@@ -32,5 +32,5 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalCloneMonster);
+    protected override string? ActivateWandScriptName => nameof(CloneMonsterIdentifableDirectionalScript);
 }

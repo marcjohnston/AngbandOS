@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreLevelScript : Script, IScript, ISuccessfulScript
+internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript
 {
     private RestoreLevelScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RestoreLevelScript : Script, IScript, ISuccessfulScript
     /// Restores the players experience points and returns true, if the players experience was increased; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         if (Game.ExperiencePoints.IntValue < Game.MaxExperienceGained.IntValue)
         {
@@ -34,6 +34,6 @@ internal class RestoreLevelScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

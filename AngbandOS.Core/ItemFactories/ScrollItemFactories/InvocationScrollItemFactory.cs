@@ -27,11 +27,5 @@ internal class InvocationScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        var patron = Game.SingletonRepository.ToWeightedRandom<Patron>().ChooseOrDefault();
-        Game.MsgPrint($"You invoke the secret name of {patron.LongName}.");
-        patron.GetReward();
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(InvocationIdentifableAndUsedScript);
 }

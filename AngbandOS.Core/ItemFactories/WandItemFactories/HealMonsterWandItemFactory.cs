@@ -30,5 +30,5 @@ internal class HealMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalHealMonster);
+    protected override string? ActivateWandScriptName => nameof(HealMonsterIdentifableDirectionalScript);
 }

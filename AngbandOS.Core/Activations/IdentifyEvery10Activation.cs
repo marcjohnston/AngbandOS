@@ -20,7 +20,7 @@ internal class IdentifyEvery10Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        return Game.RunSuccessfulScript(nameof(IdentifyItemScript));
+        return !Game.RunCancellableScript(nameof(IdentifyItemCancellableScript));
     }
 
     public override int RechargeTime() => 10;

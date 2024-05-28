@@ -2857,24 +2857,24 @@ internal sealed class Item : IComparable<Item>
 
     private void GiveActivationPower(ref ArtifactBias artifactBias)
     {
-        Activation type = null;
+        Activation activation = null;
         if (artifactBias != null)
         {
             if (Game.DieRoll(100) < artifactBias.ActivationPowerChance)
             {
-                type = artifactBias.GetActivationPowerType(this);
+                activation = artifactBias.GetActivationPowerType(this);
             }
         }
-        if (type == null)
+        if (activation == null)
         {
             int chance = 0;
-            while (type == null || Game.DieRoll(100) >= chance)
+            while (activation == null || Game.DieRoll(100) >= chance)
             {
-                type = Game.SingletonRepository.ToWeightedRandom<Activation>().ChooseOrDefault();
-                chance = type.RandomChance;
+                activation = Game.SingletonRepository.ToWeightedRandom<Activation>().ChooseOrDefault();
+                chance = activation.RandomChance;
             }
         }
-        RandomArtifactActivation = type;
+        RandomArtifactActivation = activation;
         RandomArtifactItemCharacteristics.Activate = true;
         RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 0;
     }

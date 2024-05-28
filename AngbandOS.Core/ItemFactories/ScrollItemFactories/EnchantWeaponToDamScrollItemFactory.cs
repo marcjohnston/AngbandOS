@@ -25,12 +25,5 @@ internal class EnchantWeaponToDamScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (!Game.EnchantItem(0, 1, 0))
-        {
-            eventArgs.UsedUp = false;
-        }
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(EnchantWeaponToDamage1IdentifableAndUsedScript);
 }

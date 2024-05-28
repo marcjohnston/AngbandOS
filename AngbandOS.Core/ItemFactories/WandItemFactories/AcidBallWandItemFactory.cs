@@ -28,5 +28,5 @@ internal class AcidBallWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalAcidBall60R2);
+    protected override string? ActivateWandScriptName => nameof(AcidBall60R2IdentifableDirectionalScript);
 }

@@ -25,9 +25,5 @@ internal class PhaseDoorScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.RunScript(nameof(PhaseDoorScript));
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(PhaseDoorIdentifableAndUsedScript);
 }

@@ -32,5 +32,5 @@ internal class WonderWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalWonder);
+    protected override string? ActivateWandScriptName => nameof(WonderIdentifableDirectionalScript);
 }

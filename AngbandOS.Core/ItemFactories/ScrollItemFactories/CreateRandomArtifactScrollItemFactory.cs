@@ -25,9 +25,5 @@ internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.RunScript(nameof(CreateRandomArtifactScript));
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(CreateRandomArtifactIdentifableAndUsedScript);
 }

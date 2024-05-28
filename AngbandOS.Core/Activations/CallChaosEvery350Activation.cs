@@ -22,8 +22,7 @@ internal class CallChaosEvery350Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.RunCancellableScript(nameof(CallChaosScript));
-        return true;
+        return Game.RunCancellableScript(nameof(CallChaosCancellableScript));
     }
 
     public override int Value => 5000;

@@ -20,11 +20,11 @@ internal class EsoteriaScript : Script, IScript
     {
         if (Game.DieRoll(50) > Game.ExperienceLevel.IntValue)
         {
-            Game.RunScript(nameof(IdentifyItemScript));
+            Game.RunScript(nameof(IdentifyItemCancellableScript));
         }
         else
         {
-            Game.RunScript(nameof(IdentifyItemFullyScript));
+            Game.RunScript(nameof(IdentifyItemFullyCancellableScript));
         }
     }
 }

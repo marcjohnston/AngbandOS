@@ -27,5 +27,5 @@ internal class AcidBoltWandItemFactory : WandItemFactory
         (30, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalAcidBolt3D8R2);
+    protected override string? ActivateWandScriptName => nameof(AcidBolt3D8R2IdentifableDirectionalScript);
 }

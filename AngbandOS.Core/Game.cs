@@ -7720,10 +7720,15 @@ internal class Game
     public bool RunSuccessfulScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        ISuccessfulScript castedScript = SingletonRepository.Get<ISuccessfulScript>(scriptName);
-        return castedScript.ExecuteSuccessfulScript();
+        ISuccessByChanceScript castedScript = SingletonRepository.Get<ISuccessByChanceScript>(scriptName);
+        return castedScript.ExecuteSuccessByChanceScript();
     }
 
+    /// <summary>
+    /// Run the associated script and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
+    /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
+    /// </summary>
+    /// <returns></returns>
     public bool RunCancellableScript(string scriptName)
     {
         // Get the script from the singleton repository.
@@ -7748,8 +7753,20 @@ internal class Game
     public bool RunSuccessfulScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
-        ISuccessfulScriptInt castedScript = SingletonRepository.Get<ISuccessfulScriptInt>(scriptName);
-        return castedScript.ExecuteSuccessfulScriptInt(value);
+        ISuccessByChanceScriptInt castedScript = SingletonRepository.Get<ISuccessByChanceScriptInt>(scriptName);
+        return castedScript.ExecuteSuccessByChanceScriptInt(value);
+    }
+
+    /// <summary>
+    /// Run the associated script and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
+    /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
+    /// </summary>
+    /// <returns></returns>
+    public bool RunCancellableScriptInt(string scriptName, int value)
+    {
+        // Get the script from the singleton repository.
+        ICancellableScriptInt castedScript = SingletonRepository.Get<ICancellableScriptInt>(scriptName);
+        return castedScript.ExecuteCancellableScriptInt(value);
     }
 
     /// <summary>

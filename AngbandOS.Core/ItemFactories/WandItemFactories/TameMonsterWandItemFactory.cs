@@ -27,5 +27,5 @@ internal class TameMonsterWandItemFactory : WandItemFactory
         (30, 2)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalCharmMonster45);
+    protected override string? ActivateWandScriptName => nameof(CharmMonster45IdentifableDirectionalScript);
 }

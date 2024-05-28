@@ -25,12 +25,5 @@ internal class RechargingScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (!Game.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60))
-        {
-            eventArgs.UsedUp = false;
-        }
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(Recharge60IdentifableAndUsedScript);
 }

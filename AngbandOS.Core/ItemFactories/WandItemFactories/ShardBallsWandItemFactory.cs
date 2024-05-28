@@ -32,5 +32,5 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
 
-    protected override string? ActivateWandScriptName => nameof(DirectionalShardBall1D50P75R2);
+    protected override string? ActivateWandScriptName => nameof(ShardBall1D50P75R2IdentifableDirectionalScript);
 }

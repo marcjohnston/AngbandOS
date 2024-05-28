@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessfulScript
+internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChanceScript
 {
     private RemoveCurseScript(Game game) : base(game) { }
 
@@ -40,7 +40,7 @@ internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessfulScr
     /// Removes a curse from all items, excluding a heavy curse and returns true if a curse was removed from any items; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         return Game.RemoveCurseAux(false);
     }
@@ -51,6 +51,6 @@ internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessfulScr
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

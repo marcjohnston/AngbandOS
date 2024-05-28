@@ -25,13 +25,5 @@ internal class MonsterConfusionScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (!Game.HasConfusingTouch)
-        {
-            Game.MsgPrint("Your hands begin to glow.");
-            Game.HasConfusingTouch = true;
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(MonsterConfusionIdentifableAndUsedScript);
 }

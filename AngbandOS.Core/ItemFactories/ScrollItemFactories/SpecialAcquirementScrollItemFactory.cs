@@ -25,9 +25,5 @@ internal class SpecialAcquirementScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, Game.DieRoll(2) + 1, true);
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(SpecialAcquirementIdentifableAndUsedScript);
 }

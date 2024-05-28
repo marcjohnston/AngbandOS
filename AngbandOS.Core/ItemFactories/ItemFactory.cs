@@ -783,10 +783,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool CanBeQuaffed => false;
 
     /// <summary>
-    /// Returns true, if the item can be read.
-    /// </summary>
-    public virtual bool CanBeRead => false;
-    /// <summary>
     /// Returns true, if the item can be used.
     /// </summary>
     public virtual bool CanBeUsed => false;
@@ -909,6 +905,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         _alternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax != null ? AlternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
 
         ActivateWandScript = Game.SingletonRepository.GetNullable<IIdentifableDirectionalScript>(ActivateWandScriptName);
+        ActivateScrollScript = Game.SingletonRepository.GetNullable<IIdentifableAndUsedScript>(ActivateScrollScriptName);
     }
 
     protected abstract string ItemClassName { get; }
@@ -1402,4 +1399,29 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     }
 
     public bool CanBeAimed => ActivateWandScript != null;
+
+    /// <summary>
+    /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ActivateScrollScript"/> 
+    /// property during the bind phase.
+    /// </summary>
+    protected virtual string? ActivateScrollScriptName => null;
+
+    /// <summary>
+    /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivateScrollScriptName"/> property during the bind phase.
+    /// </summary>
+    private IIdentifableAndUsedScript? ActivateScrollScript { get; set; }
+
+    /// <summary>
+    /// Returns true, if the item is a scroll.
+    /// </summary>
+    public bool CanBeRead => ActivateScrollScript != null;
+
+    public (bool identified, bool used) Read()
+    {
+        if (ActivateScrollScript == null)
+        {
+            throw new Exception("Cannot activate scroll with null script.");
+        }
+        return ActivateScrollScript.ExecuteIdentifableAndUsedScript();
+    }
 }

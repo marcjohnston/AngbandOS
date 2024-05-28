@@ -91,7 +91,7 @@ internal class GridTile : IItemContainer
     /// <summary>
     /// The index of the first item that is in this grid tile
     /// </summary>
-    public List<Item> Items = new List<Item>();
+    public List<Item> Items = new List<Item>(); // TODO: Publically, this needs to be an array
 
     /// <summary>
     /// The index of the monster that is in this grid tile

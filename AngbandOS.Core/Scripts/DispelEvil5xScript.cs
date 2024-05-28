@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancellableScript
+internal class DispelEvil5xScript : Script, ISuccessByChanceScript, IScript, ICancellableScript
 {
     private DispelEvil5xScript(Game game) : base(game) { }
 
@@ -18,7 +18,7 @@ internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancell
     /// <returns></returns>
     public bool ExecuteCancellableScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
         return true;
     }
 
@@ -26,7 +26,7 @@ internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancell
     /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         return Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), Game.ExperienceLevel.IntValue * 5);
     }
@@ -36,6 +36,6 @@ internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancell
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

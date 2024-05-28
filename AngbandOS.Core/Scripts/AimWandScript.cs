@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulScript
+internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript
 {
     private AimWandScript(Game game) : base(game) { }
 
@@ -18,7 +18,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
     /// <returns></returns>
     public bool ExecuteRepeatableScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
         return false;
     }
 
@@ -28,14 +28,14 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 
     /// <summary>
     /// Executes the aim wand script and returns a success result.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         // Prompt for an item, showing only wands
         if (!Game.SelectItem(out Item? item, "Aim which wand? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeAimedItemFilter))))
@@ -83,7 +83,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
         {
             Game.MsgPrint("You failed to use the wand properly.");
-            return false;
+            return false; // TODO: This is success = false, and cancel = false.  This should be a cancelable script.
         }
         // Make sure we have charges
         if (item.WandChargesRemaining <= 0)

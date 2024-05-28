@@ -10,7 +10,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellableScript
+internal class BrandBoltsScript : Script, IScript, ISuccessByChanceScript, ICancellableScript
 {
     private BrandBoltsScript(Game game) : base(game) { }
 
@@ -20,7 +20,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellab
     /// <returns></returns>
     public bool ExecuteCancellableScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
 
         // Return true because the player cannot cancel the script.
         return true;
@@ -30,7 +30,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellab
     /// Attempts to aaply a fire brand to the first set of bolts found in the players inventory.  Returns true, if bolts were enchanted; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         for (int i = 0; i < InventorySlot.PackCount; i++)
         {
@@ -77,6 +77,6 @@ internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellab
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

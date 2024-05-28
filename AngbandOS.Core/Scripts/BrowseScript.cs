@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScript, IScriptStore
+internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript, IScriptStore
 {
     private BrowseScript(Game game) : base(game) { }
 
@@ -27,7 +27,7 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
     /// <returns></returns>
     public bool ExecuteRepeatableScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
         return false;
     }
 
@@ -37,14 +37,14 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 
     /// <summary>
     /// Executes the activate script and returns true, if a book was rendered; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         // Make sure we can read
         if (!Game.CanCastSpells)

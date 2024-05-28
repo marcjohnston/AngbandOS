@@ -25,11 +25,5 @@ internal class BlessingScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.BlessingTimer.AddTimer(Game.DieRoll(12) + 6))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(Blessing1D12P6IdentifableAndUsedScript);
 }

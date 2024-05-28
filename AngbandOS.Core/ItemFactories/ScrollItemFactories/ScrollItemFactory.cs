@@ -20,7 +20,6 @@ internal abstract class ScrollItemFactory : ItemFactory
     };
 
     public override int PercentageBreakageChance => 50;
-    public override bool CanBeRead => true;
 
     public override bool EasyKnow => true;
     public override int PackSort => 12;
@@ -30,6 +29,4 @@ internal abstract class ScrollItemFactory : ItemFactory
     public override bool HatesAcid => true;
 
     public override ColorEnum Color => ColorEnum.BrightBeige;
-
-    public abstract void Read(ReadScrollEvent eventArgs);
 }

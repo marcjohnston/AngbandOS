@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectNormalObjectsScript : Script, IScript, ISuccessfulScript
+internal class DetectNormalObjectsScript : Script, IScript, ISuccessByChanceScript
 {
     private DetectNormalObjectsScript(Game game) : base(game) { }
 
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         bool detect = false;
         for (int y = 1; y < Game.CurHgt - 1; y++)
@@ -52,6 +52,6 @@ internal class DetectNormalObjectsScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

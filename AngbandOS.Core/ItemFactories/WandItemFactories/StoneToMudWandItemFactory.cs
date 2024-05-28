@@ -29,5 +29,5 @@ internal class StoneToMudWandItemFactory : WandItemFactory
         (80, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalStoneToMud);
+    protected override string? ActivateWandScriptName => nameof(StoneToMudIdentifableDirectionalScript);
 }

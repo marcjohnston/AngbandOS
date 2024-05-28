@@ -25,11 +25,5 @@ internal class HolyPrayerScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.BlessingTimer.AddTimer(Game.DieRoll(48) + 24))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(Blessing1D48P24IdentifableAndUsedScript);
 }

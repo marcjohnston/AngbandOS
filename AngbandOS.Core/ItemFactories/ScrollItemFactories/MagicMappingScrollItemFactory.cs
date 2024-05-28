@@ -25,9 +25,5 @@ internal class MagicMappingScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.RunScript(nameof(MapAreaScript));
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(MagicMappingIdentifableAndUsedScript);
 }

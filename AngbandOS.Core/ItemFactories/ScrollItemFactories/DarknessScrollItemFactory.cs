@@ -28,15 +28,5 @@ internal class DarknessScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (!Game.HasBlindnessResistance && !Game.HasDarkResistance)
-        {
-            Game.BlindnessTimer.AddTimer(3 + Game.DieRoll(5));
-        }
-        if (Game.UnlightArea(10, 3))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(DarknessIdentifableAndUsedScript);
 }

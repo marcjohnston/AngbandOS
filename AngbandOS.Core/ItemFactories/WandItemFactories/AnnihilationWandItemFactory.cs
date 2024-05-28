@@ -31,5 +31,5 @@ internal class AnnihilationWandItemFactory : WandItemFactory
         (60, 4)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalAnnihilation125);
+    protected override string? ActivateWandScriptName => nameof(Annihilation125IdentifableDirectionalScript);
 }

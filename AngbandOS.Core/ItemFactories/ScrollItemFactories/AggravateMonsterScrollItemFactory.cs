@@ -28,10 +28,5 @@ internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.MsgPrint("There is a high pitched humming noise.");
-        Game.AggravateMonsters();
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(AggravateMonstersIdentifableAndUsedScript);
 }

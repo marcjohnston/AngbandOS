@@ -27,5 +27,5 @@ internal class FireBoltsWandItemFactory : WandItemFactory
         (30, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalFireBolt6D8);
+    protected override string? ActivateWandScriptName => nameof(FireBolt6D8IdentifableDirectionalScript);
 }

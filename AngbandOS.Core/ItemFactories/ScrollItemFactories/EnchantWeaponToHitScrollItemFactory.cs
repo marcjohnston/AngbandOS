@@ -25,12 +25,5 @@ internal class EnchantWeaponToHitScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (!Game.EnchantItem(1, 0, 0))
-        {
-            eventArgs.UsedUp = false;
-        }
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(EnchantWeaponToHit1IdentifableAndUsedScript);
 }

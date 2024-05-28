@@ -27,5 +27,5 @@ internal class SleepMonsterWandItemFactory : WandItemFactory
         (5, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalSleepMonster);
+    protected override string? ActivateWandScriptName => nameof(SleepMonsterIdentifableDirectionalScript);
 }

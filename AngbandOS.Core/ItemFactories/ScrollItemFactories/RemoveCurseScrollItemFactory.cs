@@ -27,12 +27,5 @@ internal class RemoveCurseScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScript(nameof(RemoveCurseScript)))
-        {
-            Game.MsgPrint("You feel as if someone is watching over you.");
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(RemoveCurseIdentifableAndUsedScript);
 }

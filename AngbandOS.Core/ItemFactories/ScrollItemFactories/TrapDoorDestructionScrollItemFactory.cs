@@ -25,11 +25,5 @@ internal class TrapDoorDestructionScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScript(nameof(DestroyAdjacentDoorsScript)))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(DestroyTrapsAndDoorsIdentifableAndUsedScript);
 }

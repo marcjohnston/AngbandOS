@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessfulScript
+internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessByChanceScript
 {
     private HireAnEscortScript(Game game) : base(game) { }
 
@@ -18,7 +18,7 @@ internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessfulSc
     /// <param name="storeCommandEvent"></param>
     public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
-        storeCommandEvent.LeaveStore = ExecuteSuccessfulScript();
+        storeCommandEvent.LeaveStore = ExecuteSuccessByChanceScript();
     }
 
     /// <summary>
@@ -27,14 +27,14 @@ internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessfulSc
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 
     /// <summary>
     /// Executes the hire escort script and returns true, if the player was escorted to another town; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         var validTowns = new Dictionary<char, Town>();
         foreach (Town town in Game.SingletonRepository.Get<Town>())

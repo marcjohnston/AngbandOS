@@ -25,11 +25,5 @@ internal class DispelUndeadScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.DispelUndead(60))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(DispelUndead60IdentifableAndUsedScript);
 }

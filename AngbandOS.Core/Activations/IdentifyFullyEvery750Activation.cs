@@ -20,8 +20,7 @@ internal class IdentifyFullyEvery750Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.RunScript(nameof(IdentifyItemFullyScript));
-        return true;
+        return Game.RunCancellableScript(nameof(IdentifyItemFullyCancellableScript));
     }
 
     public override int RechargeTime() => 750;

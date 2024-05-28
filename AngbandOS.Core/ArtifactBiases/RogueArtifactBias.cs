@@ -60,7 +60,7 @@ internal class RogueArtifactBias : ArtifactBias
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(IdentifyItemScript));
+            return Game.SingletonRepository.Get<Activation>(nameof(IdentifyItemCancellableScript));
         }
     }
 }

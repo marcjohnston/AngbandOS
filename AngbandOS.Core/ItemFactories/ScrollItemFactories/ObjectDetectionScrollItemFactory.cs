@@ -24,11 +24,5 @@ internal class ObjectDetectionScrollItemFactory : ScrollItemFactory
     public override int Cost => 15;
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScript(nameof(DetectNormalObjectsScript)))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(DetectNormalObjectsIdentifableAndUsedScript);
 }

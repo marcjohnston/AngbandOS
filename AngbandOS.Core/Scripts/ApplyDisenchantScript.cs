@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
+internal class ApplyDisenchantScript : Script, IScript, ISuccessByChanceScript
 {
     private ApplyDisenchantScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
     /// Executes the script and returns a success result.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         // Select an inventory slot where items can be disenchanted.
         BaseInventorySlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
@@ -83,6 +83,6 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

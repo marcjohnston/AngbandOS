@@ -26,9 +26,5 @@ internal class MassCarnageScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.RunScriptBool(nameof(MassCarnageScript), true);
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(MassCarnageIdentifableAndUsedScript);
 }

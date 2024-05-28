@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class ProtectionfromEvilScrollItemFactory : ScrollItemFactory
+internal class ProtectionFromEvilScrollItemFactory : ScrollItemFactory
 {
-    private ProtectionfromEvilScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private ProtectionFromEvilScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Protection from Evil";
@@ -25,12 +25,5 @@ internal class ProtectionfromEvilScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        int i = 3 * Game.ExperienceLevel.IntValue;
-        if (Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + i))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(ProtectionFromEvilIdentifableAndUsedScript);
 }

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SleepMonstersScript : Script, IScript, ISuccessfulScript
+internal class SleepMonstersScript : Script, IScript, ISuccessByChanceScript
 {
     private SleepMonstersScript(Game game) : base(game) { }
 
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         return Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile)), Game.ExperienceLevel.IntValue);
     }
@@ -23,6 +23,6 @@ internal class SleepMonstersScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

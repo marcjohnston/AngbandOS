@@ -24,9 +24,5 @@ internal class DestructionScrollItemFactory : ScrollItemFactory
         (40, 1)
     };
     public override int Weight => 5;
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(DestructionR15IdentifableAndUsedScript);
 }

@@ -27,5 +27,5 @@ internal class TeleportOtherWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalTeleportMonster);
+    protected override string? ActivateWandScriptName => nameof(TeleportMonsterIdentifableDirectionalScript);
 }

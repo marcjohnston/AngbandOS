@@ -12,7 +12,7 @@ internal class GenocideScript : Script, IScript, IScriptBool
 {
     private GenocideScript(Game game) : base(game) { }
 
-    public void ExecuteScriptBool(bool playerCast)
+    public void ExecuteScriptBool(bool playerCast) // TODO: This needs to be cancellable and remove the playerCast parameter
     {
         int msec = Constants.DelayFactorInMilliseconds;
         Game.GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
@@ -37,7 +37,7 @@ internal class GenocideScript : Script, IScript, IScriptBool
                 continue;
             }
             Game.DeleteMonsterByIndex(i, true);
-            if (playerCast)
+            if (playerCast) // TODO: Move this to the caller
             {
                 Game.TakeHit(Game.DieRoll(4), "the strain of casting Carnage");
             }

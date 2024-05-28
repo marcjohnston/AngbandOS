@@ -25,11 +25,5 @@ internal class HolyChantScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(Blessing1D24P12IdentifableAndUsedScript);
 }

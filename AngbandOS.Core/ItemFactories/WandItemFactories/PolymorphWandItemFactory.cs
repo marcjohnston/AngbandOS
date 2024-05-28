@@ -27,5 +27,5 @@ internal class PolymorphWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalPolymorphMonster);
+    protected override string? ActivateWandScriptName => nameof(PolymorphMonsterIdentifableDirectionalScript);
 }

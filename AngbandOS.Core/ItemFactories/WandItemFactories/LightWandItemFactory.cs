@@ -27,5 +27,5 @@ internal class LightWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalLineOfLight);
+    protected override string? ActivateWandScriptName => nameof(LineOfLightIdentifableDirectionalScript);
 }

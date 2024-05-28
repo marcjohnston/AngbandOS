@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellIdentify : Spell
 {
     private FolkSpellIdentify(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(IdentifyItemScript);
+    protected override string? CastScriptName => nameof(IdentifyItemCancellableScript);
 
     public override string Name => "Identify";
     

@@ -5,15 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Xml.Linq;
-
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
 
-/// <summary>
-/// Give us a rumour, if possible one that we've not heard before
-/// </summary>
 internal class CreateItemScript : Script, IScript
 {
     private CreateItemScript(Game game) : base(game) { }

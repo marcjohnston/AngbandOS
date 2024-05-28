@@ -26,11 +26,5 @@ internal class LightScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.LightArea(Game.DiceRoll(2, 8), 2))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(Light2D8R2IdentifableAndUsedScript);
 }

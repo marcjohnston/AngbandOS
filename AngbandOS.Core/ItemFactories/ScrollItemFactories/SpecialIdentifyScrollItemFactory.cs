@@ -28,12 +28,5 @@ internal class SpecialIdentifyScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        eventArgs.Identified = true;
-        if (!Game.RunSuccessfulScript(nameof(IdentifyItemFullyScript)))
-        {
-            eventArgs.UsedUp = false;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(IdentifyItemFullyIdentifableAndUsedScript);
 }

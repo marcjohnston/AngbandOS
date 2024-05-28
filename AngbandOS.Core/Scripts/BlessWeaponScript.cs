@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
+internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
 {
     private BlessWeaponScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
     /// Blesses a chosen weapon and return true if blessing wasn't cancelled during the weapon selection process; false, if the blessing was cancelled.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         if (!Game.SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(WeaponsItemFilter))))
         {
@@ -103,6 +103,6 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

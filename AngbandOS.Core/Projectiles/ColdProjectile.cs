@@ -21,7 +21,7 @@ internal class ColdProjectile : Projectile
         GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         string oName = "";
-        foreach (Item oPtr in cPtr.Items)
+        foreach (Item oPtr in cPtr.Items.ToArray()) // Need the ToArray to prevent the collection  modified
         {
             bool ignore = false;
             bool plural = false;

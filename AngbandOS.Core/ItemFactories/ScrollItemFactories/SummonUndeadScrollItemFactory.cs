@@ -28,14 +28,5 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        for (int i = 0; i < Game.DieRoll(3); i++)
-        {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter))))
-            {
-                eventArgs.Identified = true;
-            }
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(SummonUndeadIdentifableAndUsedScript);
 }

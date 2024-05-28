@@ -28,5 +28,5 @@ internal class LightningBallsWandItemFactory : WandItemFactory
         (35, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalLightningBall32R2);
+    protected override string? ActivateWandScriptName => nameof(LightningBall32R2IdentifableDirectionalScript);
 }

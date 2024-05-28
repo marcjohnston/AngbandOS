@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Activate the special feature of an item.
 /// </summary>
 [Serializable]
-internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulScript
+internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript
 {
     private ActivateScript(Game game) : base(game) { }
 
@@ -20,7 +20,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     /// <returns></returns>
     public bool ExecuteRepeatableScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
         return false;
     }
 
@@ -37,7 +37,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     /// Allows the user to select an item and activates the special feature of that item.  Returns false, in all cases.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         // No item passed in, so get one; filtering to activatable items only
         if (!Game.SelectItem(out Item? item, "Activate which item? ", true, true, false, Game.SingletonRepository.Get<ItemFilter>(nameof(KnownAndActivableItemFilter))))

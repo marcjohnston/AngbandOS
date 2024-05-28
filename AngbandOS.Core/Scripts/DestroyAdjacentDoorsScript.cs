@@ -8,25 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessfulScript, ICancellableScript
+internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessByChanceScript, ICancellableScript
 {
     private DestroyAdjacentDoorsScript(Game game) : base(game) { }
 
     /// <summary>
-    /// Runs the successful script and returns true because the player cannot cancel the script.
+    /// Runs the successful script and returns false because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
     public bool ExecuteCancellableScript()
     {
-        ExecuteSuccessfulScript();
-        return true;
+        ExecuteSuccessByChanceScript();
+        return false;
     }
 
     /// <summary>
     /// Projects the kill door to the current location with a radius of 1 to destory all doors that are adjacent to the player.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
         return Game.Project(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, Game.SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile)), flg);
@@ -38,6 +38,6 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessfulScript, 
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

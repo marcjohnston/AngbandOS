@@ -64,14 +64,12 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         //bool identified = false;
         //bool usedUp = true;
 
-        ScrollItemFactory scrollItem = (ScrollItemFactory)item.Factory;
-        ReadScrollEvent readScrollEventArgs = new ReadScrollEvent();
-        scrollItem.Read(readScrollEventArgs);
+        (bool identified, bool used) = item.Factory.Read();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll
         item.ObjectTried();
-        if (readScrollEventArgs.Identified && !item.Factory.IsFlavorAware)
+        if (identified && !item.Factory.IsFlavorAware)
         {
             item.BecomeFlavorAware();
             int itemLevel = item.Factory.LevelNormallyFound;
@@ -85,7 +83,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         }
         if (!channeled)
         {
-            if (!readScrollEventArgs.UsedUp)
+            if (!used)
             {
                 return;
             }

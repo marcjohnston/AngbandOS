@@ -30,5 +30,5 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalHasteMonster);
+    protected override string? ActivateWandScriptName => nameof(HasteMonsterIdentifableDirectionalScript);
 }

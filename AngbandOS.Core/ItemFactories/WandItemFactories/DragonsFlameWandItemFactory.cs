@@ -31,5 +31,5 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
         (50, 4)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalFireBall100R3);
+    protected override string? ActivateWandScriptName => nameof(FireBall100R3IdentifableDirectionalScript);
 }

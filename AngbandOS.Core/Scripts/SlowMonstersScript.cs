@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SlowMonstersScript : Script, IScript, ISuccessfulScript
+internal class SlowMonstersScript : Script, IScript, ISuccessByChanceScript
 {
     private SlowMonstersScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SlowMonstersScript : Script, IScript, ISuccessfulScript
     /// Fires a slow monster projectile at all monsters in the players' line-of-sight and returns true, if the projectile actually hits a monster; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         return Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile)), Game.ExperienceLevel.IntValue);
     }
@@ -27,6 +27,6 @@ internal class SlowMonstersScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnhanceArmorScript : Script, IScript, IScriptStore, ISuccessfulScript
+internal class EnhanceArmorScript : Script, IScript, IScriptStore, ISuccessByChanceScript
 {
     private EnhanceArmorScript(Game game) : base(game) { }
 
@@ -36,7 +36,7 @@ internal class EnhanceArmorScript : Script, IScript, IScriptStore, ISuccessfulSc
         }
     }
 
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         return Game.EnchantItem(0, 0, 4);
 
@@ -48,6 +48,6 @@ internal class EnhanceArmorScript : Script, IScript, IScriptStore, ISuccessfulSc
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

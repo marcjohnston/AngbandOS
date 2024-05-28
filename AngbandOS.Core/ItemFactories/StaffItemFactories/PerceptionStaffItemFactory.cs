@@ -30,7 +30,7 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (!Game.RunSuccessfulScript(nameof(IdentifyItemScript)))
+        if (Game.RunCancellableScript(nameof(IdentifyItemCancellableScript)))
         {
             eventArgs.ChargeUsed = false;
         }

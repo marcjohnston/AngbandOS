@@ -346,10 +346,12 @@ internal class SingletonRepository
         RegisterRepository<IScript>();
         RegisterRepository<IIdentifableScript>();
         RegisterRepository<IIdentifableDirectionalScript>();
+        RegisterRepository<IIdentifableAndUsedScript>();
         RegisterRepository<ICancellableScript>();
         RegisterRepository<INoticeableScript>();
-        RegisterRepository<ISuccessfulScriptInt>();
-        RegisterRepository<ISuccessfulScript>();
+        RegisterRepository<ISuccessByChanceScriptInt>();
+        RegisterRepository<ICancellableScriptInt>();
+        RegisterRepository<ISuccessByChanceScript>();
         RegisterRepository<IScriptIntInt>();
         RegisterRepository<IScriptBool>();
         RegisterRepository<IScriptInt>();

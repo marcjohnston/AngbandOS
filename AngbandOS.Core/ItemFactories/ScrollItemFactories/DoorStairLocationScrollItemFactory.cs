@@ -27,15 +27,5 @@ internal class DoorStairLocationScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.DetectDoors())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.DetectStairs())
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(DoorStairLocationIdentifableAndUsedScript);
 }

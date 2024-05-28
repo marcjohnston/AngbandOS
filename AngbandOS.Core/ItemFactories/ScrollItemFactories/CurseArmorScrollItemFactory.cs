@@ -28,11 +28,5 @@ internal class CurseArmorScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.CurseArmor())
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(CurseArmorIdentifableAndUsedScript);
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScript
+internal class DropScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript
 {
     private DropScript(Game game) : base(game) { }
 
@@ -18,7 +18,7 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScrip
     /// <returns></returns>
     public bool ExecuteRepeatableScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
         return false;
     }
 
@@ -28,14 +28,14 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScrip
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 
     /// <summary>
     /// Executes the drop script and returns true, if the player dropped an item; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         int amount = 1;
         // Get an item from the inventory/equipment

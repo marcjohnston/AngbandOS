@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectEvilMonstersScript : Script, IScript, ISuccessfulScript
+internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScript
 {
     private DetectEvilMonstersScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DetectEvilMonstersScript : Script, IScript, ISuccessfulScript
     /// Detects evil monsters and returns true, if monsters were revealed; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteSuccessByChanceScript()
     {
         bool flag = false;
         for (int i = 1; i < Game.MMax; i++)
@@ -56,6 +56,6 @@ internal class DetectEvilMonstersScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScript();
+        ExecuteSuccessByChanceScript();
     }
 }

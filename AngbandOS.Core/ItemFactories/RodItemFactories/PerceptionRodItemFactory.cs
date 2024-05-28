@@ -32,7 +32,7 @@ internal class PerceptionRodItemFactory : RodItemFactory
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         zapRodEvent.Identified = true;
-        if (!Game.RunSuccessfulScript(nameof(IdentifyItemScript)))
+        if (Game.RunCancellableScript(nameof(IdentifyItemCancellableScript)))
         {
             zapRodEvent.UseCharge = false;
         }

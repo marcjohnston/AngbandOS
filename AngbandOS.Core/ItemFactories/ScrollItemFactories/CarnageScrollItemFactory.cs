@@ -26,9 +26,5 @@ internal class CarnageScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.RunScript(nameof(GenocideScript));
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(GenocideIdentifableAndUsedScript);
 }

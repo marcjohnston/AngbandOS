@@ -29,13 +29,5 @@ internal class ChaosScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, 222, 4);
-        if (!Game.HasChaosResistance)
-        {
-            Game.TakeHit(111 + Game.DieRoll(111), "a Scroll of Chaos");
-        }
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(ChaosBall222R4IdentifableAndUsedScript);
 }

@@ -24,9 +24,5 @@ internal class TeleportLevelScrollItemFactory : ScrollItemFactory
         (20, 1)
     };
     public override int Weight => 5;
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.RunScript(nameof(TeleportLevelScript));
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(TeleportLevelIdentifableAndUsedScript);
 }

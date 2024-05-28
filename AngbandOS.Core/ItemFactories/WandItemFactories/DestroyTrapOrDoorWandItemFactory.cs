@@ -27,5 +27,5 @@ internal class DestroyTrapOrDoorWandItemFactory : WandItemFactory
         (10, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalDestroyTrapOrDoor);
+    protected override string? ActivateWandScriptName => nameof(DestroyTrapOrDoorIdentifableDirectionalScript);
 }

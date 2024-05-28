@@ -27,5 +27,5 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalColdBolt3D8);
+    protected override string? ActivateWandScriptName => nameof(ColdBolt3D8IdentifableDirectionalScript);
 }

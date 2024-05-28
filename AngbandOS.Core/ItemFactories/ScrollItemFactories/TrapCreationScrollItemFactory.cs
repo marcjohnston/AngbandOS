@@ -28,11 +28,5 @@ internal class TrapCreationScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.TrapCreation())
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(CreateTrapIdentifableAndUsedScript);
 }

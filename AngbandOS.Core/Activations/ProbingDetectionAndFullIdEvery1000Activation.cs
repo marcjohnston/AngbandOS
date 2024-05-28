@@ -20,9 +20,12 @@ internal class ProbingDetectionAndFullIdEvery1000Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
+        if (!Game.RunCancellableScript(nameof(RechargeItemCancellableScriptInt)))
+        {
+            return false;
+        }
         Game.RunScript(nameof(DetectionScript));
         Game.Probing();
-        Game.RunScript(nameof(IdentifyItemFullyScript));
         return true;
     }
 

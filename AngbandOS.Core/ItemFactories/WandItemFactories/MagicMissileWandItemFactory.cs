@@ -27,5 +27,5 @@ internal class MagicMissileWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalMagicMissle2D6);
+    protected override string? ActivateWandScriptName => nameof(MagicMissle2D6IdentifableDirectionalScript);
 }

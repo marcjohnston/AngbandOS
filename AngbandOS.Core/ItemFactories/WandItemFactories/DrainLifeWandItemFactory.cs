@@ -27,5 +27,5 @@ internal class DrainLifeWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalDrainLife75);
+    protected override string? ActivateWandScriptName => nameof(DrainLife75IdentifableDirectionalScript);
 }

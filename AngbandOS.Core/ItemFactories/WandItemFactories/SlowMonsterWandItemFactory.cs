@@ -28,5 +28,5 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DirectionalSlowMonster);
+    protected override string? ActivateWandScriptName => nameof(SlowMonsterIdentifableDirectionalScript);
 }

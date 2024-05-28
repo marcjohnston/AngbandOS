@@ -25,12 +25,5 @@ internal class EnchantArmorScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        eventArgs.Identified = true;
-        if (!Game.EnchantItem(0, 0, 1))
-        {
-            eventArgs.UsedUp = false;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(EnchantArmor1IdentifableAndUsedScript);
 }

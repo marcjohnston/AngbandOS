@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellHolyVision : Spell
 {
     private LifeSpellHolyVision(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(IdentifyItemFullyScript);
+    protected override string? CastScriptName => nameof(IdentifyItemFullyCancellableScript);
 
     public override string Name => "Holy Vision";
     

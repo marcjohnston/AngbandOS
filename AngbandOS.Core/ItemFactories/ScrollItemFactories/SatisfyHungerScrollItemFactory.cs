@@ -28,11 +28,5 @@ internal class SatisfyHungerScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        if (Game.SetFood(Constants.PyFoodMax - 1))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override string? ActivateScrollScriptName => nameof(SatisfyHungerIdentifableAndUsedScript);
 }

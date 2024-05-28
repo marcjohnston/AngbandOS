@@ -28,9 +28,5 @@ internal class SpecialRemoveCurseScrollItemFactory : ScrollItemFactory
     };
     public override int Weight => 5;
 
-    public override void Read(ReadScrollEvent eventArgs)
-    {
-        Game.RunScript(nameof(RemoveAllCurseScript));
-        eventArgs.Identified = true;
-    }
+    protected override string? ActivateScrollScriptName => nameof(SpecialRemoveAllCurseIdentifableAndUsedScript);
 }

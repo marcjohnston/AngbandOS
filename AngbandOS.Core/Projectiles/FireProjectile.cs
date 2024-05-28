@@ -21,7 +21,7 @@ internal class FireProjectile : Projectile
         GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         string oName = "";
-        foreach (Item oPtr in cPtr.Items)
+        foreach (Item oPtr in cPtr.Items.ToArray()) // We need the ToArray to prevent collection modified error
         {
             bool ignore = false;
             bool plural = false;
