@@ -12,16 +12,15 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
 {
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        ArtifactBias? artifactBias = null;
         switch (Game.DieRoll(8))
         {
             case 1:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTheMagiRareItem));
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
                 break;
             case 2:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfMightRareItem));
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
                 break;
             case 3:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTelepathyRareItem));
@@ -32,7 +31,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
             case 5:
             case 6:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfLordlinessRareItem));
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
                 break;
             case 7:
             case 8:

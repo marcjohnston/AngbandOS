@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class LawArtifactBias : ArtifactBias
 {
     private LawArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Law";
     public override bool ApplySlaying(Item item)
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)

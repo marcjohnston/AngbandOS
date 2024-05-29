@@ -89,6 +89,8 @@ internal sealed class Item : IComparable<Item>
     public int BonusDamage;
     public Activation? RandomArtifactActivation = null;
 
+    public ArtifactBias? ArtifactBias = null;
+
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
     /// </summary>
@@ -754,12 +756,6 @@ internal sealed class Item : IComparable<Item>
         return tdam * mult;
     }
 
-    public void ApplyRandomResistance(int specific)
-    {
-        ArtifactBias? artifactBias = null;
-        ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
-    }
-
     public void BecomeFlavorAware()
     {
         Factory.IsFlavorAware = true;
@@ -1409,6 +1405,10 @@ internal sealed class Item : IComparable<Item>
         if (categoryIdentity != null)
         {
             info[i++] = categoryIdentity;
+        }
+        if (ArtifactBias != null)
+        {
+            info[i++] = $"It has an affinity for {ArtifactBias.AffinityName.ToLower()}.";
         }
         if (Characteristics.Str)
         {
@@ -2087,11 +2087,11 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    public void ApplyRandomResistance(ref ArtifactBias? artifactBias, int specific)
+    public void ApplyRandomResistance(int specific)
     {
-        if (specific == 0 && artifactBias != null)
+        if (specific == 0 && ArtifactBias != null)
         {
-            if (artifactBias.ApplyRandomResistances(this))
+            if (ArtifactBias.ApplyRandomResistances(this))
             {
                 return;
             }
@@ -2102,14 +2102,14 @@ internal sealed class Item : IComparable<Item>
             case 1:
                 if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                 }
                 else
                 {
                     RandomArtifactItemCharacteristics.ImAcid = true;
-                    if (artifactBias == null)
+                    if (ArtifactBias == null)
                     {
-                        artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
+                        ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
                     }
                 }
                 break;
@@ -2117,14 +2117,14 @@ internal sealed class Item : IComparable<Item>
             case 2:
                 if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                 }
                 else
                 {
                     RandomArtifactItemCharacteristics.ImElec = true;
-                    if (artifactBias == null)
+                    if (ArtifactBias == null)
                     {
-                        artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
+                        ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
                     }
                 }
                 break;
@@ -2132,14 +2132,14 @@ internal sealed class Item : IComparable<Item>
             case 3:
                 if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                 }
                 else
                 {
                     RandomArtifactItemCharacteristics.ImCold = true;
-                    if (artifactBias == null)
+                    if (ArtifactBias == null)
                     {
-                        artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
+                        ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
                     }
                 }
                 break;
@@ -2147,14 +2147,14 @@ internal sealed class Item : IComparable<Item>
             case 4:
                 if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                 }
                 else
                 {
                     RandomArtifactItemCharacteristics.ImFire = true;
-                    if (artifactBias == null)
+                    if (ArtifactBias == null)
                     {
-                        artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
+                        ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
                     }
                 }
                 break;
@@ -2163,9 +2163,9 @@ internal sealed class Item : IComparable<Item>
             case 6:
             case 13:
                 RandomArtifactItemCharacteristics.ResAcid = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
                 }
                 break;
 
@@ -2173,9 +2173,9 @@ internal sealed class Item : IComparable<Item>
             case 8:
             case 14:
                 RandomArtifactItemCharacteristics.ResElec = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
                 }
                 break;
 
@@ -2183,9 +2183,9 @@ internal sealed class Item : IComparable<Item>
             case 10:
             case 15:
                 RandomArtifactItemCharacteristics.ResFire = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
                 }
                 break;
 
@@ -2193,35 +2193,35 @@ internal sealed class Item : IComparable<Item>
             case 12:
             case 16:
                 RandomArtifactItemCharacteristics.ResCold = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
                 }
                 break;
 
             case 17:
             case 18:
                 RandomArtifactItemCharacteristics.ResPois = true;
-                if (artifactBias == null && Game.DieRoll(4) != 1)
+                if (ArtifactBias == null && Game.DieRoll(4) != 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PoisonArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PoisonArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(2) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(2) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(2) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(2) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
                 }
                 break;
 
             case 19:
             case 20:
                 RandomArtifactItemCharacteristics.ResFear = true;
-                if (artifactBias == null && Game.DieRoll(3) == 1)
+                if (ArtifactBias == null && Game.DieRoll(3) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
                 }
                 break;
 
@@ -2241,9 +2241,9 @@ internal sealed class Item : IComparable<Item>
             case 25:
             case 26:
                 RandomArtifactItemCharacteristics.ResConf = true;
-                if (artifactBias == null && Game.DieRoll(6) == 1)
+                if (ArtifactBias == null && Game.DieRoll(6) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
                 }
                 break;
 
@@ -2260,9 +2260,9 @@ internal sealed class Item : IComparable<Item>
             case 31:
             case 32:
                 RandomArtifactItemCharacteristics.ResNether = true;
-                if (artifactBias == null && Game.DieRoll(3) == 1)
+                if (ArtifactBias == null && Game.DieRoll(3) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
                 }
                 break;
 
@@ -2274,9 +2274,9 @@ internal sealed class Item : IComparable<Item>
             case 35:
             case 36:
                 RandomArtifactItemCharacteristics.ResChaos = true;
-                if (artifactBias == null && Game.DieRoll(2) == 1)
+                if (ArtifactBias == null && Game.DieRoll(2) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
                 }
                 break;
 
@@ -2292,11 +2292,11 @@ internal sealed class Item : IComparable<Item>
                 }
                 else
                 {
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                 }
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
                 }
                 break;
 
@@ -2307,11 +2307,11 @@ internal sealed class Item : IComparable<Item>
                 }
                 else
                 {
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                 }
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
                 }
                 break;
 
@@ -2322,7 +2322,7 @@ internal sealed class Item : IComparable<Item>
                 }
                 else
                 {
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                 }
                 break;
         }
@@ -2335,15 +2335,14 @@ internal sealed class Item : IComparable<Item>
         int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;
         int warriorArtifactBias = 0;
-        ArtifactBias? artifactBias = null;
         if (fromScroll && Game.DieRoll(4) == 1)
         {
-            artifactBias = Game.BaseCharacterClass.ArtifactBias;
+            ArtifactBias = Game.BaseCharacterClass.ArtifactBias;
             warriorArtifactBias = Game.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
         }
         if (Game.DieRoll(100) <= warriorArtifactBias && fromScroll)
         {
-            artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+            ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
         }
         string newName;
         if (!fromScroll && Game.DieRoll(ArtifactCurseChance) == 1)
@@ -2369,22 +2368,22 @@ internal sealed class Item : IComparable<Item>
             {
                 case 1:
                 case 2:
-                    ApplyRandomBonuses(ref artifactBias);
+                    ApplyRandomBonuses();
                     hasPval = true;
                     break;
 
                 case 3:
                 case 4:
-                    ApplyRandomResistance(ref artifactBias, 0);
+                    ApplyRandomResistance(0);
                     break;
 
                 case 5:
-                    ApplyRandomMiscPower(ref artifactBias);
+                    ApplyRandomMiscPower();
                     break;
 
                 case 6:
                 case 7:
-                    Factory.ApplyRandomSlaying(this, ref artifactBias);
+                    Factory.ApplyRandomSlaying(this, ref ArtifactBias);
                     break;
 
                 default:
@@ -2423,7 +2422,7 @@ internal sealed class Item : IComparable<Item>
         if (!aCursed && Game.DieRoll(Factory.RandartActivationChance) == 1)
         {
             RandomArtifactActivation = null;
-            GiveActivationPower(ref artifactBias);
+            GiveActivationPower(ref ArtifactBias);
         }
         if (fromScroll)
         {
@@ -2499,11 +2498,11 @@ internal sealed class Item : IComparable<Item>
         return false;
     }
 
-    private void ApplyRandomBonuses(ref ArtifactBias? artifactBias)
+    private void ApplyRandomBonuses()
     {
-        if (artifactBias != null)
+        if (ArtifactBias != null)
         {
-            if (artifactBias.ApplyBonuses(this))
+            if (ArtifactBias.ApplyBonuses(this))
             {
                 return;
             }
@@ -2513,92 +2512,92 @@ internal sealed class Item : IComparable<Item>
             case 1:
             case 2:
                 RandomArtifactItemCharacteristics.Str = true;
-                if (artifactBias == null && Game.DieRoll(13) != 1)
+                if (ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(7) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
                 }
                 break;
 
             case 3:
             case 4:
                 RandomArtifactItemCharacteristics.Int = true;
-                if (artifactBias == null && Game.DieRoll(13) != 1)
+                if (ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(7) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
                 }
                 break;
 
             case 5:
             case 6:
                 RandomArtifactItemCharacteristics.Wis = true;
-                if (artifactBias == null && Game.DieRoll(13) != 1)
+                if (ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(7) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
                 }
                 break;
 
             case 7:
             case 8:
                 RandomArtifactItemCharacteristics.Dex = true;
-                if (artifactBias == null && Game.DieRoll(13) != 1)
+                if (ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(7) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
                 }
                 break;
 
             case 9:
             case 10:
                 RandomArtifactItemCharacteristics.Con = true;
-                if (artifactBias == null && Game.DieRoll(13) != 1)
+                if (ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(9) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
                 }
                 break;
 
             case 11:
             case 12:
                 RandomArtifactItemCharacteristics.Cha = true;
-                if (artifactBias == null && Game.DieRoll(13) != 1)
+                if (ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
                 }
                 break;
 
             case 13:
             case 14:
                 RandomArtifactItemCharacteristics.Stealth = true;
-                if (artifactBias == null && Game.DieRoll(3) == 1)
+                if (ArtifactBias == null && Game.DieRoll(3) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
                 }
                 break;
 
             case 15:
             case 16:
                 RandomArtifactItemCharacteristics.Search = true;
-                if (artifactBias == null && Game.DieRoll(9) == 1)
+                if (ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
                 }
                 break;
 
@@ -2609,9 +2608,9 @@ internal sealed class Item : IComparable<Item>
 
             case 19:
                 RandomArtifactItemCharacteristics.Speed = true;
-                if (artifactBias == null && Game.DieRoll(11) == 1)
+                if (ArtifactBias == null && Game.DieRoll(11) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
                 }
                 break;
 
@@ -2624,73 +2623,73 @@ internal sealed class Item : IComparable<Item>
             case 23:
                 if (Factory.CanApplyBlowsBonus)
                 {
-                    ApplyRandomBonuses(ref artifactBias);
+                    ApplyRandomBonuses();
                 }
                 else
                 {
                     RandomArtifactItemCharacteristics.Blows = true;
-                    if (artifactBias == null && Game.DieRoll(11) == 1)
+                    if (ArtifactBias == null && Game.DieRoll(11) == 1)
                     {
-                        artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+                        ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
                     }
                 }
                 break;
         }
     }
 
-    private void ApplyRandomMiscPower(ref ArtifactBias? artifactBias)
+    private void ApplyRandomMiscPower()
     {
-        if (artifactBias != null)
+        if (ArtifactBias != null)
         {
-            artifactBias.ApplyMiscPowers(this);
+            ArtifactBias.ApplyMiscPowers(this);
         }
         switch (Game.DieRoll(31))
         {
             case 1:
                 RandomArtifactItemCharacteristics.SustStr = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
                 }
                 break;
 
             case 2:
                 RandomArtifactItemCharacteristics.SustInt = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
                 }
                 break;
 
             case 3:
                 RandomArtifactItemCharacteristics.SustWis = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
                 }
                 break;
 
             case 4:
                 RandomArtifactItemCharacteristics.SustDex = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
                 }
                 break;
 
             case 5:
                 RandomArtifactItemCharacteristics.SustCon = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
                 }
                 break;
 
             case 6:
                 RandomArtifactItemCharacteristics.SustCha = true;
-                if (artifactBias == null)
+                if (ArtifactBias == null)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
                 }
                 break;
 
@@ -2702,13 +2701,13 @@ internal sealed class Item : IComparable<Item>
 
             case 9:
                 RandomArtifactItemCharacteristics.HoldLife = true;
-                if (artifactBias == null && Game.DieRoll(5) == 1)
+                if (ArtifactBias == null && Game.DieRoll(5) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
                 }
-                else if (artifactBias == null && Game.DieRoll(6) == 1)
+                else if (ArtifactBias == null && Game.DieRoll(6) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
                 }
                 break;
 
@@ -2730,9 +2729,9 @@ internal sealed class Item : IComparable<Item>
 
             case 18:
                 RandomArtifactItemCharacteristics.Telepathy = true;
-                if (artifactBias == null && Game.DieRoll(9) == 1)
+                if (ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+                    ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
                 }
                 break;
 
@@ -2755,7 +2754,7 @@ internal sealed class Item : IComparable<Item>
             case 26:
                 if (!Factory.CanApplyBonusArmorClassMiscPower)
                 {
-                    ApplyRandomMiscPower(ref artifactBias);
+                    ApplyRandomMiscPower();
                 }
                 else
                 {

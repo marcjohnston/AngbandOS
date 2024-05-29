@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class WarriorArtifactBias : ArtifactBias 
 {
     private WarriorArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Warriors";
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Str)

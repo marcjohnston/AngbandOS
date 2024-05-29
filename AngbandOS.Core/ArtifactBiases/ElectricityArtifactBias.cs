@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class ElectricityArtifactBias : ArtifactBias
 {
     private ElectricityArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Electricity";
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResElec)

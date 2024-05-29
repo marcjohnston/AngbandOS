@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class ConstitutionArtifactBias : ArtifactBias
 {
     private ConstitutionArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Constitution";
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Con)

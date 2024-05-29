@@ -12,6 +12,7 @@ internal class AcidArtifactBias : ArtifactBias
 {
     private AcidArtifactBias(Game game) : base(game) { }
 
+    public override string AffinityName => "Acid";
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResAcid)

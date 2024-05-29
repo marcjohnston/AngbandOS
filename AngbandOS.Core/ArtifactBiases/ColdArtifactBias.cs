@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class ColdArtifactBias : ArtifactBias
 {
     private ColdArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Cold";
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResCold)

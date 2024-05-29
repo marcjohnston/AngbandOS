@@ -20,8 +20,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
         {
             item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
 
-            ArtifactBias? artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+            item.ApplyRandomResistance(Game.DieRoll(22) + 16);
         }
         else
         {

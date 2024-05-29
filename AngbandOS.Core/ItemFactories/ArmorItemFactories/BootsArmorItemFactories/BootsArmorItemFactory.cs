@@ -80,8 +80,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsWingedRareItem));
                 if (Game.DieRoll(2) == 1)
                 {
-                    ArtifactBias? artifactBias = null;
-                    item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(Game.DieRoll(22) + 16);
                 }
                 break;
         }

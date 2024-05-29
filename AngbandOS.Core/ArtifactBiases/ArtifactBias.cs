@@ -21,6 +21,7 @@ internal abstract class ArtifactBias : IGetKey
         Game = game;
     }
 
+    public abstract string AffinityName { get; }
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>

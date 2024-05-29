@@ -19,8 +19,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        ArtifactBias? artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+        item.ApplyRandomResistance(Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Grey;

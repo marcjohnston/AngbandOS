@@ -86,13 +86,11 @@ internal abstract class ArmorItemFactory : ItemFactory
         {
             if (Game.DieRoll(4) == 1)
             {
-                ArtifactBias? artifactBias = null;
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(14) + 4);
+                item.ApplyRandomResistance(Game.DieRoll(14) + 4);
             }
             else
             {
-                ArtifactBias? artifactBias = null;
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
             }
         } while (Game.DieRoll(2) == 1);
     }
@@ -131,13 +129,12 @@ internal abstract class ArmorItemFactory : ItemFactory
                 break;
             case 17:
             case 18:
-                ArtifactBias? artifactBias = null;
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfResistanceRareItem));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.RandomArtifactItemCharacteristics.ResPois = true;
                 }
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
                 break;
             case 19:
                 item.CreateRandomArtifact(false);

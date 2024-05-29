@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class PoisonArtifactBias : ArtifactBias
 {
     private PoisonArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Poison";
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResPois)

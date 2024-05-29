@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class RangerArtifactBias : ArtifactBias
 {
     private RangerArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Rangers";
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Con)

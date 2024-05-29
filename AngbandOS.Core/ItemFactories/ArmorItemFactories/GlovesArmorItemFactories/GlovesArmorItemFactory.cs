@@ -35,9 +35,8 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfAgilityRareItem));
                 break;
             case 10:
-                ArtifactBias? artifactBias = null;
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfPowerRareItem));
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
                 break;
         }
     }

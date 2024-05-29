@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class StrengthArtifactBias : ArtifactBias
 {
     private StrengthArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Strength";
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Str)

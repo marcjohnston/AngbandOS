@@ -16,10 +16,8 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        ArtifactBias? artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+        item.ApplyRandomResistance(Game.DieRoll(22) + 16);
     }
-
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "The Hard Leather Cap of the Mindcrafter";
     public override int Ac => 2;

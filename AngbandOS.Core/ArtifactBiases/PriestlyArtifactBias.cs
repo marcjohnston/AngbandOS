@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal class PriestlyArtifactBias : ArtifactBias
 {
     private PriestlyArtifactBias(Game game) : base(game) { }
+    public override string AffinityName => "Priests";
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Wis)

@@ -45,8 +45,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
                 break;
             case 10:
             case 20:
-                ArtifactBias? artifactBias = null;
-                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(34) + 4);
+                item.ApplyRandomResistance(Game.DieRoll(34) + 4);
                 if (Game.DieRoll(4) == 1)
                 {
                     item.RandomArtifactItemCharacteristics.ResPois = true;

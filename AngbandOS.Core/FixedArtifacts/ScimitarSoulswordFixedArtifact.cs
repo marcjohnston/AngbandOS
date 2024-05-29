@@ -19,8 +19,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
     {
         if (Game.DieRoll(2) == 1)
         {
-            ArtifactBias? artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
+            item.ApplyRandomResistance(Game.DieRoll(22) + 16);
         }
         else
         {
