@@ -784,8 +784,126 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public bool CanAbsorb(Item other)
     {
-        // Ask the factory for this item, if the other item can be merged.
-        return Factory.ItemsCanBeMerged(this, other);
+        // Ensure both items belong to the same factory.  This works because factories are singletons.  Items from different factories cannot
+        // be merged.
+        if (Factory != other.Factory)
+        {
+            return false;
+        }
+
+        // The known status must be the same.
+        if (IsKnown() != other.IsKnown())
+        {
+            return false;
+        }
+        if (BonusHit != other.BonusHit)
+        {
+            return false;
+        }
+        if (BonusDamage != other.BonusDamage)
+        {
+            return false;
+        }
+        if (BonusArmorClass != other.BonusArmorClass)
+        {
+            return false;
+        }
+        if (TypeSpecificValue != other.TypeSpecificValue)
+        {
+            return false;
+        }
+
+        // Only open chests can be combined; otherwise, chests are never combined.
+        if (!ContainerIsOpen || !other.ContainerIsOpen)
+        {
+            return false;
+        }
+        if (Factory.NumberOfItemsContained != other.Factory.NumberOfItemsContained)
+        {
+            return false;
+        }
+
+        // TODO: Each of these belong to the factory
+        if (StaffChargesRemaining != other.StaffChargesRemaining)
+        {
+            return false;
+        }
+
+        if (WandChargesRemaining != other.WandChargesRemaining)
+        {
+            return false;
+        }
+
+        // Items need to have the same nutritional value.  Normally, this would always be true, but nutritional values may become variable.  Taking a bite of something.
+        if (NutritionalValue != other.NutritionalValue)
+        {
+            return false;
+        }
+
+        // Items that have turns of light need to have the same number of turns, to be mergable.  E.g. 5 Wooden Torches (2500 turns)
+        if (TurnsOfLightRemaining != other.TurnsOfLightRemaining)
+        {
+            return false;
+        }
+        if (IsArtifact != other.IsArtifact)
+        {
+            return false;
+        }
+        if (RareItem != other.RareItem)
+        {
+            return false;
+        }
+        if (RandomPower != null || other.RandomPower != null)
+        {
+            return false;
+        }
+        if (RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0 || other.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
+        {
+            return false;
+        }
+        if (RodRechargeTimeRemaining != 0 || other.RodRechargeTimeRemaining != 0)
+        {
+            return false;
+        }
+        if (ArmorClass != other.ArmorClass)
+        {
+            return false;
+        }
+        if (DamageDice != other.DamageDice)
+        {
+            return false;
+        }
+        if (DamageSides != other.DamageSides)
+        {
+            return false;
+        }
+        if (!RandomArtifactItemCharacteristics.Equals(other.RandomArtifactItemCharacteristics))
+        {
+            return false;
+        }
+        if (IdentCursed != other.IdentCursed)
+        {
+            return false;
+        }
+        if (IdentBroken != other.IdentBroken)
+        {
+            return false;
+        }
+        if (Inscription != other.Inscription)
+        {
+            return false;
+        }
+        if (Discount != other.Discount)
+        {
+            return false;
+        }
+        if (IdentityIsStoreBought != other.IdentityIsStoreBought)
+        {
+            return false;
+        }
+
+        int total = Count + other.Count;
+        return total < Constants.MaxStackSize;
     }
 
     /// <summary>

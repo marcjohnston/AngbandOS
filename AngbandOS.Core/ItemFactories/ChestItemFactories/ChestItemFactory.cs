@@ -106,22 +106,10 @@ internal abstract class ChestItemFactory : ItemFactory
     }
 
     /// <summary>
-    /// Returns false, because chests cannot be merged.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    public override bool ItemsCanBeMerged(Item a, Item b)
-    {
-        return false;
-    }
-
-    /// <summary>
     /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.
     /// </summary>
     public abstract bool IsSmall { get; }
     public override int PackSort => 36;
-    public abstract int NumberOfItemsContained { get; }
 
     public override ColorEnum Color => ColorEnum.Grey;
 }

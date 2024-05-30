@@ -614,135 +614,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool CanVorpalSlay => false;
 
     /// <summary>
-    /// Returns true, if two item can be merged.  By default, returns true, if both items are from the same factory and are both known.
-    /// </summary>
-    public virtual bool ItemsCanBeMerged(Item a, Item b)
-    {
-        // Ensure both items belong to the same factory.  This works because factories are singletons.  Items from different factories cannot
-        // be merged.
-        if (a.Factory != b.Factory)
-        {
-            return false;
-        }
-
-        // The known status must be the same.
-        if (a.IsKnown() != b.IsKnown())
-        {
-            return false;
-        }
-        if (a.BonusHit != b.BonusHit)
-        {
-            return false;
-        }
-        if (a.BonusDamage != b.BonusDamage)
-        {
-            return false;
-        }
-        if (a.BonusArmorClass != b.BonusArmorClass)
-        {
-            return false;
-        }
-        if (a.TypeSpecificValue != b.TypeSpecificValue)
-        {
-            return false;
-        }
-        if (a.ContainerIsOpen != b.ContainerIsOpen)
-        {
-            return false;
-        }
-        if (a.ContainerTrapConfiguration != null || b.ContainerTrapConfiguration != null)
-        {
-            return false;
-        }
-        if (a.LevelOfObjectsInContainer != b.LevelOfObjectsInContainer)
-        {
-            return false;
-        }
-
-        // TODO: Each of these belong to the factory
-        if (a.StaffChargesRemaining != b.StaffChargesRemaining)
-        {
-            return false;
-        }
-
-        if (a.WandChargesRemaining!= b.WandChargesRemaining)
-        {
-            return false;
-        }
-
-        // Items need to have the same nutritional value.  Normally, this would always be true, but nutritional values may become variable.  Taking a bite of something.
-        if (a.NutritionalValue != b.NutritionalValue)
-        {
-            return false;
-        }
-
-        // Items that have turns of light need to have the same number of turns, to be mergable.  E.g. 5 Wooden Torches (2500 turns)
-        if (a.TurnsOfLightRemaining != b.TurnsOfLightRemaining)
-        {
-            return false;
-        }
-        if (a.IsArtifact != b.IsArtifact)
-        {
-            return false;
-        }
-        if (a.RareItem != b.RareItem)
-        {
-            return false;
-        }
-        if (a.RandomPower != null || b.RandomPower != null)
-        {
-            return false;
-        }
-        if (a.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0 || b.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
-        {
-            return false;
-        }
-        if (a.RodRechargeTimeRemaining != 0 || b.RodRechargeTimeRemaining != 0)
-        {
-            return false;
-        }
-        if (a.ArmorClass != b.ArmorClass)
-        {
-            return false;
-        }
-        if (a.DamageDice != b.DamageDice)
-        {
-            return false;
-        }
-        if (a.DamageSides != b.DamageSides)
-        {
-            return false;
-        }
-        if (!a.RandomArtifactItemCharacteristics.Equals(b.RandomArtifactItemCharacteristics))
-        {
-            return false;
-        }
-        if (a.IdentCursed != b.IdentCursed)
-        {
-            return false;
-        }
-        if (a.IdentBroken != b.IdentBroken)
-        {
-            return false;
-        }
-        if (a.Inscription != b.Inscription)
-        {
-            return false;
-        }
-        if (a.Discount != b.Discount)
-        {
-            return false;
-        }
-        if (a.IdentityIsStoreBought != b.IdentityIsStoreBought)
-        {
-            return false;
-        }
-
-        int total = a.Count + b.Count;
-        return total < Constants.MaxStackSize;
-    }
-
-    /// <summary>
     /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
     /// </summary>
     public virtual int PercentageBreakageChance => 10;
@@ -816,6 +687,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         Game = game;
     }
     public virtual string Key => GetType().Name;
+
+    /// <summary>
+    /// Returns the number of items contained in the chest; or 0, if the item is not a chest.  Returns 0, by default.
+    /// </summary>
+    public virtual int NumberOfItemsContained => 0;
 
     public string GetKey => Key;
 

@@ -437,7 +437,7 @@ internal class Store
         for (slot = 0; slot < StoreInventoryList.Count; slot++)
         {
             jPtr = StoreInventoryList[slot];
-            if (StoreFactory.StoreObjectSimilar(jPtr, oPtr))
+            if (jPtr.CanAbsorb(oPtr))
             {
                 StoreObjectAbsorb(jPtr, oPtr);
                 return slot;
