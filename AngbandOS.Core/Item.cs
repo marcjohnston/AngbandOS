@@ -2449,7 +2449,6 @@ internal sealed class Item : IComparable<Item>
     public bool CreateRandomArtifact(bool fromScroll)
     {
         const int ArtifactCurseChance = 13;
-        bool hasPval = false;
         int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;
         int warriorArtifactBias = 0;
@@ -2487,7 +2486,21 @@ internal sealed class Item : IComparable<Item>
                 case 1:
                 case 2:
                     ApplyRandomBonuses();
-                    hasPval = true;
+                    if (RandomArtifactItemCharacteristics.Blows)
+                    {
+                        TypeSpecificValue = Game.DieRoll(2) + 1;
+                    }
+                    else
+                    {
+                        do
+                        {
+                            TypeSpecificValue++;
+                        } while (TypeSpecificValue < Game.DieRoll(5) || Game.DieRoll(TypeSpecificValue) == 1);
+                    }
+                    if (TypeSpecificValue > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
+                    {
+                        TypeSpecificValue = 4;
+                    }
                     break;
 
                 case 3:
@@ -2507,24 +2520,6 @@ internal sealed class Item : IComparable<Item>
                 default:
                     powers++;
                     break;
-            }
-        }
-        if (hasPval)
-        {
-            if (RandomArtifactItemCharacteristics.Blows)
-            {
-                TypeSpecificValue = Game.DieRoll(2) + 1;
-            }
-            else
-            {
-                do
-                {
-                    TypeSpecificValue++;
-                } while (TypeSpecificValue < Game.DieRoll(5) || Game.DieRoll(TypeSpecificValue) == 1);
-            }
-            if (TypeSpecificValue > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
-            {
-                TypeSpecificValue = 4;
             }
         }
         Factory.ApplyRandartBonus(this);
