@@ -2501,7 +2501,7 @@ internal sealed class Item : IComparable<Item>
 
                 case 6:
                 case 7:
-                    Factory.ApplyRandomSlaying(this, ref ArtifactBias);
+                    Factory.ApplyRandomSlaying(this);
                     break;
 
                 default:
@@ -2540,7 +2540,7 @@ internal sealed class Item : IComparable<Item>
         if (!aCursed && Game.DieRoll(Factory.RandartActivationChance) == 1)
         {
             RandomArtifactActivation = null;
-            GiveActivationPower(ref ArtifactBias);
+            GiveActivationPower();
         }
         if (fromScroll)
         {
@@ -2972,14 +2972,14 @@ internal sealed class Item : IComparable<Item>
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
     }
 
-    private void GiveActivationPower(ref ArtifactBias artifactBias)
+    private void GiveActivationPower()
     {
         Activation activation = null;
-        if (artifactBias != null)
+        if (ArtifactBias != null)
         {
-            if (Game.DieRoll(100) < artifactBias.ActivationPowerChance)
+            if (Game.DieRoll(100) < ArtifactBias.ActivationPowerChance)
             {
-                activation = artifactBias.GetActivationPowerType(this);
+                activation = ArtifactBias.GetActivationPowerType(this);
             }
         }
         if (activation == null)
