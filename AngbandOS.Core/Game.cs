@@ -2088,12 +2088,21 @@ internal class Game
 
     public void ActivateChestTrap(int y, int x, Item chestItem)
     {
-        if (chestItem.ContainerIsOpen || chestItem.ContainerTrapConfiguration == null)
+        if (chestItem.ContainerIsOpen || chestItem.ContainerTraps == null)
         {
             return;
         }
-        ChestTrapConfiguration trap = chestItem.ContainerTrapConfiguration;
-        trap.Activate(this, chestItem);
+        foreach (ChestTrap trap in chestItem.ContainerTraps)
+        {
+            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(MapX.IntValue, MapY.IntValue);
+            trap.Activate(eventArgs);
+
+            if (eventArgs.DestroysContents)
+            {
+                MsgPrint("Everything inside the chest is destroyed!");
+                chestItem.ContainerIsOpen = true;
+            }
+        }
     }
 
     public void DisplayWildMap()
@@ -6110,7 +6119,7 @@ internal class Game
                 continue;
             }
             // If we're only interested in trapped chests, skip those that aren't
-            if (trappedOnly && (!chestItem.IsKnown() || chestItem.ContainerTrapConfiguration.NotTrapped))
+            if (trappedOnly && (!chestItem.IsKnown() || chestItem.ContainerTraps.Length == 0))
             {
                 continue;
             }
@@ -6346,12 +6355,7 @@ internal class Game
             MsgPrint("I don't see any traps.");
         }
         // If it has no traps there's nothing to disarm
-        else if (chestItem.ContainerIsOpen || chestItem.ContainerTrapConfiguration == null)
-        {
-            MsgPrint("The chest is not trapped.");
-        }
-        // If it has a null trap then there's nothing to disarm
-        else if (chestItem.ContainerTrapConfiguration.NotTrapped)
+        else if (chestItem.ContainerIsOpen || chestItem.ContainerTraps == null || chestItem.ContainerTraps.Length == 0)
         {
             MsgPrint("The chest is not trapped.");
         }
@@ -6360,7 +6364,7 @@ internal class Game
         {
             MsgPrint("You have disarmed the chest.");
             GainExperience(chestItem.LevelOfObjectsInContainer);
-            chestItem.ContainerTrapConfiguration = SingletonRepository.Get<ChestTrapConfiguration>().First(_chestTrapConfiguration => _chestTrapConfiguration.Traps.Length == 0);
+            chestItem.ContainerTraps = new ChestTrap[] { };
         }
         // If we failed to disarm it there's a chance it goes off
         else if (i > 5 && DieRoll(i) > 5)

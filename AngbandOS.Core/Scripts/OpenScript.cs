@@ -63,69 +63,55 @@ internal class OpenScript : Script, IScript, IRepeatableScript
             // Open the chest or door
             else if (chestItem != null)
             {
-                more = OpenChestAtGivenLocation(y, x, chestItem);
+                bool openedSuccessfully = true;
+                // Opening a chest takes an action
+                Game.EnergyUse = 100;
+                // If the chest is locked, we may need to pick it
+                if (!chestItem.ContainerIsOpen && chestItem.ContainerTraps != null)
+                {
+                    openedSuccessfully = false;
+                    // Our disable traps skill also doubles up as a lockpicking skill
+                    int i = Game.SkillDisarmTraps;
+                    // Hard to pick locks in the dark
+                    if (Game.BlindnessTimer.Value != 0 || Game.NoLight())
+                    {
+                        i /= 10;
+                    }
+                    // Hard to pick locks when you're confused or hallucinating
+                    if (Game.ConfusedTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
+                    {
+                        i /= 10;
+                    }
+                    // Some locks are harder to pick than others
+                    int j = i - chestItem.LevelOfObjectsInContainer;
+                    if (j < 2)
+                    {
+                        j = 2;
+                    }
+                    // See if we succeeded
+                    if (Game.RandomLessThan(100) < j)
+                    {
+                        Game.MsgPrint("You have picked the lock.");
+                        Game.GainExperience(1);
+                        openedSuccessfully = true;
+                    }
+                    else
+                    {
+                        more = true;
+                        Game.MsgPrint("You failed to pick the lock.");
+                    }
+                }
+                // If we successfully opened it, set of any traps and then actually open the chest
+                if (openedSuccessfully)
+                {
+                    Game.ActivateChestTrap(y, x, chestItem);
+                    Game.OpenChest(y, x, chestItem);
+                }
             }
             else
             {
                 more = Game.OpenDoor(y, x);
             }
-        }
-        return more;
-    }
-
-    /// <summary>
-    /// Open a chest at a given location
-    /// </summary>
-    /// <param name="y"> The y coordinate of the location </param>
-    /// <param name="x"> The x coordinate of the location </param>
-    /// <param name="itemIndex"> The index of the chest item </param>
-    /// <returns> Whether or not the player should be disturbed by the action </returns>
-    private bool OpenChestAtGivenLocation(int y, int x, Item chestItem)
-    {
-        bool openedSuccessfully = true;
-        bool more = false;
-        // Opening a chest takes an action
-        Game.EnergyUse = 100;
-        // If the chest is locked, we may need to pick it
-        if (!chestItem.ContainerIsOpen && chestItem.ContainerTrapConfiguration != null)
-        {
-            openedSuccessfully = false;
-            // Our disable traps skill also doubles up as a lockpicking skill
-            int i = Game.SkillDisarmTraps;
-            // Hard to pick locks in the dark
-            if (Game.BlindnessTimer.Value != 0 || Game.NoLight())
-            {
-                i /= 10;
-            }
-            // Hard to pick locks when you're confused or hallucinating
-            if (Game.ConfusedTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
-            {
-                i /= 10;
-            }
-            // Some locks are harder to pick than others
-            int j = i - chestItem.LevelOfObjectsInContainer;
-            if (j < 2)
-            {
-                j = 2;
-            }
-            // See if we succeeded
-            if (Game.RandomLessThan(100) < j)
-            {
-                Game.MsgPrint("You have picked the lock.");
-                Game.GainExperience(1);
-                openedSuccessfully = true;
-            }
-            else
-            {
-                more = true;
-                Game.MsgPrint("You failed to pick the lock.");
-            }
-        }
-        // If we successfully opened it, set of any traps and then actually open the chest
-        if (openedSuccessfully)
-        {
-            Game.ActivateChestTrap(y, x, chestItem);
-            Game.OpenChest(y, x, chestItem);
         }
         return more;
     }

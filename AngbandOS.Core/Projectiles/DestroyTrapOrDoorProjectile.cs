@@ -45,9 +45,9 @@ internal class DestroyTrapOrDoorProjectile : Projectile
         {
             if (oPtr.Category == ItemTypeEnum.Chest)
             {
-                if (!oPtr.ContainerIsOpen && oPtr.ContainerTrapConfiguration != null)
+                if (!oPtr.ContainerIsOpen && oPtr.ContainerTraps != null)
                 {
-                    oPtr.ContainerTrapConfiguration = null;
+                    oPtr.ContainerTraps = null;
                     oPtr.BecomeKnown();
                     if (oPtr.Marked)
                     {

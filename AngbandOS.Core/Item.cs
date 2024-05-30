@@ -280,9 +280,9 @@ internal sealed class Item : IComparable<Item>
     public int TypeSpecificValue;
 
     /// <summary>
-    /// Returns the configuration of the trapped chest.
+    /// Returns null if the container is unlocked and can be opened without picking, an empty array, if the container is disarmed and locked, or an array of traps.
     /// </summary>
-    public ChestTrapConfiguration? ContainerTrapConfiguration = null;
+    public ChestTrap[]? ContainerTraps = null;
 
     /// <summary>
     /// Returns the level of the objects contained in the chest.
@@ -497,7 +497,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
         clonedItem.ContainerIsOpen = ContainerIsOpen;
         clonedItem.LevelOfObjectsInContainer = LevelOfObjectsInContainer;
-        clonedItem.ContainerTrapConfiguration = ContainerTrapConfiguration;
+        clonedItem.ContainerTraps = ContainerTraps;
         clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
         clonedItem.StaffChargesRemaining = StaffChargesRemaining;
         clonedItem.WandChargesRemaining = WandChargesRemaining;

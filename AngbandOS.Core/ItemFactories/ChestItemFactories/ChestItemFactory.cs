@@ -6,6 +6,8 @@
 // copies. Other copyrights may also apply.”
 
 
+using System.Diagnostics;
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -32,13 +34,13 @@ internal abstract class ChestItemFactory : ItemFactory
         {
             return Stompable[StompableType.Broken]; // Empty
         }
-        else if (item.ContainerTrapConfiguration == null)
+        else if (item.ContainerTraps == null)
         {
             return Stompable[StompableType.Average];
         }
         else
         {
-            if (item.ContainerTrapConfiguration.Traps.Length == 0)
+            if (item.ContainerTraps.Length == 0)
             {
                 return Stompable[StompableType.Good];
             }
@@ -51,29 +53,30 @@ internal abstract class ChestItemFactory : ItemFactory
 
     public override string GetDetailedDescription(Item item)
     {
-        string s = string.Empty;
         if (!item.IsKnown())
         {
+            return "";
         }
         else if (item.ContainerIsOpen)
         {
-            s += " (empty)";
+           return " (empty)";
         }
-        else if (item.ContainerTrapConfiguration == null)
+        else if (item.ContainerTraps == null)
         {
-            s += " (unlocked)";
+            return " (unlocked)";
         }
-        else if (!item.ContainerTrapConfiguration.IsTrapped)
+        else if (item.ContainerTraps.Length == 0)
         {
-            s += " (disarmed)";
+            return " (locked)";
+        }
+        else if (item.ContainerTraps.Length > 1)
+        {
+            return " (multiple traps)";
         }
         else
         {
-            s += $" {item.ContainerTrapConfiguration.Description}";
+            return $" {item.ContainerTraps[0].Description}";
         }
-
-        // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
-        return s;
     }
 
     /// <summary>
@@ -100,7 +103,7 @@ internal abstract class ChestItemFactory : ItemFactory
                 int randomRemaining = chestTrapConfigurationCount - eightFivePercent;
                 chestType = eightFivePercent + Game.RandomLessThan(randomRemaining);
             }
-            item.ContainerTrapConfiguration = Game.SingletonRepository.Get<ChestTrapConfiguration>(chestType);
+            item.ContainerTraps = Game.SingletonRepository.Get<ChestTrapConfiguration>(chestType).Traps;
             item.LevelOfObjectsInContainer = chestType;
         }
     }

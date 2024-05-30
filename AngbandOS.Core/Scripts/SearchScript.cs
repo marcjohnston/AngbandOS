@@ -79,11 +79,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                         {
                             continue;
                         }
-                        if (item.ContainerIsOpen || item.ContainerTrapConfiguration == null)
-                        {
-                            continue;
-                        }
-                        if (item.ContainerTrapConfiguration.NotTrapped)
+                        if (item.ContainerIsOpen || item.ContainerTraps == null || item.ContainerTraps.Length == 0)
                         {
                             continue;
                         }

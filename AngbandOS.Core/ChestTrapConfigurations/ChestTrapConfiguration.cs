@@ -33,36 +33,4 @@ internal abstract class ChestTrapConfiguration : IGetKey
     public abstract ChestTrap[] Traps { get; }
     public bool NotTrapped => Traps.Length == 0;
     public bool IsTrapped => Traps.Length > 0;
-    public string Description
-    {
-        get
-        {
-            if (NotTrapped)
-            {
-                return "(Locked)";
-            }
-            else if (Traps.Length > 1)
-            {
-                return "(Multiple Traps)";
-            }
-            else
-            {
-                return Traps[0].Description;
-            }
-        }
-    }
-    public void Activate(Game game, Item chestItem)
-    {
-        foreach (ChestTrap trap in Traps)
-        {
-            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(game.MapX.IntValue, game.MapY.IntValue);
-            trap.Activate(eventArgs);
-
-            if (eventArgs.DestroysContents)
-            {
-                Game.MsgPrint("Everything inside the chest is destroyed!");
-                chestItem.ContainerIsOpen = true;
-            }
-        }
-    }
 }
