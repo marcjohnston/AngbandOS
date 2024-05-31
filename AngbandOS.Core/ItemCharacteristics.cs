@@ -5,10 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interfaces;
+
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents an set of item characteristics.
+/// Represents a set of item characteristics.
 /// </summary>
 [Serializable]
 internal class ItemCharacteristics : IItemCharacteristics
@@ -16,6 +18,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool Activate { get; set; } = false; // TODO: This should be IActivatible.IsAssignableFrom
     public bool Aggravate { get; set; } = false;
     public bool AntiTheft { get; set; } = false;
+    public ArtifactBias? ArtifactBias { get; set; } = null;
     public bool Blessed { get; set; } = false;
     public bool Blows { get; set; } = false;
     public bool BrandAcid { get; set; } = false;
@@ -114,6 +117,7 @@ internal class ItemCharacteristics : IItemCharacteristics
         Activate = itemCharacteristics.Activate;
         Aggravate = itemCharacteristics.Aggravate;
         AntiTheft = itemCharacteristics.AntiTheft;
+        ArtifactBias = itemCharacteristics.ArtifactBias;
         Blessed = itemCharacteristics.Blessed;
         Blows = itemCharacteristics.Blows;
         BrandAcid = itemCharacteristics.BrandAcid;
@@ -212,6 +216,10 @@ internal class ItemCharacteristics : IItemCharacteristics
         Activate = Activate || itemCharacteristics.Activate;
         Aggravate = Aggravate || itemCharacteristics.Aggravate;
         AntiTheft = AntiTheft || itemCharacteristics.AntiTheft;
+        if (ArtifactBias == null)
+        {
+            ArtifactBias = itemCharacteristics.ArtifactBias;
+        }
         Blessed = Blessed || itemCharacteristics.Blessed;
         Blows = Blows || itemCharacteristics.Blows;
         BrandAcid = BrandAcid || itemCharacteristics.BrandAcid;
@@ -309,6 +317,7 @@ internal class ItemCharacteristics : IItemCharacteristics
         Activate = false;
         Aggravate = false;
         AntiTheft = false;
+        ArtifactBias = null;
         Blessed = false;
         Blows = false;
         BrandAcid = false;
@@ -399,237 +408,9 @@ internal class ItemCharacteristics : IItemCharacteristics
     }
 
     /// <summary>
-    /// Returns true, if any characteristic is set.
-    /// </summary>
-    /// <returns></returns>
-    public bool IsSet
-    {
-        get
-        {
-            if (Activate) return true;
-            if (Aggravate) return true;
-            if (AntiTheft) return true;
-            if (Blessed) return true;
-            if (Blows) return true;
-            if (BrandAcid) return true;
-            if (BrandCold) return true;
-            if (BrandElec) return true;
-            if (BrandFire) return true;
-            if (BrandPois) return true;
-            if (Cha) return true;
-            if (Chaotic) return true;
-            if (Con) return true;
-            if (Cursed) return true;
-            if (Dex) return true;
-            if (DrainExp) return true;
-            if (DreadCurse) return true;
-            if (EasyKnow) return true;
-            if (Feather) return true;
-            if (FreeAct) return true;
-            if (HeavyCurse) return true;
-            if (HideType) return true;
-            if (HoldLife) return true;
-            if (IgnoreAcid) return true;
-            if (IgnoreCold) return true;
-            if (IgnoreElec) return true;
-            if (IgnoreFire) return true;
-            if (ImAcid) return true;
-            if (ImCold) return true;
-            if (ImElec) return true;
-            if (ImFire) return true;
-            if (Impact) return true;
-            if (Infra) return true;
-            if (InstaArt) return true;
-            if (Int) return true;
-            if (KillDragon) return true;
-            if (Lightsource) return true;
-            if (NoMagic) return true;
-            if (NoTele) return true;
-            if (PermaCurse) return true;
-            if (Reflect) return true;
-            if (Regen) return true;
-            if (ResAcid) return true;
-            if (ResBlind) return true;
-            if (ResChaos) return true;
-            if (ResCold) return true;
-            if (ResConf) return true;
-            if (ResDark) return true;
-            if (ResDisen) return true;
-            if (ResElec) return true;
-            if (ResFear) return true;
-            if (ResFire) return true;
-            if (ResLight) return true;
-            if (ResNether) return true;
-            if (ResNexus) return true;
-            if (ResPois) return true;
-            if (ResShards) return true;
-            if (ResSound) return true;
-            if (Search) return true;
-            if (SeeInvis) return true;
-            if (ShElec) return true;
-            if (ShFire) return true;
-            if (ShowMods) return true;
-            if (SlayAnimal) return true;
-            if (SlayDemon) return true;
-            if (SlayDragon) return true;
-            if (SlayEvil) return true;
-            if (SlayGiant) return true;
-            if (SlayOrc) return true;
-            if (SlayTroll) return true;
-            if (SlayUndead) return true;
-            if (SlowDigest) return true;
-            if (Speed) return true;
-            if (Stealth) return true;
-            if (Str) return true;
-            if (SustCha) return true;
-            if (SustCon) return true;
-            if (SustDex) return true;
-            if (SustInt) return true;
-            if (SustStr) return true;
-            if (SustWis) return true;
-            if (Telepathy) return true;
-            if (Teleport) return true;
-            if (Tunnel) return true;
-            if (Vampiric) return true;
-            if (Vorpal) return true;
-            if (Wis) return true;
-            if (Wraith) return true;
-            if (XtraMight) return true;
-            if (XtraShots) return true;
-            return false;
-        }
-    }
-
-    /// <summary>
     /// Creates a new set of ItemCharacteristics with all false values.
     /// </summary>
     public ItemCharacteristics()
     {
-    }
-
-    ///// <summary>
-    ///// Creates a new set of ItemCharacteristics by performing a set "OR" operation on all of the ItemCharacteristics objects provided.
-    ///// </summary>
-    ///// <param name="mergeItemCharacteristics"></param>
-    //public ItemCharacteristics(params IItemCharacteristics[] mergeItemCharacteristics)
-    //{
-    //    ItemCharacteristics tempItemCharacteristics = new ItemCharacteristics();
-    //    foreach (ItemCharacteristics itemCharacteristics in mergeItemCharacteristics)
-    //    {
-    //        tempItemCharacteristics = new ItemCharacteristics(tempItemCharacteristics, itemCharacteristics);
-    //    }
-    //}
-
-    public override bool Equals(object? obj)
-    {
-        if (obj == null)
-            return false;
-
-        // We can compare if the object inherits from the IItemCharacteristics interface.
-        if (!typeof(IItemCharacteristics).IsAssignableFrom(obj.GetType()))
-            return false;
-
-        IItemCharacteristics objCharacteristics = (IItemCharacteristics)obj;
-        if (Activate != objCharacteristics.Activate) return false;
-        if (Aggravate != objCharacteristics.Aggravate) return false;
-        if (AntiTheft != objCharacteristics.AntiTheft) return false;
-        if (Blessed != objCharacteristics.Blessed) return false;
-        if (Blows != objCharacteristics.Blows) return false;
-        if (BrandAcid != objCharacteristics.BrandAcid) return false;
-        if (BrandCold != objCharacteristics.BrandCold) return false;
-        if (BrandElec != objCharacteristics.BrandElec) return false;
-        if (BrandFire != objCharacteristics.BrandFire) return false;
-        if (BrandPois != objCharacteristics.BrandPois) return false;
-        if (Cha != objCharacteristics.Cha) return false;
-        if (Chaotic != objCharacteristics.Chaotic) return false;
-        if (Con != objCharacteristics.Con) return false;
-        if (Cursed != objCharacteristics.Cursed) return false;
-        if (Dex != objCharacteristics.Dex) return false;
-        if (DrainExp != objCharacteristics.DrainExp) return false;
-        if (DreadCurse != objCharacteristics.DreadCurse) return false;
-        if (EasyKnow != objCharacteristics.EasyKnow) return false;
-        if (Feather != objCharacteristics.Feather) return false;
-        if (FreeAct != objCharacteristics.FreeAct) return false;
-        if (HeavyCurse != objCharacteristics.HeavyCurse) return false;
-        if (HideType != objCharacteristics.HideType) return false;
-        if (HoldLife != objCharacteristics.HoldLife) return false;
-        if (IgnoreAcid != objCharacteristics.IgnoreAcid) return false;
-        if (IgnoreCold != objCharacteristics.IgnoreCold) return false;
-        if (IgnoreElec != objCharacteristics.IgnoreElec) return false;
-        if (IgnoreFire != objCharacteristics.IgnoreFire) return false;
-        if (ImAcid != objCharacteristics.ImAcid) return false;
-        if (ImCold != objCharacteristics.ImCold) return false;
-        if (ImElec != objCharacteristics.ImElec) return false;
-        if (ImFire != objCharacteristics.ImFire) return false;
-        if (Impact != objCharacteristics.Impact) return false;
-        if (Infra != objCharacteristics.Infra) return false;
-        if (InstaArt != objCharacteristics.InstaArt) return false;
-        if (Int != objCharacteristics.Int) return false;
-        if (KillDragon != objCharacteristics.KillDragon) return false;
-        if (Lightsource != objCharacteristics.Lightsource) return false;
-        if (NoMagic != objCharacteristics.NoMagic) return false;
-        if (NoTele != objCharacteristics.NoTele) return false;
-        if (PermaCurse != objCharacteristics.PermaCurse) return false;
-        if (Reflect != objCharacteristics.Reflect) return false;
-        if (Regen != objCharacteristics.Regen) return false;
-        if (ResAcid != objCharacteristics.ResAcid) return false;
-        if (ResBlind != objCharacteristics.ResBlind) return false;
-        if (ResChaos != objCharacteristics.ResChaos) return false;
-        if (ResCold != objCharacteristics.ResCold) return false;
-        if (ResConf != objCharacteristics.ResConf) return false;
-        if (ResDark != objCharacteristics.ResDark) return false;
-        if (ResDisen != objCharacteristics.ResDisen) return false;
-        if (ResElec != objCharacteristics.ResElec) return false;
-        if (ResFear != objCharacteristics.ResFear) return false;
-        if (ResFire != objCharacteristics.ResFire) return false;
-        if (ResLight != objCharacteristics.ResLight) return false;
-        if (ResNether != objCharacteristics.ResNether) return false;
-        if (ResNexus != objCharacteristics.ResNexus) return false;
-        if (ResPois != objCharacteristics.ResPois) return false;
-        if (ResShards != objCharacteristics.ResShards) return false;
-        if (ResSound != objCharacteristics.ResSound) return false;
-        if (Search != objCharacteristics.Search) return false;
-        if (SeeInvis != objCharacteristics.SeeInvis) return false;
-        if (ShElec != objCharacteristics.ShElec) return false;
-        if (ShFire != objCharacteristics.ShFire) return false;
-        if (ShowMods != objCharacteristics.ShowMods) return false;
-        if (SlayAnimal != objCharacteristics.SlayAnimal) return false;
-        if (SlayDemon != objCharacteristics.SlayDemon) return false;
-        if (SlayDragon != objCharacteristics.SlayDragon) return false;
-        if (SlayEvil != objCharacteristics.SlayEvil) return false;
-        if (SlayGiant != objCharacteristics.SlayGiant) return false;
-        if (SlayOrc != objCharacteristics.SlayOrc) return false;
-        if (SlayTroll != objCharacteristics.SlayTroll) return false;
-        if (SlayUndead != objCharacteristics.SlayUndead) return false;
-        if (SlowDigest != objCharacteristics.SlowDigest) return false;
-        if (Speed != objCharacteristics.Speed) return false;
-        if (Stealth != objCharacteristics.Stealth) return false;
-        if (Str != objCharacteristics.Str) return false;
-        if (SustCha != objCharacteristics.SustCha) return false;
-        if (SustCon != objCharacteristics.SustCon) return false;
-        if (SustDex != objCharacteristics.SustDex) return false;
-        if (SustInt != objCharacteristics.SustInt) return false;
-        if (SustStr != objCharacteristics.SustStr) return false;
-        if (SustWis != objCharacteristics.SustWis) return false;
-        if (Telepathy != objCharacteristics.Telepathy) return false;
-        if (Teleport != objCharacteristics.Teleport) return false;
-        if (Tunnel != objCharacteristics.Tunnel) return false;
-        if (Vampiric != objCharacteristics.Vampiric) return false;
-        if (Vorpal != objCharacteristics.Vorpal) return false;
-        if (Wis != objCharacteristics.Wis) return false;
-        if (Wraith != objCharacteristics.Wraith) return false;
-        if (XtraMight != objCharacteristics.XtraMight) return false;
-        if (XtraShots != objCharacteristics.XtraShots) return false;
-        return true;
-    }
-
-    public static bool operator !=(ItemCharacteristics x, IItemCharacteristics y)
-    {
-        return !x.Equals(y);
-    }
-
-    public static bool operator ==(ItemCharacteristics x, IItemCharacteristics y)
-    {
-        return x.Equals(y);
     }
 }

@@ -18,6 +18,7 @@ internal interface IItemCharacteristics
     bool Activate { get; }
     bool Aggravate { get; }
     bool AntiTheft { get; }
+    ArtifactBias? ArtifactBias { get; }
     bool Blessed { get; }
     bool Blows { get; }
     bool BrandAcid { get; }

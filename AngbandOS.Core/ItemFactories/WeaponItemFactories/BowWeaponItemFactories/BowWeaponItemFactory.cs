@@ -52,11 +52,11 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
         return basenm;
     }
 
-    public override void ApplyRandomSlaying(Item item)
+    public override void ApplySlayingForRandomArtifactCreation(Item item)
     {
-        if (item.ArtifactBias != null)
+        if (item.RandomArtifactItemCharacteristics.ArtifactBias != null)
         {
-            if (item.ArtifactBias.ApplySlaying(item))
+            if (item.RandomArtifactItemCharacteristics.ArtifactBias.ApplySlaying(item))
             {
                 return;
             }
@@ -68,17 +68,17 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
             case 2:
             case 3:
                 item.RandomArtifactItemCharacteristics.XtraMight = true;
-                if (item.ArtifactBias == null && Game.DieRoll(9) == 1)
+                if (item.RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    item.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    item.RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
                 }
                 break;
 
             default:
                 item.RandomArtifactItemCharacteristics.XtraShots = true;
-                if (item.ArtifactBias == null && Game.DieRoll(9) == 1)
+                if (item.RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    item.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    item.RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
                 }
                 break;
         }

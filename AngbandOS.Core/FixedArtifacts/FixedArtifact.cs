@@ -94,6 +94,8 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 
     public virtual bool Aggravate { get; set; } = false;
 
+    public virtual ArtifactBias? ArtifactBias { get; set; } = null;
+
     public virtual bool Blessed { get; set; } = false;
 
     public virtual bool Blows { get; set; } = false;

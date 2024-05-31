@@ -66,6 +66,7 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
     public virtual bool Activate { get; set; } = false;
     public virtual bool AntiTheft { get; set; } = false;
 
+    public virtual ArtifactBias? ArtifactBias { get; set; } = null;
     public virtual bool Aggravate { get; set; } = false;
 
     public virtual bool Blessed { get; set; } = false;
