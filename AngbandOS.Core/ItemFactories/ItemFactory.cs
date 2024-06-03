@@ -371,7 +371,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual void ApplyRandartBonus(Item item) { }
+    public virtual void ApplyBonusForRandomArtifactCreation(Item item) { }
 
     /// <summary>
     /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.

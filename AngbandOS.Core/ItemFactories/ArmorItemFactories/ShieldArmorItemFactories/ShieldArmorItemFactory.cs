@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -45,7 +46,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
                 break;
             case 10:
             case 20:
-                item.ApplyRandomResistance(Game.DieRoll(34) + 4);
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.RandomArtifactItemCharacteristics.ResPois = true;

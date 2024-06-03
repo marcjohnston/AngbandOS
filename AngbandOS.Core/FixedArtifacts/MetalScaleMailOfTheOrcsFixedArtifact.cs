@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
@@ -16,7 +17,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
     }
 
     // Orc does Carnage

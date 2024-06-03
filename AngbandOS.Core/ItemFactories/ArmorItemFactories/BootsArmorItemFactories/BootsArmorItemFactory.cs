@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -80,7 +81,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsWingedRareItem));
                 if (Game.DieRoll(2) == 1)
                 {
-                    item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 }
                 break;
         }

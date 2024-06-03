@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -16,11 +17,11 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
         {
             case 1:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTheMagiRareItem));
-                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
             case 2:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfMightRareItem));
-                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
             case 3:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTelepathyRareItem));
@@ -31,7 +32,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
             case 5:
             case 6:
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfLordlinessRareItem));
-                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
             case 7:
             case 8:

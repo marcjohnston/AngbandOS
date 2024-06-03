@@ -16,7 +16,7 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
     }
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "The Hard Leather Cap of the Mindcrafter";

@@ -59,7 +59,7 @@ internal abstract class WeaponItemFactory : ItemFactory
         return item.ComputeTypeSpecificRealValue(value);
     }
 
-    public override void ApplyRandartBonus(Item item)
+    public override void ApplyBonusForRandomArtifactCreation(Item item)
     {
         item.BonusHit += Game.DieRoll(item.BonusHit > 19 ? 1 : 20 - item.BonusHit);
         item.BonusDamage += Game.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);

@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
@@ -21,7 +22,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
     {
         item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
 
-        item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
     }
 
     public override ColorEnum Color => ColorEnum.Yellow;

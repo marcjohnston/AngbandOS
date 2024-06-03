@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -21,7 +22,7 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     {
         if (Game.DieRoll(3) == 1)
         {
-            item.ApplyRandomResistance(Game.DieRoll(34) + 4);
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)));
         }
         if (Game.DieRoll(5) == 1)
         {

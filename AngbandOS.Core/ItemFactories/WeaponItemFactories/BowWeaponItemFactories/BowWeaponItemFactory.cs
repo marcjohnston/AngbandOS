@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -94,7 +95,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 case 1:
                 case 11:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfExtraMightRareItem));
-                    item.ApplyRandomResistance(Game.DieRoll(34) + 4);
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)));
                     break;
                 case 2:
                 case 12:

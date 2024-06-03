@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 /// <summary>
@@ -49,7 +50,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     {
                         item.RandomArtifactItemCharacteristics.ResPois = true;
                     }
-                    item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     break;
                 case 3:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfVitriolRareItem));
@@ -74,14 +75,14 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 9:
                 case 10:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayDragonRareItem));
-                    item.ApplyRandomResistance(Game.DieRoll(12) + 4);
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalResistanceItemAdditiveBundleWeightedRandom)));
                     if (Game.RandomLessThan(100) < 20)
                     {
                         if (Game.DieRoll(3) == 1)
                         {
                             item.RandomArtifactItemCharacteristics.ResPois = true;
                         }
-                        item.ApplyRandomResistance(Game.DieRoll(14) + 4);
+                        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalAndPoisonResistanceItemAdditiveBundleWeightedRandom)));
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfDragonBaneRareItem));
                     }
                     break;
@@ -148,7 +149,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     break;
                 case 34:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponChaoticRareItem));
-                    item.ApplyRandomResistance(Game.DieRoll(34) + 4);
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)));
                     break;
                 case 35:
                     item.CreateRandomArtifact(false);
@@ -183,7 +184,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 38:
                 case 39:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponPlanarWeaponRareItem));
-                    item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     if (Game.DieRoll(5) == 1)
                     {
                         item.RandomArtifactItemCharacteristics.SlayDemon = true;
@@ -203,7 +204,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     {
                         item.RandomArtifactItemCharacteristics.ResFear = true;
                     }
-                    item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     break;
                 case 41:
                 case 42:

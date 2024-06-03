@@ -19,7 +19,7 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
     {
         if (Game.DieRoll(2) == 1)
         {
-            item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
         }
         else
         {

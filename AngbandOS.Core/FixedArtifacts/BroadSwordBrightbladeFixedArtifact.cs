@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
@@ -19,7 +20,7 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
     {
         if (Game.DieRoll(2) == 1)
         {
-            item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
         }
         else
         {

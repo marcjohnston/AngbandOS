@@ -36,6 +36,8 @@ global using AngbandOS.Core.Gods;
 global using AngbandOS.Core.HelpGroups;
 global using AngbandOS.Core.Interfaces;
 global using AngbandOS.Core.InventorySlots;
+global using AngbandOS.Core.ItemAdditiveBundles;
+global using AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 global using AngbandOS.Core.ItemClasses;
 global using AngbandOS.Core.ItemFactories;
 global using AngbandOS.Core.ItemFilters;

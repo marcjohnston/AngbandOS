@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -2200,247 +2201,14 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    public void ApplyRandomResistance(int specific)
+    public void ApplyRandomResistance(ItemAdditiveBundleWeightedRandom itemAdditiveBundleWeightedRandom)
     {
-        if (specific == 0 && RandomArtifactItemCharacteristics.ArtifactBias != null)
+        ItemAdditiveBundle? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
+        if (itemAdditiveBundle != null)
         {
-            if (RandomArtifactItemCharacteristics.ArtifactBias.ApplyRandomResistances(this))
-            {
-                return;
-            }
-
-        }
-        switch (specific != 0 ? specific : Game.DieRoll(41))
-        {
-            case 1:
-                if (Game.DieRoll(Constants.WeirdLuck) != 1)
-                {
-                    ApplyRandomResistance(0);
-                }
-                else
-                {
-                    RandomArtifactItemCharacteristics.ImAcid = true;
-                    if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                    {
-                        RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
-                    }
-                }
-                break;
-
-            case 2:
-                if (Game.DieRoll(Constants.WeirdLuck) != 1)
-                {
-                    ApplyRandomResistance(0);
-                }
-                else
-                {
-                    RandomArtifactItemCharacteristics.ImElec = true;
-                    if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                    {
-                        RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
-                    }
-                }
-                break;
-
-            case 3:
-                if (Game.DieRoll(Constants.WeirdLuck) != 1)
-                {
-                    ApplyRandomResistance(0);
-                }
-                else
-                {
-                    RandomArtifactItemCharacteristics.ImCold = true;
-                    if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                    {
-                        RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
-                    }
-                }
-                break;
-
-            case 4:
-                if (Game.DieRoll(Constants.WeirdLuck) != 1)
-                {
-                    ApplyRandomResistance(0);
-                }
-                else
-                {
-                    RandomArtifactItemCharacteristics.ImFire = true;
-                    if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                    {
-                        RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
-                    }
-                }
-                break;
-
-            case 5:
-            case 6:
-            case 13:
-                RandomArtifactItemCharacteristics.ResAcid = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
-                }
-                break;
-
-            case 7:
-            case 8:
-            case 14:
-                RandomArtifactItemCharacteristics.ResElec = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
-                }
-                break;
-
-            case 9:
-            case 10:
-            case 15:
-                RandomArtifactItemCharacteristics.ResFire = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
-                }
-                break;
-
-            case 11:
-            case 12:
-            case 16:
-                RandomArtifactItemCharacteristics.ResCold = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
-                }
-                break;
-
-            case 17:
-            case 18:
-                RandomArtifactItemCharacteristics.ResPois = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(4) != 1)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PoisonArtifactBias));
-                }
-                else if (RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(2) == 1)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
-                }
-                else if (RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(2) == 1)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
-                }
-                break;
-
-            case 19:
-            case 20:
-                RandomArtifactItemCharacteristics.ResFear = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
-                }
-                break;
-
-            case 21:
-                RandomArtifactItemCharacteristics.ResLight = true;
-                break;
-
-            case 22:
-                RandomArtifactItemCharacteristics.ResDark = true;
-                break;
-
-            case 23:
-            case 24:
-                RandomArtifactItemCharacteristics.ResBlind = true;
-                break;
-
-            case 25:
-            case 26:
-                RandomArtifactItemCharacteristics.ResConf = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(6) == 1)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
-                }
-                break;
-
-            case 27:
-            case 28:
-                RandomArtifactItemCharacteristics.ResSound = true;
-                break;
-
-            case 29:
-            case 30:
-                RandomArtifactItemCharacteristics.ResShards = true;
-                break;
-
-            case 31:
-            case 32:
-                RandomArtifactItemCharacteristics.ResNether = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
-                }
-                break;
-
-            case 33:
-            case 34:
-                RandomArtifactItemCharacteristics.ResNexus = true;
-                break;
-
-            case 35:
-            case 36:
-                RandomArtifactItemCharacteristics.ResChaos = true;
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null && Game.DieRoll(2) == 1)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
-                }
-                break;
-
-            case 37:
-            case 38:
-                RandomArtifactItemCharacteristics.ResDisen = true;
-                break;
-
-            case 39:
-                if (Factory.CanProvideSheathOfElectricity)
-                {
-                    RandomArtifactItemCharacteristics.ShElec = true;
-                }
-                else
-                {
-                    ApplyRandomResistance(0);
-                }
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
-                }
-                break;
-
-            case 40:
-                if (Factory.CanProvideSheathOfFire)
-                {
-                    RandomArtifactItemCharacteristics.ShFire = true;
-                }
-                else
-                {
-                    ApplyRandomResistance(0);
-                }
-                if (RandomArtifactItemCharacteristics.ArtifactBias == null)
-                {
-                    RandomArtifactItemCharacteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
-                }
-                break;
-
-            case 41:
-                if (Factory.CanReflectBoltsAndArrows)
-                {
-                    RandomArtifactItemCharacteristics.Reflect = true;
-                }
-                else
-                {
-                    ApplyRandomResistance(0);
-                }
-                break;
+            RandomArtifactItemCharacteristics.Merge(itemAdditiveBundle);
         }
     }
-
     public bool CreateRandomArtifact(bool fromScroll)
     {
         const int ArtifactCurseChance = 13;
@@ -2500,7 +2268,62 @@ internal sealed class Item : IComparable<Item>
 
                 case 3:
                 case 4:
-                    ApplyRandomResistance(0);
+                    ItemAdditiveBundleWeightedRandom itemAdditiveBundleWeightedRandom = new ItemAdditiveBundleWeightedRandom(Game);
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AcidImmunityItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ElectricityImmunityItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ColdImmunityItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(FireImmunityItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistAcidAndAcidBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistElectricityAndElectricityBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFireAndFireBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistColdAndColdBiasItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 36 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndPoisonBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 6 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndNecromanticBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 3 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndRogueBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 3, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearAndWarriorBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistLightItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDarknessItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 8 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionAndChaosBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 40 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistSoundItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistShardsItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherAndNecromanticBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNexusItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosAndChaosBiasItemAdditiveBundle)));
+                    itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosItemAdditiveBundle)));
+
+                    itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDisenchantItemAdditiveBundle)));
+
+                    if (Factory.CanProvideSheathOfElectricity)
+                    {
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfElectricityAndElectricityBiasItemAdditiveBundle)));
+                    }
+
+                    if (Factory.CanProvideSheathOfFire)
+                    {
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfFireAndFireBiasItemAdditiveBundle)));
+                    }
+
+                    if (Factory.CanReflectBoltsAndArrows)
+                    {
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ReflectBoltsAndArrowsItemAdditiveBundle)));
+                    }
+
+                    ApplyRandomResistance(itemAdditiveBundleWeightedRandom);
                     break;
 
                 case 5:
@@ -2517,7 +2340,7 @@ internal sealed class Item : IComparable<Item>
                     break;
             }
         }
-        Factory.ApplyRandartBonus(this);
+        Factory.ApplyBonusForRandomArtifactCreation(this);
         RandomArtifactItemCharacteristics.IgnoreAcid = true;
         RandomArtifactItemCharacteristics.IgnoreElec = true;
         RandomArtifactItemCharacteristics.IgnoreFire = true;

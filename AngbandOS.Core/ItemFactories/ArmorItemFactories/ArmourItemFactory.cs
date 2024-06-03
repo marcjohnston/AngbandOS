@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -54,7 +55,7 @@ internal abstract class ArmorItemFactory : ItemFactory
         (100, "3d5-3")
     };
 
-    public override void ApplyRandartBonus(Item item)
+    public override void ApplyBonusForRandomArtifactCreation(Item item)
     {
         item.BonusArmorClass += Game.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);
     }
@@ -86,11 +87,11 @@ internal abstract class ArmorItemFactory : ItemFactory
         {
             if (Game.DieRoll(4) == 1)
             {
-                item.ApplyRandomResistance(Game.DieRoll(14) + 4);
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalAndPoisonResistanceItemAdditiveBundleWeightedRandom)));
             }
             else
             {
-                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
             }
         } while (Game.DieRoll(2) == 1);
     }
@@ -134,7 +135,7 @@ internal abstract class ArmorItemFactory : ItemFactory
                 {
                     item.RandomArtifactItemCharacteristics.ResPois = true;
                 }
-                item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
             case 19:
                 item.CreateRandomArtifact(false);

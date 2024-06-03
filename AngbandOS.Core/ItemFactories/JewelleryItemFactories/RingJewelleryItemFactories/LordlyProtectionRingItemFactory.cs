@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -26,7 +27,7 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     {
         do
         {
-            item.ApplyRandomResistance(Game.DieRoll(20) + 18);
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(LordlyResistanceItemAdditiveBundleWeightedRandom)));
         } while (Game.DieRoll(4) == 1);
         item.BonusArmorClass = 10 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }

@@ -20,7 +20,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
         {
             item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
 
-            item.ApplyRandomResistance(Game.DieRoll(22) + 16);
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
         }
         else
         {
