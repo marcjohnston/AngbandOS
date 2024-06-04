@@ -7,11 +7,6 @@
 
 namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 
-internal class ItemAdditiveBundleWeightedRandom : WeightedRandom<ItemAdditiveBundle>
-{
-    public ItemAdditiveBundleWeightedRandom(Game game) : base(game) { }
-}
-
 [Serializable]
 internal abstract class BoundItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeightedRandom, IGetKey
 {

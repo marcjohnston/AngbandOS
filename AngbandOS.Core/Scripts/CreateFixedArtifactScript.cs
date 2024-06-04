@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CreateNamedArtifactScript : Script, IScript
+internal class CreateFixedArtifactScript : Script, IScript
 {
-    private CreateNamedArtifactScript(Game game) : base(game) { }
+    private CreateFixedArtifactScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.

@@ -36,7 +36,12 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     public override bool InstaArt => true;
     public override bool Int => true;
     public override int Level => 100;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for a lead crown which provides no light.
+    /// </summary>
+    public override int Radius => 3;
+
     public override bool NoTele => true;
     public override bool PermaCurse => true;
     public override int InitialTypeSpecificValue => 125;

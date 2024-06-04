@@ -8,15 +8,15 @@
 namespace AngbandOS.Core.WizardCommands;
 
 [Serializable]
-internal class CreateNamedArtifactWizardCommand : WizardCommand
+internal class CreateFixedArtifactWizardCommand : WizardCommand
 {
-    private CreateNamedArtifactWizardCommand(Game game) : base(game) { } // This object is a singleton.
+    private CreateFixedArtifactWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'C';
 
-    public override string HelpDescription => "Create Named Artifact";
+    public override string HelpDescription => "Create Fixed Artifact";
 
     protected override string? HelpGroupName => nameof(WizardObjectCommandsHelpGroup);
 
-    protected override string? ExecuteScriptName => nameof(CreateNamedArtifactScript);
+    protected override string? ExecuteScriptName => nameof(CreateFixedArtifactScript);
 }

@@ -84,4 +84,16 @@ internal class FanaticCharacterClass : BaseCharacterClass
         nameof(BroadSwordWeaponItemFactory),
         nameof(MetalScaleMailHardArmorItemFactory)
     };
+
+    public override void CalcBonuses()
+    {
+        if (Game.ExperienceLevel.IntValue > 29)
+        {
+            Game.HasChaosResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue > 39)
+        {
+            Game.HasFearResistance = true;
+        }
+    }
 }

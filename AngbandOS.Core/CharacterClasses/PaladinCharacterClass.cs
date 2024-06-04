@@ -92,4 +92,12 @@ internal class PaladinCharacterClass : BaseCharacterClass
         nameof(BroadSwordWeaponItemFactory),
         nameof(ProtectionFromEvilScrollItemFactory)
     };
+
+    public override void CalcBonuses()
+    {
+        if (Game.ExperienceLevel.IntValue > 39)
+        {
+            Game.HasFearResistance = true;
+        }
+    }
 }

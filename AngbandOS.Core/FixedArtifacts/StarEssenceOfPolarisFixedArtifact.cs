@@ -46,4 +46,9 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
     public override int ToD => 0;
     public override int ToH => 0;
     public override int Weight => 10;
+
+    /// <summary>
+    /// Returns a value of 1 to add to the radius of light for a star of essence which provides no light.
+    /// </summary>
+    public override int Radius => 1;
 }

@@ -32,7 +32,12 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool ImFire => true;
     public override int Level => 80;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for a mace which provides no light.
+    /// </summary>
+    public override int Radius => 3;
+
     public override bool NoTele => true;
     public override int InitialTypeSpecificValue => 6;
     public override int Rarity => 38;

@@ -33,7 +33,12 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool ImElec => true;
     public override int Level => 90;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for multi-hued dragon scale mail which provides no light.
+    /// </summary>
+    public override int Radius => 3;
+
     public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 9;
     public override bool ResCold => true;

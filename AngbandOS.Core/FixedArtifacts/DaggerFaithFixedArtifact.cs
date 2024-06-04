@@ -36,7 +36,12 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 4;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for a dagger which provides no light.
+    /// </summary>
+    public override int Radius => 3;
+
     public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 10;
     public override bool ResFire => true;

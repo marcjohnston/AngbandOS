@@ -65,7 +65,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFeatherFall = false;
         Game.HasHoldLife = false;
         Game.HasTelepathy = false;
-        Game.HasGlow = false;
+        Game.GlowInTheDarkRadius = 0;
         Game.HasSustainStrength = false;
         Game.HasSustainIntelligence = false;
         Game.HasSustainWisdom = false;
@@ -111,166 +111,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillRanged = Game.Race.BaseRangedAttackBonus + Game.BaseCharacterClass.BaseRangedAttackBonus;
         Game.SkillThrowing = Game.Race.BaseRangedAttackBonus + Game.BaseCharacterClass.BaseRangedAttackBonus;
         Game.SkillDigging = 0;
-        if ((Game.BaseCharacterClass.ID == CharacterClass.Warrior && Game.ExperienceLevel.IntValue > 29) ||
-            (Game.BaseCharacterClass.ID == CharacterClass.Paladin && Game.ExperienceLevel.IntValue > 39) ||
-            (Game.BaseCharacterClass.ID == CharacterClass.Fanatic && Game.ExperienceLevel.IntValue > 39))
-        {
-            Game.HasFearResistance = true;
-        }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Fanatic && Game.ExperienceLevel.IntValue > 29)
-        {
-            Game.HasChaosResistance = true;
-        }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Cultist && Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasChaosResistance = true;
-        }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Mindcrafter)
-        {
-            if (Game.ExperienceLevel.IntValue > 9)
-            {
-                Game.HasFearResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 19)
-            {
-                Game.HasSustainWisdom = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 29)
-            {
-                Game.HasConfusionResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 39)
-            {
-                Game.HasTelepathy = true;
-            }
-        }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Monk && Game.ExperienceLevel.IntValue > 24 && !Game.MartialArtistHeavyArmor())
-        {
-            Game.HasFreeAction = true;
-        }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Mystic)
-        {
-            if (Game.ExperienceLevel.IntValue > 9)
-            {
-                Game.HasConfusionResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 24)
-            {
-                Game.HasFearResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 29 && !Game.MartialArtistHeavyArmor())
-            {
-                Game.HasFreeAction = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 39)
-            {
-                Game.HasTelepathy = true;
-            }
-        }
-        if (Game.BaseCharacterClass.ID == CharacterClass.ChosenOne)
-        {
-            Game.HasGlow = true;
-            if (Game.ExperienceLevel.IntValue >= 2)
-            {
-                Game.HasConfusionResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 4)
-            {
-                Game.HasFearResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 6)
-            {
-                Game.HasBlindnessResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 8)
-            {
-                Game.HasFeatherFall = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 10)
-            {
-                Game.HasSeeInvisibility = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 12)
-            {
-                Game.HasSlowDigestion = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 14)
-            {
-                Game.HasSustainConstitution = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 16)
-            {
-                Game.HasPoisonResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 18)
-            {
-                Game.HasSustainDexterity = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 20)
-            {
-                Game.HasSustainStrength = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 22)
-            {
-                Game.HasHoldLife = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 24)
-            {
-                Game.HasFreeAction = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 26)
-            {
-                Game.HasTelepathy = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 28)
-            {
-                Game.HasDarkResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 30)
-            {
-                Game.HasLightResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 32)
-            {
-                Game.HasSustainCharisma = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 34)
-            {
-                Game.HasSoundResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 36)
-            {
-                Game.HasDisenchantResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 38)
-            {
-                Game.HasRegeneration = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 40)
-            {
-                Game.HasSustainIntelligence = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 42)
-            {
-                Game.HasChaosResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 44)
-            {
-                Game.HasSustainWisdom = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 46)
-            {
-                Game.HasNexusResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 48)
-            {
-                Game.HasShardResistance = true;
-            }
-            if (Game.ExperienceLevel.IntValue >= 50)
-            {
-                Game.HasNetherResistance = true;
-            }
-        }
+        Game.BaseCharacterClass.CalcBonuses();
         Game.Race.CalcBonuses();
         Game.Speed.IntValue = 110;
         Game.MeleeAttacksPerRound = 1;
@@ -293,7 +134,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.InfravisionRange += Game.InfravisionBonus;
         Game.HasLightningShield |= Game.ElecHit;
         Game.HasFireShield |= Game.FireHit;
-        Game.HasGlow |= Game.FireHit;
+        if (Game.GlowInTheDarkRadius == 0 && Game.FireHit)
+        {
+            Game.GlowInTheDarkRadius = 1;
+        }
         Game.ArmorClassBonus += Game.GenomeArmorClassBonus;
         Game.DisplayedArmorClassBonus.IntValue += Game.GenomeArmorClassBonus;
         Game.HasFeatherFall |= Game.FeatherFall;
@@ -442,10 +286,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (oPtr.Characteristics.Telepathy)
                     {
                         Game.HasTelepathy = true;
-                    }
-                    if (oPtr.Characteristics.Lightsource)
-                    {
-                        Game.HasGlow = true;
                     }
                     if (oPtr.Characteristics.SeeInvis)
                     {
@@ -629,7 +469,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (Game.HasFireShield)
         {
-            Game.HasGlow = true;
+            Game.GlowInTheDarkRadius = 1;
         }
         for (int i = 0; i < 6; i++)
         {

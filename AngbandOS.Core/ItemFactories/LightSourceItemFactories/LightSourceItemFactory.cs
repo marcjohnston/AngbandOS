@@ -29,20 +29,6 @@ internal abstract class LightSourceItemFactory : ItemFactory
         return item.ComputeTypeSpecificRealValue(value);
     }
 
-    public override string Identify(Item item)
-    {
-        if (item.FixedArtifact != null)
-        {
-            return "It provides light (radius 3) forever.";
-        }
-        else
-        {
-            string burnRate = BurnRate == 0 ? "forever" : "when fueled";
-            return $"It provides light (radius {Radius}) {burnRate}.";
-        }
-    }
-
-
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         if (power < 0) // Cursed

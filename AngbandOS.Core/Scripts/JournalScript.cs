@@ -180,7 +180,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
             }
         }
 
-        ItemCharacteristics playerCharacteristics = Game.GetAbilitiesAsItemFlags();
+        ItemCharacteristics playerCharacteristics = Game.GetAbilitiesAsItemFlags(); // TODO: This is done once for every call.
         if (getStat(playerCharacteristics))
         {
             Game.Screen.Print(baseColor, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
@@ -320,7 +320,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         DisplayStat("Show Mods", 32, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShowMods);
         DisplayStat("Insta Art", 33, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.InstaArt);
         DisplayStat("Levitate", 34, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Feather);
-        DisplayStat("Light", 35, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Lightsource);
+        DisplayStat("Light", 35, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Radius > 0);
         DisplayStat("See Invis", 36, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis);
         DisplayStat("Telepathy", 37, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy);
 

@@ -38,7 +38,12 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Infra => true;
     public override int Level => 20;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for a lucrene hammer which provides no light.
+    /// </summary>
+    public override int Radius => 3;
+
     public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 15;
     public override bool Regen => true;

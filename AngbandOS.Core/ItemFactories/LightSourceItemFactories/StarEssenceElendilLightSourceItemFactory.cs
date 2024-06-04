@@ -17,6 +17,12 @@ internal class StarEssenceElendilLightSourceItemFactory : LightSourceItemFactory
     public override string Name => "Star Essence Elendil";
 
     public override int Cost => 25000;
+
+    /// <summary>
+    /// Returns a radius of 2 for a star of essence.
+    /// </summary>
+    public override int Radius => 2;
+
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     protected override string? DescriptionSyntax => "Star Essence~"; // TODO: This appears to cause a defect in identification

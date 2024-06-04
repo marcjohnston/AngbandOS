@@ -49,4 +49,109 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
         nameof(HealingPotionItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };
+
+    public override void CalcBonuses()
+    {
+        Game.GlowInTheDarkRadius = 1;
+        if (Game.ExperienceLevel.IntValue >= 2)
+        {
+            Game.HasConfusionResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 4)
+        {
+            Game.HasFearResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 6)
+        {
+            Game.HasBlindnessResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 8)
+        {
+            Game.HasFeatherFall = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 10)
+        {
+            Game.HasSeeInvisibility = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 12)
+        {
+            Game.HasSlowDigestion = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 14)
+        {
+            Game.HasSustainConstitution = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 16)
+        {
+            Game.HasPoisonResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 18)
+        {
+            Game.HasSustainDexterity = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 20)
+        {
+            Game.HasSustainStrength = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 22)
+        {
+            Game.HasHoldLife = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 24)
+        {
+            Game.HasFreeAction = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 26)
+        {
+            Game.HasTelepathy = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 28)
+        {
+            Game.HasDarkResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 30)
+        {
+            Game.HasLightResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 32)
+        {
+            Game.HasSustainCharisma = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 34)
+        {
+            Game.HasSoundResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 36)
+        {
+            Game.HasDisenchantResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 38)
+        {
+            Game.HasRegeneration = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 40)
+        {
+            Game.HasSustainIntelligence = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 42)
+        {
+            Game.HasChaosResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 44)
+        {
+            Game.HasSustainWisdom = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 46)
+        {
+            Game.HasNexusResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 48)
+        {
+            Game.HasShardResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue >= 50)
+        {
+            Game.HasNetherResistance = true;
+        }
+    }
 }

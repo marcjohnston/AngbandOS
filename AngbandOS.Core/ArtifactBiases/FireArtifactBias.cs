@@ -43,10 +43,7 @@ internal class FireArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Lightsource)
-        {
-            item.RandomArtifactItemCharacteristics.Lightsource = true;
-        }
+        item.RandomArtifactItemCharacteristics.Radius = 3;
         return false;
     }
 

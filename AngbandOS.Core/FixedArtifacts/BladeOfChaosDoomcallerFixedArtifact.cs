@@ -34,7 +34,12 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool KillDragon => true;
     public override int Level => 70;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for the Blade of Chaos which provides no light.
+    /// </summary>
+    public override int Radius => 1;
+
     public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 25;
     public override bool ResAcid => true;

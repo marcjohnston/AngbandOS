@@ -55,4 +55,23 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
         nameof(RestoreManaPotionItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };
+    public override void CalcBonuses()
+    {
+        if (Game.ExperienceLevel.IntValue > 9)
+        {
+            Game.HasFearResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue > 19)
+        {
+            Game.HasSustainWisdom = true;
+        }
+        if (Game.ExperienceLevel.IntValue > 29)
+        {
+            Game.HasConfusionResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue > 39)
+        {
+            Game.HasTelepathy = true;
+        }
+    }
 }

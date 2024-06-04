@@ -178,9 +178,9 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You cannot teleport.";
         }
-        if (Game.HasGlow)
+        if (Game.GlowInTheDarkRadius > 0)
         {
-            info[infoCount++] = "You are carrying a permanent light.";
+            info[infoCount++] = "Your skin glows in the dark.";
         }
         if (Game.HasAcidImmunity)
         {

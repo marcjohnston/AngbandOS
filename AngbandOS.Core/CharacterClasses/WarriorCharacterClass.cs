@@ -66,4 +66,11 @@ internal class WarriorCharacterClass : BaseCharacterClass
         nameof(BroadSwordWeaponItemFactory),
         nameof(ChainMailHardArmorItemFactory)
     };
+    public override void CalcBonuses()
+    {
+        if (Game.ExperienceLevel.IntValue > 29)
+        {
+            Game.HasFearResistance = true;
+        }
+    }
 }

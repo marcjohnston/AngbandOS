@@ -55,10 +55,15 @@ internal abstract class ItemAdditiveBundle : IItemCharacteristics, IGetKey
     public virtual bool InstaArt => false;
     public virtual bool Int => false;
     public virtual bool KillDragon => false;
-    public virtual bool Lightsource => false;
     public virtual bool NoMagic => false;
     public virtual bool NoTele => false;
     public virtual bool PermaCurse => false;
+
+    /// <summary>
+    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
+    /// </summary>
+    public virtual int Radius => 0;
+
     public virtual bool Reflect => false;
     public virtual bool Regen => false;
     public virtual bool ResAcid => false;

@@ -16,6 +16,11 @@ internal class StarEssenceGaladrielLightSourceItemFactory : LightSourceItemFacto
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Star Essence Galadriel";
 
+    /// <summary>
+    /// Returns a radius of 2 for a star of essense.
+    /// </summary>
+    public override int Radius => 2;
+
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

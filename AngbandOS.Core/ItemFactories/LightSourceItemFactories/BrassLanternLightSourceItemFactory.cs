@@ -68,6 +68,12 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override int InitialTurnsOfLight => 7500;
     public override int Weight => 50;
 
+
+    /// <summary>
+    /// Returns a radius of 2 for a brass lantern.
+    /// </summary>
+    public override int Radius => 2;
+
     /// <summary>
     /// Refill a lamp
     /// </summary>

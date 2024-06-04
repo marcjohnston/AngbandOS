@@ -174,8 +174,6 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 
     public abstract int Level { get; }
 
-    public virtual bool Lightsource { get; set; } = false;
-
     public virtual bool NoMagic { get; set; } = false;
 
     public virtual bool NoTele { get; set; } = false;
@@ -183,6 +181,11 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
     public virtual bool PermaCurse { get; set; } = false;
 
     public abstract int InitialTypeSpecificValue { get; }
+
+    /// <summary>
+    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
+    /// </summary>
+    public virtual int Radius => 0;
 
     public abstract int Rarity { get; }
 

@@ -52,7 +52,6 @@ internal class SpectreRace : Race
         itemCharacteristics.ResNether = true;
         itemCharacteristics.ResPois = true;
         itemCharacteristics.SlowDigest = true;
-        itemCharacteristics.Lightsource = true;
         if (level > 34)
         {
             itemCharacteristics.Telepathy = true;
@@ -77,7 +76,7 @@ internal class SpectreRace : Race
         Game.HasPoisonResistance = true;
         Game.HasSlowDigestion = true;
         Game.HasColdResistance = true;
-        Game.HasGlow = true;
+        Game.GlowInTheDarkRadius = 1;
         if (Game.ExperienceLevel.IntValue > 34)
         {
             Game.HasTelepathy = true;

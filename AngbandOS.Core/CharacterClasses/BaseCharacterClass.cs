@@ -25,6 +25,11 @@ internal abstract class BaseCharacterClass : IGetKey
     public virtual void Cast() => CastSpell();
 
     /// <summary>
+    ///  Updates the Game bonuses based on the player character and race.  The ChosenOne character class overrides this method.  Does nothing, by default.
+    /// </summary>
+    public virtual void CalcBonuses() { }
+
+    /// <summary>
     /// Cast a spell.  Game.DoCast is called by default.  Mentalism casting type calls Game.DoMentalism.
     /// </summary>
     protected void CastSpell()

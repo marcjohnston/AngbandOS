@@ -115,12 +115,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     }
 
     /// <summary>
-    /// Returns a new WoodenTorchLightSourceItem.
-    /// </summary>
-    /// <returns></returns>
-
-    /// <summary>
-    /// Returns a radius of 1 because a torch provides light shorter than the default 2 radius for a typical light source.
+    /// Returns a radius of 1 for a wooden torch.
     /// </summary>
     public override int Radius => 1;
 }

@@ -29,14 +29,17 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
                 }
             }
         }
-        if (Game.LightLevel > 5)
+        if (Game.MaximumLightLevel != null && Game.LightLevel > Game.MaximumLightLevel)
         {
-            Game.LightLevel = 5;
+            Game.LightLevel = Game.MaximumLightLevel.Value;
         }
-        if (Game.LightLevel == 0 && Game.HasGlow)
+
+        // Check to see if the player has the ability to glow in the dark.
+        if (Game.LightLevel < Game.GlowInTheDarkRadius)
         {
-            Game.LightLevel = 1;
+            Game.LightLevel = Game.GlowInTheDarkRadius;
         }
+
         if (OldLightLevel != Game.LightLevel)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();

@@ -27,6 +27,11 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Gemstone";
 
+    /// <summary>
+    /// Returns a radius of 2 for a gemstone of light.
+    /// </summary>
+    public override int Radius => 2;
+
     public override int Cost => 60000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

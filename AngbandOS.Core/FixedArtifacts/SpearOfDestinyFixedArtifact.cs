@@ -47,7 +47,12 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
     public override bool Infra => true;
     public override bool Int => true;
     public override int Level => 15;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for a spear which provides no light.
+    /// </summary>
+    public override int Radius => 3;
+
     public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 45;
     public override bool ResFear => true;

@@ -52,10 +52,15 @@ internal interface IItemCharacteristics
     bool InstaArt { get; }
     bool Int { get; }
     bool KillDragon { get; }
-    bool Lightsource { get; }
     bool NoMagic { get; }
     bool NoTele { get; }
     bool PermaCurse { get; }
+
+    /// <summary>
+    /// Returns the radius that the light source illuminates.  Default radius is 2.
+    /// </summary>
+    int Radius { get; }
+
     bool Reflect { get; }
     bool Regen { get; }
     bool ResAcid { get; }

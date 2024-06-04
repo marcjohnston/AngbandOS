@@ -32,7 +32,12 @@ internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
     public override bool Infra => true;
     public override bool InstaArt => true;
     public override int Level => 70;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a radius of 3 for this fixed artifact.
+    /// </summary>
+    public override int Radius => 3;
+
     public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 50;
     public override bool Regen => true;

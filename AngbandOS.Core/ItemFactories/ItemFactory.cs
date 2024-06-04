@@ -158,9 +158,9 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual int BurnRate => 0;
 
     /// <summary>
-    /// Returns the radius that the light source illuminates.  Default radius is 2.
+    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
     /// </summary>
-    public virtual int Radius => 2;
+    public virtual int Radius => 0;
 
     /// <summary>
     /// Returns an additional description of the item that is appended to the detailed description, when needed.  
@@ -376,6 +376,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <summary>
     /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
     /// </summary>
+    [Obsolete("The Identify is being handled by the Item and cannot be provided here in the factory.  Current usage is limited to existing overrides.")]
     public virtual string Identify(Item item) => null;
 
     /// <summary>
@@ -581,22 +582,14 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual int WieldSlot => InventorySlot.Pack;
 
     /// <summary>
-    /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
-    /// light-source characteristic.
+    /// Returns the intensity of light that the object emits.  By default, returns the Radius from the merged characteristics.
     /// </summary>
     /// <param name="oPtr"></param>
     /// <returns></returns>
     public virtual int CalculateTorch(Item item)
     {
         item.RefreshFlagBasedProperties();
-        if (item.Characteristics.Lightsource)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
+        return item.Characteristics.Radius;
     }
 
     /// <summary>

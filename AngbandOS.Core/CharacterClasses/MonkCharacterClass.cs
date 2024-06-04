@@ -104,4 +104,12 @@ internal class MonkCharacterClass : BaseCharacterClass
         nameof(HealingPotionItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };
+
+    public override void CalcBonuses()
+    {
+        if (Game.ExperienceLevel.IntValue > 24 && !Game.MartialArtistHeavyArmor())
+        {
+            Game.HasFreeAction = true;
+        }
+    }
 }

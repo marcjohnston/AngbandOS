@@ -55,4 +55,24 @@ internal class MysticCharacterClass : BaseCharacterClass
         nameof(HealingPotionItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };
+
+    public override void CalcBonuses()
+    {
+        if (Game.ExperienceLevel.IntValue > 9)
+        {
+            Game.HasConfusionResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue > 24)
+        {
+            Game.HasFearResistance = true;
+        }
+        if (Game.ExperienceLevel.IntValue > 29 && !Game.MartialArtistHeavyArmor())
+        {
+            Game.HasFreeAction = true;
+        }
+        if (Game.ExperienceLevel.IntValue > 39)
+        {
+            Game.HasTelepathy = true;
+        }
+    }
 }

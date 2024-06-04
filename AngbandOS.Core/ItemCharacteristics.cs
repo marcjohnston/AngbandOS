@@ -10,7 +10,7 @@ using AngbandOS.Core.Interfaces;
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents a set of item characteristics.
+/// Represents a set of read and write item characteristics that are used as the storage for one or more merged <see cref="ItemAdditiveBundle"/> objects.
 /// </summary>
 [Serializable]
 internal class ItemCharacteristics : IItemCharacteristics
@@ -52,10 +52,15 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool InstaArt { get; set; } = false;
     public bool Int { get; set; } = false;
     public bool KillDragon { get; set; } = false;
-    public bool Lightsource { get; set; } = false;
     public bool NoMagic { get; set; } = false;
     public bool NoTele { get; set; } = false;
     public bool PermaCurse { get; set; } = false;
+
+    /// <summary>
+    /// Returns the radius of light that the item provides, if it is a light source, 0, if the item is not a light source.  Default radius is 0.
+    /// </summary>
+    public int Radius { get; set; } = 0;
+
     public bool Reflect { get; set; } = false;
     public bool Regen { get; set; } = false;
     public bool ResAcid { get; set; } = false;
@@ -151,10 +156,10 @@ internal class ItemCharacteristics : IItemCharacteristics
         InstaArt = itemCharacteristics.InstaArt;
         Int = itemCharacteristics.Int;
         KillDragon = itemCharacteristics.KillDragon;
-        Lightsource = itemCharacteristics.Lightsource;
         NoMagic = itemCharacteristics.NoMagic;
         NoTele = itemCharacteristics.NoTele;
         PermaCurse = itemCharacteristics.PermaCurse;
+        Radius = itemCharacteristics.Radius;
         Reflect = itemCharacteristics.Reflect;
         Regen = itemCharacteristics.Regen;
         ResAcid = itemCharacteristics.ResAcid;
@@ -254,10 +259,12 @@ internal class ItemCharacteristics : IItemCharacteristics
         InstaArt |= itemCharacteristics.InstaArt;
         Int |= itemCharacteristics.Int;
         KillDragon |= itemCharacteristics.KillDragon;
-        Lightsource |= itemCharacteristics.Lightsource;
         NoMagic |= itemCharacteristics.NoMagic;
         NoTele |= itemCharacteristics.NoTele;
         PermaCurse |= itemCharacteristics.PermaCurse;
+
+        Radius += itemCharacteristics.Radius;
+
         Reflect |= itemCharacteristics.Reflect;
         Regen |= itemCharacteristics.Regen;
         ResAcid |= itemCharacteristics.ResAcid;
@@ -308,110 +315,5 @@ internal class ItemCharacteristics : IItemCharacteristics
         Wraith |= itemCharacteristics.Wraith;
         XtraMight |= itemCharacteristics.XtraMight;
         XtraShots |= itemCharacteristics.XtraShots;
-    }
-
-    /// <summary>
-    /// Resets all of the characteristics to false.
-    /// </summary>
-    public void Clear()
-    {
-        Activate = false;
-        Aggravate = false;
-        AntiTheft = false;
-        ArtifactBias = null;
-        Blessed = false;
-        Blows = false;
-        BrandAcid = false;
-        BrandCold = false;
-        BrandElec = false;
-        BrandFire = false;
-        BrandPois = false;
-        Cha = false;
-        Chaotic = false;
-        Con = false;
-        Cursed = false;
-        Dex = false;
-        DrainExp = false;
-        DreadCurse = false;
-        EasyKnow = false;
-        Feather = false;
-        FreeAct = false;
-        HeavyCurse = false;
-        HideType = false;
-        HoldLife = false;
-        IgnoreAcid = false;
-        IgnoreCold = false;
-        IgnoreElec = false;
-        IgnoreFire = false;
-        ImAcid = false;
-        ImCold = false;
-        ImElec = false;
-        ImFire = false;
-        Impact = false;
-        Infra = false;
-        InstaArt = false;
-        Int = false;
-        KillDragon = false;
-        Lightsource = false;
-        NoMagic = false;
-        NoTele = false;
-        PermaCurse = false;
-        Reflect = false;
-        Regen = false;
-        ResAcid = false;
-        ResBlind = false;
-        ResChaos = false;
-        ResCold = false;
-        ResConf = false;
-        ResDark = false;
-        ResDisen = false;
-        ResElec = false;
-        ResFear = false;
-        ResFire = false;
-        ResLight = false;
-        ResNether = false;
-        ResNexus = false;
-        ResPois = false;
-        ResShards = false;
-        ResSound = false;
-        Search = false;
-        SeeInvis = false;
-        ShElec = false;
-        ShFire = false;
-        ShowMods = false;
-        SlayAnimal = false;
-        SlayDemon = false;
-        SlayDragon = false;
-        SlayEvil = false;
-        SlayGiant = false;
-        SlayOrc = false;
-        SlayTroll = false;
-        SlayUndead = false;
-        SlowDigest = false;
-        Speed = false;
-        Stealth = false;
-        Str = false;
-        SustCha = false;
-        SustCon = false;
-        SustDex = false;
-        SustInt = false;
-        SustStr = false;
-        SustWis = false;
-        Telepathy = false;
-        Teleport = false;
-        Tunnel = false;
-        Vampiric = false;
-        Vorpal = false;
-        Wis = false;
-        Wraith = false;
-        XtraMight = false;
-        XtraShots = false;
-    }
-
-    /// <summary>
-    /// Creates a new set of ItemCharacteristics with all false values.
-    /// </summary>
-    public ItemCharacteristics()
-    {
     }
 }

@@ -96,4 +96,12 @@ internal class CultistCharacterClass : BaseCharacterClass
             }
         }
     }
+
+    public override void CalcBonuses()
+    {
+        if (Game.ExperienceLevel.IntValue > 19)
+        {
+            Game.HasChaosResistance = true;
+        }
+    }
 }

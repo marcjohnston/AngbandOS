@@ -49,7 +49,6 @@ internal class VampireRace : Race
         itemCharacteristics.HoldLife = true;
         itemCharacteristics.ResDark = true;
         itemCharacteristics.ResNether = true;
-        itemCharacteristics.Lightsource = true;
         itemCharacteristics.ResPois = true;
         itemCharacteristics.ResCold = true;
     }
@@ -70,7 +69,7 @@ internal class VampireRace : Race
         Game.HasNetherResistance = true;
         Game.HasColdResistance = true;
         Game.HasPoisonResistance = true;
-        Game.HasGlow = true;
+        Game.GlowInTheDarkRadius = 1;
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
 

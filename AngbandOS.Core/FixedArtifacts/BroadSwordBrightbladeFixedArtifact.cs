@@ -40,7 +40,12 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override bool Lightsource => true;
+
+    /// <summary>
+    /// Returns a value of 3 to add to the radius of light for a broad sword which provides no light.
+    /// </summary>
+    public override int Radius => 3;
+
     public override int InitialTypeSpecificValue => 1;
     public override int Rarity => 20;
     public override bool ResFire => true;

@@ -47,8 +47,15 @@ internal class Game
 
     public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
 
-    [Obsolete]
+    [Obsolete("Configuration properties should be available in the Game object.  The configuration object is only used to transfer properties from the caller to the Game object.")]
     public readonly Configuration? Configuration = null;
+
+    /// <summary>
+    /// Returns the maximum level of light that the player is allowed to have.  Returns 5, by default.  The <see cref="UpdateLightFlaggedAction"/> uses a precomputed algorithm for processing the
+    /// light-of-sight and which grid locations can get the light.  This algorithm would need to be updated to support further distances.
+    /// </summary>
+    public int? MaximumLightLevel { get; set; } = 5;
+
     public bool IsDead;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
@@ -312,7 +319,12 @@ internal class Game
     public bool HasFireResistance;
     public bool HasFireShield;
     public bool HasFreeAction;
-    public bool HasGlow;
+
+    /// <summary>
+    /// Returns true, if the players race glows in the dark.  Spectres, sprites and vampires glow.
+    /// </summary>
+    public int GlowInTheDarkRadius;
+
     public bool HasHeavyBow;
     public bool HasHeavyWeapon;
     public bool HasHoldLife;
@@ -6272,7 +6284,7 @@ internal class Game
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.RandomArtifactItemCharacteristics.Clear();
+            item.RandomArtifactItemCharacteristics = new ItemCharacteristics();
             item.IdentCursed = true;
             item.IdentBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6311,7 +6323,7 @@ internal class Game
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.RandomArtifactItemCharacteristics.Clear();
+            item.RandomArtifactItemCharacteristics = new ItemCharacteristics();
             item.IdentCursed = true;
             item.IdentBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -13282,10 +13294,6 @@ internal class Game
         CheckExperience();
     }
 
-    public void GainLevelReward()
-    {
-    }
-
     public ItemCharacteristics GetAbilitiesAsItemFlags()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
@@ -13353,7 +13361,7 @@ internal class Game
         }
         if (BaseCharacterClass.ID == CharacterClass.ChosenOne)
         {
-            itemCharacteristics.Lightsource = true;
+            itemCharacteristics.Radius = 2;
             if (ExperienceLevel.IntValue >= 2)
             {
                 itemCharacteristics.ResConf = true;
@@ -13476,7 +13484,7 @@ internal class Game
         if (FireHit)
         {
             itemCharacteristics.ShFire = true;
-            itemCharacteristics.Lightsource = true;
+            itemCharacteristics.Radius = 2;
         }
         if (FeatherFall)
         {

@@ -29,7 +29,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RareItem? RareItem = null;
 
-    public readonly ItemCharacteristics RandomArtifactItemCharacteristics = new ItemCharacteristics();
+    public ItemCharacteristics RandomArtifactItemCharacteristics = new ItemCharacteristics();
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -1270,7 +1270,7 @@ internal sealed class Item : IComparable<Item>
         {
             total += 1250;
         }
-        if (Characteristics.Lightsource)
+        if (Characteristics.Radius > 0)
         {
             total += 1250;
         }
@@ -1607,6 +1607,13 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It can cause earthquakes.";
         }
+
+        if (Characteristics.Radius > 0)
+        {
+            string burnRate = Factory.BurnRate == 0 ? "forever" : "when fueled";
+            info[i++] = $"It provides light (radius {Characteristics.Radius}) {burnRate}.";
+        }
+
         if (Characteristics.Vorpal)
         {
             info[i++] = "It is very sharp and can cut your foes.";
@@ -1767,7 +1774,7 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It allows you to levitate.";
         }
-        if (Characteristics.Lightsource)
+        if (Characteristics.Radius > 0 && Factory.BurnRate == 0)
         {
             info[i++] = "It provides permanent light.";
         }
@@ -2644,7 +2651,7 @@ internal sealed class Item : IComparable<Item>
 
             case 10:
             case 11:
-                RandomArtifactItemCharacteristics.Lightsource = true;
+                RandomArtifactItemCharacteristics.Radius = 3;
                 break;
 
             case 12:

@@ -181,6 +181,11 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
 
     public virtual bool PermaCurse { get; set; } = false;
 
+    /// <summary>
+    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
+    /// </summary>
+    public virtual int Radius => 0;
+
     public abstract int Rarity { get; }
 
     public abstract int Rating { get; }

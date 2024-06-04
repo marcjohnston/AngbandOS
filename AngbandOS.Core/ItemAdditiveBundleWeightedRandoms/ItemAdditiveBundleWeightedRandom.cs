@@ -5,15 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Powers;
+namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 
 [Serializable]
-internal class LightsourcePower : Power
+internal class ItemAdditiveBundleWeightedRandom : WeightedRandom<ItemAdditiveBundle>
 {
-    private LightsourcePower(Game game) : base(game) { } // This object is a singleton
-    public override bool IsAbility => true;
-    public override void Activate(Item item)
-    {
-        item.Characteristics.Radius = 3;
-    }
+    public ItemAdditiveBundleWeightedRandom(Game game) : base(game) { }
 }
