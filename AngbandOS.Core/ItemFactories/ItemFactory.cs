@@ -586,8 +586,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     /// <param name="oPtr"></param>
     /// <returns></returns>
-    public virtual int CalculateTorch(Item item)
+    public int CalculateTorch(Item item)
     {
+        if (BurnRate > 0 && item.TurnsOfLightRemaining <= 0)
+        {
+            return 0;
+        }
         item.RefreshFlagBasedProperties();
         return item.Characteristics.Radius;
     }

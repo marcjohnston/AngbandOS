@@ -24,18 +24,7 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     /// <summary>
     /// Returns a radius of 2 for an orb of light.
     /// </summary>
-    public override int Radius => 2;
-
-    /// <summary>
-    /// Returns an intensity of light provided by the orb.  A value of 2 is returned, plus an additional 3
-    /// if the orb is an artifact.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    /// <returns></returns>
-    public override int CalculateTorch(Item item)
-    {
-        return base.CalculateTorch(item) + 2;
-    }
+    public override int Radius => 4;
 
     public override bool IdentityCanBeSensed => true;
     public override int Cost => 1000;
