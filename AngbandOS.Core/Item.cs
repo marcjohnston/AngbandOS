@@ -876,7 +876,7 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (RandomArtifactItemCharacteristics != null || other.RandomArtifactItemCharacteristics != null)
+        if (IsRandomArtifact || other.IsRandomArtifact)
         {
             return false;
         }
