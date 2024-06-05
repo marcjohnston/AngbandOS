@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interfaces;
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -117,7 +115,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool PermaCurse { get; set; } = false;
 
     /// <summary>
-    /// Returns the radius of light that the item provides, if it is a light source, 0, if the item is not a light source.  Default radius is 0.
+    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
     /// </summary>
     public int Radius { get; set; } = 0;
 
