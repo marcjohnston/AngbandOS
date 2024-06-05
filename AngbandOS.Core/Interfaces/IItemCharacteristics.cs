@@ -57,7 +57,7 @@ internal interface IItemCharacteristics
     bool PermaCurse { get; }
 
     /// <summary>
-    /// Returns the radius that the light source illuminates.  Default radius is 2.
+    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
     /// </summary>
     int Radius { get; }
 

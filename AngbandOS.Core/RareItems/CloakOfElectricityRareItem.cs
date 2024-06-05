@@ -15,12 +15,7 @@ internal class CloakOfElectricityRareItem : RareItem
     public override string FriendlyName => "of Electricity";
     public override bool IgnoreAcid => true;
     public override bool IgnoreElec => true;
-    public override int Level => 0;
-    public override int MaxPval => 0;
     public override int MaxToA => 4;
-    public override int MaxToD => 0;
-    public override int MaxToH => 0;
-    public override int Rarity => 0;
     public override int Rating => 16;
     public override bool ResElec => true;
     public override bool ShElec => true;

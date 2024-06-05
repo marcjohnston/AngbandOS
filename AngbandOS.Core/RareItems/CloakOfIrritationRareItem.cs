@@ -14,12 +14,8 @@ internal class CloakOfIrritationRareItem : RareItem
     public override bool Aggravate => true;
     public override int Cost => 0;
     public override string FriendlyName => "of Irritation";
-    public override int Level => 0;
-    public override int MaxPval => 0;
-    public override int MaxToA => 0;
     public override int MaxToD => 15;
     public override int MaxToH => 15;
-    public override int Rarity => 0;
     public override int Rating => 0;
     public override bool ShowMods => true;
     public override int Slot => 31;

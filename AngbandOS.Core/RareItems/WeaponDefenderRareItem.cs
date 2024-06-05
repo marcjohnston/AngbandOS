@@ -23,12 +23,10 @@ internal class WeaponDefenderRareItem : RareItem
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 0;
     public override int MaxPval => 4;
     public override int MaxToA => 8;
     public override int MaxToD => 4;
     public override int MaxToH => 4;
-    public override int Rarity => 0;
     public override int Rating => 25;
     public override bool Regen => true;
     public override bool ResAcid => true;

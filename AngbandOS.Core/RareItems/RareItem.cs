@@ -55,6 +55,56 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
     public string GetKey => Key;
     public virtual void Bind() { }
 
+    /// <summary>
+    /// Returns the value of the rare item.  When this value is 0, the value of the item is 0 regardless of the value of the original item and the
+    /// item is considered broken; otherwise this value is added to the value of the original item.
+    /// </summary>
+    public abstract int Cost { get; }
+
+    /// <summary>
+    /// Returns the name of the rare item characteristics.  This name is appended to the description of items that have a rare item
+    /// characteristics applied to it.
+    /// </summary>
+    public virtual string FriendlyName { get; }
+
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional TypeSpecificValue when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item.  Returns 0, by default.
+    /// </summary>
+    public virtual int MaxPval => 0;
+
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
+    public virtual int MaxToA => 0;
+
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
+    public virtual int MaxToD => 0;
+
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
+    public virtual int MaxToH => 0;
+
+    /// <summary>
+    /// Returns the value to be added to the treasure rating for these rare items.
+    /// </summary>
+    public abstract int Rating { get; }
+
+
+
+
+
+
+
+
+
+
     public virtual bool Activate { get; set; } = false;
     public virtual bool AntiTheft { get; set; } = false;
 
@@ -81,12 +131,6 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
 
     public virtual bool Con { get; set; } = false;
 
-    /// <summary>
-    /// Returns the value of the rare item.  When this value is 0, the value of the item is 0 regardless of the value of the original item and the
-    /// item is considered broken; otherwise this value is added to the value of the original item.
-    /// </summary>
-    public abstract int Cost { get; }
-
     public virtual bool Cursed { get; set; } = false;
 
     public virtual bool Dex { get; set; } = false;
@@ -100,12 +144,6 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
     public virtual bool Feather { get; set; } = false;
 
     public virtual bool FreeAct { get; set; } = false;
-
-    /// <summary>
-    /// Returns the name of the rare item characteristics.  This name is appended to the description of items that have a rare item
-    /// characteristics applied to it.
-    /// </summary>
-    public virtual string FriendlyName { get; }
 
     public virtual bool HeavyCurse { get; set; } = false;
 
@@ -139,48 +177,13 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
 
     public virtual bool KillDragon { get; set; } = false;
 
-    public abstract int Level { get; }
-
-    public virtual bool Lightsource { get; set; } = false;
-
-    /// <summary>
-    /// Returns a maximum value for a random amount of additional TypeSpecificValue when adding magic.  If the item is cursed or broken,
-    /// this maximum value will be subtracted from the item
-    /// </summary>
-    public abstract int MaxPval { get; }
-
-    /// <summary>
-    /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
-    /// this maximum value will be subtracted from the item
-    /// </summary>
-    public abstract int MaxToA { get; }
-
-    /// <summary>
-    /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
-    /// this maximum value will be subtracted from the item
-    /// </summary>
-    public abstract int MaxToD { get; }
-
-    /// <summary>
-    /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
-    /// this maximum value will be subtracted from the item
-    /// </summary>
-    public abstract int MaxToH { get; }
-
     public virtual bool NoMagic { get; set; } = false;
 
     public virtual bool NoTele { get; set; } = false;
 
     public virtual bool PermaCurse { get; set; } = false;
 
-    /// <summary>
-    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
-    /// </summary>
     public virtual int Radius => 0;
-
-    public abstract int Rarity { get; }
-
-    public abstract int Rating { get; }
 
     public virtual bool Reflect { get; set; } = false;
 

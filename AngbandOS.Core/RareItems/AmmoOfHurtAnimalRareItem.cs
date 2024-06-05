@@ -13,12 +13,6 @@ internal class AmmoOfHurtAnimalRareItem : RareItem
     private AmmoOfHurtAnimalRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 25;
     public override string FriendlyName => "of Hurt Animal";
-    public override int Level => 0;
-    public override int MaxPval => 0;
-    public override int MaxToA => 0;
-    public override int MaxToD => 0;
-    public override int MaxToH => 0;
-    public override int Rarity => 0;
     public override int Rating => 10;
     public override bool SlayAnimal => true;
     public override int Slot => 23;

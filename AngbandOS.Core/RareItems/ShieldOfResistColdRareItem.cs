@@ -14,12 +14,6 @@ internal class ShieldOfResistColdRareItem : RareItem
     public override int Cost => 600;
     public override string FriendlyName => "of Resist Cold";
     public override bool IgnoreCold => true;
-    public override int Level => 0;
-    public override int MaxPval => 0;
-    public override int MaxToA => 0;
-    public override int MaxToD => 0;
-    public override int MaxToH => 0;
-    public override int Rarity => 0;
     public override int Rating => 12;
     public override bool ResCold => true;
     public override int Slot => 32;

@@ -17,12 +17,7 @@ internal class ShieldOfReflectionRareItem : RareItem
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 0;
-    public override int MaxPval => 0;
     public override int MaxToA => 5;
-    public override int MaxToD => 0;
-    public override int MaxToH => 0;
-    public override int Rarity => 0;
     public override int Rating => 20;
     public override bool Reflect => true;
     public override int Slot => 32;

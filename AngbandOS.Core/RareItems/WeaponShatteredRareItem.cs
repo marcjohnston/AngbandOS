@@ -13,12 +13,8 @@ internal class WeaponShatteredRareItem : RareItem
     private WeaponShatteredRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 0;
     public override string FriendlyName => "(Shattered)";
-    public override int Level => 0;
-    public override int MaxPval => 0;
-    public override int MaxToA => 0;
     public override int MaxToD => 5;
     public override int MaxToH => 5;
-    public override int Rarity => 0;
     public override int Rating => 0;
     public override int Slot => 24;
 }

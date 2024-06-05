@@ -16,12 +16,9 @@ internal class WeaponOfKadathRareItem : RareItem
     public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Kadath";
-    public override int Level => 0;
     public override int MaxPval => 2;
-    public override int MaxToA => 0;
     public override int MaxToD => 5;
     public override int MaxToH => 5;
-    public override int Rarity => 0;
     public override int Rating => 20;
     public override bool SeeInvis => true;
     public override bool SlayGiant => true;
