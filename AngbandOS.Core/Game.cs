@@ -1611,7 +1611,7 @@ internal class Game
             }
             item = new Item(this, kIdx);
         }
-        item.ApplyMagic(ObjectLevel, true, good, great, null);
+        item.EnchantItem(ObjectLevel, true, good, great, null);
         item.Count = item.Factory.MakeObjectCount;
         if (!item.IsCursed() && !item.IsBroken() && item.Factory.LevelNormallyFound > Difficulty)
         {

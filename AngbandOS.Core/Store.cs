@@ -257,7 +257,7 @@ internal class Store
             }
 
             // Apply magic to the item.
-            newItem.ApplyMagic(level.Value, false, false, false, this);
+            newItem.EnchantItem(level.Value, false, false, false, this);
             newItem.BecomeKnown();
             newItem.IdentityIsStoreBought = true;
 

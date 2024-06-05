@@ -2057,7 +2057,7 @@ internal sealed class Item : IComparable<Item>
         return value;
     }
 
-    public void ApplyMagic(int lev, bool okay, bool good, bool great, Store? store)
+    public void EnchantItem(int lev, bool okay, bool good, bool great, Store? store)
     {            
         if (lev > Constants.MaxDepth - 1)
         {
