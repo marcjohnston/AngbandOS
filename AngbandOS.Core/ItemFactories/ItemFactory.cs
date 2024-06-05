@@ -557,7 +557,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     }
 
     /// <summary>
-    /// Applies magic to the item.  Does nothing, by default.  This apply magic method is called after an object is created (new Item())
+    /// Applies magic to the item.  Does nothing, by default.  This apply magic method is always called after an object is created (new Item()) but not all new Item creation call ApplyMagic.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="level"></param>
