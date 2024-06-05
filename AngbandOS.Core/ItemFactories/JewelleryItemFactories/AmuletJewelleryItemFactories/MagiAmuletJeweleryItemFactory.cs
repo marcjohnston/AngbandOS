@@ -19,9 +19,9 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
 
     /// <summary>
-    /// Returns the base amulet treasure rating plus 25 for the amulet of the magi.
+    /// Returns a treasure rating of 25 for an amulet of the magi.
     /// </summary>
-    public override int TreasureRating => base.TreasureRating + 25;
+    public override int TreasureRating => 25;
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {

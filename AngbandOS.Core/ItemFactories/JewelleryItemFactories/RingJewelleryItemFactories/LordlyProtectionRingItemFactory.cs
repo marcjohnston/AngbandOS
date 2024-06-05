@@ -18,10 +18,11 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
+
     /// <summary>
-    /// Returns the base ring treasure rating plus 5 for rings of lordly protection.
+    /// Returns a treasure rating of 5 for a ring of lordly protection.
     /// </summary>
-    public override int TreasureRating => base.TreasureRating + 5;
+    public override int TreasureRating => 5;
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {

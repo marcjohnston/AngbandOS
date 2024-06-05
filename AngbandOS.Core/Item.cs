@@ -2137,7 +2137,7 @@ internal sealed class Item : IComparable<Item>
         Game.TreasureRating += Factory.TreasureRating;
         if (IsRandomArtifact)
         {
-            Game.TreasureRating += 40;
+            Game.TreasureRating += RandomArtifactItemCharacteristics.TreasureRating;
         }
         else if (RareItem != null)
         {
@@ -2355,6 +2355,8 @@ internal sealed class Item : IComparable<Item>
         RandomArtifactItemCharacteristics.IgnoreElec = true;
         RandomArtifactItemCharacteristics.IgnoreFire = true;
         RandomArtifactItemCharacteristics.IgnoreCold = true;
+        RandomArtifactItemCharacteristics.TreasureRating = 40;
+
         int totalFlags = FlagBasedCost(TypeSpecificValue);
         if (aCursed)
         {

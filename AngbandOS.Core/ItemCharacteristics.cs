@@ -13,193 +13,280 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ItemCharacteristics : IItemCharacteristics
 {
-    /// <summary>
-    /// Returns true, if items of this factory can be activated.  Returns true for all dragon scale mail and rings of ice, acid and flames.  Returns false, by default.  Items produced
-    /// by this factory will implement the IItemActivatible interface.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Activate { get; set; } = false; // TODO: This should be IActivatible.IsAssignableFrom
+
+    /// <inheritdoc/>
     public bool Aggravate { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool AntiTheft { get; set; } = false;
+
+    /// <inheritdoc/>
     public ArtifactBias? ArtifactBias { get; set; } = null;
+
+    /// <inheritdoc/>
     public bool Blessed { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the blows delivered by the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Blows { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item does extra damage from acid when being wielded.
-    /// </summary>
+    /// <inheritdoc/>
     public bool BrandAcid { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item does extra damage from frost when being wielded.
-    /// </summary>
+    /// <inheritdoc/>
     public bool BrandCold { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item does extra damage from electricity when being wielded.
-    /// </summary>
+    /// <inheritdoc/>
     public bool BrandElec { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item does extra damage from fire when being wielded.
-    /// </summary>
+    /// <inheritdoc/>
     public bool BrandFire { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item poisons foes when being wielded.
-    /// </summary>
+    /// <inheritdoc/>
     public bool BrandPois { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the charisma of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Cha { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item produced chaotic effects when being wielded.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Chaotic { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the constitution of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Con { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool Cursed { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the dexterity of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Dex { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool DrainExp { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool DreadCurse { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool EasyKnow { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool Feather { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool FreeAct { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool HeavyCurse { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool HideType { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool HoldLife { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool IgnoreAcid { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool IgnoreCold { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool IgnoreElec { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool IgnoreFire { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ImAcid { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ImCold { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ImElec { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ImFire { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item causes earthquakes of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Impact { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the infravision of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Infra { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool InstaArt { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the intelligence of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Int { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item is a great bane of dragons.
-    /// </summary>
+    /// <inheritdoc/>
     public bool KillDragon { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool NoMagic { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool NoTele { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool PermaCurse { get; set; } = false;
 
-    /// <summary>
-    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
-    /// </summary>
+    /// <inheritdoc/>
     public int Radius { get; set; } = 0;
 
+    /// <inheritdoc/>
     public bool Reflect { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool Regen { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResAcid { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResBlind { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResChaos { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResCold { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResConf { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResDark { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResDisen { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResElec { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResFear { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResFire { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResLight { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResNether { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResNexus { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResPois { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResShards { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ResSound { get; set; } = false;
-    
-    /// <summary>
-    /// Returns whether or not the item affects the search capabilities of the player when being worn.
-    /// </summary>
+
+    /// <inheritdoc/>
     public bool Search { get; set; } = false;
 
+    /// <inheritdoc/>
     public bool SeeInvis { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ShElec { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ShFire { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool ShowMods { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayAnimal { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayDemon { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayDragon { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayEvil { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayGiant { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayOrc { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayTroll { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlayUndead { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SlowDigest { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the attack speed of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Speed { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the stealth of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Stealth { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the strength of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Str { get; set; } = false;
 
+    /// <inheritdoc/>
     public bool SustCha { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SustCon { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SustDex { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SustInt { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SustStr { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool SustWis { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool Telepathy { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool Teleport { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the tunneling capabilities of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
+    public int TreasureRating { get; set; } = 0;
+
+    /// <inheritdoc/>
     public bool Tunnel { get; set; } = false;
 
+    /// <inheritdoc/>
     public bool Vampiric { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item is very sharp and cuts foes of the player when being used.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Vorpal { get; set; } = false;
 
-    /// <summary>
-    /// Returns whether or not the item affects the wisdom of the player when being worn.
-    /// </summary>
+    /// <inheritdoc/>
     public bool Wis { get; set; } = false;
 
+    /// <inheritdoc/>
     public bool Wraith { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool XtraMight { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool XtraShots { get; set; } = false;
 
     /// <summary>
@@ -293,6 +380,7 @@ internal class ItemCharacteristics : IItemCharacteristics
         SustWis = itemCharacteristics.SustWis;
         Telepathy = itemCharacteristics.Telepathy;
         Teleport = itemCharacteristics.Teleport;
+        TreasureRating = itemCharacteristics.TreasureRating;
         Tunnel = itemCharacteristics.Tunnel;
         Vampiric = itemCharacteristics.Vampiric;
         Vorpal = itemCharacteristics.Vorpal;
@@ -398,6 +486,9 @@ internal class ItemCharacteristics : IItemCharacteristics
         SustWis |= itemCharacteristics.SustWis;
         Telepathy |= itemCharacteristics.Telepathy;
         Teleport |= itemCharacteristics.Teleport;
+
+        TreasureRating += itemCharacteristics.TreasureRating;
+
         Tunnel |= itemCharacteristics.Tunnel;
         Vampiric |= itemCharacteristics.Vampiric;
         Vorpal |= itemCharacteristics.Vorpal;

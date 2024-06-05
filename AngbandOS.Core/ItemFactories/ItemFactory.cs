@@ -40,11 +40,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public virtual bool InitialExcellentStomp => false;
 
-    /// <summary>
-    /// Returns a value to add to the treasure rating.  Returns 0, by default.
-    /// </summary>
-    public virtual int TreasureRating => 0;
-
     public virtual void Recharge(Item item, int num) { }
 
     /// <summary>

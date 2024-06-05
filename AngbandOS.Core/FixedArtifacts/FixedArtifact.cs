@@ -70,7 +70,7 @@ internal abstract class FixedArtifact : ItemAdditiveBundle
 
     public abstract int Ac { get; }
 
-    public virtual int TreasureRating => 10;
+    public override int TreasureRating => 10;
 
     public abstract int Cost { get; }
 

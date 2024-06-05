@@ -17,10 +17,11 @@ internal class SpeedRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
+
     /// <summary>
-    /// Returns the base ring treasure rating plus 25 for a ring of speed.
+    /// Returns a treasure rating of 25 for a ring of speed.
     /// </summary>
-    public override int TreasureRating => base.TreasureRating + 25;
+    public override int TreasureRating => 25;
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {

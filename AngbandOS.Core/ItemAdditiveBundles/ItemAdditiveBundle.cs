@@ -270,7 +270,10 @@ internal abstract class ItemAdditiveBundle : IItemCharacteristics, IGetKey
     
     /// <inheritdoc />
     public virtual bool Teleport => false;
-    
+
+    /// <inheritdoc />
+    public virtual int TreasureRating => 0;
+
     /// <inheritdoc />
     public virtual bool Tunnel => false;
     

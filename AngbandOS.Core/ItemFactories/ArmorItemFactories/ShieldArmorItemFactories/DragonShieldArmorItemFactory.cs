@@ -17,9 +17,9 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
     public override string Name => "Dragon Shield";
 
     /// <summary>
-    /// Returns the base dragon scale mail rating plus 5 for shields of dragon scale mail.
+    /// Returns a treasure rating of 5 for a shield of dragon scale mail.
     /// </summary>
-    public override int TreasureRating => base.TreasureRating + 5;
+    public override int TreasureRating => 5;
 
     /// <summary>
     /// Applies special magic to this dragon shield.

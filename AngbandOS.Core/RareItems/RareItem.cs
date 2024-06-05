@@ -72,9 +72,4 @@ internal abstract class RareItem : ItemAdditiveBundle
     /// this maximum value will be subtracted from the item
     /// </summary>
     public virtual int MaxToH => 0;
-
-    /// <summary>
-    /// Returns the value to be added to the treasure rating for these rare items.
-    /// </summary>
-    public abstract int TreasureRating { get; }
 }
