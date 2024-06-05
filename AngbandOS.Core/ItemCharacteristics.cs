@@ -15,21 +15,65 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ItemCharacteristics : IItemCharacteristics
 {
+    /// <summary>
+    /// Returns true, if items of this factory can be activated.  Returns true for all dragon scale mail and rings of ice, acid and flames.  Returns false, by default.  Items produced
+    /// by this factory will implement the IItemActivatible interface.
+    /// </summary>
     public bool Activate { get; set; } = false; // TODO: This should be IActivatible.IsAssignableFrom
     public bool Aggravate { get; set; } = false;
     public bool AntiTheft { get; set; } = false;
     public ArtifactBias? ArtifactBias { get; set; } = null;
     public bool Blessed { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the blows delivered by the player when being worn.
+    /// </summary>
     public bool Blows { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item does extra damage from acid when being wielded.
+    /// </summary>
     public bool BrandAcid { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item does extra damage from frost when being wielded.
+    /// </summary>
     public bool BrandCold { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item does extra damage from electricity when being wielded.
+    /// </summary>
     public bool BrandElec { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item does extra damage from fire when being wielded.
+    /// </summary>
     public bool BrandFire { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item poisons foes when being wielded.
+    /// </summary>
     public bool BrandPois { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the charisma of the player when being worn.
+    /// </summary>
     public bool Cha { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item produced chaotic effects when being wielded.
+    /// </summary>
     public bool Chaotic { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the constitution of the player when being worn.
+    /// </summary>
     public bool Con { get; set; } = false;
     public bool Cursed { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the dexterity of the player when being worn.
+    /// </summary>
     public bool Dex { get; set; } = false;
     public bool DrainExp { get; set; } = false;
     public bool DreadCurse { get; set; } = false;
@@ -47,10 +91,26 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool ImCold { get; set; } = false;
     public bool ImElec { get; set; } = false;
     public bool ImFire { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item causes earthquakes of the player when being worn.
+    /// </summary>
     public bool Impact { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the infravision of the player when being worn.
+    /// </summary>
     public bool Infra { get; set; } = false;
     public bool InstaArt { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the intelligence of the player when being worn.
+    /// </summary>
     public bool Int { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item is a great bane of dragons.
+    /// </summary>
     public bool KillDragon { get; set; } = false;
     public bool NoMagic { get; set; } = false;
     public bool NoTele { get; set; } = false;
@@ -79,7 +139,12 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool ResPois { get; set; } = false;
     public bool ResShards { get; set; } = false;
     public bool ResSound { get; set; } = false;
+    
+    /// <summary>
+    /// Returns whether or not the item affects the search capabilities of the player when being worn.
+    /// </summary>
     public bool Search { get; set; } = false;
+
     public bool SeeInvis { get; set; } = false;
     public bool ShElec { get; set; } = false;
     public bool ShFire { get; set; } = false;
@@ -93,9 +158,22 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool SlayTroll { get; set; } = false;
     public bool SlayUndead { get; set; } = false;
     public bool SlowDigest { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the attack speed of the player when being worn.
+    /// </summary>
     public bool Speed { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the stealth of the player when being worn.
+    /// </summary>
     public bool Stealth { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the strength of the player when being worn.
+    /// </summary>
     public bool Str { get; set; } = false;
+
     public bool SustCha { get; set; } = false;
     public bool SustCon { get; set; } = false;
     public bool SustDex { get; set; } = false;
@@ -104,10 +182,24 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool SustWis { get; set; } = false;
     public bool Telepathy { get; set; } = false;
     public bool Teleport { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the tunneling capabilities of the player when being worn.
+    /// </summary>
     public bool Tunnel { get; set; } = false;
+
     public bool Vampiric { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item is very sharp and cuts foes of the player when being used.
+    /// </summary>
     public bool Vorpal { get; set; } = false;
+
+    /// <summary>
+    /// Returns whether or not the item affects the wisdom of the player when being worn.
+    /// </summary>
     public bool Wis { get; set; } = false;
+
     public bool Wraith { get; set; } = false;
     public bool XtraMight { get; set; } = false;
     public bool XtraShots { get; set; } = false;

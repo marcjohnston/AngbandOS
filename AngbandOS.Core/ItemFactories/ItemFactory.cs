@@ -12,19 +12,9 @@ namespace AngbandOS.Core.ItemFactories;
 /// properties are modifiable.
 /// </summary>
 [Serializable]
-
-internal abstract class ItemFactory : IItemCharacteristics, IGetKey
+internal abstract class ItemFactory : ItemAdditiveBundle
 {
-    protected readonly Game Game;
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
+    protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  
@@ -156,11 +146,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// Torches and laterns have burn rates greater than zero.
     /// </summary>
     public virtual int BurnRate => 0;
-
-    /// <summary>
-    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
-    /// </summary>
-    public virtual int Radius => 0;
 
     /// <summary>
     /// Returns an additional description of the item that is appended to the detailed description, when needed.  
@@ -680,18 +665,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public virtual bool IsWeapon => false;
 
-    protected ItemFactory(Game game)
-    {
-        Game = game;
-    }
-    public virtual string Key => GetType().Name;
-
     /// <summary>
     /// Returns the number of items contained in the chest; or 0, if the item is not a chest.  Returns 0, by default.
     /// </summary>
     public virtual int NumberOfItemsContained => 0;
-
-    public string GetKey => Key;
 
     /// <summary>
     /// Returns the name of the item as it applies to the factory class.  In other words, the name does not include the factory class name.  E.g. The factory class of scrolls would
@@ -733,7 +710,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     private string _flavorUnknownDescriptionSyntax;
     private string _alternateFlavorUnknownDescriptionSyntax;
 
-    public virtual void Bind()
+    public override void Bind()
     {
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassName);
@@ -902,124 +879,22 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual int ArmorClass => 0;
 
     /// <summary>
-    /// Returns true, if items of this factory can be activated.  Returns true for all dragon scale mail and rings of ice, acid and flames.  Returns false, by default.  Items produced
-    /// by this factory will implement the IItemActivatible interface.
-    /// </summary>
-    public virtual bool Activate { get; set; } = false;
-    public virtual bool Aggravate { get; set; } = false;
-    public virtual bool AntiTheft { get; set; } = false;
-    public virtual ArtifactBias? ArtifactBias { get; set; } = null;
-    public virtual bool Blessed { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the blows delivered by the player when being worn.
-    /// </summary>
-    public virtual bool Blows { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item does extra damage from acid when being wielded.
-    /// </summary>
-    public virtual bool BrandAcid { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item does extra damage from frost when being wielded.
-    /// </summary>
-    public virtual bool BrandCold { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item does extra damage from electricity when being wielded.
-    /// </summary>
-    public virtual bool BrandElec { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item does extra damage from fire when being wielded.
-    /// </summary>
-    public virtual bool BrandFire { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item poisons foes when being wielded.
-    /// </summary>
-    public virtual bool BrandPois { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the charisma of the player when being worn.
-    /// </summary>
-    public virtual bool Cha { get; set; } = false;
-
-    /// <summary>
     /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by definition.
     /// </summary>
     public virtual (int level, int chance)[]? DepthsFoundAndChances => null;
-
-    /// <summary>
-    /// Returns whether or not the item produced chaotic effects when being wielded.
-    /// </summary>
-    public virtual bool Chaotic { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the constitution of the player when being worn.
-    /// </summary>
-    public virtual bool Con { get; set; } = false;
 
     /// <summary>
     /// Returns the real cost of a standard item.  Returns 0 by default.
     /// </summary>
     public virtual int Cost => 0;
 
-    public virtual bool Cursed { get; set; } = false;
     public virtual int DamageDice => 0;
 
-    /// <summary>
-    /// Returns whether or not the item affects the dexterity of the player when being worn.
-    /// </summary>
-    public virtual bool Dex { get; set; } = false;
-    public virtual bool DrainExp { get; set; } = false;
-    public virtual bool DreadCurse { get; set; } = false;
     public virtual int DamageSides => 0;
-    public virtual bool EasyKnow { get; set; } = false;
-    public virtual bool Feather { get; set; } = false;
-    public virtual bool FreeAct { get; set; } = false;
-
-    public virtual bool HeavyCurse { get; set; } = false;
-    public virtual bool HideType { get; set; } = false;
-    public virtual bool HoldLife { get; set; } = false;
-    public virtual bool IgnoreAcid { get; set; } = false;
-    public virtual bool IgnoreCold { get; set; } = false;
-    public virtual bool IgnoreElec { get; set; } = false;
-    public virtual bool IgnoreFire { get; set; } = false;
-    public virtual bool ImAcid { get; set; } = false;
-    public virtual bool ImCold { get; set; } = false;
-    public virtual bool ImElec { get; set; } = false;
-    public virtual bool ImFire { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item causes earthquakes of the player when being worn.
-    /// </summary>
-    public virtual bool Impact { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the infravision of the player when being worn.
-    /// </summary>
-    public virtual bool Infra { get; set; } = false;
-    public virtual bool InstaArt { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the intelligence of the player when being worn.
-    /// </summary>
-    public virtual bool Int { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item is a great bane of dragons.
-    /// </summary>
-    public virtual bool KillDragon { get; set; } = false;
 
     public virtual bool KindIsGood => false;
     public virtual int LevelNormallyFound => 0;
     public virtual bool Lightsource { get; set; } = false;
-
-    public virtual bool NoMagic { get; set; } = false;
-    public virtual bool NoTele { get; set; } = false;
-    public virtual bool PermaCurse { get; set; } = false;
 
     /// <summary>
     /// Returns the initial value to be assigned to the type specific value.  Most items will override a default value.  Gold will
@@ -1046,59 +921,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public Roll InitialGoldPiecesRoll { get; private set; }
 
-    public virtual bool Reflect { get; set; } = false;
-    public virtual bool Regen { get; set; } = false;
-    public virtual bool ResAcid { get; set; } = false;
-    public virtual bool ResBlind { get; set; } = false;
-    public virtual bool ResChaos { get; set; } = false;
-    public virtual bool ResCold { get; set; } = false;
-    public virtual bool ResConf { get; set; } = false;
-    public virtual bool ResDark { get; set; } = false;
-    public virtual bool ResDisen { get; set; } = false;
-    public virtual bool ResElec { get; set; } = false;
-    public virtual bool ResFear { get; set; } = false;
-    public virtual bool ResFire { get; set; } = false;
-    public virtual bool ResLight { get; set; } = false;
-    public virtual bool ResNether { get; set; } = false;
-    public virtual bool ResNexus { get; set; } = false;
-    public virtual bool ResPois { get; set; } = false;
-    public virtual bool ResShards { get; set; } = false;
-    public virtual bool ResSound { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the search capabilities of the player when being worn.
-    /// </summary>
-    public virtual bool Search { get; set; } = false;
-
-    public virtual bool SeeInvis { get; set; } = false;
-    public virtual bool ShElec { get; set; } = false;
-    public virtual bool ShFire { get; set; } = false;
-    public virtual bool ShowMods { get; set; } = false;
-    public virtual bool SlayAnimal { get; set; } = false;
-    public virtual bool SlayDemon { get; set; } = false;
-    public virtual bool SlayDragon { get; set; } = false;
-    public virtual bool SlayEvil { get; set; } = false;
-    public virtual bool SlayGiant { get; set; } = false;
-    public virtual bool SlayOrc { get; set; } = false;
-    public virtual bool SlayTroll { get; set; } = false;
-    public virtual bool SlayUndead { get; set; } = false;
-    public virtual bool SlowDigest { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the attack speed of the player when being worn.
-    /// </summary>
-    public virtual bool Speed { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the stealth of the player when being worn.
-    /// </summary>
-    public virtual bool Stealth { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item affects the strength of the player when being worn.
-    /// </summary>
-    public virtual bool Str { get; set; } = false;
-
     /// <summary>
     /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
     /// </summary>
@@ -1116,39 +938,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         }
     }
 
-    public virtual bool SustCha { get; set; } = false;
-    public virtual bool SustCon { get; set; } = false;
-    public virtual bool SustDex { get; set; } = false;
-    public virtual bool SustInt { get; set; } = false;
-    public virtual bool SustStr { get; set; } = false;
-    public virtual bool SustWis { get; set; } = false;
-    public virtual bool Telepathy { get; set; } = false;
-    public virtual bool Teleport { get; set; } = false;
     public virtual int BonusArmorClass => 0;
     public virtual int BonusDamage => 0;
     public virtual int BonusHit => 0;
 
-    /// <summary>
-    /// Returns whether or not the item affects the tunneling capabilities of the player when being worn.
-    /// </summary>
-    public virtual bool Tunnel { get; set; } = false;
-
-    public virtual bool Vampiric { get; set; } = false;
-
-    /// <summary>
-    /// Returns whether or not the item is very sharp and cuts foes of the player when being used.
-    /// </summary>
-    public virtual bool Vorpal { get; set; } = false;
 
     public virtual int Weight => 0;
-
-    /// <summary>
-    /// Returns whether or not the item affects the wisdom of the player when being worn.
-    /// </summary>
-    public virtual bool Wis { get; set; } = false;
-    public virtual bool Wraith { get; set; } = false;
-    public virtual bool XtraMight { get; set; } = false;
-    public virtual bool XtraShots { get; set; } = false;
 
     /// <summary>
     /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.

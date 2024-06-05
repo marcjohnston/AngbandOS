@@ -14,7 +14,7 @@ namespace AngbandOS.Core.RareItems;
 /// 3. Application of Magic - Items with rare item characteristics 
 /// </summary>
 [Serializable]
-internal abstract class RareItem : ItemAdditiveBundle, IGetKey
+internal abstract class RareItem : ItemAdditiveBundle
 {
     protected RareItem(Game game) : base(game) { }
 
@@ -38,20 +38,6 @@ internal abstract class RareItem : ItemAdditiveBundle, IGetKey
     public virtual string? DescribeActivationEffect => null;
 
     /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public virtual void Bind() { }
-
-    /// <summary>
     /// Returns the value of the rare item.  When this value is 0, the value of the item is 0 regardless of the value of the original item and the
     /// item is considered broken; otherwise this value is added to the value of the original item.
     /// </summary>
@@ -61,7 +47,7 @@ internal abstract class RareItem : ItemAdditiveBundle, IGetKey
     /// Returns the name of the rare item characteristics.  This name is appended to the description of items that have a rare item
     /// characteristics applied to it.
     /// </summary>
-    public virtual string FriendlyName { get; }
+    public abstract string FriendlyName { get; }
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional TypeSpecificValue when adding magic.  If the item is cursed or broken,
