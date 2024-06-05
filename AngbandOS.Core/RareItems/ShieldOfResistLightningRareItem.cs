@@ -16,5 +16,4 @@ internal class ShieldOfResistLightningRareItem : RareItem
     public override bool IgnoreElec => true;
     public override int Rating => 10;
     public override bool ResElec => true;
-    public override int Slot => 32;
-}
+    }

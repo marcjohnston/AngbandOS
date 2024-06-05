@@ -28,6 +28,5 @@ internal class ArmorOfYithRareItem : RareItem
     public override bool ResCold => true;
     public override bool ResElec => true;
     public override bool ResFire => true;
-    public override int Slot => 30;
-    public override bool Stealth => true;
+        public override bool Stealth => true;
 }

@@ -34,6 +34,5 @@ internal class WeaponDefenderRareItem : RareItem
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool SeeInvis => true;
-    public override int Slot => 24;
-    public override bool Stealth => true;
+        public override bool Stealth => true;
 }

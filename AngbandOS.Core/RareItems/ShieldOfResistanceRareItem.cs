@@ -23,5 +23,4 @@ internal class ShieldOfResistanceRareItem : RareItem
     public override bool ResCold => true;
     public override bool ResElec => true;
     public override bool ResFire => true;
-    public override int Slot => 32;
-}
+    }

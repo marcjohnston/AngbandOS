@@ -15,6 +15,5 @@ internal class GlovesOfWeaknessRareItem : RareItem
     public override string FriendlyName => "of Weakness";
     public override int MaxPval => 10;
     public override int Rating => 0;
-    public override int Slot => 34;
-    public override bool Str => true;
+        public override bool Str => true;
 }

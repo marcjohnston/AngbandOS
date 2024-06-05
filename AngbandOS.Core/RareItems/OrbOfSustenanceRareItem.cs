@@ -18,6 +18,5 @@ internal class OrbOfSustenanceRareItem : RareItem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Rating => 0;
-    public override int Slot => 0;
-    public override bool SlowDigest => true;
+        public override bool SlowDigest => true;
 }

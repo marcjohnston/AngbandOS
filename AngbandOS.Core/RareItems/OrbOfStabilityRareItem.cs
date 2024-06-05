@@ -19,5 +19,4 @@ internal class OrbOfStabilityRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int Rating => 0;
     public override bool ResNexus => true;
-    public override int Slot => 0;
-}
+    }

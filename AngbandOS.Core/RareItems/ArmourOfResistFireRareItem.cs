@@ -16,5 +16,4 @@ internal class ArmorOfResistFireRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int Rating => 14;
     public override bool ResFire => true;
-    public override int Slot => 30;
-}
+    }

@@ -17,5 +17,4 @@ internal class WeaponOfFreezingRareItem : RareItem
     public override bool IgnoreCold => true;
     public override int Rating => 15;
     public override bool ResCold => true;
-    public override int Slot => 24;
-}
+    }

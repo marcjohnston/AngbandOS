@@ -17,5 +17,4 @@ internal class CloakOfEnvelopingRareItem : RareItem
     public override int MaxToH => 10;
     public override int Rating => 0;
     public override bool ShowMods => true;
-    public override int Slot => 31;
-}
+    }

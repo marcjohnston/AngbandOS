@@ -16,5 +16,4 @@ internal class BowOfAccuracyRareItem : RareItem
     public override int MaxToD => 5;
     public override int MaxToH => 15;
     public override int Rating => 10;
-    public override int Slot => 25;
-}
+    }

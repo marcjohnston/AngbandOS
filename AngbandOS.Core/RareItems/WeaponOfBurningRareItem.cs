@@ -18,5 +18,4 @@ internal class WeaponOfBurningRareItem : RareItem
     public override int Radius => 3;
     public override int Rating => 20;
     public override bool ResFire => true;
-    public override int Slot => 24;
-}
+    }

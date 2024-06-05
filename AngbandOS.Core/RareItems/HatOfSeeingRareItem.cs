@@ -18,5 +18,4 @@ internal class HatOfSeeingRareItem : RareItem
     public override bool ResBlind => true;
     public override bool Search => true;
     public override bool SeeInvis => true;
-    public override int Slot => 33;
-}
+    }

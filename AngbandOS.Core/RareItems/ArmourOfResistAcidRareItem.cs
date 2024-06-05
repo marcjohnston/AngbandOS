@@ -16,5 +16,4 @@ internal class ArmorOfResistAcidRareItem : RareItem
     public override bool IgnoreAcid => true;
     public override int Rating => 16;
     public override bool ResAcid => true;
-    public override int Slot => 30;
-}
+    }

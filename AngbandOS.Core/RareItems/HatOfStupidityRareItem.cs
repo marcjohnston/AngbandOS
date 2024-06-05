@@ -16,5 +16,4 @@ internal class HatOfStupidityRareItem : RareItem
     public override bool Int => true;
     public override int MaxPval => 5;
     public override int Rating => 0;
-    public override int Slot => 33;
-}
+    }

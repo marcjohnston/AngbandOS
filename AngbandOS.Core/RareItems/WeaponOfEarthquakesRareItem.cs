@@ -16,6 +16,5 @@ internal class WeaponOfEarthquakesRareItem : RareItem
     public override bool Impact => true;
     public override int MaxPval => 3;
     public override int Rating => 20;
-    public override int Slot => 24;
-    public override bool Tunnel => true;
+        public override bool Tunnel => true;
 }

@@ -28,6 +28,5 @@ internal class HatOfTheMagiRareItem : RareItem
     public override bool ResCold => true;
     public override bool ResElec => true;
     public override bool ResFire => true;
-    public override int Slot => 33;
-    public override bool SustInt => true;
+        public override bool SustInt => true;
 }

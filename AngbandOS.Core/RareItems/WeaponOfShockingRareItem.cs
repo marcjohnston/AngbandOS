@@ -17,5 +17,4 @@ internal class WeaponOfShockingRareItem : RareItem
     public override bool IgnoreElec => true;
     public override int Rating => 20;
     public override bool ResElec => true;
-    public override int Slot => 24;
-}
+    }

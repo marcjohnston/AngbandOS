@@ -16,6 +16,5 @@ internal class HatOfBeautyRareItem : RareItem
     public override string FriendlyName => "of Beauty";
     public override int MaxPval => 4;
     public override int Rating => 8;
-    public override int Slot => 33;
-    public override bool SustCha => true;
+        public override bool SustCha => true;
 }

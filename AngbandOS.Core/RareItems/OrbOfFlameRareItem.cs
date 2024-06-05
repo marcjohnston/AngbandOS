@@ -19,5 +19,4 @@ internal class OrbOfFlameRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int Rating => 0;
     public override bool ResFire => true;
-    public override int Slot => 0;
-}
+    }

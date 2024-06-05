@@ -24,6 +24,5 @@ internal class CloakOfAmanRareItem : RareItem
     public override int MaxPval => 3;
     public override int MaxToA => 20;
     public override int Rating => 20;
-    public override int Slot => 31;
-    public override bool Stealth => true;
+        public override bool Stealth => true;
 }

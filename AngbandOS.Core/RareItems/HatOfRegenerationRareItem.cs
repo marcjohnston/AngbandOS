@@ -15,5 +15,4 @@ internal class HatOfRegenerationRareItem : RareItem
     public override string FriendlyName => "of Regeneration";
     public override int Rating => 10;
     public override bool Regen => true;
-    public override int Slot => 33;
-}
+    }

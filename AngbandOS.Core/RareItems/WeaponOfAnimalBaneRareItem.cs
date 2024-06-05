@@ -18,5 +18,4 @@ internal class WeaponOfAnimalBaneRareItem : RareItem
     public override int Rating => 20;
     public override bool Regen => true;
     public override bool SlayAnimal => true;
-    public override int Slot => 24;
-}
+    }

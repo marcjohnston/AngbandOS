@@ -16,5 +16,4 @@ internal class ShieldOfResistColdRareItem : RareItem
     public override bool IgnoreCold => true;
     public override int Rating => 12;
     public override bool ResCold => true;
-    public override int Slot => 32;
-}
+    }

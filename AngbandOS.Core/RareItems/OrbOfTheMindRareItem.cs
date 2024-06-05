@@ -18,6 +18,5 @@ internal class OrbOfTheMindRareItem : RareItem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Rating => 0;
-    public override int Slot => 0;
-    public override bool Telepathy => true;
+        public override bool Telepathy => true;
 }

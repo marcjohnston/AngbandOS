@@ -15,6 +15,5 @@ internal class HatOfNaivetyRareItem : RareItem
     public override string FriendlyName => "of Naivety";
     public override int MaxPval => 5;
     public override int Rating => 0;
-    public override int Slot => 33;
-    public override bool Wis => true;
+        public override bool Wis => true;
 }

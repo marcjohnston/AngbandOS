@@ -17,6 +17,5 @@ internal class WeaponOfUndeadBaneRareItem : RareItem
     public override int Rating => 24;
     public override bool SeeInvis => true;
     public override bool SlayUndead => true;
-    public override int Slot => 24;
-    public override bool Wis => true;
+        public override bool Wis => true;
 }

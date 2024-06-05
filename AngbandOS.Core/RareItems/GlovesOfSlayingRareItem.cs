@@ -17,5 +17,4 @@ internal class GlovesOfSlayingRareItem : RareItem
     public override int MaxToH => 6;
     public override int Rating => 17;
     public override bool ShowMods => true;
-    public override int Slot => 34;
-}
+    }

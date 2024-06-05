@@ -15,6 +15,5 @@ internal class BootsOfStealthRareItem : RareItem
     public override string FriendlyName => "of Stealth";
     public override int MaxPval => 3;
     public override int Rating => 16;
-    public override int Slot => 35;
-    public override bool Stealth => true;
+        public override bool Stealth => true;
 }

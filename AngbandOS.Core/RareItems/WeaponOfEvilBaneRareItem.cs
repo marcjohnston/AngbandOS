@@ -17,6 +17,5 @@ internal class WeaponOfEvilBaneRareItem : RareItem
     public override int MaxPval => 2;
     public override int Rating => 20;
     public override bool SlayEvil => true;
-    public override int Slot => 24;
-    public override bool Wis => true;
+        public override bool Wis => true;
 }

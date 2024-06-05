@@ -21,5 +21,4 @@ internal class WeaponOfLengRareItem : RareItem
     public override int MaxToH => 20;
     public override int Rating => 0;
     public override bool SeeInvis => true;
-    public override int Slot => 24;
-}
+    }

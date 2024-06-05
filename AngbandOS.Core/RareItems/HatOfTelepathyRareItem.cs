@@ -14,6 +14,5 @@ internal class HatOfTelepathyRareItem : RareItem
     public override int Cost => 50000;
     public override string FriendlyName => "of Telepathy";
     public override int Rating => 20;
-    public override int Slot => 33;
-    public override bool Telepathy => true;
+        public override bool Telepathy => true;
 }

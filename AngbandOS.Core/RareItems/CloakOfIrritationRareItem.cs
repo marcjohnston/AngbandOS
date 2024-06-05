@@ -18,5 +18,4 @@ internal class CloakOfIrritationRareItem : RareItem
     public override int MaxToH => 15;
     public override int Rating => 0;
     public override bool ShowMods => true;
-    public override int Slot => 31;
-}
+    }

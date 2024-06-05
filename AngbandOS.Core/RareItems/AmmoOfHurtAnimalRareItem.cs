@@ -15,5 +15,4 @@ internal class AmmoOfHurtAnimalRareItem : RareItem
     public override string FriendlyName => "of Hurt Animal";
     public override int Rating => 10;
     public override bool SlayAnimal => true;
-    public override int Slot => 23;
-}
+    }

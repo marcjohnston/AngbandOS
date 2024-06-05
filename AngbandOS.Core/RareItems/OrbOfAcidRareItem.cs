@@ -19,5 +19,4 @@ internal class OrbOfAcidRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int Rating => 0;
     public override bool ResAcid => true;
-    public override int Slot => 0;
-}
+    }

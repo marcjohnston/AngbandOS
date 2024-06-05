@@ -16,5 +16,4 @@ internal class AmmoOfBackbitingRareItem : RareItem
     public override int MaxToD => 50;
     public override int MaxToH => 50;
     public override int Rating => 0;
-    public override int Slot => 23;
-}
+    }

@@ -14,5 +14,4 @@ internal class SpecialAbilityRareItem : RareItem
     public override int Cost => 0;
     public override string FriendlyName => "";
     public override int Rating => 0;
-    public override int Slot => 0;
-}
+    }

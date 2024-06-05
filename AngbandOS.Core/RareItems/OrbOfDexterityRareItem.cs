@@ -18,6 +18,5 @@ internal class OrbOfDexterityRareItem : RareItem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Rating => 0;
-    public override int Slot => 0;
-    public override bool SustDex => true;
+        public override bool SustDex => true;
 }

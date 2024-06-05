@@ -15,5 +15,4 @@ internal class AmmoOfHurtDragonRareItem : RareItem
     public override string FriendlyName => "of Hurt Dragon";
     public override int Rating => 10;
     public override bool SlayDragon => true;
-    public override int Slot => 23;
-}
+    }

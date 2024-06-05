@@ -18,8 +18,7 @@ internal class HatOfMightRareItem : RareItem
     public override string FriendlyName => "of Might";
     public override int MaxPval => 3;
     public override int Rating => 19;
-    public override int Slot => 33;
-    public override bool Str => true;
+        public override bool Str => true;
     public override bool SustCon => true;
     public override bool SustDex => true;
     public override bool SustStr => true;

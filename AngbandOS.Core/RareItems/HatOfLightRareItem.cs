@@ -16,5 +16,4 @@ internal class HatOfLightRareItem : RareItem
     public override int Radius => 3;
     public override int Rating => 6;
     public override bool ResLight => true;
-    public override int Slot => 33;
-}
+    }

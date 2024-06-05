@@ -16,5 +16,4 @@ internal class WeaponOfPoisoningRareItem : RareItem
     public override string FriendlyName => "of Poisoning";
     public override int Rating => 20;
     public override bool ResPois => true;
-    public override int Slot => 24;
-}
+    }

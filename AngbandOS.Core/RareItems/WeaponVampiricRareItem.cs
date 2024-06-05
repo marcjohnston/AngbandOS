@@ -15,6 +15,5 @@ internal class WeaponVampiricRareItem : RareItem
     public override string FriendlyName => "(Vampiric)";
     public override bool HoldLife => true;
     public override int Rating => 25;
-    public override int Slot => 24;
-    public override bool Vampiric => true;
+        public override bool Vampiric => true;
 }

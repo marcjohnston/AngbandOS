@@ -14,5 +14,4 @@ internal class WeaponOfSlayingRareItem : RareItem
     public override int Cost => 2500;
     public override string FriendlyName => "of Slaying";
     public override int Rating => 15;
-    public override int Slot => 24;
-}
+    }

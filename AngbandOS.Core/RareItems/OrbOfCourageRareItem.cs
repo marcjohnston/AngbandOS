@@ -19,5 +19,4 @@ internal class OrbOfCourageRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int Rating => 0;
     public override bool ResFear => true;
-    public override int Slot => 0;
-}
+    }

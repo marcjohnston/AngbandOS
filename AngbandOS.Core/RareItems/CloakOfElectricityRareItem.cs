@@ -19,5 +19,4 @@ internal class CloakOfElectricityRareItem : RareItem
     public override int Rating => 16;
     public override bool ResElec => true;
     public override bool ShElec => true;
-    public override int Slot => 31;
-}
+    }

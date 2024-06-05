@@ -20,5 +20,4 @@ internal class ShieldOfReflectionRareItem : RareItem
     public override int MaxToA => 5;
     public override int Rating => 20;
     public override bool Reflect => true;
-    public override int Slot => 32;
-}
+    }

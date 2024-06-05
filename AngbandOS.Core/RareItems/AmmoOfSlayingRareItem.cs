@@ -16,5 +16,4 @@ internal class AmmoOfSlayingRareItem : RareItem
     public override int MaxToD => 12;
     public override int MaxToH => 12;
     public override int Rating => 15;
-    public override int Slot => 23;
-}
+    }

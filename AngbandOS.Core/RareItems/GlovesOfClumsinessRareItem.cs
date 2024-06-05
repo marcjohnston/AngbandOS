@@ -16,5 +16,4 @@ internal class GlovesOfClumsinessRareItem : RareItem
     public override string FriendlyName => "of Clumsiness";
     public override int MaxPval => 10;
     public override int Rating => 0;
-    public override int Slot => 34;
-}
+    }

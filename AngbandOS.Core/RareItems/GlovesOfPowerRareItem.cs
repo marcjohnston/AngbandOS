@@ -19,6 +19,5 @@ internal class GlovesOfPowerRareItem : RareItem
     public override int MaxToH => 5;
     public override int Rating => 22;
     public override bool ShowMods => true;
-    public override int Slot => 34;
-    public override bool Str => true;
+        public override bool Str => true;
 }

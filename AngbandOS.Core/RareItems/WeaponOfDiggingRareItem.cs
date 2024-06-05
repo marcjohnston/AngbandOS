@@ -20,6 +20,5 @@ internal class WeaponOfDiggingRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int MaxPval => 5;
     public override int Rating => 4;
-    public override int Slot => 24;
-    public override bool Tunnel => true;
+        public override bool Tunnel => true;
 }

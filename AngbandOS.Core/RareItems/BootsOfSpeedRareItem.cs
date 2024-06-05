@@ -16,6 +16,5 @@ internal class BootsOfSpeedRareItem : RareItem
     public override bool HideType => true;
     public override int MaxPval => 10;
     public override int Rating => 25;
-    public override int Slot => 35;
-    public override bool Speed => true;
+        public override bool Speed => true;
 }

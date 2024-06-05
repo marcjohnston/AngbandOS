@@ -19,5 +19,4 @@ internal class CloakOfImmolationRareItem : RareItem
     public override int Rating => 16;
     public override bool ResFire => true;
     public override bool ShFire => true;
-    public override int Slot => 31;
-}
+    }

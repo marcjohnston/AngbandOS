@@ -28,8 +28,7 @@ internal class ArmorOfPermanenceRareItem : RareItem
     public override bool ResCold => true;
     public override bool ResElec => true;
     public override bool ResFire => true;
-    public override int Slot => 30;
-    public override bool SustCha => true;
+        public override bool SustCha => true;
     public override bool SustCon => true;
     public override bool SustDex => true;
     public override bool SustInt => true;

@@ -18,5 +18,4 @@ internal class WeaponOfDragonBaneRareItem : RareItem
     public override int MaxPval => 1;
     public override int Rating => 24;
     public override bool SlayDragon => true;
-    public override int Slot => 24;
-}
+    }

@@ -19,5 +19,4 @@ internal class WeaponChaoticRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int Rating => 28;
     public override bool ResChaos => true;
-    public override int Slot => 24;
-}
+    }

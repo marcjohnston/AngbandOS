@@ -14,6 +14,5 @@ internal class HatOfTeleportationRareItem : RareItem
     public override int Cost => 0;
     public override string FriendlyName => "of Teleportation";
     public override int Rating => 0;
-    public override int Slot => 33;
-    public override bool Teleport => true;
+        public override bool Teleport => true;
 }

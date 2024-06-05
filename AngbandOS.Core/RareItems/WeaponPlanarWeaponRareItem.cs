@@ -38,7 +38,6 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     public override bool ResNexus => true;
     public override bool Search => true;
     public override bool SlayEvil => true;
-    public override int Slot => 24;
-    public override bool SlowDigest => true;
+        public override bool SlowDigest => true;
     public override bool Teleport => true;
 }

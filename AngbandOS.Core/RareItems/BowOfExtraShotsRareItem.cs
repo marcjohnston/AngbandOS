@@ -16,6 +16,5 @@ internal class BowOfExtraShotsRareItem : RareItem
     public override int MaxToD => 5;
     public override int MaxToH => 10;
     public override int Rating => 20;
-    public override int Slot => 25;
-    public override bool XtraShots => true;
+        public override bool XtraShots => true;
 }

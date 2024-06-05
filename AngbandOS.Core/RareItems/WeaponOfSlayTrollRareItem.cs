@@ -15,5 +15,4 @@ internal class WeaponOfSlayTrollRareItem : RareItem
     public override string FriendlyName => "of Slay Troll";
     public override int Rating => 10;
     public override bool SlayTroll => true;
-    public override int Slot => 24;
-}
+    }

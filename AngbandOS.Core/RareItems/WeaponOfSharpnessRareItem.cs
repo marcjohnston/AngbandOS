@@ -14,7 +14,6 @@ internal class WeaponOfSharpnessRareItem : RareItem
     public override int Cost => 5000;
     public override string FriendlyName => "of Sharpness";
     public override int Rating => 20;
-    public override int Slot => 24;
-    public override bool Tunnel => true;
+        public override bool Tunnel => true;
     public override bool Vorpal => true;
 }

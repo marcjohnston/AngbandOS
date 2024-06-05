@@ -19,5 +19,4 @@ internal class OrbOfDarknessRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int Rating => 0;
     public override bool ResDark => true;
-    public override int Slot => 0;
-}
+    }

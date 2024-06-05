@@ -16,6 +16,5 @@ internal class BootsOfAnnoyanceRareItem : RareItem
     public override string FriendlyName => "of Annoyance";
     public override int MaxPval => 10;
     public override int Rating => 0;
-    public override int Slot => 35;
-    public override bool Speed => true;
+        public override bool Speed => true;
 }

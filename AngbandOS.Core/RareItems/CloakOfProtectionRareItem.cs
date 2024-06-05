@@ -19,5 +19,4 @@ internal class CloakOfProtectionRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int MaxToA => 10;
     public override int Rating => 10;
-    public override int Slot => 31;
-}
+    }

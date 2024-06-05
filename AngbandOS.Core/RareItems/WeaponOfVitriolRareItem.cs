@@ -17,5 +17,4 @@ internal class WeaponOfVitriolRareItem : RareItem
     public override bool IgnoreAcid => true;
     public override int Rating => 15;
     public override bool ResAcid => true;
-    public override int Slot => 24;
-}
+    }

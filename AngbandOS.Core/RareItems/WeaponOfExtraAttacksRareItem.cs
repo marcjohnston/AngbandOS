@@ -16,5 +16,4 @@ internal class WeaponOfExtraAttacksRareItem : RareItem
     public override string FriendlyName => "of Extra Attacks";
     public override int MaxPval => 3;
     public override int Rating => 20;
-    public override int Slot => 24;
-}
+    }
