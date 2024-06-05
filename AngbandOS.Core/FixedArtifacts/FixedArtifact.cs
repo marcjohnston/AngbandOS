@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal abstract class FixedArtifact : ItemAdditiveBundle, IGetKey
+internal abstract class FixedArtifact : ItemAdditiveBundle
 {
     protected FixedArtifact(Game game) : base(game) { }
 
@@ -24,20 +24,7 @@ internal abstract class FixedArtifact : ItemAdditiveBundle, IGetKey
     /// </summary>
     protected virtual string? ActivationName => null;
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-
-    public void Bind()
+    public override void Bind()
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
