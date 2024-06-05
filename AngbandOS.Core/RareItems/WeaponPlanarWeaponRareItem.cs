@@ -33,7 +33,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     public override int MaxPval => 2;
     public override int MaxToD => 4;
     public override int MaxToH => 4;
-    public override int Rating => 22;
+    public override int TreasureRating => 22;
     public override bool Regen => true;
     public override bool ResNexus => true;
     public override bool Search => true;

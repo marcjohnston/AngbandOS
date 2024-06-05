@@ -14,5 +14,5 @@ internal class BootsOfNoiseRareItem : RareItem
     public override bool Aggravate => true;
     public override int Cost => 0;
     public override string FriendlyName => "of Noise";
-    public override int Rating => 0;
+    public override int TreasureRating => 0;
     }

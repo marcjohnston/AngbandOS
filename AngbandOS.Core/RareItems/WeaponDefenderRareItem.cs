@@ -27,7 +27,7 @@ internal class WeaponDefenderRareItem : RareItem
     public override int MaxToA => 8;
     public override int MaxToD => 4;
     public override int MaxToH => 4;
-    public override int Rating => 25;
+    public override int TreasureRating => 25;
     public override bool Regen => true;
     public override bool ResAcid => true;
     public override bool ResCold => true;

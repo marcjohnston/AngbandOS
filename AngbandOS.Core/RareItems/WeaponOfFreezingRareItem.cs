@@ -15,6 +15,6 @@ internal class WeaponOfFreezingRareItem : RareItem
     public override int Cost => 2500;
     public override string FriendlyName => "of Freezing";
     public override bool IgnoreCold => true;
-    public override int Rating => 15;
+    public override int TreasureRating => 15;
     public override bool ResCold => true;
     }

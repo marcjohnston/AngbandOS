@@ -14,5 +14,5 @@ internal class GlovesOfFreeActionRareItem : RareItem
     public override int Cost => 1000;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Free Action";
-    public override int Rating => 11;
+    public override int TreasureRating => 11;
     }

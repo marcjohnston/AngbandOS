@@ -90,5 +90,5 @@ internal abstract class RareItem : ItemAdditiveBundle, IGetKey
     /// <summary>
     /// Returns the value to be added to the treasure rating for these rare items.
     /// </summary>
-    public abstract int Rating { get; }
+    public abstract int TreasureRating { get; }
 }

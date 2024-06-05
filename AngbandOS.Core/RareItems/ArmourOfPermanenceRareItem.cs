@@ -23,7 +23,7 @@ internal class ArmorOfPermanenceRareItem : RareItem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int MaxToA => 10;
-    public override int Rating => 30;
+    public override int TreasureRating => 30;
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResElec => true;

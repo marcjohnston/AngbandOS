@@ -15,6 +15,6 @@ internal class HatOfIntelligenceRareItem : RareItem
     public override string FriendlyName => "of Intelligence";
     public override bool Int => true;
     public override int MaxPval => 2;
-    public override int Rating => 13;
+    public override int TreasureRating => 13;
         public override bool SustInt => true;
 }

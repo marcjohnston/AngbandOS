@@ -18,7 +18,7 @@ internal class ShieldOfResistanceRareItem : RareItem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int MaxToA => 10;
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResElec => true;

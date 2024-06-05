@@ -15,6 +15,6 @@ internal class WeaponOfVitriolRareItem : RareItem
     public override int Cost => 8000;
     public override string FriendlyName => "of Vitriol";
     public override bool IgnoreAcid => true;
-    public override int Rating => 15;
+    public override int TreasureRating => 15;
     public override bool ResAcid => true;
     }

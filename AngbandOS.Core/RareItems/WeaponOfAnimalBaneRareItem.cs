@@ -15,7 +15,7 @@ internal class WeaponOfAnimalBaneRareItem : RareItem
     public override string FriendlyName => "of Animal Bane";
     public override bool Int => true;
     public override int MaxPval => 2;
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
     public override bool Regen => true;
     public override bool SlayAnimal => true;
     }

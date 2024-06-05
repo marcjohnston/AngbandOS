@@ -14,6 +14,6 @@ internal class WeaponOfPoisoningRareItem : RareItem
     public override bool BrandPois => true;
     public override int Cost => 4500;
     public override string FriendlyName => "of Poisoning";
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
     public override bool ResPois => true;
     }

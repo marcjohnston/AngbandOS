@@ -22,7 +22,7 @@ internal class WeaponElderSignInscribedRareItem : RareItem
     public override int MaxToA => 4;
     public override int MaxToD => 6;
     public override int MaxToH => 6;
-    public override int Rating => 30;
+    public override int TreasureRating => 30;
     public override bool ResFear => true;
     public override bool SeeInvis => true;
     public override bool SlayDemon => true;

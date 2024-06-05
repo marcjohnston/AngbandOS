@@ -14,6 +14,6 @@ internal class CloakOfStealthRareItem : RareItem
     public override int Cost => 500;
     public override string FriendlyName => "of Stealth";
     public override int MaxPval => 3;
-    public override int Rating => 10;
+    public override int TreasureRating => 10;
         public override bool Stealth => true;
 }

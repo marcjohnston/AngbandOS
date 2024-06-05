@@ -14,6 +14,6 @@ internal class ShieldOfResistFireRareItem : RareItem
     public override int Cost => 800;
     public override string FriendlyName => "of Resist Fire";
     public override bool IgnoreFire => true;
-    public override int Rating => 14;
+    public override int TreasureRating => 14;
     public override bool ResFire => true;
     }

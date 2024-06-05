@@ -16,6 +16,6 @@ internal class WeaponOfBurningRareItem : RareItem
     public override string FriendlyName => "of Burning";
     public override bool IgnoreFire => true;
     public override int Radius => 3;
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
     public override bool ResFire => true;
     }

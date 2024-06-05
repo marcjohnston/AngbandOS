@@ -13,6 +13,6 @@ internal class AmmoOfHurtDragonRareItem : RareItem
     private AmmoOfHurtDragonRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 35;
     public override string FriendlyName => "of Hurt Dragon";
-    public override int Rating => 10;
+    public override int TreasureRating => 10;
     public override bool SlayDragon => true;
     }

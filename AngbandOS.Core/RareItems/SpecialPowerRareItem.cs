@@ -13,5 +13,5 @@ internal class SpecialPowerRareItem : RareItem
     private SpecialPowerRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 0;
     public override string FriendlyName => "";
-    public override int Rating => 0;
+    public override int TreasureRating => 0;
     }

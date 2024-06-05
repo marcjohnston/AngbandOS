@@ -15,7 +15,7 @@ internal class HatOfLordlinessRareItem : RareItem
     public override int Cost => 2000;
     public override string FriendlyName => "of Lordliness";
     public override int MaxPval => 3;
-    public override int Rating => 17;
+    public override int TreasureRating => 17;
         public override bool SustCha => true;
     public override bool SustWis => true;
     public override bool Wis => true;

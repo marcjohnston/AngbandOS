@@ -15,5 +15,5 @@ internal class HatOfStupidityRareItem : RareItem
     public override string FriendlyName => "of Stupidity";
     public override bool Int => true;
     public override int MaxPval => 5;
-    public override int Rating => 0;
+    public override int TreasureRating => 0;
     }

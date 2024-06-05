@@ -14,5 +14,5 @@ internal class BootsWingedRareItem : RareItem
     public override int Cost => 250;
     public override bool Feather => true;
     public override string FriendlyName => "(Winged)";
-    public override int Rating => 7;
+    public override int TreasureRating => 7;
     }

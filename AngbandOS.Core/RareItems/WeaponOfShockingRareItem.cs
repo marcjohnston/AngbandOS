@@ -15,6 +15,6 @@ internal class WeaponOfShockingRareItem : RareItem
     public override int Cost => 4500;
     public override string FriendlyName => "of Shocking";
     public override bool IgnoreElec => true;
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
     public override bool ResElec => true;
     }

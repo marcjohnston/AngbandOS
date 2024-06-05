@@ -14,7 +14,7 @@ internal class HatOfWisdomRareItem : RareItem
     public override int Cost => 500;
     public override string FriendlyName => "of Wisdom";
     public override int MaxPval => 2;
-    public override int Rating => 13;
+    public override int TreasureRating => 13;
         public override bool SustWis => true;
     public override bool Wis => true;
 }

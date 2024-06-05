@@ -14,6 +14,6 @@ internal class ArmorOfResistAcidRareItem : RareItem
     public override int Cost => 1000;
     public override string FriendlyName => "of Resist Acid";
     public override bool IgnoreAcid => true;
-    public override int Rating => 16;
+    public override int TreasureRating => 16;
     public override bool ResAcid => true;
     }

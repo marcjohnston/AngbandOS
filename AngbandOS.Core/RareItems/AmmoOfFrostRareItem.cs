@@ -15,5 +15,5 @@ internal class AmmoOfFrostRareItem : RareItem
     public override int Cost => 25;
     public override string FriendlyName => "of Frost";
     public override bool IgnoreCold => true;
-    public override int Rating => 10;
+    public override int TreasureRating => 10;
     }

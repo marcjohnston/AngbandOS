@@ -14,7 +14,7 @@ internal class WeaponOfUndeadBaneRareItem : RareItem
     public override int Cost => 8000;
     public override string FriendlyName => "of Undead Bane";
     public override int MaxPval => 2;
-    public override int Rating => 24;
+    public override int TreasureRating => 24;
     public override bool SeeInvis => true;
     public override bool SlayUndead => true;
         public override bool Wis => true;

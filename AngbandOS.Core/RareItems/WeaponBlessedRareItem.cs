@@ -19,6 +19,6 @@ internal class WeaponBlessedRareItem : RareItem
     public override int Cost => 5000;
     public override string FriendlyName => "(Blessed)";
     public override int MaxPval => 3;
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
         public override bool Wis => true;
 }

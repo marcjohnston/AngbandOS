@@ -14,6 +14,6 @@ internal class WeaponVampiricRareItem : RareItem
     public override int Cost => 10000;
     public override string FriendlyName => "(Vampiric)";
     public override bool HoldLife => true;
-    public override int Rating => 25;
+    public override int TreasureRating => 25;
         public override bool Vampiric => true;
 }

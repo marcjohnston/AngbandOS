@@ -17,7 +17,7 @@ internal class GlovesOfPowerRareItem : RareItem
     public override int MaxPval => 5;
     public override int MaxToD => 5;
     public override int MaxToH => 5;
-    public override int Rating => 22;
+    public override int TreasureRating => 22;
     public override bool ShowMods => true;
         public override bool Str => true;
 }

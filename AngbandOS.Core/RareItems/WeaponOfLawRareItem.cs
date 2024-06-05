@@ -18,7 +18,7 @@ internal class WeaponOfLawRareItem : RareItem
     public override int MaxPval => 2;
     public override int MaxToD => 6;
     public override int MaxToH => 6;
-    public override int Rating => 26;
+    public override int TreasureRating => 26;
     public override bool SeeInvis => true;
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;

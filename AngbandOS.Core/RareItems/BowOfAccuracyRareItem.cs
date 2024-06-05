@@ -15,5 +15,5 @@ internal class BowOfAccuracyRareItem : RareItem
     public override string FriendlyName => "of Accuracy";
     public override int MaxToD => 5;
     public override int MaxToH => 15;
-    public override int Rating => 10;
+    public override int TreasureRating => 10;
     }

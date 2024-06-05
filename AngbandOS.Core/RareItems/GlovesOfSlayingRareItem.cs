@@ -15,6 +15,6 @@ internal class GlovesOfSlayingRareItem : RareItem
     public override string FriendlyName => "of Slaying";
     public override int MaxToD => 6;
     public override int MaxToH => 6;
-    public override int Rating => 17;
+    public override int TreasureRating => 17;
     public override bool ShowMods => true;
     }

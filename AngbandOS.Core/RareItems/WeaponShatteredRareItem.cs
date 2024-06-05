@@ -15,5 +15,5 @@ internal class WeaponShatteredRareItem : RareItem
     public override string FriendlyName => "(Shattered)";
     public override int MaxToD => 5;
     public override int MaxToH => 5;
-    public override int Rating => 0;
+    public override int TreasureRating => 0;
     }

@@ -2192,7 +2192,7 @@ internal sealed class Item : IComparable<Item>
                     TypeSpecificValue += Game.DieRoll(RareItem.MaxPval);
                 }
             }
-            Game.TreasureRating += RareItem.Rating;
+            Game.TreasureRating += RareItem.TreasureRating;
             return;
         }
         if (Factory != null)

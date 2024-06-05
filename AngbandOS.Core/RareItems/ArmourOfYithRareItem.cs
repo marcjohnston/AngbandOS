@@ -23,7 +23,7 @@ internal class ArmorOfYithRareItem : RareItem
     public override bool IgnoreFire => true;
     public override int MaxPval => 3;
     public override int MaxToA => 10;
-    public override int Rating => 25;
+    public override int TreasureRating => 25;
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResElec => true;

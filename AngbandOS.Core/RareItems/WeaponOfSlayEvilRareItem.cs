@@ -13,6 +13,6 @@ internal class WeaponOfSlayEvilRareItem : RareItem
     private WeaponOfSlayEvilRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 3500;
     public override string FriendlyName => "of Slay Evil";
-    public override int Rating => 18;
+    public override int TreasureRating => 18;
     public override bool SlayEvil => true;
     }

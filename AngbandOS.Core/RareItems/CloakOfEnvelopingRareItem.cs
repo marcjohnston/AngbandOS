@@ -15,6 +15,6 @@ internal class CloakOfEnvelopingRareItem : RareItem
     public override string FriendlyName => "of Enveloping";
     public override int MaxToD => 10;
     public override int MaxToH => 10;
-    public override int Rating => 0;
+    public override int TreasureRating => 0;
     public override bool ShowMods => true;
     }

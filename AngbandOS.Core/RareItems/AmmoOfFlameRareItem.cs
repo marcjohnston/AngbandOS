@@ -15,5 +15,5 @@ internal class AmmoOfFlameRareItem : RareItem
     public override int Cost => 30;
     public override string FriendlyName => "of Flame";
     public override bool IgnoreFire => true;
-    public override int Rating => 10;
+    public override int TreasureRating => 10;
     }

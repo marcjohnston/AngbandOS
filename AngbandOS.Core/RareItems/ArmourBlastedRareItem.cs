@@ -14,5 +14,5 @@ internal class ArmorBlastedRareItem : RareItem
     public override int Cost => 0;
     public override string FriendlyName => "(Blasted)";
     public override int MaxToA => 10;
-    public override int Rating => 0;
+    public override int TreasureRating => 0;
     }

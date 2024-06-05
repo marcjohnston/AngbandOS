@@ -15,6 +15,6 @@ internal class WeaponOfEarthquakesRareItem : RareItem
     public override string FriendlyName => "of Earthquakes";
     public override bool Impact => true;
     public override int MaxPval => 3;
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
         public override bool Tunnel => true;
 }

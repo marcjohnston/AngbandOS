@@ -14,6 +14,6 @@ internal class BootsOfSlownessRareItem : RareItem
     public override int Cost => 0;
     public override string FriendlyName => "of Slowness";
     public override int MaxPval => 5;
-    public override int Rating => 0;
+    public override int TreasureRating => 0;
         public override bool Speed => true;
 }

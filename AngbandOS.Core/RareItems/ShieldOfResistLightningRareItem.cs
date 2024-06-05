@@ -14,6 +14,6 @@ internal class ShieldOfResistLightningRareItem : RareItem
     public override int Cost => 400;
     public override string FriendlyName => "of Resist Lightning";
     public override bool IgnoreElec => true;
-    public override int Rating => 10;
+    public override int TreasureRating => 10;
     public override bool ResElec => true;
     }

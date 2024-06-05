@@ -14,7 +14,7 @@ internal class HatOfSeeingRareItem : RareItem
     public override int Cost => 1000;
     public override string FriendlyName => "of Seeing";
     public override int MaxPval => 5;
-    public override int Rating => 8;
+    public override int TreasureRating => 8;
     public override bool ResBlind => true;
     public override bool Search => true;
     public override bool SeeInvis => true;

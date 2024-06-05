@@ -15,5 +15,5 @@ internal class AmmoOfSlayingRareItem : RareItem
     public override string FriendlyName => "of Slaying";
     public override int MaxToD => 12;
     public override int MaxToH => 12;
-    public override int Rating => 15;
+    public override int TreasureRating => 15;
     }

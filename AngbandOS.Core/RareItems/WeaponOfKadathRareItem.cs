@@ -19,7 +19,7 @@ internal class WeaponOfKadathRareItem : RareItem
     public override int MaxPval => 2;
     public override int MaxToD => 5;
     public override int MaxToH => 5;
-    public override int Rating => 20;
+    public override int TreasureRating => 20;
     public override bool SeeInvis => true;
     public override bool SlayGiant => true;
     public override bool SlayOrc => true;
