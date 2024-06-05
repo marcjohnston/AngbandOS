@@ -22,6 +22,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
     public override int Ac => 50;
     public override bool Activate => true;
     public override int Cost => 500000;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 4;
     public override bool Feather => true;

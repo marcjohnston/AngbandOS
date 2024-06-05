@@ -20,6 +20,7 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool BrandFire => true;
     public override int Cost => 70000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 9;
     public override string FriendlyName => "'Firestaff'";

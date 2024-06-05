@@ -23,6 +23,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     public override bool Activate => true;
     public override bool Aggravate => true;
     public override int Cost => 400000;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 4;
     public override bool FreeAct => true;

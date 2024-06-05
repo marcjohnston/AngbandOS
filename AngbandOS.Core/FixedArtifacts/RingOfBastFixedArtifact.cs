@@ -22,6 +22,7 @@ internal class RingOfBastFixedArtifact : FixedArtifact
     public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 175000;
+    public override int TreasureRating => 20;
     public override int Dd => 0;
     public override bool Dex => true;
     public override int Ds => 0;

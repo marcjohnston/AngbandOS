@@ -34,6 +34,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
     public override bool Blessed => true;
     public override bool BrandFire => true;
     public override int Cost => 77777;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 6;
     public override bool Feather => true;

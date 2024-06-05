@@ -20,6 +20,7 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool Aggravate => true;
     public override int Cost => 500000;
+    public override int TreasureRating => 20;
     public override int Dd => 9;
     public override int Ds => 9;
     public override string FriendlyName => "of Worlds";

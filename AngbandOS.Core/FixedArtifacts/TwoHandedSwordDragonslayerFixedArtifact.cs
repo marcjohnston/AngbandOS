@@ -31,6 +31,7 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
     public override int Ac => 0;
     public override int Cost => 100000;
+    public override int TreasureRating => 20;
     public override int Dd => 3;
     public override int Ds => 6;
     public override bool FreeAct => true;

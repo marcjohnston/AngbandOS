@@ -20,6 +20,7 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool BrandPois => true;
     public override int Cost => 125000;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override bool Dex => true;
     public override int Ds => 4;

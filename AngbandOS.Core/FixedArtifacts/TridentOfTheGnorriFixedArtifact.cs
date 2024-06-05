@@ -37,6 +37,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactAc
     public override bool Activate => true;
     public override bool Blessed => true;
     public override int Cost => 120000;
+    public override int TreasureRating => 20;
     public override int Dd => 4;
     public override bool Dex => true;
     public override int Ds => 8;

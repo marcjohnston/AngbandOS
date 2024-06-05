@@ -24,6 +24,7 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     public override bool BrandPois => true;
     public override bool Chaotic => true;
     public override int Cost => 250000;
+    public override int TreasureRating => 20;
     public override int Dd => 6;
     public override int Ds => 5;
     public override bool FreeAct => true;

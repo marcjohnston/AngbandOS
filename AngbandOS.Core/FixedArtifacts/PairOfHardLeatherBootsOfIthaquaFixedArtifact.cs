@@ -22,6 +22,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact
     public override int Ac => 3;
     public override bool Activate => true;
     public override int Cost => 300000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "of Ithaqua";

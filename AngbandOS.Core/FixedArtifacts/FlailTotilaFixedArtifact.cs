@@ -23,6 +23,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     public override bool Activate => true;
     public override bool BrandFire => true;
     public override int Cost => 55000;
+    public override int TreasureRating => 20;
     public override int Dd => 3;
     public override int Ds => 6;
     public override string FriendlyName => "'Totila'";

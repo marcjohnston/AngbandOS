@@ -25,6 +25,7 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     public override int Ac => 3;
     public override bool Con => true;
     public override int Cost => 60000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 2;
     public override bool FreeAct => true;

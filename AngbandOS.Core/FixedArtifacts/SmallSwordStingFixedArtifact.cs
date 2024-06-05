@@ -26,6 +26,7 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     public override bool Blows => true;
     public override bool Con => true;
     public override int Cost => 100000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 6;

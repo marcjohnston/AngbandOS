@@ -33,6 +33,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
     public override bool Blessed => true;
     public override bool Blows => true;
     public override int Cost => 111111;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 5;
     public override string FriendlyName => "'Soulsword'";

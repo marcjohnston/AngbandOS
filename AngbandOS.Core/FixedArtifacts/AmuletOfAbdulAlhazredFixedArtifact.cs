@@ -22,6 +22,7 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact
     public override bool Activate => true;
     public override bool Cha => true;
     public override int Cost => 90000;
+    public override int TreasureRating => 20;
     public override int Dd => 0;
     public override int Ds => 0;
     public override bool FreeAct => true;

@@ -19,6 +19,7 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
     public override string Name => "The Lochaber Axe of the Dwarves";
     public override int Ac => 0;
     public override int Cost => 80000;
+    public override int TreasureRating => 20;
     public override int Dd => 3;
     public override int Ds => 8;
     public override string FriendlyName => "of the Dwarves";

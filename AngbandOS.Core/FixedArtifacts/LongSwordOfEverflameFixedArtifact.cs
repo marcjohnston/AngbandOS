@@ -36,6 +36,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     public override bool Activate => true;
     public override bool BrandFire => true;
     public override int Cost => 80000;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 5;
     public override bool FreeAct => true;

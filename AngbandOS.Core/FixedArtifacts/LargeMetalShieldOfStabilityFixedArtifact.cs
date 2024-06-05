@@ -24,6 +24,7 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
     public override string Name => "The Large Metal Shield of Stability";
     public override int Ac => 5;
     public override int Cost => 160000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 3;
     public override string FriendlyName => "of Stability";

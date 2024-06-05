@@ -28,6 +28,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact
     public override bool Cha => true;
     public override bool Con => true;
     public override int Cost => 200000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;

@@ -23,6 +23,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     public override bool Activate => true;
     public override bool BrandCold => true;
     public override int Cost => 300000;
+    public override int TreasureRating => 20;
     public override int Dd => 4;
     public override int Ds => 5;
     public override bool FreeAct => true;

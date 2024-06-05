@@ -24,6 +24,7 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
     public override bool BrandFire => true;
     public override bool Cha => true;
     public override int Cost => 250000;
+    public override int TreasureRating => 20;
     public override int Dd => 3;
     public override int Ds => 5;
     public override bool FreeAct => true;

@@ -36,6 +36,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
     public override int Ac => 5;
     public override bool Activate => true;
     public override int Cost => 110000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;

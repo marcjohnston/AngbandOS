@@ -20,6 +20,7 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool BrandElec => true;
     public override int Cost => 95000;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 5;
 

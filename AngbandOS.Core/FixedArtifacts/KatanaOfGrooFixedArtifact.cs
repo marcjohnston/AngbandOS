@@ -20,6 +20,7 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool Blows => true;
     public override int Cost => 75000;
+    public override int TreasureRating => 20;
     public override int Dd => 8;
     public override bool Dex => true;
     public override int Ds => 4;

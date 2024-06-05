@@ -21,6 +21,7 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
     public override bool Blessed => true;
     public override bool Chaotic => true;
     public override int Cost => 90000;
+    public override int TreasureRating => 20;
     public override int Dd => 3;
     public override bool Dex => true;
     public override int Ds => 8;

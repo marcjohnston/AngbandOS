@@ -31,6 +31,7 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword 'Vorpal Blade'";
     public override int Ac => 0;
     public override int Cost => 250000;
+    public override int TreasureRating => 20;
     public override int Dd => 5;
     public override bool Dex => true;
     public override int Ds => 5;

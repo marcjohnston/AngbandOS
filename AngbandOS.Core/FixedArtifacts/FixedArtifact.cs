@@ -83,6 +83,7 @@ internal abstract class FixedArtifact : ItemAdditiveBundle, IGetKey
 
     public abstract int Ac { get; }
 
+    public virtual int TreasureRating => 10;
 
     public abstract int Cost { get; }
 

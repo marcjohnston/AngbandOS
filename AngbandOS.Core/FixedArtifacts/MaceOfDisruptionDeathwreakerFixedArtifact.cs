@@ -22,6 +22,7 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     public override bool BrandFire => true;
     public override bool BrandPois => true;
     public override int Cost => 444444;
+    public override int TreasureRating => 20;
     public override int Dd => 7;
     public override int Ds => 8;
     public override string FriendlyName => "'Deathwreaker'";

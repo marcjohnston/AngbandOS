@@ -20,6 +20,7 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool Con => true;
     public override int Cost => 90000;
+    public override int TreasureRating => 20;
     public override int Dd => 3;
     public override int Ds => 8;
     public override bool Feather => true;

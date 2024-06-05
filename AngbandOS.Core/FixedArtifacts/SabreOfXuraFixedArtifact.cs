@@ -22,6 +22,7 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     public override bool BrandCold => true;
     public override bool Con => true;
     public override int Cost => 125000;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override bool Dex => true;
     public override int Ds => 7;

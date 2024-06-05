@@ -35,6 +35,7 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivati
     public override bool BrandElec => true;
     public override bool BrandFire => true;
     public override int Cost => 180000;
+    public override int TreasureRating => 20;
     public override int Dd => 4;
     public override int Ds => 6;
     public override bool FreeAct => true;

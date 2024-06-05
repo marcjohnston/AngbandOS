@@ -29,6 +29,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
     public override bool Activate => true;
     public override bool Cha => true;
     public override int Cost => 150000;
+    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 4;
     public override string FriendlyName => "of the Orcs";

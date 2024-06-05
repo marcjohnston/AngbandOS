@@ -27,6 +27,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool BrandElec => true;
     public override int Cost => 250000;
+    public override int TreasureRating => 20;
     public override int Dd => 9;
     public override int Ds => 3;
     public override bool FreeAct => true;

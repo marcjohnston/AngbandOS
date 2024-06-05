@@ -21,6 +21,7 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
     public override bool BrandElec => true;
     public override bool BrandFire => true;
     public override int Cost => 160000;
+    public override int TreasureRating => 20;
     public override int Dd => 3;
     public override int Ds => 6;
     public override string FriendlyName => "'Thunderfist'";

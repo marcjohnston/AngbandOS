@@ -22,6 +22,7 @@ internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
     public override bool Blows => true;
     public override bool Cha => true;
     public override int Cost => 66666;
+    public override int TreasureRating => 20;
     public override int Dd => 11;
     public override bool Dex => true;
     public override int Ds => 5;

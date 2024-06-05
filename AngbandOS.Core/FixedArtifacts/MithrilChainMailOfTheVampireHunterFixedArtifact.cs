@@ -22,6 +22,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
     public override int Ac => 28;
     public override bool Activate => true;
     public override int Cost => 135000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 4;
     public override string FriendlyName => "of the Vampire Hunter";

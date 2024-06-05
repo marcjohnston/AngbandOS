@@ -22,6 +22,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
     public override int Ac => 5;
     public override bool Activate => true;
     public override int Cost => 100000;
+    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 3;
     public override string FriendlyName => "'Skullkeeper'";

@@ -2129,11 +2129,7 @@ internal sealed class Item : IComparable<Item>
             {
                 IdentCursed = true;
             }
-            Game.TreasureRating += 10;
-            if (FixedArtifact.Cost > 50000)
-            {
-                Game.TreasureRating += 10;
-            }
+            Game.TreasureRating += FixedArtifact.TreasureRating;
             Game.SpecialTreasure = true;
             return;
         }

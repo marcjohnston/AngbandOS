@@ -18,6 +18,7 @@ internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool BrandPois => true;
     public override int Cost => 111000;
+    public override int TreasureRating => 20;
     public override int Dd => 4;
     public override int Ds => 5;
     public override string FriendlyName => "of Nyarlathotep";
