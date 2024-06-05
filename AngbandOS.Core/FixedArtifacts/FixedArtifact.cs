@@ -8,14 +8,9 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
+internal abstract class FixedArtifact : ItemAdditiveBundle, IGetKey
 {
-    protected readonly Game Game;
-
-    protected FixedArtifact(Game game)
-    {
-        Game = game;
-    }
+    protected FixedArtifact(Game game) : base(game) { }
 
     /// <summary>
     ///  Returns an activation object, if the fixed artifact can be activated; otherwise, null is returned.  This property is bound from ActivationName property
@@ -49,9 +44,9 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
     }
 
     /// <summary>
-    /// Represents the quantity of this artifact currently in existence.
+    /// Represents the quantity of this artifact currently in existence.  
     /// </summary>
-    public int CurNum = 0;
+    public int CurNum = 0; // TODO: This property should graduate into an ItemFactory as the Count property.
 
     /// <summary>
     /// Returns the multipler to use when being used to kill a dragon.  The SwordOfLightning returns a 3.  All other weapons return 1.
@@ -88,192 +83,21 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 
     public abstract int Ac { get; }
 
-    public virtual bool Activate { get; set; } = false;
-
-    public virtual bool AntiTheft { get; set; } = false;
-
-    public virtual bool Aggravate { get; set; } = false;
-
-    public virtual ArtifactBias? ArtifactBias { get; set; } = null;
-
-    public virtual bool Blessed { get; set; } = false;
-
-    public virtual bool Blows { get; set; } = false;
-
-    public virtual bool BrandAcid { get; set; } = false;
-
-    public virtual bool BrandCold { get; set; } = false;
-
-    public virtual bool BrandElec { get; set; } = false;
-
-    public virtual bool BrandFire { get; set; } = false;
-
-    public virtual bool BrandPois { get; set; } = false;
-
-    public virtual bool Cha { get; set; } = false;
-
-    public virtual bool Chaotic { get; set; } = false;
-
-    public virtual bool Con { get; set; } = false;
 
     public abstract int Cost { get; }
 
-    public virtual bool Cursed { get; set; } = false;
-
     public abstract int Dd { get; }
 
-    public virtual bool Dex { get; set; } = false;
-
-    public virtual bool DrainExp { get; set; } = false;
-
-    public virtual bool DreadCurse { get; set; } = false;
-
     public abstract int Ds { get; }
-
-    public virtual bool EasyKnow { get; set; } = false;
-
-    public virtual bool Feather { get; set; } = false;
-
-    public virtual bool FreeAct { get; set; } = false;
 
     public abstract string FriendlyName { get; }
 
     public virtual bool HasOwnType => false;
 
-    public virtual bool HeavyCurse { get; set; } = false;
-
-    public virtual bool HideType { get; set; } = false;
-
-    public virtual bool HoldLife { get; set; } = false;
-
-    public virtual bool IgnoreAcid { get; set; } = false;
-
-    public virtual bool IgnoreCold { get; set; } = false;
-
-    public virtual bool IgnoreElec { get; set; } = false;
-
-    public virtual bool IgnoreFire { get; set; } = false;
-
-    public virtual bool ImAcid { get; set; } = false;
-
-    public virtual bool ImCold { get; set; } = false;
-
-    public virtual bool ImElec { get; set; } = false;
-
-    public virtual bool ImFire { get; set; } = false;
-
-    public virtual bool Impact { get; set; } = false;
-
-    public virtual bool Infra { get; set; } = false;
-
-    public virtual bool InstaArt { get; set; } = false;
-
-    public virtual bool Int { get; set; } = false;
-
-    public virtual bool KillDragon { get; set; } = false;
-
     public abstract int Level { get; }
 
-    public virtual bool NoMagic { get; set; } = false;
-
-    public virtual bool NoTele { get; set; } = false;
-
-    public virtual bool PermaCurse { get; set; } = false;
-
     public abstract int InitialTypeSpecificValue { get; }
-
-    /// <summary>
-    /// Returns the radius of light that the additive bundle adds to the item light source; or 0, if the additive bundle doesn't modify the item light source capabilities.  Returns 0, by default.
-    /// </summary>
-    public virtual int Radius => 0;
-
     public abstract int Rarity { get; }
-
-    public virtual bool Reflect { get; set; } = false;
-
-    public virtual bool Regen { get; set; } = false;
-
-    public virtual bool ResAcid { get; set; } = false;
-
-    public virtual bool ResBlind { get; set; } = false;
-
-    public virtual bool ResChaos { get; set; } = false;
-
-    public virtual bool ResCold { get; set; } = false;
-
-    public virtual bool ResConf { get; set; } = false;
-
-    public virtual bool ResDark { get; set; } = false;
-
-    public virtual bool ResDisen { get; set; } = false;
-
-    public virtual bool ResElec { get; set; } = false;
-
-    public virtual bool ResFear { get; set; } = false;
-
-    public virtual bool ResFire { get; set; } = false;
-
-    public virtual bool ResLight { get; set; } = false;
-
-    public virtual bool ResNether { get; set; } = false;
-
-    public virtual bool ResNexus { get; set; } = false;
-
-    public virtual bool ResPois { get; set; } = false;
-
-    public virtual bool ResShards { get; set; } = false;
-
-    public virtual bool ResSound { get; set; } = false;
-
-    public virtual bool Search { get; set; } = false;
-
-    public virtual bool SeeInvis { get; set; } = false;
-
-    public virtual bool ShElec { get; set; } = false;
-
-    public virtual bool ShFire { get; set; } = false;
-
-    public virtual bool ShowMods { get; set; } = false;
-
-    public virtual bool SlayAnimal { get; set; } = false;
-
-    public virtual bool SlayDemon { get; set; } = false;
-
-    public virtual bool SlayDragon { get; set; } = false;
-
-    public virtual bool SlayEvil { get; set; } = false;
-
-    public virtual bool SlayGiant { get; set; } = false;
-
-    public virtual bool SlayOrc { get; set; } = false;
-
-    public virtual bool SlayTroll { get; set; } = false;
-
-    public virtual bool SlayUndead { get; set; } = false;
-
-    public virtual bool SlowDigest { get; set; } = false;
-
-    public virtual bool Speed { get; set; } = false;
-
-    public virtual bool Stealth { get; set; } = false;
-
-    public virtual bool Str { get; set; } = false;
-
-    public virtual bool SustCha { get; set; } = false;
-
-    public virtual bool SustCon { get; set; } = false;
-
-    public virtual bool SustDex { get; set; } = false;
-
-    public virtual bool SustInt { get; set; } = false;
-
-    public virtual bool SustStr { get; set; } = false;
-
-    public virtual bool SustWis { get; set; } = false;
-
-    public virtual bool Telepathy { get; set; } = false;
-
-    public virtual bool Teleport { get; set; } = false;
 
     public abstract int ToA { get; }
 
@@ -281,19 +105,5 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 
     public abstract int ToH { get; }
 
-    public virtual bool Tunnel { get; set; } = false;
-
-    public virtual bool Vampiric { get; set; } = false;
-
-    public virtual bool Vorpal { get; set; } = false;
-
     public abstract int Weight { get; }
-
-    public virtual bool Wis { get; set; } = false;
-
-    public virtual bool Wraith { get; set; } = false;
-
-    public virtual bool XtraMight { get; set; } = false;
-
-    public virtual bool XtraShots { get; set; } = false;
 }
