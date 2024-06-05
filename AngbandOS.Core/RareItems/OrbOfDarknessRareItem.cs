@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class OrbOfDarknessRareItem : RareItem
 {
     private OrbOfDarknessRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(TildeSymbol));
-    public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Orb of Darkness";
     public override int Cost => 1000;
     public override string FriendlyName => "of Darkness";
     public override bool IgnoreAcid => true;

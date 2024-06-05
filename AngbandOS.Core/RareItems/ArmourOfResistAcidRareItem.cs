@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class ArmorOfResistAcidRareItem : RareItem
 {
     private ArmorOfResistAcidRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
-    public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Armor of Resist Acid";
     public override int Cost => 1000;
     public override string FriendlyName => "of Resist Acid";
     public override bool IgnoreAcid => true;

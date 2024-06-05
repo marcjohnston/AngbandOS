@@ -55,14 +55,6 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
     public string GetKey => Key;
     public virtual void Bind() { }
 
-    /// <summary>
-    /// Returns the symbol to use for rendering.
-    /// </summary>
-    public abstract Symbol Symbol { get; }
-
-    public virtual ColorEnum Color => ColorEnum.White;
-    public abstract string Name { get; }
-
     public virtual bool Activate { get; set; } = false;
     public virtual bool AntiTheft { get; set; } = false;
 

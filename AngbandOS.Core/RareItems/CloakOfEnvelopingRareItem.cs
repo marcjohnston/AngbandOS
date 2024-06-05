@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class CloakOfEnvelopingRareItem : RareItem
 {
     private CloakOfEnvelopingRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenParenthesisSymbol));
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Cloak of Enveloping";
     public override int Cost => 0;
     public override string FriendlyName => "of Enveloping";
     public override int Level => 0;

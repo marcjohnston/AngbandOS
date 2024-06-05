@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class GlovesOfPowerRareItem : RareItem
 {
     private GlovesOfPowerRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Gloves of Power";
     public override int Cost => 2500;
     public override string FriendlyName => "of Power";
     public override bool HideType => true;

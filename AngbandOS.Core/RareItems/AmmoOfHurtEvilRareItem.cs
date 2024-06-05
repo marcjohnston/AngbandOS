@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class AmmoOfHurtEvilRareItem : RareItem
 {
     private AmmoOfHurtEvilRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBracketSymbol));
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Ammo of Hurt Evil";
     public override int Cost => 25;
     public override string FriendlyName => "of Hurt Evil";
     public override int Level => 0;

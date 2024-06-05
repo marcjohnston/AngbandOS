@@ -15,9 +15,6 @@ internal class WeaponElderSignInscribedRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsSustain == true).Choose();
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
-    public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Weapon (Elder Sign Inscribed)";
     public override bool Blessed => true;
     public override int Cost => 20000;
     public override string FriendlyName => "(Elder Sign Inscribed)";

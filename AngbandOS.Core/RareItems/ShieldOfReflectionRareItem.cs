@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class ShieldOfReflectionRareItem : RareItem
 {
     private ShieldOfReflectionRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseParenthesisSymbol));
-    public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Shield of Reflection";
     public override int Cost => 15000;
     public override string FriendlyName => "of Reflection";
     public override bool IgnoreAcid => true;

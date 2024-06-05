@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class CloakOfProtectionRareItem : RareItem
 {
     private CloakOfProtectionRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenParenthesisSymbol));
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Cloak of Protection";
     public override int Cost => 500;
     public override string FriendlyName => "of Protection";
     public override bool IgnoreAcid => true;

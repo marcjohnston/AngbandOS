@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponOfSlayUndeadRareItem : RareItem
 {
     private WeaponOfSlayUndeadRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
-    public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Weapon of Slay Undead";
     public override int Cost => 3500;
     public override string FriendlyName => "of Slay Undead";
     public override int Level => 0;

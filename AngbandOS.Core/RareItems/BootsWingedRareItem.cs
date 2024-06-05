@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class BootsWingedRareItem : RareItem
 {
     private BootsWingedRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Boots (Winged)";
     public override int Cost => 250;
     public override bool Feather => true;
     public override string FriendlyName => "(Winged)";

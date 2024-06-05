@@ -15,9 +15,6 @@ internal class HatOfTheMagiRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
-    public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Hat of the Magi";
     public override int Cost => 7500;
     public override string FriendlyName => "of the Magi";
     public override bool IgnoreAcid => true;

@@ -25,10 +25,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
         item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 50 + Game.DieRoll(50);
         return true;
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
     public override string? DescribeActivationEffect => "teleport every 50+d50 turns";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Weapon (Planar Weapon)";
     public override bool Activate => true;
     public override int Cost => 7000;
     public override bool FreeAct => true;

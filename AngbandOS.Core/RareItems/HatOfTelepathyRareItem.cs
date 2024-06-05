@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class HatOfTelepathyRareItem : RareItem
 {
     private HatOfTelepathyRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
-    public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Hat of Telepathy";
     public override int Cost => 50000;
     public override string FriendlyName => "of Telepathy";
     public override int Level => 0;

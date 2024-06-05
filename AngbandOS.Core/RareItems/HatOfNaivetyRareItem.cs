@@ -11,9 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class HatOfNaivetyRareItem : RareItem
 {
     private HatOfNaivetyRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
-    public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Hat of Naivety";
     public override int Cost => 0;
     public override string FriendlyName => "of Naivety";
     public override int Level => 0;

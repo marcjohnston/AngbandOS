@@ -15,9 +15,6 @@ internal class WeaponBlessedRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
-    public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Weapon (Blessed)";
     public override bool Blessed => true;
     public override int Cost => 5000;
     public override string FriendlyName => "(Blessed)";
