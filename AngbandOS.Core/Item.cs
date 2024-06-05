@@ -2796,9 +2796,9 @@ internal sealed class Item : IComparable<Item>
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
     }
 
-    private void GiveActivationPower()
+    private void GiveActivationPower() // TODO: There may not be any activiations
     {
-        Activation activation = null;
+        Activation? activation = null;
         if (RandomArtifactItemCharacteristics.ArtifactBias != null)
         {
             if (Game.DieRoll(100) < RandomArtifactItemCharacteristics.ArtifactBias.ActivationPowerChance)
