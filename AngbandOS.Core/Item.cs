@@ -521,14 +521,14 @@ internal sealed class Item : IComparable<Item>
     public bool IsArtifact => FixedArtifact != null || IsRandomArtifact;
 
     /// <summary>
-    /// Returns the name the player provided when this item was converted into a random artifact.
+    /// Returns the name the player provided when this item was converted into a random artifact, including an empty string; or null, if the item was never converted into a random artifact.
     /// </summary>
-    public string RandomArtifactName = "";
+    public string? RandomArtifactName = null;
 
     /// <summary>
     /// Returns true, if the item is a random artifact; false, otherwise.
     /// </summary>
-    public bool IsRandomArtifact => !String.IsNullOrEmpty(RandomArtifactName); // TODO: the name is all we have until we can use the random item characteristics as null
+    public bool IsRandomArtifact => RandomArtifactName != null;
 
     [Obsolete]
     public ItemTypeEnum Category => Factory.CategoryEnum; // TODO: Provided for backwards compatibility.  Will be deleted.
