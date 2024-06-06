@@ -27,7 +27,7 @@ internal class PlasmaProjectile : Projectile
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            oPtr.RefreshFlagBasedProperties();
+            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
             if (oPtr.Count > 1)
             {
                 plural = true;
@@ -36,7 +36,7 @@ internal class PlasmaProjectile : Projectile
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (oPtr.Characteristics.IgnoreFire)
+                if (characteristics.IgnoreFire)
                 {
                     ignore = true;
                 }
@@ -46,7 +46,7 @@ internal class PlasmaProjectile : Projectile
                 ignore = false;
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";
-                if (oPtr.Characteristics.IgnoreElec)
+                if (characteristics.IgnoreElec)
                 {
                     ignore = true;
                 }

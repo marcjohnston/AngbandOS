@@ -50,12 +50,12 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
             if (oPtr != null)
             {
                 // Perform some universal actions for items that are worn.
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Characteristics.DreadCurse && Game.DieRoll(100) == 1)
+                ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+                if (characteristics.DreadCurse && Game.DieRoll(100) == 1)
                 {
                     Game.ActivateDreadCurse();
                 }
-                if (oPtr.Characteristics.Teleport && Game.RandomLessThan(100) < 1)
+                if (characteristics.Teleport && Game.RandomLessThan(100) < 1)
                 {
                     if (oPtr.IdentCursed && !Game.HasAntiTeleport)
                     {

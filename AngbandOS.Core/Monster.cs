@@ -1225,42 +1225,42 @@ internal class Monster : IItemContainer
                     if ((Race.TakeItem || Race.KillItem) && !SmFriendly)
                     {
                         bool willHurt = false;
-                        item.RefreshFlagBasedProperties();
+                        ItemCharacteristics characteristics = item.RefreshFlagBasedProperties();
                         string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
-                        if (item.Characteristics.KillDragon && Race.Dragon)
+                        if (characteristics.KillDragon && Race.Dragon)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayDragon && Race.Dragon)
+                        if (characteristics.SlayDragon && Race.Dragon)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayTroll && Race.Troll)
+                        if (characteristics.SlayTroll && Race.Troll)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayGiant && Race.Giant)
+                        if (characteristics.SlayGiant && Race.Giant)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayOrc && Race.Orc)
+                        if (characteristics.SlayOrc && Race.Orc)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayDemon && Race.Demon)
+                        if (characteristics.SlayDemon && Race.Demon)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayUndead && Race.Undead)
+                        if (characteristics.SlayUndead && Race.Undead)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayAnimal && Race.Animal)
+                        if (characteristics.SlayAnimal && Race.Animal)
                         {
                             willHurt = true;
                         }
-                        if (item.Characteristics.SlayEvil && Race.Evil)
+                        if (characteristics.SlayEvil && Race.Evil)
                         {
                             willHurt = true;
                         }

@@ -26,8 +26,8 @@ internal class SelfKnowledgeScript : Script, IScript
             Item? oPtr = Game.GetInventoryItem(k);
             if (oPtr != null)
             {
-                oPtr.RefreshFlagBasedProperties();
-                inventoryCharacteristics.Merge(oPtr.Characteristics);
+                ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+                inventoryCharacteristics.Merge(characteristics);
             }
         }
         string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.IntValue);
@@ -357,80 +357,80 @@ internal class SelfKnowledgeScript : Script, IScript
         Item? meleeItem = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
         if (meleeItem != null)
         {
-            meleeItem.RefreshFlagBasedProperties();
-            if (meleeItem.Characteristics.Blessed)
+            ItemCharacteristics characteristics = meleeItem.RefreshFlagBasedProperties();
+            if (characteristics.Blessed)
             {
                 info[infoCount++] = "Your weapon has been blessed by the gods.";
             }
-            if (meleeItem.Characteristics.Chaotic)
+            if (characteristics.Chaotic)
             {
                 info[infoCount++] = "Your weapon is branded with the Yellow Sign.";
             }
-            if (meleeItem.Characteristics.Impact)
+            if (characteristics.Impact)
             {
                 info[infoCount++] = "The impact of your weapon can cause earthquakes.";
             }
-            if (meleeItem.Characteristics.Vorpal)
+            if (characteristics.Vorpal)
             {
                 info[infoCount++] = "Your weapon is very sharp.";
             }
-            if (meleeItem.Characteristics.Vampiric)
+            if (characteristics.Vampiric)
             {
                 info[infoCount++] = "Your weapon drains life from your foes.";
             }
-            if (meleeItem.Characteristics.BrandAcid)
+            if (characteristics.BrandAcid)
             {
                 info[infoCount++] = "Your weapon melts your foes.";
             }
-            if (meleeItem.Characteristics.BrandElec)
+            if (characteristics.BrandElec)
             {
                 info[infoCount++] = "Your weapon shocks your foes.";
             }
-            if (meleeItem.Characteristics.BrandFire)
+            if (characteristics.BrandFire)
             {
                 info[infoCount++] = "Your weapon burns your foes.";
             }
-            if (meleeItem.Characteristics.BrandCold)
+            if (characteristics.BrandCold)
             {
                 info[infoCount++] = "Your weapon freezes your foes.";
             }
-            if (meleeItem.Characteristics.BrandPois)
+            if (characteristics.BrandPois)
             {
                 info[infoCount++] = "Your weapon poisons your foes.";
             }
-            if (meleeItem.Characteristics.SlayAnimal)
+            if (characteristics.SlayAnimal)
             {
                 info[infoCount++] = "Your weapon strikes at animals with extra force.";
             }
-            if (meleeItem.Characteristics.SlayEvil)
+            if (characteristics.SlayEvil)
             {
                 info[infoCount++] = "Your weapon strikes at evil with extra force.";
             }
-            if (meleeItem.Characteristics.SlayUndead)
+            if (characteristics.SlayUndead)
             {
                 info[infoCount++] = "Your weapon strikes at undead with holy wrath.";
             }
-            if (meleeItem.Characteristics.SlayDemon)
+            if (characteristics.SlayDemon)
             {
                 info[infoCount++] = "Your weapon strikes at demons with holy wrath.";
             }
-            if (meleeItem.Characteristics.SlayOrc)
+            if (characteristics.SlayOrc)
             {
                 info[infoCount++] = "Your weapon is especially deadly against orcs.";
             }
-            if (meleeItem.Characteristics.SlayTroll)
+            if (characteristics.SlayTroll)
             {
                 info[infoCount++] = "Your weapon is especially deadly against trolls.";
             }
-            if (meleeItem.Characteristics.SlayGiant)
+            if (characteristics.SlayGiant)
             {
                 info[infoCount++] = "Your weapon is especially deadly against giants.";
             }
-            if (meleeItem.Characteristics.SlayDragon)
+            if (characteristics.SlayDragon)
             {
                 info[infoCount++] = "Your weapon is especially deadly against dragons.";
             }
-            if (meleeItem.Characteristics.KillDragon)
+            if (characteristics.KillDragon)
             {
                 info[infoCount++] = "Your weapon is a great bane of dragons.";
             }

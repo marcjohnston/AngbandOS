@@ -14,8 +14,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Item : IComparable<Item>
 {
-    public ItemCharacteristics Characteristics = new ItemCharacteristics();
-
     /// <summary>
     /// Returns the factory that created this item.
     /// </summary>
@@ -559,10 +557,10 @@ internal sealed class Item : IComparable<Item>
     {
         int mult = 1;
         MonsterRace rPtr = mPtr.Race;
-        RefreshFlagBasedProperties();
+        ItemCharacteristics characteristics = RefreshFlagBasedProperties();
         if (Factory.GetsDamageMultiplier)
         {
-            if (Characteristics.SlayAnimal && rPtr.Animal)
+            if (characteristics.SlayAnimal && rPtr.Animal)
             {
                 if (mPtr.IsVisible)
                 {
@@ -573,7 +571,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (Characteristics.SlayEvil && rPtr.Evil)
+            if (characteristics.SlayEvil && rPtr.Evil)
             {
                 if (mPtr.IsVisible)
                 {
@@ -584,7 +582,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (Characteristics.SlayUndead && rPtr.Undead)
+            if (characteristics.SlayUndead && rPtr.Undead)
             {
                 if (mPtr.IsVisible)
                 {
@@ -595,7 +593,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (Characteristics.SlayDemon && rPtr.Demon)
+            if (characteristics.SlayDemon && rPtr.Demon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -606,7 +604,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (Characteristics.SlayOrc && rPtr.Orc)
+            if (characteristics.SlayOrc && rPtr.Orc)
             {
                 if (mPtr.IsVisible)
                 {
@@ -617,7 +615,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (Characteristics.SlayTroll && rPtr.Troll)
+            if (characteristics.SlayTroll && rPtr.Troll)
             {
                 if (mPtr.IsVisible)
                 {
@@ -628,7 +626,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (Characteristics.SlayGiant && rPtr.Giant)
+            if (characteristics.SlayGiant && rPtr.Giant)
             {
                 if (mPtr.IsVisible)
                 {
@@ -639,7 +637,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (Characteristics.SlayDragon && rPtr.Dragon)
+            if (characteristics.SlayDragon && rPtr.Dragon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -650,7 +648,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (Characteristics.KillDragon && rPtr.Dragon)
+            if (characteristics.KillDragon && rPtr.Dragon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -665,7 +663,7 @@ internal sealed class Item : IComparable<Item>
                     mult *= FixedArtifact.KillDragonMultiplier;
                 }
             }
-            if (Characteristics.BrandAcid)
+            if (characteristics.BrandAcid)
             {
                 if (rPtr.ImmuneAcid)
                 {
@@ -682,7 +680,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (Characteristics.BrandElec)
+            if (characteristics.BrandElec)
             {
                 if (rPtr.ImmuneLightning)
                 {
@@ -699,7 +697,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (Characteristics.BrandFire)
+            if (characteristics.BrandFire)
             {
                 if (rPtr.ImmuneFire)
                 {
@@ -716,7 +714,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (Characteristics.BrandCold)
+            if (characteristics.BrandCold)
             {
                 if (rPtr.ImmuneCold)
                 {
@@ -733,7 +731,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (Characteristics.BrandPois)
+            if (characteristics.BrandPois)
             {
                 if (rPtr.ImmunePoison)
                 {
@@ -980,344 +978,344 @@ internal sealed class Item : IComparable<Item>
     public int FlagBasedCost(int plusses)
     {
         int total = 0;
-        RefreshFlagBasedProperties();
-        if (Characteristics.Str)
+        ItemCharacteristics characteristics = RefreshFlagBasedProperties();
+        if (characteristics.Str)
         {
             total += 1000 * plusses;
         }
-        if (Characteristics.Int)
+        if (characteristics.Int)
         {
             total += 1000 * plusses;
         }
-        if (Characteristics.Wis)
+        if (characteristics.Wis)
         {
             total += 1000 * plusses;
         }
-        if (Characteristics.Dex)
+        if (characteristics.Dex)
         {
             total += 1000 * plusses;
         }
-        if (Characteristics.Con)
+        if (characteristics.Con)
         {
             total += 1000 * plusses;
         }
-        if (Characteristics.Cha)
+        if (characteristics.Cha)
         {
             total += 250 * plusses;
         }
-        if (Characteristics.Chaotic)
+        if (characteristics.Chaotic)
         {
             total += 10000;
         }
-        if (Characteristics.Vampiric)
+        if (characteristics.Vampiric)
         {
             total += 13000;
         }
-        if (Characteristics.Stealth)
+        if (characteristics.Stealth)
         {
             total += 250 * plusses;
         }
-        if (Characteristics.Search)
+        if (characteristics.Search)
         {
             total += 100 * plusses;
         }
-        if (Characteristics.Infra)
+        if (characteristics.Infra)
         {
             total += 150 * plusses;
         }
-        if (Characteristics.Tunnel)
+        if (characteristics.Tunnel)
         {
             total += 175 * plusses;
         }
-        if (Characteristics.Speed && plusses > 0)
+        if (characteristics.Speed && plusses > 0)
         {
             total += 30000 * plusses;
         }
-        if (Characteristics.Blows && plusses > 0)
+        if (characteristics.Blows && plusses > 0)
         {
             total += 2000 * plusses;
         }
-        if (Characteristics.AntiTheft)
+        if (characteristics.AntiTheft)
         {
             total += 0;
         }
-        if (Characteristics.SlayAnimal)
+        if (characteristics.SlayAnimal)
         {
             total += 3500;
         }
-        if (Characteristics.SlayEvil)
+        if (characteristics.SlayEvil)
         {
             total += 4500;
         }
-        if (Characteristics.SlayUndead)
+        if (characteristics.SlayUndead)
         {
             total += 3500;
         }
-        if (Characteristics.SlayDemon)
+        if (characteristics.SlayDemon)
         {
             total += 3500;
         }
-        if (Characteristics.SlayOrc)
+        if (characteristics.SlayOrc)
         {
             total += 3000;
         }
-        if (Characteristics.SlayTroll)
+        if (characteristics.SlayTroll)
         {
             total += 3500;
         }
-        if (Characteristics.SlayGiant)
+        if (characteristics.SlayGiant)
         {
             total += 3500;
         }
-        if (Characteristics.SlayDragon)
+        if (characteristics.SlayDragon)
         {
             total += 3500;
         }
-        if (Characteristics.KillDragon)
+        if (characteristics.KillDragon)
         {
             total += 5500;
         }
-        if (Characteristics.Vorpal)
+        if (characteristics.Vorpal)
         {
             total += 5000;
         }
-        if (Characteristics.Impact)
+        if (characteristics.Impact)
         {
             total += 5000;
         }
-        if (Characteristics.BrandPois)
+        if (characteristics.BrandPois)
         {
             total += 7500;
         }
-        if (Characteristics.BrandAcid)
+        if (characteristics.BrandAcid)
         {
             total += 7500;
         }
-        if (Characteristics.BrandElec)
+        if (characteristics.BrandElec)
         {
             total += 7500;
         }
-        if (Characteristics.BrandFire)
+        if (characteristics.BrandFire)
         {
             total += 5000;
         }
-        if (Characteristics.BrandCold)
+        if (characteristics.BrandCold)
         {
             total += 5000;
         }
-        if (Characteristics.SustStr)
+        if (characteristics.SustStr)
         {
             total += 850;
         }
-        if (Characteristics.SustInt)
+        if (characteristics.SustInt)
         {
             total += 850;
         }
-        if (Characteristics.SustWis)
+        if (characteristics.SustWis)
         {
             total += 850;
         }
-        if (Characteristics.SustDex)
+        if (characteristics.SustDex)
         {
             total += 850;
         }
-        if (Characteristics.SustCon)
+        if (characteristics.SustCon)
         {
             total += 850;
         }
-        if (Characteristics.SustCha)
+        if (characteristics.SustCha)
         {
             total += 250;
         }
-        if (Characteristics.ImAcid)
+        if (characteristics.ImAcid)
         {
             total += 10000;
         }
-        if (Characteristics.ImElec)
+        if (characteristics.ImElec)
         {
             total += 10000;
         }
-        if (Characteristics.ImFire)
+        if (characteristics.ImFire)
         {
             total += 10000;
         }
-        if (Characteristics.ImCold)
+        if (characteristics.ImCold)
         {
             total += 10000;
         }
-        if (Characteristics.Reflect)
+        if (characteristics.Reflect)
         {
             total += 10000;
         }
-        if (Characteristics.FreeAct)
+        if (characteristics.FreeAct)
         {
             total += 4500;
         }
-        if (Characteristics.HoldLife)
+        if (characteristics.HoldLife)
         {
             total += 8500;
         }
-        if (Characteristics.ResAcid)
+        if (characteristics.ResAcid)
         {
             total += 1250;
         }
-        if (Characteristics.ResElec)
+        if (characteristics.ResElec)
         {
             total += 1250;
         }
-        if (Characteristics.ResFire)
+        if (characteristics.ResFire)
         {
             total += 1250;
         }
-        if (Characteristics.ResCold)
+        if (characteristics.ResCold)
         {
             total += 1250;
         }
-        if (Characteristics.ResPois)
+        if (characteristics.ResPois)
         {
             total += 2500;
         }
-        if (Characteristics.ResFear)
+        if (characteristics.ResFear)
         {
             total += 2500;
         }
-        if (Characteristics.ResLight)
+        if (characteristics.ResLight)
         {
             total += 1750;
         }
-        if (Characteristics.ResDark)
+        if (characteristics.ResDark)
         {
             total += 1750;
         }
-        if (Characteristics.ResBlind)
+        if (characteristics.ResBlind)
         {
             total += 2000;
         }
-        if (Characteristics.ResConf)
+        if (characteristics.ResConf)
         {
             total += 2000;
         }
-        if (Characteristics.ResSound)
+        if (characteristics.ResSound)
         {
             total += 2000;
         }
-        if (Characteristics.ResShards)
+        if (characteristics.ResShards)
         {
             total += 2000;
         }
-        if (Characteristics.ResNether)
+        if (characteristics.ResNether)
         {
             total += 2000;
         }
-        if (Characteristics.ResNexus)
+        if (characteristics.ResNexus)
         {
             total += 2000;
         }
-        if (Characteristics.ResChaos)
+        if (characteristics.ResChaos)
         {
             total += 2000;
         }
-        if (Characteristics.ResDisen)
+        if (characteristics.ResDisen)
         {
             total += 10000;
         }
-        if (Characteristics.ShFire)
+        if (characteristics.ShFire)
         {
             total += 5000;
         }
-        if (Characteristics.ShElec)
+        if (characteristics.ShElec)
         {
             total += 5000;
         }
-        if (Characteristics.NoTele)
+        if (characteristics.NoTele)
         {
             total += 2500;
         }
-        if (Characteristics.NoMagic)
+        if (characteristics.NoMagic)
         {
             total += 2500;
         }
-        if (Characteristics.Wraith)
+        if (characteristics.Wraith)
         {
             total += 250000;
         }
-        if (Characteristics.DreadCurse)
+        if (characteristics.DreadCurse)
         {
             total -= 15000;
         }
-        if (Characteristics.EasyKnow)
+        if (characteristics.EasyKnow)
         {
             total += 0;
         }
-        if (Characteristics.HideType)
+        if (characteristics.HideType)
         {
             total += 0;
         }
-        if (Characteristics.ShowMods)
+        if (characteristics.ShowMods)
         {
             total += 0;
         }
-        if (Characteristics.InstaArt)
+        if (characteristics.InstaArt)
         {
             total += 0;
         }
-        if (Characteristics.Feather)
+        if (characteristics.Feather)
         {
             total += 1250;
         }
-        if (Characteristics.Radius > 0)
+        if (characteristics.Radius > 0)
         {
             total += 1250;
         }
-        if (Characteristics.SeeInvis)
+        if (characteristics.SeeInvis)
         {
             total += 2000;
         }
-        if (Characteristics.Telepathy)
+        if (characteristics.Telepathy)
         {
             total += 12500;
         }
-        if (Characteristics.SlowDigest)
+        if (characteristics.SlowDigest)
         {
             total += 750;
         }
-        if (Characteristics.Regen)
+        if (characteristics.Regen)
         {
             total += 2500;
         }
-        if (Characteristics.XtraMight)
+        if (characteristics.XtraMight)
         {
             total += 2250;
         }
-        if (Characteristics.XtraShots)
+        if (characteristics.XtraShots)
         {
             total += 10000;
         }
-        if (Characteristics.IgnoreAcid)
+        if (characteristics.IgnoreAcid)
         {
             total += 100;
         }
-        if (Characteristics.IgnoreElec)
+        if (characteristics.IgnoreElec)
         {
             total += 100;
         }
-        if (Characteristics.IgnoreFire)
+        if (characteristics.IgnoreFire)
         {
             total += 100;
         }
-        if (Characteristics.IgnoreCold)
+        if (characteristics.IgnoreCold)
         {
             total += 100;
         }
-        if (Characteristics.Activate)
+        if (characteristics.Activate)
         {
             total += 100;
         }
-        if (Characteristics.DrainExp)
+        if (characteristics.DrainExp)
         {
             total -= 12500;
         }
-        if (Characteristics.Teleport)
+        if (characteristics.Teleport)
         {
             if (IdentCursed)
             {
@@ -1328,23 +1326,23 @@ internal sealed class Item : IComparable<Item>
                 total += 250;
             }
         }
-        if (Characteristics.Aggravate)
+        if (characteristics.Aggravate)
         {
             total -= 10000;
         }
-        if (Characteristics.Blessed)
+        if (characteristics.Blessed)
         {
             total += 750;
         }
-        if (Characteristics.Cursed)
+        if (characteristics.Cursed)
         {
             total -= 5000;
         }
-        if (Characteristics.HeavyCurse)
+        if (characteristics.HeavyCurse)
         {
             total -= 12500;
         }
-        if (Characteristics.PermaCurse)
+        if (characteristics.PermaCurse)
         {
             total -= 15000;
         }
@@ -1407,34 +1405,35 @@ internal sealed class Item : IComparable<Item>
     /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
     /// the flag-based properties.
     /// </summary>
-    public void RefreshFlagBasedProperties()
+    public ItemCharacteristics RefreshFlagBasedProperties()
     {
         // All characteristics are set to false.
-        Characteristics = new ItemCharacteristics();
+        ItemCharacteristics characteristics = new ItemCharacteristics();
 
         // Merge the characteristics from the base item category.
-        Characteristics.Merge(Factory);
+        characteristics.Merge(Factory);
 
         // Now merge the characteristics from the fixed artifact, if there is one.
         if (FixedArtifact != null)
         {
-            Characteristics.Merge(FixedArtifact);
+            characteristics.Merge(FixedArtifact);
         }
 
         // Now merge the characteristics from the rare item type, if there is one.
         if (RareItem != null)
         {
-            Characteristics.Merge(RareItem);
+            characteristics.Merge(RareItem);
         }
 
         // Finally, merge any additional random artifact characteristics, if there are any.
-        Characteristics.Merge(RandomArtifactItemCharacteristics);
+        characteristics.Merge(RandomArtifactItemCharacteristics);
 
         // If there are any random characteristics, apply those also.
         if (RandomPower != null)
         {
-            Characteristics.Merge(RandomPower);
+            characteristics.Merge(RandomPower);
         }
+        return characteristics;
     }
 
     public ItemQualityRating? GetVagueQualityRating()
@@ -1490,8 +1489,8 @@ internal sealed class Item : IComparable<Item>
     {
         int i = 0, j, k;
         string[] info = new string[128];
-        RefreshFlagBasedProperties();
-        if (Characteristics.Activate)
+        ItemCharacteristics characteristics = RefreshFlagBasedProperties();
+        if (characteristics.Activate)
         {
             info[i++] = "It can be activated for...";
             if (FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(FixedArtifact.GetType()))
@@ -1518,328 +1517,328 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = categoryIdentity;
         }
-        if (Characteristics.ArtifactBias != null)
+        if (characteristics.ArtifactBias != null)
         {
-            info[i++] = $"It has an affinity for {Characteristics.ArtifactBias.AffinityName.ToLower()}.";
+            info[i++] = $"It has an affinity for {characteristics.ArtifactBias.AffinityName.ToLower()}.";
         }
-        if (Characteristics.Str)
+        if (characteristics.Str)
         {
             info[i++] = "It affects your strength.";
         }
-        if (Characteristics.Int)
+        if (characteristics.Int)
         {
             info[i++] = "It affects your intelligence.";
         }
-        if (Characteristics.Wis)
+        if (characteristics.Wis)
         {
             info[i++] = "It affects your wisdom.";
         }
-        if (Characteristics.Dex)
+        if (characteristics.Dex)
         {
             info[i++] = "It affects your dexterity.";
         }
-        if (Characteristics.Con)
+        if (characteristics.Con)
         {
             info[i++] = "It affects your constitution.";
         }
-        if (Characteristics.Cha)
+        if (characteristics.Cha)
         {
             info[i++] = "It affects your charisma.";
         }
-        if (Characteristics.Stealth)
+        if (characteristics.Stealth)
         {
             info[i++] = "It affects your stealth.";
         }
-        if (Characteristics.Search)
+        if (characteristics.Search)
         {
             info[i++] = "It affects your searching.";
         }
-        if (Characteristics.Infra)
+        if (characteristics.Infra)
         {
             info[i++] = "It affects your infravision.";
         }
-        if (Characteristics.Tunnel)
+        if (characteristics.Tunnel)
         {
             info[i++] = "It affects your ability to tunnel.";
         }
-        if (Characteristics.Speed)
+        if (characteristics.Speed)
         {
             info[i++] = "It affects your movement speed.";
         }
-        if (Characteristics.Blows)
+        if (characteristics.Blows)
         {
             info[i++] = "It affects your attack speed.";
         }
-        if (Characteristics.BrandAcid)
+        if (characteristics.BrandAcid)
         {
             info[i++] = "It does extra damage from acid.";
         }
-        if (Characteristics.BrandElec)
+        if (characteristics.BrandElec)
         {
             info[i++] = "It does extra damage from electricity.";
         }
-        if (Characteristics.BrandFire)
+        if (characteristics.BrandFire)
         {
             info[i++] = "It does extra damage from fire.";
         }
-        if (Characteristics.BrandCold)
+        if (characteristics.BrandCold)
         {
             info[i++] = "It does extra damage from frost.";
         }
-        if (Characteristics.BrandPois)
+        if (characteristics.BrandPois)
         {
             info[i++] = "It poisons your foes.";
         }
-        if (Characteristics.Chaotic)
+        if (characteristics.Chaotic)
         {
             info[i++] = "It produces chaotic effects.";
         }
-        if (Characteristics.Vampiric)
+        if (characteristics.Vampiric)
         {
             info[i++] = "It drains life from your foes.";
         }
-        if (Characteristics.Impact)
+        if (characteristics.Impact)
         {
             info[i++] = "It can cause earthquakes.";
         }
 
-        if (Characteristics.Radius > 0)
+        if (characteristics.Radius > 0)
         {
             string burnRate = Factory.BurnRate == 0 ? "forever" : "when fueled";
-            info[i++] = $"It provides light (radius {Characteristics.Radius}) {burnRate}.";
+            info[i++] = $"It provides light (radius {characteristics.Radius}) {burnRate}.";
         }
 
-        if (Characteristics.Vorpal)
+        if (characteristics.Vorpal)
         {
             info[i++] = "It is very sharp and can cut your foes.";
         }
-        if (Characteristics.KillDragon)
+        if (characteristics.KillDragon)
         {
             info[i++] = "It is a great bane of dragons.";
         }
-        else if (Characteristics.SlayDragon)
+        else if (characteristics.SlayDragon)
         {
             info[i++] = "It is especially deadly against dragons.";
         }
-        if (Characteristics.SlayOrc)
+        if (characteristics.SlayOrc)
         {
             info[i++] = "It is especially deadly against orcs.";
         }
-        if (Characteristics.SlayTroll)
+        if (characteristics.SlayTroll)
         {
             info[i++] = "It is especially deadly against trolls.";
         }
-        if (Characteristics.SlayGiant)
+        if (characteristics.SlayGiant)
         {
             info[i++] = "It is especially deadly against giants.";
         }
-        if (Characteristics.SlayDemon)
+        if (characteristics.SlayDemon)
         {
             info[i++] = "It strikes at demons with holy wrath.";
         }
-        if (Characteristics.SlayUndead)
+        if (characteristics.SlayUndead)
         {
             info[i++] = "It strikes at undead with holy wrath.";
         }
-        if (Characteristics.SlayEvil)
+        if (characteristics.SlayEvil)
         {
             info[i++] = "It fights against evil with holy fury.";
         }
-        if (Characteristics.SlayAnimal)
+        if (characteristics.SlayAnimal)
         {
             info[i++] = "It is especially deadly against natural creatures.";
         }
-        if (Characteristics.SustStr)
+        if (characteristics.SustStr)
         {
             info[i++] = "It sustains your strength.";
         }
-        if (Characteristics.SustInt)
+        if (characteristics.SustInt)
         {
             info[i++] = "It sustains your intelligence.";
         }
-        if (Characteristics.SustWis)
+        if (characteristics.SustWis)
         {
             info[i++] = "It sustains your wisdom.";
         }
-        if (Characteristics.SustDex)
+        if (characteristics.SustDex)
         {
             info[i++] = "It sustains your dexterity.";
         }
-        if (Characteristics.SustCon)
+        if (characteristics.SustCon)
         {
             info[i++] = "It sustains your constitution.";
         }
-        if (Characteristics.SustCha)
+        if (characteristics.SustCha)
         {
             info[i++] = "It sustains your charisma.";
         }
-        if (Characteristics.ImAcid)
+        if (characteristics.ImAcid)
         {
             info[i++] = "It provides immunity to acid.";
         }
-        if (Characteristics.ImElec)
+        if (characteristics.ImElec)
         {
             info[i++] = "It provides immunity to electricity.";
         }
-        if (Characteristics.ImFire)
+        if (characteristics.ImFire)
         {
             info[i++] = "It provides immunity to fire.";
         }
-        if (Characteristics.ImCold)
+        if (characteristics.ImCold)
         {
             info[i++] = "It provides immunity to cold.";
         }
-        if (Characteristics.FreeAct)
+        if (characteristics.FreeAct)
         {
             info[i++] = "It provides immunity to paralysis.";
         }
-        if (Characteristics.HoldLife)
+        if (characteristics.HoldLife)
         {
             info[i++] = "It provides resistance to life draining.";
         }
-        if (Characteristics.ResFear)
+        if (characteristics.ResFear)
         {
             info[i++] = "It makes you completely fearless.";
         }
-        if (Characteristics.ResAcid)
+        if (characteristics.ResAcid)
         {
             info[i++] = "It provides resistance to acid.";
         }
-        if (Characteristics.ResElec)
+        if (characteristics.ResElec)
         {
             info[i++] = "It provides resistance to electricity.";
         }
-        if (Characteristics.ResFire)
+        if (characteristics.ResFire)
         {
             info[i++] = "It provides resistance to fire.";
         }
-        if (Characteristics.ResCold)
+        if (characteristics.ResCold)
         {
             info[i++] = "It provides resistance to cold.";
         }
-        if (Characteristics.ResPois)
+        if (characteristics.ResPois)
         {
             info[i++] = "It provides resistance to poison.";
         }
-        if (Characteristics.ResLight)
+        if (characteristics.ResLight)
         {
             info[i++] = "It provides resistance to light.";
         }
-        if (Characteristics.ResDark)
+        if (characteristics.ResDark)
         {
             info[i++] = "It provides resistance to dark.";
         }
-        if (Characteristics.ResBlind)
+        if (characteristics.ResBlind)
         {
             info[i++] = "It provides resistance to blindness.";
         }
-        if (Characteristics.ResConf)
+        if (characteristics.ResConf)
         {
             info[i++] = "It provides resistance to confusion.";
         }
-        if (Characteristics.ResSound)
+        if (characteristics.ResSound)
         {
             info[i++] = "It provides resistance to sound.";
         }
-        if (Characteristics.ResShards)
+        if (characteristics.ResShards)
         {
             info[i++] = "It provides resistance to shards.";
         }
-        if (Characteristics.ResNether)
+        if (characteristics.ResNether)
         {
             info[i++] = "It provides resistance to nether.";
         }
-        if (Characteristics.ResNexus)
+        if (characteristics.ResNexus)
         {
             info[i++] = "It provides resistance to nexus.";
         }
-        if (Characteristics.ResChaos)
+        if (characteristics.ResChaos)
         {
             info[i++] = "It provides resistance to chaos.";
         }
-        if (Characteristics.ResDisen)
+        if (characteristics.ResDisen)
         {
             info[i++] = "It provides resistance to disenchantment.";
         }
-        if (Characteristics.Wraith)
+        if (characteristics.Wraith)
         {
             info[i++] = "It renders you incorporeal.";
         }
-        if (Characteristics.Feather)
+        if (characteristics.Feather)
         {
             info[i++] = "It allows you to levitate.";
         }
-        if (Characteristics.Radius > 0 && Factory.BurnRate == 0)
+        if (characteristics.Radius > 0 && Factory.BurnRate == 0)
         {
             info[i++] = "It provides permanent light.";
         }
-        if (Characteristics.SeeInvis)
+        if (characteristics.SeeInvis)
         {
             info[i++] = "It allows you to see invisible monsters.";
         }
-        if (Characteristics.Telepathy)
+        if (characteristics.Telepathy)
         {
             info[i++] = "It gives telepathic powers.";
         }
-        if (Characteristics.SlowDigest)
+        if (characteristics.SlowDigest)
         {
             info[i++] = "It slows your metabolism.";
         }
-        if (Characteristics.Regen)
+        if (characteristics.Regen)
         {
             info[i++] = "It speeds your regenerative powers.";
         }
-        if (Characteristics.Reflect)
+        if (characteristics.Reflect)
         {
             info[i++] = "It reflects bolts and arrows.";
         }
-        if (Characteristics.ShFire)
+        if (characteristics.ShFire)
         {
             info[i++] = "It produces a fiery sheath.";
         }
-        if (Characteristics.ShElec)
+        if (characteristics.ShElec)
         {
             info[i++] = "It produces an electric sheath.";
         }
-        if (Characteristics.NoMagic)
+        if (characteristics.NoMagic)
         {
             info[i++] = "It produces an anti-magic shell.";
         }
-        if (Characteristics.NoTele)
+        if (characteristics.NoTele)
         {
             info[i++] = "It prevents teleportation.";
         }
-        if (Characteristics.XtraMight)
+        if (characteristics.XtraMight)
         {
             info[i++] = "It fires missiles with extra might.";
         }
-        if (Characteristics.XtraShots)
+        if (characteristics.XtraShots)
         {
             info[i++] = "It fires missiles excessively fast.";
         }
-        if (Characteristics.DrainExp)
+        if (characteristics.DrainExp)
         {
             info[i++] = "It drains experience.";
         }
-        if (Characteristics.Teleport)
+        if (characteristics.Teleport)
         {
             info[i++] = "It induces random teleportation.";
         }
-        if (Characteristics.Aggravate)
+        if (characteristics.Aggravate)
         {
             info[i++] = "It aggravates nearby creatures.";
         }
-        if (Characteristics.Blessed)
+        if (characteristics.Blessed)
         {
             info[i++] = "It has been blessed by the gods.";
         }
         if (IsCursed())
         {
-            if (Characteristics.PermaCurse)
+            if (characteristics.PermaCurse)
             {
                 info[i++] = "It is permanently cursed.";
             }
-            else if (Characteristics.HeavyCurse)
+            else if (characteristics.HeavyCurse)
             {
                 info[i++] = "It is heavily cursed.";
             }
@@ -1848,23 +1847,23 @@ internal sealed class Item : IComparable<Item>
                 info[i++] = "It is cursed.";
             }
         }
-        if (Characteristics.DreadCurse)
+        if (characteristics.DreadCurse)
         {
             info[i++] = "It carries an ancient foul curse.";
         }
-        if (Characteristics.IgnoreAcid)
+        if (characteristics.IgnoreAcid)
         {
             info[i++] = "It cannot be harmed by acid.";
         }
-        if (Characteristics.IgnoreElec)
+        if (characteristics.IgnoreElec)
         {
             info[i++] = "It cannot be harmed by electricity.";
         }
-        if (Characteristics.IgnoreFire)
+        if (characteristics.IgnoreFire)
         {
             info[i++] = "It cannot be harmed by fire.";
         }
-        if (Characteristics.IgnoreCold)
+        if (characteristics.IgnoreCold)
         {
             info[i++] = "It cannot be harmed by cold.";
         }
@@ -1931,7 +1930,7 @@ internal sealed class Item : IComparable<Item>
         {
             return new ItemCharacteristics();
         }
-        return Characteristics;
+        return RefreshFlagBasedProperties();
     }
 
     /// <summary>
@@ -2867,52 +2866,52 @@ internal sealed class Item : IComparable<Item>
         }
 
         int bonusValue = 0;
-        RefreshFlagBasedProperties();
-        if (Characteristics.Str)
+        ItemCharacteristics characteristics = RefreshFlagBasedProperties();
+        if (characteristics.Str)
         {
             bonusValue += TypeSpecificValue * 200;
         }
-        if (Characteristics.Int)
+        if (characteristics.Int)
         {
             bonusValue += TypeSpecificValue * 200;
         }
-        if (Characteristics.Wis)
+        if (characteristics.Wis)
         {
             bonusValue += TypeSpecificValue * 200;
         }
-        if (Characteristics.Dex)
+        if (characteristics.Dex)
         {
             bonusValue += TypeSpecificValue * 200;
         }
-        if (Characteristics.Con)
+        if (characteristics.Con)
         {
             bonusValue += TypeSpecificValue * 200;
         }
-        if (Characteristics.Cha)
+        if (characteristics.Cha)
         {
             bonusValue += TypeSpecificValue * 200;
         }
-        if (Characteristics.Stealth)
+        if (characteristics.Stealth)
         {
             bonusValue += TypeSpecificValue * 100;
         }
-        if (Characteristics.Search)
+        if (characteristics.Search)
         {
             bonusValue += TypeSpecificValue * 100;
         }
-        if (Characteristics.Infra)
+        if (characteristics.Infra)
         {
             bonusValue += TypeSpecificValue * 50;
         }
-        if (Characteristics.Tunnel)
+        if (characteristics.Tunnel)
         {
             bonusValue += TypeSpecificValue * 50;
         }
-        if (Characteristics.Blows)
+        if (characteristics.Blows)
         {
             bonusValue += TypeSpecificValue * 5000;
         }
-        if (Characteristics.Speed)
+        if (characteristics.Speed)
         {
             bonusValue += TypeSpecificValue * 3000;
         }

@@ -27,7 +27,7 @@ internal class AcidProjectile : Projectile
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            oPtr.RefreshFlagBasedProperties();
+            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
             if (oPtr.Count > 1)
             {
                 plural = true;
@@ -36,7 +36,7 @@ internal class AcidProjectile : Projectile
             {
                 doKill = true;
                 noteKill = plural ? " melt!" : " melts!";
-                if (oPtr.Characteristics.IgnoreAcid)
+                if (characteristics.IgnoreAcid)
                 {
                     ignore = true;
                 }

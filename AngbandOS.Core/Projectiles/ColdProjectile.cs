@@ -27,7 +27,7 @@ internal class ColdProjectile : Projectile
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            oPtr.RefreshFlagBasedProperties();
+            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
             if (oPtr.Count > 1)
             {
                 plural = true;
@@ -36,7 +36,7 @@ internal class ColdProjectile : Projectile
             {
                 noteKill = plural ? " shatter!" : " shatters!";
                 doKill = true;
-                if (oPtr.Characteristics.IgnoreCold)
+                if (characteristics.IgnoreCold)
                 {
                     ignore = true;
                 }

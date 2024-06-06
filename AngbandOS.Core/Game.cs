@@ -4928,7 +4928,7 @@ internal class Game
 
         bool res = false;
         bool isArtifact = oPtr.IsArtifact;
-        oPtr.RefreshFlagBasedProperties();
+        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
         int prob = oPtr.Count * 100;
         if (oPtr.Category == ItemTypeEnum.Bolt || oPtr.Category == ItemTypeEnum.Arrow || oPtr.Category == ItemTypeEnum.Shot)
         {
@@ -4959,7 +4959,7 @@ internal class Game
                 {
                     oPtr.BonusHit++;
                     res = true;
-                    if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed() && !characteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
@@ -4994,7 +4994,7 @@ internal class Game
                 {
                     oPtr.BonusDamage++;
                     res = true;
-                    if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed() && !characteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
@@ -5029,7 +5029,7 @@ internal class Game
                 {
                     oPtr.BonusArmorClass++;
                     res = true;
-                    if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
+                    if (oPtr.IsCursed() && !characteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
@@ -5340,8 +5340,8 @@ internal class Game
         {
             return false;
         }
-        oPtr.RefreshFlagBasedProperties();
-        if (oPtr.Characteristics.IgnoreAcid)
+        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        if (characteristics.IgnoreAcid)
         {
             return false;
         }
@@ -5354,8 +5354,8 @@ internal class Game
         {
             return false;
         }
-        oPtr.RefreshFlagBasedProperties();
-        if (oPtr.Characteristics.IgnoreCold)
+        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        if (characteristics.IgnoreCold)
         {
             return false;
         }
@@ -5368,8 +5368,8 @@ internal class Game
         {
             return false;
         }
-        oPtr.RefreshFlagBasedProperties();
-        if (oPtr.Characteristics.IgnoreElec)
+        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        if (characteristics.IgnoreElec)
         {
             return false;
         }
@@ -5382,8 +5382,8 @@ internal class Game
         {
             return false;
         }
-        oPtr.RefreshFlagBasedProperties();
-        if (oPtr.Characteristics.IgnoreFire)
+        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        if (characteristics.IgnoreFire)
         {
             return false;
         }
@@ -5804,8 +5804,8 @@ internal class Game
             return false;
         }
         string oName = oPtr.GetDescription(false);
-        oPtr.RefreshFlagBasedProperties();
-        if (oPtr.Characteristics.IgnoreAcid)
+        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        if (characteristics.IgnoreAcid)
         {
             MsgPrint($"Your {oName} is unaffected!");
             return true;
@@ -5861,12 +5861,12 @@ internal class Game
             {
                 continue;
             }
-            oPtr.RefreshFlagBasedProperties();
-            if (!alsoRemoveHeavyCurse && oPtr.Characteristics.HeavyCurse)
+            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+            if (!alsoRemoveHeavyCurse && characteristics.HeavyCurse)
             {
                 continue;
             }
-            if (oPtr.Characteristics.PermaCurse)
+            if (characteristics.PermaCurse)
             {
                 continue;
             }
@@ -6543,8 +6543,8 @@ internal class Game
         {
             return false;
         }
-        item.RefreshFlagBasedProperties();
-        return item.Characteristics.Activate;
+        ItemCharacteristics characteristics = item.RefreshFlagBasedProperties();
+        return characteristics.Activate;
     }
 
     /// <summary>
@@ -7018,12 +7018,12 @@ internal class Game
                 // Default to 1 damage for an unarmed hit
                 int totalDamage = 1;
 
+                ItemCharacteristics characteristics = meleeItem.RefreshFlagBasedProperties();
                 if (meleeItem != null)
                 {
                     // Get our weapon's flags to see if we need to do anything special
-                    meleeItem.RefreshFlagBasedProperties();
-                    chaosEffect = meleeItem.Characteristics.Chaotic && DieRoll(2) == 1;
-                    if (meleeItem.Characteristics.Vampiric || (chaosEffect && DieRoll(5) < 3))
+                    chaosEffect = characteristics.Chaotic && DieRoll(2) == 1;
+                    if (characteristics.Vampiric || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7178,7 +7178,7 @@ internal class Game
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
                     // Vorpal weapons have a chance of a deep cut.
-                    bool vorpalCut = meleeItem.Characteristics.Vorpal && DieRoll(extraDamage1InChance) == 1;
+                    bool vorpalCut = characteristics.Vorpal && DieRoll(extraDamage1InChance) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
@@ -13136,8 +13136,8 @@ internal class Game
         {
             return;
         }
-        oPtr.RefreshFlagBasedProperties();
-        if (oPtr.Characteristics.Blessed && DieRoll(888) > chance)
+        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        if (characteristics.Blessed && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.Count > 1 ? "" : "s";
@@ -13146,7 +13146,7 @@ internal class Game
         }
         if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.RareItem != null))
         {
-            if (!oPtr.Characteristics.HeavyCurse)
+            if (!characteristics.HeavyCurse)
             {
                 changed = true;
             }

@@ -190,244 +190,244 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    oPtr.RefreshFlagBasedProperties();
-                    if (oPtr.Characteristics.Str)
+                    ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+                    if (characteristics.Str)
                     {
                         Game.AbilityScores[Ability.Strength].Bonus += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Int)
+                    if (characteristics.Int)
                     {
                         Game.AbilityScores[Ability.Intelligence].Bonus += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Wis)
+                    if (characteristics.Wis)
                     {
                         Game.AbilityScores[Ability.Wisdom].Bonus += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Dex)
+                    if (characteristics.Dex)
                     {
                         Game.AbilityScores[Ability.Dexterity].Bonus += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Con)
+                    if (characteristics.Con)
                     {
                         Game.AbilityScores[Ability.Constitution].Bonus += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Cha)
+                    if (characteristics.Cha)
                     {
                         Game.AbilityScores[Ability.Charisma].Bonus += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Stealth)
+                    if (characteristics.Stealth)
                     {
                         Game.SkillStealth += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Search)
+                    if (characteristics.Search)
                     {
                         Game.SkillSearching += oPtr.TypeSpecificValue * 5;
                     }
-                    if (oPtr.Characteristics.Search)
+                    if (characteristics.Search)
                     {
                         Game.SkillSearchFrequency += oPtr.TypeSpecificValue * 5;
                     }
-                    if (oPtr.Characteristics.Infra)
+                    if (characteristics.Infra)
                     {
                         Game.InfravisionRange += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Tunnel)
+                    if (characteristics.Tunnel)
                     {
                         Game.SkillDigging += oPtr.TypeSpecificValue * 20;
                     }
-                    if (oPtr.Characteristics.Speed)
+                    if (characteristics.Speed)
                     {
                         Game.Speed.IntValue += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Blows)
+                    if (characteristics.Blows)
                     {
                         extraBlows += oPtr.TypeSpecificValue;
                     }
-                    if (oPtr.Characteristics.Impact)
+                    if (characteristics.Impact)
                     {
                         Game.HasQuakeWeapon = true;
                     }
-                    if (oPtr.Characteristics.AntiTheft)
+                    if (characteristics.AntiTheft)
                     {
                         Game.HasAntiTheft = true;
                     }
-                    if (oPtr.Characteristics.XtraShots)
+                    if (characteristics.XtraShots)
                     {
                         extraShots++;
                     }
-                    if (oPtr.Characteristics.Aggravate)
+                    if (characteristics.Aggravate)
                     {
                         Game.HasAggravation = true;
                     }
-                    if (oPtr.Characteristics.Teleport)
+                    if (characteristics.Teleport)
                     {
                         Game.HasRandomTeleport = true;
                     }
-                    if (oPtr.Characteristics.DrainExp)
+                    if (characteristics.DrainExp)
                     {
                         Game.HasExperienceDrain = true;
                     }
-                    if (oPtr.Characteristics.Blessed)
+                    if (characteristics.Blessed)
                     {
                         Game.HasBlessedBlade = true;
                     }
-                    if (oPtr.Characteristics.XtraMight)
+                    if (characteristics.XtraMight)
                     {
                         Game.HasExtraMight = true;
                     }
-                    if (oPtr.Characteristics.SlowDigest)
+                    if (characteristics.SlowDigest)
                     {
                         Game.HasSlowDigestion = true;
                     }
-                    if (oPtr.Characteristics.Regen)
+                    if (characteristics.Regen)
                     {
                         Game.HasRegeneration = true;
                     }
-                    if (oPtr.Characteristics.Telepathy)
+                    if (characteristics.Telepathy)
                     {
                         Game.HasTelepathy = true;
                     }
-                    if (oPtr.Characteristics.SeeInvis)
+                    if (characteristics.SeeInvis)
                     {
                         Game.HasSeeInvisibility = true;
                     }
-                    if (oPtr.Characteristics.Feather)
+                    if (characteristics.Feather)
                     {
                         Game.HasFeatherFall = true;
                     }
-                    if (oPtr.Characteristics.FreeAct)
+                    if (characteristics.FreeAct)
                     {
                         Game.HasFreeAction = true;
                     }
-                    if (oPtr.Characteristics.HoldLife)
+                    if (characteristics.HoldLife)
                     {
                         Game.HasHoldLife = true;
                     }
-                    if (oPtr.Characteristics.Wraith)
+                    if (characteristics.Wraith)
                     {
                         Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
                     }
-                    if (oPtr.Characteristics.ImFire)
+                    if (characteristics.ImFire)
                     {
                         Game.HasFireImmunity = true;
                     }
-                    if (oPtr.Characteristics.ImAcid)
+                    if (characteristics.ImAcid)
                     {
                         Game.HasAcidImmunity = true;
                     }
-                    if (oPtr.Characteristics.ImCold)
+                    if (characteristics.ImCold)
                     {
                         Game.HasColdImmunity = true;
                     }
-                    if (oPtr.Characteristics.ImElec)
+                    if (characteristics.ImElec)
                     {
                         Game.HasLightningImmunity = true;
                     }
-                    if (oPtr.Characteristics.ResAcid)
+                    if (characteristics.ResAcid)
                     {
                         Game.HasAcidResistance = true;
                     }
-                    if (oPtr.Characteristics.ResElec)
+                    if (characteristics.ResElec)
                     {
                         Game.HasLightningResistance = true;
                     }
-                    if (oPtr.Characteristics.ResFire)
+                    if (characteristics.ResFire)
                     {
                         Game.HasFireResistance = true;
                     }
-                    if (oPtr.Characteristics.ResCold)
+                    if (characteristics.ResCold)
                     {
                         Game.HasColdResistance = true;
                     }
-                    if (oPtr.Characteristics.ResPois)
+                    if (characteristics.ResPois)
                     {
                         Game.HasPoisonResistance = true;
                     }
-                    if (oPtr.Characteristics.ResFear)
+                    if (characteristics.ResFear)
                     {
                         Game.HasFearResistance = true;
                     }
-                    if (oPtr.Characteristics.ResConf)
+                    if (characteristics.ResConf)
                     {
                         Game.HasConfusionResistance = true;
                     }
-                    if (oPtr.Characteristics.ResSound)
+                    if (characteristics.ResSound)
                     {
                         Game.HasSoundResistance = true;
                     }
-                    if (oPtr.Characteristics.ResLight)
+                    if (characteristics.ResLight)
                     {
                         Game.HasLightResistance = true;
                     }
-                    if (oPtr.Characteristics.ResDark)
+                    if (characteristics.ResDark)
                     {
                         Game.HasDarkResistance = true;
                     }
-                    if (oPtr.Characteristics.ResChaos)
+                    if (characteristics.ResChaos)
                     {
                         Game.HasChaosResistance = true;
                     }
-                    if (oPtr.Characteristics.ResDisen)
+                    if (characteristics.ResDisen)
                     {
                         Game.HasDisenchantResistance = true;
                     }
-                    if (oPtr.Characteristics.ResShards)
+                    if (characteristics.ResShards)
                     {
                         Game.HasShardResistance = true;
                     }
-                    if (oPtr.Characteristics.ResNexus)
+                    if (characteristics.ResNexus)
                     {
                         Game.HasNexusResistance = true;
                     }
-                    if (oPtr.Characteristics.ResBlind)
+                    if (characteristics.ResBlind)
                     {
                         Game.HasBlindnessResistance = true;
                     }
-                    if (oPtr.Characteristics.ResNether)
+                    if (characteristics.ResNether)
                     {
                         Game.HasNetherResistance = true;
                     }
-                    if (oPtr.Characteristics.Reflect)
+                    if (characteristics.Reflect)
                     {
                         Game.HasReflection = true;
                     }
-                    if (oPtr.Characteristics.ShFire)
+                    if (characteristics.ShFire)
                     {
                         Game.HasFireShield = true;
                     }
-                    if (oPtr.Characteristics.ShElec)
+                    if (characteristics.ShElec)
                     {
                         Game.HasLightningShield = true;
                     }
-                    if (oPtr.Characteristics.NoMagic)
+                    if (characteristics.NoMagic)
                     {
                         Game.HasAntiMagic = true;
                     }
-                    if (oPtr.Characteristics.NoTele)
+                    if (characteristics.NoTele)
                     {
                         Game.HasAntiTeleport = true;
                     }
-                    if (oPtr.Characteristics.SustStr)
+                    if (characteristics.SustStr)
                     {
                         Game.HasSustainStrength = true;
                     }
-                    if (oPtr.Characteristics.SustInt)
+                    if (characteristics.SustInt)
                     {
                         Game.HasSustainIntelligence = true;
                     }
-                    if (oPtr.Characteristics.SustWis)
+                    if (characteristics.SustWis)
                     {
                         Game.HasSustainWisdom = true;
                     }
-                    if (oPtr.Characteristics.SustDex)
+                    if (characteristics.SustDex)
                     {
                         Game.HasSustainDexterity = true;
                     }
-                    if (oPtr.Characteristics.SustCon)
+                    if (characteristics.SustCon)
                     {
                         Game.HasSustainConstitution = true;
                     }
-                    if (oPtr.Characteristics.SustCha)
+                    if (characteristics.SustCha)
                     {
                         Game.HasSustainCharisma = true;
                     }

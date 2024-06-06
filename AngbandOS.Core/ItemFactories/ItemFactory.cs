@@ -572,8 +572,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         {
             return 0;
         }
-        item.RefreshFlagBasedProperties();
-        return item.Characteristics.Radius;
+        ItemCharacteristics characteristics = item.RefreshFlagBasedProperties();
+        return characteristics.Radius;
     }
 
     /// <summary>
