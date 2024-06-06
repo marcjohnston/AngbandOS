@@ -13,38 +13,21 @@ internal class ResistanceItemAdditiveBundleWeightedRandom : BoundItemAdditiveBun
     private ResistanceItemAdditiveBundleWeightedRandom(Game game) : base(game) { } // This object is a singleton
     protected override (string, int)[] ItemAdditiveBundleNames => new (string, int)[]
     {
-        (nameof(ResistAcidAndAcidBiasItemAdditiveBundle), 3 * 48),
-        (nameof(ResistElectricityAndElectricityBiasItemAdditiveBundle), 3 * 48),
-        (nameof(ResistFireAndFireBiasItemAdditiveBundle), 3 * 48),
-        (nameof(ResistColdAndColdBiasItemAdditiveBundle), 3 * 48),
-
-        (nameof(ResistPoisonAndPoisonBiasItemAdditiveBundle), 2 * 36), // 12/16
-        (nameof(ResistPoisonAndNecromanticBiasItemAdditiveBundle), 2 * 6), // 2/16
-        (nameof(ResistPoisonAndRogueBiasItemAdditiveBundle), 2 * 3), // 1/16
-        (nameof(ResistPoisonItemAdditiveBundle), 2 * 3), // 1/16
-
-        (nameof(ResistFearAndWarriorBiasItemAdditiveBundle), 2 * 16), // 1/3
-        (nameof(ResistFearItemAdditiveBundle), 2 * 32), // 2/3
-
-        (nameof(ResistLightItemAdditiveBundle), 1 * 48),
-        (nameof(ResistDarknessItemAdditiveBundle), 1 * 48),
-        (nameof(ResistBlindnessItemAdditiveBundle), 1 * 48),
-        (nameof(ResistBlindnessItemAdditiveBundle), 1 * 48),
-
-        (nameof(ResistConfusionAndChaosBiasItemAdditiveBundle), 2 * 8), // 1/6
-        (nameof(ResistConfusionItemAdditiveBundle), 2 * 40), // 5/6
-
-        (nameof(ResistSoundItemAdditiveBundle), 2 * 48),
-        (nameof(ResistShardsItemAdditiveBundle), 2 * 48),
-
-        (nameof(ResistNetherAndNecromanticBiasItemAdditiveBundle), 2 * 16), // 1/3
-        (nameof(ResistNetherItemAdditiveBundle), 2 * 32), // 2/3
-
-        (nameof(ResistNexusItemAdditiveBundle), 2 * 48),
-
-        (nameof(ResistChaosAndChaosBiasItemAdditiveBundle), 2 * 24), // 1/2
-        (nameof(ResistChaosItemAdditiveBundle), 2 * 24), // 1/2
-
-        (nameof(ResistDisenchantItemAdditiveBundle), 2 * 48),
+        (nameof(ResistAcidItemAdditiveBundle), 1),
+        (nameof(ResistBlindnessItemAdditiveBundle), 1),
+        (nameof(ResistChaosItemAdditiveBundle), 1),
+        (nameof(ResistColdItemAdditiveBundle), 1),
+        (nameof(ResistConfusionItemAdditiveBundle), 1),
+        (nameof(ResistDarknessItemAdditiveBundle), 1),
+        (nameof(ResistDisenchantItemAdditiveBundle), 1),
+        (nameof(ResistElectricityItemAdditiveBundle), 1),
+        (nameof(ResistFearItemAdditiveBundle), 1),
+        (nameof(ResistFireItemAdditiveBundle), 1),
+        (nameof(ResistLightItemAdditiveBundle), 1),
+        (nameof(ResistNetherItemAdditiveBundle), 1),
+        (nameof(ResistNexusItemAdditiveBundle), 1),
+        (nameof(ResistPoisonItemAdditiveBundle), 1),
+        (nameof(ResistShardsItemAdditiveBundle), 1),
+        (nameof(ResistSoundItemAdditiveBundle), 1)
     };
 }

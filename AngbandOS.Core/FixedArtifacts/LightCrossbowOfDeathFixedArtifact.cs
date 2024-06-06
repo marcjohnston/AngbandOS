@@ -26,7 +26,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
         }
         else
         {
-            item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
+            item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
         }
     }
     public string DescribeActivationEffect => "fire branding of bolts every 999 turns";

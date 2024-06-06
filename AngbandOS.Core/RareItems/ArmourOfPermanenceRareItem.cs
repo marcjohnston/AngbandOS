@@ -13,7 +13,7 @@ internal class ArmorOfPermanenceRareItem : RareItem
     private ArmorOfPermanenceRareItem(Game game) : base(game) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsResistance == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
     }
     public override int Cost => 30000;
     public override string FriendlyName => "of Permanence";

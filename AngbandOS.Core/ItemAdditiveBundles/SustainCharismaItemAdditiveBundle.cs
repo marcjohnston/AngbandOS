@@ -5,15 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Powers;
+namespace AngbandOS.Core.ItemAdditiveBundles;
 
 [Serializable]
-internal class SustainConstitutionPower : Power
+internal class SustainCharismaItemAdditiveBundle : ItemAdditiveBundle
 {
-    private SustainConstitutionPower(Game game) : base(game) { } // This object is a singleton
-    public override bool IsSustain => true;
-    public override void Activate(Item item)
-    {
-        item.Characteristics.SustCon = true;
-    }
+    private SustainCharismaItemAdditiveBundle(Game game) : base(game) { } // This object is a singleton
+    public override bool SustCha => true;
 }

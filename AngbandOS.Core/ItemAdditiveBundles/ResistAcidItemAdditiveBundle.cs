@@ -5,15 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Powers;
+namespace AngbandOS.Core.ItemAdditiveBundles;
 
 [Serializable]
-internal class ResistChaosPower : Power
+internal class ResistAcidItemAdditiveBundle : ItemAdditiveBundle
 {
-    private ResistChaosPower(Game game) : base(game) { } // This object is a singleton
-    public override bool IsResistance => true;
-    public override void Activate(Item item)
-    {
-        item.Characteristics.ResChaos = true;
-    }
+    private ResistAcidItemAdditiveBundle(Game game) : base(game) { } // This object is a singleton
+    public override bool ResAcid => true;
 }

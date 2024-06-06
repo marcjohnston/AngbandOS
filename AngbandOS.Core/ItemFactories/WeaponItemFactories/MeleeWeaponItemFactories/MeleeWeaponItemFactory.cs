@@ -149,7 +149,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     break;
                 case 34:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponChaoticRareItem));
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
                     break;
                 case 35:
                     item.CreateRandomArtifact(false);

@@ -384,7 +384,6 @@ internal class SingletonRepository
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
         RegisterRepository<Patron>();
-        RegisterRepository<Power>();
         RegisterRepository<Projectile>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();

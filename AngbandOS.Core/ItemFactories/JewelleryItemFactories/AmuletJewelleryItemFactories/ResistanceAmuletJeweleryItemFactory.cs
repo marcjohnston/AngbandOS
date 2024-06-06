@@ -22,7 +22,7 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     {
         if (Game.DieRoll(3) == 1)
         {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)));
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
         }
         if (Game.DieRoll(5) == 1)
         {

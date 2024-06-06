@@ -5,15 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Powers;
+namespace AngbandOS.Core.ItemAdditiveBundles;
 
 [Serializable]
-internal class ResistShardsPower : Power
+internal class LightsourceRadius3ItemAdditiveBundle : ItemAdditiveBundle
 {
-    private ResistShardsPower(Game game) : base(game) { } // This object is a singleton
-    public override bool IsResistance => true;
-    public override void Activate(Item item)
-    {
-        item.Characteristics.ResShards = true;
-    }
+    private LightsourceRadius3ItemAdditiveBundle(Game game) : base(game) { } // This object is a singleton
+    public override int Radius => 3;
 }

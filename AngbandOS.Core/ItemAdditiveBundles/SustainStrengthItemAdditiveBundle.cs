@@ -5,15 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Powers;
+namespace AngbandOS.Core.ItemAdditiveBundles;
 
 [Serializable]
-internal class HoldLifePower : Power
+internal class SustainStrengthItemAdditiveBundle : ItemAdditiveBundle
 {
-    private HoldLifePower(Game game) : base(game) { } // This object is a singleton
-    public override bool IsAbility => true;
-    public override void Activate(Item item)
-    {
-        item.Characteristics.HoldLife = true;
-    }
+    private SustainStrengthItemAdditiveBundle(Game game) : base(game) { } // This object is a singleton
+    public override bool SustStr => true;
 }

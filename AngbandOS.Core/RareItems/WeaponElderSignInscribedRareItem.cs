@@ -13,7 +13,7 @@ internal class WeaponElderSignInscribedRareItem : RareItem
     private WeaponElderSignInscribedRareItem(Game game) : base(game) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsSustain == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
     }
     public override bool Blessed => true;
     public override int Cost => 20000;

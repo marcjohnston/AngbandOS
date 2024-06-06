@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -93,7 +92,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
     /// </summary>
-    public Power? RandomPower = null;
+    public ItemAdditiveBundle? RandomPower = null;
 
     public int BonusHit;
     public int Count;
@@ -473,6 +472,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.Discount = Discount;
         clonedItem.DamageSides = DamageSides;
         clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
+        clonedItem.RandomPower = RandomPower;
 
         clonedItem.IdentSense = IdentSense;
         clonedItem.IdentFixed = IdentFixed;
@@ -505,7 +505,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.BonusDamage = BonusDamage;
         clonedItem.BonusHit = BonusHit;
         clonedItem.Weight = Weight;
-        clonedItem.RandomPower = RandomPower;
         clonedItem.RandomArtifactActivation = RandomArtifactActivation;
         return clonedItem;
     }
@@ -849,10 +848,6 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
         if (RareItem != other.RareItem)
-        {
-            return false;
-        }
-        if (RandomPower != null || other.RandomPower != null)
         {
             return false;
         }
@@ -1438,7 +1433,7 @@ internal sealed class Item : IComparable<Item>
         // If there are any random characteristics, apply those also.
         if (RandomPower != null)
         {
-            RandomPower.Activate(this);
+            Characteristics.Merge(RandomPower);
         }
     }
 
