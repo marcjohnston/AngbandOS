@@ -290,7 +290,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool XtraShots { get; set; } = false;
 
     /// <summary>
-    /// Imports the characteristics of another item.
+    /// Imports the characteristics of another item.  This is only needed for the <see cref="Item.Clone"/> method.
     /// </summary>
     /// <param name="itemCharacteristicsA"></param>
     /// <param name="itemCharacteristicsB"></param>

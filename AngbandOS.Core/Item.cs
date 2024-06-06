@@ -26,6 +26,9 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RareItem? RareItem = null;
 
+    /// <summary>
+    /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
+    /// </summary>
     public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
     /// <summary>
@@ -517,6 +520,9 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public bool IsArtifact => FixedArtifact != null || IsRandomArtifact;
 
+    /// <summary>
+    /// Returns the name the player provided when this item was converted into a random artifact.
+    /// </summary>
     public string RandomArtifactName = "";
 
     /// <summary>
