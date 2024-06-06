@@ -14,9 +14,9 @@ internal class RogueArtifactBias : ArtifactBias
     public override string AffinityName => "Rogues";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Stealth)
+        if (!item.Characteristics.Stealth)
         {
-            item.RandomArtifactItemCharacteristics.Stealth = true;
+            item.Characteristics.Stealth = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -29,9 +29,9 @@ internal class RogueArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandomArtifactItemCharacteristics.BrandPois)
+            if (!item.Characteristics.BrandPois)
             {
-                item.RandomArtifactItemCharacteristics.BrandPois = true;
+                item.Characteristics.BrandPois = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

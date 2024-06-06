@@ -27,7 +27,7 @@ internal class FireProjectile : Projectile
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+            ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
             if (oPtr.Count > 1)
             {
                 plural = true;
@@ -36,7 +36,7 @@ internal class FireProjectile : Projectile
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (characteristics.IgnoreFire)
+                if (mergedCharacteristics.IgnoreFire)
                 {
                     ignore = true;
                 }

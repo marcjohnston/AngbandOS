@@ -16,25 +16,25 @@ internal class LawArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandomArtifactItemCharacteristics.SlayEvil)
+            if (!item.Characteristics.SlayEvil)
             {
-                item.RandomArtifactItemCharacteristics.SlayEvil = true;
+                item.Characteristics.SlayEvil = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.RandomArtifactItemCharacteristics.SlayUndead)
+            if (!item.Characteristics.SlayUndead)
             {
-                item.RandomArtifactItemCharacteristics.SlayUndead = true;
+                item.Characteristics.SlayUndead = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.RandomArtifactItemCharacteristics.SlayDemon)
+            if (!item.Characteristics.SlayDemon)
             {
-                item.RandomArtifactItemCharacteristics.SlayDemon = true;
+                item.Characteristics.SlayDemon = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

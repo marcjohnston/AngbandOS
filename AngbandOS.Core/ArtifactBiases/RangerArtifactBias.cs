@@ -14,25 +14,25 @@ internal class RangerArtifactBias : ArtifactBias
     public override string AffinityName => "Rangers";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Con)
+        if (!item.Characteristics.Con)
         {
-            item.RandomArtifactItemCharacteristics.Con = true;
+            item.Characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandomArtifactItemCharacteristics.Dex)
+        else if (!item.Characteristics.Dex)
         {
-            item.RandomArtifactItemCharacteristics.Dex = true;
+            item.Characteristics.Dex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandomArtifactItemCharacteristics.Str)
+        else if (!item.Characteristics.Str)
         {
-            item.RandomArtifactItemCharacteristics.Str = true;
+            item.Characteristics.Str = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -43,9 +43,9 @@ internal class RangerArtifactBias : ArtifactBias
     }
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.SustCon)
+        if (!item.Characteristics.SustCon)
         {
-            item.RandomArtifactItemCharacteristics.SustCon = true;
+            item.Characteristics.SustCon = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -57,9 +57,9 @@ internal class RangerArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandomArtifactItemCharacteristics.SlayAnimal)
+            if (!item.Characteristics.SlayAnimal)
             {
-                item.RandomArtifactItemCharacteristics.SlayAnimal = true;
+                item.Characteristics.SlayAnimal = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

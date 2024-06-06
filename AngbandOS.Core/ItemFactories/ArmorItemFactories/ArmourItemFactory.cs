@@ -26,7 +26,6 @@ internal abstract class ArmorItemFactory : ItemFactory
         string s = "";
         if (item.IsKnown())
         {
-            item.RefreshFlagBasedProperties();
             if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
             {
                 s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
@@ -133,7 +132,7 @@ internal abstract class ArmorItemFactory : ItemFactory
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfResistanceRareItem));
                 if (Game.DieRoll(4) == 1)
                 {
-                    item.RandomArtifactItemCharacteristics.ResPois = true;
+                    item.Characteristics.ResPois = true;
                 }
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;

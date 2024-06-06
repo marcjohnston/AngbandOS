@@ -49,7 +49,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
                 if (Game.DieRoll(4) == 1)
                 {
-                    item.RandomArtifactItemCharacteristics.ResPois = true;
+                    item.Characteristics.ResPois = true;
                 }
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ShieldOfResistanceRareItem));
                 break;

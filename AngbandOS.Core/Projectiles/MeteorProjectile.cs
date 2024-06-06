@@ -27,7 +27,7 @@ internal class MeteorProjectile : Projectile
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+            ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
             if (oPtr.Count > 1)
             {
                 plural = true;
@@ -36,7 +36,7 @@ internal class MeteorProjectile : Projectile
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (characteristics.IgnoreFire)
+                if (mergedCharacteristics.IgnoreFire)
                 {
                     ignore = true;
                 }
@@ -46,7 +46,7 @@ internal class MeteorProjectile : Projectile
                 ignore = false;
                 doKill = true;
                 noteKill = plural ? " shatter!" : " shatters!";
-                if (characteristics.IgnoreCold)
+                if (mergedCharacteristics.IgnoreCold)
                 {
                     ignore = true;
                 }

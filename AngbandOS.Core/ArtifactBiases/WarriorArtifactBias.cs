@@ -14,25 +14,25 @@ internal class WarriorArtifactBias : ArtifactBias
     public override string AffinityName => "Warriors";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Str)
+        if (!item.Characteristics.Str)
         {
-            item.RandomArtifactItemCharacteristics.Str = true;
+            item.Characteristics.Str = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandomArtifactItemCharacteristics.Con)
+        else if (!item.Characteristics.Con)
         {
-            item.RandomArtifactItemCharacteristics.Con = true;
+            item.Characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandomArtifactItemCharacteristics.Dex)
+        else if (!item.Characteristics.Dex)
         {
-            item.RandomArtifactItemCharacteristics.Dex = true;
+            item.Characteristics.Dex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -43,17 +43,17 @@ internal class WarriorArtifactBias : ArtifactBias
 
     public override bool ApplyRandomResistances(Item item)
     {
-        if (Game.DieRoll(3) != 1 && !item.RandomArtifactItemCharacteristics.ResFear)
+        if (Game.DieRoll(3) != 1 && !item.Characteristics.ResFear)
         {
-            item.RandomArtifactItemCharacteristics.ResFear = true;
+            item.Characteristics.ResFear = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (Game.DieRoll(3) == 1 && !item.RandomArtifactItemCharacteristics.NoMagic)
+        if (Game.DieRoll(3) == 1 && !item.Characteristics.NoMagic)
         {
-            item.RandomArtifactItemCharacteristics.NoMagic = true;
+            item.Characteristics.NoMagic = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

@@ -14,9 +14,9 @@ internal class DexterityArtifactBias : ArtifactBias
     public override string AffinityName => "Dexterity";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Dex)
+        if (!item.Characteristics.Dex)
         {
-            item.RandomArtifactItemCharacteristics.Dex = true;
+            item.Characteristics.Dex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -27,9 +27,9 @@ internal class DexterityArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.SustDex)
+        if (!item.Characteristics.SustDex)
         {
-            item.RandomArtifactItemCharacteristics.SustDex = true;
+            item.Characteristics.SustDex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

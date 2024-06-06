@@ -131,12 +131,12 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
 
     public virtual bool ItemMatches(Item item)
     {
-        ItemCharacteristics characteristics = item.RefreshFlagBasedProperties();
+        ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
         if (FactoryItemClassKey != null && FactoryItemClassKey != item.Factory.ItemClass.Key)
         {
             return false;
         }
-        if (IsBlessed != null && characteristics.Blessed != IsBlessed)
+        if (IsBlessed != null && mergedCharacteristics.Blessed != IsBlessed)
         {
             return false;
         }
@@ -152,7 +152,7 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         {
             return false;
         }
-        if (CanBeActivated != null && characteristics.Activate != CanBeActivated)
+        if (CanBeActivated != null && mergedCharacteristics.Activate != CanBeActivated)
         {
             return false;
         }

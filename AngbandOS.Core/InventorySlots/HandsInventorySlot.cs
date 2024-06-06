@@ -34,8 +34,8 @@ internal class HandsInventorySlot : EquipmentInventorySlot
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null)
                 {
-                    ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-                    if (!characteristics.FreeAct && !characteristics.Dex && oPtr.TypeSpecificValue > 0)
+                    ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+                    if (!mergedCharacteristics.FreeAct && !mergedCharacteristics.Dex && oPtr.TypeSpecificValue > 0)
                     {
                         msp = 3 * msp / 4;
                         RestrictingGloves = true;

@@ -62,7 +62,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfSeeingRareItem));
                 if (Game.DieRoll(7) == 1)
                 {
-                    item.RandomArtifactItemCharacteristics.Telepathy = true;
+                    item.Characteristics.Telepathy = true;
                 }
                 break;
             case 9:

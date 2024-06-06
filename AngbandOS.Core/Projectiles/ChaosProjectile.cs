@@ -29,13 +29,13 @@ internal class ChaosProjectile : Projectile
         {
             bool ignore = false;
             bool plural = false;
-            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+            ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
             if (oPtr.Count > 1)
             {
                 plural = true;
             }
             string noteKill = plural ? " are destroyed!" : " is destroyed!";
-            if (characteristics.ResChaos)
+            if (mergedCharacteristics.ResChaos)
             {
                 ignore = true;
             }

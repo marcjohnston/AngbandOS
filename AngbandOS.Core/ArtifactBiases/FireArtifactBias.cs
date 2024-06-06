@@ -14,25 +14,25 @@ internal class FireArtifactBias : ArtifactBias
     public override string AffinityName => "Fire";
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.ResFire)
+        if (!item.Characteristics.ResFire)
         {
-            item.RandomArtifactItemCharacteristics.ResFire = true;
+            item.Characteristics.ResFire = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandomArtifactItemCharacteristics.ShFire)
+        if (item.Factory.CanApplyArtifactBiasResistance && !item.Characteristics.ShFire)
         {
-            item.RandomArtifactItemCharacteristics.ShFire = true;
+            item.Characteristics.ShFire = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImFire)
+        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.Characteristics.ImFire)
         {
-            item.RandomArtifactItemCharacteristics.ImFire = true;
+            item.Characteristics.ImFire = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -43,7 +43,7 @@ internal class FireArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        item.RandomArtifactItemCharacteristics.Radius = 3;
+        item.Characteristics.Radius = 3;
         return false;
     }
 
@@ -51,9 +51,9 @@ internal class FireArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandomArtifactItemCharacteristics.BrandFire)
+            if (!item.Characteristics.BrandFire)
             {
-                item.RandomArtifactItemCharacteristics.BrandFire = true;
+                item.Characteristics.BrandFire = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

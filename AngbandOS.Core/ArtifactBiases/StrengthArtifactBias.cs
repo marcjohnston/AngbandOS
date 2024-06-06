@@ -14,9 +14,9 @@ internal class StrengthArtifactBias : ArtifactBias
     public override string AffinityName => "Strength";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Str)
+        if (!item.Characteristics.Str)
         {
-            item.RandomArtifactItemCharacteristics.Str = true;
+            item.Characteristics.Str = true;
             if (Game.DieRoll(2) == 1) // 50% chance of being a "free" power
             {
                 return true;
@@ -26,9 +26,9 @@ internal class StrengthArtifactBias : ArtifactBias
     }
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.SustStr)
+        if (!item.Characteristics.SustStr)
         {
-            item.RandomArtifactItemCharacteristics.SustStr = true;
+            item.Characteristics.SustStr = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

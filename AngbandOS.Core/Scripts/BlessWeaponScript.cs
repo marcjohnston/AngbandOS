@@ -29,10 +29,10 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
         }
         string your = oPtr.IsInInventory ? "your" : "the"; ;
         string oName = oPtr.GetDescription(false);
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
         if (oPtr.IdentCursed)
         {
-            if ((characteristics.HeavyCurse && Game.DieRoll(100) < 33) || characteristics.PermaCurse)
+            if ((mergedCharacteristics.HeavyCurse && Game.DieRoll(100) < 33) || mergedCharacteristics.PermaCurse)
             {
                 Game.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
                 return true;
@@ -43,7 +43,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
             oPtr.Inscription = "uncursed";
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
-        if (characteristics.Blessed)
+        if (mergedCharacteristics.Blessed)
         {
             string s = oPtr.Count > 1 ? "were" : "was";
             Game.MsgPrint($"{your} {oName} {s} blessed already.");
@@ -53,7 +53,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
         {
             string s = oPtr.Count > 1 ? "" : "s";
             Game.MsgPrint($"{your} {oName} shine{s}!");
-            oPtr.RandomArtifactItemCharacteristics.Blessed = true;
+            oPtr.Characteristics.Blessed = true;
         }
         else
         {

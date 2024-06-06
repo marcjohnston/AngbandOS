@@ -14,9 +14,9 @@ internal class ConstitutionArtifactBias : ArtifactBias
     public override string AffinityName => "Constitution";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Con)
+        if (!item.Characteristics.Con)
         {
-            item.RandomArtifactItemCharacteristics.Con = true;
+            item.Characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -27,9 +27,9 @@ internal class ConstitutionArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.SustCon)
+        if (!item.Characteristics.SustCon)
         {
-            item.RandomArtifactItemCharacteristics.SustCon = true;
+            item.Characteristics.SustCon = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

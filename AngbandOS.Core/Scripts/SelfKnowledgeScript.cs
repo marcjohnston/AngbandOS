@@ -26,8 +26,8 @@ internal class SelfKnowledgeScript : Script, IScript
             Item? oPtr = Game.GetInventoryItem(k);
             if (oPtr != null)
             {
-                ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-                inventoryCharacteristics.Merge(characteristics);
+                ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+                inventoryCharacteristics.Merge(mergedCharacteristics);
             }
         }
         string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.IntValue);
@@ -357,80 +357,80 @@ internal class SelfKnowledgeScript : Script, IScript
         Item? meleeItem = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
         if (meleeItem != null)
         {
-            ItemCharacteristics characteristics = meleeItem.RefreshFlagBasedProperties();
-            if (characteristics.Blessed)
+            ItemCharacteristics mergedCharacteristics = meleeItem.GetMergedCharacteristics();
+            if (mergedCharacteristics.Blessed)
             {
                 info[infoCount++] = "Your weapon has been blessed by the gods.";
             }
-            if (characteristics.Chaotic)
+            if (mergedCharacteristics.Chaotic)
             {
                 info[infoCount++] = "Your weapon is branded with the Yellow Sign.";
             }
-            if (characteristics.Impact)
+            if (mergedCharacteristics.Impact)
             {
                 info[infoCount++] = "The impact of your weapon can cause earthquakes.";
             }
-            if (characteristics.Vorpal)
+            if (mergedCharacteristics.Vorpal)
             {
                 info[infoCount++] = "Your weapon is very sharp.";
             }
-            if (characteristics.Vampiric)
+            if (mergedCharacteristics.Vampiric)
             {
                 info[infoCount++] = "Your weapon drains life from your foes.";
             }
-            if (characteristics.BrandAcid)
+            if (mergedCharacteristics.BrandAcid)
             {
                 info[infoCount++] = "Your weapon melts your foes.";
             }
-            if (characteristics.BrandElec)
+            if (mergedCharacteristics.BrandElec)
             {
                 info[infoCount++] = "Your weapon shocks your foes.";
             }
-            if (characteristics.BrandFire)
+            if (mergedCharacteristics.BrandFire)
             {
                 info[infoCount++] = "Your weapon burns your foes.";
             }
-            if (characteristics.BrandCold)
+            if (mergedCharacteristics.BrandCold)
             {
                 info[infoCount++] = "Your weapon freezes your foes.";
             }
-            if (characteristics.BrandPois)
+            if (mergedCharacteristics.BrandPois)
             {
                 info[infoCount++] = "Your weapon poisons your foes.";
             }
-            if (characteristics.SlayAnimal)
+            if (mergedCharacteristics.SlayAnimal)
             {
                 info[infoCount++] = "Your weapon strikes at animals with extra force.";
             }
-            if (characteristics.SlayEvil)
+            if (mergedCharacteristics.SlayEvil)
             {
                 info[infoCount++] = "Your weapon strikes at evil with extra force.";
             }
-            if (characteristics.SlayUndead)
+            if (mergedCharacteristics.SlayUndead)
             {
                 info[infoCount++] = "Your weapon strikes at undead with holy wrath.";
             }
-            if (characteristics.SlayDemon)
+            if (mergedCharacteristics.SlayDemon)
             {
                 info[infoCount++] = "Your weapon strikes at demons with holy wrath.";
             }
-            if (characteristics.SlayOrc)
+            if (mergedCharacteristics.SlayOrc)
             {
                 info[infoCount++] = "Your weapon is especially deadly against orcs.";
             }
-            if (characteristics.SlayTroll)
+            if (mergedCharacteristics.SlayTroll)
             {
                 info[infoCount++] = "Your weapon is especially deadly against trolls.";
             }
-            if (characteristics.SlayGiant)
+            if (mergedCharacteristics.SlayGiant)
             {
                 info[infoCount++] = "Your weapon is especially deadly against giants.";
             }
-            if (characteristics.SlayDragon)
+            if (mergedCharacteristics.SlayDragon)
             {
                 info[infoCount++] = "Your weapon is especially deadly against dragons.";
             }
-            if (characteristics.KillDragon)
+            if (mergedCharacteristics.KillDragon)
             {
                 info[infoCount++] = "Your weapon is a great bane of dragons.";
             }

@@ -14,9 +14,9 @@ internal class CharismaArtifactBias : ArtifactBias
     public override string AffinityName => "Charisma";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Cha)
+        if (!item.Characteristics.Cha)
         {
-            item.RandomArtifactItemCharacteristics.Cha = true;
+            item.Characteristics.Cha = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -26,9 +26,9 @@ internal class CharismaArtifactBias : ArtifactBias
     }
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.SustCha)
+        if (!item.Characteristics.SustCha)
         {
-            item.RandomArtifactItemCharacteristics.SustCha = true;
+            item.Characteristics.SustCha = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

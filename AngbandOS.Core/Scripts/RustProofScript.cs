@@ -29,7 +29,7 @@ internal class RustProofScript : Script, IScript
         }
         string itenName = item.GetDescription(false);
         // Set the ignore acid flag
-        item.RandomArtifactItemCharacteristics.IgnoreAcid = true;
+        item.Characteristics.IgnoreAcid = true;
         // Make sure the grammar of the message is correct
         string your = item.IsInInventory ? "Your" : "The";
         string s;

@@ -14,9 +14,9 @@ internal class MageArtifactBias : ArtifactBias
     public override string AffinityName => "Mages";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Int)
+        if (!item.Characteristics.Int)
         {
-            item.RandomArtifactItemCharacteristics.Int = true;
+            item.Characteristics.Int = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

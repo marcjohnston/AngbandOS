@@ -39,7 +39,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfSeeingRareItem));
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.RandomArtifactItemCharacteristics.Telepathy = true;
+                    item.Characteristics.Telepathy = true;
                 }
                 break;
         }

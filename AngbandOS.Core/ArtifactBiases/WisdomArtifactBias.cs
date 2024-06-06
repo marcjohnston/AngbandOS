@@ -14,9 +14,9 @@ internal class WisdomArtifactBias : ArtifactBias
     public override string AffinityName => "Wisdom";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Wis)
+        if (!item.Characteristics.Wis)
         {
-            item.RandomArtifactItemCharacteristics.Wis = true;
+            item.Characteristics.Wis = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -27,9 +27,9 @@ internal class WisdomArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.SustWis)
+        if (!item.Characteristics.SustWis)
         {
-            item.RandomArtifactItemCharacteristics.SustWis = true;
+            item.Characteristics.SustWis = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

@@ -14,9 +14,9 @@ internal class PriestlyArtifactBias : ArtifactBias
     public override string AffinityName => "Priests";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Wis)
+        if (!item.Characteristics.Wis)
         {
-            item.RandomArtifactItemCharacteristics.Wis = true;
+            item.Characteristics.Wis = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -27,9 +27,9 @@ internal class PriestlyArtifactBias : ArtifactBias
 
     public override bool ApplySlaying(Item item)
     {
-        if (item.Factory.CanApplyBlessedArtifactBias && !item.RandomArtifactItemCharacteristics.Blessed)
+        if (item.Factory.CanApplyBlessedArtifactBias && !item.Characteristics.Blessed)
         {
-            item.RandomArtifactItemCharacteristics.Blessed = true;
+            item.Characteristics.Blessed = true;
         }
         return false;
     }

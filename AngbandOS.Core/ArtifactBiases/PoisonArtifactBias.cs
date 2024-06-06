@@ -14,9 +14,9 @@ internal class PoisonArtifactBias : ArtifactBias
     public override string AffinityName => "Poison";
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.ResPois)
+        if (!item.Characteristics.ResPois)
         {
-            item.RandomArtifactItemCharacteristics.ResPois = true;
+            item.Characteristics.ResPois = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -29,9 +29,9 @@ internal class PoisonArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandomArtifactItemCharacteristics.BrandPois)
+            if (!item.Characteristics.BrandPois)
             {
-                item.RandomArtifactItemCharacteristics.BrandPois = true;
+                item.Characteristics.BrandPois = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

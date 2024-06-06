@@ -4928,7 +4928,7 @@ internal class Game
 
         bool res = false;
         bool isArtifact = oPtr.IsArtifact;
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
         int prob = oPtr.Count * 100;
         if (oPtr.Category == ItemTypeEnum.Bolt || oPtr.Category == ItemTypeEnum.Arrow || oPtr.Category == ItemTypeEnum.Shot)
         {
@@ -4959,18 +4959,18 @@ internal class Game
                 {
                     oPtr.BonusHit++;
                     res = true;
-                    if (oPtr.IsCursed() && !characteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed() && !mergedCharacteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.RandomArtifactItemCharacteristics.Cursed)
+                        if (oPtr.Characteristics.Cursed)
                         {
-                            oPtr.RandomArtifactItemCharacteristics.Cursed = false;
+                            oPtr.Characteristics.Cursed = false;
                         }
-                        if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
+                        if (oPtr.Characteristics.HeavyCurse)
                         {
-                            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
+                            oPtr.Characteristics.HeavyCurse = false;
                         }
                         oPtr.Inscription = "uncursed";
                     }
@@ -4994,18 +4994,18 @@ internal class Game
                 {
                     oPtr.BonusDamage++;
                     res = true;
-                    if (oPtr.IsCursed() && !characteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed() && !mergedCharacteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.RandomArtifactItemCharacteristics.Cursed)
+                        if (oPtr.Characteristics.Cursed)
                         {
-                            oPtr.RandomArtifactItemCharacteristics.Cursed = false;
+                            oPtr.Characteristics.Cursed = false;
                         }
-                        if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
+                        if (oPtr.Characteristics.HeavyCurse)
                         {
-                            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
+                            oPtr.Characteristics.HeavyCurse = false;
                         }
                         oPtr.Inscription = "uncursed";
                     }
@@ -5029,19 +5029,19 @@ internal class Game
                 {
                     oPtr.BonusArmorClass++;
                     res = true;
-                    if (oPtr.IsCursed() && !characteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
+                    if (oPtr.IsCursed() && !mergedCharacteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.RandomArtifactItemCharacteristics.Cursed)
+                        if (oPtr.Characteristics.Cursed)
                         {
-                            oPtr.RandomArtifactItemCharacteristics.Cursed = false;
+                            oPtr.Characteristics.Cursed = false;
                         }
-                        if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
+                        if (oPtr.Characteristics.HeavyCurse)
                         {
-                            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
+                            oPtr.Characteristics.HeavyCurse = false;
                         }
                         oPtr.Inscription = "uncursed";
                     }
@@ -5340,8 +5340,8 @@ internal class Game
         {
             return false;
         }
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-        if (characteristics.IgnoreAcid)
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+        if (mergedCharacteristics.IgnoreAcid)
         {
             return false;
         }
@@ -5354,8 +5354,8 @@ internal class Game
         {
             return false;
         }
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-        if (characteristics.IgnoreCold)
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+        if (mergedCharacteristics.IgnoreCold)
         {
             return false;
         }
@@ -5368,8 +5368,8 @@ internal class Game
         {
             return false;
         }
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-        if (characteristics.IgnoreElec)
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+        if (mergedCharacteristics.IgnoreElec)
         {
             return false;
         }
@@ -5382,8 +5382,8 @@ internal class Game
         {
             return false;
         }
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-        if (characteristics.IgnoreFire)
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+        if (mergedCharacteristics.IgnoreFire)
         {
             return false;
         }
@@ -5804,8 +5804,8 @@ internal class Game
             return false;
         }
         string oName = oPtr.GetDescription(false);
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-        if (characteristics.IgnoreAcid)
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+        if (mergedCharacteristics.IgnoreAcid)
         {
             MsgPrint($"Your {oName} is unaffected!");
             return true;
@@ -5861,24 +5861,24 @@ internal class Game
             {
                 continue;
             }
-            ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-            if (!alsoRemoveHeavyCurse && characteristics.HeavyCurse)
+            ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+            if (!alsoRemoveHeavyCurse && mergedCharacteristics.HeavyCurse)
             {
                 continue;
             }
-            if (characteristics.PermaCurse)
+            if (mergedCharacteristics.PermaCurse)
             {
                 continue;
             }
             oPtr.IdentCursed = false;
             oPtr.IdentSense = true;
-            if (oPtr.RandomArtifactItemCharacteristics.Cursed)
+            if (oPtr.Characteristics.Cursed)
             {
-                oPtr.RandomArtifactItemCharacteristics.Cursed = false;
+                oPtr.Characteristics.Cursed = false;
             }
-            if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
+            if (oPtr.Characteristics.HeavyCurse)
             {
-                oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
+                oPtr.Characteristics.HeavyCurse = false;
             }
             oPtr.Inscription = "uncursed";
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6284,7 +6284,7 @@ internal class Game
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.RandomArtifactItemCharacteristics = new ItemCharacteristics();
+            item.Characteristics = new ItemCharacteristics();
             item.IdentCursed = true;
             item.IdentBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6323,7 +6323,7 @@ internal class Game
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.RandomArtifactItemCharacteristics = new ItemCharacteristics();
+            item.Characteristics = new ItemCharacteristics();
             item.IdentCursed = true;
             item.IdentBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6543,8 +6543,8 @@ internal class Game
         {
             return false;
         }
-        ItemCharacteristics characteristics = item.RefreshFlagBasedProperties();
-        return characteristics.Activate;
+        ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
+        return mergedCharacteristics.Activate;
     }
 
     /// <summary>
@@ -7018,12 +7018,12 @@ internal class Game
                 // Default to 1 damage for an unarmed hit
                 int totalDamage = 1;
 
-                ItemCharacteristics characteristics = meleeItem.RefreshFlagBasedProperties();
+                ItemCharacteristics mergedCharacteristics = meleeItem.GetMergedCharacteristics();
                 if (meleeItem != null)
                 {
                     // Get our weapon's flags to see if we need to do anything special
-                    chaosEffect = characteristics.Chaotic && DieRoll(2) == 1;
-                    if (characteristics.Vampiric || (chaosEffect && DieRoll(5) < 3))
+                    chaosEffect = mergedCharacteristics.Chaotic && DieRoll(2) == 1;
+                    if (mergedCharacteristics.Vampiric || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7178,7 +7178,7 @@ internal class Game
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
                     // Vorpal weapons have a chance of a deep cut.
-                    bool vorpalCut = characteristics.Vorpal && DieRoll(extraDamage1InChance) == 1;
+                    bool vorpalCut = mergedCharacteristics.Vorpal && DieRoll(extraDamage1InChance) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
@@ -13136,8 +13136,8 @@ internal class Game
         {
             return;
         }
-        ItemCharacteristics characteristics = oPtr.RefreshFlagBasedProperties();
-        if (characteristics.Blessed && DieRoll(888) > chance)
+        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+        if (mergedCharacteristics.Blessed && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.Count > 1 ? "" : "s";
@@ -13146,12 +13146,12 @@ internal class Game
         }
         if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.RareItem != null))
         {
-            if (!characteristics.HeavyCurse)
+            if (!mergedCharacteristics.HeavyCurse)
             {
                 changed = true;
             }
-            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = true;
-            oPtr.RandomArtifactItemCharacteristics.Cursed = true;
+            oPtr.Characteristics.HeavyCurse = true;
+            oPtr.Characteristics.Cursed = true;
             oPtr.IdentCursed = true;
         }
         else
@@ -13160,7 +13160,7 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.RandomArtifactItemCharacteristics.Cursed = true;
+            oPtr.Characteristics.Cursed = true;
             oPtr.IdentCursed = true;
         }
         if (changed)

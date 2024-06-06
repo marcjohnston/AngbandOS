@@ -14,25 +14,25 @@ internal class NecromanticArtifactBias : ArtifactBias
     public override string AffinityName => "Necromancers";
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.ResNether)
+        if (!item.Characteristics.ResNether)
         {
-            item.RandomArtifactItemCharacteristics.ResNether = true;
+            item.Characteristics.ResNether = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (!item.RandomArtifactItemCharacteristics.ResPois)
+        if (!item.Characteristics.ResPois)
         {
-            item.RandomArtifactItemCharacteristics.ResPois = true;
+            item.Characteristics.ResPois = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (!item.RandomArtifactItemCharacteristics.ResDark)
+        if (!item.Characteristics.ResDark)
         {
-            item.RandomArtifactItemCharacteristics.ResDark = true;
+            item.Characteristics.ResDark = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -45,17 +45,17 @@ internal class NecromanticArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandomArtifactItemCharacteristics.Vampiric)
+            if (!item.Characteristics.Vampiric)
             {
-                item.RandomArtifactItemCharacteristics.Vampiric = true;
+                item.Characteristics.Vampiric = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.RandomArtifactItemCharacteristics.BrandPois && Game.DieRoll(2) == 1)
+            if (!item.Characteristics.BrandPois && Game.DieRoll(2) == 1)
             {
-                item.RandomArtifactItemCharacteristics.BrandPois = true;
+                item.Characteristics.BrandPois = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

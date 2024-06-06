@@ -26,7 +26,7 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         }
         if (Game.DieRoll(5) == 1)
         {
-            item.RandomArtifactItemCharacteristics.ResPois = true;
+            item.Characteristics.ResPois = true;
         }
     }
 

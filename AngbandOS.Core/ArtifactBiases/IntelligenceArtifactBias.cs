@@ -14,9 +14,9 @@ internal class IntelligenceArtifactBias : ArtifactBias
     public override string AffinityName => "Intelligence";
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.Int)
+        if (!item.Characteristics.Int)
         {
-            item.RandomArtifactItemCharacteristics.Int = true;
+            item.Characteristics.Int = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -27,9 +27,9 @@ internal class IntelligenceArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.SustInt)
+        if (!item.Characteristics.SustInt)
         {
-            item.RandomArtifactItemCharacteristics.SustInt = true;
+            item.Characteristics.SustInt = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

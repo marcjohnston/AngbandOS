@@ -14,25 +14,25 @@ internal class ElectricityArtifactBias : ArtifactBias
     public override string AffinityName => "Electricity";
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandomArtifactItemCharacteristics.ResElec)
+        if (!item.Characteristics.ResElec)
         {
-            item.RandomArtifactItemCharacteristics.ResElec = true;
+            item.Characteristics.ResElec = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandomArtifactItemCharacteristics.ShElec)
+        if (item.Factory.CanApplyArtifactBiasResistance && !item.Characteristics.ShElec)
         {
-            item.RandomArtifactItemCharacteristics.ShElec = true;
+            item.Characteristics.ShElec = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImElec)
+        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.Characteristics.ImElec)
         {
-            item.RandomArtifactItemCharacteristics.ImElec = true;
+            item.Characteristics.ImElec = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -45,9 +45,9 @@ internal class ElectricityArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandomArtifactItemCharacteristics.BrandElec)
+            if (!item.Characteristics.BrandElec)
             {
-                item.RandomArtifactItemCharacteristics.BrandElec = true;
+                item.Characteristics.BrandElec = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

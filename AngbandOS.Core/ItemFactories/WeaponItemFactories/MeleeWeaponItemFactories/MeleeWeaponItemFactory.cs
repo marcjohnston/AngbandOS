@@ -37,7 +37,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponElderSignInscribedRareItem));
                     if (Game.DieRoll(4) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.Blows = true;
+                        item.Characteristics.Blows = true;
                         if (item.TypeSpecificValue > 2)
                         {
                             item.TypeSpecificValue -= Game.DieRoll(2);
@@ -48,7 +48,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponDefenderRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.ResPois = true;
+                        item.Characteristics.ResPois = true;
                     }
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     break;
@@ -80,7 +80,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     {
                         if (Game.DieRoll(3) == 1)
                         {
-                            item.RandomArtifactItemCharacteristics.ResPois = true;
+                            item.Characteristics.ResPois = true;
                         }
                         item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalAndPoisonResistanceItemAdditiveBundleWeightedRandom)));
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfDragonBaneRareItem));
@@ -91,18 +91,18 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayEvilRareItem));
                     if (Game.RandomLessThan(100) < 20)
                     {
-                        item.RandomArtifactItemCharacteristics.ResFear = true;
-                        item.RandomArtifactItemCharacteristics.Blessed = true;
+                        item.Characteristics.ResFear = true;
+                        item.Characteristics.Blessed = true;
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfEvilBaneRareItem));
                     }
                     break;
                 case 13:
                 case 14:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayUndeadRareItem));
-                    item.RandomArtifactItemCharacteristics.HoldLife = true;
+                    item.Characteristics.HoldLife = true;
                     if (Game.RandomLessThan(100) < 20)
                     {
-                        item.RandomArtifactItemCharacteristics.ResNether = true;
+                        item.Characteristics.ResNether = true;
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfUndeadBaneRareItem));
                     }
                     break;
@@ -130,7 +130,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfKadathRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.ResFear = true;
+                        item.Characteristics.ResFear = true;
                     }
                     break;
                 case 28:
@@ -174,11 +174,11 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     }
                     if (Game.DieRoll(5) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.BrandPois = true;
+                        item.Characteristics.BrandPois = true;
                     }
                     if (CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.Vorpal = true;
+                        item.Characteristics.Vorpal = true;
                     }
                     break;
                 case 38:
@@ -187,22 +187,22 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     if (Game.DieRoll(5) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.SlayDemon = true;
+                        item.Characteristics.SlayDemon = true;
                     }
                     break;
                 case 40:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfLawRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.HoldLife = true;
+                        item.Characteristics.HoldLife = true;
                     }
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.Dex = true;
+                        item.Characteristics.Dex = true;
                     }
                     if (Game.DieRoll(5) == 1)
                     {
-                        item.RandomArtifactItemCharacteristics.ResFear = true;
+                        item.Characteristics.ResFear = true;
                     }
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     break;
@@ -218,7 +218,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfEarthquakesRareItem));
                         if (Game.DieRoll(3) == 1)
                         {
-                            item.RandomArtifactItemCharacteristics.Blows = true;
+                            item.Characteristics.Blows = true;
                         }
                         item.TypeSpecificValue = item.GetBonusValue(3, level);
                     }
@@ -240,7 +240,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfLengRareItem));
                 if (Game.DieRoll(6) == 1)
                 {
-                    item.RandomArtifactItemCharacteristics.DreadCurse = true;
+                    item.Characteristics.DreadCurse = true;
                 }
             }
         }
