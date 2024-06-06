@@ -2150,6 +2150,8 @@ internal sealed class Item : IComparable<Item>
             {
                 IdentCursed = true;
             }
+
+            // Check to see if we are enchanting a cursed or broken item.
             if (IsCursed() || IsBroken())
             {
                 if (RareItem.MaxToH != 0)
