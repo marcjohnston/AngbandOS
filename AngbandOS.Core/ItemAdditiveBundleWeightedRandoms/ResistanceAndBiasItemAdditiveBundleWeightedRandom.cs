@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 
 [Serializable]
-internal class ResistanceAndBiasItemAdditiveBundleWeightedRandom : BoundItemAdditiveBundleWeightedRandom
+internal class ResistanceAndBiasItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeightedRandom
 {
     private ResistanceAndBiasItemAdditiveBundleWeightedRandom(Game game) : base(game) { } // This object is a singleton
     protected override (string, int)[] ItemAdditiveBundleNames => new (string, int)[]

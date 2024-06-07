@@ -2206,7 +2206,7 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    public void ApplyRandomResistance(ItemAdditiveBundleWeightedRandom itemAdditiveBundleWeightedRandom)
+    public void ApplyRandomResistance(WeightedRandom<ItemAdditiveBundle> itemAdditiveBundleWeightedRandom)
     {
         ItemAdditiveBundle? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
         if (itemAdditiveBundle != null)
@@ -2279,7 +2279,7 @@ internal sealed class Item : IComparable<Item>
                     }
                     else
                     {
-                        ItemAdditiveBundleWeightedRandom itemAdditiveBundleWeightedRandom = new ItemAdditiveBundleWeightedRandom(Game);
+                        WeightedRandom<ItemAdditiveBundle> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemAdditiveBundle>(Game);
                         itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AcidImmunityItemAdditiveBundle)));
                         itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ElectricityImmunityItemAdditiveBundle)));
                         itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ColdImmunityItemAdditiveBundle)));

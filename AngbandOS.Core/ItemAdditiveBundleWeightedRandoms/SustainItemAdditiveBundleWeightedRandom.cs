@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 
 [Serializable]
-internal class SustainItemAdditiveBundleWeightedRandom : BoundItemAdditiveBundleWeightedRandom
+internal class SustainItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeightedRandom
 {
     private SustainItemAdditiveBundleWeightedRandom(Game game) : base(game) { } // This object is a singleton
     protected override (string, int)[] ItemAdditiveBundleNames => new (string, int)[]

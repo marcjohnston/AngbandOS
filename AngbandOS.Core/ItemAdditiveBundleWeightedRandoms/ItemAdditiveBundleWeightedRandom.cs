@@ -7,8 +7,29 @@
 
 namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 
+/// <summary>
+/// Represents a singleton for a weighted random of <see cref="ItemAdditiveBundle"/> objects.
+/// </summary>
 [Serializable]
-internal class ItemAdditiveBundleWeightedRandom : WeightedRandom<ItemAdditiveBundle>
+internal abstract class ItemAdditiveBundleWeightedRandom : WeightedRandom<ItemAdditiveBundle>, IGetKey
 {
-    public ItemAdditiveBundleWeightedRandom(Game game) : base(game) { }
+    protected ItemAdditiveBundleWeightedRandom(Game game) : base(game) { }
+
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+
+    protected abstract (string, int)[] ItemAdditiveBundleNames { get; }
+
+    public virtual void Bind()
+    {
+        foreach ((string itemAdditiveBundleName, int weight) in ItemAdditiveBundleNames)
+        {
+            Add(weight, Game.SingletonRepository.Get<ItemAdditiveBundle>(itemAdditiveBundleName));
+        }
+    }
+
+    public string ToJson()
+    {
+        return "";
+    }
 }
