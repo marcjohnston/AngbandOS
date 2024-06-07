@@ -447,12 +447,12 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
     private void JournalKills()
     {
-        string[] names = new string[Game.SingletonRepository.Get<MonsterRace>().Length];
-        int[] counts = new int[Game.SingletonRepository.Get<MonsterRace>().Length];
-        bool[] unique = new bool[Game.SingletonRepository.Get<MonsterRace>().Length];
+        string[] names = new string[Game.SingletonRepository.Count<MonsterRace>()];
+        int[] counts = new int[Game.SingletonRepository.Count<MonsterRace>()];
+        bool[] unique = new bool[Game.SingletonRepository.Count<MonsterRace>()];
         int maxCount = 0;
         int total = 0;
-        for (int i = 0; i < Game.SingletonRepository.Get<MonsterRace>().Length - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.Count<MonsterRace>() - 1; i++)
         {
             MonsterRace monster = Game.SingletonRepository.Get<MonsterRace>(i);
             if (monster.Unique)
@@ -565,8 +565,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
     private void JournalMonsters()
     {
-        int[] seen = new int[Game.SingletonRepository.Get<MonsterRace>().Length];
-        int[] filtered = new int[Game.SingletonRepository.Get<MonsterRace>().Length];
+        int[] seen = new int[Game.SingletonRepository.Count<MonsterRace>()];
+        int[] filtered = new int[Game.SingletonRepository.Count<MonsterRace>()];
         int maxSeen = 0;
         bool[] filterMask = new bool[256];
         int[] filterLookup = new int[256];
@@ -576,7 +576,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         {
             filterMask[i] = false;
         }
-        for (int i = 1; i < Game.SingletonRepository.Get<MonsterRace>().Length; i++)
+        for (int i = 1; i < Game.SingletonRepository.Count<MonsterRace>(); i++)
         {
             if (Game.SingletonRepository.Get<MonsterRace>(i).Knowledge.RSights != 0 || Game.IsWizard.BoolValue)
             {
@@ -882,10 +882,10 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
     private void JournalUniques()
     {
-        string[] names = new string[Game.SingletonRepository.Get<MonsterRace>().Length];
-        bool[] alive = new bool[Game.SingletonRepository.Get<MonsterRace>().Length];
+        string[] names = new string[Game.SingletonRepository.Count<MonsterRace>()];
+        bool[] alive = new bool[Game.SingletonRepository.Count<MonsterRace>()];
         int maxCount = 0;
-        for (int i = 0; i < Game.SingletonRepository.Get<MonsterRace>().Length - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.Count<MonsterRace>() - 1; i++)
         {
             MonsterRace monster = Game.SingletonRepository.Get<MonsterRace>(i);
             if (monster.Unique &&
@@ -947,7 +947,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     private void BuildMenuForForWorthlessItems()
     {
         _menuLength = 0;
-        for (int i = 0; i < Game.SingletonRepository.Get<ItemClass>().Length - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.Count<ItemClass>() - 1; i++)
         {
             ItemClass itemClass = Game.SingletonRepository.Get<ItemClass>(i);
             if (itemClass.AllowStomp)
@@ -995,7 +995,6 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                 {
                     WorthlessItemTypeSelection(Game.SingletonRepository.Get<ItemClass>().First(_itemClass => Game.Pluralize(_itemClass.Name) == _menuItem[menu]));
                     BuildMenuForForWorthlessItems();
-                    //_menuLength = Game.SingletonRepository.Get<ItemClass>().Length - 1;
                     break;
                 }
                 if (c == '4')
@@ -1133,7 +1132,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     private void WorthlessItemTypeSelection(ItemClass tval)
     {
         _menuLength = 0;
-        for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
+        for (int i = 0; i < Game.SingletonRepository.Count<ItemFactory>(); i++)
         {
             ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
             if (itemFactory.ItemClass == tval)
@@ -1180,7 +1179,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                     {
                         WorthlessItemQualitySelection(itemFactory);
                         _menuLength = 0;
-                        for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
+                        for (int i = 0; i < Game.SingletonRepository.Count<ItemFactory>(); i++)
                         {
                             itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
                             if (itemFactory.ItemClass == tval)

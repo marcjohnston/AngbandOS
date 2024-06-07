@@ -51,7 +51,7 @@ internal class RunRandomActivationScript : Script, IScript
             return;
         }
         selectedIndex--;
-        if (selectedIndex < 0 || selectedIndex > Game.SingletonRepository.Get<Activation>().Length)
+        if (selectedIndex < 0 || selectedIndex > Game.SingletonRepository.Count<Activation>())
         {
             return;
         }

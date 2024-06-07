@@ -60,7 +60,7 @@ internal class CreateItemScript : Script, IScript
         char ch;
         int[] choice = new int[60];
         Game.Screen.Clear();
-        for (num = 0; num < 60 && num < Game.SingletonRepository.Get<ItemClass>().Length; num++)
+        for (num = 0; num < 60 && num < Game.SingletonRepository.Count<ItemClass>(); num++)
         {
             ItemClass itemClass = Game.SingletonRepository.Get<ItemClass>(num);
             row = 2 + (num % 20);
@@ -96,7 +96,7 @@ internal class CreateItemScript : Script, IScript
         const int maxLetters = 26;
         const int maxNumbers = 10;
         const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
-        for (num = 0, i = 1; num < maxCount && i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
+        for (num = 0, i = 1; num < maxCount && i < Game.SingletonRepository.Count<ItemFactory>(); i++)
         {
             ItemFactory kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
             if (kPtr.ItemClass == selectedItemClass)

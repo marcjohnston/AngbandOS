@@ -54,7 +54,7 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                         Race newRace;
                         do
                         {
-                            newRaceIndex = Game.RandomLessThan(Game.SingletonRepository.Get<Race>().Length);
+                            newRaceIndex = Game.RandomLessThan(Game.SingletonRepository.Count<Race>());
                             newRace = Game.SingletonRepository.Get<Race>(newRaceIndex);
                         } while (newRace is Race);
                         Game.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");

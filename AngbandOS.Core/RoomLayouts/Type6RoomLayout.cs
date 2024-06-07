@@ -109,7 +109,7 @@ internal class Type6RoomLayout : RoomLayout
                 int _templateRace;
                 do
                 {
-                    _templateRace = Game.DieRoll(Game.SingletonRepository.Get<MonsterRace>().Length - 2);
+                    _templateRace = Game.DieRoll(Game.SingletonRepository.Count<MonsterRace>() - 2);
                 } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
                 getMonNumHook = new SymbolDynamicMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
             }

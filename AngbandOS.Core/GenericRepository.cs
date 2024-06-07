@@ -8,7 +8,8 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents a repository that is both a dictionary and a list.  Singletons are stored in both a dictionary with a string key and a list.
+/// Represents a repository that is both a dictionary and a list.  Singletons are stored in both a dictionary with a string key and a list.  The key is typically the type name.  The singleton
+/// objects are being stored generically as an object.
 /// </summary>
 [Serializable]
 internal class GenericRepository // TODO: Rename this as simply Repository
@@ -28,5 +29,17 @@ internal class GenericRepository // TODO: Rename this as simply Repository
             resultList.Add((T)singleton);
         }
         return resultList.ToArray();
+    }
+
+    /// <summary>
+    /// Returns the number of singletons in the repository without needing to perform any typecasting.
+    /// </summary>
+    /// <returns></returns>
+    public int Count
+    {
+        get
+        {
+            return List.Count;
+        }
     }
 }

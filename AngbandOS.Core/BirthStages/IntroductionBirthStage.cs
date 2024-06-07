@@ -93,7 +93,7 @@ internal class IntroductionBirthStage : BirthStage
             Game.BaseCharacterClass = Game.SingletonRepository.ToWeightedRandom<BaseCharacterClass>().ChooseOrDefault();
             do
             {
-                int raceIndex = Game.RandomLessThan(Game.SingletonRepository.Get<Race>().Length);
+                int raceIndex = Game.RandomLessThan(Game.SingletonRepository.Count<Race>());
                 Game.Race = Game.SingletonRepository.Get<Race>(raceIndex);
                 Game.GetFirstLevelMutation = Game.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
             }

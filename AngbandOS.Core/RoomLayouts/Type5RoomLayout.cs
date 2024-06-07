@@ -96,7 +96,7 @@ internal class Type5RoomLayout : RoomLayout
 
             do
             {
-                _templateRace = Game.DieRoll(Game.SingletonRepository.Get<MonsterRace>().Length - 2);
+                _templateRace = Game.DieRoll(Game.SingletonRepository.Count<MonsterRace>() - 2);
             } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
             if (Game.DieRoll(2) != 1 && Game.Difficulty >= 25 + Game.DieRoll(15))
             {

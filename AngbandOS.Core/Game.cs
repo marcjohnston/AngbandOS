@@ -1806,7 +1806,7 @@ internal class Game
         {
             kPtr.Tried = false;
         }
-        for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length; i++)
+        for (int i = 1; i < SingletonRepository.Count<MonsterRace>(); i++)
         {
             MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(i);
             rPtr.CurNum = 0;
@@ -1817,7 +1817,7 @@ internal class Game
             }
             rPtr.Knowledge.RPkills = 0;
         }
-        SingletonRepository.Get<MonsterRace>(SingletonRepository.Get<MonsterRace>().Length - 1).MaxNum = 0;
+        SingletonRepository.Get<MonsterRace>(SingletonRepository.Count<MonsterRace>() - 1).MaxNum = 0;
         Food.IntValue = Constants.PyFoodFull - 1;
         IsWizard.BoolValue = false;
         IsWinner.BoolValue = false;
@@ -2162,7 +2162,7 @@ internal class Game
             string buffer;
             if (dungeon.Visited)
             {
-                buffer = y < SingletonRepository.Get<Town>().Length
+                buffer = y < SingletonRepository.Count<Town>()
                     ? $"{dungeon.MapSymbol} = {SingletonRepository.Get<Town>(y).Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
                     : $"{dungeon.MapSymbol} = {dungeon.Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
@@ -2171,7 +2171,7 @@ internal class Game
                 buffer = $"? = {dungeon.Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
             ColorEnum keyAttr = ColorEnum.Brown;
-            if (y < SingletonRepository.Get<Town>().Length)
+            if (y < SingletonRepository.Count<Town>())
             {
                 keyAttr = ColorEnum.Grey;
             }
@@ -3009,7 +3009,7 @@ internal class Game
         }
 
         // Create walkway paths between the towns.
-        for (int i = 0; i < SingletonRepository.Get<Town>().Length - 1; i++)
+        for (int i = 0; i < SingletonRepository.Count<Town>() - 1; i++)
         {
             int curX = SingletonRepository.Get<Town>(i).X;
             int curY = SingletonRepository.Get<Town>(i).Y;
@@ -3305,7 +3305,7 @@ internal class Game
                 }
                 if (okay)
                 {
-                    int index = RandomLessThan(SingletonRepository.Get<ScrollReadableFlavor>().Length);
+                    int index = RandomLessThan(SingletonRepository.Count<ScrollReadableFlavor>());
                     ScrollReadableFlavor baseFlavor = SingletonRepository.Get<ScrollReadableFlavor>(index);
                     UnreadableScrollFlavor flavor = new UnreadableScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
                     UnreadableScrollFlavors.Add(flavor);
@@ -3362,7 +3362,7 @@ internal class Game
         }
         AllocationEntry[] table = AllocKindTable;
 
-        for (int i = 1; i < SingletonRepository.Get<ItemFactory>().Length; i++)
+        for (int i = 1; i < SingletonRepository.Count<ItemFactory>(); i++)
         {
             ItemFactory kPtr = SingletonRepository.Get<ItemFactory>(i);
 
@@ -3386,7 +3386,7 @@ internal class Game
         aux = new int[Constants.MaxDepth];
         itemCountPerLevel = new int[Constants.MaxDepth];
         AllocRaceSize = 0;
-        for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
+        for (int i = 1; i < SingletonRepository.Count<MonsterRace>() - 1; i++)
         {
             MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)
@@ -3411,7 +3411,7 @@ internal class Game
             AllocRaceTable[k] = new AllocationEntry();
         }
         table = AllocRaceTable;
-        for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
+        for (int i = 1; i < SingletonRepository.Count<MonsterRace>() - 1; i++)
         {
             MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)
@@ -3704,7 +3704,7 @@ internal class Game
             }
             if (RandomLessThan(Constants.StoreShuffle) == 0)
             {
-                int town = RandomLessThan(SingletonRepository.Get<Town>().Length);
+                int town = RandomLessThan(SingletonRepository.Count<Town>());
                 int store = RandomLessThan(12);
                 SingletonRepository.Get<Town>(town).Stores[store].StoreShuffle();
             }
@@ -12681,7 +12681,7 @@ internal class Game
     public void SummonNamedMonster(bool slp)
     {
         int rIdx = CommandArgument;
-        if (rIdx >= SingletonRepository.Get<MonsterRace>().Length - 1)
+        if (rIdx >= SingletonRepository.Count<MonsterRace>() - 1)
         {
             return;
         }
@@ -12703,7 +12703,7 @@ internal class Game
     public void DoCmdWizNamedFriendly(bool slp)
     {
         int rIdx = CommandArgument;
-        if (rIdx >= SingletonRepository.Get<MonsterRace>().Length - 1)
+        if (rIdx >= SingletonRepository.Count<MonsterRace>() - 1)
         {
             return;
         }
@@ -12922,14 +12922,14 @@ internal class Game
     private int GetRandomQuestMonster(int qIdx)
     {
         // Pick a minimum monster index and 1/3 of the monsters.
-        int minIndex = SingletonRepository.Get<MonsterRace>().Length / 3;
+        int minIndex = SingletonRepository.Count<MonsterRace>() / 3;
 
         // Do not allow monster zero.
         if (minIndex == 0)
         {
             minIndex = 1;
         }
-        int rIdx = RandomBetween(minIndex, SingletonRepository.Get<MonsterRace>().Length - 2); // TODO: We need to -1 the nobody monster
+        int rIdx = RandomBetween(minIndex, SingletonRepository.Count<MonsterRace>() - 2); // TODO: We need to -1 the nobody monster
 
         // Do not allow a monster that can multiply.
         if (SingletonRepository.Get<MonsterRace>(rIdx).Multiply)
@@ -15340,14 +15340,14 @@ internal class Game
 
     private void ImageMonster(out ColorEnum ap, out char cp)
     {
-        cp = SingletonRepository.Get<MonsterRace>(DieRoll(SingletonRepository.Get<MonsterRace>().Length - 2)).Symbol.Character;
-        ap = SingletonRepository.Get<MonsterRace>(DieRoll(SingletonRepository.Get<MonsterRace>().Length - 2)).Color;
+        cp = SingletonRepository.Get<MonsterRace>(DieRoll(SingletonRepository.Count<MonsterRace>() - 2)).Symbol.Character;
+        ap = SingletonRepository.Get<MonsterRace>(DieRoll(SingletonRepository.Count<MonsterRace>() - 2)).Color;
     }
 
     private void ImageObject(out ColorEnum ap, out char cp)
     {
-        cp = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Get<ItemFactory>().Length - 1)).FlavorSymbol.Character;
-        ap = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Get<ItemFactory>().Length - 1)).FlavorColor;
+        cp = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).FlavorSymbol.Character;
+        ap = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).FlavorColor;
     }
 
     private void ImageRandom(out ColorEnum ap, out char cp)

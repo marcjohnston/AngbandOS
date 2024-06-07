@@ -19,7 +19,7 @@ internal class CreateFixedArtifactScript : Script, IScript
     public void ExecuteScript()
     {
         int aIdx = Game.CommandArgument;
-        if (aIdx < 0 || aIdx >= Game.SingletonRepository.Get<FixedArtifact>().Length)
+        if (aIdx < 0 || aIdx >= Game.SingletonRepository.Count<FixedArtifact>())
         {
             return;
         }

@@ -96,7 +96,7 @@ internal abstract class ChestItemFactory : ItemFactory
         {
             int chestType = Game.DieRoll(item.Factory.LevelNormallyFound);
             item.ContainerIsOpen = false;
-            int chestTrapConfigurationCount = Game.SingletonRepository.Get<ChestTrapConfiguration>().Length;
+            int chestTrapConfigurationCount = Game.SingletonRepository.Count<ChestTrapConfiguration>();
             int eightFivePercent = chestTrapConfigurationCount * 100 / 85;
             if (chestType > eightFivePercent)
             { 

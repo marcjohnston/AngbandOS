@@ -13,8 +13,8 @@ internal abstract class FixedArtifact : ItemAdditiveBundle
     protected FixedArtifact(Game game) : base(game) { }
 
     /// <summary>
-    ///  Returns an activation object, if the fixed artifact can be activated; otherwise, null is returned.  This property is bound from ActivationName property
-    ///  during the bind phase.
+    /// Returns an activation object, if the fixed artifact can be activated; otherwise, null is returned.  This property is bound from ActivationName property
+    /// during the bind phase.
     /// </summary>
     public Activation? Activation { get; private set; }
 

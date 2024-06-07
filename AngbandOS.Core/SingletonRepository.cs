@@ -130,6 +130,17 @@ internal class SingletonRepository
     }
 
     /// <summary>
+    /// Returns the number of items in the singleton repository, with needing to perform any typecasting.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public int Count<T>()
+    {
+        string typeName = typeof(T).Name;
+        return _singletonsDictionary[typeName].Count;
+    }
+
+    /// <summary>
     /// Returns an array of singletons from the repository specified by the <typeparamref name="T"/> type referenced by the unique key identifiers <paramref name="keys"/>.  If any the singletons do not exist, an exception is thrown.
     /// </summary>
     /// <typeparam name="T"></typeparam>
