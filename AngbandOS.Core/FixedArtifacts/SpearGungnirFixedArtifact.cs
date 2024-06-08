@@ -8,29 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class SpearGungnirFixedArtifact : FixedArtifact
 {
     private SpearGungnirFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
-
-    // Grungnir shoots a lightning ball
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your spear crackles with electricity...");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 100, 3);
-        item.ActivationRechargeTimeRemaining = 500;
-    }
-    public string DescribeActivationEffect => "lightning ball (100) every 500 turns";
-
+    protected override string? ActivationName => nameof(BallOfLightning100r3Every500Activation);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear 'Gungnir'";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Blessed => true;
     public override bool BrandElec => true;
     public override bool BrandFire => true;

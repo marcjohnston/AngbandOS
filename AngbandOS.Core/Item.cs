@@ -88,7 +88,7 @@ internal sealed class Item : IComparable<Item>
     public int ArmorClass;
     public int BonusArmorClass;
     public int BonusDamage;
-    public Activation? Activation = null;
+ //   public Activation? Activation = null;
 
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
@@ -509,7 +509,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.BonusDamage = BonusDamage;
         clonedItem.BonusHit = BonusHit;
         clonedItem.Weight = Weight;
-        clonedItem.Activation = Activation;
         return clonedItem;
     }
 
@@ -1316,10 +1315,6 @@ internal sealed class Item : IComparable<Item>
         {
             total += 100;
         }
-        if (mergedCharacteristics.Activate)
-        {
-            total += 100;
-        }
         if (mergedCharacteristics.DrainExp)
         {
             total -= 12500;
@@ -1355,9 +1350,9 @@ internal sealed class Item : IComparable<Item>
         {
             total -= 15000;
         }
-        if (IsRandomArtifact && Characteristics.Activate)
+        if (mergedCharacteristics.Activation != null)
         {
-            total += Activation.Value;
+            total += mergedCharacteristics.Activation.Value;
         }
         return total;
     }
@@ -1499,26 +1494,10 @@ internal sealed class Item : IComparable<Item>
         int i = 0, j, k;
         string[] info = new string[128];
         ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
-        if (mergedCharacteristics.Activate)
+        if (mergedCharacteristics.Activation != null)
         {
             info[i++] = "It can be activated for...";
-            if (FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(FixedArtifact.GetType()))
-            {
-                IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)FixedArtifact;
-                info[i++] = activatibleFixedArtifact.DescribeActivationEffect;
-            }
-            else if (RareItem != null && RareItem.Activate)
-            {
-                info[i++] = RareItem.DescribeActivationEffect;
-            }
-            else if (Activation != null)
-            {
-                info[i++] = Activation.Description;
-            }
-            else if (Factory.DescribeActivationEffect != null)
-            {
-                info[i++] = Factory.DescribeActivationEffect;
-            }
+            info[i++] = mergedCharacteristics.Activation.Description;
             info[i++] = "...if it is being worn.";
         }
         string categoryIdentity = Factory.Identify(this);
@@ -2369,19 +2348,17 @@ internal sealed class Item : IComparable<Item>
         }
         if (!aCursed && Game.DieRoll(Factory.RandartActivationChance) == 1)
         {
-            Activation = null;
+            Characteristics.Activation = null;
             if (Characteristics.ArtifactBias != null)
             {
                 if (Game.DieRoll(100) < Characteristics.ArtifactBias.ActivationPowerChance)
                 {
-                    Activation = Characteristics.ArtifactBias.GetActivationPowerType(this);
-                    Characteristics.Activate = true;
+                    Characteristics.Activation = Characteristics.ArtifactBias.GetActivationPowerType(this);
                 }
             }
-            if (Activation == null)
+            if (Characteristics.Activation == null)
             {
-                Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
-                Characteristics.Activate = Activation != null;
+                Characteristics.Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
             }
             ActivationRechargeTimeRemaining = 0;
         }

@@ -8,20 +8,17 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
+internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
 {
     private BronzeDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string ActivationScriptName => nameof(BreatheConfusionScript);
-    public override int ActivationRechargeTime => Game.RandomLessThan(450) + 450;
-    public override string? DescribeActivationEffect => "breathe confusion (120) every 450+d450 turns";
+    protected override string? ActivationName => nameof(BallOfConfusion120r2Every1d450p450Activation);
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Bronze Dragon Scale Mail";
 
     public override int ArmorClass => 30;
-    public override bool Activate => true;
-    public override int Cost => 30000;
+    public override int Cost => 25000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     protected override string? DescriptionSyntax  => "Bronze Dragon Scale Mail~";

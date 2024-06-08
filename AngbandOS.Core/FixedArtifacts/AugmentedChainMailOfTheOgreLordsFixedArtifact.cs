@@ -26,7 +26,6 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Augmented Chain Mail of the Ogre Lords";
     public override int Ac => 16;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 40000;
     public override int Dd => 1;

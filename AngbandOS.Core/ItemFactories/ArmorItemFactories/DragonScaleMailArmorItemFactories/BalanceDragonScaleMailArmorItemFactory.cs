@@ -10,18 +10,15 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
 {
-    public override int ActivationRechargeTime => Game.RandomLessThan(300) + 300;
-    protected override string ActivationScriptName => nameof(BreatheChaosDisenchantSoundOrShardsScript);
+    protected override string? ActivationName => nameof(BreatheChaosDisenchantSoundOrShardsActivation);
     private BalanceDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override string? DescribeActivationEffect => "You breathe balance (250) every 300+d300 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "Balance Dragon Scale Mail";
 
     public override int ArmorClass => 30;
-    public override bool Activate => true;
-    public override int Cost => 100000;
+    public override int Cost => 90000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     protected override string? DescriptionSyntax  => "Balance Dragon Scale Mail~";

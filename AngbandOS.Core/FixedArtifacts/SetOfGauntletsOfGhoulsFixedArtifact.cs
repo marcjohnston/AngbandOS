@@ -8,29 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfGhoulsFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
-
-    // Ghouls shoot cold bolts
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your gauntlets are covered in frost...");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(Projection.ColdProjectile)), dir, base.Game.DiceRoll(6, 8));
-        item.ActivationRechargeTimeRemaining = base.Game.RandomLessThan(7) + 7;
-    }
-    public string DescribeActivationEffect => "frost bolt (6d8) every 7+d7 turns";
-
+    protected override string? ActivationName => nameof(BoltOfFrost6d8Every1d7p7Activation);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Ghouls";
     public override int Ac => 2;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 33000;
     public override int Dd => 1;

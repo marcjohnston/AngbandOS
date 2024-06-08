@@ -8,33 +8,19 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
 {
     private TridentOfTheGnorriFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(TridentPolearmWeaponItemFactory);
-
-    // Gnorri teleports monsters away
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your trident glows deep red...");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.TeleportMonster(dir);
-        item.ActivationRechargeTimeRemaining = 150;
-    }
+    protected override string? ActivationName => nameof(TeleportAwayEvery150Activation);
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
     }
-    public string DescribeActivationEffect => "teleport away every 150 turns";
-
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Trident of the Gnorri";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Blessed => true;
     public override int Cost => 120000;
     public override int TreasureRating => 20;

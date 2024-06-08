@@ -8,29 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsIronfistFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
-
-    // Iron Fist shoots fire bolts
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your gauntlets are covered in fire...");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(Projection.FireProjectile)), dir, base.Game.DiceRoll(9, 8));
-        item.ActivationRechargeTimeRemaining = base.Game.RandomLessThan(8) + 8;
-    }
-    public string DescribeActivationEffect => "fire bolt (9d8) every 8+d8 turns";
-
+    protected override string? ActivationName => nameof(BoltOfFire9d8Every1d8p8Activation);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets 'Ironfist'";
     public override int Ac => 2;
-    public override bool Activate => true;
     public override int Cost => 15000;
     public override int Dd => 1;
     public override int Ds => 1;

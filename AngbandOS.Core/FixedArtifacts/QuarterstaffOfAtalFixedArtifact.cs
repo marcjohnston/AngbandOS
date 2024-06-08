@@ -24,7 +24,6 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff of Atal";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool BrandFire => true;
     public override bool Cha => true;
     public override int Cost => 140000;

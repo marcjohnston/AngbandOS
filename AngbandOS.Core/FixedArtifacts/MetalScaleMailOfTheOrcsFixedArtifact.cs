@@ -26,7 +26,6 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Scale Mail of the Orcs";
     public override int Ac => 15;
-    public override bool Activate => true;
     public override bool Cha => true;
     public override int Cost => 150000;
     public override int TreasureRating => 20;

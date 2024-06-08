@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Rolls;
 
 [Serializable]
-internal abstract class Roll
+internal abstract class Roll // TODO: We need to add a description for Activations to render
 {
     protected readonly Game Game;
     protected Roll(Game game)

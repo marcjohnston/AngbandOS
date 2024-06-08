@@ -19,14 +19,8 @@ internal class WeaponPlanarWeaponRareItem : RareItem
             item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
         }
     }
-    public override bool DoActivate(Item item)
-    {
-        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
-        item.ActivationRechargeTimeRemaining = 50 + Game.DieRoll(50);
-        return true;
-    }
-    public override string? DescribeActivationEffect => "teleport every 50+d50 turns";
-    public override bool Activate => true;
+
+    protected override string? ActivationName => nameof(Teleport100Every1d50p50Activation);
     public override int Cost => 7000;
     public override bool FreeAct => true;
     public override string FriendlyName => "(Planar Weapon)";

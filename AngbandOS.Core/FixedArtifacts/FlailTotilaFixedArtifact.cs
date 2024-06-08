@@ -20,7 +20,6 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Flail 'Totila'";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool BrandFire => true;
     public override int Cost => 55000;
     public override int TreasureRating => 20;

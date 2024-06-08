@@ -20,7 +20,6 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Icicle'";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Blows => true;
     public override bool BrandCold => true;
     public override bool BrandPois => true;

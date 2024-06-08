@@ -8,29 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class SpearOfDestinyFixedArtifact : FixedArtifact
 {
     private SpearOfDestinyFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
-
-    // Destiny does rock to mud
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your spear pulsates...");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.WallToMud(dir);
-        item.ActivationRechargeTimeRemaining = 5;
-    }
-    public string DescribeActivationEffect => "stone to mud every 5 turns";
-
+    protected override string? ActivationName => nameof(StoneToMudEvery5Activation);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear of Destiny";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Blessed => true;
     public override bool BrandFire => true;
     public override int Cost => 77777;

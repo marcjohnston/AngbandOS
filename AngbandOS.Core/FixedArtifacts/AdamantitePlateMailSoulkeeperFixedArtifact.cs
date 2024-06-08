@@ -13,14 +13,10 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
     private AdamantitePlateMailSoulkeeperFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(AdamantitePlateMailHardArmorItemFactory);
-
-    // Soulkeeper heals you a lot
     protected override string? ActivationName => nameof(Heal1000Every888Activation);
-
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";
     public override int Ac => 40;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 300000;
     public override int TreasureRating => 20;

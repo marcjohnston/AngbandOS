@@ -8,32 +8,21 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
+internal class AcidRingItemFactory : RingItemFactory
 {
     private AcidRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 50, 2);
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        item.ActivationRechargeTimeRemaining = Game.RandomLessThan(50) + 50;
-    }
+    protected override string? ActivationName => nameof(BallOfAcid50r2AndResistAcid1d20p20ctivation);
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
-    public override string? DescribeActivationEffect => "ball of acid and resist acid";
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Acid";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override bool Activate => true;
-    public override int Cost => 3000;
+    public override int Cost => 2000;
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

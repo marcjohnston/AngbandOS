@@ -20,7 +20,6 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Dragon Helm of Power";
     public override int Ac => 8;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 300000;
     public override int TreasureRating => 20;

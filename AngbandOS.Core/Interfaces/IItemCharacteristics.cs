@@ -16,10 +16,11 @@ namespace AngbandOS.Core.Interfaces;
 internal interface IItemCharacteristics
 {
     /// <summary>
-    /// Returns true, if items of this factory can be activated.  Returns true for all dragon scale mail and rings of ice, acid and flames.  Returns false, by default.  Items produced
-    /// by this factory will implement the IItemActivatible interface.
+    /// Returns the <see cref="Activation"/>, if the item can be activated; or null, if the item cannot be activated.  This property is bound using the <see cref="ActivationName"/> property during
+    /// the bind phase.
     /// </summary>
-    bool Activate { get; }
+    Activation? Activation { get; }
+
     bool Aggravate { get; }
     bool AntiTheft { get; }
     ArtifactBias? ArtifactBias { get; }

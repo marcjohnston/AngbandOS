@@ -20,7 +20,6 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe 'Spleen Slicer'";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override int Cost => 21000;
     public override int Dd => 2;
     public override bool Dex => true;

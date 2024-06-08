@@ -19,7 +19,6 @@ internal class RingOfBastFixedArtifact : FixedArtifact
 
     public override string Name => "The Ring of Bast";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 175000;
     public override int TreasureRating => 20;

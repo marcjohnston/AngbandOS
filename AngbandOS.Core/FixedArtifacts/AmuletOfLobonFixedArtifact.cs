@@ -19,7 +19,6 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact
 
     public override string Name => "The Amulet of Lobon";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 60000;
     public override int TreasureRating => 20;

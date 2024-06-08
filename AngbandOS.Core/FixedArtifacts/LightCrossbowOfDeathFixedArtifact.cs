@@ -34,7 +34,6 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Light Crossbow of Death";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override int Cost => 50000;
     public override int Dd => 0;
     public override int Ds => 0;

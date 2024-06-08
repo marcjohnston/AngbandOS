@@ -8,23 +8,8 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IItemsCanBeActivated
+internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory
 {
-
-    public IScript ActivationScript { get; private set; }
-    public void ActivateItem(Item item)
-    {
-        ActivationScript.ExecuteScript();
-        item.ActivationRechargeTimeRemaining = ActivationRechargeTime;
-        return;
-    }
-
-    public override void Bind()
-    {
-        base.Bind();
-        ActivationScript = Game.SingletonRepository.Get<IScript>(ActivationScriptName);
-    }
-
     /// <summary>
     /// Applies special magic to dragon scale mail armor.
     /// </summary>
@@ -42,10 +27,6 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IIte
     }
 
     public DragonScaleMailArmorItemFactory(Game game) : base(game) { }
-
-    public abstract int ActivationRechargeTime { get; }
-
-    protected abstract string ActivationScriptName { get; }
 
     /// <summary>
     /// Returns true because broken armor should be stomped automatically. 

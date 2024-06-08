@@ -20,7 +20,6 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger of Thoth";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool BrandPois => true;
     public override int Cost => 35000;
     public override int Dd => 2;

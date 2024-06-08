@@ -20,7 +20,6 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Pair of Hard Leather Boots of Ithaqua";
     public override int Ac => 3;
-    public override bool Activate => true;
     public override int Cost => 300000;
     public override int TreasureRating => 20;
     public override int Dd => 1;

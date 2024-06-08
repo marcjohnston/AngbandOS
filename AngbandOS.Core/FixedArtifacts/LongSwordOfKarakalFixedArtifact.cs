@@ -22,7 +22,6 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Karakal";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Blows => true;
     public override bool BrandElec => true;
     public override bool Chaotic => true;

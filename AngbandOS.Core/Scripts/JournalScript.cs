@@ -334,7 +334,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         DisplayStat("Ign Elec", 27, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IgnoreElec);
         DisplayStat("Ign Fire", 28, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IgnoreFire);
         DisplayStat("Ign Cold", 29, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IgnoreCold);
-        DisplayStat("Activate", 30, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Activate);
+        DisplayStat("Activate", 30, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Activation != null);
         DisplayStat("Drain Exp", 31, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.DrainExp);
         DisplayStat("Teleport", 32, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Teleport);
         DisplayStat("Aggravate", 33, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Aggravate);

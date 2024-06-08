@@ -33,7 +33,6 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Everflame";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool BrandFire => true;
     public override int Cost => 80000;
     public override int TreasureRating => 20;

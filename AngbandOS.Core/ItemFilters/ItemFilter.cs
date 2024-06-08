@@ -152,9 +152,16 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         {
             return false;
         }
-        if (CanBeActivated != null && mergedCharacteristics.Activate != CanBeActivated)
+        if (CanBeActivated.HasValue)
         {
-            return false;
+            if (CanBeActivated.Value && mergedCharacteristics.Activation == null)
+            {
+                return false;
+            }
+            else if (!CanBeActivated.Value && mergedCharacteristics.Activation != null)
+            {
+                return false;
+            }
         }
         if (IsLanternFuel != null && item.Factory.IsFuelForLantern != IsLanternFuel)
         {

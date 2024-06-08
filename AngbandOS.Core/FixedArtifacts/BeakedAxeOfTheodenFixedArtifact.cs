@@ -20,7 +20,6 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Beaked Axe of Theoden";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 40000;
     public override int Dd => 2;

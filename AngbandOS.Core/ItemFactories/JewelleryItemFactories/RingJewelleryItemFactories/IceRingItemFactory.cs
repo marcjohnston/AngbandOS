@@ -8,31 +8,20 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
+internal class IceRingItemFactory : RingItemFactory
 {
     private IceRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 50, 2);
-        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        item.ActivationRechargeTimeRemaining = Game.RandomLessThan(50) + 50;
-    }
+    protected override string? ActivationName => nameof(BallOfCold50r2Every1d20p20Activation);
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
-    public override string? DescribeActivationEffect => "ball of cold and resist cold";
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Ice";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override bool Activate => true;
     public override int Cost => 3000;
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 50;

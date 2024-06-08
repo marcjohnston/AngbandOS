@@ -39,7 +39,6 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";
     public override int Ac => 5;
-    public override bool Activate => true;
     public override int Cost => 0;
     public override int Dd => 1;
     public override int Ds => 3;

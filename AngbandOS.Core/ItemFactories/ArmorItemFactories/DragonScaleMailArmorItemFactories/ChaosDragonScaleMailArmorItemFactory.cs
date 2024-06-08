@@ -8,20 +8,17 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
+internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
 {
     private ChaosDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string ActivationScriptName => nameof(BreatheChaosOrDisenchantmentScript);
-    public override int ActivationRechargeTime => Game.RandomLessThan(300) + 300;
-    public override string? DescribeActivationEffect => "breathe chaos/disenchant (220) every 300+d300 turns";
+    protected override string? ActivationName => nameof(BallOfChaos200r2Every1d300p300Activation);
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos Dragon Scale Mail";
 
     public override int ArmorClass => 30;
-    public override bool Activate => true;
-    public override int Cost => 70000;
+    public override int Cost => 65000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     protected override string? DescriptionSyntax  => "Chaos Dragon Scale Mail~";

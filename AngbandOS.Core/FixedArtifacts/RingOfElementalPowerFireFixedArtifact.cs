@@ -19,7 +19,6 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact
 
     public override string Name => "The Ring of Elemental Power (Fire)";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Cha => true;
     public override bool Con => true;
     public override int Cost => 100000;

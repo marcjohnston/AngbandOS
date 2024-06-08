@@ -28,7 +28,6 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Golden Crown of the Sun";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Con => true;
     public override int Cost => 125000;
     public override int TreasureRating => 20;

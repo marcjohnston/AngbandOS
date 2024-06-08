@@ -757,13 +757,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public ItemClass ItemClass { get; private set; }
 
     /// <summary>
-    /// Returns a description of the activation effect for the item or null, if the item cannot be activated.  Returns null by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual string? DescribeActivationEffect => null;
-
-    /// <summary>
     /// Returns true, if the item is fuel for a lantern.  Returns false, by default.
     /// </summary>
     public virtual bool IsFuelForLantern => false;

@@ -8,20 +8,16 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
+internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
 {
     private MultiHuedDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string ActivationScriptName => nameof(BreatheLightningFrostAcidPoisonGasOrFireScript);
-    public override int ActivationRechargeTime => Game.RandomLessThan(225) + 225;
-    public override string? DescribeActivationEffect => "breathe multi-hued (250) every 225+d225 turns";
+    protected override string? ActivationName => nameof(BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225Activation);
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Multi-Hued Dragon Scale Mail";
-
     public override int ArmorClass => 30;
-    public override bool Activate => true;
-    public override int Cost => 150000;
+    public override int Cost => 145000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     protected override string? DescriptionSyntax  => "Multi-Hued Dragon Scale Mail~";

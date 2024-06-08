@@ -18,7 +18,8 @@ internal class CreateFixedArtifactScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int aIdx = Game.CommandArgument;
+        // Retrieve the command argument which is 1-based.  We need to convert it to 0-based.
+        int aIdx = Game.CommandArgument - 1;
         if (aIdx < 0 || aIdx >= Game.SingletonRepository.Count<FixedArtifact>())
         {
             return;

@@ -20,7 +20,6 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
     public override int Ac => 28;
-    public override bool Activate => true;
     public override int Cost => 135000;
     public override int TreasureRating => 20;
     public override int Dd => 1;

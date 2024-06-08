@@ -8,29 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact
 {
     private SetOfLeatherGlovesOfLightFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(LeatherGlovesArmorItemFactory);
-
-    // Light shoots magic missiles
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your gloves glow extremely brightly...");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(Projection.MissileProjectile)), dir, base.Game.DiceRoll(2, 6));
-        item.ActivationRechargeTimeRemaining = 2;
-    }
-    public string DescribeActivationEffect => "magic missile (2d6) every 2 turns";
-
+    protected override string? ActivationName => nameof(MagicMissle2d6Every2Activation);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Leather Gloves of Light";
     public override int Ac => 1;
-    public override bool Activate => true;
     public override int Cost => 30000;
     public override int Dd => 0;
     public override int Ds => 0;

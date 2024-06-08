@@ -25,7 +25,6 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Faith'";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool BrandFire => true;
     public override int Cost => 12000;
     public override int Dd => 1;

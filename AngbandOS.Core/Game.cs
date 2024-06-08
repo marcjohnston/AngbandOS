@@ -6533,26 +6533,11 @@ internal class Game
     }
 
     /// <summary>
-    /// Return whether or not an item can be activated
-    /// </summary>
-    /// <param name="item"> The item to check </param>
-    /// <returns> True if the item can be activated </returns>
-    public bool ItemFilterActivatable(Item item)
-    {
-        if (!item.IsKnown())
-        {
-            return false;
-        }
-        ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
-        return mergedCharacteristics.Activate;
-    }
-
-    /// <summary>
     /// Return whether or not an item is a high level book
     /// </summary>
     /// <param name="item"> The item to check </param>
     /// <returns> True if the item is a high level book </returns>
-    public bool ItemFilterHighLevelBook(Item item)
+    public bool ItemFilterHighLevelBook(Item item) // TODO: Isn't this an ItemFilter
     {
         BookItemFactory? bookItemFactory = item.TryGetFactory<BookItemFactory>();
         return bookItemFactory != null && bookItemFactory.IsHighLevelBook;

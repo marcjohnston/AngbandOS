@@ -8,29 +8,19 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfNyogthaFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ShadowCloakArmorItemFactory);
-
-    // Nyogtha restores experience
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your cloak glows a deep red...");
-        Game.RunScript(nameof(RestoreLevelScript));
-        item.ActivationRechargeTimeRemaining = 450;
-    }
-    public string DescribeActivationEffect => "restore life levels every 450 turns";
+    protected override string? ActivationName => nameof(RestoreLifeLevelsEvery450Activation);
     public override void ApplyResistances(Item item)
     {
         item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
     }
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Shadow Cloak of Nyogtha";
     public override int Ac => 6;
-    public override bool Activate => true;
     public override bool Cha => true;
     public override int Cost => 55000;
     public override int Dd => 0;

@@ -25,7 +25,6 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of the Swashbuckler";
     public override int Ac => 1;
-    public override bool Activate => true;
     public override bool Cha => true;
     public override int Cost => 35000;
     public override int Dd => 0;

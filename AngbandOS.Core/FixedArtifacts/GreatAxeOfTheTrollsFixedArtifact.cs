@@ -20,7 +20,6 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Great Axe of the Trolls";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool Blessed => true;
     public override bool BrandCold => true;
     public override bool Cha => true;

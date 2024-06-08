@@ -35,20 +35,20 @@ internal abstract class Activation : IGetKey
     public virtual void Bind() { }
 
     /// <summary>
-    /// Returns the unique name for this activation power.
+    /// Returns the unique name for this activation.  This name should be capitalized appropriately.
     /// </summary>
     public abstract string Name { get; }
 
     /// <summary>
-    /// Returns the message to be displayed to the player, before the activation power occurs.  No message is display, if empty or null.  Returns null, by default.
-    /// This message is also displayed before a direction is requested from the player.
+    /// Returns the message to be displayed to the player, before the activation and before a direction is requested, or null, if no message is to be rendered.  Returns null, by default.  This message also supports string interpolation:
+    /// {0} - will be replaced with the associated <see cref="ItemClass.Name"/>. 
     /// </summary>
-    public virtual string? PreActivationMessage => null;
+    public virtual string? PreActivationMessage => null; // TODO: Need to accomodate proper grammar for items that use the {0} class name and a verb (e.g. your gauntlets glow vs your scale mail glows)
 
     /// <summary>
     /// Returns the amount of time the artifact needs to recharge, if the Activate method returns true.
     /// </summary>
-    public abstract int RechargeTime();
+    public abstract int RechargeTime(); // TODO: This needs to be converted into Roll that has a description.
 
     /// <summary>
     /// Activates the artifact power; returning false, if the activation was cancelled by the user; true, otherwise.
@@ -57,7 +57,7 @@ internal abstract class Activation : IGetKey
     /// <returns></returns>
     protected abstract bool OnActivate(Item item);
 
-    public bool Activate(Item item)
+    public bool Activate(Item item) // TODO: This should be an ActivatibleScript
     {
         if (PreActivationMessage != null)
         {

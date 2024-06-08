@@ -20,7 +20,6 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff 'Eriril'";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override int Cost => 20000;
     public override int Dd => 1;
     public override int Ds => 9;

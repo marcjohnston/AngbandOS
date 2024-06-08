@@ -20,7 +20,6 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of Barzai";
     public override int Ac => 1;
-    public override bool Activate => true;
     public override int Cost => 10000;
     public override int Dd => 0;
     public override int Ds => 0;

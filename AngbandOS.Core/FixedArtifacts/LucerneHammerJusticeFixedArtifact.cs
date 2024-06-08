@@ -25,7 +25,6 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Lucerne Hammer 'Justice'";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override bool BrandCold => true;
     public override int Cost => 30000;
     public override int Dd => 2;

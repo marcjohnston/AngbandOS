@@ -14,7 +14,7 @@ namespace AngbandOS.Core;
 internal class ItemCharacteristics : IItemCharacteristics
 {
     /// <inheritdoc/>
-    public bool Activate { get; set; } = false; // TODO: This should be IActivatible.IsAssignableFrom
+    public Activation? Activation { get; set; } = null;
 
     /// <inheritdoc/>
     public bool Aggravate { get; set; } = false;
@@ -296,7 +296,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     /// <param name="itemCharacteristicsB"></param>
     public void Copy(IItemCharacteristics itemCharacteristics)
     {
-        Activate = itemCharacteristics.Activate;
+        Activation = itemCharacteristics.Activation;
         Aggravate = itemCharacteristics.Aggravate;
         AntiTheft = itemCharacteristics.AntiTheft;
         ArtifactBias = itemCharacteristics.ArtifactBias;
@@ -401,7 +401,11 @@ internal class ItemCharacteristics : IItemCharacteristics
             ArtifactBias = itemCharacteristics.ArtifactBias;
         }
 
-        Activate |= itemCharacteristics.Activate;
+        if (Activation == null)
+        {
+            Activation = itemCharacteristics.Activation;
+        }
+
         Aggravate |= itemCharacteristics.Aggravate;
         AntiTheft |= itemCharacteristics.AntiTheft;
         Blessed |= itemCharacteristics.Blessed;

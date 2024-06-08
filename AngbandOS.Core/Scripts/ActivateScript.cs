@@ -96,35 +96,10 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessByCh
         Game.PlaySound(SoundEffectEnum.ActivateArtifact);
 
         // If it is a random artifact then use its ability and quit
-        if (item.IsRandomArtifact)
+        ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
+        if (mergedCharacteristics.Activation != null)
         {
-            Activation artifactPower = item.Activation;
-            return artifactPower.Activate(item);
-        }
-
-        // If it is a fixed artifact and that artifact has activation then use its ability
-        if (item.FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
-        {
-            IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)item.FixedArtifact;
-            activatibleFixedArtifact.ActivateItem(item);
-            return true;
-        }
-
-        // If it wasn't an artifact, then check the other types of activatable item Planar
-        // weapon teleports you
-        if (item.RareItem != null && item.RareItem.Activate)
-        {
-            // Allow the rare item singleton to perform the activation.
-            item.RareItem.DoActivate(item);
-            return true;
-        }
-
-        // Check to see if the item can be activated.
-        if (item.Factory.Activate)
-        {
-            IItemsCanBeActivated factory = (IItemsCanBeActivated)item.Factory;
-            factory.ActivateItem(item);
-            return true;
+            return mergedCharacteristics.Activation.Activate(item);
         }
 
         return false;

@@ -8,26 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class StarEssenceOfXothFixedArtifact : FixedArtifact
 {
     private StarEssenceOfXothFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(StarEssenceElendilLightSourceItemFactory);
-
-    // Star essence of Xoth lights and maps the area
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("The essence shines brightly...");
-        Game.RunScript(nameof(MapAreaScript));
-        Game.LightArea(base.Game.DiceRoll(2, 15), 3);
-        item.ActivationRechargeTimeRemaining = base.Game.RandomLessThan(50) + 50;
-    }
-    public string DescribeActivationEffect => "magic mapping and light every 50+d50 turns";
-
+    protected override string? ActivationName => nameof(MagicMappingAndIlluminationEvery1d50p50Activation);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Xoth";
     public override int Ac => 0;
-    public override bool Activate => true;
     public override int Cost => 32500;
     public override int Dd => 1;
     public override int Ds => 1;

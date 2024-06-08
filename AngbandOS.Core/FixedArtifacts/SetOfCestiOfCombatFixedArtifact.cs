@@ -8,33 +8,19 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
 {
     private SetOfCestiOfCombatFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(CestiGlovesArmorItemFactory);
-
-    // Cesti shoot arrows
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("Your cesti grows magical spikes...");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ArrowProjectile)), dir, 150);
-        item.ActivationRechargeTimeRemaining = base.Game.RandomLessThan(90) + 90;
-    }
+    protected override string? ActivationName => nameof(MagicalArrow150Every1d90p90);
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
     }
-    public string DescribeActivationEffect => "a magical arrow (150) every 90+d90 turns";
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Set of Cesti of Combat";
     public override int Ac => 5;
-    public override bool Activate => true;
     public override int Cost => 110000;
     public override int TreasureRating => 20;
     public override int Dd => 1;

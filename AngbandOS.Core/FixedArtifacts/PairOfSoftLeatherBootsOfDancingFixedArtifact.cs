@@ -20,7 +20,6 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Pair of Soft Leather Boots of Dancing";
     public override int Ac => 2;
-    public override bool Activate => true;
     public override bool Cha => true;
     public override int Cost => 40000;
     public override int Dd => 1;
