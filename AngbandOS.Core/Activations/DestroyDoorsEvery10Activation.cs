@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class DestroyDoorsEvery10Activation : Activation
 {
     private DestroyDoorsEvery10Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} glows bright red...";
 
     protected override bool OnActivate(Item item)

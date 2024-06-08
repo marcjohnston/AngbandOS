@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class TeleAwayActivation : DirectionalActivation
 {
     private TeleAwayActivation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override int RechargeTime() => 200;
 
     protected override bool Activate(int direction)

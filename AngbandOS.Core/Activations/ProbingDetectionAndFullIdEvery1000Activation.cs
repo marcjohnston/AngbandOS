@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class ProbingDetectionAndFullIdEvery1000Activation : Activation
 {
     private ProbingDetectionAndFullIdEvery1000Activation(Game game) : base(game) { }
-    public override int RandomChance => 10;
-
+    
     public override string? PreActivationMessage => "Your {0} glows brightly...";
 
     protected override bool OnActivate(Item item)

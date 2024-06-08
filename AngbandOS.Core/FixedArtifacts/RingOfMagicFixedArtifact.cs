@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class RingOfMagicFixedArtifact : FixedArtifact
 {
     private RingOfMagicFixedArtifact(Game game) : base(game) { }
 
@@ -16,19 +16,6 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
     // Ring of Magic has a djinn in it that drains life from an opponent
     protected override string? ActivationName => nameof(DrainLife100Every100p1d100Activation);
-    public void ActivateItem(Item item)
-    {
-        Game.MsgPrint("You order Frakir to strangle your opponent.");
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        if (Game.DrainLife(dir, 100))
-        {
-            item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = base.Game.RandomLessThan(100) + 100;
-        }
-    }
-    public string DescribeActivationEffect => " every 100+d100 turns";
 
     public override string Name => "The Ring of Magic";
     public override int Ac => 0;

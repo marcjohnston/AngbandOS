@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class Speed75p1d75Every150p1d150Activation : Activation
 {
     private Speed75p1d75Every150p1d150Activation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     public override string? PreActivationMessage => "The {0} glows brightly...";
 
     protected override bool OnActivate(Item item)

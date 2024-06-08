@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class LargeFrostBall200Every325p1d325Activation : DirectionalActivation
 {
     private LargeFrostBall200Every325p1d325Activation(Game game) : base(game) { }
-    public override int RandomChance => 50;
-
+    
     public override string? PreActivationMessage => "Your {0} glows bright white...";
 
     public override int RechargeTime() => Game.RandomLessThan(325) + 325;

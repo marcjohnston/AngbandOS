@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class ShardActivation : DirectionalActivation
 {
     private ShardActivation(Game game) : base(game) { }
-    public override int RandomChance => 0; // TODO: Confirm this artifact does not have a corresponding random chance.  It is only used with biased artifacts.
-
+    
     public override int RechargeTime() => 400;
 
     protected override bool Activate(int direction)

@@ -15,7 +15,7 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IIte
     public void ActivateItem(Item item)
     {
         ActivationScript.ExecuteScript();
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = ActivationRechargeTime;
+        item.ActivationRechargeTimeRemaining = ActivationRechargeTime;
         return;
     }
 

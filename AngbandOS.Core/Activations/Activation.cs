@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Activations;
 
 [Serializable]
 /// <summary>
-/// Represents a power that can be assigned to a random artifact that can be activated.
+/// Represents a power that can be assigned to a random artifact that can be activated.  Fixed artifacts are now using this Activation.
 /// </summary>
 internal abstract class Activation : IGetKey
 {
@@ -51,11 +51,6 @@ internal abstract class Activation : IGetKey
     public abstract int RechargeTime();
 
     /// <summary>
-    /// Returns the chance the activation will be selected when being chosen randomly.  
-    /// </summary>
-    public abstract int RandomChance { get; }
-
-    /// <summary>
     /// Activates the artifact power; returning false, if the activation was cancelled by the user; true, otherwise.
     /// </summary>
     /// <param name="game"></param>
@@ -72,7 +67,7 @@ internal abstract class Activation : IGetKey
         }
         if (OnActivate(item))
         {
-            item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RechargeTime();
+            item.ActivationRechargeTimeRemaining = RechargeTime();
             return true;
         }
         return false;

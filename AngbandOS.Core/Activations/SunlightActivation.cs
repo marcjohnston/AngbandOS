@@ -14,7 +14,6 @@ namespace AngbandOS.Core.Activations;
 internal class SunlightActivation : DirectionalActivation
 {
     private SunlightActivation(Game game) : base(game) { }
-    public override int RandomChance => 101;
 
     protected override string? PostAimingMessage => "A line of sunlight appears.";
 

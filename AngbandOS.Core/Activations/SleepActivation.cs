@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class SleepActivation : Activation
 {
     private SleepActivation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
     public override int RechargeTime() => 55;

@@ -15,8 +15,7 @@ internal class AlchemyEvery500Activation : Activation
 {
     private AlchemyEvery500Activation(Game game) : base(game) { }
 
-    public override int RandomChance => 5;
-
+    
     public override string? PreActivationMessage => "Your {0} glows bright yellow...";
 
     protected override bool OnActivate(Item item)

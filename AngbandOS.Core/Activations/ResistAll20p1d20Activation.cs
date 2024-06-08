@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class ResistAll20p1d20Activation : Activation
 {
     private ResistAll20p1d20Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override string? PreActivationMessage => "Your {0} glows many colors...";
 
     protected override bool OnActivate(Item item)

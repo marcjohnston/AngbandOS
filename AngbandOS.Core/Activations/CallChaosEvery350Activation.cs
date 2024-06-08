@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class CallChaosEvery350Activation : Activation
 {
     private CallChaosEvery350Activation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     public override string? PreActivationMessage => "Your {0} glows in scintillating colors...";
 
     public override int RechargeTime() => 350;

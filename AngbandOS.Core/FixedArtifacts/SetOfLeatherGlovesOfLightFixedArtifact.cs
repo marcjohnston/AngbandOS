@@ -23,7 +23,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArt
             return;
         }
         Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(Projection.MissileProjectile)), dir, base.Game.DiceRoll(2, 6));
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 2;
+        item.ActivationRechargeTimeRemaining = 2;
     }
     public string DescribeActivationEffect => "magic missile (2d6) every 2 turns";
 

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class FireBolt9d8Every8p1d8Activation : DirectionalActivation
 {
     private FireBolt9d8Every8p1d8Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} is covered in fire...";
 
     public override int RechargeTime() => Game.RandomLessThan(8) + 8;

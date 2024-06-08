@@ -11,8 +11,7 @@ namespace AngbandOS.Core.Activations;
 internal class PowerDragonEvery400Activation : DirectionalActivation
 {
     private PowerDragonEvery400Activation(Game game) : base(game) { }
-    public override int RandomChance => 5;
-
+    
     public override string? PreActivationMessage => "You breathe the elements...";
 
     public override int RechargeTime() => 400;

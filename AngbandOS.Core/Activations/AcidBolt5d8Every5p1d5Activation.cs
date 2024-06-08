@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class AcidBolt5d8Every5p1d5Activation : DirectionalActivation
 {
     private AcidBolt5d8Every5p1d5Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} is covered in acid...";
 
     public override int RechargeTime() => Game.RandomLessThan(5) + 5;

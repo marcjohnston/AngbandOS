@@ -14,9 +14,8 @@ namespace AngbandOS.Core.Activations;
 internal class DrainLife100Every100p1d100Activation : DirectionalActivation
 {
     private DrainLife100Every100p1d100Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
-    public override string? PreActivationMessage => "Your {0} glows black...";
+    
+    public override string? PreActivationMessage => "You order Frakir to strangle your opponent.";
 
     public override int RechargeTime() => Game.RandomLessThan(100) + 100;
 

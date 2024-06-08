@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class RestLifeActivation : Activation
 {
     private RestLifeActivation(Game game) : base(game) { }
-    public override int RandomChance => 66;
-
+    
     public override string? PreActivationMessage => "Your {0} glows a deep red...";
 
     protected override bool OnActivate(Item item)

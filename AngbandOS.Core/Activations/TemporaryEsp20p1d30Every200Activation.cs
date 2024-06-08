@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class TemporaryEsp20p1d30Every200Activation : Activation
 {
     private TemporaryEsp20p1d30Every200Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)

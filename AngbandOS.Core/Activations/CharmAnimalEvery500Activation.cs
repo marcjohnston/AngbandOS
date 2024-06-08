@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class CharmAnimalEvery500Activation : Activation
 {
     private CharmAnimalEvery500Activation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     public override string? PreActivationMessage => "";
 
     public override int RechargeTime() => 500;

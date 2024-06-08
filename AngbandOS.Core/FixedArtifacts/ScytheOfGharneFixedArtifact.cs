@@ -19,7 +19,7 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IFixedArtifactActiva
     {
         Game.MsgPrint("Your scythe glows soft white...");
         Game.RunScript(nameof(ToggleRecallScript));
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 200;
+        item.ActivationRechargeTimeRemaining = 200;
     }
     public string DescribeActivationEffect => "word of recall every 200 turns";
 

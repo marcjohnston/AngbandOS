@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class BallOfLightning100r3Every500Activation : DirectionalActivation
 {
     private BallOfLightning100r3Every500Activation(Game game) : base(game) { }
-    public override int RandomChance => 0; // TODO: Confirm this artifact does not have a corresponding random chance.  It is only used with biased artifacts.
-
+    
     public override string? PreActivationMessage => "Your {0} crackles with electricity...";
 
     public override int RechargeTime() => 500;

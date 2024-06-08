@@ -15,8 +15,7 @@ internal class SummonReaverEvery500p1d500Activation : Activation
 {
     private SummonReaverEvery500p1d500Activation(Game game) : base(game) { }
     public override string? PreActivationMessage => "Your {0} flickers black for a moment...";
-    public override int RandomChance => 20;
-
+    
     protected override bool OnActivate(Item item)
     {
         Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)), true);

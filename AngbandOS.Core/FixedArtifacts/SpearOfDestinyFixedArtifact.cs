@@ -23,7 +23,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
             return;
         }
         Game.WallToMud(dir);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 5;
+        item.ActivationRechargeTimeRemaining = 5;
     }
     public string DescribeActivationEffect => "stone to mud every 5 turns";
 

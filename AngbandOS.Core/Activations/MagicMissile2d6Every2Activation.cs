@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class MagicMissile2d6Every2Activation : DirectionalActivation
 {
     private MagicMissile2d6Every2Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} glows extremely brightly...";
 
     public override int RechargeTime() => 2;

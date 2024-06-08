@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class Heal700Every25Activation : Activation
 {
     private Heal700Every25Activation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
     protected override bool OnActivate(Item item)

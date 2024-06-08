@@ -22,7 +22,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     public override bool DoActivate(Item item)
     {
         Game.RunScriptInt(nameof(TeleportSelfScript), 100);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 50 + Game.DieRoll(50);
+        item.ActivationRechargeTimeRemaining = 50 + Game.DieRoll(50);
         return true;
     }
     public override string? DescribeActivationEffect => "teleport every 50+d50 turns";

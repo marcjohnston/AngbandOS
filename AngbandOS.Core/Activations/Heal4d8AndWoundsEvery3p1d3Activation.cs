@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class Heal4d8AndWoundsEvery3p1d3Activation : Activation
 {
     private Heal4d8AndWoundsEvery3p1d3Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} radiates deep purple...";
 
     protected override bool OnActivate(Item item)

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class Berserk50p1d50Every100p1d100Activation : Activation
 {
     private Berserk50p1d50Every100p1d100Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)

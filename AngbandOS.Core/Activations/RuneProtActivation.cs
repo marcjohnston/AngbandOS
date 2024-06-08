@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class RuneProtActivation : Activation
 {
     private RuneProtActivation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     public override string? PreActivationMessage => "Your {0} glows light blue...";
 
     protected override bool OnActivate(Item item)

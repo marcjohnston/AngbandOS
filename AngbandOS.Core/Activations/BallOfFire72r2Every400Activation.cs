@@ -11,8 +11,7 @@ namespace AngbandOS.Core.Activations;
 internal class BallOfFire72r2Every400Activation : DirectionalActivation
 {
     private BallOfFire72r2Every400Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override string? PreActivationMessage => "Your {0} glows an intense red...";
 
     public override int RechargeTime() => 400;

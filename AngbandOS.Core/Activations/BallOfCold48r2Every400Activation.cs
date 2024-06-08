@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class BallOfCold48r2Every400Activation : DirectionalActivation
 {
     private BallOfCold48r2Every400Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override string? PreActivationMessage => "Your {0} is covered in frost...";
 
     public override int RechargeTime() => 400;

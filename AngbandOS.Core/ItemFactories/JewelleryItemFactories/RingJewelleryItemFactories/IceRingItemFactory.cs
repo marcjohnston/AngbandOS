@@ -20,7 +20,7 @@ internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
         }
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 50, 2);
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(50) + 50;
+        item.ActivationRechargeTimeRemaining = Game.RandomLessThan(50) + 50;
     }
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {

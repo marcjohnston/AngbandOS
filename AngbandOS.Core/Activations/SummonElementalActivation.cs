@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class SummonElementalActivation : Activation
 {
     private SummonElementalActivation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     protected override bool OnActivate(Item item)
     {
         if (Game.DieRoll(3) == 1)

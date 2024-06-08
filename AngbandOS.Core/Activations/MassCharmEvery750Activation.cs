@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class MassCharmEvery750Activation : Activation
 {
     private MassCharmEvery750Activation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)

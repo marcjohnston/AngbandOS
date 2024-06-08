@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class Heal777CuringAndHeroism25pd25Every300Activation : Activation
 {
     private Heal777CuringAndHeroism25pd25Every300Activation(Game game) : base(game) { }
-    public override int RandomChance => 25;
-
+    
     public override string? PreActivationMessage => "A heavenly choir sings...";
 
     protected override bool OnActivate(Item item)

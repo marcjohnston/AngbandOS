@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class StarBall150Every1000p1d325Activation : DirectionalActivation
 {
     private StarBall150Every1000p1d325Activation(Game game) : base(game) { }
-    public override int RandomChance => 50;
-
+    
     public override string? PreActivationMessage => "Your {0} is surrounded by lightning...";
 
     public override int RechargeTime() => 1000;

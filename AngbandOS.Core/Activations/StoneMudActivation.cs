@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class StoneMudActivation : DirectionalActivation
 {
     private StoneMudActivation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} pulsates...";
 
     public override int RechargeTime() => 5;

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class BanishEvilEvery250p1d250Activation : Activation
 {
     private BanishEvilEvery250p1d250Activation(Game game) : base(game) { }
-    public override int RandomChance => 33;
-
+    
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)

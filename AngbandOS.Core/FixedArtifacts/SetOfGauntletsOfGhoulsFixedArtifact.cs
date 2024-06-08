@@ -23,7 +23,7 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifa
             return;
         }
         Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(Projection.ColdProjectile)), dir, base.Game.DiceRoll(6, 8));
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = base.Game.RandomLessThan(7) + 7;
+        item.ActivationRechargeTimeRemaining = base.Game.RandomLessThan(7) + 7;
     }
     public string DescribeActivationEffect => "frost bolt (6d8) every 7+d7 turns";
 

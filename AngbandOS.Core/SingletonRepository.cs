@@ -369,6 +369,7 @@ internal class SingletonRepository
         RegisterRepository<ITileScript>();
         
         RegisterRepository<Activation>();
+        RegisterRepository<ActivationWeightedRandom>();
         RegisterRepository<AlterAction>();
         RegisterRepository<Alignment>();
         RegisterRepository<ArtifactBias>();

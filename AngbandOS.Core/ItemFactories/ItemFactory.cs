@@ -197,7 +197,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             }
             s += ")";
         }
-        if (item.IsKnown() && item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
+        if (item.IsKnown() && item.ActivationRechargeTimeRemaining != 0)
         {
             s += " (charging)";
         }

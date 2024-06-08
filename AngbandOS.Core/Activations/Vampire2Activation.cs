@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class Vampire2Activation : DirectionalActivation
 {
     private Vampire2Activation(Game game) : base(game) { }
-    public override int RandomChance => 50;
-
+    
     public override string? PreActivationMessage => ""; // This command does not display a message.
 
     public override int RechargeTime() => 400;

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class DispelEvil5xEvery300p1d300Activation : Activation
 {
     private DispelEvil5xEvery300p1d300Activation(Game game) : base(game) { }
-    public override int RandomChance => 33;
-
+    
     public override string? PreActivationMessage => "Your {0} floods the area with goodness...";
 
     public override int RechargeTime() => Game.RandomLessThan(300) + 300;

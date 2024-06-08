@@ -20,7 +20,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
         Game.MsgPrint("The essence shines brightly...");
         Game.RunScript(nameof(MapAreaScript));
         Game.LightArea(base.Game.DiceRoll(2, 15), 3);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = base.Game.RandomLessThan(50) + 50;
+        item.ActivationRechargeTimeRemaining = base.Game.RandomLessThan(50) + 50;
     }
     public string DescribeActivationEffect => "magic mapping and light every 50+d50 turns";
 

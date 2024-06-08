@@ -11,8 +11,7 @@ namespace AngbandOS.Core.Activations;
 internal class LargeBallFire72Every100Activation : DirectionalActivation
 {
     private LargeBallFire72Every100Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override string? PreActivationMessage => "Your {0} rages in fire...";
 
     public override int RechargeTime() => 100;

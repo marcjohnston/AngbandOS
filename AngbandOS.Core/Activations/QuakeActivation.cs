@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class QuakeActivation : Activation
 {
     private QuakeActivation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "";
 
     public override int RechargeTime() => 50;

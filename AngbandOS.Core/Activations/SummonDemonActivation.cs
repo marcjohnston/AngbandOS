@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class SummonDemonActivation : Activation
 {
     private SummonDemonActivation(Game game) : base(game) { }
-    public override int RandomChance => 5;
-
+    
     protected override bool OnActivate(Item item)
     {
         if (Game.DieRoll(3) == 1)

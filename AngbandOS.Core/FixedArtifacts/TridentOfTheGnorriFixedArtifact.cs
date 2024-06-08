@@ -23,7 +23,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactAc
             return;
         }
         Game.TeleportMonster(dir);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 150;
+        item.ActivationRechargeTimeRemaining = 150;
     }
     public override void ApplyResistances(Item item)
     {

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class FrostBolt6d8Every7p1d7Activation : DirectionalActivation
 {
     private FrostBolt6d8Every7p1d7Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} is covered in frost...";
 
     public override int RechargeTime() => Game.RandomLessThan(7) + 7;

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class ProtectionFromEvilActivation : Activation
 {
     private ProtectionFromEvilActivation(Game game) : base(game) { }
-    public override int RandomChance => 75;
-
+    
     public override string? PreActivationMessage => "Your {0} lets out a shrill wail...";
 
     protected override bool OnActivate(Item item)

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class DrainLife90Every70Activation : DirectionalActivation
 {
     private DrainLife90Every70Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override string? PreActivationMessage => "Your {0} glows white...";
 
     public override int RechargeTime() => 70;

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class FireBall120r3Every225p1d225Activation : DirectionalActivation
 {
     private FireBall120r3Every225p1d225Activation(Game game) : base(game) { }
-    public override int RandomChance => 66;
-
+    
     public override string? PreActivationMessage => "Your {0} glows deep red...";
 
     public override int RechargeTime() => Game.RandomLessThan(225) + 225;

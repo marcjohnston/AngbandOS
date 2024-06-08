@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class ElementalBreath300r4Every500Activation : DirectionalActivation
 {
     private ElementalBreath300r4Every500Activation(Game game) : base(game) { }
-    public override int RandomChance => 33;
-
+    
     public override string? PreActivationMessage => ""; // No message is displayed to the player.
 
     protected override string? PostAimingMessage => "You breathe the elements.";

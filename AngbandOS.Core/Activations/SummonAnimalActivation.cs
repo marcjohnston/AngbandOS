@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class SummonAnimalActivation : Activation
 {
     private SummonAnimalActivation(Game game) : base(game) { }
-    public override int RandomChance => 40;
-
+    
     protected override bool OnActivate(Item item)
     {
         Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(AnimalRangerMonsterFilter)), true);

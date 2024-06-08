@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class RestAllActivation : Activation
 {
     private RestAllActivation(Game game) : base(game) { }
-    public override int RandomChance => 33;
-
+    
     public override string? PreActivationMessage => "Your {0} glows a deep green...";
 
     protected override bool OnActivate(Item item)

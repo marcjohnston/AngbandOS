@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class WraithActivation : Activation
 {
     private WraithActivation(Game game) : base(game) { }
-    public override int RandomChance => 5;
-
+    
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)

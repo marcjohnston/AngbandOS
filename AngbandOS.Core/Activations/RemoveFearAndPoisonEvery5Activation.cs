@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class RemoveFearAndPoisonEvery5Activation : Activation
 {
     private RemoveFearAndPoisonEvery5Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
     protected override bool OnActivate(Item item)

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class WhirlwindActivation : Activation
 {
     private WhirlwindActivation(Game game) : base(game) { }
-    public override int RandomChance => 50;
-
+    
     public override string? PreActivationMessage => "";  // There is no message for this artifact power.
 
     public override int RechargeTime() => 250;

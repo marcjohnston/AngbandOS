@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class SummonPhantomActivation : Activation
 {
     private SummonPhantomActivation(Game game) : base(game) { }
-    public override int RandomChance => 33;
-
+    
     public override string? PreActivationMessage => "You summon a phantasmal servant.";
 
     protected override bool OnActivate(Item item)

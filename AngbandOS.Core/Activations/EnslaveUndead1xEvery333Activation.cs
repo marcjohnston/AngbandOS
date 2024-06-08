@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class EnslaveUndead1xEvery333Activation : DirectionalActivation
 {
     private EnslaveUndead1xEvery333Activation(Game game) : base(game) { }
-    public override int RandomChance => 33;
-
+    
     public override string? PreActivationMessage => "";
 
     public override int RechargeTime() => 333;

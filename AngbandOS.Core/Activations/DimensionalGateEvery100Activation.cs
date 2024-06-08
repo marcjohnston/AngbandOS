@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class DimensionalGateEvery100Activation : Activation
 {
     private DimensionalGateEvery100Activation(Game game) : base(game) { }
-    public override int RandomChance => 10;
-
+    
     public override string? PreActivationMessage => "You open a dimensional gate. Choose a destination.";
 
     protected override bool OnActivate(Item item)

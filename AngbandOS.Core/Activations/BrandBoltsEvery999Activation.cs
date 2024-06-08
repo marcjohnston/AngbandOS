@@ -15,8 +15,7 @@ internal class BrandBoltsEvery999Activation : Activation
 {
     private BrandBoltsEvery999Activation(Game game) : base(game) { }
 
-    public override int RandomChance => 5;
-
+    
     public override string? PreActivationMessage => "Your {0} glows deep red...";
 
     protected override bool OnActivate(Item item)

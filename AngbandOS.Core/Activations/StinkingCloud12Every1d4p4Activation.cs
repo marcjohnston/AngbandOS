@@ -11,11 +11,10 @@ namespace AngbandOS.Core.Activations;
 /// Shoot a 12-damage ball of poison
 /// </summary>
 [Serializable]
-internal class StinkingCloud12Every4p1d4Activation : DirectionalActivation
+internal class StinkingCloud12Every1d4p4Activation : DirectionalActivation
 {
-    private StinkingCloud12Every4p1d4Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    private StinkingCloud12Every1d4p4Activation(Game game) : base(game) { }
+    
     public override string? PreActivationMessage => "Your {0} throbs deep green...";
 
     public override int RechargeTime() => Game.RandomLessThan(4) + 4;

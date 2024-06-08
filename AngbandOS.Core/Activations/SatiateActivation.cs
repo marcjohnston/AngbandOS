@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class SatiateActivation : Activation
 {
     private SatiateActivation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     protected override bool OnActivate(Item item)
     {
         Game.SetFood(Constants.PyFoodMax - 1);

@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class Arrows150Every90p1d90Activation : DirectionalActivation
 {
     private Arrows150Every90p1d90Activation(Game game) : base(game) { }
-    public override int RandomChance => 66;
-
+    
     public override string? PreActivationMessage => "Your {0} grows magical spikes...";
 
     public override int RechargeTime() => Game.RandomLessThan(90) + 90;

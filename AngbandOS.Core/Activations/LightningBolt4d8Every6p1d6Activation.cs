@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class LightningBolt4d8Every6p1d6Activation : DirectionalActivation
 {
     private LightningBolt4d8Every6p1d6Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} is covered in sparks...";
 
     public override int RechargeTime() => Game.RandomLessThan(6) + 6;

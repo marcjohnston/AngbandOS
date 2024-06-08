@@ -18,8 +18,7 @@ internal class GoldenCrownOfTheSunActivation : Activation
     /// <summary>
     /// Returns a random chance of 0, because this activation only applies to a fixed artifact.
     /// </summary>
-    public override int RandomChance => 0;
-
+    
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)

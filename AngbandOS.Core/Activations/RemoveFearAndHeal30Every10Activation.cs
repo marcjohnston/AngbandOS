@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class RemoveFearAndHeal30Every10Activation : Activation
 {
     private RemoveFearAndHeal30Every10Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)

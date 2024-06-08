@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class ConfuseMonster20Every15Activation : DirectionalActivation
 {
     private ConfuseMonster20Every15Activation(Game game) : base(game) { }
-    public override int RandomChance => 101;
-
+    
     public override string? PreActivationMessage => "Your {0} glows in scintillating colors...";
 
     public override int RechargeTime() => 15;

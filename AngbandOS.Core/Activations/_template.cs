@@ -15,8 +15,7 @@ internal class _templateActivation : Activation
 {
     private _templateActivation(Game game) : base(game) { }
 
-    public override int RandomChance => 5;
-
+    
     public override string? PreActivationMessage => "Your {0}";
 
     protected override bool OnActivate(Item item)

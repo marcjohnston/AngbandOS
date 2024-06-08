@@ -71,10 +71,10 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
                         }
                     }
                 }
-                if (oPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft > 0)
+                if (oPtr.ActivationRechargeTimeRemaining > 0)
                 {
-                    oPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft--;
-                    if (oPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft == 0)
+                    oPtr.ActivationRechargeTimeRemaining--;
+                    if (oPtr.ActivationRechargeTimeRemaining == 0)
                     {
                         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
                     }

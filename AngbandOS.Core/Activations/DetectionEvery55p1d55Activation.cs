@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class DetectionEvery55p1d55Activation : Activation
 {
     private DetectionEvery55p1d55Activation(Game game) : base(game) { }
-    public override int RandomChance => 85;
-
+    
     public override string? PreActivationMessage => "Your {0} glows bright white...";
 
     protected override bool OnActivate(Item item)

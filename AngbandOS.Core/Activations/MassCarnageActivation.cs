@@ -14,8 +14,7 @@ namespace AngbandOS.Core.Activations;
 internal class MassCarnageActivation : Activation
 {
     private MassCarnageActivation(Game game) : base(game) { }
-    public override int RandomChance => 33;
-
+    
     public override string? PreActivationMessage => "Your {0} lets out a long, shrill note...";
 
     protected override bool OnActivate(Item item)

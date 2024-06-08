@@ -264,7 +264,10 @@ internal sealed class Item : IComparable<Item>
 
     public bool Marked;
 
-    public int RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
+    /// <summary>
+    /// Returns the number of turns remaining to recharge the activation.
+    /// </summary>
+    public int ActivationRechargeTimeRemaining;
 
     /// <summary>
     /// Returns a value that is specific to the item class.
@@ -494,7 +497,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.TypeSpecificValue = TypeSpecificValue;
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.NutritionalValue = NutritionalValue;
-        clonedItem.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
+        clonedItem.ActivationRechargeTimeRemaining = ActivationRechargeTimeRemaining;
         clonedItem.ContainerIsOpen = ContainerIsOpen;
         clonedItem.LevelOfObjectsInContainer = LevelOfObjectsInContainer;
         clonedItem.ContainerTraps = ContainerTraps;
@@ -855,7 +858,7 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0 || other.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
+        if (ActivationRechargeTimeRemaining != 0 || other.ActivationRechargeTimeRemaining != 0)
         {
             return false;
         }
@@ -2367,7 +2370,20 @@ internal sealed class Item : IComparable<Item>
         if (!aCursed && Game.DieRoll(Factory.RandartActivationChance) == 1)
         {
             RandomArtifactActivation = null;
-            GiveActivationPower();
+            if (Characteristics.ArtifactBias != null)
+            {
+                if (Game.DieRoll(100) < Characteristics.ArtifactBias.ActivationPowerChance)
+                {
+                    RandomArtifactActivation = Characteristics.ArtifactBias.GetActivationPowerType(this);
+                    Characteristics.Activate = true;
+                }
+            }
+            if (RandomArtifactActivation == null)
+            {
+                RandomArtifactActivation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
+                Characteristics.Activate = RandomArtifactActivation != null;
+            }
+            ActivationRechargeTimeRemaining = 0;
         }
         if (fromScroll)
         {
@@ -2798,30 +2814,6 @@ internal sealed class Item : IComparable<Item>
             }
         }
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
-    }
-
-    private void GiveActivationPower() // TODO: There may not be any activiations
-    {
-        Activation? activation = null;
-        if (Characteristics.ArtifactBias != null)
-        {
-            if (Game.DieRoll(100) < Characteristics.ArtifactBias.ActivationPowerChance)
-            {
-                activation = Characteristics.ArtifactBias.GetActivationPowerType(this);
-            }
-        }
-        if (activation == null)
-        {
-            int chance = 0;
-            while (activation == null || Game.DieRoll(100) >= chance)
-            {
-                activation = Game.SingletonRepository.ToWeightedRandom<Activation>().ChooseOrDefault();
-                chance = activation.RandomChance;
-            }
-        }
-        RandomArtifactActivation = activation;
-        Characteristics.Activate = true;
-        RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 0;
     }
 
     public int GetBonusValue(int max, int level)
