@@ -17,7 +17,7 @@ internal class LargeFrostBall200Every325p1d325Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} glows bright white...";
 
-    public override int RechargeTime() => Game.RandomLessThan(325) + 325;
+    protected override string RechargeTimeRollExpression => "1d325+325";
 
     protected override bool Activate(int direction)
     {

@@ -36,7 +36,7 @@ internal class SummonElementalActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 750;
+    protected override string RechargeTimeRollExpression => "750";
 
     public override int Value => 15000;
 

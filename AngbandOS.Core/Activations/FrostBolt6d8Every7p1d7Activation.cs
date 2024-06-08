@@ -17,7 +17,7 @@ internal class FrostBolt6d8Every7p1d7Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} is covered in frost...";
 
-    public override int RechargeTime() => Game.RandomLessThan(7) + 7;
+    protected override string RechargeTimeRollExpression => "1d7+7";
 
     protected override bool Activate(int direction)
     {

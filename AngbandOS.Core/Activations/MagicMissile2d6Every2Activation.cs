@@ -17,7 +17,7 @@ internal class MagicMissile2d6Every2Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} glows extremely brightly...";
 
-    public override int RechargeTime() => 2;
+    protected override string RechargeTimeRollExpression => "2";
 
     protected override bool Activate(int direction)
     {

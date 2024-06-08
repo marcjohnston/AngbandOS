@@ -30,7 +30,7 @@ internal class GoldenCrownOfTheSunActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 800;
+    protected override string RechargeTimeRollExpression => "800";
 
     public override int Value => 7500;
 

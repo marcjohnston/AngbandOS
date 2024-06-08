@@ -13,7 +13,7 @@ internal class BoltOfAcid5d8Every1d5p5Activation : DirectionalActivation
     private BoltOfAcid5d8Every1d5p5Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} are covered in acid...";
-    public override int RechargeTime() => Game.DieRoll(5) + 5;
+    protected override string RechargeTimeRollExpression => "1d5+5";
     protected override bool Activate(int direction)
     {
         Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, base.Game.DiceRoll(5, 8));

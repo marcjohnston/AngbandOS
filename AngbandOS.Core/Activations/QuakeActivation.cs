@@ -17,7 +17,7 @@ internal class QuakeActivation : Activation
     
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime() => 50;
+    protected override string RechargeTimeRollExpression => "50";
 
     protected override bool OnActivate(Item item)
     {

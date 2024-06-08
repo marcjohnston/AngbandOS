@@ -22,7 +22,7 @@ internal class RechargeActivation : Activation
         return Game.RunCancellableScriptInt(nameof(RechargeItemCancellableScriptInt), 60);
     }
 
-    public override int RechargeTime() => 70;
+    protected override string RechargeTimeRollExpression => "70";
 
     public override int Value => 1000;
 

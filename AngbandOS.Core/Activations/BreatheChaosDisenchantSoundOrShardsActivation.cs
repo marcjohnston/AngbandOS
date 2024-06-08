@@ -12,7 +12,7 @@ internal class BreatheChaosDisenchantSoundOrShardsActivation : DirectionalActiva
 {
     private BreatheChaosDisenchantSoundOrShardsActivation(Game game) : base(game) { }
 
-    public override int RechargeTime() => Game.DieRoll(300) + 300;
+    protected override string RechargeTimeRollExpression => "1d300+300";
 
     protected override bool Activate(int direction)
     {

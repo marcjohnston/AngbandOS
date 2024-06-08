@@ -17,7 +17,7 @@ internal class BallOfCold48r2Every5p1d5Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} is covered in frost...";
 
-    public override int RechargeTime() => base.Game.RandomLessThan(5) + 5;
+    protected override string RechargeTimeRollExpression => "1d5+5";
 
     protected override bool Activate(int direction)
     {

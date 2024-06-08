@@ -30,7 +30,7 @@ internal class XtraSpeedActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(200) + 200;
+    protected override string RechargeTimeRollExpression => "1d200+200";
 
     public override int Value => 25000;
 

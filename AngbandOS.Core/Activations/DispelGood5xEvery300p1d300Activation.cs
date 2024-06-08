@@ -23,7 +23,7 @@ internal class DispelGood5xEvery300p1d300Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(300) + 300;
+    protected override string RechargeTimeRollExpression => "1d300+300";
 
     public override int Value => 3500;
 

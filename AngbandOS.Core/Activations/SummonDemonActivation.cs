@@ -36,7 +36,7 @@ internal class SummonDemonActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 666 + Game.DieRoll(333);
+    protected override string RechargeTimeRollExpression => "1d333+666";
 
     public override int Value => 20000;
 

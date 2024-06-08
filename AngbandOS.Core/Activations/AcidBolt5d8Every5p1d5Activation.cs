@@ -17,7 +17,7 @@ internal class AcidBolt5d8Every5p1d5Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} is covered in acid...";
 
-    public override int RechargeTime() => Game.RandomLessThan(5) + 5;
+    protected override string RechargeTimeRollExpression => "1d5+5";
 
     protected override bool Activate(int direction)
     {

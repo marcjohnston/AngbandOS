@@ -23,7 +23,7 @@ internal class LightActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(10) + 10;
+    protected override string RechargeTimeRollExpression => "1d10+10";
 
     public override int Value => 150;
 

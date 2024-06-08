@@ -13,7 +13,7 @@ internal class WordOfRecallEvery200Activation : DirectionalActivation
     private WordOfRecallEvery200Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} glows soft white...";
-    public override int RechargeTime() => 200;
+    protected override string RechargeTimeRollExpression => "200";
 
     protected override bool Activate(int direction)
     {

@@ -21,7 +21,7 @@ internal class SummonAnimalActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 200 + Game.DieRoll(300);
+    protected override string RechargeTimeRollExpression => "1d300+200";
 
     public override int Value => 10000;
 

@@ -23,7 +23,7 @@ internal class TemporaryEsp20p1d30Every200Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 200;
+    protected override string RechargeTimeRollExpression => "200";
 
     public override int Value => 1500;
 

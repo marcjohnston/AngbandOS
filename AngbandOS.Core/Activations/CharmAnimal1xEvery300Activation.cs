@@ -17,7 +17,7 @@ internal class CharmAnimal1xEvery300Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime() => 300;
+    protected override string RechargeTimeRollExpression => "300";
 
     protected override bool Activate(int direction)
     {

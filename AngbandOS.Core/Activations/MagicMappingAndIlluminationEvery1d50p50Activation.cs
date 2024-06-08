@@ -13,7 +13,7 @@ internal class MagicMappingAndIlluminationEvery1d50p50Activation : DirectionalAc
     private MagicMappingAndIlluminationEvery1d50p50Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "The {0} shines brightly...";
-    public override int RechargeTime() => Game.DieRoll(50) + 50;
+    protected override string RechargeTimeRollExpression => "1d50+50";
     protected override bool Activate(int direction)
     {
         Game.RunScript(nameof(MapAreaScript));

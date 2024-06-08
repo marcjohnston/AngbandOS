@@ -8,21 +8,27 @@
 namespace AngbandOS.Core.Rolls;
 
 [Serializable]
-internal class DiceRoll : Roll
+internal class OrdinalMultiplierDiceRoll : Roll
 {
-    public DiceRoll(Game game, int dieCount, int sideCount, int bonus) : base(game)
+    public OrdinalMultiplierDiceRoll(Game game, int dieCount, int sideCount, int multiplier, int bonus) : base(game)
     {
         if (dieCount == 0)
         {
             throw new Exception("Die count cannot be 0.");
         }
+        if (multiplier == 0)
+        {
+            throw new Exception("Die roll multiplier cannot be 0.");
+        }
         DieCount = dieCount;
         SideCount = sideCount;
+        Multiplier = multiplier;
         Bonus = bonus;
-        MaximumValue = DieCount * SideCount + Bonus;
+        MaximumValue = DieCount * SideCount * Multiplier + Bonus;
     }
     public int DieCount { get; }
     public int SideCount { get; }
+    public int Multiplier { get; }
     public int Bonus { get; }
     public override int Get(Random random)
     {
@@ -32,7 +38,7 @@ internal class DiceRoll : Roll
             int roll = random.Next(SideCount) + 1;
             sum += roll;
         }
-        sum += Bonus;
+        sum = sum * Multiplier + Bonus;
         if (sum < 0)
         {
             throw new Exception("Invalid roll syntax produced value less than zero.");

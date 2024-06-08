@@ -13,7 +13,7 @@ internal class StoneToMudEvery5Activation : DirectionalActivation
     private StoneToMudEvery5Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} pulsates...";
-    public override int RechargeTime() => 5;
+    protected override string RechargeTimeRollExpression => "5";
     protected override bool Activate(int direction)
     {
         Game.WallToMud(direction);

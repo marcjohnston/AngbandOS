@@ -16,7 +16,7 @@ internal class BreathBallOfFrost110r2Every500Activation : DirectionalActivation
 
     protected override string? PostAimingMessage => "You breathe frost.";
 
-    public override int RechargeTime() => Game.DieRoll(450) + 450;
+    protected override string RechargeTimeRollExpression => "1d450+450";
 
     protected override bool Activate(int direction)
     {

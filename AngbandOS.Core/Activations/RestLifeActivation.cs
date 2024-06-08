@@ -23,7 +23,7 @@ internal class RestLifeActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 450;
+    protected override string RechargeTimeRollExpression => "450";
 
     public override int Value => 7500;
 

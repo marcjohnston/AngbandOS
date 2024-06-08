@@ -22,7 +22,7 @@ internal class SummonReaverEvery500p1d500Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 500 + Game.DieRoll(500);
+    protected override string RechargeTimeRollExpression => "1d500+500";
 
     public override int Value => 10000;
 

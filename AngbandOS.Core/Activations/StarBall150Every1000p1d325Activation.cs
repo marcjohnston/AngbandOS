@@ -17,7 +17,7 @@ internal class StarBall150Every1000p1d325Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} is surrounded by lightning...";
 
-    public override int RechargeTime() => 1000;
+    protected override string RechargeTimeRollExpression => "1000";
 
     protected override bool Activate(int direction)
     {

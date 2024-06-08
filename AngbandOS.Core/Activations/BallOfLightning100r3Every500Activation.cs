@@ -17,7 +17,7 @@ internal class BallOfLightning100r3Every500Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} crackles with electricity...";
 
-    public override int RechargeTime() => 500;
+    protected override string RechargeTimeRollExpression => "500";
 
     protected override bool Activate(int direction)
     {

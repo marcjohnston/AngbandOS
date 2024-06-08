@@ -29,7 +29,7 @@ internal class Heal777CuringAndHeroism25pd25Every300Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 300;
+    protected override string RechargeTimeRollExpression => "300";
 
     public override int Value => 10000;
 

@@ -17,7 +17,7 @@ internal class Vampire2Activation : DirectionalActivation
     
     public override string? PreActivationMessage => ""; // This command does not display a message.
 
-    public override int RechargeTime() => 400;
+    protected override string RechargeTimeRollExpression => "400";
 
     protected override bool Activate(int direction)
     {

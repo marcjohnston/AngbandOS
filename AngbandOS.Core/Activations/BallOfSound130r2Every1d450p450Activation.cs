@@ -13,7 +13,7 @@ internal class BallOfSound130r2Every1d450p450Activation : DirectionalActivation
     private BallOfSound130r2Every1d450p450Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "You breathe sound.";
-    public override int RechargeTime() => Game.DieRoll(450) + 450;
+    protected override string RechargeTimeRollExpression => "1d450+450";
 
     protected override bool Activate(int direction)
     {

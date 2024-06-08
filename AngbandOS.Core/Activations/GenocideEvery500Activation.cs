@@ -23,7 +23,7 @@ internal class GenocideEvery500Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 500;
+    protected override string RechargeTimeRollExpression => "500";
 
     public override int Value => 10000;
 

@@ -24,7 +24,7 @@ internal class ProtectionFromEvilActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(225) + 225;
+    protected override string RechargeTimeRollExpression => "1d225+225";
 
     public override int Value => 5000;
 

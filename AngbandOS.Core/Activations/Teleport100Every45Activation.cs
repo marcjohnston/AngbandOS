@@ -23,7 +23,7 @@ internal class Teleport100Every45Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 45;
+    protected override string RechargeTimeRollExpression => "45";
 
     public override int Value => 2000;
 

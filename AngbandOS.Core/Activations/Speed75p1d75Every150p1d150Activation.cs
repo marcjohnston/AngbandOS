@@ -30,7 +30,7 @@ internal class Speed75p1d75Every150p1d150Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(150) + 150;
+    protected override string RechargeTimeRollExpression => "1d150+150";
 
     public override int Value => 20000;
 

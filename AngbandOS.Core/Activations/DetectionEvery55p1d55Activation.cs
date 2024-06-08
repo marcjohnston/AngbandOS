@@ -24,7 +24,7 @@ internal class DetectionEvery55p1d55Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(55) + 55;
+    protected override string RechargeTimeRollExpression => "1d55+55";
 
     public override int Value => 1000;
 

@@ -12,7 +12,7 @@ internal class BallOfFire50r2AndResistFire1d20p20Activation : DirectionalActivat
 {
     private BallOfFire50r2AndResistFire1d20p20Activation(Game game) : base(game) { }
 
-    public override int RechargeTime() => Game.DieRoll(50) + 50;
+    protected override string RechargeTimeRollExpression => "1d50+50";
 
     protected override bool Activate(int direction)
     {

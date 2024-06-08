@@ -30,7 +30,7 @@ internal class Speed20p1d20Every250Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 250;
+    protected override string RechargeTimeRollExpression => "250";
 
     public override int Value => 15000;
 

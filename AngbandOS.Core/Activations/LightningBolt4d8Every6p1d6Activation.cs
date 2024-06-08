@@ -17,7 +17,7 @@ internal class LightningBolt4d8Every6p1d6Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} is covered in sparks...";
 
-    public override int RechargeTime() => Game.RandomLessThan(6) + 6;
+    protected override string RechargeTimeRollExpression => "1d6+6";
 
     protected override bool Activate(int direction)
     {

@@ -13,7 +13,7 @@ internal class TeleportAwayEvery150Activation : DirectionalActivation
     private TeleportAwayEvery150Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} glows deep red...";
-    public override int RechargeTime() => 150;
+    protected override string RechargeTimeRollExpression => "150";
     protected override bool Activate(int direction)
     {
         Game.TeleportMonster(direction);

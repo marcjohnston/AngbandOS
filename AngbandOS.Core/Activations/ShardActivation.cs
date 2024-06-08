@@ -15,7 +15,7 @@ internal class ShardActivation : DirectionalActivation
 {
     private ShardActivation(Game game) : base(game) { }
     
-    public override int RechargeTime() => 400;
+    protected override string RechargeTimeRollExpression => "400";
 
     protected override bool Activate(int direction)
     {

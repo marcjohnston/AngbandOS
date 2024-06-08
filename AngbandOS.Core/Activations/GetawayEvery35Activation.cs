@@ -57,7 +57,7 @@ internal class GetawayEvery35Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 35;
+    protected override string RechargeTimeRollExpression => "35";
 
     public override int Value => 500;
 

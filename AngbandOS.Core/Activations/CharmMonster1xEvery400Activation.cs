@@ -17,7 +17,7 @@ internal class CharmMonster1xEvery400Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime() => 400;
+    protected override string RechargeTimeRollExpression => "400";
 
     protected override bool Activate(int direction)
     {

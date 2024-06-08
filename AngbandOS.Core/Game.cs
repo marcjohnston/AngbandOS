@@ -17407,7 +17407,7 @@ internal class Game
     }
 
     /// <summary>
-    /// Returns a Roll object from a roll expression.  The expression supports both integer and dice-notation formats.
+    /// Returns a Roll object from a roll expression (examples: 1d2x3+4, 1d2xX+4, 100).  The expression supports both integer and dice-notation formats.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="expression">
@@ -17434,17 +17434,17 @@ internal class Game
         int dPos = expression.IndexOf('d');
         if (dPos == -1)
         {
-            throw new Exception("Invalid roll syntax.");
+            throw new Exception("Invalid roll expression.");
         }
 
         // We will use a Regex for pattern matching.
-        Regex regEx = new Regex(@"(\d*)d(\d+)((x|/)(\d+))?((\+|-)(\d*))?");
+        Regex regEx = new Regex(@"(\d*)d(\d+)((x|/)(\d+|x))?((\+|-)(\d*))?");
         Match match = regEx.Match(expression);
 
         // The entire syntax must match.
         if (expression != match.Groups[0].Value)
         {
-            throw new Exception($"Invalid number roll syntax {expression}.");
+            throw new Exception($"Invalid number roll expression {expression}.");
         }
 
         // Extract the matches that we are interested in.
@@ -17457,35 +17457,48 @@ internal class Game
         // Ensure integer values.  Actually the regex is already ensuring digits, but we do have a bit-length limit to check.
         if (!int.TryParse(dieCountMatch, out int dieCount))
         {
-            throw new Exception($"Invalid number roll syntax {dieCountMatch}.");
+            throw new Exception($"Invalid number roll expression {dieCountMatch}.");
         }
         if (!int.TryParse(sidesCountMatch, out int sidesCount))
         {
-            throw new Exception($"Invalid max roll syntax {sidesCountMatch}.");
+            throw new Exception($"Invalid max roll expression {sidesCountMatch}.");
         }
-        bool multiplierIsDivisor = false;
-        int multiplier = 1;
-        if (multiplierMatch != "")
-        {
-            if (!int.TryParse(multiplierMatch, out multiplier))
-            {
-                throw new Exception($"Invalid multiplier roll syntax {multiplierMatch}.");
-            }
 
-            if (multiplierOrDivisorMatch == "/")
-            {
-                multiplierIsDivisor = true;
-            }
-        }
+        bool multiplierIsDivisor = multiplierOrDivisorMatch == "/";
+
+        // Compute the bonus, if any.
         int bonus = 0;
         if (bonusMatch != "")
         {
             if (!int.TryParse(bonusMatch, out bonus))
             {
-                throw new Exception($"Invalid bonus roll syntax {bonusMatch}.");
+                throw new Exception($"Invalid bonus roll expression {bonusMatch}.");
             }
         }
 
-        return new DiceRoll(this, dieCount, sidesCount, multiplier, bonus, multiplierIsDivisor);
+        // Check to see if there is a multiplier.
+        if (multiplierMatch != "")
+        {
+            // Check to see if the multiplier is for the player experience level.
+            if (multiplierMatch == "x")
+            {
+                if (multiplierIsDivisor)
+                {
+                    return new ExperienceDivisorDiceRoll(this, dieCount, sidesCount, bonus);
+                }
+                return new ExperienceMultiplierDiceRoll(this, dieCount, sidesCount, bonus);
+            }
+
+            // Parse the ordinal multiplier.
+            int multiplier = 1;
+            if (!int.TryParse(multiplierMatch, out multiplier))
+            {
+                throw new Exception($"Invalid multiplier expression {multiplierMatch}.");
+            }
+            return new OrdinalMultiplierDiceRoll(this, dieCount, sidesCount, multiplier, bonus);
+        }
+
+        // There is no multiplier.  This is a simple DieRoll.
+        return new DiceRoll(this, dieCount, sidesCount, bonus);
     }
 }

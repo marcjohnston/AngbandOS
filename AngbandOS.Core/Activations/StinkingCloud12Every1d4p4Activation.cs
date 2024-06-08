@@ -17,7 +17,7 @@ internal class StinkingCloud12Every1d4p4Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} throbs deep green...";
 
-    public override int RechargeTime() => Game.RandomLessThan(4) + 4;
+    protected override string RechargeTimeRollExpression => "1d4+4";
 
     protected override bool Activate(int direction)
     {

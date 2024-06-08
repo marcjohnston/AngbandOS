@@ -12,7 +12,7 @@ internal class BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225Activa
 {
     private BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225Activation(Game game) : base(game) { }
 
-    public override int RechargeTime() => Game.DieRoll(225) + 225;
+    protected override string RechargeTimeRollExpression => "1d225+225";
 
     protected override bool Activate(int direction)
     {

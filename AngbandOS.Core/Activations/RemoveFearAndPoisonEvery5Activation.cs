@@ -24,7 +24,7 @@ internal class RemoveFearAndPoisonEvery5Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 5;
+    protected override string RechargeTimeRollExpression => "5";
 
     public override int Value => 1000;
 

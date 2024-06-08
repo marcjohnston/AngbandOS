@@ -17,7 +17,7 @@ internal class LargeLightningBall250Every425p1d425Activation : DirectionalActiva
     
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
-    public override int RechargeTime() => Game.RandomLessThan(425) + 425;
+    protected override string RechargeTimeRollExpression => "1d425+425";
 
     protected override bool Activate(int direction)
     {

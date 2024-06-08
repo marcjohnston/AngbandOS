@@ -13,7 +13,7 @@ internal class BoltOfFire9d8Every1d8p8Activation : DirectionalActivation
     private BoltOfFire9d8Every1d8p8Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} are covered in fire...";
-    public override int RechargeTime() => Game.DieRoll(8) + 8;
+    protected override string RechargeTimeRollExpression => "1d8+8";
 
     protected override bool Activate(int direction)
     {

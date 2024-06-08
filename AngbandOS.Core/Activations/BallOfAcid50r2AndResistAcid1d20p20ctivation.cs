@@ -12,7 +12,7 @@ internal class BallOfAcid50r2AndResistAcid1d20p20ctivation : DirectionalActivati
 {
     private BallOfAcid50r2AndResistAcid1d20p20ctivation(Game game) : base(game) { }
 
-    public override int RechargeTime() => Game.DieRoll(50) + 50;
+    protected override string RechargeTimeRollExpression => "1d50+50";
 
     protected override bool Activate(int direction)
     {

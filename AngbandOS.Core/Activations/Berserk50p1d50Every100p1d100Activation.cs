@@ -24,7 +24,7 @@ internal class Berserk50p1d50Every100p1d100Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 100 + Game.DieRoll(100);
+    protected override string RechargeTimeRollExpression => "1d100+100";
 
     public override int Value => 800;
 

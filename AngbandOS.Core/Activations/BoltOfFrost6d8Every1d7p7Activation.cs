@@ -13,7 +13,7 @@ internal class BoltOfFrost6d8Every1d7p7Activation : DirectionalActivation
     private BoltOfFrost6d8Every1d7p7Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} are covered in frost...";
-    public override int RechargeTime() => Game.DieRoll(7) + 7;
+    protected override string RechargeTimeRollExpression => "1d7+7";
     protected override bool Activate(int direction)
     {
         Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, base.Game.DiceRoll(6, 8));

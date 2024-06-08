@@ -17,7 +17,7 @@ internal class DispelEvil5xEvery300p1d300Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} floods the area with goodness...";
 
-    public override int RechargeTime() => Game.RandomLessThan(300) + 300;
+    protected override string RechargeTimeRollExpression => "1d300+300";
 
     protected override bool OnActivate(Item item)
     {

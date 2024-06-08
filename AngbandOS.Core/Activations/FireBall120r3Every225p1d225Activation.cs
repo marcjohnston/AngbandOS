@@ -17,7 +17,7 @@ internal class FireBall120r3Every225p1d225Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} glows deep red...";
 
-    public override int RechargeTime() => Game.RandomLessThan(225) + 225;
+    protected override string RechargeTimeRollExpression => "1d225+225";
 
     protected override bool Activate(int direction)
     {

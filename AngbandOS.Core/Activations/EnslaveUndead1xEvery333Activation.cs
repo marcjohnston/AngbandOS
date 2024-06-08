@@ -17,7 +17,7 @@ internal class EnslaveUndead1xEvery333Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime() => 333;
+    protected override string RechargeTimeRollExpression => "333";
 
     protected override bool Activate(int direction)
     {

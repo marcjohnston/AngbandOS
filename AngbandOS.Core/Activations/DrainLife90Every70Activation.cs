@@ -17,7 +17,7 @@ internal class DrainLife90Every70Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} glows white...";
 
-    public override int RechargeTime() => 70;
+    protected override string RechargeTimeRollExpression => "70";
 
     protected override bool Activate(int direction)
     {

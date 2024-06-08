@@ -23,7 +23,7 @@ internal class SummonPhantomActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 200 + Game.DieRoll(200);
+    protected override string RechargeTimeRollExpression => "1d200+200";
 
     public override int Value => 12000;
 

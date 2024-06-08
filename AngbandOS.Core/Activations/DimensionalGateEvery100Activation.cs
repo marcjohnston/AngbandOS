@@ -40,7 +40,7 @@ internal class DimensionalGateEvery100Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 100;
+    protected override string RechargeTimeRollExpression => "100";
 
     public override int Value => 10000;
 

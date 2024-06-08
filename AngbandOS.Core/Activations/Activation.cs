@@ -32,7 +32,10 @@ internal abstract class Activation : IGetKey
 
     public string GetKey => Key;
 
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        RechargeTimeRoll = Game.ParseRollExpression(RechargeTimeRollExpression);
+    }
 
     /// <summary>
     /// Returns the unique name for this activation.  This name should be capitalized appropriately.
@@ -46,9 +49,14 @@ internal abstract class Activation : IGetKey
     public virtual string? PreActivationMessage => null; // TODO: Need to accomodate proper grammar for items that use the {0} class name and a verb (e.g. your gauntlets glow vs your scale mail glows)
 
     /// <summary>
-    /// Returns the amount of time the artifact needs to recharge, if the Activate method returns true.
+    /// Returns a Roll expression that determines the amount of time the activation needs to recharge.  This property is used to bind the <see cref="RechargeTimeRoll ">/> property during the bind phase.
     /// </summary>
-    public abstract int RechargeTime(); // TODO: This needs to be converted into Roll that has a description.
+    protected abstract string RechargeTimeRollExpression { get; }
+
+    /// <summary>
+    /// Returns a Roll that determines the amount of time the activation needs to recharge.  This property is bound from the <see cref="RechargeTimeRollExpression"/> property during the bind phase.
+    /// </summary>
+    public Roll RechargeTimeRoll { get; private set; }
 
     /// <summary>
     /// Activates the artifact power; returning false, if the activation was cancelled by the user; true, otherwise.
@@ -67,7 +75,7 @@ internal abstract class Activation : IGetKey
         }
         if (OnActivate(item))
         {
-            item.ActivationRechargeTimeRemaining = RechargeTime();
+            item.ActivationRechargeTimeRemaining = RechargeTimeRoll.Get(Game.UseRandom);
             return true;
         }
         return false;

@@ -17,7 +17,7 @@ internal class ConfuseMonster20Every15Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} glows in scintillating colors...";
 
-    public override int RechargeTime() => 15;
+    protected override string RechargeTimeRollExpression => "15";
 
     protected override bool Activate(int direction)
     {

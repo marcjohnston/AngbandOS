@@ -14,7 +14,7 @@ internal class BallOfFire72r2Every400Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} glows an intense red...";
 
-    public override int RechargeTime() => 400;
+    protected override string RechargeTimeRollExpression => "400";
 
     protected override bool Activate(int direction)
     {

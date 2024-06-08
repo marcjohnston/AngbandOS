@@ -17,7 +17,7 @@ internal class CharmAnimalEvery500Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime() => 500;
+    protected override string RechargeTimeRollExpression => "500";
 
     protected override bool OnActivate(Item item)
     {

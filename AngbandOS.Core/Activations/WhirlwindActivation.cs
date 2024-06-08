@@ -17,7 +17,7 @@ internal class WhirlwindActivation : Activation
     
     public override string? PreActivationMessage => "";  // There is no message for this artifact power.
 
-    public override int RechargeTime() => 250;
+    protected override string RechargeTimeRollExpression => "250";
 
     protected override bool OnActivate(Item item)
     {

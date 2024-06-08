@@ -28,7 +28,7 @@ internal class ProbingDetectionAndFullIdEvery1000Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 1000;
+    protected override string RechargeTimeRollExpression => "1000";
 
     public override int Value => 12500;
 

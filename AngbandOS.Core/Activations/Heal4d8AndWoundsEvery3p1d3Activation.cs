@@ -24,7 +24,7 @@ internal class Heal4d8AndWoundsEvery3p1d3Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(3) + 3;
+    protected override string RechargeTimeRollExpression => "1d3+3";
 
     public override int Value => 750;
 

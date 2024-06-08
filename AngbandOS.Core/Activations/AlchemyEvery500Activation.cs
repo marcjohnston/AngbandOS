@@ -23,7 +23,7 @@ internal class AlchemyEvery500Activation : Activation
         return Game.RunCancellableScript(nameof(AlchemyScript));
     }
 
-    public override int RechargeTime() => 500;
+    protected override string RechargeTimeRollExpression => "500";
 
     public override int Value => 10000;
 

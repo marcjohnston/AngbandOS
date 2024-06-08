@@ -25,7 +25,7 @@ internal class Heal700Every25Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 250;
+    protected override string RechargeTimeRollExpression => "250";
 
     public override int Value => 10000;
 

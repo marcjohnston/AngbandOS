@@ -17,7 +17,7 @@ internal class SleepActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
-    public override int RechargeTime() => 55;
+    protected override string RechargeTimeRollExpression => "55";
 
     protected override bool OnActivate(Item item)
     {

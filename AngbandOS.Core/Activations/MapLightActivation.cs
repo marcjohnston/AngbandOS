@@ -24,7 +24,7 @@ internal class MapLightActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(50) + 50;
+    protected override string RechargeTimeRollExpression => "1d50+50";
 
     public override int Value => 500;
 

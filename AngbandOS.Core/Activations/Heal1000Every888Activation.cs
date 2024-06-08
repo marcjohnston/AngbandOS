@@ -25,7 +25,7 @@ internal class Heal1000Every888Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 888;
+    protected override string RechargeTimeRollExpression => "888";
 
     public override int Value => 15000;
 

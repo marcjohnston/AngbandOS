@@ -17,7 +17,7 @@ internal class BallOfCold100r2Every300Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} glows an intense blue...";
 
-    public override int RechargeTime() => 300;
+    protected override string RechargeTimeRollExpression => "300";
 
     protected override bool Activate(int direction)
     {

@@ -17,7 +17,7 @@ internal class SunlightActivation : DirectionalActivation
 
     protected override string? PostAimingMessage => "A line of sunlight appears.";
 
-    public override int RechargeTime() => 10;
+    protected override string RechargeTimeRollExpression => "10";
 
     protected override bool Activate(int direction)
     {

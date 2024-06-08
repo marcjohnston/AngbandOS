@@ -17,7 +17,7 @@ internal class BallOfCold48r2Every400Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} is covered in frost...";
 
-    public override int RechargeTime() => 400;
+    protected override string RechargeTimeRollExpression => "400";
 
     protected override bool Activate(int direction)
     {

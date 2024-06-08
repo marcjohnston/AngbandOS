@@ -14,7 +14,7 @@ internal class LargeBallFire72Every100Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} rages in fire...";
 
-    public override int RechargeTime() => 100;
+    protected override string RechargeTimeRollExpression => "100";
 
     protected override bool Activate(int direction)
     {

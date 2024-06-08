@@ -13,7 +13,7 @@ internal class IlluminationEvery1d10p10Activation : DirectionalActivation
     private IlluminationEvery1d10p10Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "The {0} wells with clear light...";
-    public override int RechargeTime() => Game.DieRoll(10) + 10;
+    protected override string RechargeTimeRollExpression => "1d10+10";
     protected override bool Activate(int direction)
     {
         Game.LightArea(base.Game.DiceRoll(2, 15), 3);

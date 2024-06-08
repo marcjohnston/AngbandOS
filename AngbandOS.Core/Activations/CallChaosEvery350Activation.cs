@@ -17,7 +17,7 @@ internal class CallChaosEvery350Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows in scintillating colors...";
 
-    public override int RechargeTime() => 350;
+    protected override string RechargeTimeRollExpression => "350";
 
     protected override bool OnActivate(Item item)
     {

@@ -17,7 +17,7 @@ internal class DrainLife100Every100p1d100Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "You order Frakir to strangle your opponent.";
 
-    public override int RechargeTime() => Game.RandomLessThan(100) + 100;
+    protected override string RechargeTimeRollExpression => "1d100+100";
 
     protected override bool Activate(int direction)
     {

@@ -13,7 +13,7 @@ internal class BallOfElements300r3Activation : DirectionalActivation
     private BallOfElements300r3Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "You breathe the elements.";
-    public override int RechargeTime() => Game.DieRoll(300) + 300;
+    protected override string RechargeTimeRollExpression => "1d300+300";
 
     protected override bool Activate(int direction)
     {

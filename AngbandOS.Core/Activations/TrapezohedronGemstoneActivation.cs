@@ -37,7 +37,7 @@ internal class TrapezohedronGemstoneActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.RandomLessThan(20) + 20;
+    protected override string RechargeTimeRollExpression => "1d20+20";
 
     public override int Value => 300;
 

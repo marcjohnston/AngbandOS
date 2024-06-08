@@ -19,7 +19,7 @@ internal class ElementalBreath300r4Every500Activation : DirectionalActivation
 
     protected override string? PostAimingMessage => "You breathe the elements.";
 
-    public override int RechargeTime() => 500;
+    protected override string RechargeTimeRollExpression => "500";
 
     protected override bool Activate(int direction)
     {

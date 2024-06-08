@@ -13,7 +13,7 @@ internal class BizarreThingsEvery1d450p450Activation : DirectionalActivation
     private BizarreThingsEvery1d450p450Activation(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} glows intensely black...";
-    public override int RechargeTime() => Game.DieRoll(450) + 450;
+    protected override string RechargeTimeRollExpression => "1d450+450";
 
     protected override bool Activate(int direction)
     {

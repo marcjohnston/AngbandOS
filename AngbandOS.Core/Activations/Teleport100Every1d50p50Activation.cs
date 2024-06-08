@@ -20,7 +20,7 @@ internal class Teleport100Every1d50p50Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Game.DieRoll(50) + 50;
+    protected override string RechargeTimeRollExpression => "1d50+50";
 
     public override int Value => 2000;
 

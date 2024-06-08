@@ -27,7 +27,7 @@ internal class ResistAll20p1d20Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 111;
+    protected override string RechargeTimeRollExpression => "111";
 
     public override int Value => 5000;
 

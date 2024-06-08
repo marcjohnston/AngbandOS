@@ -14,7 +14,7 @@ internal class PowerDragonEvery400Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "You breathe the elements...";
 
-    public override int RechargeTime() => 400;
+    protected override string RechargeTimeRollExpression => "400";
 
     protected override bool Activate(int direction)
     {

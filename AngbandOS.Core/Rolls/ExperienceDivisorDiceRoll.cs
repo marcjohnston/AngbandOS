@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Rolls;
 
 [Serializable]
-internal class DiceRoll : Roll
+internal class ExperienceDivisorDiceRoll : Roll
 {
-    public DiceRoll(Game game, int dieCount, int sideCount, int bonus) : base(game)
+    public ExperienceDivisorDiceRoll(Game game, int dieCount, int sideCount, int bonus) : base(game)
     {
         if (dieCount == 0)
         {
@@ -23,6 +23,7 @@ internal class DiceRoll : Roll
     }
     public int DieCount { get; }
     public int SideCount { get; }
+    public int Divisor { get; }
     public int Bonus { get; }
     public override int Get(Random random)
     {
@@ -32,7 +33,7 @@ internal class DiceRoll : Roll
             int roll = random.Next(SideCount) + 1;
             sum += roll;
         }
-        sum += Bonus;
+        sum = sum / Game.ExperienceLevel.IntValue + Bonus;
         if (sum < 0)
         {
             throw new Exception("Invalid roll syntax produced value less than zero.");

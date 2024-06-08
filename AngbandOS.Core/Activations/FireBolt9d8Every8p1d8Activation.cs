@@ -17,7 +17,7 @@ internal class FireBolt9d8Every8p1d8Activation : DirectionalActivation
     
     public override string? PreActivationMessage => "Your {0} is covered in fire...";
 
-    public override int RechargeTime() => Game.RandomLessThan(8) + 8;
+    protected override string RechargeTimeRollExpression => "1d8+8";
 
     protected override bool Activate(int direction)
     {

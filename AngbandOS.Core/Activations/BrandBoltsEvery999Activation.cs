@@ -23,7 +23,7 @@ internal class BrandBoltsEvery999Activation : Activation
         return Game.RunCancellableScript(nameof(BrandBoltsScript));
     }
 
-    public override int RechargeTime() => 999;
+    protected override string RechargeTimeRollExpression => "999";
 
     public override int Value => 10000;
 

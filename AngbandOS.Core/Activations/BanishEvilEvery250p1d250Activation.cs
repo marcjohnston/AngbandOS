@@ -26,7 +26,7 @@ internal class BanishEvilEvery250p1d250Activation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 250 + Game.DieRoll(250);
+    protected override string RechargeTimeRollExpression => "1d250+250";
 
     public override int Value => 3000;
 

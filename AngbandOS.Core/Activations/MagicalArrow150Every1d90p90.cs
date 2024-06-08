@@ -13,7 +13,7 @@ internal class MagicalArrow150Every1d90p90 : DirectionalActivation
     private MagicalArrow150Every1d90p90(Game game) : base(game) { }
 
     public override string? PreActivationMessage => "Your {0} grows magical spikes...";
-    public override int RechargeTime() => Game.DieRoll(90) + 90;
+    protected override string RechargeTimeRollExpression => "1d90+90";
 
     protected override bool Activate(int direction)
     {

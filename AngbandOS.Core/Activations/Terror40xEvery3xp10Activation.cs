@@ -14,8 +14,8 @@ namespace AngbandOS.Core.Activations;
 internal class Terror40xEvery3xp10Activation : Activation
 {
     private Terror40xEvery3xp10Activation(Game game) : base(game) { }
-    
-    public override int RechargeTime() => 3 * (Game.ExperienceLevel.IntValue + 10);
+
+    protected override string RechargeTimeRollExpression => "3d1xX+10";
     public override string? PreActivationMessage => "rays of fear in every direction";
     protected override bool OnActivate(Item item)
     {
