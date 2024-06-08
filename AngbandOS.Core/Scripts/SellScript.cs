@@ -33,7 +33,7 @@ internal class SellScript : Script, IScriptStore
         {
             return;
         }
-        if (oPtr.IsInEquipment && oPtr.IsCursed())
+        if (oPtr.IsInEquipment && oPtr.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

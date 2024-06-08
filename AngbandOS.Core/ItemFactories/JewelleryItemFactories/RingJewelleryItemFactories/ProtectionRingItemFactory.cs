@@ -23,7 +23,7 @@ internal class ProtectionRingItemFactory : RingItemFactory
         if (power < 0)
         {
             item.IsBroken = true;
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.BonusArmorClass = 0 - item.BonusArmorClass;
         }
     }

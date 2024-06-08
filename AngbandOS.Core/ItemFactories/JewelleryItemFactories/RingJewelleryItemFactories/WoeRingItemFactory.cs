@@ -25,7 +25,7 @@ internal class WoeRingItemFactory : RingItemFactory
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.IsBroken = true;
-        item.IdentCursed = true;
+        item.IsCursed = true;
         item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
         item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
     }

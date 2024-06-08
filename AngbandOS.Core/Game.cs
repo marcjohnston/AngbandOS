@@ -1613,7 +1613,7 @@ internal class Game
         }
         item.EnchantItem(ObjectLevel, true, good, great, null);
         item.Count = item.Factory.MakeObjectCount;
-        if (!item.IsCursed() && !item.IsBroken && item.Factory.LevelNormallyFound > Difficulty)
+        if (!item.IsCursed && !item.IsBroken && item.Factory.LevelNormallyFound > Difficulty)
         {
             TreasureRating += item.Factory.LevelNormallyFound - Difficulty;
         }
@@ -4959,10 +4959,10 @@ internal class Game
                 {
                     oPtr.BonusHit++;
                     res = true;
-                    if (oPtr.IsCursed() && !mergedCharacteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.IdentCursed = false;
+                        oPtr.IsCursed = false;
                         oPtr.IdentSense = true;
                         if (oPtr.Characteristics.Cursed)
                         {
@@ -4994,10 +4994,10 @@ internal class Game
                 {
                     oPtr.BonusDamage++;
                     res = true;
-                    if (oPtr.IsCursed() && !mergedCharacteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.IdentCursed = false;
+                        oPtr.IsCursed = false;
                         oPtr.IdentSense = true;
                         if (oPtr.Characteristics.Cursed)
                         {
@@ -5029,11 +5029,11 @@ internal class Game
                 {
                     oPtr.BonusArmorClass++;
                     res = true;
-                    if (oPtr.IsCursed() && !mergedCharacteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
+                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.IdentCursed = false;
+                        oPtr.IsCursed = false;
                         oPtr.IdentSense = true;
                         if (oPtr.Characteristics.Cursed)
                         {
@@ -5857,7 +5857,7 @@ internal class Game
             {
                 continue;
             }
-            if (!oPtr.IsCursed())
+            if (!oPtr.IsCursed)
             {
                 continue;
             }
@@ -5870,7 +5870,7 @@ internal class Game
             {
                 continue;
             }
-            oPtr.IdentCursed = false;
+            oPtr.IsCursed = false;
             oPtr.IdentSense = true;
             if (oPtr.Characteristics.Cursed)
             {
@@ -6285,7 +6285,7 @@ internal class Game
             item.DamageDice = 0;
             item.DamageSides = 0;
             item.Characteristics = new ItemCharacteristics();
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -6324,7 +6324,7 @@ internal class Game
             item.DamageDice = 0;
             item.DamageSides = 0;
             item.Characteristics = new ItemCharacteristics();
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -13137,16 +13137,16 @@ internal class Game
             }
             oPtr.Characteristics.HeavyCurse = true;
             oPtr.Characteristics.Cursed = true;
-            oPtr.IdentCursed = true;
+            oPtr.IsCursed = true;
         }
         else
         {
-            if (!oPtr.IdentCursed)
+            if (!oPtr.IsCursed)
             {
                 changed = true;
             }
             oPtr.Characteristics.Cursed = true;
-            oPtr.IdentCursed = true;
+            oPtr.IsCursed = true;
         }
         if (changed)
         {

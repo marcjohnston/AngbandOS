@@ -78,7 +78,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// This property used to be a flag in the IdentifyFlags.
     /// </summary>
-    public bool IdentCursed;
+    public bool IsCursed;
 
     /// <summary>
     /// This property used to be a flag in the IdentifyFlags.
@@ -333,7 +333,7 @@ internal sealed class Item : IComparable<Item>
         }
         if (Factory.Cursed)
         {
-            IdentCursed = true;
+            IsCursed = true;
         }
     }
 
@@ -484,7 +484,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentKnown = IdentKnown;
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
-        clonedItem.IdentCursed = IdentCursed;
+        clonedItem.IsCursed = IsCursed;
         clonedItem.IsBroken = IsBroken;
 
         clonedItem.X = X;
@@ -881,7 +881,7 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (IdentCursed != other.IdentCursed)
+        if (IsCursed != other.IsCursed)
         {
             return false;
         }
@@ -954,7 +954,7 @@ internal sealed class Item : IComparable<Item>
         {
             fullDescription = Inscription;
         }
-        else if (IsCursed() && (IsKnown() || IdentSense))
+        else if (IsCursed && (IsKnown() || IdentSense))
         {
             fullDescription = "cursed";
         }
@@ -1321,7 +1321,7 @@ internal sealed class Item : IComparable<Item>
         }
         if (mergedCharacteristics.Teleport)
         {
-            if (IdentCursed)
+            if (IsCursed)
             {
                 total -= 7500;
             }
@@ -1366,7 +1366,7 @@ internal sealed class Item : IComparable<Item>
 
         if (IsArtifact)
         {
-            if (IsCursed() || IsBroken)
+            if (IsCursed || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(TerribleItemQualityRating));
             }
@@ -1374,14 +1374,14 @@ internal sealed class Item : IComparable<Item>
         }
         if (IsRare())
         {
-            if (IsCursed() || IsBroken)
+            if (IsCursed || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(WorthlessItemQualityRating));
             }
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(ExcellentItemQualityRating));
         }
 
-        if (IsCursed())
+        if (IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
@@ -1442,7 +1442,7 @@ internal sealed class Item : IComparable<Item>
 
     public ItemQualityRating? GetVagueQualityRating()
     { 
-        if (IsCursed())
+        if (IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
@@ -1820,7 +1820,7 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It has been blessed by the gods.";
         }
-        if (IsCursed())
+        if (IsCursed)
         {
             if (mergedCharacteristics.PermaCurse)
             {
@@ -1882,11 +1882,6 @@ internal sealed class Item : IComparable<Item>
         Game.Inkey();
         Game.Screen.Restore(savedScreen);
         return true;
-    }
-
-    public bool IsCursed()
-    {
-        return IdentCursed;
     }
 
     public bool IsKnown()
@@ -2005,7 +2000,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (IsCursed())
+            if (IsCursed)
             {
                 return 0;
             }
@@ -2017,7 +2012,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (IdentSense && IsCursed())
+            if (IdentSense && IsCursed)
             {
                 return 0;
             }
@@ -2104,7 +2099,7 @@ internal sealed class Item : IComparable<Item>
             }
             if (FixedArtifact.Cursed)
             {
-                IdentCursed = true;
+                IsCursed = true;
             }
             Game.TreasureRating += FixedArtifact.TreasureRating;
             Game.SpecialTreasure = true;
@@ -2125,11 +2120,11 @@ internal sealed class Item : IComparable<Item>
             }
             if (RareItem.Cursed)
             {
-                IdentCursed = true;
+                IsCursed = true;
             }
 
             // Check to see if we are enchanting a cursed or broken item.
-            if (IsCursed() || IsBroken)
+            if (IsCursed || IsBroken)
             {
                 if (RareItem.MaxToH != 0)
                 {
@@ -2178,7 +2173,7 @@ internal sealed class Item : IComparable<Item>
             }
             if (Factory.Cursed)
             {
-                IdentCursed = true;
+                IsCursed = true;
             }
         }
     }
@@ -2763,7 +2758,7 @@ internal sealed class Item : IComparable<Item>
         {
             Characteristics.NoMagic = true;
         }
-        IdentCursed = true;
+        IsCursed = true;
     }
 
     private string GenerateRandomArtifactName()

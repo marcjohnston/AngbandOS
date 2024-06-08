@@ -21,7 +21,7 @@ internal class BrandWeaponWithChaosScript : Script, IScript
         Item? item = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
 
         // We must have a non-rare, non-artifact weapon that isn't cursed
-        if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed())
+        if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed)
         {
             string act;
             string itemName = item.GetDescription(false);

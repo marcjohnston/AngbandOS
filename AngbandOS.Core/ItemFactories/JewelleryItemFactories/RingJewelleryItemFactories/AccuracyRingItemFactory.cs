@@ -22,7 +22,7 @@ internal class AccuracyRingItemFactory : RingItemFactory
         if (power < 0)
         {
             item.IsBroken = true;
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.BonusHit = 0 - item.BonusHit;
         }
     }

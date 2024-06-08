@@ -42,7 +42,7 @@ internal class CreateFixedArtifactScript : Script, IScript
         qPtr.Weight = aPtr.Weight;
         if (aPtr.Cursed)
         {
-            qPtr.IdentCursed = true;
+            qPtr.IsCursed = true;
         }
         qPtr.GetFixedArtifactResistances();
         Game.DropNear(qPtr, -1, Game.MapY.IntValue, Game.MapX.IntValue);

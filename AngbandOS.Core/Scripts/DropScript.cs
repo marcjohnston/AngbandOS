@@ -49,7 +49,7 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessByChance
             return false;
         }
         // Can't drop a cursed item
-        if (item.IsInEquipment && item.IsCursed())
+        if (item.IsInEquipment && item.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return false;

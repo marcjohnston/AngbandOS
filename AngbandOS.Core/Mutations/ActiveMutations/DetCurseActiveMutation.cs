@@ -23,7 +23,7 @@ internal class DetCurseActiveMutation : Mutation
             foreach (int slot in inventorySlot.InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(slot);
-                if (oPtr != null && oPtr.IsCursed())
+                if (oPtr != null && oPtr.IsCursed)
                 {
                     oPtr.Inscription = "cursed";
                 }

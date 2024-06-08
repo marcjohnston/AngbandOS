@@ -57,7 +57,7 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
                 }
                 if (mergedCharacteristics.Teleport && Game.RandomLessThan(100) < 1)
                 {
-                    if (oPtr.IdentCursed && !Game.HasAntiTeleport)
+                    if (oPtr.IsCursed && !Game.HasAntiTeleport)
                     {
                         Game.Disturb(true);
                         Game.RunScriptInt(nameof(TeleportSelfScript), 40);

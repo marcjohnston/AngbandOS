@@ -30,7 +30,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
         string your = oPtr.IsInInventory ? "your" : "the"; ;
         string oName = oPtr.GetDescription(false);
         ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-        if (oPtr.IdentCursed)
+        if (oPtr.IsCursed)
         {
             if ((mergedCharacteristics.HeavyCurse && Game.DieRoll(100) < 33) || mergedCharacteristics.PermaCurse)
             {
@@ -38,7 +38,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
                 return true;
             }
             Game.MsgPrint($"A malignant aura leaves {your} {oName}.");
-            oPtr.IdentCursed = false;
+            oPtr.IsCursed = false;
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();

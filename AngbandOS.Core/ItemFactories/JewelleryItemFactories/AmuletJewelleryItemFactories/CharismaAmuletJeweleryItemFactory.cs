@@ -23,7 +23,7 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))
         {
             item.IsBroken = true;
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }
     }

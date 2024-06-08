@@ -92,7 +92,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
             string feel = "special";
             Game.EnergyUse = 0;
             Game.MsgPrint($"You cannot destroy {itemName}.");
-            if (item.IsCursed() || item.IsBroken)
+            if (item.IsCursed || item.IsBroken)
             {
                 feel = "terrible";
             }

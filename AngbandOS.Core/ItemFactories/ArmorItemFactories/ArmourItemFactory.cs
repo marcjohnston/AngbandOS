@@ -181,7 +181,7 @@ internal abstract class ArmorItemFactory : ItemFactory
             }
             if (item.BonusArmorClass < 0)
             {
-                item.IdentCursed = true;
+                item.IsCursed = true;
             }
         }
     }

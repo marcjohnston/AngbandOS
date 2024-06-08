@@ -48,7 +48,7 @@ internal class TakeOffScript : Script, IScript, IRepeatableScript, IScriptStore
             return;
         }
         // Can't take of cursed items
-        if (item.IsCursed())
+        if (item.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

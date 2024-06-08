@@ -28,7 +28,7 @@ internal class SlayingRingItemFactory : RingItemFactory
         if (power < 0)
         {
             item.IsBroken = true;
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.BonusHit = 0 - item.BonusHit;
             item.BonusDamage = 0 - item.BonusDamage;
         }

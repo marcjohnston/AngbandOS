@@ -46,7 +46,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessByChanceScript, ICanc
             }
 
             // Skip cursed or broken bolts
-            if (item.IsCursed() || item.IsBroken)
+            if (item.IsCursed || item.IsBroken)
             {
                 continue;
             }

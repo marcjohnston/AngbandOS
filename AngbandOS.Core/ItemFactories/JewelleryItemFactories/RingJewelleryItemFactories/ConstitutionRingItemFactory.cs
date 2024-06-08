@@ -27,7 +27,7 @@ internal class ConstitutionRingItemFactory : RingItemFactory
         if (power < 0)
         {
             item.IsBroken = true;
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }
     }

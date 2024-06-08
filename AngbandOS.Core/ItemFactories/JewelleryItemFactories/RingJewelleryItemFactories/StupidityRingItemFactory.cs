@@ -24,7 +24,7 @@ internal class StupidityRingItemFactory : RingItemFactory
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.IsBroken = true;
-        item.IdentCursed = true;
+        item.IsCursed = true;
         item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
     }
     public override bool Cursed => true;

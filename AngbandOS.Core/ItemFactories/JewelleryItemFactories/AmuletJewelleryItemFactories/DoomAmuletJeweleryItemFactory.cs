@@ -24,7 +24,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.IsBroken = true;
-        item.IdentCursed = true;
+        item.IsCursed = true;
         item.TypeSpecificValue = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
         item.BonusArmorClass = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
     }

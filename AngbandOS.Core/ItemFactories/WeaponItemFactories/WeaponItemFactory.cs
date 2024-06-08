@@ -124,7 +124,7 @@ internal abstract class WeaponItemFactory : ItemFactory
             }
             if (item.BonusHit + item.BonusDamage < 0)
             {
-                item.IdentCursed = true;
+                item.IsCursed = true;
             }
         }
     }

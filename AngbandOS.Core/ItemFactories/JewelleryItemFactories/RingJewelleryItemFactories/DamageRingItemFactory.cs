@@ -27,7 +27,7 @@ internal class DamageRingItemFactory : RingItemFactory
         if (power < 0)
         {
             item.IsBroken = true;
-            item.IdentCursed = true;
+            item.IsCursed = true;
             item.BonusDamage = 0 - item.BonusDamage;
         }
     }

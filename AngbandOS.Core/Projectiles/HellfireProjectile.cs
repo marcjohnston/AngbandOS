@@ -30,7 +30,7 @@ internal class HellfireProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.IsCursed())
+            if (oPtr.IsCursed)
             {
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";

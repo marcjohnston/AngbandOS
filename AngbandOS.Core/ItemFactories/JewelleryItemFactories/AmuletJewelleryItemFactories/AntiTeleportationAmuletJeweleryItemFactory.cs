@@ -16,7 +16,7 @@ internal class AntiTeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFa
     {
         if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))
         {
-            item.IdentCursed = true;
+            item.IsCursed = true;
         }
     }
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
