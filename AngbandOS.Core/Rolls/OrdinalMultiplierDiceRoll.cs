@@ -45,4 +45,15 @@ internal class OrdinalMultiplierDiceRoll : Roll
         }
         return sum;
     }
+    public override string Expression
+    {
+        get
+        {
+            if (Bonus > 0)
+            {
+                return $"{DieCount}d{SideCount}*{Multiplier}+{Bonus}";
+            }
+            return $"{DieCount}d{SideCount}*{Multiplier}";
+        }
+    }
 }

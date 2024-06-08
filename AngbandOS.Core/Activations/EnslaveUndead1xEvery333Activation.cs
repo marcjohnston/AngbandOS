@@ -29,5 +29,4 @@ internal class EnslaveUndead1xEvery333Activation : DirectionalActivation
 
     public override string Name => "Enslave undead";
 
-    public override string Frequency => "333";
 }

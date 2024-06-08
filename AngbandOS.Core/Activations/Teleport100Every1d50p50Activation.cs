@@ -26,5 +26,4 @@ internal class Teleport100Every1d50p50Activation : Activation
 
     public override string Name => "Teleport (100)";
 
-    public override string Frequency => "45";
 }

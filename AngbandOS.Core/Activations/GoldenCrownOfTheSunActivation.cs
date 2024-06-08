@@ -36,5 +36,4 @@ internal class GoldenCrownOfTheSunActivation : Activation
 
     public override string Name => "Heal (700)";
 
-    public override string Frequency => "250";
 }

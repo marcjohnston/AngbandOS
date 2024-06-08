@@ -40,4 +40,15 @@ internal class ExperienceDivisorDiceRoll : Roll
         }
         return sum;
     }
+    public override string Expression
+    {
+        get
+        {
+            if (Bonus > 0)
+            {
+                return $"{DieCount}d{SideCount}/X+{Bonus}";
+            }
+            return $"{DieCount}d{SideCount}/X";
+        }
+    }
 }

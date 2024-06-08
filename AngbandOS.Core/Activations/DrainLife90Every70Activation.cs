@@ -29,5 +29,4 @@ internal class DrainLife90Every70Activation : DirectionalActivation
 
     public override string Name => "Drain life (90)";
 
-    public override string Frequency => "70";
 }

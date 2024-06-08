@@ -30,5 +30,4 @@ internal class RemoveFearAndPoisonEvery5Activation : Activation
 
     public override string Name => "Remove fear and cure poison";
 
-    public override string Frequency => "5";
 }

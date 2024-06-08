@@ -29,5 +29,4 @@ internal class FireBall120r3Every225p1d225Activation : DirectionalActivation
 
     public override string Name => "Fire ball (120)";
 
-    public override string Frequency => "225+d225";
 }

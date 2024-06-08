@@ -31,5 +31,4 @@ internal class ElementalBreath300r4Every500Activation : DirectionalActivation
 
     public override string Name => "Elemental breath (300)";
 
-    public override string Frequency => "500";
 }

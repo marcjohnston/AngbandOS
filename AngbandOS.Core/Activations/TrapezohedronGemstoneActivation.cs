@@ -43,5 +43,4 @@ internal class TrapezohedronGemstoneActivation : Activation
 
     public override string Name => "Clairvoyance and recall, draining you";
 
-    public override string Frequency => "20+d20";
 }

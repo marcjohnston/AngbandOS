@@ -24,6 +24,5 @@ internal class BoltOfAcid5d8Every1d5p5Activation : DirectionalActivation
 
     public override string Name => "Acid bolt (5d8)";
 
-    public override string Frequency => "5+d5";
 }
 

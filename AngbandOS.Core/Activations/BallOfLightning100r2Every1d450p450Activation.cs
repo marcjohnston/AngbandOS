@@ -25,6 +25,5 @@ internal class BallOfLightning100r2Every1d450p450Activation : DirectionalActivat
 
     public override string Name => "Breathe lightning (100)";
 
-    public override string Frequency => "450+d450";
 }
 

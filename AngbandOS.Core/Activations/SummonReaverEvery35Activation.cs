@@ -28,5 +28,4 @@ internal class SummonReaverEvery500p1d500Activation : Activation
 
     public override string Name => "Summon a black reaver";
 
-    public override string Frequency => "500+d500";
 }

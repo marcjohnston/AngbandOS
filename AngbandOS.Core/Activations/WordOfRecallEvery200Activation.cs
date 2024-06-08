@@ -25,6 +25,5 @@ internal class WordOfRecallEvery200Activation : DirectionalActivation
 
     public override string Name => "Word of recall";
 
-    public override string Frequency => "200";
 }
 

@@ -44,6 +44,5 @@ internal class BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225Activa
 
     public override string Name => "Breathe multi-hued (250)";
 
-    public override string Frequency => "225+d225";
 }
 

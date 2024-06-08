@@ -25,6 +25,5 @@ internal class BreatheFire200r2Every1d450p450Activation : DirectionalActivation
 
     public override string Name => "Breathe fire (200)";
 
-    public override string Frequency => "450+d450";
 }
 

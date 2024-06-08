@@ -29,5 +29,4 @@ internal class GenocideEvery500Activation : Activation
 
     public override string Name => "Carnage";
 
-    public override string Frequency => "500";
 }

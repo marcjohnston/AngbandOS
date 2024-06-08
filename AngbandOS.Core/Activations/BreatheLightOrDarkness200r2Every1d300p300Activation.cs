@@ -28,6 +28,5 @@ internal class BreatheLightOrDarkness200r2Every1d300p300Activation : Directional
 
     public override string Name => "Breathe light/darkness (200)";
 
-    public override string Frequency => "300+d300";
 }
 

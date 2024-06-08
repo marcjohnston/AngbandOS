@@ -28,6 +28,5 @@ internal class BreathBallOfFrost110r2Every500Activation : DirectionalActivation
 
     public override string Name => "Frost breath (110)";
 
-    public override string Frequency => "450+d450";
 }
 

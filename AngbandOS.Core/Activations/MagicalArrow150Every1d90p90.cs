@@ -25,6 +25,5 @@ internal class MagicalArrow150Every1d90p90 : DirectionalActivation
 
     public override string Name => "Magical arrow (150)";
 
-    public override string Frequency => "90+p90";
 }
 

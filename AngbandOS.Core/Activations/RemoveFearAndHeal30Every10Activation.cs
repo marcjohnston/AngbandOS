@@ -30,5 +30,4 @@ internal class RemoveFearAndHeal30Every10Activation : Activation
 
     public override string Name => "Remove fear & heal 30 hp";
 
-    public override string Frequency => "10";
 }

@@ -32,5 +32,4 @@ internal class BanishEvilEvery250p1d250Activation : Activation
 
     public override string Name => "Banish evil";
 
-    public override string Frequency => "250+d250";
 }

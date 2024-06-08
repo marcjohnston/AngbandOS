@@ -29,5 +29,4 @@ internal class TemporaryEsp20p1d30Every200Activation : Activation
 
     public override string Name => "Temporary ESP (25+d30)";
 
-    public override string Frequency => "200";
 }

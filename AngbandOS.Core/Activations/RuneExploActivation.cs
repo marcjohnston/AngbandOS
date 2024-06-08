@@ -29,5 +29,4 @@ internal class RuneExploActivation : Activation
 
     public override string Name => "Yellow Sign";
 
-    public override string Frequency => "200";
 }

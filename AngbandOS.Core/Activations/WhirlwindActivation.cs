@@ -39,5 +39,4 @@ internal class WhirlwindActivation : Activation
 
     public override string Name => "Whirlwind attack";
 
-    public override string Frequency => "250";
 }

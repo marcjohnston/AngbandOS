@@ -29,5 +29,4 @@ internal class StinkingCloud12Every1d4p4Activation : DirectionalActivation
 
     public override string Name => "Stinking cloud (12) rad. 3";
 
-    public override string Frequency => "4+d4";
 }

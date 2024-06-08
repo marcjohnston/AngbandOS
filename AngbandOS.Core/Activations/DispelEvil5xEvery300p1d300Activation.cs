@@ -28,5 +28,4 @@ internal class DispelEvil5xEvery300p1d300Activation : Activation
 
     public override string Name => "Dispel evil (x5)";
 
-    public override string Frequency => "300+d300";
 }

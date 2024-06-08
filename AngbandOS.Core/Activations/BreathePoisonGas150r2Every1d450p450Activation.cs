@@ -25,6 +25,5 @@ internal class BreathePoisonGas150r2Every1d450p450Activation : DirectionalActiva
 
     public override string Name => "Breathe sound (130)";
 
-    public override string Frequency => "450+d450";
 }
 

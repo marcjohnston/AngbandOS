@@ -31,5 +31,4 @@ internal class Heal700Every25Activation : Activation
 
     public override string Name => "Heal (700)";
 
-    public override string Frequency => "250";
 }

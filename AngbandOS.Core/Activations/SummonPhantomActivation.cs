@@ -29,5 +29,4 @@ internal class SummonPhantomActivation : Activation
 
     public override string Name => "Summon phantasmal servant";
 
-    public override string Frequency => "200+d200";
 }

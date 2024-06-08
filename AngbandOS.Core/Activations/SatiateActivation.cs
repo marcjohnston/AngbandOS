@@ -27,5 +27,4 @@ internal class SatiateActivation : Activation
 
     public override string Name => "Satisfy hunger";
 
-    public override string Frequency => "200";
 }

@@ -28,5 +28,4 @@ internal class DestroyDoorsEvery10Activation : Activation
 
     public override string Name => "Destroy doors";
 
-    public override string Frequency => "10";
 }

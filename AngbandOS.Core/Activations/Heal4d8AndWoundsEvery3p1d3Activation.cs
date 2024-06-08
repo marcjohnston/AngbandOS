@@ -30,5 +30,4 @@ internal class Heal4d8AndWoundsEvery3p1d3Activation : Activation
 
     public override string Name => "Heal 4d8 & wounds";
 
-    public override string Frequency => "3+d3";
 }

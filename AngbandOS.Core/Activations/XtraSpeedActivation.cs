@@ -36,5 +36,4 @@ internal class XtraSpeedActivation : Activation
 
     public override string Name => "Speed (75+d75)";
 
-    public override string Frequency => "200+d200";
 }

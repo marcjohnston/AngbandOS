@@ -46,5 +46,4 @@ internal class DimensionalGateEvery100Activation : Activation
 
     public override string Name => "Dimension gate";
 
-    public override string Frequency => "100";
 }

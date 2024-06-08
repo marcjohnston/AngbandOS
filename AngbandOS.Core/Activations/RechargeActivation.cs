@@ -28,5 +28,4 @@ internal class RechargeActivation : Activation
 
     public override string Name => "Recharging";
 
-    public override string Frequency => "70";
 }

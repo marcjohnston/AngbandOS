@@ -25,6 +25,5 @@ internal class BallOfElements300r3Activation : DirectionalActivation
 
     public override string Name => "Breathe the elements (300)";
 
-    public override string Frequency => "300+d300";
 }
 

@@ -35,5 +35,4 @@ internal class Heal777CuringAndHeroism25pd25Every300Activation : Activation
 
     public override string Name => "Heal (777), curing and heroism";
 
-    public override string Frequency => "300";
 }

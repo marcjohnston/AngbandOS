@@ -36,5 +36,4 @@ internal class PowerDragonEvery400Activation : DirectionalActivation
 
     public override string Name => "Breathe elements (300), berserk rage, bless, and resistance";
 
-    public override string Frequency => "400";
 }

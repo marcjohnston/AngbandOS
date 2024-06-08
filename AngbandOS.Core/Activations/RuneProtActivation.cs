@@ -29,5 +29,4 @@ internal class RuneProtActivation : Activation
 
     public override string Name => "Rune of protection";
 
-    public override string Frequency => "400";
 }

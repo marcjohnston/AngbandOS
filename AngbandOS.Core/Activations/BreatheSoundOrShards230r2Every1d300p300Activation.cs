@@ -27,6 +27,5 @@ internal class BreatheSoundOrShards230r2Every1d300p300Activation : DirectionalAc
 
     public override string Name => "Breathe sound/shards (230)";
 
-    public override string Frequency => "300+d300";
 }
 

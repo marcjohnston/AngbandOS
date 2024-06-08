@@ -30,5 +30,4 @@ internal class DetectionEvery55p1d55Activation : Activation
 
     public override string Name => "Detection";
 
-    public override string Frequency => "55+d55";
 }

@@ -27,5 +27,4 @@ internal class SummonAnimalActivation : Activation
 
     public override string Name => "Summon animal";
 
-    public override string Frequency => "200+d300";
 }

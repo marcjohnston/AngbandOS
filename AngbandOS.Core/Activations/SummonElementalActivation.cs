@@ -42,5 +42,4 @@ internal class SummonElementalActivation : Activation
 
     public override string Name => "Summon elemental";
 
-    public override string Frequency => "750";
 }

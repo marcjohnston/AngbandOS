@@ -29,5 +29,4 @@ internal class RestLifeActivation : Activation
 
     public override string Name => "Restore life levels";
 
-    public override string Frequency => "450";
 }

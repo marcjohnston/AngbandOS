@@ -26,5 +26,4 @@ internal class LargeBallFire72Every100Activation : DirectionalActivation
 
     public override string Name => "Large fire ball (72)";
 
-    public override string Frequency => "100";
 }

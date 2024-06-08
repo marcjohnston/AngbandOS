@@ -29,5 +29,4 @@ internal class RecallActivation : Activation
 
     public override string Name => "Word of recall";
 
-    public override string Frequency => "200";
 }

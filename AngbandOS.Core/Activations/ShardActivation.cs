@@ -27,5 +27,4 @@ internal class ShardActivation : DirectionalActivation
 
     public override string Name => "Shard ball (120+level)";
 
-    public override string Frequency => "400";
 }

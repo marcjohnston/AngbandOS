@@ -29,5 +29,4 @@ internal class FireBolt9d8Every8p1d8Activation : DirectionalActivation
 
     public override string Name => "Fire bolt (9d8)";
 
-    public override string Frequency => "8+d8";
 }

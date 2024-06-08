@@ -25,6 +25,5 @@ internal class MagicMappingAndIlluminationEvery1d50p50Activation : DirectionalAc
 
     public override string Name => "Magic mapping and light";
 
-    public override string Frequency => "50+d50";
 }
 

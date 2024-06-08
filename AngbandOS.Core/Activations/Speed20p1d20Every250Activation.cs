@@ -36,5 +36,4 @@ internal class Speed20p1d20Every250Activation : Activation
 
     public override string Name => "Haste self (20+d20)";
 
-    public override string Frequency => "250";
 }

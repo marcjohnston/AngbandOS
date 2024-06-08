@@ -27,5 +27,4 @@ internal class TeleAwayActivation : DirectionalActivation
 
     public override string Name => "Teleport away";
 
-    public override string Frequency => "200";
 }

@@ -29,5 +29,4 @@ internal class FrostBolt6d8Every7p1d7Activation : DirectionalActivation
 
     public override string Name => "Frost bolt (6d8)";
 
-    public override string Frequency => "7+d7";
 }

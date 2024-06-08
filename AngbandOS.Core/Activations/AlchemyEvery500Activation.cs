@@ -28,5 +28,4 @@ internal class AlchemyEvery500Activation : Activation
     public override int Value => 10000;
 
     public override string Name => "Alchemy";
-    public override string Frequency => "500";
 }

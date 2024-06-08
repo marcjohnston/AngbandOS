@@ -27,5 +27,4 @@ internal class Terror40xEvery3xp10Activation : Activation
 
     public override string Name => "Terror (40p1x)";
 
-    public override string Frequency => "3 * (1x+10)";
 }

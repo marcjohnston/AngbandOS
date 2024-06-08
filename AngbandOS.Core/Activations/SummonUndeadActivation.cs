@@ -42,5 +42,4 @@ internal class SummonUndeadActivation : Activation
 
     public override string Name => "Summon undead";
 
-    public override string Frequency => "666+d333";
 }

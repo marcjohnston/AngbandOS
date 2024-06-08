@@ -62,5 +62,4 @@ internal class GetawayEvery35Activation : Activation
     public override int Value => 500;
 
     public override string Name => "A getaway";
-    public override string Frequency => "35";
 }

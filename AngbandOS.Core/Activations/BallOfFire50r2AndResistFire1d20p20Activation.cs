@@ -25,6 +25,5 @@ internal class BallOfFire50r2AndResistFire1d20p20Activation : DirectionalActivat
 
     public override string Name => "Ball of fire and resist fire";
 
-    public override string Frequency => "50+d50";
 }
 

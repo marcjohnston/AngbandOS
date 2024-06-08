@@ -28,5 +28,4 @@ internal class BallOfLightning100r3Every500Activation : DirectionalActivation
     public override int Value => 1500;
     public override string Name => "Ball of lightning (100)";
 
-    public override string Frequency => "500";
 }

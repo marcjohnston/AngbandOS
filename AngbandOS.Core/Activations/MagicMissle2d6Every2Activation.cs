@@ -24,6 +24,5 @@ internal class MagicMissle2d6Every2Activation : DirectionalActivation
 
     public override string Name => "Magic missile (2d6)";
 
-    public override string Frequency => "2";
 }
 

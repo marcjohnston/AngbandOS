@@ -30,5 +30,4 @@ internal class Berserk50p1d50Every100p1d100Activation : Activation
 
     public override string Name => "Heroism and berserk (50+d50)";
 
-    public override string Frequency => "100+d100";
 }

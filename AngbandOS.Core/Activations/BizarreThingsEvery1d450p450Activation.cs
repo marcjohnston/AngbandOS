@@ -68,6 +68,5 @@ internal class BizarreThingsEvery1d450p450Activation : DirectionalActivation
 
     public override string Name => "Bizarre things";
 
-    public override string Frequency => "450+d450";
 }
 

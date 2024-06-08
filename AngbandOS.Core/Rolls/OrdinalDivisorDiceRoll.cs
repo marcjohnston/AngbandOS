@@ -45,4 +45,15 @@ internal class OrdinalDivisorDiceRoll : Roll
         }
         return sum;
     }
+    public override string Expression
+    {
+        get
+        {
+            if (Bonus > 0)
+            {
+                return $"{DieCount}d{SideCount}/{Divisor}+{Bonus}";
+            }
+            return $"{DieCount}d{SideCount}/{Divisor}";
+        }
+    }
 }

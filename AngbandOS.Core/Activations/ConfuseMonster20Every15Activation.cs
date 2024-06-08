@@ -29,5 +29,4 @@ internal class ConfuseMonster20Every15Activation : DirectionalActivation
 
     public override string Name => "Confuse monster";
 
-    public override string Frequency => "15";
 }

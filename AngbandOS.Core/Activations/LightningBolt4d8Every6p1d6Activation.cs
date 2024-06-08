@@ -29,5 +29,4 @@ internal class LightningBolt4d8Every6p1d6Activation : DirectionalActivation
 
     public override string Name => "Lightning bolt (4d8)";
 
-    public override string Frequency => "6+d6";
 }

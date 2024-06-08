@@ -29,5 +29,4 @@ internal class QuakeActivation : Activation
 
     public override string Name => "Earthquake (rad 10)";
 
-    public override string Frequency => "50";
 }

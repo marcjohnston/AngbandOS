@@ -28,5 +28,4 @@ internal class IdentifyEvery10Activation : Activation
 
     public override string Name => "Identify";
 
-    public override string Frequency => "10";
 }

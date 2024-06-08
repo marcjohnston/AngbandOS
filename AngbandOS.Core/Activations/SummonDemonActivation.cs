@@ -42,5 +42,4 @@ internal class SummonDemonActivation : Activation
 
     public override string Name => "Summon demon";
 
-    public override string Frequency => "666+d333";
 }

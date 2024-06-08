@@ -29,5 +29,4 @@ internal class LightActivation : Activation
 
     public override string Name => "Light area (2d15)";
 
-    public override string Frequency => "10+d10";
 }

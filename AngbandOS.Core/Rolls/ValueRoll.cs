@@ -17,4 +17,5 @@ internal class ValueRoll : Roll
     }
     public int Value { get; }
     public override int Get(Random random) => Value;
+    public override string Expression => $"{Value}";
 }

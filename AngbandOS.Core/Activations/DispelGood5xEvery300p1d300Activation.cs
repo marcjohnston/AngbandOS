@@ -29,5 +29,4 @@ internal class DispelGood5xEvery300p1d300Activation : Activation
 
     public override string Name => "Dispel good (5x)";
 
-    public override string Frequency => "300+d300";
 }

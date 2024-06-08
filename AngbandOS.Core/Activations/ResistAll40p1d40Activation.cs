@@ -33,5 +33,4 @@ internal class ResistAll40p1d40Activation : Activation
 
     public override string Name => "Resist elements (40+d40)";
 
-    public override string Frequency => "200";
 }

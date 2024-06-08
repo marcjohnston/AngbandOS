@@ -28,5 +28,4 @@ internal class LargeFrostBall200Every325p1d325Activation : DirectionalActivation
     public override int Value => 2500;
     public override string Name => "Large frost ball (200)";
 
-    public override string Frequency => "325+d325";
 }

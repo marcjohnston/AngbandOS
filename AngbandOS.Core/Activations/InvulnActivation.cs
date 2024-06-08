@@ -29,5 +29,4 @@ internal class InvulnActivation : Activation
 
     public override string Name => "Invulnerability (8+d8)";
 
-    public override string Frequency => "1000";
 }

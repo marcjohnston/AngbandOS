@@ -26,5 +26,4 @@ internal class BallOfFire72r2Every400Activation : DirectionalActivation
 
     public override string Name => "Ball of fire (72)";
 
-    public override string Frequency => "400";
 }

@@ -25,6 +25,5 @@ internal class BallOfAcid50r2AndResistAcid1d20p20ctivation : DirectionalActivati
 
     public override string Name => "Ball of acid and resist acid";
 
-    public override string Frequency => "50+d50";
 }
 

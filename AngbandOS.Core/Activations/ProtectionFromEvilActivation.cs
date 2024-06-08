@@ -30,5 +30,4 @@ internal class ProtectionFromEvilActivation : Activation
 
     public override string Name => "Protect evil (dur level*3 + d25)";
 
-    public override string Frequency => "225+d225";
 }

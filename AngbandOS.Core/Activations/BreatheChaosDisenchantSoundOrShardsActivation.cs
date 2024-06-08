@@ -27,6 +27,5 @@ internal class BreatheChaosDisenchantSoundOrShardsActivation : DirectionalActiva
 
     public override string Name => "Breathe balance (250)";
 
-    public override string Frequency => "300+d300";
 }
 

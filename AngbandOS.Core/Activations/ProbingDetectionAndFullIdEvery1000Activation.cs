@@ -34,5 +34,4 @@ internal class ProbingDetectionAndFullIdEvery1000Activation : Activation
 
     public override string Name => "Probing, detection and full id";
 
-    public override string Frequency => "1000";
 }

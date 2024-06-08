@@ -29,5 +29,4 @@ internal class MassCarnageActivation : Activation
 
     public override string Name => "Mass carnage";
 
-    public override string Frequency => "1000";
 }

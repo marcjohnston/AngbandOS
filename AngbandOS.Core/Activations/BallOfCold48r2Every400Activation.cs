@@ -28,5 +28,4 @@ internal class BallOfCold48r2Every400Activation : DirectionalActivation
     public override int Value => 750;
     public override string Name => "Ball of cold (48)";
 
-    public override string Frequency => "400";
 }

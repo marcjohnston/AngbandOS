@@ -89,7 +89,5 @@ internal abstract class Activation : IGetKey
     /// <summary>
     /// Returns the description of the activation.
     /// </summary>
-    public string Description => $"{Name.ToLower()} every {Frequency} turns";
-
-    public abstract string Frequency { get; }
+    public string Description => $"{Name.ToLower()} every {RechargeTimeRoll.Expression} turns";
 }

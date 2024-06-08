@@ -24,6 +24,5 @@ internal class RestoreLifeLevelsEvery450Activation : DirectionalActivation
 
     public override string Name => "Restore life levels";
 
-    public override string Frequency => "2";
 }
 

@@ -27,6 +27,5 @@ internal class BallOfChaos200r2Every1d300p300Activation : DirectionalActivation
 
     public override string Name => "Breathe chaos/disenchant (220)";
 
-    public override string Frequency => "300+d300";
 }
 

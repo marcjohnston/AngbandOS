@@ -29,5 +29,4 @@ internal class MassCharmEvery750Activation : Activation
 
     public override string Name => "Mass charm";
 
-    public override string Frequency => "750";
 }

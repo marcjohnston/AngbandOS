@@ -25,6 +25,5 @@ internal class BallOfAcid130r2Every1d450p450Activation : DirectionalActivation
 
     public override string Name => "Breathe acid (130)";
 
-    public override string Frequency => "450+d450";
 }
 

@@ -29,5 +29,4 @@ internal class SleepActivation : Activation
 
     public override string Name => "Sleep nearby monsters";
 
-    public override string Frequency => "55";
 }

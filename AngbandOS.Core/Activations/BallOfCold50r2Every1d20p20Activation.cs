@@ -25,6 +25,5 @@ internal class BallOfCold50r2Every1d20p20Activation : DirectionalActivation
 
     public override string Name => "Ball of cold and resist cold";
 
-    public override string Frequency => "50+d50";
 }
 

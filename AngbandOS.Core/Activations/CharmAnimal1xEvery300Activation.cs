@@ -29,5 +29,4 @@ internal class CharmAnimal1xEvery300Activation : DirectionalActivation
 
     public override string Name => "Charm animal";
 
-    public override string Frequency => "300";
 }

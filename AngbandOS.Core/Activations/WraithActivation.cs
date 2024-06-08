@@ -29,5 +29,4 @@ internal class WraithActivation : Activation
 
     public override string Name => "Wraith form (1d1x)";
 
-    public override string Frequency => "1000";
 }

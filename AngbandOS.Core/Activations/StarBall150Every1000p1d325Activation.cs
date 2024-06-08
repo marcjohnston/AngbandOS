@@ -31,5 +31,4 @@ internal class StarBall150Every1000p1d325Activation : DirectionalActivation
     public override int Value => 8000;
     public override string Name => "Star ball (150)";
 
-    public override string Frequency => "1000";
 }

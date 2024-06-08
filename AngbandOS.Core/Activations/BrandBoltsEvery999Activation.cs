@@ -28,5 +28,4 @@ internal class BrandBoltsEvery999Activation : Activation
     public override int Value => 10000;
 
     public override string Name => "Brand bolts";
-    public override string Frequency => "999";
 }

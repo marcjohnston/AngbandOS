@@ -35,5 +35,4 @@ internal class Vampire2Activation : DirectionalActivation
 
     public override string Name => "Vampiric drain 3x (100)";
 
-    public override string Frequency => "400";
 }

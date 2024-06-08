@@ -35,5 +35,4 @@ internal class RestAllActivation : Activation
 
     public override string Name => "Restore stats and life levels";
 
-    public override string Frequency => "750";
 }

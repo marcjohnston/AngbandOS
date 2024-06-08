@@ -27,5 +27,4 @@ internal class LargeLightningBall250Every425p1d425Activation : DirectionalActiva
 
     public override int Value => 2000;
     public override string Name => "Large lightning ball (250)";
-    public override string Frequency => "425+d425";
 }

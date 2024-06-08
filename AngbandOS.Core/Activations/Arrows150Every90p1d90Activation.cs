@@ -29,5 +29,4 @@ internal class Arrows150Every90p1d90Activation : DirectionalActivation
 
     public override string Name => "Arrows (150)";
 
-    public override string Frequency => "90+d90";
 }

@@ -23,4 +23,10 @@ internal abstract class Roll // TODO: We need to add a description for Activatio
     /// from least to most during the <see cref="Game.MakeGold"/> method.
     /// </summary>
     public int MaximumValue { get; protected set; }
+
+    public abstract string Expression { get; }
+    public override string ToString()
+    {
+        return Expression;
+    }
 }

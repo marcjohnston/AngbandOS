@@ -28,5 +28,4 @@ internal class CallChaosEvery350Activation : Activation
 
     public override string Name => "Call chaos";
 
-    public override string Frequency => "350";
 }

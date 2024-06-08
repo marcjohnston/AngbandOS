@@ -28,5 +28,4 @@ internal class IdentifyFullyEvery750Activation : Activation
 
     public override string Name => "Identify true";
 
-    public override string Frequency => "750";
 }

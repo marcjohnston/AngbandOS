@@ -40,4 +40,15 @@ internal class ExperienceMultiplierDiceRoll : Roll
         }
         return sum;
     }
+    public override string Expression
+    {
+        get
+        {
+            if (Bonus > 0)
+            {
+                return $"{DieCount}d{SideCount}xX+{Bonus}";
+            }
+            return $"{DieCount}d{SideCount}xX";
+        }
+    }
 }

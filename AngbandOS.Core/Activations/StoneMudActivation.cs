@@ -29,5 +29,4 @@ internal class StoneMudActivation : DirectionalActivation
 
     public override string Name => "Stone to mud";
 
-    public override string Frequency => "5";
 }

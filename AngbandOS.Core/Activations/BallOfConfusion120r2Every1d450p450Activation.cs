@@ -25,6 +25,5 @@ internal class BallOfConfusion120r2Every1d450p450Activation : DirectionalActivat
 
     public override string Name => "Breathe confusion (120)";
 
-    public override string Frequency => "450+d450";
 }
 

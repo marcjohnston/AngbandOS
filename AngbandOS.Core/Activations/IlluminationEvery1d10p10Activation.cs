@@ -24,6 +24,5 @@ internal class IlluminationEvery1d10p10Activation : DirectionalActivation
 
     public override string Name => "Illumination";
 
-    public override string Frequency => "10+d10";
 }
 
