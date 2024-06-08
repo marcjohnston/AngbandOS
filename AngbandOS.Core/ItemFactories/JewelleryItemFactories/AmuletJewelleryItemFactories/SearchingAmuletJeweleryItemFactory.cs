@@ -22,7 +22,7 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
         if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))
         {
-            item.IdentBroken = true;
+            item.IsBroken = true;
             item.IdentCursed = true;
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }

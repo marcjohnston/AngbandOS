@@ -83,7 +83,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// This property used to be a flag in the IdentifyFlags.
     /// </summary>
-    public bool IdentBroken;
+    public bool IsBroken;
 
     public int ArmorClass;
     public int BonusArmorClass;
@@ -329,7 +329,7 @@ internal sealed class Item : IComparable<Item>
         DamageSides = Factory.DamageSides;
         if (Factory.Cost <= 0)
         {
-            IdentBroken = true;
+            IsBroken = true;
         }
         if (Factory.Cursed)
         {
@@ -485,7 +485,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
         clonedItem.IdentCursed = IdentCursed;
-        clonedItem.IdentBroken = IdentBroken;
+        clonedItem.IsBroken = IsBroken;
 
         clonedItem.X = X;
         clonedItem.Y = Y;
@@ -885,7 +885,7 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (IdentBroken != other.IdentBroken)
+        if (IsBroken != other.IsBroken)
         {
             return false;
         }
@@ -1366,7 +1366,7 @@ internal sealed class Item : IComparable<Item>
 
         if (IsArtifact)
         {
-            if (IsCursed() || IsBroken())
+            if (IsCursed() || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(TerribleItemQualityRating));
             }
@@ -1374,7 +1374,7 @@ internal sealed class Item : IComparable<Item>
         }
         if (IsRare())
         {
-            if (IsCursed() || IsBroken())
+            if (IsCursed() || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(WorthlessItemQualityRating));
             }
@@ -1386,7 +1386,7 @@ internal sealed class Item : IComparable<Item>
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
 
-        if (IsBroken() || BonusDamage < 0 || BonusHit < 0 || BonusArmorClass < 0)
+        if (IsBroken || BonusDamage < 0 || BonusHit < 0 || BonusArmorClass < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1446,7 +1446,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
-        if (IsBroken())
+        if (IsBroken)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1884,11 +1884,6 @@ internal sealed class Item : IComparable<Item>
         return true;
     }
 
-    public bool IsBroken()
-    {
-        return IdentBroken;
-    }
-
     public bool IsCursed()
     {
         return IdentCursed;
@@ -2006,7 +2001,7 @@ internal sealed class Item : IComparable<Item>
         int value;
         if (IsKnown())
         {
-            if (IsBroken())
+            if (IsBroken)
             {
                 return 0;
             }
@@ -2018,7 +2013,7 @@ internal sealed class Item : IComparable<Item>
         }
         else
         {
-            if (IdentSense && IsBroken())
+            if (IdentSense && IsBroken)
             {
                 return 0;
             }
@@ -2105,7 +2100,7 @@ internal sealed class Item : IComparable<Item>
             Weight = FixedArtifact.Weight;
             if (FixedArtifact.Cost == 0)
             {
-                IdentBroken = true;
+                IsBroken = true;
             }
             if (FixedArtifact.Cursed)
             {
@@ -2126,7 +2121,7 @@ internal sealed class Item : IComparable<Item>
             RareItem.ApplyMagic(this);
             if (RareItem.Cost == 0)
             {
-                IdentBroken = true;
+                IsBroken = true;
             }
             if (RareItem.Cursed)
             {
@@ -2134,7 +2129,7 @@ internal sealed class Item : IComparable<Item>
             }
 
             // Check to see if we are enchanting a cursed or broken item.
-            if (IsCursed() || IsBroken())
+            if (IsCursed() || IsBroken)
             {
                 if (RareItem.MaxToH != 0)
                 {
@@ -2179,7 +2174,7 @@ internal sealed class Item : IComparable<Item>
         {
             if (Factory.Cost == 0)
             {
-                IdentBroken = true;
+                IsBroken = true;
             }
             if (Factory.Cursed)
             {

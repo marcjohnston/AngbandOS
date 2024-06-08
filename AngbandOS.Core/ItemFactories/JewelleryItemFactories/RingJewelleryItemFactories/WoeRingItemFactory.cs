@@ -24,7 +24,7 @@ internal class WoeRingItemFactory : RingItemFactory
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.IdentBroken = true;
+        item.IsBroken = true;
         item.IdentCursed = true;
         item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
         item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));

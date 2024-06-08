@@ -61,7 +61,7 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
         {
             string feel = "special";
             Game.MsgPrint($"You fail to turn {oName} to gold!");
-            if (oPtr.IsCursed() || oPtr.IsBroken())
+            if (oPtr.IsCursed() || oPtr.IsBroken)
             {
                 feel = "terrible";
             }

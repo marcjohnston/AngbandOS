@@ -1613,7 +1613,7 @@ internal class Game
         }
         item.EnchantItem(ObjectLevel, true, good, great, null);
         item.Count = item.Factory.MakeObjectCount;
-        if (!item.IsCursed() && !item.IsBroken() && item.Factory.LevelNormallyFound > Difficulty)
+        if (!item.IsCursed() && !item.IsBroken && item.Factory.LevelNormallyFound > Difficulty)
         {
             TreasureRating += item.Factory.LevelNormallyFound - Difficulty;
         }
@@ -6286,7 +6286,7 @@ internal class Game
             item.DamageSides = 0;
             item.Characteristics = new ItemCharacteristics();
             item.IdentCursed = true;
-            item.IdentBroken = true;
+            item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -6325,7 +6325,7 @@ internal class Game
             item.DamageSides = 0;
             item.Characteristics = new ItemCharacteristics();
             item.IdentCursed = true;
-            item.IdentBroken = true;
+            item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }

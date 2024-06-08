@@ -36,7 +36,7 @@ internal class SpeedRingItemFactory : RingItemFactory
         }
         if (power < 0)
         {
-            item.IdentBroken = true;
+            item.IsBroken = true;
             item.IdentCursed = true;
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }

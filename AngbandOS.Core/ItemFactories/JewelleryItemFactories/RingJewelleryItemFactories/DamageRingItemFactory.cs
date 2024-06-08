@@ -26,7 +26,7 @@ internal class DamageRingItemFactory : RingItemFactory
         item.BonusDamage = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
         if (power < 0)
         {
-            item.IdentBroken = true;
+            item.IsBroken = true;
             item.IdentCursed = true;
             item.BonusDamage = 0 - item.BonusDamage;
         }

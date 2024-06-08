@@ -23,7 +23,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.IdentBroken = true;
+        item.IsBroken = true;
         item.IdentCursed = true;
         item.TypeSpecificValue = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
         item.BonusArmorClass = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));

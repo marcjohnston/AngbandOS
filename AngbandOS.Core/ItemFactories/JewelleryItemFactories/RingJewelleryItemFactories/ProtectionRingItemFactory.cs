@@ -22,7 +22,7 @@ internal class ProtectionRingItemFactory : RingItemFactory
         item.BonusArmorClass = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
         if (power < 0)
         {
-            item.IdentBroken = true;
+            item.IsBroken = true;
             item.IdentCursed = true;
             item.BonusArmorClass = 0 - item.BonusArmorClass;
         }

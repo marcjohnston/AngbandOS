@@ -21,7 +21,7 @@ internal class AccuracyRingItemFactory : RingItemFactory
         item.BonusHit = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
         if (power < 0)
         {
-            item.IdentBroken = true;
+            item.IsBroken = true;
             item.IdentCursed = true;
             item.BonusHit = 0 - item.BonusHit;
         }

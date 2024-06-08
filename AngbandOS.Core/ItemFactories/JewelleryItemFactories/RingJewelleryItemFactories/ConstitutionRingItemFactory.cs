@@ -26,7 +26,7 @@ internal class ConstitutionRingItemFactory : RingItemFactory
         item.TypeSpecificValue = 1 + item.GetBonusValue(5, level);
         if (power < 0)
         {
-            item.IdentBroken = true;
+            item.IsBroken = true;
             item.IdentCursed = true;
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }

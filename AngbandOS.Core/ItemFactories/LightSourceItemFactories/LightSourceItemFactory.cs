@@ -38,14 +38,14 @@ internal abstract class LightSourceItemFactory : ItemFactory
                 case 1:
                     {
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(OrbOfIrritationRareItem));
-                        item.IdentBroken = true;
+                        item.IsBroken = true;
                         item.IdentCursed = true;
                         break;
                     }
                 case 2:
                     {
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(OrbOfInstabilityRareItem));
-                        item.IdentBroken = true;
+                        item.IsBroken = true;
                         item.IdentCursed = true;
                         break;
                     }
