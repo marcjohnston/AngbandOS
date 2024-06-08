@@ -19,6 +19,19 @@ internal abstract class ItemAdditiveBundle : IItemCharacteristics, IGetKey
         Game = game;
     }
 
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+
+    public virtual void Bind()
+    {
+        Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
+    }
+
+    public string ToJson()
+    {
+        return "";
+    }
+
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
@@ -301,17 +314,4 @@ internal abstract class ItemAdditiveBundle : IItemCharacteristics, IGetKey
     
     /// <inheritdoc />
     public virtual bool XtraShots => false;
-
-    public virtual string Key => GetType().Name;
-    public string GetKey => Key;
-
-    public virtual void Bind()
-    {
-        Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
-    }
-
-    public string ToJson()
-    {
-        return "";
-    }
 }
