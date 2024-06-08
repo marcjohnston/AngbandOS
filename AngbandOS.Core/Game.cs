@@ -17407,10 +17407,10 @@ internal class Game
     }
 
     /// <summary>
-    /// Returns a Roll object from a string notation.  The syntax supports both integer and dice-notation formats.
+    /// Returns a Roll object from a roll expression.  The expression supports both integer and dice-notation formats.
     /// </summary>
     /// <param name="game"></param>
-    /// <param name="syntax">
+    /// <param name="expression">
     /// Valid format:
     /// AdXxC+B
     /// where:
@@ -17421,17 +17421,17 @@ internal class Game
     /// </param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Roll ParseRoll(string syntax)
+    public Roll ParseRollExpression(string expression)
     {
         // Test for simple integer value.
-        if (int.TryParse(syntax, out int value))
+        if (int.TryParse(expression, out int value))
         {
             return new ValueRoll(this, value);
         }
 
         // Parse dice notation AdXxC+B.
-        syntax = syntax.ToLower();
-        int dPos = syntax.IndexOf('d');
+        expression = expression.ToLower();
+        int dPos = expression.IndexOf('d');
         if (dPos == -1)
         {
             throw new Exception("Invalid roll syntax.");
@@ -17439,12 +17439,12 @@ internal class Game
 
         // We will use a Regex for pattern matching.
         Regex regEx = new Regex(@"(\d*)d(\d+)((x|/)(\d+))?((\+|-)(\d*))?");
-        Match match = regEx.Match(syntax);
+        Match match = regEx.Match(expression);
 
         // The entire syntax must match.
-        if (syntax != match.Groups[0].Value)
+        if (expression != match.Groups[0].Value)
         {
-            throw new Exception($"Invalid number roll syntax {syntax}.");
+            throw new Exception($"Invalid number roll syntax {expression}.");
         }
 
         // Extract the matches that we are interested in.

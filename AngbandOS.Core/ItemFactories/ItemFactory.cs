@@ -720,7 +720,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             List<(int, Roll)> massProduceTuplesList = new List<(int, Roll)>();
             foreach ((int cost, string rollSyntax) in MassProduceTupleNames)
             {
-                (int, Roll) newTuple = (cost, Game.ParseRoll(rollSyntax));
+                (int, Roll) newTuple = (cost, Game.ParseRollExpression(rollSyntax));
                 massProduceTuplesList.Add(newTuple);
             }
             MassProduceTuples = massProduceTuplesList.ToArray();
@@ -732,7 +732,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             }
         }
 
-        InitialGoldPiecesRoll = Game.ParseRoll(InitialGoldPieces);
+        InitialGoldPiecesRoll = Game.ParseRollExpression(InitialGoldPieces);
         EatScript = Game.SingletonRepository.GetNullable<IIdentifableScript>(EatScriptName);
 
         // Flavorless items will default to simply use the item name.
@@ -897,7 +897,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
     /// <summary>
     /// Returns the initial gold pieces that are given to the player when the item is picked up.  This property must conform to the <see cref="Roll"/> syntax for parsing.  
-    /// See <see cref="Game.ParseRoll"/> for syntax details.  This property is used to bind the <see cref="InitialGoldPiecesRoll"/> property during the bind phase.
+    /// See <see cref="Game.ParseRollExpression"/> for syntax details.  This property is used to bind the <see cref="InitialGoldPiecesRoll"/> property during the bind phase.
     /// </summary>
     protected virtual string InitialGoldPieces => "0";
 
