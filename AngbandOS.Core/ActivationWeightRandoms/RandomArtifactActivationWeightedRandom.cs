@@ -34,7 +34,7 @@ internal class RandomArtifactActivationWeightedRandom : ActivationWeightedRandom
         (nameof(MapLightActivation), 100),
         (nameof(DestroyDoorsEvery10Activation), 100),
         (nameof(StoneMudActivation), 100),
-        (nameof(TeleportActivation), 100),
+        (nameof(Teleport100Every45Activation), 100),
 
         (nameof(BallOfCold48r2Every400Activation), 85),
         (nameof(BallOfFire72r2Every400Activation), 85),

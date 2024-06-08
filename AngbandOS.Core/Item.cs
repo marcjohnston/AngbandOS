@@ -88,7 +88,7 @@ internal sealed class Item : IComparable<Item>
     public int ArmorClass;
     public int BonusArmorClass;
     public int BonusDamage;
-    public Activation? RandomArtifactActivation = null;
+    public Activation? Activation = null;
 
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
@@ -509,7 +509,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.BonusDamage = BonusDamage;
         clonedItem.BonusHit = BonusHit;
         clonedItem.Weight = Weight;
-        clonedItem.RandomArtifactActivation = RandomArtifactActivation;
+        clonedItem.Activation = Activation;
         return clonedItem;
     }
 
@@ -1357,7 +1357,7 @@ internal sealed class Item : IComparable<Item>
         }
         if (IsRandomArtifact && Characteristics.Activate)
         {
-            total += RandomArtifactActivation.Value;
+            total += Activation.Value;
         }
         return total;
     }
@@ -1511,9 +1511,9 @@ internal sealed class Item : IComparable<Item>
             {
                 info[i++] = RareItem.DescribeActivationEffect;
             }
-            else if (RandomArtifactActivation != null)
+            else if (Activation != null)
             {
-                info[i++] = RandomArtifactActivation.Description;
+                info[i++] = Activation.Description;
             }
             else if (Factory.DescribeActivationEffect != null)
             {
@@ -2369,19 +2369,19 @@ internal sealed class Item : IComparable<Item>
         }
         if (!aCursed && Game.DieRoll(Factory.RandartActivationChance) == 1)
         {
-            RandomArtifactActivation = null;
+            Activation = null;
             if (Characteristics.ArtifactBias != null)
             {
                 if (Game.DieRoll(100) < Characteristics.ArtifactBias.ActivationPowerChance)
                 {
-                    RandomArtifactActivation = Characteristics.ArtifactBias.GetActivationPowerType(this);
+                    Activation = Characteristics.ArtifactBias.GetActivationPowerType(this);
                     Characteristics.Activate = true;
                 }
             }
-            if (RandomArtifactActivation == null)
+            if (Activation == null)
             {
-                RandomArtifactActivation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
-                Characteristics.Activate = RandomArtifactActivation != null;
+                Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
+                Characteristics.Activate = Activation != null;
             }
             ActivationRechargeTimeRemaining = 0;
         }

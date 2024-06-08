@@ -98,7 +98,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessByCh
         // If it is a random artifact then use its ability and quit
         if (item.IsRandomArtifact)
         {
-            Activation artifactPower = item.RandomArtifactActivation;
+            Activation artifactPower = item.Activation;
             return artifactPower.Activate(item);
         }
 
