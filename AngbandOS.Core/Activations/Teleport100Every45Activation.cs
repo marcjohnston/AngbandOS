@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Activations;
 /// Long range teleport.
 /// </summary>
 [Serializable]
-internal class TeleportActivation : Activation
+internal class Teleport100Every45Activation : Activation
 {
-    private TeleportActivation(Game game) : base(game) { }
+    private Teleport100Every45Activation(Game game) : base(game) { }
     
     public override string? PreActivationMessage => "Your {0} twists space around you...";
 

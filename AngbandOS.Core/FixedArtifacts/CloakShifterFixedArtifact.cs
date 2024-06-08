@@ -15,7 +15,7 @@ internal class CloakShifterFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ClothCloakArmorItemFactory);
 
     // Shifter teleports you
-    protected override string? ActivationName => nameof(TeleportActivation);
+    protected override string? ActivationName => nameof(Teleport100Every45Activation);
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Shifter'";
