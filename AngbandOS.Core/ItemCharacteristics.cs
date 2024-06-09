@@ -501,4 +501,400 @@ internal class ItemCharacteristics : IItemCharacteristics
         XtraMight |= itemCharacteristics.XtraMight;
         XtraShots |= itemCharacteristics.XtraShots;
     }
+
+    /// <summary>
+    /// Returns true, if all of the characteristics between two objects are the same.  This is used to determine if two items can be merged or absorbed.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public override bool Equals(object? obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (obj is not ItemCharacteristics)
+        {
+            return false;
+        }
+        ItemCharacteristics other = (ItemCharacteristics)obj;
+        if (Activation != other.Activation)
+        {
+            return false;
+        }
+        if (Aggravate != other.Aggravate)
+        {
+            return false;
+        }
+        if (AntiTheft != other.AntiTheft)
+        {
+            return false;
+        }
+        if (ArtifactBias != other.ArtifactBias)
+        {
+            return false;
+        }
+        if (Blessed != other.Blessed)
+        {
+            return false;
+        }
+        if (Blows != other.Blows)
+        {
+            return false;
+        }
+        if (BrandAcid != other.BrandAcid)
+        {
+            return false;
+        }
+        if (BrandCold != other.BrandCold)
+        {
+            return false;
+        }
+        if (BrandElec != other.BrandElec)
+        {
+            return false;
+        }
+        if (BrandFire != other.BrandFire)
+        {
+            return false;
+        }
+        if (BrandPois != other.BrandPois)
+        {
+            return false;
+        }
+        if (Cha != other.Cha)
+        {
+            return false;
+        }
+        if (Chaotic != other.Chaotic)
+        {
+            return false;
+        }
+        if (Con != other.Con)
+        {
+            return false;
+        }
+        if (Cursed != other.Cursed)
+        {
+            return false;
+        }
+        if (Dex != other.Dex)
+        {
+            return false;
+        }
+        if (DrainExp != other.DrainExp)
+        {
+            return false;
+        }
+        if (DreadCurse != other.DreadCurse)
+        {
+            return false;
+        }
+        if (EasyKnow != other.EasyKnow)
+        {
+            return false;
+        }
+        if (Feather != other.Feather)
+        {
+            return false;
+        }
+        if (FreeAct != other.FreeAct)
+        {
+            return false;
+        }
+        if (HeavyCurse != other.HeavyCurse)
+        {
+            return false;
+        }
+        if (HideType != other.HideType)
+        {
+            return false;
+        }
+        if (HoldLife != other.HoldLife)
+        {
+            return false;
+        }
+        if (IgnoreAcid != other.IgnoreAcid)
+        {
+            return false;
+        }
+        if (IgnoreCold != other.IgnoreCold)
+        {
+            return false;
+        }
+        if (IgnoreElec != other.IgnoreElec)
+        {
+            return false;
+        }
+        if (IgnoreFire != other.IgnoreFire)
+        {
+            return false;
+        }
+        if (ImAcid != other.ImAcid)
+        {
+            return false;
+        }
+        if (ImCold != other.ImCold)
+        {
+            return false;
+        }
+        if (ImElec != other.ImElec)
+        {
+            return false;
+        }
+        if (ImFire != other.ImFire)
+        {
+            return false;
+        }
+        if (Impact != other.Impact)
+        {
+            return false;
+        }
+        if (Infra != other.Infra)
+        {
+            return false;
+        }
+        if (InstaArt != other.InstaArt)
+        {
+            return false;
+        }
+        if (Int != other.Int)
+        {
+            return false;
+        }
+        if (KillDragon != other.KillDragon)
+        {
+            return false;
+        }
+        if (NoMagic != other.NoMagic)
+        {
+            return false;
+        }
+        if (NoTele != other.NoTele)
+        {
+            return false;
+        }
+        if (PermaCurse != other.PermaCurse)
+        {
+            return false;
+        }
+        if (Radius != other.Radius)
+        {
+            return false;
+        }
+        if (Reflect != other.Reflect)
+        {
+            return false;
+        }
+        if (Regen != other.Regen)
+        {
+            return false;
+        }
+        if (ResAcid != other.ResAcid)
+        {
+            return false;
+        }
+        if (ResBlind != other.ResBlind)
+        {
+            return false;
+        }
+        if (ResChaos != other.ResChaos)
+        {
+            return false;
+        }
+        if (ResCold != other.ResCold)
+        {
+            return false;
+        }
+        if (ResConf != other.ResConf)
+        {
+            return false;
+        }
+        if (ResDark != other.ResDark)
+        {
+            return false;
+        }
+        if (ResDisen != other.ResDisen)
+        {
+            return false;
+        }
+        if (ResElec != other.ResElec)
+        {
+            return false;
+        }
+        if (ResFear != other.ResFear)
+        {
+            return false;
+        }
+        if (ResFire != other.ResFire)
+        {
+            return false;
+        }
+        if (ResLight != other.ResLight)
+        {
+            return false;
+        }
+        if (ResNether != other.ResNether)
+        {
+            return false;
+        }
+        if (ResNexus != other.ResNexus)
+        {
+            return false;
+        }
+        if (ResPois != other.ResPois)
+        {
+            return false;
+        }
+        if (ResShards != other.ResShards)
+        {
+            return false;
+        }
+        if (ResSound != other.ResSound)
+        {
+            return false;
+        }
+        if (Search != other.Search)
+        {
+            return false;
+        }
+        if (SeeInvis != other.SeeInvis)
+        {
+            return false;
+        }
+        if (ShElec != other.ShElec)
+        {
+            return false;
+        }
+        if (ShFire != other.ShFire)
+        {
+            return false;
+        }
+        if (ShowMods != other.ShowMods)
+        {
+            return false;
+        }
+        if (SlayAnimal != other.SlayAnimal)
+        {
+            return false;
+        }
+        if (SlayDemon != other.SlayDemon)
+        {
+            return false;
+        }
+        if (SlayDragon != other.SlayDragon)
+        {
+            return false;
+        }
+        if (SlayEvil != other.SlayEvil)
+        {
+            return false;
+        }
+        if (SlayGiant != other.SlayGiant)
+        {
+            return false;
+        }
+        if (SlayOrc != other.SlayOrc)
+        {
+            return false;
+        }
+        if (SlayTroll != other.SlayTroll)
+        {
+            return false;
+        }
+        if (SlayUndead != other.SlayUndead)
+        {
+            return false;
+        }
+        if (SlowDigest != other.SlowDigest)
+        {
+            return false;
+        }
+        if (Speed != other.Speed)
+        {
+            return false;
+        }
+        if (Stealth != other.Stealth)
+        {
+            return false;
+        }
+        if (Str != other.Str)
+        {
+            return false;
+        }
+        if (SustCha != other.SustCha)
+        {
+            return false;
+        }
+        if (SustCon != other.SustCon)
+        {
+            return false;
+        }
+        if (SustDex != other.SustDex)
+        {
+            return false;
+        }
+        if (SustInt != other.SustInt)
+        {
+            return false;
+        }
+        if (SustStr != other.SustStr)
+        {
+            return false;
+        }
+        if (SustWis != other.SustWis)
+        {
+            return false;
+        }
+        if (Telepathy != other.Telepathy)
+        {
+            return false;
+        }
+        if (Teleport != other.Teleport)
+        {
+            return false;
+        }
+        if (TreasureRating != other.TreasureRating)
+        {
+            return false;
+        }
+        if (Tunnel != other.Tunnel)
+        {
+            return false;
+        }
+        if (Vampiric != other.Vampiric)
+        {
+            return false;
+        }
+        if (Vorpal != other.Vorpal)
+        {
+            return false;
+        }
+        if (Wis != other.Wis)
+        {
+            return false;
+        }
+        if (Wraith != other.Wraith)
+        {
+            return false;
+        }
+        if (XtraMight != other.XtraMight)
+        {
+            return false;
+        }
+        if (XtraShots != other.XtraShots)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static bool operator ==(ItemCharacteristics obj1, ItemCharacteristics obj2)
+    {
+        return obj1.Equals(obj2);
+    }
+
+    public static bool operator !=(ItemCharacteristics obj1, ItemCharacteristics obj2)
+    {
+        return !obj1.Equals(obj2);
+    }
 }

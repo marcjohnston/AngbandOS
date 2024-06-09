@@ -795,6 +795,13 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
 
+        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
+        ItemCharacteristics otherMergedCharacteristics = other.GetMergedCharacteristics();
+        if (mergedCharacteristics != otherMergedCharacteristics)
+        {
+            return false;
+        }
+
         // The known status must be the same.
         if (IsKnown() != other.IsKnown())
         {
@@ -818,7 +825,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Only open chests can be combined; otherwise, chests are never combined.
-        if (!ContainerIsOpen || !other.ContainerIsOpen)
+        if (Factory.CategoryEnum == ItemTypeEnum.Chest && !ContainerIsOpen || other.Factory.CategoryEnum == ItemTypeEnum.Chest && !other.ContainerIsOpen)
         {
             return false;
         }
