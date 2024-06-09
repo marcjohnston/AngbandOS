@@ -4962,11 +4962,11 @@ internal class Game
                     if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.IsCursed = false;
+                        oPtr.Characteristics.IsCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.Characteristics.Cursed)
+                        if (oPtr.Characteristics.IsCursed)
                         {
-                            oPtr.Characteristics.Cursed = false;
+                            oPtr.Characteristics.IsCursed = false;
                         }
                         if (oPtr.Characteristics.HeavyCurse)
                         {
@@ -4997,11 +4997,11 @@ internal class Game
                     if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.IsCursed = false;
+                        oPtr.Characteristics.IsCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.Characteristics.Cursed)
+                        if (oPtr.Characteristics.IsCursed)
                         {
-                            oPtr.Characteristics.Cursed = false;
+                            oPtr.Characteristics.IsCursed = false;
                         }
                         if (oPtr.Characteristics.HeavyCurse)
                         {
@@ -5033,11 +5033,11 @@ internal class Game
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.IsCursed = false;
+                        oPtr.Characteristics.IsCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.Characteristics.Cursed)
+                        if (oPtr.Characteristics.IsCursed)
                         {
-                            oPtr.Characteristics.Cursed = false;
+                            oPtr.Characteristics.IsCursed = false;
                         }
                         if (oPtr.Characteristics.HeavyCurse)
                         {
@@ -5870,11 +5870,11 @@ internal class Game
             {
                 continue;
             }
-            oPtr.IsCursed = false;
+            oPtr.Characteristics.IsCursed = false;
             oPtr.IdentSense = true;
-            if (oPtr.Characteristics.Cursed)
+            if (oPtr.Characteristics.IsCursed)
             {
-                oPtr.Characteristics.Cursed = false;
+                oPtr.Characteristics.IsCursed = false;
             }
             if (oPtr.Characteristics.HeavyCurse)
             {
@@ -6285,7 +6285,7 @@ internal class Game
             item.DamageDice = 0;
             item.DamageSides = 0;
             item.Characteristics = new ItemCharacteristics();
-            item.IsCursed = true;
+            item.Characteristics.IsCursed = true;
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -6324,7 +6324,7 @@ internal class Game
             item.DamageDice = 0;
             item.DamageSides = 0;
             item.Characteristics = new ItemCharacteristics();
-            item.IsCursed = true;
+            item.Characteristics.IsCursed = true;
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -13136,8 +13136,7 @@ internal class Game
                 changed = true;
             }
             oPtr.Characteristics.HeavyCurse = true;
-            oPtr.Characteristics.Cursed = true;
-            oPtr.IsCursed = true;
+            oPtr.Characteristics.IsCursed = true;
         }
         else
         {
@@ -13145,8 +13144,7 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.Characteristics.Cursed = true;
-            oPtr.IsCursed = true;
+            oPtr.Characteristics.IsCursed = true;
         }
         if (changed)
         {

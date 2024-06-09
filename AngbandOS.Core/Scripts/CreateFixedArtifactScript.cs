@@ -40,7 +40,7 @@ internal class CreateFixedArtifactScript : Script, IScript
         qPtr.BonusHit = aPtr.ToH;
         qPtr.BonusDamage = aPtr.ToD;
         qPtr.Weight = aPtr.Weight;
-        if (aPtr.Cursed)
+        if (aPtr.IsCursed)
         {
             qPtr.IsCursed = true;
         }

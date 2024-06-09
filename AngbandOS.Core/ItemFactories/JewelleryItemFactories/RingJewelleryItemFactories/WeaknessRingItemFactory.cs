@@ -12,6 +12,7 @@ internal class WeaknessRingItemFactory : RingItemFactory
 {
     private WeaknessRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    public override bool IsBroken => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>
@@ -21,7 +22,7 @@ internal class WeaknessRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override bool HideType => true;
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

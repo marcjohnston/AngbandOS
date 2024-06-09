@@ -327,14 +327,8 @@ internal sealed class Item : IComparable<Item>
         ArmorClass = Factory.ArmorClass;
         DamageDice = Factory.DamageDice;
         DamageSides = Factory.DamageSides;
-        if (Factory.Cost <= 0)
-        {
-            IsBroken = true;
-        }
-        if (Factory.Cursed)
-        {
-            IsCursed = true;
-        }
+        IsBroken = Factory.IsBroken;
+        IsCursed = Factory.IsCursed;
     }
 
     public void Recharge(int num)
@@ -1345,7 +1339,7 @@ internal sealed class Item : IComparable<Item>
         {
             total += 750;
         }
-        if (mergedCharacteristics.Cursed)
+        if (mergedCharacteristics.IsCursed)
         {
             total -= 5000;
         }
@@ -2104,7 +2098,7 @@ internal sealed class Item : IComparable<Item>
             {
                 IsBroken = true;
             }
-            if (FixedArtifact.Cursed)
+            if (FixedArtifact.IsCursed)
             {
                 IsCursed = true;
             }
@@ -2125,7 +2119,7 @@ internal sealed class Item : IComparable<Item>
             {
                 IsBroken = true;
             }
-            if (RareItem.Cursed)
+            if (RareItem.IsCursed)
             {
                 IsCursed = true;
             }
@@ -2178,7 +2172,7 @@ internal sealed class Item : IComparable<Item>
             {
                 IsBroken = true;
             }
-            if (Factory.Cursed)
+            if (Factory.IsCursed)
             {
                 IsCursed = true;
             }
@@ -2736,7 +2730,7 @@ internal sealed class Item : IComparable<Item>
             BonusDamage = 0 - (BonusDamage + Game.DieRoll(4));
         }
         Characteristics.HeavyCurse = true;
-        Characteristics.Cursed = true;
+        Characteristics.IsCursed = true;
         if (Game.DieRoll(4) == 1)
         {
             Characteristics.PermaCurse = true;

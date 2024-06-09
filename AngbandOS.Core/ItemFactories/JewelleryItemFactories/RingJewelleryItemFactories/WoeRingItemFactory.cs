@@ -16,7 +16,7 @@ internal class WoeRingItemFactory : RingItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-
+    public override bool IsBroken => true;
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Woe";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
@@ -29,9 +29,8 @@ internal class WoeRingItemFactory : RingItemFactory
         item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
         item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
     }
-
     public override bool Cha => true;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override bool HideType => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

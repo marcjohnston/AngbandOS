@@ -56,7 +56,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     public bool Con { get; set; } = false;
 
     /// <inheritdoc/>
-    public bool Cursed { get; set; } = false;
+    public bool IsCursed { get; set; } = false;
 
     /// <inheritdoc/>
     public bool Dex { get; set; } = false;
@@ -310,7 +310,7 @@ internal class ItemCharacteristics : IItemCharacteristics
         Cha = itemCharacteristics.Cha;
         Chaotic = itemCharacteristics.Chaotic;
         Con = itemCharacteristics.Con;
-        Cursed = itemCharacteristics.Cursed;
+        IsCursed = itemCharacteristics.IsCursed;
         Dex = itemCharacteristics.Dex;
         DrainExp = itemCharacteristics.DrainExp;
         DreadCurse = itemCharacteristics.DreadCurse;
@@ -418,7 +418,7 @@ internal class ItemCharacteristics : IItemCharacteristics
         Cha |= itemCharacteristics.Cha;
         Chaotic |= itemCharacteristics.Chaotic;
         Con |= itemCharacteristics.Con;
-        Cursed |= itemCharacteristics.Cursed;
+        IsCursed |= itemCharacteristics.IsCursed;
         Dex |= itemCharacteristics.Dex;
         DrainExp |= itemCharacteristics.DrainExp;
         DreadCurse |= itemCharacteristics.DreadCurse;
@@ -574,7 +574,7 @@ internal class ItemCharacteristics : IItemCharacteristics
         {
             return false;
         }
-        if (Cursed != other.Cursed)
+        if (IsCursed != other.IsCursed)
         {
             return false;
         }

@@ -12,6 +12,7 @@ internal class StupidityRingItemFactory : RingItemFactory
 {
     private StupidityRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    public override bool IsBroken => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>
@@ -27,7 +28,7 @@ internal class StupidityRingItemFactory : RingItemFactory
         item.IsCursed = true;
         item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
     }
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 5;

@@ -17,6 +17,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
+    /// </summary>
+    public virtual bool IsBroken => false;
+
+    /// <summary>
     /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  
     /// Returns false, by default.  Weapons, armor, orbs of light and broken items (items that negatively affect the player) return true.
     /// </summary>

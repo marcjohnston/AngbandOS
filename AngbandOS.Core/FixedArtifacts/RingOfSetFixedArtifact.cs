@@ -31,7 +31,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact
     public override bool Con => true;
     public override int Cost => 5000000;
     public override int TreasureRating => 20;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override int Dd => 1;
     public override bool Dex => true;
     public override bool DrainExp => true;

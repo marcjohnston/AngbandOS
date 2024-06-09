@@ -12,6 +12,7 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
 {
     private CloneMonsterWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    public override bool IsBroken => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>

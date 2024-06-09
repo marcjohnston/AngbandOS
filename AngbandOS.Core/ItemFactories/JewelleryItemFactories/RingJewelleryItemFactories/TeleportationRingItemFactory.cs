@@ -18,7 +18,7 @@ internal class TeleportationRingItemFactory : RingItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 250;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override bool EasyKnow => true;
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

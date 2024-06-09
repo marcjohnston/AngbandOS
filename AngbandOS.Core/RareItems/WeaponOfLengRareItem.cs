@@ -13,7 +13,7 @@ internal class WeaponOfLengRareItem : RareItem
     private WeaponOfLengRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;
     public override int Cost => 0;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override string FriendlyName => "of Leng";
     public override bool HeavyCurse => true;
     public override int MaxToA => 10;

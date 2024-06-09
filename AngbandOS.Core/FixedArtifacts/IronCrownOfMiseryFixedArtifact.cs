@@ -24,7 +24,7 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override bool Con => true;
     public override int Cost => 0;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;

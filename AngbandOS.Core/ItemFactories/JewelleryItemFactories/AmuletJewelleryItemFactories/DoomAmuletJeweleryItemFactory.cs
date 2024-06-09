@@ -12,6 +12,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private DoomAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    public override bool IsBroken => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>
@@ -30,7 +31,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     }
     public override bool Cha => true;
     public override bool Con => true;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override bool Dex => true;
     public override bool HideType => true;
     public override bool Int => true;

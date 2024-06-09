@@ -21,7 +21,7 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     public override bool Aggravate => true;
     public override bool Con => true;
     public override int Cost => 100000;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override int Dd => 5;
     public override int Ds => 4;
     public override string FriendlyName => "'Selfslayer'";

@@ -82,7 +82,7 @@ internal abstract class ItemAdditiveBundle : IItemCharacteristics, IGetKey
     public virtual bool Con => false;
     
     /// <inheritdoc />
-    public virtual bool Cursed => false;
+    public virtual bool IsCursed => false;
     
     /// <inheritdoc />
     public virtual bool Dex => false;

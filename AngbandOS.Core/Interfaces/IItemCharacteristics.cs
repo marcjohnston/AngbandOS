@@ -71,7 +71,7 @@ internal interface IItemCharacteristics
     /// </summary>
     bool Con { get; }
 
-    bool Cursed { get; }
+    bool IsCursed { get; }
 
     /// <summary>
     /// Returns whether or not the item affects the dexterity of the player when being worn.

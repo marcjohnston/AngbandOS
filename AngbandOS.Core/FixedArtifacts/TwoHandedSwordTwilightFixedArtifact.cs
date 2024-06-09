@@ -21,7 +21,7 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     public override bool Aggravate => true;
     public override bool BrandFire => true;
     public override int Cost => 0;
-    public override bool Cursed => true;
+    public override bool IsCursed => true;
     public override int Dd => 4;
     public override bool DreadCurse => true;
     public override int Ds => 6;

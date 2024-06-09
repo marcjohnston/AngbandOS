@@ -339,7 +339,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         DisplayStat("Teleport", 32, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Teleport);
         DisplayStat("Aggravate", 33, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Aggravate);
         DisplayStat("Blessed", 34, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Blessed);
-        DisplayStat("Cursed", 35, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Cursed);
+        DisplayStat("Cursed", 35, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IsCursed);
         DisplayStat("Hvy Curse", 36, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HeavyCurse);
         DisplayStat("Prm Curse", 37, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.PermaCurse);
 
