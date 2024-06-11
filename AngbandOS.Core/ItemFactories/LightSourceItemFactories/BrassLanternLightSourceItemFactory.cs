@@ -12,7 +12,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
 {
     private BrassLanternLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         if (store != null)
         {

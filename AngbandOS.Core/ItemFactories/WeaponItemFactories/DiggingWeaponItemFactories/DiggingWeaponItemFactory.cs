@@ -21,9 +21,9 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
         (100, "3d5-3")
     };
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
-        base.ApplyMagic(item, level, power, null);
+        base.EnchantItem(item, level, power, null);
         if (power > 1)
         {
             item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfDiggingRareItem));

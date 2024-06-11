@@ -13,7 +13,7 @@ internal class IceRingItemFactory : RingItemFactory
     private IceRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? ActivationName => nameof(BallOfCold50r2Every1d20p20Activation);
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }

@@ -16,12 +16,12 @@ internal abstract class SoftArmorItemFactory : ArmorItemFactory
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         if (power != 0)
         {
             // Apply the standard armor characteristics.
-            base.ApplyMagic(item, level, power, null);
+            base.EnchantItem(item, level, power, null);
 
             if (power > 1)
             {

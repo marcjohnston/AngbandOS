@@ -29,7 +29,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
         return item.ComputeTypeSpecificRealValue(value);
     }
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         if (power < 0) // Cursed
         {

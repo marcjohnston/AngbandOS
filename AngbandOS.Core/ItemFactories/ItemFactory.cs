@@ -545,7 +545,20 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
-    public virtual void ApplyMagic(Item item, int level, int power, Store? store) { } // TODO: Needs to be built into the new Item(), should be renamed
+    public virtual void EnchantItem(Item item, int level, int power, Store? store) { } // TODO: Needs to be built into the new Item(), should be renamed .. the Store is needed for FuelSources to be full not used
+
+    /// <summary>
+    /// Applies a good random rare characteristics to an item of armor.
+    /// </summary>
+    /// <param name="item"></param>
+    protected virtual void ApplyRandomGoodRareCharacteristics(Item item) { }
+
+    /// <summary>
+    /// Applies a poor random rare characteristics to an item of armor.  Does nothing by default.  Various derived class may override
+    /// this method and apply a random poor characteristic to the item.
+    /// </summary>
+    /// <param name="item"></param>
+    protected virtual void ApplyRandomPoorRareCharacteristics(Item item) { }
 
     /// <summary>
     /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..

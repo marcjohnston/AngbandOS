@@ -95,11 +95,7 @@ internal abstract class ArmorItemFactory : ItemFactory
         } while (Game.DieRoll(2) == 1);
     }
 
-    /// <summary>
-    /// Applies a good random rare characteristics to an item of armor.
-    /// </summary>
-    /// <param name="item"></param>
-    protected virtual void ApplyRandomGoodRareCharacteristics(Item item)
+    protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
         switch (Game.DieRoll(21))
         {
@@ -147,20 +143,13 @@ internal abstract class ArmorItemFactory : ItemFactory
     }
 
     /// <summary>
-    /// Applies a poor random rare characteristics to an item of armor.  Does nothing by default.  Various derived class may override
-    /// this method and apply a random poor characteristic to the item.
-    /// </summary>
-    /// <param name="item"></param>
-    protected virtual void ApplyRandomPoorRareCharacteristics(Item item) { }
-
-    /// <summary>
     /// Applies a standard BonusArmorClass and IdentCursed to armor class items.  Derived items must call this base to have these
     /// standard characteristics applied, when needed.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         int toac1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
         int toac2 = item.GetBonusValue(10, level);

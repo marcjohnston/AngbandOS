@@ -26,9 +26,9 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
     protected virtual bool CanBeWeaponOfLaw => false;
     protected virtual bool CanBeWeaponOfSharpness => false;
     protected virtual bool CapableOfVorpalSlaying => false;
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
-        base.ApplyMagic(item, level, power, null);
+        base.EnchantItem(item, level, power, null);
         if (power > 1)
         {
             switch (Game.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))

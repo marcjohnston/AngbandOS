@@ -27,10 +27,10 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         // Apply the standard armor characteristics, regardless of the power.
-        base.ApplyMagic(item, level, power, null);
+        base.EnchantItem(item, level, power, null);
 
         ApplyDragonscaleResistance(item);
     }

@@ -22,7 +22,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         item.IsBroken = true;
         item.IsCursed = true;

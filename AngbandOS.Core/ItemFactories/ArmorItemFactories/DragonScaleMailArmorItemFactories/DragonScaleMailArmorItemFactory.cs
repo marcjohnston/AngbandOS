@@ -10,22 +10,6 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory
 {
-    /// <summary>
-    /// Applies special magic to dragon scale mail armor.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        if (power != 0)
-        {
-            // Apply the standard armor characteristics.
-            base.ApplyMagic(item, level, power, null);
-
-        }
-    }
-
     public DragonScaleMailArmorItemFactory(Game game) : base(game) { }
 
     /// <summary>

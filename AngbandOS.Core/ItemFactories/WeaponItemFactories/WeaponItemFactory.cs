@@ -92,7 +92,7 @@ internal abstract class WeaponItemFactory : ItemFactory
         return false;
     }
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         if (power == 0)
         {

@@ -21,12 +21,12 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
         item.RareItem = Game.SingletonRepository.Get<RareItemWeightedRandom>(nameof(CloakPoorRareItemWeightedRandom)).ChooseOrDefault();
     }
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         if (power != 0)
         {
             // Apply the standard armor characteristics.
-            base.ApplyMagic(item, level, power, null);
+            base.EnchantItem(item, level, power, null);
 
             if (power > 1)
             {

@@ -2106,7 +2106,7 @@ internal sealed class Item : IComparable<Item>
             Game.SpecialTreasure = true;
             return;
         }
-        Factory.ApplyMagic(this, lev, power, store);
+        Factory.EnchantItem(this, lev, power, store);
         Game.TreasureRating += Factory.TreasureRating;
         if (IsRandomArtifact)
         {

@@ -17,7 +17,7 @@ internal class StrengthRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
         if (power == 0 && Game.RandomLessThan(100) < 50)
         {

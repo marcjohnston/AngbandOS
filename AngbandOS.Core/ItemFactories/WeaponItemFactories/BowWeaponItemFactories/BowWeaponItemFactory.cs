@@ -84,9 +84,9 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
         }
     }
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, int level, int power, Store? store)
     {
-        base.ApplyMagic(item, level, power, null);
+        base.EnchantItem(item, level, power, null);
         if (power > 1)
         {
             switch (Game.DieRoll(21))
