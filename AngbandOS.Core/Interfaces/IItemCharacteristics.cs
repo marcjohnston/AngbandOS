@@ -151,8 +151,17 @@ internal interface IItemCharacteristics
     bool Search { get; }
 
     bool SeeInvis { get; }
+
+    /// <summary>
+    /// Returns true, if the item produces a sheath of electricity around the item; false, otherwise.
+    /// </summary>
     bool ShElec { get; }
+
+    /// <summary>
+    /// Returns true, if the item produces a sheath of fire around the item; false, otherwise.
+    /// </summary>
     bool ShFire { get; }
+
     bool ShowMods { get; }
     bool SlayAnimal { get; }
     bool SlayDemon { get; }
