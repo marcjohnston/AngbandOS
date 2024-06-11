@@ -91,8 +91,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFearResistance = false;
         Game.HasElementalVulnerability = false;
         Game.HasReflection = false;
-        Game.HasFireShield = false;
-        Game.HasLightningShield = false;
+        Game.HasFireSheath = false;
+        Game.HasElectricitySheath = false;
         Game.HasAntiMagic = false;
         Game.HasAntiTeleport = false;
         Game.HasAntiTheft = false;
@@ -132,8 +132,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillSearchFrequency += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
         Game.InfravisionRange += Game.InfravisionBonus;
-        Game.HasLightningShield |= Game.ElecHit;
-        Game.HasFireShield |= Game.FireHit;
+        Game.HasElectricitySheath |= Game.ElecHit;
+        Game.HasFireSheath |= Game.FireHit;
         if (Game.GlowInTheDarkRadius == 0 && Game.FireHit)
         {
             Game.GlowInTheDarkRadius = 1;
@@ -393,11 +393,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ShFire)
                     {
-                        Game.HasFireShield = true;
+                        Game.HasFireSheath = true;
                     }
                     if (mergedCharacteristics.ShElec)
                     {
-                        Game.HasLightningShield = true;
+                        Game.HasElectricitySheath = true;
                     }
                     if (mergedCharacteristics.NoMagic)
                     {
@@ -467,7 +467,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
-        if (Game.HasFireShield)
+        if (Game.HasFireSheath)
         {
             Game.GlowInTheDarkRadius = 1;
         }

@@ -162,11 +162,11 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You reflect arrows and bolts.";
         }
-        if (Game.HasFireShield)
+        if (Game.HasFireSheath)
         {
             info[infoCount++] = "You are surrounded with a fiery aura.";
         }
-        if (Game.HasLightningShield)
+        if (Game.HasElectricitySheath)
         {
             info[infoCount++] = "You are surrounded with electricity.";
         }

@@ -3015,7 +3015,7 @@ internal class Monster : IItemContainer
                 // If the monster touched us then it may take damage from our defensive abilities
                 if (touched)
                 {
-                    if (Game.HasFireShield && alive)
+                    if (Game.HasFireSheath && alive)
                     {
                         if (!Race.ImmuneFire)
                         {
@@ -3036,7 +3036,7 @@ internal class Monster : IItemContainer
                             }
                         }
                     }
-                    if (Game.HasLightningShield && alive)
+                    if (Game.HasElectricitySheath && alive)
                     {
                         if (!Race.ImmuneLightning)
                         {

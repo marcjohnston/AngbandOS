@@ -317,7 +317,7 @@ internal class Game
     public bool HasFeatherFall;
     public bool HasFireImmunity;
     public bool HasFireResistance;
-    public bool HasFireShield;
+    public bool HasFireSheath;
     public bool HasFreeAction;
 
     /// <summary>
@@ -330,7 +330,7 @@ internal class Game
     public bool HasHoldLife;
     public bool HasLightningImmunity;
     public bool HasLightningResistance;
-    public bool HasLightningShield;
+    public bool HasElectricitySheath;
     public bool HasLightResistance;
     public bool HasNetherResistance;
     public bool HasNexusResistance;
