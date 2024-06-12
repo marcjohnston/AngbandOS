@@ -2030,6 +2030,14 @@ internal sealed class Item : IComparable<Item>
         return value;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="lev"></param>
+    /// <param name="okay">Stores send false.  The game otherwise sends true.  Wizards get to select the value.</param>
+    /// <param name="good">Stores send false.  Monsters will have a good item count Monster.DropGood.</param>
+    /// <param name="great">Stores send false.  Monsters will have a great item count Monster.DropGreat.</param>
+    /// <param name="store"></param>
     public void EnchantItem(int lev, bool okay, bool good, bool great, Store? store)
     {            
         if (lev > Constants.MaxDepth - 1)
@@ -2187,6 +2195,7 @@ internal sealed class Item : IComparable<Item>
             Characteristics.Merge(itemAdditiveBundle);
         }
     }
+
     public bool CreateRandomArtifact(bool fromScroll)
     {
         const int ArtifactCurseChance = 13;
