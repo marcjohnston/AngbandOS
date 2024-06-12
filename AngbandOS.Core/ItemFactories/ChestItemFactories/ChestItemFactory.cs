@@ -5,9 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
-using System.Diagnostics;
-
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
