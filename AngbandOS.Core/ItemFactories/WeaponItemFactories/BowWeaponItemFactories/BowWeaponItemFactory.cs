@@ -21,36 +21,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
         (100, "3d5-3")
     };
 
-    public override string GetDetailedDescription(Item item)
-    {
-        string basenm = "";
-        int power = MissileDamageMultiplier;
-        if (XtraMight)
-        {
-            power++;
-        }
-        basenm += $" (x{power})";
-        if (item.IsKnown())
-        {
-            basenm += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
-
-            if (item.ArmorClass != 0)
-            {
-                // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                basenm += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
-            }
-            else if (item.BonusArmorClass != 0)
-            {
-                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                basenm += $" [{GetSignedValue(item.BonusArmorClass)}]";
-            }
-        }
-        else if (item.ArmorClass != 0)
-        {
-            basenm += $" [{item.ArmorClass}]";
-        }
-        return basenm;
-    }
+    public override bool IsRangedWeapon => true;
 
     public override void ApplySlayingForRandomArtifactCreation(Item item)
     {
@@ -131,10 +102,6 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     protected override string ItemClassName => nameof(BowsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
     public override bool CanApplyBlowsBonus => true;
-    /// <summary>
-    /// Returns a damage multiplier when the missile weapon is used.
-    /// </summary>
-    public virtual int MissileDamageMultiplier => 1;
 
     public override int PackSort => 32;
     public abstract ItemTypeEnum AmmunitionItemCategory { get; }

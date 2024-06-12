@@ -21,34 +21,6 @@ internal abstract class ArmorItemFactory : ItemFactory
         return item.ComputeTypeSpecificRealValue(value);
     }
 
-    public override string GetDetailedDescription(Item item)
-    {
-        string s = "";
-        if (item.IsKnown())
-        {
-            if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
-            {
-                s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
-            }
-            else if (item.BonusHit != 0)
-            {
-                s += $" ({GetSignedValue(item.BonusHit)})";
-            }
-            else if (item.BonusDamage != 0)
-            {
-                s += $" ({GetSignedValue(item.BonusDamage)})";
-            }
-
-            // Add base armor class for all types of armor and when the base armor class is greater than zero.
-            s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
-        }
-        else if (item.ArmorClass != 0)
-        {
-            s += $" [{item.ArmorClass}]";
-        }
-        return s;
-    }
-
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (100, "3d5-3")

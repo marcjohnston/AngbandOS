@@ -95,39 +95,166 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool IsIgnoredByMonsters => false;
 
     /// <summary>
+    /// Returns true, if the item is a container; false, otherwise.  Containers can be opened (ContainerIsOpen) and trapped (ContainerTraps).
+    /// </summary>
+    public virtual bool IsContainer => false;
+
+    /// <summary>
+    /// Returns true, if the item is a ranged weapon; false, otherwise.
+    /// </summary>
+    public virtual bool IsRangedWeapon => false;
+
+    /// <summary>
+    /// Returns a damage multiplier when the missile weapon is used.
+    /// </summary>
+    public virtual int MissileDamageMultiplier => 1;
+
+    /// <summary>
     /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
     /// </summary>
     /// <returns></returns>
-    public virtual string GetDetailedDescription(Item item)
+    public string GetDetailedDescription(Item item)
     {
-        string s = "";
-        if (item.IsKnown())
+        if (item.Factory.IsRangedWeapon)
         {
-            if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
+            string basenm = "";
+            int power = MissileDamageMultiplier;
+            if (XtraMight)
+            {
+                power++;
+            }
+            basenm += $" (x{power})";
+            if (item.IsKnown())
+            {
+                basenm += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+
+                if (item.ArmorClass != 0)
+                {
+                    // Add base armor class for all types of armor and when the base armor class is greater than zero.
+                    basenm += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                }
+                else if (item.BonusArmorClass != 0)
+                {
+                    // This is not armor, only show bonus armor class, if it is not zero and we know about it.
+                    basenm += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                }
+            }
+            else if (item.ArmorClass != 0)
+            {
+                basenm += $" [{item.ArmorClass}]";
+            }
+            return basenm;
+        }
+        else if (item.Factory.IsWeapon)
+        {
+            string s = "";
+            s += $" ({item.DamageDice}d{item.DamageSides})";
+            if (item.IsKnown())
             {
                 s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
-            }
-            else if (item.BonusHit != 0)
-            {
-                s += $" ({GetSignedValue(item.BonusHit)})";
-            }
-            else if (item.BonusDamage != 0)
-            {
-                s += $" ({GetSignedValue(item.BonusDamage)})";
-            }
 
-            if (item.ArmorClass != 0)
+                if (item.ArmorClass != 0)
+                {
+                    // Add base armor class for all types of armor and when the base armor class is greater than zero.
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                }
+                else if (item.BonusArmorClass != 0)
+                {
+                    // This is not armor, only show bonus armor class, if it is not zero and we know about it.
+                    s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                }
+            }
+            else if (item.ArmorClass != 0)
             {
+                s += $" [{item.ArmorClass}]";
+            }
+            return s;
+        }
+        else if (item.Factory.IsContainer)
+        {
+            if (!item.IsKnown())
+            {
+                return "";
+            }
+            else if (item.ContainerIsOpen)
+            {
+                return " (empty)";
+            }
+            else if (item.ContainerTraps == null)
+            {
+                return " (unlocked)";
+            }
+            else if (item.ContainerTraps.Length == 0)
+            {
+                return " (locked)";
+            }
+            else if (item.ContainerTraps.Length > 1)
+            {
+                return " (multiple traps)";
+            }
+            else
+            {
+                return $" {item.ContainerTraps[0].Description}";
+            }
+        }
+        else if (IsArmor)
+        {
+            string s = "";
+            if (item.IsKnown())
+            {
+                if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+                }
+                else if (item.BonusHit != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusHit)})";
+                }
+                else if (item.BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusDamage)})";
+                }
+
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
                 s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
             }
-            else if (item.BonusArmorClass != 0)
+            else if (item.ArmorClass != 0)
             {
-                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                s += $" [{item.ArmorClass}]";
             }
+            return s;
         }
-        return s;
+        else
+        {
+            string s = "";
+            if (item.IsKnown())
+            {
+                if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+                }
+                else if (item.BonusHit != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusHit)})";
+                }
+                else if (item.BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusDamage)})";
+                }
+
+                if (item.ArmorClass != 0)
+                {
+                    // Add base armor class for all types of armor and when the base armor class is greater than zero.
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                }
+                else if (item.BonusArmorClass != 0)
+                {
+                    // This is not armor, only show bonus armor class, if it is not zero and we know about it.
+                    s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                }
+            }
+            return s;
+        }
     }
 
     public virtual void Refill(Game game, Item item)

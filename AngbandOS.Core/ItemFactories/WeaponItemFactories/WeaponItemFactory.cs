@@ -28,32 +28,6 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override bool HasQualityRatings => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
-    public override string GetDetailedDescription(Item item)
-    {
-        string s = "";
-        s += $" ({item.DamageDice}d{item.DamageSides})";
-        if (item.IsKnown())
-        {
-            s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
-
-            if (item.ArmorClass != 0)
-            {
-                // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
-            }
-            else if (item.BonusArmorClass != 0)
-            {
-                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                s += $" [{GetSignedValue(item.BonusArmorClass)}]";
-            }
-        }
-        else if (item.ArmorClass != 0)
-        {
-            s += $" [{item.ArmorClass}]";
-        }
-        return s;
-    }
-
     public override int? GetTypeSpecificRealValue(Item item, int value)
     {
         return item.ComputeTypeSpecificRealValue(value);

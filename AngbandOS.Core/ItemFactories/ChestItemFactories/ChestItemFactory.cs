@@ -24,6 +24,8 @@ internal abstract class ChestItemFactory : ItemFactory
     /// </summary>
     public override bool AskDestroyAll => false;
 
+    public override bool IsContainer => true;
+
     public override bool IsStompable(Item item)
     {
         if (!item.IsKnown())
@@ -48,34 +50,6 @@ internal abstract class ChestItemFactory : ItemFactory
             {
                 return Stompable[StompableType.Excellent];
             }
-        }
-    }
-
-    public override string GetDetailedDescription(Item item)
-    {
-        if (!item.IsKnown())
-        {
-            return "";
-        }
-        else if (item.ContainerIsOpen)
-        {
-           return " (empty)";
-        }
-        else if (item.ContainerTraps == null)
-        {
-            return " (unlocked)";
-        }
-        else if (item.ContainerTraps.Length == 0)
-        {
-            return " (locked)";
-        }
-        else if (item.ContainerTraps.Length > 1)
-        {
-            return " (multiple traps)";
-        }
-        else
-        {
-            return $" {item.ContainerTraps[0].Description}";
         }
     }
 

@@ -2044,29 +2044,29 @@ internal sealed class Item : IComparable<Item>
         {
             lev = Constants.MaxDepth - 1;
         }
-        int f1 = lev + 10;
-        if (f1 > 75)
+        int goodPercentRoll = lev + 10;
+        if (goodPercentRoll > 75)
         {
-            f1 = 75;
+            goodPercentRoll = 75;
         }
-        int f2 = f1 / 2;
-        if (f2 > 20)
+        int greatPercentRoll = goodPercentRoll / 2;
+        if (greatPercentRoll > 20)
         {
-            f2 = 20;
+            greatPercentRoll = 20;
         }
         int power = 0;
-        if (good || Game.PercentileRoll(f1))
+        if (good || Game.PercentileRoll(goodPercentRoll))
         {
             power = 1;
-            if (great || Game.PercentileRoll(f2))
+            if (great || Game.PercentileRoll(greatPercentRoll))
             {
                 power = 2;
             }
         }
-        else if (Game.PercentileRoll(f1))
+        else if (Game.PercentileRoll(goodPercentRoll))
         {
             power = -1;
-            if (Game.PercentileRoll(f2))
+            if (Game.PercentileRoll(greatPercentRoll))
             {
                 power = -2;
             }
