@@ -115,40 +115,16 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <returns></returns>
     public string GetDetailedDescription(Item item)
     {
-        if (item.Factory.IsRangedWeapon)
+        string s = "";
+        if (IsRangedWeapon)
         {
-            string basenm = "";
             int power = MissileDamageMultiplier;
             if (XtraMight)
             {
                 power++;
             }
-            basenm += $" (x{power})";
-            if (item.IsKnown())
-            {
-                basenm += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+            s += $" (x{power})";
 
-                if (item.ArmorClass != 0)
-                {
-                    // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    basenm += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
-                }
-                else if (item.BonusArmorClass != 0)
-                {
-                    // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    basenm += $" [{GetSignedValue(item.BonusArmorClass)}]";
-                }
-            }
-            else if (item.ArmorClass != 0)
-            {
-                basenm += $" [{item.ArmorClass}]";
-            }
-            return basenm;
-        }
-        else if (item.Factory.IsWeapon)
-        {
-            string s = "";
-            s += $" ({item.DamageDice}d{item.DamageSides})";
             if (item.IsKnown())
             {
                 s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
@@ -168,38 +144,33 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             {
                 s += $" [{item.ArmorClass}]";
             }
-            return s;
         }
-        else if (item.Factory.IsContainer)
+        else if (IsWeapon)
         {
-            if (!item.IsKnown())
+            s += $" ({item.DamageDice}d{item.DamageSides})";
+
+            if (item.IsKnown())
             {
-                return "";
+                s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+
+                if (item.ArmorClass != 0)
+                {
+                    // Add base armor class for all types of armor and when the base armor class is greater than zero.
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                }
+                else if (item.BonusArmorClass != 0)
+                {
+                    // This is not armor, only show bonus armor class, if it is not zero and we know about it.
+                    s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                }
             }
-            else if (item.ContainerIsOpen)
+            else if (item.ArmorClass != 0)
             {
-                return " (empty)";
-            }
-            else if (item.ContainerTraps == null)
-            {
-                return " (unlocked)";
-            }
-            else if (item.ContainerTraps.Length == 0)
-            {
-                return " (locked)";
-            }
-            else if (item.ContainerTraps.Length > 1)
-            {
-                return " (multiple traps)";
-            }
-            else
-            {
-                return $" {item.ContainerTraps[0].Description}";
+                s += $" [{item.ArmorClass}]";
             }
         }
         else if (IsArmor)
         {
-            string s = "";
             if (item.IsKnown())
             {
                 if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
@@ -222,11 +193,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             {
                 s += $" [{item.ArmorClass}]";
             }
-            return s;
         }
         else
         {
-            string s = "";
             if (item.IsKnown())
             {
                 if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
@@ -253,8 +222,32 @@ internal abstract class ItemFactory : ItemAdditiveBundle
                     s += $" [{GetSignedValue(item.BonusArmorClass)}]";
                 }
             }
-            return s;
         }
+
+        if (IsContainer && item.IsKnown())
+        {
+            if (item.ContainerIsOpen)
+            {
+                s += " (empty)";
+            }
+            else if (item.ContainerTraps == null)
+            {
+                s += " (unlocked)";
+            }
+            else if (item.ContainerTraps.Length == 0)
+            {
+                s += " (locked)";
+            }
+            else if (item.ContainerTraps.Length > 1)
+            {
+                s += " (multiple traps)";
+            }
+            else
+            {
+                s += $" {item.ContainerTraps[0].Description}";
+            }
+        }
+        return s;
     }
 
     public virtual void Refill(Game game, Item item)
