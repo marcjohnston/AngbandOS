@@ -12,34 +12,12 @@ internal class FireArtifactBias : ArtifactBias
 {
     private FireArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Fire";
-    public override bool ApplyRandomResistances(Item item)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (!item.Characteristics.ResFire)
-        {
-            item.Characteristics.ResFire = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (item.Factory.CanApplyArtifactBiasResistance && !item.Characteristics.ShFire)
-        {
-            item.Characteristics.ShFire = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.Characteristics.ImFire)
-        {
-            item.Characteristics.ImFire = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistFireItemTest), "1", nameof(ResistFireItemAdditiveBundle), "1/2"),
+        (nameof(FalseSheathOfFireItemTest), "1", nameof(SheathOfFireItemAdditiveBundle), "1/2"),
+        (nameof(FalseFireImmunityItemTest), "1/20", nameof(FireImmunityItemAdditiveBundle), "1/2")
+    };
 
     public override bool ApplyMiscPowers(Item item)
     {

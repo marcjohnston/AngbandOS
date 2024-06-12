@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Probabilities;
+
 namespace AngbandOS.Core.ArtifactBiases;
 
 /// <summary>
@@ -33,7 +35,22 @@ internal abstract class ArtifactBias : IGetKey
 
     public virtual string Key => GetType().Name;
 
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        if (RandomResistanceTuples != null)
+        {
+            List<(ItemTest, Probability, ItemAdditiveBundle, Probability)> randomResistances = new List<(ItemTest, Probability, ItemAdditiveBundle, Probability)>();
+            foreach ((string itemTestName, string itemTestProbabilityExpression, string itemAdditiveBundleName, string moreProbabilityExpression) in RandomResistanceTuples)
+            {
+                ItemTest itemTest = Game.SingletonRepository.Get<ItemTest>(itemTestName);
+                Probability itemTestProbability = Game.ParseProbabilityExpression(itemTestProbabilityExpression);
+                ItemAdditiveBundle itemAdditiveBundle = Game.SingletonRepository.Get<ItemAdditiveBundle>(itemAdditiveBundleName);
+                Probability moreProbability = Game.ParseProbabilityExpression(moreProbabilityExpression);
+                randomResistances.Add((itemTest, itemTestProbability, itemAdditiveBundle, moreProbability));
+            }
+            RandomResistances = randomResistances.ToArray();
+        }
+    }
 
     /// <summary>
     /// Returns the chance that the object will have immunity resistance.  The chance relates to a 1-in-chance value.
@@ -47,12 +64,32 @@ internal abstract class ArtifactBias : IGetKey
     /// <returns></returns>
     public virtual bool ApplyBonuses(Item item) => false;
 
+    protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
+    public (ItemTest, Probability, ItemAdditiveBundle, Probability)[]? RandomResistances { get; private set; } = null;
+            
     /// <summary>
     /// Apply resistances to the item and returns true, if additional resistances can applied.  By default, no resistances are applied and false is returned.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyRandomResistances(Item item) => false;
+    public bool ApplyRandomResistances(Item item)
+    {
+        if (RandomResistances != null)
+        {
+            foreach ((ItemTest itemTest, Probability itemTestProbability, ItemAdditiveBundle itemAdditiveBundle, Probability moreProbability) in RandomResistances)
+            {
+                if (itemTestProbability.Test(Game) && itemTest.Test(item))
+                {
+                    item.Characteristics.Merge(itemAdditiveBundle);
+                    if (moreProbability.Test(Game))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     /// <summary>
     /// Apply powers to the item and returns true, if additional powers can applied.  By default, no powers are applied and false is returned.

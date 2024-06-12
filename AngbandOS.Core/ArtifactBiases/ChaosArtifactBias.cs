@@ -13,34 +13,12 @@ internal class ChaosArtifactBias : ArtifactBias
     private ChaosArtifactBias(Game game) : base(game) { }
 
     public override string AffinityName => "Chaos";
-    public override bool ApplyRandomResistances(Item item)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (!item.Characteristics.ResChaos)
-        {
-            item.Characteristics.ResChaos = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (!item.Characteristics.ResConf)
-        {
-            item.Characteristics.ResConf = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (!item.Characteristics.ResDisen)
-        {
-            item.Characteristics.ResDisen = false;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistChaosItemTest), "1", nameof(ResistChaosItemAdditiveBundle), "1/2"),
+        (nameof(FalseResistConfusionItemTest), "1", nameof(ResistConfusionItemAdditiveBundle), "1/2"),
+        (nameof(FalseResistDisenchantItemTest), "1", nameof(ResistDisenchantItemAdditiveBundle), "1/2")
+    };
 
     public override bool ApplyMiscPowers(Item item)
     {

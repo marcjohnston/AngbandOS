@@ -17499,4 +17499,48 @@ internal class Game
         // There is no multiplier.  This is a simple DieRoll.
         return new DiceRoll(this, dieCount, sidesCount, bonus);
     }
+
+    public Probability ParseProbabilityExpression(string expression)
+    {
+        if (expression.Trim() == "1")
+        {
+            return new TrueProbability();
+        }
+        if (expression.Trim() == "0")
+        {
+            return new FalseProbability();
+        }
+        // Test for simple integer value.
+        if (double.TryParse(expression, out double intValue))
+        {
+            int percent = (int)Math.Round(intValue * 100);
+            return new PercentProbability(percent);
+        }
+        Regex regEx = new Regex(@"(\d*)\/(\d*)");
+        Match match = regEx.Match(expression);
+        if (match.Success)
+        {
+            if (!int.TryParse(match.Groups[1].Value, out int numerator))
+            {
+                throw new Exception("Invalid numerator in fractional probability expression.");
+            }
+            if (!int.TryParse(match.Groups[2].Value, out int denominator))
+            {
+                throw new Exception("Invalid denominator in fractional probability expression.");
+            }
+            if (denominator == 0)
+            {
+                throw new Exception("Invalid denominator value of zero in fractional probability expression.");
+            }
+            double doubleValue = (double)numerator / (double)denominator;
+            if (doubleValue > 1)
+            {
+                throw new Exception("Fractional probability cannot be greater than 1.");
+            }
+            int percent = (int)Math.Round(doubleValue * 100);
+
+            return new PercentProbability(percent);
+        }
+        throw new Exception("Unrecognized probability expression.");
+    }
 }

@@ -41,26 +41,12 @@ internal class WarriorArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyRandomResistances(Item item)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (Game.DieRoll(3) != 1 && !item.Characteristics.ResFear)
-        {
-            item.Characteristics.ResFear = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (Game.DieRoll(3) == 1 && !item.Characteristics.NoMagic)
-        {
-            item.Characteristics.NoMagic = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistFearItemTest), "2/3", nameof(ResistFearItemAdditiveBundle), "1/2"),
+        (nameof(FalseNoMagicItemTest), "1/3", nameof(NoMagicItemAdditiveBundle), "1/2"),
+        (nameof(FalseResistDarknessItemTest), "1", nameof(ResistDarknessItemAdditiveBundle), "1/2")
+    };
 
     public override int ActivationPowerChance => 80;
     public override Activation GetActivationPowerType(Item item)

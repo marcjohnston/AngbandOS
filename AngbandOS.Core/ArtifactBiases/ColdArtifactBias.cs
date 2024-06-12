@@ -12,26 +12,12 @@ internal class ColdArtifactBias : ArtifactBias
 {
     private ColdArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Cold";
-    public override bool ApplyRandomResistances(Item item)
+
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (!item.Characteristics.ResCold)
-        {
-            item.Characteristics.ResCold = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.Characteristics.ImCold)
-        {
-            item.Characteristics.ImCold = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistColdItemTest), "1", nameof(ResistColdItemAdditiveBundle), "1/2"),
+        (nameof(FalseColdImmunityItemTest), "1/20", nameof(ColdImmunityItemAdditiveBundle), "1/2")
+    };
 
     public override bool ApplySlaying(Item item)
     {

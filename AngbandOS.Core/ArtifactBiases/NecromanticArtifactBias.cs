@@ -12,34 +12,13 @@ internal class NecromanticArtifactBias : ArtifactBias
 {
     private NecromanticArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Necromancers";
-    public override bool ApplyRandomResistances(Item item)
+
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (!item.Characteristics.ResNether)
-        {
-            item.Characteristics.ResNether = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (!item.Characteristics.ResPois)
-        {
-            item.Characteristics.ResPois = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (!item.Characteristics.ResDark)
-        {
-            item.Characteristics.ResDark = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistNetherItemTest), "1", nameof(ResistNetherItemAdditiveBundle), "1/2"),
+        (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemAdditiveBundle), "1/2"),
+        (nameof(FalseResistDarknessItemTest), "1", nameof(ResistDarknessItemAdditiveBundle), "1/2")
+    };
 
     public override bool ApplySlaying(Item item)
     {

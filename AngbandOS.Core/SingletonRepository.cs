@@ -390,12 +390,14 @@ internal class SingletonRepository
         RegisterRepository<ItemFactory>();
         RegisterRepository<ItemFilter>();
         RegisterRepository<ItemQualityRating>();
+        RegisterRepository<ItemTest>();
         RegisterRepository<Justification>();
         RegisterRepository<MartialArtsAttack>();
         RegisterRepository<MonsterFilter>();
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
         RegisterRepository<Patron>();
+        RegisterRepository<Probability>();
         RegisterRepository<Projectile>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();

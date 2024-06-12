@@ -12,34 +12,13 @@ internal class ElectricityArtifactBias : ArtifactBias
 {
     private ElectricityArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Electricity";
-    public override bool ApplyRandomResistances(Item item)
+
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (!item.Characteristics.ResElec)
-        {
-            item.Characteristics.ResElec = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (item.Factory.CanApplyArtifactBiasResistance && !item.Characteristics.ShElec)
-        {
-            item.Characteristics.ShElec = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.Characteristics.ImElec)
-        {
-            item.Characteristics.ImElec = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistElectricityItemTest), "1", nameof(ResistElectricityItemAdditiveBundle), "1/2"),
+        (nameof(FalseSheathOfElectricityItemTest), "1", nameof(SheathOfElectricityItemAdditiveBundle), "1/2"),
+        (nameof(FalseElectricityImmunityItemTest), "1/20", nameof(ElectricityImmunityItemAdditiveBundle), "1/2")
+    };
 
     public override bool ApplySlaying(Item item)
     {

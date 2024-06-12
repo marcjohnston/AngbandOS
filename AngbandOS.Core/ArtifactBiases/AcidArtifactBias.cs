@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ItemCharacteristicTests;
+
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]
@@ -13,26 +15,12 @@ internal class AcidArtifactBias : ArtifactBias
     private AcidArtifactBias(Game game) : base(game) { }
 
     public override string AffinityName => "Acid";
-    public override bool ApplyRandomResistances(Item item)
+
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (!item.Characteristics.ResAcid)
-        {
-            item.Characteristics.ResAcid = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.Characteristics.ImAcid)
-        {
-            item.Characteristics.ImAcid = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistAcidItemTest), "1", nameof(ResistAcidItemAdditiveBundle), "1/2"),
+        (nameof(FalseAcidImmunityItemTest), "1/20", nameof(AcidImmunityItemAdditiveBundle), "1/2")
+    };
 
     public override bool ApplySlaying(Item item)
     {

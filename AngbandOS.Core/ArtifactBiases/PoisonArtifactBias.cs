@@ -12,18 +12,10 @@ internal class PoisonArtifactBias : ArtifactBias
 {
     private PoisonArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Poison";
-    public override bool ApplyRandomResistances(Item item)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        if (!item.Characteristics.ResPois)
-        {
-            item.Characteristics.ResPois = true;
-            if (Game.DieRoll(2) == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+        (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemAdditiveBundle), "1/2")
+    };
 
     public override bool ApplySlaying(Item item)
     {
