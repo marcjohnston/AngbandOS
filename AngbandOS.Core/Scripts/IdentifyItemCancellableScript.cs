@@ -30,7 +30,7 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
         {
             return true;
         }
-        oPtr.BecomeFlavorAware();
+        oPtr.Factory.IsFlavorAware = true;
         oPtr.BecomeKnown();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();

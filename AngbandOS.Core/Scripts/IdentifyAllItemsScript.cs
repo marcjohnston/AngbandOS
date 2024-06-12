@@ -50,7 +50,7 @@ internal class IdentifyAllItemsScript : Script, IScript, IScriptStore
             {
                 continue;
             }
-            oPtr.BecomeFlavorAware();
+            oPtr.Factory.IsFlavorAware = true;
             oPtr.BecomeKnown();
             if (oPtr.Stompable())
             {

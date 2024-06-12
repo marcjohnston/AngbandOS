@@ -54,7 +54,7 @@ internal abstract class WandItemFactory : ItemFactory
             {
                 oPtr.WandChargesRemaining += 2 + Game.DieRoll(t);
             }
-            oPtr.IdentKnown = false;
+            oPtr.IdentityIsKnown = false;
             oPtr.IdentEmpty = false;
         }
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();

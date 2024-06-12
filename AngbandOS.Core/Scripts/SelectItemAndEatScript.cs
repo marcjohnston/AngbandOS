@@ -60,7 +60,7 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         // Learn its flavor if necessary
         if (ident && !item.Factory.IsFlavorAware)
         {
-            item.BecomeFlavorAware();
+            item.Factory.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
 

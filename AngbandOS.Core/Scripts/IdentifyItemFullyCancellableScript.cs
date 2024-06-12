@@ -27,7 +27,7 @@ internal class IdentifyItemFullyCancellableScript : Script, IScript, ICancellabl
         {
             return true;
         }
-        oPtr.BecomeFlavorAware();
+        oPtr.Factory.IsFlavorAware = true;
         oPtr.BecomeKnown();
         oPtr.IdentMental = true;
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();

@@ -59,9 +59,10 @@ internal sealed class Item : IComparable<Item>
     public bool IdentEmpty;
 
     /// <summary>
-    /// This property used to be a flag in the IdentifyFlags.  The item has been identified.  
+    /// Returns true, if item has been identified; false, otherwise.  This property is near identical to the Factory.IsFlavorAware, with the exception that a store will identify an item, 
+    /// but the factory for the item may still have the <see cref="ItemFactory.IsFlavorAware"/> still set to false.
     /// </summary>
-    public bool IdentKnown;
+    public bool IdentityIsKnown;
 
     /// <summary>
     /// Returns true, if the identity of the item was provided because the item was bought from the store.  This property is used to hide the
@@ -475,7 +476,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentSense = IdentSense;
         clonedItem.IdentFixed = IdentFixed;
         clonedItem.IdentEmpty = IdentEmpty;
-        clonedItem.IdentKnown = IdentKnown;
+        clonedItem.IdentityIsKnown = IdentityIsKnown;
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
         clonedItem.IsCursed = IsCursed;
@@ -754,11 +755,6 @@ internal sealed class Item : IComparable<Item>
         return tdam * mult;
     }
 
-    public void BecomeFlavorAware()
-    {
-        Factory.IsFlavorAware = true;
-    }
-
     public void BecomeKnown()
     {
         if (!string.IsNullOrEmpty(Inscription) && IdentSense)
@@ -772,7 +768,7 @@ internal sealed class Item : IComparable<Item>
         }
         IdentSense = false;
         IdentEmpty = false;
-        IdentKnown = true;
+        IdentityIsKnown = true;
     }
 
     /// <summary>
@@ -1887,7 +1883,7 @@ internal sealed class Item : IComparable<Item>
 
     public bool IsKnown()
     {
-        if (IdentKnown)
+        if (IdentityIsKnown)
         {
             return true;
         }
@@ -2383,7 +2379,7 @@ internal sealed class Item : IComparable<Item>
             {
                 newName = "called '" + dummyName + "'";
             }
-            BecomeFlavorAware();
+            Factory.IsFlavorAware = true;
             BecomeKnown();
             IdentMental = true;
         }

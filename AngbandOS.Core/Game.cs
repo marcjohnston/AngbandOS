@@ -5231,7 +5231,7 @@ internal class Game
                 }
             }
             oPtr.IdentEmpty = false;
-            oPtr.IdentKnown = false;
+            oPtr.IdentityIsKnown = false;
             oPtr.IdentSense = false;
         }
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -9317,7 +9317,7 @@ internal class Game
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
             Item item = new Item(this, scrollSatisfyHungerItemClass);
             item.Count = (char)RandomBetween(2, 5);
-            item.BecomeFlavorAware();
+            item.Factory.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
             InvenCarry(item);
@@ -9327,7 +9327,7 @@ internal class Game
             ItemFactory rationFoodItemClass = SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
             Item item = new Item(this, rationFoodItemClass);
             item.Count = RandomBetween(3, 7);
-            item.BecomeFlavorAware();
+            item.Factory.IsFlavorAware = true;
             item.BecomeKnown();
             InvenCarry(item);
         }
@@ -9336,7 +9336,7 @@ internal class Game
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
             Item item = new Item(this, scrollLightItemClass);
             item.Count = RandomBetween(3, 7);
-            item.BecomeFlavorAware();
+            item.Factory.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
             InvenCarry(item);
@@ -9347,7 +9347,7 @@ internal class Game
             Item item = new Item(this, woodenTorchItemClass);
             item.Count = RandomBetween(3, 7);
             item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
-            item.BecomeFlavorAware();
+            item.Factory.IsFlavorAware = true;
             item.BecomeKnown();
             InvenCarry(item);
             Item carried = item.Clone(1);
@@ -9376,7 +9376,7 @@ internal class Game
     public void OutfitPlayerWithItem(Item item)
     {
         item.IdentityIsStoreBought = true;
-        item.BecomeFlavorAware();
+        item.Factory.IsFlavorAware = true;
         item.BecomeKnown();
         int slot = item.Factory.WieldSlot;
         if (slot == -1)

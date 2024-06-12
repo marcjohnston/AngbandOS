@@ -926,7 +926,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
     /// <summary>
     /// Returns true, if the flavor for the factory has been identified or the factory doesn't use flavors; false, when the factory uses flavors and
-    /// the flavor still hasn't been identified by the player.  The <see cref="Game.FlavorInit"/> method is used to re-initialize this variable.
+    /// the flavor still hasn't been identified by the player.  The <see cref="Game.FlavorInit"/> method is used to re-initialize this variable.  Stores may produce items from this
+    /// factory and identify them; even though the Factory flavor still has not been identified.
     /// </summary>
     public bool IsFlavorAware;
 
