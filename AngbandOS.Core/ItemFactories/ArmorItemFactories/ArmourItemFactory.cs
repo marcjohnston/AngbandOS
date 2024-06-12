@@ -149,7 +149,7 @@ internal abstract class ArmorItemFactory : ItemFactory
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         int toac1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
         int toac2 = item.GetBonusValue(10, level);

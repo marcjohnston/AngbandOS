@@ -90,7 +90,7 @@ internal abstract class ChestItemFactory : ItemFactory
     /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
     /// </remarks>
     /// <param name="store"></param>
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         if (item.Factory.LevelNormallyFound > 0)
         {

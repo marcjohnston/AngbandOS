@@ -22,7 +22,7 @@ internal class StupidityRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         item.IsBroken = true;
         item.IsCursed = true;

@@ -545,7 +545,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
-    public virtual void EnchantItem(Item item, int level, int power, Store? store) { } // TODO: Needs to be built into the new Item(), should be renamed .. the Store is needed for FuelSources to be full not used
+    public virtual void EnchantItem(Item item, bool usedOkay, int level, int power) { } // TODO: Needs to be built into the new Item(), should be renamed .. the Store is needed for FuelSources to be full not used
 
     /// <summary>
     /// Applies a good random rare characteristics to an item of armor.

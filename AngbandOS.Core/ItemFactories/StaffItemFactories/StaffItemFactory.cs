@@ -17,7 +17,7 @@ internal abstract class StaffItemFactory : ItemFactory
 
     public abstract int StaffChargeCount { get; }
 
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         item.StaffChargesRemaining = StaffChargeCount;
     }

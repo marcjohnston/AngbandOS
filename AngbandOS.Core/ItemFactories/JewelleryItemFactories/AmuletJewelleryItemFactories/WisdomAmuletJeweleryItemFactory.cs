@@ -13,7 +13,7 @@ internal class WisdomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     private WisdomAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
 
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         item.TypeSpecificValue = 1 + item.GetBonusValue(5, level);
         if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))

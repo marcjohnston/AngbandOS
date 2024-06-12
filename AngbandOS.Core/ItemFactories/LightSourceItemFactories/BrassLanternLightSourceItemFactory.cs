@@ -12,9 +12,9 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
 {
     private BrassLanternLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
-        if (store != null)
+        if (!usedOkay)
         {
             item.TurnsOfLightRemaining = Constants.FuelLamp / 2;
         }

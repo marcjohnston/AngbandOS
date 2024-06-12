@@ -24,7 +24,7 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     /// </summary>
     public override int TreasureRating => 5;
 
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         do
         {

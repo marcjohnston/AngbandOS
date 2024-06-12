@@ -69,12 +69,12 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
     /// <param name="level"></param>
     /// <param name="power"></param>
     /// <param name="store"></param>
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         if (power != 0)
         {
             // Apply the standard armor characteristics.
-            base.EnchantItem(item, level, power, null);
+            base.EnchantItem(item, usedOkay, level, power);
 
             if (power > 1)
             {

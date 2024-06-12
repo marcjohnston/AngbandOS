@@ -46,7 +46,7 @@ internal class CreateItemScript : Script, IScript
             return;
         }
 
-        qPtr.EnchantItem(Game.Difficulty, ok, good, great, null);
+        qPtr.EnchantItem(Game.Difficulty, ok, good, great, true);
         Game.DropNear(qPtr, -1, Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MsgPrint("Allocated.");
         return;

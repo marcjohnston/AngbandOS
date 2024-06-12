@@ -2035,10 +2035,10 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     /// <param name="lev"></param>
     /// <param name="okay">Stores send false.  The game otherwise sends true.  Wizards get to select the value.</param>
-    /// <param name="good">Stores send false.  Monsters will have a good item count Monster.DropGood.</param>
-    /// <param name="great">Stores send false.  Monsters will have a great item count Monster.DropGreat.</param>
+    /// <param name="good">Stores send false.  Monsters will have a good item count Monster.DropGood. When true, skips the percentile roll for good objects.</param>
+    /// <param name="great">Stores send false.  Monsters will have a great item count Monster.DropGreat. When true, skips the percentile roll for great objects.</param>
     /// <param name="store"></param>
-    public void EnchantItem(int lev, bool okay, bool good, bool great, Store? store)
+    public void EnchantItem(int lev, bool okay, bool good, bool great, bool usedOkay)
     {            
         if (lev > Constants.MaxDepth - 1)
         {
@@ -2071,20 +2071,20 @@ internal sealed class Item : IComparable<Item>
                 power = -2;
             }
         }
-        int rolls = 0;
+        int rollsForFixedArtifactAttempts = 0;
         if (power >= 2)
         {
-            rolls = 1;
+            rollsForFixedArtifactAttempts = 1;
         }
         if (great)
         {
-            rolls = 4;
+            rollsForFixedArtifactAttempts = 4;
         }
         if (!okay || FixedArtifact != null)
         {
-            rolls = 0;
+            rollsForFixedArtifactAttempts = 0;
         }
-        for (int i = 0; i < rolls; i++)
+        for (int i = 0; i < rollsForFixedArtifactAttempts; i++)
         {
             if (ApplyFixedArtifact())
             {
@@ -2114,7 +2114,7 @@ internal sealed class Item : IComparable<Item>
             Game.SpecialTreasure = true;
             return;
         }
-        Factory.EnchantItem(this, lev, power, store);
+        Factory.EnchantItem(this, usedOkay, lev, power);
         Game.TreasureRating += Factory.TreasureRating;
         if (IsRandomArtifact)
         {

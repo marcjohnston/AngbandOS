@@ -23,7 +23,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     /// </summary>
     public override int TreasureRating => 25;
 
-    public override void EnchantItem(Item item, int level, int power, Store? store)
+    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
         item.BonusArmorClass = Game.DieRoll(5) + item.GetBonusValue(5, level);
