@@ -1992,6 +1992,11 @@ internal sealed class Item : IComparable<Item>
         return GetDescription(false);
     }
 
+    /// <summary>
+    /// Returns the best known value of the item.  If the item is known, then the real value will be returned.  If the item is unknown, then the base value of the factory will be returned.  
+    /// The value will also reflect a discount if the item was bought at a discount.
+    /// </summary>
+    /// <returns></returns>
     public int Value()
     {
         int value;
