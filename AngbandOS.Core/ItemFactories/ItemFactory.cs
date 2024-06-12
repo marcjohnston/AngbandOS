@@ -423,8 +423,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         }
     }
 
-    public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
-
     /// <summary>
     /// Returns an array of tuples that define the mass produce for items of this factory.  These tuples define a Roll that is applied for additional items to be produced
     /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Returns null, by default.  This property is used

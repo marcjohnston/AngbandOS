@@ -24,11 +24,6 @@ internal abstract class LightSourceItemFactory : ItemFactory
         (20, "3d5-3")
     };
 
-    public override int? GetTypeSpecificRealValue(Item item, int value)
-    {
-        return item.ComputeTypeSpecificRealValue(value);
-    }
-
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         if (power < 0) // Cursed

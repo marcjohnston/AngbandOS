@@ -16,11 +16,6 @@ internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(Game game) : base(game) { }
 
-    public override int? GetTypeSpecificRealValue(Item item, int value)
-    {
-        return item.ComputeTypeSpecificRealValue(value);
-    }
-
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (100, "3d5-3")

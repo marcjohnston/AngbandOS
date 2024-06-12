@@ -12,11 +12,6 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
 {
     public AmmunitionItemFactory(Game game) : base(game) { }
 
-    public override int? GetTypeSpecificRealValue(Item item, int value)
-    {
-        return item.ComputeTypeSpecificRealValue(value);
-    }
-
     public override int? GetBonusRealValue(Item item, int value)
     {
         if (item.BonusHit + item.BonusDamage < 0)

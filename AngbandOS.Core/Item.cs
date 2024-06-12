@@ -1948,7 +1948,7 @@ internal sealed class Item : IComparable<Item>
         {
             return 0;
         }
-        int? typeSpecificValue = Factory.GetTypeSpecificRealValue(this, value);
+        int? typeSpecificValue = ComputeTypeSpecificRealValue(value);
         if (typeSpecificValue == null)
         {
             return 0;
