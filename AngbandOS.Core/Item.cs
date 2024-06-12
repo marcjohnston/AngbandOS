@@ -1920,6 +1920,10 @@ internal sealed class Item : IComparable<Item>
         Factory.Tried = true;
     }
 
+    /// <summary>
+    /// Returns the actual full value of the item.
+    /// </summary>
+    /// <returns></returns>
     public int RealValue()
     {
         if (Factory.Cost == 0)
