@@ -1941,6 +1941,7 @@ internal sealed class Item : IComparable<Item>
 
         value += Factory.WandChargeValue * WandChargesRemaining;
         value += Factory.StaffChargeValue * StaffChargesRemaining;
+        value += Factory.TurnOfLightValue * TurnsOfLightRemaining;
 
         int? bonusValue = Factory.GetBonusRealValue(this);
         if (bonusValue == null)

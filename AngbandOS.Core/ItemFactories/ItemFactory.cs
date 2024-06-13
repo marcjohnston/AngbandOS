@@ -17,6 +17,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns the value of each turn of light for light sources.  Returns 0, by default;
+    /// </summary>
+    public virtual int TurnOfLightValue => 0;
+
+    /// <summary>
     /// Returns the value of each wand charge.  Returns 0, by default.
     /// </summary>
     public virtual int WandChargeValue => 0;
@@ -1012,8 +1017,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual (int level, int chance)[]? DepthsFoundAndChances => null;
 
     /// <summary>
-    /// Returns the real cost of a standard item.  Returns 0 by default.  For wands and staffs, this value should be the value of an item with no charges.  An empty wand or staff should
-    /// still have some value because it can be recharged.
+    /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should
+    /// still have some value if it can be recharged.
     /// </summary>
     public virtual int Cost => 0;
 

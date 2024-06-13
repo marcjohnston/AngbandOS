@@ -18,14 +18,6 @@ internal abstract class LightSourceItemFactory : ItemFactory
     protected override string ItemClassName => nameof(LightSourcesItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
 
-    public override int? GetBonusRealValue(Item item)
-    {
-        if (item.TurnsOfLightRemaining <= 0)
-        {
-            return null;
-        }
-        return 0; // TODO: No additional bonus for amount of light?
-    }
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (20, "3d5-3")
