@@ -74,9 +74,9 @@ internal abstract class WandItemFactory : ItemFactory
         oPtr.IdentEmpty = true;
     }
 
-    public override int? GetBonusRealValue(Item item, int value)
+    public override int? GetBonusRealValue(Item item)
     {
-        return value / 20 * item.WandChargesRemaining;
+        return Cost / 20 * item.WandChargesRemaining;
     }
 
     public override int PercentageBreakageChance => 25;

@@ -97,9 +97,9 @@ internal abstract class StaffItemFactory : ItemFactory
         oPtr.IdentEmpty = true;
     }
 
-    public override int? GetBonusRealValue(Item item, int value)
+    public override int? GetBonusRealValue(Item item)
     {
-        return value / 20 * item.StaffChargesRemaining;
+        return Cost / 20 * item.StaffChargesRemaining;
     }
 
     public override bool CanBeUsed => true;

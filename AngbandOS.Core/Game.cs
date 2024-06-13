@@ -56,6 +56,71 @@ internal class Game
     /// </summary>
     public int? MaximumLightLevel { get; set; } = 5;
 
+    /// <summary>
+    /// Returns the value of items that offer strength modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusStrengthValue = 1200;
+
+    /// <summary>
+    /// Returns the value of items that offer intelligence modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusIntelligenceValue = 1200;
+
+    /// <summary>
+    /// Returns the value of items that offer wisdom modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusWisdomValue = 1200;
+
+    /// <summary>
+    /// Returns the value of items that offer dexterity modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusDexterityValue = 1200;
+
+    /// <summary>
+    /// Returns the value of items that offer constitution modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusConstitutionValue = 1200;
+
+    /// <summary>
+    /// Returns the value of items that offer charisma modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusCharismaValue = 450;
+
+    /// <summary>
+    /// Returns the value of items that offer stealth modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusStealthValue = 350;
+
+    /// <summary>
+    /// Returns the value of items that offer search modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusSearchValue = 200;
+
+    /// <summary>
+    /// Returns the value of items that offer infravision modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusInfravisionValue = 200;
+
+    /// <summary>
+    /// Returns the value of items that offer tunnel modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusTunnelValue = 225;
+
+    /// <summary>
+    /// Returns the value of items that offer extra blows modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusExtraBlowslValue = 7000;
+
+    /// <summary>
+    /// Returns the value of items that offer speed modifiers.  Each bonus unit is assigned this much value.
+    /// </summary>
+    public int BonusSpeedlValue = 33000;
+
+    /// <summary>
+    /// Returns the value of items that offer a chaotic modifier.
+    /// </summary>
+    public int BonusChaoticValue = 10000;
+
     public bool IsDead;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;

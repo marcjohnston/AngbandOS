@@ -980,380 +980,6 @@ internal sealed class Item : IComparable<Item>
         return basenm;
     }
 
-    public int FlagBasedCost(int plusses)
-    {
-        int total = 0;
-        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
-        if (mergedCharacteristics.Str)
-        {
-            total += 1000 * plusses;
-        }
-        if (mergedCharacteristics.Int)
-        {
-            total += 1000 * plusses;
-        }
-        if (mergedCharacteristics.Wis)
-        {
-            total += 1000 * plusses;
-        }
-        if (mergedCharacteristics.Dex)
-        {
-            total += 1000 * plusses;
-        }
-        if (mergedCharacteristics.Con)
-        {
-            total += 1000 * plusses;
-        }
-        if (mergedCharacteristics.Cha)
-        {
-            total += 250 * plusses;
-        }
-        if (mergedCharacteristics.Chaotic)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.Vampiric)
-        {
-            total += 13000;
-        }
-        if (mergedCharacteristics.Stealth)
-        {
-            total += 250 * plusses;
-        }
-        if (mergedCharacteristics.Search)
-        {
-            total += 100 * plusses;
-        }
-        if (mergedCharacteristics.Infra)
-        {
-            total += 150 * plusses;
-        }
-        if (mergedCharacteristics.Tunnel)
-        {
-            total += 175 * plusses;
-        }
-        if (mergedCharacteristics.Speed && plusses > 0)
-        {
-            total += 30000 * plusses;
-        }
-        if (mergedCharacteristics.Blows && plusses > 0)
-        {
-            total += 2000 * plusses;
-        }
-        if (mergedCharacteristics.AntiTheft)
-        {
-            total += 0;
-        }
-        if (mergedCharacteristics.SlayAnimal)
-        {
-            total += 3500;
-        }
-        if (mergedCharacteristics.SlayEvil)
-        {
-            total += 4500;
-        }
-        if (mergedCharacteristics.SlayUndead)
-        {
-            total += 3500;
-        }
-        if (mergedCharacteristics.SlayDemon)
-        {
-            total += 3500;
-        }
-        if (mergedCharacteristics.SlayOrc)
-        {
-            total += 3000;
-        }
-        if (mergedCharacteristics.SlayTroll)
-        {
-            total += 3500;
-        }
-        if (mergedCharacteristics.SlayGiant)
-        {
-            total += 3500;
-        }
-        if (mergedCharacteristics.SlayDragon)
-        {
-            total += 3500;
-        }
-        if (mergedCharacteristics.KillDragon)
-        {
-            total += 5500;
-        }
-        if (mergedCharacteristics.Vorpal)
-        {
-            total += 5000;
-        }
-        if (mergedCharacteristics.Impact)
-        {
-            total += 5000;
-        }
-        if (mergedCharacteristics.BrandPois)
-        {
-            total += 7500;
-        }
-        if (mergedCharacteristics.BrandAcid)
-        {
-            total += 7500;
-        }
-        if (mergedCharacteristics.BrandElec)
-        {
-            total += 7500;
-        }
-        if (mergedCharacteristics.BrandFire)
-        {
-            total += 5000;
-        }
-        if (mergedCharacteristics.BrandCold)
-        {
-            total += 5000;
-        }
-        if (mergedCharacteristics.SustStr)
-        {
-            total += 850;
-        }
-        if (mergedCharacteristics.SustInt)
-        {
-            total += 850;
-        }
-        if (mergedCharacteristics.SustWis)
-        {
-            total += 850;
-        }
-        if (mergedCharacteristics.SustDex)
-        {
-            total += 850;
-        }
-        if (mergedCharacteristics.SustCon)
-        {
-            total += 850;
-        }
-        if (mergedCharacteristics.SustCha)
-        {
-            total += 250;
-        }
-        if (mergedCharacteristics.ImAcid)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.ImElec)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.ImFire)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.ImCold)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.Reflect)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.FreeAct)
-        {
-            total += 4500;
-        }
-        if (mergedCharacteristics.HoldLife)
-        {
-            total += 8500;
-        }
-        if (mergedCharacteristics.ResAcid)
-        {
-            total += 1250;
-        }
-        if (mergedCharacteristics.ResElec)
-        {
-            total += 1250;
-        }
-        if (mergedCharacteristics.ResFire)
-        {
-            total += 1250;
-        }
-        if (mergedCharacteristics.ResCold)
-        {
-            total += 1250;
-        }
-        if (mergedCharacteristics.ResPois)
-        {
-            total += 2500;
-        }
-        if (mergedCharacteristics.ResFear)
-        {
-            total += 2500;
-        }
-        if (mergedCharacteristics.ResLight)
-        {
-            total += 1750;
-        }
-        if (mergedCharacteristics.ResDark)
-        {
-            total += 1750;
-        }
-        if (mergedCharacteristics.ResBlind)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.ResConf)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.ResSound)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.ResShards)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.ResNether)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.ResNexus)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.ResChaos)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.ResDisen)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.ShFire)
-        {
-            total += 5000;
-        }
-        if (mergedCharacteristics.ShElec)
-        {
-            total += 5000;
-        }
-        if (mergedCharacteristics.NoTele)
-        {
-            total += 2500;
-        }
-        if (mergedCharacteristics.NoMagic)
-        {
-            total += 2500;
-        }
-        if (mergedCharacteristics.Wraith)
-        {
-            total += 250000;
-        }
-        if (mergedCharacteristics.DreadCurse)
-        {
-            total -= 15000;
-        }
-        if (mergedCharacteristics.EasyKnow)
-        {
-            total += 0;
-        }
-        if (mergedCharacteristics.HideType)
-        {
-            total += 0;
-        }
-        if (mergedCharacteristics.ShowMods)
-        {
-            total += 0;
-        }
-        if (mergedCharacteristics.InstaArt)
-        {
-            total += 0;
-        }
-        if (mergedCharacteristics.Feather)
-        {
-            total += 1250;
-        }
-        if (mergedCharacteristics.Radius > 0)
-        {
-            total += 1250;
-        }
-        if (mergedCharacteristics.SeeInvis)
-        {
-            total += 2000;
-        }
-        if (mergedCharacteristics.Telepathy)
-        {
-            total += 12500;
-        }
-        if (mergedCharacteristics.SlowDigest)
-        {
-            total += 750;
-        }
-        if (mergedCharacteristics.Regen)
-        {
-            total += 2500;
-        }
-        if (mergedCharacteristics.XtraMight)
-        {
-            total += 2250;
-        }
-        if (mergedCharacteristics.XtraShots)
-        {
-            total += 10000;
-        }
-        if (mergedCharacteristics.IgnoreAcid)
-        {
-            total += 100;
-        }
-        if (mergedCharacteristics.IgnoreElec)
-        {
-            total += 100;
-        }
-        if (mergedCharacteristics.IgnoreFire)
-        {
-            total += 100;
-        }
-        if (mergedCharacteristics.IgnoreCold)
-        {
-            total += 100;
-        }
-        if (mergedCharacteristics.DrainExp)
-        {
-            total -= 12500;
-        }
-        if (mergedCharacteristics.Teleport)
-        {
-            if (IsCursed)
-            {
-                total -= 7500;
-            }
-            else
-            {
-                total += 250;
-            }
-        }
-        if (mergedCharacteristics.Aggravate)
-        {
-            total -= 10000;
-        }
-        if (mergedCharacteristics.Blessed)
-        {
-            total += 750;
-        }
-        if (mergedCharacteristics.IsCursed)
-        {
-            total -= 5000;
-        }
-        if (mergedCharacteristics.HeavyCurse)
-        {
-            total -= 12500;
-        }
-        if (mergedCharacteristics.PermaCurse)
-        {
-            total -= 15000;
-        }
-        if (mergedCharacteristics.Activation != null)
-        {
-            total += mergedCharacteristics.Activation.Value;
-        }
-        return total;
-    }
-
     public ItemQualityRating GetQualityRating()
     {
         if (!Factory.HasQualityRatings)
@@ -1917,7 +1543,7 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Returns the actual full value of the item.
+    /// Returns the actual value of the item.  This real value may not be known, if the item is unknown.  This real value is also used by the Alchemy script to convert the item into gold.
     /// </summary>
     /// <returns></returns>
     public int RealValue()
@@ -1927,7 +1553,6 @@ internal sealed class Item : IComparable<Item>
             return 0;
         }
         int value = Factory.Cost;
-        value += FlagBasedCost(TypeSpecificValue);
         if (FixedArtifact != null)
         {
             if (FixedArtifact.Cost == 0)
@@ -1944,20 +1569,382 @@ internal sealed class Item : IComparable<Item>
             }
             value += RareItem.Cost;
         }
-        if (Factory.IsWorthless(this))
-        {
-            return 0;
-        }
-        int? typeSpecificValue = ComputeTypeSpecificRealValue(value);
-        if (typeSpecificValue == null)
-        {
-            return 0;
-        }
-        value += typeSpecificValue.Value;
 
-        int? bonusValue = Factory.GetBonusRealValue(this, value);
+        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
+        if (mergedCharacteristics.Chaotic)
+        {
+            value += Game.BonusChaoticValue;
+        }
+        if (mergedCharacteristics.Vampiric)
+        {
+            value += 13000;
+        }
+        if (mergedCharacteristics.AntiTheft)
+        {
+            value += 0;
+        }
+        if (mergedCharacteristics.SlayAnimal)
+        {
+            value += 3500;
+        }
+        if (mergedCharacteristics.SlayEvil)
+        {
+            value += 4500;
+        }
+        if (mergedCharacteristics.SlayUndead)
+        {
+            value += 3500;
+        }
+        if (mergedCharacteristics.SlayDemon)
+        {
+            value += 3500;
+        }
+        if (mergedCharacteristics.SlayOrc)
+        {
+            value += 3000;
+        }
+        if (mergedCharacteristics.SlayTroll)
+        {
+            value += 3500;
+        }
+        if (mergedCharacteristics.SlayGiant)
+        {
+            value += 3500;
+        }
+        if (mergedCharacteristics.SlayDragon)
+        {
+            value += 3500;
+        }
+        if (mergedCharacteristics.KillDragon)
+        {
+            value += 5500;
+        }
+        if (mergedCharacteristics.Vorpal)
+        {
+            value += 5000;
+        }
+        if (mergedCharacteristics.Impact)
+        {
+            value += 5000;
+        }
+        if (mergedCharacteristics.BrandPois)
+        {
+            value += 7500;
+        }
+        if (mergedCharacteristics.BrandAcid)
+        {
+            value += 7500;
+        }
+        if (mergedCharacteristics.BrandElec)
+        {
+            value += 7500;
+        }
+        if (mergedCharacteristics.BrandFire)
+        {
+            value += 5000;
+        }
+        if (mergedCharacteristics.BrandCold)
+        {
+            value += 5000;
+        }
+        if (mergedCharacteristics.SustStr)
+        {
+            value += 850;
+        }
+        if (mergedCharacteristics.SustInt)
+        {
+            value += 850;
+        }
+        if (mergedCharacteristics.SustWis)
+        {
+            value += 850;
+        }
+        if (mergedCharacteristics.SustDex)
+        {
+            value += 850;
+        }
+        if (mergedCharacteristics.SustCon)
+        {
+            value += 850;
+        }
+        if (mergedCharacteristics.SustCha)
+        {
+            value += 250;
+        }
+        if (mergedCharacteristics.ImAcid)
+        {
+            value += 10000;
+        }
+        if (mergedCharacteristics.ImElec)
+        {
+            value += 10000;
+        }
+        if (mergedCharacteristics.ImFire)
+        {
+            value += 10000;
+        }
+        if (mergedCharacteristics.ImCold)
+        {
+            value += 10000;
+        }
+        if (mergedCharacteristics.Reflect)
+        {
+            value += 10000;
+        }
+        if (mergedCharacteristics.FreeAct)
+        {
+            value += 4500;
+        }
+        if (mergedCharacteristics.HoldLife)
+        {
+            value += 8500;
+        }
+        if (mergedCharacteristics.ResAcid)
+        {
+            value += 1250;
+        }
+        if (mergedCharacteristics.ResElec)
+        {
+            value += 1250;
+        }
+        if (mergedCharacteristics.ResFire)
+        {
+            value += 1250;
+        }
+        if (mergedCharacteristics.ResCold)
+        {
+            value += 1250;
+        }
+        if (mergedCharacteristics.ResPois)
+        {
+            value += 2500;
+        }
+        if (mergedCharacteristics.ResFear)
+        {
+            value += 2500;
+        }
+        if (mergedCharacteristics.ResLight)
+        {
+            value += 1750;
+        }
+        if (mergedCharacteristics.ResDark)
+        {
+            value += 1750;
+        }
+        if (mergedCharacteristics.ResBlind)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.ResConf)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.ResSound)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.ResShards)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.ResNether)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.ResNexus)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.ResChaos)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.ResDisen)
+        {
+            value += 10000;
+        }
+        if (mergedCharacteristics.ShFire)
+        {
+            value += 5000;
+        }
+        if (mergedCharacteristics.ShElec)
+        {
+            value += 5000;
+        }
+        if (mergedCharacteristics.NoTele)
+        {
+            value += 2500;
+        }
+        if (mergedCharacteristics.NoMagic)
+        {
+            value += 2500;
+        }
+        if (mergedCharacteristics.Wraith)
+        {
+            value += 250000;
+        }
+        if (mergedCharacteristics.DreadCurse)
+        {
+            value -= 15000;
+        }
+        if (mergedCharacteristics.EasyKnow)
+        {
+            value += 0;
+        }
+        if (mergedCharacteristics.HideType)
+        {
+            value += 0;
+        }
+        if (mergedCharacteristics.ShowMods)
+        {
+            value += 0;
+        }
+        if (mergedCharacteristics.InstaArt)
+        {
+            value += 0;
+        }
+        if (mergedCharacteristics.Feather)
+        {
+            value += 1250;
+        }
+        if (mergedCharacteristics.Radius > 0)
+        {
+            value += 1250;
+        }
+        if (mergedCharacteristics.SeeInvis)
+        {
+            value += 2000;
+        }
+        if (mergedCharacteristics.Telepathy)
+        {
+            value += 12500;
+        }
+        if (mergedCharacteristics.SlowDigest)
+        {
+            value += 750;
+        }
+        if (mergedCharacteristics.Regen)
+        {
+            value += 2500;
+        }
+        if (mergedCharacteristics.XtraMight)
+        {
+            value += 2250;
+        }
+        if (mergedCharacteristics.XtraShots)
+        {
+            value += 10000;
+        }
+        if (mergedCharacteristics.IgnoreAcid)
+        {
+            value += 100;
+        }
+        if (mergedCharacteristics.IgnoreElec)
+        {
+            value += 100;
+        }
+        if (mergedCharacteristics.IgnoreFire)
+        {
+            value += 100;
+        }
+        if (mergedCharacteristics.IgnoreCold)
+        {
+            value += 100;
+        }
+        if (mergedCharacteristics.DrainExp)
+        {
+            value -= 12500;
+        }
+        if (mergedCharacteristics.Teleport)
+        {
+            if (IsCursed)
+            {
+                value -= 7500;
+            }
+            else
+            {
+                value += 250;
+            }
+        }
+        if (mergedCharacteristics.Aggravate)
+        {
+            value -= 10000;
+        }
+        if (mergedCharacteristics.Blessed)
+        {
+            value += 750;
+        }
+        if (mergedCharacteristics.IsCursed)
+        {
+            value -= 5000;
+        }
+        if (mergedCharacteristics.HeavyCurse)
+        {
+            value -= 12500;
+        }
+        if (mergedCharacteristics.PermaCurse)
+        {
+            value -= 15000;
+        }
+        if (mergedCharacteristics.Activation != null)
+        {
+            value += mergedCharacteristics.Activation.Value;
+        }
+
+        if (mergedCharacteristics.Str)
+        {
+            value += TypeSpecificValue * Game.BonusStrengthValue;
+        }
+        if (mergedCharacteristics.Int)
+        {
+            value += TypeSpecificValue * Game.BonusIntelligenceValue;
+        }
+        if (mergedCharacteristics.Wis)
+        {
+            value += TypeSpecificValue * Game.BonusWisdomValue;
+        }
+        if (mergedCharacteristics.Dex)
+        {
+            value += TypeSpecificValue * Game.BonusDexterityValue;
+        }
+        if (mergedCharacteristics.Con)
+        {
+            value += TypeSpecificValue * Game.BonusConstitutionValue;
+        }
+        if (mergedCharacteristics.Cha)
+        {
+            value += TypeSpecificValue * Game.BonusCharismaValue;
+        }
+        if (mergedCharacteristics.Stealth)
+        {
+            value += TypeSpecificValue * Game.BonusStealthValue;
+        }
+        if (mergedCharacteristics.Search)
+        {
+            value += TypeSpecificValue * Game.BonusSearchValue;
+        }
+        if (mergedCharacteristics.Infra)
+        {
+            value += TypeSpecificValue * Game.BonusInfravisionValue;
+        }
+        if (mergedCharacteristics.Tunnel)
+        {
+            value += TypeSpecificValue * Game.BonusTunnelValue;
+        }
+        if (mergedCharacteristics.Blows)
+        {
+            value += TypeSpecificValue * Game.BonusExtraBlowslValue;
+        }
+        if (mergedCharacteristics.Speed)
+        {
+            value += TypeSpecificValue * Game.BonusSpeedlValue;
+        }
+
+        int? bonusValue = Factory.GetBonusRealValue(this);
         if (bonusValue == null)
+        {
             return 0;
+        }
 
         value += bonusValue.Value;
         return value;
@@ -2346,7 +2333,6 @@ internal sealed class Item : IComparable<Item>
         Characteristics.IgnoreCold = true;
         Characteristics.TreasureRating = 40;
 
-        int totalFlags = FlagBasedCost(TypeSpecificValue);
         if (aCursed)
         {
             CurseRandart();
@@ -2826,78 +2812,6 @@ internal sealed class Item : IComparable<Item>
             return max;
         }
         return value;
-    }
-
-    /// <summary>
-    /// Provides base functionality for the type specific real value.  Returns a real value for the type specific characteristics of the item.  Returns
-    /// null, if the item is worthless.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public int? ComputeTypeSpecificRealValue(int value)
-    {
-        if (TypeSpecificValue < 0)
-        {
-            return null; // Worthless
-        }
-
-        if (TypeSpecificValue == 0)
-        {
-            return 0;
-        }
-
-        int bonusValue = 0;
-        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
-        if (mergedCharacteristics.Str)
-        {
-            bonusValue += TypeSpecificValue * 200;
-        }
-        if (mergedCharacteristics.Int)
-        {
-            bonusValue += TypeSpecificValue * 200;
-        }
-        if (mergedCharacteristics.Wis)
-        {
-            bonusValue += TypeSpecificValue * 200;
-        }
-        if (mergedCharacteristics.Dex)
-        {
-            bonusValue += TypeSpecificValue * 200;
-        }
-        if (mergedCharacteristics.Con)
-        {
-            bonusValue += TypeSpecificValue * 200;
-        }
-        if (mergedCharacteristics.Cha)
-        {
-            bonusValue += TypeSpecificValue * 200;
-        }
-        if (mergedCharacteristics.Stealth)
-        {
-            bonusValue += TypeSpecificValue * 100;
-        }
-        if (mergedCharacteristics.Search)
-        {
-            bonusValue += TypeSpecificValue * 100;
-        }
-        if (mergedCharacteristics.Infra)
-        {
-            bonusValue += TypeSpecificValue * 50;
-        }
-        if (mergedCharacteristics.Tunnel)
-        {
-            bonusValue += TypeSpecificValue * 50;
-        }
-        if (mergedCharacteristics.Blows)
-        {
-            bonusValue += TypeSpecificValue * 5000;
-        }
-        if (mergedCharacteristics.Speed)
-        {
-            bonusValue += TypeSpecificValue * 3000;
-        }
-        return bonusValue;
     }
 
     /// <summary>

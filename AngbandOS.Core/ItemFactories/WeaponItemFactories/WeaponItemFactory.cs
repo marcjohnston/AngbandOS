@@ -34,10 +34,12 @@ internal abstract class WeaponItemFactory : ItemFactory
         item.BonusDamage += Game.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
     }
 
-    public override int? GetBonusRealValue(Item item, int value)
+    public override int? GetBonusRealValue(Item item)
     {
-        if (item.BonusHit + item.BonusDamage < 0)
+        if (item.TypeSpecificValue < 0 || item.BonusHit + item.BonusDamage < 0)
+        {
             return null;
+        }
 
         int bonusValue = 0;
         bonusValue += (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
@@ -46,19 +48,6 @@ internal abstract class WeaponItemFactory : ItemFactory
             bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * 100;
         }
         return bonusValue;
-    }
-
-    public override bool IsWorthless(Item item)
-    {
-        if (item.TypeSpecificValue < 0)
-        {
-            return true;
-        }
-        if (item.BonusHit + item.BonusDamage < 0)
-        {
-            return true;
-        }
-        return false;
     }
 
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)

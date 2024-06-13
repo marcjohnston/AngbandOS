@@ -481,16 +481,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual string Identify(Item item) => null;
 
     /// <summary>
-    /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
-    /// </summary>
-    public virtual bool IsWorthless(Item item) => false;
-
-    /// <summary>
     /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.  Returns null, if the item is worthless.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual int? GetBonusRealValue(Item item, int value) => 0;
+    public virtual int? GetBonusRealValue(Item item) => 0;
 
     public virtual void ApplySlayingForRandomArtifactCreation(Item item)
     {
