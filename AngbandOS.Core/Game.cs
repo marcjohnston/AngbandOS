@@ -3757,7 +3757,7 @@ public bool IsDead = false;
             if (kPtr.DepthsFoundAndChances != null)
             {
                 // For each depth and chance found, increment the depth table.
-                foreach ((int depth, int chance) in kPtr.DepthsFoundAndChances)
+                foreach ((int depth, int _) in kPtr.DepthsFoundAndChances)
                 {
                     AllocKindSize++;
                     itemCountPerLevel[depth]++;
