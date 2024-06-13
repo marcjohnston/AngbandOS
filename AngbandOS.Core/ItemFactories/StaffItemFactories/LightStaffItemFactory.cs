@@ -35,4 +35,5 @@ internal class LightStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 13;
 }

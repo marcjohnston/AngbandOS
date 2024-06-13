@@ -41,4 +41,5 @@ internal class StarlightStaffItemFactory : StaffItemFactory
         }
         eventArgs.Identified = true;
     }
+    public override int StaffChargeValue => 40;
 }

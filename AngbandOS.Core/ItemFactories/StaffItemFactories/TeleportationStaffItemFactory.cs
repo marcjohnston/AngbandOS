@@ -32,4 +32,5 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
         Game.RunScriptInt(nameof(TeleportSelfScript), 100);
         eventArgs.Identified = true;
     }
+    public override int StaffChargeValue => 100;
 }

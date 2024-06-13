@@ -32,4 +32,5 @@ internal class DragonsFrostWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(ColdBall80R3IdentifableDirectionalScript);
+    public override int WandChargeValue => 120;
 }

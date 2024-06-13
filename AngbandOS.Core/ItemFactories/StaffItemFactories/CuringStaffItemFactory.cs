@@ -56,4 +56,5 @@ internal class CuringStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 50;
 }

@@ -28,4 +28,6 @@ internal class AcidBoltWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(AcidBolt3D8R2IdentifableDirectionalScript);
+    public override int WandChargeValue => 48;
+
 }

@@ -36,4 +36,5 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 35;
 }

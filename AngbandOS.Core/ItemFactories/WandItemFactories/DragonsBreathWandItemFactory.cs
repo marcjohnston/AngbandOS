@@ -32,4 +32,5 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(DragonsBreathIdentifableDirectionalScript);
+    public override int WandChargeValue => 120;
 }

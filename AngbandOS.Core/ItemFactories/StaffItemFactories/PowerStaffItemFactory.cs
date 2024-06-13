@@ -34,4 +34,5 @@ internal class PowerStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 200;
 }

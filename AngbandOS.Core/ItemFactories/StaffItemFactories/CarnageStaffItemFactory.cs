@@ -32,4 +32,5 @@ internal class CarnageStaffItemFactory : StaffItemFactory
         Game.RunScript(nameof(GenocideScript));
         eventArgs.Identified = true;
     }
+    public override int StaffChargeValue => 180;
 }

@@ -295,6 +295,9 @@ internal sealed class Item : IComparable<Item>
 
     public int StaffChargesRemaining = 0;
 
+    /// <summary>
+    /// Returns the number of wand charges remaining.
+    /// </summary>
     public int WandChargesRemaining = 0;
 
     public int RodRechargeTimeRemaining = 0;
@@ -1546,7 +1549,7 @@ internal sealed class Item : IComparable<Item>
     /// Returns the actual value of the item.  This real value may not be known, if the item is unknown.  This real value is also used by the Alchemy script to convert the item into gold.
     /// </summary>
     /// <returns></returns>
-    public int RealValue()
+    public int GetRealValue()
     {
         if (Factory.Cost == 0)
         {
@@ -1936,6 +1939,9 @@ internal sealed class Item : IComparable<Item>
             value += TypeSpecificValue * Game.BonusSpeedlValue;
         }
 
+        value += Factory.WandChargeValue * WandChargesRemaining;
+        value += Factory.StaffChargeValue * StaffChargesRemaining;
+
         int? bonusValue = Factory.GetBonusRealValue(this);
         if (bonusValue == null)
         {
@@ -1993,7 +1999,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            value = RealValue();
+            value = GetRealValue();
         }
         else
         {

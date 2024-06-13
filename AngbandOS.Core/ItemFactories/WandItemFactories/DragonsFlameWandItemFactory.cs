@@ -32,4 +32,5 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(FireBall100R3IdentifableDirectionalScript);
+    public override int WandChargeValue => 120;
 }

@@ -35,4 +35,5 @@ internal class DetectEvilStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 18;
 }

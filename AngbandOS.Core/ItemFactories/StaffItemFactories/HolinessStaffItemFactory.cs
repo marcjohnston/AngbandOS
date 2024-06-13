@@ -59,4 +59,5 @@ internal class HolinessStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 225;
 }

@@ -28,4 +28,5 @@ internal class ScareMonsterWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(ScareMonster10IdentifableDirectionalScript);
+    public override int WandChargeValue => 25;
 }

@@ -28,4 +28,5 @@ internal class TeleportOtherWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(TeleportMonsterIdentifableDirectionalScript);
+    public override int WandChargeValue => 18;
 }

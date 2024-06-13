@@ -39,4 +39,5 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 25;
 }

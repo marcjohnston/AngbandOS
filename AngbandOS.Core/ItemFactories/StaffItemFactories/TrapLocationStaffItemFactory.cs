@@ -36,4 +36,5 @@ internal class TrapLocationStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 18;
 }

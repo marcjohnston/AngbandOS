@@ -28,4 +28,5 @@ internal class StinkingCloudWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(StinkingCloud12R2IdentifableDirectionalScript);
+    public override int WandChargeValue => 20;
 }

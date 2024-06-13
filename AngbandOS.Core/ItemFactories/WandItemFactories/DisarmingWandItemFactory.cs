@@ -28,4 +28,5 @@ internal class DisarmingWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(DisarmTrapIdentifableDirectionalScript);
+    public override int WandChargeValue => 35;
 }

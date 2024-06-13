@@ -29,4 +29,5 @@ internal class FireBallsWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(FireBall72R2IdentifableDirectionalScript);
+    public override int WandChargeValue => 90;
 }

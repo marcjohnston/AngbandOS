@@ -29,4 +29,5 @@ internal class AcidBallWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(AcidBall60R2IdentifableDirectionalScript);
+    public override int WandChargeValue => 83; 
 }

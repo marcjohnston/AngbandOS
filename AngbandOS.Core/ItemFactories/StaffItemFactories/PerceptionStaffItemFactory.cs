@@ -36,4 +36,5 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
         }
         eventArgs.Identified = true;
     }
+    public override int StaffChargeValue => 20;
 }

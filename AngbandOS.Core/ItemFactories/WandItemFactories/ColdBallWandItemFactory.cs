@@ -29,4 +29,5 @@ internal class ColdBallWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override string? ActivateWandScriptName => nameof(ColdBall48R2IdentifableDirectionalScript);
+    public override int WandChargeValue => 75;
 }

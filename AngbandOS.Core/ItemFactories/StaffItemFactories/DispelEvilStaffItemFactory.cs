@@ -34,4 +34,5 @@ internal class DispelEvilStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 60;
 }

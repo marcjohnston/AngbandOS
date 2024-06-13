@@ -33,4 +33,5 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     public override int Weight => 10;
 
     protected override string? ActivateWandScriptName => nameof(ShardBall1D50P75R2IdentifableDirectionalScript);
+    public override int WandChargeValue => 4500;
 }

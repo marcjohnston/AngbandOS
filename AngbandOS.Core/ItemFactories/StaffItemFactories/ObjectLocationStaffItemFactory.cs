@@ -35,4 +35,5 @@ internal class ObjectLocationStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 10;
 }

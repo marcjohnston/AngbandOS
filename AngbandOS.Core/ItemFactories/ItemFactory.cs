@@ -17,6 +17,16 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns the value of each wand charge.  Returns 0, by default.
+    /// </summary>
+    public virtual int WandChargeValue => 0;
+
+    /// <summary>
+    /// Returns the value of each staff charge.  Returns 0, by default.
+    /// </summary>
+    public virtual int StaffChargeValue => 0;
+
+    /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
     /// </summary>
     public virtual bool IsBroken => false;
@@ -1002,7 +1012,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual (int level, int chance)[]? DepthsFoundAndChances => null;
 
     /// <summary>
-    /// Returns the real cost of a standard item.  Returns 0 by default.
+    /// Returns the real cost of a standard item.  Returns 0 by default.  For wands and staffs, this value should be the value of an item with no charges.  An empty wand or staff should
+    /// still have some value because it can be recharged.
     /// </summary>
     public virtual int Cost => 0;
 

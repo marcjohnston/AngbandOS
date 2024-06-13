@@ -42,4 +42,5 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
             Game.MsgPrint("Your feel your head clear.");
         }
     }
+    public override int StaffChargeValue => 225;
 }

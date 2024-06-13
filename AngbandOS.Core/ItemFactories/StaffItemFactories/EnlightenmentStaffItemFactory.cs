@@ -33,4 +33,5 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
         Game.RunScript(nameof(MapAreaScript));
         eventArgs.Identified = true;
     }
+    public override int StaffChargeValue => 38;
 }

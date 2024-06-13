@@ -42,4 +42,5 @@ internal class HealingStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 250;
 }

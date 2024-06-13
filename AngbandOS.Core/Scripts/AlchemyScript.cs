@@ -70,7 +70,7 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
             Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
             return true;
         }
-        int price = oPtr.RealValue();
+        int price = oPtr.GetRealValue();
         if (price <= 0)
         {
             Game.MsgPrint($"You turn {oName} to fool's gold.");

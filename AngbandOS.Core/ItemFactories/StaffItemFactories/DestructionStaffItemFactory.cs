@@ -34,4 +34,5 @@ internal class DestructionStaffItemFactory : StaffItemFactory
         Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
         eventArgs.Identified = true;
     }
+    public override int StaffChargeValue => 125;
 }

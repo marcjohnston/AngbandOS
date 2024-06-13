@@ -32,4 +32,5 @@ internal class ProbingStaffItemFactory : StaffItemFactory
         Game.Probing();
         eventArgs.Identified = true;
     }
+    public override int StaffChargeValue => 200;
 }

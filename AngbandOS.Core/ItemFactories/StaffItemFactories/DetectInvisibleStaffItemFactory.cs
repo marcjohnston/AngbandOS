@@ -35,4 +35,5 @@ internal class DetectInvisibleStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
+    public override int StaffChargeValue => 10;
 }
