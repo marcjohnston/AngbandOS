@@ -273,27 +273,27 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
-                ItemCharacteristics itemCharacteristics;
-                int typeSpecificValue;
-
                 Item? item = Game.GetInventoryItem(i);
                 if (item == null)
                 {
-                    itemCharacteristics = new ItemCharacteristics();
-                    typeSpecificValue = 0;
+                    ShowBonus(false, false, 0, row + 0, col);
+                    ShowBonus(false, false, 0, row + 1, col);
+                    ShowBonus(false, false, 0, row + 2, col);
+                    ShowBonus(false, false, 0, row + 3, col);
+                    ShowBonus(false, false, 0, row + 4, col);
+                    ShowBonus(false, false, 0, row + 5, col);
                 }
                 else
                 {
                     // Only extract known bonuses, not full bonuses
-                    itemCharacteristics = item.ObjectFlagsKnown();
-                    typeSpecificValue = item.TypeSpecificValue;
+                    ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);
+                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, item.TypeSpecificValue, row + 1, col);
+                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, item.TypeSpecificValue, row + 2, col);
+                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, item.TypeSpecificValue, row + 3, col);
+                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, item.TypeSpecificValue, row + 4, col);
+                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, item.TypeSpecificValue, row + 5, col);
                 }
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, typeSpecificValue, row + 0, col);
-                ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, typeSpecificValue, row + 1, col);
-                ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, typeSpecificValue, row + 2, col);
-                ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, typeSpecificValue, row + 3, col);
-                ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, typeSpecificValue, row + 4, col);
-                ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, typeSpecificValue, row + 5, col);
                 col++;
             }
         }
