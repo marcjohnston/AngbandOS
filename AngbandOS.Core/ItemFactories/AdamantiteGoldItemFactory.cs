@@ -16,7 +16,7 @@ internal class AdamantiteGoldItemFactory : ItemFactory
     public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "adamantite";
 
-    protected override string InitialGoldPieces => "2d80x4";
+    protected override string InitialGoldPiecesRollExpression => "2d80x4";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

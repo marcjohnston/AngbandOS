@@ -16,7 +16,7 @@ internal class Silver1GoldItemFactory : ItemFactory
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "silver*";
 
-    protected override string InitialGoldPieces => "2d7x4";
+    protected override string InitialGoldPiecesRollExpression => "2d7x4";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

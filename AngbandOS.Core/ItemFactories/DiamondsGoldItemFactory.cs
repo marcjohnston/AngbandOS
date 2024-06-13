@@ -16,7 +16,7 @@ internal class DiamondsGoldItemFactory : ItemFactory
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "diamonds";
 
-    protected override string InitialGoldPieces => "2d28x4";
+    protected override string InitialGoldPiecesRollExpression => "2d28x4";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

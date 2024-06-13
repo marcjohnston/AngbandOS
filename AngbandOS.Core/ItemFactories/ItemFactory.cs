@@ -455,7 +455,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Returns null, by default.  This property is used
     /// to bind the <see cref="MassProduceTuples"/> property during the bind phase.  The tuples must be sorted by cost and are checked during the bind phase.
     /// </summary>
-    protected virtual (int, string)[]? MassProduceTupleNames => null;
+    protected virtual (int count, string rollExpression)[]? MassProduceTupleNames => null;
 
     public (int, Roll)[]? MassProduceTuples { get; private set; }
 
@@ -876,9 +876,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         else
         {
             List<(int, Roll)> massProduceTuplesList = new List<(int, Roll)>();
-            foreach ((int cost, string rollSyntax) in MassProduceTupleNames)
+            foreach ((int cost, string rollExpression) in MassProduceTupleNames)
             {
-                (int, Roll) newTuple = (cost, Game.ParseRollExpression(rollSyntax));
+                (int, Roll) newTuple = (cost, Game.ParseRollExpression(rollExpression));
                 massProduceTuplesList.Add(newTuple);
             }
             MassProduceTuples = massProduceTuplesList.ToArray();
@@ -890,7 +890,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             }
         }
 
-        InitialGoldPiecesRoll = Game.ParseRollExpression(InitialGoldPieces);
+        InitialGoldPiecesRoll = Game.ParseRollExpression(InitialGoldPiecesRollExpression);
         EatScript = Game.SingletonRepository.GetNullable<IIdentifableScript>(EatScriptName);
 
         // Flavorless items will default to simply use the item name.
@@ -1058,14 +1058,14 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual int InitialNutritionalValue => 0;
 
     /// <summary>
-    /// Returns the initial gold pieces that are given to the player when the item is picked up.  This property must conform to the <see cref="Roll"/> syntax for parsing.  
+    /// Returns the roll expression to determine the initial gold pieces that are given to the player when the item is picked up.  This property must conform to the <see cref="Roll"/> syntax for parsing.  
     /// See <see cref="Game.ParseRollExpression"/> for syntax details.  This property is used to bind the <see cref="InitialGoldPiecesRoll"/> property during the bind phase.
     /// </summary>
-    protected virtual string InitialGoldPieces => "0";
+    protected virtual string InitialGoldPiecesRollExpression => "0";
 
     /// <summary>
     /// Returns a Roll that is used to determine the number of gold pieces that are given to the player when the item is picked up.  This property is bound from the
-    /// <see cref="InitialGoldPieces"/> property during the bind phase.
+    /// <see cref="InitialGoldPiecesRollExpression"/> property during the bind phase.
     /// </summary>
     public Roll InitialGoldPiecesRoll { get; private set; }
 
