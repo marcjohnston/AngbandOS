@@ -72,14 +72,14 @@ internal class PaladinCharacterClass : BaseCharacterClass
         {
             if (Game.Studies<LifeRealm>())
             {
-                if (item.Category == ItemTypeEnum.DeathBook)
+                if (item.Factory.CategoryEnum == ItemTypeEnum.DeathBook)
                 {
                     GainExperienceFromSpellBookDestroy(item, amount);
                 }
             }
             else
             {
-                if (item.Category == ItemTypeEnum.LifeBook)
+                if (item.Factory.CategoryEnum == ItemTypeEnum.LifeBook)
                 {
                     GainExperienceFromSpellBookDestroy(item, amount);
                 }

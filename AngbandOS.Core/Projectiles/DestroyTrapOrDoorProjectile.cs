@@ -43,7 +43,7 @@ internal class DestroyTrapOrDoorProjectile : Projectile
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {
-            if (oPtr.Category == ItemTypeEnum.Chest)
+            if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Chest)
             {
                 if (!oPtr.ContainerIsOpen && oPtr.ContainerTraps != null)
                 {

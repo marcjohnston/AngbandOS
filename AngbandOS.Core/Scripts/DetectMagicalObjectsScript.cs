@@ -30,7 +30,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
                     {
                         continue;
                     }
-                    ItemTypeEnum tv = oPtr.Category;
+                    ItemTypeEnum tv = oPtr.Factory.CategoryEnum;
                     if (oPtr.IsArtifact != null || oPtr.IsRare() ||
                         tv == ItemTypeEnum.Amulet || tv == ItemTypeEnum.Ring || tv == ItemTypeEnum.Staff ||
                         tv == ItemTypeEnum.Wand || tv == ItemTypeEnum.Rod || tv == ItemTypeEnum.Scroll ||

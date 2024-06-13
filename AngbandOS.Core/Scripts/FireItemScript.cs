@@ -32,7 +32,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
         WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
         Item? missileWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
-        if (missileWeapon == null || missileWeapon.Category == 0)
+        if (missileWeapon == null || missileWeapon.Factory.CategoryEnum == 0)
         {
             Game.MsgPrint("You have nothing to fire with.");
             return;

@@ -809,7 +809,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.DisplayedAttackBonus += Game.ExperienceLevel.IntValue / 5;
                     Game.DisplayedDamageBonus += Game.ExperienceLevel.IntValue / 5;
                 }
-                if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.Category == ItemTypeEnum.Sword || oPtr.Category == ItemTypeEnum.Polearm))
+                if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.Factory.CategoryEnum == ItemTypeEnum.Sword || oPtr.Factory.CategoryEnum == ItemTypeEnum.Polearm))
                 {
                     Game.AttackBonus -= 2;
                     Game.DamageBonus -= 2;

@@ -4918,7 +4918,7 @@ public bool IsDead = false;
                     {
                         continue;
                     }
-                    if (oPtr.Category == ItemTypeEnum.Gold)
+                    if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Gold)
                     {
                         oPtr.Marked = true;
                         MainForm.RefreshMapLocation(y, x);
@@ -5353,7 +5353,7 @@ public bool IsDead = false;
         bool isArtifact = oPtr.IsArtifact;
         ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
         int prob = oPtr.Count * 100;
-        if (oPtr.Category == ItemTypeEnum.Bolt || oPtr.Category == ItemTypeEnum.Arrow || oPtr.Category == ItemTypeEnum.Shot)
+        if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Bolt || oPtr.Factory.CategoryEnum == ItemTypeEnum.Arrow || oPtr.Factory.CategoryEnum == ItemTypeEnum.Shot)
         {
             prob /= 20;
         }
@@ -6884,7 +6884,7 @@ public bool IsDead = false;
             return false;
         }
         // Cost to channel is based on how much the item is worth and what type
-        switch (item.Category)
+        switch (item.Factory.CategoryEnum)
         {
             case ItemTypeEnum.Wand:
                 cost = price / 150;
@@ -6944,7 +6944,7 @@ public bool IsDead = false;
                 continue;
             }
             // If the item is a spike, return it
-            if (item.Category == ItemTypeEnum.Spike)
+            if (item.Factory.CategoryEnum == ItemTypeEnum.Spike)
             {
                 inventoryIndex = i;
                 return true;
@@ -7294,7 +7294,7 @@ public bool IsDead = false;
             string itemName = item.GetFullDescription(true);
             Disturb(false);
             // We always pick up gold
-            if (item.Category == ItemTypeEnum.Gold)
+            if (item.Factory.CategoryEnum == ItemTypeEnum.Gold)
             {
                 MsgPrint($"You collect {item.GoldPieces} gold pieces worth of {itemName}.");
                 Gold.IntValue += item.GoldPieces;
@@ -14755,7 +14755,7 @@ public bool IsDead = false;
 
     public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
     {
-        if (item.Category == ItemTypeEnum.Gold)
+        if (item.Factory.CategoryEnum == ItemTypeEnum.Gold)
         {
             return false;
         }
@@ -14947,7 +14947,7 @@ public bool IsDead = false;
         GridTile cPtr = Map.Grid[y][x];
         foreach (Item oPtr in cPtr.Items)
         {
-            if (oPtr.Category == ItemTypeEnum.Chest)
+            if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Chest)
             {
                 return oPtr;
             }

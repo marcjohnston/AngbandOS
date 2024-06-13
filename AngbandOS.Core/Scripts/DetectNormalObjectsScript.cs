@@ -26,7 +26,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ISuccessByChanceScri
                     {
                         continue;
                     }
-                    if (oPtr.Category != ItemTypeEnum.Gold)
+                    if (oPtr.Factory.CategoryEnum != ItemTypeEnum.Gold)
                     {
                         oPtr.Marked = true;
                         Game.MainForm.RefreshMapLocation(y, x);

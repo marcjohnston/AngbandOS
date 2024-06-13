@@ -37,7 +37,7 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
         foreach (int index in InventorySlots)
         {
             Item? oPtr = Game.GetInventoryItem(index);
-            if (oPtr != null && oPtr.Category == ItemTypeEnum.Light)
+            if (oPtr != null && oPtr.Factory.CategoryEnum == ItemTypeEnum.Light)
             {
                 if (oPtr.Factory.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
                 {

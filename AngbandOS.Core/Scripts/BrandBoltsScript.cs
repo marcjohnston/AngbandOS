@@ -36,7 +36,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessByChanceScript, ICanc
         {
             // Find a set of non-artifact bolts in our inventory
             Item? item = Game.GetInventoryItem(i);
-            if (item == null || item.Category != ItemTypeEnum.Bolt)
+            if (item == null || item.Factory.CategoryEnum != ItemTypeEnum.Bolt)
             {
                 continue;
             }

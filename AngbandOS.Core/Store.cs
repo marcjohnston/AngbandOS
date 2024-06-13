@@ -262,7 +262,7 @@ internal class Store
             newItem.IdentityIsStoreBought = true;
 
             // Chests cannot be created for stores.
-            if (newItem.Category == ItemTypeEnum.Chest)
+            if (newItem.Factory.CategoryEnum == ItemTypeEnum.Chest)
             {
                 continue;
             }

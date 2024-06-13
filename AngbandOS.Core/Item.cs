@@ -536,9 +536,6 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public bool IsRandomArtifact => RandomArtifactName != null;
 
-    [Obsolete]
-    public ItemTypeEnum Category => Factory.CategoryEnum; // TODO: Provided for backwards compatibility.  Will be deleted.
-
     public void Absorb(Item other)
     {
         int total = Count + other.Count;
