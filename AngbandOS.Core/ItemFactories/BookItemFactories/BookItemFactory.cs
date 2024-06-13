@@ -18,6 +18,11 @@ internal abstract class BookItemFactory : ItemFactory
         Spells = Game.SingletonRepository.Get<Spell>(SpellNames);
     }
 
+    /// <summary>
+    /// Returns true, because books are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
     public void SetBookIndex(Realm realm, int bookIndex)
     {
         BookIndex = bookIndex;

@@ -75,6 +75,11 @@ internal abstract class WandItemFactory : ItemFactory
     }
 
 
+    /// <summary>
+    /// Returns true, because wands are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
     public override int PercentageBreakageChance => 25;
     public override bool IsRechargable => true;
 

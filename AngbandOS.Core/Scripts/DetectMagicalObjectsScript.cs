@@ -30,14 +30,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
                     {
                         continue;
                     }
-                    ItemTypeEnum tv = oPtr.Factory.CategoryEnum;
-                    if (oPtr.IsArtifact != null || oPtr.IsRare() ||
-                        tv == ItemTypeEnum.Amulet || tv == ItemTypeEnum.Ring || tv == ItemTypeEnum.Staff ||
-                        tv == ItemTypeEnum.Wand || tv == ItemTypeEnum.Rod || tv == ItemTypeEnum.Scroll ||
-                        tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
-                        tv == ItemTypeEnum.NatureBook || tv == ItemTypeEnum.ChaosBook || tv == ItemTypeEnum.DeathBook ||
-                        tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
-                        oPtr.BonusArmorClass > 0 || oPtr.BonusHit + oPtr.BonusDamage > 0)
+                    if (oPtr.IsArtifact || oPtr.IsRare() || oPtr.Factory.IsMagical || oPtr.BonusArmorClass > 0 || oPtr.BonusHit + oPtr.BonusDamage > 0)
                     {
                         oPtr.WasNoticed = true;
                         Game.MainForm.RefreshMapLocation(y, x);

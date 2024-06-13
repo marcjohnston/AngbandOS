@@ -17,6 +17,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns true, if the item is magical and is noticed with the detect magical scoll.
+    /// </summary>
+    public virtual bool IsMagical => false;
+
+    /// <summary>
     /// Returns the roll expression used to determine the initial number of staff charges that will be given to the item at item creation; or null, if the item is not a staff.  null is returns, 
     /// by default.  This property is used to bind the <see cref="StaffChargeCount"/> property during the bind phase.
     /// </summary>

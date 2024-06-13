@@ -27,6 +27,11 @@ internal abstract class RingItemFactory : JewelleryItemFactory
         }
     }
 
+    /// <summary>
+    /// Returns true, because rings are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
     public RingItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(RingsItemClass);
 

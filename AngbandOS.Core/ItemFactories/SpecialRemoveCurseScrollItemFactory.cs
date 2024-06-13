@@ -10,7 +10,12 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SpecialRemoveCurseScrollItemFactory : ItemFactory
 {
-    private SpecialRemoveCurseScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private SpecialRemoveCurseScrollItemFactory(Game game) : base(game) { } // This object is a singleton
+
+    /// <summary>
+    /// Returns true, because scrolls are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "*Remove Curse*";

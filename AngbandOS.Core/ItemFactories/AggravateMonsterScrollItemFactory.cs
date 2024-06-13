@@ -9,7 +9,12 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AggravateMonsterScrollItemFactory : ItemFactory
 {
-    private AggravateMonsterScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private AggravateMonsterScrollItemFactory(Game game) : base(game) { } // This object is a singleton
+
+    /// <summary>
+    /// Returns true, because scrolls are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
 
     public override bool IsBroken => true;
     /// <summary>

@@ -101,6 +101,11 @@ internal abstract class RodItemFactory : ItemFactory
         return s;
     }
 
+    /// <summary>
+    /// Returns true, because rods are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
     public override bool IsRechargable => true;
     public override bool CanBeZapped => true;
 

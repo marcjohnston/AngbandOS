@@ -90,6 +90,11 @@ internal abstract class StaffItemFactory : ItemFactory
 
     public override bool CanBeUsed => true;
 
+    /// <summary>
+    /// Returns true, because staffs are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
     public override bool IsRechargable => true;
 
     /// <summary>

@@ -11,6 +11,12 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class PotionItemFactory : ItemFactory
 {
     public PotionItemFactory(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns true, because potions are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
     protected override string ItemClassName => nameof(PotionsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

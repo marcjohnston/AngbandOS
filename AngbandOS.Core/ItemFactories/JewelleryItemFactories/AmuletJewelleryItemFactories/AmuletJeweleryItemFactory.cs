@@ -18,6 +18,11 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.Neck;
 
+    /// <summary>
+    /// Returns true, because amulets are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
     protected override string ItemClassName => nameof(AmuletsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(NeckInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
