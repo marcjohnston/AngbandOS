@@ -27,7 +27,7 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
     };
     public override int Weight => 50;
 
-    public override int StaffChargeCount => Game.DieRoll(5) + 6;
+    public override string? StaffChargeCountRollExpression => "1d5+6";
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {

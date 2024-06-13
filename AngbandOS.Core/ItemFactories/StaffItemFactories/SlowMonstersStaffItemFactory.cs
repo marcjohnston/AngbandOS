@@ -17,7 +17,7 @@ internal class SlowMonstersStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override int StaffChargeCount => Game.DieRoll(5) + 6;
+    public override string? StaffChargeCountRollExpression => "1d5+6";
 
     public override int Cost => 800;
     public override int DamageDice => 1;

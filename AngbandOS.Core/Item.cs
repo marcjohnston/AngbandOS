@@ -323,6 +323,12 @@ internal sealed class Item : IComparable<Item>
         GoldPieces = Factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
         WandChargesRemaining = Factory.RodChargeCount;
+
+        if (Factory.StaffChargeCount != null)
+        {
+            StaffChargesRemaining = Factory.StaffChargeCount.Get(Game.UseRandom);
+        }
+
         Count = 1;
         Weight = Factory.Weight;
         BonusHit = Factory.BonusHit;

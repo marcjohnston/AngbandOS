@@ -19,7 +19,7 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int Cost => 500;
     public override int DamageDice => 1;
-    public override int StaffChargeCount => Game.DieRoll(3) + 4;
+    public override string? StaffChargeCountRollExpression => "1d3+4";
     public override int DamageSides => 2;
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

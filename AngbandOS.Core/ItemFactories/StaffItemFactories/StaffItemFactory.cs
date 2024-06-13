@@ -15,13 +15,6 @@ internal abstract class StaffItemFactory : ItemFactory
     public StaffItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(StaffsItemClass);
 
-    public abstract int StaffChargeCount { get; }
-
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        item.StaffChargesRemaining = StaffChargeCount;
-    }
-
     public override void Recharge(Item oPtr, int num)
     {
         int i, t;

@@ -12,7 +12,7 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
 {
     private TeleportationStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override int StaffChargeCount => Game.DieRoll(4) + 5;
+    public override string? StaffChargeCountRollExpression => "1d4+5";
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Teleportation";
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";

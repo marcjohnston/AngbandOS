@@ -17827,6 +17827,16 @@ public bool IsDead = false;
         }
     }
 
+    public Roll? ParseNullableRollExpression(string? expression)
+    {
+        if (expression == null)
+        {
+            return null;
+        }
+
+        return ParseRollExpression(expression);
+    }
+
     /// <summary>
     /// Returns a Roll object from a roll expression (examples: 1d2x3+4, 1d2xX+4, 100).  The expression supports both integer and dice-notation formats.
     /// </summary>

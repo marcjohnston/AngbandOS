@@ -17,6 +17,18 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns the roll expression used to determine the initial number of staff charges that will be given to the item at item creation; or null, if the item is not a staff.  null is returns, 
+    /// by default.  This property is used to bind the <see cref="StaffChargeCount"/> property during the bind phase.
+    /// </summary>
+    public virtual string? StaffChargeCountRollExpression => null;
+
+    /// <summary>
+    /// Returns the number of staff charges that will be given to the item at item creation; or 0, if the item is not a staff.  0 is returns, by default.  This property is bound using the
+    /// <see cref="StaffChargeCountRollExpression"/> property during the bind phase.
+    /// </summary>
+    public Roll? StaffChargeCount { get; private set; } = null;
+
+    /// <summary>
     /// Returns the value of each turn of light for light sources.  Returns 0, by default;
     /// </summary>
     public virtual int TurnOfLightValue => 0;
@@ -896,6 +908,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
         ActivateWandScript = Game.SingletonRepository.GetNullable<IIdentifableDirectionalScript>(ActivateWandScriptName);
         ActivateScrollScript = Game.SingletonRepository.GetNullable<IIdentifableAndUsedScript>(ActivateScrollScriptName);
+
+        StaffChargeCount = Game.ParseNullableRollExpression(StaffChargeCountRollExpression);
     }
 
     protected abstract string ItemClassName { get; }

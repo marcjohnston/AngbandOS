@@ -17,7 +17,7 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override int StaffChargeCount => Game.DieRoll(15) + 5;
+    public override string? StaffChargeCountRollExpression => "1d15+5";
     public override int Cost => 400;
     public override int DamageDice => 1;
     public override int DamageSides => 2;

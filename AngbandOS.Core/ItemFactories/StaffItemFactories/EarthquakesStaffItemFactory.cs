@@ -17,7 +17,7 @@ internal class EarthquakesStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override int StaffChargeCount => Game.DieRoll(5) + 3;
+    public override string? StaffChargeCountRollExpression => "1d5+3";
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 2;

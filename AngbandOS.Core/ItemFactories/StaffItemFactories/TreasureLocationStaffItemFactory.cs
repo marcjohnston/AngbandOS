@@ -17,7 +17,7 @@ internal class TreasureLocationStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override int StaffChargeCount => Game.DieRoll(20) + 8;
+    public override string? StaffChargeCountRollExpression => "1d20+8";
 
     public override int Cost => 200;
     public override int DamageDice => 1;
