@@ -1580,316 +1580,288 @@ internal sealed class Item : IComparable<Item>
         }
         if (mergedCharacteristics.Vampiric)
         {
-            value += 13000;
+            value += Game.BonusVampiricValue;
         }
         if (mergedCharacteristics.AntiTheft)
         {
-            value += 0;
+            value += Game.BonusAntiTheftValue;
         }
         if (mergedCharacteristics.SlayAnimal)
         {
-            value += 3500;
+            value += Game.BonusSlayAnimalValue;
         }
         if (mergedCharacteristics.SlayEvil)
         {
-            value += 4500;
+            value += Game.BonusSlayEvilValue;
         }
         if (mergedCharacteristics.SlayUndead)
         {
-            value += 3500;
+            value += Game.BonusSlayUndeadValue;
         }
         if (mergedCharacteristics.SlayDemon)
         {
-            value += 3500;
+            value += Game.BonusSlayDemonValue;
         }
         if (mergedCharacteristics.SlayOrc)
         {
-            value += 3000;
+            value += Game.BonusSlayOrcValue;
         }
         if (mergedCharacteristics.SlayTroll)
         {
-            value += 3500;
+            value += Game.BonusSlayTrollValue;
         }
         if (mergedCharacteristics.SlayGiant)
         {
-            value += 3500;
+            value += Game.BonusSlayGiantlValue;
         }
         if (mergedCharacteristics.SlayDragon)
         {
-            value += 3500;
+            value += Game.BonusSlayDragonValue;
         }
         if (mergedCharacteristics.KillDragon)
         {
-            value += 5500;
+            value += Game.BonusKillDragonValue;
         }
         if (mergedCharacteristics.Vorpal)
         {
-            value += 5000;
+            value += Game.BonusVorpalValue;
         }
         if (mergedCharacteristics.Impact)
         {
-            value += 5000;
+            value += Game.BonusImpactValue;
         }
         if (mergedCharacteristics.BrandPois)
         {
-            value += 7500;
+            value += Game.BonusBrandPoisValue;
         }
         if (mergedCharacteristics.BrandAcid)
         {
-            value += 7500;
+            value += Game.BonusBrandAcidValue;
         }
         if (mergedCharacteristics.BrandElec)
         {
-            value += 7500;
+            value += Game.BonusBrandElecValue;
         }
         if (mergedCharacteristics.BrandFire)
         {
-            value += 5000;
+            value += Game.BonusBrandFireValue;
         }
         if (mergedCharacteristics.BrandCold)
         {
-            value += 5000;
+            value += Game.BonusBrandColdValue;
         }
         if (mergedCharacteristics.SustStr)
         {
-            value += 850;
+            value += Game.BonusSustStrValue;
         }
         if (mergedCharacteristics.SustInt)
         {
-            value += 850;
+            value += Game.BonusSustIntValue;
         }
         if (mergedCharacteristics.SustWis)
         {
-            value += 850;
+            value += Game.BonusSustWisValue;
         }
         if (mergedCharacteristics.SustDex)
         {
-            value += 850;
+            value += Game.BonusSustDexValue;
         }
         if (mergedCharacteristics.SustCon)
         {
-            value += 850;
+            value += Game.BonusSustConValue;
         }
         if (mergedCharacteristics.SustCha)
         {
-            value += 250;
+            value += Game.BonusSustChaValue;
         }
         if (mergedCharacteristics.ImAcid)
         {
-            value += 10000;
+            value += Game.BonusImAcidValue;
         }
         if (mergedCharacteristics.ImElec)
         {
-            value += 10000;
+            value += Game.BonusImElecValue;
         }
         if (mergedCharacteristics.ImFire)
         {
-            value += 10000;
+            value += Game.BonusImFireValue;
         }
         if (mergedCharacteristics.ImCold)
         {
-            value += 10000;
+            value += Game.BonusImColdValue;
         }
         if (mergedCharacteristics.Reflect)
         {
-            value += 10000;
+            value += Game.BonusReflectValue;
         }
         if (mergedCharacteristics.FreeAct)
         {
-            value += 4500;
+            value += Game.BonusFreeActValue;
         }
         if (mergedCharacteristics.HoldLife)
         {
-            value += 8500;
+            value += Game.BonusHoldLifeValue;
         }
         if (mergedCharacteristics.ResAcid)
         {
-            value += 1250;
+            value += Game.BonusResAcidValue;
         }
         if (mergedCharacteristics.ResElec)
         {
-            value += 1250;
+            value += Game.BonusResElecValue;
         }
         if (mergedCharacteristics.ResFire)
         {
-            value += 1250;
+            value += Game.BonusResFireValue;
         }
         if (mergedCharacteristics.ResCold)
         {
-            value += 1250;
+            value += Game.BonusResColdValue;
         }
         if (mergedCharacteristics.ResPois)
         {
-            value += 2500;
+            value += Game.BonusResPoisValue;
         }
         if (mergedCharacteristics.ResFear)
         {
-            value += 2500;
+            value += Game.BonusResFearValue;
         }
         if (mergedCharacteristics.ResLight)
         {
-            value += 1750;
+            value += Game.BonusResLightValue;
         }
         if (mergedCharacteristics.ResDark)
         {
-            value += 1750;
+            value += Game.BonusResDarkValue;
         }
         if (mergedCharacteristics.ResBlind)
         {
-            value += 2000;
+            value += Game.BonusResBlindValue;
         }
         if (mergedCharacteristics.ResConf)
         {
-            value += 2000;
+            value += Game.BonusResConfValue;
         }
         if (mergedCharacteristics.ResSound)
         {
-            value += 2000;
+            value += Game.BonusResSoundValue;
         }
         if (mergedCharacteristics.ResShards)
         {
-            value += 2000;
+            value += Game.BonusResShardsValue;
         }
         if (mergedCharacteristics.ResNether)
         {
-            value += 2000;
+            value += Game.BonusResNetherValue;
         }
         if (mergedCharacteristics.ResNexus)
         {
-            value += 2000;
+            value += Game.BonusResNexusValue;
         }
         if (mergedCharacteristics.ResChaos)
         {
-            value += 2000;
+            value += Game.BonusResChaosValue;
         }
         if (mergedCharacteristics.ResDisen)
         {
-            value += 10000;
+            value += Game.BonusResDisenValue;
         }
         if (mergedCharacteristics.ShFire)
         {
-            value += 5000;
+            value += Game.BonusShFireValue;
         }
         if (mergedCharacteristics.ShElec)
         {
-            value += 5000;
+            value += Game.BonusShElecValue;
         }
         if (mergedCharacteristics.NoTele)
         {
-            value += 2500;
+            value += Game.BonusNoTeleValue;
         }
         if (mergedCharacteristics.NoMagic)
         {
-            value += 2500;
+            value += Game.BonusNoMagicValue;
         }
         if (mergedCharacteristics.Wraith)
         {
-            value += 250000;
+            value += Game.BonusWraithValue;
         }
         if (mergedCharacteristics.DreadCurse)
         {
-            value -= 15000;
-        }
-        if (mergedCharacteristics.EasyKnow)
-        {
-            value += 0;
-        }
-        if (mergedCharacteristics.HideType)
-        {
-            value += 0;
-        }
-        if (mergedCharacteristics.ShowMods)
-        {
-            value += 0;
+            value += Game.BonusDreadCurseValue;
         }
         if (mergedCharacteristics.Feather)
         {
-            value += 1250;
-        }
-        if (mergedCharacteristics.Radius > 0)
-        {
-            value += 1250;
+            value += Game.BonusFeatherValue;
         }
         if (mergedCharacteristics.SeeInvis)
         {
-            value += 2000;
+            value += Game.BonusSeeInvisValue;
         }
         if (mergedCharacteristics.Telepathy)
         {
-            value += 12500;
+            value += Game.BonusTelepathyValue;
         }
         if (mergedCharacteristics.SlowDigest)
         {
-            value += 750;
+            value += Game.BonusSlowDigestValue;
         }
         if (mergedCharacteristics.Regen)
         {
-            value += 2500;
+            value += Game.BonusRegenValue;
         }
         if (mergedCharacteristics.XtraMight)
         {
-            value += 2250;
+            value += Game.BonusXtraMightValue;
         }
         if (mergedCharacteristics.XtraShots)
         {
-            value += 10000;
+            value += Game.BonusXtraShotsValue;
         }
         if (mergedCharacteristics.IgnoreAcid)
         {
-            value += 100;
+            value += Game.BonusIgnoreAcidValue;
         }
         if (mergedCharacteristics.IgnoreElec)
         {
-            value += 100;
+            value += Game.BonusIgnoreElecValue;
         }
         if (mergedCharacteristics.IgnoreFire)
         {
-            value += 100;
+            value += Game.BonusIgnoreFireValue;
         }
         if (mergedCharacteristics.IgnoreCold)
         {
-            value += 100;
+            value += Game.BonusIgnoreColdValue;
         }
         if (mergedCharacteristics.DrainExp)
         {
-            value -= 12500;
+            value += Game.BonusDrainExpValue;
         }
         if (mergedCharacteristics.Teleport)
         {
-            if (IsCursed)
-            {
-                value -= 7500;
-            }
-            else
-            {
-                value += 250;
-            }
+            value += Game.BonusTeleportValue;
         }
         if (mergedCharacteristics.Aggravate)
         {
-            value -= 10000;
+            value += Game.BonusAggravateValue;
         }
         if (mergedCharacteristics.Blessed)
         {
-            value += 750;
+            value += Game.BonusBlessedValue;
         }
         if (mergedCharacteristics.IsCursed)
         {
-            value -= 5000;
+            value += Game.BonusIsCursedValue;
         }
         if (mergedCharacteristics.HeavyCurse)
         {
-            value -= 12500;
+            value += Game.BonusHeavyCurseValue;
         }
         if (mergedCharacteristics.PermaCurse)
         {
-            value -= 15000;
+            value += Game.BonusPermaCurseValue;
         }
-        if (mergedCharacteristics.Activation != null)
-        {
-            value += mergedCharacteristics.Activation.Value;
-        }
-
         if (mergedCharacteristics.Str)
         {
             value += TypeSpecificValue * Game.BonusStrengthValue;
@@ -1937,6 +1909,11 @@ internal sealed class Item : IComparable<Item>
         if (mergedCharacteristics.Speed)
         {
             value += TypeSpecificValue * Game.BonusSpeedlValue;
+        }
+
+        if (mergedCharacteristics.Activation != null)
+        {
+            value += mergedCharacteristics.Activation.Value;
         }
 
         value += Factory.WandChargeValue * WandChargesRemaining;

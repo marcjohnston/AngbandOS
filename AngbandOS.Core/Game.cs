@@ -57,71 +57,429 @@ internal class Game
     public int? MaximumLightLevel { get; set; } = 5;
 
     /// <summary>
-    /// Returns the value of items that offer strength modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that offer strength modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusStrengthValue = 1200;
 
     /// <summary>
-    /// Returns the value of items that offer intelligence modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that offer intelligence modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusIntelligenceValue = 1200;
 
     /// <summary>
-    /// Returns the value of items that offer wisdom modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that offer wisdom modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusWisdomValue = 1200;
 
     /// <summary>
-    /// Returns the value of items that offer dexterity modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the dexterity modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusDexterityValue = 1200;
 
     /// <summary>
-    /// Returns the value of items that offer constitution modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the constitution modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusConstitutionValue = 1200;
 
     /// <summary>
-    /// Returns the value of items that offer charisma modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the charisma modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusCharismaValue = 450;
 
     /// <summary>
-    /// Returns the value of items that offer stealth modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the stealth modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusStealthValue = 350;
 
     /// <summary>
-    /// Returns the value of items that offer search modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the search modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusSearchValue = 200;
 
     /// <summary>
-    /// Returns the value of items that offer infravision modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the infravision modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusInfravisionValue = 200;
 
     /// <summary>
-    /// Returns the value of items that offer tunnel modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the tunnel modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusTunnelValue = 225;
 
     /// <summary>
-    /// Returns the value of items that offer extra blows modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the extra blows modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusExtraBlowslValue = 7000;
 
     /// <summary>
-    /// Returns the value of items that offer speed modifiers.  Each bonus unit is assigned this much value.
+    /// Returns the additive value of items that have the speed modifiers.  Each bonus unit is assigned this much value.
     /// </summary>
     public int BonusSpeedlValue = 33000;
 
     /// <summary>
-    /// Returns the value of items that offer a chaotic modifier.
+    /// Returns the additive value of items that have the chaotic modifier.
     /// </summary>
     public int BonusChaoticValue = 10000;
 
-    public bool IsDead;
+    /// <summary>
+    /// Returns the additive value of items that have the vampiric modifier.
+    /// </summary>
+    public int BonusVampiricValue = 13000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the anti-theft modifier.
+    /// </summary>
+    public int BonusAntiTheftValue = 0;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-animal modifier.
+    /// </summary>
+    public int BonusSlayAnimalValue = 3500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-evil modifier.
+    /// </summary>
+    public int BonusSlayEvilValue = 4500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-undead modifier.
+    /// </summary>
+    public int BonusSlayUndeadValue = 3500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-demon modifier.
+    /// </summary>
+    public int BonusSlayDemonValue = 3500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-orc modifier.
+    /// </summary>
+    public int BonusSlayOrcValue = 3000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-troll modifier.
+    /// </summary>
+    public int BonusSlayTrollValue = 3500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-giant modifier.
+    /// </summary>
+    public int BonusSlayGiantlValue = 3500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slay-dragon modifier.
+    /// </summary>
+    public int BonusSlayDragonValue = 3500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the kill-dragon modifier.
+    /// </summary>
+    public int BonusKillDragonValue = 5500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the vorpal modifier.
+    /// </summary>
+    public int BonusVorpalValue = 5000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the impact modifier.
+    /// </summary>
+    public int BonusImpactValue = 5000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the poison-branding modifier.
+    /// </summary>
+    public int BonusBrandPoisValue = 7500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the acid-branding modifier.
+    /// </summary>
+    public int BonusBrandAcidValue = 7500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the electricity-branding modifier.
+    /// </summary>
+    public int BonusBrandElecValue = 7500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the fire-branding modifier.
+    /// </summary>
+    public int BonusBrandFireValue = 5000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the cold-branding modifier.
+    /// </summary>
+    public int BonusBrandColdValue = 5000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sustain-strength modifier.
+    /// </summary>
+    public int BonusSustStrValue = 850;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sustain-intelligence modifier.
+    /// </summary>
+    public int BonusSustIntValue = 850;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sustain-wisdom modifier.
+    /// </summary>
+    public int BonusSustWisValue = 850;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sustain-dexterity modifier.
+    /// </summary>
+    public int BonusSustDexValue = 850;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sustain-constitution modifier.
+    /// </summary>
+    public int BonusSustConValue = 850;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sustain-charisma modifier.
+    /// </summary>
+    public int BonusSustChaValue = 250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the acid-immunity modifier.
+    /// </summary>
+    public int BonusImAcidValue = 10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the electricity-immunity modifier.
+    /// </summary>
+    public int BonusImElecValue = 10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the fire-immunity modifier.
+    /// </summary>
+    public int BonusImFireValue = 10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the cold-immunity modifier.
+    /// </summary>
+    public int BonusImColdValue = 10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the bolts-and-arrows-reflection modifier.
+    /// </summary>
+    public int BonusReflectValue = 10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the free-action modifier.
+    /// </summary>
+    public int BonusFreeActValue = 4500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the hold-life-experiences modifier.
+    /// </summary>
+    public int BonusHoldLifeValue = 8500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the acid-resistance modifier.
+    /// </summary>
+    public int BonusResAcidValue = 1250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the electricity-resistance modifier.
+    /// </summary>
+    public int BonusResElecValue = 1250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the fire-resistance modifier.
+    /// </summary>
+    public int BonusResFireValue = 1250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the cold-resistance modifier.
+    /// </summary>
+    public int BonusResColdValue = 1250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the poison-resistance modifier.
+    /// </summary>
+    public int BonusResPoisValue = 2500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the fear-resistance modifier.
+    /// </summary>
+    public int BonusResFearValue = 2500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the light-resistance modifier.
+    /// </summary>
+    public int BonusResLightValue = 1750;
+
+    /// <summary>
+    /// Returns the additive value of items that have the darkness-resistance modifier.
+    /// </summary>
+    public int BonusResDarkValue = 1750;
+
+    /// <summary>
+    /// Returns the additive value of items that have the blindness-resistance modifier.
+    /// </summary>
+    public int BonusResBlindValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the confusion-resistance modifier.
+    /// </summary>
+    public int BonusResConfValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sound-resistance modifier.
+    /// </summary>
+    public int BonusResSoundValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the shards-resistance modifier.
+    /// </summary>
+    public int BonusResShardsValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the nether-resistance modifier.
+    /// </summary>
+    public int BonusResNetherValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the nexus-resistance modifier.
+    /// </summary>
+    public int BonusResNexusValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the chaos-resistance modifier.
+    /// </summary>
+    public int BonusResChaosValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the disenchantment-resistance modifier.
+    /// </summary>
+    public int BonusResDisenValue = 10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sheath-of-fire modifier.
+    /// </summary>
+    public int BonusShFireValue = 5000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the sheath-of-electricity modifier.
+    /// </summary>
+    public int BonusShElecValue = 5000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the teleportation-immunity modifier.
+    /// </summary>
+    public int BonusNoTeleValue = 2500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the magic-immunity modifier.
+    /// </summary>
+    public int BonusNoMagicValue = 2500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the wraith-form modifier.
+    /// </summary>
+    public int BonusWraithValue = 250000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the dread-curse modifier.
+    /// </summary>
+    public int BonusDreadCurseValue = -15000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the feather-fall modifier.
+    /// </summary>
+    public int BonusFeatherValue = 1250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the see-invisible modifier.
+    /// </summary>
+    public int BonusSeeInvisValue = 2000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the telepathy modifier.
+    /// </summary>
+    public int BonusTelepathyValue = 12500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the slow-digestion modifier.
+    /// </summary>
+    public int BonusSlowDigestValue = 750;
+
+    /// <summary>
+    /// Returns the additive value of items that have the regeneration modifier.
+    /// </summary>
+    public int BonusRegenValue = 2500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the extra-might modifier.
+    /// </summary>
+    public int BonusXtraMightValue = 2250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the extra-shots modifier.
+    /// </summary>
+    public int BonusXtraShotsValue = 10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the ignore-acid modifier.
+    /// </summary>
+    public int BonusIgnoreAcidValue = 100;
+
+    /// <summary>
+    /// Returns the additive value of items that have the ignore-electricity modifier.
+    /// </summary>
+    public int BonusIgnoreElecValue = 100;
+
+    /// <summary>
+    /// Returns the additive value of items that have the ignore-fire modifier.
+    /// </summary>
+    public int BonusIgnoreFireValue = 100;
+
+    /// <summary>
+    /// Returns the additive value of items that have the ignore-cold modifier.
+    /// </summary>
+    public int BonusIgnoreColdValue = 100;
+
+    /// <summary>
+    /// Returns the additive value of items that have the drain-experience modifier.
+    /// </summary>
+    public int BonusDrainExpValue = -12500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the teleport modifier.
+    /// </summary>
+    public int BonusTeleportValue = 250;
+
+    /// <summary>
+    /// Returns the additive value of items that have the aggravate modifier.
+    /// </summary>
+    public int BonusAggravateValue = -10000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the blessed modifier.
+    /// </summary>
+    public int BonusBlessedValue = 750;
+
+    /// <summary>
+    /// Returns the additive value of items that have the cursed modifier.
+    /// </summary>
+    public int BonusIsCursedValue = -5000;
+
+    /// <summary>
+    /// Returns the additive value of items that have the heavy-curse modifier.
+    /// </summary>
+    public int BonusHeavyCurseValue = -12500;
+
+    /// <summary>
+    /// Returns the additive value of items that have the permanent-curse modifier.
+    /// </summary>
+    public int BonusPermaCurseValue = -15000;
+
+/// <summary>
+/// Returns true, if the player is dead; false, otherwise.
+/// </summary>
+public bool IsDead = false;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
 
