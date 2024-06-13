@@ -489,7 +489,7 @@ internal abstract class BaseCharacterClass : IGetKey
 
             // Create an item from the factory.
             Item item = new Item(Game, outfitItemFactory);
-            if (outfitItemFactory.CategoryEnum == ItemTypeEnum.Wand)
+            if (outfitItemFactory.CanBeAimed)
             {
                 item.WandChargesRemaining = 1;
             }

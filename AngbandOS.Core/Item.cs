@@ -821,7 +821,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Only open chests can be combined; otherwise, chests are never combined.
-        if (Factory.CategoryEnum == ItemTypeEnum.Chest && !ContainerIsOpen || other.Factory.CategoryEnum == ItemTypeEnum.Chest && !other.ContainerIsOpen)
+        if (Factory.IsContainer && !ContainerIsOpen || other.Factory.IsContainer && !other.ContainerIsOpen)
         {
             return false;
         }

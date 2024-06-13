@@ -58,7 +58,7 @@ internal class HellfireProjectile : Projectile
                 {
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }
-                bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
+                bool isPotion = oPtr.Factory.CanBeQuaffed;
                 Game.DeleteObject(oPtr);
                 if (isPotion)
                 {

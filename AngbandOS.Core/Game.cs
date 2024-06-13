@@ -2102,7 +2102,7 @@ public bool IsDead = false;
             table[i].FinalProbability = 0;
             int kIdx = table[i].Index;
             ItemFactory kPtr = SingletonRepository.Get<ItemFactory>(kIdx);
-            if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemTypeEnum.Chest)
+            if (doNotAllowChestToBeCreated && kPtr.IsContainer)
             {
                 continue;
             }
@@ -8063,7 +8063,7 @@ public bool IsDead = false;
                     {
                         // Let the player know what happens to the monster
                         MessagePain(monster, damage);
-                        if (monster.SmFriendly && missile.Factory.CategoryEnum != ItemTypeEnum.Potion)
+                        if (monster.SmFriendly && !missile.Factory.CanBeQuaffed)
                         {
                             string mName = monster.Name;
                             MsgPrint($"{mName} gets angry!");
@@ -8083,7 +8083,7 @@ public bool IsDead = false;
         // There's a chance of breakage if we hit a creature
         int chanceToBreak = hitBody ? missile.Factory.PercentageBreakageChance : 0;
         // If we hit with a potion, the potion might affect the creature
-        if (missile.Factory.CategoryEnum == ItemTypeEnum.Potion)
+        if (missile.Factory.CanBeQuaffed)
         {
             if (hitBody || !GridPassable(newY, newX) || DieRoll(100) < chanceToBreak)
             {
@@ -14593,7 +14593,7 @@ public bool IsDead = false;
                     string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
                     string w = amt > 1 ? "were" : "was";
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
-                    if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion)
+                    if (oPtr.Factory.CanBeQuaffed)
                     {
                         PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                         potion.Smash(0, MapY.IntValue, MapX.IntValue);
@@ -14947,7 +14947,7 @@ public bool IsDead = false;
         GridTile cPtr = Map.Grid[y][x];
         foreach (Item oPtr in cPtr.Items)
         {
-            if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Chest)
+            if (oPtr.Factory.IsContainer)
             {
                 return oPtr;
             }
