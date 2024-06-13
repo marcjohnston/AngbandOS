@@ -1799,10 +1799,6 @@ internal sealed class Item : IComparable<Item>
         {
             value += 0;
         }
-        if (mergedCharacteristics.InstaArt)
-        {
-            value += 0;
-        }
         if (mergedCharacteristics.Feather)
         {
             value += 1250;

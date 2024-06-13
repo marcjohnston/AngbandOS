@@ -105,8 +105,6 @@ internal interface IItemCharacteristics
     /// </summary>
     bool Infra { get; }
 
-    bool InstaArt { get; }
-
     /// <summary>
     /// Returns whether or not the item affects the intelligence of the player when being worn.
     /// </summary>
