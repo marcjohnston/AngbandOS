@@ -1286,7 +1286,7 @@ internal class Monster : IItemContainer
                             }
                             // And pick up the actual item
                             Game.ExciseObject(item);
-                            item.Marked = false;
+                            item.WasNoticed = false;
                             item.Y = 0;
                             item.X = 0;
                             item.HoldingMonsterIndex = GetMonsterIndex();

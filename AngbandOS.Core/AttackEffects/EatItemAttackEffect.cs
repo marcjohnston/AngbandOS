@@ -39,7 +39,7 @@ internal class EatItemAttackEffect : AttackEffect
                 // Give the item to the thief so it can later drop it
                 Item stolenItem = item.Clone();
                 stolenItem.Count = 1;
-                stolenItem.Marked = false;
+                stolenItem.WasNoticed = false;
 
                 Game.AddItemToMonster(item.Clone(), monster);
 

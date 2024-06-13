@@ -39,7 +39,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
                         tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
                         oPtr.BonusArmorClass > 0 || oPtr.BonusHit + oPtr.BonusDamage > 0)
                     {
-                        oPtr.Marked = true;
+                        oPtr.WasNoticed = true;
                         Game.MainForm.RefreshMapLocation(y, x);
                         detect = true;
                     }

@@ -1752,7 +1752,7 @@ public bool IsDead = false;
             // If there's an item there we weren't previously aware of then we must stop moving
             foreach (Item item in tile.Items)
             {
-                if (item.Marked)
+                if (item.WasNoticed)
                 {
                     return true;
                 }
@@ -4920,7 +4920,7 @@ public bool IsDead = false;
                     }
                     if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Gold)
                     {
-                        oPtr.Marked = true;
+                        oPtr.WasNoticed = true;
                         MainForm.RefreshMapLocation(y, x);
                         detect = true;
                     }
@@ -12795,7 +12795,7 @@ public bool IsDead = false;
         }
         foreach (Item oPtr in cPtr.Items)
         {
-            if (oPtr.Marked)
+            if (oPtr.WasNoticed)
             {
                 return true;
             }
@@ -12927,7 +12927,7 @@ public bool IsDead = false;
             bool exitDo = false;
             foreach (Item oPtr in cPtr.Items)
             {
-                if (oPtr.Marked)
+                if (oPtr.WasNoticed)
                 {
                     boring = false;
                     string oName = oPtr.GetFullDescription(true);
@@ -15435,7 +15435,7 @@ public bool IsDead = false;
         }
         foreach (Item oPtr in cPtr.Items)
         {
-            oPtr.Marked = true;
+            oPtr.WasNoticed = true;
         }
         if (!cPtr.PlayerMemorized)
         {
@@ -15905,7 +15905,7 @@ public bool IsDead = false;
         }
         foreach (Item oPtr in cPtr.Items)
         {
-            if (oPtr.Marked)
+            if (oPtr.WasNoticed)
             {
                 character = oPtr.Factory.FlavorSymbol.Character;
                 color = oPtr.Factory.FlavorColor;

@@ -40,7 +40,7 @@ internal class LightScript : Script, IScript
                 }
                 foreach (Item oPtr in cPtr.Items)
                 {
-                    oPtr.Marked = true;
+                    oPtr.WasNoticed = true;
                 }
             }
         }

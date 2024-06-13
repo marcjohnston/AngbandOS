@@ -263,7 +263,10 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    public bool Marked;
+    /// <summary>
+    /// Returns true, if this item has been noticed and/or detected by the player.  Unnoticed items will cause the player to stop running.
+    /// </summary>
+    public bool WasNoticed = false;
 
     /// <summary>
     /// Returns the number of turns remaining to recharge the activation.
@@ -493,7 +496,7 @@ internal sealed class Item : IComparable<Item>
 
         clonedItem.X = X;
         clonedItem.Y = Y;
-        clonedItem.Marked = Marked;
+        clonedItem.WasNoticed = WasNoticed;
         clonedItem.FixedArtifact = FixedArtifact;
         clonedItem.RareItem = RareItem;
         clonedItem.Inscription = Inscription;

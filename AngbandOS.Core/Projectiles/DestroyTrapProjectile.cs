@@ -52,7 +52,7 @@ internal class DestroyTrapProjectile : Projectile
                 {
                     oPtr.ContainerTraps = null;
                     oPtr.BecomeKnown();
-                    if (oPtr.Marked)
+                    if (oPtr.WasNoticed)
                     {
                         Game.MsgPrint("Click!");
                         obvious = true;

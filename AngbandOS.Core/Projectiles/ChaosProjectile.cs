@@ -39,14 +39,14 @@ internal class ChaosProjectile : Projectile
             {
                 ignore = true;
             }
-            if (oPtr.Marked)
+            if (oPtr.WasNoticed)
             {
                 obvious = true;
                 oName = oPtr.GetDescription(false);
             }
             if (oPtr.IsArtifact || ignore)
             {
-                if (oPtr.Marked)
+                if (oPtr.WasNoticed)
                 {
                     string s = plural ? "are" : "is";
                     Game.MsgPrint($"The {oName} {s} unaffected!");
@@ -54,7 +54,7 @@ internal class ChaosProjectile : Projectile
             }
             else
             {
-                if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
                 {
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }

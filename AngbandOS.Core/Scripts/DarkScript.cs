@@ -26,7 +26,7 @@ internal class DarkScript : Script, IScript
                 cPtr.PlayerMemorized = false;
                 foreach (Item oPtr in cPtr.Items)
                 {
-                    oPtr.Marked = false;
+                    oPtr.WasNoticed = false;
                 }
             }
         }

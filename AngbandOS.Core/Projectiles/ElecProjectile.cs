@@ -45,14 +45,14 @@ internal class ElecProjectile : Projectile
             {
                 continue;
             }
-            if (oPtr.Marked)
+            if (oPtr.WasNoticed)
             {
                 obvious = true;
                 oName = oPtr.GetDescription(false);
             }
             if (oPtr.IsArtifact || ignore)
             {
-                if (!oPtr.Marked)
+                if (!oPtr.WasNoticed)
                 {
                     continue;
                 }
@@ -61,7 +61,7 @@ internal class ElecProjectile : Projectile
             }
             else
             {
-                if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
                 {
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }
