@@ -38,7 +38,7 @@ internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusStrength => 3;
     public override int Rarity => 50;
     public override bool Regen => true;
     public override bool SeeInvis => true;

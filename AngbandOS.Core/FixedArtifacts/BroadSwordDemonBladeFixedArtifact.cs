@@ -33,7 +33,11 @@ internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override int InitialTypeSpecificValue => 2;
+    public override int InitialBonusExtraBlows => 2;
+    public override int InitialBonusCharisma => 2;
+    public override int InitialBonusDexterity => 2;
+    public override int InitialBonusSpeed => 2;
+    public override int InitialBonusStealth => 2;
     public override int Rarity => 15;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;

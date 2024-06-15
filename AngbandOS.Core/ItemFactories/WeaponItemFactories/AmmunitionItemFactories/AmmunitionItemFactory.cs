@@ -12,11 +12,8 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
 {
     public AmmunitionItemFactory(Game game) : base(game) { }
 
-    public override int? GetBonusRealValue(Item item)
+    public override int GetBonusRealValue(Item item)
     {
-        if (item.BonusHit + item.BonusDamage < 0)
-            return null;
-
         int bonusValue = (item.BonusHit + item.BonusDamage) * 5;
         if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
         {

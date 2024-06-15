@@ -35,7 +35,9 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override int InitialTypeSpecificValue => 4;
+    public override int InitialBonusConstitution => 4;
+    public override int InitialBonusDexterity => 4;
+    public override int InitialBonusStrength => 4;
     public override int Rarity => 45;
     public override bool Regen => true;
     public override bool ResChaos => true;

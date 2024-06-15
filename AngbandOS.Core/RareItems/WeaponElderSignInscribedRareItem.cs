@@ -18,7 +18,7 @@ internal class WeaponElderSignInscribedRareItem : RareItem
     public override bool Blessed => true;
     public override int Cost => 20000;
     public override string FriendlyName => "(Elder Sign Inscribed)";
-    public override int MaxPval => 4;
+    public override int MaxBonusWisdom => 4;
     public override int MaxToA => 4;
     public override int MaxToD => 6;
     public override int MaxToH => 6;
@@ -28,5 +28,5 @@ internal class WeaponElderSignInscribedRareItem : RareItem
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-        public override bool Wis => true;
+    public override bool Wis => true;
 }

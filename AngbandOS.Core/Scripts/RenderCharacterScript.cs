@@ -173,7 +173,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         }
     }
 
-    private void ShowBonus(bool hasSustain, bool hasStat, int typeSpecificValue, int row, int col)
+    private void ShowBonus(bool hasSustain, bool hasStat, int bonusValue, int row, int col)
     {
         if (hasSustain)
         {
@@ -183,25 +183,25 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         else if (hasStat)
         {
             // Show stat
-            if (typeSpecificValue <= -10)
+            if (bonusValue <= -10)
             {
                 // Max display for negative value
                 Game.Screen.Print(ColorEnum.Red, "*", row, col);
             }
-            else if (typeSpecificValue < 0)
+            else if (bonusValue < 0)
             {
                 // Display negative value
-                Game.Screen.Print(ColorEnum.Red, (char)('0' - (char)typeSpecificValue), row, col);
+                Game.Screen.Print(ColorEnum.Red, (char)('0' - (char)bonusValue), row, col);
             }
-            else if (typeSpecificValue >= 10)
+            else if (bonusValue >= 10)
             {
                 // Display max 
                 Game.Screen.Print(ColorEnum.Green, "*", row, col);
             }
-            else if (typeSpecificValue > 0)
+            else if (bonusValue > 0)
             {
                 // Display positive value
-                Game.Screen.Print(ColorEnum.Green, (char)('0' + (char)typeSpecificValue), row, col);
+                Game.Screen.Print(ColorEnum.Green, (char)('0' + (char)bonusValue), row, col);
             }
         }
         else
@@ -287,12 +287,12 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
                 {
                     // Only extract known bonuses, not full bonuses
                     ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
-                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);
-                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, item.TypeSpecificValue, row + 1, col);
-                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, item.TypeSpecificValue, row + 2, col);
-                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, item.TypeSpecificValue, row + 3, col);
-                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, item.TypeSpecificValue, row + 4, col);
-                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, item.TypeSpecificValue, row + 5, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.BonusStrength, row + 0, col);
+                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, item.BonusIntelligence, row + 1, col);
+                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, item.BonusWisdom, row + 2, col);
+                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, item.BonusDexterity, row + 3, col);
+                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, item.BonusConstitution, row + 4, col);
+                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, item.BonusCharisma, row + 5, col);
                 }
                 col++;
             }

@@ -29,7 +29,8 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Infra => true;
     public override int Level => 30;
-    public override int InitialTypeSpecificValue => 10;
+    public override int InitialBonusInfravision => 10;
+    public override int InitialBonusTunnel => 10;
     public override int Rarity => 8;
     public override bool ResAcid => true;
     public override bool ResCold => true;

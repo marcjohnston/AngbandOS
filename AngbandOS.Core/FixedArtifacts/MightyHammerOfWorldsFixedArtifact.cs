@@ -33,7 +33,6 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     public override bool KillDragon => true;
     public override int Level => 100;
     public override bool NoMagic => true;
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 1;
     public override bool ResAcid => true;
     public override bool ResCold => true;

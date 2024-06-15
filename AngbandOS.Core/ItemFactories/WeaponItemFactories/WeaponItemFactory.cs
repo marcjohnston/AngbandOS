@@ -34,13 +34,8 @@ internal abstract class WeaponItemFactory : ItemFactory
         item.BonusDamage += Game.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
     }
 
-    public override int? GetBonusRealValue(Item item)
+    public override int GetBonusRealValue(Item item)
     {
-        if (item.TypeSpecificValue < 0 || item.BonusHit + item.BonusDamage < 0)
-        {
-            return null;
-        }
-
         int bonusValue = 0;
         bonusValue += (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
         if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)

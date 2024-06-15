@@ -29,7 +29,7 @@ internal class WeaknessRingItemFactory : RingItemFactory
     {
         (5, 1)
     };
-    public override int InitialTypeSpecificValue => -5;
+    public override int InitialBonusStrength => -5;
     public override bool Str => true;
     public override int Weight => 2;
 }

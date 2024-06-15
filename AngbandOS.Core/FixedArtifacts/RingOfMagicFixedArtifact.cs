@@ -36,7 +36,14 @@ internal class RingOfMagicFixedArtifact : FixedArtifact
     public override bool InstaArt => true;
     public override bool Int => true;
     public override int Level => 50;
-    public override int InitialTypeSpecificValue => 1;
+    public override int InitialBonusCharisma => 1;
+    public override int InitialBonusConstitution => 1;
+    public override int InitialBonusDexterity => 1;
+    public override int InitialBonusIntelligence => 1;
+    public override int InitialBonusSearch => 1;
+    public override int InitialBonusStealth => 1;
+    public override int InitialBonusWisdom => 1;
+    public override int InitialBonusStrength => 1;
     public override int Rarity => 25;
     public override bool ResPois => true;
     public override bool Search => true;

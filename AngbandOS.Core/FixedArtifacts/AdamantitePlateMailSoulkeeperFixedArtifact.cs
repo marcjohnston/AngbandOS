@@ -29,7 +29,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 75;
-    public override int InitialTypeSpecificValue => 2;
+    public override int InitialBonusConstitution => 2;
     public override int Rarity => 9;
     public override bool ResAcid => true;
     public override bool ResChaos => true;

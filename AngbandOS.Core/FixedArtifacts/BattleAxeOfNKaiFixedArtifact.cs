@@ -32,7 +32,9 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusConstitution => 3;
+    public override int InitialBonusStealth => 3;
+    public override int InitialBonusStrength => 3;
     public override int Rarity => 15;
     public override bool Regen => true;
     public override bool ResAcid => true;

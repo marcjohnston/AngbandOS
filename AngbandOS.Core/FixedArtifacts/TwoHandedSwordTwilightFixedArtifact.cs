@@ -39,7 +39,7 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 10;
+    public override int InitialBonusSpeed => 10;
     public override int Rarity => 15;
     public override bool ResDisen => true;
     public override bool ResFear => true;

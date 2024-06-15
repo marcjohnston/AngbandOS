@@ -41,7 +41,6 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 1;
 
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 25;
     public override bool ResAcid => true;
     public override bool ResChaos => true;

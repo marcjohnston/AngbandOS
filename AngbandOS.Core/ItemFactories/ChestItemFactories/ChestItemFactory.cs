@@ -51,7 +51,7 @@ internal abstract class ChestItemFactory : ItemFactory
     }
 
     /// <summary>
-    /// Assigns the TypeSpecificValue for this chest.
+    /// 
     /// </summary>
     /// <param name="level"></param>
     /// <param name="power"></param>

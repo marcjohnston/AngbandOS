@@ -43,7 +43,8 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 2;
+    public override int InitialBonusDexterity => 2;
+    public override int InitialBonusStrength=> 2;
     public override int Rarity => 15;
     public override bool ResLight => true;
     public override bool SeeInvis => true;

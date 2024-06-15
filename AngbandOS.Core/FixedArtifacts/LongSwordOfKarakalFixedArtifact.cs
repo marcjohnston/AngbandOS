@@ -1,4 +1,4 @@
-// AngbandOS: 2022 Marc Johnston
+ // AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -44,7 +44,10 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 2;
+    public override int InitialBonusExtraBlows => 2;
+    public override int InitialBonusConstitution => 2;
+    public override int InitialBonusSpeed => 2;
+    public override int InitialBonusStrength => 2;
     public override int Rarity => 30;
     public override bool Regen => true;
     public override bool ResDark => true;

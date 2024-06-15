@@ -34,7 +34,6 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 8;
     public override bool ResCold => true;
     public override bool ResLight => true;

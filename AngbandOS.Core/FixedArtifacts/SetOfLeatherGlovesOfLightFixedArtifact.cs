@@ -33,7 +33,6 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 3;
     public override bool ResLight => true;
     public override bool SustCon => true;

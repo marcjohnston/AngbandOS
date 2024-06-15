@@ -82,7 +82,7 @@ internal sealed class Item : IComparable<Item>
     public bool IsCursed;
 
     /// <summary>
-    /// This property used to be a flag in the IdentifyFlags.
+    /// Returns true, if the item is broken; false, otherwise.  Broken items are considered worthless, regardless of their other properties.
     /// </summary>
     public bool IsBroken;
 
@@ -283,7 +283,18 @@ internal sealed class Item : IComparable<Item>
     /// Weapons (Blows) - The weapon attacks
     /// FOR ALL EQUIMENT - The bonus value for item.characteristic.(str, int, wis, dex, cha, dex, stealth, search, infra, tunnel, speed and blows
     /// </summary>
-    public int TypeSpecificValue;
+    public int BonusStrength;
+    public int BonusIntelligence;
+    public int BonusWisdom;
+    public int BonusDexterity;
+    public int BonusConstitution;
+    public int BonusCharisma;
+    public int BonusStealth;
+    public int BonusSearch;
+    public int BonusInfravision;
+    public int BonusTunnel;
+    public int BonusAttacks;
+    public int BonusSpeed;
 
     /// <summary>
     /// Returns null if the container is unlocked and can be opened without picking, an empty array, if the container is disarmed and locked, or an array of traps.
@@ -321,7 +332,18 @@ internal sealed class Item : IComparable<Item>
         Factory = factory;
 
         // TODO: The below statements should be in the ApplyMagic method for each factory.
-        TypeSpecificValue = Factory.InitialTypeSpecificValue;
+        BonusStrength = Factory.InitialBonusStrength;
+        BonusIntelligence = Factory.InitialBonusIntelligence;
+        BonusWisdom = Factory.InitialBonusWisdom;
+        BonusDexterity = Factory.InitialBonusDexterity;
+        BonusConstitution = Factory.InitialBonusConstitution;
+        BonusCharisma = Factory.InitialBonusCharisma;
+        BonusStealth = Factory.InitialBonusStealth;
+        BonusSearch = Factory.InitialBonusSearch;
+        BonusInfravision = Factory.InitialBonusInfravision;
+        BonusTunnel = Factory.InitialBonusTunnel;
+        BonusAttacks = Factory.InitialBonusAttacks;
+        BonusSpeed = Factory.InitialBonusSpeed;
         NutritionalValue = Factory.InitialNutritionalValue;        
         GoldPieces = Factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
@@ -501,7 +523,18 @@ internal sealed class Item : IComparable<Item>
         clonedItem.RareItem = RareItem;
         clonedItem.Inscription = Inscription;
         clonedItem.Count = newCount ?? Count;
-        clonedItem.TypeSpecificValue = TypeSpecificValue;
+        clonedItem.BonusStrength = BonusStrength;
+        clonedItem.BonusIntelligence = BonusIntelligence;
+        clonedItem.BonusWisdom = BonusWisdom;
+        clonedItem.BonusDexterity = BonusDexterity;
+        clonedItem.BonusConstitution = BonusConstitution;
+        clonedItem.BonusCharisma = BonusCharisma;
+        clonedItem.BonusStealth = BonusStealth;
+        clonedItem.BonusSearch = BonusSearch;
+        clonedItem.BonusInfravision = BonusInfravision;
+        clonedItem.BonusTunnel = BonusTunnel;
+        clonedItem.BonusAttacks = BonusAttacks;
+        clonedItem.BonusSpeed = BonusSpeed;
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.NutritionalValue = NutritionalValue;
         clonedItem.ActivationRechargeTimeRemaining = ActivationRechargeTimeRemaining;
@@ -818,9 +851,53 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (TypeSpecificValue != other.TypeSpecificValue)
+        if (BonusStrength != other.BonusStrength)
         {
             return false;
+        }
+        if (BonusIntelligence != other.BonusIntelligence)
+        {
+         return false;
+        }
+        if (BonusWisdom != other.BonusWisdom)
+        {
+          return false;
+        }
+        if (BonusDexterity != other.BonusDexterity)
+        {
+          return false;
+        }
+        if (BonusConstitution != other.BonusConstitution)
+        {
+          return false;
+        }
+        if (BonusCharisma != other.BonusCharisma)
+        {
+         return false;
+        }
+        if (BonusStealth != other.BonusStealth)
+        {
+            return false;
+        }
+        if (BonusSearch != other.BonusSearch)
+        {
+           return false;
+        }
+        if (BonusInfravision != other.BonusInfravision)
+        {
+           return false;
+        }
+        if (BonusTunnel != other.BonusTunnel)
+        {
+            return false;
+        }
+        if (BonusAttacks != other.BonusAttacks)
+        {
+           return false;
+        }
+        if (BonusSpeed != other.BonusSpeed)
+        {
+           return false;
         }
 
         // Only open chests can be combined; otherwise, chests are never combined.
@@ -931,8 +1008,7 @@ internal sealed class Item : IComparable<Item>
             }
             else if (FixedArtifact != null)
             {
-                basenm += ' ';
-                basenm += FixedArtifact.FriendlyName;
+                basenm = FixedArtifact.Name;
             }
             else if (RareItem != null)
             {
@@ -1870,51 +1946,51 @@ internal sealed class Item : IComparable<Item>
         }
         if (mergedCharacteristics.Str)
         {
-            value += TypeSpecificValue * Game.BonusStrengthValue;
+            value += BonusStrength * Game.BonusStrengthValue;
         }
         if (mergedCharacteristics.Int)
         {
-            value += TypeSpecificValue * Game.BonusIntelligenceValue;
+            value += BonusIntelligence * Game.BonusIntelligenceValue;
         }
         if (mergedCharacteristics.Wis)
         {
-            value += TypeSpecificValue * Game.BonusWisdomValue;
+            value += BonusWisdom * Game.BonusWisdomValue;
         }
         if (mergedCharacteristics.Dex)
         {
-            value += TypeSpecificValue * Game.BonusDexterityValue;
+            value += BonusDexterity * Game.BonusDexterityValue;
         }
         if (mergedCharacteristics.Con)
         {
-            value += TypeSpecificValue * Game.BonusConstitutionValue;
+            value += BonusConstitution * Game.BonusConstitutionValue;
         }
         if (mergedCharacteristics.Cha)
         {
-            value += TypeSpecificValue * Game.BonusCharismaValue;
+            value += BonusCharisma * Game.BonusCharismaValue;
         }
         if (mergedCharacteristics.Stealth)
         {
-            value += TypeSpecificValue * Game.BonusStealthValue;
+            value += BonusStealth * Game.BonusStealthValue;
         }
         if (mergedCharacteristics.Search)
         {
-            value += TypeSpecificValue * Game.BonusSearchValue;
+            value += BonusSearch * Game.BonusSearchValue;
         }
         if (mergedCharacteristics.Infra)
         {
-            value += TypeSpecificValue * Game.BonusInfravisionValue;
+            value += BonusInfravision * Game.BonusInfravisionValue;
         }
         if (mergedCharacteristics.Tunnel)
         {
-            value += TypeSpecificValue * Game.BonusTunnelValue;
+            value += BonusTunnel * Game.BonusTunnelValue;
         }
         if (mergedCharacteristics.Blows)
         {
-            value += TypeSpecificValue * Game.BonusExtraBlowslValue;
+            value += BonusAttacks * Game.BonusExtraBlowslValue;
         }
         if (mergedCharacteristics.Speed)
         {
-            value += TypeSpecificValue * Game.BonusSpeedlValue;
+            value += BonusSpeed * Game.BonusSpeedlValue;
         }
 
         if (mergedCharacteristics.Activation != null)
@@ -1925,14 +2001,7 @@ internal sealed class Item : IComparable<Item>
         value += Factory.WandChargeValue * WandChargesRemaining;
         value += Factory.StaffChargeValue * StaffChargesRemaining;
         value += Factory.TurnOfLightValue * TurnsOfLightRemaining;
-
-        int? bonusValue = Factory.GetBonusRealValue(this);
-        if (bonusValue == null)
-        {
-            return 0;
-        }
-
-        value += bonusValue.Value;
+        value += Factory.GetBonusRealValue(this);
         return value;
     }
 
@@ -2072,7 +2141,18 @@ internal sealed class Item : IComparable<Item>
         if (FixedArtifact != null)
         {
             FixedArtifact.CurNum = 1;
-            TypeSpecificValue = FixedArtifact.InitialTypeSpecificValue;
+            BonusStrength = FixedArtifact.InitialBonusStrength;
+            BonusIntelligence = FixedArtifact.InitialBonusIntelligence;
+            BonusWisdom = FixedArtifact.InitialBonusWisdom;
+            BonusDexterity = FixedArtifact.InitialBonusDexterity;
+            BonusConstitution = FixedArtifact.InitialBonusConstitution;
+            BonusCharisma = FixedArtifact.InitialBonusCharisma;
+            BonusStealth = FixedArtifact.InitialBonusStealth;
+            BonusSearch = FixedArtifact.InitialBonusSearch;
+            BonusInfravision = FixedArtifact.InitialBonusInfravision;
+            BonusTunnel = FixedArtifact.InitialBonusTunnel;
+            BonusAttacks = FixedArtifact.InitialBonusExtraBlows;
+            BonusSpeed = FixedArtifact.InitialBonusSpeed;
             ArmorClass = FixedArtifact.Ac;
             DamageDice = FixedArtifact.Dd;
             DamageSides = FixedArtifact.Ds;
@@ -2125,9 +2205,53 @@ internal sealed class Item : IComparable<Item>
                 {
                     BonusArmorClass -= Game.DieRoll(RareItem.MaxToA);
                 }
-                if (RareItem.MaxPval != 0)
+                if (RareItem.MaxBonusStrength != 0)
                 {
-                    TypeSpecificValue -= Game.DieRoll(RareItem.MaxPval);
+                    BonusStrength -= Game.DieRoll(RareItem.MaxBonusStrength);
+                }
+                if (RareItem.MaxBonusIntelligence != 0)
+                {
+                    BonusIntelligence -= Game.DieRoll(RareItem.MaxBonusIntelligence);
+                }
+                if (RareItem.MaxBonusWisdom != 0)
+                {
+                    BonusWisdom -= Game.DieRoll(RareItem.MaxBonusWisdom);
+                }
+                if (RareItem.MaxBonusDexterity != 0)
+                {
+                    BonusDexterity -= Game.DieRoll(RareItem.MaxBonusDexterity);
+                }
+                if (RareItem.MaxBonusConstitution != 0)
+                {
+                    BonusConstitution -= Game.DieRoll(RareItem.MaxBonusConstitution);
+                }
+                if (RareItem.MaxBonusCharisma != 0)
+                {
+                    BonusCharisma -= Game.DieRoll(RareItem.MaxBonusCharisma);
+                }
+                if (RareItem.MaxBonusStealth != 0)
+                {
+                    BonusStealth -= Game.DieRoll(RareItem.MaxBonusStealth);
+                }
+                if (RareItem.MaxBonusSearch != 0)
+                {
+                    BonusSearch -= Game.DieRoll(RareItem.MaxBonusSearch);
+                }
+                if (RareItem.MaxBonusInfravision != 0)
+                {
+                    BonusInfravision -= Game.DieRoll(RareItem.MaxBonusInfravision);
+                }
+                if (RareItem.MaxBonusTunnel != 0)
+                {
+                    BonusTunnel -= Game.DieRoll(RareItem.MaxBonusTunnel);
+                }
+                if (RareItem.MaxBonusExtraBlows != 0)
+                {
+                    BonusAttacks -= Game.DieRoll(RareItem.MaxBonusExtraBlows);
+                }
+                if (RareItem.MaxBonusSpeed != 0)
+                {
+                    BonusSpeed -= Game.DieRoll(RareItem.MaxBonusSpeed);
                 }
             }
             else
@@ -2144,9 +2268,53 @@ internal sealed class Item : IComparable<Item>
                 {
                     BonusArmorClass += Game.DieRoll(RareItem.MaxToA);
                 }
-                if (RareItem.MaxPval != 0)
+                if (RareItem.MaxBonusStrength != 0)
                 {
-                    TypeSpecificValue += Game.DieRoll(RareItem.MaxPval);
+                    BonusStrength += Game.DieRoll(RareItem.MaxBonusStrength);
+                }
+                if (RareItem.MaxBonusIntelligence != 0)
+                {
+                    BonusIntelligence += Game.DieRoll(RareItem.MaxBonusIntelligence);
+                }
+                if (RareItem.MaxBonusWisdom != 0)
+                {
+                    BonusWisdom += Game.DieRoll(RareItem.MaxBonusWisdom);
+                }
+                if (RareItem.MaxBonusDexterity != 0)
+                {
+                    BonusDexterity += Game.DieRoll(RareItem.MaxBonusDexterity);
+                }
+                if (RareItem.MaxBonusConstitution != 0)
+                {
+                    BonusConstitution += Game.DieRoll(RareItem.MaxBonusConstitution);
+                }
+                if (RareItem.MaxBonusCharisma != 0)
+                {
+                    BonusCharisma += Game.DieRoll(RareItem.MaxBonusCharisma);
+                }
+                if (RareItem.MaxBonusStealth != 0)
+                {
+                    BonusStealth += Game.DieRoll(RareItem.MaxBonusStealth);
+                }
+                if (RareItem.MaxBonusSearch != 0)
+                {
+                    BonusSearch += Game.DieRoll(RareItem.MaxBonusSearch);
+                }
+                if (RareItem.MaxBonusInfravision != 0)
+                {
+                    BonusInfravision += Game.DieRoll(RareItem.MaxBonusInfravision);
+                }
+                if (RareItem.MaxBonusTunnel != 0)
+                {
+                    BonusTunnel += Game.DieRoll(RareItem.MaxBonusTunnel);
+                }
+                if (RareItem.MaxBonusExtraBlows != 0)
+                {
+                    BonusAttacks += Game.DieRoll(RareItem.MaxBonusExtraBlows);
+                }
+                if (RareItem.MaxBonusSpeed != 0)
+                {
+                    BonusSpeed += Game.DieRoll(RareItem.MaxBonusSpeed);
                 }
             }
             Game.TreasureRating += RareItem.TreasureRating;
@@ -2172,6 +2340,19 @@ internal sealed class Item : IComparable<Item>
         {
             Characteristics.Merge(itemAdditiveBundle);
         }
+    }
+
+    private int EnchantBonus(int bonus)
+    {
+        do
+        {
+            bonus++;
+        } while (bonus < Game.DieRoll(5) || Game.DieRoll(bonus) == 1);
+        if (bonus > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
+        {
+            bonus = 4;
+        }
+        return bonus;
     }
 
     public bool CreateRandomArtifact(bool fromScroll)
@@ -2216,21 +2397,27 @@ internal sealed class Item : IComparable<Item>
                     ApplyRandomBonuses();
                     if (Characteristics.Blows)
                     {
-                        TypeSpecificValue = Game.DieRoll(2) + 1;
+                        BonusAttacks = Game.DieRoll(2) + 1;
+                        if (BonusAttacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
+                        {
+                            BonusAttacks = 4;
+                        }
                     }
                     else
                     {
-                        do
-                        {
-                            TypeSpecificValue++;
-                        } while (TypeSpecificValue < Game.DieRoll(5) || Game.DieRoll(TypeSpecificValue) == 1);
-                    }
-                    if (TypeSpecificValue > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
-                    {
-                        TypeSpecificValue = 4;
+                        BonusStrength = EnchantBonus(BonusStrength);
+                        BonusIntelligence = EnchantBonus(BonusIntelligence);
+                        BonusWisdom = EnchantBonus(BonusWisdom);
+                        BonusDexterity = EnchantBonus(BonusDexterity);
+                        BonusConstitution = EnchantBonus(BonusConstitution);
+                        BonusCharisma = EnchantBonus(BonusCharisma);
+                        BonusStealth = EnchantBonus(BonusStealth);
+                        BonusSearch = EnchantBonus(BonusSearch);
+                        BonusInfravision = EnchantBonus(BonusInfravision);
+                        BonusTunnel = EnchantBonus(BonusTunnel);
+                        BonusSpeed = EnchantBonus(BonusSpeed);
                     }
                     break;
-
                 case 3:
                 case 4:
                     if (Characteristics.ArtifactBias != null)
@@ -2699,9 +2886,53 @@ internal sealed class Item : IComparable<Item>
 
     private void CurseRandart()
     {
-        if (TypeSpecificValue != 0)
+        if (BonusStrength != 0)
         {
-            TypeSpecificValue = 0 - (TypeSpecificValue + Game.DieRoll(4));
+            BonusStrength = 0 - (BonusStrength + Game.DieRoll(4));
+        }
+        if (BonusIntelligence != 0)
+        {
+            BonusIntelligence = 0 - (BonusIntelligence + Game.DieRoll(4));
+        }
+        if (BonusWisdom != 0)
+        {
+            BonusWisdom = 0 - (BonusWisdom + Game.DieRoll(4));
+        }
+        if (BonusDexterity != 0)
+        {
+            BonusDexterity = 0 - (BonusDexterity + Game.DieRoll(4));
+        }
+        if (BonusConstitution != 0)
+        {
+            BonusConstitution = 0 - (BonusConstitution + Game.DieRoll(4));
+        }
+        if (BonusCharisma != 0)
+        {
+            BonusCharisma = 0 - (BonusCharisma + Game.DieRoll(4));
+        }
+        if (BonusStealth != 0)
+        {
+            BonusStealth = 0 - (BonusStealth + Game.DieRoll(4));
+        }
+        if (BonusSearch != 0)
+        {
+            BonusSearch = 0 - (BonusSearch + Game.DieRoll(4));
+        }
+        if (BonusInfravision != 0)
+        {
+            BonusInfravision = 0 - (BonusInfravision + Game.DieRoll(4));
+        }
+        if (BonusTunnel != 0)
+        {
+            BonusTunnel = 0 - (BonusTunnel + Game.DieRoll(4));
+        }
+        if (BonusAttacks != 0)
+        {
+            BonusAttacks = 0 - (BonusAttacks + Game.DieRoll(4));
+        }
+        if (BonusSpeed != 0)
+        {
+            BonusSpeed = 0 - (BonusSpeed + Game.DieRoll(4));
         }
         if (BonusArmorClass != 0)
         {

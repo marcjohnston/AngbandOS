@@ -46,7 +46,7 @@ internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusStealth => 3;
     public override int Rarity => 20;
     public override bool ResCold => true;
     public override bool ShowMods => true;

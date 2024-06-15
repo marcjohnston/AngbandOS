@@ -43,7 +43,8 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 4;
+    public override int InitialBonusInfravision => 4;
+    public override int InitialBonusWisdom => 4;
     public override int Rarity => 15;
     public override bool Regen => true;
     public override bool ResCold => true;

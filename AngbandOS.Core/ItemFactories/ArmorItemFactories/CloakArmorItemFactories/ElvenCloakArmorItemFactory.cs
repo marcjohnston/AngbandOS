@@ -16,7 +16,8 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Elven Cloak";
 
-    public override int InitialTypeSpecificValue => Game.DieRoll(4);
+    public override int InitialBonusSearch => Game.DieRoll(4);
+    public override int InitialBonusStealth => Game.DieRoll(4);
 
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {

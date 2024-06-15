@@ -30,7 +30,6 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 5;
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 40;
     public override bool ResDisen => true;
     public override bool ResPois => true;

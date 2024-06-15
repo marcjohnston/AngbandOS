@@ -15,6 +15,6 @@ internal class HatOfInfravisionRareItem : RareItem
     public override string FriendlyName => "of Infravision";
     public override bool HideType => true;
     public override bool Infra => true;
-    public override int MaxPval => 5;
+    public override int MaxBonusInfravision => 5;
     public override int TreasureRating => 11;
-    }
+}

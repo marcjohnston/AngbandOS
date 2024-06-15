@@ -15,12 +15,8 @@ internal abstract class JewelleryItemFactory : ItemFactory
 {
     public JewelleryItemFactory(Game game) : base(game) { }
 
-    public override int? GetBonusRealValue(Item item)
+    public override int GetBonusRealValue(Item item)
     {
-        if (item.TypeSpecificValue < 0 || item.BonusArmorClass < 0 || item.BonusHit < 0 || item.BonusDamage < 0)
-        {
-            return null;
-        }
         return (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
     }
 }

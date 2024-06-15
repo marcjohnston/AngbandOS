@@ -38,9 +38,9 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     if (Game.DieRoll(4) == 1)
                     {
                         item.Characteristics.Blows = true;
-                        if (item.TypeSpecificValue > 2)
+                        if (item.BonusAttacks > 2)
                         {
-                            item.TypeSpecificValue -= Game.DieRoll(2);
+                            item.BonusAttacks -= Game.DieRoll(2);
                         }
                     }
                     break;
@@ -211,7 +211,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     if (CanBeWeaponOfSharpness)
                     {
                         item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSharpnessRareItem));
-                        item.TypeSpecificValue = item.GetBonusValue(5, level) + 1;
+                        item.BonusTunnel = item.GetBonusValue(5, level) + 1;
                     }
                     else
                     {
@@ -220,7 +220,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                         {
                             item.Characteristics.Blows = true;
                         }
-                        item.TypeSpecificValue = item.GetBonusValue(3, level);
+                        item.BonusTunnel = item.GetBonusValue(3, level);
                     }
                     break;
             }

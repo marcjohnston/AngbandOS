@@ -23,16 +23,16 @@ internal class ExtraAttacksRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.TypeSpecificValue = item.GetBonusValue(3, level);
-        if (item.TypeSpecificValue < 1)
+        item.BonusAttacks = item.GetBonusValue(3, level);
+        if (item.BonusAttacks < 1)
         {
-            item.TypeSpecificValue = 1;
+            item.BonusAttacks = 1;
         }
         if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+            item.BonusAttacks = 0 - item.BonusAttacks;
         }
     }
 

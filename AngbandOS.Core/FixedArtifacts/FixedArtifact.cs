@@ -72,7 +72,20 @@ internal abstract class FixedArtifact : ItemAdditiveBundle
 
     public abstract int Level { get; }
 
-    public abstract int InitialTypeSpecificValue { get; }
+    public virtual int InitialBonusStrength => 0;
+    public virtual int InitialBonusIntelligence => 0;
+    public virtual int InitialBonusWisdom => 0;
+    public virtual int InitialBonusDexterity => 0;
+    public virtual int InitialBonusConstitution => 0;
+    public virtual int InitialBonusCharisma => 0;
+    public virtual int InitialBonusStealth => 0;
+    public virtual int InitialBonusSearch => 0;
+    public virtual int InitialBonusInfravision => 0;
+    public virtual int InitialBonusTunnel => 0;
+    public virtual int InitialBonusExtraBlows => 0;
+    public virtual int InitialBonusSpeed => 0;
+
+
     public abstract int Rarity { get; }
 
     public abstract int ToA { get; }

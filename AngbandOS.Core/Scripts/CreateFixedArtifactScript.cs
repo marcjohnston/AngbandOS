@@ -18,8 +18,7 @@ internal class CreateFixedArtifactScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        // Retrieve the command argument which is 1-based.  We need to convert it to 0-based.
-        int aIdx = Game.CommandArgument - 1;
+        int aIdx = Game.CommandArgument;
         if (aIdx < 0 || aIdx >= Game.SingletonRepository.Count<FixedArtifact>())
         {
             return;
@@ -32,7 +31,18 @@ internal class CreateFixedArtifactScript : Script, IScript
         aPtr.CurNum = 1;
         Item qPtr = new Item(Game, aPtr.BaseItemFactory);
         qPtr.FixedArtifact = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
-        qPtr.TypeSpecificValue = aPtr.InitialTypeSpecificValue;
+        qPtr.BonusStrength = aPtr.InitialBonusStrength;
+        qPtr.BonusIntelligence = aPtr.InitialBonusIntelligence;
+        qPtr.BonusWisdom = aPtr.InitialBonusWisdom;
+        qPtr.BonusDexterity = aPtr.InitialBonusDexterity;
+        qPtr.BonusConstitution = aPtr.InitialBonusConstitution;
+        qPtr.BonusCharisma = aPtr.InitialBonusCharisma;
+        qPtr.BonusStealth = aPtr.InitialBonusStealth;
+        qPtr.BonusSearch = aPtr.InitialBonusSearch;
+        qPtr.BonusInfravision = aPtr.InitialBonusInfravision;
+        qPtr.BonusTunnel = aPtr.InitialBonusTunnel;
+        qPtr.BonusAttacks = aPtr.InitialBonusExtraBlows;
+        qPtr.BonusSpeed = aPtr.InitialBonusSpeed;
         qPtr.ArmorClass = aPtr.Ac;
         qPtr.DamageDice = aPtr.Dd;
         qPtr.DamageSides = aPtr.Ds;

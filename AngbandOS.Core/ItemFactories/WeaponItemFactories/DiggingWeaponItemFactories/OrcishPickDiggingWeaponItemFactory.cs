@@ -25,7 +25,7 @@ internal class OrcishPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     {
         (30, 4)
     };
-    public override int InitialTypeSpecificValue => 2;
+    public override int InitialBonusTunnel => 2;
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 150;

@@ -39,7 +39,8 @@ internal class SpearGungnirFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 4;
+    public override int InitialBonusIntelligence => 4;
+    public override int InitialBonusWisdom => 4;
     public override int Rarity => 45;
     public override bool ResElec => true;
     public override bool ResFire => true;

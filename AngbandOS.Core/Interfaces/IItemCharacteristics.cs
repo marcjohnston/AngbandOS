@@ -16,6 +16,66 @@ namespace AngbandOS.Core.Interfaces;
 internal interface IItemCharacteristics
 {
     /// <summary>
+    /// Returns whether or not the item affects the search capabilities of the player when being worn.
+    /// </summary>
+    bool Search { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the tunneling capabilities of the player when being worn.
+    /// </summary>
+    bool Tunnel { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the wisdom of the player when being worn.
+    /// </summary>
+    bool Wis { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the attack speed of the player when being worn.
+    /// </summary>
+    bool Speed { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the stealth of the player when being worn.
+    /// </summary>
+    bool Stealth { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the intelligence of the player when being worn.
+    /// </summary>
+    bool Int { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the infravision of the player when being worn.
+    /// </summary>
+    bool Infra { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the constitution of the player when being worn.
+    /// </summary>
+    bool Con { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the dexterity of the player when being worn.
+    /// </summary>
+    bool Dex { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the charisma of the player when being worn.
+    /// </summary>
+    bool Cha { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the strength of the player when being worn.
+    /// </summary>
+    bool Str { get; }
+
+    /// <summary>
+    /// Returns whether or not the item affects the blows delivered by the player when being worn.
+    /// </summary>
+    bool Blows { get; }
+
+    /// <summary>
     /// Returns the <see cref="Activation"/>, if the item can be activated; or null, if the item cannot be activated.  This property is bound using the <see cref="ActivationName"/> property during
     /// the bind phase.
     /// </summary>
@@ -25,11 +85,6 @@ internal interface IItemCharacteristics
     bool AntiTheft { get; }
     ArtifactBias? ArtifactBias { get; }
     bool Blessed { get; }
-
-    /// <summary>
-    /// Returns whether or not the item affects the blows delivered by the player when being worn.
-    /// </summary>
-    bool Blows { get; }
 
     /// <summary>
     /// Returns whether or not the item does extra damage from acid when being wielded.
@@ -57,26 +112,11 @@ internal interface IItemCharacteristics
     bool BrandPois { get; }
 
     /// <summary>
-    /// Returns whether or not the item affects the charisma of the player when being worn.
-    /// </summary>
-    bool Cha { get; }
-
-    /// <summary>
     /// Returns whether or not the item produced chaotic effects when being wielded.
     /// </summary>
     bool Chaotic { get; }
 
-    /// <summary>
-    /// Returns whether or not the item affects the constitution of the player when being worn.
-    /// </summary>
-    bool Con { get; }
-
     bool IsCursed { get; }
-
-    /// <summary>
-    /// Returns whether or not the item affects the dexterity of the player when being worn.
-    /// </summary>
-    bool Dex { get; }
 
     bool DrainExp { get; }
     bool DreadCurse { get; }
@@ -84,7 +124,12 @@ internal interface IItemCharacteristics
     bool Feather { get; }
     bool FreeAct { get; }
     bool HeavyCurse { get; }
+
+    /// <summary>
+    /// Returns true, if the name of the bonus value should be omitted in the verbose description; false, otherwise.  Currently, only speed, extra-blows, stealth, searching and infravision are supported.
+    /// </summary>
     bool HideType { get; }
+
     bool HoldLife { get; }
     bool IgnoreAcid { get; }
     bool IgnoreCold { get; }
@@ -99,16 +144,6 @@ internal interface IItemCharacteristics
     /// Returns whether or not the item causes earthquakes of the player when being worn.
     /// </summary>
     bool Impact { get; }
-
-    /// <summary>
-    /// Returns whether or not the item affects the infravision of the player when being worn.
-    /// </summary>
-    bool Infra { get; }
-
-    /// <summary>
-    /// Returns whether or not the item affects the intelligence of the player when being worn.
-    /// </summary>
-    bool Int { get; }
 
     /// <summary>
     /// Returns whether or not the item is a great bane of dragons.
@@ -143,11 +178,6 @@ internal interface IItemCharacteristics
     bool ResShards { get; }
     bool ResSound { get; }
 
-    /// <summary>
-    /// Returns whether or not the item affects the search capabilities of the player when being worn.
-    /// </summary>
-    bool Search { get; }
-
     bool SeeInvis { get; }
 
     /// <summary>
@@ -171,21 +201,6 @@ internal interface IItemCharacteristics
     bool SlayUndead { get; }
     bool SlowDigest { get; }
 
-    /// <summary>
-    /// Returns whether or not the item affects the attack speed of the player when being worn.
-    /// </summary>
-    bool Speed { get; }
-
-    /// <summary>
-    /// Returns whether or not the item affects the stealth of the player when being worn.
-    /// </summary>
-    bool Stealth { get; }
-
-    /// <summary>
-    /// Returns whether or not the item affects the strength of the player when being worn.
-    /// </summary>
-    bool Str { get; }
-
     bool SustCha { get; }
     bool SustCon { get; }
     bool SustDex { get; }
@@ -201,22 +216,12 @@ internal interface IItemCharacteristics
     int TreasureRating { get; }
 
 
-    /// <summary>
-    /// Returns whether or not the item affects the tunneling capabilities of the player when being worn.
-    /// </summary>
-    bool Tunnel { get; }
-    
     bool Vampiric { get; }
 
     /// <summary>
     /// Returns whether or not the item is very sharp and cuts foes of the player when being used.
     /// </summary>
     bool Vorpal { get; }
-
-    /// <summary>
-    /// Returns whether or not the item affects the wisdom of the player when being worn.
-    /// </summary>
-    bool Wis { get; }
 
     bool Wraith { get; }
     bool XtraMight { get; }

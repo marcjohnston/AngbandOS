@@ -26,7 +26,12 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     {
         item.IsBroken = true;
         item.IsCursed = true;
-        item.TypeSpecificValue = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
+        item.BonusCharisma = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
+        item.BonusConstitution = item.BonusCharisma;
+        item.BonusDexterity = item.BonusCharisma;
+        item.BonusStrength = item.BonusCharisma;
+        item.BonusIntelligence = item.BonusCharisma;
+        item.BonusWisdom = item.BonusCharisma;
         item.BonusArmorClass = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
     }
     public override bool Cha => true;
@@ -40,7 +45,12 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     {
         (50, 1)
     };
-    public override int InitialTypeSpecificValue => -5;
+    public override int InitialBonusStrength => -5;
+    public override int InitialBonusCharisma => -5;
+    public override int InitialBonusConstitution => -5;
+    public override int InitialBonusIntelligence => -5;
+    public override int InitialBonusDexterity => -5;
+    public override int InitialBonusWisdom => -5;
     public override bool Str => true;
     public override int Weight => 3;
     public override bool Wis => true;

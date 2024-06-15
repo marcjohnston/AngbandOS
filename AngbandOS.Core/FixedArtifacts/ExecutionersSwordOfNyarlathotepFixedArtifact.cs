@@ -27,7 +27,6 @@ internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 40;
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 15;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;

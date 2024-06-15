@@ -27,7 +27,6 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 25;
     public override bool ShowMods => true;
     public override int ToA => 0;

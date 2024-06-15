@@ -15,7 +15,8 @@ internal class WeaponOfLawRareItem : RareItem
     public override int Cost => 25000;
     public override bool FreeAct => true;
     public override string FriendlyName => "(Weapon of Law)";
-    public override int MaxPval => 2;
+    public override int MaxBonusConstitution => 2;
+    public override int MaxBonusStrength => 2;
     public override int MaxToD => 6;
     public override int MaxToH => 6;
     public override int TreasureRating => 26;
@@ -23,5 +24,5 @@ internal class WeaponOfLawRareItem : RareItem
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-        public override bool Str => true;
+    public override bool Str => true;
 }

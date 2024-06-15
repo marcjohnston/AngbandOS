@@ -23,7 +23,7 @@ internal class WeaponDefenderRareItem : RareItem
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int MaxPval => 4;
+    public override int MaxBonusStealth => 4;
     public override int MaxToA => 8;
     public override int MaxToD => 4;
     public override int MaxToH => 4;
@@ -34,5 +34,5 @@ internal class WeaponDefenderRareItem : RareItem
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool SeeInvis => true;
-        public override bool Stealth => true;
+    public override bool Stealth => true;
 }

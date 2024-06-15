@@ -29,7 +29,7 @@ internal class BrandWeaponWithAstraScript : Script, IScript
             // Make it a planar weapon
             act = "seems very unstable now.";
             item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponPlanarWeaponRareItem));
-            item.TypeSpecificValue = Game.DieRoll(2);
+            item.BonusSearch = Game.DieRoll(2);
 
             // Let the player know what happened
             Game.MsgPrint($"Your {itemName} {act}");

@@ -25,7 +25,7 @@ internal class DwarvenPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     {
         (50, 1)
     };
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusTunnel => 3;
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 200;

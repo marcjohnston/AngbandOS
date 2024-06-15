@@ -37,7 +37,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 2;
+    public override int InitialBonusStealth => 2;
     public override int Rarity => 8;
     public override bool ResConf => true;
     public override bool ResFire => true;

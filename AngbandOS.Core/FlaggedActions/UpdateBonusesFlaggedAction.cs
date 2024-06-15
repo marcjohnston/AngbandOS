@@ -193,55 +193,55 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
                     if (mergedCharacteristics.Str)
                     {
-                        Game.AbilityScores[Ability.Strength].Bonus += oPtr.TypeSpecificValue;
+                        Game.AbilityScores[Ability.Strength].Bonus += oPtr.BonusStrength;
                     }
                     if (mergedCharacteristics.Int)
                     {
-                        Game.AbilityScores[Ability.Intelligence].Bonus += oPtr.TypeSpecificValue;
+                        Game.AbilityScores[Ability.Intelligence].Bonus += oPtr.BonusIntelligence;
                     }
                     if (mergedCharacteristics.Wis)
                     {
-                        Game.AbilityScores[Ability.Wisdom].Bonus += oPtr.TypeSpecificValue;
+                        Game.AbilityScores[Ability.Wisdom].Bonus += oPtr.BonusWisdom;
                     }
                     if (mergedCharacteristics.Dex)
                     {
-                        Game.AbilityScores[Ability.Dexterity].Bonus += oPtr.TypeSpecificValue;
+                        Game.AbilityScores[Ability.Dexterity].Bonus += oPtr.BonusDexterity;
                     }
                     if (mergedCharacteristics.Con)
                     {
-                        Game.AbilityScores[Ability.Constitution].Bonus += oPtr.TypeSpecificValue;
+                        Game.AbilityScores[Ability.Constitution].Bonus += oPtr.BonusConstitution;
                     }
                     if (mergedCharacteristics.Cha)
                     {
-                        Game.AbilityScores[Ability.Charisma].Bonus += oPtr.TypeSpecificValue;
+                        Game.AbilityScores[Ability.Charisma].Bonus += oPtr.BonusCharisma;
                     }
                     if (mergedCharacteristics.Stealth)
                     {
-                        Game.SkillStealth += oPtr.TypeSpecificValue;
+                        Game.SkillStealth += oPtr.BonusStealth;
                     }
                     if (mergedCharacteristics.Search)
                     {
-                        Game.SkillSearching += oPtr.TypeSpecificValue * 5;
+                        Game.SkillSearching += oPtr.BonusSearch * 5;
                     }
                     if (mergedCharacteristics.Search)
                     {
-                        Game.SkillSearchFrequency += oPtr.TypeSpecificValue * 5;
+                        Game.SkillSearchFrequency += oPtr.BonusSearch * 5;
                     }
                     if (mergedCharacteristics.Infra)
                     {
-                        Game.InfravisionRange += oPtr.TypeSpecificValue;
+                        Game.InfravisionRange += oPtr.BonusInfravision;
                     }
                     if (mergedCharacteristics.Tunnel)
                     {
-                        Game.SkillDigging += oPtr.TypeSpecificValue * 20;
+                        Game.SkillDigging += oPtr.BonusTunnel * 20;
                     }
                     if (mergedCharacteristics.Speed)
                     {
-                        Game.Speed.IntValue += oPtr.TypeSpecificValue;
+                        Game.Speed.IntValue += oPtr.BonusSpeed;
                     }
                     if (mergedCharacteristics.Blows)
                     {
-                        extraBlows += oPtr.TypeSpecificValue;
+                        extraBlows += oPtr.BonusAttacks;
                     }
                     if (mergedCharacteristics.Impact)
                     {

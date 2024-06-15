@@ -25,7 +25,7 @@ internal class ShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     {
         (5, 16)
     };
-    public override int InitialTypeSpecificValue => 1;
+    public override int InitialBonusTunnel => 1;
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 60;

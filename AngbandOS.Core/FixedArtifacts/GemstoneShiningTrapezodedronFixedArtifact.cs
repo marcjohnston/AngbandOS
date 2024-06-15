@@ -35,7 +35,9 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
     public override bool InstaArt => true;
     public override bool Int => true;
     public override int Level => 50;
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusIntelligence => 3;
+    public override int InitialBonusSpeed => 3;
+    public override int InitialBonusWisdom => 3;
     public override int Rarity => 50;
     public override bool ResChaos => true;
     public override bool SeeInvis => true;

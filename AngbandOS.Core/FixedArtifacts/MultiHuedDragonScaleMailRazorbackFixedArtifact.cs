@@ -39,7 +39,6 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 9;
     public override bool ResCold => true;
     public override bool ResDark => true;

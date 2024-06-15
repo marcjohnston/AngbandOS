@@ -41,7 +41,6 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 10;
     public override bool ResFire => true;
     public override bool ShowMods => true;

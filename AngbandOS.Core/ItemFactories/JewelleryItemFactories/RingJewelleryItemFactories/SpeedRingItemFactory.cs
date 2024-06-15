@@ -29,16 +29,16 @@ internal class SpeedRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.BonusSpeed = Game.DieRoll(5) + item.GetBonusValue(5, level);
         while (Game.RandomLessThan(100) < 50)
         {
-            item.TypeSpecificValue++;
+            item.BonusSpeed++;
         }
         if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+            item.BonusSpeed = 0 - item.BonusSpeed;
         }
     }
 

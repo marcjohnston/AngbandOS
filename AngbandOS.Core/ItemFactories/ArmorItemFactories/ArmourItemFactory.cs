@@ -26,13 +26,8 @@ internal abstract class ArmorItemFactory : ItemFactory
         item.BonusArmorClass += Game.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);
     }
 
-    public override int? GetBonusRealValue(Item item)
+    public override int GetBonusRealValue(Item item)
     {
-        if (item.TypeSpecificValue < 0 || item.BonusArmorClass < 0)
-        {
-            return null;
-        }
-
         return (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
     }
 

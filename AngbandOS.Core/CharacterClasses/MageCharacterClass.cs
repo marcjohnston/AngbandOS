@@ -48,7 +48,7 @@ internal class MageCharacterClass : BaseCharacterClass
 
 
     /// <summary>
-    /// Returns true, because arcane spell casting requires the players hands to be uncovered or be of free-action, dexterity or typespecificvalue == 0.
+    /// Returns true, because arcane spell casting requires the players hands to be unrestricted for spell casting.
     /// </summary>
     public override bool CoveredHandsRestrictCasting => true;
 

@@ -35,7 +35,7 @@ internal class HandsInventorySlot : EquipmentInventorySlot
                 if (oPtr != null)
                 {
                     ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-                    if (!mergedCharacteristics.FreeAct && !mergedCharacteristics.Dex && oPtr.TypeSpecificValue > 0)
+                    if (!mergedCharacteristics.FreeAct && !mergedCharacteristics.Dex && oPtr.BonusDexterity > 0)
                     {
                         msp = 3 * msp / 4;
                         RestrictingGloves = true;

@@ -32,7 +32,6 @@ internal class MaceThunderFixedArtifact : FixedArtifact
     public override bool ImElec => true;
     public override bool KillDragon => true;
     public override int Level => 20;
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 15;
     public override bool ShowMods => true;
     public override int ToA => 0;

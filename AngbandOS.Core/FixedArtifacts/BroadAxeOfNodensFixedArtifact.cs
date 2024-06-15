@@ -29,7 +29,7 @@ internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusConstitution => 3;
     public override int Rarity => 8;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;

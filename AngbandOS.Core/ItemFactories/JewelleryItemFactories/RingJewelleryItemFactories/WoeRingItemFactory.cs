@@ -27,7 +27,8 @@ internal class WoeRingItemFactory : RingItemFactory
         item.IsBroken = true;
         item.IsCursed = true;
         item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
-        item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
+        item.BonusCharisma = 0 - (1 + item.GetBonusValue(5, level));
+        item.BonusWisdom = item.BonusCharisma;
     }
     public override bool Cha => true;
     public override bool IsCursed => true;
@@ -37,7 +38,7 @@ internal class WoeRingItemFactory : RingItemFactory
     {
         (50, 1)
     };
-    public override int InitialTypeSpecificValue => -5;
+    public override int InitialBonusWisdom => -5;
     public override bool Teleport => true;
     public override int Weight => 2;
     public override bool Wis => true;

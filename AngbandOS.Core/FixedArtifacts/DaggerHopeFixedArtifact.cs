@@ -35,7 +35,6 @@ internal class DaggerHopeFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 3;
-    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 10;
     public override bool ResCold => true;
     public override bool ShowMods => true;

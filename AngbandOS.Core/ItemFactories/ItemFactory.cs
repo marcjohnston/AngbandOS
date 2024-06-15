@@ -316,49 +316,130 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
 
-        if (item.IsKnown() && HasAnyPvalMask)
+        if (item.IsKnown())
         {
-            s += $" ({GetSignedValue(item.TypeSpecificValue)}";
-            if (HideType)
+            (int bonusValue, string priorityBonusName)? commonBonusValue = CommonBonusValue(item);
+            if (commonBonusValue.HasValue)
             {
-            }
-            else if (Speed)
-            {
-                s += " speed";
-            }
-            else if (Blows)
-            {
-                if (item.TypeSpecificValue > 1)
+                s += $" ({GetSignedValue(commonBonusValue.Value.bonusValue)}";
+                if (!HideType && commonBonusValue.Value.priorityBonusName != "")
                 {
-                    s += " attacks";
+                    s += $" {commonBonusValue.Value.priorityBonusName}";
                 }
-                else
-                {
-                    s += " attack";
-                }
+                s += ")";
             }
-            else if (Stealth)
-            {
-                s += " stealth";
-            }
-            else if (Search)
-            {
-                s += " searching";
-            }
-            else if (Infra)
-            {
-                s += " infravision";
-            }
-            else if (Tunnel)
-            {
-            }
-            s += ")";
         }
         if (item.IsKnown() && item.ActivationRechargeTimeRemaining != 0)
         {
             s += " (charging)";
         }
         return s;
+    }
+
+    private (int bonusValue, string priorityBonusName)? CommonBonusValue(Item item)
+    {
+        (int bonusValue, string priorityBonusName)? value = null;
+        if (item.BonusSpeed != 0)
+        {
+            if (value.HasValue && item.BonusSpeed != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusSpeed, "speed");
+        }
+        if (item.BonusAttacks != 0)
+        {
+            if (value.HasValue && item.BonusAttacks != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusAttacks, item.BonusAttacks > 1 ? "attacks" : "attack");
+        }
+        if (item.BonusStealth != 0)
+        {
+            if (value.HasValue && item.BonusStealth != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusStealth, "stealth");
+        }
+        if (item.BonusSearch != 0)
+        {
+            if (value.HasValue && item.BonusSearch != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusSearch, "searching");
+        }
+        if (item.BonusInfravision != 0)
+        {
+            if (value.HasValue && item.BonusInfravision != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusInfravision, "infravision");
+        }
+        if (item.BonusCharisma != 0)
+        {
+            if (value.HasValue && item.BonusCharisma != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusCharisma, "");
+        }
+        if (item.BonusConstitution != 0)
+        {
+            if (value.HasValue && item.BonusConstitution != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusConstitution, "");
+        }
+        if (item.BonusDexterity != 0)
+        {
+            if (value.HasValue && item.BonusDexterity != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusDexterity, "");
+        }
+        if (item.BonusIntelligence != 0)
+        {
+            if (value.HasValue && item.BonusIntelligence != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusIntelligence, "");
+        }
+        if (item.BonusStrength != 0)
+        {
+            if (value.HasValue && item.BonusStrength != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusStrength, "");
+        }
+        if (item.BonusWisdom != 0)
+        {
+            if (value.HasValue && item.BonusWisdom != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusWisdom, "");
+        }
+        if (item.BonusTunnel != 0)
+        {
+            if (value.HasValue && item.BonusTunnel != value.Value.bonusValue)
+            {
+                return null;
+            }
+            value = (item.BonusTunnel, "");
+        }
+        if (!value.HasValue)
+        {
+            return (0, "");
+        }
+        return (value.Value);
     }
 
     private string ApplyPlurizationMacro(string name, int count)
@@ -513,11 +594,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual string Identify(Item item) => null;
 
     /// <summary>
-    /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.  Returns null, if the item is worthless.
+    /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual int? GetBonusRealValue(Item item) => 0;
+    public virtual int GetBonusRealValue(Item item) => 0;
 
     public virtual void ApplySlayingForRandomArtifactCreation(Item item)
     {
@@ -898,10 +979,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         InitialGoldPiecesRoll = Game.ParseRollExpression(InitialGoldPiecesRollExpression);
         EatScript = Game.SingletonRepository.GetNullable<IIdentifableScript>(EatScriptName);
 
-        // Flavorless items will default to simply use the item name.
+        // If there is no DescriptionSyntax, use the Name as the default.
         _descriptionSyntax = DescriptionSyntax != null ? DescriptionSyntax : Name;
 
-        // If the flavorless item doesn't have an altername, default to the non-alternate version.
+        // If there is no AlternateDescriptionSyntax, use the DescriptionSyntax as the default.
         _alternateDescriptionSyntax = AlternateDescriptionSyntax != null ? AlternateDescriptionSyntax : _descriptionSyntax;
 
         // Flavored items that are still unknown will default to using the flavorless syntaxes.
@@ -975,18 +1056,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public ColorEnum FlavorColor;
 
     /// <summary>
-    /// Returns true, if the item category has any of the following properties: Str, Int, Wis, Dex, Con, Cha, Stealth, Search, Infra, Tunnel, Speed or Blows.
-    /// </summary>
-    /// <returns></returns>
-    public bool HasAnyPvalMask
-    {
-        get
-        {
-            return Str || Int || Wis || Dex || Con || Cha || Stealth || Search || Infra || Tunnel || Speed || Blows;
-        }
-    }
-
-    /// <summary>
     /// Returns true, if the destroy script should ask the player if known items from this factory should be destroyed by setting the applicable 
     /// broken stomp type to true; false, otherwise.  Returns true, by default.  Chests, weapons, armor and orbs of light return false.
     /// </summary>
@@ -1050,11 +1119,68 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool Lightsource { get; set; } = false;
 
     /// <summary>
-    /// Returns the initial value to be assigned to the type specific value.  Most items will override a default value.  Gold will
-    /// compute a value based on the cost property.
+    /// Returns the initial amount of bonus charisma to be assigned to the item.
     /// </summary>
-    [Obsolete("Being converted to using true type specific values")]
-    public virtual int InitialTypeSpecificValue => 0;
+    public virtual int InitialBonusCharisma => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus constitution to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusConstitution => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus dexterity to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusDexterity => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus intelligence to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusIntelligence => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus strength to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusStrength => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus wisdom to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusWisdom => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus attacks to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusAttacks => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus infravision to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusInfravision => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus speed to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusSpeed => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus search to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusSearch => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus stealth to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusStealth => 0;
+
+    /// <summary>
+    /// Returns the initial amount of bonus tunnel to be assigned to the item.
+    /// </summary>
+    public virtual int InitialBonusTunnel => 0;
+
+    /// <summary>
+    /// Returns the initial number of turns of light to be assigned to the item.
+    /// </summary>
     public virtual int InitialTurnsOfLight => 0;
 
     /// <summary>

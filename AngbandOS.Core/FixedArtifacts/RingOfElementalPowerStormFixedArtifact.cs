@@ -45,7 +45,13 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
     public override bool InstaArt => true;
     public override bool Int => true;
     public override int Level => 90;
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusCharisma => 3;
+    public override int InitialBonusConstitution => 3;
+    public override int InitialBonusDexterity => 3;
+    public override int InitialBonusIntelligence => 3;
+    public override int InitialBonusSpeed => 3;
+    public override int InitialBonusStrength => 3;
+    public override int InitialBonusWisdom => 3;
     public override int Rarity => 50;
     public override bool Regen => true;
     public override bool SeeInvis => true;

@@ -29,7 +29,9 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Infra => true;
     public override int Level => 15;
-    public override int InitialTypeSpecificValue => 3;
+    public override int InitialBonusInfravision => 3;
+    public override int InitialBonusSpeed => 3;
+    public override int InitialBonusStealth => 3;
     public override int Rarity => 12;
     public override bool ResCold => true;
     public override bool ResDark => true;
