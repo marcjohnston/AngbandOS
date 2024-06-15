@@ -45,9 +45,23 @@ internal class DiceRoll : Roll
         {
             if (Bonus > 0)
             {
-                return $"{DieCount}d{SideCount}+{Bonus}";
+                if (DieCount > 1)
+                {
+                    return $"{Bonus}+{DieCount}d{SideCount}";
+                }
+                else
+                {
+                    return $"{Bonus}+d{SideCount}";
+                }
             }
-            return $"{DieCount}d{SideCount}";
+            if (DieCount > 1)
+            {
+                return $"{DieCount}d{SideCount}";
+            }
+            else
+            {
+                return $"d{SideCount}";
+            }
         }
     }
 }
