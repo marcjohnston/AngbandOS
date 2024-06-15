@@ -2395,28 +2395,6 @@ internal sealed class Item : IComparable<Item>
                 case 1:
                 case 2:
                     ApplyRandomBonuses();
-                    if (Characteristics.Blows)
-                    {
-                        BonusAttacks = Game.DieRoll(2) + 1;
-                        if (BonusAttacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
-                        {
-                            BonusAttacks = 4;
-                        }
-                    }
-                    else
-                    {
-                        BonusStrength = EnchantBonus(BonusStrength);
-                        BonusIntelligence = EnchantBonus(BonusIntelligence);
-                        BonusWisdom = EnchantBonus(BonusWisdom);
-                        BonusDexterity = EnchantBonus(BonusDexterity);
-                        BonusConstitution = EnchantBonus(BonusConstitution);
-                        BonusCharisma = EnchantBonus(BonusCharisma);
-                        BonusStealth = EnchantBonus(BonusStealth);
-                        BonusSearch = EnchantBonus(BonusSearch);
-                        BonusInfravision = EnchantBonus(BonusInfravision);
-                        BonusTunnel = EnchantBonus(BonusTunnel);
-                        BonusSpeed = EnchantBonus(BonusSpeed);
-                    }
                     break;
                 case 3:
                 case 4:
@@ -2614,6 +2592,7 @@ internal sealed class Item : IComparable<Item>
             case 1:
             case 2:
                 Characteristics.Str = true;
+                BonusStrength = EnchantBonus(BonusStrength);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -2627,6 +2606,7 @@ internal sealed class Item : IComparable<Item>
             case 3:
             case 4:
                 Characteristics.Int = true;
+                BonusIntelligence = EnchantBonus(BonusIntelligence);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -2640,6 +2620,7 @@ internal sealed class Item : IComparable<Item>
             case 5:
             case 6:
                 Characteristics.Wis = true;
+                BonusWisdom = EnchantBonus(BonusWisdom);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
@@ -2653,6 +2634,7 @@ internal sealed class Item : IComparable<Item>
             case 7:
             case 8:
                 Characteristics.Dex = true;
+                BonusDexterity = EnchantBonus(BonusDexterity);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -2666,6 +2648,7 @@ internal sealed class Item : IComparable<Item>
             case 9:
             case 10:
                 Characteristics.Con = true;
+                BonusConstitution = EnchantBonus(BonusConstitution);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -2679,6 +2662,7 @@ internal sealed class Item : IComparable<Item>
             case 11:
             case 12:
                 Characteristics.Cha = true;
+                BonusCharisma = EnchantBonus(BonusCharisma);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
@@ -2688,6 +2672,7 @@ internal sealed class Item : IComparable<Item>
             case 13:
             case 14:
                 Characteristics.Stealth = true;
+                BonusStealth = EnchantBonus(BonusStealth);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
@@ -2697,6 +2682,7 @@ internal sealed class Item : IComparable<Item>
             case 15:
             case 16:
                 Characteristics.Search = true;
+                BonusSearch = EnchantBonus(BonusSearch);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
@@ -2706,10 +2692,12 @@ internal sealed class Item : IComparable<Item>
             case 17:
             case 18:
                 Characteristics.Infra = true;
+                BonusInfravision = EnchantBonus(BonusInfravision);
                 break;
 
             case 19:
                 Characteristics.Speed = true;
+                BonusSpeed = EnchantBonus(BonusSpeed);
                 if (Characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
                 {
                     Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
@@ -2719,6 +2707,7 @@ internal sealed class Item : IComparable<Item>
             case 20:
             case 21:
                 Characteristics.Tunnel = true;
+                BonusTunnel = EnchantBonus(BonusTunnel);
                 break;
 
             case 22:
@@ -2730,6 +2719,11 @@ internal sealed class Item : IComparable<Item>
                 else
                 {
                     Characteristics.Blows = true;
+                    BonusAttacks = Game.DieRoll(2) + 1;
+                    if (BonusAttacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
+                    {
+                        BonusAttacks = 4;
+                    }
                     if (Characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
                     {
                         Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
