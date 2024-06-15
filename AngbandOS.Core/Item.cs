@@ -273,16 +273,6 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public int ActivationRechargeTimeRemaining;
 
-    /// <summary>
-    /// Returns a value that is specific to the item class.
-    /// Chest - The number of items in the chest. 
-    ///   <0 => Average ... untrapped with ABS value being the level of objects +10 
-    ///   0  => empty or opened
-    ///   >0 => the index of the chest trap configuration and the level of the items + 10
-    /// Ring?
-    /// Weapons (Blows) - The weapon attacks
-    /// FOR ALL EQUIMENT - The bonus value for item.characteristic.(str, int, wis, dex, cha, dex, stealth, search, infra, tunnel, speed and blows
-    /// </summary>
     public int BonusStrength;
     public int BonusIntelligence;
     public int BonusWisdom;
