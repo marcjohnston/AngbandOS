@@ -27,6 +27,6 @@ internal class FireBall120r3Every225p1d225Activation : DirectionalActivation
 
     public override int Value => 1750;
 
-    public override string Name => "Fire ball (120)";
+    public override string Name => "Large fire ball (120)";
 
 }
