@@ -33,8 +33,8 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override int InitialBonusCharisma => 5;
-    public override int InitialBonusDexterity => 5;
+    public override int BonusCharisma => 5;
+    public override int BonusDexterity => 5;
     public override int Rarity => 25;
     public override bool ResChaos => true;
     public override bool ResNether => true;

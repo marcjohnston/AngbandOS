@@ -18,7 +18,7 @@ internal class WeaponOfDiggingRareItem : RareItem
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int MaxBonusTunnel => 5;
+    public override int BonusTunnel => 5;
     public override int TreasureRating => 4;
     public override bool Tunnel => true;
 }

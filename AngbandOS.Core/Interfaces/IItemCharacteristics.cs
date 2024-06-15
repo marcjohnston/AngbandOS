@@ -86,6 +86,19 @@ internal interface IItemCharacteristics
     ArtifactBias? ArtifactBias { get; }
     bool Blessed { get; }
 
+    int BonusStrength { get; }
+    int BonusIntelligence { get; }
+    int BonusWisdom { get; }
+    int BonusDexterity { get; }
+    int BonusConstitution { get; }
+    int BonusCharisma { get; }
+    int BonusStealth { get; }
+    int BonusSearch { get; }
+    int BonusInfravision { get; }
+    int BonusTunnel { get; }
+    int BonusAttacks { get; }
+    int BonusSpeed { get;  }
+
     /// <summary>
     /// Returns whether or not the item does extra damage from acid when being wielded.
     /// </summary>

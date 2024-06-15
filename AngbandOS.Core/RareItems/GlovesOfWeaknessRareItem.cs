@@ -13,7 +13,7 @@ internal class GlovesOfWeaknessRareItem : RareItem
     private GlovesOfWeaknessRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 0;
     public override string FriendlyName => "of Weakness";
-    public override int MaxBonusStrength => 10;
+    public override int BonusStrength => 10;
     public override int TreasureRating => 0;
     public override bool Str => true;
 }

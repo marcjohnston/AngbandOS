@@ -14,7 +14,7 @@ internal class GlovesOfPowerRareItem : RareItem
     public override int Cost => 2500;
     public override string FriendlyName => "of Power";
     public override bool HideType => true;
-    public override int MaxBonusStrength => 5;
+    public override int BonusStrength => 5;
     public override int MaxToD => 5;
     public override int MaxToH => 5;
     public override int TreasureRating => 22;

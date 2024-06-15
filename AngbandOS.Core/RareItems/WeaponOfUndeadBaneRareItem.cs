@@ -13,7 +13,7 @@ internal class WeaponOfUndeadBaneRareItem : RareItem
     private WeaponOfUndeadBaneRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 8000;
     public override string FriendlyName => "of Undead Bane";
-    public override int MaxBonusWisdom => 2;
+    public override int BonusWisdom => 2;
     public override int TreasureRating => 24;
     public override bool SeeInvis => true;
     public override bool SlayUndead => true;

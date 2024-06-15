@@ -32,9 +32,9 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override int InitialBonusDexterity => 4;
-    public override int InitialBonusSearch => 4;
-    public override int InitialBonusStealth => 4;
+    public override int BonusDexterity => 4;
+    public override int BonusSearch => 4;
+    public override int BonusStealth => 4;
     public override int Rarity => 80;
     public override bool ResDark => true;
     public override bool Search => true;

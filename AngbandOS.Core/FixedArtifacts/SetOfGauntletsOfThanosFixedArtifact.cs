@@ -36,8 +36,8 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     public override bool ImCold => true;
     public override bool ImFire => true;
     public override int Level => 10;
-    public override int InitialBonusDexterity => 2;
-    public override int InitialBonusStrength => 2;
+    public override int BonusDexterity => 2;
+    public override int BonusStrength => 2;
     public override int Rarity => 20;
     public override bool ResChaos => true;
     public override bool ResDisen => true;

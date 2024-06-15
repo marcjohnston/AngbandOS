@@ -21,7 +21,7 @@ internal class ArmorOfYithRareItem : RareItem
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int MaxBonusStealth => 3;
+    public override int BonusStealth => 3;
     public override int MaxToA => 10;
     public override int TreasureRating => 25;
     public override bool ResAcid => true;

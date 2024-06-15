@@ -24,7 +24,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     public override int Cost => 7000;
     public override bool FreeAct => true;
     public override string FriendlyName => "(Planar Weapon)";
-    public override int MaxBonusSearch => 2;
+    public override int BonusSearch => 2;
     public override int MaxToD => 4;
     public override int MaxToH => 4;
     public override int TreasureRating => 22;

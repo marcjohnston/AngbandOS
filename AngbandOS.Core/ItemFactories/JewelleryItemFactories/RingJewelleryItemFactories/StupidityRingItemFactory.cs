@@ -26,7 +26,7 @@ internal class StupidityRingItemFactory : RingItemFactory
     {
         item.IsBroken = true;
         item.IsCursed = true;
-        item.BonusIntelligence = 0 - (1 + item.GetBonusValue(5, level));
+        item.Characteristics.BonusIntelligence = 0 - (1 + item.GetBonusValue(5, level));
     }
     public override bool IsCursed => true;
     public override bool HideType => true;

@@ -29,7 +29,7 @@ internal class CloakShifterFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 3;
-    public override int InitialBonusStealth => 3;
+    public override int BonusStealth => 3;
     public override int Rarity => 10;
     public override bool ResAcid => true;
     public override bool Stealth => true;

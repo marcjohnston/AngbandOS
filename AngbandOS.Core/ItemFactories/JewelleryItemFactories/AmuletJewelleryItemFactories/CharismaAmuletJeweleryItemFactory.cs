@@ -19,12 +19,12 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
-        item.BonusCharisma = 1 + item.GetBonusValue(5, level);
+        item.Characteristics.BonusCharisma = 1 + item.GetBonusValue(5, level);
         if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.BonusCharisma = 0 - item.BonusCharisma;
+            item.Characteristics.BonusCharisma = 0 - item.Characteristics.BonusCharisma;
         }
     }
     public override bool Cha => true;

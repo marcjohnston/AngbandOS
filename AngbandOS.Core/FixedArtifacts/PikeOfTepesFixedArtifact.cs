@@ -37,7 +37,7 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusIntelligence => 2;
+    public override int BonusIntelligence => 2;
     public override int Rarity => 15;
     public override bool ResCold => true;
     public override bool ResFire => true;

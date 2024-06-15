@@ -45,9 +45,9 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusCharisma => 4;
-    public override int InitialBonusIntelligence => 4;
-    public override int InitialBonusWisdom => 4;
+    public override int BonusCharisma => 4;
+    public override int BonusIntelligence => 4;
+    public override int BonusWisdom => 4;
     public override int Rarity => 105;
     public override bool ResFire => true;
     public override bool ResNether => true;

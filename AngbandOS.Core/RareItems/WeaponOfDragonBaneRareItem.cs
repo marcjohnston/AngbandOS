@@ -15,7 +15,7 @@ internal class WeaponOfDragonBaneRareItem : RareItem
     public override int Cost => 6000;
     public override string FriendlyName => "of Dragon Bane";
     public override bool KillDragon => true;
-    public override int MaxBonusConstitution => 1;
+    public override int BonusConstitution => 1;
     public override int TreasureRating => 24;
     public override bool SlayDragon => true;
 }

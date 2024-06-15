@@ -21,7 +21,7 @@ internal class CloakOfAmanRareItem : RareItem
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int MaxBonusStealth => 3;
+    public override int BonusStealth => 3;
     public override int MaxToA => 20;
     public override int TreasureRating => 20;
     public override bool Stealth => true;

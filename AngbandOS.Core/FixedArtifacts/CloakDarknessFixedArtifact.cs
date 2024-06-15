@@ -31,9 +31,9 @@ internal class CloakDarknessFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 5;
-    public override int InitialBonusStealth => 2;
-    public override int InitialBonusIntelligence => 2;
-    public override int InitialBonusWisdom => 2;
+    public override int BonusStealth => 2;
+    public override int BonusIntelligence => 2;
+    public override int BonusWisdom => 2;
     public override int Rarity => 45;
     public override bool ResAcid => true;
     public override bool ResDark => true;

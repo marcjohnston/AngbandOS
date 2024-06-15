@@ -23,12 +23,12 @@ internal class IntelligenceRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.BonusIntelligence = 1 + item.GetBonusValue(5, level);
+        item.Characteristics.BonusIntelligence = 1 + item.GetBonusValue(5, level);
         if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.BonusIntelligence = 0 - item.BonusIntelligence;
+            item.Characteristics.BonusIntelligence = 0 - item.Characteristics.BonusIntelligence;
         }
     }
     public override int Cost => 500;

@@ -48,9 +48,9 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusDexterity=> 2;
-    public override int InitialBonusSpeed => 2;
-    public override int InitialBonusStrength => 2;
+    public override int BonusDexterity=> 2;
+    public override int BonusSpeed => 2;
+    public override int BonusStrength => 2;
     public override int Rarity => 30;
     public override bool Regen => true;
     public override bool SeeInvis => true;

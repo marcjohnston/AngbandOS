@@ -14,7 +14,7 @@ internal class HatOfIntelligenceRareItem : RareItem
     public override int Cost => 500;
     public override string FriendlyName => "of Intelligence";
     public override bool Int => true;
-    public override int MaxBonusIntelligence => 2;
+    public override int BonusIntelligence => 2;
     public override int TreasureRating => 13;
     public override bool SustInt => true;
 }

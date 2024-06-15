@@ -52,8 +52,8 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusCharisma => 4;
-    public override int InitialBonusStrength => 4;
+    public override int BonusCharisma => 4;
+    public override int BonusStrength => 4;
     public override int Rarity => 180;
     public override bool ResChaos => true;
     public override bool ResFire => true;

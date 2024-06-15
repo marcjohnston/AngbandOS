@@ -45,13 +45,13 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 
     public override bool NoTele => true;
     public override bool PermaCurse => true;
-    public override int InitialBonusCharisma => 125;
-    public override int InitialBonusConstitution => 125;
-    public override int InitialBonusDexterity => 125;
-    public override int InitialBonusIntelligence => 125;
-    public override int InitialBonusInfravision => 125;
-    public override int InitialBonusStrength => 125;
-    public override int InitialBonusWisdom => 125;
+    public override int BonusCharisma => 125;
+    public override int BonusConstitution => 125;
+    public override int BonusDexterity => 125;
+    public override int BonusIntelligence => 125;
+    public override int BonusInfravision => 125;
+    public override int BonusStrength => 125;
+    public override int BonusWisdom => 125;
     public override int Rarity => 1;
     public override bool ResAcid => true;
     public override bool ResCold => true;

@@ -23,12 +23,12 @@ internal class ConstitutionRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.BonusConstitution = 1 + item.GetBonusValue(5, level);
+        item.Characteristics.BonusConstitution = 1 + item.GetBonusValue(5, level);
         if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.BonusConstitution = 0 - item.BonusConstitution;
+            item.Characteristics.BonusConstitution = 0 - item.Characteristics.BonusConstitution;
         }
     }
 

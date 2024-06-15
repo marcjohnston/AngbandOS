@@ -27,8 +27,8 @@ internal class WoeRingItemFactory : RingItemFactory
         item.IsBroken = true;
         item.IsCursed = true;
         item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
-        item.BonusCharisma = 0 - (1 + item.GetBonusValue(5, level));
-        item.BonusWisdom = item.BonusCharisma;
+        item.Characteristics.BonusCharisma = 0 - (1 + item.GetBonusValue(5, level));
+        item.Characteristics.BonusWisdom = item.Characteristics.BonusCharisma;
     }
     public override bool Cha => true;
     public override bool IsCursed => true;

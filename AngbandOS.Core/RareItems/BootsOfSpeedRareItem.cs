@@ -14,7 +14,7 @@ internal class BootsOfSpeedRareItem : RareItem
     public override int Cost => 200000;
     public override string FriendlyName => "of Speed";
     public override bool HideType => true;
-    public override int MaxBonusSpeed => 10;
+    public override int BonusSpeed => 10;
     public override int TreasureRating => 25;
     public override bool Speed => true;
 }

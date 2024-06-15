@@ -34,10 +34,10 @@ internal class RingOfBastFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool InstaArt => true;
     public override int Level => 70;
-    public override int InitialBonusConstitution => 4;
-    public override int InitialBonusDexterity => 4;
-    public override int InitialBonusSpeed => 4;
-    public override int InitialBonusStrength => 4;
+    public override int BonusConstitution => 4;
+    public override int BonusDexterity => 4;
+    public override int BonusSpeed => 4;
+    public override int BonusStrength => 4;
     public override int Rarity => 50;
     public override bool Speed => true;
     public override bool Str => true;

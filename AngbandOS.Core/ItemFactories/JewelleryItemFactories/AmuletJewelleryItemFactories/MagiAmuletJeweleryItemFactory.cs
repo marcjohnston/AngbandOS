@@ -25,7 +25,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
-        item.BonusSearch = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.Characteristics.BonusSearch = Game.DieRoll(5) + item.GetBonusValue(5, level);
         item.BonusArmorClass = Game.DieRoll(5) + item.GetBonusValue(5, level);
         if (Game.DieRoll(3) == 1)
         {

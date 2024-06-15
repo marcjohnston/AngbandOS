@@ -13,7 +13,7 @@ internal class HatOfNaivetyRareItem : RareItem
     private HatOfNaivetyRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 0;
     public override string FriendlyName => "of Naivety";
-    public override int MaxBonusWisdom => 5;
+    public override int BonusWisdom => 5;
     public override int TreasureRating => 0;
     public override bool Wis => true;
 }

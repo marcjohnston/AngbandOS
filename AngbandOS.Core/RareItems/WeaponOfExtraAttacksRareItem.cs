@@ -14,6 +14,6 @@ internal class WeaponOfExtraAttacksRareItem : RareItem
     public override bool Blows => true;
     public override int Cost => 10000;
     public override string FriendlyName => "of Extra Attacks";
-    public override int MaxBonusExtraBlows => 3;
+    public override int BonusAttacks => 3;
     public override int TreasureRating => 20;
 }
