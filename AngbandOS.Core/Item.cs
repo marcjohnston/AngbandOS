@@ -2195,53 +2195,53 @@ internal sealed class Item : IComparable<Item>
                 {
                     BonusArmorClass -= Game.DieRoll(RareItem.MaxToA);
                 }
-                if (RareItem.MaxBonusStrength != 0)
+                if (RareItem.BonusStrength != null)
                 {
-                    BonusStrength -= Game.DieRoll(RareItem.MaxBonusStrength);
+                    BonusStrength -= RareItem.BonusStrength.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusIntelligence != 0)
+                if (RareItem.BonusIntelligence != null)
                 {
-                    BonusIntelligence -= Game.DieRoll(RareItem.MaxBonusIntelligence);
+                    BonusIntelligence -= RareItem.BonusIntelligence.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusWisdom != 0)
+                if (RareItem.BonusWisdom != null)
                 {
-                    BonusWisdom -= Game.DieRoll(RareItem.MaxBonusWisdom);
+                    BonusWisdom -= RareItem.BonusWisdom.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusDexterity != 0)
+                if (RareItem.BonusDexterity != null)
                 {
-                    BonusDexterity -= Game.DieRoll(RareItem.MaxBonusDexterity);
+                    BonusDexterity -= RareItem.BonusDexterity.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusConstitution != 0)
+                if (RareItem.BonusConstitution != null)
                 {
-                    BonusConstitution -= Game.DieRoll(RareItem.MaxBonusConstitution);
+                    BonusConstitution -= RareItem.BonusConstitution.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusCharisma != 0)
+                if (RareItem.BonusCharisma != null)
                 {
-                    BonusCharisma -= Game.DieRoll(RareItem.MaxBonusCharisma);
+                    BonusCharisma -= RareItem.BonusCharisma.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusStealth != 0)
+                if (RareItem.BonusStealth != null)
                 {
-                    BonusStealth -= Game.DieRoll(RareItem.MaxBonusStealth);
+                    BonusStealth -= RareItem.BonusStealth.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusSearch != 0)
+                if (RareItem.BonusSearch != null)
                 {
-                    BonusSearch -= Game.DieRoll(RareItem.MaxBonusSearch);
+                    BonusSearch -= RareItem.BonusSearch.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusInfravision != 0)
+                if (RareItem.BonusInfravision != null)
                 {
-                    BonusInfravision -= Game.DieRoll(RareItem.MaxBonusInfravision);
+                    BonusInfravision -= RareItem.BonusInfravision.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusTunnel != 0)
+                if (RareItem.BonusTunnel != null)
                 {
-                    BonusTunnel -= Game.DieRoll(RareItem.MaxBonusTunnel);
+                    BonusTunnel -= RareItem.BonusTunnel.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusExtraBlows != 0)
+                if (RareItem.BonusAttacks != null)
                 {
-                    BonusAttacks -= Game.DieRoll(RareItem.MaxBonusExtraBlows);
+                    BonusAttacks -= RareItem.BonusAttacks.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusSpeed != 0)
+                if (RareItem.BonusSpeed != null)
                 {
-                    BonusSpeed -= Game.DieRoll(RareItem.MaxBonusSpeed);
+                    BonusSpeed -= RareItem.BonusSpeed.Get(Game.UseRandom);
                 }
             }
             else
@@ -2258,53 +2258,53 @@ internal sealed class Item : IComparable<Item>
                 {
                     BonusArmorClass += Game.DieRoll(RareItem.MaxToA);
                 }
-                if (RareItem.MaxBonusStrength != 0)
+                if (RareItem.BonusStrength != null)
                 {
-                    BonusStrength += Game.DieRoll(RareItem.MaxBonusStrength);
+                    BonusStrength += RareItem.BonusStrength.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusIntelligence != 0)
+                if (RareItem.BonusIntelligence != null)
                 {
-                    BonusIntelligence += Game.DieRoll(RareItem.MaxBonusIntelligence);
+                    BonusIntelligence += RareItem.BonusIntelligence.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusWisdom != 0)
+                if (RareItem.BonusWisdom != null)
                 {
-                    BonusWisdom += Game.DieRoll(RareItem.MaxBonusWisdom);
+                    BonusWisdom += RareItem.BonusWisdom.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusDexterity != 0)
+                if (RareItem.BonusDexterity != null)
                 {
-                    BonusDexterity += Game.DieRoll(RareItem.MaxBonusDexterity);
+                    BonusDexterity += RareItem.BonusDexterity.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusConstitution != 0)
+                if (RareItem.BonusConstitution != null)
                 {
-                    BonusConstitution += Game.DieRoll(RareItem.MaxBonusConstitution);
+                    BonusConstitution += RareItem.BonusConstitution.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusCharisma != 0)
+                if (RareItem.BonusCharisma != null)
                 {
-                    BonusCharisma += Game.DieRoll(RareItem.MaxBonusCharisma);
+                    BonusCharisma += RareItem.BonusCharisma.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusStealth != 0)
+                if (RareItem.BonusStealth != null)
                 {
-                    BonusStealth += Game.DieRoll(RareItem.MaxBonusStealth);
+                    BonusStealth += RareItem.BonusStealth.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusSearch != 0)
+                if (RareItem.BonusSearch != null)
                 {
-                    BonusSearch += Game.DieRoll(RareItem.MaxBonusSearch);
+                    BonusSearch += RareItem.BonusSearch.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusInfravision != 0)
+                if (RareItem.BonusInfravision != null)
                 {
-                    BonusInfravision += Game.DieRoll(RareItem.MaxBonusInfravision);
+                    BonusInfravision += RareItem.BonusInfravision.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusTunnel != 0)
+                if (RareItem.BonusTunnel != null)
                 {
-                    BonusTunnel += Game.DieRoll(RareItem.MaxBonusTunnel);
+                    BonusTunnel += RareItem.BonusTunnel.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusExtraBlows != 0)
+                if (RareItem.BonusAttacks != null)
                 {
-                    BonusAttacks += Game.DieRoll(RareItem.MaxBonusExtraBlows);
+                    BonusAttacks += RareItem.BonusAttacks.Get(Game.UseRandom);
                 }
-                if (RareItem.MaxBonusSpeed != 0)
+                if (RareItem.BonusSpeed != null)
                 {
-                    BonusSpeed += Game.DieRoll(RareItem.MaxBonusSpeed);
+                    BonusSpeed += RareItem.BonusSpeed.Get(Game.UseRandom);
                 }
             }
             Game.TreasureRating += RareItem.TreasureRating;

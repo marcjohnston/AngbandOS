@@ -14,7 +14,7 @@ internal class HatOfBeautyRareItem : RareItem
     public override bool Cha => true;
     public override int Cost => 1000;
     public override string FriendlyName => "of Beauty";
-    public override int MaxBonusCharisma => 4;
+    protected override string? BonusCharismaRollExpression => "1d4";
     public override int TreasureRating => 8;
     public override bool SustCha => true;
 }

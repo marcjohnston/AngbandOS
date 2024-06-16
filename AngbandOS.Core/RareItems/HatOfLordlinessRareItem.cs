@@ -14,8 +14,8 @@ internal class HatOfLordlinessRareItem : RareItem
     public override bool Cha => true;
     public override int Cost => 2000;
     public override string FriendlyName => "of Lordliness";
-    public override int MaxBonusCharisma => 3;
-    public override int MaxBonusWisdom => 3;
+    protected override string? BonusCharismaRollExpression => "1d3";
+    protected override string? BonusWisdomRollExpression => "1d3";
     public override int TreasureRating => 17;
     public override bool SustCha => true;
     public override bool SustWis => true;

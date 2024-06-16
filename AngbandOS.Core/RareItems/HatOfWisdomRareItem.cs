@@ -13,7 +13,7 @@ internal class HatOfWisdomRareItem : RareItem
     private HatOfWisdomRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 500;
     public override string FriendlyName => "of Wisdom";
-    public override int MaxBonusWisdom => 2;
+    protected override string? BonusWisdomRollExpression => "1d2";
     public override int TreasureRating => 13;
     public override bool SustWis => true;
     public override bool Wis => true;

@@ -14,7 +14,7 @@ internal class WeaponOfAnimalBaneRareItem : RareItem
     public override int Cost => 6000;
     public override string FriendlyName => "of Animal Bane";
     public override bool Int => true;
-    public override int MaxBonusIntelligence => 2;
+    protected override string? BonusIntelligenceRollExpression => "1d2";
     public override int TreasureRating => 20;
     public override bool Regen => true;
     public override bool SlayAnimal => true;

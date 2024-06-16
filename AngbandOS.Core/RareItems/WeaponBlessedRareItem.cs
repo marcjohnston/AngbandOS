@@ -18,7 +18,7 @@ internal class WeaponBlessedRareItem : RareItem
     public override bool Blessed => true;
     public override int Cost => 5000;
     public override string FriendlyName => "(Blessed)";
-    public override int MaxBonusWisdom => 3;
+    protected override string? BonusWisdomRollExpression => "1d3";
     public override int TreasureRating => 20;
     public override bool Wis => true;
 }

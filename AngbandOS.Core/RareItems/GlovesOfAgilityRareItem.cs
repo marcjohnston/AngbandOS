@@ -15,6 +15,6 @@ internal class GlovesOfAgilityRareItem : RareItem
     public override bool Dex => true;
     public override string FriendlyName => "of Agility";
     public override bool HideType => true;
-    public override int MaxBonusDexterity => 5;
+    protected override string? BonusDexterityRollExpression => "1d5";
     public override int TreasureRating => 14;
 }

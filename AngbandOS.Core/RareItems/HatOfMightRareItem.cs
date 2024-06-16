@@ -16,8 +16,8 @@ internal class HatOfMightRareItem : RareItem
     public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Might";
-    public override int MaxBonusStrength => 3;
-    public override int MaxBonusWisdom => 3;
+    protected override string? BonusStrengthRollExpression => "1d3";
+    protected override string? BonusWisdomRollExpression => "1d3";
     public override int TreasureRating => 19;
     public override bool Str => true;
     public override bool SustCon => true;

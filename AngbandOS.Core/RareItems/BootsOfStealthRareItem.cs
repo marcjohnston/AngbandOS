@@ -13,7 +13,7 @@ internal class BootsOfStealthRareItem : RareItem
     private BootsOfStealthRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 500;
     public override string FriendlyName => "of Stealth";
-    public override int MaxBonusStealth => 3;
+    protected override string? BonusStealthRollExpression => "1d3";
     public override int TreasureRating => 16;
     public override bool Stealth => true;
 }
