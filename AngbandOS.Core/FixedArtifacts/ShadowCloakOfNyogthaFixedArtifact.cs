@@ -33,11 +33,11 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 40;
-    public override int BonusCharisma => 2;
-    public override int BonusIntelligence => 2;
-    public override int BonusSpeed => 2;
-    public override int BonusStealth => 2;
-    public override int BonusWisdom => 2;
+    public override int InitialBonusCharisma => 2;
+    public override int InitialBonusIntelligence => 2;
+    public override int InitialBonusSpeed => 2;
+    public override int InitialBonusStealth => 2;
+    public override int InitialBonusWisdom => 2;
     public override int Rarity => 40;
     public override bool ResAcid => true;
     public override bool ResCold => true;

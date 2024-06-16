@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Reflection.PortableExecutable;
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -32,19 +30,6 @@ internal class ItemCharacteristics : IItemCharacteristics
 
     /// <inheritdoc/>
     public bool Blows { get; set; } = false;
-
-    public int BonusStrength { get; set; } = 0;
-    public int BonusIntelligence { get; set; } = 0;
-    public int BonusWisdom { get; set; } = 0;
-    public int BonusDexterity { get; set; } = 0;
-    public int BonusConstitution { get; set; } = 0;
-    public int BonusCharisma { get; set; } = 0;
-    public int BonusStealth { get; set; } = 0;
-    public int BonusSearch { get; set; } = 0;
-    public int BonusInfravision { get; set; } = 0;
-    public int BonusTunnel { get; set; } = 0;
-    public int BonusAttacks { get; set; } = 0;
-    public int BonusSpeed { get; set; } = 0;
 
     /// <inheritdoc/>
     public bool BrandAcid { get; set; } = false;

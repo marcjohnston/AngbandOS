@@ -28,7 +28,7 @@ internal class SabreOfBluebeardFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 15;
-    public override int BonusAttacks => 1;
+    public override int InitialBonusExtraBlows => 1;
     public override int Rarity => 8;
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;

@@ -36,9 +36,9 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 40;
-    public override int BonusConstitution => -25;
-    public override int BonusDexterity => -25;
-    public override int BonusStrength => -25;
+    public override int InitialBonusConstitution => -25;
+    public override int InitialBonusDexterity => -25;
+    public override int InitialBonusStrength => -25;
     public override int Rarity => 12;
     public override bool SeeInvis => true;
     public override bool Str => true;

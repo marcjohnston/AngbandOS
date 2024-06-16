@@ -37,7 +37,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool ImAcid => true;
     public override int Level => 30;
-    public override int BonusDexterity => 4;
+    public override int InitialBonusDexterity => 4;
     public override int Rarity => 90;
     public override bool Regen => true;
     public override bool ResNether => true;

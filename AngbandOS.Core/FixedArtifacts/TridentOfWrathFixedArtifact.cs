@@ -32,8 +32,8 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 15;
-    public override int BonusDexterity => 2;
-    public override int BonusStrength => 2;
+    public override int InitialBonusDexterity => 2;
+    public override int InitialBonusStrength => 2;
     public override int Rarity => 35;
     public override bool ResDark => true;
     public override bool ResLight => true;

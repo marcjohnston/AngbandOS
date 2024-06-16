@@ -56,20 +56,7 @@ internal abstract class ItemAdditiveBundle : IItemCharacteristics, IGetKey
 
     /// <inheritdoc/>
     public virtual bool Blows => false;
-
-    public virtual int BonusStrength => 0;
-    public virtual int BonusIntelligence => 0;
-    public virtual int BonusWisdom => 0;
-    public virtual int BonusDexterity => 0;
-    public virtual int BonusConstitution => 0;
-    public virtual int BonusCharisma => 0;
-    public virtual int BonusStealth => 0;
-    public virtual int BonusSearch => 0;
-    public virtual int BonusInfravision => 0;
-    public virtual int BonusTunnel => 0;
-    public virtual int BonusAttacks => 0;
-    public virtual int BonusSpeed => 0;
-
+    
     /// <inheritdoc />
     public virtual bool BrandAcid => false;
     

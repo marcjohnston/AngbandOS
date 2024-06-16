@@ -30,11 +30,11 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
         }
         else if (power < -1)
         {
-            item.Characteristics.BonusTunnel = 0 - (5 + Game.DieRoll(5));
+            item.BonusTunnel = 0 - (5 + Game.DieRoll(5));
         }
         else if (power < 0)
         {
-            item.Characteristics.BonusTunnel = 0 - item.Characteristics.BonusTunnel;
+            item.BonusTunnel = 0 - item.BonusTunnel;
         }
     }
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(DiggerInventorySlot));

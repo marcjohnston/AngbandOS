@@ -15,12 +15,12 @@ internal class WisdomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
-        item.Characteristics.BonusWisdom = 1 + item.GetBonusValue(5, level);
+        item.BonusWisdom = 1 + item.GetBonusValue(5, level);
         if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.Characteristics.BonusWisdom = 0 - item.Characteristics.BonusWisdom;
+            item.BonusWisdom = 0 - item.BonusWisdom;
         }
     }
     protected override string SymbolName => nameof(DoubleQuoteSymbol);

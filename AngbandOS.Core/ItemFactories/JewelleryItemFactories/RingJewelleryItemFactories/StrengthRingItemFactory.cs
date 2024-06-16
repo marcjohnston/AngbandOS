@@ -23,12 +23,12 @@ internal class StrengthRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.Characteristics.BonusStrength = 1 + item.GetBonusValue(5, level);
+        item.BonusStrength = 1 + item.GetBonusValue(5, level);
         if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.Characteristics.BonusStrength = 0 - item.Characteristics.BonusStrength;
+            item.BonusStrength = 0 - item.BonusStrength;
         }
     }
 

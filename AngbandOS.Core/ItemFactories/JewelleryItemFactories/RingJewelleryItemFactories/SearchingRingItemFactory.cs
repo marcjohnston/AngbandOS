@@ -23,12 +23,12 @@ internal class SearchingRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.Characteristics.BonusSearch = 1 + item.GetBonusValue(5, level);
+        item.BonusSearch = 1 + item.GetBonusValue(5, level);
         if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.Characteristics.BonusSearch = 0 - item.Characteristics.BonusSearch;
+            item.BonusSearch = 0 - item.BonusSearch;
         }
     }
 

@@ -29,8 +29,8 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override int BonusCharisma => 3;
-    public override int BonusWisdom => 3;
+    public override int InitialBonusCharisma => 3;
+    public override int InitialBonusWisdom => 3;
     public override int Rarity => 2;
     public override int ToA => 12;
     public override int ToD => 0;

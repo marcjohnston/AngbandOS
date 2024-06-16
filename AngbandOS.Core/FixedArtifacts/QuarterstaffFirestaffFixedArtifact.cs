@@ -37,7 +37,7 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int BonusIntelligence => 3;
+    public override int InitialBonusIntelligence => 3;
     public override int Rarity => 18;
     public override bool ResFire => true;
     public override bool ShowMods => true;

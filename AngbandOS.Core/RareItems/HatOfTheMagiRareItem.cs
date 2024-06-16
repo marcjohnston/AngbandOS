@@ -22,7 +22,7 @@ internal class HatOfTheMagiRareItem : RareItem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool Int => true;
-    public override int BonusIntelligence => 3;
+    public override int MaxBonusIntelligence => 3;
     public override int TreasureRating => 15;
     public override bool ResAcid => true;
     public override bool ResCold => true;

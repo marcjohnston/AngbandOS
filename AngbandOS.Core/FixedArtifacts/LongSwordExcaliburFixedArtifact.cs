@@ -38,7 +38,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int BonusSpeed => 10;
+    public override int InitialBonusSpeed => 10;
     public override int Rarity => 120;
     public override bool Regen => true;
     public override bool ResCold => true;

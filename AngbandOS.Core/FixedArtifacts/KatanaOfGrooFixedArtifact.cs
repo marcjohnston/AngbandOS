@@ -31,9 +31,9 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    public override int BonusAttacks => 3;
-    public override int BonusDexterity => 3;
-    public override int BonusSpeed => 3;
+    public override int InitialBonusExtraBlows => 3;
+    public override int InitialBonusDexterity => 3;
+    public override int InitialBonusSpeed => 3;
     public override int Rarity => 25;
     public override bool ShowMods => true;
     public override bool Speed => true;

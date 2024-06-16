@@ -33,7 +33,7 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool InstaArt => true;
     public override int Level => 50;
-    public override int BonusConstitution => 2;
+    public override int InitialBonusConstitution => 2;
     public override int Rarity => 10;
     public override bool ResFire => true;
     public override int ToA => 0;

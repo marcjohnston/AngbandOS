@@ -339,101 +339,101 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     private (int bonusValue, string priorityBonusName)? CommonBonusValue(Item item)
     {
         (int bonusValue, string priorityBonusName)? value = null;
-        if (item.Characteristics.BonusSpeed != 0)
+        if (item.BonusSpeed != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusSpeed != value.Value.bonusValue)
+            if (value.HasValue && item.BonusSpeed != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusSpeed, "speed");
+            value = (item.BonusSpeed, "speed");
         }
-        if (item.Characteristics.BonusAttacks != 0)
+        if (item.BonusAttacks != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusAttacks != value.Value.bonusValue)
+            if (value.HasValue && item.BonusAttacks != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusAttacks, item.Characteristics.BonusAttacks > 1 ? "attacks" : "attack");
+            value = (item.BonusAttacks, item.BonusAttacks > 1 ? "attacks" : "attack");
         }
-        if (item.Characteristics.BonusStealth != 0)
+        if (item.BonusStealth != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusStealth != value.Value.bonusValue)
+            if (value.HasValue && item.BonusStealth != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusStealth, "stealth");
+            value = (item.BonusStealth, "stealth");
         }
-        if (item.Characteristics.BonusSearch != 0)
+        if (item.BonusSearch != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusSearch != value.Value.bonusValue)
+            if (value.HasValue && item.BonusSearch != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusSearch, "searching");
+            value = (item.BonusSearch, "searching");
         }
-        if (item.Characteristics.BonusInfravision != 0)
+        if (item.BonusInfravision != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusInfravision != value.Value.bonusValue)
+            if (value.HasValue && item.BonusInfravision != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusInfravision, "infravision");
+            value = (item.BonusInfravision, "infravision");
         }
-        if (item.Characteristics.BonusCharisma != 0)
+        if (item.BonusCharisma != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusCharisma != value.Value.bonusValue)
+            if (value.HasValue && item.BonusCharisma != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusCharisma, "");
+            value = (item.BonusCharisma, "");
         }
-        if (item.Characteristics.BonusConstitution != 0)
+        if (item.BonusConstitution != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusConstitution != value.Value.bonusValue)
+            if (value.HasValue && item.BonusConstitution != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusConstitution, "");
+            value = (item.BonusConstitution, "");
         }
-        if (item.Characteristics.BonusDexterity != 0)
+        if (item.BonusDexterity != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusDexterity != value.Value.bonusValue)
+            if (value.HasValue && item.BonusDexterity != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusDexterity, "");
+            value = (item.BonusDexterity, "");
         }
-        if (item.Characteristics.BonusIntelligence != 0)
+        if (item.BonusIntelligence != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusIntelligence != value.Value.bonusValue)
+            if (value.HasValue && item.BonusIntelligence != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusIntelligence, "");
+            value = (item.BonusIntelligence, "");
         }
-        if (item.Characteristics.BonusStrength != 0)
+        if (item.BonusStrength != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusStrength != value.Value.bonusValue)
+            if (value.HasValue && item.BonusStrength != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusStrength, "");
+            value = (item.BonusStrength, "");
         }
-        if (item.Characteristics.BonusWisdom != 0)
+        if (item.BonusWisdom != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusWisdom != value.Value.bonusValue)
+            if (value.HasValue && item.BonusWisdom != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusWisdom, "");
+            value = (item.BonusWisdom, "");
         }
-        if (item.Characteristics.BonusTunnel != 0)
+        if (item.BonusTunnel != 0)
         {
-            if (value.HasValue && item.Characteristics.BonusTunnel != value.Value.bonusValue)
+            if (value.HasValue && item.BonusTunnel != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.Characteristics.BonusTunnel, "");
+            value = (item.BonusTunnel, "");
         }
         if (!value.HasValue)
         {

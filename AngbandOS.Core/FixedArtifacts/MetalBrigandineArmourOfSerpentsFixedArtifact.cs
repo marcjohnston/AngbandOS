@@ -34,8 +34,8 @@ internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    public override int BonusDexterity => 2;
-    public override int BonusStrength => 2;
+    public override int InitialBonusDexterity => 2;
+    public override int InitialBonusStrength => 2;
     public override int Rarity => 3;
     public override bool ResAcid => true;
     public override bool ResCold => true;

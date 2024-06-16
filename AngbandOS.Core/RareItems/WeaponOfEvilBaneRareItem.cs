@@ -14,7 +14,7 @@ internal class WeaponOfEvilBaneRareItem : RareItem
     public override bool Blessed => true;
     public override int Cost => 5000;
     public override string FriendlyName => "of Evil Bane";
-    public override int BonusWisdom => 2;
+    public override int MaxBonusWisdom => 2;
     public override int TreasureRating => 20;
     public override bool SlayEvil => true;
     public override bool Wis => true;

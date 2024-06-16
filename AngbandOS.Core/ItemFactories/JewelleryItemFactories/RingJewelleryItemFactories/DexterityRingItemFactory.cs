@@ -23,12 +23,12 @@ internal class DexterityRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.Characteristics.BonusDexterity = 1 + item.GetBonusValue(5, level);
+        item.BonusDexterity = 1 + item.GetBonusValue(5, level);
         if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;
-            item.Characteristics.BonusDexterity = 0 - item.Characteristics.BonusDexterity;
+            item.BonusDexterity = 0 - item.BonusDexterity;
         }
     }
 

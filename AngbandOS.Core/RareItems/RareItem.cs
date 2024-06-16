@@ -33,6 +33,23 @@ internal abstract class RareItem : ItemAdditiveBundle
     public abstract string FriendlyName { get; }
 
     /// <summary>
+    /// Returns a maximum value for a random amount of additional strength when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item.  Returns 0, by default.
+    /// </summary>
+    public virtual int MaxBonusStrength => 0;
+    public virtual int MaxBonusIntelligence => 0;
+    public virtual int MaxBonusWisdom => 0;
+    public virtual int MaxBonusDexterity => 0;
+    public virtual int MaxBonusConstitution => 0;
+    public virtual int MaxBonusCharisma => 0;
+    public virtual int MaxBonusStealth => 0;
+    public virtual int MaxBonusSearch => 0;
+    public virtual int MaxBonusInfravision => 0;
+    public virtual int MaxBonusTunnel => 0;
+    public virtual int MaxBonusExtraBlows => 0;
+    public virtual int MaxBonusSpeed => 0;
+
+    /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
