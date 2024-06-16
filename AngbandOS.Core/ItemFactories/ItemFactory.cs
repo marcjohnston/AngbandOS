@@ -319,7 +319,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         if (item.IsKnown())
         {
             (int bonusValue, string priorityBonusName)? commonBonusValue = CommonBonusValue(item);
-            if (commonBonusValue.HasValue)
+            if (commonBonusValue.HasValue && commonBonusValue.Value.bonusValue != 0)
             {
                 s += $" ({GetSignedValue(commonBonusValue.Value.bonusValue)}";
                 if (!HideType && commonBonusValue.Value.priorityBonusName != "")
