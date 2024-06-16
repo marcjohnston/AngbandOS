@@ -358,7 +358,7 @@ internal sealed class Item : IComparable<Item>
 
     public void Recharge(int num)
     {
-        Factory.Recharge(this, num);
+        Factory.RechargeScript.ExecuteScriptItemInt(this, num);
     }
 
     /// <summary>

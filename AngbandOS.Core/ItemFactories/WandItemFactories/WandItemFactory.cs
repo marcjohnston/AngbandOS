@@ -32,33 +32,7 @@ internal abstract class WandItemFactory : ItemFactory
         return true;
     }
 
-    public override void Recharge(Item oPtr, int num)
-    {
-        int i, t;
-        i = (num + 100 - LevelNormallyFound - (10 * oPtr.WandChargesRemaining)) / 15;
-        if (i < 1)
-        {
-            i = 1;
-        }
-        if (Game.RandomLessThan(i) == 0)
-        {
-            Game.MsgPrint("There is a bright flash of light.");
-            oPtr.ItemIncrease(-999);
-            oPtr.ItemDescribe();
-            oPtr.ItemOptimize();
-        }
-        else
-        {
-            t = (num / (LevelNormallyFound + 2)) + 1;
-            if (t > 0)
-            {
-                oPtr.WandChargesRemaining += 2 + Game.DieRoll(t);
-            }
-            oPtr.IdentityIsKnown = false;
-            oPtr.IdentEmpty = false;
-        }
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-    }
+    protected override string? RechargeScriptName => nameof(RechargeWandScript);
 
     public override void EatMagic(Item oPtr)
     {
@@ -81,8 +55,6 @@ internal abstract class WandItemFactory : ItemFactory
     public override bool IsMagical => true;
 
     public override int PercentageBreakageChance => 25;
-    public override bool IsRechargable => true;
-
     public override int PackSort => 14;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
 

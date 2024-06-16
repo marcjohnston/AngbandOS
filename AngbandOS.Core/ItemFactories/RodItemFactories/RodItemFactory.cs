@@ -26,36 +26,7 @@ internal abstract class RodItemFactory : ItemFactory
             }
         }
     }
-    public override void Recharge(Item oPtr, int num)
-    {
-        int i, t;
-        i = (100 - LevelNormallyFound + num) / 5;
-        if (i < 1)
-        {
-            i = 1;
-        }
-        if (Game.RandomLessThan(i) == 0)
-        {
-            Game.MsgPrint("The recharge backfires, draining the rod further!");
-            if (oPtr.RodRechargeTimeRemaining < 10000)
-            {
-                oPtr.RodRechargeTimeRemaining = (oPtr.RodRechargeTimeRemaining + 100) * 2;
-            }
-        }
-        else
-        {
-            t = num * Game.DiceRoll(2, 4);
-            if (oPtr.RodRechargeTimeRemaining > t)
-            {
-                oPtr.RodRechargeTimeRemaining -= t;
-            }
-            else
-            {
-                oPtr.RodRechargeTimeRemaining = 0;
-            }
-        }
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-    }
+    protected override string? RechargeScriptName => nameof(RechargeRodScript);
 
     public override void GridProcessWorld(Item item, GridTile gridTile)
     {
@@ -105,10 +76,7 @@ internal abstract class RodItemFactory : ItemFactory
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-
-    public override bool IsRechargable => true;
     public override bool CanBeZapped => true;
-
     public abstract bool RequiresAiming { get; }
     public override bool EasyKnow => true;
     public override int PackSort => 13;

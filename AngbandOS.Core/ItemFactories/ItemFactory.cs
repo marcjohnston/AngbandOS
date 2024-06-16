@@ -77,7 +77,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public virtual bool InitialExcellentStomp => false;
 
-    public virtual void Recharge(Item item, int num) { }
+    protected virtual string? RechargeScriptName => null;
+
+    public IScriptItemInt? RechargeScript { get; private set; }
 
     /// <summary>
     /// Returns the number of charges to assign to an item that is a rod.  A value of 0 is returned, by default.
@@ -893,11 +895,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool IsArmor => false;
 
     /// <summary>
-    /// Returns true, if the item is rechargable.
-    /// </summary>
-    public virtual bool IsRechargable => false;
-
-    /// <summary>
     /// Returns true, if the item is a weapon.
     /// </summary>
     public virtual bool IsWeapon => false;
@@ -996,6 +993,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         ActivateScrollScript = Game.SingletonRepository.GetNullable<IIdentifableAndUsedScript>(ActivateScrollScriptName);
 
         StaffChargeCount = Game.ParseNullableRollExpression(StaffChargeCountRollExpression);
+
+        RechargeScript = Game.SingletonRepository.GetNullable<IScriptItemInt>(RechargeScriptName);
     }
 
     protected abstract string ItemClassName { get; }

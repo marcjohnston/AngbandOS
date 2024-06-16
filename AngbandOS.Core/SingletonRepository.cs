@@ -366,6 +366,7 @@ internal class SingletonRepository
         RegisterRepository<IScriptIntInt>();
         RegisterRepository<IScriptBool>();
         RegisterRepository<IScriptInt>();
+        RegisterRepository<IScriptItemInt>();
         RegisterRepository<ITileScript>();
         
         RegisterRepository<Activation>();

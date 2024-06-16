@@ -13,36 +13,7 @@ internal abstract class StaffItemFactory : ItemFactory
     public StaffItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(StaffsItemClass);
 
-    public override void Recharge(Item oPtr, int num)
-    {
-        int i, t;
-        i = (100 - LevelNormallyFound + num) / 5;
-        if (i < 1)
-        {
-            i = 1;
-        }
-        if (Game.RandomLessThan(i) == 0)
-        {
-            Game.MsgPrint("The recharge backfires, draining the rod further!");
-            if (oPtr.StaffChargesRemaining < 10000)
-            {
-                oPtr.StaffChargesRemaining = (oPtr.StaffChargesRemaining + 100) * 2;
-            }
-        }
-        else
-        {
-            t = num * Game.DiceRoll(2, 4);
-            if (oPtr.StaffChargesRemaining > t)
-            {
-                oPtr.StaffChargesRemaining -= t;
-            }
-            else
-            {
-                oPtr.StaffChargesRemaining = 0;
-            }
-        }
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-    }
+    protected override string? RechargeScriptName => nameof(RechargeStaffScript);
 
     public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
     {
@@ -94,8 +65,6 @@ internal abstract class StaffItemFactory : ItemFactory
     /// Returns true, because staffs are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-
-    public override bool IsRechargable => true;
 
     /// <summary>
     /// Executes the staff action.  Returns true, if the usage identifies the staff.

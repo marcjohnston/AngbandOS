@@ -179,9 +179,16 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         {
             return false;
         }
-        if (IsRechargable != null && item.Factory.IsRechargable != IsRechargable)
+        if (IsRechargable != null)
         {
-            return false;
+            if (IsRechargable == true && item.Factory.RechargeScript == null)
+            {
+                return false;
+            }
+            if (IsRechargable == false && item.Factory.RechargeScript != null)
+            {
+                return false;
+            }
         }
         if (IsArmor != null && item.Factory.IsArmor != IsArmor)
         {
