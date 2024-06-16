@@ -34,17 +34,6 @@ internal abstract class StaffItemFactory : ItemFactory
         return true;
     }
 
-    public override string GetVerboseDescription(Item item)
-    {
-        string s = "";
-        if (item.IsKnown())
-        {
-            s += $" ({item.StaffChargesRemaining} {Game.Pluralize("charge", item.StaffChargesRemaining)})";
-        }
-        s += base.GetVerboseDescription(item);
-        return s;
-    }
-
     public override void EatMagic(Item oPtr)
     {
         if (oPtr.StaffChargesRemaining > 0)

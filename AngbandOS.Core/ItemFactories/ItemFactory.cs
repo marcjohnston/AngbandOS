@@ -305,7 +305,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// By default, empty is returned, if the item is known; otherwise, the HideType, Speed, Blows, Stealth, Search, Infra, Tunnel and recharging time characteristics are returned.
     /// </summary>
     /// <returns></returns>
-    public virtual string GetVerboseDescription(Item item)
+    public string GetVerboseDescription(Item item)
     {
         string s = "";
         if (item.IsKnown() && CanBeAimed)
@@ -334,6 +334,16 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         if (item.IsKnown() && item.ActivationRechargeTimeRemaining != 0)
         {
             s += " (charging)";
+        }
+
+        if (item.IsKnown() && item.RodRechargeTimeRemaining != 0)
+        {
+            s += $" (charging)";
+        }
+
+        if (item.IsKnown() && CanBeUsed)
+        {
+            s += $" ({item.StaffChargesRemaining} {Game.Pluralize("charge", item.StaffChargesRemaining)})";
         }
         return s;
     }

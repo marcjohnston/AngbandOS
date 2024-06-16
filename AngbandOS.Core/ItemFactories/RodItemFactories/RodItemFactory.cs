@@ -61,17 +61,6 @@ internal abstract class RodItemFactory : ItemFactory
         }
     }
 
-    public override string GetVerboseDescription(Item item)
-    {
-        string s = "";
-        if (item.IsKnown() && item.RodRechargeTimeRemaining != 0)
-        {
-            s += $" (charging)";
-        }
-        s += base.GetVerboseDescription(item);
-        return s;
-    }
-
     /// <summary>
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.
     /// </summary>
