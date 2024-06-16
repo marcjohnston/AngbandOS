@@ -31,18 +31,54 @@ internal class CreateFixedArtifactScript : Script, IScript
         aPtr.CurNum = 1;
         Item qPtr = new Item(Game, aPtr.BaseItemFactory);
         qPtr.FixedArtifact = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
-        qPtr.BonusStrength = aPtr.InitialBonusStrength;
-        qPtr.BonusIntelligence = aPtr.InitialBonusIntelligence;
-        qPtr.BonusWisdom = aPtr.InitialBonusWisdom;
-        qPtr.BonusDexterity = aPtr.InitialBonusDexterity;
-        qPtr.BonusConstitution = aPtr.InitialBonusConstitution;
-        qPtr.BonusCharisma = aPtr.InitialBonusCharisma;
-        qPtr.BonusStealth = aPtr.InitialBonusStealth;
-        qPtr.BonusSearch = aPtr.InitialBonusSearch;
-        qPtr.BonusInfravision = aPtr.InitialBonusInfravision;
-        qPtr.BonusTunnel = aPtr.InitialBonusTunnel;
-        qPtr.BonusAttacks = aPtr.InitialBonusExtraBlows;
-        qPtr.BonusSpeed = aPtr.InitialBonusSpeed;
+        if (aPtr.BonusStrength != null)
+        {
+            qPtr.BonusStrength = aPtr.BonusStrength.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusIntelligence != null)
+        {
+            qPtr.BonusIntelligence = aPtr.BonusIntelligence.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusWisdom != null)
+        {
+            qPtr.BonusWisdom = aPtr.BonusWisdom.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusDexterity != null)
+        {
+            qPtr.BonusDexterity = aPtr.BonusDexterity.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusConstitution != null)
+        {
+            qPtr.BonusConstitution = aPtr.BonusConstitution.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusCharisma != null)
+        {
+            qPtr.BonusCharisma = aPtr.BonusCharisma.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusStealth != null)
+        {
+            qPtr.BonusStealth = aPtr.BonusStealth.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusSearch != null)
+        {
+            qPtr.BonusSearch = aPtr.BonusSearch.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusInfravision != null)
+        {
+            qPtr.BonusInfravision = aPtr.BonusInfravision.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusTunnel != null)
+        {
+            qPtr.BonusTunnel = aPtr.BonusTunnel.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusAttacks != null)
+        {
+            qPtr.BonusAttacks = aPtr.BonusAttacks.Get(Game.UseRandom);
+        }
+        if (aPtr.BonusSpeed != null)
+        {
+            qPtr.BonusSpeed = aPtr.BonusSpeed.Get(Game.UseRandom);
+        }
         qPtr.ArmorClass = aPtr.Ac;
         qPtr.DamageDice = aPtr.Dd;
         qPtr.DamageSides = aPtr.Ds;

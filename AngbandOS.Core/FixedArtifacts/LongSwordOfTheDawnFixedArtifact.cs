@@ -40,8 +40,8 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusCharisma => 3;
-    public override int InitialBonusInfravision => 3;
+    protected override string? BonusCharismaRollExpression => "3";
+    protected override string? BonusInfravisionRollExpression => "3";
     public override int Rarity => 120;
     public override bool Regen => true;
     public override bool ResBlind => true;

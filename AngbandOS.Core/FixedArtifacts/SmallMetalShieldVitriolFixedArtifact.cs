@@ -37,8 +37,8 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool ImAcid => true;
     public override int Level => 30;
-    public override int InitialBonusConstitution => 4;
-    public override int InitialBonusStrength => 4;
+    protected override string? BonusConstitutionRollExpression => "4";
+    protected override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 6;
     public override bool ResChaos => true;
     public override bool ResSound => true;

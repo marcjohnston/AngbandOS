@@ -35,9 +35,9 @@ internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    public override int InitialBonusConstitution => 10;
-    public override int InitialBonusSpeed => 10;
-    public override int InitialBonusStrength => 10;
+    protected override string? BonusConstitutionRollExpression => "10";
+    protected override string? BonusSpeedRollExpression => "10";
+    protected override string? BonusStrengthRollExpression => "10";
     public override int Rarity => 25;
     public override bool Speed => true;
     public override bool Str => true;

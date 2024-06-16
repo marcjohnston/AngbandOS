@@ -43,7 +43,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 50;
-    public override int InitialBonusSpeed => 10;
+    protected override string? BonusSpeedRollExpression => "10";
     public override int Rarity => 25;
     public override bool ResFire => true;
     public override bool ShowMods => true;

@@ -52,7 +52,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusStrength => 4;
+    protected override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 40;
     public override bool ResFire => true;
     public override bool SeeInvis => true;

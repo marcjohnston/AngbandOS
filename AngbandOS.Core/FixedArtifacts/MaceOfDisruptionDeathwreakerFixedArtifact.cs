@@ -40,8 +40,8 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     public override int Radius => 3;
 
     public override bool NoTele => true;
-    public override int InitialBonusTunnel => 6;
-    public override int InitialBonusStrength => 6;
+    protected override string? BonusTunnelRollExpression => "6";
+    protected override string? BonusStrengthRollExpression => "6";
     public override int Rarity => 38;
     public override bool ResChaos => true;
     public override bool ResDark => true;

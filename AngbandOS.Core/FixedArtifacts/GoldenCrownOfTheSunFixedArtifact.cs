@@ -46,10 +46,10 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusConstitution => 3;
-    public override int InitialBonusSpeed => 3;
-    public override int InitialBonusStrength => 3;
-    public override int InitialBonusWisdom => 3;
+    protected override string? BonusConstitutionRollExpression => "3";
+    protected override string? BonusSpeedRollExpression => "3";
+    protected override string? BonusStrengthRollExpression => "3";
+    protected override string? BonusWisdomRollExpression => "3";
     public override int Rarity => 40;
     public override bool Regen => true;
     public override bool ResBlind => true;

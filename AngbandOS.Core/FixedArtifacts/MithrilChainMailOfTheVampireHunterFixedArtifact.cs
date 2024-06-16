@@ -32,9 +32,9 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 40;
-    public override int InitialBonusIntelligence => 4;
-    public override int InitialBonusStealth => 4;
-    public override int InitialBonusWisdom => 4;
+    protected override string? BonusIntelligenceRollExpression => "4";
+    protected override string? BonusStealthRollExpression => "4";
+    protected override string? BonusWisdomRollExpression => "4";
     public override int Rarity => 3;
     public override bool ResAcid => true;
     public override bool ResCold => true;

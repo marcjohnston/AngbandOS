@@ -35,9 +35,9 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact
     public override bool Infra => true;
     public override bool InstaArt => true;
     public override int Level => 65;
-    public override int InitialBonusCharisma => 3;
-    public override int InitialBonusInfravision => 3;
-    public override int InitialBonusWisdom => 3;
+    protected override string? BonusCharismaRollExpression => "3";
+    protected override string? BonusInfravisionRollExpression => "3";
+    protected override string? BonusWisdomRollExpression => "3";
     public override int Rarity => 30;
     public override bool ResAcid => true;
     public override bool ResCold => true;

@@ -40,9 +40,9 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusInfravision => 4;
-    public override int InitialBonusIntelligence => 4;
-    public override int InitialBonusWisdom => 4;
+    protected override string? BonusInfravisionRollExpression => "4";
+    protected override string? BonusIntelligenceRollExpression => "4";
+    protected override string? BonusWisdomRollExpression => "4";
     public override int Rarity => 45;
     public override bool ResFear => true;
     public override bool ResFire => true;

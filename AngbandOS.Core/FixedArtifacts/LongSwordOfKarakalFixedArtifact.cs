@@ -44,10 +44,10 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    public override int InitialBonusExtraBlows => 2;
-    public override int InitialBonusConstitution => 2;
-    public override int InitialBonusSpeed => 2;
-    public override int InitialBonusStrength => 2;
+    protected override string? BonusAttacksRollExpression => "2";
+    protected override string? BonusConstitutionRollExpression => "2";
+    protected override string? BonusSpeedRollExpression => "2";
+    protected override string? BonusStrengthRollExpression => "2";
     public override int Rarity => 30;
     public override bool Regen => true;
     public override bool ResDark => true;

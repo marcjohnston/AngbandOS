@@ -2131,18 +2131,54 @@ internal sealed class Item : IComparable<Item>
         if (FixedArtifact != null)
         {
             FixedArtifact.CurNum = 1;
-            BonusStrength = FixedArtifact.InitialBonusStrength;
-            BonusIntelligence = FixedArtifact.InitialBonusIntelligence;
-            BonusWisdom = FixedArtifact.InitialBonusWisdom;
-            BonusDexterity = FixedArtifact.InitialBonusDexterity;
-            BonusConstitution = FixedArtifact.InitialBonusConstitution;
-            BonusCharisma = FixedArtifact.InitialBonusCharisma;
-            BonusStealth = FixedArtifact.InitialBonusStealth;
-            BonusSearch = FixedArtifact.InitialBonusSearch;
-            BonusInfravision = FixedArtifact.InitialBonusInfravision;
-            BonusTunnel = FixedArtifact.InitialBonusTunnel;
-            BonusAttacks = FixedArtifact.InitialBonusExtraBlows;
-            BonusSpeed = FixedArtifact.InitialBonusSpeed;
+            if (FixedArtifact.BonusStrength != null)
+            {
+                BonusStrength = FixedArtifact.BonusStrength.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusIntelligence != null)
+            {
+                BonusIntelligence = FixedArtifact.BonusIntelligence.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusWisdom != null)
+            {
+                BonusWisdom = FixedArtifact.BonusWisdom.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusDexterity != null)
+            {
+                BonusDexterity = FixedArtifact.BonusDexterity.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusConstitution != null)
+            {
+                BonusConstitution = FixedArtifact.BonusConstitution.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusCharisma != null)
+            {
+                BonusCharisma = FixedArtifact.BonusCharisma.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusStealth != null)
+            {
+                BonusStealth = FixedArtifact.BonusStealth.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusSearch != null)
+            {
+                BonusSearch = FixedArtifact.BonusSearch.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusInfravision != null)
+            {
+                BonusInfravision = FixedArtifact.BonusInfravision.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusTunnel != null)
+            {
+                BonusTunnel = FixedArtifact.BonusTunnel.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusAttacks != null)
+            {
+                BonusAttacks = FixedArtifact.BonusAttacks.Get(Game.UseRandom);
+            }
+            if (FixedArtifact.BonusSpeed != null)
+            {
+                BonusSpeed = FixedArtifact.BonusSpeed.Get(Game.UseRandom);
+            }
             ArmorClass = FixedArtifact.Ac;
             DamageDice = FixedArtifact.Dd;
             DamageSides = FixedArtifact.Ds;
