@@ -212,6 +212,10 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
+        if (!TestBoolean(InstaArt, mergedCharacteristics.InstaArt))
+        {
+            return false;
+        }
         if (!TestBoolean(Int, mergedCharacteristics.Int))
         {
             return false;

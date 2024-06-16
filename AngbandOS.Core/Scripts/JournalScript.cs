@@ -318,6 +318,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         DisplayStat("Easy Know", 30, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.EasyKnow);
         DisplayStat("Hide Type", 31, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HideType);
         DisplayStat("Show Mods", 32, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShowMods);
+        DisplayStat("Insta Art", 33, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.InstaArt);
         DisplayStat("Levitate", 34, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Feather);
         DisplayStat("Light", 35, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Radius > 0);
         DisplayStat("See Invis", 36, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis);

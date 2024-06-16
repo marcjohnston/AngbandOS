@@ -145,6 +145,8 @@ internal interface IItemCharacteristics
     /// </summary>
     bool Impact { get; }
 
+    bool InstaArt { get; }
+
     /// <summary>
     /// Returns whether or not the item is a great bane of dragons.
     /// </summary>
