@@ -12,17 +12,8 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
 {
     private GemstoneLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    /// <summary>
-    /// Processes the world turn by draining life from the player, when the player does not have anti-magic, 1 time in 1000.
-    /// </summary>
-    public override void EquipmentProcessWorld(Item item)
-    {
-        if (Game.DieRoll(999) == 1 && !Game.HasAntiMagic && Game.InvulnerabilityTimer.Value == 0)
-        {
-            Game.MsgPrint("The Jewel of Judgement drains life from you!");
-            Game.TakeHit(Math.Min(Game.ExperienceLevel.IntValue, 50), "the Jewel of Judgement");
-        }
-    }
+    protected override string? EquipmentProcessWorldScriptName => nameof(JewelJudgementDrainLifeScript);
+
     protected override string SymbolName => nameof(AsteriskSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Gemstone";

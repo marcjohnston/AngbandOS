@@ -87,20 +87,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual int RodChargeCount => 0;
 
     /// <summary>
-    /// Processes a world turn for an item that is on the dungeon floor.  Does nothing, by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="gridTile"></param>
-    public virtual void GridProcessWorld(Item item, GridTile gridTile) { }
-
-    /// <summary>
-    /// Processes the world turn for an item being held by a monster.  Does nothing, by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="mPtr"></param>
-    public virtual void MonsterProcessWorld(Item item, Monster mPtr) { }
-
-    /// <summary>
     /// Consumes the magic of a rechargeable item.  Does nothing, by default.  Rods, staves and wands are supported.
     /// </summary>
     public virtual void EatMagic(Item item) { }
@@ -798,17 +784,70 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <param name="item"></param>
     protected virtual void ApplyRandomPoorRareCharacteristics(Item item) { }
 
+    private void ProcessWorld(Item oPtr)
+    {
+        // Decrement a rod recharge time regardless of where the rod is.
+        if (oPtr.RodRechargeTimeRemaining > 0)
+        {
+            oPtr.RodRechargeTimeRemaining--;
+            if (oPtr.RodRechargeTimeRemaining == 0)
+            {
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
+            }
+        }
+    }
+
+    protected virtual string? GridProcessWorldScriptName => null;
+    protected virtual string? MonsterProcessWorldScriptName => null;
+    protected virtual string? EquipmentProcessWorldScriptName => null;
+    protected virtual string? PackProcessWorldScriptName => null;
+
+    public IScriptItemGridTile? GridProcessWorldScript { get; private set; }
+    public IScriptItemMonster? MonsterProcessWorldScript { get; private set; }
+    public IScriptItem? EquipmentProcessWorldScript { get; private set; }
+    public IScriptItem? PackProcessWorldScript { get; private set; }
+
+    /// <summary>
+    /// Processes a world turn for an item that is on the dungeon floor.  Does nothing, by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="gridTile"></param>
+    public void GridProcessWorld(Item item, GridTile gridTile)
+    {
+        GridProcessWorldScript?.ExecuteScriptItemGridTile(item, gridTile);
+        ProcessWorld(item);
+    }
+
+    /// <summary>
+    /// Processes the world turn for an item being held by a monster.  Does nothing, by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="monster"></param>
+    public void MonsterProcessWorld(Item item, Monster monster)
+    {
+        MonsterProcessWorldScript?.ExecuteScriptItemMonster(item, monster);
+        ProcessWorld(item);
+    }
+
     /// <summary>
     /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..
     /// </summary>
     /// <param name="game"></param>
-    public virtual void PackProcessWorld(Item item) { }
+    public void PackProcessWorld(Item item)
+    {
+        PackProcessWorldScript?.ExecuteScriptItem(item);
+        ProcessWorld(item);
+    }
 
     /// <summary>
     /// Processes the world turn, when the item is being worn/wielded.  Does nothing, by default.  Gemstones of light drain from the player.
     /// </summary>
     /// <param name="game"></param>
-    public virtual void EquipmentProcessWorld(Item item) { }
+    public void EquipmentProcessWorld(Item item)
+    {
+        EquipmentProcessWorldScript?.ExecuteScriptItem(item);
+        ProcessWorld(item);
+    }
 
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
@@ -1005,6 +1044,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         StaffChargeCount = Game.ParseNullableRollExpression(StaffChargeCountRollExpression);
 
         RechargeScript = Game.SingletonRepository.GetNullable<IScriptItemInt>(RechargeScriptName);
+        GridProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItemGridTile>(GridProcessWorldScriptName);
+        MonsterProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItemMonster>(MonsterProcessWorldScriptName);
+        EquipmentProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItem>(EquipmentProcessWorldScriptName);
+        PackProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItem>(PackProcessWorldScriptName);
     }
 
     protected abstract string ItemClassName { get; }

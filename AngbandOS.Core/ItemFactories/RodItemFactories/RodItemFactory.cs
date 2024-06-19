@@ -15,38 +15,7 @@ internal abstract class RodItemFactory : ItemFactory
 
     public abstract int RodRechargeTime { get; }
 
-    private void ProcessWorld(Item oPtr)
-    {
-        if (oPtr.RodRechargeTimeRemaining != 0)
-        {
-            oPtr.RodRechargeTimeRemaining--;
-            if (oPtr.RodRechargeTimeRemaining == 0)
-            {
-                Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
-            }
-        }
-    }
     protected override string? RechargeScriptName => nameof(RechargeRodScript);
-
-    public override void GridProcessWorld(Item item, GridTile gridTile)
-    {
-        ProcessWorld(item);
-    }
-
-    public override void MonsterProcessWorld(Item item, Monster mPtr)
-    {
-        ProcessWorld(item);
-    }
-
-    public override void EquipmentProcessWorld(Item item)
-    {
-        ProcessWorld(item);
-    }
-
-    public override void PackProcessWorld(Item item)
-    {
-        ProcessWorld(item);
-    }
 
     public override void EatMagic(Item oPtr)
     {
