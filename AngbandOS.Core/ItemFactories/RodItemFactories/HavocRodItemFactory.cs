@@ -12,7 +12,6 @@ internal class HavocRodItemFactory : RodItemFactory
 {
     private HavocRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool RequiresAiming => true;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Havoc";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
@@ -27,5 +26,5 @@ internal class HavocRodItemFactory : RodItemFactory
         (100, 16)
     };
     public override int Weight => 15;
-    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(CallChaosIdentifiedAndUsedScriptItemAndDirection), "250");
+    protected override (string, string, bool)? ZapBinderDetails => (nameof(CallChaosIdentifiedAndUsedScriptItemAndDirection), "250", true);
 }

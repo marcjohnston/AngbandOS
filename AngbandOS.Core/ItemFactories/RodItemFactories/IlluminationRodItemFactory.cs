@@ -12,7 +12,6 @@ internal class IlluminationRodItemFactory : RodItemFactory
 {
     private IlluminationRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool RequiresAiming => false;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Illumination";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
@@ -27,5 +26,5 @@ internal class IlluminationRodItemFactory : RodItemFactory
         (20, 1)
     };
     public override int Weight => 15;
-    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(IlluminationIdentifiedAndUsedScriptItemAndDirection), "1d11+10");
+    protected override (string, string, bool)? ZapBinderDetails => (nameof(IlluminationIdentifiedAndUsedScriptItemAndDirection), "1d11+10", false);
 }

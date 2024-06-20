@@ -12,7 +12,6 @@ internal class RecallRodItemFactory : RodItemFactory
 {
     private RecallRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool RequiresAiming => false;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Recall";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
@@ -27,5 +26,5 @@ internal class RecallRodItemFactory : RodItemFactory
         (30, 4)
     };
     public override int Weight => 15;
-    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(RecallIdentifiedAndUsedScriptItemAndDirection), "60");
+    protected override (string, string, bool)? ZapBinderDetails => (nameof(RecallIdentifiedAndUsedScriptItemAndDirection), "60", false);
 }

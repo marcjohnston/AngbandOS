@@ -38,7 +38,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a rod
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeZappedItemFilter))))
+        if (item.Factory.ZapDetails == null)
         {
             Game.MsgPrint("That is not a rod!");
             return;
@@ -54,9 +54,8 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // We may need to aim the rod.  If we know that the rod requires aiming, we get a direction from the player.  Otherwise, if we do not know what
         // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
         // would ask for a direction.
-        RodItemFactory rodItemCategory = (RodItemFactory)item.Factory;
         int dir = 5;
-        if (rodItemCategory.RequiresAiming || !item.Factory.IsFlavorAware)
+        if (item.Factory.ZapDetails.Value.RequiresAiming || !item.Factory.IsFlavorAware)
         {
             if (!Game.GetDirectionWithAim(out int direction))
             {
@@ -99,7 +98,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
 
         // Do the rod-specific effect
         RodItemFactory rodItem = (RodItemFactory)item.Factory;
-        (bool identified, bool used) = rodItem.ZapScriptAndTurnsToRecharge.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
+        (bool identified, bool used) = rodItem.ZapDetails.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
@@ -114,7 +113,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // The player may be able to cancel the zap.
         if (used)
         {
-            item.RodRechargeTimeRemaining = item.Factory.ZapScriptAndTurnsToRecharge.Value.TurnsToRecharge.Get(Game.UseRandom);
+            item.RodRechargeTimeRemaining = item.Factory.ZapDetails.Value.TurnsToRecharge.Get(Game.UseRandom);
         }
         else
         {

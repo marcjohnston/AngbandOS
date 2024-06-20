@@ -228,11 +228,11 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         }
         if (CanBeZapped.HasValue)
         {
-            if (CanBeZapped.Value && item.Factory.ZapScriptAndTurnsToRecharge == null)
+            if (CanBeZapped.Value && item.Factory.ZapDetails == null)
             {
                 return false;
             }
-            if (!CanBeZapped.Value && item.Factory.ZapScriptAndTurnsToRecharge != null)
+            if (!CanBeZapped.Value && item.Factory.ZapDetails != null)
             {
                 return false;
             }

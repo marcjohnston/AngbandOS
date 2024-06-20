@@ -12,7 +12,6 @@ internal class DoorStairLocationRodItemFactory : RodItemFactory
 {
     private DoorStairLocationRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool RequiresAiming => false;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Door/Stair Location";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
@@ -28,5 +27,5 @@ internal class DoorStairLocationRodItemFactory : RodItemFactory
     };
     public override int Weight => 15;
 
-    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(DetectDoorsAndStairsIdentifiedAndUsedScriptItemAndDirection), "70");
+    protected override (string, string, bool)? ZapBinderDetails => (nameof(DetectDoorsAndStairsIdentifiedAndUsedScriptItemAndDirection), "70", false);
 }

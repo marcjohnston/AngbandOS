@@ -21,7 +21,6 @@ internal abstract class RodItemFactory : ItemFactory
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-    public abstract bool RequiresAiming { get; }
     public override bool EasyKnow => true;
     public override int PackSort => 13;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Rod;

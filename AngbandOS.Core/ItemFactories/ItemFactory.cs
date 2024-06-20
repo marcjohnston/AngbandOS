@@ -1064,9 +1064,12 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
         EatMagicScript = Game.SingletonRepository.GetNullable<IScriptItem>(EatMagicScriptName);
 
-        if (ZapScriptNameAndTurnsToRecharge != null)
+        if (ZapBinderDetails != null)
         {
-            ZapScriptAndTurnsToRecharge = (Game.SingletonRepository.Get<IIdentifiedAndUsedScriptItemDirection>(ZapScriptNameAndTurnsToRecharge.Value.ScriptName), Game.ParseRollExpression(ZapScriptNameAndTurnsToRecharge.Value.TurnsToRecharge));
+            IIdentifiedAndUsedScriptItemDirection identifiedAndUsedScriptItemDirection = Game.SingletonRepository.Get<IIdentifiedAndUsedScriptItemDirection>(ZapBinderDetails.Value.ScriptName);
+            Roll roll = Game.ParseRollExpression(ZapBinderDetails.Value.TurnsToRecharge);
+            bool requiresAiming = ZapBinderDetails.Value.RequiresAiming;
+            ZapDetails = (identifiedAndUsedScriptItemDirection, roll, requiresAiming);
         }
     }
 
@@ -1074,9 +1077,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// Returns the number of turns an item that can be zapped needs before it is recharged; or null, if the item cannot be zapped.  A value of zero, means the item does not need any turns to
     /// be recharged after it is used.
     /// </summary>
-    protected virtual (string ScriptName, string TurnsToRecharge)? ZapScriptNameAndTurnsToRecharge => null;
+    protected virtual (string ScriptName, string TurnsToRecharge, bool RequiresAiming)? ZapBinderDetails => null;
 
-    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge)? ZapScriptAndTurnsToRecharge { get; private set; } = null;
+    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming)? ZapDetails { get; private set; } = null;
 
     protected abstract string ItemClassName { get; }
 

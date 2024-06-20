@@ -12,7 +12,6 @@ internal class PolymorphRodItemFactory : RodItemFactory
 {
     private PolymorphRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool RequiresAiming => true;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Polymorph";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
@@ -27,5 +26,5 @@ internal class PolymorphRodItemFactory : RodItemFactory
         (35, 1)
     };
     public override int Weight => 15;
-    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(PolymorphIdentifiedAndUsedScriptItemAndDirection), "25");
+    protected override (string, string, bool)? ZapBinderDetails => (nameof(PolymorphIdentifiedAndUsedScriptItemAndDirection), "25", true);
 }

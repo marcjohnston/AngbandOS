@@ -12,7 +12,6 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
 {
     private TeleportOtherRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool RequiresAiming => true;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Teleport Other";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
@@ -27,5 +26,5 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
         (45, 2)
     };
     public override int Weight => 15;
-    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(TeleportOtherIdentifiedAndUsedScriptItemAndDirection), "25");
+    protected override (string, string, bool)? ZapBinderDetails => (nameof(TeleportOtherIdentifiedAndUsedScriptItemAndDirection), "25", true);
 }

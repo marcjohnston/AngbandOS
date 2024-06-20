@@ -12,7 +12,6 @@ internal class PerceptionRodItemFactory : RodItemFactory
 {
     private PerceptionRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool RequiresAiming => false;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Perception";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
@@ -28,5 +27,5 @@ internal class PerceptionRodItemFactory : RodItemFactory
         (100, 8)
     };
     public override int Weight => 15;
-    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(PerceptionIdentifiedAndUsedScriptItemAndDirection), "10");
+    protected override (string, string, bool)? ZapBinderDetails => (nameof(PerceptionIdentifiedAndUsedScriptItemAndDirection), "10", false);
 }
