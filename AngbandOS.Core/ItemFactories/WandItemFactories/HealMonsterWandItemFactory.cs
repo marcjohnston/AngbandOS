@@ -22,7 +22,7 @@ internal class HealMonsterWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int RodChargeCount => Game.DieRoll(20) + 8;
+    public override int WandChargeCount => Game.DieRoll(20) + 8;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 2;

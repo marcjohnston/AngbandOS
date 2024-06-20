@@ -12,7 +12,7 @@ internal class AcidBoltWandItemFactory : WandItemFactory
 {
     private AcidBoltWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override int RodChargeCount => Game.DieRoll(8) + 6;
+    public override int WandChargeCount => Game.DieRoll(8) + 6;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Acid Bolts";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";

@@ -84,7 +84,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns the number of charges to assign to an item that is a rod.  A value of 0 is returned, by default.
     /// </summary>
-    public virtual int RodChargeCount => 0;
+    public virtual int WandChargeCount => 0;
 
     public string UniqueId = Guid.NewGuid().ToString();
 

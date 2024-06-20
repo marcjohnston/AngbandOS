@@ -13,7 +13,7 @@ internal class LightWandItemFactory : WandItemFactory
     private LightWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(MinusSignSymbol);
-    public override int RodChargeCount => Game.DieRoll(10) + 6;
+    public override int WandChargeCount => Game.DieRoll(10) + 6;
     public override string Name => "Light";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";

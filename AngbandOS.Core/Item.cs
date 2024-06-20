@@ -337,7 +337,7 @@ internal sealed class Item : IComparable<Item>
         NutritionalValue = Factory.InitialNutritionalValue;        
         GoldPieces = Factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
-        WandChargesRemaining = Factory.RodChargeCount;
+        WandChargesRemaining = Factory.WandChargeCount;
 
         if (Factory.StaffChargeCount != null)
         {

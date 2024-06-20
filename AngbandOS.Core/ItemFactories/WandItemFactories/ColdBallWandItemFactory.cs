@@ -17,7 +17,7 @@ internal class ColdBallWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int RodChargeCount => Game.DieRoll(6) + 2;
+    public override int WandChargeCount => Game.DieRoll(6) + 2;
     public override int Cost => 1500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
