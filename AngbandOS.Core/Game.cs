@@ -4918,7 +4918,9 @@ public bool IsDead = false;
                     {
                         continue;
                     }
-                    if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Gold)
+
+                    // Any item that has associated gold pieces is considered detectable.
+                    if (oPtr.GoldPieces > 0)
                     {
                         oPtr.WasNoticed = true;
                         MainForm.RefreshMapLocation(y, x);
@@ -7269,8 +7271,9 @@ public bool IsDead = false;
         {
             string itemName = item.GetFullDescription(true);
             Disturb(false);
-            // We always pick up gold
-            if (item.Factory.CategoryEnum == ItemTypeEnum.Gold)
+
+            // We always pick up gold.
+            if (item.GoldPieces > 0)
             {
                 MsgPrint($"You collect {item.GoldPieces} gold pieces worth of {itemName}.");
                 Gold.IntValue += item.GoldPieces;
