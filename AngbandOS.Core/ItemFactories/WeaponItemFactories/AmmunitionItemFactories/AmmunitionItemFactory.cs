@@ -22,6 +22,11 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         return bonusValue;
     }
 
+    /// <summary>
+    /// Ammunition items return a maximum number of 20 items that can be enchanted at one time.
+    /// </summary>
+    public override int EnchantmentMaximumCount => 20;
+
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         base.EnchantItem(item, usedOkay, level, power);

@@ -5353,10 +5353,7 @@ public bool IsDead = false;
         bool isArtifact = oPtr.IsArtifact;
         ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
         int prob = oPtr.Count * 100;
-        if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Bolt || oPtr.Factory.CategoryEnum == ItemTypeEnum.Arrow || oPtr.Factory.CategoryEnum == ItemTypeEnum.Shot)
-        {
-            prob /= 20;
-        }
+        prob /= oPtr.Factory.EnchantmentMaximumCount;
         for (int i = 0; i < n; i++)
         {
             if (RandomLessThan(prob) >= 100)
@@ -6876,10 +6873,10 @@ public bool IsDead = false;
     /// <returns> True if we successfully channeled it, false if not </returns>
     public bool DoCmdChannel(Item item)
     {
-        int cost;
-        int price = item.Factory.Cost;
+        int manaNeeded;
+        int itemCost = item.Factory.Cost;
         // Never channel worthless items
-        if (price <= 0)
+        if (itemCost <= 0)
         {
             return false;
         }
@@ -6887,23 +6884,23 @@ public bool IsDead = false;
         switch (item.Factory.CategoryEnum)
         {
             case ItemTypeEnum.Wand:
-                cost = price / 150;
+                manaNeeded = itemCost / 150;
                 break;
 
             case ItemTypeEnum.Scroll:
-                cost = price / 10;
+                manaNeeded = itemCost / 10;
                 break;
 
             case ItemTypeEnum.Potion:
-                cost = price / 20;
+                manaNeeded = itemCost / 20;
                 break;
 
             case ItemTypeEnum.Rod:
-                cost = price / 250;
+                manaNeeded = itemCost / 250;
                 break;
 
             case ItemTypeEnum.Staff:
-                cost = price / 100;
+                manaNeeded = itemCost / 100;
                 break;
 
             default:
@@ -6911,15 +6908,15 @@ public bool IsDead = false;
                 return false;
         }
         // Always cost at least 1 mana
-        if (cost < 1)
+        if (manaNeeded < 1)
         {
-            cost = 1;
+            manaNeeded = 1;
         }
         // Spend the mana if we can
-        if (cost <= Mana.IntValue)
+        if (manaNeeded <= Mana.IntValue)
         {
             MsgPrint("You channel mana to power the effect.");
-            Mana.IntValue -= cost;
+            Mana.IntValue -= manaNeeded;
             return true;
         }
         // Use some mana in the attempt, even if we failed

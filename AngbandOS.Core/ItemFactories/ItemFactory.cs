@@ -17,6 +17,12 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns the maximum number of items that can be enchanted at one time.  A divisor of 1 is returned, by default.  Ammunition items return 20.  Item counts greater than this value
+    /// will have a decreased probability of enchantment.
+    /// </summary>
+    public virtual int EnchantmentMaximumCount => 1;
+
+    /// <summary>
     /// Returns true, if the item is magical and is noticed with the detect magical scoll.
     /// </summary>
     public virtual bool IsMagical => false;
