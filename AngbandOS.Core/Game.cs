@@ -14734,18 +14734,11 @@ public bool IsDead = false;
 
     public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
     {
-        if (item.Factory.CategoryEnum == ItemTypeEnum.Gold)
+        if (item.GoldPieces > 0)
         {
-            return false;
+            throw new Exception("The ItemMatchesFilter with an item of gold shouldn't have been possible.");
         }
-        if (itemFilter != null)
-        {
-            if (!itemFilter.ItemMatches(item))
-            {
-                return false;
-            }
-        }
-        return true;
+        return (itemFilter == null || itemFilter.ItemMatches(item));
     }
 
     public int LabelToEquip(char c)
