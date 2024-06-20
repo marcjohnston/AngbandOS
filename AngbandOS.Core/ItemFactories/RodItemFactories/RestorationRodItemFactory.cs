@@ -27,39 +27,5 @@ internal class RestorationRodItemFactory : RodItemFactory
         (80, 16)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 999;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.RunSuccessfulScript(nameof(RestoreLevelScript)))
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Strength))
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Wisdom))
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Dexterity))
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Constitution))
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Charisma))
-        {
-            zapRodEvent.Identified = true;
-        }
-
-        // The rod needs 999 turns to regenerate.
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(RestorationIdentifiedAndUsedScriptItemAndDirection), "999");
 }

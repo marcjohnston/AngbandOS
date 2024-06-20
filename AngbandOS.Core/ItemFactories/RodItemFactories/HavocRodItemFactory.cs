@@ -27,11 +27,5 @@ internal class HavocRodItemFactory : RodItemFactory
         (100, 16)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 250;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.RunScript(nameof(CallChaosCancellableScript));
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(CallChaosIdentifiedAndUsedScriptItemAndDirection), "250");
 }

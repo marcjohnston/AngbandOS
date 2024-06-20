@@ -27,11 +27,5 @@ internal class DetectionRodItemFactory : RodItemFactory
         (30, 8)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 99;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.RunScript(nameof(DetectionScript));
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(DetectionIdentifiedAndUsedScriptItemAndDirection), "99");
 }

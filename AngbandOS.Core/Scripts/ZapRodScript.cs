@@ -55,7 +55,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
         // would ask for a direction.
         RodItemFactory rodItemCategory = (RodItemFactory)item.Factory;
-        int? dir = 5;
+        int dir = 5;
         if (rodItemCategory.RequiresAiming || !item.Factory.IsFlavorAware)
         {
             if (!Game.GetDirectionWithAim(out int direction))
@@ -67,7 +67,6 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
 
         // Using a rod takes a whole turn
         Game.EnergyUse = 100;
-        bool identified = false;
         int itemLevel = item.Factory.LevelNormallyFound;
         // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
         int chance = Game.SkillUseDevice;
@@ -100,8 +99,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
 
         // Do the rod-specific effect
         RodItemFactory rodItem = (RodItemFactory)item.Factory;
-        ZapRodEvent zapRodEvent = new ZapRodEvent(item, dir);
-        rodItem.Execute(zapRodEvent);
+        (bool identified, bool used) = rodItem.ZapScriptAndTurnsToRecharge.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
@@ -114,10 +112,14 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         }
 
         // The player may be able to cancel the zap.
-        if (!zapRodEvent.UseCharge)
+        if (used)
+        {
+            item.RodRechargeTimeRemaining = item.Factory.ZapScriptAndTurnsToRecharge.Value.TurnsToRecharge.Get(Game.UseRandom);
+        }
+        else
         {
             item.RodRechargeTimeRemaining = 0;
-            return ;
+            return;
         }
 
         // Channelers can spend mana instead of a charge

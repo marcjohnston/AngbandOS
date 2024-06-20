@@ -34,20 +34,7 @@ internal abstract class WandItemFactory : ItemFactory
 
     protected override string? RechargeScriptName => nameof(RechargeWandScript);
 
-    public override void EatMagic(Item oPtr)
-    {
-        if (oPtr.WandChargesRemaining > 0)
-        {
-            Game.Mana.IntValue += oPtr.WandChargesRemaining * LevelNormallyFound;
-            oPtr.WandChargesRemaining = 0;
-        }
-        else
-        {
-            Game.MsgPrint("There's no energy there to absorb!");
-        }
-        oPtr.IdentEmpty = true;
-    }
-
+    protected override string? EatMagicScriptName => nameof(WandEatMagicScript);
 
     /// <summary>
     /// Returns true, because wands are magical and should be detected with the detect magic scroll.

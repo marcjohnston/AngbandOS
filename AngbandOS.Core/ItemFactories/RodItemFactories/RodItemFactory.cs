@@ -13,33 +13,18 @@ internal abstract class RodItemFactory : ItemFactory
     public RodItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(RodsItemClass);
 
-    public abstract int RodRechargeTime { get; }
-
     protected override string? RechargeScriptName => nameof(RechargeRodScript);
 
-    public override void EatMagic(Item oPtr)
-    {
-        if (oPtr.RodRechargeTimeRemaining > 0)
-        {
-            Game.MsgPrint("You can't absorb energy from a discharged rod.");
-        }
-        else
-        {
-            Game.Mana.IntValue += 2 * LevelNormallyFound;
-            oPtr.RodRechargeTimeRemaining = 500;
-        }
-    }
+    protected override string? EatMagicScriptName => nameof(RodEatMagicScript);
 
     /// <summary>
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-    public override bool CanBeZapped => true;
     public abstract bool RequiresAiming { get; }
     public override bool EasyKnow => true;
     public override int PackSort => 13;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Rod;
     public override int BaseValue => 90;
     public override ColorEnum Color => ColorEnum.Turquoise;
-    public abstract void Execute(ZapRodEvent zapRodEvent);
 }

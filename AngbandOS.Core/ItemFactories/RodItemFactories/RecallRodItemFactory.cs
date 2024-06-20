@@ -27,11 +27,5 @@ internal class RecallRodItemFactory : RodItemFactory
         (30, 4)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 60;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.RunScript(nameof(ToggleRecallScript));
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(RecallIdentifiedAndUsedScriptItemAndDirection), "60");
 }

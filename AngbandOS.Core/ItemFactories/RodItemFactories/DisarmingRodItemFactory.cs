@@ -27,13 +27,5 @@ internal class DisarmingRodItemFactory : RodItemFactory
         (35, 1)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 15 + Game.DieRoll(15);
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.DisarmTrap(zapRodEvent.Dir.Value))
-        {
-            zapRodEvent.Identified = true;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(DisarmingIdentifiedAndUsedScriptItemAndDirection), "1d15+15");
 }

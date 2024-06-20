@@ -34,19 +34,7 @@ internal abstract class StaffItemFactory : ItemFactory
         return true;
     }
 
-    public override void EatMagic(Item oPtr)
-    {
-        if (oPtr.StaffChargesRemaining > 0)
-        {
-            Game.Mana.IntValue += oPtr.StaffChargesRemaining * LevelNormallyFound;
-            oPtr.StaffChargesRemaining = 0;
-        }
-        else
-        {
-            Game.MsgPrint("There's no energy there to absorb!");
-        }
-        oPtr.IdentEmpty = true;
-    }
+    protected override string? EatMagicScriptName => nameof(StaffEatMagicScript);
 
     public override bool CanBeUsed => true;
 

@@ -27,11 +27,5 @@ internal class ColdBallsRodItemFactory : RodItemFactory
         (60, 1)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 25;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), zapRodEvent.Dir.Value, 48, 2);
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(ColdBall48r2IdentifiedAndUsedScriptItemAndDirection), "25");
 }

@@ -27,11 +27,5 @@ internal class ProbingRodItemFactory : RodItemFactory
         (40, 4)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 50;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.Probing();
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(ProbingIdentifiedAndUsedScriptItemAndDirection), "50");
 }

@@ -27,21 +27,5 @@ internal class HealingRodItemFactory : RodItemFactory
         (80, 8)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 999;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.RestoreHealth(500))
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.StunTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.BleedingTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(HealingIdentifiedAndUsedScriptItemAndDirection), "999");
 }

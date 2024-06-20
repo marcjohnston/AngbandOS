@@ -27,11 +27,5 @@ internal class LightningBallsRodItemFactory : RodItemFactory
         (55, 1)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 23;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), zapRodEvent.Dir.Value, 32, 2);
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(ElectricityBall32r2IdentifiedAndUsedScriptItemAndDirection), "23");
 }

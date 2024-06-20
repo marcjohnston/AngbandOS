@@ -55,6 +55,9 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
                 {
                     Game.ActivateDreadCurse();
                 }
+
+
+                // Items that teleport.
                 if (mergedCharacteristics.Teleport && Game.RandomLessThan(100) < 1)
                 {
                     if (oPtr.IsCursed && !Game.HasAntiTeleport)
@@ -71,6 +74,8 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
                         }
                     }
                 }
+
+                // Activated items only recharge when they are being worn.
                 if (oPtr.ActivationRechargeTimeRemaining > 0)
                 {
                     oPtr.ActivationRechargeTimeRemaining--;

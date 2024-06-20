@@ -27,12 +27,5 @@ internal class LightRodItemFactory : RodItemFactory
         (10, 1)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 9;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.MsgPrint("A line of blue shimmering light appears.");
-        Game.LightLine(zapRodEvent.Dir.Value);
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(LightBoltIdentifiedAndUsedScriptItemAndDirection), "9");
 }

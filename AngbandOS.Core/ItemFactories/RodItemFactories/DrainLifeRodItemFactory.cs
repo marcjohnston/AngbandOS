@@ -27,13 +27,5 @@ internal class DrainLifeRodItemFactory : RodItemFactory
         (75, 4)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 23;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.DrainLife(zapRodEvent.Dir.Value, 75))
-        {
-            zapRodEvent.Identified = true;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(DrainLifeIdentifiedAndUsedScriptItemAndDirection), "23");
 }

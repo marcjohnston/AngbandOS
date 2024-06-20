@@ -27,13 +27,5 @@ internal class TrapLocationRodItemFactory : RodItemFactory
         (5, 1)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 10 + Game.DieRoll(10);
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.DetectTraps())
-        {
-            zapRodEvent.Identified = true;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(TrapLocationIdentifiedAndUsedScriptItemAndDirection), "1d10+10");
 }

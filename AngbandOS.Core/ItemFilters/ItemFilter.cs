@@ -219,9 +219,16 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         {
             return false;
         }
-        if (CanBeZapped != null && item.Factory.CanBeZapped != CanBeZapped)
+        if (CanBeZapped.HasValue)
         {
-            return false;
+            if (CanBeZapped.Value && item.Factory.ZapScriptAndTurnsToRecharge == null)
+            {
+                return false;
+            }
+            if (!CanBeZapped.Value && item.Factory.ZapScriptAndTurnsToRecharge != null)
+            {
+                return false;
+            }
         }
 
         // Check to see if the item must be a usable spell book.

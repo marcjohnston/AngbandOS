@@ -28,17 +28,5 @@ internal class DoorStairLocationRodItemFactory : RodItemFactory
     };
     public override int Weight => 15;
 
-    public override int RodRechargeTime => 70;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.DetectDoors())
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.DetectStairs())
-        {
-            zapRodEvent.Identified = true;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(DetectDoorsAndStairsIdentifiedAndUsedScriptItemAndDirection), "70");
 }

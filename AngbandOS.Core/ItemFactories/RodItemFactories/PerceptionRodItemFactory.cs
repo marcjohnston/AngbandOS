@@ -28,14 +28,5 @@ internal class PerceptionRodItemFactory : RodItemFactory
         (100, 8)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 10;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        zapRodEvent.Identified = true;
-        if (Game.RunCancellableScript(nameof(IdentifyItemCancellableScript)))
-        {
-            zapRodEvent.UseCharge = false;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(PerceptionIdentifiedAndUsedScriptItemAndDirection), "10");
 }

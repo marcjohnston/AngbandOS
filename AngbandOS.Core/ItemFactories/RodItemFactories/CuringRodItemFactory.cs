@@ -27,33 +27,5 @@ internal class CuringRodItemFactory : RodItemFactory
         (65, 8)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 999;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.BlindnessTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.PoisonTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.ConfusedTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.StunTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.BleedingTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        if (Game.HallucinationsTimer.ResetTimer())
-        {
-            zapRodEvent.Identified = true;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(CuringIdentifiedAndUsedScriptItemAndDirection), "999");
 }

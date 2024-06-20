@@ -27,20 +27,5 @@ internal class SpeedRodItemFactory : RodItemFactory
         (95, 16)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 99;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.HasteTimer.Value == 0)
-        {
-            if (Game.HasteTimer.SetTimer(Game.DieRoll(30) + 15))
-            {
-                zapRodEvent.Identified = true;
-            }
-        }
-        else
-        {
-            Game.HasteTimer.AddTimer(5);
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(SpeedIdentifiedAndUsedScriptItemAndDirection), "99");
 }

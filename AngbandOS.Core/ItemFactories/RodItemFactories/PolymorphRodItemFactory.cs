@@ -27,13 +27,5 @@ internal class PolymorphRodItemFactory : RodItemFactory
         (35, 1)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 25;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        if (Game.PolyMonster(zapRodEvent.Dir.Value))
-        {
-            zapRodEvent.Identified = true;
-        }
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(PolymorphIdentifiedAndUsedScriptItemAndDirection), "25");
 }

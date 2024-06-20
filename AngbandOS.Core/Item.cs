@@ -366,7 +366,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public void EatMagic()
     {
-        Factory.EatMagic(this);
+        Factory.EatMagicScript.ExecuteScriptItem(this);
     }
 
     /// <summary>

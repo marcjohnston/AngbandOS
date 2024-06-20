@@ -27,11 +27,5 @@ internal class AcidBoltsRodItemFactory : RodItemFactory
         (40, 1)
     };
     public override int Weight => 15;
-    public override int RodRechargeTime => 12;
-    public override void Execute(ZapRodEvent zapRodEvent)
-    {
-        Game.FireBoltOrBeam(10, Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), zapRodEvent.Dir.Value, Game.DiceRoll(6, 8));
-        zapRodEvent.Identified = true;
-        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
-    }
+    protected override (string, string)? ZapScriptNameAndTurnsToRecharge => (nameof(AcidBolts6d8IdentifiedAndUsedScriptItemAndDirection), "12");
 }

@@ -86,11 +86,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public virtual int RodChargeCount => 0;
 
-    /// <summary>
-    /// Consumes the magic of a rechargeable item.  Does nothing, by default.  Rods, staves and wands are supported.
-    /// </summary>
-    public virtual void EatMagic(Item item) { }
-
     public string UniqueId = Guid.NewGuid().ToString();
 
     /// <summary>
@@ -797,6 +792,18 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         }
     }
 
+    /// <summary>
+    /// Returns the name of the script to run, when the energy of a rechargeable item is consumed; or null, if the item does not have charges that can be consumed or those charges cannot be consumed.
+    /// This property is used to bind the <see cref="EatMagicScript"/> property during the bind phase.
+    /// </summary>
+    protected virtual string? EatMagicScriptName => null;
+
+    /// <summary>
+    /// Returns the the script to run, when the energy of a rechargeable item is consumed; or null, if the item does not have charges that can be consumed or those charges cannot be consumed.
+    /// This property is bound using the <see cref="EatMagicScriptName"/> property during the bind phase.
+    /// </summary>
+    public IScriptItem? EatMagicScript { get; private set; }
+
     protected virtual string? GridProcessWorldScriptName => null;
     protected virtual string? MonsterProcessWorldScriptName => null;
     protected virtual string? EquipmentProcessWorldScriptName => null;
@@ -928,10 +935,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// Returns true, if the item can be used.
     /// </summary>
     public virtual bool CanBeUsed => false;
-    /// <summary>
-    /// Returns true, if the item can be zapped.
-    /// </summary>
-    public virtual bool CanBeZapped => false;
 
     /// <summary>
     /// Returns true, if the item can be chosen for the Fire command.
@@ -1048,7 +1051,22 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         MonsterProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItemMonster>(MonsterProcessWorldScriptName);
         EquipmentProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItem>(EquipmentProcessWorldScriptName);
         PackProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItem>(PackProcessWorldScriptName);
+
+        EatMagicScript = Game.SingletonRepository.GetNullable<IScriptItem>(EatMagicScriptName);
+
+        if (ZapScriptNameAndTurnsToRecharge != null)
+        {
+            ZapScriptAndTurnsToRecharge = (Game.SingletonRepository.Get<IIdentifiedAndUsedScriptItemDirection>(ZapScriptNameAndTurnsToRecharge.Value.ScriptName), Game.ParseRollExpression(ZapScriptNameAndTurnsToRecharge.Value.TurnsToRecharge));
+        }
     }
+
+    /// <summary>
+    /// Returns the number of turns an item that can be zapped needs before it is recharged; or null, if the item cannot be zapped.  A value of zero, means the item does not need any turns to
+    /// be recharged after it is used.
+    /// </summary>
+    protected virtual (string ScriptName, string TurnsToRecharge)? ZapScriptNameAndTurnsToRecharge => null;
+
+    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge)? ZapScriptAndTurnsToRecharge { get; private set; } = null;
 
     protected abstract string ItemClassName { get; }
 
