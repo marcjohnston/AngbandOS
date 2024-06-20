@@ -17,7 +17,6 @@ internal class StoneToMudWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(8) + 3;
     public override int Cost => 300;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -29,6 +28,5 @@ internal class StoneToMudWandItemFactory : WandItemFactory
         (80, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(StoneToMudIdentifableDirectionalScript);
-    public override int WandChargeValue => 15;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(StoneToMudIdentifableDirectionalScript), "1d8+3", 15);
 }

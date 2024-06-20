@@ -17,7 +17,6 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(2) + 1;
     public override int Cost => 95000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -32,6 +31,5 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
 
-    protected override string? ActivateWandScriptName => nameof(ShardBall1D50P75R2IdentifableDirectionalScript);
-    public override int WandChargeValue => 4500;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(ShardBall1D50P75R2IdentifableDirectionalScript), "1d2+1", 4500);
 }

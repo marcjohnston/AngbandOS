@@ -17,7 +17,6 @@ internal class FireBoltsWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(8) + 6;
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -27,6 +26,5 @@ internal class FireBoltsWandItemFactory : WandItemFactory
         (30, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(FireBolt6D8IdentifableDirectionalScript);
-    public override int WandChargeValue => 50;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(FireBolt6D8IdentifableDirectionalScript), "1d8+6", 50);
 }

@@ -22,7 +22,6 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(20) + 8;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 2;
@@ -31,5 +30,5 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(HasteMonsterIdentifableDirectionalScript);
+    protected override (string, string, int)? AimingBinderDetails => (nameof(HasteMonsterIdentifableDirectionalScript), "1d20+8", 0);
 }

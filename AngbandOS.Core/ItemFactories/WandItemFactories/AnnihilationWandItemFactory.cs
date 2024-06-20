@@ -12,7 +12,6 @@ internal class AnnihilationWandItemFactory : WandItemFactory
 {
     private AnnihilationWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override int WandChargeCount => Game.DieRoll(2) + 1;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Annihilation";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
@@ -31,6 +30,5 @@ internal class AnnihilationWandItemFactory : WandItemFactory
         (60, 4)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(Annihilation125IdentifableDirectionalScript);
-    public override int WandChargeValue => 150;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(Annihilation125IdentifableDirectionalScript), "1d2+1", 150);
 }

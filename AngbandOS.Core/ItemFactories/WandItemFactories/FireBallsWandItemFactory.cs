@@ -17,7 +17,6 @@ internal class FireBallsWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(4) + 2;
     public override int Cost => 1800;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -28,6 +27,5 @@ internal class FireBallsWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(FireBall72R2IdentifableDirectionalScript);
-    public override int WandChargeValue => 90;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(FireBall72R2IdentifableDirectionalScript), "1d4+2", 90);
 }

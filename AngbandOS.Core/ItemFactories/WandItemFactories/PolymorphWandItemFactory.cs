@@ -17,7 +17,6 @@ internal class PolymorphWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(8) + 6;
     public override int Cost => 400;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -27,6 +26,5 @@ internal class PolymorphWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(PolymorphMonsterIdentifableDirectionalScript);
-    public override int WandChargeValue => 20;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(PolymorphMonsterIdentifableDirectionalScript), "1d8+6", 20);
 }

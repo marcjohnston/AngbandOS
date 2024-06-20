@@ -17,8 +17,6 @@ internal class WonderWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(15) + 8;
-
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -32,6 +30,5 @@ internal class WonderWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(WonderIdentifableDirectionalScript);
-    public override int WandChargeValue => 13;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(WonderIdentifableDirectionalScript), "1d15+8", 13);
 }

@@ -179,13 +179,13 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         {
             return false;
         }
-        if (IsRechargable != null)
+        if (IsRechargable.HasValue)
         {
-            if (IsRechargable == true && item.Factory.RechargeScript == null)
+            if (IsRechargable.Value && item.Factory.RechargeScript == null)
             {
                 return false;
             }
-            if (IsRechargable == false && item.Factory.RechargeScript != null)
+            else if (!IsRechargable.Value && item.Factory.RechargeScript != null)
             {
                 return false;
             }
@@ -198,9 +198,16 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         {
             return false;
         }
-        if (CanBeAimed != null && item.Factory.CanBeAimed != CanBeAimed)
+        if (CanBeAimed.HasValue)
         {
-            return false;
+            if (CanBeAimed.Value && item.Factory.AimingDetails == null)
+            {
+                return false;
+            }
+            else if (!CanBeAimed.Value && item.Factory.AimingDetails != null)
+            {
+                return false;
+            }
         }
 
         if (CanBeEaten != null && item.Factory.CanBeEaten != CanBeEaten)

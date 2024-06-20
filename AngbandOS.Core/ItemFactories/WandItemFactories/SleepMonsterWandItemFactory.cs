@@ -17,7 +17,6 @@ internal class SleepMonsterWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(15) + 8;
     public override int Cost => 500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -27,6 +26,5 @@ internal class SleepMonsterWandItemFactory : WandItemFactory
         (5, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(SleepMonsterIdentifableDirectionalScript);
-    public override int WandChargeValue => 20;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(SleepMonsterIdentifableDirectionalScript), "1d15+8", 20);
 }

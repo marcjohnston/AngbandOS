@@ -17,7 +17,6 @@ internal class DestroyTrapOrDoorWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(8) + 6;
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -27,6 +26,5 @@ internal class DestroyTrapOrDoorWandItemFactory : WandItemFactory
         (10, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(DestroyTrapOrDoorIdentifableDirectionalScript);
-    public override int WandChargeValue => 5;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(DestroyTrapOrDoorIdentifableDirectionalScript), "1d8+6", 5);
 }

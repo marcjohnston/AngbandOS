@@ -17,7 +17,6 @@ internal class TameMonsterWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(6) + 2;
     public override int Cost => 1500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -27,6 +26,5 @@ internal class TameMonsterWandItemFactory : WandItemFactory
         (30, 2)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(CharmMonster45IdentifableDirectionalScript);
-    public override int WandChargeValue => 75;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(CharmMonster45IdentifableDirectionalScript), "1d6+2", 75);
 }

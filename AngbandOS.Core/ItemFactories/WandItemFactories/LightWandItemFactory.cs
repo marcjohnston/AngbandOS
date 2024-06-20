@@ -13,7 +13,6 @@ internal class LightWandItemFactory : WandItemFactory
     private LightWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(MinusSignSymbol);
-    public override int WandChargeCount => Game.DieRoll(10) + 6;
     public override string Name => "Light";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
@@ -27,6 +26,5 @@ internal class LightWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(LineOfLightIdentifableDirectionalScript);
-    public override int WandChargeValue => 10;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(LineOfLightIdentifableDirectionalScript), "1d10+6", 10);
 }

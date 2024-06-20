@@ -17,7 +17,6 @@ internal class DragonsFrostWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(3) + 1;
     public override int Cost => 2400;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -31,6 +30,5 @@ internal class DragonsFrostWandItemFactory : WandItemFactory
         (50, 4)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(ColdBall80R3IdentifableDirectionalScript);
-    public override int WandChargeValue => 120;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(ColdBall80R3IdentifableDirectionalScript), "1d3+1", 120);
 }

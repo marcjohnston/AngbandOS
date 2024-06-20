@@ -18,7 +18,6 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
 
-    public override int WandChargeCount => Game.DieRoll(10) + 6;
     public override int Cost => 500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -28,6 +27,5 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(SlowMonsterIdentifableDirectionalScript);
-    public override int WandChargeValue => 25;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(SlowMonsterIdentifableDirectionalScript), "1d10+6", 25);
 }

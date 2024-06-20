@@ -12,7 +12,6 @@ internal class AcidBallWandItemFactory : WandItemFactory
 {
     private AcidBallWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override int WandChargeCount => Game.DieRoll(5) + 2;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Acid Balls";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
@@ -28,6 +27,5 @@ internal class AcidBallWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(AcidBall60R2IdentifableDirectionalScript);
-    public override int WandChargeValue => 83; 
+    protected override (string, string, int)? AimingBinderDetails => (nameof(AcidBall60R2IdentifableDirectionalScript), "1d5+2", 83);
 }

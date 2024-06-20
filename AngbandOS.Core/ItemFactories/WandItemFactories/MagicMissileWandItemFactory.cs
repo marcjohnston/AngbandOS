@@ -17,7 +17,6 @@ internal class MagicMissileWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(10) + 6;
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -27,6 +26,5 @@ internal class MagicMissileWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(MagicMissle2D6IdentifableDirectionalScript);
-    public override int WandChargeValue => 10;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(MagicMissle2D6IdentifableDirectionalScript), "1d10+6", 10);
 }

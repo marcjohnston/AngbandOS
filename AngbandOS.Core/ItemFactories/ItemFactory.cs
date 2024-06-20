@@ -39,9 +39,16 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual int TurnOfLightValue => 0;
 
     /// <summary>
-    /// Returns the value of each wand charge.  Returns 0, by default.
+    /// Returns the name of the activation script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
+    /// item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="AimingDetails"/>  property during the bind phase.
     /// </summary>
-    public virtual int WandChargeValue => 0;
+    protected virtual (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue)? AimingBinderDetails => null;
+
+    /// <summary>
+    /// Returns the activation script for wands when aimed, a Roll to determine the number of charges to assign to new wands and the value for each charge; or null, if the item cannot be aimed.  
+    /// This property is bound from the <see cref="AimingBinderDetails"/> property during the bind phase.
+    /// </summary>
+    public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue)? AimingDetails { get; private set; } = null;
 
     /// <summary>
     /// Returns the value of each staff charge.  Returns 0, by default.
@@ -80,11 +87,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected virtual string? RechargeScriptName => null;
 
     public IScriptItemInt? RechargeScript { get; private set; }
-
-    /// <summary>
-    /// Returns the number of charges to assign to an item that is a rod.  A value of 0 is returned, by default.
-    /// </summary>
-    public virtual int WandChargeCount => 0;
 
     public string UniqueId = Guid.NewGuid().ToString();
 
@@ -289,7 +291,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public string GetVerboseDescription(Item item)
     {
         string s = "";
-        if (item.IsKnown() && CanBeAimed)
+        if (item.IsKnown() && AimingBinderDetails != null)
         {
             s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
         }
@@ -1041,7 +1043,15 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         _flavorSuppressedDescriptionSyntax = FlavorSuppressedDescriptionSyntax != null ? FlavorSuppressedDescriptionSyntax : _descriptionSyntax;
         _alternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax != null ? AlternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
 
-        ActivateWandScript = Game.SingletonRepository.GetNullable<IIdentifableDirectionalScript>(ActivateWandScriptName);
+        // Bind Wands
+        if (AimingBinderDetails != null)
+        {
+            IIdentifableDirectionalScript identifableDirectionalScript = Game.SingletonRepository.Get<IIdentifableDirectionalScript>(AimingBinderDetails.Value.ActivationScriptName);
+            Roll initialChargeCountRoll = Game.ParseRollExpression(AimingBinderDetails.Value.InitialChargesCountRollExpression);
+            int perChargeValue = AimingBinderDetails.Value.PerChargeValue;
+            AimingDetails = (identifableDirectionalScript, initialChargeCountRoll, perChargeValue);
+        }
+
         ActivateScrollScript = Game.SingletonRepository.GetNullable<IIdentifableAndUsedScript>(ActivateScrollScriptName);
 
         StaffChargeCount = Game.ParseNullableRollExpression(StaffChargeCountRollExpression);
@@ -1396,28 +1406,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// all food items are consumed except for dwarf bread.  Dwarf bread returns false.
     /// </summary>
     public virtual bool IsConsumedWhenEaten => true;
-
-    /// <summary>
-    /// Returns the name of the activation script for wands when aimed; or null, if the item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="ActivateWandScript"/> 
-    /// property during the bind phase.
-    /// </summary>
-    protected virtual string? ActivateWandScriptName => null;
-
-    /// <summary>
-    /// Returns the activation script for wands when aimed; or null, if the item cannot be aimed.  This property is bound from the <see cref="ActivateWandScriptName"/> property during the bind phase.
-    /// </summary>
-    private IIdentifableDirectionalScript? ActivateWandScript { get; set; }
-
-    public bool ActivateWand(int dir)
-    {
-        if (ActivateWandScript == null)
-        {
-            throw new Exception("Cannot activate wand with null script.");
-        }
-        return ActivateWandScript.ExecuteIdentifableDirectionalScript(dir);
-    }
-
-    public bool CanBeAimed => ActivateWandScript != null;
 
     /// <summary>
     /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ActivateScrollScript"/> 

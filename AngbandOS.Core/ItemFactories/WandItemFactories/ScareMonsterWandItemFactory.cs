@@ -17,7 +17,6 @@ internal class ScareMonsterWandItemFactory : WandItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int WandChargeCount => Game.DieRoll(5) + 3;
     public override int Cost => 500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
@@ -27,6 +26,5 @@ internal class ScareMonsterWandItemFactory : WandItemFactory
         (10, 4)
     };
     public override int Weight => 10;
-    protected override string? ActivateWandScriptName => nameof(ScareMonster10IdentifableDirectionalScript);
-    public override int WandChargeValue => 25;
+    protected override (string, string, int)? AimingBinderDetails => (nameof(ScareMonster10IdentifableDirectionalScript), "1d5+3", 25);
 }

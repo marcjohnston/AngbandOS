@@ -48,7 +48,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
         {
             return false;
         }
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeAimedItemFilter))))
+        if (item.Factory.AimingDetails == null)
         {
             Game.MsgPrint("That is not a wand!");
             return false;
@@ -93,8 +93,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             return false;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
-        WandItemFactory activateableItem = (WandItemFactory)item.Factory;
-        bool ident = activateableItem.ActivateWand(dir);
+        bool ident = item.Factory.AimingDetails.Value.ActivationScript.ExecuteIdentifableDirectionalScript(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried

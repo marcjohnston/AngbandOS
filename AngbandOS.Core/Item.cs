@@ -337,7 +337,11 @@ internal sealed class Item : IComparable<Item>
         NutritionalValue = Factory.InitialNutritionalValue;        
         GoldPieces = Factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
-        WandChargesRemaining = Factory.WandChargeCount;
+
+        if (Factory.AimingDetails != null)
+        {
+            WandChargesRemaining = Factory.AimingDetails.Value.InitialChargesCountRoll.Get(Game.UseRandom);
+        }
 
         if (Factory.StaffChargeCount != null)
         {
@@ -1992,7 +1996,10 @@ internal sealed class Item : IComparable<Item>
             value += mergedCharacteristics.Activation.Value;
         }
 
-        value += Factory.WandChargeValue * WandChargesRemaining;
+        if (Factory.AimingDetails != null)
+        {
+            value += Factory.AimingDetails.Value.PerChargeValue * WandChargesRemaining;
+        }
         value += Factory.StaffChargeValue * StaffChargesRemaining;
         value += Factory.TurnOfLightValue * TurnsOfLightRemaining;
         value += Factory.GetBonusRealValue(this);
