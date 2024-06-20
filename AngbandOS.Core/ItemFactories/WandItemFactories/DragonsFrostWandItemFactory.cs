@@ -30,5 +30,5 @@ internal class DragonsFrostWandItemFactory : WandItemFactory
         (50, 4)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(ColdBall80R3IdentifableDirectionalScript), "1d3+1", 120);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(ColdBall80R3IdentifableDirectionalScript), "1d3+1", 120, 150);
 }

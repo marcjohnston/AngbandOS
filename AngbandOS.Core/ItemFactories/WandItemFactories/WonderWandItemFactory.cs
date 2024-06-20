@@ -30,5 +30,5 @@ internal class WonderWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(WonderIdentifableDirectionalScript), "1d15+8", 13);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(WonderIdentifableDirectionalScript), "1d15+8", 13, 150);
 }

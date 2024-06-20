@@ -30,5 +30,5 @@ internal class AnnihilationWandItemFactory : WandItemFactory
         (60, 4)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(Annihilation125IdentifableDirectionalScript), "1d2+1", 150);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(Annihilation125IdentifableDirectionalScript), "1d2+1", 150, 150);
 }

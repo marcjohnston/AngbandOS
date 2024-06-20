@@ -26,5 +26,5 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(ColdBolt3D8IdentifableDirectionalScript), "1d5+6", 40);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(ColdBolt3D8IdentifableDirectionalScript), "1d5+6", 40, 150);
 }

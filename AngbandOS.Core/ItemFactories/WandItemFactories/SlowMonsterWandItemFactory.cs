@@ -27,5 +27,5 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(SlowMonsterIdentifableDirectionalScript), "1d10+6", 25);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(SlowMonsterIdentifableDirectionalScript), "1d10+6", 25, 150);
 }

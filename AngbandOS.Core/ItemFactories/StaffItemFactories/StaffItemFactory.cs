@@ -12,7 +12,7 @@ internal abstract class StaffItemFactory : ItemFactory
 {
     public StaffItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(StaffsItemClass);
-
+    public override int StaffManaValue => 100;
     protected override string? RechargeScriptName => nameof(RechargeStaffScript);
 
     public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 

@@ -108,7 +108,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item, item.Factory.AimingDetails.Value.ManaValue);
         }
         // We didn't use mana, so decrease the wand's charges
         if (!channeled)

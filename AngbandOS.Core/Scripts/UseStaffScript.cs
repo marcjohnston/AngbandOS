@@ -104,7 +104,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item, item.Factory.StaffManaValue);
         }
         if (!channeled)
         {

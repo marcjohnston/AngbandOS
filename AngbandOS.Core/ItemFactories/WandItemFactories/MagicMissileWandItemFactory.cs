@@ -26,5 +26,5 @@ internal class MagicMissileWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(MagicMissle2D6IdentifableDirectionalScript), "1d10+6", 10);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(MagicMissle2D6IdentifableDirectionalScript), "1d10+6", 10, 150);
 }

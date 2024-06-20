@@ -16,6 +16,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 {
     protected ItemFactory(Game game) : base(game) { }
 
+    public virtual int PotionManaValue => 0; // TODO: Refactor into the binder
+    public virtual int StaffManaValue => 0; // TODO: Refactor into the binder
+    public virtual int RodManaValue => 0; // TODO: Refactor into the binder
+
     /// <summary>
     /// Returns the maximum number of items that can be enchanted at one time.  A divisor of 1 is returned, by default.  Ammunition items return 20.  Item counts greater than this value
     /// will have a decreased probability of enchantment.
@@ -48,13 +52,13 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// Returns the name of the activation script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
     /// item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="AimingDetails"/>  property during the bind phase.
     /// </summary>
-    protected virtual (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue)? AimingBinderDetails => null;
+    protected virtual (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBinderDetails => null;
 
     /// <summary>
     /// Returns the activation script for wands when aimed, a Roll to determine the number of charges to assign to new wands and the value for each charge; or null, if the item cannot be aimed.  
     /// This property is bound from the <see cref="AimingBinderDetails"/> property during the bind phase.
     /// </summary>
-    public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue)? AimingDetails { get; private set; } = null;
+    public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingDetails { get; private set; } = null;
 
     /// <summary>
     /// Returns the value of each staff charge.  Returns 0, by default.
@@ -1055,10 +1059,16 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             IIdentifableDirectionalScript identifableDirectionalScript = Game.SingletonRepository.Get<IIdentifableDirectionalScript>(AimingBinderDetails.Value.ActivationScriptName);
             Roll initialChargeCountRoll = Game.ParseRollExpression(AimingBinderDetails.Value.InitialChargesCountRollExpression);
             int perChargeValue = AimingBinderDetails.Value.PerChargeValue;
-            AimingDetails = (identifableDirectionalScript, initialChargeCountRoll, perChargeValue);
+            int manaValue = AimingBinderDetails.Value.ManaValue;
+            AimingDetails = (identifableDirectionalScript, initialChargeCountRoll, perChargeValue, manaValue);
         }
 
-        ActivateScrollScript = Game.SingletonRepository.GetNullable<IIdentifableAndUsedScript>(ActivateScrollScriptName);
+        if (ActivateScrollScriptName != null)
+        {
+            IIdentifableAndUsedScript identifableAndUsedScript = Game.SingletonRepository.Get<IIdentifableAndUsedScript>(ActivateScrollScriptName.Value.ScriptName);
+            int manaValue = ActivateScrollScriptName.Value.ManaValue;
+            ActivateScrollScript = (identifableAndUsedScript, manaValue);
+        }
 
         StaffChargeCount = Game.ParseNullableRollExpression(StaffChargeCountRollExpression);
 
@@ -1420,24 +1430,15 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ActivateScrollScript"/> 
     /// property during the bind phase.
     /// </summary>
-    protected virtual string? ActivateScrollScriptName => null;
+    protected virtual (string ScriptName, int ManaValue)? ActivateScrollScriptName => null;
 
     /// <summary>
     /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivateScrollScriptName"/> property during the bind phase.
     /// </summary>
-    private IIdentifableAndUsedScript? ActivateScrollScript { get; set; }
+    public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivateScrollScript { get; private set; } = null;
 
     /// <summary>
     /// Returns true, if the item is a scroll.
     /// </summary>
     public bool CanBeRead => ActivateScrollScript != null;
-
-    public (bool identified, bool used) Read()
-    {
-        if (ActivateScrollScript == null)
-        {
-            throw new Exception("Cannot activate scroll with null script.");
-        }
-        return ActivateScrollScript.ExecuteIdentifableAndUsedScript();
-    }
 }

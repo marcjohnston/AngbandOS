@@ -26,5 +26,5 @@ internal class PolymorphWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(PolymorphMonsterIdentifableDirectionalScript), "1d8+6", 20);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(PolymorphMonsterIdentifableDirectionalScript), "1d8+6", 20, 150);
 }

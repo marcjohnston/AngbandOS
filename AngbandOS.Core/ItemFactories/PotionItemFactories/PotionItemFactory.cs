@@ -31,6 +31,8 @@ internal abstract class PotionItemFactory : ItemFactory
     public override bool EasyKnow => true;
     public override int PackSort => 11;
 
+    public override int PotionManaValue => 20; // TODO: Need to be refactored into a binder.
+
     /// <summary>
     /// Activates the potion effect and returns true, if the effect is noticed; false, otherwise.
     /// </summary>

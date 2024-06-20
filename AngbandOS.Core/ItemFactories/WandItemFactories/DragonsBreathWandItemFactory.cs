@@ -30,5 +30,5 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
         (60, 4)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(DragonsBreathIdentifableDirectionalScript), "1d3+1", 120);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(DragonsBreathIdentifableDirectionalScript), "1d3+1", 120, 150);
 }

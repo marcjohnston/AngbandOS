@@ -28,5 +28,5 @@ internal class StoneToMudWandItemFactory : WandItemFactory
         (80, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(StoneToMudIdentifableDirectionalScript), "1d8+3", 15);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(StoneToMudIdentifableDirectionalScript), "1d8+3", 15, 150);
 }

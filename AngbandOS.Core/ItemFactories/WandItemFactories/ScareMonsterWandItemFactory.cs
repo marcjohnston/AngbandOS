@@ -26,5 +26,5 @@ internal class ScareMonsterWandItemFactory : WandItemFactory
         (10, 4)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(ScareMonster10IdentifableDirectionalScript), "1d5+3", 25);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(ScareMonster10IdentifableDirectionalScript), "1d5+3", 25, 150);
 }

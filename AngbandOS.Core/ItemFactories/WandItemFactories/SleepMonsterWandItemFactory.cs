@@ -26,5 +26,5 @@ internal class SleepMonsterWandItemFactory : WandItemFactory
         (5, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(SleepMonsterIdentifableDirectionalScript), "1d15+8", 20);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(SleepMonsterIdentifableDirectionalScript), "1d15+8", 20, 150);
 }

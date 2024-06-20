@@ -27,5 +27,5 @@ internal class LightningBallsWandItemFactory : WandItemFactory
         (35, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(LightningBall32R2IdentifableDirectionalScript), "1d8+4", 60);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(LightningBall32R2IdentifableDirectionalScript), "1d8+4", 60, 150);
 }

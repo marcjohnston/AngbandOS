@@ -26,6 +26,5 @@ internal class AcidBoltWandItemFactory : WandItemFactory
         (30, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(AcidBolt3D8R2IdentifableDirectionalScript), "1d8+6", 48);
-
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(AcidBolt3D8R2IdentifableDirectionalScript), "1d8+6", 48, 150);
 }

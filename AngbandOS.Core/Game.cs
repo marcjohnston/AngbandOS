@@ -6871,47 +6871,25 @@ public bool IsDead = false;
     /// </summary>
     /// <param name="item"> The item that we wish to power </param>
     /// <returns> True if we successfully channeled it, false if not </returns>
-    public bool DoCmdChannel(Item item)
+    public bool DoCmdChannel(Item item, int manaValue)
     {
         int manaNeeded;
         int itemCost = item.Factory.Cost;
+
         // Never channel worthless items
         if (itemCost <= 0)
         {
             return false;
         }
+
         // Cost to channel is based on how much the item is worth and what type
-        switch (item.Factory.CategoryEnum)
-        {
-            case ItemTypeEnum.Wand:
-                manaNeeded = itemCost / 150;
-                break;
-
-            case ItemTypeEnum.Scroll:
-                manaNeeded = itemCost / 10;
-                break;
-
-            case ItemTypeEnum.Potion:
-                manaNeeded = itemCost / 20;
-                break;
-
-            case ItemTypeEnum.Rod:
-                manaNeeded = itemCost / 250;
-                break;
-
-            case ItemTypeEnum.Staff:
-                manaNeeded = itemCost / 100;
-                break;
-
-            default:
-                MsgPrint("Tried to channel an unknown object type!");
-                return false;
-        }
+        manaNeeded = itemCost / manaValue;
         // Always cost at least 1 mana
         if (manaNeeded < 1)
         {
             manaNeeded = 1;
         }
+
         // Spend the mana if we can
         if (manaNeeded <= Mana.IntValue)
         {
@@ -6919,6 +6897,7 @@ public bool IsDead = false;
             Mana.IntValue -= manaNeeded;
             return true;
         }
+
         // Use some mana in the attempt, even if we failed
         MsgPrint("You mana is insufficient to power the effect.");
         Mana.IntValue -= RandomLessThan(Mana.IntValue / 2);

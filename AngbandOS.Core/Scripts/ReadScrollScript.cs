@@ -54,7 +54,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a scroll
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeReadItemFilter))))
+        if (item.Factory.ActivateScrollScript == null)
         {
             Game.MsgPrint("That is not a scroll!");
             return;
@@ -64,7 +64,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         //bool identified = false;
         //bool usedUp = true;
 
-        (bool identified, bool used) = item.Factory.Read();
+        (bool identified, bool used) = item.Factory.ActivateScrollScript.Value.ActivationScript.ExecuteIdentifableAndUsedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll
@@ -79,7 +79,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         // Channelers can use mana instead of the scroll being used up
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item, item.Factory.ActivateScrollScript.Value.ManaValue);
         }
         if (!channeled)
         {

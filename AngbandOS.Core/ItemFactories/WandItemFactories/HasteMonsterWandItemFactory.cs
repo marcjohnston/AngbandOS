@@ -30,5 +30,5 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(HasteMonsterIdentifableDirectionalScript), "1d20+8", 0);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(HasteMonsterIdentifableDirectionalScript), "1d20+8", 0, 150);
 }

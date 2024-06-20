@@ -26,5 +26,5 @@ internal class StinkingCloudWandItemFactory : WandItemFactory
         (5, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(StinkingCloud12R2IdentifableDirectionalScript), "1d8+6", 20);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(StinkingCloud12R2IdentifableDirectionalScript), "1d8+6", 20, 150);
 }

@@ -69,7 +69,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         // If we're a channeler, we might be able to spend mana instead of using it up
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item, item.Factory.PotionManaValue);
         }
         if (!channeled)
         {

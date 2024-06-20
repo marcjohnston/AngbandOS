@@ -26,5 +26,5 @@ internal class DestroyTrapOrDoorWandItemFactory : WandItemFactory
         (10, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(DestroyTrapOrDoorIdentifableDirectionalScript), "1d8+6", 5);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(DestroyTrapOrDoorIdentifableDirectionalScript), "1d8+6", 5, 150);
 }

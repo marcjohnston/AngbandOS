@@ -32,5 +32,5 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int)? AimingBinderDetails => (nameof(CloneMonsterIdentifableDirectionalScript), "1d5+3", 0);
+    protected override (string, string, int, int)? AimingBinderDetails => (nameof(CloneMonsterIdentifableDirectionalScript), "1d5+3", 0, 150);
 }
