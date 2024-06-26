@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal abstract class Realm : IGetKey
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
     protected Realm(Game game)
     {
         Game = game;

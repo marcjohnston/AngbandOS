@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Shopkeepers;
 [Serializable]
 internal abstract class Shopkeeper : IGetKey
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
     public abstract int MaxCost { get; }
 
     /// <summary>

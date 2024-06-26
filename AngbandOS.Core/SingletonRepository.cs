@@ -380,6 +380,7 @@ internal class SingletonRepository
         RegisterRepository<ArtifactBias>();
         RegisterRepository<AttackEffect>();
         RegisterRepository<BaseCharacterClass>();
+        RegisterRepository<CharacterClassItemFactoryTernary>();
         RegisterRepository<BaseInventorySlot>();
         RegisterRepository<BirthStage>();
         RegisterRepository<ChestTrapConfiguration>();

@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal abstract class GameCommand : IGetKey
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
     protected GameCommand(Game game)
     {
         Game = game;

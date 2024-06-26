@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class ItemFilter : IGetKey, IItemFilter
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
     protected ItemFilter(Game game)
     {
         Game = game;

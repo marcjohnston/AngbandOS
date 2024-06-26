@@ -13,7 +13,7 @@ namespace AngbandOS.Core.HelpGroups;
 [Serializable]
 internal abstract class HelpGroup : IGetKey, IToJson
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
     protected HelpGroup(Game game) 
     {
         Game = game;

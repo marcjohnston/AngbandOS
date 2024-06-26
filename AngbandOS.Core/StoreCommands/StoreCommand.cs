@@ -12,7 +12,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal abstract class StoreCommand : IGetKey, IToJson
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
     protected StoreCommand(Game game)
     {
         Game = game;

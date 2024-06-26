@@ -13,7 +13,7 @@ namespace AngbandOS.Core.InventorySlots;
 internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IGetKey // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
     protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
-    public Game Game { get; }
+    protected readonly Game Game;
     protected BaseInventorySlot(Game game)
     {
         Game = game;

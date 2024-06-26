@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
 
     /// <summary>
     /// Resets the <see cref="IsChanged"/> change tracking flag.

@@ -12,7 +12,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal abstract class WizardCommand : IHelpCommand, IGetKey
 {
-    protected Game Game { get; }
+    protected readonly Game Game;
     protected WizardCommand(Game game)
     {
         Game = game;
