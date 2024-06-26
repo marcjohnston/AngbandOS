@@ -36,7 +36,6 @@ internal class MetalCapHelmArmorFactory : HelmArmorItemFactory
     protected override string ItemClassName => nameof(HelmsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
     public override int PackSort => 25;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Helm;
     public override bool HatesAcid => true;
 
     public override bool CanReflectBoltsAndArrows => true;

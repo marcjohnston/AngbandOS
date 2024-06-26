@@ -51,7 +51,6 @@ internal abstract class StaffItemFactory : ItemFactory
     public abstract void UseStaff(UseStaffEvent eventArgs);
 
     public override int PackSort => 15;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Staff;
     public override int BaseValue => 70;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

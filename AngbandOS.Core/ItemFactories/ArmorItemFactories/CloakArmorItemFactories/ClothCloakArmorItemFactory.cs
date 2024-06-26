@@ -34,7 +34,6 @@ internal class ClothCloakArmorItemFactory : CloakArmorItemFactory
 
     protected override string ItemClassName => nameof(CloaksItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(AboutBodyInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

@@ -48,7 +48,6 @@ internal abstract class RingItemFactory : JewelleryItemFactory
         }
     }
     public override int PackSort => 16;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Ring;
     public override int BaseValue => 45;
     public override bool HatesElectricity => true;
     public override ColorEnum Color => ColorEnum.Gold;

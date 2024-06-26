@@ -121,7 +121,6 @@ internal abstract class LightSourceItemFactory : ItemFactory
 
     public override int PercentageBreakageChance => 50;
     public override int PackSort => 18;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;
     public override bool HatesFire => true;
     public override ColorEnum Color => ColorEnum.BrightYellow;
 

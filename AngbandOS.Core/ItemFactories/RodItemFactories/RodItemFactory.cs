@@ -23,7 +23,6 @@ internal abstract class RodItemFactory : ItemFactory
     public override bool IsMagical => true;
     public override bool EasyKnow => true;
     public override int PackSort => 13;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Rod;
     public override int BaseValue => 90;
     public override ColorEnum Color => ColorEnum.Turquoise;
     public override int RodManaValue => 250;

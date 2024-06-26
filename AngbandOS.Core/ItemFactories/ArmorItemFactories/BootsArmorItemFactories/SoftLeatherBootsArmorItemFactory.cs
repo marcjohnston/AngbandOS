@@ -34,7 +34,6 @@ internal class SoftLeatherBootsArmorItemFactory : BootsArmorItemFactory
 
     protected override string ItemClassName => nameof(BootsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(FeetInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
     public override int PackSort => 27;

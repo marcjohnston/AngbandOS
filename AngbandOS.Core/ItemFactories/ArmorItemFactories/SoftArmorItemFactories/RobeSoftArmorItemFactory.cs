@@ -63,7 +63,6 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
 
     protected override string ItemClassName => nameof(SoftArmorsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SoftArmor;
     public override int PackSort => 21;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

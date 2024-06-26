@@ -38,7 +38,6 @@ internal class ConfusionMushroomFoodItemFactory : ItemFactory
     public override int InitialNutritionalValue => 500;
     public override int PercentageBreakageChance => 100;
     public override bool EasyKnow => true;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {

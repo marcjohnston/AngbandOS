@@ -35,7 +35,6 @@ internal class MetalLamellarHardArmorItemFactory : HardArmorItemFactory
 
     protected override string ItemClassName => nameof(HardArmorsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.HardArmor;
     public override int PackSort => 20;
     public override bool HatesAcid => true;
 

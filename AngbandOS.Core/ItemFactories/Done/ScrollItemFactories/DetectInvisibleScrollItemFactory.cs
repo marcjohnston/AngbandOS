@@ -43,7 +43,6 @@ internal class DetectInvisibleScrollItemFactory : ItemFactory
 
     public override bool EasyKnow => true;
     public override int PackSort => 12;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Scroll;
     public override int BaseValue => 20;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

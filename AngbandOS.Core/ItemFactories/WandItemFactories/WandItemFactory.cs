@@ -43,8 +43,6 @@ internal abstract class WandItemFactory : ItemFactory
 
     public override int PercentageBreakageChance => 25;
     public override int PackSort => 14;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
-
     public override int BaseValue => 50;
     public override bool HatesElectricity => true;
 

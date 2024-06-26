@@ -35,7 +35,6 @@ internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int WieldSlot => InventorySlot.Hands;
     public override int PackSort => 26;
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HandsInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

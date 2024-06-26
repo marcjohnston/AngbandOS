@@ -36,7 +36,6 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
     protected override string ItemClassName => nameof(CrownsItemClass);
 
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
     public override bool HatesAcid => true;
 
     public override int PackSort => 24;

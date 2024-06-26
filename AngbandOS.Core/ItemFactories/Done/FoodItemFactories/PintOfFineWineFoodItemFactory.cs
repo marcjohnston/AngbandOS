@@ -24,7 +24,6 @@ internal class PintOfFineWineFoodItemFactory : ItemFactory
     protected override string ItemClassName => nameof(FoodItemClass);
     public override int PercentageBreakageChance => 100;
     public override bool EasyKnow => true;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {

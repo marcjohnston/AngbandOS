@@ -35,7 +35,6 @@ internal class LargeLeatherShieldArmorItemFactory : ShieldArmorItemFactory
 
     protected override string ItemClassName => nameof(ShieldsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(ArmInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
     public override int PackSort => 23;
     public override bool HatesAcid => true;
 
