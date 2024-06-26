@@ -666,7 +666,6 @@ public bool IsDead = false;
     public readonly int[] MaxDlv = new int[DungeonCount];
     public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
     public int Age;
-    public ItemTypeEnum AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
     public int ArmorClassBonus;
     public int AttackBonus;
     public int BaseArmorClass;

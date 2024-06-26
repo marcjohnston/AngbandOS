@@ -116,7 +116,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.Speed.IntValue = 110;
         Game.MeleeAttacksPerRound = 1;
         Game.MissileAttacksPerRound = 1;
-        Game.AmmunitionItemCategory = 0;
         for (int i = 0; i < 6; i++)
         {
             Game.AbilityScores[i].Bonus += Game.Race.AbilityBonus[i] + Game.BaseCharacterClass.AbilityBonus[i];
@@ -677,8 +676,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
                         BowWeaponItemFactory missileWeaponItemCategory = (BowWeaponItemFactory)oPtr.Factory;
-                        Game.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
-                        if (Game.BaseCharacterClass.ID == CharacterClass.Ranger && Game.AmmunitionItemCategory == ItemTypeEnum.Arrow)
+                        ItemTypeEnum ammunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
+                        if (Game.BaseCharacterClass.ID == CharacterClass.Ranger && ammunitionItemCategory == ItemTypeEnum.Arrow)
                         {
                             if (Game.ExperienceLevel.IntValue >= 20)
                             {
@@ -689,7 +688,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                                 Game.MissileAttacksPerRound++;
                             }
                         }
-                        if (Game.BaseCharacterClass.ID == CharacterClass.Warrior && Game.AmmunitionItemCategory <= ItemTypeEnum.Bolt && Game.AmmunitionItemCategory >= ItemTypeEnum.Shot)
+                        if (Game.BaseCharacterClass.ID == CharacterClass.Warrior)
                         {
                             if (Game.ExperienceLevel.IntValue >= 25)
                             {
