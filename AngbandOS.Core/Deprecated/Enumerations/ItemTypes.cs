@@ -18,6 +18,4 @@ internal enum ItemTypeEnum // THESE ARE ITEMCLASSES
     Bolt = 18,
     Polearm = 22,
     Sword = 23,
-    LifeBook = 90,
-    DeathBook = 94,
 }

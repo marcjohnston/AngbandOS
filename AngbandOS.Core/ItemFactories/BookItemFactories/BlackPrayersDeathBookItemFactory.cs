@@ -40,7 +40,6 @@ internal class BlackPrayersDeathBookItemFactory : BookItemFactory
         nameof(DeathSpellEnslaveUndead)
     };
     protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;
 }

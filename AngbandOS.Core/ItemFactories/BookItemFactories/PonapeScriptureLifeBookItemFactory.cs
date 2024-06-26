@@ -51,7 +51,6 @@ internal class PonapeScriptureLifeBookItemFactory : BookItemFactory
         nameof(LifeSpellHolyInvulnerability)
     };
     protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;
 }

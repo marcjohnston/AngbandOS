@@ -39,7 +39,6 @@ internal class CommonPrayerLifeBookItemFactory : BookItemFactory
         nameof(LifeSpellSatisfyHunger)
    };
     protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;
 }
