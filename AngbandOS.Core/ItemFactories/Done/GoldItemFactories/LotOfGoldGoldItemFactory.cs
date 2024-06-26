@@ -20,6 +20,5 @@ internal class LotOfGoldGoldItemFactory : ItemFactory
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
     public override bool IsIgnoredByMonsters => true;
 }

@@ -16,7 +16,6 @@ internal class EmptyBottleItemFactory : ItemFactory
     protected override string ItemClassName => nameof(BottlesItemClass);
     public override bool EasyKnow => true;
     public override int PackSort => 39;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bottle;
     public override bool HatesCold => true;
     public override int PercentageBreakageChance => 100;
     public override bool HatesAcid => true;

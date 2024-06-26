@@ -13,10 +13,6 @@ namespace AngbandOS.Core;
 internal enum ItemTypeEnum // THESE ARE ITEMCLASSES
 {
     None = 0,
-    Skeleton = 1,
-    Bottle = 2,
-    Junk = 3,
-    Spike = 5,
     Chest = 7,
     Shot = 16,
     Arrow = 17,
@@ -53,5 +49,4 @@ internal enum ItemTypeEnum // THESE ARE ITEMCLASSES
     TarotBook = 95,
     FolkBook = 96,
     CorporealBook = 97,
-    Gold = 100
 }

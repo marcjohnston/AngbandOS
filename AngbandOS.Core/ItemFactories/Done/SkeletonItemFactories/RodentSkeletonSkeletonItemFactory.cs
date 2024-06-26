@@ -33,7 +33,6 @@ internal class RodentSkeletonSkeletonItemFactory : ItemFactory
     protected override string ItemClassName => nameof(SkeletonsItemClass);
     public override bool EasyKnow => true;
     public override int PackSort => 40;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Skeleton;
     public override int PercentageBreakageChance => 50;
     public override bool HatesAcid => true;
 }

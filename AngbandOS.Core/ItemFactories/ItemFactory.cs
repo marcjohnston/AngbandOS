@@ -16,6 +16,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 {
     protected ItemFactory(Game game) : base(game) { }
 
+    /// <summary>
+    /// Returns true, if the item can be used to spike a door closed; false, otherwise.  Returns false, by default.
+    /// </summary>
+    public virtual bool CanSpikeDoorClosed => false;
+
     public virtual int PotionManaValue => 0; // TODO: Refactor into the binder
     public virtual int StaffManaValue => 0; // TODO: Refactor into the binder
     public virtual int RodManaValue => 0; // TODO: Refactor into the binder
@@ -1326,7 +1331,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
     /// </summary>
-    public virtual ItemTypeEnum CategoryEnum { get; }
+    public virtual ItemTypeEnum CategoryEnum { get; } = ItemTypeEnum.None;
 
     /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.

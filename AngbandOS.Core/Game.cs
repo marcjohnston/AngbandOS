@@ -6922,7 +6922,7 @@ public bool IsDead = false;
                 continue;
             }
             // If the item is a spike, return it
-            if (item.Factory.CategoryEnum == ItemTypeEnum.Spike)
+            if (item.Factory.CanSpikeDoorClosed)
             {
                 inventoryIndex = i;
                 return true;

@@ -35,6 +35,6 @@ internal class IronSpikeItemFactory : ItemFactory
 
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
     public override bool EasyKnow => true;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;
+    public override bool CanSpikeDoorClosed => true;
     public override int PackSort => 37;
 }
