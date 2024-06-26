@@ -50,7 +50,6 @@ internal class MagicksOfMasteryFolkBookItemFactory : BookItemFactory
         nameof(FolkSpellClairvoyance)
     };
     protected override string ItemClassName => nameof(FolkSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.FolkBook;
     public override int PackSort => 2;
     public override bool HatesFire => true;
 }

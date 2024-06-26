@@ -55,7 +55,6 @@ internal class CthaatAquadingenNatureBookItemFactory : BookItemFactory
         nameof(NatureSpellNaturesWrath)
     };
     protected override string ItemClassName => nameof(NatureSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
 
     public override int PackSort => 6;
     public override bool HatesFire => true;

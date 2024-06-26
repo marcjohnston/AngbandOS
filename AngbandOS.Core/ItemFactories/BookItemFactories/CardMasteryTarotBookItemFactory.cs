@@ -41,7 +41,6 @@ internal class CardMasteryTarotBookItemFactory : BookItemFactory
         nameof(TarotSpellBanish)
     };
     protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.TarotBook;
     public override int PackSort => 3;
     public override bool HatesFire => true;
 }

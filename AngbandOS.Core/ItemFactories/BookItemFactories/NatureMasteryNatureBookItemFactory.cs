@@ -40,7 +40,6 @@ internal class NatureMasteryNatureBookItemFactory : BookItemFactory
         nameof(NatureSpellHerbalHealing)
     };
     protected override string ItemClassName => nameof(NatureSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
 
     public override int PackSort => 6;
     public override bool HatesFire => true;

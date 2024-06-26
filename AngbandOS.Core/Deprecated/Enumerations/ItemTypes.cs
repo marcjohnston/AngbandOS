@@ -19,11 +19,5 @@ internal enum ItemTypeEnum // THESE ARE ITEMCLASSES
     Polearm = 22,
     Sword = 23,
     LifeBook = 90,
-    SorceryBook = 91,
-    NatureBook = 92,
-    ChaosBook = 93,
     DeathBook = 94,
-    TarotBook = 95,
-    FolkBook = 96,
-    CorporealBook = 97,
 }

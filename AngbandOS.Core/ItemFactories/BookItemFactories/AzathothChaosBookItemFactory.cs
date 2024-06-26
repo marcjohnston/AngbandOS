@@ -54,7 +54,6 @@ internal class AzathothChaosBookItemFactory : BookItemFactory
         nameof(ChaosSpellCallTheVoid)
     };
     protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
     public override int PackSort => 5;
     public override bool HatesFire => true;
 }

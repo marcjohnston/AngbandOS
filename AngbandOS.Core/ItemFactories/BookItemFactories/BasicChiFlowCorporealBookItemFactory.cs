@@ -40,7 +40,6 @@ internal class BasicChiFlowCorporealBookItemFactory : BookItemFactory
         nameof(CorporealSpellSatisfyHunger)
     };
     protected override string ItemClassName => nameof(CorporealSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.CorporealBook;
 
     public override int PackSort => 1;
     public override bool HatesFire => true;

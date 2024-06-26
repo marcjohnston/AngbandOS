@@ -58,7 +58,6 @@ internal class LiberIvonisSorceryBookItemFactory : BookItemFactory
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
     /// </summary>
     protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;
     public override int PackSort => 7;
 }

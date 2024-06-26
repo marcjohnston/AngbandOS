@@ -50,7 +50,6 @@ internal class GharneFragmentsChaosBookItemFactory : BookItemFactory
         nameof(ChaosSpellSummonDemon)
     };
     protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
     public override int PackSort => 5;
     public override bool HatesFire => true;
 }

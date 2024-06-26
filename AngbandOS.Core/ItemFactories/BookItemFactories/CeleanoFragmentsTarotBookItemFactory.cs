@@ -55,7 +55,6 @@ internal class CeleanoFragmentsTarotBookItemFactory : BookItemFactory
         nameof(TarotSpellSummonGreaterUndead)
     };
     protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.TarotBook;
     public override int PackSort => 3;
     public override bool HatesFire => true;
 }

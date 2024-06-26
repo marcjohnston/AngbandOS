@@ -50,7 +50,6 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : BookItemFactory
     };
 
     protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;
     public override int PackSort => 7;
 }
