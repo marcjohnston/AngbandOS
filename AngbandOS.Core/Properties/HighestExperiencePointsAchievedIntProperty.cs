@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Properties;
 /// Represents an integer property of the maximum experience points that the player has gained.
 /// </summary>
 [Serializable]
-internal class MaxExperiencePointsGainedIntProperty : IntProperty
+internal class HighestExperiencePointsAchievedIntProperty : IntProperty
 {
-    protected MaxExperiencePointsGainedIntProperty(Game game) : base(game) { } // This object is a singleton.
+    protected HighestExperiencePointsAchievedIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

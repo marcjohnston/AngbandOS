@@ -803,10 +803,11 @@ public bool IsDead = false;
     public readonly MapYIntProperty MapY;
 
     /// <summary>
-    /// 
+    /// Returns the highest experience points that the player has achieved.  This value may be different from the current experience points due to the player losing experience.  This
+    /// property maintains this highest value so that the player can restore those lost experience.
     /// </summary>
     /// <remarks>borg: player->max_exp</remarks>
-    public readonly MaxExperiencePointsGainedIntProperty MaxExperienceGained;
+    public readonly HighestExperiencePointsAchievedIntProperty MaxExperienceGained;
 
     /// <summary>
     ///
@@ -1129,7 +1130,7 @@ public bool IsDead = false;
         TrackedMonsterChanged = (TrackedMonsterChangedProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterChangedProperty));
         MapX = (MapXIntProperty)SingletonRepository.Get<Property>(nameof(MapXIntProperty));
         MapY = (MapYIntProperty)SingletonRepository.Get<Property>(nameof(MapYIntProperty));
-        MaxExperienceGained = (MaxExperiencePointsGainedIntProperty)SingletonRepository.Get<Property>(nameof(MaxExperiencePointsGainedIntProperty));
+        MaxExperienceGained = (HighestExperiencePointsAchievedIntProperty)SingletonRepository.Get<Property>(nameof(HighestExperiencePointsAchievedIntProperty));
         TrackedMonster = (TrackedMonsterNullableMonsterProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterNullableMonsterProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.AcidResistanceTimer));

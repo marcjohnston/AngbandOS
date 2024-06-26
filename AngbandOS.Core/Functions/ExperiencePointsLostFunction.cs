@@ -20,6 +20,6 @@ internal class ExperiencePointsLostFunction : BoolFunction
     public override string[]? DependencyNames => new string[]
     {
         nameof(ExperiencePointsIntProperty),
-        nameof(MaxExperiencePointsGainedIntProperty)
+        nameof(HighestExperiencePointsAchievedIntProperty)
     };
 }
