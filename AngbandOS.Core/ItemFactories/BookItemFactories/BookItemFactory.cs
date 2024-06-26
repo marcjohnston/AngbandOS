@@ -62,9 +62,4 @@ internal abstract class BookItemFactory : ItemFactory
     /// Returns the names of the spells that belong to this book.  This property is used to bind the Spells property during the binding phase.
     /// </summary>
     protected abstract string[] SpellNames { get; }
-
-    /// <summary>
-    /// Returns true, if a book is a high level book; false, otherwise.  False is returned, by default.
-    /// </summary>
-    public virtual bool IsHighLevelBook => false;
 }

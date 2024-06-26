@@ -71,6 +71,7 @@ internal class SingletonRepository
         _singletonsDictionary.Add(typeName, genericRepository);
     }
 
+
     /// <summary>
     /// Returns the singleton from the repository specified by the <typeparamref name="T"/> type referenced by the unique key identifier <paramref name="key"/> or null if <paramref name="key"/> is null.
     /// </summary>
@@ -198,9 +199,11 @@ internal class SingletonRepository
         foreach (Type type in types)
         {
             // Ensure the type is not abstract and inherits the IGetKey interface.
+            // TODO: No test for IGetKey is done
             if (!type.IsAbstract)
             {
-                // Ensure it only has one constructor.
+                // Ensure it only has one private constructor.
+                // TODO: The one private constructor needs to be tested properly.
                 ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
                 if (constructors.Length == 1)
                 {
@@ -221,7 +224,7 @@ internal class SingletonRepository
                     {
                         string typeName = interfaceType.Name;
 
-                        // Check to see if there is a repository that is registered for this type.  There is no else; we simple ignore this interface.
+                        // Check to see if there is a repository that is registered for this type.  There is none; we simple ignore this interface.
                         if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
                         {
                             // We only instantiate the object once and only if we are storing it.
@@ -380,7 +383,6 @@ internal class SingletonRepository
         RegisterRepository<ArtifactBias>();
         RegisterRepository<AttackEffect>();
         RegisterRepository<BaseCharacterClass>();
-        RegisterRepository<CharacterClassItemFactoryTernary>();
         RegisterRepository<BaseInventorySlot>();
         RegisterRepository<BirthStage>();
         RegisterRepository<ChestTrapConfiguration>();
@@ -390,6 +392,7 @@ internal class SingletonRepository
         RegisterRepository<Form>();
         RegisterRepository<Function>();
         RegisterRepository<Gender>();
+        RegisterRepository<ItemAction>();
         RegisterRepository<ItemAdditiveBundle>();
         RegisterRepository<ItemAdditiveBundleWeightedRandom>();
         RegisterRepository<ItemClass>();

@@ -36,10 +36,6 @@ internal class LiberIvonisSorceryBookItemFactory : BookItemFactory
         (90, 3)
     };
 
-    /// <summary>
-    /// Returns true, because this book is a high level book.
-    /// </summary>
-    public override bool IsHighLevelBook => true;
     public override int Weight => 30;
     public override bool KindIsGood => true;
 

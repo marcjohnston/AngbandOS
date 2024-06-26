@@ -65,28 +65,6 @@ internal class PaladinCharacterClass : BaseCharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(DeathRealm))
     };
 
-    public override void ItemDestroyed(Item item, int amount)
-    {
-        // Warriors and paladins get experience for destroying magic books
-        if (Game.ItemFilterHighLevelBook(item))
-        {
-            if (Game.Studies<LifeRealm>())
-            {
-                if (item.Factory.CategoryEnum == ItemTypeEnum.DeathBook)
-                {
-                    GainExperienceFromSpellBookDestroy(item, amount);
-                }
-            }
-            else
-            {
-                if (item.Factory.CategoryEnum == ItemTypeEnum.LifeBook)
-                {
-                    GainExperienceFromSpellBookDestroy(item, amount);
-                }
-            }
-        }
-    }
-
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(BroadSwordWeaponItemFactory),
@@ -100,4 +78,8 @@ internal class PaladinCharacterClass : BaseCharacterClass
             Game.HasFearResistance = true;
         }
     }
+    protected override string[]? ItemActionNames => new string[]
+    {
+        nameof(GainExperienceForUnusableHighLevelSpellBookDestroyedItemAction)
+    };
 }

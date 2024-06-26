@@ -29,6 +29,16 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     }
 
     /// <summary>
+    /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should match; null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual string[]? MatchingFactoryKeys => null;
+
+    /// <summary>
+    /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should not match; null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual string[]? NotMatchingFactoryKeys => null;
+
+    /// <summary>
     /// Returns true, if the item must be able to project arrows; false, if the item cannot project arrows; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public virtual bool? CanProjectArrows => null;
@@ -143,6 +153,14 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     public virtual bool ItemMatches(Item item)
     {
         ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
+        if (MatchingFactoryKeys != null && !MatchingFactoryKeys.Contains(item.Factory.Key))
+        {
+            return false;
+        }
+        if (NotMatchingFactoryKeys != null && NotMatchingFactoryKeys.Contains(item.Factory.Key))
+        {
+            return false;
+        }
         if (FactoryItemClassKey != null && FactoryItemClassKey != item.Factory.ItemClass.Key)
         {
             return false;

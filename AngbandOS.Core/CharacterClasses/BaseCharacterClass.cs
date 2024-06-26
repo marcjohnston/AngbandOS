@@ -17,6 +17,18 @@ internal abstract class BaseCharacterClass : IGetKey
     }
 
     /// <summary>
+    /// Returns the names of the <see cref="ItemAction"/> objects that are associated with this <see cref="BaseCharacterClass"/> or null, if this <see cref="BaseCharacterClass"/> doesn't have any
+    /// special item action handling.  This property is used to bind the <see cref="ItemActions"/> property using the bind phase.
+    /// </summary>
+    protected virtual string[]? ItemActionNames => null;
+
+    /// <summary>
+    /// Returns the <see cref="ItemAction"/> objects that are associated with this <see cref="BaseCharacterClass"/> or null, if this <see cref="BaseCharacterClass"/> doesn't have any
+    /// special item action handling.  This property is bound using the <see cref="ItemActionNames"/> property during the bind phase.
+    /// </summary>
+    public ItemAction[]? ItemActions { get; private set; } = null;
+
+    /// <summary>
     /// Returns true, for classes that should use the alternate name for items; false, otherwise.  Returns false, by default. Some classes may render item descriptions differently for
     /// some items.  Druid, Fanatic, Monk, Priest and Ranger classes are return true.  Spellbooks are rendered differently for these classes.
     /// </summary>
@@ -344,6 +356,7 @@ internal abstract class BaseCharacterClass : IGetKey
             outfitItemFactories.Add(Game.SingletonRepository.Get<ItemFactory>(outfitItemFactoryName));
         }
         OutfitItemFactories = outfitItemFactories.ToArray();
+        ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
     }
 
     /// <summary>
@@ -440,32 +453,6 @@ internal abstract class BaseCharacterClass : IGetKey
     /// Returns the default deity that the character class worships.  This is used when randomly choosing a CharacterClass.  Defaults to None.
     /// </summary>
     public virtual God? DefaultDeity(Realm? realm) => null;
-
-    /// <summary>
-    /// Gains the experience when the character class destroys a spell book.  Derived classes must determine if the character class gains experience when they destroy a
-    /// spell book and can call this common method to perform the gain experience.
-    /// </summary>
-    /// <param name="item">The item.</param>
-    /// <param name="amount">The amount.</param>
-    protected void GainExperienceFromSpellBookDestroy(Item item, int amount)
-    {
-        if (Game.ExperiencePoints.IntValue < Constants.PyMaxExp)
-        {
-            int testerExp = Game.MaxExperienceGained.IntValue / 20;
-            if (testerExp > 10000)
-            {
-                testerExp = 10000;
-            }
-            BookItemFactory bookItemFactory = (BookItemFactory)item.Factory;
-            testerExp /= bookItemFactory.ExperienceGainDivisorForDestroying;
-            if (testerExp < 1)
-            {
-                testerExp = 1;
-            }
-            Game.MsgPrint("You feel more experienced.");
-            Game.GainExperience(testerExp * amount);
-        }
-    }
 
     /// <summary>
     /// Allows the character class to perform any additional handling when an item is destroyed.  Warriors and Paladins gain experience when specific spell books are

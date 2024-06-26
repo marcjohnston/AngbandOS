@@ -37,7 +37,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int amount = 1;
+        int count = 1;
         bool force = Game.CommandArgument > 0;
         // Get an item to destroy
         if (!Game.SelectItem(out Item? item, "Destroy which item? ", false, true, true, null))
@@ -52,14 +52,14 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
         // If we have more than one we might not want to destroy all of them
         if (item.Count > 1)
         {
-            amount = Game.GetQuantity(item.Count, true);
-            if (amount <= 0)
+            count = Game.GetQuantity(item.Count, true);
+            if (count <= 0)
             {
                 return;
             }
         }
         int oldNumber = item.Count;
-        item.Count = amount;
+        item.Count = count;
         string itemName = item.GetFullDescription(true);
         item.Count = oldNumber;
         //Only confirm if it's not a worthless item
@@ -104,10 +104,26 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
         }
         Game.MsgPrint($"You destroy {itemName}.");
 
-        Game.BaseCharacterClass.ItemDestroyed(item, amount);
+        if (Game.BaseCharacterClass.ItemActions != null)
+        {
+            // Test each of the item filters.
+            foreach (ItemAction itemAction in Game.BaseCharacterClass.ItemActions)
+            {
+                // Loop through all of the associated item filters.
+                foreach (ItemFilter itemFilter in itemAction.ItemFilters)
+                {
+                    // Check to see if the item filter matches.
+                    if (itemFilter.ItemMatches(item))
+                    {
+                        // Perform the item destroy action.
+                        itemAction.ItemDestroyed(item, count);
+                    }
+                }
+            }
+        }
 
         // Tidy up the player's inventory
-        item.ItemIncrease(-amount);
+        item.ItemIncrease(-count);
         item.ItemDescribe();
         item.ItemOptimize();
         return;

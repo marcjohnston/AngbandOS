@@ -856,7 +856,8 @@ public bool IsDead = false;
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public bool Studies<T>() where T : Realm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
+    [Obsolete("Replaced with the IsUsableSpellBook item filter")]
+    public bool Studies<T>() where T : Realm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType())); // TODO: Replace this with an itemfilter
 
     public int SkillDigging;
     public int SkillDisarmTraps;
@@ -2971,6 +2972,32 @@ public bool IsDead = false;
         ViewingItemList = false;
         MsgClear();
         return item;
+    }
+
+    /// <summary>
+    /// Gains the experience when the character class destroys a spell book.  Derived classes must determine if the character class gains experience when they destroy a
+    /// spell book and can call this common method to perform the gain experience.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <param name="count">The number of items what were destroyed.</param>
+    public void GainExperienceFromSpellBookDestroy(Item item, int count)
+    {
+        if (ExperiencePoints.IntValue < Constants.PyMaxExp)
+        {
+            int testerExp = MaxExperienceGained.IntValue / 20;
+            if (testerExp > 10000)
+            {
+                testerExp = 10000;
+            }
+            BookItemFactory bookItemFactory = (BookItemFactory)item.Factory;
+            testerExp /= bookItemFactory.ExperienceGainDivisorForDestroying;
+            if (testerExp < 1)
+            {
+                testerExp = 1;
+            }
+            MsgPrint("You feel more experienced.");
+            GainExperience(testerExp * count);
+        }
     }
 
     /// <summary>
@@ -6931,17 +6958,6 @@ public bool IsDead = false;
         // We found nothing, so return false
         inventoryIndex = -1;
         return false;
-    }
-
-    /// <summary>
-    /// Return whether or not an item is a high level book
-    /// </summary>
-    /// <param name="item"> The item to check </param>
-    /// <returns> True if the item is a high level book </returns>
-    public bool ItemFilterHighLevelBook(Item item) // TODO: Isn't this an ItemFilter
-    {
-        BookItemFactory? bookItemFactory = item.TryGetFactory<BookItemFactory>();
-        return bookItemFactory != null && bookItemFactory.IsHighLevelBook;
     }
 
     /// <summary>
