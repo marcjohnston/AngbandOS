@@ -16,7 +16,6 @@ internal enum ItemTypeEnum // THESE ARE ITEMCLASSES
     Shot = 16,
     Arrow = 17,
     Bolt = 18,
-    Digging = 20,
     Hafted = 21,
     Polearm = 22,
     Sword = 23,

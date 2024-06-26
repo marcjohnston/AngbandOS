@@ -36,7 +36,6 @@ internal class MaceOfDisruptionHaftedWeaponItemFactory : MeleeWeaponItemFactory
 
     protected override string ItemClassName => nameof(HaftedWeaponsItemClass);
     public override int PackSort => 30;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Hafted;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 }
