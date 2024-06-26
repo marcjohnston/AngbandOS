@@ -40,7 +40,6 @@ internal abstract class Patron : IGetKey
     public void GetReward()
     {
         int type;
-        int dummy;
         int nastyChance = 6;
         if (MultiRew)
         {

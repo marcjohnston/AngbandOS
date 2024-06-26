@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Repositories;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [Serializable]
-internal abstract class ListRepository<T> : Repository<T>
+internal abstract class ListRepository<T> : Repository<T> where T : notnull
 {
     private List<T> list = new List<T>();
 

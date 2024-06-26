@@ -51,7 +51,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.MsgPrint("The persistance interface does not support entity persistance.");
             return;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Game.MsgPrint("The persistance interface failed to save the configuration.");
             return;

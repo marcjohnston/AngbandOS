@@ -821,7 +821,7 @@ public bool IsDead = false;
     /// <summary>
     /// Represents the character class of the player.  Will be null prior to the character class birth selection.
     /// </summary>
-    public BaseCharacterClass? BaseCharacterClass = null;
+    public BaseCharacterClass BaseCharacterClass = null;
 
     /// <summary>
     /// Returns the current race of the character.  Will be null before the player is birthed.
@@ -1067,7 +1067,7 @@ public bool IsDead = false;
     /// <summary>
     /// Returns the maximum number of messages that can be stored in the message log.  Once this log size has been filled, the oldest messages will be deleted.
     /// </summary>
-    public readonly int MaxMessageLogLength = 2048;
+    public readonly int? MaxMessageLogLength = 2048;
 
     /// <summary>
     /// Returns the name of the town that the player will start in; or null, for a random eligible town to be selected.  Returns null, by default.
@@ -15459,7 +15459,6 @@ public bool IsDead = false;
 
     public void PickTrap(int y, int x)
     {
-        string feat;
         GridTile cPtr = Map.Grid[y][x];
         if (cPtr.FeatureType is not InvisibleTile)
         {

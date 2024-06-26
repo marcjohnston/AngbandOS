@@ -31,27 +31,6 @@ internal abstract class Repository<T> : IEnumerable<T>, ILoadAndBind where T : n
         return GetEnumerator();
     }
 
-    protected T[] LoadTypesFromAssembly<T>()
-    {
-        List<T> typeList = new List<T>();
-        Assembly assembly = Assembly.GetExecutingAssembly();
-        Type[] types = assembly.GetTypes();
-        foreach (Type type in types)
-        {
-            // Load Commands.
-            if (!type.IsAbstract && typeof(T).IsAssignableFrom(type))
-            {
-                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                if (constructors.Length == 1)
-                {
-                    T item = (T)constructors[0].Invoke(new object[] { Game });
-                    typeList.Add(item);
-                }
-            }
-        }
-        return typeList.ToArray();
-    }
-
     /// <summary>
     /// Processes the load phase for the configuration repository items.  This phase creates instances of all objects that have a private constructor.  An instance of the Game is
     /// sent to the constructor for every configuration repository item created.  The configuration repository item cannot assume other repository items are available during this phase.

@@ -19,7 +19,7 @@ internal abstract class ConditionalWidget : Widget
     /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected new (IBoolValue conditional, bool valueConditionalMustBe, int term)[] Enabled { get; private set; }
+    protected (IBoolValue conditional, bool valueConditionalMustBe, int term)[] Enabled { get; private set; }
 
     /// <summary>
     /// Returns an array of the names of the conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for 
@@ -28,7 +28,7 @@ internal abstract class ConditionalWidget : Widget
     /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    public new abstract (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
+    public abstract (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 

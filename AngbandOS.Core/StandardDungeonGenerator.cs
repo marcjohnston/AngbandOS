@@ -1024,15 +1024,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
             Cent[pick2] = new GridCoordinate(x1, y1);
         }
         DoorN = 0;
-        try // TODO: THIS IS DUE TO AN INDEX OUT OF BOUNDS ERROR
-        {
-            y = Cent[CentN - 1].Y;
-            x = Cent[CentN - 1].X;
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
+        y = Cent[CentN - 1].Y;
+        x = Cent[CentN - 1].X;
         for (int i = 0; i < CentN; i++)
         {
             BuildTunnel(Cent[i].Y, Cent[i].X, y, x);

@@ -21,8 +21,6 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
     private UpdateSpellsFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        int j;
-        Spell sPtr;
         if (Game.IsDead)
         {
             return;
