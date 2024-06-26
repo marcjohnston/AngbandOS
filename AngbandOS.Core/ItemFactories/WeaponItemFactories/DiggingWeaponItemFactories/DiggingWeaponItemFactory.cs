@@ -16,6 +16,7 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
     public override int WieldSlot => InventorySlot.Digger;
     public DiggingWeaponItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(DiggersItemClass);
+    public override bool CanBeUsedToDig => true;
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (100, "3d5-3")
@@ -38,7 +39,6 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
         }
     }
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(DiggerInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
     public override int PackSort => 31;
     public override ColorEnum Color => ColorEnum.Grey;
     public override bool GetsDamageMultiplier => true;

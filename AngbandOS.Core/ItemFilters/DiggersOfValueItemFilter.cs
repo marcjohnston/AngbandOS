@@ -14,6 +14,6 @@ namespace AngbandOS.Core.ItemFilters;
 internal class DiggersOfValueItemFilter : ItemFilter
 {
     private DiggersOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(DiggersItemClass)).Key;
+    public override bool? CanBeUsedToDig => true;
     public override bool? HasValue => true;
 }
