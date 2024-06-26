@@ -31,7 +31,6 @@ internal class LifeRealm : Realm
     };
     public override string Name => "Life";
 
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.LifeBook;
 
     public override bool SusceptibleToHolyAndHellProjectiles => true;
 }

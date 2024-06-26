@@ -30,5 +30,4 @@ internal class NatureRealm : Realm
         nameof(CthaatAquadingenNatureBookItemFactory)
     };
     public override string Name => "Nature";
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.NatureBook;
 }

@@ -18,7 +18,6 @@ internal class DeathRealm : Realm
         "offensive realm."
     };
     public override string Name => "Death";
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.DeathBook;
 
     /// <summary>
     /// Returns the Black Prayers, Black Mass, Cultesdes Goules and Necronomicon books because they belong to the Death realm.

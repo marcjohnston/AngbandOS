@@ -18,7 +18,6 @@ internal class TarotRealm : Realm
         "spells."
    };
     public override string Name => "Tarot";
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.TarotBook;
 
     /// <summary>
     /// Returns the Conjurings Tricks, Card Mastery, Eltdown Shards and Celeano Fragments books because they belong to the Tarot realm.

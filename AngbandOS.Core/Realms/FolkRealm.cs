@@ -33,5 +33,4 @@ internal class FolkRealm : Realm
     };
 
     public override string Name => "Folk";
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.FolkBook;
 }

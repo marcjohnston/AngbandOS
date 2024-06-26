@@ -19,7 +19,6 @@ internal class SorceryRealm : Realm
         "utility spells."
     };
     public override string Name => "Sorcery";
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.SorceryBook;
 
     /// <summary>
     /// Returns the Beginners Handbook, Master Sorcerers, Unaussprechlich Kulten and Liber Ivonis books because they belong to the Sorcery realm.

@@ -31,5 +31,4 @@ internal class CorporealRealm : Realm
     };
 
     public override string Name => "Corporeal";
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.CorporealBook;
 }

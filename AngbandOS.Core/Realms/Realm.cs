@@ -66,13 +66,6 @@ internal abstract class Realm : IGetKey
     public abstract string Name { get; }
 
     /// <summary>
-    /// Returns the spell book item category that represents the realm.
-    /// </summary>
-    /// <param name="realm"> The realm of magic </param>
-    /// <returns> The spell book item category </returns>
-    public abstract ItemTypeEnum SpellBookItemCategory { get; }
-
-    /// <summary>
     /// Returns true, if a player subscribing to the realm gains resistance to hellfire projectiles.  The resistance offers a 50% reduction in damage.  Returns false, by default.  The Death realm, returns true.
     /// </summary>
     /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>

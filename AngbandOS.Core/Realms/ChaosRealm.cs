@@ -20,7 +20,6 @@ internal class ChaosRealm : Realm
     };
 
     public override string Name => "Chaos";
-    public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.ChaosBook;
 
     /// <summary>
     /// Returns the Sign Of Chaos, Mastery Chaos, Gharne Fragments and Azathoth Chaos books because they belong to the Chaos realm.
