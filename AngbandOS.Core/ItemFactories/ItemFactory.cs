@@ -21,6 +21,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public virtual bool CanSpikeDoorClosed => false;
 
+    /// <summary>
+    /// Returns true, if the item is a bow and can project arrows; false, otherwise.  Returns false, by default.
+    /// </summary>
+    public virtual bool CanProjectArrows => false;
+
     public virtual int PotionManaValue => 0; // TODO: Refactor into the binder
     public virtual int StaffManaValue => 0; // TODO: Refactor into the binder
     public virtual int RodManaValue => 0; // TODO: Refactor into the binder

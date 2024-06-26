@@ -106,7 +106,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     public override int PackSort => 32;
     public abstract ItemTypeEnum AmmunitionItemCategory { get; }
 
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bow;
+    public override bool CanProjectArrows => true;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
     public override ColorEnum Color => ColorEnum.Brown;

@@ -13,11 +13,9 @@ namespace AngbandOS.Core;
 internal enum ItemTypeEnum // THESE ARE ITEMCLASSES
 {
     None = 0,
-    Chest = 7,
     Shot = 16,
     Arrow = 17,
     Bolt = 18,
-    Bow = 19,
     Digging = 20,
     Hafted = 21,
     Polearm = 22,

@@ -29,6 +29,11 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     }
 
     /// <summary>
+    /// Returns true, if the item must be able to project arrows; false, if the item cannot project arrows; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? CanProjectArrows => null;
+
+    /// <summary>
     /// Returns true, if the item must be blessed; false, if the item cannot be blessed; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public virtual bool? IsBlessed => null;
@@ -223,6 +228,10 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
             return false;
         }
         if (CanBeUsed != null && item.Factory.CanBeUsed != CanBeUsed)
+        {
+            return false;
+        }
+        if (CanProjectArrows.HasValue && item.Factory.CanProjectArrows != CanProjectArrows.Value)
         {
             return false;
         }

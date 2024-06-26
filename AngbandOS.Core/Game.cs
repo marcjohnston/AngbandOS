@@ -6911,7 +6911,7 @@ public bool IsDead = false;
     /// </summary>
     /// <param name="inventoryIndex"> The inventory index of the spike found (if any) </param>
     /// <returns> Whether or not a spike was found </returns>
-    public bool GetSpike(out int inventoryIndex)
+    public bool GetSpike(out int inventoryIndex) // TODO: This can be generalized in a new method FindInventoryItems(ItemFilter itemFilter)
     {
         // Loop through the inventory
         for (int i = 0; i < InventorySlot.PackCount; i++)

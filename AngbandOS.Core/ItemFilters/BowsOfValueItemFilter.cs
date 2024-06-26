@@ -14,6 +14,6 @@ namespace AngbandOS.Core.ItemFilters;
 internal class BowsOfValueItemFilter : ItemFilter
 {
     private BowsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(BowsItemClass)).Key;
+    public override bool? CanProjectArrows => true;
     public override bool? HasValue => true;
 }

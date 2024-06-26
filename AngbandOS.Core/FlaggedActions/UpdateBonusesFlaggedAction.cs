@@ -689,8 +689,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                                 Game.MissileAttacksPerRound++;
                             }
                         }
-                        if (Game.BaseCharacterClass.ID == CharacterClass.Warrior && Game.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
-                            Game.AmmunitionItemCategory >= ItemTypeEnum.Shot)
+                        if (Game.BaseCharacterClass.ID == CharacterClass.Warrior && Game.AmmunitionItemCategory <= ItemTypeEnum.Bolt && Game.AmmunitionItemCategory >= ItemTypeEnum.Shot)
                         {
                             if (Game.ExperienceLevel.IntValue >= 25)
                             {
