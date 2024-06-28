@@ -2731,7 +2731,7 @@ public bool IsDead = false;
             for (int ii = 0; ii < InventorySlot.PackCount; ii++)
             {
                 Item? oPtr = GetInventoryItem(ii);
-                if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                if (oPtr != null && (itemFilter == null || itemFilter.Matches(oPtr)))
                 {
                     inventory.Add(ii);
                 }
@@ -2744,7 +2744,7 @@ public bool IsDead = false;
                 foreach (int ii in inventorySlot.InventorySlots)
                 {
                     Item? oPtr = GetInventoryItem(ii);
-                    if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    if (oPtr != null && (itemFilter == null || itemFilter.Matches(oPtr)))
                     {
                         equipment.Add(ii);
                     }
@@ -14754,7 +14754,7 @@ public bool IsDead = false;
         {
             throw new Exception("The ItemMatchesFilter with an item of gold shouldn't have been possible.");
         }
-        return (itemFilter == null || itemFilter.ItemMatches(item));
+        return (itemFilter == null || itemFilter.Matches(item));
     }
 
     public int LabelToEquip(char c)
@@ -14826,7 +14826,7 @@ public bool IsDead = false;
             foreach (int index in inventorySlot.InventorySlots)
             {
                 Item? oPtr = GetInventoryItem(index);
-                if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                if (oPtr != null && (itemFilter == null || itemFilter.Matches(oPtr)))
                 {
                     ConsoleTableRow consoleRow = consoleTable.AddRow();
                     consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{index.IndexToLabel()})");

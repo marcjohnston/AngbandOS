@@ -398,6 +398,7 @@ internal class SingletonRepository
         RegisterRepository<ItemClass>();
         RegisterRepository<ItemFactory>();
         RegisterRepository<ItemFilter>();
+        RegisterRepository<ItemMatch>();
         RegisterRepository<ItemQualityRating>();
         RegisterRepository<ItemTest>();
         RegisterRepository<Justification>();

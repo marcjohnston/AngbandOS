@@ -14,6 +14,9 @@ namespace AngbandOS.Core.ItemFilters;
 internal class ShieldsOfValueItemFilter : ItemFilter
 {
     private ShieldsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(ShieldsItemClass)).Key;
-    public override bool? HasValue => true;
+    public override string[]? AnyMatchingFactoryItemClassKeys => new string[]
+        {
+            Game.SingletonRepository.Get<ItemClass>(nameof(ShieldsItemClass)).Key
+        };
+    public override bool? IsOfValue => true;
 }

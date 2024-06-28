@@ -15,5 +15,5 @@ internal class DiggersOfValueItemFilter : ItemFilter
 {
     private DiggersOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? CanBeUsedToDig => true;
-    public override bool? HasValue => true;
+    public override bool? IsOfValue => true;
 }

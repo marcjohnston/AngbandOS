@@ -5,15 +5,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemFilters;
+namespace AngbandOS.Core.ItemMatches;
 
-/// <summary>
-/// Represents an item filter for bows that have value.
-/// </summary>
 [Serializable]
-internal class BowsOfValueItemFilter : ItemFilter
+internal abstract class ItemMatch
 {
-    private BowsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override bool? CanProjectArrows => true;
-    public override bool? IsOfValue => true;
+    protected Game Game { get; }
+    public string Title { get; }
+
+    protected ItemMatch(Game game, string title)
+    {
+        Game = game;
+    }
+
+    public abstract bool Matches(Item item);
+    public override string ToString()
+    {
+        return Title;
+    }
 }

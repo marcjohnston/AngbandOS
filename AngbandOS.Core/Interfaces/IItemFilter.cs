@@ -17,5 +17,5 @@ internal interface IItemFilter
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    bool ItemMatches(Item item);
+    bool Matches(Item item);
 }

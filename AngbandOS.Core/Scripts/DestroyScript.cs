@@ -113,7 +113,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
                 foreach (ItemFilter itemFilter in itemAction.ItemFilters)
                 {
                     // Check to see if the item filter matches.
-                    if (itemFilter.ItemMatches(item))
+                    if (itemFilter.Matches(item))
                     {
                         // Perform the item destroy action.
                         itemAction.ItemDestroyed(item, count);

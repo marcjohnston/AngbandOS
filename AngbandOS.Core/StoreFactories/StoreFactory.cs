@@ -140,12 +140,12 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public bool ItemMatches(Item item)
+    public bool Matches(Item item)
     {
         // Loop through all of the item filters.  If the filter matches, then the item matches.
         foreach (ItemFilter itemFilter in ItemFilters)
         {
-            if (itemFilter.ItemMatches(item))
+            if (itemFilter.Matches(item))
             {
                 return true;
             }

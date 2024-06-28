@@ -14,6 +14,9 @@ namespace AngbandOS.Core.ItemFilters;
 internal class StaffsOfValueItemFilter : ItemFilter
 {
     private StaffsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(StaffsItemClass)).Key;
-    public override bool? HasValue => true;
+    public override string[]? AnyMatchingFactoryItemClassKeys => new string[]
+        {
+            Game.SingletonRepository.Get<ItemClass>(nameof(StaffsItemClass)).Key
+        };
+    public override bool? IsOfValue => true;
 }

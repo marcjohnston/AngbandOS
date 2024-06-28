@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ItemFactories;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -19,6 +21,8 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         Game = game;
     }
 
+    protected ItemMatch[] ItemMatches { get; private set; }
+
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -27,16 +31,96 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     {
         return "";
     }
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+
+    private ItemMatch[] AddStringsMatch(string title, string[]? matchingStrings, string[]? nonmatchingStrings, Func<Item, string> evaluateLambda)
+    {
+        List<ItemMatch> itemMatchList = new List<ItemMatch>();
+        if (matchingStrings != null)
+        {
+            itemMatchList.Add(new StringsItemMatch(Game, $"{title} in ({String.Join(",", matchingStrings)})", matchingStrings, true, evaluateLambda));
+        }
+        if (nonmatchingStrings != null)
+        {
+            itemMatchList.Add(new StringsItemMatch(Game, $"{title} not in ({String.Join(",", nonmatchingStrings)})", nonmatchingStrings, false, evaluateLambda));
+        }
+        return itemMatchList.ToArray();
+    }
+
+    private ItemMatch[] AddBooleanMatch(string title, bool? boolean, Func<Item, bool> evaluateLambda)
+    {
+        List<ItemMatch> itemMatchList = new List<ItemMatch>();
+        if (boolean.HasValue)
+        {
+            return new ItemMatch[]
+            {
+                new BooleanItemMatch(Game, $"{title}={boolean.Value}", boolean.Value, evaluateLambda)
+            };
+        }
+        return new ItemMatch[] { };
+    }
+
+    public virtual void Bind()
+    {
+        List<ItemMatch> itemMatchList = new List<ItemMatch>();
+        itemMatchList.AddRange(AddStringsMatch("FactoryKeys", AnyMatchingFactoryKeys, AllNonMatchingFactoryKeys, (Item item) => item.Factory.Key));
+        itemMatchList.AddRange(AddStringsMatch("FactoryItemClassKeys", AnyMatchingFactoryItemClassKeys, AllNonMatchingFactoryItemClassKeys, (Item item) => item.Factory.ItemClass.Key));
+        itemMatchList.AddRange(AddBooleanMatch("IsOfValue", IsOfValue, (Item item) => item.Value() > 0));
+        itemMatchList.AddRange(AddBooleanMatch("IsKnown", IsKnown, (Item item) => item.IsKnown()));
+        itemMatchList.AddRange(AddBooleanMatch("IsTooHeavyToWield", IsTooHeavyToWield, (Item item) => Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < item.Weight / 10));
+        itemMatchList.AddRange(AddBooleanMatch("IsLanternFuel", IsLanternFuel, (Item item) => item.Factory.IsFuelForLantern));
+        itemMatchList.AddRange(AddBooleanMatch("IsWeapon", IsWeapon, (Item item) => item.Factory.IsWeapon));
+        itemMatchList.AddRange(AddBooleanMatch("CanBeEaten", CanBeEaten, (Item item) => item.Factory.CanBeEaten));
+        itemMatchList.AddRange(AddBooleanMatch("CanBeQuaffed", CanBeQuaffed, (Item item) => item.Factory.CanBeQuaffed));
+        itemMatchList.AddRange(AddBooleanMatch("CanBeRead", CanBeRead, (Item item) => item.Factory.CanBeRead));
+        itemMatchList.AddRange(AddBooleanMatch("CanBeUsed", CanBeUsed, (Item item) => item.Factory.CanBeUsed));
+        itemMatchList.AddRange(AddBooleanMatch("CanProjectArrows", CanProjectArrows, (Item item) => item.Factory.CanProjectArrows));
+        itemMatchList.AddRange(AddBooleanMatch("CanBeUsedToDig", CanBeUsedToDig, (Item item) => item.Factory.CanBeUsedToDig));
+        itemMatchList.AddRange(AddBooleanMatch("IsFuelForTorch", IsFuelForTorch, (Item item) => item.Factory.IsFuelForTorch));
+        itemMatchList.AddRange(AddBooleanMatch("IsWearable", IsWearable, (Item item) => item.Factory.IsWearable));
+        itemMatchList.AddRange(AddBooleanMatch("IsArmor", IsArmor, (Item item) => item.Factory.IsArmor));
+        itemMatchList.AddRange(AddBooleanMatch("CanBeFired", CanBeFired, (Item item) => item.Factory.CanBeFired));
+        itemMatchList.AddRange(AddBooleanMatch("IsBlessed", IsBlessed, (Item item) => item.Characteristics.Blessed));
+        ItemMatches = itemMatchList.ToArray();
+    }
 
     /// <summary>
     /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should match; null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual string[]? MatchingFactoryKeys => null;
+    public virtual string[]? AnyMatchingFactoryKeys => null;
 
     /// <summary>
     /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should not match; null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual string[]? NotMatchingFactoryKeys => null;
+    public virtual string[]? AllNonMatchingFactoryKeys => null;
+
+    /// <summary>
+    /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual string[]? AnyMatchingFactoryItemClassKeys => null;
+
+    /// <summary>
+    /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual string[]? AllNonMatchingFactoryItemClassKeys => null;
+
+    /// <summary>
+    /// Returns true, if the item must have a value greater than zero (>0); false, if the item must have a value of zero or less (<=0); or null, 
+    /// if indifferent.  Returns null, by default.  Stores require their items to have value to be an item in the store.
+    /// </summary>
+    public virtual bool? IsOfValue => null;
+
+    /// <summary>
+    /// Returns true, if the item must be known; false, if the item cannot be known; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? IsKnown => null;
+
+    /// <summary>
+    /// Returns true, if the item must be too heavy to wield; false, if the item cannot be too heavy to wield; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? IsTooHeavyToWield => null;
+
 
     /// <summary>
     /// Returns true, if the item must be able to project arrows; false, if the item cannot project arrows; or null, if indifferent.  Returns null, by default.
@@ -52,17 +136,6 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     /// Returns true, if the item can be aimed; false, if the item cannot be aimed; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public virtual bool? CanBeAimed => null;
-
-    /// <summary>
-    /// Returns true, if the item must have a value greater than zero (>0); false, if the item must have a value of zero or less (<=0); or null, 
-    /// if indifferent.  Returns null, by default.  Stores require their items to have value to be an item in the store.
-    /// </summary>
-    public virtual bool? HasValue => null;
-
-    /// <summary>
-    /// Returns true, if the item must be known; false, if the item cannot be known; or null, if indifferent.  Returns null, by default.
-    /// </summary>
-    public virtual bool? IsKnown => null;
 
     /// <summary>
     /// Returns true, if the item must be activatable; false, if the item cannot be activatable; or null, if indifferent.  Returns null, by default.
@@ -137,50 +210,20 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     /// <summary>
     /// Returns true, if the item can be used to dig; false, if the item cannot be used to dig; or null, if indifferent.  Returns null, by default.
     /// </summary>
+    [Obsolete("Use ItemClass")]
     public virtual bool? CanBeUsedToDig => null;
 
-    /// <summary>
-    /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
-    /// </summary>
-    [Obsolete("Need to use a Bool Can*")]
-    public virtual string? FactoryItemClassKey => null; // TODO: Need to remove
-
-    public virtual string Key => GetType().Name;
-    public string GetKey => Key;
-
-    public virtual void Bind() { }
-
-    public virtual bool ItemMatches(Item item)
+    public virtual bool Matches(Item item)
     {
+        foreach (ItemMatch itemMatch in ItemMatches)
+        {
+            if (!itemMatch.Matches(item))
+            {
+                return false;
+            }
+        }
+
         ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
-        if (MatchingFactoryKeys != null && !MatchingFactoryKeys.Contains(item.Factory.Key))
-        {
-            return false;
-        }
-        if (NotMatchingFactoryKeys != null && NotMatchingFactoryKeys.Contains(item.Factory.Key))
-        {
-            return false;
-        }
-        if (FactoryItemClassKey != null && FactoryItemClassKey != item.Factory.ItemClass.Key)
-        {
-            return false;
-        }
-        if (IsBlessed != null && mergedCharacteristics.Blessed != IsBlessed)
-        {
-            return false;
-        }
-        if (HasValue == true && item.Value() <= 0)
-        {
-            return false;
-        }
-        if (HasValue == false && item.Value() > 0)
-        {
-            return false;
-        }
-        if (IsKnown != null && item.IsKnown() != IsKnown)
-        {
-            return false;
-        }
         if (CanBeActivated.HasValue)
         {
             if (CanBeActivated.Value && mergedCharacteristics.Activation == null)
@@ -192,22 +235,6 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
                 return false;
             }
         }
-        if (IsLanternFuel != null && item.Factory.IsFuelForLantern != IsLanternFuel)
-        {
-            return false;
-        }
-        if (IsFuelForTorch != null && item.Factory.IsFuelForTorch != IsFuelForTorch)
-        {
-            return false;
-        }
-        if (IsWearable != null && item.Factory.IsWearable != IsWearable)
-        {
-            return false;
-        }
-        if (IsWeapon != null && item.Factory.IsWeapon != IsWeapon)
-        {
-            return false;
-        }
         if (IsRechargable.HasValue)
         {
             if (IsRechargable.Value && item.Factory.RechargeScript == null)
@@ -218,14 +245,6 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
             {
                 return false;
             }
-        }
-        if (IsArmor != null && item.Factory.IsArmor != IsArmor)
-        {
-            return false;
-        }
-        if (CanBeFired != null && item.Factory.CanBeFired != CanBeFired)
-        {
-            return false;
         }
         if (CanBeAimed.HasValue)
         {
@@ -239,30 +258,6 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
             }
         }
 
-        if (CanBeEaten != null && item.Factory.CanBeEaten != CanBeEaten)
-        {
-            return false;
-        }
-        if (CanBeQuaffed != null && item.Factory.CanBeQuaffed != CanBeQuaffed)
-        {
-            return false;
-        }
-        if (CanBeRead != null && item.Factory.CanBeRead != CanBeRead)
-        {
-            return false;
-        }
-        if (CanBeUsed != null && item.Factory.CanBeUsed != CanBeUsed)
-        {
-            return false;
-        }
-        if (CanProjectArrows.HasValue && item.Factory.CanProjectArrows != CanProjectArrows.Value)
-        {
-            return false;
-        }
-        if (CanBeUsedToDig.HasValue && item.Factory.CanBeUsedToDig != CanBeUsedToDig.Value)
-        {
-            return false;
-        }
         if (CanBeZapped.HasValue)
         {
             if (CanBeZapped.Value && item.Factory.ZapDetails == null)

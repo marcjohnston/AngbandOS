@@ -14,5 +14,8 @@ namespace AngbandOS.Core.ItemFilters;
 internal class BoltsItemFilter : ItemFilter
 {
     private BoltsItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(BoltsItemClass)).Key;
+    public override string[]? AnyMatchingFactoryItemClassKeys => new string[]
+        {
+            Game.SingletonRepository.Get<ItemClass>(nameof(BoltsItemClass)).Key
+        };
 }

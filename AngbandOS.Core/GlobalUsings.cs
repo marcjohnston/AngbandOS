@@ -44,6 +44,7 @@ global using AngbandOS.Core.ItemCharacteristicTests;
 global using AngbandOS.Core.ItemClasses;
 global using AngbandOS.Core.ItemFactories;
 global using AngbandOS.Core.ItemFilters;
+global using AngbandOS.Core.ItemMatches;
 global using AngbandOS.Core.ItemQualityRatings;
 global using AngbandOS.Core.MartialArtsAttacks;
 global using AngbandOS.Core.MonsterRaces;

@@ -15,6 +15,9 @@ internal class BottlesOfValueItemFilter : ItemFilter
 {
     private BottlesOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
 
-    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(BottlesItemClass)).Key;
-    public override bool? HasValue => true;
+    public override string[]? AnyMatchingFactoryItemClassKeys => new string[]
+        {
+            Game.SingletonRepository.Get<ItemClass>(nameof(BottlesItemClass)).Key
+        };
+    public override bool? IsOfValue => true;
 }
