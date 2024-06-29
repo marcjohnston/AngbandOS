@@ -84,7 +84,7 @@ internal abstract class WeaponItemFactory : ItemFactory
 
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
-    public override bool IsWearable => true;
+    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, for all weapons where both the hit (ToH) and damage (ToD) are equal to or greater than zero.  False, for all weapons with either stat less than 0.

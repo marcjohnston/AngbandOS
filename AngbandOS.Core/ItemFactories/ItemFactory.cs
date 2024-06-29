@@ -946,7 +946,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns true, if the item can be worn.
     /// </summary>
-    public virtual bool IsWearable => false;
+    public virtual bool IsWearableOrWieldable => false;
 
     /// <summary>
     /// Returns true, if the item can be eaten.

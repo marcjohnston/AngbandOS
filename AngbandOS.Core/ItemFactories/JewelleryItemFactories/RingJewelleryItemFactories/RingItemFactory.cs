@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class RingItemFactory : JewelleryItemFactory
 {
-    public override bool IsWearable => true;
+    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns either the right or left hand inventory slot for rings.

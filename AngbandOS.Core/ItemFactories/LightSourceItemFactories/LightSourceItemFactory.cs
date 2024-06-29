@@ -127,5 +127,5 @@ internal abstract class LightSourceItemFactory : ItemFactory
     /// <summary>
     /// Returns true, because all light sources can be worn/wielded.
     /// </summary>
-    public override bool IsWearable => true;
+    public override bool IsWearableOrWieldable => true;
 }

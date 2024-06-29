@@ -96,7 +96,7 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         itemMatchList.AddRange(AddBooleanMatch(nameof(IsTooHeavyToWield), IsTooHeavyToWield, (Item item) => Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < item.Weight / 10));
         itemMatchList.AddRange(AddBooleanMatch(nameof(IsUsableSpellBook), IsUsableSpellBook, (Item item) => Game.PrimaryRealm != null && Game.PrimaryRealm.SpellBooks.Contains(item.Factory) || Game.SecondaryRealm != null && Game.SecondaryRealm.SpellBooks.Contains(item.Factory)));
         itemMatchList.AddRange(AddBooleanMatch(nameof(IsWeapon), IsWeapon, (Item item) => item.Factory.IsWeapon));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsWearableOrWieldable), IsWearableOrWieldable, (Item item) => item.Factory.IsWearable));
+        itemMatchList.AddRange(AddBooleanMatch(nameof(IsWearableOrWieldable), IsWearableOrWieldable, (Item item) => item.Factory.IsWearableOrWieldable));
         itemMatchList.AddRange(AddStringsMatch("FactoryItemClassKeys", AnyMatchingFactoryItemClassKeys, AllNonMatchingFactoryItemClassKeys, (Item item) => item.Factory.ItemClass.Key));
         itemMatchList.AddRange(AddStringsMatch("FactoryKeys", AnyMatchingFactoryKeys, AllNonMatchingFactoryKeys, (Item item) => item.Factory.Key));
         ItemMatches = itemMatchList.ToArray();
