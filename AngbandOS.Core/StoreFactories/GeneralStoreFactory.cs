@@ -48,7 +48,7 @@ internal class GeneralStoreFactory : StoreFactory
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {
-        new StoreStockManifestDefinition(nameof(ArrowAmmunitionItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(WoodenArrowAmmunitionItemFactory), 2),
         new StoreStockManifestDefinition(nameof(SteelBoltAmmunitionItemFactory), 2),
         new StoreStockManifestDefinition(nameof(ClothCloakArmorItemFactory), 3),
         new StoreStockManifestDefinition(nameof(PickDiggingWeaponItemFactory)),

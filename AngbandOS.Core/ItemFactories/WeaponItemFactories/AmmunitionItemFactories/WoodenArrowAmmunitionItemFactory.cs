@@ -34,7 +34,6 @@ internal class WoodenArrowAmmunitionItemFactory : AmmunitionItemFactory
         (500, "5d5-5")
     };
 
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Arrow;
     public override int PackSort => 34;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

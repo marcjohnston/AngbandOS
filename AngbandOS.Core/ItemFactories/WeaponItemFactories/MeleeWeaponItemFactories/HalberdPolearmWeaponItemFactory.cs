@@ -33,7 +33,6 @@ internal class HalberdPolearmWeaponItemFactory : MeleeWeaponItemFactory
     };
 
     protected override string ItemClassName => nameof(PolearmsItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Polearm;
     public override bool HatesFire => true;
     public override int PackSort => 29;
     public override bool HatesAcid => true;

@@ -29,7 +29,7 @@ internal class ShortBowRangedWeaponItemFactory : RangedWeaponItemFactory
     public override int MissileDamageMultiplier => 2;
     protected override string[]? AmmunitionItemFactoryNames => new string[]
     {
-        nameof(ArrowAmmunitionItemFactory),
+        nameof(WoodenArrowAmmunitionItemFactory),
         nameof(SeekerArrowAmmunitionItemFactory)
     };
 }

@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ItemClasses;
+
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
@@ -55,7 +57,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasAggravation = false;
         Game.HasRandomTeleport = false;
         Game.HasExperienceDrain = false;
-        Game.HasBlessedBlade = false;
+        Game.HasBlessedBlade = false; // TODO: This is local
         Game.HasExtraMight = false;
         Game.HasQuakeWeapon = false;
         Game.HasSeeInvisibility = false;
@@ -714,7 +716,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
             {
-                Game.HasHeavyWeapon = false;
+                Game.HasHeavyWeapon = false; // TODO: Is this local only
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null && hold < oPtr.Weight / 10)
                 {
@@ -808,7 +810,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.DisplayedAttackBonus += Game.ExperienceLevel.IntValue / 5;
                     Game.DisplayedDamageBonus += Game.ExperienceLevel.IntValue / 5;
                 }
-                if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.Factory.CategoryEnum == ItemTypeEnum.Sword || oPtr.Factory.CategoryEnum == ItemTypeEnum.Polearm))
+                
+                if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.Factory.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.Factory.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
                 {
                     Game.AttackBonus -= 2;
                     Game.DamageBonus -= 2;

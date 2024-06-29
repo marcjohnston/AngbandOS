@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SlingBowRangedWeaponItemFactory : RangedWeaponItemFactory
+internal class SlingRangedWeaponItemFactory : RangedWeaponItemFactory
 {
-    private SlingBowRangedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private SlingRangedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(CloseBracketSymbol);
     public override ColorEnum Color => ColorEnum.Brown;

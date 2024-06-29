@@ -29,7 +29,6 @@ internal class SteelBoltAmmunitionItemFactory : AmmunitionItemFactory
     public override bool ShowMods => true;
     public override int Weight => 3;
     protected override string ItemClassName => nameof(BoltsItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
     public override int PackSort => 33;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

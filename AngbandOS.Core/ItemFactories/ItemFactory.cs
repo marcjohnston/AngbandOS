@@ -1346,11 +1346,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual int Weight => 0;
 
     /// <summary>
-    /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
-    /// </summary>
-    public virtual ItemTypeEnum CategoryEnum { get; } = ItemTypeEnum.None;
-
-    /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
     /// </summary>
     /// <param name="item"></param>

@@ -33,7 +33,6 @@ internal class IronShotAmmunitionItemFactory : AmmunitionItemFactory
         (500, "5d5-5")
     };
 
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shot;
     public override int PackSort => 35;
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
     public override int PercentageBreakageChance => 25;

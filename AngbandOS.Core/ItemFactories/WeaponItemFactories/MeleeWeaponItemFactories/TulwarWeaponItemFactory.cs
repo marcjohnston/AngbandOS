@@ -36,7 +36,6 @@ internal class TulwarWeaponItemFactory : MeleeWeaponItemFactory
     protected override bool CanBeWeaponOfSharpness => true;
     protected override bool CapableOfVorpalSlaying => true;
     protected override string ItemClassName => nameof(SwordsItemClass);
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Sword;
     public override bool HatesAcid => true;
     public override int PackSort => 28;
 
