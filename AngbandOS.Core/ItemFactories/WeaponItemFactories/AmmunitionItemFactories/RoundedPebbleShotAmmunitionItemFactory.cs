@@ -38,7 +38,6 @@ internal class RoundedPebbleShotAmmunitionItemFactory : AmmunitionItemFactory
     public override int PercentageBreakageChance => 25;
 
     public override bool IsWeapon => true;
-    public override bool CanBeFired => true;
     public override bool IdentityCanBeSensed => true;
     public override bool GetsDamageMultiplier => true;
 }

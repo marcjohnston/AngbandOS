@@ -14,5 +14,5 @@ namespace AngbandOS.Core.ItemFilters;
 internal class CanBeRechargedItemFilter : ItemFilter
 {
     private CanBeRechargedItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override bool? IsRechargable => true;
+    public override bool? CanBeRecharged => true;
 }

@@ -964,11 +964,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool CanBeUsed => false;
 
     /// <summary>
-    /// Returns true, if the item can be chosen for the Fire command.
-    /// </summary>
-    public virtual bool CanBeFired => false;
-
-    /// <summary>
     /// Returns true, if the item is armor.
     /// </summary>
     public virtual bool IsArmor => false;
