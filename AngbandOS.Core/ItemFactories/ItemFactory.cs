@@ -575,7 +575,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     protected virtual (int count, string rollExpression)[]? MassProduceTupleNames => null;
 
-    public (int, Roll)[]? MassProduceTuples { get; private set; }
+    public (int, Roll)[]? MassProduceTuples { get; private set; } = null;
 
     /// <summary>
     /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.  When an item
@@ -1038,11 +1038,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         FlavorColor = Color;
 
         // Bind the MassProduceTuples
-        if (MassProduceTupleNames == null)
-        {
-            MassProduceTuples = null;
-        }
-        else
+        if (MassProduceTupleNames != null)
         {
             List<(int, Roll)> massProduceTuplesList = new List<(int, Roll)>();
             foreach ((int cost, string rollExpression) in MassProduceTupleNames)
@@ -1109,6 +1105,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             bool requiresAiming = ZapBinderDetails.Value.RequiresAiming;
             ZapDetails = (identifiedAndUsedScriptItemDirection, roll, requiresAiming);
         }
+
+        AmmunitionItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AmmunitionItemFactoryNames);
     }
 
     /// <summary>
