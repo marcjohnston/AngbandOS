@@ -17,6 +17,18 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns the name of the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property is used to bind
+    /// the <see cref="AmmunitionItemFactories"/> property during the bind phase.  Returns null, by default.
+    /// </summary>
+    protected virtual string[]? AmmunitionItemFactoryNames => null;
+
+    /// <summary>
+    /// Returns the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property bound using
+    /// the <see cref="AmmunitionItemFactoryNames"/> property during the bind phase.  Returns null, by default.
+    /// </summary>
+    public ItemFactory[]? AmmunitionItemFactories { get; private set; } = null;
+
+    /// <summary>
     /// Returns true, if the item can be used to spike a door closed; false, otherwise.  Returns false, by default.
     /// </summary>
     public virtual bool CanSpikeDoorClosed => false;

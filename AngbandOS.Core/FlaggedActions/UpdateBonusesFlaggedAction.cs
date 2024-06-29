@@ -675,9 +675,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (!Game.HasHeavyBow)
                     {
                         // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
-                        BowWeaponItemFactory missileWeaponItemCategory = (BowWeaponItemFactory)oPtr.Factory;
-                        ItemTypeEnum ammunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
-                        if (Game.BaseCharacterClass.ID == CharacterClass.Ranger && ammunitionItemCategory == ItemTypeEnum.Arrow)
+                        ItemFactory[]? ammunitionItemFactories = oPtr.Factory.AmmunitionItemFactories;
+
+                        // Rangers get a bonus for using ranged weapons that use arrows for ammunition.
+                        if (Game.BaseCharacterClass.ID == CharacterClass.Ranger && oPtr.Factory.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(BowItemClass)))
                         {
                             if (Game.ExperienceLevel.IntValue >= 20)
                             {

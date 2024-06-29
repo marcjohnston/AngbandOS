@@ -13,7 +13,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
 {
     private LightCrossbowOfDeathFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(LightCrossbowBowWeaponItemFactory);
+    protected override string BaseItemFactoryName => nameof(LightCrossbowRangedWeaponItemFactory);
 
     // Death brands your bolts
     protected override string? ActivationName => nameof(BrandBoltsEvery999Activation);

@@ -8,15 +8,16 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class LongBowWeaponItemFactory : BowWeaponItemFactory
+internal class LongBowRangedWeaponItemFactory : RangedWeaponItemFactory
 {
-    private LongBowWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private LongBowRangedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(CloseBracketSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Long Bow";
 
     public override int Cost => 120;
+    protected override string ItemClassName => nameof(BowItemClass);
     protected override string? DescriptionSyntax => "Long Bow~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
@@ -26,5 +27,9 @@ internal class LongBowWeaponItemFactory : BowWeaponItemFactory
     public override bool ShowMods => true;
     public override int Weight => 40;
     public override int MissileDamageMultiplier => 3;
-    public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Arrow;
+    protected override string[]? AmmunitionItemFactoryNames => new string[]
+    {
+        nameof(ArrowAmmunitionItemFactory),
+        nameof(SeekerArrowAmmunitionItemFactory)
+    };
 }

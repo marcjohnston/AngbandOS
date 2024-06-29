@@ -13,7 +13,7 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
 {
     private LongBowOfSerpentsFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(LongBowWeaponItemFactory);
+    protected override string BaseItemFactoryName => nameof(LongBowRangedWeaponItemFactory);
 
 
     public override void ApplyResistances(Item item)

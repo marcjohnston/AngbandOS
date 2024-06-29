@@ -8,15 +8,16 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SlingBowWeaponItemFactory : BowWeaponItemFactory
+internal class SlingBowRangedWeaponItemFactory : RangedWeaponItemFactory
 {
-    private SlingBowWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private SlingBowRangedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(CloseBracketSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Sling";
 
     public override int Cost => 5;
+    protected override string ItemClassName => nameof(SlingItemClass);
     protected override string? DescriptionSyntax => "Sling~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
@@ -26,5 +27,9 @@ internal class SlingBowWeaponItemFactory : BowWeaponItemFactory
     public override bool ShowMods => true;
     public override int Weight => 5;
     public override int MissileDamageMultiplier => 2;
-    public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Shot;
+    protected override string[]? AmmunitionItemFactoryNames => new string[]
+    {
+        nameof(IronShotAmmunitionItemFactory),
+        nameof(RoundedPebbleShotAmmunitionItemFactory)
+    };
 }

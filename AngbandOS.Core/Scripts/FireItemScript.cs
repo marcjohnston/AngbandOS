@@ -71,7 +71,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         int attackBonus = Game.AttackBonus + individualAmmunition.BonusHit + missileWeapon.BonusHit;
         int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
         // Damage multiplier depends on weapon
-        BowWeaponItemFactory missileWeaponItemCategory = (BowWeaponItemFactory)missileWeapon.Factory;
+        RangedWeaponItemFactory missileWeaponItemCategory = (RangedWeaponItemFactory)missileWeapon.Factory;
         int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
         // Extra might gives us an increased multiplier
         if (Game.HasExtraMight)

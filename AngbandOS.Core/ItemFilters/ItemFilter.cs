@@ -71,14 +71,13 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         {
             RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
             WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
-            Item? missileWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
-            if (missileWeapon == null)
+            Item? rangedWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
+            if (rangedWeapon == null || rangedWeapon.Factory.AmmunitionItemFactories == null)
             {
                 return false;
             }
 
-            BowWeaponItemFactory bow = (BowWeaponItemFactory)missileWeapon.Factory;
-            return item.Factory.CategoryEnum == bow.AmmunitionItemCategory;
+            return rangedWeapon.Factory.AmmunitionItemFactories.Contains(item.Factory);
         }));
         itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeQuaffed), CanBeQuaffed, (Item item) => item.Factory.CanBeQuaffed));
         itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeRead), CanBeRead, (Item item) => item.Factory.CanBeRead));

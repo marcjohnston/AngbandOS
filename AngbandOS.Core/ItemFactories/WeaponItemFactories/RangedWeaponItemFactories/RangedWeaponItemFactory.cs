@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should be renamed to RangedWeaponItemClass
+internal abstract class RangedWeaponItemFactory : WeaponItemFactory // TODO: Should be renamed to RangedWeaponItemClass
 {
     /// <summary>
     /// Returns the ranged weapon inventory slot for bows.
@@ -98,13 +98,11 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
         }
     }
 
-    public BowWeaponItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(BowsItemClass);
+    public RangedWeaponItemFactory(Game game) : base(game) { }
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
     public override bool CanApplyBlowsBonus => true;
 
     public override int PackSort => 32;
-    public abstract ItemTypeEnum AmmunitionItemCategory { get; }
 
     public override bool CanProjectArrows => true;
     public override bool HatesFire => true;
