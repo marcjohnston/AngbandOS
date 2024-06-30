@@ -17841,10 +17841,10 @@ public bool IsDead = false;
     /// <exception cref="Exception"></exception>
     public Roll ParseRollExpression(string expression)
     {
-        // Test for simple integer value.
+        // Test for simple positive or negative integer value.
         if (int.TryParse(expression, out int value))
         {
-            return new ValueRoll(this, value);
+            return new IntegerValueRoll(this, value);
         }
 
         // Parse dice notation AdXxC+B.
@@ -17856,7 +17856,7 @@ public bool IsDead = false;
         }
 
         // We will use a Regex for pattern matching.
-        Regex regEx = new Regex(@"(\d*)d(\d+)((x|/)(\d+|x))?((\+|-)(\d*))?");
+        Regex regEx = new Regex(@"^(-?)(\d*)d(\d+)((x|/)(\d+|x))?((\+|-)(\d*))?$");
         Match match = regEx.Match(expression);
 
         // The entire syntax must match.
@@ -17866,11 +17866,18 @@ public bool IsDead = false;
         }
 
         // Extract the matches that we are interested in.
-        string dieCountMatch = match.Groups[1].Value;
-        string sidesCountMatch = match.Groups[2].Value;
-        string multiplierOrDivisorMatch = match.Groups[4].Value;
-        string multiplierMatch = match.Groups[5].Value;
-        string bonusMatch = match.Groups[6].Value;
+        string negative = match.Groups[1].Value;
+        string dieCountMatch = match.Groups[2].Value;
+        string sidesCountMatch = match.Groups[3].Value;
+        string multiplierOrDivisorMatch = match.Groups[5].Value;
+        string multiplierMatch = match.Groups[6].Value;
+        string bonusMatch = match.Groups[7].Value;
+
+        if (negative.Length != 0 && negative != "-")
+        {
+            throw new Exception($"Invalid negative roll expression {negative}.");
+        }
+        bool isNegative = negative == "-";
 
         // Ensure integer values.  Actually the regex is already ensuring digits, but we do have a bit-length limit to check.
         if (!int.TryParse(dieCountMatch, out int dieCount))
@@ -17902,21 +17909,26 @@ public bool IsDead = false;
             {
                 if (multiplierIsDivisor)
                 {
-                    return new ExperienceDivisorDiceRoll(this, dieCount, sidesCount, bonus);
+                    return new ExperienceDivisorDiceRoll(this, isNegative, dieCount, sidesCount, bonus);
                 }
-                return new ExperienceMultiplierDiceRoll(this, dieCount, sidesCount, bonus);
+                return new ExperienceMultiplierDiceRoll(this, isNegative, dieCount, sidesCount, bonus);
             }
 
-            // Parse the ordinal multiplier.
+            // Parse the numeric multiplier.
             int multiplier = 1;
             if (!int.TryParse(multiplierMatch, out multiplier))
             {
                 throw new Exception($"Invalid multiplier expression {multiplierMatch}.");
             }
-            return new OrdinalMultiplierDiceRoll(this, dieCount, sidesCount, multiplier, bonus);
+
+            if (multiplierIsDivisor)
+            {
+                return new NumericDivisorDiceRoll(this, isNegative, dieCount, sidesCount, multiplier, bonus);
+            }
+            return new NumericMultiplierDiceRoll(this, isNegative, dieCount, sidesCount, multiplier, bonus);
         }
 
-        // There is no multiplier.  This is a simple DieRoll.
+        // There is no multiplier.  This is a simple DieRoll in the format 1d2+2.
         return new DiceRoll(this, dieCount, sidesCount, bonus);
     }
 

@@ -7,10 +7,13 @@
 
 namespace AngbandOS.Core.Rolls;
 
+/// <summary>
+/// Represents a <see cref="Roll"/> expression that is a simple positive or negative integer value.
+/// </summary>
 [Serializable]
-internal class ValueRoll : Roll
+internal class IntegerValueRoll : Roll
 {
-    public ValueRoll(Game game, int value) : base(game)
+    public IntegerValueRoll(Game game, int value) : base(game)
     {
         Value = value;
         MaximumValue = value;

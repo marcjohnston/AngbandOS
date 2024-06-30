@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Rolls;
 [Serializable]
 internal class ExperienceMultiplierDiceRoll : Roll
 {
-    public ExperienceMultiplierDiceRoll(Game game, int dieCount, int sideCount, int bonus) : base(game)
+    public ExperienceMultiplierDiceRoll(Game game, bool isNegative, int dieCount, int sideCount, int bonus) : base(game)
     {
         if (dieCount == 0)
         {
@@ -20,11 +20,13 @@ internal class ExperienceMultiplierDiceRoll : Roll
         SideCount = sideCount;
         Bonus = bonus;
         MaximumValue = DieCount * SideCount * 50 + Bonus;
+        IsNegative = isNegative;
     }
     public int DieCount { get; }
     public int SideCount { get; }
     public int Multiplier { get; }
     public int Bonus { get; }
+    public bool IsNegative { get; }
     public override int Get(Random random)
     {
         int sum = 0;
@@ -37,6 +39,10 @@ internal class ExperienceMultiplierDiceRoll : Roll
         if (sum < 0)
         {
             throw new Exception("Invalid roll syntax produced value less than zero.");
+        }
+        if (IsNegative)
+        {
+            sum = -sum;
         }
         return sum;
     }

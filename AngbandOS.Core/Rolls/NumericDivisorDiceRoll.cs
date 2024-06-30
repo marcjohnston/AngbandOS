@@ -8,28 +8,30 @@
 namespace AngbandOS.Core.Rolls;
 
 [Serializable]
-internal class OrdinalMultiplierDiceRoll : Roll
+internal class NumericDivisorDiceRoll : Roll
 {
-    public OrdinalMultiplierDiceRoll(Game game, int dieCount, int sideCount, int multiplier, int bonus) : base(game)
+    public NumericDivisorDiceRoll(Game game, bool isNegative, int dieCount, int sideCount, int divisor, int bonus) : base(game)
     {
         if (dieCount == 0)
         {
             throw new Exception("Die count cannot be 0.");
         }
-        if (multiplier == 0)
+        if (divisor == 0)
         {
-            throw new Exception("Die roll multiplier cannot be 0.");
+            throw new Exception("Die roll divisor cannot be 0.");
         }
         DieCount = dieCount;
         SideCount = sideCount;
-        Multiplier = multiplier;
+        Divisor = divisor;
         Bonus = bonus;
-        MaximumValue = DieCount * SideCount * Multiplier + Bonus;
+        MaximumValue = DieCount * SideCount / Divisor + Bonus;
+        IsNegative = isNegative;
     }
     public int DieCount { get; }
     public int SideCount { get; }
-    public int Multiplier { get; }
+    public int Divisor { get; }
     public int Bonus { get; }
+    public bool IsNegative { get; }
     public override int Get(Random random)
     {
         int sum = 0;
@@ -38,10 +40,14 @@ internal class OrdinalMultiplierDiceRoll : Roll
             int roll = random.Next(SideCount) + 1;
             sum += roll;
         }
-        sum = sum * Multiplier + Bonus;
+        sum = sum / Divisor + Bonus;
         if (sum < 0)
         {
             throw new Exception("Invalid roll syntax produced value less than zero.");
+        }
+        if (IsNegative)
+        {
+            sum = -sum;
         }
         return sum;
     }
@@ -51,9 +57,9 @@ internal class OrdinalMultiplierDiceRoll : Roll
         {
             if (Bonus > 0)
             {
-                return $"{DieCount}d{SideCount}*{Multiplier}+{Bonus}";
+                return $"{DieCount}d{SideCount}/{Divisor}+{Bonus}";
             }
-            return $"{DieCount}d{SideCount}*{Multiplier}";
+            return $"{DieCount}d{SideCount}/{Divisor}";
         }
     }
 }
