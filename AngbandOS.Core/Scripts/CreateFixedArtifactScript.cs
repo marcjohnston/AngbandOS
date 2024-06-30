@@ -23,75 +23,18 @@ internal class CreateFixedArtifactScript : Script, IScript
         {
             return;
         }
+
+        // Retrieve the fixed artifact.
         FixedArtifact aPtr = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
-        if (aPtr.CurNum > 0)
-        {
-            return;
-        }
-        aPtr.CurNum = 1;
+
+        // Create a compatible item.
         Item qPtr = new Item(Game, aPtr.BaseItemFactory);
-        qPtr.FixedArtifact = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
-        if (aPtr.BonusStrength != null)
+
+        // Apply the fixed artifact.
+        if (qPtr.ApplyFixedArtifact(aPtr))
         {
-            qPtr.BonusStrength = aPtr.BonusStrength.Get(Game.UseRandom);
+            Game.DropNear(qPtr, -1, Game.MapY.IntValue, Game.MapX.IntValue);
+            Game.MsgPrint("Allocated.");
         }
-        if (aPtr.BonusIntelligence != null)
-        {
-            qPtr.BonusIntelligence = aPtr.BonusIntelligence.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusWisdom != null)
-        {
-            qPtr.BonusWisdom = aPtr.BonusWisdom.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusDexterity != null)
-        {
-            qPtr.BonusDexterity = aPtr.BonusDexterity.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusConstitution != null)
-        {
-            qPtr.BonusConstitution = aPtr.BonusConstitution.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusCharisma != null)
-        {
-            qPtr.BonusCharisma = aPtr.BonusCharisma.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusStealth != null)
-        {
-            qPtr.BonusStealth = aPtr.BonusStealth.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusSearch != null)
-        {
-            qPtr.BonusSearch = aPtr.BonusSearch.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusInfravision != null)
-        {
-            qPtr.BonusInfravision = aPtr.BonusInfravision.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusTunnel != null)
-        {
-            qPtr.BonusTunnel = aPtr.BonusTunnel.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusAttacks != null)
-        {
-            qPtr.BonusAttacks = aPtr.BonusAttacks.Get(Game.UseRandom);
-        }
-        if (aPtr.BonusSpeed != null)
-        {
-            qPtr.BonusSpeed = aPtr.BonusSpeed.Get(Game.UseRandom);
-        }
-        qPtr.ArmorClass = aPtr.Ac;
-        qPtr.DamageDice = aPtr.Dd;
-        qPtr.DamageSides = aPtr.Ds;
-        qPtr.BonusArmorClass = aPtr.ToA;
-        qPtr.BonusHit = aPtr.ToH;
-        qPtr.BonusDamage = aPtr.ToD;
-        qPtr.Weight = aPtr.Weight;
-        if (aPtr.IsCursed)
-        {
-            qPtr.IsCursed = true;
-        }
-        qPtr.GetFixedArtifactResistances();
-        Game.DropNear(qPtr, -1, Game.MapY.IntValue, Game.MapX.IntValue);
-        Game.MsgPrint("Allocated.");
     }
 }

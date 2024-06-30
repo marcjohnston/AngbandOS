@@ -2077,6 +2077,85 @@ internal sealed class Item : IComparable<Item>
         return value;
     }
 
+    public bool ApplyFixedArtifact(FixedArtifact fixedArtifact)
+    {
+        // There cannot be more than one of each fixed artifacts.
+        if (fixedArtifact.CurNum > 0)
+        {
+            return false;
+        }
+
+        fixedArtifact.CurNum = 1;
+        if (fixedArtifact.BonusStrength != null)
+        {
+            BonusStrength = fixedArtifact.BonusStrength.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusIntelligence != null)
+        {
+            BonusIntelligence = fixedArtifact.BonusIntelligence.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusWisdom != null)
+        {
+            BonusWisdom = fixedArtifact.BonusWisdom.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusDexterity != null)
+        {
+            BonusDexterity = fixedArtifact.BonusDexterity.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusConstitution != null)
+        {
+            BonusConstitution = fixedArtifact.BonusConstitution.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusCharisma != null)
+        {
+            BonusCharisma = fixedArtifact.BonusCharisma.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusStealth != null)
+        {
+            BonusStealth = fixedArtifact.BonusStealth.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusSearch != null)
+        {
+            BonusSearch = fixedArtifact.BonusSearch.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusInfravision != null)
+        {
+            BonusInfravision = fixedArtifact.BonusInfravision.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusTunnel != null)
+        {
+            BonusTunnel = fixedArtifact.BonusTunnel.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusAttacks != null)
+        {
+            BonusAttacks = fixedArtifact.BonusAttacks.Get(Game.UseRandom);
+        }
+        if (fixedArtifact.BonusSpeed != null)
+        {
+            BonusSpeed = fixedArtifact.BonusSpeed.Get(Game.UseRandom);
+        }
+        ArmorClass = fixedArtifact.Ac;
+        DamageDice = fixedArtifact.Dd;
+        DamageSides = fixedArtifact.Ds;
+        BonusArmorClass = fixedArtifact.ToA;
+        BonusHit = fixedArtifact.ToH;
+        BonusDamage = fixedArtifact.ToD;
+        Weight = fixedArtifact.Weight;
+        if (fixedArtifact.IsCursed)
+        {
+            IsCursed = true;
+        }
+        GetFixedArtifactResistances();
+
+        if (fixedArtifact.Cost == 0)
+        {
+            IsBroken = true;
+        }
+        Game.TreasureRating += fixedArtifact.TreasureRating;
+        Game.SpecialTreasure = true;
+        return true;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -2133,80 +2212,16 @@ internal sealed class Item : IComparable<Item>
         }
         for (int i = 0; i < rollsForFixedArtifactAttempts; i++)
         {
-            if (ApplyFixedArtifact())
+            FixedArtifact? fixedArtifact = SelectCompatibleFixedArtifact();
+            if (fixedArtifact != null)
             {
-                break;
+                // Apply the fixed 
+                if (ApplyFixedArtifact(fixedArtifact))
+                {
+                    // Fixed artifacts do not receive anymore enchantment.
+                    return;
+                }
             }
-        }
-        if (FixedArtifact != null)
-        {
-            FixedArtifact.CurNum = 1;
-            if (FixedArtifact.BonusStrength != null)
-            {
-                BonusStrength = FixedArtifact.BonusStrength.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusIntelligence != null)
-            {
-                BonusIntelligence = FixedArtifact.BonusIntelligence.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusWisdom != null)
-            {
-                BonusWisdom = FixedArtifact.BonusWisdom.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusDexterity != null)
-            {
-                BonusDexterity = FixedArtifact.BonusDexterity.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusConstitution != null)
-            {
-                BonusConstitution = FixedArtifact.BonusConstitution.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusCharisma != null)
-            {
-                BonusCharisma = FixedArtifact.BonusCharisma.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusStealth != null)
-            {
-                BonusStealth = FixedArtifact.BonusStealth.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusSearch != null)
-            {
-                BonusSearch = FixedArtifact.BonusSearch.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusInfravision != null)
-            {
-                BonusInfravision = FixedArtifact.BonusInfravision.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusTunnel != null)
-            {
-                BonusTunnel = FixedArtifact.BonusTunnel.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusAttacks != null)
-            {
-                BonusAttacks = FixedArtifact.BonusAttacks.Get(Game.UseRandom);
-            }
-            if (FixedArtifact.BonusSpeed != null)
-            {
-                BonusSpeed = FixedArtifact.BonusSpeed.Get(Game.UseRandom);
-            }
-            ArmorClass = FixedArtifact.Ac;
-            DamageDice = FixedArtifact.Dd;
-            DamageSides = FixedArtifact.Ds;
-            BonusArmorClass = FixedArtifact.ToA;
-            BonusHit = FixedArtifact.ToH;
-            BonusDamage = FixedArtifact.ToD;
-            Weight = FixedArtifact.Weight;
-            if (FixedArtifact.Cost == 0)
-            {
-                IsBroken = true;
-            }
-            if (FixedArtifact.IsCursed)
-            {
-                IsCursed = true;
-            }
-            Game.TreasureRating += FixedArtifact.TreasureRating;
-            Game.SpecialTreasure = true;
-            return;
         }
         Factory.EnchantItem(this, usedOkay, lev, power);
         Game.TreasureRating += Factory.TreasureRating;
@@ -2572,21 +2587,21 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    private bool ApplyFixedArtifact()
+    private FixedArtifact? SelectCompatibleFixedArtifact()
     {
         if (Count != 1)
         {
-            return false;
+            return null;
         }
-        foreach (FixedArtifact aPtr in Game.SingletonRepository.Get<FixedArtifact>())
+        foreach (FixedArtifact aPtr in Game.SingletonRepository.Get<FixedArtifact>()) // TODO: This needs to be random ... 
         {
             if (aPtr.HasOwnType)
             {
                 continue;
             }
 
-            // Do not create another, if there is already one in the game.
-            if (aPtr.CurNum != 0)
+            // Do not create another, if there is already one in the game. 
+            if (aPtr.CurNum != 0) // TODO: This is already in the ApplyFixedArtifact
             {
                 continue;
             }
@@ -2607,11 +2622,9 @@ internal sealed class Item : IComparable<Item>
             {
                 continue;
             }
-            FixedArtifact = aPtr;
-            GetFixedArtifactResistances();
-            return true;
+            return aPtr;
         }
-        return false;
+        return null;
     }
 
     private void ApplyRandomBonuses()
