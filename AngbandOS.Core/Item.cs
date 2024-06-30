@@ -89,7 +89,6 @@ internal sealed class Item : IComparable<Item>
     public int ArmorClass;
     public int BonusArmorClass;
     public int BonusDamage;
- //   public Activation? Activation = null;
 
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
