@@ -1134,7 +1134,7 @@ internal sealed class Item : IComparable<Item>
         characteristics.Merge(Characteristics);
 
         // If there are any random characteristics, apply those also.
-        if (RandomPower != null)
+        if (RandomPower != null) // TODO: This smells funny
         {
             characteristics.Merge(RandomPower);
         }
