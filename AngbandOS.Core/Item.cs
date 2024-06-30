@@ -17,7 +17,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the factory that created this item.
     /// </summary>
-    public ItemFactory Factory { get; private set; } // TODO: This should be protected ... and force the item to call the factory methods.
+    public ItemFactory Factory { get; private set; } // TODO: Should this be protected ... and force the item to call the factory methods.
 
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
 
