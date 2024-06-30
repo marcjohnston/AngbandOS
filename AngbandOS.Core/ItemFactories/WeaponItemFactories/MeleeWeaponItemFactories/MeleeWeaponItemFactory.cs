@@ -99,7 +99,6 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 13:
                 case 14:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayUndeadRareItem));
-                    item.Characteristics.HoldLife = true;
                     if (Game.RandomLessThan(100) < 20)
                     {
                         item.Characteristics.ResNether = true;

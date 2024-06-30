@@ -15,4 +15,5 @@ internal class WeaponOfSlayUndeadRareItem : RareItem
     public override string? FriendlyName => "of Slay Undead";
     public override int TreasureRating => 18;
     public override bool SlayUndead => true;
-    }
+    public override bool HoldLife => true;
+}
