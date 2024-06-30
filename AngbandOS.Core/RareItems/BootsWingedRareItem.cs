@@ -13,6 +13,6 @@ internal class BootsWingedRareItem : RareItem
     private BootsWingedRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 250;
     public override bool Feather => true;
-    public override string FriendlyName => "(Winged)";
+    public override string? FriendlyName => "(Winged)";
     public override int TreasureRating => 7;
     }

@@ -12,7 +12,7 @@ internal class AmmoOfBackbitingRareItem : RareItem
 {
     private AmmoOfBackbitingRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 0;
-    public override string FriendlyName => "of Backbiting";
+    public override string? FriendlyName => "of Backbiting";
     public override int MaxToD => 50;
     public override int MaxToH => 50;
     public override int TreasureRating => 0;

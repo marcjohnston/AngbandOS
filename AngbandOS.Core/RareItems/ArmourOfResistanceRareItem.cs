@@ -12,7 +12,7 @@ internal class ArmorOfResistanceRareItem : RareItem
 {
     private ArmorOfResistanceRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 12500;
-    public override string FriendlyName => "of Resistance";
+    public override string? FriendlyName => "of Resistance";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

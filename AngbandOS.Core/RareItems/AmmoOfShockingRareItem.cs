@@ -13,7 +13,7 @@ internal class AmmoOfShockingRareItem : RareItem
     private AmmoOfShockingRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandElec => true;
     public override int Cost => 30;
-    public override string FriendlyName => "of Shocking";
+    public override string? FriendlyName => "of Shocking";
     public override bool IgnoreElec => true;
     public override int TreasureRating => 10;
     }

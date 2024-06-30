@@ -12,7 +12,7 @@ internal class BowOfExtraMightRareItem : RareItem
 {
     private BowOfExtraMightRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 10000;
-    public override string FriendlyName => "of Extra Might";
+    public override string? FriendlyName => "of Extra Might";
     public override int MaxToD => 10;
     public override int MaxToH => 5;
     public override int TreasureRating => 20;

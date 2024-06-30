@@ -13,7 +13,7 @@ internal class OrbOfFreedomRareItem : RareItem
     private OrbOfFreedomRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 1000;
     public override bool FreeAct => true;
-    public override string FriendlyName => "of Freedom";
+    public override string? FriendlyName => "of Freedom";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

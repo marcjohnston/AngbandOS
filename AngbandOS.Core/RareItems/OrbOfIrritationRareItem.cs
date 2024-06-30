@@ -13,7 +13,7 @@ internal class OrbOfIrritationRareItem : RareItem
     private OrbOfIrritationRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;
     public override int Cost => 0;
-    public override string FriendlyName => "of Irritation";
+    public override string? FriendlyName => "of Irritation";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

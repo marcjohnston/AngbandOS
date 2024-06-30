@@ -12,7 +12,7 @@ internal class OrbOfPowerRareItem : RareItem
 {
     private OrbOfPowerRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 10000;
-    public override string FriendlyName => "of Power";
+    public override string? FriendlyName => "of Power";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

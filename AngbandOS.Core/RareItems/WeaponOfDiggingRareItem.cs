@@ -13,7 +13,7 @@ internal class WeaponOfDiggingRareItem : RareItem
     private WeaponOfDiggingRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandAcid => true;
     public override int Cost => 500;
-    public override string FriendlyName => "of Digging";
+    public override string? FriendlyName => "of Digging";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

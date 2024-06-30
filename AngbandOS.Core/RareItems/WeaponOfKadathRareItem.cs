@@ -15,7 +15,7 @@ internal class WeaponOfKadathRareItem : RareItem
     public override int Cost => 20000;
     public override bool Dex => true;
     public override bool FreeAct => true;
-    public override string FriendlyName => "of Kadath";
+    public override string? FriendlyName => "of Kadath";
     protected override string? BonusConstitutionRollExpression => "1d2";
     protected override string? BonusDexterityRollExpression => "1d2";
     protected override string? BonusStrengthRollExpression => "1d2";

@@ -12,7 +12,7 @@ internal class GlovesOfPowerRareItem : RareItem
 {
     private GlovesOfPowerRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 2500;
-    public override string FriendlyName => "of Power";
+    public override string? FriendlyName => "of Power";
     public override bool HideType => true;
     protected override string? BonusStrengthRollExpression => "1d5";
     public override int MaxToD => 5;

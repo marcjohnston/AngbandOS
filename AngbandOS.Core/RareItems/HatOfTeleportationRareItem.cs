@@ -12,7 +12,7 @@ internal class HatOfTeleportationRareItem : RareItem
 {
     private HatOfTeleportationRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 0;
-    public override string FriendlyName => "of Teleportation";
+    public override string? FriendlyName => "of Teleportation";
     public override int TreasureRating => 0;
         public override bool Teleport => true;
 }

@@ -1003,7 +1003,7 @@ internal sealed class Item : IComparable<Item>
             {
                 basenm = FixedArtifact.Name;
             }
-            else if (RareItem != null)
+            else if (RareItem != null && RareItem.FriendlyName != null)
             {
                 basenm += ' ';
                 basenm += RareItem.FriendlyName; // This used to be oPtr.Name ... but Long Bow Bow of Velocity is wrong

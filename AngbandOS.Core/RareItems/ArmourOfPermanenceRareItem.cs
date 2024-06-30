@@ -16,7 +16,7 @@ internal class ArmorOfPermanenceRareItem : RareItem
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
     }
     public override int Cost => 30000;
-    public override string FriendlyName => "of Permanence";
+    public override string? FriendlyName => "of Permanence";
     public override bool HoldLife => true;
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

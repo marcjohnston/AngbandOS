@@ -12,7 +12,7 @@ internal class CloakOfImmolationRareItem : RareItem
 {
     private CloakOfImmolationRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 4000;
-    public override string FriendlyName => "of Immolation";
+    public override string? FriendlyName => "of Immolation";
     public override bool IgnoreAcid => true;
     public override bool IgnoreFire => true;
     public override int MaxToA => 4;

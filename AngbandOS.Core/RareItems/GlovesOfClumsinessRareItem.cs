@@ -13,7 +13,7 @@ internal class GlovesOfClumsinessRareItem : RareItem
     private GlovesOfClumsinessRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 0;
     public override bool Dex => true;
-    public override string FriendlyName => "of Clumsiness";
+    public override string? FriendlyName => "of Clumsiness";
     protected override string? BonusDexterityRollExpression => "1d10";
     public override int TreasureRating => 0;
 }

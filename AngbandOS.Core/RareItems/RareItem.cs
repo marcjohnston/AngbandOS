@@ -44,10 +44,9 @@ internal abstract class RareItem : ItemAdditiveBundle
     public abstract int Cost { get; }
 
     /// <summary>
-    /// Returns the name of the rare item characteristics.  This name is appended to the description of items that have a rare item
-    /// characteristics applied to it.
+    /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
     /// </summary>
-    public abstract string FriendlyName { get; }
+    public virtual string? FriendlyName => null;
 
     protected virtual string? BonusStrengthRollExpression => null;
     protected virtual string? BonusIntelligenceRollExpression => null;

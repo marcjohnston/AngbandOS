@@ -13,7 +13,7 @@ internal class WeaponOfEvilBaneRareItem : RareItem
     private WeaponOfEvilBaneRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Blessed => true;
     public override int Cost => 5000;
-    public override string FriendlyName => "of Evil Bane";
+    public override string? FriendlyName => "of Evil Bane";
     protected override string? BonusWisdomRollExpression => "1d2";
     public override int TreasureRating => 20;
     public override bool SlayEvil => true;

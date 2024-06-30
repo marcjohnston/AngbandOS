@@ -31,7 +31,7 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
         }
         else if (power < -1)
         {
-            item.BonusTunnel = 0 - (5 + Game.DieRoll(5));
+            item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(TerribleWeaponOfDiggingRareItem));
         }
         else if (power < 0)
         {

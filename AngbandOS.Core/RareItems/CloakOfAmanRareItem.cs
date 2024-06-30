@@ -16,7 +16,7 @@ internal class CloakOfAmanRareItem : RareItem
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
     }
     public override int Cost => 4000;
-    public override string FriendlyName => "of Aman";
+    public override string? FriendlyName => "of Aman";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

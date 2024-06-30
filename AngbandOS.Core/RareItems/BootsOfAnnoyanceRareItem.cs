@@ -13,7 +13,7 @@ internal class BootsOfAnnoyanceRareItem : RareItem
     private BootsOfAnnoyanceRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;
     public override int Cost => 0;
-    public override string FriendlyName => "of Annoyance";
+    public override string? FriendlyName => "of Annoyance";
     protected override string? BonusSpeedRollExpression => "1d10";
     public override int TreasureRating => 0;
     public override bool Speed => true;

@@ -14,7 +14,7 @@ internal class HatOfSicklinessRareItem : RareItem
     public override bool Con => true;
     public override int Cost => 0;
     public override bool Dex => true;
-    public override string FriendlyName => "of Sickliness";
+    public override string? FriendlyName => "of Sickliness";
     protected override string? BonusStrengthRollExpression => "1d5";
     protected override string? BonusDexterityRollExpression => "1d5";
     public override int TreasureRating => 0;

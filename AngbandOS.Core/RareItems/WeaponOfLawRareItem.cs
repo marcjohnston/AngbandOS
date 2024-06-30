@@ -14,7 +14,7 @@ internal class WeaponOfLawRareItem : RareItem
     public override bool Con => true;
     public override int Cost => 25000;
     public override bool FreeAct => true;
-    public override string FriendlyName => "(Weapon of Law)";
+    public override string? FriendlyName => "(Weapon of Law)";
     protected override string? BonusConstitutionRollExpression => "1d2";
     protected override string? BonusStrengthRollExpression => "1d2";
     public override int MaxToD => 6;

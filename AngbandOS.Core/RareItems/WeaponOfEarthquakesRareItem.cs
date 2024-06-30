@@ -12,7 +12,7 @@ internal class WeaponOfEarthquakesRareItem : RareItem
 {
     private WeaponOfEarthquakesRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 4000;
-    public override string FriendlyName => "of Earthquakes";
+    public override string? FriendlyName => "of Earthquakes";
     public override bool Impact => true;
     protected override string? BonusTunnelRollExpression => "1d3";
     public override int TreasureRating => 20;

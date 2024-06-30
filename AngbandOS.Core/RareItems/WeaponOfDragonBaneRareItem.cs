@@ -13,7 +13,7 @@ internal class WeaponOfDragonBaneRareItem : RareItem
     private WeaponOfDragonBaneRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Con => true;
     public override int Cost => 6000;
-    public override string FriendlyName => "of Dragon Bane";
+    public override string? FriendlyName => "of Dragon Bane";
     public override bool KillDragon => true;
     protected override string? BonusConstitutionRollExpression => "1d1";
     public override int TreasureRating => 24;

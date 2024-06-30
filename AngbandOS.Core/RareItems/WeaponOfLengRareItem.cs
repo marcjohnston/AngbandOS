@@ -14,7 +14,7 @@ internal class WeaponOfLengRareItem : RareItem
     public override bool Aggravate => true;
     public override int Cost => 0;
     public override bool IsCursed => true;
-    public override string FriendlyName => "of Leng";
+    public override string? FriendlyName => "of Leng";
     public override bool HeavyCurse => true;
     public override int MaxToA => 10;
     public override int MaxToD => 20;

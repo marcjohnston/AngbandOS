@@ -13,7 +13,7 @@ internal class GlovesOfAgilityRareItem : RareItem
     private GlovesOfAgilityRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int Cost => 1000;
     public override bool Dex => true;
-    public override string FriendlyName => "of Agility";
+    public override string? FriendlyName => "of Agility";
     public override bool HideType => true;
     protected override string? BonusDexterityRollExpression => "1d5";
     public override int TreasureRating => 14;

@@ -23,7 +23,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     protected override string? ActivationName => nameof(Teleport100Every1d50p50Activation);
     public override int Cost => 7000;
     public override bool FreeAct => true;
-    public override string FriendlyName => "(Planar Weapon)";
+    public override string? FriendlyName => "(Planar Weapon)";
     protected override string? BonusSearchRollExpression => "1d2";
     public override int MaxToD => 4;
     public override int MaxToH => 4;
