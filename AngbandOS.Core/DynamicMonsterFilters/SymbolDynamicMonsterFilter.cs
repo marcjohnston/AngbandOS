@@ -15,7 +15,7 @@ internal class SymbolDynamicMonsterFilter : IMonsterFilter
 
     public SymbolDynamicMonsterFilter(Game game, char character)
     {
-        character = _character;
+        _character = character;
         Game = game;
     }
 

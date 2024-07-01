@@ -35,11 +35,6 @@ internal class ExPlayer
     public readonly string Name;
 
     /// <summary>
-    /// The profession of the character.  Deprecated.  Use CharacterClass.
-    /// </summary>
-    public readonly int CharacterClassID;
-
-    /// <summary>
     /// Represents the name of the previous character class.
     /// </summary>
     public readonly string CharacterClassName;

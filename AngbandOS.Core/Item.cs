@@ -30,6 +30,7 @@ internal sealed class Item : IComparable<Item>
     /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
     /// </summary>
     public ItemCharacteristics Characteristics = new ItemCharacteristics();
+    public ItemCharacteristics? RandomArtifact = null;
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.

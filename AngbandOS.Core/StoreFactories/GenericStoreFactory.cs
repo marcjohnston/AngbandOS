@@ -103,7 +103,7 @@ internal class GenericStoreFactory : StoreFactory
     /// <summary>
     /// Returns the maximum number of items the store should maintain.  Returns one pagesize (26), by default.
     /// </summary>
-    public virtual int MaxInventory { get; set; }
+    public override int MaxInventory { get; }
 
     /// <summary>
     /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.  Returns 6, by default.

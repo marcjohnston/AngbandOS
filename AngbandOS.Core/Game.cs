@@ -787,7 +787,6 @@ public bool IsDead = false;
     /// <remarks>borg: player->total_winner</remarks>
     public readonly IsWinnerBoolProperty IsWinner;
     public readonly IsWizardBoolProperty IsWizard;
-    private int _experienceLevel;
 
     public int LightLevel;
 
@@ -820,7 +819,7 @@ public bool IsDead = false;
     /// <summary>
     /// Represents the character class of the player.  Will be null prior to the character class birth selection.
     /// </summary>
-    public BaseCharacterClass BaseCharacterClass = null;
+    public BaseCharacterClass BaseCharacterClass;
 
     /// <summary>
     /// Returns the current race of the character.  Will be null before the player is birthed.
@@ -1271,12 +1270,6 @@ public bool IsDead = false;
     private int MessageXCursorPos;
 
     /// <summary>
-    /// Returns true, if the next message to be rendered to the player should be rendered on the same line; false, if the next message
-    /// should restart at the cursor X position of 0.  No "more" prompt will be rendered when set to false.
-    /// </summary>
-    private bool MessageAppendNextMessage;
-
-    /// <summary>
     /// Returns the unique index of the first message in the MessageLog.  When messages drop out of the list due to the size of the MessageLog, this index is incremented
     /// by one.  We do not actually store indexes with each message because they are one-to-one with the list.
     /// </summary>
@@ -1430,8 +1423,6 @@ public bool IsDead = false;
                 MessageFirstQueueIndex++;
             }
         }
-
-        MessageAppendNextMessage = false;
     }
 
     /// <summary>
@@ -1494,7 +1485,6 @@ public bool IsDead = false;
             }
         }
         Screen.Print(ColorEnum.White, msg, 0, MessageXCursorPos);
-        MessageAppendNextMessage = true;
         MessageXCursorPos += msg.Length + 1;
     }
 

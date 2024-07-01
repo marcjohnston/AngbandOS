@@ -468,7 +468,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     /// <summary>
     /// Returns the index into the monster race array where the monster is.  Set just after construction.
     /// </summary>
-    public int Index; // TODO: Needs to be removed.
+    public int Index; // TODO: Needs to be removed. THERE IS NO WRITE.
 
     public int GetCoinType()
     {

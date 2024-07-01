@@ -43,13 +43,13 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : ItemFactory
     public override int BaseValue => 5;
 
     public override ColorEnum Color => ColorEnum.Green;
-    public virtual bool VanishesWhenEatenBySkeletons => false;
+    public override bool VanishesWhenEatenBySkeletons => false;
 
     /// <summary>
     /// Returns true, if the food item is completely consumed when eaten.  Consumed food items are removed once eaten.  Returns true, by default because 
     /// all food items are consumed except for dwarf bread.  Dwarf bread returns false.
     /// </summary>
-    public virtual bool IsConsumedWhenEaten => true;
+    public override bool IsConsumedWhenEaten => true;
 
     /// <summary>
     /// Returns true, because food items can be eaten by monsters.
