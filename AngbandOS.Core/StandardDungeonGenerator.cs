@@ -990,10 +990,6 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
             }
         }
-        if (CentN == 0)
-        {
-            CentN = CentN;
-        }
         for (x = 0; x < Game.CurWid; x++)
         {
             GridTile cPtr = Game.Map.Grid[0][x];
