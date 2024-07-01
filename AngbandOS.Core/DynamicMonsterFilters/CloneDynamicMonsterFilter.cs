@@ -21,6 +21,6 @@ internal class CloneDynamicMonsterFilter : IMonsterFilter
 
     public bool Matches(MonsterRace rPtr)
     {
-        return rPtr.Index == _race.Index;
+        return rPtr == _race;
     }
 }
