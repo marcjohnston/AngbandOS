@@ -31,10 +31,10 @@ internal abstract class FixedArtifact : ItemAdditiveBundle
         BonusSpeed = Game.ParseNullableRollExpression(BonusSpeedRollExpression);
     }
 
-/// <summary>
-/// Represents the quantity of this artifact currently in existence.  
-/// </summary>
-public int CurNum = 0; // TODO: This property should graduate into an ItemFactory as the Count property.
+    /// <summary>
+    /// Represents the quantity of this artifact currently in existence.  
+    /// </summary>
+    public int CurNum = 0; // TODO: This property should graduate into an ItemFactory as the Count property.
 
     /// <summary>
     /// Returns the multipler to use when being used to kill a dragon.  The SwordOfLightning returns a 3.  All other weapons return 1.
