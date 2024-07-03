@@ -12,11 +12,12 @@ internal class PriestlyArtifactBias : ArtifactBias
 {
     private PriestlyArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Priests";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Wis)
+        if (!characteristics.Wis)
         {
-            item.Characteristics.Wis = true;
+            characteristics.Wis = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -25,16 +26,16 @@ internal class PriestlyArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyBlessedArtifactBias && !item.Characteristics.Blessed)
+        if (characteristics.CanApplyBlessedArtifactBias && !characteristics.Blessed)
         {
-            item.Characteristics.Blessed = true;
+            characteristics.Blessed = true;
         }
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(13) == 1)
         {

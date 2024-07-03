@@ -20,13 +20,13 @@ internal class ElectricityArtifactBias : ArtifactBias
         (nameof(FalseElectricityImmunityItemTest), "1/20", nameof(ElectricityImmunityItemAdditiveBundle), "1/2")
     };
 
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.BrandElec)
+            if (!characteristics.BrandElec)
             {
-                item.Characteristics.BrandElec = true;
+                characteristics.BrandElec = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -36,7 +36,7 @@ internal class ElectricityArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(3) != 1)
         {

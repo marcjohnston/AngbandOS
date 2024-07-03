@@ -73,6 +73,387 @@ internal abstract class ItemTest : IGetKey
         return true;
     }
 
+    public bool Test(RandomArtifactCharacteristics characteristics)
+    {
+        if (!TestNullObject<Activation>(Activation, characteristics.Activation))
+        {
+            return false;
+        }
+        if (!TestBoolean(Aggravate, characteristics.Aggravate))
+        {
+            return false;
+        }
+        if (!TestBoolean(AntiTheft, characteristics.AntiTheft))
+        {
+            return false;
+        }
+        if (!TestNullObject<ArtifactBias>(ArtifactBias, characteristics.ArtifactBias))
+        {
+            return false;
+        }
+        if (!TestBoolean(Blessed, characteristics.Blessed))
+        {
+            return false;
+        }
+        if (!TestBoolean(Blows, characteristics.Blows))
+        {
+            return false;
+        }
+        if (!TestBoolean(BrandAcid, characteristics.BrandAcid))
+        {
+            return false;
+        }
+        if (!TestBoolean(BrandCold, characteristics.BrandCold))
+        {
+            return false;
+        }
+        if (!TestBoolean(BrandElec, characteristics.BrandElec))
+        {
+            return false;
+        }
+        if (!TestBoolean(BrandFire, characteristics.BrandFire))
+        {
+            return false;
+        }
+        if (!TestBoolean(BrandPois, characteristics.BrandPois))
+        {
+            return false;
+        }
+        if (!TestBoolean(Cha, characteristics.Cha))
+        {
+            return false;
+        }
+        if (!TestBoolean(Chaotic, characteristics.Chaotic))
+        {
+            return false;
+        }
+        if (!TestBoolean(Con, characteristics.Con))
+        {
+            return false;
+        }
+        if (!TestBoolean(IsCursed, characteristics.IsCursed))
+        {
+            return false;
+        }
+        if (!TestBoolean(Dex, characteristics.Dex))
+        {
+            return false;
+        }
+        if (!TestBoolean(DrainExp, characteristics.DrainExp))
+        {
+            return false;
+        }
+        if (!TestBoolean(DreadCurse, characteristics.DreadCurse))
+        {
+            return false;
+        }
+        if (!TestBoolean(EasyKnow, characteristics.EasyKnow))
+        {
+            return false;
+        }
+        if (!TestBoolean(Feather, characteristics.Feather))
+        {
+            return false;
+        }
+        if (!TestBoolean(FreeAct, characteristics.FreeAct))
+        {
+            return false;
+        }
+        if (!TestBoolean(HeavyCurse, characteristics.HeavyCurse))
+        {
+            return false;
+        }
+        if (!TestBoolean(HideType, characteristics.HideType))
+        {
+            return false;
+        }
+        if (!TestBoolean(HoldLife, characteristics.HoldLife))
+        {
+            return false;
+        }
+        if (!TestBoolean(IgnoreAcid, characteristics.IgnoreAcid))
+        {
+            return false;
+        }
+        if (!TestBoolean(IgnoreCold, characteristics.IgnoreCold))
+        {
+            return false;
+        }
+        if (!TestBoolean(IgnoreElec, characteristics.IgnoreElec))
+        {
+            return false;
+        }
+        if (!TestBoolean(IgnoreFire, characteristics.IgnoreFire))
+        {
+            return false;
+        }
+        if (!TestBoolean(ImAcid, characteristics.ImAcid))
+        {
+            return false;
+        }
+        if (!TestBoolean(ImCold, characteristics.ImCold))
+        {
+            return false;
+        }
+        if (!TestBoolean(ImElec, characteristics.ImElec))
+        {
+            return false;
+        }
+        if (!TestBoolean(ImFire, characteristics.ImFire))
+        {
+            return false;
+        }
+        if (!TestBoolean(Impact, characteristics.Impact))
+        {
+            return false;
+        }
+        if (!TestBoolean(Infra, characteristics.Infra))
+        {
+            return false;
+        }
+        if (!TestBoolean(InstaArt, characteristics.InstaArt))
+        {
+            return false;
+        }
+        if (!TestBoolean(Int, characteristics.Int))
+        {
+            return false;
+        }
+        if (!TestBoolean(KillDragon, characteristics.KillDragon))
+        {
+            return false;
+        }
+        if (!TestBoolean(NoMagic, characteristics.NoMagic))
+        {
+            return false;
+        }
+        if (!TestBoolean(NoTele, characteristics.NoTele))
+        {
+            return false;
+        }
+        if (!TestBoolean(PermaCurse, characteristics.PermaCurse))
+        {
+            return false;
+        }
+        if (!TestZeroInt(Radius, characteristics.Radius))
+        {
+            return false;
+        }
+        if (!TestBoolean(Reflect, characteristics.Reflect))
+        {
+            return false;
+        }
+        if (!TestBoolean(Regen, characteristics.Regen))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResAcid, characteristics.ResAcid))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResBlind, characteristics.ResBlind))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResChaos, characteristics.ResChaos))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResCold, characteristics.ResCold))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResConf, characteristics.ResConf))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResDark, characteristics.ResDark))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResDisen, characteristics.ResDisen))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResElec, characteristics.ResElec))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResFear, characteristics.ResFear))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResFire, characteristics.ResFire))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResLight, characteristics.ResLight))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResNether, characteristics.ResNether))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResNexus, characteristics.ResNexus))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResPois, characteristics.ResPois))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResShards, characteristics.ResShards))
+        {
+            return false;
+        }
+        if (!TestBoolean(ResSound, characteristics.ResSound))
+        {
+            return false;
+        }
+        if (!TestBoolean(Search, characteristics.Search))
+        {
+            return false;
+        }
+        if (!TestBoolean(SeeInvis, characteristics.SeeInvis))
+        {
+            return false;
+        }
+        if (!TestBoolean(FactoryAllowsShElecricity, characteristics.CanProvideSheathOfElectricity))
+        {
+            return false;
+        }
+        if (!TestBoolean(ShElec, characteristics.ShElec))
+        {
+            return false;
+        }
+        if (!TestBoolean(FactoryAllowsShFire, characteristics.CanProvideSheathOfFire))
+        {
+            return false;
+        }
+        if (!TestBoolean(ShFire, characteristics.ShFire))
+        {
+            return false;
+        }
+        if (!TestBoolean(ShowMods, characteristics.ShowMods))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayAnimal, characteristics.SlayAnimal))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayDemon, characteristics.SlayDemon))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayDragon, characteristics.SlayDragon))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayEvil, characteristics.SlayEvil))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayGiant, characteristics.SlayGiant))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayOrc, characteristics.SlayOrc))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayTroll, characteristics.SlayTroll))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlayUndead, characteristics.SlayUndead))
+        {
+            return false;
+        }
+        if (!TestBoolean(SlowDigest, characteristics.SlowDigest))
+        {
+            return false;
+        }
+        if (!TestBoolean(Speed, characteristics.Speed))
+        {
+            return false;
+        }
+        if (!TestBoolean(Stealth, characteristics.Stealth))
+        {
+            return false;
+        }
+        if (!TestBoolean(Str, characteristics.Str))
+        {
+            return false;
+        }
+        if (!TestBoolean(SustCha, characteristics.SustCha))
+        {
+            return false;
+        }
+        if (!TestBoolean(SustCon, characteristics.SustCon))
+        {
+            return false;
+        }
+        if (!TestBoolean(SustDex, characteristics.SustDex))
+        {
+            return false;
+        }
+        if (!TestBoolean(SustInt, characteristics.SustInt))
+        {
+            return false;
+        }
+        if (!TestBoolean(SustStr, characteristics.SustStr))
+        {
+            return false;
+        }
+        if (!TestBoolean(SustWis, characteristics.SustWis))
+        {
+            return false;
+        }
+        if (!TestBoolean(Telepathy, characteristics.Telepathy))
+        {
+            return false;
+        }
+        if (!TestBoolean(Teleport, characteristics.Teleport))
+        {
+            return false;
+        }
+        if (!TestZeroInt(TreasureRating, characteristics.TreasureRating))
+        {
+            return false;
+        }
+        if (!TestBoolean(Tunnel, characteristics.Tunnel))
+        {
+            return false;
+        }
+        if (!TestBoolean(Vampiric, characteristics.Vampiric))
+        {
+            return false;
+        }
+        if (!TestBoolean(Vorpal, characteristics.Vorpal))
+        {
+            return false;
+        }
+        if (!TestBoolean(Wis, characteristics.Wis))
+        {
+            return false;
+        }
+        if (!TestBoolean(Wraith, characteristics.Wraith))
+        {
+            return false;
+        }
+        if (!TestBoolean(XtraMight, characteristics.XtraMight))
+        {
+            return false;
+        }
+        if (!TestBoolean(XtraShots, characteristics.XtraShots))
+        {
+            return false;
+        }
+        return true;
+    }
+
     public bool Test(Item item)
     {
         IItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();

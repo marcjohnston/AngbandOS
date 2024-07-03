@@ -19,13 +19,13 @@ internal class ColdArtifactBias : ArtifactBias
         (nameof(FalseColdImmunityItemTest), "1/20", nameof(ColdImmunityItemAdditiveBundle), "1/2")
     };
 
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.BrandCold)
+            if (!characteristics.BrandCold)
             {
-                item.Characteristics.BrandCold = true;
+                characteristics.BrandCold = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -35,7 +35,7 @@ internal class ColdArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(3) != 1)
         {

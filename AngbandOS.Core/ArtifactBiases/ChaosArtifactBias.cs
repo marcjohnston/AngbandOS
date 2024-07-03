@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Reflection.PortableExecutable;
+
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]
@@ -20,11 +22,11 @@ internal class ChaosArtifactBias : ArtifactBias
         (nameof(FalseResistDisenchantItemTest), "1", nameof(ResistDisenchantItemAdditiveBundle), "1/2")
     };
 
-    public override bool ApplyMiscPowers(Item item)
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Teleport)
+        if (!characteristics.Teleport)
         {
-            item.Characteristics.Teleport = true;
+            characteristics.Teleport = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -32,13 +34,13 @@ internal class ChaosArtifactBias : ArtifactBias
         }
         return false;
     }
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.Chaotic)
+            if (!characteristics.Chaotic)
             {
-                item.Characteristics.Chaotic = true;
+                characteristics.Chaotic = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -50,7 +52,7 @@ internal class ChaosArtifactBias : ArtifactBias
 
     public override int ActivationPowerChance => 50;
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(6) == 1)
         {

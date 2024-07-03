@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using Timer = AngbandOS.Core.Timers.Timer;

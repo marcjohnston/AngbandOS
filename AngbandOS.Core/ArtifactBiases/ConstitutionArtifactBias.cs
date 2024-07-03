@@ -12,11 +12,12 @@ internal class ConstitutionArtifactBias : ArtifactBias
 {
     private ConstitutionArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Constitution";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Con)
+        if (!characteristics.Con)
         {
-            item.Characteristics.Con = true;
+            characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -25,11 +26,11 @@ internal class ConstitutionArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(Item item)
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.SustCon)
+        if (!characteristics.SustCon)
         {
-            item.Characteristics.SustCon = true;
+            characteristics.SustCon = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

@@ -19,19 +19,19 @@ internal class FireArtifactBias : ArtifactBias
         (nameof(FalseFireImmunityItemTest), "1/20", nameof(FireImmunityItemAdditiveBundle), "1/2")
     };
 
-    public override bool ApplyMiscPowers(Item item)
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        item.Characteristics.Radius = 3;
+        characteristics.Radius = 3;
         return false;
     }
 
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.BrandFire)
+            if (!characteristics.BrandFire)
             {
-                item.Characteristics.BrandFire = true;
+                characteristics.BrandFire = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -41,7 +41,7 @@ internal class FireArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(3) != 1)
         {

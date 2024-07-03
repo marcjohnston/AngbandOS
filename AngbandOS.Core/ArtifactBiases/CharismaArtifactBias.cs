@@ -12,11 +12,12 @@ internal class CharismaArtifactBias : ArtifactBias
 {
     private CharismaArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Charisma";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Cha)
+        if (!characteristics.Cha)
         {
-            item.Characteristics.Cha = true;
+            characteristics.Cha = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -24,11 +25,12 @@ internal class CharismaArtifactBias : ArtifactBias
         }
         return false;
     }
-    public override bool ApplyMiscPowers(Item item)
+
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.SustCha)
+        if (!characteristics.SustCha)
         {
-            item.Characteristics.SustCha = true;
+            characteristics.SustCha = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

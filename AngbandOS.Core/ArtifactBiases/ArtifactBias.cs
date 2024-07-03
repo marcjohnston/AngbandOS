@@ -62,7 +62,7 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyBonuses(Item item) => false;
+    public virtual bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics) => false;
 
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
     public (ItemTest, Probability, ItemAdditiveBundle, Probability)[]? RandomResistances { get; private set; } = null;
@@ -72,15 +72,15 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public bool ApplyRandomResistances(Item item)
+    public bool ApplyRandomResistances(RandomArtifactCharacteristics characteristics)
     {
         if (RandomResistances != null)
         {
             foreach ((ItemTest itemTest, Probability itemTestProbability, ItemAdditiveBundle itemAdditiveBundle, Probability moreProbability) in RandomResistances)
             {
-                if (itemTestProbability.Test(Game) && itemTest.Test(item))
+                if (itemTestProbability.Test(Game) && itemTest.Test(characteristics))
                 {
-                    item.Characteristics.Merge(itemAdditiveBundle);
+                    characteristics.Merge(itemAdditiveBundle);
                     if (moreProbability.Test(Game))
                     {
                         return true;
@@ -96,21 +96,21 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyMiscPowers(Item item) => false;
+    public virtual bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics) => false;
 
     /// <summary>
     /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplySlaying(Item item) => false;
+    public virtual bool ApplySlaying(RandomArtifactCharacteristics characteristics) => false;
 
     /// <summary>
     /// Returns an activation type to be applied for the item or null when there is no biased activation type.  By default, null is returned.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual Activation? GetActivationPowerType(Item item) => null;
+    public virtual Activation? GetActivationPowerType() => null;
 
     /// <summary>
     /// Returns the chance that an activation power is assigned.  A value greater than 100 (e.g. 101) guarantees activation power will be assigned.

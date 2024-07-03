@@ -12,27 +12,28 @@ internal class WarriorArtifactBias : ArtifactBias
 {
     private WarriorArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Warriors";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Str)
+        if (!characteristics.Str)
         {
-            item.Characteristics.Str = true;
+            characteristics.Str = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.Characteristics.Con)
+        else if (!characteristics.Con)
         {
-            item.Characteristics.Con = true;
+            characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.Characteristics.Dex)
+        else if (!characteristics.Dex)
         {
-            item.Characteristics.Dex = true;
+            characteristics.Dex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -49,7 +50,7 @@ internal class WarriorArtifactBias : ArtifactBias
     };
 
     public override int ActivationPowerChance => 80;
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(100) == 1)
         {

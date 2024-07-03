@@ -28,10 +28,10 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override bool HasQualityRatings => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
-    public override void ApplyBonusForRandomArtifactCreation(Item item)
+    public override void ApplyBonusForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {
-        item.BonusHit += Game.DieRoll(item.BonusHit > 19 ? 1 : 20 - item.BonusHit);
-        item.BonusDamage += Game.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
+        characteristics.BonusHit += Game.DieRoll(characteristics.BonusHit > 19 ? 1 : 20 - characteristics.BonusHit);
+        characteristics.BonusDamage += Game.DieRoll(characteristics.BonusDamage > 19 ? 1 : 20 - characteristics.BonusDamage);
     }
 
     public override int GetBonusRealValue(Item item)

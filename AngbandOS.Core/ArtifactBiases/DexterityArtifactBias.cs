@@ -12,11 +12,12 @@ internal class DexterityArtifactBias : ArtifactBias
 {
     private DexterityArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Dexterity";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Dex)
+        if (!characteristics.Dex)
         {
-            item.Characteristics.Dex = true;
+            characteristics.Dex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -25,11 +26,11 @@ internal class DexterityArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(Item item)
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.SustDex)
+        if (!characteristics.SustDex)
         {
-            item.Characteristics.SustDex = true;
+            characteristics.SustDex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

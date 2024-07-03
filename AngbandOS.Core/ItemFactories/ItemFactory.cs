@@ -617,7 +617,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual void ApplyBonusForRandomArtifactCreation(Item item) { }
+    public virtual void ApplyBonusForRandomArtifactCreation(RandomArtifactCharacteristics characteristics) { }
 
     /// <summary>
     /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
@@ -631,171 +631,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <param name="item"></param>
     /// <returns></returns>
     public virtual int GetBonusRealValue(Item item) => 0;
-
-    public virtual void ApplySlayingForRandomArtifactCreation(Item item)
-    {
-        if (item.Characteristics.ArtifactBias != null)
-        {
-            if (item.Characteristics.ArtifactBias.ApplySlaying(item))
-            {
-                return;
-            }
-        }
-
-        switch (Game.DieRoll(34))
-        {
-            case 1:
-            case 2:
-                item.Characteristics.SlayAnimal = true;
-                break;
-
-            case 3:
-            case 4:
-                item.Characteristics.SlayEvil = true;
-                if (item.Characteristics.ArtifactBias == null && Game.DieRoll(2) == 1)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(LawArtifactBias));
-                }
-                else if (item.Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                break;
-
-            case 5:
-            case 6:
-                item.Characteristics.SlayUndead = true;
-                if (item.Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                break;
-
-            case 7:
-            case 8:
-                item.Characteristics.SlayDemon = true;
-                if (item.Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                break;
-
-            case 9:
-            case 10:
-                item.Characteristics.SlayOrc = true;
-                break;
-
-            case 11:
-            case 12:
-                item.Characteristics.SlayTroll = true;
-                break;
-
-            case 13:
-            case 14:
-                item.Characteristics.SlayGiant = true;
-                break;
-
-            case 15:
-            case 16:
-                item.Characteristics.SlayDragon = true;
-                break;
-
-            case 17:
-                item.Characteristics.KillDragon = true;
-                break;
-
-            case 18:
-            case 19:
-                if (CanVorpalSlay)
-                {
-                    item.Characteristics.Vorpal = true;
-                    if (item.Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                    {
-                        item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
-                    }
-                }
-                else
-                {
-                    // This item cannot have vorpal slaying applied, choose a different random slaying.
-                    ApplySlayingForRandomArtifactCreation(item);
-                }
-                break;
-
-            case 20:
-                item.Characteristics.Impact = true;
-                break;
-
-            case 21:
-            case 22:
-                item.Characteristics.BrandFire = true;
-                if (item.Characteristics.ArtifactBias == null)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
-                }
-                break;
-
-            case 23:
-            case 24:
-                item.Characteristics.BrandCold = true;
-                if (item.Characteristics.ArtifactBias == null)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
-                }
-                break;
-
-            case 25:
-            case 26:
-                item.Characteristics.BrandElec = true;
-                if (item.Characteristics.ArtifactBias == null)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
-                }
-                break;
-
-            case 27:
-            case 28:
-                item.Characteristics.BrandAcid = true;
-                if (item.Characteristics.ArtifactBias == null)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
-                }
-                break;
-
-            case 29:
-            case 30:
-                item.Characteristics.BrandPois = true;
-                if (item.Characteristics.ArtifactBias == null && Game.DieRoll(3) != 1)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PoisonArtifactBias));
-                }
-                else if (item.Characteristics.ArtifactBias == null && Game.DieRoll(6) == 1)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
-                }
-                else if (item.Characteristics.ArtifactBias == null)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
-                }
-                break;
-
-            case 31:
-            case 32:
-                item.Characteristics.Vampiric = true;
-                if (item.Characteristics.ArtifactBias == null)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
-                }
-                break;
-
-            default:
-                item.Characteristics.Chaotic = true;
-                if (item.Characteristics.ArtifactBias == null)
-                {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
-                }
-                break;
-        }
-    }
 
     /// <summary>
     /// Applies magic to the item.  Does nothing, by default.  This apply magic method is always called after an object is created (new Item()) but not all new Item creation call ApplyMagic.
@@ -1456,4 +1291,730 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// Returns true, if the item is a scroll.
     /// </summary>
     public bool CanBeRead => ActivateScrollScript != null;
+
+    public virtual void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
+    {
+        if (characteristics.ArtifactBias != null)
+        {
+            if (characteristics.ArtifactBias.ApplySlaying(characteristics))
+            {
+                return;
+            }
+        }
+
+        switch (Game.DieRoll(34))
+        {
+            case 1:
+            case 2:
+                characteristics.SlayAnimal = true;
+                break;
+
+            case 3:
+            case 4:
+                characteristics.SlayEvil = true;
+                if (characteristics.ArtifactBias == null && Game.DieRoll(2) == 1)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(LawArtifactBias));
+                }
+                else if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+                }
+                break;
+
+            case 5:
+            case 6:
+                characteristics.SlayUndead = true;
+                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+                }
+                break;
+
+            case 7:
+            case 8:
+                characteristics.SlayDemon = true;
+                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+                }
+                break;
+
+            case 9:
+            case 10:
+                characteristics.SlayOrc = true;
+                break;
+
+            case 11:
+            case 12:
+                characteristics.SlayTroll = true;
+                break;
+
+            case 13:
+            case 14:
+                characteristics.SlayGiant = true;
+                break;
+
+            case 15:
+            case 16:
+                characteristics.SlayDragon = true;
+                break;
+
+            case 17:
+                characteristics.KillDragon = true;
+                break;
+
+            case 18:
+            case 19:
+                if (CanVorpalSlay)
+                {
+                    characteristics.Vorpal = true;
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+                    }
+                }
+                else
+                {
+                    // This item cannot have vorpal slaying applied, choose a different random slaying.
+                    ApplySlayingForRandomArtifactCreation(characteristics);
+                }
+                break;
+
+            case 20:
+                characteristics.Impact = true;
+                break;
+
+            case 21:
+            case 22:
+                characteristics.BrandFire = true;
+                if (characteristics.ArtifactBias == null)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
+                }
+                break;
+
+            case 23:
+            case 24:
+                characteristics.BrandCold = true;
+                if (characteristics.ArtifactBias == null)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
+                }
+                break;
+
+            case 25:
+            case 26:
+                characteristics.BrandElec = true;
+                if (characteristics.ArtifactBias == null)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
+                }
+                break;
+
+            case 27:
+            case 28:
+                characteristics.BrandAcid = true;
+                if (characteristics.ArtifactBias == null)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
+                }
+                break;
+
+            case 29:
+            case 30:
+                characteristics.BrandPois = true;
+                if (characteristics.ArtifactBias == null && Game.DieRoll(3) != 1)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PoisonArtifactBias));
+                }
+                else if (characteristics.ArtifactBias == null && Game.DieRoll(6) == 1)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
+                }
+                else if (characteristics.ArtifactBias == null)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                }
+                break;
+
+            case 31:
+            case 32:
+                characteristics.Vampiric = true;
+                if (characteristics.ArtifactBias == null)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
+                }
+                break;
+
+            default:
+                characteristics.Chaotic = true;
+                if (characteristics.ArtifactBias == null)
+                {
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
+                }
+                break;
+        }
+    }
+
+    public void CreateRandomArtifact(RandomArtifactCharacteristics characteristics, bool fromScroll)
+    {
+        int EnchantBonus(int bonus)
+        {
+            do
+            {
+                bonus++;
+            } while (bonus < Game.DieRoll(5) || Game.DieRoll(bonus) == 1);
+            if (bonus > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
+            {
+                bonus = 4;
+            }
+            return bonus;
+        }
+
+        void ApplyRandomBonuses(RandomArtifactCharacteristics characteristics)
+        {
+            if (characteristics.ArtifactBias != null)
+            {
+                if (characteristics.ArtifactBias.ApplyRandomArtifactBonuses(characteristics))
+                {
+                    return;
+                }
+            }
+            switch (Game.DieRoll(23))
+            {
+                case 1:
+                case 2:
+                    characteristics.Str = true;
+                    characteristics.BonusStrength = EnchantBonus(characteristics.BonusStrength);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
+                    }
+                    else if (characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+                    }
+                    break;
+
+                case 3:
+                case 4:
+                    characteristics.Int = true;
+                    characteristics.BonusIntelligence = EnchantBonus(characteristics.BonusIntelligence);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
+                    }
+                    else if (characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+                    }
+                    break;
+
+                case 5:
+                case 6:
+                    characteristics.Wis = true;
+                    characteristics.BonusWisdom = EnchantBonus(characteristics.BonusWisdom);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
+                    }
+                    else if (characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+                    }
+                    break;
+
+                case 7:
+                case 8:
+                    characteristics.Dex = true;
+                    characteristics.BonusDexterity = EnchantBonus(characteristics.BonusDexterity);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
+                    }
+                    else if (characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                    }
+                    break;
+
+                case 9:
+                case 10:
+                    characteristics.Con = true;
+                    characteristics.BonusConstitution = EnchantBonus(characteristics.BonusConstitution);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
+                    }
+                    else if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    }
+                    break;
+
+                case 11:
+                case 12:
+                    characteristics.Cha = true;
+                    characteristics.BonusCharisma = EnchantBonus(characteristics.BonusCharisma);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
+                    }
+                    break;
+
+                case 13:
+                case 14:
+                    characteristics.Stealth = true;
+                    characteristics.BonusStealth = EnchantBonus(characteristics.BonusStealth);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                    }
+                    break;
+
+                case 15:
+                case 16:
+                    characteristics.Search = true;
+                    characteristics.BonusSearch = EnchantBonus(characteristics.BonusSearch);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    }
+                    break;
+
+                case 17:
+                case 18:
+                    characteristics.Infra = true;
+                    characteristics.BonusInfravision = EnchantBonus(characteristics.BonusInfravision);
+                    break;
+
+                case 19:
+                    characteristics.Speed = true;
+                    characteristics.BonusSpeed = EnchantBonus(characteristics.BonusSpeed);
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+                    }
+                    break;
+
+                case 20:
+                case 21:
+                    characteristics.Tunnel = true;
+                    characteristics.BonusTunnel = EnchantBonus(characteristics.BonusTunnel);
+                    break;
+
+                case 22:
+                case 23:
+                    if (characteristics.CanApplyBlowsBonus)
+                    {
+                        ApplyRandomBonuses(characteristics);
+                    }
+                    else
+                    {
+                        characteristics.Blows = true;
+                        characteristics.BonusAttacks = Game.DieRoll(2) + 1;
+                        if (characteristics.BonusAttacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
+                        {
+                            characteristics.BonusAttacks = 4;
+                        }
+                        if (characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
+                        {
+                            characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+                        }
+                    }
+                    break;
+            }
+        }
+
+        void CurseRandart(RandomArtifactCharacteristics characteristics)
+        {
+            if (characteristics.BonusStrength != 0)
+            {
+                characteristics.BonusStrength = 0 - (characteristics.BonusStrength + Game.DieRoll(4));
+            }
+            if (characteristics.BonusIntelligence != 0)
+            {
+                characteristics.BonusIntelligence = 0 - (characteristics.BonusIntelligence + Game.DieRoll(4));
+            }
+            if (characteristics.BonusWisdom != 0)
+            {
+                characteristics.BonusWisdom = 0 - (characteristics.BonusWisdom + Game.DieRoll(4));
+            }
+            if (characteristics.BonusDexterity != 0)
+            {
+                characteristics.BonusDexterity = 0 - (characteristics.BonusDexterity + Game.DieRoll(4));
+            }
+            if (characteristics.BonusConstitution != 0)
+            {
+                characteristics.BonusConstitution = 0 - (characteristics.BonusConstitution + Game.DieRoll(4));
+            }
+            if (characteristics.BonusCharisma != 0)
+            {
+                characteristics.BonusCharisma = 0 - (characteristics.BonusCharisma + Game.DieRoll(4));
+            }
+            if (characteristics.BonusStealth != 0)
+            {
+                characteristics.BonusStealth = 0 - (characteristics.BonusStealth + Game.DieRoll(4));
+            }
+            if (characteristics.BonusSearch != 0)
+            {
+                characteristics.BonusSearch = 0 - (characteristics.BonusSearch + Game.DieRoll(4));
+            }
+            if (characteristics.BonusInfravision != 0)
+            {
+                characteristics.BonusInfravision = 0 - (characteristics.BonusInfravision + Game.DieRoll(4));
+            }
+            if (characteristics.BonusTunnel != 0)
+            {
+                characteristics.BonusTunnel = 0 - (characteristics.BonusTunnel + Game.DieRoll(4));
+            }
+            if (characteristics.BonusAttacks != 0)
+            {
+                characteristics.BonusAttacks = 0 - (characteristics.BonusAttacks + Game.DieRoll(4));
+            }
+            if (characteristics.BonusSpeed != 0)
+            {
+                characteristics.BonusSpeed = 0 - (characteristics.BonusSpeed + Game.DieRoll(4));
+            }
+            if (characteristics.BonusArmorClass != 0)
+            {
+                characteristics.BonusArmorClass = 0 - (characteristics.BonusArmorClass + Game.DieRoll(4));
+            }
+            if (characteristics.BonusHit != 0)
+            {
+                characteristics.BonusHit = 0 - (characteristics.BonusHit + Game.DieRoll(4));
+            }
+            if (characteristics.BonusDamage != 0)
+            {
+                characteristics.BonusDamage = 0 - (characteristics.BonusDamage + Game.DieRoll(4));
+            }
+            characteristics.HeavyCurse = true;
+            characteristics.IsCursed = true;
+            if (Game.DieRoll(4) == 1)
+            {
+                characteristics.PermaCurse = true;
+            }
+            if (Game.DieRoll(3) == 1)
+            {
+                characteristics.DreadCurse = true;
+            }
+            if (Game.DieRoll(2) == 1)
+            {
+                characteristics.Aggravate = true;
+            }
+            if (Game.DieRoll(3) == 1)
+            {
+                characteristics.DrainExp = true;
+            }
+            if (Game.DieRoll(2) == 1)
+            {
+                characteristics.Teleport = true;
+            }
+            else if (Game.DieRoll(3) == 1)
+            {
+                characteristics.NoTele = true;
+            }
+            if (Game.BaseCharacterClass.ID != CharacterClass.Warrior && Game.DieRoll(3) == 1)
+            {
+                characteristics.NoMagic = true;
+            }
+            characteristics.IsCursed = true;
+        }
+
+        void ApplyMiscPowerForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
+        {
+            if (characteristics.ArtifactBias != null)
+            {
+                characteristics.ArtifactBias.ApplyMiscPowers(characteristics);
+            }
+            switch (Game.DieRoll(31))
+            {
+                case 1:
+                    characteristics.SustStr = true;
+                    if (characteristics.ArtifactBias == null)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
+                    }
+                    break;
+
+                case 2:
+                    characteristics.SustInt = true;
+                    if (characteristics.ArtifactBias == null)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
+                    }
+                    break;
+
+                case 3:
+                    characteristics.SustWis = true;
+                    if (characteristics.ArtifactBias == null)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
+                    }
+                    break;
+
+                case 4:
+                    characteristics.SustDex = true;
+                    if (characteristics.ArtifactBias == null)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
+                    }
+                    break;
+
+                case 5:
+                    characteristics.SustCon = true;
+                    if (characteristics.ArtifactBias == null)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
+                    }
+                    break;
+
+                case 6:
+                    characteristics.SustCha = true;
+                    if (characteristics.ArtifactBias == null)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
+                    }
+                    break;
+
+                case 7:
+                case 8:
+                case 14:
+                    characteristics.FreeAct = true;
+                    break;
+
+                case 9:
+                    characteristics.HoldLife = true;
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(5) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+                    }
+                    else if (characteristics.ArtifactBias == null && Game.DieRoll(6) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
+                    }
+                    break;
+
+                case 10:
+                case 11:
+                    characteristics.Radius = 3;
+                    break;
+
+                case 12:
+                case 13:
+                    characteristics.Feather = true;
+                    break;
+
+                case 15:
+                case 16:
+                case 17:
+                    characteristics.SeeInvis = true;
+                    break;
+
+                case 18:
+                    characteristics.Telepathy = true;
+                    if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                    {
+                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+                    }
+                    break;
+
+                case 19:
+                case 20:
+                    characteristics.SlowDigest = true;
+                    break;
+
+                case 21:
+                case 22:
+                    characteristics.Regen = true;
+                    break;
+
+                case 23:
+                    characteristics.Teleport = true;
+                    break;
+
+                case 24:
+                case 25:
+                case 26:
+                    if (!characteristics.CanApplyBonusArmorClassMiscPower)
+                    {
+                        // This item cannot have misc power, select a different
+                        ApplyMiscPowerForRandomArtifactCreation(characteristics);
+                    }
+                    else
+                    {
+                        characteristics.ShowMods = true;
+                        characteristics.BonusArmorClass = 4 + Game.DieRoll(11);
+                    }
+                    break;
+
+                case 27:
+                case 28:
+                case 29:
+                    characteristics.ShowMods = true;
+                    characteristics.BonusHit += 4 + Game.DieRoll(11);
+                    characteristics.BonusDamage += 4 + Game.DieRoll(11);
+                    break;
+
+                case 30:
+                    characteristics.NoMagic = true;
+                    break;
+
+                case 31:
+                    characteristics.NoTele = true;
+                    break;
+            }
+        }
+
+        const int ArtifactCurseChance = 13;
+        int powers = Game.DieRoll(5) + 1;
+        bool aCursed = false;
+        int warriorArtifactBias = 0;
+        if (fromScroll && Game.DieRoll(4) == 1)
+        {
+            characteristics.ArtifactBias = Game.BaseCharacterClass.ArtifactBias;
+            warriorArtifactBias = Game.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
+        }
+        if (Game.DieRoll(100) <= warriorArtifactBias && fromScroll)
+        {
+            characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+        }
+        if (!fromScroll && Game.DieRoll(ArtifactCurseChance) == 1)
+        {
+            aCursed = true;
+        }
+        while (Game.DieRoll(powers) == 1 || Game.DieRoll(7) == 1 || Game.DieRoll(10) == 1)
+        {
+            powers++;
+        }
+        if (!aCursed && Game.DieRoll(Constants.WeirdLuck) == 1)
+        {
+            powers *= 2;
+        }
+        if (aCursed)
+        {
+            powers /= 2;
+        }
+        while (powers-- != 0)
+        {
+            int maxType = (characteristics.CanApplySlayingBonus ? 7 : 5);
+            switch (Game.DieRoll(maxType))
+            {
+                case 1:
+                case 2:
+                    ApplyRandomBonuses(characteristics);
+                    break;
+                case 3:
+                case 4:
+                    if (characteristics.ArtifactBias != null)
+                    {
+                        characteristics.ArtifactBias.ApplyRandomResistances(characteristics);
+                    }
+                    else
+                    {
+                        WeightedRandom<ItemAdditiveBundle> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemAdditiveBundle>(Game);
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AcidImmunityItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ElectricityImmunityItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ColdImmunityItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(FireImmunityItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistAcidAndAcidBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistElectricityAndElectricityBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFireAndFireBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistColdAndColdBiasItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 36 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndPoisonBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 6 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndNecromanticBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 3 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndRogueBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 3, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearAndWarriorBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistLightItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDarknessItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 8 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionAndChaosBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 40 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistSoundItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistShardsItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherAndNecromanticBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNexusItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosAndChaosBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosItemAdditiveBundle)));
+
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDisenchantItemAdditiveBundle)));
+
+                        if (characteristics.CanProvideSheathOfElectricity)
+                        {
+                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfElectricityAndElectricityBiasItemAdditiveBundle)));
+                        }
+
+                        if (characteristics.CanProvideSheathOfFire)
+                        {
+                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfFireAndFireBiasItemAdditiveBundle)));
+                        }
+
+                        if (characteristics.CanReflectBoltsAndArrows)
+                        {
+                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ReflectBoltsAndArrowsItemAdditiveBundle)));
+                        }
+
+                        ItemAdditiveBundle? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
+                        if (itemAdditiveBundle != null)
+                        {
+                            characteristics.Merge(itemAdditiveBundle);
+                        }
+                    }
+                    break;
+
+                case 5:
+                    ApplyMiscPowerForRandomArtifactCreation(characteristics);
+                    break;
+
+                case 6:
+                case 7:
+                    ApplySlayingForRandomArtifactCreation(characteristics);
+                    break;
+
+                default:
+                    powers++;
+                    break;
+            }
+        }
+        ApplyBonusForRandomArtifactCreation(characteristics);
+        characteristics.IgnoreAcid = true;
+        characteristics.IgnoreElec = true;
+        characteristics.IgnoreFire = true;
+        characteristics.IgnoreCold = true;
+        characteristics.TreasureRating = 40;
+
+        if (aCursed)
+        {
+            CurseRandart(characteristics);
+        }
+        if (!aCursed && Game.DieRoll(RandartActivationChance) == 1)
+        {
+            characteristics.Activation = null;
+            if (characteristics.ArtifactBias != null)
+            {
+                if (Game.DieRoll(100) < characteristics.ArtifactBias.ActivationPowerChance)
+                {
+                    characteristics.Activation = characteristics.ArtifactBias.GetActivationPowerType();
+                }
+            }
+            if (characteristics.Activation == null)
+            {
+                characteristics.Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
+            }
+        }
+    }
 }

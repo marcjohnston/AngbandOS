@@ -12,11 +12,12 @@ internal class MageArtifactBias : ArtifactBias
 {
     private MageArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Mages";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Int)
+        if (!characteristics.Int)
         {
-            item.Characteristics.Int = true;
+            characteristics.Int = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -27,7 +28,7 @@ internal class MageArtifactBias : ArtifactBias
 
     public override int ActivationPowerChance => 66;
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(20) == 1)
         {

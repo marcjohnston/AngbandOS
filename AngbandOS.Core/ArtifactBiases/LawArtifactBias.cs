@@ -12,29 +12,29 @@ internal class LawArtifactBias : ArtifactBias
 {
     private LawArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Law";
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.SlayEvil)
+            if (!characteristics.SlayEvil)
             {
-                item.Characteristics.SlayEvil = true;
+                characteristics.SlayEvil = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.Characteristics.SlayUndead)
+            if (!characteristics.SlayUndead)
             {
-                item.Characteristics.SlayUndead = true;
+                characteristics.SlayUndead = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.Characteristics.SlayDemon)
+            if (!characteristics.SlayDemon)
             {
-                item.Characteristics.SlayDemon = true;
+                characteristics.SlayDemon = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -44,7 +44,7 @@ internal class LawArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(8) == 1)
         {

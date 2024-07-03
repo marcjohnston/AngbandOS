@@ -22,13 +22,13 @@ internal class AcidArtifactBias : ArtifactBias
         (nameof(FalseAcidImmunityItemTest), "1/20", nameof(AcidImmunityItemAdditiveBundle), "1/2")
     };
 
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.BrandAcid)
+            if (!characteristics.BrandAcid)
             {
-                item.Characteristics.BrandAcid = true;
+                characteristics.BrandAcid = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;

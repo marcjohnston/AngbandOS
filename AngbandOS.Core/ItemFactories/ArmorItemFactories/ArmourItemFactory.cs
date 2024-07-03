@@ -21,9 +21,9 @@ internal abstract class ArmorItemFactory : ItemFactory
         (100, "3d5-3")
     };
 
-    public override void ApplyBonusForRandomArtifactCreation(Item item)
+    public override void ApplyBonusForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {
-        item.BonusArmorClass += Game.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);
+        characteristics.BonusArmorClass += Game.DieRoll(characteristics.BonusArmorClass > 19 ? 1 : 20 - characteristics.BonusArmorClass);
     }
 
     public override int GetBonusRealValue(Item item)

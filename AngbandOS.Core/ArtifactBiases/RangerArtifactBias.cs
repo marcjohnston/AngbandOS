@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Reflection.PortableExecutable;
+
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]
@@ -12,27 +14,28 @@ internal class RangerArtifactBias : ArtifactBias
 {
     private RangerArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Rangers";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Con)
+        if (!characteristics.Con)
         {
-            item.Characteristics.Con = true;
+            characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.Characteristics.Dex)
+        else if (!characteristics.Dex)
         {
-            item.Characteristics.Dex = true;
+            characteristics.Dex = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.Characteristics.Str)
+        else if (!characteristics.Str)
         {
-            item.Characteristics.Str = true;
+            characteristics.Str = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -41,11 +44,12 @@ internal class RangerArtifactBias : ArtifactBias
 
         return false;
     }
-    public override bool ApplyMiscPowers(Item item)
+
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.SustCon)
+        if (!characteristics.SustCon)
         {
-            item.Characteristics.SustCon = true;
+            characteristics.SustCon = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -53,13 +57,13 @@ internal class RangerArtifactBias : ArtifactBias
         }
         return false;
     }
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.SlayAnimal)
+            if (!characteristics.SlayAnimal)
             {
-                item.Characteristics.SlayAnimal = true;
+                characteristics.SlayAnimal = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -69,7 +73,7 @@ internal class RangerArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(20) == 1)
         {

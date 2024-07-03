@@ -12,11 +12,12 @@ internal class WisdomArtifactBias : ArtifactBias
 {
     private WisdomArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Wisdom";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Wis)
+        if (!characteristics.Wis)
         {
-            item.Characteristics.Wis = true;
+            characteristics.Wis = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -25,11 +26,11 @@ internal class WisdomArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(Item item)
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.SustWis)
+        if (!characteristics.SustWis)
         {
-            item.Characteristics.SustWis = true;
+            characteristics.SustWis = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

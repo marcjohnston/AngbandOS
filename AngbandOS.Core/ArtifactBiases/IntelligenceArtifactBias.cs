@@ -12,11 +12,12 @@ internal class IntelligenceArtifactBias : ArtifactBias
 {
     private IntelligenceArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Intelligence";
-    public override bool ApplyBonuses(Item item)
+
+    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.Int)
+        if (!characteristics.Int)
         {
-            item.Characteristics.Int = true;
+            characteristics.Int = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
@@ -25,11 +26,11 @@ internal class IntelligenceArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(Item item)
+    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
     {
-        if (!item.Characteristics.SustInt)
+        if (!characteristics.SustInt)
         {
-            item.Characteristics.SustInt = true;
+            characteristics.SustInt = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

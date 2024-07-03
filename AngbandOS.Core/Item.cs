@@ -5,6 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Races;
+using AngbandOS.Core.Spells;
+using System.Reflection.PortableExecutable;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -30,7 +37,8 @@ internal sealed class Item : IComparable<Item>
     /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
     /// </summary>
     public ItemCharacteristics Characteristics = new ItemCharacteristics();
-    public ItemCharacteristics? RandomArtifact = null;
+
+    public RandomArtifactCharacteristics? RandomArtifact = null;
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -2394,168 +2402,144 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    private int EnchantBonus(int bonus)
+    /// <summary>
+    /// Imports the characteristics of another item.  This is only needed for the <see cref="Item.Clone"/> method.
+    /// </summary>
+    /// <param name="itemCharacteristicsA"></param>
+    /// <param name="itemCharacteristicsB"></param>
+    public void Copy(RandomArtifactCharacteristics characteristics)
     {
-        do
-        {
-            bonus++;
-        } while (bonus < Game.DieRoll(5) || Game.DieRoll(bonus) == 1);
-        if (bonus > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
-        {
-            bonus = 4;
-        }
-        return bonus;
+        // CanApplyBlessedArtifactBias = Factory.CanApplyBlessedArtifactBias; // TODO: Need to restore this.
+        // CanApplyArtifactBiasSlaying = Factory.CanApplyArtifactBiasSlaying; // TODO: Need to restore this.
+        // CanApplyBlowsBonus = Factory.CanApplyBlowsBonus; // TODO: Need to restore this.
+        // CanReflectBoltsAndArrows = Factory.CanReflectBoltsAndArrows; // TODO: Need to restore this.
+        // CanApplySlayingBonus = Factory.CanApplySlayingBonus; // TODO: Need to restore this.
+        // CanApplyBonusArmorClassMiscPower = Factory.CanApplyBonusArmorClassMiscPower; // TODO: Need to restore this.
+        // CanProvideSheathOfElectricity = Factory.CanProvideSheathOfElectricity; // TODO: Need to restore this.
+        // CanProvideSheathOfFire = Factory.CanProvideSheathOfFire;        // TODO: Need to restore this.
+        BonusHit = characteristics.BonusHit;
+        BonusArmorClass = characteristics.BonusArmorClass;
+        BonusDamage = characteristics.BonusDamage;
+        BonusStrength = characteristics.BonusStrength;
+        BonusIntelligence = characteristics.BonusIntelligence;
+        BonusWisdom = characteristics.BonusWisdom;
+        BonusDexterity = characteristics.BonusDexterity;
+        BonusConstitution = characteristics.BonusConstitution;
+        BonusCharisma = characteristics.BonusCharisma;
+        BonusStealth = characteristics.BonusStealth;
+        BonusSearch = characteristics.BonusSearch;
+        BonusInfravision = characteristics.BonusInfravision;
+        BonusTunnel = characteristics.BonusTunnel;
+        BonusAttacks = characteristics.BonusAttacks;
+        BonusSpeed = characteristics.BonusSpeed;        
+        Characteristics.Activation = characteristics.Activation;
+        Characteristics.Aggravate = characteristics.Aggravate;
+        Characteristics.AntiTheft = characteristics.AntiTheft;
+        Characteristics.ArtifactBias = characteristics.ArtifactBias;
+        Characteristics.Blessed = characteristics.Blessed;
+        Characteristics.Blows = characteristics.Blows;
+        Characteristics.BrandAcid = characteristics.BrandAcid;
+        Characteristics.BrandCold = characteristics.BrandCold;
+        Characteristics.BrandElec = characteristics.BrandElec;
+        Characteristics.BrandFire = characteristics.BrandFire;
+        Characteristics.BrandPois = characteristics.BrandPois;
+        Characteristics.Cha = characteristics.Cha;
+        Characteristics.Chaotic = characteristics.Chaotic;
+        Characteristics.Con = characteristics.Con;
+        Characteristics.IsCursed = characteristics.IsCursed;
+        Characteristics.Dex = characteristics.Dex;
+        Characteristics.DrainExp = characteristics.DrainExp;
+        Characteristics.DreadCurse = characteristics.DreadCurse;
+        Characteristics.EasyKnow = characteristics.EasyKnow;
+        Characteristics.Feather = characteristics.Feather;
+        Characteristics.FreeAct = characteristics.FreeAct;
+        Characteristics.HeavyCurse = characteristics.HeavyCurse;
+        Characteristics.HideType = characteristics.HideType;
+        Characteristics.HoldLife = characteristics.HoldLife;
+        Characteristics.IgnoreAcid = characteristics.IgnoreAcid;
+        Characteristics.IgnoreCold = characteristics.IgnoreCold;
+        Characteristics.IgnoreElec = characteristics.IgnoreElec;
+        Characteristics.IgnoreFire = characteristics.IgnoreFire;
+        Characteristics.ImAcid = characteristics.ImAcid;
+        Characteristics.ImCold = characteristics.ImCold;
+        Characteristics.ImElec = characteristics.ImElec;
+        Characteristics.ImFire = characteristics.ImFire;
+        Characteristics.Impact = characteristics.Impact;
+        Characteristics.Infra = characteristics.Infra;
+        Characteristics.InstaArt = characteristics.InstaArt;
+        Characteristics.Int = characteristics.Int;
+        Characteristics.KillDragon = characteristics.KillDragon;
+        Characteristics.NoMagic = characteristics.NoMagic;
+        Characteristics.NoTele = characteristics.NoTele;
+        Characteristics.PermaCurse = characteristics.PermaCurse;
+        Characteristics.Radius = characteristics.Radius;
+        Characteristics.Reflect = characteristics.Reflect;
+        Characteristics.Regen = characteristics.Regen;
+        Characteristics.ResAcid = characteristics.ResAcid;
+        Characteristics.ResBlind = characteristics.ResBlind;
+        Characteristics.ResChaos = characteristics.ResChaos;
+        Characteristics.ResCold = characteristics.ResCold;
+        Characteristics.ResConf = characteristics.ResConf;
+        Characteristics.ResDark = characteristics.ResDark;
+        Characteristics.ResDisen = characteristics.ResDisen;
+        Characteristics.ResElec = characteristics.ResElec;
+        Characteristics.ResFear = characteristics.ResFear;
+        Characteristics.ResFire = characteristics.ResFire;
+        Characteristics.ResLight = characteristics.ResLight;
+        Characteristics.ResNether = characteristics.ResNether;
+        Characteristics.ResNexus = characteristics.ResNexus;
+        Characteristics.ResPois = characteristics.ResPois;
+        Characteristics.ResShards = characteristics.ResShards;
+        Characteristics.ResSound = characteristics.ResSound;
+        Characteristics.Search = characteristics.Search;
+        Characteristics.SeeInvis = characteristics.SeeInvis;
+        Characteristics.ShElec = characteristics.ShElec;
+        Characteristics.ShFire = characteristics.ShFire;
+        Characteristics.ShowMods = characteristics.ShowMods;
+        Characteristics.SlayAnimal = characteristics.SlayAnimal;
+        Characteristics.SlayDemon = characteristics.SlayDemon;
+        Characteristics.SlayDragon = characteristics.SlayDragon;
+        Characteristics.SlayEvil = characteristics.SlayEvil;
+        Characteristics.SlayGiant = characteristics.SlayGiant;
+        Characteristics.SlayOrc = characteristics.SlayOrc;
+        Characteristics.SlayTroll = characteristics.SlayTroll;
+        Characteristics.SlayUndead = characteristics.SlayUndead;
+        Characteristics.SlowDigest = characteristics.SlowDigest;
+        Characteristics.Speed = characteristics.Speed;
+        Characteristics.Stealth = characteristics.Stealth;
+        Characteristics.Str = characteristics.Str;
+        Characteristics.SustCha = characteristics.SustCha;
+        Characteristics.SustCon = characteristics.SustCon;
+        Characteristics.SustDex = characteristics.SustDex;
+        Characteristics.SustInt = characteristics.SustInt;
+        Characteristics.SustStr = characteristics.SustStr;
+        Characteristics.SustWis = characteristics.SustWis;
+        Characteristics.Telepathy = characteristics.Telepathy;
+        Characteristics.Teleport = characteristics.Teleport;
+        Characteristics.TreasureRating = characteristics.TreasureRating;
+        Characteristics.Tunnel = characteristics.Tunnel;
+        Characteristics.Vampiric = characteristics.Vampiric;
+        Characteristics.Vorpal = characteristics.Vorpal;
+        Characteristics.Wis = characteristics.Wis;
+        Characteristics.Wraith = characteristics.Wraith;
+        Characteristics.XtraMight = characteristics.XtraMight;
+        Characteristics.XtraShots = characteristics.XtraShots;
     }
 
     public bool CreateRandomArtifact(bool fromScroll)
     {
-        const int ArtifactCurseChance = 13;
-        int powers = Game.DieRoll(5) + 1;
-        bool aCursed = false;
-        int warriorArtifactBias = 0;
-        if (fromScroll && Game.DieRoll(4) == 1)
-        {
-            Characteristics.ArtifactBias = Game.BaseCharacterClass.ArtifactBias;
-            warriorArtifactBias = Game.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
-        }
-        if (Game.DieRoll(100) <= warriorArtifactBias && fromScroll)
-        {
-            Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
-        }
+        // Create a set of random artifact characteristics.
+        RandomArtifactCharacteristics characteristics = new RandomArtifactCharacteristics();
+
+        // Get the current item values.
+        characteristics.Copy(this);
+
+        Factory.CreateRandomArtifact(characteristics, fromScroll);
+
+        Copy(characteristics);
+
+        ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
-        if (!fromScroll && Game.DieRoll(ArtifactCurseChance) == 1)
-        {
-            aCursed = true;
-        }
-        while (Game.DieRoll(powers) == 1 || Game.DieRoll(7) == 1 || Game.DieRoll(10) == 1)
-        {
-            powers++;
-        }
-        if (!aCursed && Game.DieRoll(Constants.WeirdLuck) == 1)
-        {
-            powers *= 2;
-        }
-        if (aCursed)
-        {
-            powers /= 2;
-        }
-        while (powers-- != 0)
-        {
-            int maxType = (Factory.CanApplySlayingBonus ? 7 : 5);
-            switch (Game.DieRoll(maxType))
-            {
-                case 1:
-                case 2:
-                    ApplyRandomBonuses();
-                    break;
-                case 3:
-                case 4:
-                    if (Characteristics.ArtifactBias != null)
-                    {
-                        Characteristics.ArtifactBias.ApplyRandomResistances(this);
-                    }
-                    else
-                    {
-                        WeightedRandom<ItemAdditiveBundle> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemAdditiveBundle>(Game);
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AcidImmunityItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ElectricityImmunityItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ColdImmunityItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(FireImmunityItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistAcidAndAcidBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistElectricityAndElectricityBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFireAndFireBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistColdAndColdBiasItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 36 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndPoisonBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 6 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndNecromanticBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 3 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndRogueBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 3, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearAndWarriorBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistLightItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDarknessItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 8 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionAndChaosBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 40 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistSoundItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistShardsItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherAndNecromanticBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNexusItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosAndChaosBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosItemAdditiveBundle)));
-
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDisenchantItemAdditiveBundle)));
-
-                        if (Factory.CanProvideSheathOfElectricity)
-                        {
-                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfElectricityAndElectricityBiasItemAdditiveBundle)));
-                        }
-
-                        if (Factory.CanProvideSheathOfFire)
-                        {
-                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfFireAndFireBiasItemAdditiveBundle)));
-                        }
-
-                        if (Factory.CanReflectBoltsAndArrows)
-                        {
-                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ReflectBoltsAndArrowsItemAdditiveBundle)));
-                        }
-
-                        ApplyRandomResistance(itemAdditiveBundleWeightedRandom);
-                    }
-                    break;
-
-                case 5:
-                    ApplyMiscPowerForRandomArtifactCreation();
-                    break;
-
-                case 6:
-                case 7:
-                    Factory.ApplySlayingForRandomArtifactCreation(this);
-                    break;
-
-                default:
-                    powers++;
-                    break;
-            }
-        }
-        Factory.ApplyBonusForRandomArtifactCreation(this);
-        Characteristics.IgnoreAcid = true;
-        Characteristics.IgnoreElec = true;
-        Characteristics.IgnoreFire = true;
-        Characteristics.IgnoreCold = true;
-        Characteristics.TreasureRating = 40;
-
-        if (aCursed)
-        {
-            CurseRandart();
-        }
-        if (!aCursed && Game.DieRoll(Factory.RandartActivationChance) == 1)
-        {
-            Characteristics.Activation = null;
-            if (Characteristics.ArtifactBias != null)
-            {
-                if (Game.DieRoll(100) < Characteristics.ArtifactBias.ActivationPowerChance)
-                {
-                    Characteristics.Activation = Characteristics.ArtifactBias.GetActivationPowerType(this);
-                }
-            }
-            if (Characteristics.Activation == null)
-            {
-                Characteristics.Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
-            }
-            ActivationRechargeTimeRemaining = 0;
-        }
         if (fromScroll)
         {
             IdentifyFully();
@@ -2626,401 +2610,6 @@ internal sealed class Item : IComparable<Item>
             return aPtr;
         }
         return null;
-    }
-
-    private void ApplyRandomBonuses()
-    {
-        if (Characteristics.ArtifactBias != null)
-        {
-            if (Characteristics.ArtifactBias.ApplyBonuses(this))
-            {
-                return;
-            }
-        }
-        switch (Game.DieRoll(23))
-        {
-            case 1:
-            case 2:
-                Characteristics.Str = true;
-                BonusStrength = EnchantBonus(BonusStrength);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
-                }
-                else if (Characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
-                }
-                break;
-
-            case 3:
-            case 4:
-                Characteristics.Int = true;
-                BonusIntelligence = EnchantBonus(BonusIntelligence);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
-                }
-                else if (Characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
-                }
-                break;
-
-            case 5:
-            case 6:
-                Characteristics.Wis = true;
-                BonusWisdom = EnchantBonus(BonusWisdom);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
-                }
-                else if (Characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                break;
-
-            case 7:
-            case 8:
-                Characteristics.Dex = true;
-                BonusDexterity = EnchantBonus(BonusDexterity);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
-                }
-                else if (Characteristics.ArtifactBias == null && Game.DieRoll(7) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
-                }
-                break;
-
-            case 9:
-            case 10:
-                Characteristics.Con = true;
-                BonusConstitution = EnchantBonus(BonusConstitution);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
-                }
-                else if (Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
-                }
-                break;
-
-            case 11:
-            case 12:
-                Characteristics.Cha = true;
-                BonusCharisma = EnchantBonus(BonusCharisma);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
-                }
-                break;
-
-            case 13:
-            case 14:
-                Characteristics.Stealth = true;
-                BonusStealth = EnchantBonus(BonusStealth);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
-                }
-                break;
-
-            case 15:
-            case 16:
-                Characteristics.Search = true;
-                BonusSearch = EnchantBonus(BonusSearch);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
-                }
-                break;
-
-            case 17:
-            case 18:
-                Characteristics.Infra = true;
-                BonusInfravision = EnchantBonus(BonusInfravision);
-                break;
-
-            case 19:
-                Characteristics.Speed = true;
-                BonusSpeed = EnchantBonus(BonusSpeed);
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
-                }
-                break;
-
-            case 20:
-            case 21:
-                Characteristics.Tunnel = true;
-                BonusTunnel = EnchantBonus(BonusTunnel);
-                break;
-
-            case 22:
-            case 23:
-                if (Factory.CanApplyBlowsBonus)
-                {
-                    ApplyRandomBonuses();
-                }
-                else
-                {
-                    Characteristics.Blows = true;
-                    BonusAttacks = Game.DieRoll(2) + 1;
-                    if (BonusAttacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
-                    {
-                        BonusAttacks = 4;
-                    }
-                    if (Characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
-                    {
-                        Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
-                    }
-                }
-                break;
-        }
-    }
-
-    private void ApplyMiscPowerForRandomArtifactCreation()
-    {
-        if (Characteristics.ArtifactBias != null)
-        {
-            Characteristics.ArtifactBias.ApplyMiscPowers(this);
-        }
-        switch (Game.DieRoll(31))
-        {
-            case 1:
-                Characteristics.SustStr = true;
-                if (Characteristics.ArtifactBias == null)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
-                }
-                break;
-
-            case 2:
-                Characteristics.SustInt = true;
-                if (Characteristics.ArtifactBias == null)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
-                }
-                break;
-
-            case 3:
-                Characteristics.SustWis = true;
-                if (Characteristics.ArtifactBias == null)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
-                }
-                break;
-
-            case 4:
-                Characteristics.SustDex = true;
-                if (Characteristics.ArtifactBias == null)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
-                }
-                break;
-
-            case 5:
-                Characteristics.SustCon = true;
-                if (Characteristics.ArtifactBias == null)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
-                }
-                break;
-
-            case 6:
-                Characteristics.SustCha = true;
-                if (Characteristics.ArtifactBias == null)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
-                }
-                break;
-
-            case 7:
-            case 8:
-            case 14:
-                Characteristics.FreeAct = true;
-                break;
-
-            case 9:
-                Characteristics.HoldLife = true;
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(5) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                else if (Characteristics.ArtifactBias == null && Game.DieRoll(6) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
-                }
-                break;
-
-            case 10:
-            case 11:
-                Characteristics.Radius = 3;
-                break;
-
-            case 12:
-            case 13:
-                Characteristics.Feather = true;
-                break;
-
-            case 15:
-            case 16:
-            case 17:
-                Characteristics.SeeInvis = true;
-                break;
-
-            case 18:
-                Characteristics.Telepathy = true;
-                if (Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
-                }
-                break;
-
-            case 19:
-            case 20:
-                Characteristics.SlowDigest = true;
-                break;
-
-            case 21:
-            case 22:
-                Characteristics.Regen = true;
-                break;
-
-            case 23:
-                Characteristics.Teleport = true;
-                break;
-
-            case 24:
-            case 25:
-            case 26:
-                if (!Factory.CanApplyBonusArmorClassMiscPower)
-                {
-                    // This item cannot have misc power, select a different
-                    ApplyMiscPowerForRandomArtifactCreation();
-                }
-                else
-                {
-                    Characteristics.ShowMods = true;
-                    BonusArmorClass = 4 + Game.DieRoll(11);
-                }
-                break;
-
-            case 27:
-            case 28:
-            case 29:
-                Characteristics.ShowMods = true;
-                BonusHit += 4 + Game.DieRoll(11);
-                BonusDamage += 4 + Game.DieRoll(11);
-                break;
-
-            case 30:
-                Characteristics.NoMagic = true;
-                break;
-
-            case 31:
-                Characteristics.NoTele = true;
-                break;
-        }
-    }
-
-    private void CurseRandart()
-    {
-        if (BonusStrength != 0)
-        {
-            BonusStrength = 0 - (BonusStrength + Game.DieRoll(4));
-        }
-        if (BonusIntelligence != 0)
-        {
-            BonusIntelligence = 0 - (BonusIntelligence + Game.DieRoll(4));
-        }
-        if (BonusWisdom != 0)
-        {
-            BonusWisdom = 0 - (BonusWisdom + Game.DieRoll(4));
-        }
-        if (BonusDexterity != 0)
-        {
-            BonusDexterity = 0 - (BonusDexterity + Game.DieRoll(4));
-        }
-        if (BonusConstitution != 0)
-        {
-            BonusConstitution = 0 - (BonusConstitution + Game.DieRoll(4));
-        }
-        if (BonusCharisma != 0)
-        {
-            BonusCharisma = 0 - (BonusCharisma + Game.DieRoll(4));
-        }
-        if (BonusStealth != 0)
-        {
-            BonusStealth = 0 - (BonusStealth + Game.DieRoll(4));
-        }
-        if (BonusSearch != 0)
-        {
-            BonusSearch = 0 - (BonusSearch + Game.DieRoll(4));
-        }
-        if (BonusInfravision != 0)
-        {
-            BonusInfravision = 0 - (BonusInfravision + Game.DieRoll(4));
-        }
-        if (BonusTunnel != 0)
-        {
-            BonusTunnel = 0 - (BonusTunnel + Game.DieRoll(4));
-        }
-        if (BonusAttacks != 0)
-        {
-            BonusAttacks = 0 - (BonusAttacks + Game.DieRoll(4));
-        }
-        if (BonusSpeed != 0)
-        {
-            BonusSpeed = 0 - (BonusSpeed + Game.DieRoll(4));
-        }
-        if (BonusArmorClass != 0)
-        {
-            BonusArmorClass = 0 - (BonusArmorClass + Game.DieRoll(4));
-        }
-        if (BonusHit != 0)
-        {
-            BonusHit = 0 - (BonusHit + Game.DieRoll(4));
-        }
-        if (BonusDamage != 0)
-        {
-            BonusDamage = 0 - (BonusDamage + Game.DieRoll(4));
-        }
-        Characteristics.HeavyCurse = true;
-        Characteristics.IsCursed = true;
-        if (Game.DieRoll(4) == 1)
-        {
-            Characteristics.PermaCurse = true;
-        }
-        if (Game.DieRoll(3) == 1)
-        {
-            Characteristics.DreadCurse = true;
-        }
-        if (Game.DieRoll(2) == 1)
-        {
-            Characteristics.Aggravate = true;
-        }
-        if (Game.DieRoll(3) == 1)
-        {
-            Characteristics.DrainExp = true;
-        }
-        if (Game.DieRoll(2) == 1)
-        {
-            Characteristics.Teleport = true;
-        }
-        else if (Game.DieRoll(3) == 1)
-        {
-            Characteristics.NoTele = true;
-        }
-        if (Game.BaseCharacterClass.ID != CharacterClass.Warrior && Game.DieRoll(3) == 1)
-        {
-            Characteristics.NoMagic = true;
-        }
-        IsCursed = true;
     }
 
     private string GenerateRandomArtifactName()

@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Reflection.PortableExecutable;
+
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]
@@ -20,21 +22,21 @@ internal class NecromanticArtifactBias : ArtifactBias
         (nameof(FalseResistDarknessItemTest), "1", nameof(ResistDarknessItemAdditiveBundle), "1/2")
     };
 
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.Vampiric)
+            if (!characteristics.Vampiric)
             {
-                item.Characteristics.Vampiric = true;
+                characteristics.Vampiric = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.Characteristics.BrandPois && Game.DieRoll(2) == 1)
+            if (!characteristics.BrandPois && Game.DieRoll(2) == 1)
             {
-                item.Characteristics.BrandPois = true;
+                characteristics.BrandPois = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -44,7 +46,7 @@ internal class NecromanticArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(66) == 1)
         {

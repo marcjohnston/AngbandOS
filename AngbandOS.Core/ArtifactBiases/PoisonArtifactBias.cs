@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Reflection.PortableExecutable;
+
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]
@@ -17,13 +19,13 @@ internal class PoisonArtifactBias : ArtifactBias
         (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemAdditiveBundle), "1/2")
     };
 
-    public override bool ApplySlaying(Item item)
+    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Factory.CanApplyArtifactBiasSlaying)
+        if (characteristics.CanApplyArtifactBiasSlaying)
         {
-            if (!item.Characteristics.BrandPois)
+            if (!characteristics.BrandPois)
             {
-                item.Characteristics.BrandPois = true;
+                characteristics.BrandPois = true;
                 if (Game.DieRoll(2) == 1)
                 {
                     return true;
@@ -33,7 +35,7 @@ internal class PoisonArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType()
     {
         return Game.SingletonRepository.Get<Activation>(nameof(StinkingCloud12Every1d4p4Activation));
     }

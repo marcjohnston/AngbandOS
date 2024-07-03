@@ -5,11 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class RangedWeaponItemFactory : WeaponItemFactory // TODO: Should be renamed to RangedWeaponItemClass
+internal abstract class RangedWeaponItemFactory : WeaponItemFactory
 {
     /// <summary>
     /// Returns the ranged weapon inventory slot for bows.
@@ -23,11 +22,11 @@ internal abstract class RangedWeaponItemFactory : WeaponItemFactory // TODO: Sho
 
     public override bool IsRangedWeapon => true;
 
-    public override void ApplySlayingForRandomArtifactCreation(Item item)
+    public override void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {
-        if (item.Characteristics.ArtifactBias != null)
+        if (characteristics.ArtifactBias != null)
         {
-            if (item.Characteristics.ArtifactBias.ApplySlaying(item))
+            if (characteristics.ArtifactBias.ApplySlaying(characteristics))
             {
                 return;
             }
@@ -38,18 +37,18 @@ internal abstract class RangedWeaponItemFactory : WeaponItemFactory // TODO: Sho
             case 1:
             case 2:
             case 3:
-                item.Characteristics.XtraMight = true;
-                if (item.Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                characteristics.XtraMight = true;
+                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
                 }
                 break;
 
             default:
-                item.Characteristics.XtraShots = true;
-                if (item.Characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
+                characteristics.XtraShots = true;
+                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    item.Characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
                 }
                 break;
         }
