@@ -48,7 +48,7 @@ internal abstract class Spell : IGetKey
     public string GetKey => Key;
 
 
-    public void Bind()
+    public virtual void Bind()
     {
         CastScript = Game.SingletonRepository.GetNullable<ICastScript>(CastScriptName);
         CastFailedScript = Game.SingletonRepository.GetNullable<ICastScript>(CastFailedScriptName);
@@ -79,9 +79,15 @@ internal abstract class Spell : IGetKey
     public ClassSpell ClassSpell { get; private set; }
 
     /// <summary>
-    /// Returns the name of an ICancellableScript script to be run, when the spell is cast.
+    /// Returns the name of an <see cref="ICastScript"/> or <see cref="IScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when successfully casted.  This
+    /// property is used to bind the <see cref="CastScript"/> property during the bind phase.
     /// </summary>
     protected virtual string? CastScriptName => null;
+
+    /// <summary>
+    /// Returns the name of an <see cref="ICastScript"/> or <see cref="IScript"/> script to be run, when the spell fails; or null, if the spell does nothing when the spell fails.  This
+    /// property is used to bind the <see cref="CastFailedScript"/> property during the bind phase.
+    /// </summary>
     protected virtual string? CastFailedScriptName => null;
 
     private ICastScript? CastScript { get; set; }

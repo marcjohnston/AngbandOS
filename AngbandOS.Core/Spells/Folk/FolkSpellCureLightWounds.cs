@@ -16,4 +16,8 @@ internal class FolkSpellCureLightWounds : Spell
     public override string Name => "Cure Light Wounds";
 
     protected override string LearnedDetails => "heal 2d8";
+    public override void Bind()
+    {
+        base.Bind();
+    }
 }
