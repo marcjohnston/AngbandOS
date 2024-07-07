@@ -26,12 +26,5 @@ internal class SelfKnowledgePotionItemFactory : PotionItemFactory
         (40, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Self knowledge gives you information about yourself
-        Game.MsgPrint("You begin to know yourself a little better...");
-        Game.MsgPrint(null);
-        Game.RunScript(nameof(SelfKnowledgeScript));
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SelfKnowledgeScript);
 }

@@ -25,4 +25,3 @@ internal class CurseWeaponIdentifableAndUsedScript : Script, IIdentifableAndUsed
         return (true, true);
     }
 }
-

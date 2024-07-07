@@ -28,9 +28,5 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
         (30, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Constitution increases your constitution
-        return Game.TryIncreasingAbilityScore(Ability.Constitution);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(GainConstitutionScript);
 }

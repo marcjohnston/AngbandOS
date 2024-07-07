@@ -28,9 +28,5 @@ internal class IntelligencePotionItemFactory : PotionItemFactory
         (30, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Intelligence increases your intelligence
-        return Game.TryIncreasingAbilityScore(Ability.Intelligence);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(GainIntelligenceScript);
 }

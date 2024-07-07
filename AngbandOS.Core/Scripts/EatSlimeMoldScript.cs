@@ -19,8 +19,7 @@ internal class EatSlimeMoldScript : Script, IIdentifableScript
     public bool ExecuteIdentifableScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        PotionItemFactory slimeMold = (PotionItemFactory)Game.SingletonRepository.Get<ItemFactory>(nameof(SlimeMoldJuicePotionItemFactory));
-        slimeMold.Quaff();
+        Game.RunNoticeableScript(nameof(SlimeMoldScript));
         return true;
     }
 }

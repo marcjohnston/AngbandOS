@@ -30,11 +30,7 @@ internal class NaivetyPotionItemFactory : PotionItemFactory
         (20, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Naivety tries to reduce your wisdom
-        return Game.TryDecreasingAbilityScore(Ability.Wisdom);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(LoseWisdomScript);
     public override bool Smash(int who, int y, int x)
     {
         return true;

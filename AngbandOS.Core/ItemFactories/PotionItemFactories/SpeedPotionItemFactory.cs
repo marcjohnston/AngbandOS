@@ -28,22 +28,7 @@ internal class SpeedPotionItemFactory : PotionItemFactory
         (60, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Speed temporarily hastes you.  But it is not additive.
-        if (Game.HasteTimer.Value == 0)
-        {
-            if (Game.HasteTimer.SetTimer(Game.DieRoll(25) + 15))
-            {
-                return true;
-            }
-        }
-        else
-        {
-            Game.HasteTimer.AddTimer(5);
-        }
-        return false;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SpeedScript);
 
     public override bool Smash(int who, int y, int x)
     {

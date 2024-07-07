@@ -26,15 +26,7 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
         (60, 8)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
-        Game.MsgPrint("Massive explosions rupture your body!");
-        Game.TakeHit(Game.DiceRoll(50, 20), "a potion of Detonation");
-        Game.StunTimer.AddTimer(75);
-        Game.BleedingTimer.AddTimer(5000);
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(DetonationsScript);
 
     public override bool Smash(int who, int y, int x)
     {

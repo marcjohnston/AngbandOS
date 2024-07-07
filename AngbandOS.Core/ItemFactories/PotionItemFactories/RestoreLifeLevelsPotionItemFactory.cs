@@ -26,9 +26,5 @@ internal class RestoreLifeLevelsPotionItemFactory : PotionItemFactory
         (40, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Restore life levels restores any lost experience
-        return Game.RunSuccessfulScript(nameof(RestoreLevelScript));
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(RestoreLevelScript);
 }

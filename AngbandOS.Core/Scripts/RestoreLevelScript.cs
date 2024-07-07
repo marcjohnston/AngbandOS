@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript
+internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, INoticeableScript
 {
     private RestoreLevelScript(Game game) : base(game) { }
 
@@ -18,6 +18,7 @@ internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript
     /// <returns></returns>
     public bool ExecuteSuccessByChanceScript()
     {
+        // Restore life levels restores any lost experience
         if (Game.ExperiencePoints.IntValue < Game.MaxExperienceGained.IntValue)
         {
             Game.MsgPrint("You feel your life energies returning.");
@@ -26,6 +27,15 @@ internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript
             return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Executes the script and returns the success value as whether or not the action was noticed.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteNoticeableScript()
+    {
+        return ExecuteSuccessByChanceScript();
     }
 
     /// <summary>

@@ -27,11 +27,7 @@ internal class CharismaPotionItemFactory : PotionItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Charisma increases your charisma
-        return Game.TryIncreasingAbilityScore(Ability.Charisma);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(GainCharismaScript);
     public override bool Smash(int who, int y, int x)
     {
         return true;

@@ -28,9 +28,5 @@ internal class DexterityPotionItemFactory : PotionItemFactory
         (30, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Dexterity increases your dexterity
-        return Game.TryIncreasingAbilityScore(Ability.Dexterity);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(GainDexterityScript);
 }

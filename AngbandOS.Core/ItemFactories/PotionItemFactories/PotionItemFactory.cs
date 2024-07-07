@@ -15,7 +15,7 @@ internal abstract class PotionItemFactory : ItemFactory
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.
     /// </summary>
-    public override bool IsMagical => true;
+    public override bool IsMagical => true; // TODO: This should be a built-in function depending on what the potion does
 
     protected override string ItemClassName => nameof(PotionsItemClass);
 
@@ -32,12 +32,6 @@ internal abstract class PotionItemFactory : ItemFactory
     public override int PackSort => 11;
 
     public override int PotionManaValue => 20; // TODO: Need to be refactored into a binder.
-
-    /// <summary>
-    /// Activates the potion effect and returns true, if the effect is noticed; false, otherwise.
-    /// </summary>
-    /// <returns></returns>
-    public abstract bool Quaff();
 
     /// <summary>
     /// Perform a smash effect for the potion.

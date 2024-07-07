@@ -27,30 +27,7 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        bool identified = false;
-
-        // Cure serious wounds heals you 4d8 health, cures blindness and confusion, and
-        // reduces bleeding
-        if (Game.RestoreHealth(Game.DiceRoll(4, 8)))
-        {
-            identified = true;
-        }
-        if (Game.BlindnessTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.ConfusedTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 50))
-        {
-            identified = true;
-        }
-        return identified;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(CureSeriousWounds4d8Script);
 
     public override bool Smash(int who, int y, int x)
     {

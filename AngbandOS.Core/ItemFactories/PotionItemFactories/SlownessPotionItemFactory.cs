@@ -32,11 +32,7 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
 
-    public override bool Quaff()
-    {
-        // Slowness slows you down.
-        return Game.SlowTimer.AddTimer(Game.DieRoll(25) + 15);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SlownessScript);
 
     public override bool Smash(int who, int y, int x)
     {

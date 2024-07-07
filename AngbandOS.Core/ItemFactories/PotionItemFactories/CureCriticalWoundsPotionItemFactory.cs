@@ -27,40 +27,7 @@ internal class CureCriticalWoundsPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        bool identified = false;
-
-        // Cure critical wounds heals you 6d8 health, and cures blindness, confusion, stun,
-        // poison, and bleeding
-        if (Game.RestoreHealth(Game.DiceRoll(6, 8)))
-        {
-            identified = true;
-        }
-        if (Game.BlindnessTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.ConfusedTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.PoisonTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.StunTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.BleedingTimer.ResetTimer())
-        {
-            identified = true;
-        }
-
-        return identified;
-    }
-
+    protected override string? QuaffNoticeableScriptName => nameof(CureCriticalWounds6d8Script);
     public override bool Smash(int who, int y, int x)
     {
         Game.Project(who, 2, y, x, Game.DiceRoll(6, 3), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);

@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics.Contracts;
+
 namespace AngbandOS.Core.ItemFactories;
 
 /// <summary>
@@ -15,6 +17,18 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class ItemFactory : ItemAdditiveBundle
 {
     protected ItemFactory(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the name of the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is used to bind the
+    /// <see cref="QuaffNoticeableScript"/> property during the bind phase.  Returns null, by default.
+    /// </summary>
+    protected virtual string? QuaffNoticeableScriptName => null;
+
+    /// <summary>
+    /// Returns the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is bound using the <see cref="QuaffNoticeableScriptName"/>
+    /// property during the bind phase.
+    /// </summary>
+    public INoticeableScript? QuaffNoticeableScript { get; private set; } = null;
 
     /// <summary>
     /// Returns the name of the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property is used to bind
@@ -942,6 +956,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         }
 
         AmmunitionItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AmmunitionItemFactoryNames);
+        QuaffNoticeableScript = Game.SingletonRepository.GetNullable<INoticeableScript>(QuaffNoticeableScriptName);
     }
 
     /// <summary>

@@ -26,9 +26,5 @@ internal class RestoreStrengthPotionItemFactory : PotionItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Restore strength restores your strength
-        return Game.TryRestoringAbilityScore(Ability.Strength);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(RestoreStrengthScript);
 }

@@ -8,44 +8,35 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureLightWounds2d8Script : Script, IScript
+internal class CureLightWounds2d8Script : Script, IScript, INoticeableScript
 {
     private CureLightWounds2d8Script(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script.  Does not modify any of the store flags.
+    /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public bool ExecuteNoticeableScript()
     {
-        Game.RestoreHealth(Game.DiceRoll(2, 8));
-        Game.BleedingTimer.AddTimer(-10);
+        bool noticed = false;
+        // Cure light wounds heals you 2d8 health and reduces bleeding
+        if (Game.RestoreHealth(Game.DiceRoll(2, 8)))
+        {
+            noticed = true;
+        }
+        if (Game.BleedingTimer.AddTimer(-10))
+        {
+            noticed = true;
+        }
+        return noticed;
     }
 
     /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteRepeatableScript()
-    {
-        ExecuteScript();
-        return false;
-    }
-
-    /// <summary>
-    /// Executes the script and returns a success result.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
-    {
-        return false;
-    }
-
-    /// <summary>
-    /// Executes the script.
+    /// Executes the <see cref="INoticeableScript"/> script and returns nothing.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
+        ExecuteNoticeableScript();
     }
 }

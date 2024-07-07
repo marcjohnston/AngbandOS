@@ -28,9 +28,5 @@ internal class WisdomPotionItemFactory : PotionItemFactory
         (30, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Wisdom increases your wisdom
-        return Game.TryIncreasingAbilityScore(Ability.Wisdom);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(GainWisdomScript);
 }

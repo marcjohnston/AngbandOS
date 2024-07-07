@@ -26,9 +26,5 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Infravision gives you timed infravision
-        return Game.InfravisionTimer.AddTimer(100 + Game.DieRoll(100));
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(Infravision1d100p100Script);
 }

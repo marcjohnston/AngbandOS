@@ -26,18 +26,7 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Restore mana restores your to maximum mana
-        if (Game.Mana.IntValue < Game.MaxMana.IntValue)
-        {
-            Game.Mana.IntValue = Game.MaxMana.IntValue;
-            Game.FractionalMana = 0;
-            Game.MsgPrint("Your feel your head clear.");
-            return true;
-        }
-        return false;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(RestoreManaScript);
 
     public override bool Smash(int who, int y, int x)
     {

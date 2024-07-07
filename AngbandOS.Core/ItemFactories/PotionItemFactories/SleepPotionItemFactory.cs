@@ -31,18 +31,7 @@ internal class SleepPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 
-    public override bool Quaff()
-    {
-        // Sleep paralyses you
-        if (!Game.HasFreeAction)
-        {
-            if (Game.ParalysisTimer.AddTimer(Game.RandomLessThan(4) + 4))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SleepScript);
 
     public override bool Smash(int who, int y, int x)
     {

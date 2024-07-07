@@ -34,14 +34,5 @@ internal class ResistancePotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Resistance gives you all timed resistances
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(ResistanceScript);
 }

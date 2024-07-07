@@ -26,9 +26,5 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Slow poison halves the remaining duration of any poison you have
-        return Game.PoisonTimer.SetTimer(Game.PoisonTimer.Value / 2);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SlowPoisonScript);
 }

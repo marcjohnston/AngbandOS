@@ -8,18 +8,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HeroismScript : Script, IScript
+internal class WizardGainExperienceScript : Script, IScript
 {
-    private HeroismScript(Game game) : base(game) { }
+    private WizardGainExperienceScript(Game game) : base(game) { }
 
     /// <summary>
-    /// Adds between 25 and 50 turns of heroism, restores 10 points of health and heals fear.
+    /// Executes the script.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.HeroismTimer.AddTimer(Game.DieRoll(25) + 25);
-        Game.RestoreHealth(10);
-        Game.FearTimer.ResetTimer();
+        if (Game.CommandArgument != 0)
+        {
+            Game.GainExperience(Game.CommandArgument);
+        }
+        else
+        {
+            Game.GainExperience(Game.ExperiencePoints.IntValue + 1);
+        }
     }
 }

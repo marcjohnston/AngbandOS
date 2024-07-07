@@ -8,18 +8,17 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HealingScript : Script, IScript
+internal class Infravision1d100p100Script : Script, INoticeableScript
 {
-    private HealingScript(Game game) : base(game) { }
+    private Infravision1d100p100Script(Game game) : base(game) { }
 
     /// <summary>
-    /// Restores 300 points of health and heals stun and bleeding.
+    /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public bool ExecuteNoticeableScript()
     {
-        Game.RestoreHealth(300);
-        Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        // Infravision gives you timed infravision
+        return Game.InfravisionTimer.AddTimer(100 + Game.DieRoll(100));
     }
 }

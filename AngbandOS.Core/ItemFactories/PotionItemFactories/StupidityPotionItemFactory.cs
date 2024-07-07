@@ -30,11 +30,7 @@ internal class StupidityPotionItemFactory : PotionItemFactory
         (20, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Stupidity tries to reduce your intelligence
-        return Game.TryDecreasingAbilityScore(Ability.Intelligence);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(LoseIntelligenceScript);
     public override bool Smash(int who, int y, int x)
     {
         return true;

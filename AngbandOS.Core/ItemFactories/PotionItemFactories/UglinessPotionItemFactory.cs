@@ -30,9 +30,5 @@ internal class UglinessPotionItemFactory : PotionItemFactory
         (20, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Ugliness tries to reduce your charisma
-        return Game.TryDecreasingAbilityScore(Ability.Charisma);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(LoseCharismaScript);
 }

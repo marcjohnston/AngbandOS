@@ -30,11 +30,7 @@ internal class SicklinessPotionItemFactory : PotionItemFactory
         (10, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Sickliness tries to reduce your constitution
-        return Game.TryDecreasingAbilityScore(Ability.Constitution);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(LoseConstitutionScript);
     public override bool Smash(int who, int y, int x)
     {
         return true;

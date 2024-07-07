@@ -26,9 +26,5 @@ internal class RestoreConstitutionPotionItemFactory : PotionItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Restore constitution restores your constitution
-        return Game.TryRestoringAbilityScore(Ability.Constitution);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(RestoreConstitutionScript);
 }

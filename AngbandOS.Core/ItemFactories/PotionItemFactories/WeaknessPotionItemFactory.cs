@@ -30,11 +30,7 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Weakness tries to reduce your strength
-        return Game.TryDecreasingAbilityScore(Ability.Strength);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(LoseStrengthScript);
     public override bool Smash(int who, int y, int x)
     {
         return true;

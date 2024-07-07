@@ -31,28 +31,7 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     public override int DamageSides => 1;
     public override int InitialNutritionalValue => 400;
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Slime mold juice has a random effect (calling this function again recusively)
-        Game.MsgPrint("That tastes awful.");
-
-        // The following potions are not selected as random.  SlimeMold is the potion causing the random.
-        //Death = 23,
-        //DecCha = 21,
-        //DecCon = 20,
-        //DecDex = 19,
-        //DecInt = 17,
-        //DecStr = 16,
-        //DecWis = 18,
-        //LoseMemories = 13,
-        //Ruination = 15,
-        //SlimeMold = 2,
-
-        ItemFactoryWeightedRandom itemFactoryWeightedRandom = Game.SingletonRepository.Get<ItemFactoryWeightedRandom>(nameof(SlimeMoldPotionItemFactoryWeightedRandom));
-        PotionItemFactory potion = (PotionItemFactory)itemFactoryWeightedRandom.Choose();
-        potion.Quaff();
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SlimeMoldScript);
 
     public override bool Smash(int who, int y, int x)
     {

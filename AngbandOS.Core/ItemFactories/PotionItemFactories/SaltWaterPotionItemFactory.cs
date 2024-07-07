@@ -30,15 +30,7 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
     public override int DamageSides => 1;
     public override int Weight => 4;
 
-    public override bool Quaff()
-    {
-        // Salt water makes you vomit, but gets rid of poison
-        Game.MsgPrint("The saltiness makes you vomit!");
-        Game.SetFood(Constants.PyFoodStarve - 1);
-        Game.PoisonTimer.ResetTimer();
-        Game.ParalysisTimer.AddTimer(4);
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SaltWaterScript);
 
     public override bool Smash(int who, int y, int x)
     {

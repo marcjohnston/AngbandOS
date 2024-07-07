@@ -29,38 +29,7 @@ internal class HealingPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        bool identified = false;
-
-        // Healing heals you 300 health, and cures blindness, confusion, stun, poison, and bleeding
-        if (Game.RestoreHealth(300))
-        {
-            identified = true;
-        }
-        if (Game.BlindnessTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.ConfusedTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.PoisonTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.StunTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.BleedingTimer.ResetTimer())
-        {
-            identified = true;
-        }
-
-        return identified;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript);
 
     public override bool Smash(int who, int y, int x)
     {

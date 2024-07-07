@@ -30,11 +30,7 @@ internal class ClumsinessPotionItemFactory : PotionItemFactory
         (5, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Clumsiness tries to reduce your dexterity
-        return Game.TryDecreasingAbilityScore(Ability.Dexterity);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(LoseDexterityScript);
     public override bool Smash(int who, int y, int x)
     {
         return true;

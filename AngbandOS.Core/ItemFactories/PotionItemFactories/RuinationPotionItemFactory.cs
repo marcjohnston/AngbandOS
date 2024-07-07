@@ -30,20 +30,7 @@ internal class RuinationPotionItemFactory : PotionItemFactory
         (40, 8)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Ruination does 10d10 damage and reduces all your ability scores, bypassing
-        // sustains and divine protection
-        Game.MsgPrint("Your nerves and muscles feel weak and lifeless!");
-        Game.TakeHit(Game.DiceRoll(10, 10), "a potion of Ruination");
-        Game.DecreaseAbilityScore(Ability.Dexterity, 25, true);
-        Game.DecreaseAbilityScore(Ability.Wisdom, 25, true);
-        Game.DecreaseAbilityScore(Ability.Constitution, 25, true);
-        Game.DecreaseAbilityScore(Ability.Strength, 25, true);
-        Game.DecreaseAbilityScore(Ability.Charisma, 25, true);
-        Game.DecreaseAbilityScore(Ability.Intelligence, 25, true);
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(RuinationScript);
 
     public override bool Smash(int who, int y, int x)
     {

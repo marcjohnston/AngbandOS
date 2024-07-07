@@ -29,24 +29,5 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // New life rerolls your health, cures all mutations, and restores you to your birth race
-        Game.RunScript(nameof(RerollHitPointsScript));
-        if (Game.HasMutations)
-        {
-            Game.MsgPrint("You are cured of all mutations.");
-            Game.LoseAllMutations();
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-            Game.HandleStuff();
-        }
-        if (!(Game.Race.GetType() == Game.RaceAtBirth.GetType()))
-        {
-            var oldRaceName = Game.RaceAtBirth.Title;
-            Game.MsgPrint($"You feel more {oldRaceName} again.");
-            Game.ChangeRace(Game.RaceAtBirth);
-            Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
-        }
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(NewLifeScript);
 }

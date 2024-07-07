@@ -48,15 +48,14 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         Game.EnergyUse = 100;
         int itemLevel = item.Factory.LevelNormallyFound;
         // Do the actual potion effect
-        PotionItemFactory potion = (PotionItemFactory)item.Factory; // The item will be a potion.
-        bool identified = potion.Quaff();
+        bool noticed = item.Factory.QuaffNoticeableScript.ExecuteNoticeableScript();
 
         // Skeletons are messy drinkers
-        Game.Race.Quaff(potion);
+        Game.Race.Quaff((PotionItemFactory)item.Factory);
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We may now know the potion's type
         item.ObjectTried();
-        if (identified && !item.Factory.IsFlavorAware)
+        if (noticed && !item.Factory.IsFlavorAware)
         {
             item.Factory.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

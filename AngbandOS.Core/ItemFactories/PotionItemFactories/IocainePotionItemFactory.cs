@@ -30,13 +30,7 @@ internal class IocainePotionItemFactory : PotionItemFactory
         (55, 4)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Iocaine simply does 5000 damage
-        Game.MsgPrint("A feeling of Death flows through your body.");
-        Game.TakeHit(5000, "a potion of Death");
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(IocaineScript);
 
     public override bool Smash(int who, int y, int x)
     {

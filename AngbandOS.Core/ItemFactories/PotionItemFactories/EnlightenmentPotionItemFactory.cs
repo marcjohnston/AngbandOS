@@ -28,11 +28,5 @@ internal class EnlightenmentPotionItemFactory : PotionItemFactory
         (100, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Enlightenment shows you the whole level
-        Game.MsgPrint("An image of your surroundings forms in your mind...");
-        Game.RunScript(nameof(LightScript));
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(EnlightenmentScript);
 }

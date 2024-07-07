@@ -26,23 +26,5 @@ internal class SpecialEnlightenmentPotionItemFactory : PotionItemFactory
         (70, 4)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // *Enlightenment* shows you the whole level, increases your intelligence and
-        // wisdom, identifies all your items, and detects everything
-        Game.MsgPrint("You begin to feel more enlightened...");
-        Game.MsgPrint(null);
-        Game.RunScript(nameof(LightScript));
-        Game.TryIncreasingAbilityScore(Ability.Intelligence);
-        Game.TryIncreasingAbilityScore(Ability.Wisdom);
-        Game.DetectTraps();
-        Game.DetectDoors();
-        Game.DetectStairs();
-        Game.DetectTreasure();
-        Game.DetectObjectsGold();
-        Game.RunScript(nameof(DetectNormalObjectsScript));
-        Game.RunScript(nameof(IdentifyAllItemsScript));
-        Game.RunScript(nameof(SelfKnowledgeScript));
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SpecialEnlightenmentScript);
 }

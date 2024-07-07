@@ -8,23 +8,29 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GainExperienceScript : Script, IScript
+internal class GainExperienceScript : Script, INoticeableScript
 {
     private GainExperienceScript(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public bool ExecuteNoticeableScript()
     {
-        if (Game.CommandArgument != 0)
+        // Experience increases your experience points by 50%, with a minimum of +10 and
+        // maximuum of +10,000
+        if (Game.ExperiencePoints.IntValue < Constants.PyMaxExp)
         {
-            Game.GainExperience(Game.CommandArgument);
+            int ee = (Game.ExperiencePoints.IntValue / 2) + 10;
+            if (ee > 100000)
+            {
+                ee = 100000;
+            }
+            Game.MsgPrint("You feel more experienced.");
+            Game.GainExperience(ee);
+            return true;
         }
-        else
-        {
-            Game.GainExperience(Game.ExperiencePoints.IntValue + 1);
-        }
+        return false;
     }
 }

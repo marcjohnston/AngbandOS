@@ -26,9 +26,5 @@ internal class DetectInvisiblePotionItemFactory : PotionItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Detect invisible gives you times see invisibility
-        return Game.SeeInvisibilityTimer.AddTimer(12 + Game.DieRoll(12));
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(SeeInvisible1d12p12Script);
 }

@@ -8,16 +8,17 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistColdScript : Script, IScript
+internal class LoseDexterityScript : Script, INoticeableScript
 {
-    private ResistColdScript(Game game) : base(game) { }
+    private LoseDexterityScript(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public bool ExecuteNoticeableScript()
     {
-        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        // Clumsiness tries to reduce your dexterity
+        return Game.TryDecreasingAbilityScore(Ability.Dexterity);
     }
 }

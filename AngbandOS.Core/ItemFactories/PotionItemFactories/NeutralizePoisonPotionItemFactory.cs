@@ -26,9 +26,5 @@ internal class NeutralizePoisonPotionItemFactory : PotionItemFactory
         (5, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Cure poison removes any poison you have
-        return Game.PoisonTimer.ResetTimer();
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(ResetPoisonScript);
 }

@@ -30,17 +30,7 @@ internal class LoseMemoriesPotionItemFactory : PotionItemFactory
         (10, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Lose Memories reduces your experience
-        if (!Game.HasHoldLife && Game.ExperiencePoints.IntValue > 0)
-        {
-            Game.MsgPrint("You feel your memories fade.");
-            Game.LoseExperience(Game.ExperiencePoints.IntValue / 4);
-            return true;
-        }
-        return false;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(LoseMemoriesScript);
     public override bool Smash(int who, int y, int x)
     {
         return true;

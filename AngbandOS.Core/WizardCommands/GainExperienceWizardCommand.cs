@@ -18,5 +18,5 @@ internal class GainExperienceWizardCommand : WizardCommand
 
     protected override string? HelpGroupName => nameof(WizardCharacterEditingHelpGroup);
 
-    protected override string? ExecuteScriptName => nameof(GainExperienceScript);
+    protected override string? ExecuteScriptName => nameof(WizardGainExperienceScript);
 }

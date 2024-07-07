@@ -27,9 +27,5 @@ internal class RestoreCharismaPotionItemFactory : PotionItemFactory
     };
     public override int Weight => 4;
 
-    public override bool Quaff()
-    {
-        // Restore charisma restores your charisma
-        return Game.TryRestoringAbilityScore(Ability.Charisma);
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(RestoreCharismaScript);
 }

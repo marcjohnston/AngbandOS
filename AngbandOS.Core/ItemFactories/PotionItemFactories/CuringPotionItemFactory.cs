@@ -28,41 +28,7 @@ internal class CuringPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        bool identified = false;
-        // Curing heals you 50 health, and cures blindness, confusion, stun, poison,
-        // bleeding, and hallucinations
-        if (Game.RestoreHealth(50))
-        {
-            identified = true;
-        }
-        if (Game.BlindnessTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.PoisonTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.ConfusedTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.StunTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.BleedingTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.HallucinationsTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        return identified;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(Curing50Script);
     public override bool Smash(int who, int y, int x)
     {
         Game.Project(who, 2, y, x, Game.DiceRoll(6, 3), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);

@@ -30,13 +30,7 @@ internal class BlindnessPotionItemFactory : PotionItemFactory
     public override int DamageSides => 1;
     public override int Weight => 4;
 
-    public override bool Quaff()
-    {
-        // Blindness makes you blind
-        if (!Game.HasBlindnessResistance)
-            return Game.BlindnessTimer.AddTimer(Game.RandomLessThan(100) + 100);
-        return false;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(Blindness1d100p100Script);
 
     public override bool Smash(int who, int y, int x)
     {

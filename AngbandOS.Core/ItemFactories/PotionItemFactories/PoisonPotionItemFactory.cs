@@ -31,23 +31,7 @@ internal class PoisonPotionItemFactory : PotionItemFactory
     };
     public override int Weight => 4;
 
-    public override bool Quaff()
-    {
-        // Poison simply poisons you
-        if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
-        {
-            // Hagarg Ryonis can protect you against poison
-            if (Game.DieRoll(10) <= Game.SingletonRepository.Get<God>(nameof(HagargRyonisGod)).AdjustedFavour)
-            {
-                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
-            }
-            else if (Game.PoisonTimer.AddTimer(Game.RandomLessThan(15) + 10))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(Poison1d5p10Script);
 
     public override bool Smash(int who, int y, int x)
     {

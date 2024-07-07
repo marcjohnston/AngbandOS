@@ -26,12 +26,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
 
-    public override bool Quaff()
-    {
-        // Water has no effect
-        Game.MsgPrint("You feel less thirsty.");
-        return true;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(WaterScript);
 
     public override void Bind()
     {

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AppleJuiceScript : Script, IScript
+internal class AppleJuiceScript : Script, IScript, INoticeableScript
 {
     private AppleJuiceScript(Game game) : base(game) { }
 
@@ -20,5 +20,15 @@ internal class AppleJuiceScript : Script, IScript
     {
         // Apple juice has no effect
         Game.MsgPrint("You feel less thirsty.");
+    }
+
+    /// <summary>
+    /// Executes the script and returns true because the action is always noticed.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteNoticeableScript()
+    {
+        ExecuteScript();
+        return true;
     }
 }

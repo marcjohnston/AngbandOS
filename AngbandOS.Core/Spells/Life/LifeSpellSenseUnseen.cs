@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellSenseUnseen : Spell
 {
     private LifeSpellSenseUnseen(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(SeeInvisibileScript);
+    protected override string? CastScriptName => nameof(SeeInvisible1d24p24Script);
 
     public override string Name => "Sense Unseen";
 

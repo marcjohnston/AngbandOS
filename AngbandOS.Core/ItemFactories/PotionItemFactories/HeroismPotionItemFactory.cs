@@ -26,22 +26,5 @@ internal class HeroismPotionItemFactory : PotionItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        bool identified = false;
-        // Heroism removes fear, cures 10 health, and gives you timed heroism
-        if (Game.FearTimer.ResetTimer())
-        {
-            identified = true;
-        }
-        if (Game.HeroismTimer.AddTimer(Game.DieRoll(25) + 25))
-        {
-            identified = true;
-        }
-        if (Game.RestoreHealth(10))
-        {
-            identified = true;
-        }
-        return identified;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(Heroism1d25p25RestoreHealth10ResetFearScript);
 }

@@ -26,21 +26,5 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
         (65, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Experience increases your experience points by 50%, with a minimum of +10 and
-        // maximuum of +10,000
-        if (Game.ExperiencePoints.IntValue < Constants.PyMaxExp)
-        {
-            int ee = (Game.ExperiencePoints.IntValue / 2) + 10;
-            if (ee > 100000)
-            {
-                ee = 100000;
-            }
-            Game.MsgPrint("You feel more experienced.");
-            Game.GainExperience(ee);
-            return true;
-        }
-        return false;
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(GainExperienceScript);
 }

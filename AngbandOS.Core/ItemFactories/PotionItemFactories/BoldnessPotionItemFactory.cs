@@ -26,9 +26,5 @@ internal class BoldnessPotionItemFactory : PotionItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    public override bool Quaff()
-    {
-        // Boldness stops you being afraid
-        return Game.FearTimer.ResetTimer();
-    }
+    protected override string? QuaffNoticeableScriptName => nameof(ResetFearScript);
 }
