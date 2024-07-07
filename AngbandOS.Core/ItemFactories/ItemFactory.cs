@@ -25,8 +25,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// 
     /// Perform a smash effect on the potion and returns true, if the effect causes pets to become unfriendly; false, otherwise.  Returns false, by default.
     /// 
+    /// The amount of mana needed to consume to keep the potion.
+    /// 
     /// </summary>
-    protected virtual (string QuaffScriptName, string? SmashScriptName)? QuaffNoticeableScriptName => null;
+    protected virtual (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffNoticeableScriptName => null;
 
     /// <summary>
     /// Returns the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is bound using the <see cref="QuaffNoticeableScriptName"/>
@@ -34,8 +36,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// 
     /// Perform a smash effect on the potion and returns true, if the effect causes pets to become unfriendly; false, otherwise.  Returns false, by default.
     /// 
+    /// The amount of mana needed to consume to keep the potion.
+    /// 
     /// </summary>
-    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript)? QuaffNoticeableScript { get; private set; } = null;
+    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffNoticeableScript { get; private set; } = null;
 
     /// <summary>
     /// Returns the name of the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property is used to bind
@@ -64,6 +68,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public virtual bool CanProjectArrows => false;
 
+    /// <summary>
+    /// Returns the amount of mana needed to consume to keep a potion that was quaffed.
+    /// </summary>
     public virtual int PotionManaValue => 0; // TODO: Refactor into the binder
     public virtual int StaffManaValue => 0; // TODO: Refactor into the binder
     public virtual int RodManaValue => 0; // TODO: Refactor into the binder
@@ -968,7 +975,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         {
             INoticeableScript quaffNoticeableScript = Game.SingletonRepository.Get<INoticeableScript>(QuaffNoticeableScriptName.Value.QuaffScriptName);
             IUnfriendlyScript smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffNoticeableScriptName.Value.SmashScriptName);
-            QuaffNoticeableScript = (quaffNoticeableScript, smashUnfriendlyScript);
+            QuaffNoticeableScript = (quaffNoticeableScript, smashUnfriendlyScript, QuaffNoticeableScriptName.Value.ManaEquivalent);
         }
     }
 

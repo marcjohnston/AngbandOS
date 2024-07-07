@@ -26,5 +26,5 @@ internal class ResistHeatPotionItemFactory : PotionItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(ResistFire1d10p10Script), null);
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(ResistFire1d10p10Script), null, 20);
 }

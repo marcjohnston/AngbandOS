@@ -28,5 +28,5 @@ internal class CuringPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(Curing50Script), nameof(OldHeal6d3ProjectileFriendlyScript));
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(Curing50Script), nameof(OldHeal6d3ProjectileFriendlyScript), 20);
 }

@@ -30,5 +30,5 @@ internal class IocainePotionItemFactory : PotionItemFactory
         (55, 4)
     };
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(IocaineScript), nameof(DeathRayProjectileUnfriendlyScript));
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(IocaineScript), nameof(DeathRayProjectileUnfriendlyScript), 20);
 }

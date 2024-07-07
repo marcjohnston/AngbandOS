@@ -26,7 +26,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
 
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(WaterScript), nameof(NoEffectButMakeUnfriendlyScript));
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(WaterScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
 
     public override void Bind()
     {

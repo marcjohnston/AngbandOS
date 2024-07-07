@@ -29,5 +29,5 @@ internal class HealingPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript), nameof(OldHeal10d10ProjectileFriendlyScript));
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript), nameof(OldHeal10d10ProjectileFriendlyScript), 20);
 }

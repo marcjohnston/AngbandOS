@@ -26,5 +26,5 @@ internal class SelfKnowledgePotionItemFactory : PotionItemFactory
         (40, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(SelfKnowledgeScript), null);
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SelfKnowledgeScript), null, 20);
 }

@@ -34,5 +34,5 @@ internal class ResistancePotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(ResistanceScript), null);
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(ResistanceScript), null, 20);
 }

@@ -39,7 +39,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         }
 
         // Make sure the item is a potion
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeQuaffedItemFilter))))
+        if (item.Factory.QuaffNoticeableScript == null)
         {
             Game.MsgPrint("That is not a potion!");
             return;
@@ -71,7 +71,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         // If we're a channeler, we might be able to spend mana instead of using it up
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.PotionManaValue);
+            channeled = Game.DoCmdChannel(item, item.Factory.QuaffNoticeableScript.Value.ManaEquivalent);
         }
         if (!channeled)
         {

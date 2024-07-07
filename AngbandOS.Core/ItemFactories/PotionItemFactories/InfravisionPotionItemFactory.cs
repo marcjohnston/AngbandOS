@@ -26,5 +26,5 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(Infravision1d100p100Script), null);
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(Infravision1d100p100Script), null, 20);
 }

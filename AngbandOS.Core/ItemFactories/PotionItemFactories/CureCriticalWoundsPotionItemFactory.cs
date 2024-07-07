@@ -27,5 +27,5 @@ internal class CureCriticalWoundsPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(CureCriticalWounds6d8Script), nameof(OldHeal6d3ProjectileFriendlyScript));
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(CureCriticalWounds6d8Script), nameof(OldHeal6d3ProjectileFriendlyScript), 20);
 }

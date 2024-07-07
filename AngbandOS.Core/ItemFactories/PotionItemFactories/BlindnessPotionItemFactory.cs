@@ -30,5 +30,5 @@ internal class BlindnessPotionItemFactory : PotionItemFactory
     public override int DamageSides => 1;
     public override int Weight => 4;
 
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(Blindness1d100p100Script), nameof(DarkProjectileUnfriendlyScript));
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(Blindness1d100p100Script), nameof(DarkProjectileUnfriendlyScript), 20);
 }

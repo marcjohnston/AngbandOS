@@ -27,5 +27,5 @@ internal class CharismaPotionItemFactory : PotionItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(GainCharismaScript), nameof(NoEffectButMakeUnfriendlyScript));
+    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(GainCharismaScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
 }
