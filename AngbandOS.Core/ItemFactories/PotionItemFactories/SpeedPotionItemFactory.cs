@@ -28,5 +28,5 @@ internal class SpeedPotionItemFactory : PotionItemFactory
         (60, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SpeedScript), nameof(SpeedProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(SpeedScript), nameof(SpeedProjectileFriendlyScript), 20);
 }

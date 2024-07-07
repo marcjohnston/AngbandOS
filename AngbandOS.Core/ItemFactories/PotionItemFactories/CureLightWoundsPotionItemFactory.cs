@@ -28,5 +28,5 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(CureLightWounds2d8Script), nameof(OldHeal2d3ProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(CureLightWounds2d8Script), nameof(OldHeal2d3ProjectileFriendlyScript), 20);
 }

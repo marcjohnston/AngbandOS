@@ -28,5 +28,5 @@ internal class StrengthPotionItemFactory : PotionItemFactory
         (30, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(GainStrengthScript), null, 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(GainStrengthScript), null, 20);
 }

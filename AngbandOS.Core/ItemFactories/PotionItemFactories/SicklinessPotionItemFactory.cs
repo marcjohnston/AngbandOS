@@ -30,5 +30,5 @@ internal class SicklinessPotionItemFactory : PotionItemFactory
         (10, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(LoseConstitutionScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(LoseConstitutionScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
 }

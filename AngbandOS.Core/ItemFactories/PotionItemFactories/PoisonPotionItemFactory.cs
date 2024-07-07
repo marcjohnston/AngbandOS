@@ -31,5 +31,5 @@ internal class PoisonPotionItemFactory : PotionItemFactory
     };
     public override int Weight => 4;
 
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(Poison1d5p10Script), nameof(PoisonProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(Poison1d5p10Script), nameof(PoisonProjectileUnfriendlyScript), 20);
 }

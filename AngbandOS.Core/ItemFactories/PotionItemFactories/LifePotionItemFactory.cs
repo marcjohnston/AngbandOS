@@ -27,5 +27,5 @@ internal class LifePotionItemFactory : PotionItemFactory
         (100, 2)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(LifeScript), nameof(OldHeal50d50ProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(LifeScript), nameof(OldHeal50d50ProjectileFriendlyScript), 20);
 }

@@ -26,5 +26,5 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SlowPoisonScript), null, 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(SlowPoisonScript), null, 20);
 }

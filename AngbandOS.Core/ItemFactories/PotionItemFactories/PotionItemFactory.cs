@@ -40,11 +40,11 @@ internal abstract class PotionItemFactory : ItemFactory
     /// <param name="x"></param>
     public bool Smash(int who, int y, int x)
     {
-        if (QuaffNoticeableScript == null)
+        if (PotionDetails == null)
         {
             throw new Exception("Smash is not supported for a non-potion.");
         }
-        IUnfriendlyScript? smashUnfriendlyScript = QuaffNoticeableScript.Value.SmashScript;
+        IUnfriendlyScript? smashUnfriendlyScript = PotionDetails.Value.SmashScript;
         if (smashUnfriendlyScript == null)
         {
             return false;

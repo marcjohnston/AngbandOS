@@ -26,5 +26,5 @@ internal class BerserkStrengthPotionItemFactory : PotionItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SuperHeroism25p1d25ResetFearAndHeal30Script), null, 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(SuperHeroism25p1d25ResetFearAndHeal30Script), null, 20);
 }

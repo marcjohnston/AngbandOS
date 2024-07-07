@@ -28,5 +28,5 @@ internal class SpecialHealingPotionItemFactory : PotionItemFactory
         (80, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SpecialHealingScript), nameof(OldHeal50d50ProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(SpecialHealingScript), nameof(OldHeal50d50ProjectileFriendlyScript), 20);
 }

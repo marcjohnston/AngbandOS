@@ -30,5 +30,5 @@ internal class ClumsinessPotionItemFactory : PotionItemFactory
         (5, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(LoseDexterityScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(LoseDexterityScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
 }

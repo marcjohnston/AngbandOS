@@ -26,5 +26,5 @@ internal class HeroismPotionItemFactory : PotionItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(Heroism1d25p25RestoreHealth10ResetFearScript), null, 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(Heroism1d25p25RestoreHealth10ResetFearScript), null, 20);
 }

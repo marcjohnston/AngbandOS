@@ -32,5 +32,5 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
 
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SlownessScript), nameof(OldSlow5ProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(SlownessScript), nameof(OldSlow5ProjectileUnfriendlyScript), 20);
 }

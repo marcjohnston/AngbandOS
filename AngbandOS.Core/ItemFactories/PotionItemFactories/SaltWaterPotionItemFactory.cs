@@ -30,5 +30,5 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
     public override int DamageSides => 1;
     public override int Weight => 4;
 
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SaltWaterScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(SaltWaterScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
 }

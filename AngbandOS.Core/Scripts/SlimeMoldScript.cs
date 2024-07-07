@@ -35,11 +35,11 @@ internal class SlimeMoldScript : Script, INoticeableScript
 
         ItemFactoryWeightedRandom itemFactoryWeightedRandom = Game.SingletonRepository.Get<ItemFactoryWeightedRandom>(nameof(SlimeMoldPotionItemFactoryWeightedRandom));
         ItemFactory potion = itemFactoryWeightedRandom.Choose();
-        if (potion.QuaffNoticeableScript == null)
+        if (potion.PotionDetails == null)
         {
             throw new Exception($"The {nameof(WeightedRandom<ItemFactoryWeightedRandom>)} choose an item that is not a potion.");
         }
-        potion.QuaffNoticeableScript.Value.QuaffScript.ExecuteNoticeableScript();
+        potion.PotionDetails.Value.QuaffScript.ExecuteNoticeableScript();
         return true;
     }
 }

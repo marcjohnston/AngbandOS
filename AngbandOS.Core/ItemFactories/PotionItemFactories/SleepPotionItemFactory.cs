@@ -31,5 +31,5 @@ internal class SleepPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(SleepScript), nameof(OldSleepProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(SleepScript), nameof(OldSleepProjectileUnfriendlyScript), 20);
 }

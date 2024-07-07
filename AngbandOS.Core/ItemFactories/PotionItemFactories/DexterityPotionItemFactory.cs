@@ -28,5 +28,5 @@ internal class DexterityPotionItemFactory : PotionItemFactory
         (30, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(GainDexterityScript), null, 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(GainDexterityScript), null, 20);
 }

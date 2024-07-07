@@ -27,5 +27,5 @@ internal class RestoreCharismaPotionItemFactory : PotionItemFactory
     };
     public override int Weight => 4;
 
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(RestoreCharismaScript), null, 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(RestoreCharismaScript), null, 20);
 }

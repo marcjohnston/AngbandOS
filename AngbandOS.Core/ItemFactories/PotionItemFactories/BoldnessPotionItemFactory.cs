@@ -26,5 +26,5 @@ internal class BoldnessPotionItemFactory : PotionItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(ResetFearScript), null, 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(ResetFearScript), null, 20);
 }

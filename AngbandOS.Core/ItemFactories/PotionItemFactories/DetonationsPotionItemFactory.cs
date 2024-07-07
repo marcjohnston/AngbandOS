@@ -26,5 +26,5 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
         (60, 8)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffNoticeableScriptName => (nameof(DetonationsScript), nameof(Explode25d25ProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? PotionBinderDetails => (nameof(DetonationsScript), nameof(Explode25d25ProjectileUnfriendlyScript), 20);
 }
