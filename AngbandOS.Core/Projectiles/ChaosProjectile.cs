@@ -58,7 +58,7 @@ internal class ChaosProjectile : Projectile
                 {
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }
-                bool isPotion = oPtr.Factory.CanBeQuaffed;
+                bool isPotion = oPtr.Factory.PotionDetails != null;
                 Game.DeleteObject(oPtr);
                 if (isPotion)
                 {

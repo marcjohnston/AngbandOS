@@ -829,11 +829,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool CanBeEaten => false;
 
     /// <summary>
-    /// Returns true, if the item can be quaffed.
-    /// </summary>
-    public virtual bool CanBeQuaffed => false;
-
-    /// <summary>
     /// Returns true, if the item can be used.
     /// </summary>
     public virtual bool CanBeUsed => false;

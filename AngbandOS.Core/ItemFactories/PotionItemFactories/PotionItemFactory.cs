@@ -26,8 +26,6 @@ internal abstract class PotionItemFactory : ItemFactory
     };
 
     public override int PercentageBreakageChance => 100;
-    public override bool CanBeQuaffed => true;
-
     public override bool EasyKnow => true;
     public override int PackSort => 11;
 
