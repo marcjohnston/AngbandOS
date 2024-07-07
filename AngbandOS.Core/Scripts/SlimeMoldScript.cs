@@ -39,7 +39,7 @@ internal class SlimeMoldScript : Script, INoticeableScript
         {
             throw new Exception($"The {nameof(WeightedRandom<ItemFactoryWeightedRandom>)} choose an item that is not a potion.");
         }
-        potion.QuaffNoticeableScript.ExecuteNoticeableScript();
+        potion.QuaffNoticeableScript.Value.QuaffScript.ExecuteNoticeableScript();
         return true;
     }
 }

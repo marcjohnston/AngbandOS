@@ -31,10 +31,5 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     public override int DamageSides => 1;
     public override int InitialNutritionalValue => 400;
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(SlimeMoldScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(SlimeMoldScript), nameof(NoEffectButMakeUnfriendlyScript));
 }

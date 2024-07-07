@@ -30,9 +30,5 @@ internal class SicklinessPotionItemFactory : PotionItemFactory
         (10, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(LoseConstitutionScript);
-    public override bool Smash(int who, int y, int x)
-    {
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(LoseConstitutionScript), nameof(NoEffectButMakeUnfriendlyScript));
 }

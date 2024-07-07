@@ -35,9 +35,5 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 250;
 
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(AppleJuiceScript);
-    public override bool Smash(int who, int y, int x)
-    {
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(AppleJuiceScript), nameof(NoEffectButMakeUnfriendlyScript));
 }

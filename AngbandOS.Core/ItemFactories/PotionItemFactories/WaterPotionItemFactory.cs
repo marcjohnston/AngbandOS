@@ -26,16 +26,11 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
 
-    protected override string? QuaffNoticeableScriptName => nameof(WaterScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(WaterScript), nameof(NoEffectButMakeUnfriendlyScript));
 
     public override void Bind()
     {
         base.Bind();
         Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(ClearPotionReadableFlavor));
-    }
-
-    public override bool Smash(int who, int y, int x)
-    {
-        return true;
     }
 }

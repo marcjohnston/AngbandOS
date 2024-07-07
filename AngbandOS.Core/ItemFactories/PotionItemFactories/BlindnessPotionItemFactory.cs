@@ -30,11 +30,5 @@ internal class BlindnessPotionItemFactory : PotionItemFactory
     public override int DamageSides => 1;
     public override int Weight => 4;
 
-    protected override string? QuaffNoticeableScriptName => nameof(Blindness1d100p100Script);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(Blindness1d100p100Script), nameof(DarkProjectileUnfriendlyScript));
 }

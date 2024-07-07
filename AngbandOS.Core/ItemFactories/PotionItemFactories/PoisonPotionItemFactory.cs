@@ -31,11 +31,5 @@ internal class PoisonPotionItemFactory : PotionItemFactory
     };
     public override int Weight => 4;
 
-    protected override string? QuaffNoticeableScriptName => nameof(Poison1d5p10Script);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, 3, Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(Poison1d5p10Script), nameof(PoisonProjectileUnfriendlyScript));
 }

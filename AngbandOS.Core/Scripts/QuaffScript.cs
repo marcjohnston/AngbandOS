@@ -37,6 +37,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         {
             return;
         }
+
         // Make sure the item is a potion
         if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeQuaffedItemFilter))))
         {
@@ -44,11 +45,13 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
             return;
         }
         Game.PlaySound(SoundEffectEnum.Quaff);
+
         // Drinking a potion costs a whole turn
         Game.EnergyUse = 100;
         int itemLevel = item.Factory.LevelNormallyFound;
+
         // Do the actual potion effect
-        bool noticed = item.Factory.QuaffNoticeableScript.ExecuteNoticeableScript();
+        bool noticed = item.Factory.QuaffNoticeableScript.Value.QuaffScript.ExecuteNoticeableScript();
 
         // Skeletons are messy drinkers
         Game.Race.Quaff((PotionItemFactory)item.Factory);

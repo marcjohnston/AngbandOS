@@ -27,11 +27,5 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(CureSeriousWounds4d8Script);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, Game.DiceRoll(4, 3), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return false;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(CureSeriousWounds4d8Script), nameof(OldHeal4d3ProjectileFriendlyScript));
 }

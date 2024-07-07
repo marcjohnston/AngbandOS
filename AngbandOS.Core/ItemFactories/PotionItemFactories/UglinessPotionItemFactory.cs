@@ -30,5 +30,5 @@ internal class UglinessPotionItemFactory : PotionItemFactory
         (20, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(LoseCharismaScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(LoseCharismaScript), null);
 }

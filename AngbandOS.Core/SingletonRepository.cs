@@ -375,6 +375,7 @@ internal class SingletonRepository
         RegisterRepository<IScriptItemMonster>();
         RegisterRepository<IScriptItem>();
         RegisterRepository<IIdentifiedAndUsedScriptItemDirection>();
+        RegisterRepository<IUnfriendlyScript>();        
 
         RegisterRepository<Activation>();
         RegisterRepository<ActivationWeightedRandom>();

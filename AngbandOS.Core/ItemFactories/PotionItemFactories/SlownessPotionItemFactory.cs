@@ -32,11 +32,5 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
 
-    protected override string? QuaffNoticeableScriptName => nameof(SlownessScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, 5, Game.SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(SlownessScript), nameof(OldSlow5ProjectileUnfriendlyScript));
 }

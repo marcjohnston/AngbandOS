@@ -579,7 +579,7 @@ internal abstract class Projectile : IGetKey
     /// </summary>
     /// <param name="mPtr"></param>
     /// <returns></returns>
-    protected virtual bool ProjectileAngersMonster(Monster mPtr)
+    protected virtual bool ProjectileAngersMonster(Monster mPtr) // TODO: This return value should be combined with the potion smash and IUnfriendlyScript
     {
         return true;
     }

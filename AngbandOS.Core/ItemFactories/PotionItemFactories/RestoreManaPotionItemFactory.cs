@@ -26,11 +26,5 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(RestoreManaScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 1, y, x, Game.DiceRoll(10, 10), Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return false;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(RestoreManaScript), nameof(Mana10d10ProjectileFriendlyScript));
 }

@@ -26,5 +26,5 @@ internal class NeutralizePoisonPotionItemFactory : PotionItemFactory
         (5, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(ResetPoisonScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(ResetPoisonScript), null);
 }

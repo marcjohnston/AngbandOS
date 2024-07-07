@@ -16,7 +16,7 @@ internal class OldHealProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteSparkleAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool ProjectileAngersMonster(Monster mPtr) 
     {
         return false;
     }

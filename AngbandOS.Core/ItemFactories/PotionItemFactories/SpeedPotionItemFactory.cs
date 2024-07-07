@@ -28,11 +28,5 @@ internal class SpeedPotionItemFactory : PotionItemFactory
         (60, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(SpeedScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return false;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(SpeedScript), nameof(SpeedProjectileFriendlyScript));
 }

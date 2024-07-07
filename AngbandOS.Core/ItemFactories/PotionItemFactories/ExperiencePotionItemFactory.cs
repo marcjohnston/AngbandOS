@@ -26,5 +26,5 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
         (65, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(GainExperienceScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(GainExperienceScript), null);
 }

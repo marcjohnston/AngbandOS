@@ -26,5 +26,5 @@ internal class AugmentationPotionItemFactory : PotionItemFactory
         (40, 16)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(AugmentScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(AugmentScript), null);
 }

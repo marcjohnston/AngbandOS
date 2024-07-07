@@ -30,11 +30,5 @@ internal class IocainePotionItemFactory : PotionItemFactory
         (55, 4)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(IocaineScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 1, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(DeathRayProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(IocaineScript), nameof(DeathRayProjectileUnfriendlyScript));
 }

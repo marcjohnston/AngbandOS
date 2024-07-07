@@ -26,11 +26,5 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
         (60, 8)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(DetonationsScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, Game.DiceRoll(25, 25), Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(DetonationsScript), nameof(Explode25d25ProjectileUnfriendlyScript));
 }

@@ -30,9 +30,5 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(LoseStrengthScript);
-    public override bool Smash(int who, int y, int x)
-    {
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(LoseStrengthScript), nameof(NoEffectButMakeUnfriendlyScript));
 }

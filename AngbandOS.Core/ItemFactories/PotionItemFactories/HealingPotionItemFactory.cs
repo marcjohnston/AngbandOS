@@ -29,11 +29,5 @@ internal class HealingPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, Game.DiceRoll(10, 10), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return false;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript), nameof(OldHeal10d10ProjectileFriendlyScript));
 }

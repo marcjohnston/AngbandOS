@@ -26,5 +26,5 @@ internal class DetectInvisiblePotionItemFactory : PotionItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(SeeInvisible1d12p12Script);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(SeeInvisible1d12p12Script), null);
 }

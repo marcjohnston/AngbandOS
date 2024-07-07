@@ -29,5 +29,5 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(NewLifeScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(NewLifeScript), null);
 }

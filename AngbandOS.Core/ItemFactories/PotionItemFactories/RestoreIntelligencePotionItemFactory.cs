@@ -26,5 +26,5 @@ internal class RestoreIntelligencePotionItemFactory : PotionItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(RestoreIntelligenceScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(RestoreIntelligenceScript), null);
 }

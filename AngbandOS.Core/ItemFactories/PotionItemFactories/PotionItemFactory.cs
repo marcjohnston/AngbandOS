@@ -34,16 +34,24 @@ internal abstract class PotionItemFactory : ItemFactory
     public override int PotionManaValue => 20; // TODO: Need to be refactored into a binder.
 
     /// <summary>
-    /// Perform a smash effect for the potion.
+    /// 
     /// </summary>
     /// <param name="game"></param>
     /// <param name="who"></param>
     /// <param name="y"></param>
     /// <param name="x"></param>
-    /// <returns>Returns whether or not the action causes pets to become angry and turn against their owner.  Returns false, by default.</returns>
-    public virtual bool Smash(int who, int y, int x)
+    public bool Smash(int who, int y, int x)
     {
-        return false;
+        if (QuaffNoticeableScript == null)
+        {
+            throw new Exception("Smash is not supported for a non-potion.");
+        }
+        IUnfriendlyScript? smashUnfriendlyScript = QuaffNoticeableScript.Value.SmashScript;
+        if (smashUnfriendlyScript == null)
+        {
+            return false;
+        }
+        return smashUnfriendlyScript.ExecuteUnfriendlyScript(who, y, x);
     }
 
     public override int BaseValue => 20;

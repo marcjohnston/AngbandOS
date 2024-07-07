@@ -26,5 +26,5 @@ internal class RestoreLifeLevelsPotionItemFactory : PotionItemFactory
         (40, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(RestoreLevelScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(RestoreLevelScript), null);
 }

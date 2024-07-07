@@ -27,10 +27,5 @@ internal class LifePotionItemFactory : PotionItemFactory
         (100, 2)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(LifeScript);
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 1, y, x, Game.DiceRoll(50, 50), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return false;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(LifeScript), nameof(OldHeal50d50ProjectileFriendlyScript));
 }

@@ -28,10 +28,5 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     };
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(CureLightWounds2d8Script);
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, Game.DiceRoll(2, 3), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return false;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(CureLightWounds2d8Script), nameof(OldHeal2d3ProjectileFriendlyScript));
 }

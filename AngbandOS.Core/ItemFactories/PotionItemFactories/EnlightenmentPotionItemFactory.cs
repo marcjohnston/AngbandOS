@@ -28,5 +28,5 @@ internal class EnlightenmentPotionItemFactory : PotionItemFactory
         (100, 1)
     };
     public override int Weight => 4;
-    protected override string? QuaffNoticeableScriptName => nameof(EnlightenmentScript);
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(EnlightenmentScript), null);
 }

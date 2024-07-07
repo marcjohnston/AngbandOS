@@ -31,11 +31,5 @@ internal class SleepPotionItemFactory : PotionItemFactory
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 
-    protected override string? QuaffNoticeableScriptName => nameof(SleepScript);
-
-    public override bool Smash(int who, int y, int x)
-    {
-        Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
-        return true;
-    }
+    protected override (string, string?)? QuaffNoticeableScriptName => (nameof(SleepScript), nameof(OldSleepProjectileUnfriendlyScript));
 }
