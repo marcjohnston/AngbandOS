@@ -8,11 +8,30 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class DrainChargesAttackEffect : AttackEffect
+internal class DrainWandChargesAttackEffect : AttackEffect
 {
-    private DrainChargesAttackEffect(Game game) : base(game) { }
+    private DrainWandChargesAttackEffect(Game game) : base(game) { }
     public override int Power => 15;
     public override string Description => "drain charges";
+
+    public bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
+    {
+        if (item.WandChargesRemaining == 0)
+        {
+            return false;
+        }
+        Game.MsgPrint("Energy drains from your pack!");
+        obvious = true;
+        int j = monster.Level;
+        monster.Health += j * item.WandChargesRemaining * item.Count;
+        if (monster.Health > monster.MaxHealth)
+        {
+            monster.Health = monster.MaxHealth;
+        }
+        item.WandChargesRemaining = 0;
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        return true;
+    }
 
     public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked) // TODO: These need to be in an event
     {
@@ -25,7 +44,7 @@ internal class DrainChargesAttackEffect : AttackEffect
             BaseInventorySlot packInventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = Game.GetInventoryItem(i);
-            if (item != null && item.DrainChargesMonsterAttack(monster, ref obvious))
+            if (item != null && DrainChargesMonsterAttack(item, monster, ref obvious))
             {
                 return;
             }

@@ -13,25 +13,6 @@ internal abstract class WandItemFactory : ItemFactory
     public WandItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(WandsItemClass);
 
-    public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
-    {
-        if (item.WandChargesRemaining == 0)
-        {
-            return false;
-        }
-        Game.MsgPrint("Energy drains from your pack!");
-        obvious = true;
-        int j = monster.Level;
-        monster.Health += j * item.WandChargesRemaining * item.Count;
-        if (monster.Health > monster.MaxHealth)
-        {
-            monster.Health = monster.MaxHealth;
-        }
-        item.WandChargesRemaining = 0;
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        return true;
-    }
-
     protected override string? RechargeScriptName => nameof(RechargeWandScript);
 
     protected override string? EatMagicScriptName => nameof(WandEatMagicScript);

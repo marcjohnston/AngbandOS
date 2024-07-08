@@ -37,7 +37,8 @@ internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 1, 30),
         new MonsterAttackDefinition(nameof(ClawAttack), nameof(AcidAttackEffect), 1, 30),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 1, 10),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 1, 10),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 1, 10),
         new MonsterAttackDefinition(nameof(CrushAttack), nameof(DisenchantAttackEffect), 2, 33)
     };
     public override bool BashDoor => true;

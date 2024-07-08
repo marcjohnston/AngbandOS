@@ -483,17 +483,6 @@ internal sealed class Item : IComparable<Item>
         return 0;
     }
 
-    /// <summary>
-    /// Drains charges from the item and returns true, if charges were drained.
-    /// </summary>
-    /// <param name="monster"></param>
-    /// <param name="obvious"></param>
-    /// <returns></returns>
-    public bool DrainChargesMonsterAttack(Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
-    {
-        return Factory.DrainChargesMonsterAttack(this, monster, ref obvious); // TODO: obvious needs to be in an event 
-    }
-
     // TODO: There is no way to ensure a cloned gets all of the properties
     public Item Clone(int? newCount = null)
     {

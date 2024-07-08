@@ -32,7 +32,8 @@ internal class UndeadBeholderMonsterRace : MonsterRace
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainChargesAttackEffect), 2, 6)
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

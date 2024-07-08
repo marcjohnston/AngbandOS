@@ -24,7 +24,8 @@ internal class UnmakerMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseAllAttackEffect), 10, 10),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(DisenchantAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 10, 10),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

@@ -33,7 +33,8 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainChargesAttackEffect), 5, 5),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainStaffChargesAttackEffect), 5, 5),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainWandChargesAttackEffect), 5, 5),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 5, 5)
     };
     public override bool BashDoor => true;

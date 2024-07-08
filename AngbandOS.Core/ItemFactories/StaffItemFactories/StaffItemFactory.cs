@@ -15,25 +15,6 @@ internal abstract class StaffItemFactory : ItemFactory
     public override int StaffManaValue => 100;
     protected override string? RechargeScriptName => nameof(RechargeStaffScript);
 
-    public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
-    {
-        if (item.StaffChargesRemaining == 0)
-        {
-            return false;
-        }
-        Game.MsgPrint("Energy drains from your pack!");
-        obvious = true;
-        int j = monster.Level;
-        monster.Health += j * item.StaffChargesRemaining * item.Count;
-        if (monster.Health > monster.MaxHealth)
-        {
-            monster.Health = monster.MaxHealth;
-        }
-        item.StaffChargesRemaining = 0;
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        return true;
-    }
-
     protected override string? EatMagicScriptName => nameof(StaffEatMagicScript);
 
     public override bool CanBeUsed => true;

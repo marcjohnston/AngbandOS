@@ -48,7 +48,8 @@ internal class GreatCthulhuMonsterRace : MonsterRace
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
         new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 50, 4),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(DrainChargesAttackEffect), 15, 2),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(DrainStaffChargesAttackEffect), 15, 2),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(DrainWandChargesAttackEffect), 15, 2),
         new MonsterAttackDefinition(nameof(ClawAttack), nameof(DisenchantAttackEffect), 15, 2),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 1, 100)
     };

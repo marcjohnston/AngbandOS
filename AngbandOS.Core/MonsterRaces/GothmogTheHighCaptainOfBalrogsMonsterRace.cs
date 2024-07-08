@@ -33,7 +33,8 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
         new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
         new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 0, 0)
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

@@ -36,7 +36,8 @@ internal class OmaraxTheEyeTyrantMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp40AttackEffect), 2, 6),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainChargesAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6)
     };
     public override bool BashDoor => true;

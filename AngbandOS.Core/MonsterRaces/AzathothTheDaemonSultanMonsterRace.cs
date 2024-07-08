@@ -41,7 +41,8 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
         new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 22, 10),
         new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 20, 10),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseAllAttackEffect), 10, 12),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 0, 0)
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
     };
     public override string Description => "'That last amorphous blight of nethermost confusion which blasphemes and bubbles at the centre of all infinity - the boundless daemon sultan Azathoth, whose name no lips dare speak aloud, and who gnaws hungrily in inconceivable, unlighted chambers beyond time amidst the muffled, maddening beating of vile drums and the thin monotonous whine of accursed flutes' - H.P.Lovecraft, 'The Dream Quest of Unknown Kadath'";
     public override bool Drop_1D2 => true;

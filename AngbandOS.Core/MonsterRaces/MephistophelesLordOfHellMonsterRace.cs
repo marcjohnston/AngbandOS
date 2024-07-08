@@ -35,7 +35,8 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp80AttackEffect), 1, 5),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 1, 5),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(FireAttackEffect), 4, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 4, 5)
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 4, 5),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 4, 5)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

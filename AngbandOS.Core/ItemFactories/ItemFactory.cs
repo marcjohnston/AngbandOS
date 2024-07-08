@@ -1024,17 +1024,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public abstract int PackSort { get; }
 
     /// <summary>
-    /// Drains charges from the item and returns true, if charges were drained; false, otherwise.  Returns false, by default.
-    /// </summary>
-    /// <param name="monster"></param>
-    /// <param name="obvious"></param>
-    /// <returns></returns>
-    public virtual bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
-    {
-        return false;
-    } 
-
-    /// <summary>
     /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
     /// </summary>
     public virtual BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));

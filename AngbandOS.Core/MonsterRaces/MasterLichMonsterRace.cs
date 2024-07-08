@@ -33,7 +33,8 @@ internal class MasterLichMonsterRace : MonsterRace
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 12),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 12)
     };
