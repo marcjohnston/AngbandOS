@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class RecallRodItemFactory : RodItemFactory
+internal class RecallRodItemFactory : ItemFactory
 {
     private RecallRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -27,4 +27,18 @@ internal class RecallRodItemFactory : RodItemFactory
     };
     public override int Weight => 15;
     protected override (string, string, bool, int)? ZapBinderDetails => (nameof(RecallIdentifiedAndUsedScriptItemAndDirection), "60", false, 250);
+    protected override string ItemClassName => nameof(RodsItemClass);
+
+    protected override string? RechargeScriptName => nameof(RechargeRodScript);
+
+    protected override string? EatMagicScriptName => nameof(RodEatMagicScript);
+
+    /// <summary>
+    /// Returns true, because rods are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+    public override bool EasyKnow => true;
+    public override int PackSort => 13;
+    public override int BaseValue => 90;
+    public override ColorEnum Color => ColorEnum.Turquoise;
 }

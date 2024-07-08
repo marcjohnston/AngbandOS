@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class TrapLocationRodItemFactory : RodItemFactory
+internal class TrapLocationRodItemFactory : ItemFactory
 {
     private TrapLocationRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -27,4 +27,18 @@ internal class TrapLocationRodItemFactory : RodItemFactory
     };
     public override int Weight => 15;
     protected override (string, string, bool, int)? ZapBinderDetails => (nameof(TrapLocationIdentifiedAndUsedScriptItemAndDirection), "1d10+10", false, 250);
+    protected override string ItemClassName => nameof(RodsItemClass);
+
+    protected override string? RechargeScriptName => nameof(RechargeRodScript);
+
+    protected override string? EatMagicScriptName => nameof(RodEatMagicScript);
+
+    /// <summary>
+    /// Returns true, because rods are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+    public override bool EasyKnow => true;
+    public override int PackSort => 13;
+    public override int BaseValue => 90;
+    public override ColorEnum Color => ColorEnum.Turquoise;
 }
