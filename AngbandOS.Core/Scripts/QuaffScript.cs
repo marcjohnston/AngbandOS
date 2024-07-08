@@ -39,7 +39,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         }
 
         // Make sure the item is a potion
-        if (item.Factory.PotionDetails == null)
+        if (item.Factory.QuaffDetails == null)
         {
             Game.MsgPrint("That is not a potion!");
             return;
@@ -51,7 +51,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         int itemLevel = item.Factory.LevelNormallyFound;
 
         // Do the actual potion effect
-        bool noticed = item.Factory.PotionDetails.Value.QuaffScript.ExecuteNoticeableScript();
+        bool noticed = item.Factory.QuaffDetails.Value.QuaffScript.ExecuteNoticeableScript();
 
         // Skeletons are messy drinkers
         Game.Race.Quaff(item.Factory);
@@ -72,7 +72,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         // If we're a channeler, we might be able to spend mana instead of using it up
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.PotionDetails.Value.ManaEquivalent);
+            channeled = Game.DoCmdChannel(item, item.Factory.QuaffDetails.Value.ManaEquivalent);
         }
         if (!channeled)
         {

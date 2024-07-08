@@ -79,7 +79,7 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
 
             return rangedWeapon.Factory.AmmunitionItemFactories.Contains(item.Factory);
         }));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeQuaffed), CanBeQuaffed, (Item item) => item.Factory.PotionDetails != null));
+        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeQuaffed), CanBeQuaffed, (Item item) => item.Factory.QuaffDetails != null));
         itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeRead), CanBeRead, (Item item) => item.Factory.CanBeRead));
         itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeRecharged), CanBeRecharged, (Item item) => item.Factory.RechargeScript != null));
         itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeUsed), CanBeUsed, (Item item) => item.Factory.CanBeUsed));

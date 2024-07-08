@@ -27,11 +27,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <param name="x"></param>
     public bool Smash(int who, int y, int x)
     {
-        if (PotionDetails == null)
+        if (QuaffDetails == null)
         {
             throw new Exception("Smash is not supported for a non-potion.");
         }
-        IUnfriendlyScript? smashUnfriendlyScript = PotionDetails.Value.SmashScript;
+        IUnfriendlyScript? smashUnfriendlyScript = QuaffDetails.Value.SmashScript;
         if (smashUnfriendlyScript == null)
         {
             return false;
@@ -42,17 +42,17 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns the name of the noticeable script to run when the player quaffs the potion and the name of the smash script when the player smashes the potion; or null if the potion does
     /// not have a smash effect; if the item can be quaffed; or null, if the item cannot be quaffed.  This property is used to bind the
-    /// <see cref="PotionDetails"/> property during the bind phase.  Returns null, by default.
+    /// <see cref="QuaffDetails"/> property during the bind phase.  Returns null, by default.
     /// 
     /// Perform a smash effect on the potion and returns true, if the effect causes pets to become unfriendly; false, otherwise.  Returns false, by default.
     /// 
     /// The amount of mana needed to consume to keep the potion.
     /// 
     /// </summary>
-    protected virtual (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? PotionBinderDetails => null;
+    protected virtual (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBinderDetails => null;
 
     /// <summary>
-    /// Returns the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is bound using the <see cref="PotionBinderDetails"/>
+    /// Returns the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is bound using the <see cref="QuaffBinderDetails"/>
     /// property during the bind phase.
     /// 
     /// Perform a smash effect on the potion and returns true, if the effect causes pets to become unfriendly; false, otherwise.  Returns false, by default.
@@ -60,7 +60,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// The amount of mana needed to consume to keep the potion.
     /// 
     /// </summary>
-    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? PotionDetails { get; private set; } = null;
+    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffDetails { get; private set; } = null;
 
     /// <summary>
     /// Returns the name of the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property is used to bind
@@ -993,11 +993,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
         AmmunitionItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AmmunitionItemFactoryNames);
 
-        if (PotionBinderDetails != null)
+        if (QuaffBinderDetails != null)
         {
-            INoticeableScript quaffNoticeableScript = Game.SingletonRepository.Get<INoticeableScript>(PotionBinderDetails.Value.QuaffScriptName);
-            IUnfriendlyScript smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(PotionBinderDetails.Value.SmashScriptName);
-            PotionDetails = (quaffNoticeableScript, smashUnfriendlyScript, PotionBinderDetails.Value.ManaEquivalent);
+            INoticeableScript quaffNoticeableScript = Game.SingletonRepository.Get<INoticeableScript>(QuaffBinderDetails.Value.QuaffScriptName);
+            IUnfriendlyScript smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffBinderDetails.Value.SmashScriptName);
+            QuaffDetails = (quaffNoticeableScript, smashUnfriendlyScript, QuaffBinderDetails.Value.ManaEquivalent);
         }
     }
 

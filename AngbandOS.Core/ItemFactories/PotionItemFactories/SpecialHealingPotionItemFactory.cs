@@ -28,7 +28,7 @@ internal class SpecialHealingPotionItemFactory : ItemFactory
         (80, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(SpecialHealingScript), nameof(OldHeal50d50ProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SpecialHealingScript), nameof(OldHeal50d50ProjectileFriendlyScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

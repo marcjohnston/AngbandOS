@@ -35,7 +35,7 @@ internal class AppleJuicePotionItemFactory : ItemFactory
     public override int InitialNutritionalValue => 250;
 
     public override int Weight => 4;
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(AppleJuiceScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(AppleJuiceScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
   
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

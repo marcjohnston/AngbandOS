@@ -8049,7 +8049,7 @@ public bool IsDead = false;
                     {
                         // Let the player know what happens to the monster
                         MessagePain(monster, damage);
-                        if (monster.SmFriendly && missile.Factory.PotionDetails == null)
+                        if (monster.SmFriendly && missile.Factory.QuaffDetails == null)
                         {
                             string mName = monster.Name;
                             MsgPrint($"{mName} gets angry!");
@@ -8070,7 +8070,7 @@ public bool IsDead = false;
         Probability chanceToBreak = hitBody ? missile.Factory.BreakageChanceProbability : new FalseProbability();
 
         // If we hit with a potion, the potion might affect the creature
-        if (missile.Factory.PotionDetails != null)
+        if (missile.Factory.QuaffDetails != null)
         {
             if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test(this))
             {
@@ -14580,7 +14580,7 @@ public bool IsDead = false;
                     string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
                     string w = amt > 1 ? "were" : "was";
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
-                    if (oPtr.Factory.PotionDetails != null)
+                    if (oPtr.Factory.QuaffDetails != null)
                     {
                         oPtr.Factory.Smash(0, MapY.IntValue, MapX.IntValue);
                     }

@@ -26,7 +26,7 @@ internal class InfravisionPotionItemFactory : ItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(Infravision1d100p100Script), null, 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(Infravision1d100p100Script), null, 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

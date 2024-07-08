@@ -30,7 +30,7 @@ internal class StupidityPotionItemFactory : ItemFactory
         (20, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(LoseIntelligenceScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(LoseIntelligenceScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

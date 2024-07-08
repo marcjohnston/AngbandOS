@@ -26,7 +26,7 @@ internal class ResistHeatPotionItemFactory : ItemFactory
         (1, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(ResistFire1d10p10Script), null, 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(ResistFire1d10p10Script), null, 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

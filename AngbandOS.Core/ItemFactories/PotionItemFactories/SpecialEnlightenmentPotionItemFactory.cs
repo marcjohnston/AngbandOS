@@ -26,7 +26,7 @@ internal class SpecialEnlightenmentPotionItemFactory : ItemFactory
         (70, 4)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(SpecialEnlightenmentScript), null, 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SpecialEnlightenmentScript), null, 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

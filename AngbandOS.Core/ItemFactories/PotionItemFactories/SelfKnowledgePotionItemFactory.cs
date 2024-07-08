@@ -26,7 +26,7 @@ internal class SelfKnowledgePotionItemFactory : ItemFactory
         (40, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(SelfKnowledgeScript), null, 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SelfKnowledgeScript), null, 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

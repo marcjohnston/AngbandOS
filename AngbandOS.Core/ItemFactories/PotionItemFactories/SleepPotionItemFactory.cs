@@ -31,7 +31,7 @@ internal class SleepPotionItemFactory : ItemFactory
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 
-    protected override (string, string?, int)? PotionBinderDetails => (nameof(SleepScript), nameof(OldSleepProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SleepScript), nameof(OldSleepProjectileUnfriendlyScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.
