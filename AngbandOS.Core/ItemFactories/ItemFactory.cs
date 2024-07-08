@@ -92,7 +92,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns the amount of mana needed to consume to keep a potion that was quaffed.
     /// </summary>
-    public virtual int PotionManaValue => 0; // TODO: Refactor into the binder
     public virtual int StaffManaValue => 0; // TODO: Refactor into the binder
     public virtual int RodManaValue => 0; // TODO: Refactor into the binder
 
@@ -1005,9 +1004,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// Returns the number of turns an item that can be zapped needs before it is recharged; or null, if the item cannot be zapped.  A value of zero, means the item does not need any turns to
     /// be recharged after it is used.
     /// </summary>
-    protected virtual (string ScriptName, string TurnsToRecharge, bool RequiresAiming)? ZapBinderDetails => null;
+    protected virtual (string ScriptName, string TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapBinderDetails => null;
 
-    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming)? ZapDetails { get; private set; } = null;
+    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapDetails { get; private set; } = null;
 
     protected abstract string ItemClassName { get; }
 
