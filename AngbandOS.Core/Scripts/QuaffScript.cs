@@ -54,8 +54,9 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         bool noticed = item.Factory.PotionDetails.Value.QuaffScript.ExecuteNoticeableScript();
 
         // Skeletons are messy drinkers
-        Game.Race.Quaff((PotionItemFactory)item.Factory);
+        Game.Race.Quaff(item.Factory);
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+
         // We may now know the potion's type
         item.ObjectTried();
         if (noticed && !item.Factory.IsFlavorAware)

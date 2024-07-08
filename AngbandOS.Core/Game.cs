@@ -8074,9 +8074,8 @@ public bool IsDead = false;
         {
             if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test(this))
             {
-                PotionItemFactory potion = (PotionItemFactory)missile.Factory;
                 MsgPrint($"The {missileName} shatters!");
-                if (potion.Smash(1, y, x))
+                if (missile.Factory.Smash(1, y, x))
                 {
                     if (Map.Grid[y][x].MonsterIndex != 0 && Monsters[Map.Grid[y][x].MonsterIndex].SmFriendly)
                     {
@@ -14583,8 +14582,7 @@ public bool IsDead = false;
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                     if (oPtr.Factory.PotionDetails != null)
                     {
-                        PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
-                        potion.Smash(0, MapY.IntValue, MapX.IntValue);
+                        oPtr.Factory.Smash(0, MapY.IntValue, MapX.IntValue);
                     }
                     InvenItemIncrease(i, -amt);
                     InvenItemOptimize(i);

@@ -66,8 +66,7 @@ internal class ColdProjectile : Projectile
                     Game.DeleteObject(oPtr);
                     if (isPotion)
                     {
-                        PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
-                        potion.Smash(who, y, x);
+                        oPtr.Factory.Smash(who, y, x);
                     }
                     Game.MainForm.RefreshMapLocation(y, x);
                 }

@@ -94,12 +94,12 @@ internal class SkeletonRace : Race
         }
     }
 
-    public override void Quaff(PotionItemFactory potion)
+    public override void Quaff(ItemFactory itemFactory)
     {
         if (Game.DieRoll(12) == 1)
         {
             Game.MsgPrint("Some of the fluid falls through your jaws!");
-            potion.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
+            itemFactory.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
     public override bool CanBleed(int level) => false;
