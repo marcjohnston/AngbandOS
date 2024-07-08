@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class LightWandItemFactory : WandItemFactory
+internal class LightWandItemFactory : ItemFactory
 {
     private LightWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -27,4 +27,21 @@ internal class LightWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
     protected override (string, string, int, int)? AimingBinderDetails => (nameof(LineOfLightIdentifableDirectionalScript), "1d10+6", 10, 150);
+    protected override string ItemClassName => nameof(WandsItemClass);
+
+    protected override string? RechargeScriptName => nameof(RechargeWandScript);
+
+    protected override string? EatMagicScriptName => nameof(WandEatMagicScript);
+
+    /// <summary>
+    /// Returns true, because wands are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
+    protected override string BreakageChanceProbabilityExpression => "25/100";
+    public override int PackSort => 14;
+    public override int BaseValue => 50;
+    public override bool HatesElectricity => true;
+
+    public override ColorEnum Color => ColorEnum.Chartreuse;
 }
