@@ -22,12 +22,12 @@ internal class GreaterTitanMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightYellow;
     
     public override int ArmorClass => 125;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12)
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A forty foot tall humanoid that shakes the ground as it walks. The power radiating from its frame shakes your courage, its hatred inspired by your defiance.";

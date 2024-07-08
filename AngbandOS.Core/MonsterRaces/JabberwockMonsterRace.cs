@@ -22,12 +22,12 @@ internal class JabberwockMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 125;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 10, 10)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 10, 10)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

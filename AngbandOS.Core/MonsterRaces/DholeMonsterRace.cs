@@ -21,11 +21,11 @@ internal class DholeMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 64;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(SpitAttack), nameof(AcidAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(AcidAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 8),
+        (nameof(SpitAttack), nameof(AcidAttackEffect), 1, 8),
+        (nameof(EngulfAttack), nameof(AcidAttackEffect), 2, 8),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 4, 8),
     };
     public override bool Cthuloid => true;
     public override string Description => "A gigantic worm dripping with acid.";

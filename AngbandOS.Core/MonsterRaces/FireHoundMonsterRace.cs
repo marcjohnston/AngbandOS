@@ -21,11 +21,11 @@ internal class FireHoundMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "Flames lick at its feet and its tongue is a blade of fire. You can feel a furnace heat radiating from the creature.";

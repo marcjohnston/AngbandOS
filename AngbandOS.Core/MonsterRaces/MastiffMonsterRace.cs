@@ -17,10 +17,10 @@ internal class MastiffMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
     };
     public override string Description => "Well-trained watchdogs, obedient to death.";
     public override int FreqInate => 0;

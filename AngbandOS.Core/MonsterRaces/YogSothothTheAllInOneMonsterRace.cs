@@ -30,11 +30,11 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 40, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 16, 2),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 16, 2),
+        (nameof(TouchAttack), nameof(HurtAttackEffect), 40, 5),
+        (nameof(TouchAttack), nameof(LoseConAttackEffect), 16, 2),
+        (nameof(TouchAttack), nameof(LoseConAttackEffect), 16, 2),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

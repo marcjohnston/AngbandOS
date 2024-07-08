@@ -27,12 +27,12 @@ internal class DreadmasterMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 3, 4)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(LoseStrAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(LoseStrAttackEffect), 3, 4)
     };
     public override bool ColdBlood => true;
     public override string Description => "It is an unlife of power almost unequaled. An affront to existence, its very touch abuses and disrupts the flow of life, and its unearthly limbs, of purest black, crush rock and flesh with ease.";

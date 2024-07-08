@@ -22,12 +22,12 @@ internal class SmaugTheGoldenMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 6, 14)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 6, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "Smaug is one of the Uruloki that still survive, a fire-drake of immense cunning and intelligence. His speed through air is matched by few other dragons and his dragonfire is what legends are made of.";

@@ -23,11 +23,11 @@ internal class CrystalDrakeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Diamond;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "A dragon of strange crystalline form. Light shines through it, dazzling your eyes with spectrums of color.";

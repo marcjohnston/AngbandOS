@@ -20,11 +20,11 @@ internal class BabyBlackDragonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "This hatchling dragon is still soft, its eyes unaccustomed to light and its scales a dull black.";

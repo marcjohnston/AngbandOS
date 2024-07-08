@@ -23,10 +23,10 @@ internal class CultistMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Turquoise;
     
     public override int ArmorClass => 22;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "A robed humanoid dedicated to his outer god.";

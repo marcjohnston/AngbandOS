@@ -16,9 +16,9 @@ internal class GreenGluttonGhostMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 20;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatFoodAttackEffect), 1, 1),
+        (nameof(TouchAttack), nameof(EatFoodAttackEffect), 1, 1),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a very ugly green ghost with a voracious appetite.";

@@ -20,12 +20,12 @@ internal class UnmakerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseAllAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DisenchantAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 10, 10),
+        (nameof(TouchAttack), nameof(LoseAllAttackEffect), 10, 10),
+        (nameof(TouchAttack), nameof(DisenchantAttackEffect), 10, 10),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 10, 10),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 10, 10),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

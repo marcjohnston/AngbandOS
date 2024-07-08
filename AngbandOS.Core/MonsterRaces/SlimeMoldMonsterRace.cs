@@ -16,12 +16,12 @@ internal class SlimeMoldMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 4;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(PoisonAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(EatFoodAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(DroolAttack), null, 0, 0),
-        new MonsterAttackDefinition(nameof(DroolAttack), null, 0, 0)
+        (nameof(CrawlAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(CrawlAttack), nameof(EatFoodAttackEffect), 0, 0),
+        (nameof(DroolAttack), null, 0, 0),
+        (nameof(DroolAttack), null, 0, 0)
     };
     public override string Description => "It is a smallish, slimy, icky, hungry creature.";
     public override bool Drop90 => true;

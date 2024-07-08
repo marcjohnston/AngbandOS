@@ -20,11 +20,11 @@ internal class ChimeraMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 15;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        (nameof(ButtAttack), nameof(HurtAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a strange concoction of lion, dragon and goat. It looks very odd but very avoidable.";

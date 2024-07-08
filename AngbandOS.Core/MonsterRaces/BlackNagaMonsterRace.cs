@@ -16,9 +16,9 @@ internal class BlackNagaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A large black serpent's body with a female torso.";

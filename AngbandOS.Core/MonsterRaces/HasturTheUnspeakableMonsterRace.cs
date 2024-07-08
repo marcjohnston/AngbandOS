@@ -34,12 +34,12 @@ internal class HasturTheUnspeakableMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 150;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 14, 8),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 14, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 6, 6)
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 14, 8),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 14, 8),
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 6, 6),
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

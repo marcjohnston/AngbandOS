@@ -16,10 +16,10 @@ internal class ScruffyLookingHobbitMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightOrange;
     
     public override int ArmorClass => 8;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "A short little guy, in bedraggled clothes. He appears to be looking for a good tavern.";

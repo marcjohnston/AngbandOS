@@ -16,10 +16,10 @@ internal class HomonculousMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 32;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ParalyzeAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(HitAttack), nameof(ParalyzeAttackEffect), 1, 2),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

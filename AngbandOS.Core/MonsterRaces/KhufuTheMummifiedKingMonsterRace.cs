@@ -26,12 +26,12 @@ internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Gold;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseConAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseConAttackEffect), 0, 0)
+        (nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 6, 6),
+        (nameof(ClawAttack), nameof(LoseConAttackEffect), 0, 0),
+        (nameof(ClawAttack), nameof(LoseConAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

@@ -23,12 +23,12 @@ internal class LesserTitanMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6)
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a humanoid figure thirty feet tall that gives off an aura of power and hate.";

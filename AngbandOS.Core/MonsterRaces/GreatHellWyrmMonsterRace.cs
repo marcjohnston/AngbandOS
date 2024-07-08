@@ -23,12 +23,12 @@ internal class GreatHellWyrmMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 170;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 14)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 5, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "A vast dragon of immense power. Fire leaps continuously from its huge form. The air around it scalds you. Its slightest glance burns you, and you truly realize how insignificant you are.";

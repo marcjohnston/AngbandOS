@@ -16,12 +16,12 @@ internal class ChaosSpawnMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(HurtAttackEffect), 10, 6)
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(HurtAttackEffect), 10, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "It has two eyestalks and a large central eye. Its gaze can kill.";

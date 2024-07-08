@@ -23,12 +23,12 @@ internal class GlaurungFatherOfTheDragonsMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 7, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 7, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 7, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 7, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "Glaurung is the father of all dragons, and was for a long time the most powerful. Nevertheless, he still has full command over his brood and can command them to appear whenever he so wishes. He is the definition of dragonfire.";

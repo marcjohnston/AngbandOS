@@ -17,9 +17,9 @@ internal class BlueWormMassMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 12;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(ColdAttackEffect), 1, 4),
+        (nameof(CrawlAttack), nameof(ColdAttackEffect), 1, 4),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a large slimy mass of worms.";

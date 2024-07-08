@@ -25,10 +25,10 @@ internal class MindFlayerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Pink;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseWisAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(LoseWisAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A humanoid form with a gruesome head, tentacular mouth, and piercing eyes. Claws reach out for you and you feel a presence invade your mind.";

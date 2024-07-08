@@ -21,12 +21,12 @@ internal class NetherHoundMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3)
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3)
     };
     public override bool BashDoor => true;
     public override string Description => "You feel a soul-tearing chill upon viewing this beast, a ghostly form of darkness in the shape of a large dog.";

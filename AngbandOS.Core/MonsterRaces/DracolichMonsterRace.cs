@@ -23,12 +23,12 @@ internal class DracolichMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBeige;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6),
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

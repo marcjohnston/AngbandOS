@@ -16,11 +16,11 @@ internal class GrendelsMotherMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "She taught her son everything he knows.";

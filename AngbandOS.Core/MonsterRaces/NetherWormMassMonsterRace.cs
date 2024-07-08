@@ -17,9 +17,9 @@ internal class NetherWormMassMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 15;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp10AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp10AttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a disgusting mass of dark worms, eating each other, the floor, the air, you....";

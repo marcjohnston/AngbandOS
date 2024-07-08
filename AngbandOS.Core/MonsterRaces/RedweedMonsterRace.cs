@@ -20,9 +20,9 @@ internal class RedweedMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 3;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 1),
+        (nameof(TouchAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "A strange fibrous growth springing up everywhere.";
     public override bool EmptyMind => true;

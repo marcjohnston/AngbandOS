@@ -23,11 +23,11 @@ internal class SpectreMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseWisAttackEffect), 5, 5),
+        (nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(ClawAttack), nameof(LoseWisAttackEffect), 5, 5),
     };
     public override bool ColdBlood => true;
     public override string Description => "A phantasmal shrieking spirit. Its wail drives the intense cold of pure evil deep within your body.";

@@ -32,13 +32,13 @@ internal class OmaraxTheEyeTyrantMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp40AttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6)
+        (nameof(GazeAttack), nameof(Exp40AttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A disembodied eye, floating in the air. His gaze seems to shred your soul and his spells crush your will. He is ancient, his history steeped in forgotten evils, his atrocities numerous and sickening.";

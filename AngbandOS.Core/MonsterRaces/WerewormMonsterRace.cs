@@ -17,12 +17,12 @@ internal class WerewormMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 70;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp20AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(AcidAttackEffect), 2, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6)
+        (nameof(GazeAttack), nameof(Exp20AttackEffect), 0, 0),
+        (nameof(CrawlAttack), nameof(AcidAttackEffect), 2, 4),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A huge wormlike shape dripping acid, twisted by evil sorcery into a foul monster that breeds on death.";

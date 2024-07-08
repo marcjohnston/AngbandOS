@@ -16,12 +16,12 @@ internal class WaterTrollMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 2),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 2)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 2),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 2)
     };
     public override bool BashDoor => true;
     public override string Description => "He is a troll that reeks of brine.";

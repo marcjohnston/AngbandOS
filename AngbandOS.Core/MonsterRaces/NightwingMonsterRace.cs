@@ -27,12 +27,12 @@ internal class NightwingMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8)
+        (nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
+        (nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

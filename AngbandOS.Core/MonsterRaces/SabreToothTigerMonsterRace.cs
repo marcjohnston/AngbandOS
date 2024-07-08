@@ -17,12 +17,12 @@ internal class SabreToothTigerMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "A fierce and dangerous cat, its huge tusks and sharp claws would lacerate even the strongest armor.";

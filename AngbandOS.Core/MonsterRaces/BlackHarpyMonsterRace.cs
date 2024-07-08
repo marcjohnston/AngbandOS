@@ -17,11 +17,11 @@ internal class BlackHarpyMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 22;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
     };
     public override string Description => "A woman's face on the body of a vicious black bird.";
     public override bool Evil => true;

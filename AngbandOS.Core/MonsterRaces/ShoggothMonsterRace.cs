@@ -16,12 +16,12 @@ internal class ShoggothMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 6, 6)
+        (nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
+        (nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
+        (nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

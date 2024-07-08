@@ -29,13 +29,13 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 90;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainStaffChargesAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainWandChargesAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 5, 5)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(DrainStaffChargesAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(DrainWandChargesAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 5, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "Mandor is one of the greatest chaos Masters, a formidable magician.";

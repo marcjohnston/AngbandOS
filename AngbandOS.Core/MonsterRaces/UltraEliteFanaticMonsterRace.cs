@@ -19,10 +19,10 @@ internal class UltraEliteFanaticMonsterRace : MonsterRace
     protected override string SymbolName => nameof(LowerPSymbol);
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 12),
     };
     public override bool BashDoor => true;
     public override string Description => "Fighting for a good cause, and they consider you an agent of evil.";

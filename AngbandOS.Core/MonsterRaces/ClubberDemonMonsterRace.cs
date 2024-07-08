@@ -21,11 +21,11 @@ internal class ClubberDemonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 8, 12),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

@@ -22,12 +22,12 @@ internal class RobinHoodTheOutlawMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatItemAttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(EatItemAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "The legendary archer steals from the rich (you qualify). ";

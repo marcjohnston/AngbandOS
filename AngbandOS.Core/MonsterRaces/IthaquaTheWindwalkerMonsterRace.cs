@@ -31,12 +31,12 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBlue;
     
     public override int ArmorClass => 125;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(ColdAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(ColdAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 12, 12)
+        (nameof(ClawAttack), nameof(ColdAttackEffect), 12, 12),
+        (nameof(ClawAttack), nameof(ColdAttackEffect), 12, 12),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 12, 12),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 12, 12)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

@@ -16,12 +16,12 @@ internal class NightMareMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 85;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6)
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 2, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

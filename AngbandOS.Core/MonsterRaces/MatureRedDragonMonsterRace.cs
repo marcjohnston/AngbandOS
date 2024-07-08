@@ -22,11 +22,11 @@ internal class MatureRedDragonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
     };
     public override bool BashDoor => true;
     public override string Description => "A large dragon, scales tinted deep red.";

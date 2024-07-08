@@ -16,10 +16,10 @@ internal class FarmerMaggotMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightPink;
     
     public override int ArmorClass => 10;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(MoanAttack), null, 0, 0),
-        new MonsterAttackDefinition(nameof(MoanAttack), null, 0, 0),
+        (nameof(MoanAttack), null, 0, 0),
+        (nameof(MoanAttack), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "He's lost his dogs. He's had his mushrooms stolen. He's not a happy hobbit!";

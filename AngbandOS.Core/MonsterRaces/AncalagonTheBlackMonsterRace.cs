@@ -25,12 +25,12 @@ internal class AncalagonTheBlackMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 125;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 6, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 10, 14)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 6, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 10, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "'Rushing Jaws' is his name, and death is his game. No dragon of the brood of Glaurung can match him.";

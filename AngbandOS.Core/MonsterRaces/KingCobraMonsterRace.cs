@@ -17,10 +17,10 @@ internal class KingCobraMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(SpitAttack), nameof(BlindAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(SpitAttack), nameof(BlindAttackEffect), 1, 2),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a large snake with a hooded face.";

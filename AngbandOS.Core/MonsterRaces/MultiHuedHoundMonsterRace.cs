@@ -25,12 +25,12 @@ internal class MultiHuedHoundMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 4, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 4, 4)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 4, 4),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 4, 4)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

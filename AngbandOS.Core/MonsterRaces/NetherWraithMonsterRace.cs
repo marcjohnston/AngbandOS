@@ -25,12 +25,12 @@ internal class NetherWraithMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 55;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0)
     };
     public override bool ColdBlood => true;
     public override string Description => "A form that hurts the eye, death permeates the air around it. As it nears you, a coldness saps your soul.";

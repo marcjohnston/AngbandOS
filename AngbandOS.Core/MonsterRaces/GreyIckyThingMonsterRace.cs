@@ -16,9 +16,9 @@ internal class GreyIckyThingMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 12;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(TouchAttack), nameof(HurtAttackEffect), 1, 5),
     };
     public override string Description => "It is a smallish, slimy, icky, nasty creature.";
     public override bool EmptyMind => true;

@@ -20,9 +20,9 @@ internal class FireVampireMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 6;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(FireAttackEffect), 1, 4),
+        (nameof(TouchAttack), nameof(FireAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

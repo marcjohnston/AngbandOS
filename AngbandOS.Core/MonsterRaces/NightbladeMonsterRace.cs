@@ -16,11 +16,11 @@ internal class NightbladeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseConAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(LoseConAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "A dark elf so stealthy that he is almost impossible to see.";

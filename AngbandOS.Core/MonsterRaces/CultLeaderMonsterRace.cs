@@ -27,11 +27,11 @@ internal class CultLeaderMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "An evil priest, dressed all in black. Deadly spells hit you at an alarming rate as his black spiked mace rains down Attack after Attack on your pitiful frame.";

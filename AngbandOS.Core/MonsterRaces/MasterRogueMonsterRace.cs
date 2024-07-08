@@ -16,11 +16,11 @@ internal class MasterRogueMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(EatGoldAttackEffect), 4, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(HitAttack), nameof(EatGoldAttackEffect), 4, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "A thief of great power and shifty speed.";

@@ -16,12 +16,12 @@ internal class GolfimbulTheHillOrcChiefMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Copper;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "A leader of a band of raiding orcs, he picks on hobbits.";

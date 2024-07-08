@@ -16,12 +16,12 @@ internal class UglukTheUrukMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightWhite;
     
     public override int ArmorClass => 90;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "Another of Morgoth's servants, this orc is strong and cunning. He is ugly and scarred from many power struggles.";

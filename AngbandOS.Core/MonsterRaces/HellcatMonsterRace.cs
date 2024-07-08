@@ -17,11 +17,11 @@ internal class HellcatMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override string Description => "It is as large as a tiger, its yellow eyes are pupilless.";
     public override bool Evil => true;

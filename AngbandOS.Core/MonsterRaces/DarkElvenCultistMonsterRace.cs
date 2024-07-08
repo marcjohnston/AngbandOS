@@ -25,11 +25,11 @@ internal class DarkElvenCultistMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Turquoise;
     
     public override int ArmorClass => 75;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 7),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 7),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A powerful dark elf, with mighty nature-controlling enchantments.";

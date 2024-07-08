@@ -16,11 +16,11 @@ internal class OchreJellyMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 18;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

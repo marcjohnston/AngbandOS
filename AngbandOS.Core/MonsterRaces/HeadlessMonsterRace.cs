@@ -20,10 +20,10 @@ internal class HeadlessMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "Headless humanoid abominations created by a magical mutation.";

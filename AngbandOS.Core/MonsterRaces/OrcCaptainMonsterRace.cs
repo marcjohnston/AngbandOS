@@ -20,11 +20,11 @@ internal class OrcCaptainMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 59;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "An armored orc with an air of authority.";

@@ -24,11 +24,11 @@ internal class LawDrakeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Silver;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "This dragon is clever and cunning. It laughs at your puny efforts to disturb it.";

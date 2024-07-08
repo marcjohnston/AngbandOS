@@ -28,12 +28,12 @@ internal class MasterVampireMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

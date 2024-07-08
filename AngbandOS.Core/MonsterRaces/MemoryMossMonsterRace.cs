@@ -20,10 +20,10 @@ internal class MemoryMossMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
     };
     public override string Description => "A mass of green vegetation. You don't remember seeing anything like it before.";
     public override bool EmptyMind => true;

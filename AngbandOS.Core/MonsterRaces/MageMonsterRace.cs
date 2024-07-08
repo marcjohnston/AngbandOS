@@ -28,10 +28,10 @@ internal class MageMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "A fat mage with glasses.";

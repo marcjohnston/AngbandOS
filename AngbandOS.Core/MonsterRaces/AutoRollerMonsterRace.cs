@@ -15,12 +15,12 @@ internal class AutoRollerMonsterRace : MonsterRace
     protected override string SymbolName => nameof(LowerGSymbol);
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 7),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8)
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 7),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

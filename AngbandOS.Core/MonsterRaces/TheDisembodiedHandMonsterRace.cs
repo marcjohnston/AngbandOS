@@ -16,9 +16,9 @@ internal class TheDisembodiedHandMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 15;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

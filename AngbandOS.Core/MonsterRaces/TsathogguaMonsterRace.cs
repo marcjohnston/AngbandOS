@@ -25,12 +25,12 @@ internal class TsathogguaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 150;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 35, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 35, 5),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 35, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 35, 5)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 35, 5),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 35, 5),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 35, 5),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 35, 5)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

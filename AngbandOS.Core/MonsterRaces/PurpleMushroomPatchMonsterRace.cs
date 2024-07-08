@@ -16,11 +16,11 @@ internal class PurpleMushroomPatchMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
+        (nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
+        (nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
+        (nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
     };
     public override string Description => "Yum! It looks quite tasty.";
     public override bool EmptyMind => true;

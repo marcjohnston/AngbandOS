@@ -46,13 +46,13 @@ internal class NyarlathotepMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 165;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainStaffChargesAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainWandChargesAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 10, 2),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(BlindAttackEffect), 3, 2)
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 12, 12),
+        (nameof(HitAttack), nameof(DrainStaffChargesAttackEffect), 12, 12),
+        (nameof(HitAttack), nameof(DrainWandChargesAttackEffect), 12, 12),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 10, 2),
+        (nameof(HitAttack), nameof(BlindAttackEffect), 3, 2)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

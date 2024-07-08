@@ -16,11 +16,11 @@ internal class YetiMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 24;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "A large white figure covered in shaggy fur.";

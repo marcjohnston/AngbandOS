@@ -27,12 +27,12 @@ internal class NightcrawlerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 160;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseConAttackEffect), 8, 8),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseConAttackEffect), 8, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(AcidAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(AcidAttackEffect), 10, 10)
+        (nameof(StingAttack), nameof(LoseConAttackEffect), 8, 8),
+        (nameof(StingAttack), nameof(LoseConAttackEffect), 8, 8),
+        (nameof(BiteAttack), nameof(AcidAttackEffect), 10, 10),
+        (nameof(BiteAttack), nameof(AcidAttackEffect), 10, 10)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

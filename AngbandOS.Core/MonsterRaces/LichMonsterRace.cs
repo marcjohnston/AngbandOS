@@ -29,13 +29,13 @@ internal class LichMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBeige;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 8)
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 8),
+        (nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 8)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

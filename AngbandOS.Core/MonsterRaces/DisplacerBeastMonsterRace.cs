@@ -17,12 +17,12 @@ internal class DisplacerBeastMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10)
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a huge black panther, clubbed tentacles sprouting from its shoulders.";

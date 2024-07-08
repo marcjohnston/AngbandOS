@@ -23,10 +23,10 @@ internal class MiGoMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 2),
+        (nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 2),
     };
     public override bool ColdBlood => true;
     public override bool Cthuloid => true;

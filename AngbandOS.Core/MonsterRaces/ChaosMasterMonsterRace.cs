@@ -23,12 +23,12 @@ internal class ChaosMasterMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 2),
-        new MonsterAttackDefinition(nameof(KickAttack), nameof(HurtAttackEffect), 10, 2),
-        new MonsterAttackDefinition(nameof(PunchAttack), nameof(HurtAttackEffect), 10, 2),
-        new MonsterAttackDefinition(nameof(KickAttack), nameof(HurtAttackEffect), 10, 2)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 2),
+        (nameof(KickAttack), nameof(HurtAttackEffect), 10, 2),
+        (nameof(PunchAttack), nameof(HurtAttackEffect), 10, 2),
+        (nameof(KickAttack), nameof(HurtAttackEffect), 10, 2)
     };
     public override bool AttrAny => true;
     public override bool BashDoor => true;

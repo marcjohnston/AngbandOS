@@ -24,12 +24,12 @@ internal class FafnerTheDragonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 14, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 14, 6)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 14, 6),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 14, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "The mighty dragon of the Norse myth, Fafner was a giant who slew his brother to win a treasure hoard, and then transformed himself into a dragon, greedily watching over his hoard.";

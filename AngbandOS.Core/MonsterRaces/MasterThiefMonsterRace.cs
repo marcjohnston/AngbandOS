@@ -16,12 +16,12 @@ internal class MasterThiefMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(EatGoldAttackEffect), 4, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(EatItemAttackEffect), 4, 5)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(EatGoldAttackEffect), 4, 4),
+        (nameof(HitAttack), nameof(EatItemAttackEffect), 4, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "Cool and confident, fast and lithe; protect your possessions quickly!";

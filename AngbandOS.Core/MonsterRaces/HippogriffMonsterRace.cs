@@ -17,10 +17,10 @@ internal class HippogriffMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 14;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "A strange hybrid of eagle, lion and horse. It looks weird.";

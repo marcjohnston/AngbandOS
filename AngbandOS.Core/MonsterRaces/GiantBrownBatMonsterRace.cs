@@ -17,9 +17,9 @@ internal class GiantBrownBatMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 15;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
     };
     public override string Description => "It screeches as it attacks.";
     public override int FreqInate => 0;

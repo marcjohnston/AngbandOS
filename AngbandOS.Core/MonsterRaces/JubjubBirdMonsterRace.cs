@@ -17,11 +17,11 @@ internal class JubjubBirdMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 70;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ElectricityAttackEffect), 12, 12),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(HitAttack), nameof(ElectricityAttackEffect), 12, 12),
     };
     public override bool BashDoor => true;
     public override string Description => "A vast legendary bird, its iron talons rake the most impenetrable of surfaces and its screech echoes through the many winding dungeon corridors.";

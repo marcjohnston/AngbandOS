@@ -23,12 +23,12 @@ internal class DarkYoungOfShubNiggurathMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 75;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 5, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 5, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 6)
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 5, 6),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 5, 6),
+        (nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 6)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

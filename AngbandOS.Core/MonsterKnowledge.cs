@@ -1234,8 +1234,8 @@ internal class MonsterKnowledge
             }
             Attack method = _monsterType.Attacks[m].Method;
             AttackEffect? effect = _monsterType.Attacks[m].Effect;
-            int d1 = _monsterType.Attacks[m].DDice;
-            int d2 = _monsterType.Attacks[m].DSide;
+            int d1 = _monsterType.Attacks[m].Dice;
+            int d2 = _monsterType.Attacks[m].Sides;
             p = method.KnowledgeAction;
             if (effect == null)
                 q = null;
@@ -1378,8 +1378,8 @@ internal class MonsterKnowledge
     private bool KnowDamage(MonsterRace monsterType, MonsterKnowledge knowledge, int i)
     {
         int a = knowledge.RBlows[i];
-        int d1 = monsterType.Attacks[i].DDice;
-        int d2 = monsterType.Attacks[i].DSide;
+        int d1 = monsterType.Attacks[i].Dice;
+        int d2 = monsterType.Attacks[i].Sides;
         int d = d1 * d2;
         if ((4 + monsterType.Level) * a > 80 * d)
         {

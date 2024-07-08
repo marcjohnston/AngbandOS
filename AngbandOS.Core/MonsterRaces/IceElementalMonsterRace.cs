@@ -20,11 +20,11 @@ internal class IceElementalMonsterRace : MonsterRace
     protected override string SymbolName => nameof(UpperESymbol);
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 1, 3),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

@@ -25,11 +25,11 @@ internal class StormGiantMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ElectricityAttackEffect), 3, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(ElectricityAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a twenty-five foot tall giant wreathed in lighting.";

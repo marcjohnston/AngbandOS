@@ -44,12 +44,12 @@ internal class AbhothSourceOfUncleannessMonsterRace : MonsterRace
     
     public override int ArmorClass => 100;
 
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseConAttackEffect), 30, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 30, 4),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseIntAttackEffect), 1, 50),
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(LoseWisAttackEffect), 1, 50)
+        (nameof(CrushAttack), nameof(LoseConAttackEffect), 30, 4),
+        (nameof(HitAttack), nameof(LoseStrAttackEffect), 30, 4),
+        (nameof(TouchAttack), nameof(LoseIntAttackEffect), 1, 50),
+        (nameof(CrawlAttack), nameof(LoseWisAttackEffect), 1, 50)
     };
 
     public override bool AttrAny => true;

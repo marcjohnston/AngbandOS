@@ -16,10 +16,10 @@ internal class FlyingSkullMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Beige;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

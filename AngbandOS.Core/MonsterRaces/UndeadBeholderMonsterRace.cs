@@ -27,13 +27,13 @@ internal class UndeadBeholderMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6)
+        (nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

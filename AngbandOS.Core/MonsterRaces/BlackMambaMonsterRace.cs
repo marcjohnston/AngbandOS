@@ -17,9 +17,9 @@ internal class BlackMambaMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 32;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 4, 4),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 4, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It has glistening black skin, a sleek body and highly venomous fangs.";

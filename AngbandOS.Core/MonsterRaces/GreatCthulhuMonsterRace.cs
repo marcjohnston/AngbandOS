@@ -45,13 +45,13 @@ internal class GreatCthulhuMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 140;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 50, 4),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(DrainStaffChargesAttackEffect), 15, 2),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(DrainWandChargesAttackEffect), 15, 2),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(DisenchantAttackEffect), 15, 2),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 1, 100)
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 50, 4),
+        (nameof(ClawAttack), nameof(DrainStaffChargesAttackEffect), 15, 2),
+        (nameof(ClawAttack), nameof(DrainWandChargesAttackEffect), 15, 2),
+        (nameof(ClawAttack), nameof(DisenchantAttackEffect), 15, 2),
+        (nameof(TouchAttack), nameof(PoisonAttackEffect), 1, 100)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

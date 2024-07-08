@@ -16,10 +16,10 @@ internal class RedNagaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 4),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "A large red snake with a woman's torso.";

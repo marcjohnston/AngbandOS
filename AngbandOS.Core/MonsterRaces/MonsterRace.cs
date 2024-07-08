@@ -43,7 +43,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     /// Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns
     /// null, by default.
     /// </summary>
-    protected virtual MonsterAttackDefinition[]? AttackDefinitions => null;
+    protected virtual (string MethodName, string? EffectName, int Dice, int Sides)[]? AttackDefinitions => null;
 
     /// <summary>
     /// The monster's color can be anything (if 'AttrMulti' is set).
@@ -371,18 +371,18 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
 
         // Bind the monster attacks.
-        List<MonsterAttack> attackList = new();
+        List<(Attack, AttackEffect?, int, int)> attackList = new();
         if (AttackDefinitions != null)
         {
-            foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
+            foreach ((string MethodName, string? EffectName, int Dice, int Sides) in AttackDefinitions)
             {
-                Attack attack = Game.SingletonRepository.Get<Attack>(monsterAttackDefinition.MethodName);
+                Attack method = Game.SingletonRepository.Get<Attack>(MethodName);
                 AttackEffect? attackEffect = null;
-                if (monsterAttackDefinition.EffectName != null)
+                if (EffectName != null)
                 {
-                    attackEffect = Game.SingletonRepository.Get<AttackEffect>(monsterAttackDefinition.EffectName);
+                    attackEffect = Game.SingletonRepository.Get<AttackEffect>(EffectName);
                 }
-                attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
+                attackList.Add((method, attackEffect, Dice, Sides));
             }
         }
         Attacks = attackList.ToArray();
@@ -438,7 +438,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     /// Returns all of the attacks that the monster can perform in a single round.  This property is bound from the AttackDefinitions
     /// during the bind phase.  If there are no attacks, the array will be empty.  Null is not supported.
     /// </summary>
-    public MonsterAttack[] Attacks { get; private set; }
+    public (Attack Method, AttackEffect? Effect, int Dice, int Sides)[] Attacks { get; private set; }
 
     /// <summary>
     /// The number of hit points the monster has (click to update).

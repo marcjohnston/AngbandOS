@@ -15,10 +15,10 @@ internal class IceTrollMonsterRace : MonsterRace
     protected override string SymbolName => nameof(UpperTSymbol);
     
     public override int ArmorClass => 56;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 3, 6),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 3, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "He is a white troll with powerfully clawed hands.";

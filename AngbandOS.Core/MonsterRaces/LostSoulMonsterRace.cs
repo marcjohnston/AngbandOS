@@ -21,10 +21,10 @@ internal class LostSoulMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 10;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 2),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseWisAttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 2),
+        (nameof(TouchAttack), nameof(LoseWisAttackEffect), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is almost insubstantial.";

@@ -23,12 +23,12 @@ internal class DeathDrakeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6),
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 3, 6)
     };
     public override string Description => "It is a dragon-like form wrapped in darkness. You cannot make out its true form but you sense its evil.";
     public override bool Dragon => true;

@@ -21,11 +21,11 @@ internal class GhoulMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ParalyzeAttackEffect), 1, 5),
+        (nameof(ClawAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(ParalyzeAttackEffect), 1, 5),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

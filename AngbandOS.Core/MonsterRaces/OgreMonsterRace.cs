@@ -16,9 +16,9 @@ internal class OgreMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 33;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A hideous, smallish giant that is often found near or with orcs.";

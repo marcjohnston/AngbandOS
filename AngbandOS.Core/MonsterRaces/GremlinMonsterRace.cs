@@ -16,11 +16,11 @@ internal class GremlinMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(EatFoodAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(EatFoodAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(EatFoodAttackEffect), 1, 3),
+        (nameof(ClawAttack), nameof(EatFoodAttackEffect), 1, 2),
+        (nameof(ClawAttack), nameof(EatFoodAttackEffect), 1, 2),
+        (nameof(BiteAttack), nameof(EatFoodAttackEffect), 1, 3),
     };
     public override bool Demon => true;
     public override string Description => "Don't feed them after midnight!";

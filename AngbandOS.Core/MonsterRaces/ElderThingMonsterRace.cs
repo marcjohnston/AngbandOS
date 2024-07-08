@@ -27,12 +27,12 @@ internal class ElderThingMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 70;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseWisAttackEffect), 0, 0)
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(TouchAttack), nameof(LoseWisAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

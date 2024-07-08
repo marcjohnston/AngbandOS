@@ -22,12 +22,12 @@ internal class BastGoddessOfCatsMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 200;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(BlindAttackEffect), 10, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ParalyzeAttackEffect), 15, 1)
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        (nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 12),
+        (nameof(HitAttack), nameof(BlindAttackEffect), 10, 5),
+        (nameof(HitAttack), nameof(ParalyzeAttackEffect), 15, 1)
     };
     public override bool BashDoor => true;
     public override string Description => "She looks like a mortal female with a cat's head.";

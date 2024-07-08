@@ -17,10 +17,10 @@ internal class LargeGreySnakeMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 41;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "It is about ten feet long.";

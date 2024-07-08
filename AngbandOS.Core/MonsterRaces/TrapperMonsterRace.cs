@@ -15,12 +15,12 @@ internal class TrapperMonsterRace : MonsterRace
     protected override string SymbolName => nameof(PeriodSymbol);
     
     public override int ArmorClass => 75;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ParalyzeAttackEffect), 15, 1),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ParalyzeAttackEffect), 15, 1)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        (nameof(HitAttack), nameof(ParalyzeAttackEffect), 15, 1),
+        (nameof(HitAttack), nameof(ParalyzeAttackEffect), 15, 1)
     };
     public override bool AttrClear => true;
     public override bool CharClear => true;

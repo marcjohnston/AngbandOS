@@ -20,9 +20,9 @@ internal class WaterVortexMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(AcidAttackEffect), 3, 3),
+        (nameof(EngulfAttack), nameof(AcidAttackEffect), 3, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "A caustic spinning whirlpool of water.";

@@ -28,12 +28,12 @@ internal class GlaryssaSuccubusQueenMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightPink;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 4, 4),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 8, 1)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(LoseStrAttackEffect), 4, 4),
+        (nameof(TouchAttack), nameof(Exp80AttackEffect), 8, 1)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

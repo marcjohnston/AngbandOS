@@ -15,10 +15,10 @@ internal class LivingstoneMonsterRace : MonsterRace
     protected override string SymbolName => nameof(PoundSignSymbol);
     
     public override int ArmorClass => 28;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
     };
     public override bool CharMulti => true;
     public override bool ColdBlood => true;

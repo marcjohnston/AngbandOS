@@ -20,11 +20,11 @@ internal class BaronOfHellMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 130;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

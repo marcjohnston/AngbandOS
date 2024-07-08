@@ -20,9 +20,9 @@ internal class QuiverSlotMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(SporeAttack), nameof(ConfuseAttackEffect), 1, 1),
+        (nameof(SporeAttack), nameof(ConfuseAttackEffect), 1, 1),
     };
     public override bool ColdBlood => true;
     public override string Description => "An arrow hole in the floor, covered in fungal tendrils.";

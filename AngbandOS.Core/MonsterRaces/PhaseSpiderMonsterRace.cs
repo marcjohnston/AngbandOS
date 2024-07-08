@@ -22,11 +22,11 @@ internal class PhaseSpiderMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 25;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A spider that never seems quite there. Everywhere you look it is just half-seen in the corner of one eye.";

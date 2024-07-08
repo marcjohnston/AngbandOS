@@ -23,12 +23,12 @@ internal class WillOTheWispMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
     
     public override int ArmorClass => 150;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9)
     };
     public override string Description => "A strange ball of glowing light. It disappears and reappears and seems to draw you to it. You seem somehow compelled to stand still and watch its strange dancing motion.";
     public override bool EmptyMind => true;

@@ -31,12 +31,12 @@ internal class ShadowlordMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 150;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp40AttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp40AttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 4, 6)
+        (nameof(HitAttack), nameof(Exp40AttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(Exp40AttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(LoseStrAttackEffect), 4, 6),
+        (nameof(GazeAttack), nameof(TerrifyAttackEffect), 4, 6)
     };
     public override bool ColdBlood => true;
     public override string Description => "An aura of hatred, cowardice and falsehood surrounds you as this cloaked figure floats towards you.";

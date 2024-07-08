@@ -16,9 +16,9 @@ internal class SmeagolMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Beige;
     
     public override int ArmorClass => 12;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "He's been sneaking, and he wants his 'precious.'";

@@ -16,9 +16,9 @@ internal class RavingLunaticMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(DroolAttack), null, 0, 0),
+        (nameof(DroolAttack), null, 0, 0),
     };
     public override string Description => "Drooling and comical, but then, what do you expect?";
     public override int FreqInate => 0;

@@ -31,12 +31,12 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 10, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ColdAttackEffect), 10, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 10, 6),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 16, 6)
+        (nameof(CrushAttack), nameof(AcidAttackEffect), 10, 6),
+        (nameof(CrushAttack), nameof(ColdAttackEffect), 10, 6),
+        (nameof(CrushAttack), nameof(AcidAttackEffect), 10, 6),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 16, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A nightmarish fetid, black irididescence oozing towards you.";

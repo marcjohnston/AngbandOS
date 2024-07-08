@@ -23,11 +23,11 @@ internal class BlackKnightMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 70;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "He is a figure encased in deep black plate armor; he looks at you menacingly.";

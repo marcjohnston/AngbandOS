@@ -43,11 +43,11 @@ internal class GlaakiMonsterRace : MonsterRace
     protected override string SymbolName => nameof(UpperXSymbol);
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 15),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 15),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseConAttackEffect), 10, 15),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 15),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 15),
+        (nameof(HitAttack), nameof(LoseConAttackEffect), 10, 15),
     };
     public override bool BashDoor => true;
     public override string Description => "Oval bodied with countless thin spines, and three baleful yellow eyes on thin stalks.";

@@ -15,9 +15,9 @@ internal class GapingMawMonsterRace : MonsterRace
     protected override string SymbolName => nameof(PeriodSymbol);
     
     public override int ArmorClass => 14;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(TerrifyAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(TerrifyAttackEffect), 1, 4),
     };
     public override string Description => "A hole in the fabric of reality, leading to who knows what plane... ";
     public override int FreqInate => 0;

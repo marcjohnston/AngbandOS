@@ -17,10 +17,10 @@ internal class GiantGreyScorpionMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a giant grey scorpion. It looks poisonous.";

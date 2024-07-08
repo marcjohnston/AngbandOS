@@ -21,11 +21,11 @@ internal class OozeElementalMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

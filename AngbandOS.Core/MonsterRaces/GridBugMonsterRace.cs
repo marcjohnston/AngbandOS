@@ -17,9 +17,9 @@ internal class GridBugMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 2;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 4),
     };
     public override string Description => "A strange electric bug.";
     public override int FreqInate => 0;

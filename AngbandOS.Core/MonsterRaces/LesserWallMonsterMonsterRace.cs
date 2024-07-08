@@ -15,11 +15,11 @@ internal class LesserWallMonsterMonsterRace : MonsterRace
     protected override string SymbolName => nameof(PoundSignSymbol);
     
     public override int ArmorClass => 75;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override bool CharMulti => true;

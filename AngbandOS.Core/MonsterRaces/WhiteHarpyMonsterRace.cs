@@ -16,11 +16,11 @@ internal class WhiteHarpyMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 17;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 1),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 1),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 1),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 1),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override string Description => "A flying, screeching bird with a woman's face.";
     public override bool Evil => true;

@@ -23,12 +23,12 @@ internal class EmperorWightMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

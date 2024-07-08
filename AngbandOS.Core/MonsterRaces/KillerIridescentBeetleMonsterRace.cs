@@ -17,11 +17,11 @@ internal class KillerIridescentBeetleMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(ElectricityAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(ElectricityAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
+        (nameof(ClawAttack), nameof(ElectricityAttackEffect), 1, 12),
+        (nameof(ClawAttack), nameof(ElectricityAttackEffect), 1, 12),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

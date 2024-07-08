@@ -23,11 +23,11 @@ internal class AncientRedDragonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 5, 14),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 5, 14),
     };
     public override bool BashDoor => true;
     public override string Description => "A huge draconic form. Wisps of smoke steam from its nostrils and the extreme heat surrounding it makes you gasp for breath.";

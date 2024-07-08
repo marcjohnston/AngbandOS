@@ -17,9 +17,9 @@ internal class GiantBlackRatMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 12;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 4),
     };
     public override string Description => "It is a rodent of unusual size.";
     public override int FreqInate => 0;

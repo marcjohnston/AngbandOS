@@ -23,12 +23,12 @@ internal class SpiritNagaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Turquoise;
     
     public override int ArmorClass => 75;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8)
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8)
     };
     public override bool AttrClear => true;
     public override bool BashDoor => true;

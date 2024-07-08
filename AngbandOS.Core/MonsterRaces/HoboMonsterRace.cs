@@ -16,9 +16,9 @@ internal class HoboMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(DroolAttack), null, 0, 0),
+        (nameof(DroolAttack), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "Ugly doesn't begin to describe him.";

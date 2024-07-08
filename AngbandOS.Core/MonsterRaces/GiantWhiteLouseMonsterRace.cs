@@ -16,9 +16,9 @@ internal class GiantWhiteLouseMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 5;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "It is six inches long.";
     public override int FreqInate => 0;

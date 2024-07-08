@@ -37,12 +37,12 @@ internal class AetherVortexMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGrey;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(ElectricityAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(FireAttackEffect), 3, 3),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(AcidAttackEffect), 3, 3),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(ColdAttackEffect), 3, 3)
+        (nameof(EngulfAttack), nameof(ElectricityAttackEffect), 5, 5),
+        (nameof(EngulfAttack), nameof(FireAttackEffect), 3, 3),
+        (nameof(EngulfAttack), nameof(AcidAttackEffect), 3, 3),
+        (nameof(EngulfAttack), nameof(ColdAttackEffect), 3, 3)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

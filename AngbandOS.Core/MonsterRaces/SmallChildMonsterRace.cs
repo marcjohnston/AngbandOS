@@ -16,9 +16,9 @@ internal class SmallChildMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightWhite;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(WorshipAttack), null, 0, 0),
+        (nameof(WorshipAttack), null, 0, 0),
     };
     public override string Description => "A rather cute child with large trusting eyes.";
     public override int FreqInate => 0;

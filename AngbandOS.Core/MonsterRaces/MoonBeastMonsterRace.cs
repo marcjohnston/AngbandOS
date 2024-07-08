@@ -25,11 +25,11 @@ internal class MoonBeastMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(ButtAttack), nameof(HurtAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A great greyish-white slippery toad-creature with a mass of pink tentacles on the end of its snout.";

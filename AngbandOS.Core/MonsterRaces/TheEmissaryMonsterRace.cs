@@ -16,12 +16,12 @@ internal class TheEmissaryMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        (nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

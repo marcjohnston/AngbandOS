@@ -17,9 +17,9 @@ internal class AbyssWormMassMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 15;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(Exp10AttackEffect), 0, 0),
+        (nameof(CrawlAttack), nameof(Exp10AttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

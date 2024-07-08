@@ -25,11 +25,11 @@ internal class ShadowDrakeMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a dragon-like form wrapped in shadow. Glowing red eyes shine out in the dark.";

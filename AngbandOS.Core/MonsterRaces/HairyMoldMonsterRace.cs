@@ -16,9 +16,9 @@ internal class HairyMoldMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 15;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 1, 3),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 1, 3),
     };
     public override string Description => "It is a strange hairy growth on the dungeon floor.";
     public override bool EmptyMind => true;

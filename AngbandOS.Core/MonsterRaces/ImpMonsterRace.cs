@@ -27,10 +27,10 @@ internal class ImpMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

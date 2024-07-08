@@ -31,12 +31,12 @@ internal class KhamulTheEasterlingMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

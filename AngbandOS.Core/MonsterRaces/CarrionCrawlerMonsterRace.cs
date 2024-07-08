@@ -17,10 +17,10 @@ internal class CarrionCrawlerMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(ParalyzeAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(ParalyzeAttackEffect), 2, 6),
+        (nameof(StingAttack), nameof(ParalyzeAttackEffect), 2, 6),
+        (nameof(StingAttack), nameof(ParalyzeAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A hideous centipede covered in slime and with glowing tentacles around its head.";

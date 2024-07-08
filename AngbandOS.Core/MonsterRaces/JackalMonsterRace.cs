@@ -17,9 +17,9 @@ internal class JackalMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 3;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "It is a yapping snarling dog, dangerous when in a pack.";
     public override int FreqInate => 0;

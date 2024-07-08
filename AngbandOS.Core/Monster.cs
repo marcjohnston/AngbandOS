@@ -1410,8 +1410,8 @@ internal class Monster : IItemContainer
             int damage = 0;
             AttackEffect? effect = Race.Attacks[attackNumber].Effect;
             Attack method = Race.Attacks[attackNumber].Method;
-            int dDice = Race.Attacks[attackNumber].DDice;
-            int dSide = Race.Attacks[attackNumber].DSide;
+            int dDice = Race.Attacks[attackNumber].Dice;
+            int dSide = Race.Attacks[attackNumber].Sides;
             // Can't attack ourselves
             if (target == this)
             {
@@ -2855,8 +2855,8 @@ internal class Monster : IItemContainer
             int damage = 0;
             AttackEffect? effect = Race.Attacks[attackNumber].Effect;
             Attack method = Race.Attacks[attackNumber].Method;
-            int damageDice = Race.Attacks[attackNumber].DDice;
-            int damageSides = Race.Attacks[attackNumber].DSide;
+            int damageDice = Race.Attacks[attackNumber].Dice;
+            int damageSides = Race.Attacks[attackNumber].Sides;
 
             // Stop if player is dead or gone
             if (!alive || Game.IsDead || Game.NewLevelFlag)

@@ -20,11 +20,11 @@ internal class GrandMasterThiefMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 90;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatItemAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(TouchAttack), nameof(EatGoldAttackEffect), 5, 5),
+        (nameof(TouchAttack), nameof(EatItemAttackEffect), 5, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "A furtive figure who makes you want to hide all your valuables.";

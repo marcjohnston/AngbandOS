@@ -16,9 +16,9 @@ internal class YellowMoldMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 10;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
     };
     public override string Description => "It is a strange growth on the dungeon floor.";
     public override bool EmptyMind => true;

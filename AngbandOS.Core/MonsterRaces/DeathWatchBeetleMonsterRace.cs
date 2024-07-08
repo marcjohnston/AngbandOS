@@ -17,10 +17,10 @@ internal class DeathWatchBeetleMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 4),
-        new MonsterAttackDefinition(nameof(WailAttack), nameof(TerrifyAttackEffect), 5, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 5, 4),
+        (nameof(WailAttack), nameof(TerrifyAttackEffect), 5, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a giant beetle that produces a chilling sound.";

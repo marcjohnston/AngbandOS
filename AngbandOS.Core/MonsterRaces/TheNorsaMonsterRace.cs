@@ -29,12 +29,12 @@ internal class TheNorsaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBlue;
     
     public override int ArmorClass => 125;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(FireAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ElectricityAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(PoisonAttackEffect), 10, 14)
+        (nameof(CrushAttack), nameof(AcidAttackEffect), 8, 12),
+        (nameof(CrushAttack), nameof(FireAttackEffect), 8, 12),
+        (nameof(CrushAttack), nameof(ElectricityAttackEffect), 8, 12),
+        (nameof(CrushAttack), nameof(PoisonAttackEffect), 10, 14)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

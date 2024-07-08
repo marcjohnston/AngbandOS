@@ -16,9 +16,9 @@ internal class RedMoldMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 16;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(FireAttackEffect), 4, 4),
+        (nameof(TouchAttack), nameof(FireAttackEffect), 4, 4),
     };
     public override string Description => "It is a strange red growth on the dungeon floor; it seems to burn with flame.";
     public override bool EmptyMind => true;

@@ -30,12 +30,12 @@ internal class TulzschaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Chartreuse;
     
     public override int ArmorClass => 170;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(BlindAttackEffect), 10, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(HurtAttackEffect), 10, 10)
+        (nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(BlindAttackEffect), 10, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(EngulfAttack), nameof(HurtAttackEffect), 10, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "'A belching column of sick greenish flame... spouting volcanically from depths profound and inconceivable, casting no shadows as a healthy flame should, and coating the nitrous stone with a nasty venomous verdigris.' H.P.Lovecraft - 'The Festival'.";

@@ -15,10 +15,10 @@ internal class FrostGiantMonsterRace : MonsterRace
     protected override string SymbolName => nameof(UpperPSymbol);
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ColdAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(HitAttack), nameof(ColdAttackEffect), 3, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A twelve foot tall giant covered in furs.";

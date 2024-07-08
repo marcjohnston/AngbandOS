@@ -20,9 +20,9 @@ internal class BlackOozeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 6;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
+        (nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a strangely moving puddle.";

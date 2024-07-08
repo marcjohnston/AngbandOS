@@ -21,9 +21,9 @@ internal class TwoHeadedHydraMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A strange reptilian hybrid with two heads, guarding its hoard.";

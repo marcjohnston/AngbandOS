@@ -20,10 +20,10 @@ internal class BloodshotIckyThingMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 18;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(AcidAttackEffect), 2, 4),
+        (nameof(TouchAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(CrawlAttack), nameof(AcidAttackEffect), 2, 4),
     };
     public override string Description => "It is a strange, slimy, icky creature.";
     public override bool EmptyMind => true;

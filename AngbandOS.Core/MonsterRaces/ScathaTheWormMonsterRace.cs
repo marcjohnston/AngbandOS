@@ -22,12 +22,12 @@ internal class ScathaTheWormMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightPink;
     
     public override int ArmorClass => 130;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 6, 14)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 6, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "An ancient and wise Dragon. Scatha has grown clever over the long years. His scales are covered with frost, and his breath sends a shower of ice into the air.";

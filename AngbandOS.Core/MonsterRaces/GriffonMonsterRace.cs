@@ -17,10 +17,10 @@ internal class GriffonMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 15;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is half lion, half eagle. It flies menacingly towards you.";

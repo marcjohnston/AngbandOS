@@ -16,9 +16,9 @@ internal class SingingHappyDrunkMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BegAttack), null, 0, 0),
+        (nameof(BegAttack), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "He makes you glad to be sober.";

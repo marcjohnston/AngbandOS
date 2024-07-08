@@ -20,9 +20,9 @@ internal class DisenchanterEyeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Chartreuse;
     
     public override int ArmorClass => 10;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

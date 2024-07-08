@@ -22,9 +22,9 @@ internal class GibberingMoutherMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 20;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(CrawlAttack), nameof(PoisonAttackEffect), 1, 4),
     };
     public override string Description => "A chaotic mass of pulsating flesh, mouths and eyes.";
     public override bool EmptyMind => true;

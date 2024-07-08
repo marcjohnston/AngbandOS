@@ -17,12 +17,12 @@ internal class UmberHulkMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ConfuseAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6)
+        (nameof(GazeAttack), nameof(ConfuseAttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

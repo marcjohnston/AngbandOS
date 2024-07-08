@@ -16,11 +16,11 @@ internal class VermiciousKnidMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 55;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(TerrifyAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(TouchAttack), nameof(TerrifyAttackEffect), 4, 6),
+        (nameof(CrawlAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(EngulfAttack), nameof(HurtAttackEffect), 4, 6),
     };
     public override bool ColdBlood => true;
     public override string Description => "An amorphous shape that looks like wet grey clay with two pale eyes. It is totally silent as it oozes towards you.";

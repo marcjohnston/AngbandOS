@@ -25,12 +25,12 @@ internal class GreatWyrmOfLawMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Silver;
     
     public override int ArmorClass => 170;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 5, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "A massive dragon of powerful intellect. It seeks to dominate the universe and despises all other life. It sees all who do not obey it as mere insects to be crushed underfoot.";

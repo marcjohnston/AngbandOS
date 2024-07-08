@@ -33,12 +33,12 @@ internal class TheCollectorMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Copper;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseChaAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatItemAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseAllAttackEffect), 10, 1),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(LoseChaAttackEffect), 5, 5),
+        (nameof(TouchAttack), nameof(EatItemAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(LoseAllAttackEffect), 10, 1),
+        (nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0)
     };
     public override bool ColdBlood => true;
     public override string Description => "A strange little gnome, he's been collecting toys and friends and doesn't want to give them up.";

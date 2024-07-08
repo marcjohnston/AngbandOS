@@ -17,10 +17,10 @@ internal class VampireBatMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
     };
     public override bool ColdBlood => true;
     public override string Description => "An undead bat that flies at your neck hungrily.";

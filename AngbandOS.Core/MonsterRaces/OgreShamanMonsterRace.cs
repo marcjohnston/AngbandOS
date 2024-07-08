@@ -26,11 +26,11 @@ internal class OgreShamanMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 55;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is an ogre wrapped in furs and covered in grotesque body paints.";

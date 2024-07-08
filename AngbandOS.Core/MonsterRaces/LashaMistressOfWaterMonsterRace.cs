@@ -23,12 +23,12 @@ internal class LashaMistressOfWaterMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "With the body of a beautiful mermaid, she hides her cruelnature well, until it is too late.";

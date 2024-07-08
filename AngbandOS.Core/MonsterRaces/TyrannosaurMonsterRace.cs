@@ -17,12 +17,12 @@ internal class TyrannosaurMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 70;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 3, 6)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 3, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A horror from prehistory, reawakened by chaos.";

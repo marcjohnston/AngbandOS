@@ -25,12 +25,12 @@ internal class SpectralTyrannosaurMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 2, 13),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 2, 13),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 5, 8),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0)
+        (nameof(BiteAttack), nameof(Exp40AttackEffect), 2, 13),
+        (nameof(BiteAttack), nameof(Exp40AttackEffect), 2, 13),
+        (nameof(BiteAttack), nameof(LoseStrAttackEffect), 5, 8),
+        (nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "A deadly undead horror which looks like a skeletal tyrannosaur surrounded by a sickly green glow.";

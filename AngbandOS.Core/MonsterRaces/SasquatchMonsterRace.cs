@@ -17,11 +17,11 @@ internal class SasquatchMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 8),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A tall shaggy, furry humanoid, it could call the yeti brother.";

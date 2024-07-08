@@ -28,11 +28,11 @@ internal class IronLichMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(ColdAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(FireAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(ElectricityAttackEffect), 3, 6),
+        (nameof(ButtAttack), nameof(ColdAttackEffect), 3, 6),
+        (nameof(ButtAttack), nameof(FireAttackEffect), 3, 6),
+        (nameof(ButtAttack), nameof(ElectricityAttackEffect), 3, 6),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

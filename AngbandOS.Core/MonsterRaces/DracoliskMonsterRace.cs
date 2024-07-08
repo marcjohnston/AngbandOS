@@ -24,12 +24,12 @@ internal class DracoliskMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 8, 8),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0)
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 5, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 5, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 8, 8),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "A mixture of dragon and basilisk, the dracolisk stares at you with deep piercing eyes, its evil breath burning the ground where it stands.";

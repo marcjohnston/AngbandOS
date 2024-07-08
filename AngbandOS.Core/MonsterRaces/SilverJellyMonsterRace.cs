@@ -20,10 +20,10 @@ internal class SilverJellyMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Silver;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatLightAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatLightAttackEffect), 1, 3),
+        (nameof(TouchAttack), nameof(EatLightAttackEffect), 1, 3),
+        (nameof(TouchAttack), nameof(EatLightAttackEffect), 1, 3),
     };
     public override string Description => "It is a large pile of silver flesh that sucks all light from its surroundings.";
     public override bool EmptyMind => true;

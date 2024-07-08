@@ -27,10 +27,10 @@ internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 140;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 4, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
+        (nameof(GazeAttack), nameof(TerrifyAttackEffect), 4, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 8, 6),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

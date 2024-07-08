@@ -17,9 +17,9 @@ internal class RedWormMassMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 12;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(FireAttackEffect), 1, 6),
+        (nameof(CrawlAttack), nameof(FireAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a large slimy mass of worms.";

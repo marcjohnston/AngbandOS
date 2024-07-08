@@ -15,9 +15,9 @@ internal class WhiteIckyThingMonsterRace : MonsterRace
     protected override string SymbolName => nameof(LowerISymbol);
     
     public override int ArmorClass => 7;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(TouchAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override string Description => "It is a smallish, slimy, icky creature.";
     public override bool EmptyMind => true;

@@ -29,12 +29,12 @@ internal class RingMimicMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Gold;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4)
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4)
     };
     public override bool CharMulti => true;
     public override bool ColdBlood => true;

@@ -25,10 +25,10 @@ internal class ChaosTileMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 3, 4),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

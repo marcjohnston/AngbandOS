@@ -21,11 +21,11 @@ internal class EnergyHoundMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "Saint Elmo's Fire forms a ghostly halo around this hound, and sparks sting your fingers as energy builds up in the air around you.";

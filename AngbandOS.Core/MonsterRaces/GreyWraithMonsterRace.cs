@@ -23,11 +23,11 @@ internal class GreyWraithMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGrey;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

@@ -25,12 +25,12 @@ internal class FthagghuaLordOfTheFireVampiresMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 160;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(FireAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(HurtAttackEffect), 10, 10)
+        (nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
+        (nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
+        (nameof(EngulfAttack), nameof(FireAttackEffect), 10, 10),
+        (nameof(EngulfAttack), nameof(HurtAttackEffect), 10, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "A fiery serpentine entity, streaking through the air like a comet. The heat emanating from this creature is almost unbearable.";

@@ -21,12 +21,12 @@ internal class GromMasterOfEarthMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 97;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ShatterAttackEffect), 10, 10)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(ShatterAttackEffect), 10, 10)
     };
     public override bool ColdBlood => true;
     public override string Description => "A towering stone elemental stands before you. The walls and ceiling are reduced to rubble as Grom advances.";

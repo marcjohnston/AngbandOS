@@ -25,12 +25,12 @@ internal class ElevenHeadedHydraMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 12)
+        (nameof(BiteAttack), nameof(FireAttackEffect), 3, 12),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 3, 12),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 3, 12),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 3, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A strange reptilian hybrid with eleven smouldering heads.";

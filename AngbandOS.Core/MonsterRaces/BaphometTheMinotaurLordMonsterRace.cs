@@ -25,12 +25,12 @@ internal class BaphometTheMinotaurLordMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 12, 13),
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 12, 13),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10)
+        (nameof(ButtAttack), nameof(HurtAttackEffect), 12, 13),
+        (nameof(ButtAttack), nameof(HurtAttackEffect), 12, 13),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "A fearsome bull-headed demon, Baphomet swings a mighty axe as he curses all that defy him.";

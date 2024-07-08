@@ -22,11 +22,11 @@ internal class ChaosShapechangerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 14;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 3),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 3),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

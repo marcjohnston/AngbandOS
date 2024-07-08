@@ -21,10 +21,10 @@ internal class BlueDragonBatMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 26;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(ElectricityAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 3),
+        (nameof(StingAttack), nameof(ElectricityAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a glowing blue bat with a sharp tail.";

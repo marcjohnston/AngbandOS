@@ -21,10 +21,10 @@ internal class BansheeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBlue;
     
     public override int ArmorClass => 24;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp20AttackEffect), 0, 0),
+        (nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp20AttackEffect), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a ghostly woman's form that wails mournfully.";

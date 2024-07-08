@@ -154,7 +154,7 @@ internal class GenericMonsterRace : MonsterRace
     /// Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns
     /// null, by default.
     /// </summary>
-    protected override MonsterAttackDefinition[]? AttackDefinitions { get; } = null;
+    protected override (string, string?, int, int)[]? AttackDefinitions { get; } = null;
 
     /// <summary>
     /// The monster's color can be anything (if 'AttrMulti' is set).

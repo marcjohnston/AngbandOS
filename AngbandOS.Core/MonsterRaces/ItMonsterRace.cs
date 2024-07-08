@@ -34,12 +34,12 @@ internal class ItMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightWhite;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(BlindAttackEffect), 8, 8),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(TerrifyAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatItemAttackEffect), 0, 0)
+        (nameof(GazeAttack), nameof(BlindAttackEffect), 8, 8),
+        (nameof(TouchAttack), nameof(TerrifyAttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(EatItemAttackEffect), 0, 0)
     };
     public override bool AttrClear => true;
     public override bool CharClear => true;

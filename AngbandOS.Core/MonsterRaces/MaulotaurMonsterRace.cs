@@ -22,12 +22,12 @@ internal class MaulotaurMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ShatterAttackEffect), 5, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ShatterAttackEffect), 5, 6)
+        (nameof(ButtAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(ButtAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(HitAttack), nameof(ShatterAttackEffect), 5, 6),
+        (nameof(HitAttack), nameof(ShatterAttackEffect), 5, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a belligrent minotaur with some destructive magical arsenal, armed with a hammer.";

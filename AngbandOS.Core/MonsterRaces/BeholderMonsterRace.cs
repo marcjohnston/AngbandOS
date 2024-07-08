@@ -30,13 +30,13 @@ internal class BeholderMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp20AttackEffect), 2, 4),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 4),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6)
+        (nameof(GazeAttack), nameof(Exp20AttackEffect), 2, 4),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 4),
+        (nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(DrainStaffChargesAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(DrainWandChargesAttackEffect), 2, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A disembodied eye, surrounded by twelve smaller eyes on stalks.";

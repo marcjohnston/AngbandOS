@@ -22,11 +22,11 @@ internal class MatureBronzeDragonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 70;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 10),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 10),
     };
     public override bool BashDoor => true;
     public override string Description => "A large dragon with scales of rich bronze.";

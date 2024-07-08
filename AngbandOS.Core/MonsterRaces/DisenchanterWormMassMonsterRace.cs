@@ -17,9 +17,9 @@ internal class DisenchanterWormMassMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 5;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(DisenchantAttackEffect), 1, 4),
+        (nameof(CrawlAttack), nameof(DisenchantAttackEffect), 1, 4),
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

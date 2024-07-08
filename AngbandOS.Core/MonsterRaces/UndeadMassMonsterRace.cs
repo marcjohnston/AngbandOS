@@ -16,10 +16,10 @@ internal class UndeadMassMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 12;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 6),
+        (nameof(TouchAttack), nameof(PoisonAttackEffect), 1, 6),
+        (nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 6),
     };
     public override bool ColdBlood => true;
     public override string Description => "A sickening mound of decaying flesh, bones, hands and so on. It seems to be growing.";

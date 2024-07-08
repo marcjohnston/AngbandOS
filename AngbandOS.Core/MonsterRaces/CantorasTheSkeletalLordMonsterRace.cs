@@ -29,12 +29,12 @@ internal class CantorasTheSkeletalLordMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBlue;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp80AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp80AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5)
+        (nameof(GazeAttack), nameof(Exp80AttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(Exp80AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
+        (nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

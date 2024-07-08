@@ -20,12 +20,12 @@ internal class GorgimeraMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Chartreuse;
     
     public override int ArmorClass => 55;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 4),
-        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 1, 3)
+        (nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 4),
+        (nameof(ButtAttack), nameof(HurtAttackEffect), 1, 3)
     };
     public override bool BashDoor => true;
     public override string Description => "It has 3 heads - gorgon, goat and dragon - all attached to a lion's body.";

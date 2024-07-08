@@ -16,12 +16,12 @@ internal class LagdufTheSnagaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Chartreuse;
     
     public override int ArmorClass => 32;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9)
     };
     public override bool BashDoor => true;
     public override string Description => "A captain of a regiment of weaker orcs, Lagduf keeps his troop in order with displays of excessive violence.";

@@ -17,11 +17,11 @@ internal class HellbatMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 8),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 8),
     };
     public override string Description => "Devil-bats, notoriously difficult to kill.";
     public override bool Evil => true;

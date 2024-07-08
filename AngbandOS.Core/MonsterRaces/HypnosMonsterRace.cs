@@ -35,12 +35,12 @@ internal class HypnosMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightWhite;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 13, 13)
     };
     public override bool BashDoor => true;
     public override string Description => "Beautiful and youthful, this Outer God appears almost human. But appearances can be deceptive.";

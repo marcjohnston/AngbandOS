@@ -31,12 +31,12 @@ internal class TheWitchKingOfAngmarMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

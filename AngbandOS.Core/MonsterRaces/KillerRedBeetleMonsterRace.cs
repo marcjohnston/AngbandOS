@@ -17,10 +17,10 @@ internal class KillerRedBeetleMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 45;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(SpitAttack), nameof(FireAttackEffect), 4, 5),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 3, 4),
+        (nameof(SpitAttack), nameof(FireAttackEffect), 4, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a giant beetle wreathed in flames.";

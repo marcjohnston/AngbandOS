@@ -33,14 +33,14 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "Klingsor, whose hopeless effort to join the Knights of the Grail was thwarted, turned to black magic and became a deadly necromancer.";

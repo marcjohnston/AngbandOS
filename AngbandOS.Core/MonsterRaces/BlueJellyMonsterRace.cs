@@ -16,9 +16,9 @@ internal class BlueJellyMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(ColdAttackEffect), 1, 6),
+        (nameof(TouchAttack), nameof(ColdAttackEffect), 1, 6),
     };
     public override bool ColdBlood => true;
     public override string Description => "It's a large pile of pulsing blue flesh.";

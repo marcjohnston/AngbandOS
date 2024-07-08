@@ -21,11 +21,11 @@ internal class CryptCreepMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 12;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 3),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

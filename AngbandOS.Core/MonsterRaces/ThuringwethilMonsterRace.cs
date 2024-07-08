@@ -28,12 +28,12 @@ internal class ThuringwethilMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 145;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6)
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 5, 8),
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

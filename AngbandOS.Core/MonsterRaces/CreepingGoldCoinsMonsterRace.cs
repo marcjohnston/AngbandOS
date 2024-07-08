@@ -17,10 +17,10 @@ internal class CreepingGoldCoinsMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 36;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
+        (nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

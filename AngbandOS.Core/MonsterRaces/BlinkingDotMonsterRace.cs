@@ -20,9 +20,9 @@ internal class BlinkingDotMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(SporeAttack), nameof(ConfuseAttackEffect), 1, 4),
+        (nameof(SporeAttack), nameof(ConfuseAttackEffect), 1, 4),
     };
     public override string Description => "Is it there or is it not?";
     public override bool EmptyMind => true;

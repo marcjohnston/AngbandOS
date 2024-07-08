@@ -22,11 +22,11 @@ internal class ShantakMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 55;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
     };
     public override bool Cthuloid => true;
     public override string Description => "A scaly bird larger than an elephant, with a horse-like head.";

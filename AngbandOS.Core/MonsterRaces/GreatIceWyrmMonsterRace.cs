@@ -22,12 +22,12 @@ internal class GreatIceWyrmMonsterRace : MonsterRace
     protected override string SymbolName => nameof(UpperDSymbol);
     
     public override int ArmorClass => 170;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 5, 14)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 5, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "An immense dragon capable of awesome destruction. You have never felt such extreme cold, or witnessed such an icy stare. Begone quickly or feel its wrath!";

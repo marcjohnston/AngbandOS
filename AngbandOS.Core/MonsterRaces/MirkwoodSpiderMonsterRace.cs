@@ -17,11 +17,11 @@ internal class MirkwoodSpiderMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 25;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A strong and powerful spider from Mirkwood forest. Cunning and evil, it seeks to taste your juicy insides.";

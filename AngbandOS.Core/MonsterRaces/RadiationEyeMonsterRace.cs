@@ -20,9 +20,9 @@ internal class RadiationEyeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 6;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseStrAttackEffect), 1, 6),
+        (nameof(GazeAttack), nameof(LoseStrAttackEffect), 1, 6),
     };
     public override string Description => "A disembodied eye, crackling with energy.";
     public override int FreqInate => 11;

@@ -23,11 +23,11 @@ internal class PotionMimicMonsterRace : MonsterRace
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 3),
     };
     public override bool CharMulti => true;
     public override bool ColdBlood => true;

@@ -24,11 +24,11 @@ internal class DriderMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Blue;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A dark elven torso merged with the bloated form of a giant spider.";

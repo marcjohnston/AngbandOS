@@ -33,12 +33,12 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseWisAttackEffect), 20, 5),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseIntAttackEffect), 20, 5),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 10, 2),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseConAttackEffect), 10, 2)
+        (nameof(CrushAttack), nameof(LoseWisAttackEffect), 20, 5),
+        (nameof(CrushAttack), nameof(LoseIntAttackEffect), 20, 5),
+        (nameof(BiteAttack), nameof(LoseStrAttackEffect), 10, 2),
+        (nameof(BiteAttack), nameof(LoseConAttackEffect), 10, 2)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

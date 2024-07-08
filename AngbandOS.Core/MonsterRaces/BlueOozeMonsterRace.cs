@@ -16,9 +16,9 @@ internal class BlueOozeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBlue;
     
     public override int ArmorClass => 16;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(ColdAttackEffect), 1, 4),
+        (nameof(CrawlAttack), nameof(ColdAttackEffect), 1, 4),
     };
     public override string Description => "It's blue and it's oozing.";
     public override bool Drop60 => true;

@@ -16,12 +16,12 @@ internal class TheStormbringerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 99;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 8, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 8, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 8, 8)
+        (nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 8, 8),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 8, 8),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 8, 8)
     };
     public override bool BashDoor => true;
     public override bool CharMulti => true;

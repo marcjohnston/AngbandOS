@@ -20,9 +20,9 @@ internal class BloodshotEyeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 6;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(BlindAttackEffect), 2, 6),
+        (nameof(GazeAttack), nameof(BlindAttackEffect), 2, 6),
     };
     public override string Description => "A disembodied eye, bloodshot and nasty.";
     public override int FreqInate => 7;

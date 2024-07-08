@@ -28,12 +28,12 @@ internal class TheLerneanHydraMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 140;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 8, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 8, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 12, 6)
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 8, 6),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 8, 6),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 12, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A massive legendary hydra. It has twelve powerful heads. Its many eyes stare at you as clouds of smoke and poisonous vapour rise from its seething form.";

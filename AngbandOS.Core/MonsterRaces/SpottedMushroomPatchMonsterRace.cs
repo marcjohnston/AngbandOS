@@ -16,9 +16,9 @@ internal class SpottedMushroomPatchMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(SporeAttack), nameof(PoisonAttackEffect), 2, 4),
+        (nameof(SporeAttack), nameof(PoisonAttackEffect), 2, 4),
     };
     public override string Description => "Yum! It looks quite tasty.";
     public override bool EmptyMind => true;

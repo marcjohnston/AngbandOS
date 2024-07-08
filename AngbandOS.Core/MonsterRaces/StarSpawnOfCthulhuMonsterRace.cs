@@ -33,13 +33,13 @@ internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 90;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 1, 30),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(AcidAttackEffect), 1, 30),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(DisenchantAttackEffect), 2, 33)
+        (nameof(ClawAttack), nameof(PoisonAttackEffect), 1, 30),
+        (nameof(ClawAttack), nameof(AcidAttackEffect), 1, 30),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 1, 10),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 1, 10),
+        (nameof(CrushAttack), nameof(DisenchantAttackEffect), 2, 33)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

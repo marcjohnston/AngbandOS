@@ -26,12 +26,12 @@ internal class ThePhoenixMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 130;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12)
+        (nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
+        (nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
+        (nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
+        (nameof(HitAttack), nameof(FireAttackEffect), 9, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A massive glowing eagle bathed in flames. The searing heat chars your skin and melts your armor.";

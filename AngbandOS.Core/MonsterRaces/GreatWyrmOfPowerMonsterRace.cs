@@ -44,12 +44,12 @@ internal class GreatWyrmOfPowerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 111;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(PoisonAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(FireAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ElectricityAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 10, 18)
+        (nameof(CrushAttack), nameof(PoisonAttackEffect), 8, 12),
+        (nameof(CrushAttack), nameof(FireAttackEffect), 8, 12),
+        (nameof(CrushAttack), nameof(ElectricityAttackEffect), 8, 12),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 10, 18)
     };
     public override bool BashDoor => true;
     public override string Description => "The mightiest of all dragonkind, a great wyrm of power is seldom encountered in our world. It can crush stars with its might.";

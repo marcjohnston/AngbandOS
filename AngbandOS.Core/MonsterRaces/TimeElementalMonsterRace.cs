@@ -21,12 +21,12 @@ internal class TimeElementalMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 70;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseAllAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseAllAttackEffect), 3, 4),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 3, 4)
+        (nameof(TouchAttack), nameof(LoseAllAttackEffect), 3, 4),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 3, 4),
+        (nameof(TouchAttack), nameof(LoseAllAttackEffect), 3, 4),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 3, 4)
     };
     public override string Description => "You have not seen it yet.";
     public override bool EmptyMind => true;

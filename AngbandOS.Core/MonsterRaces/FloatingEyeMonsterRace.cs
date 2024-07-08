@@ -15,9 +15,9 @@ internal class FloatingEyeMonsterRace : MonsterRace
     protected override string SymbolName => nameof(LowerESymbol);
     
     public override int ArmorClass => 6;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
     };
     public override string Description => "A disembodied eye, floating a few feet above the ground.";
     public override int FreqInate => 0;

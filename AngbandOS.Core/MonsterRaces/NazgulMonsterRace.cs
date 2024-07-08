@@ -23,12 +23,12 @@ internal class NazgulMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(TerrifyAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(TerrifyAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 4, 6)
+        (nameof(HitAttack), nameof(TerrifyAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(TerrifyAttackEffect), 6, 6),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 4, 6),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 4, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

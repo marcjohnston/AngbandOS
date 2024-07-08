@@ -22,11 +22,11 @@ internal class AncientWhiteDragonMonsterRace : MonsterRace
     protected override string SymbolName => nameof(UpperDSymbol);
     
     public override int ArmorClass => 90;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 9),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 9),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 5, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 9),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 9),
+        (nameof(BiteAttack), nameof(ColdAttackEffect), 5, 12),
     };
     public override bool BashDoor => true;
     public override string Description => "A huge draconic form. Frost covers it from head to tail.";

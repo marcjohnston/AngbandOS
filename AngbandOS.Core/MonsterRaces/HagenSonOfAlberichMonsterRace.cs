@@ -22,12 +22,12 @@ internal class HagenSonOfAlberichMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Orange;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "Alberich's son, born of a mortal woman won with gold.";

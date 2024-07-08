@@ -24,11 +24,11 @@ internal class DeathQuasitMonsterRace : MonsterRace
     protected override string SymbolName => nameof(LowerUSymbol);
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseDexAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
+        (nameof(BiteAttack), nameof(LoseDexAttackEffect), 3, 6),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
     };
     public override bool Demon => true;
     public override string Description => "It is a demon of small stature, but its armored frame moves with lightning speed and its powers make it a tornado of death and destruction.";

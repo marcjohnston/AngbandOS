@@ -17,9 +17,9 @@ internal class GiantFruitFlyMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 14;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override string Description => "A fast-breeding, annoying pest.";
     public override int FreqInate => 0;

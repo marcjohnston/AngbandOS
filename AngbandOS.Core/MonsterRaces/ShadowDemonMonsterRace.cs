@@ -20,12 +20,12 @@ internal class ShadowDemonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseIntAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseWisAttackEffect), 1, 10)
+        (nameof(TouchAttack), nameof(Exp80AttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(ClawAttack), nameof(LoseIntAttackEffect), 1, 10),
+        (nameof(ClawAttack), nameof(LoseWisAttackEffect), 1, 10)
     };
     public override bool ColdBlood => true;
     public override bool Demon => true;

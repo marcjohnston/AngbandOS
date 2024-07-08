@@ -22,12 +22,12 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBlue;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
+        (nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

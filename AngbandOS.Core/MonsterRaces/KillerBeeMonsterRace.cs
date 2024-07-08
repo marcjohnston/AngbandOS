@@ -17,10 +17,10 @@ internal class KillerBeeMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 34;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseStrAttackEffect), 1, 4),
+        (nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
+        (nameof(StingAttack), nameof(LoseStrAttackEffect), 1, 4),
     };
     public override string Description => "It is poisonous and aggressive.";
     public override int FreqInate => 0;

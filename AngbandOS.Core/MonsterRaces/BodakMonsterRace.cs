@@ -22,11 +22,11 @@ internal class BodakMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 68;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp20AttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
+        (nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
+        (nameof(GazeAttack), nameof(Exp20AttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

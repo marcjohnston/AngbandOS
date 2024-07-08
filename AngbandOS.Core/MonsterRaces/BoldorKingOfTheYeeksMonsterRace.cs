@@ -26,11 +26,11 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 24;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A great yeek, powerful in magic and sorcery, but a yeek all the same.";

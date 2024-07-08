@@ -16,12 +16,12 @@ internal class BlackReaverMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 90;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 50),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 50),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 50),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 50)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 50),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 50),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 50),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 50)
     };
     public override bool Demon => true;
     public override string Description => "Clicking metal steps announce the arrival of this creature, A powerful undead warrior possessed by a major demon, it is unstoppable.";

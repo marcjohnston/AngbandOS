@@ -22,12 +22,12 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 185;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 20, 10),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(DisenchantAttackEffect), 5, 12)
+        (nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
+        (nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 20, 10),
+        (nameof(CrushAttack), nameof(DisenchantAttackEffect), 5, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A humanoid snake, Yig is one of the most poisonous entities in existance.";

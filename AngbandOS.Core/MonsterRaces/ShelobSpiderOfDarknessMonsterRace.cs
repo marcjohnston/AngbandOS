@@ -30,12 +30,12 @@ internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 10),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 2, 5),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseStrAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 2, 5)
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 10),
+        (nameof(StingAttack), nameof(PoisonAttackEffect), 2, 5),
+        (nameof(StingAttack), nameof(LoseStrAttackEffect), 1, 4),
+        (nameof(StingAttack), nameof(PoisonAttackEffect), 2, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "Shelob is an enormous bloated spider, rumored to have been one of the brood of Ungoliant the Unlight. Her poison is legendary, as is her ego, which may be her downfall. She used to guard the pass through Cirith Ungol, but has not been seen there for many eons.";

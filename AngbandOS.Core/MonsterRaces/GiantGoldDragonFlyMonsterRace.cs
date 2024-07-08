@@ -21,9 +21,9 @@ internal class GiantGoldDragonFlyMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "Large beating wings support this dazzling insect. A loud buzzing noise pervades the air.";

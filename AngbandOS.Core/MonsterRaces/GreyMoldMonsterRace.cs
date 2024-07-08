@@ -16,10 +16,10 @@ internal class GreyMoldMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
     };
     public override string Description => "A small strange growth.";
     public override bool EmptyMind => true;

@@ -16,10 +16,10 @@ internal class WaterSpiritMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Turquoise;
     
     public override int ArmorClass => 28;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 4),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 4),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 2, 4),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

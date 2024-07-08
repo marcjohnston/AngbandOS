@@ -16,10 +16,10 @@ internal class NightStalkerMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Grey;
     
     public override int ArmorClass => 46;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(HurtAttackEffect), 6, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(HurtAttackEffect), 6, 6),
+        (nameof(GazeAttack), nameof(HurtAttackEffect), 6, 6),
+        (nameof(GazeAttack), nameof(HurtAttackEffect), 6, 6),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

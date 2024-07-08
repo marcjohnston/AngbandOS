@@ -16,12 +16,12 @@ internal class DeathMoldMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Black;
     
     public override int ArmorClass => 60;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5)
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
+        (nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5)
     };
     public override string Description => "It is the epitome of all that is evil, in a mold. Its lifeless form draws power from sucking the souls of those that approach it, a nimbus of pure evil surrounds it. Luckily for you, it can't move.";
     public override bool Evil => true;

@@ -21,12 +21,12 @@ internal class GhostMonsterRace : MonsterRace
     protected override string SymbolName => nameof(UpperGSymbol);
     
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp20AttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseIntAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseWisAttackEffect), 1, 6)
+        (nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(Exp20AttackEffect), 0, 0),
+        (nameof(ClawAttack), nameof(LoseIntAttackEffect), 1, 6),
+        (nameof(ClawAttack), nameof(LoseWisAttackEffect), 1, 6)
     };
     public override bool ColdBlood => true;
     public override string Description => "You don't believe in them.";

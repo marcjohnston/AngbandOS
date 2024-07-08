@@ -23,11 +23,11 @@ internal class BarrowWightMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightWhite;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

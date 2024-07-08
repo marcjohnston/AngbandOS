@@ -23,11 +23,11 @@ internal class SpectatorMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGreen;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ConfuseAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
+        (nameof(GazeAttack), nameof(ParalyzeAttackEffect), 1, 4),
+        (nameof(GazeAttack), nameof(ConfuseAttackEffect), 1, 4),
+        (nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
     };
     public override string Description => "It has three small eyestalks and a large central eye.";
     public override bool EmptyMind => true;

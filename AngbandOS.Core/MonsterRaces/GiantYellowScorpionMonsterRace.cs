@@ -17,10 +17,10 @@ internal class GiantYellowScorpionMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 38;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 2, 5),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(StingAttack), nameof(PoisonAttackEffect), 2, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a giant scorpion with a sharp stinger.";

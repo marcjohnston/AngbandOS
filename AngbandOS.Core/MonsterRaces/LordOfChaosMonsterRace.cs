@@ -25,12 +25,12 @@ internal class LordOfChaosMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(KickAttack), nameof(HurtAttackEffect), 20, 2),
-        new MonsterAttackDefinition(nameof(KickAttack), nameof(HurtAttackEffect), 10, 2),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 20, 1),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseAllAttackEffect), 15, 1)
+        (nameof(KickAttack), nameof(HurtAttackEffect), 20, 2),
+        (nameof(KickAttack), nameof(HurtAttackEffect), 10, 2),
+        (nameof(HitAttack), nameof(PoisonAttackEffect), 20, 1),
+        (nameof(HitAttack), nameof(LoseAllAttackEffect), 15, 1)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

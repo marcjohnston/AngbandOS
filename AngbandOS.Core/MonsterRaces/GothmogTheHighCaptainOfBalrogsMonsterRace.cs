@@ -28,13 +28,13 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Red;
     
     public override int ArmorClass => 140;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
+        (nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

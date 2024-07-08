@@ -50,7 +50,7 @@ public class MonsterRaceDefinition : IPoco
     /// Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns
     /// null, by default.
     /// </summary>
-    public virtual MonsterAttackDefinition[]? AttackDefinitions { get; set; } = null;
+    public virtual (string MethodName, string? EffectName, int Dice, int Sides)[]? AttackDefinitions { get; set; } = null;
 
     /// <summary>
     /// The monster's color can be anything (if 'AttrMulti' is set).

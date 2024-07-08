@@ -28,12 +28,12 @@ internal class ChthonianMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 90;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2)
+        (nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
+        (nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
+        (nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2),
+        (nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2)
     };
     public override bool Cthuloid => true;
     public override string Description => "A huge subterranean worm whose body ends in a mass of groping tentacles.";

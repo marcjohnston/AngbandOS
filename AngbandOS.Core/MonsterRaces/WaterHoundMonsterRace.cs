@@ -21,12 +21,12 @@ internal class WaterHoundMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(AcidAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(AcidAttackEffect), 2, 8),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3)
+        (nameof(BiteAttack), nameof(AcidAttackEffect), 2, 8),
+        (nameof(BiteAttack), nameof(AcidAttackEffect), 2, 8),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3)
     };
     public override bool BashDoor => true;
     public override string Description => "Liquid footprints follow this hound as it pads around the dungeon. An acrid smell of acid rises from the dog's pelt.";

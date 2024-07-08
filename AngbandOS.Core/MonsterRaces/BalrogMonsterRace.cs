@@ -28,12 +28,12 @@ internal class BalrogMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 80;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 6, 2),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 6, 5)
+        (nameof(HitAttack), nameof(FireAttackEffect), 2, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 5, 6),
+        (nameof(HitAttack), nameof(FireAttackEffect), 6, 2),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 6, 5)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

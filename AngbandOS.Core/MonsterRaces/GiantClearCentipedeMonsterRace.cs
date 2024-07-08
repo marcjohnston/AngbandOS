@@ -17,10 +17,10 @@ internal class GiantClearCentipedeMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 4),
-        new MonsterAttackDefinition(nameof(StingAttack), nameof(HurtAttackEffect), 2, 4),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 4),
+        (nameof(StingAttack), nameof(HurtAttackEffect), 2, 4),
     };
     public override bool AttrClear => true;
     public override bool BashDoor => true;

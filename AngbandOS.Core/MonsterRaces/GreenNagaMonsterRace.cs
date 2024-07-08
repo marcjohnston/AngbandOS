@@ -16,10 +16,10 @@ internal class GreenNagaMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 40;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(SpitAttack), nameof(AcidAttackEffect), 2, 6),
+        (nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(SpitAttack), nameof(AcidAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A large green serpent with a female's torso. Her green skin glistens with acid.";

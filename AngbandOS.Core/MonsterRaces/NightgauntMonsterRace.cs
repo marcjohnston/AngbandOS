@@ -22,10 +22,10 @@ internal class NightgauntMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Purple;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseStrAttackEffect), 1, 5),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(ParalyzeAttackEffect), 3, 4),
+        (nameof(CrushAttack), nameof(LoseStrAttackEffect), 1, 5),
+        (nameof(TouchAttack), nameof(ParalyzeAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

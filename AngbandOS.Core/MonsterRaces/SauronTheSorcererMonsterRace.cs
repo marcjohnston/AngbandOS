@@ -40,14 +40,14 @@ internal class SauronTheSorcererMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Gold;
     
     public override int ArmorClass => 160;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 10, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 10, 12),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 10, 12),
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 10, 12),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainStaffChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0),
+        (nameof(TouchAttack), nameof(DrainWandChargesAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "Mighty in spells and enchantments,he created the One Ring. His eyes glow with power and his gaze seeks to destroy your soul. He has many servants, and rarely fights without them.";

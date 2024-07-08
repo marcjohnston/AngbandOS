@@ -16,10 +16,10 @@ internal class FilthyStreetUrchinMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGrey;
     
     public override int ArmorClass => 1;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BegAttack), null, 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
+        (nameof(BegAttack), null, 0, 0),
+        (nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
     };
     public override string Description => "He looks squalid and thoroughly revolting.";
     public override bool Evil => true;

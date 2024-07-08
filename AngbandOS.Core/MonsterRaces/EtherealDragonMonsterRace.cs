@@ -24,11 +24,11 @@ internal class EtherealDragonMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGrey;
     
     public override int ArmorClass => 100;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 6, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 4, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 6, 12),
     };
     public override string Description => "A huge dragon emanating from the elemental plains, the ethereal dragon is a master of light and dark. Its form disappears from sight as it cloaks itself in unearthly shadows.";
     public override bool Dragon => true;

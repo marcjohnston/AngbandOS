@@ -26,12 +26,12 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
-        new MonsterAttackDefinition(nameof(InsultAttack), null, 0, 0),
-        new MonsterAttackDefinition(nameof(InsultAttack), null, 0, 0)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        (nameof(InsultAttack), null, 0, 0),
+        (nameof(InsultAttack), null, 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "He's just like daddy! He knows mighty spells, but fortunately he is a yeek.";

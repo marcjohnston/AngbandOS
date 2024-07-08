@@ -16,9 +16,9 @@ internal class GreenMoldMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 14;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(TerrifyAttackEffect), 1, 4),
+        (nameof(HitAttack), nameof(TerrifyAttackEffect), 1, 4),
     };
     public override string Description => "It is a strange growth on the dungeon floor.";
     public override bool EmptyMind => true;

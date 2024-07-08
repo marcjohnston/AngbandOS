@@ -23,12 +23,12 @@ internal class DaolothMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Yellow;
     
     public override int ArmorClass => 180;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(AcidAttackEffect), 4, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10)
+        (nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        (nameof(HitAttack), nameof(AcidAttackEffect), 4, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 10, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "'Not shapeless, but so complex that the eye could recognise no discernable shape.' J.Ramsey Campbell - 'The Render of the Veils'.";

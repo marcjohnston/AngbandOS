@@ -16,12 +16,12 @@ internal class OlogMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Green;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 3),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 3)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 3),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 2, 3)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a massive intelligent troll with needle sharp fangs.";

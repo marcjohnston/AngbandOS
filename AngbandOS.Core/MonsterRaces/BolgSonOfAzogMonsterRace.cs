@@ -16,12 +16,12 @@ internal class BolgSonOfAzogMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 50;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6)
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        (nameof(HitAttack), nameof(HurtAttackEffect), 3, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A large and powerful orc. He looks just like his daddy. He is tall and fast, but fortunately blessed with orcish brains.";

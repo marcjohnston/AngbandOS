@@ -16,9 +16,9 @@ internal class ClearIckyThingMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Diamond;
     
     public override int ArmorClass => 6;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 2),
+        (nameof(TouchAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override bool AttrClear => true;
     public override string Description => "It is a smallish, slimy, icky, blobby creature.";

@@ -26,12 +26,12 @@ internal class SkyDrakeMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightBlue;
     
     public override int ArmorClass => 200;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ElectricityAttackEffect), 9, 15)
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(ClawAttack), nameof(HurtAttackEffect), 8, 12),
+        (nameof(BiteAttack), nameof(ElectricityAttackEffect), 9, 15)
     };
     public override bool BashDoor => true;
     public override string Description => "The mightiest elemental dragon of air, it can destroy you with ease.";

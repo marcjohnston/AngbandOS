@@ -17,12 +17,12 @@ internal class GiantSpiderMonsterRace : MonsterRace
     
     public override bool Animal => true;
     public override int ArmorClass => 16;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10)
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
+        (nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a vast black spider whose bulbous body is bloated with poison.";

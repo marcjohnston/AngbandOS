@@ -28,12 +28,12 @@ internal class SkullDrujMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.BrightGrey;
     
     public override int ArmorClass => 120;
-    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 4, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ParalyzeAttackEffect), 4, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseIntAttackEffect), 4, 4),
-        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseWisAttackEffect), 4, 4)
+        (nameof(BiteAttack), nameof(Exp80AttackEffect), 4, 4),
+        (nameof(BiteAttack), nameof(ParalyzeAttackEffect), 4, 4),
+        (nameof(BiteAttack), nameof(LoseIntAttackEffect), 4, 4),
+        (nameof(BiteAttack), nameof(LoseWisAttackEffect), 4, 4)
     };
     public override bool ColdBlood => true;
     public override string Description => "A glowing skull possessed by sorcerous power. It need not move, but merely blast you with mighty magic.";
