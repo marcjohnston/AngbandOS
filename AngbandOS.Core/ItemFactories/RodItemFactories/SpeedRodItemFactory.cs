@@ -26,5 +26,5 @@ internal class SpeedRodItemFactory : RodItemFactory
         (95, 16)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(SpeedIdentifiedAndUsedScriptItemAndDirection), "99", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(SpeedIdentifiedAndUsedScriptItemAndDirection), "99", false, 250);
 }

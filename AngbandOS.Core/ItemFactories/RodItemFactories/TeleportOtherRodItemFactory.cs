@@ -26,5 +26,5 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
         (45, 2)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(TeleportOtherIdentifiedAndUsedScriptItemAndDirection), "25", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(TeleportOtherIdentifiedAndUsedScriptItemAndDirection), "25", true, 250);
 }

@@ -26,5 +26,5 @@ internal class EnlightenmentRodItemFactory : RodItemFactory
         (65, 4)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(EnlightenmentIdentifiedAndUsedScriptItemAndDirection), "99", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(EnlightenmentIdentifiedAndUsedScriptItemAndDirection), "99", false, 250);
 }

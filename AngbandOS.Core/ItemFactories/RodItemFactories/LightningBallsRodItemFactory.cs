@@ -26,5 +26,5 @@ internal class LightningBallsRodItemFactory : RodItemFactory
         (55, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(ElectricityBall32r2IdentifiedAndUsedScriptItemAndDirection), "23", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(ElectricityBall32r2IdentifiedAndUsedScriptItemAndDirection), "23", true, 250);
 }

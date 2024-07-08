@@ -26,5 +26,5 @@ internal class HavocRodItemFactory : RodItemFactory
         (100, 16)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(CallChaosIdentifiedAndUsedScriptItemAndDirection), "250", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(CallChaosIdentifiedAndUsedScriptItemAndDirection), "250", true, 250);
 }

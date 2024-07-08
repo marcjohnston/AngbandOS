@@ -26,5 +26,5 @@ internal class LightRodItemFactory : RodItemFactory
         (10, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(LightBoltIdentifiedAndUsedScriptItemAndDirection), "9", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(LightBoltIdentifiedAndUsedScriptItemAndDirection), "9", true, 250);
 }

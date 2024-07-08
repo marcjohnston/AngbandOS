@@ -26,5 +26,5 @@ internal class FrostBoltsRodItemFactory : RodItemFactory
         (25, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(ColdBolt5d8IdentifiedAndUsedScriptItemAndDirection), "13", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(ColdBolt5d8IdentifiedAndUsedScriptItemAndDirection), "13", true, 250);
 }

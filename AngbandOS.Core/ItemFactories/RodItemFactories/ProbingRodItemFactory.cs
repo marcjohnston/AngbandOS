@@ -26,5 +26,5 @@ internal class ProbingRodItemFactory : RodItemFactory
         (40, 4)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(ProbingIdentifiedAndUsedScriptItemAndDirection), "50", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(ProbingIdentifiedAndUsedScriptItemAndDirection), "50", false, 250);
 }

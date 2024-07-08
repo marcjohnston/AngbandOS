@@ -26,5 +26,5 @@ internal class PolymorphRodItemFactory : RodItemFactory
         (35, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(PolymorphIdentifiedAndUsedScriptItemAndDirection), "25", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(PolymorphIdentifiedAndUsedScriptItemAndDirection), "25", true, 250);
 }

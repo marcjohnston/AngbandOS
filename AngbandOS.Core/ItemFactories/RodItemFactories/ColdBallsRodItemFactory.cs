@@ -26,5 +26,5 @@ internal class ColdBallsRodItemFactory : RodItemFactory
         (60, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(ColdBall48r2IdentifiedAndUsedScriptItemAndDirection), "25", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(ColdBall48r2IdentifiedAndUsedScriptItemAndDirection), "25", true, 250);
 }

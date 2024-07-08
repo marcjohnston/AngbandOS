@@ -26,5 +26,5 @@ internal class AcidBoltsRodItemFactory : RodItemFactory
         (40, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(AcidBolts6d8IdentifiedAndUsedScriptItemAndDirection), "12", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(AcidBolts6d8IdentifiedAndUsedScriptItemAndDirection), "12", true, 250);
 }

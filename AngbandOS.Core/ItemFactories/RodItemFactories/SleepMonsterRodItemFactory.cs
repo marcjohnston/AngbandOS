@@ -26,5 +26,5 @@ internal class SleepMonsterRodItemFactory : RodItemFactory
         (30, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(SleepMonsterIdentifiedAndUsedScriptItemAndDirection), "18", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(SleepMonsterIdentifiedAndUsedScriptItemAndDirection), "18", true, 250);
 }

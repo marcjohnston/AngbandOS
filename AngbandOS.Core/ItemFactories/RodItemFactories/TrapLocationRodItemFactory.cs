@@ -26,5 +26,5 @@ internal class TrapLocationRodItemFactory : RodItemFactory
         (5, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(TrapLocationIdentifiedAndUsedScriptItemAndDirection), "1d10+10", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(TrapLocationIdentifiedAndUsedScriptItemAndDirection), "1d10+10", false, 250);
 }

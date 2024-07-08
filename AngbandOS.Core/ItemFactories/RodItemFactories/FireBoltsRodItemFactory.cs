@@ -26,5 +26,5 @@ internal class FireBoltsRodItemFactory : RodItemFactory
         (30, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(FireBolt8d8IdentifiedAndUsedScriptItemAndDirection), "15", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(FireBolt8d8IdentifiedAndUsedScriptItemAndDirection), "15", true, 250);
 }

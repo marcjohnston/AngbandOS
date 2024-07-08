@@ -27,5 +27,5 @@ internal class DoorStairLocationRodItemFactory : RodItemFactory
     };
     public override int Weight => 15;
 
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(DetectDoorsAndStairsIdentifiedAndUsedScriptItemAndDirection), "70", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(DetectDoorsAndStairsIdentifiedAndUsedScriptItemAndDirection), "70", false, 250);
 }

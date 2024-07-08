@@ -93,7 +93,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// Returns the amount of mana needed to consume to keep a potion that was quaffed.
     /// </summary>
     public virtual int StaffManaValue => 0; // TODO: Refactor into the binder
-    public virtual int RodManaValue => 0; // TODO: Refactor into the binder
 
     /// <summary>
     /// Returns the maximum number of items that can be enchanted at one time.  A divisor of 1 is returned, by default.  Ammunition items return 20.  Item counts greater than this value
@@ -987,7 +986,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             IIdentifiedAndUsedScriptItemDirection identifiedAndUsedScriptItemDirection = Game.SingletonRepository.Get<IIdentifiedAndUsedScriptItemDirection>(ZapBinderDetails.Value.ScriptName);
             Roll roll = Game.ParseRollExpression(ZapBinderDetails.Value.TurnsToRecharge);
             bool requiresAiming = ZapBinderDetails.Value.RequiresAiming;
-            ZapDetails = (identifiedAndUsedScriptItemDirection, roll, requiresAiming);
+            int manaEquivalent = ZapBinderDetails.Value.ManaEquivalent;
+            ZapDetails = (identifiedAndUsedScriptItemDirection, roll, requiresAiming, manaEquivalent);
         }
 
         AmmunitionItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AmmunitionItemFactoryNames);
@@ -995,8 +995,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         if (QuaffBinderDetails != null)
         {
             INoticeableScript quaffNoticeableScript = Game.SingletonRepository.Get<INoticeableScript>(QuaffBinderDetails.Value.QuaffScriptName);
-            IUnfriendlyScript smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffBinderDetails.Value.SmashScriptName);
-            QuaffDetails = (quaffNoticeableScript, smashUnfriendlyScript, QuaffBinderDetails.Value.ManaEquivalent);
+            IUnfriendlyScript? smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffBinderDetails.Value.SmashScriptName);
+            int manaEquivalent = QuaffBinderDetails.Value.ManaEquivalent;
+            QuaffDetails = (quaffNoticeableScript, smashUnfriendlyScript, manaEquivalent);
         }
     }
 

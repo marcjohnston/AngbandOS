@@ -26,5 +26,5 @@ internal class RecallRodItemFactory : RodItemFactory
         (30, 4)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(RecallIdentifiedAndUsedScriptItemAndDirection), "60", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(RecallIdentifiedAndUsedScriptItemAndDirection), "60", false, 250);
 }

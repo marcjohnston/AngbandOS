@@ -124,7 +124,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.RodManaValue);
+            channeled = Game.DoCmdChannel(item, item.Factory.ZapDetails.Value.ManaEquivalent);
             if (channeled)
             {
                 item.RodRechargeTimeRemaining = 0;

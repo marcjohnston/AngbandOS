@@ -26,5 +26,5 @@ internal class CuringRodItemFactory : RodItemFactory
         (65, 8)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(CuringIdentifiedAndUsedScriptItemAndDirection), "999", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(CuringIdentifiedAndUsedScriptItemAndDirection), "999", false, 250);
 }

@@ -26,5 +26,5 @@ internal class IlluminationRodItemFactory : RodItemFactory
         (20, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(IlluminationIdentifiedAndUsedScriptItemAndDirection), "1d11+10", false);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(IlluminationIdentifiedAndUsedScriptItemAndDirection), "1d11+10", false, 250);
 }

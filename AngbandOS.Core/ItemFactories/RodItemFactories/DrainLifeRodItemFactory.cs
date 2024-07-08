@@ -26,5 +26,5 @@ internal class DrainLifeRodItemFactory : RodItemFactory
         (75, 4)
     };
     public override int Weight => 15;
-    protected override (string, string, bool)? ZapBinderDetails => (nameof(DrainLifeIdentifiedAndUsedScriptItemAndDirection), "23", true);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(DrainLifeIdentifiedAndUsedScriptItemAndDirection), "23", true, 250);
 }
