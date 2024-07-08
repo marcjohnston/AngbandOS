@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents an object that can compare items with some predefined matching criteria.  The predefined matching criteria are bound during the bind phase by adding <see cref="ItemMatch"/> objects
 /// to the <see cref="ItemMatches"/> list.  This binding of predefined <see cref="ItemMatch"/> objects allows the matching of items at run-time to be as fast as possible; no unnecessary comparisions
-/// are performed.
+/// are performed.  These <see cref="ItemFilter"/> objects are designed to support configurability.
 /// </summary>
 [Serializable]
 internal abstract class ItemFilter : IGetKey, IItemFilter
