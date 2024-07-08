@@ -37,7 +37,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     /// <summary>
     /// Returns true because a lantern contains oil which is valid as fuel for other lanterns.
     /// </summary>
-    public override bool IsFuelForLantern => true;
+    public override bool IsLanternFuel => true;
 
     protected override string SymbolName => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

@@ -7,13 +7,16 @@
 
 namespace AngbandOS.Core.ItemMatches;
 
+/// <summary>
+/// Represents an object that performs either a positive or negative string match from multiple strings (e.g. Contains) on an item property.
+/// </summary>
 [Serializable]
 internal class StringsItemMatch : ItemMatch
 {
     public string[] Strings { get; }
     public bool TrueToMatchFalseToNotMatch { get; }
-    public Func<Item, string> EvaluateLambda { get; }
-    public StringsItemMatch(Game game, string title, string[] strings, bool trueToMatchFalseToNotMatch, Func<Item, string> evaluateLambda) : base(game, title)
+    public GetItemProperty<string> EvaluateLambda { get; }
+    public StringsItemMatch(Game game, string[] strings, bool trueToMatchFalseToNotMatch, GetItemProperty<string> evaluateLambda) : base(game, $"{evaluateLambda.DebugDescription} {(trueToMatchFalseToNotMatch ? "" : "not ")}in({String.Join(",", strings)})")
     {
         Strings = strings;
         TrueToMatchFalseToNotMatch = trueToMatchFalseToNotMatch;
@@ -22,8 +25,9 @@ internal class StringsItemMatch : ItemMatch
 
     public override bool Matches(Item item)
     {
-        string value = EvaluateLambda(item);
+        string value = EvaluateLambda.Get(item);
         bool isOneOf = Strings.Contains(value);
         return isOneOf == TrueToMatchFalseToNotMatch;
     }
 }
+

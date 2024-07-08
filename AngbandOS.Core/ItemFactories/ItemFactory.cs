@@ -82,7 +82,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns true, if the item can be used to dig; false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool CanBeUsedToDig => false;
+    public virtual bool CanTunnel => false;
 
     /// <summary>
     /// Returns true, if the item is a bow and can project arrows; false, otherwise.  Returns false, by default.
@@ -1016,7 +1016,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns true, if the item is fuel for a lantern.  Returns false, by default.
     /// </summary>
-    public virtual bool IsFuelForLantern => false;
+    public virtual bool IsLanternFuel => false;
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.

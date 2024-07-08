@@ -5,12 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.ItemFactories;
-
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents an item filter for all items regardless of their value.  Does not filter any items out of the selection.
+/// Represents an object that can compare items with some predefined matching criteria.  The predefined matching criteria are bound during the bind phase by adding <see cref="ItemMatch"/> objects
+/// to the <see cref="ItemMatches"/> list.  This binding of predefined <see cref="ItemMatch"/> objects allows the matching of items at run-time to be as fast as possible; no unnecessary comparisions
+/// are performed.
 /// </summary>
 [Serializable]
 internal abstract class ItemFilter : IGetKey, IItemFilter
@@ -34,28 +34,43 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
-    private ItemMatch[] AddStringsMatch(string title, string[]? matchingStrings, string[]? nonmatchingStrings, Func<Item, string> positiveLambdaEvaluation)
+    /// <summary>
+    /// Adds either or both <see cref="StringsItemMatch"/> objects for positive and negative comparisons using two nullable string array properties.  
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="matchingStrings"></param>
+    /// <param name="nonmatchingStrings"></param>
+    /// <param name="positiveLambdaEvaluation"></param>
+    /// <returns></returns>
+    private ItemMatch[] AddStringsMatch(string[]? matchingStrings, string[]? nonmatchingStrings, GetItemProperty<string> positiveLambdaEvaluation)
     {
         List<ItemMatch> itemMatchList = new List<ItemMatch>();
         if (matchingStrings != null)
         {
-            itemMatchList.Add(new StringsItemMatch(Game, $"{title} in ({String.Join(",", matchingStrings)})", matchingStrings, true, positiveLambdaEvaluation));
+            itemMatchList.Add(new StringsItemMatch(Game, matchingStrings, true, positiveLambdaEvaluation));
         }
         if (nonmatchingStrings != null)
         {
-            itemMatchList.Add(new StringsItemMatch(Game, $"{title} not in ({String.Join(",", nonmatchingStrings)})", nonmatchingStrings, false, positiveLambdaEvaluation));
+            itemMatchList.Add(new StringsItemMatch(Game, nonmatchingStrings, false, positiveLambdaEvaluation));
         }
         return itemMatchList.ToArray();
     }
 
-    private ItemMatch[] AddBooleanMatch(string title, bool? boolean, Func<Item, bool> positiveLambdaEvaluation)
+    /// <summary>
+    /// Adds either or both <see cref="BooleanItemMatch"/> objects for positive and negative comparising using a single nullable boolean property.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="boolean"></param>
+    /// <param name="positiveLambdaEvaluation"></param>
+    /// <returns></returns>
+    private ItemMatch[] AddBooleanMatch(bool? boolean, GetItemProperty<bool> positiveLambdaEvaluation)
     {
         List<ItemMatch> itemMatchList = new List<ItemMatch>();
         if (boolean.HasValue)
         {
             return new ItemMatch[]
             {
-                new BooleanItemMatch(Game, $"{title}={boolean.Value}", boolean.Value, positiveLambdaEvaluation)
+                new BooleanItemMatch(Game, boolean.Value, positiveLambdaEvaluation)
             };
         }
         return new ItemMatch[] { };
@@ -64,40 +79,29 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     public virtual void Bind()
     {
         List<ItemMatch> itemMatchList = new List<ItemMatch>();
-        itemMatchList.AddRange(AddBooleanMatch("CanBeActivated", CanBeActivated, (Item item) => item.GetMergedCharacteristics().Activation != null));
-        itemMatchList.AddRange(AddBooleanMatch("CanBeAimed", CanBeAimed, (Item item) => item.Factory.AimingDetails != null));
-        itemMatchList.AddRange(AddBooleanMatch("CanBeEaten", CanBeEaten, (Item item) => item.Factory.CanBeEaten));
-        itemMatchList.AddRange(AddBooleanMatch("CanBeFired", CanBeFired, (Item item) =>
-        {
-            RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
-            WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
-            Item? rangedWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
-            if (rangedWeapon == null || rangedWeapon.Factory.AmmunitionItemFactories == null)
-            {
-                return false;
-            }
-
-            return rangedWeapon.Factory.AmmunitionItemFactories.Contains(item.Factory);
-        }));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeQuaffed), CanBeQuaffed, (Item item) => item.Factory.QuaffDetails != null));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeRead), CanBeRead, (Item item) => item.Factory.CanBeRead));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeRecharged), CanBeRecharged, (Item item) => item.Factory.RechargeScript != null));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeUsed), CanBeUsed, (Item item) => item.Factory.CanBeUsed));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeUsedToDig), CanBeUsedToDig, (Item item) => item.Factory.CanBeUsedToDig));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanBeZapped), CanBeZapped, (Item item) => item.Factory.ZapDetails != null));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(CanProjectArrows), CanProjectArrows, (Item item) => item.Factory.CanProjectArrows));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsArmor), IsArmor, (Item item) => item.Factory.IsArmor));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsBlessed), IsBlessed, (Item item) => item.Characteristics.Blessed));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsFuelForTorch), IsFuelForTorch, (Item item) => item.Factory.IsFuelForTorch));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsKnown), IsKnown, (Item item) => item.IsKnown()));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsLanternFuel), IsLanternFuel, (Item item) => item.Factory.IsFuelForLantern));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsOfValue), IsOfValue, (Item item) => item.Value() > 0));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsTooHeavyToWield), IsTooHeavyToWield, (Item item) => Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < item.Weight / 10));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsUsableSpellBook), IsUsableSpellBook, (Item item) => Game.PrimaryRealm != null && Game.PrimaryRealm.SpellBooks.Contains(item.Factory) || Game.SecondaryRealm != null && Game.SecondaryRealm.SpellBooks.Contains(item.Factory)));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsWeapon), IsWeapon, (Item item) => item.Factory.IsWeapon));
-        itemMatchList.AddRange(AddBooleanMatch(nameof(IsWearableOrWieldable), IsWearableOrWieldable, (Item item) => item.Factory.IsWearableOrWieldable));
-        itemMatchList.AddRange(AddStringsMatch("FactoryItemClassKeys", AnyMatchingFactoryItemClassKeys, AllNonMatchingFactoryItemClassKeys, (Item item) => item.Factory.ItemClass.Key));
-        itemMatchList.AddRange(AddStringsMatch("FactoryKeys", AnyMatchingFactoryKeys, AllNonMatchingFactoryKeys, (Item item) => item.Factory.Key));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeActivated, new CanBeActivatedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeAimed, new CanBeAimedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeEaten, new CanBeEatenBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeFired, new CanBeFiredBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeQuaffed, new CanBeQuaffedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeRead, new CanBeReadBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeRecharged, new CanBeReadBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeUsed, new CanBeUsedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeUsedToDig, new CanTunnelBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanBeZapped, new CanBeZappedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanProjectArrows, new CanProjectArrowsBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsArmor, new IsArmorBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsBlessed, new IsBlessedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsFuelForTorch, new IsFuelForTorchBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsKnown, new IsKnownBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsLanternFuel, new IsLanternFuelBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsOfValue, new IsOfValueBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsTooHeavyToWield, new IsTooHeavyToWieldBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsUsableSpellBook, new IsUsableSpellBookBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsWeapon, new IsWeaponBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsWearableOrWieldable, new IsWearableOrWieldableBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddStringsMatch(AnyMatchingFactoryItemClassKeys, AllNonMatchingFactoryItemClassKeys, new FactoryItemClassKeysStringGetItemProperty(Game)));
+        itemMatchList.AddRange(AddStringsMatch(AnyMatchingFactoryKeys, AllNonMatchingFactoryKeys, new FactoryKeysStringGetItemProperty(Game)));
         ItemMatches = itemMatchList.ToArray();
     }
 

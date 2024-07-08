@@ -7,12 +7,15 @@
 
 namespace AngbandOS.Core.ItemMatches;
 
+/// <summary>
+/// Represents an object that performs a boolean match on an item property.
+/// </summary>
 [Serializable]
 internal class BooleanItemMatch : ItemMatch
 {
     public bool TrueToMatchFalseToNotMatch { get; }
-    public Func<Item, bool> EvaluateLambda { get; }
-    public BooleanItemMatch(Game game, string title, bool trueToMatchFalseToNotMatch, Func<Item, bool> evaluateLambda) : base(game, title)
+    public GetItemProperty<bool> EvaluateLambda { get; }
+    public BooleanItemMatch(Game game, bool trueToMatchFalseToNotMatch, GetItemProperty<bool> evaluateLambda) : base(game, trueToMatchFalseToNotMatch ? $"{evaluateLambda.DebugDescription}==true" : $"{evaluateLambda.DebugDescription}==false")
     {
         TrueToMatchFalseToNotMatch = trueToMatchFalseToNotMatch;
         EvaluateLambda = evaluateLambda;
@@ -20,7 +23,7 @@ internal class BooleanItemMatch : ItemMatch
 
     public override bool Matches(Item item)
     {
-        bool value = EvaluateLambda(item);
+        bool value = EvaluateLambda.Get(item);
         return value == TrueToMatchFalseToNotMatch;
     }
 }
