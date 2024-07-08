@@ -34,7 +34,7 @@ internal class RoundedPebbleShotAmmunitionItemFactory : AmmunitionItemFactory
 
     public override int PackSort => 35;
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
-    public override int PercentageBreakageChance => 25;
+    protected override string BreakageChanceProbabilityExpression => "25/100";
 
     public override bool IsWeapon => true;
     public override bool IdentityCanBeSensed => true;

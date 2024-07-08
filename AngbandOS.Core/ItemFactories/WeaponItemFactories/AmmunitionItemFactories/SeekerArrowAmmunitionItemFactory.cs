@@ -43,7 +43,7 @@ internal class SeekerArrowAmmunitionItemFactory : AmmunitionItemFactory
     public override bool KindIsGood => true;
 
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
-    public override int PercentageBreakageChance => 25;
+    protected override string BreakageChanceProbabilityExpression => "25/100";
 
     public override bool IsWeapon => true;
     public override bool IdentityCanBeSensed => true;

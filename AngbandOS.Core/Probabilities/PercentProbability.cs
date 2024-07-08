@@ -10,11 +10,15 @@ namespace AngbandOS.Core.Probabilities;
 [Serializable]
 internal class PercentProbability : Probability
 {
+    private int _percent { get; }
     public PercentProbability(int percent)
     {
-        Percent = percent;
+        if (percent < 0 || percent > 100)
+        {
+            throw new Exception("Invalid percent expression.  Must be between 0 and 1.");
+        }
+        _percent = percent;
     }
-
-    public int Percent { get; }
-    public override bool Test(Game game) => game.RandomLessThan(100) < Percent;
+    public override int Percentage => _percent;
+    public override bool Test(Game game) => game.DieRoll(100) <= _percent;
 }

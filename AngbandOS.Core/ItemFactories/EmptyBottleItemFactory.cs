@@ -17,7 +17,7 @@ internal class EmptyBottleItemFactory : ItemFactory
     public override bool EasyKnow => true;
     public override int PackSort => 39;
     public override bool HatesCold => true;
-    public override int PercentageBreakageChance => 100;
+    protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool HatesAcid => true;
     public override string Name => "Empty Bottle";
 

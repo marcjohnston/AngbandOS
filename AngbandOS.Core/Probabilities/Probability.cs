@@ -10,5 +10,6 @@ namespace AngbandOS.Core.Probabilities;
 [Serializable]
 internal abstract class Probability
 {
+    public abstract int Percentage { get; }
     public abstract bool Test(Game game);
 }

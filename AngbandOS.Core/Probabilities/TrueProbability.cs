@@ -10,5 +10,6 @@ namespace AngbandOS.Core.Probabilities;
 [Serializable]
 internal class TrueProbability : Probability
 {
+    public override int Percentage => 100;
     public override bool Test(Game game) => true;
 }

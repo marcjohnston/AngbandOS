@@ -8067,11 +8067,12 @@ public bool IsDead = false;
             }
         }
         // There's a chance of breakage if we hit a creature
-        int chanceToBreak = hitBody ? missile.Factory.PercentageBreakageChance : 0;
+        Probability chanceToBreak = hitBody ? missile.Factory.BreakageChanceProbability : new FalseProbability();
+
         // If we hit with a potion, the potion might affect the creature
         if (missile.Factory.PotionDetails != null)
         {
-            if (hitBody || !GridPassable(newY, newX) || DieRoll(100) < chanceToBreak)
+            if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test(this))
             {
                 PotionItemFactory potion = (PotionItemFactory)missile.Factory;
                 MsgPrint($"The {missileName} shatters!");
@@ -8086,10 +8087,11 @@ public bool IsDead = false;
                 }
                 return;
             }
-            chanceToBreak = 0;
+            chanceToBreak = new FalseProbability();
         }
+
         // Drop the item on the floor
-        DropNear(missile, chanceToBreak, y, x);
+        DropNear(missile, chanceToBreak.Percentage, y, x);
     }
 
     public void RunTileScript(string scriptName, GridTile tile)
@@ -15116,7 +15118,7 @@ public bool IsDead = false;
         NoteSpot(by, bx);
         MainForm.RefreshMapLocation(by, bx);
         PlaySound(SoundEffectEnum.Drop);
-        if (chance != 0 && by == MapY.IntValue && bx == MapX.IntValue)
+        if (chance > 0 && by == MapY.IntValue && bx == MapX.IntValue)
         {
             MsgPrint("You feel something roll beneath your feet.");
         }
@@ -17923,6 +17925,13 @@ public bool IsDead = false;
         return new DiceRoll(this, dieCount, sidesCount, bonus);
     }
 
+    /// <summary>
+    /// Returns a probability from an expression.  Recognized expressions are: 1 => will always happen, 0 => will never happen, 0.0 ... 1.0 => percentage of success and x/y where x and y are
+    /// both integers, y is not 0 and x <= y.
+    /// </summary>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public Probability ParseProbabilityExpression(string expression)
     {
         if (expression.Trim() == "1")

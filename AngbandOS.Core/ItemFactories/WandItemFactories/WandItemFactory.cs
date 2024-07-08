@@ -41,7 +41,7 @@ internal abstract class WandItemFactory : ItemFactory
     /// </summary>
     public override bool IsMagical => true;
 
-    public override int PercentageBreakageChance => 25;
+    protected override string BreakageChanceProbabilityExpression => "25/100";
     public override int PackSort => 14;
     public override int BaseValue => 50;
     public override bool HatesElectricity => true;

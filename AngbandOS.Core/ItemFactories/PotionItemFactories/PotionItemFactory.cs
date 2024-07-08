@@ -25,32 +25,18 @@ internal abstract class PotionItemFactory : ItemFactory
         (240, "1d5-1")
     };
 
-    public override int PercentageBreakageChance => 100;
+    protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
     public override int PackSort => 11;
 
     /// <summary>
-    /// 
+    /// Returns 20 gold because unknown potions are not worth much.
     /// </summary>
-    /// <param name="game"></param>
-    /// <param name="who"></param>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    public bool Smash(int who, int y, int x)
-    {
-        if (PotionDetails == null)
-        {
-            throw new Exception("Smash is not supported for a non-potion.");
-        }
-        IUnfriendlyScript? smashUnfriendlyScript = PotionDetails.Value.SmashScript;
-        if (smashUnfriendlyScript == null)
-        {
-            return false;
-        }
-        return smashUnfriendlyScript.ExecuteUnfriendlyScript(who, y, x);
-    }
-
     public override int BaseValue => 20;
+
+    /// <summary>
+    /// Returns true because potions are susceptible to freezing.
+    /// </summary>
     public override bool HatesCold => true;
     public override ColorEnum Color => ColorEnum.Blue;
 

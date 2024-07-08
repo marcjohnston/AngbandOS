@@ -35,7 +35,7 @@ internal class PieceOfDwarfBreadFoodItemFactory : ItemFactory
 
     public override string? EatScriptName => nameof(EatDwarfBreadScript);
     protected override string ItemClassName => nameof(FoodItemClass);
-    public override int PercentageBreakageChance => 100;
+    protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

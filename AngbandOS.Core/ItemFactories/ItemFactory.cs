@@ -19,6 +19,27 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="who"></param>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    public bool Smash(int who, int y, int x)
+    {
+        if (PotionDetails == null)
+        {
+            throw new Exception("Smash is not supported for a non-potion.");
+        }
+        IUnfriendlyScript? smashUnfriendlyScript = PotionDetails.Value.SmashScript;
+        if (smashUnfriendlyScript == null)
+        {
+            return false;
+        }
+        return smashUnfriendlyScript.ExecuteUnfriendlyScript(who, y, x);
+    }
+
+    /// <summary>
     /// Returns the name of the noticeable script to run when the player quaffs the potion and the name of the smash script when the player smashes the potion; or null if the potion does
     /// not have a smash effect; if the item can be quaffed; or null, if the item cannot be quaffed.  This property is used to bind the
     /// <see cref="PotionDetails"/> property during the bind phase.  Returns null, by default.
@@ -794,9 +815,15 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool CanVorpalSlay => false;
 
     /// <summary>
-    /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
+    /// Returns an expression that represents the chance that an item that is thrown or fired will break.  Returns 10, or 10%, by default.  This
+    /// property is used to bind the <see cref="BreakageChanceProbability"/> property during the bind phase.
     /// </summary>
-    public virtual int PercentageBreakageChance => 10;
+    protected virtual string BreakageChanceProbabilityExpression => "10/100";
+
+    /// <summary>
+    /// Returns the probability that an item that is thrown or fired will break.  This property is bound using the <see cref="BreakageChangeProbabilityExpression"/> property during the bind phase.
+    /// </summary>
+    public Probability BreakageChanceProbability { get; private set; }
 
     /// <summary>
     /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.

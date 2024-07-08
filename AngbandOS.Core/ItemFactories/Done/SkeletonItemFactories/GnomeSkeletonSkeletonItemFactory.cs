@@ -33,6 +33,6 @@ internal class GnomeSkeletonSkeletonItemFactory : ItemFactory
     protected override string ItemClassName => nameof(SkeletonsItemClass);
     public override bool EasyKnow => true;
     public override int PackSort => 40;
-    public override int PercentageBreakageChance => 50;
+    protected override string BreakageChanceProbabilityExpression => "50/100";
     public override bool HatesAcid => true;
 }

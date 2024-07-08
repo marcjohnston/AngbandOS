@@ -119,7 +119,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
         }
     }
 
-    public override int PercentageBreakageChance => 50;
+    protected override string BreakageChanceProbabilityExpression => "50/100";
     public override int PackSort => 18;
     public override bool HatesFire => true;
     public override ColorEnum Color => ColorEnum.BrightYellow;

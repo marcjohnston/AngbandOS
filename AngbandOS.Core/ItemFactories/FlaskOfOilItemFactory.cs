@@ -38,7 +38,7 @@ internal class FlaskOfOilItemFactory : ItemFactory
         (20, "3d5-3")
     };
 
-    public override int PercentageBreakageChance => 100;
+    protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool HatesCold => true;
     public override int PackSort => 10;
 }

@@ -22,7 +22,7 @@ internal class PintOfFineAleFoodItemFactory : ItemFactory
     public override int Weight => 5;
     public override string? EatScriptName => nameof(EatGoodFoodScript);
     protected override string ItemClassName => nameof(FoodItemClass);
-    public override int PercentageBreakageChance => 100;
+    protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

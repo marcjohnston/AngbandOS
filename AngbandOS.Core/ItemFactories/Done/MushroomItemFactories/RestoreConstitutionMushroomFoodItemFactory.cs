@@ -31,7 +31,7 @@ internal class RestoreConstitutionMushroomFoodItemFactory : ItemFactory
     /// Returns a nutritional value of 500 turns for all mushrooms.
     /// </summary>
     public override int InitialNutritionalValue => 500;
-    public override int PercentageBreakageChance => 100;
+    protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

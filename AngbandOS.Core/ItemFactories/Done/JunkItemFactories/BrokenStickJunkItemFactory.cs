@@ -32,6 +32,6 @@ internal class BrokenStickJunkItemFactory : ItemFactory
     protected override string ItemClassName => nameof(JunkItemClass);
     public override int PackSort => 38;
     public override bool EasyKnow => true;
-    public override int PercentageBreakageChance => 100;
+    protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool HatesAcid => true;
 }

@@ -39,7 +39,7 @@ internal class TrapDoorDestructionScrollItemFactory : ItemFactory
         (240, "1d5-1")
     };
 
-    public override int PercentageBreakageChance => 50;
+    protected override string BreakageChanceProbabilityExpression => "50/100";
 
     public override bool EasyKnow => true;
     public override int PackSort => 12;
