@@ -8,42 +8,43 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestorationIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifiedAndUsedScriptItemDirection
+internal class HolinessScript : Script, IIdentifableAndUsedScript
 {
-    private RestorationIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
+    private HolinessScript(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script and returns false.
+    /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
         bool identified = false;
-        if (Game.RunSuccessByChanceScript(nameof(RestoreLevelScript)))
+        if (Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), 120))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Strength))
+        int k = 3 * Game.ExperienceLevel.IntValue;
+        if (Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + k))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
+        if (Game.PoisonTimer.ResetTimer())
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Wisdom))
+        if (Game.FearTimer.ResetTimer())
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Dexterity))
+        if (Game.RestoreHealth(50))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Constitution))
+        if (Game.StunTimer.ResetTimer())
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Charisma))
+        if (Game.BleedingTimer.ResetTimer())
         {
             identified = true;
         }

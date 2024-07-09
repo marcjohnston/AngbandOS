@@ -28,7 +28,7 @@ internal class SpeedPotionItemFactory : ItemFactory
         (60, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SpeedScript), nameof(SpeedProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(Speed1D25P15Or5Script), nameof(SpeedProjectileFriendlyScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

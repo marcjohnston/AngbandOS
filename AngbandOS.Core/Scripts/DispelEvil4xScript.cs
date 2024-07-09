@@ -8,33 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelEvil4xScript : Script, ISuccessByChanceScriptInt, IScriptInt, IScript
+internal class DispelEvil4xScript : Script, IScript
 {
     private DispelEvil4xScript(Game game) : base(game) { }
-
-    /// <summary>
-    /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteSuccessByChanceScriptInt(int dam)
-    {
-        return Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), dam);
-    }
-
-    /// <summary>
-    /// Executes the successful script and disposes of the result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScriptInt(int dam)
-    {
-        ExecuteSuccessByChanceScriptInt(dam);
-    }
 
     /// <summary>
     /// Executes the Int script with a damage value of 4x the players experience.
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(Game.ExperienceLevel.IntValue * 4);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), Game.ExperienceLevel.IntValue * 4);
+    }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        if (Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), 60))
+        {
+            return (true, true);
+        }
+        return (false, true);
     }
 }

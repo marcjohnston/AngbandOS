@@ -29,7 +29,7 @@ internal class SpecialEnlightenmentScript : Script, INoticeableScript
         Game.DetectDoors();
         Game.DetectStairs();
         Game.DetectTreasure();
-        Game.DetectObjectsGold();
+        Game.DetectGold();
         Game.RunScript(nameof(DetectNormalObjectsScript));
         Game.RunScript(nameof(IdentifyAllItemsScript));
         Game.RunScript(nameof(SelfKnowledgeScript));

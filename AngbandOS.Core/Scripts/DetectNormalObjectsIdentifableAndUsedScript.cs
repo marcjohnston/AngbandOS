@@ -18,7 +18,7 @@ internal class DetectNormalObjectsIdentifableAndUsedScript : Script, IIdentifabl
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.RunSuccessfulScript(nameof(DetectNormalObjectsScript)))
+        if (!Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript)))
         {
             return (false, true);
         }

@@ -17,8 +17,6 @@ internal class DestructionStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d3+1";
-
     public override int Cost => 2500;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -29,10 +27,5 @@ internal class DestructionStaffItemFactory : StaffItemFactory
         (70, 1)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 125;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(DestroyAreaR15Script), "1d3+1", 125, 100);
 }

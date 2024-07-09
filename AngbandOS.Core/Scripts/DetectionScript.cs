@@ -22,10 +22,10 @@ internal class DetectionScript : Script, IScript, ISuccessByChanceScript
         detect |= Game.DetectDoors();
         detect |= Game.DetectStairs();
         detect |= Game.DetectTreasure();
-        detect |= Game.DetectObjectsGold();
-        detect |= Game.RunSuccessfulScript(nameof(DetectNormalObjectsScript));
+        detect |= Game.DetectGold();
+        detect |= Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript));
         detect |= Game.DetectMonstersInvis();
-        detect |= Game.RunSuccessfulScript(nameof(DetectNormalMonstersScript));
+        detect |= Game.RunSuccessByChanceScript(nameof(DetectNormalMonstersScript));
         return detect;
     }
 

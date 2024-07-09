@@ -17,8 +17,6 @@ internal class SlowMonstersStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d5+6";
-
     public override int Cost => 800;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -28,12 +26,5 @@ internal class SlowMonstersStaffItemFactory : StaffItemFactory
         (10, 1)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScript(nameof(SlowMonstersScript)))
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 40;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(SlowMonstersScript), "1d5+6", 40, 100);
 }

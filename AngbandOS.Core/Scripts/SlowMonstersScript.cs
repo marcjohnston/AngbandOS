@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SlowMonstersScript : Script, IScript, ISuccessByChanceScript
+internal class SlowMonstersScript : Script, IScript, ISuccessByChanceScript, IIdentifableAndUsedScript
 {
     private SlowMonstersScript(Game game) : base(game) { }
 
@@ -28,5 +28,14 @@ internal class SlowMonstersScript : Script, IScript, ISuccessByChanceScript
     public void ExecuteScript()
     {
         ExecuteSuccessByChanceScript();
+    }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        if (ExecuteSuccessByChanceScript())
+        {
+            return (true, true);
+        }
+        return (false, true);
     }
 }

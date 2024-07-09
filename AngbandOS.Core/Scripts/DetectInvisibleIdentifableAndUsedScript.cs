@@ -18,11 +18,11 @@ internal class DetectInvisibleIdentifableAndUsedScript : Script, IIdentifableAnd
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.DetectMonstersInvis())
+        if (Game.DetectMonstersInvis())
         {
-            return (false, true);
+            return (true, true);
         }
-        return (true, true);
+        return (false, true);
     }
 }
 

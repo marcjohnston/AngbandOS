@@ -17,7 +17,6 @@ internal class LightStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d20+8";
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,13 +26,5 @@ internal class LightStaffItemFactory : StaffItemFactory
         (5, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.LightArea(Game.DiceRoll(2, 8), 2))
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 13;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(LightArea2D8R2Script), "1d20+8", 13, 100);
 }

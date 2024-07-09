@@ -8,18 +8,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportLevelIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class Speed1D30P15Or5Script : Script, IIdentifableAndUsedScript
 {
-    private TeleportLevelIdentifableAndUsedScript(Game game) : base(game) { }
+    private Speed1D30P15Or5Script(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.RunScript(nameof(TeleportLevelScript));
-        return (true, true);
+        if (Game.HasteTimer.Value == 0)
+        {
+            if (Game.HasteTimer.SetTimer(Game.DieRoll(30) + 15))
+            {
+                return (true, true);
+            }
+        }
+        else
+        {
+            Game.HasteTimer.AddTimer(5);
+        }
+        return (false, true);
     }
 }
-

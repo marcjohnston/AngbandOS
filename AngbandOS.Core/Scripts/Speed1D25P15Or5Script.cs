@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpeedScript : Script, INoticeableScript
+internal class Speed1D25P15Or5Script : Script, INoticeableScript
 {
-    private SpeedScript(Game game) : base(game) { }
+    private Speed1D25P15Or5Script(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns true because the action is always noticed.

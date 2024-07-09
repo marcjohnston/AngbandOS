@@ -5,24 +5,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blessing1d24p12IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class Slowness1D30P15Script : Script, IIdentifableAndUsedScript
 {
-    private Blessing1d24p12IdentifableAndUsedScript(Game game) : base(game) { }
+    private Slowness1D30P15Script(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12))
+        // Slowness slows you down.
+        if (Game.SlowTimer.AddTimer(Game.DieRoll(30) + 15))
         {
-            return (false, true);
+            return (true, true);
         }
-        return (true, true);
+        return (false, true);
     }
 }
-

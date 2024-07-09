@@ -351,9 +351,9 @@ internal sealed class Item : IComparable<Item>
             WandChargesRemaining = Factory.AimingDetails.Value.InitialChargesCountRoll.Get(Game.UseRandom);
         }
 
-        if (Factory.StaffChargeCount != null)
+        if (Factory.UseDetails != null)
         {
-            StaffChargesRemaining = Factory.StaffChargeCount.Get(Game.UseRandom);
+            StaffChargesRemaining = Factory.UseDetails.Value.InitialCharges.Get(Game.UseRandom);
         }
 
         Count = 1;
@@ -1997,7 +1997,12 @@ internal sealed class Item : IComparable<Item>
         {
             value += Factory.AimingDetails.Value.PerChargeValue * WandChargesRemaining;
         }
-        value += Factory.StaffChargeValue * StaffChargesRemaining;
+
+        if (Factory.UseDetails != null)
+        {
+            value += Factory.UseDetails.Value.PerChargeValue * StaffChargesRemaining;
+        }
+
         value += Factory.TurnOfLightValue * TurnsOfLightRemaining;
         value += Factory.GetBonusRealValue(this);
         return value;

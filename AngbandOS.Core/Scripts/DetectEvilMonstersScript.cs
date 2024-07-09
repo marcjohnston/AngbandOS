@@ -5,10 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScript
+internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScript, IIdentifableAndUsedScript
 {
     private DetectEvilMonstersScript(Game game) : base(game) { }
 
@@ -57,5 +59,14 @@ internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScrip
     public void ExecuteScript()
     {
         ExecuteSuccessByChanceScript();
+    }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        if (ExecuteSuccessByChanceScript())
+        {
+            return (true, true);
+        }
+        return (false, true);
     }
 }

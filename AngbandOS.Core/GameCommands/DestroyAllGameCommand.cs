@@ -17,5 +17,5 @@ internal class DestroyAllGameCommand : GameCommand
 
     public override char KeyChar => 'K';
 
-    protected override string? ExecuteScriptName => nameof(DestroyAllScript);
+    protected override string? ExecuteScriptName => nameof(DestroyAllWorthlessItemsScript);
 }

@@ -19,7 +19,6 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int Cost => 500;
     public override int DamageDice => 1;
-    public override string? StaffChargeCountRollExpression => "1d3+4";
     public override int DamageSides => 2;
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
@@ -27,17 +26,5 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
         (40, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScript(nameof(RemoveCurseScript)))
-        {
-            if (Game.BlindnessTimer.Value == 0)
-            {
-                Game.MsgPrint("The staff glows blue for a moment...");
-            }
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 25;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(RemoveCurseScript), "1d3+4", 25, 100);
 }

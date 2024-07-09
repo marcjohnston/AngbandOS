@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blessing1d24p12IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DestroyTrapsAndDoorsScript : Script, IIdentifableAndUsedScript
 {
-    private Blessing1d24p12IdentifableAndUsedScript(Game game) : base(game) { }
+    private DestroyTrapsAndDoorsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,8 +18,9 @@ internal class Blessing1d24p12IdentifableAndUsedScript : Script, IIdentifableAnd
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12))
+        if (!Game.RunSuccessByChanceScript(nameof(DestroyAdjacentDoorsScript)))
         {
+            // If nothing was destroyed, then we do not know what happened.
             return (false, true);
         }
         return (true, true);

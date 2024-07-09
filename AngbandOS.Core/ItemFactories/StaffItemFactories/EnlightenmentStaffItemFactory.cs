@@ -17,7 +17,6 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d5+5";
     public override int Cost => 750;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,11 +26,5 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
         (20, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        Game.RunScript(nameof(MapAreaScript));
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 38;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(MapAreaScript), "1d5+5", 38, 100);
 }

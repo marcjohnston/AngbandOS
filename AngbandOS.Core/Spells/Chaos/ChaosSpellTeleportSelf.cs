@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class ChaosSpellTeleportSelf : Spell
 {
     private ChaosSpellTeleportSelf(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(TeleportSelf5xScript);
+    protected override string? CastScriptName => nameof(TeleportSelf5XScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 

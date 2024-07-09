@@ -38,13 +38,11 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a staff
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeUsedItemFilter))))
+        if (item.Factory.UseDetails == null)
         {
             Game.MsgPrint("That is not a staff!");
             return;
         }
-
-        StaffItemFactory staffItem = (StaffItemFactory)item.Factory;
 
         // We can't use a staff from the floor
         if (!item.IsInInventory && item.Count > 1)
@@ -82,21 +80,20 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             return;
         }
         Game.PlaySound(SoundEffectEnum.UseStaff);
-        UseStaffEvent useStaffEventArgs = new UseStaffEvent();
 
         // Do the specific effect for the type of staff
-        staffItem.UseStaff(useStaffEventArgs);
+        (bool identified, bool chargeUsed) = item.Factory.UseDetails.Value.UseScript.ExecuteIdentifableAndUsedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does
         item.ObjectTried();
-        if (useStaffEventArgs.Identified && !item.Factory.IsFlavorAware)
+        if (identified && !item.Factory.IsFlavorAware)
         {
             item.Factory.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
         // We may not have used up a charge
-        if (!useStaffEventArgs.ChargeUsed)
+        if (!chargeUsed)
         {
             return;
         }

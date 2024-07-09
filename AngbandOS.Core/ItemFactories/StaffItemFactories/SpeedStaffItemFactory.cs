@@ -17,8 +17,6 @@ internal class SpeedStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d3+4";
-
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -28,20 +26,5 @@ internal class SpeedStaffItemFactory : StaffItemFactory
         (40, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.HasteTimer.Value == 0)
-        {
-            if (Game.HasteTimer.SetTimer(Game.DieRoll(30) + 15))
-            {
-                eventArgs.Identified = true;
-            }
-        }
-        else
-        {
-            Game.HasteTimer.AddTimer(5);
-        }
-    }
-    public override int StaffChargeValue => 50;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(Speed1D30P15Or5Script), "1d3+4", 50, 100);
 }

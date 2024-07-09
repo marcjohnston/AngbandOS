@@ -17,8 +17,6 @@ internal class StarlightStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d5+6";
-
     public override int Cost => 800;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -28,18 +26,5 @@ internal class StarlightStaffItemFactory : StaffItemFactory
         (20, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.BlindnessTimer.Value == 0)
-        {
-            Game.MsgPrint("The end of the staff glows brightly...");
-        }
-        for (int k = 0; k < 8; k++)
-        {
-            Game.LightLine(Game.OrderedDirection[k]);
-        }
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 40;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(StarlightScript), "1d5+6", 40, 100);
 }

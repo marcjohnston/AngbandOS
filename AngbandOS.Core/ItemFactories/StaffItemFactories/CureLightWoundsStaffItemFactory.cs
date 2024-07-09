@@ -12,7 +12,6 @@ internal class CureLightWoundsStaffItemFactory : StaffItemFactory
 {
     private CureLightWoundsStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override string? StaffChargeCountRollExpression => "1d5+6";
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Cure Light Wounds";
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
@@ -28,12 +27,5 @@ internal class CureLightWoundsStaffItemFactory : StaffItemFactory
     };
     public override int Weight => 50;
 
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.RestoreHealth(Game.DieRoll(8)))
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 18;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(RestoreHealth1d8Script), "1d5+6", 18, 100);
 }

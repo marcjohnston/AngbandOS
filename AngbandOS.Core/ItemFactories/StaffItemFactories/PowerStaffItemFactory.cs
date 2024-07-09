@@ -17,7 +17,6 @@ internal class PowerStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d3+1";
     public override int Cost => 4000;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,12 +26,5 @@ internal class PowerStaffItemFactory : StaffItemFactory
         (70, 2)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.DispelMonsters(120))
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 200;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(DispelMonsters120Script), "1d3+1", 200, 100);
 }

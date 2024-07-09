@@ -18,7 +18,7 @@ internal class RemoveCurseIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.RunSuccessfulScript(nameof(RemoveCurseScript)))
+        if (!Game.RunSuccessByChanceScript(nameof(RemoveCurseScript)))
         {
             return (false, true);
         }

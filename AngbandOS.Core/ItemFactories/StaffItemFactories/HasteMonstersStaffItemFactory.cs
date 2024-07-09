@@ -22,7 +22,6 @@ internal class HasteMonstersStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d8+8";
     public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override int LevelNormallyFound => 10;
@@ -31,12 +30,5 @@ internal class HasteMonstersStaffItemFactory : StaffItemFactory
         (10, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.HasteMonsters())
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(HasteMonsterScript), "1d8+8", 0, 100);
 }

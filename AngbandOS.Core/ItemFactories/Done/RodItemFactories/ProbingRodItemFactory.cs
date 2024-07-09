@@ -26,7 +26,7 @@ internal class ProbingRodItemFactory : ItemFactory
         (40, 4)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(ProbingIdentifiedAndUsedScriptItemAndDirection), "50", false, 250);
+    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(ProbingScript), "50", false, 250);
     protected override string ItemClassName => nameof(RodsItemClass);
 
     protected override string? RechargeScriptName => nameof(RechargeRodScript);

@@ -4922,7 +4922,7 @@ public bool IsDead = false;
         return flag;
     }
 
-    public bool DetectObjectsGold()
+    public bool DetectGold()
     {
         bool detect = false;
         for (int y = 1; y < CurHgt - 1; y++)
@@ -8128,7 +8128,7 @@ public bool IsDead = false;
         castedScript.ExecuteScriptIntInt(value1, value2);
     }
 
-    public bool RunSuccessfulScript(string scriptName)
+    public bool RunSuccessByChanceScript(string scriptName)
     {
         // Get the script from the singleton repository.
         ISuccessByChanceScript castedScript = SingletonRepository.Get<ISuccessByChanceScript>(scriptName);

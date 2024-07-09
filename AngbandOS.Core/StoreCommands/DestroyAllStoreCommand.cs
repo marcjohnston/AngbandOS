@@ -18,5 +18,5 @@ internal class DestroyAllStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    protected override string ExecuteScriptName => nameof(DestroyAllScript);
+    protected override string ExecuteScriptName => nameof(DestroyAllWorthlessItemsScript);
 }

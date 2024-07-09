@@ -18,7 +18,7 @@ internal class HolyWordScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.RunScriptInt(nameof(DispelEvil4xScript), Game.ExperienceLevel.IntValue * 4);
+        Game.RunScript(nameof(DispelEvil4xScript));
         Game.RestoreHealth(1000);
         Game.FearTimer.ResetTimer();
         Game.PoisonTimer.ResetTimer();

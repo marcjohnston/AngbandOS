@@ -17,7 +17,6 @@ internal class DoorStairLocationStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d8+6";
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,17 +26,5 @@ internal class DoorStairLocationStaffItemFactory : StaffItemFactory
         (10, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.DetectDoors())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.DetectStairs())
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 18;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(DetectDoorsAndStairsScript), "1d8+6", 18, 100);
 }

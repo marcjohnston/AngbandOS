@@ -24,13 +24,6 @@ internal abstract class StaffItemFactory : ItemFactory
     /// </summary>
     public override bool IsMagical => true;
 
-    /// <summary>
-    /// Executes the staff action.  Returns true, if the usage identifies the staff.
-    /// </summary>
-    /// <param name="game"></param>
-    /// <returns></returns>
-    public abstract void UseStaff(UseStaffEvent eventArgs);
-
     public override int PackSort => 15;
     public override int BaseValue => 70;
     public override bool HatesFire => true;

@@ -17,7 +17,6 @@ internal class ProbingStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d6+2";
     public override int Cost => 2000;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,10 +26,5 @@ internal class ProbingStaffItemFactory : StaffItemFactory
         (30, 1)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        Game.Probing();
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 200;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(ProbingScript), "1d6+2", 200, 100);
 }

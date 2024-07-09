@@ -17,7 +17,6 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d2+2";
     public override int Cost => 4500;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,20 +26,5 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
         (70, 2)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.Mana.IntValue < Game.MaxMana.IntValue)
-        {
-            Game.Mana.IntValue = Game.MaxMana.IntValue;
-            Game.FractionalMana = 0;
-            eventArgs.Identified = true;
-            Game.MsgPrint("Your feel your head clear.");
-        }
-    }
-    public override int StaffChargeValue => 225;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(OfTheMagiScript), "1d2+2", 225, 100);
 }

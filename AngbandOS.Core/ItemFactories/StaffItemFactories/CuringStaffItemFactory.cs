@@ -17,8 +17,6 @@ internal class CuringStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d3+4";
-
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -29,32 +27,5 @@ internal class CuringStaffItemFactory : StaffItemFactory
     };
     public override int Weight => 50;
 
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.BlindnessTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.PoisonTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.ConfusedTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.StunTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.BleedingTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.HallucinationsTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 50;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(CuringScript), "1d3+4", 50, 100);
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : Script, IScript, IScriptInt
+internal class TeleportSelfScript : Script, IScript, IScriptInt, IIdentifableAndUsedScript
 {
     private TeleportSelfScript(Game game) : base(game) { }
 
@@ -87,8 +87,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
                 {
                     if (Game.Map.Grid[oy + yy][ox + xx].MonsterIndex != 0)
                     {
-                        if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
-                            !Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
+                        if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf && !Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                         {
                             if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                             {
@@ -186,5 +185,11 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
         Game.UpdateMonsterVisibility(mIdx, true);
         Game.MainForm.RefreshMapLocation(oy, ox);
         Game.MainForm.RefreshMapLocation(ny, nx);
+    }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        ExecuteScriptInt(100);
+        return (true, true);
     }
 }

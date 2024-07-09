@@ -17,7 +17,6 @@ internal class ObjectLocationStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d15+6";
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,13 +26,5 @@ internal class ObjectLocationStaffItemFactory : StaffItemFactory
         (5, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScript(nameof(DetectNormalObjectsScript)))
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 10;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(DetectNormalObjectsScript), "1d15+6", 10, 100);
 }

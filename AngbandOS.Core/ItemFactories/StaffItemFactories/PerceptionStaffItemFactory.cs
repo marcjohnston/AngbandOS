@@ -17,7 +17,6 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d15+5";
     public override int Cost => 400;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,14 +26,5 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
         (10, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.RunCancellableScript(nameof(IdentifyItemCancellableScript)))
-        {
-            eventArgs.ChargeUsed = false;
-        }
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 20;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(IdentifyItemCancellableScript), "1d15+5", 20, 100);
 }

@@ -17,8 +17,6 @@ internal class TreasureLocationStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d20+8";
-
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -28,17 +26,5 @@ internal class TreasureLocationStaffItemFactory : StaffItemFactory
         (5, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.DetectTreasure())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.DetectObjectsGold())
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 10;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(DetectTreasureAndGoldScript), "1d20+8", 10, 100);
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SleepMonstersScript : Script, IScript, ISuccessByChanceScript
+internal class SleepMonstersScript : Script, IScript, ISuccessByChanceScript, IIdentifableAndUsedScript
 {
     private SleepMonstersScript(Game game) : base(game) { }
 
@@ -24,5 +24,14 @@ internal class SleepMonstersScript : Script, IScript, ISuccessByChanceScript
     public void ExecuteScript()
     {
         ExecuteSuccessByChanceScript();
+    }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        if (ExecuteSuccessByChanceScript())
+        {
+            return (true, true);
+        }
+        return (false, true);
     }
 }

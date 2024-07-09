@@ -5,21 +5,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GenocideIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class Slowness1D25P15Script : Script, INoticeableScript
 {
-    private GenocideIdentifableAndUsedScript(Game game) : base(game) { }
+    private Slowness1D25P15Script(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script and returns false.
+    /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public bool ExecuteNoticeableScript()
     {
-        Game.RunScript(nameof(GenocideScript));
-        return (true, true);
+        // Slowness slows you down.
+        return Game.SlowTimer.AddTimer(Game.DieRoll(25) + 15);
     }
 }
-

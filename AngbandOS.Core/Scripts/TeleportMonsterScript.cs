@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HasteMonsterIdentifableDirectionalScript : Script, IIdentifableDirectionalScript
+internal class TeleportMonsterScript : Script, IIdentifableDirectionalScript
 {
-    private HasteMonsterIdentifableDirectionalScript(Game game) : base(game) { }
+    private TeleportMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,6 +18,6 @@ internal class HasteMonsterIdentifableDirectionalScript : Script, IIdentifableDi
     /// <returns></returns>
     public bool ExecuteIdentifableDirectionalScript(int dir)
     {
-        return Game.SpeedMonster(dir);
+        return Game.TeleportMonster(dir);
     }
 }

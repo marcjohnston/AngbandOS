@@ -8,21 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blessing1d24p12IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class OfTheMagiScript : Script, IIdentifableAndUsedScript
 {
-    private Blessing1d24p12IdentifableAndUsedScript(Game game) : base(game) { }
+    private OfTheMagiScript(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12))
+        bool identified = false;
+        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
         {
-            return (false, true);
+            identified = true;
         }
-        return (true, true);
+        if (Game.Mana.IntValue < Game.MaxMana.IntValue)
+        {
+            Game.Mana.IntValue = Game.MaxMana.IntValue;
+            Game.FractionalMana = 0;
+            identified = true;
+            Game.MsgPrint("Your feel your head clear.");
+        }
+        return (identified, true);
     }
 }
-

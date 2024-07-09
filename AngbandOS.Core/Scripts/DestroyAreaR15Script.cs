@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectTreasureIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DestroyAreaR15Script : Script, IIdentifableAndUsedScript
 {
-    private DetectTreasureIdentifableAndUsedScript(Game game) : base(game) { }
+    private DestroyAreaR15Script(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,16 +18,8 @@ internal class DetectTreasureIdentifableAndUsedScript : Script, IIdentifableAndU
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        bool identified = false;
-        if (Game.DetectTreasure())
-        {
-            identified = true;
-        }
-        if (Game.DetectObjectsGold())
-        {
-            identified = true;
-        }
-        return (identified, true);
+        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
+        return (true, true);
     }
 }
 

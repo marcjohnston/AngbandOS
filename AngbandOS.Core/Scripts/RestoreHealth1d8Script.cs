@@ -8,16 +8,20 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportMonsterIdentifableDirectionalScript : Script, IIdentifableDirectionalScript
+internal class RestoreHealth1d8Script : Script, IIdentifableAndUsedScript
 {
-    private TeleportMonsterIdentifableDirectionalScript(Game game) : base(game) { }
+    private RestoreHealth1d8Script(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script and returns false.
+    /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifableDirectionalScript(int dir)
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        return Game.TeleportMonster(dir);
+        if (Game.RestoreHealth(Game.DieRoll(8)))
+        {
+            return (true, true);
+        }
+        return (false, true);
     }
 }

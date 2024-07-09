@@ -17,7 +17,6 @@ internal class EarthquakesStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d5+3";
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,10 +26,5 @@ internal class EarthquakesStaffItemFactory : StaffItemFactory
         (40, 1)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 10);
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 18;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(EarthquakeR10Script), "1d5+3", 18, 100);
 }

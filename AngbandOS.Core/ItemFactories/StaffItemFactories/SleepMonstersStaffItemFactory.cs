@@ -26,15 +26,5 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
         (10, 1)
     };
     public override int Weight => 50;
-
-    public override string? StaffChargeCountRollExpression => "1d5+6";
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScript(nameof(SleepMonstersScript)))
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 35;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(SleepMonstersScript), "1d5+6", 35, 100);
 }

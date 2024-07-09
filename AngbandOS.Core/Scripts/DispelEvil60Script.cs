@@ -8,21 +8,16 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blessing1d24p12IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DispelEvil60Script : Script, IIdentifableAndUsedScript
 {
-    private Blessing1d24p12IdentifableAndUsedScript(Game game) : base(game) { }
+    private DispelEvil60Script(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12))
+        if (Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), 60))
         {
-            return (false, true);
+            return (true, true);
         }
-        return (true, true);
+        return (false, true);
     }
 }
-

@@ -12,7 +12,6 @@ internal class CarnageStaffItemFactory : StaffItemFactory
 {
     private CarnageStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override string? StaffChargeCountRollExpression => "1d2+1";
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Carnage";
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
@@ -27,10 +26,5 @@ internal class CarnageStaffItemFactory : StaffItemFactory
         (70, 4)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        Game.RunScript(nameof(GenocideScript));
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 180;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(GenocideScript), "1d2+1", 180, 100);
 }

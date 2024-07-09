@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SuperHeroism25p1d25ResetFearAndHeal30Script : Script, INoticeableScript, IScript
+internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, INoticeableScript, IScript
 {
-    private SuperHeroism25p1d25ResetFearAndHeal30Script(Game game) : base(game) { }
+    private SuperHeroism1D25P25ResetFearAndHeal30Script(Game game) : base(game) { }
 
     /// <summary>
     /// Restores 30 points of health, removes fear and adds between 25 and 50 turns of super heroism.  Returns true, if any action is noticed; false, otherwise.

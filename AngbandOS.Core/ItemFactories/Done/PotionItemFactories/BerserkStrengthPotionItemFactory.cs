@@ -26,7 +26,7 @@ internal class BerserkStrengthPotionItemFactory : ItemFactory
         (3, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SuperHeroism25p1d25ResetFearAndHeal30Script), null, 20);
+    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SuperHeroism1D25P25ResetFearAndHeal30Script), null, 20);
  
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

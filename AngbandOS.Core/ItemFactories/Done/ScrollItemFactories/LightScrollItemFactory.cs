@@ -31,7 +31,7 @@ internal class LightScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivateScrollScriptName => (nameof(Light2D8R2IdentifableAndUsedScript), 10);
+    protected override (string, int)? ActivateScrollScriptName => (nameof(LightArea2D8R2Script), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

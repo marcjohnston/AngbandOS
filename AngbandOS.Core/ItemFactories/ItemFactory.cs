@@ -19,6 +19,33 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected ItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    /// Returns the name of the noticeable script to run when the player uses the item ; or null if the potion does
+    /// not have a smash effect; if the item can be quaffed; or null, if the item cannot be quaffed.  This property is used to bind the
+    /// <see cref="UseDetails"/> property during the bind phase.  Returns null, by default.
+    /// 
+    /// Returns the roll expression used to determine the initial number of staff charges that will be given to the item at item creation; or null, if the item is not a staff.  null is returns, 
+    /// by default.  This property is used to bind the <see cref="StaffChargeCount"/> property during the bind phase.
+    ///     
+    /// Returns the value of each staff charge.  Returns 0, by default.
+    /// The amount of mana needed to consume to keep the potion.
+    /// 
+    /// </summary>
+    protected virtual (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => null;
+
+    /// <summary>
+    /// Returns the noticeable script to run when the player uses an item; or null, if the item cannot be used.  This property is bound using the <see cref="UseBinderDetails"/>
+    /// property during the bind phase.
+    /// 
+    /// Returns the number of staff charges that will be given to the item at item creation; or 0, if the item is not a staff.  0 is returns, by default.  This property is bound using the
+    /// <see cref="StaffChargeCountRollExpression"/> property during the bind phase.
+    /// 
+    /// Returns the value of each staff charge.  Returns 0, by default.
+    /// The amount of mana needed to consume to keep the charge.
+    /// 
+    /// </summary>
+    public (IIdentifableAndUsedScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseDetails { get; private set; } = null;
+
+    /// <summary>
     /// 
     /// </summary>
     /// <param name="game"></param>
@@ -106,18 +133,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool IsMagical => false;
 
     /// <summary>
-    /// Returns the roll expression used to determine the initial number of staff charges that will be given to the item at item creation; or null, if the item is not a staff.  null is returns, 
-    /// by default.  This property is used to bind the <see cref="StaffChargeCount"/> property during the bind phase.
-    /// </summary>
-    public virtual string? StaffChargeCountRollExpression => null;
-
-    /// <summary>
-    /// Returns the number of staff charges that will be given to the item at item creation; or 0, if the item is not a staff.  0 is returns, by default.  This property is bound using the
-    /// <see cref="StaffChargeCountRollExpression"/> property during the bind phase.
-    /// </summary>
-    public Roll? StaffChargeCount { get; private set; } = null;
-
-    /// <summary>
     /// Returns the value of each turn of light for light sources.  Returns 0, by default;
     /// </summary>
     public virtual int TurnOfLightValue => 0;
@@ -133,11 +148,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// This property is bound from the <see cref="AimingBinderDetails"/> property during the bind phase.
     /// </summary>
     public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingDetails { get; private set; } = null;
-
-    /// <summary>
-    /// Returns the value of each staff charge.  Returns 0, by default.
-    /// </summary>
-    public virtual int StaffChargeValue => 0;
 
     /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
@@ -971,8 +981,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             ActivateScrollScript = (identifableAndUsedScript, manaValue);
         }
 
-        StaffChargeCount = Game.ParseNullableRollExpression(StaffChargeCountRollExpression);
-
         RechargeScript = Game.SingletonRepository.GetNullable<IScriptItemInt>(RechargeScriptName);
         GridProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItemGridTile>(GridProcessWorldScriptName);
         MonsterProcessWorldScript = Game.SingletonRepository.GetNullable<IScriptItemMonster>(MonsterProcessWorldScriptName);
@@ -998,6 +1006,15 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             IUnfriendlyScript? smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffBinderDetails.Value.SmashScriptName);
             int manaEquivalent = QuaffBinderDetails.Value.ManaEquivalent;
             QuaffDetails = (quaffNoticeableScript, smashUnfriendlyScript, manaEquivalent);
+        }
+
+        if (UseBinderDetails != null)
+        {
+            IIdentifableAndUsedScript useScript = Game.SingletonRepository.Get<IIdentifableAndUsedScript>(UseBinderDetails.Value.UseScriptName);
+            Roll initialChargeRoll = Game.ParseRollExpression(UseBinderDetails.Value.InitialChargesRollExpression);
+            int chargeValue = UseBinderDetails.Value.PerChargeValue;
+            int manaEquivalent = UseBinderDetails.Value.ManaEquivalent;
+            UseDetails = (useScript, initialChargeRoll, chargeValue, manaEquivalent);
         }
     }
 

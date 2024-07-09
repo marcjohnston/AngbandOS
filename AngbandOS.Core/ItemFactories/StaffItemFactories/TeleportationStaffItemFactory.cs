@@ -12,7 +12,6 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
 {
     private TeleportationStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override string? StaffChargeCountRollExpression => "1d4+5";
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Teleportation";
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
@@ -27,10 +26,5 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
         (20, 1)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
-        eventArgs.Identified = true;
-    }
-    public override int StaffChargeValue => 100;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(TeleportSelfScript), "1d4+5", 100, 100);
 }

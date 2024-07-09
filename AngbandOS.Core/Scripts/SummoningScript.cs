@@ -8,18 +8,19 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestructionR15IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class SummoningScript : Script, IIdentifableAndUsedScript
 {
-    private DestructionR15IdentifableAndUsedScript(Game game) : base(game) { }
+    private SummoningScript(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
-        return (true, true);
+        for (int k = 0; k < Game.DieRoll(4); k++)
+        {
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null))
+            {
+                return (true, true);
+            }
+        }
+        return (false, true);
     }
 }
-

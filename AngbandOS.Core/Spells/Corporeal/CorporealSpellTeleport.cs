@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellTeleport : Spell
 {
     private CorporealSpellTeleport(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(TeleportSelf3xScript);
+    protected override string? CastScriptName => nameof(TeleportSelf3XScript);
 
     public override string Name => "Teleport";
 

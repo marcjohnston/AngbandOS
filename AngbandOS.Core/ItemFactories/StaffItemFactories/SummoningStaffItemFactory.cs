@@ -22,8 +22,6 @@ internal class SummoningStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d3+1";
-
     public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override int LevelNormallyFound => 10;
@@ -33,14 +31,5 @@ internal class SummoningStaffItemFactory : StaffItemFactory
         (50, 1)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        for (int k = 0; k < Game.DieRoll(4); k++)
-        {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null))
-            {
-                eventArgs.Identified = true;
-            }
-        }
-    }
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(SummoningScript), "1d3+1", 0, 100);
 }

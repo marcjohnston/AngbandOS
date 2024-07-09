@@ -5,24 +5,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Light2D8R2IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class StarlightScript : Script, IIdentifableAndUsedScript
 {
-    private Light2D8R2IdentifableAndUsedScript(Game game) : base(game) { }
+    private StarlightScript(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.LightArea(Game.DiceRoll(2, 8), 2))
+        if (Game.BlindnessTimer.Value == 0)
         {
-            return (false, true);
+            Game.MsgPrint("The end of the staff glows brightly...");
+        }
+        for (int k = 0; k < 8; k++)
+        {
+            Game.LightLine(Game.OrderedDirection[k]);
         }
         return (true, true);
     }
 }
-

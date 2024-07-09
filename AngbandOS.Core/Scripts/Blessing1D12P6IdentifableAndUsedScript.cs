@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blessing1D12P6IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class Blessing1d12p6IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
 {
-    private Blessing1D12P6IdentifableAndUsedScript(Game game) : base(game) { }
+    private Blessing1d12p6IdentifableAndUsedScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.

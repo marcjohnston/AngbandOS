@@ -8,21 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blessing1d24p12IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class HasteMonsterScript : Script, IIdentifableDirectionalScript, IIdentifableAndUsedScript
 {
-    private Blessing1d24p12IdentifableAndUsedScript(Game game) : base(game) { }
+    private HasteMonsterScript(Game game) : base(game) { }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        if (Game.HasteMonsters())
+        {
+            return (true, true);
+        }
+        return (false, true);
+    }
 
     /// <summary>
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public bool ExecuteIdentifableDirectionalScript(int dir)
     {
-        if (!Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12))
-        {
-            return (false, true);
-        }
-        return (true, true);
+        return Game.SpeedMonster(dir);
     }
 }
-

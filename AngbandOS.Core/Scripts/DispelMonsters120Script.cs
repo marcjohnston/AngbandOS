@@ -8,18 +8,16 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportationIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DispelMonsters120Script : Script, IIdentifableAndUsedScript
 {
-    private TeleportationIdentifableAndUsedScript(Game game) : base(game) { }
+    private DispelMonsters120Script(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
-        return (true, true);
+        if (Game.DispelMonsters(120))
+        {
+            return (true, true);
+        }
+        return (false, true);
     }
 }
-

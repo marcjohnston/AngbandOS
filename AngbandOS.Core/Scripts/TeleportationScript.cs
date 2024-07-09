@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyTrapsAndDoorsIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class TeleportationScript : Script, IIdentifableAndUsedScript
 {
-    private DestroyTrapsAndDoorsIdentifableAndUsedScript(Game game) : base(game) { }
+    private TeleportationScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,11 +18,7 @@ internal class DestroyTrapsAndDoorsIdentifableAndUsedScript : Script, IIdentifab
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.RunSuccessfulScript(nameof(DestroyAdjacentDoorsScript)))
-        {
-            // If nothing was destroyed, then we do not know what happened.
-            return (false, true);
-        }
+        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
         return (true, true);
     }
 }

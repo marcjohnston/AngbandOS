@@ -8,31 +8,38 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectTreasureAndGoldScript : Script, IScript, IIdentifableAndUsedScript
+internal class CuringScript : Script, IIdentifableAndUsedScript
 {
-    private DetectTreasureAndGoldScript(Game game) : base(game) { }
+    private CuringScript(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteIdentifableAndUsedScript();
-    }
-
-    /// <summary>
-    /// Executes the script and returns false.
+    /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
         bool identified = false;
-        if (Game.DetectTreasure())
+        if (Game.BlindnessTimer.ResetTimer())
         {
             identified = true;
         }
-        if (Game.DetectGold())
+        if (Game.PoisonTimer.ResetTimer())
+        {
+            identified = true;
+        }
+        if (Game.ConfusedTimer.ResetTimer())
+        {
+            identified = true;
+        }
+        if (Game.StunTimer.ResetTimer())
+        {
+            identified = true;
+        }
+        if (Game.BleedingTimer.ResetTimer())
+        {
+            identified = true;
+        }
+        if (Game.HallucinationsTimer.ResetTimer())
         {
             identified = true;
         }

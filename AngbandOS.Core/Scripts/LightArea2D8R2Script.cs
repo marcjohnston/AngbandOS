@@ -8,17 +8,21 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SlownessScript : Script, INoticeableScript
+internal class LightArea2D8R2Script : Script, IIdentifableAndUsedScript
 {
-    private SlownessScript(Game game) : base(game) { }
+    private LightArea2D8R2Script(Game game) : base(game) { }
 
     /// <summary>
-    /// Executes the script and returns true because the action is always noticed.
+    /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        // Slowness slows you down.
-        return Game.SlowTimer.AddTimer(Game.DieRoll(25) + 15);
+        if (Game.LightArea(Game.DiceRoll(2, 8), 2))
+        {
+            return (true, true);
+        }
+        return (false, true);
     }
 }
+

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChanceScript
+internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChanceScript, IIdentifableAndUsedScript
 {
     private RemoveCurseScript(Game game) : base(game) { }
 
@@ -52,5 +52,18 @@ internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChan
     public void ExecuteScript()
     {
         ExecuteSuccessByChanceScript();
+    }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        if (ExecuteSuccessByChanceScript())
+        {
+            if (Game.BlindnessTimer.Value == 0)
+            {
+                Game.MsgPrint("The staff glows blue for a moment...");
+            }
+            return (true, true);
+        }
+        return (false, true);
     }
 }

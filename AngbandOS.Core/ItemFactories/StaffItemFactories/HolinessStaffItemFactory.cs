@@ -17,7 +17,6 @@ internal class HolinessStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d2+2";
     public override int Cost => 4500;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
@@ -27,37 +26,5 @@ internal class HolinessStaffItemFactory : StaffItemFactory
         (70, 2)
     };
     public override int Weight => 50;
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (Game.RunSuccessfulScriptInt(nameof(DispelEvil4xScript), 120))
-        {
-            eventArgs.Identified = true;
-        }
-        int k = 3 * Game.ExperienceLevel.IntValue;
-        if (Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + k))
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.PoisonTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.FearTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.RestoreHealth(50))
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.StunTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-        if (Game.BleedingTimer.ResetTimer())
-        {
-            eventArgs.Identified = true;
-        }
-    }
-    public override int StaffChargeValue => 225;
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(HolinessScript), "1d2+2", 225, 100);
 }

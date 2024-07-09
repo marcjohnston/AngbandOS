@@ -13,6 +13,7 @@ internal class DarknessStaffItemFactory : StaffItemFactory
     private DarknessStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool IsBroken => true;
+
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>
@@ -22,8 +23,6 @@ internal class DarknessStaffItemFactory : StaffItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override string? StaffChargeCountRollExpression => "1d8+8";
-
     public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override int LevelNormallyFound => 5;
@@ -33,19 +32,5 @@ internal class DarknessStaffItemFactory : StaffItemFactory
         (50, 1)
     };
     public override int Weight => 50;
-
-    public override void UseStaff(UseStaffEvent eventArgs)
-    {
-        if (!Game.HasBlindnessResistance && !Game.HasDarkResistance)
-        {
-            if (Game.BlindnessTimer.AddTimer(3 + Game.DieRoll(5)))
-            {
-                eventArgs.Identified = true;
-            }
-        }
-        if (Game.UnlightArea(10, 3))
-        {
-            eventArgs.Identified = true;
-        }
-    }
+    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(DarknessIdentifableAndUsedScript), "1d8+8", 0, 100);
 }

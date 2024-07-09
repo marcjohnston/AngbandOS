@@ -5,12 +5,32 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Healing300ResetStunAndBleedingScript : Script, IScript
+internal class Healing300ResetStunAndBleedingScript : Script, IScript, IIdentifableAndUsedScript
 {
     private Healing300ResetStunAndBleedingScript(Game game) : base(game) { }
+
+    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    {
+        bool identified = false;
+        if (Game.RestoreHealth(300))
+        {
+            identified = true;
+        }
+        if (Game.StunTimer.ResetTimer())
+        {
+            identified = true;
+        }
+        if (Game.BleedingTimer.ResetTimer())
+        {
+            identified = true;
+        }
+        return (identified, true);
+    }
 
     /// <summary>
     /// Restores 300 points of health and heals stun and bleeding.
@@ -18,8 +38,6 @@ internal class Healing300ResetStunAndBleedingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.RestoreHealth(300);
-        Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        ExecuteIdentifableAndUsedScript();
     }
 }
