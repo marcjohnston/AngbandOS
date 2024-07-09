@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SummoningStaffItemFactory : StaffItemFactory
+internal class SummoningStaffItemFactory : ItemFactory
 {
     private SummoningStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -32,4 +32,23 @@ internal class SummoningStaffItemFactory : StaffItemFactory
     };
     public override int Weight => 50;
     protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(SummoningScript), "1d3+1", 0, 100);
+    protected override string ItemClassName => nameof(StaffsItemClass);
+    public override int StaffManaValue => 100;
+    protected override string? RechargeScriptName => nameof(RechargeStaffScript);
+
+    protected override string? EatMagicScriptName => nameof(StaffEatMagicScript);
+
+    public override bool CanBeUsed => true;
+
+    /// <summary>
+    /// Returns true, because staffs are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
+    public override int PackSort => 15;
+    public override int BaseValue => 70;
+    public override bool HatesFire => true;
+    public override bool HatesAcid => true;
+
+    public override ColorEnum Color => ColorEnum.Purple;
 }
