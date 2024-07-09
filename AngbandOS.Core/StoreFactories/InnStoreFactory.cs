@@ -51,14 +51,14 @@ internal class InnStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[] { };
 
-    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
+    protected override (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions => new (string, int)[]
     {
-        new StoreStockManifestDefinition(nameof(HardBiscuitFoodItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(PintOfFineAleFoodItemFactory), 10),
-        new StoreStockManifestDefinition(nameof(PintOfFineWineFoodItemFactory), 10),
-        new StoreStockManifestDefinition(nameof(RationFoodItemFactory), 18),
-        new StoreStockManifestDefinition(nameof(StripOfVenisonFoodItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(SatisfyHungerScrollItemFactory), 4),
+        (nameof(HardBiscuitFoodItemFactory), 2),
+        (nameof(PintOfFineAleFoodItemFactory), 10),
+        (nameof(PintOfFineWineFoodItemFactory), 10),
+        (nameof(RationFoodItemFactory), 18),
+        (nameof(StripOfVenisonFoodItemFactory), 4),
+        (nameof(SatisfyHungerScrollItemFactory), 4),
     };
 
     public override int MaxInventory => 4;

@@ -100,12 +100,12 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         ItemFilters = itemFilters.ToArray();
 
         // Bind the store stock manifests.
-        List<StoreStockManifest> storeStockManifestList = new();
+        List<(ItemFactory ItemFactory, int Weight)> storeStockManifestList = new();
         if (StoreStockManifestDefinitions != null) {
-            foreach (StoreStockManifestDefinition storeStockManifestDefinition in StoreStockManifestDefinitions)
+            foreach ((string ItemFactoryName, int Weight) storeStockManifestDefinition in StoreStockManifestDefinitions)
             {
                 ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(storeStockManifestDefinition.ItemFactoryName);
-                storeStockManifestList.Add(new StoreStockManifest(itemFactory, storeStockManifestDefinition.Weight));
+                storeStockManifestList.Add((itemFactory, storeStockManifestDefinition.Weight));
             }
         }
         StoreStockManifests = storeStockManifestList.ToArray();
@@ -216,9 +216,9 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
     /// store to create items from.  If the store doesn't sell items, the Factory.CreateItem should return null and this property should return null.
     /// </summary>
     /// <returns></returns>
-    public StoreStockManifest[]? StoreStockManifests { get; private set; } = null;
+    public (ItemFactory ItemFactory, int Weight)[]? StoreStockManifests { get; private set; } = null;
 
-    protected virtual StoreStockManifestDefinition[]? StoreStockManifestDefinitions => null;
+    protected virtual (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions => null;
 
     /// <summary>
     /// Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will

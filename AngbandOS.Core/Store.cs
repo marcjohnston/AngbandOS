@@ -25,7 +25,7 @@ internal class Store
         List<ItemFactory> table = new();
         if (StoreFactory.StoreStockManifests != null)
         {
-            foreach (StoreStockManifest storeStockManifest in StoreFactory.StoreStockManifests)
+            foreach ((ItemFactory ItemFactory, int Weight) storeStockManifest in StoreFactory.StoreStockManifests)
             {
                 for (int i = 0; i < storeStockManifest.Weight; i++)
                 {

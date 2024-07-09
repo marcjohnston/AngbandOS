@@ -76,7 +76,7 @@ public class StoreFactoryDefinition : IPoco
     /// </summary>
     public virtual int StoreTurnover { get; set; } = 9;
 
-    public virtual StoreStockManifestDefinition[]? StoreStockManifestDefinitions { get; set; } = null;
+    public virtual (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions { get; set; } = null;
 
     /// <summary>
     /// Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will

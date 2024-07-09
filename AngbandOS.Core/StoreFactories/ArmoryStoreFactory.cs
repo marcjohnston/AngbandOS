@@ -42,29 +42,29 @@ internal class ArmoryStoreFactory : StoreFactory
 
     protected override string TileName => nameof(ArmoryStoreTile);
 
-    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
+    protected override (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions => new (string, int)[]
     {
-        new StoreStockManifestDefinition(nameof(HardLeatherBootsArmorItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(SoftLeatherBootsArmorItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(GauntletGlovesArmorItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(LeatherGlovesArmorItemFactory), 3),
-        new StoreStockManifestDefinition(nameof(AugmentedChainMailHardArmorItemFactory)),
-        new StoreStockManifestDefinition(nameof(BarChainMailHardArmorItemFactory)),
-        new StoreStockManifestDefinition(nameof(ChainMailHardArmorItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(DoubleChainMailHardArmorItemFactory)),
-        new StoreStockManifestDefinition(nameof(MetalBrigandineHardArmorItemFactory)),
-        new StoreStockManifestDefinition(nameof(MetalScaleMailHardArmorItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(HardLeatherCapHelmArmorItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(IronHelmArmorItemFactory)),
-        new StoreStockManifestDefinition(nameof(MetalCapHelmArmorFactory)),
-        new StoreStockManifestDefinition(nameof(LargeLeatherShieldArmorItemFactory)),
-        new StoreStockManifestDefinition(nameof(SmallLeatherShieldArmorItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(SmallMetalShieldArmorItemFactory)),
-        new StoreStockManifestDefinition(nameof(HardLeatherSoftArmorItemFactory), 3),
-        new StoreStockManifestDefinition(nameof(HardStuddedLeatherSoftArmorItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(LeatherScaleMailSoftArmorItemFactory), 3),
-        new StoreStockManifestDefinition(nameof(RobeSoftArmorItemFactory), 3),
-        new StoreStockManifestDefinition(nameof(SoftLeatherSoftArmorItemFactory), 4),
+        (nameof(HardLeatherBootsArmorItemFactory), 4),
+        (nameof(SoftLeatherBootsArmorItemFactory), 2),
+        (nameof(GauntletGlovesArmorItemFactory), 2),
+        (nameof(LeatherGlovesArmorItemFactory), 3),
+        (nameof(AugmentedChainMailHardArmorItemFactory), 1),
+        (nameof(BarChainMailHardArmorItemFactory), 1),
+        (nameof(ChainMailHardArmorItemFactory), 4),
+        (nameof(DoubleChainMailHardArmorItemFactory), 1),
+        (nameof(MetalBrigandineHardArmorItemFactory), 1),
+        (nameof(MetalScaleMailHardArmorItemFactory), 2),
+        (nameof(HardLeatherCapHelmArmorItemFactory), 4),
+        (nameof(IronHelmArmorItemFactory), 1),
+        (nameof(MetalCapHelmArmorFactory), 1),
+        (nameof(LargeLeatherShieldArmorItemFactory), 1),
+        (nameof(SmallLeatherShieldArmorItemFactory), 4),
+        (nameof(SmallMetalShieldArmorItemFactory), 1),
+        (nameof(HardLeatherSoftArmorItemFactory), 3),
+        (nameof(HardStuddedLeatherSoftArmorItemFactory), 2),
+        (nameof(LeatherScaleMailSoftArmorItemFactory), 3),
+        (nameof(RobeSoftArmorItemFactory), 3),
+        (nameof(SoftLeatherSoftArmorItemFactory), 4),
     };
 
     /// <summary>

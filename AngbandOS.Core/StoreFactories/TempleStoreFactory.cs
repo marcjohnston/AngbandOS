@@ -38,29 +38,29 @@ internal partial class TempleStoreFactory : StoreFactory
         nameof(DardobardTheWeakShopkeeper)
     };
 
-    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
+    protected override (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions => new (string, int)[]
     {
-        new StoreStockManifestDefinition(nameof(BallAndChainHaftedWeaponItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(FlailHaftedWeaponItemFactory)),
-        new StoreStockManifestDefinition(nameof(LeadFilledMaceHaftedWeaponItemFactory)),
-        new StoreStockManifestDefinition(nameof(LucerneHammerHaftedWeaponItemFactory)),
-        new StoreStockManifestDefinition(nameof(MaceHaftedWeaponItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(MorningStarHaftedWeaponItemFactory)),
-        new StoreStockManifestDefinition(nameof(QuarterstaffHaftedWeaponItemFactory)),
-        new StoreStockManifestDefinition(nameof(WarHammerHaftedWeaponItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(WhipHaftedWeaponItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(CommonPrayerLifeBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(HighMassLifeBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(CureCriticalWoundsPotionItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(CureLightWoundsPotionItemFactory)),
-        new StoreStockManifestDefinition(nameof(CureSeriousWoundsPotionItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(HeroismPotionItemFactory)),
-        new StoreStockManifestDefinition(nameof(RestoreLifeLevelsPotionItemFactory), 6),
-        new StoreStockManifestDefinition(nameof(BlessingScrollItemFactory)),
-        new StoreStockManifestDefinition(nameof(HolyChantScrollItemFactory)),
-        new StoreStockManifestDefinition(nameof(RemoveCurseScrollItemFactory), 3),
-        new StoreStockManifestDefinition(nameof(SpecialRemoveCurseScrollItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(WordOfRecallScrollItemFactory), 6),
+        (nameof(BallAndChainHaftedWeaponItemFactory), 2),
+        (nameof(FlailHaftedWeaponItemFactory), 1),
+        (nameof(LeadFilledMaceHaftedWeaponItemFactory), 1),
+        (nameof(LucerneHammerHaftedWeaponItemFactory), 1),
+        (nameof(MaceHaftedWeaponItemFactory), 2),
+        (nameof(MorningStarHaftedWeaponItemFactory), 1),
+        (nameof(QuarterstaffHaftedWeaponItemFactory), 1),
+        (nameof(WarHammerHaftedWeaponItemFactory), 2),
+        (nameof(WhipHaftedWeaponItemFactory), 2),
+        (nameof(CommonPrayerLifeBookItemFactory), 4),
+        (nameof(HighMassLifeBookItemFactory), 4),
+        (nameof(CureCriticalWoundsPotionItemFactory), 4),
+        (nameof(CureLightWoundsPotionItemFactory), 1),
+        (nameof(CureSeriousWoundsPotionItemFactory), 2),
+        (nameof(HeroismPotionItemFactory), 1),
+        (nameof(RestoreLifeLevelsPotionItemFactory), 6),
+        (nameof(BlessingScrollItemFactory), 1),
+        (nameof(HolyChantScrollItemFactory), 1),
+        (nameof(RemoveCurseScrollItemFactory), 3),
+        (nameof(SpecialRemoveCurseScrollItemFactory), 2),
+        (nameof(WordOfRecallScrollItemFactory), 6),
     };
 
     /// <summary>

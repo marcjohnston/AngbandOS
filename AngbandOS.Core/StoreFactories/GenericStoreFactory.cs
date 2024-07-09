@@ -115,7 +115,7 @@ internal class GenericStoreFactory : StoreFactory
     /// </summary>
     public override int StoreTurnover { get; } = 9;
 
-    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions { get; } 
+    protected override (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions { get; } 
 
     /// <summary>
     /// Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will

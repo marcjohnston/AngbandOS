@@ -46,24 +46,24 @@ internal class GeneralStoreFactory : StoreFactory
 
     protected override string TileName => nameof(GeneralStoreTile);
 
-    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
+    protected override (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions => new (string, int)[]
     {
-        new StoreStockManifestDefinition(nameof(WoodenArrowAmmunitionItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(SteelBoltAmmunitionItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(ClothCloakArmorItemFactory), 3),
-        new StoreStockManifestDefinition(nameof(PickDiggingWeaponItemFactory)),
-        new StoreStockManifestDefinition(nameof(ShovelDiggingWeaponItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(FlaskOfOilItemFactory), 10),
-        new StoreStockManifestDefinition(nameof(HardBiscuitFoodItemFactory)),
-        new StoreStockManifestDefinition(nameof(PintOfFineAleFoodItemFactory)),
-        new StoreStockManifestDefinition(nameof(PintOfFineWineFoodItemFactory)),
-        new StoreStockManifestDefinition(nameof(RationFoodItemFactory), 9),
-        new StoreStockManifestDefinition(nameof(StripOfVenisonFoodItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(BrassLanternLightSourceItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(OrbLightSourceItemFactory)),
-        new StoreStockManifestDefinition(nameof(WoodenTorchLightSourceItemFactory), 5),
-        new StoreStockManifestDefinition(nameof(IronShotAmmunitionItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(IronSpikeItemFactory), 2),
+        (nameof(WoodenArrowAmmunitionItemFactory), 2),
+        (nameof(SteelBoltAmmunitionItemFactory), 2),
+        (nameof(ClothCloakArmorItemFactory), 3),
+        (nameof(PickDiggingWeaponItemFactory), 1),
+        (nameof(ShovelDiggingWeaponItemFactory), 2),
+        (nameof(FlaskOfOilItemFactory), 10),
+        (nameof(HardBiscuitFoodItemFactory), 1),
+        (nameof(PintOfFineAleFoodItemFactory), 1),
+        (nameof(PintOfFineWineFoodItemFactory), 1),
+        (nameof(RationFoodItemFactory), 9),
+        (nameof(StripOfVenisonFoodItemFactory), 2),
+        (nameof(BrassLanternLightSourceItemFactory), 4),
+        (nameof(OrbLightSourceItemFactory), 1),
+        (nameof(WoodenTorchLightSourceItemFactory), 5),
+        (nameof(IronShotAmmunitionItemFactory), 2),
+        (nameof(IronSpikeItemFactory), 2),
     };
 
     /// <summary>

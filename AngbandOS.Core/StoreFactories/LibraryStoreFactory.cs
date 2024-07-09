@@ -42,26 +42,26 @@ internal class LibraryStoreFactory : StoreFactory
 
     protected override string TileName => nameof(LibraryStoreTile);
 
-    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
+    protected override (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions => new (string, int)[]
     {
-        new StoreStockManifestDefinition(nameof(MasteryChaosBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(SignOfChaosChaosBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(BasicChiFlowCorporealBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(YogicMasteryCorporealBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(BlackMassDeathBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(BlackPrayersDeathBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(CantripsforBeginnersFolkBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(MagicksOfMasteryFolkBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(MajorMagicksFolkBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(MinorMagicksFolkBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(CommonPrayerLifeBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(HighMassLifeBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(CallOfTheWildNatureBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(NatureMasteryNatureBookItemFactory), 4),
-        new StoreStockManifestDefinition(nameof(BeginnersHandbookSorceryBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(MasterSorcerersHandbookSorceryBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(CardMasteryTarotBookItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(ConjuringsTricksTarotBookItemFactory), 2),
+        (nameof(MasteryChaosBookItemFactory), 2),
+        (nameof(SignOfChaosChaosBookItemFactory), 2),
+        (nameof(BasicChiFlowCorporealBookItemFactory), 2),
+        (nameof(YogicMasteryCorporealBookItemFactory), 2),
+        (nameof(BlackMassDeathBookItemFactory), 4),
+        (nameof(BlackPrayersDeathBookItemFactory), 4),
+        (nameof(CantripsforBeginnersFolkBookItemFactory), 2),
+        (nameof(MagicksOfMasteryFolkBookItemFactory), 2),
+        (nameof(MajorMagicksFolkBookItemFactory), 2),
+        (nameof(MinorMagicksFolkBookItemFactory), 2),
+        (nameof(CommonPrayerLifeBookItemFactory), 4),
+        (nameof(HighMassLifeBookItemFactory), 4),
+        (nameof(CallOfTheWildNatureBookItemFactory), 4),
+        (nameof(NatureMasteryNatureBookItemFactory), 4),
+        (nameof(BeginnersHandbookSorceryBookItemFactory), 2),
+        (nameof(MasterSorcerersHandbookSorceryBookItemFactory), 2),
+        (nameof(CardMasteryTarotBookItemFactory), 2),
+        (nameof(ConjuringsTricksTarotBookItemFactory), 2),
     };
 
     /// <summary>
