@@ -496,6 +496,7 @@ public partial class MainWindow : Window, IConsoleViewPort
 
     public void GameExceptionThrown(string message)
     {
+        MessageBox.Show(message);
     }
 
     public void GameTimeElapsed()
