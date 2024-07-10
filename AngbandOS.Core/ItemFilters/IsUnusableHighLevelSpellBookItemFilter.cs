@@ -15,7 +15,7 @@ internal class IsUnusableHighLevelSpellBookItemFilter : ItemFilter
 {
     private IsUnusableHighLevelSpellBookItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsUsableSpellBook => false;
-    public override string[]? AnyMatchingFactoryKeys => new string[]
+    protected override string[]? AnyMatchingItemFactoryNames => new string[]
     {
         nameof(AzathothChaosBookItemFactory),
         nameof(CeleanoFragmentsTarotBookItemFactory),

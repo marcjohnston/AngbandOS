@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 internal class IsHighLevelSpellBookItemFilter : ItemFilter
 {
     private IsHighLevelSpellBookItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override string[]? AnyMatchingFactoryKeys => new string[]
+    protected override string[]? AnyMatchingItemFactoryNames => new string[]
     {
         nameof(AzathothChaosBookItemFactory),
         nameof(CeleanoFragmentsTarotBookItemFactory),

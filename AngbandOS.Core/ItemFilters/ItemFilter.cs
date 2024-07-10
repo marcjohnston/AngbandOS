@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ItemMatches;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -42,16 +44,16 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     /// <param name="nonmatchingStrings"></param>
     /// <param name="positiveLambdaEvaluation"></param>
     /// <returns></returns>
-    private ItemMatch[] AddStringsMatch(string[]? matchingStrings, string[]? nonmatchingStrings, GetItemProperty<string> positiveLambdaEvaluation)
+    private ItemMatch[] AddContainsMatch<T>(T[]? matchingStrings, T[]? nonmatchingStrings, GetItemProperty<T> positiveLambdaEvaluation)
     {
         List<ItemMatch> itemMatchList = new List<ItemMatch>();
         if (matchingStrings != null)
         {
-            itemMatchList.Add(new StringsItemMatch(Game, matchingStrings, true, positiveLambdaEvaluation));
+            itemMatchList.Add(new ContainsItemMatch<T>(Game, matchingStrings, true, positiveLambdaEvaluation));
         }
         if (nonmatchingStrings != null)
         {
-            itemMatchList.Add(new StringsItemMatch(Game, nonmatchingStrings, false, positiveLambdaEvaluation));
+            itemMatchList.Add(new ContainsItemMatch<T>(Game, nonmatchingStrings, false, positiveLambdaEvaluation));
         }
         return itemMatchList.ToArray();
     }
@@ -78,6 +80,11 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
 
     public virtual void Bind()
     {
+        AnyMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AnyMatchingItemClassNames);
+        AllNonMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AllNonMatchingItemClassNames);
+        AnyMatchingItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AnyMatchingItemFactoryNames);
+        AllNonMatchingItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AllNonMatchingItemFactoryNames);
+
         List<ItemMatch> itemMatchList = new List<ItemMatch>();
         itemMatchList.AddRange(AddBooleanMatch(CanBeActivated, new CanBeActivatedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeAimed, new CanBeAimedBooleanGetItemProperty(Game)));
@@ -100,8 +107,8 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         itemMatchList.AddRange(AddBooleanMatch(IsUsableSpellBook, new IsUsableSpellBookBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsWeapon, new IsWeaponBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsWearableOrWieldable, new IsWearableOrWieldableBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddStringsMatch(AnyMatchingFactoryItemClassKeys, AllNonMatchingFactoryItemClassKeys, new FactoryItemClassKeysStringGetItemProperty(Game)));
-        itemMatchList.AddRange(AddStringsMatch(AnyMatchingFactoryKeys, AllNonMatchingFactoryKeys, new FactoryKeysStringGetItemProperty(Game)));
+        itemMatchList.AddRange(AddContainsMatch<ItemClass>(AnyMatchingItemClasses, AllNonMatchingItemClasses, new ItemClassGetItemProperty(Game)));
+        itemMatchList.AddRange(AddContainsMatch<ItemFactory>(AnyMatchingItemFactories, AllNonMatchingItemFactories, new ItemFactoryGetItemProperty(Game)));
         ItemMatches = itemMatchList.ToArray();
     }
 
@@ -227,20 +234,24 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     /// <summary>
     /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual string[]? AnyMatchingFactoryItemClassKeys => null;
+    protected virtual string[]? AnyMatchingItemClassNames => null;
+    public ItemClass[]? AnyMatchingItemClasses { get; private set; }
 
     /// <summary>
     /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual string[]? AllNonMatchingFactoryItemClassKeys => null;
+    protected virtual string[]? AllNonMatchingItemClassNames => null;
+    public ItemClass[]? AllNonMatchingItemClasses { get; private set; }
 
     /// <summary>
     /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should match; null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual string[]? AnyMatchingFactoryKeys => null;
+    protected virtual string[]? AnyMatchingItemFactoryNames => null;
+    public ItemFactory[]? AnyMatchingItemFactories { get; private set; }
 
     /// <summary>
     /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should not match; null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual string[]? AllNonMatchingFactoryKeys => null;
+    protected virtual string[]? AllNonMatchingItemFactoryNames => null;
+    public ItemFactory[]? AllNonMatchingItemFactories { get; private set; }
 }

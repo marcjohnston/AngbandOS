@@ -14,7 +14,7 @@ namespace AngbandOS.Core.ItemFilters;
 internal class PolearmsOfValueItemFilter : ItemFilter
 {
     private PolearmsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
-    public override string[]? AnyMatchingFactoryItemClassKeys => new string[]
+    protected override string[]? AnyMatchingItemClassNames => new string[]
         {
             Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass)).Key
         };

@@ -5,15 +5,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemFilters;
+namespace AngbandOS.Core.ItemMatches;
 
 [Serializable]
-internal class CrownsOfValueItemFilter : ItemFilter
+internal class ItemClassGetItemProperty : GetItemProperty<ItemClass>
 {
-    private CrownsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
-    protected override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            Game.SingletonRepository.Get<ItemClass>(nameof(CrownsItemClass)).Key
-        };
-    public override bool? IsOfValue => true;
+    public ItemClassGetItemProperty(Game game) : base(game) { }
+
+    public override string DebugDescription => "FactoryKeys";
+    public override ItemClass Get(Item item)
+    {
+        return item.Factory.ItemClass;
+    }
 }
+
