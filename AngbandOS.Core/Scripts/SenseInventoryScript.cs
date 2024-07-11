@@ -40,7 +40,7 @@ internal class SenseInventoryScript : Script, IScript
                 {
                     continue;
                 }
-                bool okay = item.Factory.IdentityCanBeSensed;
+                bool okay = item.IdentityCanBeSensed;
                 if (!okay)
                 {
                     continue;

@@ -39,7 +39,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         }
 
         // Make sure the item is a potion
-        if (item.Factory.QuaffDetails == null)
+        if (item.QuaffDetails == null)
         {
             Game.MsgPrint("That is not a potion!");
             return;
@@ -48,20 +48,20 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
 
         // Drinking a potion costs a whole turn
         Game.EnergyUse = 100;
-        int itemLevel = item.Factory.LevelNormallyFound;
+        int itemLevel = item.LevelNormallyFound;
 
         // Do the actual potion effect
-        bool noticed = item.Factory.QuaffDetails.Value.QuaffScript.ExecuteNoticeableScript();
+        bool noticed = item.QuaffDetails.Value.QuaffScript.ExecuteNoticeableScript();
 
         // Skeletons are messy drinkers
-        Game.Race.Quaff(item.Factory);
+        Game.Race.Quaff(item);
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
         // We may now know the potion's type
         item.ObjectTried();
-        if (noticed && !item.Factory.IsFlavorAware)
+        if (noticed && !item.IsFlavorAware)
         {
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
 
@@ -72,7 +72,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         // If we're a channeler, we might be able to spend mana instead of using it up
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.QuaffDetails.Value.ManaEquivalent);
+            channeled = Game.DoCmdChannel(item, item.QuaffDetails.Value.ManaEquivalent);
         }
         if (!channeled)
         {

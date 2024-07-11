@@ -69,7 +69,7 @@ internal abstract class Activation : IGetKey
     {
         if (PreActivationMessage != null)
         {
-            string itemClassName = item.Factory.ItemClass.Name.ToLower();
+            string itemClassName = item.ItemClass.Name.ToLower();
             string formattedPreActivationMessage = String.Format(PreActivationMessage, itemClassName);
             Game.MsgPrint(formattedPreActivationMessage);
         }

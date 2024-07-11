@@ -48,7 +48,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
         {
             return false;
         }
-        if (item.Factory.AimingDetails == null)
+        if (item.AimingDetails == null)
         {
             Game.MsgPrint("That is not a wand!");
             return false;
@@ -66,7 +66,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
         }
         // Using a wand takes 100 energy
         Game.EnergyUse = 100;
-        int itemLevel = item.Factory.LevelNormallyFound;
+        int itemLevel = item.LevelNormallyFound;
         // Chance of success is your skill - item level, with item level capped at 50 and your
         // skill halved if you're confused
         int chance = Game.SkillUseDevice;
@@ -93,22 +93,22 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             return false;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
-        bool ident = item.Factory.AimingDetails.Value.ActivationScript.ExecuteIdentifableDirectionalScript(dir);
+        bool ident = item.AimingDetails.Value.ActivationScript.ExecuteIdentifableDirectionalScript(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried
         item.ObjectTried();
         // If we just discovered the item's flavor, mark it as so
-        if (ident && !item.Factory.IsFlavorAware)
+        if (ident && !item.IsFlavorAware)
         {
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
         // If we're a channeler then we should be using mana instead of charges
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.AimingDetails.Value.ManaValue);
+            channeled = Game.DoCmdChannel(item, item.AimingDetails.Value.ManaValue);
         }
         // We didn't use mana, so decrease the wand's charges
         if (!channeled)

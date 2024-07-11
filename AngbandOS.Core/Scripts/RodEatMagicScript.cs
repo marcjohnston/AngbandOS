@@ -24,7 +24,7 @@ internal class RodEatMagicScript : Script, IScriptItem
         }
         else
         {
-            Game.Mana.IntValue += 2 * item.Factory.LevelNormallyFound;
+            Game.Mana.IntValue += 2 * item.LevelNormallyFound;
             item.RodRechargeTimeRemaining = 500;
         }
     }

@@ -15,7 +15,7 @@ internal class ItemClassGetItemProperty : GetItemProperty<ItemClass>
     public override string DebugDescription => "FactoryKeys";
     public override ItemClass Get(Item item)
     {
-        return item.Factory.ItemClass;
+        return item.ItemClass;
     }
 }
 

@@ -132,8 +132,8 @@ internal class Store
         Item oPtr = StoreInventoryList[itemIndex];
         string outVal = $"{letter}) ";
         Game.Screen.PrintLine(outVal, row, 0);
-        ColorEnum a = oPtr.Factory.FlavorColor;
-        char c = oPtr.Factory.FlavorSymbol.Character;
+        ColorEnum a = oPtr.FlavorColor;
+        char c = oPtr.FlavorSymbol.Character;
         Game.Screen.Print(a, c.ToString(), row, 3);
         string oName = oPtr.GetFullDescription(true);
 
@@ -141,7 +141,7 @@ internal class Store
         {
             oName = oName.Substring(0, maxwid);
         }
-        Game.Screen.Print(oPtr.Factory.Color, oName, row, 5);
+        Game.Screen.Print(oPtr.Color, oName, row, 5);
         int wgt = oPtr.Weight;
         outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
 
@@ -262,7 +262,7 @@ internal class Store
             newItem.IdentityIsStoreBought = true;
 
             // Chests cannot be created for stores.
-            if (newItem.Factory.IsContainer)
+            if (newItem.IsContainer)
             {
                 continue;
             }
@@ -509,7 +509,7 @@ internal class Store
         int size = 1;
         int discount = 0;
         int cost = oPtr.Value();
-        size += oPtr.Factory.GetAdditionalMassProduceCount(oPtr);
+        size += oPtr.GetAdditionalMassProduceCount();
         if (cost < 5)
         {
             discount = 0;

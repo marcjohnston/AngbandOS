@@ -19,7 +19,7 @@ internal class RechargeStaffScript : Script, IScriptItemInt
     public void ExecuteScriptItemInt(Item item, int num)
     {
         int i, t;
-        i = (100 - item.Factory.LevelNormallyFound + num) / 5;
+        i = (100 - item.LevelNormallyFound + num) / 5;
         if (i < 1)
         {
             i = 1;

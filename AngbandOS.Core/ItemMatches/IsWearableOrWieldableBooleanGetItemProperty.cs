@@ -15,7 +15,7 @@ internal class IsWearableOrWieldableBooleanGetItemProperty : GetItemProperty<boo
     public override string DebugDescription => "IsWearableOrWieldable";
     public override bool Get(Item item)
     {
-        return item.Factory.IsWearableOrWieldable;
+        return item.IsWearableOrWieldable;
     }
 }
 

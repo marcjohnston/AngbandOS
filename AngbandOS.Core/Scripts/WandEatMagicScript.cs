@@ -20,7 +20,7 @@ internal class WandEatMagicScript : Script, IScriptItem
     {
         if (item.WandChargesRemaining > 0)
         {
-            Game.Mana.IntValue += item.WandChargesRemaining * item.Factory.LevelNormallyFound;
+            Game.Mana.IntValue += item.WandChargesRemaining * item.LevelNormallyFound;
             item.WandChargesRemaining = 0;
         }
         else

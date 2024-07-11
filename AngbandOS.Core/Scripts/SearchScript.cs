@@ -75,7 +75,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                     foreach (Item item in tile.Items)
                     {
                         // If one of them is a chest, determine if it is trapped
-                        if (!item.Factory.IsContainer)
+                        if (!item.IsContainer)
                         {
                             continue;
                         }

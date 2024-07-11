@@ -15,7 +15,7 @@ internal class CanBeReadBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeRead";
     public override bool Get(Item item)
     {
-        return item.Factory.CanBeRead;
+        return item.CanBeRead;
     }
 }
 

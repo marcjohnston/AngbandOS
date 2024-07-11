@@ -38,7 +38,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a rod
-        if (item.Factory.ZapDetails == null)
+        if (item.ZapDetails == null)
         {
             Game.MsgPrint("That is not a rod!");
             return;
@@ -55,7 +55,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
         // would ask for a direction.
         int dir = 5;
-        if (item.Factory.ZapDetails.Value.RequiresAiming || !item.Factory.IsFlavorAware)
+        if (item.ZapDetails.Value.RequiresAiming || !item.IsFlavorAware)
         {
             if (!Game.GetDirectionWithAim(out int direction))
             {
@@ -66,7 +66,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
 
         // Using a rod takes a whole turn
         Game.EnergyUse = 100;
-        int itemLevel = item.Factory.LevelNormallyFound;
+        int itemLevel = item.LevelNormallyFound;
         // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
         int chance = Game.SkillUseDevice;
         if (Game.ConfusedTimer.Value != 0)
@@ -97,22 +97,22 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         Game.PlaySound(SoundEffectEnum.ZapRod);
 
         // Do the rod-specific effect
-        (bool identified, bool used) = item.Factory.ZapDetails.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
+        (bool identified, bool used) = item.ZapDetails.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
         // We may have just discovered what the rod does
         item.ObjectTried();
-        if (identified && !item.Factory.IsFlavorAware)
+        if (identified && !item.IsFlavorAware)
         {
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
 
         // The player may be able to cancel the zap.
         if (used)
         {
-            item.RodRechargeTimeRemaining = item.Factory.ZapDetails.Value.TurnsToRecharge.Get(Game.UseRandom);
+            item.RodRechargeTimeRemaining = item.ZapDetails.Value.TurnsToRecharge.Get(Game.UseRandom);
         }
         else
         {
@@ -124,7 +124,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.ZapDetails.Value.ManaEquivalent);
+            channeled = Game.DoCmdChannel(item, item.ZapDetails.Value.ManaEquivalent);
             if (channeled)
             {
                 item.RodRechargeTimeRemaining = 0;

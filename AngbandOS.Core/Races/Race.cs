@@ -161,7 +161,7 @@ internal abstract class Race : IGetKey
     /// </summary>
     /// <param name="game"></param>
     /// <param name="item"></param>
-    public virtual void Quaff(ItemFactory itemFactory) { }
+    public virtual void Quaff(Item item) { }
 
     /// <summary>
     /// Returns true, if the race can bleed.  Golems, skeletons and spectres cannot bleed.  Level 12 or greater zombies also do not bleed.  Returns true, by default.

@@ -15,7 +15,7 @@ internal class CanBeUsedBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeUsed";
     public override bool Get(Item item)
     {
-        return item.Factory.CanBeUsed;
+        return item.UseDetails != null;
     }
 }
 

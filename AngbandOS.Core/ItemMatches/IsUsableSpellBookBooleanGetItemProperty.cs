@@ -15,7 +15,7 @@ internal class IsUsableSpellBookBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "IsUsableSpellBook";
     public override bool Get(Item item)
     {
-        return Game.PrimaryRealm != null && Game.PrimaryRealm.SpellBooks.Contains(item.Factory) || Game.SecondaryRealm != null && Game.SecondaryRealm.SpellBooks.Contains(item.Factory);
+        return item.IsUsableSpellBook();
     }
 }
 

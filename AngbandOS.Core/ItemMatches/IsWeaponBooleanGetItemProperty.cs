@@ -15,7 +15,7 @@ internal class IsWeaponBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "IsWeapon";
     public override bool Get(Item item)
     {
-        return item.Factory.IsWeapon;
+        return item.IsWeapon;
     }
 }
 

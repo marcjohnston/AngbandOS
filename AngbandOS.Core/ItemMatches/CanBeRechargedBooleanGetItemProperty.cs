@@ -15,7 +15,7 @@ internal class CanBeRechargedBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeRecharged";
     public override bool Get(Item item)
     {
-        return item.Factory.RechargeScript != null;
+        return item.RechargeScript != null;
     }
 }
 

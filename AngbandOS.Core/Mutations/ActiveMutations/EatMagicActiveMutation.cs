@@ -27,7 +27,7 @@ internal class EatMagicActiveMutation : Mutation
             return;
         }
 
-        int lev = oPtr.Factory.LevelNormallyFound;
+        int lev = oPtr.LevelNormallyFound;
         oPtr.EatMagic();
         if (Game.Mana.IntValue > Game.MaxMana.IntValue)
         {

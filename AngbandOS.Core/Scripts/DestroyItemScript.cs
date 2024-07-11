@@ -65,7 +65,7 @@ internal class DestroyItemScript : Script, IScript, IRepeatableScript, IScriptSt
         //Only confirm if it's not a worthless item
         if (!force)
         {
-            if (!item.Stompable())
+            if (!item.Stompable)
             {
                 string outVal = $"Really destroy {itemName}? ";
                 if (!Game.GetCheck(outVal))
@@ -74,11 +74,11 @@ internal class DestroyItemScript : Script, IScript, IRepeatableScript, IScriptSt
                 }
 
                 // If it was something we might want to destroy again, ask
-                if (item.IsKnown() && item.Factory.AskDestroyAll)
+                if (item.IsKnown() && item.AskDestroyAll)
                 {
                     if (Game.GetCheck($"Always destroy {itemName}?"))
                     {
-                        item.Factory.Stompable[0] = true;
+                        item.Stompable = true;
                     }
                 }
             }

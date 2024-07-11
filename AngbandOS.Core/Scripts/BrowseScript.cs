@@ -72,8 +72,7 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessByChan
 
         // Save the screen and overprint the spells in the book
         ScreenBuffer savedScreen = Game.Screen.Clone();
-        BookItemFactory book = (BookItemFactory)item.Factory;
-        Game.PrintSpells(book.Spells.ToArray(), 1, 20);
+        Game.PrintSpells(item.Spells.ToArray(), 1, 20);
         Game.MsgClear();
         // Wait for a keypress and re-load the screen
         Game.Screen.Print("[Press any key to continue]", 0, 23);

@@ -434,14 +434,14 @@ internal class RandomArtifactCharacteristics : IItemCharacteristics
     /// <param name="itemCharacteristicsB"></param>
     public void Copy(Item item)
     {
-        CanApplyBlessedArtifactBias = item.Factory.CanApplyBlessedArtifactBias;
-        CanApplyArtifactBiasSlaying = item.Factory.CanApplyArtifactBiasSlaying;
-        CanApplyBlowsBonus = item.Factory.CanApplyBlowsBonus;
-        CanReflectBoltsAndArrows = item.Factory.CanReflectBoltsAndArrows;
-        CanApplySlayingBonus = item.Factory.CanApplySlayingBonus;
-        CanApplyBonusArmorClassMiscPower = item.Factory.CanApplyBonusArmorClassMiscPower;
-        CanProvideSheathOfElectricity = item.Factory.CanProvideSheathOfElectricity;
-        CanProvideSheathOfFire = item.Factory.CanProvideSheathOfFire;
+        CanApplyBlessedArtifactBias = item.CanApplyBlessedArtifactBias;
+        CanApplyArtifactBiasSlaying = item.CanApplyArtifactBiasSlaying;
+        CanApplyBlowsBonus = item.CanApplyBlowsBonus;
+        CanReflectBoltsAndArrows = item.CanReflectBoltsAndArrows;
+        CanApplySlayingBonus = item.CanApplySlayingBonus;
+        CanApplyBonusArmorClassMiscPower = item.CanApplyBonusArmorClassMiscPower;
+        CanProvideSheathOfElectricity = item.CanProvideSheathOfElectricity;
+        CanProvideSheathOfFire = item.CanProvideSheathOfFire;
 
         BonusHit = item.BonusHit;
         BonusArmorClass = item.BonusArmorClass;

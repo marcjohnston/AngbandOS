@@ -2027,10 +2027,10 @@ public bool IsDead = false;
             item = new Item(this, kIdx);
         }
         item.EnchantItem(ObjectLevel, true, good, great, true);
-        item.Count = item.Factory.MakeObjectCount;
-        if (!item.IsCursed && !item.IsBroken && item.Factory.LevelNormallyFound > Difficulty)
+        item.Count = item.MakeObjectCount;
+        if (!item.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
         {
-            TreasureRating += item.Factory.LevelNormallyFound - Difficulty;
+            TreasureRating += item.LevelNormallyFound - Difficulty;
         }
         return item;
     }
@@ -2980,8 +2980,7 @@ public bool IsDead = false;
             {
                 testerExp = 10000;
             }
-            BookItemFactory bookItemFactory = (BookItemFactory)item.Factory;
-            testerExp /= bookItemFactory.ExperienceGainDivisorForDestroying;
+            testerExp /= item.ExperienceGainDivisorForDestroying;
             if (testerExp < 1)
             {
                 testerExp = 1;
@@ -3215,20 +3214,19 @@ public bool IsDead = false;
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeReorderFlaggedAction)).Check();
     }
 
-    public void OpenChest(int y, int x, Item chestItem)
+    public void OpenChest(int y, int x, Item item)
     {
-        ChestItemFactory chestItemFactory = (ChestItemFactory)chestItem.Factory;
-        int number = chestItemFactory.NumberOfItemsContained;
+        int number = item.NumberOfItemsContained;
 
         // Check to see if there is anything in the chest.  A chest trap will set this to zero, if it explodes.
-        if (chestItem.ContainerIsOpen)
+        if (item.ContainerIsOpen)
         {
             number = 0;
         }
-        ObjectLevel = chestItem.LevelOfObjectsInContainer + 10;
+        ObjectLevel = item.LevelOfObjectsInContainer + 10;
         for (; number > 0; --number)
         {
-            if (chestItemFactory.IsSmall && RandomLessThan(100) < 75)
+            if (item.IsSmall && RandomLessThan(100) < 75)
             {
                 Item qPtr = MakeGold();
                 DropNear(qPtr, -1, y, x);
@@ -3243,8 +3241,8 @@ public bool IsDead = false;
             }
         }
         ObjectLevel = Difficulty;
-        chestItem.ContainerIsOpen = true;
-        chestItem.BecomeKnown();
+        item.ContainerIsOpen = true;
+        item.BecomeKnown();
     }
 
     public void UpdateStuff()
@@ -5373,7 +5371,7 @@ public bool IsDead = false;
         bool isArtifact = oPtr.IsArtifact;
         ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
         int prob = oPtr.Count * 100;
-        prob /= oPtr.Factory.EnchantmentMaximumCount;
+        prob /= oPtr.EnchantmentMaximumCount;
         for (int i = 0; i < n; i++)
         {
             if (RandomLessThan(prob) >= 100)
@@ -6894,7 +6892,7 @@ public bool IsDead = false;
     public bool DoCmdChannel(Item item, int manaValue)
     {
         int manaNeeded;
-        int itemCost = item.Factory.Cost;
+        int itemCost = item.Cost;
 
         // Never channel worthless items
         if (itemCost <= 0)
@@ -6940,7 +6938,7 @@ public bool IsDead = false;
                 continue;
             }
             // If the item is a spike, return it
-            if (item.Factory.CanSpikeDoorClosed)
+            if (item.CanSpikeDoorClosed)
             {
                 inventoryIndex = i;
                 return true;
@@ -7294,7 +7292,7 @@ public bool IsDead = false;
                     MsgPrint($"You see {itemName}.");
                 }
                 // If it's worthless, stomp on it
-                else if (item.Stompable())
+                else if (item.Stompable)
                 {
                     DeleteObject(item);
                     MsgPrint($"You stomp on {itemName}.");
@@ -7830,11 +7828,10 @@ public bool IsDead = false;
         MovePlayer(CurrentRunDirection, false);
     }
 
-    public Spell[] OkaySpells(Item spellBook, bool known)
+    public Spell[] OkaySpells(Item item, bool known)
     {
         List<Spell> okaySpells = new List<Spell>();
-        BookItemFactory bookItemFactory = (BookItemFactory)spellBook.Factory;
-        foreach (Spell spell in bookItemFactory.Spells)
+        foreach (Spell spell in item.Spells)
         {
             if (SpellOkay(spell, known))
             {
@@ -7933,8 +7930,8 @@ public bool IsDead = false;
         }
         item.ItemOptimize();
         string missileName = missile.GetFullDescription(false);
-        ColorEnum missileColor = missile.Factory.FlavorColor;
-        char missileCharacter = missile.Factory.FlavorSymbol.Character;
+        ColorEnum missileColor = missile.FlavorColor;
+        char missileCharacter = missile.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
         int divider = missile.Weight > 10 ? missile.Weight : 10;
@@ -8049,7 +8046,7 @@ public bool IsDead = false;
                     {
                         // Let the player know what happens to the monster
                         MessagePain(monster, damage);
-                        if (monster.SmFriendly && missile.Factory.QuaffDetails == null)
+                        if (monster.SmFriendly && missile.QuaffDetails == null)
                         {
                             string mName = monster.Name;
                             MsgPrint($"{mName} gets angry!");
@@ -8067,15 +8064,15 @@ public bool IsDead = false;
             }
         }
         // There's a chance of breakage if we hit a creature
-        Probability chanceToBreak = hitBody ? missile.Factory.BreakageChanceProbability : new FalseProbability();
+        Probability chanceToBreak = hitBody ? missile.BreakageChanceProbability : new FalseProbability();
 
         // If we hit with a potion, the potion might affect the creature
-        if (missile.Factory.QuaffDetails != null)
+        if (missile.QuaffDetails != null)
         {
             if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test(this))
             {
                 MsgPrint($"The {missileName} shatters!");
-                if (missile.Factory.Smash(1, y, x))
+                if (missile.Smash(1, y, x))
                 {
                     if (Map.Grid[y][x].MonsterIndex != 0 && Monsters[Map.Grid[y][x].MonsterIndex].SmFriendly)
                     {
@@ -9727,7 +9724,7 @@ public bool IsDead = false;
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
             Item item = new Item(this, scrollSatisfyHungerItemClass);
             item.Count = (char)RandomBetween(2, 5);
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
             InvenCarry(item);
@@ -9737,7 +9734,7 @@ public bool IsDead = false;
             ItemFactory rationFoodItemClass = SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
             Item item = new Item(this, rationFoodItemClass);
             item.Count = RandomBetween(3, 7);
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             item.BecomeKnown();
             InvenCarry(item);
         }
@@ -9746,7 +9743,7 @@ public bool IsDead = false;
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
             Item item = new Item(this, scrollLightItemClass);
             item.Count = RandomBetween(3, 7);
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
             InvenCarry(item);
@@ -9757,7 +9754,7 @@ public bool IsDead = false;
             Item item = new Item(this, woodenTorchItemClass);
             item.Count = RandomBetween(3, 7);
             item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             item.BecomeKnown();
             InvenCarry(item);
             Item carried = item.Clone(1);
@@ -9786,9 +9783,9 @@ public bool IsDead = false;
     public void OutfitPlayerWithItem(Item item)
     {
         item.IdentityIsStoreBought = true;
-        item.Factory.IsFlavorAware = true;
+        item.IsFlavorAware = true;
         item.BecomeKnown();
-        int slot = item.Factory.WieldSlot;
+        int slot = item.WieldSlot;
         if (slot == -1)
         {
             InvenCarry(item);
@@ -13362,8 +13359,8 @@ public bool IsDead = false;
                 // Only print items that exist
                 if (item != null)
                 {
-                    color = item.Factory.FlavorColor;
-                    character = item.Factory.FlavorSymbol.Character;
+                    color = item.FlavorColor;
+                    character = item.FlavorSymbol.Character;
                 }
                 Screen.Print(color, character, screenRow, screenCol + column);
                 column++;
@@ -14580,9 +14577,9 @@ public bool IsDead = false;
                     string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
                     string w = amt > 1 ? "were" : "was";
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
-                    if (oPtr.Factory.QuaffDetails != null)
+                    if (oPtr.QuaffDetails != null)
                     {
-                        oPtr.Factory.Smash(0, MapY.IntValue, MapX.IntValue);
+                        oPtr.Smash(0, MapY.IntValue, MapX.IntValue);
                     }
                     InvenItemIncrease(i, -amt);
                     InvenItemOptimize(i);
@@ -14822,19 +14819,11 @@ public bool IsDead = false;
                     ConsoleTableRow consoleRow = consoleTable.AddRow();
                     consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{index.IndexToLabel()})");
 
-                    if (oPtr.Factory != null)
-                    {
-                        // Apply flavor visuals
-                        consoleRow["flavor"] = new ConsoleChar(oPtr.Factory.FlavorColor, oPtr.Factory.FlavorSymbol.Character);
-                    }
-                    else
-                    {
-                        // There is no item.
-                        consoleRow["flavor"] = new ConsoleChar(ColorEnum.Background, ' ');
-                    }
+                    // Apply flavor visuals
+                    consoleRow["flavor"] = new ConsoleChar(oPtr.FlavorColor, oPtr.FlavorSymbol.Character);
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
-                    ColorEnum color = oPtr.Factory.Color;
+                    ColorEnum color = oPtr.Color;
                     consoleRow["description"] = new ConsoleString(color, oPtr.GetFullDescription(true));
 
                     int wgt = oPtr.Weight * oPtr.Count;
@@ -14926,7 +14915,7 @@ public bool IsDead = false;
         GridTile cPtr = Map.Grid[y][x];
         foreach (Item oPtr in cPtr.Items)
         {
-            if (oPtr.Factory.IsContainer)
+            if (oPtr.IsContainer)
             {
                 return oPtr;
             }
@@ -15885,8 +15874,8 @@ public bool IsDead = false;
         {
             if (oPtr.WasNoticed)
             {
-                character = oPtr.Factory.FlavorSymbol.Character;
-                color = oPtr.Factory.FlavorColor;
+                character = oPtr.FlavorSymbol.Character;
+                color = oPtr.FlavorColor;
                 if (HallucinationsTimer.Value != 0)
                 {
                     ImageObject(out color, out character);

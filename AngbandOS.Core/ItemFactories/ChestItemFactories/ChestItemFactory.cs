@@ -62,9 +62,9 @@ internal abstract class ChestItemFactory : ItemFactory
     /// <param name="store"></param>
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
-        if (item.Factory.LevelNormallyFound > 0)
+        if (item.LevelNormallyFound > 0)
         {
-            int chestType = Game.DieRoll(item.Factory.LevelNormallyFound);
+            int chestType = Game.DieRoll(item.LevelNormallyFound);
             item.ContainerIsOpen = false;
             int chestTrapConfigurationCount = Game.SingletonRepository.Count<ChestTrapConfiguration>();
             int eightFivePercent = chestTrapConfigurationCount * 100 / 85;

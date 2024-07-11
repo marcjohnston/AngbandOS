@@ -50,9 +50,9 @@ internal class IdentifyAllItemsScript : Script, IScript, IScriptStore
             {
                 continue;
             }
-            oPtr.Factory.IsFlavorAware = true;
+            oPtr.IsFlavorAware = true;
             oPtr.BecomeKnown();
-            if (oPtr.Stompable())
+            if (oPtr.Stompable)
             {
                 string itemName = oPtr.GetFullDescription(true);
                 Game.MsgPrint($"You destroy {itemName}.");

@@ -54,7 +54,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a scroll
-        if (item.Factory.ActivateScrollScript == null)
+        if (item.ActivateScrollScript == null)
         {
             Game.MsgPrint("That is not a scroll!");
             return;
@@ -64,22 +64,22 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         //bool identified = false;
         //bool usedUp = true;
 
-        (bool identified, bool used) = item.Factory.ActivateScrollScript.Value.ActivationScript.ExecuteIdentifableAndUsedScript();
+        (bool identified, bool used) = item.ActivateScrollScript.Value.ActivationScript.ExecuteIdentifableAndUsedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll
         item.ObjectTried();
-        if (identified && !item.Factory.IsFlavorAware)
+        if (identified && !item.IsFlavorAware)
         {
-            item.Factory.IsFlavorAware = true;
-            int itemLevel = item.Factory.LevelNormallyFound;
+            item.IsFlavorAware = true;
+            int itemLevel = item.LevelNormallyFound;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
         bool channeled = false;
         // Channelers can use mana instead of the scroll being used up
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.ActivateScrollScript.Value.ManaValue);
+            channeled = Game.DoCmdChannel(item, item.ActivateScrollScript.Value.ManaValue);
         }
         if (!channeled)
         {

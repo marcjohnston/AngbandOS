@@ -15,7 +15,7 @@ internal class CanProjectArrowsBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanProjectArrows";
     public override bool Get(Item item)
     {
-        return item.Factory.CanProjectArrows;
+        return item.CanProjectArrows;
     }
 }
 

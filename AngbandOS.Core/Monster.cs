@@ -1217,7 +1217,7 @@ internal class Monster : IItemContainer
                 foreach (Item item in tile.Items.ToArray()) // We need to use a copy because the collection can change
                 {
                     // We ignore gold
-                    if (item.Factory.IsIgnoredByMonsters)
+                    if (item.IsIgnoredByMonsters)
                     {
                         continue;
                     }

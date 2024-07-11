@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics.Contracts;
-
 namespace AngbandOS.Core.ItemFactories;
 
 /// <summary>
@@ -17,6 +15,68 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class ItemFactory : ItemAdditiveBundle
 {
     protected ItemFactory(Game game) : base(game) { }
+
+    #region State Data
+    /// <summary>
+    /// Returns true, if the flavor for the factory has been identified or the factory doesn't use flavors; false, when the factory uses flavors and
+    /// the flavor still hasn't been identified by the player.  The <see cref="Game.FlavorInit"/> method is used to re-initialize this variable.  Stores may produce items from this
+    /// factory and identify them; even though the Factory flavor still has not been identified.
+    /// </summary>
+    public bool IsFlavorAware;
+
+    /// <summary>
+    /// Returns the character that is used to display items of this type.  This character is initially set from the BaseItemCategory, but item categories
+    /// that have flavor may override this character and replace it with a different character from the flavor.
+    /// </summary>
+    [Obsolete("This property is available via the IFlavor.Flavor property.")]
+    public Symbol FlavorSymbol;
+
+    /// <summary>
+    /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
+    /// that have flavor may override this color and replace it with a different color from the flavor.
+    /// </summary>
+    [Obsolete("This property is available via the IFlavor.Flavor property.")]
+    public ColorEnum FlavorColor;
+
+    /// <summary>
+    /// Returns true, if the player has attempted/tried the item.
+    /// </summary>
+    public bool Tried;
+
+    /// <summary>
+    /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
+    /// Use StompableType enum to address each index.
+    /// </summary>
+    public readonly bool[] Stompable = new bool[4];
+    #endregion
+
+    #region Private Cached Data
+    /// <summary>
+    /// Returns the CodedName value to render the item descriptions.  
+    /// </summary>
+    private string _descriptionSyntax;
+
+    /// <summary>
+    /// Returns the AlternateCodedName value to render for item descriptions.
+    /// </summary>
+    private string _alternateDescriptionSyntax;
+    private string _flavorSuppressedDescriptionSyntax;
+    private string _alternateFlavorSuppressedDescriptionSyntax;
+    private string _flavorUnknownDescriptionSyntax;
+    private string _alternateFlavorUnknownDescriptionSyntax;
+    #endregion
+
+    /// <summary>
+    /// Returns the symbol to use for rendering. This symbol will be initially used to set the <see cref="FlavorSymbol"/> and item
+    /// categories that have flavor may change the FlavorCharacter based on the flavor.
+    /// </summary>
+    public Symbol Symbol { get; private set; }
+
+    /// <summary>
+    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
+    /// that have flavor may change the FlavorColor based on the flavor.
+    /// </summary>
+    public virtual ColorEnum Color => ColorEnum.White;
 
     /// <summary>
     /// Returns the name of the noticeable script to run when the player uses the item ; or null if the potion does
@@ -117,11 +177,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool CanProjectArrows => false;
 
     /// <summary>
-    /// Returns the amount of mana needed to consume to keep a potion that was quaffed.
-    /// </summary>
-    public virtual int StaffManaValue => 0; // TODO: Refactor into the binder
-
-    /// <summary>
     /// Returns the maximum number of items that can be enchanted at one time.  A divisor of 1 is returned, by default.  Ammunition items return 20.  Item counts greater than this value
     /// will have a decreased probability of enchantment.
     /// </summary>
@@ -181,8 +236,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected virtual string? RechargeScriptName => null;
 
     public IScriptItemInt? RechargeScript { get; private set; }
-
-    public string UniqueId = Guid.NewGuid().ToString();
 
     /// <summary>
     /// Returns true, if the item can be stomped.  Returns the stompable status based on the item quality rating, by default.
@@ -361,9 +414,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         return s;
     }
 
-    public virtual void Refill(Game game, Item item)
+    public virtual void Refill(Item item)
     {
-        game.MsgPrint("Your light cannot be refilled.");
+        Game.MsgPrint("Your light cannot be refilled.");
     }
 
     /// <summary>
@@ -418,7 +471,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             s += $" (charging)";
         }
 
-        if (item.IsKnown() && CanBeUsed)
+        if (item.IsKnown() && UseDetails != null)
         {
             s += $" ({item.StaffChargesRemaining} {Game.Pluralize("charge", item.StaffChargesRemaining)})";
         }
@@ -864,11 +917,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool CanBeEaten => false;
 
     /// <summary>
-    /// Returns true, if the item can be used.
-    /// </summary>
-    public virtual bool CanBeUsed => false;
-
-    /// <summary>
     /// Returns true, if the item is armor.
     /// </summary>
     public virtual bool IsArmor => false;
@@ -908,20 +956,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     protected virtual string? FlavorUnknownDescriptionSyntax => null;
 
     protected virtual string? AlternateFlavorUnknownDescriptionSyntax => null;
-
-    /// <summary>
-    /// Returns the CodedName value to render the item descriptions.  
-    /// </summary>
-    private string _descriptionSyntax;
-
-    /// <summary>
-    /// Returns the AlternateCodedName value to render for item descriptions.
-    /// </summary>
-    private string _alternateDescriptionSyntax;
-    private string _flavorSuppressedDescriptionSyntax;
-    private string _alternateFlavorSuppressedDescriptionSyntax;
-    private string _flavorUnknownDescriptionSyntax;
-    private string _alternateFlavorUnknownDescriptionSyntax;
 
     public override void Bind()
     {
@@ -1046,33 +1080,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
 
     /// <summary>
-    /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
-    /// Use StompableType enum to address each index.
-    /// </summary>
-    public readonly bool[] Stompable = new bool[4];
-
-    /// <summary>
-    /// Returns true, if the flavor for the factory has been identified or the factory doesn't use flavors; false, when the factory uses flavors and
-    /// the flavor still hasn't been identified by the player.  The <see cref="Game.FlavorInit"/> method is used to re-initialize this variable.  Stores may produce items from this
-    /// factory and identify them; even though the Factory flavor still has not been identified.
-    /// </summary>
-    public bool IsFlavorAware;
-
-    /// <summary>
-    /// Returns the character to be displayed for items of this type.  This character is initially set from the BaseItemCategory, but item categories
-    /// that have flavor may override this character and replace it with a different character from the flavor.
-    /// </summary>
-    [Obsolete("This property is available via the IFlavor.Flavor property.")]
-    public Symbol FlavorSymbol;
-
-    /// <summary>
-    /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
-    /// that have flavor may override this color and replace it with a different color from the flavor.
-    /// </summary>
-    [Obsolete("This property is available via the IFlavor.Flavor property.")]
-    public ColorEnum FlavorColor;
-
-    /// <summary>
     /// Returns true, if the destroy script should ask the player if known items from this factory should be destroyed by setting the applicable 
     /// broken stomp type to true; false, otherwise.  Returns true, by default.  Chests, weapons, armor and orbs of light return false.
     /// </summary>
@@ -1095,24 +1102,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public virtual void ApplyFlavorVisuals() { }
 
-    /// <summary>
-    /// Returns true, if the player has attempted/tried the item.
-    /// </summary>
-    public bool Tried;
-
     protected abstract string SymbolName { get; }
-
-    /// <summary>
-    /// Returns the symbol to use for rendering. This symbol will be initially used to set the FlavorCharacter and item
-    /// categories that have flavor may change the FlavorCharacter based on the flavor.
-    /// </summary>
-    public Symbol Symbol { get; private set; }
-
-    /// <summary>
-    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the FlavorColor and item categories
-    /// that have flavor may change the FlavorColor based on the flavor.
-    /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
 
     public virtual int ArmorClass => 0;
 

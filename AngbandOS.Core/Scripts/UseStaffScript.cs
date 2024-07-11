@@ -38,7 +38,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a staff
-        if (item.Factory.UseDetails == null)
+        if (item.UseDetails == null)
         {
             Game.MsgPrint("That is not a staff!");
             return;
@@ -52,7 +52,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         }
         // Using a staff costs a full turn
         Game.EnergyUse = 100;
-        int itemLevel = item.Factory.LevelNormallyFound;
+        int itemLevel = item.LevelNormallyFound;
         // We have a chance of the device working equal to skill (halved if confused) - item
         // level (capped at 50)
         int chance = Game.SkillUseDevice;
@@ -82,14 +82,14 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         Game.PlaySound(SoundEffectEnum.UseStaff);
 
         // Do the specific effect for the type of staff
-        (bool identified, bool chargeUsed) = item.Factory.UseDetails.Value.UseScript.ExecuteIdentifableAndUsedScript();
+        (bool identified, bool chargeUsed) = item.UseDetails.Value.UseScript.ExecuteIdentifableAndUsedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does
         item.ObjectTried();
-        if (identified && !item.Factory.IsFlavorAware)
+        if (identified && !item.IsFlavorAware)
         {
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
         // We may not have used up a charge
@@ -101,7 +101,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.Factory.StaffManaValue);
+            channeled = Game.DoCmdChannel(item, item.ZapDetails.Value.ManaEquivalent);
         }
         if (!channeled)
         {

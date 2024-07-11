@@ -15,7 +15,7 @@ internal class CanTunnelBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanTunnel";
     public override bool Get(Item item)
     {
-        return item.Factory.CanTunnel;
+        return item.CanTunnel;
     }
 }
 

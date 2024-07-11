@@ -27,7 +27,7 @@ internal class CreatePhlogistonScript : Script, IScript
         }
 
         // Maximum phlogiston is the capacity of the light source
-        int? maxPhlogiston = item.Factory.MaxPhlogiston;
+        int? maxPhlogiston = item.MaxPhlogiston;
 
         // Probably using an orb or a star essence (or maybe not holding a light source at all)
         if (maxPhlogiston == null)

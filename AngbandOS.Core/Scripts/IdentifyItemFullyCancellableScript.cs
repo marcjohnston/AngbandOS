@@ -27,7 +27,7 @@ internal class IdentifyItemFullyCancellableScript : Script, IScript, ICancellabl
         {
             return true;
         }
-        oPtr.Factory.IsFlavorAware = true;
+        oPtr.IsFlavorAware = true;
         oPtr.BecomeKnown();
         oPtr.IdentMental = true;
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -38,7 +38,7 @@ internal class IdentifyItemFullyCancellableScript : Script, IScript, ICancellabl
         Game.MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
 
         // Check to see if the player is carrying the item and it is stompable.
-        if (oPtr.IsInInventory && oPtr.Stompable())
+        if (oPtr.IsInInventory && oPtr.Stompable)
         {
             string itemName = oPtr.GetFullDescription(true);
             Game.MsgPrint($"You destroy {oName}.");

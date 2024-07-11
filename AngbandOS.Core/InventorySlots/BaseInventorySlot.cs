@@ -69,7 +69,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
 
     public virtual void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
     {
-        int slot = oPtr.Factory.WieldSlot;
+        int slot = oPtr.WieldSlot;
         Game.SetInventoryItem(slot, oPtr);
     }
 

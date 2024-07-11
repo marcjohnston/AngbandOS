@@ -15,7 +15,7 @@ internal class IsLanternFuelBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "IsLanternFuel";
     public override bool Get(Item item)
     {
-        return item.Factory.IsLanternFuel;
+        return item.IsLanternFuel;
     }
 }
 

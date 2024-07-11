@@ -90,10 +90,8 @@ internal class ResearchSpellScript : Script, IScript, IScriptStore
             // We need to choose a spell at random
             int k = 0;
 
-            BookItemFactory bookItemFactory = (BookItemFactory)item.Factory;
-
             // Gather the potential spells from the book
-            foreach (Spell sPtr in bookItemFactory.Spells)
+            foreach (Spell sPtr in item.Spells)
             {
                 if (Game.SpellOkay(sPtr, false))
                 {

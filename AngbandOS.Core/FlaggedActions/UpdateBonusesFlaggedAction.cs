@@ -677,10 +677,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (!Game.HasHeavyBow)
                     {
                         // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
-                        ItemFactory[]? ammunitionItemFactories = oPtr.Factory.AmmunitionItemFactories;
+                        ItemFactory[]? ammunitionItemFactories = oPtr.AmmunitionItemFactories;
 
                         // Rangers get a bonus for using ranged weapons that use arrows for ammunition.
-                        if (Game.BaseCharacterClass.ID == CharacterClass.Ranger && oPtr.Factory.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(BowItemClass)))
+                        if (Game.BaseCharacterClass.ID == CharacterClass.Ranger && oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(BowItemClass)))
                         {
                             if (Game.ExperienceLevel.IntValue >= 20)
                             {
@@ -811,7 +811,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.DisplayedDamageBonus += Game.ExperienceLevel.IntValue / 5;
                 }
                 
-                if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.Factory.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.Factory.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
+                if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
                 {
                     Game.AttackBonus -= 2;
                     Game.DamageBonus -= 2;

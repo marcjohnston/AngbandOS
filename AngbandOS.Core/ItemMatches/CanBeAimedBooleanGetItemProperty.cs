@@ -15,7 +15,7 @@ internal class CanBeAimedBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeAimed";
     public override bool Get(Item item)
     {
-        return item.Factory.AimingDetails != null;
+        return item.AimingDetails != null;
     }
 }
 

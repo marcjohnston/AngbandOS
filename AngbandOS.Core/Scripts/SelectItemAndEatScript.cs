@@ -39,7 +39,7 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         }
 
         // Make sure the item is edible
-        if (item.Factory.EatScript == null)
+        if (item.EatScript == null)
         {
             Game.MsgPrint("You can't eat that!");
             return;
@@ -47,10 +47,10 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
 
         // Eating costs 100 energy
         Game.EnergyUse = 100;
-        int itemLevel = item.Factory.LevelNormallyFound;
+        int itemLevel = item.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
-        bool ident = item.Factory.EatScript.ExecuteIdentifableScript();
+        bool ident = item.EatScript.ExecuteIdentifableScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
@@ -58,9 +58,9 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         item.ObjectTried();
 
         // Learn its flavor if necessary
-        if (ident && !item.Factory.IsFlavorAware)
+        if (ident && !item.IsFlavorAware)
         {
-            item.Factory.IsFlavorAware = true;
+            item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
 
@@ -68,7 +68,7 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         Game.Race.Eat(item);
 
         // Dwarf bread isn't actually eaten so return early
-        if (item.Factory.IsConsumedWhenEaten)
+        if (item.IsConsumedWhenEaten)
         {
             // Use up the item (if it fell to the floor this will have already been dealt with)
             IItemContainer container = item.GetContainer();

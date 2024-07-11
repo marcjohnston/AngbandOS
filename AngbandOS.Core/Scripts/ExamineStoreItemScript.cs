@@ -64,8 +64,7 @@ internal class ExamineStoreItemScript : Script, IScriptStore
     private void DoStoreBrowse(Item oPtr)
     {
         ScreenBuffer savedScreen = Game.Screen.Clone();
-        BookItemFactory book = (BookItemFactory)oPtr.Factory;
-        Game.PrintSpells(book.Spells.ToArray(), 1, 20);
+        Game.PrintSpells(oPtr.Spells.ToArray(), 1, 20);
         Game.MsgClear();
         Game.Screen.Print("[Press any key to continue]", 0, 23);
         Game.Inkey();

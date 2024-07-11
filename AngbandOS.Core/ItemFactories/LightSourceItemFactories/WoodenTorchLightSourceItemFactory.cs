@@ -59,12 +59,12 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     /// Refill a torch from another torch
     /// </summary>
     /// <param name="itemIndex"> The inventory index of the fuel </param>
-    public override void Refill(Game game, Item item)
+    public override void Refill(Item item)
     {
         // Get an item if we don't already have one
-        if (!game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(TorchFuelItemFilter))))
+        if (!Game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, base.Game.SingletonRepository.Get<ItemFilter>(nameof(ItemFilters.TorchFuelItemFilter))))
         {
-            game.MsgPrint("You have no extra torches.");
+            Game.MsgPrint("You have no extra torches.");
             return;
         }
         if (fuelSource == null)
@@ -73,34 +73,34 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Check that our fuel is suitable
-        if (!game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.Get<ItemFilter>(nameof(TorchFuelItemFilter))))
+        if (!Game.ItemMatchesFilter(fuelSource, base.Game.SingletonRepository.Get<ItemFilter>(nameof(ItemFilters.TorchFuelItemFilter))))
         {
-            game.MsgPrint("You can't refill a torch with that!");
+            Game.MsgPrint("You can't refill a torch with that!");
             return;
         }
         // Refueling takes half a turn
-        game.EnergyUse = 50;
+        Game.EnergyUse = 50;
 
         // Add the fuel
         item.TurnsOfLightRemaining += fuelSource.TurnsOfLightRemaining + 5;
-        game.MsgPrint("You combine the torches.");
+        Game.MsgPrint("You combine the torches.");
 
         // Check for overfilling
         if (item.TurnsOfLightRemaining >= Constants.FuelTorch)
         {
             item.TurnsOfLightRemaining = Constants.FuelTorch;
-            game.MsgPrint("Your torch is fully fueled.");
+            Game.MsgPrint("Your torch is fully fueled.");
         }
         else
         {
-            game.MsgPrint("Your torch glows more brightly.");
+            Game.MsgPrint("Your torch glows more brightly.");
         }
 
         // Update the player's inventory
         fuelSource.ItemIncrease(-1);
         fuelSource.ItemDescribe();
         fuelSource.ItemOptimize();
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        base.Game.SingletonRepository.Get<FlaggedAction>(nameof(FlaggedActions.UpdateTorchRadiusFlaggedAction)).Set();
     }
 
     /// <summary>

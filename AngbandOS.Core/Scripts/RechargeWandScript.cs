@@ -19,7 +19,7 @@ internal class RechargeWandScript : Script, IScriptItemInt
     public void ExecuteScriptItemInt(Item item, int num)
     {
         int i, t;
-        i = (num + 100 - item.Factory.LevelNormallyFound - (10 * item.WandChargesRemaining)) / 15;
+        i = (num + 100 - item.LevelNormallyFound - (10 * item.WandChargesRemaining)) / 15;
         if (i < 1)
         {
             i = 1;
@@ -33,7 +33,7 @@ internal class RechargeWandScript : Script, IScriptItemInt
         }
         else
         {
-            t = (num / (item.Factory.LevelNormallyFound + 2)) + 1;
+            t = (num / (item.LevelNormallyFound + 2)) + 1;
             if (t > 0)
             {
                 item.WandChargesRemaining += 2 + Game.DieRoll(t);

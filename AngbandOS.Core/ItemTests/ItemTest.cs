@@ -701,7 +701,7 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(FactoryAllowsShElecricity, item.Factory.CanProvideSheathOfElectricity))
+        if (!TestBoolean(FactoryAllowsShElecricity, item.CanProvideSheathOfElectricity))
         {
             return false;
         }
@@ -709,7 +709,7 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(FactoryAllowsShFire, item.Factory.CanProvideSheathOfFire))
+        if (!TestBoolean(FactoryAllowsShFire, item.CanProvideSheathOfFire))
         {
             return false;
         }

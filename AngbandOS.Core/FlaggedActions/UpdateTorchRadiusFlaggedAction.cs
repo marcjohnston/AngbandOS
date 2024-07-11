@@ -25,7 +25,7 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    Game.LightLevel += oPtr.Factory.CalculateTorch(oPtr);
+                    Game.LightLevel += oPtr.CalculateTorch();
                 }
             }
         }

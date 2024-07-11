@@ -94,7 +94,7 @@ internal class RogueCharacterClass : BaseCharacterClass
 
     protected override void OutfitItem(Item item)
     {
-        if (item.Factory.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) && Game.Studies<DeathRealm>())
+        if (item.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) && Game.Studies<DeathRealm>())
         {
             item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfPoisoningRareItem));
         }

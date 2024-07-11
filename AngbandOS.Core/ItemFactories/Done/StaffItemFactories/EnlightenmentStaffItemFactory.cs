@@ -28,13 +28,11 @@ internal class EnlightenmentStaffItemFactory : ItemFactory
     public override int Weight => 50;
     protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(MapAreaScript), "1d5+5", 38, 100);
     protected override string ItemClassName => nameof(StaffsItemClass);
-    public override int StaffManaValue => 100;
     protected override string? RechargeScriptName => nameof(RechargeStaffScript);
 
     protected override string? EatMagicScriptName => nameof(StaffEatMagicScript);
 
-    public override bool CanBeUsed => true;
-
+    
     /// <summary>
     /// Returns true, because staffs are magical and should be detected with the detect magic scroll.
     /// </summary>

@@ -80,7 +80,7 @@ internal class SkeletonRace : Race
     public override void Eat(Item item)
     {
         // Check to see if the food item is a waybread, warpstones or a biscuit.
-        if (item.Factory.VanishesWhenEatenBySkeletons)
+        if (item.VanishesWhenEatenBySkeletons)
         {
             // These magical food types vanish.
             Game.MsgPrint("The food falls through your jaws and vanishes!");
@@ -88,18 +88,18 @@ internal class SkeletonRace : Race
         else
         {
             // Spawn a new food item on the floor to make up for the one that will be destroyed
-            Item floorItem = new Item(Game, item.Factory); // TODO: Will this lose a special characteristic of the food?
+            Item floorItem = item.Clone(); // TODO: Why do we have to clone it ... can't we simply return a do not delete response
             Game.MsgPrint("The food falls through your jaws!");
             Game.DropNear(floorItem, -1, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
 
-    public override void Quaff(ItemFactory itemFactory)
+    public override void Quaff(Item item)
     {
         if (Game.DieRoll(12) == 1)
         {
             Game.MsgPrint("Some of the fluid falls through your jaws!");
-            itemFactory.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
+            item.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
     public override bool CanBleed(int level) => false;

@@ -55,7 +55,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessByCh
         Game.EnergyUse = 100;
 
         // Get the level of the item
-        int itemLevel = item.Factory.LevelNormallyFound;
+        int itemLevel = item.LevelNormallyFound;
         if (item.FixedArtifact != null)
         {
             itemLevel = item.FixedArtifact.Level;

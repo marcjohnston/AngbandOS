@@ -67,12 +67,12 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     /// Refill a lamp
     /// </summary>
     /// <param name="itemIndex"> The inventory index of the fuel </param>
-    public override void Refill(Game game, Item item)
+    public override void Refill(Item item)
     {
         // Get an item if we don't already have one
-        if (!game.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(LanternFuelItemFilter))))
+        if (!Game.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(LanternFuelItemFilter))))
         {
-            game.MsgPrint("You have no flasks of oil.");
+            Game.MsgPrint("You have no flasks of oil.");
             return;
         }
 
@@ -83,23 +83,23 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Make sure our item is suitable fuel
-        if (!game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.Get<ItemFilter>(nameof(LanternFuelItemFilter))))
+        if (!Game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.Get<ItemFilter>(nameof(LanternFuelItemFilter))))
         {
-            game.MsgPrint("You can't refill a lantern from that!");
+            Game.MsgPrint("You can't refill a lantern from that!");
             return;
         }
         // Refilling takes half a turn
-        game.EnergyUse = 50;
+        Game.EnergyUse = 50;
 
         // Add the fuel
         item.TurnsOfLightRemaining += fuelSource.TurnsOfLightRemaining;
-        game.MsgPrint("You fuel your lamp.");
+        Game.MsgPrint("You fuel your lamp.");
 
         // Check for overfilling
         if (item.TurnsOfLightRemaining >= Constants.FuelLamp)
         {
             item.TurnsOfLightRemaining = Constants.FuelLamp;
-            game.MsgPrint("Your lamp is full.");
+            Game.MsgPrint("Your lamp is full.");
         }
 
         // Update the inventory

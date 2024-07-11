@@ -64,15 +64,16 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         Game.PlaySound(SoundEffectEnum.Shoot);
         // Get the details of the shot
         string missileName = individualAmmunition.GetFullDescription(false);
-        ColorEnum missileColor = individualAmmunition.Factory.FlavorColor;
-        char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
+        ColorEnum missileColor = individualAmmunition.FlavorColor;
+        char missileCharacter = individualAmmunition.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;
         int shotDamage = Game.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
         int attackBonus = Game.AttackBonus + individualAmmunition.BonusHit + missileWeapon.BonusHit;
         int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
+
         // Damage multiplier depends on weapon
-        RangedWeaponItemFactory missileWeaponItemCategory = (RangedWeaponItemFactory)missileWeapon.Factory;
-        int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
+        int damageMultiplier = missileWeapon.MissileDamageMultiplier;
+
         // Extra might gives us an increased multiplier
         if (Game.HasExtraMight)
         {
@@ -197,7 +198,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         }
         // If we hit something we have a chance to break the ammo, otherwise it just drops at
         // the end of its travel
-        Probability j = hitBody ? individualAmmunition.Factory.BreakageChanceProbability : new FalseProbability();
+        Probability j = hitBody ? individualAmmunition.BreakageChanceProbability : new FalseProbability();
         Game.DropNear(individualAmmunition, j.Percentage, y, x);
     }
 }

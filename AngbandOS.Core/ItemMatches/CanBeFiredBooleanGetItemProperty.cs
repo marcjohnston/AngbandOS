@@ -18,12 +18,7 @@ internal class CanBeFiredBooleanGetItemProperty : GetItemProperty<bool>
         RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
         WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
         Item? rangedWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
-        if (rangedWeapon == null || rangedWeapon.Factory.AmmunitionItemFactories == null)
-        {
-            return false;
-        }
-
-        return rangedWeapon.Factory.AmmunitionItemFactories.Contains(item.Factory);
+        return rangedWeapon != null && item.IsAmmunitionFor(rangedWeapon);
     }
 }
 

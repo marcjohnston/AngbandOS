@@ -58,11 +58,11 @@ internal class ExplodeProjectile : Projectile
                 {
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }
-                bool isPotion = oPtr.Factory.QuaffDetails != null;
+                bool isPotion = oPtr.QuaffDetails != null;
                 Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
-                    oPtr.Factory.Smash(who, y, x);
+                    oPtr.Smash(who, y, x);
                 }
                 Game.MainForm.RefreshMapLocation(y, x);
             }

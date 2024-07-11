@@ -15,7 +15,7 @@ internal class CanBeEatenBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeEaten";
     public override bool Get(Item item)
     {
-        return item.Factory.CanBeEaten;
+        return item.CanBeEaten;
     }
 }
 

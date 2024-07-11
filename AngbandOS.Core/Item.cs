@@ -5,13 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Races;
-using AngbandOS.Core.Spells;
-using System.Reflection.PortableExecutable;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System;
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -24,7 +17,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the factory that created this item.
     /// </summary>
-    public ItemFactory Factory { get; private set; } // TODO: Should this be protected ... and force the item to call the factory methods.
+    private ItemFactory Factory { get; set; } // TODO: Should this be protected ... and force the item to call the factory methods.
 
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
 
@@ -68,7 +61,7 @@ internal sealed class Item : IComparable<Item>
     public bool IdentEmpty;
 
     /// <summary>
-    /// Returns true, if item has been identified; false, otherwise.  This property is near identical to the Factory.IsFlavorAware, with the exception that a store will identify an item, 
+    /// Returns true, if item has been identified; false, otherwise.  This property is near identical to the <see cref="ItemFactory.IsFlavorAware"/>, with the exception that a store will identify an item, 
     /// but the factory for the item may still have the <see cref="ItemFactory.IsFlavorAware"/> still set to false.
     /// </summary>
     public bool IdentityIsKnown;
@@ -111,6 +104,96 @@ internal sealed class Item : IComparable<Item>
     public int Discount;
     public int HoldingMonsterIndex;
     public string Inscription = "";
+
+    #region Factory Encapsulation
+    public ItemFactory GetFactory => Factory;
+    public bool CanBeEatenByMonsters => Factory.CanBeEatenByMonsters;
+    public int? MaxPhlogiston => Factory.MaxPhlogiston;
+    public bool IsMagical => Factory.IsMagical;
+    public ItemClass ItemClass => Factory.ItemClass;
+    public int MakeObjectCount => Factory.MakeObjectCount;
+    public int LevelNormallyFound => Factory.LevelNormallyFound;
+    public int NumberOfItemsContained => Factory.NumberOfItemsContained;
+    public int EnchantmentMaximumCount => Factory.EnchantmentMaximumCount;
+    public bool IsSmall => ((ChestItemFactory)Factory).IsSmall;
+    public int Cost => Factory.Cost;
+    public bool AskDestroyAll => Factory.AskDestroyAll;
+    public bool VanishesWhenEatenBySkeletons => Factory.VanishesWhenEatenBySkeletons;
+    public bool CanSpikeDoorClosed => Factory.CanSpikeDoorClosed;
+    public bool IsFuelForTorch => Factory.IsFuelForTorch;
+    public bool IsLanternFuel => Factory.IsLanternFuel;
+    public ItemFactory[]? AmmunitionItemFactories => Factory.AmmunitionItemFactories;
+    public bool CanApplyBlessedArtifactBias => Factory.CanApplyBlessedArtifactBias;
+    public bool CanApplyArtifactBiasSlaying => Factory.CanApplyArtifactBiasSlaying;
+    public bool CanApplyBlowsBonus => Factory.CanApplyBlowsBonus;
+    public bool CanReflectBoltsAndArrows => Factory.CanReflectBoltsAndArrows;
+    public bool CanApplySlayingBonus => Factory.CanApplySlayingBonus;
+    public bool CanApplyBonusArmorClassMiscPower => Factory.CanApplyBonusArmorClassMiscPower;
+    public bool CanTunnel => Factory.CanTunnel;
+    public int BurnRate => Factory.BurnRate;
+    public bool IsWearableOrWieldable => Factory.IsWearableOrWieldable;
+    public bool CanProvideSheathOfElectricity => Factory.CanProvideSheathOfElectricity;
+    public bool CanProvideSheathOfFire => Factory.CanProvideSheathOfFire;
+    public bool ProvidesSunlight => Factory.ProvidesSunlight;
+    public bool CanBeEaten => Factory.CanBeEaten;
+    public Spell[] Spells => ((BookItemFactory)Factory).Spells;
+    public ColorEnum FlavorColor => Factory.FlavorColor; // TODO: Rename to represent current or assigned
+    public ColorEnum Color => Factory.Color; // TODO: Rename to represent raw or original or base
+    public Symbol FlavorSymbol => Factory.FlavorSymbol; // TODO: Rename to represent current or assigned
+    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffDetails => Factory.QuaffDetails;
+    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapDetails => Factory.ZapDetails;
+    public (IIdentifableAndUsedScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseDetails => Factory.UseDetails;
+    public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingDetails => Factory.AimingDetails;
+    public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivateScrollScript => Factory.ActivateScrollScript; // TODO: Rename now that it is a tuple
+    public Probability BreakageChanceProbability => Factory.BreakageChanceProbability;
+    public int MissileDamageMultiplier => Factory.MissileDamageMultiplier;
+    public bool Smash(int who, int y, int x) => Factory.Smash(who, y, x);
+    public int WieldSlot => Factory.WieldSlot;
+    public bool CanBeRead => Factory.CanBeRead;
+    public IScriptItemInt? RechargeScript => Factory.RechargeScript;
+    public bool CanProjectArrows => Factory.CanProjectArrows;
+    public bool IsWeapon => Factory.IsWeapon;
+    public bool IsIgnoredByMonsters => Factory.IsIgnoredByMonsters;
+    public bool IsArmor => Factory.IsArmor;
+    public bool IsContainer => Factory.IsContainer;
+    public int ExperienceGainDivisorForDestroying => ((BookItemFactory)this.Factory).ExperienceGainDivisorForDestroying;
+    public bool IdentityCanBeSensed => Factory.IdentityCanBeSensed;
+    public bool IsConsumedWhenEaten => Factory.IsConsumedWhenEaten;
+    public IIdentifableScript? EatScript => Factory.EatScript;
+    public bool IsFlavorAware
+    {
+        get
+        {
+            return Factory.IsFlavorAware;
+        }
+        set
+        {
+            Factory.IsFlavorAware = value;
+        }
+    }
+    public int GetAdditionalMassProduceCount()
+    {
+        return Factory.GetAdditionalMassProduceCount(this);
+    }
+    public void Refill()
+    {
+        Factory.Refill(this);
+    }
+    public int CalculateTorch()
+    {
+        return Factory.CalculateTorch(this);
+    }
+    #endregion
+
+    public bool IsAmmunitionFor(Item rangedWeapon)
+    {
+        return rangedWeapon.AmmunitionItemFactories != null && rangedWeapon.AmmunitionItemFactories.Contains(Factory);
+    }
+
+    public bool IsUsableSpellBook()
+    {
+        return Game.PrimaryRealm != null && Game.PrimaryRealm.SpellBooks.Contains(Factory) || Game.SecondaryRealm != null && Game.SecondaryRealm.SpellBooks.Contains(Factory);
+    }
 
     /// <summary>
     /// Returns the container that is holding the item.
@@ -429,11 +512,11 @@ internal sealed class Item : IComparable<Item>
 
         // Fourth level sort (FlavorAware before those unidentified)
         // Flavor aware items sort before those not identified.
-        if (Factory.IsFlavorAware && !oPtr.Factory.IsFlavorAware)
+        if (IsFlavorAware && !oPtr.IsFlavorAware)
         {
             return -1;
         }
-        if (!Factory.IsFlavorAware && oPtr.Factory.IsFlavorAware)
+        if (!IsFlavorAware && oPtr.IsFlavorAware)
         {
             return 1;
         }
@@ -1035,7 +1118,7 @@ internal sealed class Item : IComparable<Item>
         {
             fullDescription = "empty";
         }
-        else if (!Factory.IsFlavorAware && Factory.Tried)
+        else if (!IsFlavorAware && Factory.Tried)
         {
             fullDescription = "tried";
         }
@@ -1589,7 +1672,7 @@ internal sealed class Item : IComparable<Item>
         {
             return true;
         }
-        if (Factory.EasyKnow && Factory.IsFlavorAware)
+        if (Factory.EasyKnow && IsFlavorAware)
         {
             return true;
         }
@@ -2008,23 +2091,30 @@ internal sealed class Item : IComparable<Item>
         return value;
     }
 
-    public bool Stompable()
+    public bool Stompable
     {
-        if (!IsKnown())
+        get
         {
-            if (Factory.ItemClass.HasFlavor)
+            if (!IsKnown())
             {
-                if (Factory.IsFlavorAware)
+                if (Factory.ItemClass.HasFlavor)
                 {
-                    return Factory.Stompable[StompableType.Broken];
+                    if (IsFlavorAware)
+                    {
+                        return Factory.Stompable[StompableType.Broken];
+                    }
+                }
+                if (!IdentSense)
+                {
+                    return false;
                 }
             }
-            if (!IdentSense)
-            {
-                return false;
-            }
+            return Factory.IsStompable(this);
         }
-        return Factory.IsStompable(this);
+        set
+        {
+            Factory.Stompable[0] = value;
+        }
     }
 
     /// <summary>
@@ -2067,7 +2157,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (Factory.IsFlavorAware)
+            if (IsFlavorAware)
             {
                 return Factory.Cost;
             }
@@ -2546,7 +2636,7 @@ internal sealed class Item : IComparable<Item>
             {
                 newName = "called '" + dummyName + "'";
             }
-            Factory.IsFlavorAware = true;
+            IsFlavorAware = true;
             BecomeKnown();
             IdentMental = true;
         }

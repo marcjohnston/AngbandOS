@@ -47,7 +47,7 @@ internal class DestroyAllWorthlessItemsScript : Script, IScript, IRepeatableScri
                 continue;
             }
             // Only destroy if it's stompable (i.e. worthless or marked as unwanted)
-            if (!item.Stompable())
+            if (!item.Stompable)
             {
                 continue;
             }

@@ -15,7 +15,7 @@ internal class IsFuelForTorchBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "IsFuelForTorch";
     public override bool Get(Item item)
     {
-        return item.Factory.IsFuelForTorch;
+        return item.IsFuelForTorch;
     }
 }
 

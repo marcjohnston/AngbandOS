@@ -37,10 +37,10 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
         foreach (int index in InventorySlots)
         {
             Item? oPtr = Game.GetInventoryItem(index);
-            if (oPtr != null && oPtr.Factory.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
+            if (oPtr != null && oPtr.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
             {
                 hadLight = true;
-                oPtr.TurnsOfLightRemaining -= oPtr.Factory.BurnRate;
+                oPtr.TurnsOfLightRemaining -= oPtr.BurnRate;
 
                 // If the player is blind, do not allow the light to go out completely.
                 if (Game.BlindnessTimer.Value != 0)

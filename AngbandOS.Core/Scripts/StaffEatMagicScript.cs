@@ -20,7 +20,7 @@ internal class StaffEatMagicScript : Script, IScriptItem
     {
         if (item.StaffChargesRemaining > 0)
         {
-            Game.Mana.IntValue += item.StaffChargesRemaining * item.Factory.LevelNormallyFound;
+            Game.Mana.IntValue += item.StaffChargesRemaining * item.LevelNormallyFound;
             item.StaffChargesRemaining = 0;
         }
         else

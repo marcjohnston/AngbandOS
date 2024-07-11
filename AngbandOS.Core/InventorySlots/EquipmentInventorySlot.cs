@@ -94,7 +94,7 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
             foreach (int index in InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(index);
-                if (oPtr != null && oPtr.Factory.ProvidesSunlight && !Game.HasLightResistance)
+                if (oPtr != null && oPtr.ProvidesSunlight && !Game.HasLightResistance)
                 {
                     string oName = oPtr.GetDescription(false);
                     Game.MsgPrint($"The {oName} scorches your undead flesh!");

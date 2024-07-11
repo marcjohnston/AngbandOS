@@ -30,7 +30,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
                     {
                         continue;
                     }
-                    if (oPtr.IsArtifact || oPtr.IsRare() || oPtr.Factory.IsMagical || oPtr.BonusArmorClass > 0 || oPtr.BonusHit + oPtr.BonusDamage > 0)
+                    if (oPtr.IsArtifact || oPtr.IsRare() || oPtr.IsMagical || oPtr.BonusArmorClass > 0 || oPtr.BonusHit + oPtr.BonusDamage > 0)
                     {
                         oPtr.WasNoticed = true;
                         Game.MainForm.RefreshMapLocation(y, x);

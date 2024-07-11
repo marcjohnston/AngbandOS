@@ -29,13 +29,11 @@ internal class CureLightWoundsStaffItemFactory : ItemFactory
 
     protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(RestoreHealth1d8Script), "1d5+6", 18, 100);
     protected override string ItemClassName => nameof(StaffsItemClass);
-    public override int StaffManaValue => 100;
     protected override string? RechargeScriptName => nameof(RechargeStaffScript);
 
     protected override string? EatMagicScriptName => nameof(StaffEatMagicScript);
 
-    public override bool CanBeUsed => true;
-
+    
     /// <summary>
     /// Returns true, because staffs are magical and should be detected with the detect magic scroll.
     /// </summary>

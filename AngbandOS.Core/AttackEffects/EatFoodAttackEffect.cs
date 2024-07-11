@@ -22,7 +22,7 @@ internal class EatFoodAttackEffect : AttackEffect
             BaseInventorySlot packInventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = Game.GetInventoryItem(i);
-            if (item != null && item.Factory.CanBeEatenByMonsters)
+            if (item != null && item.CanBeEatenByMonsters)
             {
                 // Note that the monster doesn't actually get the food item - it's gone
                 string itemName = item.GetDescription(false);
