@@ -27,8 +27,15 @@ internal class EatMagicActiveMutation : Mutation
             return;
         }
 
+        // Make sure the item is actually edible
+        if (oPtr.EatMagicScript == null)
+        {
+            Game.MsgPrint("That is not a rod!");
+            return;
+        }
+
         int lev = oPtr.LevelNormallyFound;
-        oPtr.EatMagic();
+        oPtr.EatMagicScript.ExecuteScriptItem(oPtr);
         if (Game.Mana.IntValue > Game.MaxMana.IntValue)
         {
             Game.Mana.IntValue = Game.MaxMana.IntValue;

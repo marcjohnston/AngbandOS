@@ -23,7 +23,13 @@ internal class RechargeItemCancellableScriptInt : Script, IScript, ICancellableS
         {
             return false;
         }
-        oPtr.Recharge(num);
+        // Make sure the item is rechargable
+        if (oPtr.RechargeScript == null)
+        {
+            Game.MsgPrint("That is not a rod!");
+            return false;
+        }
+        oPtr.RechargeScript.ExecuteScriptItemInt(oPtr, num);
         return true;
     }
 

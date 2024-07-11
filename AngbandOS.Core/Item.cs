@@ -137,6 +137,7 @@ internal sealed class Item : IComparable<Item>
     public bool ProvidesSunlight => Factory.ProvidesSunlight;
     public bool CanBeEaten => Factory.CanBeEaten;
     public Spell[] Spells => ((BookItemFactory)Factory).Spells;
+    public IScriptItem? EatMagicScript => Factory.EatMagicScript;
     public ColorEnum FlavorColor => Factory.FlavorColor; // TODO: Rename to represent current or assigned
     public ColorEnum Color => Factory.Color; // TODO: Rename to represent raw or original or base
     public Symbol FlavorSymbol => Factory.FlavorSymbol; // TODO: Rename to represent current or assigned
@@ -431,19 +432,6 @@ internal sealed class Item : IComparable<Item>
         DamageSides = Factory.DamageSides;
         IsBroken = Factory.IsBroken;
         IsCursed = Factory.IsCursed;
-    }
-
-    public void Recharge(int num)
-    {
-        Factory.RechargeScript.ExecuteScriptItemInt(this, num);
-    }
-
-    /// <summary>
-    /// Consume magic of a rechargeable item.  Rods, staves and wands are supported.
-    /// </summary>
-    public void EatMagic()
-    {
-        Factory.EatMagicScript.ExecuteScriptItem(this);
     }
 
     /// <summary>

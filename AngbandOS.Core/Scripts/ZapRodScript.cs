@@ -37,6 +37,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         {
             return;
         }
+
         // Make sure the item is actually a rod
         if (item.ZapDetails == null)
         {
