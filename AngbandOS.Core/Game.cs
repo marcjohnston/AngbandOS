@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.Diagnostics;
-using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using Timer = AngbandOS.Core.Timers.Timer;
@@ -1965,7 +1964,7 @@ public bool IsDead = false;
 
     private Item? MakeFixedArtifact()
     {
-        foreach (FixedArtifact aPtr in SingletonRepository.Get<FixedArtifact>())
+        foreach (FixedArtifact aPtr in SingletonRepository.Get<FixedArtifact>()) // TODO: This shouldn't be in order ... needs to be randomized
         {
             if (!aPtr.HasOwnType)
             {
