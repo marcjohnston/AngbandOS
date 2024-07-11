@@ -337,24 +337,6 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    [Obsolete]
-    public T? TryGetFactory<T>() where T : ItemFactory
-    {
-        if (typeof(T).IsAssignableFrom(Factory.GetType()))
-        {
-            return (T)Factory;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    /// <summary>
     /// Returns true, if this item has been noticed and/or detected by the player.  Unnoticed items will cause the player to stop running.
     /// </summary>
     public bool WasNoticed = false;

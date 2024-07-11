@@ -35,18 +35,14 @@ internal class ExamineStoreItemScript : Script, IScriptStore
         }
         item += storeCommandEvent.Store.StoreTop;
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[item];
-        BookItemFactory? bookItemFactory = oPtr.TryGetFactory<BookItemFactory>();
-        if (bookItemFactory != null)
+        if (Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter)).Matches(oPtr))
         {
-            if (Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter)).Matches(oPtr))
-            {
-                DoStoreBrowse(oPtr);
-            }
-            else
-            {
-                Game.MsgPrint("The spells in the book are unintelligible to you.");
-                return;
-            }
+            DoStoreBrowse(oPtr);
+        }
+        else
+        {
+            Game.MsgPrint("The spells in the book are unintelligible to you.");
+            return;
         }
         if (!oPtr.IdentMental)
         {
