@@ -32,7 +32,7 @@ internal class AcidProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.HatesAcid())
+            if (oPtr.HatesAcid)
             {
                 doKill = true;
                 noteKill = plural ? " melt!" : " melts!";

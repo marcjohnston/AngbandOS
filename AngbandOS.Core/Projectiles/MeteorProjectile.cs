@@ -32,7 +32,7 @@ internal class MeteorProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.HatesFire())
+            if (oPtr.HatesFire)
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
@@ -41,7 +41,7 @@ internal class MeteorProjectile : Projectile
                     ignore = true;
                 }
             }
-            if (oPtr.HatesCold())
+            if (oPtr.HatesCold)
             {
                 ignore = false;
                 doKill = true;

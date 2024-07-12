@@ -30,7 +30,7 @@ internal class IceProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.HatesCold())
+            if (oPtr.HatesCold)
             {
                 noteKill = plural ? " shatter!" : " shatters!";
                 doKill = true;

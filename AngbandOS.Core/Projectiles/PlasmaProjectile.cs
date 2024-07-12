@@ -32,7 +32,7 @@ internal class PlasmaProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.HatesFire())
+            if (oPtr.HatesFire)
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
@@ -41,7 +41,7 @@ internal class PlasmaProjectile : Projectile
                     ignore = true;
                 }
             }
-            if (oPtr.HatesElec())
+            if (oPtr.HatesElec)
             {
                 ignore = false;
                 doKill = true;

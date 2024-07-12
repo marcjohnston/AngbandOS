@@ -5773,7 +5773,7 @@ public bool IsDead = false;
 
     public bool SetAcidDestroy(Item oPtr)
     {
-        if (!oPtr.HatesAcid())
+        if (!oPtr.HatesAcid)
         {
             return false;
         }
@@ -5787,7 +5787,7 @@ public bool IsDead = false;
 
     public bool SetColdDestroy(Item oPtr)
     {
-        if (!oPtr.HatesCold())
+        if (!oPtr.HatesCold)
         {
             return false;
         }
@@ -5801,7 +5801,7 @@ public bool IsDead = false;
 
     public bool SetElecDestroy(Item oPtr)
     {
-        if (!oPtr.HatesElec())
+        if (!oPtr.HatesElec)
         {
             return false;
         }
@@ -5815,7 +5815,7 @@ public bool IsDead = false;
 
     public bool SetFireDestroy(Item oPtr)
     {
-        if (!oPtr.HatesFire())
+        if (!oPtr.HatesFire)
         {
             return false;
         }

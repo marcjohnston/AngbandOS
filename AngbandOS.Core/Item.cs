@@ -139,6 +139,10 @@ internal sealed class Item : IComparable<Item>
     public Spell[] Spells => ((BookItemFactory)Factory).Spells;
     public IScriptItem? EatMagicScript => Factory.EatMagicScript;
     public ColorEnum FlavorColor => Factory.FlavorColor; // TODO: Rename to represent current or assigned
+    public bool HatesAcid => Factory.HatesAcid;
+    public bool HatesCold => Factory.HatesCold;
+    public bool HatesElec => Factory.HatesElectricity;
+    public bool HatesFire => Factory.HatesFire;
     public ColorEnum Color => Factory.Color; // TODO: Rename to represent raw or original or base
     public Symbol FlavorSymbol => Factory.FlavorSymbol; // TODO: Rename to represent current or assigned
     public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffDetails => Factory.QuaffDetails;
@@ -184,17 +188,31 @@ internal sealed class Item : IComparable<Item>
     {
         return Factory.CalculateTorch(this);
     }
-    #endregion
-
     public bool IsAmmunitionFor(Item rangedWeapon)
     {
         return rangedWeapon.AmmunitionItemFactories != null && rangedWeapon.AmmunitionItemFactories.Contains(Factory);
     }
-
     public bool IsUsableSpellBook()
     {
         return Game.PrimaryRealm != null && Game.PrimaryRealm.SpellBooks.Contains(Factory) || Game.SecondaryRealm != null && Game.SecondaryRealm.SpellBooks.Contains(Factory);
     }
+    public void GridProcessWorld(GridTile gridTile)
+    {
+        Factory.GridProcessWorld(this, gridTile);
+    }
+    public void PackProcessWorld()
+    {
+        Factory.PackProcessWorld(this);
+    }
+    public void EquipmentProcessWorld()
+    {
+        Factory.EquipmentProcessWorld(this);
+    }
+    public void MonsterProcessWorld(Monster mPtr)
+    {
+        Factory.MonsterProcessWorld(this, mPtr);
+    }
+    #endregion
 
     /// <summary>
     /// Returns the container that is holding the item.
@@ -278,26 +296,6 @@ internal sealed class Item : IComparable<Item>
     {
         IItemContainer container = GetContainer();
         container.ItemOptimize(this);
-    }
-
-    public void GridProcessWorld(GridTile gridTile)
-    {
-        Factory.GridProcessWorld(this, gridTile);
-    }
-
-    public void PackProcessWorld()
-    {
-        Factory.PackProcessWorld(this);
-    }
-
-    public void EquipmentProcessWorld()
-    {
-        Factory.EquipmentProcessWorld(this);
-    }
-
-    public void MonsterProcessWorld(Monster mPtr)
-    {
-        Factory.MonsterProcessWorld(this, mPtr);
     }
 
     /// <summary>
@@ -1219,26 +1217,6 @@ internal sealed class Item : IComparable<Item>
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
         return null;
-    }
-
-    public bool HatesAcid()
-    {
-        return Factory.HatesAcid;
-    }
-
-    public bool HatesCold()
-    {
-        return Factory.HatesCold;
-    }
-
-    public bool HatesElec()
-    {
-        return Factory.HatesElectricity;
-    }
-
-    public bool HatesFire()
-    {
-        return Factory.HatesFire;
     }
 
     public bool IdentifyFully()

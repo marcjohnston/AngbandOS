@@ -32,7 +32,7 @@ internal class ElecProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.HatesElec())
+            if (oPtr.HatesElec)
             {
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";

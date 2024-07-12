@@ -32,7 +32,7 @@ internal class FireProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.HatesFire())
+            if (oPtr.HatesFire)
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
