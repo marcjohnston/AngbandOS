@@ -42,4 +42,22 @@ internal class BlackPrayersDeathBookItemFactory : BookItemFactory
     protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 4;
+
+    /// <summary>
+    /// Returns true, because books are magical and should be detected with the detect magic scroll.
+    /// </summary>
+    public override bool IsMagical => true;
+
+    /// <summary>
+    /// Returns true for all books.
+    /// </summary>
+    public override bool EasyKnow => true;
+
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (50, "2d3-2"),
+        (500, "1d3-1")
+    };
+
+    public override int ExperienceGainDivisorForDestroying => 4;
 }
