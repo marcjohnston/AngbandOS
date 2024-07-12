@@ -264,7 +264,7 @@ public class GameServer
         }
         catch (Exception ex)
         {
-            console.GameExceptionThrown(ex.Message);
+            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
             return false;
         }
         return true;
@@ -296,7 +296,7 @@ public class GameServer
         }
         catch (Exception ex)
         {
-            console.GameExceptionThrown(ex.Message);
+            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
             return false;
         }
         return true;

@@ -30,7 +30,7 @@ internal class DispelUndeadScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivateScrollScriptName => (nameof(DispelUndead60IdentifableAndUsedScript), 10);
+    protected override (string, int)? ActivationBinderDetails => (nameof(DispelUndead60IdentifableAndUsedScript), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

@@ -29,7 +29,7 @@ internal class TreasureDetectionScrollItemFactory : ItemFactory
     public override int Cost => 15;
     public override int Weight => 5;
 
-    protected override (string, int)? ActivateScrollScriptName => (nameof(DetectTreasureAndGoldScript), 10);
+    protected override (string, int)? ActivationBinderDetails => (nameof(DetectTreasureAndGoldScript), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

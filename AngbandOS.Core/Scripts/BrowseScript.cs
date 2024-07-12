@@ -62,8 +62,9 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessByChan
         {
             return false;
         }
+
         // Check that the book is useable by the player
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter))))
+        if (item.Spells == null)
         {
             Game.MsgPrint("You can't read that.");
             return false;

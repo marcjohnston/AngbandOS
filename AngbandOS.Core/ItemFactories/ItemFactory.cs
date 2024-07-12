@@ -1008,11 +1008,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             AimingDetails = (identifableDirectionalScript, initialChargeCountRoll, perChargeValue, manaValue);
         }
 
-        if (ActivateScrollScriptName != null)
+        if (ActivationBinderDetails != null)
         {
-            IIdentifableAndUsedScript identifableAndUsedScript = Game.SingletonRepository.Get<IIdentifableAndUsedScript>(ActivateScrollScriptName.Value.ScriptName);
-            int manaValue = ActivateScrollScriptName.Value.ManaValue;
-            ActivateScrollScript = (identifableAndUsedScript, manaValue);
+            IIdentifableAndUsedScript identifableAndUsedScript = Game.SingletonRepository.Get<IIdentifableAndUsedScript>(ActivationBinderDetails.Value.ScriptName);
+            int manaValue = ActivationBinderDetails.Value.ManaValue;
+            ActivationDetails = (identifableAndUsedScript, manaValue);
         }
 
         RechargeScript = Game.SingletonRepository.GetNullable<IScriptItemInt>(RechargeScriptName);
@@ -1246,6 +1246,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual int Weight => 0;
 
     /// <summary>
+    /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.
+    /// </summary>
+    public virtual bool IsSmall => false; // TODO: This property is only valid when IsContainer.  The data type is horrible.
+
+    /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
     /// </summary>
     /// <param name="item"></param>
@@ -1344,20 +1349,20 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool IsConsumedWhenEaten => true;
 
     /// <summary>
-    /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ActivateScrollScript"/> 
+    /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ActivationDetails"/> 
     /// property during the bind phase.
     /// </summary>
-    protected virtual (string ScriptName, int ManaValue)? ActivateScrollScriptName => null;
+    protected virtual (string ScriptName, int ManaValue)? ActivationBinderDetails => null;
 
     /// <summary>
-    /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivateScrollScriptName"/> property during the bind phase.
+    /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivationBinderDetails"/> property during the bind phase.
     /// </summary>
-    public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivateScrollScript { get; private set; } = null;
+    public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivationDetails { get; private set; } = null;
 
     /// <summary>
     /// Returns true, if the item is a scroll.
     /// </summary>
-    public bool CanBeRead => ActivateScrollScript != null;
+    public bool CanBeRead => ActivationDetails != null;
 
     public virtual void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {

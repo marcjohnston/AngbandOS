@@ -17,7 +17,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the factory that created this item.
     /// </summary>
-    private ItemFactory Factory { get; set; }
+    private ItemFactory _factory { get; set; }
 
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
 
@@ -32,18 +32,6 @@ internal sealed class Item : IComparable<Item>
     public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
     public RandomArtifactCharacteristics? RandomArtifact = null;
-
-    /// <summary>
-    /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
-    /// </summary>
-    public int PackSort => Factory.PackSort;
-
-    public int TurnsOfLightRemaining = 0;
-
-    /// <summary>
-    /// Returns the number of gold pieces the item contains.  Applies to gold.
-    /// </summary>
-    public int GoldPieces = 0;
 
     /// <summary>
     /// Returns true, if the item has already been identify sensed.  This property used to be a flag in the IdentifyFlags.
@@ -79,6 +67,44 @@ internal sealed class Item : IComparable<Item>
     public bool IdentMental;
 
     /// <summary>
+    /// Returns an additional special power that is added for fixed artifacts and rare items.
+    /// </summary>
+    public ItemAdditiveBundle? RandomPower = null;
+
+    public int Count;
+    public int Discount;
+    public int HoldingMonsterIndex;
+    public string Inscription = "";
+
+    #region Factory Encapsulation and Properties that will need to be part of the IItemCharacteristics
+    // All of these properties are initially set by the Factory.
+    public int TurnsOfLightRemaining;
+
+    /// <summary>
+    /// Returns the number of gold pieces the item contains.  Applies to gold.
+    /// </summary>
+    public int GoldPieces;
+
+    public int BonusHit;
+    public int BonusDamage;
+    public int BonusArmorClass;
+    public int ArmorClass;
+    public int DamageDice;
+    public int DamageSides;
+    public int BonusStrength;
+    public int BonusIntelligence;
+    public int BonusWisdom;
+    public int BonusDexterity;
+    public int BonusConstitution;
+    public int BonusCharisma;
+    public int BonusStealth;
+    public int BonusSearch;
+    public int BonusInfravision;
+    public int BonusTunnel;
+    public int BonusAttacks;
+    public int BonusSpeed;
+
+    /// <summary>
     /// This property used to be a flag in the IdentifyFlags.
     /// </summary>
     public bool IsCursed;
@@ -88,129 +114,135 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public bool IsBroken;
 
-    public int ArmorClass;
-    public int BonusArmorClass;
-    public int BonusDamage;
+
+    public ColorEnum FlavorColor => _factory.FlavorColor; // TODO: Rename to represent current or assigned
+    public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
+    public ColorEnum Color => _factory.Color; // TODO: Rename to represent raw or original or base
+    public ItemFactory GetFactory => _factory;
 
     /// <summary>
-    /// Returns an additional special power that is added for fixed artifacts and rare items.
+    /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
     /// </summary>
-    public ItemAdditiveBundle? RandomPower = null;
+    public int PackSort { get; private set; }
 
-    public int BonusHit;
-    public int Count;
-    public int DamageDice;
-    public int DamageSides;
-    public int Discount;
-    public int HoldingMonsterIndex;
-    public string Inscription = "";
+    public bool Tried => _factory.Tried;
+    public Spell[]? Spells { get; private set; }
+    public bool CanBeEatenByMonsters { get; private set; }
+    public int? MaxPhlogiston { get; private set; }
+    public bool IsMagical { get; private set; }
+    public ItemClass ItemClass { get; private set; }
+    public int MakeObjectCount { get; private set; }
+    public int LevelNormallyFound { get; private set; }
+    public int NumberOfItemsContained { get; private set; }
+    public int EnchantmentMaximumCount { get; private set; }
+    public bool IsSmall { get; private set; }
+    public int Cost { get; private set; }
+    public bool AskDestroyAll { get; private set; }
+    public bool VanishesWhenEatenBySkeletons { get; private set; }
+    public bool CanSpikeDoorClosed { get; private set; }
+    public bool IsFuelForTorch { get; private set; }
+    public bool IsLanternFuel { get; private set; }
+    public ItemFactory[]? AmmunitionItemFactories { get; private set; }
+    public bool CanApplyBlessedArtifactBias { get; private set; }
+    public bool CanApplyArtifactBiasSlaying { get; private set; }
+    public bool CanApplyBlowsBonus { get; private set; }
+    public bool CanReflectBoltsAndArrows { get; private set; }
+    public bool CanApplySlayingBonus { get; private set; }
+    public bool CanApplyBonusArmorClassMiscPower { get; private set; }
+    public bool CanTunnel { get; private set; }
+    public int BurnRate { get; private set; }
+    public bool IsWearableOrWieldable { get; private set; }
+    public bool CanProvideSheathOfElectricity { get; private set; }
+    public bool CanProvideSheathOfFire { get; private set; }
+    public bool ProvidesSunlight { get; private set; }
+    public bool CanBeEaten { get; private set; }
+    public IScriptItem? EatMagicScript { get; private set; }
+    public bool HatesAcid { get; private set; }
+    public bool HatesCold { get; private set; }
+    public bool HatesElec { get; private set; }
+    public bool HatesFire { get; private set; }
+    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffDetails { get; private set; }
+    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapDetails { get; private set; }
+    public (IIdentifableAndUsedScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseDetails { get; private set; }
+    public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingDetails { get; private set; }
+    public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivationDetails { get; private set; }
+    public Probability BreakageChanceProbability { get; private set; }
+    public int MissileDamageMultiplier { get; private set; }
+    public int WieldSlot { get; private set; }
+    public bool CanBeRead { get; private set; }
+    public IScriptItemInt? RechargeScript { get; private set; }
+    public bool CanProjectArrows { get; private set; }
+    public bool IsWeapon { get; private set; }
+    public bool IsIgnoredByMonsters { get; private set; }
+    public bool IsArmor { get; private set; }
+    public bool IsContainer { get; private set; }
+    public int ExperienceGainDivisorForDestroying { get; private set; }
+    public bool IdentityCanBeSensed { get; private set; }
+    public bool IsConsumedWhenEaten { get; private set; }
+    public IIdentifableScript? EatScript { get; private set; }
+    public bool GetsDamageMultiplier { get; private set; }
 
-    #region Factory Encapsulation
-    public ItemFactory GetFactory => Factory;
-    public bool CanBeEatenByMonsters => Factory.CanBeEatenByMonsters;
-    public int? MaxPhlogiston => Factory.MaxPhlogiston;
-    public bool IsMagical => Factory.IsMagical;
-    public ItemClass ItemClass => Factory.ItemClass;
-    public int MakeObjectCount => Factory.MakeObjectCount;
-    public int LevelNormallyFound => Factory.LevelNormallyFound;
-    public int NumberOfItemsContained => Factory.NumberOfItemsContained;
-    public int EnchantmentMaximumCount => Factory.EnchantmentMaximumCount;
-    public bool IsSmall => ((ChestItemFactory)Factory).IsSmall;
-    public int Cost => Factory.Cost;
-    public bool AskDestroyAll => Factory.AskDestroyAll;
-    public bool VanishesWhenEatenBySkeletons => Factory.VanishesWhenEatenBySkeletons;
-    public bool CanSpikeDoorClosed => Factory.CanSpikeDoorClosed;
-    public bool IsFuelForTorch => Factory.IsFuelForTorch;
-    public bool IsLanternFuel => Factory.IsLanternFuel;
-    public ItemFactory[]? AmmunitionItemFactories => Factory.AmmunitionItemFactories;
-    public bool CanApplyBlessedArtifactBias => Factory.CanApplyBlessedArtifactBias;
-    public bool CanApplyArtifactBiasSlaying => Factory.CanApplyArtifactBiasSlaying;
-    public bool CanApplyBlowsBonus => Factory.CanApplyBlowsBonus;
-    public bool CanReflectBoltsAndArrows => Factory.CanReflectBoltsAndArrows;
-    public bool CanApplySlayingBonus => Factory.CanApplySlayingBonus;
-    public bool CanApplyBonusArmorClassMiscPower => Factory.CanApplyBonusArmorClassMiscPower;
-    public bool CanTunnel => Factory.CanTunnel;
-    public int BurnRate => Factory.BurnRate;
-    public bool IsWearableOrWieldable => Factory.IsWearableOrWieldable;
-    public bool CanProvideSheathOfElectricity => Factory.CanProvideSheathOfElectricity;
-    public bool CanProvideSheathOfFire => Factory.CanProvideSheathOfFire;
-    public bool ProvidesSunlight => Factory.ProvidesSunlight;
-    public bool CanBeEaten => Factory.CanBeEaten;
-    public Spell[] Spells => ((BookItemFactory)Factory).Spells;
-    public IScriptItem? EatMagicScript => Factory.EatMagicScript;
-    public ColorEnum FlavorColor => Factory.FlavorColor; // TODO: Rename to represent current or assigned
-    public bool HatesAcid => Factory.HatesAcid;
-    public bool HatesCold => Factory.HatesCold;
-    public bool HatesElec => Factory.HatesElectricity;
-    public bool HatesFire => Factory.HatesFire;
-    public ColorEnum Color => Factory.Color; // TODO: Rename to represent raw or original or base
-    public Symbol FlavorSymbol => Factory.FlavorSymbol; // TODO: Rename to represent current or assigned
-    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffDetails => Factory.QuaffDetails;
-    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapDetails => Factory.ZapDetails;
-    public (IIdentifableAndUsedScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseDetails => Factory.UseDetails;
-    public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingDetails => Factory.AimingDetails;
-    public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivateScrollScript => Factory.ActivateScrollScript; // TODO: Rename now that it is a tuple
-    public Probability BreakageChanceProbability => Factory.BreakageChanceProbability;
-    public int MissileDamageMultiplier => Factory.MissileDamageMultiplier;
-    public bool Smash(int who, int y, int x) => Factory.Smash(who, y, x);
-    public int WieldSlot => Factory.WieldSlot;
-    public bool CanBeRead => Factory.CanBeRead;
-    public IScriptItemInt? RechargeScript => Factory.RechargeScript;
-    public bool CanProjectArrows => Factory.CanProjectArrows;
-    public bool IsWeapon => Factory.IsWeapon;
-    public bool IsIgnoredByMonsters => Factory.IsIgnoredByMonsters;
-    public bool IsArmor => Factory.IsArmor;
-    public bool IsContainer => Factory.IsContainer;
-    public int ExperienceGainDivisorForDestroying => ((BookItemFactory)this.Factory).ExperienceGainDivisorForDestroying;
-    public bool IdentityCanBeSensed => Factory.IdentityCanBeSensed;
-    public bool IsConsumedWhenEaten => Factory.IsConsumedWhenEaten;
-    public IIdentifableScript? EatScript => Factory.EatScript;
+    /// <summary>
+    /// Returns the nutritional value in turns provided to the player, when eaten.
+    /// </summary>
+    public int NutritionalValue { get; private set; }
+
+    public int Weight { get; private set; }
+
+    public bool HasQualityRatings { get; private set; } // This is only used within Item ... might be able to make it private.
+    public bool EasyKnow { get; private set; } // This is only used within Item ... might be able to make it private.
+    public int TurnOfLightValue { get; private set; } // This is only used within Item ... might be able to make it private.
+    public int BaseValue { get; private set; } // This is only used within Item ... might be able to make it private.
+    public int TreasureRating { get; private set; } // This is only used within Item ... might be able to make it private.
+    public Realm Realm { get; private set; }
+
+    public bool Smash(int who, int y, int x) => _factory.Smash(who, y, x);
     public bool IsFlavorAware
     {
         get
         {
-            return Factory.IsFlavorAware;
+            return _factory.IsFlavorAware;
         }
         set
         {
-            Factory.IsFlavorAware = value;
+            _factory.IsFlavorAware = value;
         }
     }
     public int GetAdditionalMassProduceCount()
     {
-        return Factory.GetAdditionalMassProduceCount(this);
+        return _factory.GetAdditionalMassProduceCount(this);
     }
     public void Refill()
     {
-        Factory.Refill(this);
+        _factory.Refill(this);
     }
     public int CalculateTorch()
     {
-        return Factory.CalculateTorch(this);
+        return _factory.CalculateTorch(this);
     }
     public bool IsAmmunitionFor(Item rangedWeapon)
     {
-        return rangedWeapon.AmmunitionItemFactories != null && rangedWeapon.AmmunitionItemFactories.Contains(Factory);
+        return rangedWeapon.AmmunitionItemFactories != null && rangedWeapon.AmmunitionItemFactories.Contains(_factory);
     }
     public bool IsUsableSpellBook()
     {
-        return Game.PrimaryRealm != null && Game.PrimaryRealm.SpellBooks.Contains(Factory) || Game.SecondaryRealm != null && Game.SecondaryRealm.SpellBooks.Contains(Factory);
+        return Game.PrimaryRealm != null && Game.PrimaryRealm.SpellBooks.Contains(_factory) || Game.SecondaryRealm != null && Game.SecondaryRealm.SpellBooks.Contains(_factory);
     }
     public void GridProcessWorld(GridTile gridTile)
     {
-        Factory.GridProcessWorld(this, gridTile);
+        _factory.GridProcessWorld(this, gridTile);
     }
     public void PackProcessWorld()
     {
-        Factory.PackProcessWorld(this);
+        _factory.PackProcessWorld(this);
     }
     public void EquipmentProcessWorld()
     {
-        Factory.EquipmentProcessWorld(this);
+        _factory.EquipmentProcessWorld(this);
     }
     public void MonsterProcessWorld(Monster mPtr)
     {
-        Factory.MonsterProcessWorld(this, mPtr);
+        _factory.MonsterProcessWorld(this, mPtr);
     }
     #endregion
 
@@ -345,19 +377,6 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public int ActivationRechargeTimeRemaining;
 
-    public int BonusStrength;
-    public int BonusIntelligence;
-    public int BonusWisdom;
-    public int BonusDexterity;
-    public int BonusConstitution;
-    public int BonusCharisma;
-    public int BonusStealth;
-    public int BonusSearch;
-    public int BonusInfravision;
-    public int BonusTunnel;
-    public int BonusAttacks;
-    public int BonusSpeed;
-
     /// <summary>
     /// Returns null if the container is unlocked and can be opened without picking, an empty array, if the container is disarmed and locked, or an array of traps.
     /// </summary>
@@ -378,12 +397,6 @@ internal sealed class Item : IComparable<Item>
 
     public int RodRechargeTimeRemaining = 0;
 
-    /// <summary>
-    /// Returns the nutritional value in turns provided to the player, when eaten.
-    /// </summary>
-    public int NutritionalValue = 0;
-
-    public int Weight;
     public int X;
     public int Y;
     private readonly Game Game;
@@ -391,45 +404,109 @@ internal sealed class Item : IComparable<Item>
     public Item(Game game, ItemFactory factory)
     {
         Game = game;
-        Factory = factory;
-
-        // TODO: The below statements should be in the ApplyMagic method for each factory.
-        BonusStrength = Factory.InitialBonusStrength;
-        BonusIntelligence = Factory.InitialBonusIntelligence;
-        BonusWisdom = Factory.InitialBonusWisdom;
-        BonusDexterity = Factory.InitialBonusDexterity;
-        BonusConstitution = Factory.InitialBonusConstitution;
-        BonusCharisma = Factory.InitialBonusCharisma;
-        BonusStealth = Factory.InitialBonusStealth;
-        BonusSearch = Factory.InitialBonusSearch;
-        BonusInfravision = Factory.InitialBonusInfravision;
-        BonusTunnel = Factory.InitialBonusTunnel;
-        BonusAttacks = Factory.InitialBonusAttacks;
-        BonusSpeed = Factory.InitialBonusSpeed;
-        NutritionalValue = Factory.InitialNutritionalValue;        
-        GoldPieces = Factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
-        TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
-
-        if (Factory.AimingDetails != null)
-        {
-            WandChargesRemaining = Factory.AimingDetails.Value.InitialChargesCountRoll.Get(Game.UseRandom);
-        }
-
-        if (Factory.UseDetails != null)
-        {
-            StaffChargesRemaining = Factory.UseDetails.Value.InitialCharges.Get(Game.UseRandom);
-        }
+        _factory = factory;
 
         Count = 1;
-        Weight = Factory.Weight;
-        BonusHit = Factory.BonusHit;
-        BonusDamage = Factory.BonusDamage;
-        BonusArmorClass = Factory.BonusArmorClass;
-        ArmorClass = Factory.ArmorClass;
-        DamageDice = Factory.DamageDice;
-        DamageSides = Factory.DamageSides;
-        IsBroken = Factory.IsBroken;
-        IsCursed = Factory.IsCursed;
+
+        // Now we retrieve all of the characteristics from the factory.
+        ExperienceGainDivisorForDestroying = _factory.ExperienceGainDivisorForDestroying;
+        IsSmall = _factory.IsSmall;
+        Spells = _factory.Spells;
+
+        BonusStrength = _factory.InitialBonusStrength;
+        BonusIntelligence = _factory.InitialBonusIntelligence;
+        BonusWisdom = _factory.InitialBonusWisdom;
+        BonusDexterity = _factory.InitialBonusDexterity;
+        BonusConstitution = _factory.InitialBonusConstitution;
+        BonusCharisma = _factory.InitialBonusCharisma;
+        BonusStealth = _factory.InitialBonusStealth;
+        BonusSearch = _factory.InitialBonusSearch;
+        BonusInfravision = _factory.InitialBonusInfravision;
+        BonusTunnel = _factory.InitialBonusTunnel;
+        BonusAttacks = _factory.InitialBonusAttacks;
+        BonusSpeed = _factory.InitialBonusSpeed;
+        NutritionalValue = _factory.InitialNutritionalValue;        
+        GoldPieces = _factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
+        TurnsOfLightRemaining = _factory.InitialTurnsOfLight;
+        Weight = _factory.Weight;
+        BonusHit = _factory.BonusHit;
+        BonusDamage = _factory.BonusDamage;
+        BonusArmorClass = _factory.BonusArmorClass;
+        ArmorClass = _factory.ArmorClass;
+        DamageDice = _factory.DamageDice;
+        DamageSides = _factory.DamageSides;
+        IsBroken = _factory.IsBroken;
+        IsCursed = _factory.IsCursed;
+        EatScript = _factory.EatScript;
+        IsConsumedWhenEaten = _factory.IsConsumedWhenEaten;
+        IdentityCanBeSensed = _factory.IdentityCanBeSensed;
+        IsContainer = _factory.IsContainer;
+        IsArmor = _factory.IsArmor;
+        WieldSlot = _factory.WieldSlot;
+        CanBeRead = _factory.CanBeRead;
+        RechargeScript = _factory.RechargeScript;
+        CanProjectArrows = _factory.CanProjectArrows;
+        IsWeapon = _factory.IsWeapon;
+        IsIgnoredByMonsters = _factory.IsIgnoredByMonsters;
+        QuaffDetails = _factory.QuaffDetails;
+        ZapDetails = _factory.ZapDetails;
+        UseDetails = _factory.UseDetails;
+        AimingDetails = _factory.AimingDetails;
+        ActivationDetails = _factory.ActivationDetails;
+        BreakageChanceProbability = _factory.BreakageChanceProbability;
+        MissileDamageMultiplier = _factory.MissileDamageMultiplier;
+        CanBeEatenByMonsters = _factory.CanBeEatenByMonsters;
+        MaxPhlogiston = _factory.MaxPhlogiston;
+        IsMagical = _factory.IsMagical;
+        ItemClass = _factory.ItemClass;
+        MakeObjectCount = _factory.MakeObjectCount;
+        LevelNormallyFound = _factory.LevelNormallyFound;
+        NumberOfItemsContained = _factory.NumberOfItemsContained;
+        EnchantmentMaximumCount = _factory.EnchantmentMaximumCount;
+        Cost = _factory.Cost;
+        AskDestroyAll = _factory.AskDestroyAll;
+        VanishesWhenEatenBySkeletons = _factory.VanishesWhenEatenBySkeletons;
+        CanSpikeDoorClosed = _factory.CanSpikeDoorClosed;
+        IsFuelForTorch = _factory.IsFuelForTorch;
+        IsLanternFuel = _factory.IsLanternFuel;
+        AmmunitionItemFactories = _factory.AmmunitionItemFactories;
+        CanApplyBlessedArtifactBias = _factory.CanApplyBlessedArtifactBias;
+        CanApplyArtifactBiasSlaying = _factory.CanApplyArtifactBiasSlaying;
+        CanApplyBlowsBonus = _factory.CanApplyBlowsBonus;
+        CanReflectBoltsAndArrows = _factory.CanReflectBoltsAndArrows;
+        CanApplySlayingBonus = _factory.CanApplySlayingBonus;
+        CanApplyBonusArmorClassMiscPower = _factory.CanApplyBonusArmorClassMiscPower;
+        CanTunnel = _factory.CanTunnel;
+        BurnRate = _factory.BurnRate;
+        IsWearableOrWieldable = _factory.IsWearableOrWieldable;
+        CanProvideSheathOfElectricity = _factory.CanProvideSheathOfElectricity;
+        CanProvideSheathOfFire = _factory.CanProvideSheathOfFire;
+        ProvidesSunlight = _factory.ProvidesSunlight;
+        CanBeEaten = _factory.CanBeEaten;
+        EatMagicScript = _factory.EatMagicScript;
+        HatesAcid = _factory.HatesAcid;
+        HatesCold = _factory.HatesCold;
+        HatesElec = _factory.HatesElectricity;
+        HatesFire = _factory.HatesFire;
+        PackSort = _factory.PackSort;
+        GetsDamageMultiplier = _factory.GetsDamageMultiplier;
+        HasQualityRatings = _factory.HasQualityRatings;
+        EasyKnow = _factory.EasyKnow;
+        TurnOfLightValue = _factory.TurnOfLightValue;
+        BaseValue = _factory.BaseValue;
+        TreasureRating = _factory.TreasureRating;
+        Realm = _factory.Realm;
+
+        if (_factory.AimingDetails != null)
+        {
+            WandChargesRemaining = _factory.AimingDetails.Value.InitialChargesCountRoll.Get(Game.UseRandom);
+        }
+
+        if (_factory.UseDetails != null)
+        {
+            StaffChargesRemaining = _factory.UseDetails.Value.InitialCharges.Get(Game.UseRandom);
+        }
+
     }
 
     /// <summary>
@@ -442,24 +519,24 @@ internal sealed class Item : IComparable<Item>
     {
         // First level sort (primary realm spells books).
         // A book that matches the first realm, will always come before a book that doesn't match the first realm.
-        if (Factory.Spells != null && oPtr.Factory.Spells != null)
+        if (Spells != null && oPtr.Spells != null)
         {
-            if (Factory.Realm == Game.PrimaryRealm && oPtr.Factory.Realm != Game.PrimaryRealm)
+            if (Realm == Game.PrimaryRealm && oPtr.Realm != Game.PrimaryRealm)
             {
                 return -1;
             }
-            if (Factory.Realm != Game.PrimaryRealm && oPtr.Factory.Realm == Game.PrimaryRealm)
+            if (Realm != Game.PrimaryRealm && oPtr.Realm == Game.PrimaryRealm)
             {
                 return 1;
             }
 
             // Second level sort (secondary realm spell books).
             // A book that matches the second realm, will always come before a book that doesn't match the second realm.
-            if (Factory.Realm == Game.SecondaryRealm && oPtr.Factory.Realm != Game.SecondaryRealm)
+            if (Realm == Game.SecondaryRealm && oPtr.Realm != Game.SecondaryRealm)
             {
                 return 1;
             }
-            if (Factory.Realm != Game.SecondaryRealm && oPtr.Factory.Realm == Game.SecondaryRealm)
+            if (Realm != Game.SecondaryRealm && oPtr.Realm == Game.SecondaryRealm)
             {
                 return -1;
             }
@@ -536,7 +613,7 @@ internal sealed class Item : IComparable<Item>
     public Item Clone(int? newCount = null)
     {
         // TODO: The assignments below need to be performed by each factory.  This can be integrated into the CreateItem.
-        Item clonedItem = new Item(Game, Factory);
+        Item clonedItem = new Item(Game, _factory); // TODO: This logically doesn't make sense ... all of the data is now in the item.
 
         clonedItem.ArmorClass = ArmorClass;
         clonedItem.Characteristics.Copy(Characteristics);
@@ -643,7 +720,7 @@ internal sealed class Item : IComparable<Item>
         int mult = 1;
         MonsterRace rPtr = mPtr.Race;
         ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
-        if (Factory.GetsDamageMultiplier)
+        if (GetsDamageMultiplier)
         {
             if (mergedCharacteristics.SlayAnimal && rPtr.Animal)
             {
@@ -862,7 +939,7 @@ internal sealed class Item : IComparable<Item>
     {
         // Ensure both items belong to the same factory.  This works because factories are singletons.  Items from different factories cannot
         // be merged.
-        if (Factory != other.Factory)
+        if (_factory != other._factory)
         {
             return false;
         }
@@ -941,11 +1018,11 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Only open chests can be combined; otherwise, chests are never combined.
-        if (Factory.IsContainer && !ContainerIsOpen || other.Factory.IsContainer && !other.ContainerIsOpen)
+        if (IsContainer && !ContainerIsOpen || other.IsContainer && !other.ContainerIsOpen)
         {
             return false;
         }
-        if (Factory.NumberOfItemsContained != other.Factory.NumberOfItemsContained)
+        if (NumberOfItemsContained != other.NumberOfItemsContained)
         {
             return false;
         }
@@ -1038,7 +1115,7 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public string GetDescription(bool includeCountPrefix)
     {
-        string basenm = Factory.GetDescription(this, includeCountPrefix);
+        string basenm = _factory.GetDescription(this, includeCountPrefix);
         if (IsKnown())
         {
             if (IsRandomArtifact)
@@ -1067,8 +1144,8 @@ internal sealed class Item : IComparable<Item>
     public string GetFullDescription(bool includeCountPrefix)
     {
         string basenm = GetDescription(includeCountPrefix);
-        basenm += Factory.GetDetailedDescription(this);
-        basenm += Factory.GetVerboseDescription(this);
+        basenm += _factory.GetDetailedDescription(this);
+        basenm += _factory.GetVerboseDescription(this);
 
         // This is the full description.
         string fullDescription = "";
@@ -1084,7 +1161,7 @@ internal sealed class Item : IComparable<Item>
         {
             fullDescription = "empty";
         }
-        else if (!IsFlavorAware && Factory.Tried)
+        else if (!IsFlavorAware && Tried)
         {
             fullDescription = "tried";
         }
@@ -1107,7 +1184,7 @@ internal sealed class Item : IComparable<Item>
 
     public ItemQualityRating GetQualityRating()
     {
-        if (!Factory.HasQualityRatings)
+        if (!HasQualityRatings)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1163,7 +1240,7 @@ internal sealed class Item : IComparable<Item>
         ItemCharacteristics characteristics = new ItemCharacteristics();
 
         // Merge the characteristics from the base item category.
-        characteristics.Merge(Factory);
+        characteristics.Merge(_factory); // TODO: This merging is obsolete
 
         // Now merge the characteristics from the fixed artifact, if there is one.
         if (FixedArtifact != null)
@@ -1228,7 +1305,7 @@ internal sealed class Item : IComparable<Item>
             info[i++] = mergedCharacteristics.Activation.Description;
             info[i++] = "...if it is being worn.";
         }
-        string categoryIdentity = Factory.Identify(this);
+        string categoryIdentity = _factory.Identify(this);
         if (categoryIdentity != null)
         {
             info[i++] = categoryIdentity;
@@ -1320,7 +1397,7 @@ internal sealed class Item : IComparable<Item>
 
         if (mergedCharacteristics.Radius > 0)
         {
-            string burnRate = Factory.BurnRate == 0 ? "forever" : "when fueled";
+            string burnRate = BurnRate == 0 ? "forever" : "when fueled";
             info[i++] = $"It provides light (radius {mergedCharacteristics.Radius}) {burnRate}.";
         }
 
@@ -1484,7 +1561,7 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It allows you to levitate.";
         }
-        if (mergedCharacteristics.Radius > 0 && Factory.BurnRate == 0)
+        if (mergedCharacteristics.Radius > 0 && BurnRate == 0)
         {
             info[i++] = "It provides permanent light.";
         }
@@ -1618,7 +1695,7 @@ internal sealed class Item : IComparable<Item>
         {
             return true;
         }
-        if (Factory.EasyKnow && IsFlavorAware)
+        if (EasyKnow && IsFlavorAware)
         {
             return true;
         }
@@ -1642,9 +1719,10 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Indicate that the item has been tried.
     /// </summary>
-    public void ObjectTried()
+    public void ObjectTried() // TODO: This needs to be better named.
     {
-        Factory.Tried = true;
+        _factory.Tried = true;
+
     }
 
     /// <summary>
@@ -1653,11 +1731,11 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public int GetRealValue()
     {
-        if (Factory.Cost == 0)
+        if (Cost == 0)
         {
             return 0;
         }
-        int value = Factory.Cost;
+        int value = Cost;
         if (FixedArtifact != null)
         {
             if (FixedArtifact.Cost == 0)
@@ -2022,18 +2100,18 @@ internal sealed class Item : IComparable<Item>
             value += mergedCharacteristics.Activation.Value;
         }
 
-        if (Factory.AimingDetails != null)
+        if (AimingDetails != null)
         {
-            value += Factory.AimingDetails.Value.PerChargeValue * WandChargesRemaining;
+            value += AimingDetails.Value.PerChargeValue * WandChargesRemaining;
         }
 
-        if (Factory.UseDetails != null)
+        if (UseDetails != null)
         {
-            value += Factory.UseDetails.Value.PerChargeValue * StaffChargesRemaining;
+            value += UseDetails.Value.PerChargeValue * StaffChargesRemaining;
         }
 
-        value += Factory.TurnOfLightValue * TurnsOfLightRemaining;
-        value += Factory.GetBonusRealValue(this);
+        value += TurnOfLightValue * TurnsOfLightRemaining;
+        value += _factory.GetBonusRealValue(this);
         return value;
     }
 
@@ -2043,11 +2121,11 @@ internal sealed class Item : IComparable<Item>
         {
             if (!IsKnown())
             {
-                if (Factory.ItemClass.HasFlavor)
+                if (ItemClass.HasFlavor)
                 {
                     if (IsFlavorAware)
                     {
-                        return Factory.Stompable[StompableType.Broken];
+                        return _factory.Stompable[StompableType.Broken];
                     }
                 }
                 if (!IdentSense)
@@ -2055,11 +2133,11 @@ internal sealed class Item : IComparable<Item>
                     return false;
                 }
             }
-            return Factory.IsStompable(this);
+            return _factory.IsStompable(this);
         }
         set
         {
-            Factory.Stompable[0] = value;
+            _factory.Stompable[0] = value;
         }
     }
 
@@ -2105,9 +2183,9 @@ internal sealed class Item : IComparable<Item>
             }
             if (IsFlavorAware)
             {
-                return Factory.Cost;
+                return Cost;
             }
-            return Factory.BaseValue;
+            return BaseValue;
         }
         if (Discount != 0)
         {
@@ -2196,7 +2274,7 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// 
+    /// Applies 
     /// </summary>
     /// <param name="lev"></param>
     /// <param name="okay">Stores send false.  The game otherwise sends true.  Wizards get to select the value.</param>
@@ -2262,9 +2340,9 @@ internal sealed class Item : IComparable<Item>
                 }
             }
         }
-        Factory.EnchantItem(this, usedOkay, lev, power);
-        Game.TreasureRating += Factory.TreasureRating;
-        if (IsRandomArtifact)
+        _factory.EnchantItem(this, usedOkay, lev, power); // This may convert the item into a random artifact
+        Game.TreasureRating += TreasureRating;
+        if (IsRandomArtifact) 
         {
             Game.TreasureRating += Characteristics.TreasureRating;
         }
@@ -2410,16 +2488,13 @@ internal sealed class Item : IComparable<Item>
             Game.TreasureRating += RareItem.TreasureRating;
             return;
         }
-        if (Factory != null)
+        if (Cost == 0)
         {
-            if (Factory.Cost == 0)
-            {
-                IsBroken = true;
-            }
-            if (Factory.IsCursed)
-            {
-                IsCursed = true;
-            }
+            IsBroken = true;
+        }
+        if (IsCursed)
+        {
+            IsCursed = true;
         }
     }
 
@@ -2564,7 +2639,7 @@ internal sealed class Item : IComparable<Item>
         // Get the current item values.
         characteristics.Copy(this);
 
-        Factory.CreateRandomArtifact(characteristics, fromScroll);
+        _factory.CreateRandomArtifact(characteristics, fromScroll);
 
         Copy(characteristics);
 
@@ -2621,7 +2696,7 @@ internal sealed class Item : IComparable<Item>
                 continue;
             }
 
-            if (aPtr.BaseItemFactory != Factory)
+            if (aPtr.BaseItemFactory != _factory)
             {
                 continue;
             }

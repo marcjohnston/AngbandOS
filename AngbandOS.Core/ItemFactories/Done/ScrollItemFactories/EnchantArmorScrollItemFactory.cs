@@ -30,7 +30,7 @@ internal class EnchantArmorScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivateScrollScriptName => (nameof(EnchantArmor1IdentifableAndUsedScript), 10);
+    protected override (string, int)? ActivationBinderDetails => (nameof(EnchantArmor1IdentifableAndUsedScript), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

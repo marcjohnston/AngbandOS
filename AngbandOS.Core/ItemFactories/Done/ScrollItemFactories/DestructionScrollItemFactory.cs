@@ -29,7 +29,7 @@ internal class DestructionScrollItemFactory : ItemFactory
         (40, 1)
     };
     public override int Weight => 5;
-    protected override (string, int)? ActivateScrollScriptName => (nameof(DestroyAreaR15Script), 10);
+    protected override (string, int)? ActivationBinderDetails => (nameof(DestroyAreaR15Script), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

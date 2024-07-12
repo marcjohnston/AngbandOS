@@ -30,7 +30,7 @@ internal class WordOfRecallScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivateScrollScriptName => (nameof(WordOfRecallIdentifableAndUsedScript), 10);
+    protected override (string, int)? ActivationBinderDetails => (nameof(WordOfRecallIdentifableAndUsedScript), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

@@ -30,7 +30,7 @@ internal class HolyChantScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivateScrollScriptName => (nameof(Blessing1d24p12IdentifableAndUsedScript), 10);
+    protected override (string, int)? ActivationBinderDetails => (nameof(Blessing1d24p12IdentifableAndUsedScript), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

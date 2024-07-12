@@ -65,6 +65,13 @@ internal class ResearchSpellScript : Script, IScript, IScriptStore
         {
             return;
         }
+
+        // Check that the book is useable by the player
+        if (item.Spells == null)
+        {
+            Game.MsgPrint("You can't read that.");
+            return;
+        }
         Game.HandleStuff();
 
         // Arcane casters can choose their spell

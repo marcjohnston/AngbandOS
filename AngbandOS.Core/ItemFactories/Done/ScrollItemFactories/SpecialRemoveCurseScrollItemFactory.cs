@@ -33,7 +33,7 @@ internal class SpecialRemoveCurseScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivateScrollScriptName => (nameof(SpecialRemoveAllCurseIdentifableAndUsedScript), 10);
+    protected override (string, int)? ActivationBinderDetails => (nameof(SpecialRemoveAllCurseIdentifableAndUsedScript), 10);
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]

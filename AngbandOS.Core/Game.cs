@@ -7830,7 +7830,7 @@ public bool IsDead = false;
     public Spell[] OkaySpells(Item item, bool known)
     {
         List<Spell> okaySpells = new List<Spell>();
-        foreach (Spell spell in item.Spells)
+        foreach (Spell spell in item.Spells) // TODO: Spells is not nullable
         {
             if (SpellOkay(spell, known))
             {

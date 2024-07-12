@@ -35,9 +35,14 @@ internal class ExamineStoreItemScript : Script, IScriptStore
         }
         item += storeCommandEvent.Store.StoreTop;
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[item];
-        if (Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter)).Matches(oPtr))
+        if (oPtr.Spells != null)
         {
-            DoStoreBrowse(oPtr);
+            ScreenBuffer savedScreen = Game.Screen.Clone();
+            Game.PrintSpells(oPtr.Spells.ToArray(), 1, 20);
+            Game.MsgClear();
+            Game.Screen.Print("[Press any key to continue]", 0, 23);
+            Game.Inkey();
+            Game.Screen.Restore(savedScreen);
         }
         else
         {
@@ -55,15 +60,5 @@ internal class ExamineStoreItemScript : Script, IScriptStore
         {
             Game.MsgPrint("You see nothing special.");
         }
-    }
-
-    private void DoStoreBrowse(Item oPtr)
-    {
-        ScreenBuffer savedScreen = Game.Screen.Clone();
-        Game.PrintSpells(oPtr.Spells.ToArray(), 1, 20);
-        Game.MsgClear();
-        Game.Screen.Print("[Press any key to continue]", 0, 23);
-        Game.Inkey();
-        Game.Screen.Restore(savedScreen);
     }
 }
