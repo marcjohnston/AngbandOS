@@ -442,26 +442,24 @@ internal sealed class Item : IComparable<Item>
     {
         // First level sort (primary realm spells books).
         // A book that matches the first realm, will always come before a book that doesn't match the first realm.
-        BookItemFactory? thisBookFactory = Factory.TryCast<BookItemFactory>();
-        BookItemFactory? oPtrBookFactory = oPtr.Factory.TryCast<BookItemFactory>();
-        if (thisBookFactory != null && oPtrBookFactory != null)
+        if (Factory.Spells != null && oPtr.Factory.Spells != null)
         {
-            if (thisBookFactory.Realm == Game.PrimaryRealm && oPtrBookFactory.Realm != Game.PrimaryRealm)
+            if (Factory.Realm == Game.PrimaryRealm && oPtr.Factory.Realm != Game.PrimaryRealm)
             {
                 return -1;
             }
-            if (thisBookFactory.Realm != Game.PrimaryRealm && oPtrBookFactory.Realm == Game.PrimaryRealm)
+            if (Factory.Realm != Game.PrimaryRealm && oPtr.Factory.Realm == Game.PrimaryRealm)
             {
                 return 1;
             }
 
             // Second level sort (secondary realm spell books).
             // A book that matches the second realm, will always come before a book that doesn't match the second realm.
-            if (thisBookFactory.Realm == Game.SecondaryRealm && oPtrBookFactory.Realm != Game.SecondaryRealm)
+            if (Factory.Realm == Game.SecondaryRealm && oPtr.Factory.Realm != Game.SecondaryRealm)
             {
                 return 1;
             }
-            if (thisBookFactory.Realm != Game.SecondaryRealm && oPtrBookFactory.Realm == Game.SecondaryRealm)
+            if (Factory.Realm != Game.SecondaryRealm && oPtr.Factory.Realm == Game.SecondaryRealm)
             {
                 return -1;
             }

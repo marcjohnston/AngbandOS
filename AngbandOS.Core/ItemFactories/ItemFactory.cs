@@ -1239,28 +1239,9 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     protected virtual string[]? SpellNames => null;
 
-    /// <summary>
-    /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    [Obsolete]
-    public T? TryCast<T>() where T : ItemFactory
-    {
-        if (typeof(T).IsAssignableFrom(GetType()))
-        {
-            return (T)this;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     public virtual int BonusArmorClass => 0;
     public virtual int BonusDamage => 0;
     public virtual int BonusHit => 0;
-
 
     public virtual int Weight => 0;
 
