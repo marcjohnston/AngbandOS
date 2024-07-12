@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class CeleanoFragmentsTarotBookItemFactory : BookItemFactory
+internal class CeleanoFragmentsTarotBookItemFactory : ItemFactory
 {
     private CeleanoFragmentsTarotBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 

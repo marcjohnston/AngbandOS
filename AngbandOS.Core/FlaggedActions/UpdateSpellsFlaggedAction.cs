@@ -46,16 +46,16 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         List<Spell> spellList = new List<Spell>();
         if (Game.PrimaryRealm != null)
         {
-            foreach (BookItemFactory bookItemFactory in Game.PrimaryRealm.SpellBooks)
+            foreach (ItemFactory itemFactory in Game.PrimaryRealm.SpellBooks)
             {
-                spellList.AddRange(bookItemFactory.Spells);
+                spellList.AddRange(itemFactory.Spells);
             }
         }
         if (Game.SecondaryRealm != null)
         {
-            foreach (BookItemFactory bookItemFactory in Game.SecondaryRealm.SpellBooks)
+            foreach (ItemFactory itemFactory in Game.SecondaryRealm.SpellBooks)
             {
-                spellList.AddRange(bookItemFactory.Spells);
+                spellList.AddRange(itemFactory.Spells);
             }
         }
         foreach (Spell spell in spellList)

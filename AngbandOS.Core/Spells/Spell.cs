@@ -19,7 +19,7 @@ internal abstract class Spell : IGetKey
         Game = game;
     }
 
-    public BookItemFactory BookItemFactory { get; private set; }
+    public ItemFactory SpellBookItemFactory { get; private set; }
 
     /// <summary>
     /// Returns the index of the spell in the realm.  This index starts at 0 and increments by one for each spell.
@@ -182,12 +182,12 @@ internal abstract class Spell : IGetKey
         return chance;
     }
 
-    public void Initialize(BookItemFactory bookItemFactory, int spellIndex)
+    public void Initialize(ItemFactory itemFactory, int spellIndex)
     {
         BaseCharacterClass characterClass = Game.BaseCharacterClass;
         ClassSpell = Game.SingletonRepository.Get<ClassSpell>($"{characterClass.Key}.{this.Key}");
         SpellIndex = spellIndex;
-        BookItemFactory = bookItemFactory;
+        SpellBookItemFactory = itemFactory;
     }
 
     public string Title()

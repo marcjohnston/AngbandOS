@@ -32,13 +32,13 @@ internal abstract class Realm : IGetKey
     public string GetKey => Key;
     public void Bind()
     {
-        List<BookItemFactory> bookItemFactoryList = new List<BookItemFactory>();
+        List<ItemFactory> itemFactoryList = new List<ItemFactory>();
         foreach (string bookItemFactoryName in SpellBookNames)
         {
-            BookItemFactory bookItemFactory = (BookItemFactory)Game.SingletonRepository.Get<ItemFactory>(bookItemFactoryName);
-            bookItemFactoryList.Add(bookItemFactory);
+            ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(bookItemFactoryName);
+            itemFactoryList.Add(itemFactory);
         }
-        SpellBooks = bookItemFactoryList.ToArray();
+        SpellBooks = itemFactoryList.ToArray();
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ internal abstract class Realm : IGetKey
     /// <summary>
     /// Returns the spells books that belong to the realm.
     /// </summary>
-    public BookItemFactory[] SpellBooks { get; private set; }
+    public ItemFactory[] SpellBooks { get; private set; }
     protected abstract string[] SpellBookNames { get; }
 
     public abstract string[] Info { get; }
@@ -91,12 +91,12 @@ internal abstract class Realm : IGetKey
         int bookIndex = 0;
         int spellIndex = 0;
         int? spellFirst = null;
-        foreach (BookItemFactory bookItemFactory in SpellBooks)
+        foreach (ItemFactory itemFactory in SpellBooks)
         {
-            bookItemFactory.SetBookIndex(this, bookIndex);
-            foreach (Spell spell in bookItemFactory.Spells)
+            itemFactory.SetBookIndex(this, bookIndex);
+            foreach (Spell spell in itemFactory.Spells)
             {
-                spell.Initialize(bookItemFactory, spellIndex);
+                spell.Initialize(itemFactory, spellIndex);
                 spellIndex++;
 
 

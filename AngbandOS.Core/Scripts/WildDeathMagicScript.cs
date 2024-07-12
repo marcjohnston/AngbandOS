@@ -14,7 +14,7 @@ internal class WildDeathMagicScript : Script, IScriptSpell
 
     public void ExecuteScriptSpell(Spell spell)
     {
-        int bookIndex = spell.BookItemFactory.BookIndex;
+        int bookIndex = spell.SpellBookItemFactory.BookIndex;
         int spellIndex= spell.SpellIndex;
         if (bookIndex == 3 && Game.DieRoll(2) == 1)
         {

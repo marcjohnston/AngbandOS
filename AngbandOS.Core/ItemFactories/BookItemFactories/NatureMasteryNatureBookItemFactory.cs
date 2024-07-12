@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class NatureMasteryNatureBookItemFactory : BookItemFactory
+internal class NatureMasteryNatureBookItemFactory : ItemFactory
 {
     private NatureMasteryNatureBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
