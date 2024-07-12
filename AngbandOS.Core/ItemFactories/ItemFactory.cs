@@ -1050,6 +1050,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             int manaEquivalent = UseBinderDetails.Value.ManaEquivalent;
             UseDetails = (useScript, initialChargeRoll, chargeValue, manaEquivalent);
         }
+
+        Spells = Game.SingletonRepository.GetNullable<Spell>(SpellNames);
     }
 
     /// <summary>
@@ -1207,11 +1209,42 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public Roll InitialGoldPiecesRoll { get; private set; }
 
+
+    public void SetBookIndex(Realm realm, int bookIndex) // TODO: Can this be done during binding?
+    {
+        BookIndex = bookIndex;
+        Realm = realm;
+    }
+
+    public int BookIndex { get; private set; } // TODO: Can this be done during binding?
+
+    /// <summary>
+    /// Returns the singleton realm that this book factory belongs to.  This is needed because realms define books--books do not define what realm they belong to.
+    /// For this reason, the Realm the book belongs to is set at run-time.
+    /// </summary>
+    public Realm Realm { get; private set; } // TODO: Can this be done during binding?
+
+    /// <summary>
+    /// Returns a divisor to be used to compute the amount of experience gained when an applicable character class destroys the book.  Defaults to 4.
+    /// </summary>
+    public virtual int ExperienceGainDivisorForDestroying => 0;
+
+    /// <summary>
+    /// Returns the spells, in order, that belong to this book; or null, if the item is not a book.  This property is bound from the SpellNames property during the binding phase.
+    /// </summary>
+    public Spell[]? Spells { get; private set; }
+
+    /// <summary>
+    /// Returns the names of the spells, in order, that belong to this book; or null, if the item is not a book.  This property is used to bind the Spells property during the binding phase.
+    /// </summary>
+    protected virtual string[]? SpellNames => null;
+
     /// <summary>
     /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
+    [Obsolete]
     public T? TryCast<T>() where T : ItemFactory
     {
         if (typeof(T).IsAssignableFrom(GetType()))
