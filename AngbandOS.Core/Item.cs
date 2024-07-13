@@ -15,7 +15,9 @@ namespace AngbandOS.Core;
 internal sealed class Item : IComparable<Item>
 {
     /// <summary>
-    /// Returns the factory that created this item.
+    /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
+    /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
+    /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
     /// </summary>
     private ItemFactory _factory { get; set; }
 
@@ -2340,7 +2342,7 @@ internal sealed class Item : IComparable<Item>
                 }
             }
         }
-        _factory.EnchantItem(this, usedOkay, lev, power); // This may convert the item into a random artifact
+        _factory.EnchantItem(this, usedOkay, lev, power); // Some item factories (i.g. armor, boots, helms etc) will convert the item into a RandomArtifact here.
         Game.TreasureRating += TreasureRating;
         if (IsRandomArtifact) 
         {
