@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponOfSlayDemonRareItem : RareItem
 {
     private WeaponOfSlayDemonRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 2500;
+    public override int? AdditiveBundleValue => 2500;
     public override string? FriendlyName => "of Slay Demon";
     public override int TreasureRating => 14;
     public override bool SlayDemon => true;

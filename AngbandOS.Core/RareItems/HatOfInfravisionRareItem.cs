@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class HatOfInfravisionRareItem : RareItem
 {
     private HatOfInfravisionRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 500;
+    public override int? AdditiveBundleValue => 500;
     public override string? FriendlyName => "of Infravision";
     public override bool HideType => true;
     public override bool Infra => true;

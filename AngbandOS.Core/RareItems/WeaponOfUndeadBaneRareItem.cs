@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponOfUndeadBaneRareItem : RareItem
 {
     private WeaponOfUndeadBaneRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 8000;
+    public override int? AdditiveBundleValue => 8000;
     public override string? FriendlyName => "of Undead Bane";
     protected override string? BonusWisdomRollExpression => "1d2";
     public override int TreasureRating => 24;

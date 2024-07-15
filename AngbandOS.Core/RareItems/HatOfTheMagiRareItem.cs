@@ -15,7 +15,7 @@ internal class HatOfTheMagiRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
     }
-    public override int Cost => 7500;
+    public override int? AdditiveBundleValue => 7500;
     public override string? FriendlyName => "of the Magi";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

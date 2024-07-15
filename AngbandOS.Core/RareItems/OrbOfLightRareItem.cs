@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class OrbOfLightRareItem : RareItem
 {
     private OrbOfLightRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 1000;
+    public override int? AdditiveBundleValue => 1000;
     public override string? FriendlyName => "of Light";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

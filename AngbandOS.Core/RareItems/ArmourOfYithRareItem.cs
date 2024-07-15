@@ -15,7 +15,7 @@ internal class ArmorOfYithRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
     }
-    public override int Cost => 15000;
+    public override int? AdditiveBundleValue => 15000;
     public override string? FriendlyName => "of Yith";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

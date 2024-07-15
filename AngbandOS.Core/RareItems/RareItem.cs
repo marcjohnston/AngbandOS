@@ -38,10 +38,10 @@ internal abstract class RareItem : ItemAdditiveBundle
     public virtual void ApplyMagic(Item item) { }
 
     /// <summary>
-    /// Returns the value of the rare item.  When this value is 0, the value of the item is 0 regardless of the value of the original item and the
+    /// Returns the value of the rare item.  When this value is 0, the item is considered worthless regardless of the value of the original item and the
     /// item is considered broken; otherwise this value is added to the value of the original item.
     /// </summary>
-    public abstract int Cost { get; }
+    public virtual int? AdditiveBundleValue => null;
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.

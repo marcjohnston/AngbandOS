@@ -15,7 +15,7 @@ internal class WeaponDefenderRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
     }
-    public override int Cost => 15000;
+    public override int? AdditiveBundleValue => 15000;
     public override bool Feather => true;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Defender)";

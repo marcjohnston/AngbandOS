@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class HatOfStupidityRareItem : RareItem
 {
     private HatOfStupidityRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 0;
+    public override int? AdditiveBundleValue => 0;
     public override string? FriendlyName => "of Stupidity";
     public override bool Int => true;
     protected override string? BonusIntelligenceRollExpression => "1d5";

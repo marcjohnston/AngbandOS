@@ -12,7 +12,7 @@ internal class WeaponOfPoisoningRareItem : RareItem
 {
     private WeaponOfPoisoningRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandPois => true;
-    public override int Cost => 4500;
+    public override int? AdditiveBundleValue => 4500;
     public override string? FriendlyName => "of Poisoning";
     public override int TreasureRating => 20;
     public override bool ResPois => true;

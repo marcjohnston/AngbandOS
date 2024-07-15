@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class ArmorOfResistAcidRareItem : RareItem
 {
     private ArmorOfResistAcidRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 1000;
+    public override int? AdditiveBundleValue => 1000;
     public override string? FriendlyName => "of Resist Acid";
     public override bool IgnoreAcid => true;
     public override int TreasureRating => 16;

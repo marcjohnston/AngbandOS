@@ -16,7 +16,7 @@ internal class WeaponBlessedRareItem : RareItem
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
     }
     public override bool Blessed => true;
-    public override int Cost => 5000;
+    public override int? AdditiveBundleValue => 5000;
     public override string? FriendlyName => "(Blessed)";
     protected override string? BonusWisdomRollExpression => "1d3";
     public override int TreasureRating => 20;

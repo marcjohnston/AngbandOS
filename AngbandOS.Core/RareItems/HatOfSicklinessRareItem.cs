@@ -12,7 +12,7 @@ internal class HatOfSicklinessRareItem : RareItem
 {
     private HatOfSicklinessRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Con => true;
-    public override int Cost => 0;
+    public override int? AdditiveBundleValue => 0;
     public override bool Dex => true;
     public override string? FriendlyName => "of Sickliness";
     protected override string? BonusStrengthRollExpression => "1d5";

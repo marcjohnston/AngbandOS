@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class GlovesOfFreeActionRareItem : RareItem
 {
     private GlovesOfFreeActionRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 1000;
+    public override int? AdditiveBundleValue => 1000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "of Free Action";
     public override int TreasureRating => 11;

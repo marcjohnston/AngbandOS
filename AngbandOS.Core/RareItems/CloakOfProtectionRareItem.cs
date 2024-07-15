@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class CloakOfProtectionRareItem : RareItem
 {
     private CloakOfProtectionRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 500;
+    public override int? AdditiveBundleValue => 500;
     public override string? FriendlyName => "of Protection";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

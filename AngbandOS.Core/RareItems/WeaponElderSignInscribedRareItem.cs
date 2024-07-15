@@ -16,7 +16,7 @@ internal class WeaponElderSignInscribedRareItem : RareItem
         item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
     }
     public override bool Blessed => true;
-    public override int Cost => 20000;
+    public override int? AdditiveBundleValue => 20000;
     public override string? FriendlyName => "(Elder Sign Inscribed)";
     protected override string? BonusWisdomRollExpression => "1d4";
     public override int MaxToA => 4;

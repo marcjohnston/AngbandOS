@@ -11,6 +11,6 @@ namespace AngbandOS.Core.RareItems;
 internal class TerribleWeaponOfDiggingRareItem : RareItem
 {
     private TerribleWeaponOfDiggingRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 0;
+    public override int? AdditiveBundleValue => 0;
     protected override string? BonusTunnelRollExpression => "-1d5+5";
 }

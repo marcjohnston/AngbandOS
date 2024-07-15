@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class GlovesOfWeaknessRareItem : RareItem
 {
     private GlovesOfWeaknessRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 0;
+    public override int? AdditiveBundleValue => 0;
     public override string? FriendlyName => "of Weakness";
     protected override string? BonusStrengthRollExpression => "1d10";
     public override int TreasureRating => 0;

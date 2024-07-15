@@ -12,7 +12,7 @@ internal class WeaponOfExtraAttacksRareItem : RareItem
 {
     private WeaponOfExtraAttacksRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Blows => true;
-    public override int Cost => 10000;
+    public override int? AdditiveBundleValue => 10000;
     public override string? FriendlyName => "of Extra Attacks";
     protected override string? BonusAttacksRollExpression => "1d3";
     public override int TreasureRating => 20;

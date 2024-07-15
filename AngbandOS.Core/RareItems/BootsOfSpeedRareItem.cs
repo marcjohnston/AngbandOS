@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class BootsOfSpeedRareItem : RareItem
 {
     private BootsOfSpeedRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 200000;
+    public override int? AdditiveBundleValue => 200000;
     public override string? FriendlyName => "of Speed";
     public override bool HideType => true;
     protected override string? BonusSpeedRollExpression => "1d10";

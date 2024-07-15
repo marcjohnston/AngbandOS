@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class SpecialAbilityRareItem : RareItem
 {
     private SpecialAbilityRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override int Cost => 0;
+    public override int? AdditiveBundleValue => 0;
     public override string? FriendlyName => "";
     public override int TreasureRating => 0;
     }

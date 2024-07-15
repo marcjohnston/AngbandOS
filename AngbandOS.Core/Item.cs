@@ -1748,11 +1748,15 @@ internal sealed class Item : IComparable<Item>
         }
         else if (RareItem != null)
         {
-            if (RareItem.Cost == 0)
+            // Check to see if the item is now worthless.
+            if (RareItem.AdditiveBundleValue.HasValue)
             {
-                return 0;
+                if (RareItem.AdditiveBundleValue == 0)
+                {
+                    return 0;
+                }
+                value += RareItem.AdditiveBundleValue.Value;
             }
-            value += RareItem.Cost;
         }
 
         ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
@@ -2351,7 +2355,7 @@ internal sealed class Item : IComparable<Item>
         else if (RareItem != null)
         {
             RareItem.ApplyMagic(this);
-            if (RareItem.Cost == 0)
+            if (RareItem.AdditiveBundleValue.HasValue && RareItem.AdditiveBundleValue == 0)
             {
                 IsBroken = true;
             }

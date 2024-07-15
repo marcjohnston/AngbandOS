@@ -12,7 +12,7 @@ internal class CloakOfIrritationRareItem : RareItem
 {
     private CloakOfIrritationRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;
-    public override int Cost => 0;
+    public override int? AdditiveBundleValue => 0;
     public override string? FriendlyName => "of Irritation";
     public override int MaxToD => 15;
     public override int MaxToH => 15;

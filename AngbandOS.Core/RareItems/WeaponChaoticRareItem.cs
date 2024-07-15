@@ -12,7 +12,7 @@ internal class WeaponChaoticRareItem : RareItem
 {
     private WeaponChaoticRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Chaotic => true;
-    public override int Cost => 10000;
+    public override int? AdditiveBundleValue => 10000;
     public override string? FriendlyName => "(Chaotic)";
     public override bool IgnoreAcid => true;
     public override bool IgnoreElec => true;

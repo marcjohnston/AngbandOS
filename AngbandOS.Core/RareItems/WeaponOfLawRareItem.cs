@@ -12,7 +12,7 @@ internal class WeaponOfLawRareItem : RareItem
 {
     private WeaponOfLawRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Con => true;
-    public override int Cost => 25000;
+    public override int? AdditiveBundleValue => 25000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Weapon of Law)";
     protected override string? BonusConstitutionRollExpression => "1d2";
