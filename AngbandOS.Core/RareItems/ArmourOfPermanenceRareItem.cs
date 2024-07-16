@@ -5,16 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
 internal class ArmorOfPermanenceRareItem : RareItem
 {
     private ArmorOfPermanenceRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override void ApplyMagic(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
-    }
+    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
     public override int? AdditiveBundleValue => 30000;
     public override string? FriendlyName => "of Permanence";
     public override bool HoldLife => true;

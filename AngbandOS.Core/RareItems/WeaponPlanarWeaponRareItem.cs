@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
@@ -12,14 +13,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
 {
     private WeaponPlanarWeaponRareItem(Game game) : base(game) { } // This object is a singleton.
 
-    public override void ApplyMagic(Item item)
-    {
-        if (Game.DieRoll(7) == 1)
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
-        }
-    }
-
+    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
     protected override string? ActivationName => nameof(Teleport100Every1d50p50Activation);
     public override int? AdditiveBundleValue => 7000;
     public override bool FreeAct => true;

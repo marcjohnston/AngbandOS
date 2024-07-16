@@ -11,10 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponElderSignInscribedRareItem : RareItem
 {
     private WeaponElderSignInscribedRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override void ApplyMagic(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
-    }
+    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
     public override bool Blessed => true;
     public override int? AdditiveBundleValue => 20000;
     public override string? FriendlyName => "(Elder Sign Inscribed)";

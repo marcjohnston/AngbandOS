@@ -35,7 +35,7 @@ internal abstract class RareItem : ItemAdditiveBundle
         BonusSpeed = Game.ParseNullableRollExpression(BonusSpeedRollExpression);
     }
 
-    public virtual void ApplyMagic(Item item) { }
+    public virtual ItemAdditiveBundle? RandomPower => null;
 
     /// <summary>
     /// Returns the value of the rare item.  When this value is 0, the item is considered worthless regardless of the value of the original item and the

@@ -11,10 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class ArmorOfYithRareItem : RareItem
 {
     private ArmorOfYithRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override void ApplyMagic(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
-    }
+    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
     public override int? AdditiveBundleValue => 15000;
     public override string? FriendlyName => "of Yith";
     public override bool IgnoreAcid => true;

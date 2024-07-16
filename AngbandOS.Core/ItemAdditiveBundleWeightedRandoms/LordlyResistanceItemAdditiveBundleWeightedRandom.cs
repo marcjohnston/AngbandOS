@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 internal class LordlyResistanceItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeightedRandom
 {
     private LordlyResistanceItemAdditiveBundleWeightedRandom(Game game) : base(game) { } // This object is a singleton
-    protected override (string, int)[] ItemAdditiveBundleNames => new (string, int)[]
+    protected override (string?, int)[] ItemAdditiveBundleNames => new (string?, int)[]
     {
         (nameof(ResistFearAndWarriorBiasItemAdditiveBundle), 2 * 16), // 1/3
         (nameof(ResistFearItemAdditiveBundle), 2 * 32), // 2/3

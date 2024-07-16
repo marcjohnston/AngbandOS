@@ -5,6 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Races;
+using AngbandOS.Core.Spells;
+using System.Reflection.PortableExecutable;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -26,7 +33,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
     /// </summary>
-    public RareItem? RareItem = null;
+    public RareItem? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
 
     /// <summary>
     /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
@@ -1259,7 +1266,7 @@ internal sealed class Item : IComparable<Item>
         // Finally, merge any additional random artifact characteristics, if there are any.
         characteristics.Merge(Characteristics);
 
-        // If there are any random characteristics, apply those also.
+        // If there are any random power characteristics, apply those also.
         if (RandomPower != null) // TODO: This smells funny
         {
             characteristics.Merge(RandomPower);
@@ -2354,7 +2361,10 @@ internal sealed class Item : IComparable<Item>
         }
         else if (RareItem != null)
         {
-            RareItem.ApplyMagic(this);
+            if (RareItem.RandomPower != null)
+            {
+                RandomPower = RareItem.RandomPower;
+            }
             if (RareItem.AdditiveBundleValue.HasValue && RareItem.AdditiveBundleValue == 0)
             {
                 IsBroken = true;

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 
 [Serializable]
-internal class AbilityItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeightedRandom
+internal class PlanarWeaponItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeightedRandom
 {
-    private AbilityItemAdditiveBundleWeightedRandom(Game game) : base(game) { } // This object is a singleton
+    private PlanarWeaponItemAdditiveBundleWeightedRandom(Game game) : base(game) { } // This object is a singleton
     protected override (string?, int)[] ItemAdditiveBundleNames => new (string?, int)[]
     {
         (nameof(FeatherFallItemItemAdditiveBundle), 1),
@@ -20,6 +20,7 @@ internal class AbilityItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeigh
         (nameof(RegenerationItemAdditiveBundle), 1),
         (nameof(SeeInvisibleItemAdditiveBundle), 1),
         (nameof(SlowDigestItemAdditiveBundle), 1),
-        (nameof(TelepathyItemAdditiveBundle), 1)
+        (nameof(TelepathyItemAdditiveBundle), 1),
+        (null, 56)
     };
 }

@@ -11,10 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponDefenderRareItem : RareItem
 {
     private WeaponDefenderRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override void ApplyMagic(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
-    }
+    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
     public override int? AdditiveBundleValue => 15000;
     public override bool Feather => true;
     public override bool FreeAct => true;

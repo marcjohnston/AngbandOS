@@ -11,10 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class HatOfTheMagiRareItem : RareItem
 {
     private HatOfTheMagiRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override void ApplyMagic(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
-    }
+    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
     public override int? AdditiveBundleValue => 7500;
     public override string? FriendlyName => "of the Magi";
     public override bool IgnoreAcid => true;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
 internal class FixedArtifactItemAdditiveBundleWeightedRandom : ItemAdditiveBundleWeightedRandom
 {
     private FixedArtifactItemAdditiveBundleWeightedRandom(Game game) : base(game) { } // This object is a singleton
-    protected override (string, int)[] ItemAdditiveBundleNames => new (string, int)[]
+    protected override (string?, int)[] ItemAdditiveBundleNames => new (string?, int)[]
     {
         (nameof(ResistPoisonAndPoisonBiasItemAdditiveBundle), 2 * 36), // 12/16
         (nameof(ResistPoisonAndNecromanticBiasItemAdditiveBundle), 2 * 6), // 2/16
