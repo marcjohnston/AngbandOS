@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class OrbOfIrritationRareItem : RareItem
+internal class OrbOfIrritationRareItem : ItemAdditiveBundle
 {
     private OrbOfIrritationRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;

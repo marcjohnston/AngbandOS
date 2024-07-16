@@ -412,7 +412,6 @@ internal class SingletonRepository
         RegisterRepository<Projectile>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();
-        RegisterRepository<RareItem>();
         RegisterRepository<Realm>();
         RegisterRepository<Reward>();
         RegisterRepository<RoomLayout>();

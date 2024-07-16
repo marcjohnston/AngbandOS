@@ -49,13 +49,13 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
         switch (Game.DieRoll(24))
         {
             case 1:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsOfSpeedRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfSpeedRareItem));
                 break;
             case 2:
             case 3:
             case 4:
             case 5:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsOfFreeActionRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfFreeActionRareItem));
                 break;
             case 6:
             case 7:
@@ -65,7 +65,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             case 11:
             case 12:
             case 13:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsOfStealthRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfStealthRareItem));
                 break;
             case 14:
             case 15:
@@ -78,7 +78,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             case 22:
             case 23:
             case 24:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsWingedRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsWingedRareItem));
                 if (Game.DieRoll(2) == 1)
                 {
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
@@ -96,13 +96,13 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
         switch (Game.DieRoll(3))
         {
             case 1:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsOfNoiseRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfNoiseRareItem));
                 break;
             case 2:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsOfSlownessRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfSlownessRareItem));
                 break;
             case 3:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BootsOfAnnoyanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfAnnoyanceRareItem));
                 break;
         }
     }

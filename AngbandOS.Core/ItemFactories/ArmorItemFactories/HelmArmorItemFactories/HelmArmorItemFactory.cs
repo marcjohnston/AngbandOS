@@ -47,19 +47,19 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
         {
             case 1:
             case 2:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfIntelligenceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfIntelligenceRareItem));
                 break;
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfWisdomRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfWisdomRareItem));
                 break;
             case 5:
             case 6:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfBeautyRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfBeautyRareItem));
                 break;
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfSeeingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfSeeingRareItem));
                 if (Game.DieRoll(7) == 1)
                 {
                     item.Characteristics.Telepathy = true;
@@ -67,13 +67,13 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
                 break;
             case 9:
             case 10:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfLightRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfLightRareItem));
                 break;
             case 11:
             case 12:
             case 13:
             case 14:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfInfravisionRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfInfravisionRareItem));
                 break;
         }
     }

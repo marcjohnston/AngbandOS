@@ -24,19 +24,19 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
             case 2:
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfFreeActionRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfFreeActionRareItem));
                 break;
             case 5:
             case 6:
             case 7:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfSlayingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfSlayingRareItem));
                 break;
             case 8:
             case 9:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfAgilityRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfAgilityRareItem));
                 break;
             case 10:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfPowerRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfPowerRareItem));
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
         }

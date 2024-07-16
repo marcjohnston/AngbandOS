@@ -34,7 +34,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
             switch (Game.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
             {
                 case 1:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponElderSignInscribedRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponElderSignInscribedRareItem));
                     if (Game.DieRoll(4) == 1)
                     {
                         item.Characteristics.Blows = true;
@@ -45,7 +45,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     }
                     break;
                 case 2:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponDefenderRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponDefenderRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
                         item.Characteristics.ResPois = true;
@@ -53,28 +53,28 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     break;
                 case 3:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfVitriolRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfVitriolRareItem));
                     break;
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfShockingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfShockingRareItem));
                     break;
                 case 5:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfBurningRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfBurningRareItem));
                     break;
                 case 6:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfFreezingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfFreezingRareItem));
                     break;
                 case 7:
                 case 8:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayAnimalRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayAnimalRareItem));
                     if (Game.RandomLessThan(100) < 20)
                     {
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfAnimalBaneRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfAnimalBaneRareItem));
                     }
                     break;
                 case 9:
                 case 10:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayDragonRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayDragonRareItem));
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalResistanceItemAdditiveBundleWeightedRandom)));
                     if (Game.RandomLessThan(100) < 20)
                     {
@@ -83,71 +83,71 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                             item.Characteristics.ResPois = true;
                         }
                         item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalAndPoisonResistanceItemAdditiveBundleWeightedRandom)));
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfDragonBaneRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfDragonBaneRareItem));
                     }
                     break;
                 case 11:
                 case 12:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayEvilRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayEvilRareItem));
                     if (Game.RandomLessThan(100) < 20)
                     {
                         item.Characteristics.ResFear = true;
                         item.Characteristics.Blessed = true;
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfEvilBaneRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfEvilBaneRareItem));
                     }
                     break;
                 case 13:
                 case 14:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayUndeadRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayUndeadRareItem));
                     if (Game.RandomLessThan(100) < 20)
                     {
                         item.Characteristics.ResNether = true;
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfUndeadBaneRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfUndeadBaneRareItem));
                     }
                     break;
                 case 15:
                 case 16:
                 case 17:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayOrcRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayOrcRareItem));
                     break;
                 case 18:
                 case 19:
                 case 20:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayTrollRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayTrollRareItem));
                     break;
                 case 21:
                 case 22:
                 case 23:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayGiantRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayGiantRareItem));
                     break;
                 case 24:
                 case 25:
                 case 26:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayDemonRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayDemonRareItem));
                     break;
                 case 27:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfKadathRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfKadathRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
                         item.Characteristics.ResFear = true;
                     }
                     break;
                 case 28:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponBlessedRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponBlessedRareItem));
                     break;
                 case 29:
                 case 30:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfExtraAttacksRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfExtraAttacksRareItem));
                     break;
                 case 31:
                 case 32:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponVampiricRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponVampiricRareItem));
                     break;
                 case 33:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfPoisoningRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfPoisoningRareItem));
                     break;
                 case 34:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponChaoticRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponChaoticRareItem));
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
                     break;
                 case 35:
@@ -155,7 +155,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     break;
                 case 36:
                 case 37:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSlayingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayingRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
                         item.DamageDice *= 2;
@@ -182,7 +182,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     break;
                 case 38:
                 case 39:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponPlanarWeaponRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponPlanarWeaponRareItem));
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                     if (Game.DieRoll(5) == 1)
                     {
@@ -190,7 +190,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     }
                     break;
                 case 40:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfLawRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfLawRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
                         item.Characteristics.HoldLife = true;
@@ -209,12 +209,12 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 42:
                     if (CanBeWeaponOfSharpness)
                     {
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfSharpnessRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSharpnessRareItem));
                         item.BonusTunnel = item.GetBonusValue(5, level) + 1;
                     }
                     else
                     {
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfEarthquakesRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfEarthquakesRareItem));
                         if (Game.DieRoll(3) == 1)
                         {
                             item.Characteristics.Blows = true;
@@ -236,7 +236,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
         {
             if (Game.RandomLessThan(Constants.MaxDepth) < level)
             {
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfLengRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfLengRareItem));
                 if (Game.DieRoll(6) == 1)
                 {
                     item.Characteristics.DreadCurse = true;

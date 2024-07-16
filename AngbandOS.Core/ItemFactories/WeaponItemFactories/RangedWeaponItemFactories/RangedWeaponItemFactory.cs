@@ -63,12 +63,12 @@ internal abstract class RangedWeaponItemFactory : WeaponItemFactory
             {
                 case 1:
                 case 11:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfExtraMightRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfExtraMightRareItem));
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
                     break;
                 case 2:
                 case 12:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfExtraShotsRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfExtraShotsRareItem));
                     break;
                 case 3:
                 case 4:
@@ -78,7 +78,7 @@ internal abstract class RangedWeaponItemFactory : WeaponItemFactory
                 case 14:
                 case 15:
                 case 16:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfVelocityRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfVelocityRareItem));
                     break;
                 case 7:
                 case 8:
@@ -88,7 +88,7 @@ internal abstract class RangedWeaponItemFactory : WeaponItemFactory
                 case 18:
                 case 19:
                 case 20:
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfAccuracyRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfAccuracyRareItem));
                     break;
                 case 21:
                     item.CreateRandomArtifact(false);

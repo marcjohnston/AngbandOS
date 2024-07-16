@@ -16,27 +16,27 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
         switch (Game.DieRoll(8))
         {
             case 1:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTheMagiRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfTheMagiRareItem));
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
             case 2:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfMightRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfMightRareItem));
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
             case 3:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTelepathyRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfTelepathyRareItem));
                 break;
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfRegenerationRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfRegenerationRareItem));
                 break;
             case 5:
             case 6:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfLordlinessRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfLordlinessRareItem));
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
                 break;
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfSeeingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfSeeingRareItem));
                 if (Game.DieRoll(3) == 1)
                 {
                     item.Characteristics.Telepathy = true;

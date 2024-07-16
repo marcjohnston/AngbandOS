@@ -33,7 +33,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
     /// </summary>
-    public RareItem? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
+    public ItemAdditiveBundle? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
 
     /// <summary>
     /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.

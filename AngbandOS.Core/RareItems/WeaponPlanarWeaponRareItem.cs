@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class WeaponPlanarWeaponRareItem : RareItem
+internal class WeaponPlanarWeaponRareItem : ItemAdditiveBundle
 {
     private WeaponPlanarWeaponRareItem(Game game) : base(game) { } // This object is a singleton.
 

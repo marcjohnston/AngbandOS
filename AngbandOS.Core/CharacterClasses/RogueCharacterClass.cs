@@ -96,7 +96,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     {
         if (item.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) && Game.Studies<DeathRealm>())
         {
-            item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfPoisoningRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfPoisoningRareItem));
         }
     }
 }

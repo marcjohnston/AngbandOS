@@ -54,29 +54,29 @@ internal abstract class ArmorItemFactory : ItemFactory
             case 2:
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfResistAcidRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistAcidRareItem));
                 break;
             case 5:
             case 6:
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfResistLightningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistLightningRareItem));
                 break;
             case 9:
             case 10:
             case 11:
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfResistFireRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistFireRareItem));
                 break;
             case 13:
             case 14:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfResistColdRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistColdRareItem));
                 break;
             case 17:
             case 18:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfResistanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistanceRareItem));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.Characteristics.ResPois = true;
@@ -88,7 +88,7 @@ internal abstract class ArmorItemFactory : ItemFactory
                 break;
             case 20:
             case 21:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ArmorOfYithRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfYithRareItem));
                 break;
         }
     }

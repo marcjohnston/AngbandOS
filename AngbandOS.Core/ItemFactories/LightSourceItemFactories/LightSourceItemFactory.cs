@@ -31,14 +31,14 @@ internal abstract class LightSourceItemFactory : ItemFactory
             {
                 case 1:
                     {
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(OrbOfIrritationRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfIrritationRareItem));
                         item.IsBroken = true;
                         item.IsCursed = true;
                         break;
                     }
                 case 2:
                     {
-                        item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(OrbOfInstabilityRareItem));
+                        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfInstabilityRareItem));
                         item.IsBroken = true;
                         item.IsCursed = true;
                         break;
@@ -47,41 +47,41 @@ internal abstract class LightSourceItemFactory : ItemFactory
         }
         else if (power == 1) // Good
         {
-            WeightedRandom<RareItem> weightedRandom = new WeightedRandom<RareItem>(Game);
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfAcidRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfLightningRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfLightRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfDarknessRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfLifeRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfSightRareItem)));
-            weightedRandom.Add(2, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfCourageRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfVenomRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfClarityRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfSoundRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfChaosRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfShardsRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfUnlifeRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfStabilityRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfMagicRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfFreedomRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfStrengthRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfWisdomRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfFlameRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfDexterityRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfConstitutionRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfIntelligenceRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfCharismaRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfLightnessRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfInsightRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfTheMindRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfSustenanceRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfHealthRareItem)));
-            weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(OrbOfFrostRareItem)));
+            WeightedRandom<ItemAdditiveBundle> weightedRandom = new WeightedRandom<ItemAdditiveBundle>(Game);
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfAcidRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLightningRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLightRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfDarknessRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLifeRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfSightRareItem)));
+            weightedRandom.Add(2, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfCourageRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfVenomRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfClarityRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfSoundRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfChaosRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfShardsRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfUnlifeRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfStabilityRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfMagicRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfFreedomRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfStrengthRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfWisdomRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfFlameRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfDexterityRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfConstitutionRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfIntelligenceRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfCharismaRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLightnessRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfInsightRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfTheMindRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfSustenanceRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfHealthRareItem)));
+            weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfFrostRareItem)));
             item.RareItem = weightedRandom.ChooseOrDefault();
         }
         else if (power == 2) // Great
         {
-            item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(OrbOfPowerRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfPowerRareItem));
             for (int i = 0; i < 3; i++)
             {
                 WeightedRandomAction weightedRandomAction = new WeightedRandomAction(Game);

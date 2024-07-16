@@ -27,11 +27,11 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
         base.EnchantItem(item, usedOkay, level, power);
         if (power > 1)
         {
-            item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfDiggingRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfDiggingRareItem));
         }
         else if (power < -1)
         {
-            item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(TerribleWeaponOfDiggingRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(TerribleWeaponOfDiggingRareItem));
         }
         else if (power < 0)
         {
