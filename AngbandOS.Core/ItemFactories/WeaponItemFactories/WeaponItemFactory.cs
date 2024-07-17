@@ -45,43 +45,6 @@ internal abstract class WeaponItemFactory : ItemFactory
         return bonusValue;
     }
 
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        if (power == 0)
-        {
-            return;
-        }
-
-        int tohit1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        int todam1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        int tohit2 = item.GetBonusValue(10, level);
-        int todam2 = item.GetBonusValue(10, level);
-        if (power > 0)
-        {
-            item.BonusHit += tohit1;
-            item.BonusDamage += todam1;
-            if (power > 1)
-            {
-                item.BonusHit += tohit2;
-                item.BonusDamage += todam2;
-            }
-        }
-        else if (power < 0)
-        {
-            item.BonusHit -= tohit1;
-            item.BonusDamage -= todam1;
-            if (power < -1)
-            {
-                item.BonusHit -= tohit2;
-                item.BonusDamage -= todam2;
-            }
-            if (item.BonusHit + item.BonusDamage < 0)
-            {
-                item.IsCursed = true;
-            }
-        }
-    }
-
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearableOrWieldable => true;

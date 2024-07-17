@@ -28,7 +28,39 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
     protected virtual bool CapableOfVorpalSlaying => false;
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
-        base.EnchantItem(item, usedOkay, level, power);
+        if (power == 0)
+        {
+            return;
+        }
+
+        int tohit1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        int todam1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        int tohit2 = item.GetBonusValue(10, level);
+        int todam2 = item.GetBonusValue(10, level);
+        if (power > 0)
+        {
+            item.BonusHit += tohit1;
+            item.BonusDamage += todam1;
+            if (power > 1)
+            {
+                item.BonusHit += tohit2;
+                item.BonusDamage += todam2;
+            }
+        }
+        else if (power < 0)
+        {
+            item.BonusHit -= tohit1;
+            item.BonusDamage -= todam1;
+            if (power < -1)
+            {
+                item.BonusHit -= tohit2;
+                item.BonusDamage -= todam2;
+            }
+            if (item.BonusHit + item.BonusDamage < 0)
+            {
+                item.IsCursed = true;
+            }
+        }
         if (power > 1)
         {
             switch (Game.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
