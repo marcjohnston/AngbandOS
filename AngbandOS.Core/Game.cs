@@ -1003,7 +1003,7 @@ public bool IsDead = false;
     public int MCnt;
     public int MMax = 1;
     public int MonsterLevel;
-    public int ObjectLevel;
+    public int ObjectLevel; // TODO: This is set by by rooms, monsters and chests to control the levels of items created temporarily.
 
     /// <summary>
     /// Returns the map sector.
@@ -17909,6 +17909,15 @@ public bool IsDead = false;
 
         // There is no multiplier.  This is a simple DieRoll in the format 1d2+2.
         return new DiceRoll(this, dieCount, sidesCount, bonus);
+    }
+
+    public Probability? ParseNullableProbabilityExpression(string? expression)
+    {
+        if (expression == null)
+        {
+            return null;
+        }
+        return ParseProbabilityExpression(expression);
     }
 
     /// <summary>

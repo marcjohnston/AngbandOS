@@ -17,10 +17,11 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
+    protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
         item.BonusSearch = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))
+        if (power < 0)
         {
             item.IsBroken = true;
             item.IsCursed = true;

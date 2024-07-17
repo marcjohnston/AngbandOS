@@ -17,12 +17,9 @@ internal class DamageRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
+    protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
     public override void EnchantItem(Item item, bool usedOkay, int level, int power)
     {
-        if (power == 0 && Game.RandomLessThan(100) < 50)
-        {
-            power = -1;
-        }
         item.BonusDamage = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
         if (power < 0)
         {

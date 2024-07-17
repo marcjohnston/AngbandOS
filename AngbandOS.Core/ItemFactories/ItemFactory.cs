@@ -742,6 +742,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <returns></returns>
     public virtual int GetBonusRealValue(Item item) => 0;
 
+    protected virtual string? BreaksDuringEnchantmentProbabilityExpression => null;
+
+    public Probability? BreaksDuringEnchantmentProbability { get; private set; }
+
     /// <summary>
     /// Applies magic to the item.  Does nothing, by default.  This apply magic method is always called after an object is created (new Item()) but not all new Item creation call ApplyMagic.
     /// </summary>
@@ -1052,6 +1056,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         }
 
         Spells = Game.SingletonRepository.GetNullable<Spell>(SpellNames);
+        BreaksDuringEnchantmentProbability = Game.ParseNullableProbabilityExpression(BreaksDuringEnchantmentProbabilityExpression);
     }
 
     /// <summary>

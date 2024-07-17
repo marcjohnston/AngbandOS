@@ -2327,6 +2327,13 @@ internal sealed class Item : IComparable<Item>
                 power = -2;
             }
         }
+
+        // The factory may have specified a breakage
+        if (power == 0 && _factory.BreaksDuringEnchantmentProbability != null && _factory.BreaksDuringEnchantmentProbability.Test(Game))
+        {
+            power = -1;
+        }
+
         int rollsForFixedArtifactAttempts = 0;
         if (power >= 2)
         {
