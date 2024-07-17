@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -90,39 +89,6 @@ internal abstract class ArmorItemFactory : ItemFactory
             case 21:
                 item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfYithRareItem));
                 break;
-        }
-    }
-
-    /// <summary>
-    /// Applies a standard BonusArmorClass and IdentCursed to armor class items.  Derived items must call this base to have these
-    /// standard characteristics applied, when needed.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        int toac1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        int toac2 = item.GetBonusValue(10, level);
-        if (power > 0)
-        {
-            item.BonusArmorClass += toac1;
-            if (power > 1)
-            {
-                item.BonusArmorClass += toac2;
-            }
-        }
-        else if (power < 0)
-        {
-            item.BonusArmorClass -= toac1;
-            if (power < -1)
-            {
-                item.BonusArmorClass -= toac2;
-            }
-            if (item.BonusArmorClass < 0)
-            {
-                item.IsCursed = true;
-            }
         }
     }
 }

@@ -21,7 +21,28 @@ internal abstract class SoftArmorItemFactory : ArmorItemFactory
         if (power != 0)
         {
             // Apply the standard armor characteristics.
-            base.EnchantItem(item, usedOkay, level, power);
+            int toac1 = Game.DieRoll(5) + item.GetBonusValue(5, level);
+            int toac2 = item.GetBonusValue(10, level);
+            if (power > 0)
+            {
+                item.BonusArmorClass += toac1;
+                if (power > 1)
+                {
+                    item.BonusArmorClass += toac2;
+                }
+            }
+            else if (power < 0)
+            {
+                item.BonusArmorClass -= toac1;
+                if (power < -1)
+                {
+                    item.BonusArmorClass -= toac2;
+                }
+                if (item.BonusArmorClass < 0)
+                {
+                    item.IsCursed = true;
+                }
+            }
 
             if (power > 1)
             {
