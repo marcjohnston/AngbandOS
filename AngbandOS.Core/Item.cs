@@ -2268,7 +2268,10 @@ internal sealed class Item : IComparable<Item>
         {
             IsCursed = true;
         }
-        GetFixedArtifactResistances();
+        if (FixedArtifact != null)
+        {
+            FixedArtifact.ApplyResistances(this);
+        }
 
         if (fixedArtifact.Cost == 0)
         {
@@ -2683,14 +2686,6 @@ internal sealed class Item : IComparable<Item>
         }
         RandomArtifactName = newName;
         return true;
-    }
-
-    public void GetFixedArtifactResistances()
-    {
-        if (FixedArtifact != null)
-        {
-            FixedArtifact.ApplyResistances(this);
-        }
     }
 
     private FixedArtifact? SelectCompatibleFixedArtifact()
