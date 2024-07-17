@@ -5,13 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Races;
-using AngbandOS.Core.Spells;
-using System.Reflection.PortableExecutable;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System;
-
 namespace AngbandOS.Core;
 
 /// <summary>
