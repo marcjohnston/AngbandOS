@@ -2286,11 +2286,11 @@ internal sealed class Item : IComparable<Item>
     /// Applies 
     /// </summary>
     /// <param name="lev"></param>
-    /// <param name="okay">Stores send false.  The game otherwise sends true.  Wizards get to select the value.</param>
+    /// <param name="allowFixedArtifact">Stores send false.  The game otherwise sends true.  Wizards get to select the value.</param>
     /// <param name="good">Stores send false.  Monsters will have a good item count Monster.DropGood. When true, skips the percentile roll for good objects.</param>
     /// <param name="great">Stores send false.  Monsters will have a great item count Monster.DropGreat. When true, skips the percentile roll for great objects.</param>
     /// <param name="store"></param>
-    public void EnchantItem(int lev, bool okay, bool good, bool great, bool usedOkay)
+    public void EnchantItem(int lev, bool allowFixedArtifact, bool good, bool great, bool usedOkay)
     {            
         if (lev > Constants.MaxDepth - 1)
         {
@@ -2339,7 +2339,7 @@ internal sealed class Item : IComparable<Item>
         {
             rollsForFixedArtifactAttempts = 4;
         }
-        if (!okay || FixedArtifact != null)
+        if (!allowFixedArtifact || FixedArtifact != null)
         {
             rollsForFixedArtifactAttempts = 0;
         }
