@@ -8902,9 +8902,9 @@ public bool IsDead = false;
         Screen.PrintLine("", row, 0);
     }
 
-    public bool AskforAux(out string buf, string initial, int len)
+    public string? AskforAux(string initial, int len)
     {
-        buf = initial;
+        string buf = initial;
         char i = '\0';
         int k = 0;
         bool done = false;
@@ -8960,7 +8960,11 @@ public bool IsDead = false;
             Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
             Screen.Print(ColorEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
         }
-        return i != '\x1b';
+        if (i == '\x1b')
+        {
+            return null;
+        }
+        return buf;
     }
 
     public bool GetCheck(string prompt)
@@ -9081,9 +9085,14 @@ public bool IsDead = false;
     {
         MsgPrint(null);
         Screen.PrintLine(prompt, 0, 0);
-        bool res = AskforAux(out buf, initial, len);
+        string? buffer = AskforAux(initial, len);
+        buf = buffer;
         MsgClear();
-        return res;
+        if (buffer == null)
+        {
+            return false;
+        }
+        return true;
     }
 
     /// <summary>
@@ -13963,7 +13972,8 @@ public bool IsDead = false;
         while (!Shutdown)
         {
             Screen.Goto(2, col);
-            if (AskforAux(out string newName, PlayerName.StringValue, 12))
+            string? newName = AskforAux(PlayerName.StringValue, 12);
+            if (newName != null)
             {
                 PlayerName.StringValue = newName;
 

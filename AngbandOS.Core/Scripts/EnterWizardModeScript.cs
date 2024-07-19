@@ -47,11 +47,7 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
         else
         {
             Game.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
-            if (!Game.AskforAux(out string tmp, "", 31))
-            {
-                Game.Screen.Erase(0, 0);
-                return;
-            }
+            string? tmp = Game.AskforAux("", 31);
             Game.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
             {
