@@ -2282,16 +2282,6 @@ internal sealed class Item : IComparable<Item>
         return true;
     }
 
-    public void EnchantStoreItem()
-    {
-
-    }
-
-    public void EnchantDungeonItem()
-    {
-
-    }
-
     /// <summary>
     /// Applies 
     /// </summary>
