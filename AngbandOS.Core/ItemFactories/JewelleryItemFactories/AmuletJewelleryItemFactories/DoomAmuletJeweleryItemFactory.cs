@@ -22,18 +22,10 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.IsBroken = true;
-        item.IsCursed = true;
-        item.BonusCharisma = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
-        item.BonusConstitution = item.BonusCharisma;
-        item.BonusDexterity = item.BonusCharisma;
-        item.BonusStrength = item.BonusCharisma;
-        item.BonusIntelligence = item.BonusCharisma;
-        item.BonusWisdom = item.BonusCharisma;
-        item.BonusArmorClass = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
-    }
+        (null, null, new string[] { nameof(BrokenAndCursedEnchantmentScript),  nameof(PoorStatsEnchantmentScript), nameof(PoorArmorClass1D5B5EnchantmentScript) })
+    };
     public override bool Cha => true;
     public override bool Con => true;
     public override bool IsCursed => true;

@@ -49,35 +49,6 @@ internal abstract class ChestItemFactory : ItemFactory
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    /// <remarks>
-    /// Logic:
-    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
-    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
-    /// </remarks>
-    /// <param name="store"></param>
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        if (item.LevelNormallyFound > 0)
-        {
-            int chestType = Game.DieRoll(item.LevelNormallyFound);
-            item.ContainerIsOpen = false;
-            int chestTrapConfigurationCount = Game.SingletonRepository.Count<ChestTrapConfiguration>();
-            int eightFivePercent = chestTrapConfigurationCount * 100 / 85;
-            if (chestType > eightFivePercent)
-            { 
-                int randomRemaining = chestTrapConfigurationCount - eightFivePercent;
-                chestType = eightFivePercent + Game.RandomLessThan(randomRemaining);
-            }
-            item.ContainerTraps = Game.SingletonRepository.Get<ChestTrapConfiguration>(chestType).Traps;
-            item.LevelOfObjectsInContainer = chestType;
-        }
-    }
-
     public override int PackSort => 36;
 
     public override ColorEnum Color => ColorEnum.Grey;

@@ -24,14 +24,10 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     /// </summary>
     public override int TreasureRating => 5;
 
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        do
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(LordlyResistanceItemAdditiveBundleWeightedRandom)));
-        } while (Game.DieRoll(4) == 1);
-        item.BonusArmorClass = 10 + Game.DieRoll(5) + item.GetBonusValue(10, level);
-    }
+        (null, null, new string[] { nameof(LordlyProtectionEnchantmentScript) })
+    };
     public override int Cost => 100000;
     public override bool FreeAct => true;
     public override bool HoldLife => true;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class IronCrownArmorItemFactory : CrownArmorItemFactory
+internal class IronCrownArmorItemFactory : ArmorItemFactory
 {
     private IronCrownArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -25,6 +25,15 @@ internal class IronCrownArmorItemFactory : CrownArmorItemFactory
     {
         (45, 1)
     };
+
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleCrownEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorCrownEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodCrownEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatCrownEnchantmentScript) })
+    };
+
     public override int Weight => 20;
 
     /// <summary>

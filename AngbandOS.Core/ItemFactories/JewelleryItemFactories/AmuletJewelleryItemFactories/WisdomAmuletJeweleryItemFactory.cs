@@ -14,16 +14,11 @@ internal class WisdomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
 
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusWisdom = 1 + item.GetBonusValue(5, level);
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusWisdom = 0 - item.BonusWisdom;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorWisdomEnchantmentScript) }),
+        (new int[] {1, 2}, null, new string[] { nameof(BonusWisdomEnchantmentScript) })
+    };
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Wisdom";
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
+internal class ShadowCloakArmorItemFactory : ArmorItemFactory
 {
     private ShadowCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -28,6 +28,14 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     public override bool ResLight => true;
     public override int BonusArmorClass => 4;
     public override int Weight => 5;
+
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleCloakEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorCloakEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodCloakEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatCloakEnchantmentScript) })
+    };
 
     /// <summary>
     /// Returns the about body inventory slot for cloaks.

@@ -18,16 +18,12 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusSearch = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusSearch = 0 - item.BonusSearch;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorSearchEnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusSearchEnchantmentScript) })
+    };
+
     public override int Cost => 600;
     public override bool HideType => true;
     public override int LevelNormallyFound => 30;

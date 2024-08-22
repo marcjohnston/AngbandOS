@@ -18,17 +18,10 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        if (Game.DieRoll(3) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
-        }
-        if (Game.DieRoll(5) == 1)
-        {
-            item.Characteristics.ResPois = true;
-        }
-    }
+        (null, null, new string[] { nameof(RandomResistance1In3EnchantmentScript), nameof(ResistPoisonIn5EnchantmentScript) })
+    };
 
     public override int Cost => 25000;
     public override bool IgnoreAcid => true;

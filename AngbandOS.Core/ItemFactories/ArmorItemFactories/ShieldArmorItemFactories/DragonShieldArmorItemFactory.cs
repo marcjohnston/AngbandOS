@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
+internal class DragonShieldArmorItemFactory : ArmorItemFactory
 {
     private DragonShieldArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -20,21 +20,6 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
     /// Returns a treasure rating of 5 for a shield of dragon scale mail.
     /// </summary>
     public override int TreasureRating => 5;
-
-    /// <summary>
-    /// Applies special magic to this dragon shield.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        // Apply the standard armor characteristics, regardless of the power level.
-        base.EnchantItem(item, usedOkay, level, power);
-
-        ApplyDragonscaleResistance(item);
-    }
-
     public override int ArmorClass => 8;
     public override int Cost => 10000;
     public override int DamageDice => 1;
@@ -84,4 +69,12 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleShieldEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorShieldEnchantmentScript) }),
+        (null, null, new string[] { nameof(DragonResistanceEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodShieldEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatShieldEnchantmentScript) })
+    };
 }

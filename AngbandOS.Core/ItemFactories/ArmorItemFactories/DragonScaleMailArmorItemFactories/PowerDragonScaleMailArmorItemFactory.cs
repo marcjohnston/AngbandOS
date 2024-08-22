@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
+internal class PowerDragonScaleMailArmorItemFactory : ArmorItemFactory
 {
     private PowerDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -82,4 +82,11 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleDragonScaleMailEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorDragonScaleMailEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodDragonScaleMailEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatDragonScaleMailEnchantmentScript) })
+    };
 }

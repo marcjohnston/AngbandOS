@@ -18,16 +18,11 @@ internal class ConstitutionRingItemFactory : RingItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusConstitution = 1 + item.GetBonusValue(5, level);
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusConstitution = 0 - item.BonusConstitution;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorConstitution5BP1EnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusConstitution5BP1EnchantmentScript) })
+    };
 
     public override bool Con => true;
     public override int Cost => 500;

@@ -23,15 +23,10 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     /// </summary>
     public override int TreasureRating => 25;
 
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusSearch = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        item.BonusArmorClass = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        if (Game.DieRoll(3) == 1)
-        {
-            item.Characteristics.SlowDigest = true;
-        }
-    }
+        (null, null, new string[] { nameof(BonusArmorClass1D5P5BEnchantmentScript), nameof(BonusSearchEnchantmentScript), nameof(BonusSlowDigest1In3EnchantmentScript) })
+    };
 
     public override int Cost => 30000;
     public override bool FreeAct => true;

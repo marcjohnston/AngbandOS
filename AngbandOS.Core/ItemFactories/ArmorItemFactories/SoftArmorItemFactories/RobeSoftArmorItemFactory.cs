@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
+internal class RobeSoftArmorItemFactory : ArmorItemFactory
 {
     private RobeSoftArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -32,18 +32,16 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
 
             if (power > 1)
             {
-                // Robes have a chance of having the armor of permanence instead of a random characteristic.
-                if (Game.RandomLessThan(100) < 10)
-                {
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfPermanenceRareItem));
-                }
-                else
-                {
-                    ApplyRandomGoodRareCharacteristics(item);
-                }
             }
         }
     }
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleSoftArmorEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorSoftArmorEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodSoftArmorEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatRobeSoftArmorEnchantmentScript) })
+    };
 
     public override int ArmorClass => 2;
     public override int Cost => 4;

@@ -2356,7 +2356,25 @@ internal sealed class Item : IComparable<Item>
                 }
             }
         }
+
+        if (_factory.Enchantments != null)
+        {
+            bool isStoreStock = !usedOkay;
+            foreach ((int[]? Powers, bool? StoreStock, IEnhancementScript[] Scripts) in _factory.Enchantments)
+            {
+                if ((Powers == null || Powers.Contains(power)) && (StoreStock == null || StoreStock == isStoreStock))
+                {
+                    foreach (IEnhancementScript script in Scripts)
+                    {
+                        script.ExecuteEnchantmentScript(this, lev);
+                    }
+                }
+            }
+        }
+
+        // Run the old EnchantItem until all Enchantment scripts are done.
         _factory.EnchantItem(this, usedOkay, lev, power); // Some item factories (i.g. armor, boots, helms etc) will convert the item into a RandomArtifact here.
+
         Game.TreasureRating += TreasureRating;
         if (IsRandomArtifact) 
         {

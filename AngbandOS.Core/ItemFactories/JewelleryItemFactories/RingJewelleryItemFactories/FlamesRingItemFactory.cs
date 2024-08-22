@@ -18,10 +18,10 @@ internal class FlamesRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
-    }
+        (null, null, new string[] { nameof(BonusArmorClass1D5P10BP5EnchantmentScript) })
+    };
     public override int Cost => 1000;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;

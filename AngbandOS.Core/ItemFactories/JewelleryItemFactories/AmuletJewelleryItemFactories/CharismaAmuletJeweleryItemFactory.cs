@@ -18,16 +18,11 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusCharisma = 1 + item.GetBonusValue(5, level);
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusCharisma = 0 - item.BonusCharisma;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorCharismaEnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusCharismaEnchantmentScript) }),
+    };
     public override bool Cha => true;
     public override int Cost => 500;
     public override bool HideType => true;
@@ -37,5 +32,4 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         (20, 1)
     };
     public override int Weight => 3;
-
 }
