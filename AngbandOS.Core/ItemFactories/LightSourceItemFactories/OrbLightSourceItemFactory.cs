@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class OrbLightSourceItemFactory : LightSourceItemFactory
+internal class OrbLightSourceItemFactory : ItemFactory
 {
     private OrbLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -45,4 +45,32 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
+
+    /// <summary>
+    /// Returns the lightsource inventory slot for light sources.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Lightsource;
+    protected override string ItemClassName => nameof(LightSourcesItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
+
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (20, "3d5-3")
+    };
+
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] {-1, -2}, null, new string[] { nameof(PoorOrbOfLightEnchantmentScript) }),
+        (new int[] {1}, null, new string[] { nameof(GoodOrbOfLightEnchantmentScript) }),
+        (new int[] {2}, null, new string[] { nameof(GreatOrbOfLightEnchantmentScript) })
+    };
+
+    protected override string BreakageChanceProbabilityExpression => "50/100";
+    public override int PackSort => 18;
+    public override bool HatesFire => true;
+
+    /// <summary>
+    /// Returns true, because all light sources can be worn/wielded.
+    /// </summary>
+    public override bool IsWearableOrWieldable => true;
 }
