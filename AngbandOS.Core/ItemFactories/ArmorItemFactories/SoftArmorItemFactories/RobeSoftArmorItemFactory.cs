@@ -16,25 +16,6 @@ internal class RobeSoftArmorItemFactory : ArmorItemFactory
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Robe";
 
-
-    /// <summary>
-    /// Applies special magic to this robe.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        if (power != 0)
-        {
-            // Apply the standard armor characteristics.
-            base.EnchantItem(item, usedOkay, level, power);
-
-            if (power > 1)
-            {
-            }
-        }
-    }
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleSoftArmorEnchantmentScript) }),

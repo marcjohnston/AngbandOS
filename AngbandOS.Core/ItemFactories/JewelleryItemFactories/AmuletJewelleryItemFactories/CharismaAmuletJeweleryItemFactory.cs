@@ -20,8 +20,8 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorCharismaEnchantmentScript) }),
-        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusCharismaEnchantmentScript) }),
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorCharisma5BP1EnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusCharisma5BP1EnchantmentScript) }),
     };
     public override bool Cha => true;
     public override int Cost => 500;

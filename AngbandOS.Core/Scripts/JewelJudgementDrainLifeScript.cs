@@ -1163,9 +1163,9 @@ internal class BrokenAndCursedEnchantmentScript : Script, IEnhancementScript
 }
 
 [Serializable]
-internal class BonusCharismaEnchantmentScript : Script, IEnhancementScript
+internal class BonusCharisma5BP1EnchantmentScript : Script, IEnhancementScript
 {
-    private BonusCharismaEnchantmentScript(Game game) : base(game) { }
+    private BonusCharisma5BP1EnchantmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -1183,9 +1183,9 @@ internal class BonusCharismaEnchantmentScript : Script, IEnhancementScript
 }
 
 [Serializable]
-internal class PoorCharismaEnchantmentScript : Script, IEnhancementScript
+internal class PoorCharisma5BP1EnchantmentScript : Script, IEnhancementScript
 {
-    private PoorCharismaEnchantmentScript(Game game) : base(game) { }
+    private PoorCharisma5BP1EnchantmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -1199,6 +1199,27 @@ internal class PoorCharismaEnchantmentScript : Script, IEnhancementScript
     public void ExecuteEnchantmentScript(Item item, int level)
     {
         item.BonusCharisma = 0 - (1 + item.GetBonusValue(5, level));
+    }
+}
+
+[Serializable]
+internal class PoorCharismaAndWisdom5BP1EnchantmentScript : Script, IEnhancementScript
+{
+    private PoorCharismaAndWisdom5BP1EnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusCharisma = 0 - (1 + item.GetBonusValue(5, level));
+        item.BonusWisdom = item.BonusCharisma;
     }
 }
 
@@ -1311,9 +1332,29 @@ internal class PoorArmorClass1D5B5EnchantmentScript : Script, IEnhancementScript
 }
 
 [Serializable]
-internal class BonusSearchEnchantmentScript : Script, IEnhancementScript
+internal class PoorArmorClass10BP5EnchantmentScript : Script, IEnhancementScript
 {
-    private BonusSearchEnchantmentScript(Game game) : base(game) { }
+    private PoorArmorClass10BP5EnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
+    }
+}
+
+[Serializable]
+internal class BonusSearch1D5P5BEnchantmentScript : Script, IEnhancementScript
+{
+    private BonusSearch1D5P5BEnchantmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -1331,9 +1372,9 @@ internal class BonusSearchEnchantmentScript : Script, IEnhancementScript
 }
 
 [Serializable]
-internal class PoorSearchEnchantmentScript : Script, IEnhancementScript
+internal class PoorSearch1D5P5BEnchantmentScript : Script, IEnhancementScript
 {
-    private PoorSearchEnchantmentScript(Game game) : base(game) { }
+    private PoorSearch1D5P5BEnchantmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -1350,6 +1391,45 @@ internal class PoorSearchEnchantmentScript : Script, IEnhancementScript
     }
 }
 
+[Serializable]
+internal class BonusSearch5BP1EnchantmentScript : Script, IEnhancementScript
+{
+    private BonusSearch5BP1EnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusSearch = 1 + item.GetBonusValue(5, level);
+    }
+}
+
+[Serializable]
+internal class PoorSearch5BP1EnchantmentScript : Script, IEnhancementScript
+{
+    private PoorSearch5BP1EnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusSearch = 0 - (1 + item.GetBonusValue(5, level));
+    }
+}
 
 [Serializable]
 internal class BonusSlowDigest1In3EnchantmentScript : Script, IEnhancementScript
@@ -1747,6 +1827,177 @@ internal class PoorArmorClass1D8P10BP5EnchantmentScript : Script, IEnhancementSc
     public void ExecuteEnchantmentScript(Item item, int level)
     {
         item.BonusArmorClass = 0 - (5 + Game.DieRoll(8) + item.GetBonusValue(10, level));
+    }
+}
+
+
+[Serializable]
+internal class BonusDamage1D7P10BEnchantmentScript : Script, IEnhancementScript
+{
+    private BonusDamage1D7P10BEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusDamage = Game.DieRoll(7) + item.GetBonusValue(10, level);
+    }
+}
+
+[Serializable]
+internal class PoorDamage1D7P10BEnchantmentScript : Script, IEnhancementScript
+{
+    private PoorDamage1D7P10BEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusDamage = 0 - (Game.DieRoll(7) + item.GetBonusValue(10, level));
+    }
+}
+
+[Serializable]
+internal class BonusHit1D7P10BEnchantmentScript : Script, IEnhancementScript
+{
+    private BonusHit1D7P10BEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusHit = Game.DieRoll(7) + item.GetBonusValue(10, level);
+    }
+}
+
+[Serializable]
+internal class PoorHit1D7P10BEnchantmentScript : Script, IEnhancementScript
+{
+    private PoorHit1D7P10BEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusHit = 0 - (Game.DieRoll(7) + item.GetBonusValue(10, level));
+    }
+}
+
+
+[Serializable]
+internal class BonusSpeed1D5P5BEnchantmentScript : Script, IEnhancementScript
+{
+    private BonusSpeed1D5P5BEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusSpeed = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        while (Game.RandomLessThan(100) < 50)
+        {
+            item.BonusSpeed++;
+        }
+    }
+}
+
+[Serializable]
+internal class PoorSpeed1D5P5EnchantmentScript : Script, IEnhancementScript
+{
+    private PoorSpeed1D5P5EnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusSpeed = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        while (Game.RandomLessThan(100) < 50)
+        {
+            item.BonusSpeed++;
+        }
+        item.BonusSpeed = 0 - item.BonusSpeed;
+    }
+}
+
+[Serializable]
+internal class BonusStrength5BP1EnchantmentScript : Script, IEnhancementScript
+{
+    private BonusStrength5BP1EnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusStrength = 1 + item.GetBonusValue(5, level);
+    }
+}
+
+[Serializable]
+internal class PoorStrength5BP1EnchantmentScript : Script, IEnhancementScript
+{
+    private PoorStrength5BP1EnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusStrength = 0 - (1 + item.GetBonusValue(5, level));
     }
 }
 

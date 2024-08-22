@@ -25,7 +25,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        (null, null, new string[] { nameof(BonusArmorClass1D5P5BEnchantmentScript), nameof(BonusSearchEnchantmentScript), nameof(BonusSlowDigest1In3EnchantmentScript) })
+        (null, null, new string[] { nameof(BonusArmorClass1D5P5BEnchantmentScript), nameof(BonusSearch1D5P5BEnchantmentScript), nameof(BonusSlowDigest1In3EnchantmentScript) })
     };
 
     public override int Cost => 30000;

@@ -18,16 +18,11 @@ internal class SearchingRingItemFactory : RingItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusSearch = 1 + item.GetBonusValue(5, level);
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusSearch = 0 - item.BonusSearch;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorSearch5BP1EnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusSearch5BP1EnchantmentScript) })
+    };
 
     public override int Cost => 250;
     public override bool HideType => true;

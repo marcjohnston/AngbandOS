@@ -20,8 +20,8 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorSearchEnchantmentScript) }),
-        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusSearchEnchantmentScript) })
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorSearch1D5P5BEnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusSearch1D5P5BEnchantmentScript) })
     };
 
     public override int Cost => 600;
