@@ -2051,6 +2051,47 @@ internal class GreatAmmoEnchantmentScript : Script, IEnhancementScript
 }
 
 [Serializable]
+internal class GreatDiggerEnchantmentScript : Script, IEnhancementScript
+{
+    private GreatDiggerEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfDiggingRareItem));
+    }
+}
+
+[Serializable]
+internal class PoorDiggerEnchantmentScript : Script, IEnhancementScript
+{
+    private PoorDiggerEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.BonusTunnel = 0 - item.BonusTunnel;
+    }
+}
+
+
+[Serializable]
 internal class TerribleHit1D5P5BP10BBEnchantmentScript : Script, IEnhancementScript
 {
     private TerribleHit1D5P5BP10BBEnchantmentScript(Game game) : base(game) { }
@@ -2187,6 +2228,49 @@ internal class TerribleDamage10BEnchantmentScript : Script, IEnhancementScript
     public void ExecuteEnchantmentScript(Item item, int level)
     {
         item.BonusDamage -= 2 * item.GetBonusValue(10, level);
+    }
+}
+
+[Serializable]
+internal class AmmoOfBackbitingEnchantmentScript : Script, IEnhancementScript
+{
+    private AmmoOfBackbitingEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        if (Game.RandomLessThan(Constants.MaxDepth) < level)
+        {
+            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfBackbitingRareItem));
+        }
+    }
+}
+
+[Serializable]
+internal class TerribleDiggerEnchantmentScript : Script, IEnhancementScript
+{
+    private TerribleDiggerEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(TerribleWeaponOfDiggingRareItem));
     }
 }
 
@@ -2449,9 +2533,9 @@ internal class PoorOrbOfLightEnchantmentScript : Script, IEnhancementScript
 
 
 [Serializable]
-internal class CursedAmmoEnchantmentScript : Script, IEnhancementScript
+internal class CursedWeaponEnchantmentScript : Script, IEnhancementScript
 {
-    private CursedAmmoEnchantmentScript(Game game) : base(game) { }
+    private CursedWeaponEnchantmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -2467,6 +2551,93 @@ internal class CursedAmmoEnchantmentScript : Script, IEnhancementScript
         if (item.BonusHit + item.BonusDamage < 0)
         {
             item.IsCursed = true;
+        }
+    }
+}
+
+
+[Serializable]
+internal class FillLanternEnchantmentScript : Script, IEnhancementScript
+{
+    private FillLanternEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.TurnsOfLightRemaining = Constants.FuelLamp / 2;
+    }
+}
+
+[Serializable]
+internal class UsedLanternEnchantmentScript : Script, IEnhancementScript
+{
+    private UsedLanternEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        if (item.TurnsOfLightRemaining != 0)
+        {
+            item.TurnsOfLightRemaining = Game.DieRoll(item.TurnsOfLightRemaining);
+        }
+    }
+}
+
+[Serializable]
+internal class FillTorchEnchantmentScript : Script, IEnhancementScript
+{
+    private FillTorchEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        item.TurnsOfLightRemaining = Constants.FuelTorch / 2;
+    }
+}
+
+[Serializable]
+internal class UsedTorchEnchantmentScript : Script, IEnhancementScript
+{
+    private UsedTorchEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        if (item.TurnsOfLightRemaining != 0)
+        {
+            item.TurnsOfLightRemaining = Game.DieRoll(item.TurnsOfLightRemaining);
         }
     }
 }

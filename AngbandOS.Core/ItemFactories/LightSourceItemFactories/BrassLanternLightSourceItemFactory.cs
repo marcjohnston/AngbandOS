@@ -12,18 +12,6 @@ internal class BrassLanternLightSourceItemFactory : ItemFactory
 {
     private BrassLanternLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        if (!usedOkay)
-        {
-            item.TurnsOfLightRemaining = Constants.FuelLamp / 2;
-        }
-        else if (item.TurnsOfLightRemaining != 0)
-        {
-            item.TurnsOfLightRemaining = Game.DieRoll(item.TurnsOfLightRemaining);
-        }
-    }
-
     /// <summary>
     /// Returns 1 because a latern consumes a turn of light for every world turn.
     /// </summary>
@@ -125,7 +113,9 @@ internal class BrassLanternLightSourceItemFactory : ItemFactory
     {
         (new int[] {-1, -2}, null, new string[] { nameof(PoorOrbOfLightEnchantmentScript) }),
         (new int[] {1}, null, new string[] { nameof(GoodOrbOfLightEnchantmentScript) }),
-        (new int[] {2}, null, new string[] { nameof(GreatOrbOfLightEnchantmentScript) })
+        (new int[] {2}, null, new string[] { nameof(GreatOrbOfLightEnchantmentScript) }),
+        (null, true, new string[] { nameof(FillLanternEnchantmentScript) }),
+        (null, false, new string[] { nameof(UsedLanternEnchantmentScript) })
     };
 
     protected override string BreakageChanceProbabilityExpression => "50/100";

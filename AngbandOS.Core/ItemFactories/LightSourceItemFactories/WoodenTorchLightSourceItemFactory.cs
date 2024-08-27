@@ -12,18 +12,6 @@ internal class WoodenTorchLightSourceItemFactory : ItemFactory
 {
     private WoodenTorchLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        if (!usedOkay)
-        {
-            item.TurnsOfLightRemaining = Constants.FuelTorch / 2;
-        }
-        else if (item.TurnsOfLightRemaining != 0)
-        {
-            item.TurnsOfLightRemaining = Game.DieRoll(item.TurnsOfLightRemaining);
-        }
-    }
-
     /// <summary>
     /// Returns true because a torch can be used as fuel for another torch.
     /// </summary>
@@ -124,7 +112,9 @@ internal class WoodenTorchLightSourceItemFactory : ItemFactory
     {
         (new int[] {-1, -2}, null, new string[] { nameof(PoorOrbOfLightEnchantmentScript) }),
         (new int[] {1}, null, new string[] { nameof(GoodOrbOfLightEnchantmentScript) }),
-        (new int[] {2}, null, new string[] { nameof(GreatOrbOfLightEnchantmentScript) })
+        (new int[] {2}, null, new string[] { nameof(GreatOrbOfLightEnchantmentScript) }),
+         (null, true, new string[] { nameof(FillTorchEnchantmentScript) }),
+        (null, false, new string[] { nameof(UsedTorchEnchantmentScript) })
     };
 
     protected override string BreakageChanceProbabilityExpression => "50/100";
