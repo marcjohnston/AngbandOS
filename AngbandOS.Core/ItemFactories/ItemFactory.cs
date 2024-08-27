@@ -72,6 +72,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public Symbol Symbol { get; private set; }
 
+    public virtual bool CanBeWeaponOfLaw => false;
+    public virtual bool CanBeWeaponOfSharpness => false;
+    public virtual bool CapableOfVorpalSlaying => false;
+
     /// <summary>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
     /// that have flavor may change the FlavorColor based on the flavor.

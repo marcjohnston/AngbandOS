@@ -43,8 +43,8 @@ internal class ShovelDiggingWeaponItemFactory : WeaponItemFactory
 
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        (new int[] {-2}, null, new string[] { nameof(TerribleAmmoEnchantmentScript), nameof(TerribleDiggerEnchantmentScript), nameof(PoorDiggerEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
-        (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(PoorDiggerEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
+        (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(TerribleDiggerEnchantmentScript), nameof(TerribleTunnelEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
+        (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(TerribleTunnelEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
         (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatAmmoEnchantmentScript) })
     };

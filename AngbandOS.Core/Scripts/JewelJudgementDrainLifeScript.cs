@@ -2071,9 +2071,9 @@ internal class GreatDiggerEnchantmentScript : Script, IEnhancementScript
 }
 
 [Serializable]
-internal class PoorDiggerEnchantmentScript : Script, IEnhancementScript
+internal class TerribleTunnelEnchantmentScript : Script, IEnhancementScript
 {
-    private PoorDiggerEnchantmentScript(Game game) : base(game) { }
+    private TerribleTunnelEnchantmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -2275,9 +2275,9 @@ internal class TerribleDiggerEnchantmentScript : Script, IEnhancementScript
 }
 
 [Serializable]
-internal class TerribleAmmoEnchantmentScript : Script, IEnhancementScript
+internal class TerribleHit1D5P5BP10BEnchantmentScript : Script, IEnhancementScript
 {
-    private TerribleAmmoEnchantmentScript(Game game) : base(game) { }
+    private TerribleHit1D5P5BP10BEnchantmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -2291,11 +2291,26 @@ internal class TerribleAmmoEnchantmentScript : Script, IEnhancementScript
     public void ExecuteEnchantmentScript(Item item, int level)
     {
         item.BonusHit -= Game.DieRoll(5) + item.GetBonusValue(5, level) + item.GetBonusValue(10, level);
+    }
+}
+
+[Serializable]
+internal class TerribleDamage1D5P5BP10BEnchantmentScript : Script, IEnhancementScript
+{
+    private TerribleDamage1D5P5BP10BEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
         item.BonusDamage -= Game.DieRoll(5) + item.GetBonusValue(5, level) + item.GetBonusValue(10, level);
-        if (Game.RandomLessThan(Constants.MaxDepth) < level)
-        {
-            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfBackbitingRareItem));
-        }
     }
 }
 
@@ -2638,6 +2653,254 @@ internal class UsedTorchEnchantmentScript : Script, IEnhancementScript
         if (item.TurnsOfLightRemaining != 0)
         {
             item.TurnsOfLightRemaining = Game.DieRoll(item.TurnsOfLightRemaining);
+        }
+    }
+}
+
+
+[Serializable]
+internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
+{
+    private GreatMeleeWeaponEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        switch (Game.DieRoll(item.GetFactory.CanBeWeaponOfLaw || item.GetFactory.CanBeWeaponOfSharpness ? 42 : 40))
+        {
+            case 1:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponElderSignInscribedRareItem));
+                if (Game.DieRoll(4) == 1)
+                {
+                    item.Characteristics.Blows = true;
+                    if (item.BonusAttacks > 2)
+                    {
+                        item.BonusAttacks -= Game.DieRoll(2);
+                    }
+                }
+                break;
+            case 2:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponDefenderRareItem));
+                if (Game.DieRoll(3) == 1)
+                {
+                    item.Characteristics.ResPois = true;
+                }
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                break;
+            case 3:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfVitriolRareItem));
+                break;
+            case 4:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfShockingRareItem));
+                break;
+            case 5:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfBurningRareItem));
+                break;
+            case 6:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfFreezingRareItem));
+                break;
+            case 7:
+            case 8:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayAnimalRareItem));
+                if (Game.RandomLessThan(100) < 20)
+                {
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfAnimalBaneRareItem));
+                }
+                break;
+            case 9:
+            case 10:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayDragonRareItem));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalResistanceItemAdditiveBundleWeightedRandom)));
+                if (Game.RandomLessThan(100) < 20)
+                {
+                    if (Game.DieRoll(3) == 1)
+                    {
+                        item.Characteristics.ResPois = true;
+                    }
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalAndPoisonResistanceItemAdditiveBundleWeightedRandom)));
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfDragonBaneRareItem));
+                }
+                break;
+            case 11:
+            case 12:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayEvilRareItem));
+                if (Game.RandomLessThan(100) < 20)
+                {
+                    item.Characteristics.ResFear = true;
+                    item.Characteristics.Blessed = true;
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfEvilBaneRareItem));
+                }
+                break;
+            case 13:
+            case 14:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayUndeadRareItem));
+                if (Game.RandomLessThan(100) < 20)
+                {
+                    item.Characteristics.ResNether = true;
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfUndeadBaneRareItem));
+                }
+                break;
+            case 15:
+            case 16:
+            case 17:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayOrcRareItem));
+                break;
+            case 18:
+            case 19:
+            case 20:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayTrollRareItem));
+                break;
+            case 21:
+            case 22:
+            case 23:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayGiantRareItem));
+                break;
+            case 24:
+            case 25:
+            case 26:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayDemonRareItem));
+                break;
+            case 27:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfKadathRareItem));
+                if (Game.DieRoll(3) == 1)
+                {
+                    item.Characteristics.ResFear = true;
+                }
+                break;
+            case 28:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponBlessedRareItem));
+                break;
+            case 29:
+            case 30:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfExtraAttacksRareItem));
+                break;
+            case 31:
+            case 32:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponVampiricRareItem));
+                break;
+            case 33:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfPoisoningRareItem));
+                break;
+            case 34:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponChaoticRareItem));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
+                break;
+            case 35:
+                item.CreateRandomArtifact(false);
+                break;
+            case 36:
+            case 37:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayingRareItem));
+                if (Game.DieRoll(3) == 1)
+                {
+                    item.DamageDice *= 2;
+                }
+                else
+                {
+                    do
+                    {
+                        item.DamageDice++;
+                    } while (Game.DieRoll(item.DamageDice) == 1);
+                    do
+                    {
+                        item.DamageSides++;
+                    } while (Game.DieRoll(item.DamageSides) == 1);
+                }
+                if (Game.DieRoll(5) == 1)
+                {
+                    item.Characteristics.BrandPois = true;
+                }
+                if (item.GetFactory.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
+                {
+                    item.Characteristics.Vorpal = true;
+                }
+                break;
+            case 38:
+            case 39:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponPlanarWeaponRareItem));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                if (Game.DieRoll(5) == 1)
+                {
+                    item.Characteristics.SlayDemon = true;
+                }
+                break;
+            case 40:
+                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfLawRareItem));
+                if (Game.DieRoll(3) == 1)
+                {
+                    item.Characteristics.HoldLife = true;
+                }
+                if (Game.DieRoll(3) == 1)
+                {
+                    item.Characteristics.Dex = true;
+                }
+                if (Game.DieRoll(5) == 1)
+                {
+                    item.Characteristics.ResFear = true;
+                }
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                break;
+            case 41:
+            case 42:
+                if (item.GetFactory.CanBeWeaponOfSharpness)
+                {
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSharpnessRareItem));
+                    item.BonusTunnel = item.GetBonusValue(5, level) + 1;
+                }
+                else
+                {
+                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfEarthquakesRareItem));
+                    if (Game.DieRoll(3) == 1)
+                    {
+                        item.Characteristics.Blows = true;
+                    }
+                    item.BonusTunnel = item.GetBonusValue(3, level);
+                }
+                break;
+        }
+        while (Game.RandomLessThan(10 * item.DamageDice * item.DamageSides) == 0)
+        {
+            item.DamageDice++;
+        }
+        if (item.DamageDice > 9)
+        {
+            item.DamageDice = 9;
+        }
+    }
+}
+
+
+[Serializable]
+internal class TerribleMeleeWeaponEnchantmentScript : Script, IEnhancementScript
+{
+    private TerribleMeleeWeaponEnchantmentScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    public void ExecuteEnchantmentScript(Item item, int level)
+    {
+        if (Game.RandomLessThan(Constants.MaxDepth) < level)
+        {
+            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfLengRareItem));
+            if (Game.DieRoll(6) == 1)
+            {
+                item.Characteristics.DreadCurse = true;
+            }
         }
     }
 }
