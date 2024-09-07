@@ -35,7 +35,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
             MaxInventory = MaxInventory,
             MinInventory = MinInventory,
             StoreTurnover = StoreTurnover,
-            StoreStockManifestDefinitions = StoreStockManifestDefinitions,
+            StoreStockManifestDefinitions = StoreStockManifestDefinitions?.Select(_storeStockManifestDefinition => new StoreStockManifestDefinition() { ItemFactoryName = _storeStockManifestDefinition.ItemFactoryName, Weight = _storeStockManifestDefinition.Weight }).ToArray(),
             ShufflesOwnersAndPricing = ShufflesOwnersAndPricing,
             ShopkeeperNames = ShopkeeperNames,
             AdvertisedStoreCommand1Name = AdvertisedStoreCommand1Name,

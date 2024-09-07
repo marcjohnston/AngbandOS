@@ -5,7 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.ComponentModel.DataAnnotations;
+
 namespace AngbandOS.Core.Interface.Definitions;
+
 
 [Serializable]
 public class StoreCommandDefinition : IPoco

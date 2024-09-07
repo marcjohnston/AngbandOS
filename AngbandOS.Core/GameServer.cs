@@ -4,9 +4,9 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using AngbandOS.Core.Flavors;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -301,4 +301,35 @@ public class GameServer
         }
         return true;
     }
+
+    public DefinitionMetadata[] GetMetadata()
+    {
+        Type configurationType = typeof(Configuration);
+        PropertyInfo[] configurationTypeProperties = configurationType.GetProperties();
+        List<DefinitionMetadata> propertiesList = new List<DefinitionMetadata>();
+        foreach (PropertyInfo configurationTypeProperty in configurationTypeProperties)
+        {
+            DefinitionMetadata propertyDefinitionMetadata = new DefinitionMetadata(configurationTypeProperty.Name);
+            IEnumerable<Attribute> corePersistentStorageTypePropertyCustomAttributes = configurationTypeProperty.GetCustomAttributes();
+            foreach (Attribute corePersistentStorageTypePropertyCustomAttribute in corePersistentStorageTypePropertyCustomAttributes)
+            {
+                if (typeof(RequiredAttribute).IsAssignableFrom(corePersistentStorageTypePropertyCustomAttribute.GetType()))
+                {
+                    propertyDefinitionMetadata.IsRequired = true;
+                }
+            }
+            propertiesList.Add(propertyDefinitionMetadata);
+        }
+        return propertiesList.ToArray();
+    }
+
+    public class SelectionAttribute : ValidationAttribute
+    {
+        public readonly string Name;
+        public SelectionAttribute(string typeName)
+        {
+            Name = typeName;
+        }
+    }
+
 }

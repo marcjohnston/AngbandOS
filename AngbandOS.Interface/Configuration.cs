@@ -1,4 +1,6 @@
 ﻿using AngbandOS.Core.Interface.Definitions;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace AngbandOS.Core.Interface;
 
@@ -9,6 +11,8 @@ namespace AngbandOS.Core.Interface;
 [Serializable]
 public class Configuration
 {
+    // [Display(Name = "Last Name", Order = -9, Prompt = "Enter Last Name", Description = "Emp Last Name")]
+    
     ///// <summary>
     ///// Represents the names of the stores that are available in the game.  These store names can any preconfigured Angband store, or a store with a matching
     ///// name from the Stores Repo.
@@ -18,7 +22,12 @@ public class Configuration
 
     /// <summary>
     /// Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.
-    /// </summary>
+    /// </summary>    
+    [Required]
+    [DefaultValue(2048)]
+    [DisplayName("Previous Message Length")]
+    [Category("Settings")]
+    [Description("This value controls how many previous messages are saved.  Additional previous messages are automatically deleted.  If this value is not specified, an unlimited number of previous messages will be retained.  A default value of 2048 previous messages is recommended.")]
     public int? MaxMessageLogLength { get; set; } = 2048;
 
     /// <summary>

@@ -5,17 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
 
 namespace Cthangband;
 
@@ -213,6 +208,7 @@ public partial class MainWindow : Window, IConsoleViewPort
     private void Thread_DoWork(object? sender, DoWorkEventArgs e)
     {
         GameServer gameServer = new GameServer();
+        DefinitionMetadata[] metadata = gameServer.GetMetadata();
         string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
         ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemPersistentStorage(saveFilename);

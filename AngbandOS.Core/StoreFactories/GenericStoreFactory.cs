@@ -24,7 +24,7 @@ internal class GenericStoreFactory : StoreFactory
         MaxInventory = storeFactoryDefinition.MaxInventory;
         MinInventory = storeFactoryDefinition.MinInventory;
         StoreTurnover = storeFactoryDefinition.StoreTurnover;
-        StoreStockManifestDefinitions = storeFactoryDefinition.StoreStockManifestDefinitions;
+        StoreStockManifestDefinitions = storeFactoryDefinition.StoreStockManifestDefinitions?.Select(_storeStockManifestDefinition => (_storeStockManifestDefinition.ItemFactoryName, _storeStockManifestDefinition.Weight)).ToArray();
         ShufflesOwnersAndPricing = storeFactoryDefinition.ShufflesOwnersAndPricing;
         ShopkeeperNames = storeFactoryDefinition.ShopkeeperNames;
         AdvertisedStoreCommand1Name = storeFactoryDefinition.AdvertisedStoreCommand1Name;
