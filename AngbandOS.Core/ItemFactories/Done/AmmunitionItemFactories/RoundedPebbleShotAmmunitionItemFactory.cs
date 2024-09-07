@@ -8,41 +8,34 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SteelBoltAmmunitionItemFactory : AmmunitionItemFactory
+internal class RoundedPebbleShotAmmunitionItemFactory : ItemFactory
 {
-    private SteelBoltAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private RoundedPebbleShotAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    public override int BonusHitRealValueMultiplier => 5;
+    public override int BonusDamageRealValueMultiplier => 5;
+    public override int BonusDiceRealValueMultiplier => 5;
     protected override string SymbolName => nameof(OpenBracketSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Bolt";
+    public override string Name => "Rounded Pebble";
 
-    public override int Cost => 2;
-    public override int DamageDice => 1;
-    public override int DamageSides => 5;
-    protected override string? DescriptionSyntax => "Bolt~";
-    public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
-        (3, 1),
-        (25, 1)
+        (0, 1)
     };
+    public override int Cost => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
+    protected override string? DescriptionSyntax => "Rounded Pebble~";
     public override bool ShowMods => true;
-    public override int Weight => 3;
-    protected override string ItemClassName => nameof(BoltsItemClass);
-    public override int PackSort => 33;
-
+    public override int Weight => 4;
+    protected override string ItemClassName => nameof(ShotsItemClass);
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (500, "5d5-5")
     };
 
-    /// <summary>
-    /// Returns true for all bolts.
-    /// </summary>
-    public override bool KindIsGood => true;
-
-
-    public override bool HatesAcid => true;
+    public override int PackSort => 35;
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
     protected override string BreakageChanceProbabilityExpression => "25/100";
 
@@ -62,4 +55,22 @@ internal class SteelBoltAmmunitionItemFactory : AmmunitionItemFactory
         (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatAmmoEnchantmentScript) })
     };
+
+    /// <summary>
+    /// Returns true because broken weapons should be stomped automatically. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
+
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Weapons. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
+    public override bool HasQualityRatings => true;
+    public override bool CanApplyBonusArmorClassMiscPower => true;
+
+    public override int BonusArmorClassRealValueMultiplier => 100;
+    public override bool IsWearableOrWieldable => true;
+
+    public override bool CanApplySlayingBonus => true;
 }

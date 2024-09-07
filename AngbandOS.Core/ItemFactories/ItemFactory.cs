@@ -744,7 +744,20 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual int GetBonusRealValue(Item item) => 0;
+    public int GetBonusRealValue(Item item)
+    {
+        int bonusValue = item.BonusHit * BonusHitRealValueMultiplier + item.BonusArmorClass * BonusArmorClassRealValueMultiplier + item.BonusDamage * BonusDamageRealValueMultiplier;
+        if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
+        {
+            bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * BonusDiceRealValueMultiplier;
+        }
+        return bonusValue;
+    }
+
+    public virtual int BonusHitRealValueMultiplier => 100;
+    public virtual int BonusDamageRealValueMultiplier => 100;
+    public virtual int BonusArmorClassRealValueMultiplier => 100;
+    public virtual int BonusDiceRealValueMultiplier => 100;
 
     protected virtual string? BreaksDuringEnchantmentProbabilityExpression => null;
 

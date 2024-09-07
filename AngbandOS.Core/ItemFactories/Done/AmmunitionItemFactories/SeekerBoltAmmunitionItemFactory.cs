@@ -8,40 +8,43 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SeekerArrowAmmunitionItemFactory : AmmunitionItemFactory
+internal class SeekerBoltAmmunitionItemFactory : ItemFactory
 {
-    private SeekerArrowAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private SeekerBoltAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    public override int BonusHitRealValueMultiplier => 5;
+    public override int BonusDamageRealValueMultiplier => 5;
+    public override int BonusDiceRealValueMultiplier => 5;
     protected override string SymbolName => nameof(OpenBracketSymbol);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Seeker Arrow";
+    public override ColorEnum Color => ColorEnum.BrightBlue;
+    public override string Name => "Seeker Bolt";
 
-    public override int Cost => 20;
+    public override int Cost => 25;
     public override int DamageDice => 4;
-    public override int DamageSides => 4;
-    protected override string? DescriptionSyntax => "Seeker Arrow~";
-    public override int LevelNormallyFound => 55;
+    public override int DamageSides => 5;
+    protected override string? DescriptionSyntax => "Seeker Bolt~";
+    public override int LevelNormallyFound => 65;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
-        (55, 2)
+        (65, 4)
     };
     public override bool ShowMods => true;
-    public override int Weight => 2;
-    protected override string ItemClassName => nameof(ArrowsItemClass);
+    public override int Weight => 3;
+    protected override string ItemClassName => nameof(BoltsItemClass);
+    public override int PackSort => 33;
+
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (500, "5d5-5")
     };
 
-    public override int PackSort => 34;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
-
     /// <summary>
-    /// Returns true, for all arrows.
+    /// Returns true for all bolts.
     /// </summary>
     public override bool KindIsGood => true;
 
+
+    public override bool HatesAcid => true;
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
     protected override string BreakageChanceProbabilityExpression => "25/100";
 
@@ -61,4 +64,22 @@ internal class SeekerArrowAmmunitionItemFactory : AmmunitionItemFactory
         (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatAmmoEnchantmentScript) })
     };
+
+    /// <summary>
+    /// Returns true because broken weapons should be stomped automatically. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
+
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Weapons. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
+    public override bool HasQualityRatings => true;
+    public override bool CanApplyBonusArmorClassMiscPower => true;
+
+    public override int BonusArmorClassRealValueMultiplier => 100;
+    public override bool IsWearableOrWieldable => true;
+
+    public override bool CanApplySlayingBonus => true;
 }

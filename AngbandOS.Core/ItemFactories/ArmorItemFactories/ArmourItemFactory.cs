@@ -25,8 +25,7 @@ internal abstract class ArmorItemFactory : ItemFactory
         characteristics.BonusArmorClass += Game.DieRoll(characteristics.BonusArmorClass > 19 ? 1 : 20 - characteristics.BonusArmorClass);
     }
 
-    public override int GetBonusRealValue(Item item)
-    {
-        return (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
-    }
+    public override int BonusHitRealValueMultiplier => 100;
+    public override int BonusDamageRealValueMultiplier => 100;
+    public override int BonusArmorClassRealValueMultiplier => 100;
 }

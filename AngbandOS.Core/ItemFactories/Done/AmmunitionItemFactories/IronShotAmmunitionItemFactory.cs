@@ -8,10 +8,13 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class IronShotAmmunitionItemFactory : AmmunitionItemFactory
+internal class IronShotAmmunitionItemFactory : ItemFactory
 {
     private IronShotAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    public override int BonusHitRealValueMultiplier => 5;
+    public override int BonusDamageRealValueMultiplier => 5;
+    public override int BonusDiceRealValueMultiplier => 5;
     protected override string SymbolName => nameof(OpenBracketSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron Shot";
@@ -53,4 +56,22 @@ internal class IronShotAmmunitionItemFactory : AmmunitionItemFactory
         (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatAmmoEnchantmentScript) })
     };
+
+    /// <summary>
+    /// Returns true because broken weapons should be stomped automatically. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
+
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Weapons. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
+    public override bool HasQualityRatings => true;
+    public override bool CanApplyBonusArmorClassMiscPower => true;
+
+    public override int BonusArmorClassRealValueMultiplier => 100;
+    public override bool IsWearableOrWieldable => true;
+
+    public override bool CanApplySlayingBonus => true;
 }
