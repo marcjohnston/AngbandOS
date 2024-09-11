@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Reflection;
@@ -310,13 +311,25 @@ public class GameServer
         foreach (PropertyInfo configurationTypeProperty in configurationTypeProperties)
         {
             DefinitionMetadata propertyDefinitionMetadata = new DefinitionMetadata(configurationTypeProperty.Name);
-            IEnumerable<Attribute> corePersistentStorageTypePropertyCustomAttributes = configurationTypeProperty.GetCustomAttributes();
-            foreach (Attribute corePersistentStorageTypePropertyCustomAttribute in corePersistentStorageTypePropertyCustomAttributes)
+            IEnumerable<Attribute> configurationCustomAttributes = configurationTypeProperty.GetCustomAttributes();
+            foreach (Attribute configurationCustomAttribute in configurationCustomAttributes)
             {
-                if (typeof(RequiredAttribute).IsAssignableFrom(corePersistentStorageTypePropertyCustomAttribute.GetType()))
+                switch (configurationCustomAttribute)
                 {
-                    propertyDefinitionMetadata.IsRequired = true;
+                    case RequiredAttribute requiredAttribute:
+                        propertyDefinitionMetadata.IsRequired = true;
+                        break;
+                    case DisplayNameAttribute displayNameAttribute:
+                        propertyDefinitionMetadata.Title = displayNameAttribute.DisplayName;
+                        break;
+                    case DescriptionAttribute descriptionAttribute:
+                        propertyDefinitionMetadata.Description = descriptionAttribute.Description;
+                        break;
                 }
+            }
+            if (configurationTypeProperty.PropertyType.IsArray)
+            {
+                propertyDefinitionMetadata.IsArray = true;
             }
             propertiesList.Add(propertyDefinitionMetadata);
         }
