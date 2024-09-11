@@ -13,10 +13,10 @@ internal class AcidRingItemFactory : RingItemFactory
     private AcidRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? ActivationName => nameof(BallOfAcid50r2AndResistAcid1d20p20ctivation);
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
-    }
+        (null, null, new string[] { nameof(BonusArmorClass1D5P10BP5EnchantmentScript) })
+    };
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Acid";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";

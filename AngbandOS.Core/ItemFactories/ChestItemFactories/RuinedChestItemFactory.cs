@@ -29,4 +29,8 @@ internal class RuinedChestItemFactory : ChestItemFactory
     public override int Weight => 250;
     public override bool IsSmall => true;
     public override int NumberOfItemsContained => 0;
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (null, null, new string[] { nameof(ChestEnchantmentScript) }),
+    };
 }

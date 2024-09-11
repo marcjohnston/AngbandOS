@@ -22,14 +22,10 @@ internal class WoeRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.IsBroken = true;
-        item.IsCursed = true;
-        item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
-        item.BonusCharisma = 0 - (1 + item.GetBonusValue(5, level));
-        item.BonusWisdom = item.BonusCharisma;
-    }
+        (null, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorCharismaAndWisdom5BP1EnchantmentScript), nameof(PoorArmorClass10BP5EnchantmentScript) })
+    };
     public override bool Cha => true;
     public override bool IsCursed => true;
     public override bool HideType => true;

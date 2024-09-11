@@ -24,20 +24,11 @@ internal class SpeedRingItemFactory : RingItemFactory
     public override int TreasureRating => 25;
 
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusSpeed = Game.DieRoll(5) + item.GetBonusValue(5, level);
-        while (Game.RandomLessThan(100) < 50)
-        {
-            item.BonusSpeed++;
-        }
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusSpeed = 0 - item.BonusSpeed;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorSpeed1D5P5EnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusSpeed1D5P5BEnchantmentScript) })
+    };
 
     public override int Cost => 100000;
     public override bool HideType => true;

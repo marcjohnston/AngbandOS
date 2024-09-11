@@ -13,13 +13,10 @@ internal class AntiTeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFa
     private AntiTeleportationAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        if (power < 0)
-        {
-            item.IsCursed = true;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(CursedEnchantmentScript) }),
+    };
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Anti-Teleportation";
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";

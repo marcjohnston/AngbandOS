@@ -22,12 +22,10 @@ internal class StupidityRingItemFactory : RingItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.IsBroken = true;
-        item.IsCursed = true;
-        item.BonusIntelligence = 0 - (1 + item.GetBonusValue(5, level));
-    }
+        (null, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorIntelligence5BP1EnchantmentScript) })
+    };
     public override bool IsCursed => true;
     public override bool HideType => true;
     public override bool Int => true;

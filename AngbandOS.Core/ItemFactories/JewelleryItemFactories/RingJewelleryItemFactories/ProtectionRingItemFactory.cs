@@ -14,16 +14,11 @@ internal class ProtectionRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusArmorClass = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusArmorClass = 0 - item.BonusArmorClass;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorArmorClass1D8P10BP5EnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusArmorClass1D8P10BP5EnchantmentScript) })
+    };
 
     public override string Name => "Protection";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";

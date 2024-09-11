@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class AwlPikePolearmWeaponItemFactory : MeleeWeaponItemFactory
+internal class AwlPikePolearmWeaponItemFactory : WeaponItemFactory
 {
     private AwlPikePolearmWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -38,4 +38,20 @@ internal class AwlPikePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override bool HatesAcid => true;
 
     public override bool CanApplyBlessedArtifactBias => true;
+
+    /// <summary>
+    /// Returns the melee weapon inventory slot for melee weapons.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.MeleeWeapon;
+
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
+    public override bool GetsDamageMultiplier => true;
+
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(TerribleMeleeWeaponEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
+        (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
+        (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
+        (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatMeleeWeaponEnchantmentScript) })
+    };
 }

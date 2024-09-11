@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
+internal class DragonHelmArmorItemFactory : ArmorItemFactory
 {
     private DragonHelmArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -20,20 +20,6 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     /// Returns a treasure rating of 5 for a helm of dragon scale mail.
     /// </summary>
     public override int TreasureRating => 5;
-
-    /// <summary>
-    /// Applies special magic to this dragon helm.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
-    {
-        // Apply the standard armor characteristics, regardless of the power.
-        base.EnchantItem(item, usedOkay, level, power);
-
-        ApplyDragonscaleResistance(item);
-    }
     public override int ArmorClass => 8;
     public override int Cost => 10000;
     public override int DamageDice => 1;
@@ -83,4 +69,12 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleHelmEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorHelmEnchantmentScript) }),
+        (null, null, new string[] { nameof(DragonResistanceEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodHelmEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatHelmEnchantmentScript) })
+    };
 }

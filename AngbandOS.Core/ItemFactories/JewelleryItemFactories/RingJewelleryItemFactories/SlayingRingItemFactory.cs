@@ -18,18 +18,11 @@ internal class SlayingRingItemFactory : RingItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusDamage = Game.DieRoll(7) + item.GetBonusValue(10, level);
-        item.BonusHit = Game.DieRoll(7) + item.GetBonusValue(10, level);
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusHit = 0 - item.BonusHit;
-            item.BonusDamage = 0 - item.BonusDamage;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorDamage1D7P10BEnchantmentScript), nameof(PoorHit1D7P10BEnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusDamage1D7P10BEnchantmentScript), nameof(BonusHit1D7P10BEnchantmentScript) })
+    };
 
     public override int Cost => 1000;
     public override int LevelNormallyFound => 40;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class BladeOfChaosWeaponItemFactory : MeleeWeaponItemFactory
+internal class BladeOfChaosWeaponItemFactory : WeaponItemFactory
 {
     private BladeOfChaosWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -29,18 +29,34 @@ internal class BladeOfChaosWeaponItemFactory : MeleeWeaponItemFactory
     public override bool ResChaos => true;
     public override bool ShowMods => true;
     public override int Weight => 180;
-    protected override bool CanBeWeaponOfLaw => true;
+    public override bool CanBeWeaponOfLaw => true;
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (100, "3d5-3")
     };
 
-    protected override bool CanBeWeaponOfSharpness => true;
-    protected override bool CapableOfVorpalSlaying => true;
+    public override bool CanBeWeaponOfSharpness => true;
+    public override bool CapableOfVorpalSlaying => true;
     protected override string ItemClassName => nameof(SwordsItemClass);
     public override bool HatesAcid => true;
     public override int PackSort => 28;
 
     public override bool CanApplyBlessedArtifactBias => true;
     public override bool CanVorpalSlay => true;
+
+    /// <summary>
+    /// Returns the melee weapon inventory slot for melee weapons.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.MeleeWeapon;
+
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
+    public override bool GetsDamageMultiplier => true;
+
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(TerribleMeleeWeaponEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
+        (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
+        (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
+        (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatMeleeWeaponEnchantmentScript) })
+    };
 }

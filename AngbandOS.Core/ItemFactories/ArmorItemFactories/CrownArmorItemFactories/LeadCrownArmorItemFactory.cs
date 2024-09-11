@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
+internal class LeadCrownArmorItemFactory : ArmorItemFactory
 {
     private LeadCrownArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -30,6 +30,15 @@ internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
 
     protected override string ItemClassName => nameof(CrownsItemClass);
 
+
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleCrownEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorCrownEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodCrownEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatCrownEnchantmentScript) })
+    };
+    
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
     public override bool HatesAcid => true;
 

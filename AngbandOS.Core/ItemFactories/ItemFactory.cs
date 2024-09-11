@@ -72,6 +72,10 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     public Symbol Symbol { get; private set; }
 
+    public virtual bool CanBeWeaponOfLaw => false;
+    public virtual bool CanBeWeaponOfSharpness => false;
+    public virtual bool CapableOfVorpalSlaying => false;
+
     /// <summary>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
     /// that have flavor may change the FlavorColor based on the flavor.
@@ -740,7 +744,20 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual int GetBonusRealValue(Item item) => 0;
+    public int GetBonusRealValue(Item item)
+    {
+        int bonusValue = item.BonusHit * BonusHitRealValueMultiplier + item.BonusArmorClass * BonusArmorClassRealValueMultiplier + item.BonusDamage * BonusDamageRealValueMultiplier;
+        if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
+        {
+            bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * BonusDiceRealValueMultiplier;
+        }
+        return bonusValue;
+    }
+
+    public virtual int BonusHitRealValueMultiplier => 100;
+    public virtual int BonusDamageRealValueMultiplier => 100;
+    public virtual int BonusArmorClassRealValueMultiplier => 100;
+    public virtual int BonusDiceRealValueMultiplier => 100;
 
     protected virtual string? BreaksDuringEnchantmentProbabilityExpression => null;
 
@@ -752,13 +769,19 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
+    [Obsolete("The enchanting of an item is now being performed by the Item.")]
     public virtual void EnchantItem(Item item, bool usedOkay, int level, int power) { } // TODO: Needs to be built into the new Item(), should be renamed .. the Store is needed for FuelSources to be full not used
 
     /// <summary>
-    /// Applies a good random rare characteristics to an item of armor.
+    /// Returns the name of the IEnchantmentScript to run for enchanting items depending on the item power and whether the item is being sold in a store.
     /// </summary>
-    /// <param name="item"></param>
-    protected virtual void ApplyRandomGoodRareCharacteristics(Item item) { }
+    /// <returns>
+    /// Powers - One or more item power levels (-2, -1, 0, 1, 2) the enchantment applies to; or null, if the enchantments apply to all power levels./>
+    /// StoreStock - True, when the enchantment applies only to items sold in a store; false, when the enchantment only applies to items not sold in a store; or null, if the enchantment applies regardless of whether the item is being sold in a store or not.;<para />
+    /// ScriptNames - The names of one or more scripts that implement the IEnhancementScript interface to be run to enhance the item when the Powers and StoreStock criteria match.  An empty array will throw during binding.
+    /// </returns>
+    protected virtual (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => null;
+    public (int[]? Powers, bool? StoreStock, IEnhancementScript[] Scripts)[]? Enchantments { get; private set; }
 
     /// <summary>
     /// Applies a poor random rare characteristics to an item of armor.  Does nothing by default.  Various derived class may override
@@ -1057,6 +1080,21 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
         Spells = Game.SingletonRepository.GetNullable<Spell>(SpellNames);
         BreaksDuringEnchantmentProbability = Game.ParseNullableProbabilityExpression(BreaksDuringEnchantmentProbabilityExpression);
+
+        if (EnchantmentBinders != null)
+        {
+            List<(int[]?, bool?, IEnhancementScript[])> enchantmentsList = new List<(int[]?, bool?, IEnhancementScript[])>();
+            foreach ((int[]? Powers, bool? StoreStock, string[] ScriptNames) in EnchantmentBinders)
+            {
+                if (ScriptNames.Length == 0)
+                {
+                    throw new Exception($"The {Name} item factory specifies an enchantment that contains no enchantment scripts.");
+                }
+                IEnhancementScript[] scripts = Game.SingletonRepository.Get<IEnhancementScript>(ScriptNames);
+                enchantmentsList.Add((Powers, StoreStock, scripts));
+            }
+            Enchantments = enchantmentsList.ToArray();
+        }
     }
 
     /// <summary>

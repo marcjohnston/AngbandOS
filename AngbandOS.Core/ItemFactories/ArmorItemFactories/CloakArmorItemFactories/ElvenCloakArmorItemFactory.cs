@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
+internal class ElvenCloakArmorItemFactory : ArmorItemFactory
 {
     private ElvenCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -19,30 +19,13 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override int InitialBonusSearch => Game.DieRoll(4);
     public override int InitialBonusStealth => Game.DieRoll(4);
 
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        if (power != 0)
-        {
-            // Apply the standard armor characteristics.
-            base.EnchantItem(item, usedOkay, level, power);
-
-            if (power > 1)
-            {
-                if (Game.DieRoll(20) == 1)
-                {
-                    item.CreateRandomArtifact(false);
-                }
-                else
-                {
-                    ApplyRandomGoodRareCharacteristics(item);
-                }
-            }
-            else if (power < -1)
-            {
-                ApplyRandomPoorRareCharacteristics(item);
-            }
-        }
-    }
+        (new int[] { -2 }, null, new string[] { nameof(TerribleCloakEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorCloakEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodCloakEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatCloakEnchantmentScript) })
+    };
 
     public override int ArmorClass => 4;
     public override int Cost => 1500;

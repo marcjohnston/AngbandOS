@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class HardLeatherBootsArmorItemFactory : BootsArmorItemFactory
+internal class HardLeatherBootsArmorItemFactory : ArmorItemFactory
 {
     private HardLeatherBootsArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -27,6 +27,14 @@ internal class HardLeatherBootsArmorItemFactory : BootsArmorItemFactory
         (5, 1)
     };
     public override int Weight => 40;
+
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleBootsEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorBootsEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodBootsEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatBootsEnchantmentScript) })
+    };
 
     /// <summary>
     /// Returns the feet inventory slot for boots.

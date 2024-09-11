@@ -18,20 +18,11 @@ internal class ExtraAttacksRingItemFactory : RingItemFactory
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        item.BonusAttacks = item.GetBonusValue(3, level);
-        if (item.BonusAttacks < 1)
-        {
-            item.BonusAttacks = 1;
-        }
-        if (power < 0)
-        {
-            item.IsBroken = true;
-            item.IsCursed = true;
-            item.BonusAttacks = 0 - item.BonusAttacks;
-        }
-    }
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorAttacks3BEnchantmentScript) }),
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusAttacks3BEnchantmentScript) })
+    };
 
     public override bool Blows => true;
     public override int Cost => 100000;

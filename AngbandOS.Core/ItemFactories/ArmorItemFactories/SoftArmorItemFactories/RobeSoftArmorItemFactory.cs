@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
+internal class RobeSoftArmorItemFactory : ArmorItemFactory
 {
     private RobeSoftArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -16,34 +16,13 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Robe";
 
-
-    /// <summary>
-    /// Applies special magic to this robe.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    public override void EnchantItem(Item item, bool usedOkay, int level, int power)
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
-        if (power != 0)
-        {
-            // Apply the standard armor characteristics.
-            base.EnchantItem(item, usedOkay, level, power);
-
-            if (power > 1)
-            {
-                // Robes have a chance of having the armor of permanence instead of a random characteristic.
-                if (Game.RandomLessThan(100) < 10)
-                {
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfPermanenceRareItem));
-                }
-                else
-                {
-                    ApplyRandomGoodRareCharacteristics(item);
-                }
-            }
-        }
-    }
+        (new int[] { -2 }, null, new string[] { nameof(TerribleSoftArmorEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorSoftArmorEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodSoftArmorEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatRobeSoftArmorEnchantmentScript) })
+    };
 
     public override int ArmorClass => 2;
     public override int Cost => 4;

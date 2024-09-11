@@ -142,7 +142,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Returns an array of singletons from the repository specified by the <typeparamref name="T"/> type referenced by the unique key identifiers <paramref name="keys"/>.  If any the singletons do not exist, an exception is thrown.
+    /// Returns an array of singletons from the repository specified by the <typeparamref name="T"/> type referenced by the unique key identifiers <paramref name="keys"/>.  If any the singletons do not exist, an exception is thrown.  Empty arrays are supported and will return empty lists.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -375,7 +375,8 @@ internal class SingletonRepository
         RegisterRepository<IScriptItemMonster>();
         RegisterRepository<IScriptItem>();
         RegisterRepository<IIdentifiedAndUsedScriptItemDirection>();
-        RegisterRepository<IUnfriendlyScript>();        
+        RegisterRepository<IUnfriendlyScript>();
+        RegisterRepository<IEnhancementScript>();
 
         RegisterRepository<Activation>();
         RegisterRepository<ActivationWeightedRandom>();

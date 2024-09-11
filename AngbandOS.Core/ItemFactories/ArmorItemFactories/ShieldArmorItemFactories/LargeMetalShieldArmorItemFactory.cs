@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
+internal class LargeMetalShieldArmorItemFactory : ArmorItemFactory
 {
     private LargeMetalShieldArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -60,4 +60,11 @@ internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    {
+        (new int[] { -2 }, null, new string[] { nameof(TerribleShieldEnchantmentScript) }),
+        (new int[] { -1, -2 }, null, new string[] { nameof(PoorShieldEnchantmentScript) }),
+        (new int[] { 1, 2 }, null, new string[] { nameof(GoodShieldEnchantmentScript) }),
+        (new int[] { 2 }, null, new string[] { nameof(GreatShieldEnchantmentScript) })
+    };
 }
