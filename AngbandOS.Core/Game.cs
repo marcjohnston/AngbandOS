@@ -17702,7 +17702,7 @@ public bool IsDead = false;
 
     public string Pluralize(string singular)
     {
-        return Pluralize(singular, 1);
+        return Pluralize(singular, 0);
     }
 
     public string Pluralize(string singular, int count)
