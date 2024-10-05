@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
-
 namespace AngbandOS.Core.HelpGroups;
 
 [Serializable]
 internal class GenericHelpGroup : HelpGroup
 {
-    public GenericHelpGroup(Game game, HelpGroupDefinition helpGroupDefinition) : base(game)
+    public GenericHelpGroup(Game game, HelpGroupConfiguration helpGroupDefinition) : base(game)
     {
         Key = helpGroupDefinition.Key;
         SortIndex = helpGroupDefinition.SortIndex;

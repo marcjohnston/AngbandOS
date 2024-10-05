@@ -24,7 +24,7 @@ internal abstract class ClassSpell : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        ClassSpellDefinition classSpellDefinition = new()
+        ClassSpellConfiguration classSpellDefinition = new()
         {
             SpellName = SpellName,
             CharacterClassName = CharacterClassName,
@@ -33,7 +33,7 @@ internal abstract class ClassSpell : IGetKey
             BaseFailure = BaseFailure,
             FirstCastExperience = FirstCastExperience
         };
-        return JsonSerializer.Serialize<ClassSpellDefinition>(classSpellDefinition);
+        return JsonSerializer.Serialize<ClassSpellConfiguration>(classSpellDefinition);
     }
 
     public abstract string SpellName { get; }

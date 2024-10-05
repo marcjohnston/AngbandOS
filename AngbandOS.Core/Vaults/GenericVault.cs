@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class GenericVault : Vault
 {
-    public GenericVault(Game game, VaultDefinition vaultDefinition) : base(game)
+    public GenericVault(Game game, VaultConfiguration vaultDefinition) : base(game)
     {
         Key = vaultDefinition.Key;
         Color = vaultDefinition.Color;

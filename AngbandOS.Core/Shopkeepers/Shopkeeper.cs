@@ -55,7 +55,7 @@ internal abstract class Shopkeeper : IGetKey
 
     public string ToJson()
     {
-        ShopkeeperDefinition shopkeeperDefinition = new()
+        ShopkeeperConfiguration shopkeeperDefinition = new()
         {
             Key = Key,
             MaxCost = MaxCost,
@@ -63,6 +63,6 @@ internal abstract class Shopkeeper : IGetKey
             Name = Name,
             RaceName = OwnerRace?.GetKey
         };
-        return JsonSerializer.Serialize<ShopkeeperDefinition>(shopkeeperDefinition);
+        return JsonSerializer.Serialize<ShopkeeperConfiguration>(shopkeeperDefinition);
     }
 }

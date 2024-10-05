@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
-
 namespace AngbandOS.Core.Commands;
 
 [Serializable]
 internal class GenericWizardCommand : WizardCommand
 {
-    public GenericWizardCommand(Game game, WizardCommandDefinition wizardCommandDefinition) : base(game)
+    public GenericWizardCommand(Game game, WizardCommandConfiguration wizardCommandDefinition) : base(game)
     {
         Key = wizardCommandDefinition.Key;
         KeyChar = wizardCommandDefinition.KeyChar;

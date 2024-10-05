@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
 using System.Text.Json;
 
 namespace AngbandOS.Core.Towns;
@@ -109,7 +108,7 @@ internal abstract class Town : IGetKey
 
     public string ToJson()
     {
-        TownDefinition townDefinition = new()
+        TownConfiguration townDefinition = new()
         {
             Key = Key,
             DungeonName = DungeonName,
@@ -121,6 +120,6 @@ internal abstract class Town : IGetKey
             UnusedStoreLotsAreGraveyards = UnusedStoreLotsAreGraveyards,
             StoreFactoryNames = Stores.Select(_store => _store.StoreFactory.Key).ToArray(),
         };
-        return JsonSerializer.Serialize<TownDefinition>(townDefinition);
+        return JsonSerializer.Serialize<TownConfiguration>(townDefinition);
     }
 }

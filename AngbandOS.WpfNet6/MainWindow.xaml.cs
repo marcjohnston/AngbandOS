@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
-using AngbandOS.Core.Interface.Definitions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -208,15 +207,11 @@ public partial class MainWindow : Window, IConsoleViewPort
     private void Thread_DoWork(object? sender, DoWorkEventArgs e)
     {
         GameServer gameServer = new GameServer();
-        DefinitionMetadata[] metadata = gameServer.GetMetadata();
         string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
         ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemPersistentStorage(saveFilename);
-        Configuration configuration = new Configuration()
-        {
-            StartupTownName = "DylathLeenTown"
-        };
-
+        Configuration? configuration = null; // Configuration.LoadConfiguration(persistentStorage);
+        //configuration.StartupTownName = "DylathLeenTown";
         if (persistentStorage.GameExists())
         {
             gameServer.PlayExistingGame(this, persistentStorage);

@@ -51,7 +51,7 @@ internal abstract class GameCommand : IGetKey
 
     public string ToJson()
     {
-        GameCommandDefinition definition = new()
+        GameCommandConfiguration definition = new()
         {
             Key = Key,
             KeyChar = KeyChar,

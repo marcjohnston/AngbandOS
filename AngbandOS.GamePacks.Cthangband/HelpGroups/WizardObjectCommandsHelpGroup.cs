@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WizardObjectCommandsHelpGroup : HelpGroupDefinition
+internal class WizardObjectCommandsHelpGroup : HelpGroupConfiguration
 {
     public override string Title => "Object Commands";
 

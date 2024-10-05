@@ -30,13 +30,13 @@ internal abstract class Symbol : IGetKey
 
     public string ToJson()
     {
-        SymbolDefinition symbolDefinition = new SymbolDefinition()
+        SymbolConfiguration symbolDefinition = new SymbolConfiguration()
         {
             Key = Key,
             Character = Character,
             QueryCharacter = QueryCharacter,
             Name = Name
         };
-        return JsonSerializer.Serialize<SymbolDefinition>(symbolDefinition);
+        return JsonSerializer.Serialize<SymbolConfiguration>(symbolDefinition);
     }
 }

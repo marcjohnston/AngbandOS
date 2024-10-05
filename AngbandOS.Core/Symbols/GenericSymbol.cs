@@ -3,7 +3,7 @@
 [Serializable]
 internal class GenericSymbol : Symbol
 {
-    public GenericSymbol(Game game, SymbolDefinition symbolDefinition) : base(game)
+    public GenericSymbol(Game game, SymbolConfiguration symbolDefinition) : base(game)
     {
         Character = symbolDefinition.Character;
         QueryCharacter = symbolDefinition.QueryCharacter;

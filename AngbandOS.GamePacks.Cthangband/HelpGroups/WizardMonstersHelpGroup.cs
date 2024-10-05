@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WizardMonstersHelpGroup : HelpGroupDefinition
+internal class WizardMonstersHelpGroup : HelpGroupConfiguration
 {
     public override string Title => "Monsters";
 

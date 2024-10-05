@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GenericAmuletReadableFlavor : AmuletReadableFlavor
 {
-    public GenericAmuletReadableFlavor(Game game, ReadableFlavorDefinition readableFlavorDefninition) : base(game)
+    public GenericAmuletReadableFlavor(Game game, ReadableFlavorConfiguration readableFlavorDefninition) : base(game)
     {
         Key = readableFlavorDefninition.Key;
         Name = readableFlavorDefninition.Name;

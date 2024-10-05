@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
-
 namespace AngbandOS.Core.Commands;
 
 [Serializable]
 internal class GenericGameCommand : GameCommand
 {
-    public GenericGameCommand(Game game, GameCommandDefinition gameCommandDefinition) : base(game)
+    public GenericGameCommand(Game game, GameCommandConfiguration gameCommandDefinition) : base(game)
     {
         Key = gameCommandDefinition.Key;
         KeyChar = gameCommandDefinition.KeyChar;

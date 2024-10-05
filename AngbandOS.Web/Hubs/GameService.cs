@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.Security.Claims;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -56,11 +57,11 @@ namespace AngbandOS.Web.Hubs
             IHubContext<ChatHub, IChatHub> chatHub,
             IHubContext<AdminHub, IAdminHub> adminHub,
             IHubContext<SpectatingHub, ISpectatingHub> spectatorsHub,
-            IConfiguration config,
+            IConfiguration configuration,
             IServiceScopeFactory serviceScopeFactory
         )
         {
-            Configuration = config;
+            Configuration = configuration;
             GameHub = gameHub;
             ServiceHub = serviceHub;
             ChatHub = chatHub;

@@ -1,13 +1,18 @@
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
-using AngbandOS.Core.Interface.Definitions;
+using AngbandOS.PersistentStorage;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace AngbandOS.Configurator.WinForm
 {
     public partial class Form1 : Form
     {
-        private readonly Dictionary<TreeNode, DefinitionMetadata> _definitionMetadataByTreeNode = new Dictionary<TreeNode, DefinitionMetadata>();
-        private readonly Configuration configuration = new Configuration();
+        /// <summary>
+        /// Maps tree nodes to their associated PropertyMetadata.
+        /// </summary>
+        private readonly Dictionary<TreeNode, PropertyMetadata> _definitionMetadataByTreeNode = new Dictionary<TreeNode, PropertyMetadata>();
+        private Configuration configuration;
         public Form1()
         {
             InitializeComponent();
@@ -15,66 +20,84 @@ namespace AngbandOS.Configurator.WinForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GameServer gameServer = new GameServer();
-            DefinitionMetadata[] definitionMetadata = gameServer.GetMetadata();
-            List<DefinitionMetadata> settingDefinitions = new List<DefinitionMetadata>();
-            List<DefinitionMetadata> collectionDefinitions = new List<DefinitionMetadata>();
-            foreach (DefinitionMetadata definition in definitionMetadata)
+            string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
+            ICorePersistentStorage persistentStorage = new FileSystemPersistentStorage(saveFilename);
+            configuration = Configuration.LoadConfiguration(persistentStorage);
+            PropertyMetadata[] configurationMetadata = Configuration.Metadata;
+            Dictionary<string, TreeNodeCollection> categoryTreeNodeCollectionDictionary = new Dictionary<string, TreeNodeCollection>();
+
+            foreach (PropertyMetadata propertyMetadata in configurationMetadata)
             {
-                if (definition.Title == null)
+                TreeNodeCollection? categoryTreeNodeCollection = null;
+                if (propertyMetadata.CategoryTitle == "")
                 {
-                    definition.Title = definition.PropertyName;
-                }
-                if (definition.IsArray)
-                {
-                    collectionDefinitions.Add(definition);
+                    // Put the property into the root node.
+                    categoryTreeNodeCollection = treeView1.Nodes;
                 }
                 else
                 {
-                    settingDefinitions.Add(definition);
+                    // Determine if there is a treenode collection already for this category.
+                    if (!categoryTreeNodeCollectionDictionary.TryGetValue(propertyMetadata.CategoryTitle, out categoryTreeNodeCollection))
+                    {
+                        // There isn't.  Create one and add it to the dictionary.
+                        TreeNode categoryTreeNode = new TreeNode();
+                        categoryTreeNode.Text = propertyMetadata.CategoryTitle;
+                        categoryTreeNodeCollection = categoryTreeNode.Nodes;
+                        categoryTreeNodeCollectionDictionary.Add(propertyMetadata.CategoryTitle, categoryTreeNodeCollection);
+                        treeView1.Nodes.Add(categoryTreeNode);
+                    }
                 }
+
+                // Add a node to the category collection.
+                TreeNode propertyMetadataTreeNode = categoryTreeNodeCollection.Add(propertyMetadata.PropertyName);
+
+                // Track the node.
+                _definitionMetadataByTreeNode.Add(propertyMetadataTreeNode, propertyMetadata);
             }
-            collectionDefinitions.Sort((a, b) => String.Compare(a.Title, b.Title));
-            PopulateSettings(settingDefinitions.ToArray());
-            PopulateCollections(collectionDefinitions.ToArray());
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node == null || e.Node.Text == "Settings")
+            if (e.Node == null)
             {
                 return;
             }
 
-            DefinitionMetadata definitionMetadata = _definitionMetadataByTreeNode[e.Node];
-            RenderCollection(definitionMetadata);
-        }
+            // Retieve the property metadata.  If the node isn't in our list, then it is a parent node we do not handle.
+            if (!_definitionMetadataByTreeNode.TryGetValue(treeView1.SelectedNode, out PropertyMetadata? propertyMetadata))
+                return;
 
-        private void RenderCollection(DefinitionMetadata definitionMetadata)
-        {
-            collectionLabel.Text = definitionMetadata.Title;
-            descriptionTextBox.Text = definitionMetadata?.Description;
-        }
-
-        private void PopulateSettings(DefinitionMetadata[] definitionMetadata)
-        {
-            treeView1.Nodes.Add(new TreeNode("Settings"));
-            foreach (DefinitionMetadata definition in definitionMetadata)
+            UserControl propertyUserControl;
+            switch (propertyMetadata)
             {
-                string title = definition.Title ?? definition.PropertyName;
+                case CollectionPropertyMetadata collectionPropertyMetadata:
+                    propertyUserControl = new CollectionPropertyUserControl(collectionPropertyMetadata, configuration, "configuration");
+                    break;
+                case BooleanPropertyMetadata booleanPropertyMetadata:
+                    propertyUserControl = new BooleanPropertyUserControl(booleanPropertyMetadata, configuration);
+                    break;
+                case StringPropertyMetadata stringPropertyMetadata:
+                    propertyUserControl = new StringPropertyUserControl(stringPropertyMetadata, configuration);
+                    break;
+                case IntegerPropertyMetadata integerPropertyMetadata:
+                    propertyUserControl = new IntegerPropertyUserControl(integerPropertyMetadata, configuration);
+                    break;
+                case TuplePropertyMetadata tuplePropertyMetadata:
+                    propertyUserControl = new TuplePropertyUserControl(tuplePropertyMetadata, configuration);
+                    break;
+                default:
+                    MessageBox.Show($"An error occurred building the root metadata tree while processing the metadata property {propertyMetadata.PropertyName}.  The metadata property type {propertyMetadata.GetType().Name} is not supported.");
+                    return;
             }
-
+            splitContainer2.Panel2.Controls.Clear();
+            propertyUserControl.Dock = DockStyle.Fill;
+            splitContainer2.Panel2.Controls.Add(propertyUserControl);
         }
 
-        private void PopulateCollections(DefinitionMetadata[] definitionMetadata)
+        private void Form1_Shown(object sender, EventArgs e)
         {
-            foreach (DefinitionMetadata definition in definitionMetadata)
-            {
-                string title = definition.Title ?? definition.PropertyName;
-                TreeNode treeNode = new TreeNode(title);
-                _definitionMetadataByTreeNode.Add(treeNode, definition);
-                treeView1.Nodes.Add(treeNode);
-            }
+            treeView1.ExpandAll();
         }
     }
 }

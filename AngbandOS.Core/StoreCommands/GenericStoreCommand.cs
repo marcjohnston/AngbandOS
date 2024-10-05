@@ -5,15 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
-
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
 
 internal class GenericStoreCommand : StoreCommand
 {
-    public GenericStoreCommand(Game game, StoreCommandDefinition storeCommandDefinition) : base(game)
+    public GenericStoreCommand(Game game, StoreCommandConfiguration storeCommandDefinition) : base(game)
     {
         Key = storeCommandDefinition.Key;
         KeyChar = storeCommandDefinition.KeyChar;

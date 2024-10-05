@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ProjectileGraphics;
 [Serializable]
 internal class GenericProjectileGraphic : ProjectileGraphic
 {
-    public GenericProjectileGraphic(Game game, ProjectileGraphicDefinition projectileGraphicDefinition) : base(game)
+    public GenericProjectileGraphic(Game game, ProjectileGraphicConfiguration projectileGraphicDefinition) : base(game)
     {
         Key = projectileGraphicDefinition.Key;
         Character = projectileGraphicDefinition.Character;

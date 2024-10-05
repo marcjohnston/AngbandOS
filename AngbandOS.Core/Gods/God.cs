@@ -51,13 +51,13 @@ internal abstract class God : IGetKey
 
     public string ToJson()
     {
-        GodDefinition definition = new GodDefinition()
+        GodConfiguration definition = new GodConfiguration()
         {
             LongName = LongName,
             ShortName = ShortName,
             Key = Key,
             FavorDescription = FavorDescription
         };
-        return JsonSerializer.Serialize<GodDefinition>(definition);
+        return JsonSerializer.Serialize<GodConfiguration>(definition);
     }
 }

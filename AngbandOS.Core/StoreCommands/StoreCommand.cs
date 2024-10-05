@@ -73,7 +73,7 @@ internal abstract class StoreCommand : IGetKey, IToJson
 
     public string ToJson()
     {
-        StoreCommandDefinition definition = new()
+        StoreCommandConfiguration definition = new()
         {
             Key = Key,
             KeyChar = KeyChar,

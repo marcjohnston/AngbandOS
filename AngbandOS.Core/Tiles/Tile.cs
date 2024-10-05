@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
 using System.Text.Json;
 
 namespace AngbandOS.Core.Tiles;
@@ -30,7 +29,7 @@ internal abstract class Tile : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        TileDefinition tileDefinition = new TileDefinition()
+        TileConfiguration tileDefinition = new TileConfiguration()
         {
             AllowMonsterToOccupy = AllowMonsterToOccupy,
             AlterActionName = AlterActionName,
@@ -77,7 +76,7 @@ internal abstract class Tile : IGetKey
             SymbolName = SymbolName,
             YellowInTorchlight = YellowInTorchlight
         };
-        return JsonSerializer.Serialize<TileDefinition>(tileDefinition);
+        return JsonSerializer.Serialize<TileConfiguration>(tileDefinition);
     }
     public virtual string Key => GetType().Name;
     public string GetKey => Key;

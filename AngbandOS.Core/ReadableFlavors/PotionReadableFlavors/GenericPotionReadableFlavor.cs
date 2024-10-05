@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GenericPotionReadableFlavor : PotionReadableFlavor
 {
-    public GenericPotionReadableFlavor(Game game, ReadableFlavorDefinition readableFlavorDefninition) : base(game)
+    public GenericPotionReadableFlavor(Game game, ReadableFlavorConfiguration readableFlavorDefninition) : base(game)
     {
         Key = readableFlavorDefninition.Key;
         Name = readableFlavorDefninition.Name;

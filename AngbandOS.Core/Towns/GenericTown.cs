@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
-
 namespace AngbandOS.Core.Towns;
 
 [Serializable]
 internal class GenericTown : Town
 {
-    public GenericTown(Game game, TownDefinition townDefinition) : base(game)
+    public GenericTown(Game game, TownConfiguration townDefinition) : base(game)
     {
         Key = townDefinition.Key;
         DungeonName = townDefinition.DungeonName;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class GenericAttack : Attack
 {
-    public GenericAttack(Game game, AttackDefinition definition) : base(game)
+    public GenericAttack(Game game, AttackConfiguration definition) : base(game)
     {
         MonsterAction = definition.MonsterAction;
         Key = definition.Key;

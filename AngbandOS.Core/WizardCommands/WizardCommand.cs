@@ -24,7 +24,7 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        WizardCommandDefinition definition = new WizardCommandDefinition()
+        WizardCommandConfiguration definition = new WizardCommandConfiguration()
         {
             Key = Key,
             ExecuteScriptName = ExecuteScriptName,

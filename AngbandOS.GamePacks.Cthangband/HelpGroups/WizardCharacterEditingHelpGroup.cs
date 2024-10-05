@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WizardCharacterEditingHelpGroup : HelpGroupDefinition
+internal class WizardCharacterEditingHelpGroup : HelpGroupConfiguration
 {
     public override string Title => "Character Editing";
     public override int SortIndex => 0;
