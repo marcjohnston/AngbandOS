@@ -1,1 +1,1 @@
-﻿global using AngbandOS.Core.Interface.Configurations;
+﻿global using AngbandOS.Core.Interface;
