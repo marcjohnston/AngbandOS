@@ -48,10 +48,11 @@ namespace AngbandOS.Configurator.WinForm
             IConfiguration entityConfiguration = (IConfiguration)collectionEntitiesListBox.SelectedItem!; // ! is valid because list items will always be an object.
             MultiPropertyUserControl multiPropertyUserControl = new MultiPropertyUserControl(CollectionPropertyMetadata.PropertiesMetadata, entityConfiguration, $"{Breadcrumb}");
 
-            splitContainer1.Panel2.SuspendLayout();
+      //      splitContainer1.Panel2.SuspendLayout();
             splitContainer1.Panel2.Controls.Clear();
+            multiPropertyUserControl.Dock = DockStyle.Fill;
             splitContainer1.Panel2.Controls.Add(multiPropertyUserControl);
-            splitContainer1.Panel2.ResumeLayout();
+       //     splitContainer1.Panel2.ResumeLayout();
         }
     }
 }

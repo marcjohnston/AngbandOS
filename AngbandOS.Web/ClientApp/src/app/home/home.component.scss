@@ -35,6 +35,12 @@
     }
   }
 
+  & #component-window {
+      #chat {
+          max-width: 25%; // We do not want the width of the chat window to consume more than 25% of the screen.
+      }
+  }
+
   & #active-games-span, #saved-games-span {
     margin-top: 25px;
   }

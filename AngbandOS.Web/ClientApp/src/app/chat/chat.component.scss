@@ -32,6 +32,7 @@
   }
 
   & mat-card-content {
+      word-wrap: break-word; // Content in the chat needs to word-wrap and force words to break, if the word itself is too long.
   }
 
   & #history-area {

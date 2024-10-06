@@ -130,6 +130,36 @@ public class Configuration : IConfiguration
                     Title = "Startup Town Name",
                     IsNullable = true
                 },
+                new IntegerPropertyMetadata("MaxMessageLogLength")
+                {
+                    Description = "This value controls how many previous messages are saved.  Additional previous messages are automatically deleted.  If this value is not specified, an unlimited number of previous messages will be retained.  A default value of 2048 previous messages is recommended.",
+                    CategoryTitle = SettingsCategoryTitle,
+                    Title = "Previous Message Length",
+                    IsNullable = true,
+                    DefaultValue = 2048
+                },
+                new StringPropertyMetadata("StartupTownName")
+                {
+                    Description = "The name of the town that the player starts in.",
+                    CategoryTitle = SettingsCategoryTitle,
+                    Title = "Startup Town Name",
+                    IsNullable = true
+                },
+                new IntegerPropertyMetadata("MaxMessageLogLength")
+                {
+                    Description = "This value controls how many previous messages are saved.  Additional previous messages are automatically deleted.  If this value is not specified, an unlimited number of previous messages will be retained.  A default value of 2048 previous messages is recommended.",
+                    CategoryTitle = SettingsCategoryTitle,
+                    Title = "Previous Message Length",
+                    IsNullable = true,
+                    DefaultValue = 2048
+                },
+                new StringPropertyMetadata("StartupTownName")
+                {
+                    Description = "The name of the town that the player starts in.",
+                    CategoryTitle = SettingsCategoryTitle,
+                    Title = "Startup Town Name",
+                    IsNullable = true
+                },
                 new CollectionPropertyMetadata("StoreFactories")
                 {
                     Description = "Towns have various plots where buildings and/or stores may be placed.  Stores factories are used to create specific stores.  Store factories can produce more than one store per town.  Use this collection to define factories that are used to create stores.",

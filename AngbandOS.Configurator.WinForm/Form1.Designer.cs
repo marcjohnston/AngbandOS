@@ -44,8 +44,8 @@
             // splitContainer2.Panel1
             // 
             splitContainer2.Panel1.Controls.Add(treeView1);
-            splitContainer2.Size = new Size(1281, 962);
-            splitContainer2.SplitterDistance = 212;
+            splitContainer2.Size = new Size(660, 653);
+            splitContainer2.SplitterDistance = 143;
             splitContainer2.TabIndex = 0;
             // 
             // treeView1
@@ -53,7 +53,7 @@
             treeView1.Dock = DockStyle.Fill;
             treeView1.Location = new Point(0, 0);
             treeView1.Name = "treeView1";
-            treeView1.Size = new Size(212, 962);
+            treeView1.Size = new Size(143, 653);
             treeView1.TabIndex = 1;
             treeView1.AfterSelect += treeView1_AfterSelect;
             // 
@@ -61,7 +61,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1281, 962);
+            ClientSize = new Size(660, 653);
             Controls.Add(splitContainer2);
             Name = "Form1";
             Text = "AngbandOS Configurator";

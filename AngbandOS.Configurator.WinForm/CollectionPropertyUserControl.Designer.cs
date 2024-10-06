@@ -97,10 +97,6 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(collectionEntitiesListBox);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.AutoScroll = true;
             splitContainer1.Size = new Size(545, 456);
             splitContainer1.SplitterDistance = 181;
             splitContainer1.TabIndex = 1;

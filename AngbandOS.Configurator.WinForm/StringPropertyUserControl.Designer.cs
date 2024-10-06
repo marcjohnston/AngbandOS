@@ -51,7 +51,7 @@
             // 
             textBox1.Dock = DockStyle.Fill;
             textBox1.Location = new Point(25, 45);
-            textBox1.Margin = new Padding(25, 3, 3, 3);
+            textBox1.Margin = new Padding(25, 3, 3, 10);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(471, 23);
             textBox1.TabIndex = 3;
@@ -92,8 +92,8 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel1.Size = new Size(499, 72);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.Size = new Size(499, 78);
             tableLayoutPanel1.TabIndex = 6;
             // 
             // StringPropertyUserControl
@@ -105,7 +105,7 @@
             BackColor = SystemColors.Control;
             Controls.Add(tableLayoutPanel1);
             Name = "StringPropertyUserControl";
-            Size = new Size(499, 72);
+            Size = new Size(499, 78);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
