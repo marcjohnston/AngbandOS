@@ -120,7 +120,7 @@ public class Configuration : IConfiguration
                     Description = "This value controls how many previous messages are saved.  Additional previous messages are automatically deleted.  If this value is not specified, an unlimited number of previous messages will be retained.  A default value of 2048 previous messages is recommended.",
                     CategoryTitle = SettingsCategoryTitle,
                     Title = "Previous Message Length",
-                    IsRequired = false,
+                    IsNullable = true,
                     DefaultValue = 2048
                 },
                 new StringPropertyMetadata("StartupTownName")
@@ -128,7 +128,7 @@ public class Configuration : IConfiguration
                     Description = "The name of the town that the player starts in.",
                     CategoryTitle = SettingsCategoryTitle,
                     Title = "Startup Town Name",
-                    IsRequired = false
+                    IsNullable = true
                 },
                 new CollectionPropertyMetadata("StoreFactories")
                 {
@@ -140,30 +140,42 @@ public class Configuration : IConfiguration
                         new TuplePropertyMetadata("StoreStockManifestDefinitions")
                         {
                             Description = "Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.  Returns 9, by default.",
-                            IsRequired = false,
                             IsArray = true,
                             Types = new PropertyMetadata[]
                             {
                                 new ForeignKeyPropertyMetadata("ItemFactoryName", "ItemFactories")
                                 {
-                                    IsRequired = true
+                                    IsNullable = true
                                 },
                                 new IntegerPropertyMetadata("Weight")
                                 {
-                                    IsRequired = true
+                                    IsNullable = true
                                 }
                             }
                         },
                         new BooleanPropertyMetadata("IsEmptyLot")
                         {
-                            IsRequired = true,
                             DefaultValue = false,
                             Description = "Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.",
-                            Title = "Is Empty Lot"
+                        },
+                        new BooleanPropertyMetadata("StoreEntranceDoorsAreBlownOff")
+                        {
+                            DefaultValue = false,
+                            Description = "Returns true, if the entrances to the stores are are randomly placed.",
+                        },
+                        new BooleanPropertyMetadata("BuildingsMadeFromPermanentRock")
+                        {
+                            DefaultValue = true,
+                            Description = "Returns true, if the store (non-empty lot) is built from permanent rock.  Abandoned stores are created from inner walls and removeable rubble.",
+                        },
+                        new IntegerPropertyMetadata("PageSize")
+                        {
+                            DefaultValue = 26,
+                            Description = "Returns the number of items in a page for the store.",
                         },
                         new StringPropertyMetadata("AdvertisedStoreCommand1Name")
                         {
-                            IsRequired = false
+                            IsNullable = false
                         }
                     }
                 },
@@ -270,91 +282,91 @@ public class Configuration : IConfiguration
                 new StringPropertyMetadata("ElvishTexts")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("FindQuests")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("FunnyComments")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("FunnyDescriptions")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("HorrificDescriptions")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("InsultPlayerAttacks")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("MoanPlayerAttacks")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("UnreadableFlavorSyllables")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("ShopkeeperAcceptedComments")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("ShopkeeperBargainComments")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("ShopkeeperGoodComments")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("ShopkeeperLessThanGuessComments")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("ShopkeeperWorthlessComments")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("SingingPlayerAttacks")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
                 new StringPropertyMetadata("WorshipPlayerAttacks")
                 {
                     IsArray = true,
-                    IsRequired = false,
+                    IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 }
             };

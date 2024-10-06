@@ -9,14 +9,33 @@ namespace AngbandOS.Configurator.WinForm
         {
             InitializeComponent();
 
-            PropertyInfo integerPropertyInfo = configuration.GetType().GetProperty(propertyMetadata.PropertyName);
+            PropertyInfo? integerPropertyInfo = configuration.GetType().GetProperty(propertyMetadata.PropertyName);
             if (integerPropertyInfo == null)
             {
-                throw new Exception($"Configuration object doesn't have associated {propertyMetadata.PropertyName}.");
+                MessageBox.Show($"Configuration object doesn't have associated {propertyMetadata.PropertyName}.");
+                return;
             }
 
-            label1.Text = propertyMetadata.Title;
-            textBox1.Text = integerPropertyInfo.GetValue(configuration).ToString();
+            if (integerPropertyInfo.PropertyType != typeof(int) && integerPropertyInfo.PropertyType != typeof(int?))
+            {
+                MessageBox.Show($"The integer property {propertyMetadata.PropertyName} doesn't reference an int property in the configuration.");
+                return;
+            }
+            titleLabel.Text = propertyMetadata.Title ?? propertyMetadata.PropertyName;
+            descriptionLabel.Text = propertyMetadata.Description;
+            object? value = integerPropertyInfo.GetValue(configuration);
+
+            switch (value)
+            {
+                case null:
+                    break;
+                case int intValue:
+                    textBox1.Text = intValue.ToString();
+                    break;
+                default:
+                    MessageBox.Show($"The integer property {propertyMetadata.PropertyName} did not return an int value from the configuration.");
+                    break;
+            }
         }
     }
 }

@@ -9,14 +9,33 @@ namespace AngbandOS.Configurator.WinForm
         {
             InitializeComponent();
 
-            PropertyInfo stringPropertyInfo = configuration.GetType().GetProperty(propertyMetadata.PropertyName);
+            PropertyInfo? stringPropertyInfo = configuration.GetType().GetProperty(propertyMetadata.PropertyName);
             if (stringPropertyInfo == null)
             {
-                throw new Exception($"Configuration object doesn't have associated {propertyMetadata.PropertyName}.");
+                MessageBox.Show($"Configuration object doesn't have associated {propertyMetadata.PropertyName}.");
+                return;
             }
 
-            label1.Text = propertyMetadata.Title ?? propertyMetadata.PropertyName;
-            textBox1.Text = (string)stringPropertyInfo.GetValue(configuration);
+            if (stringPropertyInfo.PropertyType != typeof(string))
+            {
+                MessageBox.Show($"The string property {propertyMetadata.PropertyName} doesn't reference a string property in the configuration.");
+                return;
+            }
+            titleLabel.Text = propertyMetadata.Title ?? propertyMetadata.PropertyName;
+            descriptionLabel.Text = propertyMetadata.Description;
+            object? value = stringPropertyInfo.GetValue(configuration);
+
+            switch (value)
+            {
+                case null:
+                    break;
+                case string stringValue:
+                    textBox1.Text = stringValue.ToString();
+                    break;
+                default:
+                    MessageBox.Show($"The string property {propertyMetadata.PropertyName} did not return a string value from the configuration.");
+                    break;
+            }
         }
     }
 }

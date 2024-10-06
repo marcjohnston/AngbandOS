@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
     <ProjectReference Include="..\AngbandOS.PersistentStorage.FileSystem\AngbandOS.PersistentStorage.FileSystem.csproj" />
   </ItemGroup>

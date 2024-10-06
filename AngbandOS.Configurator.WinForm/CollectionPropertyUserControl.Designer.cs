@@ -34,12 +34,10 @@
             descriptionLabel = new Label();
             splitContainer1 = new SplitContainer();
             collectionEntitiesListBox = new ListBox();
-            entityFlowLayoutPanel = new FlowLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
@@ -103,7 +101,6 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.AutoScroll = true;
-            splitContainer1.Panel2.Controls.Add(entityFlowLayoutPanel);
             splitContainer1.Size = new Size(545, 456);
             splitContainer1.SplitterDistance = 181;
             splitContainer1.TabIndex = 1;
@@ -119,16 +116,6 @@
             collectionEntitiesListBox.TabIndex = 0;
             collectionEntitiesListBox.SelectedValueChanged += collectionEntitiesListBox_SelectedValueChanged;
             // 
-            // entityFlowLayoutPanel
-            // 
-            entityFlowLayoutPanel.Dock = DockStyle.Fill;
-            entityFlowLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            entityFlowLayoutPanel.Location = new Point(0, 0);
-            entityFlowLayoutPanel.Name = "entityFlowLayoutPanel";
-            entityFlowLayoutPanel.Size = new Size(360, 456);
-            entityFlowLayoutPanel.TabIndex = 0;
-            entityFlowLayoutPanel.WrapContents = false;
-            // 
             // CollectionPropertyUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -142,7 +129,6 @@
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
@@ -156,6 +142,5 @@
         private Label descriptionLabel;
         private SplitContainer splitContainer1;
         private ListBox collectionEntitiesListBox;
-        private FlowLayoutPanel entityFlowLayoutPanel;
     }
 }

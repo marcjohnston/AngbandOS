@@ -1,8 +1,5 @@
-using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.PersistentStorage;
-using System.Reflection;
-using System.Windows.Forms;
 
 namespace AngbandOS.Configurator.WinForm
 {
@@ -13,6 +10,9 @@ namespace AngbandOS.Configurator.WinForm
         /// </summary>
         private readonly Dictionary<TreeNode, PropertyMetadata> _definitionMetadataByTreeNode = new Dictionary<TreeNode, PropertyMetadata>();
         private Configuration configuration;
+        private TreeNode GameTreeNode = new TreeNode("Game Setings");
+        private PropertyMetadata[] GamePropertiesMetadata;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,14 +26,16 @@ namespace AngbandOS.Configurator.WinForm
             configuration = Configuration.LoadConfiguration(persistentStorage);
             PropertyMetadata[] configurationMetadata = Configuration.Metadata;
             Dictionary<string, TreeNodeCollection> categoryTreeNodeCollectionDictionary = new Dictionary<string, TreeNodeCollection>();
+            List<PropertyMetadata> gameSettingsPropertyMetadataList = new List<PropertyMetadata>();
+            treeView1.Nodes.Add(GameTreeNode);
 
             foreach (PropertyMetadata propertyMetadata in configurationMetadata)
             {
                 TreeNodeCollection? categoryTreeNodeCollection = null;
                 if (propertyMetadata.CategoryTitle == "")
                 {
-                    // Put the property into the root node.
-                    categoryTreeNodeCollection = treeView1.Nodes;
+                    // Put the property into the game node.
+                    gameSettingsPropertyMetadataList.Add(propertyMetadata);
                 }
                 else
                 {
@@ -47,50 +49,63 @@ namespace AngbandOS.Configurator.WinForm
                         categoryTreeNodeCollectionDictionary.Add(propertyMetadata.CategoryTitle, categoryTreeNodeCollection);
                         treeView1.Nodes.Add(categoryTreeNode);
                     }
+
+                    // Add a node to the category collection.
+                    TreeNode propertyMetadataTreeNode = categoryTreeNodeCollection.Add(propertyMetadata.PropertyName);
+
+                    // Track the node.
+                    _definitionMetadataByTreeNode.Add(propertyMetadataTreeNode, propertyMetadata);
                 }
-
-                // Add a node to the category collection.
-                TreeNode propertyMetadataTreeNode = categoryTreeNodeCollection.Add(propertyMetadata.PropertyName);
-
-                // Track the node.
-                _definitionMetadataByTreeNode.Add(propertyMetadataTreeNode, propertyMetadata);
             }
+            GamePropertiesMetadata = gameSettingsPropertyMetadataList.ToArray();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            splitContainer2.Panel2.Controls.Clear();
+
             if (e.Node == null)
             {
                 return;
             }
 
-            // Retieve the property metadata.  If the node isn't in our list, then it is a parent node we do not handle.
-            if (!_definitionMetadataByTreeNode.TryGetValue(treeView1.SelectedNode, out PropertyMetadata? propertyMetadata))
-                return;
-
+            // The next blocks will determine which property user control to render.
             UserControl propertyUserControl;
-            switch (propertyMetadata)
+
+            // Check to see if the user selected the pre-defined game settings tree node.
+            if (e.Node == GameTreeNode)
             {
-                case CollectionPropertyMetadata collectionPropertyMetadata:
-                    propertyUserControl = new CollectionPropertyUserControl(collectionPropertyMetadata, configuration, "configuration");
-                    break;
-                case BooleanPropertyMetadata booleanPropertyMetadata:
-                    propertyUserControl = new BooleanPropertyUserControl(booleanPropertyMetadata, configuration);
-                    break;
-                case StringPropertyMetadata stringPropertyMetadata:
-                    propertyUserControl = new StringPropertyUserControl(stringPropertyMetadata, configuration);
-                    break;
-                case IntegerPropertyMetadata integerPropertyMetadata:
-                    propertyUserControl = new IntegerPropertyUserControl(integerPropertyMetadata, configuration);
-                    break;
-                case TuplePropertyMetadata tuplePropertyMetadata:
-                    propertyUserControl = new TuplePropertyUserControl(tuplePropertyMetadata, configuration);
-                    break;
-                default:
-                    MessageBox.Show($"An error occurred building the root metadata tree while processing the metadata property {propertyMetadata.PropertyName}.  The metadata property type {propertyMetadata.GetType().Name} is not supported.");
-                    return;
+                propertyUserControl = new MultiPropertyUserControl(GamePropertiesMetadata, configuration, "configuration");
             }
-            splitContainer2.Panel2.Controls.Clear();
+            else
+            {
+                // Otherwise, retieve the property metadata.  If the node isn't in our list, then it is a parent node we do not handle.
+                if (!_definitionMetadataByTreeNode.TryGetValue(treeView1.SelectedNode, out PropertyMetadata? propertyMetadata))
+                    return;
+
+                switch (propertyMetadata)
+                {
+                    case CollectionPropertyMetadata collectionPropertyMetadata:
+                        propertyUserControl = new CollectionPropertyUserControl(collectionPropertyMetadata, configuration, "configuration");
+                        break;
+                    case BooleanPropertyMetadata booleanPropertyMetadata:
+                        propertyUserControl = new BooleanPropertyUserControl(booleanPropertyMetadata, configuration);
+                        break;
+                    case StringPropertyMetadata stringPropertyMetadata:
+                        propertyUserControl = new StringPropertyUserControl(stringPropertyMetadata, configuration);
+                        break;
+                    case IntegerPropertyMetadata integerPropertyMetadata:
+                        propertyUserControl = new IntegerPropertyUserControl(integerPropertyMetadata, configuration);
+                        break;
+                    case TuplePropertyMetadata tuplePropertyMetadata:
+                        propertyUserControl = new TuplePropertyUserControl(tuplePropertyMetadata, configuration);
+                        break;
+                    default:
+                        MessageBox.Show($"An error occurred building the root metadata tree while processing the metadata property {propertyMetadata.PropertyName}.  The metadata property type {propertyMetadata.GetType().Name} is not supported.");
+                        return;
+                }
+            }
+
             propertyUserControl.Dock = DockStyle.Fill;
             splitContainer2.Panel2.Controls.Add(propertyUserControl);
         }

@@ -8,6 +8,10 @@ public abstract class PropertyMetadata
 {
     public PropertyMetadata(string propertyName)
     {
+        if (String.IsNullOrEmpty(propertyName))
+        {
+            throw new Exception($"The {nameof(propertyName)} parameter cannot be null or empty.");
+        }
         PropertyName = propertyName;
     }
 
@@ -29,7 +33,7 @@ public abstract class PropertyMetadata
     /// <summary>
     /// Returns true, if the property value must be provided by the user.  Returns false, by default.
     /// </summary>
-    public bool IsRequired { get; set; } = false;
+    public bool IsNullable { get; set; } = false;
 
     /// <summary>
     /// Returns true, if the property supports more than one value.  Returns false, by default.

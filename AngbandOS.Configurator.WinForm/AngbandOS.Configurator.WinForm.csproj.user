@@ -13,6 +13,9 @@
     <Compile Update="IntegerPropertyUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="MultiPropertyUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="StringPropertyUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

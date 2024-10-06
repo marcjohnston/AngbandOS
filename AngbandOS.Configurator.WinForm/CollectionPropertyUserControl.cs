@@ -24,7 +24,7 @@ namespace AngbandOS.Configurator.WinForm
             PropertyInfo? collectionPropertyInfo = Configuration.GetType().GetProperty(CollectionPropertyMetadata.PropertyName);
             if (collectionPropertyInfo == null)
             {
-                MessageBox.Show($"The {Breadcrumb} references doesn't have the associated property {CollectionPropertyMetadata.PropertyName}.");
+                MessageBox.Show($"The {Breadcrumb}/{CollectionPropertyMetadata.PropertyName} metadata references a configuration property that is not valid.");
                 return;
             }
 
@@ -44,31 +44,14 @@ namespace AngbandOS.Configurator.WinForm
 
         private void collectionEntitiesListBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            //IConfiguration? collectionConfiguration = (IConfiguration?)CollectionPropertyInfo.GetValue(Configuration);
+            // Get the entity that the user selected from the list box.
+            IConfiguration entityConfiguration = (IConfiguration)collectionEntitiesListBox.SelectedItem!; // ! is valid because list items will always be an object.
+            MultiPropertyUserControl multiPropertyUserControl = new MultiPropertyUserControl(CollectionPropertyMetadata.PropertiesMetadata, entityConfiguration, $"{Breadcrumb}");
 
-            //foreach (PropertyMetadata propertyMetadata in CollectionPropertyMetadata.PropertiesMetadata)
-            //{
-            //    PropertyInfo propertyInfo = Configuration.GetType().GetProperty(CollectionPropertyMetadata.PropertyName);
-            //    UserControl propertyUserControl;
-            //    switch (propertyMetadata)
-            //    {
-            //        case BooleanPropertyMetadata booleanPropertyMetadata:
-            //            propertyUserControl = new BooleanPropertyUserControl(booleanPropertyMetadata, collectionConfiguration[0]);
-            //            break;
-            //        case StringPropertyMetadata stringPropertyMetadata:
-            //            propertyUserControl = new StringPropertyUserControl(stringPropertyMetadata, collectionConfiguration[0]);
-            //            break;
-            //        case IntegerPropertyMetadata integerPropertyMetadata:
-            //            propertyUserControl = new IntegerPropertyUserControl(integerPropertyMetadata, collectionConfiguration[0]);
-            //            break;
-            //        case TuplePropertyMetadata tuplePropertyMetadata:
-            //            propertyUserControl = new TuplePropertyUserControl(tuplePropertyMetadata, collectionConfiguration[0]);
-            //            break;
-            //        default:
-            //            throw new Exception("Unsupported metadata property.");
-            //    }
-            //    //flowLayoutPanel1.Controls.Add(propertyUserControl);
-            //}
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.Panel2.Controls.Clear();
+            splitContainer1.Panel2.Controls.Add(multiPropertyUserControl);
+            splitContainer1.Panel2.ResumeLayout();
         }
     }
 }
