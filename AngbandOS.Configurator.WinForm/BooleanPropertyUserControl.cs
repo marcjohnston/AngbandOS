@@ -5,23 +5,23 @@ namespace AngbandOS.Configurator.WinForm
 {
     public partial class BooleanPropertyUserControl : UserControl
     {
-        public BooleanPropertyUserControl(PropertyMetadata propertyMetadata, IConfiguration configuration)
+        public BooleanPropertyUserControl(PropertyMetadata booleanPropertyMetadata, IConfiguration configuration)
         {
             InitializeComponent();
 
-            PropertyInfo? booleanPropertyInfo = configuration.GetType().GetProperty(propertyMetadata.PropertyName);
+            PropertyInfo? booleanPropertyInfo = configuration.GetType().GetProperty(booleanPropertyMetadata.PropertyName);
             if (booleanPropertyInfo == null)
             {
-                throw new Exception($"Configuration object doesn't have associated {propertyMetadata.PropertyName}.");
+                throw new Exception($"Configuration object doesn't have associated {booleanPropertyMetadata.PropertyName}.");
             }
 
             if (booleanPropertyInfo.PropertyType != typeof(bool))
             {
-                MessageBox.Show($"The boolean property {propertyMetadata.PropertyName} doesn't reference a bool property in the configuration.");
+                MessageBox.Show($"The boolean property {booleanPropertyMetadata.PropertyName} doesn't reference a bool property in the configuration.");
                 return;
             }
-            titleLabel.Text = propertyMetadata.Title ?? propertyMetadata.PropertyName;
-            descriptionLabel.Text = propertyMetadata.Description;
+            titleLabel.Text = booleanPropertyMetadata.Title ?? booleanPropertyMetadata.PropertyName;
+            descriptionLabel.Text = booleanPropertyMetadata.Description;
             object? value = booleanPropertyInfo.GetValue(configuration);
 
             switch (value)
@@ -32,7 +32,7 @@ namespace AngbandOS.Configurator.WinForm
                     checkBox1.Checked = boolValue;
                     break;
                 default:
-                    MessageBox.Show($"The boolean property {propertyMetadata.PropertyName} did not return a bool value from the configuration.");
+                    MessageBox.Show($"The boolean property {booleanPropertyMetadata.PropertyName} did not return a bool value from the configuration.");
                     break;
             }
         }
