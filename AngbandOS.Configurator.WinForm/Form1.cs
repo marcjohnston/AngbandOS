@@ -83,27 +83,7 @@ namespace AngbandOS.Configurator.WinForm
                 if (!_definitionMetadataByTreeNode.TryGetValue(treeView1.SelectedNode, out PropertyMetadata? propertyMetadata))
                     return;
 
-                switch (propertyMetadata)
-                {
-                    case CollectionPropertyMetadata collectionPropertyMetadata:
-                        propertyUserControl = new CollectionPropertyUserControl(collectionPropertyMetadata, configuration, "configuration");
-                        break;
-                    case BooleanPropertyMetadata booleanPropertyMetadata:
-                        propertyUserControl = new BooleanPropertyUserControl(booleanPropertyMetadata, configuration);
-                        break;
-                    case StringPropertyMetadata stringPropertyMetadata:
-                        propertyUserControl = new StringPropertyUserControl(stringPropertyMetadata, configuration);
-                        break;
-                    case IntegerPropertyMetadata integerPropertyMetadata:
-                        propertyUserControl = new IntegerPropertyUserControl(integerPropertyMetadata, configuration);
-                        break;
-                    case TuplePropertyMetadata tuplePropertyMetadata:
-                        propertyUserControl = new TuplePropertyUserControl(tuplePropertyMetadata, configuration);
-                        break;
-                    default:
-                        MessageBox.Show($"An error occurred building the root metadata tree while processing the metadata property {propertyMetadata.PropertyName}.  The metadata property type {propertyMetadata.GetType().Name} is not supported.");
-                        return;
-                }
+                propertyUserControl = new MultiPropertyUserControl(new PropertyMetadata[] { propertyMetadata }, configuration, "configuration");
             }
 
             propertyUserControl.Dock = DockStyle.Fill;

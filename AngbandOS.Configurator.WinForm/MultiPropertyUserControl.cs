@@ -28,6 +28,9 @@ namespace AngbandOS.Configurator.WinForm
                 UserControl propertyUserControl;
                 switch (propertyMetadata)
                 {
+                    case CollectionPropertyMetadata collectionPropertyMetadata:
+                        propertyUserControl = new CollectionPropertyUserControl(collectionPropertyMetadata, configuration, "configuration");
+                        break;
                     case BooleanPropertyMetadata booleanPropertyMetadata:
                         propertyUserControl = new BooleanPropertyUserControl(booleanPropertyMetadata, configuration);
                         break;
