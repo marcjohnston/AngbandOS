@@ -316,7 +316,9 @@ namespace AngbandOS.Web.Hubs
                 // Convert the messages into chat format that they can be sent to the client.
                 List<ChatMessage> chatMessages = new List<ChatMessage>();
                 foreach (MessageDetails message in messages)
+                {
                     chatMessages.Add(await GetChatMessageAsync(message));
+                }
                 return chatMessages.ToArray();
             }
         }
