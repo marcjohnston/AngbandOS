@@ -36,9 +36,10 @@
         Task<MessageDetails?> WriteMessageAsync(string fromId, string? toId, string message, MessageTypeEnum type, string? gameId);
 
         /// <summary>
-        /// Returns messages from the database for any specific user.
+        /// Returns messages from the database for any specific user.  All users get to read all messages that are not sent directly to another user.  Logged in users
+        /// will get to also read all messages but they will also get messages sent directly to them.
         /// </summary>
-        /// <param name="userId">The id of the user requesting the messages or Null for an anonymous user.</param>
+        /// <param name="userId">The id of the user requesting the messages or null for an anonymous user.</param>
         /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned.  Used for scrolling.</param>
         /// <param name="types">List of message types that the user should receive or null for ALL.</param>
         /// <returns></returns>
