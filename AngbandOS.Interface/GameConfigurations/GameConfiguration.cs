@@ -7,7 +7,7 @@ namespace AngbandOS.Core.Interface;
 /// configure a new game.  Use the ConfigurationMetadata object to get metadata details that can be used to generate configuration data.
 /// </summary>
 [Serializable]
-public class Configuration : IConfiguration
+public class GameConfiguration : IGameConfiguration
 {
     ///// <summary>
     ///// Represents the names of the stores that are available in the game.  These store names can any preconfigured Angband store, or a store with a matching
@@ -31,61 +31,61 @@ public class Configuration : IConfiguration
     /// <summary>
     /// Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.
     /// </summary>
-    public TownConfiguration[]? Towns { get; set; } = null;
+    public TownGameConfiguration[]? Towns { get; set; } = null;
 
-    public ShopkeeperConfiguration[]? Shopkeepers { get; set; } = null;
+    public ShopkeeperGameConfiguration[]? Shopkeepers { get; set; } = null;
 
-    public GameCommandConfiguration[]? GameCommands { get; set; } = null;
+    public GameCommandGameConfiguration[]? GameCommands { get; set; } = null;
 
-    public StoreCommandConfiguration[]? StoreCommands { get; set; } = null;
+    public StoreCommandGameConfiguration[]? StoreCommands { get; set; } = null;
 
-    public HelpGroupConfiguration[]? HelpGroups { get; set; } = null;
+    public HelpGroupGameConfiguration[]? HelpGroups { get; set; } = null;
 
-    public MonsterRaceConfiguration[]? MonsterRaces { get; set; } = null;
+    public MonsterRaceGameConfiguration[]? MonsterRaces { get; set; } = null;
 
-    public SymbolConfiguration[]? Symbols { get; set; } = null;
+    public SymbolGameConfiguration[]? Symbols { get; set; } = null;
 
-    public VaultConfiguration[]? Vaults { get; set; } = null;
+    public VaultGameConfiguration[]? Vaults { get; set; } = null;
 
-    public DungeonGuardianConfiguration[]? DungeonGuardians { get; set; } = null;
+    public DungeonGuardianGameConfiguration[]? DungeonGuardians { get; set; } = null;
 
-    public DungeonConfiguration[]? Dungeons { get; set; } = null;
+    public DungeonGameConfiguration[]? Dungeons { get; set; } = null;
 
-    public StoreFactoryConfiguration[]? StoreFactories { get; set; } = null;
+    public StoreFactoryGameConfiguration[]? StoreFactories { get; set; } = null;
 
-    public ProjectileGraphicConfiguration[]? ProjectileGraphics { get; set; } = null;
+    public ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? AmuletReadableFlavors{ get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? AmuletReadableFlavors{ get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? MushroomReadableFlavors { get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? MushroomReadableFlavors { get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? PotionReadableFlavors { get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? PotionReadableFlavors { get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? RingReadableFlavors { get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? RingReadableFlavors { get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? RodReadableFlavors { get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? RodReadableFlavors { get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? ScrollReadableFlavors { get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? ScrollReadableFlavors { get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? StaffReadableFlavors { get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? StaffReadableFlavors { get; set; } = null;
 
-    public ReadableFlavorConfiguration[]? WandReadableFlavors { get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? WandReadableFlavors { get; set; } = null;
 
-    public ClassSpellConfiguration[]? ClassSpells { get; set; } = null;
+    public ClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
 
-    public WizardCommandConfiguration[]? WizardCommands { get; set; } = null;
+    public WizardCommandGameConfiguration[]? WizardCommands { get; set; } = null;
 
-    public TileConfiguration[]? Tiles { get; set; } = null;
+    public TileGameConfiguration[]? Tiles { get; set; } = null;
 
-    public AnimationConfiguration[]? Animations { get; set; } = null;
+    public AnimationGameConfiguration[]? Animations { get; set; } = null;
 
-    public SpellConfiguration[]? Spells { get; set; } = null;
+    public SpellGameConfiguration[]? Spells { get; set; } = null;
 
-    public PluralConfiguration[]? Plurals { get; set; } = null;
+    public PluralGameConfiguration[]? Plurals { get; set; } = null;
 
-    public AttackConfiguration[]? Attacks { get; set; } = null;
+    public AttackGameConfiguration[]? Attacks { get; set; } = null;
 
-    public GodConfiguration[]? Gods { get; set; } = null;
+    public GodGameConfiguration[]? Gods { get; set; } = null;
 
     public string[]? ElvishTexts { get; set; } = null;
     public string[]? FindQuests { get; set; } = null;
@@ -402,7 +402,7 @@ public class Configuration : IConfiguration
             };
         }
     }
-    private static TDefinition[] RetrieveEntities<TDefinition>(ICorePersistentStorage persistentStorage, string repositoryName) where TDefinition : IConfiguration
+    private static TDefinition[] RetrieveEntities<TDefinition>(ICorePersistentStorage persistentStorage, string repositoryName) where TDefinition : IGameConfiguration
     {
         string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
         List<TDefinition> entities = new List<TDefinition>();
@@ -431,38 +431,38 @@ public class Configuration : IConfiguration
         return values;
     }
 
-    public static Configuration LoadConfiguration(ICorePersistentStorage? persistentStorage)
+    public static GameConfiguration LoadConfiguration(ICorePersistentStorage? persistentStorage)
     {
-        return new Configuration()
+        return new GameConfiguration()
         {
-            AmuletReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "AmuletReadableFlavors"),
-            Animations = RetrieveEntities<AnimationConfiguration>(persistentStorage, "Animations"),
-            Attacks = RetrieveEntities<AttackConfiguration>(persistentStorage, "Attacks"),
-            ClassSpells = RetrieveEntities<ClassSpellConfiguration>(persistentStorage, "ClassSpells"),
-            DungeonGuardians = RetrieveEntities<DungeonGuardianConfiguration>(persistentStorage, "DungeonGuardians"),
-            Dungeons = RetrieveEntities<DungeonConfiguration>(persistentStorage, "Dungeons"),
-            GameCommands = RetrieveEntities<GameCommandConfiguration>(persistentStorage, "GameCommands"),
-            Gods = RetrieveEntities<GodConfiguration>(persistentStorage, "Gods"),
-            HelpGroups = RetrieveEntities<HelpGroupConfiguration>(persistentStorage, "HelpGroups"),
-            MonsterRaces = RetrieveEntities<MonsterRaceConfiguration>(persistentStorage, "MonsterRaces"),
-            MushroomReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "MushroomReadableFlavors"),
-            Plurals = RetrieveEntities<PluralConfiguration>(persistentStorage, "Plurals"),
-            PotionReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "PotionReadableFlavors"),
-            ProjectileGraphics = RetrieveEntities<ProjectileGraphicConfiguration>(persistentStorage, "ProjectileGraphics"),
-            RingReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "RingReadableFlavors"),
-            RodReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "RodReadableFlavors"),
-            ScrollReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "ScrollReadableFlavors"),
-            Shopkeepers = RetrieveEntities<ShopkeeperConfiguration>(persistentStorage, "Shopkeepers"),
-            Spells = RetrieveEntities<SpellConfiguration>(persistentStorage, "Spells"),
-            StaffReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "StaffReadableFlavors"),
-            StoreCommands = RetrieveEntities<StoreCommandConfiguration>(persistentStorage, "StoreCommands"),
-            StoreFactories = RetrieveEntities<StoreFactoryConfiguration>(persistentStorage, "StoreFactories"),
-            Symbols = RetrieveEntities<SymbolConfiguration>(persistentStorage, "Symbols"),
+            AmuletReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "AmuletReadableFlavors"),
+            Animations = RetrieveEntities<AnimationGameConfiguration>(persistentStorage, "Animations"),
+            Attacks = RetrieveEntities<AttackGameConfiguration>(persistentStorage, "Attacks"),
+            ClassSpells = RetrieveEntities<ClassSpellGameConfiguration>(persistentStorage, "ClassSpells"),
+            DungeonGuardians = RetrieveEntities<DungeonGuardianGameConfiguration>(persistentStorage, "DungeonGuardians"),
+            Dungeons = RetrieveEntities<DungeonGameConfiguration>(persistentStorage, "Dungeons"),
+            GameCommands = RetrieveEntities<GameCommandGameConfiguration>(persistentStorage, "GameCommands"),
+            Gods = RetrieveEntities<GodGameConfiguration>(persistentStorage, "Gods"),
+            HelpGroups = RetrieveEntities<HelpGroupGameConfiguration>(persistentStorage, "HelpGroups"),
+            MonsterRaces = RetrieveEntities<MonsterRaceGameConfiguration>(persistentStorage, "MonsterRaces"),
+            MushroomReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "MushroomReadableFlavors"),
+            Plurals = RetrieveEntities<PluralGameConfiguration>(persistentStorage, "Plurals"),
+            PotionReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "PotionReadableFlavors"),
+            ProjectileGraphics = RetrieveEntities<ProjectileGraphicGameConfiguration>(persistentStorage, "ProjectileGraphics"),
+            RingReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "RingReadableFlavors"),
+            RodReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "RodReadableFlavors"),
+            ScrollReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "ScrollReadableFlavors"),
+            Shopkeepers = RetrieveEntities<ShopkeeperGameConfiguration>(persistentStorage, "Shopkeepers"),
+            Spells = RetrieveEntities<SpellGameConfiguration>(persistentStorage, "Spells"),
+            StaffReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "StaffReadableFlavors"),
+            StoreCommands = RetrieveEntities<StoreCommandGameConfiguration>(persistentStorage, "StoreCommands"),
+            StoreFactories = RetrieveEntities<StoreFactoryGameConfiguration>(persistentStorage, "StoreFactories"),
+            Symbols = RetrieveEntities<SymbolGameConfiguration>(persistentStorage, "Symbols"),
             //Tiles = RetrieveEntities<TileConfiguration>(persistentStorage, "Tiles"), // TODO: This is not working with generic
-            Towns = RetrieveEntities<TownConfiguration>(persistentStorage, "Towns"),
-            Vaults = RetrieveEntities<VaultConfiguration>(persistentStorage, "Vaults"),
-            WandReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "WandReadableFlavors"),
-            WizardCommands = RetrieveEntities<WizardCommandConfiguration>(persistentStorage, "WizardCommands"),
+            Towns = RetrieveEntities<TownGameConfiguration>(persistentStorage, "Towns"),
+            Vaults = RetrieveEntities<VaultGameConfiguration>(persistentStorage, "Vaults"),
+            WandReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "WandReadableFlavors"),
+            WizardCommands = RetrieveEntities<WizardCommandGameConfiguration>(persistentStorage, "WizardCommands"),
 
             ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
             FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),

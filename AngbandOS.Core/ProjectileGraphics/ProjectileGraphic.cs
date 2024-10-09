@@ -24,13 +24,13 @@ internal abstract class ProjectileGraphic : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        ProjectileGraphicConfiguration projectileGraphicDefinition = new()
+        ProjectileGraphicGameConfiguration projectileGraphicDefinition = new()
         {
             Key = Key,
             Character = Character,
             Color = Color
         };
-        return JsonSerializer.Serialize<ProjectileGraphicConfiguration>(projectileGraphicDefinition);
+        return JsonSerializer.Serialize<ProjectileGraphicGameConfiguration>(projectileGraphicDefinition);
     }
 
     public virtual string Key => GetType().Name;

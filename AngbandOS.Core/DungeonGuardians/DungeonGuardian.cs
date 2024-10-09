@@ -41,12 +41,12 @@ internal abstract class DungeonGuardian : IGetKey
 
     public string ToJson()
     {
-        DungeonGuardianConfiguration dungeonGuardian = new()
+        DungeonGuardianGameConfiguration dungeonGuardian = new()
         {
             Key = Key,
             MonsterRaceName = MonsterRaceName,
             LevelFound = LevelFound
         };
-        return JsonSerializer.Serialize<DungeonGuardianConfiguration>(dungeonGuardian);
+        return JsonSerializer.Serialize<DungeonGuardianGameConfiguration>(dungeonGuardian);
     }
 }

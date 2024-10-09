@@ -2,7 +2,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class PluralConfiguration : IConfiguration
+public class PluralGameConfiguration : IGameConfiguration
 {
     /// <summary>
     /// Returns the capitalized singular version of the noun.

@@ -9,18 +9,23 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class WizardCommandConfiguration : IConfiguration
+public class DungeonGuardianGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual char KeyChar { get; set; }
-    public virtual bool IsEnabled { get; set; } = true;
-    public virtual string? HelpGroupName { get; set; } = null;
-    public virtual string HelpDescription { get; set; } = "";
-    public virtual string? ExecuteScriptName { get; set; } = null;
+
+    /// <summary>
+    /// Returns the name of the race for the first quest monster.
+    /// </summary>
+    public virtual string MonsterRaceName { get; set; }
+
+    /// <summary>
+    /// The level for the fixed quest.
+    /// </summary>
+    public virtual int LevelFound { get; set; }
 
     public bool IsValid()
     {
-        if (Key == null || KeyChar == null || IsEnabled == null || HelpDescription == null)
+        if (Key == null || MonsterRaceName == null || LevelFound == null)
         {
             return false;
         }
@@ -32,4 +37,3 @@ public class WizardCommandConfiguration : IConfiguration
         return Key;
     }
 }
-

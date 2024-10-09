@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class GodConfiguration : IConfiguration
+public class GodGameConfiguration : IGameConfiguration
 {
     public virtual string LongName { get; set; }
     public virtual string ShortName { get; set; }

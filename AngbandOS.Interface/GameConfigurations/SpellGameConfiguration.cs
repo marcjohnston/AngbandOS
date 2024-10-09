@@ -3,7 +3,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class SpellConfiguration : IConfiguration
+public class SpellGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
 

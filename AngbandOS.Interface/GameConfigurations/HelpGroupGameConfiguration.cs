@@ -5,27 +5,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class DungeonGuardianConfiguration : IConfiguration
+public class HelpGroupGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
 
-    /// <summary>
-    /// Returns the name of the race for the first quest monster.
-    /// </summary>
-    public virtual string MonsterRaceName { get; set; }
+    public virtual int SortIndex { get; set; }
 
-    /// <summary>
-    /// The level for the fixed quest.
-    /// </summary>
-    public virtual int LevelFound { get; set; }
+    public virtual string Title { get; set; }
 
     public bool IsValid()
     {
-        if (Key == null || MonsterRaceName == null || LevelFound == null)
+        if (Key == null || SortIndex == null || Title == null)
         {
             return false;
         }

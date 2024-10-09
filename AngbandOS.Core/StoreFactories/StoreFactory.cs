@@ -21,7 +21,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        StoreFactoryConfiguration definition = new()
+        StoreFactoryGameConfiguration definition = new()
         {
             IsEmptyLot = IsEmptyLot,
             BuildingsMadeFromPermanentRock = BuildingsMadeFromPermanentRock,

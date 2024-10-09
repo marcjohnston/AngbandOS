@@ -29,7 +29,7 @@ internal abstract class Tile : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        TileConfiguration tileDefinition = new TileConfiguration()
+        TileGameConfiguration tileDefinition = new TileGameConfiguration()
         {
             AllowMonsterToOccupy = AllowMonsterToOccupy,
             AlterActionName = AlterActionName,
@@ -76,7 +76,7 @@ internal abstract class Tile : IGetKey
             SymbolName = SymbolName,
             YellowInTorchlight = YellowInTorchlight
         };
-        return JsonSerializer.Serialize<TileConfiguration>(tileDefinition);
+        return JsonSerializer.Serialize<TileGameConfiguration>(tileDefinition);
     }
     public virtual string Key => GetType().Name;
     public string GetKey => Key;

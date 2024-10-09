@@ -9,21 +9,24 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ShopkeeperConfiguration : IConfiguration
+public class TownGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
-
-    public virtual int MaxCost { get; set; }
-
-    public virtual int MinInflate { get; set; }
-
+    public virtual char Char { get; set; }
+    public virtual int HousePrice { get; set; }
     public virtual string Name { get; set; }
+    public virtual string[] StoreFactoryNames { get; set; }
+    public virtual bool CanBeEscortedHere { get; set; } = true;
 
-    public virtual string? RaceName { get; set; }
+    public virtual bool AllowStartupTown { get; set; } = true;
+
+    public virtual string DungeonName { get; set; }
+
+    public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
 
     public bool IsValid()
     {
-        if (Key == null || MaxCost == null || MinInflate == null || Name == null)
+        if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null || DungeonName == null)
         {
             return false;
         }

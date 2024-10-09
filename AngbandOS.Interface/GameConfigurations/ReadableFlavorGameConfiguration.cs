@@ -5,23 +5,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class HelpGroupConfiguration : IConfiguration
+public class ReadableFlavorGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
-
-    public virtual int SortIndex { get; set; }
-
-    public virtual string Title { get; set; }
+    public virtual string SymbolName { get; set; }
+    public virtual ColorEnum Color { get; set; }
+    public virtual string Name { get; set; }
+    public virtual bool CanBeAssigned { get; set; }
 
     public bool IsValid()
     {
-        if (Key == null || SortIndex == null || Title == null)
-        {
-            return false;
-        }
         return true;
     }
 

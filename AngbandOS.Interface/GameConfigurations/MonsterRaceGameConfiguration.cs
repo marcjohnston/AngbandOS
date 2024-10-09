@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Interface;
 /// 102 Properties
 /// </remarks>
 [Serializable]
-public class MonsterRaceConfiguration : IConfiguration
+public class MonsterRaceGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
 

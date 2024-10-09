@@ -25,7 +25,7 @@ internal abstract class ReadableFlavor : Flavor, IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        ReadableFlavorConfiguration readableFlavorDefinition = new()
+        ReadableFlavorGameConfiguration readableFlavorDefinition = new()
         {
             Key = Key,
             SymbolName = SymbolName,
@@ -33,7 +33,7 @@ internal abstract class ReadableFlavor : Flavor, IGetKey
             CanBeAssigned = CanBeAssigned,
             Name = Name
         };
-        return JsonSerializer.Serialize<ReadableFlavorConfiguration>(readableFlavorDefinition);
+        return JsonSerializer.Serialize<ReadableFlavorGameConfiguration>(readableFlavorDefinition);
     }
 
     /// <summary>

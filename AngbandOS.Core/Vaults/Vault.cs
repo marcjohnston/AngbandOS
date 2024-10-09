@@ -33,7 +33,7 @@ internal abstract class Vault : IGetKey
 
     public string ToJson()
     {
-        VaultConfiguration vaultDefinition = new()
+        VaultGameConfiguration vaultDefinition = new()
         {
             Key = Key,
             Color = Color,
@@ -44,6 +44,6 @@ internal abstract class Vault : IGetKey
             Text = Text,
             Width = Width
         };
-        return JsonSerializer.Serialize<VaultConfiguration>(vaultDefinition);
+        return JsonSerializer.Serialize<VaultGameConfiguration>(vaultDefinition);
     }
 }

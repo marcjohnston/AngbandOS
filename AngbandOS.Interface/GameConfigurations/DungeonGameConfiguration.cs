@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class DungeonConfiguration : IConfiguration
+public class DungeonGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
 

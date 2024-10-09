@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GenericRingReadableFlavor : RingReadableFlavor
 {
-    public GenericRingReadableFlavor(Game game, ReadableFlavorConfiguration readableFlavorDefninition) : base(game)
+    public GenericRingReadableFlavor(Game game, ReadableFlavorGameConfiguration readableFlavorDefninition) : base(game)
     {
         Key = readableFlavorDefninition.Key;
         Name = readableFlavorDefninition.Name;

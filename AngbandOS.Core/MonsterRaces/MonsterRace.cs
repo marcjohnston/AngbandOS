@@ -525,7 +525,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
 
     public string ToJson()
     {
-        MonsterRaceConfiguration monsterRaceDefinition = new()
+        MonsterRaceGameConfiguration monsterRaceDefinition = new()
         {
             // 102 Properties
             Key = Key,
@@ -627,7 +627,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
             Unique = Unique,
             WeirdMind = WeirdMind
         };
-        return JsonSerializer.Serialize<MonsterRaceConfiguration>(monsterRaceDefinition);
+        return JsonSerializer.Serialize<MonsterRaceGameConfiguration>(monsterRaceDefinition);
     }
     #endregion
 

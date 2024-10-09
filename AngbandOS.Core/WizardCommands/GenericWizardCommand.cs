@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class GenericWizardCommand : WizardCommand
 {
-    public GenericWizardCommand(Game game, WizardCommandConfiguration wizardCommandDefinition) : base(game)
+    public GenericWizardCommand(Game game, WizardCommandGameConfiguration wizardCommandDefinition) : base(game)
     {
         Key = wizardCommandDefinition.Key;
         KeyChar = wizardCommandDefinition.KeyChar;

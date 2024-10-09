@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class SymbolConfiguration : IConfiguration
+public class SymbolGameConfiguration : IGameConfiguration
 {
     public virtual char Character { get; set; }
     public virtual char? QueryCharacter { get; set; } = null;

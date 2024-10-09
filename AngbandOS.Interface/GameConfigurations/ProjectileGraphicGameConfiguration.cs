@@ -2,7 +2,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ProjectileGraphicConfiguration : IConfiguration
+public class ProjectileGraphicGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
 

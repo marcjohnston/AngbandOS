@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class StoreFactoryConfiguration : IConfiguration
+public class StoreFactoryGameConfiguration : IGameConfiguration
 {
-    public StoreFactoryConfiguration()
+    public StoreFactoryGameConfiguration()
     {
         Key = GetType().Name;
         MaxInventory = PageSize;

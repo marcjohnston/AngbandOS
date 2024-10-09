@@ -10,7 +10,7 @@ namespace AngbandOS.Core.HelpGroups;
 [Serializable]
 internal class GenericHelpGroup : HelpGroup
 {
-    public GenericHelpGroup(Game game, HelpGroupConfiguration helpGroupDefinition) : base(game)
+    public GenericHelpGroup(Game game, HelpGroupGameConfiguration helpGroupDefinition) : base(game)
     {
         Key = helpGroupDefinition.Key;
         SortIndex = helpGroupDefinition.SortIndex;

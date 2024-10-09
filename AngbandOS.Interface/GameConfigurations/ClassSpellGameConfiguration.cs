@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ClassSpellConfiguration : IConfiguration
+public class ClassSpellGameConfiguration : IGameConfiguration
 {
     public virtual string SpellName { get; set; }
     public virtual string CharacterClassName { get; set; }

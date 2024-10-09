@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class GenericGameCommand : GameCommand
 {
-    public GenericGameCommand(Game game, GameCommandConfiguration gameCommandDefinition) : base(game)
+    public GenericGameCommand(Game game, GameCommandGameConfiguration gameCommandDefinition) : base(game)
     {
         Key = gameCommandDefinition.Key;
         KeyChar = gameCommandDefinition.KeyChar;

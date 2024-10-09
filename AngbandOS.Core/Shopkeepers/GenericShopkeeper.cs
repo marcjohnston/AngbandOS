@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Shopkeepers;
 [Serializable]
 internal class GenericShopkeeper : Shopkeeper
 {
-    public GenericShopkeeper(Game game, ShopkeeperConfiguration shopkeeper) : base(game)
+    public GenericShopkeeper(Game game, ShopkeeperGameConfiguration shopkeeper) : base(game)
     {
         Key = shopkeeper.Key;
         MaxCost = shopkeeper.MaxCost;

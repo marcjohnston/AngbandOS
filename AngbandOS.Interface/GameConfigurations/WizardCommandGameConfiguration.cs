@@ -9,24 +9,18 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class TownConfiguration : IConfiguration
+public class WizardCommandGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual char Char { get; set; }
-    public virtual int HousePrice { get; set; }
-    public virtual string Name { get; set; }
-    public virtual string[] StoreFactoryNames { get; set; }
-    public virtual bool CanBeEscortedHere { get; set; } = true;
-
-    public virtual bool AllowStartupTown { get; set; } = true;
-
-    public virtual string DungeonName { get; set; }
-
-    public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
+    public virtual char KeyChar { get; set; }
+    public virtual bool IsEnabled { get; set; } = true;
+    public virtual string? HelpGroupName { get; set; } = null;
+    public virtual string HelpDescription { get; set; } = "";
+    public virtual string? ExecuteScriptName { get; set; } = null;
 
     public bool IsValid()
     {
-        if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null || DungeonName == null)
+        if (Key == null || KeyChar == null || IsEnabled == null || HelpDescription == null)
         {
             return false;
         }
@@ -38,3 +32,4 @@ public class TownConfiguration : IConfiguration
         return Key;
     }
 }
+

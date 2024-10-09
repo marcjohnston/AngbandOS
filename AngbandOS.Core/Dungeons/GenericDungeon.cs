@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class GenericDungeon : Dungeon
 {
-    public GenericDungeon(Game game, DungeonConfiguration dungeonDefinition) : base(game)
+    public GenericDungeon(Game game, DungeonGameConfiguration dungeonDefinition) : base(game)
     {
         Key = dungeonDefinition.Key;
         BaseOffset = dungeonDefinition.BaseOffset;

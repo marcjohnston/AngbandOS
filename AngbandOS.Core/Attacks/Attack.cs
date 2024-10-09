@@ -28,7 +28,7 @@ internal abstract class Attack : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        AttackConfiguration definition = new()
+        AttackGameConfiguration definition = new()
         {
             MonsterAction = MonsterAction,
             PlayerAction = PlayerAction,
@@ -40,7 +40,7 @@ internal abstract class Attack : IGetKey
             AttackCutsTarget = AttackCutsTarget,
             RendersMissMessage = RendersMissMessage
         };
-        return JsonSerializer.Serialize<AttackConfiguration>(definition);
+        return JsonSerializer.Serialize<AttackGameConfiguration>(definition);
     }
 
     public string GetKey => Key;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface;
 /// <summary>
 /// Represents the interface a configuration object need to implement to store user configurable settings for initializing game objects.
 /// </summary>
-public interface IConfiguration
+public interface IGameConfiguration
 {
     /// <summary>
     /// Returns true, if the supplied values are valid; false, otherwise.

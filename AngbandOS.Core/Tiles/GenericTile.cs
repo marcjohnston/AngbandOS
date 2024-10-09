@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class GenericTile : Tile
 {
-    public GenericTile(Game game, TileConfiguration tileDefinition) : base(game)
+    public GenericTile(Game game, TileGameConfiguration tileDefinition) : base(game)
     {
         AllowMonsterToOccupy = tileDefinition.AllowMonsterToOccupy;
         AlterActionName = tileDefinition.AlterActionName;

@@ -32,7 +32,7 @@ internal abstract class Spell : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        SpellConfiguration definition = new()
+        SpellGameConfiguration definition = new()
         {
             Key = Key,
             CastScriptName = CastScriptName,
@@ -40,7 +40,7 @@ internal abstract class Spell : IGetKey
             Name = Name,
             LearnedDetails = LearnedDetails
         };
-        return JsonSerializer.Serialize<SpellConfiguration>(definition);
+        return JsonSerializer.Serialize<SpellGameConfiguration>(definition);
     }
 
     public virtual string Key => GetType().Name;

@@ -247,7 +247,7 @@ public class GameServer
     /// <param name="updateMonitor"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public bool PlayNewGame(IConsoleViewPort console, ICorePersistentStorage? persistentStorage, Configuration? configuration = null)
+    public bool PlayNewGame(IConsoleViewPort console, ICorePersistentStorage? persistentStorage, GameConfiguration? configuration = null)
     {
         if (console == null)
         {

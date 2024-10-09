@@ -108,7 +108,7 @@ internal abstract class Town : IGetKey
 
     public string ToJson()
     {
-        TownConfiguration townDefinition = new()
+        TownGameConfiguration townDefinition = new()
         {
             Key = Key,
             DungeonName = DungeonName,
@@ -120,6 +120,6 @@ internal abstract class Town : IGetKey
             UnusedStoreLotsAreGraveyards = UnusedStoreLotsAreGraveyards,
             StoreFactoryNames = Stores.Select(_store => _store.StoreFactory.Key).ToArray(),
         };
-        return JsonSerializer.Serialize<TownConfiguration>(townDefinition);
+        return JsonSerializer.Serialize<TownGameConfiguration>(townDefinition);
     }
 }

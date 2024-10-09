@@ -1,7 +1,7 @@
 ﻿
 namespace AngbandOS.Core.Interface;
 
-public class AnimationConfiguration : IConfiguration
+public class AnimationGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual char Character { get; set; }

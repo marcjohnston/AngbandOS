@@ -187,7 +187,7 @@ internal abstract class Dungeon : IGetKey
 
     public string ToJson()
     {
-        DungeonConfiguration dungeon = new()
+        DungeonGameConfiguration dungeon = new()
         {
             Key = Key,
             BaseOffset = BaseOffset,
@@ -199,6 +199,6 @@ internal abstract class Dungeon : IGetKey
             Shortname = Shortname,
             Tower = Tower
         };
-        return JsonSerializer.Serialize<DungeonConfiguration>(dungeon);
+        return JsonSerializer.Serialize<DungeonGameConfiguration>(dungeon);
     }
 }

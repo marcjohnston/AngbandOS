@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class AttackConfiguration : IConfiguration
+public class AttackGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class TileConfiguration : IConfiguration
+public class TileGameConfiguration : IGameConfiguration
 {
     protected virtual string? OnJammedTileName => null;
     protected virtual string? VisibleTreasureForTileName => null;

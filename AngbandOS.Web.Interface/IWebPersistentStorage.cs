@@ -44,5 +44,7 @@
         /// <param name="types">List of message types that the user should receive or null for ALL.</param>
         /// <returns></returns>
         Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types);
+
+        Task<GameConfiguration> GetConfiguration(string gameConfigurationId)
     }
 }

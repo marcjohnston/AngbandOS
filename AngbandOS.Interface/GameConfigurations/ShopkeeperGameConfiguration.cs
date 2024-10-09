@@ -9,16 +9,24 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ReadableFlavorConfiguration : IConfiguration
+public class ShopkeeperGameConfiguration : IGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual string SymbolName { get; set; }
-    public virtual ColorEnum Color { get; set; }
+
+    public virtual int MaxCost { get; set; }
+
+    public virtual int MinInflate { get; set; }
+
     public virtual string Name { get; set; }
-    public virtual bool CanBeAssigned { get; set; }
+
+    public virtual string? RaceName { get; set; }
 
     public bool IsValid()
     {
+        if (Key == null || MaxCost == null || MinInflate == null || Name == null)
+        {
+            return false;
+        }
         return true;
     }
 

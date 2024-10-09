@@ -16,7 +16,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GenericMonsterRace : MonsterRace
 {
-    public GenericMonsterRace(Game game, MonsterRaceConfiguration monsterRaceDefinition) : base(game)
+    public GenericMonsterRace(Game game, MonsterRaceGameConfiguration monsterRaceDefinition) : base(game)
     {
         // 102 Properties
         Key = monsterRaceDefinition.Key;

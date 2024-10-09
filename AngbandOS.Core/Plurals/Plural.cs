@@ -17,12 +17,12 @@ internal abstract class Plural : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        PluralConfiguration definition = new()
+        PluralGameConfiguration definition = new()
         {
             Key = Key,
             PluralForm = PluralForm,
         };
-        return JsonSerializer.Serialize<PluralConfiguration>(definition);
+        return JsonSerializer.Serialize<PluralGameConfiguration>(definition);
     }
 
     /// <summary>

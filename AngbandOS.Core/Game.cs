@@ -48,7 +48,7 @@ internal class Game
     public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
 
     [Obsolete("Configuration properties should be available in the Game object.  The configuration object is only used to transfer properties from the caller to the Game object.")]
-    public readonly Configuration? Configuration = null;
+    public readonly GameConfiguration? Configuration = null;
 
     /// <summary>
     /// Returns the maximum level of light that the player is allowed to have.  Returns 5, by default.  The <see cref="UpdateLightFlaggedAction"/> uses a precomputed algorithm for processing the
@@ -1076,12 +1076,12 @@ public bool IsDead = false;
     /// Allocates all storage and creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    public Game(Configuration? configuration)
+    public Game(GameConfiguration? configuration)
     {
         // We need a default configuration, if one isn't provided.
         if (configuration == null)
         {
-            configuration = new Configuration();
+            configuration = new GameConfiguration();
         }
 
         // Save the configuration.  This configuration becomes permanent.

@@ -27,7 +27,7 @@ internal abstract class Animation : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        AnimationConfiguration animationDefinition = new()
+        AnimationGameConfiguration animationDefinition = new()
         {
             AlternateColor = AlternateColor,
             Character = Character,
@@ -36,7 +36,7 @@ internal abstract class Animation : IGetKey
             Name = Name,
             Sequence = Sequence
         };
-        return JsonSerializer.Serialize<AnimationConfiguration>(animationDefinition);
+        return JsonSerializer.Serialize<AnimationGameConfiguration>(animationDefinition);
     }
 
     public virtual string Key => GetType().Name;

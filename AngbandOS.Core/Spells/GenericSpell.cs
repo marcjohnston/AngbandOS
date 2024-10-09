@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells;
 [Serializable]
 internal class GenericSpell : Spell
 {
-    public GenericSpell(Game game, SpellConfiguration definition) : base(game)
+    public GenericSpell(Game game, SpellGameConfiguration definition) : base(game)
     {
         Key = definition.Key;
         Name = definition.Name;

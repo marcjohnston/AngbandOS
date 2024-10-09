@@ -25,13 +25,13 @@ internal abstract class HelpGroup : IGetKey, IToJson
 
     public string ToJson()
     {
-        HelpGroupConfiguration helpGroupDefinition = new()
+        HelpGroupGameConfiguration helpGroupDefinition = new()
         {
             Key = Key,
             Title = Title,
             SortIndex= SortIndex,
         };
-        return JsonSerializer.Serialize<HelpGroupConfiguration>(helpGroupDefinition);
+        return JsonSerializer.Serialize<HelpGroupGameConfiguration>(helpGroupDefinition);
     }
 
     public abstract string Title { get; }

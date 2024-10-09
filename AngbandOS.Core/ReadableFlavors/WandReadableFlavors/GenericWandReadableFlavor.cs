@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GenericWandReadableFlavor : WandReadableFlavor
 {
-    public GenericWandReadableFlavor(Game game, ReadableFlavorConfiguration readableFlavorDefninition) : base(game)
+    public GenericWandReadableFlavor(Game game, ReadableFlavorGameConfiguration readableFlavorDefninition) : base(game)
     {
         Key = readableFlavorDefninition.Key;
         Name = readableFlavorDefninition.Name;
