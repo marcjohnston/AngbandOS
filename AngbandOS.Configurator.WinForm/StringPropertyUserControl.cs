@@ -5,7 +5,7 @@ namespace AngbandOS.Configurator.WinForm
 {
     public partial class StringPropertyUserControl : UserControl, IPropertyUserControl
     {
-        public StringPropertyUserControl(PropertyMetadata stringPropertyMetadata, IConfiguration configuration)
+        public StringPropertyUserControl(PropertyMetadata stringPropertyMetadata, IGameConfiguration configuration)
         {
             InitializeComponent();
 

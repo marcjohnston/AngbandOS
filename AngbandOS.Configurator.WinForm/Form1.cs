@@ -9,7 +9,7 @@ namespace AngbandOS.Configurator.WinForm
         /// Maps tree nodes to their associated PropertyMetadata.
         /// </summary>
         private readonly Dictionary<TreeNode, PropertyMetadata> _definitionMetadataByTreeNode = new Dictionary<TreeNode, PropertyMetadata>();
-        private Configuration configuration;
+        private GameConfiguration configuration;
         private TreeNode GameTreeNode = new TreeNode("Game Setings");
         private PropertyMetadata[] GamePropertiesMetadata;
 
@@ -23,8 +23,8 @@ namespace AngbandOS.Configurator.WinForm
             string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
             ICorePersistentStorage persistentStorage = new FileSystemPersistentStorage(saveFilename);
-            configuration = Configuration.LoadConfiguration(persistentStorage);
-            PropertyMetadata[] configurationMetadata = Configuration.Metadata;
+            configuration = GameConfiguration.LoadConfiguration(persistentStorage);
+            PropertyMetadata[] configurationMetadata = GameConfiguration.Metadata;
             Dictionary<string, TreeNodeCollection> categoryTreeNodeCollectionDictionary = new Dictionary<string, TreeNodeCollection>();
             List<PropertyMetadata> gameSettingsPropertyMetadataList = new List<PropertyMetadata>();
             treeView1.Nodes.Add(GameTreeNode);

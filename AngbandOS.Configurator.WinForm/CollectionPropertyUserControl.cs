@@ -6,10 +6,10 @@ namespace AngbandOS.Configurator.WinForm
     public partial class CollectionPropertyUserControl : UserControl, IPropertyUserControl
     {
         private readonly CollectionPropertyMetadata CollectionPropertyMetadata;
-        private readonly IConfiguration Configuration;
+        private readonly IGameConfiguration Configuration;
         private readonly string Breadcrumb;
 
-        public CollectionPropertyUserControl(CollectionPropertyMetadata collectionPropertyMetadata, IConfiguration configuration, string breadcrumb)
+        public CollectionPropertyUserControl(CollectionPropertyMetadata collectionPropertyMetadata, IGameConfiguration configuration, string breadcrumb)
         {
             InitializeComponent();
 
@@ -29,13 +29,13 @@ namespace AngbandOS.Configurator.WinForm
             }
 
             // A collection refers to an array of a complex object.
-            IConfiguration[]? collectionConfiguration = (IConfiguration[]?)collectionPropertyInfo.GetValue(Configuration);
+            IGameConfiguration[]? collectionConfiguration = (IGameConfiguration[]?)collectionPropertyInfo.GetValue(Configuration);
 
             // Check to see if there are entities in the collection.
             if (collectionConfiguration != null)
             {
                 // Enumerate the entities and put them into the listbox.
-                foreach (IConfiguration collectionConfigurationItem in collectionConfiguration)
+                foreach (IGameConfiguration collectionConfigurationItem in collectionConfiguration)
                 {
                     collectionEntitiesListBox.Items.Add(collectionConfigurationItem);
                 }
@@ -45,7 +45,7 @@ namespace AngbandOS.Configurator.WinForm
         private void collectionEntitiesListBox_SelectedValueChanged(object sender, EventArgs e)
         {
             // Get the entity that the user selected from the list box.
-            IConfiguration entityConfiguration = (IConfiguration)collectionEntitiesListBox.SelectedItem!; // ! is valid because list items will always be an object.
+            IGameConfiguration entityConfiguration = (IGameConfiguration)collectionEntitiesListBox.SelectedItem!; // ! is valid because list items will always be an object.
             MultiPropertyUserControl multiPropertyUserControl = new MultiPropertyUserControl(CollectionPropertyMetadata.PropertiesMetadata, entityConfiguration, $"{Breadcrumb}");
 
       //      splitContainer1.Panel2.SuspendLayout();

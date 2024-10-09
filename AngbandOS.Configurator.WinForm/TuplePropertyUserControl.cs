@@ -5,7 +5,7 @@ namespace AngbandOS.Configurator.WinForm
 {
     public partial class TuplePropertyUserControl : UserControl, IPropertyUserControl
     {
-        public TuplePropertyUserControl(TuplePropertyMetadata tuplePropertyMetadata, IConfiguration configuration)
+        public TuplePropertyUserControl(TuplePropertyMetadata tuplePropertyMetadata, IGameConfiguration configuration)
         {
             InitializeComponent();
 

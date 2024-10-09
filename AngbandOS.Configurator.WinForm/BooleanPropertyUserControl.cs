@@ -5,7 +5,7 @@ namespace AngbandOS.Configurator.WinForm
 {
     public partial class BooleanPropertyUserControl : UserControl
     {
-        public BooleanPropertyUserControl(PropertyMetadata booleanPropertyMetadata, IConfiguration configuration)
+        public BooleanPropertyUserControl(PropertyMetadata booleanPropertyMetadata, IGameConfiguration configuration)
         {
             InitializeComponent();
 

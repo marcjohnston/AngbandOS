@@ -6,7 +6,7 @@ namespace AngbandOS.Configurator.WinForm
 {
     public partial class MultiPropertyUserControl : UserControl
     {
-        public MultiPropertyUserControl(PropertyMetadata[] propertiesMetadata, IConfiguration configuration, string breadcrumb)
+        public MultiPropertyUserControl(PropertyMetadata[] propertiesMetadata, IGameConfiguration configuration, string breadcrumb)
         {
             InitializeComponent();
 
