@@ -24,7 +24,6 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<DeviceCode> DeviceCodes { get; set; } = null!;
-        public virtual DbSet<GameConfiguration> GameConfigurations { get; set; } = null!;
         public virtual DbSet<Key> Keys { get; set; } = null!;
         public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
@@ -167,28 +166,6 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.SubjectId).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<GameConfiguration>(entity =>
-            {
-                entity.HasKey(e => new { e.Guid, e.RepositoryName, e.Key });
-
-                entity.Property(e => e.RepositoryName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Key)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.JsonData).IsUnicode(false);
-
-                entity.HasOne(d => d.Gu)
-                    .WithMany(p => p.GameConfigurations)
-                    .HasPrincipalKey(p => p.Guid)
-                    .HasForeignKey(d => d.Guid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GameConfigurations_UserGameConfigurations");
-            });
-
             modelBuilder.Entity<Key>(entity =>
             {
                 entity.HasIndex(e => e.Use, "IX_Keys_Use");
@@ -298,9 +275,6 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
             {
                 entity.HasKey(e => new { e.Name, e.Username });
 
-                entity.HasIndex(e => e.Guid, "IX_UserGameConfigurations")
-                    .IsUnique();
-
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -308,6 +282,8 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.Username)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.JsonData).IsUnicode(false);
             });
 
             modelBuilder.Entity<UserSetting>(entity =>
