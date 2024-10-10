@@ -7,6 +7,7 @@
 
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Timer = AngbandOS.Core.Timers.Timer;
 
@@ -1147,6 +1148,15 @@ public bool IsDead = false;
         MainForm = (MainForm)SingletonRepository.Get<Form>(nameof(MainForm));
 
         InitializeAllocationTables();
+    }
+
+    /// <summary>
+    /// Return a JsonSerializerOptions that should be used to serialize entities. 
+    /// </summary>
+    /// <returns></returns>
+    public static JsonSerializerOptions GetJsonSerializerOptions()
+    {
+        return new JsonSerializerOptions() { IncludeFields = true };
     }
 
     public bool GetBool(string prompt, out bool value)

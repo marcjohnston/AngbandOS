@@ -37,6 +37,6 @@ internal abstract class Symbol : IGetKey
             QueryCharacter = QueryCharacter,
             Name = Name
         };
-        return JsonSerializer.Serialize<SymbolGameConfiguration>(symbolDefinition);
+        return JsonSerializer.Serialize(symbolDefinition, Game.GetJsonSerializerOptions());
     }
 }

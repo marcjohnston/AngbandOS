@@ -402,13 +402,13 @@ public class GameConfiguration : IGameConfiguration
             };
         }
     }
-    private static TDefinition[] RetrieveEntities<TDefinition>(ICorePersistentStorage persistentStorage, string repositoryName) where TDefinition : IGameConfiguration
+    private static TConfiguration[] RetrieveEntities<TConfiguration>(ICorePersistentStorage persistentStorage, string repositoryName) where TConfiguration : IGameConfiguration
     {
         string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
-        List<TDefinition> entities = new List<TDefinition>();
+        List<TConfiguration> entities = new List<TConfiguration>();
         foreach (string serializedEntity in serializedEntities)
         {
-            TDefinition? deserializedEntity = JsonSerializer.Deserialize<TDefinition>(serializedEntity);
+            TConfiguration? deserializedEntity = JsonSerializer.Deserialize<TConfiguration>(serializedEntity, new JsonSerializerOptions() { IncludeFields = true });
             if (deserializedEntity == null || !deserializedEntity.IsValid())
             {
                 throw new Exception($"Invalid {repositoryName} json.");

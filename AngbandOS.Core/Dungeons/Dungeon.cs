@@ -199,6 +199,6 @@ internal abstract class Dungeon : IGetKey
             Shortname = Shortname,
             Tower = Tower
         };
-        return JsonSerializer.Serialize<DungeonGameConfiguration>(dungeon);
+        return JsonSerializer.Serialize(dungeon, Game.GetJsonSerializerOptions());
     }
 }

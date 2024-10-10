@@ -36,7 +36,7 @@ internal abstract class Animation : IGetKey
             Name = Name,
             Sequence = Sequence
         };
-        return JsonSerializer.Serialize<AnimationGameConfiguration>(animationDefinition);
+        return JsonSerializer.Serialize(animationDefinition, Game.GetJsonSerializerOptions());
     }
 
     public virtual string Key => GetType().Name;

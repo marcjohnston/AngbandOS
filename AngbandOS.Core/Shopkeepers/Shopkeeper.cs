@@ -63,6 +63,6 @@ internal abstract class Shopkeeper : IGetKey
             Name = Name,
             RaceName = OwnerRace?.GetKey
         };
-        return JsonSerializer.Serialize<ShopkeeperGameConfiguration>(shopkeeperDefinition);
+        return JsonSerializer.Serialize(shopkeeperDefinition, Game.GetJsonSerializerOptions());
     }
 }

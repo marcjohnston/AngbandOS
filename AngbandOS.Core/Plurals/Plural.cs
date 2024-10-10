@@ -22,7 +22,7 @@ internal abstract class Plural : IGetKey
             Key = Key,
             PluralForm = PluralForm,
         };
-        return JsonSerializer.Serialize<PluralGameConfiguration>(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     /// <summary>

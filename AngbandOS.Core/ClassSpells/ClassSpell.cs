@@ -33,7 +33,7 @@ internal abstract class ClassSpell : IGetKey
             BaseFailure = BaseFailure,
             FirstCastExperience = FirstCastExperience
         };
-        return JsonSerializer.Serialize<ClassSpellGameConfiguration>(classSpellDefinition);
+        return JsonSerializer.Serialize(classSpellDefinition, Game.GetJsonSerializerOptions());
     }
 
     public abstract string SpellName { get; }

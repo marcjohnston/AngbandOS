@@ -40,7 +40,7 @@ internal abstract class Attack : IGetKey
             AttackCutsTarget = AttackCutsTarget,
             RendersMissMessage = RendersMissMessage
         };
-        return JsonSerializer.Serialize<AttackGameConfiguration>(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     public string GetKey => Key;

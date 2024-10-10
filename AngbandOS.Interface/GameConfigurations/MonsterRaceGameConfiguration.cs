@@ -439,9 +439,12 @@ public class MonsterRaceGameConfiguration : IGameConfiguration
             Troll == null ||
             Undead == null ||
             Unique == null ||
-            WeirdMind == null ||
+            WeirdMind == null)
+        {
+            return false;
+        }
 
-            AttackDefinitions.Any(_attackDefinition => _attackDefinition.EffectName == null || _attackDefinition.MethodName == null || _attackDefinition.Dice == null || _attackDefinition.Sides == null))
+        if (AttackDefinitions != null && AttackDefinitions.Any(_attackDefinition => _attackDefinition.MethodName == null || _attackDefinition.Dice == null || _attackDefinition.Sides == null))
         {
             return false;
         }

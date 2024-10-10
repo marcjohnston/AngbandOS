@@ -30,7 +30,7 @@ internal abstract class ProjectileGraphic : IGetKey
             Character = Character,
             Color = Color
         };
-        return JsonSerializer.Serialize<ProjectileGraphicGameConfiguration>(projectileGraphicDefinition);
+        return JsonSerializer.Serialize(projectileGraphicDefinition, Game.GetJsonSerializerOptions());
     }
 
     public virtual string Key => GetType().Name;

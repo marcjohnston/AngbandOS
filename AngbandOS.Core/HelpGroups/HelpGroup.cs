@@ -31,7 +31,7 @@ internal abstract class HelpGroup : IGetKey, IToJson
             Title = Title,
             SortIndex= SortIndex,
         };
-        return JsonSerializer.Serialize<HelpGroupGameConfiguration>(helpGroupDefinition);
+        return JsonSerializer.Serialize(helpGroupDefinition, Game.GetJsonSerializerOptions());
     }
 
     public abstract string Title { get; }

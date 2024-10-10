@@ -33,7 +33,7 @@ internal abstract class ReadableFlavor : Flavor, IGetKey
             CanBeAssigned = CanBeAssigned,
             Name = Name
         };
-        return JsonSerializer.Serialize<ReadableFlavorGameConfiguration>(readableFlavorDefinition);
+        return JsonSerializer.Serialize(readableFlavorDefinition, Game.GetJsonSerializerOptions());
     }
 
     /// <summary>

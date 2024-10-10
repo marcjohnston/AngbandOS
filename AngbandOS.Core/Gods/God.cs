@@ -58,6 +58,6 @@ internal abstract class God : IGetKey
             Key = Key,
             FavorDescription = FavorDescription
         };
-        return JsonSerializer.Serialize<GodGameConfiguration>(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 }

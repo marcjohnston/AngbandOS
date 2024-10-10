@@ -47,6 +47,6 @@ internal abstract class DungeonGuardian : IGetKey
             MonsterRaceName = MonsterRaceName,
             LevelFound = LevelFound
         };
-        return JsonSerializer.Serialize<DungeonGuardianGameConfiguration>(dungeonGuardian);
+        return JsonSerializer.Serialize(dungeonGuardian, Game.GetJsonSerializerOptions());
     }
 }

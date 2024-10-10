@@ -76,7 +76,7 @@ internal abstract class Tile : IGetKey
             SymbolName = SymbolName,
             YellowInTorchlight = YellowInTorchlight
         };
-        return JsonSerializer.Serialize<TileGameConfiguration>(tileDefinition);
+        return JsonSerializer.Serialize(tileDefinition, Game.GetJsonSerializerOptions());
     }
     public virtual string Key => GetType().Name;
     public string GetKey => Key;

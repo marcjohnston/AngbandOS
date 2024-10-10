@@ -44,6 +44,6 @@ internal abstract class Vault : IGetKey
             Text = Text,
             Width = Width
         };
-        return JsonSerializer.Serialize<VaultGameConfiguration>(vaultDefinition);
+        return JsonSerializer.Serialize(vaultDefinition, Game.GetJsonSerializerOptions());
     }
 }

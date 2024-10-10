@@ -120,6 +120,6 @@ internal abstract class Town : IGetKey
             UnusedStoreLotsAreGraveyards = UnusedStoreLotsAreGraveyards,
             StoreFactoryNames = Stores.Select(_store => _store.StoreFactory.Key).ToArray(),
         };
-        return JsonSerializer.Serialize<TownGameConfiguration>(townDefinition);
+        return JsonSerializer.Serialize(townDefinition, Game.GetJsonSerializerOptions());
     }
 }

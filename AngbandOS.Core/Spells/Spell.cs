@@ -40,7 +40,7 @@ internal abstract class Spell : IGetKey
             Name = Name,
             LearnedDetails = LearnedDetails
         };
-        return JsonSerializer.Serialize<SpellGameConfiguration>(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     public virtual string Key => GetType().Name;
