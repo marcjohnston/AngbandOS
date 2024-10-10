@@ -96,23 +96,37 @@ namespace AngbandOS.PersistentStorage
         {
             string path = Path.GetDirectoryName(SaveFilename);
             string folderName = Path.Combine(path, repositoryName);
-
-            List<string> entities = new List<string>();
-            foreach (string filename in Directory.GetFiles(folderName))
+            try
             {
-                string json = File.ReadAllText(Path.Combine(folderName, filename));
-                entities.Add(json);
+                string[] folderFiles = Directory.GetFiles(folderName);
+                List<string> entities = new List<string>();
+                foreach (string filename in folderFiles)
+                {
+                    string json = File.ReadAllText(Path.Combine(folderName, filename));
+                    entities.Add(json);
+                }
+                return entities.ToArray();
             }
-            return entities.ToArray();
+            catch (DirectoryNotFoundException)
+            {
+                return new string[] { };
+            }
         }
 
-        public string RetrieveEntity(string repositoryName)
+        public string? RetrieveEntity(string repositoryName)
         {
             string path = Path.GetDirectoryName(SaveFilename);
             string folderName = Path.Combine(path, repositoryName);
             string filename = $"{folderName}.json";
-            string json = File.ReadAllText(filename);
-            return json;
+            try
+            {
+                string json = File.ReadAllText(filename);
+                return json;
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
         }
 
         public byte[]? ReadGame()

@@ -424,10 +424,15 @@ public class GameConfiguration : IGameConfiguration
     /// <param name="persistentStorage"></param>
     /// <param name="repositoryName"></param>
     /// <returns></returns>
-    private static string[] RetrieveEntity(ICorePersistentStorage persistentStorage, string repositoryName)
+    private static string[]? RetrieveEntity(ICorePersistentStorage persistentStorage, string repositoryName)
     {
-        string serializedEntity = persistentStorage.RetrieveEntity(repositoryName);
-        string[] values = JsonSerializer.Deserialize<string[]>(serializedEntity);
+        string? serializedEntity = persistentStorage.RetrieveEntity(repositoryName);
+        if (serializedEntity == null)
+        {
+            return null;
+        }
+
+        string[]? values = JsonSerializer.Deserialize<string[]>(serializedEntity);
         return values;
     }
 

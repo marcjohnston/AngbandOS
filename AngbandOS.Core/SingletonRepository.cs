@@ -283,12 +283,11 @@ internal class SingletonRepository
                         // Add the singleton to the list of singletons so that they can be bound.
                         _allSingletonsList.Add(getKeySingleton);
 
-                        // Ensure there isn't already a singleton with the same name.
-                        if (genericRepository.Dictionary.TryGetValue(key, out _))
+                        // If the singleton hasn't been registered, register it now.
+                        if (!genericRepository.Dictionary.TryGetValue(key, out _))
                         {
-                            throw new Exception($"Cannot add duplicate {type.Name} singleton with the key {key}.");
+                            genericRepository.Add(key, singleton);
                         }
-                        genericRepository.Add(key, singleton);
                         break;
                     default:
                         throw new Exception($"The singleton {type.Name} does not implement the IGetKey interface.");
@@ -323,7 +322,6 @@ internal class SingletonRepository
     private void LoadFromConfiguration<T, TDefinition, TGeneric>(TDefinition[]? definitions) where T : IGetKey where TGeneric : T
     {
         string typeName = typeof(T).Name;
-        GenericRepository gameCommands = _singletonsDictionary[typeName];
         if (definitions != null)
         {
             ConstructorInfo[] constructors = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
@@ -334,9 +332,10 @@ internal class SingletonRepository
             foreach (TDefinition definition in definitions)
             {
                 T gameCommand = (T)constructors[0].Invoke(new object[] { Game, definition });
-                string key = gameCommand.GetKey;
-                gameCommands.Add(key, gameCommand);
-                _allSingletonsList.Add(gameCommand);
+                LoadSingleton(gameCommand);
+                //string key = gameCommand.GetKey;
+                //gameCommands.Add(key, gameCommand);
+                //_allSingletonsList.Add(gameCommand);
             }
         }
     }
@@ -453,9 +452,6 @@ internal class SingletonRepository
         RegisterRepository<WandReadableFlavor>();
         RegisterRepository<WizardCommand>();
 
-        // This is the load phase for assembly.
-        LoadAllAssemblyTypes();
-
         // Now load the configuration singletons.
         LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorGameConfiguration, GenericAmuletReadableFlavor>(gameConfiguration.AmuletReadableFlavors);
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
@@ -484,6 +480,9 @@ internal class SingletonRepository
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
         LoadFromConfiguration<WandReadableFlavor, ReadableFlavorGameConfiguration, GenericWandReadableFlavor>(gameConfiguration.WandReadableFlavors);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
+
+        // Load the remaining types from the assembly.
+        LoadAllAssemblyTypes();
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();

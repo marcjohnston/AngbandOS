@@ -41,16 +41,16 @@ public interface ICorePersistentStorage
     void PersistEntity(string repositoryName, string json);
 
     /// <summary>
-    /// Retrieve multiple keyed entities from the persistent storage.
+    /// Retrieve multiple keyed entities from the persistent storage.  If there are none, return an empty array.
     /// </summary>
     /// <param name="repositoryName"></param>
     /// <returns></returns>
     string[] RetrieveEntities(string repositoryName);
 
     /// <summary>
-    /// Retrieve a single non-keyed entity from the persistent storage.
+    /// Retrieve a single non-keyed entity from the persistent storage.  If there are none, return null.
     /// </summary>
     /// <param name="repositoryName"></param>
     /// <returns></returns>
-    string RetrieveEntity(string repositoryName);
+    string? RetrieveEntity(string repositoryName);
 }

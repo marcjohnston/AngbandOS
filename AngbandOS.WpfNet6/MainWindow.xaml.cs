@@ -218,8 +218,8 @@ public partial class MainWindow : Window, IConsoleViewPort
         {
             //GameConfiguration gameConfiguration = GameConfiguration.LoadGameConfiguration(persistentStorage);
             //GameConfiguration gameConfiguration = GameConfiguration.LoadGamePack();
-            GameConfiguration gameConfiguration = new GameConfiguration();
-            //GameConfiguration gameConfiguration = GameConfiguration.LoadConfiguration(persistentStorage);
+            //GameConfiguration gameConfiguration = new GameConfiguration();
+            GameConfiguration gameConfiguration = GameConfiguration.LoadConfiguration(persistentStorage);
 
             //gameConfiguration.StartupTownName = "DylathLeenTown";
             gameServer.PlayNewGame(this, persistentStorage, gameConfiguration);
