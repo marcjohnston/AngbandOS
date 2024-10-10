@@ -1073,14 +1073,8 @@ public bool IsDead = false;
     /// Allocates all storage and creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    public Game(GameConfiguration? gameConfiguration)
+    public Game(GameConfiguration gameConfiguration)
     {
-        // We need a default configuration, if one isn't provided.
-        if (gameConfiguration == null)
-        {
-            gameConfiguration = new GameConfiguration();
-        }
-
         IsDead = true;
         Map = new Map(this);
 

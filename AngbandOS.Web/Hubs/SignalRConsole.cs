@@ -331,7 +331,8 @@ namespace AngbandOS.Web.Hubs
             }
             else
             {
-                if (_gameServer.PlayNewGame(this, PersistentStorage))
+                GameConfiguration gameConfiguration = new GameConfiguration();
+                if (_gameServer.PlayNewGame(this, PersistentStorage, gameConfiguration))
                 {
                     // The game is over.  Let the client know.
                     GameOver();

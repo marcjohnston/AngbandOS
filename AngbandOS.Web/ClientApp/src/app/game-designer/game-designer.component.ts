@@ -27,15 +27,6 @@ export class GameDesignerComponent implements OnInit {
     // We preconfigure a top level game to be designed.
     this.designer = new GameDataDesigner();
     this.object = new CthangbandGameData();
-
-    this._httpClient.delete(`/apiv1/games/${activeGame.connectionId}`).toPromise().then((_savedGames) => {
-      this.showMessage("Game killed.");
-    }, (_errorResponse: HttpErrorResponse) => {
-      // No ngZone needed here.
-      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
-        duration: 5000
-      });
-    });   
   }
 
   onRepositoryAddClick(property: DesignerProperty) {

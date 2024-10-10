@@ -210,15 +210,18 @@ public partial class MainWindow : Window, IConsoleViewPort
         string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
         ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemPersistentStorage(saveFilename);
-        GameConfiguration? configuration = null; // Configuration.LoadConfiguration(persistentStorage);
-        //configuration.StartupTownName = "DylathLeenTown";
         if (persistentStorage.GameExists())
         {
             gameServer.PlayExistingGame(this, persistentStorage);
         }
         else
         {
-            gameServer.PlayNewGame(this, persistentStorage, null);
+            //GameConfiguration gameConfiguration = GameConfiguration.LoadGameConfiguration(persistentStorage);
+            //GameConfiguration gameConfiguration = GameConfiguration.LoadGamePack();
+            GameConfiguration gameConfiguration = new GameConfiguration();
+
+            //gameConfiguration.StartupTownName = "DylathLeenTown";
+            gameServer.PlayNewGame(this, persistentStorage, gameConfiguration);
         }
     }
 
