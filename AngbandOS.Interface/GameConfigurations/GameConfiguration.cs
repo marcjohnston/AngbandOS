@@ -431,7 +431,7 @@ public class GameConfiguration : IGameConfiguration
         return values;
     }
 
-    public static GameConfiguration LoadConfiguration(ICorePersistentStorage? persistentStorage)
+    public static GameConfiguration LoadConfiguration(ICorePersistentStorage persistentStorage)
     {
         return new GameConfiguration()
         {
