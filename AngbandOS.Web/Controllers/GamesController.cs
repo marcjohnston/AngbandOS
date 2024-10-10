@@ -101,17 +101,17 @@ namespace AngbandOS.Web.Controllers
                 return Conflict();
         }
 
-        #region Configuration Designer
-        [HttpGet]
-        [Route("configuration")]
-        [Produces("application/json")]
-        public async Task<ActionResult<GameConfiguration>> GetGameConfiguration()
-        {
-            // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
+        //#region Configuration Designer
+        //[HttpGet]
+        //[Route("configuration")]
+        //[Produces("application/json")]
+        //public async Task<ActionResult<GameConfiguration>> GetGameConfiguration()
+        //{
+        //    // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
+        //    ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
 
-            return GameConfiguration.LoadConfiguration(corePersistentStorage);
-        }
+        //    return GameConfiguration.LoadConfiguration(corePersistentStorage);
+        //}
 
         //[HttpGet]
         //[Route("configuration/{guid}")]
@@ -135,13 +135,13 @@ namespace AngbandOS.Web.Controllers
         //    return GameConfiguration.LoadConfiguration(corePersistentStorage);
         //}
 
-        [HttpGet]
-        [Route("configuration/metadata")]
-        [Produces("application/json")]
-        public PropertyMetadata[] GetGameConfigurationMetadata()
-        {
-            return GameConfiguration.Metadata;
-        }
-        #endregion
+        //[HttpGet]
+        //[Route("configuration/metadata")]
+        //[Produces("application/json")]
+        //public PropertyMetadata[] GetGameConfigurationMetadata()
+        //{
+        //    return GameConfiguration.Metadata;
+        //}
+        //#endregion
     }
 }
