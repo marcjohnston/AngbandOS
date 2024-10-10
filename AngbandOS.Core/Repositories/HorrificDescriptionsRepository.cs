@@ -17,9 +17,9 @@ internal class HorrificDescriptionsRepository : StringListRepository
     /// </summary>
     public override string Name => "HorrificDescriptions";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.HorrificDescriptions == null)
+        if (configuration.HorrificDescriptions == null)
         {
             Add("abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
                 "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
@@ -27,7 +27,7 @@ internal class HorrificDescriptionsRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.HorrificDescriptions);
+            Add(configuration.HorrificDescriptions);
         }
     }
 }

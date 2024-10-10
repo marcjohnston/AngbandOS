@@ -17,9 +17,9 @@ internal class ShopkeeperGoodCommentsRepository : StringListRepository
     /// </summary>
     public override string Name => "ShopkeeperGoodComments";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.ShopkeeperGoodComments == null)
+        if (configuration.ShopkeeperGoodComments == null)
         {
             Add("Cool!",
                 "You've made my day!",
@@ -29,7 +29,7 @@ internal class ShopkeeperGoodCommentsRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.ShopkeeperGoodComments);
+            Add(configuration.ShopkeeperGoodComments);
         }
     }
 }

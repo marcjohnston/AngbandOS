@@ -17,9 +17,9 @@ internal class WorshipPlayerAttacksRepository : StringListRepository
     /// </summary>
     public override string Name => "WorshipPlayerAttacks";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.WorshipPlayerAttacks == null)
+        if (configuration.WorshipPlayerAttacks == null)
         {
             Add("looks up at you!",
                 "asks how many dragons you've killed!",
@@ -33,7 +33,7 @@ internal class WorshipPlayerAttacksRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.WorshipPlayerAttacks);
+            Add(configuration.WorshipPlayerAttacks);
         }
     }
 }

@@ -17,9 +17,9 @@ internal class FindQuestsRepository : StringListRepository
     /// </summary>
     public override string Name => "FindQuests";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.FindQuests == null)
+        if (configuration.FindQuests == null)
         {
             Add("You find the following inscription in the floor",
                 "You see a message inscribed in the wall",
@@ -30,7 +30,7 @@ internal class FindQuestsRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.FindQuests);
+            Add(configuration.FindQuests);
         }
     }
 }

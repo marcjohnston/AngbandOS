@@ -47,9 +47,6 @@ internal class Game
 
     public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
 
-    [Obsolete("Configuration properties should be available in the Game object.  The configuration object is only used to transfer properties from the caller to the Game object.")]
-    public readonly GameConfiguration? Configuration = null;
-
     /// <summary>
     /// Returns the maximum level of light that the player is allowed to have.  Returns 5, by default.  The <see cref="UpdateLightFlaggedAction"/> uses a precomputed algorithm for processing the
     /// light-of-sight and which grid locations can get the light.  This algorithm would need to be updated to support further distances.
@@ -1076,16 +1073,13 @@ public bool IsDead = false;
     /// Allocates all storage and creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    public Game(GameConfiguration? configuration)
+    public Game(GameConfiguration? gameConfiguration)
     {
         // We need a default configuration, if one isn't provided.
-        if (configuration == null)
+        if (gameConfiguration == null)
         {
-            configuration = new GameConfiguration();
+            gameConfiguration = new GameConfiguration();
         }
-
-        // Save the configuration.  This configuration becomes permanent.
-        Configuration = configuration;
 
         IsDead = true;
         Map = new Map(this);
@@ -1097,13 +1091,12 @@ public bool IsDead = false;
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
-        SingletonRepository.Load();
+        SingletonRepository.Load(gameConfiguration);
         TimeSpan elapsedTime = DateTime.Now - startTime;
-        if (configuration.MaxMessageLogLength != null)
+        if (gameConfiguration.MaxMessageLogLength != null)
         {
-            MaxMessageLogLength = configuration.MaxMessageLogLength.Value;
+            MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
         }
-        Configuration = null; // TODO: This erases the configuration
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();

@@ -17,9 +17,9 @@ internal class UnreadableFlavorSyllablesRepository : StringListRepository
     /// </summary>
     public override string Name => "UnreadableFlavorSyllables";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.UnreadableFlavorSyllables == null)
+        if (configuration.UnreadableFlavorSyllables == null)
         {
             Add("a", "ab", "ag", "aks", "ala", "an", "ankh", "app", "arg", "arze", "ash", "aus", "ban", "bar", "bat", "bek",
                 "bie", "bin", "bit", "bjor", "blu", "bot", "bu", "byt", "comp", "con", "cos", "cre", "dalf", "dan", "den",
@@ -35,7 +35,7 @@ internal class UnreadableFlavorSyllablesRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.UnreadableFlavorSyllables);
+            Add(configuration.UnreadableFlavorSyllables);
         }
     }
 }

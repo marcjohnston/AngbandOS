@@ -12,6 +12,6 @@ namespace AngbandOS.Core.Interfaces;
 /// </summary>
 internal interface ILoadAndBind
 {
-    void Load();
+    void Load(GameConfiguration gameConfiguration);
     void Bind();
 }

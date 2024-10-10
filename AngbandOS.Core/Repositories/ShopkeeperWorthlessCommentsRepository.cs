@@ -17,9 +17,9 @@ internal class ShopkeeperWorthlessCommentsRepository : StringListRepository
     /// </summary>
     public override string Name => "ShopkeeperWorthlessComments";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.ShopkeeperWorthlessComments == null)
+        if (configuration.ShopkeeperWorthlessComments == null)
         {
             Add("Arrgghh!",
                 "You bastard!",
@@ -29,7 +29,7 @@ internal class ShopkeeperWorthlessCommentsRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.ShopkeeperWorthlessComments);
+            Add(configuration.ShopkeeperWorthlessComments);
         }
     }
 }

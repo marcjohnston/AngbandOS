@@ -17,9 +17,9 @@ internal class ElvishTextRepository : StringListRepository
     /// </summary>
     public override string Name => "ElvishTexts";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.ElvishTexts == null)
+        if (configuration.ElvishTexts == null)
         {
             Add("adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",
                 "anga", "anna", "ann", "on", "ar", "ien", "atar", "band", "bar", "ad", "bel", "eg", "brag", "ol", "breth",
@@ -39,7 +39,7 @@ internal class ElvishTextRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.ElvishTexts);
+            Add(configuration.ElvishTexts);
         }
     }
 }

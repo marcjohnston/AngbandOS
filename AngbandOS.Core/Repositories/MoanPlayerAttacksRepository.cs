@@ -17,9 +17,9 @@ internal class MoanPlayerAttacksRepository : StringListRepository
     /// </summary>
     public override string Name => "MoanPlayerAttacks";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.MoanPlayerAttacks == null)
+        if (configuration.MoanPlayerAttacks == null)
         {
             Add("seems sad about something.",
                 "asks if you have seen his dogs.",
@@ -29,7 +29,7 @@ internal class MoanPlayerAttacksRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.MoanPlayerAttacks);
+            Add(configuration.MoanPlayerAttacks);
         }
     }
 }

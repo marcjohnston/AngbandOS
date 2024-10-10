@@ -17,9 +17,9 @@ internal class FunnyCommentsRepository : StringListRepository
     /// </summary>
     public override string Name => "FunnyComments";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.FunnyComments == null)
+        if (configuration.FunnyComments == null)
         {
             Add("Wow, cosmic, man!",
                 "Rad!",
@@ -30,7 +30,7 @@ internal class FunnyCommentsRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.FunnyComments);
+            Add(configuration.FunnyComments);
         }
     }
 }

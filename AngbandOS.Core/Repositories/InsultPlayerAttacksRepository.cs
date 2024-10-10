@@ -17,16 +17,16 @@ internal class InsultPlayerAttacksRepository : StringListRepository
     /// </summary>
     public override string Name => "InsultPlayerAttacks";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.InsultPlayerAttacks == null)
+        if (configuration.InsultPlayerAttacks == null)
         {
             Add("insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
                 "dances around you!", "makes obscene gestures!", "moons you!");
         }
         else
         {
-            Add(Game.Configuration.InsultPlayerAttacks);
+            Add(configuration.InsultPlayerAttacks);
         }
     }
 }

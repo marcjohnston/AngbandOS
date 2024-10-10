@@ -35,7 +35,7 @@ internal abstract class Repository<T> : IEnumerable<T>, ILoadAndBind where T : n
     /// Processes the load phase for the configuration repository items.  This phase creates instances of all objects that have a private constructor.  An instance of the Game is
     /// sent to the constructor for every configuration repository item created.  The configuration repository item cannot assume other repository items are available during this phase.
     /// </summary>
-    public abstract void Load();
+    public abstract void Load(GameConfiguration gameConfiguration);
 
     /// <summary>
     /// Processes the bind phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.  Does nothing, by

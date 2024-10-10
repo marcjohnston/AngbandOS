@@ -271,11 +271,11 @@ internal class SingletonRepository
         return repository;
     }
 
-    private void LoadRepositoryItems()
+    private void LoadRepositoryItems(GameConfiguration gameConfiguration)
     {
         foreach (ILoadAndBind repository in _repositories)
         {
-            repository.Load();
+            repository.Load(gameConfiguration);
         }
     }
 
@@ -347,7 +347,7 @@ internal class SingletonRepository
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>
     /// <param name="game"></param>
-    public void Load()
+    public void Load(GameConfiguration gameConfiguration)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         RegisterRepository<IBoolValue>();
@@ -459,33 +459,33 @@ internal class SingletonRepository
 
 
         // Now load the configuration singletons.
-        LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorGameConfiguration, GenericAmuletReadableFlavor>(Game.Configuration.AmuletReadableFlavors);
-        LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(Game.Configuration.Animations);
-        LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(Game.Configuration.Attacks);
-        LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(Game.Configuration.ClassSpells);
-        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(Game.Configuration.DungeonGuardians);
-        LoadFromConfiguration<Dungeon, DungeonGameConfiguration, GenericDungeon>(Game.Configuration.Dungeons);
-        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GenericGameCommand>(Game.Configuration.GameCommands);
-        LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(Game.Configuration.Gods);
-        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(Game.Configuration.HelpGroups);
-        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(Game.Configuration.MonsterRaces);
-        LoadFromConfiguration<MushroomReadableFlavor, ReadableFlavorGameConfiguration, GenericMushroomReadableFlavor>(Game.Configuration.MushroomReadableFlavors);
-        LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(Game.Configuration.Plurals);
-        LoadFromConfiguration<PotionReadableFlavor, ReadableFlavorGameConfiguration, GenericPotionReadableFlavor>(Game.Configuration.PotionReadableFlavors);
-        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(Game.Configuration.ProjectileGraphics);
-        LoadFromConfiguration<RingReadableFlavor, ReadableFlavorGameConfiguration, GenericRingReadableFlavor>(Game.Configuration.RingReadableFlavors);
-        LoadFromConfiguration<RodReadableFlavor, ReadableFlavorGameConfiguration, GenericRodReadableFlavor>(Game.Configuration.RodReadableFlavors);
-        LoadFromConfiguration<ScrollReadableFlavor, ReadableFlavorGameConfiguration, GenericScrollReadableFlavor>(Game.Configuration.ScrollReadableFlavors);
-        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(Game.Configuration.Shopkeepers);
-        LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(Game.Configuration.Spells);
-        LoadFromConfiguration<StaffReadableFlavor, ReadableFlavorGameConfiguration, GenericStaffReadableFlavor>(Game.Configuration.StaffReadableFlavors);
-        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(Game.Configuration.StoreCommands);
-        LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(Game.Configuration.Symbols);
-        LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(Game.Configuration.Tiles);
-        LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(Game.Configuration.Towns);
-        LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(Game.Configuration.Vaults);
-        LoadFromConfiguration<WandReadableFlavor, ReadableFlavorGameConfiguration, GenericWandReadableFlavor>(Game.Configuration.WandReadableFlavors);
-        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(Game.Configuration.WizardCommands);
+        LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorGameConfiguration, GenericAmuletReadableFlavor>(gameConfiguration.AmuletReadableFlavors);
+        LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
+        LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
+        LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
+        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
+        LoadFromConfiguration<Dungeon, DungeonGameConfiguration, GenericDungeon>(gameConfiguration.Dungeons);
+        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GenericGameCommand>(gameConfiguration.GameCommands);
+        LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
+        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
+        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
+        LoadFromConfiguration<MushroomReadableFlavor, ReadableFlavorGameConfiguration, GenericMushroomReadableFlavor>(gameConfiguration.MushroomReadableFlavors);
+        LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
+        LoadFromConfiguration<PotionReadableFlavor, ReadableFlavorGameConfiguration, GenericPotionReadableFlavor>(gameConfiguration.PotionReadableFlavors);
+        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
+        LoadFromConfiguration<RingReadableFlavor, ReadableFlavorGameConfiguration, GenericRingReadableFlavor>(gameConfiguration.RingReadableFlavors);
+        LoadFromConfiguration<RodReadableFlavor, ReadableFlavorGameConfiguration, GenericRodReadableFlavor>(gameConfiguration.RodReadableFlavors);
+        LoadFromConfiguration<ScrollReadableFlavor, ReadableFlavorGameConfiguration, GenericScrollReadableFlavor>(gameConfiguration.ScrollReadableFlavors);
+        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
+        LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
+        LoadFromConfiguration<StaffReadableFlavor, ReadableFlavorGameConfiguration, GenericStaffReadableFlavor>(gameConfiguration.StaffReadableFlavors);
+        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
+        LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
+        LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(gameConfiguration.Tiles);
+        LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(gameConfiguration.Towns);
+        LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
+        LoadFromConfiguration<WandReadableFlavor, ReadableFlavorGameConfiguration, GenericWandReadableFlavor>(gameConfiguration.WandReadableFlavors);
+        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -510,7 +510,7 @@ internal class SingletonRepository
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
-        LoadRepositoryItems();
+        LoadRepositoryItems(gameConfiguration);
         BindRepositoryItems();
 
         // Bind all of the singletons now.

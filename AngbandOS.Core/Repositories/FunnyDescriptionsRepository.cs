@@ -17,9 +17,9 @@ internal class FunnyDescriptionsRepository : StringListRepository
     /// </summary>
     public override string Name => "FunnyDescriptions";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.FunnyDescriptions == null)
+        if (configuration.FunnyDescriptions == null)
         {
             Add("silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
                 "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
@@ -27,7 +27,7 @@ internal class FunnyDescriptionsRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.FunnyDescriptions);
+            Add(configuration.FunnyDescriptions);
         }
     }
 }

@@ -17,9 +17,9 @@ internal class SingingPlayerAttacksRepository : StringListRepository
     /// </summary>
     public override string Name => "SingingPlayerAttacks";
 
-    public override void Load()
+    public override void Load(GameConfiguration configuration)
     {
-        if (Game.Configuration.SingingPlayerAttacks == null)
+        if (configuration.SingingPlayerAttacks == null)
         {
             Add("sings 'We are a happy family.'",
                 "sings 'I love you, you love me.'"
@@ -27,7 +27,7 @@ internal class SingingPlayerAttacksRepository : StringListRepository
         }
         else
         {
-            Add(Game.Configuration.SingingPlayerAttacks);
+            Add(configuration.SingingPlayerAttacks);
         }
     }
 }
