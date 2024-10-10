@@ -192,74 +192,6 @@ internal class SingletonRepository
         return (T)_singletonsDictionary[typeName].List[index];
     }
 
-    private void LoadAllAssemblyTypes()
-    {
-        Assembly assembly = Assembly.GetExecutingAssembly();
-        Type[] types = assembly.GetTypes();
-        foreach (Type type in types)
-        {
-            // Ensure the type is not abstract and inherits the IGetKey interface.
-            // TODO: No test for IGetKey is done
-            if (!type.IsAbstract)
-            {
-                // Ensure it only has one private constructor.
-                // TODO: The one private constructor needs to be tested properly.
-                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                if (constructors.Length == 1)
-                {
-                    // We will only instantiate the singleton, if we are storing it.
-                    object? singleton = null;
-
-                    // Place the singleton into the respective dictionary repositories.
-                    List<Type> interfaceTypeNames = new List<Type>();
-                    interfaceTypeNames.AddRange(type.GetInterfaces());
-                    Type? baseType = type.BaseType;
-                    while (baseType != null)
-                    {
-                        interfaceTypeNames.Add(baseType);
-                        baseType = baseType.BaseType;
-                    }
-
-                    foreach (Type interfaceType in interfaceTypeNames)
-                    {
-                        string typeName = interfaceType.Name;
-
-                        // Check to see if there is a repository that is registered for this type.  There is none; we simple ignore this interface.
-                        if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
-                        {
-                            // We only instantiate the object once and only if we are storing it.
-                            if (singleton == null)
-                            {
-                                singleton = constructors[0].Invoke(new object[] { Game });
-                            }
-                            
-                            // Ensure the singleton implements the IGetKey interface and get the key from the singleton.
-                            switch (singleton)
-                            {
-                                case IGetKey getKeySingleton:
-                                    string key = getKeySingleton.GetKey;
-
-                                    // Add the singleton to the list of singletons so that they can be bound.
-                                    _allSingletonsList.Add(getKeySingleton);
-
-                                    // Ensure there isn't already a singleton with the same name.
-                                    if (genericRepository.Dictionary.TryGetValue(key, out _))
-                                    {
-                                        throw new Exception($"Cannot add duplicate {type.Name} singleton with the key {key}.");
-                                    }
-                                    genericRepository.Add(key, singleton);
-                                    break;
-                                default:
-                                    throw new Exception($"The singleton {type.Name} does not implement the IGetKey interface.");
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     public SingletonRepository(Game game)
     {
         Game = game;
@@ -319,6 +251,73 @@ internal class SingletonRepository
         }
         string pluralName = Game.Pluralize(typeof(T).Name);
         Game.CorePersistentStorage.PersistEntities(pluralName, jsonEntityList.ToArray());
+    }
+
+    private void LoadSingleton(object? singleton)
+    {
+        // Enumerate all of the interfaces that the singleton implements.
+        Type type = singleton.GetType();
+        List<Type> interfaceTypeNames = new List<Type>();
+        interfaceTypeNames.AddRange(type.GetInterfaces());
+        Type? baseType = type.BaseType;
+        while (baseType != null)
+        {
+            interfaceTypeNames.Add(baseType);
+            baseType = baseType.BaseType;
+        }
+
+        // Place the singleton into the respective dictionary repositories for each interface.
+        foreach (Type interfaceType in interfaceTypeNames)
+        {
+            string typeName = interfaceType.Name;
+
+            // Check to see if there is a repository that is registered for this type.  There is none; we simple ignore this interface.
+            if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+            {
+                // Ensure the singleton implements the IGetKey interface and get the key from the singleton.
+                switch (singleton)
+                {
+                    case IGetKey getKeySingleton:
+                        string key = getKeySingleton.GetKey;
+
+                        // Add the singleton to the list of singletons so that they can be bound.
+                        _allSingletonsList.Add(getKeySingleton);
+
+                        // Ensure there isn't already a singleton with the same name.
+                        if (genericRepository.Dictionary.TryGetValue(key, out _))
+                        {
+                            throw new Exception($"Cannot add duplicate {type.Name} singleton with the key {key}.");
+                        }
+                        genericRepository.Add(key, singleton);
+                        break;
+                    default:
+                        throw new Exception($"The singleton {type.Name} does not implement the IGetKey interface.");
+                }
+            }
+        }
+    }
+
+    private void LoadAllAssemblyTypes()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        Type[] types = assembly.GetTypes();
+        foreach (Type type in types)
+        {
+            // Ensure the type is not abstract and inherits the IGetKey interface.
+            // TODO: No test for IGetKey is done
+            if (!type.IsAbstract && typeof(IGetKey).IsAssignableFrom(type))
+            {
+                // Ensure it only has one private constructor.
+                // TODO: The one private constructor needs to be tested properly.
+                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                if (constructors.Length == 1)
+                {
+                    // We will only instantiate the singleton, if we are storing it.
+                    object? singleton = constructors[0].Invoke(new object[] { Game });
+                    LoadSingleton(singleton);
+                }
+            }
+        }
     }
 
     private void LoadFromConfiguration<T, TDefinition, TGeneric>(TDefinition[]? definitions) where T : IGetKey where TGeneric : T
@@ -456,7 +455,6 @@ internal class SingletonRepository
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
-
 
         // Now load the configuration singletons.
         LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorGameConfiguration, GenericAmuletReadableFlavor>(gameConfiguration.AmuletReadableFlavors);
