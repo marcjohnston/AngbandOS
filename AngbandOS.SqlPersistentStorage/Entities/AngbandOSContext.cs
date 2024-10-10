@@ -24,12 +24,14 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<DeviceCode> DeviceCodes { get; set; } = null!;
+        public virtual DbSet<GameConfiguration> GameConfigurations { get; set; } = null!;
         public virtual DbSet<Key> Keys { get; set; } = null!;
         public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
         public virtual DbSet<RepositoryEntity> RepositoryEntities { get; set; } = null!;
         public virtual DbSet<SavedGame> SavedGames { get; set; } = null!;
         public virtual DbSet<SavedGameContent> SavedGameContents { get; set; } = null!;
+        public virtual DbSet<UserGameConfiguration> UserGameConfigurations { get; set; } = null!;
         public virtual DbSet<UserSetting> UserSettings { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,8 +39,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
             modelBuilder.Entity<AspNetRole>(entity =>
             {
                 entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedName] IS NOT NULL)");
+                    .IsUnique();
 
                 entity.Property(e => e.Name).HasMaxLength(256);
 
@@ -59,8 +60,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
 
                 entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasMaxLength(36)
@@ -167,6 +167,28 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.SubjectId).HasMaxLength(200);
             });
 
+            modelBuilder.Entity<GameConfiguration>(entity =>
+            {
+                entity.HasKey(e => new { e.Guid, e.RepositoryName, e.Key });
+
+                entity.Property(e => e.RepositoryName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Key)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JsonData).IsUnicode(false);
+
+                entity.HasOne(d => d.Gu)
+                    .WithMany(p => p.GameConfigurations)
+                    .HasPrincipalKey(p => p.Guid)
+                    .HasForeignKey(d => d.Guid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GameConfigurations_UserGameConfigurations");
+            });
+
             modelBuilder.Entity<Key>(entity =>
             {
                 entity.HasIndex(e => e.Use, "IX_Keys_Use");
@@ -270,6 +292,22 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                     .HasForeignKey(d => d.SavedGameContentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SavedGames_SavedGameContents");
+            });
+
+            modelBuilder.Entity<UserGameConfiguration>(entity =>
+            {
+                entity.HasKey(e => new { e.Name, e.Username });
+
+                entity.HasIndex(e => e.Guid, "IX_UserGameConfigurations")
+                    .IsUnique();
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<UserSetting>(entity =>
