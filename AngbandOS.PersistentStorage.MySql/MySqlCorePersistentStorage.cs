@@ -131,5 +131,10 @@ namespace AngbandOS.PersistentStorage
         {
             throw new NotImplementedException();
         }
+
+        public GameConfiguration LoadConfiguration()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

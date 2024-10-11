@@ -13,7 +13,8 @@ import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PreferencesDialogComponent } from '../preferences-dialog/preferences-dialog.component';
 import { PreferencesDialogData } from '../preferences-dialog/preferences-dialog-data';
-import { GConfig, GameConfiguration, Preferences } from './preferences';
+import { Preferences } from './preferences';
+import { GameConfiguration } from "./game-configuration";
 import { PutUserPreferences } from './put-user-preferences';
 
 @Component({

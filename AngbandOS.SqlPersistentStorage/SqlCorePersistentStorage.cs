@@ -197,5 +197,10 @@ namespace AngbandOS.PersistentStorage
 
             return true;
         }
+
+        public Core.Interface.GameConfiguration LoadConfiguration()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
