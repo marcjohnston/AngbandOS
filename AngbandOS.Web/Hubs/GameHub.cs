@@ -1,10 +1,10 @@
-﻿using AngbandOS.Web.Models;
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using System;
 using System.Security.Claims;
 
 namespace AngbandOS.Web.Hubs
@@ -32,7 +32,7 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
         /// <returns></returns>
-        public async Task PlayNewGame(string gameConfiguration)
+        public async Task PlayNewGame(GameConfiguration gameConfiguration)
         {
             // We need to ensure the user is authenticated.
             string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;

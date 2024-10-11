@@ -13,7 +13,7 @@ import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PreferencesDialogComponent } from '../preferences-dialog/preferences-dialog.component';
 import { PreferencesDialogData } from '../preferences-dialog/preferences-dialog-data';
-import { Preferences } from './preferences';
+import { GConfig, GameConfiguration, Preferences } from './preferences';
 import { PutUserPreferences } from './put-user-preferences';
 
 @Component({
@@ -335,7 +335,54 @@ export class PlayComponent implements OnInit, OnDestroy {
 
           this.GameInProgress = true;
           if (this.gameGuid === null) {
-            this.connection.send("PlayNewGame", null);
+            const gameConfiguration: GameConfiguration = {
+              maxMessageLogLength: 1,
+              startupTownName: null,
+              towns: null,
+              shopkeepers: null,
+              gameCommands: null,
+              storeCommands: null,
+              helpGroups: null,
+              monsterRaces: null,
+              symbols: null,
+              vaults: null,
+              dungeonGuardians: null,
+              dungeons: null,
+              storeFactories: null,
+              projectileGraphics: null,
+              amuletReadableFlavor: null,
+              mushroomReadableFlavors: null,
+              potionReadableFlavors: null,
+              ringReadableFlavors: null,
+              rodReadableFlavors: null,
+              scrollReadableFlavors: null,
+              staffReadableFlavors: null,
+              wandReadableFlavors: null,
+              classSpells: null,
+              wizardCommands: null,
+              tiles: null,
+              animations: null,
+              spells: null,
+              plurals: null,
+              attacks: null,
+              gods: null,
+              elvishTexts: null,
+              findQuests: null,
+              funnyComments: null,
+              funnyDescriptions: null,
+              horrificDescriptions: null,
+              insultPlayerAttacks: null,
+              moanPlayerAttacks: null,
+              unreadableFlavorSyllables: null,
+              shopkeeperAcceptedComments: null,
+              shopkeeperBargainComments: null,
+              shopkeeperGoodComments: null,
+              shopkeeperLessThanGuessComments: null,
+              shopkeeperWorthlessComments: null,
+              singingPlayerAttacks: null,
+              worshipPlayerAttacks: null
+            }
+            this.connection.send("PlayNewGame", gameConfiguration);
           } else {
             this.connection.send("PlayExistingGame", this.gameGuid);
           }

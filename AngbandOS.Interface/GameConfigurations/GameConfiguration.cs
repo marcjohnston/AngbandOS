@@ -7,7 +7,7 @@ namespace AngbandOS.Core.Interface;
 /// configure a new game.  Use the ConfigurationMetadata object to get metadata details that can be used to generate configuration data.
 /// </summary>
 [Serializable]
-public class GameConfiguration : IGameConfiguration
+public class GameConfiguration //: IGameConfiguration
 {
     ///// <summary>
     ///// Represents the names of the stores that are available in the game.  These store names can any preconfigured Angband store, or a store with a matching
@@ -55,7 +55,7 @@ public class GameConfiguration : IGameConfiguration
 
     public ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
 
-    public ReadableFlavorGameConfiguration[]? AmuletReadableFlavors{ get; set; } = null;
+    public ReadableFlavorGameConfiguration[]? AmuletReadableFlavors { get; set; } = null;
 
     public ReadableFlavorGameConfiguration[]? MushroomReadableFlavors { get; set; } = null;
 
@@ -103,7 +103,7 @@ public class GameConfiguration : IGameConfiguration
     public string[]? SingingPlayerAttacks { get; set; } = null;
     public string[]? WorshipPlayerAttacks { get; set; } = null;
 
-    public bool IsValid() => true;
+    //   public bool IsValid() => true;
 
     public static PropertyMetadata[] Metadata
     {
@@ -402,17 +402,17 @@ public class GameConfiguration : IGameConfiguration
             };
         }
     }
-    private static TConfiguration[] RetrieveEntities<TConfiguration>(ICorePersistentStorage persistentStorage, string repositoryName) where TConfiguration : IGameConfiguration
+    private static TConfiguration[] RetrieveEntities<TConfiguration>(ICorePersistentStorage persistentStorage, string repositoryName) //where TConfiguration : IGameConfiguration
     {
         string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
         List<TConfiguration> entities = new List<TConfiguration>();
         foreach (string serializedEntity in serializedEntities)
         {
             TConfiguration? deserializedEntity = JsonSerializer.Deserialize<TConfiguration>(serializedEntity, new JsonSerializerOptions() { IncludeFields = true });
-            if (deserializedEntity == null || !deserializedEntity.IsValid())
-            {
-                throw new Exception($"Invalid {repositoryName} json.");
-            }
+            //if (deserializedEntity == null || !deserializedEntity.IsValid())
+            //{
+            //    throw new Exception($"Invalid {repositoryName} json.");
+            //}
             entities.Add(deserializedEntity);
         }
         return entities.ToArray();
