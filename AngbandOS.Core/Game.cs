@@ -1071,7 +1071,7 @@ public bool IsDead = false;
     public readonly string? StartupTownName = null;
 
     /// <summary>
-    /// Allocates all storage and creates a new game.  
+    /// Creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     public Game(GameConfiguration gameConfiguration)
