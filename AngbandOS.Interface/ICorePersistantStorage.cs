@@ -53,4 +53,6 @@ public interface ICorePersistentStorage
     /// <param name="repositoryName"></param>
     /// <returns></returns>
     string? RetrieveEntity(string repositoryName);
+
+    bool PersistGameConfiguration(GameConfiguration gameConfiguration, string configurationName, bool overwrite);
 }

@@ -334,7 +334,11 @@ export class PlayComponent implements OnInit, OnDestroy {
           });
 
           this.GameInProgress = true;
-          this.connection.send("play", this.gameGuid);
+          if (this.gameGuid === null) {
+            this.connection.send("PlayNewGame", null);
+          } else {
+            this.connection.send("PlayExistingGame", this.gameGuid);
+          }
         }
       }, () => {
         this.showSnackBar("Connection to game server failed.");

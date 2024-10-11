@@ -67,9 +67,43 @@ namespace AngbandOS.Web.Hubs
         /// Returns true, when a request to shut the game down has been received.
         /// </summary>
         private bool ShuttingDown = false;
+
+        /// <summary>
+        /// Returns the <see cref="GameConfiguration"/> to use to create a new game; or null, to play an existing game.
+        /// </summary>
+        private readonly GameConfiguration? GameConfiguration = null;
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Constructs a new <see cref="SignalRConsole"/> object to play a new game.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="gameHub"></param>
+        /// <param name="persistentStorage"></param>
+        /// <param name="userId"></param>
+        /// <param name="username"></param>
+        /// <param name="notificationAction"></param>
+        public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
+        {
+            _consoleGameHub = gameHub;
+            PersistentStorage = persistentStorage;
+            UserId = userId;
+            Username = username;
+            NotificationAction = notificationAction;
+            Context = context;
+            GameConfiguration = gameConfiguration;
+        }
+
+        /// <summary>
+        /// Constructs a new <see cref="SignalRConsole"/> object to play an existing game.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="gameHub"></param>
+        /// <param name="persistentStorage"></param>
+        /// <param name="userId"></param>
+        /// <param name="username"></param>
+        /// <param name="notificationAction"></param>
         public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
@@ -321,7 +355,7 @@ namespace AngbandOS.Web.Hubs
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
-            if (PersistentStorage.GameExists())
+            if (GameConfiguration == null)
             {
                 if (_gameServer.PlayExistingGame(this, PersistentStorage))
                 {
@@ -331,8 +365,7 @@ namespace AngbandOS.Web.Hubs
             }
             else
             {
-                GameConfiguration gameConfiguration = new GameConfiguration();
-                if (_gameServer.PlayNewGame(this, PersistentStorage, gameConfiguration))
+                if (_gameServer.PlayNewGame(this, PersistentStorage, GameConfiguration))
                 {
                     // The game is over.  Let the client know.
                     GameOver();

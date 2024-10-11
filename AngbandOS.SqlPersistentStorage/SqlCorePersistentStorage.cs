@@ -2,6 +2,7 @@
 using AngbandOS.PersistentStorage.Sql.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace AngbandOS.PersistentStorage
 {
@@ -153,6 +154,48 @@ namespace AngbandOS.PersistentStorage
                 .Single(_repositoryEntity => _repositoryEntity.RepositoryName == repositoryName && _repositoryEntity.Key == "")
                 .JsonData;
             return value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameConfiguration"></param>
+        /// <param name="configurationName"></param>
+        /// <param name="overwrite"></param>
+        /// <returns>False, if the configuration exists and the <param "overwrite"/> parameter is false; true, if the operation completes successfully.</returns>
+        public bool PersistGameConfiguration(Core.Interface.GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+
+            // Retrieve an existing configuration.
+            UserGameConfiguration? userGameConfiguration = context.UserGameConfigurations.SingleOrDefault(_userGameConfiguration => _userGameConfiguration.Name == configurationName && _userGameConfiguration.Username == Username);
+
+            // Check to see if it already exists.
+            if (userGameConfiguration != null)
+            {
+                // Check to see if we are allowed to overwrite it.
+                if (!overwrite)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                // Create it and add it to the table.
+                userGameConfiguration = new UserGameConfiguration()
+                {
+                    Username = Username,
+                    Name = configurationName,
+                };
+                context.UserGameConfigurations.Add(userGameConfiguration);
+            }
+
+            // Update the configuration entity.
+            userGameConfiguration.JsonData = JsonSerializer.Serialize(gameConfiguration);
+
+            context.SaveChanges();
+
+            return true;
         }
     }
 }

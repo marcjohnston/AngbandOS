@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Security.Claims;
 
 namespace AngbandOS.Web.Hubs
@@ -27,11 +28,11 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Process the incoming web client request to play a game.
+        /// Process the incoming web client request to play an existing game.
         /// </summary>
         /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
         /// <returns></returns>
-        public async Task Play(string guid)
+        public async Task PlayNewGame(string gameConfiguration)
         {
             // We need to ensure the user is authenticated.
             string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
@@ -39,7 +40,29 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                await GameService.PlayAsync(Context, user.Id, guid, user.UserName);
+                await GameService.PlayNewGameAsync(Context, user.Id, new Core.Interface.GameConfiguration(), user.UserName);
+            }
+        }
+
+        /// <summary>
+        /// Process the incoming web client request to play an existing game.
+        /// </summary>
+        /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
+        /// <returns></returns>
+        public async Task PlayExistingGame(string guid)
+        {
+            if (guid == null)
+            {
+                throw new ArgumentNullException(nameof(guid));
+            }
+
+            // We need to ensure the user is authenticated.
+            string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
+
+            if (user.Id != null)
+            {
+                await GameService.PlayExistingGameAsync(Context, user.Id, guid, user.UserName);
             }
         }
 

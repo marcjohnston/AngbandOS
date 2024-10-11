@@ -126,5 +126,10 @@ namespace AngbandOS.PersistentStorage
         {
             throw new NotImplementedException();
         }
+
+        public bool PersistGameConfiguration(GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

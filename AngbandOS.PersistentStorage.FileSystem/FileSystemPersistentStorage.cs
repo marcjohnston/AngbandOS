@@ -147,5 +147,10 @@ namespace AngbandOS.PersistentStorage
             File.WriteAllBytes(SaveFilename, value);
             return true;
         }
+
+        public bool PersistGameConfiguration(GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

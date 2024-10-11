@@ -4,6 +4,7 @@ using AngbandOS.Web.Interface;
 using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -118,6 +119,11 @@ namespace AngbandOS.Web.Hubs
                 return false;
         }
 
+        public async Task PlayExistingGameAsync(HubCallerContext context, string userId, string guid, string username)
+        {
+            await PlayAsync(context, userId, guid, null, username);
+        }
+
         /// <summary>
         /// Initiate game play from the connection for a specific game guid.
         /// </summary>
@@ -125,29 +131,21 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId">The user id of the connected user.</param>
         /// <param name="guid">The guid for the game to play.  Null, to start a new game.</param>
         /// <param name="username"></param>
-        public async Task PlayAsync(HubCallerContext context, string userId, string? guid, string username)
+        public async Task PlayNewGameAsync(HubCallerContext context, string userId, GameConfiguration gameConfiguration, string username)
         {
+            await PlayAsync(context, userId, null, gameConfiguration, username);
+        }
+
+        private async Task PlayAsync(HubCallerContext context, string userId, string? guid, GameConfiguration? gameConfiguration, string username)
+        { 
+            if ((guid != null && gameConfiguration != null) || (guid == null && gameConfiguration == null))
+            {
+                throw new ArgumentException($"Either {nameof(guid)} or {nameof(gameConfiguration)} must be null.");
+            }
             string connectionId = context.ConnectionId;
 
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
             IGameHub gameHub = GameHub.Clients.Client(connectionId);
-
-            // Check to see if this is a request for a new game.
-            if (guid == null)
-            {
-                // It is, create a new guid for the game.
-                guid = Guid.NewGuid().ToString();
-
-                // Write a message in the log that a new game was created.
-                await WriteMessageAsync(context.User, null, "Game created.", MessageTypeEnum.GameCreated, guid);
-
-                // Send a message to the client, so that the client knows the GUID for the game it is about to play.  We will wait for the call, but this wait may not be
-                // necessary.
-                await gameHub.GameStarted(guid);
-            }
-
-            // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
 
             // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
             Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
@@ -186,8 +184,36 @@ namespace AngbandOS.Web.Hubs
                 }
             };
 
-            // Create a background worker object that runs the game and receives messages from the game to send to the client.
-            SignalRConsole console = new SignalRConsole(context, gameHub, corePersistentStorage, userId, username, gameUpdateMonitor);
+            // Create a signal-r console object to manage the in-progress game.  Create a background worker object that runs the game and receives messages from the game to send to the client.
+            SignalRConsole console;
+
+            // Check to see if this is a request for a new game.
+            if (guid == null && gameConfiguration != null)
+            {
+                // It is, create a new guid for the game.
+                guid = Guid.NewGuid().ToString();
+
+                // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
+                ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
+
+                // Write a message in the log that a new game was created.
+                await WriteMessageAsync(context.User, null, "Game created.", MessageTypeEnum.GameCreated, guid);
+
+                // Send a message to the client, so that the client knows the GUID for the game it is about to play.  We will wait for the call, but this wait may not be
+                // necessary.
+                await gameHub.GameStarted(guid);
+
+                // Create a background worker object that runs the game and receives messages from the game to send to the client.
+                console = new SignalRConsole(context, gameHub, corePersistentStorage, gameConfiguration, userId, username, gameUpdateMonitor);
+            }
+            else
+            {
+                // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
+                ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
+
+                // Play an existing game.
+                console = new SignalRConsole(context, gameHub, corePersistentStorage, userId, username, gameUpdateMonitor);
+            }
 
             // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
             console.ThreadName = $"Game: {userId}/{guid}";
@@ -351,9 +377,13 @@ namespace AngbandOS.Web.Hubs
                 UserManager<ApplicationUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 ApplicationUser? appUser = await userManager.FindByIdAsync(userId);
                 if (appUser != null)
+                {
                     return appUser.UserName;
+                }
                 else
+                {
                     return "unknown";
+                }
             }
         }
         #endregion

@@ -244,7 +244,6 @@ public class GameServer
     /// </summary>
     /// <param name="console"></param>
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
-    /// <param name="updateMonitor"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
     public bool PlayNewGame(IConsoleViewPort console, ICorePersistentStorage? persistentStorage, GameConfiguration configuration)
@@ -271,8 +270,7 @@ public class GameServer
     /// Plays an existing game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
     /// <param name="console"></param>
-    /// <param name="persistentStorage"></param>
-    /// <param name="updateMonitor"></param>
+    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <returns></returns>
     public bool PlayExistingGame(IConsoleViewPort console, ICorePersistentStorage persistentStorage)
     {
