@@ -121,11 +121,14 @@ namespace AngbandOS.Web.Hubs
         /// <summary>
         /// Initiate game play from the connection for a specific game guid.
         /// </summary>
+        /// <param name="context">The context of the signal-r GameHub that the request came in from.</param>
         /// <param name="userId">The user id of the connected user.</param>
         /// <param name="guid">The guid for the game to play.  Null, to start a new game.</param>
-        /// <param name="connectionId"></param>
-        public async Task PlayAsync(HubCallerContext context, string userId, string? guid, string connectionId, string username)
+        /// <param name="username"></param>
+        public async Task PlayAsync(HubCallerContext context, string userId, string? guid, string username)
         {
+            string connectionId = context.ConnectionId;
+
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
             IGameHub gameHub = GameHub.Clients.Client(connectionId);
 
