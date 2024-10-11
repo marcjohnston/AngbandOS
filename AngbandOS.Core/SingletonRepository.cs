@@ -319,7 +319,7 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadFromConfiguration<T, TConfiguration, TGeneric>(TConfiguration[]? entityConfigurations) where T : IGetKey where TGeneric : T
+    private void LoadFromConfiguration<T, TConfiguration, TGeneric>(TConfiguration[]? entityConfigurations) where T : IGetKey where TGeneric : T where TConfiguration : notnull
     {
         string typeName = typeof(T).Name;
         if (entityConfigurations != null)
