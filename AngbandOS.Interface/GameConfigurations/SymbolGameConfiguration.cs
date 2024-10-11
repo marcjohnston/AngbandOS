@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class SymbolGameConfiguration : IGameConfiguration
+public class SymbolGameConfiguration
 {
     public virtual char Character { get; set; }
     public virtual char? QueryCharacter { get; set; } = null;
@@ -17,17 +17,12 @@ public class SymbolGameConfiguration : IGameConfiguration
 
     public virtual string Key { get; set; }
 
-    public bool IsValid()
-    {
-        if (Key == null || Character == null || Name == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || Character == null || Name == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }

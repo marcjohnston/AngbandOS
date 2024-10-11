@@ -55,4 +55,5 @@ public interface ICorePersistentStorage
     string? RetrieveEntity(string repositoryName);
 
     bool PersistGameConfiguration(GameConfiguration gameConfiguration, string configurationName, bool overwrite);
+    GameConfiguration LoadConfiguration();
 }

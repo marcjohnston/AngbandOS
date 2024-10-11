@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class HelpGroupGameConfiguration : IGameConfiguration
+public class HelpGroupGameConfiguration
 {
     public virtual string Key { get; set; }
 
@@ -16,17 +16,12 @@ public class HelpGroupGameConfiguration : IGameConfiguration
 
     public virtual string Title { get; set; }
 
-    public bool IsValid()
-    {
-        if (Key == null || SortIndex == null || Title == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || SortIndex == null || Title == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }

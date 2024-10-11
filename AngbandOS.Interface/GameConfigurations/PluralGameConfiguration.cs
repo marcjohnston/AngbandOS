@@ -2,7 +2,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class PluralGameConfiguration : IGameConfiguration
+public class PluralGameConfiguration
 {
     /// <summary>
     /// Returns the capitalized singular version of the noun.
@@ -14,14 +14,4 @@ public class PluralGameConfiguration : IGameConfiguration
     /// the class.
     /// </summary>
     public virtual string PluralForm { get; set; }
-
-    public bool IsValid()
-    {
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
 }

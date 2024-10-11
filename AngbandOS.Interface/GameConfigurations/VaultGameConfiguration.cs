@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class VaultGameConfiguration : IGameConfiguration
+public class VaultGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
@@ -20,17 +20,12 @@ public class VaultGameConfiguration : IGameConfiguration
     public virtual string Text { get; set; }
     public virtual int Width { get; set; }
 
-    public bool IsValid()
-    {
-        if (Key == null || Color == null || Name == null || Category == null || Height == null || Rating == null || Text == null || Width == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || Color == null || Name == null || Category == null || Height == null || Rating == null || Text == null || Width == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }

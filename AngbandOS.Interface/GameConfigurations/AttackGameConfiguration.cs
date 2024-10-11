@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class AttackGameConfiguration : IGameConfiguration
+public class AttackGameConfiguration
 {
     public virtual string Key { get; set; }
 
@@ -59,13 +59,4 @@ public class AttackGameConfiguration : IGameConfiguration
     /// </summary>
     public virtual bool RendersMissMessage { get; set; } = true;
 
-    public bool IsValid()
-    {
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
 }

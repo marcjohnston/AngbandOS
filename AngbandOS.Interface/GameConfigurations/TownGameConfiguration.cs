@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class TownGameConfiguration : IGameConfiguration
+public class TownGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual char Char { get; set; }
@@ -24,17 +24,13 @@ public class TownGameConfiguration : IGameConfiguration
 
     public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
 
-    public bool IsValid()
-    {
-        if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null || DungeonName == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null || DungeonName == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
+    //}
 }

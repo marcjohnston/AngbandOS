@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ShopkeeperGameConfiguration : IGameConfiguration
+public class ShopkeeperGameConfiguration
 {
     public virtual string Key { get; set; }
 
@@ -21,17 +21,12 @@ public class ShopkeeperGameConfiguration : IGameConfiguration
 
     public virtual string? RaceName { get; set; }
 
-    public bool IsValid()
-    {
-        if (Key == null || MaxCost == null || MinInflate == null || Name == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || MaxCost == null || MinInflate == null || Name == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }

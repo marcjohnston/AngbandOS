@@ -7,7 +7,7 @@ namespace AngbandOS.Core.Interface;
 /// configure a new game.  Use the ConfigurationMetadata object to get metadata details that can be used to generate configuration data.
 /// </summary>
 [Serializable]
-public class GameConfiguration //: IGameConfiguration
+public class GameConfiguration
 {
     ///// <summary>
     ///// Represents the names of the stores that are available in the game.  These store names can any preconfigured Angband store, or a store with a matching
@@ -102,8 +102,6 @@ public class GameConfiguration //: IGameConfiguration
     public string[]? ShopkeeperWorthlessComments { get; set; } = null;
     public string[]? SingingPlayerAttacks { get; set; } = null;
     public string[]? WorshipPlayerAttacks { get; set; } = null;
-
-    //   public bool IsValid() => true;
 
     public static PropertyMetadata[] Metadata
     {
@@ -401,89 +399,5 @@ public class GameConfiguration //: IGameConfiguration
                 }
             };
         }
-    }
-    private static TConfiguration[] RetrieveEntities<TConfiguration>(ICorePersistentStorage persistentStorage, string repositoryName) //where TConfiguration : IGameConfiguration
-    {
-        string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
-        List<TConfiguration> entities = new List<TConfiguration>();
-        foreach (string serializedEntity in serializedEntities)
-        {
-            TConfiguration? deserializedEntity = JsonSerializer.Deserialize<TConfiguration>(serializedEntity, new JsonSerializerOptions() { IncludeFields = true });
-            //if (deserializedEntity == null || !deserializedEntity.IsValid())
-            //{
-            //    throw new Exception($"Invalid {repositoryName} json.");
-            //}
-            entities.Add(deserializedEntity);
-        }
-        return entities.ToArray();
-    }
-
-    /// <summary>
-    /// Returns an array of strings that represents the string list repository entities; or null, if the file doesn't exist.
-    /// </summary>
-    /// <param name="persistentStorage"></param>
-    /// <param name="repositoryName"></param>
-    /// <returns></returns>
-    private static string[]? RetrieveEntity(ICorePersistentStorage persistentStorage, string repositoryName)
-    {
-        string? serializedEntity = persistentStorage.RetrieveEntity(repositoryName);
-        if (serializedEntity == null)
-        {
-            return null;
-        }
-
-        string[]? values = JsonSerializer.Deserialize<string[]>(serializedEntity);
-        return values;
-    }
-
-    public static GameConfiguration LoadConfiguration(ICorePersistentStorage persistentStorage)
-    {
-        return new GameConfiguration()
-        {
-            AmuletReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "AmuletReadableFlavors"),
-            Animations = RetrieveEntities<AnimationGameConfiguration>(persistentStorage, "Animations"),
-            Attacks = RetrieveEntities<AttackGameConfiguration>(persistentStorage, "Attacks"),
-            ClassSpells = RetrieveEntities<ClassSpellGameConfiguration>(persistentStorage, "ClassSpells"),
-            DungeonGuardians = RetrieveEntities<DungeonGuardianGameConfiguration>(persistentStorage, "DungeonGuardians"),
-            Dungeons = RetrieveEntities<DungeonGameConfiguration>(persistentStorage, "Dungeons"),
-            GameCommands = RetrieveEntities<GameCommandGameConfiguration>(persistentStorage, "GameCommands"),
-            Gods = RetrieveEntities<GodGameConfiguration>(persistentStorage, "Gods"),
-            HelpGroups = RetrieveEntities<HelpGroupGameConfiguration>(persistentStorage, "HelpGroups"),
-            MonsterRaces = RetrieveEntities<MonsterRaceGameConfiguration>(persistentStorage, "MonsterRaces"),
-            MushroomReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "MushroomReadableFlavors"),
-            Plurals = RetrieveEntities<PluralGameConfiguration>(persistentStorage, "Plurals"),
-            PotionReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "PotionReadableFlavors"),
-            ProjectileGraphics = RetrieveEntities<ProjectileGraphicGameConfiguration>(persistentStorage, "ProjectileGraphics"),
-            RingReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "RingReadableFlavors"),
-            RodReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "RodReadableFlavors"),
-            ScrollReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "ScrollReadableFlavors"),
-            Shopkeepers = RetrieveEntities<ShopkeeperGameConfiguration>(persistentStorage, "Shopkeepers"),
-            Spells = RetrieveEntities<SpellGameConfiguration>(persistentStorage, "Spells"),
-            StaffReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "StaffReadableFlavors"),
-            StoreCommands = RetrieveEntities<StoreCommandGameConfiguration>(persistentStorage, "StoreCommands"),
-            StoreFactories = RetrieveEntities<StoreFactoryGameConfiguration>(persistentStorage, "StoreFactories"),
-            Symbols = RetrieveEntities<SymbolGameConfiguration>(persistentStorage, "Symbols"),
-            //Tiles = RetrieveEntities<TileConfiguration>(persistentStorage, "Tiles"), // TODO: This is not working with generic
-            Towns = RetrieveEntities<TownGameConfiguration>(persistentStorage, "Towns"),
-            Vaults = RetrieveEntities<VaultGameConfiguration>(persistentStorage, "Vaults"),
-            WandReadableFlavors = RetrieveEntities<ReadableFlavorGameConfiguration>(persistentStorage, "WandReadableFlavors"),
-            WizardCommands = RetrieveEntities<WizardCommandGameConfiguration>(persistentStorage, "WizardCommands"),
-
-            ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
-            FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),
-            FunnyComments = RetrieveEntity(persistentStorage, "FunnyComments"),
-            FunnyDescriptions = RetrieveEntity(persistentStorage, "FunnyDescriptions"),
-            HorrificDescriptions = RetrieveEntity(persistentStorage, "HorrificDescriptions"),
-            InsultPlayerAttacks = RetrieveEntity(persistentStorage, "InsultPlayerAttacks"),
-            MoanPlayerAttacks = RetrieveEntity(persistentStorage, "MoanPlayerAttacks"),
-            UnreadableFlavorSyllables = RetrieveEntity(persistentStorage, "UnreadableFlavorSyllables"),
-            ShopkeeperAcceptedComments = RetrieveEntity(persistentStorage, "ShopkeeperAcceptedComments"),
-            ShopkeeperBargainComments = RetrieveEntity(persistentStorage, "ShopkeeperBargainComments"),
-            ShopkeeperGoodComments = RetrieveEntity(persistentStorage, "ShopkeeperGoodComments"),
-            ShopkeeperLessThanGuessComments = RetrieveEntity(persistentStorage, "ShopkeeperLessThanGuessComments"),
-            ShopkeeperWorthlessComments = RetrieveEntity(persistentStorage, "ShopkeeperWorthlessComments"),
-            SingingPlayerAttacks = RetrieveEntity(persistentStorage, "SingingPlayerAttacks"),
-            WorshipPlayerAttacks = RetrieveEntity(persistentStorage, "WorshipPlayerAttacks")
-        };
     }
 }

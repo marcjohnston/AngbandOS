@@ -3,7 +3,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class SpellGameConfiguration : IGameConfiguration
+public class SpellGameConfiguration
 {
     public virtual string Key { get; set; }
 
@@ -14,14 +14,4 @@ public class SpellGameConfiguration : IGameConfiguration
     public virtual string? CastScriptName { get; set; } = null;
     public virtual string? CastFailedScriptName { get; set; } = null;
     public virtual string LearnedDetails { get; set; } = "";
-
-    public bool IsValid()
-    {
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
 }

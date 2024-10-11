@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class StoreFactoryGameConfiguration : IGameConfiguration
+public class StoreFactoryGameConfiguration
 {
     public StoreFactoryGameConfiguration()
     {
@@ -194,14 +194,4 @@ public class StoreFactoryGameConfiguration : IGameConfiguration
     public virtual bool StoreIdentifiesItems { get; set; } = true;
 
     public virtual bool StoreAnalyzesPurchases { get; set; } = true;
-
-    public bool IsValid()
-    {
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
 }

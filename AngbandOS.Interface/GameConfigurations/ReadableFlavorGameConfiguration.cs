@@ -9,21 +9,11 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ReadableFlavorGameConfiguration : IGameConfiguration
+public class ReadableFlavorGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual string SymbolName { get; set; }
     public virtual ColorEnum Color { get; set; }
     public virtual string Name { get; set; }
     public virtual bool CanBeAssigned { get; set; }
-
-    public bool IsValid()
-    {
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
 }

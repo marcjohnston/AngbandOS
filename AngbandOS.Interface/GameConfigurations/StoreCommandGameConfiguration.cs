@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Interface;
 
 
 [Serializable]
-public class StoreCommandGameConfiguration : IGameConfiguration
+public class StoreCommandGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual char KeyChar { get; set; }
@@ -19,17 +19,12 @@ public class StoreCommandGameConfiguration : IGameConfiguration
     public virtual string[]? ValidStoreFactoryNames { get; set; }
     public virtual string? ExecuteScriptName { get; set; }
 
-    public bool IsValid()
-    {
-        if (Key == null || KeyChar == null || Description == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || KeyChar == null || Description == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }

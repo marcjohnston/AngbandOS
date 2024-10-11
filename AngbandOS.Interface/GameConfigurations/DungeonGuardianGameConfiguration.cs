@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class DungeonGuardianGameConfiguration : IGameConfiguration
+public class DungeonGuardianGameConfiguration
 {
     public virtual string Key { get; set; }
 
@@ -23,17 +23,12 @@ public class DungeonGuardianGameConfiguration : IGameConfiguration
     /// </summary>
     public virtual int LevelFound { get; set; }
 
-    public bool IsValid()
-    {
-        if (Key == null || MonsterRaceName == null || LevelFound == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || MonsterRaceName == null || LevelFound == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }

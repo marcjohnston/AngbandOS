@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class DungeonGameConfiguration : IGameConfiguration
+public class DungeonGameConfiguration
 {
     public virtual string Key { get; set; }
 
@@ -54,17 +54,12 @@ public class DungeonGameConfiguration : IGameConfiguration
     /// </summary>
     public virtual bool Tower { get; set; } = false;
 
-    public bool IsValid()
-    {
-        if (Key == null || BaseOffset == null || MapSymbol == null || MaxLevel == null || Name == null || Shortname == null || Tower == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || BaseOffset == null || MapSymbol == null || MaxLevel == null || Name == null || Shortname == null || Tower == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }

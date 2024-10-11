@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class WizardCommandGameConfiguration : IGameConfiguration
+public class WizardCommandGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual char KeyChar { get; set; }
@@ -18,18 +18,13 @@ public class WizardCommandGameConfiguration : IGameConfiguration
     public virtual string HelpDescription { get; set; } = "";
     public virtual string? ExecuteScriptName { get; set; } = null;
 
-    public bool IsValid()
-    {
-        if (Key == null || KeyChar == null || IsEnabled == null || HelpDescription == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
+    //public bool IsValid()
+    //{
+    //    if (Key == null || KeyChar == null || IsEnabled == null || HelpDescription == null)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 }
 

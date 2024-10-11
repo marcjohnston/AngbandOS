@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class TileGameConfiguration : IGameConfiguration
+public class TileGameConfiguration
 {
     protected virtual string? OnJammedTileName => null;
     protected virtual string? VisibleTreasureForTileName => null;
@@ -9,11 +9,6 @@ public class TileGameConfiguration : IGameConfiguration
     public virtual string Key { get; set; }
 
     public virtual string? StepOnScriptName { get; set; }
-
-    public bool IsValid()
-    {
-        return true;
-    }
 
     /// <summary>
     /// Returns the name of the symbol to be used for rendering.  This property is bound to the Symbol property during binding.
@@ -227,9 +222,4 @@ public class TileGameConfiguration : IGameConfiguration
     /// <summary>
     /// Returns true, if the tile is a tree.  Returns false, by default.  Bush, scarecrow, signpost and tree tiles all return true.
     public virtual bool IsTree { get; set; } = false;
-
-    public override string ToString()
-    {
-        return Key;
-    }
 }

@@ -2,7 +2,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ProjectileGraphicGameConfiguration : IGameConfiguration
+public class ProjectileGraphicGameConfiguration
 {
     public virtual string Key { get; set; }
 
@@ -15,14 +15,4 @@ public class ProjectileGraphicGameConfiguration : IGameConfiguration
     /// Returns the color to be used for the projectile.
     /// </summary>
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
-
-    public bool IsValid()
-    {
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return Key;
-    }
 }

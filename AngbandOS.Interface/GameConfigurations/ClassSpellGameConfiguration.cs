@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Interface;
 
 [Serializable]
-public class ClassSpellGameConfiguration : IGameConfiguration
+public class ClassSpellGameConfiguration
 {
     public virtual string SpellName { get; set; }
     public virtual string CharacterClassName { get; set; }
@@ -17,14 +17,4 @@ public class ClassSpellGameConfiguration : IGameConfiguration
     public virtual int ManaCost { get; set; }
     public virtual int BaseFailure { get; set; }
     public virtual int FirstCastExperience { get; set; }
-
-    public bool IsValid()
-    {
-        return true;
-    }
-
-    public override string ToString()
-    {
-        return $"{SpellName}.{CharacterClassName}";
-    }
 }
