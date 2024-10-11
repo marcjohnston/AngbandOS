@@ -319,23 +319,20 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadFromConfiguration<T, TDefinition, TGeneric>(TDefinition[]? definitions) where T : IGetKey where TGeneric : T
+    private void LoadFromConfiguration<T, TConfiguration, TGeneric>(TConfiguration[]? entityConfigurations) where T : IGetKey where TGeneric : T
     {
         string typeName = typeof(T).Name;
-        if (definitions != null)
+        if (entityConfigurations != null)
         {
             ConstructorInfo[] constructors = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             if (constructors.Length != 1)
             {
                 throw new Exception($"Invalid number of constructors for {typeof(TGeneric)}.");
             }
-            foreach (TDefinition definition in definitions)
+            foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
-                T gameCommand = (T)constructors[0].Invoke(new object[] { Game, definition });
-                LoadSingleton(gameCommand);
-                //string key = gameCommand.GetKey;
-                //gameCommands.Add(key, gameCommand);
-                //_allSingletonsList.Add(gameCommand);
+                T entity = (T)constructors[0].Invoke(new object[] { Game, entityConfiguration });
+                LoadSingleton(entity);
             }
         }
     }
