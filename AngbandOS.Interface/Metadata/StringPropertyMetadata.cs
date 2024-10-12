@@ -2,6 +2,12 @@
 
 public class StringPropertyMetadata : PropertyMetadata
 {
-    public StringPropertyMetadata(string propertyName) : base(propertyName) { }
-    public string DefaultValue { get; set; }
+    public StringPropertyMetadata(string propertyName) : base(propertyName, "string") { }
+    public string DefaultValue
+    {
+        set
+        {
+            DefaultStringValue = value;
+        }
+    }
 }

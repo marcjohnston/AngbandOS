@@ -1,70 +1,11 @@
 <ng-container *ngIf="designer !== undefined">
   <h6>{{designer.title}}</h6>
-  <table mat-table [dataSource]="designer.properties" id="designer-table">
-    <ng-container matColumnDef="property-name">
+  <table mat-table [dataSource]="collections" id="collections-table">
+    <ng-container matColumnDef="collection-title">
       <th mat-header-cell *matHeaderCellDef>
         Property
       </th>
-      <td mat-cell *matCellDef="let property">{{property.title}}</td>
-    </ng-container>
-    <ng-container matColumnDef="property-data-type">
-      <th mat-header-cell *matHeaderCellDef>
-        Data Type
-      </th>
-      <td mat-cell *matCellDef="let property">{{property.dataType.name}}</td>
-    </ng-container>
-    <ng-container matColumnDef="property-value">
-      <th mat-header-cell *matHeaderCellDef>
-        Edit
-      </th>
-      <td mat-cell *matCellDef="let property">
-        <ng-container *ngIf="property.dataType.render==='Boolean'">
-          <input type="radio" value="true" [checked]="object[property.propertyName]" />True
-          <input type="radio" value="false" [checked]="!object[property.propertyName]" />False
-        </ng-container>
-        <ng-container *ngIf="property.dataType.render==='String'">
-          <input type="text" value="{{object[property.propertyName]}}" />
-        </ng-container>
-        <ng-container *ngIf="property.dataType.render==='Integer'">
-          <input type="text" value="{{object[property.propertyName]}}" />
-        </ng-container>
-        <ng-container *ngIf="property.dataType.render==='DiceRoll'">
-          <input type="text" class="diceroll-dice" value="{{object[property.propertyName].dice}}" />d
-          <input type="text" class="diceroll-sides" value="{{object[property.propertyName].sides}}" />+
-          <input type="text" class="diceroll-bonus" value="{{object[property.propertyName].bonus}}" />
-        </ng-container>
-        <ng-container *ngIf="property.dataType.render==='SelectList'">
-          <select>
-            <ng-template ngFor let-item [ngForOf]="property.dataType.options">
-              <option [value]="item.value" [attr.title]="item.description">{{item.text}}</option>
-            </ng-template>
-          </select>
-        </ng-container>
-        <ng-container *ngIf="property.dataType.render==='Repository'">
-          <div class="repository-container">
-            <div class="repository-selections">
-              <ng-template ngFor let-item [ngForOf]="object[property.propertyName]">
-                <div class="repository-selection">
-                  <input type="checkbox" value="item" [(ngModel)]="item.selected" />
-                  <span>{{item}}</span>
-                </div>
-              </ng-template>
-            </div>
-            <span class="repository-actions">
-              <button (click)="onRepositoryAddClick(property)"><</button>
-              <button (click)="onRepositoryRemoveClick(property)">></button>
-            </span>
-            <div class="repository-choices">
-              <ng-template ngFor let-item [ngForOf]="property.dataType.items">
-                <div class="repository-choice">
-                  <span [attr.title]="item.description">{{item.text}}</span>
-                  <input type="checkbox" value="item" [(ngModel)]="item.selected" />
-                </div>
-              </ng-template>
-            </div>
-          </div>
-        </ng-container>
-      </td>
+      <td mat-cell *matCellDef="let property">{{property}}</td>
     </ng-container>
     <tr mat-row *matRowDef="let property; columns: propertiesDisplayedColumns"></tr>
   </table>

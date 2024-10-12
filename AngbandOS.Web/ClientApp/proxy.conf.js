@@ -14,6 +14,7 @@ const PROXY_CONFIG = [
       "/_framework",
       "/apiv1/saved-games",
       "/apiv1/games",
+      "/apiv1/configurations",
       "/apiv1/accounts",
 
       "/apiv1/admin-hub",

@@ -2,6 +2,12 @@
 
 public class IntegerPropertyMetadata : PropertyMetadata
 {
-    public IntegerPropertyMetadata(string propertyName) : base(propertyName) { }
-    public int DefaultValue { get; set; } // TODO: Is this needed when the object should be preset with this value.
+    public IntegerPropertyMetadata(string propertyName) : base(propertyName, "integer") { }
+    public int DefaultValue
+    {
+        set
+        {
+            DefaultIntegerValue = value;
+        }
+    }
 }

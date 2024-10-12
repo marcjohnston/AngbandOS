@@ -185,6 +185,21 @@ internal abstract class Dungeon : IGetKey
         }
     }
 
+    public bool IsValid(DungeonGameConfiguration dungeonGameConfiguration)
+    {
+        if (dungeonGameConfiguration.Key == null || 
+            dungeonGameConfiguration.BaseOffset == null || 
+            dungeonGameConfiguration.MapSymbol == null || 
+            dungeonGameConfiguration.MaxLevel == null || 
+            dungeonGameConfiguration.Name == null || 
+            dungeonGameConfiguration.Shortname == null || 
+            dungeonGameConfiguration.Tower == null)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public string ToJson()
     {
         DungeonGameConfiguration dungeon = new()

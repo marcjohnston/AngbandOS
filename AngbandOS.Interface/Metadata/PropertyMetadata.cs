@@ -6,14 +6,20 @@
 /// </summary>
 public abstract class PropertyMetadata
 {
-    public PropertyMetadata(string propertyName)
+    public PropertyMetadata(string propertyName, string type)
     {
         if (String.IsNullOrEmpty(propertyName))
         {
             throw new Exception($"The {nameof(propertyName)} parameter cannot be null or empty.");
         }
         PropertyName = propertyName;
+        Type = type;
     }
+
+    /// <summary>
+    /// Returns the name of the configuration property to assign the user value to.
+    /// </summary>
+    public string Type { get; }
 
     /// <summary>
     /// Returns the name of the configuration property to assign the user value to.
@@ -45,8 +51,15 @@ public abstract class PropertyMetadata
     /// </summary>
     public string? Description { get; set; } = "";
 
-    public override string ToString()
-    {
-        return PropertyName;
-    }
+    public int? DefaultIntegerValue { get; set; } = null;
+
+    public bool? DefaultBooleanValue { get; set; } = null;
+
+    public char? DefaultCharacterValue { get; set; } = null;
+
+    public string? DefaultStringValue { get; set; } = null;
+
+    public PropertyMetadata[]? CollectionPropertiesMetadata { get; set; } = null;
+
+    public PropertyMetadata[]? TupleTypes { get; set; } = null;
 }

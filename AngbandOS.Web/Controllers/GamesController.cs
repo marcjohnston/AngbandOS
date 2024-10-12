@@ -135,13 +135,15 @@ namespace AngbandOS.Web.Controllers
         //    return GameConfiguration.LoadConfiguration(corePersistentStorage);
         //}
 
-        //[HttpGet]
-        //[Route("configuration/metadata")]
-        //[Produces("application/json")]
-        //public PropertyMetadata[] GetGameConfigurationMetadata()
-        //{
-        //    return GameConfiguration.Metadata;
-        //}
+        [HttpGet]
+        [Route("configurations/metadata")]
+        [Produces("application/json")]
+        [AllowAnonymous]
+        public ActionResult<PropertyMetadata[]> GetGameConfigurationMetadata()
+        {
+            PropertyMetadata[] metadata = GameConfiguration.Metadata;
+            return Ok(metadata);
+        }
         //#endregion
     }
 }

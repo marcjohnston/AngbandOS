@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { StringDesignerPropertyDataType } from './api/string-designer-property-data-type';
 import { BooleanDesignerPropertyDataType } from './api/boolean-designer-property-data-type';
@@ -10,6 +10,10 @@ import { GameDataDesigner } from './api/game-data-designer';
 import { SelectItem } from "./api/select-item";
 import { Designer } from './api/designer';
 import { DesignerProperty } from './api/designer-property';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorMessages } from '../modules/error-messages/error-messages.module';
+import { PropertyMetadata } from './PropertyMetadata';
 
 @Component({
   selector: 'app-game-designer',
@@ -20,13 +24,47 @@ import { DesignerProperty } from './api/designer-property';
 export class GameDesignerComponent implements OnInit {
   public designer: Designer | undefined = undefined;
   public object: any | undefined = undefined;
-  public propertiesDisplayedColumns: string[] = ["property-name", "property-data-type", "property-value"];
-  constructor() { }
+  private metadata: any;
+  public propertiesDisplayedColumns: string[] = ["collection-title"];
+  public collections: string[] = [];
+
+  constructor(
+    private _httpClient: HttpClient,
+    private _ngZone: NgZone,
+    private _snackBar: MatSnackBar
+  ) { }
+
+  loadMetadata(metadata: PropertyMetadata[]) {
+    const collectionsList: string[] = [];
+    for (var propertyMetadata of metadata) {
+      if (propertyMetadata.propertyName === null) {
+        this._snackBar.open("Property metadata contains a null PropertyName value.", "", {
+          duration: 5000
+        });
+        return;
+      }
+      collectionsList.push(propertyMetadata.propertyName);
+    }
+    this.collections = collectionsList.sort();
+    this.metadata = metadata;
+  }
 
   ngOnInit(): void {
     // We preconfigure a top level game to be designed.
     this.designer = new GameDataDesigner();
     this.object = new CthangbandGameData();
+
+    this._httpClient.get<PropertyMetadata[]>(`/apiv1/configurations/metadata`).toPromise().then((_metadata) => {
+      this._ngZone.run(() => {
+        if (_metadata !== undefined) {
+          this.loadMetadata(_metadata);
+        }
+      });
+    }, (_errorResponse: HttpErrorResponse) => {
+      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+        duration: 5000
+      });
+    });
   }
 
   onRepositoryAddClick(property: DesignerProperty) {
