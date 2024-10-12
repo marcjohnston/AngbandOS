@@ -1,157 +1,142 @@
 ﻿using AngbandOS.Core.Interface;
+using AngbandOS.PersistentStorage.Sql.Entities;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 namespace AngbandOS.PersistentStorage
 {
-    public class FileSystemPersistentStorage : ICorePersistentStorage
+    /// <summary>
+    /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
+    /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
+    /// </summary>
+    public class SqlGameConfigurationPersistentStorage : IGameConfigurationPersistentStorage
     {
-        private string SaveFilename;
+        /// <summary>
+        /// Returns the connection string to the database.
+        /// </summary>
+        protected string ConnectionString { get; }
 
-        public FileSystemPersistentStorage(string saveFilename)
-        {
-            SaveFilename = saveFilename;
-        }
+        /// <summary>
+        /// Returns the username to use when reading and writing a saved game to the database.
+        /// </summary>
+        protected string Username { get; }
 
-        public bool GameExists()
+        public SqlGameConfigurationPersistentStorage(string connectionString, string username)
         {
-            return File.Exists(SaveFilename);
-        }
-
-        private bool IsValidName(string name)
-        {
-            foreach (char c in name.ToLower())
+            if (connectionString == null)
             {
-                if (!"abcdefghijklmnopqrstuvwxyz0123456789._".Contains(c))
+                throw new ArgumentNullException("connectionString");
+            }
+            if (username == null)
+            {
+                throw new ArgumentNullException("username");
+            }
+            ConnectionString = connectionString;
+            Username = username;
+        }
+
+        private string[] RetrieveEntities(string repositoryName)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+            return context.RepositoryEntities
+                .Where(_repositoryEntity => _repositoryEntity.RepositoryName == repositoryName)
+                .Select(_repositoryEntity => _repositoryEntity.JsonData)
+                .ToArray();
+        }
+
+        /// <inheritdoc />
+        /// <param name="repositoryName"></param>
+        /// <param name="jsonEntities"></param>
+        private void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                context.Database.ExecuteSqlRaw("DELETE FROM [RepositoryEntities] WHERE [RepositoryName]=@RepositoryName", new SqlParameter("@RepositoryName", repositoryName));
+                foreach (KeyValuePair<string, string> jsonEntity in jsonEntities)
+                {
+                    // Check to see if there is any json data to save.
+                    if (jsonEntity.Value.Length > 0)
+                    {
+                        string key = jsonEntity.Key;
+                        context.RepositoryEntities.Add(new RepositoryEntity()
+                        {
+                            RepositoryName = repositoryName,
+                            Key = key,
+                            JsonData = jsonEntity.Value
+                        });
+                    }
+                }
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="repositoryName"></param>
+        /// <param name="json"></param>
+        /// <remarks>Non-keyed entities share the same primary key PK as keyed entities but use the empty string as the key value.</remarks>
+        public void PersistEntity(string repositoryName, string json)
+        {
+            PersistEntities(repositoryName, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("", json) });
+        }
+
+        public string RetrieveEntity(string repositoryName)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+            string? value = context.RepositoryEntities
+                .Single(_repositoryEntity => _repositoryEntity.RepositoryName == repositoryName && _repositoryEntity.Key == "")
+                .JsonData;
+            return value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameConfiguration"></param>
+        /// <param name="configurationName"></param>
+        /// <param name="overwrite"></param>
+        /// <returns>False, if the configuration exists and the <param "overwrite"/> parameter is false; true, if the operation completes successfully.</returns>
+        public bool PersistGameConfiguration(Core.Interface.GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+
+            // Retrieve an existing configuration.
+            UserGameConfiguration? userGameConfiguration = context.UserGameConfigurations.SingleOrDefault(_userGameConfiguration => _userGameConfiguration.Name == configurationName && _userGameConfiguration.Username == Username);
+
+            // Check to see if it already exists.
+            if (userGameConfiguration != null)
+            {
+                // Check to see if we are allowed to overwrite it.
+                if (!overwrite)
                 {
                     return false;
                 }
             }
+            else
+            {
+                // Create it and add it to the table.
+                userGameConfiguration = new UserGameConfiguration()
+                {
+                    Username = Username,
+                    Name = configurationName,
+                };
+                context.UserGameConfigurations.Add(userGameConfiguration);
+            }
+
+            // Update the configuration entity.
+            userGameConfiguration.JsonData = JsonSerializer.Serialize(gameConfiguration);
+
+            context.SaveChanges();
+
             return true;
-        }
-        public void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
-        {
-            if (!IsValidName(repositoryName))
-            {
-                throw new Exception($"The repository name {repositoryName} contains invalid characters.  Only a-zA-Z0-9_. characters are allows.");
-            }
-            string path = Path.GetDirectoryName(SaveFilename);
-            string folderName = Path.Combine(path, repositoryName);
-            bool directoryCreated = false;
-
-            try
-            {
-                Directory.Delete(folderName, true);
-            }
-            catch (DirectoryNotFoundException)
-            {
-            }
-
-            // Process a folder of entities.
-            foreach (KeyValuePair<string, string> keyValuePair in jsonEntities)
-            {
-                string key = keyValuePair.Key;
-                if (!IsValidName(key))
-                {
-                    throw new Exception($"The entity key name {key} contains invalid characters.  Only a-z, A-Z, 0-9, . characters are allows.");
-                }
-
-                // Check to see if there is any content to save.  Empty content will not be written to the disk.
-                if (keyValuePair.Value.Length > 0)
-                {
-                    // Check to see if we need to create the folder.
-                    if (!directoryCreated)
-                    {
-                        Directory.CreateDirectory(folderName);
-                    }
-
-                    // Write the file.
-                    string subfolderPath = Path.Combine(folderName, key);
-                    string subfolderFilename = $"{subfolderPath}.json";
-                    File.WriteAllText(subfolderFilename, keyValuePair.Value);
-                }
-            }
-        }
-
-        public void PersistEntity(string repositoryName, string json)
-        {
-            string path = Path.GetDirectoryName(SaveFilename);
-            string folderName = Path.Combine(path, repositoryName);
-            string filename = $"{folderName}.json";
-
-            try
-            {
-                File.Delete(filename);
-            }
-            catch (FileNotFoundException)
-            {
-            }
-
-            // Write the .json file for the null key values.
-            if (json.Length > 0)
-            {
-                File.WriteAllText(filename, json);
-            }
-        }
-
-        public string[] RetrieveEntities(string repositoryName)
-        {
-            string path = Path.GetDirectoryName(SaveFilename);
-            string folderName = Path.Combine(path, repositoryName);
-            try
-            {
-                string[] folderFiles = Directory.GetFiles(folderName);
-                List<string> entities = new List<string>();
-                foreach (string filename in folderFiles)
-                {
-                    string json = File.ReadAllText(Path.Combine(folderName, filename));
-                    entities.Add(json);
-                }
-                return entities.ToArray();
-            }
-            catch (DirectoryNotFoundException)
-            {
-                return new string[] { };
-            }
-        }
-
-        public string? RetrieveEntity(string repositoryName)
-        {
-            string path = Path.GetDirectoryName(SaveFilename);
-            string folderName = Path.Combine(path, repositoryName);
-            string filename = $"{folderName}.json";
-            try
-            {
-                string json = File.ReadAllText(filename);
-                return json;
-            }
-            catch (FileNotFoundException)
-            {
-                return null;
-            }
-        }
-
-        public byte[]? ReadGame()
-        {
-            byte[]? data = null;
-            try
-            {
-                data = File.ReadAllBytes(SaveFilename);
-            }
-            catch (Exception)
-            {
-            }
-            return data;
-        }
-
-        public bool WriteGame(GameDetails gameDetails, byte[] value)
-        {
-            File.WriteAllBytes(SaveFilename, value);
-            return true;
-        }
-
-        public bool PersistGameConfiguration(GameConfiguration gameConfiguration, string configurationName, bool overwrite)
-        {
-            throw new NotImplementedException();
         }
 
         private TConfiguration[] LoadEntities<TConfiguration>(string repositoryName) //where TConfiguration : IGameConfiguration
@@ -188,9 +173,9 @@ namespace AngbandOS.PersistentStorage
             return values;
         }
 
-        public GameConfiguration LoadConfiguration()
+        public Core.Interface.GameConfiguration LoadConfiguration()
         {
-            return new GameConfiguration()
+            return new Core.Interface.GameConfiguration()
             {
                 AmuletReadableFlavors = LoadEntities<ReadableFlavorGameConfiguration>("AmuletReadableFlavors"),
                 Animations = LoadEntities<AnimationGameConfiguration>("Animations"),

@@ -203,6 +203,9 @@ namespace AngbandOS.Web.Hubs
                 // necessary.
                 await gameHub.GameStarted(guid);
 
+                IGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString, userId);
+                gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration();
+
                 // Create a background worker object that runs the game and receives messages from the game to send to the client.
                 console = new SignalRConsole(context, gameHub, corePersistentStorage, gameConfiguration, userId, username, gameUpdateMonitor);
             }

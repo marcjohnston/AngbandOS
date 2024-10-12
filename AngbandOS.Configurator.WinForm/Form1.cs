@@ -22,7 +22,7 @@ namespace AngbandOS.Configurator.WinForm
         {
             string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
-            ICorePersistentStorage persistentStorage = new FileSystemPersistentStorage(saveFilename);
+            ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
             configuration = GameConfiguration.LoadConfiguration(persistentStorage);
             PropertyMetadata[] configurationMetadata = GameConfiguration.Metadata;
             Dictionary<string, TreeNodeCollection> categoryTreeNodeCollectionDictionary = new Dictionary<string, TreeNodeCollection>();
