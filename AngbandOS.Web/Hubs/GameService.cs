@@ -130,7 +130,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="context">The context of the signal-r GameHub that the request came in from.</param>
         /// <param name="userId">The user id of the connected user.</param>
         /// <param name="guid">The guid for the game to play.  Null, to start a new game.</param>
-        /// <param name="username"></param>
+        /// <param name="username">The username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
         public async Task PlayNewGameAsync(HubCallerContext context, string userId, GameConfiguration gameConfiguration, string username)
         {
             await PlayAsync(context, userId, null, gameConfiguration, username);

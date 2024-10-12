@@ -81,8 +81,8 @@ namespace AngbandOS.Web.Hubs
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
         /// <param name="persistentStorage"></param>
-        /// <param name="userId"></param>
-        /// <param name="username"></param>
+        /// <param name="userId">The user ID of the player.  This property is used to GET ActiveGames controller to return the user ID of the player.</param>
+        /// <param name="username">The username for the player.  This property is used by the GET ActiveGames controller to return the name of the player./></param>
         /// <param name="notificationAction"></param>
         public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
