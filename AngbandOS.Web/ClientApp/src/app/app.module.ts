@@ -14,7 +14,6 @@ import { UiComponent } from './ui/ui.component';
 
 import { ColorPickerModule } from 'ngx-color-picker';
 
-import { MatTreeModule } from '@angular/material/tree';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -84,7 +83,6 @@ import { FooterComponent } from './footer/footer.component';
     MatSliderModule,
     MatIconModule,
     MatCardModule,
-    MatTreeModule,
     DragDropModule,
 
     ColorPickerModule,

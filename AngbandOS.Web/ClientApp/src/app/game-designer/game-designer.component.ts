@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { PropertyMetadata } from './PropertyMetadata';
 
+
 @Component({
   selector: 'app-game-designer',
   templateUrl: './game-designer.component.html',
