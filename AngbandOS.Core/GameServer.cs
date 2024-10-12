@@ -159,95 +159,16 @@ public class GameServer
         }
     }
 
-    //private TDefinition[] RetrieveEntities<TDefinition>(ICorePersistentStorage persistentStorage, string repositoryName) where TDefinition : IConfiguration
-    //{
-    //    string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
-    //    List<TDefinition> entities = new List<TDefinition>();
-    //    foreach (string serializedEntity in serializedEntities)
-    //    {
-    //        TDefinition? deserializedEntity = JsonSerializer.Deserialize<TDefinition>(serializedEntity);
-    //        if (deserializedEntity == null || !deserializedEntity.IsValid())
-    //        {
-    //            throw new Exception($"Invalid {repositoryName} json.");
-    //        }
-    //        entities.Add(deserializedEntity);
-    //    }
-    //    return entities.ToArray();
-    //}
-
-    ///// <summary>
-    ///// Returns an array of strings that represents the string list repository entities; or null, if the file doesn't exist.
-    ///// </summary>
-    ///// <param name="persistentStorage"></param>
-    ///// <param name="repositoryName"></param>
-    ///// <returns></returns>
-    //private string[] RetrieveEntity(ICorePersistentStorage persistentStorage, string repositoryName)
-    //{
-    //    string serializedEntity = persistentStorage.RetrieveEntity(repositoryName);
-    //    string[] values = JsonSerializer.Deserialize<string[]>(serializedEntity);
-    //    return values;
-    //}
-
-    //public Configuration LoadConfiguration(ICorePersistentStorage? persistentStorage)
-    //{
-    //    return new Configuration()
-    //    {
-    //        AmuletReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "AmuletReadableFlavors"),
-    //        Animations = RetrieveEntities<AnimationConfiguration>(persistentStorage, "Animations"),
-    //        Attacks = RetrieveEntities<AttackConfiguration>(persistentStorage, "Attacks"),
-    //        ClassSpells = RetrieveEntities<ClassSpellConfiguration>(persistentStorage, "ClassSpells"),
-    //        DungeonGuardians = RetrieveEntities<DungeonGuardianConfiguration>(persistentStorage, "DungeonGuardians"),
-    //        Dungeons = RetrieveEntities<DungeonConfiguration>(persistentStorage, "Dungeons"),
-    //        GameCommands = RetrieveEntities<GameCommandConfiguration>(persistentStorage, "GameCommands"),
-    //        Gods = RetrieveEntities<GodConfiguration>(persistentStorage, "Gods"),
-    //        HelpGroups = RetrieveEntities<HelpGroupConfiguration>(persistentStorage, "HelpGroups"),
-    //        MonsterRaces = RetrieveEntities<MonsterRaceConfiguration>(persistentStorage, "MonsterRaces"),
-    //        MushroomReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "MushroomReadableFlavors"),
-    //        Plurals = RetrieveEntities<PluralConfiguration>(persistentStorage, "Plurals"),
-    //        PotionReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "PotionReadableFlavors"),
-    //        ProjectileGraphics = RetrieveEntities<ProjectileGraphicConfiguration>(persistentStorage, "ProjectileGraphics"),
-    //        RingReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "RingReadableFlavors"),
-    //        RodReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "RodReadableFlavors"),
-    //        ScrollReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "ScrollReadableFlavors"),
-    //        Shopkeepers = RetrieveEntities<ShopkeeperConfiguration>(persistentStorage, "Shopkeepers"),
-    //        Spells = RetrieveEntities<SpellConfiguration>(persistentStorage, "Spells"),
-    //        StaffReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "StaffReadableFlavors"),
-    //        StoreCommands = RetrieveEntities<StoreCommandConfiguration>(persistentStorage, "StoreCommands"),
-    //        StoreFactories = RetrieveEntities<StoreFactoryConfiguration>(persistentStorage, "StoreFactories"),
-    //        Symbols = RetrieveEntities<SymbolConfiguration>(persistentStorage, "Symbols"),
-    //        //Tiles = RetrieveEntities<TileConfiguration>(persistentStorage, "Tiles"), // TODO: This is not working with generic
-    //        Towns = RetrieveEntities<TownConfiguration>(persistentStorage, "Towns"),
-    //        Vaults = RetrieveEntities<VaultConfiguration>(persistentStorage, "Vaults"),
-    //        WandReadableFlavors = RetrieveEntities<ReadableFlavorConfiguration>(persistentStorage, "WandReadableFlavors"),
-    //        WizardCommands = RetrieveEntities<WizardCommandConfiguration>(persistentStorage, "WizardCommands"),
-
-    //        ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
-    //        FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),
-    //        FunnyComments = RetrieveEntity(persistentStorage, "FunnyComments"),
-    //        FunnyDescriptions = RetrieveEntity(persistentStorage, "FunnyDescriptions"),
-    //        HorrificDescriptions = RetrieveEntity(persistentStorage, "HorrificDescriptions"),
-    //        InsultPlayerAttacks = RetrieveEntity(persistentStorage, "InsultPlayerAttacks"),
-    //        MoanPlayerAttacks = RetrieveEntity(persistentStorage, "MoanPlayerAttacks"),
-    //        UnreadableFlavorSyllables = RetrieveEntity(persistentStorage, "UnreadableFlavorSyllables"),
-    //        ShopkeeperAcceptedComments = RetrieveEntity(persistentStorage, "ShopkeeperAcceptedComments"),
-    //        ShopkeeperBargainComments = RetrieveEntity(persistentStorage, "ShopkeeperBargainComments"),
-    //        ShopkeeperGoodComments = RetrieveEntity(persistentStorage, "ShopkeeperGoodComments"),
-    //        ShopkeeperLessThanGuessComments = RetrieveEntity(persistentStorage, "ShopkeeperLessThanGuessComments"),
-    //        ShopkeeperWorthlessComments = RetrieveEntity(persistentStorage, "ShopkeeperWorthlessComments"),
-    //        SingingPlayerAttacks = RetrieveEntity(persistentStorage, "SingingPlayerAttacks"),
-    //        WorshipPlayerAttacks = RetrieveEntity(persistentStorage, "WorshipPlayerAttacks")
-    //    };
-    //}
-
     /// <summary>
     /// Plays a game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
     /// <param name="console"></param>
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
-    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
+    /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public bool PlayNewGame(IConsoleViewPort console, ICorePersistentStorage? persistentStorage, GameConfiguration configuration)
+    public bool PlayNewGame(IConsoleViewPort console, ICorePersistentStorage? persistentStorage, GameConfiguration gameConfiguration)
     {
+        // TODO: Validate the GameConfiguration here.  This is the only entry point for a GameConfiguration into the Core and we cannot expect that it is valid.
         if (console == null)
         {
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
@@ -255,7 +176,7 @@ public class GameServer
 
         try
         {
-            Game = new Game(configuration);
+            Game = new Game(gameConfiguration);
             Game.Play(console, persistentStorage);
         }
         catch (Exception ex)

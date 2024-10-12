@@ -1074,7 +1074,7 @@ public bool IsDead = false;
     /// Creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    public Game(GameConfiguration gameConfiguration) // TODO: Validate the game configuration
+    public Game(GameConfiguration gameConfiguration)
     {
         IsDead = true;
         Map = new Map(this);
