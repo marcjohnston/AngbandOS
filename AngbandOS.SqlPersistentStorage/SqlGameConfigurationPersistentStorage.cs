@@ -17,23 +17,13 @@ namespace AngbandOS.PersistentStorage
         /// </summary>
         protected string ConnectionString { get; }
 
-        /// <summary>
-        /// Returns the username to use when reading and writing a saved game to the database.
-        /// </summary>
-        protected string Username { get; }
-
-        public SqlGameConfigurationPersistentStorage(string connectionString, string username)
+        public SqlGameConfigurationPersistentStorage(string connectionString)
         {
             if (connectionString == null)
             {
                 throw new ArgumentNullException("connectionString");
             }
-            if (username == null)
-            {
-                throw new ArgumentNullException("username");
-            }
             ConnectionString = connectionString;
-            Username = username;
         }
 
         private string[] RetrieveEntities(string repositoryName)
@@ -104,12 +94,12 @@ namespace AngbandOS.PersistentStorage
         /// <param name="configurationName"></param>
         /// <param name="overwrite"></param>
         /// <returns>False, if the configuration exists and the <param "overwrite"/> parameter is false; true, if the operation completes successfully.</returns>
-        public bool PersistGameConfiguration(Core.Interface.GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        public bool PersistGameConfiguration(Core.Interface.GameConfiguration gameConfiguration, string? username, string configurationName, bool overwrite)
         {
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
 
             // Retrieve an existing configuration.
-            UserGameConfiguration? userGameConfiguration = context.UserGameConfigurations.SingleOrDefault(_userGameConfiguration => _userGameConfiguration.Name == configurationName && _userGameConfiguration.Username == Username);
+            UserGameConfiguration? userGameConfiguration = context.UserGameConfigurations.SingleOrDefault(_userGameConfiguration => _userGameConfiguration.Name == configurationName && _userGameConfiguration.Username == username);
 
             // Check to see if it already exists.
             if (userGameConfiguration != null)
@@ -125,7 +115,7 @@ namespace AngbandOS.PersistentStorage
                 // Create it and add it to the table.
                 userGameConfiguration = new UserGameConfiguration()
                 {
-                    Username = Username,
+                    Username = username,
                     Name = configurationName,
                 };
                 context.UserGameConfigurations.Add(userGameConfiguration);
@@ -173,7 +163,7 @@ namespace AngbandOS.PersistentStorage
             return values;
         }
 
-        public Core.Interface.GameConfiguration LoadConfiguration()
+        public Core.Interface.GameConfiguration LoadConfiguration(string? username, string configurationName)
         {
             return new Core.Interface.GameConfiguration()
             {

@@ -220,7 +220,7 @@ public partial class MainWindow : Window, IConsoleViewPort
             //GameConfiguration gameConfiguration = GameConfiguration.LoadGamePack();
             //GameConfiguration gameConfiguration = new GameConfiguration();
             IGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new AngbandOS.PersistentStorage.FileSystemGameConfigurationPersistentStorage(saveFilename);
-            GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration();
+            GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
 
             //gameConfiguration.StartupTownName = "DylathLeenTown";
             gameServer.PlayNewGame(this, persistentStorage, gameConfiguration);

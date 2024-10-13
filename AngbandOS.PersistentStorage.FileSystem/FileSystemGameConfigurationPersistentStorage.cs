@@ -83,7 +83,7 @@ namespace AngbandOS.PersistentStorage
             return values;
         }
 
-        public GameConfiguration LoadConfiguration()
+        public GameConfiguration LoadConfiguration(string? username, string configurationName)
         {
             return new GameConfiguration()
             {
@@ -134,7 +134,7 @@ namespace AngbandOS.PersistentStorage
             };
         }
 
-        public bool PersistGameConfiguration(GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        public bool PersistGameConfiguration(GameConfiguration gameConfiguration, string? username, string configurationName, bool overwrite)
         {
             throw new NotImplementedException();
         }
