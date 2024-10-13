@@ -102,16 +102,18 @@ namespace AngbandOS.Web.Controllers
         }
 
         //#region Configuration Designer
-        //[HttpGet]
-        //[Route("configuration")]
-        //[Produces("application/json")]
-        //public async Task<ActionResult<GameConfiguration>> GetGameConfiguration()
-        //{
-        //    // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-        //    ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
+        [HttpGet]
+        [Route("configurations/default")]
+        [Produces("application/json")]
+        public ActionResult<GameConfiguration> GetGameConfiguration()
+        {
+            string connectionString = Configuration["ConnectionString"];
 
-        //    return GameConfiguration.LoadConfiguration(corePersistentStorage);
-        //}
+            // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
+            IGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(connectionString);
+
+            return gameConfigurationPersistentStorage.LoadConfiguration(null, "");
+        }
 
         //[HttpGet]
         //[Route("configuration/{guid}")]

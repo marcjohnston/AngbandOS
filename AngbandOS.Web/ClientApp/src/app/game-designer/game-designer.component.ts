@@ -26,6 +26,7 @@ export class GameDesignerComponent implements OnInit {
   public designer: Designer | undefined = undefined;
   public object: any | undefined = undefined;
   private metadata: any;
+  public configuration: any;
   public propertiesDisplayedColumns: string[] = ["collection-title"];
   public collections: string[] = [];
 
@@ -59,6 +60,18 @@ export class GameDesignerComponent implements OnInit {
       this._ngZone.run(() => {
         if (_metadata !== undefined) {
           this.loadMetadata(_metadata);
+        }
+      });
+    }, (_errorResponse: HttpErrorResponse) => {
+      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+        duration: 5000
+      });
+    });
+
+    this._httpClient.get<any>(`/apiv1/configurations/default`).toPromise().then((_configuration) => {
+      this._ngZone.run(() => {
+        if (_configuration !== undefined) {
+          this.configuration = _configuration;
         }
       });
     }, (_errorResponse: HttpErrorResponse) => {
