@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace AngbandOS.Web.Controllers
 {
@@ -112,7 +113,15 @@ namespace AngbandOS.Web.Controllers
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
             IGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(connectionString);
 
-            return gameConfigurationPersistentStorage.LoadConfiguration(null, "");
+            GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
+
+            // We do not want the clients to have the properties automatically camel-cased.  They won't be aligned with the Metadata.
+            var jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = null
+            };
+
+            return new JsonResult(gameConfiguration, jsonOptions);
         }
 
         //[HttpGet]

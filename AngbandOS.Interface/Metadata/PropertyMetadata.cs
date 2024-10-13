@@ -51,6 +51,8 @@ public abstract class PropertyMetadata
     /// </summary>
     public string? Description { get; set; } = "";
 
+    public string? CollectionKeyPropertyName { get; set; } = null;
+
     public int? DefaultIntegerValue { get; set; } = null;
 
     public bool? DefaultBooleanValue { get; set; } = null;
