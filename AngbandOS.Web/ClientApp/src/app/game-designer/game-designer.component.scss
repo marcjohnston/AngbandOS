@@ -1,18 +1,39 @@
 #container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  & #component-window {
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    overflow: hidden;
 
-    #tree-panel {
-        overflow-y: scroll;
+    & #tree-panel {
+      overflow-y: scroll;
+      min-width: 15%;
+
+      & table {
+        font-family: "Arial";
+        font-size: 12px;
+        font-weight: normal;
+      }
     }
 
-    #entity-panel {
-        flex-grow: 1;
+    & #entity-panel {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      flex-grow: 1;
+
+      & .property-div {
+          display: flex;
+          flex-direction: column;
+      }
+
+      & .property-metadata-title {
+        font-weight: bold;
+        font-size: 1.25rem;
+      }
     }
-}
-table {
-  font-family: "Arial";
-  font-size: 12px;
-  font-weight: normal;
+  }
 }

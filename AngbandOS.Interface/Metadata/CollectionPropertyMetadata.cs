@@ -14,7 +14,15 @@ public class CollectionPropertyMetadata : PropertyMetadata
             CollectionPropertiesMetadata = value;
         }
     }
-    
+
+    public string EntityTitle
+    {
+        set
+        {
+            CollectionEntityTitle = value;
+        }
+    }
+
     public string KeyPropertyName
     {
         set

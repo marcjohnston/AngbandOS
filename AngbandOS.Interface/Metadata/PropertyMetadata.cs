@@ -27,7 +27,7 @@ public abstract class PropertyMetadata
     public string PropertyName { get; }
 
     /// <summary>
-    /// Returns a title (or short description) of the property that can be presented to the user or null; in which the property name should be used.
+    /// Returns a title (or short description) of the property that can be presented to the user or null; in which the <see cref="PropertyName"/> should be used.
     /// </summary>
     public string? Title { get; set; } = null;
 
@@ -50,6 +50,11 @@ public abstract class PropertyMetadata
     /// Returns a description of the property that can be presented to the user that provides the maximum amount of details on how the property is to be used.  Returns a blank description, by default.
     /// </summary>
     public string? Description { get; set; } = "";
+
+    /// <summary>
+    /// Returns the title to be used for each entity.  This is typically the singular version of the <see cref="Title"/> property; or null, if the collection <see cref="Title"/> should be used.
+    /// </summary>
+    public string? CollectionEntityTitle { get; set; } = null;
 
     public string? CollectionKeyPropertyName { get; set; } = null;
 

@@ -1,41 +1,93 @@
-<h6>Game Configuration Designer</h6>
 <div id="container">
-  <ng-container *ngIf="rootTreeNode !== undefined">
-    <div id="tree-panel">
-      <table>
-        <ng-container *ngFor="let treeNode of rootTreeNode.children">
-          <tr>
-            <td>
-              <ng-container *ngIf="treeNode.children != null">
-                <ng-container *ngIf="!treeNode.isOpen">
-                  <mat-icon (click)="treeNode.isOpen=true">add</mat-icon>
+  <app-nav-menu></app-nav-menu>
+  <h6>Game Configuration Designer</h6>
+  <div id="component-window">
+    <ng-container *ngIf="rootTreeNodes !== undefined">
+      <div id="tree-panel">
+        <table>
+          <ng-container *ngFor="let treeNode of rootTreeNodes">
+            <tr (click)="treeNodeClicked(treeNode)">
+              <td>
+                <ng-container *ngIf="treeNode.children != null">
+                  <ng-container *ngIf="!treeNode.isOpen">
+                    <mat-icon (click)="treeNode.isOpen=true">add</mat-icon>
+                  </ng-container>
+                  <ng-container *ngIf="treeNode.isOpen">
+                    <mat-icon (click)="treeNode.isOpen=false">remove</mat-icon>
+                  </ng-container>
                 </ng-container>
-                <ng-container *ngIf="treeNode.isOpen">
-                  <mat-icon (click)="treeNode.isOpen=false">remove</mat-icon>
-                </ng-container>
+              </td>
+              <td colspan="2">{{treeNode.title}}</td>
+            </tr>
+            <ng-container *ngIf="treeNode.children != null && treeNode.isOpen">
+              <ng-container *ngFor="let childTreeNode of treeNode.children">
+                <tr (click)="treeNodeClicked(childTreeNode)">
+                  <td></td>
+                  <td>-</td>
+                  <td>{{childTreeNode.title}}</td>
+                </tr>
               </ng-container>
-            </td>
-            <td colspan="2" (click)="treeNodeClicked(treeNode)">{{treeNode.title}}</td>
-          </tr>
-          <ng-container *ngIf="treeNode.children != null && treeNode.isOpen">
-            <ng-container *ngFor="let childTreeNode of treeNode.children">
-              <tr>
-                <td></td>
-                <td>-</td>
-                <td (click)="treeNodeClicked(treeNode)">{{childTreeNode.title}}</td>
-              </tr>
             </ng-container>
           </ng-container>
+        </table>
+      </div>
+      <div id="entity-panel">
+        <ng-container *ngIf="activeMetadataAndConfiguration !== null">
+          <div class="property-div" *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'collection'">
+            <!-- Collection -->
+            <ng-container *ngIf="activeMetadataAndConfiguration.configuration === null; else showCollectionEntity">
+              <span class="property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.renderTitle}}</span>
+              <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span>
+            </ng-container>
+            <ng-template #showCollectionEntity>
+              <span class="property-metadata-title">{{activeMetadataAndConfiguration.collectionTitle}} - {{activeMetadataAndConfiguration.collectionEntityTitle}}</span>
+              <ng-container *ngFor="let childPropertyMetadata of activeMetadataAndConfiguration.propertyMetadata.collectionPropertiesMetadata">
+                {{childPropertyMetadata.renderTitle}}
+                {{childPropertyMetadata.description}}
+                <div class="property-div" *ngIf="childPropertyMetadata.type === 'string'">
+                  string => 
+                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
+                </div>
+                <div class="property-div" *ngIf="childPropertyMetadata.type === 'boolean'">
+                  boolean => 
+                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
+                </div>
+                <div class="property-div" *ngIf="childPropertyMetadata.type === 'tuple'">
+                  tuple =>
+                </div>
+                <div class="property-div" *ngIf="childPropertyMetadata.type === 'integer'">
+                  integer =>
+                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
+                </div>
+                <div class="property-div" *ngIf="childPropertyMetadata.type === 'character'">
+                  character =>
+                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
+                </div>
+                <div class="property-div" *ngIf="childPropertyMetadata.type === 'foreign-key'">
+                  foreign-key =>
+                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
+                </div>
+              </ng-container>
+            </ng-template>
+          </div>
+          <!-- String -->
+          <div class="property-div" *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'string'">
+            string component
+          </div>
+          <!-- Debug -->
+          <ng-container *ngIf="showDebug === true">
+            <h6>Property Metadata Debug</h6>
+            <pre style="white-space: pre-wrap;">{{activeMetadataAndConfiguration.propertyMetadata | json}}</pre>
+            <br />
+            <h6>Configuration Debug</h6>
+            <pre style="white-space: pre-wrap;">{{activeMetadataAndConfiguration.configuration | json}}</pre>
+          </ng-container>
         </ng-container>
-      </table>
-    </div>
-    <div id="entity-panel">
-      <ng-container *ngIf="panelPropertyMetadata !== null">
-        panel
-      </ng-container>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="rootTreeNode === undefined">
-    loading ...
-  </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="rootTreeNodes === undefined">
+      loading ...
+    </ng-container>
+  </div>
+  <app-footer></app-footer>
 </div>

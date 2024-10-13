@@ -162,6 +162,7 @@ public class GameConfiguration
                 {
                     Description = "Towns have various plots where buildings and/or stores may be placed.  Stores factories are used to create specific stores.  Store factories can produce more than one store per town.  Use this collection to define factories that are used to create stores.",
                     Title = "Store Factories",
+                    EntityTitle = "Store Factory",
                     CategoryTitle = CollectionsCategoryTitle,
                     PropertiesMetadata = new PropertyMetadata[]
                     {

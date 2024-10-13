@@ -6,7 +6,6 @@ using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mail;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -106,6 +105,7 @@ namespace AngbandOS.Web.Controllers
         [HttpGet]
         [Route("configurations/default")]
         [Produces("application/json")]
+        [ResponseCache(Duration = 600, Location = ResponseCacheLocation.Any, NoStore = false)]
         public ActionResult<GameConfiguration> GetGameConfiguration()
         {
             string connectionString = Configuration["ConnectionString"];

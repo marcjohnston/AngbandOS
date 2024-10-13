@@ -33,6 +33,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
     <None Remove="ClientApp\src\app\chat\chat-message.ts" />
+    <None Remove="ClientApp\src\app\game-designer\property-metadata-and-configuration.ts" />
     <None Remove="ClientApp\src\app\home\active-game-details.ts" />
     <None Remove="ClientApp\src\app\home\active-user-details.ts" />
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
@@ -57,6 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\game-designer\property-metadata-and-configuration.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\messages-window\json-game-message.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
