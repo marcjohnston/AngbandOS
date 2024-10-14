@@ -7,13 +7,13 @@
         <table>
           <ng-container *ngFor="let treeNode of rootTreeNodes">
             <tr (click)="treeNodeClicked(treeNode)">
-              <td>
+              <td (click)="treeNode.isOpen=!treeNode.isOpen">
                 <ng-container *ngIf="treeNode.children != null">
                   <ng-container *ngIf="!treeNode.isOpen">
-                    <mat-icon (click)="treeNode.isOpen=true">add</mat-icon>
+                    +
                   </ng-container>
                   <ng-container *ngIf="treeNode.isOpen">
-                    <mat-icon (click)="treeNode.isOpen=false">remove</mat-icon>
+                    -
                   </ng-container>
                 </ng-container>
               </td>
@@ -33,47 +33,7 @@
       </div>
       <div id="entity-panel">
         <ng-container *ngIf="activeMetadataAndConfiguration !== null">
-          <div class="property-div" *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'collection'">
-            <!-- Collection -->
-            <ng-container *ngIf="activeMetadataAndConfiguration.configuration === null; else showCollectionEntity">
-              <span class="property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.renderTitle}}</span>
-              <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span>
-            </ng-container>
-            <ng-template #showCollectionEntity>
-              <span class="property-metadata-title">{{activeMetadataAndConfiguration.collectionTitle}} - {{activeMetadataAndConfiguration.collectionEntityTitle}}</span>
-              <ng-container *ngFor="let childPropertyMetadata of activeMetadataAndConfiguration.propertyMetadata.collectionPropertiesMetadata">
-                {{childPropertyMetadata.renderTitle}}
-                {{childPropertyMetadata.description}}
-                <div class="property-div" *ngIf="childPropertyMetadata.type === 'string'">
-                  string => 
-                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
-                </div>
-                <div class="property-div" *ngIf="childPropertyMetadata.type === 'boolean'">
-                  boolean => 
-                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
-                </div>
-                <div class="property-div" *ngIf="childPropertyMetadata.type === 'tuple'">
-                  tuple =>
-                </div>
-                <div class="property-div" *ngIf="childPropertyMetadata.type === 'integer'">
-                  integer =>
-                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
-                </div>
-                <div class="property-div" *ngIf="childPropertyMetadata.type === 'character'">
-                  character =>
-                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
-                </div>
-                <div class="property-div" *ngIf="childPropertyMetadata.type === 'foreign-key'">
-                  foreign-key =>
-                  {{activeMetadataAndConfiguration.configuration[childPropertyMetadata.propertyName]}}
-                </div>
-              </ng-container>
-            </ng-template>
-          </div>
-          <!-- String -->
-          <div class="property-div" *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'string'">
-            string component
-          </div>
+          <app-game-designer-type [activeMetadataAndConfiguration]="activeMetadataAndConfiguration"></app-game-designer-type>
           <!-- Debug -->
           <ng-container *ngIf="showDebug === true">
             <h6>Property Metadata Debug</h6>

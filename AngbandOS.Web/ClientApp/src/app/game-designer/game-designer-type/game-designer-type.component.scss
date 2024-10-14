@@ -1,0 +1,19 @@
+.collection-property-metadata-title {
+  font-weight: bold; // The title for collections will be larger and bold.
+  font-size: 1.25rem; // The title for collections should be larger than other non-collection properties.
+}
+
+.property-metadata-title {
+  font-weight: bold; // The title of properties will be the same size as normal text but bold.
+}
+
+.tuple-table {
+  & td {
+    border: 1px solid white; // Tuple tables have borders around the table cells.
+    padding: 0 10px 0 10px;
+  }
+
+  & .tuple-table-header {
+    font-weight: bold;
+  }
+}

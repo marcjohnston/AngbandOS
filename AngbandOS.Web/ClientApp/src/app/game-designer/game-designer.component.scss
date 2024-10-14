@@ -15,25 +15,15 @@
 
       & table {
         font-family: "Arial";
-        font-size: 12px;
+        font-size: 0.75rem;
         font-weight: normal;
       }
     }
 
     & #entity-panel {
-      overflow-y: scroll;
-      overflow-x: hidden;
-      flex-grow: 1;
-
-      & .property-div {
-          display: flex;
-          flex-direction: column;
-      }
-
-      & .property-metadata-title {
-        font-weight: bold;
-        font-size: 1.25rem;
-      }
+      overflow-y: scroll; // The entity panel will need to scroll vertically.
+      overflow-x: hidden; // We do not want the entity panel to scroll horizontally.  We will word-break for the horizontal direction.
+      flex-grow: 1; // The entity panel needs to consume the remaining space horizontally with the tree panel.
     }
   }
 }
