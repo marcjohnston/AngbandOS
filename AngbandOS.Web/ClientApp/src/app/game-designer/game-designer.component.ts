@@ -220,7 +220,7 @@ export class GameDesignerComponent implements OnInit {
       return undefined;
     }
 
-    const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, configuration[propertyMetadata.propertyName]);
+    const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, configuration);
     return new TreeNode(propertyMetadata.propertyName, null, parentPropertyMetadataAndConfiguration);
   }
 

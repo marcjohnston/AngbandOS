@@ -3,7 +3,7 @@
   <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'collection'">
     <ng-container *ngIf="activeMetadataAndConfiguration.configuration === null; else showCollectionEntity">
       <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-      <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span>
+      <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span><br />
     </ng-container>
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.collectionTitle}} - {{activeMetadataAndConfiguration.collectionEntityTitle}}</span><br />
@@ -17,7 +17,14 @@
   </div>
   <!-- String -->
   <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'string'">
-    <input type="text" [(ngModel)]="activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]" />
+    <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
+    <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+    <ng-container *ngIf="!activeMetadataAndConfiguration.propertyMetadata.isArray; else multilineInput">
+      <input type="text" [(ngModel)]="activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]" />
+    </ng-container>
+    <ng-template #multilineInput>
+      <textarea rows="10" [ngModel]="activeMetadataAndConfiguration.getTextArea(activeMetadataAndConfiguration.propertyMetadata.propertyName)" (blur)="activeMetadataAndConfiguration.setTextArea(activeMetadataAndConfiguration.propertyMetadata.propertyName, $event)"></textarea>
+    </ng-template>
   </div>
   <!-- Boolean -->
   <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'boolean'">

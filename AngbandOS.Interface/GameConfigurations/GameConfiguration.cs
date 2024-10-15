@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Interface;
 
 /// <summary>
 /// Represents an interface that describes the configuration data that the GameServer.Play method accepts.  This configuration data is used to completely

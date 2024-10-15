@@ -20,6 +20,14 @@ export class PropertyMetadataAndConfiguration {
     return this.configuration[this.propertyMetadata.collectionKeyPropertyName!]; // This was already verified in the json validation routine.
   }
 
+  public getTextArea(propertyName: string): string {
+    return this.configuration[propertyName].join('\n');
+  }
+
+  public setTextArea(propertyName: string, event: any) {
+    this.configuration[propertyName] = event.target.value.split('\n');
+  }
+
   /**
    * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.
    * @param propertyMetadata
