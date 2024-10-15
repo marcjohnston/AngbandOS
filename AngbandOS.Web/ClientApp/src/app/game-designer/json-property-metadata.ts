@@ -14,7 +14,7 @@ export class JsonPropertyMetadata {
     public defaultBooleanValue: boolean | null | undefined = undefined;
     public defaultCharacterValue: string | null | undefined = undefined;
     public defaultStringValue: string | null | undefined = undefined;
-    public collectionPropertiesMetadata: JsonPropertyMetadata[] | null | undefined = undefined;
+    public collectionPropertyMetadatas: JsonPropertyMetadata[] | null | undefined = undefined;
     public tupleTypes: JsonPropertyMetadata[] | null | undefined = undefined;
     public collectionKeyPropertyName: string | null | undefined = undefined;
     public collectionEntityTitle: string | null | undefined = undefined;

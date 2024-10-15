@@ -105,7 +105,7 @@ namespace AngbandOS.Web.Controllers
         [HttpGet]
         [Route("configurations/default")]
         [Produces("application/json")]
-  //      [ResponseCache(Duration = 600, Location = ResponseCacheLocation.Any, NoStore = false)]
+        [ResponseCache(Duration = 600, Location = ResponseCacheLocation.Any, NoStore = false)]
         public ActionResult<GameConfiguration> GetGameConfiguration()
         {
             string connectionString = Configuration["ConnectionString"];

@@ -32,7 +32,7 @@
         </table>
       </div>
       <div id="entity-panel">
-        <ng-container *ngIf="activePropertydataMetadataAndConfigurations !== null">
+        <ng-container *ngIf="activePropertyMetadataAndConfigurations !== null">
           <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations">
             <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-property>
           </ng-container>

@@ -162,7 +162,7 @@ public class GameConfiguration
                     Title = "Store Factories",
                     EntityTitle = "Store Factory",
                     CategoryTitle = CollectionsCategoryTitle,
-                    PropertiesMetadata = new PropertyMetadata[]
+                    PropertyMetadatas = new PropertyMetadata[]
                     {
                         new TuplePropertyMetadata("StoreStockManifestDefinitions")
                         {

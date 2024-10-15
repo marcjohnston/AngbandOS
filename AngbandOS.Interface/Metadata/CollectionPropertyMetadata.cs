@@ -7,11 +7,11 @@ public class CollectionPropertyMetadata : PropertyMetadata
         KeyPropertyName = keyPropertyName;
     }
 
-    public PropertyMetadata[] PropertiesMetadata
+    public PropertyMetadata[] PropertyMetadatas
     {
         set
         {
-            CollectionPropertiesMetadata = value;
+            CollectionPropertyMetadatas = value;
         }
     }
 

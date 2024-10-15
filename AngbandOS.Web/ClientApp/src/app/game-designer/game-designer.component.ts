@@ -88,7 +88,7 @@ export class GameDesignerComponent implements OnInit {
     if (jsonPropertyMetadata.tupleTypes === undefined) {
       return undefined;
     }
-    if (jsonPropertyMetadata.collectionPropertiesMetadata === undefined) {
+    if (jsonPropertyMetadata.collectionPropertyMetadatas === undefined) {
       return undefined;
     }
     if (jsonPropertyMetadata.collectionKeyPropertyName === undefined) {
@@ -107,9 +107,9 @@ export class GameDesignerComponent implements OnInit {
           return undefined;
         }
 
-        if (jsonPropertyMetadata.collectionPropertiesMetadata !== null) {
+        if (jsonPropertyMetadata.collectionPropertyMetadatas !== null) {
           collectionPropertyMetadataList = [];
-          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.collectionPropertiesMetadata) {
+          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.collectionPropertyMetadatas) {
             const collectionPropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonCollectionPropertyMetadata);
             if (collectionPropertyMetadata === undefined) {
               return undefined;

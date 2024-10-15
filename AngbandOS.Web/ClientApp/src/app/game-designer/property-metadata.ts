@@ -13,7 +13,7 @@ export class PropertyMetadata {
   public defaultBooleanValue: boolean | null;
   public defaultCharacterValue: string | null;
   public defaultStringValue: string | null;
-  public collectionPropertiesMetadata: PropertyMetadata[] | null;
+  public collectionPropertyMetadatas: PropertyMetadata[] | null;
   public tupleTypes: PropertyMetadata[] | null;
   public collectionKeyPropertyName: string | null;
   public collectionEntityTitle: string | null;
@@ -37,7 +37,7 @@ export class PropertyMetadata {
               defaultBooleanValue: boolean | null,
               defaultCharacterValue: string | null,
               defaultStringValue: string | null,
-              collectionPropertiesMetadata: PropertyMetadata[] | null,
+              collectionPropertyMetadatas: PropertyMetadata[] | null,
               tupleTypes: PropertyMetadata[] | null,
               collectionKeyPropertyName: string | null,
               collectionEntityTitle: string | null) {
@@ -52,7 +52,7 @@ export class PropertyMetadata {
     this.defaultBooleanValue = defaultBooleanValue;
     this.defaultCharacterValue = defaultCharacterValue;
     this.defaultStringValue = defaultStringValue;
-    this.collectionPropertiesMetadata = collectionPropertiesMetadata;
+    this.collectionPropertyMetadatas = collectionPropertyMetadatas;
     this.tupleTypes = tupleTypes;
     this.collectionKeyPropertyName = collectionKeyPropertyName;
     this.collectionEntityTitle = collectionEntityTitle;
