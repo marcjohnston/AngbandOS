@@ -20,11 +20,11 @@ export class TreeNode {
      * The property metadata and the configuration that apply to this tree node.  When the tree node is clicked by the user, these properties are used to process the node.
      * @type {[PropertyMetadata, any | null]} - The PropertyMetadata for the tree node and the entity.  If the tree node is a collection and the user clicks to root (a non entity), a null value.
      */
-    public metadataAndConfigurations: PropertyMetadataAndConfiguration[];
+    public propertyMetadataAndConfigurations: PropertyMetadataAndConfiguration[];
 
-    constructor(title: string, children: TreeNode[] | null, metadataAndConfigurations: PropertyMetadataAndConfiguration[]) {
+    constructor(title: string, children: TreeNode[] | null, propertyMetadataAndConfigurations: PropertyMetadataAndConfiguration[]) {
         this.title = title;
         this.children = children;
-        this.metadataAndConfigurations = metadataAndConfigurations;
+        this.propertyMetadataAndConfigurations = propertyMetadataAndConfigurations;
     }
 }

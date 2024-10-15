@@ -1,21 +1,21 @@
-<ng-container *ngIf="activeMetadataAndConfiguration !== undefined">
+<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
   <!-- Collection -->
-  <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'collection'; else nonCollectionProperty">
-    <ng-container *ngIf="activeMetadataAndConfiguration.configuration === null; else showCollectionEntity">
-      <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-      <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'collection'; else nonCollectionProperty">
+    <ng-container *ngIf="activePropertyMetadataAndConfiguration.configuration === null; else showCollectionEntity">
+      <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
+                                                                                                                                     <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
     </ng-container>
     <ng-template #showCollectionEntity>
-      <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.collectionEntityTitle}} - {{activeMetadataAndConfiguration.collectionEntityTitle}}</span><br />
-      <ng-container *ngFor="let childPropertyMetadata of activeMetadataAndConfiguration.propertyMetadata.collectionPropertiesMetadata">
+      <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.collectionEntityTitle}} - {{activePropertyMetadataAndConfiguration.collectionEntityTitle}}</span><br />
+      <ng-container *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.collectionPropertiesMetadata">
         <hr />
-        <app-game-designer-property [activeMetadataAndConfiguration]="activeMetadataAndConfiguration.createChild(childPropertyMetadata)"></app-game-designer-property> <!-- Recursion -->
+        <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration.createChild(childPropertyMetadata)"></app-game-designer-property> <!-- Recursion -->
       </ng-container>
     </ng-template>
   </div>
   <ng-template #nonCollectionProperty>
-    <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-    <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span><br />
-    <app-game-designer-type [activeMetadataAndConfiguration]="activeMetadataAndConfiguration"></app-game-designer-type>
+    <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
+    <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+    <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type>
   </ng-template>
 </ng-container>

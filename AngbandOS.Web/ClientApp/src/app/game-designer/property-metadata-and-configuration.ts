@@ -36,6 +36,16 @@ export class PropertyMetadataAndConfiguration {
     return new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
   }
 
+  /**
+   * Returns a new PropertyMetadataAndConfiguration object from a child property that references a tuple.
+   * @param propertyMetadata
+   * @param itemIndex
+   * @returns
+   */
+  public createTupleChild(propertyMetadata: PropertyMetadata, itemIndex: number): PropertyMetadataAndConfiguration {
+    return new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+  }
+
   constructor(propertyMetadata: PropertyMetadata, configuration: any | null) {
     this.propertyMetadata = propertyMetadata;
     this.configuration = configuration;

@@ -27,7 +27,7 @@ export class GameDesignerComponent implements OnInit {
   /**
    * The unverified metadata that has been received from the game controller.
    */
-  private jsonMetadata: JsonPropertyMetadata[] | undefined = undefined;
+  private jsonPropertyMetadata: JsonPropertyMetadata[] | undefined = undefined;
 
   /**
    * The configuration object being worked on.
@@ -42,7 +42,7 @@ export class GameDesignerComponent implements OnInit {
   /**
    * The property metadata and the configuration to be rendered on demand when the user clicks a tree node; null, if the user hasn't selected any tree node.
    */
-  public activeMetadataAndConfigurations: PropertyMetadataAndConfiguration[] | null = null;
+  public activePropertyMetadataAndConfigurations: PropertyMetadataAndConfiguration[] | null = null;
 
   constructor(
     private _httpClient: HttpClient,
@@ -152,10 +152,10 @@ export class GameDesignerComponent implements OnInit {
   }
 
   initialize() {
-    if (this.jsonMetadata !== undefined && this.configuration !== undefined) {
+    if (this.jsonPropertyMetadata !== undefined && this.configuration !== undefined) {
       const rootTreeNodes: TreeNode[] = [];
       const gameSettingsPropertyAndMetadataAndConfigurations: PropertyMetadataAndConfiguration[] = []; // We will need to build the game settings tree node manually.
-      for (var jsonPropertyMetadata of this.jsonMetadata) {
+      for (var jsonPropertyMetadata of this.jsonPropertyMetadata) {
         // We need to validate the json metadata before we can provide it to a tree node.
         const propertyMetadata = this.validateJsonPropertyMetadata(jsonPropertyMetadata);
         if (propertyMetadata === undefined) {
@@ -205,14 +205,14 @@ export class GameDesignerComponent implements OnInit {
 
   public treeNodeClicked(treeNode: TreeNode) {
     // Activate the tree node property metadata and configuration.
-    this.activeMetadataAndConfigurations = treeNode.metadataAndConfigurations;
+    this.activePropertyMetadataAndConfigurations = treeNode.propertyMetadataAndConfigurations;
   }
 
   ngOnInit(): void {
     this._httpClient.get<PropertyMetadata[]>(`/apiv1/configurations/metadata`).toPromise().then((_jsonMetadata) => {
       this._ngZone.run(() => {
         if (_jsonMetadata !== undefined) {
-          this.jsonMetadata = _jsonMetadata;
+          this.jsonPropertyMetadata = _jsonMetadata;
           this.initialize();
         }
       });
