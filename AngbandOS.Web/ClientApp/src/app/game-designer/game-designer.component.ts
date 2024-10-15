@@ -101,7 +101,7 @@ export class GameDesignerComponent implements OnInit {
     // Now check for data types that require additional properties to not be null.
     let collectionPropertyMetadataList: PropertyMetadata[] | null = null;
     let tupleTypesPropertyMetadataList: PropertyMetadata[] | null = null;
-    switch (jsonPropertyMetadata.type.toLocaleUpperCase()) {
+    switch (jsonPropertyMetadata.type.toLowerCase()) {
       case "collection":
         if (jsonPropertyMetadata.collectionKeyPropertyName === null) {
           return undefined;
