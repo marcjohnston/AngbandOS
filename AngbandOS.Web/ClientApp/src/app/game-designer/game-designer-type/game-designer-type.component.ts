@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PropertyMetadataAndConfiguration } from '../property-metadata-and-configuration';
 
 @Component({
   selector: 'app-game-designer-type',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game-designer-type.component.scss']
 })
 export class GameDesignerTypeComponent implements OnInit {
+  @Input() activeMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
 
   constructor() { }
 

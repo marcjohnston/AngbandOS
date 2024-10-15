@@ -1,1 +1,42 @@
-<p>game-designer-type works!</p>
+<ng-container *ngIf="activeMetadataAndConfiguration !== undefined">
+  <!-- String -->
+  <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'string'">
+    <ng-container *ngIf="!activeMetadataAndConfiguration.propertyMetadata.isArray; else multilineInput">
+      <input type="text" [(ngModel)]="activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]" />
+    </ng-container>
+    <ng-template #multilineInput>
+      <textarea rows="10" [ngModel]="activeMetadataAndConfiguration.getTextArea(activeMetadataAndConfiguration.propertyMetadata.propertyName)" (blur)="activeMetadataAndConfiguration.setTextArea(activeMetadataAndConfiguration.propertyMetadata.propertyName, $event)"></textarea>
+    </ng-template>
+  </div>
+  <!-- Boolean -->
+  <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'boolean'">
+    <select [(ngModel)]="activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]">
+      <option [ngValue]="true">True</option>
+      <option [ngValue]="false">False</option>
+    </select>
+  </div>
+  <!-- Tuple -->
+  <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
+    <table class="tuple-table">
+      <tr>
+        <ng-container *ngFor="let tupleType of activeMetadataAndConfiguration.propertyMetadata.tupleTypes">
+          <td>
+            <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+  <!-- Integer -->
+  <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'integer'">
+    <input type="text" [(ngModel)]="activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]" />
+  </div>
+  <!-- Character -->
+  <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'character'">
+    <input type="text" [(ngModel)]="activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]" />
+  </div>
+  <!-- Foreign Key -->
+  <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
+    {{activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]}}
+  </div>
+</ng-container>
