@@ -12,10 +12,6 @@ export class PropertyMetadataAndConfiguration {
    */
   public configuration: any | null;
 
-  public get collectionTitle(): string {
-    return this.propertyMetadata.collectionEntityTitle ?? this.propertyMetadata.renderTitle;
-  }
-
   public get collectionEntityTitle(): string {
     return this.configuration[this.propertyMetadata.collectionKeyPropertyName!]; // This was already verified in the json validation routine.
   }

@@ -6,7 +6,7 @@
       <span class="property-metadata-description">{{activeMetadataAndConfiguration.propertyMetadata.description}}</span><br />
     </ng-container>
     <ng-template #showCollectionEntity>
-      <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.collectionTitle}} - {{activeMetadataAndConfiguration.collectionEntityTitle}}</span><br />
+      <span class="collection-property-metadata-title">{{activeMetadataAndConfiguration.propertyMetadata.renderTitle}} - {{activeMetadataAndConfiguration.collectionEntityTitle}}</span><br />
       <ng-container *ngFor="let childPropertyMetadata of activeMetadataAndConfiguration.propertyMetadata.collectionPropertiesMetadata">
         <br />
         <span class="property-metadata-title">{{childPropertyMetadata.renderTitle}}</span><br />
