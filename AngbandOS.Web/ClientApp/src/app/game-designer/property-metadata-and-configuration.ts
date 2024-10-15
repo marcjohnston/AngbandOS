@@ -4,6 +4,9 @@ import { PropertyMetadata } from "./property-metadata";
  * Represents the active metadata and configuration that is being presented to the user.
  */
 export class PropertyMetadataAndConfiguration {
+  /**
+   * Returns the property metadata that applies to the treenode.
+   */
   public propertyMetadata: PropertyMetadata;
 
   /**
@@ -13,7 +16,7 @@ export class PropertyMetadataAndConfiguration {
   public configuration: any | null;
 
   public get collectionEntityTitle(): string {
-    return this.configuration[this.propertyMetadata.collectionKeyPropertyName!]; // This was already verified in the json validation routine.
+    return this.configuration[this.propertyMetadata.collectionKeyPropertyName!]; // collectionKeyPropertyName was already verified in the json validation routine.
   }
 
   public getTextArea(propertyName: string): string {

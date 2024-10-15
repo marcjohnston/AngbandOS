@@ -45,6 +45,7 @@ import { GameDesignerComponent } from './game-designer/game-designer.component';
 import { CanDeactivatePlay } from './can-deactivate-play/can-deactivate-play';
 import { MessagesWindowComponent } from './messages-window/messages-window.component';
 import { FooterComponent } from './footer/footer.component';
+import { GameDesignerPropertyComponent } from './game-designer/game-designer-property/game-designer-property.component';
 import { GameDesignerTypeComponent } from './game-designer/game-designer-type/game-designer-type.component';
 
 @NgModule({
@@ -72,6 +73,7 @@ import { GameDesignerTypeComponent } from './game-designer/game-designer-type/ga
     GameDesignerComponent,
     MessagesWindowComponent,
     FooterComponent,
+    GameDesignerPropertyComponent,
     GameDesignerTypeComponent
   ],
   imports: [

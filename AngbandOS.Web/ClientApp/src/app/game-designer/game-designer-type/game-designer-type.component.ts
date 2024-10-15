@@ -1,6 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PropertyMetadata } from '../property-metadata';
-import { PropertyMetadataAndConfiguration } from '../property-metadata-and-configuration';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-game-designer-type',
@@ -8,7 +6,6 @@ import { PropertyMetadataAndConfiguration } from '../property-metadata-and-confi
   styleUrls: ['./game-designer-type.component.scss']
 })
 export class GameDesignerTypeComponent implements OnInit {
-  @Input() activeMetadataAndConfiguration: PropertyMetadataAndConfiguration | null = null;
 
   constructor() { }
 

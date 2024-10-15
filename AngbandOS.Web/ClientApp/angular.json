@@ -9,6 +9,9 @@
         "@schematics/angular:application": {
           "strict": true,
           "style": "scss"
+        },
+        "@schematics/angular:component": {
+          "style": "scss"
         }
       },
       "root": "",

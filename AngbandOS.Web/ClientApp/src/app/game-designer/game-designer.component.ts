@@ -6,10 +6,6 @@ import { ColorDesignerPropertyDataType } from './api/color-designer-property-dat
 import { DiceRollDesignerPropertyDataType } from './api/dice-roll-designer-property-data-type';
 import { IntegerDesignerPropertyDataType } from './api/integer-designer-property-data-type';
 import { RepositoryDesignerPropertyDataType } from './api/repository-designer-property-data-type';
-import { GameDataDesigner } from './api/game-data-designer';
-import { SelectItem } from "./api/select-item";
-import { Designer } from './api/designer';
-import { DesignerProperty } from './api/designer-property';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
@@ -46,7 +42,7 @@ export class GameDesignerComponent implements OnInit {
   /**
    * The property metadata and the configuration to be rendered on demand when the user clicks a tree node; null, if the user hasn't selected any tree node.
    */
-  public activeMetadataAndConfiguration: PropertyMetadataAndConfiguration | null = null;
+  public activeMetadataAndConfigurations: PropertyMetadataAndConfiguration[] | null = null;
 
   constructor(
     private _httpClient: HttpClient,
@@ -55,6 +51,7 @@ export class GameDesignerComponent implements OnInit {
   ) { }
 
   validateJsonPropertyMetadata(jsonPropertyMetadata: JsonPropertyMetadata): PropertyMetadata | undefined {
+    // Check that none of the properties are undefined.
     if (jsonPropertyMetadata.type === undefined) {
       return undefined;
     }
@@ -101,35 +98,40 @@ export class GameDesignerComponent implements OnInit {
       return undefined;
     }
 
-    if (jsonPropertyMetadata.type.toLocaleUpperCase() === "collection" && jsonPropertyMetadata.collectionKeyPropertyName === null) {
-      return undefined;
-    }
-
+    // Now check for data types that require additional properties to not be null.
     let collectionPropertyMetadataList: PropertyMetadata[] | null = null;
-    if (jsonPropertyMetadata.collectionPropertiesMetadata !== null) {
-      collectionPropertyMetadataList = [];
-      for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.collectionPropertiesMetadata)
-      {
-        const collectionPropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonCollectionPropertyMetadata);
-        if (collectionPropertyMetadata === undefined) {
-          return undefined;
-        }
-
-        collectionPropertyMetadataList.push(collectionPropertyMetadata);
-      }
-    }
-
     let tupleTypesPropertyMetadataList: PropertyMetadata[] | null = null;
-    if (jsonPropertyMetadata.tupleTypes !== null) {
-      tupleTypesPropertyMetadataList = [];
-      for (let jsonTupleTypePropertyMetadata of jsonPropertyMetadata.tupleTypes) {
-        const tupleTypePropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonTupleTypePropertyMetadata);
-        if (tupleTypePropertyMetadata === undefined) {
+    switch (jsonPropertyMetadata.type.toLocaleUpperCase()) {
+      case "collection":
+        if (jsonPropertyMetadata.collectionKeyPropertyName === null) {
           return undefined;
         }
 
-        tupleTypesPropertyMetadataList.push(tupleTypePropertyMetadata);
-      }
+        if (jsonPropertyMetadata.collectionPropertiesMetadata !== null) {
+          collectionPropertyMetadataList = [];
+          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.collectionPropertiesMetadata) {
+            const collectionPropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonCollectionPropertyMetadata);
+            if (collectionPropertyMetadata === undefined) {
+              return undefined;
+            }
+
+            collectionPropertyMetadataList.push(collectionPropertyMetadata);
+          }
+        }
+        break;
+      case "tuple":
+        if (jsonPropertyMetadata.tupleTypes !== null) {
+          tupleTypesPropertyMetadataList = [];
+          for (let jsonTupleTypePropertyMetadata of jsonPropertyMetadata.tupleTypes) {
+            const tupleTypePropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonTupleTypePropertyMetadata);
+            if (tupleTypePropertyMetadata === undefined) {
+              return undefined;
+            }
+
+            tupleTypesPropertyMetadataList.push(tupleTypePropertyMetadata);
+          }
+        }
+        break;
     }
 
     return new PropertyMetadata(jsonPropertyMetadata.type,
@@ -151,7 +153,8 @@ export class GameDesignerComponent implements OnInit {
 
   initialize() {
     if (this.jsonMetadata !== undefined && this.configuration !== undefined) {
-      const childTreeNodes: TreeNode[] = [];
+      const rootTreeNodes: TreeNode[] = [];
+      const gameSettingsPropertyAndMetadataAndConfigurations: PropertyMetadataAndConfiguration[] = []; // We will need to build the game settings tree node manually.
       for (var jsonPropertyMetadata of this.jsonMetadata) {
         // We need to validate the json metadata before we can provide it to a tree node.
         const propertyMetadata = this.validateJsonPropertyMetadata(jsonPropertyMetadata);
@@ -164,69 +167,45 @@ export class GameDesignerComponent implements OnInit {
 
         switch (propertyMetadata.type?.toLowerCase()) {
           case "collection":
-            const collectionPropertyTreeNode: TreeNode | undefined = this.buildCollectionTree(propertyMetadata, this.configuration);
-            if (collectionPropertyTreeNode !== undefined) {
-              childTreeNodes.push(collectionPropertyTreeNode);
+            const entityTable: any[] = this.configuration[propertyMetadata.propertyName];
+            const childTreeNodes: TreeNode[] = [];
+            for (var entity of entityTable) {
+              const keyValue = entity[propertyMetadata.collectionKeyPropertyName!]; // collectionKeyPropertyName was already validated.
+              const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
+              childTreeNodes.push(new TreeNode(keyValue, null, [childPropertyMetadataAndConfiguration]));
             }
+
+            // This is the parent node, we are not rendering any children.
+            const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, null);
+            const collectionTreeNode = new TreeNode(propertyMetadata.propertyName, childTreeNodes, [parentPropertyMetadataAndConfiguration]);
+            rootTreeNodes.push(collectionTreeNode);
             break;
           case "string":
             if (propertyMetadata.isArray) {
-              const stringPropertyTreeNode: TreeNode | undefined = this.buildStringArrayTree(propertyMetadata, this.configuration);
-              if (stringPropertyTreeNode !== undefined) {
-                childTreeNodes.push(stringPropertyTreeNode);
-              }
+              const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+              const stringArrayTreeNode = new TreeNode(propertyMetadata.renderTitle, null, [parentPropertyMetadataAndConfiguration]);
+              rootTreeNodes.push(stringArrayTreeNode);
+            } else {
+              const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+              gameSettingsPropertyAndMetadataAndConfigurations.push(gameSettingPropertyAndMetadataConfiguration);
             }
+            break;
+          default:
+            const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+            gameSettingsPropertyAndMetadataAndConfigurations.push(gameSettingPropertyAndMetadataConfiguration);
             break;
         }
       }
 
       // Assign the list to comply with the Angular change detection assignment.
-      this.rootTreeNodes = childTreeNodes;
+      const gameSettingsTreeNode = new TreeNode("Game Settings", null, gameSettingsPropertyAndMetadataAndConfigurations);
+      this.rootTreeNodes = [gameSettingsTreeNode, ...rootTreeNodes];
     }
-  }
-
-  buildCollectionTree(propertyMetadata: PropertyMetadata, configuration: any): TreeNode | undefined {
-    if (propertyMetadata.propertyName === undefined) {
-      this._snackBar.open("Property metadata contains an invalid type value.", "", {
-        duration: 5000
-      });
-      return undefined;
-    }
-    if (propertyMetadata.collectionKeyPropertyName === undefined || propertyMetadata.collectionKeyPropertyName === null) {
-      this._snackBar.open("Property metadata contains an invalid collection key property name value.", "", {
-        duration: 5000
-      });
-      return undefined;
-    }
-
-    const entityTable: any[] = configuration[propertyMetadata.propertyName];
-    const childTreeNodes: TreeNode[] = [];
-    for (var entity of entityTable) {
-      const keyValue = entity[propertyMetadata.collectionKeyPropertyName];
-      const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
-      childTreeNodes.push(new TreeNode(keyValue, null, childPropertyMetadataAndConfiguration));
-    }
-
-    // This is the parent node, we are not rendering any children.
-    const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, null);
-    return new TreeNode(propertyMetadata.propertyName, childTreeNodes, parentPropertyMetadataAndConfiguration);
-  }
-
-  buildStringArrayTree(propertyMetadata: PropertyMetadata, configuration: any): TreeNode | undefined {
-    if (propertyMetadata.propertyName === undefined) {
-      this._snackBar.open("Property metadata contains an invalid type value.", "", {
-        duration: 5000
-      });
-      return undefined;
-    }
-
-    const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, configuration);
-    return new TreeNode(propertyMetadata.propertyName, null, parentPropertyMetadataAndConfiguration);
   }
 
   public treeNodeClicked(treeNode: TreeNode) {
     // Activate the tree node property metadata and configuration.
-    this.activeMetadataAndConfiguration = treeNode.metadataAndConfiguration;
+    this.activeMetadataAndConfigurations = treeNode.metadataAndConfigurations;
   }
 
   ngOnInit(): void {

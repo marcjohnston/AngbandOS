@@ -32,15 +32,20 @@
         </table>
       </div>
       <div id="entity-panel">
-        <ng-container *ngIf="activeMetadataAndConfiguration !== null">
-          <app-game-designer-type [activeMetadataAndConfiguration]="activeMetadataAndConfiguration"></app-game-designer-type>
+        <ng-container *ngIf="activeMetadataAndConfigurations !== null">
+          <ng-container *ngFor="let activeMetadataAndConfiguration of activeMetadataAndConfigurations">
+            <app-game-designer-property [activeMetadataAndConfiguration]="activeMetadataAndConfiguration"></app-game-designer-property>
+          </ng-container>
           <!-- Debug -->
-          <ng-container *ngIf="showDebug === true">
-            <h6>Property Metadata Debug</h6>
-            <pre style="white-space: pre-wrap;">{{activeMetadataAndConfiguration.propertyMetadata | json}}</pre>
+          <ng-container *ngIf="false && activeMetadataAndConfigurations !== null"> <!-- Change the first true/false to enable and disable the debug mode -->
+            <hr />
+            <ng-container *ngFor="let activeMetadataAndConfiguration of activeMetadataAndConfigurations; let index = index">
+              <h6>Property Metadata Debug #{{index}}</h6>
+              <pre style="white-space: pre-wrap;">{{activeMetadataAndConfiguration.propertyMetadata | json}}</pre>
+            </ng-container>
             <br />
             <h6>Configuration Debug</h6>
-            <pre style="white-space: pre-wrap;">{{activeMetadataAndConfiguration.configuration | json}}</pre>
+            <pre style="white-space: pre-wrap;">{{activeMetadataAndConfigurations[0].configuration | json}}</pre> <!-- We only want to show the configuration once.  It is the same for all properties. -->
           </ng-container>
         </ng-container>
       </div>
