@@ -18,13 +18,23 @@
   <!-- Tuple -->
   <div *ngIf="activeMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
     <table class="tuple-table">
-      <tr>
+      <tr> <!-- Tuple table header -->
         <ng-container *ngFor="let tupleType of activeMetadataAndConfiguration.propertyMetadata.tupleTypes">
           <td>
             <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
           </td>
         </ng-container>
       </tr>
+      <!-- Tuple table rows of configuration values -->
+      <ng-container *ngFor="let tupleValues of activeMetadataAndConfiguration.configuration[activeMetadataAndConfiguration.propertyMetadata.propertyName]">
+        <tr>
+          <ng-container *ngFor="let tupleType of activeMetadataAndConfiguration.propertyMetadata.tupleTypes">
+            <td>
+              <!--<app-game-designer-type activeMetadataAndConfiguration="activeMetadataAndConfiguration.createChild()"></app-game-designer-type>-->
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
     </table>
   </div>
   <!-- Integer -->

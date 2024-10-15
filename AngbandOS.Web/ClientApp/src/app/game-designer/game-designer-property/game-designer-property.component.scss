@@ -6,19 +6,3 @@
 .property-metadata-title {
   font-weight: bold; // The title of properties will be the same size as normal text but bold.
 }
-
-.tuple-table {
-  & td {
-    border: 1px solid white; // Tuple tables have borders around the table cells.
-    padding: 0 10px 0 10px; // Tuple table cells need padding on the left and right sides.
-  }
-
-  & .tuple-table-header {
-    font-weight: bold; // Tuple table headers will be bold.
-  }
-}
-
-textarea {
-  width: 25%; // The fit-content didn't work.
-  resize: both; // Allow the user to resize the text area, as needed.
-}

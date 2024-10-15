@@ -59,6 +59,6 @@ internal abstract class GameCommand : IGetKey
             IsEnabled = IsEnabled,
             ExecuteScriptName = ExecuteScriptName
         };
-        return JsonSerializer.Serialize(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 }

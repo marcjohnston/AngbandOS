@@ -33,7 +33,7 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey
             IsEnabled = IsEnabled,
             KeyChar = KeyChar
         };
-        return JsonSerializer.Serialize(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     public virtual string Key => GetType().Name;

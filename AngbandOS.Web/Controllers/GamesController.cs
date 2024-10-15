@@ -105,7 +105,7 @@ namespace AngbandOS.Web.Controllers
         [HttpGet]
         [Route("configurations/default")]
         [Produces("application/json")]
-        [ResponseCache(Duration = 600, Location = ResponseCacheLocation.Any, NoStore = false)]
+  //      [ResponseCache(Duration = 600, Location = ResponseCacheLocation.Any, NoStore = false)]
         public ActionResult<GameConfiguration> GetGameConfiguration()
         {
             string connectionString = Configuration["ConnectionString"];
@@ -115,10 +115,11 @@ namespace AngbandOS.Web.Controllers
 
             GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
 
-            // We do not want the clients to have the properties automatically camel-cased.  They won't be aligned with the Metadata.
+            // We do not want the clients to have the properties automatically camel-cased.  They won't be aligned with the Metadata.  We also have to ensure tuple-fields get serialized.
             var jsonOptions = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = null
+                PropertyNamingPolicy = null,
+                IncludeFields = true
             };
 
             return new JsonResult(gameConfiguration, jsonOptions);

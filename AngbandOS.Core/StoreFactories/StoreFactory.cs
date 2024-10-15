@@ -68,7 +68,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
             StoreIdentifiesItems = StoreIdentifiesItems,
             StoreAnalyzesPurchases = StoreAnalyzesPurchases
         };
-        return JsonSerializer.Serialize(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     protected StoreFactory(Game game)

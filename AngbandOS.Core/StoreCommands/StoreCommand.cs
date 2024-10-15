@@ -81,6 +81,6 @@ internal abstract class StoreCommand : IGetKey, IToJson
             ValidStoreFactoryNames = ValidStoreFactoryNames,
             ExecuteScriptName = ExecuteScriptName
         };
-        return JsonSerializer.Serialize(definition);
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 }
