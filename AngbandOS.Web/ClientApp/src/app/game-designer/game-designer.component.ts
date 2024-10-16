@@ -35,6 +35,11 @@ export class GameDesignerComponent implements OnInit {
   public configuration: any | undefined = undefined;
 
   /**
+   * Returns the unmodified original configuration to detect changes.
+   */
+  public unmodifiedConfigurationAsJson: string | undefined = undefined;
+
+  /**
    * The root tree nodes that are being rendered in the left panel.
    */
   public rootTreeNodes: TreeNode[] | undefined = undefined;
@@ -208,6 +213,10 @@ export class GameDesignerComponent implements OnInit {
     }
   }
 
+  public get isModified(): boolean {
+    return JSON.stringify(this.configuration) != this.unmodifiedConfigurationAsJson;
+  }
+
   public treeNodeClicked(treeNode: TreeNode) {
     // Activate the tree node property metadata and configuration.
     this.activePropertyMetadataAndConfigurations = treeNode.propertyMetadataAndConfigurations;
@@ -230,7 +239,11 @@ export class GameDesignerComponent implements OnInit {
     this._httpClient.get<any>(`/apiv1/configurations/default`).toPromise().then((_configuration) => {
       this._ngZone.run(() => {
         if (_configuration !== undefined) {
+          // Keep a reference to the configuration.
           this.configuration = _configuration;
+
+          // Make a deep-copy of the configuration to detect changes.
+          this.unmodifiedConfigurationAsJson = JSON.stringify(_configuration);
           this.initialize();
         }
       });
