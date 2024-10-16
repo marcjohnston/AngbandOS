@@ -197,9 +197,14 @@ export class GameDesignerComponent implements OnInit {
         }
       }
 
-      // Assign the list to comply with the Angular change detection assignment.
+      // Sort the root tree nodes by title.
+      rootTreeNodes.sort((treeNodeA, treeNodeB) => treeNodeA.title.localeCompare(treeNodeB.title));
+
+      // Build the Game Settings tree node to place at the top of the tree.
       const gameSettingsTreeNode = new TreeNode("Game Settings", null, gameSettingsPropertyAndMetadataAndConfigurations);
-      this.rootTreeNodes = [gameSettingsTreeNode, ...rootTreeNodes];
+
+      // Assign the list to comply with the Angular change detection assignment.
+      this.rootTreeNodes = [gameSettingsTreeNode, ...rootTreeNodes]; 
     }
   }
 
