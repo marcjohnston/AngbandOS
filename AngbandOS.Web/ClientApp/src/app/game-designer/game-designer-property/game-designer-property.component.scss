@@ -7,7 +7,7 @@
   font-weight: bold; // The title of properties will be the same size as normal text but bold.
 }
 
-.property-container-div {
+.property-container-div, .type-container-div {
   margin-top: 10px; // This is the amount of space before each of the properties that are shown in a collection.
   margin-bottom: 20px; // This is the amount of space after each of the properties that are shown in a collection.  We wanted some margin on the bottom so that the last property isn't flush to the bottom of the scroll; so the total margin was split between the top and bottom margins.
 }
