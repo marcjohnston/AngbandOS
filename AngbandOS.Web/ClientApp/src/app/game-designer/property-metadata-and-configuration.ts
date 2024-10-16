@@ -39,11 +39,27 @@ export class PropertyMetadataAndConfiguration {
   /**
    * Returns a new PropertyMetadataAndConfiguration object from a child property that references a tuple.
    * @param propertyMetadata
-   * @param itemIndex
+   * @param tupleIndex
    * @returns
    */
-  public createTupleChild(propertyMetadata: PropertyMetadata, itemIndex: number): PropertyMetadataAndConfiguration {
-    return new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+  public createTupleChild(tupleTypePropertyMetadata: PropertyMetadata, tupleIndex: number, tupleValues: any): PropertyMetadataAndConfiguration {
+    const derivedTuplePropertyMetadata = new PropertyMetadata(
+      tupleTypePropertyMetadata.type,
+      `Item${tupleIndex + 1}`, // This is how the serialization is naming the tuple fields
+      tupleTypePropertyMetadata.title,
+      tupleTypePropertyMetadata.categoryTitle,
+      tupleTypePropertyMetadata.isNullable,
+      tupleTypePropertyMetadata.isArray,
+      tupleTypePropertyMetadata.description,
+      tupleTypePropertyMetadata.defaultIntegerValue,
+      tupleTypePropertyMetadata.defaultBooleanValue,
+      tupleTypePropertyMetadata.defaultCharacterValue,
+      tupleTypePropertyMetadata.defaultStringValue,
+      tupleTypePropertyMetadata.collectionPropertyMetadatas,
+      tupleTypePropertyMetadata.tupleTypes,
+      tupleTypePropertyMetadata.collectionKeyPropertyName,
+      tupleTypePropertyMetadata.collectionEntityTitle);
+    return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
   }
 
   constructor(propertyMetadata: PropertyMetadata, configuration: any | null) {

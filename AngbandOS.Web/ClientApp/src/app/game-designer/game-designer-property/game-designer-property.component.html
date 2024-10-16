@@ -3,19 +3,20 @@
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'collection'; else nonCollectionProperty">
     <ng-container *ngIf="activePropertyMetadataAndConfiguration.configuration === null; else showCollectionEntity">
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-                                                                                                                                     <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+      <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
     </ng-container>
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.collectionEntityTitle}} - {{activePropertyMetadataAndConfiguration.collectionEntityTitle}}</span><br />
-      <ng-container *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.collectionPropertyMetadatas">
-        <hr />
+      <div class="property-container-div" *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.collectionPropertyMetadatas">
         <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration.createChild(childPropertyMetadata)"></app-game-designer-property> <!-- Recursion -->
-      </ng-container>
+      </div>
     </ng-template>
   </div>
   <ng-template #nonCollectionProperty>
     <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
     <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
-    <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type>
+    <div class="type-container-div">
+      <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type>
+    </div>
   </ng-template>
 </ng-container>

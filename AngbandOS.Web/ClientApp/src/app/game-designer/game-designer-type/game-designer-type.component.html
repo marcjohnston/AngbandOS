@@ -18,7 +18,8 @@
   <!-- Tuple -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
     <table class="tuple-table">
-      <tr> <!-- Tuple table header -->
+      <tr>
+        <!-- Tuple table header -->
         <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes">
           <td>
             <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
@@ -28,10 +29,9 @@
       <!-- Tuple table rows of configuration values -->
       <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]">
         <tr>
-          <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes; let index = index">
+          <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes; let tupleIndex = index">
             <td>
-              <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type>
-              <!--activePropertyMetadataAndConfiguration.createTupleChild(activePropertyMetadataAndConfiguration.propertyMetadata, index)-->
+              <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration.createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)"></app-game-designer-type>
             </td>
           </ng-container>
         </tr>
@@ -48,6 +48,6 @@
   </div>
   <!-- Foreign Key -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
-    {{activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]}}
+    <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
   </div>
 </ng-container>

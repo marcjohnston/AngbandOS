@@ -37,7 +37,7 @@
             <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-property>
           </ng-container>
           <!-- Debug -->
-          <ng-container *ngIf="true && activePropertyMetadataAndConfigurations !== null"> <!-- Change the first true/false to enable and disable the debug mode -->
+          <ng-container *ngIf="false && activePropertyMetadataAndConfigurations !== null"> <!-- Change the first true/false to enable and disable the debug mode -->
             <hr />
             <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations; let index = index">
               <h6>Property Metadata Debug #{{index}}</h6>
