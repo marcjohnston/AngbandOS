@@ -66,4 +66,5 @@ public abstract class PropertyMetadata
     public PropertyMetadata[]? CollectionPropertyMetadatas { get; set; } = null;
 
     public PropertyMetadata[]? TupleTypes { get; set; } = null;
+    public string? ForeignCollectionName{ get; set; } = null;
 }

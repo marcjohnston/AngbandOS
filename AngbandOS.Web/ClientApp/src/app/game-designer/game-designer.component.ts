@@ -22,7 +22,7 @@ import { JsonPropertyMetadata } from './json-property-metadata';
 })
 
 export class GameDesignerComponent implements OnInit {
-  public showDebug = false;
+  public collections = new Map<string, string[]>();
 
   /**
    * The unverified metadata that has been received from the game controller.
@@ -102,6 +102,9 @@ export class GameDesignerComponent implements OnInit {
     if (jsonPropertyMetadata.collectionEntityTitle === undefined) {
       return undefined;
     }
+    if (jsonPropertyMetadata.foreignCollectionName === undefined) {
+      return undefined;
+    }
 
     // Now check for data types that require additional properties to not be null.
     let collectionPropertyMetadataList: PropertyMetadata[] | null = null;
@@ -154,7 +157,8 @@ export class GameDesignerComponent implements OnInit {
       collectionPropertyMetadataList,
       tupleTypesPropertyMetadataList,
       jsonPropertyMetadata.collectionKeyPropertyName,
-      jsonPropertyMetadata.collectionEntityTitle);
+      jsonPropertyMetadata.collectionEntityTitle,
+      jsonPropertyMetadata.foreignCollectionName);
   }
 
   initialize() {
@@ -175,16 +179,26 @@ export class GameDesignerComponent implements OnInit {
           case "collection":
             const entityTable: any[] = this.configuration[propertyMetadata.propertyName];
             const childTreeNodes: TreeNode[] = [];
+            const collectionKeysArray: string[] = [];
             for (var entity of entityTable) {
+              // Get the key value for the entity.
               const keyValue = entity[propertyMetadata.collectionKeyPropertyName!]; // collectionKeyPropertyName was already validated.
+
+              // Build the child tree node.
               const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
               childTreeNodes.push(new TreeNode(keyValue, null, [childPropertyMetadataAndConfiguration]));
+
+              // Add the key value to the collection keys array.  This array will be assigned to the collections Map that is used for foreign key references.
+              collectionKeysArray.push(keyValue);
             }
 
             // This is the parent node, we are not rendering any children.
             const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, null);
             const collectionTreeNode = new TreeNode(propertyMetadata.propertyName, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
+
+            // Add the keys to the Map of collections by the property name.
+            this.collections.set(propertyMetadata.propertyName, collectionKeysArray);
             break;
           case "string-array":
               const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);

@@ -25,6 +25,6 @@
   </div>
   <!-- Foreign Key -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
-    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-foreign-key>
+    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-type-foreign-key>
   </div>
 </ng-container>

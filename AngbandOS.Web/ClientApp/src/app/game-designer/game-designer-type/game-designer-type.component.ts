@@ -7,7 +7,8 @@ import { PropertyMetadataAndConfiguration } from '../property-metadata-and-confi
   styleUrls: ['./game-designer-type.component.scss']
 })
 export class GameDesignerTypeComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
+  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
+  @Input() collections: Map<string, string[]> | undefined = undefined; // Undefined until Angular loads the parameters.
 
   constructor() { }
 

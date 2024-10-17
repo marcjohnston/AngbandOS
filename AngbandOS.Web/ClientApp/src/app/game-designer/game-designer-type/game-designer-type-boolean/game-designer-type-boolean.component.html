@@ -1,9 +1,9 @@
 <ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
-  <select [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]">
+  <select [ngModel]="getValue(activePropertyMetadataAndConfiguration)" (blur)="setValue(activePropertyMetadataAndConfiguration, $event)">
     <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable">
-      <option [ngValue]="null">Default</option>
+      <option value="">Default</option>
     </ng-container>
-    <option [ngValue]="true">True</option>
-    <option [ngValue]="false">False</option>
+    <option value="true">True</option>
+    <option value="false">False</option>
   </select>
 </ng-container>

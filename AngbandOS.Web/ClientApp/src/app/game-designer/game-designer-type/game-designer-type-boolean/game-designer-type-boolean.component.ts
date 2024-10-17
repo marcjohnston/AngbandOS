@@ -14,4 +14,11 @@ export class GameDesignerTypeBooleanComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public getValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
+    return activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] ?? "";
+  }
+
+  public setValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
+    activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = event.target.value === "" ? null : event.target.value === "true" ? true : false;
+  }
 }

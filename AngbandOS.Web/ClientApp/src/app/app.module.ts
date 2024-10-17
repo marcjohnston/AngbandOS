@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ResetPasswordComponent } from './accounts/reset-password/reset-password.component';
@@ -102,6 +103,7 @@ import { GameDesignerTypeForeignKeyComponent } from './game-designer/game-design
     MatIconModule,
     MatCardModule,
     DragDropModule,
+    MatSelectModule,
 
     ColorPickerModule,
 

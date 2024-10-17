@@ -1,3 +1,13 @@
-<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
-  <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
+<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined && isNull !== undefined">
+  <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable">
+    <span id="default-span"><input type="checkbox" [(ngModel)]="isNull" (change)="setValue()" />Default</span>
+  </ng-container>
+  <select #select [disabled]="isNull" [ngModel]="getValue()" (change)="setValue()">
+    <ng-container *ngIf="collections !== undefined">
+      <ng-container *ngFor="let option of collections.get(activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName!)">
+        <option value="{{option}}">{{option}}</option>
+      </ng-container>
+    </ng-container>
+  </select>
+  <span id="modified-span" *ngIf="unmodifiedValue !== getValue()"><mat-icon>circle</mat-icon></span>
 </ng-container>

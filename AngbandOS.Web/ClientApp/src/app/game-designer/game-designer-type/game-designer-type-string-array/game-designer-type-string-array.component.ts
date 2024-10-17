@@ -14,11 +14,11 @@ export class GameDesignerTypeStringArrayComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public getTextArea(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
+  public getValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
     return activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].join('\n');
   }
 
-  public setTextArea(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
+  public setValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
     activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = event.target.value.split('\n');
   }
 }

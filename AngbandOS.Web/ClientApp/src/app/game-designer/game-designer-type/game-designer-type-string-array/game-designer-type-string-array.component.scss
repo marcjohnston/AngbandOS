@@ -1,4 +1,6 @@
 textarea {
+  background-color: transparent; // The background for the textarea needs to be transparent.
+  color: white; // The text needs to be white.
   width: 25%; // The fit-content didn't work.
   resize: both; // Allow the user to resize the text area, as needed.
 }

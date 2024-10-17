@@ -64,7 +64,7 @@ public class StoreFactoryGameConfiguration
     /// <summary>
     /// Returns the maximum number of items the store should maintain.  Returns one pagesize (26), by default.
     /// </summary>
-    public virtual int MaxInventory { get; set; } // The default value is set in the constructor.
+    public virtual int MaxInventory { get; set; } // The default value is set in the constructor. // TODO: Why is this not nullable
 
     /// <summary>
     /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.  Returns 6, by default.
@@ -84,6 +84,9 @@ public class StoreFactoryGameConfiguration
     /// </summary>
     public virtual bool ShufflesOwnersAndPricing { get; set; } = true;
 
+    /// <summary>
+    /// Returns the names of the skopkeepers that can be owners of the store.
+    /// </summary>
     public virtual string[] ShopkeeperNames { get; set; }
 
     public virtual string? AdvertisedStoreCommand1Name { get; set; } // The default value is set in the constructor.

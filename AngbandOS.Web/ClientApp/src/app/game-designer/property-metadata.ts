@@ -17,6 +17,7 @@ export class PropertyMetadata {
   public tupleTypes: PropertyMetadata[] | null;
   public collectionKeyPropertyName: string | null;
   public collectionEntityTitle: string | null;
+  public foreignCollectionName: string | null;
 
   /**
    * Returns the title of property.
@@ -40,7 +41,8 @@ export class PropertyMetadata {
               collectionPropertyMetadatas: PropertyMetadata[] | null,
               tupleTypes: PropertyMetadata[] | null,
               collectionKeyPropertyName: string | null,
-              collectionEntityTitle: string | null) {
+              collectionEntityTitle: string | null,
+              foreignCollectionName: string | null) {
     this.type = type;
     this.title = title;
     this.propertyName = propertyName;
@@ -56,6 +58,7 @@ export class PropertyMetadata {
     this.tupleTypes = tupleTypes;
     this.collectionKeyPropertyName = collectionKeyPropertyName;
     this.collectionEntityTitle = collectionEntityTitle;
+    this.foreignCollectionName = foreignCollectionName;
   }
 }
 
