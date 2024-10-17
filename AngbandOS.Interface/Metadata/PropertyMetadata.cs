@@ -42,11 +42,6 @@ public abstract class PropertyMetadata
     public bool IsNullable { get; set; } = false;
 
     /// <summary>
-    /// Returns true, if the property supports more than one value.  Returns false, by default.
-    /// </summary>
-    public bool IsArray { get; set; } = false;
-
-    /// <summary>
     /// Returns a description of the property that can be presented to the user that provides the maximum amount of details on how the property is to be used.  Returns a blank description, by default.
     /// </summary>
     public string? Description { get; set; } = "";
@@ -65,6 +60,8 @@ public abstract class PropertyMetadata
     public char? DefaultCharacterValue { get; set; } = null;
 
     public string? DefaultStringValue { get; set; } = null;
+
+    public string[]? DefaultStringArrayValue { get; set; } = null;
 
     public PropertyMetadata[]? CollectionPropertyMetadatas { get; set; } = null;
 

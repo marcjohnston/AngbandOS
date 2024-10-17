@@ -1,0 +1,4 @@
+textarea {
+  width: 25%; // The fit-content didn't work.
+  resize: both; // Allow the user to resize the text area, as needed.
+}

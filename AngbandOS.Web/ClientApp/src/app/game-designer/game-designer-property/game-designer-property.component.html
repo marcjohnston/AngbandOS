@@ -8,7 +8,7 @@
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.collectionEntityTitle}} - {{activePropertyMetadataAndConfiguration.collectionEntityTitle}}</span><br />
       <div class="property-container-div" *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.collectionPropertyMetadatas">
-        <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration.createChild(childPropertyMetadata)"></app-game-designer-property> <!-- Recursion -->
+        <app-game-designer-property [activePropertyMetadataAndConfiguration]="createChild(activePropertyMetadataAndConfiguration, childPropertyMetadata)"></app-game-designer-property> <!-- Recursion -->
       </div>
     </ng-template>
   </div>

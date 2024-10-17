@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../property-metadata-and-configuration';
+import { PropertyMetadata } from '../property-metadata';
 
 @Component({
   selector: 'app-game-designer-property',
@@ -14,4 +15,12 @@ export class GameDesignerPropertyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.
+   * @param propertyMetadata
+   * @returns
+   */
+  public createChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, childPropertyMetadata: PropertyMetadata): PropertyMetadataAndConfiguration {
+    return new PropertyMetadataAndConfiguration(childPropertyMetadata, activePropertyMetadataAndConfiguration.configuration);
+  }
 }

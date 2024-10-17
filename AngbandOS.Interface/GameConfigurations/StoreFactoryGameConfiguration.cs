@@ -34,7 +34,7 @@ public class StoreFactoryGameConfiguration
     /// </summary>
     public virtual bool StoreEntranceDoorsAreBlownOff { get; set; } = false;
 
-    public virtual string Key { get; set; }
+    public virtual string Key { get; set; } // The default value is set in the constructor.
 
     /// <summary>
     /// Returns the number of items in a page for the store.
@@ -64,7 +64,7 @@ public class StoreFactoryGameConfiguration
     /// <summary>
     /// Returns the maximum number of items the store should maintain.  Returns one pagesize (26), by default.
     /// </summary>
-    public virtual int MaxInventory { get; set; }
+    public virtual int MaxInventory { get; set; } // The default value is set in the constructor.
 
     /// <summary>
     /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.  Returns 6, by default.
@@ -86,9 +86,9 @@ public class StoreFactoryGameConfiguration
 
     public virtual string[] ShopkeeperNames { get; set; }
 
-    public virtual string? AdvertisedStoreCommand1Name { get; set; }
-    public virtual string? AdvertisedStoreCommand2Name { get; set; }
-    public virtual string? AdvertisedStoreCommand3Name { get; set; }
+    public virtual string? AdvertisedStoreCommand1Name { get; set; } // The default value is set in the constructor.
+    public virtual string? AdvertisedStoreCommand2Name { get; set; } // The default value is set in the constructor.
+    public virtual string? AdvertisedStoreCommand3Name { get; set; } // The default value is set in the constructor.
     public virtual string? AdvertisedStoreCommand4Name { get; set; } = null;
     public virtual string? AdvertisedStoreCommand5Name { get; set; } = null;
 

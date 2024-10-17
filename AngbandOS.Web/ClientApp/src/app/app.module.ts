@@ -47,6 +47,13 @@ import { MessagesWindowComponent } from './messages-window/messages-window.compo
 import { FooterComponent } from './footer/footer.component';
 import { GameDesignerPropertyComponent } from './game-designer/game-designer-property/game-designer-property.component';
 import { GameDesignerTypeComponent } from './game-designer/game-designer-type/game-designer-type.component';
+import { GameDesignerTypeBooleanComponent } from './game-designer/game-designer-type/game-designer-type-boolean/game-designer-type-boolean.component';
+import { GameDesignerTypeStringArrayComponent } from './game-designer/game-designer-type/game-designer-type-string-array/game-designer-type-string-array.component';
+import { GameDesignerTypeStringComponent } from './game-designer/game-designer-type/game-designer-type-string/game-designer-type-string.component';
+import { GameDesignerTypeTupleArrayComponent } from './game-designer/game-designer-type/game-designer-type-tuple-array/game-designer-type-tuple-array.component';
+import { GameDesignerTypeIntegerComponent } from './game-designer/game-designer-type/game-designer-type-integer/game-designer-type-integer.component';
+import { GameDesignerTypeCharacterComponent } from './game-designer/game-designer-type/game-designer-type-character/game-designer-type-character.component';
+import { GameDesignerTypeForeignKeyComponent } from './game-designer/game-designer-type/game-designer-type-foreign-key/game-designer-type-foreign-key.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +81,14 @@ import { GameDesignerTypeComponent } from './game-designer/game-designer-type/ga
     MessagesWindowComponent,
     FooterComponent,
     GameDesignerPropertyComponent,
-    GameDesignerTypeComponent
+    GameDesignerTypeComponent,
+    GameDesignerTypeBooleanComponent,
+    GameDesignerTypeStringArrayComponent,
+    GameDesignerTypeStringComponent,
+    GameDesignerTypeTupleArrayComponent,
+    GameDesignerTypeIntegerComponent,
+    GameDesignerTypeCharacterComponent,
+    GameDesignerTypeForeignKeyComponent
   ],
   imports: [
     MatTableModule,

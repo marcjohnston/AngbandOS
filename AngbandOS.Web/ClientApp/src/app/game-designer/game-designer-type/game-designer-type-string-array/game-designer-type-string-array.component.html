@@ -1,0 +1,3 @@
+<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+  <textarea rows="10" [ngModel]="getTextArea(activePropertyMetadataAndConfiguration)" (blur)="setTextArea(activePropertyMetadataAndConfiguration, $event)"></textarea>
+</ng-container>

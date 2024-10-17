@@ -1,0 +1,6 @@
+input {
+  background-color: transparent; // We do not want input boxes to have a white background.  Too much white.
+  color: white; // We need the font color to be white, now that the background is transparent (black).
+  border: 1px solid white; // We can hide the border.  It is also ugly.
+  border-radius: 4px; // Give the border a rounded radius.  The focus already shows rounded and larger.  By default it is square and ugly.
+}

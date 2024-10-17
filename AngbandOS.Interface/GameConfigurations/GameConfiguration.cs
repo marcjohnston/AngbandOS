@@ -134,10 +134,49 @@ public class GameConfiguration
                     CategoryTitle = CollectionsCategoryTitle,
                     PropertyMetadatas = new PropertyMetadata[]
                     {
-                        new TuplePropertyMetadata("StoreStockManifestDefinitions")
+                        new BooleanPropertyMetadata("IsEmptyLot")
                         {
+                            DefaultValue = false,
+                            Description = "Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.",
+                        },
+                        new BooleanPropertyMetadata("BuildingsMadeFromPermanentRock")
+                        {
+                            DefaultValue = true,
+                            Description = "Returns true, if the store (non-empty lot) is built from permanent rock.  Abandoned stores are created from inner walls and removeable rubble.",
+                        },
+                        new BooleanPropertyMetadata("StoreEntranceDoorsAreBlownOff")
+                        {
+                            DefaultValue = false,
+                            Description = "Returns true, if the entrances to the stores are are randomly placed.",
+                        },
+                        new StringPropertyMetadata("Key")
+                        {
+                        },
+                        new IntegerPropertyMetadata("PageSize")
+                        {
+                            DefaultValue = 26,
+                            Description = "Returns the number of items in a page for the store.",
+                        },
+                        new BooleanPropertyMetadata("UseHomeCarry")
+                        {
+                            DefaultValue = false,
+                        },
+                        new ForeignKeyArrayPropertyMetadata("ItemFilterNames", "ItemFilters")
+                        {
+                            Description = "Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to indicate that the store does not buy any items."
+                        },
+                        new BooleanPropertyMetadata("IsHomeThatCanBeBought")
+                        {
+                            IsNullable = true,
+                            DefaultValue = false,
+                            Description = "Returns true, if the store is a home that can be bought; false, otherwise.  When true, the doors locked will return true, if the store/home is in the correct town.  Returns false, by default.",
+                        },
+
+
+                        new TupleArrayPropertyMetadata("StoreStockManifestDefinitions")
+                        {
+                            IsNullable = true,
                             Description = "Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.  Returns 9, by default.",
-                            IsArray = true,
                             Types = new PropertyMetadata[]
                             {
                                 new ForeignKeyPropertyMetadata("ItemFactoryName", "ItemFactories")
@@ -149,26 +188,6 @@ public class GameConfiguration
                                     IsNullable = true
                                 }
                             }
-                        },
-                        new BooleanPropertyMetadata("IsEmptyLot")
-                        {
-                            DefaultValue = false,
-                            Description = "Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.",
-                        },
-                        new BooleanPropertyMetadata("StoreEntranceDoorsAreBlownOff")
-                        {
-                            DefaultValue = false,
-                            Description = "Returns true, if the entrances to the stores are are randomly placed.",
-                        },
-                        new BooleanPropertyMetadata("BuildingsMadeFromPermanentRock")
-                        {
-                            DefaultValue = true,
-                            Description = "Returns true, if the store (non-empty lot) is built from permanent rock.  Abandoned stores are created from inner walls and removeable rubble.",
-                        },
-                        new IntegerPropertyMetadata("PageSize")
-                        {
-                            DefaultValue = 26,
-                            Description = "Returns the number of items in a page for the store.",
                         },
                         new StringPropertyMetadata("AdvertisedStoreCommand1Name")
                         {
@@ -276,93 +295,77 @@ public class GameConfiguration
                 {
                     CategoryTitle = CollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("ElvishTexts")
+                new StringArrayPropertyMetadata("ElvishTexts")
                 {
-                    IsArray = true,
+                    CategoryTitle = StringCollectionsCategoryTitle,
+                },
+                new StringArrayPropertyMetadata("FindQuests")
+                {
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("FindQuests")
+                new StringArrayPropertyMetadata("FunnyComments")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("FunnyComments")
+                new StringArrayPropertyMetadata("FunnyDescriptions")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("FunnyDescriptions")
+                new StringArrayPropertyMetadata("HorrificDescriptions")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("HorrificDescriptions")
+                new StringArrayPropertyMetadata("InsultPlayerAttacks")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("InsultPlayerAttacks")
+                new StringArrayPropertyMetadata("MoanPlayerAttacks")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("MoanPlayerAttacks")
+                new StringArrayPropertyMetadata("UnreadableFlavorSyllables")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("UnreadableFlavorSyllables")
+                new StringArrayPropertyMetadata("ShopkeeperAcceptedComments")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("ShopkeeperAcceptedComments")
+                new StringArrayPropertyMetadata("ShopkeeperBargainComments")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("ShopkeeperBargainComments")
+                new StringArrayPropertyMetadata("ShopkeeperGoodComments")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("ShopkeeperGoodComments")
+                new StringArrayPropertyMetadata("ShopkeeperLessThanGuessComments")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("ShopkeeperLessThanGuessComments")
+                new StringArrayPropertyMetadata("ShopkeeperWorthlessComments")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("ShopkeeperWorthlessComments")
+                new StringArrayPropertyMetadata("SingingPlayerAttacks")
                 {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 },
-                new StringPropertyMetadata("SingingPlayerAttacks")
+                new StringArrayPropertyMetadata("WorshipPlayerAttacks")
                 {
-                    IsArray = true,
-                    IsNullable = false,
-                    CategoryTitle = StringCollectionsCategoryTitle,
-                },
-                new StringPropertyMetadata("WorshipPlayerAttacks")
-                {
-                    IsArray = true,
                     IsNullable = false,
                     CategoryTitle = StringCollectionsCategoryTitle,
                 }

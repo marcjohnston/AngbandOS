@@ -72,9 +72,6 @@ export class GameDesignerComponent implements OnInit {
     if (jsonPropertyMetadata.isNullable === undefined) {
       return undefined;
     }
-    if (jsonPropertyMetadata.isArray === undefined) {
-      return undefined;
-    }
     if (jsonPropertyMetadata.description === undefined) {
       return undefined;
     }
@@ -88,6 +85,9 @@ export class GameDesignerComponent implements OnInit {
       return undefined;
     }
     if (jsonPropertyMetadata.defaultStringValue === undefined) {
+      return undefined;
+    }
+    if (jsonPropertyMetadata.defaultStringArrayValue === undefined) {
       return undefined;
     }
     if (jsonPropertyMetadata.tupleTypes === undefined) {
@@ -125,6 +125,7 @@ export class GameDesignerComponent implements OnInit {
         }
         break;
       case "tuple":
+      case "tuple-array":
         if (jsonPropertyMetadata.tupleTypes !== null) {
           tupleTypesPropertyMetadataList = [];
           for (let jsonTupleTypePropertyMetadata of jsonPropertyMetadata.tupleTypes) {
@@ -144,12 +145,12 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.title,
       jsonPropertyMetadata.categoryTitle,
       jsonPropertyMetadata.isNullable,
-      jsonPropertyMetadata.isArray,
       jsonPropertyMetadata.description,
       jsonPropertyMetadata.defaultIntegerValue,
       jsonPropertyMetadata.defaultBooleanValue,
       jsonPropertyMetadata.defaultCharacterValue,
       jsonPropertyMetadata.defaultStringValue,
+      jsonPropertyMetadata.defaultStringArrayValue,
       collectionPropertyMetadataList,
       tupleTypesPropertyMetadataList,
       jsonPropertyMetadata.collectionKeyPropertyName,
@@ -181,19 +182,14 @@ export class GameDesignerComponent implements OnInit {
             }
 
             // This is the parent node, we are not rendering any children.
-            const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, null);
-            const collectionTreeNode = new TreeNode(propertyMetadata.propertyName, childTreeNodes, [parentPropertyMetadataAndConfiguration]);
+            const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, null);
+            const collectionTreeNode = new TreeNode(propertyMetadata.propertyName, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
             break;
-          case "string":
-            if (propertyMetadata.isArray) {
-              const parentPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
-              const stringArrayTreeNode = new TreeNode(propertyMetadata.renderTitle, null, [parentPropertyMetadataAndConfiguration]);
+          case "string-array":
+              const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+              const stringArrayTreeNode = new TreeNode(propertyMetadata.renderTitle, null, [stringArrayPropertyMetadataAndConfiguration]);
               rootTreeNodes.push(stringArrayTreeNode);
-            } else {
-              const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
-              gameSettingsPropertyAndMetadataAndConfigurations.push(gameSettingPropertyAndMetadataConfiguration);
-            }
             break;
           default:
             const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);

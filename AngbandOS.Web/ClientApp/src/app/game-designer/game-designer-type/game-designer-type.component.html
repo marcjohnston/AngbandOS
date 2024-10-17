@@ -1,53 +1,30 @@
 <ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
   <!-- String -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'string'">
-    <ng-container *ngIf="!activePropertyMetadataAndConfiguration.propertyMetadata.isArray; else multilineInput">
-      <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
-    </ng-container>
-    <ng-template #multilineInput>
-      <textarea rows="10" [ngModel]="activePropertyMetadataAndConfiguration.getTextArea(activePropertyMetadataAndConfiguration.propertyMetadata.propertyName)" (blur)="activePropertyMetadataAndConfiguration.setTextArea(activePropertyMetadataAndConfiguration.propertyMetadata.propertyName, $event)"></textarea>
-    </ng-template>
+    <app-game-designer-type-string [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string>
+  </div>
+  <!-- String Array -->
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'string-array'">
+    <app-game-designer-type-string-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string-array>
   </div>
   <!-- Boolean -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'boolean'">
-    <select [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]">
-      <option [ngValue]="true">True</option>
-      <option [ngValue]="false">False</option>
-    </select>
+    <app-game-designer-type-boolean [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-boolean>
   </div>
-  <!-- Tuple -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
-    <table class="tuple-table">
-      <tr>
-        <!-- Tuple table header -->
-        <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes">
-          <td>
-            <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
-          </td>
-        </ng-container>
-      </tr>
-      <!-- Tuple table rows of configuration values -->
-      <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]">
-        <tr>
-          <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes; let tupleIndex = index">
-            <td>
-              <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration.createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)"></app-game-designer-type>
-            </td>
-          </ng-container>
-        </tr>
-      </ng-container>
-    </table>
+  <!-- Tuple Array -->
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'tuple-array'">
+    <app-game-designer-type-tuple-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-tuple-array>
   </div>
   <!-- Integer -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'integer'">
-    <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
+    <app-game-designer-type-integer [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-integer>
   </div>
   <!-- Character -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'character'">
-    <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
+    <app-game-designer-type-character [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-character>
   </div>
   <!-- Foreign Key -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
-    <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
+    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-foreign-key>
   </div>
 </ng-container>

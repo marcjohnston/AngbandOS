@@ -19,49 +19,6 @@ export class PropertyMetadataAndConfiguration {
     return this.configuration[this.propertyMetadata.collectionKeyPropertyName!]; // collectionKeyPropertyName was already verified in the json validation routine.
   }
 
-  public getTextArea(propertyName: string): string {
-    return this.configuration[propertyName].join('\n');
-  }
-
-  public setTextArea(propertyName: string, event: any) {
-    this.configuration[propertyName] = event.target.value.split('\n');
-  }
-
-  /**
-   * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.
-   * @param propertyMetadata
-   * @returns
-   */
-  public createChild(propertyMetadata: PropertyMetadata): PropertyMetadataAndConfiguration {
-    return new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
-  }
-
-  /**
-   * Returns a new PropertyMetadataAndConfiguration object from a child property that references a tuple.
-   * @param propertyMetadata
-   * @param tupleIndex
-   * @returns
-   */
-  public createTupleChild(tupleTypePropertyMetadata: PropertyMetadata, tupleIndex: number, tupleValues: any): PropertyMetadataAndConfiguration {
-    const derivedTuplePropertyMetadata = new PropertyMetadata(
-      tupleTypePropertyMetadata.type,
-      `Item${tupleIndex + 1}`, // This is how the serialization is naming the tuple fields
-      tupleTypePropertyMetadata.title,
-      tupleTypePropertyMetadata.categoryTitle,
-      tupleTypePropertyMetadata.isNullable,
-      tupleTypePropertyMetadata.isArray,
-      tupleTypePropertyMetadata.description,
-      tupleTypePropertyMetadata.defaultIntegerValue,
-      tupleTypePropertyMetadata.defaultBooleanValue,
-      tupleTypePropertyMetadata.defaultCharacterValue,
-      tupleTypePropertyMetadata.defaultStringValue,
-      tupleTypePropertyMetadata.collectionPropertyMetadatas,
-      tupleTypePropertyMetadata.tupleTypes,
-      tupleTypePropertyMetadata.collectionKeyPropertyName,
-      tupleTypePropertyMetadata.collectionEntityTitle);
-    return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
-  }
-
   constructor(propertyMetadata: PropertyMetadata, configuration: any | null) {
     this.propertyMetadata = propertyMetadata;
     this.configuration = configuration;
