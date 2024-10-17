@@ -22,6 +22,11 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
     }
   }
 
+  public undo() {
+    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
+    this.isNull = this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] === null;
+  }
+
   public getValue(): string | null {
     return this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName];
   }

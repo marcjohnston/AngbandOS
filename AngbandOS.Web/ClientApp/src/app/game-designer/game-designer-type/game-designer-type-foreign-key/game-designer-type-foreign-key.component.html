@@ -9,5 +9,5 @@
       </ng-container>
     </ng-container>
   </select>
-  <span id="modified-span" *ngIf="unmodifiedValue !== getValue()"><mat-icon>circle</mat-icon></span>
+  <span id="modified-span" *ngIf="unmodifiedValue !== getValue()"><mat-icon (click)="undo()">undo</mat-icon></span>
 </ng-container>
