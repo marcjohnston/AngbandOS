@@ -3,5 +3,5 @@
     <input #input type="text" [ngModel]="getValue()" (input)="validate()" (change)="setValue()" />
     <span id="modified-span" *ngIf="unmodifiedValue !== getValue() || errorMessage !== ''"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
   </div>
-  <span *ngIf="errorMessage !== ''">{{errorMessage}}</span>
+  <span class="game-designer-error-message-span" *ngIf="errorMessage !== ''">{{errorMessage}}</span>
 </div>

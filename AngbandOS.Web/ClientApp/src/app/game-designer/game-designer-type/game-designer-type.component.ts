@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../property-metadata-and-configuration';
+import { PropertyMetadata } from '../property-metadata';
 
 @Component({
   selector: 'app-game-designer-type',
@@ -13,5 +14,9 @@ export class GameDesignerTypeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public createArrayChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, value: any) {
+    return new PropertyMetadataAndConfiguration(activePropertyMetadataAndConfiguration.propertyMetadata, value);
   }
 }

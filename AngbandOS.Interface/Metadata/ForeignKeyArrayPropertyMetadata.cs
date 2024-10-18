@@ -2,5 +2,8 @@
 
 public class ForeignKeyArrayPropertyMetadata : PropertyMetadata
 {
-    public ForeignKeyArrayPropertyMetadata(string propertyName, string foreignCollection) : base(propertyName, "foreign-key-array") { }
+    public ForeignKeyArrayPropertyMetadata(string propertyName, string foreignCollectionName) : base(propertyName, "foreign-key-array")
+    {
+        base.ForeignCollectionName = foreignCollectionName;
+    }
 }

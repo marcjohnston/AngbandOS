@@ -1,4 +1,11 @@
 <ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+  <!-- Foreign Key Array -->
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key-array'">
+    <ng-container *ngFor="let value of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]">
+      <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="createArrayChild(activePropertyMetadataAndConfiguration, value)" [collections]="collections"></app-game-designer-type-foreign-key>
+    </ng-container>
+  </div>
+
   <!-- String -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'string'">
     <app-game-designer-type-string [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string>

@@ -27,3 +27,8 @@ body {
   margin-left: 0.5rem; // Place a margin between the icon and the element it applies to.
   margin-bottom: 2px; // Apparently, mat-icons need 2px added to the bottom to allow it to vertically align middle.  This is apparent in a zoom.  2px seems to work in 100% and zoomed in.
 }
+
+.game-designer-error-message-span {
+  color: red;
+  font-size: 0.75rem;
+}

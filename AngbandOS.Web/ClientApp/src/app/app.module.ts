@@ -55,6 +55,7 @@ import { GameDesignerTypeTupleArrayComponent } from './game-designer/game-design
 import { GameDesignerTypeIntegerComponent } from './game-designer/game-designer-type/game-designer-type-integer/game-designer-type-integer.component';
 import { GameDesignerTypeCharacterComponent } from './game-designer/game-designer-type/game-designer-type-character/game-designer-type-character.component';
 import { GameDesignerTypeForeignKeyComponent } from './game-designer/game-designer-type/game-designer-type-foreign-key/game-designer-type-foreign-key.component';
+import { GameDesignerTypeArrayComponent } from './game-designer/game-designer-type/game-designer-type-array/game-designer-type-array.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { GameDesignerTypeForeignKeyComponent } from './game-designer/game-design
     GameDesignerTypeTupleArrayComponent,
     GameDesignerTypeIntegerComponent,
     GameDesignerTypeCharacterComponent,
-    GameDesignerTypeForeignKeyComponent
+    GameDesignerTypeForeignKeyComponent,
+    GameDesignerTypeArrayComponent
   ],
   imports: [
     MatTableModule,

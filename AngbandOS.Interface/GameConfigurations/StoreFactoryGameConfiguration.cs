@@ -85,7 +85,7 @@ public class StoreFactoryGameConfiguration
     public virtual bool ShufflesOwnersAndPricing { get; set; } = true;
 
     /// <summary>
-    /// Returns the names of the skopkeepers that can be owners of the store.
+    /// Returns the skopkeepers that can be owners of the store.
     /// </summary>
     public virtual string[] ShopkeeperNames { get; set; }
 

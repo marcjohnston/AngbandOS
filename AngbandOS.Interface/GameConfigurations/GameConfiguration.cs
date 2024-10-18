@@ -211,9 +211,10 @@ public class GameConfiguration
                             DefaultValue = true,
                             Description = "Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will automatically perform this shuffling.",
                         },
-                        new StringArrayPropertyMetadata("ShopkeeperNames")
+                        new ForeignKeyArrayPropertyMetadata("ShopkeeperNames", "Shopkeepers")
                         {
-                            Description = "Returns the names of the skopkeepers that can be owners of the store."
+                            Title = "Shopkeepers",
+                            Description = "Returns the skopkeepers that can be owners of the store."
                         },
                         new ForeignKeyPropertyMetadata("AdvertisedStoreCommand1Name", "StoreCommands")
                         {
