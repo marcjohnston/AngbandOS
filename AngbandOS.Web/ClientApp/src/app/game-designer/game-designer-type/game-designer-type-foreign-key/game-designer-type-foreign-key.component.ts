@@ -10,28 +10,23 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
   @Input() collections: Map<string, string[]> | undefined = undefined; // Undefined until Angular loads the parameters.
   @ViewChild('select') select!: ElementRef;
-  public isNull: boolean | undefined;
   public unmodifiedValue: string | null | undefined = undefined;
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.activePropertyMetadataAndConfiguration !== undefined) {
-      this.isNull = this.activePropertyMetadataAndConfiguration.configuration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] === null;
-      this.unmodifiedValue = this.getValue();
-    }
+    this.unmodifiedValue = this.getValue();
   }
 
   public undo() {
     this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
-    this.isNull = this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] === null;
   }
 
   public getValue(): string | null {
-    return this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName];
+    return this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
   public setValue() {
-    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.isNull ? null : this.select.nativeElement.value;
+    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value == "" ? null : this.select.nativeElement.value;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 
 @Component({
@@ -8,17 +8,28 @@ import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-co
 })
 export class GameDesignerTypeBooleanComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
+  @ViewChild('select') select!: ElementRef;
+  public unmodifiedValue: string | undefined = undefined; // The possible values will be true, false or "" to represent null.
 
   constructor() { }
 
   ngOnInit(): void {
+    this.unmodifiedValue = this.getValue();
   }
 
-  public getValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
-    return activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] ?? "";
+  /**
+   * Returns the current value of the configuration.
+   * @returns "true", "false" or "" for null
+   */
+  public getValue(): string {
+    return this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
-  public setValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
-    activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = event.target.value === "" ? null : event.target.value === "true" ? true : false;
+  public setValue() {
+    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value === "" ? null : this.select.nativeElement.value === "true" ? true : false;
+  }
+
+  public undo() {
+    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
   }
 }

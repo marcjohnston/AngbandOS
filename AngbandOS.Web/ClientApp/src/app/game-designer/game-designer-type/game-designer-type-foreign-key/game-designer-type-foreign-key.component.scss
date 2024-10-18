@@ -22,14 +22,3 @@ input {
 #default-span {
   margin-right: 20px; // Add some margin after the default text and before the drop down.
 }
-
-#modified-span {
-  color:red;
-  font-weight: bold;
-}
-
-mat-icon {
-    color: green; // The modified will be a green color.
-    font-size: 1rem; // The modified icon should only be 1rem.  By default, it is much larger.
-    vertical-align: text-top; // The modified icon needs to be centered vertically with the text.
-}

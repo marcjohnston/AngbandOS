@@ -1,3 +1,7 @@
-<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
-  <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
-</ng-container>
+<div id="container" *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+  <div id="input-div">
+    <input #input type="text" [ngModel]="getValue()" (input)="validate()" (change)="setValue()" />
+    <span id="modified-span" *ngIf="unmodifiedValue !== getValue() || errorMessage !== ''"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
+  </div>
+  <span *ngIf="errorMessage !== ''">{{errorMessage}}</span>
+</div>

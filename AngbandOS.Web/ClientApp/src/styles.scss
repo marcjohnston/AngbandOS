@@ -15,3 +15,15 @@ body {
   margin: 0;
   font-family: "Arial";
 }
+
+.game-designer-undo-icon {
+  color: green; // The modified will be a green color.
+  font-size: 1.5rem; // The modified icon should only be 1rem.  By default, it is much larger.
+  vertical-align: middle; // The modified icon needs to be centered vertically with the text.
+  border: 1px solid green; // Place a green border around the icon.
+  border-radius: 4px; // Round the border.
+  width: 1.75rem !important; // Set the width of the icon.
+  height: 1.75rem !important; // Set the height of the icon.
+  margin-left: 0.5rem; // Place a margin between the icon and the element it applies to.
+  margin-bottom: 2px; // Apparently, mat-icons need 2px added to the bottom to allow it to vertically align middle.  This is apparent in a zoom.  2px seems to work in 100% and zoomed in.
+}
