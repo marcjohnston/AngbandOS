@@ -1,24 +1,26 @@
-select {
-  background-color: transparent; // We do not want input boxes to have a white background.  Too much white.
-  color: white; // We need the font color to be white, now that the background is transparent (black).
-  border: 1px solid white; // The border needs to be white.
-  border-radius: 4px; // Give the border a rounded radius.  The focus already shows rounded and larger.  By default it is square and ugly.
+#container {
+  display: flex;
+  flex-direction: column;
 
-  & option {
-    background-color: black; // Select options need to have a black background.
-    color: white; // Select options need to be white.
+  & #select-div {
+    display: flex;
+    flex-direction: row;
+
+    & select {
+      background-color: transparent; // We do not want input boxes to have a white background.  Too much white.
+      color: white; // We need the font color to be white, now that the background is transparent (black).
+      border: 1px solid white; // The border needs to be white.
+      border-radius: 4px; // Give the border a rounded radius.  The focus already shows rounded and larger.  By default it is square and ugly.
+
+      & option {
+        background-color: black; // Select options need to have a black background.
+        color: white; // Select options need to be white.
+      }
+    }
+
+    & select:disabled {
+      color: darkgray; // We need the font color to be darkgray, when the select is disabled.
+      border: 1px solid darkgray; // Disabled select border should be dark gray.
+    }
   }
-}
-
-select:disabled {
-  color: darkgray; // We need the font color to be darkgray, when the select is disabled.
-  border: 1px solid darkgray; // Disabled select border should be dark gray.
-}
-
-input {
-  vertical-align: text-top; // The checkbox needs a vertical alignment to make it look right.
-}
-
-#default-span {
-  margin-right: 20px; // Add some margin after the default text and before the drop down.
 }

@@ -1,1 +1,9 @@
+.array-div {
+  display: flex;
+  flex-direction: column;
 
+  & .array-item-div {
+    display: flex;
+    flex-direction: row;
+  }
+}

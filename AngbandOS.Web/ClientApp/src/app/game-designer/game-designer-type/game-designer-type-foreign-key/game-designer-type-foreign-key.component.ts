@@ -11,6 +11,7 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
   @Input() collections: Map<string, string[]> | undefined = undefined; // Undefined until Angular loads the parameters.
   @ViewChild('select') select!: ElementRef;
   public unmodifiedValue: string | null | undefined = undefined;
+  public errorMessage: string = "";
 
   constructor() { }
 
