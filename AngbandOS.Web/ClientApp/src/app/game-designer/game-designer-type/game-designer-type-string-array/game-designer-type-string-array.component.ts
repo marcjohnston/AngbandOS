@@ -15,10 +15,10 @@ export class GameDesignerTypeStringArrayComponent implements OnInit {
   }
 
   public getValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
-    return activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].join('\n');
+    return activePropertyMetadataAndConfiguration.configuration.join('\n');
   }
 
   public setValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
-    activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = event.target.value.split('\n');
+    activePropertyMetadataAndConfiguration.configuration = event.target.value.split('\n');
   }
 }

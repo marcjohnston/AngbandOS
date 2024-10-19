@@ -32,3 +32,12 @@ body {
   color: red;
   font-size: 0.75rem;
 }
+
+.game-designer-delete-icon {
+  font-size: 1.5rem; // The modified icon should only be 1rem.  By default, it is much larger.
+  vertical-align: middle; // The modified icon needs to be centered vertically with the text.
+  width: 1.75rem !important; // Set the width of the icon.
+  height: 1.75rem !important; // Set the height of the icon.
+  margin-left: 0.5rem; // Place a margin between the icon and the element it applies to.
+//  margin-bottom: 2px; // Apparently, mat-icons need 2px added to the bottom to allow it to vertically align middle.  This is apparent in a zoom.  2px seems to work in 100% and zoomed in.
+}

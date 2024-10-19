@@ -3,13 +3,13 @@
     <tr>
       <!-- Tuple table header -->
       <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes">
-        <td>
+        <th>
           <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
-        </td>
+        </th>
       </ng-container>
     </tr>
     <!-- Tuple table rows of configuration values -->
-    <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]">
+    <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration">
       <tr>
         <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes; let tupleIndex = index">
           <td>

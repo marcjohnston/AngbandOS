@@ -16,7 +16,11 @@ export class GameDesignerTypeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public createArrayChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, value: any) {
+  public createChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, value: any) {
     return new PropertyMetadataAndConfiguration(activePropertyMetadataAndConfiguration.propertyMetadata, value);
+  }
+
+  public deleteArrayIndex(index: number) {
+    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].splice(index, 1);
   }
 }
