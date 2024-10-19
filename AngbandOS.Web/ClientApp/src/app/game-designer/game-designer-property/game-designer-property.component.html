@@ -3,7 +3,9 @@
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'collection'; else nonCollectionProperty">
     <ng-container *ngIf="activePropertyMetadataAndConfiguration.configuration === null; else showCollectionEntity">
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-      <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+      <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== ''">
+        <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+      </ng-container>
     </ng-container>
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.collectionEntityTitle}} - {{activePropertyMetadataAndConfiguration.collectionEntityTitle}}</span><br />
@@ -14,7 +16,9 @@
   </div>
   <ng-template #nonCollectionProperty>
     <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-    <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== ''">
+      <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+    </ng-container>
     <div class="type-container-div">
       <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-type>
     </div>
