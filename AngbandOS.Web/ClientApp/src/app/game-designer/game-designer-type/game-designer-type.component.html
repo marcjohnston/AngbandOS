@@ -7,13 +7,17 @@
     </div>
     <mat-icon class="game-designer-add-icon" (click)="appendArrayItem()">add</mat-icon>
   </div>
-  <!-- String -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'string'">
-    <app-game-designer-type-string [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string>
+  <!-- Foreign Key -->
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
+    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-type-foreign-key>
   </div>
   <!-- String Array -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'string-array'">
     <app-game-designer-type-string-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string-array>
+  </div>
+  <!-- String -->
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'string'">
+    <app-game-designer-type-string [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string>
   </div>
   <!-- Boolean -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'boolean'">
@@ -30,9 +34,5 @@
   <!-- Character -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'character'">
     <app-game-designer-type-character [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-character>
-  </div>
-  <!-- Foreign Key -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
-    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-type-foreign-key>
   </div>
 </ng-container>

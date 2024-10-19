@@ -1,11 +1,4 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { ColorEnum } from '../modules/color-enum/color-enum.module';
-import { StringDesignerPropertyDataType } from './api/string-designer-property-data-type';
-import { BooleanDesignerPropertyDataType } from './api/boolean-designer-property-data-type';
-import { ColorDesignerPropertyDataType } from './api/color-designer-property-data-type';
-import { DiceRollDesignerPropertyDataType } from './api/dice-roll-designer-property-data-type';
-import { IntegerDesignerPropertyDataType } from './api/integer-designer-property-data-type';
-import { RepositoryDesignerPropertyDataType } from './api/repository-designer-property-data-type';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
