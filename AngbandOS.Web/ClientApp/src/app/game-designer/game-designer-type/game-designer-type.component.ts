@@ -16,7 +16,33 @@ export class GameDesignerTypeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public createArrayChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, value: any) {
-    return new PropertyMetadataAndConfiguration(activePropertyMetadataAndConfiguration.propertyMetadata, value);
+  public createArrayChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, valueIndex: any) {
+    const derivedArrayPropertyMetadata = new PropertyMetadata(
+      activePropertyMetadataAndConfiguration.propertyMetadata.type,
+      valueIndex, // This is how the serialization is naming the tuple fields
+      activePropertyMetadataAndConfiguration.propertyMetadata.title,
+      activePropertyMetadataAndConfiguration.propertyMetadata.categoryTitle,
+      activePropertyMetadataAndConfiguration.propertyMetadata.isNullable,
+      activePropertyMetadataAndConfiguration.propertyMetadata.description,
+      activePropertyMetadataAndConfiguration.propertyMetadata.defaultIntegerValue,
+      activePropertyMetadataAndConfiguration.propertyMetadata.defaultBooleanValue,
+      activePropertyMetadataAndConfiguration.propertyMetadata.defaultCharacterValue,
+      activePropertyMetadataAndConfiguration.propertyMetadata.defaultStringValue,
+      activePropertyMetadataAndConfiguration.propertyMetadata.defaultStringArrayValue,
+      activePropertyMetadataAndConfiguration.propertyMetadata.collectionPropertyMetadatas,
+      activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes,
+      activePropertyMetadataAndConfiguration.propertyMetadata.collectionKeyPropertyName,
+      activePropertyMetadataAndConfiguration.propertyMetadata.collectionEntityTitle,
+      activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
+    return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]);
+  }
+
+  public deleteArrayIndex(index: number) {
+    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].splice(index, 1);
+  }
+
+  public appendArrayItem() {
+    //this.activePropertyMetadataAndConfiguration!.propertyMetadata.def
+    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].push("");
   }
 }
