@@ -2,32 +2,9 @@
 
 public class CollectionPropertyMetadata : PropertyMetadata
 {
-    public CollectionPropertyMetadata(string propertyName, string keyPropertyName = "Key") : base(propertyName, "collection")
-    {
-        KeyPropertyName = keyPropertyName;
-    }
+    public virtual PropertyMetadata[] PropertyMetadatas { get; set; }
 
-    public PropertyMetadata[] PropertyMetadatas
-    {
-        set
-        {
-            CollectionPropertyMetadatas = value;
-        }
-    }
+    public virtual string EntityTitle { get; set; }
 
-    public string EntityTitle
-    {
-        set
-        {
-            CollectionEntityTitle = value;
-        }
-    }
-
-    public string KeyPropertyName
-    {
-        set
-        {
-            CollectionKeyPropertyName = value;
-        }
-    }
+    public virtual string KeyPropertyName => "Key";
 }

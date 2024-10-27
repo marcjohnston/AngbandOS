@@ -2,12 +2,5 @@
 
 public class StringArrayPropertyMetadata : PropertyMetadata
 {
-    public StringArrayPropertyMetadata(string propertyName) : base(propertyName, "string-array") { }
-    public string[] DefaultValue
-    {
-        set
-        {
-            DefaultStringArrayValue = value;
-        }
-    }
+    public string[]? DefaultValue { get; set; }
 }

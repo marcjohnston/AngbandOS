@@ -6,10 +6,10 @@ string outputFolder = args[1];
 string folder = Path.GetDirectoryName(configurationName);
 string filename = Path.GetFileNameWithoutExtension(configurationName);
 //D:\OneDrive\Programming\AngbandOS\AngbandOS.Interface\GameConfigurations\GameConfiguration.cs
-GenericPropertyMetadata[] gameConfigurationPropertyMetadatas = ParseClass(configurationName);
+PropertyMetadata[] gameConfigurationPropertyMetadatas = ParseClass(configurationName);
 WriteClass(outputFolder, filename, gameConfigurationPropertyMetadatas);
 
-void WriteClass(string folder, string entityName, IPropertyMetadata[] propertyMetadatas)
+void WriteClass(string folder, string entityName, PropertyMetadata[] propertyMetadatas)
 {
     string filename = Path.Combine(folder, $"{entityName}Metadata.cs");
     using (StreamWriter writer = new StreamWriter(filename, false))
@@ -25,7 +25,7 @@ void WriteClass(string folder, string entityName, IPropertyMetadata[] propertyMe
         writer.WriteLine("            return new PropertyMetadata[]");
         writer.WriteLine("            {");
 
-        foreach (GenericPropertyMetadata genericPropertyMetadata in propertyMetadatas)
+        foreach (PropertyMetadata genericPropertyMetadata in propertyMetadatas)
         {
             WriteProperty(writer, folder, genericPropertyMetadata, 4);
         }
@@ -37,53 +37,60 @@ void WriteClass(string folder, string entityName, IPropertyMetadata[] propertyMe
     Console.WriteLine();
 }
 
-void WriteProperty(StreamWriter writer, string folder, GenericPropertyMetadata genericPropertyMetadata, int indentUnits)
+void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericPropertyMetadata, int indentUnits)
 {
-    string? defaultValue = null;
     string indentation = new string(' ', indentUnits * 4);
     switch (genericPropertyMetadata)
     {
-        case GenericIntegerPropertyMetadata genericIntegerPropertyMetadata:
+        case IntegerPropertyMetadata genericIntegerPropertyMetadata:
             writer.WriteLine($"{indentation}new IntegerPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            if (genericIntegerPropertyMetadata.DefaultValue != null)
+            if (genericIntegerPropertyMetadata.IsNullable || genericIntegerPropertyMetadata.DefaultValue != null)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericIntegerPropertyMetadata.DefaultValue.ToString()}");
+                writer.WriteLine($"{indentation}    DefaultValue = {genericIntegerPropertyMetadata.DefaultValue.ToString()},");
             }
             break;
-        case GenericBooleanPropertyMetadata genericBooleanPropertyMetadata:
+        case BooleanPropertyMetadata genericBooleanPropertyMetadata:
             writer.WriteLine($"{indentation}new BooleanPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            if (genericBooleanPropertyMetadata.DefaultValue.HasValue)
+            if (genericBooleanPropertyMetadata.IsNullable || genericBooleanPropertyMetadata.DefaultValue.HasValue)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericBooleanPropertyMetadata.DefaultValue.Value.ToString().ToLower()}");
+                writer.WriteLine($"{indentation}    DefaultValue = {genericBooleanPropertyMetadata.DefaultValue.Value.ToString().ToLower()},");
             }
             break;
-        case GenericStringPropertyMetadata genericStringPropertyMetadata:
+        case StringPropertyMetadata genericStringPropertyMetadata:
             writer.WriteLine($"{indentation}new StringPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            defaultValue = genericStringPropertyMetadata.DefaultValue;
+            if (genericStringPropertyMetadata.IsNullable || genericStringPropertyMetadata.DefaultValue != null)
+            {
+                writer.WriteLine($"{indentation}    DefaultValue = \"{genericStringPropertyMetadata.DefaultValue}\",");
+            }
             break;
-        case GenericStringArrayPropertyMetadata genericStringArrayPropertyMetadata:
+        case StringArrayPropertyMetadata genericStringArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new StringArrayPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
+            if (genericStringArrayPropertyMetadata.IsNullable || genericStringArrayPropertyMetadata.DefaultValue != null)
+            {
+                writer.WriteLine($"{indentation}    DefaultValue = {genericStringArrayPropertyMetadata.DefaultValue},");
+            }
             break;
-        case GenericCharPropertyMetadata genericCharArrayPropertyMetadata:
-            writer.WriteLine($"{indentation}new CharPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+        case CharacterPropertyMetadata genericCharacterPropertyMetadata:
+            writer.WriteLine($"{indentation}new CharacterPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
+            if (genericCharacterPropertyMetadata.IsNullable || genericCharacterPropertyMetadata.DefaultValue != null)
+            {
+                writer.WriteLine($"{indentation}    DefaultValue = '{genericCharacterPropertyMetadata.DefaultValue}',");
+            }
             break;
-        case GenericCollectionPropertyMetadata genericCollectionArrayPropertyMetadata:
+        case CollectionPropertyMetadata genericCollectionArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new CollectionPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
+            writer.WriteLine($"{indentation}    PropertyMetadatas = {genericCollectionArrayPropertyMetadata.EntityTitle}Metadata.Metadata,");
             WriteClass(folder, genericCollectionArrayPropertyMetadata.EntityTitle, genericCollectionArrayPropertyMetadata.PropertyMetadatas);
             break;
-        case GenericColorEnumPropertyMetadata genericColorEnumPropertyMetadata:
+        case ColorEnumPropertyMetadata genericColorEnumPropertyMetadata:
             writer.WriteLine($"{indentation}new ColorEnumPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
             break;
         default:
             throw new Exception($"{genericPropertyMetadata.GetType().Name} not supported.");
@@ -103,9 +110,9 @@ void WriteProperty(StreamWriter writer, string folder, GenericPropertyMetadata g
 }
 
 
-GenericPropertyMetadata[] ParseClass(string collectionFilename)
+PropertyMetadata[] ParseClass(string collectionFilename)
 {
-    List<GenericPropertyMetadata> propertyMetadatas = new List<GenericPropertyMetadata>();
+    List<PropertyMetadata> propertyMetadatas = new List<PropertyMetadata>();
 
     string[] text = File.ReadAllLines(collectionFilename);
     ModeEnum mode = ModeEnum.None;
@@ -219,14 +226,14 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                 // Remove the parenthesis.
                 dataType = dataType.Substring(1, dataType.Length - 2);
                 string[] dataTypeTokens = dataType.Split(",");
-                List<GenericPropertyMetadata> tupleProperties = new List<GenericPropertyMetadata>();
+                List<PropertyMetadata> tupleProperties = new List<PropertyMetadata>();
                 foreach (string dataTypeToken in dataTypeTokens)
                 {
                     (string tupleDataType, bool tupleIsNullable, bool tupleIsArray) = ParseDataType(dataTypeToken);
                     switch (fullDataType)
                     {
                         case "char":
-                            propertyMetadatas.Add(new GenericCharPropertyMetadata()
+                            propertyMetadatas.Add(new CharacterPropertyMetadata()
                             {
                                 CategoryTitle = category,
                                 Description = description,
@@ -237,7 +244,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                             });
                             break;
                         case "bool":
-                            propertyMetadatas.Add(new GenericBooleanPropertyMetadata()
+                            propertyMetadatas.Add(new BooleanPropertyMetadata()
                             {
                                 CategoryTitle = category,
                                 Description = description,
@@ -248,7 +255,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                             });
                             break;
                         case "int":
-                            propertyMetadatas.Add(new GenericIntegerPropertyMetadata()
+                            propertyMetadatas.Add(new IntegerPropertyMetadata()
                             {
                                 CategoryTitle = category,
                                 Description = description,
@@ -259,7 +266,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                             });
                             break;
                         case "ColorEnum":
-                            propertyMetadatas.Add(new GenericColorEnumPropertyMetadata()
+                            propertyMetadatas.Add(new ColorEnumPropertyMetadata()
                             {
                                 CategoryTitle = category,
                                 Description = description,
@@ -272,7 +279,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                         case "string":
                             if (tupleIsArray)
                             {
-                                propertyMetadatas.Add(new GenericStringArrayPropertyMetadata()
+                                propertyMetadatas.Add(new StringArrayPropertyMetadata()
                                 {
                                     CategoryTitle = category,
                                     Description = description,
@@ -284,7 +291,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                             }
                             else
                             {
-                                propertyMetadatas.Add(new GenericStringPropertyMetadata()
+                                propertyMetadatas.Add(new StringPropertyMetadata()
                                 {
                                     CategoryTitle = category,
                                     Description = description,
@@ -303,7 +310,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                 switch (dataType)
                 {
                     case "char":
-                        propertyMetadatas.Add(new GenericCharPropertyMetadata()
+                        propertyMetadatas.Add(new CharacterPropertyMetadata()
                         {
                             CategoryTitle = category,
                             Description = description,
@@ -314,7 +321,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                         });
                         break;
                     case "bool":
-                        propertyMetadatas.Add(new GenericBooleanPropertyMetadata()
+                        propertyMetadatas.Add(new BooleanPropertyMetadata()
                         {
                             CategoryTitle = category,
                             Description = description,
@@ -325,7 +332,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                         });
                         break;
                     case "int":
-                        propertyMetadatas.Add(new GenericIntegerPropertyMetadata()
+                        propertyMetadatas.Add(new IntegerPropertyMetadata()
                         {
                             CategoryTitle = category,
                             Description = description,
@@ -336,7 +343,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                         });
                         break;
                     case "ColorEnum":
-                        propertyMetadatas.Add(new GenericColorEnumPropertyMetadata()
+                        propertyMetadatas.Add(new ColorEnumPropertyMetadata()
                         {
                             CategoryTitle = category,
                             Description = description,
@@ -349,7 +356,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                     case "string":
                         if (isArray)
                         {
-                            propertyMetadatas.Add(new GenericStringArrayPropertyMetadata()
+                            propertyMetadatas.Add(new StringArrayPropertyMetadata()
                             {
                                 CategoryTitle = category,
                                 Description = description,
@@ -361,7 +368,7 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                         }
                         else
                         {
-                            propertyMetadatas.Add(new GenericStringPropertyMetadata()
+                            propertyMetadatas.Add(new StringPropertyMetadata()
                             {
                                 CategoryTitle = category,
                                 Description = description,
@@ -380,8 +387,8 @@ GenericPropertyMetadata[] ParseClass(string collectionFilename)
                             throw new Exception(message);
                         }
                         string entityTitle = dataType.Substring(0, dataType.Length - 17);
-                        GenericPropertyMetadata[] collectionPropertyMetadatas = ParseClass(Path.Combine(Path.GetDirectoryName(collectionFilename), $"{dataType}.cs"));
-                        propertyMetadatas.Add(new GenericCollectionPropertyMetadata()
+                        PropertyMetadata[] collectionPropertyMetadatas = ParseClass(Path.Combine(Path.GetDirectoryName(collectionFilename), $"{dataType}.cs"));
+                        propertyMetadatas.Add(new CollectionPropertyMetadata()
                         {
                             CategoryTitle = category,
                             Description = description,
