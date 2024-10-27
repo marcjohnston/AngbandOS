@@ -1,11 +1,13 @@
 ﻿using AngbandOS.Core.Interface;
 
 string configurationName = args[0];
+string outputFolder = args[1];
+
 string folder = Path.GetDirectoryName(configurationName);
 string filename = Path.GetFileNameWithoutExtension(configurationName);
 //D:\OneDrive\Programming\AngbandOS\AngbandOS.Interface\GameConfigurations\GameConfiguration.cs
 GenericPropertyMetadata[] gameConfigurationPropertyMetadatas = ParseClass(configurationName);
-WriteClass(folder, filename, gameConfigurationPropertyMetadatas);
+WriteClass(outputFolder, filename, gameConfigurationPropertyMetadatas);
 
 void WriteClass(string folder, string entityName, IPropertyMetadata[] propertyMetadatas)
 {
@@ -37,46 +39,56 @@ void WriteClass(string folder, string entityName, IPropertyMetadata[] propertyMe
 
 void WriteProperty(StreamWriter writer, string folder, GenericPropertyMetadata genericPropertyMetadata, int indentUnits)
 {
-    string classDataTypeName;
     string? defaultValue = null;
+    string indentation = new string(' ', indentUnits * 4);
     switch (genericPropertyMetadata)
     {
         case GenericIntegerPropertyMetadata genericIntegerPropertyMetadata:
-            classDataTypeName = $"IntegerPropertyMetadata";
-            defaultValue = genericIntegerPropertyMetadata.DefaultValue.ToString();
+            writer.WriteLine($"{indentation}new IntegerPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
+            if (genericIntegerPropertyMetadata.DefaultValue != null)
+            {
+                writer.WriteLine($"{indentation}    DefaultValue = {genericIntegerPropertyMetadata.DefaultValue.ToString()}");
+            }
             break;
         case GenericBooleanPropertyMetadata genericBooleanPropertyMetadata:
-            classDataTypeName = $"BooleanPropertyMetadata";
-            defaultValue = genericBooleanPropertyMetadata.DefaultValue.ToString().ToLower();
+            writer.WriteLine($"{indentation}new BooleanPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
+            if (genericBooleanPropertyMetadata.DefaultValue.HasValue)
+            {
+                writer.WriteLine($"{indentation}    DefaultValue = {genericBooleanPropertyMetadata.DefaultValue.Value.ToString().ToLower()}");
+            }
             break;
         case GenericStringPropertyMetadata genericStringPropertyMetadata:
-            classDataTypeName = $"StringPropertyMetadata";
+            writer.WriteLine($"{indentation}new StringPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
             defaultValue = genericStringPropertyMetadata.DefaultValue;
             break;
         case GenericStringArrayPropertyMetadata genericStringArrayPropertyMetadata:
-            classDataTypeName = $"StringArrayPropertyMetadata";
+            writer.WriteLine($"{indentation}new StringArrayPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
             //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
             break;
         case GenericCharPropertyMetadata genericCharArrayPropertyMetadata:
-            classDataTypeName = $"CharPropertyMetadata";
+            writer.WriteLine($"{indentation}new CharPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
             //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
             break;
         case GenericCollectionPropertyMetadata genericCollectionArrayPropertyMetadata:
-            classDataTypeName = $"CollectionPropertyMetadata";
+            writer.WriteLine($"{indentation}new CollectionPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
             //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
             WriteClass(folder, genericCollectionArrayPropertyMetadata.EntityTitle, genericCollectionArrayPropertyMetadata.PropertyMetadatas);
             break;
         case GenericColorEnumPropertyMetadata genericColorEnumPropertyMetadata:
-            classDataTypeName = $"ColorEnumPropertyMetadata";
+            writer.WriteLine($"{indentation}new ColorEnumPropertyMetadata(\"{genericPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
             //defaultValue = genericStringArrayPropertyMetadata.DefaultValue;
             break;
         default:
             throw new Exception($"{genericPropertyMetadata.GetType().Name} not supported.");
     }
 
-    string indentation = new string(' ', indentUnits * 4);
-    writer.WriteLine($"{indentation}new {classDataTypeName}(\"{genericPropertyMetadata.PropertyName}\")");
-    writer.WriteLine($"{indentation}{{");
     writer.WriteLine($"{indentation}    Description = \"{genericPropertyMetadata.Description}\",");
     writer.WriteLine($"{indentation}    IsNullable = {genericPropertyMetadata.IsNullable.ToString().ToLower()},");
     if (genericPropertyMetadata.Title != null)
@@ -86,10 +98,6 @@ void WriteProperty(StreamWriter writer, string folder, GenericPropertyMetadata g
     if (genericPropertyMetadata.CategoryTitle != null)
     {
         writer.WriteLine($"{indentation}    Category = \"{genericPropertyMetadata.CategoryTitle}\",");
-    }
-    if (defaultValue != null)
-    {
-        writer.WriteLine($"{indentation}    DefaultValue = {defaultValue}");
     }
     writer.WriteLine($"{indentation}}},");
 }

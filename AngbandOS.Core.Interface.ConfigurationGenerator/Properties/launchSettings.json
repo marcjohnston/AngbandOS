@@ -2,7 +2,7 @@
   "profiles": {
     "AngbandOS.Core.Interface.ConfigurationGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Interface\\GameConfigurations\\GameConfiguration.cs"
+      "commandLineArgs": "D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Interface\\GameConfigurations\\GameConfiguration.cs D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Interface\\ConfigurationMetadata"
     }
   }
 }
