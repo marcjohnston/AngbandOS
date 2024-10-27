@@ -27,7 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.GamePacks.Cthangband", "AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj", "{DBE26605-7C51-45F7-BEDD-3113A4208AAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Configurator.WinForm", "AngbandOS.Configurator.WinForm\AngbandOS.Configurator.WinForm.csproj", "{DE9A9A62-4F9F-4D3A-B4AF-D76DE552F47F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Configurator.WinForm", "AngbandOS.Configurator.WinForm\AngbandOS.Configurator.WinForm.csproj", "{DE9A9A62-4F9F-4D3A-B4AF-D76DE552F47F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Core.Interface.ConfigurationGenerator", "AngbandOS.Core.Interface.ConfigurationGenerator\AngbandOS.Core.Interface.ConfigurationGenerator.csproj", "{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -285,6 +287,30 @@ Global
 		{DE9A9A62-4F9F-4D3A-B4AF-D76DE552F47F}.Release|arm64.Build.0 = Release|Any CPU
 		{DE9A9A62-4F9F-4D3A-B4AF-D76DE552F47F}.Release|x86.ActiveCfg = Release|Any CPU
 		{DE9A9A62-4F9F-4D3A-B4AF-D76DE552F47F}.Release|x86.Build.0 = Release|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug (Separate Folders)|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug (Separate Folders)|Any CPU.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug (Separate Folders)|arm64.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug (Separate Folders)|arm64.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug (Separate Folders)|x86.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug (Separate Folders)|x86.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug|arm64.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug|x86.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug1|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug1|Any CPU.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug1|arm64.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug1|arm64.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug1|x86.ActiveCfg = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Debug1|x86.Build.0 = Debug|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Release|arm64.ActiveCfg = Release|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Release|arm64.Build.0 = Release|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAB9624D-D857-4E66-8DEF-140A44BE5DAC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

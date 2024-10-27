@@ -11,3 +11,7 @@ public class BooleanPropertyMetadata : PropertyMetadata
         }
     }
 }
+
+public class GenericColorEnumPropertyMetadata : GenericPropertyMetadata
+{
+}

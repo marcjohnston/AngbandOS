@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AngbandOS.Core.Interface": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Interface\\GameConfigurations\\StoreFactoryGameConfiguration.cs"
+    }
+  }
+}

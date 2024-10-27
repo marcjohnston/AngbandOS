@@ -7,21 +7,20 @@
 
 namespace AngbandOS.Core.Interface;
 
+/// <summary>
+/// 
+/// </summary>
 [Serializable]
 public class StoreFactoryGameConfiguration
 {
-    public StoreFactoryGameConfiguration()
-    {
-        Key = GetType().Name;
-        MaxInventory = PageSize;
-        AdvertisedStoreCommand1Name = "PurchaseStoreCommand";
-        AdvertisedStoreCommand2Name = "SellStoreCommand";
-        AdvertisedStoreCommand3Name = "ExamineStoreItemCommand";
-    }
-
     /// <summary>
     /// Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.
     /// </summary>
+    /// <title>
+    /// Lot Is Empty?
+    /// </title>
+    /// <category>
+    /// </category>
     public virtual bool IsEmptyLot { get; set; } = false;
 
     /// <summary>
@@ -64,7 +63,7 @@ public class StoreFactoryGameConfiguration
     /// <summary>
     /// Returns the maximum number of items the store should maintain.  Returns one pagesize (26), by default.
     /// </summary>
-    public virtual int MaxInventory { get; set; } // The default value is set in the constructor. // TODO: Why is this not nullable
+    public virtual int MaxInventory { get; set; } = 26; // TODO: This should default to the page size.
 
     /// <summary>
     /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.  Returns 6, by default.
@@ -76,6 +75,13 @@ public class StoreFactoryGameConfiguration
     /// </summary>
     public virtual int StoreTurnover { get; set; } = 9;
 
+    /// <summary>
+    /// Returns the manifests used to stock the store.  These manifests specify which item factories the store stocks and an assocated distribution weight for each item factory.
+    /// </summary>
+    /// <returns>
+    /// ItemFactoryName: The name of the item factory.
+    /// Weight: The associated distribution weight for the item factory.
+    /// </returns>
     public virtual (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions { get; set; } = null;
 
     /// <summary>
@@ -89,9 +95,9 @@ public class StoreFactoryGameConfiguration
     /// </summary>
     public virtual string[] ShopkeeperNames { get; set; }
 
-    public virtual string? AdvertisedStoreCommand1Name { get; set; } // The default value is set in the constructor.
-    public virtual string? AdvertisedStoreCommand2Name { get; set; } // The default value is set in the constructor.
-    public virtual string? AdvertisedStoreCommand3Name { get; set; } // The default value is set in the constructor.
+    public virtual string? AdvertisedStoreCommand1Name { get; set; } = null;
+    public virtual string? AdvertisedStoreCommand2Name { get; set; } = null;
+    public virtual string? AdvertisedStoreCommand3Name { get; set; } = null;
     public virtual string? AdvertisedStoreCommand4Name { get; set; } = null;
     public virtual string? AdvertisedStoreCommand5Name { get; set; } = null;
 
@@ -198,3 +204,4 @@ public class StoreFactoryGameConfiguration
 
     public virtual bool StoreAnalyzesPurchases { get; set; } = true;
 }
+
