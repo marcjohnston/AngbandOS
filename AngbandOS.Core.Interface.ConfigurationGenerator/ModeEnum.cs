@@ -3,6 +3,7 @@
     None,
     Summary,
     Title,
-    Category
+    Category,
+    Returns
 }
 

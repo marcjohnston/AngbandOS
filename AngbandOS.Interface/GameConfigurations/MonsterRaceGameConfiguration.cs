@@ -51,6 +51,12 @@ public class MonsterRaceGameConfiguration
     /// Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns
     /// null, by default.
     /// </summary>
+    /// <returns>
+    /// MethodName: The name of the attack method.
+    /// EffectName: The name of the attach effect.
+    /// Dice: The number of dice.
+    /// Sides: The number of sides on the dice.
+    /// </returns>
     public virtual (string MethodName, string? EffectName, int Dice, int Sides)[]? AttackDefinitions { get; set; } = null;
 
     /// <summary>

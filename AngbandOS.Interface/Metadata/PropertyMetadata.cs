@@ -2,6 +2,11 @@
 
 public class PropertyMetadata
 {
+    public PropertyMetadata(string propertyName)
+    {
+        PropertyName = propertyName;
+    }
+
     /// <summary>
     /// Returns the name of the property in the configuration that the metadata references.
     /// </summary>
