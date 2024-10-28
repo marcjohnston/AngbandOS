@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface.Metadata;
 using AngbandOS.PersistentStorage;
 using AngbandOS.Web.Hubs;
 using AngbandOS.Web.Interface;
@@ -153,7 +154,7 @@ namespace AngbandOS.Web.Controllers
         [AllowAnonymous]
         public ActionResult<PropertyMetadata[]> GetGameConfigurationMetadata()
         {
-            PropertyMetadata[] metadata = GameConfiguration.Metadata;
+            PropertyMetadata[] metadata = GameConfigurationMetadata.Metadata;
             return Ok(metadata);
         }
         //#endregion
