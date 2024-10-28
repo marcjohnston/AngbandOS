@@ -7,5 +7,5 @@ public class CollectionPropertyMetadata : PropertyMetadata
 
     public virtual string EntityTitle { get; set; }
 
-    public virtual string KeyPropertyName => "Key";
+    public virtual string KeyPropertyName { get; set; }
 }
