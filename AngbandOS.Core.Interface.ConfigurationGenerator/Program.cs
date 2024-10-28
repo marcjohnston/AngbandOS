@@ -63,7 +63,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             }
             else
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericBooleanPropertyMetadata.DefaultValue.Value},");
+                writer.WriteLine($"{indentation}    DefaultValue = {genericBooleanPropertyMetadata.DefaultValue.Value.ToString().ToLower()},");
             }
             break;
         case StringPropertyMetadata genericStringPropertyMetadata:
@@ -123,19 +123,19 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
         case TuplePropertyMetadata genericTupleArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new TuplePropertyMetadata(\"{genericTupleArrayPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            writer.WriteLine($"{indentation}Types = new PropertyMetadata[]");
-            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    DataTypes = new PropertyMetadata[]");
+            writer.WriteLine($"{indentation}    {{");
             foreach (PropertyMetadata tuplePropertyMetadata in genericTupleArrayPropertyMetadata.DataTypes)
             {
-                WriteProperty(writer, folder, tuplePropertyMetadata, indentUnits + 1);
+                WriteProperty(writer, folder, tuplePropertyMetadata, indentUnits + 2);
             }
-            writer.WriteLine($"{indentation}}}");
+            writer.WriteLine($"{indentation}    }},");
             break;       
         default:
             throw new Exception($"{genericPropertyMetadata.GetType().Name} not supported.");
     }
 
-    writer.WriteLine($"{indentation}    Description = \"{genericPropertyMetadata.Description}\",");
+    writer.WriteLine($"{indentation}    Description = \"{genericPropertyMetadata.Description.Replace("\"", "\\\"")}\",");
     writer.WriteLine($"{indentation}    IsNullable = {genericPropertyMetadata.IsNullable.ToString().ToLower()},");
     if (genericPropertyMetadata.Title != null)
     {
