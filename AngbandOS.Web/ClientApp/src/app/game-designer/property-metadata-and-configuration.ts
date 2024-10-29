@@ -15,8 +15,8 @@ export class PropertyMetadataAndConfiguration {
    */
   public configuration: any | null;
 
-  public get collectionEntityTitle(): string {
-    return this.configuration[this.propertyMetadata.collectionKeyPropertyName!]; // collectionKeyPropertyName was already verified in the json validation routine.
+  public get entityTitle(): string {
+    return this.configuration[this.propertyMetadata.keyPropertyName!]; // collectionKeyPropertyName was already verified in the json validation routine.
   }
 
   constructor(propertyMetadata: PropertyMetadata, configuration: any | null) {

@@ -24,15 +24,11 @@ export class GameDesignerTypeComponent implements OnInit {
       activePropertyMetadataAndConfiguration.propertyMetadata.categoryTitle,
       activePropertyMetadataAndConfiguration.propertyMetadata.isNullable,
       activePropertyMetadataAndConfiguration.propertyMetadata.description,
-      activePropertyMetadataAndConfiguration.propertyMetadata.defaultIntegerValue,
-      activePropertyMetadataAndConfiguration.propertyMetadata.defaultBooleanValue,
-      activePropertyMetadataAndConfiguration.propertyMetadata.defaultCharacterValue,
-      activePropertyMetadataAndConfiguration.propertyMetadata.defaultStringValue,
-      activePropertyMetadataAndConfiguration.propertyMetadata.defaultStringArrayValue,
-      activePropertyMetadataAndConfiguration.propertyMetadata.collectionPropertyMetadatas,
-      activePropertyMetadataAndConfiguration.propertyMetadata.tupleTypes,
-      activePropertyMetadataAndConfiguration.propertyMetadata.collectionKeyPropertyName,
-      activePropertyMetadataAndConfiguration.propertyMetadata.collectionEntityTitle,
+      activePropertyMetadataAndConfiguration.propertyMetadata.defaultValue,
+      activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas,
+      activePropertyMetadataAndConfiguration.propertyMetadata.dataTypes,
+      activePropertyMetadataAndConfiguration.propertyMetadata.keyPropertyName,
+      activePropertyMetadataAndConfiguration.propertyMetadata.entityTitle,
       activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
     return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]);
   }

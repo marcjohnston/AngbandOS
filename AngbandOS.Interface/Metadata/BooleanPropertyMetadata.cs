@@ -2,6 +2,6 @@
 
 public class BooleanPropertyMetadata : PropertyMetadata
 {
-    public BooleanPropertyMetadata(string propertyName) : base(propertyName) { }
+    public BooleanPropertyMetadata(string propertyName) : base("Boolean", propertyName) { }
     public bool? DefaultValue { get; set; }
 }

@@ -29,15 +29,11 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
       tupleTypePropertyMetadata.categoryTitle,
       tupleTypePropertyMetadata.isNullable,
       tupleTypePropertyMetadata.description,
-      tupleTypePropertyMetadata.defaultIntegerValue,
-      tupleTypePropertyMetadata.defaultBooleanValue,
-      tupleTypePropertyMetadata.defaultCharacterValue,
-      tupleTypePropertyMetadata.defaultStringValue,
-      tupleTypePropertyMetadata.defaultStringArrayValue,
-      tupleTypePropertyMetadata.collectionPropertyMetadatas,
-      tupleTypePropertyMetadata.tupleTypes,
-      tupleTypePropertyMetadata.collectionKeyPropertyName,
-      tupleTypePropertyMetadata.collectionEntityTitle,
+      tupleTypePropertyMetadata.defaultValue,
+      tupleTypePropertyMetadata.propertyMetadatas,
+      tupleTypePropertyMetadata.dataTypes,
+      tupleTypePropertyMetadata.keyPropertyName,
+      tupleTypePropertyMetadata.entityTitle,
       tupleTypePropertyMetadata.foreignCollectionName);
     return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
   }

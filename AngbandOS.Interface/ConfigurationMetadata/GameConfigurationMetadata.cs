@@ -15,7 +15,7 @@ public static class GameConfigurationMetadata
                 new IntegerPropertyMetadata("MaxMessageLogLength")
                 {
                     DefaultValue = 2048,
-                    Description = "Represents an interface that describes the configuration data that the GameServer.Play method accepts.  This configuration data is used to completely configure a new game.  Use the ConfigurationMetadata object to get metadata details that can be used to generate configuration data. Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.",
+                    Description = "Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.",
                     IsNullable = true,
                 },
                 new StringPropertyMetadata("StartupTownName")

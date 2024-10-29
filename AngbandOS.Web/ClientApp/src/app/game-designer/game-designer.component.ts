@@ -50,67 +50,70 @@ export class GameDesignerComponent implements OnInit {
 
   validateJsonPropertyMetadata(jsonPropertyMetadata: JsonPropertyMetadata): PropertyMetadata | undefined {
     // Check that none of the properties are undefined.
-    if (jsonPropertyMetadata.type === undefined) {
+    if (jsonPropertyMetadata.propertyName === undefined) {
+      this._snackBar.open(`Invalid propertyName value.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
-    if (jsonPropertyMetadata.propertyName === undefined) {
+    if (jsonPropertyMetadata.type === undefined) {
+      this._snackBar.open(`Invalid type value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.title === undefined) {
+      this._snackBar.open(`Invalid title value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.categoryTitle === undefined) {
+      this._snackBar.open(`Invalid categoryTitle value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.isNullable === undefined) {
+      this._snackBar.open(`Invalid isNullable value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.description === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.defaultIntegerValue === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.defaultBooleanValue === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.defaultCharacterValue === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.defaultStringValue === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.defaultStringArrayValue === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.tupleTypes === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.collectionPropertyMetadatas === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.collectionKeyPropertyName === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.collectionEntityTitle === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.foreignCollectionName === undefined) {
+      this._snackBar.open(`Invalid description value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
 
     // Now check for data types that require additional properties to not be null.
     let collectionPropertyMetadataList: PropertyMetadata[] | null = null;
-    let tupleTypesPropertyMetadataList: PropertyMetadata[] | null = null;
+    let tupleDataTypesPropertyMetadataList: PropertyMetadata[] | null = null;
     switch (jsonPropertyMetadata.type.toLowerCase()) {
       case "collection":
-        if (jsonPropertyMetadata.collectionKeyPropertyName === null) {
+        if (jsonPropertyMetadata.propertyMetadatas === undefined) {
+          this._snackBar.open(`Invalid propertyMetadata value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        if (jsonPropertyMetadata.keyPropertyName === undefined) {
+          this._snackBar.open(`Invalid keyPropertyName value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        if (jsonPropertyMetadata.entityTitle === undefined) {
+          this._snackBar.open(`Invalid entityTitle value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
           return undefined;
         }
 
-        if (jsonPropertyMetadata.collectionPropertyMetadatas !== null) {
+        if (jsonPropertyMetadata.propertyMetadatas !== null) {
           collectionPropertyMetadataList = [];
-          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.collectionPropertyMetadatas) {
+          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.propertyMetadatas) {
             const collectionPropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonCollectionPropertyMetadata);
             if (collectionPropertyMetadata === undefined) {
               return undefined;
@@ -119,21 +122,101 @@ export class GameDesignerComponent implements OnInit {
             collectionPropertyMetadataList.push(collectionPropertyMetadata);
           }
         }
+        jsonPropertyMetadata.foreignCollectionName = null;
+        break;
+      case "foreign-key":
+      case "foreign-key-array":
+        if (jsonPropertyMetadata.defaultValue === undefined) {
+          this._snackBar.open(`Invalid defaultValue value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        if (jsonPropertyMetadata.foreignCollectionName === undefined) {
+          this._snackBar.open(`Invalid foreignCollectionName value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        jsonPropertyMetadata.keyPropertyName = null;
+        jsonPropertyMetadata.entityTitle = null;
+        break;
+      case "integer":
+        if (jsonPropertyMetadata.defaultValue === undefined) {
+          this._snackBar.open(`Invalid defaultValue value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        jsonPropertyMetadata.keyPropertyName = null;
+        jsonPropertyMetadata.entityTitle = null;
+        jsonPropertyMetadata.foreignCollectionName = null;
+        break;
+      case "character":
+        if (jsonPropertyMetadata.defaultValue === undefined) {
+          this._snackBar.open(`Invalid defaultValue value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        jsonPropertyMetadata.keyPropertyName = null;
+        jsonPropertyMetadata.entityTitle = null;
+        jsonPropertyMetadata.foreignCollectionName = null;
+        break;
+      case "boolean":
+        if (jsonPropertyMetadata.defaultValue === undefined) {
+          this._snackBar.open(`Invalid defaultValue value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        jsonPropertyMetadata.keyPropertyName = null;
+        jsonPropertyMetadata.entityTitle = null;
+        jsonPropertyMetadata.foreignCollectionName = null;
+        break;
+      case "colorenum":
+        if (jsonPropertyMetadata.defaultValue === undefined) {
+          this._snackBar.open(`Invalid defaultValue value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        jsonPropertyMetadata.keyPropertyName = null;
+        jsonPropertyMetadata.entityTitle = null;
+        jsonPropertyMetadata.foreignCollectionName = null;
+        jsonPropertyMetadata.foreignCollectionName = null;
         break;
       case "tuple":
       case "tuple-array":
-        if (jsonPropertyMetadata.tupleTypes !== null) {
-          tupleTypesPropertyMetadataList = [];
-          for (let jsonTupleTypePropertyMetadata of jsonPropertyMetadata.tupleTypes) {
+        if (jsonPropertyMetadata.defaultValue === undefined) {
+          this._snackBar.open(`Invalid defaultValue value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        if (jsonPropertyMetadata.dataTypes === undefined) {
+          this._snackBar.open(`Invalid dataTypes value for the ${jsonPropertyMetadata.propertyName} property.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        if (jsonPropertyMetadata.dataTypes !== null) {
+          tupleDataTypesPropertyMetadataList = [];
+          for (let jsonTupleTypePropertyMetadata of jsonPropertyMetadata.dataTypes) {
             const tupleTypePropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonTupleTypePropertyMetadata);
             if (tupleTypePropertyMetadata === undefined) {
               return undefined;
             }
 
-            tupleTypesPropertyMetadataList.push(tupleTypePropertyMetadata);
+            tupleDataTypesPropertyMetadataList.push(tupleTypePropertyMetadata);
           }
         }
+        jsonPropertyMetadata.keyPropertyName = null;
+        jsonPropertyMetadata.entityTitle = null;
+        jsonPropertyMetadata.foreignCollectionName = null;
         break;
+      default:
+        return undefined;
     }
 
     return new PropertyMetadata(jsonPropertyMetadata.type,
@@ -142,15 +225,11 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.categoryTitle,
       jsonPropertyMetadata.isNullable,
       jsonPropertyMetadata.description,
-      jsonPropertyMetadata.defaultIntegerValue,
-      jsonPropertyMetadata.defaultBooleanValue,
-      jsonPropertyMetadata.defaultCharacterValue,
-      jsonPropertyMetadata.defaultStringValue,
-      jsonPropertyMetadata.defaultStringArrayValue,
+      jsonPropertyMetadata.defaultValue,
       collectionPropertyMetadataList,
-      tupleTypesPropertyMetadataList,
-      jsonPropertyMetadata.collectionKeyPropertyName,
-      jsonPropertyMetadata.collectionEntityTitle,
+      tupleDataTypesPropertyMetadataList,
+      jsonPropertyMetadata.keyPropertyName,
+      jsonPropertyMetadata.entityTitle,
       jsonPropertyMetadata.foreignCollectionName);
   }
 
@@ -162,9 +241,6 @@ export class GameDesignerComponent implements OnInit {
         // We need to validate the json metadata before we can provide it to a tree node.
         const propertyMetadata = this.validateJsonPropertyMetadata(jsonPropertyMetadata);
         if (propertyMetadata === undefined) {
-          this._snackBar.open("Invalid metadata.", "", {
-            duration: 5000
-          });
           return;
         }
 
@@ -175,7 +251,7 @@ export class GameDesignerComponent implements OnInit {
             const collectionKeysArray: string[] = [];
             for (var entity of entityTable) {
               // Get the key value for the entity.
-              const keyValue = entity[propertyMetadata.collectionKeyPropertyName!]; // collectionKeyPropertyName was already validated.
+              const keyValue = entity[propertyMetadata.keyPropertyName!]; // collectionKeyPropertyName was already validated.
 
               // Build the child tree node.
               const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);

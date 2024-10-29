@@ -171,7 +171,6 @@ PropertyMetadata[] ParseClass(string classFilename)
         if (trimmedLine.Contains(@"<EntityTitle>"))
         {
             mode = ModeEnum.None;
-            //entityTitle = trimmedLine.Replace("<EntityTitle", "").Replace("</EntityTitle", "");
         }
         else if (trimmedLine.StartsWith(@"///") && !trimmedLine.Contains(@"</"))
         {
@@ -231,11 +230,15 @@ PropertyMetadata[] ParseClass(string classFilename)
             {
                 throw new Exception();
             }
+
+            // Reset the XML comments.
+            descriptionList.Clear();
+            title = null;
+            category = null;
             continue; // Skip the rest of the processing.
         }
-
         // Is this a property.
-        if (tokens.Length > 1 && tokens[0] == "public")
+        else if (tokens.Length > 1 && tokens[0] == "public")
         {
             // Yes.  Check if there is a default value specified.
             string? defaultValueParsedString = null;

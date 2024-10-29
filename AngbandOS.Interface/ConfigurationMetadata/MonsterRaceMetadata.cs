@@ -15,7 +15,7 @@ public static class MonsterRaceMetadata
                 new StringPropertyMetadata("Key")
                 {
                     DefaultValue = null,
-                    Description = "<remarks> 102 Properties",
+                    Description = "",
                     IsNullable = false,
                 },
                 new StringArrayPropertyMetadata("SpellNames")

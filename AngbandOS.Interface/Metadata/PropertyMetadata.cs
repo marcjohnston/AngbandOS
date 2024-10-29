@@ -2,10 +2,16 @@
 
 public class PropertyMetadata
 {
-    public PropertyMetadata(string propertyName)
+    public PropertyMetadata(string type, string propertyName)
     {
+        Type = type;
         PropertyName = propertyName;
     }
+
+    /// <summary>
+    /// Returns the name of the property in the configuration that the metadata references.
+    /// </summary>
+    public virtual string Type { get; }
 
     /// <summary>
     /// Returns the name of the property in the configuration that the metadata references.
