@@ -30,7 +30,7 @@ public static class TileMetadata
                     Description = "Returns the name of the symbol to be used for rendering.  This property is bound to the Symbol property during binding.",
                     IsNullable = false,
                 },
-                new ColorEnumPropertyMetadata("Color")
+                new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "Returns the color to render the tile as.  Returns white, by default.",

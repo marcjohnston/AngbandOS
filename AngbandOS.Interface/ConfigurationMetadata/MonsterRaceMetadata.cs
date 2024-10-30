@@ -15,10 +15,10 @@ public static class MonsterRaceMetadata
                 new StringPropertyMetadata("Key")
                 {
                     DefaultValue = null,
-                    Description = "<remarks> 102 Properties",
+                    Description = "",
                     IsNullable = false,
                 },
-                new StringArrayPropertyMetadata("SpellNames")
+                new StringsPropertyMetadata("SpellNames")
                 {
                     DefaultValue = null,
                     Description = "",
@@ -36,7 +36,7 @@ public static class MonsterRaceMetadata
                     Description = "Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the bind phase.",
                     IsNullable = false,
                 },
-                new ColorEnumPropertyMetadata("Color")
+                new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "The color to display the monster as.",
@@ -56,7 +56,7 @@ public static class MonsterRaceMetadata
                 },
                 new TuplePropertyMetadata("AttackDefinitions")
                 {
-                    DataTypes = new PropertyMetadata[]
+                    Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("MethodName")
                         {

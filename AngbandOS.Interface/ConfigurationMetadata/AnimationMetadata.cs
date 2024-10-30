@@ -24,7 +24,7 @@ public static class AnimationMetadata
                     Description = "",
                     IsNullable = false,
                 },
-                new ColorEnumPropertyMetadata("Color")
+                new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = null,
                     Description = "",
@@ -36,7 +36,7 @@ public static class AnimationMetadata
                     Description = "",
                     IsNullable = false,
                 },
-                new ColorEnumPropertyMetadata("AlternateColor")
+                new ColorPropertyMetadata("AlternateColor")
                 {
                     DefaultValue = null,
                     Description = "",

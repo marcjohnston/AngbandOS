@@ -24,7 +24,7 @@ public static class ProjectileGraphicMetadata
                     Description = "Returns the character to be used for the projectile.",
                     IsNullable = false,
                 },
-                new ColorEnumPropertyMetadata("Color")
+                new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "Returns the color to be used for the projectile.",

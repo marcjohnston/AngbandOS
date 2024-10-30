@@ -8,15 +8,10 @@ export class PropertyMetadata {
   public categoryTitle: string;
   public isNullable: boolean;
   public description: string | null;
-  public defaultIntegerValue: number | null;
-  public defaultBooleanValue: boolean | null;
-  public defaultCharacterValue: string | null;
-  public defaultStringValue: string | null;
-  public defaultStringArrayValue: string[] | null;
-  public collectionPropertyMetadatas: PropertyMetadata[] | null;
-  public tupleTypes: PropertyMetadata[] | null;
-  public collectionKeyPropertyName: string | null;
-  public collectionEntityTitle: string | null;
+  public defaultValue: string[] | null;
+  public propertyMetadatas: PropertyMetadata[] | null;
+  public keyPropertyName: string | null;
+  public entityTitle: string | null;
   public foreignCollectionName: string | null;
 
   /**
@@ -33,15 +28,10 @@ export class PropertyMetadata {
               categoryTitle: string,
               isNullable: boolean,
               description: string | null,
-              defaultIntegerValue: number | null,
-              defaultBooleanValue: boolean | null,
-              defaultCharacterValue: string | null,
-              defaultStringValue: string | null,
-              defaultStringArrayValue: string[] | null,
-              collectionPropertyMetadatas: PropertyMetadata[] | null,
-              tupleTypes: PropertyMetadata[] | null,
-              collectionKeyPropertyName: string | null,
-              collectionEntityTitle: string | null,
+              defaultValue: string[] | null,
+              propertyMetadatas: PropertyMetadata[] | null,
+              keyPropertyName: string | null,
+              entityTitle: string | null,
               foreignCollectionName: string | null) {
     this.type = type;
     this.title = title;
@@ -49,15 +39,10 @@ export class PropertyMetadata {
     this.categoryTitle = categoryTitle;
     this.isNullable = isNullable;
     this.description = description;
-    this.defaultIntegerValue = defaultIntegerValue;
-    this.defaultBooleanValue = defaultBooleanValue;
-    this.defaultCharacterValue = defaultCharacterValue;
-    this.defaultStringValue = defaultStringValue;
-    this.defaultStringArrayValue = defaultStringArrayValue;
-    this.collectionPropertyMetadatas = collectionPropertyMetadatas;
-    this.tupleTypes = tupleTypes;
-    this.collectionKeyPropertyName = collectionKeyPropertyName;
-    this.collectionEntityTitle = collectionEntityTitle;
+    this.defaultValue = defaultValue;
+    this.propertyMetadatas = propertyMetadatas;
+    this.keyPropertyName = keyPropertyName;
+    this.entityTitle = entityTitle;
     this.foreignCollectionName = foreignCollectionName;
   }
 }

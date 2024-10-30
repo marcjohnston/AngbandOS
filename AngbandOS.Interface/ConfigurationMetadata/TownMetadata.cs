@@ -36,7 +36,7 @@ public static class TownMetadata
                     Description = "",
                     IsNullable = false,
                 },
-                new StringArrayPropertyMetadata("StoreFactoryNames")
+                new StringsPropertyMetadata("StoreFactoryNames")
                 {
                     DefaultValue = null,
                     Description = "",

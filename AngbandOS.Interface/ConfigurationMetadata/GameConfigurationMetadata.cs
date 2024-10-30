@@ -15,7 +15,7 @@ public static class GameConfigurationMetadata
                 new IntegerPropertyMetadata("MaxMessageLogLength")
                 {
                     DefaultValue = 2048,
-                    Description = "Represents an interface that describes the configuration data that the GameServer.Play method accepts.  This configuration data is used to completely configure a new game.  Use the ConfigurationMetadata object to get metadata details that can be used to generate configuration data. Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.",
+                    Description = "Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.",
                     IsNullable = true,
                 },
                 new StringPropertyMetadata("StartupTownName")
@@ -248,91 +248,91 @@ public static class GameConfigurationMetadata
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("ElvishTexts")
+                new StringsPropertyMetadata("ElvishTexts")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("FindQuests")
+                new StringsPropertyMetadata("FindQuests")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("FunnyComments")
+                new StringsPropertyMetadata("FunnyComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("FunnyDescriptions")
+                new StringsPropertyMetadata("FunnyDescriptions")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("HorrificDescriptions")
+                new StringsPropertyMetadata("HorrificDescriptions")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("InsultPlayerAttacks")
+                new StringsPropertyMetadata("InsultPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("MoanPlayerAttacks")
+                new StringsPropertyMetadata("MoanPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("UnreadableFlavorSyllables")
+                new StringsPropertyMetadata("UnreadableFlavorSyllables")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("ShopkeeperAcceptedComments")
+                new StringsPropertyMetadata("ShopkeeperAcceptedComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("ShopkeeperBargainComments")
+                new StringsPropertyMetadata("ShopkeeperBargainComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("ShopkeeperGoodComments")
+                new StringsPropertyMetadata("ShopkeeperGoodComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("ShopkeeperLessThanGuessComments")
+                new StringsPropertyMetadata("ShopkeeperLessThanGuessComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("ShopkeeperWorthlessComments")
+                new StringsPropertyMetadata("ShopkeeperWorthlessComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("SingingPlayerAttacks")
+                new StringsPropertyMetadata("SingingPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("WorshipPlayerAttacks")
+                new StringsPropertyMetadata("WorshipPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",

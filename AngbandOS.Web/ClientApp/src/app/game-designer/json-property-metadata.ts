@@ -9,14 +9,9 @@ export class JsonPropertyMetadata {
   public categoryTitle: string | undefined = undefined;
   public isNullable: boolean | undefined = undefined;
   public description: string | null | undefined = undefined;
-  public defaultIntegerValue: number | null | undefined = undefined;
-  public defaultBooleanValue: boolean | null | undefined = undefined;
-  public defaultCharacterValue: string | null | undefined = undefined;
-  public defaultStringValue: string | null | undefined = undefined;
-  public defaultStringArrayValue: string[] | null | undefined = undefined;
-  public collectionPropertyMetadatas: JsonPropertyMetadata[] | null | undefined = undefined;
-  public tupleTypes: JsonPropertyMetadata[] | null | undefined = undefined;
-  public collectionKeyPropertyName: string | null | undefined = undefined;
-  public collectionEntityTitle: string | null | undefined = undefined;
+  public defaultValue: string[] | null | undefined = undefined;
+  public propertyMetadatas: JsonPropertyMetadata[] | null | undefined = undefined;
+  public keyPropertyName: string | null | undefined = undefined;
+  public entityTitle: string | null | undefined = undefined;
   public foreignCollectionName: string | null | undefined = undefined;
 }

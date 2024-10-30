@@ -18,7 +18,7 @@ public static class VaultMetadata
                     Description = "",
                     IsNullable = false,
                 },
-                new ColorEnumPropertyMetadata("Color")
+                new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "",

@@ -49,7 +49,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                 },
-                new StringArrayPropertyMetadata("ItemFilterNames")
+                new StringsPropertyMetadata("ItemFilterNames")
                 {
                     DefaultValue = null,
                     Description = "Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to indicate that the store does not buy any items.",
@@ -87,7 +87,7 @@ public static class StoreFactoryMetadata
                 },
                 new TuplePropertyMetadata("StoreStockManifestDefinitions")
                 {
-                    DataTypes = new PropertyMetadata[]
+                    Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("ItemFactoryName")
                         {
@@ -111,7 +111,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will automatically perform this shuffling.",
                     IsNullable = false,
                 },
-                new StringArrayPropertyMetadata("ShopkeeperNames")
+                new StringsPropertyMetadata("ShopkeeperNames")
                 {
                     DefaultValue = null,
                     Description = "Returns the skopkeepers that can be owners of the store.",

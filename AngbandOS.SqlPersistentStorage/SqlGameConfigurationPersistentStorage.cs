@@ -190,7 +190,7 @@ namespace AngbandOS.PersistentStorage
                 StoreCommands = LoadEntities<StoreCommandGameConfiguration>("StoreCommands"),
                 StoreFactories = LoadEntities<StoreFactoryGameConfiguration>("StoreFactories"),
                 Symbols = LoadEntities<SymbolGameConfiguration>("Symbols"),
-                //Tiles = RetrieveEntities<TileConfiguration>(persistentStorage, "Tiles"), // TODO: This is not working with generic
+                Tiles = LoadEntities<TileGameConfiguration>("Tiles"), // TODO: This is not working with generic
                 Towns = LoadEntities<TownGameConfiguration>("Towns"),
                 Vaults = LoadEntities<VaultGameConfiguration>("Vaults"),
                 WandReadableFlavors = LoadEntities<ReadableFlavorGameConfiguration>("WandReadableFlavors"),

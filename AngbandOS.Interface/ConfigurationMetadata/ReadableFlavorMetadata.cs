@@ -24,7 +24,7 @@ public static class ReadableFlavorMetadata
                     Description = "",
                     IsNullable = false,
                 },
-                new ColorEnumPropertyMetadata("Color")
+                new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = null,
                     Description = "",

@@ -30,7 +30,7 @@ public static class DungeonMetadata
                     Description = "Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no biasness.  Returns null, by default.",
                     IsNullable = true,
                 },
-                new StringArrayPropertyMetadata("DungeonGuardianNames")
+                new StringsPropertyMetadata("DungeonGuardianNames")
                 {
                     DefaultValue = null,
                     Description = "Returns all of the quests associated to the dungeon.",

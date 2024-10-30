@@ -38,7 +38,6 @@ void WriteClass(string folder, string entityName, PropertyMetadata[] propertyMet
         writer.WriteLine("    }");
         writer.WriteLine("}");
     }
-    Console.WriteLine();
 }
 
 void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericPropertyMetadata, int indentUnits)
@@ -82,7 +81,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
                 writer.WriteLine($"{indentation}    DefaultValue = {genericStringPropertyMetadata.DefaultValue},");
             }
             break;
-        case StringArrayPropertyMetadata genericStringArrayPropertyMetadata:
+        case StringsPropertyMetadata genericStringArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new StringArrayPropertyMetadata(\"{genericStringArrayPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
             if (genericStringArrayPropertyMetadata.DefaultValue == null)
@@ -106,7 +105,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
                 writer.WriteLine($"{indentation}    DefaultValue = {genericCharacterPropertyMetadata.DefaultValue.Value},");
             }
             break;
-        case ColorEnumPropertyMetadata genericColorEnumPropertyMetadata:
+        case ColorPropertyMetadata genericColorEnumPropertyMetadata:
             writer.WriteLine($"{indentation}new ColorEnumPropertyMetadata(\"{genericColorEnumPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
             if (!genericColorEnumPropertyMetadata.DefaultValue.HasValue)
@@ -131,7 +130,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             writer.WriteLine($"{indentation}    DataTypes = new PropertyMetadata[]");
             writer.WriteLine($"{indentation}    {{");
-            foreach (PropertyMetadata tuplePropertyMetadata in genericTupleArrayPropertyMetadata.DataTypes)
+            foreach (PropertyMetadata tuplePropertyMetadata in genericTupleArrayPropertyMetadata.Types)
             {
                 WriteProperty(writer, folder, tuplePropertyMetadata, indentUnits + 2);
             }
@@ -171,7 +170,6 @@ PropertyMetadata[] ParseClass(string classFilename)
         if (trimmedLine.Contains(@"<EntityTitle>"))
         {
             mode = ModeEnum.None;
-            //entityTitle = trimmedLine.Replace("<EntityTitle", "").Replace("</EntityTitle", "");
         }
         else if (trimmedLine.StartsWith(@"///") && !trimmedLine.Contains(@"</"))
         {
@@ -231,11 +229,15 @@ PropertyMetadata[] ParseClass(string classFilename)
             {
                 throw new Exception();
             }
+
+            // Reset the XML comments.
+            descriptionList.Clear();
+            title = null;
+            category = null;
             continue; // Skip the rest of the processing.
         }
-
         // Is this a property.
-        if (tokens.Length > 1 && tokens[0] == "public")
+        else if (tokens.Length > 1 && tokens[0] == "public")
         {
             // Yes.  Check if there is a default value specified.
             string? defaultValueParsedString = null;
@@ -328,7 +330,7 @@ PropertyMetadata[] ParseClass(string classFilename)
                     Description = description,
                     IsNullable = isNullable,
                     Title = title,
-                    DataTypes = tuplePropertyMetadatasList.ToArray(),
+                    Types = tuplePropertyMetadatasList.ToArray(),
                 });
             }
             else
@@ -427,7 +429,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 defaultValueParsedString = colorEnumTokens[1];
             }
 
-            return new ColorEnumPropertyMetadata(name)
+            return new ColorPropertyMetadata(name)
             {
                 CategoryTitle = category,
                 Description = description,
@@ -438,7 +440,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
         case "string":
             if (isArray)
             {
-                return new StringArrayPropertyMetadata(name)
+                return new StringsPropertyMetadata(name)
                 {
                     CategoryTitle = category,
                     Description = description,

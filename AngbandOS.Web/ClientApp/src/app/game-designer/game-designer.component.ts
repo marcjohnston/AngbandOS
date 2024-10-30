@@ -50,87 +50,114 @@ export class GameDesignerComponent implements OnInit {
 
   validateJsonPropertyMetadata(jsonPropertyMetadata: JsonPropertyMetadata): PropertyMetadata | undefined {
     // Check that none of the properties are undefined.
-    if (jsonPropertyMetadata.type === undefined) {
+    if (jsonPropertyMetadata.propertyName === undefined) {
+      this._snackBar.open(`Metadata property name is invalid after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
-    if (jsonPropertyMetadata.propertyName === undefined) {
+    if (jsonPropertyMetadata.type === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid type value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.title === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid title value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.categoryTitle === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid category title value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.isNullable === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid isNullable value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.description === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid description value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
-    if (jsonPropertyMetadata.defaultIntegerValue === undefined) {
+    if (jsonPropertyMetadata.defaultValue === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid defaultValue value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
-    if (jsonPropertyMetadata.defaultBooleanValue === undefined) {
+    if (jsonPropertyMetadata.propertyMetadatas === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid propertyMetadatas value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
-    if (jsonPropertyMetadata.defaultCharacterValue === undefined) {
+    if (jsonPropertyMetadata.keyPropertyName === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid keyPropertyName value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
-    if (jsonPropertyMetadata.defaultStringValue === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.defaultStringArrayValue === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.tupleTypes === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.collectionPropertyMetadatas === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.collectionKeyPropertyName === undefined) {
-      return undefined;
-    }
-    if (jsonPropertyMetadata.collectionEntityTitle === undefined) {
+    if (jsonPropertyMetadata.entityTitle === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityValue value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
     if (jsonPropertyMetadata.foreignCollectionName === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid foreignCollectionName value after json deserialization.`, "", {
+        duration: 5000
+      });
       return undefined;
     }
 
     // Now check for data types that require additional properties to not be null.
     let collectionPropertyMetadataList: PropertyMetadata[] | null = null;
-    let tupleTypesPropertyMetadataList: PropertyMetadata[] | null = null;
     switch (jsonPropertyMetadata.type.toLowerCase()) {
       case "collection":
-        if (jsonPropertyMetadata.collectionKeyPropertyName === null) {
+        if (jsonPropertyMetadata.keyPropertyName === null) {
+          this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null keyPropertyName value.`, "", {
+            duration: 5000
+          });
           return undefined;
         }
+        break;
+    }
 
-        if (jsonPropertyMetadata.collectionPropertyMetadatas !== null) {
+    switch (jsonPropertyMetadata.type.toLowerCase()) {
+      case "foreign-key":
+      case "foreign-keys":
+        if (jsonPropertyMetadata.keyPropertyName === null) {
+          this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null keyPropertyName value.`, "", {
+            duration: 5000
+          });
+          return undefined;
+        }
+        break;
+    }
+
+    switch (jsonPropertyMetadata.type.toLowerCase()) {
+      case "collection":
+      case "tuple":
+      case "tuples":
+        if (jsonPropertyMetadata.propertyMetadatas !== null) {
           collectionPropertyMetadataList = [];
-          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.collectionPropertyMetadatas) {
+          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.propertyMetadatas) {
             const collectionPropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonCollectionPropertyMetadata);
             if (collectionPropertyMetadata === undefined) {
+              this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null propertyMetadatas element value.`, "", {
+                duration: 5000
+              });
               return undefined;
             }
 
             collectionPropertyMetadataList.push(collectionPropertyMetadata);
-          }
-        }
-        break;
-      case "tuple":
-      case "tuple-array":
-        if (jsonPropertyMetadata.tupleTypes !== null) {
-          tupleTypesPropertyMetadataList = [];
-          for (let jsonTupleTypePropertyMetadata of jsonPropertyMetadata.tupleTypes) {
-            const tupleTypePropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(jsonTupleTypePropertyMetadata);
-            if (tupleTypePropertyMetadata === undefined) {
-              return undefined;
-            }
-
-            tupleTypesPropertyMetadataList.push(tupleTypePropertyMetadata);
           }
         }
         break;
@@ -142,15 +169,10 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.categoryTitle,
       jsonPropertyMetadata.isNullable,
       jsonPropertyMetadata.description,
-      jsonPropertyMetadata.defaultIntegerValue,
-      jsonPropertyMetadata.defaultBooleanValue,
-      jsonPropertyMetadata.defaultCharacterValue,
-      jsonPropertyMetadata.defaultStringValue,
-      jsonPropertyMetadata.defaultStringArrayValue,
+      jsonPropertyMetadata.defaultValue,
       collectionPropertyMetadataList,
-      tupleTypesPropertyMetadataList,
-      jsonPropertyMetadata.collectionKeyPropertyName,
-      jsonPropertyMetadata.collectionEntityTitle,
+      jsonPropertyMetadata.keyPropertyName,
+      jsonPropertyMetadata.entityTitle,
       jsonPropertyMetadata.foreignCollectionName);
   }
 
@@ -162,20 +184,23 @@ export class GameDesignerComponent implements OnInit {
         // We need to validate the json metadata before we can provide it to a tree node.
         const propertyMetadata = this.validateJsonPropertyMetadata(jsonPropertyMetadata);
         if (propertyMetadata === undefined) {
-          this._snackBar.open("Invalid metadata.", "", {
-            duration: 5000
-          });
           return;
         }
 
         switch (propertyMetadata.type?.toLowerCase()) {
           case "collection":
-            const entityTable: any[] = this.configuration[propertyMetadata.propertyName];
+            const entityTable: any[] | null = this.configuration[propertyMetadata.propertyName];
+            if (entityTable === null) {
+              this._snackBar.open(`The ${propertyMetadata.propertyName} collection does not exist in the configuration.`, "", {
+                duration: 5000
+              });
+              return;
+            }
             const childTreeNodes: TreeNode[] = [];
             const collectionKeysArray: string[] = [];
             for (var entity of entityTable) {
               // Get the key value for the entity.
-              const keyValue = entity[propertyMetadata.collectionKeyPropertyName!]; // collectionKeyPropertyName was already validated.
+              const keyValue = entity[propertyMetadata.keyPropertyName!]; // collectionKeyPropertyName was already validated.
 
               // Build the child tree node.
               const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
@@ -193,7 +218,7 @@ export class GameDesignerComponent implements OnInit {
             // Add the keys to the Map of collections by the property name.
             this.collections.set(propertyMetadata.propertyName, collectionKeysArray);
             break;
-          case "string-array":
+          case "strings":
               const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
               const stringArrayTreeNode = new TreeNode(propertyMetadata.renderTitle, null, [stringArrayPropertyMetadataAndConfiguration]);
               rootTreeNodes.push(stringArrayTreeNode);
@@ -226,7 +251,7 @@ export class GameDesignerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._httpClient.get<PropertyMetadata[]>(`/apiv1/configurations/metadata`).toPromise().then((_jsonMetadata) => {
+    this._httpClient.get<JsonPropertyMetadata[]>(`/apiv1/configurations/metadata`).toPromise().then((_jsonMetadata) => {
       this._ngZone.run(() => {
         if (_jsonMetadata !== undefined) {
           this.jsonPropertyMetadata = _jsonMetadata;

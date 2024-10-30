@@ -30,7 +30,7 @@ public static class StoreCommandMetadata
                     Description = "",
                     IsNullable = false,
                 },
-                new StringArrayPropertyMetadata("ValidStoreFactoryNames")
+                new StringsPropertyMetadata("ValidStoreFactoryNames")
                 {
                     DefaultValue = null,
                     Description = "",
