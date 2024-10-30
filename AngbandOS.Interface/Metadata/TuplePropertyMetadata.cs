@@ -3,5 +3,5 @@
 public class TuplePropertyMetadata : PropertyMetadata
 {
     public TuplePropertyMetadata(string propertyName) : base("Tuple", propertyName) { }
-    public virtual PropertyMetadata[] DataTypes { get; set; }
+    public PropertyMetadata[] DataTypes { get; set; }
 }
