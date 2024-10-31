@@ -1,12 +1,22 @@
 ﻿using AngbandOS.Core.Interface;
 using System.Text.RegularExpressions;
 
+if (args.Length < 2)
+{
+    Console.WriteLine("syntax: scaffold-metadata {configuration_file} {output_folder}");
+    Console.WriteLine("where:");
+    Console.WriteLine(@"    configuration_file - full path, file name and extension to the top-level game configuration file (e.g. AngbandOS\AngbandOS.Core.Interface.Configuration\GameConfiguration.cs)");
+    Console.WriteLine(@"    output_folder - full path to the folder to output the metadata classes (e.g. AngbandOS\AngbandOS.Core.Interface.Metadata\Scaffolded");
+    Environment.Exit(1); // Invalid arguments.
+}
+
+"D:\OneDrive\Programming" "D:\OneDrive\Programming\"
+
 string configurationName = args[0];
 string outputFolder = args[1];
 
 string folder = Path.GetDirectoryName(configurationName);
 string filename = Path.GetFileNameWithoutExtension(configurationName);
-//D:\OneDrive\Programming\AngbandOS\AngbandOS.Interface\GameConfigurations\GameConfiguration.cs
 PropertyMetadata[] gameConfigurationPropertyMetadatas = ParseClass(configurationName);
 WriteClass(outputFolder, filename, gameConfigurationPropertyMetadatas);
 
