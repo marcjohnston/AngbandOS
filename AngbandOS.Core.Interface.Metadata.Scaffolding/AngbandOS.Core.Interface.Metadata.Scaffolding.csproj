@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration.Metadata\AngbandOS.Core.Interface.Configuration.Metadata.csproj" />
+    <ProjectReference Include="..\AngbandOS.Core.Interface.Metadata\AngbandOS.Core.Interface.Metadata.csproj" />
   </ItemGroup>
 
 </Project>
