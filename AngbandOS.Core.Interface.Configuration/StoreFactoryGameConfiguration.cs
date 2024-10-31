@@ -93,6 +93,7 @@ public class StoreFactoryGameConfiguration
     /// <summary>
     /// Returns the skopkeepers that can be owners of the store.
     /// </summary>
+    /// <foreign-collection>Shopkeepers</foreign-collection>
     public virtual string[] ShopkeeperNames { get; set; }
 
     public virtual string? AdvertisedStoreCommand1Name { get; set; } = null;

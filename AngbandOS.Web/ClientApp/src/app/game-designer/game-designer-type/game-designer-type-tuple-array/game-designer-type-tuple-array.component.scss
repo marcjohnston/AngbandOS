@@ -3,7 +3,7 @@
     border-bottom: 1px solid white; // Tuple tables have borders around the table cells.
   }
 
-  & td:not(:last-child) {
+  & .tuple-cell {
     padding: 5px 10px 0 0; // Tuple table cells need padding on the right sides for all except the last table cell.  Also, we need top padding to separate from the previous tr.
   }
 

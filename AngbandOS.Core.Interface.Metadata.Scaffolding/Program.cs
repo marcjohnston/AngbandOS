@@ -102,6 +102,16 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
                 writer.WriteLine($"{indentation}    DefaultValue = {genericStringArrayPropertyMetadata.DefaultValue},");
             }
             break;
+        case ForeignKeyPropertyMetadata genericForeignKeyPropertyMetadata:
+            writer.WriteLine($"{indentation}new ForeignKeyPropertyMetadata(\"{genericForeignKeyPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{genericForeignKeyPropertyMetadata.ForeignCollectionName}\",");
+            break;
+        case ForeignKeysPropertyMetadata genericForeignKeysPropertyMetadata:
+            writer.WriteLine($"{indentation}new ForeignKeysPropertyMetadata(\"{genericForeignKeysPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{genericForeignKeysPropertyMetadata.ForeignCollectionName}\",");
+            break;
         case CharacterPropertyMetadata genericCharacterPropertyMetadata:
             writer.WriteLine($"{indentation}new CharacterPropertyMetadata(\"{genericCharacterPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
@@ -173,19 +183,28 @@ PropertyMetadata[] ParseClass(string classFilename)
     List<string> returnsList = new List<string>();
     string? category = null;
     string? title = null;
+    string? foreignCollectionName = null;
 
     void ResetXMLComments()
     {
         descriptionList.Clear();
         title = null;
         category = null;
+        foreignCollectionName = null;
     }
 
     foreach (string line in text)
     {
-        string trimmedLine = line.Trim();
-        if (trimmedLine.Contains(@"<EntityTitle>"))
+        string trimmedLine = line.Trim(); // We are not converting to lowercase or supporting non-lowercase XML tags
+        if (trimmedLine.Contains(@"<foreign-collection>"))
         {
+            int startPos = trimmedLine.IndexOf("<foreign-collection>");
+            int endPos = trimmedLine.IndexOf("</foreign-collection>");
+            if (endPos < 0)
+            {
+                throw new Exception("Invalid <foreign-collection> XML comment.  The entire XML comment must be on a single line.");
+            }
+            foreignCollectionName = trimmedLine.Substring(startPos + 20, endPos - startPos - 20);
             mode = ModeEnum.None;
         }
         else if (trimmedLine.StartsWith(@"///") && !trimmedLine.Contains(@"</"))
@@ -342,7 +361,7 @@ PropertyMetadata[] ParseClass(string classFilename)
                     }
                     string tupleTitle = Regex.Replace(tupleName, "(?<!^)([A-Z])", " $1");
 
-                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString);
+                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString, foreignCollectionName);
                     if (propertyMetadata == null)
                     {
                         throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
@@ -376,7 +395,7 @@ PropertyMetadata[] ParseClass(string classFilename)
                 }
                 else
                 {
-                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, dataType, name, category, description, isNullable, isArray, title, defaultValueParsedString);
+                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, dataType, name, category, description, isNullable, isArray, title, defaultValueParsedString, foreignCollectionName);
                     if (propertyMetadata == null)
                     {
                         throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
@@ -409,7 +428,7 @@ PropertyMetadata[] ParseClass(string classFilename)
     return (fullDataType, isNullable, isArray);
 }
 
-PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, string name, string? category, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString)
+PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, string name, string? category, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString, string? foreignCollection)
 {
     switch (dataType)
     {
@@ -463,6 +482,17 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
         case "string":
             if (isArray)
             {
+                if (foreignCollection != null)
+                {
+                    return new ForeignKeysPropertyMetadata(name)
+                    {
+                        CategoryTitle = category,
+                        Description = description,
+                        IsNullable = isNullable,
+                        Title = title,
+                        ForeignCollectionName = foreignCollection
+                    };
+                }
                 return new StringsPropertyMetadata(name)
                 {
                     CategoryTitle = category,
@@ -474,6 +504,17 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
             }
             else
             {
+                if (foreignCollection != null)
+                {
+                    return new ForeignKeyPropertyMetadata(name)
+                    {
+                        CategoryTitle = category,
+                        Description = description,
+                        IsNullable = isNullable,
+                        Title = title,
+                        ForeignCollectionName = foreignCollection
+                    };
+                }
                 return new StringPropertyMetadata(name)
                 {
                     CategoryTitle = category,

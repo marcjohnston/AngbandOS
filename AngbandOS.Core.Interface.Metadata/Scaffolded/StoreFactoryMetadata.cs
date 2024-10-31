@@ -126,9 +126,9 @@ public static class StoreFactoryMetadata
                     IsNullable = false,
                     Title = "Shuffles Owners And Pricing",
                 },
-                new StringsPropertyMetadata("ShopkeeperNames")
+                new ForeignKeysPropertyMetadata("ShopkeeperNames")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Shopkeepers",
                     Description = "Returns the skopkeepers that can be owners of the store.",
                     IsNullable = false,
                     Title = "Shopkeeper Names",

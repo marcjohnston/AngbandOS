@@ -118,8 +118,8 @@ export class GameDesignerComponent implements OnInit {
     }
 
     // Now check for data types that require additional properties to not be null.
-    let collectionPropertyMetadataList: PropertyMetadata[] | null = null;
-    switch (jsonPropertyMetadata.type.toLowerCase()) {
+    // Validate that keyPropertyName is not null.
+    switch (jsonPropertyMetadata.type) {
       case "collection":
         if (jsonPropertyMetadata.keyPropertyName === null) {
           this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null keyPropertyName value.`, "", {
@@ -130,11 +130,12 @@ export class GameDesignerComponent implements OnInit {
         break;
     }
 
-    switch (jsonPropertyMetadata.type.toLowerCase()) {
+    // Validate that foreignCollectionName is not null.
+    switch (jsonPropertyMetadata.type) {
       case "foreign-key":
       case "foreign-keys":
-        if (jsonPropertyMetadata.keyPropertyName === null) {
-          this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null keyPropertyName value.`, "", {
+        if (jsonPropertyMetadata.foreignCollectionName === null) {
+          this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null foreignCollectionName value.`, "", {
             duration: 5000
           });
           return undefined;
@@ -142,7 +143,9 @@ export class GameDesignerComponent implements OnInit {
         break;
     }
 
-    switch (jsonPropertyMetadata.type.toLowerCase()) {
+    // Validate that propertyMetadatas is not null.
+    let collectionPropertyMetadataList: PropertyMetadata[] | null = null;
+    switch (jsonPropertyMetadata.type) {
       case "collection":
       case "tuple":
       case "tuples":
@@ -187,7 +190,7 @@ export class GameDesignerComponent implements OnInit {
           return;
         }
 
-        switch (propertyMetadata.type?.toLowerCase()) {
+        switch (propertyMetadata.type) {
           case "collection":
             const entityTable: any[] | null = this.configuration[propertyMetadata.propertyName];
             if (entityTable === null) {
