@@ -17,36 +17,42 @@ public static class ClassSpellMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Spell Name",
                 },
                 new StringPropertyMetadata("CharacterClassName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Character Class Name",
                 },
                 new IntegerPropertyMetadata("Level")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Level",
                 },
                 new IntegerPropertyMetadata("ManaCost")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Mana Cost",
                 },
                 new IntegerPropertyMetadata("BaseFailure")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Base Failure",
                 },
                 new IntegerPropertyMetadata("FirstCastExperience")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "First Cast Experience",
                 },
             };
         }

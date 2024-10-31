@@ -17,42 +17,49 @@ public static class MonsterRaceMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new StringsPropertyMetadata("SpellNames")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Spell Names",
                 },
                 new StringPropertyMetadata("MultilineName")
                 {
                     DefaultValue = null,
                     Description = "Returns a multiline version of the monster race that is shown to the player.  Defaults to the <see cref=\"FriendlyName\"/>.  Word-breaks are encoded with a \n character.",
                     IsNullable = true,
+                    Title = "Multiline Name",
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
                     DefaultValue = null,
                     Description = "Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the bind phase.",
                     IsNullable = false,
+                    Title = "Symbol Name",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "The color to display the monster as.",
                     IsNullable = false,
+                    Title = "Color",
                 },
                 new BooleanPropertyMetadata("Animal")
                 {
                     DefaultValue = false,
                     Description = "The monster is an animal.",
                     IsNullable = false,
+                    Title = "Animal",
                 },
                 new IntegerPropertyMetadata("ArmorClass")
                 {
                     DefaultValue = null,
                     Description = "The monsters armor class.",
                     IsNullable = false,
+                    Title = "Armor Class",
                 },
                 new TuplePropertyMetadata("AttackDefinitions")
                 {
@@ -63,574 +70,670 @@ public static class MonsterRaceMetadata
                             DefaultValue = null,
                             Description = "The name of the attack method.",
                             IsNullable = false,
+                            Title = "Method Name",
                         },
                         new StringPropertyMetadata("EffectName")
                         {
                             DefaultValue = null,
                             Description = "The name of the attach effect.",
                             IsNullable = true,
+                            Title = "Effect Name",
                         },
                         new IntegerPropertyMetadata("Dice")
                         {
                             DefaultValue = null,
                             Description = "The number of dice.",
                             IsNullable = false,
+                            Title = "Dice",
                         },
                         new IntegerPropertyMetadata("Sides")
                         {
                             DefaultValue = null,
                             Description = "The number of sides on the dice.",
                             IsNullable = false,
+                            Title = "Sides",
                         },
                     },
                     Description = "Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns null, by default.",
                     IsNullable = true,
+                    Title = "Attack Definitions",
                 },
                 new BooleanPropertyMetadata("AttrAny")
                 {
                     DefaultValue = false,
                     Description = "The monster's color can be anything (if 'AttrMulti' is set).",
                     IsNullable = false,
+                    Title = "Attr Any",
                 },
                 new BooleanPropertyMetadata("AttrClear")
                 {
                     DefaultValue = false,
                     Description = "The monster is transparent.",
                     IsNullable = false,
+                    Title = "Attr Clear",
                 },
                 new BooleanPropertyMetadata("AttrMulti")
                 {
                     DefaultValue = false,
                     Description = "The monster changes color.",
                     IsNullable = false,
+                    Title = "Attr Multi",
                 },
                 new BooleanPropertyMetadata("BashDoor")
                 {
                     DefaultValue = false,
                     Description = "The monster can break open doors.",
                     IsNullable = false,
+                    Title = "Bash Door",
                 },
                 new BooleanPropertyMetadata("CharClear")
                 {
                     DefaultValue = false,
                     Description = "The monster is never seen, even with see invisible.",
                     IsNullable = false,
+                    Title = "Char Clear",
                 },
                 new BooleanPropertyMetadata("CharMulti")
                 {
                     DefaultValue = false,
                     Description = "The monster is changes shape randomly.",
                     IsNullable = false,
+                    Title = "Char Multi",
                 },
                 new BooleanPropertyMetadata("ColdBlood")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Cold Blood",
                 },
                 new BooleanPropertyMetadata("Cthuloid")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Cthuloid",
                 },
                 new BooleanPropertyMetadata("Demon")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Demon",
                 },
                 new StringPropertyMetadata("Description")
                 {
                     DefaultValue = null,
                     Description = "The descriptive text.",
                     IsNullable = false,
+                    Title = "Description",
                 },
                 new BooleanPropertyMetadata("Dragon")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Dragon",
                 },
                 new BooleanPropertyMetadata("Drop_1D2")
                 {
                     DefaultValue = false,
                     Description = "The monster drops 1d2 items.",
                     IsNullable = false,
+                    Title = "Drop_1 D2",
                 },
                 new BooleanPropertyMetadata("Drop_2D2")
                 {
                     DefaultValue = false,
                     Description = "The monster drops 2d2 items.",
                     IsNullable = false,
+                    Title = "Drop_2 D2",
                 },
                 new BooleanPropertyMetadata("Drop_3D2")
                 {
                     DefaultValue = false,
                     Description = "The monster drops 3d2 items.",
                     IsNullable = false,
+                    Title = "Drop_3 D2",
                 },
                 new BooleanPropertyMetadata("Drop_4D2")
                 {
                     DefaultValue = false,
                     Description = "The monster drops 4d2 items.",
                     IsNullable = false,
+                    Title = "Drop_4 D2",
                 },
                 new BooleanPropertyMetadata("Drop60")
                 {
                     DefaultValue = false,
                     Description = "The monster drops an item 60% of the time.",
                     IsNullable = false,
+                    Title = "Drop60",
                 },
                 new BooleanPropertyMetadata("Drop90")
                 {
                     DefaultValue = false,
                     Description = "The monster drops an item 90% of the time.",
                     IsNullable = false,
+                    Title = "Drop90",
                 },
                 new BooleanPropertyMetadata("DropGood")
                 {
                     DefaultValue = false,
                     Description = "The monster drops good items.",
                     IsNullable = false,
+                    Title = "Drop Good",
                 },
                 new BooleanPropertyMetadata("DropGreat")
                 {
                     DefaultValue = false,
                     Description = "The monster drops great items.",
                     IsNullable = false,
+                    Title = "Drop Great",
                 },
                 new BooleanPropertyMetadata("EldritchHorror")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Eldritch Horror",
                 },
                 new BooleanPropertyMetadata("EmptyMind")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Empty Mind",
                 },
                 new BooleanPropertyMetadata("Escorted")
                 {
                     DefaultValue = false,
                     Description = "The monster comes with minions of the same character.",
                     IsNullable = false,
+                    Title = "Escorted",
                 },
                 new BooleanPropertyMetadata("EscortsGroup")
                 {
                     DefaultValue = false,
                     Description = "The monster's minions come in groups (this doesn't force minions if 'Escort' isn't set).",
                     IsNullable = false,
+                    Title = "Escorts Group",
                 },
                 new BooleanPropertyMetadata("Evil")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Evil",
                 },
                 new BooleanPropertyMetadata("Female")
                 {
                     DefaultValue = false,
                     Description = "The monster should use feminine pronouns.",
                     IsNullable = false,
+                    Title = "Female",
                 },
                 new BooleanPropertyMetadata("FireAura")
                 {
                     DefaultValue = false,
                     Description = "The monster has an aura of fire around it.",
                     IsNullable = false,
+                    Title = "Fire Aura",
                 },
                 new BooleanPropertyMetadata("ForceMaxHp")
                 {
                     DefaultValue = false,
                     Description = "The monster has maximum hit points.",
                     IsNullable = false,
+                    Title = "Force Max Hp",
                 },
                 new BooleanPropertyMetadata("ForceSleep")
                 {
                     DefaultValue = false,
                     Description = "The monster always starts asleep.",
                     IsNullable = false,
+                    Title = "Force Sleep",
                 },
                 new IntegerPropertyMetadata("FreqInate")
                 {
                     DefaultValue = null,
                     Description = "The 1-in-X frequency with which the monster uses special abilities.",
                     IsNullable = false,
+                    Title = "Freq Inate",
                 },
                 new IntegerPropertyMetadata("FreqSpell")
                 {
                     DefaultValue = null,
                     Description = "The 1-in-X frequency with which the monster uses spells.",
                     IsNullable = false,
+                    Title = "Freq Spell",
                 },
                 new StringPropertyMetadata("FriendlyName")
                 {
                     DefaultValue = null,
                     Description = "The name that the game shows the player (may have duplicates).",
                     IsNullable = false,
+                    Title = "Friendly Name",
                 },
                 new BooleanPropertyMetadata("Friends")
                 {
                     DefaultValue = false,
                     Description = "The monster comes with friends of the same race.",
                     IsNullable = false,
+                    Title = "Friends",
                 },
                 new BooleanPropertyMetadata("Giant")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Giant",
                 },
                 new BooleanPropertyMetadata("Good")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Good",
                 },
                 new BooleanPropertyMetadata("GreatOldOne")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Great Old One",
                 },
                 new IntegerPropertyMetadata("Hdice")
                 {
                     DefaultValue = null,
                     Description = "The number of hit dice the monster has.",
                     IsNullable = false,
+                    Title = "Hdice",
                 },
                 new IntegerPropertyMetadata("Hside")
                 {
                     DefaultValue = null,
                     Description = "The number of sides of the monster's hit dice.",
                     IsNullable = false,
+                    Title = "Hside",
                 },
                 new BooleanPropertyMetadata("HurtByCold")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Hurt By Cold",
                 },
                 new BooleanPropertyMetadata("HurtByFire")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Hurt By Fire",
                 },
                 new BooleanPropertyMetadata("HurtByLight")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Hurt By Light",
                 },
                 new BooleanPropertyMetadata("HurtByRock")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Hurt By Rock",
                 },
                 new BooleanPropertyMetadata("ImmuneAcid")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Acid",
                 },
                 new BooleanPropertyMetadata("ImmuneCold")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Cold",
                 },
                 new BooleanPropertyMetadata("ImmuneConfusion")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Confusion",
                 },
                 new BooleanPropertyMetadata("ImmuneFear")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Fear",
                 },
                 new BooleanPropertyMetadata("ImmuneFire")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Fire",
                 },
                 new BooleanPropertyMetadata("ImmuneLightning")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Lightning",
                 },
                 new BooleanPropertyMetadata("ImmunePoison")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Poison",
                 },
                 new BooleanPropertyMetadata("ImmuneSleep")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Sleep",
                 },
                 new BooleanPropertyMetadata("ImmuneStun")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Immune Stun",
                 },
                 new BooleanPropertyMetadata("Invisible")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Invisible",
                 },
                 new BooleanPropertyMetadata("KillBody")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Kill Body",
                 },
                 new BooleanPropertyMetadata("KillItem")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Kill Item",
                 },
                 new BooleanPropertyMetadata("KillWall")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Kill Wall",
                 },
                 new IntegerPropertyMetadata("LevelFound")
                 {
                     DefaultValue = null,
                     Description = "The level on which the monster is normally found.",
                     IsNullable = false,
+                    Title = "Level Found",
                 },
                 new BooleanPropertyMetadata("LightningAura")
                 {
                     DefaultValue = false,
                     Description = "The monster has an aura of electricity around it.",
                     IsNullable = false,
+                    Title = "Lightning Aura",
                 },
                 new BooleanPropertyMetadata("Male")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Male",
                 },
                 new IntegerPropertyMetadata("Mexp")
                 {
                     DefaultValue = null,
                     Description = "The experience value for killing one of these.",
                     IsNullable = false,
+                    Title = "Mexp",
                 },
                 new BooleanPropertyMetadata("MoveBody")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Move Body",
                 },
                 new BooleanPropertyMetadata("Multiply")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Multiply",
                 },
                 new BooleanPropertyMetadata("NeverAttack")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Never Attack",
                 },
                 new BooleanPropertyMetadata("NeverMove")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Never Move",
                 },
                 new BooleanPropertyMetadata("Nonliving")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Nonliving",
                 },
                 new IntegerPropertyMetadata("NoticeRange")
                 {
                     DefaultValue = null,
                     Description = "The distance at which the monster notices the player.",
                     IsNullable = false,
+                    Title = "Notice Range",
                 },
                 new BooleanPropertyMetadata("OnlyDropGold")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Only Drop Gold",
                 },
                 new BooleanPropertyMetadata("OnlyDropItem")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Only Drop Item",
                 },
                 new BooleanPropertyMetadata("OpenDoor")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Open Door",
                 },
                 new BooleanPropertyMetadata("Orc")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Orc",
                 },
                 new BooleanPropertyMetadata("PassWall")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Pass Wall",
                 },
                 new BooleanPropertyMetadata("Powerful")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Powerful",
                 },
                 new BooleanPropertyMetadata("RandomMove25")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Random Move25",
                 },
                 new BooleanPropertyMetadata("RandomMove50")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Random Move50",
                 },
                 new IntegerPropertyMetadata("Rarity")
                 {
                     DefaultValue = null,
                     Description = "The rarity with which the monster is usually found.",
                     IsNullable = false,
+                    Title = "Rarity",
                 },
                 new BooleanPropertyMetadata("Reflecting")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Reflecting",
                 },
                 new BooleanPropertyMetadata("Regenerate")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Regenerate",
                 },
                 new BooleanPropertyMetadata("ResistDisenchant")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Resist Disenchant",
                 },
                 new BooleanPropertyMetadata("ResistNether")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Resist Nether",
                 },
                 new BooleanPropertyMetadata("ResistNexus")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Resist Nexus",
                 },
                 new BooleanPropertyMetadata("ResistPlasma")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Resist Plasma",
                 },
                 new BooleanPropertyMetadata("ResistTeleport")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Resist Teleport",
                 },
                 new BooleanPropertyMetadata("ResistWater")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Resist Water",
                 },
                 new BooleanPropertyMetadata("Shapechanger")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Shapechanger",
                 },
                 new IntegerPropertyMetadata("Sleep")
                 {
                     DefaultValue = null,
                     Description = "How deeply the monster sleeps.",
                     IsNullable = false,
+                    Title = "Sleep",
                 },
                 new BooleanPropertyMetadata("Smart")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the monster is smart.  When badly injured, the monster will want to prioritise spells that disable the player, summon help, or let it escape over spells that do direct damage.",
                     IsNullable = false,
+                    Title = "Smart",
                 },
                 new IntegerPropertyMetadata("Speed")
                 {
                     DefaultValue = null,
                     Description = "how fast the monster moves (110 = normal speed, higher is better).",
                     IsNullable = false,
+                    Title = "Speed",
                 },
                 new BooleanPropertyMetadata("Stupid")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Stupid",
                 },
                 new BooleanPropertyMetadata("TakeItem")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Take Item",
                 },
                 new BooleanPropertyMetadata("Troll")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Troll",
                 },
                 new BooleanPropertyMetadata("Undead")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Undead",
                 },
                 new BooleanPropertyMetadata("Unique")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Unique",
                 },
                 new BooleanPropertyMetadata("WeirdMind")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Weird Mind",
                 },
             };
         }

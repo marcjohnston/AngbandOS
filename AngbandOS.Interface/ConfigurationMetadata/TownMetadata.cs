@@ -17,54 +17,63 @@ public static class TownMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new CharacterPropertyMetadata("Char")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Char",
                 },
                 new IntegerPropertyMetadata("HousePrice")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "House Price",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Name",
                 },
                 new StringsPropertyMetadata("StoreFactoryNames")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Store Factory Names",
                 },
                 new BooleanPropertyMetadata("CanBeEscortedHere")
                 {
                     DefaultValue = true,
                     Description = "",
                     IsNullable = false,
+                    Title = "Can Be Escorted Here",
                 },
                 new BooleanPropertyMetadata("AllowStartupTown")
                 {
                     DefaultValue = true,
                     Description = "",
                     IsNullable = false,
+                    Title = "Allow Startup Town",
                 },
                 new StringPropertyMetadata("DungeonName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Dungeon Name",
                 },
                 new BooleanPropertyMetadata("UnusedStoreLotsAreGraveyards")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Unused Store Lots Are Graveyards",
                 },
             };
         }

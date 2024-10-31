@@ -17,18 +17,21 @@ public static class ProjectileGraphicMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new CharacterPropertyMetadata("Character")
                 {
                     DefaultValue = null,
                     Description = "Returns the character to be used for the projectile.",
                     IsNullable = false,
+                    Title = "Character",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "Returns the color to be used for the projectile.",
                     IsNullable = false,
+                    Title = "Color",
                 },
             };
         }

@@ -17,54 +17,63 @@ public static class AttackMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new StringPropertyMetadata("MonsterAction")
                 {
                     DefaultValue = null,
                     Description = "Returns the action message to be displayed, when the attack targets another monster.",
                     IsNullable = false,
+                    Title = "Monster Action",
                 },
                 new StringPropertyMetadata("PlayerAction")
                 {
                     DefaultValue = null,
                     Description = "Returns the action message to be displayed, when the attack targets the player.",
                     IsNullable = false,
+                    Title = "Player Action",
                 },
                 new StringPropertyMetadata("KnowledgeAction")
                 {
                     DefaultValue = null,
                     Description = "Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing their knowledge.",
                     IsNullable = false,
+                    Title = "Knowledge Action",
                 },
                 new BooleanPropertyMetadata("AttackTouchesTarget")
                 {
                     DefaultValue = true,
                     Description = "Returns true, if the attack requires touching the target; false otherwise.  Returns true, by default.  The beg, drool, gaze, insult, moan, show, spit, spore, wail and worship attacks do not require touching the target.",
                     IsNullable = false,
+                    Title = "Attack Touches Target",
                 },
                 new BooleanPropertyMetadata("AttackAwakensTarget")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the attack awakes the target; false otherwise.  Returns false, by default,  The beg, insult, moan and show attacks return true.",
                     IsNullable = false,
+                    Title = "Attack Awakens Target",
                 },
                 new BooleanPropertyMetadata("AttackStunsTarget")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the attack stuns the target; false otherwise.  Returns false, by default.  The hit, punch, kick, butt and crush attacks return true.",
                     IsNullable = false,
+                    Title = "Attack Stuns Target",
                 },
                 new BooleanPropertyMetadata("AttackCutsTarget")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the attack cuts the target; false otherwise.  Returns false, by default.  The hit, claw and bite attacks all return true.",
                     IsNullable = false,
+                    Title = "Attack Cuts Target",
                 },
                 new BooleanPropertyMetadata("RendersMissMessage")
                 {
                     DefaultValue = true,
                     Description = "Returns true, if the attack should render a message, if the attack touches the target and missed; false no message should be rendered.  Returns true, by default. Only the crawl attack, requires touching the target and does not render a miss message.",
                     IsNullable = false,
+                    Title = "Renders Miss Message",
                 },
             };
         }

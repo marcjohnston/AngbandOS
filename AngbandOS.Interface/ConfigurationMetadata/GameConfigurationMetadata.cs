@@ -17,12 +17,14 @@ public static class GameConfigurationMetadata
                     DefaultValue = 2048,
                     Description = "Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.",
                     IsNullable = true,
+                    Title = "Max Message Log Length",
                 },
                 new StringPropertyMetadata("StartupTownName")
                 {
                     DefaultValue = null,
                     Description = "Returns the name of the town where the player will start, ignoring whether or not that town is a startup town; or null, for a random town to be choosen from the available startup towns.",
                     IsNullable = true,
+                    Title = "Startup Town Name",
                 },
                 new CollectionPropertyMetadata("Towns")
                 {
@@ -31,6 +33,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.",
                     IsNullable = true,
+                    Title = "Towns",
                 },
                 new CollectionPropertyMetadata("Shopkeepers")
                 {
@@ -39,6 +42,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Shopkeepers",
                 },
                 new CollectionPropertyMetadata("GameCommands")
                 {
@@ -47,6 +51,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Game Commands",
                 },
                 new CollectionPropertyMetadata("StoreCommands")
                 {
@@ -55,6 +60,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Store Commands",
                 },
                 new CollectionPropertyMetadata("HelpGroups")
                 {
@@ -63,6 +69,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Help Groups",
                 },
                 new CollectionPropertyMetadata("MonsterRaces")
                 {
@@ -71,6 +78,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Monster Races",
                 },
                 new CollectionPropertyMetadata("Symbols")
                 {
@@ -79,6 +87,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Symbols",
                 },
                 new CollectionPropertyMetadata("Vaults")
                 {
@@ -87,6 +96,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Vaults",
                 },
                 new CollectionPropertyMetadata("DungeonGuardians")
                 {
@@ -95,6 +105,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Dungeon Guardians",
                 },
                 new CollectionPropertyMetadata("Dungeons")
                 {
@@ -103,14 +114,16 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Dungeons",
                 },
                 new CollectionPropertyMetadata("StoreFactories")
                 {
                     PropertyMetadatas = StoreFactoryMetadata.Metadata,
                     EntityTitle = "StoreFactory",
                     KeyPropertyName = "Key",
-                    Description = "",
+                    Description = "Towns have various plots where buildings and/or stores may be placed.  Stores factories are used to create specific stores.  Store factories can produce more than one store per town.  Use this collection to define factories that are used to create stores.",
                     IsNullable = true,
+                    Title = "Store Factories",
                 },
                 new CollectionPropertyMetadata("ProjectileGraphics")
                 {
@@ -119,6 +132,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Projectile Graphics",
                 },
                 new CollectionPropertyMetadata("AmuletReadableFlavors")
                 {
@@ -127,6 +141,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Amulet Readable Flavors",
                 },
                 new CollectionPropertyMetadata("MushroomReadableFlavors")
                 {
@@ -135,6 +150,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Mushroom Readable Flavors",
                 },
                 new CollectionPropertyMetadata("PotionReadableFlavors")
                 {
@@ -143,6 +159,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Potion Readable Flavors",
                 },
                 new CollectionPropertyMetadata("RingReadableFlavors")
                 {
@@ -151,6 +168,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Ring Readable Flavors",
                 },
                 new CollectionPropertyMetadata("RodReadableFlavors")
                 {
@@ -159,6 +177,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Rod Readable Flavors",
                 },
                 new CollectionPropertyMetadata("ScrollReadableFlavors")
                 {
@@ -167,6 +186,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Scroll Readable Flavors",
                 },
                 new CollectionPropertyMetadata("StaffReadableFlavors")
                 {
@@ -175,6 +195,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Staff Readable Flavors",
                 },
                 new CollectionPropertyMetadata("WandReadableFlavors")
                 {
@@ -183,6 +204,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Wand Readable Flavors",
                 },
                 new CollectionPropertyMetadata("ClassSpells")
                 {
@@ -191,6 +213,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Class Spells",
                 },
                 new CollectionPropertyMetadata("WizardCommands")
                 {
@@ -199,6 +222,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Wizard Commands",
                 },
                 new CollectionPropertyMetadata("Tiles")
                 {
@@ -207,6 +231,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Tiles",
                 },
                 new CollectionPropertyMetadata("Animations")
                 {
@@ -215,6 +240,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Animations",
                 },
                 new CollectionPropertyMetadata("Spells")
                 {
@@ -223,6 +249,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Spells",
                 },
                 new CollectionPropertyMetadata("Plurals")
                 {
@@ -231,6 +258,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Plurals",
                 },
                 new CollectionPropertyMetadata("Attacks")
                 {
@@ -239,6 +267,7 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Attacks",
                 },
                 new CollectionPropertyMetadata("Gods")
                 {
@@ -247,96 +276,112 @@ public static class GameConfigurationMetadata
                     KeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Gods",
                 },
                 new StringsPropertyMetadata("ElvishTexts")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Elvish Texts",
                 },
                 new StringsPropertyMetadata("FindQuests")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Find Quests",
                 },
                 new StringsPropertyMetadata("FunnyComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Funny Comments",
                 },
                 new StringsPropertyMetadata("FunnyDescriptions")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Funny Descriptions",
                 },
                 new StringsPropertyMetadata("HorrificDescriptions")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Horrific Descriptions",
                 },
                 new StringsPropertyMetadata("InsultPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Insult Player Attacks",
                 },
                 new StringsPropertyMetadata("MoanPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Moan Player Attacks",
                 },
                 new StringsPropertyMetadata("UnreadableFlavorSyllables")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Unreadable Flavor Syllables",
                 },
                 new StringsPropertyMetadata("ShopkeeperAcceptedComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Shopkeeper Accepted Comments",
                 },
                 new StringsPropertyMetadata("ShopkeeperBargainComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Shopkeeper Bargain Comments",
                 },
                 new StringsPropertyMetadata("ShopkeeperGoodComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Shopkeeper Good Comments",
                 },
                 new StringsPropertyMetadata("ShopkeeperLessThanGuessComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Shopkeeper Less Than Guess Comments",
                 },
                 new StringsPropertyMetadata("ShopkeeperWorthlessComments")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Shopkeeper Worthless Comments",
                 },
                 new StringsPropertyMetadata("SingingPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Singing Player Attacks",
                 },
                 new StringsPropertyMetadata("WorshipPlayerAttacks")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Worship Player Attacks",
                 },
             };
         }

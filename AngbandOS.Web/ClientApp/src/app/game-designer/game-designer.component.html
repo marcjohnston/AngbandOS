@@ -1,10 +1,10 @@
 <div id="container">
   <app-nav-menu></app-nav-menu>
-  <h6>Game Configuration Designer</h6>
-  <ng-container *ngIf="configuration !== undefined">
+  <h6 class="window-left-right-margins">Game Configuration Designer</h6>
+  <div class="window-left-right-margins" *ngIf="configuration !== undefined">
     {{isModified ? '--MODIFIED--' : "--unchanged--"}}
-  </ng-container>
-  <div id="component-window">
+  </div>
+  <div id="component-window" class="window-left-right-margins">
     <ng-container *ngIf="rootTreeNodes !== undefined">
       <div id="tree-panel">
         <table>

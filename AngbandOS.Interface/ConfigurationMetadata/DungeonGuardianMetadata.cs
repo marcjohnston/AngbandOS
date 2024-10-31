@@ -17,18 +17,21 @@ public static class DungeonGuardianMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new StringPropertyMetadata("MonsterRaceName")
                 {
                     DefaultValue = null,
                     Description = "Returns the name of the race for the first quest monster.",
                     IsNullable = false,
+                    Title = "Monster Race Name",
                 },
                 new IntegerPropertyMetadata("LevelFound")
                 {
                     DefaultValue = null,
                     Description = "The level for the fixed quest.",
                     IsNullable = false,
+                    Title = "Level Found",
                 },
             };
         }

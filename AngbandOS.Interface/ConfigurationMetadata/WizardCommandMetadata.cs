@@ -17,36 +17,42 @@ public static class WizardCommandMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new CharacterPropertyMetadata("KeyChar")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key Char",
                 },
                 new BooleanPropertyMetadata("IsEnabled")
                 {
                     DefaultValue = true,
                     Description = "",
                     IsNullable = false,
+                    Title = "Is Enabled",
                 },
                 new StringPropertyMetadata("HelpGroupName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Help Group Name",
                 },
                 new StringPropertyMetadata("HelpDescription")
                 {
                     DefaultValue = "",
                     Description = "",
                     IsNullable = false,
+                    Title = "Help Description",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Execute Script Name",
                 },
             };
         }

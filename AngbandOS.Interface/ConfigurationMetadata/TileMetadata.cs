@@ -17,282 +17,329 @@ public static class TileMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new StringPropertyMetadata("StepOnScriptName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Step On Script Name",
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
                     DefaultValue = null,
                     Description = "Returns the name of the symbol to be used for rendering.  This property is bound to the Symbol property during binding.",
                     IsNullable = false,
+                    Title = "Symbol Name",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "Returns the color to render the tile as.  Returns white, by default.",
                     IsNullable = false,
+                    Title = "Color",
                 },
                 new BooleanPropertyMetadata("IsWildPath")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Is Wild Path",
                 },
                 new BooleanPropertyMetadata("IsPath")
                 {
                     DefaultValue = false,
                     Description = "Returns true for all path tiles; false, otherwise.  Returns false, by default.  PathBase, PathBorderEW, PathBorderNS, PathEW, PathJunction and PathNS return true.",
                     IsNullable = false,
+                    Title = "Is Path",
                 },
                 new BooleanPropertyMetadata("IsTreasure")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Is Treasure",
                 },
                 new BooleanPropertyMetadata("BlocksScent")
                 {
                     DefaultValue = null,
                     Description = "Returns true, if the tile type blocks the scent trail.  Defaults to return true, if the tile type blocks line of sight; false, otherwise.  Secret doors typically block line of sight but will allow the scent to pass through.",
                     IsNullable = false,
+                    Title = "Blocks Scent",
                 },
                 new StringPropertyMetadata("HiddenTreasureForTileName")
                 {
                     DefaultValue = null,
                     Description = "Returns null, if the tile type is not a hidden treasure; otherwise, when the tile is a hidden treasure, the visible tile type is returned.",
                     IsNullable = true,
+                    Title = "Hidden Treasure For Tile Name",
                 },
                 new BooleanPropertyMetadata("IsVisibleTreasure")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile type is a visible treasure.  Defaults to false.  Magma and quartz are treasure tile types.",
                     IsNullable = false,
+                    Title = "Is Visible Treasure",
                 },
                 new BooleanPropertyMetadata("IsBorder")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Is Border",
                 },
                 new BooleanPropertyMetadata("IsMagma")
                 {
                     DefaultValue = false,
                     Description = "",
                     IsNullable = false,
+                    Title = "Is Magma",
                 },
                 new StringPropertyMetadata("AlterActionName")
                 {
                     DefaultValue = null,
                     Description = "Returns the name of the single action to perform on the tile.",
                     IsNullable = true,
+                    Title = "Alter Action Name",
                 },
                 new StringPropertyMetadata("MimicTileName")
                 {
                     DefaultValue = null,
                     Description = "The name of the tile this tile should appear as when looked at; or null, if this tile is invisible/transparent.  Non-transparent, non-mimicing tiles will name themself.  Mimicing tiles will return a name for a different tile.  Transparent tile that are considered invisible will return null.  Invisible tiles will render the background feature.",
                     IsNullable = true,
+                    Title = "Mimic Tile Name",
                 },
                 new BooleanPropertyMetadata("BlocksLos")
                 {
                     DefaultValue = false,
                     Description = "The tile blocks line of sight.",
                     IsNullable = false,
+                    Title = "Blocks Los",
                 },
                 new StringPropertyMetadata("Description")
                 {
                     DefaultValue = null,
                     Description = "A text description of the tile.",
                     IsNullable = false,
+                    Title = "Description",
                 },
                 new BooleanPropertyMetadata("DimsOutsideLOS")
                 {
                     DefaultValue = false,
                     Description = "The the tile this one should appear to be when looked at.",
                     IsNullable = false,
+                    Title = "Dims Outside L O S",
                 },
                 new BooleanPropertyMetadata("IsBasicWall")
                 {
                     DefaultValue = false,
                     Description = "The tile is a basic (not permanent) dungeon wall.",
                     IsNullable = false,
+                    Title = "Is Basic Wall",
                 },
                 new BooleanPropertyMetadata("IsVisibleDoor")
                 {
                     DefaultValue = false,
                     Description = "Returns true for all visible doors (locked and jammed); false, otherwise.  Secret doors return false; all other doors return true.",
                     IsNullable = false,
+                    Title = "Is Visible Door",
                 },
                 new IntegerPropertyMetadata("LockLevel")
                 {
                     DefaultValue = 0,
                     Description = "",
                     IsNullable = false,
+                    Title = "Lock Level",
                 },
                 new BooleanPropertyMetadata("IsInteresting")
                 {
                     DefaultValue = false,
                     Description = "The tile is 'interesting' and should be noticed when the player looks around.",
                     IsNullable = false,
+                    Title = "Is Interesting",
                 },
                 new BooleanPropertyMetadata("IsOpenFloor")
                 {
                     DefaultValue = false,
                     Description = "The tile is open floor safe to drop items on.",
                     IsNullable = false,
+                    Title = "Is Open Floor",
                 },
                 new BooleanPropertyMetadata("IsPassable")
                 {
                     DefaultValue = false,
                     Description = "A text description of the tile.",
                     IsNullable = false,
+                    Title = "Is Passable",
                 },
                 new BooleanPropertyMetadata("IsPermanent")
                 {
                     DefaultValue = false,
                     Description = "A text description of the tile.",
                     IsNullable = false,
+                    Title = "Is Permanent",
                 },
                 new BooleanPropertyMetadata("IsShop")
                 {
                     DefaultValue = false,
                     Description = "The tile is a shop entrance.",
                     IsNullable = false,
+                    Title = "Is Shop",
                 },
                 new BooleanPropertyMetadata("IsTrap")
                 {
                     DefaultValue = false,
                     Description = "The tile is a known trap.",
                     IsNullable = false,
+                    Title = "Is Trap",
                 },
                 new BooleanPropertyMetadata("IsWall")
                 {
                     DefaultValue = false,
                     Description = "The tile is a wall (not including a secret door).",
                     IsNullable = false,
+                    Title = "Is Wall",
                 },
                 new BooleanPropertyMetadata("IsWater")
                 {
                     DefaultValue = false,
                     Description = "The tile is water.",
                     IsNullable = false,
+                    Title = "Is Water",
                 },
                 new BooleanPropertyMetadata("IsRock")
                 {
                     DefaultValue = false,
                     Description = "The tile is rock.",
                     IsNullable = false,
+                    Title = "Is Rock",
                 },
                 new BooleanPropertyMetadata("IsDownStaircase")
                 {
                     DefaultValue = false,
                     Description = "The tile is a down staircase.",
                     IsNullable = false,
+                    Title = "Is Down Staircase",
                 },
                 new BooleanPropertyMetadata("IsUpStaircase")
                 {
                     DefaultValue = false,
                     Description = "The tile is a up staircase.",
                     IsNullable = false,
+                    Title = "Is Up Staircase",
                 },
                 new BooleanPropertyMetadata("IsGrass")
                 {
                     DefaultValue = false,
                     Description = "The tile is grass.",
                     IsNullable = false,
+                    Title = "Is Grass",
                 },
                 new BooleanPropertyMetadata("HasWater")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.",
                     IsNullable = false,
+                    Title = "Has Water",
                 },
                 new IntegerPropertyMetadata("MapPriority")
                 {
                     DefaultValue = null,
                     Description = "The priority on the map.",
                     IsNullable = false,
+                    Title = "Map Priority",
                 },
                 new BooleanPropertyMetadata("RunPast")
                 {
                     DefaultValue = false,
                     Description = "The player will run past the tile rather than stopping at it.",
                     IsNullable = false,
+                    Title = "Run Past",
                 },
                 new BooleanPropertyMetadata("YellowInTorchlight")
                 {
                     DefaultValue = false,
                     Description = "The tile this one should appear to be when looked at.",
                     IsNullable = false,
+                    Title = "Yellow In Torchlight",
                 },
                 new BooleanPropertyMetadata("IsRevealedWithDetectStairsScript")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile should be revealed with the detect stairs script.  Returns false, by default.  UpStairs and DownStairs tiles return true.",
                     IsNullable = false,
+                    Title = "Is Revealed With Detect Stairs Script",
                 },
                 new BooleanPropertyMetadata("AllowMonsterToOccupy")
                 {
                     DefaultValue = true,
                     Description = "Returns true, if the tile allows a monster to occupy it.  Returns true, by default.  YellowSignSigils and ElderSignSigils return false.",
                     IsNullable = false,
+                    Title = "Allow Monster To Occupy",
                 },
                 new BooleanPropertyMetadata("IsSecretDoor")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is a secret door.  Returns false, by default.  Secret doors return true.",
                     IsNullable = false,
+                    Title = "Is Secret Door",
                 },
                 new BooleanPropertyMetadata("IsClosedDoor")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is a closed door.  Returns false, by default.  Locked doors all return true.  Jammed doors return false.  Returns false, by default.",
                     IsNullable = false,
+                    Title = "Is Closed Door",
                 },
                 new BooleanPropertyMetadata("IsJammedClosedDoor")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is a door that is jammed closed.  Returns false, by default.  Jammed doors all return true.",
                     IsNullable = false,
+                    Title = "Is Jammed Closed Door",
                 },
                 new BooleanPropertyMetadata("IsTrapDoor")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is a trap door.  Returns false, by default.  Trap doors all return true.",
                     IsNullable = false,
+                    Title = "Is Trap Door",
                 },
                 new BooleanPropertyMetadata("IsRubble")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is rubble.  Returns false, by default.  Rubble returns true.",
                     IsNullable = false,
+                    Title = "Is Rubble",
                 },
                 new BooleanPropertyMetadata("IsOpenDoor")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is an open door.  Returns false, by default.  Open and broken doors returns true.",
                     IsNullable = false,
+                    Title = "Is Open Door",
                 },
                 new BooleanPropertyMetadata("IsVein")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is a vein.  Returns false, by default.  Magma hidden treasure, magma, magma visible treasure, quartz hidden, quartz and quartz visible treasure tiles all returns true.",
                     IsNullable = false,
+                    Title = "Is Vein",
                 },
                 new BooleanPropertyMetadata("IsUnidentifiedTrap")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is an unidentified trap.  Returns false, by default.  Invisible traps return true.",
                     IsNullable = false,
+                    Title = "Is Unidentified Trap",
                 },
                 new BooleanPropertyMetadata("IsTree")
                 {
                     DefaultValue = false,
                     Description = "Returns true, if the tile is a tree.  Returns false, by default.  Bush, scarecrow, signpost and tree tiles all return true.",
                     IsNullable = false,
+                    Title = "Is Tree",
                 },
             };
         }

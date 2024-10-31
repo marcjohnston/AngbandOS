@@ -17,18 +17,21 @@ public static class HelpGroupMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new IntegerPropertyMetadata("SortIndex")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Sort Index",
                 },
                 new StringPropertyMetadata("Title")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Title",
                 },
             };
         }

@@ -17,48 +17,56 @@ public static class VaultMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = ColorEnum.White,
                     Description = "",
                     IsNullable = false,
+                    Title = "Color",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Name",
                 },
                 new IntegerPropertyMetadata("Category")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Category",
                 },
                 new IntegerPropertyMetadata("Height")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Height",
                 },
                 new IntegerPropertyMetadata("Rating")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Rating",
                 },
                 new StringPropertyMetadata("Text")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Text",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Width",
                 },
             };
         }

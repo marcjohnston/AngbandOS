@@ -17,30 +17,35 @@ public static class ReadableFlavorMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Symbol Name",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Color",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Name",
                 },
                 new BooleanPropertyMetadata("CanBeAssigned")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Can Be Assigned",
                 },
             };
         }

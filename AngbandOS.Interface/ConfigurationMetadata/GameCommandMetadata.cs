@@ -17,30 +17,35 @@ public static class GameCommandMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new CharacterPropertyMetadata("KeyChar")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key Char",
                 },
                 new IntegerPropertyMetadata("Repeat")
                 {
                     DefaultValue = 0,
                     Description = "",
                     IsNullable = true,
+                    Title = "Repeat",
                 },
                 new BooleanPropertyMetadata("IsEnabled")
                 {
                     DefaultValue = true,
                     Description = "",
                     IsNullable = false,
+                    Title = "Is Enabled",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Execute Script Name",
                 },
             };
         }

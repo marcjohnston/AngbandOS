@@ -17,30 +17,35 @@ public static class StoreCommandMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
                 new CharacterPropertyMetadata("KeyChar")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key Char",
                 },
                 new StringPropertyMetadata("Description")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Description",
                 },
                 new StringsPropertyMetadata("ValidStoreFactoryNames")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Valid Store Factory Names",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Execute Script Name",
                 },
             };
         }

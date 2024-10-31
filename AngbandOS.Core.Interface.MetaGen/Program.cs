@@ -83,7 +83,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             }
             break;
         case StringsPropertyMetadata genericStringArrayPropertyMetadata:
-            writer.WriteLine($"{indentation}new StringArrayPropertyMetadata(\"{genericStringArrayPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}new StringsPropertyMetadata(\"{genericStringArrayPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
             if (genericStringArrayPropertyMetadata.DefaultValue == null)
             {
@@ -107,7 +107,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             }
             break;
         case ColorPropertyMetadata genericColorEnumPropertyMetadata:
-            writer.WriteLine($"{indentation}new ColorEnumPropertyMetadata(\"{genericColorEnumPropertyMetadata.PropertyName}\")");
+            writer.WriteLine($"{indentation}new ColorPropertyMetadata(\"{genericColorEnumPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
             if (!genericColorEnumPropertyMetadata.DefaultValue.HasValue)
             {
@@ -129,7 +129,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
         case TuplePropertyMetadata genericTupleArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new TuplePropertyMetadata(\"{genericTupleArrayPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            writer.WriteLine($"{indentation}    DataTypes = new PropertyMetadata[]");
+            writer.WriteLine($"{indentation}    Types = new PropertyMetadata[]");
             writer.WriteLine($"{indentation}    {{");
             foreach (PropertyMetadata tuplePropertyMetadata in genericTupleArrayPropertyMetadata.Types)
             {
@@ -165,6 +165,14 @@ PropertyMetadata[] ParseClass(string classFilename)
     List<string> returnsList = new List<string>();
     string? category = null;
     string? title = null;
+
+    void ResetXMLComments()
+    {
+        descriptionList.Clear();
+        title = null;
+        category = null;
+    }
+
     foreach (string line in text)
     {
         string trimmedLine = line.Trim();
@@ -232,9 +240,8 @@ PropertyMetadata[] ParseClass(string classFilename)
             }
 
             // Reset the XML comments.
-            descriptionList.Clear();
-            title = null;
-            category = null;
+            ResetXMLComments();
+
             continue; // Skip the rest of the processing.
         }
         // Is this a property.
@@ -266,6 +273,13 @@ PropertyMetadata[] ParseClass(string classFilename)
             // Get the name of the property.
             string name = tokens[tokenIndex];
 
+            // Check to see if we need to provide a default title.
+            if (title == null)
+            {
+                // Add a space before each word in the property name using pascal case.
+                title = Regex.Replace(name, "(?<!^)([A-Z])", " $1");
+            }
+
             // Check if the virtual keyword was specified.
             int leadingTokensToSkip = 1; // Skip the public keyword.
             if (tokens[1] == "virtual")
@@ -276,13 +290,6 @@ PropertyMetadata[] ParseClass(string classFilename)
             string fullDataType = String.Join(" ", tokens.Skip(leadingTokensToSkip).Take(tokenIndex - leadingTokensToSkip));
             (string dataType, bool isNullable, bool isArray) = ParseDataType(fullDataType);
             string description = String.Join(' ', descriptionList);
-
-            // Check to see if we need to provide a default title.
-            if (title == null)
-            {
-                // Add a space before each word in the property name using pascal case.
-                title = Regex.Replace(name, "(?<!^)([A-Z])", " $1");
-            }
 
             // Detect a tuple
             if (dataType.StartsWith("("))
@@ -312,6 +319,7 @@ PropertyMetadata[] ParseClass(string classFilename)
 
                     string tupleName = "";
                     string tupleDescription = "";
+
                     // Check to see if a name was provided.
                     if (dataTypeAndNameTokens.Length > 1)
                     {
@@ -324,8 +332,9 @@ PropertyMetadata[] ParseClass(string classFilename)
                             tupleDescription = matchingDescriptionTokens[1].Trim();
                         }
                     }
+                    string tupleTitle = Regex.Replace(tupleName, "(?<!^)([A-Z])", " $1");
 
-                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, title, defaultValueParsedString);
+                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString);
                     if (propertyMetadata == null)
                     {
                         throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
@@ -369,9 +378,7 @@ PropertyMetadata[] ParseClass(string classFilename)
 
             }
 
-            descriptionList.Clear();
-            title = null;
-            category = null;
+            ResetXMLComments();
         }
     }
     return propertyMetadatas.ToArray();

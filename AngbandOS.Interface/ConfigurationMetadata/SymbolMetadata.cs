@@ -17,24 +17,28 @@ public static class SymbolMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Character",
                 },
                 new CharacterPropertyMetadata("QueryCharacter")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = true,
+                    Title = "Query Character",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Name",
                 },
                 new StringPropertyMetadata("Key")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
             };
         }

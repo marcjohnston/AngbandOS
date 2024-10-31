@@ -17,24 +17,28 @@ public static class GodMetadata
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Long Name",
                 },
                 new StringPropertyMetadata("ShortName")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Short Name",
                 },
                 new StringPropertyMetadata("FavorDescription")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Favor Description",
                 },
                 new StringPropertyMetadata("Key")
                 {
                     DefaultValue = null,
                     Description = "",
                     IsNullable = false,
+                    Title = "Key",
                 },
             };
         }

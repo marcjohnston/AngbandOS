@@ -12,7 +12,7 @@
     <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-type-foreign-key>
   </div>
   <!-- String Array -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'string-array'">
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'strings'">
     <app-game-designer-type-string-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string-array>
   </div>
   <!-- String -->
@@ -24,7 +24,7 @@
     <app-game-designer-type-boolean [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-boolean>
   </div>
   <!-- Tuple Array -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'tuple-array'">
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
     <app-game-designer-type-tuple-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-tuple-array>
   </div>
   <!-- Integer -->
