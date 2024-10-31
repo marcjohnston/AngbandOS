@@ -10,8 +10,6 @@ if (args.Length < 2)
     Environment.Exit(1); // Invalid arguments.
 }
 
-"D:\OneDrive\Programming" "D:\OneDrive\Programming\"
-
 string configurationName = args[0];
 string outputFolder = args[1];
 
