@@ -41,6 +41,9 @@ public class GameConfiguration
 
     public DungeonGameConfiguration[]? Dungeons { get; set; } = null;
 
+    /// <summary>
+    /// Towns have various plots where buildings and/or stores may be placed.  Stores factories are used to create specific stores.  Store factories can produce more than one store per town.  Use this collection to define factories that are used to create stores.
+    /// </summary>
     public StoreFactoryGameConfiguration[]? StoreFactories { get; set; } = null;
 
     public ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
