@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
+using System.Text.RegularExpressions;
 
 string configurationName = args[0];
 string outputFolder = args[1];
@@ -275,6 +276,13 @@ PropertyMetadata[] ParseClass(string classFilename)
             string fullDataType = String.Join(" ", tokens.Skip(leadingTokensToSkip).Take(tokenIndex - leadingTokensToSkip));
             (string dataType, bool isNullable, bool isArray) = ParseDataType(fullDataType);
             string description = String.Join(' ', descriptionList);
+
+            // Check to see if we need to provide a default title.
+            if (title == null)
+            {
+                // Add a space before each word in the property name using pascal case.
+                string result = Regex.Replace(name, "(?<!^)([A-Z])", " $1");
+            }
 
             // Detect a tuple
             if (dataType.StartsWith("("))
