@@ -15,6 +15,19 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public addTuple() {
+    const newTupleValue: any[] = [];
+    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
+      newTupleValue.push(tuplePropertyMetadata.defaultValue);
+    }
+    this.activePropertyMetadataAndConfiguration?.configuration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].push(newTupleValue);
+  }
+
+  public deleteTuple(index: number) {
+    this.activePropertyMetadataAndConfiguration?.configuration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].splice(index, 1);
+  }
+
   /**
    * Returns a new PropertyMetadataAndConfiguration object from a child property that references a tuple.
    * @param propertyMetadata

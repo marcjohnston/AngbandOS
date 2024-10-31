@@ -1,22 +1,39 @@
 <ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
   <table id="tuple-table">
-    <tr>
-      <!-- Tuple table header -->
-      <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
-        <td>
-          <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
-        </td>
-      </ng-container>
-    </tr>
-    <!-- Tuple table rows of configuration values -->
-    <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]">
+    <thead>
       <tr>
-        <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas; let tupleIndex = index">
+        <!-- Tuple table header -->
+        <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
           <td>
-            <app-game-designer-type [activePropertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)"></app-game-designer-type>
+            <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
           </td>
         </ng-container>
+        <td></td> <!-- Action icons -->
       </tr>
+    </thead>
+    <tbody>
+      <!-- Tuple table rows of configuration values -->
+      <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let index=index">
+        <tr>
+          <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas; let tupleIndex=index">
+            <td>
+              <app-game-designer-type [activePropertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)"></app-game-designer-type>
+            </td>
+          </ng-container>
+          <td>
+            <mat-icon class="game-designer-delete-icon" title="Delete this setting." (click)="deleteTuple(index)">delete</mat-icon>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas !== null">
+      <tfoot>
+        <tr>
+          <td [attr.colspan]="activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas.length + 1">
+            <mat-icon class="game-designer-add-icon" title="Add new setting." (click)="addTuple()">add</mat-icon>
+          </td>
+        </tr>
+      </tfoot>
     </ng-container>
   </table>
 </ng-container>
