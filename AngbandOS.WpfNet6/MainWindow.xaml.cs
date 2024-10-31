@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

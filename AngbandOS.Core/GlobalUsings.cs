@@ -94,3 +94,4 @@ global using AngbandOS.Core.Widgets;
 global using AngbandOS.Core.WizardCommands;
 
 global using AngbandOS.Core.Interface;
+global using AngbandOS.Core.Interface.Configuration;

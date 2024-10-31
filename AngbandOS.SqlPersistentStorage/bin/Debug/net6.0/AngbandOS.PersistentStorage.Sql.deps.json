@@ -9,6 +9,7 @@
       "AngbandOS.PersistentStorage.Sql/1.0.0": {
         "dependencies": {
           "AngbandOS.Core.Interface": "1.0.0",
+          "AngbandOS.Core.Interface.Configuration": "1.0.0",
           "AngbandOS.Web.Interface": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "6.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.8"
@@ -484,6 +485,14 @@
           "AngbandOS.Core.Interface.dll": {}
         }
       },
+      "AngbandOS.Core.Interface.Configuration/1.0.0": {
+        "dependencies": {
+          "AngbandOS.Core.Interface": "1.0.0"
+        },
+        "runtime": {
+          "AngbandOS.Core.Interface.Configuration.dll": {}
+        }
+      },
       "AngbandOS.Web.Interface/1.0.0": {
         "runtime": {
           "AngbandOS.Web.Interface.dll": {}
@@ -792,6 +801,11 @@
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
     "AngbandOS.Core.Interface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AngbandOS.Core.Interface.Configuration/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

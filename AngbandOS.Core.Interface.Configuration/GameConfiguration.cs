@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Interface.Configuration;
 
 /// <summary>
 /// Represents an interface that describes the configuration data that the GameServer.Play method accepts.  This configuration data is used to completely

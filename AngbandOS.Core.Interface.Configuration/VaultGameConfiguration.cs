@@ -6,26 +6,23 @@
 // copies. Other copyrights may also apply.”
 
 
-namespace AngbandOS.Core.Interface;
+namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class DungeonGuardianGameConfiguration
+public class VaultGameConfiguration
 {
     public virtual string Key { get; set; }
-
-    /// <summary>
-    /// Returns the name of the race for the first quest monster.
-    /// </summary>
-    public virtual string MonsterRaceName { get; set; }
-
-    /// <summary>
-    /// The level for the fixed quest.
-    /// </summary>
-    public virtual int LevelFound { get; set; }
+    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
+    public virtual string Name { get; set; }
+    public virtual int Category { get; set; }
+    public virtual int Height { get; set; }
+    public virtual int Rating { get; set; }
+    public virtual string Text { get; set; }
+    public virtual int Width { get; set; }
 
     //public bool IsValid()
     //{
-    //    if (Key == null || MonsterRaceName == null || LevelFound == null)
+    //    if (Key == null || Color == null || Name == null || Category == null || Height == null || Rating == null || Text == null || Width == null)
     //    {
     //        return false;
     //    }

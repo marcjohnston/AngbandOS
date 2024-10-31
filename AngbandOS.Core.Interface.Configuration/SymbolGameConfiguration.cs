@@ -6,24 +6,20 @@
 // copies. Other copyrights may also apply.”
 
 
-namespace AngbandOS.Core.Interface;
+namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ShopkeeperGameConfiguration
+public class SymbolGameConfiguration
 {
-    public virtual string Key { get; set; }
-
-    public virtual int MaxCost { get; set; }
-
-    public virtual int MinInflate { get; set; }
-
+    public virtual char Character { get; set; }
+    public virtual char? QueryCharacter { get; set; } = null;
     public virtual string Name { get; set; }
 
-    public virtual string? RaceName { get; set; }
+    public virtual string Key { get; set; }
 
     //public bool IsValid()
     //{
-    //    if (Key == null || MaxCost == null || MinInflate == null || Name == null)
+    //    if (Key == null || Character == null || Name == null)
     //    {
     //        return false;
     //    }

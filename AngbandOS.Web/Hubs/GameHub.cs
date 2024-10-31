@@ -1,4 +1,4 @@
-﻿using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Connections;
@@ -40,7 +40,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                await GameService.PlayNewGameAsync(Context, user.Id, new Core.Interface.GameConfiguration(), user.UserName);
+                await GameService.PlayNewGameAsync(Context, user.Id, new Core.Interface.Configuration.GameConfiguration(), user.UserName);
             }
         }
 

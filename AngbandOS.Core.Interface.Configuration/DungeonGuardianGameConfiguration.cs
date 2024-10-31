@@ -5,23 +5,27 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.ComponentModel.DataAnnotations;
 
-namespace AngbandOS.Core.Interface;
-
+namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class StoreCommandGameConfiguration
+public class DungeonGuardianGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual char KeyChar { get; set; }
-    public virtual string Description { get; set; }
-    public virtual string[]? ValidStoreFactoryNames { get; set; }
-    public virtual string? ExecuteScriptName { get; set; }
+
+    /// <summary>
+    /// Returns the name of the race for the first quest monster.
+    /// </summary>
+    public virtual string MonsterRaceName { get; set; }
+
+    /// <summary>
+    /// The level for the fixed quest.
+    /// </summary>
+    public virtual int LevelFound { get; set; }
 
     //public bool IsValid()
     //{
-    //    if (Key == null || KeyChar == null || Description == null)
+    //    if (Key == null || MonsterRaceName == null || LevelFound == null)
     //    {
     //        return false;
     //    }

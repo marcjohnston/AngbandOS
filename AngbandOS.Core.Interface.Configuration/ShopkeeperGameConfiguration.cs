@@ -6,25 +6,27 @@
 // copies. Other copyrights may also apply.”
 
 
-namespace AngbandOS.Core.Interface;
+namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class WizardCommandGameConfiguration
+public class ShopkeeperGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual char KeyChar { get; set; }
-    public virtual bool IsEnabled { get; set; } = true;
-    public virtual string? HelpGroupName { get; set; } = null;
-    public virtual string HelpDescription { get; set; } = "";
-    public virtual string? ExecuteScriptName { get; set; } = null;
+
+    public virtual int MaxCost { get; set; }
+
+    public virtual int MinInflate { get; set; }
+
+    public virtual string Name { get; set; }
+
+    public virtual string? RaceName { get; set; }
 
     //public bool IsValid()
     //{
-    //    if (Key == null || KeyChar == null || IsEnabled == null || HelpDescription == null)
+    //    if (Key == null || MaxCost == null || MinInflate == null || Name == null)
     //    {
     //        return false;
     //    }
     //    return true;
     //}
 }
-

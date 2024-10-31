@@ -163,7 +163,7 @@ namespace AngbandOS.PersistentStorage
         /// <param name="configurationName"></param>
         /// <param name="overwrite"></param>
         /// <returns>False, if the configuration exists and the <param "overwrite"/> parameter is false; true, if the operation completes successfully.</returns>
-        public bool PersistGameConfiguration(Core.Interface.GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        public bool PersistGameConfiguration(Core.Interface.Configuration.GameConfiguration gameConfiguration, string configurationName, bool overwrite)
         {
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
 
@@ -198,7 +198,7 @@ namespace AngbandOS.PersistentStorage
             return true;
         }
 
-        public Core.Interface.GameConfiguration LoadConfiguration()
+        public Core.Interface.Configuration.GameConfiguration LoadConfiguration()
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface.Configuration;
 using System.Text.Json;
 
 namespace AngbandOS.PersistentStorage

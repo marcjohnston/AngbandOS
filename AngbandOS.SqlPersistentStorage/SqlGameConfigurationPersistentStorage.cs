@@ -1,4 +1,4 @@
-﻿using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.PersistentStorage.Sql.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -94,7 +94,7 @@ namespace AngbandOS.PersistentStorage
         /// <param name="configurationName"></param>
         /// <param name="overwrite"></param>
         /// <returns>False, if the configuration exists and the <param "overwrite"/> parameter is false; true, if the operation completes successfully.</returns>
-        public bool PersistGameConfiguration(Core.Interface.GameConfiguration gameConfiguration, string? username, string configurationName, bool overwrite)
+        public bool PersistGameConfiguration(Core.Interface.Configuration.GameConfiguration gameConfiguration, string? username, string configurationName, bool overwrite)
         {
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
 
@@ -163,9 +163,9 @@ namespace AngbandOS.PersistentStorage
             return values;
         }
 
-        public Core.Interface.GameConfiguration LoadConfiguration(string? username, string configurationName)
+        public Core.Interface.Configuration.GameConfiguration LoadConfiguration(string? username, string configurationName)
         {
-            return new Core.Interface.GameConfiguration()
+            return new Core.Interface.Configuration.GameConfiguration()
             {
                 AmuletReadableFlavors = LoadEntities<ReadableFlavorGameConfiguration>("AmuletReadableFlavors"),
                 Animations = LoadEntities<AnimationGameConfiguration>("Animations"),

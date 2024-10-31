@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface.Configuration;
 
 namespace AngbandOS.PersistentStorage
 {

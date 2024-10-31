@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.Core.Interface.Metadata;
 using AngbandOS.PersistentStorage;
 using AngbandOS.Web.Hubs;

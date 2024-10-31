@@ -6,14 +6,15 @@
 // copies. Other copyrights may also apply.”
 
 
-namespace AngbandOS.Core.Interface;
+namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ReadableFlavorGameConfiguration
+public class ClassSpellGameConfiguration
 {
-    public virtual string Key { get; set; }
-    public virtual string SymbolName { get; set; }
-    public virtual ColorEnum Color { get; set; }
-    public virtual string Name { get; set; }
-    public virtual bool CanBeAssigned { get; set; }
+    public virtual string SpellName { get; set; }
+    public virtual string CharacterClassName { get; set; }
+    public virtual int Level { get; set; }
+    public virtual int ManaCost { get; set; }
+    public virtual int BaseFailure { get; set; }
+    public virtual int FirstCastExperience { get; set; }
 }

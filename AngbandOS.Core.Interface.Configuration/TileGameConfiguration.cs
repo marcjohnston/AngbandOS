@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
 public class TileGameConfiguration
