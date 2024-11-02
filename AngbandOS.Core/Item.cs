@@ -691,6 +691,10 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public bool IsRandomArtifact => RandomArtifactName != null;
 
+    /// <summary>
+    /// Takes an item that is the same <see cref="CanAbsorb" and adds it./>
+    /// </summary>
+    /// <param name="other"></param>
     public void Absorb(Item other)
     {
         int total = Count + other.Count;
@@ -933,7 +937,7 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Returns true, if two objects can be absorbed into one for the home store.
+    /// Returns true, if two objects are identical and can be grouped together in inventory listings (e.g. 5 wooden torches).
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>

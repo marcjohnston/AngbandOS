@@ -14465,23 +14465,31 @@ public bool IsDead = false;
     public int InvenCarry(Item oPtr)
     {
         int j;
-        int n = -1;
-        for (j = 0; j < InventorySlot.PackCount; j++)
+        int n = -1; // TODO: This is bad.
+        for (j = 0; j < InventorySlot.PackCount; j++) // TODO: Why is this < PackCount and not <= PackCount.  This prevents us from grouping items in the last slot
         {
             Item? jPtr = GetInventoryItem(j);
+
+            // Check to see if this slot is empty.
             if (jPtr == null)
             {
+                // It is empty, lets use it.
                 continue;
             }
             n = j;
+
+            // Check to see if the item is the same as an existing item, so that it can be grouped.
             if (oPtr.CanAbsorb(jPtr))
             {
+                // Group it together.
                 jPtr.Absorb(oPtr);
                 WeightCarried += oPtr.Count * oPtr.Weight;
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                 return j;
             }
         }
+
+        // Check to see if we scanned every slot.
         if (_invenCnt > InventorySlot.PackCount)
         {
             return -1;
