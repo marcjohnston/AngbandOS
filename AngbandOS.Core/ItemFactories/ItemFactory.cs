@@ -1120,6 +1120,11 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public abstract int PackSort { get; }
 
     /// <summary>
+    /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
+    /// </summary>
+    public virtual BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
+
+    /// <summary>
     /// Returns true, if the destroy script should ask the player if known items from this factory should be destroyed by setting the applicable 
     /// broken stomp type to true; false, otherwise.  Returns true, by default.  Chests, weapons, armor and orbs of light return false.
     /// </summary>

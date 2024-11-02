@@ -24,6 +24,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
     public override bool IsMagical => true;
 
     protected override string ItemClassName => nameof(AmuletsItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(NeckInventorySlot));
     public override int PackSort => 17;
     public override int BaseValue => 45;
     public override ColorEnum Color => ColorEnum.Orange;

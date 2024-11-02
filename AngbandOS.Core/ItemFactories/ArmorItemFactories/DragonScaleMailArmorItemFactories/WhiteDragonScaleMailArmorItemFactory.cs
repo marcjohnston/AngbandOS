@@ -45,6 +45,7 @@ internal class WhiteDragonScaleMailArmorItemFactory : ArmorItemFactory
     /// </summary>
     public override int TreasureRating => 30;
     protected override string ItemClassName => nameof(DragonScaleMailsItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
     public override int PackSort => 19;
     public override bool HatesAcid => true;
 

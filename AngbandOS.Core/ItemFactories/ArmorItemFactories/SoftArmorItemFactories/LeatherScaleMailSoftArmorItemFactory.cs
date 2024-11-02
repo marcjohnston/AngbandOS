@@ -35,6 +35,7 @@ internal class LeatherScaleMailSoftArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.OnBody;
 
     protected override string ItemClassName => nameof(SoftArmorsItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
     public override int PackSort => 21;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

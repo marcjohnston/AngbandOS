@@ -34,6 +34,7 @@ internal class IronHelmArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.Head;
 
     protected override string ItemClassName => nameof(HelmsItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
     public override int PackSort => 25;
     public override bool HatesAcid => true;
 

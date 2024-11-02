@@ -38,6 +38,7 @@ internal class GemstoneLightSourceItemFactory : ItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.Lightsource;
     protected override string ItemClassName => nameof(LightSourcesItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
