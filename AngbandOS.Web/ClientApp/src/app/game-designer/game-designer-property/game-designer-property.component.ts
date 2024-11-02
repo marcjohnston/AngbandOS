@@ -16,6 +16,19 @@ export class GameDesignerPropertyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public addEntity() {
+    const newCollectionEntity: any[] = [];
+    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
+      newCollectionEntity.push(tuplePropertyMetadata.defaultValue);
+    }
+    this.activePropertyMetadataAndConfiguration?.configuration.push(newCollectionEntity);
+  }
+
+  public deleteEntity(index: number) {
+    this.activePropertyMetadataAndConfiguration?.configuration.splice(index, 1);
+  }
+
   /**
    * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.
    * @param propertyMetadata

@@ -9,13 +9,13 @@
       </ng-container>
       <table>
         <tbody>
-          <ng-container *ngFor="let entity of activePropertyMetadataAndConfiguration.configuration">
+          <ng-container *ngFor="let entity of activePropertyMetadataAndConfiguration.configuration; let index=index">
             <tr>
               <td>
                 {{entity[activePropertyMetadataAndConfiguration.propertyMetadata.keyPropertyName!]}}
               </td>
               <td>
-                <mat-icon class="game-designer-delete-icon">delete</mat-icon>
+                <mat-icon class="game-designer-delete-icon" (click)="deleteEntity(index)">delete</mat-icon>
               </td>
             </tr>
           </ng-container>
@@ -23,7 +23,7 @@
         <tfoot>
           <tr>
             <td [attr.colspan]="2">
-              <mat-icon class="game-designer-add-icon">add</mat-icon>
+              <mat-icon class="game-designer-add-icon" (click)="addEntity()">add</mat-icon>
             </td>
           </tr>
         </tfoot>
