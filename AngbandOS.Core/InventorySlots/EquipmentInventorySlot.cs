@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core.InventorySlots;
 
+/// <summary>
+/// Represents a base class for inventory slots that represent equipment inventory slots.
+/// </summary>
 [Serializable]
 internal abstract class EquipmentInventorySlot : BaseInventorySlot
 {
