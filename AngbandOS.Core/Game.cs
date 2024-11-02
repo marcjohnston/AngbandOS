@@ -14730,17 +14730,6 @@ public bool IsDead = false;
         return slot;
     }
 
-    [Obsolete("Use InvenTakeOff(Item, int)")]
-    public int? InvenTakeoff(int item, int amt)
-    {
-        Item? oPtr = GetInventoryItem(item);
-        if (oPtr == null)
-        {
-            return null;
-        }
-        return InvenTakeoff(oPtr, amt);
-    }
-
     public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
     {
         if (item.GoldPieces > 0)

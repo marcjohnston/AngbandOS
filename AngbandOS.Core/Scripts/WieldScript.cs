@@ -83,10 +83,13 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
 
         // Take off the old item
         Item? wasWieldingItem = Game.GetInventoryItem(slot);
-        if (wasWieldingItem != null)
+        if (wasWieldingItem == null)
         {
-            Game.InvenTakeoff(slot, 255);
+            Game.MsgPrint("Unable to take off item!");
+            return;
         }
+
+        Game.InvenTakeoff(wasWieldingItem, 255);
         // Put the item into the wield slot
         Game.SetInventoryItem(slot, wornItem);
         // Add the weight of the item
