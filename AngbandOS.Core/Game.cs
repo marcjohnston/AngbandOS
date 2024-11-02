@@ -14468,17 +14468,6 @@ public bool IsDead = false;
     /// <returns></returns>
     public Item? InventoryCarry(Item oPtr)
     {
-        int itemNew = InvenCarry(oPtr);
-        if (itemNew == -1)
-        {
-            return null;
-        }
-        return GetInventoryItem(itemNew);
-    }
-
-    [Obsolete("Use InventoryCarry")]
-    public int InvenCarry(Item oPtr)
-    {
         int j;
         int n = -1; // TODO: This is bad.
         for (j = 0; j < InventorySlot.PackCount; j++) // TODO: Why is this < PackCount and not <= PackCount.  This prevents us from grouping items in the last slot
@@ -14500,14 +14489,14 @@ public bool IsDead = false;
                 jPtr.Absorb(oPtr);
                 WeightCarried += oPtr.Count * oPtr.Weight;
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-                return j;
+                return jPtr;
             }
         }
 
         // Check to see if we scanned every slot.
         if (_invenCnt > InventorySlot.PackCount)
         {
-            return -1;
+            return null;
         }
         for (j = 0; j <= InventorySlot.PackCount; j++)
         {
@@ -14541,16 +14530,16 @@ public bool IsDead = false;
             SetInventoryItem(i, null);
         }
 
-        SetInventoryItem(i, oPtr.Clone());
-        oPtr = GetInventoryItem(i);
-        oPtr.Y = 0;
-        oPtr.X = 0;
-        oPtr.HoldingMonsterIndex = 0;
-        WeightCarried += oPtr.Count * oPtr.Weight;
+        Item newItem = oPtr.Clone(); // TODO: Why are we cloning?
+        SetInventoryItem(i, newItem);
+        newItem.Y = 0;
+        newItem.X = 0;
+        newItem.HoldingMonsterIndex = 0;
+        WeightCarried += newItem.Count * newItem.Weight;
         _invenCnt++;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        return i;
+        return newItem;
     }
 
     public bool InvenCarryOkay(Item oPtr)
