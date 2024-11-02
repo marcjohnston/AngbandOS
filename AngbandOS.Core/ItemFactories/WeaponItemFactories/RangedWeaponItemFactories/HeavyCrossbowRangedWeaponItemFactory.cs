@@ -53,7 +53,6 @@ internal class HeavyCrossbowRangedWeaponItemFactory : RangedWeaponItemFactory
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatRangedWeaponEnchantmentScript) })
    };
 
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
     public override bool CanApplyBlowsBonus => true;
 
     public override int PackSort => 32;

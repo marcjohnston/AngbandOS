@@ -42,7 +42,6 @@ internal class HardLeatherBootsArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.Feet;
 
     protected override string ItemClassName => nameof(BootsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(FeetInventorySlot));
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
     public override int PackSort => 27;

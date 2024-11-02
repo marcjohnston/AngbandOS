@@ -43,7 +43,6 @@ internal class ShadowCloakArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.AboutBody;
 
     protected override string ItemClassName => nameof(CloaksItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(AboutBodyInventorySlot));
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

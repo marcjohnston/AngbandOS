@@ -34,7 +34,6 @@ internal class BarChainMailHardArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.OnBody;
 
     protected override string ItemClassName => nameof(HardArmorsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
     public override int PackSort => 20;
     public override bool HatesAcid => true;
 

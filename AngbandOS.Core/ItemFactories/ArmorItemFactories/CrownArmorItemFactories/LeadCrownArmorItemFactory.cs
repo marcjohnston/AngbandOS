@@ -39,7 +39,6 @@ internal class LeadCrownArmorItemFactory : ArmorItemFactory
         (new int[] { 2 }, null, new string[] { nameof(GreatCrownEnchantmentScript) })
     };
     
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
     public override bool HatesAcid => true;
 
     public override int PackSort => 24;

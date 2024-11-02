@@ -34,7 +34,6 @@ internal class LargeLeatherShieldArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.Arm;
 
     protected override string ItemClassName => nameof(ShieldsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(ArmInventorySlot));
     public override int PackSort => 23;
     public override bool HatesAcid => true;
 

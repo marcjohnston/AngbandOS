@@ -35,18 +35,6 @@ internal abstract class RingItemFactory : JewelleryItemFactory
     public RingItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(RingsItemClass);
 
-    public override BaseInventorySlot BaseWieldSlot
-    {
-        get
-        {
-            BaseInventorySlot rightHand = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RightHandInventorySlot));
-            if (rightHand.Count == 0)
-            {
-                return rightHand;
-            }
-            return Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LeftHandInventorySlot));
-        }
-    }
     public override int PackSort => 16;
     public override int BaseValue => 45;
     public override bool HatesElectricity => true;

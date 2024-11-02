@@ -47,7 +47,6 @@ internal class RapierWeaponItemFactory : WeaponItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.MeleeWeapon;
 
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
     public override bool GetsDamageMultiplier => true;
 
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
