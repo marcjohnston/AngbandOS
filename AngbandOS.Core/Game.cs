@@ -14462,6 +14462,22 @@ public bool IsDead = false;
         return ItemMatchesFilter(item, itemFilter);
     }
 
+    /// <summary>
+    /// Puts an item in the players pack inventory and returns the item being carried.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public Item? InventoryCarry(Item oPtr)
+    {
+        int itemNew = InvenCarry(oPtr);
+        if (itemNew == -1)
+        {
+            return null;
+        }
+        return GetInventoryItem(itemNew);
+    }
+
+    [Obsolete("Use InventoryCarry")]
     public int InvenCarry(Item oPtr)
     {
         int j;

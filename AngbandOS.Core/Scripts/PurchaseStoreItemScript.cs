@@ -111,14 +111,13 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
                         Game.MsgPrint($"You bought {oName} for {price} gold.");
                     }
                     jPtr.Inscription = "";
-                    itemNew = Game.InvenCarry(jPtr);
-                    Item? newItemInInventory = Game.GetInventoryItem(itemNew);
+                    Item? newItemInInventory = Game.InventoryCarry(jPtr);
                     if (newItemInInventory == null)
                     {
                         return; // TODO: This should never be.
                     }
                     oName = newItemInInventory.GetFullDescription(true);
-                    Game.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
+                    Game.MsgPrint($"You have {oName} ({newItemInInventory.Label}).");
                     Game.HandleStuff();
                     i = storeCommandEvent.Store.StoreInventoryList.Count;
                     storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
@@ -159,14 +158,13 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
         }
         else
         {
-            itemNew = Game.InvenCarry(jPtr);
-            Item? newItemInInventory = Game.GetInventoryItem(itemNew);
+            Item? newItemInInventory = Game.InventoryCarry(jPtr);
             if (newItemInInventory == null)
             {
                 return; // TODO: This should never be.
             }
             oName = newItemInInventory.GetFullDescription(true);
-            Game.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
+            Game.MsgPrint($"You have {oName} ({newItemInInventory.Label}).");
             Game.HandleStuff();
             i = storeCommandEvent.Store.StoreInventoryList.Count;
             storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
