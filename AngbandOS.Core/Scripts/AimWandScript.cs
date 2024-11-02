@@ -121,7 +121,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
                 item.WandChargesRemaining++;
                 item.Count--;
                 Game.WeightCarried -= splitItem.Weight;
-                Game.InvenCarry(splitItem);
+                Game.InventoryCarry(splitItem);
                 Game.MsgPrint("You unstack your wand.");
             }
             // Let us know we have used a charge

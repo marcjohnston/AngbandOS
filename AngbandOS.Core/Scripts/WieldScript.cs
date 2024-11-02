@@ -89,7 +89,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
             return;
         }
 
-        Game.InvenTakeoff(wasWieldingItem, 255);
+        Game.InventoryTakeoff(wasWieldingItem, 255);
         // Put the item into the wield slot
         Game.SetInventoryItem(slot, wornItem);
         // Add the weight of the item

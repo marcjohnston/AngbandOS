@@ -114,7 +114,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
                 item.StaffChargesRemaining++;
                 item.Count--;
                 Game.WeightCarried -= singleStaff.Weight;
-                Game.InvenCarry(singleStaff);
+                Game.InventoryCarry(singleStaff);
                 Game.MsgPrint("You unstack your staff.");
             }
             // Let the player know what happened

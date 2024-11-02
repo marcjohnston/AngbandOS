@@ -7301,14 +7301,13 @@ public bool IsDead = false;
                 else
                 {
                     // Actually pick up the item
-                    int slot = InvenCarry(item);
-                    Item? inventoryItem = GetInventoryItem(slot);
+                    Item? inventoryItem = InventoryCarry(item);
                     if (inventoryItem == null)
                     {
                         throw new Exception("Unable to locate picked up item in the inventory."); // TODO: Clean this up
                     }
                     itemName = inventoryItem.GetFullDescription(true);
-                    MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
+                    MsgPrint($"You have {itemName} ({inventoryItem.Label}).");
                     DeleteObject(item);
                 }
             }
@@ -9732,7 +9731,7 @@ public bool IsDead = false;
             item.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
-            InvenCarry(item);
+            InventoryCarry(item);
         }
         else
         {
@@ -9741,7 +9740,7 @@ public bool IsDead = false;
             item.Count = RandomBetween(3, 7);
             item.IsFlavorAware = true;
             item.BecomeKnown();
-            InvenCarry(item);
+            InventoryCarry(item);
         }
         if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
         {
@@ -9751,7 +9750,7 @@ public bool IsDead = false;
             item.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
-            InvenCarry(item);
+            InventoryCarry(item);
         }
         else
         {
@@ -9761,7 +9760,7 @@ public bool IsDead = false;
             item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
             item.IsFlavorAware = true;
             item.BecomeKnown();
-            InvenCarry(item);
+            InventoryCarry(item);
             Item carried = item.Clone(1);
             LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
@@ -14623,19 +14622,12 @@ public bool IsDead = false;
         if (oPtr.IsInEquipment)
         {
             // Take the item off first.
-            int? newItem = InvenTakeoff(oPtr, amt);
-            if (newItem == null)
+            Item? removedItem = InventoryTakeoff(oPtr, amt);
+            if (removedItem == null)
             {
                 return;
             }
-
-            oPtr = GetInventoryItem(newItem.Value);
-
-            // We took off the item, check to ensure that the item is not missing.
-            if (oPtr == null)
-            {
-                return;
-            }
+            oPtr = removedItem;
         }
         Item qPtr = oPtr.Clone(amt);
         string oName = qPtr.GetFullDescription(true);
@@ -14724,8 +14716,7 @@ public bool IsDead = false;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
     }
-
-    public int? InvenTakeoff(Item oPtr, int amt)
+    public Item? InventoryTakeoff(Item oPtr, int amt)
     {
         string act;
         if (amt <= 0)
@@ -14741,9 +14732,14 @@ public bool IsDead = false;
         act = oPtr.TakeOffMessage;
         oPtr.ItemIncrease(-amt);
         oPtr.ItemOptimize();
-        int slot = InvenCarry(qPtr);
-        MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
-        return slot;
+        Item? newItem = InventoryCarry(qPtr);
+        if (newItem == null)
+        {
+            MsgPrint("Failed to carry item.");
+            return null;
+        }
+        MsgPrint($"{act} {oName} ({newItem.Label}).");
+        return newItem;
     }
 
     public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)

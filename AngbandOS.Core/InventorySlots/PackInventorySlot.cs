@@ -29,7 +29,7 @@ internal class PackInventorySlot : BaseInventorySlot
 
     public override void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
     {
-        Game.InvenCarry(oPtr);
+        Game.InventoryCarry(oPtr);
     }
 
     /// Checks the quantity of an item and removes it, when the quanity is zero.  The pack inventory slot will move subsequent items in the pack to the end of the pack.

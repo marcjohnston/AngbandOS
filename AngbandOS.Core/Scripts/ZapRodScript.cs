@@ -141,7 +141,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
                 item.RodRechargeTimeRemaining = 0;
                 item.Count--;
                 Game.WeightCarried -= singleRod.Weight;
-                Game.InvenCarry(singleRod);
+                Game.InventoryCarry(singleRod);
                 Game.MsgPrint("You unstack your rod.");
             }
         }
