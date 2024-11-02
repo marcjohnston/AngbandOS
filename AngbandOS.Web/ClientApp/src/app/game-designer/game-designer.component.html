@@ -36,6 +36,7 @@
       </div>
       <div id="entity-panel">
         <ng-container *ngIf="activePropertyMetadataAndConfigurations !== null">
+          <!-- Render all of metadatas and configurations for the selection.  The game settings will have multiple metadatas and configuraitons; everything else will have a single element -->
           <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations">
             <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-property>
           </ng-container>
@@ -46,7 +47,7 @@
               <h6>Property Metadata Debug #{{index}}</h6>
               <pre style="white-space: pre-wrap;">{{activePropertyMetadataAndConfiguration.propertyMetadata | json}}</pre>
             </ng-container>
-            <br />
+            <hr />
             <h6>Configuration Debug</h6>
             <pre style="white-space: pre-wrap;">{{activePropertyMetadataAndConfigurations[0].configuration | json}}</pre> <!-- We only want to show the configuration once.  It is the same for all properties. -->
           </ng-container>

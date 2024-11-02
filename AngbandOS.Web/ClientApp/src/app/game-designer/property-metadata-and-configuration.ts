@@ -15,6 +15,13 @@ export class PropertyMetadataAndConfiguration {
    */
   public configuration: any | null;
 
+  /**
+   * Returns true, if the configuration is an array.  This is used to determine if the configuration is a collection or a single entry in the collection.
+   */
+  public get configurationIsArray() {
+    return Array.isArray(this.configuration);
+  }
+
   public get entityTitle(): string {
     return this.configuration[this.propertyMetadata.keyPropertyName!]; // collectionKeyPropertyName was already verified in the json validation routine.
   }

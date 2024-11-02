@@ -205,7 +205,7 @@ export class GameDesignerComponent implements OnInit {
               // Get the key value for the entity.
               const keyValue = entity[propertyMetadata.keyPropertyName!]; // collectionKeyPropertyName was already validated.
 
-              // Build the child tree node.
+              // Build the child tree node for each entity of the collection.
               const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
               childTreeNodes.push(new TreeNode(keyValue, null, [childPropertyMetadataAndConfiguration]));
 
@@ -214,7 +214,7 @@ export class GameDesignerComponent implements OnInit {
             }
 
             // This is the parent node, we are not rendering any children.
-            const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, null);
+            const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entityTable); // This is the parent node with no children (null).
             const collectionTreeNode = new TreeNode(propertyMetadata.propertyName, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
 

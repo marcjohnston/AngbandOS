@@ -16,7 +16,7 @@
       <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let index=index">
         <tr>
           <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas; let tupleIndex=index">
-            <td class="tuple-cell">
+            <td>
               <app-game-designer-type [activePropertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)"></app-game-designer-type>
             </td>
           </ng-container>

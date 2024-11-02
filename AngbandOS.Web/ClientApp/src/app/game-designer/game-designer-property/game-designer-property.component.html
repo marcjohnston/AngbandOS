@@ -1,12 +1,35 @@
 <ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
   <!-- Collection -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'collection'; else nonCollectionProperty">
-    <ng-container *ngIf="activePropertyMetadataAndConfiguration.configuration === null; else showCollectionEntity">
+    <!-- Collection entity list, add and delete -->
+    <ng-container *ngIf="activePropertyMetadataAndConfiguration.configurationIsArray; else showCollectionEntity">
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
       <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== ''">
         <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
       </ng-container>
+      <table>
+        <tbody>
+          <ng-container *ngFor="let entity of activePropertyMetadataAndConfiguration.configuration">
+            <tr>
+              <td>
+                {{entity[activePropertyMetadataAndConfiguration.propertyMetadata.keyPropertyName!]}}
+              </td>
+              <td>
+                <mat-icon class="game-designer-delete-icon">delete</mat-icon>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td [attr.colspan]="2">
+              <mat-icon class="game-designer-add-icon">add</mat-icon>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </ng-container>
+    <!-- Single collection entity -->
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.entityTitle}} - {{activePropertyMetadataAndConfiguration.entityTitle}}</span><br />
       <div class="property-container-div" *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
@@ -14,6 +37,7 @@
       </div>
     </ng-template>
   </div>
+  <!-- An array of metadatas and configurations -->
   <ng-template #nonCollectionProperty>
     <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
     <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== ''">
