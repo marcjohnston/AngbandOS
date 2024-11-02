@@ -238,15 +238,15 @@ internal class Monster : IItemContainer
 
     public string Label(Item oPtr) => ""; // TODO: Items held by a monster cannot be selected.
 
-    public void AddItem(Item oPtr)
-    {
-        Items.Add(oPtr);
-    }
+    //public void AddItem(Item oPtr)
+    //{
+    //    Items.Add(oPtr);
+    //}
 
-    public void RemoveItem(Item oPtr)
-    {
-        Items.Remove(oPtr);
-    }
+    //public void RemoveItem(Item oPtr)
+    //{
+    //    Items.Remove(oPtr);
+    //}
 
     /// <summary>
     /// Modifies the quantity of an item.  No player stats are modified.

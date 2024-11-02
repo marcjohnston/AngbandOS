@@ -9790,16 +9790,7 @@ public bool IsDead = false;
         item.IdentityIsStoreBought = true;
         item.IsFlavorAware = true;
         item.BecomeKnown();
-        int slot = item.WieldSlot;
-        if (slot == -1)
-        {
-            InvenCarry(item);
-        }
-        else
-        {
-            SetInventoryItem(slot, item);
-            WeightCarried += item.Weight;
-        }
+        item.GetFactory.BaseWieldSlot.AddItem(item);
     }
 
     /// <summary>

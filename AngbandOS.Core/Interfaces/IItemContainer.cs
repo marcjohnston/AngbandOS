@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents the interface required for objects to participate as a container for items.
+/// Represents the interface required for objects to participate as a container for items.  GridTiles, InventorySlots and monsters are item containers.
 /// </summary>
 internal interface IItemContainer
 {
@@ -61,6 +61,15 @@ internal interface IItemContainer
     /// <returns></returns>
     string TakeOffMessage(Item oPtr);
 
-    void AddItem(Item oPtr);
-    void RemoveItem(Item oPtr);
+    ///// <summary>
+    ///// Adds an item to the container.
+    ///// </summary>
+    ///// <param name="oPtr"></param>
+    //void AddItem(Item oPtr);
+
+    ///// <summary>
+    ///// Removed the item from the container.
+    ///// </summary>
+    ///// <param name="oPtr"></param>
+    //void RemoveItem(Item oPtr);
 }

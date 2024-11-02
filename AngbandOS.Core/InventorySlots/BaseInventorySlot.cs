@@ -67,17 +67,27 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
         }
     }
 
-    public virtual void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
+    /// <summary>
+    /// Adds an item to this inventory slot.  Since inventory slots participate as item containers, we need to implement the ability to add an item.
+    /// </summary>
+    /// <param name="item"></param>
+    public virtual void AddItem(Item item) // TODO: this doesn't support the multi-item slots where we can wear multiple items on our neck etc.  not sure why it doesn't though
     {
-        int slot = oPtr.WieldSlot;
-        Game.SetInventoryItem(slot, oPtr);
+        int slot = item.WieldSlot;
+        Game.SetInventoryItem(slot, item);
+        Game.WeightCarried += item.Weight;
     }
 
-    public virtual void RemoveItem(Item oPtr) // TODO: this doesn't support the multi-item slots
-    {
-        int slot = FindInventorySlot(oPtr);
-        Game.SetInventoryItem(slot, null);
-    }
+    /// <summary>
+    /// Removed an item from this inventory slot.  Since inventory slots participate as item containers, we need to implement the ability to remove an item.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    //public virtual void RemoveItem(Item oPtr) // TODO: this doesn't support the multi-item slots where we can wear multiple items on our neck etc.  not sure why it doesn't though
+    //{
+    //    int slot = FindInventorySlot(oPtr);
+    //    Game.SetInventoryItem(slot, null);
+    //    // TODO: need to drop the weight
+    //}
 
     /// <summary>
     /// Returns the alphabetical label for the position of the item in the container.  The player will use this label to select the item from the container.

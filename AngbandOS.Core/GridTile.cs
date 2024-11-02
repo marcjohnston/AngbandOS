@@ -157,15 +157,15 @@ internal class GridTile : IItemContainer
         Items.Remove(oPtr);
     }
 
-    public void AddItem(Item oPtr)
-    {
-        Items.Add(oPtr);
-    }
+    //public void AddItem(Item oPtr)
+    //{
+    //    Items.Add(oPtr);
+    //}
 
-    public void RemoveItem(Item oPtr)
-    {
-        Items.Remove(oPtr);
-    }
+    //public void RemoveItem(Item oPtr)
+    //{
+    //    Items.Remove(oPtr);
+    //}
 
     public void ProcessWorld()
     {
