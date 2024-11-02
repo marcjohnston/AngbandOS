@@ -18,4 +18,9 @@ internal class RightHandInventorySlot : EquipmentInventorySlot
     public override string DescribeWieldLocation(int index) => "wearing on your right hand";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your right hand";
     public override int SortOrder => 5;
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.RightHand, item);
+        Game.WeightCarried += item.Weight;
+    }
 }

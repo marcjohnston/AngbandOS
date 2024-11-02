@@ -19,4 +19,9 @@ internal class DiggerInventorySlot : EquipmentInventorySlot
     public override string DescribeItemLocation(Item oPtr) => "carrying in your pack";
     public override string WieldPhrase => "You are digging with";
     public override int SortOrder => 3;
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.Digger, item);
+        Game.WeightCarried += item.Weight;
+    }
 }

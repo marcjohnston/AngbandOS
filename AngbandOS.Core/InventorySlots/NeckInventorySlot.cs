@@ -18,4 +18,9 @@ internal class NeckInventorySlot : EquipmentInventorySlot
     public override string DescribeWieldLocation(int index) => "wearing around your neck";
     public override string DescribeItemLocation(Item oPtr) => "wearing around your neck";
     public override int SortOrder => 6;
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.Neck, item);
+        Game.WeightCarried += item.Weight;
+    }
 }

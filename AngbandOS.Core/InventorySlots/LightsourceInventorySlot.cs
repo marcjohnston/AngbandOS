@@ -22,6 +22,11 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
     public override int SortOrder => 7;
     public override string TakeOffMessage(Item oPtr) => "You were holding";
 
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.Lightsource, item);
+        Game.WeightCarried += item.Weight;
+    }
     /// <summary>
     /// Consumes a turn of light during the ProcessWorldHook event.  Base inventory slot ProcessWorldHook processing occurs first, allowing light source items to process the event first.
     /// </summary>

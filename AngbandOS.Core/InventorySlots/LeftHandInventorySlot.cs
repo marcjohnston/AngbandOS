@@ -18,4 +18,9 @@ internal class LeftHandInventorySlot : EquipmentInventorySlot
     public override string DescribeItemLocation(Item oPtr) => "On left hand";
     public override string DescribeWieldLocation(int index) => "wearing on your left hand";
     public override int SortOrder => 4;
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.LeftHand, item);
+        Game.WeightCarried += item.Weight;
+    }
 }

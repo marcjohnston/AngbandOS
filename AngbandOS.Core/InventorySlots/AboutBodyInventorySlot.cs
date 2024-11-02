@@ -21,4 +21,9 @@ internal class AboutBodyInventorySlot : EquipmentInventorySlot
     public override bool IsWeightRestricting => true;
     public override bool IsArmor => true;
     public override int SortOrder => 9;
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.AboutBody, item);
+        Game.WeightCarried += item.Weight;
+    }
 }

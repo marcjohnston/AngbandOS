@@ -170,7 +170,10 @@ internal sealed class Item : IComparable<Item>
     public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivationDetails { get; private set; }
     public Probability BreakageChanceProbability { get; private set; }
     public int MissileDamageMultiplier { get; private set; }
+
+    [Obsolete("Use GetFactory().BaseInventorySlot")]
     public int WieldSlot { get; private set; }
+
     public bool CanBeRead { get; private set; }
     public IScriptItemInt? RechargeScript { get; private set; }
     public bool CanProjectArrows { get; private set; }

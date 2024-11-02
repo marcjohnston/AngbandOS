@@ -20,6 +20,11 @@ internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
     public override bool IsMeleeWeapon => true;
     public override string WieldPhrase => "You are wielding";
     public override string TakeOffMessage(Item oPtr) => "You were wielding";
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.MeleeWeapon, item);
+        Game.WeightCarried += item.Weight;
+    }
     public override string MentionUse(int? index)
     {
         string p = "Wielding";

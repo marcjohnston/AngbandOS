@@ -22,4 +22,9 @@ internal class OnBodyInventorySlot : EquipmentInventorySlot
     public override bool IsArmor => true;
     public override bool CanBeCursed => true;
     public override int SortOrder => 8;
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.OnBody, item);
+        Game.WeightCarried += item.Weight;
+    }
 }

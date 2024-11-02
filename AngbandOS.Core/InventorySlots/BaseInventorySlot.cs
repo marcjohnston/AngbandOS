@@ -71,12 +71,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// Adds an item to this inventory slot.  Since inventory slots participate as item containers, we need to implement the ability to add an item.
     /// </summary>
     /// <param name="item"></param>
-    public virtual void AddItem(Item item) // TODO: this doesn't support the multi-item slots where we can wear multiple items on our neck etc.  not sure why it doesn't though
-    {
-        int slot = item.WieldSlot;
-        Game.SetInventoryItem(slot, item);
-        Game.WeightCarried += item.Weight;
-    }
+    public abstract void AddItem(Item item);
 
     /// <summary>
     /// Removed an item from this inventory slot.  Since inventory slots participate as item containers, we need to implement the ability to remove an item.

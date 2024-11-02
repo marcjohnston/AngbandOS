@@ -23,6 +23,11 @@ internal class HandsInventorySlot : EquipmentInventorySlot
     public override bool IsArmor => true;
     public override int SortOrder => 12;
 
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.Hands, item);
+        Game.WeightCarried += item.Weight;
+    }
     public override int CalcMana(Game game, int msp)
     {
         if (Game.BaseCharacterClass.CoveredHandsRestrictCasting)

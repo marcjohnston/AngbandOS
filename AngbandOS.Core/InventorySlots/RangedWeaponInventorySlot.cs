@@ -20,6 +20,11 @@ internal class RangedWeaponInventorySlot : EquipmentInventorySlot
     public override string WieldPhrase => "You are shooting with";
     public override int SortOrder => 2;
     public override string TakeOffMessage(Item oPtr) => "You were holding";
+    public override void AddItem(Item item)
+    {
+        Game.SetInventoryItem(InventorySlot.RangedWeapon, item);
+        Game.WeightCarried += item.Weight;
+    }
     public override string MentionUse(int? index)
     {
         string p = "Shooting";
