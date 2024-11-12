@@ -28,8 +28,8 @@ export class GameDesignerTypeComponent implements OnInit {
       activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas,
       activePropertyMetadataAndConfiguration.propertyMetadata.entityKeyPropertyName,
       activePropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName,
-      activePropertyMetadataAndConfiguration.propertyMetadata.entityTitle,
-      activePropertyMetadataAndConfiguration.propertyMetadata.entityName,
+      activePropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle,
+      activePropertyMetadataAndConfiguration.propertyMetadata.entityNoun,
       activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
     return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]);
   }

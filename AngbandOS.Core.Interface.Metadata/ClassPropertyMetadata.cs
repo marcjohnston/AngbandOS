@@ -4,10 +4,10 @@ public class ClassPropertyMetadata : PropertyMetadata
 {
     public ClassPropertyMetadata() : base("", "") { }
 
-    public new string? EntityTitle
+    public new string? EntityNounTitle
     {
-        get => base.EntityTitle;
-        set => base.EntityTitle = value;
+        get => base.EntityNounTitle;
+        set => base.EntityNounTitle = value;
     }
 
     public new string? EntityNamePropertyName

@@ -158,12 +158,12 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
         case CollectionPropertyMetadata genericCollectionArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new CollectionPropertyMetadata(\"{genericCollectionArrayPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.PropertyMetadatas)} = {genericCollectionArrayPropertyMetadata.EntityName}Metadata.Metadata,");
-            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityTitle)} = \"{genericCollectionArrayPropertyMetadata.EntityTitle}\",");
-            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityName)} = \"{genericCollectionArrayPropertyMetadata.EntityName}\",");
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.PropertyMetadatas)} = {genericCollectionArrayPropertyMetadata.EntityNoun}Metadata.Metadata,");
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityNounTitle)} = \"{genericCollectionArrayPropertyMetadata.EntityNounTitle}\",");
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityNoun)} = \"{genericCollectionArrayPropertyMetadata.EntityNoun}\",");
             writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityNamePropertyName)} = {WriteNullableStringValue(genericCollectionArrayPropertyMetadata.EntityNamePropertyName)},");
             writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityKeyPropertyName)} = \"{genericCollectionArrayPropertyMetadata.EntityKeyPropertyName}\",");
-            WriteClass(folder, genericCollectionArrayPropertyMetadata.EntityName, genericCollectionArrayPropertyMetadata.PropertyMetadatas);
+            WriteClass(folder, genericCollectionArrayPropertyMetadata.EntityNoun, genericCollectionArrayPropertyMetadata.PropertyMetadatas);
             break;
         case TuplePropertyMetadata genericTupleArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new TuplePropertyMetadata(\"{genericTupleArrayPropertyMetadata.PropertyName}\")");
@@ -467,8 +467,8 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                             Description = description,
                             IsNullable = isNullable,
                             Title = title ?? ConvertToTitleCase(name),
-                            EntityTitle = ConvertToTitleCase(entityName),
-                            EntityName = entityName,
+                            EntityNounTitle = ConvertToTitleCase(entityName),
+                            EntityNoun = entityName,
                             EntityKeyPropertyName = entityKeyPropertyName ?? "Key", // Provide a default.
                             EntityNamePropertyName = collectionClassLevelPropertyMetadata.EntityNamePropertyName ?? entityNamePropertyName,
                             PropertyMetadatas = collectionPropertyLevelPropertyMetadata,

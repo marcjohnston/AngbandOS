@@ -112,13 +112,13 @@ export class GameDesignerComponent implements OnInit {
       });
       return undefined;
     }
-    if (jsonPropertyMetadata.entityTitle === undefined) {
+    if (jsonPropertyMetadata.entityNounTitle === undefined) {
       this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityTitle value after json deserialization.`, "", {
         duration: 5000
       });
       return undefined;
     }
-    if (jsonPropertyMetadata.entityName === undefined) {
+    if (jsonPropertyMetadata.entityNoun === undefined) {
       this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityName value after json deserialization.`, "", {
         duration: 5000
       });
@@ -190,8 +190,8 @@ export class GameDesignerComponent implements OnInit {
       collectionPropertyMetadataList,
       jsonPropertyMetadata.entityKeyPropertyName,
       jsonPropertyMetadata.entityNamePropertyName,
-      jsonPropertyMetadata.entityTitle,
-      jsonPropertyMetadata.entityName,
+      jsonPropertyMetadata.entityNounTitle,
+      jsonPropertyMetadata.entityNoun,
       jsonPropertyMetadata.foreignCollectionName);
   }
 

@@ -62,12 +62,12 @@ public abstract class PropertyMetadata
     /// <summary>
     /// Returns the singular entity name for each of the objects in a collection.  Returns null, if the property is not a collection.
     /// </summary>
-    public string? EntityName { get; protected set; } = null;
+    public string? EntityNoun { get; protected set; } = null;
 
     /// <summary>
     /// Returns the title to render for the entity name.
     /// </summary>
-    public string? EntityTitle { get; protected set; } = null;
+    public string? EntityNounTitle { get; protected set; } = null;
 
     /// <summary>
     /// Returns the additional associated property metadata descriptions relevant to the property.  Applies only to collections and tuples.  Collections use this property to describe their 

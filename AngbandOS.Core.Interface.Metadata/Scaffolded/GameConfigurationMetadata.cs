@@ -29,8 +29,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Towns")
                 {
                     PropertyMetadatas = TownMetadata.Metadata,
-                    EntityTitle = "Town",
-                    EntityName = "Town",
+                    EntityNounTitle = "Town",
+                    EntityNoun = "Town",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.",
@@ -40,8 +40,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Shopkeepers")
                 {
                     PropertyMetadatas = ShopkeeperMetadata.Metadata,
-                    EntityTitle = "Shopkeeper",
-                    EntityName = "Shopkeeper",
+                    EntityNounTitle = "Shopkeeper",
+                    EntityNoun = "Shopkeeper",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -51,8 +51,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("GameCommands")
                 {
                     PropertyMetadatas = GameCommandMetadata.Metadata,
-                    EntityTitle = "Game Command",
-                    EntityName = "GameCommand",
+                    EntityNounTitle = "Game Command",
+                    EntityNoun = "GameCommand",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -62,8 +62,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StoreCommands")
                 {
                     PropertyMetadatas = StoreCommandMetadata.Metadata,
-                    EntityTitle = "Store Command",
-                    EntityName = "StoreCommand",
+                    EntityNounTitle = "Store Command",
+                    EntityNoun = "StoreCommand",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -73,8 +73,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("HelpGroups")
                 {
                     PropertyMetadatas = HelpGroupMetadata.Metadata,
-                    EntityTitle = "Help Group",
-                    EntityName = "HelpGroup",
+                    EntityNounTitle = "Help Group",
+                    EntityNoun = "HelpGroup",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -84,8 +84,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MonsterRaces")
                 {
                     PropertyMetadatas = MonsterRaceMetadata.Metadata,
-                    EntityTitle = "Monster Race",
-                    EntityName = "MonsterRace",
+                    EntityNounTitle = "Monster Race",
+                    EntityNoun = "MonsterRace",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -95,8 +95,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Symbols")
                 {
                     PropertyMetadatas = SymbolMetadata.Metadata,
-                    EntityTitle = "Symbol",
-                    EntityName = "Symbol",
+                    EntityNounTitle = "Symbol",
+                    EntityNoun = "Symbol",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -106,8 +106,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Vaults")
                 {
                     PropertyMetadatas = VaultMetadata.Metadata,
-                    EntityTitle = "Vault",
-                    EntityName = "Vault",
+                    EntityNounTitle = "Vault",
+                    EntityNoun = "Vault",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -117,8 +117,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("DungeonGuardians")
                 {
                     PropertyMetadatas = DungeonGuardianMetadata.Metadata,
-                    EntityTitle = "Dungeon Guardian",
-                    EntityName = "DungeonGuardian",
+                    EntityNounTitle = "Dungeon Guardian",
+                    EntityNoun = "DungeonGuardian",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -128,8 +128,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Dungeons")
                 {
                     PropertyMetadatas = DungeonMetadata.Metadata,
-                    EntityTitle = "Dungeon",
-                    EntityName = "Dungeon",
+                    EntityNounTitle = "Dungeon",
+                    EntityNoun = "Dungeon",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -139,8 +139,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StoreFactories")
                 {
                     PropertyMetadatas = StoreFactoryMetadata.Metadata,
-                    EntityTitle = "Store Factory",
-                    EntityName = "StoreFactory",
+                    EntityNounTitle = "Store Factory",
+                    EntityNoun = "StoreFactory",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "Towns have various plots where buildings and/or stores may be placed.  Stores factories are used to create specific stores.  Store factories can produce more than one store per town.  Use this collection to define factories that are used to create stores.",
@@ -150,8 +150,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ProjectileGraphics")
                 {
                     PropertyMetadatas = ProjectileGraphicMetadata.Metadata,
-                    EntityTitle = "Projectile Graphic",
-                    EntityName = "ProjectileGraphic",
+                    EntityNounTitle = "Projectile Graphic",
+                    EntityNoun = "ProjectileGraphic",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -161,8 +161,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("AmuletReadableFlavors")
                 {
                     PropertyMetadatas = AmuletReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Amulet Readable Flavor",
-                    EntityName = "AmuletReadableFlavor",
+                    EntityNounTitle = "Amulet Readable Flavor",
+                    EntityNoun = "AmuletReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -172,8 +172,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MushroomReadableFlavors")
                 {
                     PropertyMetadatas = MushroomReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Mushroom Readable Flavor",
-                    EntityName = "MushroomReadableFlavor",
+                    EntityNounTitle = "Mushroom Readable Flavor",
+                    EntityNoun = "MushroomReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -183,8 +183,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("PotionReadableFlavors")
                 {
                     PropertyMetadatas = PotionReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Potion Readable Flavor",
-                    EntityName = "PotionReadableFlavor",
+                    EntityNounTitle = "Potion Readable Flavor",
+                    EntityNoun = "PotionReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -194,8 +194,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RingReadableFlavors")
                 {
                     PropertyMetadatas = RingReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Ring Readable Flavor",
-                    EntityName = "RingReadableFlavor",
+                    EntityNounTitle = "Ring Readable Flavor",
+                    EntityNoun = "RingReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -205,8 +205,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RodReadableFlavors")
                 {
                     PropertyMetadatas = RodReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Rod Readable Flavor",
-                    EntityName = "RodReadableFlavor",
+                    EntityNounTitle = "Rod Readable Flavor",
+                    EntityNoun = "RodReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -216,8 +216,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ScrollReadableFlavors")
                 {
                     PropertyMetadatas = ScrollReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Scroll Readable Flavor",
-                    EntityName = "ScrollReadableFlavor",
+                    EntityNounTitle = "Scroll Readable Flavor",
+                    EntityNoun = "ScrollReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -227,8 +227,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StaffReadableFlavors")
                 {
                     PropertyMetadatas = StaffReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Staff Readable Flavor",
-                    EntityName = "StaffReadableFlavor",
+                    EntityNounTitle = "Staff Readable Flavor",
+                    EntityNoun = "StaffReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -238,8 +238,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("WandReadableFlavors")
                 {
                     PropertyMetadatas = WandReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Wand Readable Flavor",
-                    EntityName = "WandReadableFlavor",
+                    EntityNounTitle = "Wand Readable Flavor",
+                    EntityNoun = "WandReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -249,8 +249,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ClassSpells")
                 {
                     PropertyMetadatas = ClassSpellMetadata.Metadata,
-                    EntityTitle = "Class Spell",
-                    EntityName = "ClassSpell",
+                    EntityNounTitle = "Class Spell",
+                    EntityNoun = "ClassSpell",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -260,8 +260,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("WizardCommands")
                 {
                     PropertyMetadatas = WizardCommandMetadata.Metadata,
-                    EntityTitle = "Wizard Command",
-                    EntityName = "WizardCommand",
+                    EntityNounTitle = "Wizard Command",
+                    EntityNoun = "WizardCommand",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -271,8 +271,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Tiles")
                 {
                     PropertyMetadatas = TileMetadata.Metadata,
-                    EntityTitle = "Tile",
-                    EntityName = "Tile",
+                    EntityNounTitle = "Tile",
+                    EntityNoun = "Tile",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -282,8 +282,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Animations")
                 {
                     PropertyMetadatas = AnimationMetadata.Metadata,
-                    EntityTitle = "Animation",
-                    EntityName = "Animation",
+                    EntityNounTitle = "Animation",
+                    EntityNoun = "Animation",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -293,8 +293,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Spells")
                 {
                     PropertyMetadatas = SpellMetadata.Metadata,
-                    EntityTitle = "Spell",
-                    EntityName = "Spell",
+                    EntityNounTitle = "Spell",
+                    EntityNoun = "Spell",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -304,8 +304,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Plurals")
                 {
                     PropertyMetadatas = PluralMetadata.Metadata,
-                    EntityTitle = "Plural",
-                    EntityName = "Plural",
+                    EntityNounTitle = "Plural",
+                    EntityNoun = "Plural",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -315,8 +315,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Attacks")
                 {
                     PropertyMetadatas = AttackMetadata.Metadata,
-                    EntityTitle = "Attack",
-                    EntityName = "Attack",
+                    EntityNounTitle = "Attack",
+                    EntityNoun = "Attack",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -326,8 +326,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Gods")
                 {
                     PropertyMetadatas = GodMetadata.Metadata,
-                    EntityTitle = "God",
-                    EntityName = "God",
+                    EntityNounTitle = "God",
+                    EntityNoun = "God",
                     EntityNamePropertyName = null,
                     EntityKeyPropertyName = "Key",
                     Description = "",

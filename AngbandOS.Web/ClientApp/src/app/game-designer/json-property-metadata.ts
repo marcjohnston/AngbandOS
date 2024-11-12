@@ -13,7 +13,7 @@ export class JsonPropertyMetadata {
   public propertyMetadatas: JsonPropertyMetadata[] | null | undefined = undefined;
   public entityKeyPropertyName: string | null | undefined = undefined;
   public entityNamePropertyName: string | null | undefined = undefined;
-  public entityTitle: string | null | undefined = undefined;
-  public entityName: string | null | undefined = undefined;
+  public entityNounTitle: string | null | undefined = undefined;
+  public entityNoun: string | null | undefined = undefined;
   public foreignCollectionName: string | null | undefined = undefined;
 }

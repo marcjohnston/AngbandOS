@@ -12,8 +12,8 @@ export class PropertyMetadata {
   public propertyMetadatas: PropertyMetadata[] | null;
   public entityKeyPropertyName: string | null;
   public entityNamePropertyName: string | null;
-  public entityTitle: string | null;
-  public entityName: string | null;
+  public entityNounTitle: string | null;
+  public entityNoun: string | null;
   public foreignCollectionName: string | null;
 
   /**
@@ -34,8 +34,8 @@ export class PropertyMetadata {
               propertyMetadatas: PropertyMetadata[] | null,
               entityKeyPropertyName: string | null,
               entityNamePropertyName: string | null,
-              entityTitle: string | null,
-              entityName: string | null,
+              entityNounTitle: string | null,
+              entityNoun: string | null,
               foreignCollectionName: string | null) {
     this.type = type;
     this.title = title;
@@ -47,8 +47,8 @@ export class PropertyMetadata {
     this.propertyMetadatas = propertyMetadatas;
     this.entityKeyPropertyName = entityKeyPropertyName;
     this.entityNamePropertyName = entityNamePropertyName;
-    this.entityTitle = entityTitle;
-    this.entityName = entityName;
+    this.entityNounTitle = entityNounTitle;
+    this.entityNoun = entityNoun;
     this.foreignCollectionName = foreignCollectionName;
   }
 }
