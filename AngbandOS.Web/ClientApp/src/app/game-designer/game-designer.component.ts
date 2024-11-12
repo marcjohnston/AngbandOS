@@ -7,6 +7,7 @@ import { TreeNode } from './tree-node';
 import { PropertyMetadataAndConfiguration } from './property-metadata-and-configuration';
 import { JsonPropertyMetadata } from './json-property-metadata';
 import { getEntityName } from './game-designer-library.module';
+import { convertToTitleCase } from '../modules/strings-library/strings-library.module';
 
 
 @Component({
@@ -226,7 +227,8 @@ export class GameDesignerComponent implements OnInit {
 
             // This is the parent node, we are not rendering any children.
             const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entityTable); // This is the parent node with no children (null).
-            const collectionTreeNode = new TreeNode(propertyMetadata.propertyName, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
+            const collecionName = convertToTitleCase(propertyMetadata.propertyName);
+            const collectionTreeNode = new TreeNode(collecionName, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
 
             // Add the keys to the Map of collections by the property name.

@@ -191,6 +191,18 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
     writer.WriteLine($"{indentation}}},");
 }
 
+string? RetrieveTupleComment(IEnumerable<string> commentList, string tuplePropertyName, string propertyName)
+{
+    // Find the description for the tuple in the returns XML comments.
+    string prefix = $"{tuplePropertyName}:{propertyName}:".ToLower();
+    string? matchingComment = commentList.SingleOrDefault(_description => _description.ToLower().StartsWith(prefix));
+    if (matchingComment != null)
+    {
+        return matchingComment.Substring(prefix.Length).Trim();
+    }
+    return null;
+}
+
 (ClassPropertyMetadata classLevelPropertyMetadata, PropertyMetadata[] propertyLevelPropertyMetadata) ParseClass(string classFilename)
 {
     // Detect if we have already processed this file.
@@ -235,15 +247,15 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
         string trimmedLine = line.Trim();
 
         // We need to support the foreign-collection single-line XML tag. 
-        if (trimmedLine.Contains(@"<foreign-collection>"))
+        if (trimmedLine.Contains(@"<foreign-collection-name>"))
         {
-            int startPos = trimmedLine.IndexOf("<foreign-collection>");
-            int endPos = trimmedLine.IndexOf("</foreign-collection>");
+            int startPos = trimmedLine.IndexOf("<foreign-collection-name>");
+            int endPos = trimmedLine.IndexOf("</foreign-collection-name>");
             if (endPos < 0)
             {
-                throw new Exception("Invalid <foreign-collection> XML comment.  The entire XML comment must be on a single line.");
+                throw new Exception("Invalid <foreign-collection-name> XML comment.  The entire XML comment must be on a single line.");
             }
-            foreignCollectionName = trimmedLine.Substring(startPos + 20, endPos - startPos - 20);
+            foreignCollectionName = trimmedLine.Substring(startPos + 25, endPos - startPos - 25);
             multilineXmlTagMode = MultilineTagModeEnum.None;
         }       
         else if (trimmedLine.Contains(@"<entity-name-property-name"))
@@ -400,24 +412,20 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
 
                         (string tupleDataType, bool tupleIsNullable, bool tupleIsArray) = ParseDataType(dataTypeAndNameTokens[0]);
 
-                        string tupleName = "";
-                        string tupleDescription = "";
+                        string tupleName = ""; // There is no default for a name.  Names are required.
+                        string? tupleTitle = null; // Titles are not required.
+                        string tupleDescription = ""; // There is no default for a description.  Descriptions are required.
+                        string? tupleForeignCollectionName = null; // Foreign-collection-names are not required.
 
                         // Check to see if a name was provided.
                         if (dataTypeAndNameTokens.Length > 1)
                         {
-                            // Find the description for the tuple in the returns XML comments.
-                            string? matchingDescription = returnsList.SingleOrDefault(_description => _description.ToLower().StartsWith($"{dataTypeAndNameTokens[1].ToLower()}:"));
-                            if (matchingDescription != null)
-                            {
-                                string[] matchingDescriptionTokens = matchingDescription.Split(":");
-                                tupleName = matchingDescriptionTokens[0];
-                                tupleDescription = matchingDescriptionTokens[1].Trim();
-                            }
+                            tupleDescription = RetrieveTupleComment(returnsList, dataTypeAndNameTokens[1], "description") ?? "";
+                            tupleTitle = RetrieveTupleComment(returnsList, dataTypeAndNameTokens[1], "title") ?? "";
+                            tupleForeignCollectionName = RetrieveTupleComment(returnsList, dataTypeAndNameTokens[1], "foreign-collection-name") ?? "";
                         }
-                        string tupleTitle = Regex.Replace(tupleName, "(?<!^)([A-Z])", " $1");
 
-                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString, foreignCollectionName);
+                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString, tupleForeignCollectionName);
                         if (propertyMetadata == null)
                         {
                             throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");

@@ -65,33 +65,33 @@ public static class MonsterRaceMetadata
                 {
                     Types = new PropertyMetadata[]
                     {
-                        new StringPropertyMetadata("MethodName")
+                        new ForeignKeyPropertyMetadata("")
                         {
-                            DefaultValue = null,
-                            Description = "The name of the attack method.",
+                            ForeignCollectionName = "",
+                            Description = "",
                             IsNullable = false,
-                            Title = "Method Name",
+                            Title = "",
                         },
-                        new StringPropertyMetadata("EffectName")
+                        new ForeignKeyPropertyMetadata("")
                         {
-                            DefaultValue = null,
-                            Description = "The name of the attach effect.",
+                            ForeignCollectionName = "",
+                            Description = "",
                             IsNullable = true,
-                            Title = "Effect Name",
+                            Title = "",
                         },
-                        new IntegerPropertyMetadata("Dice")
+                        new IntegerPropertyMetadata("")
                         {
                             DefaultValue = null,
-                            Description = "The number of dice.",
+                            Description = "",
                             IsNullable = false,
-                            Title = "Dice",
+                            Title = "",
                         },
-                        new IntegerPropertyMetadata("Sides")
+                        new IntegerPropertyMetadata("")
                         {
                             DefaultValue = null,
-                            Description = "The number of sides on the dice.",
+                            Description = "",
                             IsNullable = false,
-                            Title = "Sides",
+                            Title = "",
                         },
                     },
                     Description = "Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns null, by default.",

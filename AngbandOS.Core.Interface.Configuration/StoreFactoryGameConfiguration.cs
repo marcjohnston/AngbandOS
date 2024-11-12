@@ -79,8 +79,9 @@ public class StoreFactoryGameConfiguration
     /// Returns the manifests used to stock the store.  These manifests specify which item factories the store stocks and an assocated distribution weight for each item factory.
     /// </summary>
     /// <returns>
-    /// ItemFactoryName: The name of the item factory.
-    /// Weight: The associated distribution weight for the item factory.
+    /// ItemFactoryName:description: The name of the item factory.
+    /// ItemFactoryName:foreign-collection-name: ItemFactories
+    /// Weight:Description: The associated distribution weight for the item factory.
     /// </returns>
     public virtual (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions { get; set; } = null;
 
@@ -93,7 +94,7 @@ public class StoreFactoryGameConfiguration
     /// <summary>
     /// Returns the skopkeepers that can be owners of the store.
     /// </summary>
-    /// <foreign-collection>Shopkeepers</foreign-collection>
+    /// <foreign-collection-name>Shopkeepers</foreign-collection-name>
     public virtual string[] ShopkeeperNames { get; set; }
 
     public virtual string? AdvertisedStoreCommand1Name { get; set; } = null;
