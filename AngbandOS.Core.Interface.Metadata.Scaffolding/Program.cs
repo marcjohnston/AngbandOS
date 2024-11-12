@@ -11,12 +11,17 @@ if (args.Length < 2)
     Environment.Exit(1); // Invalid arguments.
 }
 
-string configurationName = args[0];
-string outputFolder = args[1];
+string configurationName = args[0]; // TODO: no detection
+string outputFolder = args[1]; // TODO: no detection
 
-string folder = Path.GetDirectoryName(configurationName);
-string filename = Path.GetFileNameWithoutExtension(configurationName);
-(ClassPropertyMetadata _, PropertyMetadata[] gameConfigurationPropertyMetadatas)  = ParseClass(configurationName);
+string? folder = Path.GetDirectoryName(configurationName); // TODO: no null detection
+string? filename = Path.GetFileNameWithoutExtension(configurationName); // TODO: no null detection
+
+// We need to cache the ParseClass method because it can be called numerous times.
+Dictionary<string, (ClassPropertyMetadata, PropertyMetadata[])> classPropertyMetadataDictionary = new Dictionary<string, (ClassPropertyMetadata, PropertyMetadata[])>();
+
+// Parse the top-level game configuration file that was supplied on the command line.
+(ClassPropertyMetadata _, PropertyMetadata[] gameConfigurationPropertyMetadatas) = ParseClass(configurationName);
 WriteClass(outputFolder, filename, gameConfigurationPropertyMetadatas);
 
 void WriteClass(string folder, string entityName, PropertyMetadata[] propertyMetadatas)
@@ -186,8 +191,15 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
     writer.WriteLine($"{indentation}}},");
 }
 
-(ClassPropertyMetadata classLevelPropertyMetadata, PropertyMetadata[] propertyLevelPropertyMetadata) ParseClass(string classFilename) // TODO: This method may be called multiple times on the same file ... e.g. ReadableFlavors
+(ClassPropertyMetadata classLevelPropertyMetadata, PropertyMetadata[] propertyLevelPropertyMetadata) ParseClass(string classFilename)
 {
+    // Detect if we have already processed this file.
+    if (classPropertyMetadataDictionary.TryGetValue(classFilename, out (ClassPropertyMetadata, PropertyMetadata[]) cachedResults))
+    {
+        // We did, return the results.
+        return cachedResults;
+    }
+
     List<PropertyMetadata> propertyMetadatas = new List<PropertyMetadata>(); // Mutable work-in-progress list of output results.
     MultilineTagModeEnum multilineXmlTagMode = MultilineTagModeEnum.None; // This mode tracks which multi-line XML tag we are processing.
     string[] text = File.ReadAllLines(classFilename);
@@ -463,7 +475,15 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
     {
         EntityNamePropertyName = classEntityNamePropertyName
     };
-    return (classLevelPropertyMetadata, propertyMetadatas.ToArray());
+
+    // Generate the results.
+    (ClassPropertyMetadata, PropertyMetadata[]) results = (classLevelPropertyMetadata, propertyMetadatas.ToArray());
+
+    // Store the results if the file is subject to be reparsed.
+    classPropertyMetadataDictionary.Add(classFilename, results);
+
+    // Return the results.
+    return results;
 }
 
 ///
