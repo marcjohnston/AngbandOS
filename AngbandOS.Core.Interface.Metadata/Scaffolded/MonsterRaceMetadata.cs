@@ -65,38 +65,37 @@ public static class MonsterRaceMetadata
                 {
                     Types = new PropertyMetadata[]
                     {
-                        new ForeignKeyPropertyMetadata("")
+                        new StringPropertyMetadata("MethodName")
                         {
-                            ForeignCollectionName = "",
+                            DefaultValue = null,
                             Description = "",
                             IsNullable = false,
-                            Title = "",
+                            Title = "Method Name",
                         },
-                        new ForeignKeyPropertyMetadata("")
+                        new StringPropertyMetadata("EffectName")
                         {
-                            ForeignCollectionName = "",
+                            DefaultValue = null,
                             Description = "",
                             IsNullable = true,
-                            Title = "",
+                            Title = "Effect Name",
                         },
-                        new IntegerPropertyMetadata("")
+                        new IntegerPropertyMetadata("Dice")
                         {
                             DefaultValue = null,
                             Description = "",
                             IsNullable = false,
-                            Title = "",
+                            Title = "Dice",
                         },
-                        new IntegerPropertyMetadata("")
+                        new IntegerPropertyMetadata("Sides")
                         {
                             DefaultValue = null,
                             Description = "",
                             IsNullable = false,
-                            Title = "",
+                            Title = "Sides",
                         },
                     },
                     Description = "Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns null, by default.",
                     IsNullable = true,
-                    Title = "Attack Definitions",
                 },
                 new BooleanPropertyMetadata("AttrAny")
                 {

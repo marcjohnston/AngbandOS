@@ -14,5 +14,6 @@ export class JsonPropertyMetadata {
   public entityKeyPropertyName: string | null | undefined = undefined;
   public entityNamePropertyName: string | null | undefined = undefined;
   public entityTitle: string | null | undefined = undefined;
+  public entityName: string | null | undefined = undefined;
   public foreignCollectionName: string | null | undefined = undefined;
 }

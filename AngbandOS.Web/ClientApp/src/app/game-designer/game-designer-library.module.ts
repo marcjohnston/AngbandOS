@@ -11,10 +11,10 @@ export function getEntityName(propertyMetadata: PropertyMetadata, entity: any): 
 
     // Check to see if the entity name is properly suffixed with the entity title.
     var entityName = keyValue; // Default the entity name to the key value.
-    const entityTitle: string = propertyMetadata.entityTitle!;
-    if (keyValue.endsWith(entityTitle)) {
+    const collectionEntityName: string = propertyMetadata.entityName!;
+    if (keyValue.endsWith(collectionEntityName)) {
       // Override the entity name by removing the suffix.
-      entityName = keyValue.slice(0, -entityTitle.length);
+      entityName = keyValue.slice(0, -collectionEntityName.length);
 
       // and converting it to title case now.
       entityName = convertToTitleCase(entityName);

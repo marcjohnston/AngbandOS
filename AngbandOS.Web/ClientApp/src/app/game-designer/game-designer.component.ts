@@ -113,7 +113,13 @@ export class GameDesignerComponent implements OnInit {
       return undefined;
     }
     if (jsonPropertyMetadata.entityTitle === undefined) {
-      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityValue value after json deserialization.`, "", {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityTitle value after json deserialization.`, "", {
+        duration: 5000
+      });
+      return undefined;
+    }
+    if (jsonPropertyMetadata.entityName === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityName value after json deserialization.`, "", {
         duration: 5000
       });
       return undefined;
@@ -185,6 +191,7 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.entityKeyPropertyName,
       jsonPropertyMetadata.entityNamePropertyName,
       jsonPropertyMetadata.entityTitle,
+      jsonPropertyMetadata.entityName,
       jsonPropertyMetadata.foreignCollectionName);
   }
 

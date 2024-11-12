@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Core.Interface;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 if (args.Length < 2)
 {
@@ -157,11 +158,12 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
         case CollectionPropertyMetadata genericCollectionArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new CollectionPropertyMetadata(\"{genericCollectionArrayPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            writer.WriteLine($"{indentation}    PropertyMetadatas = {genericCollectionArrayPropertyMetadata.EntityTitle}Metadata.Metadata,");
-            writer.WriteLine($"{indentation}    EntityTitle = \"{genericCollectionArrayPropertyMetadata.EntityTitle}\",");
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.PropertyMetadatas)} = {genericCollectionArrayPropertyMetadata.EntityName}Metadata.Metadata,");
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityTitle)} = \"{genericCollectionArrayPropertyMetadata.EntityTitle}\",");
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityName)} = \"{genericCollectionArrayPropertyMetadata.EntityName}\",");
             writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityNamePropertyName)} = {WriteNullableStringValue(genericCollectionArrayPropertyMetadata.EntityNamePropertyName)},");
-            writer.WriteLine($"{indentation}    EntityKeyPropertyName = \"{genericCollectionArrayPropertyMetadata.EntityKeyPropertyName}\",");
-            WriteClass(folder, genericCollectionArrayPropertyMetadata.EntityTitle, genericCollectionArrayPropertyMetadata.PropertyMetadatas);
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityKeyPropertyName)} = \"{genericCollectionArrayPropertyMetadata.EntityKeyPropertyName}\",");
+            WriteClass(folder, genericCollectionArrayPropertyMetadata.EntityName, genericCollectionArrayPropertyMetadata.PropertyMetadatas);
             break;
         case TuplePropertyMetadata genericTupleArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new TuplePropertyMetadata(\"{genericTupleArrayPropertyMetadata.PropertyName}\")");
@@ -202,6 +204,8 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
     }
     return null;
 }
+
+string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])", " $1");
 
 (ClassPropertyMetadata classLevelPropertyMetadata, PropertyMetadata[] propertyLevelPropertyMetadata) ParseClass(string classFilename)
 {
@@ -368,13 +372,6 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
                 // Get the name of the property.
                 string name = tokens[tokenIndex];
 
-                // Check to see if we need to provide a default title.
-                if (title == null)
-                {
-                    // Add a space before each word in the property name using pascal case.
-                    title = Regex.Replace(name, "(?<!^)([A-Z])", " $1");
-                }
-
                 // Check if the virtual keyword was specified.
                 int leadingTokensToSkip = 1; // Skip the public keyword.
                 if (tokens[1] == "virtual")
@@ -420,9 +417,10 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
                         // Check to see if a name was provided.
                         if (dataTypeAndNameTokens.Length > 1)
                         {
-                            tupleDescription = RetrieveTupleComment(returnsList, dataTypeAndNameTokens[1], "description") ?? "";
-                            tupleTitle = RetrieveTupleComment(returnsList, dataTypeAndNameTokens[1], "title") ?? "";
-                            tupleForeignCollectionName = RetrieveTupleComment(returnsList, dataTypeAndNameTokens[1], "foreign-collection-name") ?? "";
+                            tupleName = dataTypeAndNameTokens[1];
+                            tupleDescription = RetrieveTupleComment(returnsList, tupleName, "description") ?? "";
+                            tupleTitle = RetrieveTupleComment(returnsList, tupleName, "title");
+                            tupleForeignCollectionName = RetrieveTupleComment(returnsList, tupleName, "foreign-collection-name");
                         }
 
                         PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString, tupleForeignCollectionName);
@@ -446,8 +444,9 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
                     // Detect a collection.  Collections always have a suffix of GameConfiguration.
                     if (dataType.EndsWith("GameConfiguration"))
                     {
-                        // The entity title is fixed as the class name.  Extract the entity title from the collection name.
-                        string entityTitle = dataType.Substring(0, dataType.Length - 17);
+                        // The entity name defaults as the prefix of the class name.
+                        string entityName = dataType.Substring(0, dataType.Length - 17);
+
                         (PropertyMetadata collectionClassLevelPropertyMetadata, PropertyMetadata[] collectionPropertyLevelPropertyMetadata) = ParseClass(Path.Combine(Path.GetDirectoryName(classFilename), $"{dataType}.cs"));
                         propertyMetadatas.Add(new CollectionPropertyMetadata(name)
                         {
@@ -455,7 +454,8 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
                             Description = description,
                             IsNullable = isNullable,
                             Title = title,
-                            EntityTitle = entityTitle,
+                            EntityTitle = ConvertToTitleCase(entityName),
+                            EntityName = entityName,
                             EntityKeyPropertyName = entityKeyPropertyName ?? "Key", // Provide a default.
                             EntityNamePropertyName = collectionClassLevelPropertyMetadata.EntityNamePropertyName ?? entityNamePropertyName,
                             PropertyMetadatas = collectionPropertyLevelPropertyMetadata,
@@ -514,6 +514,11 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
 
 PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, string name, string? category, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString, string? foreignCollection)
 {
+    if (title == null)
+    {
+        title = ConvertToTitleCase(name);
+    }
+
     switch (dataType)
     {
         case "char":

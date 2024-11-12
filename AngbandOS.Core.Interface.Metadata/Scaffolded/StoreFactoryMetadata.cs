@@ -100,24 +100,23 @@ public static class StoreFactoryMetadata
                 {
                     Types = new PropertyMetadata[]
                     {
-                        new ForeignKeyPropertyMetadata("")
+                        new ForeignKeyPropertyMetadata("ItemFactoryName")
                         {
                             ForeignCollectionName = "ItemFactories",
                             Description = "The name of the item factory.",
                             IsNullable = false,
-                            Title = "",
+                            Title = "Item Factory Name",
                         },
-                        new IntegerPropertyMetadata("")
+                        new IntegerPropertyMetadata("Weight")
                         {
                             DefaultValue = null,
                             Description = "The associated distribution weight for the item factory.",
                             IsNullable = false,
-                            Title = "",
+                            Title = "Weight",
                         },
                     },
                     Description = "Returns the manifests used to stock the store.  These manifests specify which item factories the store stocks and an assocated distribution weight for each item factory.",
                     IsNullable = true,
-                    Title = "Store Stock Manifest Definitions",
                 },
                 new BooleanPropertyMetadata("ShufflesOwnersAndPricing")
                 {

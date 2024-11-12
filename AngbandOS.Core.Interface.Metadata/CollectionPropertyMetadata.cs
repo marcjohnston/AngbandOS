@@ -10,6 +10,12 @@ public class CollectionPropertyMetadata : PropertyMetadata
         set => base.PropertyMetadatas = value;
     }
 
+    public new string? EntityName
+    {
+        get => base.EntityName;
+        set => base.EntityName = value;
+    }
+
     public new string? EntityTitle
     {
         get => base.EntityTitle;
