@@ -117,6 +117,7 @@ public static class StoreFactoryMetadata
                     },
                     Description = "Returns the manifests used to stock the store.  These manifests specify which item factories the store stocks and an assocated distribution weight for each item factory.",
                     IsNullable = true,
+                    Title = "Store Stock Manifest Definitions",
                 },
                 new BooleanPropertyMetadata("ShufflesOwnersAndPricing")
                 {

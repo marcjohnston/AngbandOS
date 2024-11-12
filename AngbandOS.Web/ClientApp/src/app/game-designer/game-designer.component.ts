@@ -234,8 +234,7 @@ export class GameDesignerComponent implements OnInit {
 
             // This is the parent node, we are not rendering any children.
             const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entityTable); // This is the parent node with no children (null).
-            const collecionName = convertToTitleCase(propertyMetadata.propertyName);
-            const collectionTreeNode = new TreeNode(collecionName, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
+            const collectionTreeNode = new TreeNode(propertyMetadata.title!, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
 
             // Add the keys to the Map of collections by the property name.

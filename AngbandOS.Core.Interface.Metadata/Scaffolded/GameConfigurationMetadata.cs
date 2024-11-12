@@ -35,6 +35,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.",
                     IsNullable = true,
+                    Title = "Towns",
                 },
                 new CollectionPropertyMetadata("Shopkeepers")
                 {
@@ -45,6 +46,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Shopkeepers",
                 },
                 new CollectionPropertyMetadata("GameCommands")
                 {
@@ -55,6 +57,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Game Commands",
                 },
                 new CollectionPropertyMetadata("StoreCommands")
                 {
@@ -65,6 +68,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Store Commands",
                 },
                 new CollectionPropertyMetadata("HelpGroups")
                 {
@@ -75,6 +79,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Help Groups",
                 },
                 new CollectionPropertyMetadata("MonsterRaces")
                 {
@@ -85,6 +90,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Monster Races",
                 },
                 new CollectionPropertyMetadata("Symbols")
                 {
@@ -95,6 +101,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Symbols",
                 },
                 new CollectionPropertyMetadata("Vaults")
                 {
@@ -105,6 +112,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Vaults",
                 },
                 new CollectionPropertyMetadata("DungeonGuardians")
                 {
@@ -115,6 +123,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Dungeon Guardians",
                 },
                 new CollectionPropertyMetadata("Dungeons")
                 {
@@ -125,6 +134,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Dungeons",
                 },
                 new CollectionPropertyMetadata("StoreFactories")
                 {
@@ -135,6 +145,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "Towns have various plots where buildings and/or stores may be placed.  Stores factories are used to create specific stores.  Store factories can produce more than one store per town.  Use this collection to define factories that are used to create stores.",
                     IsNullable = true,
+                    Title = "Store Factories",
                 },
                 new CollectionPropertyMetadata("ProjectileGraphics")
                 {
@@ -145,6 +156,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Projectile Graphics",
                 },
                 new CollectionPropertyMetadata("AmuletReadableFlavors")
                 {
@@ -155,6 +167,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Amulet Readable Flavors",
                 },
                 new CollectionPropertyMetadata("MushroomReadableFlavors")
                 {
@@ -165,6 +178,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Mushroom Readable Flavors",
                 },
                 new CollectionPropertyMetadata("PotionReadableFlavors")
                 {
@@ -175,6 +189,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Potion Readable Flavors",
                 },
                 new CollectionPropertyMetadata("RingReadableFlavors")
                 {
@@ -185,6 +200,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Ring Readable Flavors",
                 },
                 new CollectionPropertyMetadata("RodReadableFlavors")
                 {
@@ -195,6 +211,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Rod Readable Flavors",
                 },
                 new CollectionPropertyMetadata("ScrollReadableFlavors")
                 {
@@ -205,6 +222,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Scroll Readable Flavors",
                 },
                 new CollectionPropertyMetadata("StaffReadableFlavors")
                 {
@@ -215,6 +233,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Staff Readable Flavors",
                 },
                 new CollectionPropertyMetadata("WandReadableFlavors")
                 {
@@ -225,6 +244,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Wand Readable Flavors",
                 },
                 new CollectionPropertyMetadata("ClassSpells")
                 {
@@ -235,6 +255,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Class Spells",
                 },
                 new CollectionPropertyMetadata("WizardCommands")
                 {
@@ -245,6 +266,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Wizard Commands",
                 },
                 new CollectionPropertyMetadata("Tiles")
                 {
@@ -255,6 +277,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Tiles",
                 },
                 new CollectionPropertyMetadata("Animations")
                 {
@@ -265,6 +288,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Animations",
                 },
                 new CollectionPropertyMetadata("Spells")
                 {
@@ -275,6 +299,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Spells",
                 },
                 new CollectionPropertyMetadata("Plurals")
                 {
@@ -285,6 +310,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Plurals",
                 },
                 new CollectionPropertyMetadata("Attacks")
                 {
@@ -295,6 +321,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Attacks",
                 },
                 new CollectionPropertyMetadata("Gods")
                 {
@@ -305,6 +332,7 @@ public static class GameConfigurationMetadata
                     EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
+                    Title = "Gods",
                 },
                 new StringsPropertyMetadata("ElvishTexts")
                 {

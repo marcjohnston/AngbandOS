@@ -96,6 +96,7 @@ public static class MonsterRaceMetadata
                     },
                     Description = "Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns null, by default.",
                     IsNullable = true,
+                    Title = "Attack Definitions",
                 },
                 new BooleanPropertyMetadata("AttrAny")
                 {

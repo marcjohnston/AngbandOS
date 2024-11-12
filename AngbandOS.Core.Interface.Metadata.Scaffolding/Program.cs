@@ -435,7 +435,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                         CategoryTitle = category,
                         Description = description,
                         IsNullable = isNullable,
-                        Title = title,
+                        Title = title ?? ConvertToTitleCase(name),
                         Types = tuplePropertyMetadatasList.ToArray(),
                     });
                 }
@@ -453,7 +453,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                             CategoryTitle = category,
                             Description = description,
                             IsNullable = isNullable,
-                            Title = title,
+                            Title = title ?? ConvertToTitleCase(name),
                             EntityTitle = ConvertToTitleCase(entityName),
                             EntityName = entityName,
                             EntityKeyPropertyName = entityKeyPropertyName ?? "Key", // Provide a default.
@@ -514,11 +514,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
 
 PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, string name, string? category, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString, string? foreignCollection)
 {
-    if (title == null)
-    {
-        title = ConvertToTitleCase(name);
-    }
-
+    title = title ?? ConvertToTitleCase(name);
     switch (dataType)
     {
         case "char":
