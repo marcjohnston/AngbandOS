@@ -2,14 +2,14 @@
   <!-- Foreign Key Array -->
   <div class="array-div" *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-keys'">
     <div class="array-item-div" *ngFor="let value of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let valueIndex = index">
-      <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="createArrayChild(activePropertyMetadataAndConfiguration, valueIndex)" [collections]="collections"></app-game-designer-type-foreign-key>
+      <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="createArrayChild(activePropertyMetadataAndConfiguration, valueIndex)" [collectionMap]="collectionMap"></app-game-designer-type-foreign-key>
       <mat-icon class="game-designer-delete-icon" (click)="deleteArrayIndex(valueIndex)">delete</mat-icon>
     </div>
     <mat-icon class="game-designer-add-icon" (click)="appendArrayItem()">add</mat-icon>
   </div>
   <!-- Foreign Key -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
-    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-type-foreign-key>
+    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collectionMap]="collectionMap"></app-game-designer-type-foreign-key>
   </div>
   <!-- String Array -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'strings'">

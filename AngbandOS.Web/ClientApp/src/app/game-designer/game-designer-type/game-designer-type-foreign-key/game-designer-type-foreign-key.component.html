@@ -1,12 +1,12 @@
 <div id="container" *ngIf="activePropertyMetadataAndConfiguration !== undefined">
   <div id="select-div">
     <select #select [ngModel]="getValue()" (change)="setValue()">
-      <ng-container *ngIf="collections !== undefined">
+      <ng-container *ngIf="collectionMap !== undefined">
         <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable">
           <option value=""></option>
         </ng-container>
-        <ng-container *ngFor="let option of collections.get(activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName!)">
-          <option value="{{option}}">{{option}}</option>
+        <ng-container *ngFor="let selectOption of collectionMap.get(this.activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName!)">
+          <option value="{{selectOption.value}}">{{selectOption.text}}</option>
         </ng-container>
       </ng-container>
     </select>

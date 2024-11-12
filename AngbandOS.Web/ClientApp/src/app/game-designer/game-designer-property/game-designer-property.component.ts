@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../property-metadata-and-configuration';
 import { PropertyMetadata } from '../property-metadata';
 import { getEntityName as importedGetEntityName } from '../game-designer-library.module';
+import { SelectOption } from '../select-option';
 
 @Component({
   selector: 'app-game-designer-property',
@@ -10,7 +11,7 @@ import { getEntityName as importedGetEntityName } from '../game-designer-library
 })
 export class GameDesignerPropertyComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
-  @Input() collections: Map<string, string[]> | undefined = undefined; // Undefined until Angular loads the parameters.
+  @Input() collectionMap: Map<string, SelectOption[]> | undefined = undefined; // Undefined until Angular loads the parameters.
 
   constructor() { }
 

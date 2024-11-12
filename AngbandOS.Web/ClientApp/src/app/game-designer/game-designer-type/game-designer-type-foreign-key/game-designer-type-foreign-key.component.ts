@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
+import { SelectOption } from '../../select-option';
 
 @Component({
   selector: 'app-game-designer-type-foreign-key',
@@ -8,7 +9,7 @@ import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-co
 })
 export class GameDesignerTypeForeignKeyComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
-  @Input() collections: Map<string, string[]> | undefined = undefined; // Undefined until Angular loads the parameters.
+  @Input() collectionMap: Map<string, SelectOption[]> | undefined = undefined; // Undefined until Angular loads the parameters.
   @ViewChild('select') select!: ElementRef;
   public unmodifiedValue: string | null | undefined = undefined;
   public errorMessage: string = "";

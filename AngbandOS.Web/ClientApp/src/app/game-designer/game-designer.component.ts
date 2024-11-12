@@ -7,7 +7,7 @@ import { TreeNode } from './tree-node';
 import { PropertyMetadataAndConfiguration } from './property-metadata-and-configuration';
 import { JsonPropertyMetadata } from './json-property-metadata';
 import { getEntityName } from './game-designer-library.module';
-import { convertToTitleCase } from '../modules/strings-library/strings-library.module';
+import { SelectOption } from './select-option';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { convertToTitleCase } from '../modules/strings-library/strings-library.m
 })
 
 export class GameDesignerComponent implements OnInit {
-  public collections = new Map<string, string[]>();
+  public collectionMap = new Map<string, SelectOption[]>();
 
   /**
    * The unverified metadata that has been received from the game controller.
@@ -216,7 +216,7 @@ export class GameDesignerComponent implements OnInit {
               return;
             }
             const childTreeNodes: TreeNode[] = [];
-            const collectionKeysArray: string[] = [];
+            const selectOptions: SelectOption[] = [];
             for (var entity of entityTable) {
               // Get the key value for the entity.
               const keyValue = entity[propertyMetadata.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
@@ -229,7 +229,7 @@ export class GameDesignerComponent implements OnInit {
               childTreeNodes.push(new TreeNode(entityName, null, [childPropertyMetadataAndConfiguration]));
 
               // Add the key value to the collection keys array.  This array will be assigned to the collections Map that is used for foreign key references.
-              collectionKeysArray.push(keyValue);
+              selectOptions.push(new SelectOption(entityName, keyValue));
             }
 
             // This is the parent node, we are not rendering any children.
@@ -238,7 +238,7 @@ export class GameDesignerComponent implements OnInit {
             rootTreeNodes.push(collectionTreeNode);
 
             // Add the keys to the Map of collections by the property name.
-            this.collections.set(propertyMetadata.propertyName, collectionKeysArray);
+            this.collectionMap.set(propertyMetadata.propertyName, selectOptions);
             break;
           case "strings":
               const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);

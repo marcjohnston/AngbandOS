@@ -38,7 +38,7 @@
         <ng-container *ngIf="activePropertyMetadataAndConfigurations !== null">
           <!-- Render all of metadatas and configurations for the selection.  The game settings will have multiple metadatas and configuraitons; everything else will have a single element -->
           <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations">
-            <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collections]="collections"></app-game-designer-property>
+            <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collectionMap]="collectionMap"></app-game-designer-property>
           </ng-container>
           <!-- Debug -->
           <ng-container *ngIf="false && activePropertyMetadataAndConfigurations !== null"> <!-- Change the first true/false to enable and disable the debug mode -->
