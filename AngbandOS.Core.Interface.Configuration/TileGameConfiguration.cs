@@ -13,6 +13,7 @@ public class TileGameConfiguration
     /// <summary>
     /// Returns the name of the symbol to be used for rendering.  This property is bound to the Symbol property during binding.
     /// </summary>
+    /// <foreign-collection-name>Symbols</foreign-collection-name>
     public virtual string SymbolName { get; set; }
 
     /// <summary>

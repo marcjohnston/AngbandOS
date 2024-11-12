@@ -26,9 +26,9 @@ public static class TileMetadata
                     IsNullable = true,
                     Title = "Step On Script Name",
                 },
-                new StringPropertyMetadata("SymbolName")
+                new ForeignKeyPropertyMetadata("SymbolName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Symbols",
                     Description = "Returns the name of the symbol to be used for rendering.  This property is bound to the Symbol property during binding.",
                     IsNullable = false,
                     Title = "Symbol Name",
