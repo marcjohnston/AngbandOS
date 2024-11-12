@@ -1,14 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface;
 
-public class CollectionPropertyMetadata : PropertyMetadata
+public class ClassPropertyMetadata : PropertyMetadata
 {
-    public CollectionPropertyMetadata(string propertyName) : base("collection", propertyName) { }
-
-    public new PropertyMetadata[]? PropertyMetadatas
-    {
-        get => base.PropertyMetadatas;
-        set => base.PropertyMetadatas = value;
-    }
+    public ClassPropertyMetadata() : base("", "") { }
 
     public new string? EntityTitle
     {

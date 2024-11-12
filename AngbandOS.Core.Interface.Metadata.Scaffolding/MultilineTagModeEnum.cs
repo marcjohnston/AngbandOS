@@ -1,4 +1,4 @@
-﻿enum ModeEnum
+﻿enum MultilineTagModeEnum
 {
     None,
     Summary,

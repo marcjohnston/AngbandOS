@@ -5,7 +5,7 @@
 /// set modifier to prevent the property values from being set by anything but the derived classes.  This arrangement allows the Games controller to return an array of PropertyMetadata without
 /// needing polymorphic serialiation.
 /// </summary>
-public class PropertyMetadata
+public abstract class PropertyMetadata
 {
     public PropertyMetadata(string type, string propertyName)
     {
@@ -52,7 +52,12 @@ public class PropertyMetadata
     /// <summary>
     /// Returns the name of the property that represents the primary key for a collection.  Returns null, if the property is not a collection.
     /// </summary>
-    public string? KeyPropertyName { get; protected set; } = null;
+    public string? EntityKeyPropertyName { get; protected set; } = null;
+
+    /// <summary>
+    /// Returns the name of the property that represents the primary key for a collection.  Returns null, if the property is not a collection.
+    /// </summary>
+    public string? EntityNamePropertyName { get; protected set; } = null;
 
     /// <summary>
     /// Returns the singular entity name for each of the objects in a collection.  Returns null, if the property is not a collection.

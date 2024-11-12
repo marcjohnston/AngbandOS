@@ -16,7 +16,7 @@ string outputFolder = args[1];
 
 string folder = Path.GetDirectoryName(configurationName);
 string filename = Path.GetFileNameWithoutExtension(configurationName);
-PropertyMetadata[] gameConfigurationPropertyMetadatas = ParseClass(configurationName);
+(ClassPropertyMetadata _, PropertyMetadata[] gameConfigurationPropertyMetadatas)  = ParseClass(configurationName);
 WriteClass(outputFolder, filename, gameConfigurationPropertyMetadatas);
 
 void WriteClass(string folder, string entityName, PropertyMetadata[] propertyMetadatas)
@@ -47,6 +47,18 @@ void WriteClass(string folder, string entityName, PropertyMetadata[] propertyMet
         writer.WriteLine("        }");
         writer.WriteLine("    }");
         writer.WriteLine("}");
+    }
+}
+
+string WriteNullableStringValue(string? value)
+{
+    if (value == null)
+    {
+        return "null";
+    }
+    else
+    {
+        return $"\"{value}\"";
     }
 }
 
@@ -142,7 +154,8 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             writer.WriteLine($"{indentation}    PropertyMetadatas = {genericCollectionArrayPropertyMetadata.EntityTitle}Metadata.Metadata,");
             writer.WriteLine($"{indentation}    EntityTitle = \"{genericCollectionArrayPropertyMetadata.EntityTitle}\",");
-            writer.WriteLine($"{indentation}    KeyPropertyName = \"Key\",");
+            writer.WriteLine($"{indentation}    {nameof(genericCollectionArrayPropertyMetadata.EntityNamePropertyName)} = {WriteNullableStringValue(genericCollectionArrayPropertyMetadata.EntityNamePropertyName)},");
+            writer.WriteLine($"{indentation}    EntityKeyPropertyName = \"{genericCollectionArrayPropertyMetadata.EntityKeyPropertyName}\",");
             WriteClass(folder, genericCollectionArrayPropertyMetadata.EntityTitle, genericCollectionArrayPropertyMetadata.PropertyMetadatas);
             break;
         case TuplePropertyMetadata genericTupleArrayPropertyMetadata:
@@ -173,30 +186,43 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
     writer.WriteLine($"{indentation}}},");
 }
 
-
-PropertyMetadata[] ParseClass(string classFilename)
+(ClassPropertyMetadata classLevelPropertyMetadata, PropertyMetadata[] propertyLevelPropertyMetadata) ParseClass(string classFilename) // TODO: This method may be called multiple times on the same file ... e.g. ReadableFlavors
 {
-    List<PropertyMetadata> propertyMetadatas = new List<PropertyMetadata>();
-
+    List<PropertyMetadata> propertyMetadatas = new List<PropertyMetadata>(); // Mutable work-in-progress list of output results.
+    MultilineTagModeEnum multilineXmlTagMode = MultilineTagModeEnum.None; // This mode tracks which multi-line XML tag we are processing.
     string[] text = File.ReadAllLines(classFilename);
-    ModeEnum mode = ModeEnum.None;
-    List<string> descriptionList = new List<string>();
-    List<string> returnsList = new List<string>();
-    string? category = null;
-    string? title = null;
-    string? foreignCollectionName = null;
 
-    void ResetXMLComments()
+    // Class level variables.  These may be overridden by property level variables.
+    string? classEntityNamePropertyName = null;
+
+    // Property level variables.  These are reset by the ResetPropertyXMLComments method.
+    List<string> descriptionList = new List<string>();
+    string? title = null;
+    string? category = null;
+    string? entityNamePropertyName = null;
+    string? entityKeyPropertyName = null;
+    string? foreignCollectionName = null;
+    List<string> returnsList = new List<string>();
+    
+    void ResetPropertyXMLComments()
     {
+        // The property that we are parsing will be changing.  We need to clear all of the values that we recorded for this property.
         descriptionList.Clear();
         title = null;
         category = null;
         foreignCollectionName = null;
+        entityNamePropertyName = null;
+        entityKeyPropertyName = null;
+        returnsList.Clear();
     }
 
+    // Parse every line in the c# file.
     foreach (string line in text)
     {
-        string trimmedLine = line.Trim(); // We are not converting to lowercase or supporting non-lowercase XML tags
+        // Convert the line to lowercase for easier detection of the XML tags.  We are not supporting case-sensitive XML tags.
+        string trimmedLine = line.Trim();
+
+        // We need to support the foreign-collection single-line XML tag. 
         if (trimmedLine.Contains(@"<foreign-collection>"))
         {
             int startPos = trimmedLine.IndexOf("<foreign-collection>");
@@ -206,46 +232,58 @@ PropertyMetadata[] ParseClass(string classFilename)
                 throw new Exception("Invalid <foreign-collection> XML comment.  The entire XML comment must be on a single line.");
             }
             foreignCollectionName = trimmedLine.Substring(startPos + 20, endPos - startPos - 20);
-            mode = ModeEnum.None;
+            multilineXmlTagMode = MultilineTagModeEnum.None;
+        }       
+        else if (trimmedLine.Contains(@"<entity-name-property-name"))
+        {
+            int startPos = trimmedLine.IndexOf("<entity-name-property-name>");
+            int endPos = trimmedLine.IndexOf("</entity-name-property-name>");
+            if (endPos < 0)
+            {
+                throw new Exception("Invalid <entity-name-property-name> XML comment.  The entire XML comment must be on a single line.");
+            }
+            entityNamePropertyName = trimmedLine.Substring(startPos + 27, endPos - startPos - 27);
+            multilineXmlTagMode = MultilineTagModeEnum.None;
         }
+        // Now detect multiline XML tags.
         else if (trimmedLine.StartsWith(@"///") && !trimmedLine.Contains(@"</"))
         {
             if (trimmedLine.Contains(@"<summary>"))
             {
-                mode = ModeEnum.Summary;
+                multilineXmlTagMode = MultilineTagModeEnum.Summary;
             }
             else if (trimmedLine.Contains(@"<title>"))
             {
-                mode = ModeEnum.Title;
+                multilineXmlTagMode = MultilineTagModeEnum.Title;
             }
             else if (trimmedLine.Contains(@"<category>"))
             {
-                mode = ModeEnum.Category;
+                multilineXmlTagMode = MultilineTagModeEnum.Category;
             }
             else if (trimmedLine.Contains(@"<returns>"))
             {
-                mode = ModeEnum.Returns;
+                multilineXmlTagMode = MultilineTagModeEnum.Returns;
             }
             else
             {
-                switch (mode)
+                switch (multilineXmlTagMode)
                 {
-                    case ModeEnum.Summary:
+                    case MultilineTagModeEnum.Summary:
                         if (trimmedLine.Length > 3)
                         {
                             descriptionList.Add(trimmedLine.Substring(4));
                         }
                         break;
-                    case ModeEnum.Returns:
+                    case MultilineTagModeEnum.Returns:
                         if (trimmedLine.Length > 3)
                         {
                             returnsList.Add(trimmedLine.Substring(4));
                         }
                         break;
-                    case ModeEnum.Title:
+                    case MultilineTagModeEnum.Title:
                         title = trimmedLine.Substring(4);
                         break;
-                    case ModeEnum.Category:
+                    case MultilineTagModeEnum.Category:
                         category = trimmedLine.Substring(4);
                         break;
                     default:
@@ -253,165 +291,182 @@ PropertyMetadata[] ParseClass(string classFilename)
                 }
             }
         }
-
-        string[] tokens = trimmedLine.Split(' ');
-
-        // Check to see if this line represents the class.
-        int classIndex = Array.IndexOf(tokens, "class");
-        if (classIndex >= 0)
+        else
         {
-            // Ensure this file matches the class we are expecting to parse.
-            string className = tokens[classIndex + 1];
-            if (className != Path.GetFileNameWithoutExtension(classFilename))
+            // This line of code is not an XML tag.  Split the line into tokens so that we can continue detection.
+            string[] tokens = trimmedLine.Split(' ');
+
+            // Check to see if this line represents the class.
+            int classIndex = Array.IndexOf(tokens, "class");
+            if (classIndex >= 0)
             {
-                throw new Exception();
-            }
-
-            // Reset the XML comments.
-            ResetXMLComments();
-
-            continue; // Skip the rest of the processing.
-        }
-        // Is this a property.
-        else if (tokens.Length > 1 && tokens[0] == "public")
-        {
-            // Yes.  Check if there is a default value specified.
-            string? defaultValueParsedString = null;
-            int tokenIndex = Array.IndexOf(tokens, "=");
-            if (tokenIndex >= 0)
-            {
-                // Extract the default value and remove the semi-colon.
-                defaultValueParsedString = String.Join(" ", tokens.Skip(tokenIndex + 1).Take(tokens.Length - tokenIndex)).Replace(";", "");
-
-                int commentPosition = defaultValueParsedString.IndexOf(@"//");
-                if (commentPosition >= 0)
+                // Ensure this file matches the class we are expecting to parse.
+                string className = tokens[classIndex + 1];
+                if (className != Path.GetFileNameWithoutExtension(classFilename))
                 {
-                    defaultValueParsedString = defaultValueParsedString.Substring(0, commentPosition);
+                    throw new Exception($"The file {classFilename} does not contain the expected class {className}.");
                 }
 
-                // Back off the { get; set; } tokens.
-                tokenIndex -= 5;
+                // Retrieve class level property values.
+                classEntityNamePropertyName = entityNamePropertyName;
+
+                // Reset the property level XML comments.  There shouldn't be any values at this point.
+                ResetPropertyXMLComments();
+
+                continue; // Skip additional processing of this file line.
             }
-            else
+            // Is this a public property.
+            else if (tokens.Length > 1 && tokens[0] == "public")
             {
-                // Find the } in the { get; set; } and back up 4 tokens.
-                tokenIndex = Array.IndexOf(tokens, "}") - 4;
-            }
-
-            // Get the name of the property.
-            string name = tokens[tokenIndex];
-
-            // Check to see if we need to provide a default title.
-            if (title == null)
-            {
-                // Add a space before each word in the property name using pascal case.
-                title = Regex.Replace(name, "(?<!^)([A-Z])", " $1");
-            }
-
-            // Check if the virtual keyword was specified.
-            int leadingTokensToSkip = 1; // Skip the public keyword.
-            if (tokens[1] == "virtual")
-            {
-                leadingTokensToSkip++; // Skip the virtual keyword.
-            }
-
-            string fullDataType = String.Join(" ", tokens.Skip(leadingTokensToSkip).Take(tokenIndex - leadingTokensToSkip));
-            (string dataType, bool isNullable, bool isArray) = ParseDataType(fullDataType);
-            string description = String.Join(' ', descriptionList);
-
-            // Detect a tuple
-            if (dataType.StartsWith("("))
-            {
-                // Ensure it is properly enclosed in parenthesis
-                if (!dataType.EndsWith(")"))
+                // Yes.  Check if there is a default value specified.
+                string? defaultValueParsedString = null;
+                int tokenIndex = Array.IndexOf(tokens, "=");
+                if (tokenIndex >= 0)
                 {
-                    string message = $"The {name} property in the {classFilename} file has a tuple data type of {dataType} that does not have a trailing end parenthesis ).";
-                    Console.WriteLine(message);
-                    throw new Exception(message);
-                }
+                    // Extract the default value and remove the semi-colon.
+                    defaultValueParsedString = String.Join(" ", tokens.Skip(tokenIndex + 1).Take(tokens.Length - tokenIndex)).Replace(";", "");
 
-                // Remove the parenthesis.
-                dataType = dataType.Substring(1, dataType.Length - 2);
-
-                // Separate each tuple data type into a token.
-                string[] tupleDataTypeTokens = dataType.Split(",");
-
-                // Generate property metadata for each token.
-                List<PropertyMetadata> tuplePropertyMetadatasList = new List<PropertyMetadata>();
-                foreach (string tupleDataTypeToken in tupleDataTypeTokens)
-                {
-                    // Check to see if there is a name for this tuple.
-                    string[] dataTypeAndNameTokens = tupleDataTypeToken.Trim().Split(" ");
-
-                    (string tupleDataType, bool tupleIsNullable, bool tupleIsArray) = ParseDataType(dataTypeAndNameTokens[0]);
-
-                    string tupleName = "";
-                    string tupleDescription = "";
-
-                    // Check to see if a name was provided.
-                    if (dataTypeAndNameTokens.Length > 1)
+                    int commentPosition = defaultValueParsedString.IndexOf(@"//");
+                    if (commentPosition >= 0)
                     {
-                        // Find the description for the tuple in the returns XML comments.
-                        string? matchingDescription = returnsList.SingleOrDefault(_description => _description.ToLower().StartsWith($"{dataTypeAndNameTokens[1].ToLower()}:"));
-                        if (matchingDescription != null)
+                        defaultValueParsedString = defaultValueParsedString.Substring(0, commentPosition);
+                    }
+
+                    // Back off the { get; set; } tokens.
+                    tokenIndex -= 5;
+                }
+                else
+                {
+                    // Find the } in the { get; set; } and back up 4 tokens.
+                    tokenIndex = Array.IndexOf(tokens, "}") - 4;
+                }
+
+                // Get the name of the property.
+                string name = tokens[tokenIndex];
+
+                // Check to see if we need to provide a default title.
+                if (title == null)
+                {
+                    // Add a space before each word in the property name using pascal case.
+                    title = Regex.Replace(name, "(?<!^)([A-Z])", " $1");
+                }
+
+                // Check if the virtual keyword was specified.
+                int leadingTokensToSkip = 1; // Skip the public keyword.
+                if (tokens[1] == "virtual")
+                {
+                    leadingTokensToSkip++; // Skip the virtual keyword.
+                }
+
+                string fullDataType = String.Join(" ", tokens.Skip(leadingTokensToSkip).Take(tokenIndex - leadingTokensToSkip));
+                (string dataType, bool isNullable, bool isArray) = ParseDataType(fullDataType);
+                string description = String.Join(' ', descriptionList);
+
+                // Detect a tuple
+                if (dataType.StartsWith("("))
+                {
+                    // Ensure it is properly enclosed in parenthesis
+                    if (!dataType.EndsWith(")"))
+                    {
+                        string message = $"The {name} property in the {classFilename} file has a tuple data type of {dataType} that does not have a trailing end parenthesis ).";
+                        Console.WriteLine(message);
+                        throw new Exception(message);
+                    }
+
+                    // Remove the parenthesis.
+                    dataType = dataType.Substring(1, dataType.Length - 2);
+
+                    // Separate each tuple data type into a token.
+                    string[] tupleDataTypeTokens = dataType.Split(",");
+
+                    // Generate property metadata for each token.
+                    List<PropertyMetadata> tuplePropertyMetadatasList = new List<PropertyMetadata>();
+                    foreach (string tupleDataTypeToken in tupleDataTypeTokens)
+                    {
+                        // Check to see if there is a name for this tuple.
+                        string[] dataTypeAndNameTokens = tupleDataTypeToken.Trim().Split(" ");
+
+                        (string tupleDataType, bool tupleIsNullable, bool tupleIsArray) = ParseDataType(dataTypeAndNameTokens[0]);
+
+                        string tupleName = "";
+                        string tupleDescription = "";
+
+                        // Check to see if a name was provided.
+                        if (dataTypeAndNameTokens.Length > 1)
                         {
-                            string[] matchingDescriptionTokens = matchingDescription.Split(":");
-                            tupleName = matchingDescriptionTokens[0];
-                            tupleDescription = matchingDescriptionTokens[1].Trim();
+                            // Find the description for the tuple in the returns XML comments.
+                            string? matchingDescription = returnsList.SingleOrDefault(_description => _description.ToLower().StartsWith($"{dataTypeAndNameTokens[1].ToLower()}:"));
+                            if (matchingDescription != null)
+                            {
+                                string[] matchingDescriptionTokens = matchingDescription.Split(":");
+                                tupleName = matchingDescriptionTokens[0];
+                                tupleDescription = matchingDescriptionTokens[1].Trim();
+                            }
                         }
-                    }
-                    string tupleTitle = Regex.Replace(tupleName, "(?<!^)([A-Z])", " $1");
+                        string tupleTitle = Regex.Replace(tupleName, "(?<!^)([A-Z])", " $1");
 
-                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString, foreignCollectionName);
-                    if (propertyMetadata == null)
-                    {
-                        throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
+                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString, foreignCollectionName);
+                        if (propertyMetadata == null)
+                        {
+                            throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
+                        }
+                        tuplePropertyMetadatasList.Add(propertyMetadata);
                     }
-                    tuplePropertyMetadatasList.Add(propertyMetadata);
-                }
-                propertyMetadatas.Add(new TuplePropertyMetadata(name)
-                {
-                    CategoryTitle = category,
-                    Description = description,
-                    IsNullable = isNullable,
-                    Title = title,
-                    Types = tuplePropertyMetadatasList.ToArray(),
-                });
-            }
-            else
-            {
-                if (dataType.EndsWith("GameConfiguration"))
-                {
-                    string entityTitle = dataType.Substring(0, dataType.Length - 17);
-                    PropertyMetadata[] collectionPropertyMetadatas = ParseClass(Path.Combine(Path.GetDirectoryName(classFilename), $"{dataType}.cs"));
-                    propertyMetadatas.Add(new CollectionPropertyMetadata(name)
+                    propertyMetadatas.Add(new TuplePropertyMetadata(name)
                     {
                         CategoryTitle = category,
                         Description = description,
                         IsNullable = isNullable,
                         Title = title,
-                        EntityTitle = entityTitle,
-                        PropertyMetadatas = collectionPropertyMetadatas,
+                        Types = tuplePropertyMetadatasList.ToArray(),
                     });
                 }
                 else
                 {
-                    PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, dataType, name, category, description, isNullable, isArray, title, defaultValueParsedString, foreignCollectionName);
-                    if (propertyMetadata == null)
+                    // Detect a collection.  Collections always have a suffix of GameConfiguration.
+                    if (dataType.EndsWith("GameConfiguration"))
                     {
-                        throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
+                        // The entity title is fixed as the class name.  Extract the entity title from the collection name.
+                        string entityTitle = dataType.Substring(0, dataType.Length - 17);
+                        (PropertyMetadata collectionClassLevelPropertyMetadata, PropertyMetadata[] collectionPropertyLevelPropertyMetadata) = ParseClass(Path.Combine(Path.GetDirectoryName(classFilename), $"{dataType}.cs"));
+                        propertyMetadatas.Add(new CollectionPropertyMetadata(name)
+                        {
+                            CategoryTitle = category,
+                            Description = description,
+                            IsNullable = isNullable,
+                            Title = title,
+                            EntityTitle = entityTitle,
+                            EntityKeyPropertyName = entityKeyPropertyName ?? "Key", // Provide a default.
+                            EntityNamePropertyName = collectionClassLevelPropertyMetadata.EntityNamePropertyName ?? entityNamePropertyName,
+                            PropertyMetadatas = collectionPropertyLevelPropertyMetadata,
+                        });
                     }
-                    propertyMetadatas.Add(propertyMetadata);
+                    else
+                    {
+                        // This is an unknown data-type.
+                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, dataType, name, category, description, isNullable, isArray, title, defaultValueParsedString, foreignCollectionName);
+                        if (propertyMetadata == null)
+                        {
+                            throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
+                        }
+                        propertyMetadatas.Add(propertyMetadata);
+                    }
+
                 }
 
+                ResetPropertyXMLComments();
             }
-
-            ResetXMLComments();
         }
     }
-    return propertyMetadatas.ToArray();
+
+    ClassPropertyMetadata classLevelPropertyMetadata = new ClassPropertyMetadata()
+    {
+        EntityNamePropertyName = classEntityNamePropertyName
+    };
+    return (classLevelPropertyMetadata, propertyMetadatas.ToArray());
 }
 
+///
 (string dataType, bool isNullable, bool isArray) ParseDataType(string fullDataType)
 {
     bool isNullable = false;

@@ -25,14 +25,19 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\modules\NewFolder\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\modules\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\modules\NewFolder\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\modules\NewFolder\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
     <None Remove="ClientApp\src\app\chat\chat-message.ts" />
+    <None Remove="ClientApp\src\app\game-designer\game-designer-library.module.ts" />
     <None Remove="ClientApp\src\app\game-designer\property-metadata-and-configuration.ts" />
     <None Remove="ClientApp\src\app\home\active-game-details.ts" />
     <None Remove="ClientApp\src\app\home\active-user-details.ts" />
@@ -58,6 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\game-designer\game-designer-library.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\game-designer\property-metadata-and-configuration.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\messages-window\json-game-message.ts">
       <SubType>Code</SubType>

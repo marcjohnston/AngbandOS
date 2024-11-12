@@ -30,7 +30,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = TownMetadata.Metadata,
                     EntityTitle = "Town",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.",
                     IsNullable = true,
                     Title = "Towns",
@@ -39,7 +40,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ShopkeeperMetadata.Metadata,
                     EntityTitle = "Shopkeeper",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Shopkeepers",
@@ -48,7 +50,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = GameCommandMetadata.Metadata,
                     EntityTitle = "GameCommand",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Game Commands",
@@ -57,7 +60,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = StoreCommandMetadata.Metadata,
                     EntityTitle = "StoreCommand",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Store Commands",
@@ -66,7 +70,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = HelpGroupMetadata.Metadata,
                     EntityTitle = "HelpGroup",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Help Groups",
@@ -75,7 +80,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = MonsterRaceMetadata.Metadata,
                     EntityTitle = "MonsterRace",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Monster Races",
@@ -84,7 +90,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = SymbolMetadata.Metadata,
                     EntityTitle = "Symbol",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Symbols",
@@ -93,7 +100,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = VaultMetadata.Metadata,
                     EntityTitle = "Vault",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Vaults",
@@ -102,7 +110,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = DungeonGuardianMetadata.Metadata,
                     EntityTitle = "DungeonGuardian",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Dungeon Guardians",
@@ -111,7 +120,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = DungeonMetadata.Metadata,
                     EntityTitle = "Dungeon",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Dungeons",
@@ -120,7 +130,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = StoreFactoryMetadata.Metadata,
                     EntityTitle = "StoreFactory",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "Towns have various plots where buildings and/or stores may be placed.  Stores factories are used to create specific stores.  Store factories can produce more than one store per town.  Use this collection to define factories that are used to create stores.",
                     IsNullable = true,
                     Title = "Store Factories",
@@ -129,7 +140,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ProjectileGraphicMetadata.Metadata,
                     EntityTitle = "ProjectileGraphic",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Projectile Graphics",
@@ -138,7 +150,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Amulet Readable Flavors",
@@ -147,7 +160,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Mushroom Readable Flavors",
@@ -156,7 +170,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Potion Readable Flavors",
@@ -165,7 +180,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Ring Readable Flavors",
@@ -174,7 +190,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Rod Readable Flavors",
@@ -183,7 +200,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Scroll Readable Flavors",
@@ -192,7 +210,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Staff Readable Flavors",
@@ -201,7 +220,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ReadableFlavorMetadata.Metadata,
                     EntityTitle = "ReadableFlavor",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = "Name",
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Wand Readable Flavors",
@@ -210,7 +230,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = ClassSpellMetadata.Metadata,
                     EntityTitle = "ClassSpell",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Class Spells",
@@ -219,7 +240,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = WizardCommandMetadata.Metadata,
                     EntityTitle = "WizardCommand",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Wizard Commands",
@@ -228,7 +250,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = TileMetadata.Metadata,
                     EntityTitle = "Tile",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Tiles",
@@ -237,7 +260,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = AnimationMetadata.Metadata,
                     EntityTitle = "Animation",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Animations",
@@ -246,7 +270,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = SpellMetadata.Metadata,
                     EntityTitle = "Spell",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Spells",
@@ -255,7 +280,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = PluralMetadata.Metadata,
                     EntityTitle = "Plural",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Plurals",
@@ -264,7 +290,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = AttackMetadata.Metadata,
                     EntityTitle = "Attack",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Attacks",
@@ -273,7 +300,8 @@ public static class GameConfigurationMetadata
                 {
                     PropertyMetadatas = GodMetadata.Metadata,
                     EntityTitle = "God",
-                    KeyPropertyName = "Key",
+                    EntityNamePropertyName = null,
+                    EntityKeyPropertyName = "Key",
                     Description = "",
                     IsNullable = true,
                     Title = "Gods",

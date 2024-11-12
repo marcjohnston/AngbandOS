@@ -44,8 +44,9 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
       tupleTypePropertyMetadata.description,
       tupleTypePropertyMetadata.defaultValue,
       tupleTypePropertyMetadata.propertyMetadatas,
-      tupleTypePropertyMetadata.keyPropertyName,
-      tupleTypePropertyMetadata.entityTitle,
+      null, // Tuples do not support collections/entities
+      null, // Tuples do not support collections/entities
+      null, // Tuples do not support collections/entities
       tupleTypePropertyMetadata.foreignCollectionName);
     return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
   }

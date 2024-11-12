@@ -10,7 +10,8 @@ export class PropertyMetadata {
   public description: string | null;
   public defaultValue: string[] | null;
   public propertyMetadatas: PropertyMetadata[] | null;
-  public keyPropertyName: string | null;
+  public entityKeyPropertyName: string | null;
+  public entityNamePropertyName: string | null;
   public entityTitle: string | null;
   public foreignCollectionName: string | null;
 
@@ -30,7 +31,8 @@ export class PropertyMetadata {
               description: string | null,
               defaultValue: string[] | null,
               propertyMetadatas: PropertyMetadata[] | null,
-              keyPropertyName: string | null,
+              entityKeyPropertyName: string | null,
+              entityNamePropertyName: string | null,
               entityTitle: string | null,
               foreignCollectionName: string | null) {
     this.type = type;
@@ -41,7 +43,8 @@ export class PropertyMetadata {
     this.description = description;
     this.defaultValue = defaultValue;
     this.propertyMetadatas = propertyMetadatas;
-    this.keyPropertyName = keyPropertyName;
+    this.entityKeyPropertyName = entityKeyPropertyName;
+    this.entityNamePropertyName = entityNamePropertyName;
     this.entityTitle = entityTitle;
     this.foreignCollectionName = foreignCollectionName;
   }

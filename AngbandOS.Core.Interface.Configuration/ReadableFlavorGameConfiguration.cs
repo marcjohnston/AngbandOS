@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
+/// <entity-name-property-name>Name</entity-name-property-name>
 [Serializable]
 public class ReadableFlavorGameConfiguration
 {

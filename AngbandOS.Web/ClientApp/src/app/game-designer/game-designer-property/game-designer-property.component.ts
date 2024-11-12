@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../property-metadata-and-configuration';
 import { PropertyMetadata } from '../property-metadata';
+import { getEntityName as importedGetEntityName } from '../game-designer-library.module';
 
 @Component({
   selector: 'app-game-designer-property',
@@ -14,6 +15,13 @@ export class GameDesignerPropertyComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  /***
+   * Returns an entity name.  If the entity doesn't have a defined property name, the property key value will be returned.
+   */
+  public getEntityName(entity: any) {
+    return importedGetEntityName(this.activePropertyMetadataAndConfiguration!, entity);
   }
 
   public addEntity() {

@@ -98,8 +98,14 @@ export class GameDesignerComponent implements OnInit {
       });
       return undefined;
     }
-    if (jsonPropertyMetadata.keyPropertyName === undefined) {
-      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid keyPropertyName value after json deserialization.`, "", {
+    if (jsonPropertyMetadata.entityKeyPropertyName === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityKeyPropertyName value after json deserialization.`, "", {
+        duration: 5000
+      });
+      return undefined;
+    }
+    if (jsonPropertyMetadata.entityNamePropertyName === undefined) {
+      this._snackBar.open(`Metadata property ${jsonPropertyMetadata.propertyName} has an invalid entityNamePropertyName value after json deserialization.`, "", {
         duration: 5000
       });
       return undefined;
@@ -118,11 +124,11 @@ export class GameDesignerComponent implements OnInit {
     }
 
     // Now check for data types that require additional properties to not be null.
-    // Validate that keyPropertyName is not null.
+    // Validate that entityKeyPropertyName is not null.
     switch (jsonPropertyMetadata.type) {
       case "collection":
-        if (jsonPropertyMetadata.keyPropertyName === null) {
-          this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null keyPropertyName value.`, "", {
+        if (jsonPropertyMetadata.entityKeyPropertyName === null) {
+          this._snackBar.open(`Collection metadata property ${jsonPropertyMetadata.propertyName} has an null entityKeyPropertyName value.`, "", {
             duration: 5000
           });
           return undefined;
@@ -174,7 +180,8 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.description,
       jsonPropertyMetadata.defaultValue,
       collectionPropertyMetadataList,
-      jsonPropertyMetadata.keyPropertyName,
+      jsonPropertyMetadata.entityKeyPropertyName,
+      jsonPropertyMetadata.entityNamePropertyName,
       jsonPropertyMetadata.entityTitle,
       jsonPropertyMetadata.foreignCollectionName);
   }
@@ -203,7 +210,7 @@ export class GameDesignerComponent implements OnInit {
             const collectionKeysArray: string[] = [];
             for (var entity of entityTable) {
               // Get the key value for the entity.
-              const keyValue = entity[propertyMetadata.keyPropertyName!]; // collectionKeyPropertyName was already validated.
+              const keyValue = entity[propertyMetadata.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
 
               // Build the child tree node for each entity of the collection.
               const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);

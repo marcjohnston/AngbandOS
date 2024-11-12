@@ -12,7 +12,7 @@
           <ng-container *ngFor="let entity of activePropertyMetadataAndConfiguration.configuration; let index=index">
             <tr>
               <td>
-                {{entity[activePropertyMetadataAndConfiguration.propertyMetadata.keyPropertyName!]}}
+                {{getEntityName(entity)}}
               </td>
               <td>
                 <mat-icon class="game-designer-delete-icon" (click)="deleteEntity(index)">delete</mat-icon>
