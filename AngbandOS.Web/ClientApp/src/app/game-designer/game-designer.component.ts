@@ -6,6 +6,7 @@ import { PropertyMetadata } from './property-metadata';
 import { TreeNode } from './tree-node';
 import { PropertyMetadataAndConfiguration } from './property-metadata-and-configuration';
 import { JsonPropertyMetadata } from './json-property-metadata';
+import { getEntityName } from './game-designer-library.module';
 
 
 @Component({
@@ -212,9 +213,12 @@ export class GameDesignerComponent implements OnInit {
               // Get the key value for the entity.
               const keyValue = entity[propertyMetadata.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
 
+              // Now generate the entity name for the tree node title.
+              const entityName = getEntityName(propertyMetadata, entity);
+
               // Build the child tree node for each entity of the collection.
               const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
-              childTreeNodes.push(new TreeNode(keyValue, null, [childPropertyMetadataAndConfiguration]));
+              childTreeNodes.push(new TreeNode(entityName, null, [childPropertyMetadataAndConfiguration]));
 
               // Add the key value to the collection keys array.  This array will be assigned to the collections Map that is used for foreign key references.
               collectionKeysArray.push(keyValue);

@@ -1,17 +1,17 @@
 import { convertToTitleCase } from "../modules/strings-library/strings-library.module";
-import { PropertyMetadataAndConfiguration } from "./property-metadata-and-configuration";
+import { PropertyMetadata } from "./property-metadata";
 
 /***
   * Returns an entity name.  If the entity doesn't have a defined property name, the property key value will be returned.
   */
-export function getEntityName(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, entity: any): string {
-  if (activePropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName === null) {
+export function getEntityName(propertyMetadata: PropertyMetadata, entity: any): string {
+  if (propertyMetadata.entityNamePropertyName === null) {
     // Retrieve the value of the entity key as the default.
-    const keyValue: string = entity[activePropertyMetadataAndConfiguration!.propertyMetadata.entityKeyPropertyName!] as string; // The activePropertyMetadataAndConfiguration will always be available.
+    const keyValue: string = entity[propertyMetadata.entityKeyPropertyName!] as string; // The activePropertyMetadataAndConfiguration will always be available.
 
     // Check to see if the entity name is properly suffixed with the entity title.
     var entityName = keyValue; // Default the entity name to the key value.
-    const entityTitle: string = activePropertyMetadataAndConfiguration!.propertyMetadata.entityTitle!;
+    const entityTitle: string = propertyMetadata.entityTitle!;
     if (keyValue.endsWith(entityTitle)) {
       // Override the entity name by removing the suffix.
       entityName = keyValue.slice(0, -entityTitle.length);
@@ -22,6 +22,6 @@ export function getEntityName(activePropertyMetadataAndConfiguration: PropertyMe
     return entityName;
   }
   else {
-    return entity[activePropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName]; // The activePropertyMetadataAndConfiguration and entityKeyPropertyName properties will always be available.
+    return entity[propertyMetadata.entityNamePropertyName]; // The activePropertyMetadataAndConfiguration and entityKeyPropertyName properties will always be available.
   }
 }

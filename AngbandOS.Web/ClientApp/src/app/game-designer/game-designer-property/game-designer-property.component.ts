@@ -21,7 +21,7 @@ export class GameDesignerPropertyComponent implements OnInit {
    * Returns an entity name.  If the entity doesn't have a defined property name, the property key value will be returned.
    */
   public getEntityName(entity: any) {
-    return importedGetEntityName(this.activePropertyMetadataAndConfiguration!, entity);
+    return importedGetEntityName(this.activePropertyMetadataAndConfiguration!.propertyMetadata, entity);
   }
 
   public addEntity() {
