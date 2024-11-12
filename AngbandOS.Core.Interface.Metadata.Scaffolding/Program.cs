@@ -227,6 +227,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
     List<string> descriptionList = new List<string>();
     string? title = null;
     string? category = null;
+    string? entityName = null;
     string? entityNamePropertyName = null;
     string? entityKeyPropertyName = null;
     string? foreignCollectionName = null;
@@ -238,6 +239,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
         descriptionList.Clear();
         title = null;
         category = null;
+        entityName = null;
         foreignCollectionName = null;
         entityNamePropertyName = null;
         entityKeyPropertyName = null;
@@ -261,7 +263,18 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
             }
             foreignCollectionName = trimmedLine.Substring(startPos + 25, endPos - startPos - 25);
             multilineXmlTagMode = MultilineTagModeEnum.None;
-        }       
+        }
+        else if (trimmedLine.Contains(@"<entity-name>"))
+        {
+            int startPos = trimmedLine.IndexOf("<entity-name>");
+            int endPos = trimmedLine.IndexOf("</entity-name>");
+            if (endPos < 0)
+            {
+                throw new Exception("Invalid <entity-name> XML comment.  The entire XML comment must be on a single line.");
+            }
+            entityName = trimmedLine.Substring(startPos + 13, endPos - startPos - 13);
+            multilineXmlTagMode = MultilineTagModeEnum.None;
+        }
         else if (trimmedLine.Contains(@"<entity-name-property-name"))
         {
             int startPos = trimmedLine.IndexOf("<entity-name-property-name>");
@@ -445,7 +458,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                     if (dataType.EndsWith("GameConfiguration"))
                     {
                         // The entity name defaults as the prefix of the class name.
-                        string entityName = dataType.Substring(0, dataType.Length - 17);
+                        entityName = entityName ?? dataType.Substring(0, dataType.Length - 17);
 
                         (PropertyMetadata collectionClassLevelPropertyMetadata, PropertyMetadata[] collectionPropertyLevelPropertyMetadata) = ParseClass(Path.Combine(Path.GetDirectoryName(classFilename), $"{dataType}.cs"));
                         propertyMetadatas.Add(new CollectionPropertyMetadata(name)

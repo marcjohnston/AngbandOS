@@ -160,9 +160,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("AmuletReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = AmuletReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Amulet Readable Flavor",
+                    EntityName = "AmuletReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -171,9 +171,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("MushroomReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = MushroomReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Mushroom Readable Flavor",
+                    EntityName = "MushroomReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -182,9 +182,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("PotionReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = PotionReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Potion Readable Flavor",
+                    EntityName = "PotionReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -193,9 +193,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("RingReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = RingReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Ring Readable Flavor",
+                    EntityName = "RingReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -204,9 +204,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("RodReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = RodReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Rod Readable Flavor",
+                    EntityName = "RodReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -215,9 +215,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("ScrollReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = ScrollReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Scroll Readable Flavor",
+                    EntityName = "ScrollReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -226,9 +226,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("StaffReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = StaffReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Staff Readable Flavor",
+                    EntityName = "StaffReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",
@@ -237,9 +237,9 @@ public static class GameConfigurationMetadata
                 },
                 new CollectionPropertyMetadata("WandReadableFlavors")
                 {
-                    PropertyMetadatas = ReadableFlavorMetadata.Metadata,
-                    EntityTitle = "Readable Flavor",
-                    EntityName = "ReadableFlavor",
+                    PropertyMetadatas = WandReadableFlavorMetadata.Metadata,
+                    EntityTitle = "Wand Readable Flavor",
+                    EntityName = "WandReadableFlavor",
                     EntityNamePropertyName = "Name",
                     EntityKeyPropertyName = "Key",
                     Description = "",

@@ -48,20 +48,28 @@ public class GameConfiguration
 
     public ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
 
+    /// <entity-name>AmuletReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? AmuletReadableFlavors { get; set; } = null;
 
+    /// <entity-name>MushroomReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? MushroomReadableFlavors { get; set; } = null;
 
+    /// <entity-name>PotionReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? PotionReadableFlavors { get; set; } = null;
 
+    /// <entity-name>RingReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? RingReadableFlavors { get; set; } = null;
 
+    /// <entity-name>RodReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? RodReadableFlavors { get; set; } = null;
 
+    /// <entity-name>ScrollReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? ScrollReadableFlavors { get; set; } = null;
 
+    /// <entity-name>StaffReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? StaffReadableFlavors { get; set; } = null;
 
+    /// <entity-name>WandReadableFlavor</entity-name>
     public ReadableFlavorGameConfiguration[]? WandReadableFlavors { get; set; } = null;
 
     public ClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
