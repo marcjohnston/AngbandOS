@@ -44,9 +44,9 @@ public static class GameCommandMetadata
                     Title = "Is Enabled",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("ExecuteScriptName")
+                new ForeignKeyPropertyMetadata("ExecuteScriptName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Scripts",
                     Description = "",
                     IsNullable = true,
                     Title = "Execute Script Name",

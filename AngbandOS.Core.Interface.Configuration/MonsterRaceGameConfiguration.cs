@@ -19,6 +19,7 @@ public class MonsterRaceGameConfiguration
 {
     public virtual string Key { get; set; }
 
+    /// <foreign-collection-name>MonsterSpells</foreign-collection-name>
     public virtual string[]? SpellNames { get; set; } = null;
 
     /// <summary>
@@ -30,6 +31,7 @@ public class MonsterRaceGameConfiguration
     /// Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the
     /// bind phase.
     /// </summary>
+    /// <foreign-collection-name>Symbols</foreign-collection-name>
     public virtual string SymbolName { get; set; }
 
     /// <summary>
@@ -52,10 +54,11 @@ public class MonsterRaceGameConfiguration
     /// null, by default.
     /// </summary>
     /// <returns>
-    /// MethodName: The name of the attack method.
-    /// EffectName: The name of the attach effect.
-    /// Dice: The number of dice.
-    /// Sides: The number of sides on the dice.
+    /// MethodName:description The name of the attack method.
+    /// MethodName:foreign-collection-name: Attacks
+    /// EffectName:description: The name of the attach effect.
+    /// Dice:description: The number of dice.
+    /// Sides:description: The number of sides on the dice.
     /// </returns>
     public virtual (string MethodName, string? EffectName, int Dice, int Sides)[]? AttackDefinitions { get; set; } = null;
 

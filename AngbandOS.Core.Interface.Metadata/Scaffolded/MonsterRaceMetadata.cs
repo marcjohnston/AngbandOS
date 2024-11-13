@@ -20,9 +20,9 @@ public static class MonsterRaceMetadata
                     Title = "Key",
                     CategoryTitle = "",
                 },
-                new StringsPropertyMetadata("SpellNames")
+                new ForeignKeysPropertyMetadata("SpellNames")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Spells",
                     Description = "",
                     IsNullable = true,
                     Title = "Spell Names",
@@ -36,9 +36,9 @@ public static class MonsterRaceMetadata
                     Title = "Multiline Name",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("SymbolName")
+                new ForeignKeyPropertyMetadata("SymbolName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Symbols",
                     Description = "Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the bind phase.",
                     IsNullable = false,
                     Title = "Symbol Name",
@@ -72,9 +72,9 @@ public static class MonsterRaceMetadata
                 {
                     Types = new PropertyMetadata[]
                     {
-                        new StringPropertyMetadata("MethodName")
+                        new ForeignKeyPropertyMetadata("MethodName")
                         {
-                            DefaultValue = null,
+                            ForeignCollectionName = "Attacks",
                             Description = "",
                             IsNullable = false,
                             Title = "Method Name",

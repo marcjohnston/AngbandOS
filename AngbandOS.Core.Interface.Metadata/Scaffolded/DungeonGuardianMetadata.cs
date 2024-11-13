@@ -20,9 +20,9 @@ public static class DungeonGuardianMetadata
                     Title = "Key",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("MonsterRaceName")
+                new ForeignKeyPropertyMetadata("MonsterRaceName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "MonsterRaces",
                     Description = "Returns the name of the race for the first quest monster.",
                     IsNullable = false,
                     Title = "Monster Race Name",

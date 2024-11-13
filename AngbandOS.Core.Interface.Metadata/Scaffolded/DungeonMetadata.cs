@@ -36,17 +36,17 @@ public static class DungeonMetadata
                     Title = "Bias Monster Filter Name",
                     CategoryTitle = "",
                 },
-                new StringsPropertyMetadata("DungeonGuardianNames")
+                new ForeignKeysPropertyMetadata("DungeonGuardianNames")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "DungeonGuardians",
                     Description = "Returns all of the quests associated to the dungeon.",
                     IsNullable = true,
                     Title = "Dungeon Guardian Names",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("MapSymbol")
+                new ForeignKeyPropertyMetadata("MapSymbol")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Symbols",
                     Description = "The symbol used for the dungeon on the wilderness map",
                     IsNullable = false,
                     Title = "Map Symbol",

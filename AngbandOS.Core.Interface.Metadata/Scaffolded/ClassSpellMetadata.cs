@@ -12,17 +12,17 @@ public static class ClassSpellMetadata
         {
             return new PropertyMetadata[]
             {
-                new StringPropertyMetadata("SpellName")
+                new ForeignKeyPropertyMetadata("SpellName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Spells",
                     Description = "",
                     IsNullable = false,
                     Title = "Spell Name",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("CharacterClassName")
+                new ForeignKeyPropertyMetadata("CharacterClassName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "CharacterClasses",
                     Description = "",
                     IsNullable = false,
                     Title = "Character Class Name",

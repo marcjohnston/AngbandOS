@@ -20,9 +20,9 @@ public static class RodReadableFlavorMetadata
                     Title = "Key",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("SymbolName")
+                new ForeignKeyPropertyMetadata("SymbolName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Symbols",
                     Description = "",
                     IsNullable = false,
                     Title = "Symbol Name",

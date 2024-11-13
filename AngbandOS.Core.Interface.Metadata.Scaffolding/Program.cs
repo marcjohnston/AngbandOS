@@ -159,7 +159,7 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
 {
     // Find the description for the tuple in the returns XML comments.
     string prefix = $"{tuplePropertyName}:{propertyName}:".ToLower();
-    string? matchingComment = commentList.SingleOrDefault(_description => _description.ToLower().StartsWith(prefix));
+    string? matchingComment = commentList.SingleOrDefault(_description => _description.ToLower().StartsWith(prefix)); // TODO: Detect multiple matches and throw error.
     if (matchingComment != null)
     {
         return matchingComment.Substring(prefix.Length).Trim();

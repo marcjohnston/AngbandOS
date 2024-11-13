@@ -20,9 +20,9 @@ public static class RingReadableFlavorMetadata
                     Title = "Key",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("SymbolName")
+                new ForeignKeyPropertyMetadata("SymbolName")
                 {
-                    DefaultValue = null,
+                    ForeignCollectionName = "Symbols",
                     Description = "",
                     IsNullable = false,
                     Title = "Symbol Name",

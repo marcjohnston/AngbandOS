@@ -27,11 +27,13 @@ public class DungeonGameConfiguration
     /// <summary>
     /// Returns all of the quests associated to the dungeon.
     /// </summary>
+    /// <foreign-collection-name>DungeonGuardians</foreign-collection-name>
     public virtual string[]? DungeonGuardianNames { get; set; } = null;
 
     /// <summary>
     /// The symbol used for the dungeon on the wilderness map
     /// </summary>
+    /// <foreign-collection-name>Symbols</foreign-collection-name>
     public virtual string MapSymbol { get; set; }
 
     /// <summary>

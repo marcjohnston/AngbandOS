@@ -16,6 +16,7 @@ public class DungeonGuardianGameConfiguration
     /// <summary>
     /// Returns the name of the race for the first quest monster.
     /// </summary>
+    /// <foreign-collection-name>MonsterRaces</foreign-collection-name>
     public virtual string MonsterRaceName { get; set; }
 
     /// <summary>

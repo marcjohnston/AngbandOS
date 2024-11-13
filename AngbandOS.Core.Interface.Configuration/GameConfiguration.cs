@@ -16,6 +16,7 @@ public class GameConfiguration
     /// Returns the name of the town where the player will start, ignoring whether or not that town is a startup town; or null, for a random town to be choosen 
     /// from the available startup towns.
     /// </summary>
+    /// <foreign-collection-name>Towns</foreign-collection-name>
     public string? StartupTownName { get; set; } = null;
 
     /// <summary>

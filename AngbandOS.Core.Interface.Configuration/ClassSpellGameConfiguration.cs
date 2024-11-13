@@ -11,7 +11,9 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class ClassSpellGameConfiguration
 {
+    /// <foreign-collection-name>Spells</foreign-collection-name>
     public virtual string SpellName { get; set; }
+    /// <foreign-collection-name>CharacterClasses</foreign-collection-name>
     public virtual string CharacterClassName { get; set; }
     public virtual int Level { get; set; }
     public virtual int ManaCost { get; set; }

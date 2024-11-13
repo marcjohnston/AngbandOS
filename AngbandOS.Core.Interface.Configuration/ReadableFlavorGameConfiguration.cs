@@ -13,6 +13,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ReadableFlavorGameConfiguration
 {
     public virtual string Key { get; set; }
+    /// <foreign-collection-name>Symbols</foreign-collection-name>
     public virtual string SymbolName { get; set; }
     public virtual ColorEnum Color { get; set; }
     public virtual string Name { get; set; }
