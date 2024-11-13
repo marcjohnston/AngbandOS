@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		Documents\AngbandOS.Web Topology.pptx = Documents\AngbandOS.Web Topology.pptx
 		Documents\Cthangband.xlsx = Documents\Cthangband.xlsx
+		Documents\Object Property Design and Binding.pptx = Documents\Object Property Design and Binding.pptx
 		Object Property Design and Binding.txt = Object Property Design and Binding.txt
 	EndProjectSection
 EndProject
