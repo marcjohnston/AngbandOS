@@ -5,9 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interfaces;
-using Timer = AngbandOS.Core.Timers.Timer;
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]

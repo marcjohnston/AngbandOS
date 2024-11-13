@@ -28,7 +28,7 @@ internal abstract class MonsterSpell : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     /// <summary>
     /// Returns true, if the spell is an innate ability.  Returns false, by default.  Spells that return true represent spells in the Flags4 flag-set.
@@ -222,6 +222,7 @@ internal abstract class MonsterSpell : IGetKey
     /// </summary>
     public virtual SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { };
 
+    public virtual string[]? SmartLearnSpellResistantDetectionKeys => null;
     /// <summary>
     /// Returns true, if the attack on a sleeping monster, wakes the monster.  Returns true, by default.
     /// </summary>

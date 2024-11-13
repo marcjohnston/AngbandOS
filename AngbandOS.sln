@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		Documents\AngbandOS.Web Topology.pptx = Documents\AngbandOS.Web Topology.pptx
 		Documents\Cthangband.xlsx = Documents\Cthangband.xlsx
+		Object Property Design and Binding.txt = Object Property Design and Binding.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.GamePacks.Cthangband", "AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj", "{DBE26605-7C51-45F7-BEDD-3113A4208AAF}"
