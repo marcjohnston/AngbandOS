@@ -14,10 +14,11 @@ public static class AnimationMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("Character")
                 {
@@ -25,6 +26,7 @@ public static class AnimationMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Character",
+                    CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
@@ -32,13 +34,15 @@ public static class AnimationMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Color",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("AlternateColor")
                 {
@@ -46,13 +50,15 @@ public static class AnimationMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Alternate Color",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Sequence")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Sequence",
+                    CategoryTitle = "",
                 },
             };
         }

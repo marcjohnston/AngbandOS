@@ -14,10 +14,11 @@ public static class VaultMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
@@ -25,13 +26,15 @@ public static class VaultMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Color",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Category")
                 {
@@ -39,6 +42,7 @@ public static class VaultMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Category",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Height")
                 {
@@ -46,6 +50,7 @@ public static class VaultMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Height",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Rating")
                 {
@@ -53,13 +58,15 @@ public static class VaultMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Rating",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Text")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Text",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
@@ -67,6 +74,7 @@ public static class VaultMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Width",
+                    CategoryTitle = "",
                 },
             };
         }

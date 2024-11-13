@@ -1,7 +1,16 @@
 ﻿using AngbandOS.Core.Interface;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
+
+const string FOREIGNCOLLECTIONNAMETAGNAME = "foreign-collection-name";
+const string TITLETAGNAME = "title";
+const string CATEGORYTITLETAGNAME = "category-title";
+const string ENTITYNOUNTAGNAME = "entity-noun";
+const string ENTITYNOUNTITLETAGNAME = "entity-noun-title";
+const string ENTITYNAMEPROPERTYNAMETAGNAME = "entity-name-property-name";
+const string ENTITYKEYPROPERTYNAMETAGNAME = "entity-key-property-name";
+const string SUMMARYTAGNAME = "summary";
+const string RETURNSTAGNAME = "returns";
 
 if (args.Length < 2)
 {
@@ -78,11 +87,11 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             if (!genericIntegerPropertyMetadata.DefaultValue.HasValue)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = null,");
+                writer.WriteLine($"{indentation}    {nameof(genericIntegerPropertyMetadata.DefaultValue)} = null,");
             }
             else
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericIntegerPropertyMetadata.DefaultValue.Value},");
+                writer.WriteLine($"{indentation}    {nameof(genericIntegerPropertyMetadata.DefaultValue)} = {genericIntegerPropertyMetadata.DefaultValue.Value},");
             }
             break;
         case BooleanPropertyMetadata genericBooleanPropertyMetadata:
@@ -90,11 +99,11 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             if (!genericBooleanPropertyMetadata.DefaultValue.HasValue)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = null,");
+                writer.WriteLine($"{indentation}    {nameof(genericBooleanPropertyMetadata.DefaultValue)} = null,");
             }
             else
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericBooleanPropertyMetadata.DefaultValue.Value.ToString().ToLower()},");
+                writer.WriteLine($"{indentation}    {nameof(genericBooleanPropertyMetadata.DefaultValue)} = {genericBooleanPropertyMetadata.DefaultValue.Value.ToString().ToLower()},");
             }
             break;
         case StringPropertyMetadata genericStringPropertyMetadata:
@@ -102,11 +111,11 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             if (genericStringPropertyMetadata.DefaultValue == null)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = null,");
+                writer.WriteLine($"{indentation}    Defaul{nameof(genericStringPropertyMetadata.DefaultValue)}tValue = null,");
             }
             else
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericStringPropertyMetadata.DefaultValue},");
+                writer.WriteLine($"{indentation}    {nameof(genericStringPropertyMetadata.DefaultValue)} = {genericStringPropertyMetadata.DefaultValue},");
             }
             break;
         case StringsPropertyMetadata genericStringArrayPropertyMetadata:
@@ -114,11 +123,11 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             if (genericStringArrayPropertyMetadata.DefaultValue == null)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = null,");
+                writer.WriteLine($"{indentation}    {nameof(genericStringArrayPropertyMetadata.DefaultValue)} = null,");
             }
             else
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericStringArrayPropertyMetadata.DefaultValue},");
+                writer.WriteLine($"{indentation}    {nameof(genericStringArrayPropertyMetadata.DefaultValue)} = {genericStringArrayPropertyMetadata.DefaultValue},");
             }
             break;
         case ForeignKeyPropertyMetadata genericForeignKeyPropertyMetadata:
@@ -136,11 +145,11 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             if (!genericCharacterPropertyMetadata.DefaultValue.HasValue)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = null,");
+                writer.WriteLine($"{indentation}    {nameof(genericCharacterPropertyMetadata.DefaultValue)} = null,");
             }
             else
             {
-                writer.WriteLine($"{indentation}    DefaultValue = {genericCharacterPropertyMetadata.DefaultValue.Value},");
+                writer.WriteLine($"{indentation}    {nameof(genericCharacterPropertyMetadata.DefaultValue)} = {genericCharacterPropertyMetadata.DefaultValue.Value},");
             }
             break;
         case ColorPropertyMetadata genericColorEnumPropertyMetadata:
@@ -148,11 +157,11 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             if (!genericColorEnumPropertyMetadata.DefaultValue.HasValue)
             {
-                writer.WriteLine($"{indentation}    DefaultValue = null,");
+                writer.WriteLine($"{indentation}    {nameof(genericColorEnumPropertyMetadata.DefaultValue)} = null,");
             }
             else
             {
-                writer.WriteLine($"{indentation}    DefaultValue = ColorEnum.{genericColorEnumPropertyMetadata.DefaultValue.Value},");
+                writer.WriteLine($"{indentation}    {nameof(genericColorEnumPropertyMetadata.DefaultValue)} = ColorEnum.{genericColorEnumPropertyMetadata.DefaultValue.Value},");
             }
             break;
         case CollectionPropertyMetadata genericCollectionArrayPropertyMetadata:
@@ -168,7 +177,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
         case TuplePropertyMetadata genericTupleArrayPropertyMetadata:
             writer.WriteLine($"{indentation}new TuplePropertyMetadata(\"{genericTupleArrayPropertyMetadata.PropertyName}\")");
             writer.WriteLine($"{indentation}{{");
-            writer.WriteLine($"{indentation}    Types = new PropertyMetadata[]");
+            writer.WriteLine($"{indentation}    {nameof(genericTupleArrayPropertyMetadata.Types)} = new PropertyMetadata[]");
             writer.WriteLine($"{indentation}    {{");
             foreach (PropertyMetadata tuplePropertyMetadata in genericTupleArrayPropertyMetadata.Types)
             {
@@ -180,15 +189,15 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             throw new Exception($"{genericPropertyMetadata.GetType().Name} not supported.");
     }
 
-    writer.WriteLine($"{indentation}    Description = \"{genericPropertyMetadata.Description.Replace("\"", "\\\"")}\",");
-    writer.WriteLine($"{indentation}    IsNullable = {genericPropertyMetadata.IsNullable.ToString().ToLower()},");
+    writer.WriteLine($"{indentation}    {nameof(genericPropertyMetadata.Description)} = \"{genericPropertyMetadata.Description.Replace("\"", "\\\"")}\",");
+    writer.WriteLine($"{indentation}    {nameof(genericPropertyMetadata.IsNullable)} = {genericPropertyMetadata.IsNullable.ToString().ToLower()},");
     if (genericPropertyMetadata.Title != null)
     {
-        writer.WriteLine($"{indentation}    Title = \"{genericPropertyMetadata.Title}\",");
+        writer.WriteLine($"{indentation}    {nameof(genericPropertyMetadata.Title)} = \"{genericPropertyMetadata.Title}\",");
     }
     if (genericPropertyMetadata.CategoryTitle != null)
     {
-        writer.WriteLine($"{indentation}    Category = \"{genericPropertyMetadata.CategoryTitle}\",");
+        writer.WriteLine($"{indentation}    {nameof(genericPropertyMetadata.CategoryTitle)} = \"{genericPropertyMetadata.CategoryTitle}\",");
     }
     writer.WriteLine($"{indentation}}},");
 }
@@ -205,7 +214,7 @@ string? RetrieveTupleComment(IEnumerable<string> commentList, string tupleProper
     return null;
 }
 
-string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])", " $1");
+string? ConvertToTitleCase(string? value) => value == null ? null : Regex.Replace(value, "(?<!^)([A-Z])", " $1");
 
 (ClassPropertyMetadata classLevelPropertyMetadata, PropertyMetadata[] propertyLevelPropertyMetadata) ParseClass(string classFilename)
 {
@@ -217,33 +226,42 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
     }
 
     List<PropertyMetadata> propertyMetadatas = new List<PropertyMetadata>(); // Mutable work-in-progress list of output results.
-    MultilineTagModeEnum multilineXmlTagMode = MultilineTagModeEnum.None; // This mode tracks which multi-line XML tag we are processing.
     string[] text = File.ReadAllLines(classFilename);
 
     // Class level variables.  These may be overridden by property level variables.
     string? classEntityNamePropertyName = null;
 
     // Property level variables.  These are reset by the ResetPropertyXMLComments method.
-    List<string> descriptionList = new List<string>();
-    string? title = null;
-    string? category = null;
-    string? entityName = null;
-    string? entityNamePropertyName = null;
-    string? entityKeyPropertyName = null;
-    string? foreignCollectionName = null;
-    List<string> returnsList = new List<string>();
-    
+    Dictionary<string, List<string>> metadataDictionary = new Dictionary<string, List<string>>();
+    string? currentMultilineTag = null;
+    (string, bool)[] supportedTags = new (string, bool)[]
+    {
+        (FOREIGNCOLLECTIONNAMETAGNAME, false),
+        (TITLETAGNAME, false),
+        (CATEGORYTITLETAGNAME, false),
+        (ENTITYNOUNTAGNAME, false),
+        (ENTITYNOUNTITLETAGNAME, false),
+        (ENTITYNAMEPROPERTYNAMETAGNAME, false),
+        (ENTITYKEYPROPERTYNAMETAGNAME, false),
+        (SUMMARYTAGNAME, true),
+        (RETURNSTAGNAME, true),
+    };
+    ResetPropertyXMLComments();
+
     void ResetPropertyXMLComments()
     {
         // The property that we are parsing will be changing.  We need to clear all of the values that we recorded for this property.
-        descriptionList.Clear();
-        title = null;
-        category = null;
-        entityName = null;
-        foreignCollectionName = null;
-        entityNamePropertyName = null;
-        entityKeyPropertyName = null;
-        returnsList.Clear();
+        metadataDictionary.Clear();
+        metadataDictionary.Clear();
+        foreach ((string tagName, bool multiline) in supportedTags)
+        {
+            metadataDictionary.Add(tagName, new List<string>());
+        }
+    }
+
+    string? GetSinglelineMetadataValue(string tagName)
+    {
+        return metadataDictionary[tagName].Count == 0 ? null : metadataDictionary[tagName][0];
     }
 
     // Parse every line in the c# file.
@@ -252,88 +270,61 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
         // Convert the line to lowercase for easier detection of the XML tags.  We are not supporting case-sensitive XML tags.
         string trimmedLine = line.Trim();
 
-        // We need to support the foreign-collection single-line XML tag. 
-        if (trimmedLine.Contains(@"<foreign-collection-name>"))
+        // Process all of the XML tags.
+        if (trimmedLine.StartsWith(@"///"))
         {
-            int startPos = trimmedLine.IndexOf("<foreign-collection-name>");
-            int endPos = trimmedLine.IndexOf("</foreign-collection-name>");
-            if (endPos < 0)
+            // Check to see if we are currently processing a multiline tag.
+            if (currentMultilineTag != null)
             {
-                throw new Exception("Invalid <foreign-collection-name> XML comment.  The entire XML comment must be on a single line.");
-            }
-            foreignCollectionName = trimmedLine.Substring(startPos + 25, endPos - startPos - 25);
-            multilineXmlTagMode = MultilineTagModeEnum.None;
-        }
-        else if (trimmedLine.Contains(@"<entity-name>"))
-        {
-            int startPos = trimmedLine.IndexOf("<entity-name>");
-            int endPos = trimmedLine.IndexOf("</entity-name>");
-            if (endPos < 0)
-            {
-                throw new Exception("Invalid <entity-name> XML comment.  The entire XML comment must be on a single line.");
-            }
-            entityName = trimmedLine.Substring(startPos + 13, endPos - startPos - 13);
-            multilineXmlTagMode = MultilineTagModeEnum.None;
-        }
-        else if (trimmedLine.Contains(@"<entity-name-property-name"))
-        {
-            int startPos = trimmedLine.IndexOf("<entity-name-property-name>");
-            int endPos = trimmedLine.IndexOf("</entity-name-property-name>");
-            if (endPos < 0)
-            {
-                throw new Exception("Invalid <entity-name-property-name> XML comment.  The entire XML comment must be on a single line.");
-            }
-            entityNamePropertyName = trimmedLine.Substring(startPos + 27, endPos - startPos - 27);
-            multilineXmlTagMode = MultilineTagModeEnum.None;
-        }
-        // Now detect multiline XML tags.
-        else if (trimmedLine.StartsWith(@"///") && !trimmedLine.Contains(@"</"))
-        {
-            if (trimmedLine.Contains(@"<summary>"))
-            {
-                multilineXmlTagMode = MultilineTagModeEnum.Summary;
-            }
-            else if (trimmedLine.Contains(@"<title>"))
-            {
-                multilineXmlTagMode = MultilineTagModeEnum.Title;
-            }
-            else if (trimmedLine.Contains(@"<category>"))
-            {
-                multilineXmlTagMode = MultilineTagModeEnum.Category;
-            }
-            else if (trimmedLine.Contains(@"<returns>"))
-            {
-                multilineXmlTagMode = MultilineTagModeEnum.Returns;
+                // We are currently processing a multiline tag.  Check for the closing tag.
+                int endPos = trimmedLine.IndexOf($"</{currentMultilineTag}>");
+                if (endPos >= 0)
+                {
+                    // This is the ending tag.
+                    currentMultilineTag = null;
+                }
+                else
+                {
+                    // Add the line to the metadata but skip blank lines.
+                    metadataDictionary[currentMultilineTag].Add(trimmedLine.Substring(3).Trim());
+                }
             }
             else
             {
-                switch (multilineXmlTagMode)
+                // We are not currently processing a multiline tag.  Check to see if any of the known tags are found.
+                foreach (KeyValuePair<string, List<string>> metadataNameAndValue in metadataDictionary)
                 {
-                    case MultilineTagModeEnum.Summary:
-                        if (trimmedLine.Length > 3)
+                    int startPos = trimmedLine.IndexOf($"<{metadataNameAndValue.Key}>");
+                    if (startPos >= 0)
+                    {
+                        // Yes, the starting tag was found.  Check to see if this is a single line with the presense of the closing tag.
+                        int endPos = trimmedLine.IndexOf($"</{metadataNameAndValue.Key}>");
+                        if (endPos >= 0)
                         {
-                            descriptionList.Add(trimmedLine.Substring(4));
+                            // Yes, this is a single line tag.
+                            string value = trimmedLine.Substring(startPos + metadataNameAndValue.Key.Length + 2, endPos - startPos - metadataNameAndValue.Key.Length - 2);
+                            metadataDictionary[metadataNameAndValue.Key].Add(value);
                         }
-                        break;
-                    case MultilineTagModeEnum.Returns:
-                        if (trimmedLine.Length > 3)
+                        else
                         {
-                            returnsList.Add(trimmedLine.Substring(4));
+                            // This is the start of a multiline tag.
+                            currentMultilineTag = metadataNameAndValue.Key;
                         }
-                        break;
-                    case MultilineTagModeEnum.Title:
-                        title = trimmedLine.Substring(4);
-                        break;
-                    case MultilineTagModeEnum.Category:
-                        category = trimmedLine.Substring(4);
-                        break;
-                    default:
-                        break;
+                    }
                 }
             }
         }
         else
         {
+            // Validate XML tags do not have too many lines.
+            foreach ((string tagName, bool multiline) in supportedTags)
+            {
+                if (!multiline && metadataDictionary[tagName].Count > 1)
+                {
+                    throw new Exception($"XML tag {tagName} cannot have more than one XML comment line found in file {classFilename}.");
+                }
+            }
+
             // This line of code is not an XML tag.  Split the line into tokens so that we can continue detection.
             string[] tokens = trimmedLine.Split(' ');
 
@@ -349,12 +340,10 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                 }
 
                 // Retrieve class level property values.
-                classEntityNamePropertyName = entityNamePropertyName;
+                classEntityNamePropertyName = GetSinglelineMetadataValue("entity-name-property-name");
 
-                // Reset the property level XML comments.  There shouldn't be any values at this point.
+                // Reset the property level XML comments.
                 ResetPropertyXMLComments();
-
-                continue; // Skip additional processing of this file line.
             }
             // Is this a public property.
             else if (tokens.Length > 1 && tokens[0] == "public")
@@ -394,7 +383,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
 
                 string fullDataType = String.Join(" ", tokens.Skip(leadingTokensToSkip).Take(tokenIndex - leadingTokensToSkip));
                 (string dataType, bool isNullable, bool isArray) = ParseDataType(fullDataType);
-                string description = String.Join(' ', descriptionList);
+                string description = String.Join(' ', metadataDictionary[SUMMARYTAGNAME]);
 
                 // Detect a tuple
                 if (dataType.StartsWith("("))
@@ -431,12 +420,22 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                         if (dataTypeAndNameTokens.Length > 1)
                         {
                             tupleName = dataTypeAndNameTokens[1];
-                            tupleDescription = RetrieveTupleComment(returnsList, tupleName, "description") ?? "";
-                            tupleTitle = RetrieveTupleComment(returnsList, tupleName, "title");
-                            tupleForeignCollectionName = RetrieveTupleComment(returnsList, tupleName, "foreign-collection-name");
+                            tupleDescription = RetrieveTupleComment(metadataDictionary[RETURNSTAGNAME], tupleName, description) ?? "";
+                            tupleTitle = RetrieveTupleComment(metadataDictionary[RETURNSTAGNAME], tupleName, TITLETAGNAME);
+                            tupleForeignCollectionName = RetrieveTupleComment(metadataDictionary[RETURNSTAGNAME], tupleName, FOREIGNCOLLECTIONNAMETAGNAME);
                         }
 
-                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, tupleDataType, tupleName, category, tupleDescription, tupleIsNullable, tupleIsArray, tupleTitle, defaultValueParsedString, tupleForeignCollectionName);
+                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(
+                            classFilename, 
+                            tupleDataType, 
+                            tupleName, 
+                            "", // Tuples do not support categories.
+                            tupleDescription, 
+                            tupleIsNullable, 
+                            tupleIsArray, 
+                            tupleTitle, 
+                            defaultValueParsedString, 
+                            tupleForeignCollectionName);
                         if (propertyMetadata == null)
                         {
                             throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
@@ -445,10 +444,10 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                     }
                     propertyMetadatas.Add(new TuplePropertyMetadata(name)
                     {
-                        CategoryTitle = category,
+                        CategoryTitle = GetSinglelineMetadataValue(CATEGORYTITLETAGNAME) ?? "",
                         Description = description,
                         IsNullable = isNullable,
-                        Title = title ?? ConvertToTitleCase(name),
+                        Title = GetSinglelineMetadataValue(TITLETAGNAME) ?? ConvertToTitleCase(name),
                         Types = tuplePropertyMetadatasList.ToArray(),
                     });
                 }
@@ -458,26 +457,36 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
                     if (dataType.EndsWith("GameConfiguration"))
                     {
                         // The entity name defaults as the prefix of the class name.
-                        entityName = entityName ?? dataType.Substring(0, dataType.Length - 17);
+                        string entityNoun = GetSinglelineMetadataValue(ENTITYNOUNTAGNAME) ?? dataType.Substring(0, dataType.Length - 17);
 
                         (PropertyMetadata collectionClassLevelPropertyMetadata, PropertyMetadata[] collectionPropertyLevelPropertyMetadata) = ParseClass(Path.Combine(Path.GetDirectoryName(classFilename), $"{dataType}.cs"));
                         propertyMetadatas.Add(new CollectionPropertyMetadata(name)
                         {
-                            CategoryTitle = category,
+                            CategoryTitle = GetSinglelineMetadataValue(CATEGORYTITLETAGNAME) ?? "",
                             Description = description,
                             IsNullable = isNullable,
-                            Title = title ?? ConvertToTitleCase(name),
-                            EntityNounTitle = ConvertToTitleCase(entityName),
-                            EntityNoun = entityName,
-                            EntityKeyPropertyName = entityKeyPropertyName ?? "Key", // Provide a default.
-                            EntityNamePropertyName = collectionClassLevelPropertyMetadata.EntityNamePropertyName ?? entityNamePropertyName,
+                            Title = GetSinglelineMetadataValue(TITLETAGNAME) ?? ConvertToTitleCase(name),
+                            EntityNounTitle = GetSinglelineMetadataValue(ENTITYNOUNTITLETAGNAME) ?? ConvertToTitleCase(entityNoun),
+                            EntityNoun = entityNoun,
+                            EntityKeyPropertyName = GetSinglelineMetadataValue(ENTITYKEYPROPERTYNAMETAGNAME) ?? "Key", // Provide a default.
+                            EntityNamePropertyName = collectionClassLevelPropertyMetadata.EntityNamePropertyName ?? GetSinglelineMetadataValue(ENTITYNAMEPROPERTYNAMETAGNAME),
                             PropertyMetadatas = collectionPropertyLevelPropertyMetadata,
                         });
                     }
                     else
                     {
-                        // This is an unknown data-type.
-                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(classFilename, dataType, name, category, description, isNullable, isArray, title, defaultValueParsedString, foreignCollectionName);
+                        // This is not a tuple and it is not a collection.  Process it as a basic data type.
+                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(
+                            classFilename, 
+                            dataType, 
+                            name, 
+                            GetSinglelineMetadataValue(CATEGORYTITLETAGNAME) ?? "", 
+                            description, 
+                            isNullable, 
+                            isArray,
+                            GetSinglelineMetadataValue(TITLETAGNAME) ?? ConvertToTitleCase(name), 
+                            defaultValueParsedString,
+                            GetSinglelineMetadataValue(FOREIGNCOLLECTIONNAMETAGNAME));
                         if (propertyMetadata == null)
                         {
                             throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
@@ -487,6 +496,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
 
                 }
 
+                // Reset the property level XML comments.
                 ResetPropertyXMLComments();
             }
         }
@@ -525,7 +535,7 @@ string ConvertToTitleCase(string value) => Regex.Replace(value, "(?<!^)([A-Z])",
     return (fullDataType, isNullable, isArray);
 }
 
-PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, string name, string? category, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString, string? foreignCollection)
+PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, string name, string categoryTitle, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString, string? foreignCollection)
 {
     title = title ?? ConvertToTitleCase(name);
     switch (dataType)
@@ -533,7 +543,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
         case "char":
             return new CharacterPropertyMetadata(name)
             {
-                CategoryTitle = category,
+                CategoryTitle = categoryTitle,
                 Description = description,
                 IsNullable = isNullable,
                 PropertyName = name,
@@ -543,7 +553,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
         case "bool":
             return new BooleanPropertyMetadata(name)
             {
-                CategoryTitle = category,
+                CategoryTitle = categoryTitle,
                 Description = description,
                 IsNullable = isNullable,
                 Title = title,
@@ -552,7 +562,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
         case "int":
             return new IntegerPropertyMetadata(name)
             {
-                CategoryTitle = category,
+                CategoryTitle = categoryTitle,
                 Description = description,
                 IsNullable = isNullable,
                 Title = title,
@@ -571,7 +581,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
 
             return new ColorPropertyMetadata(name)
             {
-                CategoryTitle = category,
+                CategoryTitle = categoryTitle,
                 Description = description,
                 IsNullable = isNullable,
                 Title = title,
@@ -584,7 +594,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 {
                     return new ForeignKeysPropertyMetadata(name)
                     {
-                        CategoryTitle = category,
+                        CategoryTitle = categoryTitle,
                         Description = description,
                         IsNullable = isNullable,
                         Title = title,
@@ -593,7 +603,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 }
                 return new StringsPropertyMetadata(name)
                 {
-                    CategoryTitle = category,
+                    CategoryTitle = categoryTitle,
                     Description = description,
                     IsNullable = isNullable,
                     Title = title,
@@ -606,7 +616,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 {
                     return new ForeignKeyPropertyMetadata(name)
                     {
-                        CategoryTitle = category,
+                        CategoryTitle = categoryTitle,
                         Description = description,
                         IsNullable = isNullable,
                         Title = title,
@@ -615,7 +625,7 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 }
                 return new StringPropertyMetadata(name)
                 {
-                    CategoryTitle = category,
+                    CategoryTitle = categoryTitle,
                     Description = description,
                     IsNullable = isNullable,
                     Title = title,

@@ -14,10 +14,11 @@ public static class ShopkeeperMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MaxCost")
                 {
@@ -25,6 +26,7 @@ public static class ShopkeeperMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Max Cost",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MinInflate")
                 {
@@ -32,20 +34,23 @@ public static class ShopkeeperMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Min Inflate",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RaceName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Race Name",
+                    CategoryTitle = "",
                 },
             };
         }

@@ -18,6 +18,7 @@ public static class SymbolMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Character",
+                    CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("QueryCharacter")
                 {
@@ -25,20 +26,23 @@ public static class SymbolMetadata
                     Description = "",
                     IsNullable = true,
                     Title = "Query Character",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
             };
         }

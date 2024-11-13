@@ -14,31 +14,35 @@ public static class SpellMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the name of the spell, as rendered to the SaveGame.",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CastScriptName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Cast Script Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CastFailedScriptName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Cast Failed Script Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("LearnedDetails")
                 {
@@ -46,6 +50,7 @@ public static class SpellMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Learned Details",
+                    CategoryTitle = "",
                 },
             };
         }

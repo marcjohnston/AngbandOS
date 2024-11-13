@@ -14,17 +14,19 @@ public static class PluralMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the capitalized singular version of the noun.",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PluralForm")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the pluralized version of the key. the class.",
                     IsNullable = false,
                     Title = "Plural Form",
+                    CategoryTitle = "",
                 },
             };
         }

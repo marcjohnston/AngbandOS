@@ -14,17 +14,19 @@ public static class ClassSpellMetadata
             {
                 new StringPropertyMetadata("SpellName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Spell Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CharacterClassName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Character Class Name",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Level")
                 {
@@ -32,6 +34,7 @@ public static class ClassSpellMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Level",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ManaCost")
                 {
@@ -39,6 +42,7 @@ public static class ClassSpellMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Mana Cost",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BaseFailure")
                 {
@@ -46,6 +50,7 @@ public static class ClassSpellMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Base Failure",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("FirstCastExperience")
                 {
@@ -53,6 +58,7 @@ public static class ClassSpellMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "First Cast Experience",
+                    CategoryTitle = "",
                 },
             };
         }

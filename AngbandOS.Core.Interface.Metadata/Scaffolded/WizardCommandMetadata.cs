@@ -14,10 +14,11 @@ public static class WizardCommandMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("KeyChar")
                 {
@@ -25,6 +26,7 @@ public static class WizardCommandMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Key Char",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsEnabled")
                 {
@@ -32,13 +34,15 @@ public static class WizardCommandMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Is Enabled",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("HelpGroupName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Help Group Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("HelpDescription")
                 {
@@ -46,13 +50,15 @@ public static class WizardCommandMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Help Description",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Execute Script Name",
+                    CategoryTitle = "",
                 },
             };
         }

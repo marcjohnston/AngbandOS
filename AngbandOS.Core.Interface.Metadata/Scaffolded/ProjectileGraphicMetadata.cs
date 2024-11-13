@@ -14,10 +14,11 @@ public static class ProjectileGraphicMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("Character")
                 {
@@ -25,6 +26,7 @@ public static class ProjectileGraphicMetadata
                     Description = "Returns the character to be used for the projectile.",
                     IsNullable = false,
                     Title = "Character",
+                    CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
@@ -32,6 +34,7 @@ public static class ProjectileGraphicMetadata
                     Description = "Returns the color to be used for the projectile.",
                     IsNullable = false,
                     Title = "Color",
+                    CategoryTitle = "",
                 },
             };
         }

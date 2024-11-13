@@ -14,10 +14,11 @@ public static class DungeonMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BaseOffset")
                 {
@@ -25,13 +26,15 @@ public static class DungeonMetadata
                     Description = "Returns base offset (difficulty) for the dungeon.",
                     IsNullable = false,
                     Title = "Base Offset",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("BiasMonsterFilterName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no biasness.  Returns null, by default.",
                     IsNullable = true,
                     Title = "Bias Monster Filter Name",
+                    CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("DungeonGuardianNames")
                 {
@@ -39,13 +42,15 @@ public static class DungeonMetadata
                     Description = "Returns all of the quests associated to the dungeon.",
                     IsNullable = true,
                     Title = "Dungeon Guardian Names",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MapSymbol")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "The symbol used for the dungeon on the wilderness map",
                     IsNullable = false,
                     Title = "Map Symbol",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MaxLevel")
                 {
@@ -53,20 +58,23 @@ public static class DungeonMetadata
                     Description = "The number of levels the dungeon has",
                     IsNullable = false,
                     Title = "Max Level",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "The full name of the dungeon",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Shortname")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "The shortened name of the dungeon for display purposes",
                     IsNullable = false,
                     Title = "Shortname",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Tower")
                 {
@@ -74,6 +82,7 @@ public static class DungeonMetadata
                     Description = "Returns true, if the dungeon is a tower; false, otherwise.  Returns false, by default.",
                     IsNullable = false,
                     Title = "Tower",
+                    CategoryTitle = "",
                 },
             };
         }

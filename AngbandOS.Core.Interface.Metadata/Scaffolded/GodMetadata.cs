@@ -14,31 +14,35 @@ public static class GodMetadata
             {
                 new StringPropertyMetadata("LongName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Long Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ShortName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Short Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("FavorDescription")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Favor Description",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
             };
         }

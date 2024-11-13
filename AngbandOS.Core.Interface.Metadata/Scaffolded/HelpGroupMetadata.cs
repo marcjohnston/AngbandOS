@@ -14,10 +14,11 @@ public static class HelpGroupMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("SortIndex")
                 {
@@ -25,13 +26,15 @@ public static class HelpGroupMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Sort Index",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Title")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Title",
+                    CategoryTitle = "",
                 },
             };
         }

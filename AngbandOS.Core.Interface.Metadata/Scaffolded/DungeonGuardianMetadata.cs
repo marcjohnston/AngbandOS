@@ -14,17 +14,19 @@ public static class DungeonGuardianMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MonsterRaceName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the name of the race for the first quest monster.",
                     IsNullable = false,
                     Title = "Monster Race Name",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("LevelFound")
                 {
@@ -32,6 +34,7 @@ public static class DungeonGuardianMetadata
                     Description = "The level for the fixed quest.",
                     IsNullable = false,
                     Title = "Level Found",
+                    CategoryTitle = "",
                 },
             };
         }

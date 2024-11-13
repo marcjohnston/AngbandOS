@@ -14,10 +14,11 @@ public static class MonsterRaceMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("SpellNames")
                 {
@@ -25,20 +26,23 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = true,
                     Title = "Spell Names",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MultilineName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns a multiline version of the monster race that is shown to the player.  Defaults to the <see cref=\"FriendlyName\"/>.  Word-breaks are encoded with a \n character.",
                     IsNullable = true,
                     Title = "Multiline Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the bind phase.",
                     IsNullable = false,
                     Title = "Symbol Name",
+                    CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
@@ -46,6 +50,7 @@ public static class MonsterRaceMetadata
                     Description = "The color to display the monster as.",
                     IsNullable = false,
                     Title = "Color",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Animal")
                 {
@@ -53,6 +58,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster is an animal.",
                     IsNullable = false,
                     Title = "Animal",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ArmorClass")
                 {
@@ -60,6 +66,7 @@ public static class MonsterRaceMetadata
                     Description = "The monsters armor class.",
                     IsNullable = false,
                     Title = "Armor Class",
+                    CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("AttackDefinitions")
                 {
@@ -67,17 +74,19 @@ public static class MonsterRaceMetadata
                     {
                         new StringPropertyMetadata("MethodName")
                         {
-                            DefaultValue = null,
+                            DefaulDefaultValuetValue = null,
                             Description = "",
                             IsNullable = false,
                             Title = "Method Name",
+                            CategoryTitle = "",
                         },
                         new StringPropertyMetadata("EffectName")
                         {
-                            DefaultValue = null,
+                            DefaulDefaultValuetValue = null,
                             Description = "",
                             IsNullable = true,
                             Title = "Effect Name",
+                            CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Dice")
                         {
@@ -85,6 +94,7 @@ public static class MonsterRaceMetadata
                             Description = "",
                             IsNullable = false,
                             Title = "Dice",
+                            CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Sides")
                         {
@@ -92,11 +102,13 @@ public static class MonsterRaceMetadata
                             Description = "",
                             IsNullable = false,
                             Title = "Sides",
+                            CategoryTitle = "",
                         },
                     },
                     Description = "Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns null, by default.",
                     IsNullable = true,
                     Title = "Attack Definitions",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttrAny")
                 {
@@ -104,6 +116,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster's color can be anything (if 'AttrMulti' is set).",
                     IsNullable = false,
                     Title = "Attr Any",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttrClear")
                 {
@@ -111,6 +124,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster is transparent.",
                     IsNullable = false,
                     Title = "Attr Clear",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttrMulti")
                 {
@@ -118,6 +132,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster changes color.",
                     IsNullable = false,
                     Title = "Attr Multi",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("BashDoor")
                 {
@@ -125,6 +140,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster can break open doors.",
                     IsNullable = false,
                     Title = "Bash Door",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CharClear")
                 {
@@ -132,6 +148,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster is never seen, even with see invisible.",
                     IsNullable = false,
                     Title = "Char Clear",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CharMulti")
                 {
@@ -139,6 +156,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster is changes shape randomly.",
                     IsNullable = false,
                     Title = "Char Multi",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ColdBlood")
                 {
@@ -146,6 +164,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Cold Blood",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Cthuloid")
                 {
@@ -153,6 +172,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Cthuloid",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Demon")
                 {
@@ -160,13 +180,15 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Demon",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Description")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "The descriptive text.",
                     IsNullable = false,
                     Title = "Description",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Dragon")
                 {
@@ -174,6 +196,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Dragon",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_1D2")
                 {
@@ -181,6 +204,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops 1d2 items.",
                     IsNullable = false,
                     Title = "Drop_1 D2",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_2D2")
                 {
@@ -188,6 +212,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops 2d2 items.",
                     IsNullable = false,
                     Title = "Drop_2 D2",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_3D2")
                 {
@@ -195,6 +220,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops 3d2 items.",
                     IsNullable = false,
                     Title = "Drop_3 D2",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_4D2")
                 {
@@ -202,6 +228,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops 4d2 items.",
                     IsNullable = false,
                     Title = "Drop_4 D2",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop60")
                 {
@@ -209,6 +236,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops an item 60% of the time.",
                     IsNullable = false,
                     Title = "Drop60",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop90")
                 {
@@ -216,6 +244,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops an item 90% of the time.",
                     IsNullable = false,
                     Title = "Drop90",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("DropGood")
                 {
@@ -223,6 +252,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops good items.",
                     IsNullable = false,
                     Title = "Drop Good",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("DropGreat")
                 {
@@ -230,6 +260,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster drops great items.",
                     IsNullable = false,
                     Title = "Drop Great",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("EldritchHorror")
                 {
@@ -237,6 +268,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Eldritch Horror",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("EmptyMind")
                 {
@@ -244,6 +276,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Empty Mind",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Escorted")
                 {
@@ -251,6 +284,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster comes with minions of the same character.",
                     IsNullable = false,
                     Title = "Escorted",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("EscortsGroup")
                 {
@@ -258,6 +292,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster's minions come in groups (this doesn't force minions if 'Escort' isn't set).",
                     IsNullable = false,
                     Title = "Escorts Group",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Evil")
                 {
@@ -265,6 +300,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Evil",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Female")
                 {
@@ -272,6 +308,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster should use feminine pronouns.",
                     IsNullable = false,
                     Title = "Female",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("FireAura")
                 {
@@ -279,13 +316,15 @@ public static class MonsterRaceMetadata
                     Description = "The monster has an aura of fire around it.",
                     IsNullable = false,
                     Title = "Fire Aura",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ForceMaxHp")
                 {
                     DefaultValue = false,
-                    Description = "The monster has maximum hit points.",
+                    Description = "",
                     IsNullable = false,
                     Title = "Force Max Hp",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ForceSleep")
                 {
@@ -293,6 +332,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster always starts asleep.",
                     IsNullable = false,
                     Title = "Force Sleep",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("FreqInate")
                 {
@@ -300,6 +340,7 @@ public static class MonsterRaceMetadata
                     Description = "The 1-in-X frequency with which the monster uses special abilities.",
                     IsNullable = false,
                     Title = "Freq Inate",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("FreqSpell")
                 {
@@ -307,13 +348,15 @@ public static class MonsterRaceMetadata
                     Description = "The 1-in-X frequency with which the monster uses spells.",
                     IsNullable = false,
                     Title = "Freq Spell",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("FriendlyName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "The name that the game shows the player (may have duplicates).",
                     IsNullable = false,
                     Title = "Friendly Name",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Friends")
                 {
@@ -321,6 +364,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster comes with friends of the same race.",
                     IsNullable = false,
                     Title = "Friends",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Giant")
                 {
@@ -328,6 +372,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Giant",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Good")
                 {
@@ -335,6 +380,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Good",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("GreatOldOne")
                 {
@@ -342,6 +388,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Great Old One",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Hdice")
                 {
@@ -349,6 +396,7 @@ public static class MonsterRaceMetadata
                     Description = "The number of hit dice the monster has.",
                     IsNullable = false,
                     Title = "Hdice",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Hside")
                 {
@@ -356,6 +404,7 @@ public static class MonsterRaceMetadata
                     Description = "The number of sides of the monster's hit dice.",
                     IsNullable = false,
                     Title = "Hside",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByCold")
                 {
@@ -363,6 +412,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Hurt By Cold",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByFire")
                 {
@@ -370,6 +420,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Hurt By Fire",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByLight")
                 {
@@ -377,6 +428,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Hurt By Light",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByRock")
                 {
@@ -384,6 +436,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Hurt By Rock",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneAcid")
                 {
@@ -391,6 +444,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Acid",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneCold")
                 {
@@ -398,6 +452,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Cold",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneConfusion")
                 {
@@ -405,6 +460,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Confusion",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneFear")
                 {
@@ -412,6 +468,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Fear",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneFire")
                 {
@@ -419,6 +476,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Fire",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneLightning")
                 {
@@ -426,6 +484,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Lightning",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmunePoison")
                 {
@@ -433,6 +492,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Poison",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneSleep")
                 {
@@ -440,6 +500,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Sleep",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneStun")
                 {
@@ -447,6 +508,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Immune Stun",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Invisible")
                 {
@@ -454,6 +516,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Invisible",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("KillBody")
                 {
@@ -461,6 +524,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Kill Body",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("KillItem")
                 {
@@ -468,6 +532,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Kill Item",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("KillWall")
                 {
@@ -475,6 +540,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Kill Wall",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("LevelFound")
                 {
@@ -482,6 +548,7 @@ public static class MonsterRaceMetadata
                     Description = "The level on which the monster is normally found.",
                     IsNullable = false,
                     Title = "Level Found",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("LightningAura")
                 {
@@ -489,6 +556,7 @@ public static class MonsterRaceMetadata
                     Description = "The monster has an aura of electricity around it.",
                     IsNullable = false,
                     Title = "Lightning Aura",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Male")
                 {
@@ -496,6 +564,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Male",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Mexp")
                 {
@@ -503,6 +572,7 @@ public static class MonsterRaceMetadata
                     Description = "The experience value for killing one of these.",
                     IsNullable = false,
                     Title = "Mexp",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("MoveBody")
                 {
@@ -510,6 +580,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Move Body",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Multiply")
                 {
@@ -517,6 +588,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Multiply",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("NeverAttack")
                 {
@@ -524,6 +596,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Never Attack",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("NeverMove")
                 {
@@ -531,6 +604,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Never Move",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Nonliving")
                 {
@@ -538,6 +612,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Nonliving",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("NoticeRange")
                 {
@@ -545,6 +620,7 @@ public static class MonsterRaceMetadata
                     Description = "The distance at which the monster notices the player.",
                     IsNullable = false,
                     Title = "Notice Range",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("OnlyDropGold")
                 {
@@ -552,6 +628,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Only Drop Gold",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("OnlyDropItem")
                 {
@@ -559,6 +636,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Only Drop Item",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("OpenDoor")
                 {
@@ -566,6 +644,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Open Door",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Orc")
                 {
@@ -573,6 +652,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Orc",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("PassWall")
                 {
@@ -580,6 +660,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Pass Wall",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Powerful")
                 {
@@ -587,6 +668,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Powerful",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RandomMove25")
                 {
@@ -594,6 +676,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Random Move25",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RandomMove50")
                 {
@@ -601,6 +684,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Random Move50",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Rarity")
                 {
@@ -608,6 +692,7 @@ public static class MonsterRaceMetadata
                     Description = "The rarity with which the monster is usually found.",
                     IsNullable = false,
                     Title = "Rarity",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Reflecting")
                 {
@@ -615,6 +700,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Reflecting",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Regenerate")
                 {
@@ -622,6 +708,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Regenerate",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistDisenchant")
                 {
@@ -629,6 +716,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Resist Disenchant",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistNether")
                 {
@@ -636,6 +724,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Resist Nether",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistNexus")
                 {
@@ -643,6 +732,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Resist Nexus",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistPlasma")
                 {
@@ -650,6 +740,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Resist Plasma",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistTeleport")
                 {
@@ -657,6 +748,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Resist Teleport",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistWater")
                 {
@@ -664,6 +756,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Resist Water",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Shapechanger")
                 {
@@ -671,6 +764,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Shapechanger",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Sleep")
                 {
@@ -678,6 +772,7 @@ public static class MonsterRaceMetadata
                     Description = "How deeply the monster sleeps.",
                     IsNullable = false,
                     Title = "Sleep",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Smart")
                 {
@@ -685,6 +780,7 @@ public static class MonsterRaceMetadata
                     Description = "Returns true, if the monster is smart.  When badly injured, the monster will want to prioritise spells that disable the player, summon help, or let it escape over spells that do direct damage.",
                     IsNullable = false,
                     Title = "Smart",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Speed")
                 {
@@ -692,6 +788,7 @@ public static class MonsterRaceMetadata
                     Description = "how fast the monster moves (110 = normal speed, higher is better).",
                     IsNullable = false,
                     Title = "Speed",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Stupid")
                 {
@@ -699,6 +796,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Stupid",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("TakeItem")
                 {
@@ -706,6 +804,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Take Item",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Troll")
                 {
@@ -713,6 +812,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Troll",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Undead")
                 {
@@ -720,6 +820,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Undead",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Unique")
                 {
@@ -727,6 +828,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Unique",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("WeirdMind")
                 {
@@ -734,6 +836,7 @@ public static class MonsterRaceMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Weird Mind",
+                    CategoryTitle = "",
                 },
             };
         }

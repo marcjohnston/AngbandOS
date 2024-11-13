@@ -18,6 +18,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.",
                     IsNullable = false,
                     Title = "Lot Is Empty?",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("BuildingsMadeFromPermanentRock")
                 {
@@ -25,6 +26,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store (non-empty lot) is built from permanent rock.  Abandoned stores are created from inner walls and removeable rubble.",
                     IsNullable = false,
                     Title = "Buildings Made From Permanent Rock",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("StoreEntranceDoorsAreBlownOff")
                 {
@@ -32,13 +34,15 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the entrances to the stores are are randomly placed.",
                     IsNullable = false,
                     Title = "Store Entrance Doors Are Blown Off",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("PageSize")
                 {
@@ -46,6 +50,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the number of items in a page for the store.",
                     IsNullable = false,
                     Title = "Page Size",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UseHomeCarry")
                 {
@@ -53,6 +58,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Use Home Carry",
+                    CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ItemFilterNames")
                 {
@@ -60,6 +66,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to indicate that the store does not buy any items.",
                     IsNullable = false,
                     Title = "Item Filter Names",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsHomeThatCanBeBought")
                 {
@@ -67,6 +74,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store is a home that can be bought; false, otherwise.  When true, the doors locked will return true, if the store/home is in the correct town.  Returns false, by default.",
                     IsNullable = false,
                     Title = "Is Home That Can Be Bought",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("MaintainsStockLevels")
                 {
@@ -74,6 +82,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns whether or not the store should perform maintenance.  When true, the store will automatically maintain stock levels based on the MinKeep, MaxKeep and Turnover values.  Returns true, by default.",
                     IsNullable = false,
                     Title = "Maintains Stock Levels",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MaxInventory")
                 {
@@ -81,6 +90,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the maximum number of items the store should maintain.  Returns one pagesize (26), by default.",
                     IsNullable = false,
                     Title = "Max Inventory",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MinInventory")
                 {
@@ -88,6 +98,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.  Returns 6, by default.",
                     IsNullable = false,
                     Title = "Min Inventory",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("StoreTurnover")
                 {
@@ -95,6 +106,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.  Returns 9, by default.",
                     IsNullable = false,
                     Title = "Store Turnover",
+                    CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("StoreStockManifestDefinitions")
                 {
@@ -103,21 +115,24 @@ public static class StoreFactoryMetadata
                         new ForeignKeyPropertyMetadata("ItemFactoryName")
                         {
                             ForeignCollectionName = "ItemFactories",
-                            Description = "The name of the item factory.",
+                            Description = "",
                             IsNullable = false,
                             Title = "Item Factory Name",
+                            CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Weight")
                         {
                             DefaultValue = null,
-                            Description = "The associated distribution weight for the item factory.",
+                            Description = "",
                             IsNullable = false,
                             Title = "Weight",
+                            CategoryTitle = "",
                         },
                     },
                     Description = "Returns the manifests used to stock the store.  These manifests specify which item factories the store stocks and an assocated distribution weight for each item factory.",
                     IsNullable = true,
                     Title = "Store Stock Manifest Definitions",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ShufflesOwnersAndPricing")
                 {
@@ -125,6 +140,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will automatically perform this shuffling.",
                     IsNullable = false,
                     Title = "Shuffles Owners And Pricing",
+                    CategoryTitle = "",
                 },
                 new ForeignKeysPropertyMetadata("ShopkeeperNames")
                 {
@@ -132,41 +148,47 @@ public static class StoreFactoryMetadata
                     Description = "Returns the skopkeepers that can be owners of the store.",
                     IsNullable = false,
                     Title = "Shopkeeper Names",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand1Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command1 Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand2Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command2 Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand3Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command3 Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand4Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command4 Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand5Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command5 Name",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("WidthOfDescriptionColumn")
                 {
@@ -174,6 +196,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the width of the description column for rendering items in the store inventory.  The HomeStore defines a wider column for the description.",
                     IsNullable = false,
                     Title = "Width Of Description Column",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RenderWeightUnitOfMeasurement")
                 {
@@ -181,13 +204,15 @@ public static class StoreFactoryMetadata
                     Description = "Returns whether the weight column should render the lb. units of measurement.  The players home has sufficient space to render, but the other stores do not.",
                     IsNullable = false,
                     Title = "Render Weight Unit Of Measurement",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("TileName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Tile Name",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ItemsRenderFlavorAware")
                 {
@@ -195,20 +220,23 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the items should render as flavor aware; false, otherwise.  Stores will render their items as flavor aware.  The flavor awareness is factory related.  Stores override the factory value.  Pawnshops and the home stores render items as they are seen in the dungeon. Returns true, by default.  Pawnshops and the home store return false.",
                     IsNullable = false,
                     Title = "Items Render Flavor Aware",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("OwnerName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the name of the owner of the store; or null, if the store owner should reflect the store owner.",
                     IsNullable = true,
                     Title = "Owner Name",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Title")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the title of the store; or null, if the store title should reflect the store owner.",
                     IsNullable = true,
                     Title = "Title",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("StoreMaintainsInventory")
                 {
@@ -216,6 +244,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store maintains an inventory.  When false, the various buying, selling and inventory maintenace properties are ignored. Returns true, by default.  The Hall store returns false.",
                     IsNullable = false,
                     Title = "Store Maintains Inventory",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ShowItemPricing")
                 {
@@ -223,6 +252,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns whether or not the store should show prices with items in the inventory.  Return true, by default.  The home does not show prices.",
                     IsNullable = false,
                     Title = "Show Item Pricing",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MarkupRate")
                 {
@@ -230,6 +260,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the rate at which the store marks up items.  Returns 1, by default.",
                     IsNullable = false,
                     Title = "Markup Rate",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MarkdownRate")
                 {
@@ -237,6 +268,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the rate at which the store marks down items.  Returns 1, by default.",
                     IsNullable = false,
                     Title = "Markdown Rate",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("PerformsMaintenanceWhenResting")
                 {
@@ -244,6 +276,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Performs Maintenance When Resting",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("LevelForRandomItemCreation")
                 {
@@ -251,6 +284,7 @@ public static class StoreFactoryMetadata
                     Description = "Allows the store factory the option to create a random item using the value as the base level for the item; or null, if the store should choose from the StoreStockManifests.  The black market store will override this method.",
                     IsNullable = true,
                     Title = "Level For Random Item Creation",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MinimumItemValue")
                 {
@@ -258,6 +292,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Minimum Item Value",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("NoStockMessage")
                 {
@@ -265,6 +300,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "No Stock Message",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PurchaseMessage")
                 {
@@ -272,6 +308,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Purchase Message",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("StoreSellsItems")
                 {
@@ -279,6 +316,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store sells items for gold to the player when the player retrieves items from the store.  Returns true, by default. The home does not sell items.",
                     IsNullable = false,
                     Title = "Store Sells Items",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("BoughtMessageAsBoughtBack")
                 {
@@ -286,6 +324,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store indicates that the player bought \"back\" the item.  False, otherwise.  Returns false, by default.  The pawnbroker store returns true.",
                     IsNullable = false,
                     Title = "Bought Message As Bought Back",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SellPrompt")
                 {
@@ -293,6 +332,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Sell Prompt",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("StoreFullMessage")
                 {
@@ -300,6 +340,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Store Full Message",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("StoreMaintainsInscription")
                 {
@@ -307,6 +348,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store keeps inscriptions on items it acquires.  Only the players home does this.",
                     IsNullable = false,
                     Title = "Store Maintains Inscription",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("StoreBuysItems")
                 {
@@ -314,6 +356,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store buys items for gold from the player.  Returns true, by default.  The home store doesn't buy items.",
                     IsNullable = false,
                     Title = "Store Buys Items",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("BoughtVerb")
                 {
@@ -321,6 +364,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns the verb when the player sells or drops an item to the store.  Normally, \"sold\", but the home \"drops\" and the pawn shop \"pawns\".",
                     IsNullable = false,
                     Title = "Bought Verb",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("StoreIdentifiesItems")
                 {
@@ -328,6 +372,7 @@ public static class StoreFactoryMetadata
                     Description = "Returns true, if the store identifies items when the player sells an item to the store.  Does not apply to stores that do not buy items.",
                     IsNullable = false,
                     Title = "Store Identifies Items",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("StoreAnalyzesPurchases")
                 {
@@ -335,6 +380,7 @@ public static class StoreFactoryMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Store Analyzes Purchases",
+                    CategoryTitle = "",
                 },
             };
         }

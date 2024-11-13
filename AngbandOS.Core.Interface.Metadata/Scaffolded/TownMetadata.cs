@@ -14,10 +14,11 @@ public static class TownMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("Char")
                 {
@@ -25,6 +26,7 @@ public static class TownMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Char",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("HousePrice")
                 {
@@ -32,13 +34,15 @@ public static class TownMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "House Price",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("StoreFactoryNames")
                 {
@@ -46,6 +50,7 @@ public static class TownMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Store Factory Names",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeEscortedHere")
                 {
@@ -53,6 +58,7 @@ public static class TownMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Can Be Escorted Here",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AllowStartupTown")
                 {
@@ -60,13 +66,15 @@ public static class TownMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Allow Startup Town",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("DungeonName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Dungeon Name",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UnusedStoreLotsAreGraveyards")
                 {
@@ -74,6 +82,7 @@ public static class TownMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Unused Store Lots Are Graveyards",
+                    CategoryTitle = "",
                 },
             };
         }

@@ -14,31 +14,35 @@ public static class AttackMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MonsterAction")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the action message to be displayed, when the attack targets another monster.",
                     IsNullable = false,
                     Title = "Monster Action",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PlayerAction")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the action message to be displayed, when the attack targets the player.",
                     IsNullable = false,
                     Title = "Player Action",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("KnowledgeAction")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing their knowledge.",
                     IsNullable = false,
                     Title = "Knowledge Action",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackTouchesTarget")
                 {
@@ -46,6 +50,7 @@ public static class AttackMetadata
                     Description = "Returns true, if the attack requires touching the target; false otherwise.  Returns true, by default.  The beg, drool, gaze, insult, moan, show, spit, spore, wail and worship attacks do not require touching the target.",
                     IsNullable = false,
                     Title = "Attack Touches Target",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackAwakensTarget")
                 {
@@ -53,6 +58,7 @@ public static class AttackMetadata
                     Description = "Returns true, if the attack awakes the target; false otherwise.  Returns false, by default,  The beg, insult, moan and show attacks return true.",
                     IsNullable = false,
                     Title = "Attack Awakens Target",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackStunsTarget")
                 {
@@ -60,6 +66,7 @@ public static class AttackMetadata
                     Description = "Returns true, if the attack stuns the target; false otherwise.  Returns false, by default.  The hit, punch, kick, butt and crush attacks return true.",
                     IsNullable = false,
                     Title = "Attack Stuns Target",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackCutsTarget")
                 {
@@ -67,6 +74,7 @@ public static class AttackMetadata
                     Description = "Returns true, if the attack cuts the target; false otherwise.  Returns false, by default.  The hit, claw and bite attacks all return true.",
                     IsNullable = false,
                     Title = "Attack Cuts Target",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RendersMissMessage")
                 {
@@ -74,6 +82,7 @@ public static class AttackMetadata
                     Description = "Returns true, if the attack should render a message, if the attack touches the target and missed; false no message should be rendered.  Returns true, by default. Only the crawl attack, requires touching the target and does not render a miss message.",
                     IsNullable = false,
                     Title = "Renders Miss Message",
+                    CategoryTitle = "",
                 },
             };
         }

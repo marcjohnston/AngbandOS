@@ -14,10 +14,11 @@ public static class StoreCommandMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("KeyChar")
                 {
@@ -25,13 +26,15 @@ public static class StoreCommandMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Key Char",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Description")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Description",
+                    CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ValidStoreFactoryNames")
                 {
@@ -39,13 +42,15 @@ public static class StoreCommandMetadata
                     Description = "",
                     IsNullable = true,
                     Title = "Valid Store Factory Names",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Execute Script Name",
+                    CategoryTitle = "",
                 },
             };
         }

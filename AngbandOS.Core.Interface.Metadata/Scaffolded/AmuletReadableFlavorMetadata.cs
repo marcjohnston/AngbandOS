@@ -14,17 +14,19 @@ public static class AmuletReadableFlavorMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Symbol Name",
+                    CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
@@ -32,13 +34,15 @@ public static class AmuletReadableFlavorMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Color",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeAssigned")
                 {
@@ -46,6 +50,7 @@ public static class AmuletReadableFlavorMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Can Be Assigned",
+                    CategoryTitle = "",
                 },
             };
         }

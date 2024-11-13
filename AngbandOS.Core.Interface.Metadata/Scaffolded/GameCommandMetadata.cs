@@ -14,10 +14,11 @@ public static class GameCommandMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
+                    CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("KeyChar")
                 {
@@ -25,6 +26,7 @@ public static class GameCommandMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Key Char",
+                    CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Repeat")
                 {
@@ -32,6 +34,7 @@ public static class GameCommandMetadata
                     Description = "",
                     IsNullable = true,
                     Title = "Repeat",
+                    CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsEnabled")
                 {
@@ -39,13 +42,15 @@ public static class GameCommandMetadata
                     Description = "",
                     IsNullable = false,
                     Title = "Is Enabled",
+                    CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
-                    DefaultValue = null,
+                    DefaulDefaultValuetValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Execute Script Name",
+                    CategoryTitle = "",
                 },
             };
         }
