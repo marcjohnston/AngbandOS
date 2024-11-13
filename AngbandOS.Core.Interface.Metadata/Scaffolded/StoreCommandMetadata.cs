@@ -14,7 +14,7 @@ public static class StoreCommandMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -30,7 +30,7 @@ public static class StoreCommandMetadata
                 },
                 new StringPropertyMetadata("Description")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Description",
@@ -46,7 +46,7 @@ public static class StoreCommandMetadata
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Execute Script Name",

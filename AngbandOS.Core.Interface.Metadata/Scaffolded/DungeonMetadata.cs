@@ -14,7 +14,7 @@ public static class DungeonMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -30,7 +30,7 @@ public static class DungeonMetadata
                 },
                 new StringPropertyMetadata("BiasMonsterFilterName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no biasness.  Returns null, by default.",
                     IsNullable = true,
                     Title = "Bias Monster Filter Name",
@@ -46,7 +46,7 @@ public static class DungeonMetadata
                 },
                 new StringPropertyMetadata("MapSymbol")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "The symbol used for the dungeon on the wilderness map",
                     IsNullable = false,
                     Title = "Map Symbol",
@@ -62,7 +62,7 @@ public static class DungeonMetadata
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "The full name of the dungeon",
                     IsNullable = false,
                     Title = "Name",
@@ -70,7 +70,7 @@ public static class DungeonMetadata
                 },
                 new StringPropertyMetadata("Shortname")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "The shortened name of the dungeon for display purposes",
                     IsNullable = false,
                     Title = "Shortname",

@@ -14,7 +14,7 @@ public static class MonsterRaceMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -30,7 +30,7 @@ public static class MonsterRaceMetadata
                 },
                 new StringPropertyMetadata("MultilineName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns a multiline version of the monster race that is shown to the player.  Defaults to the <see cref=\"FriendlyName\"/>.  Word-breaks are encoded with a \n character.",
                     IsNullable = true,
                     Title = "Multiline Name",
@@ -38,7 +38,7 @@ public static class MonsterRaceMetadata
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the bind phase.",
                     IsNullable = false,
                     Title = "Symbol Name",
@@ -74,7 +74,7 @@ public static class MonsterRaceMetadata
                     {
                         new StringPropertyMetadata("MethodName")
                         {
-                            DefaulDefaultValuetValue = null,
+                            DefaultValue = null,
                             Description = "",
                             IsNullable = false,
                             Title = "Method Name",
@@ -82,7 +82,7 @@ public static class MonsterRaceMetadata
                         },
                         new StringPropertyMetadata("EffectName")
                         {
-                            DefaulDefaultValuetValue = null,
+                            DefaultValue = null,
                             Description = "",
                             IsNullable = true,
                             Title = "Effect Name",
@@ -184,7 +184,7 @@ public static class MonsterRaceMetadata
                 },
                 new StringPropertyMetadata("Description")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "The descriptive text.",
                     IsNullable = false,
                     Title = "Description",
@@ -352,7 +352,7 @@ public static class MonsterRaceMetadata
                 },
                 new StringPropertyMetadata("FriendlyName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "The name that the game shows the player (may have duplicates).",
                     IsNullable = false,
                     Title = "Friendly Name",

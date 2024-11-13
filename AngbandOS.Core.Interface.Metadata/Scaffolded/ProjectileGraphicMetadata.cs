@@ -14,7 +14,7 @@ public static class ProjectileGraphicMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",

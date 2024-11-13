@@ -14,7 +14,7 @@ public static class AnimationMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -38,7 +38,7 @@ public static class AnimationMetadata
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
@@ -54,7 +54,7 @@ public static class AnimationMetadata
                 },
                 new StringPropertyMetadata("Sequence")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Sequence",

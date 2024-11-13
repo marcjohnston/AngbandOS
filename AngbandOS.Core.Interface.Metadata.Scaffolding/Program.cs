@@ -111,7 +111,7 @@ void WriteProperty(StreamWriter writer, string folder, PropertyMetadata genericP
             writer.WriteLine($"{indentation}{{");
             if (genericStringPropertyMetadata.DefaultValue == null)
             {
-                writer.WriteLine($"{indentation}    Defaul{nameof(genericStringPropertyMetadata.DefaultValue)}tValue = null,");
+                writer.WriteLine($"{indentation}    {nameof(genericStringPropertyMetadata.DefaultValue)} = null,");
             }
             else
             {

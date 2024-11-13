@@ -22,7 +22,7 @@ public static class GameConfigurationMetadata
                 },
                 new StringPropertyMetadata("StartupTownName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the name of the town where the player will start, ignoring whether or not that town is a startup town; or null, for a random town to be choosen from the available startup towns.",
                     IsNullable = true,
                     Title = "Startup Town Name",

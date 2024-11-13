@@ -14,7 +14,7 @@ public static class VaultMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -30,7 +30,7 @@ public static class VaultMetadata
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
@@ -62,7 +62,7 @@ public static class VaultMetadata
                 },
                 new StringPropertyMetadata("Text")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Text",

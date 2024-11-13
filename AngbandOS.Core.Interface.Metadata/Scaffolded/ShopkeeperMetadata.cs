@@ -14,7 +14,7 @@ public static class ShopkeeperMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -38,7 +38,7 @@ public static class ShopkeeperMetadata
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",
@@ -46,7 +46,7 @@ public static class ShopkeeperMetadata
                 },
                 new StringPropertyMetadata("RaceName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Race Name",

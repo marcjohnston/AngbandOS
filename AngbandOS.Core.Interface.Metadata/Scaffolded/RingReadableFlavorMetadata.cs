@@ -14,7 +14,7 @@ public static class RingReadableFlavorMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -22,7 +22,7 @@ public static class RingReadableFlavorMetadata
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Symbol Name",
@@ -38,7 +38,7 @@ public static class RingReadableFlavorMetadata
                 },
                 new StringPropertyMetadata("Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Name",

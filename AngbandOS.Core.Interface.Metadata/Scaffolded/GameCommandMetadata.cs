@@ -14,7 +14,7 @@ public static class GameCommandMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -46,7 +46,7 @@ public static class GameCommandMetadata
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Execute Script Name",

@@ -14,7 +14,7 @@ public static class GodMetadata
             {
                 new StringPropertyMetadata("LongName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Long Name",
@@ -22,7 +22,7 @@ public static class GodMetadata
                 },
                 new StringPropertyMetadata("ShortName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Short Name",
@@ -30,7 +30,7 @@ public static class GodMetadata
                 },
                 new StringPropertyMetadata("FavorDescription")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Favor Description",
@@ -38,7 +38,7 @@ public static class GodMetadata
                 },
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",

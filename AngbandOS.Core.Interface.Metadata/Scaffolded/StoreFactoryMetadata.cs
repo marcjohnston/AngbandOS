@@ -38,7 +38,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -152,7 +152,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand1Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command1 Name",
@@ -160,7 +160,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand2Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command2 Name",
@@ -168,7 +168,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand3Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command3 Name",
@@ -176,7 +176,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand4Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command4 Name",
@@ -184,7 +184,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("AdvertisedStoreCommand5Name")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Advertised Store Command5 Name",
@@ -208,7 +208,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("TileName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Tile Name",
@@ -224,7 +224,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("OwnerName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the name of the owner of the store; or null, if the store owner should reflect the store owner.",
                     IsNullable = true,
                     Title = "Owner Name",
@@ -232,7 +232,7 @@ public static class StoreFactoryMetadata
                 },
                 new StringPropertyMetadata("Title")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the title of the store; or null, if the store title should reflect the store owner.",
                     IsNullable = true,
                     Title = "Title",

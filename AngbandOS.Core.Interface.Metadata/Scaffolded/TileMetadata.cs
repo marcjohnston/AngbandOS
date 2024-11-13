@@ -14,7 +14,7 @@ public static class TileMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -22,7 +22,7 @@ public static class TileMetadata
                 },
                 new StringPropertyMetadata("StepOnScriptName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Step On Script Name",
@@ -78,7 +78,7 @@ public static class TileMetadata
                 },
                 new StringPropertyMetadata("HiddenTreasureForTileName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns null, if the tile type is not a hidden treasure; otherwise, when the tile is a hidden treasure, the visible tile type is returned.",
                     IsNullable = true,
                     Title = "Hidden Treasure For Tile Name",
@@ -110,7 +110,7 @@ public static class TileMetadata
                 },
                 new StringPropertyMetadata("AlterActionName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the name of the single action to perform on the tile.",
                     IsNullable = true,
                     Title = "Alter Action Name",
@@ -118,7 +118,7 @@ public static class TileMetadata
                 },
                 new StringPropertyMetadata("MimicTileName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "The name of the tile this tile should appear as when looked at; or null, if this tile is invisible/transparent.  Non-transparent, non-mimicing tiles will name themself.  Mimicing tiles will return a name for a different tile.  Transparent tile that are considered invisible will return null.  Invisible tiles will render the background feature.",
                     IsNullable = true,
                     Title = "Mimic Tile Name",
@@ -134,7 +134,7 @@ public static class TileMetadata
                 },
                 new StringPropertyMetadata("Description")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "A text description of the tile.",
                     IsNullable = false,
                     Title = "Description",

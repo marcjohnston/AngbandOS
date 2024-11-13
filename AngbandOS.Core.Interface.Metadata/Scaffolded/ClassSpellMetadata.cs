@@ -14,7 +14,7 @@ public static class ClassSpellMetadata
             {
                 new StringPropertyMetadata("SpellName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Spell Name",
@@ -22,7 +22,7 @@ public static class ClassSpellMetadata
                 },
                 new StringPropertyMetadata("CharacterClassName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Character Class Name",

@@ -14,7 +14,7 @@ public static class AttackMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -22,7 +22,7 @@ public static class AttackMetadata
                 },
                 new StringPropertyMetadata("MonsterAction")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the action message to be displayed, when the attack targets another monster.",
                     IsNullable = false,
                     Title = "Monster Action",
@@ -30,7 +30,7 @@ public static class AttackMetadata
                 },
                 new StringPropertyMetadata("PlayerAction")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the action message to be displayed, when the attack targets the player.",
                     IsNullable = false,
                     Title = "Player Action",
@@ -38,7 +38,7 @@ public static class AttackMetadata
                 },
                 new StringPropertyMetadata("KnowledgeAction")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing their knowledge.",
                     IsNullable = false,
                     Title = "Knowledge Action",

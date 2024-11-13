@@ -14,7 +14,7 @@ public static class DungeonGuardianMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -22,7 +22,7 @@ public static class DungeonGuardianMetadata
                 },
                 new StringPropertyMetadata("MonsterRaceName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the name of the race for the first quest monster.",
                     IsNullable = false,
                     Title = "Monster Race Name",

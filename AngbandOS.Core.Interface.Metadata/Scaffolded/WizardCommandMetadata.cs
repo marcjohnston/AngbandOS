@@ -14,7 +14,7 @@ public static class WizardCommandMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -38,7 +38,7 @@ public static class WizardCommandMetadata
                 },
                 new StringPropertyMetadata("HelpGroupName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Help Group Name",
@@ -54,7 +54,7 @@ public static class WizardCommandMetadata
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = true,
                     Title = "Execute Script Name",

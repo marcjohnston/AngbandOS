@@ -14,7 +14,7 @@ public static class HelpGroupMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Key",
@@ -30,7 +30,7 @@ public static class HelpGroupMetadata
                 },
                 new StringPropertyMetadata("Title")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "",
                     IsNullable = false,
                     Title = "Title",

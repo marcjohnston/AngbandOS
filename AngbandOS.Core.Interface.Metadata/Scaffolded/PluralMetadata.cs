@@ -14,7 +14,7 @@ public static class PluralMetadata
             {
                 new StringPropertyMetadata("Key")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the capitalized singular version of the noun.",
                     IsNullable = false,
                     Title = "Key",
@@ -22,7 +22,7 @@ public static class PluralMetadata
                 },
                 new StringPropertyMetadata("PluralForm")
                 {
-                    DefaulDefaultValuetValue = null,
+                    DefaultValue = null,
                     Description = "Returns the pluralized version of the key. the class.",
                     IsNullable = false,
                     Title = "Plural Form",
