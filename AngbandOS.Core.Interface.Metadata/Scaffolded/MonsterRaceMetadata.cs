@@ -22,7 +22,7 @@ public static class MonsterRaceMetadata
                 },
                 new ForeignKeysPropertyMetadata("SpellNames")
                 {
-                    ForeignCollectionName = "Spells",
+                    ForeignCollectionName = "MonsterSpells",
                     Description = "",
                     IsNullable = true,
                     Title = "Spell Names",

@@ -378,7 +378,7 @@ string? ConvertToTitleCase(string? value) => value == null ? null : Regex.Replac
                             tupleForeignCollectionName = RetrieveTupleComment(metadataDictionary[RETURNSTAGNAME], tupleName, FOREIGNCOLLECTIONNAMETAGNAME);
                         }
 
-                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(
+                        PropertyMetadata propertyMetadata = GetPropertyMetadata(
                             classFilename, 
                             tupleDataType, 
                             tupleName, 
@@ -389,10 +389,6 @@ string? ConvertToTitleCase(string? value) => value == null ? null : Regex.Replac
                             tupleTitle, 
                             defaultValueParsedString, 
                             tupleForeignCollectionName);
-                        if (propertyMetadata == null)
-                        {
-                            throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
-                        }
                         tuplePropertyMetadatasList.Add(propertyMetadata);
                     }
                     propertyMetadatas.Add(new TuplePropertyMetadata(name)
@@ -429,7 +425,7 @@ string? ConvertToTitleCase(string? value) => value == null ? null : Regex.Replac
                     else
                     {
                         // This is not a tuple and it is not a collection.  Process it as a basic data type.
-                        PropertyMetadata? propertyMetadata = GetPropertyMetadata(
+                        PropertyMetadata propertyMetadata = GetPropertyMetadata(
                             classFilename, 
                             dataType, 
                             name, 
@@ -440,10 +436,6 @@ string? ConvertToTitleCase(string? value) => value == null ? null : Regex.Replac
                             GetSinglelineMetadataValue(TITLETAGNAME) ?? ConvertToTitleCase(name), 
                             defaultValueParsedString,
                             GetSinglelineMetadataValue(FOREIGNCOLLECTIONNAMETAGNAME));
-                        if (propertyMetadata == null)
-                        {
-                            throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
-                        }
                         propertyMetadatas.Add(propertyMetadata);
                     }
 
@@ -488,12 +480,29 @@ string? ConvertToTitleCase(string? value) => value == null ? null : Regex.Replac
     return (fullDataType, isNullable, isArray);
 }
 
-PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, string name, string categoryTitle, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString, string? foreignCollection)
+PropertyMetadata GetPropertyMetadata(string classFilename, string dataType, string name, string categoryTitle, string description, bool isNullable, bool isArray, string? title, string? defaultValueParsedString, string? foreignCollection)
 {
     title = title ?? ConvertToTitleCase(name);
     switch (dataType)
     {
+        case "bool":
+            if (isArray)
+            {
+                throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType}[] that is not supported.");
+            }
+            return new BooleanPropertyMetadata(name)
+            {
+                CategoryTitle = categoryTitle,
+                Description = description,
+                IsNullable = isNullable,
+                Title = title,
+                DefaultValue = defaultValueParsedString == null || defaultValueParsedString == "null" ? null : Boolean.Parse(defaultValueParsedString)
+            };
         case "char":
+            if (isArray)
+            {
+                throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType}[] that is not supported.");
+            }
             return new CharacterPropertyMetadata(name)
             {
                 CategoryTitle = categoryTitle,
@@ -503,25 +512,12 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 Title = title,
                 DefaultValue = defaultValueParsedString == null || defaultValueParsedString == "null" ? null : Char.Parse(defaultValueParsedString)
             };
-        case "bool":
-            return new BooleanPropertyMetadata(name)
-            {
-                CategoryTitle = categoryTitle,
-                Description = description,
-                IsNullable = isNullable,
-                Title = title,
-                DefaultValue = defaultValueParsedString == null || defaultValueParsedString == "null" ? null : Boolean.Parse(defaultValueParsedString)
-            };
-        case "int":
-            return new IntegerPropertyMetadata(name)
-            {
-                CategoryTitle = categoryTitle,
-                Description = description,
-                IsNullable = isNullable,
-                Title = title,
-                DefaultValue = defaultValueParsedString == null || defaultValueParsedString == "null" ? null : Int32.Parse(defaultValueParsedString)
-            };
         case "ColorEnum":
+            if (isArray)
+            {
+                throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType}[] that is not supported.");
+            }
+
             if (defaultValueParsedString != null && defaultValueParsedString != "null")
             {
                 string[] colorEnumTokens = defaultValueParsedString.Split('.');
@@ -539,6 +535,19 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 IsNullable = isNullable,
                 Title = title,
                 DefaultValue = defaultValueParsedString == null || defaultValueParsedString == "null" ? null : Enum.Parse<ColorEnum>(defaultValueParsedString)
+            };
+        case "int":
+            if (isArray)
+            {
+                throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType}[] that is not supported.");
+            }
+            return new IntegerPropertyMetadata(name)
+            {
+                CategoryTitle = categoryTitle,
+                Description = description,
+                IsNullable = isNullable,
+                Title = title,
+                DefaultValue = defaultValueParsedString == null || defaultValueParsedString == "null" ? null : Int32.Parse(defaultValueParsedString)
             };
         case "string":
             if (isArray)
@@ -586,6 +595,6 @@ PropertyMetadata? GetPropertyMetadata(string classFilename, string dataType, str
                 };
             }
         default:
-            return null;
+            throw new Exception($"The {name} property in the {classFilename} file has a data type of {dataType} that is not supported.");
     }
 }
