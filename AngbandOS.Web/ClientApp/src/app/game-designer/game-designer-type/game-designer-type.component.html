@@ -23,6 +23,10 @@
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'boolean'">
     <app-game-designer-type-boolean [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-boolean>
   </div>
+  <!-- Color -->
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'color'">
+    <app-game-designer-type-color [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-color>
+  </div>
   <!-- Tuple Array -->
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
     <app-game-designer-type-tuple-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-tuple-array>

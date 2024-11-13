@@ -1,0 +1,16 @@
+<div id="container" *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+  <div id="select-div">
+    <select #select [ngModel]="getValue()" (change)="setValue()">
+      <ng-container *ngIf="colorOptions !== undefined">
+        <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable">
+          <option value=""></option>
+        </ng-container>
+        <ng-container *ngFor="let selectOption of colorOptions">
+          <option value="{{selectOption.value}}">{{selectOption.text}}</option>
+        </ng-container>
+      </ng-container>
+    </select>
+    <span id="modified-span" *ngIf="unmodifiedValue !== getValue()"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
+  </div>
+  <span class="game-designer-error-message-span" *ngIf="errorMessage !== ''">{{errorMessage}}</span>
+</div>
