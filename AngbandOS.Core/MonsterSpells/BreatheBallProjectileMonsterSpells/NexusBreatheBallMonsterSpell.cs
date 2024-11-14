@@ -16,5 +16,5 @@ internal class NexusBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     protected override string ProjectileKey => nameof(NexusProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 250;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NexusSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(NexusSpellResistantDetection) };
 }

@@ -16,5 +16,5 @@ internal class ColdBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     protected override string ProjectileKey => nameof(ColdProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ColdSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ColdSpellResistantDetection) };
 }

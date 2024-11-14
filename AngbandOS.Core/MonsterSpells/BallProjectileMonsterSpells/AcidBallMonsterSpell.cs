@@ -20,5 +20,5 @@ internal class AcidBallMonsterSpell : BallProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DieRoll(monsterLevel * 3) + 15;
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(AcidSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(AcidSpellResistantDetection) };
 }

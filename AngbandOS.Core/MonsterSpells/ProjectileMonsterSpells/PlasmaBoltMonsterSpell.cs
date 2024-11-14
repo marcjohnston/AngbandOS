@@ -20,5 +20,5 @@ internal class PlasmaBoltMonsterSpell : ProjectileMonsterSpell
         return 10 + Game.DiceRoll(8, 7) + monsterLevel;
     }
     protected override string ProjectileKey => nameof(PlasmaProjectile);
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

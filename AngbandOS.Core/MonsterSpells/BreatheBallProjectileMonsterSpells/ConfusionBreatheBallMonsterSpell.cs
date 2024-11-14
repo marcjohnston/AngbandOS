@@ -16,5 +16,5 @@ internal class ConfusionBreatheBallMonsterSpell : BreatheBallProjectileMonsterSp
     protected override string ProjectileKey => nameof(ConfusionProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ConfSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ColdSpellResistantDetection) };
 }

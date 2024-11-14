@@ -21,5 +21,5 @@ internal class FireBallMonsterSpell : BallProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DieRoll(monsterLevel * 7 / 2) + 10;
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(FireSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(FireSpellResistantDetection) };
 }

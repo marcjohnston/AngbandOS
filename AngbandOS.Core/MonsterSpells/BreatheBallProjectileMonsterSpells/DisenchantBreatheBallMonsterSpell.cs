@@ -16,5 +16,5 @@ internal class DisenchantBreatheBallMonsterSpell : BreatheBallProjectileMonsterS
     protected override string ProjectileKey => nameof(DisenchantProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 500;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(DisenSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(DisenSpellResistantDetection) };
 }

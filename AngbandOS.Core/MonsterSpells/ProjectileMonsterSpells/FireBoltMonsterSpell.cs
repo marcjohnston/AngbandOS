@@ -21,5 +21,5 @@ internal class FireBoltMonsterSpell : ProjectileMonsterSpell
         return Game.DiceRoll(9, 8) + (monsterLevel / 3);
     }
     protected override string ProjectileKey => nameof(FireProjectile);
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(FireSpellResistantDetection)), Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(FireSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

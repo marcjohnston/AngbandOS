@@ -16,5 +16,5 @@ internal class AcidBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     protected override string ProjectileKey => nameof(AcidProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(AcidSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(AcidSpellResistantDetection) };
 }

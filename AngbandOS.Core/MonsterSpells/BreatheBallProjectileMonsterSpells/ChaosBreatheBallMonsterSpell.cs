@@ -16,5 +16,5 @@ internal class ChaosBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     protected override string ProjectileKey => nameof(ChaosProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 600;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ChaosSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ChaosSpellResistantDetection) };
 }

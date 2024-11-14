@@ -16,5 +16,5 @@ internal class NetherBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     protected override string ProjectileKey => nameof(NetherProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 550;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NethSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(NethSpellResistantDetection) };
 }

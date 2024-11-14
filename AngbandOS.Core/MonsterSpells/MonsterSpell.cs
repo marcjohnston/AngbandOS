@@ -28,7 +28,10 @@ internal abstract class MonsterSpell : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        SmartLearn = Game.SingletonRepository.Get<SpellResistantDetection>(SmartLearnSpellResistantDetectionKeys);
+    }
 
     /// <summary>
     /// Returns true, if the spell is an innate ability.  Returns false, by default.  Spells that return true represent spells in the Flags4 flag-set.
@@ -218,11 +221,17 @@ internal abstract class MonsterSpell : IGetKey
     public virtual string? VsMonsterSeenMessage(Monster monster, Monster target) => VsPlayerActionMessage(monster);
 
     /// <summary>
-    /// Returns the characteristics that are learned, when the player experiences or sees the spell.  Returns an empty set, by defaut.
+    /// Returns the keys for the <see cref="SpellResistantDetection"/> characteristics that are learned, when the player experiences or sees the spell.  Returns an empty set, by defaut.  This
+    /// property is used to bind the <see cref="SmartLearn"/> property during the binding phase.
     /// </summary>
-    public virtual SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { };
+    protected virtual string[] SmartLearnSpellResistantDetectionKeys => new string[] { };
 
-    public virtual string[]? SmartLearnSpellResistantDetectionKeys => null;
+    /// <summary>
+    /// Returns the characteristics that are learned, when the player experiences or sees the spell.  Returns an empty set, by defaut.  This property is bound using the <see cref="SmartLearnSpellResistantDetectionKeys"/>
+    /// property during the bind phase.
+    /// </summary>
+    public SpellResistantDetection[] SmartLearn { get; private set; }
+
     /// <summary>
     /// Returns true, if the attack on a sleeping monster, wakes the monster.  Returns true, by default.
     /// </summary>

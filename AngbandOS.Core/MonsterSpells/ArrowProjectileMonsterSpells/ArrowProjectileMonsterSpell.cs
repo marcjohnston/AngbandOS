@@ -49,5 +49,6 @@ internal abstract class ArrowProjectileMonsterSpell : ProjectileMonsterSpell
     protected override int Damage(Monster monster) => DamageRoll.Get(Game.UseRandom);
 
     protected override string ProjectileKey => nameof(ArrowProjectile);
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
+
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

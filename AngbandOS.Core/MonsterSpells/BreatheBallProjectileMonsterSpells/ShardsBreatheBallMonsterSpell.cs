@@ -16,5 +16,5 @@ internal class ShardsBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     protected override string ProjectileKey => nameof(ExplodeProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ShardSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ShardSpellResistantDetection) };
 }

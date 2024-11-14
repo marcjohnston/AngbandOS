@@ -16,5 +16,5 @@ internal class RadiationBreatheBallMonsterSpell : BreatheBallProjectileMonsterSp
     protected override string ProjectileKey => nameof(NukeProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 800;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(PoisSpellResistantDetection)) };
+    protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(PoisSpellResistantDetection) };
 }
