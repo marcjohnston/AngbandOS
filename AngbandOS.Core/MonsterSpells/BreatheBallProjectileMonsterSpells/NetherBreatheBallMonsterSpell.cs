@@ -13,7 +13,7 @@ internal class NetherBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     private NetherBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesNether => true;
     protected override string ActionName => "breathes nether";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(NetherProjectile));
+    protected override string ProjectileKey => nameof(NetherProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 550;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NethSpellResistantDetection)) };

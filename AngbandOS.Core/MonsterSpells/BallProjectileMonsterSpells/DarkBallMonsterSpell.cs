@@ -22,7 +22,7 @@ internal class DarkBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsPlayerBlindMessage => $"You hear someone mumble powerfully.";
 
     protected override string ActionName => "invokes a darkness storm";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile));
+    protected override string ProjectileKey => nameof(DarkProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

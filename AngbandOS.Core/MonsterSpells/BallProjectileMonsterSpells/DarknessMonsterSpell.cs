@@ -19,7 +19,7 @@ internal class DarknessMonsterSpell : BallProjectileMonsterSpell
     protected override ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
 
     protected override string ActionName => "gestures in shadow";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile));
+    protected override string ProjectileKey => nameof(AcidProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

@@ -13,7 +13,7 @@ internal class DisenchantBreatheBallMonsterSpell : BreatheBallProjectileMonsterS
     private DisenchantBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesDisenchantment => true;
     protected override string ActionName => "breathes disenchantment";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile));
+    protected override string ProjectileKey => nameof(DisenchantProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 500;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(DisenSpellResistantDetection)) };

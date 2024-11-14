@@ -13,7 +13,7 @@ internal class SoundBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     private SoundBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesSound => true;
     protected override string ActionName => "breathes sound";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));
+    protected override string ProjectileKey => nameof(SoundProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(SoundSpellResistantDetection)) };

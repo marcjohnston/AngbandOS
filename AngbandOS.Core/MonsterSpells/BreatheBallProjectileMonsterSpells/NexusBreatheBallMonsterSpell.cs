@@ -13,7 +13,7 @@ internal class NexusBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     private NexusBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesNexus => true;
     protected override string ActionName => "breathes nexus";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(NexusProjectile));
+    protected override string ProjectileKey => nameof(NexusProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 250;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NexusSpellResistantDetection)) };

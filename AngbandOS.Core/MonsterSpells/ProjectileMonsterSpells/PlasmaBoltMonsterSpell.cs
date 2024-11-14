@@ -8,21 +8,17 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class MagicMissileMonsterSpell : ProjectileMonsterSpell
+internal class PlasmaBoltMonsterSpell : ProjectileMonsterSpell
 {
-    private MagicMissileMonsterSpell(Game game) : base(game) { }
+    private PlasmaBoltMonsterSpell(Game game) : base(game) { }
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
-
-    protected override string ActionName => "casts a magic missile";
-
+    protected override string ActionName => "casts a plasma bolt";
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DiceRoll(2, 6) + (monsterLevel / 3);
+        return 10 + Game.DiceRoll(8, 7) + monsterLevel;
     }
-
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile));
-
+    protected override string ProjectileKey => nameof(PlasmaProjectile);
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
 }

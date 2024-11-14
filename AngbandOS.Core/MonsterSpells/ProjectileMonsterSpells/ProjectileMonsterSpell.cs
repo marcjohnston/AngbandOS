@@ -14,6 +14,13 @@ namespace AngbandOS.Core.MonsterSpells;
 internal abstract class ProjectileMonsterSpell : MonsterSpell
 {
     protected ProjectileMonsterSpell(Game game) : base(game) { }
+
+    public override void Bind()
+    {
+        base.Bind();
+        Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileKey);
+    }
+
     /// <summary>
     /// Returns a message that the monster performed an action specified by the protected ActionName method.
     /// </summary>
@@ -45,11 +52,16 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
     protected virtual ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
 
     /// <summary>
-    /// Returns the projectile that the monster will use when attacking with the spell.
+    /// Returns the key for the projectile to use.  This property is used to bind the ProjectileProperty during the binding phase.
+    /// </summary>
+    protected abstract string ProjectileKey { get; }
+
+    /// <summary>
+    /// Returns the projectile that the monster will use when attacking with the spell.  This property is bound using the ProjectileKey property during the bind phase.
     /// </summary>
     /// <param name="game"></param>
     /// <returns></returns>
-    protected abstract Projectile Projectile(Game game);
+    protected Projectile Projectile { get; private set; }
 
     /// <summary>
     /// Returns the amount of damage the projectile will incur on the target.
@@ -77,15 +89,13 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(Monster monster)
     {
-        Projectile projectile = Projectile(Game);
         int damage = Damage(monster);
-        Project(monster, 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectile, ProjectionFlags);
+        Project(monster, 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, Projectile, ProjectionFlags);
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        Projectile projectile = Projectile(Game);
         int damage = Damage(monster);
-        Project(monster, 0, target.MapY, target.MapX, damage, projectile, ProjectionFlags);
+        Project(monster, 0, target.MapY, target.MapX, damage, Projectile, ProjectionFlags);
     }
 }

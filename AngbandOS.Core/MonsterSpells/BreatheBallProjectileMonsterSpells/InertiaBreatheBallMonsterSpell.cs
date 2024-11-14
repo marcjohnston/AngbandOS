@@ -12,7 +12,7 @@ internal class InertiaBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpel
 {
     private InertiaBreatheBallMonsterSpell(Game game) : base(game) { }
     protected override string ActionName => "breathes inertia";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(InertiaProjectile));
+    protected override string ProjectileKey => nameof(InertiaProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 200;
 }

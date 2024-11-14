@@ -11,6 +11,13 @@ namespace AngbandOS.Core.MonsterSpells;
 internal abstract class CauseWoundsMonsterSpell : MonsterSpell
 {
     protected CauseWoundsMonsterSpell(Game game) : base(game) { }
+
+    public override void Bind()
+    {
+        base.Bind();
+        DamageRoll = Game.ParseRollExpression(DamageRollExpression);
+    }
+
     public override bool IsAttack => true;
     public override bool Annoys => true;
 

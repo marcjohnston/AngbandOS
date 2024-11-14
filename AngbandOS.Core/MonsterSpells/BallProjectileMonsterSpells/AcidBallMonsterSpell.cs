@@ -14,7 +14,7 @@ internal class AcidBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesAcid => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts an acid ball";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile));
+    protected override string ProjectileKey => nameof(AcidProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

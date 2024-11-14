@@ -15,7 +15,7 @@ internal class RadiationBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesRadiation => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a ball of radiation";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(NukeProjectile));
+    protected override string ProjectileKey => nameof(NukeProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

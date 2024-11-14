@@ -16,7 +16,7 @@ internal class ShardBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool UsesShards => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a shard ball";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile));
+    protected override string ProjectileKey => nameof(ShardProjectile);
     protected override int MonsterHealthDamageDivisor => 4;
     protected override int MaxDamage => 800;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ShardSpellResistantDetection)) };

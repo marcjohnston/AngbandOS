@@ -12,7 +12,7 @@ internal class PlasmaBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private PlasmaBreatheBallMonsterSpell(Game game) : base(game) { }
     protected override string ActionName => "breathes plasma";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(PlasmaProjectile));
+    protected override string ProjectileKey => nameof(PlasmaProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 150;
 }

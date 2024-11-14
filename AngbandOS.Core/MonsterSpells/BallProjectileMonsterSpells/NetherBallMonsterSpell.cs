@@ -14,7 +14,7 @@ internal class NetherBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesNether => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts an nether ball";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(NetherProjectile));
+    protected override string ProjectileKey => nameof(NetherProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
