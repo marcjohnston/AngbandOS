@@ -18,8 +18,8 @@ internal class SkyDrakeMonsterRace : MonsterRace
         nameof(LightBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonDragonMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell)
+        nameof(DragonSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperDSymbol);

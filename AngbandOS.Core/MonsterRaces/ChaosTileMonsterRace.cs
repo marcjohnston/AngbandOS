@@ -18,7 +18,7 @@ internal class ChaosTileMonsterRace : MonsterRace
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(BlinkMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(PeriodSymbol);

@@ -22,7 +22,7 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);

@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class SummonMonstersMonsterSpell : SummonMonsterSpell
+internal class MonstersSummonMonsterSpell : SummonMonsterSpell
 {
-    private SummonMonstersMonsterSpell(Game game) : base(game) { }
-    protected override string SummonName(Monster monster) => "monsters";
+    private MonstersSummonMonsterSpell(Game game) : base(game) { }
+    protected override string SummonNameExpression => "monsters";
 
     /// <summary>
     /// Returns 8, to summon upto 8 monsters.

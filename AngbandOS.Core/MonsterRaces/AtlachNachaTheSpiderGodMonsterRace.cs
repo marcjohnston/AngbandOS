@@ -21,8 +21,8 @@ internal class AtlachNachaTheSpiderGodMonsterRace : MonsterRace
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(DarknessMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonSpiderMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(SpiderSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperSSymbol);

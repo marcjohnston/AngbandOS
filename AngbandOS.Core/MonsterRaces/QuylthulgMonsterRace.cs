@@ -14,7 +14,7 @@ internal class QuylthulgMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BlinkMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperQSymbol);

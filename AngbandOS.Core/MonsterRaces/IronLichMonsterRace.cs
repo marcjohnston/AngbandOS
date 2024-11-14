@@ -21,7 +21,7 @@ internal class IronLichMonsterRace : MonsterRace
         nameof(IceBoltMonsterSpell),
         nameof(LightningBallMonsterSpell),
         nameof(WaterBallMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperLSymbol);

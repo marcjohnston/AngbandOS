@@ -391,7 +391,7 @@ internal class MonsterKnowledge
         {
             vp[vn++] = "shriek for help";
         }
-        if (combinedSpells.Contains(typeof(ShardBallMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ShardBreatheBallMonsterSpell)))
         {
             vp[vn++] = "produce shard balls";
         }
@@ -725,67 +725,67 @@ internal class MonsterKnowledge
         {
             vp[vn++] = "cause amnesia";
         }
-        if (combinedSpells.Contains(typeof(SummonMonsterMonsterSpell)))
+        if (combinedSpells.Contains(typeof(MonsterSummonMonsterSpell)))
         {
             vp[vn++] = "summon a monster";
         }
-        if (combinedSpells.Contains(typeof(SummonMonstersMonsterSpell)))
+        if (combinedSpells.Contains(typeof(MonstersSummonMonsterSpell)))
         {
             vp[vn++] = "summon monsters";
         }
-        if (combinedSpells.Contains(typeof(SummonKinMonsterSpell)))
+        if (combinedSpells.Contains(typeof(KinSummonMonsterSpell)))
         {
             vp[vn++] = "summon aid";
         }
-        if (combinedSpells.Contains(typeof(SummonAntMonsterSpell)))
+        if (combinedSpells.Contains(typeof(AntSummonMonsterSpell)))
         {
             vp[vn++] = "summon ants";
         }
-        if (combinedSpells.Contains(typeof(SummonSpiderMonsterSpell)))
+        if (combinedSpells.Contains(typeof(SpiderSummonMonsterSpell)))
         {
             vp[vn++] = "summon spiders";
         }
-        if (combinedSpells.Contains(typeof(SummonHoundMonsterSpell)))
+        if (combinedSpells.Contains(typeof(HoundSummonMonsterSpell)))
         {
             vp[vn++] = "summon hounds";
         }
-        if (combinedSpells.Contains(typeof(SummonHydraMonsterSpell)))
+        if (combinedSpells.Contains(typeof(HydraSummonMonsterSpell)))
         {
             vp[vn++] = "summon hydras";
         }
-        if (combinedSpells.Contains(typeof(SummonCthuloidMonsterSpell)))
+        if (combinedSpells.Contains(typeof(CthuloidSummonMonsterSpell)))
         {
             vp[vn++] = "summon a Cthuloid entity";
         }
-        if (combinedSpells.Contains(typeof(SummonDemonMonsterSpell)))
+        if (combinedSpells.Contains(typeof(DemonSummonMonsterSpell)))
         {
             vp[vn++] = "summon a demon";
         }
-        if (combinedSpells.Contains(typeof(SummonUndeadMonsterSpell)))
+        if (combinedSpells.Contains(typeof(UndeadSummonMonsterSpell)))
         {
             vp[vn++] = "summon an undead";
         }
-        if (combinedSpells.Contains(typeof(SummonDragonMonsterSpell)))
+        if (combinedSpells.Contains(typeof(DragonSummonMonsterSpell)))
         {
             vp[vn++] = "summon a dragon";
         }
-        if (combinedSpells.Contains(typeof(SummonHiUndeadMonsterSpell)))
+        if (combinedSpells.Contains(typeof(HiUndeadSummonMonsterSpell)))
         {
             vp[vn++] = "summon Greater Undead";
         }
-        if (combinedSpells.Contains(typeof(SummonHiDragonMonsterSpell)))
+        if (combinedSpells.Contains(typeof(HiDragonSummonMonsterSpell)))
         {
             vp[vn++] = "summon Ancient Dragons";
         }
-        if (combinedSpells.Contains(typeof(SummonReaverMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ReaverSummonMonsterSpell)))
         {
             vp[vn++] = "summon Black Reavers";
         }
-        if (combinedSpells.Contains(typeof(SummonGreatOldOneMonsterSpell)))
+        if (combinedSpells.Contains(typeof(GreatOldOneSummonMonsterSpell)))
         {
             vp[vn++] = "summon Great Old Ones";
         }
-        if (combinedSpells.Contains(typeof(SummonUniqueMonsterSpell)))
+        if (combinedSpells.Contains(typeof(UniqueSummonMonsterSpell)))
         {
             vp[vn++] = "summon Unique Monsters";
         }

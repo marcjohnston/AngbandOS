@@ -18,7 +18,7 @@ internal class OgreShamanMonsterRace : MonsterRace
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

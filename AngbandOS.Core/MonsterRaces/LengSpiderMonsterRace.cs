@@ -19,7 +19,7 @@ internal class LengSpiderMonsterRace : MonsterRace
         nameof(SlowMonsterSpell),
         nameof(HasteMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonSpiderMonsterSpell)
+        nameof(SpiderSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperSSymbol);

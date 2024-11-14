@@ -19,9 +19,9 @@ internal class BalrogMonsterRace : MonsterRace
         nameof(ConfuseMonsterSpell),
         nameof(NetherBallMonsterSpell),
         nameof(PlasmaBoltMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperUSymbol);

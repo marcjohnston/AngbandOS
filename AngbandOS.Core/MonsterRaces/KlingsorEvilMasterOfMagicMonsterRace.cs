@@ -25,7 +25,7 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
         nameof(WaterBallMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
         nameof(DreadCurseMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

@@ -15,7 +15,7 @@ internal class ByakheeMonsterRace : MonsterRace
     protected override string[]? SpellNames =>new string[] {
         nameof(ConfuseMonsterSpell),
         nameof(FireBoltMonsterSpell),
-        nameof(SummonDemonMonsterSpell)
+        nameof(DemonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperBSymbol);

@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class SummonMonsterMonsterSpell : SummonMonsterSpell
+internal class MonsterSummonMonsterSpell : SummonMonsterSpell
 {
-    private SummonMonsterMonsterSpell(Game game) : base(game) { }
-    protected override string SummonName(Monster monster) => "help";
+    private MonsterSummonMonsterSpell(Game game) : base(game) { }
+    protected override string SummonNameExpression => "help";
 
     /// <summary>
     /// Returns null, to summon any monster.

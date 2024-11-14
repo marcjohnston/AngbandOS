@@ -16,9 +16,9 @@ internal class LordOfChaosMonsterRace : MonsterRace
         nameof(ChaosBallMonsterSpell),
         nameof(MindBlastMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonHoundMonsterSpell),
-        nameof(SummonSpiderMonsterSpell)
+        nameof(DemonSummonMonsterSpell),
+        nameof(HoundSummonMonsterSpell),
+        nameof(SpiderSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);

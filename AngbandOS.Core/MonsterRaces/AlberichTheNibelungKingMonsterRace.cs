@@ -17,7 +17,7 @@ internal class AlberichTheNibelungKingMonsterRace : MonsterRace
         nameof(AcidBoltMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

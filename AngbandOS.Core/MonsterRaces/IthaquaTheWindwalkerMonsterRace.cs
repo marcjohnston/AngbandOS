@@ -22,9 +22,9 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
         nameof(MindBlastMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(WaterBallMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonKinMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperXSymbol);

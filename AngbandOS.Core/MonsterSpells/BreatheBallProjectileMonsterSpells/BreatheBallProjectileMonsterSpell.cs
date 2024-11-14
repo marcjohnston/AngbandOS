@@ -39,16 +39,6 @@ internal abstract class BreatheBallProjectileMonsterSpell : BallProjectileMonste
     public override string? VsPlayerBlindMessage => $"You hear breathing.";
 
     /// <summary>
-    /// Returns an action message that the monster is breathes and an element specified by the protected Element method.
-    /// </summary>
-    protected override string ActionName => $"breathes {ElementName}";
-
-    /// <summary>
-    /// Returns the name of the element that the monster breathes.
-    /// </summary>
-    protected abstract string ElementName { get; }
-
-    /// <summary>
     /// Returns a default radius of damage of 0.
     /// </summary>
     protected override int Radius => 0;

@@ -12,7 +12,7 @@ internal class PoisonBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private PoisonBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesPoison => true;
-    protected override string ElementName => "gas";
+    protected override string ActionName => "breathes gas";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 800;

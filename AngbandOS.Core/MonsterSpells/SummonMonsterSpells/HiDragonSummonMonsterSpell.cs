@@ -8,10 +8,12 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class SummonHydraMonsterSpell : SummonMonsterSpell
+internal class HiDragonSummonMonsterSpell : SummonMonsterSpell
 {
-    private SummonHydraMonsterSpell(Game game) : base(game) { }
-    protected override string SummonName(Monster monster) => "hydras";
+    private HiDragonSummonMonsterSpell(Game game) : base(game) { }
+    protected override string SummonNameExpression => "ancient dragons";
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter));
+    protected override int MaximumSummonCount => 8;
+
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonMonsterFilter));
 }

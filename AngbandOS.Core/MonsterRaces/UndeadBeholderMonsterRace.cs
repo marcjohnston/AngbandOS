@@ -20,7 +20,7 @@ internal class UndeadBeholderMonsterRace : MonsterRace
         nameof(MindBlastMonsterSpell),
         nameof(SlowMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerESymbol);

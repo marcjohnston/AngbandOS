@@ -17,7 +17,7 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
         nameof(SlowMonsterSpell),
         nameof(BlinkMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

@@ -22,7 +22,7 @@ internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
         nameof(SlowMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonSpiderMonsterSpell)
+        nameof(SpiderSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperSSymbol);

@@ -14,7 +14,7 @@ internal class BastGoddessOfCatsMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(HealMonsterSpell),
-        nameof(SummonKinMonsterSpell),
+        nameof(KinSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

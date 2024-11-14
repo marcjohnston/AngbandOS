@@ -19,7 +19,7 @@ internal class NightwalkerMonsterRace : MonsterRace
         nameof(NetherBallMonsterSpell),
         nameof(NetherBoltMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerZSymbol);

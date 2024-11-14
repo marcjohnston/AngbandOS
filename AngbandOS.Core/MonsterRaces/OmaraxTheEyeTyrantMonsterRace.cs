@@ -25,7 +25,7 @@ internal class OmaraxTheEyeTyrantMonsterRace : MonsterRace
         nameof(SlowMonsterSpell),
         nameof(DarknessMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonKinMonsterSpell)
+        nameof(KinSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerESymbol);

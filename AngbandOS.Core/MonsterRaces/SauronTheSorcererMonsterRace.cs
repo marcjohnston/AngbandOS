@@ -28,10 +28,10 @@ internal class SauronTheSorcererMonsterRace : MonsterRace
         nameof(WaterBallMonsterSpell),
         nameof(DreadCurseMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
         nameof(TeleportLevelMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };

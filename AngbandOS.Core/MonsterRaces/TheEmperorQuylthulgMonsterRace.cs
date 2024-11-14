@@ -14,8 +14,8 @@ internal class TheEmperorQuylthulgMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BrainSmashMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell)
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperQSymbol);

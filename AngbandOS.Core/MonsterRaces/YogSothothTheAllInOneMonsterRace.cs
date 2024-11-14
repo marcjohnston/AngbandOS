@@ -19,11 +19,11 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
         nameof(BrainSmashMonsterSpell),
         nameof(ManaBallMonsterSpell),
         nameof(ManaBoltMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonHoundMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonReaverMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(HoundSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(ReaverSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperXSymbol);

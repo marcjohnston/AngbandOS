@@ -14,7 +14,7 @@ internal class StairwayToHellMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(ShriekMonsterSpell),
-        nameof(SummonDemonMonsterSpell)
+        nameof(DemonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(GreaterThanSymbol);

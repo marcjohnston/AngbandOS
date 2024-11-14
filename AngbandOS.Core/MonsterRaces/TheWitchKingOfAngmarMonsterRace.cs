@@ -20,10 +20,10 @@ internal class TheWitchKingOfAngmarMonsterRace : MonsterRace
         nameof(ManaBoltMonsterSpell),
         nameof(NetherBallMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell)
     };
 

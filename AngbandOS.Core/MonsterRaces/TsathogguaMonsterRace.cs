@@ -18,7 +18,7 @@ internal class TsathogguaMonsterRace : MonsterRace
         nameof(DisintegrationBreatheBallMonsterSpell),
         nameof(ManaBreatheBallMonsterSpell),
         nameof(WaterBallMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperXSymbol);

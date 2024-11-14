@@ -17,7 +17,7 @@ internal class DeathKnightMonsterRace : MonsterRace
         nameof(CauseCriticalWoundsMonsterSpell),
         nameof(NetherBoltMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonMonstersMonsterSpell)
+        nameof(MonstersSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);

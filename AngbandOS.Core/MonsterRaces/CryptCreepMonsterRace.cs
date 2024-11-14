@@ -14,7 +14,7 @@ internal class CryptCreepMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(CauseLightWoundsMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerSSymbol);

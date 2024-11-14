@@ -22,7 +22,7 @@ internal class BoneGolemMonsterRace : MonsterRace
         nameof(HoldMonsterSpell),
         nameof(ManaBallMonsterSpell),
         nameof(NetherBallMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

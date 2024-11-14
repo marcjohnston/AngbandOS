@@ -27,9 +27,9 @@ internal class SarumanOfManyColorsMonsterRace : MonsterRace
         nameof(ForgetMonsterSpell),
         nameof(HasteMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonDragonMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(DragonSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };

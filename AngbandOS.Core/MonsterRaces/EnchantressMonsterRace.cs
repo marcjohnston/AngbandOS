@@ -14,7 +14,7 @@ internal class EnchantressMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BlindnessMonsterSpell),
-        nameof(SummonDragonMonsterSpell)
+        nameof(DragonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);

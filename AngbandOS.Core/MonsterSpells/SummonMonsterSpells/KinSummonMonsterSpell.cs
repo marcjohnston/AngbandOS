@@ -8,18 +8,12 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class SummonKinMonsterSpell : SummonMonsterSpell
+internal class KinSummonMonsterSpell : SummonMonsterSpell
 {
-    private SummonKinMonsterSpell(Game game) : base(game) { }
-    /// <summary>
-    /// Returns an empty string because all messages are overridden.
-    /// </summary>
-    protected override string SummonName(Monster monster)
-    {
-        string monsterPossessive = monster.PossessiveName;
-        string kin = monster.Race.Unique ? "minions" : "kin";
-        return $"{monsterPossessive} {kin}";
-    }
+    protected override string SummonNameExpression => "{0} {1}";
+
+
+    private KinSummonMonsterSpell(Game game) : base(game) { }
 
     /// <summary>
     /// Returns a kin monster selector with the character of the original monster for summoning.

@@ -17,8 +17,8 @@ internal class DarkElvenCultistMonsterRace : MonsterRace
         nameof(MagicMissileMonsterSpell),
         nameof(DarknessMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonSpiderMonsterSpell)
+        nameof(MonsterSummonMonsterSpell),
+        nameof(SpiderSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerHSymbol);

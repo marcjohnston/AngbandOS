@@ -22,8 +22,8 @@ internal class GoatOfMendesMonsterRace : MonsterRace
         nameof(NetherBallMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(DemonSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerQSymbol);

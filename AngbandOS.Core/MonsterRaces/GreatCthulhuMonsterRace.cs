@@ -34,10 +34,10 @@ internal class GreatCthulhuMonsterRace : MonsterRace
         nameof(DarknessMonsterSpell),
         nameof(DreadCurseMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonReaverMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(ReaverSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

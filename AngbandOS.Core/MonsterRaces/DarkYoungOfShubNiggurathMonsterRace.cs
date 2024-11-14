@@ -16,7 +16,7 @@ internal class DarkYoungOfShubNiggurathMonsterRace : MonsterRace
         nameof(BlindnessMonsterSpell),
         nameof(CauseSeriousWoundsMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperASymbol);

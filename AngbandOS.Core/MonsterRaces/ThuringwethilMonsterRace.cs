@@ -21,7 +21,7 @@ internal class ThuringwethilMonsterRace : MonsterRace
         nameof(HoldMonsterSpell),
         nameof(NetherBallMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonKinMonsterSpell)
+        nameof(KinSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperVSymbol);

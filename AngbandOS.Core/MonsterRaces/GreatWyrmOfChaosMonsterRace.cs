@@ -18,7 +18,7 @@ internal class GreatWyrmOfChaosMonsterRace : MonsterRace
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonDragonMonsterSpell)
+        nameof(DragonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperDSymbol);

@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class SummonAntMonsterSpell : SummonMonsterSpell
+internal class AntSummonMonsterSpell : SummonMonsterSpell
 {
-    private SummonAntMonsterSpell(Game game) : base(game) { }
-    protected override string SummonName(Monster monster) => "ants";
+    private AntSummonMonsterSpell(Game game) : base(game) { }
+    protected override string SummonNameExpression => "ants";
 
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(AntMonsterFilter));
 }

@@ -18,8 +18,8 @@ internal class ElderThingMonsterRace : MonsterRace
         nameof(ConfuseMonsterSpell),
         nameof(PoisonBallMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell)
     };
 

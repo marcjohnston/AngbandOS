@@ -18,7 +18,7 @@ internal class DeathQuasitMonsterRace : MonsterRace
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonDemonMonsterSpell)
+        nameof(DemonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerUSymbol);

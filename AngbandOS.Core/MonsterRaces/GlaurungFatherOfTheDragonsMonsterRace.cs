@@ -16,7 +16,7 @@ internal class GlaurungFatherOfTheDragonsMonsterRace : MonsterRace
         nameof(FireBreatheBallMonsterSpell),
         nameof(CauseCriticalWoundsMonsterSpell),
         nameof(ConfuseMonsterSpell),
-        nameof(SummonDragonMonsterSpell)
+        nameof(DragonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperDSymbol);

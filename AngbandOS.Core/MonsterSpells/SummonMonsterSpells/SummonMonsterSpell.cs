@@ -24,9 +24,20 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} magically summons {SummonName(monster)}!";
 
     /// <summary>
+    /// Returns the name of what is being summoned.  This name is used to generate the messages rendered to the player and supports {0} for the possessive name of the monster and {1} for
+    /// either "minions", if the monster is a unique or "kin", if the monster is not a unique.
+    /// </summary>
+    protected abstract string SummonNameExpression { get; }
+
+    /// <summary>
     /// Returns the name of what is being summoned.  This name is used to generate the messages rendered to the player.
     /// </summary>
-    protected abstract string SummonName(Monster monster);
+    protected string SummonName(Monster monster)
+    {
+        string monsterPossessive = monster.PossessiveName;
+        string kin = monster.Race.Unique ? "minions" : "kin";
+        return String.Format(SummonNameExpression, monsterPossessive, kin);
+    }
 
     /// <summary>
     /// Returns the maximum number of monsters that will be summoned.  Returns 6, by default.

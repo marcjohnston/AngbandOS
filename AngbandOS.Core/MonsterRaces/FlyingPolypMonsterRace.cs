@@ -18,7 +18,7 @@ internal class FlyingPolypMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell),
         nameof(HasteMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell)
     };
 

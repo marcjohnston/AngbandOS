@@ -21,7 +21,7 @@ internal class CantorasTheSkeletalLordMonsterRace : MonsterRace
         nameof(ScareMonsterSpell),
         nameof(SlowMonsterSpell),
         nameof(WaterBallMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

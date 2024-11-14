@@ -16,7 +16,7 @@ internal class CultistMonsterRace : MonsterRace
         nameof(CauseSeriousWoundsMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);

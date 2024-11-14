@@ -18,8 +18,8 @@ internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
         nameof(CauseMortalWoundsMonsterSpell),
         nameof(ManaBoltMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

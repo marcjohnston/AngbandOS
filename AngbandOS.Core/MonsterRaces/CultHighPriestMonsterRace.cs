@@ -18,9 +18,9 @@ internal class CultHighPriestMonsterRace : MonsterRace
         nameof(CauseMortalWoundsMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);

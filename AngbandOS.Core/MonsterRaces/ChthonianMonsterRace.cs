@@ -21,7 +21,7 @@ internal class ChthonianMonsterRace : MonsterRace
         nameof(ForgetMonsterSpell),
         nameof(HasteMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonDemonMonsterSpell)
+        nameof(DemonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperASymbol);

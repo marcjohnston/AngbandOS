@@ -33,8 +33,8 @@ internal class GlaakiMonsterRace : MonsterRace
         nameof(DarknessMonsterSpell),
         nameof(ForgetMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell),
         nameof(TeleportToMonsterSpell),
         nameof(TeleportSelfMonsterSpell)

@@ -17,7 +17,7 @@ internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
         nameof(FireBoltMonsterSpell),
         nameof(MindBlastMonsterSpell),
         nameof(DarknessMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperASymbol);

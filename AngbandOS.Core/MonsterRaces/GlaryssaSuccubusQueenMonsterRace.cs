@@ -21,7 +21,7 @@ internal class GlaryssaSuccubusQueenMonsterRace : MonsterRace
         nameof(NetherBoltMonsterSpell),
         nameof(DarknessMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonDemonMonsterSpell)
+        nameof(DemonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperUSymbol);

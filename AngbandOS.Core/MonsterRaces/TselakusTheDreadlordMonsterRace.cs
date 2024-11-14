@@ -18,8 +18,8 @@ internal class TselakusTheDreadlordMonsterRace : MonsterRace
         nameof(DarkBallMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(NetherBallMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonKinMonsterSpell)
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperGSymbol);

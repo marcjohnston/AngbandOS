@@ -20,10 +20,10 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
         nameof(BrainSmashMonsterSpell),
         nameof(MindBlastMonsterSpell),
         nameof(HasteMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

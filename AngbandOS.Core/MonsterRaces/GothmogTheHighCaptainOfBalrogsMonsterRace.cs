@@ -18,10 +18,10 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonReaverMonsterSpell)
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(ReaverSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperUSymbol);

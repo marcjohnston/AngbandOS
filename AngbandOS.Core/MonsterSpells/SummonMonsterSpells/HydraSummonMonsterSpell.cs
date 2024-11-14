@@ -8,12 +8,10 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class SummonCthuloidMonsterSpell : SummonMonsterSpell
+internal class HydraSummonMonsterSpell : SummonMonsterSpell
 {
-    private SummonCthuloidMonsterSpell(Game game) : base(game) { }
-    protected override string SummonName(Monster monster) => "a Cthuloid entity";
+    private HydraSummonMonsterSpell(Game game) : base(game) { }
+    protected override string SummonNameExpression => "hydras";
 
-    protected override int MaximumSummonCount => 1;
-
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter));
 }

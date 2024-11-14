@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class SummonReaverMonsterSpell : SummonMonsterSpell
+internal class ReaverSummonMonsterSpell : SummonMonsterSpell
 {
-    private SummonReaverMonsterSpell(Game game) : base(game) { }
-    protected override string SummonName(Monster monster) => "Black Reavers";
+    private ReaverSummonMonsterSpell(Game game) : base(game) { }
+    protected override string SummonNameExpression => "Black Reavers";
 
     protected override int MaximumSummonCount => (Game.Difficulty / 50) + Game.DieRoll(6);
 

@@ -19,7 +19,7 @@ internal class DreadmasterMonsterRace : MonsterRace
         nameof(DrainManaMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(NetherBoltMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportLevelMonsterSpell)
     };
 

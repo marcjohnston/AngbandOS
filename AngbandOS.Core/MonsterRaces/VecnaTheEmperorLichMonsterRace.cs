@@ -25,9 +25,9 @@ internal class VecnaTheEmperorLichMonsterRace : MonsterRace
         nameof(ScareMonsterSpell),
         nameof(BlinkMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

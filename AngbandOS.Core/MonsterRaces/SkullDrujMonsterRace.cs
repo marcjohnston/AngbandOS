@@ -21,7 +21,7 @@ internal class SkullDrujMonsterRace : MonsterRace
         nameof(SlowMonsterSpell),
         nameof(WaterBallMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerSSymbol);

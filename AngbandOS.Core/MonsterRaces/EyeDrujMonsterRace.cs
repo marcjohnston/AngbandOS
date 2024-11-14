@@ -16,7 +16,7 @@ internal class EyeDrujMonsterRace : MonsterRace
         nameof(ManaBoltMonsterSpell),
         nameof(NetherBallMonsterSpell),
         nameof(NetherBoltMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerSSymbol);

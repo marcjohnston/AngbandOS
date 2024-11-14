@@ -11,7 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class InertiaBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private InertiaBreatheBallMonsterSpell(Game game) : base(game) { }
-    protected override string ElementName => "inertia";
+    protected override string ActionName => "breathes inertia";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(InertiaProjectile));
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 200;

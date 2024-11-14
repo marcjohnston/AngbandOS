@@ -17,7 +17,7 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
         nameof(SlowMonsterSpell),
         nameof(BlinkMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonKinMonsterSpell),
+        nameof(KinSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

@@ -17,7 +17,7 @@ internal class MasterYeekMonsterRace : MonsterRace
         nameof(PoisonBallMonsterSpell),
         nameof(SlowMonsterSpell),
         nameof(BlinkMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

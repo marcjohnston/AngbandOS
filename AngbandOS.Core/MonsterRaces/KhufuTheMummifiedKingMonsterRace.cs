@@ -18,8 +18,8 @@ internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
         nameof(SlowMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
         nameof(DarknessMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(KinSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerZSymbol);

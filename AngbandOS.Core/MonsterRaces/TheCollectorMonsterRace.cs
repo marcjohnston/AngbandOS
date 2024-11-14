@@ -22,10 +22,10 @@ internal class TheCollectorMonsterRace : MonsterRace
         nameof(ScareMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
-        nameof(SummonUniqueMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(UniqueSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell)
     };
 

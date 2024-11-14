@@ -15,7 +15,7 @@ internal class BodakMonsterRace : MonsterRace
     protected override string[]? SpellNames =>new string[] {
         nameof(FireBallMonsterSpell),
         nameof(FireBoltMonsterSpell),
-        nameof(SummonDemonMonsterSpell)
+        nameof(DemonSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerUSymbol);

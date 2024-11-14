@@ -21,8 +21,8 @@ internal class IpsissimusMonsterRace : MonsterRace
         nameof(ScareMonsterSpell),
         nameof(ForgetMonsterSpell),
         nameof(HasteMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };

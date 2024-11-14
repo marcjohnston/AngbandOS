@@ -9,14 +9,15 @@ namespace AngbandOS.Core.MonsterSpells;
 
 
 [Serializable]
-internal class ShardBallMonsterSpell : BallProjectileMonsterSpell
+internal class ShardBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
-    private ShardBallMonsterSpell(Game game) : base(game) { }
+    private ShardBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool IsInnate => true;
     public override bool UsesShards => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a shard ball";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile));
-    protected override int Damage(Monster monster) => monster.Health / 4 > 800 ? 800 : monster.Health / 4;
+    protected override int MonsterHealthDamageDivisor => 4;
+    protected override int MaxDamage => 800;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ShardSpellResistantDetection)) };
 }

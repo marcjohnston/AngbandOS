@@ -15,7 +15,7 @@ internal class CauseCriticalWoundsMonsterSpell : CauseWoundsMonsterSpell
     public override bool Annoys => true;
     protected override int CurseEquipmentChance => 80;
     protected override int HeavyCurseEquipmentChance => 15;
-    protected override int Damage => Game.DiceRoll(10, 15);
+    protected override string DamageRollExpression => "10d15";
     public override string? VsPlayerBlindMessage => $"You hear someone mumble loudly.";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} points at you, incanting terribly!";
     public override string? VsMonsterUnseenMessage => $"You hear someone mumble.";

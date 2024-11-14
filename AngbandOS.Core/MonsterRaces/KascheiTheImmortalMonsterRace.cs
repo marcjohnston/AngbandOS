@@ -21,9 +21,9 @@ internal class KascheiTheImmortalMonsterRace : MonsterRace
         nameof(ManaBoltMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(DreadCurseMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

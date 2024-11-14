@@ -23,9 +23,9 @@ internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
         nameof(MindBlastMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

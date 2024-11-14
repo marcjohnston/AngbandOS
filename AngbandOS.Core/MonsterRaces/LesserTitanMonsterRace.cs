@@ -15,7 +15,7 @@ internal class LesserTitanMonsterRace : MonsterRace
     protected override string[]? SpellNames =>new string[] {
         nameof(ScareMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

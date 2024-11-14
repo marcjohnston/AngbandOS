@@ -14,8 +14,8 @@ internal class MiGoMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(ConfuseMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperASymbol);

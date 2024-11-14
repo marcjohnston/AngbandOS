@@ -13,12 +13,12 @@ internal class MasterQuylthulgMonsterRace : MonsterRace
     protected MasterQuylthulgMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(SummonDragonMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonUndeadMonsterSpell)
+        nameof(DragonSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperQSymbol);

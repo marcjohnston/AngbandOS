@@ -23,13 +23,13 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
         nameof(BrainSmashMonsterSpell),
         nameof(DreadCurseMonsterSpell),
         nameof(HasteMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonGreatOldOneMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonReaverMonsterSpell),
-        nameof(SummonUniqueMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(GreatOldOneSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(ReaverSummonMonsterSpell),
+        nameof(UniqueSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperXSymbol);

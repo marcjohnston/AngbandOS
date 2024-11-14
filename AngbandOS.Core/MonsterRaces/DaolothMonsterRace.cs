@@ -15,7 +15,7 @@ internal class DaolothMonsterRace : MonsterRace
     protected override string[]? SpellNames =>new string[] {
         nameof(BlindnessMonsterSpell),
         nameof(ManaBoltMonsterSpell),
-        nameof(SummonKinMonsterSpell),
+        nameof(KinSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

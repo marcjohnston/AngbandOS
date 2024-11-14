@@ -16,7 +16,7 @@ internal class GnomeMageMonsterRace : MonsterRace
         nameof(ColdBoltMonsterSpell),
         nameof(BlinkMonsterSpell),
         nameof(DarknessMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerHSymbol);

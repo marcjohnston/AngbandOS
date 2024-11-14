@@ -23,9 +23,9 @@ internal class ItMonsterRace : MonsterRace
         nameof(DarknessMonsterSpell),
         nameof(ForgetMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonHydraMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(HydraSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };

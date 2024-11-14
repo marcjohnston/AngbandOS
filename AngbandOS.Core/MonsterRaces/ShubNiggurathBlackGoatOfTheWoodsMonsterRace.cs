@@ -23,10 +23,10 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
         nameof(DarkBallMonsterSpell),
         nameof(ManaBoltMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonUniqueMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UniqueSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperXSymbol);

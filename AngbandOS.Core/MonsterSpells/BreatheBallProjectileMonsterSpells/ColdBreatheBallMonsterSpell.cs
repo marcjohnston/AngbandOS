@@ -12,7 +12,7 @@ internal class ColdBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private ColdBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesCold => true;
-    protected override string ElementName => "frost";
+    protected override string ActionName => "breathes frost";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;

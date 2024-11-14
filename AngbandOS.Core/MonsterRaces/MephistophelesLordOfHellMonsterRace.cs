@@ -19,10 +19,10 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(DreadCurseMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonReaverMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(ReaverSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

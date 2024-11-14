@@ -17,7 +17,7 @@ internal class CarcharothTheJawsOfThirstMonsterRace : MonsterRace
         nameof(BrainSmashMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonHoundMonsterSpell)
+        nameof(HoundSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperCSymbol);

@@ -21,9 +21,9 @@ internal class SorcererMonsterRace : MonsterRace
         nameof(FireBallMonsterSpell),
         nameof(BlinkMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
-        nameof(SummonDragonMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(DragonSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

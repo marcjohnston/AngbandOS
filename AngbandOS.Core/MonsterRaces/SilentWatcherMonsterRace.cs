@@ -18,8 +18,8 @@ internal class SilentWatcherMonsterRace : MonsterRace
         nameof(DrainManaMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(MindBlastMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonMonstersMonsterSpell)
+        nameof(MonsterSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerGSymbol);

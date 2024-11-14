@@ -12,7 +12,7 @@ internal class NetherBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private NetherBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesNether => true;
-    protected override string ElementName => "nether";
+    protected override string ActionName => "breathes nether";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(NetherProjectile));
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 550;

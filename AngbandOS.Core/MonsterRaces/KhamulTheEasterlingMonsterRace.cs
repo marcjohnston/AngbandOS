@@ -22,8 +22,8 @@ internal class KhamulTheEasterlingMonsterRace : MonsterRace
         nameof(ManaBoltMonsterSpell),
         nameof(NetherBallMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportLevelMonsterSpell)
     };
 

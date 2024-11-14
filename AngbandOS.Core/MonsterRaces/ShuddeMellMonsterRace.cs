@@ -21,7 +21,7 @@ internal class ShuddeMellMonsterRace : MonsterRace
         nameof(ForgetMonsterSpell),
         nameof(HasteMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperXSymbol);

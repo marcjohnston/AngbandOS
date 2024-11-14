@@ -19,7 +19,7 @@ internal class MedusaTheGorgonMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell),
         nameof(PoisonBallMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonHydraMonsterSpell)
+        nameof(HydraSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerNSymbol);

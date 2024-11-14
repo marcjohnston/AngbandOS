@@ -15,8 +15,8 @@ internal class ChaosMasterMonsterRace : MonsterRace
     protected override string[]? SpellNames =>new string[] {
         nameof(ChaosBallMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonSpiderMonsterSpell)
+        nameof(DemonSummonMonsterSpell),
+        nameof(SpiderSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);

@@ -22,7 +22,7 @@ internal class MasterLichMonsterRace : MonsterRace
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(BlinkMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 

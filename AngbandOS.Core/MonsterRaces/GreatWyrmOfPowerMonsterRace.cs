@@ -35,9 +35,9 @@ internal class GreatWyrmOfPowerMonsterRace : MonsterRace
         nameof(ShardsBreatheBallMonsterSpell),
         nameof(SoundBreatheBallMonsterSpell),
         nameof(TimeBreatheBallMonsterSpell),
-        nameof(SummonDragonMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonKinMonsterSpell)
+        nameof(DragonSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperDSymbol);

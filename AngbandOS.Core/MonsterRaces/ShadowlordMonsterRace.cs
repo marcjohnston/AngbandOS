@@ -22,7 +22,7 @@ internal class ShadowlordMonsterRace : MonsterRace
         nameof(NetherBallMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(DarknessMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };

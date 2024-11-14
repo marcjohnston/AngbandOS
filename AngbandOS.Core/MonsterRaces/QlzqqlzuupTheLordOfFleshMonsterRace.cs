@@ -13,21 +13,21 @@ internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
     protected QlzqqlzuupTheLordOfFleshMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(SummonAntMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonDragonMonsterSpell),
-        nameof(SummonGreatOldOneMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonHiUndeadMonsterSpell),
-        nameof(SummonHoundMonsterSpell),
-        nameof(SummonHydraMonsterSpell),
-        nameof(SummonKinMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonMonstersMonsterSpell),
-        nameof(SummonSpiderMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
-        nameof(SummonUniqueMonsterSpell)
+        nameof(AntSummonMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(DragonSummonMonsterSpell),
+        nameof(GreatOldOneSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(HoundSummonMonsterSpell),
+        nameof(HydraSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(SpiderSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(UniqueSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperQSymbol);

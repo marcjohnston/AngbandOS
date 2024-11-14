@@ -21,8 +21,8 @@ internal class TheNorsaMonsterRace : MonsterRace
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),
-        nameof(SummonHiDragonMonsterSpell),
-        nameof(SummonMonstersMonsterSpell)
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperHSymbol);

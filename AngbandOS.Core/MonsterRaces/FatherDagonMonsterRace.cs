@@ -17,7 +17,7 @@ internal class FatherDagonMonsterRace : MonsterRace
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(BlinkMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell),
         nameof(TeleportLevelMonsterSpell),
         nameof(TeleportToMonsterSpell),

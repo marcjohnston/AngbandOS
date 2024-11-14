@@ -12,7 +12,7 @@ internal class DarkBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private DarkBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesDarkness => true;
-    protected override string ElementName => "darkness";
+    protected override string ActionName => "breathes darkness";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile));
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;

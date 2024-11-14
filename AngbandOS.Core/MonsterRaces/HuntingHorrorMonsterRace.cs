@@ -16,7 +16,7 @@ internal class HuntingHorrorMonsterRace : MonsterRace
         nameof(DarkBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell)
+        nameof(CthuloidSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperUSymbol);

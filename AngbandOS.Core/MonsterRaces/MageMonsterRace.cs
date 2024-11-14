@@ -19,7 +19,7 @@ internal class MageMonsterRace : MonsterRace
         nameof(FireBoltMonsterSpell),
         nameof(LightningBoltMonsterSpell),
         nameof(HasteMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
         nameof(TeleportToMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };

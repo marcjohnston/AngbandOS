@@ -24,7 +24,7 @@ internal class HasturTheUnspeakableMonsterRace : MonsterRace
         nameof(WaterBallMonsterSpell),
         nameof(HasteMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonCthuloidMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
         nameof(TeleportAwayMonsterSpell),
         nameof(TeleportToMonsterSpell),
         nameof(TeleportSelfMonsterSpell)

@@ -22,7 +22,7 @@ internal class RingMimicMonsterRace : MonsterRace
         nameof(LightningBoltMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(ForgetMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(EqualSignSymbol);

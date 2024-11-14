@@ -12,7 +12,7 @@ internal class ChaosBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private ChaosBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesChaos => true;
-    protected override string ElementName => "chaos";
+    protected override string ActionName => "breathes chaos";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile));
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 600;

@@ -17,7 +17,7 @@ internal class OgreMageMonsterRace : MonsterRace
         nameof(HoldMonsterSpell),
         nameof(CreateTrapsMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonMonsterMonsterSpell)
+        nameof(MonsterSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperOSymbol);

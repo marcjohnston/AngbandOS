@@ -13,7 +13,7 @@ internal class TheQueenAntMonsterRace : MonsterRace
     protected TheQueenAntMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(SummonAntMonsterSpell)
+        nameof(AntSummonMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerASymbol);

@@ -12,7 +12,7 @@ internal class ConfusionBreatheBallMonsterSpell : BreatheBallProjectileMonsterSp
 {
     private ConfusionBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesConfusion => true;
-    protected override string ElementName => "confusion";
+    protected override string ActionName => "breathes confusion";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;

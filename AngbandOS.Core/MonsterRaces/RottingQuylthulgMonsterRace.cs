@@ -14,7 +14,7 @@ internal class RottingQuylthulgMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BlinkMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportSelfMonsterSpell)
     };
 

@@ -23,9 +23,9 @@ internal class DarkElvenThaumaturgeMonsterRace : MonsterRace
         nameof(BlinkMonsterSpell),
         nameof(DarknessMonsterSpell),
         nameof(HealMonsterSpell),
-        nameof(SummonDemonMonsterSpell),
-        nameof(SummonMonsterMonsterSpell),
-        nameof(SummonUndeadMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };
 
