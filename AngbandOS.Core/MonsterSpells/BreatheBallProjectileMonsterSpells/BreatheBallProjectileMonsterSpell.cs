@@ -13,9 +13,9 @@ namespace AngbandOS.Core.MonsterSpells;
 /// damage.
 /// </summary>
 [Serializable]
-internal abstract class BreatheProjectileMonsterSpell : BallProjectileMonsterSpell
+internal abstract class BreatheBallProjectileMonsterSpell : BallProjectileMonsterSpell
 {
-    protected BreatheProjectileMonsterSpell(Game game) : base(game) { }
+    protected BreatheBallProjectileMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns true because all breathe attacks are innate.
     /// </summary>
@@ -52,6 +52,14 @@ internal abstract class BreatheProjectileMonsterSpell : BallProjectileMonsterSpe
     /// Returns a default radius of damage of 0.
     /// </summary>
     protected override int Radius => 0;
+
+    protected abstract int MonsterHealthDamageDivisor { get; }
+    protected abstract int MaxDamage { get; }
+    protected sealed override int Damage(Monster monster)
+    {
+        int damage = monster.Health / MonsterHealthDamageDivisor;
+        return damage > MaxDamage ? MaxDamage : damage;
+    }
 
     protected override bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
     {

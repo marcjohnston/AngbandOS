@@ -8,12 +8,13 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class BreatheNetherMonsterSpell : BreatheProjectileMonsterSpell
+internal class NetherBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
-    private BreatheNetherMonsterSpell(Game game) : base(game) { }
+    private NetherBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesNether => true;
     protected override string ElementName => "nether";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(NetherProjectile));
-    protected override int Damage(Monster monster) => monster.Health / 6 > 550 ? 550 : monster.Health / 6;
+    protected override int MonsterHealthDamageDivisor => 6;
+    protected override int MaxDamage => 550;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NethSpellResistantDetection)) };
 }

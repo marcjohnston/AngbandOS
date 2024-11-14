@@ -13,7 +13,7 @@ internal class ShimmeringVortexMonsterRace : MonsterRace
     protected ShimmeringVortexMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheLightMonsterSpell),
+        nameof(LightBreatheBallMonsterSpell),
         nameof(ShriekMonsterSpell)
     };
 

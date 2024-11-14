@@ -8,12 +8,13 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class BreatheLightMonsterSpell : BreatheProjectileMonsterSpell
+internal class LightBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
-    private BreatheLightMonsterSpell(Game game) : base(game) { }
+    private LightBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesLight => true;
     protected override string ElementName => "light";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(LightProjectile));
-    protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
+    protected override int MonsterHealthDamageDivisor => 6;
+    protected override int MaxDamage => 400;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(LightSpellResistantDetection)) };
 }

@@ -13,7 +13,7 @@ internal class LightHoundMonsterRace : MonsterRace
     protected LightHoundMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheLightMonsterSpell)
+        nameof(LightBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperZSymbol);

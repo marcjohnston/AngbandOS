@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class WaterBoltMonsterSpell : BoltProjectileMonsterSpell
+internal class WaterBoltMonsterSpell : ProjectileMonsterSpell
 {
     private WaterBoltMonsterSpell(Game game) : base(game) { }
     public override bool CanBeReflected => true;

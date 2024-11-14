@@ -13,7 +13,7 @@ internal class GlaurungFatherOfTheDragonsMonsterRace : MonsterRace
     protected GlaurungFatherOfTheDragonsMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
         nameof(CauseCriticalWoundsMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(SummonDragonMonsterSpell)

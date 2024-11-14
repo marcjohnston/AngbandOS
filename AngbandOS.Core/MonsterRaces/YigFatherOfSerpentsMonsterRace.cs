@@ -13,9 +13,9 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
     protected YigFatherOfSerpentsMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheAcidMonsterSpell),
-        nameof(BreatheDisenchantMonsterSpell),
-        nameof(BreathePoisonMonsterSpell)
+        nameof(AcidBreatheBallMonsterSpell),
+        nameof(DisenchantBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperJSymbol);

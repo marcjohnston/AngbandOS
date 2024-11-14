@@ -389,20 +389,20 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     }
 
     public MonsterSpellList Spells = new MonsterSpellList();
-    public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));
-    public bool BreatheCold => Spells.Contains(typeof(BreatheColdMonsterSpell));
-    public bool BreatheFire => Spells.Contains(typeof(BreatheFireMonsterSpell));
-    public bool BreatheLightning => Spells.Contains(typeof(BreatheLightningMonsterSpell));
-    public bool BreathePoison => Spells.Contains(typeof(BreathePoisonMonsterSpell));
-    public bool BreatheChaos => Spells.Contains(typeof(BreatheChaosMonsterSpell));
-    public bool BreatheConfusion => Spells.Contains(typeof(BreatheConfusionMonsterSpell));
-    public bool BreatheDark => Spells.Contains(typeof(BreatheDarkMonsterSpell));
-    public bool BreatheSound => Spells.Contains(typeof(BreatheSoundMonsterSpell));
-    public bool BreatheForce => Spells.Contains(typeof(BreatheForceMonsterSpell));
-    public bool BreatheShards => Spells.Contains(typeof(BreatheShardsMonsterSpell));
-    public bool BreatheGravity => Spells.Contains(typeof(BreatheGravityMonsterSpell));
-    public bool BreatheInertia => Spells.Contains(typeof(BreatheInertiaMonsterSpell));
-    public bool BreatheTime => Spells.Contains(typeof(BreatheTimeMonsterSpell));
+    public bool BreatheAcid => Spells.Contains(typeof(AcidBreatheBallMonsterSpell));
+    public bool BreatheCold => Spells.Contains(typeof(ColdBreatheBallMonsterSpell));
+    public bool BreatheFire => Spells.Contains(typeof(FireBreatheBallMonsterSpell));
+    public bool BreatheLightning => Spells.Contains(typeof(LightningBreatheBallMonsterSpell));
+    public bool BreathePoison => Spells.Contains(typeof(PoisonBreatheBallMonsterSpell));
+    public bool BreatheChaos => Spells.Contains(typeof(ChaosBreatheBallMonsterSpell));
+    public bool BreatheConfusion => Spells.Contains(typeof(ConfusionBreatheBallMonsterSpell));
+    public bool BreatheDark => Spells.Contains(typeof(DarkBreatheBallMonsterSpell));
+    public bool BreatheSound => Spells.Contains(typeof(SoundBreatheBallMonsterSpell));
+    public bool BreatheForce => Spells.Contains(typeof(ForceBreatheBallMonsterSpell));
+    public bool BreatheShards => Spells.Contains(typeof(ShardsBreatheBallMonsterSpell));
+    public bool BreatheGravity => Spells.Contains(typeof(GravityBreatheBallMonsterSpell));
+    public bool BreatheInertia => Spells.Contains(typeof(InertiaBreatheBallMonsterSpell));
+    public bool BreatheTime => Spells.Contains(typeof(TimeBreatheBallMonsterSpell));
     public bool TeleportSelf => Spells.Contains(typeof(TeleportSelfMonsterSpell));
 
     public int CurNum;

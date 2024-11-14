@@ -13,8 +13,8 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
     protected GothmogTheHighCaptainOfBalrogsMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheDisintegrationMonsterSpell),
-        nameof(BreatheFireMonsterSpell),
+        nameof(DisintegrationBreatheBallMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),

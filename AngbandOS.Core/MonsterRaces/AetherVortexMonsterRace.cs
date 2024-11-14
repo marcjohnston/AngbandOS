@@ -13,24 +13,24 @@ internal class AetherVortexMonsterRace : MonsterRace
     protected AetherVortexMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheAcidMonsterSpell),
-        nameof(BreatheChaosMonsterSpell),
-        nameof(BreatheColdMonsterSpell),
-        nameof(BreatheConfusionMonsterSpell),
-        nameof(BreatheDarkMonsterSpell),
-        nameof(BreatheLightningMonsterSpell),
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreatheForceMonsterSpell),
-        nameof(BreatheGravityMonsterSpell),
-        nameof(BreatheInertiaMonsterSpell),
-        nameof(BreatheLightMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
-        nameof(BreatheNexusMonsterSpell),
-        nameof(BreathePlasmaMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
-        nameof(BreatheShardsMonsterSpell),
-        nameof(BreatheSoundMonsterSpell),
-        nameof(BreatheTimeMonsterSpell)
+        nameof(AcidBreatheBallMonsterSpell),
+        nameof(ChaosBreatheBallMonsterSpell),
+        nameof(ColdBreatheBallMonsterSpell),
+        nameof(ConfusionBreatheBallMonsterSpell),
+        nameof(DarkBreatheBallMonsterSpell),
+        nameof(LightningBreatheBallMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(ForceBreatheBallMonsterSpell),
+        nameof(GravityBreatheBallMonsterSpell),
+        nameof(InertiaBreatheBallMonsterSpell),
+        nameof(LightBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
+        nameof(NexusBreatheBallMonsterSpell),
+        nameof(PlasmaBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
+        nameof(ShardsBreatheBallMonsterSpell),
+        nameof(SoundBreatheBallMonsterSpell),
+        nameof(TimeBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerVSymbol);

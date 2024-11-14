@@ -13,7 +13,7 @@ internal class PlasmaHoundMonsterRace : MonsterRace
     protected PlasmaHoundMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreathePlasmaMonsterSpell)
+        nameof(PlasmaBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperZSymbol);

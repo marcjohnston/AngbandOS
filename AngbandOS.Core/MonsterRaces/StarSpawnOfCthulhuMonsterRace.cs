@@ -13,9 +13,9 @@ internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
     protected StarSpawnOfCthulhuMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheAcidMonsterSpell),
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
+        nameof(AcidBreatheBallMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
         nameof(RadiationBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(ConfuseMonsterSpell),

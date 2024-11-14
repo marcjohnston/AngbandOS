@@ -13,8 +13,8 @@ internal class DracoliskMonsterRace : MonsterRace
     protected DracoliskMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell)
     };

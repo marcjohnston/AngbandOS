@@ -13,7 +13,7 @@ internal class NazgulMonsterRace : MonsterRace
     protected NazgulMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheNetherMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
         nameof(DrainManaMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell)

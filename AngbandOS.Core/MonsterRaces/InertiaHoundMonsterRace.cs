@@ -13,7 +13,7 @@ internal class InertiaHoundMonsterRace : MonsterRace
     protected InertiaHoundMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheInertiaMonsterSpell)
+        nameof(InertiaBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperZSymbol);

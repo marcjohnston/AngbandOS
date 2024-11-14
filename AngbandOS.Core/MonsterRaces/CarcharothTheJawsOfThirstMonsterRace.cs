@@ -13,7 +13,7 @@ internal class CarcharothTheJawsOfThirstMonsterRace : MonsterRace
     protected CarcharothTheJawsOfThirstMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(HealMonsterSpell),

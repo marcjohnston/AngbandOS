@@ -13,8 +13,8 @@ internal class FafnerTheDragonMonsterRace : MonsterRace
     protected FafnerTheDragonMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
         nameof(CauseCriticalWoundsMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell)

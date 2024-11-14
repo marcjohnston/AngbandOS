@@ -434,91 +434,91 @@ internal class MonsterKnowledge
             _description.Append(". ");
         }
         vn = 0;
-        if (combinedSpells.Contains(typeof(BreatheAcidMonsterSpell)))
+        if (combinedSpells.Contains(typeof(AcidBreatheBallMonsterSpell)))
         {
             vp[vn++] = "acid";
         }
-        if (combinedSpells.Contains(typeof(BreatheLightningMonsterSpell)))
+        if (combinedSpells.Contains(typeof(LightningBreatheBallMonsterSpell)))
         {
             vp[vn++] = "lightning";
         }
-        if (combinedSpells.Contains(typeof(BreatheFireMonsterSpell)))
+        if (combinedSpells.Contains(typeof(FireBreatheBallMonsterSpell)))
         {
             vp[vn++] = "fire";
         }
-        if (combinedSpells.Contains(typeof(BreatheColdMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ColdBreatheBallMonsterSpell)))
         {
             vp[vn++] = "frost";
         }
-        if (combinedSpells.Contains(typeof(BreathePoisonMonsterSpell)))
+        if (combinedSpells.Contains(typeof(PoisonBreatheBallMonsterSpell)))
         {
             vp[vn++] = "poison";
         }
-        if (combinedSpells.Contains(typeof(BreatheNetherMonsterSpell)))
+        if (combinedSpells.Contains(typeof(NetherBreatheBallMonsterSpell)))
         {
             vp[vn++] = "nether";
         }
-        if (combinedSpells.Contains(typeof(BreatheLightMonsterSpell)))
+        if (combinedSpells.Contains(typeof(LightBreatheBallMonsterSpell)))
         {
             vp[vn++] = "light";
         }
-        if (combinedSpells.Contains(typeof(BreatheDarkMonsterSpell)))
+        if (combinedSpells.Contains(typeof(DarkBreatheBallMonsterSpell)))
         {
             vp[vn++] = "darkness";
         }
-        if (combinedSpells.Contains(typeof(BreatheConfusionMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ConfusionBreatheBallMonsterSpell)))
         {
             vp[vn++] = "confusion";
         }
-        if (combinedSpells.Contains(typeof(BreatheSoundMonsterSpell)))
+        if (combinedSpells.Contains(typeof(SoundBreatheBallMonsterSpell)))
         {
             vp[vn++] = "sound";
         }
-        if (combinedSpells.Contains(typeof(BreatheChaosMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ChaosBreatheBallMonsterSpell)))
         {
             vp[vn++] = "chaos";
         }
-        if (combinedSpells.Contains(typeof(BreatheDisenchantMonsterSpell)))
+        if (combinedSpells.Contains(typeof(DisenchantBreatheBallMonsterSpell)))
         {
             vp[vn++] = "disenchantment";
         }
-        if (combinedSpells.Contains(typeof(BreatheNexusMonsterSpell)))
+        if (combinedSpells.Contains(typeof(NexusBreatheBallMonsterSpell)))
         {
             vp[vn++] = "nexus";
         }
-        if (combinedSpells.Contains(typeof(BreatheTimeMonsterSpell)))
+        if (combinedSpells.Contains(typeof(TimeBreatheBallMonsterSpell)))
         {
             vp[vn++] = "time";
         }
-        if (combinedSpells.Contains(typeof(BreatheInertiaMonsterSpell)))
+        if (combinedSpells.Contains(typeof(InertiaBreatheBallMonsterSpell)))
         {
             vp[vn++] = "inertia";
         }
-        if (combinedSpells.Contains(typeof(BreatheGravityMonsterSpell)))
+        if (combinedSpells.Contains(typeof(GravityBreatheBallMonsterSpell)))
         {
             vp[vn++] = "gravity";
         }
-        if (combinedSpells.Contains(typeof(BreatheShardsMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ShardsBreatheBallMonsterSpell)))
         {
             vp[vn++] = "shards";
         }
-        if (combinedSpells.Contains(typeof(BreathePlasmaMonsterSpell)))
+        if (combinedSpells.Contains(typeof(PlasmaBreatheBallMonsterSpell)))
         {
             vp[vn++] = "plasma";
         }
-        if (combinedSpells.Contains(typeof(BreatheForceMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ForceBreatheBallMonsterSpell)))
         {
             vp[vn++] = "force";
         }
-        if (combinedSpells.Contains(typeof(BreatheManaMonsterSpell)))
+        if (combinedSpells.Contains(typeof(ManaBreatheBallMonsterSpell)))
         {
             vp[vn++] = "mana";
         }
-        if (combinedSpells.Contains(typeof(BreatheRadiationMonsterSpell)))
+        if (combinedSpells.Contains(typeof(RadiationBreatheBallMonsterSpell)))
         {
             vp[vn++] = "toxic waste";
         }
-        if (combinedSpells.Contains(typeof(BreatheDisintegrationMonsterSpell)))
+        if (combinedSpells.Contains(typeof(DisintegrationBreatheBallMonsterSpell)))
         {
             vp[vn++] = "disintegration";
         }

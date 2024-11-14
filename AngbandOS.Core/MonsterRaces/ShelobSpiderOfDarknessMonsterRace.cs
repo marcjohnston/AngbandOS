@@ -13,7 +13,7 @@ internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
     protected ShelobSpiderOfDarknessMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheDarkMonsterSpell),
+        nameof(DarkBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(CauseCriticalWoundsMonsterSpell),
         nameof(CauseMortalWoundsMonsterSpell),

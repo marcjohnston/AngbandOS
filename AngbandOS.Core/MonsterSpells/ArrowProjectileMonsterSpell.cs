@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal abstract class ArrowProjectileMonsterSpell : BoltProjectileMonsterSpell
+internal abstract class ArrowProjectileMonsterSpell : ProjectileMonsterSpell
 {
     protected ArrowProjectileMonsterSpell(Game game) : base(game) { }
     public override bool IsInnate => true;

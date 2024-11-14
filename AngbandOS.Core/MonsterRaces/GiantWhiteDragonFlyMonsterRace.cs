@@ -13,7 +13,7 @@ internal class GiantWhiteDragonFlyMonsterRace : MonsterRace
     protected GiantWhiteDragonFlyMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheColdMonsterSpell)
+        nameof(ColdBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperFSymbol);

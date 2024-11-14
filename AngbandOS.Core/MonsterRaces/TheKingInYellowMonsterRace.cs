@@ -13,10 +13,10 @@ internal class TheKingInYellowMonsterRace : MonsterRace
     protected TheKingInYellowMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheColdMonsterSpell),
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
+        nameof(ColdBreatheBallMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
         nameof(AcidBoltMonsterSpell),
         nameof(ManaBoltMonsterSpell),
         nameof(PoisonBallMonsterSpell),

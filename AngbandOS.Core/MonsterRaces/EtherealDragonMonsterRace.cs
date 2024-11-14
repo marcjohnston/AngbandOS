@@ -13,9 +13,9 @@ internal class EtherealDragonMonsterRace : MonsterRace
     protected EtherealDragonMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheConfusionMonsterSpell),
-        nameof(BreatheDarkMonsterSpell),
-        nameof(BreatheLightMonsterSpell),
+        nameof(ConfusionBreatheBallMonsterSpell),
+        nameof(DarkBreatheBallMonsterSpell),
+        nameof(LightBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell)
     };

@@ -13,8 +13,8 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
     protected HoundOfTindalosMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheNetherMonsterSpell),
-        nameof(BreatheTimeMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
+        nameof(TimeBreatheBallMonsterSpell),
         nameof(BlinkMonsterSpell),
         nameof(TeleportToMonsterSpell)
     };

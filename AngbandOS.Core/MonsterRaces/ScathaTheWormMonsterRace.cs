@@ -13,7 +13,7 @@ internal class ScathaTheWormMonsterRace : MonsterRace
     protected ScathaTheWormMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheColdMonsterSpell),
+        nameof(ColdBreatheBallMonsterSpell),
         nameof(CauseCriticalWoundsMonsterSpell),
         nameof(ConfuseMonsterSpell)
     };

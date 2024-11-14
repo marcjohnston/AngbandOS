@@ -13,8 +13,8 @@ internal class HasturTheUnspeakableMonsterRace : MonsterRace
     protected HasturTheUnspeakableMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheDarkMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
+        nameof(DarkBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(CauseMortalWoundsMonsterSpell),

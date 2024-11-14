@@ -13,7 +13,7 @@ internal class DoomDrakeMonsterRace : MonsterRace
     protected DoomDrakeMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell)
+        nameof(FireBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerDSymbol);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class PoisonBoltMonsterSpell : BoltProjectileMonsterSpell
+internal class PoisonBoltMonsterSpell : ProjectileMonsterSpell
 {
     private PoisonBoltMonsterSpell(Game game) : base(game) { }
     public override bool UsesPoison => true;

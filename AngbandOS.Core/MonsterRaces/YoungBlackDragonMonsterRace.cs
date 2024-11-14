@@ -13,7 +13,7 @@ internal class YoungBlackDragonMonsterRace : MonsterRace
     protected YoungBlackDragonMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheAcidMonsterSpell),
+        nameof(AcidBreatheBallMonsterSpell),
         nameof(ScareMonsterSpell)
     };
 

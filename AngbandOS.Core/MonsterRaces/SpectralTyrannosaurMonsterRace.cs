@@ -13,9 +13,9 @@ internal class SpectralTyrannosaurMonsterRace : MonsterRace
     protected SpectralTyrannosaurMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheNetherMonsterSpell),
-        nameof(BreatheNexusMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
+        nameof(NexusBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell)
     };

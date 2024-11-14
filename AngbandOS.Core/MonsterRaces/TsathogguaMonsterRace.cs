@@ -13,10 +13,10 @@ internal class TsathogguaMonsterRace : MonsterRace
     protected TsathogguaMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheChaosMonsterSpell),
-        nameof(BreatheDisenchantMonsterSpell),
-        nameof(BreatheDisintegrationMonsterSpell),
-        nameof(BreatheManaMonsterSpell),
+        nameof(ChaosBreatheBallMonsterSpell),
+        nameof(DisenchantBreatheBallMonsterSpell),
+        nameof(DisintegrationBreatheBallMonsterSpell),
+        nameof(ManaBreatheBallMonsterSpell),
         nameof(WaterBallMonsterSpell),
         nameof(SummonCthuloidMonsterSpell)
     };

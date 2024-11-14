@@ -13,7 +13,7 @@ internal class NexusVortexMonsterRace : MonsterRace
     protected NexusVortexMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheNexusMonsterSpell)
+        nameof(NexusBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerVSymbol);

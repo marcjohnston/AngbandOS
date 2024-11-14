@@ -13,11 +13,11 @@ internal class YoungMultiHuedDragonMonsterRace : MonsterRace
     protected YoungMultiHuedDragonMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheAcidMonsterSpell),
-        nameof(BreatheColdMonsterSpell),
-        nameof(BreatheLightningMonsterSpell),
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
+        nameof(AcidBreatheBallMonsterSpell),
+        nameof(ColdBreatheBallMonsterSpell),
+        nameof(LightningBreatheBallMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
         nameof(ScareMonsterSpell)
     };
 

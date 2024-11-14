@@ -13,9 +13,9 @@ internal class SkyDrakeMonsterRace : MonsterRace
     protected SkyDrakeMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheLightningMonsterSpell),
-        nameof(BreatheGravityMonsterSpell),
-        nameof(BreatheLightMonsterSpell),
+        nameof(LightningBreatheBallMonsterSpell),
+        nameof(GravityBreatheBallMonsterSpell),
+        nameof(LightBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ScareMonsterSpell),
         nameof(SummonDragonMonsterSpell),

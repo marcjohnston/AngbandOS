@@ -13,7 +13,7 @@ internal class NineHeadedHydraMonsterRace : MonsterRace
     protected NineHeadedHydraMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
         nameof(FireBoltMonsterSpell),
         nameof(ScareMonsterSpell)
     };

@@ -8,10 +8,11 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class BreatheDisintegrationMonsterSpell : BreatheProjectileMonsterSpell
+internal class DisintegrationBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
-    private BreatheDisintegrationMonsterSpell(Game game) : base(game) { }
+    private DisintegrationBreatheBallMonsterSpell(Game game) : base(game) { }
     protected override string ElementName => "disintegration";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(DisintegrateProjectile));
-    protected override int Damage(Monster monster) => monster.Health / 3 > 300 ? 300 : monster.Health / 3;
+    protected override int MonsterHealthDamageDivisor => 3;
+    protected override int MaxDamage => 300;
 }

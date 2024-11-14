@@ -13,7 +13,7 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
     protected IthaquaTheWindwalkerMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheColdMonsterSpell),
+        nameof(ColdBreatheBallMonsterSpell),
         nameof(ChaosBallMonsterSpell),
         nameof(CauseMortalWoundsMonsterSpell),
         nameof(LightningBallMonsterSpell),

@@ -13,12 +13,12 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
     protected AzathothTheDaemonSultanMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheChaosMonsterSpell),
-        nameof(BreatheDisintegrationMonsterSpell),
-        nameof(BreatheManaMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
-        nameof(BreatheRadiationMonsterSpell),
+        nameof(ChaosBreatheBallMonsterSpell),
+        nameof(DisintegrationBreatheBallMonsterSpell),
+        nameof(ManaBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
+        nameof(RadiationBreatheBallMonsterSpell),
         nameof(ChaosBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(DreadCurseMonsterSpell),

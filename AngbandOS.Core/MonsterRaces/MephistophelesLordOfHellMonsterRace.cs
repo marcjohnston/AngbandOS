@@ -13,8 +13,8 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
     protected MephistophelesLordOfHellMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(HoldMonsterSpell),
         nameof(ScareMonsterSpell),

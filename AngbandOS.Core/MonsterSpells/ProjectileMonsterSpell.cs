@@ -11,9 +11,9 @@ namespace AngbandOS.Core.MonsterSpells;
 /// Represents a monster spell that fires a projectile without any radius.  Default messages are provided.
 /// </summary>
 [Serializable]
-internal abstract class BoltProjectileMonsterSpell : MonsterSpell
+internal abstract class ProjectileMonsterSpell : MonsterSpell
 {
-    protected BoltProjectileMonsterSpell(Game game) : base(game) { }
+    protected ProjectileMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns a message that the monster performed an action specified by the protected ActionName method.
     /// </summary>

@@ -13,15 +13,15 @@ internal class KavlaxTheManyHeadedMonsterRace : MonsterRace
     protected KavlaxTheManyHeadedMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheAcidMonsterSpell),
-        nameof(BreatheColdMonsterSpell),
-        nameof(BreatheConfusionMonsterSpell),
-        nameof(BreatheLightningMonsterSpell),
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreatheGravityMonsterSpell),
-        nameof(BreatheNexusMonsterSpell),
-        nameof(BreatheShardsMonsterSpell),
-        nameof(BreatheSoundMonsterSpell)
+        nameof(AcidBreatheBallMonsterSpell),
+        nameof(ColdBreatheBallMonsterSpell),
+        nameof(ConfusionBreatheBallMonsterSpell),
+        nameof(LightningBreatheBallMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(GravityBreatheBallMonsterSpell),
+        nameof(NexusBreatheBallMonsterSpell),
+        nameof(ShardsBreatheBallMonsterSpell),
+        nameof(SoundBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(LowerDSymbol);

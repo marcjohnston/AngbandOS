@@ -13,8 +13,8 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
     protected YogSothothTheAllInOneMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheDisintegrationMonsterSpell),
-        nameof(BreatheManaMonsterSpell),
+        nameof(DisintegrationBreatheBallMonsterSpell),
+        nameof(ManaBreatheBallMonsterSpell),
         nameof(ChaosBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(ManaBallMonsterSpell),

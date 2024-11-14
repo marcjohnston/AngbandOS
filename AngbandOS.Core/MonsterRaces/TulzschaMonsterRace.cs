@@ -13,8 +13,8 @@ internal class TulzschaMonsterRace : MonsterRace
     protected TulzschaMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
-        nameof(BreatheNetherMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
+        nameof(NetherBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(FireBallMonsterSpell),
         nameof(FireBoltMonsterSpell),

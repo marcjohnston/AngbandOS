@@ -13,7 +13,7 @@ internal class TimeElementalMonsterRace : MonsterRace
     protected TimeElementalMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheTimeMonsterSpell),
+        nameof(TimeBreatheBallMonsterSpell),
         nameof(SlowMonsterSpell)
     };
 

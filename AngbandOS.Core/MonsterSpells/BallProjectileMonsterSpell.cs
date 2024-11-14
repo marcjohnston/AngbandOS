@@ -12,7 +12,7 @@ namespace AngbandOS.Core.MonsterSpells;
 /// are also modified.
 /// </summary>
 [Serializable]
-internal abstract class BallProjectileMonsterSpell : BoltProjectileMonsterSpell
+internal abstract class BallProjectileMonsterSpell : ProjectileMonsterSpell
 {
     protected BallProjectileMonsterSpell(Game game) : base(game) { }
     /// <summary>

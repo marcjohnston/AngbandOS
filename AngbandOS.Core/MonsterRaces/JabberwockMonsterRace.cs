@@ -13,7 +13,7 @@ internal class JabberwockMonsterRace : MonsterRace
     protected JabberwockMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheChaosMonsterSpell),
+        nameof(ChaosBreatheBallMonsterSpell),
         nameof(CauseMortalWoundsMonsterSpell)
     };
 

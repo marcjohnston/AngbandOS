@@ -13,10 +13,10 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
     protected NyogthaTheThingThatShouldNotBeMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheAcidMonsterSpell),
-        nameof(BreatheDarkMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
-        nameof(BreatheRadiationMonsterSpell),
+        nameof(AcidBreatheBallMonsterSpell),
+        nameof(DarkBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
+        nameof(RadiationBreatheBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(MindBlastMonsterSpell),
         nameof(HasteMonsterSpell),

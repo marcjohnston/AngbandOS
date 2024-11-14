@@ -14,7 +14,7 @@ internal class BaphometTheMinotaurLordMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(Arrow7D6MonsterSpell),
-        nameof(BreatheForceMonsterSpell),
+        nameof(ForceBreatheBallMonsterSpell),
         nameof(LightningBallMonsterSpell),
         nameof(ManaBoltMonsterSpell),
         nameof(PlasmaBoltMonsterSpell),

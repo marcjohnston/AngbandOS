@@ -13,7 +13,7 @@ internal class UnmakerMonsterRace : MonsterRace
     protected UnmakerMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheChaosMonsterSpell)
+        nameof(ChaosBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperESymbol);

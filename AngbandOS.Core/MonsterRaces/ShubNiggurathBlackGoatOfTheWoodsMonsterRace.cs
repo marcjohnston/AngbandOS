@@ -13,10 +13,10 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
     protected ShubNiggurathBlackGoatOfTheWoodsMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheChaosMonsterSpell),
-        nameof(BreatheConfusionMonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
-        nameof(BreatheRadiationMonsterSpell),
+        nameof(ChaosBreatheBallMonsterSpell),
+        nameof(ConfusionBreatheBallMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
+        nameof(RadiationBreatheBallMonsterSpell),
         nameof(ChaosBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(CauseMortalWoundsMonsterSpell),

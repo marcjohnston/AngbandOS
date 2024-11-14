@@ -13,7 +13,7 @@ internal class GorgimeraMonsterRace : MonsterRace
     protected GorgimeraMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell)
+        nameof(FireBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperHSymbol);

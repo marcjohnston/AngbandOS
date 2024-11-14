@@ -13,7 +13,7 @@ internal class FthagghuaLordOfTheFireVampiresMonsterRace : MonsterRace
     protected FthagghuaLordOfTheFireVampiresMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheFireMonsterSpell),
+        nameof(FireBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(FireBallMonsterSpell),
         nameof(FireBoltMonsterSpell),

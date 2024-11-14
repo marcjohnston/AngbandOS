@@ -13,7 +13,7 @@ internal class NetherHoundMonsterRace : MonsterRace
     protected NetherHoundMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheNetherMonsterSpell)
+        nameof(NetherBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperZSymbol);

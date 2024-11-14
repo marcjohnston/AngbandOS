@@ -13,7 +13,7 @@ internal class AbhothSourceOfUncleannessMonsterRace : MonsterRace
     protected AbhothSourceOfUncleannessMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheNexusMonsterSpell),
+        nameof(NexusBreatheBallMonsterSpell),
         nameof(ChaosBallMonsterSpell),
         nameof(BrainSmashMonsterSpell),
         nameof(CauseMortalWoundsMonsterSpell),

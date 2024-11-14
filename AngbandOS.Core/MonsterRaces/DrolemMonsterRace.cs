@@ -14,7 +14,7 @@ internal class DrolemMonsterRace : MonsterRace
 
     protected override string[]? SpellNames =>new string[] {
         nameof(Arrow5D6MonsterSpell),
-        nameof(BreathePoisonMonsterSpell),
+        nameof(PoisonBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(SlowMonsterSpell)

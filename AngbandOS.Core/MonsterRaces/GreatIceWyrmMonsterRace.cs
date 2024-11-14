@@ -13,7 +13,7 @@ internal class GreatIceWyrmMonsterRace : MonsterRace
     protected GreatIceWyrmMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheColdMonsterSpell),
+        nameof(ColdBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell)

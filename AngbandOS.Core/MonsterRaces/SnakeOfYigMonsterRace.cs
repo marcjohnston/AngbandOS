@@ -13,7 +13,7 @@ internal class SnakeOfYigMonsterRace : MonsterRace
     protected SnakeOfYigMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreathePoisonMonsterSpell)
+        nameof(PoisonBreatheBallMonsterSpell)
     };
 
     protected override string SymbolName => nameof(UpperJSymbol);

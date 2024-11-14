@@ -13,10 +13,10 @@ internal class GreatWyrmOfBalanceMonsterRace : MonsterRace
     protected GreatWyrmOfBalanceMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
-        nameof(BreatheChaosMonsterSpell),
-        nameof(BreatheDisenchantMonsterSpell),
-        nameof(BreatheShardsMonsterSpell),
-        nameof(BreatheSoundMonsterSpell),
+        nameof(ChaosBreatheBallMonsterSpell),
+        nameof(DisenchantBreatheBallMonsterSpell),
+        nameof(ShardsBreatheBallMonsterSpell),
+        nameof(SoundBreatheBallMonsterSpell),
         nameof(BlindnessMonsterSpell),
         nameof(ConfuseMonsterSpell),
         nameof(ScareMonsterSpell),
