@@ -14,8 +14,8 @@ internal class CreateTrapsMonsterSpell : MonsterSpell
     public override bool IsIntelligent => true;
     public override bool Annoys => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone mumbles and then cackles evilly.";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} casts a spell and cackles evilly.";
+    public override string? VsPlayerBlindMessage => "Someone mumbles and then cackles evilly.";
+    public override string? VsPlayerActionMessage => "{0} casts a spell and cackles evilly.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

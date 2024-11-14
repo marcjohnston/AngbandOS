@@ -12,7 +12,8 @@ internal class RadiationBreatheBallMonsterSpell : BreatheBallProjectileMonsterSp
 {
     private RadiationBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesRadiation => true;
-    protected override string ActionName => "breathes toxic waste";
+    public override string? VsMonsterSeenMessage => "{0} breathes toxic waste at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes toxic waste.";
     protected override string ProjectileKey => nameof(NukeProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 800;

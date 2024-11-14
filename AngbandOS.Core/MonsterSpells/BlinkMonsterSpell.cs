@@ -14,8 +14,9 @@ internal class BlinkMonsterSpell : MonsterSpell
     public override bool IsIntelligent => true;
     public override bool ProvidesEscape => true;
 
-    public override string? VsPlayerBlindMessage => $"You hear someone blink away.";
-    public override string? VsPlayerActionMessage(Monster monster) => monster.IsVisible ? $"{monster.Name} blinks away." : null;
+    public override string? VsPlayerBlindMessage => "You hear someone blink away.";
+    public override string? VsPlayerActionMessage => "{0} blinks away.";
+    public override string? VsPlayerActionMessageOnInvisibleMonster => null;
 
     public override void ExecuteOnPlayer(Monster monster)
     {

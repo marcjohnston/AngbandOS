@@ -18,15 +18,9 @@ internal class DrainManaMonsterSpell : MonsterSpell
     public override string? VsPlayerBlindMessage => null;
 
     /// <summary>
-    /// Returns null, because the drain mana process cannot be seen.  If the player cannot see either monster, the player will not have
-    /// any message indicating such.
-    /// </summary>
-    public override string? VsPlayerActionMessage(Monster monster) => null;
-
-    /// <summary>
     /// Returns the message rendered to the player when a monster drains energy from another monster and the player sees it.
     /// </summary>
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} draws psychic energy from {target.Name}.";
+    public override string? VsMonsterSeenMessage => "{0} draws psychic energy from {3}.";
 
     public override bool DrainsMana => true;
     public override bool Annoys => true;

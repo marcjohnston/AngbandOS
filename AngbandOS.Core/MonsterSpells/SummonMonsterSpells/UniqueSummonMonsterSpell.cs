@@ -11,7 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class UniqueSummonMonsterSpell : SummonMonsterSpell
 {
     private UniqueSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "special opponents";
+    public override string? VsPlayerActionMessage => "{0} magically summons special opponents!";
 
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(UniqueMonsterFilter));
 

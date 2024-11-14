@@ -11,7 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class ReaverSummonMonsterSpell : SummonMonsterSpell
 {
     private ReaverSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "Black Reavers";
+    public override string? VsPlayerActionMessage => "{0} magically summons Black Reavers!";
 
     protected override int MaximumSummonCount => (Game.Difficulty / 50) + Game.DieRoll(6);
 

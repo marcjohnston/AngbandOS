@@ -15,7 +15,8 @@ internal class ShardBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool IsInnate => true;
     public override bool UsesShards => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a shard ball";
+    public override string? VsMonsterSeenMessage => "{0} casts a shard ball at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a shard ball.";
     protected override string ProjectileKey => nameof(ShardProjectile);
     protected override int MonsterHealthDamageDivisor => 4;
     protected override int MaxDamage => 800;

@@ -11,7 +11,8 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class PlasmaBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private PlasmaBreatheBallMonsterSpell(Game game) : base(game) { }
-    protected override string ActionName => "breathes plasma";
+    public override string? VsMonsterSeenMessage => "{0} breathes plasma at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes plasma.";
     protected override string ProjectileKey => nameof(PlasmaProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 150;

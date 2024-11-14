@@ -11,9 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class CthuloidSummonMonsterSpell : SummonMonsterSpell
 {
     private CthuloidSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "a Cthuloid entity";
-
     protected override int MaximumSummonCount => 1;
-
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter));
+    public override string? VsPlayerActionMessage => "{0} magically summons a Cthuloid entity!";
 }

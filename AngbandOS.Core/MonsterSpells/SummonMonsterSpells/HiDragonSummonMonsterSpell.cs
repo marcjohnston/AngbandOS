@@ -11,9 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class HiDragonSummonMonsterSpell : SummonMonsterSpell
 {
     private HiDragonSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "ancient dragons";
-
     protected override int MaximumSummonCount => 8;
-
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonMonsterFilter));
+    public override string? VsPlayerActionMessage => "{0} magically summons ancient dragons!";
 }

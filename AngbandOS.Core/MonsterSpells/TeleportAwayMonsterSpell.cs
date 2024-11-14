@@ -15,9 +15,9 @@ internal class TeleportAwayMonsterSpell : MonsterSpell
 
     public override bool ProvidesEscape => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone teleports you away.";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} teleports you away.";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} teleports {target.Name} away.";
+    public override string? VsPlayerBlindMessage => "Someone teleports you away.";
+    public override string? VsPlayerActionMessage => "{0} teleports you away.";
+    public override string? VsMonsterSeenMessage => "{0} teleports {3} away.";
     public override string? VsMonsterUnseenMessage => null;
 
     public override void ExecuteOnPlayer(Monster monster)

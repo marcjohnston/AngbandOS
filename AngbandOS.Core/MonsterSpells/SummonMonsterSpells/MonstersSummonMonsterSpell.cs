@@ -11,7 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class MonstersSummonMonsterSpell : SummonMonsterSpell
 {
     private MonstersSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "monsters";
+    public override string? VsPlayerActionMessage => "{0} magically summons monsters!";
 
     /// <summary>
     /// Returns 8, to summon upto 8 monsters.

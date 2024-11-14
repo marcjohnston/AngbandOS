@@ -12,7 +12,8 @@ internal class NexusBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private NexusBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesNexus => true;
-    protected override string ActionName => "breathes nexus";
+    public override string? VsMonsterSeenMessage => "{0} breathes nexus at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes nexus.";
     protected override string ProjectileKey => nameof(NexusProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 250;

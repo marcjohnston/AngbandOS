@@ -16,8 +16,8 @@ internal class ShriekMonsterSpell : MonsterSpell
 
     public override string? VsPlayerBlindMessage => "You hear a shriek.";
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} makes a high pitched shriek.";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} shrieks at {target.Name}.";
+    public override string? VsPlayerActionMessage => "{0} makes a high pitched shriek.";
+    public override string? VsMonsterSeenMessage => "{0} shrieks at {3}.";
 
 
     public override void ExecuteOnPlayer(Monster monster)

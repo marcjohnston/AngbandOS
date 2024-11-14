@@ -14,7 +14,7 @@ internal class HealMonsterSpell : MonsterSpell
     public override bool IsIntelligent => true;
     public override bool Heals => true;
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} concentrates on {monster.PossessiveName} wounds.";
+    public override string? VsPlayerActionMessage => "{0} concentrates on {1} wounds.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

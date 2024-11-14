@@ -14,7 +14,7 @@ internal class HasteMonsterSpell : MonsterSpell
     public override bool IsIntelligent => true;
     public override bool Hastens => true;
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} concentrates on {monster.PossessiveName} body.";
+    public override string? VsPlayerActionMessage => "{0} concentrates on {1} body.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

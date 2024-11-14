@@ -13,7 +13,8 @@ internal class PlasmaBoltMonsterSpell : ProjectileMonsterSpell
     private PlasmaBoltMonsterSpell(Game game) : base(game) { }
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a plasma bolt";
+    public override string? VsMonsterSeenMessage => "{0} casts a plasma bolt at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a plasma bolt.";
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

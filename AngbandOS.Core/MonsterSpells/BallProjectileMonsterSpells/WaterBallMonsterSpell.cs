@@ -12,7 +12,8 @@ internal class WaterBallMonsterSpell : BallProjectileMonsterSpell
 {
     private WaterBallMonsterSpell(Game game) : base(game) { }
     public override bool IsAttack => true;
-    protected override string ActionName => "gestures fluidly";
+    public override string? VsMonsterSeenMessage => "{0} gestures fluidly at {3}";
+    public override string? VsPlayerActionMessage => "{0} gestures fluidly.";
     protected override string ProjectileKey => nameof(WaterProjectile);
     protected override int Damage(Monster monster)
     {

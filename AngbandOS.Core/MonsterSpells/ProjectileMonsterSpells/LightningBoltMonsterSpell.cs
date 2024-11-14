@@ -14,7 +14,8 @@ internal class LightningBoltMonsterSpell : ProjectileMonsterSpell
     public override bool UsesLightning => true;
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a lightning bolt";
+    public override string? VsMonsterSeenMessage => "{0} casts a lightning bolt at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a lightning bolt.";
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

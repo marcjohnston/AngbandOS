@@ -12,7 +12,8 @@ internal class ShardsBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private ShardsBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesShards => true;
-    protected override string ActionName => "breathes shards";
+    public override string? VsMonsterSeenMessage => "{0} breathes shards at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes shards.";
     protected override string ProjectileKey => nameof(ExplodeProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;

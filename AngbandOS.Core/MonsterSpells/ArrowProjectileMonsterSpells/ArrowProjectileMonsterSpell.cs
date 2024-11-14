@@ -26,8 +26,7 @@ internal abstract class ArrowProjectileMonsterSpell : ProjectileMonsterSpell
     /// </summary>
     /// <param name="monsterName"></param>
     /// <returns></returns>
-    public override string? VsPlayerBlindMessage => $"You hear a strange noise.";
-    protected override string ActionName => "fires an arrow";
+    public override string? VsPlayerBlindMessage => "You hear a strange noise.";
 
     /// <summary>
     /// Returns the roll expression that determines the amount of damage the arrow projectile inflicts.  This expression is parse

@@ -13,7 +13,8 @@ internal class PoisonBallMonsterSpell : BallProjectileMonsterSpell
     private PoisonBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesPoison => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a stinking cloud";
+    public override string? VsMonsterSeenMessage => "{0} casts a stinking cloud at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a stinking cloud.";
     protected override string ProjectileKey => nameof(PoisProjectile);
     protected override int Damage(Monster monster)
     {

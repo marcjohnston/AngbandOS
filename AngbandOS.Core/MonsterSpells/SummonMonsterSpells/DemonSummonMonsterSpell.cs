@@ -11,9 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class DemonSummonMonsterSpell : SummonMonsterSpell
 {
     private DemonSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "a demon";
-
     protected override int MaximumSummonCount => 1;
-
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter));
+    public override string? VsPlayerActionMessage => "{0} magically summons a demon!";
 }

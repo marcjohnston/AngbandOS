@@ -22,31 +22,6 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
     }
 
     /// <summary>
-    /// Returns a message that the monster performed an action specified by the protected ActionName method.
-    /// </summary>
-    /// <param name="monsterName"></param>
-    /// <returns></returns>
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} {ActionName}.";
-
-    /// <summary>
-    /// Returns a message that the monster performed an action specified by the protected ActionName method against another monster.
-    /// </summary>
-    /// <param name="monsterName"></param>
-    /// <param name="targetName"></param>
-    /// <returns></returns>
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} {ActionName} at {target.Name}";
-
-    /// <summary>
-    /// Returns the name of the action.  This action name is being used to generate the messages rendered to the player.  If both the
-    /// VsPlayer and VsMonster messages are overridden, this property is ignored.  This property needs to follow the following syntax:
-    /// 
-    /// {verb noun}
-    /// 
-    /// Examples: casts an arrow, invokes raw chaos
-    /// </summary>
-    protected abstract string ActionName { get; }
-
-    /// <summary>
     /// Returns the flags used by the projectile.  Defaults to stop and kill.
     /// </summary>
     protected virtual ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;

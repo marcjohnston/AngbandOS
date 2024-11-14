@@ -13,7 +13,8 @@ internal class LightningBallMonsterSpell : BallProjectileMonsterSpell
     private LightningBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesLightning => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a lightning ball";
+    public override string? VsMonsterSeenMessage => "{0} casts a lightning ball at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a lightning ball.";
     protected override string ProjectileKey => nameof(ElecProjectile);
     protected override int Damage(Monster monster)
     {

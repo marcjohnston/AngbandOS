@@ -10,8 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class KinSummonMonsterSpell : SummonMonsterSpell
 {
-    protected override string SummonNameExpression => "{0} {1}";
-
+    public override string? VsPlayerActionMessage => "{0} magically summons {1} {2}!";
 
     private KinSummonMonsterSpell(Game game) : base(game) { }
 

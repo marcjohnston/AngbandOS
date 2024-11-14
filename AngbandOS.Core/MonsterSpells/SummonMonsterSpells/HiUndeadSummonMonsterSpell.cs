@@ -11,9 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class HiUndeadSummonMonsterSpell : SummonMonsterSpell
 {
     private HiUndeadSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "greater undead";
-
+    public override string? VsPlayerActionMessage => "{0} magically summons greater undead!";
     protected override int MaximumSummonCount => 8;
-
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadMonsterFilter));
 }

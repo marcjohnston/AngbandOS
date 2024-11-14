@@ -11,7 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class UndeadSummonMonsterSpell : SummonMonsterSpell
 {
     private UndeadSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "an undead adversary";
+    public override string? VsPlayerActionMessage => "{0} magically summons an undead adversary!";
 
     protected override int MaximumSummonCount => 1;
 

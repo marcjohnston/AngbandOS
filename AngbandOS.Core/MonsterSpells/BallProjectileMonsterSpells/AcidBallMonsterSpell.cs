@@ -13,7 +13,8 @@ internal class AcidBallMonsterSpell : BallProjectileMonsterSpell
     private AcidBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesAcid => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts an acid ball";
+    public override string? VsMonsterSeenMessage => "{0} casts an acid ball at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts an acid ball.";
     protected override string ProjectileKey => nameof(AcidProjectile);
     protected override int Damage(Monster monster)
     {

@@ -13,7 +13,8 @@ internal class NetherBallMonsterSpell : BallProjectileMonsterSpell
     private NetherBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesNether => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts an nether ball";
+    public override string? VsMonsterSeenMessage => "{0} casts an nether ball at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts an nether ball.";
     protected override string ProjectileKey => nameof(NetherProjectile);
     protected override int Damage(Monster monster)
     {

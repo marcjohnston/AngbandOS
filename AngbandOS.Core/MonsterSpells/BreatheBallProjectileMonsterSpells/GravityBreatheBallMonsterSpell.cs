@@ -11,7 +11,8 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class GravityBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private GravityBreatheBallMonsterSpell(Game game) : base(game) { }
-    protected override string ActionName => "breathes gravity";
+    public override string? VsMonsterSeenMessage => "{0} breathes gravity at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes gravity.";
     protected override string ProjectileKey => nameof(GravityProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 200;

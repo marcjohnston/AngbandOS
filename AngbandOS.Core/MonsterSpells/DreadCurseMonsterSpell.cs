@@ -13,8 +13,8 @@ internal class DreadCurseMonsterSpell : MonsterSpell
     private DreadCurseMonsterSpell(Game game) : base(game) { }
     public override bool IsAttack => true;
     public override string? VsPlayerBlindMessage => "You hear someone invoke the Dread Curse of Azathoth!";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} invokes the Dread Curse of Azathoth!";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} invokes the Dread Curse of Azathoth on {target.Name}";
+    public override string? VsPlayerActionMessage => "{0} invokes the Dread Curse of Azathoth!";
+    public override string? VsMonsterSeenMessage => "{0} invokes the Dread Curse of Azathoth on {3}";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

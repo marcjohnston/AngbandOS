@@ -25,7 +25,7 @@ internal class TeleportSelfMonsterSpell : MonsterSpell
     /// <param name="monster"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} teleports away.";
+    public override string? VsPlayerActionMessage => "{0} teleports away.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

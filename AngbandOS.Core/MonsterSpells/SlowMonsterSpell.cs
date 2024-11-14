@@ -15,15 +15,9 @@ internal class SlowMonsterSpell : MonsterSpell
     public override bool RestrictsFreeAction => true;
     public override bool Annoys => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone drains power from your muscles!";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} drains power from your muscles!";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target)
-    {
-        string monsterName = target.Name;
-        string targetName = target.Name;
-        string it = (targetName == "it" ? "s" : "'s");
-        return $"{monsterName} drains power from {targetName}{it} muscles.";
-    }
+    public override string? VsPlayerBlindMessage => "Someone drains power from your muscles!";
+    public override string? VsPlayerActionMessage => "{0} drains power from your muscles!";
+    public override string? VsMonsterSeenMessage => "{0} drains power from {4} muscles.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

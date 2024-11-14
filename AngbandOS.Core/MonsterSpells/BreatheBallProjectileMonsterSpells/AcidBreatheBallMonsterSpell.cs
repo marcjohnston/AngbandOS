@@ -12,7 +12,8 @@ internal class AcidBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private AcidBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesAcid => true;
-    protected override string ActionName => "breathes acid";
+    public override string? VsMonsterSeenMessage => "{0} breathes acid at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes acid.";
     protected override string ProjectileKey => nameof(AcidProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;

@@ -12,7 +12,8 @@ internal class LightningBreatheBallMonsterSpell : BreatheBallProjectileMonsterSp
 {
     private LightningBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesLightning => true;
-    protected override string ActionName => "breathes lightning";
+    public override string? VsMonsterSeenMessage => "{0} breathes lightning at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes lightning.";
     protected override string ProjectileKey => nameof(ElecProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;

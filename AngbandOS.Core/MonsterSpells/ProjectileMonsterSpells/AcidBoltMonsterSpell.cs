@@ -14,7 +14,8 @@ internal class AcidBoltMonsterSpell : ProjectileMonsterSpell
     public override bool UsesAcid => true;
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a acid bolt";
+    public override string? VsMonsterSeenMessage => "{0} casts an acid bolt at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts an acid bolt.";
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

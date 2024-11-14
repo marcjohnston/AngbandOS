@@ -11,7 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class MonsterSummonMonsterSpell : SummonMonsterSpell
 {
     private MonsterSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "help";
+    public override string? VsPlayerActionMessage => "{0} magically summons help!";
 
     /// <summary>
     /// Returns null, to summon any monster.

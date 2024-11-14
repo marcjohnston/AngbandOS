@@ -14,7 +14,8 @@ internal class MagicMissileMonsterSpell : ProjectileMonsterSpell
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
 
-    protected override string ActionName => "casts a magic missile";
+    public override string? VsMonsterSeenMessage => "{0} casts a magic missile at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a magic missile.";
 
     protected override int Damage(Monster monster)
     {

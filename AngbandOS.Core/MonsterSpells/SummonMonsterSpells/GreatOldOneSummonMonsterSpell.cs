@@ -11,9 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class GreatOldOneSummonMonsterSpell : SummonMonsterSpell
 {
     private GreatOldOneSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "Great Old Ones";
-
     protected override int MaximumSummonCount => 8;
-
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(GooMonsterFilter));
+    public override string? VsPlayerActionMessage => "{0} magically summons Great Old Ones!";
 }

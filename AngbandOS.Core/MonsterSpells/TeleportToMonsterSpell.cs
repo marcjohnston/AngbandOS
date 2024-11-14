@@ -13,8 +13,8 @@ internal class TeleportToMonsterSpell : MonsterSpell
     private TeleportToMonsterSpell(Game game) : base(game) { }
     public override bool Annoys => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone commands you to return.";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} commands you to return.";
+    public override string? VsPlayerBlindMessage => "Someone commands you to return.";
+    public override string? VsPlayerActionMessage => "{0} commands you to return.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

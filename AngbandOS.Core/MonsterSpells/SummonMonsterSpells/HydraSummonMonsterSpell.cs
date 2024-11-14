@@ -11,7 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class HydraSummonMonsterSpell : SummonMonsterSpell
 {
     private HydraSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "hydras";
+    public override string? VsPlayerActionMessage => "{0} magically summons hydras!";
 
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter));
 }

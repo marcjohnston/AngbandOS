@@ -15,8 +15,8 @@ internal class HoldMonsterSpell : MonsterSpell
     public override bool RestrictsFreeAction => true;
     public override bool Annoys => true;
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} stares deep into your eyes!";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} stares intently at {target.Name}";
+    public override string? VsPlayerActionMessage => "{0} stares deep into your eyes!";
+    public override string? VsMonsterSeenMessage => "{0} stares intently at {3}";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

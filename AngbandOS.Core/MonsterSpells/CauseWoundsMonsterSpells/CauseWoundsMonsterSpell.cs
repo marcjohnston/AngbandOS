@@ -23,9 +23,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
 
     public override string? VsPlayerBlindMessage => "You hear someone mumble.";
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} points at you and curses.";
-
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} points at {target.Name} and curses.";
+    public override string? VsPlayerActionMessage => "{0} points at you and curses.";
 
     /// <summary>
     /// Returns the roll expression that determines the amount of damage the arrow projectile inflicts.  This expression is parse

@@ -18,14 +18,13 @@ internal class ManaBallMonsterSpell : BallProjectileMonsterSpell
     /// </summary>
     /// <param name="monsterName"></param>
     /// <returns></returns>
-    public override string? VsPlayerBlindMessage => $"You hear someone mumble powerfully.";
-
+    public override string? VsPlayerBlindMessage => "You hear someone mumble powerfully.";
+    public override string? VsPlayerActionMessage => "{0} invokes a mana storm.";
     /// <summary>
     /// Returns a message that the player hears someone powerfully.  The player does not know either monster.
     /// </summary>
     public override string? VsMonsterUnseenMessage => "You hear someone mumble powerfully.";
-
-    protected override string ActionName => "invokes a mana storm";
+    public override string? VsMonsterSeenMessage => "{0} invokes a mana storm at {3}";
     protected override string ProjectileKey => nameof(ManaProjectile);
     protected override int Damage(Monster monster)
     {

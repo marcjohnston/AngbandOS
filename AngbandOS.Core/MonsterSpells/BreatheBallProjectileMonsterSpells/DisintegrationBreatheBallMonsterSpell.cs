@@ -11,7 +11,8 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class DisintegrationBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private DisintegrationBreatheBallMonsterSpell(Game game) : base(game) { }
-    protected override string ActionName => "breathes disintegration";
+    public override string? VsMonsterSeenMessage => "{0} breathes disintegration at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes disintegration.";
     protected override string ProjectileKey => nameof(DisintegrateProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 300;

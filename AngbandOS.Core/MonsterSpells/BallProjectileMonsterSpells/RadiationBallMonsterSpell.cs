@@ -14,7 +14,8 @@ internal class RadiationBallMonsterSpell : BallProjectileMonsterSpell
     public override bool IsInnate => true;
     public override bool UsesRadiation => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a ball of radiation";
+    public override string? VsMonsterSeenMessage => "{0} casts a ball of radiation at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a ball of radiation.";
     protected override string ProjectileKey => nameof(NukeProjectile);
     protected override int Damage(Monster monster)
     {

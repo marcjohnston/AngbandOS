@@ -13,4 +13,7 @@ internal class Arrow1D6MonsterSpell : ArrowProjectileMonsterSpell
     private Arrow1D6MonsterSpell(Game game) : base(game) { }
 
     protected override string DamageRollExpression => "1d6";
+    public override string? VsPlayerActionMessage => "{0} fires an arrow.";
+
+    public override string? VsMonsterSeenMessage => "{0} fires an arrow at {3}";
 }

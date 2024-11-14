@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.MonsterRaces;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -357,8 +359,8 @@ internal class Monster : IItemContainer
         // *   0x04 --&gt; Full nominative name("the kobold") or "something"
         // *   0x80 --&gt; Genocide resistance name("the kobold")
         // *   0x88 --&gt; Killing name("a kobold")
-        // *   0x22 --&gt; Possessive, genderized if visable("his") or "its"
-        // *   0x23 --&gt; Reflexive, genderized if visable("himself") or "itself"
+        // *   0x22 --&gt; Possessive, genderized if visible (e.g. "his") or (e.g. "its", if invisible)
+        // *   0x23 --&gt; Reflexive, genderized if visible (e.g. "himself") or (e.g. "itself", if invisible)
         if (Race == null)
         {
             return string.Empty;
@@ -1675,9 +1677,16 @@ internal class Monster : IItemContainer
 
         // Render a message to the player.
         bool playerIsBlind = Game.BlindnessTimer.Value != 0;
-        string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : thrownSpell.VsPlayerActionMessage(this);
+
+        // Choose which message to render.
+        string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : IsVisible ? thrownSpell.VsPlayerActionMessage : thrownSpell.VsPlayerActionMessageOnInvisibleMonster;
+
+        // Check to see if there is a message to be rendered.
         if (message != null)
         {
+            // Provide additional macro formatting.
+            string kinName = Race.Unique ? "minions" : "kin";
+            message = String.Format(message, monsterName, monsterPossessive, kinName);
             Game.MsgPrint(message);
         }
 
@@ -1810,7 +1819,12 @@ internal class Monster : IItemContainer
             }
 
             // Against other monsters we pick spells randomly
-            MonsterSpell thrownSpell = Race.Spells.ToWeightedRandom(Game).ChooseOrDefault();
+            MonsterSpell? thrownSpell = Race.Spells.ToWeightedRandom(Game).ChooseOrDefault();
+            if (thrownSpell == null)
+            {
+                return false; // We were unable to cast a spell.
+            }
+
             bool blind = Game.BlindnessTimer.Value != 0;
             bool seeTarget = !blind && target.IsVisible;
             bool seen = !blind && IsVisible;
@@ -1823,9 +1837,13 @@ internal class Monster : IItemContainer
             }
 
             // Render a message to the player.
-            string? message = !seeEither ? thrownSpell.VsMonsterUnseenMessage : thrownSpell.VsMonsterSeenMessage(this, target);
+            string? message = !seeEither ? thrownSpell.VsMonsterUnseenMessage : thrownSpell.VsMonsterSeenMessage;
             if (message != null)
             {
+                string kinName = Race.Unique ? "minions" : "kin";
+                string targetMonsterName = target.Name;
+                string targetPossessive = target.Name != "it" ? "s" : "'s";
+                message = String.Format(message, Name, PossessiveName, kinName, targetMonsterName, $"{targetMonsterName}{targetPossessive}");
                 Game.MsgPrint(message);
             }
 

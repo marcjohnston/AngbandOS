@@ -16,11 +16,11 @@ internal class ScareMonsterSpell : MonsterSpell
     public override bool IsAttack => true;
     public override bool Annoys => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone mumbles, and you hear scary noises.";
+    public override string? VsPlayerBlindMessage => "Someone mumbles, and you hear scary noises.";
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} casts a fearful illusion.";
+    public override string? VsPlayerActionMessage => "{0} casts a fearful illusion.";
 
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} casts a fearful illusion at {target.Name}";
+    public override string? VsMonsterSeenMessage => "{0} casts a fearful illusion at {3}";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

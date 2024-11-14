@@ -11,7 +11,8 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class TimeBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private TimeBreatheBallMonsterSpell(Game game) : base(game) { }
-    protected override string ActionName => "breathes time";
+    public override string? VsMonsterSeenMessage => "{0} breathes time at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes time.";
     protected override string ProjectileKey => nameof(TimeProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 150;

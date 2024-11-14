@@ -15,9 +15,9 @@ internal class CauseMortalWoundsMonsterSpell : CauseWoundsMonsterSpell
     protected override int CurseEquipmentChance => 0;
     protected override int HeavyCurseEquipmentChance => 0;
     protected override string DamageRollExpression => "15d15";
-    public override string? VsPlayerBlindMessage => $"You hear someone screams the word 'DIE!'";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} points at you, screaming the word DIE!";
-    public override string? VsMonsterUnseenMessage => $"You hear someone mumble.";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} points at {target.Name}, screaming the word 'DIE!'";
+    public override string? VsPlayerBlindMessage => "You hear someone screams the word 'DIE!'";
+    public override string? VsPlayerActionMessage => "{0} points at you, screaming the word DIE!";
+    public override string? VsMonsterUnseenMessage => "You hear someone mumble.";
+    public override string? VsMonsterSeenMessage => "{0} points at {3}, screaming the word 'DIE!'";
     protected override int TimedBleeding => Game.DiceRoll(10, 10);
 }

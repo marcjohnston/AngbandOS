@@ -15,11 +15,11 @@ internal class BrainSmashMonsterSpell : MonsterSpell
 
     public override string? VsPlayerBlindMessage => "You feel something focusing on your mind.";
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} looks deep into your eyes.";
+    public override string? VsPlayerActionMessage => "{0} looks deep into your eyes.";
 
     public override string? VsMonsterUnseenMessage => null;
 
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} gazes intently at {target.Name}";
+    public override string? VsMonsterSeenMessage => "{0} gazes intently at {3}";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

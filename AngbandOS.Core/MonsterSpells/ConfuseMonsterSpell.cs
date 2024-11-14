@@ -15,9 +15,9 @@ internal class ConfuseMonsterSpell : MonsterSpell
     public override bool UsesConfusion => true;
     public override bool Annoys => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone mumbles, and you hear puzzling noises.";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} creates a mesmerising illusion.";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} creates a mesmerising illusion in front of {target.Name}";
+    public override string? VsPlayerBlindMessage => "Someone mumbles, and you hear puzzling noises.";
+    public override string? VsPlayerActionMessage => "{0} creates a mesmerising illusion.";
+    public override string? VsMonsterSeenMessage => "{0} creates a mesmerising illusion in front of {3}";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

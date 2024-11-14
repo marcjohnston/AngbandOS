@@ -15,8 +15,8 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
     public override bool UsesNexus => true;
     public override bool ProvidesEscape => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone mumbles strangely.";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} gestures at your feet.";
+    public override string? VsPlayerBlindMessage => "Someone mumbles strangely.";
+    public override string? VsPlayerActionMessage => "{0} gestures at your feet.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

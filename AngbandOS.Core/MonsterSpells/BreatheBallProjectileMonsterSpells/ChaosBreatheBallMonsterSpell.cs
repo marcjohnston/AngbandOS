@@ -12,7 +12,8 @@ internal class ChaosBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private ChaosBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesChaos => true;
-    protected override string ActionName => "breathes chaos";
+    public override string? VsMonsterSeenMessage => "{0} breathes chaos at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes chaos.";
     protected override string ProjectileKey => nameof(ChaosProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 600;

@@ -14,7 +14,8 @@ internal class ColdBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesCold => true;
     public override bool IsAttack => true;
 
-    protected override string ActionName => "casts a frost ball";
+    public override string? VsMonsterSeenMessage => "{0} casts a frost ball at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a frost ball.";
     protected override string ProjectileKey => nameof(ColdProjectile);
     protected override int Damage(Monster monster)
     {

@@ -12,7 +12,8 @@ internal class PoisonBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private PoisonBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesPoison => true;
-    protected override string ActionName => "breathes gas";
+    public override string? VsMonsterSeenMessage => "{0} breathes gas at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes gas.";
     protected override string ProjectileKey => nameof(PoisProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 800;

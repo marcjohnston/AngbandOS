@@ -15,7 +15,8 @@ internal class NetherBoltMonsterSpell : ProjectileMonsterSpell
 
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "casts a nether bolt";
+    public override string? VsMonsterSeenMessage => "{0} casts a nether bolt at {3}";
+    public override string? VsPlayerActionMessage => "{0} casts a nether bolt.";
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

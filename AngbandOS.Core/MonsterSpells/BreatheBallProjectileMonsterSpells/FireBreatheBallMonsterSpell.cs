@@ -12,7 +12,8 @@ internal class FireBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
 {
     private FireBreatheBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesFire => true;
-    protected override string ActionName => "breathes fire";
+    public override string? VsMonsterSeenMessage => "{0} breathes fire at {3}";
+    public override string? VsPlayerActionMessage => "{0} breathes fire.";
     protected override string ProjectileKey => nameof(FireProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;

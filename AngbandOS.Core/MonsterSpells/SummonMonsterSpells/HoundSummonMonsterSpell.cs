@@ -11,7 +11,6 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class HoundSummonMonsterSpell : SummonMonsterSpell
 {
     private HoundSummonMonsterSpell(Game game) : base(game) { }
-    protected override string SummonNameExpression => "hounds";
-
+    public override string? VsPlayerActionMessage => "{0} magically summons hounds!";
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HoundMonsterFilter));
 }

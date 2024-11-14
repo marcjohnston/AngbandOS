@@ -19,9 +19,9 @@ internal class DarkBallMonsterSpell : BallProjectileMonsterSpell
     /// </summary>
     /// <param name="monsterName"></param>
     /// <returns></returns>
-    public override string? VsPlayerBlindMessage => $"You hear someone mumble powerfully.";
-
-    protected override string ActionName => "invokes a darkness storm";
+    public override string? VsPlayerBlindMessage => "You hear someone mumble powerfully.";
+    public override string? VsMonsterSeenMessage => "{0} invokes a darkness storm at {3}";
+    public override string? VsPlayerActionMessage => "{0} invokes a darkness storm.";
     protected override string ProjectileKey => nameof(DarkProjectile);
     protected override int Damage(Monster monster)
     {

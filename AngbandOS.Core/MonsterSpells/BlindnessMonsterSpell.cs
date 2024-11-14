@@ -15,14 +15,9 @@ internal class BlindnessMonsterSpell : MonsterSpell
     public override bool UsesBlindness => true;
     public override bool Annoys => true;
 
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} casts a spell, burning your eyes!";
+    public override string? VsPlayerActionMessage => "{0} casts a spell, burning your eyes!";
 
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target)
-    {
-        string targetName = target.Name;
-        string it = targetName != "it" ? "s" : "'s";
-        return $"{monster.Name} casts a spell, burning {targetName}{it} eyes.";
-    }
+    public override string? VsMonsterSeenMessage => "{0} casts a spell, burning {4} eyes.";
 
     public override void ExecuteOnPlayer(Monster monster)
     {

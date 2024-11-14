@@ -13,8 +13,8 @@ internal class ForgetMonsterSpell : MonsterSpell
     private ForgetMonsterSpell(Game game) : base(game) { }
     public override bool Annoys => true;
 
-    public override string? VsPlayerBlindMessage => $"Someone tries to blank your mind.";
-    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} tries to blank your mind.";
+    public override string? VsPlayerBlindMessage => "Someone tries to blank your mind.";
+    public override string? VsPlayerActionMessage => "{0} tries to blank your mind.";
     public override void ExecuteOnPlayer(Monster monster)
     {
         string monsterName = monster.Name;

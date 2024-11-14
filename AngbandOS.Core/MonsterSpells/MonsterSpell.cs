@@ -190,22 +190,40 @@ internal abstract class MonsterSpell : IGetKey
     /// <summary>
     /// Returns the message that is rendered to the player, when the spell is being used against the player and the player is blind.
     /// Returns a message that the monster mumbles something, by default.  Returns null, if there is no message to be rendered.
+    /// {0} - The monster name (monster.Name)
+    /// {1} - The genderized possessive name of the monster ... (e.g. "his", if visible) or (e.g. "its", if invisible) 
+    /// {2} - The name of the monsters kin.  (e.g. uniques will use "minions" and non-uniques will use "kin" because uniques have no kin)
     /// </summary>
     /// <param name="monsterName"></param>
     /// <returns></returns>
-    public virtual string? VsPlayerBlindMessage => $"You hear someone mumble.";
+    public virtual string? VsPlayerBlindMessage => "You hear someone mumble.";
 
     /// <summary>
-    /// Returns the message that is rendered to the player, when the spell is targeting the player and the player is not blind.
-    /// Returns null, if there is no message to be rendered.
+    /// Returns the message that is rendered to the player, when the spell is targeting the player, the player is not blind and the monster is visible.  Returns null, if there is no message to be rendered.
+    /// Returns null, by default.  The message supports the following macros:
+    /// {0} - The monster name (monster.Name)
+    /// {1} - The genderized possessive name of the monster ... (e.g. "his", if visible) or (e.g. "its", if invisible) 
+    /// {2} - The name of the monsters kin.  (e.g. uniques will use "minions" and non-uniques will use "kin" because uniques have no kin)
     /// </summary>
-    /// <param name="monsterName"></param>
-    /// <returns></returns>
-    public abstract string? VsPlayerActionMessage(Monster monster);
+    public virtual string? VsPlayerActionMessage => null;
+
+    /// <summary>
+    /// Returns the message that is rendered to the player, when the spell is targeting the player, the player is not blind and the monster is not visible.  Returns null, if there is no message to be rendered.
+    /// Returns the <see cref="VsPlayerActionMessage"/>, by default.  The message supports the following macros:
+    /// {0} - The monster name (monster.Name)
+    /// {1} - The genderized possessive name of the monster ... (e.g. "his", if visible) or (e.g. "its", if invisible) 
+    /// {2} - The name of the monsters kin.  (e.g. uniques will use "minions" and non-uniques will use "kin" because uniques have no kin)
+    /// </summary>
+    public virtual string? VsPlayerActionMessageOnInvisibleMonster => VsPlayerActionMessage;
 
     /// <summary>
     /// Returns the message that is rendered to the player, when the spell is being used against another monster and the player is blind.
     /// Returns null, if there is no message to be rendered.  By default, the VsPlayerBlindMessage is returned.
+    /// {0} - The monster name (monster.Name)
+    /// {1} - The genderized possessive name of the monster ... (e.g. "his", if visible) or (e.g. "its", if invisible) 
+    /// {2} - The name of the monsters kin.  (e.g. uniques will use "minions" and non-uniques will use "kin" because uniques have no kin)
+    /// {3} - The name of the monster that the attack targeted.
+    /// {4} - The formal possessive name of the target monster.
     /// </summary>
     /// <param name="monsterName"></param>
     /// <returns></returns>
@@ -214,11 +232,16 @@ internal abstract class MonsterSpell : IGetKey
     /// <summary>
     /// Returns the message to be rendered to the player when a monster attacks another monster and the player sees either monster, or null if there
     /// is no message to be rendered.  Returns the VsPlayerActionMessage, by default.
+    /// {0} - The monster name (monster.Name)
+    /// {1} - The generized possessive name of the monster ... (e.g. "his", if visible) or (e.g. "its", if invisible) 
+    /// {2} - The name of the monsters kin.  (e.g. uniques will use "minions" and non-uniques will use "kin" because uniques have no kin)
+    /// {3} - The name of the monster that the attack targeted.
+    /// {4} - The formal possessive name of the target monster.
     /// </summary>
     /// <param name="monsterName"></param>
     /// <param name="targetName"></param>
     /// <returns></returns>
-    public virtual string? VsMonsterSeenMessage(Monster monster, Monster target) => VsPlayerActionMessage(monster);
+    public virtual string? VsMonsterSeenMessage => VsPlayerActionMessage;
 
     /// <summary>
     /// Returns the keys for the <see cref="SpellResistantDetection"/> characteristics that are learned, when the player experiences or sees the spell.  Returns an empty set, by defaut.  This

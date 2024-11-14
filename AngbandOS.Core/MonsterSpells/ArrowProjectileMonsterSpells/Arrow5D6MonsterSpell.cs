@@ -11,6 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class Arrow5D6MonsterSpell : ArrowProjectileMonsterSpell
 {
     private Arrow5D6MonsterSpell(Game game) : base(game) { }
-    protected override string ActionName => "fires a missile";
+    public override string? VsMonsterSeenMessage => "{0} fires a missile at {3}";
+    public override string? VsPlayerActionMessage => "{0} fires a missile.";
     protected override string DamageRollExpression => "5d6";
 }

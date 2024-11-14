@@ -14,5 +14,5 @@ internal class CauseLightWoundsMonsterSpell : CauseWoundsMonsterSpell
     protected override int CurseEquipmentChance => 33;
     protected override int HeavyCurseEquipmentChance => 0;
     protected override string DamageRollExpression => "3d8";
-    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} points at {target.Name} and curses horribly.";
+    public override string? VsMonsterSeenMessage => "{0} points at {3} and curses horribly.";
 }

@@ -16,12 +16,12 @@ internal class ChaosBallMonsterSpell : BallProjectileMonsterSpell
     /// </summary>
     /// <param name="monsterName"></param>
     /// <returns></returns>
-    public override string? VsPlayerBlindMessage => $"You hear someone mumble frighteningly.";
-
+    public override string? VsPlayerBlindMessage => "You hear someone mumble frighteningly.";
+    public override string? VsPlayerActionMessage => "{0} invokes raw chaos.";
     public override bool IsInnate => true;
     public override bool UsesChaos => true;
     public override bool IsAttack => true;
-    protected override string ActionName => "invokes raw chaos";
+    public override string? VsMonsterSeenMessage => "{0} invokes raw chaos at {3}";
     protected override string ProjectileKey => nameof(ChaosProjectile);
     protected override int Damage(Monster monster)
     {
