@@ -12,5 +12,5 @@ internal class Arrow7D6MonsterSpell : ArrowProjectileMonsterSpell
 {
     private Arrow7D6MonsterSpell(Game game) : base(game) { }
     protected override string ActionName => "fires a missile";
-    protected override int Damage(Monster monster) => Game.DiceRoll(7, 6);
+    protected override string DamageRollExpression => "7d6";
 }

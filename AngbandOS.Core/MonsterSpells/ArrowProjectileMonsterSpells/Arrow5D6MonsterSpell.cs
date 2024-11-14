@@ -8,8 +8,9 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal class Arrow3D6MonsterSpell : ArrowProjectileMonsterSpell
+internal class Arrow5D6MonsterSpell : ArrowProjectileMonsterSpell
 {
-    private Arrow3D6MonsterSpell(Game game) : base(game) { }
-    protected override int Damage(Monster monster) => Game.DiceRoll(3, 6);
+    private Arrow5D6MonsterSpell(Game game) : base(game) { }
+    protected override string ActionName => "fires a missile";
+    protected override string DamageRollExpression => "5d6";
 }
