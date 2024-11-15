@@ -61,7 +61,7 @@ internal abstract class Projectile : IGetKey
                 ty = target.Y;
             }
         }
-        return Fire(0, 0, ty, tx, dam, flg | ProjectionFlag.ProjectThru, jump: jump, beam: beam);
+        return Fire(0, 0, ty, tx, dam, flg, jump: jump, beam: beam, thru: true);
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="jump">Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.</param>
     /// <param name="beam">Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.</param>
     /// <returns></returns>
-    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false, bool beam = false)
+    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false, bool beam = false, bool thru = false)
     {
         int i, dist;
         int y1, x1;
@@ -110,11 +110,11 @@ internal abstract class Projectile : IGetKey
         int xSaver = x1;
         int y2 = y;
         int x2 = x;
-        if ((flg & ProjectionFlag.ProjectThru) != 0)
+        if (thru)
         {
             if (x1 == x2 && y1 == y2)
             {
-                flg &= ~ProjectionFlag.ProjectThru;
+                thru = false;
             }
         }
         if (rad < 0)
@@ -151,7 +151,7 @@ internal abstract class Projectile : IGetKey
             {
                 break;
             }
-            if ((flg & ProjectionFlag.ProjectThru) == 0 && x == x2 && y == y2)
+            if (!thru && x == x2 && y == y2)
             {
                 break;
             }
