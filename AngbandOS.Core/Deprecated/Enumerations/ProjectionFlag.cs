@@ -11,11 +11,6 @@ namespace AngbandOS.Core;
 internal enum ProjectionFlag
 {
     /// <summary>
-    /// 
-    /// </summary>
-    ProjectThru = 0x04,
-
-    /// <summary>
     /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.
     /// </summary>
     ProjectStop = 0x08,
