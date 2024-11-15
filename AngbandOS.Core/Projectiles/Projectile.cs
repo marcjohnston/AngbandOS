@@ -41,6 +41,30 @@ internal abstract class Projectile : IGetKey
     protected virtual ProjectileGraphic? ImpactProjectileGraphic => null;
 
     /// <summary>
+    /// Returns true, if the projectile actually hits and affects a monster.
+    /// </summary>
+    /// <param name="projectile"></param>
+    /// <param name="dir"></param>
+    /// <param name="dam"></param>
+    /// <param name="flg"></param>
+    /// <returns></returns>
+    public bool TargetedFire(int dir, int dam, ProjectionFlag flg, bool jump = false)
+    {
+        int tx = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
+        int ty = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
+        if (dir == 5 && Game.TargetWho != null)
+        {
+            GridCoordinate? target = Game.TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                tx = target.X;
+                ty = target.Y;
+            }
+        }
+        return Fire(0, 0, ty, tx, dam, flg | ProjectionFlag.ProjectThru, jump: jump);
+    }
+
+    /// <summary>
     /// Returns true, if the projectile actally hits and affects a monster.
     /// </summary>
     /// <param name="who"></param>

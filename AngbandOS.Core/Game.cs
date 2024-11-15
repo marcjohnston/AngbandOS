@@ -4712,22 +4712,22 @@ public bool IsDead = false;
         return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(TeleportAwayEvilProjectile)), dist);
     }
 
-    public void CharmAnimal(int dir, int plev)
+    public bool CharmAnimal(int dir, int plev)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile)), dir, plev, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile));
+        return projectile.TargetedFire(dir, plev, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public bool CharmMonster(int dir, int plev)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(CharmProjectile)), dir, plev, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
+        return projectile.TargetedFire(dir, plev, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public bool CloneMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile)), dir, 0, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile));
+        return projectile.TargetedFire(dir, 0, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void ColdDam(int dam, string kbStr)
@@ -4762,8 +4762,8 @@ public bool IsDead = false;
 
     public bool ConfuseMonster(int dir, int plev)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldConfProjectile)), dir, plev, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfProjectile));
+        return projectile.TargetedFire(dir, plev, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void ConfuseMonsters(int dam)
@@ -4771,10 +4771,10 @@ public bool IsDead = false;
         ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(OldConfProjectile)), dam);
     }
 
-    public void ControlOneUndead(int dir, int plev)
+    public bool ControlOneUndead(int dir, int plev)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Get<Projectile>(nameof(ControlUndeadProjectile)), dir, plev, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlUndeadProjectile));
+        return projectile.TargetedFire(dir, plev, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void DestroyArea(int y1, int x1, int r)
@@ -4851,8 +4851,8 @@ public bool IsDead = false;
 
     public bool DestroyTrapOrDoor(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile)), dir, 0, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
+        return projectile.TargetedFire(dir, 0, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
     }
 
     public bool DetectDoors()
@@ -5034,8 +5034,8 @@ public bool IsDead = false;
 
     public bool DisarmTrap(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(DestroyTrapProjectile)), dir, 0, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapProjectile));
+        return projectile.TargetedFire(dir, 0, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
     }
 
     public void DispelDemons(int dam)
@@ -5061,8 +5061,8 @@ public bool IsDead = false;
     /// <returns></returns>
     public bool DrainLife(int dir, int dam)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldDrainProjectile)), dir, dam, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainProjectile));
+        return projectile.TargetedFire(dir, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void Earthquake(int cy, int cx, int r)
@@ -5529,8 +5529,8 @@ public bool IsDead = false;
 
     public bool ScareMonster(int dir, int plev)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile)), dir, plev, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
+        return projectile.TargetedFire(dir, plev, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     /// <summary>
@@ -5561,14 +5561,12 @@ public bool IsDead = false;
 
     public void FireBeam(Projectile projectile, int dir, int dam)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill;
-        TargetedProject(projectile, dir, dam, flg);
+        projectile.TargetedFire(dir, dam, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill);
     }
 
     public void FireBolt(Projectile projectile, int dir, int dam)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(projectile, dir, dam, flg);
+        projectile.TargetedFire(dir, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void FireBoltOrBeam(int prob, Projectile projectile, int dir, int dam)
@@ -5620,8 +5618,8 @@ public bool IsDead = false;
 
     public bool HealMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), dir, DiceRoll(4, 6), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
+        return projectile.TargetedFire(dir, DiceRoll(4, 6), ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public bool LightArea(int dam, int rad)
@@ -5637,10 +5635,10 @@ public bool IsDead = false;
         return true;
     }
 
-    public void LightLine(int dir)
+    public bool LightLine(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile)), dir, DiceRoll(6, 8), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
+        return projectile.TargetedFire(dir, DiceRoll(6, 8), ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill);
     }
 
     public bool LoseAllInfo()
@@ -5675,10 +5673,6 @@ public bool IsDead = false;
         return true;
     }
 
-    public void MassCarnage(bool playerCast)
-    {
-    }
-
     public void MindblastMonsters(int dam)
     {
         ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dam);
@@ -5686,8 +5680,8 @@ public bool IsDead = false;
 
     public bool PolyMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldPolyProjectile)), dir, ExperienceLevel.IntValue, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldPolyProjectile));
+        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5811,8 +5805,8 @@ public bool IsDead = false;
 
     public bool SleepMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile)), dir, ExperienceLevel.IntValue, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile));
+        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void SleepMonstersTouch()
@@ -5824,20 +5818,20 @@ public bool IsDead = false;
 
     public bool SlowMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile)), dir, ExperienceLevel.IntValue, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile));
+        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public bool SpeedMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), dir, ExperienceLevel.IntValue, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile));
+        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
-    public void StasisMonster(int dir)
+    public bool StasisMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Get<Projectile>(nameof(StasisProjectile)), dir, ExperienceLevel.IntValue, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(StasisProjectile));
+        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void StasisMonsters(int dam)
@@ -5845,10 +5839,10 @@ public bool IsDead = false;
         ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(StasisProjectile)), dam);
     }
 
-    public void StunMonster(int dir, int plev)
+    public bool StunMonster(int dir, int plev)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Get<Projectile>(nameof(StunProjectile)), dir, plev, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(StunProjectile));
+        return projectile.TargetedFire(dir, plev, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
     }
 
     public void StunMonsters(int dam)
@@ -5867,8 +5861,8 @@ public bool IsDead = false;
 
     public bool TeleportMonster(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(TeleportAwayAllProjectile)), dir, Constants.MaxSight * 5, flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TeleportAwayAllProjectile));
+        return projectile.TargetedFire(dir, Constants.MaxSight * 5, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill);
     }
 
     public void TeleportPlayerTo(int ny, int nx)
@@ -6054,14 +6048,14 @@ public bool IsDead = false;
 
     public bool WallToMud(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(WallToMudProjectile)), dir, 20 + DieRoll(30), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(WallToMudProjectile));
+        return projectile.TargetedFire(dir, 20 + DieRoll(30), ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
     }
 
-    public void WizardLock(int dir)
+    public bool WizardLock(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile)), dir, 20 + DieRoll(30), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile));
+        return projectile.TargetedFire(dir, 20 + DieRoll(30), ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
     }
 
     private void CaveTempRoomAux(int y, int x)
@@ -6308,32 +6302,6 @@ public bool IsDead = false;
         return cnt > 0;
     }
 
-    /// <summary>
-    /// Returns true, if the projectile actually hits and affects a monster.
-    /// </summary>
-    /// <param name="projectile"></param>
-    /// <param name="dir"></param>
-    /// <param name="dam"></param>
-    /// <param name="flg"></param>
-    /// <returns></returns>
-    public bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
-    {
-        flg |= ProjectionFlag.ProjectThru;
-        int tx = MapX.IntValue + KeypadDirectionXOffset[dir];
-        int ty = MapY.IntValue + KeypadDirectionYOffset[dir];
-        if (dir == 5 && TargetWho != null)
-        {
-            GridCoordinate? target = TargetWho.GetTargetLocation();
-            if (target != null)
-            {
-                tx = target.X;
-                ty = target.Y;
-            }
-        }
-        return projectile.Fire(0, 0, ty, tx, dam, flg);
-    }
-
-    // CommandHandler
     /// <summary>
     /// Process the player's latest command
     /// </summary>
