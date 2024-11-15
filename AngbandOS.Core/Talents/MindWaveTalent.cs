@@ -21,8 +21,8 @@ internal class MindWaveTalent : Talent
         Game.MsgPrint("Mind-warping forces emanate from your brain!");
         if (Game.ExperienceLevel.IntValue < 25)
         {
-            Game.Project(0, 2 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2,
-                Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), ProjectionFlag.ProjectKill);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
+            projectile.Fire(0, 2 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, ProjectionFlag.ProjectKill);
         }
         else
         {

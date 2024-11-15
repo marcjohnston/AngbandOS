@@ -1466,7 +1466,7 @@ internal class Monster : IItemContainer
                 // Implement the attack as a projectile
                 if (pt != null)
                 {
-                    Game.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                    pt.Fire(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                     // If we touched the target we might get burned or zapped
                     if (method.AttackTouchesTarget)
                     {
@@ -1483,7 +1483,8 @@ internal class Monster : IItemContainer
                                     targetRace.Knowledge.Characteristics.FireAura = true;
                                 }
                             }
-                            Game.Project(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), Game.SingletonRepository.Get<Projectile>(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(Projection.FireProjectile));
+                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1498,8 +1499,8 @@ internal class Monster : IItemContainer
                                     targetRace.Knowledge.Characteristics.LightningAura = true;
                                 }
                             }
-                            Game.Project(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                Game.SingletonRepository.Get<Projectile>(nameof(Projection.ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile));
+                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                     }
                 }
@@ -1908,7 +1909,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        Game.Project(GetMonsterIndex(), radius, targetY, targetX, damage, projectile, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), radius, targetY, targetX, damage, projectionFlags);
     }
 
     /// <summary>
@@ -1925,7 +1926,7 @@ internal class Monster : IItemContainer
         {
             radius = Race.Powerful ? 3 : 2;
         }
-        Game.Project(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectile, projectionFlag);
+        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectionFlag);
     }
 
     /// <summary>
@@ -1947,7 +1948,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        Game.Project(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectile, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectionFlags);
     }
 
     /// <summary>
@@ -1961,7 +1962,7 @@ internal class Monster : IItemContainer
     public void FireBoltAtMonster(int targetY, int targetX, Projectile projectile, int damage) // TODO: Why is this not used
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        Game.Project(GetMonsterIndex(), 0, targetY, targetX, damage, projectile, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), 0, targetY, targetX, damage, projectionFlags);
     }
 
     /// <summary>
@@ -2054,7 +2055,7 @@ internal class Monster : IItemContainer
     public void FireBoltAtPlayer(Projectile projectile, int damage)
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        Game.Project(GetMonsterIndex(), 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectile, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectionFlags);
     }
 
     /// <summary>

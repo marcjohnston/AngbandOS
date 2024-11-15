@@ -14,7 +14,8 @@ internal class PoisonProjectileUnfriendlyScript : Script, IUnfriendlyScript
 
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
-        Game.Project(who, 2, y, x, 3, Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
+        projectile.Fire(who, 2, y, x, 3, ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
 }

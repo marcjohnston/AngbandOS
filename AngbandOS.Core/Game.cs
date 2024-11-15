@@ -5556,7 +5556,7 @@ public bool IsDead = false;
                 ty = target.Y;
             }
         }
-        return Project(0, rad, ty, tx, dam, projectile, flg);
+        return projectile.Fire(0, rad, ty, tx, dam, flg);
     }
 
     public void FireBeam(Projectile projectile, int dir, int dam)
@@ -5631,7 +5631,8 @@ public bool IsDead = false;
         {
             MsgPrint("You are surrounded by a white light.");
         }
-        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile)), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
+        projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, flg);
         LightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -5752,22 +5753,6 @@ public bool IsDead = false;
         }
     }
 
-    /// <summary>
-    /// Returns true, if the projectile actally hits and affects a monster.
-    /// </summary>
-    /// <param name="who"></param>
-    /// <param name="rad"></param>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    /// <param name="dam"></param>
-    /// <param name="projectile"></param>
-    /// <param name="flg"></param>
-    /// <returns></returns>
-    public bool Project(int who, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
-    {
-        return projectile.Fire(who, rad, y, x, dam, flg);
-    }
-
     public bool SetAcidDestroy(Item oPtr)
     {
         if (!oPtr.HatesAcid)
@@ -5833,7 +5818,8 @@ public bool IsDead = false;
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-        Project(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile)), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile));
+        projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, flg);
     }
 
     public bool SlowMonster(int dir)
@@ -5985,7 +5971,8 @@ public bool IsDead = false;
     public bool TrapCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, MapY.IntValue, MapX.IntValue, 0, SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile)), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
+        return projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, 0, flg);
     }
 
     public void TurnEvil(int dam)
@@ -6005,7 +5992,8 @@ public bool IsDead = false;
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Get<Projectile>(nameof(DarkWeakProjectile)), flg);
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DarkWeakProjectile));
+        projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, flg);
         UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -6273,7 +6261,7 @@ public bool IsDead = false;
             {
                 continue;
             }
-            if (Project(0, 0, y, x, dam, projectile, flg))
+            if (projectile.Fire(0, 0, y, x, dam, flg))
             {
                 obvious = true;
             }
@@ -6343,7 +6331,7 @@ public bool IsDead = false;
                 ty = target.Y;
             }
         }
-        return Project(0, 0, ty, tx, dam, projectile, flg);
+        return projectile.Fire(0, 0, ty, tx, dam, flg);
     }
 
     // CommandHandler
@@ -8591,13 +8579,13 @@ public bool IsDead = false;
                     break;
 
                 case MutationAttackType.Poison:
-                    Project(0, 0, monster.MapY, monster.MapX, damage,
-                        SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), ProjectionFlag.ProjectKill);
+                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
+                    poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, ProjectionFlag.ProjectKill);
                     break;
 
                 case MutationAttackType.Hellfire:
-                    Project(0, 0, monster.MapY, monster.MapX, damage,
-                        SingletonRepository.Get<Projectile>(nameof(HellfireProjectile)), ProjectionFlag.ProjectKill);
+                    Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
+                    hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, ProjectionFlag.ProjectKill);
                     break;
             }
             // The monster might hurt when we touch it

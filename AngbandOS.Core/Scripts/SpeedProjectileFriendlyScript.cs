@@ -14,7 +14,8 @@ internal class SpeedProjectileFriendlyScript : Script, IUnfriendlyScript
 
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
-        Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile));
+        projectile.Fire(who, 2, y, x, 0, ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
 }
