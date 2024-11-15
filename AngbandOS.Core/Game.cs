@@ -6246,7 +6246,6 @@ public bool IsDead = false;
     /// <returns></returns>
     public bool ProjectAtAllInLos(Projectile projectile, int dam)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
         bool obvious = false;
         for (int i = 1; i < MMax; i++)
         {
@@ -6261,7 +6260,7 @@ public bool IsDead = false;
             {
                 continue;
             }
-            if (projectile.Fire(0, 0, y, x, dam, flg))
+            if (projectile.Fire(0, 0, y, x, dam, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide, jump: true))
             {
                 obvious = true;
             }

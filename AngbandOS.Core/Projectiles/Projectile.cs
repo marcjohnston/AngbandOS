@@ -48,9 +48,9 @@ internal abstract class Projectile : IGetKey
     /// <param name="y"></param>
     /// <param name="x"></param>
     /// <param name="dam"></param>
-    /// <param name="flg"></param>
+    /// <param name="jump">Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.</param>
     /// <returns></returns>
-    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg)
+    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false)
     {
         int i, dist;
         int y1, x1;
@@ -66,7 +66,7 @@ internal abstract class Projectile : IGetKey
         int[] gy = new int[256];
         int[] gm = new int[32];
         int gmRad = rad;
-        if ((flg & ProjectionFlag.ProjectJump) != 0)
+        if (jump)
         {
             x1 = x;
             y1 = y;
@@ -425,7 +425,7 @@ internal abstract class Projectile : IGetKey
                     }
                 }
             }
-            if (who == 0 && ProjectMn == 1 && (flg & ProjectionFlag.ProjectJump) == 0)
+            if (who == 0 && ProjectMn == 1 && !jump)
             {
                 x = ProjectMx;
                 y = ProjectMy;

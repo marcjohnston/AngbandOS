@@ -15,7 +15,7 @@ internal class OldSleepProjectileUnfriendlyScript : Script, IUnfriendlyScript
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile));
-        projectile.Fire(who, 2, y, x, 0, ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        projectile.Fire(who, 2, y, x, 0, ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, jump: true);
         return true;
     }
 }

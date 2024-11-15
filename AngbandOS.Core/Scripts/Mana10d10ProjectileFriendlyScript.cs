@@ -15,7 +15,7 @@ internal class Mana10d10ProjectileFriendlyScript : Script, IUnfriendlyScript
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
-        projectile.Fire(who, 1, y, x, Game.DiceRoll(10, 10), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        projectile.Fire(who, 1, y, x, Game.DiceRoll(10, 10), ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, jump: true);
         return false;
     }
 }

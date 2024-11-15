@@ -15,7 +15,7 @@ internal class OldSlow5ProjectileUnfriendlyScript : Script, IUnfriendlyScript
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile));
-        projectile.Fire(who, 2, y, x, 5, ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        projectile.Fire(who, 2, y, x, 5, ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, jump: true);
         return true;
     }
 }

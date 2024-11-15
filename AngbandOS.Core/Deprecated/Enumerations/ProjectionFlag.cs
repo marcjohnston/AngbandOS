@@ -10,13 +10,6 @@ namespace AngbandOS.Core;
 [Flags]
 internal enum ProjectionFlag
 {
-    ProjectNone = 0x00,
-
-    /// <summary>
-    /// Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.
-    /// </summary>
-    ProjectJump = 0x01,
-
     /// <summary>
     /// Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.
     /// </summary>
