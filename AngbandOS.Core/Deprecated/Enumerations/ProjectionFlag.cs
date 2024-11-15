@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 internal enum ProjectionFlag
 {
     /// <summary>
-    /// Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.
+    /// 
     /// </summary>
     ProjectThru = 0x04,
 
