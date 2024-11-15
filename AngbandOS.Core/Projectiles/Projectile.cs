@@ -48,7 +48,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="dam"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    public bool TargetedFire(int dir, int dam, ProjectionFlag flg, bool jump = false)
+    public bool TargetedFire(int dir, int dam, ProjectionFlag flg, bool jump = false, bool beam = false)
     {
         int tx = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         int ty = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
@@ -61,7 +61,7 @@ internal abstract class Projectile : IGetKey
                 ty = target.Y;
             }
         }
-        return Fire(0, 0, ty, tx, dam, flg | ProjectionFlag.ProjectThru, jump: jump);
+        return Fire(0, 0, ty, tx, dam, flg | ProjectionFlag.ProjectThru, jump: jump, beam: beam);
     }
 
     /// <summary>
@@ -73,8 +73,9 @@ internal abstract class Projectile : IGetKey
     /// <param name="x"></param>
     /// <param name="dam"></param>
     /// <param name="jump">Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.</param>
+    /// <param name="beam">Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.</param>
     /// <returns></returns>
-    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false)
+    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false, bool beam = false)
     {
         int i, dist;
         int y1, x1;
@@ -132,13 +133,13 @@ internal abstract class Projectile : IGetKey
         dist = 0;
         while (true)
         {
-            if ((flg & ProjectionFlag.ProjectBeam) != 0)
+            if (beam)
             {
                 gy[grids] = y;
                 gx[grids] = x;
                 grids++;
             }
-            if (!blind && (flg & ProjectionFlag.ProjectHide) == 0 && dist != 0 && (flg & ProjectionFlag.ProjectBeam) != 0 && Game.PanelContains(y, x) && Game.PlayerHasLosBold(y, x))
+            if (!blind && (flg & ProjectionFlag.ProjectHide) == 0 && dist != 0 && beam && Game.PanelContains(y, x) && Game.PlayerHasLosBold(y, x))
             {
                 if (ImpactProjectileGraphic != null)
                 {
@@ -203,7 +204,7 @@ internal abstract class Projectile : IGetKey
         int distHack = dist;
         if (dist <= Constants.MaxRange)
         {
-            if ((flg & ProjectionFlag.ProjectBeam) != 0 && grids > 0)
+            if (beam && grids > 0)
             {
                 grids--;
             }

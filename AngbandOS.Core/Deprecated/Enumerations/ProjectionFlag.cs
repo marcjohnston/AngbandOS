@@ -11,11 +11,6 @@ namespace AngbandOS.Core;
 internal enum ProjectionFlag
 {
     /// <summary>
-    /// Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.
-    /// </summary>
-    ProjectBeam = 0x02,
-
-    /// <summary>
     /// Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.
     /// </summary>
     ProjectThru = 0x04,

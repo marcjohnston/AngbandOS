@@ -4852,7 +4852,7 @@ public bool IsDead = false;
     public bool DestroyTrapOrDoor(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
-        return projectile.TargetedFire(dir, 0, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+        return projectile.TargetedFire(dir, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, beam: true);
     }
 
     public bool DetectDoors()
@@ -5035,7 +5035,7 @@ public bool IsDead = false;
     public bool DisarmTrap(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapProjectile));
-        return projectile.TargetedFire(dir, 0, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+        return projectile.TargetedFire(dir, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, beam: true);
     }
 
     public void DispelDemons(int dam)
@@ -5561,7 +5561,7 @@ public bool IsDead = false;
 
     public void FireBeam(Projectile projectile, int dir, int dam)
     {
-        projectile.TargetedFire(dir, dam, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill);
+        projectile.TargetedFire(dir, dam, ProjectionFlag.ProjectKill, beam: true);
     }
 
     public void FireBolt(Projectile projectile, int dir, int dam)
@@ -5638,7 +5638,7 @@ public bool IsDead = false;
     public bool LightLine(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
-        return projectile.TargetedFire(dir, DiceRoll(6, 8), ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill);
+        return projectile.TargetedFire(dir, DiceRoll(6, 8), ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill, beam: true);
     }
 
     public bool LoseAllInfo()
@@ -5862,7 +5862,7 @@ public bool IsDead = false;
     public bool TeleportMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TeleportAwayAllProjectile));
-        return projectile.TargetedFire(dir, Constants.MaxSight * 5, ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill);
+        return projectile.TargetedFire(dir, Constants.MaxSight * 5, ProjectionFlag.ProjectKill, beam: true);
     }
 
     public void TeleportPlayerTo(int ny, int nx)
@@ -6049,13 +6049,13 @@ public bool IsDead = false;
     public bool WallToMud(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(WallToMudProjectile));
-        return projectile.TargetedFire(dir, 20 + DieRoll(30), ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        return projectile.TargetedFire(dir, 20 + DieRoll(30), ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, beam: true);
     }
 
     public bool WizardLock(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile));
-        return projectile.TargetedFire(dir, 20 + DieRoll(30), ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        return projectile.TargetedFire(dir, 20 + DieRoll(30), ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, beam: true);
     }
 
     private void CaveTempRoomAux(int y, int x)
