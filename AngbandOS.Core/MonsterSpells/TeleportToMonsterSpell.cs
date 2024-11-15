@@ -21,7 +21,7 @@ internal class TeleportToMonsterSpell : MonsterSpell
         Game.TeleportPlayerTo(monster.MapY, monster.MapX);
     }
 
-    public override void ExecuteOnMonster(Monster monster, Monster target) // TODO: Not implemented
+    public override void ExecuteOnMonster(Monster monster, Monster target) // TODO: Not implemented, monsters do not teleport each other
     {
     }
 }

@@ -8,8 +8,7 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 /// <summary>
-/// Represents a bolt projectile but also adds a radius damage and uses ball applicable projectile flags.  The messages to the player
-/// are also modified.
+/// Represents a bolt projectile but also adds a radius damage and uses ball applicable projectile flags.  The messages to the player are also modified.
 /// </summary>
 [Serializable]
 internal abstract class BallProjectileMonsterSpell : ProjectileMonsterSpell
@@ -32,7 +31,7 @@ internal abstract class BallProjectileMonsterSpell : ProjectileMonsterSpell
         // Radius 0 means use the default radius
         if (radius < 1)
         {
-            radius = monster.Race.Powerful ? 3 : 2;
+            radius = monster.Race.Powerful ? 3 : 2; // TODO: This can be a monster setting ... instead of based on Powerful
         }
 
         return base.Project(monster, rad, y, x, dam, projectile, grid: grid, stop: stop, item: item, kill: kill);
