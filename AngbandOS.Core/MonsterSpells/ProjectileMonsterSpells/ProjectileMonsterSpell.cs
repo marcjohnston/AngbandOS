@@ -21,10 +21,10 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileKey);
     }
 
-    /// <summary>
-    /// Returns the flags used by the projectile.  Defaults to stop and kill.
-    /// </summary>
-    protected virtual ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
+    protected virtual bool ItemProjectionFlag => false;
+    protected virtual bool GridProjectionFlag => false;
+    protected virtual bool KillProjectionFlag => true;
+    protected virtual bool StopProjectionFlag => true;
 
     /// <summary>
     /// Returns the key for the projectile to use.  This property is used to bind the ProjectileProperty during the binding phase.
@@ -57,20 +57,20 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
     /// <param name="projectile"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    protected virtual bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
+    protected virtual bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
     {
-        return projectile.Fire(monster.GetMonsterIndex(), rad, Game.MapY.IntValue, Game.MapX.IntValue, dam, flg);
+        return projectile.Fire(monster.GetMonsterIndex(), rad, Game.MapY.IntValue, Game.MapX.IntValue, dam, grid: grid, stop: stop, item: item, kill: kill);
     }
 
     public override void ExecuteOnPlayer(Monster monster)
     {
         int damage = Damage(monster);
-        Project(monster, 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, Projectile, ProjectionFlags);
+        Project(monster, 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, Projectile, grid: GridProjectionFlag, stop: StopProjectionFlag, kill: KillProjectionFlag, item: ItemProjectionFlag);
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int damage = Damage(monster);
-        Project(monster, 0, target.MapY, target.MapX, damage, Projectile, ProjectionFlags);
+        Project(monster, 0, target.MapY, target.MapX, damage, Projectile, grid: GridProjectionFlag, stop: StopProjectionFlag, kill: KillProjectionFlag, item: ItemProjectionFlag);
     }
 }

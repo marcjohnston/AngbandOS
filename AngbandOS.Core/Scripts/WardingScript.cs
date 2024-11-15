@@ -19,8 +19,7 @@ internal class WardingScript : Script, IScript
     public void ExecuteScript()
     {
         Game.RunScript(nameof(ElderSignScript));
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MakeElderSignProjectile));
-        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, flg);
+        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true);
     }
 }

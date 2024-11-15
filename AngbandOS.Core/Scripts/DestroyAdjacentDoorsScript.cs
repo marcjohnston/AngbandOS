@@ -29,7 +29,7 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessByChanceScr
     public bool ExecuteSuccessByChanceScript()
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
-        return projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, hide: true);
+        return projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, hide: true);
     }
 
     /// <summary>

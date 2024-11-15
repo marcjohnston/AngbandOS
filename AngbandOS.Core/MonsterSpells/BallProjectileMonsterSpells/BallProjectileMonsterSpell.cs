@@ -20,9 +20,11 @@ internal abstract class BallProjectileMonsterSpell : ProjectileMonsterSpell
     /// </summary>
     protected virtual int Radius => 2;
 
-    protected override ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
+    protected override bool GridProjectionFlag => true; // Ball projectiles affect the grid.
+    protected override bool ItemProjectionFlag => true; // Ball projectiles affect items.
+    protected override bool StopProjectionFlag => false; // Ball projectiles do not stop.
 
-    protected override bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
+    protected override bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
     {
         // A ball injects a radius.
         int radius = Radius;
@@ -33,6 +35,6 @@ internal abstract class BallProjectileMonsterSpell : ProjectileMonsterSpell
             radius = monster.Race.Powerful ? 3 : 2;
         }
 
-        return base.Project(monster, rad, y, x, dam, projectile, flg);
+        return base.Project(monster, rad, y, x, dam, projectile, grid: grid, stop: stop, item: item, kill: kill);
     }
 }

@@ -19,7 +19,7 @@ internal class DivineInterventionScript : Script, IScript
     public void ExecuteScript()
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile));
-        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 777, ProjectionFlag.ProjectKill);
+        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 777, kill: true);
         Game.DispelMonsters(Game.ExperienceLevel.IntValue * 4);
         Game.RunScript(nameof(SlowMonstersScript));
         Game.StunMonsters(Game.ExperienceLevel.IntValue * 4);

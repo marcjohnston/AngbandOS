@@ -18,24 +18,24 @@ internal class WizardBoltScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
         int tx = Game.MapX.IntValue + (99 * Game.KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
         int ty = Game.MapY.IntValue + (99 * Game.KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
+        bool stop = true;
         if (dir == 5 && Game.TargetWho != null)
         {
             GridCoordinate? target = Game.TargetWho.GetTargetLocation();
             if (target != null)
             {
-                flg &= ~ProjectionFlag.ProjectStop;
+                stop = false;
                 tx = target.X;
                 ty = target.Y;
             }
         }
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(WizardBoltProjectile));
-        projectile.Fire(0, 0, ty, tx, 1000000, flg);
+        projectile.Fire(0, 0, ty, tx, 1000000, stop: stop, grid: true, item: true, kill: true);
     }
 }

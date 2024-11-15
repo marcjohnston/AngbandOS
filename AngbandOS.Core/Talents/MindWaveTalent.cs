@@ -22,7 +22,7 @@ internal class MindWaveTalent : Talent
         if (Game.ExperienceLevel.IntValue < 25)
         {
             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
-            projectile.Fire(0, 2 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, ProjectionFlag.ProjectKill);
+            projectile.Fire(0, 2 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, kill: true);
         }
         else
         {

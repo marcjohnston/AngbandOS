@@ -1466,7 +1466,7 @@ internal class Monster : IItemContainer
                 // Implement the attack as a projectile
                 if (pt != null)
                 {
-                    pt.Fire(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                    pt.Fire(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, kill: true, stop: true);
                     // If we touched the target we might get burned or zapped
                     if (method.AttackTouchesTarget)
                     {
@@ -1484,7 +1484,7 @@ internal class Monster : IItemContainer
                                 }
                             }
                             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(Projection.FireProjectile));
-                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1500,7 +1500,7 @@ internal class Monster : IItemContainer
                                 }
                             }
                             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile));
-                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true);
                         }
                     }
                 }
@@ -1901,7 +1901,6 @@ internal class Monster : IItemContainer
     /// <param name="radius"> The radius of the attack, or zero for the default radius </param>
     public void BreatheAtMonster(int targetY, int targetX, Projectile projectile, int damage, int radius) // TODO: Why is this not used
     {
-        const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         // Radius 0 means use the default radius
         if (radius < 1)
         {
@@ -1909,7 +1908,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        projectile.Fire(GetMonsterIndex(), radius, targetY, targetX, damage, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), radius, targetY, targetX, damage, grid: true, item: true, kill: true);
     }
 
     /// <summary>
@@ -1921,12 +1920,11 @@ internal class Monster : IItemContainer
     /// <param name="radius"> The radius of the ball, or zero to use the default radius </param>
     public void FireBallAtPlayer(Projectile projectile, int damage, int radius) // TODO: Why is this not used
     {
-        const ProjectionFlag projectionFlag = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         if (radius < 1)
         {
             radius = Race.Powerful ? 3 : 2;
         }
-        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectionFlag);
+        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, grid: true, item: true, kill: true);
     }
 
     /// <summary>
@@ -1940,7 +1938,6 @@ internal class Monster : IItemContainer
     /// </param>
     public void BreatheAtPlayer(Projectile projectile, int damage, int radius) // TODO: Why is this not used
     {
-        const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         // Radius 0 means use the default radius
         if (radius < 1)
         {
@@ -1948,7 +1945,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, grid: true, item: true, kill: true);
     }
 
     /// <summary>
@@ -1961,8 +1958,7 @@ internal class Monster : IItemContainer
     /// <param name="damage"> The damage the projectile should do </param>
     public void FireBoltAtMonster(int targetY, int targetX, Projectile projectile, int damage) // TODO: Why is this not used
     {
-        const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        projectile.Fire(GetMonsterIndex(), 0, targetY, targetX, damage, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), 0, targetY, targetX, damage, kill: true, stop: true);
     }
 
     /// <summary>
@@ -2054,8 +2050,7 @@ internal class Monster : IItemContainer
     /// <param name="damage"> The damage that the bolt will do </param>
     public void FireBoltAtPlayer(Projectile projectile, int damage)
     {
-        const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        projectile.Fire(GetMonsterIndex(), 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectionFlags);
+        projectile.Fire(GetMonsterIndex(), 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, kill: true, stop: true);
     }
 
     /// <summary>

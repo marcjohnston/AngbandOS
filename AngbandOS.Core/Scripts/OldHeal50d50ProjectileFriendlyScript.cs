@@ -15,7 +15,7 @@ internal class OldHeal50d50ProjectileFriendlyScript : Script, IUnfriendlyScript
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
-        projectile.Fire(who, 1, y, x, Game.DiceRoll(50, 50), ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, jump: true);
+        projectile.Fire(who, 1, y, x, Game.DiceRoll(50, 50), item: true, kill: true, jump: true);
         return false;
     }
 }

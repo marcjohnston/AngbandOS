@@ -20,12 +20,12 @@ internal class CreateTrapsMonsterSpell : MonsterSpell
     public override void ExecuteOnPlayer(Monster monster)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
-        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, hide: true);
+        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, hide: true);
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
-        projectile.Fire(0, 1, target.MapY, target.MapX, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, hide: true);
+        projectile.Fire(0, 1, target.MapY, target.MapX, 0, grid: true, item: true, hide: true);
     }
 }

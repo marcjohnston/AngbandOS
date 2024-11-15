@@ -51,9 +51,9 @@ internal abstract class BreatheBallProjectileMonsterSpell : BallProjectileMonste
         return damage > MaxDamage ? MaxDamage : damage;
     }
 
-    protected override bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
+    protected override bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
     {
         // Make the radius negative to indicate we need a cone instead of a ball.
-        return base.Project(monster, -rad, y, x, dam, projectile, flg);
+        return base.Project(monster, -rad, y, x, dam, projectile, grid: grid, stop: stop, item: item, kill: kill);
     }
 }

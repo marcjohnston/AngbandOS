@@ -48,7 +48,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="dam"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    public bool TargetedFire(int dir, int dam, ProjectionFlag flg, bool jump = false, bool beam = false)
+    public bool TargetedFire(int dir, int dam, bool jump = false, bool beam = false, bool stop = false, bool kill = false, bool grid = false, bool item = false)
     {
         int tx = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         int ty = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
@@ -61,7 +61,7 @@ internal abstract class Projectile : IGetKey
                 ty = target.Y;
             }
         }
-        return Fire(0, 0, ty, tx, dam, flg, jump: jump, beam: beam, thru: true);
+        return Fire(0, 0, ty, tx, dam, jump: jump, beam: beam, thru: true, stop: stop, kill: kill, grid: grid, item: item);
     }
 
     /// <summary>
@@ -76,8 +76,12 @@ internal abstract class Projectile : IGetKey
     /// <param name="beam">Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.</param>
     /// <param name="thru">Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.</param>
     /// <param name="hide">Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.</param>
+    /// <param name="grid">Allows the effect to interact with each grid (tile or cell) it moves through, which can alter terrain or affect grid-based elements like traps.</param>
+    /// <param name="item">Enables the effect to interact with items it encounters, possibly damaging or destroying them if applicable.</param>
+    /// <param name="kill">Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.</param>
+    /// <param name="stop">Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.</param>
     /// <returns></returns>
-    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false, bool beam = false, bool thru = false, bool hide = false)
+    public bool Fire(int who, int rad, int y, int x, int dam, bool jump = false, bool beam = false, bool thru = false, bool hide = false, bool grid = false, bool item = false, bool kill = false, bool stop = false)
     {
         int i, dist;
         int y1, x1;
@@ -157,7 +161,7 @@ internal abstract class Projectile : IGetKey
             {
                 break;
             }
-            if (cPtr.MonsterIndex != 0 && dist != 0 && (flg & ProjectionFlag.ProjectStop) != 0)
+            if (cPtr.MonsterIndex != 0 && dist != 0 && stop)
             {
                 break;
             }
@@ -359,7 +363,7 @@ internal abstract class Projectile : IGetKey
             EffectAnimation.Animate(gy, gx);
         }
 
-        if ((flg & ProjectionFlag.ProjectGrid) != 0)
+        if (grid)
         {
             dist = 0;
             for (i = 0; i < grids; i++)
@@ -376,7 +380,7 @@ internal abstract class Projectile : IGetKey
                 }
             }
         }
-        if ((flg & ProjectionFlag.ProjectItem) != 0)
+        if (item)
         {
             dist = 0;
             for (i = 0; i < grids; i++)
@@ -393,7 +397,7 @@ internal abstract class Projectile : IGetKey
                 }
             }
         }
-        if ((flg & ProjectionFlag.ProjectKill) != 0)
+        if (kill)
         {
             ProjectMn = 0;
             ProjectMx = 0;
@@ -441,7 +445,7 @@ internal abstract class Projectile : IGetKey
                             Game.MsgPrint("The attack bounces!");
                             refPtr.Knowledge.Characteristics.Reflecting = true;
                         }
-                        Fire(cPtr.MonsterIndex, 0, tY, tX, dam, flg);
+                        Fire(cPtr.MonsterIndex, 0, tY, tX, dam, jump: jump, beam: beam, thru: thru, hide: hide, grid: grid, item: item, kill: kill, stop: stop);
                     }
                     else
                     {
@@ -467,7 +471,7 @@ internal abstract class Projectile : IGetKey
                 }
             }
         }
-        if ((flg & ProjectionFlag.ProjectKill) != 0)
+        if (kill)
         {
             dist = 0;
             for (i = 0; i < grids; i++)
@@ -531,7 +535,7 @@ internal abstract class Projectile : IGetKey
                 tY = Game.Monsters[who].MapY;
                 tX = Game.Monsters[who].MapX;
             }
-            Fire(0, 0, tY, tX, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
+            Fire(0, 0, tY, tX, dam, stop: true, kill: true);
             Game.Disturb(true);
             return true;
         }

@@ -15,7 +15,7 @@ internal class Explode25d25ProjectileUnfriendlyScript : Script, IUnfriendlyScrip
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile));
-        projectile.Fire(who, 2, y, x, Game.DiceRoll(25, 25), ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, jump: true);
+        projectile.Fire(who, 2, y, x, Game.DiceRoll(25, 25), item: true, kill: true, jump: true);
         return true;
     }
 }

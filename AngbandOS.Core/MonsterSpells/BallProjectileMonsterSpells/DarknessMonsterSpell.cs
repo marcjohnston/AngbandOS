@@ -13,10 +13,12 @@ internal class DarknessMonsterSpell : BallProjectileMonsterSpell
     private DarknessMonsterSpell(Game game) : base(game) { }
     public override bool Annoys => true;
 
+    protected override bool GridProjectionFlag => true; // Darkness affects the grid.
+    protected override bool StopProjectionFlag => false; // Darkness doesn't stop.
+
     /// <summary>
     /// Returns the grid and kill projectile flags.
     /// </summary>
-    protected override ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
     public override string? VsMonsterSeenMessage => "{0} gestures in shadow at {3}";
     public override string? VsPlayerActionMessage => "{0} gestures in shadow.";
     protected override string ProjectileKey => nameof(AcidProjectile);

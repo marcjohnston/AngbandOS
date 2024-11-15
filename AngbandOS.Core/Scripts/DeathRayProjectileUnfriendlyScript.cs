@@ -15,7 +15,7 @@ internal class DeathRayProjectileUnfriendlyScript : Script, IUnfriendlyScript
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DeathRayProjectile));
-        projectile.Fire(who, 1, y, x, 0, ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill, jump: true);
+        projectile.Fire(who, 1, y, x, 0, item: true, kill: true, jump: true);
         return true;
     }
 }
