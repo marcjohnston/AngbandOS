@@ -19,15 +19,13 @@ internal class CreateTrapsMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(Monster monster)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
-        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, flg);
+        projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, hide: true);
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
-        projectile.Fire(0, 1, target.MapY, target.MapX, 0, flg);
+        projectile.Fire(0, 1, target.MapY, target.MapX, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, hide: true);
     }
 }

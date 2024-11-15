@@ -5811,9 +5811,8 @@ public bool IsDead = false;
 
     public void SleepMonstersTouch()
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile));
-        projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, flg);
+        projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, ProjectionFlag.ProjectKill, hide: true);
     }
 
     public bool SlowMonster(int dir)
@@ -5964,9 +5963,8 @@ public bool IsDead = false;
 
     public bool TrapCreation()
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
-        return projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, 0, flg);
+        return projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, 0, ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem, hide: true);
     }
 
     public void TurnEvil(int dam)
@@ -6254,7 +6252,7 @@ public bool IsDead = false;
             {
                 continue;
             }
-            if (projectile.Fire(0, 0, y, x, dam, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide, jump: true))
+            if (projectile.Fire(0, 0, y, x, dam, ProjectionFlag.ProjectKill, jump: true, hide: true))
             {
                 obvious = true;
             }

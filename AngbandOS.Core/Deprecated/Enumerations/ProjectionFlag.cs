@@ -29,9 +29,4 @@ internal enum ProjectionFlag
     /// Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.
     /// </summary>
     ProjectKill = 0x40,
-
-    /// <summary>
-    /// Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.
-    /// </summary>
-    ProjectHide = 0x80,
 }

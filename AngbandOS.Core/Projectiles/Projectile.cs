@@ -75,8 +75,9 @@ internal abstract class Projectile : IGetKey
     /// <param name="jump">Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.</param>
     /// <param name="beam">Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.</param>
     /// <param name="thru">Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.</param>
+    /// <param name="hide">Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.</param>
     /// <returns></returns>
-    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false, bool beam = false, bool thru = false)
+    public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg, bool jump = false, bool beam = false, bool thru = false, bool hide = false)
     {
         int i, dist;
         int y1, x1;
@@ -122,7 +123,7 @@ internal abstract class Projectile : IGetKey
         {
             rad = 0 - rad;
             breath = true;
-            flg |= ProjectionFlag.ProjectHide;
+            hide = true;
         }
         for (dist = 0; dist < 32; dist++)
         {
@@ -140,7 +141,7 @@ internal abstract class Projectile : IGetKey
                 gx[grids] = x;
                 grids++;
             }
-            if (!blind && (flg & ProjectionFlag.ProjectHide) == 0 && dist != 0 && beam && Game.PanelContains(y, x) && Game.PlayerHasLosBold(y, x))
+            if (!blind && !hide && dist != 0 && beam && Game.PanelContains(y, x) && Game.PlayerHasLosBold(y, x))
             {
                 if (ImpactProjectileGraphic != null)
                 {
@@ -170,7 +171,7 @@ internal abstract class Projectile : IGetKey
             {
                 break;
             }
-            if (!blind && (flg & ProjectionFlag.ProjectHide) == 0)
+            if (!blind && !hide)
             {
                 if (Game.PlayerHasLosBold(y9, x9) && Game.PanelContains(y9, x9))
                 {
@@ -214,7 +215,7 @@ internal abstract class Projectile : IGetKey
                 int brad = 0;
                 int bdis = 0;
                 bool done = false;
-                flg &= ~ProjectionFlag.ProjectHide;
+                hide = false;
                 int by = y1;
                 int bx = x1;
                 while (bdis <= dist + rad)
@@ -310,7 +311,7 @@ internal abstract class Projectile : IGetKey
         {
             return false;
         }
-        if (!blind && (flg & ProjectionFlag.ProjectHide) == 0)
+        if (!blind && !hide)
         {
             for (int t = 0; t <= gmRad; t++)
             {
