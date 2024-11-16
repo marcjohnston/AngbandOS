@@ -15,7 +15,7 @@ internal class ReaverSummonMonsterSpell : SummonMonsterSpell
 
     protected override int MaximumSummonCount => (Game.Difficulty / 50) + Game.DieRoll(6);
 
-    protected override int SummonLevel(Monster monster) => 100;
+    protected override int? SummonLevel => 100;
 
     /// <summary>
     /// Returns null, because the Execute methods are overridden because Reavers can only be summoned via the SummonReaver method.

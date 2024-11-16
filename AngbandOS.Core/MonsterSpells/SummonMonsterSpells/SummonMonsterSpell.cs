@@ -58,19 +58,10 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// <returns></returns>
     protected IMonsterSelector? FriendlyMonsterSelector { get; private set; }
 
-    protected virtual int SummonLevel(Monster monster) => monster.Race.Level >= 1 ? monster.Race.Level : 1;
-
     /// <summary>
-    /// Summons non-friendly monsters.  Can be overrideen for special summoning needs.  Only the SummonReaver needs to call a special method.
+    /// Returns the level of the monster that is summoned; or null, for a level that is the same as the monster that is doing the summoning.
     /// </summary>
-    /// <returns></returns>
-    protected virtual bool Summon(Game game, Monster monster)
-    {
-        int playerX = game.MapX.IntValue;
-        int playerY = game.MapY.IntValue;
-
-        return game.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector.GetMonsterFilter(monster.Race));
-    }
+    protected virtual int? SummonLevel => null;
 
     public override void ExecuteOnPlayer(Monster monster)
     {
@@ -79,7 +70,11 @@ internal abstract class SummonMonsterSpell : MonsterSpell
 
         for (int k = 0; k < MaximumSummonCount; k++)
         {
-            if (Summon(Game, monster))
+            int playerX = Game.MapX.IntValue;
+            int playerY = Game.MapY.IntValue;
+            int summonLevel = SummonLevel.HasValue ? SummonLevel.Value : monster.Race.Level >= 1 ? monster.Race.Level : 1;
+
+            if (Game.SummonSpecific(playerY, playerX, summonLevel, MonsterSelector?.GetMonsterFilter(monster.Race)))
             {
                 count++;
             }
@@ -105,16 +100,20 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         MonsterFilter? monsterFilter = MonsterSelector?.GetMonsterFilter(monster.Race);
         for (int k = 0; k < 8; k++)
         {
+            int summonLevel = SummonLevel.HasValue ? SummonLevel.Value : monster.Race.Level >= 1 ? monster.Race.Level : 1;
             if (friendly)
             {
-                if (Game.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), monsterFilter, true))
+                if (Game.SummonSpecificFriendly(target.MapY, target.MapX, summonLevel, monsterFilter, true))
                 {
                     count++;
                 }
             }
             else
             {
-                if (Summon(Game, monster))
+                int playerX = Game.MapX.IntValue;
+                int playerY = Game.MapY.IntValue;
+
+                if (Game.SummonSpecific(playerY, playerX, summonLevel, MonsterSelector?.GetMonsterFilter(monster.Race)))
                 {
                     count++;
                 }
