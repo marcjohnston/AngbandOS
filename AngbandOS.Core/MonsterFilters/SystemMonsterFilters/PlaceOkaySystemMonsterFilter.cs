@@ -5,20 +5,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.DynamicMonsterFilters;
+namespace AngbandOS.Core.MonsterSelectors;
 
 [Serializable]
-internal class PlaceOkayDynamicMonsterFilter : IMonsterFilter
+internal class PlaceOkaySystemMonsterFilter : MonsterFilter
 {
-    private readonly Game Game;
     private int _placeMonsterIdx;
-    public PlaceOkayDynamicMonsterFilter(Game game, int placeMonsterIdx)
+    public PlaceOkaySystemMonsterFilter(Game game, int placeMonsterIdx) : base(game)
     {
         _placeMonsterIdx = placeMonsterIdx;
-        Game = game;
     }
 
-    public bool Matches(MonsterRace rPtr)
+    public override bool Matches(MonsterRace rPtr)
     {
         MonsterRace pPtr = Game.SingletonRepository.Get<MonsterRace>(_placeMonsterIdx);
         if (rPtr.Symbol.Character != pPtr.Symbol.Character)

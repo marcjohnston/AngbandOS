@@ -5,22 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.DynamicMonsterFilters;
+namespace AngbandOS.Core.MonsterSelectors;
 
 [Serializable]
-internal class SymbolDynamicMonsterFilter : IMonsterFilter
+internal class CloneMonsterSelector : MonsterSelector
 {
-    private readonly Game Game;
-    private char _character;
+    private CloneMonsterSelector(Game game) : base(game) { }
 
-    public SymbolDynamicMonsterFilter(Game game, char character)
+    public override MonsterFilter GetMonsterFilter(MonsterRace monsterRace)
     {
-        _character = character;
-        Game = game;
-    }
-
-    public bool Matches(MonsterRace rPtr)
-    {
-        return rPtr.Symbol.Character == _character && !rPtr.Unique;
+        return new CloneSystemMonsterFilter(Game, monsterRace);
     }
 }

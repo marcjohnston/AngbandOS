@@ -12,6 +12,6 @@ internal class HiDragonSummonMonsterSpell : SummonMonsterSpell
 {
     private HiDragonSummonMonsterSpell(Game game) : base(game) { }
     protected override int MaximumSummonCount => 8;
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonMonsterFilter));
+    protected override string? MonsterSelectorKey => nameof(HiDragonMonsterFilter);
     public override string? VsPlayerActionMessage => "{0} magically summons ancient dragons!";
 }

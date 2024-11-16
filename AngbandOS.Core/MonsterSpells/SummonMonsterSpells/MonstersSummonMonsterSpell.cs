@@ -21,7 +21,7 @@ internal class MonstersSummonMonsterSpell : SummonMonsterSpell
     /// <summary>
     /// Returns null, for any monster to be summoned.
     /// </summary>
-    protected override MonsterFilter? MonsterSelector(Monster monster) => null;
+    protected override string? MonsterSelectorKey => null;
 
-    protected override MonsterFilter? FriendlyMonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter));
+    protected override string? FriendlyMonsterSelectorKey => nameof(NoUniquesMonsterFilter);
 }

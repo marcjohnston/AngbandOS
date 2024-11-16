@@ -8,9 +8,12 @@
 namespace AngbandOS.Core.MonsterFilters;
 
 [Serializable]
-internal class AnyBreathingDragonMonsterFilter : MonsterFilter
+internal class AnyBreathingDragonMonsterFilter : MonsterFilter, IMonsterSelector
 {
     private AnyBreathingDragonMonsterFilter(Game game) : base(game) { } // This object is a singleton.
+
+    public MonsterFilter GetMonsterFilter(MonsterRace monsterRace) => this;
+
     public override bool Matches(MonsterRace rPtr)
     {
         return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && (rPtr.BreatheAcid || rPtr.BreatheLightning || rPtr.BreatheFire || rPtr.BreatheCold || rPtr.BreathePoison);

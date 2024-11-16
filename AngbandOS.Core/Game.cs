@@ -15951,7 +15951,7 @@ public bool IsDead = false;
         Monster mPtr = Monsters[_hackMIdxIi];
         for (attempts = DieRoll(10) + 5; attempts != 0; attempts--)
         {
-            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinDynamicMonsterFilter(this, rPtr.Symbol.Character));
+            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinSystemMonsterFilter(this, rPtr.Symbol.Character));
         }
         return true;
     }
@@ -16226,9 +16226,9 @@ public bool IsDead = false;
     /// Returns the index of a monster.
     /// </summary>
     /// <param name="level"></param>
-    /// <param name="getMonNumHook"></param>
+    /// <param name="monsterFilter"></param>
     /// <returns></returns>
-    public int GetMonNum(int level, IMonsterFilter? getMonNumHook)
+    public int GetMonNum(int level, MonsterFilter? monsterFilter)
     {
         int i, j;
         AllocationEntry[] table = AllocRaceTable;
@@ -16266,7 +16266,7 @@ public bool IsDead = false;
                 continue;
             }
 
-            if (getMonNumHook == null || getMonNumHook.Matches(rPtr))
+            if (monsterFilter == null || monsterFilter.Matches(rPtr))
             {
                 table[i].FinalProbability = table[i].BaseProbability;
             }
@@ -16590,7 +16590,7 @@ public bool IsDead = false;
                 {
                     continue;
                 }
-                int z = GetMonNum(rPtr.Level, new PlaceOkayDynamicMonsterFilter(this, rPtr.Index));
+                int z = GetMonNum(rPtr.Level, new PlaceOkaySystemMonsterFilter(this, rPtr.Index));
                 if (z == 0)
                 {
                     break;
@@ -16665,7 +16665,7 @@ public bool IsDead = false;
         }
     }
 
-    public bool SummonSpecific(int y1, int x1, int lev, IMonsterFilter? monsterSelector, bool groupOk = true)
+    public bool SummonSpecific(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk = true)
     {
         int i;
         int x = x1;
@@ -16688,7 +16688,7 @@ public bool IsDead = false;
         {
             return false;
         }
-        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterSelector);
+        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterFilter);
         if (rIdx == 0)
         {
             return false;
@@ -16701,7 +16701,7 @@ public bool IsDead = false;
         return true;
     }
 
-    public bool SummonSpecificFriendly(int y1, int x1, int lev, IMonsterFilter? monsterSelector, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
+    public bool SummonSpecificFriendly(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
     {
         int i;
         int x = 0;
@@ -16728,7 +16728,7 @@ public bool IsDead = false;
         {
             return false;
         }
-        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterSelector);
+        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterFilter);
         if (rIdx == 0)
         {
             return false;

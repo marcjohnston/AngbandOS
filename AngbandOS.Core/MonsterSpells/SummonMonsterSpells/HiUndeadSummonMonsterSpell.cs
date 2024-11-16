@@ -13,5 +13,5 @@ internal class HiUndeadSummonMonsterSpell : SummonMonsterSpell
     private HiUndeadSummonMonsterSpell(Game game) : base(game) { }
     public override string? VsPlayerActionMessage => "{0} magically summons greater undead!";
     protected override int MaximumSummonCount => 8;
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadMonsterFilter));
+    protected override string? MonsterSelectorKey => nameof(HiUndeadMonsterFilter);
 }

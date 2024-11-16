@@ -5,13 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.MonsterSpells;
+namespace AngbandOS.Core.MonsterSelectors;
 
 [Serializable]
-internal class HydraSummonMonsterSpell : SummonMonsterSpell
+internal class KinSystemMonsterFilter : MonsterFilter
 {
-    private HydraSummonMonsterSpell(Game game) : base(game) { }
-    public override string? VsPlayerActionMessage => "{0} magically summons hydras!";
+    private char _summonKinType;
+    public KinSystemMonsterFilter(Game game, char summonKinType) : base(game)
+    {
+        _summonKinType = summonKinType;
+    }
 
-    protected override string? MonsterSelectorKey => nameof(HydraMonsterFilter);
+    public override bool Matches(MonsterRace rPtr)
+    {
+        return rPtr.Symbol.Character == _summonKinType && !rPtr.Unique;
+    }
 }

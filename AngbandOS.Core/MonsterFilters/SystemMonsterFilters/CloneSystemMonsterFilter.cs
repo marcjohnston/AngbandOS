@@ -5,13 +5,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.MonsterSpells;
+namespace AngbandOS.Core.MonsterSelectors;
 
 [Serializable]
-internal class HydraSummonMonsterSpell : SummonMonsterSpell
+internal class CloneSystemMonsterFilter : MonsterFilter
 {
-    private HydraSummonMonsterSpell(Game game) : base(game) { }
-    public override string? VsPlayerActionMessage => "{0} magically summons hydras!";
+    private MonsterRace _race;
 
-    protected override string? MonsterSelectorKey => nameof(HydraMonsterFilter);
+    public CloneSystemMonsterFilter(Game game, MonsterRace race) : base(game)
+    {
+        _race = race;
+    }
+
+    public override bool Matches(MonsterRace rPtr)
+    {
+        return rPtr == _race;
+    }
 }

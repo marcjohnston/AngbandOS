@@ -13,7 +13,7 @@ internal class UniqueSummonMonsterSpell : SummonMonsterSpell
     private UniqueSummonMonsterSpell(Game game) : base(game) { }
     public override string? VsPlayerActionMessage => "{0} magically summons special opponents!";
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(UniqueMonsterFilter));
+    protected override string? MonsterSelectorKey => nameof(UniqueMonsterFilter);
 
     protected override string BlindNonZeroSummonedMessage => "You hear many powerful things appear nearby.";
 }

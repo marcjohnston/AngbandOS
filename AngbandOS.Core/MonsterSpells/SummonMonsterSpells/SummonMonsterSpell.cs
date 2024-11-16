@@ -11,6 +11,14 @@ namespace AngbandOS.Core.MonsterSpells;
 internal abstract class SummonMonsterSpell : MonsterSpell
 {
     protected SummonMonsterSpell(Game game) : base(game) { }
+
+    public override void Bind()
+    {
+        base.Bind();
+        MonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(MonsterSelectorKey);
+        FriendlyMonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(FriendlyMonsterSelectorKey);
+    }
+
     /// <summary>
     /// Returns true because all summoning magic spells require intelligence.
     /// </summary>
@@ -27,9 +35,20 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     protected virtual int MaximumSummonCount => 6;
 
     /// <summary>
+    /// Returns a monster selector key that is used to specify which type of monster to be summoned; or null, for any monster.  Returns null, by default.
+    /// </summary>
+    protected virtual string? MonsterSelectorKey => null;
+
+    /// <summary>
     /// Returns a monster filter that is used to specify which type of monster to be summoned or null, for any monster.
     /// </summary>
-    protected abstract IMonsterFilter? MonsterSelector(Monster monster);
+    protected IMonsterSelector? MonsterSelector { get; private set; }
+
+    /// <summary>
+    /// Returns a monster selector key that is used to specify which type of monster to be summoned when a friendly monster is attacking
+    /// another monster, or null for any monster.  Returns the monster selector key, by default.
+    /// </summary>
+    protected virtual string? FriendlyMonsterSelectorKey => MonsterSelectorKey;
 
     /// <summary>
     /// Returns a monster selector that is used to specify which type of monster to be summoned when a friendly monster is attacking
@@ -37,7 +56,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected virtual IMonsterFilter? FriendlyMonsterSelector(Monster monster) => MonsterSelector(monster);
+    protected IMonsterSelector? FriendlyMonsterSelector { get; private set; }
 
     protected virtual int SummonLevel(Monster monster) => monster.Race.Level >= 1 ? monster.Race.Level : 1;
 
@@ -50,7 +69,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         int playerX = game.MapX.IntValue;
         int playerY = game.MapY.IntValue;
 
-        return game.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
+        return game.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector.GetMonsterFilter(monster.Race));
     }
 
     public override void ExecuteOnPlayer(Monster monster)
@@ -83,11 +102,12 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         bool friendly = monster.SmFriendly;
         int count = 0;
 
+        MonsterFilter? monsterFilter = MonsterSelector?.GetMonsterFilter(monster.Race);
         for (int k = 0; k < 8; k++)
         {
             if (friendly)
             {
-                if (Game.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
+                if (Game.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), monsterFilter, true))
                 {
                     count++;
                 }

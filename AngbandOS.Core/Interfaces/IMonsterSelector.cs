@@ -5,13 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.MonsterSpells;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class HydraSummonMonsterSpell : SummonMonsterSpell
+internal interface IMonsterSelector
 {
-    private HydraSummonMonsterSpell(Game game) : base(game) { }
-    public override string? VsPlayerActionMessage => "{0} magically summons hydras!";
-
-    protected override string? MonsterSelectorKey => nameof(HydraMonsterFilter);
+    MonsterFilter GetMonsterFilter(MonsterRace monsterRace);
 }

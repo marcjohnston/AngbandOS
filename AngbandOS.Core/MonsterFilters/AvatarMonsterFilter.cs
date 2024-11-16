@@ -8,9 +8,12 @@
 namespace AngbandOS.Core.MonsterFilters;
 
 [Serializable]
-internal class AvatarMonsterFilter : MonsterFilter
+internal class AvatarMonsterFilter : MonsterFilter, IMonsterSelector
 {
     private AvatarMonsterFilter(Game game) : base(game) { } // This object is a singleton.
+
+    public MonsterFilter GetMonsterFilter(MonsterRace monsterRace) => this;
+    
     public override bool Matches(MonsterRace rPtr)
     {
         return rPtr.FriendlyName == "Avatar of Nyarlathotep" && !rPtr.Unique;

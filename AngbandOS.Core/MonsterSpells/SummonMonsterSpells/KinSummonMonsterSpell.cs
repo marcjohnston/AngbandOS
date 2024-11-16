@@ -19,5 +19,5 @@ internal class KinSummonMonsterSpell : SummonMonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected override IMonsterFilter? MonsterSelector(Monster monster) => new KinDynamicMonsterFilter(Game, monster.Race.Symbol.Character);
+    protected override string? MonsterSelectorKey => nameof(KinMonsterSelector);
 }

@@ -12,6 +12,6 @@ internal class GreatOldOneSummonMonsterSpell : SummonMonsterSpell
 {
     private GreatOldOneSummonMonsterSpell(Game game) : base(game) { }
     protected override int MaximumSummonCount => 8;
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(GooMonsterFilter));
+    protected override string? MonsterSelectorKey => nameof(GooMonsterFilter);
     public override string? VsPlayerActionMessage => "{0} magically summons Great Old Ones!";
 }

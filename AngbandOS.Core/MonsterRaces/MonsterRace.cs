@@ -352,6 +352,14 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     public string GetKey => Key;
     public void Bind()
     {
+        // We need to initialize the monster indexes.
+        // TODO: The Index should be removed.
+        for (int i = 0; i < Game.SingletonRepository.Count<MonsterRace>(); i++)
+        {
+            MonsterRace monsterRace = Game.SingletonRepository.Get<MonsterRace>(i);
+            monsterRace.Index = i;
+        }
+
         Knowledge = new MonsterKnowledge(Game, this);
         int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
         int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
@@ -468,7 +476,8 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     /// <summary>
     /// Returns the index into the monster race array where the monster is.  Set just after construction.
     /// </summary>
-    public int Index; // TODO: Needs to be removed. THERE IS NO WRITE.
+    [Obsolete("Index will be removed.")]
+    public int Index { get; private set; }
 
     public int GetCoinType()
     {

@@ -97,7 +97,7 @@ internal class SingletonRepository
         // Retrieve the singleton by key name.
         if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
         {
-            throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
+            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.  Ensure the {nameof(IGetKey)} interface was implemented.");
         }
         return (T)singleton;
     }
@@ -372,6 +372,7 @@ internal class SingletonRepository
         RegisterRepository<IIdentifiedAndUsedScriptItemDirection>();
         RegisterRepository<IUnfriendlyScript>();
         RegisterRepository<IEnhancementScript>();
+        RegisterRepository<IMonsterSelector>();
 
         RegisterRepository<Activation>();
         RegisterRepository<ActivationWeightedRandom>();
@@ -401,6 +402,7 @@ internal class SingletonRepository
         RegisterRepository<Justification>();
         RegisterRepository<MartialArtsAttack>();
         RegisterRepository<MonsterFilter>();
+        RegisterRepository<MonsterSelector>();
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
         RegisterRepository<Patron>();

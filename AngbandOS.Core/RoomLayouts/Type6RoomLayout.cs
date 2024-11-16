@@ -27,7 +27,7 @@ internal class Type6RoomLayout : RoomLayout
         int y2 = yval + 4;
         int x1 = xval - 11;
         int x2 = xval + 11;
-        IMonsterFilter getMonNumHook;
+        MonsterFilter getMonNumHook;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
@@ -111,7 +111,7 @@ internal class Type6RoomLayout : RoomLayout
                 {
                     _templateRace = Game.DieRoll(Game.SingletonRepository.Count<MonsterRace>() - 2);
                 } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
-                getMonNumHook = new SymbolDynamicMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
+                getMonNumHook = new SymbolSystemMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
             }
             else
             {
@@ -163,7 +163,7 @@ internal class Type6RoomLayout : RoomLayout
         }
         else
         {
-            getMonNumHook = new SymbolDynamicMonsterFilter(Game, 'U');
+            getMonNumHook = new SymbolSystemMonsterFilter(Game, 'U');
         }
         for (i = 0; i < 16; i++)
         {
