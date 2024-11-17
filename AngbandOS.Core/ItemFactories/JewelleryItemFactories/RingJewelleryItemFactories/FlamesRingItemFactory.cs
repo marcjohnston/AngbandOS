@@ -13,12 +13,12 @@ internal class FlamesRingItemFactory : RingItemFactory
     private FlamesRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? ActivationName => nameof(BallOfFire50r2AndResistFire1d20p20Activation);
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Flames";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(BonusArmorClass1D5P10BP5EnchantmentScript) })
     };

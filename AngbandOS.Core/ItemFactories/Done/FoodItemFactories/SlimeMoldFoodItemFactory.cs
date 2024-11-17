@@ -12,7 +12,7 @@ internal class SlimeMoldFoodItemFactory : ItemFactory
 {
     private SlimeMoldFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CommaSymbol);
+    protected override string SymbolBindingKey => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Slime Mold";
 
@@ -25,12 +25,12 @@ internal class SlimeMoldFoodItemFactory : ItemFactory
     };
     public override int InitialNutritionalValue => 3000;
     public override int Weight => 5;
-    public override string? EatScriptName => nameof(EatSlimeMoldScript);
-    protected override string ItemClassName => nameof(FoodItemClass);
+    public override string? EatScriptBindingKey => nameof(EatSlimeMoldScript);
+    protected override string ItemClassBindingKey => nameof(FoodItemClass);
     protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };

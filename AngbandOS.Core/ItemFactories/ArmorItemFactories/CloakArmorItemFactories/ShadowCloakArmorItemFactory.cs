@@ -12,7 +12,7 @@ internal class ShadowCloakArmorItemFactory : ArmorItemFactory
 {
     private ShadowCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(OpenParenthesisSymbol);
+    protected override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shadow Cloak";
 
@@ -29,7 +29,7 @@ internal class ShadowCloakArmorItemFactory : ArmorItemFactory
     public override int BonusArmorClass => 4;
     public override int Weight => 5;
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleCloakEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorCloakEnchantmentScript) }),
@@ -40,10 +40,10 @@ internal class ShadowCloakArmorItemFactory : ArmorItemFactory
     /// <summary>
     /// Returns the about body inventory slot for cloaks.
     /// </summary>
-    public override int WieldSlot => InventorySlot.AboutBody;
+    public override int[] WieldSlots => new int[] { InventorySlot.AboutBody };
 
-    protected override string ItemClassName => nameof(CloaksItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(AboutBodyInventorySlot));
+    protected override string ItemClassBindingKey => nameof(CloaksItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(AboutBodyInventorySlot) };
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

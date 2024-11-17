@@ -12,7 +12,7 @@ internal class SmallMetalShieldArmorItemFactory : ArmorItemFactory
 {
     private SmallMetalShieldArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CloseParenthesisSymbol);
+    protected override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small Metal Shield";
 
@@ -31,10 +31,10 @@ internal class SmallMetalShieldArmorItemFactory : ArmorItemFactory
     /// <summary>
     /// Returns the arm inventory slot for shields.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Arm;
+    public override int[] WieldSlots => new int[] { InventorySlot.Arm };
 
-    protected override string ItemClassName => nameof(ShieldsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(ArmInventorySlot));
+    protected override string ItemClassBindingKey => nameof(ShieldsItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(ArmInventorySlot) };
     public override int PackSort => 23;
     public override bool HatesAcid => true;
 
@@ -60,7 +60,7 @@ internal class SmallMetalShieldArmorItemFactory : ArmorItemFactory
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleShieldEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorShieldEnchantmentScript) }),

@@ -12,7 +12,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactory
 {
     private UnaussprechlichenKultenSorceryBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "[Unaussprechlichen Kulten]";
     protected override string? DescriptionSyntax => "Sorcery Spellbook~ $Name$";
@@ -33,7 +33,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(SorcerySpellDetectObjectsAndTreasure),
         nameof(SorcerySpellDetectEnchantment),
@@ -45,7 +45,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactory
         nameof(SorcerySpellWordOfRecall)
     };
 
-    protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(SorcerySpellBooksItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 7;
 
@@ -59,7 +59,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

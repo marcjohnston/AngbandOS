@@ -48,8 +48,20 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
             return;
         }
 
+        if (item.WieldSlots.Length == 0)
+        {
+            Game.MsgPrint("This item cannot be wielded.");
+            return;
+        }
+
         // Find the inventory slot where the item is to be wielded.
-        int slot = item.WieldSlot;
+        int slot;
+        int index = 0;
+        do
+        {
+            slot = item.WieldSlots[index];
+            index++;
+        } while (Game.GetInventoryItem(slot) != null && index < item.WieldSlots.Length);
 
         // Can't replace a cursed item
         Item? wieldingItem = Game.GetInventoryItem(slot);
@@ -82,14 +94,16 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         item.ItemOptimize();
 
         // Take off the old item
-        Item? wasWieldingItem = Game.GetInventoryItem(slot);
-        if (wasWieldingItem == null)
+        if (wieldingItem != null)
         {
-            Game.MsgPrint("Unable to take off item!");
-            return;
+            Item? wasWieldingItem = Game.InventoryTakeoff(wieldingItem, 255);
+            if (wasWieldingItem == null)
+            {
+                Game.MsgPrint("Unable to take off item!");
+                return;
+            }
         }
 
-        Game.InventoryTakeoff(wasWieldingItem, 255);
         // Put the item into the wield slot
         Game.SetInventoryItem(slot, wornItem);
         // Add the weight of the item

@@ -15,7 +15,7 @@ internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(Game game) : base(game) { }
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")
     };

@@ -12,7 +12,7 @@ internal class GoldenCrownArmorItemFactory : ArmorItemFactory
 {
     private GoldenCrownArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CloseBraceSymbol);
+    protected override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Golden Crown";
 
@@ -27,7 +27,7 @@ internal class GoldenCrownArmorItemFactory : ArmorItemFactory
         (45, 1)
     };
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleCrownEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorCrownEnchantmentScript) }),
@@ -40,11 +40,11 @@ internal class GoldenCrownArmorItemFactory : ArmorItemFactory
     /// <summary>
     /// Returns the head inventory slot, for crowns.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Head;
+    public override int[] WieldSlots => new int[] { InventorySlot.Head };
 
-    protected override string ItemClassName => nameof(CrownsItemClass);
+    protected override string ItemClassBindingKey => nameof(CrownsItemClass);
 
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadInventorySlot) };
     public override bool HatesAcid => true;
 
     public override int PackSort => 24;

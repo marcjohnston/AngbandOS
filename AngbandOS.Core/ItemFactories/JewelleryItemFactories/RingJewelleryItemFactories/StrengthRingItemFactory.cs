@@ -12,13 +12,13 @@ internal class StrengthRingItemFactory : RingItemFactory
 {
     private StrengthRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Strength";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorStrength5BP1EnchantmentScript) }),
         (new int[] {0, 1, 2}, null, new string[] { nameof(BonusStrength5BP1EnchantmentScript) })

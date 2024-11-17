@@ -12,7 +12,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : ItemFactory
 {
     private PieceOfElvishWaybreadFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CommaSymbol);
+    protected override string SymbolBindingKey => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Piece of Elvish Waybread";
 
@@ -27,18 +27,18 @@ internal class PieceOfElvishWaybreadFoodItemFactory : ItemFactory
     };
     public override int InitialNutritionalValue => 7500;
     public override int Weight => 3;
-    public override string? EatScriptName => nameof(EatElvenBreadScript);
+    public override string? EatScriptBindingKey => nameof(EatElvenBreadScript);
 
     /// <summary>
     /// Returns true because waybread vanishes when a skeleton tries to eat it.
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
 
-    protected override string ItemClassName => nameof(FoodItemClass);
+    protected override string ItemClassBindingKey => nameof(FoodItemClass);
     protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };

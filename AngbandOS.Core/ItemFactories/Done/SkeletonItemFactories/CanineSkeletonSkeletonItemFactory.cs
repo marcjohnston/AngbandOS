@@ -17,7 +17,7 @@ internal class CanineSkeletonSkeletonItemFactory : ItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(TildeSymbol);
+    protected override string SymbolBindingKey => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Canine Skeleton";
 
@@ -30,7 +30,7 @@ internal class CanineSkeletonSkeletonItemFactory : ItemFactory
         (1, 1)
     };
     public override int Weight => 10;
-    protected override string ItemClassName => nameof(SkeletonsItemClass);
+    protected override string ItemClassBindingKey => nameof(SkeletonsItemClass);
     public override bool EasyKnow => true;
     public override int PackSort => 40;
     protected override string BreakageChanceProbabilityExpression => "50/100";

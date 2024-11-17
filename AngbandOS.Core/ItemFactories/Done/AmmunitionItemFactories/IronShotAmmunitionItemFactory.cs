@@ -15,7 +15,7 @@ internal class IronShotAmmunitionItemFactory : ItemFactory
     public override int BonusHitRealValueMultiplier => 5;
     public override int BonusDamageRealValueMultiplier => 5;
     public override int BonusDiceRealValueMultiplier => 5;
-    protected override string SymbolName => nameof(OpenBracketSymbol);
+    protected override string SymbolBindingKey => nameof(OpenBracketSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron Shot";
 
@@ -30,8 +30,8 @@ internal class IronShotAmmunitionItemFactory : ItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 5;
-    protected override string ItemClassName => nameof(ShotsItemClass);
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override string ItemClassBindingKey => nameof(ShotsItemClass);
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (500, "5d5-5")
     };
@@ -49,7 +49,7 @@ internal class IronShotAmmunitionItemFactory : ItemFactory
     /// </summary>
     public override int EnchantmentMaximumCount => 20;
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(AmmoOfBackbitingEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
         (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),

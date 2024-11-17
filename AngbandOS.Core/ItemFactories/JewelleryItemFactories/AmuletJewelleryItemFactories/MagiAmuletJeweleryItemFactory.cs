@@ -12,7 +12,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private MagiAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(DoubleQuoteSymbol);
+    protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "the Magi";
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
@@ -23,7 +23,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     /// </summary>
     public override int TreasureRating => 25;
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(BonusArmorClass1D5P5BEnchantmentScript), nameof(BonusSearch1D5P5BEnchantmentScript), nameof(BonusSlowDigest1In3EnchantmentScript) })
     };

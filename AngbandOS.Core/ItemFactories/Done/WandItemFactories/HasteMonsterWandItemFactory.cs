@@ -17,7 +17,7 @@ internal class HasteMonsterWandItemFactory : ItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(MinusSignSymbol);
+    protected override string SymbolBindingKey => nameof(MinusSignSymbol);
     public override string Name => "Haste Monster";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
@@ -30,12 +30,12 @@ internal class HasteMonsterWandItemFactory : ItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBinderDetails => (nameof(HasteMonsterScript), "1d20+8", 0, 150);
-    protected override string ItemClassName => nameof(WandsItemClass);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(HasteMonsterScript), "1d20+8", 0, 150);
+    protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
-    protected override string? RechargeScriptName => nameof(RechargeWandScript);
+    protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);
 
-    protected override string? EatMagicScriptName => nameof(WandEatMagicScript);
+    protected override string? EatMagicScriptBindingKey => nameof(WandEatMagicScript);
 
     /// <summary>
     /// Returns true, because wands are magical and should be detected with the detect magic scroll.

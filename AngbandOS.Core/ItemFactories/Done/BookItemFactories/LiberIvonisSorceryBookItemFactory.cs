@@ -12,7 +12,7 @@ internal class LiberIvonisSorceryBookItemFactory : ItemFactory
 {
     private LiberIvonisSorceryBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
 
     /// <summary>
@@ -39,7 +39,7 @@ internal class LiberIvonisSorceryBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(SorcerySpellStasis),
         nameof(SorcerySpellTelekinesis),
@@ -53,7 +53,7 @@ internal class LiberIvonisSorceryBookItemFactory : ItemFactory
     /// <summary>
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
     /// </summary>
-    protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(SorcerySpellBooksItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 7;
 
@@ -67,7 +67,7 @@ internal class LiberIvonisSorceryBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

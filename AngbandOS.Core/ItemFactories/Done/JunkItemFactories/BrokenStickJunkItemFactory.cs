@@ -17,7 +17,7 @@ internal class BrokenStickJunkItemFactory : ItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(TildeSymbol);
+    protected override string SymbolBindingKey => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Broken Stick";
 
@@ -29,7 +29,7 @@ internal class BrokenStickJunkItemFactory : ItemFactory
     public override int DamageSides => 1;
     protected override string? DescriptionSyntax => "Broken Stick~";
     public override int Weight => 3;
-    protected override string ItemClassName => nameof(JunkItemClass);
+    protected override string ItemClassBindingKey => nameof(JunkItemClass);
     public override int PackSort => 38;
     public override bool EasyKnow => true;
     protected override string BreakageChanceProbabilityExpression => "100/100";

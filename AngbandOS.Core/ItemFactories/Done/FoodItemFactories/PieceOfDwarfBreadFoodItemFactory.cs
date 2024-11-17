@@ -12,7 +12,7 @@ internal class PieceOfDwarfBreadFoodItemFactory : ItemFactory
 {
     private PieceOfDwarfBreadFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CommaSymbol);
+    protected override string SymbolBindingKey => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Piece of Dwarf Bread";
 
@@ -33,12 +33,12 @@ internal class PieceOfDwarfBreadFoodItemFactory : ItemFactory
     /// </summary>
     public override bool IsConsumedWhenEaten => false;
 
-    public override string? EatScriptName => nameof(EatDwarfBreadScript);
-    protected override string ItemClassName => nameof(FoodItemClass);
+    public override string? EatScriptBindingKey => nameof(EatDwarfBreadScript);
+    protected override string ItemClassBindingKey => nameof(FoodItemClass);
     protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };

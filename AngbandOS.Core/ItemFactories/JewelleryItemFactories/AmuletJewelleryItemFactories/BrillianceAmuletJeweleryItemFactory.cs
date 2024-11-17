@@ -12,7 +12,7 @@ internal class BrillianceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private BrillianceAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(DoubleQuoteSymbol);
+    protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "Brilliance";
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";

@@ -17,12 +17,12 @@ internal class StupidityRingItemFactory : RingItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Stupidity";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorIntelligence5BP1EnchantmentScript) })
     };

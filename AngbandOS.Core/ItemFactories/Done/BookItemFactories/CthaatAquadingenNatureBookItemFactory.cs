@@ -12,7 +12,7 @@ internal class CthaatAquadingenNatureBookItemFactory : ItemFactory
 {
     private CthaatAquadingenNatureBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Green;
 
     /// <summary>
@@ -39,7 +39,7 @@ internal class CthaatAquadingenNatureBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(NatureSpellEarthquake),
         nameof(NatureSpellWhirlwindAttack),
@@ -50,7 +50,7 @@ internal class CthaatAquadingenNatureBookItemFactory : ItemFactory
         nameof(NatureSpellElementalBranding),
         nameof(NatureSpellNaturesWrath)
     };
-    protected override string ItemClassName => nameof(NatureSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(NatureSpellBooksItemClass);
 
     public override int PackSort => 6;
     public override bool HatesFire => true;
@@ -65,7 +65,7 @@ internal class CthaatAquadingenNatureBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

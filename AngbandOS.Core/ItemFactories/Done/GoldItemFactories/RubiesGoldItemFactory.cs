@@ -12,13 +12,13 @@ internal class RubiesGoldItemFactory : ItemFactory
 {
     private RubiesGoldItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(DollarSignSymbol);
+    protected override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "rubies";
 
     protected override string InitialGoldPiecesRollExpression => "2d24x4";
     public override int LevelNormallyFound => 1;
-    protected override string ItemClassName => nameof(GoldItemClass);
+    protected override string ItemClassBindingKey => nameof(GoldItemClass);
     public override int PackSort => 0;
     public override bool IsIgnoredByMonsters => true;
 }

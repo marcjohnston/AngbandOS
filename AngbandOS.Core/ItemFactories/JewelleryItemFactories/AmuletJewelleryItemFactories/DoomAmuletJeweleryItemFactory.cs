@@ -17,12 +17,12 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(DoubleQuoteSymbol);
+    protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "DOOM";
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(BrokenAndCursedEnchantmentScript),  nameof(PoorStatsEnchantmentScript), nameof(PoorArmorClass1D5B5EnchantmentScript) })
     };

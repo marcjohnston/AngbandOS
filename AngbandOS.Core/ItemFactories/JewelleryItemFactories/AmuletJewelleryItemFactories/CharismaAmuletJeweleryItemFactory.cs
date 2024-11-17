@@ -12,13 +12,13 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private CharismaAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(DoubleQuoteSymbol);
+    protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "Charisma";
     protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorCharisma5BP1EnchantmentScript) }),
         (new int[] {0, 1, 2}, null, new string[] { nameof(BonusCharisma5BP1EnchantmentScript) }),

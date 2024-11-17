@@ -9736,7 +9736,11 @@ public bool IsDead = false;
         item.IdentityIsStoreBought = true;
         item.IsFlavorAware = true;
         item.BecomeKnown();
-        item.GetFactory.BaseWieldSlot.AddItem(item);
+
+        if (!item.Wield())
+        {
+            throw new Exception($"The {item.GetDescription(false)} cannot be outfit because the all of the wield slots are currently in use.");
+        }
     }
 
     /// <summary>
@@ -14652,6 +14656,13 @@ public bool IsDead = false;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
     }
+
+    /// <summary>
+    /// Returns a clone of the item that has been taken off; or null, if the amount <= 0, or the item cannot be carries, for which it is gone. 
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <param name="amt"></param>
+    /// <returns></returns>
     public Item? InventoryTakeoff(Item oPtr, int amt)
     {
         string act;
@@ -14671,7 +14682,7 @@ public bool IsDead = false;
         Item? newItem = InventoryCarry(qPtr);
         if (newItem == null)
         {
-            MsgPrint("Failed to carry item.");
+            MsgPrint("Failed to carry item."); // TODO: Need to prevent this
             return null;
         }
         MsgPrint($"{act} {oName} ({newItem.Label}).");

@@ -12,7 +12,7 @@ internal class SpeedRingItemFactory : RingItemFactory
 {
     private SpeedRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Speed";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
@@ -24,7 +24,7 @@ internal class SpeedRingItemFactory : RingItemFactory
     public override int TreasureRating => 25;
 
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorSpeed1D5P5EnchantmentScript) }),
         (new int[] {0, 1, 2}, null, new string[] { nameof(BonusSpeed1D5P5BEnchantmentScript) })

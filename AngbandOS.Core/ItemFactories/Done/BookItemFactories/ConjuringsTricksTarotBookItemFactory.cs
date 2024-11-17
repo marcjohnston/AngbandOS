@@ -12,7 +12,7 @@ internal class ConjuringsTricksTarotBookItemFactory : ItemFactory
 {
     private ConjuringsTricksTarotBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "[Conjurings  Tricks]";
     protected override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
@@ -28,7 +28,7 @@ internal class ConjuringsTricksTarotBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(TarotSpellPhaseDoor),
         nameof(TarotSpellMindBlast),
@@ -39,7 +39,7 @@ internal class ConjuringsTricksTarotBookItemFactory : ItemFactory
         nameof(TarotSpellAstralSpying),
         nameof(TarotSpellTeleportAway)
     };
-    protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;
     public override bool HatesFire => true;
 
@@ -53,7 +53,7 @@ internal class ConjuringsTricksTarotBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

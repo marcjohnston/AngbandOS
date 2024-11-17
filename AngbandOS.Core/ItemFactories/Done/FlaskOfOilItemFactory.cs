@@ -16,7 +16,7 @@ internal class FlaskOfOilItemFactory : ItemFactory
     /// Returns true because a flask of oil is valid as fuel for lanterns.
     /// </summary>
     public override bool IsLanternFuel => true;
-    protected override string SymbolName => nameof(ExclamationPointSymbol);
+    protected override string SymbolBindingKey => nameof(ExclamationPointSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Flask of oil";
 
@@ -31,9 +31,9 @@ internal class FlaskOfOilItemFactory : ItemFactory
     };
     public override int InitialTurnsOfLight => 7500;
     public override int Weight => 10;
-    protected override string ItemClassName => nameof(FlasksItemClass);
+    protected override string ItemClassBindingKey => nameof(FlasksItemClass);
     public override bool EasyKnow => true;
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };

@@ -12,8 +12,8 @@ internal class EmptyBottleItemFactory : ItemFactory
 {
     private EmptyBottleItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(ExclamationPointSymbol);
-    protected override string ItemClassName => nameof(BottlesItemClass);
+    protected override string SymbolBindingKey => nameof(ExclamationPointSymbol);
+    protected override string ItemClassBindingKey => nameof(BottlesItemClass);
     public override bool EasyKnow => true;
     public override int PackSort => 39;
     public override bool HatesCold => true;

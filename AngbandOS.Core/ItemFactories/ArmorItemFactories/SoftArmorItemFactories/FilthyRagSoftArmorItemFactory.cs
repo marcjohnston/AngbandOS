@@ -12,7 +12,7 @@ internal class FilthyRagSoftArmorItemFactory : ArmorItemFactory
 {
     private FilthyRagSoftArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(OpenParenthesisSymbol);
+    protected override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Filthy Rag";
 
@@ -29,10 +29,10 @@ internal class FilthyRagSoftArmorItemFactory : ArmorItemFactory
     /// <summary>
     /// Returns the on-body inventory slot for soft armor.
     /// </summary>
-    public override int WieldSlot => InventorySlot.OnBody;
+    public override int[] WieldSlots => new int[] { InventorySlot.OnBody };
 
-    protected override string ItemClassName => nameof(SoftArmorsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
+    protected override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
     public override int PackSort => 21;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
@@ -62,7 +62,7 @@ internal class FilthyRagSoftArmorItemFactory : ArmorItemFactory
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleSoftArmorEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorSoftArmorEnchantmentScript) }),

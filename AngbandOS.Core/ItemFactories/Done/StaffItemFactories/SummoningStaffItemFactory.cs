@@ -17,7 +17,7 @@ internal class SummoningStaffItemFactory : ItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(UnderscoreSymbol);
+    protected override string SymbolBindingKey => nameof(UnderscoreSymbol);
     public override string Name => "Summoning";
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
@@ -31,11 +31,11 @@ internal class SummoningStaffItemFactory : ItemFactory
         (50, 1)
     };
     public override int Weight => 50;
-    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(SummoningScript), "1d3+1", 0, 100);
-    protected override string ItemClassName => nameof(StaffsItemClass);
-    protected override string? RechargeScriptName => nameof(RechargeStaffScript);
+    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SummoningScript), "1d3+1", 0, 100);
+    protected override string ItemClassBindingKey => nameof(StaffsItemClass);
+    protected override string? RechargeScriptBindingKey => nameof(RechargeStaffScript);
 
-    protected override string? EatMagicScriptName => nameof(StaffEatMagicScript);
+    protected override string? EatMagicScriptBindingKey => nameof(StaffEatMagicScript);
 
     
     /// <summary>

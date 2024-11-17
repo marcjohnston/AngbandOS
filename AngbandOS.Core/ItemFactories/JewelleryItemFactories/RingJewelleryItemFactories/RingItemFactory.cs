@@ -15,17 +15,7 @@ internal abstract class RingItemFactory : JewelleryItemFactory
     /// <summary>
     /// Returns either the right or left hand inventory slot for rings.
     /// </summary>
-    public override int WieldSlot
-    {
-        get
-        {
-            if (Game.GetInventoryItem(InventorySlot.RightHand) == null)
-            {
-                return InventorySlot.RightHand;
-            }
-            return InventorySlot.LeftHand;
-        }
-    }
+    public override int[] WieldSlots => new int[] { InventorySlot.RightHand, InventorySlot.LeftHand };
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.
@@ -33,20 +23,9 @@ internal abstract class RingItemFactory : JewelleryItemFactory
     public override bool IsMagical => true;
 
     public RingItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(RingsItemClass);
+    protected override string ItemClassBindingKey => nameof(RingsItemClass);
 
-    public override BaseInventorySlot BaseWieldSlot
-    {
-        get
-        {
-            BaseInventorySlot rightHand = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RightHandInventorySlot));
-            if (rightHand.Count == 0)
-            {
-                return rightHand;
-            }
-            return Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LeftHandInventorySlot));
-        }
-    }
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(RightHandInventorySlot), nameof(LeftHandInventorySlot) };
     public override int PackSort => 16;
     public override int BaseValue => 45;
     public override bool HatesElectricity => true;

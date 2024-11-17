@@ -12,7 +12,7 @@ internal class LightAndDarknessResistanceRingItemFactory : RingItemFactory
 {
     private LightAndDarknessResistanceRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Light and Darkness Resistance";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";

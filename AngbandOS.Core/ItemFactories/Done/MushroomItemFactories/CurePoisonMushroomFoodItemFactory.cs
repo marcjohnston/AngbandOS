@@ -12,7 +12,7 @@ internal class CurePoisonMushroomFoodItemFactory : ItemFactory
 {
     private CurePoisonMushroomFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CommaSymbol);
+    protected override string SymbolBindingKey => nameof(CommaSymbol);
     public override string Name => "Cure Poison";
     protected override string? DescriptionSyntax => "$Flavor$ Mushroom~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Mushroom~";
@@ -24,8 +24,8 @@ internal class CurePoisonMushroomFoodItemFactory : ItemFactory
         (10, 1)
     };
     public override int Weight => 1;
-    public override string? EatScriptName => nameof(EatCurePoisonScript);
-    protected override string ItemClassName => nameof(MushroomItemClass);
+    public override string? EatScriptBindingKey => nameof(EatCurePoisonScript);
+    protected override string ItemClassBindingKey => nameof(MushroomItemClass);
 
     /// <summary>
     /// Returns a nutritional value of 500 turns for all mushrooms.
@@ -34,7 +34,7 @@ internal class CurePoisonMushroomFoodItemFactory : ItemFactory
     protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };

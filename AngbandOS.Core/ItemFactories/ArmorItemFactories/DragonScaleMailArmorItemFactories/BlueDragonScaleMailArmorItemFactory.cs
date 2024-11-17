@@ -13,7 +13,7 @@ internal class BlueDragonScaleMailArmorItemFactory : ArmorItemFactory
     private BlueDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? ActivationName => nameof(BallOfLightning100r2Every1d450p450Activation);
-    protected override string SymbolName => nameof(OpenBraceSymbol);
+    protected override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Blue Dragon Scale Mail";
     public override int ArmorClass => 30;
@@ -38,14 +38,14 @@ internal class BlueDragonScaleMailArmorItemFactory : ArmorItemFactory
     /// <summary>
     /// Returns the on-body inventory slot for scale mail.
     /// </summary>
-    public override int WieldSlot => InventorySlot.OnBody;
+    public override int[] WieldSlots => new int[] { InventorySlot.OnBody };
 
     /// <summary>
     /// Returns a treasure rating of 30 for dragon scale mail items.
     /// </summary>
     public override int TreasureRating => 30;
-    protected override string ItemClassName => nameof(DragonScaleMailsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
+    protected override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
     public override int PackSort => 19;
     public override bool HatesAcid => true;
 
@@ -69,7 +69,7 @@ internal class BlueDragonScaleMailArmorItemFactory : ArmorItemFactory
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleDragonScaleMailEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorDragonScaleMailEnchantmentScript) }),

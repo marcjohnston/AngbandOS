@@ -13,12 +13,12 @@ internal class AccuracyRingItemFactory : RingItemFactory
     private AccuracyRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorHit1D8P10BP5EnchantmentScript) }),
         (new int[] {0, 1, 2}, null, new string[] { nameof(BonusHit1D8P10BP5EnchantmentScript) })
     };
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Accuracy";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";

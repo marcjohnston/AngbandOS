@@ -12,7 +12,7 @@ internal class EltdownShardsTarotBookItemFactory : ItemFactory
 {
     private EltdownShardsTarotBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Eltdown Shards]";
     protected override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
@@ -33,7 +33,7 @@ internal class EltdownShardsTarotBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(TarotSpellTheFool),
         nameof(TarotSpellSummonSpiders),
@@ -44,7 +44,7 @@ internal class EltdownShardsTarotBookItemFactory : ItemFactory
         nameof(TarotSpellDeathDealing),
         nameof(TarotSpellSummonReaver)
     };
-    protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;
     public override bool HatesFire => true;
 
@@ -58,7 +58,7 @@ internal class EltdownShardsTarotBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

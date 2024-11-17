@@ -12,9 +12,9 @@ internal class ProtectionRingItemFactory : RingItemFactory
 {
     private ProtectionRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorArmorClass1D8P10BP5EnchantmentScript) }),
         (new int[] {0, 1, 2}, null, new string[] { nameof(BonusArmorClass1D8P10BP5EnchantmentScript) })

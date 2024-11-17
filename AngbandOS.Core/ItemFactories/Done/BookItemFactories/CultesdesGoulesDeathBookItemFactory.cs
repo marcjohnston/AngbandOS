@@ -12,7 +12,7 @@ internal class CultesdesGoulesDeathBookItemFactory : ItemFactory
 {
     private CultesdesGoulesDeathBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Cultes des Goules]";
     protected override string? DescriptionSyntax => "Death Spellbook~ $Name$";
@@ -33,7 +33,7 @@ internal class CultesdesGoulesDeathBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(DeathSpellBerserk),
         nameof(DeathSpellInvokeSpirits),
@@ -44,7 +44,7 @@ internal class CultesdesGoulesDeathBookItemFactory : ItemFactory
         nameof(DeathSpellDarknessStorm),
         nameof(DeathSpellMassCarnage)
     };
-    protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 4;
 
@@ -58,7 +58,7 @@ internal class CultesdesGoulesDeathBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

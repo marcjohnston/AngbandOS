@@ -12,7 +12,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : ItemFactory
 {
     private PnakoticManuscriptsCorporealBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "[Pnakotic Manuscripts]";
     protected override string? DescriptionSyntax => "Corporeal Spellbook~ $Name$";
@@ -39,7 +39,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(CorporealSpellHeroism),
         nameof(CorporealSpellWraithform),
@@ -50,7 +50,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : ItemFactory
         nameof(CorporealSpellRestoreSoul),
         nameof(CorporealSpellInvulnerability)
    };
-    protected override string ItemClassName => nameof(CorporealSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(CorporealSpellBooksItemClass);
     public override int PackSort => 1;
     public override bool HatesFire => true;
 
@@ -64,7 +64,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

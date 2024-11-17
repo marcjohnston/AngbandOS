@@ -12,7 +12,7 @@ internal class HalberdPolearmWeaponItemFactory : WeaponItemFactory
 {
     private HalberdPolearmWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(ForwardSlashSymbol);
+    protected override string SymbolBindingKey => nameof(ForwardSlashSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Halberd";
 
@@ -27,12 +27,12 @@ internal class HalberdPolearmWeaponItemFactory : WeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 190;
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")
     };
 
-    protected override string ItemClassName => nameof(PolearmsItemClass);
+    protected override string ItemClassBindingKey => nameof(PolearmsItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 29;
     public override bool HatesAcid => true;
@@ -42,12 +42,12 @@ internal class HalberdPolearmWeaponItemFactory : WeaponItemFactory
     /// <summary>
     /// Returns the melee weapon inventory slot for melee weapons.
     /// </summary>
-    public override int WieldSlot => InventorySlot.MeleeWeapon;
+    public override int[] WieldSlots => new int[] { InventorySlot.MeleeWeapon };
 
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponInventorySlot) };
     public override bool GetsDamageMultiplier => true;
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(TerribleMeleeWeaponEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
         (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),

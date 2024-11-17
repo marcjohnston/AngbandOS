@@ -12,7 +12,7 @@ internal class TwoHandedFlailHaftedWeaponItemFactory : WeaponItemFactory
 {
     private TwoHandedFlailHaftedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(BackSlashSymbol);
+    protected override string SymbolBindingKey => nameof(BackSlashSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Two-Handed Flail";
 
@@ -28,12 +28,12 @@ internal class TwoHandedFlailHaftedWeaponItemFactory : WeaponItemFactory
     public override bool ShowMods => true;
     public override int Weight => 280;
     public override bool CanBeWeaponOfLaw => true;
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")
     };
 
-    protected override string ItemClassName => nameof(HaftedWeaponsItemClass);
+    protected override string ItemClassBindingKey => nameof(HaftedWeaponsItemClass);
     public override int PackSort => 30;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
@@ -41,12 +41,12 @@ internal class TwoHandedFlailHaftedWeaponItemFactory : WeaponItemFactory
     /// <summary>
     /// Returns the melee weapon inventory slot for melee weapons.
     /// </summary>
-    public override int WieldSlot => InventorySlot.MeleeWeapon;
+    public override int[] WieldSlots => new int[] { InventorySlot.MeleeWeapon };
 
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponInventorySlot) };
     public override bool GetsDamageMultiplier => true;
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(TerribleMeleeWeaponEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
         (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),

@@ -12,7 +12,7 @@ internal class BlackMassDeathBookItemFactory : ItemFactory
 {
     private BlackMassDeathBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "[Black Mass]";
     protected override string? DescriptionSyntax => "Death Spellbook~ $Name$";
@@ -28,7 +28,7 @@ internal class BlackMassDeathBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(DeathSpellOrbOfEntropy),
         nameof(DeathSpellNetherBolt),
@@ -39,7 +39,7 @@ internal class BlackMassDeathBookItemFactory : ItemFactory
         nameof(DeathSpellCarnage),
         nameof(DeathSpellRestoreLife)
     };
-    protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 4;
 
@@ -53,7 +53,7 @@ internal class BlackMassDeathBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

@@ -12,7 +12,7 @@ internal class LargeIronChestItemFactory : ChestItemFactory
 {
     private LargeIronChestItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(TildeSymbol);
+    protected override string SymbolBindingKey => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large iron chest";
 
@@ -28,7 +28,7 @@ internal class LargeIronChestItemFactory : ChestItemFactory
     public override int Weight => 1000;
     public override bool IsSmall => false;
     public override int NumberOfItemsContained => 4;
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(ChestEnchantmentScript) }),
     };

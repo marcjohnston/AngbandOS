@@ -17,12 +17,12 @@ internal class WoeRingItemFactory : RingItemFactory
     /// </summary>
     public override bool InitialBrokenStomp => true;
     public override bool IsBroken => true;
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Woe";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorCharismaAndWisdom5BP1EnchantmentScript), nameof(PoorArmorClass10BP5EnchantmentScript) })
     };

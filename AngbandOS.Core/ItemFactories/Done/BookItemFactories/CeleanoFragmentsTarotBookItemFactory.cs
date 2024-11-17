@@ -18,7 +18,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : ItemFactory
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Celeano Fragments]";
     protected override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
@@ -39,7 +39,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(TarotSpellEtherealDivination),
         nameof(TarotSpellAstralLore),
@@ -50,7 +50,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : ItemFactory
         nameof(TarotSpellSummonAncientDragon),
         nameof(TarotSpellSummonGreaterUndead)
     };
-    protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;
     public override bool HatesFire => true;
 
@@ -64,7 +64,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

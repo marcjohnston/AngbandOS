@@ -12,7 +12,7 @@ internal class CestiGlovesArmorItemFactory : ArmorItemFactory
 {
     private CestiGlovesArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CloseBraceSymbol);
+    protected override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Set of Cesti";
 
@@ -27,14 +27,14 @@ internal class CestiGlovesArmorItemFactory : ArmorItemFactory
         (50, 1)
     };
     public override int Weight => 40;
-    protected override string ItemClassName => nameof(GlovesItemClass);
+    protected override string ItemClassBindingKey => nameof(GlovesItemClass);
 
     /// <summary>
     /// Returns the hands inventory slots for gloves.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Hands;
+    public override int[] WieldSlots => new int[] { InventorySlot.Hands };
     public override int PackSort => 26;
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HandsInventorySlot));
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HandsInventorySlot) };
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
@@ -59,7 +59,7 @@ internal class CestiGlovesArmorItemFactory : ArmorItemFactory
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleGlovesEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorGlovesEnchantmentScript) }),

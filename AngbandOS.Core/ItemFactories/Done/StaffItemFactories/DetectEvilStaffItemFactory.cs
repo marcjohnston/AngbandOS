@@ -12,7 +12,7 @@ internal class DetectEvilStaffItemFactory : ItemFactory
 {
     private DetectEvilStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(UnderscoreSymbol);
+    protected override string SymbolBindingKey => nameof(UnderscoreSymbol);
     public override string Name => "Detect Evil";
     protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
@@ -27,11 +27,11 @@ internal class DetectEvilStaffItemFactory : ItemFactory
     };
     public override int Weight => 50;
 
-    protected override (string UseScriptName, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBinderDetails => (nameof(DetectEvilMonstersScript), "1d15+8", 18, 100);
-    protected override string ItemClassName => nameof(StaffsItemClass);
-    protected override string? RechargeScriptName => nameof(RechargeStaffScript);
+    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(DetectEvilMonstersScript), "1d15+8", 18, 100);
+    protected override string ItemClassBindingKey => nameof(StaffsItemClass);
+    protected override string? RechargeScriptBindingKey => nameof(RechargeStaffScript);
 
-    protected override string? EatMagicScriptName => nameof(StaffEatMagicScript);
+    protected override string? EatMagicScriptBindingKey => nameof(StaffEatMagicScript);
 
     
     /// <summary>

@@ -12,7 +12,7 @@ internal class DholChantsLifeBookItemFactory : ItemFactory
 {
     private DholChantsLifeBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Dhol Chants]";
     protected override string? DescriptionSyntax => "Life Spellbook~ $Name$";
@@ -33,7 +33,7 @@ internal class DholChantsLifeBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(LifeSpellExorcism),
         nameof(LifeSpellDispelCurse),
@@ -44,7 +44,7 @@ internal class DholChantsLifeBookItemFactory : ItemFactory
         nameof(LifeSpellHolyWord),
         nameof(LifeSpellWardingTrue)
     };
-    protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(LifeSpellBooksItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 8;
 
@@ -58,7 +58,7 @@ internal class DholChantsLifeBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

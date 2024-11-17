@@ -22,7 +22,7 @@ internal class WoodenTorchLightSourceItemFactory : ItemFactory
     /// </summary>
     public override int BurnRate => 1;
 
-    protected override string SymbolName => nameof(TildeSymbol);
+    protected override string SymbolBindingKey => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Wooden Torch";
 
@@ -99,16 +99,16 @@ internal class WoodenTorchLightSourceItemFactory : ItemFactory
     /// <summary>
     /// Returns the lightsource inventory slot for light sources.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Lightsource;
-    protected override string ItemClassName => nameof(LightSourcesItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
+    public override int[] WieldSlots => new int[] { InventorySlot.Lightsource };
+    protected override string ItemClassBindingKey => nameof(LightSourcesItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(LightsourceInventorySlot) };
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-1, -2}, null, new string[] { nameof(PoorOrbOfLightEnchantmentScript) }),
         (new int[] {1}, null, new string[] { nameof(GoodOrbOfLightEnchantmentScript) }),

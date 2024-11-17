@@ -12,7 +12,7 @@ internal class DragonHelmArmorItemFactory : ArmorItemFactory
 {
     private DragonHelmArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CloseBraceSymbol);
+    protected override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Helm";
 
@@ -40,10 +40,10 @@ internal class DragonHelmArmorItemFactory : ArmorItemFactory
     /// <summary>
     /// Returns the head inventory slot for helms.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Head;
+    public override int[] WieldSlots => new int[] { InventorySlot.Head };
 
-    protected override string ItemClassName => nameof(HelmsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
+    protected override string ItemClassBindingKey => nameof(HelmsItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadInventorySlot) };
     public override int PackSort => 25;
     public override bool HatesAcid => true;
 
@@ -69,7 +69,7 @@ internal class DragonHelmArmorItemFactory : ArmorItemFactory
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
     public override bool KindIsGood => BonusArmorClass >= 0;
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleHelmEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorHelmEnchantmentScript) }),

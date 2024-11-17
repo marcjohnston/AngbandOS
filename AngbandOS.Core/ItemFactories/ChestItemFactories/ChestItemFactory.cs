@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class ChestItemFactory : ItemFactory
 {
     public ChestItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(ChestsItemClass);
+    protected override string ItemClassBindingKey => nameof(ChestsItemClass);
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

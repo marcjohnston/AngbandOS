@@ -17,7 +17,7 @@ internal class InvocationScrollItemFactory : ItemFactory
     /// </summary>
     public override bool IsMagical => true;
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override string Name => "Invocation";
     protected override string? DescriptionSyntax => "Scroll~ titled \"$Flavor$\" of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
@@ -32,10 +32,10 @@ internal class InvocationScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBinderDetails => (nameof(InvocationIdentifableAndUsedScript), 10);
-    protected override string ItemClassName => nameof(ScrollsItemClass);
+    protected override (string, int)? ActivationBindingTuple => (nameof(InvocationIdentifableAndUsedScript), 10);
+    protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (60, "3d5-3"),
         (240, "1d5-1")

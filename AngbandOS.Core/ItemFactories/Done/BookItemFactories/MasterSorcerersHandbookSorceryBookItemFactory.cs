@@ -12,7 +12,7 @@ internal class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactory
 {
     private MasterSorcerersHandbookSorceryBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "[Master Sorcerer's Handbook]";
     protected override string? DescriptionSyntax => "Sorcery Spellbook~ $Name$";
@@ -28,7 +28,7 @@ internal class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(SorcerySpellMagicMapping),
         nameof(SorcerySpellIdentify),
@@ -42,7 +42,7 @@ internal class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactory
     /// <summary>
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
     /// </summary>
-    protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(SorcerySpellBooksItemClass);
     public override bool HatesFire => true;
     public override int PackSort => 7;
 
@@ -56,7 +56,7 @@ internal class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

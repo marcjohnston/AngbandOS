@@ -12,7 +12,7 @@ internal class BasicChiFlowCorporealBookItemFactory : ItemFactory
 {
     private BasicChiFlowCorporealBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "[Basic Chi Flow]";
     protected override string? DescriptionSyntax => "Corporeal Spellbook~ $Name$";
@@ -28,7 +28,7 @@ internal class BasicChiFlowCorporealBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(CorporealSpellBlink),
         nameof(CorporealSpellBravery),
@@ -39,7 +39,7 @@ internal class BasicChiFlowCorporealBookItemFactory : ItemFactory
         nameof(CorporealSpellCureLightWounds),
         nameof(CorporealSpellSatisfyHunger)
     };
-    protected override string ItemClassName => nameof(CorporealSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(CorporealSpellBooksItemClass);
 
     public override int PackSort => 1;
     public override bool HatesFire => true;
@@ -54,7 +54,7 @@ internal class BasicChiFlowCorporealBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

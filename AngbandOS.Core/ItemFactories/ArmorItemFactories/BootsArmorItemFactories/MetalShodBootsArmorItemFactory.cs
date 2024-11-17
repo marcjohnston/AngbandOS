@@ -12,7 +12,7 @@ internal class MetalShodBootsArmorItemFactory : ArmorItemFactory
 {
     private MetalShodBootsArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CloseBraceSymbol);
+    protected override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Pair of Metal Shod Boots";
 
@@ -27,7 +27,7 @@ internal class MetalShodBootsArmorItemFactory : ArmorItemFactory
         (20, 1)
     };
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] { -2 }, null, new string[] { nameof(TerribleBootsEnchantmentScript) }),
         (new int[] { -1, -2 }, null, new string[] { nameof(PoorBootsEnchantmentScript) }),
@@ -40,10 +40,10 @@ internal class MetalShodBootsArmorItemFactory : ArmorItemFactory
     /// <summary>
     /// Returns the feet inventory slot for boots.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Feet;
+    public override int[] WieldSlots => new int[] { InventorySlot.Feet };
 
-    protected override string ItemClassName => nameof(BootsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(FeetInventorySlot));
+    protected override string ItemClassBindingKey => nameof(BootsItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(FeetInventorySlot) };
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
     public override int PackSort => 27;

@@ -12,7 +12,7 @@ internal class PieceOfWarpstoneFoodItemFactory : ItemFactory
 {
     private PieceOfWarpstoneFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(AsteriskSymbol);
+    protected override string SymbolBindingKey => nameof(AsteriskSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Piece of Warpstone";
 
@@ -26,17 +26,17 @@ internal class PieceOfWarpstoneFoodItemFactory : ItemFactory
         (50, 1)
     };
     public override int Weight => 1;
-    public override string? EatScriptName => nameof(EatWarpstoneScript);
+    public override string? EatScriptBindingKey => nameof(EatWarpstoneScript);
 
     /// <summary>
     /// Returns true because warpstones vanish when a skeleton tries to eat it.
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
-    protected override string ItemClassName => nameof(FoodItemClass);
+    protected override string ItemClassBindingKey => nameof(FoodItemClass);
     protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };

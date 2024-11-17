@@ -12,7 +12,7 @@ internal class IronSpikeItemFactory : ItemFactory
 {
     private IronSpikeItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(TildeSymbol);
+    protected override string SymbolBindingKey => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Iron Spike";
 
@@ -26,9 +26,9 @@ internal class IronSpikeItemFactory : ItemFactory
         (1, 1)
     };
     public override int Weight => 10;
-    protected override string ItemClassName => nameof(SpikesItemClass);
+    protected override string ItemClassBindingKey => nameof(SpikesItemClass);
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (500, "5d5-5")
     };

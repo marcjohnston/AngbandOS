@@ -12,7 +12,7 @@ internal class PickDiggingWeaponItemFactory : WeaponItemFactory
 {
     private PickDiggingWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(BackSlashSymbol);
+    protected override string SymbolBindingKey => nameof(BackSlashSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Pick";
 
@@ -33,22 +33,22 @@ internal class PickDiggingWeaponItemFactory : WeaponItemFactory
     /// <summary>
     /// Returns the digger inventory slot for shovels.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Digger;
-    protected override string ItemClassName => nameof(DiggersItemClass);
+    public override int[] WieldSlots => new int[] { InventorySlot.Digger };
+    protected override string ItemClassBindingKey => nameof(DiggersItemClass);
     public override bool CanTunnel => true;
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")
     };
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(TerribleDiggerEnchantmentScript), nameof(TerribleTunnelEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
         (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(TerribleTunnelEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
         (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatAmmoEnchantmentScript) })
     };
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(DiggerInventorySlot));
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(DiggerInventorySlot) };
     public override int PackSort => 31;
     public override bool GetsDamageMultiplier => true;
 }

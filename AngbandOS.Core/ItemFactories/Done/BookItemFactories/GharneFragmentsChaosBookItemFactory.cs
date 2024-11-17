@@ -12,7 +12,7 @@ internal class GharneFragmentsChaosBookItemFactory : ItemFactory
 {
     private GharneFragmentsChaosBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[G'harne Fragments]";
     protected override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
@@ -33,7 +33,7 @@ internal class GharneFragmentsChaosBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(ChaosSpellPolymorphOther),
         nameof(ChaosSpellChainLightning),
@@ -44,7 +44,7 @@ internal class GharneFragmentsChaosBookItemFactory : ItemFactory
         nameof(ChaosSpellChaosBranding),
         nameof(ChaosSpellSummonDemon)
     };
-    protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(ChaosSpellBooksItemClass);
     public override int PackSort => 5;
     public override bool HatesFire => true;
 
@@ -58,7 +58,7 @@ internal class GharneFragmentsChaosBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

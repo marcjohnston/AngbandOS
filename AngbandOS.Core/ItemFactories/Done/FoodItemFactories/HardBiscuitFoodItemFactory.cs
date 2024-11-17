@@ -12,7 +12,7 @@ internal class HardBiscuitFoodItemFactory : ItemFactory
 {
     private HardBiscuitFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CommaSymbol);
+    protected override string SymbolBindingKey => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Hard Biscuit";
 
@@ -20,18 +20,18 @@ internal class HardBiscuitFoodItemFactory : ItemFactory
     protected override string? DescriptionSyntax => "Hard Biscuit~";
     public override int InitialNutritionalValue => 500;
     public override int Weight => 2;
-    public override string? EatScriptName => nameof(EatGoodFoodScript);
+    public override string? EatScriptBindingKey => nameof(EatGoodFoodScript);
 
     /// <summary>
     /// Returns true because biscuits vanish when a skeleton tries to eat it.
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
 
-    protected override string ItemClassName => nameof(FoodItemClass);
+    protected override string ItemClassBindingKey => nameof(FoodItemClass);
     protected override string BreakageChanceProbabilityExpression => "100/100";
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")
     };

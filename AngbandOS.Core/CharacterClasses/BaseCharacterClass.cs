@@ -477,7 +477,7 @@ internal abstract class BaseCharacterClass : IGetKey
 
             // Create an item from the factory.
             Item item = new Item(Game, outfitItemFactory);
-            if (outfitItemFactory.AimingDetails != null)
+            if (outfitItemFactory.AimingTuple != null)
             {
                 item.WandChargesRemaining = 1;
             }

@@ -172,7 +172,7 @@ internal sealed class Item : IComparable<Item>
     public int MissileDamageMultiplier { get; private set; }
 
     [Obsolete("Use GetFactory().BaseInventorySlot")]
-    public int WieldSlot { get; private set; }
+    public int[] WieldSlots { get; private set; }
 
     public bool CanBeRead { get; private set; }
     public IScriptItemInt? RechargeScript { get; private set; }
@@ -406,6 +406,19 @@ internal sealed class Item : IComparable<Item>
     public int Y;
     private readonly Game Game;
 
+    public bool Wield()
+    {
+        foreach (BaseInventorySlot baseInventorySlot in GetFactory.BaseWieldSlots)
+        {
+            if (baseInventorySlot.Count == 0)
+            {
+                baseInventorySlot.AddItem(this);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Item(Game game, ItemFactory factory)
     {
         Game = game;
@@ -447,17 +460,17 @@ internal sealed class Item : IComparable<Item>
         IdentityCanBeSensed = _factory.IdentityCanBeSensed;
         IsContainer = _factory.IsContainer;
         IsArmor = _factory.IsArmor;
-        WieldSlot = _factory.WieldSlot;
+        WieldSlots = _factory.WieldSlots;
         CanBeRead = _factory.CanBeRead;
         RechargeScript = _factory.RechargeScript;
         CanProjectArrows = _factory.CanProjectArrows;
         IsWeapon = _factory.IsWeapon;
         IsIgnoredByMonsters = _factory.IsIgnoredByMonsters;
-        QuaffDetails = _factory.QuaffDetails;
-        ZapDetails = _factory.ZapDetails;
-        UseDetails = _factory.UseDetails;
-        AimingDetails = _factory.AimingDetails;
-        ActivationDetails = _factory.ActivationDetails;
+        QuaffDetails = _factory.QuaffTuple;
+        ZapDetails = _factory.ZapTuple;
+        UseDetails = _factory.UseTuple;
+        AimingDetails = _factory.AimingTuple;
+        ActivationDetails = _factory.ActivationTuple;
         BreakageChanceProbability = _factory.BreakageChanceProbability;
         MissileDamageMultiplier = _factory.MissileDamageMultiplier;
         CanBeEatenByMonsters = _factory.CanBeEatenByMonsters;
@@ -502,14 +515,14 @@ internal sealed class Item : IComparable<Item>
         TreasureRating = _factory.TreasureRating;
         Realm = _factory.Realm;
 
-        if (_factory.AimingDetails != null)
+        if (_factory.AimingTuple != null)
         {
-            WandChargesRemaining = _factory.AimingDetails.Value.InitialChargesCountRoll.Get(Game.UseRandom);
+            WandChargesRemaining = _factory.AimingTuple.Value.InitialChargesCountRoll.Get(Game.UseRandom);
         }
 
-        if (_factory.UseDetails != null)
+        if (_factory.UseTuple != null)
         {
-            StaffChargesRemaining = _factory.UseDetails.Value.InitialCharges.Get(Game.UseRandom);
+            StaffChargesRemaining = _factory.UseTuple.Value.InitialCharges.Get(Game.UseRandom);
         }
 
     }
@@ -2364,10 +2377,10 @@ internal sealed class Item : IComparable<Item>
             }
         }
 
-        if (_factory.Enchantments != null)
+        if (_factory.EnchantmentTuples != null)
         {
             bool isStoreStock = !usedOkay;
-            foreach ((int[]? Powers, bool? StoreStock, IEnhancementScript[] Scripts) in _factory.Enchantments)
+            foreach ((int[]? Powers, bool? StoreStock, IEnhancementScript[] Scripts) in _factory.EnchantmentTuples)
             {
                 if ((Powers == null || Powers.Contains(power)) && (StoreStock == null || StoreStock == isStoreStock))
                 {

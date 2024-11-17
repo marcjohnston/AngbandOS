@@ -12,7 +12,7 @@ internal class IlluminationRodItemFactory : ItemFactory
 {
     private IlluminationRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(MinusSignSymbol);
+    protected override string SymbolBindingKey => nameof(MinusSignSymbol);
     public override string Name => "Illumination";
     protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Rod~";
@@ -26,12 +26,12 @@ internal class IlluminationRodItemFactory : ItemFactory
         (20, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBinderDetails => (nameof(IlluminationIdentifiedAndUsedScriptItemAndDirection), "1d11+10", false, 250);
-    protected override string ItemClassName => nameof(RodsItemClass);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(IlluminationIdentifiedAndUsedScriptItemAndDirection), "1d11+10", false, 250);
+    protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
-    protected override string? RechargeScriptName => nameof(RechargeRodScript);
+    protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);
 
-    protected override string? EatMagicScriptName => nameof(RodEatMagicScript);
+    protected override string? EatMagicScriptBindingKey => nameof(RodEatMagicScript);
 
     /// <summary>
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.

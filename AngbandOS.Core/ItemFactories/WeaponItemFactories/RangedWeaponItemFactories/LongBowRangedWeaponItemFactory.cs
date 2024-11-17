@@ -12,12 +12,12 @@ internal class LongBowRangedWeaponItemFactory : RangedWeaponItemFactory
 {
     private LongBowRangedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(CloseBracketSymbol);
+    protected override string SymbolBindingKey => nameof(CloseBracketSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Long Bow";
 
     public override int Cost => 120;
-    protected override string ItemClassName => nameof(BowItemClass);
+    protected override string ItemClassBindingKey => nameof(BowItemClass);
     protected override string? DescriptionSyntax => "Long Bow~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
@@ -27,7 +27,7 @@ internal class LongBowRangedWeaponItemFactory : RangedWeaponItemFactory
     public override bool ShowMods => true;
     public override int Weight => 40;
     public override int MissileDamageMultiplier => 3;
-    protected override string[]? AmmunitionItemFactoryNames => new string[]
+    protected override string[]? AmmunitionItemFactoryBindingKeys => new string[]
     {
         nameof(WoodenArrowAmmunitionItemFactory),
         nameof(SeekerArrowAmmunitionItemFactory)
@@ -36,16 +36,16 @@ internal class LongBowRangedWeaponItemFactory : RangedWeaponItemFactory
     /// <summary>
     /// Returns the ranged weapon inventory slot for bows.
     /// </summary>
-    public override int WieldSlot => InventorySlot.RangedWeapon;
+    public override int[] WieldSlots => new int[] { InventorySlot.RangedWeapon };
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")
     };
 
     public override bool IsRangedWeapon => true;
 
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
    {
         (new int[] {-2}, null, new string[] { nameof(TerribleHit1D5P5BP10BEnchantmentScript), nameof(TerribleDamage1D5P5BP10BEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
         (new int[] {-1}, null, new string[] { nameof(PoorHit1D5P5BEnchantmentScript), nameof(PoorDamage1D5P5BEnchantmentScript), nameof(CursedWeaponEnchantmentScript) }),
@@ -53,7 +53,7 @@ internal class LongBowRangedWeaponItemFactory : RangedWeaponItemFactory
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatRangedWeaponEnchantmentScript) })
    };
 
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(RangedWeaponInventorySlot) };
     public override bool CanApplyBlowsBonus => true;
 
     public override int PackSort => 32;

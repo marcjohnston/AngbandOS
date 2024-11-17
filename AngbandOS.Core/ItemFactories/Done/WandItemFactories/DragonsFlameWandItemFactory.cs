@@ -12,7 +12,7 @@ internal class DragonsFlameWandItemFactory : ItemFactory
 {
     private DragonsFlameWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(MinusSignSymbol);
+    protected override string SymbolBindingKey => nameof(MinusSignSymbol);
     public override string Name => "Dragon's Flame";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
@@ -30,12 +30,12 @@ internal class DragonsFlameWandItemFactory : ItemFactory
         (50, 4)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBinderDetails => (nameof(FireBall100R3IdentifableDirectionalScript), "1d3+1", 120, 150);
-    protected override string ItemClassName => nameof(WandsItemClass);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(FireBall100R3IdentifableDirectionalScript), "1d3+1", 120, 150);
+    protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
-    protected override string? RechargeScriptName => nameof(RechargeWandScript);
+    protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);
 
-    protected override string? EatMagicScriptName => nameof(WandEatMagicScript);
+    protected override string? EatMagicScriptBindingKey => nameof(WandEatMagicScript);
 
     /// <summary>
     /// Returns true, because wands are magical and should be detected with the detect magic scroll.

@@ -12,7 +12,7 @@ internal class CardMasteryTarotBookItemFactory : ItemFactory
 {
     private CardMasteryTarotBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "[Card Mastery]";
     protected override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
@@ -29,7 +29,7 @@ internal class CardMasteryTarotBookItemFactory : ItemFactory
     public override bool KindIsGood => false;
 
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(TarotSpellSummonObject),
         nameof(TarotSpellSummonAnimal),
@@ -40,7 +40,7 @@ internal class CardMasteryTarotBookItemFactory : ItemFactory
         nameof(TarotSpellWordOfRecall),
         nameof(TarotSpellBanish)
     };
-    protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;
     public override bool HatesFire => true;
 
@@ -54,7 +54,7 @@ internal class CardMasteryTarotBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")

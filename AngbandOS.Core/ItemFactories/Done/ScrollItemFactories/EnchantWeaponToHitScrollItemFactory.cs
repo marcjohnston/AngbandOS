@@ -17,7 +17,7 @@ internal class EnchantWeaponToHitScrollItemFactory : ItemFactory
     /// </summary>
     public override bool IsMagical => true;
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override string Name => "Enchant Weapon To-Hit";
     protected override string? DescriptionSyntax => "Scroll~ titled \"$Flavor$\" of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
@@ -30,10 +30,10 @@ internal class EnchantWeaponToHitScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBinderDetails => (nameof(EnchantWeaponToHit1IdentifableAndUsedScript), 10);
-    protected override string ItemClassName => nameof(ScrollsItemClass);
+    protected override (string, int)? ActivationBindingTuple => (nameof(EnchantWeaponToHit1IdentifableAndUsedScript), 10);
+    protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (60, "3d5-3"),
         (240, "1d5-1")

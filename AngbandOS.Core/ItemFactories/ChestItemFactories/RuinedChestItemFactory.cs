@@ -17,7 +17,7 @@ internal class RuinedChestItemFactory : ChestItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(TildeSymbol);
+    protected override string SymbolBindingKey => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Ruined chest";
 
@@ -29,7 +29,7 @@ internal class RuinedChestItemFactory : ChestItemFactory
     public override int Weight => 250;
     public override bool IsSmall => true;
     public override int NumberOfItemsContained => 0;
-    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBinders => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(ChestEnchantmentScript) }),
     };

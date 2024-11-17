@@ -17,7 +17,7 @@ internal class SleepPotionItemFactory : ItemFactory
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    protected override string SymbolName => nameof(ExclamationPointSymbol);
+    protected override string SymbolBindingKey => nameof(ExclamationPointSymbol);
     public override string Name => "Sleep";
     protected override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
@@ -31,16 +31,16 @@ internal class SleepPotionItemFactory : ItemFactory
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 
-    protected override (string, string?, int)? QuaffBinderDetails => (nameof(SleepScript), nameof(OldSleepProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(SleepScript), nameof(OldSleepProjectileUnfriendlyScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true; // TODO: This should be a built-in function depending on what the potion does
 
-    protected override string ItemClassName => nameof(PotionsItemClass);
+    protected override string ItemClassBindingKey => nameof(PotionsItemClass);
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (60, "3d5-3"),
         (240, "1d5-1")

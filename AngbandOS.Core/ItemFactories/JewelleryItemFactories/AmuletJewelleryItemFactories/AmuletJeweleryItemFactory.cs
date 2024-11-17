@@ -16,15 +16,15 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
     /// <summary>
     /// Returns the neck inventory slot for amulets.
     /// </summary>
-    public override int WieldSlot => InventorySlot.Neck;
+    public override int[] WieldSlots => new int[] { InventorySlot.Neck };
 
     /// <summary>
     /// Returns true, because amulets are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
 
-    protected override string ItemClassName => nameof(AmuletsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(NeckInventorySlot));
+    protected override string ItemClassBindingKey => nameof(AmuletsItemClass);
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(NeckInventorySlot) };
     public override int PackSort => 17;
     public override int BaseValue => 45;
     public override ColorEnum Color => ColorEnum.Orange;

@@ -12,7 +12,7 @@ internal class PowerRingItemFactory : RingItemFactory
 {
     private PowerRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(EqualSignSymbol);
+    protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";

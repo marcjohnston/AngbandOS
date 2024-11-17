@@ -12,7 +12,7 @@ internal class MasteryChaosBookItemFactory : ItemFactory
 {
     private MasteryChaosBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string SymbolName => nameof(QuestionMarkSymbol);
+    protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "[Chaos Mastery]";
     protected override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
@@ -28,7 +28,7 @@ internal class MasteryChaosBookItemFactory : ItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
 
-    protected override string[] SpellNames => new string[]
+    protected override string[] SpellBindingKeys => new string[]
     {
         nameof(ChaosSpellWonder),
         nameof(ChaosSpellChaosBolt),
@@ -39,7 +39,7 @@ internal class MasteryChaosBookItemFactory : ItemFactory
         nameof(ChaosSpellWordOfDestruction),
         nameof(ChaosSpellInvokeChaos)
     };
-    protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
+    protected override string ItemClassBindingKey => nameof(ChaosSpellBooksItemClass);
     public override int PackSort => 5;
     public override bool HatesFire => true;
 
@@ -53,7 +53,7 @@ internal class MasteryChaosBookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),
         (500, "1d3-1")
