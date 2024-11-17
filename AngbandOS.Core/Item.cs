@@ -1327,11 +1327,6 @@ internal sealed class Item : IComparable<Item>
             info[i++] = mergedCharacteristics.Activation.Description;
             info[i++] = "...if it is being worn.";
         }
-        string categoryIdentity = _factory.Identify(this);
-        if (categoryIdentity != null)
-        {
-            info[i++] = categoryIdentity;
-        }
         if (mergedCharacteristics.ArtifactBias != null)
         {
             info[i++] = $"It has an affinity for {mergedCharacteristics.ArtifactBias.AffinityName.ToLower()}.";

@@ -1444,12 +1444,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     [Obsolete("The enchanting of an item is now being performed by the Item.")]
     public virtual void EnchantItem(Item item, bool usedOkay, int level, int power) { } // TODO: Needs to be built into the new Item(), should be renamed .. the Store is needed for FuelSources to be full not used
 
-    /// <summary>
-    /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
-    /// </summary>
-    [Obsolete("The Identify is being handled by the Item and cannot be provided here in the factory.  Current usage is limited to existing overrides.")]
-    public virtual string Identify(Item item) => null;
-
     public virtual void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {
         if (characteristics.ArtifactBias != null)
