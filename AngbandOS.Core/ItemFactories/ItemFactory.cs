@@ -1407,10 +1407,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     {
         Game.MsgPrint("Your light cannot be refilled.");
     }
-    /// <summary>
-    /// Applies random flavor visuals to the items.  This method is called if the HasFlavor property returns true when creating a new game.
-    /// </summary>
-    public virtual void ApplyFlavorVisuals() { }
 
     /// <summary>
     /// Returns true, if the item can be stomped.  Returns the stompable status based on the item quality rating, by default.
