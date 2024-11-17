@@ -1450,13 +1450,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     [Obsolete("The Identify is being handled by the Item and cannot be provided here in the factory.  Current usage is limited to existing overrides.")]
     public virtual string Identify(Item item) => null;
 
-    /// <summary>
-    /// Applies a poor random rare characteristics to an item of armor.  Does nothing by default.  Various derived class may override
-    /// this method and apply a random poor characteristic to the item.
-    /// </summary>
-    /// <param name="item"></param>
-    protected virtual void ApplyRandomPoorRareCharacteristics(Item item) { }
-
     public virtual void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {
         if (characteristics.ArtifactBias != null)
