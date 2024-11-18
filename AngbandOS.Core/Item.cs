@@ -150,6 +150,12 @@ internal sealed class Item : IComparable<Item>
     #endregion
 
     #region API Methods
+    [Obsolete("Use new Item(Game, Item)")]
+    public Item Clone(int? newCount = null) // TODO: Can this be a constructor?
+    {
+        return new Item(Game, this);
+    }
+
     /// <summary>
     /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
     /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
@@ -2673,6 +2679,59 @@ internal sealed class Item : IComparable<Item>
     #endregion
 
     #region Constructors
+    public Item(Game game, Item cloneFrom) : this(game, cloneFrom._factory)
+    {
+        // TODO: There is no way to ensure a cloned gets all of the properties
+        IdentSense = cloneFrom.IdentSense;
+        IdentFixed = cloneFrom.IdentFixed;
+        IdentEmpty = cloneFrom.IdentEmpty;
+        IdentityIsKnown = cloneFrom.IdentityIsKnown;
+        IdentityIsStoreBought = cloneFrom.IdentityIsStoreBought;
+        IdentMental = cloneFrom.IdentMental;
+        FixedArtifact  = cloneFrom.FixedArtifact;
+        RareItem = cloneFrom.RareItem;
+        Characteristics  = cloneFrom.Characteristics;
+        RandomArtifact  = cloneFrom.RandomArtifact;
+        RandomPower  = cloneFrom.RandomPower;
+        Count = cloneFrom.Count;
+        Discount = cloneFrom.Discount;
+        HoldingMonsterIndex = cloneFrom.HoldingMonsterIndex;
+        Inscription = cloneFrom.Inscription;
+        WasNoticed  = cloneFrom.WasNoticed;
+        ActivationRechargeTimeRemaining = cloneFrom.ActivationRechargeTimeRemaining;
+        ContainerTraps  = cloneFrom.ContainerTraps;
+        LevelOfObjectsInContainer  = cloneFrom.LevelOfObjectsInContainer;
+        ContainerIsOpen  = cloneFrom.ContainerIsOpen;
+        StaffChargesRemaining = cloneFrom.StaffChargesRemaining;
+        WandChargesRemaining  = cloneFrom.WandChargesRemaining;
+        RodRechargeTimeRemaining  = cloneFrom.RodRechargeTimeRemaining;
+        X = cloneFrom.X;
+        Y = cloneFrom.Y;
+        TurnsOfLightRemaining = cloneFrom.TurnsOfLightRemaining;
+        GoldPieces = cloneFrom.GoldPieces;
+        RandomArtifactName  = cloneFrom.RandomArtifactName;
+        BonusHit = cloneFrom.BonusHit;
+        BonusDamage = cloneFrom.BonusDamage;
+        BonusArmorClass = cloneFrom.BonusArmorClass;
+        ArmorClass = cloneFrom.ArmorClass;
+        DamageDice = cloneFrom.DamageDice;
+        DamageSides = cloneFrom.DamageSides;
+        BonusStrength = cloneFrom.BonusStrength;
+        BonusIntelligence = cloneFrom.BonusIntelligence;
+        BonusWisdom = cloneFrom.BonusWisdom;
+        BonusDexterity = cloneFrom.BonusDexterity;
+        BonusConstitution = cloneFrom.BonusConstitution;
+        BonusCharisma = cloneFrom.BonusCharisma;
+        BonusStealth = cloneFrom.BonusStealth;
+        BonusSearch = cloneFrom.BonusSearch;
+        BonusInfravision = cloneFrom.BonusInfravision;
+        BonusTunnel = cloneFrom.BonusTunnel;
+        BonusAttacks = cloneFrom.BonusAttacks;
+        BonusSpeed = cloneFrom.BonusSpeed;
+        IsCursed = cloneFrom.IsCursed;
+        IsBroken = cloneFrom.IsBroken;
+    }
+
     public Item(Game game, ItemFactory factory)
     {
         Game = game;
@@ -2716,66 +2775,5 @@ internal sealed class Item : IComparable<Item>
             StaffChargesRemaining = _factory.UseTuple.Value.InitialCharges.Get(Game.UseRandom);
         }
     }
-
-    // TODO: There is no way to ensure a cloned gets all of the properties
-    public Item Clone(int? newCount = null) // TODO: Can this be a constructor?
-    {
-        // TODO: The assignments below need to be performed by each factory.  This can be integrated into the CreateItem.
-        Item clonedItem = new Item(Game, _factory); // TODO: This logically doesn't make sense ... all of the data is now in the item.
-
-        clonedItem.ArmorClass = ArmorClass;
-        clonedItem.Characteristics.Copy(Characteristics);
-        clonedItem.RandomArtifactName = RandomArtifactName;
-        clonedItem.DamageDice = DamageDice;
-        clonedItem.Discount = Discount;
-        clonedItem.DamageSides = DamageSides;
-        clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
-        clonedItem.RandomPower = RandomPower;
-
-        clonedItem.IdentSense = IdentSense;
-        clonedItem.IdentFixed = IdentFixed;
-        clonedItem.IdentEmpty = IdentEmpty;
-        clonedItem.IdentityIsKnown = IdentityIsKnown;
-        clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
-        clonedItem.IdentMental = IdentMental;
-        clonedItem.IsCursed = IsCursed;
-        clonedItem.IsBroken = IsBroken;
-
-        clonedItem.X = X;
-        clonedItem.Y = Y;
-        clonedItem.WasNoticed = WasNoticed;
-        clonedItem.FixedArtifact = FixedArtifact;
-        clonedItem.RareItem = RareItem;
-        clonedItem.Inscription = Inscription;
-        clonedItem.Count = newCount ?? Count;
-        clonedItem.BonusStrength = BonusStrength;
-        clonedItem.BonusIntelligence = BonusIntelligence;
-        clonedItem.BonusWisdom = BonusWisdom;
-        clonedItem.BonusDexterity = BonusDexterity;
-        clonedItem.BonusConstitution = BonusConstitution;
-        clonedItem.BonusCharisma = BonusCharisma;
-        clonedItem.BonusStealth = BonusStealth;
-        clonedItem.BonusSearch = BonusSearch;
-        clonedItem.BonusInfravision = BonusInfravision;
-        clonedItem.BonusTunnel = BonusTunnel;
-        clonedItem.BonusAttacks = BonusAttacks;
-        clonedItem.BonusSpeed = BonusSpeed;
-        clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
-        clonedItem.NutritionalValue = NutritionalValue;
-        clonedItem.ActivationRechargeTimeRemaining = ActivationRechargeTimeRemaining;
-        clonedItem.ContainerIsOpen = ContainerIsOpen;
-        clonedItem.LevelOfObjectsInContainer = LevelOfObjectsInContainer;
-        clonedItem.ContainerTraps = ContainerTraps;
-        clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
-        clonedItem.StaffChargesRemaining = StaffChargesRemaining;
-        clonedItem.WandChargesRemaining = WandChargesRemaining;
-        clonedItem.GoldPieces = GoldPieces;
-        clonedItem.BonusArmorClass = BonusArmorClass;
-        clonedItem.BonusDamage = BonusDamage;
-        clonedItem.BonusHit = BonusHit;
-        clonedItem.Weight = Weight;
-        return clonedItem;
-    }
-
     #endregion
 }
