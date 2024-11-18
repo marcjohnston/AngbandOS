@@ -43,53 +43,7 @@ internal class WoodenTorchLightSourceItemFactory : ItemFactory
     };
     public override int InitialTurnsOfLight => 4000;
     public override int Weight => 30;
-    /// <summary>
-    /// Refill a torch from another torch
-    /// </summary>
-    /// <param name="itemIndex"> The inventory index of the fuel </param>
-    public override void Refill(Item item)
-    {
-        // Get an item if we don't already have one
-        if (!Game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, base.Game.SingletonRepository.Get<ItemFilter>(nameof(ItemFilters.TorchFuelItemFilter))))
-        {
-            Game.MsgPrint("You have no extra torches.");
-            return;
-        }
-        if (fuelSource == null)
-        {
-            return;
-        }
-
-        // Check that our fuel is suitable
-        if (!Game.ItemMatchesFilter(fuelSource, base.Game.SingletonRepository.Get<ItemFilter>(nameof(ItemFilters.TorchFuelItemFilter))))
-        {
-            Game.MsgPrint("You can't refill a torch with that!");
-            return;
-        }
-        // Refueling takes half a turn
-        Game.EnergyUse = 50;
-
-        // Add the fuel
-        item.TurnsOfLightRemaining += fuelSource.TurnsOfLightRemaining + 5;
-        Game.MsgPrint("You combine the torches.");
-
-        // Check for overfilling
-        if (item.TurnsOfLightRemaining >= Constants.FuelTorch)
-        {
-            item.TurnsOfLightRemaining = Constants.FuelTorch;
-            Game.MsgPrint("Your torch is fully fueled.");
-        }
-        else
-        {
-            Game.MsgPrint("Your torch glows more brightly.");
-        }
-
-        // Update the player's inventory
-        fuelSource.ItemIncrease(-1);
-        fuelSource.ItemDescribe();
-        fuelSource.ItemOptimize();
-        base.Game.SingletonRepository.Get<FlaggedAction>(nameof(FlaggedActions.UpdateTorchRadiusFlaggedAction)).Set();
-    }
+    protected override string? RefillScriptBindingKey => nameof(RefillLightSourceFromTorchScript);
 
     /// <summary>
     /// Returns a radius of 1 for a wooden torch.

@@ -51,52 +51,8 @@ internal class BrassLanternLightSourceItemFactory : ItemFactory
     /// </summary>
     public override int Radius => 2;
 
-    /// <summary>
-    /// Refill a lamp
-    /// </summary>
-    /// <param name="itemIndex"> The inventory index of the fuel </param>
-    public override void Refill(Item item)
-    {
-        // Get an item if we don't already have one
-        if (!Game.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(LanternFuelItemFilter))))
-        {
-            Game.MsgPrint("You have no flasks of oil.");
-            return;
-        }
+    protected override string? RefillScriptBindingKey => nameof(RefillLightSourceFromFlaskScript);
 
-        // Get the item from the inventory or from the floor.
-        if (fuelSource == null)
-        {
-            return;
-        }
-
-        // Make sure our item is suitable fuel
-        if (!Game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.Get<ItemFilter>(nameof(LanternFuelItemFilter))))
-        {
-            Game.MsgPrint("You can't refill a lantern from that!");
-            return;
-        }
-        // Refilling takes half a turn
-        Game.EnergyUse = 50;
-
-        // Add the fuel
-        item.TurnsOfLightRemaining += fuelSource.TurnsOfLightRemaining;
-        Game.MsgPrint("You fuel your lamp.");
-
-        // Check for overfilling
-        if (item.TurnsOfLightRemaining >= Constants.FuelLamp)
-        {
-            item.TurnsOfLightRemaining = Constants.FuelLamp;
-            Game.MsgPrint("Your lamp is full.");
-        }
-
-        // Update the inventory
-        fuelSource.ItemIncrease(-1);
-        fuelSource.ItemDescribe();
-        fuelSource.ItemOptimize();
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-    }
- 
     protected override string ItemClassBindingKey => nameof(LightSourcesItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(LightsourceInventorySlot) };
 

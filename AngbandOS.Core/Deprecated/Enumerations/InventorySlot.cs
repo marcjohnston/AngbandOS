@@ -21,11 +21,10 @@ internal static class InventorySlot
     public const int Neck = 32; // DONE
     public const int RightHand = 31; // DONE
     public const int Pack = -1;  // DONE
-
+    public const int RangedWeapon = 28; // DONE
 
     //WIP
     public const int MeleeWeapon = 27; // This is start inventory slot where the equipment items are stored.
     public const int PackCount = 26; // This is the last pack item slot.
-    public const int RangedWeapon = 28; // DONE
     public const int Total = 40; // This is the end of the inventory slots.  This slot is not used.
 }
