@@ -2674,7 +2674,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        switch (Game.DieRoll(item.GetFactory.CanBeWeaponOfLaw || item.GetFactory.CanBeWeaponOfSharpness ? 42 : 40))
+        switch (Game.DieRoll(item.CanBeWeaponOfLaw || item.CanBeWeaponOfSharpness ? 42 : 40))
         {
             case 1:
                 item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponElderSignInscribedRareItem));
@@ -2818,7 +2818,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 {
                     item.Characteristics.BrandPois = true;
                 }
-                if (item.GetFactory.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
+                if (item.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
                 {
                     item.Characteristics.Vorpal = true;
                 }
@@ -2850,7 +2850,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 break;
             case 41:
             case 42:
-                if (item.GetFactory.CanBeWeaponOfSharpness)
+                if (item.CanBeWeaponOfSharpness)
                 {
                     item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSharpnessRareItem));
                     item.BonusTunnel = item.GetBonusValue(5, level) + 1;

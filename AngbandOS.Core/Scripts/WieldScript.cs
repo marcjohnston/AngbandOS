@@ -49,7 +49,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         }
 
         // Check to see if there are any wield slots for this item.
-        if (item.GetFactory.BaseWieldSlots.Length == 0)
+        if (item.BaseWieldSlots.Length == 0)
         {
             Game.MsgPrint("You look around yourself and do not see a way to wield this item.");
             return;
@@ -61,10 +61,10 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         do
         {
             // Get this slot position.
-            slot = item.GetFactory.BaseWieldSlots[slotIndex];
+            slot = item.BaseWieldSlots[slotIndex];
 
             // Determine if the slot has room for another item or if we ran out of more slots to check.
-            if (slot.Count < slot.InventorySlots.Length || slotIndex + 1 >= item.GetFactory.BaseWieldSlots.Length)
+            if (slot.Count < slot.InventorySlots.Length || slotIndex + 1 >= item.BaseWieldSlots.Length)
             {
                 break;
             }

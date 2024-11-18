@@ -19,7 +19,18 @@ internal sealed class Item : IComparable<Item>
     /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
     /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
     /// </summary>
-    private ItemFactory _factory { get; set; }
+    private readonly ItemFactory _factory;
+
+    /// <summary>
+    /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
+    /// </summary>
+    public ItemFactory GetFactory => _factory; // TODO: Refactor the ItemFilter to not need this.
+
+    public bool CanBeWeaponOfSharpness => _factory.CanBeWeaponOfSharpness;
+    public bool CapableOfVorpalSlaying => _factory.CapableOfVorpalSlaying;
+    public bool CanBeWeaponOfLaw => _factory.CanBeWeaponOfLaw;
+
+    public BaseInventorySlot[] BaseWieldSlots => _factory.BaseWieldSlots;
 
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
 
@@ -120,7 +131,6 @@ internal sealed class Item : IComparable<Item>
     public ColorEnum FlavorColor => _factory.FlavorColor; // TODO: Rename to represent current or assigned
     public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
     public ColorEnum Color => _factory.Color; // TODO: Rename to represent raw or original or base
-    public ItemFactory GetFactory => _factory;
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -190,11 +200,11 @@ internal sealed class Item : IComparable<Item>
 
     public int Weight { get; private set; }
 
-    public bool HasQualityRatings { get; private set; } // This is only used within Item ... might be able to make it private.
-    public bool EasyKnow { get; private set; } // This is only used within Item ... might be able to make it private.
-    public int TurnOfLightValue { get; private set; } // This is only used within Item ... might be able to make it private.
-    public int BaseValue { get; private set; } // This is only used within Item ... might be able to make it private.
-    public int TreasureRating { get; private set; } // This is only used within Item ... might be able to make it private.
+    private bool HasQualityRatings { get; set; }
+    private bool EasyKnow { get; set; }
+    private int TurnOfLightValue { get; set; }
+    private int BaseValue { get; set; }
+    public int TreasureRating { get; set; }
     public Realm Realm { get; private set; }
 
     public bool Smash(int who, int y, int x) => _factory.Smash(who, y, x);
@@ -404,7 +414,7 @@ internal sealed class Item : IComparable<Item>
 
     public bool Wield()
     {
-        foreach (BaseInventorySlot baseInventorySlot in GetFactory.BaseWieldSlots)
+        foreach (BaseInventorySlot baseInventorySlot in BaseWieldSlots)
         {
             if (baseInventorySlot.Count == 0)
             {
@@ -1199,6 +1209,11 @@ internal sealed class Item : IComparable<Item>
         return basenm;
     }
 
+    /// <summary>
+    /// Returns a quality rating for the item using the following algorithm:
+    /// 1. 
+    /// </summary>
+    /// <returns></returns>
     public ItemQualityRating GetQualityRating()
     {
         if (!HasQualityRatings)
