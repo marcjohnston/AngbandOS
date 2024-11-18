@@ -1397,12 +1397,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     #endregion
 
     #region Heavy Weights and Obsoletes - Virtual Methods and Virtual Complex Properties that must be resolved
-    /// <summary>
-    /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
-    /// </summary>
-    [Obsolete]
-    public virtual int[] WieldSlots => new int[] { InventorySlot.Pack };
-
     public virtual void Refill(Item item)
     {
         Game.MsgPrint("Your light cannot be refilled.");

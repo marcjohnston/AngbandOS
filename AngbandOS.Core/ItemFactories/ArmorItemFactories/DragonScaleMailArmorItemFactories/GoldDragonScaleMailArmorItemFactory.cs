@@ -37,11 +37,6 @@ internal class GoldDragonScaleMailArmorItemFactory : ArmorItemFactory
     public override int Weight => 200;
 
     /// <summary>
-    /// Returns the on-body inventory slot for scale mail.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.OnBody };
-
-    /// <summary>
     /// Returns a treasure rating of 30 for dragon scale mail items.
     /// </summary>
     public override int TreasureRating => 30;

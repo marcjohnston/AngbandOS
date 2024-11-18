@@ -96,10 +96,6 @@ internal class WoodenTorchLightSourceItemFactory : ItemFactory
     /// </summary>
     public override int Radius => 1;
 
-    /// <summary>
-    /// Returns the lightsource inventory slot for light sources.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Lightsource };
     protected override string ItemClassBindingKey => nameof(LightSourcesItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(LightsourceInventorySlot) };
 

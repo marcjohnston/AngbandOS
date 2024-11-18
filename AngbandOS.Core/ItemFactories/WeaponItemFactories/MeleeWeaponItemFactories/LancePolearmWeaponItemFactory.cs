@@ -39,11 +39,6 @@ internal class LancePolearmWeaponItemFactory : WeaponItemFactory
 
     public override bool CanApplyBlessedArtifactBias => true;
 
-    /// <summary>
-    /// Returns the melee weapon inventory slot for melee weapons.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.MeleeWeapon };
-
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponInventorySlot) };
     public override bool GetsDamageMultiplier => true;
 

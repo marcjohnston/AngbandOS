@@ -28,11 +28,6 @@ internal class PartialPlateHardArmorItemFactory : ArmorItemFactory
     };
     public override int BonusHit => -3;
     public override int Weight => 260;
-    /// <summary>
-    /// Returns the on-body inventory slot for hard armor.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.OnBody };
-
     protected override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
     public override int PackSort => 20;

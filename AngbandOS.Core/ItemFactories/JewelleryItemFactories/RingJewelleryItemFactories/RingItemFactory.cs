@@ -13,11 +13,6 @@ internal abstract class RingItemFactory : JewelleryItemFactory
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>
-    /// Returns either the right or left hand inventory slot for rings.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.RightHand, InventorySlot.LeftHand };
-
-    /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;

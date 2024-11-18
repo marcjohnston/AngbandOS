@@ -25,7 +25,7 @@ internal class PackInventorySlot : BaseInventorySlot
     public override int SortOrder => 0;
     public override string DescribeWieldLocation(int index) => "carrying in your pack";
 
-    public override string DescribeItemLocation(Item oPtr) => "In your pack";
+    public override string DescribeItemLocation(Item oPtr) => "carrying in your pack";
 
     public override void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
     {

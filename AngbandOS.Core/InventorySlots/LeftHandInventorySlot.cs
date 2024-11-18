@@ -15,7 +15,7 @@ internal class LeftHandInventorySlot : EquipmentInventorySlot
     public override string Label(int index) => "d";
     public override string Label(Item oPtr) => "d";
     public override string MentionUse(int? index) => "On left hand";
-    public override string DescribeItemLocation(Item oPtr) => "On left hand";
+    public override string DescribeItemLocation(Item oPtr) => "wearing on your left hand";
     public override string DescribeWieldLocation(int index) => "wearing on your left hand";
     public override int SortOrder => 4;
     public override void AddItem(Item item)

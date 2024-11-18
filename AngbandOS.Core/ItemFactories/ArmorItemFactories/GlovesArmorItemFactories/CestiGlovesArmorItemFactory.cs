@@ -29,10 +29,6 @@ internal class CestiGlovesArmorItemFactory : ArmorItemFactory
     public override int Weight => 40;
     protected override string ItemClassBindingKey => nameof(GlovesItemClass);
 
-    /// <summary>
-    /// Returns the hands inventory slots for gloves.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Hands };
     public override int PackSort => 26;
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HandsInventorySlot) };
     public override bool HatesFire => true;

@@ -29,11 +29,6 @@ internal class HardStuddedLeatherSoftArmorItemFactory : ArmorItemFactory
     public override int BonusHit => -1;
     public override int Weight => 110;
 
-    /// <summary>
-    /// Returns the on-body inventory slot for soft armor.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.OnBody };
-
     protected override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
     public override int PackSort => 21;

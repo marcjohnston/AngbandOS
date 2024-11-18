@@ -28,11 +28,6 @@ internal class MetalCapHelmArmorFactory : ArmorItemFactory
     };
     public override int Weight => 20;
 
-    /// <summary>
-    /// Returns the head inventory slot for helms.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Head };
-
     protected override string ItemClassBindingKey => nameof(HelmsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadInventorySlot) };
     public override int PackSort => 25;

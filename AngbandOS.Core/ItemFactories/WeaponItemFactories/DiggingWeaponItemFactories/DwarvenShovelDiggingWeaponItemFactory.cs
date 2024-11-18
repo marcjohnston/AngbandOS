@@ -30,10 +30,6 @@ internal class DwarvenShovelDiggingWeaponItemFactory : WeaponItemFactory
     public override bool Tunnel => true;
     public override int Weight => 120;
 
-    /// <summary>
-    /// Returns the digger inventory slot for shovels.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Digger };
     protected override string ItemClassBindingKey => nameof(DiggersItemClass);
     public override bool CanTunnel => true;
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

@@ -29,10 +29,6 @@ internal class AdamantitePlateMailHardArmorItemFactory : ArmorItemFactory
     };
     public override int BonusHit => -4;
     public override int Weight => 420;
-    /// <summary>
-    /// Returns the on-body inventory slot for hard armor.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.OnBody };
 
     protected override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };

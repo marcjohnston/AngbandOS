@@ -28,11 +28,6 @@ internal class LargeLeatherShieldArmorItemFactory : ArmorItemFactory
     };
     public override int Weight => 100;
 
-    /// <summary>
-    /// Returns the arm inventory slot for shields.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Arm };
-
     protected override string ItemClassBindingKey => nameof(ShieldsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(ArmInventorySlot) };
     public override int PackSort => 23;

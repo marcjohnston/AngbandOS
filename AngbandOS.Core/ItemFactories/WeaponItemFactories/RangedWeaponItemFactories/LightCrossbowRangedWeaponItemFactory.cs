@@ -33,11 +33,6 @@ internal class LightCrossbowRangedWeaponItemFactory : RangedWeaponItemFactory
         nameof(SeekerBoltAmmunitionItemFactory)
     };
 
-    /// <summary>
-    /// Returns the ranged weapon inventory slot for bows.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.RangedWeapon };
-
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

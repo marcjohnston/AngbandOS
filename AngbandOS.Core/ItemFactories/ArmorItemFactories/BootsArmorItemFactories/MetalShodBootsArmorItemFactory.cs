@@ -37,11 +37,6 @@ internal class MetalShodBootsArmorItemFactory : ArmorItemFactory
 
     public override int Weight => 80;
 
-    /// <summary>
-    /// Returns the feet inventory slot for boots.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Feet };
-
     protected override string ItemClassBindingKey => nameof(BootsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(FeetInventorySlot) };
     public override bool HatesFire => true;

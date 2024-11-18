@@ -13,10 +13,6 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
     public AmuletJeweleryItemFactory(Game game) : base(game) { }
 
     public override bool IsWearableOrWieldable => true;
-    /// <summary>
-    /// Returns the neck inventory slot for amulets.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Neck };
 
     /// <summary>
     /// Returns true, because amulets are magical and should be detected with the detect magic scroll.

@@ -170,10 +170,6 @@ internal sealed class Item : IComparable<Item>
     public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivationDetails { get; private set; }
     public Probability BreakageChanceProbability { get; private set; }
     public int MissileDamageMultiplier { get; private set; }
-
-    [Obsolete("Use GetFactory().BaseInventorySlot")]
-    public int[] WieldSlots { get; private set; }
-
     public bool CanBeRead { get; private set; }
     public IScriptItemInt? RechargeScript { get; private set; }
     public bool CanProjectArrows { get; private set; }
@@ -460,7 +456,6 @@ internal sealed class Item : IComparable<Item>
         IdentityCanBeSensed = _factory.IdentityCanBeSensed;
         IsContainer = _factory.IsContainer;
         IsArmor = _factory.IsArmor;
-        WieldSlots = _factory.WieldSlots;
         CanBeRead = _factory.CanBeRead;
         RechargeScript = _factory.RechargeScript;
         CanProjectArrows = _factory.CanProjectArrows;

@@ -36,11 +36,6 @@ internal class HardLeatherBootsArmorItemFactory : ArmorItemFactory
         (new int[] { 2 }, null, new string[] { nameof(GreatBootsEnchantmentScript) })
     };
 
-    /// <summary>
-    /// Returns the feet inventory slot for boots.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Feet };
-
     protected override string ItemClassBindingKey => nameof(BootsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(FeetInventorySlot) };
     public override bool HatesFire => true;

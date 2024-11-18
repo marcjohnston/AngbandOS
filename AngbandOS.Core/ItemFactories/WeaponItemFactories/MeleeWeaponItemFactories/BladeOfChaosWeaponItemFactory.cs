@@ -44,11 +44,6 @@ internal class BladeOfChaosWeaponItemFactory : WeaponItemFactory
     public override bool CanApplyBlessedArtifactBias => true;
     public override bool CanVorpalSlay => true;
 
-    /// <summary>
-    /// Returns the melee weapon inventory slot for melee weapons.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.MeleeWeapon };
-
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponInventorySlot) };
     public override bool GetsDamageMultiplier => true;
 

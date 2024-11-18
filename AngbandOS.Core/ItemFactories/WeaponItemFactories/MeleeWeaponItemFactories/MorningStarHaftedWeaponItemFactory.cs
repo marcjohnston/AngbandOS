@@ -38,11 +38,6 @@ internal class MorningStarHaftedWeaponItemFactory : WeaponItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    /// <summary>
-    /// Returns the melee weapon inventory slot for melee weapons.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.MeleeWeapon };
-
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponInventorySlot) };
     public override bool GetsDamageMultiplier => true;
 

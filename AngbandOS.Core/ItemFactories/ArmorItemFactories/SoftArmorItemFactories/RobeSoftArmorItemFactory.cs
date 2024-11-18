@@ -35,11 +35,6 @@ internal class RobeSoftArmorItemFactory : ArmorItemFactory
     };
     public override int Weight => 20;
 
-    /// <summary>
-    /// Returns the on-body inventory slot for soft armor.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.OnBody };
-
     protected override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
     public override int PackSort => 21;

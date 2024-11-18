@@ -36,11 +36,6 @@ internal class IronCrownArmorItemFactory : ArmorItemFactory
 
     public override int Weight => 20;
 
-    /// <summary>
-    /// Returns the head inventory slot, for crowns.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Head };
-
     protected override string ItemClassBindingKey => nameof(CrownsItemClass);
 
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadInventorySlot) };

@@ -44,11 +44,6 @@ internal class ElvenCloakArmorItemFactory : ArmorItemFactory
     public override int BonusArmorClass => 4;
     public override int Weight => 5;
 
-    /// <summary>
-    /// Returns the about body inventory slot for cloaks.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.AboutBody };
-
     protected override string ItemClassBindingKey => nameof(CloaksItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(AboutBodyInventorySlot) };
     public override bool HatesFire => true;

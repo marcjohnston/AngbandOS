@@ -48,27 +48,56 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
             return;
         }
 
-        if (item.WieldSlots.Length == 0)
+        // Check to see if there are any wield slots for this item.
+        if (item.GetFactory.BaseWieldSlots.Length == 0)
         {
-            Game.MsgPrint("This item cannot be wielded.");
+            Game.MsgPrint("You look around yourself and do not see a way to wield this item.");
             return;
         }
 
-        // Find the inventory slot where the item is to be wielded.
-        int slot;
-        int index = 0;
+        // Find and empty inventory slot where the item is to be wielded.
+        BaseInventorySlot slot;
+        int slotIndex = 0;
         do
         {
-            slot = item.WieldSlots[index];
-            index++;
-        } while (Game.GetInventoryItem(slot) != null && index < item.WieldSlots.Length);
+            // Get this slot position.
+            slot = item.GetFactory.BaseWieldSlots[slotIndex];
+
+            // Determine if the slot has room for another item or if we ran out of more slots to check.
+            if (slot.Count < slot.InventorySlots.Length || slotIndex >= item.GetFactory.BaseWieldSlots.Length)
+            {
+                break;
+            }
+            slotIndex++;
+        } while (true);
+
+        // Determine the inventory item that is open or the position of the item to remove.
+        int inventoryItem = slot.InventorySlots[0];
+
+        // Check to see if there is room for the item.
+        if (slot.Count < slot.InventorySlots.Length)
+        {
+            // Find an open item index or the item index to remove.  Each slot has one or more inventory slots.
+            int inventorySlot = 0;
+            do
+            {
+                inventoryItem = slot.InventorySlots[inventorySlot];
+                if (Game.GetInventoryItem(inventoryItem) == null || inventorySlot >= slot.InventorySlots.Length)
+                {
+                    break;
+                }
+                inventorySlot++;
+            } while (true);
+        }
+
+        // Get the current item.
+        Item? wieldingItem = Game.GetInventoryItem(inventoryItem);
 
         // Can't replace a cursed item
-        Item? wieldingItem = Game.GetInventoryItem(slot);
         if (wieldingItem != null && wieldingItem.IsCursed)
         {
             string cursedItemName = wieldingItem.GetDescription(false);
-            Game.MsgPrint($"The {cursedItemName} you are {Game.DescribeWieldLocation(slot)} appears to be cursed.");
+            Game.MsgPrint($"The {cursedItemName} you are {slot.DescribeItemLocation(wieldingItem)} appears to be cursed.");
             return;
         }
 
@@ -105,15 +134,14 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         }
 
         // Put the item into the wield slot
-        Game.SetInventoryItem(slot, wornItem);
+        Game.SetInventoryItem(inventoryItem, wornItem);
         // Add the weight of the item
         Game.WeightCarried += wornItem.Weight;
 
         // Inform us what we did
-        BaseInventorySlot inventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>().Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));
-        string wieldPhrase = inventorySlot.WieldPhrase;
+        string wieldPhrase = slot.WieldPhrase;
         string itemName = wornItem.GetFullDescription(true);
-        Game.MsgPrint($"{wieldPhrase} {itemName} ({slot.IndexToLabel()}).");
+        Game.MsgPrint($"{wieldPhrase} {itemName} ({inventoryItem.IndexToLabel()}).");
         // Let us know if it's cursed
         if (wornItem.IsCursed)
         {

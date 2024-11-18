@@ -46,10 +46,6 @@ internal class OrbLightSourceItemFactory : ItemFactory
 
     public override bool HasQualityRatings => true;
 
-    /// <summary>
-    /// Returns the lightsource inventory slot for light sources.
-    /// </summary>
-    public override int[] WieldSlots => new int[] { InventorySlot.Lightsource };
     protected override string ItemClassBindingKey => nameof(LightSourcesItemClass);
     protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(LightsourceInventorySlot) };
 
