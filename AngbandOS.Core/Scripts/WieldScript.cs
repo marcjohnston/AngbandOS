@@ -64,7 +64,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
             slot = item.GetFactory.BaseWieldSlots[slotIndex];
 
             // Determine if the slot has room for another item or if we ran out of more slots to check.
-            if (slot.Count < slot.InventorySlots.Length || slotIndex >= item.GetFactory.BaseWieldSlots.Length)
+            if (slot.Count < slot.InventorySlots.Length || slotIndex + 1 >= item.GetFactory.BaseWieldSlots.Length)
             {
                 break;
             }

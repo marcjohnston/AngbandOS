@@ -82,6 +82,16 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     #endregion
 
     #region Concrete Methods and Properties (Non-abstract and non-virtual) - API Object Functionality
+    public void Refill(Item item)
+    {
+        if (RefillScript == null)
+        {
+            Game.MsgPrint("Your light cannot be refilled.");
+            return;
+        }
+        RefillScript.ExecuteScriptItem(item);
+    }
+
     /// <summary>
     /// Processes a world turn for an item that is on the dungeon floor.  Does nothing, by default.
     /// </summary>
@@ -243,6 +253,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
             }
             EnchantmentTuples = enchantmentsList.ToArray();
         }
+
+        RefillScript = Game.SingletonRepository.GetNullable<IScriptItem>(RefillScriptBindingKey);
     }
 
     /// <summary>
@@ -1302,6 +1314,12 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
     #region Bound Concrete Properties - API Object Functionality - Set during Bind() - get; private set;
     /// <summary>
+    /// Returns the script that is used to refill the item; or null, if the item cannot be refilled.  This property is bound using the <see cref="RefillScriptBindingKey"/> property during the binding
+    /// phase.
+    /// </summary>
+    protected IScriptItem? RefillScript { get; private set; }
+
+    /// <summary>
     /// Returns the symbol to use for rendering. This symbol will be initially used to set the <see cref="FlavorSymbol"/> and item
     /// categories that have flavor may change the FlavorCharacter based on the flavor.  This property is bound from the <see cref="SymbolBindingKey"/> property during the bind phase.
     /// </summary>
@@ -1397,11 +1415,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     #endregion
 
     #region Heavy Weights and Obsoletes - Virtual Methods and Virtual Complex Properties that must be resolved
-    public virtual void Refill(Item item)
-    {
-        Game.MsgPrint("Your light cannot be refilled.");
-    }
-
     /// <summary>
     /// Returns true, if the item can be stomped.  Returns the stompable status based on the item quality rating, by default.
     /// </summary>
@@ -1601,6 +1614,12 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     #endregion
 
     #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects
+    /// <summary>
+    /// Returns the key of the script that is used to refill the item; or null, if the item cannot be refilled.  Returns null, by default.  This property is used to bind the <see cref="RefillScript"/>
+    /// property during the binding phase.
+    /// </summary>
+    protected virtual string? RefillScriptBindingKey => null;
+
     /// <summary>
     /// Returns the symbol to use for rendering the item.  This symbol will be initially used to set the <see cref="FlavorSymol"/> and item catagories that have flavor may the change the
     /// <see cref="FlavorCharacter"/> based on the flavor.  This property is used to bind the <see cref="Symbol"/> property during the bind phase.
