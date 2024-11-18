@@ -32,7 +32,7 @@ internal class ElecProjectile : Projectile
             {
                 plural = true;
             }
-            if (oPtr.HatesElec)
+            if (oPtr.HatesElectricity)
             {
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";
@@ -65,7 +65,7 @@ internal class ElecProjectile : Projectile
                 {
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }
-                bool isPotion = oPtr.QuaffDetails != null;
+                bool isPotion = oPtr.QuaffTuple != null;
                 Game.DeleteObject(oPtr);
                 if (isPotion)
                 {

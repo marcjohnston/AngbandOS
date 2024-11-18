@@ -48,7 +48,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
         {
             return false;
         }
-        if (item.AimingDetails == null)
+        if (item.AimingTuple == null)
         {
             Game.MsgPrint("That is not a wand!");
             return false;
@@ -93,7 +93,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             return false;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
-        bool ident = item.AimingDetails.Value.ActivationScript.ExecuteIdentifableDirectionalScript(dir);
+        bool ident = item.AimingTuple.Value.ActivationScript.ExecuteIdentifableDirectionalScript(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried
@@ -108,7 +108,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.AimingDetails.Value.ManaValue);
+            channeled = Game.DoCmdChannel(item, item.AimingTuple.Value.ManaValue);
         }
         // We didn't use mana, so decrease the wand's charges
         if (!channeled)

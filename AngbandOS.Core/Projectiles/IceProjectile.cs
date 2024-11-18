@@ -56,7 +56,7 @@ internal class IceProjectile : Projectile
                     {
                         Game.MsgPrint($"The {oName}{noteKill}");
                     }
-                    bool isPotion = oPtr.QuaffDetails != null;
+                    bool isPotion = oPtr.QuaffTuple != null;
                     Game.DeleteObject(oPtr);
                     if (isPotion)
                     {

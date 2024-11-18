@@ -16,7 +16,7 @@ internal class CanBeQuaffedBooleanGetItemProperty : GetItemProperty<bool>
 
     public override bool Get(Item item)
     {
-        return item.QuaffDetails != null;
+        return item.QuaffTuple != null;
     }
 }
 

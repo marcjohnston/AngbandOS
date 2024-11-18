@@ -15,7 +15,7 @@ internal class CanBeZappedBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeZapped";
     public override bool Get(Item item)
     {
-        return item.ZapDetails != null;
+        return item.ZapTuple != null;
     }
 }
 

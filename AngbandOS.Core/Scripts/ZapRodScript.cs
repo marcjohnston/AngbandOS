@@ -39,7 +39,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         }
 
         // Make sure the item is actually a rod
-        if (item.ZapDetails == null)
+        if (item.ZapTuple == null)
         {
             Game.MsgPrint("That is not a rod!");
             return;
@@ -56,7 +56,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
         // would ask for a direction.
         int dir = 5;
-        if (item.ZapDetails.Value.RequiresAiming || !item.IsFlavorAware)
+        if (item.ZapTuple.Value.RequiresAiming || !item.IsFlavorAware)
         {
             if (!Game.GetDirectionWithAim(out int direction))
             {
@@ -98,7 +98,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         Game.PlaySound(SoundEffectEnum.ZapRod);
 
         // Do the rod-specific effect
-        (bool identified, bool used) = item.ZapDetails.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
+        (bool identified, bool used) = item.ZapTuple.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
@@ -113,7 +113,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // The player may be able to cancel the zap.
         if (used)
         {
-            item.RodRechargeTimeRemaining = item.ZapDetails.Value.TurnsToRecharge.Get(Game.UseRandom);
+            item.RodRechargeTimeRemaining = item.ZapTuple.Value.TurnsToRecharge.Get(Game.UseRandom);
         }
         else
         {
@@ -125,7 +125,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         bool channeled = false;
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = Game.DoCmdChannel(item, item.ZapDetails.Value.ManaEquivalent);
+            channeled = Game.DoCmdChannel(item, item.ZapTuple.Value.ManaEquivalent);
             if (channeled)
             {
                 item.RodRechargeTimeRemaining = 0;
