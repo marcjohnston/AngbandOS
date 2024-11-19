@@ -425,7 +425,7 @@ internal sealed class Item : IComparable<Item>
     {
         foreach (BaseInventorySlot baseInventorySlot in BaseWieldSlots)
         {
-            if (baseInventorySlot.Count == 0)
+            if (baseInventorySlot.Count < baseInventorySlot.MaximumItemSlots)
             {
                 baseInventorySlot.AddItem(this);
                 return true;

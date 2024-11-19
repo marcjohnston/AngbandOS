@@ -20,6 +20,11 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     }
 
     /// <summary>
+    /// Returns the maximum number of items that the inventory slot can hold.  Returns 1, by default.  All inventory slots return 1, except for the pack that returns 26 (a-z).
+    /// </summary>
+    public virtual int MaximumItemSlots => 1;
+
+    /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
     /// <returns></returns>
