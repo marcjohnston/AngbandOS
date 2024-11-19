@@ -2328,32 +2328,32 @@ public bool IsDead = false;
     public void Play(IConsoleViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
         // Replay Druid, Klackon, Female error
-        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(0)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(750)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(271)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(158)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(163)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(141)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(156)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(157)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(146)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(673)));
-        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(175)));
-        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(385)));
-        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(159)));
-        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(157)));
-        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(338)));
-        replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(575)));
-        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(349)));
-        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(210)));
-        replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(432)));
-        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(641)));
-        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(490)));
-        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(288)));
-        replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(545)));
-        replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(350)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(0)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(750)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(271)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(158)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(163)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(141)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(156)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(157)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(146)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(673)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(175)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(385)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(159)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(157)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(338)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(575)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(349)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(210)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(432)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(641)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(490)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(288)));
+        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(545)));
+        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(350)));
 
         // If this game was restored, then the Random variable will not be here and we need to create them.  The Random were created when the Game
         // was instantiated as part of the New game process so that Singletons have access to non-fixed random numbers.
