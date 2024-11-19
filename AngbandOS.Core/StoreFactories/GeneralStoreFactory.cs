@@ -50,7 +50,7 @@ internal class GeneralStoreFactory : StoreFactory
     {
         (nameof(WoodenArrowAmmunitionItemFactory), 2),
         (nameof(SteelBoltAmmunitionItemFactory), 2),
-        (nameof(ClothCloakArmorItemFactory), 3),
+        (nameof(ClothCloakItemFactory), 3),
         (nameof(PickDiggingWeaponItemFactory), 1),
         (nameof(ShovelDiggingWeaponItemFactory), 2),
         (nameof(FlaskOfOilItemFactory), 10),

@@ -12,7 +12,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
 {
     private IronHelmSkullkeeperFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(IronHelmArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(IronHelmItemFactory);
 
     // Skull Keeper detects everything
     protected override string? ActivationName => nameof(DetectionEvery55p1d55Activation);

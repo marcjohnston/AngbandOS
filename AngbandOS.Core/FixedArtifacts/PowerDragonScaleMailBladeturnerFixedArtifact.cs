@@ -12,7 +12,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
 {
     private PowerDragonScaleMailBladeturnerFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailItemFactory);
 
     // Bladeturner heals you and gives you timed resistances
     protected override string? ActivationName => nameof(PowerDragonEvery400Activation);

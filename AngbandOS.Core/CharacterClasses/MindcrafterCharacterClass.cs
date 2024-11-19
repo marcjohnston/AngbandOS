@@ -53,7 +53,7 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     {
         nameof(SmallSwordWeaponItemFactory),
         nameof(RestoreManaPotionItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
+        nameof(SoftLeatherSoftItemFactory)
     };
     public override void CalcBonuses()
     {

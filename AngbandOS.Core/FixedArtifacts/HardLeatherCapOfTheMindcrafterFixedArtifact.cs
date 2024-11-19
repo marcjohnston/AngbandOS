@@ -12,7 +12,7 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 {
     private HardLeatherCapOfTheMindcrafterFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(HardLeatherCapHelmArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(HardLeatherCapHelmItemFactory);
 
     public override void ApplyResistances(Item item)
     {

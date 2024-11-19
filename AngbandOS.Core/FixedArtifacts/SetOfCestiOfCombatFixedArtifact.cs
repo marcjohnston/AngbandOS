@@ -12,7 +12,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
 {
     private SetOfCestiOfCombatFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(CestiGlovesArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(CestiGlovesItemFactory);
     protected override string? ActivationName => nameof(MagicalArrow150Every1d90p90);
     public override void ApplyResistances(Item item)
     {

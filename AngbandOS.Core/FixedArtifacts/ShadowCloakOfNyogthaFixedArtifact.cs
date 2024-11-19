@@ -12,7 +12,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfNyogthaFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ShadowCloakArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
     protected override string? ActivationName => nameof(RestoreLifeLevelsEvery450Activation);
     public override void ApplyResistances(Item item)
     {

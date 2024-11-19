@@ -13,7 +13,7 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
 {
     private SmallMetalShieldVitriolFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(SmallMetalShieldArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(SmallMetalShieldItemFactory);
 
     public override void ApplyResistances(Item item)
     {

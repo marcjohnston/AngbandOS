@@ -102,7 +102,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(HealingPotionItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
+        nameof(SoftLeatherSoftItemFactory)
     };
 
     public override void CalcBonuses()

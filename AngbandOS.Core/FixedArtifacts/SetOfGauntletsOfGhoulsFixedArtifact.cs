@@ -12,7 +12,7 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfGhoulsFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
     protected override string? ActivationName => nameof(BoltOfFrost6d8Every1d7p7Activation);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Ghouls";

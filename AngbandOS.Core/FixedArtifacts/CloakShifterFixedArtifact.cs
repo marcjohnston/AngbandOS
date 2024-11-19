@@ -12,7 +12,7 @@ internal class CloakShifterFixedArtifact : FixedArtifact
 {
     private CloakShifterFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ClothCloakArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
 
     // Shifter teleports you
     protected override string? ActivationName => nameof(Teleport100Every45Activation);

@@ -12,7 +12,7 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
 {
     private SteelHelmOfHammerhandFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(SteelHelmArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(SteelHelmItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.BrightWhite;

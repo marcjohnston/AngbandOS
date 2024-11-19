@@ -12,7 +12,7 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 {
     private LargeLeatherShieldRawhideFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(LargeLeatherShieldArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(LargeLeatherShieldItemFactory);
 
     public override void ApplyResistances(Item item)
     {

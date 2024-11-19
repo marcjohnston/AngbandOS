@@ -12,7 +12,7 @@ internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
 {
     private SetOfLeatherGlovesCalfskinFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(LeatherGlovesArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(LeatherGlovesItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.BrightBrown;

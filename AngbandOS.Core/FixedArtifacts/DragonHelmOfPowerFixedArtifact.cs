@@ -12,7 +12,7 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
 {
     private DragonHelmOfPowerFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(DragonHelmArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(DragonHelmItemFactory);
 
     // Dragon Helm and Terror Mask cause fear
     protected override string? ActivationName => nameof(Terror40xEvery3xp10Activation);

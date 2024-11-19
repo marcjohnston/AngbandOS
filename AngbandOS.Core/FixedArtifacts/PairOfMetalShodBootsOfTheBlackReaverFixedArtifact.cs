@@ -13,7 +13,7 @@ internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
 {
     private PairOfMetalShodBootsOfTheBlackReaverFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(MetalShodBootsArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(MetalShodBootsItemFactory);
 
 
     public override void ApplyResistances(Item item)

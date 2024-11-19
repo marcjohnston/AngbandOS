@@ -12,7 +12,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
 {
     private IronHelmTerrorMaskFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(IronHelmArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(IronHelmItemFactory);
 
     public override void ApplyResistances(Item item)
     {

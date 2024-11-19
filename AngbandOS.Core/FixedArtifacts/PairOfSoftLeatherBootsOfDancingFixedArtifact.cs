@@ -12,7 +12,7 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
 {
     private PairOfSoftLeatherBootsOfDancingFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(SoftLeatherBootsArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(SoftLeatherBootsItemFactory);
 
     // Dancing heal poison and fear
     protected override string? ActivationName => nameof(RemoveFearAndPoisonEvery5Activation);

@@ -12,7 +12,7 @@ internal class CloakDarknessFixedArtifact : FixedArtifact
 {
     private CloakDarknessFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ClothCloakArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
 
     // Darkness sends monsters to sleep
     protected override string? ActivationName => nameof(SleepActivation);

@@ -12,7 +12,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
 {
     private MithrilChainMailOfTheVampireHunterFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(MithrilChainMailHardArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(MithrilChainMailHardItemFactory);
 
     // Vampire Hunter cures most ailments
     protected override string? ActivationName => nameof(Heal777CuringAndHeroism25pd25Every300Activation);

@@ -12,7 +12,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact
 {
     private SetOfLeatherGlovesOfLightFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(LeatherGlovesArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(LeatherGlovesItemFactory);
     protected override string? ActivationName => nameof(MagicMissle2d6Every2Activation);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Leather Gloves of Light";

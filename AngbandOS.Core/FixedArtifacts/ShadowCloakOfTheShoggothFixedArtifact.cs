@@ -12,7 +12,7 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfTheShoggothFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ShadowCloakArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.Black;

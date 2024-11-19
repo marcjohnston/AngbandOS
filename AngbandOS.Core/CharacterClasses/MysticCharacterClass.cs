@@ -53,7 +53,7 @@ internal class MysticCharacterClass : BaseCharacterClass
     {
         nameof(SustainWisdomRingItemFactory),
         nameof(HealingPotionItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
+        nameof(SoftLeatherSoftItemFactory)
     };
 
     public override void CalcBonuses()

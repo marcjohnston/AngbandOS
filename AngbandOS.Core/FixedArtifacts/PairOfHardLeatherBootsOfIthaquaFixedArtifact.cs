@@ -12,7 +12,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact
 {
     private PairOfHardLeatherBootsOfIthaquaFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(HardLeatherBootsArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(HardLeatherBootsItemFactory);
 
     // Boots haste you
     protected override string? ActivationName => nameof(Speed20p1d20Every200Activation);

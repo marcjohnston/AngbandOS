@@ -12,7 +12,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
 {
     private MultiHuedDragonScaleMailRazorbackFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(MultiHuedDragonScaleMailArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(MultiHuedDragonScaleMailItemFactory);
 
     // Razorback gives you a point-blank lightning ball
     protected override string? ActivationName => nameof(StarBall150Every1000p1d325Activation);

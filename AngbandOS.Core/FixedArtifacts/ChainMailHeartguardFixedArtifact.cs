@@ -13,7 +13,7 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 {
     private ChainMailHeartguardFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ChainMailHardArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ChainMailHardItemFactory);
 
     public override void ApplyResistances(Item item)
     {

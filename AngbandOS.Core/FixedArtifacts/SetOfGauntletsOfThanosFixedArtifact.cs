@@ -12,7 +12,7 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfThanosFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.BrightBrown;

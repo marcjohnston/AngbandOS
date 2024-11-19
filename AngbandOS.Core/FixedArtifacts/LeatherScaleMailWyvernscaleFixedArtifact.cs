@@ -13,7 +13,7 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
 {
     private LeatherScaleMailWyvernscaleFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(LeatherScaleMailSoftArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(LeatherScaleMailSoftItemFactory);
 
     public override void ApplyResistances(Item item)
     {

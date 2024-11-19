@@ -12,7 +12,7 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
 {
     private MetalCapOfHolinessFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(MetalCapHelmArmorFactory);
+    protected override string BaseItemFactoryName => nameof(MetalCapHelmItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.Grey;

@@ -12,7 +12,7 @@ internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
 {
     private FullPlateArmorOfTheGodsFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(FullPlateHardArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(FullPlateHardItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.BrightWhite;

@@ -13,7 +13,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
 {
     private GoldenCrownOfTheSunFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(GoldenCrownArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(GoldenCrownItemFactory);
 
     // Sun Crown heals
     protected override string? ActivationName => nameof(Heal700Every25Activation);
