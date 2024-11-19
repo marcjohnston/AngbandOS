@@ -165,7 +165,7 @@ public class GameServer
         foreach ((char c, TimeSpan t) in replayQueue)
         {
             byte b = (byte)c;
-            s.Add($"replayQueue.Enqueue(((char)0x{b.ToString("X2")}, TimeSpan.FromMilliseconds({(long)t.TotalMilliseconds}));");
+            s.Add($"replayQueue.Enqueue(((char)0x{b.ToString("X2")}, TimeSpan.FromMilliseconds({(long)t.TotalMilliseconds})));");
         }
         return string.Join("\n", s);
     }
@@ -188,6 +188,7 @@ public class GameServer
         {
             Game = new Game(gameConfiguration);
             Game.Play(console, persistentStorage);
+            string gameReplayKeystrokeHistory = GenerateReplayQueue(Game.gameReplayKeystrokeHistory.ToArray());
         }
         catch (Exception ex)
         {

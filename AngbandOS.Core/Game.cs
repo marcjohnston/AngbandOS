@@ -2319,6 +2319,9 @@ public bool IsDead = false;
         GenerateNewLevel();
     }
 
+    public int MainSequenceRandomSeed;
+    public int FixedSequenceRandomSeed;
+
     /// <summary>
     /// Plays the current game.
     /// </summary>
@@ -2355,10 +2358,73 @@ public bool IsDead = false;
         //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(545)));
         //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(350)));
 
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(0)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(174)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(150)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(157)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(158)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(178)));
+        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(299)));
+        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(161)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(1854)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(197)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(156)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(191)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(160)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(159)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(190)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(160)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(175)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(193)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(207)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(163)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(155)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(193)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(179)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(21853)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(1022)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(176)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(163)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(155)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(146)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(170)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(243)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(171)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(322)));
+        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(212)));
+        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(220)));
+        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(17566)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(71010)));
+        //replayQueue.Enqueue(((char)0x3E, TimeSpan.FromMilliseconds(1989)));
+        //replayQueue.Enqueue(((char)0x20, TimeSpan.FromMilliseconds(870)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(4192)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(192)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(159)));
+        //replayQueue.Enqueue(((char)0x1B, TimeSpan.FromMilliseconds(788)));
+        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(1372)));
+        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(307)));
+        //MainSequenceRandomSeed = 1481391657;
+        //FixedSequenceRandomSeed = 712658850;
+
         // If this game was restored, then the Random variable will not be here and we need to create them.  The Random were created when the Game
         // was instantiated as part of the New game process so that Singletons have access to non-fixed random numbers.
-        _mainSequence = new Random();
-        _fixed = new Random();
+        if (replayQueue.Count > 0)
+        {
+            _mainSequence = new Random(MainSequenceRandomSeed);
+            _fixed = new Random(FixedSequenceRandomSeed);
+        }
+        else
+        {
+            // Generate all new random seeds.
+            Random r = new Random();           
+            MainSequenceRandomSeed = r.Next(int.MaxValue);
+            FixedSequenceRandomSeed = r.Next(int.MaxValue);
+
+            // Generate the random generators.
+            _mainSequence = new Random(MainSequenceRandomSeed);
+            _fixed = new Random(FixedSequenceRandomSeed);
+        }
+
 
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
