@@ -632,9 +632,6 @@ public bool IsDead = false;
 
     public char[] KeyQueue;
 
-    [Obsolete("Use KeyQueue.length")]
-    public int KeySize;
-
     /// <summary>
     /// The current contents of the game screen.
     /// </summary>
@@ -2339,7 +2336,6 @@ public bool IsDead = false;
         Shutdown = false;
         LastInputReceived = DateTime.Now;
         CorePersistentStorage = persistentStorage;
-        KeySize = ConsoleViewPort.MaximumKeyQueueLength;
         KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
         Screen = new Screen(consoleViewPort);
         MapMovementKeys();
@@ -9234,7 +9230,7 @@ public bool IsDead = false;
             return;
         }
         KeyQueue[KeyHead++] = k;
-        if (KeyHead == KeySize)
+        if (KeyHead == KeyQueue.Length)
         {
             KeyHead = 0;
         }
@@ -9274,7 +9270,7 @@ public bool IsDead = false;
             return false;
         }
         ch = KeyQueue[KeyTail];
-        if (take && ++KeyTail == KeySize)
+        if (take && ++KeyTail == KeyQueue.Length)
         {
             KeyTail = 0;
         }
