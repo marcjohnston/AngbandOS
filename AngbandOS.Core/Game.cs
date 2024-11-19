@@ -641,7 +641,7 @@ public bool IsDead = false;
     public int KeyTail = 0;
 
     /// <summary>
-    /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.
+    /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
     /// </summary>
     public string _artificialKeyBuffer = "";
 
@@ -2327,6 +2327,34 @@ public bool IsDead = false;
     /// <param name="updateMonitor"></param>
     public void Play(IConsoleViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
+        // Replay Druid, Klackon, Female error
+        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(0)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(750)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(271)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(158)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(163)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(141)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(156)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(157)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(146)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(673)));
+        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(175)));
+        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(385)));
+        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(159)));
+        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(157)));
+        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(338)));
+        replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(575)));
+        replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(349)));
+        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(210)));
+        replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(432)));
+        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(641)));
+        replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(490)));
+        replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(288)));
+        replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(545)));
+        replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(350)));
+
         // If this game was restored, then the Random variable will not be here and we need to create them.  The Random were created when the Game
         // was instantiated as part of the New game process so that Singletons have access to non-fixed random numbers.
         _mainSequence = new Random();
@@ -9035,67 +9063,18 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Returns the next keystoke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
-    /// keystrokes are retrieved.
-    /// </summary>
-    /// <returns>The next key pressed.</returns>
-    public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
-    {
-        char ch = '\0';
-        if (_artificialKeyBuffer.Length > 0)
-        {
-            ch = _artificialKeyBuffer[0];
-            _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
-            HideCursorOnFullScreenInkey = false;
-            return ch;
-        }
-        bool v = Screen.CursorVisible;
-        if (!doNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
-        {
-            Screen.CursorVisible = true;
-        }
-        if (InPopupMenu)
-        {
-            Screen.CursorVisible = false;
-        }
-        while (ch == 0 && !Shutdown)
-        {
-            if (doNotWaitOnInkey && GetKeypress(out char kk, false, false))
-            {
-                ch = kk;
-                break;
-            }
-            if (doNotWaitOnInkey)
-            {
-                break;
-            }
-            GetKeypress(out ch, true, true);
-            if (ch == 29)
-            {
-                ch = '\0';
-                continue;
-            }
-            if (ch == '`')
-            {
-                ch = '\x1b';
-            }
-            if (ch == 30)
-            {
-                ch = '\0';
-            }
-        }
-        Screen.CursorVisible = v;
-        HideCursorOnFullScreenInkey = false;
-        return ch;
-    }
-
-    /// <summary>
     /// Pauses for a duration
     /// </summary>
     /// <param name="duration"> The duration of the pause, in milliseconds </param>
+    [Obsolete("Use Pause(Timespan)")]
     public void Pause(int duration)
     {
         Thread.Sleep(duration);
+    }
+
+    public void Pause(TimeSpan timeSpan)
+    {
+        Thread.Sleep(timeSpan);
     }
 
     /// <summary>
@@ -9219,13 +9198,74 @@ public bool IsDead = false;
         ConsoleViewPort.SetBackground(image);
     }
 
+    private DateTime? lastKeystrokeDateTime = null;
+    public List<(char, TimeSpan)> gameReplayKeystrokeHistory = new List<(char, TimeSpan)>();
+    public Queue<(char, TimeSpan)> replayQueue = new Queue<(char, TimeSpan)>(); // Queue.Dequeue has a O(1) time complexity
+
+    //((char)0x36, TimeSpan.FromMilliseconds(0)),
+    //    (0x38, TimeSpan.FromMilliseconds(927)),
+    //    (0x38, TimeSpan.FromMilliseconds(1084)),
+    //    (0x38, TimeSpan.FromMilliseconds(1246)),
+    //    (0x38, TimeSpan.FromMilliseconds(1390)),
+    //    (0x38, TimeSpan.FromMilliseconds(1531)),
+    //    (0x38, TimeSpan.FromMilliseconds(1690)),
+    //    (0x38, TimeSpan.FromMilliseconds(1867)),
+    //    (0x38, TimeSpan.FromMilliseconds(2031)),
+    //    (0x38, TimeSpan.FromMilliseconds(2189)),
+    //    (0x38, TimeSpan.FromMilliseconds(2575)),
+    //    (0x38, TimeSpan.FromMilliseconds(2784)),
+    //    (0x36, TimeSpan.FromMilliseconds(3182)),
+    //    (0x32, TimeSpan.FromMilliseconds(3726)),
+    //    (0x32, TimeSpan.FromMilliseconds(3917)),
+    //    (0x36, TimeSpan.FromMilliseconds(4367)),
+    //    (0x32, TimeSpan.FromMilliseconds(4895)),
+    //    (0x36, TimeSpan.FromMilliseconds(5100)),
+    //    (0x0D, TimeSpan.FromMilliseconds(5884)),
+    //    (0x0D, TimeSpan.FromMilliseconds(6315)),
+
+
     /// <summary>
     /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort" and updates the <see cref="LastInputReceived"/> property./>
     /// </summary>
     /// <param name="k"> The keypress to add </param>
-    private void EnqueueKey(char k)
+    private void WaitAndEnqueueKey()
     {
-        if (k == 0)
+
+        char k;
+
+        // Check to see if we are in playback mode.
+        if (replayQueue.Count > 0)
+        {
+            // Replay the next keystroke.
+            (k, TimeSpan timeSpan) = replayQueue.Dequeue();
+            DateTime now = DateTime.Now;
+            if (lastKeystrokeDateTime == null)
+            {
+                lastKeystrokeDateTime = now;
+            }
+            DateTime nextKeystroke = lastKeystrokeDateTime.Value + timeSpan;
+            TimeSpan waitTime = nextKeystroke - now;
+            lastKeystrokeDateTime = nextKeystroke;
+            if (waitTime > TimeSpan.Zero)
+            {
+                Pause(waitTime);
+            }
+        }
+        else
+        {
+            // Wait for a keystroke from the console and record it and the elapsed time in milliseconds for replay.
+            k = ConsoleViewPort.WaitForKey();
+            DateTime now = DateTime.Now;
+            if (lastKeystrokeDateTime == null)
+            {
+                lastKeystrokeDateTime = now;
+            }
+            TimeSpan elapsedTime = now - lastKeystrokeDateTime.Value;
+            gameReplayKeystrokeHistory.Add((k, elapsedTime));
+            lastKeystrokeDateTime = now;
+        }
+
+        if (k == 0) // TODO: This should never be
         {
             return;
         }
@@ -9255,14 +9295,14 @@ public bool IsDead = false;
             UpdateScreen();
             while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
             {
-                EnqueueKey(ConsoleViewPort.WaitForKey());
+                WaitAndEnqueueKey();
             }
         }
         else
         {
             if (!ConsoleViewPort.KeyQueueIsEmpty())
             {
-                EnqueueKey(ConsoleViewPort.WaitForKey());
+                WaitAndEnqueueKey();
             }
         }
         if (KeyHead == KeyTail)
@@ -9275,6 +9315,61 @@ public bool IsDead = false;
             KeyTail = 0;
         }
         return true;
+    }
+
+    /// <summary>
+    /// Returns the next keystoke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
+    /// keystrokes are retrieved.
+    /// </summary>
+    /// <returns>The next key pressed.</returns>
+    public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
+    {
+        char ch = '\0';
+        if (_artificialKeyBuffer.Length > 0)
+        {
+            ch = _artificialKeyBuffer[0];
+            _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
+            HideCursorOnFullScreenInkey = false;
+            return ch;
+        }
+        bool v = Screen.CursorVisible;
+        if (!doNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
+        {
+            Screen.CursorVisible = true;
+        }
+        if (InPopupMenu)
+        {
+            Screen.CursorVisible = false;
+        }
+        while (ch == 0 && !Shutdown)
+        {
+            if (doNotWaitOnInkey && GetKeypress(out char kk, false, false))
+            {
+                ch = kk;
+                break;
+            }
+            if (doNotWaitOnInkey)
+            {
+                break;
+            }
+            GetKeypress(out ch, true, true);
+            if (ch == 29)
+            {
+                ch = '\0';
+                continue;
+            }
+            if (ch == '`')
+            {
+                ch = '\x1b';
+            }
+            if (ch == 30)
+            {
+                ch = '\0';
+            }
+        }
+        Screen.CursorVisible = v;
+        HideCursorOnFullScreenInkey = false;
+        return ch;
     }
 
     private void MapMovementKeys()
