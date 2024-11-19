@@ -15,11 +15,8 @@ internal abstract class WeaponItemFactory : ItemFactory
 {
     public WeaponItemFactory(Game game) : base(game) { }
 
-    public override void ApplyBonusForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
-    {
-        characteristics.BonusHit += Game.DieRoll(characteristics.BonusHit > 19 ? 1 : 20 - characteristics.BonusHit);
-        characteristics.BonusDamage += Game.DieRoll(characteristics.BonusDamage > 19 ? 1 : 20 - characteristics.BonusDamage);
-    }
+    public override int? RandomArtifactBonusDamageCeiling => 19;
+    public override int? RandomArtifactBonusHitCeiling => 19;
 
     /// <summary>
     /// Returns true, for all weapons where both the hit (ToH) and damage (ToD) are equal to or greater than zero.  False, for all weapons with either stat less than 0.

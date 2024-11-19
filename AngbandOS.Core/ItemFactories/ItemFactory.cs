@@ -1283,7 +1283,19 @@ internal abstract class ItemFactory : ItemAdditiveBundle
                     break;
             }
         }
-        ApplyBonusForRandomArtifactCreation(characteristics);
+        if (RandomArtifactBonusArmorCeiling != null)
+        {
+            characteristics.BonusArmorClass += Game.DieRoll(characteristics.BonusArmorClass > RandomArtifactBonusArmorCeiling.Value ? 1 : RandomArtifactBonusArmorCeiling.Value + 1 - characteristics.BonusArmorClass);
+        }
+        if (RandomArtifactBonusHitCeiling != null)
+        { 
+            characteristics.BonusHit += Game.DieRoll(characteristics.BonusHit > RandomArtifactBonusHitCeiling.Value ? 1 : RandomArtifactBonusHitCeiling.Value + 1 - characteristics.BonusArmorClass);
+        }
+        if (RandomArtifactBonusDamageCeiling != null)
+        {
+            characteristics.BonusDamage += Game.DieRoll(characteristics.BonusDamage > RandomArtifactBonusDamageCeiling.Value ? 1 : RandomArtifactBonusDamageCeiling.Value + 1 - characteristics.BonusArmorClass);
+        }
+
         characteristics.IgnoreAcid = true;
         characteristics.IgnoreElec = true;
         characteristics.IgnoreFire = true;
@@ -1415,12 +1427,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     #endregion
 
     #region Heavy Weights and Obsoletes - Virtual Methods and Virtual Complex Properties that must be resolved
-    /// <summary>
-    /// Applies an additional bonus to random artifacts.  Does nothing by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual void ApplyBonusForRandomArtifactCreation(RandomArtifactCharacteristics characteristics) { }
 
     public virtual void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {
@@ -1587,6 +1593,27 @@ internal abstract class ItemFactory : ItemAdditiveBundle
         }
     }
     #endregion
+
+    /// <summary>
+    /// Returns the ceiling value for bonus armor values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
+    /// be added to the bonus.  The die rolls will be provided a maximum value to prevent the bonus from going over the this ceiling value.  If the bonus is already above this ceiling
+    /// value, the die roll will only provide an additional bonus value of 1.  Returns a value of null, by default.
+    /// </summary>
+    public virtual int? RandomArtifactBonusArmorCeiling => null;
+
+    /// <summary>
+    /// Returns the ceiling value for bonus hit values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
+    /// be added to the bonus.  The die rolls will be provided a maximum value to prevent the bonus from going over the this ceiling value.  If the bonus is already above this ceiling
+    /// value, the die roll will only provide an additional bonus value of 1.  Returns a value of null, by default.
+    /// </summary>
+    public virtual int? RandomArtifactBonusHitCeiling => null;
+
+    /// <summary>
+    /// Returns the ceiling value for bonus damage values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
+    /// be added to the bonus.  The die rolls will be provided a maximum value to prevent the bonus from going over the this ceiling value.  If the bonus is already above this ceiling
+    /// value, the die roll will only provide an additional bonus value of 1.  Returns a value of null, by default.
+    /// </summary>
+    public virtual int? RandomArtifactBonusDamageCeiling => null;
 
     #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects
     /// <summary>
