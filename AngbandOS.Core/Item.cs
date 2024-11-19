@@ -246,7 +246,7 @@ internal sealed class Item : IComparable<Item>
     public int Weight { get; private set; }
 
     private bool EasyKnow => _factory.EasyKnow;
-    private int TurnOfLightValue => _factory.TurnOfLightValue;
+    private int TurnOfLightValue => _factory.ValuePerTurnOfLight;
     private int BaseValue => _factory.BaseValue;
     public int TreasureRating => _factory.TreasureRating;
     public Realm Realm => _factory.Realm;
@@ -2286,9 +2286,6 @@ internal sealed class Item : IComparable<Item>
                 }
             }
         }
-
-        // Run the old EnchantItem until all Enchantment scripts are done.
-        _factory.EnchantItem(this, usedOkay, lev, power); // Some item factories (i.g. armor, boots, helms etc) will convert the item into a RandomArtifact here.
 
         Game.TreasureRating += TreasureRating;
         if (IsRandomArtifact) 

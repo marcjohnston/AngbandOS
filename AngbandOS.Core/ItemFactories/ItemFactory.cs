@@ -1422,15 +1422,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <returns></returns>
     public virtual void ApplyBonusForRandomArtifactCreation(RandomArtifactCharacteristics characteristics) { }
 
-    /// <summary>
-    /// Applies magic to the item.  Does nothing, by default.  This apply magic method is always called after an object is created (new Item()) but not all new Item creation call ApplyMagic.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    [Obsolete("The enchanting of an item is now being performed by the Item.")]
-    public virtual void EnchantItem(Item item, bool usedOkay, int level, int power) { } // TODO: Needs to be built into the new Item(), should be renamed .. the Store is needed for FuelSources to be full not used
-
     public virtual void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
     {
         if (characteristics.ArtifactBias != null)
@@ -1670,7 +1661,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool CanProjectArrows => false;
 
     /// <summary>
-    /// Returns the maximum number of items that can be enchanted at one time.  A divisor of 1 is returned, by default.  Ammunition items return 20.  Item counts greater than this value
+    /// Returns the maximum number of items that can be enchanted at one time.  A value of 1 is returned, by default.  Ammunition items return 20.  Item counts greater than this value
     /// will have a decreased probability of enchantment.
     /// </summary>
     public virtual int EnchantmentMaximumCount => 1;
@@ -1683,7 +1674,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     /// <summary>
     /// Returns the value of each turn of light for light sources.  Returns 0, by default;
     /// </summary>
-    public virtual int TurnOfLightValue => 0;
+    public virtual int ValuePerTurnOfLight => 0;
 
     /// <summary>
     /// Returns the name of the activation script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
@@ -1697,7 +1688,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool IsBroken => false;
 
     /// <summary>
-    /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  
+    /// Returns true, if items of this factory that have a broken quality that should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  
     /// Returns false, by default.  Weapons, armor, orbs of light and broken items (items that negatively affect the player) return true.
     /// </summary>
     public virtual bool InitialBrokenStomp => false;
@@ -1748,7 +1739,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual int? MaxPhlogiston => null;
 
     /// <summary>
-    /// Returns the number of turns of light that consumeds for each world turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
+    /// Returns the number of turns of light that is consumed per turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
     /// Torches and laterns have burn rates greater than zero.
     /// </summary>
     public virtual int BurnRate => 0;
@@ -1820,7 +1811,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool GetsDamageMultiplier => false;
 
     /// <summary>
-    /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
+    /// Returns true, if the item can be sensed; false, otherwise.  Returns false, by default.
     /// </summary>
     public virtual bool IdentityCanBeSensed => false;
 
@@ -1850,7 +1841,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool IsWeapon => false;
 
     /// <summary>
-    /// Returns the number of items contained in the chest; or 0, if the item is not a chest.  Returns 0, by default.
+    /// Returns the number of items contained in the chest; or 0, if the item is not a container.  Returns 0, by default.
     /// </summary>
     public virtual int NumberOfItemsContained => 0;
 
