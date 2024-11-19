@@ -44,10 +44,10 @@ internal class MagicStoreFactory : StoreFactory
 
     protected override (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions => new (string, int)[]
     {
-        (nameof(CharismaAmuletJeweleryItemFactory), 1),
-        (nameof(ResistAcidAmuletJeweleryItemFactory), 1),
-        (nameof(SearchingAmuletJeweleryItemFactory), 1),
-        (nameof(SlowDigestionAmuletJeweleryItemFactory), 1),
+        (nameof(CharismaAmuletItemFactory), 1),
+        (nameof(ResistAcidAmuletItemFactory), 1),
+        (nameof(SearchingAmuletItemFactory), 1),
+        (nameof(SlowDigestionAmuletItemFactory), 1),
         (nameof(CantripsforBeginnersFolkBookItemFactory), 2),
         (nameof(MagicksOfMasteryFolkBookItemFactory), 2),
         (nameof(MajorMagicksFolkBookItemFactory), 2),

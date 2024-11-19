@@ -12,7 +12,7 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact
 {
     private AmuletOfAbdulAlhazredFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(IngweAmuletJeweleryItemFactory);
+    protected override string BaseItemFactoryName => nameof(IngweAmuletItemFactory);
 
     // Amulet of Abdul Alhazred dispels evil
     protected override string? ActivationName => nameof(DispelEvil5xEvery300p1d300Activation);

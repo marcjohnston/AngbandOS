@@ -12,7 +12,7 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact
 {
     private AmuletOfLobonFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(CarlammasAmuletJeweleryItemFactory);
+    protected override string BaseItemFactoryName => nameof(CarlammasAmuletItemFactory);
 
     // Amulet of Lobon protects us from evil
     protected override string? ActivationName => nameof(ProtectionFromEvilActivation);
