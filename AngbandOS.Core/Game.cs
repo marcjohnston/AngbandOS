@@ -9039,9 +9039,10 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Returns the next keypress. The behavior of this function is modified by other class properties
+    /// Returns the next keystoke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
+    /// keystrokes are retrieved.
     /// </summary>
-    /// <returns> The next key pressed </returns>
+    /// <returns>The next key pressed.</returns>
     public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
     {
         char ch = '\0';
@@ -9223,7 +9224,7 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Adds a keypress to the internal queue
+    /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort" and updates the <see cref="LastInputReceived"/> property./>
     /// </summary>
     /// <param name="k"> The keypress to add </param>
     private void EnqueueKey(char k)
@@ -9237,10 +9238,14 @@ public bool IsDead = false;
         {
             KeyHead = 0;
         }
+
+        LastInputReceived = DateTime.Now;
+        ConsoleViewPort.InputReceived();
     }
 
     /// <summary>
-    /// Gets a keypress from the internal queue, waiting until one is added if necessary
+    /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
+    /// queue is empty.
     /// </summary>
     /// <param name="ch"> The next key from the queue </param>
     /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
@@ -9252,11 +9257,9 @@ public bool IsDead = false;
         if (wait)
         {
             UpdateScreen();
-            while (KeyHead == KeyTail && !Shutdown)
+            while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
             {
                 EnqueueKey(ConsoleViewPort.WaitForKey());
-                LastInputReceived = DateTime.Now;
-                ConsoleViewPort.InputReceived();
             }
         }
         else
