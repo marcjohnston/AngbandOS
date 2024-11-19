@@ -16,7 +16,7 @@ internal sealed class Item : IComparable<Item>
 {
     #region State Data - Fields that are maintained
     /// <summary>
-    /// Returns true, if the item has already been identify sensed.  This property used to be a flag in the IdentifyFlags.
+    /// Returns true, if the player has sensed the item.  Item characteristics that can be sensed are <see cref="IsCursed"/> and <see cref="IsBroken"/> (maybe <see cref="IsArtifact"/> too?)
     /// </summary>
     public bool IdentSense;
 
@@ -83,7 +83,7 @@ internal sealed class Item : IComparable<Item>
     public int ActivationRechargeTimeRemaining;
 
     /// <summary>
-    /// Returns null if the container is unlocked and can be opened without picking, an empty array, if the container is disarmed and locked, or an array of traps.
+    /// Returns null if the container is unlocked and can be opened without picking; or an empty array, if a previously trapped container is now disarmed and locked, or an array of traps.
     /// </summary>
     public ChestTrap[]? ContainerTraps = null; // TODO: This doesn't support an open for a trapped container.
 
@@ -245,7 +245,6 @@ internal sealed class Item : IComparable<Item>
 
     public int Weight { get; private set; }
 
-    private bool HasQualityRatings => _factory.HasQualityRatings;
     private bool EasyKnow => _factory.EasyKnow;
     private int TurnOfLightValue => _factory.TurnOfLightValue;
     private int BaseValue => _factory.BaseValue;
@@ -1048,13 +1047,19 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Returns a quality rating for the item using the following algorithm:
-    /// 1. 
+    /// Returns a quality rating for the item using the following algorithm.  The rating tests are performed in order, and the rating is returned when the test matches.
+    /// 1. If the ItemFactory indicates that items do not have quality rating <see cref="ItemFactory.HasQualityRatings"/>, the <see cref="BrokenItemQualityRating"/> is returned.
+    /// 2. If the item is an artifact (fixed or random), the <see cref="SpecialItemQualityRating"/> is returned; unless the item is cursed or broken, for which the <see cref="TerribleItemQualityRating"/> is returned.
+    /// 3. If the item is rare, the <see cref="ExcellentItemQualityRating"/> is returned; unless the item is cursed or broken, for which the <see cref="WorthlessItemQualityRating"/> is returned.
+    /// 4. If the item <see cref="IsCursed"/>, the <see cref="CursedItemQualityRating"/> is returned.
+    /// 5. If the item <see cref="IsBroken"/>, or the <see cref="BonusDamage"/>, <see cref="BonusHit"/> or <see cref="BonusArmorClass"/> are less than zero, the <see cref="BrokenItemQualityRating"/> is returned.
+    /// 6. If the <see cref="BonusDamage"/>, <see cref="BonusHit"/> or <see cref="BonusArmorClass"/> is greater than 0, then the <see cref="GoodItemQualityRating"/> is returned.
+    /// 7. The <see cref="AverageItemQualityRating"/> is returned.
     /// </summary>
     /// <returns></returns>
     public ItemQualityRating GetQualityRating()
     {
-        if (!HasQualityRatings)
+        if (!_factory.HasQualityRatings)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1984,6 +1989,17 @@ internal sealed class Item : IComparable<Item>
         return value;
     }
 
+    /// <summary>
+    /// Returns true, if the item can be stomped.  Returns the stompable status based on the item quality rating, by default.  The algorithm for determine if an item can be stomped is:
+    /// 1. If the item is unknown (e.g. <see cref="IsKnown"/> is false) and the player has not been able to sense the object, false is returned.
+    /// 2. If the item is unknown, and the item <see cref="HasFlavor"/> and the player has identified the flavor <see cref="IsFlavorAware"/>, then the <see cref="StompableType.Broken"/> setting value is returned.
+    /// 3. Unknown containers will return false.
+    /// 4. Open containers will return the <see cref="StompableType.Broken"/> setting value.
+    /// 5. Closed containers that are not trapped will return the <see cref="StompableType.Average"/> setting value.
+    /// 6. Unlocked containers will return the <see cref="StompableType.Good"/> setting value.
+    /// 7. Locked containers that are trapped or disarmed will return the <see cref="StompableType.Excellent"/> setting value.
+    /// 8. The item factory will return the <see cref="StompSetting"/> for other non-containers items.
+    /// </summary>
     public bool Stompable
     {
         get
@@ -2002,7 +2018,43 @@ internal sealed class Item : IComparable<Item>
                     return false;
                 }
             }
-            return _factory.IsStompable(this);
+
+            if (IsContainer)
+            {
+                if (!IsKnown())
+                {
+                    return false;
+                }
+                else if (ContainerIsOpen)
+                {
+                    return _factory.Stompable[StompableType.Broken]; // Empty
+                }
+                else if (ContainerTraps == null)
+                {
+                    return _factory.Stompable[StompableType.Average];
+                }
+                else
+                {
+                    if (ContainerTraps.Length == 0)
+                    {
+                        return _factory.Stompable[StompableType.Good];
+                    }
+                    else
+                    {
+                        return _factory.Stompable[StompableType.Excellent];
+                    }
+                }
+            }
+            else
+            {
+                ItemQualityRating itemQualityRating = GetQualityRating();
+                int? stompableIndex = itemQualityRating.StompIndex;
+                if (stompableIndex == null)
+                {
+                    return false;
+                }
+                return _factory.Stompable[stompableIndex.Value];
+            }
         }
         set
         {

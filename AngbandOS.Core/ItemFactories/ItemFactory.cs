@@ -1416,22 +1416,6 @@ internal abstract class ItemFactory : ItemAdditiveBundle
 
     #region Heavy Weights and Obsoletes - Virtual Methods and Virtual Complex Properties that must be resolved
     /// <summary>
-    /// Returns true, if the item can be stomped.  Returns the stompable status based on the item quality rating, by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual bool IsStompable(Item item)
-    {
-        ItemQualityRating itemQualityRating = item.GetQualityRating();
-        int? stompableIndex = itemQualityRating.StompIndex;
-        if (stompableIndex == null)
-        {
-            return false;
-        }
-        return Stompable[stompableIndex.Value];
-    }
-
-    /// <summary>
     /// Applies an additional bonus to random artifacts.  Does nothing by default.
     /// </summary>
     /// <param name="item"></param>
@@ -1927,8 +1911,8 @@ internal abstract class ItemFactory : ItemAdditiveBundle
     public virtual bool AskDestroyAll => true;
 
     /// <summary>
-    /// Returns true, if the object have different quality ratings; false, if items of the factory all have the same quality rating.  Returns false, by default.  
-    /// Armor, weapons and orbs of light return true.  Items without quality rating will always use the Broken stomp type.  Items with quality will use various
+    /// Returns true, if the object has different quality ratings; false, if items of the factory all have the same quality rating.  Returns false, by default.  
+    /// Armor, weapons and orbs of light return true.  Items without quality ratings will always use the Broken stomp type.  Items with various quality ratings will use various
     /// item properties to determine their quality.
     /// </summary>
     public virtual bool HasQualityRatings => false;

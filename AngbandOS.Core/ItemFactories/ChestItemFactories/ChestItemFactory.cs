@@ -22,33 +22,6 @@ internal abstract class ChestItemFactory : ItemFactory
 
     public override bool IsContainer => true;
 
-    public override bool IsStompable(Item item)
-    {
-        if (!item.IsKnown())
-        {
-            return false;
-        }
-        else if (item.ContainerIsOpen)
-        {
-            return Stompable[StompableType.Broken]; // Empty
-        }
-        else if (item.ContainerTraps == null)
-        {
-            return Stompable[StompableType.Average];
-        }
-        else
-        {
-            if (item.ContainerTraps.Length == 0)
-            {
-                return Stompable[StompableType.Good];
-            }
-            else
-            {
-                return Stompable[StompableType.Excellent];
-            }
-        }
-    }
-
     public override int PackSort => 36;
 
     public override ColorEnum Color => ColorEnum.Grey;
