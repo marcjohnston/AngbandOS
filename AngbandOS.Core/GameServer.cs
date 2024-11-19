@@ -159,6 +159,16 @@ public class GameServer
         }
     }
 
+    private string GenerateReplayQueue((char, TimeSpan)[] replayQueue)
+    {
+        List<string> s = new List<string>();
+        foreach ((char c, TimeSpan t) in replayQueue)
+        {
+            byte b = (byte)c;
+            s.Add($"replayQueue.Enqueue(((char)0x{b.ToString("X2")}, TimeSpan.FromMilliseconds({(long)t.TotalMilliseconds}));");
+        }
+        return string.Join("\n", s);
+    }
     /// <summary>
     /// Plays a game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
@@ -181,6 +191,7 @@ public class GameServer
         }
         catch (Exception ex)
         {
+            string gameReplayKeystrokeHistory = GenerateReplayQueue(Game.gameReplayKeystrokeHistory.ToArray());
             console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
             return false;
         }
