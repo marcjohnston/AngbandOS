@@ -1264,7 +1264,7 @@ internal abstract class ItemFactory : ItemAdditiveBundle
                         ItemAdditiveBundle? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
                         if (itemAdditiveBundle != null)
                         {
-                            characteristics.Merge(itemAdditiveBundle);
+                            characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
                         }
                     }
                     break;

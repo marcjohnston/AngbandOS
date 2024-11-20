@@ -80,7 +80,7 @@ internal abstract class ArtifactBias : IGetKey
             {
                 if (itemTestProbability.Test(Game) && itemTest.Test(characteristics))
                 {
-                    characteristics.Merge(itemAdditiveBundle);
+                    characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
                     if (moreProbability.Test(Game))
                     {
                         return true;

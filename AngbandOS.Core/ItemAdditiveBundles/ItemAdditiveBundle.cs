@@ -12,12 +12,110 @@ namespace AngbandOS.Core.ItemAdditiveBundles;
 /// artifact creation process.
 /// </summary>
 [Serializable]
-internal abstract class ItemAdditiveBundle : IItemCharacteristics, IGetKey
+internal abstract class ItemAdditiveBundle : IGetKey
 {
     protected readonly Game Game;
     protected ItemAdditiveBundle(Game game)
     {
         Game = game;
+    }
+
+    public IItemCharacteristics GenerateItemCharacteristics()
+    {
+        ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
+        itemCharacteristics.Activation = Activation;
+        itemCharacteristics.Aggravate = Aggravate;
+        itemCharacteristics.AntiTheft = AntiTheft;
+        itemCharacteristics.ArtifactBias = ArtifactBias;
+        itemCharacteristics.Blessed = Blessed;
+        itemCharacteristics.Blows = Blows;
+        itemCharacteristics.BrandAcid = BrandAcid;
+        itemCharacteristics.BrandCold = BrandCold;
+        itemCharacteristics.BrandElec = BrandElec;
+        itemCharacteristics.BrandFire = BrandFire;
+        itemCharacteristics.BrandPois = BrandPois;
+        itemCharacteristics.Cha = Cha;
+        itemCharacteristics.Chaotic = Chaotic;
+        itemCharacteristics.Con = Con;
+        itemCharacteristics.IsCursed = IsCursed;
+        itemCharacteristics.Dex = Dex;
+        itemCharacteristics.DrainExp = DrainExp;
+        itemCharacteristics.DreadCurse = DreadCurse;
+        itemCharacteristics.EasyKnow = EasyKnow;
+        itemCharacteristics.Feather = Feather;
+        itemCharacteristics.FreeAct = FreeAct;
+        itemCharacteristics.HeavyCurse = HeavyCurse;
+        itemCharacteristics.HideType = HideType;
+        itemCharacteristics.HoldLife = HoldLife;
+        itemCharacteristics.IgnoreAcid = IgnoreAcid;
+        itemCharacteristics.IgnoreCold = IgnoreCold;
+        itemCharacteristics.IgnoreElec = IgnoreElec;
+        itemCharacteristics.IgnoreFire = IgnoreFire;
+        itemCharacteristics.ImAcid = ImAcid;
+        itemCharacteristics.ImCold = ImCold;
+        itemCharacteristics.ImElec = ImElec;
+        itemCharacteristics.ImFire = ImFire;
+        itemCharacteristics.Impact = Impact;
+        itemCharacteristics.Infra = Infra;
+        itemCharacteristics.InstaArt = InstaArt;
+        itemCharacteristics.Int = Int;
+        itemCharacteristics.KillDragon = KillDragon;
+        itemCharacteristics.NoMagic = NoMagic;
+        itemCharacteristics.NoTele = NoTele;
+        itemCharacteristics.PermaCurse = PermaCurse;
+        itemCharacteristics.Radius = Radius;
+        itemCharacteristics.Reflect = Reflect;
+        itemCharacteristics.Regen = Regen;
+        itemCharacteristics.ResAcid = ResAcid;
+        itemCharacteristics.ResBlind = ResBlind;
+        itemCharacteristics.ResChaos = ResChaos;
+        itemCharacteristics.ResCold = ResCold;
+        itemCharacteristics.ResConf = ResConf;
+        itemCharacteristics.ResDark = ResDark;
+        itemCharacteristics.ResDisen = ResDisen;
+        itemCharacteristics.ResElec = ResElec;
+        itemCharacteristics.ResFear = ResFear;
+        itemCharacteristics.ResFire = ResFire;
+        itemCharacteristics.ResLight = ResLight;
+        itemCharacteristics.ResNether = ResNether;
+        itemCharacteristics.ResNexus = ResNexus;
+        itemCharacteristics.ResPois = ResPois;
+        itemCharacteristics.ResShards = ResShards;
+        itemCharacteristics.ResSound = ResSound;
+        itemCharacteristics.Search = Search;
+        itemCharacteristics.SeeInvis = SeeInvis;
+        itemCharacteristics.ShElec = ShElec;
+        itemCharacteristics.ShFire = ShFire;
+        itemCharacteristics.ShowMods = ShowMods;
+        itemCharacteristics.SlayAnimal = SlayAnimal;
+        itemCharacteristics.SlayDemon = SlayDemon;
+        itemCharacteristics.SlayDragon = SlayDragon;
+        itemCharacteristics.SlayEvil = SlayEvil;
+        itemCharacteristics.SlayGiant = SlayGiant;
+        itemCharacteristics.SlayOrc = SlayOrc;
+        itemCharacteristics.SlayTroll = SlayTroll;
+        itemCharacteristics.SlayUndead = SlayUndead;
+        itemCharacteristics.SlowDigest = SlowDigest;
+        itemCharacteristics.Speed = Speed;
+        itemCharacteristics.Stealth = Stealth;
+        itemCharacteristics.Str = Str;
+        itemCharacteristics.SustCha = SustCha;
+        itemCharacteristics.SustCon = SustCon;
+        itemCharacteristics.SustDex = SustDex;
+        itemCharacteristics.SustInt = SustInt;
+        itemCharacteristics.SustStr = SustStr;
+        itemCharacteristics.SustWis = SustWis;
+        itemCharacteristics.Telepathy = Telepathy;
+        itemCharacteristics.Teleport = Teleport;
+        itemCharacteristics.TreasureRating = TreasureRating;
+        itemCharacteristics.Tunnel = Tunnel;
+        itemCharacteristics.Vampiric = Vampiric;
+        itemCharacteristics.Vorpal = Vorpal;
+        itemCharacteristics.Wis = Wis;
+        itemCharacteristics.Wraith = Wraith;
+        itemCharacteristics.XtraMight = XtraMight;
+        itemCharacteristics.XtraShots = XtraShots;
+        return itemCharacteristics;
     }
 
     public virtual string Key => GetType().Name;
