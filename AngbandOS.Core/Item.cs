@@ -1115,18 +1115,18 @@ internal sealed class Item : IComparable<Item>
         ItemCharacteristics characteristics = new ItemCharacteristics();
 
         // Merge the characteristics from the base item category.
-        characteristics.Merge(_factory); // TODO: This merging is obsolete
+        characteristics.Merge(_factory.GenerateItemCharacteristics()); // TODO: This merging is obsolete
 
         // Now merge the characteristics from the fixed artifact, if there is one.
         if (FixedArtifact != null)
         {
-            characteristics.Merge(FixedArtifact);
+            characteristics.Merge(FixedArtifact.GenerateItemCharacteristics());
         }
 
         // Now merge the characteristics from the rare item type, if there is one.
         if (RareItem != null)
         {
-            characteristics.Merge(RareItem);
+            characteristics.Merge(RareItem.GenerateItemCharacteristics());
         }
 
         // Finally, merge any additional random artifact characteristics, if there are any.
@@ -1135,7 +1135,7 @@ internal sealed class Item : IComparable<Item>
         // If there are any random power characteristics, apply those also.
         if (RandomPower != null) // TODO: This smells funny
         {
-            characteristics.Merge(RandomPower);
+            characteristics.Merge(RandomPower.GenerateItemCharacteristics());
         }
         return characteristics;
     }
@@ -2452,7 +2452,7 @@ internal sealed class Item : IComparable<Item>
         ItemAdditiveBundle? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
         if (itemAdditiveBundle != null)
         {
-            Characteristics.Merge(itemAdditiveBundle);
+            Characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
         }
     }
 

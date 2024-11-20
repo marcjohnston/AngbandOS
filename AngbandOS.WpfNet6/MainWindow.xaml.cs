@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface.Configuration;
+using AngbandOS.PersistentStorage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -208,23 +209,35 @@ public partial class MainWindow : Window, IConsoleViewPort
     private void Thread_DoWork(object? sender, DoWorkEventArgs e)
     {
         GameServer gameServer = new GameServer();
-        string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
-        ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemCorePersistentStorage(saveFilename);
+        string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string savePath = Path.Combine(myDocumentsPath, "My Games");
+        string saveFilename = Path.Combine(savePath, "angbandos.savefile");
+        string replayFilename = Path.Combine(savePath, "replay.json");
+        ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
         if (persistentStorage.GameExists())
         {
-            gameServer.PlayExistingGame(this, persistentStorage);
+            GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage);
+            File.WriteAllText(replayFilename, gameResults.Replay);
         }
         else
         {
+            FileSystemGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new FileSystemGameConfigurationPersistentStorage(saveFilename);
+
+            // Check to see if there is a replay.json.
+            string? gameReplay = null;
+            if (File.Exists(replayFilename))
+            {
+                gameReplay = File.ReadAllText(replayFilename);
+            }
+
             //GameConfiguration gameConfiguration = GameConfiguration.LoadGameConfiguration(persistentStorage);
             //GameConfiguration gameConfiguration = GameConfiguration.LoadGamePack();
             //GameConfiguration gameConfiguration = new GameConfiguration();
-            IGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new AngbandOS.PersistentStorage.FileSystemGameConfigurationPersistentStorage(saveFilename);
             GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
 
             //gameConfiguration.StartupTownName = "DylathLeenTown";
-            gameServer.PlayNewGame(this, persistentStorage, gameConfiguration);
+            GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, gameConfiguration, gameReplay);
+            File.WriteAllText(replayFilename, gameResults.Replay);
         }
     }
 

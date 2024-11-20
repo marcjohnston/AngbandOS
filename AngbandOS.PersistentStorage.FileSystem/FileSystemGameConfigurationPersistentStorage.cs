@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace AngbandOS.PersistentStorage
 {
-    public class FileSystemGameConfigurationPersistentStorage : IGameConfigurationPersistentStorage
+    public class FileSystemGameConfigurationPersistentStorage
     {
         private string SaveFilename;
 

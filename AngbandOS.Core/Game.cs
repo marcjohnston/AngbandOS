@@ -1071,8 +1071,17 @@ public bool IsDead = false;
     /// Creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    public Game(GameConfiguration gameConfiguration)
+    public Game(GameConfiguration gameConfiguration, string? serializedGameReplay)
     {
+        // Initialize the game replay, if needed.
+        if (!string.IsNullOrEmpty(serializedGameReplay))
+        {
+            GameReplay gameReplay = JsonSerializer.Deserialize<GameReplay>(serializedGameReplay);
+            MainSequenceRandomSeed = gameReplay.MainSequenceRandomSeed;
+            FixedSequenceRandomSeed = gameReplay.FixedSequenceRandomSeed;
+            ReplayQueue.AddRange(gameReplay.GameReplaySteps);
+        }
+
         IsDead = true;
         Map = new Map(this);
 
@@ -2330,85 +2339,9 @@ public bool IsDead = false;
     /// <param name="updateMonitor"></param>
     public void Play(IConsoleViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
-        // Replay Druid, Klackon, Female error
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(0)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(750)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(271)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(158)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(163)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(141)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(161)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(156)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(157)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(146)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(673)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(175)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(385)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(159)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(157)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(338)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(575)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(349)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(210)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(432)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(641)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(490)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(288)));
-        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(545)));
-        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(350)));
-
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(0)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(174)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(150)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(157)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(158)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(178)));
-        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(299)));
-        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(161)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(1854)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(197)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(156)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(191)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(160)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(159)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(190)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(160)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(175)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(193)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(207)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(163)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(155)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(193)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(179)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(21853)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(1022)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(176)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(163)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(155)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(146)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(170)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(243)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(171)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(322)));
-        //replayQueue.Enqueue(((char)0x34, TimeSpan.FromMilliseconds(212)));
-        //replayQueue.Enqueue(((char)0x38, TimeSpan.FromMilliseconds(220)));
-        //replayQueue.Enqueue(((char)0x36, TimeSpan.FromMilliseconds(17566)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(71010)));
-        //replayQueue.Enqueue(((char)0x3E, TimeSpan.FromMilliseconds(1989)));
-        //replayQueue.Enqueue(((char)0x20, TimeSpan.FromMilliseconds(870)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(4192)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(192)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(159)));
-        //replayQueue.Enqueue(((char)0x1B, TimeSpan.FromMilliseconds(788)));
-        //replayQueue.Enqueue(((char)0x32, TimeSpan.FromMilliseconds(1372)));
-        //replayQueue.Enqueue(((char)0x0D, TimeSpan.FromMilliseconds(307)));
-        //MainSequenceRandomSeed = 1481391657;
-        //FixedSequenceRandomSeed = 712658850;
-
         // If this game was restored, then the Random variable will not be here and we need to create them.  The Random were created when the Game
         // was instantiated as part of the New game process so that Singletons have access to non-fixed random numbers.
-        if (replayQueue.Count > 0)
+        if (ReplayQueue.Count > 0)
         {
             _mainSequence = new Random(MainSequenceRandomSeed);
             _fixed = new Random(FixedSequenceRandomSeed);
@@ -9264,9 +9197,20 @@ public bool IsDead = false;
         ConsoleViewPort.SetBackground(image);
     }
 
-    private DateTime? lastKeystrokeDateTime = null;
-    public List<(char, TimeSpan)> gameReplayKeystrokeHistory = new List<(char, TimeSpan)>();
-    public Queue<(char, TimeSpan)> replayQueue = new Queue<(char, TimeSpan)>(); // Queue.Dequeue has a O(1) time complexity
+    /// <summary>
+    /// Returns the date and time of when the last keystroke was presented to the game either by the replay system or via the keyboard/console.
+    /// </summary>
+    private DateTime? LastKeystrokeDateTime = null;
+
+    /// <summary>
+    /// Tracks the index for the GameReplayStep that will be sent to the game during game replay mode.  In recording mode, it is incremented to ensure the game doesn't attempt to replay the same keystroke.
+    /// </summary>
+    private int ReplayQueueIndex = 0;
+
+    /// <summary>
+    /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
+    /// </summary>
+    public readonly List<GameReplayStep> ReplayQueue = new List<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
 
     //((char)0x36, TimeSpan.FromMilliseconds(0)),
     //    (0x38, TimeSpan.FromMilliseconds(927)),
@@ -9300,35 +9244,57 @@ public bool IsDead = false;
         char k;
 
         // Check to see if we are in playback mode.
-        if (replayQueue.Count > 0)
+        if (ReplayQueueIndex < ReplayQueue.Count)
         {
-            // Replay the next keystroke.
-            (k, TimeSpan timeSpan) = replayQueue.Dequeue();
+            // Replay the next keystroke.  This is a non-destructive (non-dequeue) peek.  We increment the index pointer.
+            GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex++];
+
+            // Record the time stamp right now.
             DateTime now = DateTime.Now;
-            if (lastKeystrokeDateTime == null)
+
+            // Initialize the last keystroke timestamp, if needed.
+            if (LastKeystrokeDateTime == null)
             {
-                lastKeystrokeDateTime = now;
+                LastKeystrokeDateTime = now;
             }
-            DateTime nextKeystroke = lastKeystrokeDateTime.Value + timeSpan;
+
+            // Compute when the next keystroke should be submitted.
+            DateTime nextKeystroke = LastKeystrokeDateTime.Value + gameReplayStep.WaitTime;
+
+            // Compute how much time we need to wait and wait that time out.
             TimeSpan waitTime = nextKeystroke - now;
-            lastKeystrokeDateTime = nextKeystroke;
             if (waitTime > TimeSpan.Zero)
             {
                 Pause(waitTime);
             }
+
+            // Deliver the keystroke and record the time stamp.
+            k = gameReplayStep.Keystroke;
+            LastKeystrokeDateTime = nextKeystroke;
         }
         else
         {
             // Wait for a keystroke from the console and record it and the elapsed time in milliseconds for replay.
             k = ConsoleViewPort.WaitForKey();
+
+            // Record the timestamp right now.
             DateTime now = DateTime.Now;
-            if (lastKeystrokeDateTime == null)
+
+            // Initialize the last keystroke time stamp, if needed.
+            if (LastKeystrokeDateTime == null)
             {
-                lastKeystrokeDateTime = now;
+                LastKeystrokeDateTime = now;
             }
-            TimeSpan elapsedTime = now - lastKeystrokeDateTime.Value;
-            gameReplayKeystrokeHistory.Add((k, elapsedTime));
-            lastKeystrokeDateTime = now;
+
+            // Compute the elapsed time since the previous keystroke and update the previous keystroke timestamp.
+            TimeSpan elapsedTime = now - LastKeystrokeDateTime.Value;
+            LastKeystrokeDateTime = now;
+
+            // Append the replay step.
+            ReplayQueue.Add(new GameReplayStep(elapsedTime, k));
+
+            // We are in recording mode.  Keep the replay queue index up to date.
+            ReplayQueueIndex = ReplayQueue.Count;
         }
 
         if (k == 0) // TODO: This should never be
@@ -17423,7 +17389,7 @@ public bool IsDead = false;
 
     private int _fixedSeed;
 
-    public int FixedSeed
+    public int FixedSeed // TODO: This is ugly
     {
         get => _fixedSeed;
         set
