@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemAdditiveBundles;
 
 /// <summary>
-/// Represents a set of item characteristics that can be merges with another set of ItemCharacterstics.  These objects are used <see cref="RareItem"/> objects and during the random 
+/// Represents a set of item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
 [Serializable]
