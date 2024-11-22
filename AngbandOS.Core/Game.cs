@@ -2161,7 +2161,7 @@ public bool IsDead = false;
     /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
     /// </summary>
     /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
-    public void SavePlayer()
+    public void SaveGame()
     {
         BinaryFormatter formatter = new BinaryFormatter();
         MemoryStream memoryStream = new MemoryStream();
@@ -2660,7 +2660,7 @@ public bool IsDead = false;
         HandleStuff();
         UpdateScreen();
         DiedFrom = "(saved)";
-        SavePlayer();
+        SaveGame();
         UpdateScreen();
         DiedFrom = "(alive and well)";
     }
@@ -3343,7 +3343,7 @@ public bool IsDead = false;
             }
 
             //HighScore score = new HighScore(this);
-            SavePlayer();
+            SaveGame();
             PrintTomb();
             if (IsWizard.BoolValue)
             {
