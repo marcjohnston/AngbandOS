@@ -9249,11 +9249,8 @@ public bool IsDead = false;
         char k;
 
         // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.
-        if (!UseFixed)
-        {
-            CurrentSequenceRandomSeed = Next(int.MaxValue - 1);
-            _mainSequence = new Random(CurrentSequenceRandomSeed);
-        }
+        CurrentSequenceRandomSeed = Next(int.MaxValue - 1);
+        _mainSequence = new Random(CurrentSequenceRandomSeed);
 
         // Check to see if we are in playback mode.
         if (ReplayQueueIndex < ReplayQueue.Count)
