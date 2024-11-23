@@ -4064,6 +4064,12 @@ public bool IsDead = false;
             else
             {
                 MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
+
+                // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
+                // has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
+                CurrentSequenceRandomSeed = Next(int.MaxValue - 1);
+                _mainSequence = new Random(CurrentSequenceRandomSeed);
+
                 RequestCommand(false);
                 ProcessCommand(false);
                 CloseBatchOfMessages();
@@ -9247,10 +9253,6 @@ public bool IsDead = false;
     private void WaitAndEnqueueKey()
     {
         char k;
-
-        // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.
-        CurrentSequenceRandomSeed = Next(int.MaxValue - 1);
-        _mainSequence = new Random(CurrentSequenceRandomSeed);
 
         // Check to see if we are in playback mode.
         if (ReplayQueueIndex < ReplayQueue.Count)
