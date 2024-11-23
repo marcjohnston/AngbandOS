@@ -16,6 +16,40 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
+    #region Game Replay
+    /// <summary>
+    /// Returns the date and time of when the last keystroke was presented to the game either by the replay system or via the keyboard/console.
+    /// </summary>
+    private DateTime? LastKeystrokeDateTime = null;
+
+    /// <summary>
+    /// Tracks the index for the GameReplayStep that will be sent to the game during game replay mode.  In recording mode, it is incremented to ensure the game doesn't attempt to replay the same keystroke.
+    /// </summary>
+    private int ReplayQueueIndex = 0;
+
+    /// <summary>
+    /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
+    /// </summary>
+    public readonly List<GameReplayStep> ReplayQueue = new List<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
+
+    /// <summary>
+    /// Returns the random seed to start the game that is applied to the non-fixed random generator.
+    /// </summary>
+    public int MainSequenceRandomSeed;
+
+    /// <summary>
+    /// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
+    /// the non-fixed random generator when a saved game is restored.
+    /// </summary>
+    public int CurrentSequenceRandomSeed;
+
+    /// <summary>
+    /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
+    /// to exit the popup menu are not recorded--in actuality, those keystrokes are removed from the queue.
+    /// </summary>
+    public bool PreviousInPopupMenu = false;
+    #endregion
+
     public readonly RefreshMapProperty RefreshMap;
     public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
     public bool IsBirthday;
@@ -1077,7 +1111,7 @@ public bool IsDead = false;
     /// </remarks>
     public Game(GameConfiguration gameConfiguration, string? serializedGameReplay)
     {
-        // Initialize the game replay, if needed.
+        // Restore the game replay, if needed.
         if (!string.IsNullOrEmpty(serializedGameReplay))
         {
             GameReplay gameReplay = JsonSerializer.Deserialize<GameReplay>(serializedGameReplay);
@@ -2337,10 +2371,6 @@ public bool IsDead = false;
         GenerateNewLevel();
     }
 
-    public int MainSequenceRandomSeed;
-    public int CurrentSequenceRandomSeed;
-    public bool PreviousInPopupMenu = false;
-
     /// <summary>
     /// Plays the current game.
     /// </summary>
@@ -2363,6 +2393,9 @@ public bool IsDead = false;
             // Restore an existing game to continue playing.
             _mainSequence = new Random(CurrentSequenceRandomSeed);
         }
+
+        // Reset the last keystroke date and time.  This ensures the time offline isn't recorded as wait time.
+        LastKeystrokeDateTime = DateTime.Now;
 
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
@@ -9203,19 +9236,9 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Returns the date and time of when the last keystroke was presented to the game either by the replay system or via the keyboard/console.
+    /// Returns the maximum elapsed time to submit a replay keystroke or null, to impose no limit.
     /// </summary>
-    private DateTime? LastKeystrokeDateTime = null;
-
-    /// <summary>
-    /// Tracks the index for the GameReplayStep that will be sent to the game during game replay mode.  In recording mode, it is incremented to ensure the game doesn't attempt to replay the same keystroke.
-    /// </summary>
-    private int ReplayQueueIndex = 0;
-
-    /// <summary>
-    /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
-    /// </summary>
-    public readonly List<GameReplayStep> ReplayQueue = new List<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
+    public TimeSpan? MaxKeystrokeReplayElapsedTime = new TimeSpan(0, 0, 0, 0, 0);
 
     /// <summary>
     /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort" and updates the <see cref="LastInputReceived"/> property./>
@@ -9235,31 +9258,45 @@ public bool IsDead = false;
         // Check to see if we are in playback mode.
         if (ReplayQueueIndex < ReplayQueue.Count)
         {
-            // Replay the next keystroke.  This is a non-destructive (non-dequeue) peek.  We increment the index pointer.
-            GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex++];
+            // Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
+            GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex];
 
-            // Record the time stamp right now.
+            // Compute how much elapsed time occured since the last keystroke.
+            TimeSpan keystrokeElapsedTime = ReplayQueueIndex == 0 ? TimeSpan.Zero : ReplayQueue[ReplayQueueIndex].DateTime - ReplayQueue[ReplayQueueIndex - 1].DateTime;
+            ReplayQueueIndex++;
+
+            // Retrieve the current date and time for the computations.
             DateTime now = DateTime.Now;
 
-            // Initialize the last keystroke timestamp, if needed.
+            // Check to see if the last keystroke date and time needs to be initialized.
             if (LastKeystrokeDateTime == null)
             {
                 LastKeystrokeDateTime = now;
             }
 
-            // Compute when the next keystroke should be submitted.
-            DateTime nextKeystroke = LastKeystrokeDateTime.Value + gameReplayStep.WaitTime;
+            // Determine when the next keystroke should be submitted.
+            DateTime nextKeystrokeSubmitTime = LastKeystrokeDateTime.Value + keystrokeElapsedTime;
 
             // Compute how much time we need to wait and wait that time out.
-            TimeSpan waitTime = nextKeystroke - now;
+            TimeSpan waitTime = nextKeystrokeSubmitTime - now;
+
+            // Enforce a maximum elapsed keystroke wait time.
+            if (MaxKeystrokeReplayElapsedTime.HasValue && waitTime > MaxKeystrokeReplayElapsedTime)
+            {
+                waitTime = MaxKeystrokeReplayElapsedTime.Value;
+            }
+
+            // Force a wait.
             if (waitTime > TimeSpan.Zero)
             {
                 Pause(waitTime);
             }
 
-            // Deliver the keystroke and record the time stamp.
+            // Deliver the keystroke.
             k = gameReplayStep.Keystroke;
-            LastKeystrokeDateTime = nextKeystroke;
+
+            // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
+            LastKeystrokeDateTime = nextKeystrokeSubmitTime;
         }
         else
         {
@@ -9277,21 +9314,8 @@ public bool IsDead = false;
             // Wait for a keystroke from the console and record it and the elapsed time in milliseconds for replay.
             k = ConsoleViewPort.WaitForKey();
 
-            // Record the timestamp right now.
-            DateTime now = DateTime.Now;
-
-            // Initialize the last keystroke time stamp, if needed.
-            if (LastKeystrokeDateTime == null)
-            {
-                LastKeystrokeDateTime = now;
-            }
-
-            // Compute the elapsed time since the previous keystroke and update the previous keystroke timestamp.
-            TimeSpan elapsedTime = now - LastKeystrokeDateTime.Value;
-            LastKeystrokeDateTime = now;
-
             // Append the replay step.
-            ReplayQueue.Add(new GameReplayStep(elapsedTime, k));
+            ReplayQueue.Add(new GameReplayStep(DateTime.Now, k));
 
             // We are in recording mode.  Keep the replay queue index up to date.
             ReplayQueueIndex = ReplayQueue.Count;

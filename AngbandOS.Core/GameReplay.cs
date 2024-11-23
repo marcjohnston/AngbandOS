@@ -11,13 +11,11 @@ namespace AngbandOS.Core;
 internal class GameReplay
 {
     public int MainSequenceRandomSeed { get; }
-    public int CurrentSequenceRandomSeed { get; }
     public GameReplayStep[] GameReplaySteps { get; }
 
-    public GameReplay(int mainSequenceRandomSeed, int currentSequenceRandomSeed, GameReplayStep[] gameReplaySteps)
+    public GameReplay(int mainSequenceRandomSeed, GameReplayStep[] gameReplaySteps)
     {
         MainSequenceRandomSeed = mainSequenceRandomSeed;
-        CurrentSequenceRandomSeed = currentSequenceRandomSeed;
         GameReplaySteps = gameReplaySteps;
     }
 }

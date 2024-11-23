@@ -198,7 +198,7 @@ public class GameServer
         }
 
         // Serialize the GameReplay.
-        GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.CurrentSequenceRandomSeed, Game.ReplayQueue.ToArray());
+        GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.ReplayQueue.ToArray());
         serializedGameReplay = JsonSerializer.Serialize(gameReplay); // This is replacing the parameter contents.
         return new GameResults(success, serializedGameReplay);
     }
@@ -234,7 +234,7 @@ public class GameServer
         }
 
         // Serialize the GameReplay.
-        GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.CurrentSequenceRandomSeed, Game.ReplayQueue.ToArray());
+        GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.ReplayQueue.ToArray());
         string serializedGameReplay = JsonSerializer.Serialize(gameReplay);
         return new GameResults(success, serializedGameReplay);
     }

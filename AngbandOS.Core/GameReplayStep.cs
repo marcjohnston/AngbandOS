@@ -10,12 +10,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GameReplayStep
 {
-    public TimeSpan WaitTime { get; }
+    public DateTime DateTime { get; }
     public char Keystroke { get; }
 
-    public GameReplayStep(TimeSpan waitTime, char keystroke)
+    public GameReplayStep(DateTime dateTime, char keystroke)
     {
-        WaitTime = waitTime;
+        DateTime = dateTime;
         Keystroke = keystroke;
     }
 }
