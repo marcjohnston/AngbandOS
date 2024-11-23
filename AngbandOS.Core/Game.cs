@@ -1071,6 +1071,10 @@ public bool IsDead = false;
     /// Creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
+    /// <remarks>
+    /// For game replay mode, construction of the game DOES NOT use the random generator.  We only initialize the non-fixed seed.
+    /// 
+    /// </remarks>
     public Game(GameConfiguration gameConfiguration, string? serializedGameReplay)
     {
         // Initialize the game replay, if needed.
@@ -1078,8 +1082,13 @@ public bool IsDead = false;
         {
             GameReplay gameReplay = JsonSerializer.Deserialize<GameReplay>(serializedGameReplay);
             MainSequenceRandomSeed = gameReplay.MainSequenceRandomSeed;
-            FixedSequenceRandomSeed = gameReplay.FixedSequenceRandomSeed;
             ReplayQueue.AddRange(gameReplay.GameReplaySteps);
+        }
+        else
+        {
+            // Generate all new random seeds.
+            Random r = new Random();
+            MainSequenceRandomSeed = r.Next(int.MaxValue);
         }
 
         IsDead = true;
@@ -2329,7 +2338,8 @@ public bool IsDead = false;
     }
 
     public int MainSequenceRandomSeed;
-    public int FixedSequenceRandomSeed;
+    public int CurrentSequenceRandomSeed;
+    public bool PreviousInPopupMenu = false;
 
     /// <summary>
     /// Plays the current game.
@@ -2337,27 +2347,22 @@ public bool IsDead = false;
     /// <param name="consoleViewPort"></param>
     /// <param name="persistentStorage"></param>
     /// <param name="updateMonitor"></param>
+    /// <remarks>
+    /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
+    /// </remarks>
     public void Play(IConsoleViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
-        // If this game was restored, then the Random variable will not be here and we need to create them.  The Random were created when the Game
-        // was instantiated as part of the New game process so that Singletons have access to non-fixed random numbers.
-        if (ReplayQueue.Count > 0)
+        // If this game is to be replayed, we need to initialize the non-fixed random with the same value that was used to construct the game.
+        if (ReplayQueueIndex == 0)
         {
+            // This is a new game or we are replaying a game.
             _mainSequence = new Random(MainSequenceRandomSeed);
-            _fixed = new Random(FixedSequenceRandomSeed);
         }
         else
         {
-            // Generate all new random seeds.
-            Random r = new Random();           
-            MainSequenceRandomSeed = r.Next(int.MaxValue);
-            FixedSequenceRandomSeed = r.Next(int.MaxValue);
-
-            // Generate the random generators.
-            _mainSequence = new Random(MainSequenceRandomSeed);
-            _fixed = new Random(FixedSequenceRandomSeed);
+            // Restore an existing game to continue playing.
+            _mainSequence = new Random(CurrentSequenceRandomSeed);
         }
-
 
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
@@ -9212,36 +9217,20 @@ public bool IsDead = false;
     /// </summary>
     public readonly List<GameReplayStep> ReplayQueue = new List<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
 
-    //((char)0x36, TimeSpan.FromMilliseconds(0)),
-    //    (0x38, TimeSpan.FromMilliseconds(927)),
-    //    (0x38, TimeSpan.FromMilliseconds(1084)),
-    //    (0x38, TimeSpan.FromMilliseconds(1246)),
-    //    (0x38, TimeSpan.FromMilliseconds(1390)),
-    //    (0x38, TimeSpan.FromMilliseconds(1531)),
-    //    (0x38, TimeSpan.FromMilliseconds(1690)),
-    //    (0x38, TimeSpan.FromMilliseconds(1867)),
-    //    (0x38, TimeSpan.FromMilliseconds(2031)),
-    //    (0x38, TimeSpan.FromMilliseconds(2189)),
-    //    (0x38, TimeSpan.FromMilliseconds(2575)),
-    //    (0x38, TimeSpan.FromMilliseconds(2784)),
-    //    (0x36, TimeSpan.FromMilliseconds(3182)),
-    //    (0x32, TimeSpan.FromMilliseconds(3726)),
-    //    (0x32, TimeSpan.FromMilliseconds(3917)),
-    //    (0x36, TimeSpan.FromMilliseconds(4367)),
-    //    (0x32, TimeSpan.FromMilliseconds(4895)),
-    //    (0x36, TimeSpan.FromMilliseconds(5100)),
-    //    (0x0D, TimeSpan.FromMilliseconds(5884)),
-    //    (0x0D, TimeSpan.FromMilliseconds(6315)),
-
-
     /// <summary>
     /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort" and updates the <see cref="LastInputReceived"/> property./>
     /// </summary>
     /// <param name="k"> The keypress to add </param>
     private void WaitAndEnqueueKey()
     {
-
         char k;
+
+        // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.
+        if (!UseFixed)
+        {
+            CurrentSequenceRandomSeed = Next(int.MaxValue - 1);
+            _mainSequence = new Random(CurrentSequenceRandomSeed);
+        }
 
         // Check to see if we are in playback mode.
         if (ReplayQueueIndex < ReplayQueue.Count)
@@ -9274,6 +9263,17 @@ public bool IsDead = false;
         }
         else
         {
+            // Detect if we just entered the popup menu.
+            bool enteredPopupMenu = InPopupMenu && !PreviousInPopupMenu;
+            bool exitedPopupMenu = !InPopupMenu && PreviousInPopupMenu;
+            bool popupMenuCommand = InPopupMenu && PreviousInPopupMenu;
+            if (enteredPopupMenu || exitedPopupMenu || popupMenuCommand)
+            {
+                // Remove the keystroke.
+                ReplayQueue.RemoveAt(ReplayQueue.Count - 1);
+            }
+            PreviousInPopupMenu = InPopupMenu;
+
             // Wait for a keystroke from the console and record it and the elapsed time in milliseconds for replay.
             k = ConsoleViewPort.WaitForKey();
 
@@ -17533,28 +17533,6 @@ public bool IsDead = false;
         Random use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
     public int GenomeArmorClassBonus;
