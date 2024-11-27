@@ -53,7 +53,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
     /// </summary>
-    public ItemAdditiveBundle? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
+    public ItemEnhancement? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
 
     /// <summary>
     /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
@@ -65,7 +65,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
     /// </summary>
-    public ItemAdditiveBundle? RandomPower = null;
+    public ItemEnhancement? RandomPower = null;
 
     public int Count;
     public int Discount;
@@ -2447,9 +2447,9 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    public void ApplyRandomResistance(WeightedRandom<ItemAdditiveBundle> itemAdditiveBundleWeightedRandom)
+    public void ApplyRandomResistance(WeightedRandom<ItemEnhancement> itemAdditiveBundleWeightedRandom)
     {
-        ItemAdditiveBundle? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
+        ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
         if (itemAdditiveBundle != null)
         {
             Characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());

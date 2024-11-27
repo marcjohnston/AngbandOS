@@ -68,13 +68,13 @@ internal class GreatBootsEnchantmentScript : Script, IEnhancementScript
             switch (Game.DieRoll(24))
             {
                 case 1:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfSpeedRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfSpeedRareItem));
                     break;
                 case 2:
                 case 3:
                 case 4:
                 case 5:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfFreeActionRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfFreeActionRareItem));
                     break;
                 case 6:
                 case 7:
@@ -84,7 +84,7 @@ internal class GreatBootsEnchantmentScript : Script, IEnhancementScript
                 case 11:
                 case 12:
                 case 13:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfStealthRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfStealthRareItem));
                     break;
                 case 14:
                 case 15:
@@ -97,10 +97,10 @@ internal class GreatBootsEnchantmentScript : Script, IEnhancementScript
                 case 22:
                 case 23:
                 case 24:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsWingedRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsWingedRareItem));
                     if (Game.DieRoll(2) == 1)
                     {
-                        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                     }
                     break;
             }
@@ -142,13 +142,13 @@ internal class TerribleBootsEnchantmentScript : Script, IEnhancementScript
         switch (Game.DieRoll(3))
         {
             case 1:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfNoiseRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfNoiseRareItem));
                 break;
             case 2:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfSlownessRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfSlownessRareItem));
                 break;
             case 3:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BootsOfAnnoyanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfAnnoyanceRareItem));
                 break;
         }
         if (item.BonusArmorClass < 0)
@@ -280,27 +280,27 @@ internal class GreatCrownEnchantmentScript : Script, IEnhancementScript
             switch (Game.DieRoll(8))
             {
                 case 1:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfTheMagiRareItem));
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfTheMagiRareItem));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                     break;
                 case 2:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfMightRareItem));
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfMightRareItem));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                     break;
                 case 3:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfTelepathyRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfTelepathyRareItem));
                     break;
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfRegenerationRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfRegenerationRareItem));
                     break;
                 case 5:
                 case 6:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfLordlinessRareItem));
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfLordlinessRareItem));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                     break;
                 case 7:
                 case 8:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfSeeingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
                         item.Characteristics.Telepathy = true;
@@ -463,20 +463,20 @@ internal class GreatGlovesEnchantmentScript : Script, IEnhancementScript
                 case 2:
                 case 3:
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfFreeActionRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfFreeActionRareItem));
                     break;
                 case 5:
                 case 6:
                 case 7:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfSlayingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfSlayingRareItem));
                     break;
                 case 8:
                 case 9:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfAgilityRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfAgilityRareItem));
                     break;
                 case 10:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(GlovesOfPowerRareItem));
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfPowerRareItem));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                     break;
             }
         }
@@ -563,41 +563,41 @@ internal class GreatHardArmorEnchantmentScript : Script, IEnhancementScript
             case 2:
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistAcidRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistAcidRareItem));
                 break;
             case 5:
             case 6:
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistLightningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistLightningRareItem));
                 break;
             case 9:
             case 10:
             case 11:
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistFireRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistFireRareItem));
                 break;
             case 13:
             case 14:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistColdRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistColdRareItem));
                 break;
             case 17:
             case 18:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistanceRareItem));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.Characteristics.ResPois = true;
                 }
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                 break;
             case 19:
                 item.CreateRandomArtifact(false);
                 break;
             case 20:
             case 21:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfYithRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfYithRareItem));
                 break;
         }
     }
@@ -689,19 +689,19 @@ internal class GreatHelmEnchantmentScript : Script, IEnhancementScript
             {
                 case 1:
                 case 2:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfIntelligenceRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfIntelligenceRareItem));
                     break;
                 case 3:
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfWisdomRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfWisdomRareItem));
                     break;
                 case 5:
                 case 6:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfBeautyRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfBeautyRareItem));
                     break;
                 case 7:
                 case 8:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfSeeingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingRareItem));
                     if (Game.DieRoll(7) == 1)
                     {
                         item.Characteristics.Telepathy = true;
@@ -709,13 +709,13 @@ internal class GreatHelmEnchantmentScript : Script, IEnhancementScript
                     break;
                 case 9:
                 case 10:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfLightRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfLightRareItem));
                     break;
                 case 11:
                 case 12:
                 case 13:
                 case 14:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(HatOfInfravisionRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfInfravisionRareItem));
                     break;
             }
         }
@@ -777,11 +777,11 @@ internal class DragonResistanceEnchantmentScript : Script, IEnhancementScript
         {
             if (Game.DieRoll(4) == 1)
             {
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalAndPoisonResistanceItemAdditiveBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(NaturalAndPoisonResistanceItemEnhancementWeightedRandom)));
             }
             else
             {
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
             }
         } while (Game.DieRoll(2) == 1);
     }
@@ -820,7 +820,7 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
         {
             case 1:
             case 11:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ShieldOfResistAcidRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistAcidRareItem));
                 break;
             case 2:
             case 3:
@@ -828,13 +828,13 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
             case 12:
             case 13:
             case 14:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ShieldOfResistLightningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistLightningRareItem));
                 break;
             case 5:
             case 6:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ShieldOfResistFireRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistFireRareItem));
                 break;
             case 7:
             case 8:
@@ -842,20 +842,20 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
             case 17:
             case 18:
             case 19:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ShieldOfResistColdRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistColdRareItem));
                 break;
             case 10:
             case 20:
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.Characteristics.ResPois = true;
                 }
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ShieldOfResistanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistanceRareItem));
                 break;
             case 21:
             case 22:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ShieldOfReflectionRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfReflectionRareItem));
                 break;
             case 23:
                 item.CreateRandomArtifact(false);
@@ -920,7 +920,7 @@ internal class GreatRobeSoftArmorEnchantmentScript : Script, IEnhancementScript
         // Robes have a chance of having the armor of permanence instead of a random characteristic.
         if (Game.RandomLessThan(100) < 10)
         {
-            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfPermanenceRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfPermanenceRareItem));
         }
         else
         {
@@ -930,41 +930,41 @@ internal class GreatRobeSoftArmorEnchantmentScript : Script, IEnhancementScript
                 case 2:
                 case 3:
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistAcidRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistAcidRareItem));
                     break;
                 case 5:
                 case 6:
                 case 7:
                 case 8:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistLightningRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistLightningRareItem));
                     break;
                 case 9:
                 case 10:
                 case 11:
                 case 12:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistFireRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistFireRareItem));
                     break;
                 case 13:
                 case 14:
                 case 15:
                 case 16:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistColdRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistColdRareItem));
                     break;
                 case 17:
                 case 18:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistanceRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistanceRareItem));
                     if (Game.DieRoll(4) == 1)
                     {
                         item.Characteristics.ResPois = true;
                     }
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                     break;
                 case 19:
                     item.CreateRandomArtifact(false);
                     break;
                 case 20:
                 case 21:
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfYithRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfYithRareItem));
                     break;
             }
         }
@@ -1005,41 +1005,41 @@ internal class GreatSoftArmorEnchantmentScript : Script, IEnhancementScript
             case 2:
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistAcidRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistAcidRareItem));
                 break;
             case 5:
             case 6:
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistLightningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistLightningRareItem));
                 break;
             case 9:
             case 10:
             case 11:
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistFireRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistFireRareItem));
                 break;
             case 13:
             case 14:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistColdRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistColdRareItem));
                 break;
             case 17:
             case 18:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfResistanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistanceRareItem));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.Characteristics.ResPois = true;
                 }
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                 break;
             case 19:
                 item.CreateRandomArtifact(false);
                 break;
             case 20:
             case 21:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ArmorOfYithRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfYithRareItem));
                 break;
         }
     }
@@ -1473,7 +1473,7 @@ internal class RandomResistance1In3EnchantmentScript : Script, IEnhancementScrip
     {
         if (Game.DieRoll(3) == 1)
         {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
         }
     }
 }
@@ -1784,7 +1784,7 @@ internal class LordlyProtectionEnchantmentScript : Script, IEnhancementScript
     {
         do
         {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(LordlyResistanceItemAdditiveBundleWeightedRandom)));
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(LordlyResistanceItemEnhancementWeightedRandom)));
         } while (Game.DieRoll(4) == 1);
         item.BonusArmorClass = 10 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
@@ -2012,30 +2012,30 @@ internal class GreatAmmoEnchantmentScript : Script, IEnhancementScript
             case 1:
             case 2:
             case 3:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfWoundingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfWoundingRareItem));
                 break;
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfFlameRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFlameRareItem));
                 break;
             case 5:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfFrostRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFrostRareItem));
                 break;
             case 6:
             case 7:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfHurtAnimalRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtAnimalRareItem));
                 break;
             case 8:
             case 9:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfHurtEvilRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtEvilRareItem));
                 break;
             case 10:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfHurtDragonRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtDragonRareItem));
                 break;
             case 11:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfShockingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfShockingRareItem));
                 break;
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfSlayingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfSlayingRareItem));
                 item.DamageDice++;
                 break;
         }
@@ -2066,7 +2066,7 @@ internal class GreatDiggerEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfDiggingRareItem));
+        item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfDiggingRareItem));
     }
 }
 
@@ -2249,7 +2249,7 @@ internal class AmmoOfBackbitingEnchantmentScript : Script, IEnhancementScript
     {
         if (Game.RandomLessThan(Constants.MaxDepth) < level)
         {
-            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AmmoOfBackbitingRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfBackbitingRareItem));
         }
     }
 }
@@ -2270,7 +2270,7 @@ internal class TerribleDiggerEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(TerribleWeaponOfDiggingRareItem));
+        item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(TerribleWeaponOfDiggingRareItem));
     }
 }
 
@@ -2420,36 +2420,36 @@ internal class GoodOrbOfLightEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        WeightedRandom<ItemAdditiveBundle> weightedRandom = new WeightedRandom<ItemAdditiveBundle>(Game);
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfAcidRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLightningRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLightRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfDarknessRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLifeRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfSightRareItem)));
-        weightedRandom.Add(2, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfCourageRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfVenomRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfClarityRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfSoundRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfChaosRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfShardsRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfUnlifeRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfStabilityRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfMagicRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfFreedomRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfStrengthRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfWisdomRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfFlameRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfDexterityRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfConstitutionRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfIntelligenceRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfCharismaRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfLightnessRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfInsightRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfTheMindRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfSustenanceRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfHealthRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfFrostRareItem)));
+        WeightedRandom<ItemEnhancement> weightedRandom = new WeightedRandom<ItemEnhancement>(Game);
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfAcidRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfLightningRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfLightRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfDarknessRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfLifeRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfSightRareItem)));
+        weightedRandom.Add(2, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfCourageRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfVenomRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfClarityRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfSoundRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfChaosRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfShardsRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfUnlifeRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfStabilityRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfMagicRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfFreedomRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfStrengthRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfWisdomRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfFlameRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfDexterityRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfConstitutionRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfIntelligenceRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfCharismaRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfLightnessRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfInsightRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfTheMindRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfSustenanceRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfHealthRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfFrostRareItem)));
         item.RareItem = weightedRandom.ChooseOrDefault();
     }
 }
@@ -2471,7 +2471,7 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfPowerRareItem));
+        item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfPowerRareItem));
         for (int i = 0; i < 3; i++)
         {
             WeightedRandomAction weightedRandomAction = new WeightedRandomAction(Game);
@@ -2530,14 +2530,14 @@ internal class PoorOrbOfLightEnchantmentScript : Script, IEnhancementScript
         {
             case 1:
                 {
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfIrritationRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfIrritationRareItem));
                     item.IsBroken = true;
                     item.IsCursed = true;
                     break;
                 }
             case 2:
                 {
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(OrbOfInstabilityRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfInstabilityRareItem));
                     item.IsBroken = true;
                     item.IsCursed = true;
                     break;
@@ -2677,7 +2677,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
         switch (Game.DieRoll(item.CanBeWeaponOfLaw || item.CanBeWeaponOfSharpness ? 42 : 40))
         {
             case 1:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponElderSignInscribedRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponElderSignInscribedRareItem));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.Characteristics.Blows = true;
@@ -2688,117 +2688,117 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 break;
             case 2:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponDefenderRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponDefenderRareItem));
                 if (Game.DieRoll(3) == 1)
                 {
                     item.Characteristics.ResPois = true;
                 }
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                 break;
             case 3:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfVitriolRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfVitriolRareItem));
                 break;
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfShockingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfShockingRareItem));
                 break;
             case 5:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfBurningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfBurningRareItem));
                 break;
             case 6:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfFreezingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfFreezingRareItem));
                 break;
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayAnimalRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayAnimalRareItem));
                 if (Game.RandomLessThan(100) < 20)
                 {
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfAnimalBaneRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfAnimalBaneRareItem));
                 }
                 break;
             case 9:
             case 10:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayDragonRareItem));
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalResistanceItemAdditiveBundleWeightedRandom)));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayDragonRareItem));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(NaturalResistanceItemEnhancementWeightedRandom)));
                 if (Game.RandomLessThan(100) < 20)
                 {
                     if (Game.DieRoll(3) == 1)
                     {
                         item.Characteristics.ResPois = true;
                     }
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(NaturalAndPoisonResistanceItemAdditiveBundleWeightedRandom)));
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfDragonBaneRareItem));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(NaturalAndPoisonResistanceItemEnhancementWeightedRandom)));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfDragonBaneRareItem));
                 }
                 break;
             case 11:
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayEvilRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayEvilRareItem));
                 if (Game.RandomLessThan(100) < 20)
                 {
                     item.Characteristics.ResFear = true;
                     item.Characteristics.Blessed = true;
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfEvilBaneRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfEvilBaneRareItem));
                 }
                 break;
             case 13:
             case 14:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayUndeadRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayUndeadRareItem));
                 if (Game.RandomLessThan(100) < 20)
                 {
                     item.Characteristics.ResNether = true;
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfUndeadBaneRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfUndeadBaneRareItem));
                 }
                 break;
             case 15:
             case 16:
             case 17:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayOrcRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayOrcRareItem));
                 break;
             case 18:
             case 19:
             case 20:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayTrollRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayTrollRareItem));
                 break;
             case 21:
             case 22:
             case 23:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayGiantRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayGiantRareItem));
                 break;
             case 24:
             case 25:
             case 26:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayDemonRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayDemonRareItem));
                 break;
             case 27:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfKadathRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfKadathRareItem));
                 if (Game.DieRoll(3) == 1)
                 {
                     item.Characteristics.ResFear = true;
                 }
                 break;
             case 28:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponBlessedRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponBlessedRareItem));
                 break;
             case 29:
             case 30:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfExtraAttacksRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfExtraAttacksRareItem));
                 break;
             case 31:
             case 32:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponVampiricRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponVampiricRareItem));
                 break;
             case 33:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfPoisoningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfPoisoningRareItem));
                 break;
             case 34:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponChaoticRareItem));
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponChaoticRareItem));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
                 break;
             case 35:
                 item.CreateRandomArtifact(false);
                 break;
             case 36:
             case 37:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSlayingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayingRareItem));
                 if (Game.DieRoll(3) == 1)
                 {
                     item.DamageDice *= 2;
@@ -2825,15 +2825,15 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 break;
             case 38:
             case 39:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponPlanarWeaponRareItem));
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponPlanarWeaponRareItem));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                 if (Game.DieRoll(5) == 1)
                 {
                     item.Characteristics.SlayDemon = true;
                 }
                 break;
             case 40:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfLawRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfLawRareItem));
                 if (Game.DieRoll(3) == 1)
                 {
                     item.Characteristics.HoldLife = true;
@@ -2846,18 +2846,18 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 {
                     item.Characteristics.ResFear = true;
                 }
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
                 break;
             case 41:
             case 42:
                 if (item.CanBeWeaponOfSharpness)
                 {
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfSharpnessRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSharpnessRareItem));
                     item.BonusTunnel = item.GetBonusValue(5, level) + 1;
                 }
                 else
                 {
-                    item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfEarthquakesRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfEarthquakesRareItem));
                     if (Game.DieRoll(3) == 1)
                     {
                         item.Characteristics.Blows = true;
@@ -2896,7 +2896,7 @@ internal class TerribleMeleeWeaponEnchantmentScript : Script, IEnhancementScript
     {
         if (Game.RandomLessThan(Constants.MaxDepth) < level)
         {
-            item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(WeaponOfLengRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfLengRareItem));
             if (Game.DieRoll(6) == 1)
             {
                 item.Characteristics.DreadCurse = true;
@@ -2926,12 +2926,12 @@ internal class GreatRangedWeaponEnchantmentScript : Script, IEnhancementScript
         {
             case 1:
             case 11:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfExtraMightRareItem));
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceAndBiasItemAdditiveBundleWeightedRandom)));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfExtraMightRareItem));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
                 break;
             case 2:
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfExtraShotsRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfExtraShotsRareItem));
                 break;
             case 3:
             case 4:
@@ -2941,7 +2941,7 @@ internal class GreatRangedWeaponEnchantmentScript : Script, IEnhancementScript
             case 14:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfVelocityRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfVelocityRareItem));
                 break;
             case 7:
             case 8:
@@ -2951,7 +2951,7 @@ internal class GreatRangedWeaponEnchantmentScript : Script, IEnhancementScript
             case 18:
             case 19:
             case 20:
-                item.RareItem = Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(BowOfAccuracyRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfAccuracyRareItem));
                 break;
             case 21:
                 item.CreateRandomArtifact(false);

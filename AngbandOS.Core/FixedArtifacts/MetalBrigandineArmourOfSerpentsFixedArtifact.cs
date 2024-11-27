@@ -17,7 +17,7 @@ internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
     }
 
     public override ColorEnum Color => ColorEnum.Grey;

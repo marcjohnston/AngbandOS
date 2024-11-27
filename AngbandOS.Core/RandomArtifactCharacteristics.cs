@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents a set of read and write item characteristics that are used as the storage for one or more merged <see cref="ItemAdditiveBundle"/> objects.
+/// Represents a set of read and write item characteristics that are used as the storage for one or more merged <see cref="ItemEnhancement"/> objects.
 /// </summary>
 [Serializable]
 internal class RandomArtifactCharacteristics : IItemCharacteristics

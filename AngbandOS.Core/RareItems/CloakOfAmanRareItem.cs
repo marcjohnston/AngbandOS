@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class CloakOfAmanRareItem : ItemAdditiveBundle
+internal class CloakOfAmanRareItem : ItemEnhancement
 {
     private CloakOfAmanRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(ResistanceItemAdditiveBundleWeightedRandom)).Choose();
+    public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceItemEnhancementWeightedRandom)).Choose();
     public override int? AdditiveBundleValue => 4000;
     public override string? FriendlyName => "of Aman";
     public override bool IgnoreAcid => true;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class WeaponShatteredRareItem : ItemAdditiveBundle
+internal class WeaponShatteredRareItem : ItemEnhancement
 {
     private WeaponShatteredRareItem(Game game) : base(game) { } // This object is a singleton.
     public override int? AdditiveBundleValue => 0;

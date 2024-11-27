@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class WeaponElderSignInscribedRareItem : ItemAdditiveBundle
+internal class WeaponElderSignInscribedRareItem : ItemEnhancement
 {
     private WeaponElderSignInscribedRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(SustainItemAdditiveBundleWeightedRandom)).Choose();
+    public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(SustainItemEnhancementWeightedRandom)).Choose();
     public override bool Blessed => true;
     public override int? AdditiveBundleValue => 20000;
     public override string? FriendlyName => "(Elder Sign Inscribed)";

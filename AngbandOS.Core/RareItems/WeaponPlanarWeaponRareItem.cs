@@ -9,11 +9,11 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class WeaponPlanarWeaponRareItem : ItemAdditiveBundle
+internal class WeaponPlanarWeaponRareItem : ItemEnhancement
 {
     private WeaponPlanarWeaponRareItem(Game game) : base(game) { } // This object is a singleton.
 
-    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
+    public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
     protected override string? ActivationName => nameof(Teleport100Every1d50p50Activation);
     public override int? AdditiveBundleValue => 7000;
     public override bool FreeAct => true;

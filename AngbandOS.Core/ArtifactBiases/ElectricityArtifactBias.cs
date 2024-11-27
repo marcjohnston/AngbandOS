@@ -15,9 +15,9 @@ internal class ElectricityArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistElectricityItemTest), "1", nameof(ResistElectricityItemAdditiveBundle), "1/2"),
-        (nameof(FalseSheathOfElectricityItemTest), "1", nameof(SheathOfElectricityItemAdditiveBundle), "1/2"),
-        (nameof(FalseElectricityImmunityItemTest), "1/20", nameof(ElectricityImmunityItemAdditiveBundle), "1/2")
+        (nameof(FalseResistElectricityItemTest), "1", nameof(ResistElectricityItemEnhancement), "1/2"),
+        (nameof(FalseSheathOfElectricityItemTest), "1", nameof(SheathOfElectricityItemEnhancement), "1/2"),
+        (nameof(FalseElectricityImmunityItemTest), "1/20", nameof(ElectricityImmunityItemEnhancement), "1/2")
     };
 
     public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.WeightedRandoms;
 
 [Serializable]
-internal abstract class RareItemWeightedRandom : WeightedRandom<ItemAdditiveBundle>, IGetKey
+internal abstract class RareItemWeightedRandom : WeightedRandom<ItemEnhancement>, IGetKey
 {
     protected RareItemWeightedRandom(Game game) : base(game) { }
     protected abstract (string name, int weight)[] ItemFactoryNamesAndWeights { get; }
@@ -21,7 +21,7 @@ internal abstract class RareItemWeightedRandom : WeightedRandom<ItemAdditiveBund
     {
         foreach ((string name, int weight) in ItemFactoryNamesAndWeights)
         {
-            Add(weight, Game.SingletonRepository.Get<ItemAdditiveBundle>(name));
+            Add(weight, Game.SingletonRepository.Get<ItemEnhancement>(name));
         }
     }
 

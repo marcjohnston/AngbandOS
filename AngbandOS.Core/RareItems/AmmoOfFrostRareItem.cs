@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class AmmoOfFrostRareItem : ItemAdditiveBundle
+internal class AmmoOfFrostRareItem : ItemEnhancement
 {
     private AmmoOfFrostRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandCold => true;

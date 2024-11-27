@@ -14,9 +14,9 @@ internal class FireArtifactBias : ArtifactBias
     public override string AffinityName => "Fire";
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistFireItemTest), "1", nameof(ResistFireItemAdditiveBundle), "1/2"),
-        (nameof(FalseSheathOfFireItemTest), "1", nameof(SheathOfFireItemAdditiveBundle), "1/2"),
-        (nameof(FalseFireImmunityItemTest), "1/20", nameof(FireImmunityItemAdditiveBundle), "1/2")
+        (nameof(FalseResistFireItemTest), "1", nameof(ResistFireItemEnhancement), "1/2"),
+        (nameof(FalseSheathOfFireItemTest), "1", nameof(SheathOfFireItemEnhancement), "1/2"),
+        (nameof(FalseFireImmunityItemTest), "1/20", nameof(FireImmunityItemEnhancement), "1/2")
     };
 
     public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)

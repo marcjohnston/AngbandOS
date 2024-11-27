@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal abstract class FixedArtifact : ItemAdditiveBundle
+internal abstract class FixedArtifact : ItemEnhancement
 {
     protected FixedArtifact(Game game) : base(game) { }
 

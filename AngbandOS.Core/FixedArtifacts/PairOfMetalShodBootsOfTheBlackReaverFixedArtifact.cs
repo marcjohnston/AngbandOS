@@ -18,7 +18,7 @@ internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
     }
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Pair of Metal Shod Boots of the Black Reaver";

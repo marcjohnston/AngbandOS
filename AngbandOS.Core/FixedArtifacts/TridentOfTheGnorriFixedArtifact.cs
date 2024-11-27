@@ -16,7 +16,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
     protected override string? ActivationName => nameof(TeleportAwayEvery150Activation);
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
+        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
     }
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Trident of the Gnorri";

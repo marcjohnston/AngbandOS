@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class HatOfTheMagiRareItem : ItemAdditiveBundle
+internal class HatOfTheMagiRareItem : ItemEnhancement
 {
     private HatOfTheMagiRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override ItemAdditiveBundle? RandomPower => Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
+    public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
     public override int? AdditiveBundleValue => 7500;
     public override string? FriendlyName => "of the Magi";
     public override bool IgnoreAcid => true;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class BootsOfNoiseRareItem : ItemAdditiveBundle
+internal class BootsOfNoiseRareItem : ItemEnhancement
 {
     private BootsOfNoiseRareItem(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;

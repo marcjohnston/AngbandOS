@@ -17,9 +17,9 @@ internal class ChaosArtifactBias : ArtifactBias
     public override string AffinityName => "Chaos";
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistChaosItemTest), "1", nameof(ResistChaosItemAdditiveBundle), "1/2"),
-        (nameof(FalseResistConfusionItemTest), "1", nameof(ResistConfusionItemAdditiveBundle), "1/2"),
-        (nameof(FalseResistDisenchantItemTest), "1", nameof(ResistDisenchantItemAdditiveBundle), "1/2")
+        (nameof(FalseResistChaosItemTest), "1", nameof(ResistChaosItemEnhancement), "1/2"),
+        (nameof(FalseResistConfusionItemTest), "1", nameof(ResistConfusionItemEnhancement), "1/2"),
+        (nameof(FalseResistDisenchantItemTest), "1", nameof(ResistDisenchantItemEnhancement), "1/2")
     };
 
     public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)

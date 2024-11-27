@@ -20,7 +20,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(FixedArtifactItemAdditiveBundleWeightedRandom)));
+        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
     }
     public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
 

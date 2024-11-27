@@ -12,7 +12,7 @@ namespace AngbandOS.Core.ItemFactories;
 /// properties are modifiable.
 /// </summary>
 [Serializable]
-internal abstract class ItemFactory : ItemAdditiveBundle
+internal abstract class ItemFactory : ItemEnhancement
 {
     #region Constructors
     protected ItemFactory(Game game) : base(game) { }
@@ -1206,62 +1206,62 @@ internal abstract class ItemFactory : ItemAdditiveBundle
                     }
                     else
                     {
-                        WeightedRandom<ItemAdditiveBundle> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemAdditiveBundle>(Game);
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(AcidImmunityItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ElectricityImmunityItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ColdImmunityItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(FireImmunityItemAdditiveBundle)));
+                        WeightedRandom<ItemEnhancement> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemEnhancement>(Game);
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(AcidImmunityItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ElectricityImmunityItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ColdImmunityItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(FireImmunityItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistAcidAndAcidBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistElectricityAndElectricityBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFireAndFireBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistColdAndColdBiasItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistAcidAndAcidBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistElectricityAndElectricityBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistFireAndFireBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(3 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistColdAndColdBiasItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 36 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndPoisonBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 6 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndNecromanticBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 3 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonAndRogueBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 3, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistPoisonItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 36 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistPoisonAndPoisonBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 6 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistPoisonAndNecromanticBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 3 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistPoisonAndRogueBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 3, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistPoisonItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearAndWarriorBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistFearItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistFearAndWarriorBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistFearItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistLightItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDarknessItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistBlindnessItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistLightItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistDarknessItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistBlindnessItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistBlindnessItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 8 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionAndChaosBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 40 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistConfusionItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 8 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistConfusionAndChaosBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 40 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistConfusionItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistSoundItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistShardsItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistSoundItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistShardsItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherAndNecromanticBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNetherItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistNetherAndNecromanticBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 32 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistNetherItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistNexusItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistNexusItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosAndChaosBiasItemAdditiveBundle)));
-                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistChaosItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistChaosAndChaosBiasItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 24 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistChaosItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ResistDisenchantItemAdditiveBundle)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistDisenchantItemEnhancement)));
 
                         if (characteristics.CanProvideSheathOfElectricity)
                         {
-                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfElectricityAndElectricityBiasItemAdditiveBundle)));
+                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfElectricityAndElectricityBiasItemEnhancement)));
                         }
 
                         if (characteristics.CanProvideSheathOfFire)
                         {
-                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(SheathOfFireAndFireBiasItemAdditiveBundle)));
+                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfFireAndFireBiasItemEnhancement)));
                         }
 
                         if (characteristics.CanReflectBoltsAndArrows)
                         {
-                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemAdditiveBundle>(nameof(ReflectBoltsAndArrowsItemAdditiveBundle)));
+                            itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ReflectBoltsAndArrowsItemEnhancement)));
                         }
 
-                        ItemAdditiveBundle? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
+                        ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
                         if (itemAdditiveBundle != null)
                         {
                             characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());

@@ -262,8 +262,8 @@ internal class SingletonRepository
         RegisterRepository<Function>();
         RegisterRepository<Gender>();
         RegisterRepository<ItemAction>();
-        RegisterRepository<ItemAdditiveBundle>();
-        RegisterRepository<ItemAdditiveBundleWeightedRandom>();
+        RegisterRepository<ItemEnhancement>();
+        RegisterRepository<ItemEnhancementWeightedRandom>();
         RegisterRepository<ItemClass>();
         RegisterRepository<ItemFactory>();
         RegisterRepository<ItemFilter>();

@@ -17,9 +17,9 @@ internal class NecromanticArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistNetherItemTest), "1", nameof(ResistNetherItemAdditiveBundle), "1/2"),
-        (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemAdditiveBundle), "1/2"),
-        (nameof(FalseResistDarknessItemTest), "1", nameof(ResistDarknessItemAdditiveBundle), "1/2")
+        (nameof(FalseResistNetherItemTest), "1", nameof(ResistNetherItemEnhancement), "1/2"),
+        (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemEnhancement), "1/2"),
+        (nameof(FalseResistDarknessItemTest), "1", nameof(ResistDarknessItemEnhancement), "1/2")
     };
 
     public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)

@@ -15,8 +15,8 @@ internal class ColdArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistColdItemTest), "1", nameof(ResistColdItemAdditiveBundle), "1/2"),
-        (nameof(FalseColdImmunityItemTest), "1/20", nameof(ColdImmunityItemAdditiveBundle), "1/2")
+        (nameof(FalseResistColdItemTest), "1", nameof(ResistColdItemEnhancement), "1/2"),
+        (nameof(FalseColdImmunityItemTest), "1/20", nameof(ColdImmunityItemEnhancement), "1/2")
     };
 
     public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)

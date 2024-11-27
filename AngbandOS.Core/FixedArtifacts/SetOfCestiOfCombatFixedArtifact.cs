@@ -16,7 +16,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
     protected override string? ActivationName => nameof(MagicalArrow150Every1d90p90);
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = Game.SingletonRepository.Get<ItemAdditiveBundleWeightedRandom>(nameof(AbilityItemAdditiveBundleWeightedRandom)).Choose();
+        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
     }
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Set of Cesti of Combat";
