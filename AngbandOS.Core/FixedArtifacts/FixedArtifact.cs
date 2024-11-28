@@ -26,7 +26,7 @@ internal abstract class FixedArtifact : ItemEnhancement
     /// <summary>
     /// Returns the multipler to use when being used to kill a dragon.  The SwordOfLightning returns a 3.  All other weapons return 1.
     /// </summary>
-    public virtual int KillDragonMultiplier => 1;
+    public virtual int KillDragonMultiplier => 1; // TODO: Move this into the IItemCharacteristics
 
     /// <summary>
     /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
@@ -44,39 +44,48 @@ internal abstract class FixedArtifact : ItemEnhancement
     /// <summary>
     /// Returns a 1-in-chance value of the weapon doing extra vorpal damage.  Does not affect non-vorpal cutting weapons.  Default to a 1-in-6 chance.
     /// </summary>
-    public virtual int VorpalExtraDamage1InChance => 6;
+    public virtual int VorpalExtraDamage1InChance => 6; // TODO: Move this into the IItemCharacteristics
 
-    public virtual bool IsVorpalBlade => false;
+    public virtual bool IsVorpalBlade => false; // TODO: Move this into the IItemCharacteristics
 
     /// <summary>
     /// Returns a 1-in-chance value of the weapon doing extra vorpal attacks. Does not affect non-vorpal cutting weapons.  Default to a 1-in-4 chance.
     /// </summary>
-    public virtual int VorpalExtraAttacks1InChance => 4;
+    public virtual int VorpalExtraAttacks1InChance => 4; // TODO: Move this into the IItemCharacteristics
 
-    public virtual ColorEnum Color => ColorEnum.White;
-    public abstract string Name { get; }
+    public virtual ColorEnum Color => ColorEnum.White; // TODO: This must be used outside of the ItemEnhancement
+    public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
 
-    public abstract int Ac { get; }
+    /// <summary>
+    /// Overrides the BaseItemFactory ArmorClass 
+    /// </summary>
+    public abstract int Ac { get; } // TODO: Need to convert this to an enhancement
 
-    public override int TreasureRating => 10;
+    public override int TreasureRating => 10; // TODO: Need to convert this to an enhancement
 
-    public abstract int Cost { get; }
+    /// <summary>
+    /// Overrides the BaseItemFactory Cost
+    /// </summary>
+    public abstract int Cost { get; } // TODO: Need to convert this to an enhancement .. this also doesn't appear to be copied
 
-    public abstract int Dd { get; }
+    /// <summary>
+    /// Overrides the BaseItemFactory Cost
+    /// </summary>
+    public abstract int Dd { get; } // TODO: Need to convert this to an enhancement
 
-    public abstract int Ds { get; }
+    public abstract int Ds { get; } // TODO: Need to convert this to an enhancement
 
-    public virtual bool HasOwnType => false;
+    public virtual bool HasOwnType => false; // TODO: What is this?
 
-    public abstract int Level { get; }
+    public abstract int Level { get; } // TODO: Need to convert this to an enhancement.  This must be used outside of the ItemEnhancement
 
-    public abstract int Rarity { get; }
+    public abstract int Rarity { get; } // TODO: Need to convert this to an enhancement.  This must be used outside of the ItemEnhancement
 
-    public abstract int ToA { get; }
+    public abstract int ToA { get; } // TODO: Need to convert this to an enhancement
 
-    public abstract int ToD { get; }
+    public abstract int ToD { get; } // TODO: Need to convert this to an enhancement
 
-    public abstract int ToH { get; }
+    public abstract int ToH { get; } // TODO: Need to convert this to an enhancement
 
-    public abstract int Weight { get; }
+    public abstract int Weight { get; } // TODO: Need to convert this to an enhancement
 }
