@@ -76,11 +76,11 @@ internal abstract class ArtifactBias : IGetKey
     {
         if (RandomResistances != null)
         {
-            foreach ((ItemTest itemTest, Probability itemTestProbability, ItemEnhancement itemAdditiveBundle, Probability moreProbability) in RandomResistances)
+            foreach ((ItemTest itemTest, Probability itemTestProbability, ItemEnhancement itemEnhancement, Probability moreProbability) in RandomResistances)
             {
                 if (itemTestProbability.Test(Game) && itemTest.Test(characteristics))
                 {
-                    characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
+                    characteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
                     if (moreProbability.Test(Game))
                     {
                         return true;
