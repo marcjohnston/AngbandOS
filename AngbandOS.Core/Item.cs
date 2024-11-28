@@ -51,21 +51,39 @@ internal sealed class Item : IComparable<Item>
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
 
     /// <summary>
+    /// Returns the deterministic set of fixed artifact characteristics.
+    /// </summary>
+    private IItemCharacteristics? FixedArtifactItemCharacteristics = null;
+
+    /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
     /// </summary>
     public ItemEnhancement? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
+
+    /// <summary>
+    /// Returns the deterministic set of rare item characteristics.
+    /// </summary>
+    private IItemCharacteristics? RareItemCharacteristics = null;
 
     /// <summary>
     /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
     /// </summary>
     public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
-    public ItemCharacteristics? RandomArtifact = null;
+    /// <summary>
+    /// Returns the deterministic set of random artifact characteristics.
+    /// </summary>
+    public ItemCharacteristics? RandomArtifactItemCharacteristics = null;
 
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
     /// </summary>
     public ItemEnhancement? RandomPower = null;
+
+    /// <summary>
+    /// Returns the deterministic set of random power characteristics.
+    /// </summary>
+    private IItemCharacteristics? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
 
     public int Count;
     public int Discount;
@@ -147,6 +165,11 @@ internal sealed class Item : IComparable<Item>
     /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
     /// </summary>
     private readonly ItemFactory _factory;
+
+    /// <summary>
+    /// Returns the deterministic set of fixed artifact characteristics.
+    /// </summary>
+    private IItemCharacteristics FactoryItemCharacteristics;
 
     /// <summary>
     /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
@@ -1092,28 +1115,19 @@ internal sealed class Item : IComparable<Item>
         ItemCharacteristics characteristics = new ItemCharacteristics();
 
         // Merge the characteristics from the base item category.
-        characteristics.Merge(_factory.GenerateItemCharacteristics()); // TODO: This merging is obsolete
+        characteristics.Merge(FactoryItemCharacteristics); // TODO: This merging is obsolete
 
         // Now merge the characteristics from the fixed artifact, if there is one.
-        if (FixedArtifact != null)
-        {
-            characteristics.Merge(FixedArtifact.GenerateItemCharacteristics());
-        }
+        characteristics.Merge(FixedArtifactItemCharacteristics);
 
         // Now merge the characteristics from the rare item type, if there is one.
-        if (RareItem != null)
-        {
-            characteristics.Merge(RareItem.GenerateItemCharacteristics());
-        }
+        characteristics.Merge(RareItemCharacteristics);
 
         // Finally, merge any additional random artifact characteristics, if there are any.
         characteristics.Merge(Characteristics);
 
         // If there are any random power characteristics, apply those also.
-        if (RandomPower != null) // TODO: This smells funny
-        {
-            characteristics.Merge(RandomPower.GenerateItemCharacteristics());
-        }
+        characteristics.Merge(RandomPowerItemCharacteristics);
         return characteristics;
     }
 
@@ -2102,19 +2116,7 @@ internal sealed class Item : IComparable<Item>
 
         fixedArtifact.CurNum = 1;
         FixedArtifact = fixedArtifact;
-        IItemCharacteristics fixedArtifactCharacteristics = fixedArtifact.GenerateItemCharacteristics();
-        Characteristics.BonusStrength = fixedArtifactCharacteristics.BonusStrength;
-        Characteristics.BonusIntelligence = fixedArtifactCharacteristics.BonusIntelligence;
-        Characteristics.BonusWisdom = fixedArtifactCharacteristics.BonusWisdom;
-        Characteristics.BonusDexterity = fixedArtifactCharacteristics.BonusDexterity;
-        Characteristics.BonusConstitution = fixedArtifactCharacteristics.BonusConstitution;
-        Characteristics.BonusCharisma = fixedArtifactCharacteristics.BonusCharisma;
-        Characteristics.BonusStealth = fixedArtifactCharacteristics.BonusStealth;
-        Characteristics.BonusSearch = fixedArtifactCharacteristics.BonusSearch;
-        Characteristics.BonusInfravision = fixedArtifactCharacteristics.BonusInfravision;
-        Characteristics.BonusTunnel = fixedArtifactCharacteristics.BonusTunnel;
-        Characteristics.BonusAttacks = fixedArtifactCharacteristics.BonusAttacks;
-        Characteristics.BonusSpeed = fixedArtifactCharacteristics.BonusSpeed;
+        FixedArtifactItemCharacteristics = fixedArtifact.GenerateItemCharacteristics();
         ArmorClass = fixedArtifact.Ac;
         DamageDice = fixedArtifact.Dd;
         DamageSides = fixedArtifact.Ds;
@@ -2237,7 +2239,7 @@ internal sealed class Item : IComparable<Item>
         }
         else if (RareItem != null)
         {
-            IItemCharacteristics rareItemCharacteristics = RareItem.GenerateItemCharacteristics();
+            RareItemCharacteristics = RareItem.GenerateItemCharacteristics();
             if (RareItem.RandomPower != null)
             {
                 RandomPower = RareItem.RandomPower;
@@ -2253,21 +2255,21 @@ internal sealed class Item : IComparable<Item>
 
             // Check to see if we are enchanting a cursed or broken item.
             int goodBadMultiplier = IsCursed || IsBroken ? -1 : 1;
-            Characteristics.BonusHit -= rareItemCharacteristics.BonusHit * goodBadMultiplier;
-            Characteristics.BonusDamage -= rareItemCharacteristics.BonusDamage * goodBadMultiplier;
-            Characteristics.BonusArmorClass -= rareItemCharacteristics.BonusArmorClass * goodBadMultiplier;
-            Characteristics.BonusStrength -= rareItemCharacteristics.BonusStrength * goodBadMultiplier;
-            Characteristics.BonusIntelligence -= rareItemCharacteristics.BonusIntelligence * goodBadMultiplier;
-            Characteristics.BonusWisdom -= rareItemCharacteristics.BonusWisdom * goodBadMultiplier;
-            Characteristics.BonusDexterity -= rareItemCharacteristics.BonusDexterity * goodBadMultiplier;
-            Characteristics.BonusConstitution -= rareItemCharacteristics.BonusConstitution * goodBadMultiplier;
-            Characteristics.BonusCharisma -= rareItemCharacteristics.BonusCharisma * goodBadMultiplier;
-            Characteristics.BonusStealth -= rareItemCharacteristics.BonusStealth * goodBadMultiplier;
-            Characteristics.BonusSearch -= rareItemCharacteristics.BonusSearch * goodBadMultiplier;
-            Characteristics.BonusInfravision -= rareItemCharacteristics.BonusInfravision * goodBadMultiplier;
-            Characteristics.BonusTunnel -= rareItemCharacteristics.BonusTunnel * goodBadMultiplier;
-            Characteristics.BonusAttacks -= rareItemCharacteristics.BonusAttacks * goodBadMultiplier;
-            Characteristics.BonusSpeed -= rareItemCharacteristics.BonusSpeed * goodBadMultiplier;
+            Characteristics.BonusHit -= RareItemCharacteristics.BonusHit * goodBadMultiplier;
+            Characteristics.BonusDamage -= RareItemCharacteristics.BonusDamage * goodBadMultiplier;
+            Characteristics.BonusArmorClass -= RareItemCharacteristics.BonusArmorClass * goodBadMultiplier;
+            Characteristics.BonusStrength -= RareItemCharacteristics.BonusStrength * goodBadMultiplier;
+            Characteristics.BonusIntelligence -= RareItemCharacteristics.BonusIntelligence * goodBadMultiplier;
+            Characteristics.BonusWisdom -= RareItemCharacteristics.BonusWisdom * goodBadMultiplier;
+            Characteristics.BonusDexterity -= RareItemCharacteristics.BonusDexterity * goodBadMultiplier;
+            Characteristics.BonusConstitution -= RareItemCharacteristics.BonusConstitution * goodBadMultiplier;
+            Characteristics.BonusCharisma -= RareItemCharacteristics.BonusCharisma * goodBadMultiplier;
+            Characteristics.BonusStealth -= RareItemCharacteristics.BonusStealth * goodBadMultiplier;
+            Characteristics.BonusSearch -= RareItemCharacteristics.BonusSearch * goodBadMultiplier;
+            Characteristics.BonusInfravision -= RareItemCharacteristics.BonusInfravision * goodBadMultiplier;
+            Characteristics.BonusTunnel -= RareItemCharacteristics.BonusTunnel * goodBadMultiplier;
+            Characteristics.BonusAttacks -= RareItemCharacteristics.BonusAttacks * goodBadMultiplier;
+            Characteristics.BonusSpeed -= RareItemCharacteristics.BonusSpeed * goodBadMultiplier;
             Game.TreasureRating += RareItem.TreasureRating;
             return;
         }
@@ -2290,141 +2292,12 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    /// <summary>
-    /// Imports the characteristics of another item.  This is only needed for the <see cref="Item.Clone"/> method.
-    /// </summary>
-    /// <param name="itemCharacteristicsA"></param>
-    /// <param name="itemCharacteristicsB"></param>
-    public void Copy(ItemCharacteristics characteristics)
-    {
-        // CanApplyBlessedArtifactBias = Factory.CanApplyBlessedArtifactBias; // TODO: Need to restore this.
-        // CanApplyArtifactBiasSlaying = Factory.CanApplyArtifactBiasSlaying; // TODO: Need to restore this.
-        // CanApplyBlowsBonus = Factory.CanApplyBlowsBonus; // TODO: Need to restore this.
-        // CanReflectBoltsAndArrows = Factory.CanReflectBoltsAndArrows; // TODO: Need to restore this.
-        // CanApplySlayingBonus = Factory.CanApplySlayingBonus; // TODO: Need to restore this.
-        // CanApplyBonusArmorClassMiscPower = Factory.CanApplyBonusArmorClassMiscPower; // TODO: Need to restore this.
-        // CanProvideSheathOfElectricity = Factory.CanProvideSheathOfElectricity; // TODO: Need to restore this.
-        // CanProvideSheathOfFire = Factory.CanProvideSheathOfFire;        // TODO: Need to restore this.
-        Characteristics.BonusHit = characteristics.BonusHit;
-        Characteristics.BonusArmorClass = characteristics.BonusArmorClass;
-        Characteristics.BonusDamage = characteristics.BonusDamage;
-        Characteristics.BonusStrength = characteristics.BonusStrength;
-        Characteristics.BonusIntelligence = characteristics.BonusIntelligence;
-        Characteristics.BonusWisdom = characteristics.BonusWisdom;
-        Characteristics.BonusDexterity = characteristics.BonusDexterity;
-        Characteristics.BonusConstitution = characteristics.BonusConstitution;
-        Characteristics.BonusCharisma = characteristics.BonusCharisma;
-        Characteristics.BonusStealth = characteristics.BonusStealth;
-        Characteristics.BonusSearch = characteristics.BonusSearch;
-        Characteristics.BonusInfravision = characteristics.BonusInfravision;
-        Characteristics.BonusTunnel = characteristics.BonusTunnel;
-        Characteristics.BonusAttacks = characteristics.BonusAttacks;
-        Characteristics.BonusSpeed = characteristics.BonusSpeed;        
-        Characteristics.Activation = characteristics.Activation;
-        Characteristics.Aggravate = characteristics.Aggravate;
-        Characteristics.AntiTheft = characteristics.AntiTheft;
-        Characteristics.ArtifactBias = characteristics.ArtifactBias;
-        Characteristics.Blessed = characteristics.Blessed;
-        Characteristics.Blows = characteristics.Blows;
-        Characteristics.BrandAcid = characteristics.BrandAcid;
-        Characteristics.BrandCold = characteristics.BrandCold;
-        Characteristics.BrandElec = characteristics.BrandElec;
-        Characteristics.BrandFire = characteristics.BrandFire;
-        Characteristics.BrandPois = characteristics.BrandPois;
-        Characteristics.Cha = characteristics.Cha;
-        Characteristics.Chaotic = characteristics.Chaotic;
-        Characteristics.Con = characteristics.Con;
-        Characteristics.IsCursed = characteristics.IsCursed;
-        Characteristics.Dex = characteristics.Dex;
-        Characteristics.DrainExp = characteristics.DrainExp;
-        Characteristics.DreadCurse = characteristics.DreadCurse;
-        Characteristics.EasyKnow = characteristics.EasyKnow;
-        Characteristics.Feather = characteristics.Feather;
-        Characteristics.FreeAct = characteristics.FreeAct;
-        Characteristics.HeavyCurse = characteristics.HeavyCurse;
-        Characteristics.HideType = characteristics.HideType;
-        Characteristics.HoldLife = characteristics.HoldLife;
-        Characteristics.IgnoreAcid = characteristics.IgnoreAcid;
-        Characteristics.IgnoreCold = characteristics.IgnoreCold;
-        Characteristics.IgnoreElec = characteristics.IgnoreElec;
-        Characteristics.IgnoreFire = characteristics.IgnoreFire;
-        Characteristics.ImAcid = characteristics.ImAcid;
-        Characteristics.ImCold = characteristics.ImCold;
-        Characteristics.ImElec = characteristics.ImElec;
-        Characteristics.ImFire = characteristics.ImFire;
-        Characteristics.Impact = characteristics.Impact;
-        Characteristics.Infra = characteristics.Infra;
-        Characteristics.InstaArt = characteristics.InstaArt;
-        Characteristics.Int = characteristics.Int;
-        Characteristics.KillDragon = characteristics.KillDragon;
-        Characteristics.NoMagic = characteristics.NoMagic;
-        Characteristics.NoTele = characteristics.NoTele;
-        Characteristics.PermaCurse = characteristics.PermaCurse;
-        Characteristics.Radius = characteristics.Radius;
-        Characteristics.Reflect = characteristics.Reflect;
-        Characteristics.Regen = characteristics.Regen;
-        Characteristics.ResAcid = characteristics.ResAcid;
-        Characteristics.ResBlind = characteristics.ResBlind;
-        Characteristics.ResChaos = characteristics.ResChaos;
-        Characteristics.ResCold = characteristics.ResCold;
-        Characteristics.ResConf = characteristics.ResConf;
-        Characteristics.ResDark = characteristics.ResDark;
-        Characteristics.ResDisen = characteristics.ResDisen;
-        Characteristics.ResElec = characteristics.ResElec;
-        Characteristics.ResFear = characteristics.ResFear;
-        Characteristics.ResFire = characteristics.ResFire;
-        Characteristics.ResLight = characteristics.ResLight;
-        Characteristics.ResNether = characteristics.ResNether;
-        Characteristics.ResNexus = characteristics.ResNexus;
-        Characteristics.ResPois = characteristics.ResPois;
-        Characteristics.ResShards = characteristics.ResShards;
-        Characteristics.ResSound = characteristics.ResSound;
-        Characteristics.Search = characteristics.Search;
-        Characteristics.SeeInvis = characteristics.SeeInvis;
-        Characteristics.ShElec = characteristics.ShElec;
-        Characteristics.ShFire = characteristics.ShFire;
-        Characteristics.ShowMods = characteristics.ShowMods;
-        Characteristics.SlayAnimal = characteristics.SlayAnimal;
-        Characteristics.SlayDemon = characteristics.SlayDemon;
-        Characteristics.SlayDragon = characteristics.SlayDragon;
-        Characteristics.SlayEvil = characteristics.SlayEvil;
-        Characteristics.SlayGiant = characteristics.SlayGiant;
-        Characteristics.SlayOrc = characteristics.SlayOrc;
-        Characteristics.SlayTroll = characteristics.SlayTroll;
-        Characteristics.SlayUndead = characteristics.SlayUndead;
-        Characteristics.SlowDigest = characteristics.SlowDigest;
-        Characteristics.Speed = characteristics.Speed;
-        Characteristics.Stealth = characteristics.Stealth;
-        Characteristics.Str = characteristics.Str;
-        Characteristics.SustCha = characteristics.SustCha;
-        Characteristics.SustCon = characteristics.SustCon;
-        Characteristics.SustDex = characteristics.SustDex;
-        Characteristics.SustInt = characteristics.SustInt;
-        Characteristics.SustStr = characteristics.SustStr;
-        Characteristics.SustWis = characteristics.SustWis;
-        Characteristics.Telepathy = characteristics.Telepathy;
-        Characteristics.Teleport = characteristics.Teleport;
-        Characteristics.TreasureRating = characteristics.TreasureRating;
-        Characteristics.Tunnel = characteristics.Tunnel;
-        Characteristics.Vampiric = characteristics.Vampiric;
-        Characteristics.Vorpal = characteristics.Vorpal;
-        Characteristics.Wis = characteristics.Wis;
-        Characteristics.Wraith = characteristics.Wraith;
-        Characteristics.XtraMight = characteristics.XtraMight;
-        Characteristics.XtraShots = characteristics.XtraShots;
-    }
-
     public bool CreateRandomArtifact(bool fromScroll)
     {
         // Create a set of random artifact characteristics.
-        ItemCharacteristics characteristics = new ItemCharacteristics();
+        RandomArtifactItemCharacteristics = new ItemCharacteristics();
 
-        // Get the current item values.
-        characteristics.Copy(Characteristics);
-
-        _factory.CreateRandomArtifact(characteristics, fromScroll);
-
-        Copy(characteristics);
+        _factory.CreateRandomArtifact(RandomArtifactItemCharacteristics, fromScroll);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
@@ -2574,7 +2447,7 @@ internal sealed class Item : IComparable<Item>
         FixedArtifact  = cloneFrom.FixedArtifact;
         RareItem = cloneFrom.RareItem;
         Characteristics  = cloneFrom.Characteristics;
-        RandomArtifact  = cloneFrom.RandomArtifact;
+        RandomArtifactItemCharacteristics  = cloneFrom.RandomArtifactItemCharacteristics;
         RandomPower  = cloneFrom.RandomPower;
         Count = cloneFrom.Count;
         Discount = cloneFrom.Discount;
@@ -2619,22 +2492,11 @@ internal sealed class Item : IComparable<Item>
     {
         Game = game;
         _factory = factory;
+        FactoryItemCharacteristics = factory.GenerateItemCharacteristics();
 
         Count = 1;
 
         // Now we retrieve all of the characteristics from the factory.
-        Characteristics.BonusStrength = _factory.InitialBonusStrength;
-        Characteristics.BonusIntelligence = _factory.InitialBonusIntelligence;
-        Characteristics.BonusWisdom = _factory.InitialBonusWisdom;
-        Characteristics.BonusDexterity = _factory.InitialBonusDexterity;
-        Characteristics.BonusConstitution = _factory.InitialBonusConstitution;
-        Characteristics.BonusCharisma = _factory.InitialBonusCharisma;
-        Characteristics.BonusStealth = _factory.InitialBonusStealth;
-        Characteristics.BonusSearch = _factory.InitialBonusSearch;
-        Characteristics.BonusInfravision = _factory.InitialBonusInfravision;
-        Characteristics.BonusTunnel = _factory.InitialBonusTunnel;
-        Characteristics.BonusAttacks = _factory.InitialBonusAttacks;
-        Characteristics.BonusSpeed = _factory.InitialBonusSpeed;
         NutritionalValue = _factory.InitialNutritionalValue;        
         GoldPieces = _factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
         TurnsOfLightRemaining = _factory.InitialTurnsOfLight;

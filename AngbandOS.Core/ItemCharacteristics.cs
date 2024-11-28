@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents a set of read and write item characteristics that are used as the storage for one or more merged <see cref="ItemEnhancement"/> objects.
+/// Represents a set of deterministic read and write item characteristics that are used as the storage for one or more merged <see cref="ItemEnhancement"/> objects.
 /// </summary>
 [Serializable]
 internal class ItemCharacteristics : IItemCharacteristics
@@ -443,8 +443,13 @@ internal class ItemCharacteristics : IItemCharacteristics
     /// Merge two sets of item characteristics.  Characteristics are typically merged by using an OR operation.
     /// </summary>
     /// <param name="itemCharacteristics"></param>
-    public void Merge(IItemCharacteristics itemCharacteristics)
+    public void Merge(IItemCharacteristics? itemCharacteristics)
     {
+        if (itemCharacteristics == null)
+        {
+            return;
+        }
+
         CanApplyBlessedArtifactBias |= itemCharacteristics.CanApplyBlessedArtifactBias;
         CanApplyArtifactBiasSlaying |= itemCharacteristics.CanApplyArtifactBiasSlaying;
         CanApplyBlowsBonus |= itemCharacteristics.CanApplyBlowsBonus;

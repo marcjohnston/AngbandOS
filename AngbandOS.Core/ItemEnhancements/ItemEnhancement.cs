@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemEnhancements;
 
 /// <summary>
-/// Represents a set of item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
+/// Represents a set of non-deterministic item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
 [Serializable]
@@ -20,6 +20,10 @@ internal abstract class ItemEnhancement : IGetKey
         Game = game;
     }
 
+    /// <summary>
+    /// Returns a deterministic set of characteristics that are merge with the other <see cref="Item"/> characteristics.
+    /// </summary>
+    /// <returns></returns>
     public IItemCharacteristics GenerateItemCharacteristics()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
