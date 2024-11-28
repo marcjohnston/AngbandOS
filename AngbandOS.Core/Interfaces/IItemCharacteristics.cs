@@ -15,6 +15,31 @@ namespace AngbandOS.Core.Interfaces;
 /// </remarks>
 internal interface IItemCharacteristics
 {
+    bool CanApplyBlessedArtifactBias { get; }
+    bool CanApplyArtifactBiasSlaying { get; }
+    bool CanApplyBlowsBonus { get; }
+    bool CanReflectBoltsAndArrows { get; }
+    bool CanApplySlayingBonus { get; }
+    bool CanApplyBonusArmorClassMiscPower { get; }
+    bool CanProvideSheathOfElectricity { get; }
+    bool CanProvideSheathOfFire { get; }
+
+    int BonusHit { get; }
+    int BonusArmorClass { get; }
+    int BonusDamage { get; }
+    int BonusStrength { get; }
+    int BonusIntelligence { get; }
+    int BonusWisdom { get; }
+    int BonusDexterity { get; }
+    int BonusConstitution { get; }
+    int BonusCharisma { get; }
+    int BonusStealth { get; }
+    int BonusSearch { get; }
+    int BonusInfravision { get; }
+    int BonusTunnel { get; }
+    int BonusAttacks { get; }
+    int BonusSpeed { get; }
+
     /// <summary>
     /// Returns whether or not the item affects the search capabilities of the player when being worn.
     /// </summary>

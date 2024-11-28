@@ -18,7 +18,7 @@ internal class GreatSoftArmorEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusArmorClass += item.GetBonusValue(10, level);
+        item.Characteristics.BonusArmorClass += item.GetBonusValue(10, level);
 
         switch (Game.DieRoll(21))
         {

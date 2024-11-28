@@ -18,9 +18,9 @@ internal class TerribleCloakEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusArmorClass -= item.GetBonusValue(10, level);
+        item.Characteristics.BonusArmorClass -= item.GetBonusValue(10, level);
         item.RareItem = Game.SingletonRepository.Get<RareItemWeightedRandom>(nameof(CloakPoorRareItemWeightedRandom)).ChooseOrDefault();
-        if (item.BonusArmorClass < 0)
+        if (item.Characteristics.BonusArmorClass < 0)
         {
             item.IsCursed = true;
         }

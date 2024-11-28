@@ -15,7 +15,7 @@ internal class RogueArtifactBias : ArtifactBias
     private RogueArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Rogues";
 
-    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
+    public override bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics)
     {
         if (!characteristics.Stealth)
         {
@@ -28,7 +28,7 @@ internal class RogueArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
+    public override bool ApplySlaying(ItemCharacteristics characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

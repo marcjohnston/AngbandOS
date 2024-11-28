@@ -23,6 +23,6 @@ internal class BonusArmorClass1D8P10BP5EnchantmentScript : Script, IEnhancementS
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusArmorClass = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
+        item.Characteristics.BonusArmorClass = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
     }
 }

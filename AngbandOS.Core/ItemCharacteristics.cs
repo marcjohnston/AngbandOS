@@ -13,6 +13,31 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ItemCharacteristics : IItemCharacteristics
 {
+    public bool CanApplyBlessedArtifactBias { get; set; }
+    public bool CanApplyArtifactBiasSlaying { get; set; }
+    public bool CanApplyBlowsBonus { get; set; }
+    public bool CanReflectBoltsAndArrows { get; set; }
+    public bool CanApplySlayingBonus { get; set; }
+    public bool CanApplyBonusArmorClassMiscPower { get; set; }
+    public bool CanProvideSheathOfElectricity { get; set; }
+    public bool CanProvideSheathOfFire { get; set; }
+
+    public int BonusHit { get; set; }
+    public int BonusArmorClass { get; set; }
+    public int BonusDamage { get; set; }
+    public int BonusStrength { get; set; }
+    public int BonusIntelligence { get; set; }
+    public int BonusWisdom { get; set; }
+    public int BonusDexterity { get; set; }
+    public int BonusConstitution { get; set; }
+    public int BonusCharisma { get; set; }
+    public int BonusStealth { get; set; }
+    public int BonusSearch { get; set; }
+    public int BonusInfravision { get; set; }
+    public int BonusTunnel { get; set; }
+    public int BonusAttacks { get; set; }
+    public int BonusSpeed { get; set; }
+
     /// <inheritdoc/>
     public Activation? Activation { get; set; } = null;
 
@@ -396,6 +421,31 @@ internal class ItemCharacteristics : IItemCharacteristics
     /// <param name="itemCharacteristics"></param>
     public void Merge(IItemCharacteristics itemCharacteristics)
     {
+        CanApplyBlessedArtifactBias |= itemCharacteristics.CanApplyBlessedArtifactBias;
+        CanApplyArtifactBiasSlaying |= itemCharacteristics.CanApplyArtifactBiasSlaying;
+        CanApplyBlowsBonus |= itemCharacteristics.CanApplyBlowsBonus;
+        CanReflectBoltsAndArrows |= itemCharacteristics.CanReflectBoltsAndArrows;
+        CanApplySlayingBonus |= itemCharacteristics.CanApplySlayingBonus;
+        CanApplyBonusArmorClassMiscPower |= itemCharacteristics.CanApplyBonusArmorClassMiscPower;
+        CanProvideSheathOfElectricity |= itemCharacteristics.CanProvideSheathOfElectricity;
+        CanProvideSheathOfFire |= itemCharacteristics.CanProvideSheathOfFire;
+
+        BonusHit += itemCharacteristics.BonusHit;
+        BonusArmorClass += itemCharacteristics.BonusArmorClass;
+        BonusDamage += itemCharacteristics.BonusDamage;
+        BonusStrength += itemCharacteristics.BonusStrength;
+        BonusIntelligence += itemCharacteristics.BonusIntelligence;
+        BonusWisdom += itemCharacteristics.BonusWisdom;
+        BonusDexterity += itemCharacteristics.BonusDexterity;
+        BonusConstitution += itemCharacteristics.BonusConstitution;
+        BonusCharisma += itemCharacteristics.BonusCharisma;
+        BonusStealth += itemCharacteristics.BonusStealth;
+        BonusSearch += itemCharacteristics.BonusSearch;
+        BonusInfravision += itemCharacteristics.BonusInfravision;
+        BonusTunnel += itemCharacteristics.BonusTunnel;
+        BonusAttacks += itemCharacteristics.BonusAttacks;
+        BonusSpeed += itemCharacteristics.BonusSpeed;
+
         if (ArtifactBias == null)
         {
             ArtifactBias = itemCharacteristics.ArtifactBias;
@@ -518,6 +568,101 @@ internal class ItemCharacteristics : IItemCharacteristics
             return false;
         }
         ItemCharacteristics other = (ItemCharacteristics)obj;
+
+        if (CanApplyBlessedArtifactBias != other.CanApplyBlessedArtifactBias)
+        {
+                return false;
+        }
+        if (CanApplyArtifactBiasSlaying != other.CanApplyArtifactBiasSlaying)
+        {
+                return false;
+        }
+        if (CanApplyBlowsBonus != other.CanApplyBlowsBonus)
+        {
+                return false;
+        }
+        if (CanReflectBoltsAndArrows != other.CanReflectBoltsAndArrows)
+        {
+                return false;
+        }
+        if (CanApplySlayingBonus != other.CanApplySlayingBonus)
+        {
+                return false;
+        }
+        if (CanApplyBonusArmorClassMiscPower != other.CanApplyBonusArmorClassMiscPower)
+        {
+                return false;
+        }
+        if (CanProvideSheathOfElectricity != other.CanProvideSheathOfElectricity)
+        {
+                return false;
+        }
+        if (CanProvideSheathOfFire != other.CanProvideSheathOfFire)
+        {
+                return false;
+        }
+
+        if (BonusHit != other.BonusHit)
+        {
+                return false;
+        }
+        if (BonusArmorClass != other.BonusArmorClass)
+        {
+                return false;
+        }
+        if (BonusDamage != other.BonusDamage)
+        {
+                return false;
+        }
+        if (BonusStrength != other.BonusStrength)
+        {
+                return false;
+        }
+        if (BonusIntelligence != other.BonusIntelligence)
+        {
+                return false;
+        }
+        if (BonusWisdom != other.BonusWisdom)
+        {
+                return false;
+        }
+        if (BonusDexterity != other.BonusDexterity)
+        {
+                return false;
+        }
+        if (BonusConstitution != other.BonusConstitution)
+        {
+                return false;
+        }
+        if (BonusCharisma != other.BonusCharisma)
+        {
+                return false;
+        }
+        if (BonusStealth != other.BonusStealth)
+        {
+                return false;
+        }
+        if (BonusSearch != other.BonusSearch)
+        {
+                return false;
+        }
+        if (BonusInfravision != other.BonusInfravision)
+        {
+                return false;
+        }
+        if (BonusTunnel != other.BonusTunnel)
+        {
+                return false;
+        }
+        if (BonusAttacks != other.BonusAttacks)
+        {
+                return false;
+        }
+        if (BonusSpeed != other.BonusSpeed)
+        {
+            return false;
+        }
+
         if (Activation != other.Activation)
         {
             return false;

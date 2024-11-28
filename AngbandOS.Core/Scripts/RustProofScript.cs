@@ -33,11 +33,11 @@ internal class RustProofScript : Script, IScript
         // Make sure the grammar of the message is correct
         string your = item.IsInInventory ? "Your" : "The";
         string s;
-        if (item.BonusArmorClass < 0 && !item.IsCursed)
+        if (item.Characteristics.BonusArmorClass < 0 && !item.IsCursed)
         {
             s = item.Count > 1 ? "" : "s";
             Game.MsgPrint($"{your} {itenName} look{s} as good as new!");
-            item.BonusArmorClass = 0;
+            item.Characteristics.BonusArmorClass = 0;
         }
         s = item.Count > 1 ? "are" : "is";
         Game.MsgPrint($"{your} {itenName} {s} now protected against corrosion.");

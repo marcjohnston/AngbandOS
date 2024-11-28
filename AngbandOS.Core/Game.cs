@@ -5440,23 +5440,23 @@ public bool IsDead = false;
             int chance;
             if ((eflag & Constants.EnchTohit) != 0)
             {
-                if (oPtr.BonusHit < 0)
+                if (oPtr.Characteristics.BonusHit < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.BonusHit > 15)
+                else if (oPtr.Characteristics.BonusHit > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.BonusHit];
+                    chance = EnchantTable[oPtr.Characteristics.BonusHit];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.BonusHit++;
+                    oPtr.Characteristics.BonusHit++;
                     res = true;
-                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.Characteristics.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.Characteristics.IsCursed = false;
@@ -5475,23 +5475,23 @@ public bool IsDead = false;
             }
             if ((eflag & Constants.EnchTodam) != 0)
             {
-                if (oPtr.BonusDamage < 0)
+                if (oPtr.Characteristics.BonusDamage < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.BonusDamage > 15)
+                else if (oPtr.Characteristics.BonusDamage > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.BonusDamage];
+                    chance = EnchantTable[oPtr.Characteristics.BonusDamage];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.BonusDamage++;
+                    oPtr.Characteristics.BonusDamage++;
                     res = true;
-                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.Characteristics.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.Characteristics.IsCursed = false;
@@ -5510,23 +5510,23 @@ public bool IsDead = false;
             }
             if ((eflag & Constants.EnchToac) != 0)
             {
-                if (oPtr.BonusArmorClass < 0)
+                if (oPtr.Characteristics.BonusArmorClass < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.BonusArmorClass > 15)
+                else if (oPtr.Characteristics.BonusArmorClass > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.BonusArmorClass];
+                    chance = EnchantTable[oPtr.Characteristics.BonusArmorClass];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.BonusArmorClass++;
+                    oPtr.Characteristics.BonusArmorClass++;
                     res = true;
-                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
+                    if (oPtr.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.Characteristics.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
@@ -6274,7 +6274,7 @@ public bool IsDead = false;
         {
             return false;
         }
-        if (oPtr.ArmorClass + oPtr.BonusArmorClass <= 0)
+        if (oPtr.ArmorClass + oPtr.Characteristics.BonusArmorClass <= 0)
         {
             return false;
         }
@@ -6286,7 +6286,7 @@ public bool IsDead = false;
             return true;
         }
         MsgPrint($"Your {oName} is damaged!");
-        oPtr.BonusArmorClass--;
+        oPtr.Characteristics.BonusArmorClass--;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
@@ -6726,9 +6726,9 @@ public bool IsDead = false;
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
             item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedRareItem));
-            item.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
-            item.BonusHit = 0;
-            item.BonusDamage = 0;
+            item.Characteristics.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
+            item.Characteristics.BonusHit = 0;
+            item.Characteristics.BonusDamage = 0;
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
@@ -6765,9 +6765,9 @@ public bool IsDead = false;
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
             item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredRareItem));
-            item.BonusHit = 0 - DieRoll(5) - DieRoll(5);
-            item.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
-            item.BonusArmorClass = 0;
+            item.Characteristics.BonusHit = 0 - DieRoll(5) - DieRoll(5);
+            item.Characteristics.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
+            item.Characteristics.BonusArmorClass = 0;
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
@@ -7385,7 +7385,7 @@ public bool IsDead = false;
         Item? meleeItem = GetInventoryItem(InventorySlot.MeleeWeapon);
         if (meleeItem != null)
         {
-            bonus += meleeItem.BonusHit;
+            bonus += meleeItem.Characteristics.BonusHit;
         }
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         // Attacking uses a full turn
@@ -7574,7 +7574,7 @@ public bool IsDead = false;
                         chaosEffect = false;
                     }
                     // Check if we did a critical
-                    totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.BonusHit, totalDamage);
+                    totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.Characteristics.BonusHit, totalDamage);
 
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
@@ -7593,7 +7593,7 @@ public bool IsDead = false;
                         } while (DieRoll(meleeItem.FixedArtifact == null ? 4 : meleeItem.FixedArtifact.VorpalExtraAttacks1InChance) == 1);
                     }
                     // Add bonus damage for the weapon
-                    totalDamage += meleeItem.BonusDamage;
+                    totalDamage += meleeItem.Characteristics.BonusDamage;
                 }
                 // Add bonus damage for strength etc.
                 totalDamage += DamageBonus;
@@ -7950,7 +7950,7 @@ public bool IsDead = false;
             throwDistance = 10;
         }
         // Work out the damage done
-        int damage = DiceRoll(missile.DamageDice, missile.DamageSides) + missile.BonusDamage;
+        int damage = DiceRoll(missile.DamageDice, missile.DamageSides) + missile.Characteristics.BonusDamage;
         damage *= damageMultiplier;
         int chance = SkillThrowing + (AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
@@ -8042,7 +8042,7 @@ public bool IsDead = false;
                     }
                     // Adjust the damage for the particular monster type
                     damage = missile.AdjustDamageForMonsterType(damage, monster);
-                    damage = PlayerCriticalRanged(missile.Weight, missile.BonusHit, damage);
+                    damage = PlayerCriticalRanged(missile.Weight, missile.Characteristics.BonusHit, damage);
                     if (damage < 0)
                     {
                         damage = 0;

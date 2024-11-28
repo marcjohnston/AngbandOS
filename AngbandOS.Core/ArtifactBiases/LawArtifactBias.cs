@@ -12,7 +12,7 @@ internal class LawArtifactBias : ArtifactBias
 {
     private LawArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Law";
-    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
+    public override bool ApplySlaying(ItemCharacteristics characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

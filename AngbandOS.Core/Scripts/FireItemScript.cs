@@ -67,8 +67,8 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         ColorEnum missileColor = individualAmmunition.FlavorColor;
         char missileCharacter = individualAmmunition.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;
-        int shotDamage = Game.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
-        int attackBonus = Game.AttackBonus + individualAmmunition.BonusHit + missileWeapon.BonusHit;
+        int shotDamage = Game.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageSides) + individualAmmunition.Characteristics.BonusDamage + missileWeapon.Characteristics.BonusDamage;
+        int attackBonus = Game.AttackBonus + individualAmmunition.Characteristics.BonusHit + missileWeapon.Characteristics.BonusHit;
         int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
 
         // Damage multiplier depends on weapon
@@ -172,7 +172,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
                     }
                     // Work out the damage done
                     shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
-                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusHit, shotDamage);
+                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.Characteristics.BonusHit, shotDamage);
                     if (shotDamage < 0)
                     {
                         shotDamage = 0;

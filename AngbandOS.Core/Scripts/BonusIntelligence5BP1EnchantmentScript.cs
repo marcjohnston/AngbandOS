@@ -23,6 +23,6 @@ internal class BonusIntelligence5BP1EnchantmentScript : Script, IEnhancementScri
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusIntelligence = 1 + item.GetBonusValue(5, level);
+        item.Characteristics.BonusIntelligence = 1 + item.GetBonusValue(5, level);
     }
 }

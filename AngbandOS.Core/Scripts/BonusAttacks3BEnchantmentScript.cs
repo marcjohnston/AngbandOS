@@ -23,6 +23,6 @@ internal class BonusAttacks3BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusAttacks = Math.Max(1, item.GetBonusValue(3, level));
+        item.Characteristics.BonusAttacks = Math.Max(1, item.GetBonusValue(3, level));
     }
 }

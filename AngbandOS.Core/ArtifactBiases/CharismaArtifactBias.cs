@@ -13,7 +13,7 @@ internal class CharismaArtifactBias : ArtifactBias
     private CharismaArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Charisma";
 
-    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
+    public override bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics)
     {
         if (!characteristics.Cha)
         {
@@ -26,7 +26,7 @@ internal class CharismaArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
+    public override bool ApplyMiscPowers(ItemCharacteristics characteristics)
     {
         if (!characteristics.SustCha)
         {

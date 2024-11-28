@@ -23,6 +23,6 @@ internal class PoorHit1D7P10BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusHit -= Game.DieRoll(7) + item.GetBonusValue(10, level);
+        item.Characteristics.BonusHit -= Game.DieRoll(7) + item.GetBonusValue(10, level);
     }
 }

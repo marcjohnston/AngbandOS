@@ -15,7 +15,7 @@ internal class RangerArtifactBias : ArtifactBias
     private RangerArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Rangers";
 
-    public override bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics)
+    public override bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics)
     {
         if (!characteristics.Con)
         {
@@ -45,7 +45,7 @@ internal class RangerArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics)
+    public override bool ApplyMiscPowers(ItemCharacteristics characteristics)
     {
         if (!characteristics.SustCon)
         {
@@ -57,7 +57,7 @@ internal class RangerArtifactBias : ArtifactBias
         }
         return false;
     }
-    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
+    public override bool ApplySlaying(ItemCharacteristics characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

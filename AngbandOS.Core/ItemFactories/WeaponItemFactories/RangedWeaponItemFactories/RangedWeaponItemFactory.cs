@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class RangedWeaponItemFactory : WeaponItemFactory
 {
-    public override void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
+    public override void ApplySlayingForRandomArtifactCreation(ItemCharacteristics characteristics)
     {
         if (characteristics.ArtifactBias != null)
         {
