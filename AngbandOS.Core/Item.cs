@@ -2101,6 +2101,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         fixedArtifact.CurNum = 1;
+        FixedArtifact = fixedArtifact;
         IItemCharacteristics fixedArtifactCharacteristics = fixedArtifact.GenerateItemCharacteristics();
         Characteristics.BonusStrength = fixedArtifactCharacteristics.BonusStrength;
         Characteristics.BonusIntelligence = fixedArtifactCharacteristics.BonusIntelligence;
