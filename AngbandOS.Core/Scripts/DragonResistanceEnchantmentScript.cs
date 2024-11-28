@@ -26,7 +26,7 @@ internal class DragonResistanceEnchantmentScript : Script, IEnhancementScript
             }
             else
             {
-                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
+                item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
             }
         } while (Game.DieRoll(2) == 1);
     }

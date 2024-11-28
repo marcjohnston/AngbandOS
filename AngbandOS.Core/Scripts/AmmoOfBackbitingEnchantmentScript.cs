@@ -25,7 +25,7 @@ internal class AmmoOfBackbitingEnchantmentScript : Script, IEnhancementScript
     {
         if (Game.RandomLessThan(Constants.MaxDepth) < level)
         {
-            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfBackbitingRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfBackbitingItemEnhancement));
         }
     }
 }

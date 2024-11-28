@@ -6725,7 +6725,7 @@ public bool IsDead = false;
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedRareItem));
+            item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement));
             item.Characteristics.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.Characteristics.BonusHit = 0;
             item.Characteristics.BonusDamage = 0;
@@ -6764,7 +6764,7 @@ public bool IsDead = false;
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredRareItem));
+            item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement));
             item.Characteristics.BonusHit = 0 - DieRoll(5) - DieRoll(5);
             item.Characteristics.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.Characteristics.BonusArmorClass = 0;

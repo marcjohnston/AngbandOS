@@ -20,7 +20,7 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
     {
         if (Game.DieRoll(2) == 1)
         {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
+            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
         }
         else
         {

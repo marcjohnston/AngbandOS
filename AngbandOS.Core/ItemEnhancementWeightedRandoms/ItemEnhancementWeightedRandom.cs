@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
+namespace AngbandOS.Core.ItemEnhancementWeightedRandoms;
 
 /// <summary>
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
@@ -18,13 +18,13 @@ internal abstract class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhan
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
-    protected abstract (string?, int)[] ItemAdditiveBundleNames { get; }
+    protected abstract (string?, int)[] ItemEnhancementBindingKeyAndWeightTuples { get; }
 
     public virtual void Bind()
     {
-        foreach ((string? itemAdditiveBundleName, int weight) in ItemAdditiveBundleNames)
+        foreach ((string? itemEnhancementBindingKey, int weight) in ItemEnhancementBindingKeyAndWeightTuples)
         {
-            Add(weight, Game.SingletonRepository.GetNullable<ItemEnhancement>(itemAdditiveBundleName));
+            Add(weight, Game.SingletonRepository.GetNullable<ItemEnhancement>(itemEnhancementBindingKey));
         }
     }
 

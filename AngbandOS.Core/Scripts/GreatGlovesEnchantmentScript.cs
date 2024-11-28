@@ -32,20 +32,20 @@ internal class GreatGlovesEnchantmentScript : Script, IEnhancementScript
                 case 2:
                 case 3:
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfFreeActionRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfFreeActionItemEnhancement));
                     break;
                 case 5:
                 case 6:
                 case 7:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfSlayingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfSlayingItemEnhancement));
                     break;
                 case 8:
                 case 9:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfAgilityRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfAgilityItemEnhancement));
                     break;
                 case 10:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfPowerRareItem));
-                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(GlovesOfPowerItemEnhancement));
+                    item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                     break;
             }
         }

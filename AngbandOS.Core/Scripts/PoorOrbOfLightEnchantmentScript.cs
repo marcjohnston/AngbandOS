@@ -27,14 +27,14 @@ internal class PoorOrbOfLightEnchantmentScript : Script, IEnhancementScript
         {
             case 1:
                 {
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfIrritationRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfIrritationItemEnhancement));
                     item.IsBroken = true;
                     item.IsCursed = true;
                     break;
                 }
             case 2:
                 {
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfInstabilityRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfInstabilityItemEnhancement));
                     item.IsBroken = true;
                     item.IsCursed = true;
                     break;

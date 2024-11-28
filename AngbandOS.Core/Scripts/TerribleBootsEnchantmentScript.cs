@@ -22,13 +22,13 @@ internal class TerribleBootsEnchantmentScript : Script, IEnhancementScript
         switch (Game.DieRoll(3))
         {
             case 1:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfNoiseRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfNoiseItemEnhancement));
                 break;
             case 2:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfSlownessRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfSlownessItemEnhancement));
                 break;
             case 3:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfAnnoyanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfAnnoyanceItemEnhancement));
                 break;
         }
         if (item.Characteristics.BonusArmorClass < 0)

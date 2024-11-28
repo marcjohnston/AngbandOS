@@ -24,6 +24,6 @@ internal class TerribleHelmEnchantmentScript : Script, IEnhancementScript
             item.IsCursed = true;
         }
 
-        item.RareItem = Game.SingletonRepository.Get<RareItemWeightedRandom>(nameof(HelmPoorRareItemWeightedRandom)).ChooseOrDefault();
+        item.RareItem = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(HelmPoorItemEnhancementWeightedRandom)).ChooseOrDefault();
     }
 }

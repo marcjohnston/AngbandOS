@@ -25,20 +25,20 @@ internal class SingletonRepository
 
     #region Publics
     public ElvishTextRepository ElvishText; // TODO: These cannot be hardcoded.
-    public FindQuestsRepository FindQuests;
-    public FunnyCommentsRepository FunnyComments;
-    public FunnyDescriptionsRepository FunnyDescriptions;
-    public HorrificDescriptionsRepository HorrificDescriptions;
-    public InsultPlayerAttacksRepository InsultPlayerAttacks;
-    public MoanPlayerAttacksRepository MoanPlayerAttacks;
-    public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments;
-    public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
-    public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
-    public ShopkeeperLessThanGuessCommentsRepository ShopkeeperLessThanGuessComments;
-    public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments;
-    public SingingPlayerAttacksRepository SingingPlayerAttacks;
-    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
-    public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
+    public FindQuestsRepository FindQuests; // TODO: These cannot be hardcoded.
+    public FunnyCommentsRepository FunnyComments; // TODO: These cannot be hardcoded.
+    public FunnyDescriptionsRepository FunnyDescriptions; // TODO: These cannot be hardcoded.
+    public HorrificDescriptionsRepository HorrificDescriptions; // TODO: These cannot be hardcoded.
+    public InsultPlayerAttacksRepository InsultPlayerAttacks; // TODO: These cannot be hardcoded.
+    public MoanPlayerAttacksRepository MoanPlayerAttacks; // TODO: These cannot be hardcoded.
+    public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments; // TODO: These cannot be hardcoded.
+    public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments; // TODO: These cannot be hardcoded.
+    public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments; // TODO: These cannot be hardcoded.
+    public ShopkeeperLessThanGuessCommentsRepository ShopkeeperLessThanGuessComments; // TODO: These cannot be hardcoded.
+    public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments; // TODO: These cannot be hardcoded.
+    public SingingPlayerAttacksRepository SingingPlayerAttacks; // TODO: These cannot be hardcoded.
+    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables; // TODO: These cannot be hardcoded.
+    public WorshipPlayerAttacksRepository WorshipPlayerAttacks; // TODO: These cannot be hardcoded.
 
     /// <summary>
     /// Returns a <see cref="WeightedRandom"/> object with all of the entities in the <typeparamref name="T""Tx"/> repository.
@@ -262,10 +262,11 @@ internal class SingletonRepository
         RegisterRepository<Function>();
         RegisterRepository<Gender>();
         RegisterRepository<ItemAction>();
+        RegisterRepository<ItemClass>();
         RegisterRepository<ItemEnhancement>();
         RegisterRepository<ItemEnhancementWeightedRandom>();
-        RegisterRepository<ItemClass>();
         RegisterRepository<ItemFactory>();
+        RegisterRepository<ItemFactoryWeightedRandom>();
         RegisterRepository<ItemFilter>();
         RegisterRepository<ItemMatch>();
         RegisterRepository<ItemQualityRating>();
@@ -289,8 +290,6 @@ internal class SingletonRepository
         RegisterRepository<StoreFactory>();
         RegisterRepository<Talent>();
         RegisterRepository<Timer>();
-        RegisterRepository<ItemFactoryWeightedRandom>();
-        RegisterRepository<RareItemWeightedRandom>();
         RegisterRepository<Widget>();
 
         // These are already capable of Json serialization.

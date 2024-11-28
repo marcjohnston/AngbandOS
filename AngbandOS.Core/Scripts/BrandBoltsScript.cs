@@ -59,7 +59,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessByChanceScript, ICanc
 
             // Make the bolts into bolts of flame
             Game.MsgPrint("Your bolts are covered in a fiery aura!");
-            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFlameRareItem));
+            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFlameItemEnhancement));
             Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
 
             // Quit after the first bolts have been upgraded

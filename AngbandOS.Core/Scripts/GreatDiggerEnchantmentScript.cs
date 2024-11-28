@@ -23,6 +23,6 @@ internal class GreatDiggerEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfDiggingRareItem));
+        item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfDiggingItemEnhancement));
     }
 }

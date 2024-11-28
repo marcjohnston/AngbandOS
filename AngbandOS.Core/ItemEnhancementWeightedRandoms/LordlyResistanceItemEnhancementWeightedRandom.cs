@@ -5,13 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemAdditiveBundleWeightedRandoms;
+namespace AngbandOS.Core.ItemEnhancementWeightedRandoms;
 
 [Serializable]
 internal class LordlyResistanceItemEnhancementWeightedRandom : ItemEnhancementWeightedRandom
 {
     private LordlyResistanceItemEnhancementWeightedRandom(Game game) : base(game) { } // This object is a singleton
-    protected override (string?, int)[] ItemAdditiveBundleNames => new (string?, int)[]
+    protected override (string?, int)[] ItemEnhancementBindingKeyAndWeightTuples => new (string?, int)[]
     {
         (nameof(ResistFearAndWarriorBiasItemEnhancement), 2 * 16), // 1/3
         (nameof(ResistFearItemEnhancement), 2 * 32), // 2/3

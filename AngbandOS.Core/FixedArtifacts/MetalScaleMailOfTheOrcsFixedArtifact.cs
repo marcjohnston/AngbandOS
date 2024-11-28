@@ -17,7 +17,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactEnhancementBundleWeightedRandom)));
+        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
     }
 
     // Orc does Carnage

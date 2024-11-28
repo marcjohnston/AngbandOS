@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemAdditiveBundles;
+namespace AngbandOS.Core.ItemEnhancements;
 
 /// <summary>
 /// Represents a set of item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 

@@ -27,12 +27,12 @@ internal class GreatRangedWeaponEnchantmentScript : Script, IEnhancementScript
         {
             case 1:
             case 11:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfExtraMightRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfExtraMightItemEnhancement));
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
                 break;
             case 2:
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfExtraShotsRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfExtraShotsItemEnhancement));
                 break;
             case 3:
             case 4:
@@ -42,7 +42,7 @@ internal class GreatRangedWeaponEnchantmentScript : Script, IEnhancementScript
             case 14:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfVelocityRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfVelocityItemEnhancement));
                 break;
             case 7:
             case 8:
@@ -52,7 +52,7 @@ internal class GreatRangedWeaponEnchantmentScript : Script, IEnhancementScript
             case 18:
             case 19:
             case 20:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfAccuracyRareItem));
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BowOfAccuracyItemEnhancement));
                 break;
             case 21:
                 item.CreateRandomArtifact(false);
