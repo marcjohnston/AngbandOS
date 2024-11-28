@@ -172,10 +172,9 @@ internal abstract class ItemEnhancement : IGetKey
     public virtual ItemEnhancement? RandomPower => null;
 
     /// <summary>
-    /// Returns the value of the rare item.  When this value is 0, the item is considered worthless regardless of the value of the original item and the
-    /// item is considered broken; otherwise this value is added to the value of the original item.
+    /// Returns the value of the enhancement.
     /// </summary>
-    public virtual int? AdditiveBundleValue => null;
+    public virtual int? Value => null;
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.

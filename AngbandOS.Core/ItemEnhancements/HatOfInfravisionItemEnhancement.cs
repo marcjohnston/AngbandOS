@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class HatOfInfravisionItemEnhancement : ItemEnhancement
 {
     private HatOfInfravisionItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 500;
+    public override int? Value => 500;
     public override string? FriendlyName => "of Infravision";
     public override bool HideType => true;
     public override bool Infra => true;

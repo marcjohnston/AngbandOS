@@ -12,7 +12,7 @@ internal class WeaponOfLengItemEnhancement : ItemEnhancement
 {
     private WeaponOfLengItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     public override bool IsCursed => true;
     public override string? FriendlyName => "of Leng";
     public override bool HeavyCurse => true;

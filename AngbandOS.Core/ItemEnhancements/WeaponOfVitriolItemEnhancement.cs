@@ -12,7 +12,7 @@ internal class WeaponOfVitriolItemEnhancement : ItemEnhancement
 {
     private WeaponOfVitriolItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandAcid => true;
-    public override int? AdditiveBundleValue => 8000;
+    public override int? Value => 8000;
     public override string? FriendlyName => "of Vitriol";
     public override bool IgnoreAcid => true;
     public override int TreasureRating => 15;

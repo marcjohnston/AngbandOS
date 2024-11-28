@@ -15,7 +15,7 @@ internal class WeaponPlanarWeaponItemEnhancement : ItemEnhancement
 
     public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
     protected override string? ActivationName => nameof(Teleport100Every1d50p50Activation);
-    public override int? AdditiveBundleValue => 7000;
+    public override int? Value => 7000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Planar Weapon)";
     protected override string? BonusSearchRollExpression => "1d2";

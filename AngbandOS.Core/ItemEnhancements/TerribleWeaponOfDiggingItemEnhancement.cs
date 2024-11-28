@@ -11,6 +11,6 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class TerribleWeaponOfDiggingItemEnhancement : ItemEnhancement
 {
     private TerribleWeaponOfDiggingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     protected override string? BonusTunnelRollExpression => "-1d5+5";
 }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class WeaponOfEarthquakesItemEnhancement : ItemEnhancement
 {
     private WeaponOfEarthquakesItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 4000;
+    public override int? Value => 4000;
     public override string? FriendlyName => "of Earthquakes";
     public override bool Impact => true;
     protected override string? BonusTunnelRollExpression => "1d3";

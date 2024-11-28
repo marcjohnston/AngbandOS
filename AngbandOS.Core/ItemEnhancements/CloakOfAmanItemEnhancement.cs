@@ -12,7 +12,7 @@ internal class CloakOfAmanItemEnhancement : ItemEnhancement
 {
     private CloakOfAmanItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceItemEnhancementWeightedRandom)).Choose();
-    public override int? AdditiveBundleValue => 4000;
+    public override int? Value => 4000;
     public override string? FriendlyName => "of Aman";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

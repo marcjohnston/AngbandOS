@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class WeaponOfSharpnessItemEnhancement : ItemEnhancement
 {
     private WeaponOfSharpnessItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 5000;
+    public override int? Value => 5000;
     public override string? FriendlyName => "of Sharpness";
     public override int TreasureRating => 20;
     public override bool Tunnel => true;

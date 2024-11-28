@@ -12,7 +12,7 @@ internal class OrbOfIrritationItemEnhancement : ItemEnhancement
 {
     private OrbOfIrritationItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     public override string? FriendlyName => "of Irritation";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

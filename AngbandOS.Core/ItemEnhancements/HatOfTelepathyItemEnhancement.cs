@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class HatOfTelepathyItemEnhancement : ItemEnhancement
 {
     private HatOfTelepathyItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 50000;
+    public override int? Value => 50000;
     public override string? FriendlyName => "of Telepathy";
     public override int TreasureRating => 20;
         public override bool Telepathy => true;

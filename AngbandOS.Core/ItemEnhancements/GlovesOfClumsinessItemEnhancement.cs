@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class GlovesOfClumsinessItemEnhancement : ItemEnhancement
 {
     private GlovesOfClumsinessItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     public override bool Dex => true;
     public override string? FriendlyName => "of Clumsiness";
     protected override string? BonusDexterityRollExpression => "1d10";

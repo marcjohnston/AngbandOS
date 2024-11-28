@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class GlovesOfPowerItemEnhancement : ItemEnhancement
 {
     private GlovesOfPowerItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 2500;
+    public override int? Value => 2500;
     public override string? FriendlyName => "of Power";
     public override bool HideType => true;
     protected override string? BonusStrengthRollExpression => "1d5";

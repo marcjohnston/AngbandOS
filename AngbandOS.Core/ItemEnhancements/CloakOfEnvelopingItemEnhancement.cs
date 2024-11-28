@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class CloakOfEnvelopingItemEnhancement : ItemEnhancement
 {
     private CloakOfEnvelopingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     public override string? FriendlyName => "of Enveloping";
     protected override string? BonusDamageRollExpression => "1d10";
     protected override string? BonusHitRollExpression => "1d10";

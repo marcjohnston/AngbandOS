@@ -13,7 +13,7 @@ internal class WeaponBlessedItemEnhancement : ItemEnhancement
     private WeaponBlessedItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
     public override bool Blessed => true;
-    public override int? AdditiveBundleValue => 5000;
+    public override int? Value => 5000;
     public override string? FriendlyName => "(Blessed)";
     protected override string? BonusWisdomRollExpression => "1d3";
     public override int TreasureRating => 20;

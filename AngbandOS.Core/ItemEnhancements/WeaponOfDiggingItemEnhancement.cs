@@ -12,7 +12,7 @@ internal class WeaponOfDiggingItemEnhancement : ItemEnhancement
 {
     private WeaponOfDiggingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandAcid => true;
-    public override int? AdditiveBundleValue => 500;
+    public override int? Value => 500;
     public override string? FriendlyName => "of Digging";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

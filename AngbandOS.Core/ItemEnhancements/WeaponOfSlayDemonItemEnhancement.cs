@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class WeaponOfSlayDemonItemEnhancement : ItemEnhancement
 {
     private WeaponOfSlayDemonItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 2500;
+    public override int? Value => 2500;
     public override string? FriendlyName => "of Slay Demon";
     public override int TreasureRating => 14;
     public override bool SlayDemon => true;

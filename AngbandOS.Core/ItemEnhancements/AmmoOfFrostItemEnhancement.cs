@@ -12,7 +12,7 @@ internal class AmmoOfFrostItemEnhancement : ItemEnhancement
 {
     private AmmoOfFrostItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandCold => true;
-    public override int? AdditiveBundleValue => 25;
+    public override int? Value => 25;
     public override string? FriendlyName => "of Frost";
     public override bool IgnoreCold => true;
     public override int TreasureRating => 10;

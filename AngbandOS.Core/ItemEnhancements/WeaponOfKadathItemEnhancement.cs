@@ -12,7 +12,7 @@ internal class WeaponOfKadathItemEnhancement : ItemEnhancement
 {
     private WeaponOfKadathItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool Con => true;
-    public override int? AdditiveBundleValue => 20000;
+    public override int? Value => 20000;
     public override bool Dex => true;
     public override bool FreeAct => true;
     public override string? FriendlyName => "of Kadath";

@@ -12,7 +12,7 @@ internal class WeaponOfShockingItemEnhancement : ItemEnhancement
 {
     private WeaponOfShockingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool BrandElec => true;
-    public override int? AdditiveBundleValue => 4500;
+    public override int? Value => 4500;
     public override string? FriendlyName => "of Shocking";
     public override bool IgnoreElec => true;
     public override int TreasureRating => 20;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class BootsWingedItemEnhancement : ItemEnhancement
 {
     private BootsWingedItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 250;
+    public override int? Value => 250;
     public override bool Feather => true;
     public override string? FriendlyName => "(Winged)";
     public override int TreasureRating => 7;

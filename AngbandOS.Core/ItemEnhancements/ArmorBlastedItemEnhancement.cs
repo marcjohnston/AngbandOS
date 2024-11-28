@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class ArmorBlastedItemEnhancement : ItemEnhancement
 {
     private ArmorBlastedItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     public override string? FriendlyName => "(Blasted)";
     protected override string? BonusArmorClassRollExpression => "1d10";
     public override int TreasureRating => 0;

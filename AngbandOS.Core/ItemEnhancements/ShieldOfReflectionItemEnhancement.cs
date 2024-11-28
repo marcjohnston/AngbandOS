@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class ShieldOfReflectionItemEnhancement : ItemEnhancement
 {
     private ShieldOfReflectionItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 15000;
+    public override int? Value => 15000;
     public override string? FriendlyName => "of Reflection";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

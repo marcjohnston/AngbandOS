@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class BowOfVelocityItemEnhancement : ItemEnhancement
 {
     private BowOfVelocityItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 1000;
+    public override int? Value => 1000;
     public override string? FriendlyName => "of Velocity";
     protected override string? BonusDamageRollExpression => "1d15";
     protected override string? BonusHitRollExpression => "1d5";

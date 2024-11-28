@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class OrbOfLifeItemEnhancement : ItemEnhancement
 {
     private OrbOfLifeItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 1000;
+    public override int? Value => 1000;
     public override string? FriendlyName => "of Life";
     public override bool HoldLife => true;
     public override bool IgnoreAcid => true;

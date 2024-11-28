@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class OrbOfLightnessItemEnhancement : ItemEnhancement
 {
     private OrbOfLightnessItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 1000;
+    public override int? Value => 1000;
     public override bool Feather => true;
     public override string? FriendlyName => "of Lightness";
     public override bool IgnoreAcid => true;

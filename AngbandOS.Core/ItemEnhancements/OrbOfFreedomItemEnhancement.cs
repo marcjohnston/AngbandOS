@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class OrbOfFreedomItemEnhancement : ItemEnhancement
 {
     private OrbOfFreedomItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 1000;
+    public override int? Value => 1000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "of Freedom";
     public override bool IgnoreAcid => true;

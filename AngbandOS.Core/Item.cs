@@ -1608,13 +1608,13 @@ internal sealed class Item : IComparable<Item>
         else if (RareItem != null)
         {
             // Check to see if the item is now worthless.
-            if (RareItem.AdditiveBundleValue.HasValue)
+            if (RareItem.Value.HasValue)
             {
-                if (RareItem.AdditiveBundleValue == 0)
+                if (RareItem.Value == 0)
                 {
                     return 0;
                 }
-                value += RareItem.AdditiveBundleValue.Value;
+                value += RareItem.Value.Value;
             }
         }
 
@@ -2244,7 +2244,7 @@ internal sealed class Item : IComparable<Item>
             {
                 RandomPower = RareItem.RandomPower;
             }
-            if (RareItem.AdditiveBundleValue.HasValue && RareItem.AdditiveBundleValue == 0)
+            if (RareItem.Value.HasValue && RareItem.Value == 0)
             {
                 IsBroken = true;
             }

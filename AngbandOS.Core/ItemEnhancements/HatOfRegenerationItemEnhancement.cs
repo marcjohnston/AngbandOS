@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class HatOfRegenerationItemEnhancement : ItemEnhancement
 {
     private HatOfRegenerationItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 1500;
+    public override int? Value => 1500;
     public override string? FriendlyName => "of Regeneration";
     public override int TreasureRating => 10;
     public override bool Regen => true;

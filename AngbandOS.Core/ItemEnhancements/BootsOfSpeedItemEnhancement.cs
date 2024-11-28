@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class BootsOfSpeedItemEnhancement : ItemEnhancement
 {
     private BootsOfSpeedItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 200000;
+    public override int? Value => 200000;
     public override string? FriendlyName => "of Speed";
     public override bool HideType => true;
     protected override string? BonusSpeedRollExpression => "1d10";

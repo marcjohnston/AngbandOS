@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class WeaponVampiricItemEnhancement : ItemEnhancement
 {
     private WeaponVampiricItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 10000;
+    public override int? Value => 10000;
     public override string? FriendlyName => "(Vampiric)";
     public override bool HoldLife => true;
     public override int TreasureRating => 25;

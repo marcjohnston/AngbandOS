@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class OrbOfClarityItemEnhancement : ItemEnhancement
 {
     private OrbOfClarityItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 1000;
+    public override int? Value => 1000;
     public override string? FriendlyName => "of Clarity";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

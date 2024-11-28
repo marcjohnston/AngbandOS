@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class WeaponOfAnimalBaneItemEnhancement : ItemEnhancement
 {
     private WeaponOfAnimalBaneItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 6000;
+    public override int? Value => 6000;
     public override string? FriendlyName => "of Animal Bane";
     public override bool Int => true;
     protected override string? BonusIntelligenceRollExpression => "1d2";

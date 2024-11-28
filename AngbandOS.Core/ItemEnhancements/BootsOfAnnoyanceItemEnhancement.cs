@@ -12,7 +12,7 @@ internal class BootsOfAnnoyanceItemEnhancement : ItemEnhancement
 {
     private BootsOfAnnoyanceItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool Aggravate => true;
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     public override string? FriendlyName => "of Annoyance";
     protected override string? BonusSpeedRollExpression => "1d10";
     public override int TreasureRating => 0;

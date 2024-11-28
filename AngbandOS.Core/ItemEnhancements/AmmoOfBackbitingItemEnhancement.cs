@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class AmmoOfBackbitingItemEnhancement : ItemEnhancement
 {
     private AmmoOfBackbitingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 0;
+    public override int? Value => 0;
     public override string? FriendlyName => "of Backbiting";
     protected override string? BonusDamageRollExpression => "1d50";
     protected override string? BonusHitRollExpression => "1d50";

@@ -12,7 +12,7 @@ internal class WeaponDefenderItemEnhancement : ItemEnhancement
 {
     private WeaponDefenderItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(SustainItemEnhancementWeightedRandom)).Choose();
-    public override int? AdditiveBundleValue => 15000;
+    public override int? Value => 15000;
     public override bool Feather => true;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Defender)";

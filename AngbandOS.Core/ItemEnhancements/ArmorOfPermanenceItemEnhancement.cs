@@ -13,7 +13,7 @@ internal class ArmorOfPermanenceItemEnhancement : ItemEnhancement
 {
     private ArmorOfPermanenceItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceItemEnhancementWeightedRandom)).Choose();
-    public override int? AdditiveBundleValue => 30000;
+    public override int? Value => 30000;
     public override string? FriendlyName => "of Permanence";
     public override bool HoldLife => true;
     public override bool IgnoreAcid => true;

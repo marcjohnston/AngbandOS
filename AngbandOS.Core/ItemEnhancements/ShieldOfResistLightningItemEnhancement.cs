@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class ShieldOfResistLightningItemEnhancement : ItemEnhancement
 {
     private ShieldOfResistLightningItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override int? AdditiveBundleValue => 400;
+    public override int? Value => 400;
     public override string? FriendlyName => "of Resist Lightning";
     public override bool IgnoreElec => true;
     public override int TreasureRating => 10;
