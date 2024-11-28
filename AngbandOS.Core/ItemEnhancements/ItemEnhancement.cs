@@ -23,6 +23,21 @@ internal abstract class ItemEnhancement : IGetKey
     public IItemCharacteristics GenerateItemCharacteristics()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
+
+        itemCharacteristics.BonusStrength = BonusStrengthRoll == null ? 0 : BonusStrengthRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusIntelligence = BonusIntelligenceRoll == null ? 0 : BonusIntelligenceRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusWisdom = BonusWisdomRoll == null ? 0 : BonusWisdomRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusDexterity = BonusDexterityRoll == null ? 0 : BonusDexterityRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusConstitution = BonusConstitutionRoll == null ? 0 : BonusConstitutionRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusCharisma = BonusCharismaRoll == null ? 0 : BonusCharismaRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusStealth = BonusStealthRoll == null ? 0 : BonusStealthRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusSearch = BonusSearchRoll == null ? 0 : BonusSearchRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusInfravision = BonusInfravisionRoll == null ? 0 : BonusInfravisionRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusTunnel = BonusTunnelRoll == null ? 0 : BonusTunnelRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusAttacks = BonusAttacksRoll == null ? 0 : BonusAttacksRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusSpeed = BonusSpeedRoll == null ? 0 : BonusSpeedRoll.Get(Game.UseRandom);
+
+
         itemCharacteristics.Activation = Activation;
         itemCharacteristics.Aggravate = Aggravate;
         itemCharacteristics.AntiTheft = AntiTheft;
@@ -124,18 +139,18 @@ internal abstract class ItemEnhancement : IGetKey
     public virtual void Bind()
     {
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
-        BonusStrength = Game.ParseNullableRollExpression(BonusStrengthRollExpression);
-        BonusIntelligence = Game.ParseNullableRollExpression(BonusIntelligenceRollExpression);
-        BonusWisdom = Game.ParseNullableRollExpression(BonusWisdomRollExpression);
-        BonusDexterity = Game.ParseNullableRollExpression(BonusDexterityRollExpression);
-        BonusConstitution = Game.ParseNullableRollExpression(BonusConstitutionRollExpression);
-        BonusCharisma = Game.ParseNullableRollExpression(BonusCharismaRollExpression);
-        BonusStealth = Game.ParseNullableRollExpression(BonusStealthRollExpression);
-        BonusSearch = Game.ParseNullableRollExpression(BonusSearchRollExpression);
-        BonusInfravision = Game.ParseNullableRollExpression(BonusInfravisionRollExpression);
-        BonusTunnel = Game.ParseNullableRollExpression(BonusTunnelRollExpression);
-        BonusAttacks = Game.ParseNullableRollExpression(BonusAttacksRollExpression);
-        BonusSpeed = Game.ParseNullableRollExpression(BonusSpeedRollExpression);
+        BonusStrengthRoll = Game.ParseNullableRollExpression(BonusStrengthRollExpression);
+        BonusIntelligenceRoll = Game.ParseNullableRollExpression(BonusIntelligenceRollExpression);
+        BonusWisdomRoll = Game.ParseNullableRollExpression(BonusWisdomRollExpression);
+        BonusDexterityRoll = Game.ParseNullableRollExpression(BonusDexterityRollExpression);
+        BonusConstitutionRoll = Game.ParseNullableRollExpression(BonusConstitutionRollExpression);
+        BonusCharismaRoll = Game.ParseNullableRollExpression(BonusCharismaRollExpression);
+        BonusStealthRoll = Game.ParseNullableRollExpression(BonusStealthRollExpression);
+        BonusSearchRoll = Game.ParseNullableRollExpression(BonusSearchRollExpression);
+        BonusInfravisionRoll = Game.ParseNullableRollExpression(BonusInfravisionRollExpression);
+        BonusTunnelRoll = Game.ParseNullableRollExpression(BonusTunnelRollExpression);
+        BonusAttacksRoll = Game.ParseNullableRollExpression(BonusAttacksRollExpression);
+        BonusSpeedRoll = Game.ParseNullableRollExpression(BonusSpeedRollExpression);
     }
 
     public string ToJson()
@@ -173,18 +188,18 @@ internal abstract class ItemEnhancement : IGetKey
     /// Returns a maximum value for a random amount of additional strength when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item.  Returns 0, by default.
     /// </summary>
-    public Roll? BonusStrength { get; private set; } = null;
-    public Roll? BonusIntelligence { get; private set; } = null;
-    public Roll? BonusWisdom { get; private set; } = null;
-    public Roll? BonusDexterity { get; private set; } = null;
-    public Roll? BonusConstitution { get; private set; } = null;
-    public Roll? BonusCharisma { get; private set; } = null;
-    public Roll? BonusStealth { get; private set; } = null;
-    public Roll? BonusSearch { get; private set; } = null;
-    public Roll? BonusInfravision { get; private set; } = null;
-    public Roll? BonusTunnel { get; private set; } = null;
-    public Roll? BonusAttacks { get; private set; } = null;
-    public Roll? BonusSpeed { get; private set; } = null;
+    public Roll? BonusStrengthRoll { get; private set; } = null;
+    public Roll? BonusIntelligenceRoll { get; private set; } = null;
+    public Roll? BonusWisdomRoll { get; private set; } = null;
+    public Roll? BonusDexterityRoll { get; private set; } = null;
+    public Roll? BonusConstitutionRoll { get; private set; } = null;
+    public Roll? BonusCharismaRoll { get; private set; } = null;
+    public Roll? BonusStealthRoll { get; private set; } = null;
+    public Roll? BonusSearchRoll { get; private set; } = null;
+    public Roll? BonusInfravisionRoll { get; private set; } = null;
+    public Roll? BonusTunnelRoll { get; private set; } = null;
+    public Roll? BonusAttacksRoll { get; private set; } = null;
+    public Roll? BonusSpeedRoll { get; private set; } = null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
