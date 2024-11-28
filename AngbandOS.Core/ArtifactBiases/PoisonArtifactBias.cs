@@ -19,7 +19,7 @@ internal class PoisonArtifactBias : ArtifactBias
         (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
+    public override bool ApplySlaying(ItemCharacteristics characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

@@ -18,7 +18,7 @@ internal class GreatRobeSoftArmorEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusArmorClass += item.GetBonusValue(10, level);
+        item.Characteristics.BonusArmorClass += item.GetBonusValue(10, level);
 
         // Robes have a chance of having the armor of permanence instead of a random characteristic.
         if (Game.RandomLessThan(100) < 10)

@@ -19,7 +19,7 @@ internal class ColdArtifactBias : ArtifactBias
         (nameof(FalseColdImmunityItemTest), "1/20", nameof(ColdImmunityItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
+    public override bool ApplySlaying(ItemCharacteristics characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

@@ -35,7 +35,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessByChanceScript
         {
             return false;
         }
-        if (oPtr.BonusHit <= 0 && oPtr.BonusDamage <= 0 && oPtr.BonusArmorClass <= 0)
+        if (oPtr.Characteristics.BonusHit <= 0 && oPtr.Characteristics.BonusDamage <= 0 && oPtr.Characteristics.BonusArmorClass <= 0)
         {
             return false;
         }
@@ -47,29 +47,29 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessByChanceScript
             Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
             return true;
         }
-        if (oPtr.BonusHit > 0)
+        if (oPtr.Characteristics.BonusHit > 0)
         {
-            oPtr.BonusHit--;
+            oPtr.Characteristics.BonusHit--;
         }
-        if (oPtr.BonusHit > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.Characteristics.BonusHit > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.BonusHit--;
+            oPtr.Characteristics.BonusHit--;
         }
-        if (oPtr.BonusDamage > 0)
+        if (oPtr.Characteristics.BonusDamage > 0)
         {
-            oPtr.BonusDamage--;
+            oPtr.Characteristics.BonusDamage--;
         }
-        if (oPtr.BonusDamage > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.Characteristics.BonusDamage > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.BonusDamage--;
+            oPtr.Characteristics.BonusDamage--;
         }
-        if (oPtr.BonusArmorClass > 0)
+        if (oPtr.Characteristics.BonusArmorClass > 0)
         {
-            oPtr.BonusArmorClass--;
+            oPtr.Characteristics.BonusArmorClass--;
         }
-        if (oPtr.BonusArmorClass > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.Characteristics.BonusArmorClass > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.BonusArmorClass--;
+            oPtr.Characteristics.BonusArmorClass--;
         }
         s = oPtr.Count != 1 ? "were" : "was";
         Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");

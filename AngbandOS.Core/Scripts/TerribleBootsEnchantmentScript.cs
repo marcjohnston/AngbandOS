@@ -18,7 +18,7 @@ internal class TerribleBootsEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusArmorClass -= item.GetBonusValue(10, level);
+        item.Characteristics.BonusArmorClass -= item.GetBonusValue(10, level);
         switch (Game.DieRoll(3))
         {
             case 1:
@@ -31,7 +31,7 @@ internal class TerribleBootsEnchantmentScript : Script, IEnhancementScript
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfAnnoyanceRareItem));
                 break;
         }
-        if (item.BonusArmorClass < 0)
+        if (item.Characteristics.BonusArmorClass < 0)
         {
             item.IsCursed = true;
         }

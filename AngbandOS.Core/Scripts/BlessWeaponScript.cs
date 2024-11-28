@@ -59,32 +59,32 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
         {
             bool disHappened = false;
             Game.MsgPrint("The artifact resists your blessing!");
-            if (oPtr.BonusHit > 0)
+            if (oPtr.Characteristics.BonusHit > 0)
             {
-                oPtr.BonusHit--;
+                oPtr.Characteristics.BonusHit--;
                 disHappened = true;
             }
-            if (oPtr.BonusHit > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.Characteristics.BonusHit > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.BonusHit--;
+                oPtr.Characteristics.BonusHit--;
             }
-            if (oPtr.BonusDamage > 0)
+            if (oPtr.Characteristics.BonusDamage > 0)
             {
-                oPtr.BonusDamage--;
+                oPtr.Characteristics.BonusDamage--;
                 disHappened = true;
             }
-            if (oPtr.BonusDamage > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.Characteristics.BonusDamage > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.BonusDamage--;
+                oPtr.Characteristics.BonusDamage--;
             }
-            if (oPtr.BonusArmorClass > 0)
+            if (oPtr.Characteristics.BonusArmorClass > 0)
             {
-                oPtr.BonusArmorClass--;
+                oPtr.Characteristics.BonusArmorClass--;
                 disHappened = true;
             }
-            if (oPtr.BonusArmorClass > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.Characteristics.BonusArmorClass > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.BonusArmorClass--;
+                oPtr.Characteristics.BonusArmorClass--;
             }
             if (disHappened)
             {

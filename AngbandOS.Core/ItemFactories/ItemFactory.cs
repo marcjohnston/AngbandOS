@@ -331,17 +331,17 @@ internal abstract class ItemFactory : ItemEnhancement
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+                s += $" ({GetSignedValue(item.Characteristics.BonusHit)},{GetSignedValue(item.Characteristics.BonusDamage)})";
 
                 if (item.ArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.Characteristics.BonusArmorClass)}]";
                 }
-                else if (item.BonusArmorClass != 0)
+                else if (item.Characteristics.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.Characteristics.BonusArmorClass)}]";
                 }
             }
             else if (item.ArmorClass != 0)
@@ -355,17 +355,17 @@ internal abstract class ItemFactory : ItemEnhancement
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+                s += $" ({GetSignedValue(item.Characteristics.BonusHit)},{GetSignedValue(item.Characteristics.BonusDamage)})";
 
                 if (item.ArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.Characteristics.BonusArmorClass)}]";
                 }
-                else if (item.BonusArmorClass != 0)
+                else if (item.Characteristics.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.Characteristics.BonusArmorClass)}]";
                 }
             }
             else if (item.ArmorClass != 0)
@@ -377,21 +377,21 @@ internal abstract class ItemFactory : ItemEnhancement
         {
             if (item.IsKnown())
             {
-                if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
+                if (ShowMods || item.Characteristics.BonusHit != 0 && item.Characteristics.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.Characteristics.BonusHit)},{GetSignedValue(item.Characteristics.BonusDamage)})";
                 }
-                else if (item.BonusHit != 0)
+                else if (item.Characteristics.BonusHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.BonusHit)})";
+                    s += $" ({GetSignedValue(item.Characteristics.BonusHit)})";
                 }
-                else if (item.BonusDamage != 0)
+                else if (item.Characteristics.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.Characteristics.BonusDamage)})";
                 }
 
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                s += $" [{item.ArmorClass},{GetSignedValue(item.Characteristics.BonusArmorClass)}]";
             }
             else if (item.ArmorClass != 0)
             {
@@ -402,28 +402,28 @@ internal abstract class ItemFactory : ItemEnhancement
         {
             if (item.IsKnown())
             {
-                if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
+                if (ShowMods || item.Characteristics.BonusHit != 0 && item.Characteristics.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.Characteristics.BonusHit)},{GetSignedValue(item.Characteristics.BonusDamage)})";
                 }
-                else if (item.BonusHit != 0)
+                else if (item.Characteristics.BonusHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.BonusHit)})";
+                    s += $" ({GetSignedValue(item.Characteristics.BonusHit)})";
                 }
-                else if (item.BonusDamage != 0)
+                else if (item.Characteristics.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.Characteristics.BonusDamage)})";
                 }
 
                 if (item.ArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.Characteristics.BonusArmorClass)}]";
                 }
-                else if (item.BonusArmorClass != 0)
+                else if (item.Characteristics.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.Characteristics.BonusArmorClass)}]";
                 }
             }
         }
@@ -505,101 +505,101 @@ internal abstract class ItemFactory : ItemEnhancement
     private (int bonusValue, string priorityBonusName)? CommonBonusValue(Item item)
     {
         (int bonusValue, string priorityBonusName)? value = null;
-        if (item.BonusSpeed != 0)
+        if (item.Characteristics.BonusSpeed != 0)
         {
-            if (value.HasValue && item.BonusSpeed != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusSpeed != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusSpeed, "speed");
+            value = (item.Characteristics.BonusSpeed, "speed");
         }
-        if (item.BonusAttacks != 0)
+        if (item.Characteristics.BonusAttacks != 0)
         {
-            if (value.HasValue && item.BonusAttacks != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusAttacks != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusAttacks, item.BonusAttacks > 1 ? "attacks" : "attack");
+            value = (item.Characteristics.BonusAttacks, item.Characteristics.BonusAttacks > 1 ? "attacks" : "attack");
         }
-        if (item.BonusStealth != 0)
+        if (item.Characteristics.BonusStealth != 0)
         {
-            if (value.HasValue && item.BonusStealth != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusStealth != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusStealth, "stealth");
+            value = (item.Characteristics.BonusStealth, "stealth");
         }
-        if (item.BonusSearch != 0)
+        if (item.Characteristics.BonusSearch != 0)
         {
-            if (value.HasValue && item.BonusSearch != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusSearch != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusSearch, "searching");
+            value = (item.Characteristics.BonusSearch, "searching");
         }
-        if (item.BonusInfravision != 0)
+        if (item.Characteristics.BonusInfravision != 0)
         {
-            if (value.HasValue && item.BonusInfravision != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusInfravision != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusInfravision, "infravision");
+            value = (item.Characteristics.BonusInfravision, "infravision");
         }
-        if (item.BonusCharisma != 0)
+        if (item.Characteristics.BonusCharisma != 0)
         {
-            if (value.HasValue && item.BonusCharisma != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusCharisma != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusCharisma, "");
+            value = (item.Characteristics.BonusCharisma, "");
         }
-        if (item.BonusConstitution != 0)
+        if (item.Characteristics.BonusConstitution != 0)
         {
-            if (value.HasValue && item.BonusConstitution != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusConstitution != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusConstitution, "");
+            value = (item.Characteristics.BonusConstitution, "");
         }
-        if (item.BonusDexterity != 0)
+        if (item.Characteristics.BonusDexterity != 0)
         {
-            if (value.HasValue && item.BonusDexterity != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusDexterity != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusDexterity, "");
+            value = (item.Characteristics.BonusDexterity, "");
         }
-        if (item.BonusIntelligence != 0)
+        if (item.Characteristics.BonusIntelligence != 0)
         {
-            if (value.HasValue && item.BonusIntelligence != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusIntelligence != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusIntelligence, "");
+            value = (item.Characteristics.BonusIntelligence, "");
         }
-        if (item.BonusStrength != 0)
+        if (item.Characteristics.BonusStrength != 0)
         {
-            if (value.HasValue && item.BonusStrength != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusStrength != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusStrength, "");
+            value = (item.Characteristics.BonusStrength, "");
         }
-        if (item.BonusWisdom != 0)
+        if (item.Characteristics.BonusWisdom != 0)
         {
-            if (value.HasValue && item.BonusWisdom != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusWisdom != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusWisdom, "");
+            value = (item.Characteristics.BonusWisdom, "");
         }
-        if (item.BonusTunnel != 0)
+        if (item.Characteristics.BonusTunnel != 0)
         {
-            if (value.HasValue && item.BonusTunnel != value.Value.bonusValue)
+            if (value.HasValue && item.Characteristics.BonusTunnel != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.BonusTunnel, "");
+            value = (item.Characteristics.BonusTunnel, "");
         }
         if (!value.HasValue)
         {
@@ -628,7 +628,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// <returns></returns>
     public int GetBonusRealValue(Item item)
     {
-        int bonusValue = item.BonusHit * BonusHitRealValueMultiplier + item.BonusArmorClass * BonusArmorClassRealValueMultiplier + item.BonusDamage * BonusDamageRealValueMultiplier;
+        int bonusValue = item.Characteristics.BonusHit * BonusHitRealValueMultiplier + item.Characteristics.BonusArmorClass * BonusArmorClassRealValueMultiplier + item.Characteristics.BonusDamage * BonusDamageRealValueMultiplier;
         if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
         {
             bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * BonusDiceRealValueMultiplier;
@@ -750,7 +750,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// </summary>
     public bool CanBeRead => ActivationTuple != null;
 
-    public void CreateRandomArtifact(RandomArtifactCharacteristics characteristics, bool fromScroll)
+    public void CreateRandomArtifact(ItemCharacteristics characteristics, bool fromScroll)
     {
         int EnchantBonus(int bonus)
         {
@@ -765,7 +765,7 @@ internal abstract class ItemFactory : ItemEnhancement
             return bonus;
         }
 
-        void ApplyRandomBonuses(RandomArtifactCharacteristics characteristics)
+        void ApplyRandomBonuses(ItemCharacteristics characteristics)
         {
             if (characteristics.ArtifactBias != null)
             {
@@ -920,7 +920,7 @@ internal abstract class ItemFactory : ItemEnhancement
             }
         }
 
-        void CurseRandart(RandomArtifactCharacteristics characteristics)
+        void CurseRandart(ItemCharacteristics characteristics)
         {
             if (characteristics.BonusStrength != 0)
             {
@@ -1015,7 +1015,7 @@ internal abstract class ItemFactory : ItemEnhancement
             characteristics.IsCursed = true;
         }
 
-        void ApplyMiscPowerForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
+        void ApplyMiscPowerForRandomArtifactCreation(ItemCharacteristics characteristics)
         {
             if (characteristics.ArtifactBias != null)
             {
@@ -1428,7 +1428,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
     #region Heavy Weights and Obsoletes - Virtual Methods and Virtual Complex Properties that must be resolved
 
-    public virtual void ApplySlayingForRandomArtifactCreation(RandomArtifactCharacteristics characteristics)
+    public virtual void ApplySlayingForRandomArtifactCreation(ItemCharacteristics characteristics)
     {
         if (characteristics.ArtifactBias != null)
         {

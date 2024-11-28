@@ -18,8 +18,8 @@ internal class TerribleHelmEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusArmorClass -= item.GetBonusValue(10, level);
-        if (item.BonusArmorClass < 0)
+        item.Characteristics.BonusArmorClass -= item.GetBonusValue(10, level);
+        if (item.Characteristics.BonusArmorClass < 0)
         {
             item.IsCursed = true;
         }

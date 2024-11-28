@@ -23,6 +23,6 @@ internal class BonusSearch5BP1EnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusSearch = 1 + item.GetBonusValue(5, level);
+        item.Characteristics.BonusSearch = 1 + item.GetBonusValue(5, level);
     }
 }

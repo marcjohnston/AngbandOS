@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.ItemCharacteristicTests;
-
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]
@@ -22,7 +20,7 @@ internal class AcidArtifactBias : ArtifactBias
         (nameof(FalseAcidImmunityItemTest), "1/20", nameof(AcidImmunityItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(RandomArtifactCharacteristics characteristics)
+    public override bool ApplySlaying(ItemCharacteristics characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

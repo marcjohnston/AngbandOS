@@ -18,8 +18,8 @@ internal class PoorHelmEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.BonusArmorClass -= Game.DieRoll(5) + item.GetBonusValue(5, level);
-        if (item.BonusArmorClass < 0)
+        item.Characteristics.BonusArmorClass -= Game.DieRoll(5) + item.GetBonusValue(5, level);
+        if (item.Characteristics.BonusArmorClass < 0)
         {
             item.IsCursed = true;
         }

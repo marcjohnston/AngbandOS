@@ -73,7 +73,7 @@ internal abstract class ItemTest : IGetKey
         return true;
     }
 
-    public bool Test(RandomArtifactCharacteristics characteristics)
+    public bool Test(ItemCharacteristics characteristics)
     {
         if (!TestNullObject<Activation>(Activation, characteristics.Activation))
         {
@@ -701,7 +701,7 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(FactoryAllowsShElecricity, item.CanProvideSheathOfElectricity))
+        if (!TestBoolean(FactoryAllowsShElecricity, item.Characteristics.CanProvideSheathOfElectricity))
         {
             return false;
         }
@@ -709,7 +709,7 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(FactoryAllowsShFire, item.CanProvideSheathOfFire))
+        if (!TestBoolean(FactoryAllowsShFire, item.Characteristics.CanProvideSheathOfFire))
         {
             return false;
         }

@@ -62,7 +62,7 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyRandomArtifactBonuses(RandomArtifactCharacteristics characteristics) => false;
+    public virtual bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics) => false;
 
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
     public (ItemTest, Probability, ItemEnhancement, Probability)[]? RandomResistances { get; private set; } = null;
@@ -72,7 +72,7 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public bool ApplyRandomResistances(RandomArtifactCharacteristics characteristics)
+    public bool ApplyRandomResistances(ItemCharacteristics characteristics)
     {
         if (RandomResistances != null)
         {
@@ -96,14 +96,14 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyMiscPowers(RandomArtifactCharacteristics characteristics) => false;
+    public virtual bool ApplyMiscPowers(ItemCharacteristics characteristics) => false;
 
     /// <summary>
     /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplySlaying(RandomArtifactCharacteristics characteristics) => false;
+    public virtual bool ApplySlaying(ItemCharacteristics characteristics) => false;
 
     /// <summary>
     /// Returns an activation type to be applied for the item or null when there is no biased activation type.  By default, null is returned.

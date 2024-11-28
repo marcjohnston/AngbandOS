@@ -30,9 +30,9 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 if (Game.DieRoll(4) == 1)
                 {
                     item.Characteristics.Blows = true;
-                    if (item.BonusAttacks > 2)
+                    if (item.Characteristics.BonusAttacks > 2)
                     {
-                        item.BonusAttacks -= Game.DieRoll(2);
+                        item.Characteristics.BonusAttacks -= Game.DieRoll(2);
                     }
                 }
                 break;
@@ -202,7 +202,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 if (item.CanBeWeaponOfSharpness)
                 {
                     item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSharpnessRareItem));
-                    item.BonusTunnel = item.GetBonusValue(5, level) + 1;
+                    item.Characteristics.BonusTunnel = item.GetBonusValue(5, level) + 1;
                 }
                 else
                 {
@@ -211,7 +211,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                     {
                         item.Characteristics.Blows = true;
                     }
-                    item.BonusTunnel = item.GetBonusValue(3, level);
+                    item.Characteristics.BonusTunnel = item.GetBonusValue(3, level);
                 }
                 break;
         }
