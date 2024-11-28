@@ -13,7 +13,7 @@ internal class AmmoOfSlayingItemEnhancement : ItemEnhancement
     private AmmoOfSlayingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override int? AdditiveBundleValue => 20;
     public override string? FriendlyName => "of Slaying";
-    public override int MaxToD => 12;
-    public override int MaxToH => 12;
+    protected override string? BonusDamageRollExpression => "1d12";
+    protected override string? BonusHitRollExpression => "1d12";
     public override int TreasureRating => 15;
-    }
+}

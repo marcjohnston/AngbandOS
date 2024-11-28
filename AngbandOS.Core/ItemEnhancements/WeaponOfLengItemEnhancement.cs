@@ -16,9 +16,9 @@ internal class WeaponOfLengItemEnhancement : ItemEnhancement
     public override bool IsCursed => true;
     public override string? FriendlyName => "of Leng";
     public override bool HeavyCurse => true;
-    public override int MaxToA => 10;
-    public override int MaxToD => 20;
-    public override int MaxToH => 20;
+    protected override string? BonusArmorClassRollExpression => "1d10";
+    protected override string? BonusDamageRollExpression => "1d20";
+    protected override string? BonusHitRollExpression => "1d20";
     public override int TreasureRating => 0;
     public override bool SeeInvis => true;
-    }
+}

@@ -13,7 +13,7 @@ internal class AmmoOfBackbitingItemEnhancement : ItemEnhancement
     private AmmoOfBackbitingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override int? AdditiveBundleValue => 0;
     public override string? FriendlyName => "of Backbiting";
-    public override int MaxToD => 50;
-    public override int MaxToH => 50;
+    protected override string? BonusDamageRollExpression => "1d50";
+    protected override string? BonusHitRollExpression => "1d50";
     public override int TreasureRating => 0;
 }

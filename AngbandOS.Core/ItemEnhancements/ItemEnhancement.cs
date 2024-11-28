@@ -37,6 +37,9 @@ internal abstract class ItemEnhancement : IGetKey
         itemCharacteristics.BonusAttacks = BonusAttacksRoll == null ? 0 : BonusAttacksRoll.Get(Game.UseRandom);
         itemCharacteristics.BonusSpeed = BonusSpeedRoll == null ? 0 : BonusSpeedRoll.Get(Game.UseRandom);
 
+        itemCharacteristics.BonusArmorClass = BonusArmorClassRoll == null ? 0 : BonusArmorClassRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusHit = BonusHitRoll == null ? 0 : BonusHitRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusDamage = BonusDamageRoll == null ? 0 : BonusDamageRoll.Get(Game.UseRandom);
 
         itemCharacteristics.Activation = Activation;
         itemCharacteristics.Aggravate = Aggravate;
@@ -151,6 +154,10 @@ internal abstract class ItemEnhancement : IGetKey
         BonusTunnelRoll = Game.ParseNullableRollExpression(BonusTunnelRollExpression);
         BonusAttacksRoll = Game.ParseNullableRollExpression(BonusAttacksRollExpression);
         BonusSpeedRoll = Game.ParseNullableRollExpression(BonusSpeedRollExpression);
+
+        BonusArmorClassRoll = Game.ParseNullableRollExpression(BonusArmorClassRollExpression);
+        BonusHitRoll = Game.ParseNullableRollExpression(BonusHitRollExpression);
+        BonusDamageRoll = Game.ParseNullableRollExpression(BonusDamageRollExpression);
     }
 
     public string ToJson()
@@ -201,23 +208,29 @@ internal abstract class ItemEnhancement : IGetKey
     public Roll? BonusAttacksRoll { get; private set; } = null;
     public Roll? BonusSpeedRoll { get; private set; } = null;
 
+    protected virtual string? BonusArmorClassRollExpression => null;
+
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public virtual int MaxToA => 0;
+    public Roll? BonusArmorClassRoll { get; private set; }
+
+    protected virtual string? BonusDamageRollExpression => null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public virtual int MaxToD => 0;
+    public Roll? BonusDamageRoll { get; private set; }
+
+    protected virtual string? BonusHitRollExpression => null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public virtual int MaxToH => 0;
+    public Roll? BonusHitRoll { get; private set; } 
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and

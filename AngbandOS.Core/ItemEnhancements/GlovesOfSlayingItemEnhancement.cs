@@ -13,8 +13,8 @@ internal class GlovesOfSlayingItemEnhancement : ItemEnhancement
     private GlovesOfSlayingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override int? AdditiveBundleValue => 1500;
     public override string? FriendlyName => "of Slaying";
-    public override int MaxToD => 6;
-    public override int MaxToH => 6;
+    protected override string? BonusDamageRollExpression => "1d6";
+    protected override string? BonusHitRollExpression => "1d6";
     public override int TreasureRating => 17;
     public override bool ShowMods => true;
-    }
+}

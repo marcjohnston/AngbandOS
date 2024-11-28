@@ -15,8 +15,8 @@ internal class GlovesOfPowerItemEnhancement : ItemEnhancement
     public override string? FriendlyName => "of Power";
     public override bool HideType => true;
     protected override string? BonusStrengthRollExpression => "1d5";
-    public override int MaxToD => 5;
-    public override int MaxToH => 5;
+    protected override string? BonusDamageRollExpression => "1d5";
+    protected override string? BonusHitRollExpression => "1d5";
     public override int TreasureRating => 22;
     public override bool ShowMods => true;
     public override bool Str => true;

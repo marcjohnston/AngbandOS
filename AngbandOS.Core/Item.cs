@@ -2254,18 +2254,9 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we are enchanting a cursed or broken item.
             if (IsCursed || IsBroken)
             {
-                if (RareItem.MaxToH != 0)
-                {
-                    Characteristics.BonusHit -= Game.DieRoll(RareItem.MaxToH);
-                }
-                if (RareItem.MaxToD != 0)
-                {
-                    Characteristics.BonusDamage -= Game.DieRoll(RareItem.MaxToD);
-                }
-                if (RareItem.MaxToA != 0)
-                {
-                    Characteristics.BonusArmorClass -= Game.DieRoll(RareItem.MaxToA);
-                }
+                Characteristics.BonusHit -= rareItemCharacteristics.BonusHit;
+                Characteristics.BonusDamage -= rareItemCharacteristics.BonusDamage;
+                Characteristics.BonusArmorClass -= rareItemCharacteristics.BonusArmorClass;
                 Characteristics.BonusStrength -= rareItemCharacteristics.BonusStrength;
                 Characteristics.BonusIntelligence -= rareItemCharacteristics.BonusIntelligence;
                 Characteristics.BonusWisdom -= rareItemCharacteristics.BonusWisdom;
@@ -2281,18 +2272,9 @@ internal sealed class Item : IComparable<Item>
             }
             else
             {
-                if (RareItem.MaxToH != 0)
-                {
-                    Characteristics.BonusHit += Game.DieRoll(RareItem.MaxToH);
-                }
-                if (RareItem.MaxToD != 0)
-                {
-                    Characteristics.BonusDamage += Game.DieRoll(RareItem.MaxToD);
-                }
-                if (RareItem.MaxToA != 0)
-                {
-                    Characteristics.BonusArmorClass += Game.DieRoll(RareItem.MaxToA);
-                }
+                Characteristics.BonusHit += rareItemCharacteristics.BonusHit;
+                Characteristics.BonusDamage += rareItemCharacteristics.BonusDamage;
+                Characteristics.BonusArmorClass += rareItemCharacteristics.BonusArmorClass;
                 Characteristics.BonusStrength += rareItemCharacteristics.BonusStrength;
                 Characteristics.BonusIntelligence += rareItemCharacteristics.BonusIntelligence;
                 Characteristics.BonusWisdom += rareItemCharacteristics.BonusWisdom;

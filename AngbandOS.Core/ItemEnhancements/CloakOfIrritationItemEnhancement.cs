@@ -14,8 +14,8 @@ internal class CloakOfIrritationItemEnhancement : ItemEnhancement
     public override bool Aggravate => true;
     public override int? AdditiveBundleValue => 0;
     public override string? FriendlyName => "of Irritation";
-    public override int MaxToD => 15;
-    public override int MaxToH => 15;
+    protected override string? BonusDamageRollExpression => "1d15";
+    protected override string? BonusHitRollExpression => "1d15";
     public override int TreasureRating => 0;
     public override bool ShowMods => true;
-    }
+}

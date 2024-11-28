@@ -19,7 +19,7 @@ internal class ArmorOfYithItemEnhancement : ItemEnhancement
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     protected override string? BonusStealthRollExpression => "1d3";
-    public override int MaxToA => 10;
+    protected override string? BonusArmorClassRollExpression => "1d10";
     public override int TreasureRating => 25;
     public override bool ResAcid => true;
     public override bool ResCold => true;

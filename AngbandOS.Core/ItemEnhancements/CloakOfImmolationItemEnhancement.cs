@@ -15,8 +15,8 @@ internal class CloakOfImmolationItemEnhancement : ItemEnhancement
     public override string? FriendlyName => "of Immolation";
     public override bool IgnoreAcid => true;
     public override bool IgnoreFire => true;
-    public override int MaxToA => 4;
+    protected override string? BonusArmorClassRollExpression => "1d4";
     public override int TreasureRating => 16;
     public override bool ResFire => true;
     public override bool ShFire => true;
-    }
+}

@@ -20,7 +20,7 @@ internal class ArmorOfPermanenceItemEnhancement : ItemEnhancement
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int MaxToA => 10;
+    protected override string? BonusArmorClassRollExpression => "1d10";
     public override int TreasureRating => 30;
     public override bool ResAcid => true;
     public override bool ResCold => true;

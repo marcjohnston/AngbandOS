@@ -17,8 +17,8 @@ internal class WeaponOfLawItemEnhancement : ItemEnhancement
     public override string? FriendlyName => "(Weapon of Law)";
     protected override string? BonusConstitutionRollExpression => "1d2";
     protected override string? BonusStrengthRollExpression => "1d2";
-    public override int MaxToD => 6;
-    public override int MaxToH => 6;
+    protected override string? BonusDamageRollExpression => "1d6";
+    protected override string? BonusHitRollExpression => "1d6";
     public override int TreasureRating => 26;
     public override bool SeeInvis => true;
     public override bool SlayDemon => true;

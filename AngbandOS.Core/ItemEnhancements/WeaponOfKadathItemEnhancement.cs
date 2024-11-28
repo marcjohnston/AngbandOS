@@ -19,8 +19,8 @@ internal class WeaponOfKadathItemEnhancement : ItemEnhancement
     protected override string? BonusConstitutionRollExpression => "1d2";
     protected override string? BonusDexterityRollExpression => "1d2";
     protected override string? BonusStrengthRollExpression => "1d2";
-    public override int MaxToD => 5;
-    public override int MaxToH => 5;
+    protected override string? BonusDamageRollExpression => "1d5";
+    protected override string? BonusHitRollExpression => "1d5";
     public override int TreasureRating => 20;
     public override bool SeeInvis => true;
     public override bool SlayGiant => true;

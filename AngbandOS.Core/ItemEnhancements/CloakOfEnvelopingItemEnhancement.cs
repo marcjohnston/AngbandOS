@@ -13,8 +13,8 @@ internal class CloakOfEnvelopingItemEnhancement : ItemEnhancement
     private CloakOfEnvelopingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override int? AdditiveBundleValue => 0;
     public override string? FriendlyName => "of Enveloping";
-    public override int MaxToD => 10;
-    public override int MaxToH => 10;
+    protected override string? BonusDamageRollExpression => "1d10";
+    protected override string? BonusHitRollExpression => "1d10";
     public override int TreasureRating => 0;
     public override bool ShowMods => true;
-    }
+}

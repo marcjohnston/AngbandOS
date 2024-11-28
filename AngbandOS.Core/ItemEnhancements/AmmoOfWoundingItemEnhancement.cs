@@ -13,7 +13,7 @@ internal class AmmoOfWoundingItemEnhancement : ItemEnhancement
     private AmmoOfWoundingItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override int? AdditiveBundleValue => 20;
     public override string? FriendlyName => "of Wounding";
-    public override int MaxToD => 6;
-    public override int MaxToH => 6;
+    protected override string? BonusDamageRollExpression => "1d6";
+    protected override string? BonusHitRollExpression => "1d6";
     public override int TreasureRating => 5;
-    }
+}

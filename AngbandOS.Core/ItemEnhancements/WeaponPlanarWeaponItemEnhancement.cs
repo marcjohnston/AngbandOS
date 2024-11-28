@@ -19,8 +19,8 @@ internal class WeaponPlanarWeaponItemEnhancement : ItemEnhancement
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Planar Weapon)";
     protected override string? BonusSearchRollExpression => "1d2";
-    public override int MaxToD => 4;
-    public override int MaxToH => 4;
+    protected override string? BonusDamageRollExpression => "1d4";
+    protected override string? BonusHitRollExpression => "1d4";
     public override int TreasureRating => 22;
     public override bool Regen => true;
     public override bool ResNexus => true;

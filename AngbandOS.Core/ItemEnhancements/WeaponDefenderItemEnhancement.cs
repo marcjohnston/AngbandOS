@@ -21,9 +21,9 @@ internal class WeaponDefenderItemEnhancement : ItemEnhancement
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     protected override string? BonusStealthRollExpression => "1d4";
-    public override int MaxToA => 8;
-    public override int MaxToD => 4;
-    public override int MaxToH => 4;
+    protected override string? BonusArmorClassRollExpression => "1d8";
+    protected override string? BonusDamageRollExpression => "1d4";
+    protected override string? BonusHitRollExpression => "1d4";
     public override int TreasureRating => 25;
     public override bool Regen => true;
     public override bool ResAcid => true;
