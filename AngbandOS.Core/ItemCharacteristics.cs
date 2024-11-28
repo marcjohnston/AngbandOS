@@ -595,92 +595,92 @@ internal class ItemCharacteristics : IItemCharacteristics
 
         if (CanApplyBlessedArtifactBias != other.CanApplyBlessedArtifactBias)
         {
-                return false;
+            return false;
         }
         if (CanApplyArtifactBiasSlaying != other.CanApplyArtifactBiasSlaying)
         {
-                return false;
+            return false;
         }
         if (CanApplyBlowsBonus != other.CanApplyBlowsBonus)
         {
-                return false;
+            return false;
         }
         if (CanReflectBoltsAndArrows != other.CanReflectBoltsAndArrows)
         {
-                return false;
+            return false;
         }
         if (CanApplySlayingBonus != other.CanApplySlayingBonus)
         {
-                return false;
+            return false;
         }
         if (CanApplyBonusArmorClassMiscPower != other.CanApplyBonusArmorClassMiscPower)
         {
-                return false;
+            return false;
         }
         if (CanProvideSheathOfElectricity != other.CanProvideSheathOfElectricity)
         {
-                return false;
+            return false;
         }
         if (CanProvideSheathOfFire != other.CanProvideSheathOfFire)
         {
-                return false;
+            return false;
         }
 
         if (BonusHit != other.BonusHit)
         {
-                return false;
+            return false;
         }
         if (BonusArmorClass != other.BonusArmorClass)
         {
-                return false;
+            return false;
         }
         if (BonusDamage != other.BonusDamage)
         {
-                return false;
+            return false;
         }
         if (BonusStrength != other.BonusStrength)
         {
-                return false;
+            return false;
         }
         if (BonusIntelligence != other.BonusIntelligence)
         {
-                return false;
+            return false;
         }
         if (BonusWisdom != other.BonusWisdom)
         {
-                return false;
+            return false;
         }
         if (BonusDexterity != other.BonusDexterity)
         {
-                return false;
+            return false;
         }
         if (BonusConstitution != other.BonusConstitution)
         {
-                return false;
+            return false;
         }
         if (BonusCharisma != other.BonusCharisma)
         {
-                return false;
+            return false;
         }
         if (BonusStealth != other.BonusStealth)
         {
-                return false;
+            return false;
         }
         if (BonusSearch != other.BonusSearch)
         {
-                return false;
+            return false;
         }
         if (BonusInfravision != other.BonusInfravision)
         {
-                return false;
+            return false;
         }
         if (BonusTunnel != other.BonusTunnel)
         {
-                return false;
+            return false;
         }
         if (BonusAttacks != other.BonusAttacks)
         {
-                return false;
+            return false;
         }
         if (BonusSpeed != other.BonusSpeed)
         {
