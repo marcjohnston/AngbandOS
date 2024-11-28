@@ -66,8 +66,6 @@ internal abstract class FixedArtifact : ItemEnhancement
 
     public abstract int Ds { get; }
 
-    public abstract string FriendlyName { get; }
-
     public virtual bool HasOwnType => false;
 
     public abstract int Level { get; }
