@@ -2252,42 +2252,22 @@ internal sealed class Item : IComparable<Item>
             }
 
             // Check to see if we are enchanting a cursed or broken item.
-            if (IsCursed || IsBroken)
-            {
-                Characteristics.BonusHit -= rareItemCharacteristics.BonusHit;
-                Characteristics.BonusDamage -= rareItemCharacteristics.BonusDamage;
-                Characteristics.BonusArmorClass -= rareItemCharacteristics.BonusArmorClass;
-                Characteristics.BonusStrength -= rareItemCharacteristics.BonusStrength;
-                Characteristics.BonusIntelligence -= rareItemCharacteristics.BonusIntelligence;
-                Characteristics.BonusWisdom -= rareItemCharacteristics.BonusWisdom;
-                Characteristics.BonusDexterity -= rareItemCharacteristics.BonusDexterity;
-                Characteristics.BonusConstitution -= rareItemCharacteristics.BonusConstitution;
-                Characteristics.BonusCharisma -= rareItemCharacteristics.BonusCharisma;
-                Characteristics.BonusStealth -= rareItemCharacteristics.BonusStealth;
-                Characteristics.BonusSearch -= rareItemCharacteristics.BonusSearch;
-                Characteristics.BonusInfravision -= rareItemCharacteristics.BonusInfravision;
-                Characteristics.BonusTunnel -= rareItemCharacteristics.BonusTunnel;
-                Characteristics.BonusAttacks -= rareItemCharacteristics.BonusAttacks;
-                Characteristics.BonusSpeed -= rareItemCharacteristics.BonusSpeed;
-            }
-            else
-            {
-                Characteristics.BonusHit += rareItemCharacteristics.BonusHit;
-                Characteristics.BonusDamage += rareItemCharacteristics.BonusDamage;
-                Characteristics.BonusArmorClass += rareItemCharacteristics.BonusArmorClass;
-                Characteristics.BonusStrength += rareItemCharacteristics.BonusStrength;
-                Characteristics.BonusIntelligence += rareItemCharacteristics.BonusIntelligence;
-                Characteristics.BonusWisdom += rareItemCharacteristics.BonusWisdom;
-                Characteristics.BonusDexterity += rareItemCharacteristics.BonusDexterity;
-                Characteristics.BonusConstitution += rareItemCharacteristics.BonusConstitution;
-                Characteristics.BonusCharisma += rareItemCharacteristics.BonusCharisma;
-                Characteristics.BonusStealth += rareItemCharacteristics.BonusStealth;
-                Characteristics.BonusSearch += rareItemCharacteristics.BonusSearch;
-                Characteristics.BonusInfravision += rareItemCharacteristics.BonusInfravision;
-                Characteristics.BonusTunnel += rareItemCharacteristics.BonusTunnel;
-                Characteristics.BonusAttacks += rareItemCharacteristics.BonusAttacks;
-                Characteristics.BonusSpeed += rareItemCharacteristics.BonusSpeed;
-            }
+            int goodBadMultiplier = IsCursed || IsBroken ? -1 : 1;
+            Characteristics.BonusHit -= rareItemCharacteristics.BonusHit * goodBadMultiplier;
+            Characteristics.BonusDamage -= rareItemCharacteristics.BonusDamage * goodBadMultiplier;
+            Characteristics.BonusArmorClass -= rareItemCharacteristics.BonusArmorClass * goodBadMultiplier;
+            Characteristics.BonusStrength -= rareItemCharacteristics.BonusStrength * goodBadMultiplier;
+            Characteristics.BonusIntelligence -= rareItemCharacteristics.BonusIntelligence * goodBadMultiplier;
+            Characteristics.BonusWisdom -= rareItemCharacteristics.BonusWisdom * goodBadMultiplier;
+            Characteristics.BonusDexterity -= rareItemCharacteristics.BonusDexterity * goodBadMultiplier;
+            Characteristics.BonusConstitution -= rareItemCharacteristics.BonusConstitution * goodBadMultiplier;
+            Characteristics.BonusCharisma -= rareItemCharacteristics.BonusCharisma * goodBadMultiplier;
+            Characteristics.BonusStealth -= rareItemCharacteristics.BonusStealth * goodBadMultiplier;
+            Characteristics.BonusSearch -= rareItemCharacteristics.BonusSearch * goodBadMultiplier;
+            Characteristics.BonusInfravision -= rareItemCharacteristics.BonusInfravision * goodBadMultiplier;
+            Characteristics.BonusTunnel -= rareItemCharacteristics.BonusTunnel * goodBadMultiplier;
+            Characteristics.BonusAttacks -= rareItemCharacteristics.BonusAttacks * goodBadMultiplier;
+            Characteristics.BonusSpeed -= rareItemCharacteristics.BonusSpeed * goodBadMultiplier;
             Game.TreasureRating += RareItem.TreasureRating;
             return;
         }
