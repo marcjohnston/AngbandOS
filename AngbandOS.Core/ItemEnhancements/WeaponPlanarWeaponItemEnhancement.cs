@@ -13,7 +13,7 @@ internal class WeaponPlanarWeaponItemEnhancement : ItemEnhancement
 {
     private WeaponPlanarWeaponItemEnhancement(Game game) : base(game) { } // This object is a singleton.
 
-    public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
+    protected override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
     protected override string? ActivationName => nameof(Teleport100Every1d50p50Activation);
     public override int? Value => 7000;
     public override bool FreeAct => true;

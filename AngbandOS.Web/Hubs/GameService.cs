@@ -205,7 +205,7 @@ namespace AngbandOS.Web.Hubs
                 // necessary.
                 await gameHub.GameStarted(guid);
 
-                IGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString);
+                SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString);
                 //gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(username, ""); // Load the configuration from SQL
                 gameConfiguration = new GameConfiguration(); // Create a new configuration.
 

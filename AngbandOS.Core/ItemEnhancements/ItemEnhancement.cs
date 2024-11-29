@@ -162,6 +162,8 @@ internal abstract class ItemEnhancement : IGetKey
         BonusArmorClassRoll = Game.ParseNullableRollExpression(BonusArmorClassRollExpression);
         BonusHitRoll = Game.ParseNullableRollExpression(BonusHitRollExpression);
         BonusDamageRoll = Game.ParseNullableRollExpression(BonusDamageRollExpression);
+
+        AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
     }
 
     public string ToJson()
@@ -169,7 +171,11 @@ internal abstract class ItemEnhancement : IGetKey
         return "";
     }
 
-    public virtual ItemEnhancement? RandomPower => null;
+    private string  DeleteMe => ""; // TODO: THis is causing a compiler error to delete
+
+    protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey => null;
+
+    public ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; private set; }
 
     /// <summary>
     /// Returns the value of the enhancement.

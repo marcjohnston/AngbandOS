@@ -113,7 +113,7 @@ namespace AngbandOS.Web.Controllers
             string connectionString = Configuration["ConnectionString"];
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            IGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(connectionString);
+            SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(connectionString);
 
             GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
 

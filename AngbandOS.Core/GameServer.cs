@@ -185,12 +185,12 @@ public class GameServer
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
         }
 
-        bool success = false;
+        bool gameIsOver = false;
         try
         {
             Game = new Game(gameConfiguration, serializedGameReplay);
             Game.Play(console, persistentStorage);
-            success = true;
+            gameIsOver = true;
         }
         catch (Exception ex)
         {
@@ -200,7 +200,7 @@ public class GameServer
         // Serialize the GameReplay.
         GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.ReplayQueue.ToArray());
         serializedGameReplay = JsonSerializer.Serialize(gameReplay); // This is replacing the parameter contents.
-        return new GameResults(success, serializedGameReplay);
+        return new GameResults(gameIsOver, serializedGameReplay);
     }
 
     /// <summary>
@@ -220,13 +220,13 @@ public class GameServer
             throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to retrieve the game from persistent storage and cannot be null.");
         }
 
-        bool success = false;
+        bool gameIsOver = false;
         try
         {
             // Retrieve the game from persistent storage.
             Game = Game.LoadGame(persistentStorage);
             Game.Play(console, persistentStorage);
-            success = true;
+            gameIsOver = true;
         }
         catch (Exception ex)
         {
@@ -236,6 +236,6 @@ public class GameServer
         // Serialize the GameReplay.
         GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.ReplayQueue.ToArray());
         string serializedGameReplay = JsonSerializer.Serialize(gameReplay);
-        return new GameResults(success, serializedGameReplay);
+        return new GameResults(gameIsOver, serializedGameReplay);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.PersistentStorage
     /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
     /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
     /// </summary>
-    public class SqlGameConfigurationPersistentStorage : IGameConfigurationPersistentStorage
+    public class SqlGameConfigurationPersistentStorage
     {
         /// <summary>
         /// Returns the connection string to the database.

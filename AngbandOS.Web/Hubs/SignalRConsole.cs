@@ -358,7 +358,8 @@ namespace AngbandOS.Web.Hubs
             // IConsole to receive and process print and wait for key requests.
             if (GameConfiguration == null)
             {
-                if (_gameServer.PlayExistingGame(this, PersistentStorage))
+                GameResults results = _gameServer.PlayExistingGame(this, PersistentStorage);
+                if (results.GameIsOver)
                 {
                     // The game is over.  Let the client know.
                     GameOver();
@@ -366,7 +367,8 @@ namespace AngbandOS.Web.Hubs
             }
             else
             {
-                if (_gameServer.PlayNewGame(this, PersistentStorage, GameConfiguration))
+                GameResults results = _gameServer.PlayNewGame(this, PersistentStorage, GameConfiguration, null);
+                if (results.GameIsOver)
                 {
                     // The game is over.  Let the client know.
                     GameOver();

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class WeaponElderSignInscribedItemEnhancement : ItemEnhancement
 {
     private WeaponElderSignInscribedItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(SustainItemEnhancementWeightedRandom)).Choose();
+    protected override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(SustainItemEnhancementWeightedRandom);
     public override bool Blessed => true;
     public override int? Value => 20000;
     public override string? FriendlyName => "(Elder Sign Inscribed)";

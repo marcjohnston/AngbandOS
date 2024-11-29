@@ -2240,10 +2240,6 @@ internal sealed class Item : IComparable<Item>
         else if (RareItem != null)
         {
             RareItemCharacteristics = RareItem.GenerateItemCharacteristics();
-            if (RareItem.RandomPower != null)
-            {
-                RandomPower = RareItem.RandomPower;
-            }
             if (RareItem.Value.HasValue && RareItem.Value == 0)
             {
                 IsBroken = true;

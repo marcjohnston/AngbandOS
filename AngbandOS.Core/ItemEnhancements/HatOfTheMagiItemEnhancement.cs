@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemEnhancements;
 internal class HatOfTheMagiItemEnhancement : ItemEnhancement
 {
     private HatOfTheMagiItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override ItemEnhancement? RandomPower => Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
+    protected override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
     public override int? Value => 7500;
     public override string? FriendlyName => "of the Magi";
     public override bool IgnoreAcid => true;

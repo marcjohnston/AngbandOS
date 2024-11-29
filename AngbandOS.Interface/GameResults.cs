@@ -2,12 +2,12 @@
 
 public class GameResults
 {
-    public bool Success { get; }
+    public bool GameIsOver { get; }
     public string Replay { get; }
 
-    public GameResults(bool success, string replay)
+    public GameResults(bool gameIsOver, string replay)
     {
-        Success = success;
+        GameIsOver = gameIsOver;
         Replay = replay;
     }
 }
