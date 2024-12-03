@@ -125,7 +125,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         // Take off the old item
         if (wieldingItem != null)
         {
-            Item? wasWieldingItem = Game.InventoryTakeoff(wieldingItem, 255);
+            Item? wasWieldingItem = wieldingItem.Takeoff(255);
             if (wasWieldingItem == null)
             {
                 Game.MsgPrint("Unable to take off item!");

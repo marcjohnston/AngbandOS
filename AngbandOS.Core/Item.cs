@@ -421,6 +421,10 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
+    /// <summary>
+    /// Wields the item in the first available wield slot and returns true, if successful; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
     public bool Wield()
     {
         foreach (WieldSlot wieldSlot in BaseWieldSlots)
@@ -432,6 +436,38 @@ internal sealed class Item : IComparable<Item>
             }
         }
         return false;
+    }
+
+    /// <summary>
+    /// Returns a clone of the item that has been taken off; or null, if the amount <= 0, or the item cannot be carries, for which it is gone. 
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <param name="amt"></param>
+    /// <returns></returns>
+    public Item? Takeoff(int amt)
+    {
+        string act;
+        if (amt <= 0)
+        {
+            return null;
+        }
+        if (amt > Count)
+        {
+            amt = Count;
+        }
+        Item qPtr = Clone(amt);
+        string oName = qPtr.GetFullDescription(true);
+        act = TakeOffMessage;
+        ItemIncrease(-amt);
+        ItemOptimize();
+        Item? newItem = Game.InventoryCarry(qPtr);
+        if (newItem == null)
+        {
+            Game.MsgPrint("Failed to carry item."); // TODO: Need to prevent this
+            return null;
+        }
+        Game.MsgPrint($"{act} {oName} ({newItem.Label}).");
+        return newItem;
     }
 
     /// <summary>

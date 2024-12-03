@@ -55,7 +55,7 @@ internal class TakeOffScript : Script, IScript, IRepeatableScript, IScriptStore
         }
         // Take off the item
         Game.EnergyUse = 50;
-        Game.InventoryTakeoff(item, 255);
+        item.Takeoff(255);
         Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
     }
 }

@@ -14711,7 +14711,7 @@ public bool IsDead = false;
         if (oPtr.IsInEquipment)
         {
             // Take the item off first.
-            Item? removedItem = InventoryTakeoff(oPtr, amt);
+            Item? removedItem = oPtr.Takeoff(amt);
             if (removedItem == null)
             {
                 return;
@@ -14804,38 +14804,6 @@ public bool IsDead = false;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
-    }
-
-    /// <summary>
-    /// Returns a clone of the item that has been taken off; or null, if the amount <= 0, or the item cannot be carries, for which it is gone. 
-    /// </summary>
-    /// <param name="oPtr"></param>
-    /// <param name="amt"></param>
-    /// <returns></returns>
-    public Item? InventoryTakeoff(Item oPtr, int amt)
-    {
-        string act;
-        if (amt <= 0)
-        {
-            return null;
-        }
-        if (amt > oPtr.Count)
-        {
-            amt = oPtr.Count;
-        }
-        Item qPtr = oPtr.Clone(amt);
-        string oName = qPtr.GetFullDescription(true);
-        act = oPtr.TakeOffMessage;
-        oPtr.ItemIncrease(-amt);
-        oPtr.ItemOptimize();
-        Item? newItem = InventoryCarry(qPtr);
-        if (newItem == null)
-        {
-            MsgPrint("Failed to carry item."); // TODO: Need to prevent this
-            return null;
-        }
-        MsgPrint($"{act} {oName} ({newItem.Label}).");
-        return newItem;
     }
 
     public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
