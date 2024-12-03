@@ -498,6 +498,11 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public bool Wield()
     {
+        if (WieldSlots.Length == 0)
+        {
+            return false;
+        }
+
         foreach (WieldSlot wieldSlot in WieldSlots)
         {
             if (wieldSlot.Count < wieldSlot.MaximumItemSlots)

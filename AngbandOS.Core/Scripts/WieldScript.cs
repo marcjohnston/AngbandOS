@@ -43,6 +43,8 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
             Game.MsgPrint("You have nothing you can wear or wield.");
             return;
         }
+
+        // Check if the selection was cancelled.
         if (item == null)
         {
             return;
