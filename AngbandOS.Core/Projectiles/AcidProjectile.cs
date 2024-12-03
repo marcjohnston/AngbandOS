@@ -28,7 +28,7 @@ internal class AcidProjectile : Projectile
             bool doKill = false;
             string noteKill = null;
             ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-            if (oPtr.Count > 1)
+            if (oPtr.StackCount > 1)
             {
                 plural = true;
             }

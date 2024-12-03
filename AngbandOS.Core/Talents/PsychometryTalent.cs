@@ -56,7 +56,7 @@ internal class PsychometryTalent : Talent
             Game.MsgPrint($"You do not perceive anything unusual about the {oName}.");
             return;
         }
-        string s = oPtr.Count == 1 ? "is" : "are";
+        string s = oPtr.StackCount == 1 ? "is" : "are";
         Game.MsgPrint($"You feel that the {oName} {s} {feel}...");
         oPtr.IdentSense = true;
         if (string.IsNullOrEmpty(oPtr.Inscription))

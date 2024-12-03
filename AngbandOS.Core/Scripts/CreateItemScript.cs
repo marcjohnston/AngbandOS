@@ -32,7 +32,7 @@ internal class CreateItemScript : Script, IScript
         }
         ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(kIdx);
         Item qPtr = new Item(Game, itemFactory);
-        qPtr.Count = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
+        qPtr.StackCount = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
         if (!Game.GetBool($"Allow Fixed Artifact (0=False, 1=True)? ", out bool ok))
         {
             return;

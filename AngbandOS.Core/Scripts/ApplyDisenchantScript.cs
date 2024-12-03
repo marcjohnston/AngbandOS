@@ -43,7 +43,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessByChanceScript
         string s;
         if (oPtr.IsArtifact && Game.RandomLessThan(100) < 71)
         {
-            s = oPtr.Count != 1 ? "" : "s";
+            s = oPtr.StackCount != 1 ? "" : "s";
             Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
             return true;
         }
@@ -71,7 +71,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessByChanceScript
         {
             oPtr.Characteristics.BonusArmorClass--;
         }
-        s = oPtr.Count != 1 ? "were" : "was";
+        s = oPtr.StackCount != 1 ? "were" : "was";
         Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;

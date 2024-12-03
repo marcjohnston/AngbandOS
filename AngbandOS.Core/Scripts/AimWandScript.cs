@@ -54,7 +54,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             return false;
         }
         // We can't use wands directly from the floor, since we need to aim them
-        if (!item.IsInInventory && item.Count > 1)
+        if (!item.IsInInventory && item.StackCount > 1)
         {
             Game.MsgPrint("You must first pick up the wand.");
             return false;
@@ -115,11 +115,11 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
         {
             item.WandChargesRemaining--;
             // If the wand is part of a stack, split it off from the others
-            if (item.IsInInventory && item.Count > 1)
+            if (item.IsInInventory && item.StackCount > 1)
             {
                 Item splitItem = item.Clone(1);
                 item.WandChargesRemaining++;
-                item.Count--;
+                item.StackCount--;
                 Game.WeightCarried -= splitItem.Weight;
                 Game.InventoryCarry(splitItem);
                 Game.MsgPrint("You unstack your wand.");

@@ -23,7 +23,7 @@ internal class DrainWandChargesAttackEffect : AttackEffect
         Game.MsgPrint("Energy drains from your pack!");
         obvious = true;
         int j = monster.Level;
-        monster.Health += j * item.WandChargesRemaining * item.Count;
+        monster.Health += j * item.WandChargesRemaining * item.StackCount;
         if (monster.Health > monster.MaxHealth)
         {
             monster.Health = monster.MaxHealth;

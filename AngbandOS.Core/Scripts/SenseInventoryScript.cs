@@ -63,7 +63,7 @@ internal class SenseInventoryScript : Script, IScript
                     continue;
                 }
                 string oName = item.GetDescription(false);
-                string isare = item.Count == 1 ? "is" : "are";
+                string isare = item.StackCount == 1 ? "is" : "are";
                 Game.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {qualityRating.Description}...");
                 item.IdentSense = true;
                 if (string.IsNullOrEmpty(item.Inscription))

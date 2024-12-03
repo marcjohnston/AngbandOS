@@ -52,7 +52,7 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     /// <param name="num"></param>
     public virtual void ItemIncrease(Item oPtr, int num)
     {
-        num += oPtr.Count;
+        num += oPtr.StackCount;
         if (num > 255)
         {
             num = 255;
@@ -61,10 +61,10 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
         {
             num = 0;
         }
-        num -= oPtr.Count;
+        num -= oPtr.StackCount;
         if (num != 0)
         {
-            oPtr.Count += num;
+            oPtr.StackCount += num;
             Game.WeightCarried += num * oPtr.Weight;
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();

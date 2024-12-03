@@ -34,18 +34,18 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
         {
             return false;
         }
-        if (oPtr.Count > 1)
+        if (oPtr.StackCount > 1)
         {
-            amt = Game.GetQuantity(oPtr.Count, true);
+            amt = Game.GetQuantity(oPtr.StackCount, true);
             if (amt <= 0)
             {
                 return false;
             }
         }
-        int oldNumber = oPtr.Count;
-        oPtr.Count = amt;
+        int oldNumber = oPtr.StackCount;
+        oPtr.StackCount = amt;
         string oName = oPtr.GetFullDescription(true);
-        oPtr.Count = oldNumber;
+        oPtr.StackCount = oldNumber;
         if (!force)
         {
             if (!(oPtr.Value() < 1))

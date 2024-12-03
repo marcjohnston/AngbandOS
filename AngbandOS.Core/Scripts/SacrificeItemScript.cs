@@ -40,9 +40,9 @@ internal class SacrificeItemScript : Script, IScriptStore
             return;
         }
         int amt = 1;
-        if (oPtr.Count > 1)
+        if (oPtr.StackCount > 1)
         {
-            amt = Game.GetQuantity(oPtr.Count, true);
+            amt = Game.GetQuantity(oPtr.StackCount, true);
             if (amt <= 0)
             {
                 return;
@@ -51,7 +51,7 @@ internal class SacrificeItemScript : Script, IScriptStore
         Item qPtr = oPtr.Clone(amt);
         string oName = qPtr.GetFullDescription(true);
         qPtr.Inscription = "";
-        int finalAsk = storeCommandEvent.Store.MarkdownItem(qPtr) * qPtr.Count;
+        int finalAsk = storeCommandEvent.Store.MarkdownItem(qPtr) * qPtr.StackCount;
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();

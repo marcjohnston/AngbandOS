@@ -283,7 +283,7 @@ internal class Store
     private void StoreDelete()
     {
         int what = Game.RandomLessThan(StoreInventoryList.Count);
-        int num = StoreInventoryList[what].Count;
+        int num = StoreInventoryList[what].StackCount;
         if (Game.RandomLessThan(100) < 50)
         {
             num = (num + 1) / 2;
@@ -299,7 +299,7 @@ internal class Store
     public void StoreItemIncrease(int item, int num)
     {
         Item oPtr = StoreInventoryList[item];
-        int cnt = oPtr.Count + num;
+        int cnt = oPtr.StackCount + num;
         if (cnt > 255)
         {
             cnt = 255;
@@ -308,14 +308,14 @@ internal class Store
         {
             cnt = 0;
         }
-        num = cnt - oPtr.Count;
-        oPtr.Count += num;
+        num = cnt - oPtr.StackCount;
+        oPtr.StackCount += num;
     }
 
     public void StoreItemOptimize(int item)
     {
         Item oPtr = StoreInventoryList[item];
-        if (oPtr.Count > 0)
+        if (oPtr.StackCount > 0)
         {
             return;
         }
@@ -324,8 +324,8 @@ internal class Store
 
     private void StoreObjectAbsorb(Item oPtr, Item jPtr)
     {
-        int total = oPtr.Count + jPtr.Count;
-        oPtr.Count = total > 99 ? 99 : total;
+        int total = oPtr.StackCount + jPtr.StackCount;
+        oPtr.StackCount = total > 99 ? 99 : total;
     }
 
     private void ProcessCommand()
@@ -535,7 +535,7 @@ internal class Store
             discount = 0;
         }
         oPtr.Discount = discount;
-        oPtr.Count = size - size * discount / 100;
+        oPtr.StackCount = size - size * discount / 100;
     }
 
     /// <summary>

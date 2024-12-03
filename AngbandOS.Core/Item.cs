@@ -85,7 +85,11 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     private IItemCharacteristics? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
 
-    public int Count;
+    /// <summary>
+    /// Returns the number of stacked items.
+    /// </summary>
+    public int StackCount;
+
     public int Discount;
     public int HoldingMonsterIndex;
     public string Inscription = "";
@@ -451,9 +455,9 @@ internal sealed class Item : IComparable<Item>
         {
             return null;
         }
-        if (amt > Count)
+        if (amt > StackCount)
         {
-            amt = Count;
+            amt = StackCount;
         }
         Item qPtr = Clone(amt);
         string oName = qPtr.GetFullDescription(true);
@@ -617,8 +621,8 @@ internal sealed class Item : IComparable<Item>
     /// <param name="other"></param>
     public void Absorb(Item other)
     {
-        int total = Count + other.Count;
-        Count = total < Constants.MaxStackSize ? total : Constants.MaxStackSize - 1;
+        int total = StackCount + other.StackCount;
+        StackCount = total < Constants.MaxStackSize ? total : Constants.MaxStackSize - 1;
         if (other.IsKnown())
         {
             BecomeKnown();
@@ -1028,7 +1032,7 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
 
-        int total = Count + other.Count;
+        int total = StackCount + other.StackCount;
         return total < Constants.MaxStackSize;
     }
 
@@ -2385,7 +2389,7 @@ internal sealed class Item : IComparable<Item>
 
     private FixedArtifact? SelectCompatibleFixedArtifact()
     {
-        if (Count != 1)
+        if (StackCount != 1)
         {
             return null;
         }
@@ -2507,7 +2511,7 @@ internal sealed class Item : IComparable<Item>
         Characteristics  = cloneFrom.Characteristics;
         RandomArtifactItemCharacteristics  = cloneFrom.RandomArtifactItemCharacteristics;
         RandomPower  = cloneFrom.RandomPower;
-        Count = cloneFrom.Count;
+        StackCount = cloneFrom.StackCount;
         Discount = cloneFrom.Discount;
         HoldingMonsterIndex = cloneFrom.HoldingMonsterIndex;
         Inscription = cloneFrom.Inscription;
@@ -2552,7 +2556,7 @@ internal sealed class Item : IComparable<Item>
         _factory = factory;
         FactoryItemCharacteristics = factory.GenerateItemCharacteristics();
 
-        Count = 1;
+        StackCount = 1;
 
         // Now we retrieve all of the characteristics from the factory.
         NutritionalValue = _factory.InitialNutritionalValue;        

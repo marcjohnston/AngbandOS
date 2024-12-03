@@ -27,7 +27,7 @@ internal abstract class EquipmentWieldSlot : WieldSlot
     /// <param name="oPtr"></param>
     public override void ItemOptimize(Item oPtr)
     {
-        if (oPtr.Count > 0)
+        if (oPtr.StackCount > 0)
         {
             return;
         }

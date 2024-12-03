@@ -45,7 +45,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         }
 
         // We can't use a staff from the floor
-        if (!item.IsInInventory && item.Count > 1)
+        if (!item.IsInInventory && item.StackCount > 1)
         {
             Game.MsgPrint("You must first pick up the staff.");
             return;
@@ -108,11 +108,11 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             // Use the actual charge
             item.StaffChargesRemaining--;
             // If the staff was part of a stack, separate it from the rest
-            if (item.IsInInventory && item.Count > 1)
+            if (item.IsInInventory && item.StackCount > 1)
             {
                 Item singleStaff = item.Clone(1);
                 item.StaffChargesRemaining++;
-                item.Count--;
+                item.StackCount--;
                 Game.WeightCarried -= singleStaff.Weight;
                 Game.InventoryCarry(singleStaff);
                 Game.MsgPrint("You unstack your staff.");

@@ -2072,7 +2072,7 @@ public bool IsDead = false;
             item = new Item(this, kIdx);
         }
         item.EnchantItem(ObjectLevel, true, good, great, true);
-        item.Count = item.MakeObjectCount;
+        item.StackCount = item.MakeObjectCount;
         if (!item.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
         {
             TreasureRating += item.LevelNormallyFound - Difficulty;
@@ -5429,7 +5429,7 @@ public bool IsDead = false;
         bool res = false;
         bool isArtifact = oPtr.IsArtifact;
         ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-        int prob = oPtr.Count * 100;
+        int prob = oPtr.StackCount * 100;
         prob /= oPtr.EnchantmentMaximumCount;
         for (int i = 0; i < n; i++)
         {
@@ -5569,7 +5569,7 @@ public bool IsDead = false;
         }
         string oName = oPtr.GetDescription(false);
         string your = oPtr.IsInInventory ? "Your" : "The";
-        string s = oPtr.Count > 1 ? "" : "s"; // TODO: this plural looks wrong
+        string s = oPtr.StackCount > 1 ? "" : "s"; // TODO: this plural looks wrong
         MsgPrint($"{your} {oName} glow{s} brightly!"); // TODO: this plural looks wrong
         if (Enchant(oPtr, numHit, Constants.EnchTohit))
         {
@@ -9823,7 +9823,7 @@ public bool IsDead = false;
         {
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
             Item item = new Item(this, scrollSatisfyHungerItemClass);
-            item.Count = (char)RandomBetween(2, 5);
+            item.StackCount = (char)RandomBetween(2, 5);
             item.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
@@ -9833,7 +9833,7 @@ public bool IsDead = false;
         {
             ItemFactory rationFoodItemClass = SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
             Item item = new Item(this, rationFoodItemClass);
-            item.Count = RandomBetween(3, 7);
+            item.StackCount = RandomBetween(3, 7);
             item.IsFlavorAware = true;
             item.BecomeKnown();
             InventoryCarry(item);
@@ -9842,7 +9842,7 @@ public bool IsDead = false;
         {
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
             Item item = new Item(this, scrollLightItemClass);
-            item.Count = RandomBetween(3, 7);
+            item.StackCount = RandomBetween(3, 7);
             item.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
@@ -9852,7 +9852,7 @@ public bool IsDead = false;
         {
             ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
             Item item = new Item(this, woodenTorchItemClass);
-            item.Count = RandomBetween(3, 7);
+            item.StackCount = RandomBetween(3, 7);
             item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
             item.IsFlavorAware = true;
             item.BecomeKnown();
@@ -13025,7 +13025,7 @@ public bool IsDead = false;
                         break;
                     }
                     s1 = "It is ";
-                    if (oPtr.Count != 1)
+                    if (oPtr.StackCount != 1)
                     {
                         s1 = "They are ";
                     }
@@ -13627,7 +13627,7 @@ public bool IsDead = false;
         if (mergedCharacteristics.Blessed && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
-            string s = oPtr.Count > 1 ? "" : "s";
+            string s = oPtr.StackCount > 1 ? "" : "s";
             MsgPrint($"Your {oName} resist{s} cursing!");
             return;
         }
@@ -14587,7 +14587,7 @@ public bool IsDead = false;
             {
                 // Group it together.
                 jPtr.Absorb(oPtr);
-                WeightCarried += oPtr.Count * oPtr.Weight;
+                WeightCarried += oPtr.StackCount * oPtr.Weight;
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                 return jPtr;
             }
@@ -14636,7 +14636,7 @@ public bool IsDead = false;
         newItem.Y = 0;
         newItem.X = 0;
         newItem.HoldingMonsterIndex = 0;
-        WeightCarried += newItem.Count * newItem.Weight;
+        WeightCarried += newItem.StackCount * newItem.Weight;
         _invenCnt++;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
@@ -14653,7 +14653,7 @@ public bool IsDead = false;
             {
                 int j;
                 int amt;
-                for (amt = j = 0; j < oPtr.Count; ++j)
+                for (amt = j = 0; j < oPtr.StackCount; ++j)
                 {
                     if (RandomLessThan(100) < perc)
                     {
@@ -14663,7 +14663,7 @@ public bool IsDead = false;
                 if (amt != 0)
                 {
                     string oName = oPtr.GetFullDescription(false);
-                    string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
+                    string y = oPtr.StackCount > 1 ? (amt == oPtr.StackCount ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
                     string w = amt > 1 ? "were" : "was";
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                     if (oPtr.QuaffTuple != null)
@@ -14684,9 +14684,9 @@ public bool IsDead = false;
         {
             return;
         }
-        if (amt > oPtr.Count)
+        if (amt > oPtr.StackCount)
         {
-            amt = oPtr.Count;
+            amt = oPtr.StackCount;
         }
         if (oPtr.IsInEquipment)
         {
@@ -14736,7 +14736,7 @@ public bool IsDead = false;
         {
             return;
         }
-        num += oPtr.Count;
+        num += oPtr.StackCount;
         if (num > 255)
         {
             num = 255;
@@ -14745,10 +14745,10 @@ public bool IsDead = false;
         {
             num = 0;
         }
-        num -= oPtr.Count;
+        num -= oPtr.StackCount;
         if (num != 0)
         {
-            oPtr.Count += num;
+            oPtr.StackCount += num;
             WeightCarried += num * oPtr.Weight;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -14763,7 +14763,7 @@ public bool IsDead = false;
         {
             return;
         }
-        if (oPtr.Count > 0)
+        if (oPtr.StackCount > 0)
         {
             return;
         }
@@ -14876,7 +14876,7 @@ public bool IsDead = false;
                     ColorEnum color = oPtr.Color;
                     consoleRow["description"] = new ConsoleString(color, oPtr.GetFullDescription(true));
 
-                    int wgt = oPtr.Weight * oPtr.Count;
+                    int wgt = oPtr.Weight * oPtr.StackCount;
                     consoleRow["weight"] = new ConsoleString(ColorEnum.White, $"{wgt / 10}.{wgt % 10} lb");
                     slotIsEmpty = false;
                 }
@@ -15023,7 +15023,7 @@ public bool IsDead = false;
         GridTile cPtr;
         bool flag = false;
         bool done = false;
-        bool plural = jPtr.Count != 1;
+        bool plural = jPtr.StackCount != 1;
         string oName = jPtr.GetDescription(false);
         if (!jPtr.IsArtifact && RandomLessThan(100) < chance)
         {

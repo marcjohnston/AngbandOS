@@ -39,16 +39,16 @@ internal class SellScript : Script, IScriptStore
             return;
         }
         int amt = 1;
-        if (oPtr.Count > 1)
+        if (oPtr.StackCount > 1)
         {
-            amt = Game.GetQuantity(oPtr.Count, true);
+            amt = Game.GetQuantity(oPtr.StackCount, true);
             if (amt <= 0)
             {
                 return;
             }
         }
         Item qPtr = oPtr.Clone();
-        qPtr.Count = amt;
+        qPtr.StackCount = amt;
         string oName = qPtr.GetFullDescription(true);
         if (!storeCommandEvent.Store.StoreFactory.StoreMaintainsInscription)
         {
@@ -72,7 +72,7 @@ internal class SellScript : Script, IScriptStore
             Game.PlaySound(SoundEffectEnum.StoreTransaction);
             Game.Gold.IntValue += price;
             Game.StorePrtGold();
-            int guess = qPtr.Value() * qPtr.Count;
+            int guess = qPtr.Value() * qPtr.StackCount;
             if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
             {
                 oPtr.IsFlavorAware = true;
@@ -80,7 +80,7 @@ internal class SellScript : Script, IScriptStore
             }
             Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
             qPtr = oPtr.Clone();
-            qPtr.Count = amt;
+            qPtr.StackCount = amt;
             int value;
             if (!storeCommandEvent.Store.StoreFactory.StoreAnalyzesPurchases)
             {
@@ -88,7 +88,7 @@ internal class SellScript : Script, IScriptStore
             }
             else
             {
-                value = qPtr.Value() * qPtr.Count;
+                value = qPtr.Value() * qPtr.StackCount;
                 oName = qPtr.GetFullDescription(true);
             }
             Game.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
@@ -159,7 +159,7 @@ internal class SellScript : Script, IScriptStore
             finalAsk -= finalAsk / 10;
         }
         const string pmt = "Final Offer";
-        finalAsk *= oPtr.Count;
+        finalAsk *= oPtr.StackCount;
         price = finalAsk;
         string outVal = $"{pmt} :  {finalAsk}";
         Game.Screen.Print(outVal, 1, 0);

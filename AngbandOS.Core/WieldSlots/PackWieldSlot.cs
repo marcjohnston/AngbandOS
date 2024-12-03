@@ -39,7 +39,7 @@ internal class PackWieldSlot : WieldSlot
     public override void ItemOptimize(Item oPtr)
     {
         // Check to see if there are any items remaining.
-        if (oPtr.Count > 0)
+        if (oPtr.StackCount > 0)
         {
             // There are, nothing to do.
             return;

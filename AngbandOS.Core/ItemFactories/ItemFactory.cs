@@ -713,20 +713,20 @@ internal abstract class ItemFactory : ItemEnhancement
             // This syntax is allowed to use the name macro.
             descriptionSyntax = descriptionSyntax.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
         }
-        string pluralizedName = ApplyPlurizationMacro(descriptionSyntax, item.Count);
+        string pluralizedName = ApplyPlurizationMacro(descriptionSyntax, item.StackCount);
 
         if (!includeCountPrefix)
         {
             return pluralizedName;
         }
 
-        if (item.Count <= 0)
+        if (item.StackCount <= 0)
         {
             return $"no more {pluralizedName}";
         }
-        else if (item.Count > 1)
+        else if (item.StackCount > 1)
         {
-            return $"{item.Count} {pluralizedName}";
+            return $"{item.StackCount} {pluralizedName}";
         }
         else if (item.IsKnownArtifact)
         {

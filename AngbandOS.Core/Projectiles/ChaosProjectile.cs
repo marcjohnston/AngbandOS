@@ -30,7 +30,7 @@ internal class ChaosProjectile : Projectile
             bool ignore = false;
             bool plural = false;
             ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-            if (oPtr.Count > 1)
+            if (oPtr.StackCount > 1)
             {
                 plural = true;
             }

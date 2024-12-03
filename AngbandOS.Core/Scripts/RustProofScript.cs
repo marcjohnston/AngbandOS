@@ -35,11 +35,11 @@ internal class RustProofScript : Script, IScript
         string s;
         if (item.Characteristics.BonusArmorClass < 0 && !item.IsCursed)
         {
-            s = item.Count > 1 ? "" : "s";
+            s = item.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {itenName} look{s} as good as new!");
             item.Characteristics.BonusArmorClass = 0;
         }
-        s = item.Count > 1 ? "are" : "is";
+        s = item.StackCount > 1 ? "are" : "is";
         Game.MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
     }
 }

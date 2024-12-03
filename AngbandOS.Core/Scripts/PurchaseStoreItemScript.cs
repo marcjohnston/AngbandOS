@@ -45,13 +45,13 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             return;
         }
         int best = storeCommandEvent.Store.MarkupItem(jPtr);
-        if (oPtr.Count > 1)
+        if (oPtr.StackCount > 1)
         {
             if (storeCommandEvent.Store.StoreFactory.StoreSellsItems && oPtr.IdentFixed)
             {
                 Game.MsgPrint($"That costs {best} gold per item.");
             }
-            int maxBuy = Math.Min(Game.Gold.IntValue / best, oPtr.Count);
+            int maxBuy = Math.Min(Game.Gold.IntValue / best, oPtr.StackCount);
             if (maxBuy < 2)
             {
                 amt = 1;
@@ -78,7 +78,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             if (oPtr.IdentFixed)
             {
                 choice = false;
-                price = best * jPtr.Count;
+                price = best * jPtr.StackCount;
             }
             else
             {
@@ -195,7 +195,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
         Game.MsgPrint(null);
         finalAsk += finalAsk / 10;
         const string pmt = "Final Offer";
-        finalAsk *= oPtr.Count;
+        finalAsk *= oPtr.StackCount;
         price = finalAsk;
         string outVal = $"{pmt} :  {finalAsk}";
         Game.Screen.Print(outVal, 1, 0);

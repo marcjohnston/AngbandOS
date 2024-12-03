@@ -50,18 +50,18 @@ internal class DestroyItemScript : Script, IScript, IRepeatableScript, IScriptSt
             return;
         }
         // If we have more than one we might not want to destroy all of them
-        if (item.Count > 1)
+        if (item.StackCount > 1)
         {
-            count = Game.GetQuantity(item.Count, true);
+            count = Game.GetQuantity(item.StackCount, true);
             if (count <= 0)
             {
                 return;
             }
         }
-        int oldNumber = item.Count;
-        item.Count = count;
+        int oldNumber = item.StackCount;
+        item.StackCount = count;
         string itemName = item.GetFullDescription(true);
-        item.Count = oldNumber;
+        item.StackCount = oldNumber;
         //Only confirm if it's not a worthless item
         if (!force)
         {

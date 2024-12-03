@@ -45,13 +45,13 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
         }
         if (mergedCharacteristics.Blessed)
         {
-            string s = oPtr.Count > 1 ? "were" : "was";
+            string s = oPtr.StackCount > 1 ? "were" : "was";
             Game.MsgPrint($"{your} {oName} {s} blessed already.");
             return true;
         }
         if (!oPtr.IsArtifact || Game.DieRoll(3) == 1)
         {
-            string s = oPtr.Count > 1 ? "" : "s";
+            string s = oPtr.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {oName} shine{s}!");
             oPtr.Characteristics.Blessed = true;
         }
@@ -89,7 +89,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
             if (disHappened)
             {
                 Game.MsgPrint("There is a  feeling in the air...");
-                string s = oPtr.Count > 1 ? "were" : "was";
+                string s = oPtr.StackCount > 1 ? "were" : "was";
                 Game.MsgPrint($"{your} {oName} {s} disenchanted!");
             }
         }

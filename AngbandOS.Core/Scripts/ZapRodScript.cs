@@ -46,7 +46,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         }
 
         // Rods can't be used from the floor
-        if (!item.IsInInventory && item.Count > 1)
+        if (!item.IsInInventory && item.StackCount > 1)
         {
             Game.MsgPrint("You must first pick up the rods.");
             return;
@@ -135,11 +135,11 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         if (!channeled)
         {
             // If the rod was part of a stack, remove it
-            if (item.IsInInventory && item.Count > 1)
+            if (item.IsInInventory && item.StackCount > 1)
             {
                 Item singleRod = item.Clone(1);
                 item.RodRechargeTimeRemaining = 0;
-                item.Count--;
+                item.StackCount--;
                 Game.WeightCarried -= singleRod.Weight;
                 Game.InventoryCarry(singleRod);
                 Game.MsgPrint("You unstack your rod.");

@@ -33,12 +33,12 @@ internal class EatItemAttackEffect : AttackEffect
             if (item != null && !item.IsArtifact)
             {
                 string itemName = item.GetFullDescription(false);
-                string y = item.Count > 1 ? "One of y" : "Y";
+                string y = item.StackCount > 1 ? "One of y" : "Y";
                 Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
 
                 // Give the item to the thief so it can later drop it
                 Item stolenItem = item.Clone();
-                stolenItem.Count = 1;
+                stolenItem.StackCount = 1;
                 stolenItem.WasNoticed = false;
 
                 Game.AddItemToMonster(item.Clone(), monster);

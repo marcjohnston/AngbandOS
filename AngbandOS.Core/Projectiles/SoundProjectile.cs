@@ -26,7 +26,7 @@ internal class SoundProjectile : Projectile
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            if (oPtr.Count > 1)
+            if (oPtr.StackCount > 1)
             {
                 plural = true;
             }

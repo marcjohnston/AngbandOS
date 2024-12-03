@@ -55,9 +55,9 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessByChance
             return false;
         }
         // It's a stack, so find out how many to drop
-        if (item.Count > 1)
+        if (item.StackCount > 1)
         {
-            amount = Game.GetQuantity(item.Count, true);
+            amount = Game.GetQuantity(item.StackCount, true);
             if (amount <= 0)
             {
                 return false;

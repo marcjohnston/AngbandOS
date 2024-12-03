@@ -30,30 +30,30 @@ internal class CreateRandomArtifactScript : Script, IScript
         }
         string oName = oPtr.GetDescription(false);
         string your = oPtr.IsInInventory ? "Your" : "The";
-        string s = oPtr.Count > 1 ? "" : "s";
+        string s = oPtr.StackCount > 1 ? "" : "s";
         Game.MsgPrint($"{your} {oName} radiate{s} a blinding light!");
         if (oPtr.IsArtifact)
         {
-            string are = oPtr.Count > 1 ? "are" : "is";
-            s = oPtr.Count > 1 ? "artifacts" : "an artifact";
+            string are = oPtr.StackCount > 1 ? "are" : "is";
+            s = oPtr.StackCount > 1 ? "artifacts" : "an artifact";
             Game.MsgPrint($"The {oName} {are} already {s}!");
             okay = false;
         }
         else if (oPtr.RareItem != null)
         {
-            string are = oPtr.Count > 1 ? "are" : "is";
-            s = oPtr.Count > 1 ? "rare items" : "a rare item";
+            string are = oPtr.StackCount > 1 ? "are" : "is";
+            s = oPtr.StackCount > 1 ? "rare items" : "a rare item";
             Game.MsgPrint($"The {oName} {are} already {s}!");
             okay = false;
         }
         else
         {
-            if (oPtr.Count > 1)
+            if (oPtr.StackCount > 1)
             {
                 Game.MsgPrint("Not enough energy to enchant more than one object!");
-                s = oPtr.Count > 2 ? "were" : "was";
-                Game.MsgPrint($"{oPtr.Count - 1} of your {oName} {s} destroyed!");
-                oPtr.Count = 1;
+                s = oPtr.StackCount > 2 ? "were" : "was";
+                Game.MsgPrint($"{oPtr.StackCount - 1} of your {oName} {s} destroyed!");
+                oPtr.StackCount = 1;
             }
             okay = oPtr.CreateRandomArtifact(true);
         }

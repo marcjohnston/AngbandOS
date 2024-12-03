@@ -24,7 +24,7 @@ internal class DisintegrateProjectile : Projectile
         foreach (Item oPtr in cPtr.Items)
         {
             bool plural = false;
-            if (oPtr.Count > 1)
+            if (oPtr.StackCount > 1)
             {
                 plural = true;
             }
