@@ -22,7 +22,7 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
         {
             i += 10;
         }
-        int energy = Constants.ExtractEnergy[i];
+        int energy = Constants.ExtractEnergy[i]; // TODO: This causes a runtime error for out of bounds
         if (i > 110)
         {
             attr = ColorEnum.BrightGreen;

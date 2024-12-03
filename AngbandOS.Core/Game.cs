@@ -3979,7 +3979,7 @@ public bool IsDead = false;
             RunScript(nameof(GainMutationScript));
             GetFirstLevelMutation = false;
         }
-        Energy += Constants.ExtractEnergy[Speed.IntValue];
+        Energy += Constants.ExtractEnergy[Speed.IntValue]; // TODO: This causes a runtime error for out of bounds
         if (Energy < 100)
         {
             return;
