@@ -14594,7 +14594,7 @@ public bool IsDead = false;
         }
 
         // Check to see if we scanned every slot.
-        if (_invenCnt > InventorySlot.PackCount)
+        if (_invenCnt >= InventorySlot.PackCount)
         {
             return null;
         }
