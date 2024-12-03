@@ -82,6 +82,11 @@ internal abstract class ItemFactory : ItemEnhancement
     #endregion
 
     #region Concrete Methods and Properties (Non-abstract and non-virtual) - API Object Functionality
+    public Item GenerateItem()
+    {
+        return new Item(Game, this);
+    }
+
     public void Refill(Item item)
     {
         if (RefillScript == null)

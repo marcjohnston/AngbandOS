@@ -2041,7 +2041,7 @@ public bool IsDead = false;
                     continue;
                 }
             }
-            Item item = new Item(this, kIdx);
+            Item item = kIdx.GenerateItem();
             item.FixedArtifact = aPtr;
             return item;
         }
@@ -2069,7 +2069,7 @@ public bool IsDead = false;
             {
                 return null;
             }
-            item = new Item(this, kIdx);
+            item = kIdx.GenerateItem();
         }
         item.EnchantItem(ObjectLevel, true, good, great, true);
         item.StackCount = item.MakeObjectCount;
@@ -2106,7 +2106,8 @@ public bool IsDead = false;
         {
             goldType = goldItemFactories.Length - 1;
         }
-        return new Item(this, goldItemFactories[goldType.Value]);
+        ItemFactory itemFactory = goldItemFactories[goldType.Value];
+        return itemFactory.GenerateItem();
     }
 
     private void ResetUniqueOnlyGuardianStatus()
@@ -9822,7 +9823,7 @@ public bool IsDead = false;
         if (Race.OutfitsWithScrollsOfSatisfyHunger)
         {
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
-            Item item = new Item(this, scrollSatisfyHungerItemClass);
+            Item item = scrollSatisfyHungerItemClass.GenerateItem();
             item.StackCount = (char)RandomBetween(2, 5);
             item.IsFlavorAware = true;
             item.BecomeKnown();
@@ -9832,7 +9833,7 @@ public bool IsDead = false;
         else
         {
             ItemFactory rationFoodItemClass = SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
-            Item item = new Item(this, rationFoodItemClass);
+            Item item = rationFoodItemClass.GenerateItem();
             item.StackCount = RandomBetween(3, 7);
             item.IsFlavorAware = true;
             item.BecomeKnown();
@@ -9841,7 +9842,7 @@ public bool IsDead = false;
         if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
         {
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
-            Item item = new Item(this, scrollLightItemClass);
+            Item item = scrollLightItemClass.GenerateItem();
             item.StackCount = RandomBetween(3, 7);
             item.IsFlavorAware = true;
             item.BecomeKnown();
@@ -9851,7 +9852,7 @@ public bool IsDead = false;
         else
         {
             ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
-            Item item = new Item(this, woodenTorchItemClass);
+            Item item = woodenTorchItemClass.GenerateItem();
             item.StackCount = RandomBetween(3, 7);
             item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
             item.IsFlavorAware = true;

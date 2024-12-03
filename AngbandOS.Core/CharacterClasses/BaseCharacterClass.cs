@@ -476,7 +476,7 @@ internal abstract class BaseCharacterClass : IGetKey
             ItemFactory outfitItemFactory = Game.Race.OutfitItemClass(itemFactory);
 
             // Create an item from the factory.
-            Item item = new Item(Game, outfitItemFactory);
+            Item item = outfitItemFactory.GenerateItem();
             if (outfitItemFactory.AimingTuple != null)
             {
                 item.WandChargesRemaining = 1;

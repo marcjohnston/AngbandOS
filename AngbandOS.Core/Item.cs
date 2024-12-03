@@ -157,10 +157,61 @@ internal sealed class Item : IComparable<Item>
     #endregion
 
     #region API Methods
-    [Obsolete("Use new Item(Game, Item)")]
     public Item Clone(int? newCount = null) // TODO: Can this be a constructor?
     {
-        return new Item(Game, this);
+        Item clonedItem = _factory.GenerateItem();
+
+        // TODO: There is no way to ensure a cloned gets all of the properties
+        clonedItem.IdentSense = IdentSense;
+        clonedItem.IdentFixed = IdentFixed;
+        clonedItem.IdentEmpty = IdentEmpty;
+        clonedItem.IdentityIsKnown = IdentityIsKnown;
+        clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
+        clonedItem.IdentMental = IdentMental;
+        clonedItem.FixedArtifact = FixedArtifact;
+        clonedItem.RareItem = RareItem;
+        clonedItem.Characteristics = Characteristics;
+        clonedItem.RandomArtifactItemCharacteristics = RandomArtifactItemCharacteristics;
+        clonedItem.RandomPower = RandomPower;
+        clonedItem.StackCount = StackCount;
+        clonedItem.Discount = Discount;
+        clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
+        clonedItem.Inscription = Inscription;
+        clonedItem.WasNoticed = WasNoticed;
+        clonedItem.ActivationRechargeTimeRemaining = ActivationRechargeTimeRemaining;
+        clonedItem.ContainerTraps = ContainerTraps;
+        clonedItem.LevelOfObjectsInContainer = LevelOfObjectsInContainer;
+        clonedItem.ContainerIsOpen = ContainerIsOpen;
+        clonedItem.StaffChargesRemaining = StaffChargesRemaining;
+        clonedItem.WandChargesRemaining = WandChargesRemaining;
+        clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
+        clonedItem.X = X;
+        clonedItem.Y = Y;
+        clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
+        clonedItem.GoldPieces = GoldPieces;
+        clonedItem.RandomArtifactName = RandomArtifactName;
+        clonedItem.Characteristics.BonusHit = Characteristics.BonusHit;
+        clonedItem.Characteristics.BonusDamage = Characteristics.BonusDamage;
+        clonedItem.Characteristics.BonusArmorClass = Characteristics.BonusArmorClass;
+        clonedItem.ArmorClass = ArmorClass;
+        clonedItem.DamageDice = DamageDice;
+        clonedItem.DamageSides = DamageSides;
+        clonedItem.Characteristics.BonusStrength = Characteristics.BonusStrength;
+        clonedItem.Characteristics.BonusIntelligence = Characteristics.BonusIntelligence;
+        clonedItem.Characteristics.BonusWisdom = Characteristics.BonusWisdom;
+        clonedItem.Characteristics.BonusDexterity = Characteristics.BonusDexterity;
+        clonedItem.Characteristics.BonusConstitution = Characteristics.BonusConstitution;
+        clonedItem.Characteristics.BonusCharisma = Characteristics.BonusCharisma;
+        clonedItem.Characteristics.BonusStealth = Characteristics.BonusStealth;
+        clonedItem.Characteristics.BonusSearch = Characteristics.BonusSearch;
+        clonedItem.Characteristics.BonusInfravision = Characteristics.BonusInfravision;
+        clonedItem.Characteristics.BonusTunnel = Characteristics.BonusTunnel;
+        clonedItem.Characteristics.BonusAttacks = Characteristics.BonusAttacks;
+        clonedItem.Characteristics.BonusSpeed = Characteristics.BonusSpeed;
+        clonedItem.IsCursed = IsCursed;
+        clonedItem.IsBroken = IsBroken;
+
+        return clonedItem;
     }
 
     /// <summary>
@@ -2497,59 +2548,6 @@ internal sealed class Item : IComparable<Item>
     #endregion
 
     #region Constructors
-    public Item(Game game, Item cloneFrom) : this(game, cloneFrom._factory)
-    {
-        // TODO: There is no way to ensure a cloned gets all of the properties
-        IdentSense = cloneFrom.IdentSense;
-        IdentFixed = cloneFrom.IdentFixed;
-        IdentEmpty = cloneFrom.IdentEmpty;
-        IdentityIsKnown = cloneFrom.IdentityIsKnown;
-        IdentityIsStoreBought = cloneFrom.IdentityIsStoreBought;
-        IdentMental = cloneFrom.IdentMental;
-        FixedArtifact  = cloneFrom.FixedArtifact;
-        RareItem = cloneFrom.RareItem;
-        Characteristics  = cloneFrom.Characteristics;
-        RandomArtifactItemCharacteristics  = cloneFrom.RandomArtifactItemCharacteristics;
-        RandomPower  = cloneFrom.RandomPower;
-        StackCount = cloneFrom.StackCount;
-        Discount = cloneFrom.Discount;
-        HoldingMonsterIndex = cloneFrom.HoldingMonsterIndex;
-        Inscription = cloneFrom.Inscription;
-        WasNoticed  = cloneFrom.WasNoticed;
-        ActivationRechargeTimeRemaining = cloneFrom.ActivationRechargeTimeRemaining;
-        ContainerTraps  = cloneFrom.ContainerTraps;
-        LevelOfObjectsInContainer  = cloneFrom.LevelOfObjectsInContainer;
-        ContainerIsOpen  = cloneFrom.ContainerIsOpen;
-        StaffChargesRemaining = cloneFrom.StaffChargesRemaining;
-        WandChargesRemaining  = cloneFrom.WandChargesRemaining;
-        RodRechargeTimeRemaining  = cloneFrom.RodRechargeTimeRemaining;
-        X = cloneFrom.X;
-        Y = cloneFrom.Y;
-        TurnsOfLightRemaining = cloneFrom.TurnsOfLightRemaining;
-        GoldPieces = cloneFrom.GoldPieces;
-        RandomArtifactName  = cloneFrom.RandomArtifactName;
-        Characteristics.BonusHit = cloneFrom.Characteristics.BonusHit;
-        Characteristics.BonusDamage = cloneFrom.Characteristics.BonusDamage;
-        Characteristics.BonusArmorClass = cloneFrom.Characteristics.BonusArmorClass;
-        ArmorClass = cloneFrom.ArmorClass;
-        DamageDice = cloneFrom.DamageDice;
-        DamageSides = cloneFrom.DamageSides;
-        Characteristics.BonusStrength = cloneFrom.Characteristics.BonusStrength;
-        Characteristics.BonusIntelligence = cloneFrom.Characteristics.BonusIntelligence;
-        Characteristics.BonusWisdom = cloneFrom.Characteristics.BonusWisdom;
-        Characteristics.BonusDexterity = cloneFrom.Characteristics.BonusDexterity;
-        Characteristics.BonusConstitution = cloneFrom.Characteristics.BonusConstitution;
-        Characteristics.BonusCharisma = cloneFrom.Characteristics.BonusCharisma;
-        Characteristics.BonusStealth = cloneFrom.Characteristics.BonusStealth;
-        Characteristics.BonusSearch = cloneFrom.Characteristics.BonusSearch;
-        Characteristics.BonusInfravision = cloneFrom.Characteristics.BonusInfravision;
-        Characteristics.BonusTunnel = cloneFrom.Characteristics.BonusTunnel;
-        Characteristics.BonusAttacks = cloneFrom.Characteristics.BonusAttacks;
-        Characteristics.BonusSpeed = cloneFrom.Characteristics.BonusSpeed;
-        IsCursed = cloneFrom.IsCursed;
-        IsBroken = cloneFrom.IsBroken;
-    }
-
     public Item(Game game, ItemFactory factory)
     {
         Game = game;

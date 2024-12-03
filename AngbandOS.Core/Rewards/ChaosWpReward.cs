@@ -99,7 +99,7 @@ internal class ChaosWpReward : Reward
                 reward = Game.SingletonRepository.Get<ItemFactory>(nameof(BladeOfChaosWeaponItemFactory));
                 break;
         }
-        Item qPtr = new Item(Game, reward);
+        Item qPtr = reward.GenerateItem();
         qPtr.Characteristics.BonusHit = 3 + (Game.DieRoll(Game.Difficulty) % 10);
         qPtr.Characteristics.BonusDamage = 3 + (Game.DieRoll(Game.Difficulty) % 10);
         qPtr.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));

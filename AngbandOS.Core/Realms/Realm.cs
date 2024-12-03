@@ -50,7 +50,7 @@ internal abstract class Realm : IGetKey
         ItemFactory outfitItem = SpellBooks[0];
 
         // Create an item from the factory.
-        Item item = new Item(Game, outfitItem);
+        Item item = outfitItem.GenerateItem();
 
         Game.OutfitPlayerWithItem(item);
     }
