@@ -493,7 +493,7 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Wields the item in the first available wield slot and returns true, if successful; false, otherwise.
+    /// Attempts to wield the item in the first available wield slot and return true, if successful; false, otherwise.
     /// </summary>
     /// <returns></returns>
     public bool Wield()
