@@ -14609,6 +14609,7 @@ public bool IsDead = false;
         int i = j;
         if (i < InventorySlot.PackCount)
         {
+            // Use a merge sort to insert the item into the pack based on the sorting rules.
             for (j = 0; j < InventorySlot.PackCount; j++)
             {
                 Item? jPtr = GetInventoryItem(j);
