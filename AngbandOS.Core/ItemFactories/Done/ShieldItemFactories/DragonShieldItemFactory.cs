@@ -47,7 +47,7 @@ internal class DragonShieldItemFactory : ItemFactory
     public override int Weight => 100;
 
     protected override string ItemClassBindingKey => nameof(ShieldsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(ArmWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(ArmWieldSlot) };
     public override int PackSort => 23;
     public override bool HatesAcid => true;
 

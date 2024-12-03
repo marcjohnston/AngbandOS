@@ -40,7 +40,7 @@ internal class AdamantitePlateMailHardItemFactory : ItemFactory
     public override int Weight => 420;
 
     protected override string ItemClassBindingKey => nameof(HardArmorsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(OnBodyWieldSlot) };
     public override int PackSort => 20;
     public override bool HatesAcid => true;
 

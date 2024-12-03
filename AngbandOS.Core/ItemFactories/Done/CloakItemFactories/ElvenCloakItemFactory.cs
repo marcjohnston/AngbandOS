@@ -54,7 +54,7 @@ internal class ElvenCloakItemFactory : ItemFactory
     public override int Weight => 5;
 
     protected override string ItemClassBindingKey => nameof(CloaksItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(AboutBodyWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(AboutBodyWieldSlot) };
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

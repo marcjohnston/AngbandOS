@@ -39,7 +39,7 @@ internal class MithrilPlateMailHardItemFactory : ItemFactory
     public override int BonusHit => -3;
     public override int Weight => 300;
     protected override string ItemClassBindingKey => nameof(HardArmorsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(OnBodyWieldSlot) };
     public override int PackSort => 20;
     public override bool HatesAcid => true;
 

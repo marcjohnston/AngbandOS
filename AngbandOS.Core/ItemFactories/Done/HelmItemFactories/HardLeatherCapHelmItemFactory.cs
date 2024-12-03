@@ -36,7 +36,7 @@ internal class HardLeatherCapHelmItemFactory : ItemFactory
     public override int Weight => 15;
 
     protected override string ItemClassBindingKey => nameof(HelmsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(HeadWieldSlot) };
     public override int PackSort => 25;
     public override bool HatesAcid => true;
 

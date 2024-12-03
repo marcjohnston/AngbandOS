@@ -47,7 +47,7 @@ internal class JewelEncrustedCrownItemFactory : ItemFactory
     public override int Weight => 40;
     protected override string ItemClassBindingKey => nameof(CrownsItemClass);
 
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(HeadWieldSlot) };
     public override bool HatesAcid => true;
 
     public override int PackSort => 24;

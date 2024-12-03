@@ -242,7 +242,7 @@ internal sealed class Item : IComparable<Item>
     public bool CapableOfVorpalSlaying => _factory.CapableOfVorpalSlaying;
     public bool CanBeWeaponOfLaw => _factory.CanBeWeaponOfLaw;
 
-    public WieldSlot[] BaseWieldSlots => _factory.BaseWieldSlots;
+    public WieldSlot[] WieldSlots => _factory.WieldSlots;
     public ColorEnum FlavorColor => _factory.FlavorColor; // TODO: Rename to represent current or assigned
     public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
     public ColorEnum Color => _factory.Color; // TODO: Rename to represent raw or original or base
@@ -498,7 +498,7 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public bool Wield()
     {
-        foreach (WieldSlot wieldSlot in BaseWieldSlots)
+        foreach (WieldSlot wieldSlot in WieldSlots)
         {
             if (wieldSlot.Count < wieldSlot.MaximumItemSlots)
             {

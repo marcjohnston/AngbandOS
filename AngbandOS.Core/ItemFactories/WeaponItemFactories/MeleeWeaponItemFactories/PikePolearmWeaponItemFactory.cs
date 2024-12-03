@@ -39,7 +39,7 @@ internal class PikePolearmWeaponItemFactory : WeaponItemFactory
 
     public override bool CanApplyBlessedArtifactBias => true;
 
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;
 
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]

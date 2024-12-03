@@ -32,7 +32,7 @@ internal class StarEssenceElendilLightSourceItemFactory : ItemFactory
     public override bool ProvidesSunlight => true;
 
     protected override string ItemClassBindingKey => nameof(LightSourcesItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(LightsourceWieldSlot) };
+    protected override string[] WieldSlotBindingKeys => new string[] { nameof(LightsourceWieldSlot) };
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

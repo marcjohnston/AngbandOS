@@ -152,7 +152,7 @@ internal abstract class ItemFactory : ItemEnhancement
         FlavorSymbol = Symbol;
         FlavorColor = Color;
 
-        BaseWieldSlots = Game.SingletonRepository.Get<WieldSlot>(BaseWieldSlotBindingKeys);
+        WieldSlots = Game.SingletonRepository.Get<WieldSlot>(WieldSlotBindingKeys);
 
         // Bind the MassProduceTuples
         if (MassProduceBindingTuples != null)
@@ -1404,9 +1404,9 @@ internal abstract class ItemFactory : ItemEnhancement
 
     /// <summary>
     /// Returns the inventory slots where the item can be wielded.  Items will be placed in the first wield slot that is available. Rings use multiple wield slots for left and right hands. 
-    /// Returns the pack, by default.  This property is bound from the <see cref="BaseWieldSlotBindingKey"/> property during the binding phase.
+    /// Returns the pack, by default.  This property is bound from the <see cref="WieldSlotBindingKeys"/> property during the binding phase.
     /// </summary>
-    public WieldSlot[] BaseWieldSlots { get; private set; }
+    public WieldSlot[] WieldSlots { get; private set; }
 
     /// <summary>
     /// Returns a Roll that is used to determine the number of gold pieces that are given to the player when the item is picked up.  This property is bound from the
@@ -1923,9 +1923,9 @@ internal abstract class ItemFactory : ItemEnhancement
 
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Items will be wielded in the first slot that is available.  Rings use multiple wield slots for left and right hands.
-    /// Returns the pack, by default.  This property is used to bind the <see cref="BaseWieldSlot"/>  property during the binding phase.
+    /// Returns the pack, by default.  This property is used to bind the <see cref="WieldSlots"/>  property during the binding phase.
     /// </summary>
-    protected virtual string[] BaseWieldSlotBindingKeys => new string[] { nameof(PackWieldSlot) };
+    protected virtual string[] WieldSlotBindingKeys => new string[] { nameof(PackWieldSlot) };
 
     /// <summary>
     /// Returns true, if the destroy script should ask the player if known items from this factory should be destroyed by setting the applicable 
