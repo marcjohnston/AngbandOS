@@ -22,6 +22,7 @@ global using AngbandOS.Core.ChestTraps;
 global using AngbandOS.Core.ClassSpells;
 global using AngbandOS.Core.Commands;
 global using AngbandOS.Core.ConsoleElements;
+global using AngbandOS.Core.DungeonGenerators;
 global using AngbandOS.Core.DungeonGuardians;
 global using AngbandOS.Core.Dungeons;
 global using AngbandOS.Core.MonsterSelectors;

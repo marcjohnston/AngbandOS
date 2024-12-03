@@ -7,7 +7,7 @@
 
 using System.Diagnostics;
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.DungeonGenerators;
 
 [Serializable]
 internal class StandardDungeonGenerator : DungeonGenerator
@@ -94,8 +94,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 int tester2 = Game.DieRoll(Game.MaxWid / Constants.PlayableScreenWidth);
                 Game.CurHgt = tester1 * Constants.PlayableScreenHeight;
                 Game.CurWid = tester2 * Constants.PlayableScreenWidth;
-                Game.MaxPanelRows = (Game.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                Game.MaxPanelCols = (Game.CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                Game.MaxPanelRows = Game.CurHgt / Constants.PlayableScreenHeight * 2 - 2;
+                Game.MaxPanelCols = Game.CurWid / Constants.PlayableScreenWidth * 2 - 2;
                 Game.PanelRow = Game.MaxPanelRows;
                 Game.PanelCol = Game.MaxPanelCols;
             }
@@ -103,8 +103,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 Game.CurHgt = Game.MaxHgt;
                 Game.CurWid = Game.MaxWid;
-                Game.MaxPanelRows = (Game.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                Game.MaxPanelCols = (Game.CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                Game.MaxPanelRows = Game.CurHgt / Constants.PlayableScreenHeight * 2 - 2;
+                Game.MaxPanelCols = Game.CurWid / Constants.PlayableScreenWidth * 2 - 2;
                 Game.PanelRow = Game.MaxPanelRows;
                 Game.PanelCol = Game.MaxPanelCols;
             }
@@ -149,7 +149,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             int rIdx = GetQuestMonster();
             int qIdx = Game.GetQuestNumber();
-            while (Game.SingletonRepository.Get<MonsterRace>(rIdx).CurNum < (Game.Quests[qIdx].ToKill - Game.Quests[qIdx].Killed))
+            while (Game.SingletonRepository.Get<MonsterRace>(rIdx).CurNum < Game.Quests[qIdx].ToKill - Game.Quests[qIdx].Killed)
             {
                 PutQuestMonster(Game.Quests[qIdx].RIdx);
             }
@@ -360,13 +360,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 GridTile cPtr = Game.Map.Grid[y][x];
                 double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
                 v = (v + 1) / 2;
-                double dX = Math.Abs(x - (Game.CurWid / 2)) * widthDivisor;
-                double dY = Math.Abs(y - (Game.CurHgt / 2)) * heightDivisor;
+                double dX = Math.Abs(x - Game.CurWid / 2) * widthDivisor;
+                double dY = Math.Abs(y - Game.CurHgt / 2) * heightDivisor;
                 double d = Math.Max(dX, dY);
                 const double elevation = 0.05;
                 const double steepness = 6.0;
                 const double dropoff = 50.0;
-                v += elevation - (dropoff * Math.Pow(d, steepness));
+                v += elevation - dropoff * Math.Pow(d, steepness);
                 v = Math.Min(1, Math.Max(0, v));
                 int rounded = (int)(v * 10);
                 if (rounded < 2 || rounded > 5)
