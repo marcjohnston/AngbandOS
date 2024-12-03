@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.InventorySlots;
 
 [Serializable]
-internal class LightsourceInventorySlot : EquipmentInventorySlot
+internal class LightsourceWieldSlot : EquipmentWieldSlot
 {
-    private LightsourceInventorySlot(Game game) : base(game) { }
+    private LightsourceWieldSlot(Game game) : base(game) { }
     public override string Label(int index) => "g";
     public override string Label(Item oPtr) => "g";
     public override int[] InventorySlots => new int[] { InventorySlot.Lightsource };

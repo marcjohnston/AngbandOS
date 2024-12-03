@@ -132,7 +132,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     {
         // Determine if the stat is granted via any equipment.  This allows us to choose the color before rendering any of the inventory slots.
         bool anyHasStat = false;
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
@@ -154,7 +154,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
         // Now render all of the inventory slots.
         int index = 0;
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {

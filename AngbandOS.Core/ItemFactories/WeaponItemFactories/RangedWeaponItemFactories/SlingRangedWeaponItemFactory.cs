@@ -48,7 +48,7 @@ internal class SlingRangedWeaponItemFactory : RangedWeaponItemFactory
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatRangedWeaponEnchantmentScript) })
    };
 
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(RangedWeaponInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(RangedWeaponWieldSlot) };
     public override bool CanApplyBlowsBonus => true;
 
     public override int PackSort => 32;

@@ -36,7 +36,7 @@ internal class SoftLeatherSoftItemFactory : ItemFactory
     public override int Weight => 80;
 
     protected override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyWieldSlot) };
     public override int PackSort => 21;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.InventorySlots;
 
 [Serializable]
-internal class HandsInventorySlot : EquipmentInventorySlot
+internal class HandsWieldSlot : EquipmentWieldSlot
 {
     private bool RestrictingGloves;
-    private HandsInventorySlot(Game game) : base(game) { }
+    private HandsWieldSlot(Game game) : base(game) { }
     public override string Label(int index) => "l";
     public override string Label(Item oPtr) => "l";
     public override int[] InventorySlots => new int[] { InventorySlot.Hands };

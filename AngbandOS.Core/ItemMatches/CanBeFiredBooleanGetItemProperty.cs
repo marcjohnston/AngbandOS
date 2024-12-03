@@ -15,7 +15,7 @@ internal class CanBeFiredBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeFired";
     public override bool Get(Item item)
     {
-        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
+        RangedWeaponWieldSlot rangedWeaponInventorySlot = (RangedWeaponWieldSlot)Game.SingletonRepository.Get<WieldSlot>(nameof(RangedWeaponWieldSlot));
         WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
         Item? rangedWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
         return rangedWeapon != null && item.IsAmmunitionFor(rangedWeapon);

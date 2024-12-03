@@ -44,7 +44,7 @@ internal class DwarvenShovelDiggingWeaponItemFactory : WeaponItemFactory
         (new int[] {1}, null, new string[] { nameof(GoodHit1D5P5BEnchantmentScript), nameof(GoodDamage1D5P5BEnchantmentScript) }),
         (new int[] {2}, null, new string[] { nameof(GreatHit1D5P5BP10BEnchantmentScript), nameof(GreatDamage1D5P5BP10BEnchantmentScript), nameof(GreatAmmoEnchantmentScript) })
     };
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(DiggerInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(DiggerWieldSlot) };
     public override int PackSort => 31;
     public override bool GetsDamageMultiplier => true;
 }

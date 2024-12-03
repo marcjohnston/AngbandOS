@@ -39,7 +39,7 @@ internal class CestiGlovesItemFactory : ItemFactory
     protected override string ItemClassBindingKey => nameof(GlovesItemClass);
 
     public override int PackSort => 26;
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HandsInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HandsWieldSlot) };
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

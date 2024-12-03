@@ -19,7 +19,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessByChanceScript
     public bool ExecuteSuccessByChanceScript()
     {
         // Select an inventory slot where items can be disenchanted.
-        BaseInventorySlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
+        WieldSlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
         if (inventorySlot == null)
         {
             // There are no inventory slots capable of being disenchanted.

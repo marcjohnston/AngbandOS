@@ -47,7 +47,7 @@ internal class ShadowCloakItemFactory : ItemFactory
     };
 
     protected override string ItemClassBindingKey => nameof(CloaksItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(AboutBodyInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(AboutBodyWieldSlot) };
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

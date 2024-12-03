@@ -45,7 +45,7 @@ internal class ClothCloakItemFactory : ItemFactory
     public override int Weight => 10;
 
     protected override string ItemClassBindingKey => nameof(CloaksItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(AboutBodyInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(AboutBodyWieldSlot) };
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 

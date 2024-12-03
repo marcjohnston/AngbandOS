@@ -48,7 +48,7 @@ internal class GoldenCrownItemFactory : ItemFactory
 
     protected override string ItemClassBindingKey => nameof(CrownsItemClass);
 
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadWieldSlot) };
     public override bool HatesAcid => true;
 
     public override int PackSort => 24;

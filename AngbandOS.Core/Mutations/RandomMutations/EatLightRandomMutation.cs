@@ -28,7 +28,7 @@ internal class EatLightRandomMutation : Mutation
         {
             Game.RestoreHealth(10);
         }
-        BaseInventorySlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.ProvidesLight).ChooseOrDefault();
+        WieldSlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.ProvidesLight).ChooseOrDefault();
         if (inventorySlot == null)
         {
             return;

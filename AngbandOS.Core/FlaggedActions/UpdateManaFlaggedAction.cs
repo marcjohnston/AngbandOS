@@ -34,17 +34,17 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp += msp / 4;
         }
 
-        // Allow inventory slots access to the CalcMana process.
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
+        // Allow wield slots to access to the CalcMana process.
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
         {
-            // Update the mana for the inventory slot.
+            // Update the mana for the wield slot.
             msp = inventorySlot.CalcMana(Game, msp);
         }
 
         if (Game.BaseCharacterClass.WeightEncumbersMovement)
         {
             int curWgt = 0;
-            foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
+            foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
             {
                 if (inventorySlot.IsWeightRestricting)
                 {

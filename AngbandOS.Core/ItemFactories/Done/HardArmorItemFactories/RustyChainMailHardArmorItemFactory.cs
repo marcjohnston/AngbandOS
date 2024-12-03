@@ -39,7 +39,7 @@ internal class RustyChainMailHardItemFactory : ItemFactory
     public override int BonusHit => -5;
     public override int Weight => 200;
     protected override string ItemClassBindingKey => nameof(HardArmorsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyWieldSlot) };
     public override int PackSort => 20;
     public override bool HatesAcid => true;
 

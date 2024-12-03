@@ -43,7 +43,7 @@ internal class LeadCrownItemFactory : ItemFactory
         (new int[] { 2 }, null, new string[] { nameof(GreatCrownEnchantmentScript) })
     };
     
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(HeadWieldSlot) };
     public override bool HatesAcid => true;
 
     public override int PackSort => 24;

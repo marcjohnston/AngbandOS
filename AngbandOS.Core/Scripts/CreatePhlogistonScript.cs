@@ -18,7 +18,7 @@ internal class CreatePhlogistonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
+        LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)Game.SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
         Item? item = Game.GetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault());
         if (item == null)
         {

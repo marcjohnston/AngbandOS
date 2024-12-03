@@ -49,7 +49,7 @@ internal class RedDragonScaleMailItemFactory : ItemFactory
     /// </summary>
     public override int TreasureRating => 30;
     protected override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(OnBodyWieldSlot) };
     public override int PackSort => 19;
     public override bool HatesAcid => true;
 

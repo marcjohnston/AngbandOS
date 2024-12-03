@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Interfaces;
 internal interface IItemContainer
 {
     /// <summary>
-    /// Modifies the quantity of an item.  The modification process differs depending on the type of container containing the item (e.g. inventory slots will update the player stats, monster and grid tile containers do not).
+    /// Modifies the quantity of an item.  The modification process differs depending on the type of container containing the item (e.g. wield slots will update the player stats, monster and grid tile containers do not).
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
     void ItemIncrease(Item oPtr, int num);
 
     /// <summary>
-    /// Returns a description of the item as it is in the container.  For an inventory slot, the description is rendered as possessive; non-inventory slots, render as the player is viewing the item.
+    /// Returns a description of the item as it is in the container.  For a wield slot, the description is rendered as possessive; non-wield slots, render as the player is viewing the item.
     /// </summary>
     /// <param name="item"></param>
     string DescribeContainer(Item oPtr);
@@ -32,17 +32,17 @@ internal interface IItemContainer
     void ItemOptimize(Item oPtr);
 
     /// <summary>
-    /// Returns true, if the container is part of the players inventory.  All inventory slots (pack & equipment), return true; monsters and grid tiles return false.
+    /// Returns true, if the container is part of the players inventory.  All wield slots (pack & equipment), return true; monsters and grid tiles return false.
     /// </summary>
-    bool IsInInventory { get; }
+    bool IsWielded { get; }
 
     /// <summary>
-    /// Returns true, if the container is part of the players wielding/worn equipment.  Equipment inventory slots, return true; the pack inventory slot, monsters and grid tiles return false.
+    /// Returns true, if the container is part of the players wielding/worn equipment.  Equipment wield slots, return true; the pack wield slot, monsters and grid tiles return false.
     /// </summary>
-    bool IsInEquipment { get; }
+    bool IsWieldedAsEquipment { get; }
 
     /// <summary>
-    /// Returns a description of the location for the item.  An item in the players inventory will return "In your pack", being wielded by the player will return the inventory slot wield description,
+    /// Returns a description of the location for the item.  An item in the players inventory will return "In your pack", being wielded by the player will return the wield slot wield description,
     /// monsters and grid tiles aren't really used yet but location descriptions have been added.
     /// </summary>
     string DescribeItemLocation(Item oPtr);

@@ -180,7 +180,7 @@ internal sealed class Item : IComparable<Item>
     public bool CapableOfVorpalSlaying => _factory.CapableOfVorpalSlaying;
     public bool CanBeWeaponOfLaw => _factory.CanBeWeaponOfLaw;
 
-    public BaseInventorySlot[] BaseWieldSlots => _factory.BaseWieldSlots;
+    public WieldSlot[] BaseWieldSlots => _factory.BaseWieldSlots;
     public ColorEnum FlavorColor => _factory.FlavorColor; // TODO: Rename to represent current or assigned
     public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
     public ColorEnum Color => _factory.Color; // TODO: Rename to represent raw or original or base
@@ -306,7 +306,7 @@ internal sealed class Item : IComparable<Item>
     public IItemContainer GetContainer()
     {
         // Check to see if the item is in the players inventory.
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {
@@ -349,7 +349,7 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Modifies the quantity of an item.  The modification process differs depending on the type of container containing the item (e.g. inventory slots will update the player stats, monster and grid tile containers do not).
+    /// Modifies the quantity of an item.  The modification process differs depending on the type of container containing the item (e.g. wield slots will update the player stats, monster and grid tile containers do not).
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
@@ -360,7 +360,7 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive; non-inventory slots, render as the player is viewing the item.
+    /// Renders a description of the item.  For a wield slot, the description is rendered as possessive; non-wield slots, render as the player is viewing the item.
     /// </summary>
     /// <param name="item"></param>
     public void ItemDescribe()
@@ -385,14 +385,14 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Returns true, if the container is part of the players inventory.  All inventory slots (pack & equipment), return true; monsters and grid tiles return false.
+    /// Returns true, if the container is part of the players inventory.  All wield slots (pack & equipment), return true; monsters and grid tiles return false.
     /// </summary>
     public bool IsInInventory
     {
         get
         {
             IItemContainer container = GetContainer();
-            return container.IsInInventory;
+            return container.IsWielded;
         }
     }
 
@@ -404,7 +404,7 @@ internal sealed class Item : IComparable<Item>
         get
         {
             IItemContainer container = GetContainer();
-            return container.IsInEquipment;
+            return container.IsWieldedAsEquipment;
         }
     }
 
@@ -423,11 +423,11 @@ internal sealed class Item : IComparable<Item>
 
     public bool Wield()
     {
-        foreach (BaseInventorySlot baseInventorySlot in BaseWieldSlots)
+        foreach (WieldSlot wieldSlot in BaseWieldSlots)
         {
-            if (baseInventorySlot.Count < baseInventorySlot.MaximumItemSlots)
+            if (wieldSlot.Count < wieldSlot.MaximumItemSlots)
             {
-                baseInventorySlot.AddItem(this);
+                wieldSlot.AddItem(this);
                 return true;
             }
         }

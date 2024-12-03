@@ -11,16 +11,16 @@ namespace AngbandOS.Core.InventorySlots;
 /// Represents a base class for inventory slots that represent equipment inventory slots.
 /// </summary>
 [Serializable]
-internal abstract class EquipmentInventorySlot : BaseInventorySlot
+internal abstract class EquipmentWieldSlot : WieldSlot
 {
-    protected EquipmentInventorySlot(Game game) : base(game) { }
+    protected EquipmentWieldSlot(Game game) : base(game) { }
 
     /// <summary>
     /// Returns true.
     /// </summary>
     public override bool IsEquipment => true;
 
-    public override bool IsInEquipment => true;
+    public override bool IsWieldedAsEquipment => true;
 
     /// Checks the quantity of an item and removes it, when the quanity is zero.
     /// </summary>

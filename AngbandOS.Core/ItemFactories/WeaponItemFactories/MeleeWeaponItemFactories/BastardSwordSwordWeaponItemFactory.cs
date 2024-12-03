@@ -42,7 +42,7 @@ internal class BastardSwordSwordWeaponItemFactory : WeaponItemFactory
     public override bool CanApplyBlessedArtifactBias => true;
     public override bool CanVorpalSlay => true;
 
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;
 
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]

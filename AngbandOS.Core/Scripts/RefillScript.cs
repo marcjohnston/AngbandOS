@@ -29,7 +29,7 @@ internal class RefillScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Make sure we actually have a light source to refuel.           
-        BaseInventorySlot? chosenLightSourceInventorySlot = Game.SingletonRepository.ToWeightedRandom<BaseInventorySlot>(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
+        WieldSlot? chosenLightSourceInventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
 
         // Check to ensure there is an inventory slot for light sources.
         if (chosenLightSourceInventorySlot == null)

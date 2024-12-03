@@ -10,9 +10,9 @@ using System;
 namespace AngbandOS.Core.InventorySlots;
 
 [Serializable]
-internal class RangedWeaponInventorySlot : EquipmentInventorySlot
+internal class RangedWeaponWieldSlot : EquipmentWieldSlot
 {
-    private RangedWeaponInventorySlot(Game game) : base(game) { }
+    private RangedWeaponWieldSlot(Game game) : base(game) { }
     public override string Label(int index) => "b";
     public override string Label(Item oPtr) => "b";
     public override int[] InventorySlots => new int[] { InventorySlot.RangedWeapon };

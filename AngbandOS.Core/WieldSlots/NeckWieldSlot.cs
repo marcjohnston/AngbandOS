@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.InventorySlots;
 
 [Serializable]
-internal class NeckInventorySlot : EquipmentInventorySlot
+internal class NeckWieldSlot : EquipmentWieldSlot
 {
-    private NeckInventorySlot(Game game) : base(game) { }
+    private NeckWieldSlot(Game game) : base(game) { }
     public override int[] InventorySlots => new int[] { InventorySlot.Neck };
     public override string Label(int index) => "f";
     public override string Label(Item oPtr) => "f";

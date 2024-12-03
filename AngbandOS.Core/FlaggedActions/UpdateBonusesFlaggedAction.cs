@@ -184,7 +184,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Game.HasSustainCharisma = true;
             }
         }
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
@@ -458,7 +458,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if ((Game.BaseCharacterClass.ID == CharacterClass.Monk || Game.BaseCharacterClass.ID == CharacterClass.Mystic) && !Game.MartialArtistHeavyArmor())
         {
-            foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
+            foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
             {
                 if (inventorySlot.Count == 0)
                 {
@@ -660,7 +660,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Dexterity].DexAttackBonus;
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Strength].StrAttackBonus;
         int hold = Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
-        foreach (BaseInventorySlot rangedWeaponInventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
+        foreach (WieldSlot rangedWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
         {
             foreach (int index in rangedWeaponInventorySlot.InventorySlots)
             {
@@ -712,7 +712,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
         }
 
-        foreach (BaseInventorySlot meleeWeaponInventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
+        foreach (WieldSlot meleeWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
         {
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
             {
@@ -869,7 +869,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint("You have trouble wielding such a heavy bow.");
             }
-            else if (Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot)).Count > 0)
+            else if (Game.SingletonRepository.Get<WieldSlot>(nameof(RangedWeaponWieldSlot)).Count > 0)
             {
                 Game.MsgPrint("You have no trouble wielding your bow.");
             }
@@ -885,7 +885,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint("You have trouble wielding such a heavy weapon.");
             }
-            else if (Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot)).Count > 0)
+            else if (Game.SingletonRepository.Get<WieldSlot>(nameof(MeleeWeaponWieldSlot)).Count > 0)
             {
                 Game.MsgPrint("You have no trouble wielding your weapon.");
             }

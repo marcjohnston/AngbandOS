@@ -10,11 +10,11 @@ using System.Collections;
 namespace AngbandOS.Core.InventorySlots;
 
 [Serializable]
-internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IGetKey // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
+internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
     protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
     protected readonly Game Game;
-    protected BaseInventorySlot(Game game)
+    protected WieldSlot(Game game)
     {
         Game = game;
     }
@@ -108,7 +108,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     [Obsolete("Use InventorySlot.Items WIP")]
     protected int FindInventorySlot(Item oPtr)
     {
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {
@@ -131,9 +131,9 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// <summary>
     /// Returns true, because the item container belongs to the players inventory (pack & equipment).
     /// </summary>
-    public bool IsInInventory => true;
+    public bool IsWielded => true;
 
-    public abstract bool IsInEquipment { get; }
+    public abstract bool IsWieldedAsEquipment { get; }
 
     /// <summary>
     /// Hooks into the ProcessWorld event.  All inventory slots receive this event and can perform additional processing based on the items being carried, either in a pack or by being

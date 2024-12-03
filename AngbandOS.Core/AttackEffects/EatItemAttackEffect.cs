@@ -27,7 +27,7 @@ internal class EatItemAttackEffect : AttackEffect
         // Have ten tries at picking a suitable item to steal
         for (int k = 0; k < 10; k++)
         {
-            BaseInventorySlot packInventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
+            WieldSlot packInventorySlot = Game.SingletonRepository.Get<WieldSlot>(nameof(PackWieldSlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = Game.GetInventoryItem(i);
             if (item != null && !item.IsArtifact)

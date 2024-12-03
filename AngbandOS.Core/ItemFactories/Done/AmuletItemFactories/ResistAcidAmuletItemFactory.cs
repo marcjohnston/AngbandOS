@@ -35,7 +35,7 @@ internal class ResistAcidAmuletItemFactory : ItemFactory
     public override bool IsMagical => true;
 
     protected override string ItemClassBindingKey => nameof(AmuletsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(NeckInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(NeckWieldSlot) };
     public override int PackSort => 17;
     public override int BaseValue => 45;
     public override ColorEnum Color => ColorEnum.Orange;

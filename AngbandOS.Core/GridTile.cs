@@ -178,8 +178,8 @@ internal class GridTile : IItemContainer
     /// <summary>
     /// Returns false, because the item container doesn't belong to the players inventory.
     /// </summary>
-    public bool IsInInventory => false;
-    public bool IsInEquipment => false;
+    public bool IsWielded => false;
+    public bool IsWieldedAsEquipment => false;
 
     public void RevertToBackground()
     {

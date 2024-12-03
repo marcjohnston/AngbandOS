@@ -30,7 +30,7 @@ internal class SenseInventoryScript : Script, IScript
         bool detailed = Game.BaseCharacterClass.DetailedSenseInventory;
 
         // Enumerate each of the inventory slots.
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
         {
             // Enumerate each of the items in the inventory slot.
             foreach (int i in inventorySlot)

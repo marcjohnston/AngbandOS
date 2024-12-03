@@ -2787,7 +2787,7 @@ public bool IsDead = false;
         }
         if (canChooseFromEquipment)
         {
-            foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+            foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
             {
                 foreach (int ii in inventorySlot.InventorySlots)
                 {
@@ -4229,8 +4229,8 @@ public bool IsDead = false;
         }
         bool caveNoRegen = false;
 
-        // Allow all inventory slots access to the process world.
-        foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>())
+        // Allow all wield slots access to the process world.
+        foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>())
         {
             ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs();
             inventorySlot.ProcessWorld(inventorySlotProcessWorldEventArgs);
@@ -6258,18 +6258,18 @@ public bool IsDead = false;
 
     private bool MinusAc()
     {
-        // Generate a weighted random for armor inventory slots.
-        WeightedRandom<BaseInventorySlot> inventorySlotsWeightedRandom = SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.IsArmor);
+        // Generate a weighted random for armor wield slots.
+        WeightedRandom<WieldSlot> wieldSlotsWeightedRandom = SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.IsArmor);
 
-        // Choose one of those inventory slots.
-        BaseInventorySlot? inventorySlot = inventorySlotsWeightedRandom.ChooseOrDefault();
+        // Choose one of those wield slots.
+        WieldSlot? wieldSlot = wieldSlotsWeightedRandom.ChooseOrDefault();
 
-        if (inventorySlot == null)
+        if (wieldSlot == null)
         {
-            // No inventory slots are affected by acid or the slot is empty.
+            // No wield slots are affected by acid or the slot is empty.
             return false;
         }
-        Item? oPtr = GetInventoryItem(inventorySlot.WeightedRandom.ChooseOrDefault());
+        Item? oPtr = GetInventoryItem(wieldSlot.WeightedRandom.ChooseOrDefault());
         if (oPtr == null)
         {
             return false;
@@ -6698,7 +6698,7 @@ public bool IsDead = false;
     /// <returns> true if there was armor to curse, false otherwise </returns>
     public bool CurseArmor()
     {
-        BaseInventorySlot? inventorySlot = SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.CanBeCursed).ChooseOrDefault();
+        WieldSlot? inventorySlot = SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.CanBeCursed).ChooseOrDefault();
 
         // Check to see if there are any slots capable of cursing.
         if (inventorySlot == null)
@@ -9858,7 +9858,7 @@ public bool IsDead = false;
             item.BecomeKnown();
             InventoryCarry(item);
             Item carried = item.Clone(1);
-            LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
+            LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
             WeightCarried += carried.Weight;
         }
@@ -13128,7 +13128,7 @@ public bool IsDead = false;
         {
             return false;
         }
-        foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>())
+        foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>())
         {
             if (inventorySlot.IsArmor)
             {
@@ -13444,7 +13444,7 @@ public bool IsDead = false;
     public void DisplayPlayerEquippy(int screenRow, int screenCol)
     {
         int column = 0;
-        foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
+        foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
         {
             foreach (int index in inventorySlot.InventorySlots)
             {
@@ -13765,7 +13765,7 @@ public bool IsDead = false;
 
     public string DescribeWieldLocation(int index)
     {
-        BaseInventorySlot inventorySlot = SingletonRepository.Get<BaseInventorySlot>().Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(index));
+        WieldSlot inventorySlot = SingletonRepository.Get<WieldSlot>().Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(index));
         return inventorySlot.DescribeWieldLocation(index);
     }
 
@@ -14893,14 +14893,14 @@ public bool IsDead = false;
     /// <param name="itemFilter"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public bool ShowInven(Func<BaseInventorySlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, ShowInventoryOptions? options = null)
+    public bool ShowInven(Func<WieldSlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, ShowInventoryOptions? options = null)
     {
         if (options == null)
         {
             options = new ShowInventoryOptions();
         }
 
-        BaseInventorySlot[] inventorySlots = SingletonRepository.Get<BaseInventorySlot>()
+        WieldSlot[] inventorySlots = SingletonRepository.Get<WieldSlot>()
             .Where(_inventorySlot => inventorySlotPredicate(_inventorySlot))
             .OrderBy(_inventorySlot => _inventorySlot.SortOrder)
             .ToArray();
@@ -14910,7 +14910,7 @@ public bool IsDead = false;
         consoleTable.Column("flavor").IsVisible = options.ShowFlavorColumn;
         consoleTable.Column("usage").IsVisible = options.ShowFlavorColumn;
         consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
-        foreach (BaseInventorySlot inventorySlot in inventorySlots)
+        foreach (WieldSlot inventorySlot in inventorySlots)
         {
             bool slotIsEmpty = true;
             foreach (int index in inventorySlot.InventorySlots)

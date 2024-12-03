@@ -56,7 +56,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         }
 
         // Find and empty inventory slot where the item is to be wielded.
-        BaseInventorySlot slot;
+        WieldSlot slot;
         int slotIndex = 0;
         do
         {

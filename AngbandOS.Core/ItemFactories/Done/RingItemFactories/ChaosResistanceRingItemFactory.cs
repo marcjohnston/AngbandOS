@@ -36,7 +36,7 @@ internal class ChaosResistanceRingItemFactory : ItemFactory
 
     protected override string ItemClassBindingKey => nameof(RingsItemClass);
 
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(RightHandInventorySlot), nameof(LeftHandInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(RightHandWieldSlot), nameof(LeftHandWieldSlot) };
     public override int PackSort => 16;
     public override int BaseValue => 45;
     public override bool HatesElectricity => true;

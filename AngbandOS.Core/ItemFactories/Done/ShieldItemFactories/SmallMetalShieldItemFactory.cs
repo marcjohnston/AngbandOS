@@ -38,7 +38,7 @@ internal class SmallMetalShieldItemFactory : ItemFactory
     public override int Weight => 65;
 
     protected override string ItemClassBindingKey => nameof(ShieldsItemClass);
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(ArmInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(ArmWieldSlot) };
     public override int PackSort => 23;
     public override bool HatesAcid => true;
 

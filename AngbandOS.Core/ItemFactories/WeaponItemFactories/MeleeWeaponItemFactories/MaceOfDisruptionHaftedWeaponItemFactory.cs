@@ -39,7 +39,7 @@ internal class MaceOfDisruptionHaftedWeaponItemFactory : WeaponItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponInventorySlot) };
+    protected override string[] BaseWieldSlotBindingKeys => new string[] { nameof(MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;
 
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
