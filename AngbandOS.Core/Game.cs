@@ -7308,7 +7308,7 @@ public bool IsDead = false;
                     MsgPrint($"You stomp on {itemName}.");
                 }
                 // If we can't carry the item, let us know
-                else if (!InvenCarryOkay(item))
+                else if (!item.CanCarry())
                 {
                     MsgPrint($"You have no room for {itemName}.");
                 }
@@ -14641,27 +14641,6 @@ public bool IsDead = false;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return newItem;
-    }
-
-    public bool InvenCarryOkay(Item oPtr)
-    {
-        if (_invenCnt < InventorySlot.PackCount)
-        {
-            return true;
-        }
-        for (int j = 0; j < InventorySlot.PackCount; j++)
-        {
-            Item? jPtr = GetInventoryItem(j);
-            if (jPtr == null)
-            {
-                continue;
-            }
-            if (jPtr.CanAbsorb(oPtr))
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     public int InvenDamage(Func<Item, bool> testerFunc, int perc)

@@ -471,6 +471,32 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
+    /// Returns true, if the item can be carried; false, otherwise.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public bool CanCarry()
+    {
+        if (Game._invenCnt < InventorySlot.PackCount)
+        {
+            return true;
+        }
+        for (int j = 0; j < InventorySlot.PackCount; j++)
+        {
+            Item? jPtr = Game.GetInventoryItem(j);
+            if (jPtr == null)
+            {
+                continue;
+            }
+            if (jPtr.CanAbsorb(this))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
     /// Compares two items for sorting.  Returns -1, if this item sorts before the oPtr item; 1, if this item sorts after or 0 if they are equivalent.
     /// </summary>
     /// <param name="obj"></param>

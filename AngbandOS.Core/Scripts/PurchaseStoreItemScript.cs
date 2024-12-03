@@ -39,7 +39,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[inventoryItemIndex];
         int amt = 1;
         Item jPtr = oPtr.Clone(amt);
-        if (!Game.InvenCarryOkay(jPtr))
+        if (!jPtr.CanCarry())
         {
             Game.MsgPrint("You cannot carry that many different items.");
             return;
@@ -66,7 +66,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             }
         }
         jPtr = oPtr.Clone(amt);
-        if (!Game.InvenCarryOkay(jPtr))
+        if (!jPtr.CanCarry())
         {
             Game.MsgPrint("You cannot carry that many items.");
             return;
