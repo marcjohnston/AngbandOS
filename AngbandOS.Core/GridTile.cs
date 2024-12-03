@@ -121,17 +121,7 @@ internal class GridTile : IItemContainer
     /// <param name="num"></param>
     public void ItemIncrease(Item oPtr, int num)
     {
-        num += oPtr.StackCount;
-        if (num > 255)
-        {
-            num = 255;
-        }
-        else if (num < 0)
-        {
-            num = 0;
-        }
-        num -= oPtr.StackCount;
-        oPtr.StackCount += num;
+        oPtr.ItemIncrease(num);
     }
 
     /// <summary>

@@ -43,7 +43,7 @@ internal class EatItemAttackEffect : AttackEffect
 
                 Game.AddItemToMonster(item.Clone(), monster);
 
-                Game.InvenItemIncrease(i, -1);
+                item.ItemIncrease(-1);
                 Game.InvenItemOptimize(i);
                 obvious = true;
                 blinked = true;

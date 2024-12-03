@@ -55,7 +55,7 @@ internal class DestroyAllWorthlessItemsScript : Script, IScript, IRepeatableScri
             Game.MsgPrint($"You destroy {itemName}.");
             count++;
             int amount = item.StackCount;
-            Game.InvenItemIncrease(i, -amount);
+            item.ItemIncrease(-amount);
             Game.InvenItemOptimize(i);
         }
         if (count == 0)

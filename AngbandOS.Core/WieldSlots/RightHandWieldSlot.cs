@@ -15,7 +15,6 @@ internal class RightHandWieldSlot : EquipmentWieldSlot
     public override string Label(Item oPtr) => "e";
     public override int[] InventorySlots => new int[] { InventorySlot.RightHand };
     public override string MentionUse(int? index) => "On right hand";
-    public override string DescribeWieldLocation(int index) => "wearing on your right hand";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your right hand";
     public override int SortOrder => 5;
     public override void AddItem(Item item)

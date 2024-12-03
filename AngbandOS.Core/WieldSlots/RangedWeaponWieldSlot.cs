@@ -39,19 +39,6 @@ internal class RangedWeaponWieldSlot : EquipmentWieldSlot
         return p;
     }
 
-    public override string DescribeWieldLocation(int index)
-    {
-        string p = "shooting missiles with";
-        if (Count > 0)
-        {
-            Item? oPtr = Game.GetInventoryItem(index);
-            if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-            {
-                p = "just holding";
-            }
-        }
-        return p;
-    }
     public override string DescribeItemLocation(Item oPtr)
     {
         string p = "shooting missiles with";

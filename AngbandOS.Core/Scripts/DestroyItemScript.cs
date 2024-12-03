@@ -86,7 +86,7 @@ internal class DestroyItemScript : Script, IScript, IRepeatableScript, IScriptSt
         // Destroying something takes a turn
         Game.EnergyUse = 100;
 
-        // Can't destroy an artifact artifact
+        // Can't destroy an artifact.
         if (item.IsArtifact)
         {
             string feel = "special";

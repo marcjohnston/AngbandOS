@@ -171,8 +171,6 @@ internal abstract class ItemEnhancement : IGetKey
         return "";
     }
 
-    private string  DeleteMe => ""; // TODO: THis is causing a compiler error to delete
-
     protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey => null;
 
     public ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; private set; }

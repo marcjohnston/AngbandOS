@@ -669,7 +669,7 @@ internal class Store
                     Item qPtr = oPtr.Clone();
                     string oName = qPtr.GetFullDescription(true);
                     Game.MsgPrint($"You drop {oName} ({itemIndex.IndexToLabel()}).");
-                    Game.InvenItemIncrease(itemIndex, -255);
+                    oPtr.ItemIncrease(-255);
                     Game.InvenItemDescribe(itemIndex);
                     Game.InvenItemOptimize(itemIndex);
                     Game.HandleStuff();

@@ -157,6 +157,13 @@ internal sealed class Item : IComparable<Item>
     #endregion
 
     #region API Methods
+    public Item TakeFromStack(int count)
+    {
+        Item retrievedItem = Clone(count);
+        ItemIncrease(-count);
+        return retrievedItem;
+    }
+
     public Item Clone(int? newCount = null) // TODO: Can this be a constructor?
     {
         Item clonedItem = _factory.GenerateItem();
@@ -404,14 +411,23 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Modifies the quantity of an item.  The modification process differs depending on the type of container containing the item (e.g. wield slots will update the player stats, monster and grid tile containers do not).
+    /// Modifies the quantity of an item.
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
     public void ItemIncrease(int num)
     {
-        IItemContainer container = GetContainer();
-        container.ItemIncrease(this, num);
+        num += StackCount;
+        if (num > 255)
+        {
+            num = 255;
+        }
+        else if (num < 0)
+        {
+            num = 0;
+        }
+        num -= StackCount;
+        StackCount += num;
     }
 
     /// <summary>
@@ -486,7 +502,8 @@ internal sealed class Item : IComparable<Item>
         {
             if (wieldSlot.Count < wieldSlot.MaximumItemSlots)
             {
-                wieldSlot.AddItem(this);
+                // Wield only 1 item from a stack.
+                wieldSlot.AddItem(TakeFromStack(1));
                 return true;
             }
         }

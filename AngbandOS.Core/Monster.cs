@@ -240,16 +240,6 @@ internal class Monster : IItemContainer
 
     public string Label(Item oPtr) => ""; // TODO: Items held by a monster cannot be selected.
 
-    //public void AddItem(Item oPtr)
-    //{
-    //    Items.Add(oPtr);
-    //}
-
-    //public void RemoveItem(Item oPtr)
-    //{
-    //    Items.Remove(oPtr);
-    //}
-
     /// <summary>
     /// Modifies the quantity of an item.  No player stats are modified.
     /// </summary>
@@ -257,17 +247,7 @@ internal class Monster : IItemContainer
     /// <param name="num"></param>
     public void ItemIncrease(Item oPtr, int num)
     {
-        num += oPtr.StackCount;
-        if (num > 255)
-        {
-            num = 255;
-        }
-        else if (num < 0)
-        {
-            num = 0;
-        }
-        num -= oPtr.StackCount;
-        oPtr.StackCount += num;
+        oPtr.ItemIncrease(num);
     }
 
     /// <summary>

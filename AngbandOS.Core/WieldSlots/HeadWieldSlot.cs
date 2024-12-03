@@ -15,7 +15,6 @@ internal class HeadWieldSlot : EquipmentWieldSlot
     public override string Label(Item oPtr) => "k";
     public override int[] InventorySlots => new int[] { InventorySlot.Head };
     public override string MentionUse(int? index) => "On head";
-    public override string DescribeWieldLocation(int index) => "wearing on your head";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your head";
     public override int BareArmorClassBonus => (Game.ExperienceLevel.IntValue - 2) / 3;
     public override bool IsWeightRestricting => true;

@@ -15,7 +15,6 @@ internal class OnBodyWieldSlot : EquipmentWieldSlot
     public override string Label(Item oPtr) => "h";
     public override int[] InventorySlots => new int[] { InventorySlot.OnBody };
     public override string MentionUse(int? index) => "On body";
-    public override string DescribeWieldLocation(int index) => "wearing on your body";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your body";
     public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue * 3 / 2;
     public override bool IsWeightRestricting => true;

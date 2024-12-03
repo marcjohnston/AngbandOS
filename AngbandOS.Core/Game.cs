@@ -4029,7 +4029,7 @@ public bool IsDead = false;
                 string oName = oPtr.GetFullDescription(true);
                 MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
                 DropNear(oPtr, 0, MapY.IntValue, MapX.IntValue);
-                InvenItemIncrease(item, -255);
+                oPtr.ItemIncrease(-255);
                 InvenItemDescribe(item);
                 InvenItemOptimize(item);
                 NoticeStuff();
@@ -13764,12 +13764,6 @@ public bool IsDead = false;
         return res;
     }
 
-    public string DescribeWieldLocation(int index)
-    {
-        WieldSlot inventorySlot = SingletonRepository.Get<WieldSlot>().Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(index));
-        return inventorySlot.DescribeWieldLocation(index);
-    }
-
     public void GainExperience(int amount)
     {
         ExperiencePoints.IntValue += amount;
@@ -14671,7 +14665,7 @@ public bool IsDead = false;
                     {
                         oPtr.Smash(0, MapY.IntValue, MapX.IntValue);
                     }
-                    InvenItemIncrease(i, -amt);
+                    oPtr.ItemIncrease(-amt);
                     InvenItemOptimize(i);
                     k += amt;
                 }
@@ -14728,33 +14722,6 @@ public bool IsDead = false;
         }
         string oName = oPtr.GetFullDescription(true);
         MsgPrint($"You have {oName}.");
-    }
-
-    public void InvenItemIncrease(int item, int num)
-    {
-        Item? oPtr = GetInventoryItem(item);
-        if (oPtr == null)
-        {
-            return;
-        }
-        num += oPtr.StackCount;
-        if (num > 255)
-        {
-            num = 255;
-        }
-        else if (num < 0)
-        {
-            num = 0;
-        }
-        num -= oPtr.StackCount;
-        if (num != 0)
-        {
-            oPtr.StackCount += num;
-            WeightCarried += num * oPtr.Weight;
-            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
-            SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        }
     }
 
     public void InvenItemOptimize(int item)

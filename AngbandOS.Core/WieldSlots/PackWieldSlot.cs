@@ -22,9 +22,8 @@ internal class PackWieldSlot : WieldSlot
         return alphabet[foundSlot].ToString();
     }
     public override string MentionUse(int? index) => "In pack";
-    public override string SenseLocation(int index) => "in your pack";
+    public override string SenseLocation(Item item) => "in your pack";
     public override int SortOrder => 0;
-    public override string DescribeWieldLocation(int index) => "carrying in your pack";
 
     public override string DescribeItemLocation(Item oPtr) => "carrying in your pack";
 

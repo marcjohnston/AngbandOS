@@ -46,30 +46,19 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     public abstract string DescribeItemLocation(Item oPtr);
 
     /// <summary>
-    /// Modifies the quantity of an item.  For an inventory slot, the player's weight, bonuses and mana are updated accordingly.
+    /// Modifies the quantity of an item.  For a wielded slot, the player's weight, bonuses and mana are updated accordingly.
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
-    public virtual void ItemIncrease(Item oPtr, int num)
+    public void ItemIncrease(Item oPtr, int num)
     {
-        num += oPtr.StackCount;
-        if (num > 255)
-        {
-            num = 255;
-        }
-        else if (num < 0)
-        {
-            num = 0;
-        }
-        num -= oPtr.StackCount;
-        if (num != 0)
-        {
-            oPtr.StackCount += num;
-            Game.WeightCarried += num * oPtr.Weight;
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        }
+        oPtr.ItemIncrease(num);
+
+        // Items that are being wielded add or subtract from the players weight being carried.
+        Game.WeightCarried += num * oPtr.Weight;
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
     }
 
     /// <summary>
@@ -157,7 +146,7 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
         return msp;
     }
 
-    public virtual string SenseLocation(int index) => $"you are {DescribeWieldLocation(index)}";
+    public virtual string SenseLocation(Item item) => $"you are {DescribeItemLocation(item)}";
 
     /// <summary>
     /// Returns a weighted random chooser for an item in the slot.  Each item has an equal weight.
@@ -232,14 +221,6 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     /// <param name="index">The index of the item.  If null, a generic non-item based usage is returned.</param>
     /// <returns></returns>
     public abstract string MentionUse(int? index);
-
-    /// <summary>
-    /// Returns a string that describes the wielding location of an item in the slot.
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    [Obsolete("Use DescribeItemLocation")]
-    public abstract string DescribeWieldLocation(int index);
 
     public IEnumerator<int> GetEnumerator()
     {

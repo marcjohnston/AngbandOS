@@ -39,20 +39,6 @@ internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
         return p;
     }
 
-    public override string DescribeWieldLocation(int index) 
-    {
-        string p = "attacking monsters with";
-        if (Count > 0)
-        {
-            Item? oPtr = Game.GetInventoryItem(index);
-            if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-            {
-                p = "just lifting";
-            }
-        }
-        return p;
-    }
-
     public override string DescribeItemLocation(Item oPtr)
     {
         string p = "attacking monsters with";

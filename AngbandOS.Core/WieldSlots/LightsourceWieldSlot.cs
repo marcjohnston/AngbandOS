@@ -15,7 +15,6 @@ internal class LightsourceWieldSlot : EquipmentWieldSlot
     public override string Label(Item oPtr) => "g";
     public override int[] InventorySlots => new int[] { InventorySlot.Lightsource };
     public override string MentionUse(int? index) => "Light source";
-    public override string DescribeWieldLocation(int index) => "using to light the way";
     public override string DescribeItemLocation(Item oPtr) => "using to light the way";
     public override string WieldPhrase => "Your light source is";
     public override bool ProvidesLight => true;

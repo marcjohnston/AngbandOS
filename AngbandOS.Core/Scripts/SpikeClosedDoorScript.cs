@@ -45,6 +45,12 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
                 {
                     Game.MsgPrint("You have no spikes!");
                 }
+
+                Item? item = Game.GetInventoryItem(itemIndex);
+                if (item == null)
+                {
+                    Game.MsgPrint("There are no spikes here.");
+                }
                 // Can't close a door if there's someone in the way
                 else if (tile.MonsterIndex != 0)
                 {
@@ -70,7 +76,7 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
                     }
 
                     // Use up the spike from the player's inventory
-                    Game.InvenItemIncrease(itemIndex, -1);
+                    item.ItemIncrease(-1);
                     Game.InvenItemDescribe(itemIndex);
                     Game.InvenItemOptimize(itemIndex);
                 }
