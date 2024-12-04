@@ -37,13 +37,9 @@ internal class EatItemAttackEffect : AttackEffect
                 Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
 
                 // Give the item to the thief so it can later drop it
-                Item stolenItem = item.Clone();
-                stolenItem.StackCount = 1;
+                Item stolenItem = item.TakeFromStack(1);
                 stolenItem.WasNoticed = false;
-
-                Game.AddItemToMonster(item.Clone(), monster);
-
-                item.ModifyStackCount(-1);
+                Game.AddItemToMonster(stolenItem, monster);
                 Game.InvenItemOptimize(i);
                 obvious = true;
                 blinked = true;

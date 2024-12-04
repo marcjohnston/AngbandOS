@@ -88,7 +88,7 @@ internal class SkeletonRace : Race
         else
         {
             // Spawn a new food item on the floor to make up for the one that will be destroyed
-            Item floorItem = item.Clone(); // TODO: Why do we have to clone it ... can't we simply return a do not delete response
+            Item floorItem = item.TakeFromStack(1);
             Game.MsgPrint("The food falls through your jaws!");
             Game.DropNear(floorItem, -1, Game.MapY.IntValue, Game.MapX.IntValue);
         }

@@ -53,9 +53,8 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
             return;
         }
         // Copy an ammunition piece from the stack...
-        Item individualAmmunition = ammunitionStack.Clone(1);
+        Item individualAmmunition = ammunitionStack.TakeFromStack(1);
         // ...and reduced the amount in the stack
-        ammunitionStack.ModifyStackCount(-1);
         if (ammunitionStack.IsInInventory)
         {
             ammunitionStack.ItemDescribe();

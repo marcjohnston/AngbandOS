@@ -260,6 +260,7 @@ internal abstract class ItemFactory : ItemEnhancement
         }
 
         RefillScript = Game.SingletonRepository.GetNullable<IScriptItem>(RefillScriptBindingKey);
+        BreakageChanceProbability = Game.ParseProbabilityExpression(BreakageChanceProbabilityExpression);
     }
 
     /// <summary>

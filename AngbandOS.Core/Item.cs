@@ -517,10 +517,9 @@ internal sealed class Item : IComparable<Item>
         {
             amt = StackCount;
         }
-        Item qPtr = Clone(amt);
+        Item qPtr = TakeFromStack(amt);
         string oName = qPtr.GetFullDescription(true);
         act = TakeOffMessage;
-        ModifyStackCount(-amt);
         ItemOptimize();
         Item? newItem = Game.InventoryCarry(qPtr);
         if (newItem == null)
@@ -2184,7 +2183,7 @@ internal sealed class Item : IComparable<Item>
     /// <remarks>There may not be any references in code but this method is very useful for debugging.</remarks>
     public override string ToString()
     {
-        return GetDescription(false);
+        return GetDescription(true);
     }
 
     /// <summary>

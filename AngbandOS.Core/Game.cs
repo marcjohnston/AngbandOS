@@ -7932,8 +7932,7 @@ public bool IsDead = false;
             return;
         }
         // Copy a single item from the item stack as the thrown item
-        Item missile = item.Clone(1);
-        item.ModifyStackCount(-1);
+        Item missile = item.TakeFromStack(1);
         if (item.IsInInventory)
         {
             item.ItemDescribe();
@@ -9858,7 +9857,7 @@ public bool IsDead = false;
             item.IsFlavorAware = true;
             item.BecomeKnown();
             InventoryCarry(item);
-            Item carried = item.Clone(1);
+            Item carried = item.TakeFromStack(1);
             LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
             WeightCarried += carried.Weight;
@@ -14626,16 +14625,15 @@ public bool IsDead = false;
             SetInventoryItem(i, null);
         }
 
-        Item newItem = oPtr.Clone(); // TODO: Why are we cloning?
-        SetInventoryItem(i, newItem);
-        newItem.Y = 0;
-        newItem.X = 0;
-        newItem.HoldingMonsterIndex = 0;
-        WeightCarried += newItem.StackCount * newItem.Weight;
+        SetInventoryItem(i, oPtr);
+        oPtr.Y = 0;
+        oPtr.X = 0;
+        oPtr.HoldingMonsterIndex = 0;
+        WeightCarried += oPtr.StackCount * oPtr.Weight;
         _invenCnt++;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        return newItem;
+        return oPtr;
     }
 
     public int InvenDamage(Func<Item, bool> testerFunc, int perc)
@@ -14693,11 +14691,10 @@ public bool IsDead = false;
             }
             oPtr = removedItem;
         }
-        Item qPtr = oPtr.Clone(amt);
+        Item qPtr = oPtr.TakeFromStack(amt);
         string oName = qPtr.GetFullDescription(true);
         MsgPrint($"You drop {oName} ({oPtr.Label}).");
         DropNear(qPtr, 0, MapY.IntValue, MapX.IntValue);
-        oPtr.ModifyStackCount(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
     }
@@ -15108,8 +15105,7 @@ public bool IsDead = false;
 
         if (!done)
         {
-            Item oPtr = jPtr.Clone();
-            if (!AddItemToGrid(oPtr, bx, by))
+            if (!AddItemToGrid(jPtr, bx, by))
             {
                 string p = plural ? "" : "s";
                 MsgPrint($"The {oName} disappear{p}.");

@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using static System.Formats.Asn1.AsnWriter;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -37,13 +39,13 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
         int inventoryItemIndex = letterIndex + storeCommandEvent.Store.StoreTop;
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[inventoryItemIndex];
         int amt = 1;
-        Item jPtr = oPtr.Clone(amt);
+        Item jPtr = oPtr.Clone(amt); // Make a copy of the items.  Do not take them.
         if (!jPtr.CanCarry())
         {
             Game.MsgPrint("You cannot carry that many different items.");
             return;
         }
-        int best = storeCommandEvent.Store.MarkupItem(jPtr);
+        int best = BestPricePerItem(storeCommandEvent.Store, jPtr);
         if (oPtr.StackCount > 1)
         {
             if (storeCommandEvent.Store.StoreFactory.StoreSellsItems && oPtr.IdentFixed)
@@ -187,16 +189,18 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
         }
     }
 
-    private bool PurchaseHaggle(Store store, Item oPtr, out int price)
+    private int BestPricePerItem(Store store, Item oPtr)
     {
         int finalAsk = store.MarkupItem(oPtr);
+        return finalAsk + finalAsk / 10;
+    }
+
+    private bool PurchaseHaggle(Store store, Item oPtr, out int price)
+    {
         Game.MsgPrint("You quickly agree upon the price.");
         Game.MsgPrint(null);
-        finalAsk += finalAsk / 10;
-        const string pmt = "Final Offer";
-        finalAsk *= oPtr.StackCount;
-        price = finalAsk;
-        string outVal = $"{pmt} :  {finalAsk}";
+        price = BestPricePerItem(store, oPtr) * oPtr.StackCount;
+        string outVal = $"Final Offer : {price}";
         Game.Screen.Print(outVal, 1, 0);
         return !Game.GetCheck("Accept deal? ");
     }

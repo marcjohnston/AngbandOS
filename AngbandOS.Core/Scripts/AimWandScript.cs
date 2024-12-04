@@ -117,9 +117,8 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             // If the wand is part of a stack, split it off from the others
             if (item.IsInInventory && item.StackCount > 1)
             {
-                Item splitItem = item.Clone(1);
+                Item splitItem = item.TakeFromStack(1);
                 item.WandChargesRemaining++;
-                item.StackCount--;
                 Game.WeightCarried -= splitItem.Weight;
                 Game.InventoryCarry(splitItem);
                 Game.MsgPrint("You unstack your wand.");
