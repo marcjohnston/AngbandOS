@@ -280,36 +280,9 @@ internal class Store
         }
     }
 
-    private void StoreDelete()
+    public void ModifyItemStackCount(Item item, int num)
     {
-        int what = Game.RandomLessThan(StoreInventoryList.Count);
-        int num = StoreInventoryList[what].StackCount;
-        if (Game.RandomLessThan(100) < 50)
-        {
-            num = (num + 1) / 2;
-        }
-        if (Game.RandomLessThan(100) < 50)
-        {
-            num = 1;
-        }
-        StoreItemIncrease(what, -num);
-        StoreItemOptimize(what);
-    }
-
-    public void StoreItemIncrease(int item, int num)
-    {
-        Item oPtr = StoreInventoryList[item];
-        int cnt = oPtr.StackCount + num;
-        if (cnt > 255)
-        {
-            cnt = 255;
-        }
-        else if (cnt < 0)
-        {
-            cnt = 0;
-        }
-        num = cnt - oPtr.StackCount;
-        oPtr.StackCount += num;
+        item.ModifyStackCount(num);
     }
 
     public void StoreItemOptimize(int item)
@@ -762,7 +735,24 @@ internal class Store
         // Now delete the items that are being turned over.
         while (StoreInventoryList.Count > desiredTurnOverInventoryCount)
         {
-            StoreDelete();
+            // Pick an item to delete.
+            int what = Game.RandomLessThan(StoreInventoryList.Count);
+
+            // Get the item that we will be deleting.
+            Item item = StoreInventoryList[what];
+
+            // We need to delete all of the items in the stack.
+            int countToDelete = item.StackCount;
+            if (Game.RandomLessThan(100) < 50)
+            {
+                countToDelete = (countToDelete + 1) / 2;
+            }
+            if (Game.RandomLessThan(100) < 50)
+            {
+                countToDelete = 1;
+            }
+            ModifyItemStackCount(item, -countToDelete);
+            StoreItemOptimize(what);
         }
 
         // Now add new items to the store to meet the store minimum and maximum counts.

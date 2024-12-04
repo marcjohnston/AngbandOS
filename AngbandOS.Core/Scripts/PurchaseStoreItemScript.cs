@@ -18,7 +18,6 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
     /// <returns></returns>
     public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
-        int itemNew;
         string oName;
         if (storeCommandEvent.Store.StoreInventoryList.Count <= 0)
         {
@@ -120,7 +119,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
                     Game.MsgPrint($"You have {oName} ({newItemInInventory.Label}).");
                     Game.HandleStuff();
                     i = storeCommandEvent.Store.StoreInventoryList.Count;
-                    storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
+                    storeCommandEvent.Store.ModifyItemStackCount(oPtr, -amt);
                     storeCommandEvent.Store.StoreItemOptimize(inventoryItemIndex);
 
                     // Ensure the inventory scrolls as needed.
@@ -167,7 +166,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             Game.MsgPrint($"You have {oName} ({newItemInInventory.Label}).");
             Game.HandleStuff();
             i = storeCommandEvent.Store.StoreInventoryList.Count;
-            storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
+            storeCommandEvent.Store.ModifyItemStackCount(oPtr, -amt);
             storeCommandEvent.Store.StoreItemOptimize(inventoryItemIndex);
             if (i == storeCommandEvent.Store.StoreInventoryList.Count)
             {

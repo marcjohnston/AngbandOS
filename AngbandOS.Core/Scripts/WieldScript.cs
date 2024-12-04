@@ -118,10 +118,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         Game.EnergyUse = 100;
 
         // Pull one item out of the item stack
-        Item wornItem = item.Clone(1);
-
-        // Reduce the count of the item stack accordingly
-        item.ModifyStackCount(-1);
+        Item wornItem = item.TakeFromStack(1);
         item.ItemOptimize();
 
         // Take off the old item

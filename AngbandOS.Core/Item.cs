@@ -167,6 +167,7 @@ internal sealed class Item : IComparable<Item>
     public Item Clone(int? newCount = null) // TODO: Can this be a constructor?
     {
         Item clonedItem = _factory.GenerateItem();
+        clonedItem.StackCount = newCount.HasValue ? newCount.Value : 1;
 
         // TODO: There is no way to ensure a cloned gets all of the properties
         clonedItem.IdentSense = IdentSense;
@@ -177,10 +178,9 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentMental = IdentMental;
         clonedItem.FixedArtifact = FixedArtifact;
         clonedItem.RareItem = RareItem;
-        clonedItem.Characteristics = Characteristics;
+        clonedItem.Characteristics.Copy(Characteristics);
         clonedItem.RandomArtifactItemCharacteristics = RandomArtifactItemCharacteristics;
         clonedItem.RandomPower = RandomPower;
-        clonedItem.StackCount = StackCount;
         clonedItem.Discount = Discount;
         clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
         clonedItem.Inscription = Inscription;
@@ -197,24 +197,9 @@ internal sealed class Item : IComparable<Item>
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.RandomArtifactName = RandomArtifactName;
-        clonedItem.Characteristics.BonusHit = Characteristics.BonusHit;
-        clonedItem.Characteristics.BonusDamage = Characteristics.BonusDamage;
-        clonedItem.Characteristics.BonusArmorClass = Characteristics.BonusArmorClass;
         clonedItem.ArmorClass = ArmorClass;
         clonedItem.DamageDice = DamageDice;
         clonedItem.DamageSides = DamageSides;
-        clonedItem.Characteristics.BonusStrength = Characteristics.BonusStrength;
-        clonedItem.Characteristics.BonusIntelligence = Characteristics.BonusIntelligence;
-        clonedItem.Characteristics.BonusWisdom = Characteristics.BonusWisdom;
-        clonedItem.Characteristics.BonusDexterity = Characteristics.BonusDexterity;
-        clonedItem.Characteristics.BonusConstitution = Characteristics.BonusConstitution;
-        clonedItem.Characteristics.BonusCharisma = Characteristics.BonusCharisma;
-        clonedItem.Characteristics.BonusStealth = Characteristics.BonusStealth;
-        clonedItem.Characteristics.BonusSearch = Characteristics.BonusSearch;
-        clonedItem.Characteristics.BonusInfravision = Characteristics.BonusInfravision;
-        clonedItem.Characteristics.BonusTunnel = Characteristics.BonusTunnel;
-        clonedItem.Characteristics.BonusAttacks = Characteristics.BonusAttacks;
-        clonedItem.Characteristics.BonusSpeed = Characteristics.BonusSpeed;
         clonedItem.IsCursed = IsCursed;
         clonedItem.IsBroken = IsBroken;
 
