@@ -38,20 +38,25 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
         }
         int inventoryItemIndex = letterIndex + storeCommandEvent.Store.StoreTop;
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[inventoryItemIndex];
+
+        // Start out with the intention of buying one item.
         int amt = 1;
-        Item jPtr = oPtr.Clone(amt); // Make a copy of the items.  Do not take them.
+
+        // Check to see if we can even carry one item.
+        Item jPtr = oPtr.Clone(amt); // Do not take the items yet.
         if (!jPtr.CanCarry())
         {
             Game.MsgPrint("You cannot carry that many different items.");
             return;
         }
+
+        // Compute the price.
         int best = BestPricePerItem(storeCommandEvent.Store, jPtr);
+
+        // Check to see if there is more than one item that can be purchased.
         if (oPtr.StackCount > 1)
         {
-            if (storeCommandEvent.Store.StoreFactory.StoreSellsItems && oPtr.IdentFixed)
-            {
-                Game.MsgPrint($"That costs {best} gold per item.");
-            }
+            // Compute the maximum number of items the player can purchase based on the available gold and the number of available items.
             int maxBuy = Math.Min(Game.Gold.IntValue / best, oPtr.StackCount);
             if (maxBuy < 2)
             {
@@ -60,18 +65,23 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             else
             {
                 amt = Game.GetQuantity(maxBuy, false);
+
+                // Check to see if the player cancelled the purchase.
                 if (amt <= 0)
                 {
                     return;
                 }
             }
         }
-        jPtr = oPtr.Clone(amt);
+
+        // Check to see if we can carry the requested number of items.
+        jPtr = oPtr.Clone(amt); // Do not take the items yet.
         if (!jPtr.CanCarry())
         {
             Game.MsgPrint("You cannot carry that many items.");
             return;
         }
+
         if (storeCommandEvent.Store.StoreFactory.StoreSellsItems)
         {
             bool choice;
@@ -96,10 +106,6 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
                     Game.PlaySound(SoundEffectEnum.StoreTransaction);
                     Game.Gold.IntValue -= price;
                     Game.StorePrtGold();
-                    //if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
-                    //{
-                    //    jPtr.BecomeFlavorAware();
-                    //}
                     jPtr.IdentFixed = false;
                     oName = jPtr.GetFullDescription(true);
                     

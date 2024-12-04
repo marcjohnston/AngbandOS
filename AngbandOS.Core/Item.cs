@@ -159,11 +159,17 @@ internal sealed class Item : IComparable<Item>
     #region API Methods
     public Item TakeFromStack(int count)
     {
-        Item retrievedItem = Clone(count);
+        Item retrievedItem = Clone(count); // This will not take the items from the stack yet.
         ModifyStackCount(-count);
         return retrievedItem;
     }
 
+    /// <summary>
+    /// Clone an item and set the stack size.  Used during the purchasing of items from a store to detect if the player can carry the item before it is removed
+    /// from inventory.
+    /// </summary>
+    /// <param name="newCount"></param>
+    /// <returns></returns>
     public Item Clone(int? newCount = null) // TODO: Can this be a constructor?
     {
         Item clonedItem = _factory.GenerateItem();
@@ -403,9 +409,9 @@ internal sealed class Item : IComparable<Item>
     public void ModifyStackCount(int num)
     {
         num += StackCount;
-        if (num > 255)
+        if (num >= Constants.MaxStackSize)
         {
-            num = 255;
+            num = Constants.MaxStackSize - 1;
         }
         else if (num < 0)
         {
@@ -673,13 +679,13 @@ internal sealed class Item : IComparable<Item>
     public bool IsRandomArtifact => RandomArtifactName != null;
 
     /// <summary>
-    /// Takes an item that is the same <see cref="CanAbsorb" and adds it./>
+    /// Takes an item that is the same <see cref="CanAbsorb"/> and adds it.  The original item <paramref name="other"/> is not changed.
     /// </summary>
     /// <param name="other"></param>
     public void Absorb(Item other)
     {
-        int total = StackCount + other.StackCount;
-        StackCount = total < Constants.MaxStackSize ? total : Constants.MaxStackSize - 1;
+        ModifyStackCount(other.StackCount);
+        other.TakeFromStack(other.StackCount);
         if (other.IsKnown())
         {
             BecomeKnown();

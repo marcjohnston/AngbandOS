@@ -7316,7 +7316,7 @@ public bool IsDead = false;
                 else
                 {
                     // Actually pick up the item
-                    Item? inventoryItem = InventoryCarry(item);
+                    Item? inventoryItem = InventoryCarry(item.Clone(item.StackCount));
                     if (inventoryItem == null)
                     {
                         throw new Exception("Unable to locate picked up item in the inventory."); // TODO: Clean this up

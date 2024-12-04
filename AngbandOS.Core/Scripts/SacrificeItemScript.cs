@@ -48,11 +48,10 @@ internal class SacrificeItemScript : Script, IScriptStore
                 return;
             }
         }
-        Item qPtr = oPtr.Clone(amt);
+        Item qPtr = oPtr.TakeFromStack(amt);
         string oName = qPtr.GetFullDescription(true);
         qPtr.Inscription = "";
         int finalAsk = storeCommandEvent.Store.MarkdownItem(qPtr) * qPtr.StackCount;
-        oPtr.ModifyStackCount(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
         Game.HandleStuff();

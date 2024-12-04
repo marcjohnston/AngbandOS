@@ -107,15 +107,18 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         {
             // Use the actual charge
             item.StaffChargesRemaining--;
+
             // If the staff was part of a stack, separate it from the rest
             if (item.IsInInventory && item.StackCount > 1)
             {
-                Item singleStaff = item.Clone(1);
+                Item singleStaff = item.TakeFromStack(1);
                 item.StaffChargesRemaining++;
-                item.StackCount--;
                 Game.WeightCarried -= singleStaff.Weight;
                 Game.InventoryCarry(singleStaff);
                 Game.MsgPrint("You unstack your staff.");
+            }
+            else
+            {
             }
             // Let the player know what happened
             if (item.IsKnown())
