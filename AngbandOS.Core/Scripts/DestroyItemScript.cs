@@ -123,7 +123,7 @@ internal class DestroyItemScript : Script, IScript, IRepeatableScript, IScriptSt
         }
 
         // Tidy up the player's inventory
-        item.ItemIncrease(-count);
+        item.ModifyStackCount(-count);
         item.ItemDescribe();
         item.ItemOptimize();
         return;

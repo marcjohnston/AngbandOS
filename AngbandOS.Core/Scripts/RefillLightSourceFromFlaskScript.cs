@@ -50,7 +50,7 @@ internal class RefillLightSourceFromFlaskScript : Script, IScriptItem
         }
 
         // Update the inventory
-        fuelSource.ItemIncrease(-1);
+        fuelSource.ModifyStackCount(-1);
         fuelSource.ItemDescribe();
         fuelSource.ItemOptimize();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();

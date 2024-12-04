@@ -52,7 +52,7 @@ internal class RefillLightSourceFromTorchScript : Script, IScriptItem
         }
 
         // Update the player's inventory
-        fuelSource.ItemIncrease(-1);
+        fuelSource.ModifyStackCount(-1);
         fuelSource.ItemDescribe();
         fuelSource.ItemOptimize();
         base.Game.SingletonRepository.Get<FlaggedAction>(nameof(FlaggedActions.UpdateTorchRadiusFlaggedAction)).Set();

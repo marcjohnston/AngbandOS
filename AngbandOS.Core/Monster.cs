@@ -245,9 +245,9 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
-    public void ItemIncrease(Item oPtr, int num)
+    public void ModifyItemStackCount(Item oPtr, int num)
     {
-        oPtr.ItemIncrease(num);
+        oPtr.ModifyStackCount(num);
     }
 
     /// <summary>

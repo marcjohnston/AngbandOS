@@ -160,7 +160,7 @@ internal sealed class Item : IComparable<Item>
     public Item TakeFromStack(int count)
     {
         Item retrievedItem = Clone(count);
-        ItemIncrease(-count);
+        ModifyStackCount(-count);
         return retrievedItem;
     }
 
@@ -415,7 +415,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
-    public void ItemIncrease(int num)
+    public void ModifyStackCount(int num)
     {
         num += StackCount;
         if (num > 255)
@@ -535,7 +535,7 @@ internal sealed class Item : IComparable<Item>
         Item qPtr = Clone(amt);
         string oName = qPtr.GetFullDescription(true);
         act = TakeOffMessage;
-        ItemIncrease(-amt);
+        ModifyStackCount(-amt);
         ItemOptimize();
         Item? newItem = Game.InventoryCarry(qPtr);
         if (newItem == null)

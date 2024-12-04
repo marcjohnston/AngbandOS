@@ -121,7 +121,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         Item wornItem = item.Clone(1);
 
         // Reduce the count of the item stack accordingly
-        item.ItemIncrease(-1);
+        item.ModifyStackCount(-1);
         item.ItemOptimize();
 
         // Take off the old item

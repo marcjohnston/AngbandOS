@@ -57,7 +57,7 @@ internal class IdentifyAllItemsScript : Script, IScript, IScriptStore
                 string itemName = oPtr.GetFullDescription(true);
                 Game.MsgPrint($"You destroy {itemName}.");
                 int amount = oPtr.StackCount;
-                oPtr.ItemIncrease(-amount);
+                oPtr.ModifyStackCount(-amount);
                 Game.InvenItemOptimize(i);
                 i--;
             }

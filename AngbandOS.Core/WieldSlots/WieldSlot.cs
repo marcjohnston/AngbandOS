@@ -50,9 +50,9 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
-    public void ItemIncrease(Item oPtr, int num)
+    public void ModifyItemStackCount(Item oPtr, int num)
     {
-        oPtr.ItemIncrease(num);
+        oPtr.ModifyStackCount(num);
 
         // Items that are being wielded add or subtract from the players weight being carried.
         Game.WeightCarried += num * oPtr.Weight;

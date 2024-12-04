@@ -17,7 +17,7 @@ internal interface IItemContainer
     /// </summary>
     /// <param name="oPtr"></param>
     /// <param name="num"></param>
-    void ItemIncrease(Item oPtr, int num);
+    void ModifyItemStackCount(Item oPtr, int num);
 
     /// <summary>
     /// Returns a description of the item as it is in the container.  For a wield slot, the description is rendered as possessive; non-wield slots, render as the player is viewing the item.

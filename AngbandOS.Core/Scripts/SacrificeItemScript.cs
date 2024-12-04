@@ -52,7 +52,7 @@ internal class SacrificeItemScript : Script, IScriptStore
         string oName = qPtr.GetFullDescription(true);
         qPtr.Inscription = "";
         int finalAsk = storeCommandEvent.Store.MarkdownItem(qPtr) * qPtr.StackCount;
-        oPtr.ItemIncrease(-amt);
+        oPtr.ModifyStackCount(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
         Game.HandleStuff();

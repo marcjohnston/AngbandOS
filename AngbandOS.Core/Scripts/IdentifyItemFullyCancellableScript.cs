@@ -43,7 +43,7 @@ internal class IdentifyItemFullyCancellableScript : Script, IScript, ICancellabl
             string itemName = oPtr.GetFullDescription(true);
             Game.MsgPrint($"You destroy {oName}.");
             int amount = oPtr.StackCount;
-            oPtr.ItemIncrease(-amount);
+            oPtr.ModifyStackCount(-amount);
             oPtr.ItemOptimize();
         }
 

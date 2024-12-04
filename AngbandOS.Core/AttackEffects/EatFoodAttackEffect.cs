@@ -28,7 +28,7 @@ internal class EatFoodAttackEffect : AttackEffect
                 string itemName = item.GetDescription(false);
                 string y = item.StackCount > 1 ? "One of y" : "Y";
                 Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
-                item.ItemIncrease(-1);
+                item.ModifyStackCount(-1);
                 Game.InvenItemOptimize(i);
                 obvious = true;
                 return;

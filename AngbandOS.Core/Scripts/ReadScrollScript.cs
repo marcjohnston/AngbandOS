@@ -88,7 +88,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
                 return;
             }
             // If it wasn't used up then decrease the amount in the stack
-            item.ItemIncrease(-1);
+            item.ModifyStackCount(-1);
             item.ItemDescribe();
             item.ItemOptimize();
         }

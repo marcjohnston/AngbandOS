@@ -99,7 +99,7 @@ internal class SellScript : Script, IScriptStore
             Game.MsgPrint($"You drop {oName} ({oPtr.Label}).");
         }
 
-        oPtr.ItemIncrease(-amt);
+        oPtr.ModifyStackCount(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
         Game.HandleStuff();

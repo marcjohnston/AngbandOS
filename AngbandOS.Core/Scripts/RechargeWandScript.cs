@@ -27,7 +27,7 @@ internal class RechargeWandScript : Script, IScriptItemInt
         if (Game.RandomLessThan(i) == 0)
         {
             Game.MsgPrint("There is a bright flash of light.");
-            item.ItemIncrease(-999);
+            item.ModifyStackCount(-999);
             item.ItemDescribe();
             item.ItemOptimize();
         }

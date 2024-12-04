@@ -77,7 +77,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         if (!channeled)
         {
             // We didn't channel it, so use up one potion from the stack
-            item.ItemIncrease(-1);
+            item.ModifyStackCount(-1);
             item.ItemDescribe();
             item.ItemOptimize();
         }

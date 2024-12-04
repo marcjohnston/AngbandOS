@@ -72,7 +72,7 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         {
             // Use up the item (if it fell to the floor this will have already been dealt with)
             IItemContainer container = item.GetContainer();
-            item.ItemIncrease(-1);
+            item.ModifyStackCount(-1);
             item.ItemOptimize();
             string containerDescription = container.DescribeContainer(item);
             Game.MsgPrint(containerDescription);

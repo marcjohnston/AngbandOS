@@ -4029,7 +4029,7 @@ public bool IsDead = false;
                 string oName = oPtr.GetFullDescription(true);
                 MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
                 DropNear(oPtr, 0, MapY.IntValue, MapX.IntValue);
-                oPtr.ItemIncrease(-255);
+                oPtr.ModifyStackCount(-255);
                 InvenItemDescribe(item);
                 InvenItemOptimize(item);
                 NoticeStuff();
@@ -7933,7 +7933,7 @@ public bool IsDead = false;
         }
         // Copy a single item from the item stack as the thrown item
         Item missile = item.Clone(1);
-        item.ItemIncrease(-1);
+        item.ModifyStackCount(-1);
         if (item.IsInInventory)
         {
             item.ItemDescribe();
@@ -14665,7 +14665,7 @@ public bool IsDead = false;
                     {
                         oPtr.Smash(0, MapY.IntValue, MapX.IntValue);
                     }
-                    oPtr.ItemIncrease(-amt);
+                    oPtr.ModifyStackCount(-amt);
                     InvenItemOptimize(i);
                     k += amt;
                 }
@@ -14697,7 +14697,7 @@ public bool IsDead = false;
         string oName = qPtr.GetFullDescription(true);
         MsgPrint($"You drop {oName} ({oPtr.Label}).");
         DropNear(qPtr, 0, MapY.IntValue, MapX.IntValue);
-        oPtr.ItemIncrease(-amt);
+        oPtr.ModifyStackCount(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
     }

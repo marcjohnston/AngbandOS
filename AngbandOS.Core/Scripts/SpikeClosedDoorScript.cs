@@ -76,7 +76,7 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
                     }
 
                     // Use up the spike from the player's inventory
-                    item.ItemIncrease(-1);
+                    item.ModifyStackCount(-1);
                     Game.InvenItemDescribe(itemIndex);
                     Game.InvenItemOptimize(itemIndex);
                 }
