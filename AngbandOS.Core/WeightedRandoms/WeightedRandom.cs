@@ -79,6 +79,11 @@ internal class WeightedRandom<T>
         }
     }
 
+    /// <summary>
+    /// Chooses and returns a random item from the weighted list.  Throws an exception, if the list is empty.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public T Choose()
     {
         T? t = ChooseOrDefault();
@@ -89,6 +94,10 @@ internal class WeightedRandom<T>
         return t;
     }
 
+    /// <summary>
+    /// Chooses and returned a random item from the weighted list; or null, if the list is empty.
+    /// </summary>
+    /// <returns></returns>
     public T? ChooseOrDefault()
     {
         if (_list.Count == 0)

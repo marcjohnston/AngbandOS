@@ -12,5 +12,5 @@ internal class ResistPoisonAndNecromanticBiasItemEnhancement : ItemEnhancement
 {
     private ResistPoisonAndNecromanticBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResPois => true;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(NecromanticArtifactBiasWeightedRandom);
 }

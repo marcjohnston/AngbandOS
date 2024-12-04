@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ArtifactBiasWeightedRandoms;
+
 namespace AngbandOS.Core.ItemEnhancements;
 
 /// <summary>
@@ -48,7 +50,7 @@ internal abstract class ItemEnhancement : IGetKey
         itemCharacteristics.Activation = Activation;
         itemCharacteristics.Aggravate = Aggravate;
         itemCharacteristics.AntiTheft = AntiTheft;
-        itemCharacteristics.ArtifactBias = ArtifactBias;
+        itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();
         itemCharacteristics.Blessed = Blessed;
         itemCharacteristics.Blows = Blows;
         itemCharacteristics.BrandAcid = BrandAcid;
@@ -164,6 +166,7 @@ internal abstract class ItemEnhancement : IGetKey
         BonusDamageRoll = Game.ParseNullableRollExpression(BonusDamageRollExpression);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
+        ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
     }
 
     public string ToJson()
@@ -255,8 +258,10 @@ internal abstract class ItemEnhancement : IGetKey
     /// <inheritdoc />
     public virtual bool AntiTheft => false;
     
+    protected virtual string? ArtifactBiasWeightedRandomBindingKey { get; set; }
+
     /// <inheritdoc />
-    public virtual ArtifactBias? ArtifactBias => null;
+    public ArtifactBiasWeightedRandom? ArtifactBiasWeightedRandom { get; private set; }
     
     /// <inheritdoc />
     public virtual bool Blessed => false;

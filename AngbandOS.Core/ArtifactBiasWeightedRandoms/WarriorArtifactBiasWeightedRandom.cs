@@ -5,13 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemEnhancements;
+namespace AngbandOS.Core.ArtifactBiasWeightedRandoms;
 
-[Serializable]
-internal class ColdImmunityItemEnhancement : ItemEnhancement
+internal class WarriorArtifactBiasWeightedRandom : ArtifactBiasWeightedRandom
 {
-    private ColdImmunityItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override bool ImCold => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(ColdArtifactBiasWeightedRandom);
-
+    private WarriorArtifactBiasWeightedRandom(Game game) : base(game) { } // This object is a singleton
+    protected override (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples => new (string?, int)[]
+    {
+        (nameof(WarriorArtifactBias), 1)
+    };
 }

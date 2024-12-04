@@ -250,6 +250,7 @@ internal class SingletonRepository
         RegisterRepository<AlterAction>();
         RegisterRepository<Alignment>();
         RegisterRepository<ArtifactBias>();
+        RegisterRepository<ArtifactBiasWeightedRandom>();
         RegisterRepository<AttackEffect>();
         RegisterRepository<BaseCharacterClass>();
         RegisterRepository<WieldSlot>();

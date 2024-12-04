@@ -13,6 +13,7 @@ global using AngbandOS.Core.ActivationWeightRandoms;
 global using AngbandOS.Core.AlterActions;
 global using AngbandOS.Core.Animations;
 global using AngbandOS.Core.ArtifactBiases;
+global using AngbandOS.Core.ArtifactBiasWeightedRandoms;
 global using AngbandOS.Core.AttackEffects;
 global using AngbandOS.Core.AttackTypes;
 global using AngbandOS.Core.BirthStages;
