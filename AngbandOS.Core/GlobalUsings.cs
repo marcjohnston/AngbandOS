@@ -45,6 +45,7 @@ global using AngbandOS.Core.ItemClasses;
 global using AngbandOS.Core.ItemEnhancements;
 global using AngbandOS.Core.ItemEnhancementWeightedRandoms;
 global using AngbandOS.Core.ItemFactories;
+global using AngbandOS.Core.ItemFactoryWeightedRandoms;
 global using AngbandOS.Core.ItemFilters;
 global using AngbandOS.Core.ItemMatches;
 global using AngbandOS.Core.ItemQualityRatings;
@@ -90,7 +91,6 @@ global using AngbandOS.Core.Tiles;
 global using AngbandOS.Core.Timers;
 global using AngbandOS.Core.Towns;
 global using AngbandOS.Core.Vaults;
-global using AngbandOS.Core.WeightedRandoms;
 global using AngbandOS.Core.Widgets;
 global using AngbandOS.Core.WizardCommands;
 

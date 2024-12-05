@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.WeightedRandoms;
+namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents an object capable of picking items from a weighted list.  The items in the list can be added specify varying and specific weights.  This object stores the weights
