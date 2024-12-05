@@ -1797,7 +1797,7 @@ internal abstract class ItemFactory : ItemEnhancement
     public virtual int ArmorClass => 0;
 
     /// <summary>
-    /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by definition.
+    /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by default.
     /// </summary>
     public virtual (int level, int chance)[]? DepthsFoundAndChances => null; // TODO: Convert the chance into a Roll object
 
