@@ -12,5 +12,5 @@ internal class ResistFireAndFireBiasItemEnhancement : ItemEnhancement
 {
     private ResistFireAndFireBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResFire => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(FireArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Fire1In1ArtifactBiasWeightedRandom);
 }

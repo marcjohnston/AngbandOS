@@ -7,11 +7,12 @@
 
 namespace AngbandOS.Core.ArtifactBiasWeightedRandoms;
 
-internal class ChaosArtifactBiasWeightedRandom : ArtifactBiasWeightedRandom
+[Serializable]
+internal class Electricity1In1ArtifactBiasWeightedRandom : ArtifactBiasWeightedRandom
 {
-    private ChaosArtifactBiasWeightedRandom(Game game) : base(game) { } // This object is a singleton
+    private Electricity1In1ArtifactBiasWeightedRandom(Game game) : base(game) { } // This object is a singleton
     protected override (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples => new (string?, int)[]
     {
-        (nameof(ChaosArtifactBias), 1)
+        (nameof(ElectricityArtifactBias), 1)
     };
 }

@@ -12,5 +12,5 @@ internal class ResistAcidAndAcidBiasItemEnhancement : ItemEnhancement
 {
     private ResistAcidAndAcidBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResAcid => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(AcidArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Acid1In1ArtifactBiasWeightedRandom);
 }

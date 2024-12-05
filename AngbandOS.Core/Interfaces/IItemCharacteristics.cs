@@ -166,7 +166,7 @@ internal interface IItemCharacteristics
     bool ImFire { get; }
 
     /// <summary>
-    /// Returns whether or not the item causes earthquakes of the player when being worn.
+    /// Returns whether or not the item causes earthquakes to the player when being worn.
     /// </summary>
     bool Impact { get; }
 

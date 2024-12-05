@@ -12,6 +12,6 @@ internal class ColdImmunityItemEnhancement : ItemEnhancement
 {
     private ColdImmunityItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ImCold => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(ColdArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Cold1In1ArtifactBiasWeightedRandom);
 
 }

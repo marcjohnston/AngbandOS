@@ -12,5 +12,5 @@ internal class ResistPoisonAndRogueBiasItemEnhancement : ItemEnhancement
 {
     private ResistPoisonAndRogueBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResPois => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(RogueArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Rogue1In1ArtifactBiasWeightedRandom);
 }

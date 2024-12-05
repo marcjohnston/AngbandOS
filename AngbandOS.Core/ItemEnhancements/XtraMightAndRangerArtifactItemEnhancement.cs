@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ArtifactBiasWeightedRandoms;
+namespace AngbandOS.Core.ItemEnhancements;
 
 [Serializable]
-internal class AcidArtifactBiasWeightedRandom : ArtifactBiasWeightedRandom
+internal class XtraMightAndRangerArtifactItemEnhancement : ItemEnhancement
 {
-    private AcidArtifactBiasWeightedRandom(Game game) : base(game) { } // This object is a singleton
-    protected override (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples => new (string?, int)[]
-    {
-        (nameof(AcidArtifactBias), 1)
-    };
+    private XtraMightAndRangerArtifactItemEnhancement(Game game) : base(game) { } // This object is a singleton.
+    public override bool XtraMight => true;
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Ranger1In9ArtifactBiasWeightedRandom);
 }

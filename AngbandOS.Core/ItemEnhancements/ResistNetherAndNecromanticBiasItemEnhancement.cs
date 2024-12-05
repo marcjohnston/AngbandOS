@@ -12,5 +12,5 @@ internal class ResistNetherAndNecromanticBiasItemEnhancement : ItemEnhancement
 {
     private ResistNetherAndNecromanticBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResNether => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(NecromanticArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Necromantic1In1ArtifactBiasWeightedRandom);
 }

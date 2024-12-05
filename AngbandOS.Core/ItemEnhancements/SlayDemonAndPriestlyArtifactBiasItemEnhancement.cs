@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.ArtifactBiasWeightedRandoms;
-
 namespace AngbandOS.Core.ItemEnhancements;
 
 [Serializable]
-internal class AcidImmunityItemEnhancement : ItemEnhancement
+internal class SlayDemonAndPriestlyArtifactBiasItemEnhancement : ItemEnhancement
 {
-    private AcidImmunityItemEnhancement(Game game) : base(game) { } // This object is a singleton.
-    public override bool ImAcid => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(AcidArtifactBiasWeightedRandom);
+    private SlayDemonAndPriestlyArtifactBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
+    public override bool SlayDemon => true;
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Priestly1In9ArtifactBiasWeightedRandom);
 }

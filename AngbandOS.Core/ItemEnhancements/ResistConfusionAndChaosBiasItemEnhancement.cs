@@ -12,5 +12,5 @@ internal class ResistConfusionAndChaosBiasItemEnhancement : ItemEnhancement
 {
     private ResistConfusionAndChaosBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResConf => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(ChaosArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Chaos1In1ArtifactBiasWeightedRandom);
 }

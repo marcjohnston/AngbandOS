@@ -10,37 +10,6 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class RangedWeaponItemFactory : WeaponItemFactory
 {
-    public override void ApplySlayingForRandomArtifactCreation(ItemCharacteristics characteristics)
-    {
-        if (characteristics.ArtifactBias != null)
-        {
-            if (characteristics.ArtifactBias.ApplySlaying(characteristics))
-            {
-                return;
-            }
-        }
-
-        switch (Game.DieRoll(6))
-        {
-            case 1:
-            case 2:
-            case 3:
-                characteristics.XtraMight = true;
-                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
-                }
-                break;
-
-            default:
-                characteristics.XtraShots = true;
-                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
-                }
-                break;
-        }
-    }
+    protected override string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingRangedWeaponItemEnhancementWeightedRandom);
     public RangedWeaponItemFactory(Game game) : base(game) { }
-
 }

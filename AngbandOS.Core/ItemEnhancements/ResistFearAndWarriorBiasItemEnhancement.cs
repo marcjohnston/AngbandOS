@@ -12,5 +12,5 @@ internal class ResistFearAndWarriorBiasItemEnhancement : ItemEnhancement
 {
     private ResistFearAndWarriorBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResFear => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(WarriorArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Warrior1In1ArtifactBiasWeightedRandom);
 }

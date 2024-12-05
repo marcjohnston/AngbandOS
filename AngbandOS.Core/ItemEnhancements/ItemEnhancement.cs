@@ -145,6 +145,23 @@ internal abstract class ItemEnhancement : IGetKey
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
+    /// <summary>
+    /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
+    /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
+    /// </summary>
+    protected virtual string[]? ApplicableItemFactoryBindingKeys => null;
+
+    public ItemFactory[]? ApplicableItemFactories { get; private set; }
+
+    public bool AppliesTo(ItemFactory itemFactory)
+    {
+        if (ApplicableItemFactories == null)
+        {
+            return true;
+        }
+        return ApplicableItemFactories.Contains(itemFactory);
+    }
+
     public virtual void Bind()
     {
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
@@ -167,6 +184,7 @@ internal abstract class ItemEnhancement : IGetKey
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
+        ApplicableItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(ApplicableItemFactoryBindingKeys);
     }
 
     public string ToJson()
@@ -257,8 +275,8 @@ internal abstract class ItemEnhancement : IGetKey
     
     /// <inheritdoc />
     public virtual bool AntiTheft => false;
-    
-    protected virtual string? ArtifactBiasWeightedRandomBindingKey { get; set; }
+
+    protected virtual string? ArtifactBiasWeightedRandomBindingKey => null;
 
     /// <inheritdoc />
     public ArtifactBiasWeightedRandom? ArtifactBiasWeightedRandom { get; private set; }

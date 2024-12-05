@@ -12,5 +12,5 @@ internal class ResistElectricityAndElectricityBiasItemEnhancement : ItemEnhancem
 {
     private ResistElectricityAndElectricityBiasItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ResElec => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(ElectricityArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Electricity1In1ArtifactBiasWeightedRandom);
 }

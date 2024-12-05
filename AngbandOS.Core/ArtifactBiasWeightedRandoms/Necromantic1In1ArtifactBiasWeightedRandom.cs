@@ -7,9 +7,10 @@
 
 namespace AngbandOS.Core.ArtifactBiasWeightedRandoms;
 
-internal class NecromanticArtifactBiasWeightedRandom : ArtifactBiasWeightedRandom
+[Serializable]
+internal class Necromantic1In1ArtifactBiasWeightedRandom : ArtifactBiasWeightedRandom
 {
-    private NecromanticArtifactBiasWeightedRandom(Game game) : base(game) { } // This object is a singleton
+    private Necromantic1In1ArtifactBiasWeightedRandom(Game game) : base(game) { } // This object is a singleton
     protected override (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples => new (string?, int)[]
     {
         (nameof(NecromanticArtifactBias), 1)

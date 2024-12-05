@@ -42,8 +42,6 @@ internal class BladeOfChaosWeaponItemFactory : WeaponItemFactory
     public override int PackSort => 28;
 
     public override bool CanApplyBlessedArtifactBias => true;
-    public override bool CanVorpalSlay => true;
-
     protected override string[] WieldSlotBindingKeys => new string[] { nameof(MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;
 

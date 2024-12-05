@@ -261,6 +261,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         RefillScript = Game.SingletonRepository.GetNullable<IScriptItem>(RefillScriptBindingKey);
         BreakageChanceProbability = Game.ParseProbabilityExpression(BreakageChanceProbabilityExpression);
+        SlayingRandomArtifactItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey);
     }
 
     /// <summary>
@@ -1213,7 +1214,7 @@ internal abstract class ItemFactory : ItemEnhancement
                     else
                     {
                         WeightedRandom<ItemEnhancement> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemEnhancement>(Game);
-                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(AcidImmunityItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(AcidImmunityAndAcidArtifactBiasItemEnhancement)));
                         itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ElectricityImmunityItemEnhancement)));
                         itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ColdImmunityItemEnhancement)));
                         itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(FireImmunityItemEnhancement)));
@@ -1328,9 +1329,32 @@ internal abstract class ItemFactory : ItemEnhancement
             }
         }
     }
+
+    public void ApplySlayingForRandomArtifactCreation(ItemCharacteristics characteristics)
+    {
+        if (characteristics.ArtifactBias != null)
+        {
+            if (characteristics.ArtifactBias.ApplySlaying(characteristics))
+            {
+                return;
+            }
+        }
+
+        // Choose a slaying item enhancement.  If the item enhancement doesn't apply to this item factory, choose another.
+        ItemEnhancement? slayingItemEnhancement = null;
+        do
+        {
+            slayingItemEnhancement = SlayingRandomArtifactItemEnhancementWeightedRandom?.ChooseOrDefault();
+        } while (slayingItemEnhancement != null && !slayingItemEnhancement.AppliesTo(this));
+
+        // Apply the item enhancement.  This supports a null choice.
+        characteristics.Merge(slayingItemEnhancement?.GenerateItemCharacteristics());
+    }
     #endregion
 
     #region Bound Concrete Properties - API Object Functionality - Set during Bind() - get; private set;
+    public ItemEnhancementWeightedRandom? SlayingRandomArtifactItemEnhancementWeightedRandom { get; private set; }
+
     /// <summary>
     /// Returns the script that is used to refill the item; or null, if the item cannot be refilled.  This property is bound using the <see cref="RefillScriptBindingKey"/> property during the binding
     /// phase.
@@ -1432,173 +1456,8 @@ internal abstract class ItemFactory : ItemEnhancement
     public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivationTuple { get; private set; } = null;
     #endregion
 
-    #region Heavy Weights and Obsoletes - Virtual Methods and Virtual Complex Properties that must be resolved
-
-    public virtual void ApplySlayingForRandomArtifactCreation(ItemCharacteristics characteristics)
-    {
-        if (characteristics.ArtifactBias != null)
-        {
-            if (characteristics.ArtifactBias.ApplySlaying(characteristics))
-            {
-                return;
-            }
-        }
-
-        switch (Game.DieRoll(34))
-        {
-            case 1:
-            case 2:
-                characteristics.SlayAnimal = true;
-                break;
-
-            case 3:
-            case 4:
-                characteristics.SlayEvil = true;
-                if (characteristics.ArtifactBias == null && Game.DieRoll(2) == 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(LawArtifactBias));
-                }
-                else if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                break;
-
-            case 5:
-            case 6:
-                characteristics.SlayUndead = true;
-                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                break;
-
-            case 7:
-            case 8:
-                characteristics.SlayDemon = true;
-                if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
-                }
-                break;
-
-            case 9:
-            case 10:
-                characteristics.SlayOrc = true;
-                break;
-
-            case 11:
-            case 12:
-                characteristics.SlayTroll = true;
-                break;
-
-            case 13:
-            case 14:
-                characteristics.SlayGiant = true;
-                break;
-
-            case 15:
-            case 16:
-                characteristics.SlayDragon = true;
-                break;
-
-            case 17:
-                characteristics.KillDragon = true;
-                break;
-
-            case 18:
-            case 19:
-                if (CanVorpalSlay)
-                {
-                    characteristics.Vorpal = true;
-                    if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
-                    {
-                        characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
-                    }
-                }
-                else
-                {
-                    // This item cannot have vorpal slaying applied, choose a different random slaying.
-                    ApplySlayingForRandomArtifactCreation(characteristics);
-                }
-                break;
-
-            case 20:
-                characteristics.Impact = true;
-                break;
-
-            case 21:
-            case 22:
-                characteristics.BrandFire = true;
-                if (characteristics.ArtifactBias == null)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(FireArtifactBias));
-                }
-                break;
-
-            case 23:
-            case 24:
-                characteristics.BrandCold = true;
-                if (characteristics.ArtifactBias == null)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ColdArtifactBias));
-                }
-                break;
-
-            case 25:
-            case 26:
-                characteristics.BrandElec = true;
-                if (characteristics.ArtifactBias == null)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ElectricityArtifactBias));
-                }
-                break;
-
-            case 27:
-            case 28:
-                characteristics.BrandAcid = true;
-                if (characteristics.ArtifactBias == null)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(AcidArtifactBias));
-                }
-                break;
-
-            case 29:
-            case 30:
-                characteristics.BrandPois = true;
-                if (characteristics.ArtifactBias == null && Game.DieRoll(3) != 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PoisonArtifactBias));
-                }
-                else if (characteristics.ArtifactBias == null && Game.DieRoll(6) == 1)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
-                }
-                else if (characteristics.ArtifactBias == null)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
-                }
-                break;
-
-            case 31:
-            case 32:
-                characteristics.Vampiric = true;
-                if (characteristics.ArtifactBias == null)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(NecromanticArtifactBias));
-                }
-                break;
-
-            default:
-                characteristics.Chaotic = true;
-                if (characteristics.ArtifactBias == null)
-                {
-                    characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
-                }
-                break;
-        }
-    }
-    #endregion
+    #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects
+    protected virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; set; } = nameof(SlayingItemEnhancementWeightedRandom);
 
     /// <summary>
     /// Returns the ceiling value for bonus armor values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
@@ -1621,7 +1480,6 @@ internal abstract class ItemFactory : ItemEnhancement
     /// </summary>
     public virtual int? RandomArtifactBonusDamageCeiling => null;
 
-    #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects
     /// <summary>
     /// Returns the key of the script that is used to refill the item; or null, if the item cannot be refilled.  Returns null, by default.  This property is used to bind the <see cref="RefillScript"/>
     /// property during the binding phase.
@@ -1821,11 +1679,6 @@ internal abstract class ItemFactory : ItemEnhancement
     /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
     /// </summary>
     public virtual bool CanApplyBlowsBonus => false;
-
-    /// <summary>
-    /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanVorpalSlay => false;
 
     /// <summary>
     /// Returns an expression that represents the chance that an item that is thrown or fired will break.  Returns 10, or 10%, by default.  This

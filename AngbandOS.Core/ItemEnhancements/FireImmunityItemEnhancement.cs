@@ -12,5 +12,5 @@ internal class FireImmunityItemEnhancement : ItemEnhancement
 {
     private FireImmunityItemEnhancement(Game game) : base(game) { } // This object is a singleton.
     public override bool ImFire => true;
-    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(FireArtifactBiasWeightedRandom);
+    protected override string? ArtifactBiasWeightedRandomBindingKey => nameof(Fire1In1ArtifactBiasWeightedRandom);
 }
