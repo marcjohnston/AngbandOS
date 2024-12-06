@@ -26,7 +26,6 @@ internal class ConjuringsTricksTarotBookItemFactory : ItemFactory
         (10, 1)
     };
     public override int Weight => 30;
-    public override bool KindIsGood => false;
 
     protected override string[] SpellBindingKeys => new string[]
     {

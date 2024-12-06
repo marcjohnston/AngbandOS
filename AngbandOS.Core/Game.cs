@@ -2118,6 +2118,13 @@ public bool IsDead = false;
         }
     }
 
+    /// <summary>
+    /// Returns an <see cref="ItemFactory"/> for the creation of an object.
+    /// </summary>
+    /// <param name="level"></param>
+    /// <param name="doNotAllowChestToBeCreated"></param>
+    /// <param name="good"></param>
+    /// <returns></returns>
     public ItemFactory? RandomItemType(int level, bool doNotAllowChestToBeCreated, bool good)
     {
         int i;
@@ -2146,7 +2153,8 @@ public bool IsDead = false;
             }
 
             // Determine the final probability.  If only good objects are requested and the object is not good, then set it to 0.
-            table[i].FinalProbability = good && !kPtr.KindIsGood ? 0 : table[i].BaseProbability;
+            bool isGood = kPtr.BonusArmorClass >= 0 && kPtr.BonusHit >= 0 && kPtr.BonusDamage >= 0;
+            table[i].FinalProbability = good && !isGood ? 0 : table[i].BaseProbability;
 
             total += table[i].FinalProbability;
         }

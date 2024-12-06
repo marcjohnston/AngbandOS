@@ -37,13 +37,6 @@ internal class SeekerBoltAmmunitionItemFactory : ItemFactory
     {
         (500, "5d5-5")
     };
-
-    /// <summary>
-    /// Returns true for all bolts.
-    /// </summary>
-    public override bool KindIsGood => true;
-
-
     public override bool HatesAcid => true;
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
     protected override string BreakageChanceProbabilityExpression => "25/100";

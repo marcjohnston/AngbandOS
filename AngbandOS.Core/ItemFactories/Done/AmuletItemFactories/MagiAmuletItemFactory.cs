@@ -44,8 +44,6 @@ internal class MagiAmuletItemFactory : ItemFactory
     public override bool SeeInvis => true;
     public override int BonusArmorClass => 3;
     public override int Weight => 3;
-
-    public override bool KindIsGood => true;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

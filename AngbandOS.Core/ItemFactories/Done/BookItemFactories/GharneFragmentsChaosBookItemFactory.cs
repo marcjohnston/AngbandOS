@@ -31,8 +31,6 @@ internal class GharneFragmentsChaosBookItemFactory : ItemFactory
     };
 
     public override int Weight => 30;
-    public override bool KindIsGood => true;
-
     protected override string[] SpellBindingKeys => new string[]
     {
         nameof(ChaosSpellPolymorphOther),

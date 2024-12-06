@@ -40,12 +40,6 @@ internal class WoodenArrowAmmunitionItemFactory : ItemFactory
     public override int PackSort => 34;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
-
-    /// <summary>
-    /// Returns true, for all arrows.
-    /// </summary>
-    public override bool KindIsGood => true;
-
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
     protected override string BreakageChanceProbabilityExpression => "25/100";
 

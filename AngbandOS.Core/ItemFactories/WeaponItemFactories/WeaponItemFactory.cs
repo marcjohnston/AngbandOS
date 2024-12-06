@@ -19,25 +19,6 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override int? RandomArtifactBonusHitCeiling => 19;
 
     /// <summary>
-    /// Returns true, for all weapons where both the hit (ToH) and damage (ToD) are equal to or greater than zero.  False, for all weapons with either stat less than 0.
-    /// </summary>
-    public override bool KindIsGood
-    {
-        get
-        {
-            if (BonusHit < 0)
-            {
-                return false;
-            }
-            if (BonusDamage < 0)
-            {
-                return false;
-            }
-            return true;
-        }
-    }
-
-    /// <summary>
     /// Returns true because broken weapons should be stomped automatically. 
     /// </summary>
     public override bool InitialBrokenStomp => true;

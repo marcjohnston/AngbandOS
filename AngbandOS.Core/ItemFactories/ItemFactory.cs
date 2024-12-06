@@ -1811,7 +1811,6 @@ internal abstract class ItemFactory : ItemEnhancement
 
     public virtual int DamageSides => 0;
 
-    public virtual bool KindIsGood => false;
     public virtual int LevelNormallyFound => 0;
     public virtual bool Lightsource { get; set; } = false;
 

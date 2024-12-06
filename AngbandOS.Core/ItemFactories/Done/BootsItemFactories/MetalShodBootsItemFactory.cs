@@ -67,9 +67,4 @@ internal class MetalShodBootsItemFactory : ItemFactory
     public override bool IdentityCanBeSensed => true;
     public override bool IsWearableOrWieldable => true;
     public override int RandartActivationChance => base.RandartActivationChance * 2;
-
-    /// <summary>
-    /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
-    /// </summary>
-    public override bool KindIsGood => BonusArmorClass >= 0;
 }

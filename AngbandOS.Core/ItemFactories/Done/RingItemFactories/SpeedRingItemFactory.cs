@@ -39,8 +39,6 @@ internal class SpeedRingItemFactory : ItemFactory
     };
     public override bool Speed => true;
     public override int Weight => 2;
-
-    public override bool KindIsGood => true;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>
