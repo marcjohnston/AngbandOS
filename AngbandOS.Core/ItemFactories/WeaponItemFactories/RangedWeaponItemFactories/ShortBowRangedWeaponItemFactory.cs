@@ -8,10 +8,11 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class ShortBowRangedWeaponItemFactory : RangedWeaponItemFactory
+internal class ShortBowRangedWeaponItemFactory : WeaponItemFactory
 {
     private ShortBowRangedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    protected override string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingRangedWeaponItemEnhancementWeightedRandom);
     protected override string SymbolBindingKey => nameof(CloseBracketSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Short Bow";
