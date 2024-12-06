@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class LargeSteelChestItemFactory : ChestItemFactory
+internal class LargeSteelChestItemFactory : ItemFactory
 {
     private LargeSteelChestItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -32,5 +32,16 @@ internal class LargeSteelChestItemFactory : ChestItemFactory
     {
         (null, null, new string[] { nameof(ChestEnchantmentScript) }),
     };
+    protected override string ItemClassBindingKey => nameof(ChestsItemClass);
+    public override bool HatesFire => true;
+    public override bool HatesAcid => true;
 
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Chests. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
+    public override bool IsContainer => true;
+
+    public override int PackSort => 36;
 }
