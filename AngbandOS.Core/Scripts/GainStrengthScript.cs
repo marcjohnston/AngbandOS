@@ -19,6 +19,6 @@ internal class GainStrengthScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Strength increases your strength
-        return Game.TryIncreasingAbilityScore(Ability.Strength);
+        return Game.TryIncreasingAbilityScore(AbilityEnum.Strength);
     }
 }

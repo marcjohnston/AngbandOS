@@ -13,7 +13,7 @@ internal class SmellMetActiveMutation : Mutation
     private SmellMetActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 12))
+        if (Game.CheckIfRacialPowerWorks(3, 2, AbilityEnum.Intelligence, 12))
         {
             Game.DetectTreasure();
         }

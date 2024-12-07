@@ -49,7 +49,7 @@ internal class RogueCharacterClass : BaseCharacterClass
                 return "Thief";
         }
     }
-    public override int PrimeStat => Ability.Dexterity;
+    public override int PrimeStat => AbilityEnum.Dexterity;
     public override string[] Info => new string[] {
         "Stealth based characters who are adept at picking locks,",
         "searching, and disarming traps. Rogues can use stealth to",
@@ -73,7 +73,7 @@ internal class RogueCharacterClass : BaseCharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override int SpellStat => Ability.Intelligence;
+    public override int SpellStat => AbilityEnum.Intelligence;
     public override int MaximumWeight => 30;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;

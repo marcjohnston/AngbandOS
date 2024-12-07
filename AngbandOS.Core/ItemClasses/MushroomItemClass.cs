@@ -8,5 +8,5 @@ internal class MushroomItemClass : ItemClass
     /// <summary>
     /// Returns the mushroom flavors repository because mushrooms have flavors that need to be identified.
     /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<MushroomReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<MushroomItemFlavor>();
 }

@@ -25,7 +25,7 @@ internal class DexterityDartScript : Script, IScript
             // Do 1d4 damage plus dexterity drain
             int damage = Game.DiceRoll(1, 4);
             Game.TakeHit(damage, "a dart trap");
-            Game.TryDecreasingAbilityScore(Ability.Dexterity);
+            Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity);
         }
         else
         {

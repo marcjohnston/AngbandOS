@@ -19,7 +19,7 @@ internal class EatRestoreConstitutionScript : Script, IIdentifableScript
     public bool ExecuteIdentifableScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        if (Game.TryRestoringAbilityScore(Ability.Constitution))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Constitution))
         {
             return true;
         }

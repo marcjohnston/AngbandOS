@@ -9,5 +9,5 @@ internal class RingsItemClass : ItemClass
     /// <summary>
     /// Returns the ring flavors repository because rings have flavors that need to be identified.
     /// </summary>
-    public override IEnumerable<Flavor> GetFlavorRepository => Game.SingletonRepository.Get<RingReadableFlavor>();
+    public override IEnumerable<Flavor> GetFlavorRepository => Game.SingletonRepository.Get<RingItemFlavor>();
 }

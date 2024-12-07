@@ -54,7 +54,7 @@ internal class HalfTrollRace : Race
             itemCharacteristics.SlowDigest = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -78,7 +78,7 @@ internal class HalfTrollRace : Race
     public override void UseRacialPower()
     {
         // Half-trolls can go berserk, which also heals them
-        if (Game.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, Game.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
+        if (Game.CheckIfRacialPowerWorks(10, 12, AbilityEnum.Wisdom, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
         {
             Game.MsgPrint("RAAAGH!");
             Game.FearTimer.ResetTimer();

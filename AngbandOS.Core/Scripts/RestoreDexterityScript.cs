@@ -19,6 +19,6 @@ internal class RestoreDexterityScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Restore wisdom restores your wisdom
-        return Game.TryRestoringAbilityScore(Ability.Wisdom);
+        return Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
     }
 }

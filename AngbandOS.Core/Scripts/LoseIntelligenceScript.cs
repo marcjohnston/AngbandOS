@@ -19,6 +19,6 @@ internal class LoseIntelligenceScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Stupidity tries to reduce your intelligence
-        return Game.TryDecreasingAbilityScore(Ability.Intelligence);
+        return Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
     }
 }

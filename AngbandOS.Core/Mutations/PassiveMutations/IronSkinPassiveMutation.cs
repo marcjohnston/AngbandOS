@@ -15,7 +15,7 @@ internal class IronSkinPassiveMutation : Mutation
     public override string GainMessage => "Your skin turns to steel!";
     public override string HaveMessage => "Your skin is made of steel (-1 DEX, +25 AC).";
     public override string LoseMessage => "Your skin reverts to flesh!";
-    public override MutationGroup Group => MutationGroup.Skin;
+    public override MutationGroupEnum Group => MutationGroupEnum.Skin;
 
     public override void OnGain()
     {

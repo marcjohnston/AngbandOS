@@ -48,7 +48,7 @@ internal class InventoryScript : Script, IScript, IRepeatableScript, IScriptStor
             return;
         }
         // Get a new command
-        string outVal = $"Inventory: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+        string outVal = $"Inventory: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.AbilityScores[AbilityEnum.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
         Game.Screen.PrintLine(outVal, 0, 0);
         char c = Game.Inkey();
         Game.Screen.Restore(savedScreen);

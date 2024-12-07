@@ -13,7 +13,7 @@ internal class ColdTouchActiveMutation : Mutation
     private ColdTouchActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(2, 2, Ability.Constitution, 11))
+        if (!Game.CheckIfRacialPowerWorks(2, 2, AbilityEnum.Constitution, 11))
         {
             return;
         }

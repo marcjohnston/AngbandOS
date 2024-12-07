@@ -13,7 +13,7 @@ internal class PatronUbboSathla : Patron
     private PatronUbboSathla(Game game) : base(game) { }
     public override string ShortName => "Ubbo-Sathla";
     public override string LongName => "Ubbo-Sathla, the Unbegotten Source";
-    public override int PreferredAbility => Ability.Charisma;
+    public override int PreferredAbility => AbilityEnum.Charisma;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

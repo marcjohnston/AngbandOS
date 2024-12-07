@@ -20,27 +20,27 @@ internal class EatRestoringScript : Script, IIdentifableScript
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         bool ident = false;
-        if (Game.TryRestoringAbilityScore(Ability.Strength))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Strength))
         {
             ident = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
         {
             ident = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Wisdom))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Wisdom))
         {
             ident = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Dexterity))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Dexterity))
         {
             ident = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Constitution))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Constitution))
         {
             ident = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Charisma))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Charisma))
         {
             ident = true;
         }

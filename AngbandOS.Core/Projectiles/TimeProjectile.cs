@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection;
+namespace AngbandOS.Core.Projectiles;
 
 [Serializable]
 internal class TimeProjectile : Projectile
@@ -80,32 +80,32 @@ internal class TimeProjectile : Projectile
                         switch (Game.DieRoll(6))
                         {
                             case 1:
-                                k = Ability.Strength;
+                                k = AbilityEnum.Strength;
                                 act = "strong";
                                 break;
 
                             case 2:
-                                k = Ability.Intelligence;
+                                k = AbilityEnum.Intelligence;
                                 act = "bright";
                                 break;
 
                             case 3:
-                                k = Ability.Wisdom;
+                                k = AbilityEnum.Wisdom;
                                 act = "wise";
                                 break;
 
                             case 4:
-                                k = Ability.Dexterity;
+                                k = AbilityEnum.Dexterity;
                                 act = "agile";
                                 break;
 
                             case 5:
-                                k = Ability.Constitution;
+                                k = AbilityEnum.Constitution;
                                 act = "hale";
                                 break;
 
                             case 6:
-                                k = Ability.Charisma;
+                                k = AbilityEnum.Charisma;
                                 act = "beautiful";
                                 break;
                         }

@@ -15,7 +15,7 @@ internal class FleshRotPassiveMutation : Mutation
     public override string GainMessage => "Your flesh is afflicted by a rotting disease!";
     public override string HaveMessage => "Your flesh is rotting (-2 CON, -1 CHR).";
     public override string LoseMessage => "Your flesh is no longer afflicted by a rotting disease!";
-    public override MutationGroup Group => MutationGroup.Skin;
+    public override MutationGroupEnum Group => MutationGroupEnum.Skin;
 
     public override void OnGain()
     {

@@ -69,7 +69,7 @@ internal class DraconianRace : Race
             itemCharacteristics.ResPois = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new GnomishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new GnomishSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };
@@ -122,10 +122,10 @@ internal class DraconianRace : Race
         {
             switch (Game.BaseCharacterClass.ID)
             {
-                case CharacterClass.Warrior:
-                case CharacterClass.Ranger:
-                case CharacterClass.Druid:
-                case CharacterClass.ChosenOne:
+                case CharacterClassEnum.Warrior:
+                case CharacterClassEnum.Ranger:
+                case CharacterClassEnum.Druid:
+                case CharacterClassEnum.ChosenOne:
                     if (Game.DieRoll(3) == 1)
                     {
                         projectile = Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile));
@@ -138,10 +138,10 @@ internal class DraconianRace : Race
                     }
                     break;
 
-                case CharacterClass.Mage:
-                case CharacterClass.WarriorMage:
-                case CharacterClass.HighMage:
-                case CharacterClass.Channeler:
+                case CharacterClassEnum.Mage:
+                case CharacterClassEnum.WarriorMage:
+                case CharacterClassEnum.HighMage:
+                case CharacterClassEnum.Channeler:
                     if (Game.DieRoll(3) == 1)
                     {
                         projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
@@ -154,8 +154,8 @@ internal class DraconianRace : Race
                     }
                     break;
 
-                case CharacterClass.Fanatic:
-                case CharacterClass.Cultist:
+                case CharacterClassEnum.Fanatic:
+                case CharacterClassEnum.Cultist:
                     if (Game.DieRoll(3) != 1)
                     {
                         projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
@@ -168,7 +168,7 @@ internal class DraconianRace : Race
                     }
                     break;
 
-                case CharacterClass.Monk:
+                case CharacterClassEnum.Monk:
                     if (Game.DieRoll(3) != 1)
                     {
                         projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
@@ -181,8 +181,8 @@ internal class DraconianRace : Race
                     }
                     break;
 
-                case CharacterClass.Mindcrafter:
-                case CharacterClass.Mystic:
+                case CharacterClassEnum.Mindcrafter:
+                case CharacterClassEnum.Mystic:
                     if (Game.DieRoll(3) != 1)
                     {
                         projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
@@ -195,8 +195,8 @@ internal class DraconianRace : Race
                     }
                     break;
 
-                case CharacterClass.Priest:
-                case CharacterClass.Paladin:
+                case CharacterClassEnum.Priest:
+                case CharacterClassEnum.Paladin:
                     if (Game.DieRoll(3) == 1)
                     {
                         projectile = Game.SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
@@ -209,7 +209,7 @@ internal class DraconianRace : Race
                     }
                     break;
 
-                case CharacterClass.Rogue:
+                case CharacterClassEnum.Rogue:
                     if (Game.DieRoll(3) == 1)
                     {
                         projectile = Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile));
@@ -223,7 +223,7 @@ internal class DraconianRace : Race
                     break;
             }
         }
-        if (Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, Ability.Constitution, 12))
+        if (Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, AbilityEnum.Constitution, 12))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

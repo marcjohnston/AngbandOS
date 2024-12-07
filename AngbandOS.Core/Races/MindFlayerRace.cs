@@ -58,7 +58,7 @@ internal class MindFlayerRace : Race
             itemCharacteristics.Telepathy = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 14)
@@ -84,7 +84,7 @@ internal class MindFlayerRace : Race
     public override void UseRacialPower()
     {
         // Mind Flayers can shoot psychic bolts
-        if (Game.CheckIfRacialPowerWorks(15, 12, Ability.Intelligence, 14))
+        if (Game.CheckIfRacialPowerWorks(15, 12, AbilityEnum.Intelligence, 14))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

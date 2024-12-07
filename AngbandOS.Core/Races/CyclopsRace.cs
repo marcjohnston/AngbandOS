@@ -50,7 +50,7 @@ internal class CyclopsRace : Race
         itemCharacteristics.ResSound = true;
     }
 
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -68,7 +68,7 @@ internal class CyclopsRace : Race
     public override void UseRacialPower()
     {
         // Cyclopes can throw boulders
-        if (Game.CheckIfRacialPowerWorks(20, 15, Ability.Strength, 12))
+        if (Game.CheckIfRacialPowerWorks(20, 15, AbilityEnum.Strength, 12))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

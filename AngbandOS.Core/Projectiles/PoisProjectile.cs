@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection;
+namespace AngbandOS.Core.Projectiles;
 
 [Serializable]
 internal class PoisProjectile : Projectile
@@ -66,7 +66,7 @@ internal class PoisProjectile : Projectile
         if (!(Game.PoisonResistanceTimer.Value != 0 || Game.HasPoisonResistance) &&
             Game.DieRoll(Game.HurtChance) == 1)
         {
-            Game.TryDecreasingAbilityScore(Ability.Constitution);
+            Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
         }
         Game.TakeHit(dam, killer);
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))

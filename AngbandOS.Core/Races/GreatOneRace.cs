@@ -50,7 +50,7 @@ internal class GreatOneRace : Race
         itemCharacteristics.SustCon = true;
         itemCharacteristics.Regen = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -98,7 +98,7 @@ internal class GreatOneRace : Race
         }
         if (dreamPower == 1)
         {
-            if (Game.CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
+            if (Game.CheckIfRacialPowerWorks(40, 75, AbilityEnum.Wisdom, 50))
             {
                 Game.MsgPrint("You dream of a time of health and peace...");
                 Game.PoisonTimer.ResetTimer();
@@ -107,23 +107,23 @@ internal class GreatOneRace : Race
                 Game.BleedingTimer.ResetTimer();
                 Game.BlindnessTimer.ResetTimer();
                 Game.FearTimer.ResetTimer();
-                Game.TryRestoringAbilityScore(Ability.Strength);
-                Game.TryRestoringAbilityScore(Ability.Intelligence);
-                Game.TryRestoringAbilityScore(Ability.Wisdom);
-                Game.TryRestoringAbilityScore(Ability.Dexterity);
-                Game.TryRestoringAbilityScore(Ability.Constitution);
-                Game.TryRestoringAbilityScore(Ability.Charisma);
+                Game.TryRestoringAbilityScore(AbilityEnum.Strength);
+                Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
+                Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
+                Game.TryRestoringAbilityScore(AbilityEnum.Dexterity);
+                Game.TryRestoringAbilityScore(AbilityEnum.Constitution);
+                Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
                 Game.RunScript(nameof(RestoreLevelScript));
             }
         }
         else if (dreamPower == 2)
         {
-            if (Game.CheckIfRacialPowerWorks(30, 50, Ability.Intelligence, 50))
+            if (Game.CheckIfRacialPowerWorks(30, 50, AbilityEnum.Intelligence, 50))
             {
                 Game.MsgPrint("You start walking around. Your surroundings change.");
                 Game.DoCmdSaveGame(true);
                 Game.NewLevelFlag = true;
-                Game.CameFrom = LevelStart.StartRandom;
+                Game.CameFrom = LevelStartEnum.StartRandom;
             }
         }
     }

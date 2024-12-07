@@ -39,7 +39,7 @@ internal class DestroyAllWorthlessItemsScript : Script, IScript, IRepeatableScri
     {
         int count = 0;
         // Look for worthless items
-        for (int i = InventorySlot.PackCount - 1; i >= 0; i--)
+        for (int i = InventorySlotEnum.PackCount - 1; i >= 0; i--)
         {
             Item? item = Game.GetInventoryItem(i);
             if (item == null)

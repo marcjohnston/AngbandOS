@@ -19,6 +19,6 @@ internal class LoseConstitutionScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Sickliness tries to reduce your constitution
-        return Game.TryDecreasingAbilityScore(Ability.Constitution);
+        return Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
     }
 }

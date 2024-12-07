@@ -31,7 +31,7 @@ internal class WaterPotionItemFactory : ItemFactory
     public override void Bind()
     {
         base.Bind();
-        Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(ClearPotionReadableFlavor));
+        Flavor = Game.SingletonRepository.Get<PotionItemFlavor>(nameof(ClearPotionItemFlavor));
     }
 
     /// <summary>

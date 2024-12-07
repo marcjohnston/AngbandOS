@@ -48,7 +48,7 @@ internal class DwarfRace : Race
     {
         itemCharacteristics.ResBlind = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 4)
@@ -65,7 +65,7 @@ internal class DwarfRace : Race
     public override void UseRacialPower()
     {
         // Dwarves can detect traps, doors, and stairs
-        if (Game.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
+        if (Game.CheckIfRacialPowerWorks(5, 5, AbilityEnum.Wisdom, 12))
         {
             Game.MsgPrint("You examine your surroundings.");
             Game.DetectTraps();

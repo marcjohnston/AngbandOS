@@ -13,7 +13,7 @@ internal class TelekinesActiveMutation : Mutation
     private TelekinesActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(9, 9, Ability.Wisdom, 14))
+        if (!Game.CheckIfRacialPowerWorks(9, 9, AbilityEnum.Wisdom, 14))
         {
             return;
         }

@@ -15,7 +15,7 @@ internal class LoseStrChestTrap : ChestTrap
     {
         Game.MsgPrint("A small needle has pricked you!");
         Game.TakeHit(Game.DiceRoll(1, 4), "a poison needle");
-        Game.TryDecreasingAbilityScore(Ability.Strength);
+        Game.TryDecreasingAbilityScore(AbilityEnum.Strength);
     }
     public override string Description => "(Poison Needle)";
 }

@@ -15,7 +15,7 @@ internal class BeakRandomMutation : Mutation
     public override string GainMessage => "Your mouth turns into a sharp, powerful beak!";
     public override string HaveMessage => "You have a beak (dam. 2d4).";
     public override string LoseMessage => "Your mouth reverts to normal!";
-    public override MutationGroup Group => MutationGroup.Mouth;
+    public override MutationGroupEnum Group => MutationGroupEnum.Mouth;
     public override int DamageDiceSize => 2;
     public override int DamageDiceNumber => 4;
     public override int EquivalentWeaponWeight => 5;

@@ -49,7 +49,7 @@ internal class KoboldRace : Race
     {
         itemCharacteristics.ResPois = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 11)
@@ -66,7 +66,7 @@ internal class KoboldRace : Race
     public override void UseRacialPower()
     {
         // Kobolds can throw poison darts
-        if (Game.CheckIfRacialPowerWorks(12, 8, Ability.Dexterity, 14))
+        if (Game.CheckIfRacialPowerWorks(12, 8, AbilityEnum.Dexterity, 14))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

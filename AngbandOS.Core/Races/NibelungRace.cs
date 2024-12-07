@@ -50,7 +50,7 @@ internal class NibelungRace : Race
         itemCharacteristics.ResDisen = true;
         itemCharacteristics.ResDark = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -70,7 +70,7 @@ internal class NibelungRace : Race
     public override void UseRacialPower()
     {
         // Nibelungen can detect traps, doors, and stairs
-        if (Game.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
+        if (Game.CheckIfRacialPowerWorks(5, 5, AbilityEnum.Wisdom, 10))
         {
             Game.MsgPrint("You examine your surroundings.");
             Game.DetectTraps();

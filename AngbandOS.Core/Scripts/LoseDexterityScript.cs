@@ -19,6 +19,6 @@ internal class LoseDexterityScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Clumsiness tries to reduce your dexterity
-        return Game.TryDecreasingAbilityScore(Ability.Dexterity);
+        return Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity);
     }
 }

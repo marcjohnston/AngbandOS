@@ -13,7 +13,7 @@ internal class PatronTsathoggua : Patron
     private PatronTsathoggua(Game game) : base(game) { }
     public override string ShortName => "Tsathoggua";
     public override string LongName => "Tsathoggua, the Sleeper of N'Kai";
-    public override int PreferredAbility => Ability.Intelligence;
+    public override int PreferredAbility => AbilityEnum.Intelligence;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

@@ -49,7 +49,7 @@ internal class HobbitRace : Race
     {
         itemCharacteristics.SustDex = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -68,7 +68,7 @@ internal class HobbitRace : Race
     public override void UseRacialPower()
     {
         // Hobbits can cook food
-        if (Game.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
+        if (Game.CheckIfRacialPowerWorks(15, 10, AbilityEnum.Intelligence, 10))
         {
             ItemFactory foodItemFactory = Game.SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
             Item item = foodItemFactory.GenerateItem();

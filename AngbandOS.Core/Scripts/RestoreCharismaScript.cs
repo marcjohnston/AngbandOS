@@ -19,6 +19,6 @@ internal class RestoreCharismaScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Restore charisma restores your charisma
-        return Game.TryRestoringAbilityScore(Ability.Charisma);
+        return Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
     }
 }

@@ -13,7 +13,7 @@ internal class SterilityActiveMutation : Mutation
     private SterilityActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(20, 40, Ability.Charisma, 18))
+        if (!Game.CheckIfRacialPowerWorks(20, 40, AbilityEnum.Charisma, 18))
         {
             return;
         }

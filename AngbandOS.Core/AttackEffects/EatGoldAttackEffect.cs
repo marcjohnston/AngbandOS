@@ -18,7 +18,7 @@ internal class EatGoldAttackEffect : AttackEffect
         // Steal some money
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
         obvious = true;
-        if ((Game.ParalysisTimer.Value == 0 && Game.RandomLessThan(100) < Game.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Game.ExperienceLevel.IntValue) || Game.HasAntiTheft)
+        if ((Game.ParalysisTimer.Value == 0 && Game.RandomLessThan(100) < Game.AbilityScores[AbilityEnum.Dexterity].DexTheftAvoidance + Game.ExperienceLevel.IntValue) || Game.HasAntiTheft)
         {
             Game.MsgPrint("You quickly protect your money pouch!");
             if (Game.RandomLessThan(3) != 0)

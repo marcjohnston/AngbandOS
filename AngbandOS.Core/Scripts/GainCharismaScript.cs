@@ -19,6 +19,6 @@ internal class GainCharismaScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Charisma increases your charisma
-        return Game.TryIncreasingAbilityScore(Ability.Charisma);
+        return Game.TryIncreasingAbilityScore(AbilityEnum.Charisma);
     }
 }

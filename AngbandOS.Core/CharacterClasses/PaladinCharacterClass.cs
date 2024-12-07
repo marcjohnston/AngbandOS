@@ -43,7 +43,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
                 return "Paladin";
         }
     }
-    public override int PrimeStat => Ability.Wisdom;
+    public override int PrimeStat => AbilityEnum.Wisdom;
     public override string[] Info => new string[] {
         "Holy warriors who use WIS based spell casting to supplement",
         "their fighting skills. Paladins can specialise in either",
@@ -53,7 +53,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
     };
     public override int SpellWeight => 400;
     public override void Cast() => CastMentalism();
-    public override int SpellStat => Ability.Wisdom;
+    public override int SpellStat => AbilityEnum.Wisdom;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));

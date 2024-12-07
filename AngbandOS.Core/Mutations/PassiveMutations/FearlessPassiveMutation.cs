@@ -15,7 +15,7 @@ internal class FearlessPassiveMutation : Mutation
     public override string GainMessage => "You become completely fearless.";
     public override string HaveMessage => "You are completely fearless.";
     public override string LoseMessage => "You begin to feel fear again.";
-    public override MutationGroup Group => MutationGroup.Bravery;
+    public override MutationGroupEnum Group => MutationGroupEnum.Bravery;
 
     public override void OnGain()
     {

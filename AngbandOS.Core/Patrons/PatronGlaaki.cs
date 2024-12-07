@@ -13,7 +13,7 @@ internal class PatronGlaaki : Patron
     private PatronGlaaki(Game game) : base(game) { }
     public override string ShortName => "Glaaki";
     public override string LongName => "Glaaki, Lord of Dead Dreams";
-    public override int PreferredAbility => Ability.Constitution;
+    public override int PreferredAbility => AbilityEnum.Constitution;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

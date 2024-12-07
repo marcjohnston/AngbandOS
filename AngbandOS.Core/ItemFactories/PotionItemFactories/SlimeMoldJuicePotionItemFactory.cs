@@ -20,7 +20,7 @@ internal class SlimeMoldJuicePotionItemFactory : ItemFactory
     public override void Bind()
     {
         base.Bind();
-        Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(IckyGreenPotionReadableFlavor));
+        Flavor = Game.SingletonRepository.Get<PotionItemFlavor>(nameof(IckyGreenPotionItemFlavor));
     }
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

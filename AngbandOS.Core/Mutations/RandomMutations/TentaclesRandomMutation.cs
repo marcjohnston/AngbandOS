@@ -19,7 +19,7 @@ internal class TentaclesRandomMutation : Mutation
     public override int DamageDiceNumber => 5;
     public override int EquivalentWeaponWeight => 5;
     public override string AttackDescription => "tentacles";
-    public override MutationAttackType MutationAttackType => MutationAttackType.Hellfire;
+    public override MutationAttackTypeEnum MutationAttackType => MutationAttackTypeEnum.Hellfire;
 
     public override void OnGain()
     {

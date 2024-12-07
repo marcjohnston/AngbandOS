@@ -75,6 +75,6 @@ internal class RestInRoomScript : Script, IScript
         Game.ConfusedTimer.SetValue();
         Game.StunTimer.SetValue();
         Game.NewLevelFlag = true;
-        Game.CameFrom = LevelStart.StartWalk;
+        Game.CameFrom = LevelStartEnum.StartWalk;
     }
 }

@@ -49,7 +49,7 @@ internal class HalfTitanRace : Race
     {
         itemCharacteristics.ResChaos = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -67,7 +67,7 @@ internal class HalfTitanRace : Race
     public override void UseRacialPower()
     {
         // Half-Titans can probe enemies
-        if (Game.CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
+        if (Game.CheckIfRacialPowerWorks(35, 20, AbilityEnum.Intelligence, 12))
         {
             Game.MsgPrint("You examine your foes...");
             Game.Probing();

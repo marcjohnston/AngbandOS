@@ -52,7 +52,7 @@ internal class VampireRace : Race
         itemCharacteristics.ResPois = true;
         itemCharacteristics.ResCold = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -91,7 +91,7 @@ internal class VampireRace : Race
     public override void UseRacialPower()
     {
         // Vampires can drain health
-        if (Game.CheckIfRacialPowerWorks(2, 1 + (Game.ExperienceLevel.IntValue / 3), Ability.Constitution, 9))
+        if (Game.CheckIfRacialPowerWorks(2, 1 + (Game.ExperienceLevel.IntValue / 3), AbilityEnum.Constitution, 9))
         {
             if (Game.GetDirectionNoAim(out int direction))
             {

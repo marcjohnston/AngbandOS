@@ -10,5 +10,5 @@ internal class PotionsItemClass : ItemClass
     /// Returns the potions flavors repository because potions have flavors that need to be identified.  The Apple Juice, Water and Slime-Mold
     /// potions override this
     /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<PotionReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<PotionItemFlavor>();
 }

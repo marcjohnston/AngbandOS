@@ -50,7 +50,7 @@ internal class GetawayEvery35Activation : Activation
                         Game.DoCmdSaveGame(true);
                     }
                     Game.NewLevelFlag = true;
-                    Game.CameFrom = LevelStart.StartRandom;
+                    Game.CameFrom = LevelStartEnum.StartRandom;
                 }
                 break;
         }

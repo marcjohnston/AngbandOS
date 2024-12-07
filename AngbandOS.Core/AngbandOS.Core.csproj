@@ -25,4 +25,9 @@
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Widgets\NullableTextAreaWidget\" />
+    <Folder Include="Widgets\TextAreaWidgets\" />
+  </ItemGroup>
+
 </Project>

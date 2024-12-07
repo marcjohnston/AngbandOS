@@ -56,7 +56,7 @@ internal class ZombieRace : Race
             itemCharacteristics.ResCold = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -90,7 +90,7 @@ internal class ZombieRace : Race
     public override void UseRacialPower()
     {
         // Skeletons and zombies can restore their life energy
-        if (Game.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
+        if (Game.CheckIfRacialPowerWorks(30, 30, AbilityEnum.Wisdom, 18))
         {
             Game.MsgPrint("You attempt to restore your lost energies.");
             Game.RunScript(nameof(RestoreLevelScript));

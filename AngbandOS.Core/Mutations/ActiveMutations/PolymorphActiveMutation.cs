@@ -13,7 +13,7 @@ internal class PolymorphActiveMutation : Mutation
     private PolymorphActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(18, 20, Ability.Constitution, 18))
+        if (Game.CheckIfRacialPowerWorks(18, 20, AbilityEnum.Constitution, 18))
         {
             Game.RunScript(nameof(PolymorphSelfScript));
         }

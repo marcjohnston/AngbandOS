@@ -17,27 +17,27 @@ internal class LoseAllAttackEffect : AttackEffect
     {
         // Try to decrease all six ability scores
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        if (Game.TryDecreasingAbilityScore(Ability.Strength))
+        if (Game.TryDecreasingAbilityScore(AbilityEnum.Strength))
         {
             obvious = true;
         }
-        if (Game.TryDecreasingAbilityScore(Ability.Dexterity))
+        if (Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity))
         {
             obvious = true;
         }
-        if (Game.TryDecreasingAbilityScore(Ability.Constitution))
+        if (Game.TryDecreasingAbilityScore(AbilityEnum.Constitution))
         {
             obvious = true;
         }
-        if (Game.TryDecreasingAbilityScore(Ability.Intelligence))
+        if (Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence))
         {
             obvious = true;
         }
-        if (Game.TryDecreasingAbilityScore(Ability.Wisdom))
+        if (Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom))
         {
             obvious = true;
         }
-        if (Game.TryDecreasingAbilityScore(Ability.Charisma))
+        if (Game.TryDecreasingAbilityScore(AbilityEnum.Charisma))
         {
             obvious = true;
         }

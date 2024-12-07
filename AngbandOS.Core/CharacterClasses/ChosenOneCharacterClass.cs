@@ -32,7 +32,7 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 4;
     public override int ExperienceFactor => 20;
-    public override int PrimeStat => Ability.Strength;
+    public override int PrimeStat => AbilityEnum.Strength;
     public override string[] Info => new string[] {
         "Warriors of fate, who have no spell casting abilities but",
         "gain a large number of passive magical abilities (too long",

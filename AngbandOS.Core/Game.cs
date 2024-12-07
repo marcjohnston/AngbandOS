@@ -565,7 +565,7 @@ public bool IsDead = false;
     public AllocationEntry[] AllocKindTable;
     public int AllocRaceSize;
     public AllocationEntry[] AllocRaceTable;
-    public LevelStart CameFrom;
+    public LevelStartEnum CameFrom;
     public bool CharacterXtra; // TODO: This global can be removed when actions are updated
     public bool CreateDownStair;
     public bool CreateUpStair;
@@ -581,7 +581,7 @@ public bool IsDead = false;
     public Dungeon RecallDungeon;
     public int Resting;
     public int Running;
-    public List<UnreadableScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
+    public List<IllegibleScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
 
     /// <summary>
     /// Returns the target the player has selected; or null, if the player hasn't chosen a target.
@@ -2234,10 +2234,10 @@ public bool IsDead = false;
     {
         foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
         {
-            itemFactory.Stompable[StompableType.Broken] = itemFactory.InitialBrokenStomp;
-            itemFactory.Stompable[StompableType.Average] = itemFactory.InitialAverageStomp;
-            itemFactory.Stompable[StompableType.Good] = itemFactory.InitialGoodStomp;
-            itemFactory.Stompable[StompableType.Excellent] = itemFactory.InitialExcellentStomp;
+            itemFactory.Stompable[StompableTypeEnum.Broken] = itemFactory.InitialBrokenStomp;
+            itemFactory.Stompable[StompableTypeEnum.Average] = itemFactory.InitialAverageStomp;
+            itemFactory.Stompable[StompableTypeEnum.Good] = itemFactory.InitialGoodStomp;
+            itemFactory.Stompable[StompableTypeEnum.Excellent] = itemFactory.InitialExcellentStomp;
         }
     }
 
@@ -2250,8 +2250,8 @@ public bool IsDead = false;
     {
         SetBackground(BackgroundImageEnum.Paper);
         PlayMusic(MusicTrackEnum.Chargen);
-        Inventory = new Item[InventorySlot.Total];
-        for (int i = 0; i < InventorySlot.Total; i++)
+        Inventory = new Item[InventorySlotEnum.Total];
+        for (int i = 0; i < InventorySlotEnum.Total; i++)
         {
             Inventory[i] = null;
         }
@@ -2376,7 +2376,7 @@ public bool IsDead = false;
         DungeonDifficulty = 0;
         WildernessX = CurTown.X;
         WildernessY = CurTown.Y;
-        CameFrom = LevelStart.StartRandom;
+        CameFrom = LevelStartEnum.StartRandom;
         GenerateNewLevel();
     }
 
@@ -2785,7 +2785,7 @@ public bool IsDead = false;
         List<int> equipment = new List<int>();
         if (canChooseFromInventory)
         {
-            for (int ii = 0; ii < InventorySlot.PackCount; ii++)
+            for (int ii = 0; ii < InventorySlotEnum.PackCount; ii++)
             {
                 Item? oPtr = GetInventoryItem(ii);
                 if (oPtr != null && (itemFilter == null || itemFilter.Matches(oPtr)))
@@ -2997,7 +2997,7 @@ public bool IsDead = false;
                             which = char.ToLower(which);
                         }
                         k = !ViewingEquipment ? LabelToInven(which) : LabelToEquip(which);
-                        if (k < 0 || k >= InventorySlot.Total)
+                        if (k < 0 || k >= InventorySlotEnum.Total)
                         {
                             break;
                         }
@@ -3692,10 +3692,10 @@ public bool IsDead = false;
         MonsterLevel = Difficulty;
         ObjectLevel = Difficulty;
         HackMind = true;
-        if (CameFrom == LevelStart.StartHouse)
+        if (CameFrom == LevelStartEnum.StartHouse)
         {
             RunScript(nameof(EnterStoreScript));
-            CameFrom = LevelStart.StartRandom;
+            CameFrom = LevelStartEnum.StartRandom;
         }
         if (CurrentDepth == 0)
         {
@@ -3776,7 +3776,7 @@ public bool IsDead = false;
         int i, j;
         UseFixed = true;
         FixedSeed = _seedFlavor;
-        UnreadableScrollFlavors = new List<UnreadableScrollFlavor>();
+        UnreadableScrollFlavors = new List<IllegibleScrollFlavor>();
         for (i = 0; i < Constants.MaxNumberOfScrollFlavorsGenerated; i++)
         {
             while (true)
@@ -3810,9 +3810,9 @@ public bool IsDead = false;
                 }
                 if (okay)
                 {
-                    int index = RandomLessThan(SingletonRepository.Count<ScrollReadableFlavor>());
-                    ScrollReadableFlavor baseFlavor = SingletonRepository.Get<ScrollReadableFlavor>(index);
-                    UnreadableScrollFlavor flavor = new UnreadableScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
+                    int index = RandomLessThan(SingletonRepository.Count<ScrollItemFlavor>());
+                    ScrollItemFlavor baseFlavor = SingletonRepository.Get<ScrollItemFlavor>(index);
+                    IllegibleScrollFlavor flavor = new IllegibleScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
                     UnreadableScrollFlavors.Add(flavor);
                     break;
                 }
@@ -4028,7 +4028,7 @@ public bool IsDead = false;
             RedrawStuff();
             MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             UpdateScreen();
-            const int item = InventorySlot.PackCount;
+            const int item = InventorySlotEnum.PackCount;
             Item? oPtr = GetInventoryItem(item);
             if (oPtr != null)
             { 
@@ -4362,11 +4362,11 @@ public bool IsDead = false;
         if (TotalFriends != 0)
         {
             int upkeepDivider = 20;
-            if (BaseCharacterClass.ID == CharacterClass.Mage)
+            if (BaseCharacterClass.ID == CharacterClassEnum.Mage)
             {
                 upkeepDivider = 15;
             }
-            else if (BaseCharacterClass.ID == CharacterClass.HighMage)
+            else if (BaseCharacterClass.ID == CharacterClassEnum.HighMage)
             {
                 upkeepDivider = 12;
             }
@@ -4475,14 +4475,14 @@ public bool IsDead = false;
                         WildernessX = CurTown.X;
                         WildernessY = CurTown.Y;
                         NewLevelFlag = true;
-                        CameFrom = LevelStart.StartHouse;
+                        CameFrom = LevelStartEnum.StartHouse;
                     }
                     else
                     {
                         WildernessX = CurTown.X;
                         WildernessY = CurTown.Y;
                         NewLevelFlag = true;
-                        CameFrom = LevelStart.StartRandom;
+                        CameFrom = LevelStartEnum.StartRandom;
                     }
                 }
                 else
@@ -4589,7 +4589,7 @@ public bool IsDead = false;
         }
         if (AcidResistanceTimer.Value == 0 && !HasAcidResistance && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(Ability.Charisma);
+            TryDecreasingAbilityScore(AbilityEnum.Charisma);
         }
         if (MinusAc())
         {
@@ -4735,7 +4735,7 @@ public bool IsDead = false;
         MsgPrint("The world changes!");
         DoCmdSaveGame(true);
         NewLevelFlag = true;
-        CameFrom = LevelStart.StartRandom;
+        CameFrom = LevelStartEnum.StartRandom;
     }
 
     public void ApplyNexus(Monster mPtr)
@@ -4823,7 +4823,7 @@ public bool IsDead = false;
         }
         if (!(ColdResistanceTimer.Value != 0 || HasColdResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(Ability.Strength);
+            TryDecreasingAbilityScore(AbilityEnum.Strength);
         }
         TakeHit(dam, kbStr);
         if (!(HasColdResistance && ColdResistanceTimer.Value != 0))
@@ -5422,7 +5422,7 @@ public bool IsDead = false;
         }
         if (!(LightningResistanceTimer.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(Ability.Dexterity);
+            TryDecreasingAbilityScore(AbilityEnum.Dexterity);
         }
         TakeHit(dam, kbStr);
         if (!(LightningResistanceTimer.Value != 0 && HasLightningResistance))
@@ -5674,7 +5674,7 @@ public bool IsDead = false;
         }
         if (!(FireResistanceTimer.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(Ability.Strength);
+            TryDecreasingAbilityScore(AbilityEnum.Strength);
         }
         TakeHit(dam, kbStr);
         if (!(HasFireResistance && FireResistanceTimer.Value != 0))
@@ -5714,7 +5714,7 @@ public bool IsDead = false;
 
     public bool LoseAllInfo()
     {
-        for (int i = 0; i < InventorySlot.Total; i++)
+        for (int i = 0; i < InventorySlotEnum.Total; i++)
         {
             Item? oPtr = GetInventoryItem(i);
             if (oPtr == null)
@@ -6333,7 +6333,7 @@ public bool IsDead = false;
     public bool RemoveCurseAux(bool alsoRemoveHeavyCurse)
     {
         int cnt = 0;
-        for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+        for (int i = InventorySlotEnum.MeleeWeapon; i < InventorySlotEnum.Total; i++)
         {
             Item? oPtr = GetInventoryItem(i);
             if (oPtr == null)
@@ -6428,7 +6428,7 @@ public bool IsDead = false;
         EnergyUse = 100;
         GridTile cPtr = Map.Grid[y][x];
         MsgPrint("You smash into the door!");
-        int bash = AbilityScores[Ability.Strength].StrAttackSpeedComponent;
+        int bash = AbilityScores[AbilityEnum.Strength].StrAttackSpeedComponent;
         int temp = cPtr.FeatureType.LockLevel;
         temp = bash - (temp * 10);
         if (temp < 1)
@@ -6445,7 +6445,7 @@ public bool IsDead = false;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         }
-        else if (RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel.IntValue)
+        else if (RandomLessThan(100) < AbilityScores[AbilityEnum.Dexterity].DexTheftAvoidance + ExperienceLevel.IntValue)
         {
             MsgPrint("The door holds firm.");
             more = true;
@@ -6756,7 +6756,7 @@ public bool IsDead = false;
     /// <returns> True if the player was carrying a weapon, false if not </returns>
     public bool CurseWeapon()
     {
-        Item? item = GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? item = GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         // If we don't have a weapon then nothing happens
         if (item == null)
         {
@@ -6949,7 +6949,7 @@ public bool IsDead = false;
     public bool GetSpike(out int inventoryIndex) // TODO: This can be generalized in a new method FindInventoryItems(ItemFilter itemFilter)
     {
         // Loop through the inventory
-        for (int i = 0; i < InventorySlot.PackCount; i++)
+        for (int i = 0; i < InventorySlotEnum.PackCount; i++)
         {
             Item? item = GetInventoryItem(i);
             if (item == null)
@@ -7110,7 +7110,7 @@ public bool IsDead = false;
                     }
                     // We'll need a new level
                     NewLevelFlag = true;
-                    CameFrom = LevelStart.StartWalk;
+                    CameFrom = LevelStartEnum.StartWalk;
                     DoCmdSaveGame(true);
                 }
                 else if (tile.FeatureType.IsVisibleDoor)
@@ -7192,7 +7192,7 @@ public bool IsDead = false;
                     }
                     // We need a new map
                     NewLevelFlag = true;
-                    CameFrom = LevelStart.StartWalk;
+                    CameFrom = LevelStartEnum.StartWalk;
                     DoCmdSaveGame(true);
                 }
                 // If we can see that we're walking into a closed door, try to open it
@@ -7357,7 +7357,7 @@ public bool IsDead = false;
         bool noExtra = false;
         Disturb(false);
         // If we're a rogue then we can backstab monsters
-        if (BaseCharacterClass.ID == CharacterClass.Rogue)
+        if (BaseCharacterClass.ID == CharacterClassEnum.Rogue)
         {
             if (monster.SleepLevel != 0 && monster.IsVisible)
             {
@@ -7391,7 +7391,7 @@ public bool IsDead = false;
         }
         int bonus = AttackBonus;
         bool chaosEffect = false;
-        Item? meleeItem = GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? meleeItem = GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
             bonus += meleeItem.Characteristics.BonusHit;
@@ -7410,7 +7410,7 @@ public bool IsDead = false;
                 // Tell the player they hit it with the appropriate message
                 if (!(backstab || stabFleeing))
                 {
-                    if (!((BaseCharacterClass.ID == CharacterClass.Monk || BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistEmptyHands()))
+                    if (!((BaseCharacterClass.ID == CharacterClassEnum.Monk || BaseCharacterClass.ID == CharacterClassEnum.Mystic) && MartialArtistEmptyHands()))
                     {
                         MsgPrint($"You hit {monsterName}.");
                     }
@@ -7448,7 +7448,7 @@ public bool IsDead = false;
                     }
                 }
                 // If we're a martial artist then we have special attacks
-                if ((BaseCharacterClass.ID == CharacterClass.Monk || BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistEmptyHands())
+                if ((BaseCharacterClass.ID == CharacterClassEnum.Monk || BaseCharacterClass.ID == CharacterClassEnum.Mystic) && MartialArtistEmptyHands())
                 {
                     int specialEffect = 0;
                     int stunEffect = 0;
@@ -7952,7 +7952,7 @@ public bool IsDead = false;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
         int divider = missile.Weight > 10 ? missile.Weight : 10;
-        int throwDistance = (AbilityScores[Ability.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
+        int throwDistance = (AbilityScores[AbilityEnum.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
         if (throwDistance > 10)
         {
             throwDistance = 10;
@@ -8608,16 +8608,16 @@ public bool IsDead = false;
             // Apply damage of the correct type to the monster
             switch (mutation.MutationAttackType)
             {
-                case MutationAttackType.Physical:
+                case MutationAttackTypeEnum.Physical:
                     monsterDies = DamageMonster(monsterIndex, damage, out fear, null);
                     break;
 
-                case MutationAttackType.Poison:
+                case MutationAttackTypeEnum.Poison:
                     Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
                     poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill : true);
                     break;
 
-                case MutationAttackType.Hellfire:
+                case MutationAttackTypeEnum.Hellfire:
                     Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
                     hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true);
                     break;
@@ -11525,19 +11525,19 @@ public bool IsDead = false;
         UseFixed = false;
         switch (CameFrom)
         {
-            case LevelStart.StartRandom:
+            case LevelStartEnum.StartRandom:
                 NewPlayerSpot();
                 break;
 
-            case LevelStart.StartStairs:
+            case LevelStartEnum.StartStairs:
                 MapY.IntValue = downStairsLocation.Y;
                 MapX.IntValue = downStairsLocation.X;
                 break;
 
-            case LevelStart.StartWalk:
+            case LevelStartEnum.StartWalk:
                 break;
 
-            case LevelStart.StartHouse:
+            case LevelStartEnum.StartHouse:
                 foreach (Store store in CurTown.Stores)
                 {
                     if (store.GetType() != typeof(HomeStoreFactory))
@@ -12488,16 +12488,16 @@ public bool IsDead = false;
             Map.Grid[y][x].SetFeature(GetRockTile);
         }
         UseFixed = false;
-        if (CameFrom == LevelStart.StartRandom)
+        if (CameFrom == LevelStartEnum.StartRandom)
         {
             NewPlayerSpot();
         }
-        else if (CameFrom == LevelStart.StartStairs)
+        else if (CameFrom == LevelStartEnum.StartStairs)
         {
             this.MapY.IntValue = stairY;
             this.MapX.IntValue = stairX;
         }
-        else if (CameFrom == LevelStart.StartWalk)
+        else if (CameFrom == LevelStartEnum.StartWalk)
         {
             if (Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsTree || Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsWater)
             {
@@ -13122,17 +13122,17 @@ public bool IsDead = false;
 
     public bool MartialArtistEmptyHands()
     {
-        if (BaseCharacterClass.ID != CharacterClass.Monk && BaseCharacterClass.ID != CharacterClass.Mystic)
+        if (BaseCharacterClass.ID != CharacterClassEnum.Monk && BaseCharacterClass.ID != CharacterClassEnum.Mystic)
         {
             return false;
         }
-        return GetInventoryItem(InventorySlot.MeleeWeapon) == null;
+        return GetInventoryItem(InventorySlotEnum.MeleeWeapon) == null;
     }
 
     public bool MartialArtistHeavyArmor()
     {
         int martialArtistArmWgt = 0;
-        if (BaseCharacterClass.ID != CharacterClass.Monk && BaseCharacterClass.ID != CharacterClass.Mystic)
+        if (BaseCharacterClass.ID != CharacterClassEnum.Monk && BaseCharacterClass.ID != CharacterClassEnum.Mystic)
         {
             return false;
         }
@@ -13582,7 +13582,7 @@ public bool IsDead = false;
             if (ExperienceLevel.IntValue > MaxLevelGained)
             {
                 MaxLevelGained = ExperienceLevel.IntValue;
-                if (BaseCharacterClass.ID == CharacterClass.Fanatic || BaseCharacterClass.ID == CharacterClass.Cultist)
+                if (BaseCharacterClass.ID == CharacterClassEnum.Fanatic || BaseCharacterClass.ID == CharacterClassEnum.Cultist)
                 {
                     levelReward = true;
                 }
@@ -13626,7 +13626,7 @@ public bool IsDead = false;
         {
             return;
         }
-        Item? oPtr = GetInventoryItem(InventorySlot.MeleeWeapon - 1 + DieRoll(12));
+        Item? oPtr = GetInventoryItem(InventorySlotEnum.MeleeWeapon - 1 + DieRoll(12));
         if (oPtr == null)
         {
             return;
@@ -13784,27 +13784,27 @@ public bool IsDead = false;
     public ItemCharacteristics GetAbilitiesAsItemFlags()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
-        if ((BaseCharacterClass.ID == CharacterClass.Warrior && ExperienceLevel.IntValue > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && ExperienceLevel.IntValue > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.IntValue > 39))
+        if ((BaseCharacterClass.ID == CharacterClassEnum.Warrior && ExperienceLevel.IntValue > 29) || (BaseCharacterClass.ID == CharacterClassEnum.Paladin && ExperienceLevel.IntValue > 39) || (BaseCharacterClass.ID == CharacterClassEnum.Fanatic && ExperienceLevel.IntValue > 39))
         {
             itemCharacteristics.ResFear = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.IntValue > 29)
+        if (BaseCharacterClass.ID == CharacterClassEnum.Fanatic && ExperienceLevel.IntValue > 29)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Cultist && ExperienceLevel.IntValue > 19)
+        if (BaseCharacterClass.ID == CharacterClassEnum.Cultist && ExperienceLevel.IntValue > 19)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.IntValue > 9 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.ID == CharacterClassEnum.Monk && ExperienceLevel.IntValue > 9 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.Speed = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.IntValue > 24 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.ID == CharacterClassEnum.Monk && ExperienceLevel.IntValue > 24 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.FreeAct = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Mindcrafter)
+        if (BaseCharacterClass.ID == CharacterClassEnum.Mindcrafter)
         {
             if (ExperienceLevel.IntValue > 9)
             {
@@ -13823,7 +13823,7 @@ public bool IsDead = false;
                 itemCharacteristics.Telepathy = true;
             }
         }
-        if (BaseCharacterClass.ID == CharacterClass.Mystic)
+        if (BaseCharacterClass.ID == CharacterClassEnum.Mystic)
         {
             if (ExperienceLevel.IntValue > 9)
             {
@@ -13846,7 +13846,7 @@ public bool IsDead = false;
                 itemCharacteristics.Telepathy = true;
             }
         }
-        if (BaseCharacterClass.ID == CharacterClass.ChosenOne)
+        if (BaseCharacterClass.ID == CharacterClassEnum.ChosenOne)
         {
             itemCharacteristics.Radius = 2;
             if (ExperienceLevel.IntValue >= 2)
@@ -14429,42 +14429,42 @@ public bool IsDead = false;
         bool sust = false;
         switch (stat)
         {
-            case Ability.Strength:
+            case AbilityEnum.Strength:
                 if (HasSustainStrength)
                 {
                     sust = true;
                 }
                 break;
 
-            case Ability.Intelligence:
+            case AbilityEnum.Intelligence:
                 if (HasSustainIntelligence)
                 {
                     sust = true;
                 }
                 break;
 
-            case Ability.Wisdom:
+            case AbilityEnum.Wisdom:
                 if (HasSustainWisdom)
                 {
                     sust = true;
                 }
                 break;
 
-            case Ability.Dexterity:
+            case AbilityEnum.Dexterity:
                 if (HasSustainDexterity)
                 {
                     sust = true;
                 }
                 break;
 
-            case Ability.Constitution:
+            case AbilityEnum.Constitution:
                 if (HasSustainConstitution)
                 {
                     sust = true;
                 }
                 break;
 
-            case Ability.Charisma:
+            case AbilityEnum.Charisma:
                 if (HasSustainCharisma)
                 {
                     sust = true;
@@ -14572,7 +14572,7 @@ public bool IsDead = false;
     {
         int j;
         int n = -1; // TODO: This is bad.
-        for (j = 0; j < InventorySlot.PackCount; j++) // TODO: Why is this < PackCount and not <= PackCount.  This prevents us from grouping items in the last slot
+        for (j = 0; j < InventorySlotEnum.PackCount; j++) // TODO: Why is this < PackCount and not <= PackCount.  This prevents us from grouping items in the last slot
         {
             Item? jPtr = GetInventoryItem(j);
 
@@ -14596,11 +14596,11 @@ public bool IsDead = false;
         }
 
         // Check to see if we scanned every slot.
-        if (_invenCnt >= InventorySlot.PackCount)
+        if (_invenCnt >= InventorySlotEnum.PackCount)
         {
             return null;
         }
-        for (j = 0; j <= InventorySlot.PackCount; j++)
+        for (j = 0; j <= InventorySlotEnum.PackCount; j++)
         {
             Item? jPtr = GetInventoryItem(j);
             if (jPtr == null)
@@ -14609,10 +14609,10 @@ public bool IsDead = false;
             }
         }
         int i = j;
-        if (i < InventorySlot.PackCount)
+        if (i < InventorySlotEnum.PackCount)
         {
             // Use a merge sort to insert the item into the pack based on the sorting rules.
-            for (j = 0; j < InventorySlot.PackCount; j++)
+            for (j = 0; j < InventorySlotEnum.PackCount; j++)
             {
                 Item? jPtr = GetInventoryItem(j);
                 if (jPtr == null)
@@ -14647,7 +14647,7 @@ public bool IsDead = false;
     public int InvenDamage(Func<Item, bool> testerFunc, int perc)
     {
         int k = 0;
-        for (int i = 0; i < InventorySlot.PackCount; i++)
+        for (int i = 0; i < InventorySlotEnum.PackCount; i++)
         {
             Item oPtr = GetInventoryItem(i);
             if (oPtr != null && !oPtr.IsArtifact && testerFunc(oPtr))
@@ -14740,11 +14740,11 @@ public bool IsDead = false;
         {
             return;
         }
-        if (item < InventorySlot.MeleeWeapon)
+        if (item < InventorySlotEnum.MeleeWeapon)
         {
             int i;
             _invenCnt--;
-            for (i = item; i < InventorySlot.PackCount; i++)
+            for (i = item; i < InventorySlotEnum.PackCount; i++)
             {
                 SetInventoryItem(i, GetInventoryItem(i + 1));
             }
@@ -14770,8 +14770,8 @@ public bool IsDead = false;
 
     public int LabelToEquip(char c)
     {
-        int i = (char.IsLower(c) ? c.LetterToNumber() : -1) + InventorySlot.MeleeWeapon;
-        if (i < InventorySlot.MeleeWeapon || i >= InventorySlot.Total)
+        int i = (char.IsLower(c) ? c.LetterToNumber() : -1) + InventorySlotEnum.MeleeWeapon;
+        if (i < InventorySlotEnum.MeleeWeapon || i >= InventorySlotEnum.Total)
         {
             return -1; // TODO: Return null
         }
@@ -14785,7 +14785,7 @@ public bool IsDead = false;
     public int LabelToInven(char c)
     {
         int i = char.IsLower(c) ? c.LetterToNumber() : -1;
-        if (i < 0 || i > InventorySlot.PackCount)
+        if (i < 0 || i > InventorySlotEnum.PackCount)
         {
             return -1; // TODO: Return null
         }

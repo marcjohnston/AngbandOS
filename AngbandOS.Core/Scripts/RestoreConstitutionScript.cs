@@ -19,6 +19,6 @@ internal class RestoreConstitutionScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Restore constitution restores your constitution
-        return Game.TryRestoringAbilityScore(Ability.Constitution);
+        return Game.TryRestoringAbilityScore(AbilityEnum.Constitution);
     }
 }

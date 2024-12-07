@@ -20,7 +20,7 @@ internal class EatNaivetyScript : Script, IIdentifableScript
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.TakeHit(Game.DiceRoll(8, 8), "poisonous food.");
-        Game.TryDecreasingAbilityScore(Ability.Wisdom);
+        Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
         return true;
     }
 }

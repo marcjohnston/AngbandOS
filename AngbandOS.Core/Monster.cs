@@ -590,8 +590,8 @@ internal class Monster : IItemContainer
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            Game.TryDecreasingAbilityScore(Ability.Intelligence);
-            Game.TryDecreasingAbilityScore(Ability.Wisdom);
+            Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+            Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
             return;
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
@@ -606,11 +606,11 @@ internal class Monster : IItemContainer
             }
             while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(Ability.Intelligence);
+                Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
             }
             while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(Ability.Wisdom);
+                Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
             }
             if (!Game.HasChaosResistance)
             {
@@ -620,11 +620,11 @@ internal class Monster : IItemContainer
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            if (Game.DecreaseAbilityScore(Ability.Intelligence, 10, true))
+            if (Game.DecreaseAbilityScore(AbilityEnum.Intelligence, 10, true))
             {
                 happened = true;
             }
-            if (Game.DecreaseAbilityScore(Ability.Wisdom, 10, true))
+            if (Game.DecreaseAbilityScore(AbilityEnum.Wisdom, 10, true))
             {
                 happened = true;
             }
@@ -1463,7 +1463,7 @@ internal class Monster : IItemContainer
                                     targetRace.Knowledge.Characteristics.FireAura = true;
                                 }
                             }
-                            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(Projection.FireProjectile));
+                            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(Projectiles.FireProjectile));
                             projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)

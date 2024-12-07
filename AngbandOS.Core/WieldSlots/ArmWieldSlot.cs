@@ -5,13 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class ArmWieldSlot : EquipmentWieldSlot
 {
     private ArmWieldSlot(Game game) : base(game) { }
-    public override int[] InventorySlots => new int[] { InventorySlot.Arm };
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.Arm };
     public override string Label(int index) => "j";
     public override string Label(Item oPtr) => "j";
     public override string MentionUse(int? index) => "On arm";
@@ -22,7 +22,7 @@ internal class ArmWieldSlot : EquipmentWieldSlot
     public override int SortOrder => 10;
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlot.Arm, item);
+        Game.SetInventoryItem(InventorySlotEnum.Arm, item);
         Game.WeightCarried += item.Weight;
     }
 }

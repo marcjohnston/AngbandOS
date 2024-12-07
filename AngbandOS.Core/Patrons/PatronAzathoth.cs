@@ -13,7 +13,7 @@ internal class PatronAzathoth : Patron
     private PatronAzathoth(Game game) : base(game) { }
     public override string ShortName => "Azathoth";
     public override string LongName => "Azathoth, the Daemon Sultan";
-    public override int PreferredAbility => Ability.Strength;
+    public override int PreferredAbility => AbilityEnum.Strength;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(DreadCurseReward)),

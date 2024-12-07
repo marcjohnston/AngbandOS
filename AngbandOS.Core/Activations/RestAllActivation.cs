@@ -19,12 +19,12 @@ internal class RestAllActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.TryRestoringAbilityScore(Ability.Strength);
-        Game.TryRestoringAbilityScore(Ability.Intelligence);
-        Game.TryRestoringAbilityScore(Ability.Wisdom);
-        Game.TryRestoringAbilityScore(Ability.Dexterity);
-        Game.TryRestoringAbilityScore(Ability.Constitution);
-        Game.TryRestoringAbilityScore(Ability.Charisma);
+        Game.TryRestoringAbilityScore(AbilityEnum.Strength);
+        Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
+        Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
+        Game.TryRestoringAbilityScore(AbilityEnum.Dexterity);
+        Game.TryRestoringAbilityScore(AbilityEnum.Constitution);
+        Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
         Game.RunScript(nameof(RestoreLevelScript));
         return true;
     }

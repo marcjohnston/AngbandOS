@@ -7,13 +7,13 @@
 
 using System;
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
 {
     private MeleeWeaponWieldSlot(Game game) : base(game) { }
-    public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.MeleeWeapon };
     public override int SortOrder => 1;
     public override string Label(int index) => "a";
     public override string Label(Item oPtr) => "a";
@@ -22,7 +22,7 @@ internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
     public override string TakeOffMessage(Item oPtr) => "You were wielding";
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlot.MeleeWeapon, item);
+        Game.SetInventoryItem(InventorySlotEnum.MeleeWeapon, item);
         Game.WeightCarried += item.Weight;
     }
     public override string MentionUse(int? index)
@@ -31,7 +31,7 @@ internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
         if (Count > 0 && index.HasValue)
         {
             Item? oPtr = Game.GetInventoryItem(index.Value);
-            if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            if (oPtr != null && Game.AbilityScores[AbilityEnum.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "Just lifting";
             }
@@ -44,7 +44,7 @@ internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
         string p = "attacking monsters with";
 
         // Check to see if we have a weapon.
-        if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+        if (oPtr != null && Game.AbilityScores[AbilityEnum.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
         {
             p = "just lifting";
         }

@@ -48,7 +48,7 @@ internal class DarkElfRace : Race
     {
         itemCharacteristics.ResDark = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -70,7 +70,7 @@ internal class DarkElfRace : Race
     public override void UseRacialPower()
     {
         // Dark elves can cast magic missile
-        if (Game.CheckIfRacialPowerWorks(2, 2, Ability.Intelligence, 9))
+        if (Game.CheckIfRacialPowerWorks(2, 2, AbilityEnum.Intelligence, 9))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

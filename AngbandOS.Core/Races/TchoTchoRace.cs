@@ -49,7 +49,7 @@ internal class TchoTchoRace : Race
     {
         itemCharacteristics.ResFear = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 7)
@@ -66,7 +66,7 @@ internal class TchoTchoRace : Race
     public override void UseRacialPower()
     {
         // Tcho-Tcho can create The Yellow Sign
-        if (Game.CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
+        if (Game.CheckIfRacialPowerWorks(25, 35, AbilityEnum.Intelligence, 15))
         {
             Game.MsgPrint("You carefully draw The Yellow Sign...");
             Game.RunScript(nameof(YellowSignScript));

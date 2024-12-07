@@ -13,7 +13,7 @@ internal class EarthquakeActiveMutation : Mutation
     private EarthquakeActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(12, 12, Ability.Strength, 16))
+        if (!Game.CheckIfRacialPowerWorks(12, 12, AbilityEnum.Strength, 16))
         {
             return;
         }

@@ -42,7 +42,7 @@ internal class PriestCharacterClass : BaseCharacterClass
                 return "Priest";
         }
     }
-    public override int PrimeStat => Ability.Wisdom;
+    public override int PrimeStat => AbilityEnum.Wisdom;
     public override string[] Info => new string[] {
         "Devout followers of the Great Ones, Priests use WIS based",
         "spell casting. They may choose either Life or Death magic,",
@@ -78,7 +78,7 @@ internal class PriestCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override int SpellStat => Ability.Wisdom;
+    public override int SpellStat => AbilityEnum.Wisdom;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {

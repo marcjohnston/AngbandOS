@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.RoomTypes;
+namespace AngbandOS.Core.RoomLayouts;
 
 [Serializable]
 internal class Type4RoomLayout : RoomLayout

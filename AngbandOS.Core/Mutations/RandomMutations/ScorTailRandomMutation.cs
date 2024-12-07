@@ -19,7 +19,7 @@ internal class ScorTailRandomMutation : Mutation
     public override int DamageDiceNumber => 7;
     public override int EquivalentWeaponWeight => 5;
     public override string AttackDescription => "tail";
-    public override MutationAttackType MutationAttackType => MutationAttackType.Poison;
+    public override MutationAttackTypeEnum MutationAttackType => MutationAttackTypeEnum.Poison;
 
     public override void OnGain()
     {

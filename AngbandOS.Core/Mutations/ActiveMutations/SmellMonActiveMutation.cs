@@ -13,7 +13,7 @@ internal class SmellMonActiveMutation : Mutation
     private SmellMonActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(5, 4, Ability.Intelligence, 15))
+        if (Game.CheckIfRacialPowerWorks(5, 4, AbilityEnum.Intelligence, 15))
         {
             Game.RunScript(nameof(DetectNormalMonstersScript));
         }

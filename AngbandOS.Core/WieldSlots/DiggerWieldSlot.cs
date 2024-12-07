@@ -5,13 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class DiggerWieldSlot : EquipmentWieldSlot
 {
     private DiggerWieldSlot(Game game) : base(game) { }
-    public override int[] InventorySlots => new int[] { InventorySlot.Digger };
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.Digger };
     public override string Label(int index) => "c";
     public override string Label(Item oPtr) => "c";
     public override string MentionUse(int? index) => "Digging with";
@@ -20,7 +20,7 @@ internal class DiggerWieldSlot : EquipmentWieldSlot
     public override int SortOrder => 3;
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlot.Digger, item);
+        Game.SetInventoryItem(InventorySlotEnum.Digger, item);
         Game.WeightCarried += item.Weight;
     }
 }

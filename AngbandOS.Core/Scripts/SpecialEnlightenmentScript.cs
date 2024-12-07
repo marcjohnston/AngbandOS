@@ -23,8 +23,8 @@ internal class SpecialEnlightenmentScript : Script, INoticeableScript
         Game.MsgPrint("You begin to feel more enlightened...");
         Game.MsgPrint(null);
         Game.RunScript(nameof(LightScript));
-        Game.TryIncreasingAbilityScore(Ability.Intelligence);
-        Game.TryIncreasingAbilityScore(Ability.Wisdom);
+        Game.TryIncreasingAbilityScore(AbilityEnum.Intelligence);
+        Game.TryIncreasingAbilityScore(AbilityEnum.Wisdom);
         Game.DetectTraps();
         Game.DetectDoors();
         Game.DetectStairs();

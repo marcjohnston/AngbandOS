@@ -53,7 +53,7 @@ internal class SpriteRace : Race
             itemCharacteristics.Speed = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -74,7 +74,7 @@ internal class SpriteRace : Race
     public override void UseRacialPower()
     {
         // Sprites can sleep monsters
-        if (Game.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
+        if (Game.CheckIfRacialPowerWorks(12, 12, AbilityEnum.Intelligence, 15))
         {
             Game.MsgPrint("You throw some magic dust...");
             if (Game.ExperienceLevel.IntValue < 25)

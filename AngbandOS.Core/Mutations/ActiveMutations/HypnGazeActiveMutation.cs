@@ -13,7 +13,7 @@ internal class HypnGazeActiveMutation : Mutation
     private HypnGazeActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(12, 12, Ability.Charisma, 18))
+        if (!Game.CheckIfRacialPowerWorks(12, 12, AbilityEnum.Charisma, 18))
         {
             return;
         }

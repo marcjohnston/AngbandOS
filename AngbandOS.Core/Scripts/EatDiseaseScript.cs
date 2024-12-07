@@ -20,7 +20,7 @@ internal class EatDiseaseScript : Script, IIdentifableScript
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.TakeHit(Game.DiceRoll(10, 10), "poisonous food.");
-        Game.TryDecreasingAbilityScore(Ability.Strength);
+        Game.TryDecreasingAbilityScore(AbilityEnum.Strength);
         return true;
     }
 }

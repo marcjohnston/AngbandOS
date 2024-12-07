@@ -544,11 +544,11 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public bool CanCarry()
     {
-        if (Game._invenCnt < InventorySlot.PackCount)
+        if (Game._invenCnt < InventorySlotEnum.PackCount)
         {
             return true;
         }
-        for (int j = 0; j < InventorySlot.PackCount; j++)
+        for (int j = 0; j < InventorySlotEnum.PackCount; j++)
         {
             Item? jPtr = Game.GetInventoryItem(j);
             if (jPtr == null)
@@ -2112,12 +2112,12 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns true, if the item can be stomped.  Returns the stompable status based on the item quality rating, by default.  The algorithm for determine if an item can be stomped is:
     /// 1. If the item is unknown (e.g. <see cref="IsKnown"/> is false) and the player has not been able to sense the object, false is returned.
-    /// 2. If the item is unknown, and the item <see cref="HasFlavor"/> and the player has identified the flavor <see cref="IsFlavorAware"/>, then the <see cref="StompableType.Broken"/> setting value is returned.
+    /// 2. If the item is unknown, and the item <see cref="HasFlavor"/> and the player has identified the flavor <see cref="IsFlavorAware"/>, then the <see cref="StompableTypeEnum.Broken"/> setting value is returned.
     /// 3. Unknown containers will return false.
-    /// 4. Open containers will return the <see cref="StompableType.Broken"/> setting value.
-    /// 5. Closed containers that are not trapped will return the <see cref="StompableType.Average"/> setting value.
-    /// 6. Unlocked containers will return the <see cref="StompableType.Good"/> setting value.
-    /// 7. Locked containers that are trapped or disarmed will return the <see cref="StompableType.Excellent"/> setting value.
+    /// 4. Open containers will return the <see cref="StompableTypeEnum.Broken"/> setting value.
+    /// 5. Closed containers that are not trapped will return the <see cref="StompableTypeEnum.Average"/> setting value.
+    /// 6. Unlocked containers will return the <see cref="StompableTypeEnum.Good"/> setting value.
+    /// 7. Locked containers that are trapped or disarmed will return the <see cref="StompableTypeEnum.Excellent"/> setting value.
     /// 8. The item factory will return the <see cref="StompSetting"/> for other non-containers items.
     /// </summary>
     public bool Stompable
@@ -2130,7 +2130,7 @@ internal sealed class Item : IComparable<Item>
                 {
                     if (IsFlavorAware)
                     {
-                        return _factory.Stompable[StompableType.Broken];
+                        return _factory.Stompable[StompableTypeEnum.Broken];
                     }
                 }
                 if (!IdentSense)
@@ -2147,21 +2147,21 @@ internal sealed class Item : IComparable<Item>
                 }
                 else if (ContainerIsOpen)
                 {
-                    return _factory.Stompable[StompableType.Broken]; // Empty
+                    return _factory.Stompable[StompableTypeEnum.Broken]; // Empty
                 }
                 else if (ContainerTraps == null)
                 {
-                    return _factory.Stompable[StompableType.Average];
+                    return _factory.Stompable[StompableTypeEnum.Average];
                 }
                 else
                 {
                     if (ContainerTraps.Length == 0)
                     {
-                        return _factory.Stompable[StompableType.Good];
+                        return _factory.Stompable[StompableTypeEnum.Good];
                     }
                     else
                     {
-                        return _factory.Stompable[StompableType.Excellent];
+                        return _factory.Stompable[StompableTypeEnum.Excellent];
                     }
                 }
             }

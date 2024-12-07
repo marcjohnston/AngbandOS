@@ -9,6 +9,6 @@ internal class WandsItemClass : ItemClass
     /// <summary>
     /// Returns the want flavors repository because wands have flavors that need to be identified.
     /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<WandReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<WandItemFlavor>();
 
 }

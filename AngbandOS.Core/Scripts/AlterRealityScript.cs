@@ -31,6 +31,6 @@ internal class AlterRealityScript : Script, IScript, IRepeatableScript
         Game.MsgPrint("The world changes!");
         Game.DoCmdSaveGame(true);
         Game.NewLevelFlag = true;
-        Game.CameFrom = LevelStart.StartRandom;
+        Game.CameFrom = LevelStartEnum.StartRandom;
     }
 }

@@ -26,12 +26,12 @@ internal class DisarmRandomMutation : Mutation
         Game.MsgPrint("You trip over your own feet!");
         Game.TakeHit(base.Game.DieRoll(Game.Weight / 6), "tripping");
         Game.MsgPrint(null);
-        Item? oPtr = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? oPtr = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (oPtr == null)
         {
             return;
         }
         Game.MsgPrint("You drop your weapon!");
-        Game.InvenDrop(InventorySlot.MeleeWeapon, 1);
+        Game.InvenDrop(InventorySlotEnum.MeleeWeapon, 1);
     }
 }

@@ -13,7 +13,7 @@ internal class RecallActiveMutation : Mutation
     private RecallActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
+        if (!Game.CheckIfRacialPowerWorks(17, 50, AbilityEnum.Intelligence, 16))
         {
             return;
         }

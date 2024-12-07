@@ -29,12 +29,12 @@ internal class LifeScript : Script, INoticeableScript
         Game.HallucinationsTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
         Game.BleedingTimer.ResetTimer();
-        Game.TryRestoringAbilityScore(Ability.Strength);
-        Game.TryRestoringAbilityScore(Ability.Constitution);
-        Game.TryRestoringAbilityScore(Ability.Dexterity);
-        Game.TryRestoringAbilityScore(Ability.Wisdom);
-        Game.TryRestoringAbilityScore(Ability.Intelligence);
-        Game.TryRestoringAbilityScore(Ability.Charisma);
+        Game.TryRestoringAbilityScore(AbilityEnum.Strength);
+        Game.TryRestoringAbilityScore(AbilityEnum.Constitution);
+        Game.TryRestoringAbilityScore(AbilityEnum.Dexterity);
+        Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
+        Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
+        Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
         return true;
     }
 }

@@ -26,42 +26,42 @@ internal class WastingRandomMutation : Mutation
         bool sustained = false;
         switch (whichStat)
         {
-            case Ability.Strength:
+            case AbilityEnum.Strength:
                 if (Game.HasSustainStrength)
                 {
                     sustained = true;
                 }
                 break;
 
-            case Ability.Intelligence:
+            case AbilityEnum.Intelligence:
                 if (Game.HasSustainIntelligence)
                 {
                     sustained = true;
                 }
                 break;
 
-            case Ability.Wisdom:
+            case AbilityEnum.Wisdom:
                 if (Game.HasSustainWisdom)
                 {
                     sustained = true;
                 }
                 break;
 
-            case Ability.Dexterity:
+            case AbilityEnum.Dexterity:
                 if (Game.HasSustainDexterity)
                 {
                     sustained = true;
                 }
                 break;
 
-            case Ability.Constitution:
+            case AbilityEnum.Constitution:
                 if (Game.HasSustainConstitution)
                 {
                     sustained = true;
                 }
                 break;
 
-            case Ability.Charisma:
+            case AbilityEnum.Charisma:
                 if (Game.HasSustainCharisma)
                 {
                     sustained = true;

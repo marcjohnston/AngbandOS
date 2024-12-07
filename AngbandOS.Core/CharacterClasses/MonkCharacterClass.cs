@@ -50,7 +50,7 @@ internal class MonkCharacterClass : BaseCharacterClass
                 return "Monk";
         }
     }
-    public override int PrimeStat => Ability.Dexterity;
+    public override int PrimeStat => AbilityEnum.Dexterity;
     public override string[] Info => new string[] {
         "Masters of unarmed combat. While wearing only light armor",
         "they can move faster and dodge blows and can learn to",
@@ -87,7 +87,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override int SpellStat => Ability.Wisdom;
+    public override int SpellStat => AbilityEnum.Wisdom;
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;

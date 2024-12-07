@@ -49,7 +49,7 @@ internal class HalfGiantRace : Race
         itemCharacteristics.ResShards = true;
         itemCharacteristics.SustStr = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -69,7 +69,7 @@ internal class HalfGiantRace : Race
     public override void UseRacialPower()
     {
         // Half-giants can bash through stone walls
-        if (Game.CheckIfRacialPowerWorks(20, 10, Ability.Strength, 12))
+        if (Game.CheckIfRacialPowerWorks(20, 10, AbilityEnum.Strength, 12))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

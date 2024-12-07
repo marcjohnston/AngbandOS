@@ -21,27 +21,27 @@ internal class AugmentScript : Script, INoticeableScript
         bool identified = false;
 
         // Augmentation increases all ability scores
-        if (Game.TryIncreasingAbilityScore(Ability.Strength))
+        if (Game.TryIncreasingAbilityScore(AbilityEnum.Strength))
         {
             identified = true;
         }
-        if (Game.TryIncreasingAbilityScore(Ability.Intelligence))
+        if (Game.TryIncreasingAbilityScore(AbilityEnum.Intelligence))
         {
             identified = true;
         }
-        if (Game.TryIncreasingAbilityScore(Ability.Wisdom))
+        if (Game.TryIncreasingAbilityScore(AbilityEnum.Wisdom))
         {
             identified = true;
         }
-        if (Game.TryIncreasingAbilityScore(Ability.Dexterity))
+        if (Game.TryIncreasingAbilityScore(AbilityEnum.Dexterity))
         {
             identified = true;
         }
-        if (Game.TryIncreasingAbilityScore(Ability.Constitution))
+        if (Game.TryIncreasingAbilityScore(AbilityEnum.Constitution))
         {
             identified = true;
         }
-        if (Game.TryIncreasingAbilityScore(Ability.Charisma))
+        if (Game.TryIncreasingAbilityScore(AbilityEnum.Charisma))
         {
             identified = true;
         }

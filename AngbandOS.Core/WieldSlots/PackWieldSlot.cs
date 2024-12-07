@@ -7,7 +7,7 @@
 
 using System;
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class PackWieldSlot : WieldSlot
@@ -47,11 +47,11 @@ internal class PackWieldSlot : WieldSlot
         // Remove the item from the inventory slot.
         int foundSlot = FindInventorySlot(oPtr);
         Game._invenCnt--;
-        for (int i = foundSlot; i < InventorySlot.PackCount; i++)
+        for (int i = foundSlot; i < InventorySlotEnum.PackCount; i++)
         {
             Game.SetInventoryItem(i, Game.GetInventoryItem(i + 1));
         }
-        Game.SetInventoryItem(InventorySlot.PackCount, null);
+        Game.SetInventoryItem(InventorySlotEnum.PackCount, null);
     }
 
     public override bool IsEquipment => false;

@@ -38,7 +38,7 @@ internal class GainMutationScript : Script, IScript
             }
             Mutation mutation = Game.MutationsNotPossessed[i];
             Game.MutationsNotPossessed.RemoveAt(i);
-            if (Game.MutationsPossessed.Count > 0 && mutation.Group != MutationGroup.None)
+            if (Game.MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
             {
                 int j = 0;
                 do

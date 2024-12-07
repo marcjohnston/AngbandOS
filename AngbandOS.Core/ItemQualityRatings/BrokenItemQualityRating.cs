@@ -12,5 +12,5 @@ internal class BrokenItemQualityRating : ItemQualityRating
 {
     private BrokenItemQualityRating(Game game) : base(game) { } // This object is a singleton
     public override string Description => "broken";
-    public override int? StompIndex => StompableType.Broken;
+    public override int? StompIndex => StompableTypeEnum.Broken;
 }

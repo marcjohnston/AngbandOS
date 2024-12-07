@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class LightsourceWieldSlot : EquipmentWieldSlot
@@ -13,7 +13,7 @@ internal class LightsourceWieldSlot : EquipmentWieldSlot
     private LightsourceWieldSlot(Game game) : base(game) { }
     public override string Label(int index) => "g";
     public override string Label(Item oPtr) => "g";
-    public override int[] InventorySlots => new int[] { InventorySlot.Lightsource };
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.Lightsource };
     public override string MentionUse(int? index) => "Light source";
     public override string DescribeItemLocation(Item oPtr) => "using to light the way";
     public override string WieldPhrase => "Your light source is";
@@ -23,7 +23,7 @@ internal class LightsourceWieldSlot : EquipmentWieldSlot
 
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlot.Lightsource, item);
+        Game.SetInventoryItem(InventorySlotEnum.Lightsource, item);
         Game.WeightCarried += item.Weight;
     }
     /// <summary>

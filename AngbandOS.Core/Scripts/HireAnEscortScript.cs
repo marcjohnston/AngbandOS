@@ -70,7 +70,7 @@ internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessByCha
                         Game.WildernessY = destination.Y;
                         Game.CurTown = destination;
                         Game.NewLevelFlag = true;
-                        Game.CameFrom = LevelStart.StartRandom;
+                        Game.CameFrom = LevelStartEnum.StartRandom;
                         Game.MsgPrint("The journey takes all day.");
                         Game.ToNextDusk();
                         return true;

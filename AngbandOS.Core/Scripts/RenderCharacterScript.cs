@@ -54,7 +54,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         // Fill in up to five pieces of bonus text
         switch (abilityIndex)
         {
-            case Ability.Strength:
+            case AbilityEnum.Strength:
                 int toHit = ability.StrAttackBonus;
                 bonus1 = $"{toHit:+0;-0;+0} to hit";
                 int toDam = ability.StrDamageBonus;
@@ -67,19 +67,19 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
                 bonus5 = $", {dig}% digging";
                 break;
 
-            case Ability.Intelligence:
+            case AbilityEnum.Intelligence:
                 int device = ability.IntUseDeviceBonus;
                 bonus1 = $"{device:+0;-0;+0} device";
                 int disarm = ability.IntDisarmBonus;
                 bonus2 = $", {disarm:+0;-0;+0}% disarm";
                 break;
 
-            case Ability.Wisdom:
+            case AbilityEnum.Wisdom:
                 int save = ability.WisSavingThrowBonus;
                 bonus1 = $"{save:+0;-0;+0} save";
                 break;
 
-            case Ability.Dexterity:
+            case AbilityEnum.Dexterity:
                 toHit = ability.DexAttackBonus;
                 bonus1 = $"{toHit:+0;-0;+0} to hit";
                 disarm = ability.DexDisarmBonus;
@@ -90,7 +90,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
                 bonus4 = $", {theft}% anti-theft";
                 break;
 
-            case Ability.Constitution:
+            case AbilityEnum.Constitution:
                 int hits = ability.ConHealthBonus;
                 if (hits == -1)
                 {
@@ -104,19 +104,19 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
                 bonus2 = $", x{regen + 1} recovery";
                 break;
 
-            case Ability.Charisma:
+            case AbilityEnum.Charisma:
                 int haggle = ability.ChaPriceAdjustment;
                 bonus1 = $"{haggle}% prices";
                 break;
         }
         // Add the bonus text for spell casting abilities
-        if (Game.BaseCharacterClass.SpellStat == abilityIndex && abilityIndex != Ability.Strength)
+        if (Game.BaseCharacterClass.SpellStat == abilityIndex && abilityIndex != AbilityEnum.Strength)
         {
             int mana = ability.ManaBonus;
             // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
             bonus3 = mana % 2 == 0 ? $", {mana / 2} SP/lvl" : $", {mana / 2}.5 SP/lvl";
             // Not all casting classes have actual spells
-            if (Game.BaseCharacterClass.ID != CharacterClass.Mindcrafter && Game.BaseCharacterClass.ID != CharacterClass.Mystic && Game.BaseCharacterClass.ID != CharacterClass.Channeler)
+            if (Game.BaseCharacterClass.ID != CharacterClassEnum.Mindcrafter && Game.BaseCharacterClass.ID != CharacterClassEnum.Mystic && Game.BaseCharacterClass.ID != CharacterClassEnum.Channeler)
             {
                 int spells = ability.HalfSpellsPerLevel;
                 if (spells == 2)
@@ -133,7 +133,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
                 }
             }
             // Almost all casting classes have a failure chance
-            if (Game.BaseCharacterClass.ID != CharacterClass.Channeler)
+            if (Game.BaseCharacterClass.ID != CharacterClassEnum.Channeler)
             {
                 int fail = ability.SpellMinFailChance;
                 bonus5 = $", {fail}% min fail";
@@ -518,7 +518,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
             Game.Screen.Print(ColorEnum.Brown, realmBuff, 6, 15);
         }
         // Fanatics and Cultists get a patron
-        if (Game.BaseCharacterClass.ID == CharacterClass.Fanatic || Game.BaseCharacterClass.ID == CharacterClass.Cultist)
+        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Fanatic || Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist)
         {
             Game.Screen.Print(ColorEnum.Blue, "Patron      :", 7, 1);
             Game.Screen.Print(ColorEnum.Brown, Game.GooPatron.LongName, 7, 15);

@@ -55,7 +55,7 @@ internal class TeleportLevelScript : Script, IScript, IIdentifableAndUsedScript
             Game.DoCmdSaveGame(true);
             Game.CurrentDepth--;
             Game.NewLevelFlag = true;
-            Game.CameFrom = LevelStart.StartRandom;
+            Game.CameFrom = LevelStartEnum.StartRandom;
         }
         else
         {

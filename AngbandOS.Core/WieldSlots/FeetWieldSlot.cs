@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class FeetWieldSlot : EquipmentWieldSlot
@@ -13,7 +13,7 @@ internal class FeetWieldSlot : EquipmentWieldSlot
     private FeetWieldSlot(Game game) : base(game) { }
     public override string Label(int index) => "m";
     public override string Label(Item oPtr) => "m";
-    public override int[] InventorySlots => new int[] { InventorySlot.Feet };
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.Feet };
     public override string MentionUse(int? index) => "On feet";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your feet";
     public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue / 3;
@@ -22,7 +22,7 @@ internal class FeetWieldSlot : EquipmentWieldSlot
     public override int SortOrder => 13;
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlot.Feet, item);
+        Game.SetInventoryItem(InventorySlotEnum.Feet, item);
         Game.WeightCarried += item.Weight;
     }
 }

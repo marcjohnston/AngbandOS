@@ -20,7 +20,7 @@ internal class TarotDrawScript : Script, IScript
     {
         bool noneCame = false;
         int die = Game.DieRoll(120);
-        if (Game.BaseCharacterClass.ID == CharacterClass.Rogue || Game.BaseCharacterClass.ID == CharacterClass.HighMage)
+        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Rogue || Game.BaseCharacterClass.ID == CharacterClassEnum.HighMage)
         {
             die = Game.DieRoll(110) + (Game.ExperienceLevel.IntValue / 5);
         }
@@ -51,8 +51,8 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 26)
         {
             Game.MsgPrint("It's the Fool.");
-            Game.TryDecreasingAbilityScore(Ability.Intelligence);
-            Game.TryDecreasingAbilityScore(Ability.Wisdom);
+            Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+            Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
         }
         else if (die < 30)
         {

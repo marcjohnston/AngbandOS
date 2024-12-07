@@ -19,6 +19,6 @@ internal class LoseWisdomScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Naivety tries to reduce your wisdom
-        return Game.TryDecreasingAbilityScore(Ability.Wisdom);
+        return Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
     }
 }

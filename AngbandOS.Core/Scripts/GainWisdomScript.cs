@@ -19,6 +19,6 @@ internal class GainWisdomScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Wisdom increases your wisdom
-        return Game.TryIncreasingAbilityScore(Ability.Wisdom);
+        return Game.TryIncreasingAbilityScore(AbilityEnum.Wisdom);
     }
 }

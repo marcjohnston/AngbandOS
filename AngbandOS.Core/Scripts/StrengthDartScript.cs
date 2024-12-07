@@ -25,7 +25,7 @@ internal class StrengthDartScript : Script, IScript
             // Do 1d4 damage plus strength drain
             int damage = Game.DiceRoll(1, 4);
             Game.TakeHit(damage, "a dart trap");
-            Game.TryDecreasingAbilityScore(Ability.Strength);
+            Game.TryDecreasingAbilityScore(AbilityEnum.Strength);
         }
         else
         {

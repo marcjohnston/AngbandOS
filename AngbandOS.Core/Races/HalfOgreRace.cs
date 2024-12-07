@@ -50,7 +50,7 @@ internal class HalfOgreRace : Race
         itemCharacteristics.SustStr = true;
         itemCharacteristics.ResDark = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -70,7 +70,7 @@ internal class HalfOgreRace : Race
     public override void UseRacialPower()
     {
         // Half-Ogres can go berserk
-        if (Game.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, Game.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
+        if (Game.CheckIfRacialPowerWorks(8, 10, AbilityEnum.Wisdom, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
         {
             Game.MsgPrint("Raaagh!");
             Game.FearTimer.ResetTimer();

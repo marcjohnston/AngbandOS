@@ -53,7 +53,7 @@ internal class KlackonRace : Race
         itemCharacteristics.ResConf = true;
         itemCharacteristics.ResAcid = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new KlackonSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new KlackonSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 8)
@@ -71,7 +71,7 @@ internal class KlackonRace : Race
     public override void UseRacialPower()
     {
         // Klackons can spit acid
-        if (Game.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 14))
+        if (Game.CheckIfRacialPowerWorks(9, 9, AbilityEnum.Dexterity, 14))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

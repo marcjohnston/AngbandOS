@@ -22,6 +22,6 @@ internal class HolyOrbScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile)), dir, Game.DiceRoll(3, 6) + Game.ExperienceLevel.IntValue + (Game.ExperienceLevel.IntValue / (Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)), Game.ExperienceLevel.IntValue < 30 ? 2 : 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile)), dir, Game.DiceRoll(3, 6) + Game.ExperienceLevel.IntValue + (Game.ExperienceLevel.IntValue / (Game.BaseCharacterClass.ID == CharacterClassEnum.Priest || Game.BaseCharacterClass.ID == CharacterClassEnum.HighMage ? 2 : 4)), Game.ExperienceLevel.IntValue < 30 ? 2 : 3);
     }
 }

@@ -13,7 +13,7 @@ internal class LaserEyeActiveMutation : Mutation
     private LaserEyeActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(7, 10, Ability.Wisdom, 9))
+        if (!Game.CheckIfRacialPowerWorks(7, 10, AbilityEnum.Wisdom, 9))
         {
             return;
         }

@@ -8,5 +8,5 @@ internal class AmuletsItemClass : ItemClass
     /// <summary>
     /// Returns the amulet flavors repository because amulets have flavors that need to be identified.
     /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<AmuletReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<AmuletItemFlavor>();
 }

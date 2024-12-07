@@ -41,5 +41,5 @@ internal class HumanRace : Race
     /// Human 1->2->3->50->51->52->53->End
     /// </summary>
     public override int Chart => 1;
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
 }

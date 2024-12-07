@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class OnBodyWieldSlot : EquipmentWieldSlot
@@ -13,7 +13,7 @@ internal class OnBodyWieldSlot : EquipmentWieldSlot
     private OnBodyWieldSlot(Game game) : base(game) { }
     public override string Label(int index) => "h";
     public override string Label(Item oPtr) => "h";
-    public override int[] InventorySlots => new int[] { InventorySlot.OnBody };
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.OnBody };
     public override string MentionUse(int? index) => "On body";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your body";
     public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue * 3 / 2;
@@ -23,7 +23,7 @@ internal class OnBodyWieldSlot : EquipmentWieldSlot
     public override int SortOrder => 8;
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlot.OnBody, item);
+        Game.SetInventoryItem(InventorySlotEnum.OnBody, item);
         Game.WeightCarried += item.Weight;
     }
 }

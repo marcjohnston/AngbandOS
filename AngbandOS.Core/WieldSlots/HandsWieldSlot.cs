@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots;
+namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
 internal class HandsWieldSlot : EquipmentWieldSlot
@@ -14,7 +14,7 @@ internal class HandsWieldSlot : EquipmentWieldSlot
     private HandsWieldSlot(Game game) : base(game) { }
     public override string Label(int index) => "l";
     public override string Label(Item oPtr) => "l";
-    public override int[] InventorySlots => new int[] { InventorySlot.Hands };
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.Hands };
     public override string MentionUse(int? index) => "On hands";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your hands";
     public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue > 4 ? Game.ExperienceLevel.IntValue / 2 : 0;
@@ -24,7 +24,7 @@ internal class HandsWieldSlot : EquipmentWieldSlot
 
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlot.Hands, item);
+        Game.SetInventoryItem(InventorySlotEnum.Hands, item);
         Game.WeightCarried += item.Weight;
     }
     public override int CalcMana(Game game, int msp)

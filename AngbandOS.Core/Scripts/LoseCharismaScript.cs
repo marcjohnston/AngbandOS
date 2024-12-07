@@ -19,6 +19,6 @@ internal class LoseCharismaScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Ugliness tries to reduce your charisma
-        return Game.TryDecreasingAbilityScore(Ability.Charisma);
+        return Game.TryDecreasingAbilityScore(AbilityEnum.Charisma);
     }
 }

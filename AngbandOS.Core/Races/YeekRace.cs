@@ -52,7 +52,7 @@ internal class YeekRace : Race
             itemCharacteristics.ImAcid = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new YeekishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new YeekishSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 14)
@@ -73,7 +73,7 @@ internal class YeekRace : Race
     public override void UseRacialPower()
     {
         // Yeeks can scream
-        if (Game.CheckIfRacialPowerWorks(15, 15, Ability.Wisdom, 10))
+        if (Game.CheckIfRacialPowerWorks(15, 15, AbilityEnum.Wisdom, 10))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

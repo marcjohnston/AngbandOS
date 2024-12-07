@@ -21,7 +21,7 @@ internal class SelfKnowledgeScript : Script, IScript, INoticeableScript
         int infoCount = 0;
         string[] info = new string[128];
         ItemCharacteristics inventoryCharacteristics = new ItemCharacteristics();
-        for (int k = InventorySlot.MeleeWeapon; k < InventorySlot.Total; k++)
+        for (int k = InventorySlotEnum.MeleeWeapon; k < InventorySlotEnum.Total; k++)
         {
             Item? oPtr = Game.GetInventoryItem(k);
             if (oPtr != null)
@@ -354,7 +354,7 @@ internal class SelfKnowledgeScript : Script, IScript, INoticeableScript
         {
             info[infoCount++] = "Your attack speed is affected by your equipment.";
         }
-        Item? meleeItem = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? meleeItem = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
             ItemCharacteristics mergedCharacteristics = meleeItem.GetMergedCharacteristics();

@@ -47,7 +47,7 @@ internal class HalfElfRace : Race
         itemCharacteristics.ResLight = true;
         itemCharacteristics.SeeInvis = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllableSet());
     public override void CalcBonuses()
     {
         Game.HasLightResistance = true;

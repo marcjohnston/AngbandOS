@@ -13,7 +13,7 @@ internal class GrowMoldActiveMutation : Mutation
     private GrowMoldActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(1, 6, Ability.Constitution, 14))
+        if (!Game.CheckIfRacialPowerWorks(1, 6, AbilityEnum.Constitution, 14))
         {
             return;
         }

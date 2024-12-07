@@ -23,27 +23,27 @@ internal class RestorationIdentifiedAndUsedScriptItemAndDirection : Script, IIde
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Strength))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Strength))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Wisdom))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Wisdom))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Dexterity))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Dexterity))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Constitution))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Constitution))
         {
             identified = true;
         }
-        if (Game.TryRestoringAbilityScore(Ability.Charisma))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Charisma))
         {
             identified = true;
         }

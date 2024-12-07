@@ -19,6 +19,6 @@ internal class GainDexterityScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Dexterity increases your dexterity
-        return Game.TryIncreasingAbilityScore(Ability.Dexterity);
+        return Game.TryIncreasingAbilityScore(AbilityEnum.Dexterity);
     }
 }

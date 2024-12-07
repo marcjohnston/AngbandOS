@@ -32,7 +32,7 @@ internal class CultistCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;
     public override int ExperienceFactor => 30;
-    public override int PrimeStat => Ability.Intelligence;
+    public override int PrimeStat => AbilityEnum.Intelligence;
     public override string[] Info => new string[] {
         "INT based spell casters, who use Chaos and another realm",
         "of their choice. Can't wield weapons except for powerful",
@@ -55,7 +55,7 @@ internal class CultistCharacterClass : BaseCharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override int SpellStat => Ability.Intelligence;
+    public override int SpellStat => AbilityEnum.Intelligence;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;

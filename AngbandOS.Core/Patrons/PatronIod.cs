@@ -13,7 +13,7 @@ internal class PatronIod : Patron
     private PatronIod(Game game) : base(game) { }
     public override string ShortName => "Iod";
     public override string LongName => "Iod, the Shining Hunter";
-    public override int PreferredAbility => Ability.Charisma;
+    public override int PreferredAbility => AbilityEnum.Charisma;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

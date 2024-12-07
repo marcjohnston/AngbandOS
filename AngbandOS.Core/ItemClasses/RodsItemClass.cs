@@ -9,5 +9,5 @@ internal class RodsItemClass : ItemClass
     /// <summary>
     /// Returns the rod flavors repository because rods have flavors that need to be identified.
     /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<RodReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<RodItemFlavor>();
 }

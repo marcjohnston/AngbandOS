@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection;
+namespace AngbandOS.Core.Projectiles;
 
 [Serializable]
 internal class CharmProjectile : Projectile
@@ -25,7 +25,7 @@ internal class CharmProjectile : Projectile
         bool seen = mPtr.IsVisible;
         bool obvious = false;
         string? note = null;
-        dam += Game.AbilityScores[Ability.Charisma].ConRecoverySpeed - 1;
+        dam += Game.AbilityScores[AbilityEnum.Charisma].ConRecoverySpeed - 1;
         if (seen)
         {
             obvious = true;

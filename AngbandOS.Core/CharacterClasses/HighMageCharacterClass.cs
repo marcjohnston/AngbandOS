@@ -65,7 +65,7 @@ internal class HighMageCharacterClass : BaseCharacterClass
                 return "High Mage";
         }
     }
-    public override int PrimeStat => Ability.Intelligence;
+    public override int PrimeStat => AbilityEnum.Intelligence;
     public override string[] Info => new string[] {
         "INT based spell casters who specialise in a single realm",
         "of magic. They may choose any realm, and are better at",
@@ -88,7 +88,7 @@ internal class HighMageCharacterClass : BaseCharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override int SpellStat => Ability.Intelligence;
+    public override int SpellStat => AbilityEnum.Intelligence;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;

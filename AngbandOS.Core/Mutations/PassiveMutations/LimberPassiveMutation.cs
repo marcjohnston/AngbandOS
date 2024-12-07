@@ -15,7 +15,7 @@ internal class LimberPassiveMutation : Mutation
     public override string GainMessage => "Your muscles become limber.";
     public override string HaveMessage => "Your body is very limber (+3 DEX).";
     public override string LoseMessage => "Your muscles stiffen.";
-    public override MutationGroup Group => MutationGroup.Joints;
+    public override MutationGroupEnum Group => MutationGroupEnum.Joints;
 
     public override void OnGain()
     {

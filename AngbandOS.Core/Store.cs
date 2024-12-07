@@ -529,7 +529,7 @@ internal class Store
 
         // Create a charisma factor that affects the store owner.
         int factor = 100;
-        factor += Game.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
+        factor += Game.AbilityScores[AbilityEnum.Charisma].ChaPriceAdjustment;
         adjust = 100 + (greed + factor - 300);
         if (adjust < 100)
         {
@@ -564,7 +564,7 @@ internal class Store
 
         // Create a charisma factor that affects the store owner.
         int factor = 100;
-        factor += Game.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
+        factor += Game.AbilityScores[AbilityEnum.Charisma].ChaPriceAdjustment;
         adjust = 100 + (300 - (greed + factor));
         if (adjust > 100)
         {
@@ -608,7 +608,7 @@ internal class Store
         while (!_leaveStore)
         {
             Game.Screen.PrintLine("", 1, 0);
-            int tmpCha = Game.AbilityScores[Ability.Charisma].Adjusted;
+            int tmpCha = Game.AbilityScores[AbilityEnum.Charisma].Adjusted;
             Game.Screen.Clear(41);
             Game.Screen.PrintLine(" ESC) Exit from Building.", 42, 0);
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand1, 42, 31);
@@ -622,7 +622,7 @@ internal class Store
             Game.FullScreenOverlay = true;
             Game.NoticeStuff();
             Game.HandleStuff();
-            const int itemIndex = InventorySlot.PackCount;
+            const int itemIndex = InventorySlotEnum.PackCount;
             Item? oPtr = Game.GetInventoryItem(itemIndex);
             if (oPtr != null)
             {
@@ -654,7 +654,7 @@ internal class Store
                     }
                 }
             }
-            if (tmpCha != Game.AbilityScores[Ability.Charisma].Adjusted)
+            if (tmpCha != Game.AbilityScores[AbilityEnum.Charisma].Adjusted)
             {
                 DisplayInventory();
             }

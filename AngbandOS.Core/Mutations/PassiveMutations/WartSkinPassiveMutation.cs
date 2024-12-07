@@ -15,7 +15,7 @@ internal class WartSkinPassiveMutation : Mutation
     public override string GainMessage => "Disgusting warts appear everywhere on you!";
     public override string HaveMessage => "Your skin is covered with warts (-2 CHR, +5 AC).";
     public override string LoseMessage => "Your warts disappear!";
-    public override MutationGroup Group => MutationGroup.Skin;
+    public override MutationGroupEnum Group => MutationGroupEnum.Skin;
 
     public override void OnGain()
     {

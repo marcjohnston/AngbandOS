@@ -13,7 +13,7 @@ internal class BanishActiveMutation : Mutation
     private BanishActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(25, 25, Ability.Wisdom, 18))
+        if (!Game.CheckIfRacialPowerWorks(25, 25, AbilityEnum.Wisdom, 18))
         {
             return;
         }

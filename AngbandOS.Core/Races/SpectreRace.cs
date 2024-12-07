@@ -57,7 +57,7 @@ internal class SpectreRace : Race
             itemCharacteristics.Telepathy = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -98,7 +98,7 @@ internal class SpectreRace : Race
     public override void UseRacialPower()
     {
         // Spectres can howl
-        if (Game.CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
+        if (Game.CheckIfRacialPowerWorks(4, 6, AbilityEnum.Intelligence, 3))
         {
             Game.MsgPrint("You emit an eldritch howl!");
             if (Game.GetDirectionWithAim(out int direction))

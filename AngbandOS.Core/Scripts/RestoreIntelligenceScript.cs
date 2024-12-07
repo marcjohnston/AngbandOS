@@ -19,6 +19,6 @@ internal class RestoreIntelligenceScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Restore intelligence restores your intelligence
-        return Game.TryRestoringAbilityScore(Ability.Intelligence);
+        return Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
     }
 }

@@ -19,6 +19,6 @@ internal class GainIntelligenceScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Intelligence increases your intelligence
-        return Game.TryIncreasingAbilityScore(Ability.Intelligence);
+        return Game.TryIncreasingAbilityScore(AbilityEnum.Intelligence);
     }
 }

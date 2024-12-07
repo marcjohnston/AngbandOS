@@ -32,7 +32,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessByChanceScript, ICanc
     /// <returns></returns>
     public bool ExecuteSuccessByChanceScript()
     {
-        for (int i = 0; i < InventorySlot.PackCount; i++)
+        for (int i = 0; i < InventorySlotEnum.PackCount; i++)
         {
             // Find a set of non-artifact bolts in our inventory
             Item? item = Game.GetInventoryItem(i);

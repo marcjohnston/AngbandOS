@@ -56,7 +56,7 @@ internal class ImpRace : Race
             itemCharacteristics.ImFire = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new AngelicSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new AngelicSyllableSet());
     public override string[]? SelfKnowledge(int level)
     {
         List<string> values = new List<string>();
@@ -88,7 +88,7 @@ internal class ImpRace : Race
     public override void UseRacialPower()
     {
         // Imps can cast fire bolt/ball
-        if (Game.CheckIfRacialPowerWorks(9, 15, Ability.Wisdom, 15))
+        if (Game.CheckIfRacialPowerWorks(9, 15, AbilityEnum.Wisdom, 15))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

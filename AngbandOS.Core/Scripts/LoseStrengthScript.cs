@@ -19,6 +19,6 @@ internal class LoseStrengthScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Weakness tries to reduce your strength
-        return Game.TryDecreasingAbilityScore(Ability.Strength);
+        return Game.TryDecreasingAbilityScore(AbilityEnum.Strength);
     }
 }

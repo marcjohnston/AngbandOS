@@ -43,7 +43,7 @@ internal class IdentifyAllItemsScript : Script, IScript, IScriptStore
     /// <returns></returns>
     public void ExecuteScript()
     {
-        for (int i = 0; i < InventorySlot.Total; i++)
+        for (int i = 0; i < InventorySlotEnum.Total; i++)
         {
             Item? oPtr = Game.GetInventoryItem(i);
             if (oPtr == null)

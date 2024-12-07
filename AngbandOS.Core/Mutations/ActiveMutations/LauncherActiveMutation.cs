@@ -13,7 +13,7 @@ internal class LauncherActiveMutation : Mutation
     private LauncherActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, Ability.Strength, 6))
+        if (!Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, AbilityEnum.Strength, 6))
         {
             return;
         }

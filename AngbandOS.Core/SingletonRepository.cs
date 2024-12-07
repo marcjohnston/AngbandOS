@@ -294,7 +294,7 @@ internal class SingletonRepository
         RegisterRepository<Widget>();
 
         // These are already capable of Json serialization.
-        RegisterRepository<AmuletReadableFlavor>();
+        RegisterRepository<AmuletItemFlavor>();
         RegisterRepository<Animation>();
         RegisterRepository<Attack>();
         RegisterRepository<ClassSpell>();
@@ -304,26 +304,26 @@ internal class SingletonRepository
         RegisterRepository<God>();
         RegisterRepository<HelpGroup>();
         RegisterRepository<MonsterRace>();
-        RegisterRepository<MushroomReadableFlavor>();
+        RegisterRepository<MushroomItemFlavor>();
         RegisterRepository<Plural>();
-        RegisterRepository<PotionReadableFlavor>();
+        RegisterRepository<PotionItemFlavor>();
         RegisterRepository<ProjectileGraphic>();
-        RegisterRepository<RingReadableFlavor>();
-        RegisterRepository<RodReadableFlavor>();
-        RegisterRepository<ScrollReadableFlavor>();
+        RegisterRepository<RingItemFlavor>();
+        RegisterRepository<RodItemFlavor>();
+        RegisterRepository<ScrollItemFlavor>();
         RegisterRepository<Shopkeeper>();
         RegisterRepository<Spell>();
-        RegisterRepository<StaffReadableFlavor>();
+        RegisterRepository<StaffItemFlavor>();
         RegisterRepository<StoreCommand>();
         RegisterRepository<Symbol>();
         RegisterRepository<Tile>();
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
-        RegisterRepository<WandReadableFlavor>();
+        RegisterRepository<WandItemFlavor>();
         RegisterRepository<WizardCommand>();
 
         // Now load the configuration singletons.
-        LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorGameConfiguration, GenericAmuletReadableFlavor>(gameConfiguration.AmuletReadableFlavors);
+        LoadFromConfiguration<AmuletItemFlavor, ReadableFlavorGameConfiguration, GenericAmuletItemFlavor>(gameConfiguration.AmuletReadableFlavors);
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
@@ -333,22 +333,22 @@ internal class SingletonRepository
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<MushroomReadableFlavor, ReadableFlavorGameConfiguration, GenericMushroomReadableFlavor>(gameConfiguration.MushroomReadableFlavors);
+        LoadFromConfiguration<MushroomItemFlavor, ReadableFlavorGameConfiguration, GenericMushroomItemFlavor>(gameConfiguration.MushroomReadableFlavors);
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
-        LoadFromConfiguration<PotionReadableFlavor, ReadableFlavorGameConfiguration, GenericPotionReadableFlavor>(gameConfiguration.PotionReadableFlavors);
+        LoadFromConfiguration<PotionItemFlavor, ReadableFlavorGameConfiguration, GenericPotionItemFlavor>(gameConfiguration.PotionReadableFlavors);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
-        LoadFromConfiguration<RingReadableFlavor, ReadableFlavorGameConfiguration, GenericRingReadableFlavor>(gameConfiguration.RingReadableFlavors);
-        LoadFromConfiguration<RodReadableFlavor, ReadableFlavorGameConfiguration, GenericRodReadableFlavor>(gameConfiguration.RodReadableFlavors);
-        LoadFromConfiguration<ScrollReadableFlavor, ReadableFlavorGameConfiguration, GenericScrollReadableFlavor>(gameConfiguration.ScrollReadableFlavors);
+        LoadFromConfiguration<RingItemFlavor, ReadableFlavorGameConfiguration, GenericRingItemFlavor>(gameConfiguration.RingReadableFlavors);
+        LoadFromConfiguration<RodItemFlavor, ReadableFlavorGameConfiguration, GenericRodItemFlavor>(gameConfiguration.RodReadableFlavors);
+        LoadFromConfiguration<ScrollItemFlavor, ReadableFlavorGameConfiguration, GenericScrollItemFlavor>(gameConfiguration.ScrollReadableFlavors);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
-        LoadFromConfiguration<StaffReadableFlavor, ReadableFlavorGameConfiguration, GenericStaffReadableFlavor>(gameConfiguration.StaffReadableFlavors);
+        LoadFromConfiguration<StaffItemFlavor, ReadableFlavorGameConfiguration, GenericStaffItemFlavor>(gameConfiguration.StaffReadableFlavors);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(gameConfiguration.Tiles);
         LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
-        LoadFromConfiguration<WandReadableFlavor, ReadableFlavorGameConfiguration, GenericWandReadableFlavor>(gameConfiguration.WandReadableFlavors);
+        LoadFromConfiguration<WandItemFlavor, ReadableFlavorGameConfiguration, GenericWandItemFlavor>(gameConfiguration.WandReadableFlavors);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
 
         // Load the remaining types from the assembly.

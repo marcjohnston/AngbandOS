@@ -15,7 +15,7 @@ internal class CowardiceRandomMutation : Mutation
     public override string GainMessage => "You become an incredible coward!";
     public override string HaveMessage => "You are subject to cowardice.";
     public override string LoseMessage => "You are no longer an incredible coward!";
-    public override MutationGroup Group => MutationGroup.Bravery;
+    public override MutationGroupEnum Group => MutationGroupEnum.Bravery;
 
     public override void ProcessWorld()
     {

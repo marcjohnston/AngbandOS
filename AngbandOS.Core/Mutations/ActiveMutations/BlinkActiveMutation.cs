@@ -13,7 +13,7 @@ internal class BlinkActiveMutation : Mutation
     private BlinkActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
+        if (Game.CheckIfRacialPowerWorks(3, 3, AbilityEnum.Wisdom, 12))
         {
             Game.RunScriptInt(nameof(TeleportSelfScript), 10);
         }

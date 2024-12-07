@@ -19,6 +19,6 @@ internal class GainConstitutionScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Constitution increases your constitution
-        return Game.TryIncreasingAbilityScore(Ability.Constitution);
+        return Game.TryIncreasingAbilityScore(AbilityEnum.Constitution);
     }
 }

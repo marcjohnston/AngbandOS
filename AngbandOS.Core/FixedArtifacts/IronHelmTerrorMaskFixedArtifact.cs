@@ -16,7 +16,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        if (Game.BaseCharacterClass.ID == CharacterClass.Warrior)
+        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior)
         {
             item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
 

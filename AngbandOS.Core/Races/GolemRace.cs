@@ -56,7 +56,7 @@ internal class GolemRace : Race
             itemCharacteristics.HoldLife = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -92,7 +92,7 @@ internal class GolemRace : Race
     public override void UseRacialPower()
     {
         // Golems can harden their skin
-        if (Game.CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
+        if (Game.CheckIfRacialPowerWorks(20, 15, AbilityEnum.Constitution, 8))
         {
             Game.StoneskinTimer.AddTimer(Game.DieRoll(20) + 30);
         }

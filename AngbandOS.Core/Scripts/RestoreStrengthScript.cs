@@ -19,6 +19,6 @@ internal class RestoreStrengthScript : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         // Restore strength restores your strength
-        return Game.TryRestoringAbilityScore(Ability.Strength);
+        return Game.TryRestoringAbilityScore(AbilityEnum.Strength);
     }
 }

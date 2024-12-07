@@ -48,7 +48,7 @@ internal class HighElfRace : Race
             itemCharacteristics.SeeInvis = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllableSet());
     public override void CalcBonuses()
     {
         Game.HasSeeInvisibility = true;

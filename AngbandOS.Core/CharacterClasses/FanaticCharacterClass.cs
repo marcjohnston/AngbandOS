@@ -32,7 +32,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 35;
-    public override int PrimeStat => Ability.Intelligence;
+    public override int PrimeStat => AbilityEnum.Intelligence;
     public override string[] Info => new string[] {
         "Warriors who dabble in INT based Chaos magic. Have a cult",
         "patron who will randomly give them rewards or punishments",
@@ -68,7 +68,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override int SpellStat => Ability.Intelligence;
+    public override int SpellStat => AbilityEnum.Intelligence;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));

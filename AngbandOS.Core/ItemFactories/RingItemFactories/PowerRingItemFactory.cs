@@ -21,7 +21,7 @@ internal class PowerRingItemFactory : ItemFactory
     public override void Bind()
     {
         base.Bind();
-        Flavor = Game.SingletonRepository.Get<RingReadableFlavor>(nameof(PlainGoldRingReadableFlavor));
+        Flavor = Game.SingletonRepository.Get<RingItemFlavor>(nameof(PlainGoldRingItemFlavor));
     }
 
     public override int Cost => 5000000;

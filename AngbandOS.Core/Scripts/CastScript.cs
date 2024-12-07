@@ -31,7 +31,7 @@ internal class CastScript : Script, IScript, IRepeatableScript
         if (Game.HasAntiMagic)
         {
             string whichMagicType = Game.BaseCharacterClass.MagicType;
-            if (Game.BaseCharacterClass.ID == CharacterClass.Mindcrafter || Game.BaseCharacterClass.ID == CharacterClass.Mystic)
+            if (Game.BaseCharacterClass.ID == CharacterClassEnum.Mindcrafter || Game.BaseCharacterClass.ID == CharacterClassEnum.Mystic)
             {
                 whichMagicType = "psychic talents";
             }

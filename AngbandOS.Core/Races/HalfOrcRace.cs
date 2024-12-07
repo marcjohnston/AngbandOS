@@ -49,7 +49,7 @@ internal class HalfOrcRace : Race
     {
         itemCharacteristics.ResDark = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllables());
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllableSet());
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -68,7 +68,7 @@ internal class HalfOrcRace : Race
     public override void UseRacialPower()
     {
         // Half-orcs can remove fear
-        if (Game.CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, Game.BaseCharacterClass.ID == CharacterClass.Warrior ? 5 : 10))
+        if (Game.CheckIfRacialPowerWorks(3, 5, AbilityEnum.Wisdom, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 5 : 10))
         {
             Game.MsgPrint("You play tough.");
             Game.FearTimer.ResetTimer();

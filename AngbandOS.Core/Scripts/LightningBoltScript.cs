@@ -21,11 +21,11 @@ internal class LightningBoltScript : Script, IScript
         int beam;
         switch (Game.BaseCharacterClass.ID)
         {
-            case CharacterClass.Mage:
+            case CharacterClassEnum.Mage:
                 beam = Game.ExperienceLevel.IntValue;
                 break;
 
-            case CharacterClass.HighMage:
+            case CharacterClassEnum.HighMage:
                 beam = Game.ExperienceLevel.IntValue + 10;
                 break;
 

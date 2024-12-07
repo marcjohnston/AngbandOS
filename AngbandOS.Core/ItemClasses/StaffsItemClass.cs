@@ -10,5 +10,5 @@ internal class StaffsItemClass : ItemClass
     /// <summary>
     /// Returns the staff flavors repository because staves have flavors that need to be identified.
     /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<StaffReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<StaffItemFlavor>();
 }

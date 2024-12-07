@@ -16,7 +16,7 @@ internal class LoseConAttackEffect : AttackEffect
     public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        if (Game.TryDecreasingAbilityScore(Ability.Constitution))
+        if (Game.TryDecreasingAbilityScore(AbilityEnum.Constitution))
         {
             obvious = true;
         }

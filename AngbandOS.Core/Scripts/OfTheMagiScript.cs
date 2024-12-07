@@ -15,7 +15,7 @@ internal class OfTheMagiScript : Script, IIdentifableAndUsedScript
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
         bool identified = false;
-        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
+        if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
         {
             identified = true;
         }

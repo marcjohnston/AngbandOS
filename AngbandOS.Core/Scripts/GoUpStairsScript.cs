@@ -90,7 +90,7 @@ internal class GoUpStairsScript : Script, IScript, IRepeatableScript
             {
                 Game.WildernessX = Game.CurDungeon.X;
                 Game.WildernessY = Game.CurDungeon.Y;
-                Game.CameFrom = LevelStart.StartStairs;
+                Game.CameFrom = LevelStartEnum.StartStairs;
             }
         }
         Game.NewLevelFlag = true;
