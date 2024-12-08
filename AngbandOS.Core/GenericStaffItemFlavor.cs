@@ -8,15 +8,15 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class GenericRingItemFlavor : RingItemFlavor
+internal class GenericStaffItemFlavor : StaffItemFlavor
 {
-    public GenericRingItemFlavor(Game game, ReadableFlavorGameConfiguration readableFlavorDefninition) : base(game)
+    public GenericStaffItemFlavor(Game game, ItemFlavorGameConfiguration readableFlavorDefinition) : base(game)
     {
-        Key = readableFlavorDefninition.Key;
-        Name = readableFlavorDefninition.Name;
-        SymbolName = readableFlavorDefninition.SymbolName;
-        Color = readableFlavorDefninition.Color;
-        CanBeAssigned = readableFlavorDefninition.CanBeAssigned;
+        Key = readableFlavorDefinition.Key;
+        Name = readableFlavorDefinition.Name;
+        SymbolName = readableFlavorDefinition.SymbolName;
+        Color = readableFlavorDefinition.Color;
+        CanBeAssigned = readableFlavorDefinition.CanBeAssigned;
     }
 
     public override string Key { get; }

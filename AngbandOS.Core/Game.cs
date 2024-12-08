@@ -2336,7 +2336,7 @@ public bool IsDead = false;
         IsDead = false;
         PlayerOutfit();
         FlavorInit();
-        ApplyFlavorVisuals();
+        AssignItemFlavors();
 
         _seedFlavor = RandomLessThan(int.MaxValue);
         CreateWorld();
@@ -3331,27 +3331,34 @@ public bool IsDead = false;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Check();
     }
 
-    private void ApplyFlavorVisuals()
+    private void AssignItemFlavors()
     {
-        Dictionary<Type, IEnumerator<Flavor>> currentFlavorIndex = new Dictionary<Type, IEnumerator<Flavor>>();
+        // Create a dictionary that tracks all of the flavor repositories as the flavors are being assigned.
+        Dictionary<ItemClass, IEnumerator<Flavor>> currentFlavorIndex = new Dictionary<ItemClass, IEnumerator<Flavor>>();
+
+        // Loop through all of the item factories.  Multiple item factories will have common item class flavor repositories.
         foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
-            if (kPtr.ItemClass.HasFlavor)
+            // Get the flavor repository for the item class.
+            IEnumerable<Flavor>? flavorRepository = kPtr.ItemClass.GetFlavorRepository;
+
+            // Check to see if the item class has flavor.
+            if (flavorRepository != null)
             {
-                // Get the repository for the flavors.
-                IEnumerable<Flavor>? flavorRepository = kPtr.ItemClass.GetFlavorRepository;
-
-                // Check to see if the repository indicates that the flavors need to be assigned and a predefined flavor hasn't already been bound.
-                if (flavorRepository != null && kPtr.Flavor == null)
+                // Check to see if the item has a predefined flavor.
+                if (kPtr.PreassignedItemFlavor != null)
                 {
-                    // The dictionary for the enumerator is using the type as the key.
-                    Type factoryType = flavorRepository.GetType();
-
-                    if (!currentFlavorIndex.TryGetValue(factoryType, out IEnumerator<Flavor>? flavorEnumerator))
+                    // Assign the predefined flavor.
+                    kPtr.Flavor = kPtr.PreassignedItemFlavor;
+                }
+                else
+                {
+                    // No, it doesn't have a preasigned flavor.  Assign one from the item class flavor repository.
+                    if (!currentFlavorIndex.TryGetValue(kPtr.ItemClass, out IEnumerator<Flavor>? flavorEnumerator))
                     {
                         // Get the enumerator for the repository.
                         flavorEnumerator = flavorRepository.GetEnumerator();
-                        currentFlavorIndex.Add(factoryType, flavorEnumerator);
+                        currentFlavorIndex.Add(kPtr.ItemClass, flavorEnumerator);
                     }
 
                     // Ensure there are enough flavors.
@@ -3359,7 +3366,7 @@ public bool IsDead = false;
                     {
                         if (!flavorEnumerator.MoveNext())
                         {
-                            throw new Exception($"{factoryType.Name} does not have enough flavors to assign to the associated factories.");
+                            throw new Exception($"The ItemClass {kPtr.ItemClass.Name} does not have enough flavors to assign to the associated factories.");
                         }
                     }
                     while (!flavorEnumerator.Current.CanBeAssigned);

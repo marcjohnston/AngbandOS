@@ -25,7 +25,7 @@ internal abstract class ItemFlavor : Flavor, IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        ReadableFlavorGameConfiguration readableFlavorDefinition = new()
+        ItemFlavorGameConfiguration readableFlavorDefinition = new()
         {
             Key = Key,
             SymbolName = SymbolName,

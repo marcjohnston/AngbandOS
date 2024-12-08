@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 /// <entity-name-property-name>Name</entity-name-property-name>
 [Serializable]
-public class ReadableFlavorGameConfiguration
+public class ItemFlavorGameConfiguration
 {
     public virtual string Key { get; set; }
     /// <foreign-collection-name>Symbols</foreign-collection-name>

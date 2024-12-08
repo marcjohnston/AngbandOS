@@ -18,12 +18,8 @@ internal class PowerRingItemFactory : ItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override void Bind()
-    {
-        base.Bind();
-        Flavor = Game.SingletonRepository.Get<RingItemFlavor>(nameof(PlainGoldRingItemFlavor));
-    }
 
+    protected override string? PreassignedItemFlavorBindingKey => nameof(PlainGoldRingItemFlavor);
     public override int Cost => 5000000;
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 110;

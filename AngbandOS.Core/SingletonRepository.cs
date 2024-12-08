@@ -323,7 +323,7 @@ internal class SingletonRepository
         RegisterRepository<WizardCommand>();
 
         // Now load the configuration singletons.
-        LoadFromConfiguration<AmuletItemFlavor, ReadableFlavorGameConfiguration, GenericAmuletItemFlavor>(gameConfiguration.AmuletReadableFlavors);
+        LoadFromConfiguration<AmuletItemFlavor, ItemFlavorGameConfiguration, GenericAmuletItemFlavor>(gameConfiguration.AmuletReadableFlavors);
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
@@ -333,22 +333,22 @@ internal class SingletonRepository
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<MushroomItemFlavor, ReadableFlavorGameConfiguration, GenericMushroomItemFlavor>(gameConfiguration.MushroomReadableFlavors);
+        LoadFromConfiguration<MushroomItemFlavor, ItemFlavorGameConfiguration, GenericMushroomItemFlavor>(gameConfiguration.MushroomReadableFlavors);
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
-        LoadFromConfiguration<PotionItemFlavor, ReadableFlavorGameConfiguration, GenericPotionItemFlavor>(gameConfiguration.PotionReadableFlavors);
+        LoadFromConfiguration<PotionItemFlavor, ItemFlavorGameConfiguration, GenericPotionItemFlavor>(gameConfiguration.PotionReadableFlavors);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
-        LoadFromConfiguration<RingItemFlavor, ReadableFlavorGameConfiguration, GenericRingItemFlavor>(gameConfiguration.RingReadableFlavors);
-        LoadFromConfiguration<RodItemFlavor, ReadableFlavorGameConfiguration, GenericRodItemFlavor>(gameConfiguration.RodReadableFlavors);
-        LoadFromConfiguration<ScrollItemFlavor, ReadableFlavorGameConfiguration, GenericScrollItemFlavor>(gameConfiguration.ScrollReadableFlavors);
+        LoadFromConfiguration<RingItemFlavor, ItemFlavorGameConfiguration, GenericRingItemFlavor>(gameConfiguration.RingReadableFlavors);
+        LoadFromConfiguration<RodItemFlavor, ItemFlavorGameConfiguration, GenericRodItemFlavor>(gameConfiguration.RodReadableFlavors);
+        LoadFromConfiguration<ScrollItemFlavor, ItemFlavorGameConfiguration, GenericScrollItemFlavor>(gameConfiguration.ScrollReadableFlavors);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
-        LoadFromConfiguration<StaffItemFlavor, ReadableFlavorGameConfiguration, GenericStaffItemFlavor>(gameConfiguration.StaffReadableFlavors);
+        LoadFromConfiguration<StaffItemFlavor, ItemFlavorGameConfiguration, GenericStaffItemFlavor>(gameConfiguration.StaffReadableFlavors);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(gameConfiguration.Tiles);
         LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
-        LoadFromConfiguration<WandItemFlavor, ReadableFlavorGameConfiguration, GenericWandItemFlavor>(gameConfiguration.WandReadableFlavors);
+        LoadFromConfiguration<WandItemFlavor, ItemFlavorGameConfiguration, GenericWandItemFlavor>(gameConfiguration.WandReadableFlavors);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
 
         // Load the remaining types from the assembly.

@@ -41,9 +41,23 @@ internal abstract class ItemFactory : ItemEnhancement
     public ColorEnum FlavorColor;
 
     /// <summary>
+    /// Returns the name of the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
+    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
+    /// This property is used to bind the <see cref="PreassignedItemFlavor"/> property during the binding phase.
+    /// </summary>
+    protected virtual string? PreassignedItemFlavorBindingKey => null;
+
+    /// <summary>
+    /// Returns the the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
+    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
+    /// This property is bound using the <see cref="PreassignedItemFlavorBindingKey"/> property during the binding phase.
+    /// </summary>
+    public Flavor? PreassignedItemFlavor { get; private set; }
+
+    /// <summary>
     /// Returns the flavor that was issued to the item factory.
     /// </summary>
-    public Flavor? Flavor;
+    public Flavor? Flavor { get; set; }
 
     /// <summary>
     /// Returns true, if the player has attempted/tried the item.
@@ -262,6 +276,7 @@ internal abstract class ItemFactory : ItemEnhancement
         RefillScript = Game.SingletonRepository.GetNullable<IScriptItem>(RefillScriptBindingKey);
         BreakageChanceProbability = Game.ParseProbabilityExpression(BreakageChanceProbabilityExpression);
         SlayingRandomArtifactItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey);
+        Flavor = Game.SingletonRepository.GetNullable<ItemFlavor>(PreassignedItemFlavorBindingKey);
     }
 
     /// <summary>
