@@ -581,7 +581,6 @@ public bool IsDead = false;
     public Dungeon RecallDungeon;
     public int Resting;
     public int Running;
-    public List<IllegibleScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
 
     /// <summary>
     /// Returns the target the player has selected; or null, if the player hasn't chosen a target.
@@ -2335,8 +2334,9 @@ public bool IsDead = false;
         InitializeQuests();
         IsDead = false;
         PlayerOutfit();
-        FlavorInit();
-        ApplyFlavorVisuals();
+
+        AssignItemFlavors();
+        ResetItemFlavors();
 
         _seedFlavor = RandomLessThan(int.MaxValue);
         CreateWorld();
@@ -3331,44 +3331,119 @@ public bool IsDead = false;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Check();
     }
 
-    private void ApplyFlavorVisuals()
+    private List<Flavor>? GenerateFlavors(ItemClass itemClass)
     {
-        Dictionary<Type, IEnumerator<Flavor>> currentFlavorIndex = new Dictionary<Type, IEnumerator<Flavor>>();
+
+        if (itemClass.NumberOfFlavorsToGenerate == 0)
+        {
+            return itemClass.ItemFlavorRepository?.ToList();
+        }
+
+        List<Flavor>? itemFlavors = new List<Flavor>();
+
+        int i, j;
+        UseFixed = true;
+        FixedSeed = _seedFlavor;
+        for (i = 0; i < itemClass.NumberOfFlavorsToGenerate; i++)
+        {
+            while (true)
+            {
+                string buf = "";
+                while (true)
+                {
+                    string tmp = "";
+                    int s = RandomLessThan(100) < 30 ? 1 : 2;
+                    for (int q = 0; q < s; q++)
+                    {
+                        tmp += SingletonRepository.IllegibleFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
+                    }
+                    if (buf.Length + tmp.Length > 14)
+                    {
+                        break;
+                    }
+                    buf += " ";
+                    buf += tmp;
+                }
+                bool okay = true;
+                string name = buf.Substring(1);
+                foreach (Flavor testFlavor in itemFlavors)
+                {
+                    if (testFlavor.Name.Substring(0, 4) == name.Substring(0, 4))
+                    {
+                        okay = false;
+                        break;
+                    }
+                }
+                if (okay)
+                {
+                    // Select a random flavor from the repository.
+                    int index = RandomLessThan(itemClass.ItemFlavorRepository.Length);
+                    Flavor baseFlavor = itemClass.ItemFlavorRepository[index];
+
+                    // Generate an item flavor.
+                    Flavor flavor = new IllegibleItemFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
+                    itemFlavors.Add(flavor);
+                    break;
+                }
+            }
+        }
+
+        return itemFlavors;
+    }
+
+    private void ResetItemFlavors()
+    {
+        // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
+        UseFixed = false;
+        foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
+        {
+            itemFactory.IsFlavorAware = !itemFactory.ItemClass.HasFlavor;
+        }
+    }
+    private void AssignItemFlavors()
+    {
+        // Create a dictionary that tracks all of the flavor repositories as the flavors are being assigned.
+        Dictionary<ItemClass, List<Flavor>> itemClassWorkingRepositoryOfItemFlavors = new Dictionary<ItemClass, List<Flavor>>();
+
+        // Loop through all of the item factories.  Multiple item factories will have common item class flavor repositories.
         foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
+            // Check to see if the item class has flavor.
             if (kPtr.ItemClass.HasFlavor)
             {
-                // Get the repository for the flavors.
-                IEnumerable<Flavor>? flavorRepository = kPtr.ItemClass.GetFlavorRepository;
-
-                // Check to see if the repository indicates that the flavors need to be assigned and a predefined flavor hasn't already been bound.
-                if (flavorRepository != null && kPtr.Flavor == null)
+                // Check to see if the item has a predefined flavor.
+                if (kPtr.PreassignedItemFlavor != null)
                 {
-                    // The dictionary for the enumerator is using the type as the key.
-                    Type factoryType = flavorRepository.GetType();
-
-                    if (!currentFlavorIndex.TryGetValue(factoryType, out IEnumerator<Flavor>? flavorEnumerator))
+                    // Assign the predefined flavor.
+                    kPtr.Flavor = kPtr.PreassignedItemFlavor;
+                }
+                else
+                {
+                    // No, it doesn't have a preasigned flavor.  Assign one from the item class flavor repository.
+                    if (!itemClassWorkingRepositoryOfItemFlavors.TryGetValue(kPtr.ItemClass, out List<Flavor>? currentFlavorRepository))
                     {
-                        // Get the enumerator for the repository.
-                        flavorEnumerator = flavorRepository.GetEnumerator();
-                        currentFlavorIndex.Add(factoryType, flavorEnumerator);
+                        // Get the flavor repository for the item class.  This generation process may involve generating illegible scroll titles.
+                        List<Flavor>? completeFlavorRepository = GenerateFlavors(kPtr.ItemClass);
+
+                        // The dictionary currently isn't tracking the repository.  Set it up now.
+                        currentFlavorRepository = completeFlavorRepository;
+                        itemClassWorkingRepositoryOfItemFlavors.Add(kPtr.ItemClass, currentFlavorRepository);
                     }
 
                     // Ensure there are enough flavors.
-                    do
+                    if (currentFlavorRepository.Count == 0)
                     {
-                        if (!flavorEnumerator.MoveNext())
-                        {
-                            throw new Exception($"{factoryType.Name} does not have enough flavors to assign to the associated factories.");
-                        }
+                        throw new Exception($"The ItemClass {kPtr.ItemClass.Name} does not have enough flavors to assign to the associated factories.");
                     }
-                    while (!flavorEnumerator.Current.CanBeAssigned);
+
+                    // Select a random item flavor.
+                    int randomIndex = UseRandom.Next(currentFlavorRepository.Count);
 
                     // Retrieve the flavor to assign to the factory.
-                    Flavor flavor = flavorEnumerator.Current;
+                    kPtr.Flavor = currentFlavorRepository[randomIndex];
 
-                    // Assign the flavor details.
-                    kPtr.Flavor = flavor;
+                    // Remove the used flavor from the current item class repository.
+                    currentFlavorRepository.RemoveAt(randomIndex);
                 }
 
                 kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
@@ -3768,62 +3843,6 @@ public bool IsDead = false;
             {
                 RunScript(nameof(SayFeelingScript));
             }
-        }
-    }
-
-    private void FlavorInit()
-    {
-        int i, j;
-        UseFixed = true;
-        FixedSeed = _seedFlavor;
-        UnreadableScrollFlavors = new List<IllegibleScrollFlavor>();
-        for (i = 0; i < Constants.MaxNumberOfScrollFlavorsGenerated; i++)
-        {
-            while (true)
-            {
-                string buf = "";
-                while (true)
-                {
-                    string tmp = "";
-                    int s = RandomLessThan(100) < 30 ? 1 : 2;
-                    for (int q = 0; q < s; q++)
-                    {
-                        tmp += SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
-                    }
-                    if (buf.Length + tmp.Length > 14)
-                    {
-                        break;
-                    }
-                    buf += " ";
-                    buf += tmp;
-                }
-                bool okay = true;
-                string name = buf.Substring(1);
-                for (j = 0; j < i; j++)
-                {
-                    string hack1 = UnreadableScrollFlavors[j].Name;
-                    if (hack1.Substring(0, 4) == name.Substring(0, 4))
-                    {
-                        okay = false;
-                        break;
-                    }
-                }
-                if (okay)
-                {
-                    int index = RandomLessThan(SingletonRepository.Count<ScrollItemFlavor>());
-                    ScrollItemFlavor baseFlavor = SingletonRepository.Get<ScrollItemFlavor>(index);
-                    IllegibleScrollFlavor flavor = new IllegibleScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
-                    UnreadableScrollFlavors.Add(flavor);
-                    break;
-                }
-            }
-        }
-
-        // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
-        UseFixed = false;
-        foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
-        {
-            itemFactory.IsFlavorAware = !itemFactory.ItemClass.HasFlavor;
         }
     }
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class MapleStaffItemFlavor : StaffItemFlavor
+internal class MapleStaffItemFlavor : ItemFlavor
 {
     private MapleStaffItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(UnderscoreSymbol);

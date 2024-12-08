@@ -8,9 +8,15 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal abstract class ScrollItemFlavor : ItemFlavor
+internal class IllegibleItemFlavor : Flavor
 {
-    protected ScrollItemFlavor(Game game) : base(game)
+    public override Symbol Symbol { get; }
+    public override ColorEnum Color { get; }
+    public override string Name { get; }
+    public IllegibleItemFlavor(Game game, Symbol symbol, ColorEnum color, string name) : base(game)
     {
+        Symbol = symbol;
+        Color = color;
+        Name = name;
     }
 }

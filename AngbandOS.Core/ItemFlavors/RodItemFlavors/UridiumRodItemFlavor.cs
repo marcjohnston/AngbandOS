@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class UridiumRodItemFlavor : RodItemFlavor
+internal class UridiumRodItemFlavor : ItemFlavor
 {
     private UridiumRodItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);

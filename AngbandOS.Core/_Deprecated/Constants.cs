@@ -59,7 +59,6 @@ internal static class Constants
     public const int MaxSight = 20;
     public const int MaxStackSize = 100;
     public const int MaxStoresTotal = 96;
-    public const int MaxNumberOfScrollFlavorsGenerated = 54;
     public const int MaxUchar = 255;
     public const int MaxWoods = 32;
     public const int MflagBorn = 0x10;

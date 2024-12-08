@@ -17,11 +17,7 @@ internal class SlimeMoldJuicePotionItemFactory : ItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
-    public override void Bind()
-    {
-        base.Bind();
-        Flavor = Game.SingletonRepository.Get<PotionItemFlavor>(nameof(IckyGreenPotionItemFlavor));
-    }
+    protected override string? PreassignedItemFlavorBindingKey => nameof(IckyGreenPotionItemFlavor);
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1)

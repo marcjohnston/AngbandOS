@@ -23,13 +23,17 @@ internal abstract class ItemClass : IGetKey
     /// </summary>
     public virtual bool AllowStomp => true;
 
-    public bool HasFlavor => (GetFlavorRepository != null);
+    public bool HasFlavor => (ItemFlavorRepository != null);
+
+    public virtual int NumberOfFlavorsToGenerate => 0;
 
     /// <summary>
     /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned
     /// when an item has a predefined flavor.  Apple juice, water and slime-mold item factories use pre-defined flavors. 
     /// </summary>
-    public virtual IEnumerable<Flavor>? GetFlavorRepository => null;
+    protected virtual string[]? ItemFlavorBindingKeys => null;
+
+    public Flavor[]? ItemFlavorRepository { get; private set; }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -43,5 +47,8 @@ internal abstract class ItemClass : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        ItemFlavorRepository = Game.SingletonRepository.GetNullable<ItemFlavor>(ItemFlavorBindingKeys);
+    }
 }

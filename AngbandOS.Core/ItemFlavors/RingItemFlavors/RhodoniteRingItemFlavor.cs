@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class RhodoniteRingItemFlavor : RingItemFlavor
+internal class RhodoniteRingItemFlavor : ItemFlavor
 {
     private RhodoniteRingItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);

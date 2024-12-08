@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class TinPlatedWandItemFlavor : WandItemFlavor
+internal class TinPlatedWandItemFlavor : ItemFlavor
 {
     private TinPlatedWandItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);

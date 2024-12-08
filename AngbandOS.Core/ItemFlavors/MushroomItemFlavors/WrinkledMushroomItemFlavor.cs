@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class WrinkledMushroomItemFlavor : MushroomItemFlavor
+internal class WrinkledMushroomItemFlavor : ItemFlavor
 {
     private WrinkledMushroomItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CommaSymbol);

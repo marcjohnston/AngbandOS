@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class RubyRingItemFlavor : RingItemFlavor
+internal class RubyRingItemFlavor : ItemFlavor
 {
     private RubyRingItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);

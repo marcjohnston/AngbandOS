@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class CoralAmuletItemFlavor : AmuletItemFlavor
+internal class CoralAmuletItemFlavor : ItemFlavor
 {
     private CoralAmuletItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(DoubleQuoteSymbol);

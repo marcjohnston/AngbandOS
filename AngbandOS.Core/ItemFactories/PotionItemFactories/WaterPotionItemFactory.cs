@@ -28,11 +28,7 @@ internal class WaterPotionItemFactory : ItemFactory
 
     protected override (string, string?, int)? QuaffBindingTuple => (nameof(WaterScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
 
-    public override void Bind()
-    {
-        base.Bind();
-        Flavor = Game.SingletonRepository.Get<PotionItemFlavor>(nameof(ClearPotionItemFlavor));
-    }
+    protected override string? PreassignedItemFlavorBindingKey => nameof(ClearPotionItemFlavor);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

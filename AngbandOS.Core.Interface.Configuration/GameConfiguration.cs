@@ -50,28 +50,28 @@ public class GameConfiguration
     public ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
 
     /// <entity-noun>AmuletReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? AmuletReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? AmuletReadableFlavors { get; set; } = null;
 
     /// <entity-noun>MushroomReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? MushroomReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? MushroomReadableFlavors { get; set; } = null;
 
     /// <entity-noun>PotionReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? PotionReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? PotionReadableFlavors { get; set; } = null;
 
     /// <entity-noun>RingReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? RingReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? RingReadableFlavors { get; set; } = null;
 
     /// <entity-noun>RodReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? RodReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? RodReadableFlavors { get; set; } = null;
 
     /// <entity-noun>ScrollReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? ScrollReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? ScrollReadableFlavors { get; set; } = null;
 
     /// <entity-noun>StaffReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? StaffReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? StaffReadableFlavors { get; set; } = null;
 
     /// <entity-noun>WandReadableFlavor</entity-noun>
-    public ReadableFlavorGameConfiguration[]? WandReadableFlavors { get; set; } = null;
+    public ItemFlavorGameConfiguration[]? WandReadableFlavors { get; set; } = null;
 
     public ClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
 

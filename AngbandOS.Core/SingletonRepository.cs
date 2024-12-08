@@ -37,7 +37,7 @@ internal class SingletonRepository
     public ShopkeeperLessThanGuessCommentsRepository ShopkeeperLessThanGuessComments; // TODO: These cannot be hardcoded.
     public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments; // TODO: These cannot be hardcoded.
     public SingingPlayerAttacksRepository SingingPlayerAttacks; // TODO: These cannot be hardcoded.
-    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables; // TODO: These cannot be hardcoded.
+    public IllegibleFlavorSyllablesRepository IllegibleFlavorSyllables; // TODO: These cannot be hardcoded.
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks; // TODO: These cannot be hardcoded.
 
     /// <summary>
@@ -294,7 +294,6 @@ internal class SingletonRepository
         RegisterRepository<Widget>();
 
         // These are already capable of Json serialization.
-        RegisterRepository<AmuletItemFlavor>();
         RegisterRepository<Animation>();
         RegisterRepository<Attack>();
         RegisterRepository<ClassSpell>();
@@ -303,27 +302,20 @@ internal class SingletonRepository
         RegisterRepository<GameCommand>();
         RegisterRepository<God>();
         RegisterRepository<HelpGroup>();
+        RegisterRepository<ItemFlavor>();
         RegisterRepository<MonsterRace>();
-        RegisterRepository<MushroomItemFlavor>();
         RegisterRepository<Plural>();
-        RegisterRepository<PotionItemFlavor>();
         RegisterRepository<ProjectileGraphic>();
-        RegisterRepository<RingItemFlavor>();
-        RegisterRepository<RodItemFlavor>();
-        RegisterRepository<ScrollItemFlavor>();
         RegisterRepository<Shopkeeper>();
         RegisterRepository<Spell>();
-        RegisterRepository<StaffItemFlavor>();
         RegisterRepository<StoreCommand>();
         RegisterRepository<Symbol>();
         RegisterRepository<Tile>();
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
-        RegisterRepository<WandItemFlavor>();
         RegisterRepository<WizardCommand>();
 
         // Now load the configuration singletons.
-        LoadFromConfiguration<AmuletItemFlavor, ReadableFlavorGameConfiguration, GenericAmuletItemFlavor>(gameConfiguration.AmuletReadableFlavors);
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
@@ -332,23 +324,17 @@ internal class SingletonRepository
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GenericGameCommand>(gameConfiguration.GameCommands);
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
+        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, GenericItemFlavor>(gameConfiguration.AmuletReadableFlavors);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<MushroomItemFlavor, ReadableFlavorGameConfiguration, GenericMushroomItemFlavor>(gameConfiguration.MushroomReadableFlavors);
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
-        LoadFromConfiguration<PotionItemFlavor, ReadableFlavorGameConfiguration, GenericPotionItemFlavor>(gameConfiguration.PotionReadableFlavors);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
-        LoadFromConfiguration<RingItemFlavor, ReadableFlavorGameConfiguration, GenericRingItemFlavor>(gameConfiguration.RingReadableFlavors);
-        LoadFromConfiguration<RodItemFlavor, ReadableFlavorGameConfiguration, GenericRodItemFlavor>(gameConfiguration.RodReadableFlavors);
-        LoadFromConfiguration<ScrollItemFlavor, ReadableFlavorGameConfiguration, GenericScrollItemFlavor>(gameConfiguration.ScrollReadableFlavors);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
-        LoadFromConfiguration<StaffItemFlavor, ReadableFlavorGameConfiguration, GenericStaffItemFlavor>(gameConfiguration.StaffReadableFlavors);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(gameConfiguration.Tiles);
         LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
-        LoadFromConfiguration<WandItemFlavor, ReadableFlavorGameConfiguration, GenericWandItemFlavor>(gameConfiguration.WandReadableFlavors);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
 
         // Load the remaining types from the assembly.
@@ -373,7 +359,7 @@ internal class SingletonRepository
         ShopkeeperLessThanGuessComments = AddRepository<ShopkeeperLessThanGuessCommentsRepository>(new ShopkeeperLessThanGuessCommentsRepository(Game));
         ShopkeeperWorthlessComments = AddRepository<ShopkeeperWorthlessCommentsRepository>(new ShopkeeperWorthlessCommentsRepository(Game));
         SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(Game));
-        UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
+        IllegibleFlavorSyllables = AddRepository<IllegibleFlavorSyllablesRepository>(new IllegibleFlavorSyllablesRepository(Game));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.

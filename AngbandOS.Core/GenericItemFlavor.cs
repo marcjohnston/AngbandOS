@@ -8,15 +8,15 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class GenericAmuletItemFlavor : AmuletItemFlavor
+internal class GenericItemFlavor : ItemFlavor
 {
-    public GenericAmuletItemFlavor(Game game, ReadableFlavorGameConfiguration readableFlavorDefninition) : base(game)
+    public GenericItemFlavor(Game game, ItemFlavorGameConfiguration readableFlavorDefinition) : base(game)
     {
-        Key = readableFlavorDefninition.Key;
-        Name = readableFlavorDefninition.Name;
-        SymbolName = readableFlavorDefninition.SymbolName;
-        Color = readableFlavorDefninition.Color;
-        CanBeAssigned = readableFlavorDefninition.CanBeAssigned;
+        Key = readableFlavorDefinition.Key;
+        Name = readableFlavorDefinition.Name;
+        SymbolName = readableFlavorDefinition.SymbolName;
+        Color = readableFlavorDefinition.Color;
+        CanBeAssigned = readableFlavorDefinition.CanBeAssigned;
     }
 
     public override string Key { get; }

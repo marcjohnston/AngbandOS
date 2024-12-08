@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class BrownPotionItemFlavor : PotionItemFlavor
+internal class BrownPotionItemFlavor : ItemFlavor
 {
     private BrownPotionItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(ExclamationPointSymbol);

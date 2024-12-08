@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class BrightBeigeScrollItemFlavor : ScrollItemFlavor
+internal class BrightBeigeScrollItemFlavor : ItemFlavor
 {
     private BrightBeigeScrollItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(QuestionMarkSymbol);

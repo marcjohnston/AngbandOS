@@ -2498,7 +2498,7 @@ internal sealed class Item : IComparable<Item>
         {
             while (testcounter-- != 0)
             {
-                outString += Game.SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
+                outString += Game.SingletonRepository.IllegibleFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
             }
         }
         else

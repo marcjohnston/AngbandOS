@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFlavors;
 
 [Serializable]
-internal class HemlockStaffItemFlavor : StaffItemFlavor
+internal class HemlockStaffItemFlavor : ItemFlavor
 {
     private HemlockStaffItemFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(UnderscoreSymbol);
