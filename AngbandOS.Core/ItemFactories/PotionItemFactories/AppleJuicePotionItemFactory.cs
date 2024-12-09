@@ -16,10 +16,6 @@ internal class AppleJuicePotionItemFactory : ItemFactory
     protected override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
-    public override void Bind()
-    {
-        base.Bind();
-    }
     protected override string? PreassignedItemFlavorBindingKey => nameof(LightBrownPotionItemFlavor);
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
