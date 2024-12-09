@@ -35,19 +35,25 @@ internal class ExamineStoreItemScript : Script, IScriptStore
         }
         item += storeCommandEvent.Store.StoreTop;
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[item];
+
+        // Determine if the item is a book.
         if (oPtr.Spells != null)
         {
-            ScreenBuffer savedScreen = Game.Screen.Clone();
-            Game.PrintSpells(oPtr.Spells.ToArray(), 1, 20);
-            Game.MsgClear();
-            Game.Screen.Print("[Press any key to continue]", 0, 23);
-            Game.Inkey();
-            Game.Screen.Restore(savedScreen);
-        }
-        else
-        {
-            Game.MsgPrint("The spells in the book are unintelligible to you.");
-            return;
+            // It is.  Only books from realms that the player belongs to can be read.
+            if (oPtr.IsUsableSpellBook())
+            {
+                ScreenBuffer savedScreen = Game.Screen.Clone();
+                Game.PrintSpells(oPtr.Spells.ToArray(), 1, 20);
+                Game.MsgClear();
+                Game.Screen.Print("[Press any key to continue]", 0, 23);
+                Game.Inkey();
+                Game.Screen.Restore(savedScreen);
+            }
+            else
+            {
+                Game.MsgPrint("The spells in the book are unintelligible to you.");
+                return;
+            }
         }
         if (!oPtr.IdentMental)
         {
