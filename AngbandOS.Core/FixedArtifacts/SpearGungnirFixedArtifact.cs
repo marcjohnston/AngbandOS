@@ -13,7 +13,7 @@ internal class SpearGungnirFixedArtifact : FixedArtifact
     private SpearGungnirFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
-    protected override string? ActivationName => nameof(BallOfLightning100r3Every500Activation);
+    protected override string? ActivationName => nameof(BallOfLightning100r3Every500DirectionalActivation);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear 'Gungnir'";
     public override int Ac => 0;

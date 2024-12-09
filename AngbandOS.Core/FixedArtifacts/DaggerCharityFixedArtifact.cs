@@ -16,7 +16,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Charity shoots a lightning bolt
-    protected override string? ActivationName => nameof(LightningBolt4d8Every6p1d6Activation);
+    protected override string? ActivationName => nameof(LightningBolt4d8Every6p1d6DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {

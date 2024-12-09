@@ -21,7 +21,7 @@ internal class WhiteDragonScaleMailItemFactory : ItemFactory
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    protected override string? ActivationName => nameof(BreathBallOfFrost110r2Every500Activation);
+    protected override string? ActivationName => nameof(BreathBallOfFrost110r2Every500DirectionalActivation);
     protected override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "White Dragon Scale Mail";
 

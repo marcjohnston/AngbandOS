@@ -21,7 +21,7 @@ internal class GoldDragonScaleMailItemFactory : ItemFactory
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    protected override string? ActivationName => nameof(BallOfSound130r2Every1d450p450Activation);
+    protected override string? ActivationName => nameof(BallOfSound130r2Every1d450p450DirectionalActivation);
     protected override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Gold Dragon Scale Mail";

@@ -15,7 +15,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
 
     // Firestarter does fire ball
-    protected override string? ActivationName => nameof(LargeBallFire72Every100Activation);
+    protected override string? ActivationName => nameof(LargeBallFire72Every100DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Morning Star 'Firestarter'";

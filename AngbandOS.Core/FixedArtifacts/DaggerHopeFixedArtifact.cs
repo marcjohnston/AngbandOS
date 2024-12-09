@@ -15,7 +15,7 @@ internal class DaggerHopeFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Hope shoots a frost bolt
-    protected override string? ActivationName => nameof(FrostBolt6d8Every7p1d7Activation);
+    protected override string? ActivationName => nameof(FrostBolt6d8Every7p1d7DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {

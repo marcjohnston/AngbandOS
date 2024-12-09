@@ -21,7 +21,7 @@ internal class ChaosDragonScaleMailItemFactory : ItemFactory
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    protected override string? ActivationName => nameof(BallOfChaos200r2Every1d300p300Activation);
+    protected override string? ActivationName => nameof(BallOfChaos200r2Every1d300p300DirectionalActivation);
     protected override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos Dragon Scale Mail";

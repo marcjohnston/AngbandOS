@@ -13,7 +13,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
     private SetOfCestiOfCombatFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(CestiGlovesItemFactory);
-    protected override string? ActivationName => nameof(MagicalArrow150Every1d90p90);
+    protected override string? ActivationName => nameof(MagicalArrow150Every1d90p90DirectionalActivation);
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();

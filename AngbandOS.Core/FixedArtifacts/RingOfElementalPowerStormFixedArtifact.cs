@@ -15,7 +15,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(VilyaRingItemFactory);
 
     // Ring of Elemental Lightning casts a lightning ball
-    protected override string? ActivationName => nameof(LargeLightningBall250Every425p1d425Activation);
+    protected override string? ActivationName => nameof(LargeLightningBall250Every425p1d425DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {

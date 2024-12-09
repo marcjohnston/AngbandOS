@@ -21,7 +21,7 @@ internal class GreenDragonScaleMailItemFactory : ItemFactory
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    protected override string? ActivationName => nameof(BreathePoisonGas150r2Every1d450p450Activation);
+    protected override string? ActivationName => nameof(BreathePoisonGas150r2Every1d450p450DirectionalActivation);
     protected override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Green Dragon Scale Mail";

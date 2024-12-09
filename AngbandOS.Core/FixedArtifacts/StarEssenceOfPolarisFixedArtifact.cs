@@ -13,7 +13,7 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
     private StarEssenceOfPolarisFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(StarEssenceGaladrielLightSourceItemFactory);
-    protected override string? ActivationName => nameof(IlluminationEvery1d10p10Activation);
+    protected override string? ActivationName => nameof(IlluminationEvery1d10p10DirectionalActivation);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Polaris";
     public override int Ac => 0;

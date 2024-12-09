@@ -15,7 +15,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact
 
     protected override string BaseItemFactoryName => nameof(PowerRingItemFactory);
 
-    protected override string? ActivationName => nameof(BizarreThingsEvery1d450p450Activation);
+    protected override string? ActivationName => nameof(BizarreThingsEvery1d450p450DirectionalActivation);
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();

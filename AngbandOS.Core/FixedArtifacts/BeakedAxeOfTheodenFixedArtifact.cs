@@ -15,7 +15,7 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BeakedAxePolearmWeaponItemFactory);
 
     // Theoden drains life
-    protected override string? ActivationName => nameof(DrainLife120Every400Activation);
+    protected override string? ActivationName => nameof(DrainLife120Every400DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Beaked Axe of Theoden";

@@ -13,7 +13,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact
     private SpearOfDestinyFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
-    protected override string? ActivationName => nameof(StoneToMudEvery5Activation);
+    protected override string? ActivationName => nameof(StoneToMudEvery5DirectionalActivation);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear of Destiny";
     public override int Ac => 0;

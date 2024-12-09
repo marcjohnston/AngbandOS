@@ -12,7 +12,7 @@ internal class BalanceDragonScaleMailItemFactory : ItemFactory
 {
     private BalanceDragonScaleMailItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string? ActivationName => nameof(BreatheChaosDisenchantSoundOrShardsActivation);
+    protected override string? ActivationName => nameof(BreatheChaosDisenchantSoundOrShardsDirectionalActivation);
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
   {
         (100, "3d5-3")

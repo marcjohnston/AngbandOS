@@ -39,19 +39,19 @@ internal class ColdArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(FrostBolt6d8Every7p1d7Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(FrostBolt6d8Every7p1d7DirectionalActivation));
         }
         else if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(BallOfCold48r2Every400Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfCold48r2Every400DirectionalActivation));
         }
         else if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(BallOfCold100r2Every300Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfCold100r2Every300DirectionalActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(LargeFrostBall200Every325p1d325Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(LargeFrostBall200Every325p1d325DirectionalActivation));
         }
     }
 }

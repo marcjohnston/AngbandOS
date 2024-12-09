@@ -13,7 +13,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
     private ShadowCloakOfNyogthaFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
-    protected override string? ActivationName => nameof(RestoreLifeLevelsEvery450Activation);
+    protected override string? ActivationName => nameof(RestoreLifeLevelsEvery450DirectionalActivation);
     public override void ApplyResistances(Item item)
     {
         item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));

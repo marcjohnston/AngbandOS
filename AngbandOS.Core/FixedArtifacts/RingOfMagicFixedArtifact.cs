@@ -15,7 +15,7 @@ internal class RingOfMagicFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BarahirRingItemFactory);
 
     // Ring of Magic has a djinn in it that drains life from an opponent
-    protected override string? ActivationName => nameof(DrainLife100Every100p1d100Activation);
+    protected override string? ActivationName => nameof(DrainLife100Every100p1d100DirectionalActivation);
 
     public override string Name => "The Ring of Magic";
     public override int Ac => 0;

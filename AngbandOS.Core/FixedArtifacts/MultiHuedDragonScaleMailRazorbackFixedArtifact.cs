@@ -15,7 +15,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MultiHuedDragonScaleMailItemFactory);
 
     // Razorback gives you a point-blank lightning ball
-    protected override string? ActivationName => nameof(StarBall150Every1000p1d325Activation);
+    protected override string? ActivationName => nameof(StarBall150Every1000p1d325DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";

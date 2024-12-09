@@ -13,7 +13,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
     private TridentOfTheGnorriFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(TridentPolearmWeaponItemFactory);
-    protected override string? ActivationName => nameof(TeleportAwayEvery150Activation);
+    protected override string? ActivationName => nameof(TeleportAwayEvery150DirectionalActivation);
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();

@@ -21,7 +21,7 @@ internal class BlueDragonScaleMailItemFactory : ItemFactory
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    protected override string? ActivationName => nameof(BallOfLightning100r2Every1d450p450Activation);
+    protected override string? ActivationName => nameof(BallOfLightning100r2Every1d450p450DirectionalActivation);
     protected override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Blue Dragon Scale Mail";

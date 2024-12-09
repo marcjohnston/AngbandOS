@@ -15,7 +15,7 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Thoth shoots a poison ball
-    protected override string? ActivationName => nameof(StinkingCloud12Every1d4p4Activation);
+    protected override string? ActivationName => nameof(StinkingCloud12Every1d4p4DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger of Thoth";

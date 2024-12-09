@@ -85,7 +85,7 @@ internal class RangerArtifactBias : ArtifactBias
         }
         else if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(CharmAnimal1xEvery300Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(CharmAnimal1xEvery300DirectionalActivation));
         }
         else if (Game.DieRoll(4) == 1)
         {

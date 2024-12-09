@@ -39,7 +39,7 @@ internal class PriestlyArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(13) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(EnslaveUndead1xEvery333Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(EnslaveUndead1xEvery333DirectionalActivation));
         }
         else if (Game.DieRoll(12) == 1)
         {

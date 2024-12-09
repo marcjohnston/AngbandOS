@@ -15,7 +15,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
 
     // Excalibur shoots a frost ball
-    protected override string? ActivationName => nameof(BallOfCold100r2Every300Activation);
+    protected override string? ActivationName => nameof(BallOfCold100r2Every300DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword 'Excalibur'";

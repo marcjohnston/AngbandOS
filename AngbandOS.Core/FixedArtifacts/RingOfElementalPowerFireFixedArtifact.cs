@@ -15,7 +15,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(NaryaRingItemFactory);
 
     // Ring of Elemental Fire casts a fireball
-    protected override string? ActivationName => nameof(FireBall120r3Every225p1d225Activation);
+    protected override string? ActivationName => nameof(FireBall120r3Every225p1d225DirectionalActivation);
 
     public override string Name => "The Ring of Elemental Power (Fire)";
     public override int Ac => 0;

@@ -37,6 +37,6 @@ internal class PoisonArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType()
     {
-        return Game.SingletonRepository.Get<Activation>(nameof(StinkingCloud12Every1d4p4Activation));
+        return Game.SingletonRepository.Get<Activation>(nameof(StinkingCloud12Every1d4p4DirectionalActivation));
     }
 }

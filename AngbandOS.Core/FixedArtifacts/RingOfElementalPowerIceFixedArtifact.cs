@@ -15,7 +15,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(NenyaRingItemFactory);
 
     // Ring of Elemental Ice casts a coldball
-    protected override string? ActivationName => nameof(LargeFrostBall200Every325p1d325Activation);
+    protected override string? ActivationName => nameof(LargeFrostBall200Every325p1d325DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {

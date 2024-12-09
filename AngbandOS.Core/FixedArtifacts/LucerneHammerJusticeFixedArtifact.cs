@@ -15,7 +15,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LucerneHammerHaftedWeaponItemFactory);
 
     // Justice drains life
-    protected override string? ActivationName => nameof(DrainLife90Every70Activation);
+    protected override string? ActivationName => nameof(DrainLife90Every70DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {

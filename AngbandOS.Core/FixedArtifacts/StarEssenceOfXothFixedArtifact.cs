@@ -13,7 +13,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact
     private StarEssenceOfXothFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(StarEssenceElendilLightSourceItemFactory);
-    protected override string? ActivationName => nameof(MagicMappingAndIlluminationEvery1d50p50Activation);
+    protected override string? ActivationName => nameof(MagicMappingAndIlluminationEvery1d50p50DirectionalActivation);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Xoth";
     public override int Ac => 0;

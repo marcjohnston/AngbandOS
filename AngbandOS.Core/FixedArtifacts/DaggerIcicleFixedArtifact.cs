@@ -15,7 +15,7 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Icicle shoots a cold ball
-    protected override string? ActivationName => nameof(BallOfCold48r2Every5p1d5Activation);
+    protected override string? ActivationName => nameof(BallOfCold48r2Every5p1d5DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Icicle'";

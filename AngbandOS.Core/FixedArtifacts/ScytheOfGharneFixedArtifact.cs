@@ -13,7 +13,7 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact
     private ScytheOfGharneFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ScythePolearmWeaponItemFactory);
-    protected override string? ActivationName => nameof(WordOfRecallEvery200Activation);
+    protected override string? ActivationName => nameof(WordOfRecallEvery200DirectionalActivation);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Scythe of G'harne";
     public override int Ac => 0;

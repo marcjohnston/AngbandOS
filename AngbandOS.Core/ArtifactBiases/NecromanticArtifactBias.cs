@@ -70,15 +70,15 @@ internal class NecromanticArtifactBias : ArtifactBias
         }
         else if (Game.DieRoll(9) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(Vampire2Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(Vampire2DirectionalActivation));
         }
         else if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(EnslaveUndead1xEvery333Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(EnslaveUndead1xEvery333DirectionalActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(Vampire1Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(Vampire1DirectionalActivation));
         }
     }
 }

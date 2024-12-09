@@ -15,7 +15,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailItemFactory);
 
     // Bladeturner heals you and gives you timed resistances
-    protected override string? ActivationName => nameof(PowerDragonEvery400Activation);
+    protected override string? ActivationName => nameof(PowerDragonEvery400DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";

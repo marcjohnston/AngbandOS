@@ -16,7 +16,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
 
     // Everflame shoots a fire ball
-    protected override string? ActivationName => nameof(BallOfFire72r2Every400Activation);
+    protected override string? ActivationName => nameof(BallOfFire72r2Every400DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {

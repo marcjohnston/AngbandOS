@@ -13,7 +13,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact
     private SetOfGauntletsWhiteSparkFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
-    protected override string? ActivationName => nameof(BoltOfElectricity4d8Every1d6p6Activation);
+    protected override string? ActivationName => nameof(BoltOfElectricity4d8Every1d6p6DirectionalActivation);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets 'White Spark'";
     public override int Ac => 2;

@@ -15,7 +15,7 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Faith shoots a fire bolt
-    protected override string? ActivationName => nameof(FireBolt9d8Every8p1d8Activation);
+    protected override string? ActivationName => nameof(FireBolt9d8Every8p1d8DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {

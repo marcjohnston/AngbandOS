@@ -12,7 +12,7 @@ internal class FlamesRingItemFactory : ItemFactory
 {
     private FlamesRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    protected override string? ActivationName => nameof(BallOfFire50r2AndResistFire1d20p20Activation);
+    protected override string? ActivationName => nameof(BallOfFire50r2AndResistFire1d20p20DirectionalActivation);
     protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Flames";
     protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";

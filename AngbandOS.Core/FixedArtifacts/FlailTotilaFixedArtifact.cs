@@ -15,7 +15,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(FlailHaftedWeaponItemFactory);
 
     // Totila does confusion
-    protected override string? ActivationName => nameof(ConfuseMonster20Every15Activation);
+    protected override string? ActivationName => nameof(ConfuseMonster20Every15DirectionalActivation);
 
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Flail 'Totila'";
