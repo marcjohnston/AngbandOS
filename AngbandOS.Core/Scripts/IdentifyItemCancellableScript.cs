@@ -24,11 +24,11 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
         if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
             Game.MsgPrint("You have nothing to identify.");
-            return true;
+            return false;
         }
         if (oPtr == null)
         {
-            return true;
+            return false;
         }
         oPtr.IsFlavorAware = true;
         oPtr.BecomeKnown();
@@ -48,7 +48,7 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
             oPtr.ItemOptimize();
         }
 
-        return false;
+        return true;
     }
 
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()

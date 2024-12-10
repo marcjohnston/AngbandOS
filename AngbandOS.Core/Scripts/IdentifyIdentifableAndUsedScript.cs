@@ -20,9 +20,9 @@ internal class IdentifyIdentifableAndUsedScript : Script, IIdentifableAndUsedScr
     {
         if (Game.RunCancellableScript(nameof(IdentifyItemCancellableScript)))
         {
-            return (true, false);
+            return (true, true);
         }
-        return (true, true);
+        return (true, false);
     }
 }
 

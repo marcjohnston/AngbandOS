@@ -19,7 +19,7 @@ internal class IdentifyEvery10Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        return !Game.RunCancellableScript(nameof(IdentifyItemCancellableScript));
+        return Game.RunCancellableScript(nameof(IdentifyItemCancellableScript));
     }
 
     protected override string RechargeTimeRollExpression => "10";
