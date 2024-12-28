@@ -19,11 +19,7 @@ internal class LargeFrostBall200Every325p1d325DirectionalActivation : Directiona
 
     protected override string RechargeTimeRollExpression => "1d325+325";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 200, 3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LargeFrostBall200Script);
 
     public override int Value => 2500;
     public override string Name => "Large frost ball (200)";

@@ -17,11 +17,7 @@ internal class TemporaryEsp20p1d30Every200Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(AddTelepathy25p1d30Script));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(AddTelepathy25p1d30Script);
 
     protected override string RechargeTimeRollExpression => "200";
 

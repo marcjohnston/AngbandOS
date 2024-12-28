@@ -44,27 +44,27 @@ internal class RogueArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType()
+    public override BaseActivation GetActivationPowerType()
     {
         if (Game.DieRoll(50) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(Speed20p1d20Every250Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(Speed20p1d20Every250Activation));
         }
         else if (Game.DieRoll(4) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(SleepActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(SleepActivation));
         }
         else if (Game.DieRoll(3) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(DetectionEvery55p1d55Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(DetectionEvery55p1d55Activation));
         }
         else if (Game.DieRoll(8) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(IdentifyFullyEvery750Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(IdentifyFullyEvery750Activation));
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(IdentifyItemCancellableScript));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(IdentifyItemCancellableScript));
         }
     }
 }

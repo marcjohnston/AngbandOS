@@ -19,11 +19,7 @@ internal class BallOfLightning100r3Every500DirectionalActivation : DirectionalAc
 
     protected override string RechargeTimeRollExpression => "500";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 100, 3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfLightning100r3Script);
 
     public override int Value => 1500;
     public override string Name => "Ball of lightning (100)";

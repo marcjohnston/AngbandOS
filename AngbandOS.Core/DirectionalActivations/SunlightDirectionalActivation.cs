@@ -19,11 +19,7 @@ internal class SunlightDirectionalActivation : DirectionalActivation
 
     protected override string RechargeTimeRollExpression => "10";
 
-    protected override bool Activate(int direction)
-    {
-        Game.LightLine(direction);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(SunlightScript);
 
     public override int Value => 250;
 

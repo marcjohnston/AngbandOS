@@ -19,10 +19,7 @@ internal class DispelEvil5xEvery300p1d300Activation : Activation
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScript(nameof(DispelEvil5xScript));
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(DispelEvil5xScript);
 
     public override int Value => 4000;
 

@@ -28,23 +28,23 @@ internal class MageArtifactBias : ArtifactBias
 
     public override int ActivationPowerChance => 66;
 
-    public override Activation GetActivationPowerType()
+    public override BaseActivation GetActivationPowerType()
     {
         if (Game.DieRoll(20) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(SummonElementalActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(SummonFriendlyElemental2In3Activation));
         }
         else if (Game.DieRoll(10) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(SummonPhantomActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(SummonFriendlyPhantomActivation));
         }
         else if (Game.DieRoll(5) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(RuneExploActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(RuneExploActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(TemporaryEsp20p1d30Every200Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(TemporaryEsp20p1d30Every200Activation));
         }
     }
 }

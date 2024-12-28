@@ -17,11 +17,7 @@ internal class Terror40xEvery3xp10Activation : Activation
 
     protected override string RechargeTimeRollExpression => "3d1xX+10";
     public override string? PreActivationMessage => "rays of fear in every direction";
-    protected override bool OnActivate(Item item)
-    {
-        Game.TurnMonsters(40 + Game.ExperienceLevel.IntValue);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Terror40xScript);
 
     public override int Value => 2500;
 

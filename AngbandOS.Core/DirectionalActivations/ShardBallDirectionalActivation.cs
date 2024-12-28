@@ -17,11 +17,7 @@ internal class ShardBallDirectionalActivation : DirectionalActivation
     
     protected override string RechargeTimeRollExpression => "400";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile)), direction, 120 + Game.ExperienceLevel.IntValue, 2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ShardBall1xp120Script);
 
     public override int Value => 5000;
 

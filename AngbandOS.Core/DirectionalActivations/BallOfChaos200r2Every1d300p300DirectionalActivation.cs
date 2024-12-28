@@ -14,14 +14,7 @@ internal class BallOfChaos200r2Every1d300p300DirectionalActivation : Directional
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override bool Activate(int direction)
-    {
-        int chance = Game.RandomLessThan(2);
-        string element = chance == 1 ? "chaos" : "disenchantment";
-        Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(projectile: chance == 1 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile)), direction, 220, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfChaos200r2Script);
 
     public override int Value => 5000;
 

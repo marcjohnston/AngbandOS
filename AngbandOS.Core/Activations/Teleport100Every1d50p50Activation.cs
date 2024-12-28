@@ -14,11 +14,7 @@ internal class Teleport100Every1d50p50Activation : Activation
 
     public override string? PreActivationMessage => "Your {0} twists space around you...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(TeleportSelfScript);
 
     protected override string RechargeTimeRollExpression => "1d50+50";
 

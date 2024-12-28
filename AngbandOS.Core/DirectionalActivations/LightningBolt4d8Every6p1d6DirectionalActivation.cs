@@ -19,11 +19,7 @@ internal class LightningBolt4d8Every6p1d6DirectionalActivation : DirectionalActi
 
     protected override string RechargeTimeRollExpression => "1d6+6";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, Game.DiceRoll(4, 8));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LightningBolt4d8Script);
 
     public override int Value => 250;
 

@@ -8,9 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ToggleRecallScript : Script, IScript
+internal class ToggleRecallScript : Script, IScript, ICancellableScriptItem
 {
     private ToggleRecallScript(Game game) : base(game) { }
+
+    public bool ExecuteCancellableScriptItem(Item item)
+    {
+        ExecuteScript();
+        return true;
+    }
 
     /// <summary>
     /// Executes the script.

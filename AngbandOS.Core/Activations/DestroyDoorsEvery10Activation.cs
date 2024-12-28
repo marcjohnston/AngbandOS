@@ -17,10 +17,7 @@ internal class DestroyDoorsEvery10Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows bright red...";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScript(nameof(DestroyAdjacentDoorsScript));
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(DestroyAdjacentDoorsScript);
 
     protected override string RechargeTimeRollExpression => "10";
 

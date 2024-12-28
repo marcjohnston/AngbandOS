@@ -78,7 +78,7 @@ internal class SingletonRepository
         // Retrieve the singleton by key name.
         if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
         {
-            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.  Ensure the {nameof(IGetKey)} interface was implemented.");
+            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.  Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.");
         }
         return (T)singleton;
     }
@@ -217,51 +217,60 @@ internal class SingletonRepository
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         RegisterRepository<IBoolValue>();
-        RegisterRepository<IIntValue>();
+        RegisterRepository<ICancellableScript>();
+        RegisterRepository<ICancellableScriptInt>();
+        RegisterRepository<ICancellableScriptItem>();
         RegisterRepository<ICastScript>();
         RegisterRepository<IChangeTracker>();
         RegisterRepository<IDateAndTimeValue>();
-        RegisterRepository<INullableStringsValue>();
-        RegisterRepository<IStringValue>();
-        RegisterRepository<IScript>();
-        RegisterRepository<IIdentifableScript>();
-        RegisterRepository<IIdentifableDirectionalScript>();
+        RegisterRepository<IDirectionalCancellableScriptItem>();
+        RegisterRepository<IEnhancementScript>();
         RegisterRepository<IIdentifableAndUsedScript>();
-        RegisterRepository<ICancellableScript>();
+        RegisterRepository<IIdentifableDirectionalScript>();
+        RegisterRepository<IIdentifableScript>();
+        RegisterRepository<IIdentifiedAndUsedScriptItemDirection>();
+        RegisterRepository<IIntValue>();
+        RegisterRepository<IMonsterSelector>();
         RegisterRepository<INoticeableScript>();
-        RegisterRepository<ISuccessByChanceScriptInt>();
-        RegisterRepository<ICancellableScriptInt>();
-        RegisterRepository<ISuccessByChanceScript>();
-        RegisterRepository<IScriptIntInt>();
+        RegisterRepository<INullableStringsValue>();
+        RegisterRepository<IScript>();
         RegisterRepository<IScriptBool>();
         RegisterRepository<IScriptInt>();
-        RegisterRepository<IScriptItemInt>();
-        RegisterRepository<ITileScript>();
-        RegisterRepository<IScriptItemGridTile>();
-        RegisterRepository<IScriptItemMonster>();
+        RegisterRepository<IScriptIntInt>();
         RegisterRepository<IScriptItem>();
-        RegisterRepository<IIdentifiedAndUsedScriptItemDirection>();
+        RegisterRepository<IScriptItemGridTile>();
+        RegisterRepository<IScriptItemInt>();
+        RegisterRepository<IScriptItemMonster>();
+        RegisterRepository<IStringValue>();
+        RegisterRepository<ISuccessByChanceScript>();
+        RegisterRepository<ISuccessByChanceScriptInt>();
+        RegisterRepository<ITileScript>();
         RegisterRepository<IUnfriendlyScript>();
-        RegisterRepository<IEnhancementScript>();
-        RegisterRepository<IMonsterSelector>();
 
-        RegisterRepository<Activation>();
         RegisterRepository<ActivationWeightedRandom>();
-        RegisterRepository<AlterAction>();
         RegisterRepository<Alignment>();
+        RegisterRepository<AlterAction>();
+        RegisterRepository<Animation>();
         RegisterRepository<ArtifactBias>();
         RegisterRepository<ArtifactBiasWeightedRandom>();
+        RegisterRepository<Attack>();
         RegisterRepository<AttackEffect>();
+        RegisterRepository<BaseActivation>();
         RegisterRepository<BaseCharacterClass>();
-        RegisterRepository<WieldSlot>();
         RegisterRepository<BirthStage>();
-        RegisterRepository<ChestTrapConfiguration>();
         RegisterRepository<ChestTrap>();
+        RegisterRepository<ChestTrapConfiguration>();
+        RegisterRepository<ClassSpell>();
+        RegisterRepository<Dungeon>();
+        RegisterRepository<DungeonGuardian>();
         RegisterRepository<FixedArtifact>();
         RegisterRepository<FlaggedAction>();
         RegisterRepository<Form>();
         RegisterRepository<Function>();
+        RegisterRepository<GameCommand>();
         RegisterRepository<Gender>();
+        RegisterRepository<God>();
+        RegisterRepository<HelpGroup>();
         RegisterRepository<ItemAction>();
         RegisterRepository<ItemClass>();
         RegisterRepository<ItemEnhancement>();
@@ -269,50 +278,41 @@ internal class SingletonRepository
         RegisterRepository<ItemFactory>();
         RegisterRepository<ItemFactoryWeightedRandom>();
         RegisterRepository<ItemFilter>();
+        RegisterRepository<ItemFlavor>();
         RegisterRepository<ItemMatch>();
         RegisterRepository<ItemQualityRating>();
         RegisterRepository<ItemTest>();
         RegisterRepository<Justification>();
         RegisterRepository<MartialArtsAttack>();
         RegisterRepository<MonsterFilter>();
+        RegisterRepository<MonsterRace>();
         RegisterRepository<MonsterSelector>();
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
         RegisterRepository<Patron>();
+        RegisterRepository<Plural>();
         RegisterRepository<Probability>();
         RegisterRepository<Projectile>();
+        RegisterRepository<ProjectileGraphic>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();
         RegisterRepository<Realm>();
         RegisterRepository<Reward>();
         RegisterRepository<RoomLayout>();
         RegisterRepository<Script>();
-        RegisterRepository<SpellResistantDetection>();
-        RegisterRepository<StoreFactory>();
-        RegisterRepository<Talent>();
-        RegisterRepository<Timer>();
-        RegisterRepository<Widget>();
-
-        // These are already capable of Json serialization.
-        RegisterRepository<Animation>();
-        RegisterRepository<Attack>();
-        RegisterRepository<ClassSpell>();
-        RegisterRepository<DungeonGuardian>();
-        RegisterRepository<Dungeon>();
-        RegisterRepository<GameCommand>();
-        RegisterRepository<God>();
-        RegisterRepository<HelpGroup>();
-        RegisterRepository<ItemFlavor>();
-        RegisterRepository<MonsterRace>();
-        RegisterRepository<Plural>();
-        RegisterRepository<ProjectileGraphic>();
         RegisterRepository<Shopkeeper>();
         RegisterRepository<Spell>();
+        RegisterRepository<SpellResistantDetection>();
         RegisterRepository<StoreCommand>();
+        RegisterRepository<StoreFactory>();
         RegisterRepository<Symbol>();
+        RegisterRepository<Talent>();
         RegisterRepository<Tile>();
+        RegisterRepository<Timer>();
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
+        RegisterRepository<Widget>();
+        RegisterRepository<WieldSlot>();
         RegisterRepository<WizardCommand>();
 
         // Now load the configuration singletons.
@@ -427,6 +427,7 @@ internal class SingletonRepository
     {
         // Enumerate all of the interfaces that the singleton implements.
         Type type = singleton.GetType();
+        string name = type.Name;
         List<Type> interfaceTypeNames = new List<Type>();
         interfaceTypeNames.AddRange(type.GetInterfaces());
         Type? baseType = type.BaseType;

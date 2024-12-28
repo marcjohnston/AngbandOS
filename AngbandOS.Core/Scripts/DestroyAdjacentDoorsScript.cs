@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessByChanceScript, ICancellableScript
+internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessByChanceScript, ICancellableScriptItem
 {
     private DestroyAdjacentDoorsScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessByChanceScr
     /// Runs the successful script and returns false because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteCancellableScript()
+    public bool ExecuteCancellableScriptItem(Item item)
     {
         ExecuteSuccessByChanceScript();
         return false;

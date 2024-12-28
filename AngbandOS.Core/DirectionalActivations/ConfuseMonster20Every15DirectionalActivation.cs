@@ -19,11 +19,7 @@ internal class ConfuseMonster20Every15DirectionalActivation : DirectionalActivat
 
     protected override string RechargeTimeRollExpression => "15";
 
-    protected override bool Activate(int direction)
-    {
-        Game.ConfuseMonster(direction, 20);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ConfuseMonster20Script);
 
     public override int Value => 500;
 

@@ -17,13 +17,7 @@ internal class Heal700Every25Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.MsgPrint("You feel a warm tingling inside...");
-        Game.RestoreHealth(700);
-        Game.BleedingTimer.ResetTimer();
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Heal700Script);
 
     protected override string RechargeTimeRollExpression => "250";
 

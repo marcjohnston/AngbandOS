@@ -17,10 +17,7 @@ internal class IdentifyFullyEvery750Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows yellow...";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScript(nameof(IdentifyItemFullyCancellableScript));
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(IdentifyItemFullyCancellableScript);
 
     protected override string RechargeTimeRollExpression => "750";
 

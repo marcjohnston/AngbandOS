@@ -17,15 +17,7 @@ internal class ResistAll20p1d20Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows many colors...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ResistAll20p1d20Script);
 
     protected override string RechargeTimeRollExpression => "111";
 

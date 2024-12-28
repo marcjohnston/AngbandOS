@@ -19,11 +19,7 @@ internal class SleepActivation : Activation
 
     protected override string RechargeTimeRollExpression => "55";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.SleepMonstersTouch();
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(SleepMonstersTouchScript);
 
     public override int Value => 750;
 

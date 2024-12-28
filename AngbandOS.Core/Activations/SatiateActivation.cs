@@ -14,12 +14,8 @@ namespace AngbandOS.Core.Activations;
 internal class SatiateActivation : Activation
 {
     private SatiateActivation(Game game) : base(game) { }
-    
-    protected override bool OnActivate(Item item)
-    {
-        Game.SetFood(Constants.PyFoodMax - 1);
-        return true;
-    }
+
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(SatiateScript);
 
     protected override string RechargeTimeRollExpression => "200";
 

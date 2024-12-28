@@ -14,11 +14,7 @@ internal class BoltOfElectricity4d8Every1d6p6DirectionalActivation : Directional
 
     public override string? PreActivationMessage => "Your {0} are covered in sparks...";
     protected override string RechargeTimeRollExpression => "1d6+6";
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, base.Game.DiceRoll(4, 8));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BoltOfElectricity4d8Script);
 
     public override int Value => 5000;
 

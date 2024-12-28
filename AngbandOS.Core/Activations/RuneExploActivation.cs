@@ -17,11 +17,7 @@ internal class RuneExploActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows a sickly yellow...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(YellowSignScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(YellowSignScript);
 
     protected override string RechargeTimeRollExpression => "200";
 

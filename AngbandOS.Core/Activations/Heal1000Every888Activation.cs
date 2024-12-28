@@ -17,13 +17,7 @@ internal class Heal1000Every888Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows a bright white...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.MsgPrint("You feel much better...");
-        Game.RestoreHealth(1000);
-        Game.BleedingTimer.ResetTimer();
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Heal1000Script);
 
     protected override string RechargeTimeRollExpression => "888";
 

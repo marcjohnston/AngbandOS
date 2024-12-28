@@ -17,17 +17,7 @@ internal class RestAllActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows a deep green...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.TryRestoringAbilityScore(AbilityEnum.Strength);
-        Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
-        Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
-        Game.TryRestoringAbilityScore(AbilityEnum.Dexterity);
-        Game.TryRestoringAbilityScore(AbilityEnum.Constitution);
-        Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
-        Game.RunScript(nameof(RestoreLevelScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(RestAllScript);
 
     protected override string RechargeTimeRollExpression => "750";
 

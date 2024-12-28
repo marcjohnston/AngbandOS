@@ -19,11 +19,7 @@ internal class Arrows150Every90p1d90DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "1d90+90";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ArrowProjectile)), direction, 150);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Arrows150Script);
 
     public override int Value => 1000;
 

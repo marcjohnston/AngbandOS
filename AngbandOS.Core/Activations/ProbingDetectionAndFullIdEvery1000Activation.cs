@@ -17,16 +17,7 @@ internal class ProbingDetectionAndFullIdEvery1000Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows brightly...";
 
-    protected override bool OnActivate(Item item)
-    {
-        if (!Game.RunCancellableScript(nameof(RechargeItemCancellableScriptInt)))
-        {
-            return false;
-        }
-        Game.RunScript(nameof(DetectionScript));
-        Game.Probing();
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ProbingDetectionAndFullIdScript);
 
     protected override string RechargeTimeRollExpression => "1000";
 

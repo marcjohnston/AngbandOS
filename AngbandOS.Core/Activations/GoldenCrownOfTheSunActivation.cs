@@ -21,14 +21,7 @@ internal class GoldenCrownOfTheSunActivation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.MsgPrint("Your crown glows deep yellow...");
-        Game.MsgPrint("You feel a warm tingling inside...");
-        Game.RestoreHealth(700);
-        Game.BleedingTimer.ResetTimer();
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(GoldenCrownOfTheSunScript);
 
     protected override string RechargeTimeRollExpression => "800";
 

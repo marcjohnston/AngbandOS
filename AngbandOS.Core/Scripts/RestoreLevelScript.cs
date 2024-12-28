@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, INoticeableScript
+internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, INoticeableScript, ICancellableScriptItem
 {
     private RestoreLevelScript(Game game) : base(game) { }
 
@@ -45,5 +45,11 @@ internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, INo
     public void ExecuteScript()
     {
         ExecuteSuccessByChanceScript();
+    }
+
+    public bool ExecuteCancellableScriptItem(Item item)
+    {
+        ExecuteScript();
+        return true;
     }
 }

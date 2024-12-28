@@ -18,10 +18,7 @@ internal class BrandBoltsEvery999Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows deep red...";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScript(nameof(BrandBoltsScript));
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(BrandBoltsScript);
 
     protected override string RechargeTimeRollExpression => "999";
 

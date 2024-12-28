@@ -19,11 +19,7 @@ internal class FireBall120r3Every225p1d225DirectionalActivation : DirectionalAct
 
     protected override string RechargeTimeRollExpression => "1d225+225";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 120, 3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(FireBall120r3Script);
 
     public override int Value => 1750;
 

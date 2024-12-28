@@ -17,11 +17,7 @@ internal class DispelGood5xEvery300p1d300Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} floods the area with evil...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScriptInt(nameof(DispelGood4xScript), Game.ExperienceLevel.IntValue * 5);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(DispelGood5xScript);
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 

@@ -17,11 +17,7 @@ internal class GenocideEvery500Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(GenocideScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(GenocideScript);
 
     protected override string RechargeTimeRollExpression => "500";
 

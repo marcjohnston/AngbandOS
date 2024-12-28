@@ -19,11 +19,7 @@ internal class CharmAnimal1xEvery300DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "300";
 
-    protected override bool Activate(int direction)
-    {
-        Game.CharmAnimal(direction, Game.ExperienceLevel.IntValue);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(CharmAnimal1xScript);
 
     public override int Value => 7500;
 

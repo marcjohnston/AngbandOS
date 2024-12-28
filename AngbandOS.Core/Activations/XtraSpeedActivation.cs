@@ -17,18 +17,7 @@ internal class XtraSpeedActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows brightly...";
 
-    protected override bool OnActivate(Item item)
-    {
-        if (Game.HasteTimer.Value == 0)
-        {
-            Game.HasteTimer.SetTimer(Game.DieRoll(75) + 75);
-        }
-        else
-        {
-            Game.HasteTimer.AddTimer(5);
-        }
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(XtraSpeedScript);
 
     protected override string RechargeTimeRollExpression => "1d200+200";
 

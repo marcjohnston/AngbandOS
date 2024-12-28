@@ -18,7 +18,7 @@ internal class Recharge60IdentifableAndUsedScript : Script, IIdentifableAndUsedS
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        if (!Game.RunCancellableScriptInt(nameof(RechargeItemCancellableScriptInt), 60))
+        if (!Game.RunCancellableScriptInt(nameof(RechargeItemScript), 60))
         {
             return (true, false);
         }

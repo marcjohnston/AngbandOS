@@ -19,11 +19,7 @@ internal class DrainLife90Every70DirectionalActivation : DirectionalActivation
 
     protected override string RechargeTimeRollExpression => "70";
 
-    protected override bool Activate(int direction)
-    {
-        Game.DrainLife(direction, 90);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(DrainLife90Script);
 
     public override int Value => 500;
 

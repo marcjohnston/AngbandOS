@@ -14,31 +14,7 @@ internal class BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225Direct
 
     protected override string RechargeTimeRollExpression => "1d225+225";
 
-    protected override bool Activate(int direction)
-    {
-        int chance = Game.RandomLessThan(5);
-        string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
-        Game.MsgPrint($"You breathe {element}.");
-        switch (chance)
-        {
-            case 0:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 250, -2);
-                break;
-            case 1:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 250, -2);
-                break;
-            case 2:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 250, -2);
-                break;
-            case 3:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, 250, -2);
-                break;
-            case 4:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), direction, 250, -2);
-                break;
-        }
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreatheLightningFrostAcidPoisonGasOrFire250r2Script);
 
     public override int Value => 5000;
 

@@ -21,11 +21,7 @@ internal class ElementalBreath300r4Every500DirectionalActivation : DirectionalAc
 
     protected override string RechargeTimeRollExpression => "500";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, -4);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ElementalBreath300r4Script);
 
     public override int Value => 5000;
 

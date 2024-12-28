@@ -15,11 +15,7 @@ internal class BallOfAcid130r2Every1d450p450DirectionalActivation : DirectionalA
     public override string? PreActivationMessage => "You breathe acid.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, 130, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfAcid130r2Script);
 
     public override int Value => 5000;
 

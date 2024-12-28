@@ -15,14 +15,7 @@ internal class BreatheLightOrDarkness200r2Every1d300p300DirectionalActivation : 
     public override string? PreActivationMessage => "You breathe the elements.";
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override bool Activate(int direction)
-    {
-        int chance = Game.RandomLessThan(2);
-        string element = chance == 0 ? "light" : "darkness";
-        Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(chance == 0 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile)), direction, 200, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreatheLightOrDarkness200r2Script);
 
     public override int Value => 5000;
 

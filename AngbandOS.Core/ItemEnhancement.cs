@@ -162,7 +162,7 @@ internal abstract class ItemEnhancement : IGetKey
 
     public virtual void Bind()
     {
-        Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
+        Activation = Game.SingletonRepository.GetNullable<BaseActivation>(ActivationName);
         BonusStrengthRoll = Game.ParseNullableRollExpression(BonusStrengthRollExpression);
         BonusIntelligenceRoll = Game.ParseNullableRollExpression(BonusIntelligenceRollExpression);
         BonusWisdomRoll = Game.ParseNullableRollExpression(BonusWisdomRollExpression);
@@ -266,7 +266,7 @@ internal abstract class ItemEnhancement : IGetKey
     protected virtual string? ActivationName { get; }
 
     /// <inheritdoc />
-    public Activation? Activation { get; protected set; }
+    public BaseActivation? Activation { get; protected set; }
     
     /// <inheritdoc />
     public virtual bool Aggravate => false;

@@ -14,12 +14,7 @@ internal class MagicMappingAndIlluminationEvery1d50p50DirectionalActivation : Di
 
     public override string? PreActivationMessage => "The {0} shines brightly...";
     protected override string RechargeTimeRollExpression => "1d50+50";
-    protected override bool Activate(int direction)
-    {
-        Game.RunScript(nameof(MapAreaScript));
-        Game.LightArea(Game.DiceRoll(2, 15), 3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(MagicMappingAndIlluminationScript);
 
     public override int Value => 5000;
 

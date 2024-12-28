@@ -19,11 +19,7 @@ internal class LargeLightningBall250Every425p1d425DirectionalActivation : Direct
 
     protected override string RechargeTimeRollExpression => "1d425+425";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 250, 3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LargeLightningBall250Script);
 
     public override int Value => 2000;
     public override string Name => "Large lightning ball (250)";

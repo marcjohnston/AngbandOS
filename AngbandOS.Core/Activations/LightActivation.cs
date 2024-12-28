@@ -17,11 +17,7 @@ internal class LightActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} swells with clear light...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.LightArea(Game.DiceRoll(2, 15), 3);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(LightAreaRadius3Damage2d15Script);
 
     protected override string RechargeTimeRollExpression => "1d10+10";
 

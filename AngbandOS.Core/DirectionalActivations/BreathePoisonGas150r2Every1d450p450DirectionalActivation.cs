@@ -15,11 +15,7 @@ internal class BreathePoisonGas150r2Every1d450p450DirectionalActivation : Direct
     public override string? PreActivationMessage => "You breathe poison gas.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), direction, 150, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreathePoisonGas150r2Script);
 
     public override int Value => 5000;
 

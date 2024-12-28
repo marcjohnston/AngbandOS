@@ -17,12 +17,7 @@ internal class RemoveFearAndPoisonEvery5Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.FearTimer.ResetTimer();
-        Game.PoisonTimer.ResetTimer();
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(RemoveFearAndPoisonScript);
 
     protected override string RechargeTimeRollExpression => "5";
 

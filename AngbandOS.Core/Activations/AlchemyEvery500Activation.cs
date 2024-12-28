@@ -18,11 +18,7 @@ internal class AlchemyEvery500Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows bright yellow...";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScript(nameof(AlchemyScript));
-    }
-
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(AlchemyScript);
     protected override string RechargeTimeRollExpression => "500";
 
     public override int Value => 10000;

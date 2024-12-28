@@ -14,12 +14,7 @@ internal class BallOfCold50r2Every1d20p20DirectionalActivation : DirectionalActi
 
     protected override string RechargeTimeRollExpression => "1d50+50";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 50, 2);
-        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfCold50r2AndColdResistance1d20p20Script);
 
     public override int Value => 5000;
 

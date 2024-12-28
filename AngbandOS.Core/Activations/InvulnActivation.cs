@@ -17,11 +17,7 @@ internal class InvulnActivation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.InvulnerabilityTimer.AddTimer(Game.DieRoll(8) + 8);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Invulnerability1d8p8Script);
 
     protected override string RechargeTimeRollExpression => "1000";
 

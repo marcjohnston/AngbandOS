@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellRecharging : Spell
 {
     private FolkSpellRecharging(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(RechargeItemCancellableScriptInt);
+    protected override string? CastScriptName => nameof(RechargeItemScript);
 
     public override string Name => "Recharging";
     

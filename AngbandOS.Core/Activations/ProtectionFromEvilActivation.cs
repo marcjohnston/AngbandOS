@@ -17,12 +17,7 @@ internal class ProtectionFromEvilActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} lets out a shrill wail...";
 
-    protected override bool OnActivate(Item item)
-    {
-        int k = 3 * Game.ExperienceLevel.IntValue;
-        Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + k);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ProtectionFromEvilScript);
 
     protected override string RechargeTimeRollExpression => "1d225+225";
 

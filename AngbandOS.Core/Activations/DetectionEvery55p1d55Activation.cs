@@ -17,12 +17,7 @@ internal class DetectionEvery55p1d55Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows bright white...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.MsgPrint("An image forms in your mind...");
-        Game.RunScript(nameof(DetectionScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(DetectionScript);
 
     protected override string RechargeTimeRollExpression => "1d55+55";
 

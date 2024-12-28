@@ -17,12 +17,7 @@ internal class MapLightActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} shines brightly...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(MapAreaScript));
-        Game.LightArea(Game.DiceRoll(2, 15), 3);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(MapLightScript);
 
     protected override string RechargeTimeRollExpression => "1d50+50";
 

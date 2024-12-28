@@ -14,14 +14,7 @@ internal class BreatheSoundOrShards230r2Every1d300p300DirectionalActivation : Di
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override bool Activate(int direction)
-    {
-        int chance = Game.RandomLessThan(2);
-        string element = chance == 1 ? "sound" : "shards";
-        Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(chance == 1 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile)), direction, 230, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreatheSoundOrShards230r2ameScript);
 
     public override int Value => 5000;
 

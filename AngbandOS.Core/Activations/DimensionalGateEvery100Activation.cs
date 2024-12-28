@@ -17,28 +17,7 @@ internal class DimensionalGateEvery100Activation : Activation
     
     public override string? PreActivationMessage => "You open a dimensional gate. Choose a destination.";
 
-    protected override bool OnActivate(Item item)
-    {
-        if (!Game.TgtPt(out int ii, out int ij))
-        {
-            return false;
-        }
-        Game.Energy -= 60 - Game.ExperienceLevel.IntValue;
-        if (!Game.GridPassableNoCreature(ij, ii) ||
-            Game.Map.Grid[ij][ii].InVault ||
-            Game.Distance(ij, ii, Game.MapY.IntValue, Game.MapX.IntValue) > Game.ExperienceLevel.IntValue + 2 ||
-            Game.RandomLessThan(Game.ExperienceLevel.IntValue * Game.ExperienceLevel.IntValue / 2) == 0)
-        {
-            Game.MsgPrint("You fail to exit the astral plane correctly!");
-            Game.Energy -= 100;
-            Game.RunScriptInt(nameof(TeleportSelfScript), 10);
-        }
-        else
-        {
-            Game.TeleportPlayerTo(ij, ii);
-        }
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(DimensionalGateScript);
 
     protected override string RechargeTimeRollExpression => "100";
 

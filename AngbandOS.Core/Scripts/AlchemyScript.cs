@@ -5,15 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Gods;
-
 namespace AngbandOS.Core.Scripts;
 
 /// <summary>
 /// Allows the player to choose a quantity of items to convert into gold.
 /// </summary>
 [Serializable]
-internal class AlchemyScript : Script, IScript, ICancellableScript
+internal class AlchemyScript : Script, IScript, ICancellableScript, ICancellableScriptItem
 {
     private AlchemyScript(Game game) : base(game) { }
 
@@ -95,6 +93,11 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
         return true;
     }
 
+    public bool ExecuteCancellableScriptItem(Item item)
+    {
+        return ExecuteCancellableScript();
+    }
+
     /// <summary>
     /// Executes the cancellable script and disposes of the result.
     /// </summary>
@@ -102,5 +105,4 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
     {
         ExecuteCancellableScript();
     }
-
 }

@@ -17,14 +17,7 @@ internal class BanishEvilEvery250p1d250Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        if (Game.BanishEvil(100))
-        {
-            Game.MsgPrint("The power of the artifact banishes evil!");
-        }
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(BanishEvil100Script);
 
     protected override string RechargeTimeRollExpression => "1d250+250";
 

@@ -17,11 +17,7 @@ internal class RestLifeActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows a deep red...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(RestoreLevelScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(RestoreLevelScript);
 
     protected override string RechargeTimeRollExpression => "450";
 

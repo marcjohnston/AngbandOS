@@ -15,11 +15,7 @@ internal class BallOfConfusion120r2Every1d450p450DirectionalActivation : Directi
     public override string? PreActivationMessage => "You breathe confusion.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile)), direction, 120, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfConfusion120r2Script);
 
     public override int Value => 5000;
 

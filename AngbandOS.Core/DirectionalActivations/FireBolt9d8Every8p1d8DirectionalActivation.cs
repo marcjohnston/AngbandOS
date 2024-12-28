@@ -19,11 +19,7 @@ internal class FireBolt9d8Every8p1d8DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "1d8+8";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, Game.DiceRoll(9, 8));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(FireBolt9d8Script);
 
     public override int Value => 250;
 

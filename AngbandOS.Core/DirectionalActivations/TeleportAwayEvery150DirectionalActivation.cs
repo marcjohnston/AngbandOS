@@ -14,11 +14,7 @@ internal class TeleportAwayEvery150DirectionalActivation : DirectionalActivation
 
     public override string? PreActivationMessage => "Your {0} glows deep red...";
     protected override string RechargeTimeRollExpression => "150";
-    protected override bool Activate(int direction)
-    {
-        Game.TeleportMonster(direction);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(TeleAwayScript);
 
     public override int Value => 5000;
 

@@ -17,11 +17,7 @@ internal class RuneProtActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows light blue...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(ElderSignScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ElderSignScript);
 
     protected override string RechargeTimeRollExpression => "400";
 

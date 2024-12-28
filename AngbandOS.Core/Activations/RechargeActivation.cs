@@ -17,10 +17,7 @@ internal class RechargeActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows bright yellow...";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScriptInt(nameof(RechargeItemCancellableScriptInt), 60);
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(RechargeItemScript);
 
     protected override string RechargeTimeRollExpression => "70";
 

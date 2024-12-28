@@ -17,11 +17,7 @@ internal class MassCharmEvery750Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(CharmOthersScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(MassCharmScript);
 
     protected override string RechargeTimeRollExpression => "750";
 

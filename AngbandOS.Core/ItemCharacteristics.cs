@@ -39,7 +39,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     public int BonusSpeed { get; set; }
 
     /// <inheritdoc/>
-    public Activation? Activation { get; set; } = null;
+    public BaseActivation? Activation { get; set; } = null;
 
     /// <inheritdoc/>
     public bool Aggravate { get; set; } = false;

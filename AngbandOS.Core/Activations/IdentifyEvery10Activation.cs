@@ -17,10 +17,7 @@ internal class IdentifyEvery10Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows yellow...";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScript(nameof(IdentifyItemCancellableScript));
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(IdentifyItemCancellableScript);
 
     protected override string RechargeTimeRollExpression => "10";
 

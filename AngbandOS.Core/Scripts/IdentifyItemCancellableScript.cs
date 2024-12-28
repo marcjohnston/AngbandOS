@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Identifies a chosen item and returns false, if the item selection is cancelled; true, otherwise.
 /// </summary>
 [Serializable]
-internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScript, IIdentifableAndUsedScript
+internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScript, IIdentifableAndUsedScript, ICancellableScriptItem
 {
     private IdentifyItemCancellableScript(Game game) : base(game) { }
 
@@ -49,6 +49,11 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
         }
 
         return true;
+    }
+
+    public bool ExecuteCancellableScriptItem(Item item)
+    {
+        return ExecuteCancellableScript();
     }
 
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()

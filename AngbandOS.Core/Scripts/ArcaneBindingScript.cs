@@ -18,6 +18,6 @@ internal class ArcaneBindingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.RunCancellableScriptInt(nameof(RechargeItemCancellableScriptInt), 40);
+        Game.RunCancellableScriptInt(nameof(RechargeItemScript), 40);
     }
 }

@@ -19,11 +19,7 @@ internal class AcidBolt5d8Every5p1d5DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "1d5+5";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, Game.DiceRoll(5, 8));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(AcidBolt5d8Script);
 
     public override int Value => 250;
 

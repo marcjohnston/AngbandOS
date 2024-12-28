@@ -28,7 +28,7 @@ internal class DominationTalent : Talent
         }
         else
         {
-            Game.RunScript(nameof(CharmOthersScript));
+            Game.RunScript(nameof(CharmAnimalScript));
         }
     }
 

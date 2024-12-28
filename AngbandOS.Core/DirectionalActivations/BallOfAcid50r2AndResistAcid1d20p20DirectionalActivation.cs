@@ -14,12 +14,7 @@ internal class BallOfAcid50r2AndResistAcid1d20p20DirectionalActivation : Directi
 
     protected override string RechargeTimeRollExpression => "1d50+50";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, 50, 2);
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfAcid50r2AndResistAcid1d20p20Script);
 
     public override int Value => 1000;
 

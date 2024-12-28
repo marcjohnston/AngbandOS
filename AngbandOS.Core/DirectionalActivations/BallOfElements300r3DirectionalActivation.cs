@@ -15,11 +15,7 @@ internal class BallOfElements300r3DirectionalActivation : DirectionalActivation
     public override string? PreActivationMessage => "You breathe the elements.";
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, -3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfElements300r3Script);
 
     public override int Value => 5000;
 

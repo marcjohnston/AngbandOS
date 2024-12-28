@@ -108,7 +108,7 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual Activation? GetActivationPowerType() => null;
+    public virtual BaseActivation? GetActivationPowerType() => null;
 
     /// <summary>
     /// Returns the chance that an activation power is assigned.  A value greater than 100 (e.g. 101) guarantees activation power will be assigned.

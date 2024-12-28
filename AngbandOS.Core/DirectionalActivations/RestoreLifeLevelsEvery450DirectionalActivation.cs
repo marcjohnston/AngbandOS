@@ -14,11 +14,7 @@ internal class RestoreLifeLevelsEvery450DirectionalActivation : DirectionalActiv
 
     public override string? PreActivationMessage => "Your {0} glows a deep red...";
     protected override string RechargeTimeRollExpression => "450";
-    protected override bool Activate(int direction)
-    {
-        Game.RunScript(nameof(RestoreLevelScript));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(RestoreLifeLevelsScript);
 
     public override int Value => 5000;
 

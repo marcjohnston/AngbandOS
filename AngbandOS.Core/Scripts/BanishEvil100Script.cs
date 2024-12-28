@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BanishEvil100Script : Script, IScript
+internal class BanishEvil100Script : Script, IScript, ICancellableScriptItem
 {
     private BanishEvil100Script(Game game) : base(game) { }
 
@@ -22,5 +22,14 @@ internal class BanishEvil100Script : Script, IScript
         {
             Game.MsgPrint("The power of your god banishes evil!");
         }
+    }
+
+    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    {
+        if (Game.BanishEvil(100))
+        {
+            Game.MsgPrint("The power of the artifact banishes evil!");
+        }
+        return true;
     }
 }

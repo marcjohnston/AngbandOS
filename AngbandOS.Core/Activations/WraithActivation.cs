@@ -17,11 +17,7 @@ internal class WraithActivation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.IntValue));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(WraithScript);
 
     protected override string RechargeTimeRollExpression => "1000";
 

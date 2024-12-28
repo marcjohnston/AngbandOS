@@ -35,43 +35,43 @@ internal class PriestlyArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType()
+    public override BaseActivation GetActivationPowerType()
     {
         if (Game.DieRoll(13) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(EnslaveUndead1xEvery333DirectionalActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(EnslaveUndead1xEvery333DirectionalActivation));
         }
         else if (Game.DieRoll(12) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(BanishEvilEvery250p1d250Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(BanishEvilEvery250p1d250Activation));
         }
         else if (Game.DieRoll(11) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(DispelEvil5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(DispelEvil5xEvery300p1d300Activation));
         }
         else if (Game.DieRoll(10) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(ProtectionFromEvilActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(ProtectionFromEvilActivation));
         }
         else if (Game.DieRoll(9) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(Heal1000Every888Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(Heal1000Every888Activation));
         }
         else if (Game.DieRoll(8) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(Heal700Every25Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(Heal700Every25Activation));
         }
         else if (Game.DieRoll(7) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(RestAllActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(RestAllActivation));
         }
         else if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(RestLifeActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(RestLifeActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(Heal4d8AndWoundsEvery3p1d3Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(Heal4d8AndWoundsEvery3p1d3Activation));
         }
     }
 }

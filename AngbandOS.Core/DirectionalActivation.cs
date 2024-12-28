@@ -12,14 +12,50 @@ namespace AngbandOS.Core;
 /// Provides base functionality for an ArtifactPower that needs a direction/aiming.  This object inherits the base ArtifactPower but addings a GetDirectionWithAim
 /// to the activation functionality.
 /// </summary>
-internal abstract class DirectionalActivation : Activation
+internal abstract class DirectionalActivation : BaseActivation, IGetKey
 {
     protected DirectionalActivation(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the message to be displayed to the player, after the player has selected a direction.  No message is rendered, if empty or null.  Returns null, by default.
     /// </summary>
     protected virtual string? PostAimingMessage => null;
+
+    public virtual void Bind()
+    {
+        RechargeTimeRoll = Game.ParseRollExpression(RechargeTimeRollExpression);
+        DirectionalActivationCancellableScript = Game.SingletonRepository.Get<IDirectionalCancellableScriptItem>(DirectionalActivationCancellableScriptBindingKey);
+    }
+
+    /// <summary>
+    /// Returns a Roll expression that determines the amount of time the activation needs to recharge.  This property is used to bind the <see cref="RechargeTimeRoll ">/> property during the bind phase.
+    /// </summary>
+    protected abstract string RechargeTimeRollExpression { get; }
+
+    /// <summary>
+    /// Returns the binding key for the <see cref="ICancellableScript"/> that should be run when the activation is executed.  This property is used to bind
+    /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
+    /// </summary>
+    protected abstract string DirectionalActivationCancellableScriptBindingKey { get; }
+
+    /// <summary>
+    /// Returns the binding key for the <see cref="ICancellableScript"/> that should be run when the activation is executed.  This property is used to bind
+    /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
+    /// </summary>
+    public IDirectionalCancellableScriptItem DirectionalActivationCancellableScript { get; protected set; }
 
     protected override bool OnActivate(Item item)
     {
@@ -31,15 +67,7 @@ internal abstract class DirectionalActivation : Activation
         {
             Game.MsgPrint(PostAimingMessage);
         }
-        return Activate(direction);
-    }
 
-    /// <summary>
-    /// Activates the artifact with directional/aiming functionality and returns false, if the activation was cancelled; true, otherwise.
-    /// </summary>
-    /// <param name="player"></param>
-    /// <param name="level"></param>
-    /// <param name="item"></param>
-    /// <param name="direction"></param>
-    protected abstract bool Activate(int direction);
+        return DirectionalActivationCancellableScript.ExecuteCancellableScriptItem(item, direction);
+    }
 }

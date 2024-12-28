@@ -15,11 +15,7 @@ internal class WordOfRecallEvery200DirectionalActivation : DirectionalActivation
     public override string? PreActivationMessage => "Your {0} glows soft white...";
     protected override string RechargeTimeRollExpression => "200";
 
-    protected override bool Activate(int direction)
-    {
-        Game.RunScript(nameof(ToggleRecallScript));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(WordOfRecallScript);
 
     public override int Value => 5000;
 

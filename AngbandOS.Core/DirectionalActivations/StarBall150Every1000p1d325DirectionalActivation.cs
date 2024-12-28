@@ -19,14 +19,7 @@ internal class StarBall150Every1000p1d325DirectionalActivation : DirectionalActi
 
     protected override string RechargeTimeRollExpression => "1000";
 
-    protected override bool Activate(int direction)
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), Game.OrderedDirection[i], 150, 3);
-        }
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(StarBall150Script);
 
     public override int Value => 8000;
     public override string Name => "Star ball (150)";

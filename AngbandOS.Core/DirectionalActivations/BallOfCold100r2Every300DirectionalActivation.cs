@@ -19,11 +19,7 @@ internal class BallOfCold100r2Every300DirectionalActivation : DirectionalActivat
 
     protected override string RechargeTimeRollExpression => "300";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 100, 2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfCold100r2Script);
 
     public override int Value => 1250;
     public override string Name => "Ball of cold (100)";

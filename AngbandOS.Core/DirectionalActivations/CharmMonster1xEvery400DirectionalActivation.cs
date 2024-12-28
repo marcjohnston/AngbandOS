@@ -19,11 +19,7 @@ internal class CharmMonster1xEvery400DirectionalActivation : DirectionalActivati
 
     protected override string RechargeTimeRollExpression => "400";
 
-    protected override bool Activate(int direction)
-    {
-        Game.CharmMonster(direction, Game.ExperienceLevel.IntValue);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(CharmMonster1xEvery400Script);
 
     public override int Value => 10000;
 

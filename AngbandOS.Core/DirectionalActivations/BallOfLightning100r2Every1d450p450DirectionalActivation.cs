@@ -15,11 +15,7 @@ internal class BallOfLightning100r2Every1d450p450DirectionalActivation : Directi
     public override string? PreActivationMessage => "You breathe lightning.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 100, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfLightning100r2Script);
 
     public override int Value => 5000;
 

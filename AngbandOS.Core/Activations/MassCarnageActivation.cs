@@ -17,11 +17,7 @@ internal class MassCarnageActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} lets out a long, shrill note...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScriptBool(nameof(MassCarnageScript), true);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(MassCarnageScript);
 
     protected override string RechargeTimeRollExpression => "1000";
 

@@ -19,11 +19,7 @@ internal class QuakeActivation : Activation
 
     protected override string RechargeTimeRollExpression => "50";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 10);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(QuakeScript);
 
     public override int Value => 600;
 

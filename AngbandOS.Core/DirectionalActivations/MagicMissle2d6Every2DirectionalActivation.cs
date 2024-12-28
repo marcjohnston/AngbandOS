@@ -14,11 +14,7 @@ internal class MagicMissle2d6Every2DirectionalActivation : DirectionalActivation
 
     public override string? PreActivationMessage => "Your {0} glow extremely brightly...";
     protected override string RechargeTimeRollExpression => "2";
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, base.Game.DiceRoll(2, 6));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(MagicMissle2d6Script);
 
     public override int Value => 5000;
 

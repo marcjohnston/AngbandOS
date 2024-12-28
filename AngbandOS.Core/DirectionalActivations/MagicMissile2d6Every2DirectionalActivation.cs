@@ -19,11 +19,7 @@ internal class MagicMissile2d6Every2DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "2";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, Game.DiceRoll(2, 6));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(MagicMissile2d6Script);
 
     public override int Value => 250;
 

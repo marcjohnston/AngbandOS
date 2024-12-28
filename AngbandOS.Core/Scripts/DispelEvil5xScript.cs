@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelEvil5xScript : Script, ISuccessByChanceScript, IScript, ICancellableScript
+internal class DispelEvil5xScript : Script, ISuccessByChanceScript, IScript, ICancellableScriptItem
 {
     private DispelEvil5xScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DispelEvil5xScript : Script, ISuccessByChanceScript, IScript, ICa
     /// Executes the successful script and returns true because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteCancellableScript()
+    public bool ExecuteCancellableScriptItem(Item item)
     {
         ExecuteSuccessByChanceScript();
         return true;

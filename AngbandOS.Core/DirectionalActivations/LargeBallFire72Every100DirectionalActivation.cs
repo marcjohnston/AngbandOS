@@ -16,11 +16,7 @@ internal class LargeBallFire72Every100DirectionalActivation : DirectionalActivat
 
     protected override string RechargeTimeRollExpression => "100";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 72, 3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LargeBallFire72Script);
 
     public override int Value => 6000;
 

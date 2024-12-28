@@ -14,12 +14,7 @@ internal class BallOfFire50r2AndResistFire1d20p20DirectionalActivation : Directi
 
     protected override string RechargeTimeRollExpression => "1d50+50";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 50, 2);
-        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfFire50r2AndResistFire1d20p20Script);
 
     public override int Value => 1000;
 

@@ -19,11 +19,7 @@ internal class StinkingCloud12Every1d4p4DirectionalActivation : DirectionalActiv
 
     protected override string RechargeTimeRollExpression => "1d4+4";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), direction, 12, 3);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(StinkingCloud12Script);
 
     public override int Value => 300;
 

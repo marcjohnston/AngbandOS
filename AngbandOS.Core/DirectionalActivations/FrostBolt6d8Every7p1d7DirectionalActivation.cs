@@ -19,11 +19,7 @@ internal class FrostBolt6d8Every7p1d7DirectionalActivation : DirectionalActivati
 
     protected override string RechargeTimeRollExpression => "1d7+7";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, Game.DiceRoll(6, 8));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(FrostBolt6d8Script);
 
     public override int Value => 250;
 

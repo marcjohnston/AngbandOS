@@ -15,11 +15,7 @@ internal class BreatheFire200r2Every1d450p450DirectionalActivation : Directional
     public override string? PreActivationMessage => "You breathe fire.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 200, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreatheFire200r2Script);
 
     public override int Value => 5000;
 

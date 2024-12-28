@@ -17,12 +17,7 @@ internal class RemoveFearAndHeal30Every10Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.FearTimer.ResetTimer();
-        Game.RestoreHealth(30);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(RemoveFearAndHeal30Script);
 
     protected override string RechargeTimeRollExpression => "10";
 

@@ -19,10 +19,7 @@ internal class CallChaosEvery350Activation : Activation
 
     protected override string RechargeTimeRollExpression => "350";
 
-    protected override bool OnActivate(Item item)
-    {
-        return Game.RunCancellableScript(nameof(CallChaosCancellableScript));
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(CallChaosCancellableScript);
 
     public override int Value => 5000;
 

@@ -16,21 +16,7 @@ internal class PowerDragonEvery400DirectionalActivation : DirectionalActivation
 
     protected override string RechargeTimeRollExpression => "400";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, 4);
-        Game.MsgPrint("Your armor glows many colors...");
-        Game.FearTimer.ResetTimer();
-        Game.SuperheroismTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        Game.RestoreHealth(30);
-        Game.BlessingTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        Game.AcidResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        Game.LightningResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        Game.FireResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        Game.ColdResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        Game.PoisonResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(PowerDragonScript);
 
     public override int Value => 100000;
 

@@ -44,19 +44,19 @@ internal class LawArtifactBias : ArtifactBias
         return false;
     }
 
-    public override Activation GetActivationPowerType()
+    public override BaseActivation GetActivationPowerType()
     {
         if (Game.DieRoll(8) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(BanishEvilEvery250p1d250Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(BanishEvilEvery250p1d250Activation));
         }
         else if (Game.DieRoll(4) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(DispelEvil5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(DispelEvil5xEvery300p1d300Activation));
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(ProtectionFromEvilActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(ProtectionFromEvilActivation));
         }
     }
 }

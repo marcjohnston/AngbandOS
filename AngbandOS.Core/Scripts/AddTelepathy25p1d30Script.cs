@@ -8,9 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AddTelepathy25p1d30Script : Script, IScript
+internal class AddTelepathy25p1d30Script : Script, IScript, ICancellableScriptItem
 {
     private AddTelepathy25p1d30Script(Game game) : base(game) { }
+
+    public bool ExecuteCancellableScriptItem(Item item)
+    {
+        ExecuteScript();
+        return true;
+    }
 
     /// <summary>
     /// Add between 25 and 55 turns of telepathy.

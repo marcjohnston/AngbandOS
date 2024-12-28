@@ -15,11 +15,7 @@ internal class BoltOfFire9d8Every1d8p8DirectionalActivation : DirectionalActivat
     public override string? PreActivationMessage => "Your {0} are covered in fire...";
     protected override string RechargeTimeRollExpression => "1d8+8";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, base.Game.DiceRoll(9, 8));
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BoltOfFire9d8Script);
 
     public override int Value => 5000;
 

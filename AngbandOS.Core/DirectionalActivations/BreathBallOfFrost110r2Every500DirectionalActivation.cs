@@ -18,11 +18,7 @@ internal class BreathBallOfFrost110r2Every500DirectionalActivation : Directional
 
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 110, -2);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreathBallOfFrost110r2Script);
 
     public override int Value => 5000;
 

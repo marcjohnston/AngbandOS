@@ -19,11 +19,7 @@ internal class EnslaveUndead1xEvery333DirectionalActivation : DirectionalActivat
 
     protected override string RechargeTimeRollExpression => "333";
 
-    protected override bool Activate(int direction)
-    {
-        Game.ControlOneUndead(direction, Game.ExperienceLevel.IntValue);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(EnslaveUndead1xScript);
 
     public override int Value => 10000;
 

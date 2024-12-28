@@ -17,12 +17,7 @@ internal class Heal4d8AndWoundsEvery3p1d3Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} radiates deep purple...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RestoreHealth(Game.DiceRoll(4, 8));
-        Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 50);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Heal4d8AndWoundsScript);
 
     protected override string RechargeTimeRollExpression => "1d3+3";
 

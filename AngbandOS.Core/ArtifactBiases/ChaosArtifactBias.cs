@@ -50,15 +50,15 @@ internal class ChaosArtifactBias : ArtifactBias
 
     public override int ActivationPowerChance => 50;
 
-    public override Activation GetActivationPowerType()
+    public override BaseActivation GetActivationPowerType()
     {
         if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(SummonDemonActivation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(SummonFriendlyDemon2In3Activation));
         }
         else
         {
-            return Game.SingletonRepository.Get<Activation>(nameof(CallChaosEvery350Activation));
+            return Game.SingletonRepository.Get<BaseActivation>(nameof(CallChaosEvery350Activation));
         }
     }
 }

@@ -17,12 +17,7 @@ internal class Berserk50p1d50Every100p1d100Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.SuperheroismTimer.AddTimer(Game.DieRoll(50) + 50);
-        Game.BlessingTimer.AddTimer(Game.DieRoll(50) + 50);
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(SuperheroismAndBlessing50p1d50Script);
 
     protected override string RechargeTimeRollExpression => "1d100+100";
 

@@ -17,18 +17,7 @@ internal class Speed20p1d20Every250Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows bright green...";
 
-    protected override bool OnActivate(Item item)
-    {
-        if (Game.HasteTimer.Value == 0)
-        {
-            Game.HasteTimer.SetTimer(Game.DieRoll(20) + 20);
-        }
-        else
-        {
-            Game.HasteTimer.AddTimer(5);
-        }
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Speed20p1d20Script);
 
     protected override string RechargeTimeRollExpression => "250";
 

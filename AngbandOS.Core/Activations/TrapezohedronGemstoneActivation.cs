@@ -21,21 +21,7 @@ internal class TrapezohedronGemstoneActivation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.MsgPrint("The gemstone flashes bright red!");
-        Game.RunScript(nameof(LightScript));
-        Game.MsgPrint("The gemstone drains your vitality...");
-        Game.TakeHit(base.Game.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
-        Game.DetectTraps();
-        Game.DetectDoors();
-        Game.DetectStairs();
-        if (Game.GetCheck("Activate recall? "))
-        {
-            Game.RunScript(nameof(ToggleRecallScript));
-        }
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(TrapezohedronGemstoneScript);
 
     protected override string RechargeTimeRollExpression => "1d20+20";
 

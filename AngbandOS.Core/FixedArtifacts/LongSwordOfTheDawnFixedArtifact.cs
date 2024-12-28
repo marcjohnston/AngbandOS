@@ -15,7 +15,7 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
 
     // Dawn Sword summons a reaver
-    protected override string? ActivationName => nameof(SummonReaverEvery500p1d500Activation);
+    protected override string? ActivationName => nameof(SummonFriendlyReaverEvery500p1d500Activation);
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of the Dawn";

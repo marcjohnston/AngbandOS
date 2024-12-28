@@ -17,11 +17,7 @@ internal class RecallActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows soft white...";
 
-    protected override bool OnActivate(Item item)
-    {
-        Game.RunScript(nameof(ToggleRecallScript));
-        return true;
-    }
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ToggleRecallScript);
 
     protected override string RechargeTimeRollExpression => "200";
 

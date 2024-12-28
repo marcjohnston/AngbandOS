@@ -15,11 +15,7 @@ internal class MagicalArrow150Every1d90p90DirectionalActivation : DirectionalAct
     public override string? PreActivationMessage => "Your {0} grows magical spikes...";
     protected override string RechargeTimeRollExpression => "1d90+90";
 
-    protected override bool Activate(int direction)
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ArrowProjectile)), direction, 150);
-        return true;
-    }
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(MagicalArrow150Script);
 
     public override int Value => 5000;
 
