@@ -14,7 +14,7 @@ internal class BoltOfAcid5d8Every1d5p5DirectionalActivation : DirectionalActivat
 
     public override string? PreActivationMessage => "Your {0} are covered in acid...";
     protected override string RechargeTimeRollExpression => "1d5+5";
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BoltOfAcid5d8Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Acid5d8r0ProjectileScript);
 
     public override int Value => 5000;
 

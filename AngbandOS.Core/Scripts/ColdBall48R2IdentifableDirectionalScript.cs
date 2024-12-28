@@ -12,10 +12,6 @@ internal class ColdBall48R2IdentifableDirectionalScript : Script, IIdentifableDi
 {
     private ColdBall48R2IdentifableDirectionalScript(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
     public bool ExecuteIdentifableDirectionalScript(int dir)
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 48, 2);

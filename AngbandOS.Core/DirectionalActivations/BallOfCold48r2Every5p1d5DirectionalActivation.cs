@@ -19,7 +19,7 @@ internal class BallOfCold48r2Every5p1d5DirectionalActivation : DirectionalActiva
 
     protected override string RechargeTimeRollExpression => "1d5+5";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfCold48r2Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Cold48r2ProjectileScript);
 
     public override int Value => 750;
     public override string Name => "Ball of cold (48)";

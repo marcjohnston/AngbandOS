@@ -1413,7 +1413,7 @@ internal abstract class ItemFactory : ItemEnhancement
     public ItemFactory[]? AmmunitionItemFactories { get; private set; } = null;
 
     /// <summary>
-    /// Returns the activation script for wands when aimed, a Roll to determine the number of charges to assign to new wands and the value for each charge; or null, if the item cannot be aimed.  
+    /// Returns the <see cref="IIdentifableDirectionalScript"/> script for wands when aimed, a Roll to determine the number of charges to assign to new wands and the value for each charge; or null, if the item cannot be aimed.  
     /// This property is bound from the <see cref="AimingBindingTuple"/> property during the bind phase.
     /// </summary>
     public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple { get; private set; } = null;
@@ -1583,7 +1583,7 @@ internal abstract class ItemFactory : ItemEnhancement
     public virtual int ValuePerTurnOfLight => 0;
 
     /// <summary>
-    /// Returns the name of the activation script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
+    /// Returns the name of the <see cref="IIdentifableDirectionalScript"/> script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
     /// item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="AimingTuple"/>  property during the bind phase.
     /// </summary>
     protected virtual (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBindingTuple => null;

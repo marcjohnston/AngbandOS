@@ -14,7 +14,7 @@ internal class BoltOfFrost6d8Every1d7p7DirectionalActivation : DirectionalActiva
 
     public override string? PreActivationMessage => "Your {0} are covered in frost...";
     protected override string RechargeTimeRollExpression => "1d7+7";
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BoltOfFrost6d8Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Frost6d8ProjectileScript);
 
     public override int Value => 5000;
 

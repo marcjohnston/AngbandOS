@@ -13,3 +13,6 @@ csharp_style_namespace_declarations = file_scoped:silent
 
 # IDE0220: Add explicit cast
 dotnet_diagnostic.IDE0220.severity = error
+
+# CS0108: Member hides inherited member; missing new keyword
+dotnet_diagnostic.CS0108.severity = error

@@ -19,7 +19,7 @@ internal class BallOfLightning100r3Every500DirectionalActivation : DirectionalAc
 
     protected override string RechargeTimeRollExpression => "500";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfLightning100r3Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Electricity100r3ProjectileScript);
 
     public override int Value => 1500;
     public override string Name => "Ball of lightning (100)";

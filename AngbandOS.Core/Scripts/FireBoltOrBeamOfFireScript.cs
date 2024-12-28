@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FireBoltScript : Script, IScript
+internal class FireBoltOrBeamOfFireScript : Script, IScript
 {
-    private FireBoltScript(Game game) : base(game) { }
+    private FireBoltOrBeamOfFireScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a bolt or beam of fire in a chosen direction.

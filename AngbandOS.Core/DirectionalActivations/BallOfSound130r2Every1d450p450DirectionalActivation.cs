@@ -15,7 +15,7 @@ internal class BallOfSound130r2Every1d450p450DirectionalActivation : Directional
     public override string? PreActivationMessage => "You breathe sound.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfSound130r2Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Sound130rm2ProjectileScript);
 
     public override int Value => 5000;
 

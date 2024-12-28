@@ -15,7 +15,7 @@ internal class BallOfElements300r3DirectionalActivation : DirectionalActivation
     public override string? PreActivationMessage => "You breathe the elements.";
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfElements300r3Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Missle300rm3ProjectileScript);
 
     public override int Value => 5000;
 

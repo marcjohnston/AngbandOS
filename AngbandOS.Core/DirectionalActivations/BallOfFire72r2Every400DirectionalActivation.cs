@@ -16,7 +16,7 @@ internal class BallOfFire72r2Every400DirectionalActivation : DirectionalActivati
 
     protected override string RechargeTimeRollExpression => "400";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfFire72r2Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Fire72r2ProjectileScript);
 
     public override int Value => 1000;
 

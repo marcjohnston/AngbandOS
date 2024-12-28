@@ -18,7 +18,7 @@ internal class BreathBallOfFrost110r2Every500DirectionalActivation : Directional
 
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreathBallOfFrost110r2Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Cold110rm2ProjectileScript);
 
     public override int Value => 5000;
 

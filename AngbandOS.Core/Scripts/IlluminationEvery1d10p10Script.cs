@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BallOfLightning100r3Script : Script, IDirectionalCancellableScriptItem
+internal class IlluminationEvery1d10p10Script : Script, IDirectionalCancellableScriptItem
 {
-    private BallOfLightning100r3Script(Game game) : base(game) { }
+    private IlluminationEvery1d10p10Script(Game game) : base(game) { }
 
     public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 100, 3);
+        Game.LightArea(base.Game.DiceRoll(2, 15), 3);
         return true;
     }
 }

@@ -15,7 +15,7 @@ internal class BreathePoisonGas150r2Every1d450p450DirectionalActivation : Direct
     public override string? PreActivationMessage => "You breathe poison gas.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreathePoisonGas150r2Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Poison150rm2ProjectileScript);
 
     public override int Value => 5000;
 

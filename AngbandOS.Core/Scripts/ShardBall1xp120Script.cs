@@ -8,13 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ShardBall1xp120Script : Script, IDirectionalCancellableScriptItem
+internal class ShardBall1xp120Script : ProjectileScript
 {
     private ShardBall1xp120Script(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile)), direction, 120 + Game.ExperienceLevel.IntValue, 2);
-        return true;
-    }
+    protected override string ProjectileBindingKey => nameof(ShardProjectile);
+    protected override string DamageRollExpression => "1d1xX+120";
+    protected override string RadiusRollExpression => "2";
 }

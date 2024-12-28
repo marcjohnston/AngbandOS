@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class ChaosSpellFireBolt : Spell
 {
     private ChaosSpellFireBolt(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(FireBoltScript);
+    protected override string? CastScriptName => nameof(FireBoltOrBeamOfFireScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 

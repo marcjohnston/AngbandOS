@@ -14,7 +14,7 @@ internal class BoltOfElectricity4d8Every1d6p6DirectionalActivation : Directional
 
     public override string? PreActivationMessage => "Your {0} are covered in sparks...";
     protected override string RechargeTimeRollExpression => "1d6+6";
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BoltOfElectricity4d8Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Electricity4d8ProjectileScript);
 
     public override int Value => 5000;
 

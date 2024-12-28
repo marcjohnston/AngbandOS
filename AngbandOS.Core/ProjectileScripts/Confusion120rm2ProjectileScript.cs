@@ -8,13 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BoltOfAcid5d8Script : Script, IDirectionalCancellableScriptItem
+internal class Confusion120rm2ProjectileScript : ProjectileScript
 {
-    private BoltOfAcid5d8Script(Game game) : base(game) { }
+    private Confusion120rm2ProjectileScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
-    {
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, base.Game.DiceRoll(5, 8));
-        return true;
-    }
+    protected override string ProjectileBindingKey => nameof(ConfusionProjectile);
+    protected override string DamageRollExpression => "120";
+    protected override string RadiusRollExpression => "-2";
 }

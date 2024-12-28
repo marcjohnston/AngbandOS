@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Interfaces;
 internal interface IIdentifableDirectionalScript
 {
     /// <summary>
-    /// Returns true, if the script performs an action that would identify an object; false, otherwise.
+    /// Returns true, if the script performs an action that would identify the item that performed the action; false, otherwise.
     /// </summary>
     /// <returns></returns>
     bool ExecuteIdentifableDirectionalScript(int dir);

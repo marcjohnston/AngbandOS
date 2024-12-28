@@ -19,7 +19,7 @@ internal class FireBolt9d8Every8p1d8DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "1d8+8";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(FireBolt9d8Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Fire9d8ProjectileScript);
 
     public override int Value => 250;
 

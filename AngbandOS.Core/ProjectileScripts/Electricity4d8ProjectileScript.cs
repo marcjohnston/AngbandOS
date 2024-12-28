@@ -8,13 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BreatheFire200r2Script : Script, IDirectionalCancellableScriptItem
+internal class Electricity4d8ProjectileScript : ProjectileScript
 {
-    private BreatheFire200r2Script(Game game) : base(game) { }
-
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 200, -2);
-        return true;
-    }
+    private Electricity4d8ProjectileScript(Game game) : base(game) { }
+    protected override string ProjectileBindingKey => nameof(ElecProjectile);
+    protected override string DamageRollExpression => "4d8";
 }
