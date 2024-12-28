@@ -37,7 +37,7 @@ internal abstract class StoreCommand : IGetKey, IToJson
     public void Bind()
     {
         // Get the script from the singleton repository.
-        ExecuteScript = ExecuteScriptName == null ? null : (IScriptStore)Game.SingletonRepository.Get<Script>(ExecuteScriptName);
+        ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IScriptStore>(ExecuteScriptName);
 
         if (ValidStoreFactoryNames == null)
         {

@@ -41,7 +41,7 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey
     public string GetKey => Key;
     public void Bind() 
     {
-        ExecuteScript = ExecuteScriptName == null ? null : (IScript)Game.SingletonRepository.Get<Script>(ExecuteScriptName);
+        ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IScript>(ExecuteScriptName);
         HelpGroup = HelpGroupName == null ? null : Game.SingletonRepository.Get<HelpGroup>(HelpGroupName);
     }
 

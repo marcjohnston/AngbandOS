@@ -233,6 +233,7 @@ internal class SingletonRepository
         RegisterRepository<IMonsterSelector>();
         RegisterRepository<INoticeableScript>();
         RegisterRepository<INullableStringsValue>();
+        RegisterRepository<IRepeatableScript>();
         RegisterRepository<IScript>();
         RegisterRepository<IScriptBool>();
         RegisterRepository<IScriptInt>();
@@ -241,6 +242,7 @@ internal class SingletonRepository
         RegisterRepository<IScriptItemGridTile>();
         RegisterRepository<IScriptItemInt>();
         RegisterRepository<IScriptItemMonster>();
+        RegisterRepository<IScriptStore>();
         RegisterRepository<IStringValue>();
         RegisterRepository<ISuccessByChanceScript>();
         RegisterRepository<ISuccessByChanceScriptInt>();
@@ -299,7 +301,6 @@ internal class SingletonRepository
         RegisterRepository<Realm>();
         RegisterRepository<Reward>();
         RegisterRepository<RoomLayout>();
-        RegisterRepository<Script>();
         RegisterRepository<Shopkeeper>();
         RegisterRepository<Spell>();
         RegisterRepository<SpellResistantDetection>();
