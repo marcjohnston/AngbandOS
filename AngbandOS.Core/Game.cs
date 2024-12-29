@@ -6104,14 +6104,14 @@ public bool IsDead = false;
 
     public void WallBreaker()
     {
-        int dummy;
+        int dir;
         if (DieRoll(80 + ExperienceLevel.IntValue) < 70)
         {
             do
             {
-                dummy = DieRoll(9);
-            } while (dummy == 5 || dummy == 0);
-            WallToMud(dummy);
+                dir = DieRoll(9);
+            } while (dir == 5 || dir == 0);
+            WallToMud(dir);
         }
         else if (DieRoll(100) > 30)
         {
@@ -6119,18 +6119,14 @@ public bool IsDead = false;
         }
         else
         {
-            for (dummy = 1; dummy < 10; dummy++)
+            for (dir = 1; dir < 10; dir++)
             {
-                if (dummy != 5)
+                if (dir != 5)
                 {
-                    WallToMud(dummy);
+                    WallToMud(dir);
                 }
             }
         }
-    }
-
-    public void WallStone()
-    {
     }
 
     public bool WallToMud(int dir)
@@ -17861,7 +17857,7 @@ public bool IsDead = false;
         // The entire syntax must match.
         if (expression != match.Groups[0].Value)
         {
-            throw new Exception($"Invalid number roll expression {expression}.");
+            throw new Exception($"Invalid roll expression {expression}.");
         }
 
         // Extract the matches that we are interested in.
