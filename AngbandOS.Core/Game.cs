@@ -5642,7 +5642,7 @@ public bool IsDead = false;
             GridCoordinate? target = TargetWho.GetTargetLocation();
             if (target != null)
             {
-                stop = false;
+                stop = false; // TODO: This means we can target a monster around a corner?
                 tx = target.X;
                 ty = target.Y;
             }
