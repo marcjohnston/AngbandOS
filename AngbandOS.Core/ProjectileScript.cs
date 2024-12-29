@@ -45,7 +45,7 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
         int damage = DamageRoll.Get(Game.UseRandom);
         if (radius == 0)
         {
-            Game.FireBolt(Projectile, direction, damage); // TODO: We do not do anything with the return value.
+            bool hitSuccess = Projectile.TargetedFire(direction, damage, stop: true, kill: true); // TODO: We do not do anything with the return value.
         }
         else
         {
