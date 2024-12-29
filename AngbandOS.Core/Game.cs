@@ -5634,20 +5634,7 @@ public bool IsDead = false;
     /// <returns></returns>
     public bool FireBall(Projectile projectile, int dir, int dam, int rad)
     {
-        bool stop = true;
-        int tx = MapX.IntValue + (99 * KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
-        int ty = MapY.IntValue + (99 * KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
-        if (dir == 5 && TargetWho != null)
-        {
-            GridCoordinate? target = TargetWho.GetTargetLocation();
-            if (target != null)
-            {
-                stop = false; // TODO: This means we can target a monster around a corner?
-                tx = target.X;
-                ty = target.Y;
-            }
-        }
-        return projectile.Fire(0, rad, ty, tx, dam, stop: stop, grid: true, item: true, kill: true);
+        return projectile.TargetedFireBall(dir, dam, rad);
     }
 
     public void FireBeam(Projectile projectile, int dir, int dam)

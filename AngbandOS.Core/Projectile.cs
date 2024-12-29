@@ -67,6 +67,32 @@ internal abstract class Projectile : IGetKey
     /// <summary>
     /// Returns true, if the projectile actally hits and affects a monster.
     /// </summary>
+    /// <param name="projectile"></param>
+    /// <param name="dir"></param>
+    /// <param name="dam"></param>
+    /// <param name="rad"></param>
+    /// <returns></returns>
+    public bool TargetedFireBall(int dir, int dam, int rad)
+    {
+        bool stop = true;
+        int tx = Game.MapX.IntValue + (99 * Game.KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
+        int ty = Game.MapY.IntValue + (99 * Game.KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
+        if (dir == 5 && Game.TargetWho != null)
+        {
+            GridCoordinate? target = Game.TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                stop = false; // TODO: This means we can target a monster around a corner?
+                tx = target.X;
+                ty = target.Y;
+            }
+        }
+        return Fire(0, rad, ty, tx, dam, stop: stop, grid: true, item: true, kill: true);
+    }
+
+    /// <summary>
+    /// Returns true, if the projectile actally hits and affects a monster.
+    /// </summary>
     /// <param name="who"></param>
     /// <param name="rad"></param>
     /// <param name="y"></param>
