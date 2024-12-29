@@ -48,7 +48,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="dam"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    public bool TargetedFire(int dir, int dam, bool jump = false, bool beam = false, bool stop = false, bool kill = false, bool grid = false, bool item = false)
+    public bool TargetedFireBolt(int dir, int dam, bool jump = false, bool beam = false, bool stop = false, bool kill = false, bool grid = false, bool item = false)
     {
         int tx = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         int ty = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];

@@ -4806,19 +4806,19 @@ public bool IsDead = false;
     public bool CharmAnimal(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile));
-        return projectile.TargetedFire(dir, plev, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, plev, stop: true, kill: true);
     }
 
     public bool CharmMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
-        return projectile.TargetedFire(dir, plev, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, plev, stop: true, kill: true);
     }
 
     public bool CloneMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile));
-        return projectile.TargetedFire(dir, 0, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, 0, stop: true, kill: true);
     }
 
     public void ColdDam(int dam, string kbStr)
@@ -4854,7 +4854,7 @@ public bool IsDead = false;
     public bool ConfuseMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfProjectile));
-        return projectile.TargetedFire(dir, plev, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, plev, stop: true, kill: true);
     }
 
     public void ConfuseMonsters(int dam)
@@ -4865,7 +4865,7 @@ public bool IsDead = false;
     public bool ControlOneUndead(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlUndeadProjectile));
-        return projectile.TargetedFire(dir, plev, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, plev, stop: true, kill: true);
     }
 
     public void DestroyArea(int y1, int x1, int r)
@@ -4943,7 +4943,7 @@ public bool IsDead = false;
     public bool DestroyTrapOrDoor(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
-        return projectile.TargetedFire(dir, 0, beam: true, grid: true, item: true);
+        return projectile.TargetedFireBolt(dir, 0, beam: true, grid: true, item: true);
     }
 
     public bool DetectDoors()
@@ -5126,7 +5126,7 @@ public bool IsDead = false;
     public bool DisarmTrap(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapProjectile));
-        return projectile.TargetedFire(dir, 0, beam: true, grid: true, item: true);
+        return projectile.TargetedFireBolt(dir, 0, beam: true, grid: true, item: true);
     }
 
     public void DispelDemons(int dam)
@@ -5153,7 +5153,7 @@ public bool IsDead = false;
     public bool DrainLife(int dir, int dam)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainProjectile));
-        return projectile.TargetedFire(dir, dam, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, dam, stop: true, kill: true);
     }
 
     public void Earthquake(int cy, int cx, int r)
@@ -5621,7 +5621,7 @@ public bool IsDead = false;
     public bool ScareMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
-        return projectile.TargetedFire(dir, plev, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, plev, stop: true, kill: true);
     }
 
     /// <summary>
@@ -5652,12 +5652,12 @@ public bool IsDead = false;
 
     public void FireBeam(Projectile projectile, int dir, int dam)
     {
-        projectile.TargetedFire(dir, dam, beam: true, kill: true);
+        projectile.TargetedFireBolt(dir, dam, beam: true, kill: true);
     }
 
     public void FireBolt(Projectile projectile, int dir, int dam)
     {
-        projectile.TargetedFire(dir, dam, stop: true, kill: true);
+        projectile.TargetedFireBolt(dir, dam, stop: true, kill: true);
     }
 
     public void FireBoltOrBeam(int prob, Projectile projectile, int dir, int dam)
@@ -5710,7 +5710,7 @@ public bool IsDead = false;
     public bool HealMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
-        return projectile.TargetedFire(dir, DiceRoll(4, 6), stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, DiceRoll(4, 6), stop: true, kill: true);
     }
 
     public bool LightArea(int dam, int rad)
@@ -5728,7 +5728,7 @@ public bool IsDead = false;
     public bool LightLine(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
-        return projectile.TargetedFire(dir, DiceRoll(6, 8), beam: true, grid: true, kill: true);
+        return projectile.TargetedFireBolt(dir, DiceRoll(6, 8), beam: true, grid: true, kill: true);
     }
 
     public bool LoseAllInfo()
@@ -5771,7 +5771,7 @@ public bool IsDead = false;
     public bool PolyMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldPolyProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, ExperienceLevel.IntValue, stop: true, kill: true);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5896,7 +5896,7 @@ public bool IsDead = false;
     public bool SleepMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, ExperienceLevel.IntValue, stop: true, kill: true);
     }
 
     public void SleepMonstersTouch()
@@ -5908,19 +5908,19 @@ public bool IsDead = false;
     public bool SlowMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, ExperienceLevel.IntValue, stop: true, kill: true);
     }
 
     public bool SpeedMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, ExperienceLevel.IntValue, stop: true, kill: true);
     }
 
     public bool StasisMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(StasisProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, ExperienceLevel.IntValue, stop: true, kill: true);
     }
 
     public void StasisMonsters(int dam)
@@ -5931,7 +5931,7 @@ public bool IsDead = false;
     public bool StunMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(StunProjectile));
-        return projectile.TargetedFire(dir, plev, stop: true, kill: true);
+        return projectile.TargetedFireBolt(dir, plev, stop: true, kill: true);
     }
 
     public void StunMonsters(int dam)
@@ -5951,7 +5951,7 @@ public bool IsDead = false;
     public bool TeleportMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TeleportAwayAllProjectile));
-        return projectile.TargetedFire(dir, Constants.MaxSight * 5, kill: true, beam: true);
+        return projectile.TargetedFireBolt(dir, Constants.MaxSight * 5, kill: true, beam: true);
     }
 
     public void TeleportPlayerTo(int ny, int nx)
@@ -6132,13 +6132,13 @@ public bool IsDead = false;
     public bool WallToMud(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(WallToMudProjectile));
-        return projectile.TargetedFire(dir, 20 + DieRoll(30), grid: true, item: true, kill: true, beam: true);
+        return projectile.TargetedFireBolt(dir, 20 + DieRoll(30), grid: true, item: true, kill: true, beam: true);
     }
 
     public bool WizardLock(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile));
-        return projectile.TargetedFire(dir, 20 + DieRoll(30), grid: true, item: true, kill: true, beam: true);
+        return projectile.TargetedFireBolt(dir, 20 + DieRoll(30), grid: true, item: true, kill: true, beam: true);
     }
 
     private void CaveTempRoomAux(int y, int x)
