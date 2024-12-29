@@ -15,7 +15,7 @@ internal class DarkProjectileUnfriendlyScript : Script, IUnfriendlyScript
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile));
-        projectile.Fire(who, 2, y, x, 0, item: true, kill: true, jump: true);
+        projectile.Fire(who, 2, y, x, 0, item: true, kill: true, jump: true, beam: false, thru: false, hide: false, grid: false, stop: false);
         return true;
     }
 }

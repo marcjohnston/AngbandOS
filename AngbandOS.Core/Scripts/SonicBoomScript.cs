@@ -19,6 +19,6 @@ internal class SonicBoomScript : Script, IScript
     public void ExecuteScript()
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));
-        projectile.Fire(0, 2 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, 45 + Game.ExperienceLevel.IntValue, item: true, kill: true);
+        projectile.Fire(0, 2 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, 45 + Game.ExperienceLevel.IntValue, item: true, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, stop: false);
     }
 }

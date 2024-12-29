@@ -48,7 +48,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="dam"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    public bool TargetedFireBolt(int dir, int dam, bool jump = false, bool beam = false, bool stop = false, bool kill = false, bool grid = false, bool item = false)
+    public bool TargetedFireBolt(int dir, int dam, bool jump, bool beam, bool stop, bool kill, bool grid, bool item, bool thru, bool hide)
     {
         int tx = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         int ty = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
@@ -61,7 +61,7 @@ internal abstract class Projectile : IGetKey
                 ty = target.Y;
             }
         }
-        return Fire(0, 0, ty, tx, dam, jump: jump, beam: beam, thru: true, stop: stop, kill: kill, grid: grid, item: item);
+        return Fire(0, 0, ty, tx, dam, jump: jump, beam: beam, thru: thru, stop: stop, kill: kill, grid: grid, item: item, hide: hide);
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="dam"></param>
     /// <param name="rad"></param>
     /// <returns></returns>
-    public bool TargetedFireBall(int dir, int dam, int rad)
+    public bool TargetedFireBall(int dir, int dam, int rad, bool grid, bool item, bool kill, bool jump, bool beam, bool thru, bool hide)
     {
         bool stop = true;
         int tx = Game.MapX.IntValue + (99 * Game.KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
@@ -87,7 +87,7 @@ internal abstract class Projectile : IGetKey
                 ty = target.Y;
             }
         }
-        return Fire(0, rad, ty, tx, dam, stop: stop, grid: true, item: true, kill: true);
+        return Fire(0, rad, ty, tx, dam, stop: stop, grid: grid, item: item, kill: kill, jump: jump, beam: beam, thru: thru, hide: hide);
     }
 
     /// <summary>
@@ -107,7 +107,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="kill">Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.</param>
     /// <param name="stop">Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.</param>
     /// <returns></returns>
-    public bool Fire(int who, int rad, int y, int x, int dam, bool jump = false, bool beam = false, bool thru = false, bool hide = false, bool grid = false, bool item = false, bool kill = false, bool stop = false)
+    public bool Fire(int who, int rad, int y, int x, int dam, bool jump, bool beam, bool thru, bool hide, bool grid, bool item, bool kill, bool stop)
     {
         int i, dist;
         int y1, x1;
@@ -561,7 +561,7 @@ internal abstract class Projectile : IGetKey
                 tY = Game.Monsters[who].MapY;
                 tX = Game.Monsters[who].MapX;
             }
-            Fire(0, 0, tY, tX, dam, stop: true, kill: true);
+            Fire(0, 0, tY, tX, dam, stop: true, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
             Game.Disturb(true);
             return true;
         }

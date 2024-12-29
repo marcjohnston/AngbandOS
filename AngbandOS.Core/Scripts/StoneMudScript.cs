@@ -14,7 +14,8 @@ internal class StoneMudScript : Script, IDirectionalCancellableScriptItem
 
     public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
     {
-        Game.WallToMud(direction);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(WallToMudProjectile));
+        bool hitSuccess = projectile.TargetedFireBolt(direction, 20 + Game.DieRoll(30), grid: true, item: true, kill: true, beam: true, jump: false, stop: false, thru: false, hide: false);
         return true;
     }
 }

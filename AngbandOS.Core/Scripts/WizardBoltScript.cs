@@ -36,6 +36,6 @@ internal class WizardBoltScript : Script, IScript
             }
         }
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(WizardBoltProjectile));
-        projectile.Fire(0, 0, ty, tx, 1000000, stop: stop, grid: true, item: true, kill: true);
+        projectile.Fire(0, 0, ty, tx, 1000000, stop: stop, grid: true, item: true, kill: true, jump: false, beam: false, thru: false, hide: false);
     }
 }

@@ -39,17 +39,24 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
 
     public Roll RadiusRoll { get; protected set; }
 
+    public virtual bool Stop => true;
+    public virtual bool Kill => true;
+    public virtual bool Jump => false;
+    public virtual bool Beam => false;
+    public virtual bool Grid => false;
+    public virtual bool Item => false;
+
     public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
         int damage = DamageRoll.Get(Game.UseRandom);
         if (radius == 0)
         {
-            bool hitSuccess = Projectile.TargetedFireBolt(direction, damage, stop: true, kill: true); // TODO: We do not do anything with the return value.
+            bool hitSuccess = Projectile.TargetedFireBolt(direction, damage, jump: Jump, beam: Beam, stop: Stop, kill: Kill, grid: Grid, item: Item, thru: false, hide: false); // TODO: We do not do anything with the return value.
         }
         else
         {
-            Game.FireBall(Projectile, direction, damage, radius); // TODO: We do not do anything with the return value.
+            bool hitSuccess = Projectile.TargetedFireBall(direction, damage, radius, grid: true, item: true, kill: true, jump: false, beam: false, thru: false, hide: false); // TODO: We do not do anything with the return value.
         }
         return true; // Return true because the script was not cancelled.
     }
