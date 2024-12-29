@@ -17,7 +17,7 @@ internal class ShardBallDirectionalActivation : DirectionalActivation
     
     protected override string RechargeTimeRollExpression => "400";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ShardBall1xp120Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Shard1xp120r2ProjectileScript);
 
     public override int Value => 5000;
 

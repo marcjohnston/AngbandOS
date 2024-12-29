@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Acid5d8r0ProjectileScript : ProjectileScript
+internal class Charm45ProjectileScript : ProjectileScript
 {
-    private Acid5d8r0ProjectileScript(Game game) : base(game) { }
+    private Charm45ProjectileScript(Game game) : base(game) { }
 
     public override bool Stop => true;
     public override bool Kill => true;
@@ -20,6 +20,6 @@ internal class Acid5d8r0ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(AcidProjectile);
-    protected override string DamageRollExpression => "5d8";
+    protected override string ProjectileBindingKey => nameof(CharmProjectile);
+    protected override string DamageRollExpression => "45";
 }

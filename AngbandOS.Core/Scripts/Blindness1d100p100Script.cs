@@ -19,7 +19,9 @@ internal class Blindness1d100p100Script : Script, INoticeableScript
     public bool ExecuteNoticeableScript()
     {
         if (!Game.HasBlindnessResistance)
+        {
             return Game.BlindnessTimer.AddTimer(Game.RandomLessThan(100) + 100);
+        }
         return false;
     }
 }

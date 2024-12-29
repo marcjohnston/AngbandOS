@@ -19,7 +19,7 @@ internal class CharmAnimal1xEvery300DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "300";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(CharmAnimal1xScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ControlAnimal1xProjectileScript);
 
     public override int Value => 7500;
 

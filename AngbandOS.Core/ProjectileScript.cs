@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IDirectionalCancellableScriptItem
+internal abstract class ProjectileScript : Script, IDirectionalCancellableScriptItem, IIdentifableDirectionalScript
 {
     public ProjectileScript(Game game) : base(game) { }
 
@@ -79,11 +79,15 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// </summary>
     public abstract bool Hide { get; }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
+    public bool ExecuteCancellableScriptItem(Item item, int direction)
+    {
+        ExecuteIdentifableDirectionalScript(direction);
+        return true; // Return true because the script was not cancelled.
+    }
+    public bool ExecuteIdentifableDirectionalScript(int direction)
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
         int damage = DamageRoll.Get(Game.UseRandom);
-        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop); // TODO: We do not do anything with the return value.
-        return true; // Return true because the script was not cancelled.
+        return Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
     }
 }

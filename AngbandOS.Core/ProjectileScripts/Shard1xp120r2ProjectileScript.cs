@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ShardBall1xp120Script : ProjectileScript
+internal class Shard1xp120r2ProjectileScript : ProjectileScript
 {
-    private ShardBall1xp120Script(Game game) : base(game) { }
+    private Shard1xp120r2ProjectileScript(Game game) : base(game) { }
 
     public override bool Stop => true;
     public override bool Kill => true;

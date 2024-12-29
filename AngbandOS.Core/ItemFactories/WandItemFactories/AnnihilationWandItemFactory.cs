@@ -30,7 +30,7 @@ internal class AnnihilationWandItemFactory : ItemFactory
         (60, 4)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(Annihilation125IdentifableDirectionalScript), "1d2+1", 150, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(OldDrain125ProjectileScript), "1d2+1", 150, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

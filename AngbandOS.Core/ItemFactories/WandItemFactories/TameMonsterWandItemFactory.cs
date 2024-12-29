@@ -26,7 +26,7 @@ internal class TameMonsterWandItemFactory : ItemFactory
         (30, 2)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(CharmMonster45IdentifableDirectionalScript), "1d6+2", 75, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(Charm45ProjectileScript), "1d6+2", 75, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

@@ -19,7 +19,7 @@ internal class CharmMonster1xEvery400DirectionalActivation : DirectionalActivati
 
     protected override string RechargeTimeRollExpression => "400";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(CharmMonster1xEvery400Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Charm1xProjectileScript);
 
     public override int Value => 10000;
 

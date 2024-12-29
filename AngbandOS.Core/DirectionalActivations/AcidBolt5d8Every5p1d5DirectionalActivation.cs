@@ -19,7 +19,7 @@ internal class AcidBolt5d8Every5p1d5DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "1d5+5";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Acid5d8r0ProjectileScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Acid5d8ProjectileScript);
 
     public override int Value => 250;
 

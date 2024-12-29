@@ -19,7 +19,7 @@ internal class FrostBolt6d8Every7p1d7DirectionalActivation : DirectionalActivati
 
     protected override string RechargeTimeRollExpression => "1d7+7";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(FrostBolt6d8Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Cold6d8ProjectileScript);
 
     public override int Value => 250;
 
