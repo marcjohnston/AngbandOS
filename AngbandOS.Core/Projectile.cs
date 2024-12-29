@@ -48,7 +48,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="dam"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    public bool TargetedFireBolt(int dir, int dam, bool jump, bool beam, bool stop, bool kill, bool grid, bool item, bool thru, bool hide)
+    public bool TargetedFire(int dir, int dam, int rad, bool jump, bool beam, bool stop, bool kill, bool grid, bool item, bool thru, bool hide)
     {
         int tx = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         int ty = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
@@ -57,37 +57,15 @@ internal abstract class Projectile : IGetKey
             GridCoordinate? target = Game.TargetWho.GetTargetLocation();
             if (target != null)
             {
+                if (rad != 0)
+                {
+                    stop = false; // TODO: This means we can target a monster around a corner?
+                }
                 tx = target.X;
                 ty = target.Y;
             }
         }
-        return Fire(0, 0, ty, tx, dam, jump: jump, beam: beam, thru: thru, stop: stop, kill: kill, grid: grid, item: item, hide: hide);
-    }
-
-    /// <summary>
-    /// Returns true, if the projectile actally hits and affects a monster.
-    /// </summary>
-    /// <param name="projectile"></param>
-    /// <param name="dir"></param>
-    /// <param name="dam"></param>
-    /// <param name="rad"></param>
-    /// <returns></returns>
-    public bool TargetedFireBall(int dir, int dam, int rad, bool grid, bool item, bool kill, bool jump, bool beam, bool thru, bool hide)
-    {
-        bool stop = true;
-        int tx = Game.MapX.IntValue + (99 * Game.KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
-        int ty = Game.MapY.IntValue + (99 * Game.KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
-        if (dir == 5 && Game.TargetWho != null)
-        {
-            GridCoordinate? target = Game.TargetWho.GetTargetLocation();
-            if (target != null)
-            {
-                stop = false; // TODO: This means we can target a monster around a corner?
-                tx = target.X;
-                ty = target.Y;
-            }
-        }
-        return Fire(0, rad, ty, tx, dam, stop: stop, grid: grid, item: item, kill: kill, jump: jump, beam: beam, thru: thru, hide: hide);
+        return Fire(0, rad, ty, tx, dam, jump: jump, beam: beam, thru: thru, stop: stop, kill: kill, grid: grid, item: item, hide: hide);
     }
 
     /// <summary>

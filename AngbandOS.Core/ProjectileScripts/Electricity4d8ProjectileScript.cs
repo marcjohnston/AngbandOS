@@ -11,6 +11,14 @@ namespace AngbandOS.Core.Scripts;
 internal class Electricity4d8ProjectileScript : ProjectileScript
 {
     private Electricity4d8ProjectileScript(Game game) : base(game) { }
+    public override bool Stop => true;
+    public override bool Kill => true;
+    public override bool Jump => false;
+    public override bool Beam => false;
+    public override bool Grid => false;
+    public override bool Item => false;
+    public override bool Thru => false;
+    public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(ElecProjectile);
     protected override string DamageRollExpression => "4d8";
 }

@@ -12,6 +12,14 @@ internal class Electricity100r3ProjectileScript : ProjectileScript
 {
     private Electricity100r3ProjectileScript(Game game) : base(game) { }
 
+    public override bool Stop => true;
+    public override bool Kill => true;
+    public override bool Jump => false;
+    public override bool Beam => false;
+    public override bool Grid => true;
+    public override bool Item => true;
+    public override bool Thru => false;
+    public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(ElecProjectile);
     protected override string DamageRollExpression => "100";
     protected override string RadiusRollExpression => "3";

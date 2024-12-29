@@ -39,25 +39,51 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
 
     public Roll RadiusRoll { get; protected set; }
 
-    public virtual bool Stop => true;
-    public virtual bool Kill => true;
-    public virtual bool Jump => false;
-    public virtual bool Beam => false;
-    public virtual bool Grid => false;
-    public virtual bool Item => false;
+    /// <summary>
+    /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.
+    /// </summary>
+    public abstract bool Stop { get; }
+
+    /// <summary>
+    /// Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.
+    /// </summary>
+    public abstract bool Kill { get; }
+
+    /// <summary>
+    /// Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.
+    /// </summary>
+    public abstract bool Jump { get; }
+
+    /// <summary>
+    /// Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.
+    /// </summary>
+    public abstract bool Beam { get; }
+
+    /// <summary>
+    /// Allows the effect to interact with each grid (tile or cell) it moves through, which can alter terrain or affect grid-based elements like traps.
+    /// </summary>
+    public abstract bool Grid { get; }
+
+    /// <summary>
+    /// Enables the effect to interact with items it encounters, possibly damaging or destroying them if applicable.
+    /// </summary>
+    public abstract bool Item { get; }
+
+    /// <summary>
+    /// Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.
+    /// </summary>
+    public abstract bool Thru { get; }
+
+    /// <summary>
+    /// Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.
+    /// </summary>
+    public abstract bool Hide { get; }
 
     public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
         int damage = DamageRoll.Get(Game.UseRandom);
-        if (radius == 0)
-        {
-            bool hitSuccess = Projectile.TargetedFireBolt(direction, damage, jump: Jump, beam: Beam, stop: Stop, kill: Kill, grid: Grid, item: Item, thru: false, hide: false); // TODO: We do not do anything with the return value.
-        }
-        else
-        {
-            bool hitSuccess = Projectile.TargetedFireBall(direction, damage, radius, grid: true, item: true, kill: true, jump: false, beam: false, thru: false, hide: false); // TODO: We do not do anything with the return value.
-        }
+        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop); // TODO: We do not do anything with the return value.
         return true; // Return true because the script was not cancelled.
     }
 }

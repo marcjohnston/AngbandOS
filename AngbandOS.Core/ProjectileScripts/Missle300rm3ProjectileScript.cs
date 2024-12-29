@@ -12,6 +12,14 @@ internal class Missle300rm3ProjectileScript : ProjectileScript
 {
     private Missle300rm3ProjectileScript(Game game) : base(game) { }
 
+    public override bool Stop => true;
+    public override bool Kill => true;
+    public override bool Jump => false;
+    public override bool Beam => false;
+    public override bool Grid => true;
+    public override bool Item => true;
+    public override bool Thru => false;
+    public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(MissileProjectile);
     protected override string DamageRollExpression => "300";
     protected override string RadiusRollExpression => "-3";
