@@ -1008,7 +1008,12 @@ public bool IsDead = false;
     public readonly Map Map;
     public readonly int[] KeypadDirectionXOffset = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
     public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
-    public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7, 5 };
+
+    /// <summary>
+    /// Returns all of the directions in a sequence.  This is used for items like a star ball where the projectiles are launched in every direction in a specific sequence.
+    /// </summary>
+    public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7 }; // The final direction [8] and a non-directional value of 5 has been removed because it is not used.
+
     public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
     public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
     public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
