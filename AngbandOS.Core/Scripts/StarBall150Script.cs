@@ -16,7 +16,7 @@ internal class StarBall150Script : Script, IDirectionalCancellableScriptItem
     {
         for (int i = 0; i < 8; i++)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), Game.OrderedDirection[i], 150, 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), Game.OrderedDirection[i], 150, 3);
         }
         return true;
     }

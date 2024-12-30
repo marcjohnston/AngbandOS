@@ -68,7 +68,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 46)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)), dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3);
         }
         else if (die < 51)
         {
@@ -76,7 +76,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 56)
         {
-            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
         }
         else if (die < 61)
         {
@@ -96,7 +96,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 81)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 30 + (Game.ExperienceLevel.IntValue / 2), 2);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, 30 + (Game.ExperienceLevel.IntValue / 2), 2);
         }
         else if (die < 86)
         {

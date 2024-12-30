@@ -19,7 +19,7 @@ internal class ConfuseMonster20Every15DirectionalActivation : DirectionalActivat
 
     protected override string RechargeTimeRollExpression => "15";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ConfuseMonster20Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(OldConfuse20ProjectileScript);
 
     public override int Value => 500;
 

@@ -26,7 +26,7 @@ internal class TeleportOtherRodItemFactory : ItemFactory
         (45, 2)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(TeleportOtherIdentifiedAndUsedScriptItemAndDirection), "25", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(TeleportAwayAll100ProjectileScript), "25", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

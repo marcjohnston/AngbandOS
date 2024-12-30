@@ -53,7 +53,7 @@ internal class WonderIdentifableDirectionalScript : Script, IIdentifableDirectio
                 return Game.DrainLife(dir, 75);
             case 9:
                 // ElecBall
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 32, 2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, 32, 2);
                 return true;
             case 10:
                 // FearMonster
@@ -92,7 +92,7 @@ internal class WonderIdentifableDirectionalScript : Script, IIdentifableDirectio
                 return Game.SlowMonster(dir);
             case 20:
                 // StinkingCloud
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 12, 2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)), dir, 12, 2);
                 return true;
             case 21:
                 // StoneToMud

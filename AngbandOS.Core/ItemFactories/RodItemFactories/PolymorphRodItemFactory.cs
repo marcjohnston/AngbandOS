@@ -26,7 +26,7 @@ internal class PolymorphRodItemFactory : ItemFactory
         (35, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(PolymorphIdentifiedAndUsedScriptItemAndDirection), "25", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(OldPolymorph1xProjectileScript), "25", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

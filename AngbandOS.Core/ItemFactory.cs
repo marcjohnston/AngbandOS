@@ -1529,7 +1529,6 @@ internal abstract class ItemFactory : ItemEnhancement
     ///     
     /// Returns the value of each staff charge.  Returns 0, by default.
     /// The amount of mana needed to consume to keep the potion.
-    /// 
     /// </summary>
     protected virtual (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => null;
 
@@ -1541,7 +1540,6 @@ internal abstract class ItemFactory : ItemEnhancement
     /// Perform a smash effect on the potion and returns true, if the effect causes pets to become unfriendly; false, otherwise.  Returns false, by default.
     /// 
     /// The amount of mana needed to consume to keep the potion.
-    /// 
     /// </summary>
     protected virtual (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple => null;
 

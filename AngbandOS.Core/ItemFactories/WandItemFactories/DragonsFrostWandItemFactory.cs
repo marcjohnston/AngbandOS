@@ -30,7 +30,7 @@ internal class DragonsFrostWandItemFactory : ItemFactory
         (50, 4)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(ColdBall80R3IdentifableDirectionalScript), "1d3+1", 120, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(Cold80r3ProjectileScript), "1d3+1", 120, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

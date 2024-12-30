@@ -19,7 +19,7 @@ internal class LightningBolt4d8Every6p1d6DirectionalActivation : DirectionalActi
 
     protected override string RechargeTimeRollExpression => "1d6+6";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LightningBolt4d8Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Electricity4d8ProjectileScript);
 
     public override int Value => 250;
 

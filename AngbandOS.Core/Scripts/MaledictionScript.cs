@@ -39,7 +39,7 @@ internal class MaledictionScript : Script, IScript
         }
         if (dummy < 800)
         {
-            Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(OldConfProjectile)), dir, Game.ExperienceLevel.IntValue);
+            Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile)), dir, Game.ExperienceLevel.IntValue);
         }
         Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(StunProjectile)), dir, Game.ExperienceLevel.IntValue);
     }

@@ -26,7 +26,7 @@ internal class AcidBallsRodItemFactory : ItemFactory
         (70, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(AcidBall60R2IdentifiedAndUsedScriptItemAndDirection), "27", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(Acid60r2ProjectileScript), "27", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

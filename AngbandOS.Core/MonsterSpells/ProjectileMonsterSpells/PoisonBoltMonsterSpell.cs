@@ -21,6 +21,6 @@ internal class PoisonBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DiceRoll(12, 2) + (monsterLevel / 3);
     }
-    protected override string ProjectileKey => nameof(PoisProjectile);
+    protected override string ProjectileKey => nameof(PoisonProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(PoisSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

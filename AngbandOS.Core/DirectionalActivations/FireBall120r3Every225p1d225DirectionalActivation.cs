@@ -19,7 +19,7 @@ internal class FireBall120r3Every225p1d225DirectionalActivation : DirectionalAct
 
     protected override string RechargeTimeRollExpression => "1d225+225";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(FireBall120r3Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Fire120r3ProjectileScript);
 
     public override int Value => 1750;
 

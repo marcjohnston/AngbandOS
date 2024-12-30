@@ -37,6 +37,6 @@ internal class LightningBoltScript : Script, IScript
         {
             return;
         }
-        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

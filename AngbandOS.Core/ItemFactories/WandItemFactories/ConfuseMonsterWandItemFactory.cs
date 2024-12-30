@@ -26,7 +26,7 @@ internal class ConfuseMonsterWandItemFactory : ItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(ConfuseMonster10IdentifableDirectionalScript), "1d12+6", 25, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(OldConfuse10ProjectileScript), "1d12+6", 25, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

@@ -31,7 +31,7 @@ internal class ShardBallsWandItemFactory : ItemFactory
     };
     public override int Weight => 10;
 
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(ShardBall1D50P75R2IdentifableDirectionalScript), "1d2+1", 4500, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(Shardl1d50p75r2ProjectileScript), "1d2+1", 4500, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

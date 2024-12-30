@@ -30,7 +30,7 @@ internal class HasteMonsterWandItemFactory : ItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(HasteMonsterScript), "1d20+8", 0, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(OldSpeed1xProjectileScript), "1d20+8", 0, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

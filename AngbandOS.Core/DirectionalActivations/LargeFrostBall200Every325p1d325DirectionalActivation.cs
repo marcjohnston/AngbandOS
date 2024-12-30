@@ -19,7 +19,7 @@ internal class LargeFrostBall200Every325p1d325DirectionalActivation : Directiona
 
     protected override string RechargeTimeRollExpression => "1d325+325";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LargeFrostBall200Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Cold200r3ProjectileScript);
 
     public override int Value => 2500;
     public override string Name => "Large frost ball (200)";

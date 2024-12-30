@@ -27,7 +27,7 @@ internal class ColdBallWandItemFactory : ItemFactory
         (40, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(ColdBall48R2IdentifableDirectionalScript), "1d6+2", 75, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(Cold48r2ProjectileScript), "1d6+2", 75, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

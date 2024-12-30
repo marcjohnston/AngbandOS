@@ -18,7 +18,7 @@ internal class ElectricityBolt3d8IdentifiedAndUsedScriptItemAndDirection : Scrip
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
     {
-        Game.FireBoltOrBeam(10, Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, Game.DiceRoll(3, 8));
+        Game.FireBoltOrBeam(10, Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, Game.DiceRoll(3, 8));
         return (true, true);
     }
 }

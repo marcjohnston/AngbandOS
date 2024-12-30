@@ -26,7 +26,7 @@ internal class DestroyTrapOrDoorWandItemFactory : ItemFactory
         (10, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(DestroyTrapOrDoorIdentifableDirectionalScript), "1d8+6", 5, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(DestroyTrapOrDoorProjectileScript), "1d8+6", 5, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

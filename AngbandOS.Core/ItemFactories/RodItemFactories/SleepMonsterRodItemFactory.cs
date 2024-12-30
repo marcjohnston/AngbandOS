@@ -26,7 +26,7 @@ internal class SleepMonsterRodItemFactory : ItemFactory
         (30, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(SleepMonsterIdentifiedAndUsedScriptItemAndDirection), "18", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(OldSleep1xProjectileScript), "18", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

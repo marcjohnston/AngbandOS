@@ -32,7 +32,7 @@ internal class CloneMonsterWandItemFactory : ItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(CloneMonsterIdentifableDirectionalScript), "1d5+3", 0, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(OldCloneProjectileScript), "1d5+3", 0, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

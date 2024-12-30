@@ -30,7 +30,7 @@ internal class HealMonsterWandItemFactory : ItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(HealMonsterIdentifableDirectionalScript), "1d20+8", 0, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(OldHeal4d6ProjectileScript), "1d20+8", 0, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

@@ -26,7 +26,7 @@ internal class LightRodItemFactory : ItemFactory
         (10, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(LightBoltIdentifiedAndUsedScriptItemAndDirection), "9", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(LightWeak6d8ProjectileScript), "9", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

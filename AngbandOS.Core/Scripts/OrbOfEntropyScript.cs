@@ -22,6 +22,6 @@ internal class OrbOfEntropyScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(OldDrainProjectile)), dir, Game.DiceRoll(3, 6) + Game.ExperienceLevel.IntValue + (Game.ExperienceLevel.IntValue / (Game.BaseCharacterClass.ID == CharacterClassEnum.Mage || Game.BaseCharacterClass.ID == CharacterClassEnum.HighMage ? 2 : 4)), Game.ExperienceLevel.IntValue < 30 ? 2 : 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(OldDrainLifeProjectile)), dir, Game.DiceRoll(3, 6) + Game.ExperienceLevel.IntValue + (Game.ExperienceLevel.IntValue / (Game.BaseCharacterClass.ID == CharacterClassEnum.Mage || Game.BaseCharacterClass.ID == CharacterClassEnum.HighMage ? 2 : 4)), Game.ExperienceLevel.IntValue < 30 ? 2 : 3);
     }
 }

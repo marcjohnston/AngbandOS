@@ -26,7 +26,7 @@ internal class TeleportOtherWandItemFactory : ItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(TeleportMonsterScript), "1d5+6", 18, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(TeleportAwayAll100ProjectileScript), "1d5+6", 18, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

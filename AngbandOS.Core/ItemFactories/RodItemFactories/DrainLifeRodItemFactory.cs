@@ -26,7 +26,7 @@ internal class DrainLifeRodItemFactory : ItemFactory
         (75, 4)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(DrainLifeIdentifiedAndUsedScriptItemAndDirection), "23", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(OldDrainLife75ProjectileScript), "23", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

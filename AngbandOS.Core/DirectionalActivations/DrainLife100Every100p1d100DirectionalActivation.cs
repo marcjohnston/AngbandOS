@@ -19,7 +19,7 @@ internal class DrainLife100Every100p1d100DirectionalActivation : DirectionalActi
 
     protected override string RechargeTimeRollExpression => "1d100+100";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(DrainLife100Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(OldDrainLife100ProjectileScript);
 
     public override int Value => 500;
 

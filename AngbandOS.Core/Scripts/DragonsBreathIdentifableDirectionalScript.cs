@@ -24,7 +24,7 @@ internal class DragonsBreathIdentifableDirectionalScript : Script, IIdentifableD
                 Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 100, -3);
                 break;
             case 1:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 80, -3);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, 80, -3);
                 break;
             case 2:
                 Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 100, -3);
@@ -33,7 +33,7 @@ internal class DragonsBreathIdentifableDirectionalScript : Script, IIdentifableD
                 Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 80, -3);
                 break;
             case 4:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 60, -3);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)), dir, 60, -3);
                 break;
             default:
                 throw new Exception("Internal error.");

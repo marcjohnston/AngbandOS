@@ -26,7 +26,7 @@ internal class DrainLifeWandItemFactory : ItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(DrainLife75IdentifableDirectionalScript), "1d3+3", 60, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(OldDrainLife75ProjectileScript), "1d3+3", 60, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

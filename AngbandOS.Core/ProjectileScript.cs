@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IDirectionalCancellableScriptItem, IIdentifableDirectionalScript
+internal abstract class ProjectileScript : Script, IDirectionalCancellableScriptItem, IIdentifableDirectionalScript, IIdentifiedAndUsedScriptItemDirection, IScript
 {
     public ProjectileScript(Game game) : base(game) { }
 
@@ -79,15 +79,70 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// </summary>
     public abstract bool Hide { get; }
 
+    /// <summary>
+    /// Returns true, if the projectile is automatically identified; false, if the projectile is not identifiable; or null, if the projectile is identified, if and
+    /// only if, the projectile hits and affects a monster, item or grid tile.  Returns true, by default.
+    /// </summary>
+    public virtual bool? Identified => true;
+
+    /// <summary>
+    /// Returns a message to be rendered before the projectile is projected or null, for no message.  Returns null, by default.
+    /// </summary>
+    public virtual string? PreMessage => null;
+
+    /// <summary>
+    /// Projects the projectile and returns true in all cases because there is no user interaction that can result in the player cancelling the script.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="direction"></param>
+    /// <returns></returns>
     public bool ExecuteCancellableScriptItem(Item item, int direction)
     {
         ExecuteIdentifableDirectionalScript(direction);
         return true; // Return true because the script was not cancelled.
     }
+
+    /// <summary>
+    /// Projects the projectile and returns true, if the projectile is identifable by the player; false, otherwise.
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <returns></returns>
     public bool ExecuteIdentifableDirectionalScript(int direction)
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
         int damage = DamageRoll.Get(Game.UseRandom);
-        return Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
+        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
+        return Identified ?? hitSuccess;
+    }
+
+    /// <summary>
+    /// Projects the projectile and returns whether the projectile can be identified and whether the projectile actually used a consumable.
+    /// </summary>
+    /// <returns>
+    /// identified:description: returns true, if the projectile actually hits and affects a monster, which allows the projectile to be identified by the player; false, otherwise.
+    /// used:description: returns true if the projectile uses a charge for rod items
+    /// </returns>
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    {
+        if (PreMessage != null)
+        {
+            Game.MsgPrint(PreMessage);
+        }
+
+        bool identified = ExecuteIdentifableDirectionalScript(dir);
+        return (identified, true);
+    }
+
+    /// <summary>
+    /// Gets a direction from the player and projects the projectile in the specified direction.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        if (!Game.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        ExecuteIdentifableDirectionalScript(dir);
     }
 }

@@ -19,7 +19,7 @@ internal class StinkingCloud12Every1d4p4DirectionalActivation : DirectionalActiv
 
     protected override string RechargeTimeRollExpression => "1d4+4";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(StinkingCloud12Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Poison12r3ProjectileScript);
 
     public override int Value => 300;
 

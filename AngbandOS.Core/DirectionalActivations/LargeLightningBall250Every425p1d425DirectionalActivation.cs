@@ -19,7 +19,7 @@ internal class LargeLightningBall250Every425p1d425DirectionalActivation : Direct
 
     protected override string RechargeTimeRollExpression => "1d425+425";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LargeLightningBall250Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Electricity250r3ProjectileScript);
 
     public override int Value => 2000;
     public override string Name => "Large lightning ball (250)";

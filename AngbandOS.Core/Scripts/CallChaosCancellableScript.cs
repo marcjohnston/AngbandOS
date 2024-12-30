@@ -42,8 +42,8 @@ internal class CallChaosCancellableScript : Script, IScript, ICancellableScript,
         bool lineChaos = false;
         Projectile[] hurtTypes =
         {
-            Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)),
-            Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)),
+            Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)),
+            Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)),
             Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)),
             Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)),
             Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)),

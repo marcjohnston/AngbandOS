@@ -4853,13 +4853,13 @@ public bool IsDead = false;
 
     public bool ConfuseMonster(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: false, hide: false);
     }
 
     public void ConfuseMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(OldConfProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile)), dam);
     }
 
     public bool ControlOneUndead(int dir, int plev)
@@ -5152,7 +5152,7 @@ public bool IsDead = false;
     /// <returns></returns>
     public bool DrainLife(int dir, int dam)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainLifeProjectile));
         return projectile.TargetedFire(dir, dam, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: false, hide: false);
     }
 
@@ -5757,7 +5757,7 @@ public bool IsDead = false;
 
     public bool PolyMonster(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldPolyProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldPolymorphProjectile));
         return projectile.TargetedFire(dir, ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: false, hide: false);
     }
 
@@ -8615,7 +8615,7 @@ public bool IsDead = false;
                     break;
 
                 case MutationAttackTypeEnum.Poison:
-                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
+                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonProjectile));
                     poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill : true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                     break;
 

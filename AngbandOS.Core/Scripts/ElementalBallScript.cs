@@ -30,7 +30,7 @@ internal class ElementalBallScript : Script, IScript
                 break;
 
             case 2:
-                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile));
+                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile));
                 break;
 
             case 3:

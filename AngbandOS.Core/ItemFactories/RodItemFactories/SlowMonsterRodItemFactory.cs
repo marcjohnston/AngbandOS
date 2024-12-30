@@ -26,7 +26,7 @@ internal class SlowMonsterRodItemFactory : ItemFactory
         (30, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(SlowMonsterIdentifiedAndUsedScriptItemAndDirection), "20", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(OldSlow1xProjectileScript), "20", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

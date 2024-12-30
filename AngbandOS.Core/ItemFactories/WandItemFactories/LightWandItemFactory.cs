@@ -26,7 +26,7 @@ internal class LightWandItemFactory : ItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(LineOfLightIdentifableDirectionalScript), "1d10+6", 10, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(LightWeak6d8ProjectileScript), "1d10+6", 10, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

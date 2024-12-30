@@ -1479,7 +1479,7 @@ internal class Monster : IItemContainer
                                     targetRace.Knowledge.Characteristics.LightningAura = true;
                                 }
                             }
-                            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile));
+                            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile));
                             projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
                         }
                     }

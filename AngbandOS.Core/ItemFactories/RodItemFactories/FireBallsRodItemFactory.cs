@@ -26,7 +26,7 @@ internal class FireBallsRodItemFactory : ItemFactory
         (75, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(FireBall72r2IdentifiedAndUsedScriptItemAndDirection), "30", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(Fire72r2ProjectileScript), "30", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

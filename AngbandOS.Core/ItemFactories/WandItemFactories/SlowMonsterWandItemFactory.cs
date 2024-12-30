@@ -27,7 +27,7 @@ internal class SlowMonsterWandItemFactory : ItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(SlowMonsterIdentifableDirectionalScript), "1d10+6", 25, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(OldSlow1xProjectileScript), "1d10+6", 25, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

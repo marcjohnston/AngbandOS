@@ -23,7 +23,7 @@ internal class BreatheLightningFrostAcidPoisonGasOrFire250r2Script : Script, IDi
                 Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 250, -2);
                 break;
             case 1:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 250, -2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), direction, 250, -2);
                 break;
             case 2:
                 Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 250, -2);
@@ -32,7 +32,7 @@ internal class BreatheLightningFrostAcidPoisonGasOrFire250r2Script : Script, IDi
                 Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, 250, -2);
                 break;
             case 4:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), direction, 250, -2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)), direction, 250, -2);
                 break;
         }
         return true;
