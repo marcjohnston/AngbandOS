@@ -26,7 +26,7 @@ internal class AcidBoltWandItemFactory : ItemFactory
         (30, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(AcidBolt3D8R2IdentifableDirectionalScript), "1d8+6", 48, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(Acid3d8BoltOrBeamProjectileScriptGenericWeightedRandom), "1d8+6", 48, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

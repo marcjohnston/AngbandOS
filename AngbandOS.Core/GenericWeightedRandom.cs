@@ -5,13 +5,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Scripts;
 
+/// <summary>
+/// Represents a <see cref="WeightedRandom"/> object that implements the IGetKey interface for configuration objects.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [Serializable]
-internal abstract class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey
+internal abstract class GenericWeightedRandom<T> : WeightedRandom<T>, IGetKey where T : class
 {
-    protected ItemFactoryWeightedRandom(Game game) : base(game) { } 
-    protected abstract (string name, int weight)[] ItemFactoryNamesAndWeights { get; }
+    protected GenericWeightedRandom(Game game) : base(game) { }
+    protected abstract (string name, int weight)[] NameAndWeightBindingTuples { get; }
 
     public virtual string Key => GetType().Name;
 
@@ -19,9 +23,9 @@ internal abstract class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>,
 
     public void Bind()
     {
-        foreach ((string name, int weight) in ItemFactoryNamesAndWeights)
+        foreach ((string name, int weight) in NameAndWeightBindingTuples)
         {
-            Add(weight, Game.SingletonRepository.Get<ItemFactory>(name));
+            Add(weight, Game.SingletonRepository.Get<T>(name));
         }
     }
 

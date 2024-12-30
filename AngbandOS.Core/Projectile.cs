@@ -89,7 +89,7 @@ internal abstract class Projectile : IGetKey
     {
         int i, dist;
         int y1, x1;
-        int msec = Constants.DelayFactorInMilliseconds;
+        int msec = Constants.DelayFactorInMilliseconds; // TODO: This can be per projectile
         GridTile cPtr;
         bool notice = false;
         bool visual = false;
@@ -99,7 +99,7 @@ internal abstract class Projectile : IGetKey
         int grids = 0;
         int[] gx = new int[256];
         int[] gy = new int[256];
-        int[] gm = new int[32];
+        int[] gm = new int[32]; // TODO: Is this the maximum distance of travel?
         int gmRad = rad;
         if (jump)
         {

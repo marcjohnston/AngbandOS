@@ -278,7 +278,7 @@ internal class SingletonRepository
         RegisterRepository<ItemEnhancement>();
         RegisterRepository<ItemEnhancementWeightedRandom>();
         RegisterRepository<ItemFactory>();
-        RegisterRepository<ItemFactoryWeightedRandom>();
+        RegisterRepository<ItemFactoryGenericWeightedRandom>();
         RegisterRepository<ItemFilter>();
         RegisterRepository<ItemFlavor>();
         RegisterRepository<ItemMatch>();
@@ -296,6 +296,7 @@ internal class SingletonRepository
         RegisterRepository<Probability>();
         RegisterRepository<Projectile>();
         RegisterRepository<ProjectileGraphic>();
+        RegisterRepository<ProjectileScript>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();
         RegisterRepository<Realm>();
@@ -452,10 +453,13 @@ internal class SingletonRepository
                     case IGetKey getKeySingleton:
                         string key = getKeySingleton.GetKey;
 
-                        // Add the singleton to the list of singletons so that they can be bound.
-                        _allSingletonsList.Add(getKeySingleton);
+                        // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.
+                        if (!_allSingletonsList.Contains(getKeySingleton))
+                        {
+                            _allSingletonsList.Add(getKeySingleton);
+                        }
 
-                        // If the singleton hasn't been registered, register it now.
+                        // If the singleton hasn't been registered, register it now.  The singleton may belong to many repositories.
                         if (!genericRepository.Dictionary.TryGetValue(key, out _))
                         {
                             genericRepository.Add(key, singleton);

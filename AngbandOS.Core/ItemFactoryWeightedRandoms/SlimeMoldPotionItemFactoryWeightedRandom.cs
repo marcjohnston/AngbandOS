@@ -9,10 +9,10 @@ namespace AngbandOS.Core.ItemFactoryWeightedRandoms;
 
 
 [Serializable]
-internal class SlimeMoldPotionItemFactoryWeightedRandom : ItemFactoryWeightedRandom
+internal class SlimeMoldPotionItemFactoryWeightedRandom : ItemFactoryGenericWeightedRandom
 {
     private SlimeMoldPotionItemFactoryWeightedRandom(Game game) : base(game) { } // This object is a singleton.
-    protected override (string, int)[] ItemFactoryNamesAndWeights => new (string, int)[]
+    protected override (string, int)[] NameAndWeightBindingTuples => new (string, int)[]
     {
         (nameof(WaterPotionItemFactory), 1),
         (nameof(AppleJuicePotionItemFactory), 1),
