@@ -19,7 +19,7 @@ internal class StoneToMudDirectionalActivation : DirectionalActivation
 
     protected override string RechargeTimeRollExpression => "5";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(StoneMudScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(WallToMud1d30p20ProjectileScript);
 
     public override int Value => 1000;
 

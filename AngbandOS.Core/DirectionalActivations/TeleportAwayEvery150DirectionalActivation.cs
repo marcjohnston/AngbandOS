@@ -14,7 +14,7 @@ internal class TeleportAwayEvery150DirectionalActivation : DirectionalActivation
 
     public override string? PreActivationMessage => "Your {0} glows deep red...";
     protected override string RechargeTimeRollExpression => "150";
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(TeleAwayScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(TeleportAwayAll1xProjectileScript);
 
     public override int Value => 5000;
 

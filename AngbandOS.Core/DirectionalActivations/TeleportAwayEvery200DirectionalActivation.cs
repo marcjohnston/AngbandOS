@@ -17,7 +17,7 @@ internal class TeleportAwayEvery200DirectionalActivation : DirectionalActivation
     
     protected override string RechargeTimeRollExpression => "200";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(TeleAwayScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(TeleportAwayAll1xProjectileScript);
 
     public override int Value => 2000;
 

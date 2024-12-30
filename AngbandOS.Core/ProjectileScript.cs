@@ -90,6 +90,8 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// </summary>
     public virtual string? PreMessage => null;
 
+    public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
+
     /// <summary>
     /// Projects the projectile and returns true in all cases because there is no user interaction that can result in the player cancelling the script.
     /// </summary>
@@ -139,10 +141,31 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!Game.GetDirectionWithAim(out int dir))
+        switch (NonDirectionalProjectileMode)
         {
-            return;
+            case NonDirectionalProjectileModeEnum.PlayerSpecified:
+                {
+                    if (!Game.GetDirectionWithAim(out int dir))
+                    {
+                        return;
+                    }
+                    ExecuteIdentifableDirectionalScript(dir);
+                }
+                break;
+            case NonDirectionalProjectileModeEnum.AllDirections:
+                {
+                    foreach (int dir in Game.OrderedDirection)
+                    {
+                        ExecuteIdentifableDirectionalScript(dir);
+                    }
+                }
+                break;
+            //case NonDirectionalProjectileModeEnum.MonstersInLos:
+            //    {
+            //    }
+            //    break;
+            default:
+                throw new Exception("Invalid value for NonDirectionalProjectileMode.");
         }
-        ExecuteIdentifableDirectionalScript(dir);
     }
 }

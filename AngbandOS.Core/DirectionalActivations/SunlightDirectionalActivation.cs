@@ -19,7 +19,7 @@ internal class SunlightDirectionalActivation : DirectionalActivation
 
     protected override string RechargeTimeRollExpression => "10";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(SunlightScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LightWeak0ProjectileScript);
 
     public override int Value => 250;
 

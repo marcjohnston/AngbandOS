@@ -19,7 +19,7 @@ internal class StarBall150Every1000p1d325DirectionalActivation : DirectionalActi
 
     protected override string RechargeTimeRollExpression => "1000";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(StarBall150Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ElectricityAll150r3Script);
 
     public override int Value => 8000;
     public override string Name => "Star ball (150)";
