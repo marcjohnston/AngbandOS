@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Projectiles;
 
 [Serializable]
-internal class PoisonProjectile : Projectile
+internal class PoisonGasProjectile : Projectile
 {
-    private PoisonProjectile(Game game) : base(game) { }
+    private PoisonGasProjectile(Game game) : base(game) { }
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreenBulletProjectileGraphic));
 

@@ -73,7 +73,7 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 46)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)), dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile)), dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3);
         }
         if (die < 51)
         {

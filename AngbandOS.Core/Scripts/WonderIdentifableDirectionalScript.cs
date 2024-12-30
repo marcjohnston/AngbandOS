@@ -92,7 +92,7 @@ internal class WonderIdentifableDirectionalScript : Script, IIdentifableDirectio
                 return Game.SlowMonster(dir);
             case 20:
                 // StinkingCloud
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)), dir, 12, 2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile)), dir, 12, 2);
                 return true;
             case 21:
                 // StoneToMud

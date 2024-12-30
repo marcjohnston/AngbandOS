@@ -8615,7 +8615,7 @@ public bool IsDead = false;
                     break;
 
                 case MutationAttackTypeEnum.Poison:
-                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonProjectile));
+                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
                     poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill : true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                     break;
 

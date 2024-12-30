@@ -43,7 +43,7 @@ internal class CallChaosCancellableScript : Script, IScript, ICancellableScript,
         Projectile[] hurtTypes =
         {
             Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)),
-            Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)),
+            Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile)),
             Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)),
             Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)),
             Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)),

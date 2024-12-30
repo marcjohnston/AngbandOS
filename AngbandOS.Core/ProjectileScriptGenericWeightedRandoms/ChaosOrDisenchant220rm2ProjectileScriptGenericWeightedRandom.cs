@@ -18,3 +18,18 @@ internal class ChaosOrDisenchant220rm2ProjectileScriptGenericWeightedRandom : Pr
         (nameof(Disenchant220rm2ProjectileScript), 1),
     };
 }
+
+[Serializable]
+internal class FireColdElectricityPoisonGasOrAcid220rm2ProjectileScriptGenericWeightedRandom : ProjectileScriptGenericWeightedRandom
+{
+    private FireColdElectricityPoisonGasOrAcid220rm2ProjectileScriptGenericWeightedRandom(Game game) : base(game) { }
+
+    protected override (string, int)[] NameAndWeightBindingTuples => new (string, int)[]
+    {
+        (nameof(Fire250rm2ProjectileScript), 1),
+        (nameof(Cold250rm2ProjectileScript), 1),
+        (nameof(Acid250rm2ProjectileScript), 1),
+        (nameof(Electricity250rm2ProjectileScript), 1),
+        (nameof(PoisonGas250rm2ProjectileScript), 1),
+    };
+}

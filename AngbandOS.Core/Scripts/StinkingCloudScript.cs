@@ -22,6 +22,6 @@ internal class StinkingCloudScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile)), dir, 10 + (Game.ExperienceLevel.IntValue / 2), 2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile)), dir, 10 + (Game.ExperienceLevel.IntValue / 2), 2);
     }
 }

@@ -15,7 +15,7 @@ internal class PoisonBallMonsterSpell : BallProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a stinking cloud at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a stinking cloud.";
-    protected override string ProjectileKey => nameof(PoisonProjectile);
+    protected override string ProjectileKey => nameof(PoisonGasProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

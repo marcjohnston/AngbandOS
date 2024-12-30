@@ -217,7 +217,7 @@ internal class DraconianRace : Race
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisonProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
                         projectileDescription = "poison";
                     }
                     break;
