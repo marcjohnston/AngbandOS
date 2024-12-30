@@ -15,7 +15,7 @@ internal class MagicalArrow150Every1d90p90DirectionalActivation : DirectionalAct
     public override string? PreActivationMessage => "Your {0} grows magical spikes...";
     protected override string RechargeTimeRollExpression => "1d90+90";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(MagicalArrow150Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Arrow150ProjectileScript);
 
     public override int Value => 5000;
 

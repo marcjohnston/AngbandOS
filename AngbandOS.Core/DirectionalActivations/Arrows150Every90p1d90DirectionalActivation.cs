@@ -19,7 +19,7 @@ internal class Arrows150Every90p1d90DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "1d90+90";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Arrows150Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Arrow150ProjectileScript);
 
     public override int Value => 1000;
 

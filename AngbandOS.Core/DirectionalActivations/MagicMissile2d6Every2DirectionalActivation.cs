@@ -19,10 +19,9 @@ internal class MagicMissile2d6Every2DirectionalActivation : DirectionalActivatio
 
     protected override string RechargeTimeRollExpression => "2";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(MagicMissile2d6Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Missile2d6ProjectileScript);
 
-    public override int Value => 250;
+    public override int Value => 5000;
 
     public override string Name => "Magic missile (2d6)";
-
 }

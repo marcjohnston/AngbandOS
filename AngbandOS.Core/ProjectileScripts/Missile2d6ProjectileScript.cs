@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Arrows150Script : ProjectileScript
+internal class Missile2d6ProjectileScript : ProjectileScript
 {
-    private Arrows150Script(Game game) : base(game) { }
+    private Missile2d6ProjectileScript(Game game) : base(game) { }
 
     public override bool Stop => true;
     public override bool Kill => true;
@@ -20,6 +20,6 @@ internal class Arrows150Script : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ArrowProjectile);
-    protected override string DamageRollExpression => "150";
+    protected override string ProjectileBindingKey => nameof(MissileProjectile);
+    protected override string DamageRollExpression => "2d6";
 }
