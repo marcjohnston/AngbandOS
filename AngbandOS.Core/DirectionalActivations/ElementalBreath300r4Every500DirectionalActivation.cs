@@ -21,7 +21,7 @@ internal class ElementalBreath300r4Every500DirectionalActivation : DirectionalAc
 
     protected override string RechargeTimeRollExpression => "500";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ElementalBreath300r4Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Missile300rm4ProjectileScript);
 
     public override int Value => 5000;
 
