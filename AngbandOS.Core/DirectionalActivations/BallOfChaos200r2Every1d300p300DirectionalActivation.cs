@@ -14,11 +14,10 @@ internal class BallOfChaos200r2Every1d300p300DirectionalActivation : Directional
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BallOfChaos200r2Script);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(Chaos1in2OrDisenchant220rm2ProjectileScriptGenericWeightedRandom);
 
     public override int Value => 5000;
 
     public override string Name => "Breathe chaos/disenchant (220)";
-
 }
 
