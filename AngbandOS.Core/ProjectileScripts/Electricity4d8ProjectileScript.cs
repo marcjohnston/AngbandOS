@@ -17,7 +17,7 @@ internal class Electricity4d8ProjectileScript : ProjectileScript
     public override bool Beam => false;
     public override bool Grid => false;
     public override bool Item => false;
-    public override bool Thru => false;
+    public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(ElectricityProjectile);
     protected override string DamageRollExpression => "4d8";

@@ -18,7 +18,7 @@ internal class OldSleep1xProjectileScript : ProjectileScript
     public override bool Beam => false;
     public override bool Grid => false;
     public override bool Item => false;
-    public override bool Thru => false;
+    public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(OldSleepProjectile);
     protected override string DamageRollExpression => "1d1xX";

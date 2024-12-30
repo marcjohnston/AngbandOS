@@ -18,7 +18,7 @@ internal class OldPolymorph1xProjectileScript : ProjectileScript
     public override bool Beam => false;
     public override bool Grid => false;
     public override bool Item => false;
-    public override bool Thru => false;
+    public override bool Thru => true;
     public override bool Hide => false;
     public override bool? Identified => null;
     protected override string ProjectileBindingKey => nameof(OldPolymorphProjectile);

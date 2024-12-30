@@ -23,6 +23,6 @@ internal class DeathRayScript : Script, IScript
             return;
         }
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DeathRayProjectile));
-        projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: false, hide: false);
+        projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 }

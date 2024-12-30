@@ -18,7 +18,7 @@ internal class Poison12r3ProjectileScript : ProjectileScript
     public override bool Beam => false;
     public override bool Grid => true;
     public override bool Item => true;
-    public override bool Thru => false;
+    public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(PoisonProjectile);
     protected override string DamageRollExpression => "12";

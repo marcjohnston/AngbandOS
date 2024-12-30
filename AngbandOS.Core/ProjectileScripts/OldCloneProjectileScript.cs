@@ -18,7 +18,7 @@ internal class OldCloneProjectileScript : ProjectileScript
     public override bool Beam => false;
     public override bool Grid => false;
     public override bool Item => false;
-    public override bool Thru => false;
+    public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(OldCloneProjectile);
     protected override string DamageRollExpression => "0"; // Not used.
