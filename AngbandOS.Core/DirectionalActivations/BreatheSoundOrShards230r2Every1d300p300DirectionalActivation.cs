@@ -14,7 +14,7 @@ internal class BreatheSoundOrShards230r2Every1d300p300DirectionalActivation : Di
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(BreatheSoundOrShards230r2ameScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(SoundOrExplode230rm2ProjectileScriptGenericWeightedRandom);
 
     public override int Value => 5000;
 
