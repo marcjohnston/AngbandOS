@@ -11,9 +11,9 @@ namespace AngbandOS.Core;
 internal abstract class Projectile : IGetKey
 {
     protected readonly Game Game;
-    protected int ProjectMn;
-    protected int ProjectMx;
-    protected int ProjectMy;
+    protected int ProjectMn; // TODO: These need to be removed
+    protected int ProjectMx; // TODO: These need to be removed
+    protected int ProjectMy; // TODO: These need to be removed
 
     public Projectile(Game game)
     {
@@ -648,25 +648,25 @@ internal abstract class Projectile : IGetKey
     {
         if (ny == y && nx == x)
         {
-            return '*';
+            return '*'; // TODO: This can be a property for each projectile
         }
         if (ny == y)
         {
-            return '-';
+            return '-'; // TODO: This can be a property for each projectile
         }
         if (nx == x)
         {
-            return '|';
+            return '|'; // TODO: This can be a property for each projectile
         }
         if (ny - y == x - nx)
         {
-            return '/';
+            return '/'; // TODO: This can be a property for each projectile
         }
         if (ny - y == nx - x)
         {
-            return '\\';
+            return '\\'; // TODO: This can be a property for each projectile
         }
-        return '*';
+        return '*'; // TODO: This can be a property for each projectile
     }
 
     protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note)
