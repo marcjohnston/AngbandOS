@@ -23,7 +23,7 @@ internal class WarningRandomMutation : Mutation
             return;
         }
         int dangerAmount = 0;
-        for (int monster = 0; monster < Game.MMax; monster++)
+        for (int monster = 0; monster < Game.MonsterMax; monster++)
         {
             Monster mPtr = Game.Monsters[monster];
             MonsterRace rPtr = mPtr.Race;

@@ -19,7 +19,7 @@ internal class DetectNormalMonstersScript : Script, IScript, ISuccessByChanceScr
     public bool ExecuteSuccessByChanceScript()
     {
         bool flag = false;
-        for (int i = 1; i < Game.MMax; i++)
+        for (int i = 1; i < Game.MonsterMax; i++)
         {
             Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;

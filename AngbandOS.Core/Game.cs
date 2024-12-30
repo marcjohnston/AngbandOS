@@ -1010,7 +1010,7 @@ public bool IsDead = false;
     public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
 
     /// <summary>
-    /// Returns all of the directions in a sequence.  This is used for items like a star ball where the projectiles are launched in every direction in a specific sequence.
+    /// Returns all of the directions in a sequence.  This is used for for the StarBall and StarLight projectiles where the projectiles are launched in every direction in a specific sequence.
     /// </summary>
     public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7 }; // The final direction [8] and a non-directional value of 5 has been removed because it is not used.
 
@@ -1034,7 +1034,7 @@ public bool IsDead = false;
     public int MaxPanelCols;
     public int MaxPanelRows;
     public int MCnt;
-    public int MMax = 1;
+    public int MonsterMax = 1; // This is the current number of monsters.  Monster[0] is the player.
     public int MonsterLevel;
     public int ObjectLevel; // TODO: This is set by by rooms, monsters and chests to control the levels of items created temporarily.
 
@@ -3805,7 +3805,7 @@ public bool IsDead = false;
             {
                 CompactMonsters(64);
             }
-            if (MCnt + 32 < MMax)
+            if (MCnt + 32 < MonsterMax)
             {
                 CompactMonsters(0);
             }
@@ -4114,7 +4114,7 @@ public bool IsDead = false;
                 if (ShimmerMonsters)
                 {
                     ShimmerMonsters = false;
-                    for (i = 1; i < MMax; i++)
+                    for (i = 1; i < MonsterMax; i++)
                     {
                         Monster mPtr = Monsters[i];
                         if (mPtr.Race == null)
@@ -4133,7 +4133,7 @@ public bool IsDead = false;
                 if (RepairMonsters)
                 {
                     RepairMonsters = false;
-                    for (i = 1; i < MMax; i++)
+                    for (i = 1; i < MonsterMax; i++)
                     {
                         Monster mPtr = Monsters[i];
                         if (mPtr.Race == null)
@@ -4555,7 +4555,7 @@ public bool IsDead = false;
 
     private void RegenMonsters()
     {
-        for (int i = 1; i < MMax; i++)
+        for (int i = 1; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
@@ -4708,7 +4708,7 @@ public bool IsDead = false;
     {
         bool sleep = false;
         bool speed = false;
-        for (int i = 0; i < MMax; i++)
+        for (int i = 0; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
@@ -4981,7 +4981,7 @@ public bool IsDead = false;
     public bool DetectMonstersInvis()
     {
         bool flag = false;
-        for (int i = 1; i < MMax; i++)
+        for (int i = 1; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
@@ -5800,7 +5800,7 @@ public bool IsDead = false;
     public void Probing()
     {
         bool probe = false;
-        for (int i = 1; i < MMax; i++)
+        for (int i = 1; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
             if (mPtr.Race == null)
@@ -6219,7 +6219,7 @@ public bool IsDead = false;
     public bool DetectMonstersString(string match)
     {
         bool flag = false;
-        for (int i = 1; i < MMax; i++)
+        for (int i = 1; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
@@ -6308,7 +6308,7 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Fires a projectile at everything in the players line-of-sight and returns true, if the projectile actually hits a monster; false, otherwise.
+    /// Fires a projectile at all monsters in the players line-of-sight and returns true, if the projectile actually hits a monster; false, otherwise.
     /// </summary>
     /// <param name="projectile"></param>
     /// <param name="dam"></param>
@@ -6316,10 +6316,10 @@ public bool IsDead = false;
     public bool ProjectAtAllInLos(Projectile projectile, int dam)
     {
         bool obvious = false;
-        for (int i = 1; i < MMax; i++)
+        for (int i = 1; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
-            if (mPtr.Race == null)
+            if (mPtr.Race == null) // TODO: This should never be.
             {
                 continue;
             }
@@ -8756,7 +8756,7 @@ public bool IsDead = false;
         // The noise the player is making is based on their stealth score
         uint noise = 1u << (30 - SkillStealth);
         // Go through all the monster slots on the level
-        for (int i = MMax - 1; i >= 1; i--)
+        for (int i = MonsterMax - 1; i >= 1; i--)
         {
             Monster monster = Monsters[i];
             // If the monster slot is empty, skip it
@@ -10682,7 +10682,7 @@ public bool IsDead = false;
                 TreasureFeeling = 0;
                 DangerFeeling = 0;
             }
-            if (MMax >= Constants.MaxMIdx)
+            if (MonsterMax >= Constants.MaxMIdx)
             {
                 okay = false;
             }
@@ -12565,7 +12565,7 @@ public bool IsDead = false;
         {
             if (RandomLessThan(100) < 75)
             {
-                dir = OrderedDirection[RandomLessThan(8)];
+                dir = OrderedDirection[RandomLessThan(8)]; // Choose a random direction
             }
         }
         if (CommandDirection != dir)
@@ -12628,7 +12628,7 @@ public bool IsDead = false;
         CommandDirection = dir;
         if (ConfusedTimer.Value != 0)
         {
-            dir = OrderedDirection[RandomLessThan(8)];
+            dir = OrderedDirection[RandomLessThan(8)]; // Choose a random direction.
         }
         if (CommandDirection != dir)
         {
@@ -16100,7 +16100,7 @@ public bool IsDead = false;
         {
             int curLev = 5 * cnt;
             int curDis = 5 * (20 - cnt);
-            for (i = 1; i < MMax; i++)
+            for (i = 1; i < MonsterMax; i++)
             {
                 Monster mPtr = Monsters[i];
                 MonsterRace rPtr = mPtr.Race;
@@ -16133,15 +16133,15 @@ public bool IsDead = false;
                 num++;
             }
         }
-        for (i = MMax - 1; i >= 1; i--)
+        for (i = MonsterMax - 1; i >= 1; i--)
         {
             Monster mPtr = Monsters[i];
             if (mPtr.Race != null)
             {
                 continue;
             }
-            CompactMonstersAux(MMax - 1, i);
-            MMax--;
+            CompactMonstersAux(MonsterMax - 1, i);
+            MonsterMax--;
         }
     }
 
@@ -17026,7 +17026,7 @@ public bool IsDead = false;
 
     public void WipeMList()
     {
-        for (int i = MMax - 1; i >= 1; i--)
+        for (int i = MonsterMax - 1; i >= 1; i--)
         {
             Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
@@ -17038,7 +17038,7 @@ public bool IsDead = false;
             Map.Grid[mPtr.MapY][mPtr.MapX].MonsterIndex = 0;
             Monsters[i] = new Monster(this);
         }
-        MMax = 1;
+        MonsterMax = 1;
         MCnt = 0;
         NumRepro = 0;
         TargetWho = null;
@@ -17073,14 +17073,14 @@ public bool IsDead = false;
     private int MPop()
     {
         int i;
-        if (MMax < Constants.MaxMIdx)
+        if (MonsterMax < Constants.MaxMIdx)
         {
-            i = MMax;
-            MMax++;
+            i = MonsterMax;
+            MonsterMax++;
             MCnt++;
             return i;
         }
-        for (i = 1; i < MMax; i++)
+        for (i = 1; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
             if (mPtr.Race != null)

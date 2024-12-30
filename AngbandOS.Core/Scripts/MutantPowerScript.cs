@@ -50,7 +50,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
             Game.EnergyUse = 0;
             return;
         }
-        for (petCtr = Game.MMax - 1; petCtr >= 1; petCtr--)
+        for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
         {
             monster = Game.Monsters[petCtr];
             if (monster.SmFriendly)
@@ -154,7 +154,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
             {
                 allPets = true;
             }
-            for (petCtr = Game.MMax - 1; petCtr >= 1; petCtr--)
+            for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
             {
                 monster = Game.Monsters[petCtr];
                 if (monster.SmFriendly)

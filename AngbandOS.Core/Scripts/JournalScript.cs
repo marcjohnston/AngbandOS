@@ -766,7 +766,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     {
         List<string> petNames = new List<string>();
         int pets = 0;
-        for (int petCtr = Game.MMax - 1; petCtr >= 1; petCtr--)
+        for (int petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
         {
             Monster mPtr = Game.Monsters[petCtr];
             if (!mPtr.SmFriendly)

@@ -13,7 +13,7 @@ internal class UpdateMonstersFlaggedAction : FlaggedAction
     private UpdateMonstersFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        for (int i = 1; i < Game.MMax; i++)
+        for (int i = 1; i < Game.MonsterMax; i++)
         {
             Monster mPtr = Game.Monsters[i];
             if (mPtr.Race == null)

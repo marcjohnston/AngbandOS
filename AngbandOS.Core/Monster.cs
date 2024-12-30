@@ -1732,7 +1732,7 @@ internal class Monster : IItemContainer
         MonsterSpellList monsterSpells = Race.Spells;
 
         // Look through the monster list to find a potential target
-        for (int i = 1; i < Game.MMax; i++)
+        for (int i = 1; i < Game.MonsterMax; i++)
         {
             int targetIndex = i;
             Monster target = Game.Monsters[targetIndex];

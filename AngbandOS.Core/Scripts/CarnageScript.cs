@@ -18,7 +18,7 @@ internal class CarnageScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        for (int i = 1; i < Game.MMax; i++)
+        for (int i = 1; i < Game.MonsterMax; i++)
         {
             Monster mPtr = Game.Monsters[i];
             if (mPtr.Race == null)
