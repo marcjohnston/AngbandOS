@@ -19,7 +19,7 @@ internal class EnslaveUndead1xEvery333DirectionalActivation : DirectionalActivat
 
     protected override string RechargeTimeRollExpression => "333";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(EnslaveUndead1xScript);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(ControlUndead1xProjectileScript);
 
     public override int Value => 10000;
 
