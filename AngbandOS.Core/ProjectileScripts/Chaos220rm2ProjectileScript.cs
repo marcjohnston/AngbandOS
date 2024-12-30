@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Xml.Linq;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -23,4 +25,6 @@ internal class Chaos220rm2ProjectileScript : ProjectileScript
     protected override string ProjectileBindingKey => nameof(ChaosProjectile);
     protected override string DamageRollExpression => "220";
     protected override string RadiusRollExpression => "-2";
+    public override string? PreMessage => "You breathe chaos.";
+;
 }

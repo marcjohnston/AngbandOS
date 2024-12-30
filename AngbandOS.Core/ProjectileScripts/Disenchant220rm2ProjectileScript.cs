@@ -23,4 +23,5 @@ internal class Disenchant220rm2ProjectileScript : ProjectileScript
     protected override string ProjectileBindingKey => nameof(DisenchantProjectile);
     protected override string DamageRollExpression => "220";
     protected override string RadiusRollExpression => "-2";
+    public override string? PreMessage => "You breathe disenchantment.";
 }
