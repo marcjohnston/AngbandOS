@@ -6060,7 +6060,7 @@ public bool IsDead = false;
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DarkWeakProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DarknessWeakProjectile));
         projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;

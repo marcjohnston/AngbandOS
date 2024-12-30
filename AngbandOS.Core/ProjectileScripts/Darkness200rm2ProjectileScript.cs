@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Chaos220rm2ProjectileScript : ProjectileScript
+internal class Darkness200rm2ProjectileScript : ProjectileScript
 {
-    private Chaos220rm2ProjectileScript(Game game) : base(game) { }
+    private Darkness200rm2ProjectileScript(Game game) : base(game) { }
 
     public override bool Stop => true;
     public override bool Kill => true;
@@ -20,8 +20,8 @@ internal class Chaos220rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ChaosProjectile);
-    protected override string DamageRollExpression => "220";
+    protected override string ProjectileBindingKey => nameof(DarknessProjectile);
+    protected override string DamageRollExpression => "200";
     protected override string RadiusRollExpression => "-2";
-    public override string? PreMessage => "You breathe chaos.";
+    public override string? PreMessage => "You breathe darkness.";
 }

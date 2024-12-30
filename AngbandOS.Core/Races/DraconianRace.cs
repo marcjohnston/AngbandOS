@@ -212,7 +212,7 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.Rogue:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DarknessProjectile));
                         projectileDescription = "darkness";
                     }
                     else

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Projectiles;
 
 [Serializable]
-internal class DarkWeakProjectile : Projectile
+internal class DarknessWeakProjectile : Projectile
 {
-    private DarkWeakProjectile(Game game) : base(game) { }
+    private DarknessWeakProjectile(Game game) : base(game) { }
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreyBoltProjectileGraphic));
 
