@@ -14,10 +14,7 @@ internal class HasteMonstersScript : Script, IIdentifiedAndUsedScript
 
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (Game.HasteMonsters())
-        {
-            return (true, true);
-        }
-        return (false, true);
+        bool identified = Game.HasteMonsters();
+        return (identified, true);
     }
 }
