@@ -74,7 +74,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
             int playerY = Game.MapY.IntValue;
             int summonLevel = SummonLevel.HasValue ? SummonLevel.Value : monster.Race.Level >= 1 ? monster.Race.Level : 1;
 
-            if (Game.SummonSpecific(playerY, playerX, summonLevel, MonsterSelector?.GetMonsterFilter(monster.Race)))
+            if (Game.SummonSpecific(playerY, playerX, summonLevel, MonsterSelector?.GetMonsterFilter(monster.Race), true, false))
             {
                 count++;
             }
@@ -103,7 +103,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
             int summonLevel = SummonLevel.HasValue ? SummonLevel.Value : monster.Race.Level >= 1 ? monster.Race.Level : 1;
             if (friendly)
             {
-                if (Game.SummonSpecificFriendly(target.MapY, target.MapX, summonLevel, monsterFilter, true))
+                if (Game.SummonSpecific(target.MapY, target.MapX, summonLevel, monsterFilter, true, true))
                 {
                     count++;
                 }
@@ -113,7 +113,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
                 int playerX = Game.MapX.IntValue;
                 int playerY = Game.MapY.IntValue;
 
-                if (Game.SummonSpecific(playerY, playerX, summonLevel, MonsterSelector?.GetMonsterFilter(monster.Race)))
+                if (Game.SummonSpecific(playerY, playerX, summonLevel, MonsterSelector?.GetMonsterFilter(monster.Race), true, false))
                 {
                     count++;
                 }

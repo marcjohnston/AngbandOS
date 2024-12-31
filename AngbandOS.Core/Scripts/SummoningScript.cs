@@ -16,7 +16,7 @@ internal class SummoningScript : Script, IIdentifiedAndUsedScript
     {
         for (int k = 0; k < Game.DieRoll(4); k++)
         {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null, true, false))
             {
                 return (true, true);
             }

@@ -21,12 +21,12 @@ internal class SummonReptileScript : Script, IScript
         Game.MsgPrint("You concentrate on the image of a reptile...");
         if (Game.DieRoll(5) > 2)
         {
-            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter)), true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter)), true, true))
             {
                 Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter))))
+        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter)), true, false))
         {
             Game.MsgPrint("The summoned reptile gets angry!");
         }

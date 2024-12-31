@@ -27,7 +27,7 @@ internal class SummonRuneScript : Script, IScript
         int num = 2 + Game.DieRoll(3);
         for (int i = 0; i < num; i++)
         {
-            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null);
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null, true, false);
         }
         // Have a chance of also cursing the player
         if (Game.Difficulty > Game.DieRoll(100))

@@ -24,7 +24,7 @@ internal class SummonFriendlyAnimalScript : Script, IScript, IUsedScriptItem
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(AnimalRangerMonsterFilter)), true))
+        if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(AnimalRangerMonsterFilter)), true, true))
         {
             Game.MsgPrint("No-one ever turns up.");
         }

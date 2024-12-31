@@ -23,7 +23,7 @@ internal class SummonChestTrap : ChestTrap
             }
             else
             {
-                Game.SummonSpecific(eventArgs.Y, eventArgs.X, Game.Difficulty, null);
+                Game.SummonSpecific(eventArgs.Y, eventArgs.X, Game.Difficulty, null, true, false);
             }
         }
     }

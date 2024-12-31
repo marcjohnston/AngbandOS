@@ -21,12 +21,12 @@ internal class SummonAncientDragonScript : Script, IScript
         Game.MsgPrint("You concentrate on the image of an ancient dragon...");
         if (Game.DieRoll(10) > 3)
         {
-            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonNoUniquesMonsterFilter)), true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonNoUniquesMonsterFilter)), true, true))
             {
                 Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonNoUniquesMonsterFilter))))
+        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonNoUniquesMonsterFilter)), true, false))
         {
             Game.MsgPrint("The summoned dragon gets angry!");
         }

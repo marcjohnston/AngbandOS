@@ -26,7 +26,7 @@ internal class SummonSpecificMonsterScript : Script, IScript
 
         for (int i = 0; i < num; i++)
         {
-            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null);
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null, true, false);
         }
     }
 }

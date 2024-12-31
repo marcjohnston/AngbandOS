@@ -112,7 +112,7 @@ internal class WildChaoticMagicScript : Script, IScriptSpell
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector());
+                    Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector(), true, false);
                 }
                 break;
 

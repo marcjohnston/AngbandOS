@@ -17,7 +17,7 @@ internal class SummonMReward : Reward
         Game.MsgPrint("'My pets, destroy the arrogant mortal!'");
         for (int dummy = 0; dummy < Game.DieRoll(5) + 1; dummy++)
         {
-            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null);
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null, true, false);
         }
     }
 }

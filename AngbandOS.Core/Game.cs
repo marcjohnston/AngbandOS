@@ -2531,7 +2531,7 @@ public bool IsDead = false;
                 case 8:
                 case 9:
                 case 18:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, null);
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, null, true, false);
                     break;
 
                 case 10:
@@ -4193,7 +4193,7 @@ public bool IsDead = false;
         if (IsHalloween)
         {
             MsgPrint("All Hallows Eve and the ghouls come out to play...");
-            SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)));
+            SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), true, false);
         }
         if (CurrentDepth <= 0)
         {
@@ -4640,70 +4640,70 @@ public bool IsDead = false;
             {
                 case 1:
                 case 2:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(AntMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(AntMonsterFilter)), true, false);
                     break;
 
                 case 3:
                 case 4:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(SpiderMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(SpiderMonsterFilter)), true, false);
                     break;
 
                 case 5:
                 case 6:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HoundMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HoundMonsterFilter)), true, false);
                     break;
 
                 case 7:
                 case 8:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter)), true, false);
                     break;
 
                 case 9:
                 case 10:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter)), true, false);
                     break;
 
                 case 11:
                 case 12:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), true, false);
                     break;
 
                 case 13:
                 case 14:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(DragonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(DragonMonsterFilter)), true, false);
                     break;
 
                 case 15:
                 case 16:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)), true, false);
                     break;
 
                 case 17:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(GooMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(GooMonsterFilter)), true, false);
                     break;
 
                 case 18:
                 case 19:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UniqueMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UniqueMonsterFilter)), true, false);
                     break;
 
                 case 20:
                 case 21:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadMonsterFilter)), true, false);
                     break;
 
                 case 22:
                 case 23:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HiDragonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HiDragonMonsterFilter)), true, false);
                     break;
 
                 case 24:
                 case 25:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)), true, false);
                     break;
 
                 default:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, (Difficulty * 3 / 2) + 5, null);
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, (Difficulty * 3 / 2) + 5, null, true, false);
                     break;
             }
         }
@@ -5861,7 +5861,7 @@ public bool IsDead = false;
         int maxReaver = (Difficulty / 50) + DieRoll(6);
         for (int i = 0; i < maxReaver; i++)
         {
-            SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)));
+            SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)), true, false);
         }
     }
 
@@ -15933,7 +15933,7 @@ public bool IsDead = false;
         Monster mPtr = Monsters[_hackMIdxIi];
         for (attempts = DieRoll(10) + 5; attempts != 0; attempts--)
         {
-            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinSystemMonsterFilter(this, rPtr.Symbol.Character));
+            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinSystemMonsterFilter(this, rPtr.Symbol.Character), true, false);
         }
         return true;
     }
@@ -15971,7 +15971,7 @@ public bool IsDead = false;
         {
             if (DunBias != null && RandomBetween(1, 10) > 6)
             {
-                if (SummonSpecific(y, x, Difficulty, DunBias))
+                if (SummonSpecific(y, x, Difficulty, DunBias, true, false))
                 {
                 }
             }
@@ -16647,12 +16647,12 @@ public bool IsDead = false;
         }
     }
 
-    public bool SummonSpecific(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk = true)
+    public bool SummonSpecific(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk, bool friendly)
     {
         int i;
         int x = x1;
         int y = y1;
-        for (i = 0; i < 20; ++i)
+        for (i = 0; i < 20; ++i) // TODO: This is a hard coded value
         {
             int d = (i / 15) + 1;
             (y, x) = Scatter(y1, x1, d);
@@ -16677,46 +16677,6 @@ public bool IsDead = false;
         }
         MonsterRace race = SingletonRepository.Get<MonsterRace>(rIdx);
         if (!PlaceMonsterAux(y, x, race, false, groupOk, false))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public bool SummonSpecificFriendly(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
-    {
-        int i;
-        int x = 0;
-        int y = 0;
-        for (i = 0; i < 20; ++i)
-        {
-            int d = (i / 15) + 1;
-            (y, x) = Scatter(y1, x1, d);
-            if (!GridPassableNoCreature(y, x))
-            {
-                continue;
-            }
-            if (Map.Grid[y][x].FeatureType is ElderSignSigilTile)
-            {
-                continue;
-            }
-            if (Map.Grid[y][x].FeatureType is YellowSignSigilTile)
-            {
-                continue;
-            }
-            break;
-        }
-        if (i == 20)
-        {
-            return false;
-        }
-        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterFilter);
-        if (rIdx == 0)
-        {
-            return false;
-        }
-        MonsterRace race = SingletonRepository.Get<MonsterRace>(rIdx);
-        if (!PlaceMonsterAux(y, x, race, false, groupOk, true))
         {
             return false;
         }

@@ -21,7 +21,7 @@ internal class SummonUndeadIdentifableAndUsedScript : Script, IIdentifiedAndUsed
         bool identified = false;
         for (int i = 0; i < Game.DieRoll(3); i++)
         {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), true, false))
             {
                 identified = true;
             }

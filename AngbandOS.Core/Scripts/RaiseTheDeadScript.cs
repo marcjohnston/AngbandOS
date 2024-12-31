@@ -20,7 +20,7 @@ internal class RaiseTheDeadScript : Script, IScript
     {
         if (Game.DieRoll(3) == 1)
         {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, Game.ExperienceLevel.IntValue > 47 ? Game.SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadMonsterFilter)) : Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, Game.ExperienceLevel.IntValue > 47 ? Game.SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadMonsterFilter)) : Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), true, false))
             {
                 Game.MsgPrint("Cold winds begin to swirl around you, carrying with them the stench of decay...");
                 Game.MsgPrint("'The dead arise... to punish you for disturbing them!'");
@@ -32,7 +32,7 @@ internal class RaiseTheDeadScript : Script, IScript
         }
         else
         {
-            if (Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, Game.ExperienceLevel.IntValue > 47 ? Game.SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadNoUniquesMonsterFilter)) : Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), Game.ExperienceLevel.IntValue > 24 && Game.DieRoll(3) == 1))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, Game.ExperienceLevel.IntValue > 47 ? Game.SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadNoUniquesMonsterFilter)) : Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), Game.ExperienceLevel.IntValue > 24 && Game.DieRoll(3) == 1, true))
             {
                 Game.MsgPrint("Cold winds begin to swirl around you, carrying with them the stench of decay...");
                 Game.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");

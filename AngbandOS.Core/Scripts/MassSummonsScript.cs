@@ -24,12 +24,12 @@ internal class MassSummonsScript : Script, IScript
         {
             if (Game.DieRoll(10) > 3)
             {
-                if (Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter)), false))
+                if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter)), false, true))
                 {
                     noneCame = false;
                 }
             }
-            else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, null))
+            else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, null, true, false))
             {
                 Game.MsgPrint("A summoned creature gets angry!");
                 noneCame = false;

@@ -21,7 +21,7 @@ internal class SummonMonsterIdentifableAndUsedScript : Script, IIdentifiedAndUse
         bool identified = false;
         for (int i = 0; i < Game.DieRoll(3); i++)
         {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null, true, false))
             {
                 identified = true;
             }

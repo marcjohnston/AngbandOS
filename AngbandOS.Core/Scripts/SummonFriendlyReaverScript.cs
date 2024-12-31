@@ -14,7 +14,7 @@ internal class SummonFriendlyReaverScript : Script, IUsedScriptItem
 
     public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
-        Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)), true);
+        Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)), true, true);
         return true;
     }
 }
