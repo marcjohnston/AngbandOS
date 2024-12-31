@@ -22,6 +22,6 @@ internal class StoneToMudScript : Script, IScript
         {
             return;
         }
-        Game.WallToMud(dir);
+        Game.RunIdentifiedScriptDirection(nameof(WallToMud1d30p20ProjectileScript), dir);
     }
 }

@@ -133,8 +133,8 @@ internal class SpellOfWonderScript : Script, IScript
         else
         {
             Game.RunScript(nameof(DispelAllAtLos150ProjectileScript));
-            Game.RunScript(nameof(SlowMonstersScript));
-            Game.RunScript(nameof(SleepMonstersScript));
+            Game.RunScript(nameof(OldSlowAtLos1xProjectileScript));
+            Game.RunScript(nameof(OldSleepAtLos1xProjectileScript));
             Game.RestoreHealth(300);
         }
     }

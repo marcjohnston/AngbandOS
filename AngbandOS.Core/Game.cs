@@ -6006,7 +6006,7 @@ public bool IsDead = false;
             {
                 dir = DieRoll(9);
             } while (dir == 5 || dir == 0);
-            WallToMud(dir);
+            RunIdentifiedScriptDirection(nameof(WallToMud1d30p20ProjectileScript), dir);
         }
         else if (DieRoll(100) > 30)
         {
@@ -6018,16 +6018,10 @@ public bool IsDead = false;
             {
                 if (dir != 5)
                 {
-                    WallToMud(dir);
+                    RunIdentifiedScriptDirection(nameof(WallToMud1d30p20ProjectileScript), dir);
                 }
             }
         }
-    }
-
-    public bool WallToMud(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(WallToMudProjectile));
-        return projectile.TargetedFire(dir, 20 + DieRoll(30), 0, grid: true, item: true, kill: true, beam: true, jump: false, stop: false, thru: true, hide: false);
     }
 
     public bool WizardLock(int dir)

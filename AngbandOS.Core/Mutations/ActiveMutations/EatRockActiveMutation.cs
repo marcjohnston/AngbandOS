@@ -57,7 +57,7 @@ internal class EatRockActiveMutation : Mutation
             Game.MsgPrint("This granite is very filling!");
             Game.SetFood(Game.Food.IntValue + 10000);
         }
-        Game.WallToMud(dir);
+        Game.RunIdentifiedScriptDirection(nameof(WallToMud1d30p20ProjectileScript), dir);
         int oy = Game.MapY.IntValue;
         int ox = Game.MapX.IntValue;
         Game.MapY.IntValue = y;

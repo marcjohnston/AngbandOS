@@ -74,7 +74,7 @@ internal class HalfGiantRace : Race
             if (Game.GetDirectionWithAim(out int direction))
             {
                 Game.MsgPrint("You bash at a stone wall.");
-                Game.WallToMud(direction);
+                Game.RunIdentifiedScriptDirection(nameof(WallToMud1d30p20ProjectileScript), direction);
             }
         }
     }

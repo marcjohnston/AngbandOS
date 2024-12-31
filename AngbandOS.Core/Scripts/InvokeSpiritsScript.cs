@@ -136,8 +136,8 @@ internal class InvokeSpiritsScript : Script, IScript
             Game.RunScript(nameof(DispelAllAtLos120ProjectileScript));
         }
         Game.RunScript(nameof(DispelAllAtLos150ProjectileScript));
-        Game.RunScript(nameof(SlowMonstersScript));
-        Game.RunScript(nameof(SleepMonstersScript));
+        Game.RunScript(nameof(OldSlowAtLos1xProjectileScript));
+        Game.RunScript(nameof(OldSleepAtLos1xProjectileScript));
         Game.RestoreHealth(300);
         if (die < 31)
         {

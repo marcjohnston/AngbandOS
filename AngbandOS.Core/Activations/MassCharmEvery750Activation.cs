@@ -17,7 +17,7 @@ internal class MassCharmEvery750Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(MassCharmScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(CharmAtLos2xProjectileScript);
 
     protected override string RechargeTimeRollExpression => "750";
 

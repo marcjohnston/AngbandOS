@@ -26,7 +26,7 @@ internal class SlowMonstersStaffItemFactory : ItemFactory
         (10, 1)
     };
     public override int Weight => 50;
-    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SlowMonstersScript), "1d5+6", 40, 100);
+    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(OldSlowAtLos1xProjectileScript), "1d5+6", 40, 100);
     protected override string ItemClassBindingKey => nameof(StaffsItemClass);
     protected override string? RechargeScriptBindingKey => nameof(RechargeStaffScript);
 

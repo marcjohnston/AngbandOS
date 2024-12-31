@@ -83,7 +83,7 @@ internal class SpriteRace : Race
             }
             else
             {
-                Game.RunScript(nameof(SleepMonstersScript));
+                Game.RunScript(nameof(OldSleepAtLos1xProjectileScript));
             }
         }
     }
