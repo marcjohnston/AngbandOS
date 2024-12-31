@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript
+internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript, IUsedScriptItem
 {
     public ProjectileScript(Game game) : base(game) { }
 
@@ -90,8 +90,14 @@ internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IId
     /// </summary>
     public virtual string? PreMessage => null;
 
+    /// <summary>
+    /// Returns a message to be rendered after the projectile is projected or null, for no message.  Returns null, by default.
+    /// </summary>
+    public virtual string? PostMessage => null;
+
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
 
+    #region Interface Implementations
     /// <summary>
     /// Projects the projectile in a given direction and returns true in all cases because there is no user interaction that can result in the player cancelling the script.  The <paramref name="item"/>
     /// parameter is ignored.
@@ -101,8 +107,11 @@ internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IId
     /// <returns></returns>
     public bool ExecuteUsedScriptItemDirection(Item item, int direction)
     {
-        ExecuteIdentifiedScriptDirection(direction);
-        return true; // Return true because the script was not cancelled.
+        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
+        {
+            ExecuteTargeted(direction);
+            return true; // Return true because the script was not cancelled.
+        });
     }
 
     /// <summary>
@@ -112,10 +121,10 @@ internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IId
     /// <returns>True, if the projectile can be identified by the player; false, otherwise.</returns>
     public bool ExecuteIdentifiedScriptDirection(int direction)
     {
-        int radius = RadiusRoll.Get(Game.UseRandom);
-        int damage = DamageRoll.Get(Game.UseRandom);
-        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
-        return Identified ?? hitSuccess;
+        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
+        {
+            return ExecuteTargeted(direction);
+        });
     }
 
     /// <summary>
@@ -127,19 +136,75 @@ internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IId
     /// </returns>
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int direction)
     {
-        if (PreMessage != null)
+        return ExecuteScriptWithPreAndPostMessages<(bool, bool)>(() =>
         {
-            Game.MsgPrint(PreMessage);
-        }
-
-        bool identified = ExecuteIdentifiedScriptDirection(direction);
-        return (identified, true);
+            bool identified = ExecuteTargeted(direction);
+            return (identified, true);
+        });
     }
 
     /// <summary>
     /// Projects the projectile in a direction specified by the <see cref="NonDirectionalProjectileMode"/> property.
     /// </summary>
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    {
+        return ExecuteScriptWithPreAndPostMessages<(bool, bool)>(() =>
+        {
+            return ExecuteNonDirectional();
+        });
+    }
+
+    public void ExecuteScript()
+    {
+        ExecuteScriptWithPreAndPostMessages(() =>
+        {
+            ExecuteNonDirectional();
+        });
+    }
+
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    {
+        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
+        {
+            (bool identified, bool used) = ExecuteNonDirectional();
+            return used;
+        });
+    }
+    #endregion
+
+    #region Privates - Implement the functionality.
+    private void RenderPreMessage()
+    {
+        if (PreMessage != null)
+        {
+            Game.MsgPrint(PreMessage);
+        }
+    }
+
+    private void RenderPostMessage()
+    {
+        if (PostMessage != null)
+        {
+            Game.MsgPrint(PostMessage);
+        }
+    }
+
+    private T ExecuteScriptWithPreAndPostMessages<T>(Func<T> action)
+    {
+        RenderPreMessage();
+        T result = action();
+        RenderPostMessage();
+        return result;
+    }
+
+    private void ExecuteScriptWithPreAndPostMessages(Action action)
+    {
+        RenderPreMessage();
+        action();
+        RenderPostMessage();
+    }
+
+    private (bool identified, bool used) ExecuteNonDirectional()
     {
         switch (NonDirectionalProjectileMode)
         {
@@ -195,8 +260,13 @@ internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IId
                 throw new Exception("Invalid value for NonDirectionalProjectileMode.");
         }
     }
-    public void ExecuteScript()
+
+    private bool ExecuteTargeted(int direction)
     {
-        ExecuteIdentifiedAndUsedScript();
+        int radius = RadiusRoll.Get(Game.UseRandom);
+        int damage = DamageRoll.Get(Game.UseRandom);
+        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
+        return Identified ?? hitSuccess;
     }
+    #endregion
 }

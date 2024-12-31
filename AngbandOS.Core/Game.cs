@@ -4808,11 +4808,6 @@ public bool IsDead = false;
         }
     }
 
-    public bool BanishEvil(int dist)
-    {
-        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(TeleportAwayEvilProjectile)), dist);
-    }
-
     public bool CharmAnimal(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile));

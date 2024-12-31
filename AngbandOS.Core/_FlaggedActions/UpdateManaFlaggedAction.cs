@@ -20,7 +20,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
     private UpdateManaFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {       
-        if (Game.UsesMana)
+        if (!Game.UsesMana)
         {
             return;
         }
