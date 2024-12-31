@@ -223,7 +223,7 @@ internal class SingletonRepository
         RegisterRepository<ICastScript>();
         RegisterRepository<IChangeTracker>();
         RegisterRepository<IDateAndTimeValue>();
-        RegisterRepository<IDirectionalCancellableScriptItem>();
+        RegisterRepository<IUsedScriptItemDirection>();
         RegisterRepository<IEnhancementScript>();
         RegisterRepository<IIdentifiedAndUsedScript>();
         RegisterRepository<IIdentifiedScriptDirection>();

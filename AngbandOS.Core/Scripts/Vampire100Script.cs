@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Vampire100Script : Script, IDirectionalCancellableScriptItem
+internal class Vampire100Script : Script, IUsedScriptItemDirection
 {
     private Vampire100Script(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
+    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
     {
         for (int i = 0; i < 3; i++)
         {

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BallOfFire50r2AndResistFire1d20p20Script : Script, IDirectionalCancellableScriptItem
+internal class BallOfFire50r2AndResistFire1d20p20Script : Script, IUsedScriptItemDirection
 {
     private BallOfFire50r2AndResistFire1d20p20Script(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
+    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 50, 2);
         Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);

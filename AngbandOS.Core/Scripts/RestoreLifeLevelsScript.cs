@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreLifeLevelsScript : Script, IDirectionalCancellableScriptItem
+internal class RestoreLifeLevelsScript : Script, IUsedScriptItemDirection
 {
     private RestoreLifeLevelsScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
+    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
     {
         Game.RunScript(nameof(RestoreLevelScript));
         return true;

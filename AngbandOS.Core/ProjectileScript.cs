@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IDirectionalCancellableScriptItem, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript
+internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript
 {
     public ProjectileScript(Game game) : base(game) { }
 
@@ -93,22 +93,23 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
 
     /// <summary>
-    /// Projects the projectile and returns true in all cases because there is no user interaction that can result in the player cancelling the script.
+    /// Projects the projectile in a given direction and returns true in all cases because there is no user interaction that can result in the player cancelling the script.  The <paramref name="item"/>
+    /// parameter is ignored.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="direction"></param>
     /// <returns></returns>
-    public bool ExecuteCancellableScriptItem(Item item, int direction)
+    public bool ExecuteUsedScriptItemDirection(Item item, int direction)
     {
         ExecuteIdentifiedScriptDirection(direction);
         return true; // Return true because the script was not cancelled.
     }
 
     /// <summary>
-    /// Projects the projectile and returns true, if the projectile is identifable by the player; false, otherwise.
+    /// Projects the projectile in a given direction using the associated properties.
     /// </summary>
     /// <param name="direction"></param>
-    /// <returns></returns>
+    /// <returns>True, if the projectile can be identified by the player; false, otherwise.</returns>
     public bool ExecuteIdentifiedScriptDirection(int direction)
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
@@ -118,54 +119,84 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     }
 
     /// <summary>
-    /// Projects the projectile and returns whether the projectile can be identified and whether the projectile actually used a consumable.
+    /// Projects the projectile and returns whether the projectile can be identified by the player and true for used because projectiles are always used.
     /// </summary>
     /// <returns>
     /// identified:description: returns true, if the projectile actually hits and affects a monster, which allows the projectile to be identified by the player; false, otherwise.
     /// used:description: returns true if the projectile uses a charge for rod items
     /// </returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int direction)
     {
         if (PreMessage != null)
         {
             Game.MsgPrint(PreMessage);
         }
 
-        bool identified = ExecuteIdentifiedScriptDirection(dir);
+        bool identified = ExecuteIdentifiedScriptDirection(direction);
         return (identified, true);
     }
 
     /// <summary>
-    /// Gets a direction from the player and projects the projectile in the specified direction.
+    /// Projects the projectile in a direction specified by the <see cref="NonDirectionalProjectileMode"/> property.
     /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         switch (NonDirectionalProjectileMode)
         {
             case NonDirectionalProjectileModeEnum.PlayerSpecified:
                 {
-                    if (!Game.GetDirectionWithAim(out int dir))
+                    if (!Game.GetDirectionWithAim(out int direction))
                     {
-                        return;
+                        return (false, false);
                     }
-                    ExecuteIdentifiedScriptDirection(dir);
+                    bool identified = ExecuteIdentifiedScriptDirection(direction);
+                    return (identified, true);
                 }
-                break;
             case NonDirectionalProjectileModeEnum.AllDirections:
                 {
-                    foreach (int dir in Game.OrderedDirection)
+                    bool identified = false;
+                    foreach (int direction in Game.OrderedDirection)
                     {
-                        ExecuteIdentifiedScriptDirection(dir);
+                        if (ExecuteIdentifiedScriptDirection(direction))
+                        {
+                            identified = true;
+                        }
                     }
+                    return (identified, true);
                 }
-                break;
-            //case NonDirectionalProjectileModeEnum.MonstersInLos:
-            //    {
-            //    }
-            //    break;
+            case NonDirectionalProjectileModeEnum.AllMonstersInLos:
+                {
+                    bool anyIdentified = false;
+                    int damage = DamageRoll.Get(Game.UseRandom);
+                    int radius = RadiusRoll.Get(Game.UseRandom);
+                    for (int i = 1; i < Game.MonsterMax; i++)
+                    {
+                        Monster mPtr = Game.Monsters[i];
+                        if (mPtr.Race == null) // TODO: This should never be.
+                        {
+                            continue;
+                        }
+                        int y = mPtr.MapY;
+                        int x = mPtr.MapX;
+                        if (!Game.PlayerHasLosBold(y, x))
+                        {
+                            continue;
+                        }
+                        bool affectsMonster = Projectile.Fire(0, radius, y, x, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
+                        bool identified = Identified ?? affectsMonster;
+                        if (identified)
+                        {
+                            anyIdentified = true;
+                        }
+                    }
+                    return (anyIdentified, true);
+                }
             default:
                 throw new Exception("Invalid value for NonDirectionalProjectileMode.");
         }
+    }
+    public void ExecuteScript()
+    {
+        ExecuteIdentifiedAndUsedScript();
     }
 }

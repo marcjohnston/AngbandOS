@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MagicMappingAndIlluminationScript : Script, IDirectionalCancellableScriptItem
+internal class MagicMappingAndIlluminationScript : Script, IUsedScriptItemDirection
 {
     private MagicMappingAndIlluminationScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
+    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
     {
         Game.RunScript(nameof(MapAreaScript));
         Game.LightArea(Game.DiceRoll(2, 15), 3);

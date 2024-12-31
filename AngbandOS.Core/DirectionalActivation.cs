@@ -37,7 +37,7 @@ internal abstract class DirectionalActivation : BaseActivation, IGetKey
     public virtual void Bind()
     {
         RechargeTimeRoll = Game.ParseRollExpression(RechargeTimeRollExpression);
-        DirectionalActivationCancellableScript = Game.SingletonRepository.Get<IDirectionalCancellableScriptItem>(DirectionalActivationCancellableScriptBindingKey);
+        DirectionalActivationCancellableScript = Game.SingletonRepository.Get<IUsedScriptItemDirection>(DirectionalActivationCancellableScriptBindingKey);
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ internal abstract class DirectionalActivation : BaseActivation, IGetKey
     /// Returns the binding key for the <see cref="ICancellableScript"/> that should be run when the activation is executed.  This property is used to bind
     /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
     /// </summary>
-    public IDirectionalCancellableScriptItem DirectionalActivationCancellableScript { get; protected set; }
+    public IUsedScriptItemDirection DirectionalActivationCancellableScript { get; protected set; }
 
     protected override bool OnActivate(Item item)
     {
@@ -68,6 +68,6 @@ internal abstract class DirectionalActivation : BaseActivation, IGetKey
             Game.MsgPrint(PostAimingMessage);
         }
 
-        return DirectionalActivationCancellableScript.ExecuteCancellableScriptItem(item, direction);
+        return DirectionalActivationCancellableScript.ExecuteUsedScriptItemDirection(item, direction);
     }
 }

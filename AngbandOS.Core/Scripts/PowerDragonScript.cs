@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PowerDragonScript : Script, IDirectionalCancellableScriptItem
+internal class PowerDragonScript : Script, IUsedScriptItemDirection
 {
     private PowerDragonScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
+    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, 4);
         Game.MsgPrint("Your armor glows many colors...");

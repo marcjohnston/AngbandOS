@@ -41,3 +41,22 @@ internal class _template_bolt : ProjectileScript
     protected override string ProjectileBindingKey => nameof(AcidProjectile);
     protected override string DamageRollExpression => "5d8";
 }
+
+[Serializable]
+internal class _template_los : ProjectileScript
+{
+    private _template_los(Game game) : base(game) { }
+
+    public override bool Stop => false;
+    public override bool Kill => true;
+    public override bool Jump => true;
+    public override bool Beam => false;
+    public override bool Grid => false;
+    public override bool Item => false;
+    public override bool Thru => false;
+    public override bool Hide => true;
+    protected override string ProjectileBindingKey => nameof(OldSpeedProjectile);
+    protected override string DamageRollExpression => "1d1xX";
+    public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
+    public override bool? Identified => null;
+}

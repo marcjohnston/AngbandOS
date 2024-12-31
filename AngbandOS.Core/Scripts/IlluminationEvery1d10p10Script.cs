@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IlluminationEvery1d10p10Script : Script, IDirectionalCancellableScriptItem
+internal class IlluminationEvery1d10p10Script : Script, IUsedScriptItemDirection
 {
     private IlluminationEvery1d10p10Script(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item, int direction) // This is run by an item activation
+    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
     {
         Game.LightArea(base.Game.DiceRoll(2, 15), 3);
         return true;
