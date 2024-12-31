@@ -8159,13 +8159,6 @@ public bool IsDead = false;
         castedScript.ExecuteScriptBool(value);
     }
 
-    public void RunScriptIntInt(string scriptName, int value1, int value2)
-    {
-        // Get the script from the singleton repository.
-        IScriptIntInt castedScript = SingletonRepository.Get<IScriptIntInt>(scriptName);
-        castedScript.ExecuteScriptIntInt(value1, value2);
-    }
-
     public bool RunSuccessByChanceScript(string scriptName)
     {
         // Get the script from the singleton repository.
