@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellCharmMonster : Spell
 {
     private SorcerySpellCharmMonster(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(CharmMonsterScript);
+    protected override string? CastScriptName => nameof(Charm1xProjectileScript);
 
     public override string Name => "Charm Monster";
     

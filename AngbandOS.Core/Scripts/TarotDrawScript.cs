@@ -101,7 +101,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 72)
         {
             Game.MsgPrint("It's Temperance.");
-            Game.SleepMonstersTouch();
+            Game.RunScript(nameof(OldSleep1xr1ProjectileScript));
         }
         else if (die < 80)
         {
@@ -234,12 +234,12 @@ internal class TarotDrawScript : Script, IScript
                 break;
 
             case 18:
-                Game.SleepMonstersTouch();
+                Game.RunScript(nameof(OldSleep1xr1ProjectileScript));
                 break;
 
             case 19:
             case 20:
-                Game.TrapCreation();
+                Game.RunScript(nameof(MakeTrapr1ProjectileScript));
                 break;
 
             case 21:

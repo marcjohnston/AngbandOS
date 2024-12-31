@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class ChaosSpellPolymorphOther : Spell
 {
     private ChaosSpellPolymorphOther(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(PolymorphOtherScript);
+    protected override string? CastScriptName => nameof(OldPolymorph1xProjectileScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 

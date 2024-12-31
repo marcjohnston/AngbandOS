@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Death;
 internal class DeathSpellEnslaveUndead : Spell
 {
     private DeathSpellEnslaveUndead(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(EnslaveUndeadScript);
+    protected override string? CastScriptName => nameof(ControlUndead1xProjectileScript);
 
     protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
 

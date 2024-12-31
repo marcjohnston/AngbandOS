@@ -26,7 +26,8 @@ internal class MindWaveTalent : Talent
         }
         else
         {
-            Game.MindblastMonsters(Game.ExperienceLevel.IntValue * (((Game.ExperienceLevel.IntValue - 5) / 10) + 1));
+            int dam = (Game.ExperienceLevel.IntValue * (((Game.ExperienceLevel.IntValue - 5) / 10) + 1));
+            Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dam);
         }
     }
 

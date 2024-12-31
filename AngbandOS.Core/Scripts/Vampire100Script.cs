@@ -16,7 +16,7 @@ internal class Vampire100Script : Script, IUsedScriptItemDirection
     {
         for (int i = 0; i < 3; i++)
         {
-            if (Game.DrainLife(direction, 100))
+            if (Game.RunIdentifiedScript(nameof(OldDrainLife100ProjectileScript)))
             {
                 Game.RestoreHealth(100);
             }

@@ -18,7 +18,7 @@ internal class HolyWordScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.RunScript(nameof(DispelEvil4xScript));
+        Game.RunScript(nameof(DispelEvilAtLos4xProjectileScript));
         Game.RestoreHealth(1000);
         Game.FearTimer.ResetTimer();
         Game.PoisonTimer.ResetTimer();

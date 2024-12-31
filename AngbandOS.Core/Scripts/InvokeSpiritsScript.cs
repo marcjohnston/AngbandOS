@@ -60,7 +60,7 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 31)
         {
-            Game.PolyMonster(dir);
+            Game.RunIdentifiedScriptDirection(nameof(OldPolymorph1xProjectileScript), dir);
         }
         if (die < 36)
         {
@@ -97,7 +97,7 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 76)
         {
-            Game.DrainLife(dir, 75);
+            Game.RunIdentifiedScript(nameof(OldDrainLife75ProjectileScript));
         }
         if (die < 81)
         {
@@ -117,7 +117,7 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 101)
         {
-            Game.DrainLife(dir, 100 + Game.ExperienceLevel.IntValue);
+            Game.RunScript(nameof(OldDrainLife1xp100ProjectileScript));
         }
         if (die < 104)
         {
@@ -133,9 +133,9 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 110)
         {
-            Game.DispelMonsters(120);
+            Game.RunScript(nameof(DispelAllAtLos120ProjectileScript));
         }
-        Game.DispelMonsters(150);
+        Game.RunScript(nameof(DispelAllAtLos150ProjectileScript));
         Game.RunScript(nameof(SlowMonstersScript));
         Game.RunScript(nameof(SleepMonstersScript));
         Game.RestoreHealth(300);

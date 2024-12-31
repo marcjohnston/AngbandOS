@@ -48,7 +48,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 14)
         {
-            Game.SpeedMonster(dir);
+            Game.RunScript(nameof(OldSpeed1xProjectileScript));
         }
         else if (die < 26)
         {
@@ -56,7 +56,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 31)
         {
-            Game.PolyMonster(dir);
+            Game.RunIdentifiedScriptDirection(nameof(OldPolymorph1xProjectileScript), dir);
         }
         else if (die < 36)
         {
@@ -92,7 +92,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 76)
         {
-            Game.DrainLife(dir, 75);
+            Game.RunIdentifiedScript(nameof(OldDrainLife75ProjectileScript));
         }
         else if (die < 81)
         {
@@ -112,7 +112,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 101)
         {
-            Game.DrainLife(dir, 100 + Game.ExperienceLevel.IntValue);
+            Game.RunScript(nameof(OldDrainLife1xp100ProjectileScript));
         }
         else if (die < 104)
         {
@@ -128,11 +128,11 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 110)
         {
-            Game.DispelMonsters(120);
+            Game.RunScript(nameof(DispelAllAtLos120ProjectileScript));
         }
         else
         {
-            Game.DispelMonsters(150);
+            Game.RunScript(nameof(DispelAllAtLos150ProjectileScript));
             Game.RunScript(nameof(SlowMonstersScript));
             Game.RunScript(nameof(SleepMonstersScript));
             Game.RestoreHealth(300);

@@ -11,8 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellStasis : Spell
 {
     private SorcerySpellStasis(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(StasisMonsterScript);
+    protected override string? CastScriptName => nameof(Stasis4xProjectileScript);
 
-    public override string Name => "Stasis";
-    
+    public override string Name => "Stasis";    
 }

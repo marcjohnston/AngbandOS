@@ -20,12 +20,12 @@ internal class DivineInterventionScript : Script, IScript
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile));
         projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 777, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
-        Game.DispelMonsters(Game.ExperienceLevel.IntValue * 4);
+        Game.RunScript(nameof(DispelAllAtLos4xProjectileScript));
         Game.RunScript(nameof(SlowMonstersScript));
-        Game.StunMonsters(Game.ExperienceLevel.IntValue * 4);
-        Game.ConfuseMonsters(Game.ExperienceLevel.IntValue * 4);
-        Game.TurnMonsters(Game.ExperienceLevel.IntValue * 4);
-        Game.StasisMonsters(Game.ExperienceLevel.IntValue * 4);
+        Game.RunScript(nameof(StunAtLos4xProjectileScript));
+        Game.RunScript(nameof(OldConfuseAtLos4xProjectileScript));
+        Game.RunScript(nameof(TurnAllAtLos4xProjectileScript));
+        Game.RunIdentifiedScript(nameof(StasisAtLos4xProjectileScript));
         Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter)), true);
         Game.SuperheroismTimer.AddTimer(Game.DieRoll(25) + 25);
         Game.RestoreHealth(300);

@@ -26,7 +26,7 @@ internal class PowerStaffItemFactory : ItemFactory
         (70, 2)
     };
     public override int Weight => 50;
-    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(DispelMonsters120Script), "1d3+1", 200, 100);
+    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(DispelMonstersAtLos120ProjectileScript), "1d3+1", 200, 100);
     protected override string ItemClassBindingKey => nameof(StaffsItemClass);
     protected override string? RechargeScriptBindingKey => nameof(RechargeStaffScript);
 

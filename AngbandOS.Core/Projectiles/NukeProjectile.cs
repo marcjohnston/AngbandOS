@@ -54,7 +54,7 @@ internal class NukeProjectile : Projectile
         {
             note = " is unaffected!";
             bool charm = mPtr.SmFriendly;
-            int tmp = Game.PolymorphMonster(mPtr.Race);
+            int tmp = Game.PolymorphMonsterRace(mPtr.Race);
             if (tmp != mPtr.Race.Index)
             {
                 note = " changes!";

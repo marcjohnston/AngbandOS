@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript, IUsedScriptItem
+internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript, IUsedScriptItem, ISuccessByChanceScript
 {
     public ProjectileScript(Game game) : base(game) { }
 
@@ -98,6 +98,15 @@ internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IId
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
 
     #region Interface Implementations
+    public bool ExecuteSuccessByChanceScript()
+    {
+        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
+        {
+            (bool identified, bool used) = ExecuteNonDirectional();
+            return identified;
+        });
+    }
+
     /// <summary>
     /// Projects the projectile in a given direction and returns true in all cases because there is no user interaction that can result in the player cancelling the script.  The <paramref name="item"/>
     /// parameter is ignored.

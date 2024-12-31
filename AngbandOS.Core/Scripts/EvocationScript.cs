@@ -18,8 +18,8 @@ internal class EvocationScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.DispelMonsters(Game.ExperienceLevel.IntValue * 4);
-        Game.TurnMonsters(Game.ExperienceLevel.IntValue * 4);
-        Game.RunScriptInt(nameof(BanishMonsters4xScript), Game.ExperienceLevel.IntValue * 4);
+        Game.RunScript(nameof(DispelAllAtLos4xProjectileScript));
+        Game.RunScript(nameof(TurnAllAtLos4xProjectileScript));
+        Game.RunScriptInt(nameof(TeleportAwayAllAtLos4xProjectileScript), Game.ExperienceLevel.IntValue * 4);
     }
 }

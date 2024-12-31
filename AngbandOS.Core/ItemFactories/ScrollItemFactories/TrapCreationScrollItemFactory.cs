@@ -34,7 +34,7 @@ internal class TrapCreationScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(CreateTrapIdentifableAndUsedScript), 10);
+    protected override (string, int)? ActivationBindingTuple => (nameof(MakeTrapr1ProjectileScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

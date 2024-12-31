@@ -37,7 +37,7 @@ internal class BizarreThingsScript : Script, IUsedScriptItemDirection
                 {
                     // Dispel monsters
                     Game.MsgPrint("You are surrounded by a powerful aura.");
-                    Game.DispelMonsters(1000);
+                    Game.RunScript(nameof(DispelAllAtLos1000ProjectileScript));
                     break;
                 }
             case 4:

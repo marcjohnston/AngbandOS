@@ -19,7 +19,7 @@ internal class CharmAnimalEvery500Activation : Activation
 
     protected override string RechargeTimeRollExpression => "500";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(CharmAnimalScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ControlAnimalAtLos2xProjectileScript);
 
     public override int Value => 12500;
 

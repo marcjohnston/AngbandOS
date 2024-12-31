@@ -62,12 +62,12 @@ internal class WildChaoticMagicScript : Script, IScriptSpell
                 break;
 
             case 18:
-                Game.SleepMonstersTouch();
+                Game.RunScript(nameof(OldSleep1xr1ProjectileScript));
                 break;
 
             case 19:
             case 20:
-                Game.TrapCreation();
+                Game.RunScript(nameof(MakeTrapr1ProjectileScript));
                 break;
 
             case 21:

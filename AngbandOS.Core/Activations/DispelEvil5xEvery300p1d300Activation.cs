@@ -19,7 +19,7 @@ internal class DispelEvil5xEvery300p1d300Activation : Activation
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(DispelEvil5xScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(DispelEvilAtLos5xProjectileScript);
 
     public override int Value => 4000;
 

@@ -19,7 +19,7 @@ internal class SleepActivation : Activation
 
     protected override string RechargeTimeRollExpression => "55";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(SleepMonstersTouchScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(OldSleep1xr1ProjectileScript);
 
     public override int Value => 750;
 

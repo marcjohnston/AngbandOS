@@ -24,7 +24,7 @@ internal class VampirismTrueScript : Script, IScript
         }
         for (int dummy = 0; dummy < 3; dummy++)
         {
-            if (Game.DrainLife(dir, 100))
+            if (Game.RunIdentifiedScript(nameof(OldDrainLife100ProjectileScript)))
             {
                 Game.RestoreHealth(100);
             }

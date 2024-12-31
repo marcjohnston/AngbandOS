@@ -17,7 +17,7 @@ internal class BanishEvilEvery250p1d250Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(BanishEvilByArtifact100ProjectileScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(TeleportAwayEvilAtLosByArtifact100ProjectileScript);
 
     protected override string RechargeTimeRollExpression => "1d250+250";
 

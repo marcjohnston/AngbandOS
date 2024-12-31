@@ -4862,17 +4862,6 @@ public bool IsDead = false;
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
-    public void ConfuseMonsters(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile)), dam);
-    }
-
-    public bool ControlOneUndead(int dir, int plev)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlUndeadProjectile));
-        return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public void DestroyArea(int y1, int x1, int r)
     {
         int y, x;
@@ -5138,27 +5127,6 @@ public bool IsDead = false;
             MsgPrint("You sense the presence of buried treasure!");
         }
         return anyTreasureRevealed;
-    }
-
-    public bool DisarmTrap(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapProjectile));
-        return projectile.TargetedFire(dir, 0, 0, beam: true, grid: true, item: true, jump: false, stop: false, kill: false, thru: true, hide: false);
-    }
-
-    public void DispelDemons(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(DispDemonProjectile)), dam);
-    }
-
-    public bool DispelMonsters(int dam)
-    {
-        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(DispAllProjectile)), dam);
-    }
-
-    public bool DispelUndead(int dam)
-    {
-        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(DispUndeadProjectile)), dam);
     }
 
     /// <summary>
@@ -5769,18 +5737,7 @@ public bool IsDead = false;
         return true;
     }
 
-    public void MindblastMonsters(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dam);
-    }
-
-    public bool PolyMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldPolymorphProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
-    public int PolymorphMonster(MonsterRace rPtr)
+    public int PolymorphMonsterRace(MonsterRace rPtr)
     {
         int index = rPtr.Index;
         if (rPtr.Unique || rPtr.Guardian)
@@ -5899,52 +5856,6 @@ public bool IsDead = false;
         return true;
     }
 
-    public bool SleepMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
-    public void SleepMonstersTouch()
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile));
-        projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, stop: true, kill: true, hide: true, jump: false, beam: false, thru: false, grid: false, item: false);
-    }
-
-    public bool SlowMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
-    public bool SpeedMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
-    public bool StasisMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(StasisProjectile));
-        return projectile.TargetedFire(dir, ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
-    public void StasisMonsters(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(StasisProjectile)), dam);
-    }
-
-    public bool StunMonster(int dir, int plev)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(StunProjectile));
-        return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
-    public void StunMonsters(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(StunProjectile)), dam);
-    }
-
     public void SummonReaver()
     {
         int maxReaver = (Difficulty / 50) + DieRoll(6);
@@ -5952,12 +5863,6 @@ public bool IsDead = false;
         {
             SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)));
         }
-    }
-
-    public bool TeleportMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TeleportAwayAllProjectile));
-        return projectile.TargetedFire(dir, Constants.MaxSight * 5, 0, kill: true, beam: true, jump: false, stop: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public void TeleportPlayerTo(int ny, int nx)
@@ -6055,22 +5960,6 @@ public bool IsDead = false;
                 HandleStuff();
             }
         }
-    }
-
-    public bool TrapCreation()
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
-        return projectile.Fire(0, 1, MapY.IntValue, MapX.IntValue, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
-    }
-
-    public void TurnEvil(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(TurnEvilProjectile)), dam);
-    }
-
-    public void TurnMonsters(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile)), dam);
     }
 
     public bool UnlightArea(int dam, int rad)
@@ -7722,7 +7611,7 @@ public bool IsDead = false;
                     if (!(race.Unique || race.BreatheChaos ||
                           race.Guardian))
                     {
-                        int newRaceIndex = PolymorphMonster(monster.Race);
+                        int newRaceIndex = PolymorphMonsterRace(monster.Race);
                         if (newRaceIndex != monster.Race.Index)
                         {
                             MsgPrint($"{monsterName} changes!");
@@ -8138,6 +8027,12 @@ public bool IsDead = false;
         castedScript.ExecuteScript();
     }
 
+    public bool RunIdentifiedScriptDirection(string scriptName, int dir)
+    {
+        IIdentifiedScriptDirection script = SingletonRepository.Get<IIdentifiedScriptDirection>(scriptName);
+        return script.ExecuteIdentifiedScriptDirection(dir);
+    }
+
     public void RunScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
@@ -8167,15 +8062,22 @@ public bool IsDead = false;
     public bool RunUsedScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        ICancellableScript castedScript = (ICancellableScript)SingletonRepository.Get<ICancellableScript>(scriptName);
+        ICancellableScript castedScript = SingletonRepository.Get<ICancellableScript>(scriptName);
         return castedScript.ExecuteCancellableScript();
     }
 
     public bool RunNoticeableScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        INoticeableScript castedScript = (INoticeableScript)SingletonRepository.Get<INoticeableScript>(scriptName);
+        INoticeableScript castedScript = SingletonRepository.Get<INoticeableScript>(scriptName);
         return castedScript.ExecuteNoticeableScript();
+    }
+
+    public bool RunIdentifiedScript(string scriptName)
+    {
+        // Get the script from the singleton repository.
+        IIdentifiedScript castedScript = SingletonRepository.Get<IIdentifiedScript>(scriptName);
+        return castedScript.ExecuteIdentifiedScript();
     }
 
     /// <summary>

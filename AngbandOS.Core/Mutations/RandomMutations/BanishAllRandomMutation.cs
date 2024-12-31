@@ -24,7 +24,7 @@ internal class BanishAllRandomMutation : Mutation
         }
         Game.Disturb(false);
         Game.MsgPrint("You suddenly feel almost lonely.");
-        Game.RunScriptInt(nameof(BanishMonsters4xScript), 100);
+        Game.RunScript(nameof(TeleportAwayAll100ProjectileScript));
         Game.MsgPrint(null);
     }
 }

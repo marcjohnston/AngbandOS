@@ -79,7 +79,7 @@ internal class SpriteRace : Race
             Game.MsgPrint("You throw some magic dust...");
             if (Game.ExperienceLevel.IntValue < 25)
             {
-                Game.SleepMonstersTouch();
+                Game.RunScript(nameof(OldSleep1xr1ProjectileScript));
             }
             else
             {

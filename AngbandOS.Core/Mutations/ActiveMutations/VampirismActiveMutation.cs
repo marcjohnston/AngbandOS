@@ -21,7 +21,7 @@ internal class VampirismActiveMutation : Mutation
         {
             return;
         }
-        if (Game.DrainLife(dir, Game.ExperienceLevel.IntValue * 2))
+        if (Game.RunIdentifiedScript(nameof(OldDrainLife2xProjectileScript)))
         {
             Game.RestoreHealth(Game.ExperienceLevel.IntValue + base.Game.DieRoll(Game.ExperienceLevel.IntValue));
         }

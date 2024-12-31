@@ -17,7 +17,7 @@ internal class DispelGood5xEvery300p1d300Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} floods the area with evil...";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(DispelGood5xScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(DispelGood5xProjectileScript);
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 

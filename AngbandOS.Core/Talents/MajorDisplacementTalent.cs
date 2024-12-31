@@ -21,7 +21,7 @@ internal class MajorDisplacementTalent : Talent
         Game.RunScriptInt(nameof(TeleportSelfScript), Game.ExperienceLevel.IntValue * 5);
         if (Game.ExperienceLevel.IntValue > 29)
         {
-            Game.RunScriptInt(nameof(BanishMonsters4xScript), Game.ExperienceLevel.IntValue);
+            Game.RunScriptInt(nameof(TeleportAwayAllAtLos4xProjectileScript), Game.ExperienceLevel.IntValue);
         }
     }
 

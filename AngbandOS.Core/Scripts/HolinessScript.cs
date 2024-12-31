@@ -19,7 +19,7 @@ internal class HolinessScript : Script, IIdentifiedAndUsedScript
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         bool identified = false;
-        if (Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), 120))
+        if (Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispelEvilProjectile)), 120))
         {
             identified = true;
         }
