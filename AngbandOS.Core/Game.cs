@@ -7870,25 +7870,25 @@ public bool IsDead = false;
         MovePlayer(CurrentRunDirection, false);
     }
 
-    public Spell[] OkaySpells(Item item, bool known)
-    {
-        List<Spell> okaySpells = new List<Spell>();
-        foreach (Spell spell in item.Spells) // TODO: Spells is not nullable
-        {
-            if (SpellOkay(spell, known))
-            {
-                okaySpells.Add(spell);
-            }
-        }
-        return okaySpells.ToArray();
-    }
-
     /// <summary>
     /// Returns an spell selected by the player.  If the player doesn't have any spells capable of being selected, false is returned; otherwise the spell selected by the user is returned on the output
     /// parameter.  If the user cancels the selection, a true value is returned and the output spell parameter is set to null.
     /// </summary>
     public bool GetSpell(out Spell? selectedSpell, string prompt, Item spellBook, bool known)
     {
+        Spell[] OkaySpells(Item item, bool known)
+        {
+            List<Spell> okaySpells = new List<Spell>();
+            foreach (Spell spell in item.Spells) // TODO: Spells is not nullable
+            {
+                if (SpellOkay(spell, known))
+                {
+                    okaySpells.Add(spell);
+                }
+            }
+            return okaySpells.ToArray();
+        }
+
         selectedSpell = null;
         Spell[] okaySpells = OkaySpells(spellBook, known);
         if (okaySpells.Length == 0)
@@ -8131,13 +8131,6 @@ public bool IsDead = false;
         DropNear(missile, chanceToBreak.Percentage, y, x);
     }
 
-    public void RunTileScript(string scriptName, GridTile tile)
-    {
-        // Get the script from the singleton repository.
-        ITileScript castedScript = (ITileScript)SingletonRepository.Get<ITileScript>(scriptName);
-        castedScript.ExecuteTileScript(tile);
-    }
-
     public void RunScript(string scriptName)
     {
         // Get the script from the singleton repository.
@@ -8178,25 +8171,11 @@ public bool IsDead = false;
         return castedScript.ExecuteCancellableScript();
     }
 
-    public bool RunIdentifableScript(string scriptName)
-    {
-        // Get the script from the singleton repository.
-        IIdentifiedScript? castedScript = (IIdentifiedScript)SingletonRepository.Get<IIdentifiedScript>(scriptName);
-        return castedScript.ExecuteIdentifiedScript();
-    }
-
     public bool RunNoticeableScript(string scriptName)
     {
         // Get the script from the singleton repository.
         INoticeableScript castedScript = (INoticeableScript)SingletonRepository.Get<INoticeableScript>(scriptName);
         return castedScript.ExecuteNoticeableScript();
-    }
-
-    public bool RunSuccessfulScriptInt(string scriptName, int value)
-    {
-        // Get the script from the singleton repository.
-        ISuccessByChanceScriptInt castedScript = SingletonRepository.Get<ISuccessByChanceScriptInt>(scriptName);
-        return castedScript.ExecuteSuccessByChanceScriptInt(value);
     }
 
     /// <summary>
