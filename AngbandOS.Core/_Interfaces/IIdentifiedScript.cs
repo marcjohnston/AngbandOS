@@ -16,5 +16,5 @@ internal interface IIdentifiedScript // TODO: This is the same as the INoticeabl
     /// Returns true, if the script performs an action that would identify an object; false, otherwise. 
     /// </summary>
     /// <returns></returns>
-    bool ExecuteIdentifableScript();
+    bool ExecuteIdentifiedScript();
 }

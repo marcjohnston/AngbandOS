@@ -16,7 +16,7 @@ internal class EatWarpstoneScript : Script, IIdentifiedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifableScript()
+    public bool ExecuteIdentifiedScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.MsgPrint("That tastes... funky.");

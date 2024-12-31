@@ -100,7 +100,7 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// <returns></returns>
     public bool ExecuteCancellableScriptItem(Item item, int direction)
     {
-        ExecuteIdentifableScriptDirection(direction);
+        ExecuteIdentifiedScriptDirection(direction);
         return true; // Return true because the script was not cancelled.
     }
 
@@ -109,7 +109,7 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// </summary>
     /// <param name="direction"></param>
     /// <returns></returns>
-    public bool ExecuteIdentifableScriptDirection(int direction)
+    public bool ExecuteIdentifiedScriptDirection(int direction)
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
         int damage = DamageRoll.Get(Game.UseRandom);
@@ -131,7 +131,7 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
             Game.MsgPrint(PreMessage);
         }
 
-        bool identified = ExecuteIdentifableScriptDirection(dir);
+        bool identified = ExecuteIdentifiedScriptDirection(dir);
         return (identified, true);
     }
 
@@ -149,14 +149,14 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
                     {
                         return;
                     }
-                    ExecuteIdentifableScriptDirection(dir);
+                    ExecuteIdentifiedScriptDirection(dir);
                 }
                 break;
             case NonDirectionalProjectileModeEnum.AllDirections:
                 {
                     foreach (int dir in Game.OrderedDirection)
                     {
-                        ExecuteIdentifableScriptDirection(dir);
+                        ExecuteIdentifiedScriptDirection(dir);
                     }
                 }
                 break;

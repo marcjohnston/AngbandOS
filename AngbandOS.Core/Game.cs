@@ -8199,7 +8199,7 @@ public bool IsDead = false;
     {
         // Get the script from the singleton repository.
         IIdentifiedScript? castedScript = (IIdentifiedScript)SingletonRepository.Get<IIdentifiedScript>(scriptName);
-        return castedScript.ExecuteIdentifableScript();
+        return castedScript.ExecuteIdentifiedScript();
     }
 
     public bool RunNoticeableScript(string scriptName)

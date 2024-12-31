@@ -54,7 +54,7 @@ internal class _template : Script, IScript, IRepeatableScript, ISuccessByChanceS
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifableScript()
+    public bool ExecuteIdentifiedScript()
     {
         ExecuteScript();
         return false;

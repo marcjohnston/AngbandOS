@@ -16,7 +16,7 @@ internal class EatDwarfBreadScript : Script, IIdentifiedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifableScript()
+    public bool ExecuteIdentifiedScript()
     {
         Game.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
         return true;

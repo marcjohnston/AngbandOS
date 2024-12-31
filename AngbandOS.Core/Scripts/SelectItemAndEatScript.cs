@@ -50,7 +50,7 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         int itemLevel = item.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
-        bool ident = item.EatScript.ExecuteIdentifableScript();
+        bool ident = item.EatScript.ExecuteIdentifiedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 

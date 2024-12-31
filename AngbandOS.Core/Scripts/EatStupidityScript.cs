@@ -16,7 +16,7 @@ internal class EatStupidityScript : Script, IIdentifiedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifableScript()
+    public bool ExecuteIdentifiedScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.TakeHit(Game.DiceRoll(8, 8), "poisonous food.");

@@ -18,9 +18,9 @@ internal abstract class ProjectileScriptGenericWeightedRandom : GenericWeightedR
         return Choose().ExecuteCancellableScriptItem(item, direction);
     }
 
-    public bool ExecuteIdentifableScriptDirection(int dir)
+    public bool ExecuteIdentifiedScriptDirection(int dir)
     {
-        return Choose().ExecuteIdentifableScriptDirection(dir);
+        return Choose().ExecuteIdentifiedScriptDirection(dir);
     }
 
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
