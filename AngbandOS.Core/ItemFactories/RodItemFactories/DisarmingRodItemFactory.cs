@@ -26,7 +26,7 @@ internal class DisarmingRodItemFactory : ItemFactory
         (35, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(DisarmingIdentifiedAndUsedScriptItemAndDirection), "1d15+15", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(DestroyTrapProjectileScript), "1d15+15", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

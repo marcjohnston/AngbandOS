@@ -26,7 +26,7 @@ internal class FrostBoltsWandItemFactory : ItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(ColdBolt3D8IdentifableDirectionalScript), "1d5+6", 40, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(ColdBoltOrBeam3d8ProjectileScriptGenericWeightedRandom), "1d5+6", 40, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);
