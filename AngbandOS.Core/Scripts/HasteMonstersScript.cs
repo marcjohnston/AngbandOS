@@ -14,7 +14,7 @@ internal class HasteMonstersScript : Script, IIdentifiedAndUsedScript
 
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        bool identified = Game.HasteMonsters();
+        bool identified = Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), Game.ExperienceLevel.IntValue);
         return (identified, true);
     }
 }

@@ -5718,11 +5718,6 @@ public bool IsDead = false;
         }
     }
 
-    public bool HasteMonsters()
-    {
-        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), ExperienceLevel.IntValue);
-    }
-
     public bool HealMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
