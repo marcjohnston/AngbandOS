@@ -242,7 +242,7 @@ internal abstract class RoomLayout : IGetKey
             for (int i = 0; i < 9; i++)
             {
                 const int d = 1;
-                Game.Scatter(out int y, out int x, y1, x1, d);
+                (int y, int x) = Game.Scatter(y1, x1, d);
                 if (!Game.GridPassableNoCreature(y, x))
                 {
                     continue;

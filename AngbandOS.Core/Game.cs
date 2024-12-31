@@ -3265,7 +3265,7 @@ public bool IsDead = false;
                 while (!CaveValidBold(y, x))
                 {
                     const int d = 1;
-                    Scatter(out int ny, out int nx, y, x, d);
+                    (int ny, int nx) = Scatter(y, x, d);
                     y = ny;
                     x = nx;
                 }
@@ -13075,7 +13075,7 @@ public bool IsDead = false;
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Scatter(out int y, out int x, MapY.IntValue, MapX.IntValue, d);
+            (int y, int x) = Scatter(MapY.IntValue, MapX.IntValue, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
@@ -13097,7 +13097,7 @@ public bool IsDead = false;
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Scatter(out int y, out int x, MapY.IntValue, MapX.IntValue, d);
+            (int y, int x) = Scatter(MapY.IntValue, MapX.IntValue, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
@@ -15545,12 +15545,12 @@ public bool IsDead = false;
         MainForm.RefreshMapLocation(y, x);
     }
 
-    public void Scatter(out int yp, out int xp, int y, int x, int d)
+    public (int yp, int xp) Scatter(int y, int x, int d)
     {
         int nx = 0;
         int ny = 0;
-        yp = y;
-        xp = x;
+        int yp = y;
+        int xp = x;
         int attemptsLeft = 5000;
         while (--attemptsLeft != 0)
         {
@@ -15571,9 +15571,9 @@ public bool IsDead = false;
         }
         if (attemptsLeft > 0)
         {
-            yp = ny;
-            xp = nx;
+            return (ny, nx);
         }
+        return (yp, xp);
     }
 
     private ColorEnum DimColor(ColorEnum a)
@@ -16525,7 +16525,7 @@ public bool IsDead = false;
         for (int i = 0; i < 18; i++)
         {
             int d = 1;
-            Scatter(out int y, out int x, mPtr.MapY, mPtr.MapX, d);
+            (int y, int x) = Scatter(mPtr.MapY, mPtr.MapX, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
@@ -16567,7 +16567,7 @@ public bool IsDead = false;
             for (int i = 0; i < 50; i++)
             {
                 int d = 3;
-                Scatter(out int ny, out int nx, y, x, d);
+                (int ny, int nx) = Scatter(y, x, d);
                 if (!GridPassableNoCreature(ny, nx))
                 {
                     continue;
@@ -16610,7 +16610,7 @@ public bool IsDead = false;
         for (i = 0; i < 20; ++i)
         {
             int d = (i / 15) + 1;
-            Scatter(out y, out x, y1, x1, d);
+            (y, x) = Scatter(y1, x1, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
@@ -16655,7 +16655,7 @@ public bool IsDead = false;
         for (i = 0; i < 20; ++i)
         {
             int d = (i / 15) + 1;
-            Scatter(out y, out x, y1, x1, d);
+            (y, x) = Scatter(y1, x1, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
@@ -16691,7 +16691,7 @@ public bool IsDead = false;
         for (i = 0; i < 20; ++i)
         {
             int d = (i / 15) + 1;
-            Scatter(out y, out x, y1, x1, d);
+            (y, x) = Scatter(y1, x1, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
