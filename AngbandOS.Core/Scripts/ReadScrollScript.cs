@@ -64,7 +64,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         //bool identified = false;
         //bool usedUp = true;
 
-        (bool identified, bool used) = item.ActivationTuple.Value.ActivationScript.ExecuteIdentifableAndUsedScript();
+        (bool identified, bool used) = item.ActivationTuple.Value.ActivationScript.ExecuteIdentifiedAndUsedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll

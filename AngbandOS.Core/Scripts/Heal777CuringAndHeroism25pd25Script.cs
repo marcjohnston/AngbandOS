@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Heal777CuringAndHeroism25pd25Script : Script, ICancellableScriptItem
+internal class Heal777CuringAndHeroism25pd25Script : Script, IUsedScriptItem
 {
     private Heal777CuringAndHeroism25pd25Script(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.PoisonTimer.ResetTimer();
         Game.BleedingTimer.ResetTimer();

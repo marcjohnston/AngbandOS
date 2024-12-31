@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistAll40p1d40Script : Script, ICancellableScriptItem
+internal class ResistAll40p1d40Script : Script, IUsedScriptItem
 {
     private ResistAll40p1d40Script(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(40) + 40);

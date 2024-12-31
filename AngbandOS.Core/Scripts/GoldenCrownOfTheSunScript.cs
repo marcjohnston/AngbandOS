@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GoldenCrownOfTheSunScript : Script, ICancellableScriptItem
+internal class GoldenCrownOfTheSunScript : Script, IUsedScriptItem
 {
     private GoldenCrownOfTheSunScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.MsgPrint("Your crown glows deep yellow...");
         Game.MsgPrint("You feel a warm tingling inside...");

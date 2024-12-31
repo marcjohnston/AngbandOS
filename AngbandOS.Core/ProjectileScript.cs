@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IDirectionalCancellableScriptItem, IIdentifableDirectionalScript, IIdentifiedAndUsedScriptItemDirection, IScript
+internal abstract class ProjectileScript : Script, IDirectionalCancellableScriptItem, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript
 {
     public ProjectileScript(Game game) : base(game) { }
 
@@ -100,7 +100,7 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// <returns></returns>
     public bool ExecuteCancellableScriptItem(Item item, int direction)
     {
-        ExecuteIdentifableDirectionalScript(direction);
+        ExecuteIdentifableScriptDirection(direction);
         return true; // Return true because the script was not cancelled.
     }
 
@@ -109,7 +109,7 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
     /// </summary>
     /// <param name="direction"></param>
     /// <returns></returns>
-    public bool ExecuteIdentifableDirectionalScript(int direction)
+    public bool ExecuteIdentifableScriptDirection(int direction)
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
         int damage = DamageRoll.Get(Game.UseRandom);
@@ -131,7 +131,7 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
             Game.MsgPrint(PreMessage);
         }
 
-        bool identified = ExecuteIdentifableDirectionalScript(dir);
+        bool identified = ExecuteIdentifableScriptDirection(dir);
         return (identified, true);
     }
 
@@ -149,14 +149,14 @@ internal abstract class ProjectileScript : Script, IDirectionalCancellableScript
                     {
                         return;
                     }
-                    ExecuteIdentifableDirectionalScript(dir);
+                    ExecuteIdentifableScriptDirection(dir);
                 }
                 break;
             case NonDirectionalProjectileModeEnum.AllDirections:
                 {
                     foreach (int dir in Game.OrderedDirection)
                     {
-                        ExecuteIdentifableDirectionalScript(dir);
+                        ExecuteIdentifableScriptDirection(dir);
                     }
                 }
                 break;

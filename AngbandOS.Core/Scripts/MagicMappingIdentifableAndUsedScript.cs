@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MagicMappingIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class MagicMappingIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private MagicMappingIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class MagicMappingIdentifableAndUsedScript : Script, IIdentifableAndUse
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         Game.RunScript(nameof(MapAreaScript));
         return (true, true);

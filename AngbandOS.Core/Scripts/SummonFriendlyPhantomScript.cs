@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonFriendlyPhantomScript : Script, ICancellableScriptItem
+internal class SummonFriendlyPhantomScript : Script, IUsedScriptItem
 {
     private SummonFriendlyPhantomScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(PhantomMonsterFilter)), true);
         return true;

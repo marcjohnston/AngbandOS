@@ -756,7 +756,12 @@ public bool IsDead = false;
     public bool HasChaosResistance;
     public bool HasColdImmunity;
     public bool HasColdResistance;
+
+    /// <summary>
+    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.
+    /// </summary>
     public bool HasConfusingTouch;
+
     public bool HasConfusionResistance;
     public bool HasDarkResistance;
     public bool HasDisenchantResistance;
@@ -4978,7 +4983,11 @@ public bool IsDead = false;
         return detect;
     }
 
-    public bool DetectMonstersInvis()
+    /// <summary>
+    /// Reveals all invisible monsters within the viewport.
+    /// </summary>
+    /// <returns>True, if any monsters were revealed; false, otherwise.</returns>
+    public bool DetectInvisibleMonsters()
     {
         bool flag = false;
         for (int i = 1; i < MonsterMax; i++)
@@ -5072,9 +5081,13 @@ public bool IsDead = false;
         return detect;
     }
 
+    /// <summary>
+    /// Reveals traps that are within the viewport.
+    /// </summary>
+    /// <returns>True, if any traps were reveals; false, otherwise.</returns>
     public bool DetectTraps()
     {
-        bool detect = false;
+        bool anyTrapsRevealed = false;
         for (int y = PanelRowMin; y <= PanelRowMax; y++)
         {
             for (int x = PanelColMin; x <= PanelColMax; x++)
@@ -5089,21 +5102,25 @@ public bool IsDead = false;
                 if (cPtr.FeatureType.IsTrap)
                 {
                     cPtr.PlayerMemorized = true;
-                    detect = true;
+                    anyTrapsRevealed = true;
                 }
             }
         }
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
-        if (detect)
+        if (anyTrapsRevealed)
         {
             MsgPrint("You sense the presence of traps!");
         }
-        return detect;
+        return anyTrapsRevealed;
     }
 
+    /// <summary>
+    /// Reveals any treasure that is within the viewport.
+    /// </summary>
+    /// <returns>True, if any treasure was revealed; false, otherwise.</returns>
     public bool DetectTreasure()
     {
-        bool detect = false;
+        bool anyTreasureRevealed = false;
         for (int y = PanelRowMin; y <= PanelRowMax; y++)
         {
             for (int x = PanelColMin; x <= PanelColMax; x++)
@@ -5117,15 +5134,15 @@ public bool IsDead = false;
                 {
                     cPtr.PlayerMemorized = true;
                     MainForm.RefreshMapLocation(y, x);
-                    detect = true;
+                    anyTreasureRevealed = true;
                 }
             }
         }
-        if (detect)
+        if (anyTreasureRevealed)
         {
             MsgPrint("You sense the presence of buried treasure!");
         }
-        return detect;
+        return anyTreasureRevealed;
     }
 
     public bool DisarmTrap(int dir)
@@ -5587,6 +5604,13 @@ public bool IsDead = false;
         return true;
     }
 
+    /// <summary>
+    /// Allows the player to selection an item from their inventory, equipment or the floor and attempts to enchant it.
+    /// </summary>
+    /// <param name="numHit"></param>
+    /// <param name="numDam"></param>
+    /// <param name="numAc"></param>
+    /// <returns>False, if there are no items available to the player or the player cancels the selection.  True, otherwise.</returns>
     public bool EnchantItem(int numHit, int numDam, int numAc)
     {
         bool okay = false;
@@ -6709,9 +6733,12 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Heavily curse the players armor
+    /// Heavily curse the players armor. 
     /// </summary>
-    /// <returns> true if there was armor to curse, false otherwise </returns>
+    /// <returns>
+    /// Returns true, if there was armor that was subjected to being cursed, even if the armor resisted the curse; false, if there was no
+    /// armor capable of being cursed.
+    /// </returns>
     public bool CurseArmor()
     {
         WieldSlot? inventorySlot = SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.CanBeCursed).ChooseOrDefault();
@@ -8161,7 +8188,7 @@ public bool IsDead = false;
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    public bool RunCancellableScript(string scriptName)
+    public bool RunUsedScript(string scriptName)
     {
         // Get the script from the singleton repository.
         ICancellableScript castedScript = (ICancellableScript)SingletonRepository.Get<ICancellableScript>(scriptName);
@@ -8171,7 +8198,7 @@ public bool IsDead = false;
     public bool RunIdentifableScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        IIdentifableScript? castedScript = (IIdentifableScript)SingletonRepository.Get<IIdentifableScript>(scriptName);
+        IIdentifiedScript? castedScript = (IIdentifiedScript)SingletonRepository.Get<IIdentifiedScript>(scriptName);
         return castedScript.ExecuteIdentifableScript();
     }
 
@@ -8194,11 +8221,11 @@ public bool IsDead = false;
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    public bool RunCancellableScriptInt(string scriptName, int value)
+    public bool RunUsedScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
-        ICancellableScriptInt castedScript = SingletonRepository.Get<ICancellableScriptInt>(scriptName);
-        return castedScript.ExecuteCancellableScriptInt(value);
+        IUsedScriptInt castedScript = SingletonRepository.Get<IUsedScriptInt>(scriptName);
+        return castedScript.ExecuteUsedScriptInt(value);
     }
 
     /// <summary>
@@ -14163,6 +14190,11 @@ public bool IsDead = false;
         }
     }
 
+    /// <summary>
+    /// Restores an ability.
+    /// </summary>
+    /// <param name="stat"></param>
+    /// <returns>Returns true, if the ability was less than max and was restored back to max; false, otherwise.</returns>
     public bool RestoreAbilityScore(int stat)
     {
         if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
@@ -14512,6 +14544,11 @@ public bool IsDead = false;
         return false;
     }
 
+    /// <summary>
+    /// Attempts to restore an ability and renders a message to player, if the ability was restored.
+    /// </summary>
+    /// <param name="stat"></param>
+    /// <returns>Returns true, if the ability was less than max and was restored back to max; false, otherwise.</returns>
     public bool TryRestoringAbilityScore(int stat)
     {
         if (RestoreAbilityScore(stat))

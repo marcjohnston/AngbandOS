@@ -70,7 +70,7 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
     }
 
     /// <summary>
-    /// Adds (or subtracts) turns from the timer and returns true, if the action was noticed; false, otherwise.  The action is noticed when the timer is started or stopped.
+    /// Adds (or subtracts) turns from the timer and returns true, if the action was identifiable; false, otherwise.  The action is identifiable when the timer is started or stopped.
     /// </summary>
     /// <param name="deltaValue"></param>
     /// <returns></returns>

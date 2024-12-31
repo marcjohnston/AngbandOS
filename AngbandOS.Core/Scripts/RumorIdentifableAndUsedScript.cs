@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RumorIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class RumorIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private RumorIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RumorIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         Game.MsgPrint("There is message on the scroll. It says:");
         Game.MsgPrint(null);

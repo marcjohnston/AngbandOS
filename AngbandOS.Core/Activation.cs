@@ -31,7 +31,7 @@ internal abstract class Activation : BaseActivation, IGetKey
     public virtual void Bind()
     {
         RechargeTimeRoll = Game.ParseRollExpression(RechargeTimeRollExpression);
-        ActivationCancellableScript = Game.SingletonRepository.Get<ICancellableScriptItem>(ActivationCancellableScriptItemBindingKey);
+        ActivationCancellableScript = Game.SingletonRepository.Get<IUsedScriptItem>(ActivationCancellableScriptItemBindingKey);
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ internal abstract class Activation : BaseActivation, IGetKey
     /// Returns the binding key for the <see cref="ICancellableScript"/> that should be run when the activation is executed.  This property is used to bind
     /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
     /// </summary>
-    public ICancellableScriptItem ActivationCancellableScript { get; protected set; }
+    public IUsedScriptItem ActivationCancellableScript { get; protected set; }
 
     /// <summary>
     /// Performs the item activation and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
@@ -59,6 +59,6 @@ internal abstract class Activation : BaseActivation, IGetKey
     /// <param name="item">The item that was activated.</param>
     protected override bool OnActivate(Item item)
     {
-        return ActivationCancellableScript.ExecuteCancellableScriptItem(item);
+        return ActivationCancellableScript.ExecuteUsedScriptItem(item);
     }
 }

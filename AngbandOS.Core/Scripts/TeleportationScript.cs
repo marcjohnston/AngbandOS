@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportationScript : Script, IIdentifableAndUsedScript
+internal class TeleportationScript : Script, IIdentifiedAndUsedScript
 {
     private TeleportationScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class TeleportationScript : Script, IIdentifableAndUsedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         Game.RunScriptInt(nameof(TeleportSelfScript), 100);
         return (true, true);

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GetawayScript : Script, ICancellableScriptItem
+internal class GetawayScript : Script, IUsedScriptItem
 {
     private GetawayScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         switch (Game.DieRoll(13))
         {

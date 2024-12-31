@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAreaR15Script : Script, IIdentifableAndUsedScript
+internal class DestroyAreaR15Script : Script, IIdentifiedAndUsedScript
 {
     private DestroyAreaR15Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DestroyAreaR15Script : Script, IIdentifableAndUsedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
         return (true, true);

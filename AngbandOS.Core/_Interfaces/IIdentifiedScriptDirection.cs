@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Interfaces;
 /// <summary>
 /// Represents the interface a script needs to implement to particpate in scripts that can potentially identify an object.
 /// </summary>
-internal interface IIdentifableScript // TODO: This is the same as the INoticeable??
-{ 
+internal interface IIdentifiedScriptDirection
+{
     /// <summary>
-    /// Returns true, if the script performs an action that would identify an object; false, otherwise. 
+    /// Returns true, if the script performs an action that would identify the item that performed the action; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    bool ExecuteIdentifableScript();
+    bool ExecuteIdentifableScriptDirection(int dir);
 }

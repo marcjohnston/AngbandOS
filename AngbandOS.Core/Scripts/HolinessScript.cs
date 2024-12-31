@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HolinessScript : Script, IIdentifableAndUsedScript
+internal class HolinessScript : Script, IIdentifiedAndUsedScript
 {
     private HolinessScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class HolinessScript : Script, IIdentifableAndUsedScript
     /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         bool identified = false;
         if (Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), 120))

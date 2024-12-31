@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CurseWeaponIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class CurseWeaponIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private CurseWeaponIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,12 +16,9 @@ internal class CurseWeaponIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (!Game.CurseWeapon())
-        {
-            return (false, true);
-        }
-        return (true, true);
+        bool identified = Game.CurseWeapon();
+        return (identified, true);
     }
 }

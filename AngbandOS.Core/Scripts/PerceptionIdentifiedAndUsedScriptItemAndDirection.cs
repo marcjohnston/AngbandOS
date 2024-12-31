@@ -18,7 +18,7 @@ internal class PerceptionIdentifiedAndUsedScriptItemAndDirection : Script, IIden
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
     {
-        if (Game.RunCancellableScript(nameof(IdentifyItemCancellableScript)))
+        if (Game.RunUsedScript(nameof(IdentifyItemCancellableScript)))
         {
             return (true, true);
         }

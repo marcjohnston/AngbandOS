@@ -82,7 +82,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         Game.PlaySound(SoundEffectEnum.UseStaff);
 
         // Do the specific effect for the type of staff
-        (bool identified, bool chargeUsed) = item.UseTuple.Value.UseScript.ExecuteIdentifableAndUsedScript();
+        (bool identified, bool chargeUsed) = item.UseTuple.Value.UseScript.ExecuteIdentifiedAndUsedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does

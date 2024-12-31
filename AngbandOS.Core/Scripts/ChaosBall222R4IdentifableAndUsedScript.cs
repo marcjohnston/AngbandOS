@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ChaosBall222R4IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class ChaosBall222R4IdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private ChaosBall222R4IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ChaosBall222R4IdentifableAndUsedScript : Script, IIdentifableAndU
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, 222, 4);
         if (!Game.HasChaosResistance)

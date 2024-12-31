@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class OfTheMagiScript : Script, IIdentifableAndUsedScript
+internal class OfTheMagiScript : Script, IIdentifiedAndUsedScript
 {
     private OfTheMagiScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         bool identified = false;
         if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))

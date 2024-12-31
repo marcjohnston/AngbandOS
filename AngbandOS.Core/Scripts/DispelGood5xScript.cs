@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelGood5xScript : Script, ICancellableScriptItem
+internal class DispelGood5xScript : Script, IUsedScriptItem
 {
     private DispelGood5xScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.RunScriptInt(nameof(DispelGood4xScript), Game.ExperienceLevel.IntValue * 5);
         return true;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectNormalObjectsIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DetectNormalObjectsIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private DetectNormalObjectsIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,13 +16,10 @@ internal class DetectNormalObjectsIdentifableAndUsedScript : Script, IIdentifabl
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (!Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript)))
-        {
-            return (false, true);
-        }
-        return (true, true);
+        bool identified = Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript));
+        return (identified, true);
     }
 }
 

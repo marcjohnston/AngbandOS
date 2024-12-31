@@ -7,11 +7,11 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IIdentifableAndUsedScript
+internal interface IIdentifiedAndUsedScript
 {
     /// <summary>
     /// Returns identified as true, if the script performs an action that would identify the item; false, otherwise and used as true, if the item should be deleted; false, for the item to be kept.
     /// </summary>
     /// <returns></returns>
-    (bool identified, bool used) ExecuteIdentifableAndUsedScript();
+    (bool identified, bool used) ExecuteIdentifiedAndUsedScript();
 }

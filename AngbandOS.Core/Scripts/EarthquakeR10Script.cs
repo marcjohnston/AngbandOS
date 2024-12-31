@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EarthquakeR10Script : Script, IScript, IIdentifableAndUsedScript
+internal class EarthquakeR10Script : Script, IScript, IIdentifiedAndUsedScript
 {
     private EarthquakeR10Script(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         ExecuteScript();
         return (true, true);

@@ -8,16 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelEvil60Script : Script, IIdentifableAndUsedScript
+internal class DispelEvil60Script : Script, IIdentifiedAndUsedScript
 {
     private DispelEvil60Script(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), 60))
-        {
-            return (true, true);
-        }
-        return (false, true);
+        bool identified = Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), 60);
+        return (identified, true);
     }
 }

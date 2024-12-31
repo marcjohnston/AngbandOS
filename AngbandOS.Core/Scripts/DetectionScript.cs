@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectionScript : Script, IScript, ISuccessByChanceScript, ICancellableScriptItem
+internal class DetectionScript : Script, IScript, ISuccessByChanceScript, IUsedScriptItem
 {
     private DetectionScript(Game game) : base(game) { }
 
@@ -24,7 +24,7 @@ internal class DetectionScript : Script, IScript, ISuccessByChanceScript, ICance
         detect |= Game.DetectTreasure();
         detect |= Game.DetectGold();
         detect |= Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript));
-        detect |= Game.DetectMonstersInvis();
+        detect |= Game.DetectInvisibleMonsters();
         detect |= Game.RunSuccessByChanceScript(nameof(DetectNormalMonstersScript));
         return detect;
     }
@@ -38,7 +38,7 @@ internal class DetectionScript : Script, IScript, ISuccessByChanceScript, ICance
         ExecuteSuccessByChanceScript();
     }
 
-    public bool ExecuteCancellableScriptItem(Item item)
+    public bool ExecuteUsedScriptItem(Item item)
     {
         Game.MsgPrint("An image forms in your mind...");
         ExecuteSuccessByChanceScript();

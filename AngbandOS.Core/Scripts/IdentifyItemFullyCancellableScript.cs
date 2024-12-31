@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyItemFullyCancellableScript : Script, IScript, ICancellableScript, ICancellableScriptItem
+internal class IdentifyItemFullyCancellableScript : Script, IScript, ICancellableScript, IUsedScriptItem
 {
     private IdentifyItemFullyCancellableScript(Game game) : base(game) { }
 
@@ -51,7 +51,7 @@ internal class IdentifyItemFullyCancellableScript : Script, IScript, ICancellabl
         return false;
     }
 
-    public bool ExecuteCancellableScriptItem(Item item)
+    public bool ExecuteUsedScriptItem(Item item)
     {
         return ExecuteCancellableScript();
     }

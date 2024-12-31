@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MassCharmScript : Script, ICancellableScriptItem
+internal class MassCharmScript : Script, IUsedScriptItem
 {
     private MassCharmScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(CharmProjectile)), Game.ExperienceLevel.IntValue * 2);
         return true;

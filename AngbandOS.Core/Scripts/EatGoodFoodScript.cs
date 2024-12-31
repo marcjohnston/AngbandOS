@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatGoodFoodScript : Script, IIdentifableScript
+internal class EatGoodFoodScript : Script, IIdentifiedScript
 {
     private EatGoodFoodScript(Game game) : base(game) { }
 

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WhirlwindScript : Script, ICancellableScriptItem
+internal class WhirlwindScript : Script, IUsedScriptItem
 {
     private WhirlwindScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         for (int direction = 0; direction <= 9; direction++)
         {

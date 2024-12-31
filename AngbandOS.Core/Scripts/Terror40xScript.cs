@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Terror40xScript : Script, ICancellableScriptItem
+internal class Terror40xScript : Script, IUsedScriptItem
 {
     private Terror40xScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.TurnMonsters(40 + Game.ExperienceLevel.IntValue);
         return true;

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectDoorsAndStairsScript : Script, IIdentifiedAndUsedScriptItemDirection, IIdentifableAndUsedScript
+internal class DetectDoorsAndStairsScript : Script, IIdentifiedAndUsedScriptItemDirection, IIdentifiedAndUsedScript
 {
     private DetectDoorsAndStairsScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         bool identified = false;
         if (Game.DetectDoors())
@@ -32,6 +32,6 @@ internal class DetectDoorsAndStairsScript : Script, IIdentifiedAndUsedScriptItem
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
     {
-        return ExecuteIdentifableAndUsedScript();
+        return ExecuteIdentifiedAndUsedScript();
     }
 }

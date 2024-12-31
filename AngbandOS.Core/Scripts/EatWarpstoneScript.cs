@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatWarpstoneScript : Script, IIdentifableScript
+internal class EatWarpstoneScript : Script, IIdentifiedScript
 {
     private EatWarpstoneScript(Game game) : base(game) { }
 

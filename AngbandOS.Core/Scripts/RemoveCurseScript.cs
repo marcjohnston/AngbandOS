@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChanceScript, IIdentifableAndUsedScript
+internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChanceScript, IIdentifiedAndUsedScript
 {
     private RemoveCurseScript(Game game) : base(game) { }
 
@@ -54,9 +54,10 @@ internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChan
         ExecuteSuccessByChanceScript();
     }
 
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (ExecuteSuccessByChanceScript())
+        bool identified = ExecuteSuccessByChanceScript();
+        if (identified)
         {
             if (Game.BlindnessTimer.Value == 0)
             {

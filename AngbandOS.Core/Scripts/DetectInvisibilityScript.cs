@@ -18,6 +18,6 @@ internal class DetectInvisibilityScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.DetectMonstersInvis();
+        Game.DetectInvisibleMonsters();
     }
 }

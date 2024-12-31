@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LightAreaRadius3Damage2d15Script : Script, ICancellableScriptItem
+internal class LightAreaRadius3Damage2d15Script : Script, IUsedScriptItem
 {
     private LightAreaRadius3Damage2d15Script(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.LightArea(Game.DiceRoll(2, 15), 3);
         return true;

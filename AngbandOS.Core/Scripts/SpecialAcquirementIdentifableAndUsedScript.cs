@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpecialAcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class SpecialAcquirementIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private SpecialAcquirementIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SpecialAcquirementIdentifableAndUsedScript : Script, IIdentifable
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, Game.DieRoll(2) + 1, true);
         return (true, true);

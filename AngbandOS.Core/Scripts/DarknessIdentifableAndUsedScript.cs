@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DarknessIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DarknessIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private DarknessIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,17 +16,14 @@ internal class DarknessIdentifableAndUsedScript : Script, IIdentifableAndUsedScr
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         if (!Game.HasBlindnessResistance && !Game.HasDarkResistance)
         {
             Game.BlindnessTimer.AddTimer(3 + Game.DieRoll(5));
         }
-        if (!Game.UnlightArea(10, 3))
-        {
-            return (false, true);
-        }
-        return (true, true);
+        bool identified = Game.UnlightArea(10, 3);
+        return (identified, true);
     }
 }
 

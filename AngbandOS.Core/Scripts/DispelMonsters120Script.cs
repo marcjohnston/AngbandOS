@@ -8,16 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelMonsters120Script : Script, IIdentifableAndUsedScript
+internal class DispelMonsters120Script : Script, IIdentifiedAndUsedScript
 {
     private DispelMonsters120Script(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (Game.DispelMonsters(120))
-        {
-            return (true, true);
-        }
-        return (false, true);
+        bool identified = Game.DispelMonsters(120);
+        return (identified, true);
     }
 }

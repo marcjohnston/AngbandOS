@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ProtectionFromEvilIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class ProtectionFromEvilIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private ProtectionFromEvilIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,14 +16,11 @@ internal class ProtectionFromEvilIdentifableAndUsedScript : Script, IIdentifable
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         int i = 3 * Game.ExperienceLevel.IntValue;
-        if (!Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + i))
-        {
-            return (false, true);
-        }
-        return (true, true);
+        bool identified = Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + i);
+        return (identified, true);
     }
 }
 

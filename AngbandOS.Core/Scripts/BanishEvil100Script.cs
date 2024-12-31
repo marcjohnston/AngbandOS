@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BanishEvil100Script : Script, IScript, ICancellableScriptItem
+internal class BanishEvil100Script : Script, IScript, IUsedScriptItem
 {
     private BanishEvil100Script(Game game) : base(game) { }
 
@@ -24,7 +24,7 @@ internal class BanishEvil100Script : Script, IScript, ICancellableScriptItem
         }
     }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         if (Game.BanishEvil(100))
         {

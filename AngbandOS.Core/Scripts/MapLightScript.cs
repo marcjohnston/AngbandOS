@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MapLightScript : Script, ICancellableScriptItem
+internal class MapLightScript : Script, IUsedScriptItem
 {
     private MapLightScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(MapAreaScript));
         Game.LightArea(Game.DiceRoll(2, 15), 3);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class _template : Script, IScript, IRepeatableScript, ISuccessByChanceScript, IScriptStore, IIdentifableScript, INoticeableScript, ICancellableScript
+internal class _template : Script, IScript, IRepeatableScript, ISuccessByChanceScript, IScriptStore, IIdentifiedScript, INoticeableScript, ICancellableScript
 {
     private _template(Game game) : base(game) { }
 

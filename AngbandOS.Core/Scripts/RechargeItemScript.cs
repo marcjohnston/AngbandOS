@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RechargeItemScript : Script, IScript, ICancellableScriptInt, ICancellableScriptItem
+internal class RechargeItemScript : Script, IScript, IUsedScriptInt, IUsedScriptItem
 {
     private RechargeItemScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptInt(int num)
+    public bool ExecuteUsedScriptInt(int num)
     {
         if (!Game.SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeRechargedItemFilter))))
         {
@@ -33,9 +33,9 @@ internal class RechargeItemScript : Script, IScript, ICancellableScriptInt, ICan
         return true;
     }
 
-    public bool ExecuteCancellableScriptItem(Item item)
+    public bool ExecuteUsedScriptItem(Item item)
     {
-        return ExecuteCancellableScriptInt(60);
+        return ExecuteUsedScriptInt(60);
     }
 
     /// <summary>
@@ -44,6 +44,6 @@ internal class RechargeItemScript : Script, IScript, ICancellableScriptInt, ICan
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteCancellableScriptInt(Game.ExperienceLevel.IntValue * 2);
+        ExecuteUsedScriptInt(Game.ExperienceLevel.IntValue * 2);
     }
 }

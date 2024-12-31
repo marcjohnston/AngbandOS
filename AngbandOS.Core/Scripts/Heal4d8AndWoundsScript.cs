@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Heal4d8AndWoundsScript : Script, ICancellableScriptItem
+internal class Heal4d8AndWoundsScript : Script, IUsedScriptItem
 {
     private Heal4d8AndWoundsScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.RestoreHealth(Game.DiceRoll(4, 8));
         Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 50);

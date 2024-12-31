@@ -93,7 +93,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             return false;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
-        bool ident = item.AimingTuple.Value.ActivationScript.ExecuteIdentifableDirectionalScript(dir);
+        bool ident = item.AimingTuple.Value.ActivationScript.ExecuteIdentifableScriptDirection(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatSlimeMoldScript : Script, IIdentifableScript
+internal class EatSlimeMoldScript : Script, IIdentifiedScript
 {
     private EatSlimeMoldScript(Game game) : base(game) { }
 

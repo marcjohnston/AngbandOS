@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectTrapsIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DetectTrapsIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private DetectTrapsIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,13 +16,10 @@ internal class DetectTrapsIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (!Game.DetectTraps())
-        {
-            return (false, true);
-        }
-        return (true, true);
+        bool identified = Game.DetectTraps();
+        return (identified, true);
     }
 }
 

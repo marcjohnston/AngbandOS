@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnchantWeaponToDamage1D3AndToHit1D3IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class EnchantWeaponToDamage1D3AndToHit1D3IdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private EnchantWeaponToDamage1D3AndToHit1D3IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,13 +16,10 @@ internal class EnchantWeaponToDamage1D3AndToHit1D3IdentifableAndUsedScript : Scr
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (!Game.EnchantItem(Game.DieRoll(3), Game.DieRoll(3), 0))
-        {
-            return (true, false);
-        }
-        return (true, true);
+        bool used = Game.EnchantItem(Game.DieRoll(3), Game.DieRoll(3), 0);
+        return (true, used);
     }
 }
 

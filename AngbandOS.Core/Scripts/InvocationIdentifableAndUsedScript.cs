@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class InvocationIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class InvocationIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private InvocationIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,9 +16,9 @@ internal class InvocationIdentifableAndUsedScript : Script, IIdentifableAndUsedS
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        Patron patron = Game.SingletonRepository.ToWeightedRandom<Patron>().ChooseOrDefault();
+        Patron? patron = Game.SingletonRepository.ToWeightedRandom<Patron>().ChooseOrDefault();
         if (patron == null)
         {
             throw new Exception("There are no Patrons configured to invoke.");

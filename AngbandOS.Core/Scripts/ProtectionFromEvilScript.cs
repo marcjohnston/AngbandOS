@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ProtectionFromEvilScript : Script, IScript, ICancellableScriptItem
+internal class ProtectionFromEvilScript : Script, IScript, IUsedScriptItem
 {
     private ProtectionFromEvilScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item)
+    public bool ExecuteUsedScriptItem(Item item)
     {
         ExecuteScript();
         return true;

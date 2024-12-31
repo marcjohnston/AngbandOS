@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScriptGenericWeightedRandom : GenericWeightedRandom<ProjectileScript>, IDirectionalCancellableScriptItem, IIdentifableDirectionalScript, IIdentifiedAndUsedScriptItemDirection, IScript
+internal abstract class ProjectileScriptGenericWeightedRandom : GenericWeightedRandom<ProjectileScript>, IDirectionalCancellableScriptItem, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript
 {
     protected ProjectileScriptGenericWeightedRandom(Game game) : base(game) { }
 
@@ -18,9 +18,9 @@ internal abstract class ProjectileScriptGenericWeightedRandom : GenericWeightedR
         return Choose().ExecuteCancellableScriptItem(item, direction);
     }
 
-    public bool ExecuteIdentifableDirectionalScript(int dir)
+    public bool ExecuteIdentifableScriptDirection(int dir)
     {
-        return Choose().ExecuteIdentifableDirectionalScript(dir);
+        return Choose().ExecuteIdentifableScriptDirection(dir);
     }
 
     public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)

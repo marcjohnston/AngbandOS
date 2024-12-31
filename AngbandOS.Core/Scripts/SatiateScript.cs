@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SatiateScript : Script, ICancellableScriptItem
+internal class SatiateScript : Script, IUsedScriptItem
 {
     private SatiateScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
     {
         Game.SetFood(Constants.PyFoodMax - 1);
         return true;

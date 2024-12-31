@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HasteMonstersScript : Script, IIdentifableAndUsedScript
+internal class HasteMonstersScript : Script, IIdentifiedAndUsedScript
 {
     private HasteMonstersScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         if (Game.HasteMonsters())
         {

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelUndead60IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DispelUndead60IdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private DispelUndead60IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,13 +16,10 @@ internal class DispelUndead60IdentifableAndUsedScript : Script, IIdentifableAndU
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (!Game.DispelUndead(60))
-        {
-            return (false, true);
-        }
-        return (true, true);
+        bool identified = Game.DispelUndead(60);
+        return (identified, true);
     }
 }
 

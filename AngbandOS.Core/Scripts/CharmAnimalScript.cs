@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CharmAnimalScript : Script, IScript, IScriptInt, ICancellableScriptItem
+internal class CharmAnimalScript : Script, IScript, IScriptInt, IUsedScriptItem
 {
     private CharmAnimalScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class CharmAnimalScript : Script, IScript, IScriptInt, ICancellableScri
     /// Runs the script and returns true because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteCancellableScriptItem(Item item)
+    public bool ExecuteUsedScriptItem(Item item)
     {
         ExecuteScript();
         return true;

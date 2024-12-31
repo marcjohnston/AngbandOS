@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MonsterConfusionIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class MonsterConfusionIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private MonsterConfusionIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,15 +16,15 @@ internal class MonsterConfusionIdentifableAndUsedScript : Script, IIdentifableAn
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         if (Game.HasConfusingTouch)
         {
-            return (false, true);
+            return (false, true); // We already had the enchantment.  We won't be able to identify any changes.
         }
         Game.MsgPrint("Your hands begin to glow.");
         Game.HasConfusingTouch = true;
-        return (true, true);
+        return (true, true); // We were able to identify the change in our hands.
     }
 }
 

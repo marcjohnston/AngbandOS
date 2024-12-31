@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Recharge60IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class Recharge60IdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private Recharge60IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,13 +16,9 @@ internal class Recharge60IdentifableAndUsedScript : Script, IIdentifableAndUsedS
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
-        if (!Game.RunCancellableScriptInt(nameof(RechargeItemScript), 60))
-        {
-            return (true, false);
-        }
-        return (true, true);
+        bool used = Game.RunUsedScriptInt(nameof(RechargeItemScript), 60);
+        return (true, used);
     }
 }
-

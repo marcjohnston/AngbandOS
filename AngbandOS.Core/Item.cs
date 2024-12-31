@@ -273,9 +273,9 @@ internal sealed class Item : IComparable<Item>
     public bool HatesFire => _factory.HatesFire;
     public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple => _factory.QuaffTuple;
     public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple => _factory.ZapTuple;
-    public (IIdentifableAndUsedScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
-    public (IIdentifableDirectionalScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
-    public (IIdentifableAndUsedScript ActivationScript, int ManaValue)? ActivationTuple => _factory.ActivationTuple;
+    public (IIdentifiedAndUsedScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
+    public (IIdentifiedScriptDirection ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
+    public (IIdentifiedAndUsedScript ActivationScript, int ManaValue)? ActivationTuple => _factory.ActivationTuple;
     public Probability BreakageChanceProbability => _factory.BreakageChanceProbability;
     public int MissileDamageMultiplier => _factory.MissileDamageMultiplier;
     public bool CanBeRead => _factory.CanBeRead;
@@ -288,7 +288,7 @@ internal sealed class Item : IComparable<Item>
     public int ExperienceGainDivisorForDestroying => _factory.ExperienceGainDivisorForDestroying;
     public bool IdentityCanBeSensed => _factory.IdentityCanBeSensed;
     public bool IsConsumedWhenEaten => _factory.IsConsumedWhenEaten;
-    public IIdentifableScript? EatScript => _factory.EatScript;
+    public IIdentifiedScript? EatScript => _factory.EatScript;
     private bool GetsDamageMultiplier => _factory.GetsDamageMultiplier;
 
     /// <summary>

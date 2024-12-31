@@ -32,7 +32,7 @@ internal class PrecognitionTalent : Talent
             b = Game.RunSuccessByChanceScript(nameof(DetectNormalMonstersScript));
             if (Game.ExperienceLevel.IntValue > 14)
             {
-                b |= Game.DetectMonstersInvis();
+                b |= Game.DetectInvisibleMonsters();
             }
             if (Game.ExperienceLevel.IntValue > 4)
             {

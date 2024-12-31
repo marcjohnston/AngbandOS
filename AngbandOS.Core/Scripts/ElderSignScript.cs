@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ElderSignScript : Script, IScript, ICancellableScriptItem
+internal class ElderSignScript : Script, IScript, IUsedScriptItem
 {
     private ElderSignScript(Game game) : base(game) { }
 
-    public bool ExecuteCancellableScriptItem(Item item)
+    public bool ExecuteUsedScriptItem(Item item)
     {
         ExecuteScript();
         return true;

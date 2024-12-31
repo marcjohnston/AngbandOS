@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MassCarnageScript : Script, IScriptBool, IScript, ICancellableScriptItem
+internal class MassCarnageScript : Script, IScriptBool, IScript, IUsedScriptItem
 {
     private MassCarnageScript(Game game) : base(game) { }
 
@@ -59,7 +59,7 @@ internal class MassCarnageScript : Script, IScriptBool, IScript, ICancellableScr
         ExecuteScriptBool(true);
     }
 
-    public bool ExecuteCancellableScriptItem(Item item)
+    public bool ExecuteUsedScriptItem(Item item)
     {
         ExecuteScriptBool(true);
         return true;

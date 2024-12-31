@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpecialRemoveAllCurseIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class SpecialRemoveAllCurseIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
 {
     private SpecialRemoveAllCurseIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SpecialRemoveAllCurseIdentifableAndUsedScript : Script, IIdentifa
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
+    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
     {
         Game.RunScript(nameof(RemoveAllCurseScript));
         return (true, true);

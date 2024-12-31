@@ -7,12 +7,12 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface ICancellableScriptItem
+internal interface IUsedScriptItem
 {
     /// <summary>
     /// Run the associated script and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    bool ExecuteCancellableScriptItem(Item item);
+    bool ExecuteUsedScriptItem(Item item);
 }
