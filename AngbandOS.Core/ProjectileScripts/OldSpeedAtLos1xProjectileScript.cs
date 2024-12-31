@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core.ProjectileScripts;
 
 [Serializable]
 internal class OldSpeedAtLos1xProjectileScript : ProjectileScript

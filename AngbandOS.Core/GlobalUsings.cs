@@ -64,6 +64,7 @@ global using AngbandOS.Core.Plurals;
 global using AngbandOS.Core.Probabilities;
 global using AngbandOS.Core.ProjectileGraphics;
 global using AngbandOS.Core.Projectiles;
+global using AngbandOS.Core.ProjectileScripts; 
 global using AngbandOS.Core.Properties;
 global using AngbandOS.Core.PropertyFormatters;
 global using AngbandOS.Core.Races;

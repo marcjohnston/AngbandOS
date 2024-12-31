@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core.ProjectileScripts;
 
 [Serializable]
 internal class Stasis4xProjectileScript : ProjectileScript
@@ -21,6 +21,6 @@ internal class Stasis4xProjectileScript : ProjectileScript
     public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(StasisProjectile);
-    protected override string DamageRollExpression => "1d14x";
+    protected override string DamageRollExpression => "1d4xX";
     public override bool? Identified => null;
 }
