@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IlluminationIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifiedAndUsedScriptItemDirection
+internal class IlluminationIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private IlluminationIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class IlluminationIdentifiedAndUsedScriptItemAndDirection : Script, IId
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
     {
         if (Game.LightArea(Game.DiceRoll(2, 8), 2))
         {

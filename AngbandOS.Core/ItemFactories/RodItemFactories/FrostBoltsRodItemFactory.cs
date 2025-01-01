@@ -26,7 +26,7 @@ internal class FrostBoltsRodItemFactory : ItemFactory
         (25, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(ColdBoltOrBeam5d8ProjectileScriptGenericWeightedRandom), "13", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(ColdBoltOrBeam5d8ProjectileWeightedRandomScript), "13", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

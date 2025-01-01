@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RuneOfProtectionIdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
+internal class RuneOfProtectionIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
 {
     private RuneOfProtectionIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RuneOfProtectionIdentifableAndUsedScript : Script, IIdentifiedAnd
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         Game.RunScript(nameof(ElderSignScript));
         return (true, true);

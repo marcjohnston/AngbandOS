@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnlightenmentIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifiedAndUsedScriptItemDirection
+internal class EnlightenmentIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private EnlightenmentIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EnlightenmentIdentifiedAndUsedScriptItemAndDirection : Script, II
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
     {
         Game.RunScript(nameof(MapAreaScript));
         return (true, true);

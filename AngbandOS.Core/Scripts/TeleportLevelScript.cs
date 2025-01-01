@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportLevelScript : Script, IScript, IIdentifiedAndUsedScript
+internal class TeleportLevelScript : Script, IScript, IReadScrollAndUseStaffScript
 {
     private TeleportLevelScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class TeleportLevelScript : Script, IScript, IIdentifiedAndUsedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         ExecuteScript();
         return (true, true);

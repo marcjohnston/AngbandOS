@@ -30,7 +30,7 @@ internal class WonderWandItemFactory : ItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(WonderProjectileScriptGenericWeightedRandom), "1d15+8", 13, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(WonderProjectileWeightedRandomScript), "1d15+8", 13, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

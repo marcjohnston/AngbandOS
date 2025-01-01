@@ -214,7 +214,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (ActivationBindingTuple != null)
         {
-            IIdentifiedAndUsedScript identifableAndUsedScript = Game.SingletonRepository.Get<IIdentifiedAndUsedScript>(ActivationBindingTuple.Value.ScriptName);
+            IReadScrollAndUseStaffScript identifableAndUsedScript = Game.SingletonRepository.Get<IReadScrollAndUseStaffScript>(ActivationBindingTuple.Value.ScriptName);
             int manaValue = ActivationBindingTuple.Value.ManaValue;
             ActivationTuple = (identifableAndUsedScript, manaValue);
         }
@@ -229,7 +229,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (ZapBindingTuple != null)
         {
-            IIdentifiedAndUsedScriptItemDirection identifiedAndUsedScriptItemDirection = Game.SingletonRepository.Get<IIdentifiedAndUsedScriptItemDirection>(ZapBindingTuple.Value.ScriptName);
+            IZapRodScript identifiedAndUsedScriptItemDirection = Game.SingletonRepository.Get<IZapRodScript>(ZapBindingTuple.Value.ScriptName);
             Roll roll = Game.ParseRollExpression(ZapBindingTuple.Value.TurnsToRecharge);
             bool requiresAiming = ZapBindingTuple.Value.RequiresAiming;
             int manaEquivalent = ZapBindingTuple.Value.ManaEquivalent;
@@ -248,7 +248,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (UseBindingTuple != null)
         {
-            IIdentifiedAndUsedScript useScript = Game.SingletonRepository.Get<IIdentifiedAndUsedScript>(UseBindingTuple.Value.UseScriptBindingKey);
+            IReadScrollAndUseStaffScript useScript = Game.SingletonRepository.Get<IReadScrollAndUseStaffScript>(UseBindingTuple.Value.UseScriptBindingKey);
             Roll initialChargeRoll = Game.ParseRollExpression(UseBindingTuple.Value.InitialChargesRollExpression);
             int chargeValue = UseBindingTuple.Value.PerChargeValue;
             int manaEquivalent = UseBindingTuple.Value.ManaEquivalent;
@@ -1393,7 +1393,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// The amount of mana needed to consume to keep the charge.
     /// 
     /// </summary>
-    public (IIdentifiedAndUsedScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple { get; private set; } = null;
+    public (IReadScrollAndUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple { get; private set; } = null;
 
     /// <summary>
     /// Returns the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is bound using the <see cref="QuaffBindingTuple"/>
@@ -1439,7 +1439,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// </summary>
     public Probability BreakageChanceProbability { get; private set; }
 
-    public (IIdentifiedAndUsedScriptItemDirection Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple { get; private set; } = null;
+    public (IZapRodScript Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple { get; private set; } = null;
     public ItemClass ItemClass { get; private set; }
 
     /// <summary>
@@ -1468,7 +1468,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// <summary>
     /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivationBindingTuple"/> property during the bind phase.
     /// </summary>
-    public (IIdentifiedAndUsedScript ActivationScript, int ManaValue)? ActivationTuple { get; private set; } = null;
+    public (IReadScrollAndUseStaffScript ActivationScript, int ManaValue)? ActivationTuple { get; private set; } = null;
     #endregion
 
     #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects

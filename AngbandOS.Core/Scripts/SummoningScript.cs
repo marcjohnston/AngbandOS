@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummoningScript : Script, IIdentifiedAndUsedScript
+internal class SummoningScript : Script, IReadScrollAndUseStaffScript
 {
     private SummoningScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         for (int k = 0; k < Game.DieRoll(4); k++)
         {

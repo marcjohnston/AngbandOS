@@ -26,7 +26,7 @@ internal class AcidBoltsRodItemFactory : ItemFactory
         (40, 1)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(AcidBoltOrBeam6d8ProjectileScriptGenericWeightedRandom), "12", true, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(AcidBoltOrBeam6d8ProjectileWeightedRandomScript), "12", true, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

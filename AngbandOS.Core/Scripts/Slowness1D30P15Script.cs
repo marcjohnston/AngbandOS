@@ -10,11 +10,11 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Slowness1D30P15Script : Script, IIdentifiedAndUsedScript
+internal class Slowness1D30P15Script : Script, IReadScrollAndUseStaffScript
 {
     private Slowness1D30P15Script(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         // Slowness slows you down.
         bool identified = Game.SlowTimer.AddTimer(Game.DieRoll(30) + 15);

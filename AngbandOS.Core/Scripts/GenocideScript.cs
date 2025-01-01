@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GenocideScript : Script, IScript, IScriptBool, IIdentifiedAndUsedScript, IUsedScriptItem
+internal class GenocideScript : Script, IScript, IScriptBool, IReadScrollAndUseStaffScript, IUsedScriptItem
 {
     private GenocideScript(Game game) : base(game) { }
 
@@ -52,7 +52,7 @@ internal class GenocideScript : Script, IScript, IScriptBool, IIdentifiedAndUsed
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         ExecuteScript();
         return (true, true);

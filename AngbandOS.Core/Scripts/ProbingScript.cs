@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ProbingScript : Script, IIdentifiedAndUsedScriptItemDirection, IIdentifiedAndUsedScript
+internal class ProbingScript : Script, IZapRodScript, IReadScrollAndUseStaffScript
 {
     private ProbingScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         Game.Probing();
         return (true, true);
@@ -22,8 +22,8 @@ internal class ProbingScript : Script, IIdentifiedAndUsedScriptItemDirection, II
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
     {
-        return ExecuteIdentifiedAndUsedScript();
+        return ExecuteReadScrollAndUseStaffScript();
     }
 }

@@ -7,11 +7,12 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IIdentifiedAndUsedScript
+internal interface IDirectionalActivationScript
 {
     /// <summary>
-    /// Returns identified as true, if the script performs an action that would identify the item; false, otherwise and used as true, if the item should be deleted; false, for the item to be kept.
+    /// Run the associated script and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
+    /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    (bool identified, bool used) ExecuteIdentifiedAndUsedScript();
+    bool ExecuteDirectionalActivationScript(Item item, int direction);
 }

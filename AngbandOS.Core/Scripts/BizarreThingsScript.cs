@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BizarreThingsScript : Script, IUsedScriptItemDirection
+internal class BizarreThingsScript : Script, IDirectionalActivationScript
 {
     private BizarreThingsScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
+    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         switch (Game.DieRoll(10))
         {

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CuringIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifiedAndUsedScriptItemDirection
+internal class CuringIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private CuringIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class CuringIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifi
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
     {
         bool identified = false;
         if (Game.BlindnessTimer.ResetTimer())

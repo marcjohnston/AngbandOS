@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpeedIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifiedAndUsedScriptItemDirection
+internal class SpeedIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private SpeedIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SpeedIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifie
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
     {
         bool identified = false;
         if (Game.HasteTimer.Value == 0)

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Speed1D30P15Or5Script : Script, IIdentifiedAndUsedScript
+internal class Speed1D30P15Or5Script : Script, IReadScrollAndUseStaffScript
 {
     private Speed1D30P15Or5Script(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         if (Game.HasteTimer.Value == 0)
         {

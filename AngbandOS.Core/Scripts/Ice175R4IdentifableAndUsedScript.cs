@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Ice175R4IdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
+internal class Ice175R4IdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
 {
     private Ice175R4IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Ice175R4IdentifableAndUsedScript : Script, IIdentifiedAndUsedScri
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(IceProjectile)), 0, 175, 4);
         if (!(Game.ColdResistanceTimer.Value != 0 || Game.HasColdResistance || Game.HasColdImmunity))

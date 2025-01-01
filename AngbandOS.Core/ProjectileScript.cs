@@ -7,8 +7,9 @@
 
 namespace AngbandOS.Core.Scripts;
 
+
 [Serializable]
-internal abstract class ProjectileScript : IGetKey, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript, IUsedScriptItem, ISuccessByChanceScript
+internal abstract class ProjectileScript : IGetKey, IProjectile
 {
     protected readonly Game Game;
     public ProjectileScript(Game game) 
@@ -130,7 +131,7 @@ internal abstract class ProjectileScript : IGetKey, IUsedScriptItemDirection, II
     /// <param name="item"></param>
     /// <param name="direction"></param>
     /// <returns></returns>
-    public bool ExecuteUsedScriptItemDirection(Item item, int direction)
+    public bool ExecuteDirectionalActivationScript(Item item, int direction)
     {
         return ExecuteScriptWithPreAndPostMessages<bool>(() =>
         {
@@ -159,7 +160,7 @@ internal abstract class ProjectileScript : IGetKey, IUsedScriptItemDirection, II
     /// identified:description: returns true, if the projectile actually hits and affects a monster, which allows the projectile to be identified by the player; false, otherwise.
     /// used:description: returns true if the projectile uses a charge for rod items
     /// </returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int direction)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int direction)
     {
         return ExecuteScriptWithPreAndPostMessages<(bool, bool)>(() =>
         {
@@ -171,7 +172,7 @@ internal abstract class ProjectileScript : IGetKey, IUsedScriptItemDirection, II
     /// <summary>
     /// Projects the projectile in a direction specified by the <see cref="NonDirectionalProjectileMode"/> property.
     /// </summary>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         return ExecuteScriptWithPreAndPostMessages<(bool, bool)>(() =>
         {
@@ -295,3 +296,4 @@ internal abstract class ProjectileScript : IGetKey, IUsedScriptItemDirection, II
     }
     #endregion
 }
+

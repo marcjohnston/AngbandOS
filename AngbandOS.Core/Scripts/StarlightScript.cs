@@ -10,11 +10,11 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StarlightScript : Script, IIdentifiedAndUsedScript
+internal class StarlightScript : Script, IReadScrollAndUseStaffScript
 {
     private StarlightScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         if (Game.BlindnessTimer.Value == 0)
         {

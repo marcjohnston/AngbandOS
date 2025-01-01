@@ -26,7 +26,7 @@ internal class FireBoltsWandItemFactory : ItemFactory
         (30, 1)
     };
     public override int Weight => 10;
-    protected override (string, string, int, int)? AimingBindingTuple => (nameof(FireBoltOrBeam6d8ProjectileScriptGenericWeightedRandom), "1d8+6", 50, 150);
+    protected override (string, string, int, int)? AimingBindingTuple => (nameof(FireBoltOrBeam6d8ProjectileWeightedRandomScript), "1d8+6", 50, 150);
     protected override string ItemClassBindingKey => nameof(WandsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeWandScript);

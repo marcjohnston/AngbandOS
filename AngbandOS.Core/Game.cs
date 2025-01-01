@@ -6907,8 +6907,7 @@ public bool IsDead = false;
         if (tile.MonsterIndex != 0 && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-            if (monster.SmFriendly && !(ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) &&
-                (GridPassable(newY, newX) || canPassWalls))
+            if (monster.SmFriendly && !(ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) && (GridPassable(newY, newX) || canPassWalls))
             {
                 // Wake up the monster, and track it
                 monster.SleepLevel = 0;
@@ -16647,6 +16646,16 @@ public bool IsDead = false;
         }
     }
 
+    /// <summary>
+    /// Generates a monster near the coordinaes <paramref name="x1"/> and <paramref name="y1"/> that belongs to the specified <paramref name="monsterFilter"/>, if specified.
+    /// </summary>
+    /// <param name="y1"></param>
+    /// <param name="x1"></param>
+    /// <param name="lev"></param>
+    /// <param name="monsterFilter"></param>
+    /// <param name="groupOk"></param>
+    /// <param name="friendly"></param>
+    /// <returns>True, if a monster was summoned; false, otherwise.</returns>
     public bool SummonSpecific(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk, bool friendly)
     {
         int i;

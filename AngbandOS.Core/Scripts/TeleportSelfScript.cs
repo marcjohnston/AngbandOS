@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : Script, IScript, IScriptInt, IIdentifiedAndUsedScript, IUsedScriptItem
+internal class TeleportSelfScript : Script, IScript, IScriptInt, IReadScrollAndUseStaffScript, IUsedScriptItem
 {
     private TeleportSelfScript(Game game) : base(game) { }
 
@@ -187,7 +187,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt, IIdentifiedAndU
         Game.MainForm.RefreshMapLocation(ny, nx);
     }
 
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         ExecuteScriptInt(100);
         return (true, true);

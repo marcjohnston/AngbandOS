@@ -223,12 +223,12 @@ internal class SingletonRepository
         RegisterRepository<ICastScript>();
         RegisterRepository<IChangeTracker>();
         RegisterRepository<IDateAndTimeValue>();
-        RegisterRepository<IUsedScriptItemDirection>();
+        RegisterRepository<IDirectionalActivationScript>();
         RegisterRepository<IEnhancementScript>();
-        RegisterRepository<IIdentifiedAndUsedScript>();
+        RegisterRepository<IReadScrollAndUseStaffScript>();
         RegisterRepository<IIdentifiedScriptDirection>();
         RegisterRepository<IIdentifiedScript>();
-        RegisterRepository<IIdentifiedAndUsedScriptItemDirection>();
+        RegisterRepository<IZapRodScript>();
         RegisterRepository<IIntValue>();
         RegisterRepository<IMonsterSelector>();
         RegisterRepository<INoticeableScript>();

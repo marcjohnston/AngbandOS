@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChanceScript, IIdentifiedAndUsedScript
+internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChanceScript, IReadScrollAndUseStaffScript
 {
     private RemoveCurseScript(Game game) : base(game) { }
 
@@ -54,7 +54,7 @@ internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChan
         ExecuteSuccessByChanceScript();
     }
 
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         bool identified = ExecuteSuccessByChanceScript();
         if (identified)

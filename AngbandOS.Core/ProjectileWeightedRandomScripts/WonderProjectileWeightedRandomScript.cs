@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WonderProjectileScriptGenericWeightedRandom : ProjectileScriptGenericWeightedRandom
+internal class WonderProjectileWeightedRandomScript : ProjectileWeightedRandomScript
 {
-    private WonderProjectileScriptGenericWeightedRandom(Game game) : base(game) { }
+    private WonderProjectileWeightedRandomScript(Game game) : base(game) { }
 
     protected override (string, int)[] NameAndWeightBindingTuples => new (string, int)[]
     {

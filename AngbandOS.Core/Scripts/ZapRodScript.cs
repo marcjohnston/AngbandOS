@@ -98,7 +98,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         Game.PlaySound(SoundEffectEnum.ZapRod);
 
         // Do the rod-specific effect
-        (bool identified, bool used) = item.ZapTuple.Value.Script.ExecuteIdentifiedAndUsedScriptItemDirection(item, dir);
+        (bool identified, bool used) = item.ZapTuple.Value.Script.ExecuteZapRodScript(item, dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blessing1d12p6IdentifableAndUsedScript : Script, IIdentifiedAndUsedScript
+internal class Blessing1d12p6IdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
 {
     private Blessing1d12p6IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Blessing1d12p6IdentifableAndUsedScript : Script, IIdentifiedAndUs
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScript()
+    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
     {
         bool identified = Game.BlessingTimer.AddTimer(Game.DieRoll(12) + 6);
         return (identified, true);

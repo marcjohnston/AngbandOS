@@ -15,7 +15,7 @@ internal class BreatheLightOrDarkness200r2Every1d300p300DirectionalActivation : 
     public override string? PreActivationMessage => "You breathe the elements.";
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LightOrDarkness200rm2ProjectileScriptGenericWeightedRandom);
+    protected override string DirectionalActivationCancellableScriptBindingKey => nameof(LightOrDarkness200rm2ProjectileWeightedRandomScript);
 
     public override int Value => 5000;
 

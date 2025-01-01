@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PerceptionIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifiedAndUsedScriptItemDirection
+internal class PerceptionIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private PerceptionIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class PerceptionIdentifiedAndUsedScriptItemAndDirection : Script, IIden
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
     {
         if (Game.RunUsedScript(nameof(IdentifyItemCancellableScript)))
         {

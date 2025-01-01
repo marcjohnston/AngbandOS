@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WordOfRecallScript : Script, IUsedScriptItemDirection
+internal class WordOfRecallScript : Script, IDirectionalActivationScript
 {
     private WordOfRecallScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItemDirection(Item item, int direction) // This is run by an item activation
+    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.RunScript(nameof(ToggleRecallScript));
         return true;

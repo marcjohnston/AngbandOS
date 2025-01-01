@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CallChaosIdentifiedAndUsedScriptItemAndDirection : Script, IIdentifiedAndUsedScriptItemDirection
+internal class CallChaosIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private CallChaosIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class CallChaosIdentifiedAndUsedScriptItemAndDirection : Script, IIdent
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteIdentifiedAndUsedScriptItemDirection(Item item, int dir)
+    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
     {
         Game.RunScript(nameof(CallChaosCancellableScript));
         return (true, true);
