@@ -60,21 +60,3 @@ internal class _template_los : ProjectileScript
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;
 }
-
-[Serializable]
-internal class MakeTrapr1ProjectileScript : ProjectileScript
-{
-    private MakeTrapr1ProjectileScript(Game game) : base(game) { }
-
-    public override bool Stop => false;
-    public override bool Kill => false;
-    public override bool Jump => false;
-    public override bool Beam => false;
-    public override bool Grid => true;
-    public override bool Item => true;
-    public override bool Thru => true;
-    public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(MakeTrapProjectile);
-    protected override string DamageRollExpression => "0";
-    protected override string RadiusRollExpression => "1";
-}

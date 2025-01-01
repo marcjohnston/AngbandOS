@@ -8,13 +8,29 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript, IUsedScriptItem, ISuccessByChanceScript
+internal abstract class ProjectileScript : IGetKey, IUsedScriptItemDirection, IIdentifiedScriptDirection, IIdentifiedAndUsedScriptItemDirection, IScript, IIdentifiedAndUsedScript, IUsedScriptItem, ISuccessByChanceScript
 {
-    public ProjectileScript(Game game) : base(game) { }
-
-    public override void Bind()
+    protected readonly Game Game;
+    public ProjectileScript(Game game) 
     {
-        base.Bind();
+        Game = game;
+    }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+ 
+    public void Bind()
+    {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);
         DamageRoll = Game.ParseRollExpression(DamageRollExpression);
         RadiusRoll = Game.ParseRollExpression(RadiusRollExpression);
