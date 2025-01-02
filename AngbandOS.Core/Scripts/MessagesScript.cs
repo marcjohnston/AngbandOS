@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MessagesScript : Script, IScript, ICastSpellScript, IGameCommandScript, IScriptStore
+internal class MessagesScript : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
 {
     private MessagesScript(Game game) : base(game) { }
 
@@ -21,7 +21,7 @@ internal class MessagesScript : Script, IScript, ICastSpellScript, IGameCommandS
     /// Executes the messages script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }

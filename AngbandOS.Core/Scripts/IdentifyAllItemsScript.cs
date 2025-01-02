@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyAllItemsScript : Script, IScript, ICastSpellScript, IScriptStore
+internal class IdentifyAllItemsScript : Script, IScript, ICastSpellScript, IStoreCommandScript
 {
     private IdentifyAllItemsScript(Game game) : base(game) { }
 
@@ -21,7 +21,7 @@ internal class IdentifyAllItemsScript : Script, IScript, ICastSpellScript, IScri
     /// Executes the identify all script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         if (!Game.ServiceHaggle(500, out int price))
         {

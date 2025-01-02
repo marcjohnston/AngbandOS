@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class InventoryScript : Script, IScript, ICastSpellScript, IGameCommandScript, IScriptStore
+internal class InventoryScript : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
 {
     private InventoryScript(Game game) : base(game) { }
 
@@ -21,7 +21,7 @@ internal class InventoryScript : Script, IScript, ICastSpellScript, IGameCommand
     /// Executes the inventory script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }

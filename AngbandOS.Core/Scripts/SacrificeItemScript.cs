@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SacrificeItemScript : Script, IScriptStore
+internal class SacrificeItemScript : Script, IStoreCommandScript
 {
     private SacrificeItemScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SacrificeItemScript : Script, IScriptStore
     /// Allows an item to be sacrificed to regain health and mana.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         God? god = GetDestinationTown();
         if (god == null)

@@ -10,7 +10,7 @@ using static System.Formats.Asn1.AsnWriter;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PurchaseStoreItemScript : Script, IScriptStore
+internal class PurchaseStoreItemScript : Script, IStoreCommandScript
 {
     private PurchaseStoreItemScript(Game game) : base(game) { }
 
@@ -18,7 +18,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
     /// Allows the selection of and purchase of an item from the store.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         string oName;
         if (storeCommandEvent.Store.StoreInventoryList.Count <= 0)

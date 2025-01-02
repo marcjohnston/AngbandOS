@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LeaveStoreScript : Script, IScriptStore
+internal class LeaveStoreScript : Script, IStoreCommandScript
 {
     private LeaveStoreScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LeaveStoreScript : Script, IScriptStore
     /// Sets the leave store flag.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         storeCommandEvent.LeaveStore = true;
     }

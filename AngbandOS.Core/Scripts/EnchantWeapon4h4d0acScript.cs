@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnchantWeapon4h4d0acScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IScriptStore
+internal class EnchantWeapon4h4d0acScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IStoreCommandScript
 {
     private EnchantWeapon4h4d0acScript(Game game) : base(game) { }
 
@@ -21,7 +21,7 @@ internal class EnchantWeapon4h4d0acScript : Script, IScript, ICastSpellScript, I
     /// Executes the enchant weapon script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         if (!Game.ServiceHaggle(800, out int price))
         {

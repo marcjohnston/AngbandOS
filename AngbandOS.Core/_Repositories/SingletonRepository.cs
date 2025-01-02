@@ -237,7 +237,7 @@ internal class SingletonRepository
         RegisterRepository<IScriptItemGridTile>();
         RegisterRepository<IScriptItemInt>();
         RegisterRepository<IScriptItemMonster>();
-        RegisterRepository<IScriptStore>();
+        RegisterRepository<IStoreCommandScript>();
         RegisterRepository<IStringValue>();
         RegisterRepository<ISuccessByChanceScript>();
         RegisterRepository<ISuccessByChanceScriptInt>();

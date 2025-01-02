@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class _template : Script, IScript, ICastSpellScript, IGameCommandScript, IScriptStore, IEatOrQuaffScript, IUsedScript
+internal class _template : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript, IEatOrQuaffScript, IUsedScript
 {
     private _template(Game game) : base(game) { }
 
@@ -21,7 +21,7 @@ internal class _template : Script, IScript, ICastSpellScript, IGameCommandScript
     /// Executes the script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
     }
 

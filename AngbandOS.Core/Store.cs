@@ -319,7 +319,7 @@ internal class Store
                 if (command.IsEnabled(StoreFactory) && command.ExecuteScript != null)
                 {
                     StoreCommandEvent storeCommandEvent = new(this);
-                    command.ExecuteScript.ExecuteScriptStore(storeCommandEvent);
+                    command.ExecuteScript.ExecuteStoreCommandScript(storeCommandEvent);
 
                     if (storeCommandEvent.RequiresRerendering)
                     {

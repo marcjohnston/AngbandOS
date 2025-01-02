@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interfaces;
 /// <summary>
 /// Represents the interface a script needs to implement for it available when the player is in a store.
 /// </summary>
-internal interface IScriptStore
+internal interface IStoreCommandScript
 {
-    void ExecuteScriptStore(StoreCommandEvent storeCommandEvent);
+    void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent);
 }

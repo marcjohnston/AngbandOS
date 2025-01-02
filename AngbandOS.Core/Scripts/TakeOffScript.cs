@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TakeOffScript : Script, IScript, ICastSpellScript, IGameCommandScript, IScriptStore
+internal class TakeOffScript : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
 {
     private TakeOffScript(Game game) : base(game) { }
 
@@ -21,7 +21,7 @@ internal class TakeOffScript : Script, IScript, ICastSpellScript, IGameCommandSc
     /// Executes the take-off script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }
