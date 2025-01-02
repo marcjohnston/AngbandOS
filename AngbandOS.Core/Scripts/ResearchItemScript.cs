@@ -44,7 +44,7 @@ internal class ResearchItemScript : Script, IScript, ICastSpellScript, IStoreCom
                 Game.SayComment_1();
                 Game.PlaySound(SoundEffectEnum.StoreTransaction);
                 Game.StorePrtGold();
-                Game.RunScript(nameof(IdentifyItemFullyCancellableScript));
+                Game.RunScript(nameof(IdentifyItemFullyScript));
             }
             Game.HandleStuff();
         }

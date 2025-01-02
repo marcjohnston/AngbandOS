@@ -17,7 +17,7 @@ internal class IdentifyFullyEvery750Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows yellow...";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(IdentifyItemFullyCancellableScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(IdentifyItemFullyScript);
 
     protected override string RechargeTimeRollExpression => "750";
 

@@ -29,7 +29,7 @@ internal class EsoteriaScript : Script, IScript, ICastSpellScript
         }
         else
         {
-            Game.RunScript(nameof(IdentifyItemFullyCancellableScript));
+            Game.RunScript(nameof(IdentifyItemFullyScript));
         }
     }
 }

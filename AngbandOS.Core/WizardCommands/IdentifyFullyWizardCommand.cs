@@ -18,5 +18,5 @@ internal class IdentifyFullyWizardCommand : WizardCommand
 
     protected override string? HelpGroupName => nameof(WizardObjectCommandsHelpGroup);
 
-    protected override string? ExecuteScriptName => nameof(IdentifyItemFullyCancellableScript);
+    protected override string? ExecuteScriptName => nameof(IdentifyItemFullyScript);
 }
