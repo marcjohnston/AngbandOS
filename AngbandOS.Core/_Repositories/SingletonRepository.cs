@@ -245,7 +245,7 @@ internal class SingletonRepository
         RegisterRepository<IUnfriendlyScript>();
         RegisterRepository<IUsedScript>();
         RegisterRepository<IUsedScriptInt>();
-        RegisterRepository<IUsedScriptItem>();
+        RegisterRepository<IActivateItemScript>();
         RegisterRepository<IZapRodScript>();
 
         RegisterRepository<ActivationWeightedRandom>();

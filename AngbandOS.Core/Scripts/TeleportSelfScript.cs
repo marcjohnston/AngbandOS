@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptInt, IReadScrollOrUseStaffScript, IUsedScriptItem
+internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptInt, IReadScrollOrUseStaffScript, IActivateItemScript
 {
     private TeleportSelfScript(Game game) : base(game) { }
 
@@ -198,7 +198,7 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
         return new IdentifiedAndUsedResult(true, true);
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         ExecuteScriptInt(100);
         return true;

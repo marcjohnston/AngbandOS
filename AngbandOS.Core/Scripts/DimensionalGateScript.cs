@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DimensionalGateScript : Script, IUsedScriptItem
+internal class DimensionalGateScript : Script, IActivateItemScript
 {
     private DimensionalGateScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (!Game.TgtPt(out int ii, out int ij))
         {

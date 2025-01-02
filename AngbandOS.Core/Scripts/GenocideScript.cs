@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, IReadScrollOrUseStaffScript, IUsedScriptItem
+internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, IReadScrollOrUseStaffScript, IActivateItemScript
 {
     private GenocideScript(Game game) : base(game) { }
 
@@ -72,7 +72,7 @@ internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, 
         ExecuteScriptBool(true);
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
         return true;

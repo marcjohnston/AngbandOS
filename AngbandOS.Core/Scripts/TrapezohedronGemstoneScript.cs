@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TrapezohedronGemstoneScript : Script, IUsedScriptItem
+internal class TrapezohedronGemstoneScript : Script, IActivateItemScript
 {
     private TrapezohedronGemstoneScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.MsgPrint("The gemstone flashes bright red!");
         Game.RunScript(nameof(LightScript));

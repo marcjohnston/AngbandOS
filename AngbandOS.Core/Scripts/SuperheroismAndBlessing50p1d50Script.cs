@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SuperheroismAndBlessing50p1d50Script : Script, IUsedScriptItem
+internal class SuperheroismAndBlessing50p1d50Script : Script, IActivateItemScript
 {
     private SuperheroismAndBlessing50p1d50Script(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         Game.SuperheroismTimer.AddTimer(Game.DieRoll(50) + 50);
         Game.BlessingTimer.AddTimer(Game.DieRoll(50) + 50);

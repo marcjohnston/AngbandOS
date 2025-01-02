@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUsedScript, IUsedScriptItem, IReadScrollOrUseStaffScript
+internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUsedScript, IActivateItemScript, IReadScrollOrUseStaffScript
 {
     private IdentifyItemFullyScript(Game game) : base(game) { }
 
@@ -62,7 +62,7 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUse
         return false;
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScript();
     }

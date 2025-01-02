@@ -10,7 +10,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandBoltsScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IUsedScript, IUsedScriptItem
+internal class BrandBoltsScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IUsedScript, IActivateItemScript
 {
     private BrandBoltsScript(Game game) : base(game) { }
 
@@ -23,7 +23,7 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, ISuccessByC
     /// Runs the successful script and returns true, because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         ExecuteSuccessByChanceScript();
 

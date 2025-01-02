@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Identifies a chosen item and returns false, if the item selection is cancelled; true, otherwise.
 /// </summary>
 [Serializable]
-internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScript, IReadScrollOrUseStaffScript, IUsedScriptItem, IZapRodScript
+internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScript, IReadScrollOrUseStaffScript, IActivateItemScript, IZapRodScript
 {
     private IdentifyItemScript(Game game) : base(game) { }
 
@@ -62,7 +62,7 @@ internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScri
         return true;
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScript();
     }

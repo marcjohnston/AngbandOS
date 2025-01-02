@@ -38,9 +38,9 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
         return Choose().ExecuteReadScrollOrUseStaffScript();
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
-        return Choose().ExecuteUsedScriptItem(item);
+        return Choose().ExecuteActivateItemScript(item);
     }
 
     public bool ExecuteSuccessByChanceScript()

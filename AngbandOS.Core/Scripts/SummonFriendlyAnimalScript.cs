@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonFriendlyAnimalScript : Script, IScript, ICastSpellScript, IUsedScriptItem
+internal class SummonFriendlyAnimalScript : Script, IScript, ICastSpellScript, IActivateItemScript
 {
     private SummonFriendlyAnimalScript(Game game) : base(game) { }
 
@@ -17,7 +17,7 @@ internal class SummonFriendlyAnimalScript : Script, IScript, ICastSpellScript, I
         ExecuteScript();
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
         return true;

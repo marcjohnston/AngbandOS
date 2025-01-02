@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class XtraSpeedScript : Script, IUsedScriptItem
+internal class XtraSpeedScript : Script, IActivateItemScript
 {
     private XtraSpeedScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (Game.HasteTimer.Value == 0)
         {

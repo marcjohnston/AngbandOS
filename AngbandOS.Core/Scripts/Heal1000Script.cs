@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Heal1000Script : Script, IUsedScriptItem
+internal class Heal1000Script : Script, IActivateItemScript
 {
     private Heal1000Script(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.MsgPrint("You feel much better...");
         Game.RestoreHealth(1000);

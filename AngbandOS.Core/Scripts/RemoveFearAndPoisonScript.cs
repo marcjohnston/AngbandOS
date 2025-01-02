@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveFearAndPoisonScript : Script, IUsedScriptItem
+internal class RemoveFearAndPoisonScript : Script, IActivateItemScript
 {
     private RemoveFearAndPoisonScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.FearTimer.ResetTimer();
         Game.PoisonTimer.ResetTimer();

@@ -5,15 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class PerceptionIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
+internal interface IActivateItemScript
 {
-    private PerceptionIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }
-
     /// <summary>
-    /// Executes the script and returns false.
+    /// Run the associated script and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
+    /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
+    bool ExecuteActivateItemScript(Item item);
 }

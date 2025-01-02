@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonFriendlyDemon2In3Script : Script, IUsedScriptItem
+internal class SummonFriendlyDemon2In3Script : Script, IActivateItemScript
 {
     private SummonFriendlyDemon2In3Script(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (Game.DieRoll(3) == 1)
         {

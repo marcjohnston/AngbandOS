@@ -46,13 +46,13 @@ internal abstract class DirectionalActivation : BaseActivation, IGetKey
     protected abstract string RechargeTimeRollExpression { get; }
 
     /// <summary>
-    /// Returns the binding key for the <see cref="IUsedScript"/> that should be run when the activation is executed.  This property is used to bind
+    /// Returns the binding key for the <see cref="IDirectionalActivationScript"/> that should be run when the activation is executed.  This property is used to bind
     /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
     /// </summary>
     protected abstract string DirectionalActivationCancellableScriptBindingKey { get; }
 
     /// <summary>
-    /// Returns the binding key for the <see cref="IUsedScript"/> that should be run when the activation is executed.  This property is used to bind
+    /// Returns the binding key for the <see cref="IDirectionalActivationScript"/> that should be run when the activation is executed.  This property is used to bind
     /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
     /// </summary>
     public IDirectionalActivationScript DirectionalActivationCancellableScript { get; protected set; }

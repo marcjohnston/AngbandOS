@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistAll20p1d20Script : Script, IUsedScriptItem
+internal class ResistAll20p1d20Script : Script, IActivateItemScript
 {
     private ResistAll20p1d20Script(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);

@@ -187,7 +187,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
         });
     }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         return ExecuteScriptWithPreAndPostMessages<bool>(() =>
         {

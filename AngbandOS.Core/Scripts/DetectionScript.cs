@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IUsedScriptItem
+internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IActivateItemScript
 {
     private DetectionScript(Game game) : base(game) { }
 
@@ -43,7 +43,7 @@ internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByCh
         ExecuteSuccessByChanceScript();
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         Game.MsgPrint("An image forms in your mind...");
         ExecuteSuccessByChanceScript();

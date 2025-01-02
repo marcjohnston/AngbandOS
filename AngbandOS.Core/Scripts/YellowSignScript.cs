@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class YellowSignScript : Script, IScript, ICastSpellScript, IUsedScriptItem
+internal class YellowSignScript : Script, IScript, ICastSpellScript, IActivateItemScript
 {
     private YellowSignScript(Game game) : base(game) { }
 
@@ -17,7 +17,7 @@ internal class YellowSignScript : Script, IScript, ICastSpellScript, IUsedScript
         ExecuteScript();
     }
 
-    public bool ExecuteUsedScriptItem(Item item)
+    public bool ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
         return true;

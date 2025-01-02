@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuakeScript : Script, IUsedScriptItem
+internal class QuakeScript : Script, IActivateItemScript
 {
     private QuakeScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 10);
         return true;

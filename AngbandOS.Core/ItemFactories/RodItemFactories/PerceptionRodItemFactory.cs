@@ -27,7 +27,7 @@ internal class PerceptionRodItemFactory : ItemFactory
         (100, 8)
     };
     public override int Weight => 15;
-    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(PerceptionIdentifiedAndUsedScriptItemAndDirection), "10", false, 250);
+    protected override (string, string, bool, int)? ZapBindingTuple => (nameof(IdentifyItemScript), "10", false, 250);
     protected override string ItemClassBindingKey => nameof(RodsItemClass);
 
     protected override string? RechargeScriptBindingKey => nameof(RechargeRodScript);

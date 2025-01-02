@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ProbingDetectionAndFullIdScript : Script, IUsedScriptItem
+internal class ProbingDetectionAndFullIdScript : Script, IActivateItemScript
 {
     private ProbingDetectionAndFullIdScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (!Game.RunUsedScript(nameof(RechargeItemScript)))
         {

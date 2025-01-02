@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonFriendlyReaverScript : Script, IUsedScriptItem
+internal class SummonFriendlyReaverScript : Script, IActivateItemScript
 {
     private SummonFriendlyReaverScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)), true, true);
         return true;

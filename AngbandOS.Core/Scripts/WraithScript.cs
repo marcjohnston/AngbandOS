@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WraithScript : Script, IUsedScriptItem
+internal class WraithScript : Script, IActivateItemScript
 {
     private WraithScript(Game game) : base(game) { }
 
-    public bool ExecuteUsedScriptItem(Item item) // This is run by an item activation
+    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.IntValue));
         return true;
