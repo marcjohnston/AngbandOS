@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WordOfDestructionScript : Script, IScript
+internal class WordOfDestructionScript : Script, IScript, ICastSpellScript
 {
     private WordOfDestructionScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

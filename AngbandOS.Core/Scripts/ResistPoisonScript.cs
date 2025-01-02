@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistPoisonScript : Script, IScript
+internal class ResistPoisonScript : Script, IScript, ICastSpellScript
 {
     private ResistPoisonScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds between 20 and 40 turns of resist poison.

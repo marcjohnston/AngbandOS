@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AimWandScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript
+internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandScript, ISuccessByChanceScript
 {
     private AimWandScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the aim wand script, disposes of the successful result and returns false.

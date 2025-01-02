@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonAncientDragonScript : Script, IScript
+internal class SummonAncientDragonScript : Script, IScript, ICastSpellScript
 {
     private SummonAncientDragonScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

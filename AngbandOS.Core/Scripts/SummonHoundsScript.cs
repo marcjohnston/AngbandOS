@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonHoundsScript : Script, IScript
+internal class SummonHoundsScript : Script, IScript, ICastSpellScript
 {
     private SummonHoundsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

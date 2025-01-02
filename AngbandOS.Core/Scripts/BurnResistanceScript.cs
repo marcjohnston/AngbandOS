@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BurnResistanceScript : Script, IScript
+internal class BurnResistanceScript : Script, IScript, ICastSpellScript
 {
     private BurnResistanceScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds temporary fire, lightning and acid resistance.

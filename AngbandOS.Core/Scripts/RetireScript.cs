@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RetireScript : Script, IScript, IGameCommandScript
+internal class RetireScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private RetireScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the retire script and returns false.

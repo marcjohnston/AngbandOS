@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HolyOrbScript : Script, IScript
+internal class HolyOrbScript : Script, IScript, ICastSpellScript
 {
     private HolyOrbScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of holy fire in a chosen direction.

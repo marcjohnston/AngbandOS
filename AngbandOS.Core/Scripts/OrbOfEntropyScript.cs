@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class OrbOfEntropyScript : Script, IScript
+internal class OrbOfEntropyScript : Script, IScript, ICastSpellScript
 {
     private OrbOfEntropyScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of old drain in a chosen direction.

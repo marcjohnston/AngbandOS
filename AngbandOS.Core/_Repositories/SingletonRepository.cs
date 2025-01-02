@@ -218,7 +218,7 @@ internal class SingletonRepository
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         RegisterRepository<IAimWandScript>();
         RegisterRepository<IBoolValue>();
-        RegisterRepository<ICastScript>();
+        RegisterRepository<ICastSpellScript>();
         RegisterRepository<IChangeTracker>();
         RegisterRepository<IDateAndTimeValue>();
         RegisterRepository<IDirectionalActivationScript>();

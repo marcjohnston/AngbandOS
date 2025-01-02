@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ChaosBoltScript : Script, IScript
+internal class ChaosBoltScript : Script, IScript, ICastSpellScript
 {
     private ChaosBoltScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a bolt or a beam of chaos in a chosen direction.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PoisonPitScript : Script, IScript
+internal class PoisonPitScript : Script, IScript, ICastSpellScript
 {
     private PoisonPitScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

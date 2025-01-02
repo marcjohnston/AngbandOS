@@ -10,9 +10,14 @@ using System.Runtime.CompilerServices;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WinnerScript : Script, IScript
+internal class WinnerScript : Script, IScript, ICastSpellScript
 {
     private WinnerScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

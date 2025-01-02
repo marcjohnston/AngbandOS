@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelUndeadAndDemonsScript : Script, IScript
+internal class DispelUndeadAndDemonsScript : Script, IScript, ICastSpellScript
 {
     private DispelUndeadAndDemonsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

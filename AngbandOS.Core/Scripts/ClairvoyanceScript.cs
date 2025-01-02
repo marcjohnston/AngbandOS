@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ClairvoyanceScript : Script, IScript
+internal class ClairvoyanceScript : Script, IScript, ICastSpellScript
 {
     private ClairvoyanceScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds between 30 and 55 turns of telepathy.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EditStatsScript : Script, IScript
+internal class EditStatsScript : Script, IScript, ICastSpellScript
 {
     private EditStatsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Allows the wizard to edit all of the player stats.

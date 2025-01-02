@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class InvokeChaosScript : Script, IScript
+internal class InvokeChaosScript : Script, IScript, ICastSpellScript
 {
     private InvokeChaosScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of chaos in a chosen direction.

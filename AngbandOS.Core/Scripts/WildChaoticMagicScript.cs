@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WildChaoticMagicScript : Script, IScriptSpell
+internal class WildChaoticMagicScript : Script, ICastSpellScript
 {
     private WildChaoticMagicScript(Game game) : base(game) { }
 
@@ -17,7 +17,7 @@ internal class WildChaoticMagicScript : Script, IScriptSpell
     /// </summary>
     /// <param name="spellLevel">A spell level from 0 to 38.  The actual spell cast will be in the range of spell ... spell + 1d8.</param>
     /// <returns></returns>
-    public void ExecuteScriptSpell(Spell spell)
+    public void ExecuteCastSpellScript(Spell spell)
     {
         int spellIndex = spell.SpellIndex;
         Game.MsgPrint("You produce a chaotic effect!");

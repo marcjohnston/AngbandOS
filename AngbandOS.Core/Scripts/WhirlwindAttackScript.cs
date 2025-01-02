@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WhirlwindAttackScript : Script, IScript
+internal class WhirlwindAttackScript : Script, IScript, ICastSpellScript
 {
     private WhirlwindAttackScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

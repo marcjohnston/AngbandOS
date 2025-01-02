@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JumpToLevelScript : Script, IScript
+internal class JumpToLevelScript : Script, IScript, ICastSpellScript
 {
     private JumpToLevelScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the jump to level script.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ReadScrollScript : Script, IScript, IGameCommandScript
+internal class ReadScrollScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ReadScrollScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the read scroll script and returns false.

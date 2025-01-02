@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectInvisibilityScript : Script, IScript
+internal class DetectInvisibilityScript : Script, IScript, ICastSpellScript
 {
     private DetectInvisibilityScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

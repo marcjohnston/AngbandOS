@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonDemonServantScript : Script, IScript
+internal class SummonDemonServantScript : Script, IScript, ICastSpellScript
 {
     private SummonDemonServantScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Summons a demon monster.

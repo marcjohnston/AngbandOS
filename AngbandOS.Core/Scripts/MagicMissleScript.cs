@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MagicMissleScript : Script, IScript
+internal class MagicMissleScript : Script, IScript, ICastSpellScript
 {
     private MagicMissleScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a bolt or beam of missle in a chosen direction.

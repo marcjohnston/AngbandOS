@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DeathRayScript : Script, IScript
+internal class DeathRayScript : Script, IScript, ICastSpellScript
 {
     private DeathRayScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Projects a death ray in a chosen direction with damage equal to the player experience.

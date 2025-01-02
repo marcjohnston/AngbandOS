@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HasteScript : Script, IScript
+internal class HasteScript : Script, IScript, ICastSpellScript
 {
     private HasteScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Temporarily adds a random amount of haste from the experience level up to 2x the experience level + 20, if the player

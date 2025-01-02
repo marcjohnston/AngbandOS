@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PersistConfigurationScript : Script, IScript
+internal class PersistConfigurationScript : Script, IScript, ICastSpellScript
 {
     private PersistConfigurationScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

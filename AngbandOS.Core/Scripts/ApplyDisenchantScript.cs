@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ApplyDisenchantScript : Script, IScript, ISuccessByChanceScript
+internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript
 {
     private ApplyDisenchantScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script and returns a success result.

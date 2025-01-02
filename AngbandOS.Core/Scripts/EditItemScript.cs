@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EditItemScript : Script, IScript
+internal class EditItemScript : Script, IScript, ICastSpellScript
 {
     private EditItemScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Allows the wizard to edit an item.

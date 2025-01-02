@@ -11,9 +11,14 @@ namespace AngbandOS.Core.Scripts;
 /// Activate the special feature of an item.
 /// </summary>
 [Serializable]
-internal class ActivateScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript
+internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandScript, ISuccessByChanceScript
 {
     private ActivateScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the activate script and disposes of the successful result.

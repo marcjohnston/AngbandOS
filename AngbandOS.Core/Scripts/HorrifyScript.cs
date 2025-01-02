@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HorrifyScript : Script, IScript
+internal class HorrifyScript : Script, IScript, ICastSpellScript
 {
     private HorrifyScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Sets fear and stun on a monster in a chosen direction with damage equivalent to the player experience.

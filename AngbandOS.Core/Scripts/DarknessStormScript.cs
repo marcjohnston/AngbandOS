@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DarknessStormScript : Script, IScript
+internal class DarknessStormScript : Script, IScript, ICastSpellScript
 {
     private DarknessStormScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of dark in a chosen direction with a damage of 120.

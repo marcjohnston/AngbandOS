@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureMediumWounds4d10Script : Script, IScript
+internal class CureMediumWounds4d10Script : Script, IScript, ICastSpellScript
 {
     private CureMediumWounds4d10Script(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Restores health between 4 and 10 points and reduces the bleeding timer to 20 points less than half of the remaining turns.

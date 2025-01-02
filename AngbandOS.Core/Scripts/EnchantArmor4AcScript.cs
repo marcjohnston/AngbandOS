@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnhanceArmorScript : Script, IScript, IScriptStore, ISuccessByChanceScript
+internal class EnhanceArmorScript : Script, IScript, ICastSpellScript, IScriptStore, ISuccessByChanceScript
 {
     private EnhanceArmorScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the enchange armor script.  Does not modify any of the store flags.

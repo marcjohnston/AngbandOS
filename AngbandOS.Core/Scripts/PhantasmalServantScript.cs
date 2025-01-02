@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PhantasmalServantScript : Script, IScript
+internal class PhantasmalServantScript : Script, IScript, ICastSpellScript
 {
     private PhantasmalServantScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

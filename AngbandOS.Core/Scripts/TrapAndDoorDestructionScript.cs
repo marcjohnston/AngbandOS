@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TrapAndDoorDestructionScript : Script, IScript
+internal class TrapAndDoorDestructionScript : Script, IScript, ICastSpellScript
 {
     private TrapAndDoorDestructionScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

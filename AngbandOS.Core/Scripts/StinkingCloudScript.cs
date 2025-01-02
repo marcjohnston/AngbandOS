@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StinkingCloudScript : Script, IScript
+internal class StinkingCloudScript : Script, IScript, ICastSpellScript
 {
     private StinkingCloudScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of poison in a chosen direction.

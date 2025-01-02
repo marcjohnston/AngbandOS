@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EarthquakeR10Script : Script, IScript, IReadScrollOrUseStaffScript
+internal class EarthquakeR10Script : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private EarthquakeR10Script(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StayScript : Script, IScript, IGameCommandScript
+internal class StayScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private StayScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the stay script and returns false.

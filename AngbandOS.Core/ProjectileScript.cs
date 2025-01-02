@@ -5,11 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
-
+namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ProjectileScript : IGetKey, IProjectile
+internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
     protected readonly Game Game;
     public ProjectileScript(Game game) 
@@ -114,7 +113,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
 
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
 
-    #region Interface Implementations
+    #region Interface Fulfillments - These fulfillments use the private implementations to satisfy the interfaces that the projectiles support.
     public bool ExecuteSuccessByChanceScript()
     {
         return ExecuteScriptWithPreAndPostMessages<bool>(() =>
@@ -195,6 +194,15 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
             IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectional();
             return readScrollAndUseStaffResult.IsUsed;
         });
+    }
+
+    /// <summary>
+    /// Projects the projectile via the <see cref="IScript"/> interface.  The <see cref="IScript"/> interface is used to convert an <see cref="IProjectile"/> script into an <see cref="ICastSpellScript"/>.
+    /// </summary>
+    /// <param name="spell"></param>
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
     }
     #endregion
 

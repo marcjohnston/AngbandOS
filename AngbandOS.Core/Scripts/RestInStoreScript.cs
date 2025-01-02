@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestInStoreScript : Script, IScript, IScriptStore
+internal class RestInStoreScript : Script, IScript, ICastSpellScript, IScriptStore
 {
     private RestInStoreScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the rest in store script.  Does not modify any of the store flags.

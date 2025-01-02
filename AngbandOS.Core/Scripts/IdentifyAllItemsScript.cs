@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyAllItemsScript : Script, IScript, IScriptStore
+internal class IdentifyAllItemsScript : Script, IScript, ICastSpellScript, IScriptStore
 {
     private IdentifyAllItemsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the identify all script.  Does not modify any of the store flags.

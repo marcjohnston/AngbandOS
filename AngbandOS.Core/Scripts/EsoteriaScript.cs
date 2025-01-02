@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EsoteriaScript : Script, IScript
+internal class EsoteriaScript : Script, IScript, ICastSpellScript
 {
     private EsoteriaScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Identifies an item.  50% of the time, the item is identified fully.

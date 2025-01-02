@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RechargeItemScript : Script, IScript, IUsedScriptInt, IUsedScriptItem
+internal class RechargeItemScript : Script, IScript, ICastSpellScript, IUsedScriptInt, IUsedScriptItem
 {
     private RechargeItemScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     public bool ExecuteUsedScriptInt(int num)
     {

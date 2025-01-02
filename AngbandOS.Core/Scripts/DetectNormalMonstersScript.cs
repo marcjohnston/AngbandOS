@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectNormalMonstersScript : Script, IScript, ISuccessByChanceScript
+internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript
 {
     private DetectNormalMonstersScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Detects monsters and returns true, if monsters were reveals; false, otherwise.

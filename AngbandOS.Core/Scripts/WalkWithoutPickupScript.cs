@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkWithoutPickupScript : Script, IScript, IGameCommandScript
+internal class WalkWithoutPickupScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private WalkWithoutPickupScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the stay script and disposes of the repeatable result.

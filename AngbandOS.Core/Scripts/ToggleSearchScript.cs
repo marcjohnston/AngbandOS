@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ToggleSearchScript : Script, IScript, IGameCommandScript
+internal class ToggleSearchScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ToggleSearchScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the toggle search script and returns false.

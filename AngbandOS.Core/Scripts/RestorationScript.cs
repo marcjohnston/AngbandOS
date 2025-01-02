@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestorationScript : Script, IScript, IScriptStore
+internal class RestorationScript : Script, IScript, ICastSpellScript, IScriptStore
 {
     private RestorationScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Allows the player to purchase the restoration for 750 gold.  Does not modify any of the store flags.

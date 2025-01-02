@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureAllScript : Script, IScript
+internal class CureAllScript : Script, IScript, ICastSpellScript
 {
     private CureAllScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the cure all script.

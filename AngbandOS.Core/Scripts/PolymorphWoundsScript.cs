@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PolymorphWoundsScript : Script, IScript, IGameCommandScript
+internal class PolymorphWoundsScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private PolymorphWoundsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the polymorph-wounds script and returns false.

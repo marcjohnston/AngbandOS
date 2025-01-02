@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SayLocationAndFeelingScript : Script, IScript, IGameCommandScript
+internal class SayLocationAndFeelingScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private SayLocationAndFeelingScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the say location and feeling script and returns false.

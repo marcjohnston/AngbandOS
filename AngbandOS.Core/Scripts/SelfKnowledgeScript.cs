@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SelfKnowledgeScript : Script, IScript, IEatOrQuaffScript
+internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private SelfKnowledgeScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

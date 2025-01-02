@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ZapRodScript : Script, IScript, IGameCommandScript
+internal class ZapRodScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ZapRodScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the zap rod script and returns false.

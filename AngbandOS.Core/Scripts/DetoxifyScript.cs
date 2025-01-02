@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetoxifyScript : Script, IScript
+internal class DetoxifyScript : Script, IScript, ICastSpellScript
 {
     private DetoxifyScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Instantly cures poison.

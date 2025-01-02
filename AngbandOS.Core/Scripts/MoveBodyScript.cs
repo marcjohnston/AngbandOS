@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MoveBodyScript : Script, IScript
+internal class MoveBodyScript : Script, IScript, ICastSpellScript
 {
     private MoveBodyScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Teleports the player to a chosen destination.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LookScript : Script, IScript, IGameCommandScript
+internal class LookScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private LookScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the look script and returns false.

@@ -8,10 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EaglesVisionScript : Script, IScript
+internal class EaglesVisionScript : Script, IScript, ICastSpellScript
 {
     private EaglesVisionScript(Game game) : base(game) { }
 
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Detects traps, doors and stairs.

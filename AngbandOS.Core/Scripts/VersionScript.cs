@@ -10,10 +10,14 @@ using System.Reflection;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class VersionScript : Script, IScript, IGameCommandScript
+internal class VersionScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
-
     private VersionScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the version script and returns false.

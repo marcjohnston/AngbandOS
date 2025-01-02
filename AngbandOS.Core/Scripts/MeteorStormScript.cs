@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MeteorStormScript : Script, IScript
+internal class MeteorStormScript : Script, IScript, ICastSpellScript
 {
     private MeteorStormScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Projects a meteor onto the location of the player.

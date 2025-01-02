@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpikeClosedDoorScript : Script, IScript, IGameCommandScript
+internal class SpikeClosedDoorScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private SpikeClosedDoorScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the spike closed door script and returns false.

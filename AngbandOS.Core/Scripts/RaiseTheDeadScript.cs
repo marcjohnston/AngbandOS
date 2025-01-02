@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RaiseTheDeadScript : Script, IScript
+internal class RaiseTheDeadScript : Script, IScript, ICastSpellScript
 {
     private RaiseTheDeadScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Summons specific monsters, 1/3 of the time they are not friendly.

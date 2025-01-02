@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectNonlivingScript : Script, IScript
+internal class DetectNonlivingScript : Script, IScript, ICastSpellScript
 {
     private DetectNonlivingScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Detects monsters that are not-living.

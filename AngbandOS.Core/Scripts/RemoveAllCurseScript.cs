@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveAllCurseScript : Script, IScript
+internal class RemoveAllCurseScript : Script, IScript, ICastSpellScript
 {
     private RemoveAllCurseScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Removes a curse from all items including heavy curses.

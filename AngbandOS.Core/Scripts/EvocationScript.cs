@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EvocationScript : Script, IScript
+internal class EvocationScript : Script, IScript, ICastSpellScript
 {
     private EvocationScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Displels, turns and banishs monsters with damage of the player experience * 4.

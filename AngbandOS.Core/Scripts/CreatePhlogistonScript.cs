@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CreatePhlogistonScript : Script, IScript
+internal class CreatePhlogistonScript : Script, IScript, ICastSpellScript
 {
     private CreatePhlogistonScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Create phlogiston to refill a lantern or torch with.

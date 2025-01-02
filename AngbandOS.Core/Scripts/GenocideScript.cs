@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GenocideScript : Script, IScript, IScriptBool, IReadScrollOrUseStaffScript, IUsedScriptItem
+internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, IReadScrollOrUseStaffScript, IUsedScriptItem
 {
     private GenocideScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     public void ExecuteScriptBool(bool playerCast) // TODO: This needs to be cancellable and remove the playerCast parameter
     {

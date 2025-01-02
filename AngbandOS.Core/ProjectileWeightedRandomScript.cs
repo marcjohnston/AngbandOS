@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core;
 
 [Serializable]
 internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<ProjectileScript>, IProjectile
@@ -46,5 +46,10 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
     public bool ExecuteSuccessByChanceScript()
     {
         return Choose().ExecuteSuccessByChanceScript();
+    }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        Choose().ExecuteCastSpellScript(spell);
     }
 }

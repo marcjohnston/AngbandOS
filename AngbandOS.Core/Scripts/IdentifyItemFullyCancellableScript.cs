@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyItemFullyCancellableScript : Script, IScript, IUsedScript, IUsedScriptItem
+internal class IdentifyItemFullyCancellableScript : Script, IScript, ICastSpellScript, IUsedScript, IUsedScriptItem
 {
     private IdentifyItemFullyCancellableScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Identifies an item completely and returns true, if an item was chosen to be identified; false, of the item selection was cancelled.

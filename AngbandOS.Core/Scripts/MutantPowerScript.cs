@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MutantPowerScript : Script, IScript, IGameCommandScript
+internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private MutantPowerScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the mutant power script and returns false.

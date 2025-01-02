@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class NetherBoltScript : Script, IScript
+internal class NetherBoltScript : Script, IScript, ICastSpellScript
 {
     private NetherBoltScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a bolt of nether in a chosen direction.

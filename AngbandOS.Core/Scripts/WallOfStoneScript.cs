@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WallOfStoneScript : Script, IScript
+internal class WallOfStoneScript : Script, IScript, ICastSpellScript
 {
     private WallOfStoneScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardHelpScript : Script, IScript
+internal class WizardHelpScript : Script, IScript, ICastSpellScript
 {
     private WizardHelpScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the wizard help script.

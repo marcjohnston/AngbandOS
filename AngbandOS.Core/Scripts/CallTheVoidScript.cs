@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CallTheVoidScript : Script, IScript
+internal class CallTheVoidScript : Script, IScript, ICastSpellScript
 {
     private CallTheVoidScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Blast energy in all directions.

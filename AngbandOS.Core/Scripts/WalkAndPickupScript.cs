@@ -10,9 +10,14 @@ using System.Diagnostics;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkAndPickupScript : Script, IScript, IGameCommandScript
+internal class WalkAndPickupScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private WalkAndPickupScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the walk and pickup script and disposes of the repeatable result.

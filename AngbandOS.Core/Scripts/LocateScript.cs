@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LocateScript : Script, IScript, IGameCommandScript
+internal class LocateScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private LocateScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the locate script and returns false.

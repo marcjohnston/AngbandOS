@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectionScript : Script, IScript, ISuccessByChanceScript, IUsedScriptItem
+internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IUsedScriptItem
 {
     private DetectionScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Detects traps, doors, stairs, treasures, gold, normal objects, normal monsters and invisible monsters and returns true, if anything was detected; false, otherwise.

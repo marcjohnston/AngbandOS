@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HellfireScript : Script, IScript
+internal class HellfireScript : Script, IScript, ICastSpellScript
 {
     private HellfireScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of hellfire in a chosen direction with 666 damage and radius of 3; also, causing between 50 and 100 points of damage to the player.

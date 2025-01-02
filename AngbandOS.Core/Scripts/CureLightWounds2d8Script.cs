@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureLightWounds2d8Script : Script, IScript, IEatOrQuaffScript
+internal class CureLightWounds2d8Script : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private CureLightWounds2d8Script(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script and returns true because the action is always noticed.

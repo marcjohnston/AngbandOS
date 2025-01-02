@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TouchOfConfusionScript : Script, IScript
+internal class TouchOfConfusionScript : Script, IScript, ICastSpellScript
 {
     private TouchOfConfusionScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Sets the HasConfusingTouch property to true.

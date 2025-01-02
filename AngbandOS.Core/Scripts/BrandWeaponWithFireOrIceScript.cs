@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandWeaponWithFireOrIceScript : Script, IScript
+internal class BrandWeaponWithFireOrIceScript : Script, IScript, ICastSpellScript
 {
     private BrandWeaponWithFireOrIceScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Enchants the melee weapon with fire 25% of the time; ice, the other 75%.

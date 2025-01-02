@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResearchSpellScript : Script, IScript, IScriptStore
+internal class ResearchSpellScript : Script, IScript, ICastSpellScript, IScriptStore
 {
     private ResearchSpellScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the research item script.  Does not modify any of the store flags.

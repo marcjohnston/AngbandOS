@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HypnoticEyesScript : Script, IScript
+internal class HypnoticEyesScript : Script, IScript, ICastSpellScript
 {
     private HypnoticEyesScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Charms a monster in a chosen direction.

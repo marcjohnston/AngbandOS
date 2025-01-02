@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreBodyScript : Script, IScript
+internal class RestoreBodyScript : Script, IScript, ICastSpellScript
 {
     private RestoreBodyScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Restores the ability score for strength, intelligence, wisdon, dexterity, constitution and charisma.

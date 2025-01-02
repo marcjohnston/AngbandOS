@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class InvokeSpiritsScript : Script, IScript
+internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
 {
     private InvokeSpiritsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Does 150 points of dispel monster; slows and sleeps monsters; restores 300 points of health; and an additional random.

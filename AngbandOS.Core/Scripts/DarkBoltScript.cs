@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DarkBoltScript : Script, IScript
+internal class DarkBoltScript : Script, IScript, ICastSpellScript
 {
     private DarkBoltScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a bolt or beam of dark in a chosen direction with damage equal to 1/2 the experience or for mages, 1x experience or for high mages, experience + 10.

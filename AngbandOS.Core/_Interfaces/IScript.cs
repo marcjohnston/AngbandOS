@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interfaces;
 /// <summary>
 /// Represents the interface a void return value script needs to implement to be run without any parameters.
 /// </summary>
-internal interface IScript : ICastScript
+internal interface IScript
 {
     /// <summary>
     /// Execute the script.

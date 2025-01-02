@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GoDownStairsScript : Script, IScript, IGameCommandScript
+internal class GoDownStairsScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private GoDownStairsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the go down stairs script and returns false.

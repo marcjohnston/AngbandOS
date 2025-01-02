@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RenderCharacterScript : Script, IScript, IGameCommandScript
+internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private RenderCharacterScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the render character script and returns false.

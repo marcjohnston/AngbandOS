@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ManaBurstScript : Script, IScript
+internal class ManaBurstScript : Script, IScript, ICastSpellScript
 {
     private ManaBurstScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of missle in a chosen direction.

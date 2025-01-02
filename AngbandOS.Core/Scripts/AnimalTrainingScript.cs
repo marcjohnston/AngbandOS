@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AnimalTrainingScript : Script, IScript
+internal class AnimalTrainingScript : Script, IScript, ICastSpellScript
 {
     private AnimalTrainingScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

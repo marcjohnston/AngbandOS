@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class UseStaffScript : Script, IScript, IGameCommandScript
+internal class UseStaffScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private UseStaffScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the use staff script and returns false.

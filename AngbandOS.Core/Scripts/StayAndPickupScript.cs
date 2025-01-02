@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StayAndPickupScript : Script, IScript, IGameCommandScript
+internal class StayAndPickupScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private StayAndPickupScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the stay and pickup script and returns false.

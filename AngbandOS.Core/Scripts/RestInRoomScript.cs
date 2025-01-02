@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestInRoomScript : Script, IScript
+internal class RestInRoomScript : Script, IScript, ICastSpellScript
 {
     private RestInRoomScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the rest in a room script.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AddTelepathy25p1d30Script : Script, IScript, IUsedScriptItem
+internal class AddTelepathy25p1d30Script : Script, IScript, ICastSpellScript, IUsedScriptItem
 {
     private AddTelepathy25p1d30Script(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     public bool ExecuteUsedScriptItem(Item item)
     {

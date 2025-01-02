@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DisintegrateScript : Script, IScript
+internal class DisintegrateScript : Script, IScript, ICastSpellScript
 {
     private DisintegrateScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of disintegration in a chosen direction.

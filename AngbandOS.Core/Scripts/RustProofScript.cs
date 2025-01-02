@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RustProofScript : Script, IScript
+internal class RustProofScript : Script, IScript, ICastSpellScript
 {
     private RustProofScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Make a piece of armor immune to acid damage, removing any penalty at the same time

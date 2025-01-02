@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SatisfyHungerScript : Script, IScript
+internal class SatisfyHungerScript : Script, IScript, ICastSpellScript
 {
     private SatisfyHungerScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Maximizes the satiation.

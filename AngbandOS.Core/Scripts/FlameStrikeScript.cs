@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FlameStrikeScript : Script, IScript
+internal class FlameStrikeScript : Script, IScript, ICastSpellScript
 {
     private FlameStrikeScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of fire at the location of the player.

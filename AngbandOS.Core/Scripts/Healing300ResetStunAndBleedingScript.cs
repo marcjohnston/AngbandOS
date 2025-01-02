@@ -10,9 +10,14 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Healing300ResetStunAndBleedingScript : Script, IScript, IReadScrollOrUseStaffScript
+internal class Healing300ResetStunAndBleedingScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private Healing300ResetStunAndBleedingScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {

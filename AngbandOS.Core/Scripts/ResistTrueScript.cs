@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistTrueScript : Script, IScript
+internal class ResistTrueScript : Script, IScript, ICastSpellScript
 {
     private ResistTrueScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds between 20 and 40 turns of resistance to acid, lightning, fire, cold and poison.

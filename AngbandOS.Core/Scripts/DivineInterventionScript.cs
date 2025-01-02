@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DivineInterventionScript : Script, IScript
+internal class DivineInterventionScript : Script, IScript, ICastSpellScript
 {
     private DivineInterventionScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

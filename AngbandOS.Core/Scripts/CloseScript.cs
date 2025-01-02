@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CloseScript : Script, IScript, IGameCommandScript
+internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private CloseScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the close script and disposes of the repeatable result.

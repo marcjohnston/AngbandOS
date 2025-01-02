@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, IEatOrQuaffScript, IUsedScriptItem
+internal class RestoreLevelScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IEatOrQuaffScript, IUsedScriptItem
 {
     private RestoreLevelScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Restores the players experience points and returns true, if the players experience was increased; false, otherwise.

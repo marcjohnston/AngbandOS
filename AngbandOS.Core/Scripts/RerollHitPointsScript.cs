@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RerollHitPointsScript : Script, IScript
+internal class RerollHitPointsScript : Script, IScript, ICastSpellScript
 {
     private RerollHitPointsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

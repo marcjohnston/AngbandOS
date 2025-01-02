@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpellOfWonderScript : Script, IScript
+internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
 {
     private SpellOfWonderScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes a random spell in a chosen direction.

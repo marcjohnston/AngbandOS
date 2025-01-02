@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GetRumorScript : Script, IScript, IGameCommandScript
+internal class GetRumorScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private GetRumorScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the get rumor script and returns false.

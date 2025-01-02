@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PopupMenuScript : Script, IScript, IGameCommandScript
+internal class PopupMenuScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private PopupMenuScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the popup-menu script and returns false.

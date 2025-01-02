@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ExtraDimensionalBeingScript : Script, IScript
+internal class ExtraDimensionalBeingScript : Script, IScript, ICastSpellScript
 {
     private ExtraDimensionalBeingScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

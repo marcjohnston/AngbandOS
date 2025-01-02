@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PhaseDoorScript : Script, IScript
+internal class PhaseDoorScript : Script, IScript, ICastSpellScript
 {
     private PhaseDoorScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Randomly teleports the player within a range of 10 tiles.

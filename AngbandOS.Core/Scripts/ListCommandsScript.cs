@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ListCommandsScript : Script, IScript, IGameCommandScript
+internal class ListCommandsScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ListCommandsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the list commands script and returns false.

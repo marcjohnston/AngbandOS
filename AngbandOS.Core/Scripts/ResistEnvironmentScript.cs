@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistEnvironmentScript : Script, IScript
+internal class ResistEnvironmentScript : Script, IScript, ICastSpellScript
 {
     private ResistEnvironmentScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

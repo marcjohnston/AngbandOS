@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WraithformScript : Script, IScript
+internal class WraithformScript : Script, IScript, ICastSpellScript
 {
     private WraithformScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds between 1/2 the player experience to 1x the player experience of etherealness.

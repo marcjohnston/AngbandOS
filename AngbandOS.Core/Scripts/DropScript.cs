@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DropScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript
+internal class DropScript : Script, IScript, ICastSpellScript, IGameCommandScript, ISuccessByChanceScript
 {
     private DropScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the drop script, disposes of the successful result and returns false.

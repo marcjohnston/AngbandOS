@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BattleFrenzyScript : Script, IScript
+internal class BattleFrenzyScript : Script, IScript, ICastSpellScript
 {
     private BattleFrenzyScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Restores 30 points of health, removes fear, adds between 25 and 50 turns of super heroism and adds up to 5 turns of haste if the player already has

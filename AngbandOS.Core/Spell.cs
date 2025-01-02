@@ -50,8 +50,8 @@ internal abstract class Spell : IGetKey
 
     public virtual void Bind()
     {
-        CastScript = Game.SingletonRepository.GetNullable<ICastScript>(CastScriptName);
-        CastFailedScript = Game.SingletonRepository.GetNullable<ICastScript>(CastFailedScriptName);
+        CastSpellScript = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastScriptName);
+        FailedCastSpellScript = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastFailedScriptName);
     }
 
     /// <summary>
@@ -79,43 +79,29 @@ internal abstract class Spell : IGetKey
     public ClassSpell ClassSpell { get; private set; }
 
     /// <summary>
-    /// Returns the name of an <see cref="ICastScript"/> or <see cref="IScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when successfully casted.  This
-    /// property is used to bind the <see cref="CastScript"/> property during the bind phase.
+    /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when successfully casted.  This
+    /// property is used to bind the <see cref="CastSpellScript"/> property during the bind phase.
     /// </summary>
     protected virtual string? CastScriptName => null;
 
     /// <summary>
-    /// Returns the name of an <see cref="ICastScript"/> or <see cref="IScript"/> script to be run, when the spell fails; or null, if the spell does nothing when the spell fails.  This
-    /// property is used to bind the <see cref="CastFailedScript"/> property during the bind phase.
+    /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell fails; or null, if the spell does nothing when the spell fails.  This
+    /// property is used to bind the <see cref="FailedCastSpellScript"/> property during the bind phase.
     /// </summary>
     protected virtual string? CastFailedScriptName => null;
 
-    private ICastScript? CastScript { get; set; }
-    private ICastScript? CastFailedScript { get; set; }
-
-    private void ExecuteScript(ICastScript? script)
-    {
-        switch (script)
-        {
-            case null:
-                break;
-            case IScriptSpell asSpellScript:
-                asSpellScript.ExecuteScriptSpell(this);
-                break;
-            case IScript asScript:
-                asScript.ExecuteScript();
-                break;
-            default:
-                throw new Exception("Invalid script for spell.  Only ISpellScript and IScript scripts are supported for spells.");
-        }
-    }
+    private ICastSpellScript? CastSpellScript { get; set; }
+    private ICastSpellScript? FailedCastSpellScript { get; set; }
 
     /// <summary>
     /// Performs the spell.
     /// </summary>
     public void CastSpell()
     {
-        ExecuteScript(CastScript);
+        if (CastSpellScript != null)
+        {
+            CastSpellScript.ExecuteCastSpellScript(this);
+        }
     }
 
     /// <summary>
@@ -124,7 +110,10 @@ internal abstract class Spell : IGetKey
     /// </summary>
     public void CastFailed()
     {
-        ExecuteScript(CastFailedScript);
+        if (FailedCastSpellScript != null)
+        {
+            FailedCastSpellScript.ExecuteCastSpellScript(this);
+        }
     }
 
     /// <summary>

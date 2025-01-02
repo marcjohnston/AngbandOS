@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DoomBoltScript : Script, IScript
+internal class DoomBoltScript : Script, IScript, ICastSpellScript
 {
     private DoomBoltScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a beam of mana in a chosen direction.

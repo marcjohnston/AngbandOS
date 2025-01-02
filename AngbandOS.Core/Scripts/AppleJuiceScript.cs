@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AppleJuiceScript : Script, IScript, IEatOrQuaffScript
+internal class AppleJuiceScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private AppleJuiceScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

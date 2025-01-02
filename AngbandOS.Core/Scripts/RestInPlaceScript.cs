@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestInPlaceScript : Script, IScript, IGameCommandScript
+internal class RestInPlaceScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private RestInPlaceScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the rest script and disposes of the repeatable result.

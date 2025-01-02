@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SeeInvisible1d24p24Script : Script, IScript
+internal class SeeInvisible1d24p24Script : Script, IScript, ICastSpellScript
 {
     private SeeInvisible1d24p24Script(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds between 24 and 48 turns of see invisibility.

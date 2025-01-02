@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuerySymbolScript : Script, IScript, IGameCommandScript, IScriptStore
+internal class QuerySymbolScript : Script, IScript, ICastSpellScript, IGameCommandScript, IScriptStore
 {
     private QuerySymbolScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the query symbol script.  Does not modify any of the store flags.

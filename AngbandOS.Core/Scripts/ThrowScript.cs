@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ThrowScript : Script, IScript, IGameCommandScript
+internal class ThrowScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ThrowScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the throw script and returns false.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TunnelScript : Script, IScript, IGameCommandScript
+internal class TunnelScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private TunnelScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the tunnel script and disposes of the repeatable result.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandWeaponWithChaosScript : Script, IScript
+internal class BrandWeaponWithChaosScript : Script, IScript, ICastSpellScript
 {
     private BrandWeaponWithChaosScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Enchants the melee weapon with chaos.

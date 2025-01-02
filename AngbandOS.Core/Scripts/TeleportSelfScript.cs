@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : Script, IScript, IScriptInt, IReadScrollOrUseStaffScript, IUsedScriptItem
+internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptInt, IReadScrollOrUseStaffScript, IUsedScriptItem
 {
     private TeleportSelfScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Teleports the player between a specified distance from 1/2 of the distance up to a maximum of 200.

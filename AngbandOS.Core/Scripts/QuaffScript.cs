@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuaffScript : Script, IScript, IGameCommandScript
+internal class QuaffScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private QuaffScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the quaff script and returns false.

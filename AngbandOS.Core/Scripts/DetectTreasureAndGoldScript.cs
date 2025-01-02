@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectTreasureAndGoldScript : Script, IScript, IReadScrollOrUseStaffScript
+internal class DetectTreasureAndGoldScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private DetectTreasureAndGoldScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessByChanceScript
+internal class HireAnEscortScript : Script, IScript, ICastSpellScript, IScriptStore, ISuccessByChanceScript
 {
     private HireAnEscortScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the hire escort script successful script and sets the leave store flag to true, if the script was successful.

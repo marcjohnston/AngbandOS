@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FistOfForceScript : Script, IScript
+internal class FistOfForceScript : Script, IScript, ICastSpellScript
 { 
     private FistOfForceScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a ball of disintegrate in a chosen direction.

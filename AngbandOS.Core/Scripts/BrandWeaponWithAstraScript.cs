@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandWeaponWithAstraScript : Script, IScript
+internal class BrandWeaponWithAstraScript : Script, IScript, ICastSpellScript
 {
     private BrandWeaponWithAstraScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Enchants the melee weapon as planar.

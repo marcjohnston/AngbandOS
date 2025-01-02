@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MutateBodyScript : Script, IScript
+internal class MutateBodyScript : Script, IScript, ICastSpellScript
 {
     private MutateBodyScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Gains a mutation.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HorrificVisageScript : Script, IScript
+internal class HorrificVisageScript : Script, IScript, ICastSpellScript
 {
     private HorrificVisageScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds fear and stuns a monster in a chosen direction.

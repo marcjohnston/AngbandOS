@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RefillScript : Script, IScript, IGameCommandScript
+internal class RefillScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private RefillScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the refill script and returns false.

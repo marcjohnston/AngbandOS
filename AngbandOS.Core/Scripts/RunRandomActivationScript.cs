@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RunRandomActivationScript : Script, IScript
+internal class RunRandomActivationScript : Script, IScript, ICastSpellScript
 {
     private RunRandomActivationScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the activate power script.

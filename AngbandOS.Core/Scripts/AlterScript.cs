@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterScript : Script, IScript, IGameCommandScript
+internal class AlterScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private AlterScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the alter script and disposes of the successful result.

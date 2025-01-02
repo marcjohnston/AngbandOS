@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SenseInventoryScript : Script, IScript
+internal class SenseInventoryScript : Script, IScript, ICastSpellScript
 {
     private SenseInventoryScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Senses magical items in the inventory.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BlessWeaponScript : Script, IScript, ISuccessByChanceScript
+internal class BlessWeaponScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript
 {
     private BlessWeaponScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Blesses a chosen weapon and return true if blessing wasn't cancelled during the weapon selection process; false, if the blessing was cancelled.

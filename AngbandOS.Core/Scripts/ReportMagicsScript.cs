@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ReportMagicsScript : Script, IScript
+internal class ReportMagicsScript : Script, IScript, ICastSpellScript
 {
     private ReportMagicsScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

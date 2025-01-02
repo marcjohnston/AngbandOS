@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnterWizardModeScript : Script, IScript, IGameCommandScript
+internal class EnterWizardModeScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private EnterWizardModeScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the wizard mode script and returns false.

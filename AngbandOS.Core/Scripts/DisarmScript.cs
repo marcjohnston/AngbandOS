@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DisarmScript : Script, IScript, IGameCommandScript
+internal class DisarmScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private DisarmScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the disarm script and disposes of the repeatable result.

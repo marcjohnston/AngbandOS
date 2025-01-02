@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandWeaponWithPoisonScript : Script, IScript
+internal class BrandWeaponWithPoisonScript : Script, IScript, ICastSpellScript
 {
     private BrandWeaponWithPoisonScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Enchants the melee weapon with poison.

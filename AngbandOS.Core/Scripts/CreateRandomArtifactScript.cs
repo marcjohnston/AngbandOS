@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CreateRandomArtifactScript : Script, IScript
+internal class CreateRandomArtifactScript : Script, IScript, ICastSpellScript
 {
     private CreateRandomArtifactScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Creates an artifact from a chosen item.

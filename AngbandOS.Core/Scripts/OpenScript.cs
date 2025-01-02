@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class OpenScript : Script, IScript, IGameCommandScript
+internal class OpenScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private OpenScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the open script and disposes of the repeatable result.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelf5XScript : Script, IScript
+internal class TeleportSelf5XScript : Script, IScript, ICastSpellScript
 {
     private TeleportSelf5XScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     public void ExecuteScript()
     {

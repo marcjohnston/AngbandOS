@@ -10,9 +10,14 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScript, IReadScrollOrUseStaffScript
+internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IReadScrollOrUseStaffScript
 {
     private DetectEvilMonstersScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Detects evil monsters and returns true, if monsters were revealed; false, otherwise.

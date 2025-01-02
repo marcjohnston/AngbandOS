@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StoneSkinScript : Script, IScript
+internal class StoneSkinScript : Script, IScript, ICastSpellScript
 {
     private StoneSkinScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Adds between 30 and 50 turns of stoneskin.

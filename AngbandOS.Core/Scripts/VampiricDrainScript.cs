@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class VampiricDrainScript : Script, IScript
+internal class VampiricDrainScript : Script, IScript, ICastSpellScript
 {
     private VampiricDrainScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Drains the health of a monster in a chosen direction and adds the same amount of health to the player.

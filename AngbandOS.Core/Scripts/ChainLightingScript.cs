@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ChainLightingScript : Script, IScript
+internal class ChainLightingScript : Script, IScript, ICastSpellScript
 {
     private ChainLightingScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires a beam of electricity in all directions.

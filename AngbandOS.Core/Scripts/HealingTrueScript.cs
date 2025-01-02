@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HealingTrueScript : Script, IScript
+internal class HealingTrueScript : Script, IScript, ICastSpellScript
 {
     private HealingTrueScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Restores 2000 points of health and heals stun and bleeding.

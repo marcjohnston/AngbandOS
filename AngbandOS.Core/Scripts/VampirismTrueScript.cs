@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class VampirismTrueScript : Script, IScript
+internal class VampirismTrueScript : Script, IScript, ICastSpellScript
 {
     private VampirismTrueScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Drains 100 points of life from a monster in a chosen direction and adds 100 points to the player.

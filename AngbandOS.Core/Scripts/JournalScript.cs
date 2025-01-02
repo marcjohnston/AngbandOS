@@ -10,12 +10,17 @@ using System.Xml.Linq;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JournalScript : Script, IScript, IGameCommandScript, IScriptStore
+internal class JournalScript : Script, IScript, ICastSpellScript, IGameCommandScript, IScriptStore
 {
     private readonly ColorEnum[] _menuColors = new ColorEnum[128];
     private readonly int[] _menuIndices = new int[128];
     private readonly string[] _menuItem = new string[128];
     private int _menuLength;
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     private JournalScript(Game game) : base(game) { }
 

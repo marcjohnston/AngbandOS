@@ -8,11 +8,16 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ConfuseGasScript : Script, IScript
+internal class ConfuseGasScript : Script, IScript, ICastSpellScript
 {
     private ConfuseGasScript(Game game) : base(game) { }
 
-     /// <summary>
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
     /// Executes the script.
     /// </summary>
     /// <returns></returns>

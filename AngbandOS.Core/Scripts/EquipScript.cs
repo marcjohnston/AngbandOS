@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EquipScript : Script, IScript, IGameCommandScript, IScriptStore
+internal class EquipScript : Script, IScript, ICastSpellScript, IGameCommandScript, IScriptStore
 {
     private EquipScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the equip script.  Does not modify any of the store flags.

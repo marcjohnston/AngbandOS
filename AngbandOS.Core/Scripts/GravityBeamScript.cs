@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GravityBeamScript : Script, IScript
+internal class GravityBeamScript : Script, IScript, ICastSpellScript
 {
     private GravityBeamScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Fires beam of gravity in a chosen direction.

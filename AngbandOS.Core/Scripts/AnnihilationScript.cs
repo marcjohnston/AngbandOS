@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AnnihilationScript : Script, IScript
+internal class AnnihilationScript : Script, IScript, ICastSpellScript
 {
     private AnnihilationScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Destroys every monster, taking a hit for each one but adding mana for each too.

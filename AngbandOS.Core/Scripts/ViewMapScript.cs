@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewMapScript : Script, IScript, IGameCommandScript
+internal class ViewMapScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ViewMapScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the view map script and returns false.

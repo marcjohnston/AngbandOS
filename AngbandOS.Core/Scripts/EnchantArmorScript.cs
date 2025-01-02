@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnchantArmorScript : Script, IScript
+internal class EnchantArmorScript : Script, IScript, ICastSpellScript
 {
     private EnchantArmorScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

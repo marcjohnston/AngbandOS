@@ -9,9 +9,14 @@ namespace AngbandOS.Core.Scripts;
 
 [Serializable]
 
-internal class CreateItemScript : Script, IScript
+internal class CreateItemScript : Script, IScript, ICastSpellScript
 {
     private CreateItemScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the create item script.

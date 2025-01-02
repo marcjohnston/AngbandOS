@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RayOfSunlightScript : Script, IScript
+internal class RayOfSunlightScript : Script, IScript, ICastSpellScript
 {
     private RayOfSunlightScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandWeaponAsVampiricScript : Script, IScript
+internal class BrandWeaponAsVampiricScript : Script, IScript, ICastSpellScript
 {
     private BrandWeaponAsVampiricScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Enchants the melee weapon as vampiric.

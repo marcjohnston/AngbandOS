@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ShowManualScript : Script, IScript, IGameCommandScript
+internal class ShowManualScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ShowManualScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the show manual script and returns false.

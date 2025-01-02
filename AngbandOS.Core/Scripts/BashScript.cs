@@ -11,9 +11,14 @@ namespace AngbandOS.Core.Scripts;
 /// Get a direction and bash a door, returning true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
 /// </summary>
 [Serializable]
-internal class BashScript : Script, IScript, IGameCommandScript
+internal class BashScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private BashScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the bash script and disposes of the repeatable result.

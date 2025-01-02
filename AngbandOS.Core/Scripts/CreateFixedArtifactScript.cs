@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CreateFixedArtifactScript : Script, IScript
+internal class CreateFixedArtifactScript : Script, IScript, ICastSpellScript
 {
     private CreateFixedArtifactScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.

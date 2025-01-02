@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResetFearTimerScript : Script, IScript
+internal class ResetFearTimerScript : Script, IScript, ICastSpellScript
 {
     private ResetFearTimerScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Resets the timed fear.

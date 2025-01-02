@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HerbalHealingScript : Script, IScript
+internal class HerbalHealingScript : Script, IScript, ICastSpellScript
 {
     private HerbalHealingScript(Game game) : base(game) { }
+
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
 
     /// <summary>
     /// Executes the script.
