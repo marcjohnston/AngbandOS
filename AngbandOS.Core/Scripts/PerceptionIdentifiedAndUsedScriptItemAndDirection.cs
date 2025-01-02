@@ -16,12 +16,4 @@ internal class PerceptionIdentifiedAndUsedScriptItemAndDirection : Script, IZapR
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
-    {
-        if (Game.RunUsedScript(nameof(IdentifyItemScript)))
-        {
-            return new IdentifiedAndUsedResult(true, true);
-        }
-        return new IdentifiedAndUsedResult(true, false);
-    }
 }

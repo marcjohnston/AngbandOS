@@ -11,13 +11,19 @@ namespace AngbandOS.Core.Scripts;
 /// Identifies a chosen item and returns false, if the item selection is cancelled; true, otherwise.
 /// </summary>
 [Serializable]
-internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScript, IReadScrollOrUseStaffScript, IUsedScriptItem
+internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScript, IReadScrollOrUseStaffScript, IUsedScriptItem, IZapRodScript
 {
     private IdentifyItemScript(Game game) : base(game) { }
 
     public void ExecuteCastSpellScript(Spell spell)
     {
         ExecuteScript();
+    }
+
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
+    {
+        bool isUsed = ExecuteUsedScript();
+        return new IdentifiedAndUsedResult(true, isUsed);
     }
 
     /// <summary>
