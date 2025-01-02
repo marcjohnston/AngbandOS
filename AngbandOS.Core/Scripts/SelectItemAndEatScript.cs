@@ -50,15 +50,15 @@ internal class SelectItemAndEatScript : Script, IScript, IGameCommandScript
         int itemLevel = item.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
-        bool ident = item.EatScript.ExecuteIdentifiedScript();
+        EatResult eatResult = item.EatScript.ExecuteEatScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
-        // We've tried this type of object
+        // We've tried this type of object  
         item.ObjectTried();
 
         // Learn its flavor if necessary
-        if (ident && !item.IsFlavorAware)
+        if (eatResult.IsIdentified && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

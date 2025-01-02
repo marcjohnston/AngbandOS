@@ -31,7 +31,7 @@ internal class BashScript : Script, IScript, IGameCommandScript
     public GameCommandResult ExecuteGameCommandScript()
     {
         // Assume it won't disturb us
-        bool repeatable = false;
+        bool isRepeatable = false;
 
         // Get the direction to bash
         if (Game.GetDirectionNoAim(out int dir))
@@ -54,9 +54,9 @@ internal class BashScript : Script, IScript, IGameCommandScript
             else
             {
                 // Bash the door.
-                repeatable = Game.BashClosedDoor(y, x);
+                isRepeatable = Game.BashClosedDoor(y, x);
             }
         }
-        return new GameCommandResult(repeatable);
+        return new GameCommandResult(isRepeatable);
     }
 }

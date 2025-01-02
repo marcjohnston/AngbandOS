@@ -27,7 +27,7 @@ internal class TunnelScript : Script, IScript, IGameCommandScript
     /// <returns></returns>
     public GameCommandResult ExecuteGameCommandScript()
     {
-        bool repeatable = false;
+        bool isRepeatable = false;
         // Get the direction in which we wish to tunnel
         if (Game.GetDirectionNoAim(out int dir))
         {
@@ -54,9 +54,9 @@ internal class TunnelScript : Script, IScript, IGameCommandScript
             else
             {
                 // Tunnel through the tile
-                repeatable = Game.TunnelThroughTile(tileY, tileX);
+                isRepeatable = Game.TunnelThroughTile(tileY, tileX);
             }
         }
-        return new GameCommandResult(repeatable);
+        return new GameCommandResult(isRepeatable);
     }
 }

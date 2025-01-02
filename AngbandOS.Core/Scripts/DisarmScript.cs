@@ -27,7 +27,7 @@ internal class DisarmScript : Script, IScript, IGameCommandScript
     /// <returns></returns>
     public GameCommandResult ExecuteGameCommandScript()
     {
-        bool repeatable = false;
+        bool isRepeatable = false;
         int numTraps = Game.CountKnownTraps(out GridCoordinate? trapCoord);
         int numChests = Game.CountChests(out GridCoordinate? chestCoord, true);
         // Count the possible traps and chests we might want to disarm
@@ -62,13 +62,13 @@ internal class DisarmScript : Script, IScript, IGameCommandScript
             // Disarm the chest or trap
             else if (chestItem != null)
             {
-                repeatable = Game.DisarmChest(y, x, chestItem);
+                isRepeatable = Game.DisarmChest(y, x, chestItem);
             }
             else
             {
-                repeatable = Game.DisarmTrap(y, x);
+                isRepeatable = Game.DisarmTrap(y, x);
             }
         }
-        return new GameCommandResult(repeatable);
+        return new GameCommandResult(isRepeatable);
     }
 }

@@ -16,16 +16,16 @@ internal class EatConfusionScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (!Game.HasConfusionResistance)
         {
             if (Game.ConfusedTimer.AddTimer(Game.RandomLessThan(10) + 10))
             {
-                return true;
+                return new EatResult(true);
             }
         }
-        return false;
+        return new EatResult(false);
     }
 }

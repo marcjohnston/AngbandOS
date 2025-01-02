@@ -16,16 +16,16 @@ internal class EatHallucinationsScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (!Game.HasChaosResistance)
         {
             if (Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 250))
             {
-                return true;
+                return new EatResult(true);
             }
         }
-        return false;
+        return new EatResult(false);
     }
 }

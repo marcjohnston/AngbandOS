@@ -16,11 +16,11 @@ internal class EatUnhealthScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.TakeHit(Game.DiceRoll(10, 10), "poisonous food.");
         Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
-        return true;
+        return new EatResult(true);
     }
 }

@@ -28,7 +28,7 @@ internal class AlterScript : Script, IScript, IGameCommandScript
     public GameCommandResult ExecuteGameCommandScript()
     {
         // Assume we won't disturb the player
-        bool repeatable = false;
+        bool isRepeatable = false;
 
         // Get the direction in which to alter something
         if (Game.GetDirectionNoAim(out int dir))
@@ -55,10 +55,10 @@ internal class AlterScript : Script, IScript, IGameCommandScript
                 {
                     AlterEventArgs alterEventArgs = new AlterEventArgs(y, x);
                     alterAction.Execute(alterEventArgs);
-                    repeatable = alterEventArgs.More;
+                    isRepeatable = alterEventArgs.More;
                 }
             }
         }
-        return new GameCommandResult(repeatable);
+        return new GameCommandResult(isRepeatable);
     }
 }

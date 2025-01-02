@@ -54,10 +54,10 @@ internal class _template : Script, IScript, IGameCommandScript, IScriptStore, IE
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         ExecuteScript();
-        return false;
+        return new EatResult(false);
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ internal class EatPoisonScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
@@ -28,9 +28,9 @@ internal class EatPoisonScript : Script, IEatScript
             }
             else if (Game.PoisonTimer.AddTimer(Game.RandomLessThan(10) + 10))
             {
-                return true;
+                return new EatResult(true);
             }
         }
-        return false;
+        return new EatResult(false);
     }
 }

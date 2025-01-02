@@ -27,7 +27,7 @@ internal class CloseScript : Script, IScript, IGameCommandScript
     /// <returns></returns>
     public GameCommandResult ExecuteGameCommandScript()
     {
-        bool repeatable = false;
+        bool isRepeatable = false;
         // If there's only one door, assume we mean that one and don't ask for a direction
         if (Game.CountOpenDoors(out GridCoordinate? coord) == 1)
         {
@@ -54,9 +54,9 @@ internal class CloseScript : Script, IScript, IGameCommandScript
             // Actually close the door
             else
             {
-                repeatable = Game.CloseDoor(y, x);
+                isRepeatable = Game.CloseDoor(y, x);
             }
         }
-        return new GameCommandResult(repeatable);
+        return new GameCommandResult(isRepeatable);
     }
 }

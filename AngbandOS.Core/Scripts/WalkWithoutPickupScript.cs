@@ -27,15 +27,15 @@ internal class WalkWithoutPickupScript : Script, IScript, IGameCommandScript
     /// <returns></returns>
     public GameCommandResult ExecuteGameCommandScript()
     {
-        bool repeatable = false;
+        bool isRepeatable = false;
         // If we don't already have a direction, get one
         if (Game.GetDirectionNoAim(out int dir))
         {
             // Walking takes a full turn
             Game.EnergyUse = 100;
             Game.MovePlayer(dir, true);
-            repeatable = true;
+            isRepeatable = true;
         }
-        return new GameCommandResult(repeatable);
+        return new GameCommandResult(isRepeatable);
     }
 }

@@ -16,34 +16,34 @@ internal class EatRestoringScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        bool ident = false;
+        bool isIdentified = false;
         if (Game.TryRestoringAbilityScore(AbilityEnum.Strength))
         {
-            ident = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
         {
-            ident = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Wisdom))
         {
-            ident = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Dexterity))
         {
-            ident = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Constitution))
         {
-            ident = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Charisma))
         {
-            ident = true;
+            isIdentified = true;
         }
-        return ident;
+        return new EatResult(isIdentified);
     }
 }

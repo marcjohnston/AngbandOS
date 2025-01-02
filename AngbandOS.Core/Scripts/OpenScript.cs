@@ -27,7 +27,7 @@ internal class OpenScript : Script, IScript, IGameCommandScript
     /// <returns></returns>
     public GameCommandResult ExecuteGameCommandScript()
     {
-        bool repeatable = false;
+        bool isRepeatable = false;
         // Check if there's only one thing we can open
         int numDoors = Game.CountClosedDoors(out GridCoordinate? doorCoord);
         int numChests = Game.CountChests(out GridCoordinate? chestCoord, false);
@@ -97,7 +97,7 @@ internal class OpenScript : Script, IScript, IGameCommandScript
                     }
                     else
                     {
-                        repeatable = true;
+                        isRepeatable = true;
                         Game.MsgPrint("You failed to pick the lock.");
                     }
                 }
@@ -110,9 +110,9 @@ internal class OpenScript : Script, IScript, IGameCommandScript
             }
             else
             {
-                repeatable = Game.OpenDoor(y, x);
+                isRepeatable = Game.OpenDoor(y, x);
             }
         }
-        return new GameCommandResult(repeatable);
+        return new GameCommandResult(isRepeatable);
     }
 }

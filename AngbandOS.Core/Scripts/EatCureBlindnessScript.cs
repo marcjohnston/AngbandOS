@@ -16,13 +16,13 @@ internal class EatCureBlindnessScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.BlindnessTimer.ResetTimer())
         {
-            return true;
+            return new EatResult(true);
         }
-        return false;
+        return new EatResult(false);
     }
 }

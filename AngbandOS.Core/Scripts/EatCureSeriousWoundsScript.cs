@@ -16,13 +16,13 @@ internal class EatCureSeriousWoundsScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.RestoreHealth(Game.DiceRoll(4, 8)))
         {
-            return true;
+            return new EatResult(true);
         }
-        return false;
+        return new EatResult(false);
     }
 }

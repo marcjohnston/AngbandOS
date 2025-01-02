@@ -16,16 +16,16 @@ internal class EatBlindnessScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public EatResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (!Game.HasBlindnessResistance)
         {
             if (Game.BlindnessTimer.AddTimer(Game.RandomLessThan(200) + 200))
             {
-                return true;
+                return new EatResult(true);
             }
         }
-        return false;
+        return new EatResult(false);
     }
 }
