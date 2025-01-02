@@ -216,24 +216,19 @@ internal class SingletonRepository
     public void Load(GameConfiguration gameConfiguration)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
+        RegisterRepository<IAimWandScript>();
         RegisterRepository<IBoolValue>();
-        RegisterRepository<IUsedScript>();
-        RegisterRepository<IUsedScriptInt>();
-        RegisterRepository<IUsedScriptItem>();
         RegisterRepository<ICastScript>();
         RegisterRepository<IChangeTracker>();
         RegisterRepository<IDateAndTimeValue>();
         RegisterRepository<IDirectionalActivationScript>();
-        RegisterRepository<IEnhancementScript>();
-        RegisterRepository<IReadScrollOrUseStaffScript>();
-        RegisterRepository<IAimWandScript>();
         RegisterRepository<IEatOrQuaffScript>();
-        RegisterRepository<IZapRodScript>();
+        RegisterRepository<IEnhancementScript>();
+        RegisterRepository<IGameCommandScript>();
         RegisterRepository<IIntValue>();
         RegisterRepository<IMonsterSelector>();
-        RegisterRepository<IEatOrQuaffScript>();
         RegisterRepository<INullableStringsValue>();
-        RegisterRepository<IGameCommandScript>();
+        RegisterRepository<IReadScrollOrUseStaffScript>();
         RegisterRepository<IScript>();
         RegisterRepository<IScriptBool>();
         RegisterRepository<IScriptInt>();
@@ -248,6 +243,10 @@ internal class SingletonRepository
         RegisterRepository<ISuccessByChanceScriptInt>();
         RegisterRepository<ITileScript>();
         RegisterRepository<IUnfriendlyScript>();
+        RegisterRepository<IUsedScript>();
+        RegisterRepository<IUsedScriptInt>();
+        RegisterRepository<IUsedScriptItem>();
+        RegisterRepository<IZapRodScript>();
 
         RegisterRepository<ActivationWeightedRandom>();
         RegisterRepository<Alignment>();
