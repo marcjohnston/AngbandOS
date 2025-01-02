@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class OpenScript : Script, IScript, IRepeatableScript
+internal class OpenScript : Script, IScript, IGameCommandScript
 {
     private OpenScript(Game game) : base(game) { }
 
@@ -18,16 +18,16 @@ internal class OpenScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteRepeatableScript();
+        ExecuteGameCommandScript();
     }
 
     /// <summary>
     /// Executes the open script and returns true, if the open fails due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
-        bool more = false;
+        bool repeatable = false;
         // Check if there's only one thing we can open
         int numDoors = Game.CountClosedDoors(out GridCoordinate? doorCoord);
         int numChests = Game.CountChests(out GridCoordinate? chestCoord, false);
@@ -97,7 +97,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
                     }
                     else
                     {
-                        more = true;
+                        repeatable = true;
                         Game.MsgPrint("You failed to pick the lock.");
                     }
                 }
@@ -110,9 +110,9 @@ internal class OpenScript : Script, IScript, IRepeatableScript
             }
             else
             {
-                more = Game.OpenDoor(y, x);
+                repeatable = Game.OpenDoor(y, x);
             }
         }
-        return more;
+        return new GameCommandResult(repeatable);
     }
 }

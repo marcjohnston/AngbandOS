@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DisarmScript : Script, IScript, IRepeatableScript
+internal class DisarmScript : Script, IScript, IGameCommandScript
 {
     private DisarmScript(Game game) : base(game) { }
 
@@ -18,16 +18,16 @@ internal class DisarmScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteRepeatableScript();
+        ExecuteGameCommandScript();
     }
 
     /// <summary>
     /// Executes the disarm script and returns true, if the disarm fails due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
-        bool more = false;
+        bool repeatable = false;
         int numTraps = Game.CountKnownTraps(out GridCoordinate? trapCoord);
         int numChests = Game.CountChests(out GridCoordinate? chestCoord, true);
         // Count the possible traps and chests we might want to disarm
@@ -62,13 +62,13 @@ internal class DisarmScript : Script, IScript, IRepeatableScript
             // Disarm the chest or trap
             else if (chestItem != null)
             {
-                more = Game.DisarmChest(y, x, chestItem);
+                repeatable = Game.DisarmChest(y, x, chestItem);
             }
             else
             {
-                more = Game.DisarmTrap(y, x);
+                repeatable = Game.DisarmTrap(y, x);
             }
         }
-        return more;
+        return new GameCommandResult(repeatable);
     }
 }

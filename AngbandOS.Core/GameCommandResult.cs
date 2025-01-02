@@ -5,21 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core;
 
 [Serializable]
-internal class EatGoodFoodScript : Script, IEatScript
+public class GameCommandResult
 {
-    private EatGoodFoodScript(Game game) : base(game) { }
-
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteIdentifiedScript()
+    public bool IsRepeatable { get; set; }
+    public GameCommandResult(bool repeatable)
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        Game.MsgPrint("That tastes good.");
-        return true;
+        IsRepeatable = repeatable;
     }
 }

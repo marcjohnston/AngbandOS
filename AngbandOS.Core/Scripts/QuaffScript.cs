@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuaffScript : Script, IScript, IRepeatableScript
+internal class QuaffScript : Script, IScript, IGameCommandScript
 {
     private QuaffScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
     /// Executes the quaff script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

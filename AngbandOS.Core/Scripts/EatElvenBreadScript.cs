@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatElvenBreadScript : Script, IIdentifiedScript
+internal class EatElvenBreadScript : Script, IEatScript
 {
     private EatElvenBreadScript(Game game) : base(game) { }
 

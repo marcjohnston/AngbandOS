@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IScriptStore
+internal class ViewCharacterScript : Script, IScript, IGameCommandScript, IScriptStore
 {
     private ViewCharacterScript(Game game) : base(game) { }
 
@@ -26,10 +26,10 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IScript
     /// Executes the view character script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

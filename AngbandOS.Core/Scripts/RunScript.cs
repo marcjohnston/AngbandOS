@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RunScript : Script, IScript, IRepeatableScript
+internal class RunScript : Script, IScript, IGameCommandScript
 {
     private RunScript(Game game) : base(game) { }
 
@@ -25,13 +25,13 @@ internal class RunScript : Script, IScript, IRepeatableScript
     /// Executes the run script and returns false, if the player is confused; true, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         // Can't run if we're confused
         if (Game.ConfusedTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
-            return false; // Don't repeat this.
+            return new GameCommandResult(false); // Don't repeat this.
         }
         // Get a direction if we don't already have one
         if (Game.GetDirectionNoAim(out int dir))
@@ -41,6 +41,6 @@ internal class RunScript : Script, IScript, IRepeatableScript
             // Run one step in the chosen direction
             Game.RunOneStep(dir);
         }
-        return true; // Repeat the run.
+        return new GameCommandResult(true); // Repeat the run.
     }
 }

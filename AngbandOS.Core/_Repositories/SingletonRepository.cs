@@ -227,13 +227,13 @@ internal class SingletonRepository
         RegisterRepository<IEnhancementScript>();
         RegisterRepository<IReadScrollAndUseStaffScript>();
         RegisterRepository<IIdentifiedScriptDirection>();
-        RegisterRepository<IIdentifiedScript>();
+        RegisterRepository<IEatScript>();
         RegisterRepository<IZapRodScript>();
         RegisterRepository<IIntValue>();
         RegisterRepository<IMonsterSelector>();
         RegisterRepository<INoticeableScript>();
         RegisterRepository<INullableStringsValue>();
-        RegisterRepository<IRepeatableScript>();
+        RegisterRepository<IGameCommandScript>();
         RegisterRepository<IScript>();
         RegisterRepository<IScriptBool>();
         RegisterRepository<IScriptInt>();

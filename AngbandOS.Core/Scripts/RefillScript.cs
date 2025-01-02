@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RefillScript : Script, IScript, IRepeatableScript
+internal class RefillScript : Script, IScript, IGameCommandScript
 {
     private RefillScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class RefillScript : Script, IScript, IRepeatableScript
     /// Executes the refill script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

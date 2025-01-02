@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyItemScript : Script, IScript, IRepeatableScript, IScriptStore
+internal class DestroyItemScript : Script, IScript, IGameCommandScript, IScriptStore
 {
     private DestroyItemScript(Game game) : base(game) { }
 
@@ -25,10 +25,10 @@ internal class DestroyItemScript : Script, IScript, IRepeatableScript, IScriptSt
     /// Executes the destroy script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

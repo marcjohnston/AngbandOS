@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SayFeelingScript : Script, IScript, IRepeatableScript
+internal class SayFeelingScript : Script, IScript, IGameCommandScript
 {
     private SayFeelingScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class SayFeelingScript : Script, IScript, IRepeatableScript
     /// Executes the say feeling script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LocateScript : Script, IScript, IRepeatableScript
+internal class LocateScript : Script, IScript, IGameCommandScript
 {
     private LocateScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class LocateScript : Script, IScript, IRepeatableScript
     /// Executes the locate script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

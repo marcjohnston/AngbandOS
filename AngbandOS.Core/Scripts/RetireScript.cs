@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RetireScript : Script, IScript, IRepeatableScript
+internal class RetireScript : Script, IScript, IGameCommandScript
 {
     private RetireScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class RetireScript : Script, IScript, IRepeatableScript
     /// Executes the retire script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

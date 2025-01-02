@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
+internal class SelectItemAndEatScript : Script, IScript, IGameCommandScript
 {
     private SelectItemAndEatScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
     /// Executes the eat script and returns false because the process shouldn't be repeated.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

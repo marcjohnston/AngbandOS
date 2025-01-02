@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ListCommandsScript : Script, IScript, IRepeatableScript
+internal class ListCommandsScript : Script, IScript, IGameCommandScript
 {
     private ListCommandsScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class ListCommandsScript : Script, IScript, IRepeatableScript
     /// Executes the list commands script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

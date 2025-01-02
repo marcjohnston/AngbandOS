@@ -288,7 +288,7 @@ internal sealed class Item : IComparable<Item>
     public int ExperienceGainDivisorForDestroying => _factory.ExperienceGainDivisorForDestroying;
     public bool IdentityCanBeSensed => _factory.IdentityCanBeSensed;
     public bool IsConsumedWhenEaten => _factory.IsConsumedWhenEaten;
-    public IIdentifiedScript? EatScript => _factory.EatScript;
+    public IEatScript? EatScript => _factory.EatScript;
     private bool GetsDamageMultiplier => _factory.GetsDamageMultiplier;
 
     /// <summary>

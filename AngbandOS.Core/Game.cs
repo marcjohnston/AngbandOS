@@ -6289,13 +6289,14 @@ public bool IsDead = false;
             // attached for improved performance.
             if (command.IsEnabled && command.KeyChar == c)
             {
-                bool more = false;
+                bool repeatable = false;
                 if (command.ExecuteScript != null)
                 {
-                    more = command.ExecuteScript.ExecuteRepeatableScript();
+                    GameCommandResult gameCommandResult = command.ExecuteScript.ExecuteGameCommandScript();
+                    repeatable = gameCommandResult.IsRepeatable;
                 }
 
-                if (!more)
+                if (!repeatable)
                 {
                     Disturb(false);
                 }
@@ -8069,7 +8070,7 @@ public bool IsDead = false;
     public bool RunIdentifiedScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        IIdentifiedScript castedScript = SingletonRepository.Get<IIdentifiedScript>(scriptName);
+        IEatScript castedScript = SingletonRepository.Get<IEatScript>(scriptName);
         return castedScript.ExecuteIdentifiedScript();
     }
 

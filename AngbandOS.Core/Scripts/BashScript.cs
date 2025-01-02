@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Get a direction and bash a door, returning true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
 /// </summary>
 [Serializable]
-internal class BashScript : Script, IScript, IRepeatableScript
+internal class BashScript : Script, IScript, IGameCommandScript
 {
     private BashScript(Game game) : base(game) { }
 
@@ -21,17 +21,17 @@ internal class BashScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteRepeatableScript();
+        ExecuteGameCommandScript();
     }
 
     /// <summary>
     /// Allows the player to select a direction and bashes the object found in that direction.  Returns true, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         // Assume it won't disturb us
-        bool more = false;
+        bool repeatable = false;
 
         // Get the direction to bash
         if (Game.GetDirectionNoAim(out int dir))
@@ -54,9 +54,9 @@ internal class BashScript : Script, IScript, IRepeatableScript
             else
             {
                 // Bash the door.
-                more = Game.BashClosedDoor(y, x);
+                repeatable = Game.BashClosedDoor(y, x);
             }
         }
-        return more;
+        return new GameCommandResult(repeatable);
     }
 }

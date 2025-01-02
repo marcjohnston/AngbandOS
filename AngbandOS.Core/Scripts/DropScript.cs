@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DropScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript
+internal class DropScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript
 {
     private DropScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessByChance
     /// Executes the drop script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

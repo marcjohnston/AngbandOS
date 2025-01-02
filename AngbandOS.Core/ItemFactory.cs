@@ -187,7 +187,7 @@ internal abstract class ItemFactory : ItemEnhancement
         }
 
         InitialGoldPiecesRoll = Game.ParseRollExpression(InitialGoldPiecesRollExpression);
-        EatScript = Game.SingletonRepository.GetNullable<IIdentifiedScript>(EatScriptBindingKey);
+        EatScript = Game.SingletonRepository.GetNullable<IEatScript>(EatScriptBindingKey);
 
         // If there is no DescriptionSyntax, use the Name as the default.
         _descriptionSyntax = DescriptionSyntax != null ? DescriptionSyntax : Name;
@@ -1463,7 +1463,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// Returns the script to be run when an item of this factory is eaten; or null, if items cannot be eaten.  This property is bound from the <see cref="EatScriptBindingKey"/> property
     /// during the bind phase.
     /// </summary>
-    public IIdentifiedScript? EatScript { get; private set; }
+    public IEatScript? EatScript { get; private set; }
 
     /// <summary>
     /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivationBindingTuple"/> property during the bind phase.

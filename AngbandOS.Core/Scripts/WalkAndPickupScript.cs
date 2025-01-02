@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
+internal class WalkAndPickupScript : Script, IScript, IGameCommandScript
 {
     private WalkAndPickupScript(Game game) : base(game) { }
 
@@ -27,9 +27,9 @@ internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
     /// Executes the walk and pickup script and returns true, if the walk succeeded or failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
-        bool more = false;
+        bool repeatable = false;
 
         // If we don't already have a direction, get one
         if (Game.GetDirectionNoAim(out int dir))
@@ -37,8 +37,8 @@ internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
             // Walking takes a full turn
             Game.EnergyUse = 100;
             Game.MovePlayer(dir, false);
-            more = true;
+            repeatable = true;
         }
-        return more;
+        return new GameCommandResult(repeatable);
     }
 }

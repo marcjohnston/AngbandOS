@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Search around the player for secret doors and traps
 /// </summary>
 [Serializable]
-internal class SearchScript : Script, IScript, IRepeatableScript
+internal class SearchScript : Script, IScript, IGameCommandScript
 {
     private SearchScript(Game game) : base(game) { }
 
@@ -19,10 +19,10 @@ internal class SearchScript : Script, IScript, IRepeatableScript
     /// Executes the search script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

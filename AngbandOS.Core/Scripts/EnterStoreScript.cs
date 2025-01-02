@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnterStoreScript : Script, IScript, IRepeatableScript
+internal class EnterStoreScript : Script, IScript, IGameCommandScript
 {
     private EnterStoreScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class EnterStoreScript : Script, IScript, IRepeatableScript
     /// Executes the enter store script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

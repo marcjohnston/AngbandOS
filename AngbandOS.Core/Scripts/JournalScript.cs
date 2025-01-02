@@ -10,7 +10,7 @@ using System.Xml.Linq;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
+internal class JournalScript : Script, IScript, IGameCommandScript, IScriptStore
 {
     private readonly ColorEnum[] _menuColors = new ColorEnum[128];
     private readonly int[] _menuIndices = new int[128];
@@ -33,10 +33,10 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     /// Executes the journal script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

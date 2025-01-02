@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CastScript : Script, IScript, IRepeatableScript
+internal class CastScript : Script, IScript, IGameCommandScript
 {
     private CastScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class CastScript : Script, IScript, IRepeatableScript
     /// Executes the cast script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

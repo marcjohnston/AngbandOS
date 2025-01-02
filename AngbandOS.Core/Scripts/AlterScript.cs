@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterScript : Script, IScript, IRepeatableScript
+internal class AlterScript : Script, IScript, IGameCommandScript
 {
     private AlterScript(Game game) : base(game) { }
 
@@ -18,17 +18,17 @@ internal class AlterScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteRepeatableScript();
+        ExecuteGameCommandScript();
     }
 
     /// <summary>
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         // Assume we won't disturb the player
-        bool more = false;
+        bool repeatable = false;
 
         // Get the direction in which to alter something
         if (Game.GetDirectionNoAim(out int dir))
@@ -55,10 +55,10 @@ internal class AlterScript : Script, IScript, IRepeatableScript
                 {
                     AlterEventArgs alterEventArgs = new AlterEventArgs(y, x);
                     alterAction.Execute(alterEventArgs);
-                    more = alterEventArgs.More;
+                    repeatable = alterEventArgs.More;
                 }
             }
         }
-        return more;
+        return new GameCommandResult(repeatable);
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PopupMenuScript : Script, IScript, IRepeatableScript
+internal class PopupMenuScript : Script, IScript, IGameCommandScript
 {
     private PopupMenuScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class PopupMenuScript : Script, IScript, IRepeatableScript
     /// Executes the popup-menu script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>

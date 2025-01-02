@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FireItemScript : Script, IScript, IRepeatableScript
+internal class FireItemScript : Script, IScript, IGameCommandScript
 {
     private FireItemScript(Game game) : base(game) { }
 
@@ -16,10 +16,10 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
     /// Executes the fire script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteRepeatableScript()
+    public GameCommandResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return false;
+        return new GameCommandResult(false);
     }
 
     /// <summary>
