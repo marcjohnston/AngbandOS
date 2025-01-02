@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatRestoreConstitutionScript : Script, IIdentifiedScript
+internal class EatRestoreConstitutionScript : Script, IEatOrQuaffScript
 {
     private EatRestoreConstitutionScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatRestoreConstitutionScript : Script, IIdentifiedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.TryRestoringAbilityScore(AbilityEnum.Constitution))

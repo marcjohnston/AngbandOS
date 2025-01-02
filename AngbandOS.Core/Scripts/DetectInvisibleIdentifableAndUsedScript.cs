@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectInvisibleIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class DetectInvisibleIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private DetectInvisibleIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DetectInvisibleIdentifableAndUsedScript : Script, IReadScrollAndU
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = Game.DetectInvisibleMonsters();
         return new IdentifiedAndUsedResult(isIdentified, true);

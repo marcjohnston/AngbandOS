@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SaltWaterScript : Script, IIdentifiedScript
+internal class SaltWaterScript : Script, IEatOrQuaffScript
 {
     private SaltWaterScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SaltWaterScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Salt water makes you vomit, but gets rid of poison
         Game.MsgPrint("The saltiness makes you vomit!");

@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
+internal class WalkAndPickupScript : Script, IScript, IGameCommandScript
 {
     private WalkAndPickupScript(Game game) : base(game) { }
 
@@ -27,7 +27,7 @@ internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
     /// Executes the walk and pickup script and returns true, if the walk succeeded or failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Speed1D25P15Or5Script : Script, IIdentifiedScript
+internal class Speed1D25P15Or5Script : Script, IEatOrQuaffScript
 {
     private Speed1D25P15Or5Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Speed1D25P15Or5Script : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Speed temporarily hastes you.  But it is not additive.
         if (Game.HasteTimer.Value == 0)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WordOfRecallIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class WordOfRecallIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private WordOfRecallIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class WordOfRecallIdentifableAndUsedScript : Script, IReadScrollAndUseS
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.RunScript(nameof(ToggleRecallScript));
         return new IdentifiedAndUsedResult(true, true);

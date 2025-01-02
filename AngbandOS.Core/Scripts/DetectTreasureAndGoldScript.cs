@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectTreasureAndGoldScript : Script, IScript, IReadScrollAndUseStaffScript
+internal class DetectTreasureAndGoldScript : Script, IScript, IReadScrollOrUseStaffScript
 {
     private DetectTreasureAndGoldScript(Game game) : base(game) { }
 
@@ -18,14 +18,14 @@ internal class DetectTreasureAndGoldScript : Script, IScript, IReadScrollAndUseS
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteReadScrollAndUseStaffScript();
+        ExecuteReadScrollOrUseStaffScript();
     }
 
     /// <summary>
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = false;
         if (Game.DetectTreasure())

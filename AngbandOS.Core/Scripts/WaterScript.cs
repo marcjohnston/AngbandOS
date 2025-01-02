@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WaterScript : Script, IIdentifiedScript
+internal class WaterScript : Script, IEatOrQuaffScript
 {
     private WaterScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class WaterScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Water has no effect
         Game.MsgPrint("You feel less thirsty.");

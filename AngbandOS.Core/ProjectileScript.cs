@@ -145,7 +145,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
     /// </summary>
     /// <param name="direction"></param>
     /// <returns>True, if the projectile can be identified by the player; false, otherwise.</returns>
-    public IdentifiedResult ExecuteIdentifiedScriptDirection(int direction)
+    public IdentifiedResult ExecuteAimWandScript(int direction)
     {
         return ExecuteScriptWithPreAndPostMessages<IdentifiedResult>(() =>
         {
@@ -172,7 +172,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
     /// <summary>
     /// Projects the projectile in a direction specified by the <see cref="NonDirectionalProjectileMode"/> property.
     /// </summary>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         return ExecuteScriptWithPreAndPostMessages<IdentifiedAndUsedResult>(() =>
         {
@@ -240,7 +240,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
                     {
                         return new IdentifiedAndUsedResult(false, false);
                     }
-                    IdentifiedResult identifiedResult = ExecuteIdentifiedScriptDirection(direction);
+                    IdentifiedResult identifiedResult = ExecuteAimWandScript(direction);
                     return new IdentifiedAndUsedResult(identifiedResult.IsIdentified, true);
                 }
             case NonDirectionalProjectileModeEnum.AllDirections:
@@ -248,7 +248,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
                     bool identified = false;
                     foreach (int direction in Game.OrderedDirection)
                     {
-                        IdentifiedResult identifiedResult = ExecuteIdentifiedScriptDirection(direction);
+                        IdentifiedResult identifiedResult = ExecuteAimWandScript(direction);
                         if (identifiedResult.IsIdentified)
                         {
                             identified = true;

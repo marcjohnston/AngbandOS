@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SummonMonsterIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class SummonMonsterIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private SummonMonsterIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SummonMonsterIdentifableAndUsedScript : Script, IReadScrollAndUse
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = false;
         for (int i = 0; i < Game.DieRoll(3); i++)

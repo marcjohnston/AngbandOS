@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectTrapsScript : Script, IReadScrollAndUseStaffScript
+internal class DetectTrapsScript : Script, IReadScrollOrUseStaffScript
 {
     private DetectTrapsScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DetectTrapsScript : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = Game.DetectTraps();
         return new IdentifiedAndUsedResult(isIdentified, true);

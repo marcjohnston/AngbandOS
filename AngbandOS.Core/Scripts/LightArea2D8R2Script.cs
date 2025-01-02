@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LightArea2D8R2Script : Script, IReadScrollAndUseStaffScript
+internal class LightArea2D8R2Script : Script, IReadScrollOrUseStaffScript
 {
     private LightArea2D8R2Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LightArea2D8R2Script : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = Game.LightArea(Game.DiceRoll(2, 8), 2); // TODO: The LightArea doesn't actually return a qualified result.
         return new IdentifiedAndUsedResult(isIdentified, true);

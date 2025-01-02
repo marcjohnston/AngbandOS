@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TunnelScript : Script, IScript, IRepeatableScript
+internal class TunnelScript : Script, IScript, IGameCommandScript
 {
     private TunnelScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class TunnelScript : Script, IScript, IRepeatableScript
     /// Executes the stay script and returns true, if the tunnel succeeded or failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // Get the direction in which we wish to tunnel

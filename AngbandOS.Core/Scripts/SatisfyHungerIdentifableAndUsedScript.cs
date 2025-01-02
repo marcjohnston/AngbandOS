@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SatisfyHungerIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class SatisfyHungerIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private SatisfyHungerIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SatisfyHungerIdentifableAndUsedScript : Script, IReadScrollAndUse
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = Game.SetFood(Constants.PyFoodMax - 1);
         return new IdentifiedAndUsedResult(isIdentified, true);

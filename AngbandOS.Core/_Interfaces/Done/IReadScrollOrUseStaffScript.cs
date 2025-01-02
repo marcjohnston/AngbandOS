@@ -8,13 +8,12 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents the interface that a script needs to implement to particpate in scripts that return an IdentifiedResult if the action it performs can by identify by the player.
 /// </summary>
-internal interface IIdentifiedScript
-{ 
+internal interface IReadScrollOrUseStaffScript
+{
     /// <summary>
-    /// Returns true, if the script performs an action that would identify the item; false, otherwise. 
+    /// Returns identified as true, if the script performs an action that would identify the item; false, otherwise and used as true, if the item should be deleted; false, for the item to be kept.
     /// </summary>
     /// <returns></returns>
-    IdentifiedResult ExecuteIdentifiedScript();
+    IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript(); // TODO: Why isn't there an Item parameter like IZapRodScript
 }

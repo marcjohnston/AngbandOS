@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ReadScrollScript : Script, IScript, IRepeatableScript
+internal class ReadScrollScript : Script, IScript, IGameCommandScript
 {
     private ReadScrollScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
     /// Executes the read scroll script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);
@@ -64,7 +64,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         //bool identified = false;
         //bool usedUp = true;
 
-        IdentifiedAndUsedResult identifiedAndUsedResult = item.ActivationTuple.Value.ActivationScript.ExecuteReadScrollAndUseStaffScript();
+        IdentifiedAndUsedResult identifiedAndUsedResult = item.ActivationTuple.Value.ActivationScript.ExecuteReadScrollOrUseStaffScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll

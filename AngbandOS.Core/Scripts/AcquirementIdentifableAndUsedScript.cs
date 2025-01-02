@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcquirementIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class AcquirementIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private AcquirementIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class AcquirementIdentifableAndUsedScript : Script, IReadScrollAndUseSt
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
         return new IdentifiedAndUsedResult(true, true);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyTrapsAndDoorsScript : Script, IReadScrollAndUseStaffScript
+internal class DestroyTrapsAndDoorsScript : Script, IReadScrollOrUseStaffScript
 {
     private DestroyTrapsAndDoorsScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DestroyTrapsAndDoorsScript : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = Game.RunSuccessByChanceScript(nameof(DestroyAdjacentDoorsScript)); // If nothing was destroyed, then we do not know what happened.
         return new IdentifiedAndUsedResult(isIdentified, true);

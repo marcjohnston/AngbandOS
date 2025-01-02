@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ProtectionFromEvilIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class ProtectionFromEvilIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private ProtectionFromEvilIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ProtectionFromEvilIdentifableAndUsedScript : Script, IReadScrollA
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         int i = 3 * Game.ExperienceLevel.IntValue;
         bool isIdentified = Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + i);

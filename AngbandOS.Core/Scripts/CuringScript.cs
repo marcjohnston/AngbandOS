@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CuringScript : Script, IReadScrollAndUseStaffScript
+internal class CuringScript : Script, IReadScrollOrUseStaffScript
 {
     private CuringScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class CuringScript : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = false;
         if (Game.BlindnessTimer.ResetTimer())

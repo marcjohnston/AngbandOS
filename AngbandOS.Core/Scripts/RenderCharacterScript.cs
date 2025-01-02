@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RenderCharacterScript : Script, IScript, IRepeatableScript
+internal class RenderCharacterScript : Script, IScript, IGameCommandScript
 {
     private RenderCharacterScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
     /// Executes the render character script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

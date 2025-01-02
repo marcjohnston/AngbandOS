@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FireIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class FireIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private FireIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class FireIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScri
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), 0, 150, 4);
         if (!(Game.FireResistanceTimer.Value != 0 || Game.HasFireResistance || Game.HasFireImmunity))

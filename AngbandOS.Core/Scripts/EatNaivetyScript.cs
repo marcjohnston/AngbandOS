@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatNaivetyScript : Script, IIdentifiedScript
+internal class EatNaivetyScript : Script, IEatOrQuaffScript
 {
     private EatNaivetyScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatNaivetyScript : Script, IIdentifiedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.TakeHit(Game.DiceRoll(8, 8), "poisonous food.");

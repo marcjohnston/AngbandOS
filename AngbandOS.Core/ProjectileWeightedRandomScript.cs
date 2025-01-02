@@ -18,9 +18,9 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
         return Choose().ExecuteDirectionalActivationScript(item, direction);
     }
 
-    public IdentifiedResult ExecuteIdentifiedScriptDirection(int dir)
+    public IdentifiedResult ExecuteAimWandScript(int dir)
     {
-        return Choose().ExecuteIdentifiedScriptDirection(dir);
+        return Choose().ExecuteAimWandScript(dir);
     }
 
     public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
@@ -33,9 +33,9 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
         Choose().ExecuteScript();
     }
 
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        return Choose().ExecuteReadScrollAndUseStaffScript();
+        return Choose().ExecuteReadScrollOrUseStaffScript();
     }
 
     public bool ExecuteUsedScriptItem(Item item)

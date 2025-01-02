@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, IIdentifiedScript, IUsedScriptItem
+internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, IEatOrQuaffScript, IUsedScriptItem
 {
     private RestoreLevelScript(Game game) : base(game) { }
 
@@ -33,7 +33,7 @@ internal class RestoreLevelScript : Script, IScript, ISuccessByChanceScript, IId
     /// Executes the script and returns the success value as whether or not the action was noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         bool isIdentified = ExecuteSuccessByChanceScript();
         return new IdentifiedResult(isIdentified);

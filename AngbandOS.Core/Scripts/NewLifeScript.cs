@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class NewLifeScript : Script, IIdentifiedScript
+internal class NewLifeScript : Script, IEatOrQuaffScript
 {
     private NewLifeScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class NewLifeScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // New life rerolls your health, cures all mutations, and restores you to your birth race
         Game.RunScript(nameof(RerollHitPointsScript));

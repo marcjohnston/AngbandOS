@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterRealityScript : Script, IScript, IRepeatableScript
+internal class AlterRealityScript : Script, IScript, IGameCommandScript
 {
     private AlterRealityScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class AlterRealityScript : Script, IScript, IRepeatableScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

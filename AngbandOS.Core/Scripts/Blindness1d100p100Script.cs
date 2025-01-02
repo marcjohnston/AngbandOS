@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blindness1d100p100Script : Script, IIdentifiedScript
+internal class Blindness1d100p100Script : Script, IEatOrQuaffScript
 {
     private Blindness1d100p100Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Blindness1d100p100Script : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         if (!Game.HasBlindnessResistance)
         {

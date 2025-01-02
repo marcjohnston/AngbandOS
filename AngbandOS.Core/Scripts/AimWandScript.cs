@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript
+internal class AimWandScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript
 {
     private AimWandScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
     /// Executes the aim wand script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
         return new RepeatableResult(false);
@@ -93,7 +93,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             return false;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
-        IdentifiedResult identifiedResult = item.AimingTuple.Value.ActivationScript.ExecuteIdentifiedScriptDirection(dir);
+        IdentifiedResult identifiedResult = item.AimingTuple.Value.ActivationScript.ExecuteAimWandScript(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried

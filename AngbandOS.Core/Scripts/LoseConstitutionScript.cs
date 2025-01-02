@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LoseConstitutionScript : Script, IIdentifiedScript
+internal class LoseConstitutionScript : Script, IEatOrQuaffScript
 {
     private LoseConstitutionScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LoseConstitutionScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Sickliness tries to reduce your constitution
         return Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);

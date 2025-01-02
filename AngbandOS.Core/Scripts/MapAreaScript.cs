@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MapAreaScript : Script, IScript, IReadScrollAndUseStaffScript
+internal class MapAreaScript : Script, IScript, IReadScrollOrUseStaffScript
 {
     private MapAreaScript(Game game) : base(game) { }
 
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         ExecuteScript();
         return new IdentifiedAndUsedResult(true, true);

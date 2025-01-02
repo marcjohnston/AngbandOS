@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ToggleSearchScript : Script, IScript, IRepeatableScript
+internal class ToggleSearchScript : Script, IScript, IGameCommandScript
 {
     private ToggleSearchScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ToggleSearchScript : Script, IScript, IRepeatableScript
     /// Executes the toggle search script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

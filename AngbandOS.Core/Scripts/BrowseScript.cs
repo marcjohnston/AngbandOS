@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript, IScriptStore
+internal class BrowseScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript, IScriptStore
 {
     private BrowseScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessByChan
     /// Executes the browse script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
         return new RepeatableResult(false);

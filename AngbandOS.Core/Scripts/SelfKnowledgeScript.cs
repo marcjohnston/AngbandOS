@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SelfKnowledgeScript : Script, IScript, IIdentifiedScript
+internal class SelfKnowledgeScript : Script, IScript, IEatOrQuaffScript
 {
     private SelfKnowledgeScript(Game game) : base(game) { }
 
@@ -464,7 +464,7 @@ internal class SelfKnowledgeScript : Script, IScript, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Self knowledge gives you information about yourself
         Game.MsgPrint("You begin to know yourself a little better...");

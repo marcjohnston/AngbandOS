@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnchantWeaponToDamage1IdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class EnchantWeaponToDamage1IdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private EnchantWeaponToDamage1IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EnchantWeaponToDamage1IdentifableAndUsedScript : Script, IReadScr
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isUsed = Game.EnchantItem(0, 1, 0);
         return new IdentifiedAndUsedResult(true, isUsed);

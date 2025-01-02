@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BoozeScript : Script, IIdentifiedScript
+internal class BoozeScript : Script, IEatOrQuaffScript
 {
     private BoozeScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class BoozeScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 

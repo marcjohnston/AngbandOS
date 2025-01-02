@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestInPlaceScript : Script, IScript, IRepeatableScript
+internal class RestInPlaceScript : Script, IScript, IGameCommandScript
 {
     private RestInPlaceScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class RestInPlaceScript : Script, IScript, IRepeatableScript
     /// Executes the rest script and returns false, if the resting is disturbed; true, if the rest was undisturbed.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         if (Game.CommandArgument <= 0)
         {

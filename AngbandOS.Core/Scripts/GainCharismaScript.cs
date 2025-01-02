@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GainCharismaScript : Script, IIdentifiedScript
+internal class GainCharismaScript : Script, IEatOrQuaffScript
 {
     private GainCharismaScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GainCharismaScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Charisma increases your charisma
         return Game.TryIncreasingAbilityScore(AbilityEnum.Charisma);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Script, IIdentifiedScript
+internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Script, IEatOrQuaffScript
 {
     private Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Sc
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 

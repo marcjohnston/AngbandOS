@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class OpenScript : Script, IScript, IRepeatableScript
+internal class OpenScript : Script, IScript, IGameCommandScript
 {
     private OpenScript(Game game) : base(game) { }
 
@@ -18,14 +18,14 @@ internal class OpenScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteRepeatableScript();
+        ExecuteGameCommandScript();
     }
 
     /// <summary>
     /// Executes the open script and returns true, if the open fails due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // Check if there's only one thing we can open

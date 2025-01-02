@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ProbingScript : Script, IZapRodScript, IReadScrollAndUseStaffScript
+internal class ProbingScript : Script, IZapRodScript, IReadScrollOrUseStaffScript
 {
     private ProbingScript(Game game) : base(game) { }
 
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.Probing();
         return new IdentifiedAndUsedResult(true, true);
@@ -24,6 +24,6 @@ internal class ProbingScript : Script, IZapRodScript, IReadScrollAndUseStaffScri
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
-        return ExecuteReadScrollAndUseStaffScript();
+        return ExecuteReadScrollOrUseStaffScript();
     }
 }

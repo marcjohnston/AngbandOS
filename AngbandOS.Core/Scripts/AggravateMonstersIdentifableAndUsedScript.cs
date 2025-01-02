@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AggravateMonstersIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class AggravateMonstersIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private AggravateMonstersIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class AggravateMonstersIdentifableAndUsedScript : Script, IReadScrollAn
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.MsgPrint("There is a high pitched humming noise.");
         Game.AggravateMonsters();

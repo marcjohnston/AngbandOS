@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LoseCharismaScript : Script, IIdentifiedScript
+internal class LoseCharismaScript : Script, IEatOrQuaffScript
 {
     private LoseCharismaScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LoseCharismaScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Ugliness tries to reduce your charisma
         return Game.TryDecreasingAbilityScore(AbilityEnum.Charisma);

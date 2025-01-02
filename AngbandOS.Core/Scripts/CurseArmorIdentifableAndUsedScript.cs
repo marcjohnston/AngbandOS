@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CurseArmorIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class CurseArmorIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private CurseArmorIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class CurseArmorIdentifableAndUsedScript : Script, IReadScrollAndUseSta
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = Game.CurseArmor(); // An attempt to curse armor allows the action to be identified.
         return new IdentifiedAndUsedResult(isIdentified, true);

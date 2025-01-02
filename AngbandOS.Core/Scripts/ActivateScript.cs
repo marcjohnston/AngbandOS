@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Activate the special feature of an item.
 /// </summary>
 [Serializable]
-internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript
+internal class ActivateScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript
 {
     private ActivateScript(Game game) : base(game) { }
 
@@ -27,7 +27,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessByCh
     /// Executes the activate script, disposes of the successful result and returns false because activation is never repeatable.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
         return new RepeatableResult(false);

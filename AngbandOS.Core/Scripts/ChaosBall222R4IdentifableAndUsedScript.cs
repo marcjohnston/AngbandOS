@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ChaosBall222R4IdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class ChaosBall222R4IdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private ChaosBall222R4IdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ChaosBall222R4IdentifableAndUsedScript : Script, IReadScrollAndUs
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, 222, 4);
         if (!Game.HasChaosResistance)

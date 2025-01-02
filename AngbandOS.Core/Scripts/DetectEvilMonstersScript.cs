@@ -10,7 +10,7 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScript, IReadScrollAndUseStaffScript
+internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScript, IReadScrollOrUseStaffScript
 {
     private DetectEvilMonstersScript(Game game) : base(game) { }
 
@@ -61,7 +61,7 @@ internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScrip
         ExecuteSuccessByChanceScript();
     }
 
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = ExecuteSuccessByChanceScript();
         return new IdentifiedAndUsedResult(isIdentified, true);

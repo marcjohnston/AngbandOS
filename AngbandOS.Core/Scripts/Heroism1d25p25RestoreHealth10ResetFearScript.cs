@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, IIdentifiedScript
+internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, IEatOrQuaffScript
 {
     private Heroism1d25p25RestoreHealth10ResetFearScript(Game game) : base(game) { }
 
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
         // Heroism removes fear, cures 10 health, and gives you timed heroism
@@ -37,6 +37,6 @@ internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, I
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteIdentifiedScript();
+        ExecuteEatOrQuaffScript();
     }
 }

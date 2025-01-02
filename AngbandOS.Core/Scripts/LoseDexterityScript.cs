@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LoseDexterityScript : Script, IIdentifiedScript
+internal class LoseDexterityScript : Script, IEatOrQuaffScript
 {
     private LoseDexterityScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LoseDexterityScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Clumsiness tries to reduce your dexterity
         return Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity);

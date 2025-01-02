@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RuinationScript : Script, IIdentifiedScript
+internal class RuinationScript : Script, IEatOrQuaffScript
 {
     private RuinationScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RuinationScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Ruination does 10d10 damage and reduces all your ability scores, bypassing
         // sustains and divine protection

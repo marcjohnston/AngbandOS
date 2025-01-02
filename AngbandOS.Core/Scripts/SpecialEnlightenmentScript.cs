@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpecialEnlightenmentScript : Script, IIdentifiedScript
+internal class SpecialEnlightenmentScript : Script, IEatOrQuaffScript
 {
     private SpecialEnlightenmentScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SpecialEnlightenmentScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // *Enlightenment* shows you the whole level, increases your intelligence and
         // wisdom, identifies all your items, and detects everything

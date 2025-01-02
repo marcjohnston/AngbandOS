@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class IdentifyIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private IdentifyIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class IdentifyIdentifableAndUsedScript : Script, IReadScrollAndUseStaff
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isUsed = Game.RunUsedScript(nameof(IdentifyItemCancellableScript));
         return new IdentifiedAndUsedResult(true, isUsed);

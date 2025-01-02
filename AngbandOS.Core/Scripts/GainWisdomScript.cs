@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GainWisdomScript : Script, IIdentifiedScript
+internal class GainWisdomScript : Script, IEatOrQuaffScript
 {
     private GainWisdomScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GainWisdomScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Wisdom increases your wisdom
         return Game.TryIncreasingAbilityScore(AbilityEnum.Wisdom);

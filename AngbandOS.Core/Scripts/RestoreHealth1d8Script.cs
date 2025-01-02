@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreHealth1d8Script : Script, IReadScrollAndUseStaffScript
+internal class RestoreHealth1d8Script : Script, IReadScrollOrUseStaffScript
 {
     private RestoreHealth1d8Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RestoreHealth1d8Script : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = Game.RestoreHealth(Game.DieRoll(8));
         return new IdentifiedAndUsedResult(isIdentified, true);

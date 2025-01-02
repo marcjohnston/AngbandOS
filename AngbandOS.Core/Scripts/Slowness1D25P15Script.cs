@@ -10,7 +10,7 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Slowness1D25P15Script : Script, IIdentifiedScript
+internal class Slowness1D25P15Script : Script, IEatOrQuaffScript
 {
     private Slowness1D25P15Script(Game game) : base(game) { }
 
@@ -18,7 +18,7 @@ internal class Slowness1D25P15Script : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Slowness slows you down.
         bool isIdentified = Game.SlowTimer.AddTimer(Game.DieRoll(25) + 15);

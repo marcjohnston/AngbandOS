@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Curing50Script : Script, IIdentifiedScript
+internal class Curing50Script : Script, IEatOrQuaffScript
 {
     private Curing50Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Curing50Script : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 

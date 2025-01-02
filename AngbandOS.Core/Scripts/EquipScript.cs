@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EquipScript : Script, IScript, IRepeatableScript, IScriptStore
+internal class EquipScript : Script, IScript, IGameCommandScript, IScriptStore
 {
     private EquipScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class EquipScript : Script, IScript, IRepeatableScript, IScriptStore
     /// Executes the equip script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

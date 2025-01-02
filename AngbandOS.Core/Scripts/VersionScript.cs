@@ -10,7 +10,7 @@ using System.Reflection;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class VersionScript : Script, IScript, IRepeatableScript
+internal class VersionScript : Script, IScript, IGameCommandScript
 {
 
     private VersionScript(Game game) : base(game) { }
@@ -19,7 +19,7 @@ internal class VersionScript : Script, IScript, IRepeatableScript
     /// Executes the version script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GainConstitutionScript : Script, IIdentifiedScript
+internal class GainConstitutionScript : Script, IEatOrQuaffScript
 {
     private GainConstitutionScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GainConstitutionScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Constitution increases your constitution
         return Game.TryIncreasingAbilityScore(AbilityEnum.Constitution);

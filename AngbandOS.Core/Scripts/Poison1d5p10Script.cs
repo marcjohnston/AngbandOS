@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Poison1d5p10Script : Script, IIdentifiedScript
+internal class Poison1d5p10Script : Script, IEatOrQuaffScript
 {
     private Poison1d5p10Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Poison1d5p10Script : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Poison simply poisons you
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))

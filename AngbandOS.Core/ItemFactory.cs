@@ -187,7 +187,7 @@ internal abstract class ItemFactory : ItemEnhancement
         }
 
         InitialGoldPiecesRoll = Game.ParseRollExpression(InitialGoldPiecesRollExpression);
-        EatScript = Game.SingletonRepository.GetNullable<IIdentifiedScript>(EatScriptBindingKey);
+        EatScript = Game.SingletonRepository.GetNullable<IEatOrQuaffScript>(EatScriptBindingKey);
 
         // If there is no DescriptionSyntax, use the Name as the default.
         _descriptionSyntax = DescriptionSyntax != null ? DescriptionSyntax : Name;
@@ -205,7 +205,7 @@ internal abstract class ItemFactory : ItemEnhancement
         // Bind Wands
         if (AimingBindingTuple != null)
         {
-            IIdentifiedScriptDirection identifableDirectionalScript = Game.SingletonRepository.Get<IIdentifiedScriptDirection>(AimingBindingTuple.Value.ActivationScriptName);
+            IAimWandScript identifableDirectionalScript = Game.SingletonRepository.Get<IAimWandScript>(AimingBindingTuple.Value.ActivationScriptName);
             Roll initialChargeCountRoll = Game.ParseRollExpression(AimingBindingTuple.Value.InitialChargesCountRollExpression);
             int perChargeValue = AimingBindingTuple.Value.PerChargeValue;
             int manaValue = AimingBindingTuple.Value.ManaValue;
@@ -214,7 +214,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (ActivationBindingTuple != null)
         {
-            IReadScrollAndUseStaffScript identifableAndUsedScript = Game.SingletonRepository.Get<IReadScrollAndUseStaffScript>(ActivationBindingTuple.Value.ScriptName);
+            IReadScrollOrUseStaffScript identifableAndUsedScript = Game.SingletonRepository.Get<IReadScrollOrUseStaffScript>(ActivationBindingTuple.Value.ScriptName);
             int manaValue = ActivationBindingTuple.Value.ManaValue;
             ActivationTuple = (identifableAndUsedScript, manaValue);
         }
@@ -240,7 +240,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (QuaffBindingTuple != null)
         {
-            IIdentifiedScript quaffNoticeableScript = Game.SingletonRepository.Get<IIdentifiedScript>(QuaffBindingTuple.Value.QuaffScriptName);
+            IEatOrQuaffScript quaffNoticeableScript = Game.SingletonRepository.Get<IEatOrQuaffScript>(QuaffBindingTuple.Value.QuaffScriptName);
             IUnfriendlyScript? smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffBindingTuple.Value.SmashScriptName);
             int manaEquivalent = QuaffBindingTuple.Value.ManaEquivalent;
             QuaffTuple = (quaffNoticeableScript, smashUnfriendlyScript, manaEquivalent);
@@ -248,7 +248,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (UseBindingTuple != null)
         {
-            IReadScrollAndUseStaffScript useScript = Game.SingletonRepository.Get<IReadScrollAndUseStaffScript>(UseBindingTuple.Value.UseScriptBindingKey);
+            IReadScrollOrUseStaffScript useScript = Game.SingletonRepository.Get<IReadScrollOrUseStaffScript>(UseBindingTuple.Value.UseScriptBindingKey);
             Roll initialChargeRoll = Game.ParseRollExpression(UseBindingTuple.Value.InitialChargesRollExpression);
             int chargeValue = UseBindingTuple.Value.PerChargeValue;
             int manaEquivalent = UseBindingTuple.Value.ManaEquivalent;
@@ -1393,7 +1393,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// The amount of mana needed to consume to keep the charge.
     /// 
     /// </summary>
-    public (IReadScrollAndUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple { get; private set; } = null;
+    public (IReadScrollOrUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple { get; private set; } = null;
 
     /// <summary>
     /// Returns the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is bound using the <see cref="QuaffBindingTuple"/>
@@ -1404,7 +1404,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// The amount of mana needed to consume to keep the potion.
     /// 
     /// </summary>
-    public (IIdentifiedScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple { get; private set; } = null;
+    public (IEatOrQuaffScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple { get; private set; } = null;
 
     /// <summary>
     /// Returns the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property bound using
@@ -1413,10 +1413,10 @@ internal abstract class ItemFactory : ItemEnhancement
     public ItemFactory[]? AmmunitionItemFactories { get; private set; } = null;
 
     /// <summary>
-    /// Returns the <see cref="IIdentifiedScriptDirection"/> script for wands when aimed, a Roll to determine the number of charges to assign to new wands and the value for each charge; or null, if the item cannot be aimed.  
+    /// Returns the <see cref="IAimWandScript"/> script for wands when aimed, a Roll to determine the number of charges to assign to new wands and the value for each charge; or null, if the item cannot be aimed.  
     /// This property is bound from the <see cref="AimingBindingTuple"/> property during the bind phase.
     /// </summary>
-    public (IIdentifiedScriptDirection ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple { get; private set; } = null;
+    public (IAimWandScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple { get; private set; } = null;
 
     public IScriptItemInt? RechargeScript { get; private set; }
 
@@ -1463,12 +1463,12 @@ internal abstract class ItemFactory : ItemEnhancement
     /// Returns the script to be run when an item of this factory is eaten; or null, if items cannot be eaten.  This property is bound from the <see cref="EatScriptBindingKey"/> property
     /// during the bind phase.
     /// </summary>
-    public IIdentifiedScript? EatScript { get; private set; }
+    public IEatOrQuaffScript? EatScript { get; private set; }
 
     /// <summary>
     /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivationBindingTuple"/> property during the bind phase.
     /// </summary>
-    public (IReadScrollAndUseStaffScript ActivationScript, int ManaValue)? ActivationTuple { get; private set; } = null;
+    public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ActivationTuple { get; private set; } = null;
     #endregion
 
     #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects
@@ -1581,7 +1581,7 @@ internal abstract class ItemFactory : ItemEnhancement
     public virtual int ValuePerTurnOfLight => 0;
 
     /// <summary>
-    /// Returns the name of the <see cref="IIdentifiedScriptDirection"/> script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
+    /// Returns the name of the <see cref="IAimWandScript"/> script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
     /// item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="AimingTuple"/>  property during the bind phase.
     /// </summary>
     protected virtual (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBindingTuple => null;

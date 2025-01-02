@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetonationsScript : Script, IIdentifiedScript
+internal class DetonationsScript : Script, IEatOrQuaffScript
 {
     private DetonationsScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DetonationsScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
         Game.MsgPrint("Massive explosions rupture your body!");

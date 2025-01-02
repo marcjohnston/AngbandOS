@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ZapRodScript : Script, IScript, IRepeatableScript
+internal class ZapRodScript : Script, IScript, IGameCommandScript
 {
     private ZapRodScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
     /// Executes the zap rod script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

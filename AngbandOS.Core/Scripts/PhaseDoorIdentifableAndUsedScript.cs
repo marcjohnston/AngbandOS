@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PhaseDoorIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class PhaseDoorIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private PhaseDoorIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class PhaseDoorIdentifableAndUsedScript : Script, IReadScrollAndUseStaf
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.RunScript(nameof(PhaseDoorScript));
         return new IdentifiedAndUsedResult(true, true);

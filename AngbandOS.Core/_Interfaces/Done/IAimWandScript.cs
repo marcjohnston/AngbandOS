@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Interfaces;
 /// <summary>
 /// Represents the interface a script needs to implement to particpate in scripts that can potentially identify an object.
 /// </summary>
-internal interface IIdentifiedScriptDirection
+internal interface IAimWandScript
 {
     /// <summary>
     /// Returns true, if the script performs an action that would identify the item that performed the action; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    IdentifiedResult ExecuteIdentifiedScriptDirection(int dir);
+    IdentifiedResult ExecuteAimWandScript(int dir);
 }

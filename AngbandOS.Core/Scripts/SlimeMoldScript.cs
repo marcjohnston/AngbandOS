@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SlimeMoldScript : Script, IIdentifiedScript
+internal class SlimeMoldScript : Script, IEatOrQuaffScript
 {
     private SlimeMoldScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SlimeMoldScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Slime mold juice has a random effect (calling this function again recusively)
         Game.MsgPrint("That tastes awful.");
@@ -39,7 +39,7 @@ internal class SlimeMoldScript : Script, IIdentifiedScript
         {
             throw new Exception($"The {nameof(WeightedRandom<ItemFactoryGenericWeightedRandom>)} choose an item that is not a potion.");
         }
-        potion.QuaffTuple.Value.QuaffScript.ExecuteIdentifiedScript();
+        potion.QuaffTuple.Value.QuaffScript.ExecuteEatOrQuaffScript();
         return new IdentifiedResult(true);
     }
 }

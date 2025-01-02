@@ -10,11 +10,11 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Healing300ResetStunAndBleedingScript : Script, IScript, IReadScrollAndUseStaffScript
+internal class Healing300ResetStunAndBleedingScript : Script, IScript, IReadScrollOrUseStaffScript
 {
     private Healing300ResetStunAndBleedingScript(Game game) : base(game) { }
 
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = false;
         if (Game.RestoreHealth(300))
@@ -38,6 +38,6 @@ internal class Healing300ResetStunAndBleedingScript : Script, IScript, IReadScro
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteReadScrollAndUseStaffScript();
+        ExecuteReadScrollOrUseStaffScript();
     }
 }

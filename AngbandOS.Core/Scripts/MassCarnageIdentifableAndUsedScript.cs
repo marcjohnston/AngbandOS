@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MassCarnageIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class MassCarnageIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private MassCarnageIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class MassCarnageIdentifableAndUsedScript : Script, IReadScrollAndUseSt
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.RunScriptBool(nameof(MassCarnageScript), true);
         return new IdentifiedAndUsedResult(true, true);

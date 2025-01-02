@@ -271,11 +271,11 @@ internal sealed class Item : IComparable<Item>
     public bool HatesCold => _factory.HatesCold;
     public bool HatesElectricity => _factory.HatesElectricity;
     public bool HatesFire => _factory.HatesFire;
-    public (IIdentifiedScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple => _factory.QuaffTuple;
+    public (IEatOrQuaffScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple => _factory.QuaffTuple;
     public (IZapRodScript Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple => _factory.ZapTuple;
-    public (IReadScrollAndUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
-    public (IIdentifiedScriptDirection ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
-    public (IReadScrollAndUseStaffScript ActivationScript, int ManaValue)? ActivationTuple => _factory.ActivationTuple;
+    public (IReadScrollOrUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
+    public (IAimWandScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
+    public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ActivationTuple => _factory.ActivationTuple;
     public Probability BreakageChanceProbability => _factory.BreakageChanceProbability;
     public int MissileDamageMultiplier => _factory.MissileDamageMultiplier;
     public bool CanBeRead => _factory.CanBeRead;
@@ -288,7 +288,7 @@ internal sealed class Item : IComparable<Item>
     public int ExperienceGainDivisorForDestroying => _factory.ExperienceGainDivisorForDestroying;
     public bool IdentityCanBeSensed => _factory.IdentityCanBeSensed;
     public bool IsConsumedWhenEaten => _factory.IsConsumedWhenEaten;
-    public IIdentifiedScript? EatScript => _factory.EatScript;
+    public IEatOrQuaffScript? EatScript => _factory.EatScript;
     private bool GetsDamageMultiplier => _factory.GetsDamageMultiplier;
 
     /// <summary>

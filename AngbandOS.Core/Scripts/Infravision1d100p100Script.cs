@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Infravision1d100p100Script : Script, IIdentifiedScript
+internal class Infravision1d100p100Script : Script, IEatOrQuaffScript
 {
     private Infravision1d100p100Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Infravision1d100p100Script : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Infravision gives you timed infravision
         bool isIdentified = Game.InfravisionTimer.AddTimer(100 + Game.DieRoll(100));

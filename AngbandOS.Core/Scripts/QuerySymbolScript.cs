@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IScriptStore
+internal class QuerySymbolScript : Script, IScript, IGameCommandScript, IScriptStore
 {
     private QuerySymbolScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IScriptSt
     /// Executes the query symbol script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

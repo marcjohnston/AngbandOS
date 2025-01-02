@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureLightWounds2d8Script : Script, IScript, IIdentifiedScript
+internal class CureLightWounds2d8Script : Script, IScript, IEatOrQuaffScript
 {
     private CureLightWounds2d8Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class CureLightWounds2d8Script : Script, IScript, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
         // Cure light wounds heals you 2d8 health and reduces bleeding
@@ -32,11 +32,11 @@ internal class CureLightWounds2d8Script : Script, IScript, IIdentifiedScript
     }
 
     /// <summary>
-    /// Executes the <see cref="IIdentifiedScript"/> script and returns nothing.
+    /// Executes the <see cref="IEatOrQuaffScript"/> script and returns nothing.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteIdentifiedScript();
+        ExecuteEatOrQuaffScript();
     }
 }

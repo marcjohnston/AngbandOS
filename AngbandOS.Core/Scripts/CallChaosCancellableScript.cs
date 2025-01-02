@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CallChaosCancellableScript : Script, IScript, ICancellableScript, IUsedScriptItem
+internal class CallChaosCancellableScript : Script, IScript, IUsedScript, IUsedScriptItem
 {
     private CallChaosCancellableScript(Game game) : base(game) { }
 
@@ -26,7 +26,7 @@ internal class CallChaosCancellableScript : Script, IScript, ICancellableScript,
     /// Runs the script and returns true because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteCancellableScript()
+    public bool ExecuteUsedScript()
     {
         ExecuteScript();
         return true;

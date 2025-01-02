@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CreateRandomArtifactIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class CreateRandomArtifactIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private CreateRandomArtifactIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class CreateRandomArtifactIdentifableAndUsedScript : Script, IReadScrol
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.RunScript(nameof(CreateRandomArtifactScript)); // TODO: This may be cancelled?
         return new IdentifiedAndUsedResult(true, true);

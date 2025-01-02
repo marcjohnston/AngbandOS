@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpecialRemoveAllCurseIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class SpecialRemoveAllCurseIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private SpecialRemoveAllCurseIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SpecialRemoveAllCurseIdentifableAndUsedScript : Script, IReadScro
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.RunScript(nameof(RemoveAllCurseScript));
         return new IdentifiedAndUsedResult(true, true);

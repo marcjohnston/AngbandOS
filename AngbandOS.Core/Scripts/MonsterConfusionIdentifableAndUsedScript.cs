@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MonsterConfusionIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class MonsterConfusionIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private MonsterConfusionIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class MonsterConfusionIdentifableAndUsedScript : Script, IReadScrollAnd
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         if (Game.HasConfusingTouch)
         {

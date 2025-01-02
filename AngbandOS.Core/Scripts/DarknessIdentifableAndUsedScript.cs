@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DarknessIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class DarknessIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private DarknessIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DarknessIdentifableAndUsedScript : Script, IReadScrollAndUseStaff
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         if (!Game.HasBlindnessResistance && !Game.HasDarkResistance)
         {

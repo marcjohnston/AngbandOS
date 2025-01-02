@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreManaScript : Script, IIdentifiedScript
+internal class RestoreManaScript : Script, IEatOrQuaffScript
 {
     private RestoreManaScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RestoreManaScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Restore mana restores your to maximum mana
         if (Game.Mana.IntValue < Game.MaxMana.IntValue)

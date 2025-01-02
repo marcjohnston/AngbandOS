@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatSlimeMoldScript : Script, IIdentifiedScript
+internal class EatSlimeMoldScript : Script, IEatOrQuaffScript
 {
     private EatSlimeMoldScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatSlimeMoldScript : Script, IIdentifiedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.RunIdentifiedScript(nameof(SlimeMoldScript));

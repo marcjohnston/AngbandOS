@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GetRumorScript : Script, IScript, IRepeatableScript
+internal class GetRumorScript : Script, IScript, IGameCommandScript
 {
     private GetRumorScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GetRumorScript : Script, IScript, IRepeatableScript
     /// Executes the get rumor script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

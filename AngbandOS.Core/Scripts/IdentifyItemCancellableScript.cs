@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Identifies a chosen item and returns false, if the item selection is cancelled; true, otherwise.
 /// </summary>
 [Serializable]
-internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScript, IReadScrollAndUseStaffScript, IUsedScriptItem
+internal class IdentifyItemCancellableScript : Script, IScript, IUsedScript, IReadScrollOrUseStaffScript, IUsedScriptItem
 {
     private IdentifyItemCancellableScript(Game game) : base(game) { }
 
@@ -19,7 +19,7 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
     /// Identifies a chosen item and returns true, if the item selection is cancelled; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteCancellableScript()
+    public bool ExecuteUsedScript()
     {
         if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
@@ -53,12 +53,12 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
 
     public bool ExecuteUsedScriptItem(Item item)
     {
-        return ExecuteCancellableScript();
+        return ExecuteUsedScript();
     }
 
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        bool isUsed = ExecuteCancellableScript();
+        bool isUsed = ExecuteUsedScript();
         return new IdentifiedAndUsedResult(true, isUsed);
     }
 
@@ -68,6 +68,6 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteCancellableScript();
+        ExecuteUsedScript();
     }
 }

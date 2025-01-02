@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatCureConfusionScript : Script, IIdentifiedScript
+internal class EatCureConfusionScript : Script, IEatOrQuaffScript
 {
     private EatCureConfusionScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatCureConfusionScript : Script, IIdentifiedScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.ConfusedTimer.ResetTimer())

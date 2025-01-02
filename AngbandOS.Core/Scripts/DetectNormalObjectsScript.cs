@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Reveals normal objects that are within the viewport.
 /// </summary>
 [Serializable]
-internal class DetectNormalObjectsScript : Script, IScript, ISuccessByChanceScript, IReadScrollAndUseStaffScript
+internal class DetectNormalObjectsScript : Script, IScript, ISuccessByChanceScript, IReadScrollOrUseStaffScript
 {
     private DetectNormalObjectsScript(Game game) : base(game) { }
 
@@ -58,7 +58,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ISuccessByChanceScri
         ExecuteSuccessByChanceScript();
     }
 
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = ExecuteSuccessByChanceScript();
         return new IdentifiedAndUsedResult(isIdentified, true);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class InvocationIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScript
+internal class InvocationIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private InvocationIdentifableAndUsedScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class InvocationIdentifableAndUsedScript : Script, IReadScrollAndUseSta
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Patron? patron = Game.SingletonRepository.ToWeightedRandom<Patron>().ChooseOrDefault();
         if (patron == null)

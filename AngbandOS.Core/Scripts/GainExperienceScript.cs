@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GainExperienceScript : Script, IIdentifiedScript
+internal class GainExperienceScript : Script, IEatOrQuaffScript
 {
     private GainExperienceScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GainExperienceScript : Script, IIdentifiedScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Experience increases your experience points by 50%, with a minimum of +10 and
         // maximuum of +10,000

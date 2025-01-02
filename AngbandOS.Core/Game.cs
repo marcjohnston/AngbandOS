@@ -6292,7 +6292,7 @@ public bool IsDead = false;
                 bool isRepeatable = false;
                 if (command.ExecuteScript != null)
                 {
-                    RepeatableResult gameCommandResult = command.ExecuteScript.ExecuteRepeatableScript();
+                    RepeatableResult gameCommandResult = command.ExecuteScript.ExecuteGameCommandScript();
                     isRepeatable = gameCommandResult.IsRepeatable;
                 }
 
@@ -8023,8 +8023,8 @@ public bool IsDead = false;
 
     public IdentifiedResult RunIdentifiedScriptDirection(string scriptName, int dir)
     {
-        IIdentifiedScriptDirection script = SingletonRepository.Get<IIdentifiedScriptDirection>(scriptName);
-        return script.ExecuteIdentifiedScriptDirection(dir);
+        IAimWandScript script = SingletonRepository.Get<IAimWandScript>(scriptName);
+        return script.ExecuteAimWandScript(dir);
     }
 
     public void RunScriptInt(string scriptName, int value)
@@ -8056,15 +8056,15 @@ public bool IsDead = false;
     public bool RunUsedScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        ICancellableScript castedScript = SingletonRepository.Get<ICancellableScript>(scriptName);
-        return castedScript.ExecuteCancellableScript();
+        IUsedScript castedScript = SingletonRepository.Get<IUsedScript>(scriptName);
+        return castedScript.ExecuteUsedScript();
     }
 
     public bool RunIdentifiedScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        IIdentifiedScript castedScript = SingletonRepository.Get<IIdentifiedScript>(scriptName);
-        return castedScript.ExecuteIdentifiedScript().IsIdentified; // TODO: Fix this
+        IEatOrQuaffScript castedScript = SingletonRepository.Get<IEatOrQuaffScript>(scriptName);
+        return castedScript.ExecuteEatOrQuaffScript().IsIdentified; // TODO: Fix this
     }
 
     /// <summary>

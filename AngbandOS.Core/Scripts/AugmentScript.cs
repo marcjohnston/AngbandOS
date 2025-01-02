@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AugmentScript : Script, IIdentifiedScript
+internal class AugmentScript : Script, IEatOrQuaffScript
 {
     private AugmentScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class AugmentScript : Script, IIdentifiedScript
     /// Augments all ability scores and returns true, if any ability score was increased; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteIdentifiedScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 

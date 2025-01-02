@@ -7,11 +7,17 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IReadScrollAndUseStaffScript
-{
+/// <summary>
+/// Represents the interface that a script needs to implement to particpate in scripts that return an IdentifiedResult if the action it performs can by identify by the player.
+/// This interface is used by:
+/// 1. Eat
+/// 2. Quaff
+/// </summary>
+internal interface IEatOrQuaffScript
+{ 
     /// <summary>
-    /// Returns identified as true, if the script performs an action that would identify the item; false, otherwise and used as true, if the item should be deleted; false, for the item to be kept.
+    /// Returns true, if the script performs an action that would identify the item; false, otherwise. 
     /// </summary>
     /// <returns></returns>
-    IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript(); // TODO: Why isn't there an Item parameter like IZapRodScript
+    IdentifiedResult ExecuteEatOrQuaffScript();
 }

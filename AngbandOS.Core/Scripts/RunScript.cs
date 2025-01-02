@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RunScript : Script, IScript, IRepeatableScript
+internal class RunScript : Script, IScript, IGameCommandScript
 {
     private RunScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class RunScript : Script, IScript, IRepeatableScript
     /// Executes the run script and returns false, if the player is confused; true, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteRepeatableScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         // Can't run if we're confused
         if (Game.ConfusedTimer.Value != 0)
