@@ -26,7 +26,7 @@ internal class PerceptionStaffItemFactory : ItemFactory
         (10, 1)
     };
     public override int Weight => 50;
-    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(IdentifyItemCancellableScript), "1d15+5", 20, 100);
+    protected override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(IdentifyItemScript), "1d15+5", 20, 100);
     protected override string ItemClassBindingKey => nameof(StaffsItemClass);
     protected override string? RechargeScriptBindingKey => nameof(RechargeStaffScript);
 

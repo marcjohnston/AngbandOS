@@ -17,7 +17,7 @@ internal class IdentifyEvery10Activation : Activation
     
     public override string? PreActivationMessage => "Your {0} glows yellow...";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(IdentifyItemCancellableScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(IdentifyItemScript);
 
     protected override string RechargeTimeRollExpression => "10";
 

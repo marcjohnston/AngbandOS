@@ -25,7 +25,7 @@ internal class EsoteriaScript : Script, IScript, ICastSpellScript
     {
         if (Game.DieRoll(50) > Game.ExperienceLevel.IntValue)
         {
-            Game.RunScript(nameof(IdentifyItemCancellableScript));
+            Game.RunScript(nameof(IdentifyItemScript));
         }
         else
         {

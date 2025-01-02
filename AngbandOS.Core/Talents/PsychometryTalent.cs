@@ -24,7 +24,7 @@ internal class PsychometryTalent : Talent
         }
         else
         {
-            Game.RunScript(nameof(IdentifyItemCancellableScript));
+            Game.RunScript(nameof(IdentifyItemScript));
         }
     }
 
