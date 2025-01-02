@@ -12,10 +12,10 @@ internal class MagicMappingAndIlluminationScript : Script, IDirectionalActivatio
 {
     private MagicMappingAndIlluminationScript(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.RunScript(nameof(MapAreaScript));
         Game.LightArea(Game.DiceRoll(2, 15), 3);
-        return true;
+        return new UsedResult(true);
     }
 }

@@ -12,11 +12,11 @@ internal class MapLightScript : Script, IActivateItemScript
 {
     private MapLightScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(MapAreaScript));
         Game.LightArea(Game.DiceRoll(2, 15), 3);
-        return true;
+        return new UsedResult(true);
     }
 }
 

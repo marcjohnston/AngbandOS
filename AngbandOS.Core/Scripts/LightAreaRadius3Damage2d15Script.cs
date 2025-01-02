@@ -12,10 +12,10 @@ internal class LightAreaRadius3Damage2d15Script : Script, IActivateItemScript
 {
     private LightAreaRadius3Damage2d15Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.LightArea(Game.DiceRoll(2, 15), 3);
-        return true;
+        return new UsedResult(true);
     }
 }
 

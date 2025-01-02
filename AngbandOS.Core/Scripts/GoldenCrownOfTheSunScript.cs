@@ -12,12 +12,12 @@ internal class GoldenCrownOfTheSunScript : Script, IActivateItemScript
 {
     private GoldenCrownOfTheSunScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.MsgPrint("Your crown glows deep yellow...");
         Game.MsgPrint("You feel a warm tingling inside...");
         Game.RestoreHealth(700);
         Game.BleedingTimer.ResetTimer();
-        return true;
+        return new UsedResult(true);
     }
 }

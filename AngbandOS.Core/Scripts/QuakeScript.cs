@@ -12,9 +12,9 @@ internal class QuakeScript : Script, IActivateItemScript
 {
     private QuakeScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 10);
-        return true;
+        return new UsedResult(true);
     }
 }

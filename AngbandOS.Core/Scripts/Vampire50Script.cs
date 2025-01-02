@@ -12,7 +12,7 @@ internal class Vampire50Script : Script, IDirectionalActivationScript
 {
     private Vampire50Script(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         for (int i = 0; i < 3; i++)
         {
@@ -21,6 +21,6 @@ internal class Vampire50Script : Script, IDirectionalActivationScript
                 Game.RestoreHealth(50);
             }
         }
-        return true;
+        return new UsedResult(true);
     }
 }

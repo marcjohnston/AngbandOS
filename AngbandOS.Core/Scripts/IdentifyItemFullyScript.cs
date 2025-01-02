@@ -19,24 +19,24 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUse
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        bool isUsed = ExecuteUsedScript();
-        return new IdentifiedAndUsedResult(true, isUsed);
+        UsedResult usedResult = ExecuteUsedScript();
+        return new IdentifiedAndUsedResult(true, usedResult.IsUsed);
     }
 
     /// <summary>
     /// Identifies an item completely and returns true, if an item was chosen to be identified; false, of the item selection was cancelled.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteUsedScript()
+    public UsedResult ExecuteUsedScript()
     {
         if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
             Game.MsgPrint("You have nothing to identify.");
-            return true;
+            return new UsedResult(true);
         }
         if (oPtr == null)
         {
-            return true;
+            return new UsedResult(true);
         }
         oPtr.IsFlavorAware = true;
         oPtr.BecomeKnown();
@@ -59,10 +59,10 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUse
         }
 
         oPtr.IdentifyFully();
-        return false;
+        return new UsedResult(false);
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScript();
     }

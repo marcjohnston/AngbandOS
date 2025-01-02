@@ -12,10 +12,10 @@ internal class SuperheroismAndBlessing50p1d50Script : Script, IActivateItemScrip
 {
     private SuperheroismAndBlessing50p1d50Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         Game.SuperheroismTimer.AddTimer(Game.DieRoll(50) + 50);
         Game.BlessingTimer.AddTimer(Game.DieRoll(50) + 50);
-        return true;
+        return new UsedResult(true);
     }
 }

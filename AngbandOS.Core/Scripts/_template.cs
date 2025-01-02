@@ -49,10 +49,10 @@ internal class _template : Script, IScript, ICastSpellScript, IGameCommandScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return false;
+        return new UsedResult(false);
     }
 
     /// <summary>

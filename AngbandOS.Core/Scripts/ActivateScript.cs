@@ -104,7 +104,8 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
         ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
         if (mergedCharacteristics.Activation != null)
         {
-            return mergedCharacteristics.Activation.Activate(item);
+            UsedResult usedResult = mergedCharacteristics.Activation.Activate(item);
+            return usedResult.IsUsed;
         }
 
         return false;

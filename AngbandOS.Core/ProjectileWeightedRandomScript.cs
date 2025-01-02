@@ -8,12 +8,12 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<ProjectileScript>, IProjectile
+internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<ProjectileScript>, IProjectile // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
     protected ProjectileWeightedRandomScript(Game game) : base(game) { }
 
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction)
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction)
     {
         return Choose().ExecuteDirectionalActivationScript(item, direction);
     }
@@ -38,7 +38,7 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
         return Choose().ExecuteReadScrollOrUseStaffScript();
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         return Choose().ExecuteActivateItemScript(item);
     }

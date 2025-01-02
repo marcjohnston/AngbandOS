@@ -23,24 +23,24 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, ISuccessByC
     /// Runs the successful script and returns true, because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteSuccessByChanceScript();
 
         // Return true because the player cannot cancel the script.
-        return true;
+        return new UsedResult(true);
     }
 
     /// <summary>
     /// Runs the successful script and returns true, because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteUsedScript()
+    public UsedResult ExecuteUsedScript()
     {
         ExecuteSuccessByChanceScript();
 
         // Return true because the player cannot cancel the script.
-        return true;
+        return new UsedResult(true);
     }
 
     /// <summary>

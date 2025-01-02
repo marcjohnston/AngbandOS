@@ -12,10 +12,10 @@ internal class BallOfFire50r2AndResistFire1d20p20Script : Script, IDirectionalAc
 {
     private BallOfFire50r2AndResistFire1d20p20Script(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 50, 2);
         Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
+        return new UsedResult(true);
     }
 }

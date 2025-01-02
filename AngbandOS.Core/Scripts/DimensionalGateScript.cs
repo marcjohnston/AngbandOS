@@ -12,11 +12,11 @@ internal class DimensionalGateScript : Script, IActivateItemScript
 {
     private DimensionalGateScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (!Game.TgtPt(out int ii, out int ij))
         {
-            return false;
+            return new UsedResult(false);
         }
         Game.Energy -= 60 - Game.ExperienceLevel.IntValue;
         if (!Game.GridPassableNoCreature(ij, ii) ||
@@ -32,6 +32,6 @@ internal class DimensionalGateScript : Script, IActivateItemScript
         {
             Game.TeleportPlayerTo(ij, ii);
         }
-        return true;
+        return new UsedResult(true);
     }
 }

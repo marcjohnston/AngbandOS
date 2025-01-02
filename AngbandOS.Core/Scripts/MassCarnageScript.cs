@@ -64,9 +64,9 @@ internal class MassCarnageScript : Script, IScriptBool, IScript, ICastSpellScrip
         ExecuteScriptBool(true);
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteScriptBool(true);
-        return true;
+        return new UsedResult(true);
     }
 }

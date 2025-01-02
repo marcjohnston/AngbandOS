@@ -12,7 +12,7 @@ internal class Heal777CuringAndHeroism25pd25Script : Script, IActivateItemScript
 {
     private Heal777CuringAndHeroism25pd25Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.PoisonTimer.ResetTimer();
         Game.BleedingTimer.ResetTimer();
@@ -21,7 +21,7 @@ internal class Heal777CuringAndHeroism25pd25Script : Script, IActivateItemScript
         Game.BlindnessTimer.ResetTimer();
         Game.HeroismTimer.AddTimer(base.Game.DieRoll(25) + 25);
         Game.RestoreHealth(777);
-        return true;
+        return new UsedResult(true);
     }
 }
 

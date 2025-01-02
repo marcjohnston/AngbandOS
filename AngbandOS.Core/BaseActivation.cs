@@ -48,7 +48,7 @@ internal abstract class BaseActivation
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected abstract bool OnActivate(Item item);
+    protected abstract UsedResult OnActivate(Item item);
 
     /// <summary>
     /// Performs the item activation by calling the <see cref="OnActivate"/> method that must be inherited by a derived class and return false, if the script is 
@@ -56,7 +56,7 @@ internal abstract class BaseActivation
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    public bool Activate(Item item) // TODO: This should be an ActivatibleScript
+    public UsedResult Activate(Item item) // TODO: This should be an ActivatibleScript
     {
         if (PreActivationMessage != null)
         {
@@ -64,11 +64,11 @@ internal abstract class BaseActivation
             string formattedPreActivationMessage = String.Format(PreActivationMessage, itemClassName);
             Game.MsgPrint(formattedPreActivationMessage);
         }
-        if (OnActivate(item))
+        UsedResult usedResult = OnActivate(item);
+        if (usedResult.IsUsed)
         {
             item.ActivationRechargeTimeRemaining = RechargeTimeRoll.Get(Game.UseRandom);
-            return true;
         }
-        return false;
+        return usedResult;
     }
 }

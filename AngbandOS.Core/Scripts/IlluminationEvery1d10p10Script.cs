@@ -12,9 +12,9 @@ internal class IlluminationEvery1d10p10Script : Script, IDirectionalActivationSc
 {
     private IlluminationEvery1d10p10Script(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.LightArea(base.Game.DiceRoll(2, 15), 3);
-        return true;
+        return new UsedResult(true);
     }
 }

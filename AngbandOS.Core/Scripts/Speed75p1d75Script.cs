@@ -12,7 +12,7 @@ internal class Speed75p1d75Script : Script, IActivateItemScript
 {
     private Speed75p1d75Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (Game.HasteTimer.Value == 0)
         {
@@ -22,6 +22,6 @@ internal class Speed75p1d75Script : Script, IActivateItemScript
         {
             Game.HasteTimer.AddTimer(5);
         }
-        return true;
+        return new UsedResult(true);
     }
 }

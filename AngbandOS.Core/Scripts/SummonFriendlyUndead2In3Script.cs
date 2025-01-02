@@ -12,7 +12,7 @@ internal class SummonFriendlyUndead2In3Script : Script, IActivateItemScript
 {
     private SummonFriendlyUndead2In3Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (Game.DieRoll(3) == 1)
         {
@@ -30,6 +30,6 @@ internal class SummonFriendlyUndead2In3Script : Script, IActivateItemScript
                 Game.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
             }
         }
-        return true;
+        return new UsedResult(true);
     }
 }

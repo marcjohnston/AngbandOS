@@ -12,13 +12,13 @@ internal class ResistAll40p1d40Script : Script, IActivateItemScript
 {
     private ResistAll40p1d40Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
         Game.FireResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
         Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
-        return true;
+        return new UsedResult(true);
     }
 }

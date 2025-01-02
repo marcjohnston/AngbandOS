@@ -12,10 +12,10 @@ internal class BallOfCold50r2AndColdResistance1d20p20Script : Script, IDirection
 {
     private BallOfCold50r2AndColdResistance1d20p20Script(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 50, 2);
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
+        return new UsedResult(true);
     }
 }

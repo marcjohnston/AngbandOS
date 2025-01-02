@@ -12,9 +12,9 @@ internal class RestoreLifeLevelsScript : Script, IDirectionalActivationScript
 {
     private RestoreLifeLevelsScript(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.RunScript(nameof(RestoreLevelScript));
-        return true;
+        return new UsedResult(true);
     }
 }

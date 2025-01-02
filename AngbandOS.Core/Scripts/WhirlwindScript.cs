@@ -12,7 +12,7 @@ internal class WhirlwindScript : Script, IActivateItemScript
 {
     private WhirlwindScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         for (int direction = 0; direction <= 9; direction++)
         {
@@ -25,6 +25,6 @@ internal class WhirlwindScript : Script, IActivateItemScript
                 Game.PlayerAttackMonster(y, x);
             }
         }
-        return true;
+        return new UsedResult(true);
     }
 }

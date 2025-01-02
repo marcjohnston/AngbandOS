@@ -57,7 +57,7 @@ internal abstract class Activation : BaseActivation, IGetKey
     /// </summary>
     /// <returns></returns>
     /// <param name="item">The item that was activated.</param>
-    protected override bool OnActivate(Item item)
+    protected override UsedResult OnActivate(Item item)
     {
         return ActivationCancellableScript.ExecuteActivateItemScript(item);
     }

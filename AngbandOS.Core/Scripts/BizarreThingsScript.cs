@@ -12,7 +12,7 @@ internal class BizarreThingsScript : Script, IDirectionalActivationScript
 {
     private BizarreThingsScript(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         switch (Game.DieRoll(10))
         {
@@ -58,6 +58,6 @@ internal class BizarreThingsScript : Script, IDirectionalActivationScript
                     break;
                 }
         }
-        return true;
+        return new UsedResult(true);
     }
 }

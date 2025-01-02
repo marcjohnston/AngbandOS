@@ -12,7 +12,7 @@ internal class SummonFriendlyDemon2In3Script : Script, IActivateItemScript
 {
     private SummonFriendlyDemon2In3Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         if (Game.DieRoll(3) == 1)
         {
@@ -30,6 +30,6 @@ internal class SummonFriendlyDemon2In3Script : Script, IActivateItemScript
                 Game.MsgPrint("'What is thy bidding... Master?'");
             }
         }
-        return true;
+        return new UsedResult(true);
     }
 }

@@ -8053,7 +8053,7 @@ public bool IsDead = false;
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    public bool RunUsedScript(string scriptName)
+    public UsedResult RunUsedScript(string scriptName)
     {
         // Get the script from the singleton repository.
         IUsedScript castedScript = SingletonRepository.Get<IUsedScript>(scriptName);
@@ -8072,7 +8072,7 @@ public bool IsDead = false;
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    public bool RunUsedScriptInt(string scriptName, int value)
+    public UsedResult RunUsedScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
         IUsedScriptInt castedScript = SingletonRepository.Get<IUsedScriptInt>(scriptName);

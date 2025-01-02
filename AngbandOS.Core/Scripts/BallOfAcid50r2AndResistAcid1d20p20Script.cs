@@ -12,10 +12,10 @@ internal class BallOfAcid50r2AndResistAcid1d20p20Script : Script, IDirectionalAc
 {
     private BallOfAcid50r2AndResistAcid1d20p20Script(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, 50, 2);
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
+        return new UsedResult(true);
     }
 }

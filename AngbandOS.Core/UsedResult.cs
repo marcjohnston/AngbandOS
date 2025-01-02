@@ -5,16 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core;
 
 [Serializable]
-internal class WordOfRecallScript : Script, IDirectionalActivationScript
+public class UsedResult
 {
-    private WordOfRecallScript(Game game) : base(game) { }
-
-    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public bool IsUsed { get; set; }
+    public UsedResult(bool isUsed)
     {
-        Game.RunScript(nameof(ToggleRecallScript));
-        return new UsedResult(true);
+        IsUsed = isUsed;
     }
 }

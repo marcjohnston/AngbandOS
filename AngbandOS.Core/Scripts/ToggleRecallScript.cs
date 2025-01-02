@@ -17,10 +17,10 @@ internal class ToggleRecallScript : Script, IScript, ICastSpellScript, IActivate
         ExecuteScript();
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return true;
+        return new UsedResult(true);
     }
 
     /// <summary>

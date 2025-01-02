@@ -12,10 +12,10 @@ internal class RemoveFearAndPoisonScript : Script, IActivateItemScript
 {
     private RemoveFearAndPoisonScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.FearTimer.ResetTimer();
         Game.PoisonTimer.ResetTimer();
-        return true;
+        return new UsedResult(true);
     }
 }

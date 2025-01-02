@@ -17,10 +17,10 @@ internal class AddTelepathy25p1d30Script : Script, IScript, ICastSpellScript, IA
         ExecuteScript();
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return true;
+        return new UsedResult(true);
     }
 
     /// <summary>

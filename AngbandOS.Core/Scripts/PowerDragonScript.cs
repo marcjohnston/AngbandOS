@@ -12,7 +12,7 @@ internal class PowerDragonScript : Script, IDirectionalActivationScript
 {
     private PowerDragonScript(Game game) : base(game) { }
 
-    public bool ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, 4);
         Game.MsgPrint("Your armor glows many colors...");
@@ -25,6 +25,6 @@ internal class PowerDragonScript : Script, IDirectionalActivationScript
         Game.FireResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
         Game.ColdResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
         Game.PoisonResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        return true;
+        return new UsedResult(true);
     }
 }

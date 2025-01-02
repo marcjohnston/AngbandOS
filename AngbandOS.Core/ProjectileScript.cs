@@ -130,12 +130,12 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
     /// <param name="item"></param>
     /// <param name="direction"></param>
     /// <returns></returns>
-    public bool ExecuteDirectionalActivationScript(Item item, int direction)
+    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction)
     {
-        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
+        return ExecuteScriptWithPreAndPostMessages<UsedResult>(() =>
         {
             ExecuteTargeted(direction);
-            return true; // Return true because the script was not cancelled.
+            return new UsedResult(true); // Return true because the script was not cancelled.
         });
     }
 
@@ -187,12 +187,12 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
         });
     }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
+        return ExecuteScriptWithPreAndPostMessages<UsedResult>(() =>
         {
             IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectional();
-            return readScrollAndUseStaffResult.IsUsed;
+            return new UsedResult(readScrollAndUseStaffResult.IsUsed); // TODO: This is lossy
         });
     }
 

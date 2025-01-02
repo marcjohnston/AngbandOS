@@ -21,10 +21,10 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, I
     /// Runs the successful script and returns false because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteSuccessByChanceScript();
-        return false;
+        return new UsedResult(false);
     }
 
     /// <summary>

@@ -14,5 +14,5 @@ internal interface IUsedScript
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    bool ExecuteUsedScript();
+    UsedResult ExecuteUsedScript();
 }

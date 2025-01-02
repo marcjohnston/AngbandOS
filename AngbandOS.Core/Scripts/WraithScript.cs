@@ -12,9 +12,9 @@ internal class WraithScript : Script, IActivateItemScript
 {
     private WraithScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.IntValue));
-        return true;
+        return new UsedResult(true);
     }
 }

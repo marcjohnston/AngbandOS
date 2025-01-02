@@ -24,25 +24,25 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IUsedScript, I
     /// Executes the script returning false, if the player cancels the selection or confirmation dialog; true, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteUsedScript()
+    public UsedResult ExecuteUsedScript()
     {
         int amt = 1;
         bool force = Game.CommandArgument > 0;
         if (!Game.SelectItem(out Item? oPtr, "Turn which item to gold? ", false, true, true, null))
         {
             Game.MsgPrint("You have nothing to turn to gold.");
-            return false;
+            return new UsedResult(false);
         }
         if (oPtr == null)
         {
-            return false;
+            return new UsedResult(false);
         }
         if (oPtr.StackCount > 1)
         {
             amt = Game.GetQuantity(oPtr.StackCount, true);
             if (amt <= 0)
             {
-                return false;
+                return new UsedResult(false);
             }
         }
         int oldNumber = oPtr.StackCount;
@@ -56,7 +56,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IUsedScript, I
                 string outVal = $"Really turn {oName} to gold? ";
                 if (!Game.GetCheck(outVal))
                 {
-                    return false;
+                    return new UsedResult(false);
                 }
             }
         }
@@ -71,7 +71,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IUsedScript, I
             oPtr.Inscription = feel;
             oPtr.IdentSense = true;
             Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
-            return true;
+            return new UsedResult(true);
         }
         int price = oPtr.GetRealValue();
         if (price <= 0)
@@ -95,10 +95,10 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IUsedScript, I
         oPtr.ModifyStackCount(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
-        return true;
+        return new UsedResult(true);
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScript();
     }

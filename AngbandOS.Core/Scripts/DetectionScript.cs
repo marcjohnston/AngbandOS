@@ -43,10 +43,10 @@ internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByCh
         ExecuteSuccessByChanceScript();
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         Game.MsgPrint("An image forms in your mind...");
         ExecuteSuccessByChanceScript();
-        return true;
+        return new UsedResult(true);
     }
 }

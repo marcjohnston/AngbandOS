@@ -21,20 +21,20 @@ internal class CallChaosCancellableScript : Script, IScript, ICastSpellScript, I
     /// Runs the script and returns true because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return true;
+        return new UsedResult(true);
     }
 
     /// <summary>
     /// Runs the script and returns true because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteUsedScript()
+    public UsedResult ExecuteUsedScript()
     {
         ExecuteScript();
-        return true;
+        return new UsedResult(true);
     }
 
     /// <summary>

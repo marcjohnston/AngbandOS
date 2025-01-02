@@ -57,11 +57,11 @@ internal abstract class DirectionalActivation : BaseActivation, IGetKey
     /// </summary>
     public IDirectionalActivationScript DirectionalActivationCancellableScript { get; protected set; }
 
-    protected override bool OnActivate(Item item)
+    protected override UsedResult OnActivate(Item item)
     {
         if (!Game.GetDirectionWithAim(out int direction))
         {
-            return false;
+            return new UsedResult(false);
         }
         if (!String.IsNullOrEmpty(PostAimingMessage))
         {

@@ -53,9 +53,9 @@ internal class RestoreLevelScript : Script, IScript, ICastSpellScript, ISuccessB
         ExecuteSuccessByChanceScript();
     }
 
-    public bool ExecuteActivateItemScript(Item item)
+    public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return true;
+        return new UsedResult(true);
     }
 }

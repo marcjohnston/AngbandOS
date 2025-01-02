@@ -12,7 +12,7 @@ internal class GetawayScript : Script, IActivateItemScript
 {
     private GetawayScript(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         switch (Game.DieRoll(13))
         {
@@ -48,6 +48,6 @@ internal class GetawayScript : Script, IActivateItemScript
                 }
                 break;
         }
-        return true;
+        return new UsedResult(true);
     }
 }

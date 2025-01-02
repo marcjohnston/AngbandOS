@@ -12,11 +12,11 @@ internal class Heal1000Script : Script, IActivateItemScript
 {
     private Heal1000Script(Game game) : base(game) { }
 
-    public bool ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.MsgPrint("You feel much better...");
         Game.RestoreHealth(1000);
         Game.BleedingTimer.ResetTimer();
-        return true;
+        return new UsedResult(true);
     }
 }
