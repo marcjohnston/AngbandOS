@@ -16,10 +16,10 @@ internal class SayLocationAndFeelingScript : Script, IScript, IGameCommandScript
     /// Executes the say location and feeling script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

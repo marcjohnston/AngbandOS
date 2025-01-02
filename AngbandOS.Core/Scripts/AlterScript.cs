@@ -25,7 +25,7 @@ internal class AlterScript : Script, IScript, IGameCommandScript
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         // Assume we won't disturb the player
         bool isRepeatable = false;
@@ -59,6 +59,6 @@ internal class AlterScript : Script, IScript, IGameCommandScript
                 }
             }
         }
-        return new GameCommandResult(isRepeatable);
+        return new RepeatableResult(isRepeatable);
     }
 }

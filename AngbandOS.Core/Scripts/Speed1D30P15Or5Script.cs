@@ -12,19 +12,19 @@ internal class Speed1D30P15Or5Script : Script, IReadScrollAndUseStaffScript
 {
     private Speed1D30P15Or5Script(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         if (Game.HasteTimer.Value == 0)
         {
             if (Game.HasteTimer.SetTimer(Game.DieRoll(30) + 15))
             {
-                return (true, true);
+                return new IdentifiedAndUsedResult(true, true);
             }
         }
         else
         {
             Game.HasteTimer.AddTimer(5);
         }
-        return (false, true);
+        return new IdentifiedAndUsedResult(false, true);
     }
 }

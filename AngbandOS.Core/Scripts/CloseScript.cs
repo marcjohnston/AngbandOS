@@ -25,7 +25,7 @@ internal class CloseScript : Script, IScript, IGameCommandScript
     /// Executes the close script and returns true, if the close failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // If there's only one door, assume we mean that one and don't ask for a direction
@@ -57,6 +57,6 @@ internal class CloseScript : Script, IScript, IGameCommandScript
                 isRepeatable = Game.CloseDoor(y, x);
             }
         }
-        return new GameCommandResult(isRepeatable);
+        return new RepeatableResult(isRepeatable);
     }
 }

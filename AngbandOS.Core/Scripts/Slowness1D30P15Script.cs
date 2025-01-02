@@ -14,10 +14,10 @@ internal class Slowness1D30P15Script : Script, IReadScrollAndUseStaffScript
 {
     private Slowness1D30P15Script(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         // Slowness slows you down.
         bool identified = Game.SlowTimer.AddTimer(Game.DieRoll(30) + 15);
-        return (identified, true);
+        return new IdentifiedAndUsedResult(identified, true);
     }
 }

@@ -12,10 +12,10 @@ internal class MapAreaScript : Script, IScript, IReadScrollAndUseStaffScript
 {
     private MapAreaScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         ExecuteScript();
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 
     /// <summary>

@@ -25,7 +25,7 @@ internal class WalkWithoutPickupScript : Script, IScript, IGameCommandScript
     /// Executes the stay script.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // If we don't already have a direction, get one
@@ -36,6 +36,6 @@ internal class WalkWithoutPickupScript : Script, IScript, IGameCommandScript
             Game.MovePlayer(dir, true);
             isRepeatable = true;
         }
-        return new GameCommandResult(isRepeatable);
+        return new RepeatableResult(isRepeatable);
     }
 }

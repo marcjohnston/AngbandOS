@@ -16,10 +16,10 @@ internal class CurseArmorIdentifableAndUsedScript : Script, IReadScrollAndUseSta
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.CurseArmor(); // An attempt to curse armor allows the action to be identified.
-        return (identified, true);
+        bool isIdentified = Game.CurseArmor(); // An attempt to curse armor allows the action to be identified.
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

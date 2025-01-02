@@ -16,7 +16,7 @@ internal class InvocationIdentifableAndUsedScript : Script, IReadScrollAndUseSta
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Patron? patron = Game.SingletonRepository.ToWeightedRandom<Patron>().ChooseOrDefault();
         if (patron == null)
@@ -25,7 +25,7 @@ internal class InvocationIdentifableAndUsedScript : Script, IReadScrollAndUseSta
         }
         Game.MsgPrint($"You invoke the secret name of {patron.LongName}.");
         patron.GetReward();
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

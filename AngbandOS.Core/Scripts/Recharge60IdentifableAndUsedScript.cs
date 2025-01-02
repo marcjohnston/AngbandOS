@@ -16,9 +16,9 @@ internal class Recharge60IdentifableAndUsedScript : Script, IReadScrollAndUseSta
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool used = Game.RunUsedScriptInt(nameof(RechargeItemScript), 60);
-        return (true, used);
+        bool isUsed = Game.RunUsedScriptInt(nameof(RechargeItemScript), 60);
+        return new IdentifiedAndUsedResult(true, isUsed);
     }
 }

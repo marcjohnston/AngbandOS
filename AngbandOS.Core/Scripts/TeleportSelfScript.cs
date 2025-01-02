@@ -187,10 +187,10 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt, IReadScrollAndU
         Game.MainForm.RefreshMapLocation(ny, nx);
     }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         ExecuteScriptInt(100);
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 
     public bool ExecuteUsedScriptItem(Item item)

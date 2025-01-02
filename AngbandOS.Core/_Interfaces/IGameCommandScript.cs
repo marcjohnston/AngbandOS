@@ -19,5 +19,5 @@ internal interface IGameCommandScript
     /// Scripts that succeed and can have additional effect if repeated should also return true.  (e.g. run)
     /// </summary>
     /// <returns></returns>
-    GameCommandResult ExecuteGameCommandScript();
+    RepeatableResult ExecuteGameCommandScript();
 }

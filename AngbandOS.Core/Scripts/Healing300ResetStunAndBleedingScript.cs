@@ -14,22 +14,22 @@ internal class Healing300ResetStunAndBleedingScript : Script, IScript, IReadScro
 {
     private Healing300ResetStunAndBleedingScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.RestoreHealth(300))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.StunTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 
     /// <summary>

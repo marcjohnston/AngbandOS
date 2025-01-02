@@ -16,10 +16,10 @@ internal class DetectNormalObjectsIdentifableAndUsedScript : Script, IReadScroll
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript));
-        return (identified, true);
+        bool isIdentified = Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript));
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

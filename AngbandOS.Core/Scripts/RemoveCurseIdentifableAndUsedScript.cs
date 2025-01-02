@@ -16,15 +16,15 @@ internal class RemoveCurseIdentifableAndUsedScript : Script, IReadScrollAndUseSt
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.RunSuccessByChanceScript(nameof(RemoveCurseScript));
-        if (!identified)
+        bool isIdentified = Game.RunSuccessByChanceScript(nameof(RemoveCurseScript));
+        if (!isIdentified)
         {
-            return (false, true);
+            return new IdentifiedAndUsedResult(false, true);
         }
         Game.MsgPrint("You feel as if someone is watching over you.");
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

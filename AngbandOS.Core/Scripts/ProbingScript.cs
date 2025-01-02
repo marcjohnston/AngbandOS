@@ -12,17 +12,17 @@ internal class ProbingScript : Script, IZapRodScript, IReadScrollAndUseStaffScri
 {
     private ProbingScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.Probing();
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 
     /// <summary>
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
         return ExecuteReadScrollAndUseStaffScript();
     }

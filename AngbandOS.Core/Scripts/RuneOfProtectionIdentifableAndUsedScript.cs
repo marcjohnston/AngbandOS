@@ -16,10 +16,10 @@ internal class RuneOfProtectionIdentifableAndUsedScript : Script, IReadScrollAnd
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.RunScript(nameof(ElderSignScript));
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

@@ -24,10 +24,10 @@ internal class _template : Script, IScript, IGameCommandScript, IScriptStore, IE
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>
@@ -54,10 +54,10 @@ internal class _template : Script, IScript, IGameCommandScript, IScriptStore, IE
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public EatResult ExecuteEatScript()
+    public IdentifiedResult ExecuteEatScript()
     {
         ExecuteScript();
-        return new EatResult(false);
+        return new IdentifiedResult(false);
     }
 
     /// <summary>

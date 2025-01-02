@@ -16,13 +16,13 @@ internal class EatCurePoisonScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public EatResult ExecuteEatScript()
+    public IdentifiedResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.PoisonTimer.ResetTimer())
         {
-            return new EatResult(true);
+            return new IdentifiedResult(true);
         }
-        return new EatResult(false);
+        return new IdentifiedResult(false);
     }
 }

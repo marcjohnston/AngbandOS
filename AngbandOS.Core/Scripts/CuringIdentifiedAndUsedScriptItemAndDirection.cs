@@ -16,33 +16,33 @@ internal class CuringIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodSc
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.BlindnessTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.PoisonTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.ConfusedTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.StunTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.HallucinationsTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

@@ -12,20 +12,20 @@ internal class OfTheMagiScript : Script, IReadScrollAndUseStaffScript
 {
     private OfTheMagiScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.Mana.IntValue < Game.MaxMana.IntValue)
         {
             Game.Mana.IntValue = Game.MaxMana.IntValue;
             Game.FractionalMana = 0;
-            identified = true;
+            isIdentified = true;
             Game.MsgPrint("Your feel your head clear.");
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

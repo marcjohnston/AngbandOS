@@ -6292,7 +6292,7 @@ public bool IsDead = false;
                 bool isRepeatable = false;
                 if (command.ExecuteScript != null)
                 {
-                    GameCommandResult gameCommandResult = command.ExecuteScript.ExecuteGameCommandScript();
+                    RepeatableResult gameCommandResult = command.ExecuteScript.ExecuteGameCommandScript();
                     isRepeatable = gameCommandResult.IsRepeatable;
                 }
 
@@ -8058,13 +8058,6 @@ public bool IsDead = false;
         // Get the script from the singleton repository.
         ICancellableScript castedScript = SingletonRepository.Get<ICancellableScript>(scriptName);
         return castedScript.ExecuteCancellableScript();
-    }
-
-    public bool RunNoticeableScript(string scriptName)
-    {
-        // Get the script from the singleton repository.
-        INoticeableScript castedScript = SingletonRepository.Get<INoticeableScript>(scriptName);
-        return castedScript.ExecuteNoticeableScript();
     }
 
     public bool RunIdentifiedScript(string scriptName)

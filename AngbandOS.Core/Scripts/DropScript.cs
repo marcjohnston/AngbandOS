@@ -16,10 +16,10 @@ internal class DropScript : Script, IScript, IGameCommandScript, ISuccessByChanc
     /// Executes the drop script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

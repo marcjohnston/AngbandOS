@@ -16,10 +16,10 @@ internal class PopupMenuScript : Script, IScript, IGameCommandScript
     /// Executes the popup-menu script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

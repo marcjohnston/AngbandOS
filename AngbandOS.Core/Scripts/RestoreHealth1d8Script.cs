@@ -16,9 +16,9 @@ internal class RestoreHealth1d8Script : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.RestoreHealth(Game.DieRoll(8));
-        return (identified, true);
+        bool isIdentified = Game.RestoreHealth(Game.DieRoll(8));
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

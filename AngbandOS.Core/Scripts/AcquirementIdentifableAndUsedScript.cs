@@ -16,9 +16,9 @@ internal class AcquirementIdentifableAndUsedScript : Script, IReadScrollAndUseSt
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }

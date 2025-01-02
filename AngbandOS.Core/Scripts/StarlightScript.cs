@@ -14,7 +14,7 @@ internal class StarlightScript : Script, IReadScrollAndUseStaffScript
 {
     private StarlightScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         if (Game.BlindnessTimer.Value == 0)
         {
@@ -24,6 +24,6 @@ internal class StarlightScript : Script, IReadScrollAndUseStaffScript
         {
             Game.LightLine(Game.OrderedDirection[k]);
         }
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }

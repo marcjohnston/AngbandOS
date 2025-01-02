@@ -16,38 +16,38 @@ internal class HolinessScript : Script, IReadScrollAndUseStaffScript
     /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.RunIdentifiedScript(nameof(DispelEvilAtLos120ProjectileScript)))
         {
-            identified = true;
+            isIdentified = true;
         }
         int k = 3 * Game.ExperienceLevel.IntValue;
         if (Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + k))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.PoisonTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.FearTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.RestoreHealth(50))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.StunTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

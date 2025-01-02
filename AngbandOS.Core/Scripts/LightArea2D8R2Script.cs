@@ -16,10 +16,10 @@ internal class LightArea2D8R2Script : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.LightArea(Game.DiceRoll(2, 8), 2); // TODO: The LightArea doesn't actually return a qualified result.
-        return (identified, true);
+        bool isIdentified = Game.LightArea(Game.DiceRoll(2, 8), 2); // TODO: The LightArea doesn't actually return a qualified result.
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

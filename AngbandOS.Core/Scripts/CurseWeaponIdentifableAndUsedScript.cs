@@ -16,9 +16,9 @@ internal class CurseWeaponIdentifableAndUsedScript : Script, IReadScrollAndUseSt
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.CurseWeapon();
-        return (identified, true);
+        bool isIdentified = Game.CurseWeapon();
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

@@ -28,7 +28,7 @@ internal class BashScript : Script, IScript, IGameCommandScript
     /// Allows the player to select a direction and bashes the object found in that direction.  Returns true, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         // Assume it won't disturb us
         bool isRepeatable = false;
@@ -57,6 +57,6 @@ internal class BashScript : Script, IScript, IGameCommandScript
                 isRepeatable = Game.BashClosedDoor(y, x);
             }
         }
-        return new GameCommandResult(isRepeatable);
+        return new RepeatableResult(isRepeatable);
     }
 }

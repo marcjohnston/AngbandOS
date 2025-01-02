@@ -25,10 +25,10 @@ internal class InventoryScript : Script, IScript, IGameCommandScript, IScriptSto
     /// Executes the inventory script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

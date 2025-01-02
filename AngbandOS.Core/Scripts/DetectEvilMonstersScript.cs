@@ -61,9 +61,9 @@ internal class DetectEvilMonstersScript : Script, IScript, ISuccessByChanceScrip
         ExecuteSuccessByChanceScript();
     }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = ExecuteSuccessByChanceScript();
-        return (identified, true);
+        bool isIdentified = ExecuteSuccessByChanceScript();
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

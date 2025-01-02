@@ -16,10 +16,10 @@ internal class DetectInvisibleIdentifableAndUsedScript : Script, IReadScrollAndU
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.DetectInvisibleMonsters();
-        return (identified, true);
+        bool isIdentified = Game.DetectInvisibleMonsters();
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

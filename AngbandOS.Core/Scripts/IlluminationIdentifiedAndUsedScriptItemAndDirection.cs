@@ -16,12 +16,12 @@ internal class IlluminationIdentifiedAndUsedScriptItemAndDirection : Script, IZa
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
         if (Game.LightArea(Game.DiceRoll(2, 8), 2))
         {
-            return (true, true);
+            return new IdentifiedAndUsedResult(true, true);
         }
-        return (false, true);
+        return new IdentifiedAndUsedResult(false, true);
     }
 }

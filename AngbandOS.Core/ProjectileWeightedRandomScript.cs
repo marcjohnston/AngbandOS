@@ -23,7 +23,7 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
         return Choose().ExecuteIdentifiedScriptDirection(dir);
     }
 
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
         return Choose().ExecuteZapRodScript(item, dir);
     }
@@ -33,7 +33,7 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
         Choose().ExecuteScript();
     }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         return Choose().ExecuteReadScrollAndUseStaffScript();
     }

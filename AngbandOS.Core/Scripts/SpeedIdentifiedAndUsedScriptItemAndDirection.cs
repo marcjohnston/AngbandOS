@@ -16,20 +16,20 @@ internal class SpeedIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScr
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.HasteTimer.Value == 0)
         {
             if (Game.HasteTimer.SetTimer(Game.DieRoll(30) + 15))
             {
-                identified = true;
+                isIdentified = true;
             }
         }
         else
         {
             Game.HasteTimer.AddTimer(5);
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

@@ -5,13 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interfaces;
+namespace AngbandOS.Core;
 
-internal interface IZapRodScript
+[Serializable]
+public class IdentifiedResult
 {
-    /// <summary>
-    /// Returns true, if the script performs an action that would identify an object; false, otherwise.
-    /// </summary>
-    /// <returns></returns>
-    IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir);
+    public bool IsIdentified { get; set; }
+    public IdentifiedResult(bool isIdentified)
+    {
+        IsIdentified = isIdentified;
+    }
 }

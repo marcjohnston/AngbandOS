@@ -16,33 +16,33 @@ internal class CuringScript : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.BlindnessTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.PoisonTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.ConfusedTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.StunTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.HallucinationsTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

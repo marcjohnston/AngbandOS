@@ -54,7 +54,7 @@ internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChan
         ExecuteSuccessByChanceScript();
     }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         bool identified = ExecuteSuccessByChanceScript();
         if (identified)
@@ -63,8 +63,8 @@ internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessByChan
             {
                 Game.MsgPrint("The staff glows blue for a moment...");
             }
-            return (true, true);
+            return new IdentifiedAndUsedResult(true, true);
         }
-        return (false, true);
+        return new IdentifiedAndUsedResult(false, true);
     }
 }

@@ -16,10 +16,10 @@ internal class DestroyTrapsAndDoorsScript : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.RunSuccessByChanceScript(nameof(DestroyAdjacentDoorsScript)); // If nothing was destroyed, then we do not know what happened.
-        return (identified, true);
+        bool isIdentified = Game.RunSuccessByChanceScript(nameof(DestroyAdjacentDoorsScript)); // If nothing was destroyed, then we do not know what happened.
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

@@ -16,14 +16,14 @@ internal class ChaosBall222R4IdentifableAndUsedScript : Script, IReadScrollAndUs
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, 222, 4);
         if (!Game.HasChaosResistance)
         {
             Game.TakeHit(111 + Game.DieRoll(111), "a Scroll of Chaos");
         }
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

@@ -16,10 +16,10 @@ internal class DestroyAreaR15Script : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

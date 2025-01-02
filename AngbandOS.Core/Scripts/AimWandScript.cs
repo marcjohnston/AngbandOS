@@ -16,10 +16,10 @@ internal class AimWandScript : Script, IScript, IGameCommandScript, ISuccessByCh
     /// Executes the aim wand script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

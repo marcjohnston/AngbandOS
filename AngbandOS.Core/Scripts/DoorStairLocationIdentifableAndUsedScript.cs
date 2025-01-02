@@ -16,18 +16,18 @@ internal class DoorStairLocationIdentifableAndUsedScript : Script, IReadScrollAn
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.DetectDoors())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.DetectStairs())
         {
-            identified = true;
+            isIdentified = true;
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

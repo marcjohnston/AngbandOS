@@ -16,10 +16,10 @@ internal class EnchantArmor1IdentifableAndUsedScript : Script, IReadScrollAndUse
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool used = Game.EnchantItem(0, 0, 1);
-        return (true, used);
+        bool isUsed = Game.EnchantItem(0, 0, 1);
+        return new IdentifiedAndUsedResult(true, isUsed);
     }
 }
 

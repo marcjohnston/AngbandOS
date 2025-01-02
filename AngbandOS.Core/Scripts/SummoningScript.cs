@@ -12,15 +12,15 @@ internal class SummoningScript : Script, IReadScrollAndUseStaffScript
 {
     private SummoningScript(Game game) : base(game) { }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         for (int k = 0; k < Game.DieRoll(4); k++)
         {
             if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null, true, false))
             {
-                return (true, true);
+                return new IdentifiedAndUsedResult(true, true);
             }
         }
-        return (false, true);
+        return new IdentifiedAndUsedResult(false, true);
     }
 }

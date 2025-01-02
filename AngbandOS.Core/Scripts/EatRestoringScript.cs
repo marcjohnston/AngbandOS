@@ -16,7 +16,7 @@ internal class EatRestoringScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public EatResult ExecuteEatScript()
+    public IdentifiedResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         bool isIdentified = false;
@@ -44,6 +44,6 @@ internal class EatRestoringScript : Script, IEatScript
         {
             isIdentified = true;
         }
-        return new EatResult(isIdentified);
+        return new IdentifiedResult(isIdentified);
     }
 }

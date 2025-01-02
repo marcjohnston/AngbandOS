@@ -16,10 +16,10 @@ internal class UseStaffScript : Script, IScript, IGameCommandScript
     /// Executes the use staff script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>
@@ -82,18 +82,18 @@ internal class UseStaffScript : Script, IScript, IGameCommandScript
         Game.PlaySound(SoundEffectEnum.UseStaff);
 
         // Do the specific effect for the type of staff
-        (bool identified, bool chargeUsed) = item.UseTuple.Value.UseScript.ExecuteReadScrollAndUseStaffScript();
+        IdentifiedAndUsedResult identifiedAndUsedResult = item.UseTuple.Value.UseScript.ExecuteReadScrollAndUseStaffScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does
         item.ObjectTried();
-        if (identified && !item.IsFlavorAware)
+        if (identifiedAndUsedResult.IsIdentified && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
         // We may not have used up a charge
-        if (!chargeUsed)
+        if (!identifiedAndUsedResult.IsUsed)
         {
             return;
         }

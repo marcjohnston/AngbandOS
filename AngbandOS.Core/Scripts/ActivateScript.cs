@@ -27,10 +27,10 @@ internal class ActivateScript : Script, IScript, IGameCommandScript, ISuccessByC
     /// Executes the activate script, disposes of the successful result and returns false because activation is never repeatable.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

@@ -16,37 +16,37 @@ internal class RestorationIdentifiedAndUsedScriptItemAndDirection : Script, IZap
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
-        bool identified = false;
+        bool isIdentified = false;
         if (Game.RunSuccessByChanceScript(nameof(RestoreLevelScript)))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Strength))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Wisdom))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Dexterity))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Constitution))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.TryRestoringAbilityScore(AbilityEnum.Charisma))
         {
-            identified = true;
+            isIdentified = true;
         }
-        return (identified, true);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

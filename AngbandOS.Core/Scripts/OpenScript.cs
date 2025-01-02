@@ -25,7 +25,7 @@ internal class OpenScript : Script, IScript, IGameCommandScript
     /// Executes the open script and returns true, if the open fails due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // Check if there's only one thing we can open
@@ -113,6 +113,6 @@ internal class OpenScript : Script, IScript, IGameCommandScript
                 isRepeatable = Game.OpenDoor(y, x);
             }
         }
-        return new GameCommandResult(isRepeatable);
+        return new RepeatableResult(isRepeatable);
     }
 }

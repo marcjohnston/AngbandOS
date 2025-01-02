@@ -8,11 +8,13 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-public class GameCommandResult
+public class IdentifiedAndUsedResult
 {
-    public bool IsRepeatable { get; set; }
-    public GameCommandResult(bool isRepeatable)
+    public bool IsIdentified { get; set; }
+    public bool IsUsed { get; set; }
+    public IdentifiedAndUsedResult(bool isIdentified, bool isUsed)
     {
-        IsRepeatable = isRepeatable;
+        IsIdentified = isIdentified;
+        IsUsed = isUsed;
     }
 }

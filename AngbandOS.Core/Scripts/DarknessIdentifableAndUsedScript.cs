@@ -16,14 +16,14 @@ internal class DarknessIdentifableAndUsedScript : Script, IReadScrollAndUseStaff
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         if (!Game.HasBlindnessResistance && !Game.HasDarkResistance)
         {
             Game.BlindnessTimer.AddTimer(3 + Game.DieRoll(5));
         }
-        bool identified = Game.UnlightArea(10, 3);
-        return (identified, true);
+        bool isIdentified = Game.UnlightArea(10, 3);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

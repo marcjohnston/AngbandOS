@@ -16,11 +16,11 @@ internal class ProtectionFromEvilIdentifableAndUsedScript : Script, IReadScrollA
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         int i = 3 * Game.ExperienceLevel.IntValue;
-        bool identified = Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + i);
-        return (identified, true);
+        bool isIdentified = Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + i);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

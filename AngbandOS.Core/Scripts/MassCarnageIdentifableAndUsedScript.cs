@@ -16,10 +16,10 @@ internal class MassCarnageIdentifableAndUsedScript : Script, IReadScrollAndUseSt
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.RunScriptBool(nameof(MassCarnageScript), true);
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

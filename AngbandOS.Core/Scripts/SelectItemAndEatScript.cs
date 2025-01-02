@@ -16,10 +16,10 @@ internal class SelectItemAndEatScript : Script, IScript, IGameCommandScript
     /// Executes the eat script and returns false because the process shouldn't be repeated.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ internal class SelectItemAndEatScript : Script, IScript, IGameCommandScript
         int itemLevel = item.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
-        EatResult eatResult = item.EatScript.ExecuteEatScript();
+        IdentifiedResult eatResult = item.EatScript.ExecuteEatScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 

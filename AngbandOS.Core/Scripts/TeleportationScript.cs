@@ -16,10 +16,10 @@ internal class TeleportationScript : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.RunScriptInt(nameof(TeleportSelfScript), 100);
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

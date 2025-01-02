@@ -16,10 +16,10 @@ internal class ToggleSearchScript : Script, IScript, IGameCommandScript
     /// Executes the toggle search script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

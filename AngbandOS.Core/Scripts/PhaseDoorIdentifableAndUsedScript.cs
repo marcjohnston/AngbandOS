@@ -16,10 +16,10 @@ internal class PhaseDoorIdentifableAndUsedScript : Script, IReadScrollAndUseStaf
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.RunScript(nameof(PhaseDoorScript));
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

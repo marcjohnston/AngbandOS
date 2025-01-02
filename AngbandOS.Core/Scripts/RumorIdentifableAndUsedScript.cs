@@ -16,12 +16,12 @@ internal class RumorIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScr
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.MsgPrint("There is message on the scroll. It says:");
         Game.MsgPrint(null);
         Game.RunScript(nameof(GetRumorScript));
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

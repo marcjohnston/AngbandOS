@@ -16,10 +16,10 @@ internal class ReadScrollScript : Script, IScript, IGameCommandScript
     /// Executes the read scroll script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>
@@ -64,12 +64,12 @@ internal class ReadScrollScript : Script, IScript, IGameCommandScript
         //bool identified = false;
         //bool usedUp = true;
 
-        (bool identified, bool used) = item.ActivationTuple.Value.ActivationScript.ExecuteReadScrollAndUseStaffScript();
+        IdentifiedAndUsedResult identifiedAndUsedResult = item.ActivationTuple.Value.ActivationScript.ExecuteReadScrollAndUseStaffScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll
         item.ObjectTried();
-        if (identified && !item.IsFlavorAware)
+        if (identifiedAndUsedResult.IsIdentified && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             int itemLevel = item.LevelNormallyFound;
@@ -83,7 +83,7 @@ internal class ReadScrollScript : Script, IScript, IGameCommandScript
         }
         if (!channeled)
         {
-            if (!used)
+            if (!identifiedAndUsedResult.IsUsed)
             {
                 return;
             }

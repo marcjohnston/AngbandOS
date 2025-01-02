@@ -25,10 +25,10 @@ internal class BrowseScript : Script, IScript, IGameCommandScript, ISuccessByCha
     /// Executes the browse script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteSuccessByChanceScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

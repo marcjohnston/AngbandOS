@@ -16,7 +16,7 @@ internal class EatWarpstoneScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public EatResult ExecuteEatScript()
+    public IdentifiedResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.MsgPrint("That tastes... funky.");
@@ -29,6 +29,6 @@ internal class EatWarpstoneScript : Script, IEatScript
         {
             Game.RunScript(nameof(GainMutationScript));
         }
-        return new EatResult(true);
+        return new IdentifiedResult(true);
     }
 }

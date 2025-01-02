@@ -16,10 +16,10 @@ internal class Blessing1d24p12IdentifableAndUsedScript : Script, IReadScrollAndU
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12);
-        return (identified, true);
+        bool isIdentified = Game.BlessingTimer.AddTimer(Game.DieRoll(24) + 12);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

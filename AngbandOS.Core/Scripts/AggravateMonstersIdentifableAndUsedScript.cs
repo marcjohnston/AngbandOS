@@ -16,11 +16,11 @@ internal class AggravateMonstersIdentifableAndUsedScript : Script, IReadScrollAn
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.MsgPrint("There is a high pitched humming noise.");
         Game.AggravateMonsters();
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

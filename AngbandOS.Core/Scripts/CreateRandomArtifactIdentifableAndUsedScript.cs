@@ -16,10 +16,10 @@ internal class CreateRandomArtifactIdentifableAndUsedScript : Script, IReadScrol
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.RunScript(nameof(CreateRandomArtifactScript)); // TODO: This may be cancelled?
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

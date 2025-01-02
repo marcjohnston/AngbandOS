@@ -16,12 +16,12 @@ internal class EatElvenBreadScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public EatResult ExecuteEatScript()
+    public IdentifiedResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.MsgPrint("That tastes good.");
         Game.PoisonTimer.ResetTimer();
         Game.RestoreHealth(Game.DiceRoll(4, 8));
-        return new EatResult(true);
+        return new IdentifiedResult(true);
     }
 }

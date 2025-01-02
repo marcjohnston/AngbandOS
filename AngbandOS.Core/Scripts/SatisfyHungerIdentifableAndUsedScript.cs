@@ -16,10 +16,10 @@ internal class SatisfyHungerIdentifableAndUsedScript : Script, IReadScrollAndUse
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.SetFood(Constants.PyFoodMax - 1);
-        return (identified, true);
+        bool isIdentified = Game.SetFood(Constants.PyFoodMax - 1);
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

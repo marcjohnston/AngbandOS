@@ -16,10 +16,10 @@ internal class DetectTrapsScript : Script, IReadScrollAndUseStaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool identified = Game.DetectTraps();
-        return (identified, true);
+        bool isIdentified = Game.DetectTraps();
+        return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }
 

@@ -16,15 +16,15 @@ internal class MonsterConfusionIdentifableAndUsedScript : Script, IReadScrollAnd
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         if (Game.HasConfusingTouch)
         {
-            return (false, true); // We already had the enchantment.  We won't be able to identify any changes.
+            return new IdentifiedAndUsedResult(false, true); // We already had the enchantment.  We won't be able to identify any changes.
         }
         Game.MsgPrint("Your hands begin to glow.");
         Game.HasConfusingTouch = true;
-        return (true, true); // We were able to identify the change in our hands.
+        return new IdentifiedAndUsedResult(true, true); // We were able to identify the change in our hands.
     }
 }
 

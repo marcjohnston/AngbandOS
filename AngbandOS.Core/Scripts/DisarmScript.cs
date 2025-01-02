@@ -25,7 +25,7 @@ internal class DisarmScript : Script, IScript, IGameCommandScript
     /// Executes the disarm script and returns true, if the disarm fails due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         int numTraps = Game.CountKnownTraps(out GridCoordinate? trapCoord);
@@ -69,6 +69,6 @@ internal class DisarmScript : Script, IScript, IGameCommandScript
                 isRepeatable = Game.DisarmTrap(y, x);
             }
         }
-        return new GameCommandResult(isRepeatable);
+        return new RepeatableResult(isRepeatable);
     }
 }

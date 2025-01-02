@@ -119,8 +119,8 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
     {
         return ExecuteScriptWithPreAndPostMessages<bool>(() =>
         {
-            (bool identified, bool used) = ExecuteNonDirectional();
-            return identified;
+            IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectional();
+            return readScrollAndUseStaffResult.IsIdentified;
         });
     }
 
@@ -160,21 +160,21 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
     /// identified:description: returns true, if the projectile actually hits and affects a monster, which allows the projectile to be identified by the player; false, otherwise.
     /// used:description: returns true if the projectile uses a charge for rod items
     /// </returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int direction)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int direction)
     {
-        return ExecuteScriptWithPreAndPostMessages<(bool, bool)>(() =>
+        return ExecuteScriptWithPreAndPostMessages<IdentifiedAndUsedResult>(() =>
         {
-            bool identified = ExecuteTargeted(direction);
-            return (identified, true);
+            bool isIdentified = ExecuteTargeted(direction);
+            return new IdentifiedAndUsedResult(isIdentified, true);
         });
     }
 
     /// <summary>
     /// Projects the projectile in a direction specified by the <see cref="NonDirectionalProjectileMode"/> property.
     /// </summary>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        return ExecuteScriptWithPreAndPostMessages<(bool, bool)>(() =>
+        return ExecuteScriptWithPreAndPostMessages<IdentifiedAndUsedResult>(() =>
         {
             return ExecuteNonDirectional();
         });
@@ -192,8 +192,8 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
     {
         return ExecuteScriptWithPreAndPostMessages<bool>(() =>
         {
-            (bool identified, bool used) = ExecuteNonDirectional();
-            return used;
+            IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectional();
+            return readScrollAndUseStaffResult.IsUsed;
         });
     }
     #endregion
@@ -230,7 +230,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
         RenderPostMessage();
     }
 
-    private (bool identified, bool used) ExecuteNonDirectional()
+    private IdentifiedAndUsedResult ExecuteNonDirectional()
     {
         switch (NonDirectionalProjectileMode)
         {
@@ -238,10 +238,10 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
                 {
                     if (!Game.GetDirectionWithAim(out int direction))
                     {
-                        return (false, false);
+                        return new IdentifiedAndUsedResult(false, false);
                     }
                     bool identified = ExecuteIdentifiedScriptDirection(direction);
-                    return (identified, true);
+                    return new IdentifiedAndUsedResult(identified, true);
                 }
             case NonDirectionalProjectileModeEnum.AllDirections:
                 {
@@ -253,7 +253,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
                             identified = true;
                         }
                     }
-                    return (identified, true);
+                    return new IdentifiedAndUsedResult(identified, true);
                 }
             case NonDirectionalProjectileModeEnum.AllMonstersInLos:
                 {
@@ -280,7 +280,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
                             anyIdentified = true;
                         }
                     }
-                    return (anyIdentified, true);
+                    return new IdentifiedAndUsedResult(anyIdentified, true);
                 }
             default:
                 throw new Exception("Invalid value for NonDirectionalProjectileMode.");

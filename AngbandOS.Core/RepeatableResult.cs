@@ -8,11 +8,11 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-public class EatResult
+public class RepeatableResult
 {
-    public bool IsIdentified { get; set; }
-    public EatResult(bool isIdentified)
+    public bool IsRepeatable { get; set; }
+    public RepeatableResult(bool isRepeatable)
     {
-        IsIdentified = isIdentified;
+        IsRepeatable = isRepeatable;
     }
 }

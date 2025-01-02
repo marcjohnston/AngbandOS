@@ -16,10 +16,10 @@ internal class EnchantWeaponToDamage1IdentifableAndUsedScript : Script, IReadScr
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool used = Game.EnchantItem(0, 1, 0);
-        return (true, used);
+        bool isUsed = Game.EnchantItem(0, 1, 0);
+        return new IdentifiedAndUsedResult(true, isUsed);
     }
 }
 

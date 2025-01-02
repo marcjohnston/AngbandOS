@@ -56,10 +56,10 @@ internal class IdentifyItemCancellableScript : Script, IScript, ICancellableScri
         return ExecuteCancellableScript();
     }
 
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool used = ExecuteCancellableScript();
-        return (true, used);
+        bool isUsed = ExecuteCancellableScript();
+        return new IdentifiedAndUsedResult(true, isUsed);
     }
 
     /// <summary>

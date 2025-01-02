@@ -16,9 +16,9 @@ internal class EnlightenmentIdentifiedAndUsedScriptItemAndDirection : Script, IZ
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
         Game.RunScript(nameof(MapAreaScript));
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }

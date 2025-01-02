@@ -16,10 +16,10 @@ internal class TeleportLevelScript : Script, IScript, IReadScrollAndUseStaffScri
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         ExecuteScript();
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 
     /// <summary>

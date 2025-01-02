@@ -16,10 +16,10 @@ internal class EnterWizardModeScript : Script, IScript, IGameCommandScript
     /// Executes the wizard mode script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>

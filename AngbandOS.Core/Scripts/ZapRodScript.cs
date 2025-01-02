@@ -16,10 +16,10 @@ internal class ZapRodScript : Script, IScript, IGameCommandScript
     /// Executes the zap rod script and returns false.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new GameCommandResult(false);
+        return new RepeatableResult(false);
     }
 
     /// <summary>
@@ -98,20 +98,20 @@ internal class ZapRodScript : Script, IScript, IGameCommandScript
         Game.PlaySound(SoundEffectEnum.ZapRod);
 
         // Do the rod-specific effect
-        (bool identified, bool used) = item.ZapTuple.Value.Script.ExecuteZapRodScript(item, dir);
+        IdentifiedAndUsedResult identifiedAndUsedResult = item.ZapTuple.Value.Script.ExecuteZapRodScript(item, dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
         // We may have just discovered what the rod does
         item.ObjectTried();
-        if (identified && !item.IsFlavorAware)
+        if (identifiedAndUsedResult.IsIdentified && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
 
         // The player may be able to cancel the zap.
-        if (used)
+        if (identifiedAndUsedResult.IsUsed)
         {
             item.RodRechargeTimeRemaining = item.ZapTuple.Value.TurnsToRecharge.Get(Game.UseRandom);
         }

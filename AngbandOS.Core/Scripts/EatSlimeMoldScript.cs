@@ -16,10 +16,10 @@ internal class EatSlimeMoldScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public EatResult ExecuteEatScript()
+    public IdentifiedResult ExecuteEatScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        Game.RunNoticeableScript(nameof(SlimeMoldScript));
-        return new EatResult(true);
+        Game.RunIdentifiedScript(nameof(SlimeMoldScript));
+        return new IdentifiedResult(true);
     }
 }

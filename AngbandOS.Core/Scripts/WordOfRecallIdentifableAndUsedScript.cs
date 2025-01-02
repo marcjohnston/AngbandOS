@@ -16,10 +16,10 @@ internal class WordOfRecallIdentifableAndUsedScript : Script, IReadScrollAndUseS
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.RunScript(nameof(ToggleRecallScript));
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

@@ -16,14 +16,14 @@ internal class FireIdentifableAndUsedScript : Script, IReadScrollAndUseStaffScri
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), 0, 150, 4);
         if (!(Game.FireResistanceTimer.Value != 0 || Game.HasFireResistance || Game.HasFireImmunity))
         {
             Game.TakeHit(50 + Game.DieRoll(50), "a Scroll of Fire");
         }
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }
 

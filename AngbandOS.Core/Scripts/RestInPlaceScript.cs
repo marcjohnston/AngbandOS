@@ -25,14 +25,14 @@ internal class RestInPlaceScript : Script, IScript, IGameCommandScript
     /// Executes the rest script and returns false, if the resting is disturbed; true, if the rest was undisturbed.
     /// </summary>
     /// <returns></returns>
-    public GameCommandResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteGameCommandScript()
     {
         if (Game.CommandArgument <= 0)
         {
             const string prompt = "Rest (0-9999, '*' for HP/SP, '&' as needed): ";
             if (!Game.GetString(prompt, out string choice, "&", 4))
             {
-                return new GameCommandResult(false); // We are not returning by chance.  The user opted out.
+                return new RepeatableResult(false); // We are not returning by chance.  The user opted out.
             }
 
             // Default to resting until we're fine
@@ -64,7 +64,7 @@ internal class RestInPlaceScript : Script, IScript, IGameCommandScript
                 // The player might not have put a number in - so abandon if they didn't
                 if (Game.CommandArgument <= 0)
                 {
-                    return new GameCommandResult(false); // We are not returning by chance.  The user entered an invalid count.
+                    return new RepeatableResult(false); // We are not returning by chance.  The user entered an invalid count.
                 }
             }
         }
@@ -83,6 +83,6 @@ internal class RestInPlaceScript : Script, IScript, IGameCommandScript
         Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
         Game.HandleStuff();
         Game.UpdateScreen();
-        return new GameCommandResult(true); // This can and should be repeated.
+        return new RepeatableResult(true); // This can and should be repeated.
     }
 }

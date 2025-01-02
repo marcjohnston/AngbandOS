@@ -16,10 +16,10 @@ internal class IdentifyIdentifableAndUsedScript : Script, IReadScrollAndUseStaff
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteReadScrollAndUseStaffScript()
+    public IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript()
     {
-        bool used = Game.RunUsedScript(nameof(IdentifyItemCancellableScript));
-        return (true, used);
+        bool isUsed = Game.RunUsedScript(nameof(IdentifyItemCancellableScript));
+        return new IdentifiedAndUsedResult(true, isUsed);
     }
 }
 

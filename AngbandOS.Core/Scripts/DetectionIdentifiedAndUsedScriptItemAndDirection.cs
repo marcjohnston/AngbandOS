@@ -16,9 +16,9 @@ internal class DetectionIdentifiedAndUsedScriptItemAndDirection : Script, IZapRo
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public (bool identified, bool used) ExecuteZapRodScript(Item item, int dir)
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
         Game.RunScript(nameof(DetectionScript));
-        return (true, true);
+        return new IdentifiedAndUsedResult(true, true);
     }
 }

@@ -16,9 +16,9 @@ internal class EatDwarfBreadScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public EatResult ExecuteEatScript()
+    public IdentifiedResult ExecuteEatScript()
     {
         Game.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
-        return new EatResult(true);
+        return new IdentifiedResult(true);
     }
 }

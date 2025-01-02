@@ -13,5 +13,5 @@ internal interface IReadScrollAndUseStaffScript
     /// Returns identified as true, if the script performs an action that would identify the item; false, otherwise and used as true, if the item should be deleted; false, for the item to be kept.
     /// </summary>
     /// <returns></returns>
-    (bool identified, bool used) ExecuteReadScrollAndUseStaffScript(); // TODO: Why isn't there an Item parameter like IZapRodScript
+    IdentifiedAndUsedResult ExecuteReadScrollAndUseStaffScript(); // TODO: Why isn't there an Item parameter like IZapRodScript
 }
