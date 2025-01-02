@@ -93,13 +93,13 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByCha
             return false;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
-        bool ident = item.AimingTuple.Value.ActivationScript.ExecuteIdentifiedScriptDirection(dir);
+        IdentifiedResult identifiedResult = item.AimingTuple.Value.ActivationScript.ExecuteIdentifiedScriptDirection(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried
         item.ObjectTried();
         // If we just discovered the item's flavor, mark it as so
-        if (ident && !item.IsFlavorAware)
+        if (identifiedResult.IsIdentified && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

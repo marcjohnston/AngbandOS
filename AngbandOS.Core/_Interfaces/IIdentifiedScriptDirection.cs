@@ -16,5 +16,5 @@ internal interface IIdentifiedScriptDirection
     /// Returns true, if the script performs an action that would identify the item that performed the action; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    bool ExecuteIdentifiedScriptDirection(int dir);
+    IdentifiedResult ExecuteIdentifiedScriptDirection(int dir);
 }

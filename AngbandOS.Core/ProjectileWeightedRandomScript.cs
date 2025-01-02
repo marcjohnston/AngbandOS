@@ -18,7 +18,7 @@ internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<P
         return Choose().ExecuteDirectionalActivationScript(item, direction);
     }
 
-    public bool ExecuteIdentifiedScriptDirection(int dir)
+    public IdentifiedResult ExecuteIdentifiedScriptDirection(int dir)
     {
         return Choose().ExecuteIdentifiedScriptDirection(dir);
     }

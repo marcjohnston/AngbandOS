@@ -145,9 +145,9 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
     /// </summary>
     /// <param name="direction"></param>
     /// <returns>True, if the projectile can be identified by the player; false, otherwise.</returns>
-    public bool ExecuteIdentifiedScriptDirection(int direction)
+    public IdentifiedResult ExecuteIdentifiedScriptDirection(int direction)
     {
-        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
+        return ExecuteScriptWithPreAndPostMessages<IdentifiedResult>(() =>
         {
             return ExecuteTargeted(direction);
         });
@@ -164,8 +164,8 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
     {
         return ExecuteScriptWithPreAndPostMessages<IdentifiedAndUsedResult>(() =>
         {
-            bool isIdentified = ExecuteTargeted(direction);
-            return new IdentifiedAndUsedResult(isIdentified, true);
+            IdentifiedResult identifiedResult = ExecuteTargeted(direction);
+            return new IdentifiedAndUsedResult(identifiedResult.IsIdentified, true);
         });
     }
 
@@ -240,15 +240,16 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
                     {
                         return new IdentifiedAndUsedResult(false, false);
                     }
-                    bool identified = ExecuteIdentifiedScriptDirection(direction);
-                    return new IdentifiedAndUsedResult(identified, true);
+                    IdentifiedResult identifiedResult = ExecuteIdentifiedScriptDirection(direction);
+                    return new IdentifiedAndUsedResult(identifiedResult.IsIdentified, true);
                 }
             case NonDirectionalProjectileModeEnum.AllDirections:
                 {
                     bool identified = false;
                     foreach (int direction in Game.OrderedDirection)
                     {
-                        if (ExecuteIdentifiedScriptDirection(direction))
+                        IdentifiedResult identifiedResult = ExecuteIdentifiedScriptDirection(direction);
+                        if (identifiedResult.IsIdentified)
                         {
                             identified = true;
                         }
@@ -287,12 +288,13 @@ internal abstract class ProjectileScript : IGetKey, IProjectile
         }
     }
 
-    private bool ExecuteTargeted(int direction)
+    private IdentifiedResult ExecuteTargeted(int direction)
     {
         int radius = RadiusRoll.Get(Game.UseRandom);
         int damage = DamageRoll.Get(Game.UseRandom);
         bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
-        return Identified ?? hitSuccess;
+        bool isIdentified = Identified ?? hitSuccess;
+        return new IdentifiedResult(isIdentified);
     }
     #endregion
 }

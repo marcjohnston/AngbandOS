@@ -8021,7 +8021,7 @@ public bool IsDead = false;
         castedScript.ExecuteScript();
     }
 
-    public bool RunIdentifiedScriptDirection(string scriptName, int dir)
+    public IdentifiedResult RunIdentifiedScriptDirection(string scriptName, int dir)
     {
         IIdentifiedScriptDirection script = SingletonRepository.Get<IIdentifiedScriptDirection>(scriptName);
         return script.ExecuteIdentifiedScriptDirection(dir);
