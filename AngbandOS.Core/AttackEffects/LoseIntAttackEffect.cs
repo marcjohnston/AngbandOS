@@ -13,12 +13,13 @@ internal class LoseIntAttackEffect : AttackEffect
     private LoseIntAttackEffect(Game game) : base(game) { }
     public override int Power => 0;
     public override string Description => "reduce intelligence";
-    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool identified, ref int damage, ref bool blinked)
     {
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence))
+        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
     }
 }

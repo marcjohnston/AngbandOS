@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreCharismaScript : Script, INoticeableScript
+internal class RestoreCharismaScript : Script, IIdentifiedScript
 {
     private RestoreCharismaScript(Game game) : base(game) { }
 
@@ -16,9 +16,10 @@ internal class RestoreCharismaScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Restore charisma restores your charisma
-        return Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
+        bool isIdentified = Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
+        return new IdentifiedResult(isIdentified);
     }
 }

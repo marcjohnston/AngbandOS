@@ -8,27 +8,27 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, INoticeableScript
+internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, IIdentifiedScript
 {
     private Heroism1d25p25RestoreHealth10ResetFearScript(Game game) : base(game) { }
 
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool noticed = false;
+        bool isIdentified = false;
         // Heroism removes fear, cures 10 health, and gives you timed heroism
         if (Game.FearTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.HeroismTimer.AddTimer(Game.DieRoll(25) + 25))
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.RestoreHealth(10))
         {
-            noticed = true;
+            isIdentified = true;
         }
-        return noticed;
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -37,6 +37,6 @@ internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, I
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteNoticeableScript();
+        ExecuteIdentifiedScript();
     }
 }

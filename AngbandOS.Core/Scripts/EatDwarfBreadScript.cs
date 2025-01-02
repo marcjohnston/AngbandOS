@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatDwarfBreadScript : Script, IEatScript
+internal class EatDwarfBreadScript : Script, IIdentifiedScript
 {
     private EatDwarfBreadScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatDwarfBreadScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         Game.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
         return new IdentifiedResult(true);

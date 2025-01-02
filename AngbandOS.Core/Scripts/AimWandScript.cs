@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AimWandScript : Script, IScript, IGameCommandScript, ISuccessByChanceScript
+internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessByChanceScript
 {
     private AimWandScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class AimWandScript : Script, IScript, IGameCommandScript, ISuccessByCh
     /// Executes the aim wand script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteSuccessByChanceScript();
         return new RepeatableResult(false);

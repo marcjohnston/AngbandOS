@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SeeInvisible1d12p12Script : Script, INoticeableScript
+internal class SeeInvisible1d12p12Script : Script, IIdentifiedScript
 {
     private SeeInvisible1d12p12Script(Game game) : base(game) { }
 
@@ -16,9 +16,10 @@ internal class SeeInvisible1d12p12Script : Script, INoticeableScript
     /// Adds between 24 and 48 turns of see invisibility.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Detect invisible gives you times see invisibility
-        return Game.SeeInvisibilityTimer.AddTimer(12 + Game.DieRoll(12));
+        bool isIdentified = Game.SeeInvisibilityTimer.AddTimer(12 + Game.DieRoll(12));
+        return new IdentifiedResult(isIdentified);
     }
 }

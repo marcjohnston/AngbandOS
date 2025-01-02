@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuaffScript : Script, IScript, IGameCommandScript
+internal class QuaffScript : Script, IScript, IRepeatableScript
 {
     private QuaffScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class QuaffScript : Script, IScript, IGameCommandScript
     /// Executes the quaff script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);
@@ -51,7 +51,7 @@ internal class QuaffScript : Script, IScript, IGameCommandScript
         int itemLevel = item.LevelNormallyFound;
 
         // Do the actual potion effect
-        bool noticed = item.QuaffTuple.Value.QuaffScript.ExecuteNoticeableScript();
+        IdentifiedResult identifiedResult = item.QuaffTuple.Value.QuaffScript.ExecuteIdentifiedScript();
 
         // Skeletons are messy drinkers
         Game.Race.Quaff(item);
@@ -59,7 +59,7 @@ internal class QuaffScript : Script, IScript, IGameCommandScript
 
         // We may now know the potion's type
         item.ObjectTried();
-        if (noticed && !item.IsFlavorAware)
+        if (identifiedResult.IsIdentified && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistCold1d10p10Script : Script, INoticeableScript
+internal class ResistCold1d10p10Script : Script, IIdentifiedScript
 {
     private ResistCold1d10p10Script(Game game) : base(game) { }
 
@@ -16,9 +16,10 @@ internal class ResistCold1d10p10Script : Script, INoticeableScript
     /// Executes the script.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Resist cold gives you timed frost resistance
-        return Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        bool isIdentified = Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        return new IdentifiedResult(isIdentified);
     }
 }

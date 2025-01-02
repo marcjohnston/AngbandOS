@@ -13,12 +13,13 @@ internal class LoseWisAttackEffect : AttackEffect
     private LoseWisAttackEffect(Game game) : base(game) { }
     public override int Power => 0;
     public override string Description => "reduce wisdom";
-    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool identified, ref int damage, ref bool blinked)
     {
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom))
+        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
     }
 }

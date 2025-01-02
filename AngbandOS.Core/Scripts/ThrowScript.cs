@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ThrowScript : Script, IScript, IGameCommandScript
+internal class ThrowScript : Script, IScript, IRepeatableScript
 {
     private ThrowScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ThrowScript : Script, IScript, IGameCommandScript
     /// Executes the throw script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

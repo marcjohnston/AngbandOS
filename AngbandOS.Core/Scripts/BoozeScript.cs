@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BoozeScript : Script, INoticeableScript
+internal class BoozeScript : Script, IIdentifiedScript
 {
     private BoozeScript(Game game) : base(game) { }
 
@@ -16,29 +16,29 @@ internal class BoozeScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool noticed = false;
+        bool isIdentified = false;
 
         // Confusion makes you confused and possibly other effects
         if (!(Game.HasConfusionResistance || Game.HasChaosResistance))
         {
             if (Game.ConfusedTimer.AddTimer(Game.RandomLessThan(20) + 15))
             {
-                noticed = true;
+                isIdentified = true;
             }
             // 50% chance of having hallucinations
             if (Game.DieRoll(2) == 1)
             {
                 if (Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(150) + 150))
                 {
-                    noticed = true;
+                    isIdentified = true;
                 }
             }
             // 1 in 13 chance of blacking out and waking up somewhere else
             if (Game.DieRoll(13) == 1)
             {
-                noticed = true;
+                isIdentified = true;
                 // 1 in 3 chance of losing your memories after blacking out
                 if (Game.DieRoll(3) == 1)
                 {
@@ -54,6 +54,6 @@ internal class BoozeScript : Script, INoticeableScript
                 Game.MsgPrint("You can't remember a thing, or how you got here!");
             }
         }
-        return noticed;
+        return new IdentifiedResult(isIdentified);
     }
 }

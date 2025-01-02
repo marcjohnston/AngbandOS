@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Interfaces;
 /// Represents the interface a script needs to implement to particpate in repeatable scripts.  In-game player commands must implement this interface.  Store commands and
 /// wizard commands do not require this interface.
 /// </summary>
-internal interface IGameCommandScript
+internal interface IRepeatableScript
 {
     /// <summary>
     /// Returns true, if the script can be repeated.  The ability to repeat a command should be determined by whether or not the script failed due to chance or was successful.  
@@ -19,5 +19,5 @@ internal interface IGameCommandScript
     /// Scripts that succeed and can have additional effect if repeated should also return true.  (e.g. run)
     /// </summary>
     /// <returns></returns>
-    RepeatableResult ExecuteGameCommandScript();
+    RepeatableResult ExecuteRepeatableScript();
 }

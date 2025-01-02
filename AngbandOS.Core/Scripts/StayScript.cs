@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StayScript : Script, IScript, IGameCommandScript
+internal class StayScript : Script, IScript, IRepeatableScript
 {
     private StayScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class StayScript : Script, IScript, IGameCommandScript
     /// Executes the stay script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

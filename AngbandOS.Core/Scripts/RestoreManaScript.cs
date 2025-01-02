@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreManaScript : Script, INoticeableScript
+internal class RestoreManaScript : Script, IIdentifiedScript
 {
     private RestoreManaScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RestoreManaScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Restore mana restores your to maximum mana
         if (Game.Mana.IntValue < Game.MaxMana.IntValue)
@@ -24,8 +24,8 @@ internal class RestoreManaScript : Script, INoticeableScript
             Game.Mana.IntValue = Game.MaxMana.IntValue;
             Game.FractionalMana = 0;
             Game.MsgPrint("Your feel your head clear.");
-            return true;
+            return new IdentifiedResult(true);
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 }

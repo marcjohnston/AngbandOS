@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StayAndPickupScript : Script, IScript, IGameCommandScript
+internal class StayAndPickupScript : Script, IScript, IRepeatableScript
 {
     private StayAndPickupScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class StayAndPickupScript : Script, IScript, IGameCommandScript
     /// Executes the stay and pickup script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

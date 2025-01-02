@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ShowManualScript : Script, IScript, IGameCommandScript
+internal class ShowManualScript : Script, IScript, IRepeatableScript
 {
     private ShowManualScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ShowManualScript : Script, IScript, IGameCommandScript
     /// Executes the show manual script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

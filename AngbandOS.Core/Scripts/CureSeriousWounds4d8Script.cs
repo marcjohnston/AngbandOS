@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureSeriousWounds4d8Script : Script, INoticeableScript
+internal class CureSeriousWounds4d8Script : Script, IIdentifiedScript
 {
     private CureSeriousWounds4d8Script(Game game) : base(game) { }
 
@@ -16,28 +16,28 @@ internal class CureSeriousWounds4d8Script : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
 
         // Cure serious wounds heals you 4d8 health, cures blindness and confusion, and
         // reduces bleeding
         if (Game.RestoreHealth(Game.DiceRoll(4, 8)))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.BlindnessTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.ConfusedTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 50))
         {
-            identified = true;
+            isIdentified = true;
         }
-        return identified;
+        return new IdentifiedResult(isIdentified);
     }
 }

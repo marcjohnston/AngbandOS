@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistanceScript : Script, INoticeableScript
+internal class ResistanceScript : Script, IIdentifiedScript
 {
     private ResistanceScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ResistanceScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Resistance gives you all timed resistances
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
@@ -24,6 +24,6 @@ internal class ResistanceScript : Script, INoticeableScript
         Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return true;
+        return new IdentifiedResult(true);
     }
 }

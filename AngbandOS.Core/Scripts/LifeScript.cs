@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LifeScript : Script, INoticeableScript
+internal class LifeScript : Script, IIdentifiedScript
 {
     private LifeScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LifeScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Life heals you 5000 health, removes experience and ability score drains, and
         // cures blindness, confusion, stun, poison, and bleeding
@@ -35,6 +35,6 @@ internal class LifeScript : Script, INoticeableScript
         Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
         Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
         Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
-        return true;
+        return new IdentifiedResult(true);
     }
 }

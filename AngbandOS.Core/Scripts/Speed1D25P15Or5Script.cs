@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Speed1D25P15Or5Script : Script, INoticeableScript
+internal class Speed1D25P15Or5Script : Script, IIdentifiedScript
 {
     private Speed1D25P15Or5Script(Game game) : base(game) { }
 
@@ -16,20 +16,20 @@ internal class Speed1D25P15Or5Script : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Speed temporarily hastes you.  But it is not additive.
         if (Game.HasteTimer.Value == 0)
         {
             if (Game.HasteTimer.SetTimer(Game.DieRoll(25) + 15))
             {
-                return true;
+                return new IdentifiedResult(true);
             }
         }
         else
         {
             Game.HasteTimer.AddTimer(5);
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 }

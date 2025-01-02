@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpecialEnlightenmentScript : Script, INoticeableScript
+internal class SpecialEnlightenmentScript : Script, IIdentifiedScript
 {
     private SpecialEnlightenmentScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SpecialEnlightenmentScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // *Enlightenment* shows you the whole level, increases your intelligence and
         // wisdom, identifies all your items, and detects everything
@@ -33,6 +33,6 @@ internal class SpecialEnlightenmentScript : Script, INoticeableScript
         Game.RunScript(nameof(DetectNormalObjectsScript));
         Game.RunScript(nameof(IdentifyAllItemsScript));
         Game.RunScript(nameof(SelfKnowledgeScript));
-        return true;
+        return new IdentifiedResult(true);
     }
 }

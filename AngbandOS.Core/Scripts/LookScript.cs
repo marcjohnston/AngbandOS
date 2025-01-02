@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LookScript : Script, IScript, IGameCommandScript
+internal class LookScript : Script, IScript, IRepeatableScript
 {
     private LookScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LookScript : Script, IScript, IGameCommandScript
     /// Executes the look script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

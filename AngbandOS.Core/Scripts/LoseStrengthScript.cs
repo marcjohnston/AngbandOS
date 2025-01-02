@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LoseStrengthScript : Script, INoticeableScript
+internal class LoseStrengthScript : Script, IIdentifiedScript
 {
     private LoseStrengthScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class LoseStrengthScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Weakness tries to reduce your strength
         return Game.TryDecreasingAbilityScore(AbilityEnum.Strength);

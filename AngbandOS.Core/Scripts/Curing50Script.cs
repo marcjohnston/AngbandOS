@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Curing50Script : Script, INoticeableScript
+internal class Curing50Script : Script, IIdentifiedScript
 {
     private Curing50Script(Game game) : base(game) { }
 
@@ -16,39 +16,40 @@ internal class Curing50Script : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool noticed = false;
+        bool isIdentified = false;
+
         // Curing heals you 50 health, and cures blindness, confusion, stun, poison,
         // bleeding, and hallucinations
         if (Game.RestoreHealth(50))
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.BlindnessTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.PoisonTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.ConfusedTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.StunTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.HallucinationsTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
-        return noticed;
+        return new IdentifiedResult(isIdentified);
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestoreIntelligenceScript : Script, INoticeableScript
+internal class RestoreIntelligenceScript : Script, IIdentifiedScript
 {
     private RestoreIntelligenceScript(Game game) : base(game) { }
 
@@ -16,9 +16,10 @@ internal class RestoreIntelligenceScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Restore intelligence restores your intelligence
-        return Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
+        bool isIdentified = Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
+        return new IdentifiedResult(isIdentified);
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WieldScript : Script, IScript, IGameCommandScript, IScriptStore
+internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
 {
     private WieldScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class WieldScript : Script, IScript, IGameCommandScript, IScriptStore
     /// Executes the wield script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

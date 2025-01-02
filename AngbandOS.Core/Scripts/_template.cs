@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class _template : Script, IScript, IGameCommandScript, IScriptStore, IEatScript, INoticeableScript, ICancellableScript
+internal class _template : Script, IScript, IRepeatableScript, IScriptStore, IIdentifiedScript, ICancellableScript
 {
     private _template(Game game) : base(game) { }
 
@@ -24,7 +24,7 @@ internal class _template : Script, IScript, IGameCommandScript, IScriptStore, IE
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);
@@ -34,10 +34,10 @@ internal class _template : Script, IScript, IGameCommandScript, IScriptStore, IE
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         ExecuteScript();
-        return false;
+        return new IdentifiedResult(false);
     }
 
     /// <summary>
@@ -48,16 +48,6 @@ internal class _template : Script, IScript, IGameCommandScript, IScriptStore, IE
     {
         ExecuteScript();
         return false;
-    }
-
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public IdentifiedResult ExecuteEatScript()
-    {
-        ExecuteScript();
-        return new IdentifiedResult(false);
     }
 
     /// <summary>

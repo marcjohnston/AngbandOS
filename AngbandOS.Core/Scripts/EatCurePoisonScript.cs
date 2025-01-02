@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatCurePoisonScript : Script, IEatScript
+internal class EatCurePoisonScript : Script, IIdentifiedScript
 {
     private EatCurePoisonScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatCurePoisonScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.PoisonTimer.ResetTimer())

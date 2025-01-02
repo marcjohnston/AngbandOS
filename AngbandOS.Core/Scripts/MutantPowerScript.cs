@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MutantPowerScript : Script, IScript, IGameCommandScript
+internal class MutantPowerScript : Script, IScript, IRepeatableScript
 {
     private MutantPowerScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class MutantPowerScript : Script, IScript, IGameCommandScript
     /// Executes the mutant power script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

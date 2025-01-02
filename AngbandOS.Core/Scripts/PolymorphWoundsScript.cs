@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PolymorphWoundsScript : Script, IScript, IGameCommandScript
+internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
 {
     private PolymorphWoundsScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class PolymorphWoundsScript : Script, IScript, IGameCommandScript
     /// Executes the polymorph-wounds script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

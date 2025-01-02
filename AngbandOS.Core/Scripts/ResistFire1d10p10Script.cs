@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResistFire1d10p10Script : Script, INoticeableScript
+internal class ResistFire1d10p10Script : Script, IIdentifiedScript
 {
     private ResistFire1d10p10Script(Game game) : base(game) { }
 
@@ -16,9 +16,10 @@ internal class ResistFire1d10p10Script : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Resist heat gives you timed fire resistance
-        return Game.FireResistanceTimer.AddTimer(Game.DieRoll(10) + 10);
+        bool isIdentified = Game.FireResistanceTimer.AddTimer(Game.DieRoll(10) + 10);
+        return new IdentifiedResult(isIdentified);
     }
 }

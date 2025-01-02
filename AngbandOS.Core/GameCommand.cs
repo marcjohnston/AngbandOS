@@ -23,7 +23,7 @@ internal abstract class GameCommand : IGetKey
     public string GetKey => Key;
     public void Bind()
     {
-        ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IGameCommandScript>(ExecuteScriptName);
+        ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IRepeatableScript>(ExecuteScriptName);
     }
 
     public abstract char KeyChar { get; }
@@ -47,7 +47,7 @@ internal abstract class GameCommand : IGetKey
     /// Returns an IRepeatableScript script for the game command to execute, or null, if the game command does not do anything.  This property is bound from the ExecuteScriptName
     /// property during the bind phase.
     /// </summary>
-    public IGameCommandScript? ExecuteScript { get; private set; }
+    public IRepeatableScript? ExecuteScript { get; private set; }
 
     public string ToJson()
     {

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnlightenmentScript : Script, INoticeableScript
+internal class EnlightenmentScript : Script, IIdentifiedScript
 {
     private EnlightenmentScript(Game game) : base(game) { }
 
@@ -16,11 +16,11 @@ internal class EnlightenmentScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Enlightenment shows you the whole level
         Game.MsgPrint("An image of your surroundings forms in your mind...");
         Game.RunScript(nameof(LightScript));
-        return true;
+        return new IdentifiedResult(true);
     }
 }

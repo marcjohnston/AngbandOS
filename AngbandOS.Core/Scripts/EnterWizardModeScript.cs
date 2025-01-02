@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnterWizardModeScript : Script, IScript, IGameCommandScript
+internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
 {
     private EnterWizardModeScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EnterWizardModeScript : Script, IScript, IGameCommandScript
     /// Executes the wizard mode script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

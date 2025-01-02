@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents the interface a script needs to implement to particpate in scripts that can potentially identify an object.
+/// Represents the interface that a script needs to implement to particpate in scripts that return an IdentifiedResult if the action it performs can by identify by the player.
 /// </summary>
-internal interface IEatScript // TODO: This is the same as the INoticeable??
+internal interface IIdentifiedScript
 { 
     /// <summary>
     /// Returns true, if the script performs an action that would identify the item; false, otherwise. 
     /// </summary>
     /// <returns></returns>
-    IdentifiedResult ExecuteEatScript();
+    IdentifiedResult ExecuteIdentifiedScript();
 }

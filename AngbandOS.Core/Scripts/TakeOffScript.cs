@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TakeOffScript : Script, IScript, IGameCommandScript, IScriptStore
+internal class TakeOffScript : Script, IScript, IRepeatableScript, IScriptStore
 {
     private TakeOffScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class TakeOffScript : Script, IScript, IGameCommandScript, IScriptStore
     /// Executes the take-off script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatWarpstoneScript : Script, IEatScript
+internal class EatWarpstoneScript : Script, IIdentifiedScript
 {
     private EatWarpstoneScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatWarpstoneScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.MsgPrint("That tastes... funky.");

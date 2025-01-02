@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResetPoisonScript : Script, INoticeableScript
+internal class ResetPoisonScript : Script, IIdentifiedScript
 {
     private ResetPoisonScript(Game game) : base(game) { }
 
@@ -16,9 +16,10 @@ internal class ResetPoisonScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Cure poison removes any poison you have
-        return Game.PoisonTimer.ResetTimer();
+        bool isIdentified = Game.PoisonTimer.ResetTimer();
+        return new IdentifiedResult(isIdentified);
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Script, INoticeableScript
+internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Script, IIdentifiedScript
 {
     private Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript(Game game) : base(game) { }
 
@@ -16,36 +16,36 @@ internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Sc
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool noticed = false;
+        bool isIdentified = false;
 
         // Healing heals you 300 health, and cures blindness, confusion, stun, poison, and bleeding
         if (Game.RestoreHealth(300))
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.BlindnessTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.ConfusedTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.PoisonTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.StunTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.ResetTimer())
         {
-            noticed = true;
+            isIdentified = true;
         }
 
-        return noticed;
+        return new IdentifiedResult(isIdentified);
     }
 }

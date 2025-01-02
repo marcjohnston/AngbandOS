@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SelectItemAndEatScript : Script, IScript, IGameCommandScript
+internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
 {
     private SelectItemAndEatScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SelectItemAndEatScript : Script, IScript, IGameCommandScript
     /// Executes the eat script and returns false because the process shouldn't be repeated.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);
@@ -50,7 +50,7 @@ internal class SelectItemAndEatScript : Script, IScript, IGameCommandScript
         int itemLevel = item.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
-        IdentifiedResult eatResult = item.EatScript.ExecuteEatScript();
+        IdentifiedResult eatResult = item.EatScript.ExecuteIdentifiedScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 

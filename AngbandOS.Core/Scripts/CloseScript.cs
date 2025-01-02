@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CloseScript : Script, IScript, IGameCommandScript
+internal class CloseScript : Script, IScript, IRepeatableScript
 {
     private CloseScript(Game game) : base(game) { }
 
@@ -18,14 +18,14 @@ internal class CloseScript : Script, IScript, IGameCommandScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteGameCommandScript();
+        ExecuteRepeatableScript();
     }
 
     /// <summary>
     /// Executes the close script and returns true, if the close failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         bool isRepeatable = false;
         // If there's only one door, assume we mean that one and don't ask for a direction

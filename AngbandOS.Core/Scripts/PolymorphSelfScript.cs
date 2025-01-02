@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PolymorphSelfScript : Script, IScript, IGameCommandScript
+internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
 {
     private PolymorphSelfScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class PolymorphSelfScript : Script, IScript, IGameCommandScript
     /// Executes the polymorph-self script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

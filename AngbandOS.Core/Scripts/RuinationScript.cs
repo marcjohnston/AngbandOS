@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RuinationScript : Script, INoticeableScript
+internal class RuinationScript : Script, IIdentifiedScript
 {
     private RuinationScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RuinationScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Ruination does 10d10 damage and reduces all your ability scores, bypassing
         // sustains and divine protection
@@ -28,6 +28,6 @@ internal class RuinationScript : Script, INoticeableScript
         Game.DecreaseAbilityScore(AbilityEnum.Strength, 25, true);
         Game.DecreaseAbilityScore(AbilityEnum.Charisma, 25, true);
         Game.DecreaseAbilityScore(AbilityEnum.Intelligence, 25, true);
-        return true;
+        return new IdentifiedResult(true);
     }
 }

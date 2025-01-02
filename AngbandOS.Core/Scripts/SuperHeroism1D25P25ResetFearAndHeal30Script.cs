@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, INoticeableScript, IScript
+internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, IIdentifiedScript, IScript
 {
     private SuperHeroism1D25P25ResetFearAndHeal30Script(Game game) : base(game) { }
 
@@ -16,24 +16,24 @@ internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, INoticeable
     /// Restores 30 points of health, removes fear and adds between 25 and 50 turns of super heroism.  Returns true, if any action is noticed; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
 
         // Berserk strength removes fear, heals 30 health, and gives you timed super heroism
         if (Game.FearTimer.ResetTimer())
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.SuperheroismTimer.AddTimer(Game.DieRoll(25) + 25))
         {
-            identified = true;
+            isIdentified = true;
         }
         if (Game.RestoreHealth(30))
         {
-            identified = true;
+            isIdentified = true;
         }
-        return identified;
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -41,6 +41,6 @@ internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, INoticeable
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteNoticeableScript();
+        ExecuteIdentifiedScript();
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SleepScript : Script, INoticeableScript
+internal class SleepScript : Script, IIdentifiedScript
 {
     private SleepScript(Game game) : base(game) { }
 
@@ -16,16 +16,16 @@ internal class SleepScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Sleep paralyses you
         if (!Game.HasFreeAction)
         {
             if (Game.ParalysisTimer.AddTimer(Game.RandomLessThan(4) + 4))
             {
-                return true;
+                return new IdentifiedResult(true);
             }
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 }

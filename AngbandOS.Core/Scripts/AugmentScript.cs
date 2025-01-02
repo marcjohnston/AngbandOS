@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AugmentScript : Script, INoticeableScript
+internal class AugmentScript : Script, IIdentifiedScript
 {
     private AugmentScript(Game game) : base(game) { }
 
@@ -16,35 +16,41 @@ internal class AugmentScript : Script, INoticeableScript
     /// Augments all ability scores and returns true, if any ability score was increased; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool identified = false;
+        bool isIdentified = false;
 
         // Augmentation increases all ability scores
-        if (Game.TryIncreasingAbilityScore(AbilityEnum.Strength))
+        IdentifiedResult identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Strength);
+        if (identifiedResult.IsIdentified)
         {
-            identified = true;
+            isIdentified = true;
         }
-        if (Game.TryIncreasingAbilityScore(AbilityEnum.Intelligence))
+        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Intelligence);
+        if (identifiedResult.IsIdentified)
         {
-            identified = true;
+            isIdentified = true;
         }
-        if (Game.TryIncreasingAbilityScore(AbilityEnum.Wisdom))
+        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Wisdom);
+        if (identifiedResult.IsIdentified)
         {
-            identified = true;
+            isIdentified = true;
         }
-        if (Game.TryIncreasingAbilityScore(AbilityEnum.Dexterity))
+        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Dexterity);
+        if (identifiedResult.IsIdentified)
         {
-            identified = true;
+            isIdentified = true;
         }
-        if (Game.TryIncreasingAbilityScore(AbilityEnum.Constitution))
+        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Constitution);
+        if (identifiedResult.IsIdentified)
         {
-            identified = true;
+            isIdentified = true;
         }
-        if (Game.TryIncreasingAbilityScore(AbilityEnum.Charisma))
+        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Charisma);
+        if (identifiedResult.IsIdentified)
         {
-            identified = true;
+            isIdentified = true;
         }
-        return identified;
+        return new IdentifiedResult(isIdentified);
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IocaineScript : Script, INoticeableScript
+internal class IocaineScript : Script, IIdentifiedScript
 {
     private IocaineScript(Game game) : base(game) { }
 
@@ -16,11 +16,11 @@ internal class IocaineScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Iocaine simply does 5000 damage
         Game.MsgPrint("A feeling of Death flows through your body.");
         Game.TakeHit(5000, "a potion of Death");
-        return true;
+        return new IdentifiedResult(true);
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SaltWaterScript : Script, INoticeableScript
+internal class SaltWaterScript : Script, IIdentifiedScript
 {
     private SaltWaterScript(Game game) : base(game) { }
 
@@ -16,13 +16,13 @@ internal class SaltWaterScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Salt water makes you vomit, but gets rid of poison
         Game.MsgPrint("The saltiness makes you vomit!");
         Game.SetFood(Constants.PyFoodStarve - 1);
         Game.PoisonTimer.ResetTimer();
         Game.ParalysisTimer.AddTimer(4);
-        return true;
+        return new IdentifiedResult(true);
     }
 }

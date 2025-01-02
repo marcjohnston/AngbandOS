@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GainExperienceScript : Script, INoticeableScript
+internal class GainExperienceScript : Script, IIdentifiedScript
 {
     private GainExperienceScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GainExperienceScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Experience increases your experience points by 50%, with a minimum of +10 and
         // maximuum of +10,000
@@ -29,8 +29,8 @@ internal class GainExperienceScript : Script, INoticeableScript
             }
             Game.MsgPrint("You feel more experienced.");
             Game.GainExperience(ee);
-            return true;
+            return new IdentifiedResult(true);
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 }

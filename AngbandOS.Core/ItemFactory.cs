@@ -187,7 +187,7 @@ internal abstract class ItemFactory : ItemEnhancement
         }
 
         InitialGoldPiecesRoll = Game.ParseRollExpression(InitialGoldPiecesRollExpression);
-        EatScript = Game.SingletonRepository.GetNullable<IEatScript>(EatScriptBindingKey);
+        EatScript = Game.SingletonRepository.GetNullable<IIdentifiedScript>(EatScriptBindingKey);
 
         // If there is no DescriptionSyntax, use the Name as the default.
         _descriptionSyntax = DescriptionSyntax != null ? DescriptionSyntax : Name;
@@ -240,7 +240,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (QuaffBindingTuple != null)
         {
-            INoticeableScript quaffNoticeableScript = Game.SingletonRepository.Get<INoticeableScript>(QuaffBindingTuple.Value.QuaffScriptName);
+            IIdentifiedScript quaffNoticeableScript = Game.SingletonRepository.Get<IIdentifiedScript>(QuaffBindingTuple.Value.QuaffScriptName);
             IUnfriendlyScript? smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffBindingTuple.Value.SmashScriptName);
             int manaEquivalent = QuaffBindingTuple.Value.ManaEquivalent;
             QuaffTuple = (quaffNoticeableScript, smashUnfriendlyScript, manaEquivalent);
@@ -1404,7 +1404,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// The amount of mana needed to consume to keep the potion.
     /// 
     /// </summary>
-    public (INoticeableScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple { get; private set; } = null;
+    public (IIdentifiedScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple { get; private set; } = null;
 
     /// <summary>
     /// Returns the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property bound using
@@ -1463,7 +1463,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// Returns the script to be run when an item of this factory is eaten; or null, if items cannot be eaten.  This property is bound from the <see cref="EatScriptBindingKey"/> property
     /// during the bind phase.
     /// </summary>
-    public IEatScript? EatScript { get; private set; }
+    public IIdentifiedScript? EatScript { get; private set; }
 
     /// <summary>
     /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivationBindingTuple"/> property during the bind phase.

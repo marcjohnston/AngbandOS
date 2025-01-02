@@ -6292,7 +6292,7 @@ public bool IsDead = false;
                 bool isRepeatable = false;
                 if (command.ExecuteScript != null)
                 {
-                    RepeatableResult gameCommandResult = command.ExecuteScript.ExecuteGameCommandScript();
+                    RepeatableResult gameCommandResult = command.ExecuteScript.ExecuteRepeatableScript();
                     isRepeatable = gameCommandResult.IsRepeatable;
                 }
 
@@ -8063,8 +8063,8 @@ public bool IsDead = false;
     public bool RunIdentifiedScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        IEatScript castedScript = SingletonRepository.Get<IEatScript>(scriptName);
-        return castedScript.ExecuteEatScript().IsIdentified; // TODO: Fix this
+        IIdentifiedScript castedScript = SingletonRepository.Get<IIdentifiedScript>(scriptName);
+        return castedScript.ExecuteIdentifiedScript().IsIdentified; // TODO: Fix this
     }
 
     /// <summary>
@@ -14314,7 +14314,7 @@ public bool IsDead = false;
         }
     }
 
-    public bool TryDecreasingAbilityScore(int stat)
+    public IdentifiedResult TryDecreasingAbilityScore(int stat)
     {
         bool sust = false;
         switch (stat)
@@ -14364,35 +14364,35 @@ public bool IsDead = false;
         if (sust)
         {
             MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but the feeling passes.");
-            return true;
+            return new IdentifiedResult(true);
         }
         if (DieRoll(10) <= SingletonRepository.Get<God>(nameof(LobonGod)).AdjustedFavour)
         {
             MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
-            return true;
+            return new IdentifiedResult(true);
         }
         if (DecreaseAbilityScore(stat, 10, false))
         {
             MsgPrint($"You feel very {Constants.DescStatNeg[stat]}.");
-            return true;
+            return new IdentifiedResult(true);
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 
-    public bool TryIncreasingAbilityScore(int stat)
+    public IdentifiedResult TryIncreasingAbilityScore(int stat)
     {
         bool res = RestoreAbilityScore(stat);
         if (IncreaseAbilityScore(stat))
         {
             MsgPrint($"Wow!  You feel very {Constants.DescStatPos[stat]}!");
-            return true;
+            return new IdentifiedResult(true);
         }
         if (res)
         {
             MsgPrint($"You feel less {Constants.DescStatNeg[stat]}.");
-            return true;
+            return new IdentifiedResult(true);
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 
     /// <summary>

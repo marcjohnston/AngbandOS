@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Blindness1d100p100Script : Script, INoticeableScript
+internal class Blindness1d100p100Script : Script, IIdentifiedScript
 {
     private Blindness1d100p100Script(Game game) : base(game) { }
 
@@ -16,12 +16,13 @@ internal class Blindness1d100p100Script : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         if (!Game.HasBlindnessResistance)
         {
-            return Game.BlindnessTimer.AddTimer(Game.RandomLessThan(100) + 100);
+            bool isIdentified = Game.BlindnessTimer.AddTimer(Game.RandomLessThan(100) + 100);
+            return new IdentifiedResult(isIdentified);
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 }

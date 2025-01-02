@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewMapScript : Script, IScript, IGameCommandScript
+internal class ViewMapScript : Script, IScript, IRepeatableScript
 {
     private ViewMapScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ViewMapScript : Script, IScript, IGameCommandScript
     /// Executes the view map script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

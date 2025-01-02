@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class InventoryScript : Script, IScript, IGameCommandScript, IScriptStore
+internal class InventoryScript : Script, IScript, IRepeatableScript, IScriptStore
 {
     private InventoryScript(Game game) : base(game) { }
 
@@ -25,7 +25,7 @@ internal class InventoryScript : Script, IScript, IGameCommandScript, IScriptSto
     /// Executes the inventory script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

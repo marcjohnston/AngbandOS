@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class UseStaffScript : Script, IScript, IGameCommandScript
+internal class UseStaffScript : Script, IScript, IRepeatableScript
 {
     private UseStaffScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class UseStaffScript : Script, IScript, IGameCommandScript
     /// Executes the use staff script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

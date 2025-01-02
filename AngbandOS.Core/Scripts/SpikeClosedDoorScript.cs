@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpikeClosedDoorScript : Script, IScript, IGameCommandScript
+internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
 {
     private SpikeClosedDoorScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SpikeClosedDoorScript : Script, IScript, IGameCommandScript
     /// Executes the spike closed door script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

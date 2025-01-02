@@ -13,33 +13,39 @@ internal class LoseAllAttackEffect : AttackEffect
     private LoseAllAttackEffect(Game game) : base(game) { }
     public override int Power => 2;
     public override string Description => "reduce all stats";
-    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool identified, ref int damage, ref bool blinked) // TODO: Convert to function -- the OUT REF identified, damage and blinked parameters
     {
         // Try to decrease all six ability scores
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Strength))
+        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Strength);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity))
+        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Constitution))
+        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence))
+        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom))
+        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
-        if (Game.TryDecreasingAbilityScore(AbilityEnum.Charisma))
+        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Charisma);
+        if (identifiedResult.IsIdentified)
         {
-            obvious = true;
+            identified = true;
         }
     }
 }

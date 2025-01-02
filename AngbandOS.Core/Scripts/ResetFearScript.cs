@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ResetFearScript : Script, INoticeableScript
+internal class ResetFearScript : Script, IIdentifiedScript
 {
     private ResetFearScript(Game game) : base(game) { }
 
@@ -16,8 +16,9 @@ internal class ResetFearScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        return Game.FearTimer.ResetTimer();
+        bool isIdentified = Game.FearTimer.ResetTimer();
+        return new IdentifiedResult(isIdentified);
     }
 }

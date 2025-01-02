@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GoUpStairsScript : Script, IScript, IGameCommandScript
+internal class GoUpStairsScript : Script, IScript, IRepeatableScript
 {
     private GoUpStairsScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GoUpStairsScript : Script, IScript, IGameCommandScript
     /// Executes the go up stairs script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatRestoreStrengthScript : Script, IEatScript
+internal class EatRestoreStrengthScript : Script, IIdentifiedScript
 {
     private EatRestoreStrengthScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class EatRestoreStrengthScript : Script, IEatScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.TryRestoringAbilityScore(AbilityEnum.Strength))

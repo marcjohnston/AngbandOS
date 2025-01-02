@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class Poison1d5p10Script : Script, INoticeableScript
+internal class Poison1d5p10Script : Script, IIdentifiedScript
 {
     private Poison1d5p10Script(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class Poison1d5p10Script : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Poison simply poisons you
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
@@ -28,9 +28,9 @@ internal class Poison1d5p10Script : Script, INoticeableScript
             }
             else if (Game.PoisonTimer.AddTimer(Game.RandomLessThan(15) + 10))
             {
-                return true;
+                return new IdentifiedResult(true);
             }
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 }

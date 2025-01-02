@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ReadScrollScript : Script, IScript, IGameCommandScript
+internal class ReadScrollScript : Script, IScript, IRepeatableScript
 {
     private ReadScrollScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ReadScrollScript : Script, IScript, IGameCommandScript
     /// Executes the read scroll script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResult ExecuteRepeatableScript()
     {
         ExecuteScript();
         return new RepeatableResult(false);

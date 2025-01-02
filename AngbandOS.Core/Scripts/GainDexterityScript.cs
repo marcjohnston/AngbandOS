@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GainDexterityScript : Script, INoticeableScript
+internal class GainDexterityScript : Script, IIdentifiedScript
 {
     private GainDexterityScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class GainDexterityScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Dexterity increases your dexterity
         return Game.TryIncreasingAbilityScore(AbilityEnum.Dexterity);

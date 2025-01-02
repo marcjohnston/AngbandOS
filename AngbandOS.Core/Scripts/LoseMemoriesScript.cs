@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LoseMemoriesScript : Script, INoticeableScript
+internal class LoseMemoriesScript : Script, IIdentifiedScript
 {
     private LoseMemoriesScript(Game game) : base(game) { }
 
@@ -16,15 +16,15 @@ internal class LoseMemoriesScript : Script, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
         // Lose Memories reduces your experience
         if (!Game.HasHoldLife && Game.ExperiencePoints.IntValue > 0)
         {
             Game.MsgPrint("You feel your memories fade.");
             Game.LoseExperience(Game.ExperiencePoints.IntValue / 4);
-            return true;
+            return new IdentifiedResult(true);
         }
-        return false;
+        return new IdentifiedResult(false);
     }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureLightWounds2d8Script : Script, IScript, INoticeableScript
+internal class CureLightWounds2d8Script : Script, IScript, IIdentifiedScript
 {
     private CureLightWounds2d8Script(Game game) : base(game) { }
 
@@ -16,27 +16,27 @@ internal class CureLightWounds2d8Script : Script, IScript, INoticeableScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteNoticeableScript()
+    public IdentifiedResult ExecuteIdentifiedScript()
     {
-        bool noticed = false;
+        bool isIdentified = false;
         // Cure light wounds heals you 2d8 health and reduces bleeding
         if (Game.RestoreHealth(Game.DiceRoll(2, 8)))
         {
-            noticed = true;
+            isIdentified = true;
         }
         if (Game.BleedingTimer.AddTimer(-10))
         {
-            noticed = true;
+            isIdentified = true;
         }
-        return noticed;
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
-    /// Executes the <see cref="INoticeableScript"/> script and returns nothing.
+    /// Executes the <see cref="IIdentifiedScript"/> script and returns nothing.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteNoticeableScript();
+        ExecuteIdentifiedScript();
     }
 }
