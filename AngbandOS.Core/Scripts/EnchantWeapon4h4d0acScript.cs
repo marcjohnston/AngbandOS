@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnchantWeapon4h4d0acScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IStoreCommandScript
+internal class EnchantWeapon4h4d0acScript : Script, IScript, ICastSpellScript, IStoreCommandScript
 {
     private EnchantWeapon4h4d0acScript(Game game) : base(game) { }
 

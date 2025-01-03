@@ -10,7 +10,7 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IReadScrollOrUseStaffScript
+internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private DetectEvilMonstersScript(Game game) : base(game) { }
 

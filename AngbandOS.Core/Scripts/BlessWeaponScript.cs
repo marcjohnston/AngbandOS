@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BlessWeaponScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript
+internal class BlessWeaponScript : Script, IScript, ICastSpellScript
 {
     private BlessWeaponScript(Game game) : base(game) { }
 

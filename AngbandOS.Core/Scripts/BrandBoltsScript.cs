@@ -10,7 +10,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandBoltsScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IUsedScript, IActivateItemScript
+internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IUsedScript, IActivateItemScript
 {
     private BrandBoltsScript(Game game) : base(game) { }
 

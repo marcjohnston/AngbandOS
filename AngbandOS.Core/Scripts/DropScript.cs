@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DropScript : Script, IScript, ICastSpellScript, IGameCommandScript, ISuccessByChanceScript
+internal class DropScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private DropScript(Game game) : base(game) { }
 

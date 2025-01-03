@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HireAnEscortScript : Script, IScript, ICastSpellScript, IStoreCommandScript, ISuccessByChanceScript
+internal class HireAnEscortScript : Script, IScript, ICastSpellScript, IStoreCommandScript
 {
     private HireAnEscortScript(Game game) : base(game) { }
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandScript, ISuccessByChanceScript
+internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private AimWandScript(Game game) : base(game) { }
 

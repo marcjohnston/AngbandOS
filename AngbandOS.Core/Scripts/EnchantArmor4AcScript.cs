@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnhanceArmorScript : Script, IScript, ICastSpellScript, IStoreCommandScript, ISuccessByChanceScript
+internal class EnhanceArmorScript : Script, IScript, ICastSpellScript, IStoreCommandScript
 {
     private EnhanceArmorScript(Game game) : base(game) { }
 
