@@ -29,7 +29,7 @@ internal class TeleportLevelScrollItemFactory : ItemFactory
         (20, 1)
     };
     public override int Weight => 5;
-    protected override (string, int)? ActivationBindingTuple => (nameof(TeleportLevelScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(TeleportLevelScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

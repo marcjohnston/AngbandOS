@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class StupidityRingItemFactory : ItemFactory
 {
-    private StupidityRingItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private StupidityRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool IsBroken => true;
     /// <summary>

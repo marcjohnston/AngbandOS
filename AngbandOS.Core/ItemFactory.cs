@@ -161,6 +161,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
     public override void Bind()
     {
+        base.Bind();
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -212,11 +213,11 @@ internal abstract class ItemFactory : ItemEnhancement
             AimingTuple = (identifableDirectionalScript, initialChargeCountRoll, perChargeValue, manaValue);
         }
 
-        if (ActivationBindingTuple != null)
+        if (ReadBindingTuple != null)
         {
-            IReadScrollOrUseStaffScript identifableAndUsedScript = Game.SingletonRepository.Get<IReadScrollOrUseStaffScript>(ActivationBindingTuple.Value.ScriptName);
-            int manaValue = ActivationBindingTuple.Value.ManaValue;
-            ActivationTuple = (identifableAndUsedScript, manaValue);
+            IReadScrollOrUseStaffScript identifableAndUsedScript = Game.SingletonRepository.Get<IReadScrollOrUseStaffScript>(ReadBindingTuple.Value.ScriptName);
+            int manaValue = ReadBindingTuple.Value.ManaValue;
+            ReadTuple = (identifableAndUsedScript, manaValue);
         }
 
         RechargeScript = Game.SingletonRepository.GetNullable<IScriptItemInt>(RechargeScriptBindingKey);
@@ -770,7 +771,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// <summary>
     /// Returns true, if the item is a scroll.
     /// </summary>
-    public bool CanBeRead => ActivationTuple != null;
+    public bool CanBeRead => ReadTuple != null;
 
     public void CreateRandomArtifact(ItemCharacteristics characteristics, bool fromScroll)
     {
@@ -1466,12 +1467,16 @@ internal abstract class ItemFactory : ItemEnhancement
     public IEatOrQuaffScript? EatScript { get; private set; }
 
     /// <summary>
-    /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ActivationBindingTuple"/> property during the bind phase.
+    /// Returns the activation script for scrolls when read; or null, if the item cannot be read.  This property is bound from the <see cref="ReadBindingTuple"/> property during the bind phase.
     /// </summary>
-    public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ActivationTuple { get; private set; } = null;
+    public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ReadTuple { get; private set; } = null;
     #endregion
 
     #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects
+    public virtual bool NegativeBonusDamageRepresentsBroken => false;
+    public virtual bool NegativeBonusArmorClassRepresentsBroken => false;
+    public virtual bool NegativeBonusHitRepresentsBroken => false;
+
     protected virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; set; } = nameof(SlayingItemEnhancementWeightedRandom);
 
     /// <summary>
@@ -2016,9 +2021,12 @@ internal abstract class ItemFactory : ItemEnhancement
     public virtual bool IsConsumedWhenEaten => true;
 
     /// <summary>
-    /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ActivationTuple"/> 
+    /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ReadTuple"/> 
     /// property during the bind phase.
     /// </summary>
-    protected virtual (string ScriptName, int ManaValue)? ActivationBindingTuple => null;
+    /// <returns>
+    /// ManaValue:description Returns the amount of mana channelers can substitute instead of the scroll being used up.
+    /// </returns>
+    protected virtual (string ScriptName, int ManaValue)? ReadBindingTuple => null;
     #endregion
 }

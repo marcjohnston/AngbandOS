@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class IceRingItemFactory : ItemFactory
 {
-    private IceRingItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private IceRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? ActivationName => nameof(BallOfCold50r2Every1d20p20DirectionalActivation);
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]

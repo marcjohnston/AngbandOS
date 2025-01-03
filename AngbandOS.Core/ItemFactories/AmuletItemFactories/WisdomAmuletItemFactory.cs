@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class WisdomAmuletItemFactory : ItemFactory
 {
-    private WisdomAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private WisdomAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
 
 
     protected override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";

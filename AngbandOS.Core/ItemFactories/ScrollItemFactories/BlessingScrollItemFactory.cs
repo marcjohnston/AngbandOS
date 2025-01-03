@@ -30,7 +30,7 @@ internal class BlessingScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(Blessing1d12p6IdentifableAndUsedScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(Blessing1d12p6IdentifableAndUsedScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

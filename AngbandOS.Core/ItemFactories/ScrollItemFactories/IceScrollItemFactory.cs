@@ -31,7 +31,7 @@ internal class IceScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(Ice175R4IdentifableAndUsedScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(Ice175R4IdentifableAndUsedScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

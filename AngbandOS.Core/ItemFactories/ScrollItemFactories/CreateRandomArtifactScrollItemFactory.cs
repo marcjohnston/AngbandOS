@@ -30,7 +30,7 @@ internal class CreateRandomArtifactScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(CreateRandomArtifactIdentifableAndUsedScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(CreateRandomArtifactIdentifableAndUsedScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

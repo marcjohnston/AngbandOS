@@ -32,7 +32,7 @@ internal class IdentifyScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(IdentifyItemScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(IdentifyItemScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

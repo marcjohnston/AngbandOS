@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SustainWisdomRingItemFactory : ItemFactory
 {
-    private SustainWisdomRingItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private SustainWisdomRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Sustain Wisdom";

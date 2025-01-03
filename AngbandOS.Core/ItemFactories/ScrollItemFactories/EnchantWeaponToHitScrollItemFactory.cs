@@ -30,7 +30,7 @@ internal class EnchantWeaponToHitScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(EnchantWeaponToHit1IdentifableAndUsedScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(EnchantWeaponToHit1IdentifableAndUsedScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

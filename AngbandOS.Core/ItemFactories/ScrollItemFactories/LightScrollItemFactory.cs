@@ -31,7 +31,7 @@ internal class LightScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(LightArea2D8R2Script), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(LightArea2D8R2Script), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

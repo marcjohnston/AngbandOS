@@ -34,7 +34,7 @@ internal class CurseArmorScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(CurseArmorIdentifableAndUsedScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(CurseArmorIdentifableAndUsedScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

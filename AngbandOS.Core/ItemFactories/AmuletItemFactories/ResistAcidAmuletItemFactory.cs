@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ResistAcidAmuletItemFactory : ItemFactory
 {
-    private ResistAcidAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private ResistAcidAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "Resist Acid";

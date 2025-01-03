@@ -222,7 +222,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the deterministic set of fixed artifact characteristics.
     /// </summary>
-    private IItemCharacteristics FactoryItemCharacteristics;
+    private readonly IItemCharacteristics FactoryItemCharacteristics;
 
     /// <summary>
     /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
@@ -275,7 +275,7 @@ internal sealed class Item : IComparable<Item>
     public (IZapRodScript Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple => _factory.ZapTuple;
     public (IReadScrollOrUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
     public (IAimWandScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
-    public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ActivationTuple => _factory.ActivationTuple;
+    public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ReadTuple => _factory.ReadTuple;
     public Probability BreakageChanceProbability => _factory.BreakageChanceProbability;
     public int MissileDamageMultiplier => _factory.MissileDamageMultiplier;
     public bool CanBeRead => _factory.CanBeRead;
@@ -290,6 +290,9 @@ internal sealed class Item : IComparable<Item>
     public bool IsConsumedWhenEaten => _factory.IsConsumedWhenEaten;
     public IEatOrQuaffScript? EatScript => _factory.EatScript;
     private bool GetsDamageMultiplier => _factory.GetsDamageMultiplier;
+    public bool NegativeBonusDamageRepresentsBroken => _factory.NegativeBonusDamageRepresentsBroken;
+    public bool NegativeBonusArmorClassRepresentsBroken => _factory.NegativeBonusArmorClassRepresentsBroken;
+    public bool NegativeBonusHitRepresentsBroken => _factory.NegativeBonusHitRepresentsBroken;
 
     /// <summary>
     /// Returns the nutritional value in turns provided to the player, when eaten.
@@ -1215,7 +1218,19 @@ internal sealed class Item : IComparable<Item>
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
 
-        if (IsBroken || Characteristics.BonusDamage < 0 || Characteristics.BonusHit < 0 || Characteristics.BonusArmorClass < 0)
+        if (IsBroken)
+        {
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
+        }
+        if (NegativeBonusDamageRepresentsBroken && Characteristics.BonusDamage < 0)
+        {
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
+        }
+        if (NegativeBonusArmorClassRepresentsBroken && Characteristics.BonusArmorClass < 0)
+        {
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
+        }
+        if (NegativeBonusHitRepresentsBroken && Characteristics.BonusHit < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }

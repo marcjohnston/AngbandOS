@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ReflectionAmuletItemFactory : ItemFactory
 {
-    private ReflectionAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private ReflectionAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "Reflection";

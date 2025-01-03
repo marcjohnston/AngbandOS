@@ -33,7 +33,7 @@ internal class SatisfyHungerScrollItemFactory : ItemFactory
     };
     public override int Weight => 5;
 
-    protected override (string, int)? ActivationBindingTuple => (nameof(SatisfyHungerIdentifableAndUsedScript), 10);
+    protected override (string, int)? ReadBindingTuple => (nameof(SatisfyHungerIdentifableAndUsedScript), 10);
     protected override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     protected override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

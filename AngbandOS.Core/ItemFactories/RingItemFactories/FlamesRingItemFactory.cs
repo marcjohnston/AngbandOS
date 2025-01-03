@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class FlamesRingItemFactory : ItemFactory
 {
-    private FlamesRingItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private FlamesRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string? ActivationName => nameof(BallOfFire50r2AndResistFire1d20p20DirectionalActivation);
     protected override string SymbolBindingKey => nameof(EqualSignSymbol);

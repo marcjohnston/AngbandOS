@@ -10,7 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AggravateMonsterRingItemFactory : ItemFactory
 {
-    private AggravateMonsterRingItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusArmorClassRepresentsBroken => true;
+    public override bool NegativeBonusHitRepresentsBroken => true;
+    public override bool NegativeBonusDamageRepresentsBroken => true;    private AggravateMonsterRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool IsBroken => true;
     /// <summary>
