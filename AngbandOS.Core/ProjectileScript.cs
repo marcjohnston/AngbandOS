@@ -116,11 +116,8 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
     #region Interface Fulfillments - These fulfillments use the private implementations to satisfy the interfaces that the projectiles support.
     public bool ExecuteSuccessByChanceScript()
     {
-        return ExecuteScriptWithPreAndPostMessages<bool>(() =>
-        {
-            IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectional();
-            return readScrollAndUseStaffResult.IsIdentified;
-        });
+        IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectionalWithPreAndPostMessages();
+        return readScrollAndUseStaffResult.IsIdentified;
     }
 
     /// <summary>
@@ -132,11 +129,8 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
     /// <returns></returns>
     public UsedResult ExecuteDirectionalActivationScript(Item item, int direction)
     {
-        return ExecuteScriptWithPreAndPostMessages<UsedResult>(() =>
-        {
-            ExecuteTargeted(direction);
-            return new UsedResult(true); // Return true because the script was not cancelled.
-        });
+        ExecuteDirectionalWithPreAndPostMessages(direction);
+        return UsedResult.True;
     }
 
     /// <summary>
@@ -146,10 +140,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
     /// <returns>True, if the projectile can be identified by the player; false, otherwise.</returns>
     public IdentifiedResult ExecuteAimWandScript(int direction)
     {
-        return ExecuteScriptWithPreAndPostMessages<IdentifiedResult>(() =>
-        {
-            return ExecuteTargeted(direction);
-        });
+        return ExecuteDirectionalWithPreAndPostMessages(direction);
     }
 
     /// <summary>
@@ -161,39 +152,30 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
     /// </returns>
     public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int direction)
     {
-        return ExecuteScriptWithPreAndPostMessages<IdentifiedAndUsedResult>(() =>
-        {
-            IdentifiedResult identifiedResult = ExecuteTargeted(direction);
-            return new IdentifiedAndUsedResult(identifiedResult.IsIdentified, true);
-        });
+        IdentifiedResult identifiedResult = ExecuteTargeted(direction);
+        return new IdentifiedAndUsedResult(identifiedResult, true);
     }
 
     /// <summary>
-    /// Projects the projectile in a direction specified by the <see cref="NonDirectionalProjectileMode"/> property.
+    /// Uses the <see cref="NonDirectionalProjectileMode"/> property to project the projectile and return an <see cref="IdentifiedAndUsedResult"/>.
     /// </summary>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        return ExecuteScriptWithPreAndPostMessages<IdentifiedAndUsedResult>(() =>
-        {
-            return ExecuteNonDirectional();
-        });
+        return ExecuteNonDirectionalWithPreAndPostMessages();
     }
 
+    /// <summary>
+    /// Uses the <see cref="NonDirectionalProjectileMode"/> property to project the projectile and discards the return value.
+    /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptWithPreAndPostMessages(() =>
-        {
-            ExecuteNonDirectional();
-        });
+        ExecuteNonDirectionalWithPreAndPostMessages();
     }
 
     public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        return ExecuteScriptWithPreAndPostMessages<UsedResult>(() =>
-        {
-            IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectional();
-            return new UsedResult(readScrollAndUseStaffResult.IsUsed); // TODO: This is lossy
-        });
+        IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectionalWithPreAndPostMessages();
+        return new UsedResult(readScrollAndUseStaffResult); // TODO: This is lossy
     }
 
     /// <summary>
@@ -223,22 +205,12 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
         }
     }
 
-    private T ExecuteScriptWithPreAndPostMessages<T>(Func<T> action)
-    {
-        RenderPreMessage();
-        T result = action();
-        RenderPostMessage();
-        return result;
-    }
-
-    private void ExecuteScriptWithPreAndPostMessages(Action action)
-    {
-        RenderPreMessage();
-        action();
-        RenderPostMessage();
-    }
-
-    private IdentifiedAndUsedResult ExecuteNonDirectional()
+    /// <summary>
+    /// Projects the projectile using the <see cref="NonDirectionalProjectileMode"/> to specify the direction(s).  Also, renders the pre and post messages accordingly.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    private IdentifiedAndUsedResult ExecuteNonDirectionalWithPreAndPostMessages()
     {
         switch (NonDirectionalProjectileMode)
         {
@@ -248,24 +220,29 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
                     {
                         return new IdentifiedAndUsedResult(false, false);
                     }
-                    IdentifiedResult identifiedResult = ExecuteAimWandScript(direction);
+                    RenderPreMessage();
+                    IdentifiedResult identifiedResult = ExecuteTargeted(direction);
+                    RenderPostMessage();
                     return new IdentifiedAndUsedResult(identifiedResult.IsIdentified, true);
                 }
             case NonDirectionalProjectileModeEnum.AllDirections:
                 {
+                    RenderPreMessage();
                     bool identified = false;
                     foreach (int direction in Game.OrderedDirection)
                     {
-                        IdentifiedResult identifiedResult = ExecuteAimWandScript(direction);
+                        IdentifiedResult identifiedResult = ExecuteTargeted(direction);
                         if (identifiedResult.IsIdentified)
                         {
                             identified = true;
                         }
                     }
+                    RenderPostMessage();
                     return new IdentifiedAndUsedResult(identified, true);
                 }
             case NonDirectionalProjectileModeEnum.AllMonstersInLos:
                 {
+                    RenderPreMessage();
                     bool anyIdentified = false;
                     int damage = DamageRoll.Get(Game.UseRandom);
                     int radius = RadiusRoll.Get(Game.UseRandom);
@@ -289,11 +266,23 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
                             anyIdentified = true;
                         }
                     }
+                    RenderPostMessage();
                     return new IdentifiedAndUsedResult(anyIdentified, true);
                 }
             default:
                 throw new Exception("Invalid value for NonDirectionalProjectileMode.");
         }
+    }
+
+    private IdentifiedResult ExecuteDirectionalWithPreAndPostMessages(int direction)
+    {
+        RenderPreMessage();
+        int radius = RadiusRoll.Get(Game.UseRandom);
+        int damage = DamageRoll.Get(Game.UseRandom);
+        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
+        bool isIdentified = Identified ?? hitSuccess;
+        RenderPostMessage();
+        return new IdentifiedResult(isIdentified);
     }
 
     private IdentifiedResult ExecuteTargeted(int direction)

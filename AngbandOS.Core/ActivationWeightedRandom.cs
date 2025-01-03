@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// Represents a singleton for a weighted random of <see cref="Activation"/> objects.
 /// </summary>
 [Serializable]
-internal abstract class ActivationWeightedRandom : WeightedRandom<BaseActivation>, IGetKey
+internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, IGetKey
 {
     public ActivationWeightedRandom(Game game) : base(game) { }
     public virtual string Key => GetType().Name;
@@ -23,7 +23,7 @@ internal abstract class ActivationWeightedRandom : WeightedRandom<BaseActivation
     {
         foreach ((string activationName, int weight) in ActivationNamesAndWeights)
         {
-            Add(weight, Game.SingletonRepository.Get<BaseActivation>(activationName));
+            Add(weight, Game.SingletonRepository.Get<Activation>(activationName));
         }
     }
 

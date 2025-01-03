@@ -15,4 +15,6 @@ public class IdentifiedResult
     {
         IsIdentified = isIdentified;
     }
+    public static IdentifiedResult True => new IdentifiedResult(true);
+    public static IdentifiedResult False => new IdentifiedResult(false);
 }

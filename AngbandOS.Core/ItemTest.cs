@@ -75,7 +75,7 @@ internal abstract class ItemTest : IGetKey
 
     public bool Test(ItemCharacteristics characteristics)
     {
-        if (!TestNullObject<BaseActivation>(Activation, characteristics.Activation))
+        if (!TestNullObject<Activation>(Activation, characteristics.Activation))
         {
             return false;
         }
@@ -457,7 +457,7 @@ internal abstract class ItemTest : IGetKey
     public bool Test(Item item)
     {
         IItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
-        if (!TestNullObject<BaseActivation>(Activation, mergedCharacteristics.Activation))
+        if (!TestNullObject<Activation>(Activation, mergedCharacteristics.Activation))
         {
             return false;
         }

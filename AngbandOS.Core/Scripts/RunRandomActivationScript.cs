@@ -32,7 +32,7 @@ internal class RunRandomActivationScript : Script, IScript, ICastSpellScript
 
             Game.Screen.Clear();
             int index = 0;
-            foreach (BaseActivation activation in Game.SingletonRepository.Get<BaseActivation>())
+            foreach (Activation activation in Game.SingletonRepository.Get<Activation>())
             {
                 int row = 2 + (index % 40);
                 int col = 30 * (index / 40);
@@ -56,12 +56,12 @@ internal class RunRandomActivationScript : Script, IScript, ICastSpellScript
             return;
         }
         selectedIndex--;
-        if (selectedIndex < 0 || selectedIndex > Game.SingletonRepository.Count<BaseActivation>())
+        if (selectedIndex < 0 || selectedIndex > Game.SingletonRepository.Count<Activation>())
         {
             return;
         }
 
-        BaseActivation selectedActivation = Game.SingletonRepository.Get<BaseActivation>(selectedIndex);
+        Activation selectedActivation = Game.SingletonRepository.Get<Activation>(selectedIndex);
         //selectedActivation.Activate(); // TODO: Wizard command does not work
     }
 }

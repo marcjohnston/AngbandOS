@@ -221,7 +221,7 @@ internal class SingletonRepository
         RegisterRepository<ICastSpellScript>();
         RegisterRepository<IChangeTracker>();
         RegisterRepository<IDateAndTimeValue>();
-        RegisterRepository<IDirectionalActivationScript>();
+        RegisterRepository<IActivateItemScript>();
         RegisterRepository<IEatOrQuaffScript>();
         RegisterRepository<IEnhancementScript>();
         RegisterRepository<IGameCommandScript>();
@@ -256,7 +256,7 @@ internal class SingletonRepository
         RegisterRepository<ArtifactBiasWeightedRandom>();
         RegisterRepository<Attack>();
         RegisterRepository<AttackEffect>();
-        RegisterRepository<BaseActivation>();
+        RegisterRepository<Activation>();
         RegisterRepository<BaseCharacterClass>();
         RegisterRepository<BirthStage>();
         RegisterRepository<ChestTrap>();

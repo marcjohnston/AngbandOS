@@ -22,4 +22,5 @@ internal class LightWeak0ProjectileScript : ProjectileScript
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(LightWeakProjectile);
     protected override string DamageRollExpression => "0";
+    public override string? PreMessage => "A line of sunlight appears.";
 }

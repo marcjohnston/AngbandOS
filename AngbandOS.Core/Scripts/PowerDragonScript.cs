@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PowerDragonScript : Script, IDirectionalActivationScript
+internal class PowerDragonScript : Script, IActivateItemScript
 {
     private PowerDragonScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, 4);
+        Game.RunScript(nameof(Missile300r4ProjectileScript));
         Game.MsgPrint("Your armor glows many colors...");
         Game.FearTimer.ResetTimer();
         Game.SuperheroismTimer.AddTimer(base.Game.DieRoll(50) + 50);

@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BallOfCold50r2AndColdResistance1d20p20Script : Script, IDirectionalActivationScript
+internal class BallOfCold50r2AndColdResistance1d20p20Script : Script, IActivateItemScript
 {
     private BallOfCold50r2AndColdResistance1d20p20Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 50, 2);
+        Game.RunScript(nameof(Cold50r2ProjectileScript));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         return new UsedResult(true);
     }

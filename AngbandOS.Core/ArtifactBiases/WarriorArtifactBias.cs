@@ -50,16 +50,16 @@ internal class WarriorArtifactBias : ArtifactBias
     };
 
     public override int ActivationPowerChance => 80;
-    public override BaseActivation GetActivationPowerType()
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(100) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(InvulnActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(InvulnActivation));
 
         }
         else
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(Berserk50p1d50Every100p1d100Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(Berserk50p1d50Every100p1d100Activation));
         }
     }
 }

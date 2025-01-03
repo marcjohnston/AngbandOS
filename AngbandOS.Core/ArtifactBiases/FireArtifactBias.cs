@@ -41,19 +41,19 @@ internal class FireArtifactBias : ArtifactBias
         return false;
     }
 
-    public override BaseActivation GetActivationPowerType()
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(FireBolt9d8Every8p1d8DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(FireBolt9d8Every8p1d8DirectionalActivation));
         }
         else if (Game.DieRoll(5) != 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(BallOfFire72r2Every400DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfFire72r2Every400DirectionalActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(FireBall120r3Every225p1d225DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(FireBall120r3Every225p1d225DirectionalActivation));
         }
     }
 }

@@ -23,4 +23,5 @@ internal class Cold110rm2ProjectileScript : ProjectileScript
     protected override string ProjectileBindingKey => nameof(ColdProjectile);
     protected override string DamageRollExpression => "110";
     protected override string RadiusRollExpression => "-2";
+    public override string? PreMessage => "You breathe frost.";
 }

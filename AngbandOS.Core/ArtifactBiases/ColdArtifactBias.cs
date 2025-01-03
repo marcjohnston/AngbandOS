@@ -35,23 +35,23 @@ internal class ColdArtifactBias : ArtifactBias
         return false;
     }
 
-    public override BaseActivation GetActivationPowerType()
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(FrostBolt6d8Every7p1d7DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(FrostBolt6d8Every7p1d7DirectionalActivation));
         }
         else if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(BallOfCold48r2Every400DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfCold48r2Every400DirectionalActivation));
         }
         else if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(BallOfCold100r2Every300DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfCold100r2Every300DirectionalActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(LargeFrostBall200Every325p1d325DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(LargeFrostBall200Every325p1d325DirectionalActivation));
         }
     }
 }

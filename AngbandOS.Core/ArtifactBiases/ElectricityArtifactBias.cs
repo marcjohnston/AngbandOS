@@ -36,19 +36,19 @@ internal class ElectricityArtifactBias : ArtifactBias
         return false;
     }
 
-    public override BaseActivation GetActivationPowerType()
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(LightningBolt4d8Every6p1d6DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(LightningBolt4d8Every6p1d6DirectionalActivation));
         }
         else if (Game.DieRoll(5) != 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(BallOfLightning100r3Every500DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfLightning100r3Every500DirectionalActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(LargeLightningBall250Every425p1d425DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(LargeLightningBall250Every425p1d425DirectionalActivation));
         }
     }
 }

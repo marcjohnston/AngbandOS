@@ -12,9 +12,21 @@ public class IdentifiedAndUsedResult
 {
     public bool IsIdentified { get; set; }
     public bool IsUsed { get; set; }
+    public UsedResult UsedResult => new UsedResult(IsUsed);
+    public IdentifiedResult IdentifiedResult => new IdentifiedResult(IsIdentified);
     public IdentifiedAndUsedResult(bool isIdentified, bool isUsed)
     {
         IsIdentified = isIdentified;
         IsUsed = isUsed;
+    }
+    public IdentifiedAndUsedResult(IdentifiedResult identifiedResult, bool isUsed)
+    {
+        IsIdentified = identifiedResult.IsIdentified;
+        IsUsed = isUsed;
+    }
+    public IdentifiedAndUsedResult(bool isIdentified, UsedResult usedResult)
+    {
+        IsIdentified = isIdentified;
+        IsUsed = usedResult.IsUsed;
     }
 }

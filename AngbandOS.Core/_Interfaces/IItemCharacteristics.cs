@@ -104,7 +104,7 @@ internal interface IItemCharacteristics
     /// Returns the <see cref="Activation"/>, if the item can be activated; or null, if the item cannot be activated.  This property is bound using the <see cref="ActivationName"/> property during
     /// the bind phase.
     /// </summary>
-    BaseActivation? Activation { get; }
+    Activation? Activation { get; }
 
     bool Aggravate { get; }
     bool AntiTheft { get; }

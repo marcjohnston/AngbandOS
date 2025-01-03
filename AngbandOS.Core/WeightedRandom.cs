@@ -106,7 +106,7 @@ internal class WeightedRandom<T>
         }
         int choice = Game.RandomLessThan(_sum);
         int index = 0;
-        while (choice >= _list[index].Key)
+        while (choice >= _list[index].Key) // This is because there are weights.  The keys are used to track weights.
         {
             index++;
         }

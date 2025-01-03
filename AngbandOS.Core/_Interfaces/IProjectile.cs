@@ -11,6 +11,6 @@ namespace AngbandOS.Core.Interfaces;
 /// Represents a composite interface that scripts need to implement to act as a projectile.  ProjectileScripts and ProjectileWeightedRandoms will both use this interface to ensure they 
 /// both conform to all required interfaces and stay in sync with each other.
 /// </summary>
-internal interface IProjectile : IDirectionalActivationScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, IActivateItemScript, ISuccessByChanceScript, ICastSpellScript
+internal interface IProjectile : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ISuccessByChanceScript, ICastSpellScript
 {
 }

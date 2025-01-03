@@ -46,39 +46,39 @@ internal class NecromanticArtifactBias : ArtifactBias
         return false;
     }
 
-    public override BaseActivation GetActivationPowerType()
+    public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(66) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(WraithActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(WraithActivation));
         }
         else if (Game.DieRoll(13) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(DispelGood5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(DispelGood5xEvery300p1d300Activation));
         }
         else if (Game.DieRoll(9) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(MassCarnageActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(MassCarnageActivation));
         }
         else if (Game.DieRoll(8) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(GenocideEvery500Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(GenocideEvery500Activation));
         }
         else if (Game.DieRoll(13) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(SummonFriendlyUndead2In3Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(SummonFriendlyUndead2In3Activation));
         }
         else if (Game.DieRoll(9) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(Vampire100Every400DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(Vampire100Every400DirectionalActivation));
         }
         else if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(EnslaveUndead1xEvery333DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(EnslaveUndead1xEvery333DirectionalActivation));
         }
         else
         {
-            return Game.SingletonRepository.Get<BaseActivation>(nameof(Vampire50Every400DirectionalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(Vampire50Every400DirectionalActivation));
         }
     }
 }

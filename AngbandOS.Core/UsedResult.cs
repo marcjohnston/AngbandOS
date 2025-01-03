@@ -15,4 +15,10 @@ public class UsedResult
     {
         IsUsed = isUsed;
     }
+    public UsedResult(IdentifiedAndUsedResult identifiedAndUsedResult)
+    {
+        IsUsed = identifiedAndUsedResult.IsUsed;
+    }
+    public static UsedResult True => new UsedResult(true);
+    public static UsedResult False => new UsedResult(false);
 }

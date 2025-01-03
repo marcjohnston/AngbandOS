@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BizarreThingsScript : Script, IDirectionalActivationScript
+internal class BizarreThingsScript : Script, IActivateItemScript
 {
     private BizarreThingsScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         switch (Game.DieRoll(10))
         {
@@ -44,8 +44,9 @@ internal class BizarreThingsScript : Script, IDirectionalActivationScript
             case 5:
             case 6:
                 {
+
                     // Do a 300 damage mana ball
-                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), direction, 300, 3);
+                    Game.RunScript(nameof(Mana300r3ProjectileScript));
                     break;
                 }
             case 7:
@@ -54,7 +55,7 @@ internal class BizarreThingsScript : Script, IDirectionalActivationScript
             case 10:
                 {
                     // Do a 250 damage mana bolt
-                    Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), direction, 250);
+                    Game.RunScript(nameof(Mana250ProjectileScript));
                     break;
                 }
         }

@@ -8,13 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BallOfAcid50r2AndResistAcid1d20p20Script : Script, IDirectionalActivationScript
+internal class BallOfAcid50r2AndResistAcid1d20p20Script : Script, IActivateItemScript
 {
     private BallOfAcid50r2AndResistAcid1d20p20Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction) // This is run by an item activation
+    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, 50, 2);
+        ProjectileScript projectileScript = Game.SingletonRepository.Get<ProjectileScript>(nameof(Acid60r2ProjectileScript));
+
+        Game.RunScript(nameof(Acid50r2ProjectileScript));
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         return new UsedResult(true);
     }
