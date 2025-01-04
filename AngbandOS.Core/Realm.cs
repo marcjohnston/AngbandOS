@@ -92,6 +92,7 @@ internal abstract class Realm : IGetKey
         foreach (ItemFactory itemFactory in SpellBooks)
         {
             itemFactory.SetBookIndex(this, bookIndex);
+            bookIndex++;
             foreach (Spell spell in itemFactory.Spells)
             {
                 spell.Initialize(itemFactory, spellIndex);

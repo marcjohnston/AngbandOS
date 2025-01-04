@@ -86,6 +86,9 @@ internal abstract class ItemFactory : ItemEnhancement
     private string _flavorUnknownDescriptionSyntax;
     private string _alternateFlavorUnknownDescriptionSyntax;
 
+    /// <summary>
+    /// Returns the index of the book as it pertains to the realm.
+    /// </summary>
     public int BookIndex { get; private set; } // TODO: Can this be done during binding?
 
     /// <summary>
@@ -122,6 +125,11 @@ internal abstract class ItemFactory : ItemEnhancement
         ProcessWorld(item);
     }
 
+    /// <summary>
+    /// Sets the index of the book in the realm.  This is done when the realm binds the books.
+    /// </summary>
+    /// <param name="realm"></param>
+    /// <param name="bookIndex"></param>
     public void SetBookIndex(Realm realm, int bookIndex) // TODO: Can this be done during binding?
     {
         BookIndex = bookIndex;

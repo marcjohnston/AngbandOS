@@ -27,15 +27,14 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         Game.FullScreenOverlay = true;
         ScreenBuffer savedScreen = Game.Screen.Clone();
         Game.SetBackground(BackgroundImageEnum.Normal);
-        int kIdx = WizCreateItemtype();
+        ItemFactory? itemFactory = WizardSelectItemFactory();
         Game.Screen.Restore(savedScreen);
         Game.FullScreenOverlay = false;
         Game.SetBackground(BackgroundImageEnum.Overhead);
-        if (kIdx == 0)
+        if (itemFactory == null)
         {
             return;
         }
-        ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(kIdx);
         Item qPtr = itemFactory.GenerateItem();
         qPtr.StackCount = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
         if (!Game.GetBool($"Allow Fixed Artifact (0=False, 1=True)? ", out bool ok))
@@ -57,7 +56,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         return;
     }
 
-    private int WizCreateItemtype()
+    private ItemFactory? WizardSelectItemFactory()
     {
         char[] _head = { 'a', 'A', '0' };
         int i, num;
@@ -76,7 +75,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         int maxNum = num;
         if (!Game.GetCom("Get what type of object? ", out ch))
         {
-            return 0;
+            return null;
         }
         num = -1;
         if (ch >= _head[0] && ch < _head[0] + 20)
@@ -93,7 +92,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         }
         if (num < 0 || num >= maxNum)
         {
-            return 0;
+            return null;
         }
         ItemClass selectedItemClass = Game.SingletonRepository.Get<ItemClass>(num);
         string tvalDesc = Game.Pluralize(selectedItemClass.Name);
@@ -101,24 +100,22 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         const int maxLetters = 26;
         const int maxNumbers = 10;
         const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
-        for (num = 0, i = 1; num < maxCount && i < Game.SingletonRepository.Count<ItemFactory>(); i++)
+        ItemFactory[] itemFactories = Game.SingletonRepository.Get<ItemFactory>().Where(_itemFactory => _itemFactory.ItemClass == selectedItemClass).OrderBy(_itemFactory => _itemFactory.BookIndex).ToArray();
+        for (num = 0; num < maxCount && num < itemFactories.Length; num++)
         {
-            ItemFactory kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
-            if (kPtr.ItemClass == selectedItemClass)
-            {
-                row = 2 + (num % maxLetters);
-                col = 30 * (num / maxLetters);
-                ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
-                string itemName = kPtr.Name;
+            ItemFactory kPtr = itemFactories[num];
+            row = 2 + (num % maxLetters);
+            col = 30 * (num / maxLetters);
+            ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
+            string itemName = kPtr.Name;
 
-                Game.Screen.PrintLine($"[{ch}] {itemName}", row, col);
-                choice[num++] = i;
-            }
+            Game.Screen.PrintLine($"[{ch}] {itemName}", row, col);
+            choice[num] = num;
         }
         maxNum = num;
         if (!Game.GetCom($"What Kind of {tvalDesc}? ", out ch))
         {
-            return 0;
+            return null;
         }
         num = -1;
         if (ch >= _head[0] && ch < _head[0] + maxLetters)
@@ -135,8 +132,8 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         }
         if (num < 0 || num >= maxNum)
         {
-            return 0;
+            return null;
         }
-        return choice[num];
+        return itemFactories[num];
     }
 }
