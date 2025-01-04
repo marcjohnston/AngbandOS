@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Identifies a chosen item and returns false, if the item selection is cancelled; true, otherwise.
 /// </summary>
 [Serializable]
-internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScript, IReadScrollOrUseStaffScript, IActivateItemScript, IZapRodScript
+internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript, IActivateItemScript, IZapRodScript
 {
     private IdentifyItemScript(Game game) : base(game) { }
 
@@ -35,11 +35,11 @@ internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScri
         if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
             Game.MsgPrint("You have nothing to identify.");
-            return new UsedResult(false);
+            return UsedResult.False;
         }
         if (oPtr == null)
         {
-            return new UsedResult(false);
+            return UsedResult.False;
         }
         oPtr.IsFlavorAware = true;
         oPtr.BecomeKnown();
@@ -59,7 +59,7 @@ internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IUsedScri
             oPtr.ItemOptimize();
         }
 
-        return new UsedResult(true);
+        return UsedResult.True;
     }
 
     public UsedResult ExecuteActivateItemScript(Item item)

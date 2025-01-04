@@ -14,7 +14,7 @@ internal class ProbingDetectionAndFullIdScript : Script, IActivateItemScript
 
     public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        UsedResult rechargeItemUsedResult = Game.RunUsedScript(nameof(RechargeItemScript));
+        UsedResult rechargeItemUsedResult = Game.RunUsedScriptInt(nameof(RechargeItemScript), Game.ExperienceLevel.IntValue * 2);
         if (!rechargeItemUsedResult.IsUsed)
         {
             return rechargeItemUsedResult;

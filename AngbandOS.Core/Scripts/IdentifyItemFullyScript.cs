@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUsedScript, IActivateItemScript, IReadScrollOrUseStaffScript
+internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IActivateItemScript, IReadScrollOrUseStaffScript
 {
     private IdentifyItemFullyScript(Game game) : base(game) { }
 
@@ -32,11 +32,11 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUse
         if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
             Game.MsgPrint("You have nothing to identify.");
-            return new UsedResult(true);
+            return UsedResult.False;
         }
         if (oPtr == null)
         {
-            return new UsedResult(true);
+            return UsedResult.False;
         }
         oPtr.IsFlavorAware = true;
         oPtr.BecomeKnown();
@@ -59,7 +59,7 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IUse
         }
 
         oPtr.IdentifyFully();
-        return new UsedResult(false);
+        return UsedResult.True;
     }
 
     public UsedResult ExecuteActivateItemScript(Item item)

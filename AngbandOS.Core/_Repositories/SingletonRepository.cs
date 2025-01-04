@@ -241,7 +241,6 @@ internal class SingletonRepository
         RegisterRepository<IStringValue>();
         RegisterRepository<ITileScript>();
         RegisterRepository<IUnfriendlyScript>();
-        RegisterRepository<IUsedScript>();
         RegisterRepository<IUsedScriptInt>();
         RegisterRepository<IZapRodScript>();
 

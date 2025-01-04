@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Allows the player to choose a quantity of items to convert into gold.
 /// </summary>
 [Serializable]
-internal class AlchemyScript : Script, IScript, ICastSpellScript, IUsedScript, IActivateItemScript
+internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemScript
 {
     private AlchemyScript(Game game) : base(game) { }
 
@@ -20,10 +20,11 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IUsedScript, I
         ExecuteScript();
     }
 
-    /// <summary>
-    /// Executes the script returning false, if the player cancels the selection or confirmation dialog; true, otherwise.
-    /// </summary>
-    /// <returns></returns>
+    public UsedResult ExecuteActivateItemScript(Item item)
+    {
+        return ExecuteUsedScript();
+    }
+
     public UsedResult ExecuteUsedScript()
     {
         int amt = 1;
@@ -96,11 +97,6 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IUsedScript, I
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
         return new UsedResult(true);
-    }
-
-    public UsedResult ExecuteActivateItemScript(Item item)
-    {
-        return ExecuteUsedScript();
     }
 
     /// <summary>
