@@ -29,25 +29,6 @@ internal abstract class StringsRepository : IEnumerable<string>, ILoadAndBind
     private List<string> list = new List<string>();
 
     /// <summary>
-    /// Returns an item in the repository by the ordinal index.
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    public string this[int index]
-    {
-        get
-        {
-            return list[index];
-        }
-    }
-
-
-    /// <summary>
-    /// Returns the number of items in the repository.
-    /// </summary>
-    public int Count => list.Count;
-
-    /// <summary>
     /// Returns a WeightedRandom object used to choose an item from the repository.
     /// </summary>
     /// <param name="predicate"></param>
@@ -64,14 +45,6 @@ internal abstract class StringsRepository : IEnumerable<string>, ILoadAndBind
     }
 
     public void Add(params string[] items)
-    {
-        foreach (string item in items)
-        {
-            Add(item);
-        }
-    }
-
-    public void Add(IEnumerable<string> items)
     {
         foreach (string item in items)
         {
