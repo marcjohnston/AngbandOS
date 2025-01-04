@@ -29,4 +29,10 @@ public class IdentifiedAndUsedResult
         IsIdentified = isIdentified;
         IsUsed = usedResult.IsUsed;
     }
+
+    public IdentifiedAndUsedResult(IdentifiedResult identifiedResult, UsedResult usedResult)
+    {
+        IsIdentified = identifiedResult.IsIdentified;
+        IsUsed = usedResult.IsUsed;
+    }
 }
