@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
     protected readonly Game Game;
     public ProjectileScript(Game game) 
@@ -179,7 +179,7 @@ internal abstract class ProjectileScript : IGetKey, IProjectile // DO NOT ADD MO
     }
 
     /// <summary>
-    /// Projects the projectile via the <see cref="IScript"/> interface.  The <see cref="IScript"/> interface is used to convert an <see cref="IProjectile"/> script into an <see cref="ICastSpellScript"/>.
+    /// Projects the projectile via the <see cref="IScript"/> interface.  The <see cref="IScript"/> interface is used to convert an <see cref="IUniversalScript"/> script into an <see cref="ICastSpellScript"/>.
     /// </summary>
     /// <param name="spell"></param>
     public void ExecuteCastSpellScript(Spell spell)

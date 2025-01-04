@@ -14,7 +14,7 @@ internal class BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225Direct
 
     protected override string RechargeTimeRollExpression => "1d225+225";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(FireColdElectricityPoisonGasOrAcid220rm2ProjectileWeightedRandomScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(FireColdElectricityPoisonGasOrAcid220rm2ProjectileWeightedRandom);
 
     public override int Value => 5000;
 

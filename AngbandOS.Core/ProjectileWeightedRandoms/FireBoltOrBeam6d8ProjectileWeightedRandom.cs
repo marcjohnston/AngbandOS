@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ColdBoltOrBeam5d8ProjectileWeightedRandomScript : ProjectileWeightedRandomScript
+internal class FireBoltOrBeam6d8ProjectileWeightedRandom : ProjectileWeightedRandomScript
 {
-    private ColdBoltOrBeam5d8ProjectileWeightedRandomScript(Game game) : base(game) { }
+    private FireBoltOrBeam6d8ProjectileWeightedRandom(Game game) : base(game) { }
 
     protected override (string, int)[] NameAndWeightBindingTuples => new (string, int)[]
     {
-        (nameof(Cold5d8ProjectileScript), 20),
-        (nameof(ColdBeam5d8ProjectileScript), 80),
+        (nameof(Fire6d8ProjectileScript), 1),
+        (nameof(FireBeam6d8ProjectileScript), 1),
     };
 }

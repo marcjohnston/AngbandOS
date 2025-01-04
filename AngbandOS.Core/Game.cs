@@ -17247,7 +17247,7 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Returns a random number greater or equal to zero and less than max
+    /// Returns a random number greater than or equal to zero and less than <paramref name="max"/>.
     /// </summary>
     /// <param name="max"> The upper limit (exclusive) </param>
     /// <returns> A random number </returns>

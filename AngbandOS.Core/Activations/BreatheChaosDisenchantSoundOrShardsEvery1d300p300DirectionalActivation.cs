@@ -14,7 +14,7 @@ internal class BreatheChaosDisenchantSoundOrShardsEvery1d300p300DirectionalActiv
 
     protected override string RechargeTimeRollExpression => "1d300+300";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(ChaosDisenchantSoundOrShards250rm2ProjectileWeightedRandomScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ChaosDisenchantSoundOrShards250rm2ProjectileWeightedRandom);
 
     public override int Value => 10000;
 

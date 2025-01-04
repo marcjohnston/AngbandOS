@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcidBoltOrBeam3d8ProjectileWeightedRandomScript : ProjectileWeightedRandomScript
+internal class AcidBoltOrBeam3d8ProjectileWeightedRandom : ProjectileWeightedRandomScript
 {
-    private AcidBoltOrBeam3d8ProjectileWeightedRandomScript(Game game) : base(game) { }
+    private AcidBoltOrBeam3d8ProjectileWeightedRandom(Game game) : base(game) { }
 
     protected override (string, int)[] NameAndWeightBindingTuples => new (string, int)[]
     {

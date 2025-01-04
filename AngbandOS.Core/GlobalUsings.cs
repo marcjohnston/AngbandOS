@@ -89,6 +89,7 @@ global using AngbandOS.Core.StoreCommands;
 global using AngbandOS.Core.StoreFactories;
 global using AngbandOS.Core.SyllableSets;
 global using AngbandOS.Core.Symbols;
+global using AngbandOS.Core.SummonScripts;
 global using AngbandOS.Core.Talents;
 global using AngbandOS.Core.Tiles;
 global using AngbandOS.Core.Timers;

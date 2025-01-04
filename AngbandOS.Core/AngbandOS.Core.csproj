@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="DirectionalActivations\" />
-    <Folder Include="SummonScripts\" />
     <Folder Include="Widgets\NullableTextAreaWidget\" />
     <Folder Include="Widgets\TextAreaWidgets\" />
   </ItemGroup>

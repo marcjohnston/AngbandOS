@@ -302,6 +302,7 @@ internal class SingletonRepository
         RegisterRepository<SpellResistantDetection>();
         RegisterRepository<StoreCommand>();
         RegisterRepository<StoreFactory>();
+        RegisterRepository<BaseSummonScript>();
         RegisterRepository<Symbol>();
         RegisterRepository<Talent>();
         RegisterRepository<Tile>();

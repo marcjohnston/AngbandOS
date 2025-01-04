@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<ProjectileScript>, IProjectile // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal abstract class ProjectileWeightedRandomScript : GenericWeightedRandom<ProjectileScript>, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
     protected ProjectileWeightedRandomScript(Game game) : base(game) { }
 
