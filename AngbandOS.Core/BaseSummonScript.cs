@@ -35,7 +35,14 @@ internal abstract class BaseSummonScript : IGetKey, IUniversalScript
         LevelRoll = Game.ParseRollExpression(LevelRollExpression);
     }
 
+    /// <summary>
+    /// Returns true, to summon a friendly monster (a.k.a pet); false, otherwise.  Returns false, by default.
+    /// </summary>
     public virtual bool Pet => false;
+
+    /// <summary>
+    /// Returns true, if a group of monsters or pets can be summon; false, otherwise.  Returns true, by default.
+    /// </summary>
     public virtual bool Group => true;
     protected abstract string MonsterFilterBindingKey { get; }
     public MonsterFilter MonsterFilter { get; private set; }

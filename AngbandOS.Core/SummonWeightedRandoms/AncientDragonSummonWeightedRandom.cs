@@ -5,15 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TarotSpellSummonAncientDragon : Spell
+internal class AncientDragonSummonWeightedRandom : SummonWeightedRandom
 {
-    private TarotSpellSummonAncientDragon(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(AncientDragonSummonWeightedRandom);
+    protected AncientDragonSummonWeightedRandom(Game game) : base(game) { }
 
-    public override string Name => "Summon Ancient Dragon";
-
-    protected override string LearnedDetails => "control 70%";
+    protected override (string name, int weight)[] NameAndWeightBindingTuples => new (string, int)[] {
+        (nameof(AncientDragonPet1xSummonScript), 6),
+        (nameof(AncientDragon1xSummonScript), 4)
+    };
 }
