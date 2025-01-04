@@ -14,7 +14,7 @@ internal class ConjuringsTricksTarotBookItemFactory : ItemFactory
 
     protected override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
-    public override string Name => "[Conjurings  Tricks]";
+    public override string Name => "[Conjurings Tricks]";
     protected override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
     protected override string? AlternateDescriptionSyntax => "Book~ of Tarot Magic $Name$";
     public override int Cost => 100;
