@@ -18,7 +18,7 @@ internal class RemoveCurseIdentifableAndUsedScript : Script, IReadScrollOrUseSta
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        bool isIdentified = Game.RunSuccessByChanceScript(nameof(RemoveCurseScript));
+        bool isIdentified = Game.RunIdentifiedScript(nameof(RemoveCurseScript));
         if (!isIdentified)
         {
             return new IdentifiedAndUsedResult(false, true);

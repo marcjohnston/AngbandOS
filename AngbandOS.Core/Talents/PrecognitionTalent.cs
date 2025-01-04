@@ -26,28 +26,28 @@ internal class PrecognitionTalent : Talent
         {
             Game.RunScript(nameof(MapAreaScript));
         }
-        bool b;
+        bool isIdentified;
         if (Game.ExperienceLevel.IntValue < 30)
         {
-            b = Game.RunSuccessByChanceScript(nameof(DetectNormalMonstersScript));
+            isIdentified = Game.RunIdentifiedScript(nameof(DetectNormalMonstersScript));
             if (Game.ExperienceLevel.IntValue > 14)
             {
-                b |= Game.DetectInvisibleMonsters();
+                isIdentified |= Game.DetectInvisibleMonsters();
             }
             if (Game.ExperienceLevel.IntValue > 4)
             {
-                b |= Game.DetectTraps();
+                isIdentified |= Game.DetectTraps();
             }
         }
         else
         {
-            b = Game.RunSuccessByChanceScript(nameof(DetectionScript));
+            isIdentified = Game.RunIdentifiedScript(nameof(DetectionScript));
         }
         if (Game.ExperienceLevel.IntValue > 24 && Game.ExperienceLevel.IntValue < 40)
         {
             Game.TelepathyTimer.AddTimer(Game.ExperienceLevel.IntValue);
         }
-        if (!b)
+        if (!isIdentified)
         {
             Game.MsgPrint("You feel safe.");
         }

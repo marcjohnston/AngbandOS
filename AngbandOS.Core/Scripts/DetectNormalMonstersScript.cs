@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript
+internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private DetectNormalMonstersScript(Game game) : base(game) { }
 
@@ -21,9 +21,9 @@ internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, I
     /// Detects monsters and returns true, if monsters were reveals; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        bool flag = false;
+        bool isIdentified = false;
         for (int i = 1; i < Game.MonsterMax; i++)
         {
             Monster mPtr = Game.Monsters[i];
@@ -44,14 +44,14 @@ internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, I
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
                 Game.MainForm.RefreshMapLocation(y, x);
-                flag = true;
+                isIdentified = true;
             }
         }
-        if (flag)
+        if (isIdentified)
         {
             Game.MsgPrint("You sense the presence of monsters!");
         }
-        return flag;
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -60,6 +60,6 @@ internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, I
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
     }
 }

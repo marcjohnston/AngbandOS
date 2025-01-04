@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript
+internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private ApplyDisenchantScript(Game game) : base(game) { }
 
@@ -21,14 +21,14 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, ISucce
     /// Executes the script and returns a success result.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Select an inventory slot where items can be disenchanted.
         WieldSlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
         if (inventorySlot == null)
         {
             // There are no inventory slots capable of being disenchanted.
-            return false;
+            return IdentifiedResult.False;
         }
 
         // Select an item in the inventory slot to be disenchanted.
@@ -38,11 +38,11 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, ISucce
         // The chosen slot does not have an item to disenchant.
         if (oPtr == null)
         {
-            return false;
+            return IdentifiedResult.False;
         }
         if (oPtr.Characteristics.BonusHit <= 0 && oPtr.Characteristics.BonusDamage <= 0 && oPtr.Characteristics.BonusArmorClass <= 0)
         {
-            return false;
+            return IdentifiedResult.False;
         }
         string oName = oPtr.GetDescription(false);
         string s;
@@ -50,7 +50,7 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, ISucce
         {
             s = oPtr.StackCount != 1 ? "" : "s";
             Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
-            return true;
+            return IdentifiedResult.True;
         }
         if (oPtr.Characteristics.BonusHit > 0)
         {
@@ -79,7 +79,7 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, ISucce
         s = oPtr.StackCount != 1 ? "were" : "was";
         Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-        return true;
+        return IdentifiedResult.True;
     }
 
     /// <summary>
@@ -88,6 +88,6 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, ISucce
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
     }
 }

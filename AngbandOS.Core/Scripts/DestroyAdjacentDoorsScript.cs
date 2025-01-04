@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IActivateItemScript
+internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript, IActivateItemScript
 {
     private DestroyAdjacentDoorsScript(Game game) : base(game) { }
 
@@ -23,7 +23,7 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, I
     /// <returns></returns>
     public UsedResult ExecuteActivateItemScript(Item item)
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
         return new UsedResult(false);
     }
 
@@ -31,10 +31,11 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, I
     /// Projects the kill door to the current location with a radius of 1 to destory all doors that are adjacent to the player.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
-        return projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
+        bool isIdentified = projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -43,6 +44,6 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, I
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
     }
 }

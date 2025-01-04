@@ -19,7 +19,7 @@ internal class RestorationIdentifiedAndUsedScriptItemAndDirection : Script, IZap
     public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
         bool isIdentified = false;
-        if (Game.RunSuccessByChanceScript(nameof(RestoreLevelScript)))
+        if (Game.RunIdentifiedScript(nameof(RestoreLevelScript)))
         {
             isIdentified = true;
         }

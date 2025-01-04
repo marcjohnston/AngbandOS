@@ -8041,13 +8041,6 @@ public bool IsDead = false;
         castedScript.ExecuteScriptBool(value);
     }
 
-    public bool RunSuccessByChanceScript(string scriptName)
-    {
-        // Get the script from the singleton repository.
-        ISuccessByChanceScript castedScript = SingletonRepository.Get<ISuccessByChanceScript>(scriptName);
-        return castedScript.ExecuteSuccessByChanceScript();
-    }
-
     /// <summary>
     /// Run the associated script and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.

@@ -18,7 +18,7 @@ internal class DestroyTrapsAndDoorsScript : Script, IReadScrollOrUseStaffScript
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        bool isIdentified = Game.RunSuccessByChanceScript(nameof(DestroyAdjacentDoorsScript)); // If nothing was destroyed, then we do not know what happened.
+        bool isIdentified = Game.RunIdentifiedScript(nameof(DestroyAdjacentDoorsScript)); // If nothing was destroyed, then we do not know what happened.
         return new IdentifiedAndUsedResult(isIdentified, true);
     }
 }

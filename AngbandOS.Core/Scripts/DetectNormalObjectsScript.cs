@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Scripts;
 /// Reveals normal objects that are within the viewport.
 /// </summary>
 [Serializable]
-internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IReadScrollOrUseStaffScript
+internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript, IReadScrollOrUseStaffScript
 {
     private DetectNormalObjectsScript(Game game) : base(game) { }
 
@@ -20,9 +20,9 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IS
         ExecuteScript();
     }
 
-    public bool ExecuteSuccessByChanceScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        bool detect = false;
+        bool isIdentified = false;
         for (int y = 1; y < Game.CurHgt - 1; y++)
         {
             for (int x = 1; x < Game.CurWid - 1; x++)
@@ -38,20 +38,20 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IS
                     {
                         oPtr.WasNoticed = true;
                         Game.MainForm.RefreshMapLocation(y, x);
-                        detect = true;
+                        isIdentified = true;
                     }
                 }
             }
         }
-        if (detect)
+        if (isIdentified)
         {
             Game.MsgPrint("You sense the presence of objects!");
         }
         if (Game.DetectMonstersString("!=?|"))
         {
-            detect = true;
+            isIdentified = true;
         }
-        return detect;
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -60,12 +60,12 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IS
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
     }
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        bool isIdentified = ExecuteSuccessByChanceScript();
-        return new IdentifiedAndUsedResult(isIdentified, true);
+        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
+        return new IdentifiedAndUsedResult(identifiedResult, true);
     }
 }

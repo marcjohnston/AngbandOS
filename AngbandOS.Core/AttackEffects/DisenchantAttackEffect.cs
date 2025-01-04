@@ -19,7 +19,7 @@ internal class DisenchantAttackEffect : AttackEffect
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
         if (!Game.HasDisenchantResistance)
         {
-            if (Game.RunSuccessByChanceScript(nameof(ApplyDisenchantScript)))
+            if (Game.RunIdentifiedScript(nameof(ApplyDisenchantScript)))
             {
                 obvious = true;
             }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByChanceScript, IActivateItemScript
+internal class DetectionScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript, IActivateItemScript
 {
     private DetectionScript(Game game) : base(game) { }
 
@@ -21,17 +21,17 @@ internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByCh
     /// Detects traps, doors, stairs, treasures, gold, normal objects, normal monsters and invisible monsters and returns true, if anything was detected; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        bool detect = Game.DetectTraps();
-        detect |= Game.DetectDoors();
-        detect |= Game.DetectStairs();
-        detect |= Game.DetectTreasure();
-        detect |= Game.DetectGold();
-        detect |= Game.RunSuccessByChanceScript(nameof(DetectNormalObjectsScript));
-        detect |= Game.DetectInvisibleMonsters();
-        detect |= Game.RunSuccessByChanceScript(nameof(DetectNormalMonstersScript));
-        return detect;
+        bool isIdentified = Game.DetectTraps();
+        isIdentified |= Game.DetectDoors();
+        isIdentified |= Game.DetectStairs();
+        isIdentified |= Game.DetectTreasure();
+        isIdentified |= Game.DetectGold();
+        isIdentified |= Game.RunIdentifiedScript(nameof(DetectNormalObjectsScript));
+        isIdentified |= Game.DetectInvisibleMonsters();
+        isIdentified |= Game.RunIdentifiedScript(nameof(DetectNormalMonstersScript));
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -40,13 +40,13 @@ internal class DetectionScript : Script, IScript, ICastSpellScript, ISuccessByCh
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
     }
 
     public UsedResult ExecuteActivateItemScript(Item item)
     {
         Game.MsgPrint("An image forms in your mind...");
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
         return new UsedResult(true);
     }
 }

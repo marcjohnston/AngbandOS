@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveCurseScript : Script, IScript, ICastSpellScript, IStoreCommandScript, ISuccessByChanceScript, IReadScrollOrUseStaffScript
+internal class RemoveCurseScript : Script, IScript, ICastSpellScript, IStoreCommandScript, IEatOrQuaffScript, IReadScrollOrUseStaffScript
 {
     private RemoveCurseScript(Game game) : base(game) { }
 
@@ -45,9 +45,10 @@ internal class RemoveCurseScript : Script, IScript, ICastSpellScript, IStoreComm
     /// Removes a curse from all items, excluding a heavy curse and returns true if a curse was removed from any items; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        return Game.RemoveCurseAux(false);
+        bool isIdentified = Game.RemoveCurseAux(false);
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -56,20 +57,19 @@ internal class RemoveCurseScript : Script, IScript, ICastSpellScript, IStoreComm
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
     }
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        bool identified = ExecuteSuccessByChanceScript();
-        if (identified)
+        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
+        if (identifiedResult.IsIdentified)
         {
             if (Game.BlindnessTimer.Value == 0)
             {
                 Game.MsgPrint("The staff glows blue for a moment...");
             }
-            return new IdentifiedAndUsedResult(true, true);
         }
-        return new IdentifiedAndUsedResult(false, true);
+        return new IdentifiedAndUsedResult(identifiedResult, true);
     }
 }
