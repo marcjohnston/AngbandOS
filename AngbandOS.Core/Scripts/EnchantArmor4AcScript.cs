@@ -41,18 +41,12 @@ internal class EnhanceArmorScript : Script, IScript, ICastSpellScript, IStoreCom
         }
     }
 
-    public bool ExecuteSuccessByChanceScript()
-    {
-        return Game.EnchantItem(0, 0, 4);
-
-    }
-
     /// <summary>
     /// Executes the successful script and disposes of the result.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        Game.EnchantItem(0, 0, 4);
     }
 }

@@ -23,7 +23,7 @@ internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandSc
     /// <returns></returns>
     public RepeatableResult ExecuteGameCommandScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteScript();
         return new RepeatableResult(false);
     }
 
@@ -33,41 +33,32 @@ internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandSc
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
-    }
-
-    /// <summary>
-    /// Executes the aim wand script and returns a success result.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
-    {
         // Prompt for an item, showing only wands
         if (!Game.SelectItem(out Item? item, "Aim which wand? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeAimedItemFilter))))
         {
             Game.MsgPrint("You have no wand to aim.");
-            return false;
+            return;
         }
         // Get the item and check if it is really a wand
         if (item == null)
         {
-            return false;
+            return;
         }
         if (item.AimingTuple == null)
         {
             Game.MsgPrint("That is not a wand!");
-            return false;
+            return;
         }
         // We can't use wands directly from the floor, since we need to aim them
         if (!item.IsInInventory && item.StackCount > 1)
         {
             Game.MsgPrint("You must first pick up the wand.");
-            return false;
+            return;
         }
         // Aim the wand
         if (!Game.GetDirectionWithAim(out int dir))
         {
-            return false;
+            return;
         }
         // Using a wand takes 100 energy
         Game.EnergyUse = 100;
@@ -88,14 +79,14 @@ internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandSc
         if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
         {
             Game.MsgPrint("You failed to use the wand properly.");
-            return false; // TODO: This is success = false, and cancel = false.  This should be a cancelable script.
+            return; // TODO: This is success = false, and cancel = false.  This should be a cancelable script.
         }
         // Make sure we have charges
         if (item.WandChargesRemaining <= 0)
         {
             Game.MsgPrint("The wand has no charges left.");
             item.IdentEmpty = true;
-            return false;
+            return;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
         IdentifiedResult identifiedResult = item.AimingTuple.Value.ActivationScript.ExecuteAimWandScript(dir);
@@ -141,6 +132,5 @@ internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandSc
                 }
             }
         }
-        return true;
     }
 }

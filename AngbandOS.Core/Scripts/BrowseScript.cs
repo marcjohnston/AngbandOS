@@ -32,7 +32,7 @@ internal class BrowseScript : Script, IScript, ICastSpellScript, IGameCommandScr
     /// <returns></returns>
     public RepeatableResult ExecuteGameCommandScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteScript();
         return new RepeatableResult(false);
     }
 
@@ -42,37 +42,28 @@ internal class BrowseScript : Script, IScript, ICastSpellScript, IGameCommandScr
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
-    }
-
-    /// <summary>
-    /// Executes the activate script and returns true, if a book was rendered; false, otherwise.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
-    {
         // Make sure we can read
         if (!Game.CanCastSpells)
         {
             Game.MsgPrint("You cannot read books!");
-            return false;
+            return;
         }
         // Get a book to read if we don't already have one
         if (!Game.SelectItem(out Item? item, "Browse which book? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter))))
         {
             Game.MsgPrint("You have no books that you can read.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
 
         // Check that the book is useable by the player
         if (item.Spells == null)
         {
             Game.MsgPrint("You can't read that.");
-            return false;
+            return;
         }
         Game.HandleStuff();
 
@@ -84,6 +75,5 @@ internal class BrowseScript : Script, IScript, ICastSpellScript, IGameCommandScr
         Game.Screen.Print("[Press any key to continue]", 0, 23);
         Game.Inkey();
         Game.Screen.Restore(savedScreen);
-        return true;
     }
 }

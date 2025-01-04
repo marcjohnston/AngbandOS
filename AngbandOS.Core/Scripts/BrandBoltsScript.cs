@@ -25,7 +25,7 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IUsedScript
     /// <returns></returns>
     public UsedResult ExecuteActivateItemScript(Item item)
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteScript();
 
         // Return true because the player cannot cancel the script.
         return new UsedResult(true);
@@ -37,17 +37,17 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IUsedScript
     /// <returns></returns>
     public UsedResult ExecuteUsedScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteScript();
 
         // Return true because the player cannot cancel the script.
         return new UsedResult(true);
     }
 
     /// <summary>
-    /// Attempts to aaply a fire brand to the first set of bolts found in the players inventory.  Returns true, if bolts were enchanted; false, otherwise.
+    /// Executes the successful script and disposes of the result.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public void ExecuteScript()
     {
         for (int i = 0; i < InventorySlotEnum.PackCount; i++)
         {
@@ -80,20 +80,10 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IUsedScript
             Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
 
             // Quit after the first bolts have been upgraded
-            return true;
+            return;
         }
 
         // We fell off the end of the inventory without enchanting anything
         Game.MsgPrint("The fiery enchantment failed.");
-        return false;
-    }
-
-    /// <summary>
-    /// Executes the successful script and disposes of the result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteSuccessByChanceScript();
     }
 }

@@ -18,19 +18,19 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
     }
 
     /// <summary>
-    /// Blesses a chosen weapon and return true if blessing wasn't cancelled during the weapon selection process; false, if the blessing was cancelled.
+    /// Executes the successful script and disposes of the result.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public void ExecuteScript()
     {
         if (!Game.SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(WeaponsItemFilter))))
         {
             Game.MsgPrint("You have no weapon to bless.");
-            return false;
+            return;
         }
         if (oPtr == null)
         {
-            return false;
+            return;
         }
         string your = oPtr.IsInInventory ? "your" : "the"; ;
         string oName = oPtr.GetDescription(false);
@@ -40,7 +40,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
             if ((mergedCharacteristics.HeavyCurse && Game.DieRoll(100) < 33) || mergedCharacteristics.PermaCurse)
             {
                 Game.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
-                return true;
+                return;
             }
             Game.MsgPrint($"A malignant aura leaves {your} {oName}.");
             oPtr.IsCursed = false;
@@ -52,7 +52,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         {
             string s = oPtr.StackCount > 1 ? "were" : "was";
             Game.MsgPrint($"{your} {oName} {s} blessed already.");
-            return true;
+            return;
         }
         if (!oPtr.IsArtifact || Game.DieRoll(3) == 1)
         {
@@ -99,15 +99,5 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
             }
         }
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-        return true;
-    }
-
-    /// <summary>
-    /// Executes the successful script and disposes of the result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteSuccessByChanceScript();
     }
 }

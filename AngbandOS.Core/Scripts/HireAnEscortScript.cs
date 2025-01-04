@@ -8,38 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HireAnEscortScript : Script, IScript, ICastSpellScript, IStoreCommandScript
+internal class HireAnEscortScript : Script, IStoreCommandScript
 {
     private HireAnEscortScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
 
     /// <summary>
     /// Executes the hire escort script successful script and sets the leave store flag to true, if the script was successful.
     /// </summary>
     /// <param name="storeCommandEvent"></param>
     public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.LeaveStore = ExecuteSuccessByChanceScript();
-    }
-
-    /// <summary>
-    /// Executes the hire escort script and disposes of the successful result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteSuccessByChanceScript();
-    }
-
-    /// <summary>
-    /// Executes the hire escort script and returns true, if the player was escorted to another town; false, otherwise.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
     {
         var validTowns = new Dictionary<char, Town>();
         foreach (Town town in Game.SingletonRepository.Get<Town>())
@@ -78,13 +55,13 @@ internal class HireAnEscortScript : Script, IScript, ICastSpellScript, IStoreCom
                         Game.CameFrom = LevelStartEnum.StartRandom;
                         Game.MsgPrint("The journey takes all day.");
                         Game.ToNextDusk();
-                        return true;
+                        storeCommandEvent.LeaveStore = true;
                     }
                 }
             }
         }
         Game.HandleStuff();
-        return false;
+        storeCommandEvent.LeaveStore = false;
     }
 
     private Town? GetEscortDestination(Dictionary<char, Town> towns)

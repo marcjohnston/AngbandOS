@@ -25,35 +25,16 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
-    }
-
-    /// <summary>
-    /// Executes the activate script, disposes of the successful result and returns false because activation is never repeatable.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
-    {
-        ExecuteSuccessByChanceScript();
-        return new RepeatableResult(false);
-    }
-
-    /// <summary>
-    /// Allows the user to select an item and activates the special feature of that item.  
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
-    {
         // No item passed in, so get one; filtering to activatable items only
         if (!Game.SelectItem(out Item? item, "Activate which item? ", true, true, false, Game.SingletonRepository.Get<ItemFilter>(nameof(KnownAndActivableItemFilter))))
         {
             Game.MsgPrint("You have nothing to activate.");
-            return false;
+            return;
         }
         // Get the item from the index
         if (item == null)
         {
-            return false;
+            return;
         }
 
         // Activating an item uses 100 energy
@@ -86,14 +67,14 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
         if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
         {
             Game.MsgPrint("You failed to activate it properly.");
-            return false;
+            return;
         }
 
         // If the item is still recharging, then just tell us and quit
         if (item.ActivationRechargeTimeRemaining != 0)
         {
             Game.MsgPrint("It whines, glows and fades...");
-            return false;
+            return;
         }
 
         // We passed the checks, so the item is activated
@@ -105,9 +86,16 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
         if (mergedCharacteristics.Activation != null)
         {
             UsedResult usedResult = mergedCharacteristics.Activation.Activate(item);
-            return usedResult.IsUsed;
         }
+    }
 
-        return false;
+    /// <summary>
+    /// Executes the activate script, disposes of the successful result and returns false because activation is never repeatable.
+    /// </summary>
+    /// <returns></returns>
+    public RepeatableResult ExecuteGameCommandScript()
+    {
+        ExecuteScript();
+        return new RepeatableResult(false);
     }
 }

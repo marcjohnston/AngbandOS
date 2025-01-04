@@ -41,17 +41,12 @@ internal class EnchantWeapon4h4d0acScript : Script, IScript, ICastSpellScript, I
         }
     }
 
-    public bool ExecuteSuccessByChanceScript()
-    {
-        return Game.EnchantItem(4, 4, 0);
-    }
-
     /// <summary>
     /// Executes the successful script and disposes of the result.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        Game.EnchantItem(4, 4, 0);
     }
 }

@@ -10,7 +10,7 @@ using System;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
+internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript, IEatOrQuaffScript
 {
     private DetectEvilMonstersScript(Game game) : base(game) { }
 
@@ -23,9 +23,9 @@ internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IRe
     /// Detects evil monsters and returns true, if monsters were revealed; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessByChanceScript()
+    public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        bool flag = false;
+        bool isIdentified = false;
         for (int i = 1; i < Game.MonsterMax; i++)
         {
             Monster mPtr = Game.Monsters[i];
@@ -47,14 +47,14 @@ internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IRe
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
                 Game.MainForm.RefreshMapLocation(y, x);
-                flag = true;
+                isIdentified = true;
             }
         }
-        if (flag)
+        if (isIdentified)
         {
             Game.MsgPrint("You sense the presence of evil creatures!");
         }
-        return flag;
+        return new IdentifiedResult(isIdentified);
     }
 
     /// <summary>
@@ -63,12 +63,12 @@ internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IRe
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessByChanceScript();
+        ExecuteEatOrQuaffScript();
     }
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        bool isIdentified = ExecuteSuccessByChanceScript();
-        return new IdentifiedAndUsedResult(isIdentified, true);
+        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
+        return new IdentifiedAndUsedResult(identifiedResult, true);
     }
 }
