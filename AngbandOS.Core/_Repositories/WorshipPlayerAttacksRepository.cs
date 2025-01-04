@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class WorshipPlayerAttacksRepository : StringListRepository
+internal class WorshipPlayerAttacksRepository : StringsRepository
 {
     public WorshipPlayerAttacksRepository(Game game) : base(game) { }
 

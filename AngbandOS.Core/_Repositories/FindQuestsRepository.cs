@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class FindQuestsRepository : StringListRepository
+internal class FindQuestsRepository : StringsRepository
 {
     public FindQuestsRepository(Game game) : base(game) { }
 

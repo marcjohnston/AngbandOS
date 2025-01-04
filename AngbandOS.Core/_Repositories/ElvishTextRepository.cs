@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ElvishTextRepository : StringListRepository
+internal class ElvishTextRepository : StringsRepository
 {
     public ElvishTextRepository(Game game) : base(game) { }
 

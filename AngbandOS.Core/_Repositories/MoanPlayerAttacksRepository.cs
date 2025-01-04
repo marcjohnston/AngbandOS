@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class MoanPlayerAttacksRepository : StringListRepository
+internal class MoanPlayerAttacksRepository : StringsRepository
 {
     public MoanPlayerAttacksRepository(Game game) : base(game) { }
 

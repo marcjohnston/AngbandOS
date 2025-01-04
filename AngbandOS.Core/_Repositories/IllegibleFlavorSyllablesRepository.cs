@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class IllegibleFlavorSyllablesRepository : StringListRepository
+internal class IllegibleFlavorSyllablesRepository : StringsRepository
 {
     public IllegibleFlavorSyllablesRepository(Game game) : base(game) { }
 

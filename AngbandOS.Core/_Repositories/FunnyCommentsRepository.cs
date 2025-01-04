@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class FunnyCommentsRepository : StringListRepository
+internal class FunnyCommentsRepository : StringsRepository
 {
     public FunnyCommentsRepository(Game game) : base(game) { }
 

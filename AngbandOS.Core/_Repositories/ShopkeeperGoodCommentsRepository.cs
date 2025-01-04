@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ShopkeeperGoodCommentsRepository : StringListRepository
+internal class ShopkeeperGoodCommentsRepository : StringsRepository
 {
     public ShopkeeperGoodCommentsRepository(Game game) : base(game) { }
 

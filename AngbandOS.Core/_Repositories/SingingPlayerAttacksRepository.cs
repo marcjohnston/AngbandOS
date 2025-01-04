@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class SingingPlayerAttacksRepository : StringListRepository
+internal class SingingPlayerAttacksRepository : StringsRepository
 {
     public SingingPlayerAttacksRepository(Game game) : base(game) { }
 
