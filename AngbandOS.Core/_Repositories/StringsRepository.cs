@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Repositories;
 /// Represents a ListRepository where all of the entities are strings.  This abstract class handles the string serialization for the repository entities.
 /// </summary>
 [Serializable]
-internal abstract class StringsRepository : IEnumerable<string>, ILoadAndBind
+internal abstract class StringsRepository : IEnumerable<string>
 {
     public void PersistEntities()
     {
