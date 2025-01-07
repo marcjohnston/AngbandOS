@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core.Expressions\AngbandOS.Core.Expressions.csproj" />
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,32 +2,31 @@
 {
     public class IdentifierFactorParser : FactorParser
     {
-        public readonly (string, bool)[] Identifiers;
-        public IdentifierFactorParser(params (string, bool)[] identifiers)
+        public bool CaseSensitive { get; }
+        public string Identifier { get; }
+        public IdentifierFactorParser(string identifier, bool caseSensitive)
         {
-            (string identifier, bool caseSensitive)[] namedIdentifierTuples = identifiers; // This names the tuple elements for the OrderBy.
-            Identifiers = namedIdentifierTuples.OrderByDescending(tuple => tuple.identifier.Length).ToArray();
+            CaseSensitive = caseSensitive;
+            Identifier = identifier;
         }
 
         public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
         {
             int startCharacterIndex = characterIndex;
             char c = text[characterIndex];
-            (string identifier, bool caseSensitive)[] identifiers = Identifiers; // This names the tuple elements for the OrderBy.
-            foreach ((string identifier, bool caseSensitive) in Identifiers)
+
+            int length = Identifier.Length;
+            if (startCharacterIndex + length > text.Length)
             {
-                int length = identifier.Length;
-                if (startCharacterIndex + length > text.Length)
-                {
-                    length = text.Length - startCharacterIndex;
-                }
-                string matchedIdentifier = text.Substring(startCharacterIndex, identifier.Length);
-                if (caseSensitive && matchedIdentifier == identifier || !caseSensitive && matchedIdentifier.ToLower() == identifier.ToLower())
-                {
-                    characterIndex += matchedIdentifier.Length;
-                    return new IdentifierExpression(matchedIdentifier);
-                }
+                length = text.Length - startCharacterIndex;
             }
+            string matchedIdentifier = text.Substring(startCharacterIndex, Identifier.Length);
+            if (CaseSensitive && matchedIdentifier == Identifier || !CaseSensitive && matchedIdentifier.ToLower() == Identifier.ToLower())
+            {
+                characterIndex += matchedIdentifier.Length;
+                return new IdentifierExpression(matchedIdentifier);
+            }
+
             return null;
         }
     }
