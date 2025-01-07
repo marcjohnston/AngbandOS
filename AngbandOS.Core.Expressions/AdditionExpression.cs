@@ -1,13 +1,9 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
-    public class AdditionExpression : Expression
+    public class AdditionExpression : InfixExpression
     {
-        public readonly Expression Addend1;
-        public readonly Expression Addend2;
-        public AdditionExpression(Expression addend1, Expression addend2)
-        {
-            Addend1 = addend1;
-            Addend2 = addend2;
-        }
+        public AdditionExpression(Expression addend1, Expression addend2) : base(addend1, addend2) { }
+        public Expression Addend1 => base.Operand1;
+        public Expression Addend2 => base.Operand2;
     }
 }

@@ -12,8 +12,11 @@
 
   <ItemGroup>
     <Compile Remove="ConfigurationMetadata\**" />
+    <Compile Remove="DirectionalActivations\**" />
     <EmbeddedResource Remove="ConfigurationMetadata\**" />
+    <EmbeddedResource Remove="DirectionalActivations\**" />
     <None Remove="ConfigurationMetadata\**" />
+    <None Remove="DirectionalActivations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DirectionalActivations\" />
     <Folder Include="Widgets\NullableTextAreaWidget\" />
     <Folder Include="Widgets\TextAreaWidgets\" />
   </ItemGroup>

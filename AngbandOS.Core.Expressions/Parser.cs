@@ -2,135 +2,72 @@
 {
     public class Parser
     {
-        public readonly SymbolSet Digits = new SymbolSet("0123456789");
-        public Expression ParseExpression(string text, ParseLanguage parseLanguage)
+        public readonly ParseLanguage ParseLanguage;
+        public Parser(ParseLanguage parseLanguage)
+        {
+            ParseLanguage = parseLanguage;
+        }
+        public Expression ParseExpression(string text)
         {
             int characterIndex = 0;
-            return ParseExpression(text, parseLanguage, ref characterIndex);
+            return ParseExpression(text,  0, ref characterIndex);
         }
 
-        public Expression ParseExpression(string text, ParseLanguage parseLanguage, ref int characterIndex)
+        public Expression ParseExpression(string text, ref int characterIndex)
         {
-            return ParseSimpleExpression(text, parseLanguage, ref characterIndex);
+            return ParseExpression(text, 0, ref characterIndex);
         }
-        private Expression ParseSimpleExpression(string text, ParseLanguage parseLanguage, ref int characterIndex)
+
+        private Expression ParseExpression(string text, int precedence, ref int characterIndex)
         {
-            IgnoreWhitespace(text, parseLanguage, ref characterIndex);
-            Expression term = ParseTerm(text, parseLanguage, ref characterIndex);
-            char peekChar = text[characterIndex];
-            if (peekChar == '+')
+            IgnoreWhitespace(text, ref characterIndex);
+            if (precedence > ParseLanguage.HighestPrecedence)
             {
-                characterIndex++;
-                Expression term2 = ParseTerm(text, parseLanguage, ref characterIndex);
-                return new AdditionExpression(term, term2);
-            }
-            else if (peekChar == '-')
-            {
-                characterIndex++;
-                Expression term2 = ParseTerm(text, parseLanguage, ref characterIndex);
-                return new SubtractionExpression(term, term2);
-            }
-            return term;
-        }
-        private Expression ParseTerm(string text, ParseLanguage parseLanguage, ref int characterIndex)
-        {
-            IgnoreWhitespace(text, parseLanguage, ref characterIndex);
-            Expression exponent = ParseExponent(text, parseLanguage, ref characterIndex);
-            do
-            {
-                if (characterIndex >= text.Length)
+                if (ParseLanguage.FactorParsers == null)
                 {
-                    break;
+                    throw new Exception($"Unable to parse expression.  No factor parsers were registered.");
                 }
-                char peekChar = text[characterIndex];
-                if (peekChar == '*')
+                foreach (FactorParser factorParser in ParseLanguage.FactorParsers)
                 {
-                    characterIndex++;
-                    Expression exponent2 = ParseExponent(text, parseLanguage, ref characterIndex);
-                    exponent = new MultiplicationExpression(exponent, exponent2);
+                    Expression? factorExpression = factorParser.TryParse(this, text, ref characterIndex);
+                    if (factorExpression != null)
+                    {
+                        return factorExpression;
+                    }
                 }
-                else if (peekChar == '/')
-                {
-                    characterIndex++;
-                    Expression exponent2 = ParseExponent(text, parseLanguage, ref characterIndex);
-                    exponent = new DivisionExpression(exponent, exponent2);
-                }
-                else
-                {
-                    break;
-                }
-            } while (true);
-            return exponent;
-        }
-        private Expression ParseExponent(string text, ParseLanguage parseLanguage, ref int characterIndex)
-        {
-            IgnoreWhitespace(text, parseLanguage, ref characterIndex);
-            Expression factor = ParseFactor(text, parseLanguage, ref characterIndex);
-            if (characterIndex < text.Length)
-            {
-                char peekChar = text[characterIndex];
-                if (peekChar == 'd')
-                {
-                    characterIndex++;
-                    Expression factor2 = ParseFactor(text, parseLanguage, ref characterIndex);
-                    return new DiceRollExpression(factor, factor2);
-                }
-            }
-            return factor;
-        }
-        private Expression ParseFactor(string text, ParseLanguage parseLanguage, ref int characterIndex)
-        {
-            IgnoreWhitespace(text, parseLanguage, ref characterIndex);
-            int startCharacterIndex = characterIndex;
-            char c = text[characterIndex];
-            if (c == '(') {
-                characterIndex++;
-                Expression parenthesisExpression = ParseExpression(text, parseLanguage, ref characterIndex);
-                if (text[characterIndex] != ')')
-                {
-                    throw new Exception($"Missing closing parenthesis in expression \"{text}\" at position {characterIndex}.");
-                }
-                characterIndex++;
-                return parenthesisExpression;
-            }
-            else if (Digits.Contains(c))
-            {
-                characterIndex++;
-                while (text.Length > characterIndex && Digits.Contains(text[characterIndex]))
-                {
-                    characterIndex++;
-                }
-                string integerText = text.Substring(startCharacterIndex, characterIndex - startCharacterIndex);
-                if (!Int32.TryParse(integerText, out int integerValue))
-                {
-                    throw new Exception($"Invalid int32 value in expression \"{text}\" at position {characterIndex}.");
-                }
-                return new IntegerExpression(integerValue);
+                throw new Exception($"Unrecognized expression at position {characterIndex} in {text}.");
             }
             else
             {
-                (string identifier, bool caseSensitive)[] identifiers = parseLanguage.ValidIdentifiers; // This names the tuple elements for the OrderBy.
-                foreach ((string identifier, bool caseSensitive) in identifiers.OrderByDescending(tuple => tuple.identifier.Length))
-                {
-                    int length = identifier.Length;
-                    if (startCharacterIndex + length > text.Length)
-                    {
-                        length = text.Length - startCharacterIndex;
-                    }
-                    string matchedIdentifier = text.Substring(startCharacterIndex, identifier.Length);
-                    if (caseSensitive && matchedIdentifier == identifier || !caseSensitive && matchedIdentifier.ToLower() == identifier.ToLower())
-                    {
-                        characterIndex += matchedIdentifier.Length;
-                        return new IdentifierExpression(matchedIdentifier);
-                    }
-                }
-            }
-            throw new Exception($"Unrecognized factor in expression \"{text}\" at position {characterIndex}.");
-        }
+                Expression expression = ParseExpression(text, precedence + 1, ref characterIndex);
 
-        private void IgnoreWhitespace(string text, ParseLanguage parseLanguage, ref int characterIndex)
+                InfixOperator[]? infixOperators = ParseLanguage.GetPrecedenceOperators(precedence);
+                if (infixOperators != null)
+                {
+                    bool found;
+                    do
+                    {
+                        found = false;
+                        foreach (InfixOperator infixOperator in infixOperators)
+                        {
+                            int length = infixOperator.OperatorSymbol.Length;
+                            if (characterIndex + length < text.Length && text.Substring(characterIndex, length) == infixOperator.OperatorSymbol)
+                            {
+                                characterIndex += length;
+                                Expression nextPrecedenceOperator2 = ParseExpression(text, precedence + 1, ref characterIndex);
+                                expression = infixOperator.CreateExpression(expression, nextPrecedenceOperator2);
+                                found = true;
+                                break;
+                            }
+                        }
+                    } while (found);
+                }
+                return expression;
+            }
+        }
+        private void IgnoreWhitespace(string text, ref int characterIndex)
         {
-            while (parseLanguage.WhitespaceCharacters.Contains(text[characterIndex]))
+            while (ParseLanguage.WhitespaceCharacters.Contains(text[characterIndex]))
             {
                 characterIndex++;
             }

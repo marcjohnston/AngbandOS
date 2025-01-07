@@ -1,14 +1,10 @@
 ﻿
 namespace AngbandOS.Core.Expressions
 {
-    public class DiceRollExpression : Expression
+    public class DiceRollExpression : InfixExpression
     {
-        public readonly Expression Dice;
-        public readonly Expression Sides;
-        public DiceRollExpression(Expression dice, Expression sides)
-        {
-            Dice = dice;
-            Sides = sides;
-        }
+        public DiceRollExpression(Expression dice, Expression sides) : base(dice, sides) { }
+        public Expression Dice => base.Operand1;
+        public Expression Sides => base.Operand2;
     }
 }

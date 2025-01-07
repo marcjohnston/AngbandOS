@@ -1,13 +1,9 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
-    public class SubtractionExpression : Expression
+    public class SubtractionExpression : InfixExpression
     {
-        public readonly Expression Minuend;
-        public readonly Expression Subtrahend;
-        public SubtractionExpression(Expression minuend, Expression subtrahend)
-        {
-            Minuend = minuend;
-            Subtrahend = subtrahend;
-        }
+        public SubtractionExpression(Expression minuend, Expression subtrahend) : base(minuend, subtrahend) { }
+        public Expression Minuend => base.Operand1;
+        public Expression Subtrahend => base.Operand1;
     }
 }

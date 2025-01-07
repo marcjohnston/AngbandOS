@@ -11,8 +11,16 @@ namespace AngbandOS.Core.Expressions.IDE
         {
             treeView1.Nodes.Clear();
             ParseLanguage parseLanguage = new ParseLanguage();
-            Parser parser = new Parser();
-            Expression expression = parser.ParseExpression(textBox1.Text, parseLanguage);
+            parseLanguage.RegisterInfixOperator(0, new AdditionInfixOperator());
+            parseLanguage.RegisterInfixOperator(0, new SubtractionInfixOperator());
+            parseLanguage.RegisterInfixOperator(1, new MultiplicationInfixOperator());
+            parseLanguage.RegisterInfixOperator(1, new DivisionInfixOperator());
+            parseLanguage.RegisterInfixOperator(2, new DiceRollInfixOperator());
+            parseLanguage.RegisterFactorParser(new ParenthesisFactorParser());
+            parseLanguage.RegisterFactorParser(new IntegerFactorParser());
+            parseLanguage.RegisterFactorParser(new IdentifierFactorParser(("x", false)));
+            Parser parser = new Parser(parseLanguage);
+            Expression expression = parser.ParseExpression(textBox1.Text);
             TreeNode rootNode = treeView1.Nodes.Add("Expression");
             RenderExpression(rootNode, expression);
         }
