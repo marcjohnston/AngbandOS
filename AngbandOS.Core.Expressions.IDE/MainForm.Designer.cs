@@ -31,6 +31,8 @@
             textBox1 = new TextBox();
             button1 = new Button();
             treeView1 = new TreeView();
+            computeButton = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // textBox1
@@ -57,19 +59,40 @@
             treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             treeView1.Location = new Point(15, 108);
             treeView1.Name = "treeView1";
-            treeView1.Size = new Size(773, 330);
+            treeView1.Size = new Size(773, 273);
             treeView1.TabIndex = 2;
             // 
-            // Form1
+            // computeButton
+            // 
+            computeButton.Location = new Point(15, 387);
+            computeButton.Name = "computeButton";
+            computeButton.Size = new Size(75, 23);
+            computeButton.TabIndex = 3;
+            computeButton.Text = "Compute";
+            computeButton.UseVisualStyleBackColor = true;
+            computeButton.Click += computeButton_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(17, 421);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 4;
+            label1.Text = "label1";
+            // 
+            // MainForm
             // 
             AcceptButton = button1;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(computeButton);
             Controls.Add(treeView1);
             Controls.Add(button1);
             Controls.Add(textBox1);
-            Name = "Form1";
+            Name = "MainForm";
             Text = "AngbandOS Expression IDE";
             ResumeLayout(false);
             PerformLayout();
@@ -80,5 +103,7 @@
         private TextBox textBox1;
         private Button button1;
         private TreeView treeView1;
+        private Button computeButton;
+        private Label label1;
     }
 }

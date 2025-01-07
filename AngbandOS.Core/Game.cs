@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Expressions;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
@@ -17648,6 +17649,12 @@ public bool IsDead = false;
         }
 
         return ParseRollExpression(expression);
+    }
+
+    public Expression ParseRollExpression2(string expression)
+    {
+        Parser parser = new Parser(new AngbandOSExpressionParseLanguage());
+        return parser.ParseExpression(expression);
     }
 
     /// <summary>

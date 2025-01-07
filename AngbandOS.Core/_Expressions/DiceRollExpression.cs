@@ -1,7 +1,4 @@
-﻿
-using AngbandOS.Core.Expressions;
-
-namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Expressions;
 
 public class DiceRollExpression : InfixExpression
 {

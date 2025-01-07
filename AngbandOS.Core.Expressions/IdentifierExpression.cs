@@ -3,9 +3,15 @@
     public class IdentifierExpression : Expression
     {
         public readonly string Identifier;
-        public IdentifierExpression(string identifier)
+        public readonly Func<Expression> GetValueFunction;
+        public IdentifierExpression(string identifier, Func<Expression> getValueFunction)
         {
             Identifier = identifier;
+            GetValueFunction = getValueFunction;
+        }
+        public override Expression Compute()
+        {
+            return GetValueFunction();
         }
     }
 }

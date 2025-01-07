@@ -7,5 +7,10 @@
         {
             Value = value;
         }
+
+        public override Expression Compute()
+        {
+            return this;
+        }
     }
 }

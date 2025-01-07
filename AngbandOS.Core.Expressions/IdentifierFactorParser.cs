@@ -4,10 +4,12 @@
     {
         public bool CaseSensitive { get; }
         public string Identifier { get; }
-        public IdentifierFactorParser(string identifier, bool caseSensitive)
+        public Func<Expression> GetValueFunction { get; }
+        public IdentifierFactorParser(string identifier, bool caseSensitive, Func<Expression> getValueFunction)
         {
             CaseSensitive = caseSensitive;
             Identifier = identifier;
+            GetValueFunction = getValueFunction;
         }
 
         public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
@@ -24,7 +26,7 @@
             if (CaseSensitive && matchedIdentifier == Identifier || !CaseSensitive && matchedIdentifier.ToLower() == Identifier.ToLower())
             {
                 characterIndex += matchedIdentifier.Length;
-                return new IdentifierExpression(matchedIdentifier);
+                return new IdentifierExpression(matchedIdentifier, GetValueFunction);
             }
 
             return null;
