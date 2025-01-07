@@ -7,21 +7,27 @@
 
 namespace AngbandOS.Core.Expressions;
 
-public class AngbandOSExpressionParseLanguage : ParseLanguage
+internal class AngbandOSExpressionParseLanguage : ParseLanguage
 {
+    public readonly Game Game;
+    public AngbandOSExpressionParseLanguage(Game game)
+    {
+        Game = game;
+    }
     public override string WhitespaceCharacters => " ";
     public override FactorParser[] FactorParsers => new FactorParser[]
     {
-    new ParenthesisFactorParser(),
-    new IntegerFactorParser(),
-    new IdentifierFactorParser("x", false)
+        new ParenthesisFactorParser(),
+        new IntegerFactorParser(),
+        new IdentifierFactorParser("x", false, () => new IntegerExpression(Game.ExperienceLevel.IntValue))
     };
+
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]
     {
-    (0, new AdditionInfixOperator()),
-    (0, new SubtractionInfixOperator()),
-    (1, new MultiplicationInfixOperator()),
-    (1, new DivisionInfixOperator()),
-    (2, new DiceRollInfixOperator())
+        (0, new AdditionInfixOperator()),
+        (0, new SubtractionInfixOperator()),
+        (1, new MultiplicationInfixOperator()),
+        (1, new DivisionInfixOperator()),
+        (2, new DiceRollInfixOperator(Game))
     };
 }

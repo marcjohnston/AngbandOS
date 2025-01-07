@@ -27,6 +27,7 @@ global using AngbandOS.Core.DirectionalActivations;
 global using AngbandOS.Core.DungeonGenerators;
 global using AngbandOS.Core.DungeonGuardians;
 global using AngbandOS.Core.Dungeons;
+global using AngbandOS.Core.Expressions;
 global using AngbandOS.Core.MonsterSelectors;
 global using AngbandOS.Core.EventArgs;
 global using AngbandOS.Core.EventsArgs;

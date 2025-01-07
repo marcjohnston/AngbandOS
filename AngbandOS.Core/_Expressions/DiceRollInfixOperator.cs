@@ -1,7 +1,12 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-public class DiceRollInfixOperator : InfixOperator
+internal class DiceRollInfixOperator : InfixOperator
 {
+    public readonly Game Game;
+    public DiceRollInfixOperator(Game game)
+    {
+        Game = game;    
+    }
     public override string OperatorSymbol => "d";
-    public override InfixExpression CreateExpression(Expression operand1, Expression operand2) => new DiceRollExpression(operand1, operand2);
+    public override InfixExpression CreateExpression(Expression operand1, Expression operand2) => new DiceRollExpression(Game, operand1, operand2);
 }
