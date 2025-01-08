@@ -19,5 +19,9 @@
             }
             throw new Exception("Invalid data types for division.");
         }
+        public override string ToString()
+        {
+            return $"{Dividend}/{Divisor}";
+        }
     }
 }

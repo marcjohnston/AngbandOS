@@ -13,5 +13,9 @@
         {
             return GetValueFunction();
         }
+        public override string ToString()
+        {
+            return $"{Identifier}";
+        }
     }
 }

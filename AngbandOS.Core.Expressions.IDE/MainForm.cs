@@ -69,7 +69,7 @@ public partial class MainForm : Form
         Expression result = expression.Compute();
         if (result is IntegerExpression integerResult)
         {
-            label1.Text = integerResult.Value.ToString();
+            label1.Text = $"{expression}={integerResult.Value}";
         }
         else
         {

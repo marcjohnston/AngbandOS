@@ -15,5 +15,9 @@
             }
             throw new Exception("Invalid data types for addition.");
         }
+        public override string ToString()
+        {
+            return $"{Addend1}+{Addend2}";
+        }
     }
 }

@@ -16,5 +16,9 @@
             }
             throw new Exception("Invalid data types for multiplication.");
         }
+        public override string ToString()
+        {
+            return $"{Factor1}*{Factor2}";
+        }
     }
 }

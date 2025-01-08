@@ -26,4 +26,8 @@ internal class DiceRollExpression : InfixExpression
         }
         throw new Exception("Invalid data types for addition.");
     }
+    public override string ToString()
+    {
+        return $"{Dice}d{Sides}";
+    }
 }

@@ -1,10 +1,12 @@
-﻿namespace AngbandOS.Core.Expressions
+﻿using System.Numerics;
+
+namespace AngbandOS.Core.Expressions
 {
     public class SubtractionExpression : InfixExpression
     {
         public SubtractionExpression(Expression minuend, Expression subtrahend) : base(minuend, subtrahend) { }
         public Expression Minuend => base.Operand1;
-        public Expression Subtrahend => base.Operand1;
+        public Expression Subtrahend => base.Operand2;
         public override Expression Compute()
         {
             Expression minuend = Minuend.Compute();
@@ -14,6 +16,10 @@
                 return new IntegerExpression(minuendIntegerExpression.Value - subtrahendIntegerExpression.Value);
             }
             throw new Exception("Invalid data types for subraction.");
+        }
+        public override string ToString()
+        {
+            return $"{Minuend}-{Subtrahend}";
         }
     }
 }
