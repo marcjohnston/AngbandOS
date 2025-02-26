@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public abstract class ParseLanguage
     {
         public virtual string WhitespaceCharacters { get; set; } = " \t";

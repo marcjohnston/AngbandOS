@@ -21,6 +21,6 @@ internal class Fire1xp55r2ProjectileScript : ProjectileScript
     public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(FireProjectile);
-    protected override string DamageRollExpression => "1d1xX+55";
+    protected override string DamageRollExpression => "X+55";
     protected override string RadiusRollExpression => "2";
 }

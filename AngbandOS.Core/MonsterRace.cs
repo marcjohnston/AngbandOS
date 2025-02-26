@@ -394,6 +394,8 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
             }
         }
         Attacks = attackList.ToArray();
+
+        GoldItemFactory = Game.SingletonRepository.Get<ItemFactory>(GoldItemFactoryBindingKey);
     }
 
     public MonsterSpellList Spells = new MonsterSpellList();
@@ -479,53 +481,8 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     [Obsolete("Index will be removed.")]
     public int Index { get; private set; }
 
-    public int GetCoinType()
-    {
-        if (Symbol.Character == '$') // TODO: Hardcoding
-        {
-            if (FriendlyName.Contains(" copper ")) // TODO: Hardcoding
-            {
-                return 2;
-            }
-            if (FriendlyName.Contains(" silver ")) // TODO: Hardcoding
-            {
-                return 5;
-            }
-            if (FriendlyName.Contains(" gold ")) // TODO: Hardcoding
-            {
-                return 10;
-            }
-            if (FriendlyName.Contains(" mithril ")) // TODO: Hardcoding
-            {
-                return 16;
-            }
-            if (FriendlyName.Contains(" adamantite ")) // TODO: Hardcoding
-            {
-                return 17;
-            }
-            if (FriendlyName.StartsWith("Copper ")) // TODO: Hardcoding
-            {
-                return 2;
-            }
-            if (FriendlyName.StartsWith("Silver ")) // TODO: Hardcoding
-            {
-                return 5;
-            }
-            if (FriendlyName.StartsWith("Gold ")) // TODO: Hardcoding
-            {
-                return 10;
-            }
-            if (FriendlyName.StartsWith("Mithril ")) // TODO: Hardcoding
-            {
-                return 16;
-            }
-            if (FriendlyName.StartsWith("Adamantite ")) // TODO: Hardcoding
-            {
-                return 17;
-            }
-        }
-        return 0;
-    }
+    protected virtual string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
+    public ItemFactory GoldItemFactory { get; private set; }
 
     public override string ToString()
     {

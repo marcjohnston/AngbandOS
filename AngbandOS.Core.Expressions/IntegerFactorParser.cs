@@ -2,20 +2,17 @@
 {
     public class IntegerFactorParser : FactorParser
     {
-        public readonly SymbolSet Digits;
-        public IntegerFactorParser() : this("0123456789") { }
-        public IntegerFactorParser(string digits)
-        {
-            Digits = new SymbolSet(digits);
-        }
+        public readonly SymbolSet InitialDigits = new SymbolSet("+-0123456789");
+        public readonly SymbolSet SubsequentDigits = new SymbolSet("0123456789");
+        public IntegerFactorParser() { }
         public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
         {
             int startCharacterIndex = characterIndex;
             char c = text[characterIndex];
-            if (Digits.Contains(c))
+            if (InitialDigits.Contains(c))
             {
                 characterIndex++;
-                while (text.Length > characterIndex && Digits.Contains(text[characterIndex]))
+                while (text.Length > characterIndex && SubsequentDigits.Contains(text[characterIndex]))
                 {
                     characterIndex++;
                 }

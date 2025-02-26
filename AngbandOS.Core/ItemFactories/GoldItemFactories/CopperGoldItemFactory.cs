@@ -16,7 +16,7 @@ internal class CopperGoldItemFactory : ItemFactory
     public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "copper";
 
-    protected override string InitialGoldPiecesRollExpression => "2d3x4";
+    protected override string InitialGoldPiecesRollExpression => "2d3*4";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassBindingKey => nameof(GoldItemClass);
     public override int PackSort => 0;

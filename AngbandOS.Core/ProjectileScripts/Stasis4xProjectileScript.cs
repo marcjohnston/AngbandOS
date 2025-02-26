@@ -21,6 +21,6 @@ internal class Stasis4xProjectileScript : ProjectileScript
     public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(StasisProjectile);
-    protected override string DamageRollExpression => "1d4xX";
+    protected override string DamageRollExpression => "4*X";
     public override bool? Identified => null;
 }

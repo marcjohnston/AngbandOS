@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public abstract class InfixExpression : Expression
     {
         protected readonly Expression Operand1;

@@ -21,7 +21,7 @@ internal class DispelEvilAtLos4xProjectileScript : ProjectileScript
     public override bool Thru => false;
     public override bool Hide => true;
     protected override string ProjectileBindingKey => nameof(DispelEvilProjectile);
-    protected override string DamageRollExpression => "1d4xX";
+    protected override string DamageRollExpression => "4*X";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;
 }

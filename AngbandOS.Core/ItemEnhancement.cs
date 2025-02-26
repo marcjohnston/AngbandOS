@@ -28,22 +28,22 @@ internal abstract class ItemEnhancement : IGetKey
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
 
-        itemCharacteristics.BonusStrength = BonusStrengthRoll == null ? 0 : BonusStrengthRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusIntelligence = BonusIntelligenceRoll == null ? 0 : BonusIntelligenceRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusWisdom = BonusWisdomRoll == null ? 0 : BonusWisdomRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusDexterity = BonusDexterityRoll == null ? 0 : BonusDexterityRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusConstitution = BonusConstitutionRoll == null ? 0 : BonusConstitutionRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusCharisma = BonusCharismaRoll == null ? 0 : BonusCharismaRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusStealth = BonusStealthRoll == null ? 0 : BonusStealthRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusSearch = BonusSearchRoll == null ? 0 : BonusSearchRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusInfravision = BonusInfravisionRoll == null ? 0 : BonusInfravisionRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusTunnel = BonusTunnelRoll == null ? 0 : BonusTunnelRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusAttacks = BonusAttacksRoll == null ? 0 : BonusAttacksRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusSpeed = BonusSpeedRoll == null ? 0 : BonusSpeedRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusStrength = BonusStrengthRoll == null ? 0 : BonusStrengthRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusIntelligence = BonusIntelligenceRoll == null ? 0 : BonusIntelligenceRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusWisdom = BonusWisdomRoll == null ? 0 : BonusWisdomRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusDexterity = BonusDexterityRoll == null ? 0 : BonusDexterityRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusConstitution = BonusConstitutionRoll == null ? 0 : BonusConstitutionRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusCharisma = BonusCharismaRoll == null ? 0 : BonusCharismaRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusStealth = BonusStealthRoll == null ? 0 : BonusStealthRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusSearch = BonusSearchRoll == null ? 0 : BonusSearchRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusInfravision = BonusInfravisionRoll == null ? 0 : BonusInfravisionRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusTunnel = BonusTunnelRoll == null ? 0 : BonusTunnelRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusAttacks = BonusAttacksRoll == null ? 0 : BonusAttacksRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusSpeed = BonusSpeedRoll == null ? 0 : BonusSpeedRoll.Compute<IntegerExpression>().Value;
 
-        itemCharacteristics.BonusArmorClass = BonusArmorClassRoll == null ? 0 : BonusArmorClassRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusHit = BonusHitRoll == null ? 0 : BonusHitRoll.Get(Game.UseRandom);
-        itemCharacteristics.BonusDamage = BonusDamageRoll == null ? 0 : BonusDamageRoll.Get(Game.UseRandom);
+        itemCharacteristics.BonusArmorClass = BonusArmorClassRoll == null ? 0 : BonusArmorClassRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusHit = BonusHitRoll == null ? 0 : BonusHitRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusDamage = BonusDamageRoll == null ? 0 : BonusDamageRoll.Compute<IntegerExpression>().Value;
 
         itemCharacteristics.Activation = Activation;
         itemCharacteristics.Aggravate = Aggravate;
@@ -221,18 +221,18 @@ internal abstract class ItemEnhancement : IGetKey
     /// Returns a maximum value for a random amount of additional strength when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item.  Returns 0, by default.
     /// </summary>
-    public Roll? BonusStrengthRoll { get; private set; } = null;
-    public Roll? BonusIntelligenceRoll { get; private set; } = null;
-    public Roll? BonusWisdomRoll { get; private set; } = null;
-    public Roll? BonusDexterityRoll { get; private set; } = null;
-    public Roll? BonusConstitutionRoll { get; private set; } = null;
-    public Roll? BonusCharismaRoll { get; private set; } = null;
-    public Roll? BonusStealthRoll { get; private set; } = null;
-    public Roll? BonusSearchRoll { get; private set; } = null;
-    public Roll? BonusInfravisionRoll { get; private set; } = null;
-    public Roll? BonusTunnelRoll { get; private set; } = null;
-    public Roll? BonusAttacksRoll { get; private set; } = null;
-    public Roll? BonusSpeedRoll { get; private set; } = null;
+    public Expression? BonusStrengthRoll { get; private set; } = null;
+    public Expression? BonusIntelligenceRoll { get; private set; } = null;
+    public Expression? BonusWisdomRoll { get; private set; } = null;
+    public Expression? BonusDexterityRoll { get; private set; } = null;
+    public Expression? BonusConstitutionRoll { get; private set; } = null;
+    public Expression? BonusCharismaRoll { get; private set; } = null;
+    public Expression? BonusStealthRoll { get; private set; } = null;
+    public Expression? BonusSearchRoll { get; private set; } = null;
+    public Expression? BonusInfravisionRoll { get; private set; } = null;
+    public Expression? BonusTunnelRoll { get; private set; } = null;
+    public Expression? BonusAttacksRoll { get; private set; } = null;
+    public Expression? BonusSpeedRoll { get; private set; } = null;
 
     protected virtual string? BonusArmorClassRollExpression => null;
 
@@ -240,7 +240,7 @@ internal abstract class ItemEnhancement : IGetKey
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public Roll? BonusArmorClassRoll { get; private set; }
+    public Expression? BonusArmorClassRoll { get; private set; }
 
     protected virtual string? BonusDamageRollExpression => null;
 
@@ -248,7 +248,7 @@ internal abstract class ItemEnhancement : IGetKey
     /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public Roll? BonusDamageRoll { get; private set; }
+    public Expression? BonusDamageRoll { get; private set; }
 
     protected virtual string? BonusHitRollExpression => null;
 
@@ -256,7 +256,7 @@ internal abstract class ItemEnhancement : IGetKey
     /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public Roll? BonusHitRoll { get; private set; } 
+    public Expression? BonusHitRoll { get; private set; } 
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and

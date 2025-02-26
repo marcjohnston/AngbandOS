@@ -33,7 +33,7 @@ internal abstract class Activation : IGetKey
     /// <summary>
     /// Returns a Roll that determines the amount of time the activation needs to recharge.  This property is bound from the <see cref="RechargeTimeRollExpression"/> property during the bind phase.
     /// </summary>
-    public Roll RechargeTimeRoll { get; protected set; }
+    public Expression RechargeTimeRoll { get; protected set; }
 
     /// <summary>
     /// Returns the gold value of the activation.
@@ -43,7 +43,7 @@ internal abstract class Activation : IGetKey
     /// <summary>
     /// Returns the description of the activation.
     /// </summary>
-    public string Description => $"{Name.ToLower()} every {RechargeTimeRoll.Expression} turns";
+    public string Description => $"{Name.ToLower()} every {RechargeTimeRoll} turns";
 
     /// <summary>
     /// Performs the item activation by calling the <see cref="OnActivate"/> method that must be inherited by a derived class and return false, if the script is 
@@ -62,7 +62,8 @@ internal abstract class Activation : IGetKey
         UsedResult usedResult = ActivationCancellableScript.ExecuteActivateItemScript(item);
         if (usedResult.IsUsed)
         {
-            item.ActivationRechargeTimeRemaining = RechargeTimeRoll.Get(Game.UseRandom);
+            IntegerExpression result = RechargeTimeRoll.Compute<IntegerExpression>();
+            item.ActivationRechargeTimeRemaining = result.Value;
         }
         return usedResult;
     }

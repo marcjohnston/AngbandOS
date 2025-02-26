@@ -21,5 +21,5 @@ internal class Stun1xProjectileScript : ProjectileScript
     public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(StunProjectile);
-    protected override string DamageRollExpression => "1d1xX";
+    protected override string DamageRollExpression => "X";
 }

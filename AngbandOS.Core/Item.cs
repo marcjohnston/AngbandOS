@@ -272,9 +272,9 @@ internal sealed class Item : IComparable<Item>
     public bool HatesElectricity => _factory.HatesElectricity;
     public bool HatesFire => _factory.HatesFire;
     public (IEatOrQuaffScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple => _factory.QuaffTuple;
-    public (IZapRodScript Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple => _factory.ZapTuple;
-    public (IReadScrollOrUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
-    public (IAimWandScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
+    public (IZapRodScript Script, Expression TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple => _factory.ZapTuple;
+    public (IReadScrollOrUseStaffScript UseScript, Expression InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
+    public (IAimWandScript ActivationScript, Expression InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
     public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ReadTuple => _factory.ReadTuple;
     public Probability BreakageChanceProbability => _factory.BreakageChanceProbability;
     public int MissileDamageMultiplier => _factory.MissileDamageMultiplier;
@@ -2585,7 +2585,7 @@ internal sealed class Item : IComparable<Item>
 
         // Now we retrieve all of the characteristics from the factory.
         NutritionalValue = _factory.InitialNutritionalValue;        
-        GoldPieces = _factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
+        GoldPieces = _factory.InitialGoldPiecesRoll.Compute<IntegerExpression>().Value;
         TurnsOfLightRemaining = _factory.InitialTurnsOfLight;
         Weight = _factory.Weight;
         Characteristics.BonusHit = _factory.BonusHit;
@@ -2599,12 +2599,12 @@ internal sealed class Item : IComparable<Item>
 
         if (_factory.AimingTuple != null)
         {
-            WandChargesRemaining = _factory.AimingTuple.Value.InitialChargesCountRoll.Get(Game.UseRandom);
+            WandChargesRemaining = _factory.AimingTuple.Value.InitialChargesCountRoll.Compute<IntegerExpression>().Value;
         }
 
         if (_factory.UseTuple != null)
         {
-            StaffChargesRemaining = _factory.UseTuple.Value.InitialCharges.Get(Game.UseRandom);
+            StaffChargesRemaining = _factory.UseTuple.Value.InitialCharges.Compute<IntegerExpression>().Value;
         }
     }
     #endregion

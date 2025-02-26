@@ -13,6 +13,7 @@ internal class CreepingSilverCoinsMonsterRace : MonsterRace
     protected CreepingSilverCoinsMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(DollarSignSymbol);
+    protected override string GoldItemFactoryBindingKey => nameof(Silver2GoldItemFactory);
     public override ColorEnum Color => ColorEnum.Silver;
     
     public override bool Animal => true;

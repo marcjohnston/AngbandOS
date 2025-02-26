@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public abstract class Expression
     {
         public abstract Expression Compute();

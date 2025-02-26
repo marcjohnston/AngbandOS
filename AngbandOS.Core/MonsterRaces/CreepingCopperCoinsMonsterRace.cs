@@ -13,6 +13,8 @@ internal class CreepingCopperCoinsMonsterRace : MonsterRace
     protected CreepingCopperCoinsMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(DollarSignSymbol);
+    protected override string GoldItemFactoryBindingKey => nameof(Copper2GoldItemFactory);
+
     public override ColorEnum Color => ColorEnum.Copper;
     
     public override bool Animal => true;

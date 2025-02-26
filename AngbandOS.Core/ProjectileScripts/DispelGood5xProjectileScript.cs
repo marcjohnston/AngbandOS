@@ -21,7 +21,7 @@ internal class DispelGood5xProjectileScript : ProjectileScript
     public override bool Thru => false;
     public override bool Hide => true;
     protected override string ProjectileBindingKey => nameof(DispelGoodProjectile);
-    protected override string DamageRollExpression => "1d5xX";
+    protected override string DamageRollExpression => "5*X";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;
 }

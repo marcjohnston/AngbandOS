@@ -180,16 +180,17 @@ internal abstract class ItemFactory : ItemEnhancement
         // Bind the MassProduceTuples
         if (MassProduceBindingTuples != null)
         {
-            List<(int, Roll)> massProduceTuplesList = new List<(int, Roll)>();
+            List<(int, Expression)> massProduceTuplesList = new List<(int, Expression)>();
             foreach ((int cost, string rollExpression) in MassProduceBindingTuples)
             {
-                (int, Roll) newTuple = (cost, Game.ParseRollExpression(rollExpression));
+                Expression rollResult = Game.ParseRollExpression(rollExpression);
+                (int, Expression) newTuple = (cost, rollResult);
                 massProduceTuplesList.Add(newTuple);
             }
             MassProduceTuples = massProduceTuplesList.ToArray();
 
             // Validate the MassProduceTuples sorting.
-            if (!Game.ValidateTupleSorting<(int cost, Roll roll)>(MassProduceTuples, (a, b) => a.cost < b.cost))
+            if (!Game.ValidateTupleSorting<(int cost, Expression expression)>(MassProduceTuples, (a, b) => a.cost < b.cost))
             {
                 throw new Exception($"The MassProduceTupleNames specified for the {GetType().Name} are not sorted in ascending order by cost.");
             }
@@ -215,7 +216,7 @@ internal abstract class ItemFactory : ItemEnhancement
         if (AimingBindingTuple != null)
         {
             IAimWandScript identifableDirectionalScript = Game.SingletonRepository.Get<IAimWandScript>(AimingBindingTuple.Value.ActivationScriptName);
-            Roll initialChargeCountRoll = Game.ParseRollExpression(AimingBindingTuple.Value.InitialChargesCountRollExpression);
+            Expression initialChargeCountRoll = Game.ParseRollExpression(AimingBindingTuple.Value.InitialChargesCountRollExpression);
             int perChargeValue = AimingBindingTuple.Value.PerChargeValue;
             int manaValue = AimingBindingTuple.Value.ManaValue;
             AimingTuple = (identifableDirectionalScript, initialChargeCountRoll, perChargeValue, manaValue);
@@ -239,7 +240,7 @@ internal abstract class ItemFactory : ItemEnhancement
         if (ZapBindingTuple != null)
         {
             IZapRodScript identifiedAndUsedScriptItemDirection = Game.SingletonRepository.Get<IZapRodScript>(ZapBindingTuple.Value.ScriptName);
-            Roll roll = Game.ParseRollExpression(ZapBindingTuple.Value.TurnsToRecharge);
+            Expression roll = Game.ParseRollExpression(ZapBindingTuple.Value.TurnsToRecharge);
             bool requiresAiming = ZapBindingTuple.Value.RequiresAiming;
             int manaEquivalent = ZapBindingTuple.Value.ManaEquivalent;
             ZapTuple = (identifiedAndUsedScriptItemDirection, roll, requiresAiming, manaEquivalent);
@@ -258,7 +259,7 @@ internal abstract class ItemFactory : ItemEnhancement
         if (UseBindingTuple != null)
         {
             IReadScrollOrUseStaffScript useScript = Game.SingletonRepository.Get<IReadScrollOrUseStaffScript>(UseBindingTuple.Value.UseScriptBindingKey);
-            Roll initialChargeRoll = Game.ParseRollExpression(UseBindingTuple.Value.InitialChargesRollExpression);
+            Expression initialChargeRoll = Game.ParseRollExpression(UseBindingTuple.Value.InitialChargesRollExpression);
             int chargeValue = UseBindingTuple.Value.PerChargeValue;
             int manaEquivalent = UseBindingTuple.Value.ManaEquivalent;
             UseTuple = (useScript, initialChargeRoll, chargeValue, manaEquivalent);
@@ -312,11 +313,12 @@ internal abstract class ItemFactory : ItemEnhancement
 
         if (MassProduceTuples != null)
         {
-            foreach ((int cost, Roll roll) in MassProduceTuples)
+            foreach ((int cost, Expression expression) in MassProduceTuples)
             {
                 if (itemCost <= cost)
                 {
-                    return roll.Get(random);
+                    IntegerExpression result = expression.Compute<IntegerExpression>();
+                    return result.Value;
                 }
             }
         }
@@ -1402,7 +1404,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// The amount of mana needed to consume to keep the charge.
     /// 
     /// </summary>
-    public (IReadScrollOrUseStaffScript UseScript, Roll InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple { get; private set; } = null;
+    public (IReadScrollOrUseStaffScript UseScript, Expression InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple { get; private set; } = null;
 
     /// <summary>
     /// Returns the noticeable script to run when the player quaffs the potion; or null, if the item cannot be quaffed.  This property is bound using the <see cref="QuaffBindingTuple"/>
@@ -1425,11 +1427,11 @@ internal abstract class ItemFactory : ItemEnhancement
     /// Returns the <see cref="IAimWandScript"/> script for wands when aimed, a Roll to determine the number of charges to assign to new wands and the value for each charge; or null, if the item cannot be aimed.  
     /// This property is bound from the <see cref="AimingBindingTuple"/> property during the bind phase.
     /// </summary>
-    public (IAimWandScript ActivationScript, Roll InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple { get; private set; } = null;
+    public (IAimWandScript ActivationScript, Expression InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple { get; private set; } = null;
 
     public IScriptItemInt? RechargeScript { get; private set; }
 
-    public (int, Roll)[]? MassProduceTuples { get; private set; } = null;
+    public (int, Expression)[]? MassProduceTuples { get; private set; } = null;
     public Probability? BreaksDuringEnchantmentProbability { get; private set; }
     public (int[]? Powers, bool? StoreStock, IEnhancementScript[] Scripts)[]? EnchantmentTuples { get; private set; }
 
@@ -1448,7 +1450,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// </summary>
     public Probability BreakageChanceProbability { get; private set; }
 
-    public (IZapRodScript Script, Roll TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple { get; private set; } = null;
+    public (IZapRodScript Script, Expression TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple { get; private set; } = null;
     public ItemClass ItemClass { get; private set; }
 
     /// <summary>
@@ -1461,7 +1463,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// Returns a Roll that is used to determine the number of gold pieces that are given to the player when the item is picked up.  This property is bound from the
     /// <see cref="InitialGoldPiecesRollExpression"/> property during the bind phase.
     /// </summary>
-    public Roll InitialGoldPiecesRoll { get; private set; }
+    public Expression InitialGoldPiecesRoll { get; private set; }
 
     /// <summary>
     /// Returns the spells, in order, that belong to this book; or null, if the item is not a book.  This property is bound from the SpellNames property during the binding phase.

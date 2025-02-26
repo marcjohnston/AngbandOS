@@ -1110,6 +1110,8 @@ public bool IsDead = false;
     /// </summary>
     public readonly string? StartupTownName = null;
 
+    public readonly ItemFactory[] GoldFactories;
+
     /// <summary>
     /// Creates a new game.  
     /// </summary>
@@ -1149,6 +1151,19 @@ public bool IsDead = false;
         if (gameConfiguration.MaxMessageLogLength != null)
         {
             MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
+        }
+        if (gameConfiguration.StartupTownName != null)
+        {
+            StartupTownName = gameConfiguration.StartupTownName;
+        }
+        if (gameConfiguration.GoldFactoriesBindingKeys != null)
+        {
+            List<ItemFactory> goldFactoryList = new List<ItemFactory>();
+            foreach (string goldFactoryBindingKey in gameConfiguration.GoldFactoriesBindingKeys)
+            {
+                goldFactoryList.Add(SingletonRepository.Get<ItemFactory>(goldFactoryBindingKey));
+            }
+            GoldFactories = goldFactoryList.ToArray();
         }
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
@@ -2107,15 +2122,11 @@ public bool IsDead = false;
             }
         }
 
-        // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-        ItemClass goldItemClass = SingletonRepository.Get<ItemClass>(nameof(GoldItemClass));
-        ItemFactory[] goldItemFactories = SingletonRepository.Get<ItemFactory>().Where(_itemFactory => _itemFactory.ItemClass.Key == goldItemClass.Key).OrderBy(_goldItemFactory => _goldItemFactory.InitialGoldPiecesRoll.MaximumValue).ToArray();
-
-        if (goldType >= goldItemFactories.Length)
+        if (goldType >= GoldFactories.Length)
         {
-            goldType = goldItemFactories.Length - 1;
+            goldType = GoldFactories.Length - 1;
         }
-        ItemFactory itemFactory = goldItemFactories[goldType.Value];
+        ItemFactory itemFactory = GoldFactories[goldType.Value];
         return itemFactory.GenerateItem();
     }
 
@@ -3148,7 +3159,6 @@ public bool IsDead = false;
         bool doGold = !rPtr.OnlyDropItem;
         bool doItem = !rPtr.OnlyDropGold;
         bool cloned = false;
-        int forceCoin = rPtr.GetCoinType();
         int y = mPtr.MapY;
         int x = mPtr.MapX;
         if (mPtr.SmCloned)
@@ -3162,7 +3172,8 @@ public bool IsDead = false;
         }
         if (mPtr.StolenGold > 0)
         {
-            Item oPtr = MakeGold(10);
+
+            Item oPtr = rPtr.GoldItemFactory.GenerateItem();
             oPtr.GoldPieces = mPtr.StolenGold;
             DropNear(oPtr, -1, y, x);
         }
@@ -3214,7 +3225,8 @@ public bool IsDead = false;
         {
             if (doGold && (!doItem || RandomLessThan(100) < 50))
             {
-                Item qPtr = MakeGold(forceCoin);
+                // Make gold to drop near the monster.
+                Item qPtr = rPtr.GoldItemFactory.GenerateItem();
                 DropNear(qPtr, -1, y, x);
                 dumpGold++;
             }
@@ -17640,7 +17652,13 @@ public bool IsDead = false;
         }
     }
 
-    public Roll? ParseNullableRollExpression(string? expression)
+    public Expression ParseRollExpression(string expression)
+    {
+        Parser parser = new Parser(new AngbandOSExpressionParseLanguage(this));
+        return parser.ParseExpression(expression);
+    }
+
+    public Expression? ParseNullableRollExpression(string? expression)
     {
         if (expression == null)
         {
@@ -17648,130 +17666,6 @@ public bool IsDead = false;
         }
 
         return ParseRollExpression(expression);
-    }
-
-    public Expression ParseRollExpression2(string expression)
-    {
-        Parser parser = new Parser(new AngbandOSExpressionParseLanguage(this));
-        return parser.ParseExpression(expression);
-    }
-
-    public Expression? ParseNullableRollExpression2(string? expression)
-    {
-        if (expression == null)
-        {
-            return null;
-        }
-
-        return ParseRollExpression2(expression);
-    }
-
-    /// <summary>
-    /// Returns a Roll object from a roll expression (examples: 1d2x3+4, 1d2xX+4, 100).  The expression supports both integer and dice-notation formats.
-    /// </summary>
-    /// <param name="game"></param>
-    /// <param name="expression">
-    /// Valid format:
-    /// AdXxC+B
-    /// where:
-    /// A, X and B are integers; when specified
-    /// A >= 1; if omitted, defaults to 1
-    /// X >= 2
-    /// B can be negative and defaults to 0; when omitted
-    /// </param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public Roll ParseRollExpression(string expression)
-    {
-        // Test for simple positive or negative integer value.
-        if (int.TryParse(expression, out int value))
-        {
-            return new IntegerValueRoll(this, value);
-        }
-
-        // Parse dice notation AdXxC+B.
-        expression = expression.ToLower();
-        int dPos = expression.IndexOf('d');
-        if (dPos == -1)
-        {
-            throw new Exception("Invalid roll expression.");
-        }
-
-        // We will use a Regex for pattern matching.
-        Regex regEx = new Regex(@"^(-?)(\d*)d(\d+)((x|/)(\d+|x))?((\+|-)(\d*))?$");
-        Match match = regEx.Match(expression);
-
-        // The entire syntax must match.
-        if (expression != match.Groups[0].Value)
-        {
-            throw new Exception($"Invalid roll expression {expression}.");
-        }
-
-        // Extract the matches that we are interested in.
-        string negative = match.Groups[1].Value;
-        string dieCountMatch = match.Groups[2].Value;
-        string sidesCountMatch = match.Groups[3].Value;
-        string multiplierOrDivisorMatch = match.Groups[5].Value;
-        string multiplierMatch = match.Groups[6].Value;
-        string bonusMatch = match.Groups[7].Value;
-
-        if (negative.Length != 0 && negative != "-")
-        {
-            throw new Exception($"Invalid negative roll expression {negative}.");
-        }
-        bool isNegative = negative == "-";
-
-        // Ensure integer values.  Actually the regex is already ensuring digits, but we do have a bit-length limit to check.
-        if (!int.TryParse(dieCountMatch, out int dieCount))
-        {
-            throw new Exception($"Invalid number roll expression {dieCountMatch}.");
-        }
-        if (!int.TryParse(sidesCountMatch, out int sidesCount))
-        {
-            throw new Exception($"Invalid max roll expression {sidesCountMatch}.");
-        }
-
-        bool multiplierIsDivisor = multiplierOrDivisorMatch == "/";
-
-        // Compute the bonus, if any.
-        int bonus = 0;
-        if (bonusMatch != "")
-        {
-            if (!int.TryParse(bonusMatch, out bonus))
-            {
-                throw new Exception($"Invalid bonus roll expression {bonusMatch}.");
-            }
-        }
-
-        // Check to see if there is a multiplier.
-        if (multiplierMatch != "")
-        {
-            // Check to see if the multiplier is for the player experience level.
-            if (multiplierMatch == "x")
-            {
-                if (multiplierIsDivisor)
-                {
-                    return new ExperienceDivisorDiceRoll(this, isNegative, dieCount, sidesCount, bonus);
-                }
-                return new ExperienceMultiplierDiceRoll(this, isNegative, dieCount, sidesCount, bonus);
-            }
-
-            // Parse the numeric multiplier.
-            int multiplier = 1;
-            if (!int.TryParse(multiplierMatch, out multiplier))
-            {
-                throw new Exception($"Invalid multiplier expression {multiplierMatch}.");
-            }
-
-            if (multiplierIsDivisor)
-            {
-                return new NumericDivisorDiceRoll(this, isNegative, dieCount, sidesCount, multiplier, bonus);
-            }
-            return new NumericMultiplierDiceRoll(this, isNegative, dieCount, sidesCount, multiplier, bonus);
-        }
-
-        // There is no multiplier.  This is a simple DieRoll in the format 1d2+2.
-        return new DiceRoll(this, dieCount, sidesCount, bonus);
     }
 
     public Probability? ParseNullableProbabilityExpression(string? expression)

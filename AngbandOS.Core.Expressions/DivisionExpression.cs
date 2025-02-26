@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public class DivisionExpression : InfixExpression
     {
         public DivisionExpression(Expression dividend, Expression divsor) : base(dividend, divsor) { }

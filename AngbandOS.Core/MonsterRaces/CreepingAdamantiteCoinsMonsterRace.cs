@@ -14,7 +14,8 @@ internal class CreepingAdamantiteCoinsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    
+
+    protected override string GoldItemFactoryBindingKey => nameof(AdamantiteGoldItemFactory);
     public override bool Animal => true;
     public override int ArmorClass => 50;
     protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]

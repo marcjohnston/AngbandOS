@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Expressions;
 
+[Serializable]
 internal class AngbandOSExpressionParseLanguage : ParseLanguage
 {
     public readonly Game Game;
@@ -19,7 +20,7 @@ internal class AngbandOSExpressionParseLanguage : ParseLanguage
     {
         new ParenthesisFactorParser(),
         new IntegerFactorParser(),
-        new IdentifierFactorParser("x", false, () => new IntegerExpression(Game.ExperienceLevel.IntValue))
+        new ExperienceLevelIdentifierFactorParser(Game)
     };
 
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]

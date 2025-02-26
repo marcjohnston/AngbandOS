@@ -16,7 +16,7 @@ internal class MithrilGoldItemFactory : ItemFactory
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "mithril";
 
-    protected override string InitialGoldPiecesRollExpression => "2d40x4";
+    protected override string InitialGoldPiecesRollExpression => "2d40*4";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassBindingKey => nameof(GoldItemClass);
     public override int PackSort => 0;

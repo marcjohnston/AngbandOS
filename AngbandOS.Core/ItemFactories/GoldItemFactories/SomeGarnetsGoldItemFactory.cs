@@ -15,7 +15,7 @@ internal class SomeGarnetsGoldItemFactory : ItemFactory
     protected override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "some garnets";
-    protected override string InitialGoldPiecesRollExpression => "2d9x4";
+    protected override string InitialGoldPiecesRollExpression => "2d9*4";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassBindingKey => nameof(GoldItemClass);
     public override int PackSort => 0;

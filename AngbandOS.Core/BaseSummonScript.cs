@@ -47,7 +47,7 @@ internal abstract class BaseSummonScript : IGetKey, IUniversalScript
     protected abstract string MonsterFilterBindingKey { get; }
     public MonsterFilter MonsterFilter { get; private set; }
     protected abstract string LevelRollExpression { get; }
-    public Roll LevelRoll { get; private set; }
+    public Expression LevelRoll { get; private set; }
     public virtual string? PreMessage => null;
     public virtual string? SuccessMessage => null;
     public virtual string? FailureMessage => null;
@@ -58,7 +58,8 @@ internal abstract class BaseSummonScript : IGetKey, IUniversalScript
         {
             Game.MsgPrint(PreMessage);
         }
-        bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, MonsterFilter, Group, Pet);
+        IntegerExpression levelResult = LevelRoll.Compute<IntegerExpression>();
+        bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, Group, Pet);
         if (success && SuccessMessage != null)
         {
             Game.MsgPrint(SuccessMessage);

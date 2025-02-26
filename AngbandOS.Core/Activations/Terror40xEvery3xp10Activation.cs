@@ -15,7 +15,7 @@ internal class Terror40xEvery3xp10Activation : Activation
 {
     private Terror40xEvery3xp10Activation(Game game) : base(game) { }
 
-    protected override string RechargeTimeRollExpression => "3d1xX+10";
+    protected override string RechargeTimeRollExpression => "3d1*X+10";
     public override string? PreActivationMessage => "rays of fear in every direction";
     protected override string ActivationCancellableScriptItemBindingKey => nameof(TurnAllAtLos1xp40ProjectileScript);
 

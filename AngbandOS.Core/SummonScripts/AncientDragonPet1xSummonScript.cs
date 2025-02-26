@@ -14,7 +14,7 @@ internal class AncientDragonPet1xSummonScript : BaseSummonScript
 
     protected override string MonsterFilterBindingKey => nameof(HiDragonNoUniquesMonsterFilter);
     public override bool Pet => true;
-    protected override string LevelRollExpression => "1d1xX";
+    protected override string LevelRollExpression => "X";
     public override string? PreMessage => "You concentrate on the image of an ancient dragon...";
     public override string? FailureMessage => "No-one ever turns up.";
 }

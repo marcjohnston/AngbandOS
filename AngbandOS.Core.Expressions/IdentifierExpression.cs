@@ -1,21 +1,15 @@
-﻿namespace AngbandOS.Core.Expressions
+﻿namespace AngbandOS.Core.Expressions;
+
+[Serializable]
+public abstract class IdentifierExpression : Expression
 {
-    public class IdentifierExpression : Expression
+    public readonly string Identifier;
+    public IdentifierExpression(string identifier)
     {
-        public readonly string Identifier;
-        public readonly Func<Expression> GetValueFunction;
-        public IdentifierExpression(string identifier, Func<Expression> getValueFunction)
-        {
-            Identifier = identifier;
-            GetValueFunction = getValueFunction;
-        }
-        public override Expression Compute()
-        {
-            return GetValueFunction();
-        }
-        public override string ToString()
-        {
-            return $"{Identifier}";
-        }
+        Identifier = identifier;
+    }
+    public override string ToString()
+    {
+        return $"{Identifier}";
     }
 }

@@ -338,6 +338,7 @@ internal class SingletonRepository
         // Load the remaining types from the assembly.
         LoadAllAssemblyTypes();
 
+        // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
         _singletonsDictionary["MonsterRace"].List.Clear();

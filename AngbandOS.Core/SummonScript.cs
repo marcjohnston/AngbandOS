@@ -5,40 +5,40 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+//namespace AngbandOS.Core.Scripts;
 
-[Serializable]
-internal abstract class SummonScript : IGetKey
-{
-    protected readonly Game Game;
-    public SummonScript(Game game)
-    {
-        Game = game;
-    }
+//[Serializable]
+//internal abstract class SummonScript : IGetKey
+//{
+//    protected readonly Game Game;
+//    public SummonScript(Game game)
+//    {
+//        Game = game;
+//    }
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
+//    /// <summary>
+//    /// Returns the entity serialized into a Json string.
+//    /// </summary>
+//    /// <returns></returns>
+//    public string ToJson()
+//    {
+//        return "";
+//    }
 
-    public virtual string Key => GetType().Name;
+//    public virtual string Key => GetType().Name;
 
-    public string GetKey => Key;
+//    public string GetKey => Key;
 
-    public void Bind()
-    {
-    }
+//    public void Bind()
+//    {
+//    }
 
-    public void ExecuteSuccessByChanceScript()
-    {
-        //if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonNoUniquesMonsterFilter)), true, false))
-        //{
-        //    Game.MsgPrint("The summoned dragon gets angry!");
-        //}
-    }
-}
+//    public void ExecuteSuccessByChanceScript()
+//    {
+//        //if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonNoUniquesMonsterFilter)), true, false))
+//        //{
+//        //    Game.MsgPrint("The summoned dragon gets angry!");
+//        //}
+//    }
+//}
 

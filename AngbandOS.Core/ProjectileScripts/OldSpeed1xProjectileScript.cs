@@ -21,6 +21,6 @@ internal class OldSpeed1xProjectileScript : ProjectileScript
     public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(OldSpeedProjectile);
-    protected override string DamageRollExpression => "1d1xX";
+    protected override string DamageRollExpression => "X";
     public override bool? Identified => null;
 }

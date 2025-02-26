@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public class MultiplicationExpression : InfixExpression
     {
         public MultiplicationExpression(Expression factor1, Expression factor2) : base(factor1, factor2) { }

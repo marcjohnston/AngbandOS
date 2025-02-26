@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
+[Serializable]
 internal class DiceRollExpression : InfixExpression
 {
     public readonly Game Game;

@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public class AdditionInfixOperator : InfixOperator
     {
         public override string OperatorSymbol => "+";

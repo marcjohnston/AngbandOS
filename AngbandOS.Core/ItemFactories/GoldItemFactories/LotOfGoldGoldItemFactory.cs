@@ -16,7 +16,7 @@ internal class LotOfGoldGoldItemFactory : ItemFactory
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "gold**";
 
-    protected override string InitialGoldPiecesRollExpression => "2d16x4";
+    protected override string InitialGoldPiecesRollExpression => "2d16*4";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassBindingKey => nameof(GoldItemClass);
     public override int PackSort => 0;

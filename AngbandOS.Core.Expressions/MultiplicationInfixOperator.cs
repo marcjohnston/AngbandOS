@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public class MultiplicationInfixOperator : InfixOperator
     {
         public override string OperatorSymbol => "*";

@@ -22,5 +22,5 @@ internal class OldPolymorph1xProjectileScript : ProjectileScript
     public override bool Hide => false;
     public override bool? Identified => null;
     protected override string ProjectileBindingKey => nameof(OldPolymorphProjectile);
-    protected override string DamageRollExpression => "1d1xX";
+    protected override string DamageRollExpression => "X";
 }

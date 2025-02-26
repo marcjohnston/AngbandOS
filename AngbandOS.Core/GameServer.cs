@@ -185,6 +185,7 @@ public class GameServer
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
         }
 
+        gameConfiguration = new CthangbandGameConfiguration();
         bool gameIsOver = false;
         try
         {

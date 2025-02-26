@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions
 {
+    [Serializable]
     public class IntegerExpression : Expression
     {
         public readonly int Value;

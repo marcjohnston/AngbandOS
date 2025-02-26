@@ -45,7 +45,7 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     /// </summary>
     protected abstract string DamageRollExpression { get; }
 
-    public Roll DamageRoll { get; protected set; }
+    public Expression DamageRoll { get; protected set; }
 
     /// <summary>
     /// Returns a roll expression for the radius of damage the projectile produces.  A radius of 0 represents a bolt.  A radius >0 represents a ball and a radius <0 represents breathe.
@@ -53,7 +53,7 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     /// </summary>
     protected virtual string RadiusRollExpression => "0";
 
-    public Roll RadiusRoll { get; protected set; }
+    public Expression RadiusRoll { get; protected set; }
 
     /// <summary>
     /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.
@@ -244,8 +244,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
                 {
                     RenderPreMessage();
                     bool anyIdentified = false;
-                    int damage = DamageRoll.Get(Game.UseRandom);
-                    int radius = RadiusRoll.Get(Game.UseRandom);
+                    int damage = DamageRoll.Compute<IntegerExpression>().Value;
+                    int radius = RadiusRoll.Compute<IntegerExpression>().Value;
                     for (int i = 1; i < Game.MonsterMax; i++)
                     {
                         Monster mPtr = Game.Monsters[i];
@@ -277,8 +277,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     private IdentifiedResult ExecuteDirectionalWithPreAndPostMessages(int direction)
     {
         RenderPreMessage();
-        int radius = RadiusRoll.Get(Game.UseRandom);
-        int damage = DamageRoll.Get(Game.UseRandom);
+        int radius = RadiusRoll.Compute<IntegerExpression>().Value;
+        int damage = DamageRoll.Compute<IntegerExpression>().Value;
         bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
         bool isIdentified = Identified ?? hitSuccess;
         RenderPostMessage();
@@ -287,8 +287,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
 
     private IdentifiedResult ExecuteTargeted(int direction)
     {
-        int radius = RadiusRoll.Get(Game.UseRandom);
-        int damage = DamageRoll.Get(Game.UseRandom);
+        int radius = RadiusRoll.Compute<IntegerExpression>().Value;
+        int damage = DamageRoll.Compute<IntegerExpression>().Value;
         bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
         bool isIdentified = Identified ?? hitSuccess;
         return new IdentifiedResult(isIdentified);

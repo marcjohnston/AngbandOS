@@ -21,7 +21,7 @@ internal class OldDrainLife1xp100ProjectileScript : ProjectileScript
     public override bool Thru => true;
     public override bool Hide => false;
     protected override string ProjectileBindingKey => nameof(OldDrainLifeProjectile);
-    protected override string DamageRollExpression => "1d1xX+100";
+    protected override string DamageRollExpression => "X+100";
     public override bool? Identified => null; // The drain life actual had to affect a monster to know what it did. 
 }
 

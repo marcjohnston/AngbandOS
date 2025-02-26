@@ -15,7 +15,7 @@ internal class AnimalRangerPet1xSummonScript : BaseSummonScript
     protected override string MonsterFilterBindingKey => nameof(AnimalRangerMonsterFilter);
     public override bool Group => false;
     public override bool Pet => true;
-    protected override string LevelRollExpression => "1d1xX";
+    protected override string LevelRollExpression => "X";
     public override string? PreMessage => "You concentrate on the image of an animal...";
     public override string? FailureMessage => "No-one ever turns up.";
 }
