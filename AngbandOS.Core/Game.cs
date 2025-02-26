@@ -508,10 +508,10 @@ internal class Game
     /// </summary>
     public int BonusPermaCurseValue = -15000;
 
-/// <summary>
-/// Returns true, if the player is dead; false, otherwise.
-/// </summary>
-public bool IsDead = false;
+    /// <summary>
+    /// Returns true, if the player is dead; false, otherwise.
+    /// </summary>
+    public bool IsDead = false;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
 
@@ -1110,7 +1110,15 @@ public bool IsDead = false;
     /// </summary>
     public readonly string? StartupTownName = null;
 
-    public readonly ItemFactory[] GoldFactories;
+    /// <summary>
+    /// Returns the item factories to be used to generate gold.  If there are no item factories defined, gold will not be generated.
+    /// </summary>
+    public readonly ItemFactory[]? GoldFactories = null;
+
+    /// <summary>
+    /// Returns the one-in-probability that found gold is great.
+    /// </summary>
+    public readonly Probability GoldItemIsGreatProbability = new PercentProbability(5); // 1 in 20
 
     /// <summary>
     /// Creates a new game.  
@@ -1165,6 +1173,11 @@ public bool IsDead = false;
             }
             GoldFactories = goldFactoryList.ToArray();
         }
+        if (gameConfiguration.GoldItemIsGreatProbabilityExpression != null)
+        {
+            GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression);
+        }
+
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
@@ -2105,28 +2118,31 @@ public bool IsDead = false;
     }
 
     /// <summary>
-    /// Returns the one-in-probability that found gold is great.
+    /// Returns a gold item.  If the configuration doesn't define any Gold item factories, null is returned.
     /// </summary>
-    public int OneInProbabilityGoldItemIsGreat => 20;
-    public Item MakeGold(int? goldType = null)
+    /// <param name="goldType"></param>
+    /// <returns></returns>
+    public Item? MakeGold()
     {
-        if (goldType == null)
+        if (GoldFactories == null)
         {
-            // The type of gold to be created depends on the level it is found.
-            goldType = ((DieRoll(ObjectLevel + 2) + 2) / 2) - 1;
+            return null;
+        }
 
-            // A great find has some probability.
-            if (RandomLessThan(OneInProbabilityGoldItemIsGreat) == 0)
-            {
-                goldType += DieRoll(ObjectLevel + 1);
-            }
+        // The type of gold to be created depends on the level it is found.
+        int goldType = ((DieRoll(ObjectLevel + 2) + 2) / 2) - 1;
+
+        // A great find has some probability.
+        if (GoldItemIsGreatProbability.Test(this))
+        {
+            goldType += DieRoll(ObjectLevel + 1);
         }
 
         if (goldType >= GoldFactories.Length)
         {
             goldType = GoldFactories.Length - 1;
         }
-        ItemFactory itemFactory = GoldFactories[goldType.Value];
+        ItemFactory itemFactory = GoldFactories[goldType];
         return itemFactory.GenerateItem();
     }
 
@@ -3316,8 +3332,11 @@ public bool IsDead = false;
         {
             if (item.IsSmall && RandomLessThan(100) < 75)
             {
-                Item qPtr = MakeGold();
-                DropNear(qPtr, -1, y, x);
+                Item? qPtr = MakeGold();
+                if (qPtr != null)
+                {
+                    DropNear(qPtr, -1, y, x);
+                }
             }
             else
             {
@@ -15397,11 +15416,14 @@ public bool IsDead = false;
         {
             return;
         }
-        Item oPtr = MakeGold();
-        if (AddItemToGrid(oPtr, x, y))
+        Item? oPtr = MakeGold();
+        if (oPtr != null)
         {
-            NoteSpot(y, x);
-            MainForm.RefreshMapLocation(y, x);
+            if (AddItemToGrid(oPtr, x, y))
+            {
+                NoteSpot(y, x);
+                MainForm.RefreshMapLocation(y, x);
+            }
         }
     }
 

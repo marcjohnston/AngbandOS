@@ -10,6 +10,15 @@ namespace AngbandOS.Core.Probabilities;
 [Serializable]
 internal abstract class Probability
 {
+    /// <summary>
+    /// Returns the percentage the probability will succeed.
+    /// </summary>
     public abstract int Percentage { get; }
+
+    /// <summary>
+    /// Returns true, if a random test succeeds.
+    /// </summary>
+    /// <param name="game"></param>
+    /// <returns></returns>
     public abstract bool Test(Game game);
 }
