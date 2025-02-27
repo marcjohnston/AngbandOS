@@ -1274,7 +1274,7 @@ internal class Game
 
     public void SayComment_1()
     {
-        MsgPrint(SingletonRepository.ShopkeeperAcceptedComments.ToWeightedRandom().ChooseOrDefault());
+        MsgPrint(SingletonRepository.GetStringsRepository("ShopkeeperAcceptedComments").ToWeightedRandom().ChooseOrDefault());
     }
 
     public bool ServiceHaggle(int serviceCost, out int price)
@@ -3396,7 +3396,7 @@ internal class Game
                     int s = RandomLessThan(100) < 30 ? 1 : 2;
                     for (int q = 0; q < s; q++)
                     {
-                        tmp += SingletonRepository.IllegibleFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
+                        tmp += SingletonRepository.GetStringsRepository("IllegibleFlavorSyllables").ToWeightedRandom().ChooseOrDefault();
                     }
                     if (buf.Length + tmp.Length > 14)
                     {
@@ -13286,7 +13286,7 @@ internal class Game
         MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(Quests[qIdx].RIdx);
         string name = rPtr.FriendlyName;
         int qNum = Quests[qIdx].ToKill;
-        MsgPrint(SingletonRepository.FindQuests.ToWeightedRandom().ChooseOrDefault());
+        MsgPrint(SingletonRepository.GetStringsRepository("FindQuests").ToWeightedRandom().ChooseOrDefault());
         MsgPrint(null);
         if (qNum == 1)
         {

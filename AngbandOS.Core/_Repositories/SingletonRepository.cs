@@ -24,22 +24,6 @@ internal class SingletonRepository
     #endregion
 
     #region Publics
-    public StringsRepository ElvishText; // TODO: These cannot be hardcoded.
-    public StringsRepository FindQuests; // TODO: These cannot be hardcoded.
-    public StringsRepository FunnyComments; // TODO: These cannot be hardcoded.
-    public StringsRepository FunnyDescriptions; // TODO: These cannot be hardcoded.
-    public StringsRepository HorrificDescriptions; // TODO: These cannot be hardcoded.
-    public StringsRepository InsultPlayerAttacks; // TODO: These cannot be hardcoded.
-    public StringsRepository MoanPlayerAttacks; // TODO: These cannot be hardcoded.
-    public StringsRepository ShopkeeperAcceptedComments; // TODO: These cannot be hardcoded.
-    public StringsRepository ShopkeeperBargainComments; // TODO: These cannot be hardcoded.
-    public StringsRepository ShopkeeperGoodComments; // TODO: These cannot be hardcoded.
-    public StringsRepository ShopkeeperLessThanGuessComments; // TODO: These cannot be hardcoded.
-    public StringsRepository ShopkeeperWorthlessComments; // TODO: These cannot be hardcoded.
-    public StringsRepository SingingPlayerAttacks; // TODO: These cannot be hardcoded.
-    public StringsRepository IllegibleFlavorSyllables; // TODO: These cannot be hardcoded.
-    public StringsRepository WorshipPlayerAttacks; // TODO: These cannot be hardcoded.
-
     /// <summary>
     /// Returns a <see cref="WeightedRandom"/> object with all of the entities in the <typeparamref name="T""Tx"/> repository.
     /// </summary>
@@ -206,6 +190,11 @@ internal class SingletonRepository
             string pluralName = Game.Pluralize(typeNameAndRepository.Key);
             Game.CorePersistentStorage.PersistEntities(pluralName, jsonEntityList.ToArray());
         }
+    }
+
+    public StringsRepository GetStringsRepository(string name)
+    {
+        return _stringsRepositoriesDictionary[name];
     }
 
     /// <summary>
@@ -399,21 +388,21 @@ internal class SingletonRepository
         _singletonsDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        ElvishText = AddRepository(new ElvishTextRepository(Game));
-        FindQuests = AddRepository(new FindQuestsRepository(Game));
-        FunnyComments = AddRepository(new FunnyCommentsRepository(Game));
-        FunnyDescriptions = AddRepository(new FunnyDescriptionsRepository(Game));
-        HorrificDescriptions = AddRepository(new HorrificDescriptionsRepository(Game));
-        InsultPlayerAttacks = AddRepository(new InsultPlayerAttacksRepository(Game));
-        MoanPlayerAttacks = AddRepository(new MoanPlayerAttacksRepository(Game));
-        ShopkeeperAcceptedComments = AddRepository(new ShopkeeperAcceptedCommentsRepository(Game));
-        ShopkeeperBargainComments = AddRepository(new ShopkeeperBargainCommentsRepository(Game));
-        ShopkeeperGoodComments = AddRepository(new ShopkeeperGoodCommentsRepository(Game));
-        ShopkeeperLessThanGuessComments = AddRepository(new ShopkeeperLessThanGuessCommentsRepository(Game));
-        ShopkeeperWorthlessComments = AddRepository(new ShopkeeperWorthlessCommentsRepository(Game));
-        SingingPlayerAttacks = AddRepository(new SingingPlayerAttacksRepository(Game));
-        IllegibleFlavorSyllables = AddRepository(new IllegibleFlavorSyllablesRepository(Game));
-        WorshipPlayerAttacks = AddRepository(new WorshipPlayerAttacksRepository(Game));
+        AddStringRepository("ElvishTexts", gameConfiguration.ElvishTexts);
+        AddStringRepository("FindQuests", gameConfiguration.FindQuests);
+        AddStringRepository("FunnyComments", gameConfiguration.FunnyComments);
+        AddStringRepository("FunnyDescriptions", gameConfiguration.FunnyDescriptions);
+        AddStringRepository("HorrificDescriptions", gameConfiguration.HorrificDescriptions);
+        AddStringRepository("InsultPlayerAttacks", gameConfiguration.InsultPlayerAttacks);
+        AddStringRepository("MoanPlayerAttacks", gameConfiguration.MoanPlayerAttacks);
+        AddStringRepository("ShopkeeperAcceptedComments", gameConfiguration.ShopkeeperAcceptedComments);
+        AddStringRepository("ShopkeeperBargainComments", gameConfiguration.ShopkeeperBargainComments);
+        AddStringRepository("ShopkeeperGoodComments", gameConfiguration.ShopkeeperGoodComments);
+        AddStringRepository("ShopkeeperLessThanGuessComments", gameConfiguration.ShopkeeperLessThanGuessComments);
+        AddStringRepository("ShopkeeperWorthlessComments", gameConfiguration.ShopkeeperWorthlessComments);
+        AddStringRepository("SingingPlayerAttacks", gameConfiguration.SingingPlayerAttacks);
+        AddStringRepository("IllegibleFlavorSyllables", gameConfiguration.IllegibleFlavorSyllables);
+        AddStringRepository("WorshipPlayerAttacks", gameConfiguration.WorshipPlayerAttacks);
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         LoadRepositoryItems(gameConfiguration);
@@ -429,7 +418,7 @@ internal class SingletonRepository
 
     #region Privates
     private readonly Game Game;
-    private readonly List<StringsRepository> _repositories = new();
+    private readonly Dictionary<string, StringsRepository> _stringsRepositoriesDictionary = new Dictionary<string, StringsRepository>();
 
     private Dictionary<string, GenericRepository> _singletonsDictionary = new Dictionary<string, GenericRepository>();
 
@@ -454,15 +443,15 @@ internal class SingletonRepository
         _singletonsDictionary.Add(typeName, genericRepository);
     }
 
-    private StringsRepository AddRepository(StringsRepository repository)
+    private void AddStringRepository(string name, string[]? strings)
     {
-        _repositories.Add(repository);
-        return repository;
+        StringsRepository repository = new StringsRepository(Game, name, strings);
+        _stringsRepositoriesDictionary.Add(name, repository);
     }
 
     private void LoadRepositoryItems(GameConfiguration gameConfiguration)
     {
-        foreach (StringsRepository repository in _repositories)
+        foreach ((string name, StringsRepository repository) in _stringsRepositoriesDictionary)
         {
             repository.Load(gameConfiguration);
         }
@@ -470,7 +459,7 @@ internal class SingletonRepository
 
     private void BindRepositoryItems()
     {
-        foreach (StringsRepository repository in _repositories)
+        foreach ((string name, StringsRepository repository) in _stringsRepositoriesDictionary)
         {
             repository.Bind();
         }

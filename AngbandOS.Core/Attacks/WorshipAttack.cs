@@ -12,7 +12,7 @@ internal class WorshipAttack : Attack
 {
     private WorshipAttack(Game game) : base(game) { }
     public override string MonsterAction => "hero worships {0}";
-    public override string PlayerAction => Game.SingletonRepository.WorshipPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
+    public override string PlayerAction => Game.SingletonRepository.GetStringsRepository("WorshipPlayerAttacks").ToWeightedRandom().ChooseOrDefault();
     public override string KnowledgeAction => "hero worship";
     public override bool AttackTouchesTarget => false;
 }

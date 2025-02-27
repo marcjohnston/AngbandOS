@@ -12,7 +12,7 @@ internal class InsultAttack : Attack
 {
     private InsultAttack(Game game) : base(game) { }
     public override string MonsterAction => "insults {0}";
-    public override string PlayerAction => Game.SingletonRepository.InsultPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
+    public override string PlayerAction => Game.SingletonRepository.GetStringsRepository("InsultPlayerAttacks").ToWeightedRandom().ChooseOrDefault();
     public override string KnowledgeAction => "insult";
     public override bool AttackTouchesTarget => false;
     public override bool AttackAwakensTarget => true;

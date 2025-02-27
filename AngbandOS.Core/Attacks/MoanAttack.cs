@@ -12,7 +12,7 @@ internal class MoanAttack : Attack
 {
     private MoanAttack(Game game) : base(game) { }
     public override string MonsterAction => "moans at {0}";
-    public override string PlayerAction => Game.SingletonRepository.MoanPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
+    public override string PlayerAction => Game.SingletonRepository.GetStringsRepository("MoanPlayerAttacks").ToWeightedRandom().ChooseOrDefault();
     public override string KnowledgeAction => "moan";
     public override bool AttackAwakensTarget => true;
 }

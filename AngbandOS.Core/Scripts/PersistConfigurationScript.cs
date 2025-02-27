@@ -32,21 +32,21 @@ internal class PersistConfigurationScript : Script, IScript, ICastSpellScript
         try
         {
             // List repositories.
-            Game.SingletonRepository.ElvishText.PersistEntities();
-            Game.SingletonRepository.FindQuests.PersistEntities();
-            Game.SingletonRepository.FunnyComments.PersistEntities();
-            Game.SingletonRepository.FunnyDescriptions.PersistEntities();
-            Game.SingletonRepository.HorrificDescriptions.PersistEntities();
-            Game.SingletonRepository.InsultPlayerAttacks.PersistEntities();
-            Game.SingletonRepository.MoanPlayerAttacks.PersistEntities();
-            Game.SingletonRepository.IllegibleFlavorSyllables.PersistEntities();
-            Game.SingletonRepository.ShopkeeperAcceptedComments.PersistEntities();
-            Game.SingletonRepository.ShopkeeperBargainComments.PersistEntities();
-            Game.SingletonRepository.ShopkeeperGoodComments.PersistEntities();
-            Game.SingletonRepository.ShopkeeperLessThanGuessComments.PersistEntities();
-            Game.SingletonRepository.ShopkeeperWorthlessComments.PersistEntities();
-            Game.SingletonRepository.SingingPlayerAttacks.PersistEntities();
-            Game.SingletonRepository.WorshipPlayerAttacks.PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("ElvishText").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("FindQuests").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("FunnyComments").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("FunnyDescriptions").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("HorrificDescriptions").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("InsultPlayerAttacks").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("MoanPlayerAttacks").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("IllegibleFlavorSyllables").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("ShopkeeperAcceptedComments").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("ShopkeeperBargainComments").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("ShopkeeperGoodComments").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("ShopkeeperLessThanGuessComments").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("ShopkeeperWorthlessComments").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("SingingPlayerAttacks").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("WorshipPlayerAttacks").PersistEntities();
 
             // Dictionary repositories.
             Game.SingletonRepository.PersistSingletons();

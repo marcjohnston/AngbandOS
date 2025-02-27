@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Repositories;
 /// Represents a ListRepository where all of the entities are strings.  This abstract class handles the string serialization for the repository entities.
 /// </summary>
 [Serializable]
-internal abstract class StringsRepository : IEnumerable<string>
+internal class StringsRepository : IEnumerable<string>
 {
     public void PersistEntities()
     {
@@ -35,35 +35,23 @@ internal abstract class StringsRepository : IEnumerable<string>
     /// <returns></returns>
     public WeightedRandom<string> ToWeightedRandom(Func<string, bool>? predicate = null) => new WeightedRandom<string>(Game, this, predicate);
 
-    /// <summary>
-    /// Adds an item to the repository.  This is often used to add configured objects.
-    /// </summary>
-    /// <param name="item"></param>
-    public virtual void Add(string item)
-    {
-        list.Add(item);
-    }
-
-    public void Add(params string[] items)
-    {
-        foreach (string item in items)
-        {
-            Add(item);
-        }
-    }
-
     protected readonly Game Game;
 
-    protected StringsRepository(Game game)
+    public StringsRepository(Game game, string name, string[]? strings)
     {
         Game = game;
+        Name = name;
+        if (strings != null)
+        {
+            list.AddRange(strings);
+        }
     }
 
     /// <summary>
     /// Processes the load phase for the configuration repository items.  This phase creates instances of all objects that have a private constructor.  An instance of the Game is
     /// sent to the constructor for every configuration repository item created.  The configuration repository item cannot assume other repository items are available during this phase.
     /// </summary>
-    public abstract void Load(GameConfiguration gameConfiguration);
+    public void Load(GameConfiguration gameConfiguration) { }
 
     /// <summary>
     /// Processes the bind phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.  Does nothing, by
@@ -81,5 +69,5 @@ internal abstract class StringsRepository : IEnumerable<string>
         return list.GetEnumerator();
     }
 
-    public abstract string Name { get; }
+    public string Name { get; }
 }

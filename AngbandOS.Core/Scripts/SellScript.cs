@@ -122,22 +122,22 @@ internal class SellScript : Script, IStoreCommandScript
     {
         if (value <= 0 && price > value)
         {
-            Game.MsgPrint(Game.SingletonRepository.ShopkeeperWorthlessComments.ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperWorthlessComments").ToWeightedRandom().ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldWorthless);
         }
         else if (value < guess && price > value)
         {
-            Game.MsgPrint(Game.SingletonRepository.ShopkeeperLessThanGuessComments.ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperLessThanGuessComments").ToWeightedRandom().ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldBargain);
         }
         else if (value > guess && value < 4 * guess && price < value)
         {
-            Game.MsgPrint(Game.SingletonRepository.ShopkeeperGoodComments.ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperGoodComments").ToWeightedRandom().ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldCheaply);
         }
         else if (value > guess && price < value)
         {
-            Game.MsgPrint(Game.SingletonRepository.ShopkeeperBargainComments.ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperBargainComments").ToWeightedRandom().ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldExtraCheaply);
         }
     }

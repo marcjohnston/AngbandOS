@@ -559,15 +559,15 @@ internal class Monster : IItemContainer
             }
             if (Game.HallucinationsTimer.Value != 0)
             {
-                this.Game.MsgPrint($"You behold the {this.Game.SingletonRepository.FunnyDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
+                this.Game.MsgPrint($"You behold the {this.Game.SingletonRepository.GetStringsRepository("FunnyDescriptions").ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
                 if (Game.DieRoll(3) == 1)
                 {
-                    this.Game.MsgPrint(this.Game.SingletonRepository.FunnyComments.ToWeightedRandom().ChooseOrDefault());
+                    this.Game.MsgPrint(this.Game.SingletonRepository.GetStringsRepository("FunnyComments").ToWeightedRandom().ChooseOrDefault());
                     Game.HallucinationsTimer.AddTimer(Game.DieRoll(Race.Level));
                 }
                 return;
             }
-            this.Game.MsgPrint($"You behold the {this.Game.SingletonRepository.HorrificDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
+            this.Game.MsgPrint($"You behold the {this.Game.SingletonRepository.GetStringsRepository("HorrificDescriptions").ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
