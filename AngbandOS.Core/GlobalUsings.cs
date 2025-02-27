@@ -70,7 +70,6 @@ global using AngbandOS.Core.Properties;
 global using AngbandOS.Core.PropertyFormatters;
 global using AngbandOS.Core.Races;
 global using AngbandOS.Core.Realms;
-global using AngbandOS.Core.Repositories;
 global using AngbandOS.Core.Rewards;
 global using AngbandOS.Core.RoomLayouts;
 global using AngbandOS.Core.Scripts;

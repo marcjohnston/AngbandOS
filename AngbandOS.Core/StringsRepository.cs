@@ -8,7 +8,7 @@
 using System.Collections;
 using System.Text.Json;
 
-namespace AngbandOS.Core.Repositories;
+namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents a ListRepository where all of the entities are strings.  This abstract class handles the string serialization for the repository entities.
