@@ -19,13 +19,7 @@ internal class FunnyDescriptionsRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.FunnyDescriptions == null)
-        {
-            Add("silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
-                "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
-                "amazing", "incredible", "chaotic", "wild", "preposterous");
-        }
-        else
+        if (configuration.FunnyDescriptions != null)
         {
             Add(configuration.FunnyDescriptions);
         }

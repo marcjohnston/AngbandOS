@@ -98,9 +98,9 @@ public class GameConfiguration
     public virtual string[]? FunnyComments { get; set; } = null;
     public virtual string[]? FunnyDescriptions { get; set; } = null;
     public virtual string[]? HorrificDescriptions { get; set; } = null;
+    public virtual string[]? IllegibleFlavorSyllables { get; set; } = null;
     public virtual string[]? InsultPlayerAttacks { get; set; } = null;
     public virtual string[]? MoanPlayerAttacks { get; set; } = null;
-    public virtual string[]? UnreadableFlavorSyllables { get; set; } = null;
     public virtual string[]? ShopkeeperAcceptedComments { get; set; } = null;
     public virtual string[]? ShopkeeperBargainComments { get; set; } = null;
     public virtual string[]? ShopkeeperGoodComments { get; set; } = null;

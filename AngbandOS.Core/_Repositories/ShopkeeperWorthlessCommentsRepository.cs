@@ -19,15 +19,7 @@ internal class ShopkeeperWorthlessCommentsRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.ShopkeeperWorthlessComments == null)
-        {
-            Add("Arrgghh!",
-                "You bastard!",
-                "You hear someone sobbing...",
-                "The shopkeeper howls in agony!"
-                );
-        }
-        else
+        if (configuration.ShopkeeperWorthlessComments != null)
         {
             Add(configuration.ShopkeeperWorthlessComments);
         }

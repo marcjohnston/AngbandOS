@@ -19,15 +19,7 @@ internal class ShopkeeperBargainCommentsRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.ShopkeeperBargainComments == null)
-        {
-            Add("Yipee!",
-                "I think I'll retire!",
-                "The shopkeeper jumps for joy.",
-                "The shopkeeper smiles gleefully."
-                );
-        }
-        else
+        if (configuration.ShopkeeperBargainComments != null)
         {
             Add(configuration.ShopkeeperBargainComments);
         }

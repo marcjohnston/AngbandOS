@@ -19,19 +19,7 @@ internal class WorshipPlayerAttacksRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.WorshipPlayerAttacks == null)
-        {
-            Add("looks up at you!",
-                "asks how many dragons you've killed!",
-                "asks for your autograph!",
-                "tries to shake your hand!",
-                "pretends to be you!",
-                "dances around you!",
-                "tugs at your clothing!",
-                "asks if you will adopt him!"
-                );
-        }
-        else
+        if (configuration.WorshipPlayerAttacks != null)
         {
             Add(configuration.WorshipPlayerAttacks);
         }

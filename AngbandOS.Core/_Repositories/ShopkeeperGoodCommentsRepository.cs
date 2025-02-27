@@ -19,15 +19,7 @@ internal class ShopkeeperGoodCommentsRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.ShopkeeperGoodComments == null)
-        {
-            Add("Cool!",
-                "You've made my day!",
-                "The shopkeeper giggles.",
-                "The shopkeeper laughs loudly."
-                );
-        }
-        else
+        if (configuration.ShopkeeperGoodComments != null)
         {
             Add(configuration.ShopkeeperGoodComments);
         }

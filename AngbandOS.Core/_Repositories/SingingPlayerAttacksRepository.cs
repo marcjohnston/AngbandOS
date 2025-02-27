@@ -19,13 +19,7 @@ internal class SingingPlayerAttacksRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.SingingPlayerAttacks == null)
-        {
-            Add("sings 'We are a happy family.'",
-                "sings 'I love you, you love me.'"
-                );
-        }
-        else
+        if (configuration.SingingPlayerAttacks != null)
         {
             Add(configuration.SingingPlayerAttacks);
         }

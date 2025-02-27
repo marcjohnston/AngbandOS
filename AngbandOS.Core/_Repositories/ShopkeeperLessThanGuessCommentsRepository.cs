@@ -19,15 +19,7 @@ internal class ShopkeeperLessThanGuessCommentsRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.ShopkeeperLessThanGuessComments == null)
-        {
-            Add("Damn!",
-                "You bastard!",
-                "The shopkeeper curses at you.",
-                "The shopkeeper glares at you."
-                );
-        }
-        else
+        if (configuration.ShopkeeperLessThanGuessComments != null)
         {
             Add(configuration.ShopkeeperLessThanGuessComments);
         }

@@ -19,16 +19,7 @@ internal class FunnyCommentsRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.FunnyComments == null)
-        {
-            Add("Wow, cosmic, man!",
-                "Rad!",
-                "Groovy!",
-                "Cool!",
-                "Far out!"
-                );
-        }
-        else
+        if (configuration.FunnyComments != null)
         {
             Add(configuration.FunnyComments);
         }

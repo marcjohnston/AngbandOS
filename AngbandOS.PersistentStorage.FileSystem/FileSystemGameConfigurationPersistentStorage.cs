@@ -123,7 +123,7 @@ namespace AngbandOS.PersistentStorage
                 HorrificDescriptions = LoadEntity("HorrificDescriptions"),
                 InsultPlayerAttacks = LoadEntity("InsultPlayerAttacks"),
                 MoanPlayerAttacks = LoadEntity("MoanPlayerAttacks"),
-                UnreadableFlavorSyllables = LoadEntity("UnreadableFlavorSyllables"),
+                IllegibleFlavorSyllables = LoadEntity("UnreadableFlavorSyllables"),
                 ShopkeeperAcceptedComments = LoadEntity("ShopkeeperAcceptedComments"),
                 ShopkeeperBargainComments = LoadEntity("ShopkeeperBargainComments"),
                 ShopkeeperGoodComments = LoadEntity("ShopkeeperGoodComments"),

@@ -19,16 +19,7 @@ internal class ShopkeeperAcceptedCommentsRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.ShopkeeperAcceptedComments == null)
-        {
-            Add("Okay.",
-                "Fine.",
-                "Accepted!",
-                "Agreed!",
-                "Done!",
-                "Taken!");
-        }
-        else
+        if (configuration.ShopkeeperAcceptedComments != null)
         {
             Add(configuration.ShopkeeperAcceptedComments);
         }

@@ -19,12 +19,7 @@ internal class InsultPlayerAttacksRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.InsultPlayerAttacks == null)
-        {
-            Add("insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
-                "dances around you!", "makes obscene gestures!", "moons you!");
-        }
-        else
+        if (configuration.InsultPlayerAttacks != null)
         {
             Add(configuration.InsultPlayerAttacks);
         }

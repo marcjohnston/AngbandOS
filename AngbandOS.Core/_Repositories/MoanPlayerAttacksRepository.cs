@@ -19,15 +19,7 @@ internal class MoanPlayerAttacksRepository : StringsRepository
 
     public override void Load(GameConfiguration configuration)
     {
-        if (configuration.MoanPlayerAttacks == null)
-        {
-            Add("seems sad about something.",
-                "asks if you have seen his dogs.",
-                "tells you to get off his land.",
-                "mumbles something about mushrooms."
-                );
-        }
-        else
+        if (configuration.MoanPlayerAttacks != null)
         {
             Add(configuration.MoanPlayerAttacks);
         }
