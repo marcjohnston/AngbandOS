@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WizardMovementHelpGroup : HelpGroupGameConfiguration
+public class WizardMovementHelpGroup : HelpGroupGameConfiguration
 {
     public override string Title => "Movement";
     public override int SortIndex => 4;

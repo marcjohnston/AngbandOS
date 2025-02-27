@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WizardGeneralCommandsHelpGroup : HelpGroupGameConfiguration
+public class WizardGeneralCommandsHelpGroup : HelpGroupGameConfiguration
 {
     public override string Title => "General Commands";
     public override int SortIndex => 1;

@@ -10,52 +10,52 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericStoreFactory : StoreFactory
 {
-    public GenericStoreFactory(Game game, StoreFactoryGameConfiguration storeFactoryDefinition) : base(game)
+    public GenericStoreFactory(Game game, StoreFactoryGameConfiguration storeFactoryGameConfiguration) : base(game)
     {
-        IsEmptyLot = storeFactoryDefinition.IsEmptyLot;
-        BuildingsMadeFromPermanentRock = storeFactoryDefinition.BuildingsMadeFromPermanentRock;
-        StoreEntranceDoorsAreBlownOff = storeFactoryDefinition.StoreEntranceDoorsAreBlownOff;
-        Key = storeFactoryDefinition.Key;
-        PageSize = storeFactoryDefinition.PageSize;
-        UseHomeCarry = storeFactoryDefinition.UseHomeCarry;
-        ItemFilterNames = storeFactoryDefinition.ItemFilterNames;
-        IsHomeThatCanBeBought = storeFactoryDefinition.IsHomeThatCanBeBought;
-        MaintainsStockLevels = storeFactoryDefinition.MaintainsStockLevels;
-        MaxInventory = storeFactoryDefinition.MaxInventory;
-        MinInventory = storeFactoryDefinition.MinInventory;
-        StoreTurnover = storeFactoryDefinition.StoreTurnover;
-        StoreStockManifestDefinitions = storeFactoryDefinition.StoreStockManifestDefinitions?.Select(_storeStockManifestDefinition => (_storeStockManifestDefinition.ItemFactoryName, _storeStockManifestDefinition.Weight)).ToArray();
-        ShufflesOwnersAndPricing = storeFactoryDefinition.ShufflesOwnersAndPricing;
-        ShopkeeperNames = storeFactoryDefinition.ShopkeeperNames;
-        AdvertisedStoreCommand1Name = storeFactoryDefinition.AdvertisedStoreCommand1Name;
-        AdvertisedStoreCommand2Name = storeFactoryDefinition.AdvertisedStoreCommand2Name;
-        AdvertisedStoreCommand3Name = storeFactoryDefinition.AdvertisedStoreCommand3Name;
-        AdvertisedStoreCommand4Name = storeFactoryDefinition.AdvertisedStoreCommand4Name;
-        AdvertisedStoreCommand5Name = storeFactoryDefinition.AdvertisedStoreCommand5Name;
-        WidthOfDescriptionColumn = storeFactoryDefinition.WidthOfDescriptionColumn;
-        RenderWeightUnitOfMeasurement = storeFactoryDefinition.RenderWeightUnitOfMeasurement;
-        TileName = storeFactoryDefinition.TileName;
-        ItemsRenderFlavorAware = storeFactoryDefinition.ItemsRenderFlavorAware;
-        OwnerName = storeFactoryDefinition.OwnerName;
-        Title = storeFactoryDefinition.Title;
-        StoreMaintainsInventory = storeFactoryDefinition.StoreMaintainsInventory;
-        ShowItemPricing = storeFactoryDefinition.ShowItemPricing;
-        MarkupRate = storeFactoryDefinition.MarkupRate;
-        MarkdownRate = storeFactoryDefinition.MarkdownRate;
-        PerformsMaintenanceWhenResting = storeFactoryDefinition.PerformsMaintenanceWhenResting;
-        LevelForRandomItemCreation = storeFactoryDefinition.LevelForRandomItemCreation;
-        MinimumItemValue = storeFactoryDefinition.MinimumItemValue;
-        NoStockMessage = storeFactoryDefinition.NoStockMessage;
-        PurchaseMessage = storeFactoryDefinition.PurchaseMessage;
-        StoreSellsItems = storeFactoryDefinition.StoreSellsItems;
-        BoughtMessageAsBoughtBack = storeFactoryDefinition.BoughtMessageAsBoughtBack;
-        SellPrompt = storeFactoryDefinition.SellPrompt;
-        StoreFullMessage = storeFactoryDefinition.StoreFullMessage;
-        StoreMaintainsInscription = storeFactoryDefinition.StoreMaintainsInscription;
-        StoreBuysItems = storeFactoryDefinition.StoreBuysItems;
-        BoughtVerb = storeFactoryDefinition.BoughtVerb;
-        StoreIdentifiesItems = storeFactoryDefinition.StoreIdentifiesItems;
-        StoreAnalyzesPurchases = storeFactoryDefinition.StoreAnalyzesPurchases;
+        IsEmptyLot = storeFactoryGameConfiguration.IsEmptyLot;
+        BuildingsMadeFromPermanentRock = storeFactoryGameConfiguration.BuildingsMadeFromPermanentRock;
+        StoreEntranceDoorsAreBlownOff = storeFactoryGameConfiguration.StoreEntranceDoorsAreBlownOff;
+        Key = storeFactoryGameConfiguration.Key ?? storeFactoryGameConfiguration.GetType().Name;
+        PageSize = storeFactoryGameConfiguration.PageSize;
+        UseHomeCarry = storeFactoryGameConfiguration.UseHomeCarry;
+        ItemFilterNames = storeFactoryGameConfiguration.ItemFilterNames;
+        IsHomeThatCanBeBought = storeFactoryGameConfiguration.IsHomeThatCanBeBought;
+        MaintainsStockLevels = storeFactoryGameConfiguration.MaintainsStockLevels;
+        MaxInventory = storeFactoryGameConfiguration.MaxInventory;
+        MinInventory = storeFactoryGameConfiguration.MinInventory;
+        StoreTurnover = storeFactoryGameConfiguration.StoreTurnover;
+        StoreStockManifestDefinitions = storeFactoryGameConfiguration.StoreStockManifestDefinitions?.Select(_storeStockManifestDefinition => (_storeStockManifestDefinition.ItemFactoryName, _storeStockManifestDefinition.Weight)).ToArray();
+        ShufflesOwnersAndPricing = storeFactoryGameConfiguration.ShufflesOwnersAndPricing;
+        ShopkeeperNames = storeFactoryGameConfiguration.ShopkeeperNames;
+        AdvertisedStoreCommand1Name = storeFactoryGameConfiguration.AdvertisedStoreCommand1Name;
+        AdvertisedStoreCommand2Name = storeFactoryGameConfiguration.AdvertisedStoreCommand2Name;
+        AdvertisedStoreCommand3Name = storeFactoryGameConfiguration.AdvertisedStoreCommand3Name;
+        AdvertisedStoreCommand4Name = storeFactoryGameConfiguration.AdvertisedStoreCommand4Name;
+        AdvertisedStoreCommand5Name = storeFactoryGameConfiguration.AdvertisedStoreCommand5Name;
+        WidthOfDescriptionColumn = storeFactoryGameConfiguration.WidthOfDescriptionColumn;
+        RenderWeightUnitOfMeasurement = storeFactoryGameConfiguration.RenderWeightUnitOfMeasurement;
+        TileName = storeFactoryGameConfiguration.TileName;
+        ItemsRenderFlavorAware = storeFactoryGameConfiguration.ItemsRenderFlavorAware;
+        OwnerName = storeFactoryGameConfiguration.OwnerName;
+        Title = storeFactoryGameConfiguration.Title;
+        StoreMaintainsInventory = storeFactoryGameConfiguration.StoreMaintainsInventory;
+        ShowItemPricing = storeFactoryGameConfiguration.ShowItemPricing;
+        MarkupRate = storeFactoryGameConfiguration.MarkupRate;
+        MarkdownRate = storeFactoryGameConfiguration.MarkdownRate;
+        PerformsMaintenanceWhenResting = storeFactoryGameConfiguration.PerformsMaintenanceWhenResting;
+        LevelForRandomItemCreation = storeFactoryGameConfiguration.LevelForRandomItemCreation;
+        MinimumItemValue = storeFactoryGameConfiguration.MinimumItemValue;
+        NoStockMessage = storeFactoryGameConfiguration.NoStockMessage;
+        PurchaseMessage = storeFactoryGameConfiguration.PurchaseMessage;
+        StoreSellsItems = storeFactoryGameConfiguration.StoreSellsItems;
+        BoughtMessageAsBoughtBack = storeFactoryGameConfiguration.BoughtMessageAsBoughtBack;
+        SellPrompt = storeFactoryGameConfiguration.SellPrompt;
+        StoreFullMessage = storeFactoryGameConfiguration.StoreFullMessage;
+        StoreMaintainsInscription = storeFactoryGameConfiguration.StoreMaintainsInscription;
+        StoreBuysItems = storeFactoryGameConfiguration.StoreBuysItems;
+        BoughtVerb = storeFactoryGameConfiguration.BoughtVerb;
+        StoreIdentifiesItems = storeFactoryGameConfiguration.StoreIdentifiesItems;
+        StoreAnalyzesPurchases = storeFactoryGameConfiguration.StoreAnalyzesPurchases;
     }
 
     /// <summary>

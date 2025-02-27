@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericTown : Town
 {
-    public GenericTown(Game game, TownGameConfiguration townDefinition) : base(game)
+    public GenericTown(Game game, TownGameConfiguration townGameConfiguration) : base(game)
     {
-        Key = townDefinition.Key;
-        DungeonName = townDefinition.DungeonName;
-        HousePrice = townDefinition.HousePrice;
-        Name = townDefinition.Name;
-        Char = townDefinition.Char;
-        StoreFactoryNames = townDefinition.StoreFactoryNames;
+        Key = townGameConfiguration.Key ?? townGameConfiguration.GetType().Name;
+        DungeonName = townGameConfiguration.DungeonName;
+        HousePrice = townGameConfiguration.HousePrice;
+        Name = townGameConfiguration.Name;
+        Char = townGameConfiguration.Char;
+        StoreFactoryNames = townGameConfiguration.StoreFactoryNames;
     }
 
     public override string DungeonName { get; }

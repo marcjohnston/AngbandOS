@@ -10,12 +10,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericGod : God
 {
-    public GenericGod(Game game, GodGameConfiguration definition) : base(game)
+    public GenericGod(Game game, GodGameConfiguration godGameConfiguration) : base(game)
     {
-        LongName = definition.LongName;
-        ShortName = definition.ShortName;
-        FavorDescription = definition.FavorDescription;
-        Key = definition.Key;
+        LongName = godGameConfiguration.LongName;
+        ShortName = godGameConfiguration.ShortName;
+        FavorDescription = godGameConfiguration.FavorDescription;
+        Key = godGameConfiguration.Key ?? godGameConfiguration.GetType().Name;
     }
 
     public override string LongName { get; }

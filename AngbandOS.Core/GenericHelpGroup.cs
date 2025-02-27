@@ -10,11 +10,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericHelpGroup : HelpGroup
 {
-    public GenericHelpGroup(Game game, HelpGroupGameConfiguration helpGroupDefinition) : base(game)
+    public GenericHelpGroup(Game game, HelpGroupGameConfiguration helpGroupGameConfiguration) : base(game)
     {
-        Key = helpGroupDefinition.Key;
-        SortIndex = helpGroupDefinition.SortIndex;
-        Title = helpGroupDefinition.Title;
+        Key = helpGroupGameConfiguration.Key ?? helpGroupGameConfiguration.GetType().Name;
+        SortIndex = helpGroupGameConfiguration.SortIndex;
+        Title = helpGroupGameConfiguration.Title;
     }
 
     public override string Key { get; }

@@ -313,7 +313,18 @@ internal class SingletonRepository
         RegisterRepository<WieldSlot>();
         RegisterRepository<WizardCommand>();
 
-        // Now load the configuration singletons.
+        // Load system singletons.
+        LoadAllAssemblyTypes<Alignment>();
+        LoadAllAssemblyTypes<ConsoleElement>();
+        LoadAllAssemblyTypes<FlaggedAction>();
+        LoadAllAssemblyTypes<Justification>();
+        LoadAllAssemblyTypes<MonsterSelector>();
+        LoadAllAssemblyTypes<Function>();
+        LoadAllAssemblyTypes<Probability>();
+        LoadAllAssemblyTypes<Property>();
+        LoadAllAssemblyTypes<Timer>();
+
+        // Now load the user-configured singletons.
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
@@ -335,8 +346,51 @@ internal class SingletonRepository
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
 
-        // Load the remaining types from the assembly.
-        LoadAllAssemblyTypes();
+        // Load the remaining user-configured singletons from the assembly.
+        LoadAllAssemblyTypes<Activation>();
+        LoadAllAssemblyTypes<ActivationWeightedRandom>();
+        LoadAllAssemblyTypes<AlterAction>();
+        LoadAllAssemblyTypes<ArtifactBias>();
+        LoadAllAssemblyTypes<ArtifactBiasWeightedRandom>();
+        LoadAllAssemblyTypes<AttackEffect>();
+        LoadAllAssemblyTypes<BirthStage>();
+        LoadAllAssemblyTypes<BaseCharacterClass>();
+        LoadAllAssemblyTypes<ChestTrapConfiguration>();
+        LoadAllAssemblyTypes<ChestTrap>();
+        LoadAllAssemblyTypes<DungeonGenerator>();
+        LoadAllAssemblyTypes<FixedArtifact>();
+        LoadAllAssemblyTypes<Form>();
+        LoadAllAssemblyTypes<Gender>();
+        LoadAllAssemblyTypes<ItemAction>();
+        LoadAllAssemblyTypes<ItemClass>();
+        LoadAllAssemblyTypes<ItemEnhancement>();
+        LoadAllAssemblyTypes<ItemEnhancementWeightedRandom>();
+        LoadAllAssemblyTypes<ItemFactory>();
+        LoadAllAssemblyTypes<ItemFactoryGenericWeightedRandom>();
+        LoadAllAssemblyTypes<ItemFilter>();
+        LoadAllAssemblyTypes<ItemQualityRating>();
+        LoadAllAssemblyTypes<ItemTest>();
+        LoadAllAssemblyTypes<MartialArtsAttack>();
+        LoadAllAssemblyTypes<MonsterFilter>();
+        LoadAllAssemblyTypes<MonsterSpell>();
+        LoadAllAssemblyTypes<Mutation>();
+        LoadAllAssemblyTypes<Patron>();
+        LoadAllAssemblyTypes<Projectile>();
+        LoadAllAssemblyTypes<ProjectileScript>();
+        LoadAllAssemblyTypes<ProjectileWeightedRandomScript>();
+        LoadAllAssemblyTypes<Race>();
+        LoadAllAssemblyTypes<Realm>();
+        LoadAllAssemblyTypes<Reward>();
+        LoadAllAssemblyTypes<RoomLayout>();
+        LoadAllAssemblyTypes<Script>();
+        LoadAllAssemblyTypes<SpellResistantDetection>();
+        LoadAllAssemblyTypes<StoreFactory>();
+        LoadAllAssemblyTypes<BaseSummonScript>();
+        LoadAllAssemblyTypes<SummonWeightedRandom>();
+        LoadAllAssemblyTypes<SyllableSet>();
+        LoadAllAssemblyTypes<Talent>();
+        LoadAllAssemblyTypes<Widget>();
+        LoadAllAssemblyTypes<WieldSlot>();
 
         // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
         MonsterRace[] monsterRaces = Get<MonsterRace>();
@@ -469,7 +523,7 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadAllAssemblyTypes()
+    private void LoadAllAssemblyTypes<T>()
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type[] types = assembly.GetTypes();
@@ -477,7 +531,7 @@ internal class SingletonRepository
         {
             // Ensure the type is not abstract and inherits the IGetKey interface.
             // TODO: No test for IGetKey is done
-            if (!type.IsAbstract && typeof(IGetKey).IsAssignableFrom(type))
+            if (!type.IsAbstract && typeof(IGetKey).IsAssignableFrom(type) && typeof(T).IsAssignableFrom(type))
             {
                 // Ensure it only has one private constructor.
                 // TODO: The one private constructor needs to be tested properly.
@@ -504,9 +558,14 @@ internal class SingletonRepository
             }
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
-                T entity = (T)constructors[0].Invoke(new object[] { Game, entityConfiguration });
+                // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
+                TGeneric entity = (TGeneric)constructors[0].Invoke(new object[] { Game, entityConfiguration });
                 LoadSingleton(entity);
             }
+        }
+        else
+        {
+            LoadAllAssemblyTypes<T>();
         }
     }
     #endregion

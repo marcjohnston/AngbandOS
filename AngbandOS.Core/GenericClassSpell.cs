@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericClassSpell : ClassSpell
 {
-    public GenericClassSpell(Game game, ClassSpellGameConfiguration definition) : base(game)
+    public GenericClassSpell(Game game, ClassSpellGameConfiguration classSpellGameConfiguration) : base(game)
     {
-        SpellName = definition.SpellName;
-        CharacterClassName = definition.CharacterClassName;
-        Level = definition.Level;
-        ManaCost = definition.ManaCost;
-        BaseFailure = definition.BaseFailure;
-        FirstCastExperience = definition.FirstCastExperience;
+        SpellName = classSpellGameConfiguration.SpellName;
+        CharacterClassName = classSpellGameConfiguration.CharacterClassName;
+        Level = classSpellGameConfiguration.Level;
+        ManaCost = classSpellGameConfiguration.ManaCost;
+        BaseFailure = classSpellGameConfiguration.BaseFailure;
+        FirstCastExperience = classSpellGameConfiguration.FirstCastExperience;
     }
     public override string SpellName { get; }
     public override string CharacterClassName { get; }

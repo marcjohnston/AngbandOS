@@ -11,13 +11,13 @@ namespace AngbandOS.Core;
 
 internal class GenericStoreCommand : StoreCommand
 {
-    public GenericStoreCommand(Game game, StoreCommandGameConfiguration storeCommandDefinition) : base(game)
+    public GenericStoreCommand(Game game, StoreCommandGameConfiguration storeCommandGameConfiguration) : base(game)
     {
-        Key = storeCommandDefinition.Key;
-        KeyChar = storeCommandDefinition.KeyChar;
-        Description = storeCommandDefinition.Description;
-        ValidStoreFactoryNames = storeCommandDefinition.ValidStoreFactoryNames;
-        ExecuteScriptName = storeCommandDefinition.ExecuteScriptName;
+        Key = storeCommandGameConfiguration.Key ?? storeCommandGameConfiguration.GetType().Name;
+        KeyChar = storeCommandGameConfiguration.KeyChar;
+        Description = storeCommandGameConfiguration.Description;
+        ValidStoreFactoryNames = storeCommandGameConfiguration.ValidStoreFactoryNames;
+        ExecuteScriptName = storeCommandGameConfiguration.ExecuteScriptName;
     }
 
     public override string Key { get; }

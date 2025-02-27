@@ -10,13 +10,13 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericShopkeeper : Shopkeeper
 {
-    public GenericShopkeeper(Game game, ShopkeeperGameConfiguration shopkeeper) : base(game)
+    public GenericShopkeeper(Game game, ShopkeeperGameConfiguration shopkeeperGameConfiguration) : base(game)
     {
-        Key = shopkeeper.Key;
-        MaxCost = shopkeeper.MaxCost;
-        MinInflate = shopkeeper.MinInflate;
-        Name = shopkeeper.Name;
-        RaceName = shopkeeper.RaceName;
+        Key = shopkeeperGameConfiguration.Key ?? shopkeeperGameConfiguration.GetType().Name;
+        MaxCost = shopkeeperGameConfiguration.MaxCost;
+        MinInflate = shopkeeperGameConfiguration.MinInflate;
+        Name = shopkeeperGameConfiguration.Name;
+        RaceName = shopkeeperGameConfiguration.RaceName;
     }
 
     public override string Key { get; }

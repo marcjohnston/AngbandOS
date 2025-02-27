@@ -16,13 +16,4 @@ public class SymbolGameConfiguration
     public virtual string Name { get; set; }
 
     public virtual string Key { get; set; }
-
-    //public bool IsValid()
-    //{
-    //    if (Key == null || Character == null || Name == null)
-    //    {
-    //        return false;
-    //    }
-    //    return true;
-    //}
 }

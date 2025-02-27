@@ -10,11 +10,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericDungeonGuardian : DungeonGuardian
 {
-    public GenericDungeonGuardian(Game game, DungeonGuardianGameConfiguration dungeonGuardianDefinition) : base(game)
+    public GenericDungeonGuardian(Game game, DungeonGuardianGameConfiguration dungeonGuardianGameConfiguration) : base(game)
     {
-        Key = dungeonGuardianDefinition.Key;
-        MonsterRaceName = dungeonGuardianDefinition.MonsterRaceName;
-        LevelFound = dungeonGuardianDefinition.LevelFound;
+        Key = dungeonGuardianGameConfiguration.Key ?? dungeonGuardianGameConfiguration.GetType().Name;
+        MonsterRaceName = dungeonGuardianGameConfiguration.MonsterRaceName;
+        LevelFound = dungeonGuardianGameConfiguration.LevelFound;
     }
 
     public override string Key { get; }

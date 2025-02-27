@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericAnimation : Animation
 {
-    public GenericAnimation(Game game, AnimationGameConfiguration animationDefinition) : base(game)
+    public GenericAnimation(Game game, AnimationGameConfiguration animationGameConfiguration) : base(game)
     {
-        AlternateColor = animationDefinition.AlternateColor;
-        Character = animationDefinition.Character;
-        Color = animationDefinition.Color;
-        Key = animationDefinition.Key;
-        Name = animationDefinition.Name;
-        Sequence = animationDefinition.Sequence;
+        AlternateColor = animationGameConfiguration.AlternateColor;
+        Character = animationGameConfiguration.Character;
+        Color = animationGameConfiguration.Color;
+        Key = animationGameConfiguration.Key ?? animationGameConfiguration.GetType().Name;
+        Name = animationGameConfiguration.Name;
+        Sequence = animationGameConfiguration.Sequence;
     }
     public override string Key { get; }
     public override char Character { get; }

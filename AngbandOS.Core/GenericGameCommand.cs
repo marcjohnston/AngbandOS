@@ -10,13 +10,13 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericGameCommand : GameCommand
 {
-    public GenericGameCommand(Game game, GameCommandGameConfiguration gameCommandDefinition) : base(game)
+    public GenericGameCommand(Game game, GameCommandGameConfiguration gameCommandGameConfiguration) : base(game)
     {
-        Key = gameCommandDefinition.Key;
-        KeyChar = gameCommandDefinition.KeyChar;
-        IsEnabled = gameCommandDefinition.IsEnabled;
-        Repeat = gameCommandDefinition.Repeat;
-        ExecuteScriptName = gameCommandDefinition.ExecuteScriptName;
+        Key = gameCommandGameConfiguration.Key ?? gameCommandGameConfiguration.GetType().Name;
+        KeyChar = gameCommandGameConfiguration.KeyChar;
+        IsEnabled = gameCommandGameConfiguration.IsEnabled;
+        Repeat = gameCommandGameConfiguration.Repeat;
+        ExecuteScriptName = gameCommandGameConfiguration.ExecuteScriptName;
     }
 
     public override string Key { get; }

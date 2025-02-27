@@ -10,13 +10,13 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericSpell : Spell
 {
-    public GenericSpell(Game game, SpellGameConfiguration definition) : base(game)
+    public GenericSpell(Game game, SpellGameConfiguration spellGameConfiguration) : base(game)
     {
-        Key = definition.Key;
-        Name = definition.Name;
-        CastScriptName = definition.CastScriptName;
-        CastFailedScriptName = definition.CastFailedScriptName;
-        LearnedDetails = definition.LearnedDetails;
+        Key = spellGameConfiguration.Key ?? spellGameConfiguration.GetType().Name;
+        Name = spellGameConfiguration.Name;
+        CastScriptName = spellGameConfiguration.CastScriptName;
+        CastFailedScriptName = spellGameConfiguration.CastFailedScriptName;
+        LearnedDetails = spellGameConfiguration.LearnedDetails;
     }
 
     public override string Key { get; }

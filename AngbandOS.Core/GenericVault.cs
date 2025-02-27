@@ -10,16 +10,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericVault : Vault
 {
-    public GenericVault(Game game, VaultGameConfiguration vaultDefinition) : base(game)
+    public GenericVault(Game game, VaultGameConfiguration vaultGameConfiguration) : base(game)
     {
-        Key = vaultDefinition.Key;
-        Color = vaultDefinition.Color;
-        Name = vaultDefinition.Name;
-        Category = vaultDefinition.Category;
-        Height = vaultDefinition.Height;
-        Rating = vaultDefinition.Rating;
-        Text = vaultDefinition.Text;
-        Width = vaultDefinition.Width;
+        Key = vaultGameConfiguration.Key ?? vaultGameConfiguration.GetType().Name;
+        Color = vaultGameConfiguration.Color;
+        Name = vaultGameConfiguration.Name;
+        Category = vaultGameConfiguration.Category;
+        Height = vaultGameConfiguration.Height;
+        Rating = vaultGameConfiguration.Rating;
+        Text = vaultGameConfiguration.Text;
+        Width = vaultGameConfiguration.Width;
     }
 
     public override string Key { get; }

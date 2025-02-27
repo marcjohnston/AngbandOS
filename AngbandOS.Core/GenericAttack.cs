@@ -10,17 +10,17 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericAttack : Attack
 {
-    public GenericAttack(Game game, AttackGameConfiguration definition) : base(game)
+    public GenericAttack(Game game, AttackGameConfiguration attackGameConfiguration) : base(game)
     {
-        MonsterAction = definition.MonsterAction;
-        Key = definition.Key;
-        PlayerAction = definition.PlayerAction;
-        KnowledgeAction = definition.KnowledgeAction;
-        AttackTouchesTarget = definition.AttackTouchesTarget;
-        AttackAwakensTarget = definition.AttackAwakensTarget;
-        AttackStunsTarget  = definition.AttackStunsTarget;
-        AttackCutsTarget = definition.AttackCutsTarget;
-        RendersMissMessage = definition.RendersMissMessage;
+        MonsterAction = attackGameConfiguration.MonsterAction;
+        Key = attackGameConfiguration.Key ?? attackGameConfiguration.GetType().Name;
+        PlayerAction = attackGameConfiguration.PlayerAction;
+        KnowledgeAction = attackGameConfiguration.KnowledgeAction;
+        AttackTouchesTarget = attackGameConfiguration.AttackTouchesTarget;
+        AttackAwakensTarget = attackGameConfiguration.AttackAwakensTarget;
+        AttackStunsTarget  = attackGameConfiguration.AttackStunsTarget;
+        AttackCutsTarget = attackGameConfiguration.AttackCutsTarget;
+        RendersMissMessage = attackGameConfiguration.RendersMissMessage;
     }
 
     public override string Key { get; }

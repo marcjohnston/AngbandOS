@@ -10,11 +10,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericProjectileGraphic : ProjectileGraphic
 {
-    public GenericProjectileGraphic(Game game, ProjectileGraphicGameConfiguration projectileGraphicDefinition) : base(game)
+    public GenericProjectileGraphic(Game game, ProjectileGraphicGameConfiguration projectileGraphicGameConfiguration) : base(game)
     {
-        Key = projectileGraphicDefinition.Key;
-        Character = projectileGraphicDefinition.Character;
-        Color = projectileGraphicDefinition.Color;
+        Key = projectileGraphicGameConfiguration.Key ?? projectileGraphicGameConfiguration.GetType().Name;
+        Character = projectileGraphicGameConfiguration.Character;
+        Color = projectileGraphicGameConfiguration.Color;
     }
 
     public override string Key { get; }

@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ItemFlavors;
 [Serializable]
 internal class GenericItemFlavor : ItemFlavor
 {
-    public GenericItemFlavor(Game game, ItemFlavorGameConfiguration readableFlavorDefinition) : base(game)
+    public GenericItemFlavor(Game game, ItemFlavorGameConfiguration readableFlavorGameConfiguration) : base(game)
     {
-        Key = readableFlavorDefinition.Key;
-        Name = readableFlavorDefinition.Name;
-        SymbolName = readableFlavorDefinition.SymbolName;
-        Color = readableFlavorDefinition.Color;
-        CanBeAssigned = readableFlavorDefinition.CanBeAssigned;
+        Key = readableFlavorGameConfiguration.Key ?? readableFlavorGameConfiguration.GetType().Name;
+        Name = readableFlavorGameConfiguration.Name;
+        SymbolName = readableFlavorGameConfiguration.SymbolName;
+        Color = readableFlavorGameConfiguration.Color;
+        CanBeAssigned = readableFlavorGameConfiguration.CanBeAssigned;
     }
 
     public override string Key { get; }

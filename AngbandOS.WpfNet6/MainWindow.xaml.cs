@@ -233,7 +233,8 @@ public partial class MainWindow : Window, IConsoleViewPort
             //GameConfiguration gameConfiguration = GameConfiguration.LoadGameConfiguration(persistentStorage);
             //GameConfiguration gameConfiguration = GameConfiguration.LoadGamePack();
             //GameConfiguration gameConfiguration = new GameConfiguration();
-            GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
+            //GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
+            GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
 
             //gameConfiguration.StartupTownName = "DylathLeenTown";
             GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, gameConfiguration, gameReplay);

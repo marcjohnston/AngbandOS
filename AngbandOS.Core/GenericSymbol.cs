@@ -3,12 +3,12 @@
 [Serializable]
 internal class GenericSymbol : Symbol
 {
-    public GenericSymbol(Game game, SymbolGameConfiguration symbolDefinition) : base(game)
+    public GenericSymbol(Game game, SymbolGameConfiguration symbolGameConfiguration) : base(game)
     {
-        Character = symbolDefinition.Character;
-        QueryCharacter = symbolDefinition.QueryCharacter;
-        Name = symbolDefinition.Name;
-        Key = symbolDefinition.Key;
+        Character = symbolGameConfiguration.Character;
+        QueryCharacter = symbolGameConfiguration.QueryCharacter;
+        Name = symbolGameConfiguration.Name;
+        Key = symbolGameConfiguration.Key ?? symbolGameConfiguration.GetType().Name;
     }
 
     public override char Character { get; }

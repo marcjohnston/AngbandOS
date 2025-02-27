@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericWizardCommand : WizardCommand
 {
-    public GenericWizardCommand(Game game, WizardCommandGameConfiguration wizardCommandDefinition) : base(game)
+    public GenericWizardCommand(Game game, WizardCommandGameConfiguration wizardCommandGameConfiguration) : base(game)
     {
-        Key = wizardCommandDefinition.Key;
-        KeyChar = wizardCommandDefinition.KeyChar;
-        IsEnabled = wizardCommandDefinition.IsEnabled;
-        ExecuteScriptName = wizardCommandDefinition.ExecuteScriptName;
-        HelpDescription = wizardCommandDefinition.HelpDescription;
-        HelpGroupName = wizardCommandDefinition.HelpGroupName;
+        Key = wizardCommandGameConfiguration.Key ?? wizardCommandGameConfiguration.GetType().Name;
+        KeyChar = wizardCommandGameConfiguration.KeyChar;
+        IsEnabled = wizardCommandGameConfiguration.IsEnabled;
+        ExecuteScriptName = wizardCommandGameConfiguration.ExecuteScriptName;
+        HelpDescription = wizardCommandGameConfiguration.HelpDescription;
+        HelpGroupName = wizardCommandGameConfiguration.HelpGroupName;
     }
 
     protected override string? HelpGroupName { get; }

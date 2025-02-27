@@ -3,10 +3,10 @@
 [Serializable]
 internal class GenericPlural : Plural
 {
-    public GenericPlural(Game game, PluralGameConfiguration pluralDefinition) : base(game)
+    public GenericPlural(Game game, PluralGameConfiguration pluralGameConfiguration) : base(game)
     {
-        Key = pluralDefinition.Key;
-        PluralForm = pluralDefinition.PluralForm;
+        Key = pluralGameConfiguration.Key ?? pluralGameConfiguration.GetType().Name;
+        PluralForm = pluralGameConfiguration.PluralForm;
     }
     public override string PluralForm { get; }
 
