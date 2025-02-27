@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.Collections;
-using System.Text.Json;
 
 namespace AngbandOS.Core;
 
@@ -16,16 +15,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class StringsRepository : IEnumerable<string>
 {
-    public void PersistEntities()
-    {
-        List<string> values = new List<string>();
-        foreach (string entity in this)
-        {
-            values.Add(entity);
-        }
-        string json = JsonSerializer.Serialize(values);
-        Game.CorePersistentStorage.PersistEntity(Name, json);
-    }
     private List<string> list = new List<string>();
 
     /// <summary>
@@ -37,10 +26,9 @@ internal class StringsRepository : IEnumerable<string>
 
     protected readonly Game Game;
 
-    public StringsRepository(Game game, string name, string[]? strings)
+    public StringsRepository(Game game, string[]? strings)
     {
         Game = game;
-        Name = name;
         if (strings != null)
         {
             list.AddRange(strings);
@@ -68,6 +56,4 @@ internal class StringsRepository : IEnumerable<string>
     {
         return list.GetEnumerator();
     }
-
-    public string Name { get; }
 }

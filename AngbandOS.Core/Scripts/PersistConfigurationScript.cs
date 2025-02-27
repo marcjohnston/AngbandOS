@@ -29,37 +29,13 @@ internal class PersistConfigurationScript : Script, IScript, ICastSpellScript
             return;
         }
 
-        try
-        {
-            // List repositories.
-            Game.SingletonRepository.GetStringsRepository("ElvishTexts").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("FindQuests").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("FunnyComments").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("FunnyDescriptions").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("HorrificDescriptions").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("InsultPlayerAttacks").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("MoanPlayerAttacks").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("IllegibleFlavorSyllables").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("ShopkeeperAcceptedComments").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("ShopkeeperBargainComments").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("ShopkeeperGoodComments").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("ShopkeeperLessThanGuessComments").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("ShopkeeperWorthlessComments").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("SingingPlayerAttacks").PersistEntities();
-            Game.SingletonRepository.GetStringsRepository("WorshipPlayerAttacks").PersistEntities();
+        Game.Screen.PrintLine("Enter configuration name: ", 0, 0);
+        string? configurationName = Game.AskforAux("", 31);
+        Game.Screen.Erase(0, 0);
 
-            // Dictionary repositories.
-            Game.SingletonRepository.PersistSingletons();
-        }
-        catch (NotImplementedException)
+        if (configurationName != null)
         {
-            Game.MsgPrint("The persistance interface does not support entity persistance.");
-            return;
-        }
-        catch (Exception)
-        {
-            Game.MsgPrint("The persistance interface failed to save the configuration.");
-            return;
+            Game.SingletonRepository.PersistConfiguration(configurationName);
         }
     }
 }

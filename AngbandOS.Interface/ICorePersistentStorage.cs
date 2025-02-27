@@ -31,14 +31,14 @@ public interface ICorePersistentStorage
     /// </summary>
     /// <param name="repositoryName">Specify the name of the repository.</param>
     /// <param name="jsonEntities">Specify an array of key/value pairs.</param>
-    void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities);
+    void PersistEntities(string configurationName, string repositoryName, KeyValuePair<string, string>[] jsonEntities);
 
     /// <summary>
     /// Persist a single non-keyed entity to the persistent storage--overwriting all other entities in the same repository identified by the repository name parameter.
     /// </summary>
     /// <param name="repositoryName"></param>
     /// <param name="json"></param>
-    void PersistEntity(string repositoryName, string json);
+    void PersistEntity(string configurationName, string repositoryName, string json);
 
     /// <summary>
     /// Retrieve multiple keyed entities from the persistent storage.  If there are none, return an empty array.

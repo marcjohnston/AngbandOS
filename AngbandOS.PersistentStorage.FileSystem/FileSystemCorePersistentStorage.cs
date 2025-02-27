@@ -28,16 +28,16 @@ namespace AngbandOS.PersistentStorage
             }
             return true;
         }
-        public void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
+        public void PersistEntities(string configurationName, string repositoryName, KeyValuePair<string, string>[] jsonEntities)
         {
             if (!IsValidName(repositoryName))
             {
                 throw new Exception($"The repository name {repositoryName} contains invalid characters.  Only a-zA-Z0-9_. characters are allows.");
             }
-            string path = Path.GetDirectoryName(SaveFilename);
+            string path = Path.Combine(Path.GetDirectoryName(SaveFilename), configurationName);
             string folderName = Path.Combine(path, repositoryName);
-            bool directoryCreated = false;
 
+            Directory.CreateDirectory(path);
             try
             {
                 Directory.Delete(folderName, true);
@@ -47,6 +47,7 @@ namespace AngbandOS.PersistentStorage
             }
 
             // Process a folder of entities.
+            bool directoryCreated = false;
             foreach (KeyValuePair<string, string> keyValuePair in jsonEntities)
             {
                 string key = keyValuePair.Key;
@@ -72,12 +73,12 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public void PersistEntity(string repositoryName, string json)
+        public void PersistEntity(string configurationName, string repositoryName, string json)
         {
-            string path = Path.GetDirectoryName(SaveFilename);
-            string folderName = Path.Combine(path, repositoryName);
-            string filename = $"{folderName}.json";
+            string path = Path.Combine(Path.GetDirectoryName(SaveFilename), configurationName);
+            string filename = Path.Combine(path, $"{repositoryName}.json");
 
+            Directory.CreateDirectory(path);
             try
             {
                 File.Delete(filename);

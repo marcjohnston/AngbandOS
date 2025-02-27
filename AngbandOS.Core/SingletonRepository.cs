@@ -8,6 +8,7 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Reflection;
+using System.Text.Json;
 using System.Xml.Linq;
 using Timer = AngbandOS.Core.Timers.Timer;
 
@@ -176,22 +177,49 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Persist all of the singletons to the persistent storage.
+    /// Persists the entire configuration using the CorePersistentStorage driver.
     /// </summary>
-    public void PersistSingletons()
+    /// <param name="name"></param>
+    public void PersistConfiguration(string configurationName)
     {
-        foreach (KeyValuePair<string, GenericRepository> typeNameAndRepository in _singletonsDictionary)
+        try
         {
-            List<KeyValuePair<string, string>> jsonEntityList = new List<KeyValuePair<string, string>>();
-            foreach (KeyValuePair<string, object> keyAndEntity in typeNameAndRepository.Value.Dictionary)
+            // Persist all of the string repositories.
+            foreach ((string repositoryName, StringsRepository stringsRepository) in _stringsRepositoriesDictionary)
             {
-                string key = keyAndEntity.Key; // entity.GetKey.ToString(); // TODO: The use of .ToString is because TKey needs to be strings
-                IGetKey entity = (IGetKey)keyAndEntity.Value;
-                string serializedEntity =  entity.ToJson();
-                jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
+                List<string> stringList = new List<string>();
+                foreach (string entity in stringsRepository)
+                {
+                    stringList.Add(entity);
+                }
+                string json = JsonSerializer.Serialize(stringList);
+                Game.CorePersistentStorage.PersistEntity(configurationName, repositoryName, json);
             }
-            string pluralName = Game.Pluralize(typeNameAndRepository.Key);
-            Game.CorePersistentStorage.PersistEntities(pluralName, jsonEntityList.ToArray());
+
+            // Dictionary repositories.
+            foreach (KeyValuePair<string, GenericRepository> typeNameAndRepository in _singletonsDictionary)
+            {
+                List<KeyValuePair<string, string>> jsonEntityList = new List<KeyValuePair<string, string>>();
+                foreach (KeyValuePair<string, object> keyAndEntity in typeNameAndRepository.Value.Dictionary)
+                {
+                    string key = keyAndEntity.Key; // entity.GetKey.ToString(); // TODO: The use of .ToString is because TKey needs to be strings
+                    IGetKey entity = (IGetKey)keyAndEntity.Value;
+                    string serializedEntity = entity.ToJson();
+                    jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
+                }
+                string pluralName = Game.Pluralize(typeNameAndRepository.Key);
+                Game.CorePersistentStorage.PersistEntities(configurationName, pluralName, jsonEntityList.ToArray());
+            }
+        }
+        catch (NotImplementedException)
+        {
+            Game.MsgPrint("The persistance interface does not support entity persistance.");
+            return;
+        }
+        catch (Exception)
+        {
+            Game.MsgPrint("The persistance interface failed to save the configuration.");
+            return;
         }
     }
 
@@ -391,10 +419,13 @@ internal class SingletonRepository
         _singletonsDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        foreach ((string name, string[] strings) in gameConfiguration.StringRepositories)
+        if (gameConfiguration.StringRepositories != null)
         {
-            StringsRepository repository = new StringsRepository(Game, name, strings);
-            _stringsRepositoriesDictionary.Add(name, repository);
+            foreach ((string name, string[] strings) in gameConfiguration.StringRepositories)
+            {
+                StringsRepository repository = new StringsRepository(Game, strings);
+                _stringsRepositoriesDictionary.Add(name, repository);
+            }
         }
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
