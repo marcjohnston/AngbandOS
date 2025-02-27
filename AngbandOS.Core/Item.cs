@@ -2521,7 +2521,7 @@ internal sealed class Item : IComparable<Item>
             testcounter = Game.DieRoll(2) + 1;
             while (testcounter-- != 0)
             {
-                outString += Game.SingletonRepository.GetStringsRepository("ElvishText").ToWeightedRandom().ChooseOrDefault();
+                outString += Game.SingletonRepository.GetStringsRepository("ElvishTexts").ToWeightedRandom().ChooseOrDefault();
             }
         }
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";

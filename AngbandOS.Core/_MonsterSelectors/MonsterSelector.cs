@@ -24,6 +24,6 @@ internal abstract class MonsterSelector : IMonsterSelector, IGetKey
 
     public string ToJson()
     {
-        throw new NotImplementedException();
+        return "";
     }
 }

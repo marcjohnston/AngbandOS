@@ -5,7 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using Microsoft.VisualBasic;
+using System;
 using System.Reflection;
+using System.Xml.Linq;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core;
@@ -388,21 +391,11 @@ internal class SingletonRepository
         _singletonsDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        AddStringRepository("ElvishTexts", gameConfiguration.ElvishTexts);
-        AddStringRepository("FindQuests", gameConfiguration.FindQuests);
-        AddStringRepository("FunnyComments", gameConfiguration.FunnyComments);
-        AddStringRepository("FunnyDescriptions", gameConfiguration.FunnyDescriptions);
-        AddStringRepository("HorrificDescriptions", gameConfiguration.HorrificDescriptions);
-        AddStringRepository("InsultPlayerAttacks", gameConfiguration.InsultPlayerAttacks);
-        AddStringRepository("MoanPlayerAttacks", gameConfiguration.MoanPlayerAttacks);
-        AddStringRepository("ShopkeeperAcceptedComments", gameConfiguration.ShopkeeperAcceptedComments);
-        AddStringRepository("ShopkeeperBargainComments", gameConfiguration.ShopkeeperBargainComments);
-        AddStringRepository("ShopkeeperGoodComments", gameConfiguration.ShopkeeperGoodComments);
-        AddStringRepository("ShopkeeperLessThanGuessComments", gameConfiguration.ShopkeeperLessThanGuessComments);
-        AddStringRepository("ShopkeeperWorthlessComments", gameConfiguration.ShopkeeperWorthlessComments);
-        AddStringRepository("SingingPlayerAttacks", gameConfiguration.SingingPlayerAttacks);
-        AddStringRepository("IllegibleFlavorSyllables", gameConfiguration.IllegibleFlavorSyllables);
-        AddStringRepository("WorshipPlayerAttacks", gameConfiguration.WorshipPlayerAttacks);
+        foreach ((string name, string[] strings) in gameConfiguration.StringRepositories)
+        {
+            StringsRepository repository = new StringsRepository(Game, name, strings);
+            _stringsRepositoriesDictionary.Add(name, repository);
+        }
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         LoadRepositoryItems(gameConfiguration);
@@ -441,12 +434,6 @@ internal class SingletonRepository
         }
         genericRepository = new GenericRepository();
         _singletonsDictionary.Add(typeName, genericRepository);
-    }
-
-    private void AddStringRepository(string name, string[]? strings)
-    {
-        StringsRepository repository = new StringsRepository(Game, name, strings);
-        _stringsRepositoriesDictionary.Add(name, repository);
     }
 
     private void LoadRepositoryItems(GameConfiguration gameConfiguration)

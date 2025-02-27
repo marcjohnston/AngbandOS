@@ -85,6 +85,23 @@ namespace AngbandOS.PersistentStorage
 
         public GameConfiguration LoadConfiguration(string? username, string configurationName)
         {
+            List<(string name, string[]? strings)> stringRepositoriesList = new List<(string name, string[]? strings)>();
+            stringRepositoriesList.Add(("ElvishTexts", LoadEntity("ElvishTexts")));
+            stringRepositoriesList.Add(("FindQuests", LoadEntity("FindQuests")));
+            stringRepositoriesList.Add(("FunnyComments", LoadEntity("FunnyComments")));
+            stringRepositoriesList.Add(("FunnyDescriptions", LoadEntity("FunnyDescriptions")));
+            stringRepositoriesList.Add(("HorrificDescriptions", LoadEntity("HorrificDescriptions")));
+            stringRepositoriesList.Add(("InsultPlayerAttacks", LoadEntity("InsultPlayerAttacks")));
+            stringRepositoriesList.Add(("MoanPlayerAttacks", LoadEntity("MoanPlayerAttacks")));
+            stringRepositoriesList.Add(("IllegibleFlavorSyllables", LoadEntity("UnreadableFlavorSyllables")));
+            stringRepositoriesList.Add(("ShopkeeperAcceptedComments", LoadEntity("ShopkeeperAcceptedComments")));
+            stringRepositoriesList.Add(("ShopkeeperBargainComments", LoadEntity("ShopkeeperBargainComments")));
+            stringRepositoriesList.Add(("ShopkeeperGoodComments", LoadEntity("ShopkeeperGoodComments")));
+            stringRepositoriesList.Add(("ShopkeeperLessThanGuessComments", LoadEntity("ShopkeeperLessThanGuessComments")));
+            stringRepositoriesList.Add(("ShopkeeperWorthlessComments", LoadEntity("ShopkeeperWorthlessComments")));
+            stringRepositoriesList.Add(("SingingPlayerAttacks", LoadEntity("SingingPlayerAttacks")));
+            stringRepositoriesList.Add(("WorshipPlayerAttacks", LoadEntity("WorshipPlayerAttacks")));
+
             return new GameConfiguration()
             {
                 AmuletReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("AmuletReadableFlavors"),
@@ -116,21 +133,7 @@ namespace AngbandOS.PersistentStorage
                 WandReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("WandReadableFlavors"),
                 WizardCommands = LoadEntities<WizardCommandGameConfiguration>("WizardCommands"),
 
-                ElvishTexts = LoadEntity("ElvishTexts"),
-                FindQuests = LoadEntity("FindQuests"),
-                FunnyComments = LoadEntity("FunnyComments"),
-                FunnyDescriptions = LoadEntity("FunnyDescriptions"),
-                HorrificDescriptions = LoadEntity("HorrificDescriptions"),
-                InsultPlayerAttacks = LoadEntity("InsultPlayerAttacks"),
-                MoanPlayerAttacks = LoadEntity("MoanPlayerAttacks"),
-                IllegibleFlavorSyllables = LoadEntity("UnreadableFlavorSyllables"),
-                ShopkeeperAcceptedComments = LoadEntity("ShopkeeperAcceptedComments"),
-                ShopkeeperBargainComments = LoadEntity("ShopkeeperBargainComments"),
-                ShopkeeperGoodComments = LoadEntity("ShopkeeperGoodComments"),
-                ShopkeeperLessThanGuessComments = LoadEntity("ShopkeeperLessThanGuessComments"),
-                ShopkeeperWorthlessComments = LoadEntity("ShopkeeperWorthlessComments"),
-                SingingPlayerAttacks = LoadEntity("SingingPlayerAttacks"),
-                WorshipPlayerAttacks = LoadEntity("WorshipPlayerAttacks")
+                StringRepositories = stringRepositoriesList.ToArray()
             };
         }
 

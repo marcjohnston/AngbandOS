@@ -32,7 +32,7 @@ internal class PersistConfigurationScript : Script, IScript, ICastSpellScript
         try
         {
             // List repositories.
-            Game.SingletonRepository.GetStringsRepository("ElvishText").PersistEntities();
+            Game.SingletonRepository.GetStringsRepository("ElvishTexts").PersistEntities();
             Game.SingletonRepository.GetStringsRepository("FindQuests").PersistEntities();
             Game.SingletonRepository.GetStringsRepository("FunnyComments").PersistEntities();
             Game.SingletonRepository.GetStringsRepository("FunnyDescriptions").PersistEntities();
