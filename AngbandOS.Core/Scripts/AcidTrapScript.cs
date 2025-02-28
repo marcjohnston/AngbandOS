@@ -23,8 +23,8 @@ internal class AcidTrapScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
+        Game.RunScript(nameof(YouAreSplashedWithAcidRenderMessageScript));
         // Do 4d6 acid damage
-        Game.MsgPrint("You are splashed with acid!");
         int damage = Game.DiceRoll(4, 6);
         Game.AcidDam(damage, "an acid trap");
     }
