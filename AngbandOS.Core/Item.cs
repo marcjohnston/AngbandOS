@@ -2513,7 +2513,7 @@ internal sealed class Item : IComparable<Item>
         {
             while (testcounter-- != 0)
             {
-                outString += Game.SingletonRepository.GetStringsRepository("IllegibleFlavorSyllables").ToWeightedRandom().ChooseOrDefault();
+                outString += new WeightedRandom<string>(Game, Game.IllegibleFlavorSyllables).ChooseOrDefault();
             }
         }
         else
@@ -2521,7 +2521,7 @@ internal sealed class Item : IComparable<Item>
             testcounter = Game.DieRoll(2) + 1;
             while (testcounter-- != 0)
             {
-                outString += Game.SingletonRepository.GetStringsRepository("ElvishTexts").ToWeightedRandom().ChooseOrDefault();
+                outString += new WeightedRandom<string>(Game, Game.ElvishTexts).ChooseOrDefault();
             }
         }
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";

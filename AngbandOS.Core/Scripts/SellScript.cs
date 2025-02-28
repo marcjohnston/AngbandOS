@@ -12,6 +12,38 @@ internal class SellScript : Script, IStoreCommandScript
 {
     private SellScript(Game game) : base(game) { }
 
+    public virtual string[] ShopkeeperBargainComments => new string[]
+    {
+        "Yipee!",
+        "I think I'll retire!",
+        "The shopkeeper jumps for joy.",
+        "The shopkeeper smiles gleefully."
+    };
+
+    public virtual string[] ShopkeeperGoodComments => new string[]
+    {
+        "Cool!",
+        "You've made my day!",
+        "The shopkeeper giggles.",
+        "The shopkeeper laughs loudly."
+    };
+
+    public virtual string[] ShopkeeperLessThanGuessComments => new string[]
+    {
+        "Damn!",
+        "You bastard!",
+        "The shopkeeper curses at you.",
+        "The shopkeeper glares at you."
+    };
+
+    public virtual string[] ShopkeeperWorthlessComments => new string[]
+    {
+        "Arrgghh!",
+        "You bastard!",
+        "You hear someone sobbing...",
+        "The shopkeeper howls in agony!"
+    };      
+
     /// <summary>
     /// Allows an item to be sold to the store.  Does not modify any of the store flags.
     /// </summary>
@@ -122,22 +154,22 @@ internal class SellScript : Script, IStoreCommandScript
     {
         if (value <= 0 && price > value)
         {
-            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperWorthlessComments").ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(new WeightedRandom<string>(Game, ShopkeeperWorthlessComments).ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldWorthless);
         }
         else if (value < guess && price > value)
         {
-            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperLessThanGuessComments").ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(new WeightedRandom<string>(Game, ShopkeeperLessThanGuessComments).ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldBargain);
         }
         else if (value > guess && value < 4 * guess && price < value)
         {
-            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperGoodComments").ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(new WeightedRandom<string>(Game, ShopkeeperGoodComments).ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldCheaply);
         }
         else if (value > guess && price < value)
         {
-            Game.MsgPrint(Game.SingletonRepository.GetStringsRepository("ShopkeeperBargainComments").ToWeightedRandom().ChooseOrDefault());
+            Game.MsgPrint(new WeightedRandom<string>(Game, ShopkeeperBargainComments).ChooseOrDefault());
             Game.PlaySound(SoundEffectEnum.StoreSoldExtraCheaply);
         }
     }

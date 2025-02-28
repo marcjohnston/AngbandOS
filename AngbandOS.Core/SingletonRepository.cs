@@ -5,11 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using Microsoft.VisualBasic;
-using System;
 using System.Reflection;
-using System.Text.Json;
-using System.Xml.Linq;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core;
@@ -184,18 +180,6 @@ internal class SingletonRepository
     {
         try
         {
-            // Persist all of the string repositories.
-            foreach ((string repositoryName, StringsRepository stringsRepository) in _stringsRepositoriesDictionary)
-            {
-                List<string> stringList = new List<string>();
-                foreach (string entity in stringsRepository)
-                {
-                    stringList.Add(entity);
-                }
-                string json = JsonSerializer.Serialize(stringList);
-                Game.CorePersistentStorage.PersistEntity(configurationName, repositoryName, json);
-            }
-
             // Dictionary repositories.
             foreach (KeyValuePair<string, GenericRepository> typeNameAndRepository in _singletonsDictionary)
             {
@@ -221,11 +205,6 @@ internal class SingletonRepository
             Game.MsgPrint("The persistance interface failed to save the configuration.");
             return;
         }
-    }
-
-    public StringsRepository GetStringsRepository(string name)
-    {
-        return _stringsRepositoriesDictionary[name];
     }
 
     /// <summary>
@@ -418,20 +397,6 @@ internal class SingletonRepository
         _singletonsDictionary["MonsterRace"].List.Clear();
         _singletonsDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
-        // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        if (gameConfiguration.StringRepositories != null)
-        {
-            foreach ((string name, string[] strings) in gameConfiguration.StringRepositories)
-            {
-                StringsRepository repository = new StringsRepository(Game, strings);
-                _stringsRepositoriesDictionary.Add(name, repository);
-            }
-        }
-
-        // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
-        LoadRepositoryItems(gameConfiguration);
-        BindRepositoryItems();
-
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
         {
@@ -442,8 +407,6 @@ internal class SingletonRepository
 
     #region Privates
     private readonly Game Game;
-    private readonly Dictionary<string, StringsRepository> _stringsRepositoriesDictionary = new Dictionary<string, StringsRepository>();
-
     private Dictionary<string, GenericRepository> _singletonsDictionary = new Dictionary<string, GenericRepository>();
 
     /// <summary>
@@ -465,22 +428,6 @@ internal class SingletonRepository
         }
         genericRepository = new GenericRepository();
         _singletonsDictionary.Add(typeName, genericRepository);
-    }
-
-    private void LoadRepositoryItems(GameConfiguration gameConfiguration)
-    {
-        foreach ((string name, StringsRepository repository) in _stringsRepositoriesDictionary)
-        {
-            repository.Load(gameConfiguration);
-        }
-    }
-
-    private void BindRepositoryItems()
-    {
-        foreach ((string name, StringsRepository repository) in _stringsRepositoriesDictionary)
-        {
-            repository.Bind();
-        }
     }
 
     private void LoadSingleton(object? singleton)

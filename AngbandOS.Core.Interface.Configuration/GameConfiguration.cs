@@ -93,5 +93,11 @@ public class GameConfiguration
 
     public virtual GodGameConfiguration[]? Gods { get; set; } = null;
 
-    public virtual (string, string[])[]? StringRepositories { get; set; } = null;
+    public virtual string[]? ShopkeeperAcceptedComments { get; set; } = null;
+    public virtual string[]? IllegibleFlavorSyllables { get; set; } = null;
+    public virtual string[]? FindQuests { get; set; } = null;
+    public virtual string[]? ElvishTexts { get; set; } = null;
+    public virtual string[]? FunnyDescriptions { get; set; } = null;
+    public virtual string[]? FunnyComments { get; set; } = null;
+    public virtual string[]? HorrificDescriptions { get; set; } = null;
 }

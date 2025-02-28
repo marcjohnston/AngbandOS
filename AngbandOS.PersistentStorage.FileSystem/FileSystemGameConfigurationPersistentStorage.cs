@@ -132,8 +132,6 @@ namespace AngbandOS.PersistentStorage
                 Vaults = LoadEntities<VaultGameConfiguration>("Vaults"),
                 WandReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("WandReadableFlavors"),
                 WizardCommands = LoadEntities<WizardCommandGameConfiguration>("WizardCommands"),
-
-                StringRepositories = stringRepositoriesList.ToArray()
             };
         }
 

@@ -50,6 +50,14 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
+    public readonly string[] ShopkeeperAcceptedComments;
+    public readonly string[] IllegibleFlavorSyllables;
+    public readonly string[] FindQuests;
+    public readonly string[] ElvishTexts;
+    public readonly string[] FunnyDescriptions;
+    public readonly string[] FunnyComments;
+    public readonly string[] HorrificDescriptions;
+
     public readonly RefreshMapProperty RefreshMap;
     public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
     public bool IsBirthday;
@@ -1178,6 +1186,14 @@ internal class Game
             GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression);
         }
 
+        ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
+        HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
+        FunnyComments = gameConfiguration.FunnyComments ?? new string[] { };
+        FunnyDescriptions = gameConfiguration.FunnyDescriptions ?? new string[] { };
+        FindQuests = gameConfiguration.FindQuests ?? new string[] { };
+        IllegibleFlavorSyllables = gameConfiguration.IllegibleFlavorSyllables ?? new string[] { };
+        ShopkeeperAcceptedComments = gameConfiguration.ShopkeeperAcceptedComments ?? new string[] { };
+
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
@@ -1274,7 +1290,7 @@ internal class Game
 
     public void SayComment_1()
     {
-        MsgPrint(SingletonRepository.GetStringsRepository("ShopkeeperAcceptedComments").ToWeightedRandom().ChooseOrDefault());
+        MsgPrint(new WeightedRandom<string>(this, ShopkeeperAcceptedComments).ChooseOrDefault());
     }
 
     public bool ServiceHaggle(int serviceCost, out int price)
@@ -3396,7 +3412,7 @@ internal class Game
                     int s = RandomLessThan(100) < 30 ? 1 : 2;
                     for (int q = 0; q < s; q++)
                     {
-                        tmp += SingletonRepository.GetStringsRepository("IllegibleFlavorSyllables").ToWeightedRandom().ChooseOrDefault();
+                        tmp += new WeightedRandom<string>(this, IllegibleFlavorSyllables).ChooseOrDefault();
                     }
                     if (buf.Length + tmp.Length > 14)
                     {
@@ -13286,7 +13302,7 @@ internal class Game
         MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(Quests[qIdx].RIdx);
         string name = rPtr.FriendlyName;
         int qNum = Quests[qIdx].ToKill;
-        MsgPrint(SingletonRepository.GetStringsRepository("FindQuests").ToWeightedRandom().ChooseOrDefault());
+        MsgPrint(new WeightedRandom<string>(this, FindQuests).ChooseOrDefault());
         MsgPrint(null);
         if (qNum == 1)
         {
