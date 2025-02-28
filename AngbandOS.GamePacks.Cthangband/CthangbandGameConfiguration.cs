@@ -138,6 +138,20 @@ public class CthangbandGameConfiguration : GameConfiguration
         new VerticalBarSymbol()
     };
 
+    public override SyllableSetGameConfiguration[]? SyllableSets => new SyllableSetGameConfiguration[]
+    {
+        new AngelicSyllableSet(),
+        new CthuloidSyllableSet(),
+        new DwarvenSyllableSet(),
+        new ElvishSyllableSet(),
+        new GnomishSyllableSet(),
+        new HobbitSyllableSet(),
+        new HumanSyllableSet(),
+        new KlackonSyllableSet(),
+        new OrcishSyllableSet(),
+        new YeekishSyllableSet()
+    };
+
     public override string[]? ElvishTexts => new string[]
     {
         "adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",

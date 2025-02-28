@@ -340,6 +340,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
+        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, GenericSyllableSet>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(gameConfiguration.Tiles);
         LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(gameConfiguration.Towns);
@@ -387,7 +388,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<StoreFactory>();
         LoadAllAssemblyTypes<BaseSummonScript>();
         LoadAllAssemblyTypes<SummonWeightedRandom>();
-        LoadAllAssemblyTypes<SyllableSet>();
         LoadAllAssemblyTypes<Talent>();
         LoadAllAssemblyTypes<Widget>();
         LoadAllAssemblyTypes<WieldSlot>();

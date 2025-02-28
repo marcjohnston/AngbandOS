@@ -18,8 +18,9 @@ internal abstract class SyllableSet : IGetKey
     public abstract string[] BeginningSyllables { get; }
     public abstract string[] MiddleSyllables { get; }
     public abstract string[] EndingSyllables { get; }
+    public virtual string Key => GetType().Name;
 
-    public string GetKey => GetType().Name;
+    public string GetKey => Key;
 
     public void Bind() { }
 
