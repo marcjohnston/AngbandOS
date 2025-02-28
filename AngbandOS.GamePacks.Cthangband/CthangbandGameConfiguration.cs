@@ -264,6 +264,14 @@ public class CthangbandGameConfiguration : GameConfiguration
         new TheRewardIsWorthItVault()
     };
 
+    public override PluralGameConfiguration[]? Plurals => new PluralGameConfiguration[]
+    {
+        new BootsPlural(),
+        new GlovesPlural(),
+        new GoldPlural(),
+        new JunkPlural()
+    };
+
     public override string[]? ElvishTexts => new string[]
     {
         "adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",
