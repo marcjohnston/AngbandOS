@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RenderMessageScripts;
 using System.Reflection;
 using Timer = AngbandOS.Core.Timers.Timer;
 
@@ -294,6 +295,7 @@ internal class SingletonRepository
         RegisterRepository<Property>();
         RegisterRepository<Race>();
         RegisterRepository<Realm>();
+        RegisterRepository<RenderMessageScript>();
         RegisterRepository<Reward>();
         RegisterRepository<RoomLayout>();
         RegisterRepository<Shopkeeper>();
@@ -381,6 +383,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<ProjectileWeightedRandomScript>();
         LoadAllAssemblyTypes<Race>();
         LoadAllAssemblyTypes<Realm>();
+        LoadAllAssemblyTypes<RenderMessageScript>();
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();
         LoadAllAssemblyTypes<Script>();

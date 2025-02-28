@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RenderMessageScripts;
+
 namespace AngbandOS.Core.ChestTraps;
 
 [Serializable]
@@ -13,7 +15,7 @@ internal class PoisonChestTrap : ChestTrap
     private PoisonChestTrap(Game game) : base(game) { }
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        Game.MsgPrint("A puff of green gas surrounds you!");
+        Game.RunScript(nameof(APuffOfGreenGasSurroundsYouRenderMessageScript));
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
             if (Game.DieRoll(10) <= Game.SingletonRepository.Get<God>(nameof(HagargRyonisGod)).AdjustedFavour)
