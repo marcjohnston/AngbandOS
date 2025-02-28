@@ -48,7 +48,7 @@ internal class DwarfRace : Race
     {
         itemCharacteristics.ResBlind = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 4)

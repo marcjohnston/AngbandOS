@@ -12,6 +12,7 @@ namespace AngbandOS.Core.SyllableSets;
 /// </summary>
 internal class HumanSyllableSet : SyllableSet
 {
+    private HumanSyllableSet(Game game) : base(game) { } // This object is a singleton.
     public override string[] BeginningSyllables => new string[]
     {
         "Ab", "Ac", "Ad", "Af", "Agr", "Ast", "As", "Al", "Adw", "Adr", "Ar", "B", "Br", "C", "Cr", "Ch", "Cad",

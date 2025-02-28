@@ -46,7 +46,7 @@ internal class ElfRace : Race
     {
         itemCharacteristics.ResLight = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
 
     public override void CalcBonuses()
     {

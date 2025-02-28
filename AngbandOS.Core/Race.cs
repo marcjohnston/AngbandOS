@@ -25,11 +25,13 @@ internal abstract class Race : IGetKey
         return "";
     }
 
-
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
+    }
 
     public abstract int[] AbilityBonus { get; } // TODO: This needs to be a dictionary where the keys are stats
     public abstract int AgeRange { get; }
@@ -95,23 +97,13 @@ internal abstract class Race : IGetKey
     {
     }
 
-    protected string CreateRandomNameFromSyllables(SyllableSet syllables)
-    {
-        string name = "";
-        do
-        {
-            name = syllables.BeginningSyllables[Game.RandomLessThan(syllables.BeginningSyllables.Length)];
-            name += syllables.MiddleSyllables[Game.RandomLessThan(syllables.MiddleSyllables.Length)];
-            name += syllables.EndingSyllables[Game.RandomLessThan(syllables.EndingSyllables.Length)];
-        } while (name.Length > 12);
-
-        return name;
-    }
+    protected abstract string GenerateNameSyllableSetName { get; }
+    public SyllableSet GenerateNameSyllableSet { get; private set; }
 
     /// <summary>
     /// Create a random name for a character based on their race.
     /// </summary>
-    public abstract string CreateRandomName();
+    public string CreateRandomName() => GenerateNameSyllableSet.GenerateName();
 
     /// <summary>
     /// Returns one or two lines of self knowledge or null, if the race has no additional self knowledge.  Return null, by default.

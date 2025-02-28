@@ -47,7 +47,7 @@ internal class MiriNigriRace : Race
         itemCharacteristics.ResSound = true;
         itemCharacteristics.ResConf = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
     public override void CalcBonuses()
     {
         Game.HasConfusionResistance = true;

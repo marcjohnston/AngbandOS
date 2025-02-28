@@ -57,7 +57,7 @@ internal class SpectreRace : Race
             itemCharacteristics.Telepathy = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

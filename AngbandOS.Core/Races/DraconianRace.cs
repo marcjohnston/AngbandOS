@@ -69,7 +69,7 @@ internal class DraconianRace : Race
             itemCharacteristics.ResPois = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new GnomishSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };

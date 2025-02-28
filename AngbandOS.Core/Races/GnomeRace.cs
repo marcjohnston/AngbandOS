@@ -49,7 +49,7 @@ internal class GnomeRace : Race
     {
         itemCharacteristics.FreeAct = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new GnomishSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

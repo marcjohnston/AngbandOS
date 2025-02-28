@@ -48,7 +48,7 @@ internal class DarkElfRace : Race
     {
         itemCharacteristics.ResDark = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

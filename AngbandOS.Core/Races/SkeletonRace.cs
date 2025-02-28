@@ -54,7 +54,7 @@ internal class SkeletonRace : Race
             itemCharacteristics.ResCold = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 29)

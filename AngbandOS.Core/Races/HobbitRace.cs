@@ -49,7 +49,7 @@ internal class HobbitRace : Race
     {
         itemCharacteristics.SustDex = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(HobbitSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

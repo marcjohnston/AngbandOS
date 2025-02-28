@@ -12,6 +12,7 @@ namespace AngbandOS.Core.SyllableSets;
 /// </summary>
 internal class GnomishSyllableSet : SyllableSet
 {
+    private GnomishSyllableSet(Game game) : base(game) { } // This object is a singleton.
     public override string[] BeginningSyllables => new string[]
     {
         "Aar", "An", "Ar", "As", "C", "H", "Han", "Har", "Hel", "Iir", "J", "Jan", "Jar", "K", "L", "M", "Mar", "N",

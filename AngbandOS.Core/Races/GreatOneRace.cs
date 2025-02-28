@@ -50,7 +50,7 @@ internal class GreatOneRace : Race
         itemCharacteristics.SustCon = true;
         itemCharacteristics.Regen = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

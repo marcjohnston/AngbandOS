@@ -302,6 +302,7 @@ internal class SingletonRepository
         RegisterRepository<StoreCommand>();
         RegisterRepository<StoreFactory>();
         RegisterRepository<BaseSummonScript>();
+        RegisterRepository<SyllableSet>();
         RegisterRepository<Symbol>();
         RegisterRepository<Talent>();
         RegisterRepository<Tile>();

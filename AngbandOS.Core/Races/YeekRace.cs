@@ -52,7 +52,7 @@ internal class YeekRace : Race
             itemCharacteristics.ImAcid = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new YeekishSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(YeekishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 14)

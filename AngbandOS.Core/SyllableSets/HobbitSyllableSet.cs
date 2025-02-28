@@ -12,6 +12,7 @@ namespace AngbandOS.Core.SyllableSets;
 /// </summary>
 internal class HobbitSyllableSet : SyllableSet
 {
+    private HobbitSyllableSet(Game game) : base(game) { } // This object is a singleton.
     public override string[] BeginningSyllables => new string[] { "B", "Ber", "Br", "D", "Der", "Dr", "F", "Fr", "G", "H", "L", "Ler", "M", "Mer", "N", "P", "Pr", "Per", "R", "S", "T", "W" };
     public override string[] MiddleSyllables => new string[] { "a", "e", "i", "ia", "o", "oi", "u" };
     public override string[] EndingSyllables => new string[]

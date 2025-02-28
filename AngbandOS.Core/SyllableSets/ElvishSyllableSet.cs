@@ -12,6 +12,7 @@ namespace AngbandOS.Core.SyllableSets;
 /// </summary>
 internal class ElvishSyllableSet : SyllableSet
 {
+    private ElvishSyllableSet(Game game) : base(game) { } // This object is a singleton.
     public override string[] BeginningSyllables => new string[]
     {
         "Al", "An", "Bal", "Bel", "Cal", "Cel", "El", "Elr", "Elv", "Eow", "Ear", "F", "Fal", "Fel", "Fin", "G",

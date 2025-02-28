@@ -56,7 +56,7 @@ internal class ImpRace : Race
             itemCharacteristics.ImFire = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new AngelicSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(AngelicSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         List<string> values = new List<string>();

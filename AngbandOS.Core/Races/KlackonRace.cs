@@ -53,7 +53,7 @@ internal class KlackonRace : Race
         itemCharacteristics.ResConf = true;
         itemCharacteristics.ResAcid = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new KlackonSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(KlackonSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 8)

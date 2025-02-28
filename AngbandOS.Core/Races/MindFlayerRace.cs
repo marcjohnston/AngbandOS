@@ -58,7 +58,7 @@ internal class MindFlayerRace : Race
             itemCharacteristics.Telepathy = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 14)

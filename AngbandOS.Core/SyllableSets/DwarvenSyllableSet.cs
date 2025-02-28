@@ -12,6 +12,7 @@ namespace AngbandOS.Core.SyllableSets;
 /// </summary>
 internal class DwarvenSyllableSet : SyllableSet
 {
+    private DwarvenSyllableSet(Game game) : base(game) { } // This object is a singleton.
     public override string[] BeginningSyllables => new string[] { "B", "D", "F", "G", "Gl", "H", "K", "L", "M", "N", "R", "S", "T", "Th", "V" };
     public override string[] MiddleSyllables => new string[] { "a", "e", "i", "o", "oi", "u" };
     public override string[] EndingSyllables => new string[] { "bur", "fur", "gan", "gnus", "gnar", "li", "lin", "lir", "mli", "nar", "nus", "rin", "ran", "sin", "sil", "sur" };

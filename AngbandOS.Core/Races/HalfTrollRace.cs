@@ -54,7 +54,7 @@ internal class HalfTrollRace : Race
             itemCharacteristics.SlowDigest = true;
         }
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

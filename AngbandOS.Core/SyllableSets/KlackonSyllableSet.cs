@@ -12,6 +12,7 @@ namespace AngbandOS.Core.SyllableSets;
 /// </summary>
 internal class KlackonSyllableSet : SyllableSet
 {
+    private KlackonSyllableSet(Game game) : base(game) { } // This object is a singleton.
     public override string[] BeginningSyllables => new string[] { "K'", "K", "Kri", "Kir", "Kiri", "Iriki", "Irik", "Karik", "Iri", "Akri" };
     public override string[] MiddleSyllables => new string[] { "arak", "i", "iri", "ikki", "ki", "kiri", "ikir", "irak", "arik", "k'", "r" };
     public override string[] EndingSyllables => new string[] { "akkak", "ak", "ik", "ikkik", "irik", "arik", "kidik", "kii", "k", "ki", "riki", "irk" };

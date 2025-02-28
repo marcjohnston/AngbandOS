@@ -49,7 +49,7 @@ internal class HalfGiantRace : Race
         itemCharacteristics.ResShards = true;
         itemCharacteristics.SustStr = true;
     }
-    public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllableSet());
+    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
