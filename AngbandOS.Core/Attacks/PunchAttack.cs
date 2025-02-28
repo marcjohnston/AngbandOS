@@ -12,7 +12,10 @@ internal class PunchAttack : Attack
 {
     private PunchAttack(Game game) : base(game) { }
     public override string MonsterAction => "punches {0}";
-    public override string PlayerAction => $"punches you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "punches you"
+    };
     public override string KnowledgeAction => "punch";
     public override bool AttackStunsTarget => true;
 }

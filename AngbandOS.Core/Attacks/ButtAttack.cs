@@ -12,7 +12,10 @@ internal class ButtAttack : Attack
 {
     private ButtAttack(Game game) : base(game) { }
     public override string MonsterAction => "butts {0}";
-    public override string PlayerAction => $"butts you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "butts you"
+    };
     public override bool AttackStunsTarget => true;
     public override string KnowledgeAction => "butt";
 }

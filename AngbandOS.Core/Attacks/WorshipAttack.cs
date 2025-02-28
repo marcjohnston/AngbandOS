@@ -12,7 +12,17 @@ internal class WorshipAttack : Attack
 {
     private WorshipAttack(Game game) : base(game) { }
     public override string MonsterAction => "hero worships {0}";
-    public override string PlayerAction => Game.SingletonRepository.GetStringsRepository("WorshipPlayerAttacks").ToWeightedRandom().ChooseOrDefault();
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "looks up at you!",
+        "asks how many dragons you've killed!",
+        "asks for your autograph!",
+        "tries to shake your hand!",
+        "pretends to be you!",
+        "dances around you!",
+        "tugs at your clothing!",
+        "asks if you will adopt him!"
+    };
     public override string KnowledgeAction => "hero worship";
     public override bool AttackTouchesTarget => false;
 }

@@ -14,7 +14,7 @@ internal class GenericAttack : Attack
     {
         MonsterAction = attackGameConfiguration.MonsterAction;
         Key = attackGameConfiguration.Key ?? attackGameConfiguration.GetType().Name;
-        PlayerAction = attackGameConfiguration.PlayerAction;
+        PlayerActionMessages = attackGameConfiguration.PlayerAction;
         KnowledgeAction = attackGameConfiguration.KnowledgeAction;
         AttackTouchesTarget = attackGameConfiguration.AttackTouchesTarget;
         AttackAwakensTarget = attackGameConfiguration.AttackAwakensTarget;
@@ -35,7 +35,7 @@ internal class GenericAttack : Attack
     /// </summary>
     /// <param name="game"></param>
     /// <returns></returns>
-    public override string PlayerAction { get; }
+    public override string[]? PlayerActionMessages { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing

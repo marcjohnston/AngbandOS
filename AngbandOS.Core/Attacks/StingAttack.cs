@@ -12,6 +12,9 @@ internal class StingAttack : Attack
 {
     private StingAttack(Game game) : base(game) { }
     public override string MonsterAction => "stings {0}";
-    public override string PlayerAction => $"stings you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "stings you"
+    };
     public override string KnowledgeAction => "string";
 }

@@ -12,7 +12,10 @@ internal class GazeAttack : Attack
 {
     private GazeAttack(Game game) : base(game) { }
     public override string MonsterAction => "gazes at {0}";
-    public override string PlayerAction => $"gazes at you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "gazes at you"
+    };
     public override string KnowledgeAction => "gaze";
     public override bool AttackTouchesTarget => false;
 }

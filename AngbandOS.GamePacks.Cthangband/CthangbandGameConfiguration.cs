@@ -206,20 +206,6 @@ public class CthangbandGameConfiguration : GameConfiguration
                 "yerg", "yp", "zun", "tri", "blaa", "jah", "bul", "on", "foo", "ju", "xuxu"
             }
         ),
-        ("InsultPlayerAttacks", new string[]
-            {
-                "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
-                "dances around you!", "makes obscene gestures!", "moons you!"
-            }
-        ),
-        ("MoanPlayerAttacks", new string[]
-            {
-                "seems sad about something.",
-                "asks if you have seen his dogs.",
-                "tells you to get off his land.",
-                "mumbles something about mushrooms."
-            }
-        ),
         ("ShopkeeperAcceptedComments", new string[]
             {
                 "Okay.",
@@ -260,24 +246,6 @@ public class CthangbandGameConfiguration : GameConfiguration
                 "You bastard!",
                 "You hear someone sobbing...",
                 "The shopkeeper howls in agony!"
-            }
-        ),
-        ("SingingPlayerAttacks", new string[]
-            {
-                "sings 'We are a happy family.'",
-                "sings 'I love you, you love me.'"
-            }
-        ),
-        ("WorshipPlayerAttacks", new string[]
-            {
-                "looks up at you!",
-                "asks how many dragons you've killed!",
-                "asks for your autograph!",
-                "tries to shake your hand!",
-                "pretends to be you!",
-                "dances around you!",
-                "tugs at your clothing!",
-                "asks if you will adopt him!"
             }
         )
     };

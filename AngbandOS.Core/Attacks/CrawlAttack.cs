@@ -12,7 +12,10 @@ internal class CrawlAttack : Attack
 {
     private CrawlAttack(Game game) : base(game) { }
     public override string MonsterAction => "crawls on {0}";
-    public override string PlayerAction => $"crawls on you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "crawls on you"
+    };
     public override string KnowledgeAction => "crawl on you";
     public override bool RendersMissMessage => false;
 }

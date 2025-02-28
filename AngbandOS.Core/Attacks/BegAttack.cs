@@ -12,7 +12,10 @@ internal class BegAttack : Attack
 {
     private BegAttack(Game game) : base(game) { }
     public override string MonsterAction => "begs {0} for money";
-    public override string PlayerAction => $"begs you for money";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "begs you for money"
+    };
     public override string KnowledgeAction => "beg";
     public override bool AttackTouchesTarget => false;
     public override bool AttackAwakensTarget => true;

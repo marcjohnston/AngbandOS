@@ -2883,12 +2883,20 @@ internal class Monster : IItemContainer
                     continue;
                 }
 
-                // Print the message
-                string action = method.PlayerAction;
-                if (!string.IsNullOrEmpty(action))
+                // Are there player action messages to choose from.
+                if (method.PlayerActionMessages != null)
                 {
-                    Game.MsgPrint($"{monsterName} {action}.");
+                    // Select one of them.
+                    string? action = new WeightedRandom<string>(Game, method.PlayerActionMessages).ChooseOrDefault();
+
+                    // Is t
+                    if (!string.IsNullOrEmpty(action))
+                    {
+                        // Print the message.
+                        Game.MsgPrint($"{monsterName} {action}.");
+                    }
                 }
+
                 obvious = true;
                 // Work out base damage done by the attack
                 damage = this.Game.DiceRoll(damageDice, damageSides);

@@ -12,6 +12,9 @@ internal class ChargeAttack : Attack
 {
     private ChargeAttack(Game game) : base(game) { }
     public override string MonsterAction => "charges {0}";
-    public override string PlayerAction => $"charges you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "charges you"
+    };
     public override string KnowledgeAction => "charge";
 }

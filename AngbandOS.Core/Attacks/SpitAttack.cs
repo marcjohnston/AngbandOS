@@ -12,7 +12,10 @@ internal class SpitAttack : Attack
 {
     private SpitAttack(Game game) : base(game) { }
     public override string MonsterAction => "spits on {0}";
-    public override string PlayerAction => $"spits on you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "spits on you"
+    };
     public override string KnowledgeAction => "spit";
 
     public override bool AttackTouchesTarget => false;

@@ -12,7 +12,10 @@ internal class BiteAttack : Attack
 {
     private BiteAttack(Game game) : base(game) { }
     public override string MonsterAction => "bites {0}";
-    public override string PlayerAction => $"bites you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "bites you"
+    };
     public override string KnowledgeAction => "bite";
     public override bool AttackCutsTarget => true;
 }

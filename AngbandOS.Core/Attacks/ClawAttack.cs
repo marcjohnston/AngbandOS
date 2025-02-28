@@ -12,7 +12,10 @@ internal class ClawAttack : Attack
 {
     private ClawAttack(Game game) : base(game) { }
     public override string MonsterAction => "claws {0}";
-    public override string PlayerAction => $"claws you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "claws you"
+    };
     public override bool AttackCutsTarget => true;
     public override string KnowledgeAction => "claw";
 }

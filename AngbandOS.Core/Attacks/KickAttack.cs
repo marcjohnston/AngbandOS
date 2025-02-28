@@ -12,7 +12,10 @@ internal class KickAttack : Attack
 {
     private KickAttack(Game game) : base(game) { }
     public override string MonsterAction => "kicks {0}";
-    public override string PlayerAction => $"kicks you";
+    public override string[] PlayerActionMessages => new string[]
+    {
+        "kicks you"
+    };
     public override string KnowledgeAction => "kick";
     public override bool AttackStunsTarget => true;
 }

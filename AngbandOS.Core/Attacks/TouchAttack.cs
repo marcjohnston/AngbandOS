@@ -12,6 +12,9 @@ internal class TouchAttack : Attack
 {
     private TouchAttack(Game game) : base(game) { }
     public override string MonsterAction => "touches {0}";
-    public override string PlayerAction => $"touches you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "touches you"
+    };
     public override string KnowledgeAction => "touch";
 }

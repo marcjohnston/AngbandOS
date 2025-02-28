@@ -29,7 +29,7 @@ internal abstract class Attack : IGetKey
         AttackGameConfiguration definition = new()
         {
             MonsterAction = MonsterAction,
-            PlayerAction = PlayerAction,
+            PlayerAction = PlayerActionMessages,
             KnowledgeAction = KnowledgeAction,
             Key = Key,
             AttackTouchesTarget = AttackTouchesTarget,
@@ -54,7 +54,7 @@ internal abstract class Attack : IGetKey
     /// </summary>
     /// <param name="game"></param>
     /// <returns></returns>
-    public abstract string PlayerAction { get; }
+    public abstract string[]? PlayerActionMessages { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing

@@ -12,7 +12,10 @@ internal class WailAttack : Attack
 {
     private WailAttack(Game game) : base(game) { }
     public override string MonsterAction => "wails at {0}";
-    public override string PlayerAction => $"wails at you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "wails at you"
+    };
     public override string KnowledgeAction => "wail";
     public override bool AttackTouchesTarget => false;
 }

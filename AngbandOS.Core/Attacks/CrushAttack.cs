@@ -12,7 +12,10 @@ internal class CrushAttack : Attack
 {
     private CrushAttack(Game game) : base(game) { }
     public override string MonsterAction => "crushes {0}";
-    public override string PlayerAction => $"crushes you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "crushes you"
+    };
     public override string KnowledgeAction => "crush";
     public override bool AttackStunsTarget => true;
 }

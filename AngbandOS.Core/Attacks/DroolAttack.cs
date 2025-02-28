@@ -12,7 +12,10 @@ internal class DroolAttack : Attack
 {
     private DroolAttack(Game game) : base(game) { }
     public override string MonsterAction => "drools on {0}";
-    public override string PlayerAction => $"drools on you";
+    public override string[]? PlayerActionMessages => new string[]
+    {
+        "drools on you"
+    };
     public override string KnowledgeAction => "drool on you";
     public override bool AttackTouchesTarget => false;
 }
