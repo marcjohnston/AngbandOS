@@ -111,6 +111,9 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     /// </summary>
     public virtual string? PostMessage => null;
 
+    /// <summary>
+    /// Returns the mode that the projectile will use when it is launched using a script interface that does not accept a directional parameter.
+    /// </summary>
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
 
     #region Interface Fulfillments - These fulfillments use the private implementations to satisfy the interfaces that the projectiles support.
