@@ -579,6 +579,32 @@ public class CthangbandGameConfiguration : GameConfiguration
         new YellowSwirlAnimation()
     };
 
+    public override AttackGameConfiguration[]? Attacks => new AttackGameConfiguration[]
+    {
+        new BegAttack(),
+        new BiteAttack(),
+        new ButtAttack(),
+        new ChargeAttack(),
+        new ClawAttack(),
+        new CrawlAttack(),
+        new CrushAttack(),
+        new DroolAttack(),
+        new EngulfAttack(),
+        new GazeAttack(),
+        new HitAttack(),
+        new InsultAttack(),
+        new KickAttack(),
+        new MoanAttack(),
+        new PunchAttack(),
+        new SingingAttack(),
+        new SpitAttack(),
+        new SporeAttack(),
+        new StingAttack(),
+        new TouchAttack(),
+        new WailAttack(),
+        new WorshipAttack()
+    };
+
     public override string[]? ElvishTexts => new string[]
     {
         "adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",

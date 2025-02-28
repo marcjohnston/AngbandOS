@@ -29,7 +29,7 @@ internal abstract class Attack : IGetKey
         AttackGameConfiguration definition = new()
         {
             MonsterAction = MonsterAction,
-            PlayerAction = PlayerActionMessages,
+            PlayerActionMessages = PlayerActionMessages,
             KnowledgeAction = KnowledgeAction,
             Key = Key,
             AttackTouchesTarget = AttackTouchesTarget,

@@ -5,18 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class BegAttack : Attack
+public class TouchAttack : AttackGameConfiguration
 {
-    private BegAttack(Game game) : base(game) { }
-    public override string MonsterAction => "begs {0} for money";
+    public override string MonsterAction => "touches {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "begs you for money"
+        "touches you"
     };
-    public override string KnowledgeAction => "beg";
-    public override bool AttackTouchesTarget => false;
-    public override bool AttackAwakensTarget => true;
+    public override string KnowledgeAction => "touch";
 }

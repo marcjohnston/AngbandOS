@@ -5,16 +5,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class EngulfAttack : Attack
+public class SingingAttack : AttackGameConfiguration
 {
-    private EngulfAttack(Game game) : base(game) { }
-    public override string MonsterAction => "engulfs {0}";
+    public override string MonsterAction => "sings to {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "engulfs you"
+        "sings 'We are a happy family.'",
+        "sings 'I love you, you love me.'"
     };
-    public override string KnowledgeAction => "engulf";
+    public override string KnowledgeAction => "sing";
+    public override bool AttackTouchesTarget => false;
+    public override bool AttackAwakensTarget => true;
 }

@@ -5,17 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WailAttack : Attack
+public class ButtAttack : AttackGameConfiguration
 {
-    private WailAttack(Game game) : base(game) { }
-    public override string MonsterAction => "wails at {0}";
+    public override string MonsterAction => "butts {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "wails at you"
+        "butts you"
     };
-    public override string KnowledgeAction => "wail";
-    public override bool AttackTouchesTarget => false;
+    public override bool AttackStunsTarget => true;
+    public override string KnowledgeAction => "butt";
 }

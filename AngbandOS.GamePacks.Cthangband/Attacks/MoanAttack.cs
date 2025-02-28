@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class ButtAttack : Attack
+public class MoanAttack : AttackGameConfiguration
 {
-    private ButtAttack(Game game) : base(game) { }
-    public override string MonsterAction => "butts {0}";
+    public override string MonsterAction => "moans at {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "butts you"
+        "seems sad about something.",
+        "asks if you have seen his dogs.",
+        "tells you to get off his land.",
+        "mumbles something about mushrooms."
     };
-    public override bool AttackStunsTarget => true;
-    public override string KnowledgeAction => "butt";
+    public override string KnowledgeAction => "moan";
+    public override bool AttackAwakensTarget => true;
 }

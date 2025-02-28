@@ -5,17 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class BiteAttack : Attack
+public class ChargeAttack : AttackGameConfiguration
 {
-    private BiteAttack(Game game) : base(game) { }
-    public override string MonsterAction => "bites {0}";
+    public override string MonsterAction => "charges {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "bites you"
+        "charges you"
     };
-    public override string KnowledgeAction => "bite";
-    public override bool AttackCutsTarget => true;
+    public override string KnowledgeAction => "charge";
 }

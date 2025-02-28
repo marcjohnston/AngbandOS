@@ -14,7 +14,6 @@ global using AngbandOS.Core.AlterActions;
 global using AngbandOS.Core.ArtifactBiases;
 global using AngbandOS.Core.ArtifactBiasWeightedRandoms;
 global using AngbandOS.Core.AttackEffects;
-global using AngbandOS.Core.Attacks;
 global using AngbandOS.Core.BirthStages;
 global using AngbandOS.Core.CharacterClasses;
 global using AngbandOS.Core.ChestTraps;

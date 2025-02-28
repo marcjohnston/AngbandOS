@@ -5,24 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WorshipAttack : Attack
+public class SporeAttack : AttackGameConfiguration
 {
-    private WorshipAttack(Game game) : base(game) { }
-    public override string MonsterAction => "hero worships {0}";
+    public override string MonsterAction => "releases spores at {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "looks up at you!",
-        "asks how many dragons you've killed!",
-        "asks for your autograph!",
-        "tries to shake your hand!",
-        "pretends to be you!",
-        "dances around you!",
-        "tugs at your clothing!",
-        "asks if you will adopt him!"
+        "releases spores at you"
     };
-    public override string KnowledgeAction => "hero worship";
+    public override string KnowledgeAction => "release spores";
     public override bool AttackTouchesTarget => false;
 }

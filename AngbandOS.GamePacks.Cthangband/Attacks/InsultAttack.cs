@@ -5,17 +5,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class GazeAttack : Attack
+public class InsultAttack : AttackGameConfiguration
 {
-    private GazeAttack(Game game) : base(game) { }
-    public override string MonsterAction => "gazes at {0}";
+    public override string MonsterAction => "insults {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "gazes at you"
+        "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
+        "dances around you!", "makes obscene gestures!", "moons you!"
     };
-    public override string KnowledgeAction => "gaze";
+    public override string KnowledgeAction => "insult";
     public override bool AttackTouchesTarget => false;
+    public override bool AttackAwakensTarget => true;
 }

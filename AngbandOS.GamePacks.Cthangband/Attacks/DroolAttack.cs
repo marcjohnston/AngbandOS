@@ -5,17 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class SporeAttack : Attack
+public class DroolAttack : AttackGameConfiguration
 {
-    private SporeAttack(Game game) : base(game) { }
-    public override string MonsterAction => "releases spores at {0}";
+    public override string MonsterAction => "drools on {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "releases spores at you"
+        "drools on you"
     };
-    public override string KnowledgeAction => "release spores";
+    public override string KnowledgeAction => "drool on you";
     public override bool AttackTouchesTarget => false;
 }

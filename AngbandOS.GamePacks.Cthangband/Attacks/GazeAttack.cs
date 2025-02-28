@@ -5,17 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class CrawlAttack : Attack
+public class GazeAttack : AttackGameConfiguration
 {
-    private CrawlAttack(Game game) : base(game) { }
-    public override string MonsterAction => "crawls on {0}";
+    public override string MonsterAction => "gazes at {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "crawls on you"
+        "gazes at you"
     };
-    public override string KnowledgeAction => "crawl on you";
-    public override bool RendersMissMessage => false;
+    public override string KnowledgeAction => "gaze";
+    public override bool AttackTouchesTarget => false;
 }

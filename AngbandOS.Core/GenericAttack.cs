@@ -14,7 +14,7 @@ internal class GenericAttack : Attack
     {
         MonsterAction = attackGameConfiguration.MonsterAction;
         Key = attackGameConfiguration.Key ?? attackGameConfiguration.GetType().Name;
-        PlayerActionMessages = attackGameConfiguration.PlayerAction;
+        PlayerActionMessages = attackGameConfiguration.PlayerActionMessages;
         KnowledgeAction = attackGameConfiguration.KnowledgeAction;
         AttackTouchesTarget = attackGameConfiguration.AttackTouchesTarget;
         AttackAwakensTarget = attackGameConfiguration.AttackAwakensTarget;

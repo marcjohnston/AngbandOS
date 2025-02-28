@@ -23,7 +23,7 @@ public class AttackGameConfiguration
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
-    public virtual string[]? PlayerAction { get; set; }
+    public virtual string[]? PlayerActionMessages { get; set; }
 
     /// <summary>
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing

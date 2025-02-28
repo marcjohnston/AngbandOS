@@ -5,19 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class SingingAttack : Attack
+public class WailAttack : AttackGameConfiguration
 {
-    private SingingAttack(Game game) : base(game) { }
-    public override string MonsterAction => "sings to {0}";
+    public override string MonsterAction => "wails at {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "sings 'We are a happy family.'",
-        "sings 'I love you, you love me.'"
+        "wails at you"
     };
-    public override string KnowledgeAction => "sing";
+    public override string KnowledgeAction => "wail";
     public override bool AttackTouchesTarget => false;
-    public override bool AttackAwakensTarget => true;
 }

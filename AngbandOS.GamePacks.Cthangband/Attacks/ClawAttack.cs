@@ -5,12 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class ClawAttack : Attack
+public class ClawAttack : AttackGameConfiguration
 {
-    private ClawAttack(Game game) : base(game) { }
     public override string MonsterAction => "claws {0}";
     public override string[]? PlayerActionMessages => new string[]
     {

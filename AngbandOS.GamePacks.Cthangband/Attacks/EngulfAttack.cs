@@ -5,17 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Attacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class DroolAttack : Attack
+public class EngulfAttack : AttackGameConfiguration
 {
-    private DroolAttack(Game game) : base(game) { }
-    public override string MonsterAction => "drools on {0}";
+    public override string MonsterAction => "engulfs {0}";
     public override string[]? PlayerActionMessages => new string[]
     {
-        "drools on you"
+        "engulfs you"
     };
-    public override string KnowledgeAction => "drool on you";
-    public override bool AttackTouchesTarget => false;
+    public override string KnowledgeAction => "engulf";
 }
