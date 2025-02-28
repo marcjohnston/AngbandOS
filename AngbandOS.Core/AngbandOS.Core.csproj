@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core.Expressions\AngbandOS.Core.Expressions.csproj" />
     <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration\AngbandOS.Core.Interface.Configuration.csproj" />
+    <ProjectReference Include="..\AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
