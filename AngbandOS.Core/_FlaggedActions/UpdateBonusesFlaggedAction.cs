@@ -756,7 +756,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     Game.SkillDigging += oPtr.Weight / 10;
                 }
-                else if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Monk || Game.BaseCharacterClass.ID == CharacterClassEnum.Mystic) && Game.MartialArtistEmptyHands())
+                else if (Game.IsMartialArtistAndNotWieldingAMeleeWeapon())
                 {
                     Game.MeleeAttacksPerRound = 0;
                     if (Game.ExperienceLevel.IntValue > 9)

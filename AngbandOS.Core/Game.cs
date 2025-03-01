@@ -7361,10 +7361,11 @@ internal class Game
             if (PlayerCheckHitOnMonster(chance, race.ArmorClass, monster.IsVisible))
             {
                 PlaySound(SoundEffectEnum.MeleeHit);
+
                 // Tell the player they hit it with the appropriate message
                 if (!(backstab || stabFleeing))
                 {
-                    if (!((BaseCharacterClass.ID == CharacterClassEnum.Monk || BaseCharacterClass.ID == CharacterClassEnum.Mystic) && MartialArtistEmptyHands()))
+                    if (!IsMartialArtistAndNotWieldingAMeleeWeapon())
                     {
                         MsgPrint($"You hit {monsterName}.");
                     }
@@ -7402,7 +7403,7 @@ internal class Game
                     }
                 }
                 // If we're a martial artist then we have special attacks
-                if (BaseCharacterClass.IsMartialArtist && MartialArtistEmptyHands())
+                if (IsMartialArtistAndNotWieldingAMeleeWeapon())
                 {
                     int specialEffect = 0;
                     int stunEffect = 0;
@@ -7450,6 +7451,7 @@ internal class Game
                     }
                     // Get damage from the martial arts attack
                     totalDamage = DiceRoll(martialArtsAttack.Dd, martialArtsAttack.Ds);
+
                     // If it was a knee attack and the monster is male, hit it in the groin
                     if (martialArtsAttack.Effect == Constants.MaKnee)
                     {
@@ -13033,13 +13035,9 @@ internal class Game
         }
     }
 
-    public bool MartialArtistEmptyHands()
+    public bool IsMartialArtistAndNotWieldingAMeleeWeapon()
     {
-        if (BaseCharacterClass.ID != CharacterClassEnum.Monk && BaseCharacterClass.ID != CharacterClassEnum.Mystic)
-        {
-            return false;
-        }
-        return GetInventoryItem(InventorySlotEnum.MeleeWeapon) == null;
+        return BaseCharacterClass.IsMartialArtist && GetInventoryItem(InventorySlotEnum.MeleeWeapon) == null;
     }
 
     public bool MartialArtistHeavyArmor()
