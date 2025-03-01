@@ -16,6 +16,11 @@ internal class GiantWhiteDragonFlyMonsterRace : MonsterRace
         nameof(ColdBreatheBallMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperFSymbol);
     
     public override bool Animal => true;

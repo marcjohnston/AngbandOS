@@ -22,6 +22,11 @@ internal class BalanceDrakeMonsterRace : MonsterRace
         nameof(SlowMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     

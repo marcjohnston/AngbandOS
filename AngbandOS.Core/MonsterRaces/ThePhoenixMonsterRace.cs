@@ -21,6 +21,11 @@ internal class ThePhoenixMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     

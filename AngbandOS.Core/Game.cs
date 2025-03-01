@@ -7466,8 +7466,8 @@ internal class Game
                     // If it was an ankle kick and the monster has legs, slow it
                     else if (martialArtsAttack.Effect == Constants.MaSlow)
                     {
-                        if (!race.NeverMove ||
-                            "UjmeEv$,DdsbBFIJQSXclnw!=?".Contains(race.Symbol.Character.ToString()))
+                        // Check to ensure the monster is not stationary and has legs.
+                        if (!race.NeverMove && race.HasLegs)
                         {
                             MsgPrint($"You kick {monsterName} in the ankle.");
                             specialEffect = Constants.MaSlow;

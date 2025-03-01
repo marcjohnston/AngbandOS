@@ -12,6 +12,7 @@ internal class AcidicCytoplasmMonsterRace : MonsterRace
 {
     protected AcidicCytoplasmMonsterRace(Game game) : base(game) { }
 
+
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
     

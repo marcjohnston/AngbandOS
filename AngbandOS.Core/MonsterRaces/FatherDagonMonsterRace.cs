@@ -24,6 +24,11 @@ internal class FatherDagonMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
     

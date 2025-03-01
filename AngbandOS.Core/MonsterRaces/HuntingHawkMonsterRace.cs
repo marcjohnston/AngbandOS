@@ -12,6 +12,11 @@ internal class HuntingHawkMonsterRace : MonsterRace
 {
     protected HuntingHawkMonsterRace(Game game) : base(game) { }
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     

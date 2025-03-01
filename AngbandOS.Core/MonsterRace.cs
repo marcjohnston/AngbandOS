@@ -340,6 +340,13 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     public virtual bool Unique => false;
 
     public virtual bool WeirdMind => false;
+
+    protected virtual string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
+
+    /// <summary>
+    /// Returns true, if the monster has legs.  Monsters that have legs are susceptible to martial arts ankle kicks that will slow the monster.  Returns false, by default.
+    /// </summary>
+    public virtual bool HasLegs => false;
     #endregion
 
     #region
@@ -481,7 +488,6 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     [Obsolete("Index will be removed.")]
     public int Index { get; private set; }
 
-    protected virtual string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public ItemFactory GoldItemFactory { get; private set; }
 
     public override string ToString()

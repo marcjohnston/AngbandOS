@@ -16,6 +16,11 @@ internal class BlackReaverMonsterRace : MonsterRace
     public override ColorEnum Color => ColorEnum.Brown;
     
     public override int ArmorClass => 90;
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override (string, string?, int, int)[]? AttackDefinitions => new (string, string?, int, int)[]
     {
         (nameof(HitAttack), nameof(HurtAttackEffect), 1, 50),

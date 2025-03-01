@@ -18,6 +18,11 @@ internal class NightgauntMonsterRace : MonsterRace
         nameof(FireBoltMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     

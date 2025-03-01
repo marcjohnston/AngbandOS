@@ -24,6 +24,11 @@ internal class GlaryssaSuccubusQueenMonsterRace : MonsterRace
         nameof(DemonSummonMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     

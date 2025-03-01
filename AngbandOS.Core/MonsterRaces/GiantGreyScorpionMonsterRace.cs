@@ -12,6 +12,11 @@ internal class GiantGreyScorpionMonsterRace : MonsterRace
 {
     protected GiantGreyScorpionMonsterRace(Game game) : base(game) { }
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
     

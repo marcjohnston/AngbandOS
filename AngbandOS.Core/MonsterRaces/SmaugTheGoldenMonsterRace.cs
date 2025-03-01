@@ -18,6 +18,11 @@ internal class SmaugTheGoldenMonsterRace : MonsterRace
         nameof(ConfuseMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     

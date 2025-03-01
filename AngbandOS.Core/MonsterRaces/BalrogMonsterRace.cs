@@ -25,6 +25,12 @@ internal class BalrogMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(UpperUSymbol);
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
+
     public override ColorEnum Color => ColorEnum.BrightRed;
     
     public override int ArmorClass => 80;

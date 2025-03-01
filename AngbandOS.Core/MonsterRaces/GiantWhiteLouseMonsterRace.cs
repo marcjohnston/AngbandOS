@@ -12,6 +12,11 @@ internal class GiantWhiteLouseMonsterRace : MonsterRace
 {
     protected GiantWhiteLouseMonsterRace(Game game) : base(game) { }
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(LowerLSymbol);
     
     public override bool Animal => true;

@@ -17,6 +17,11 @@ internal class BaronOfHellMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(UpperUSymbol);
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     public override ColorEnum Color => ColorEnum.BrightBrown;
     
     public override int ArmorClass => 130;

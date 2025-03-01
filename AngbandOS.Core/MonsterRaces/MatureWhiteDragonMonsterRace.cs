@@ -17,6 +17,11 @@ internal class MatureWhiteDragonMonsterRace : MonsterRace
         nameof(ScareMonsterSpell)
     };
 
+
+    /// <summary>
+    /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.
+    /// </summary>
+    public override bool HasLegs => true;
     protected override string SymbolName => nameof(LowerDSymbol);
     
     public override int ArmorClass => 65;
