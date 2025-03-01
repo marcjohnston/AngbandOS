@@ -33,6 +33,11 @@ internal class MonkCharacterClass : BaseCharacterClass
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 40;
 
+    /// <summary>
+    /// Returns true, because characters of this class study martial arts.
+    /// </summary>
+    public override bool IsMartialArtist => true;
+
     public override string ClassSubName(Realm? realm)
     {
         switch (realm)

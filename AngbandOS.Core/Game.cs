@@ -7402,7 +7402,7 @@ internal class Game
                     }
                 }
                 // If we're a martial artist then we have special attacks
-                if ((BaseCharacterClass.ID == CharacterClassEnum.Monk || BaseCharacterClass.ID == CharacterClassEnum.Mystic) && MartialArtistEmptyHands())
+                if (BaseCharacterClass.IsMartialArtist && MartialArtistEmptyHands())
                 {
                     int specialEffect = 0;
                     int stunEffect = 0;

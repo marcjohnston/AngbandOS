@@ -49,6 +49,11 @@ internal class MysticCharacterClass : BaseCharacterClass
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 
+
+    /// <summary>
+    /// Returns true, because characters of this class study martial arts.
+    /// </summary>
+    public override bool IsMartialArtist => true;
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(SustainWisdomRingItemFactory),

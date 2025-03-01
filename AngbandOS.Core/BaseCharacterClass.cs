@@ -361,6 +361,11 @@ internal abstract class BaseCharacterClass : IGetKey
     }
 
     /// <summary>
+    /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
+    /// </summary>
+    public virtual bool IsMartialArtist => false;
+
+    /// <summary>
     /// Returns the deprecated CharacterClass constant for backwards compatibility.
     /// </summary>
     /// <value>The identifier.</value>
