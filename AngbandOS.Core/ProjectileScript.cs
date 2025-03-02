@@ -19,8 +19,14 @@ internal abstract class ProjectileScript : Script, IUniversalScript // DO NOT AD
         RadiusRoll = Game.ParseRollExpression(RadiusRollExpression);
     }
 
-    protected virtual string ProjectileBindingKey { get; }
+    /// <summary>
+    /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
+    /// </summary>
+    protected abstract string ProjectileBindingKey { get; }
 
+    /// <summary>
+    /// Returns the projectile to use.  This property is bound using the <see cref="ProjectileBindingKey"/> property during the binding phase.
+    /// </summary>
     public Projectile Projectile { get; protected set; }
 
     /// <summary>
