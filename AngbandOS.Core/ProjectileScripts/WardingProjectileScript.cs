@@ -8,19 +8,19 @@
 namespace AngbandOS.Core.ProjectileScripts;
 
 [Serializable]
-internal class SonicBoomProjectileScript : ProjectileScript
+internal class WardingProjectileScript : ProjectileScript
 {
-    private SonicBoomProjectileScript(Game game) : base(game) { }
+    private WardingProjectileScript(Game game) : base(game) { }
 
     public override bool Stop => false;
 
-    public override bool Kill => true;
+    public override bool Kill => false;
 
     public override bool Jump => false;
 
     public override bool Beam => false;
 
-    public override bool Grid => false;
+    public override bool Grid => true;
 
     public override bool Item => true;
 
@@ -28,8 +28,8 @@ internal class SonicBoomProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(SoundProjectile);
+    protected override string ProjectileBindingKey => nameof(MakeElderSignProjectile);
 
-    protected override string DamageRollExpression => "45+x";
-    protected override string RadiusRollExpression => "2+(x/10)";
+    protected override string DamageRollExpression => "0";
+    protected override string RadiusRollExpression => "1";
 }
