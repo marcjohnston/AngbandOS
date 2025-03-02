@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.SummonScripts;
 
 [Serializable]
-internal class AncientDragon1xSummonScript : BaseSummonScript
+internal class AncientDragon1xSummonScript : SummonScript
 {
     private AncientDragon1xSummonScript(Game game) : base(game) { } // This object is a singleton
 

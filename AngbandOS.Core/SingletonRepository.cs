@@ -303,7 +303,7 @@ internal class SingletonRepository
         RegisterRepository<SpellResistantDetection>();
         RegisterRepository<StoreCommand>();
         RegisterRepository<StoreFactory>();
-        RegisterRepository<BaseSummonScript>();
+        RegisterRepository<SummonScript>();
         RegisterRepository<SyllableSet>();
         RegisterRepository<Symbol>();
         RegisterRepository<Talent>();
@@ -389,7 +389,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Script>();
         LoadAllAssemblyTypes<SpellResistantDetection>();
         LoadAllAssemblyTypes<StoreFactory>();
-        LoadAllAssemblyTypes<BaseSummonScript>();
+        LoadAllAssemblyTypes<SummonScript>();
         LoadAllAssemblyTypes<SummonWeightedRandom>();
         LoadAllAssemblyTypes<Talent>();
         LoadAllAssemblyTypes<Widget>();

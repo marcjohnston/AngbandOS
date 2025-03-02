@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class SummonWeightedRandom : GenericWeightedRandom<BaseSummonScript>, IUniversalScript
+internal abstract class SummonWeightedRandom : GenericWeightedRandom<SummonScript>, IUniversalScript
 {
     protected SummonWeightedRandom(Game game) : base(game) { }
 

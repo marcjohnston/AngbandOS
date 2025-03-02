@@ -5,40 +5,84 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-//namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core;
 
-//[Serializable]
-//internal abstract class SummonScript : IGetKey
-//{
-//    protected readonly Game Game;
-//    public SummonScript(Game game)
-//    {
-//        Game = game;
-//    }
+[Serializable]
+internal abstract class SummonScript : Script, IUniversalScript
+{
+    protected SummonScript(Game game) : base(game) { }
 
-//    /// <summary>
-//    /// Returns the entity serialized into a Json string.
-//    /// </summary>
-//    /// <returns></returns>
-//    public string ToJson()
-//    {
-//        return "";
-//    }
+    public override void Bind()
+    {
+        MonsterFilter = Game.SingletonRepository.Get<MonsterFilter>(MonsterFilterBindingKey);
+        LevelRoll = Game.ParseRollExpression(LevelRollExpression);
+    }
 
-//    public virtual string Key => GetType().Name;
+    /// <summary>
+    /// Returns true, to summon a friendly monster (a.k.a pet); false, otherwise.  Returns false, by default.
+    /// </summary>
+    public virtual bool Pet => false;
 
-//    public string GetKey => Key;
+    /// <summary>
+    /// Returns true, if a group of monsters or pets can be summon; false, otherwise.  Returns true, by default.
+    /// </summary>
+    public virtual bool Group => true;
+    protected abstract string MonsterFilterBindingKey { get; }
+    public MonsterFilter MonsterFilter { get; private set; }
+    protected abstract string LevelRollExpression { get; }
+    public Expression LevelRoll { get; private set; }
+    public virtual string? PreMessage => null;
+    public virtual string? SuccessMessage => null;
+    public virtual string? FailureMessage => null;
 
-//    public void Bind()
-//    {
-//    }
+    public IdentifiedResult ExecuteEatOrQuaffScript()
+    {
+        if (PreMessage != null)
+        {
+            Game.MsgPrint(PreMessage);
+        }
+        IntegerExpression levelResult = LevelRoll.Compute<IntegerExpression>();
+        bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, Group, Pet);
+        if (success && SuccessMessage != null)
+        {
+            Game.MsgPrint(SuccessMessage);
+        }
+        else if (FailureMessage != null)
+        {
+            Game.MsgPrint(FailureMessage);
+        }
+        return new IdentifiedResult(success);
+    }
 
-//    public void ExecuteSuccessByChanceScript()
-//    {
-//        //if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonNoUniquesMonsterFilter)), true, false))
-//        //{
-//        //    Game.MsgPrint("The summoned dragon gets angry!");
-//        //}
-//    }
-//}
+    public void ExecuteScript()
+    {
+        ExecuteEatOrQuaffScript();
+    }
 
+    public void ExecuteCastSpellScript(Spell spell)
+    {
+        ExecuteScript();
+    }
+
+    public UsedResult ExecuteActivateItemScript(Item item)
+    {
+        ExecuteScript();
+        return UsedResult.True;
+    }
+
+    public IdentifiedResult ExecuteAimWandScript(int dir)
+    {
+        return ExecuteEatOrQuaffScript();
+    }
+
+    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
+    {
+        return ExecuteReadScrollOrUseStaffScript();
+    }
+
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
+    {
+        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
+        return new IdentifiedAndUsedResult(identifiedResult, UsedResult.True);
+    }
+}
