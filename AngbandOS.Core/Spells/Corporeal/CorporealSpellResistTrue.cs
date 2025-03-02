@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellResistTrue : Spell
 {
     private CorporealSpellResistTrue(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(ResistTrueScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(ResistTrueScript) };
 
     public override string Name => "Resist True";
 

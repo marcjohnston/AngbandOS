@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellAlchemy : Spell
 {
     private SorcerySpellAlchemy(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(AlchemyScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(AlchemyScript) };
 
     public override string Name => "Alchemy";
     

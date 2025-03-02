@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellMassSleep : Spell
 {
     private SorcerySpellMassSleep(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(OldSleepAtLos1xProjectileScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(OldSleepAtLos1xProjectileScript) };
 
     public override string Name => "Mass Sleep";
     

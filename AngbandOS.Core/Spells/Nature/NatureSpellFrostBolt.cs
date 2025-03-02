@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellFrostBolt : Spell
 {
     private NatureSpellFrostBolt(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(FrostBoltScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(FrostBoltScript) };
 
     public override string Name => "Frost Bolt";
 

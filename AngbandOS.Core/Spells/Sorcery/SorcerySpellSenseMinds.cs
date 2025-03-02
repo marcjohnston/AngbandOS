@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellSenseMinds : Spell
 {
     private SorcerySpellSenseMinds(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(AddTelepathy25p1d30Script);
+    protected override string[]? CastScriptNames => new string[] { nameof(AddTelepathy25p1d30Script) };
 
     public override string Name => "Sense Minds";
 

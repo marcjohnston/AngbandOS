@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellDetoxify : Spell
 {
     private CorporealSpellDetoxify(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(DetoxifyScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(DetoxifyScript) };
 
     public override string Name => "Detoxify";
     

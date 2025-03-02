@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellSelfKnowledge : Spell
 {
     private SorcerySpellSelfKnowledge(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(SelfKnowledgeScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(SelfKnowledgeScript) };
 
     public override string Name => "Self Knowledge";
     

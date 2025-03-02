@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellAstralLore : Spell
 {
     private TarotSpellAstralLore(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(IdentifyItemFullyScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(IdentifyItemFullyScript) };
 
     public override string Name => "Astral Lore";
     

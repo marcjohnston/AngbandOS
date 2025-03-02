@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellMutateBody : Spell
 {
     private CorporealSpellMutateBody(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(MutateBodyScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(MutateBodyScript) };
 
     public override string Name => "Mutate Body";
     

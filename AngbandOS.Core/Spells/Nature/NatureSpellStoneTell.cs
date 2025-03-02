@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellStoneTell : Spell
 {
     private NatureSpellStoneTell(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(IdentifyItemFullyScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(IdentifyItemFullyScript) };
 
     public override string Name => "Stone Tell";
     

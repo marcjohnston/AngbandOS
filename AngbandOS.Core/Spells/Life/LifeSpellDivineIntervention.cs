@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellDivineIntervention : Spell
 {
     private LifeSpellDivineIntervention(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(DivineInterventionScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(DivineInterventionScript) };
 
     public override string Name => "Divine Intervention";
 

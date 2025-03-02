@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class ChaosSpellCallTheVoid : Spell
 {
     private ChaosSpellCallTheVoid(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(CallTheVoidScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(CallTheVoidScript) };
 
-    protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
+    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
 
     public override string Name => "Call the Void";
 

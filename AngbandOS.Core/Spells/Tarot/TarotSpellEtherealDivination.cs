@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellEtherealDivination : Spell
 {
     private TarotSpellEtherealDivination(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(DetectionScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(DetectionScript) };
 
     public override string Name => "Ethereal Divination";
     

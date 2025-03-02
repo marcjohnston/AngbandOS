@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellAnimalTaming : Spell
 {
     private NatureSpellAnimalTaming(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(AnimalTrainingScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(AnimalTrainingScript) };
 
     public override string Name => "Animal Taming";
     

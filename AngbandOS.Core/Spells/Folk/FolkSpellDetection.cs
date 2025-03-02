@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellDetection : Spell
 {
     private FolkSpellDetection(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(DetectionScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(DetectionScript) };
 
     public override string Name => "Detection";
     

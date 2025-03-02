@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellHasteSelf : Spell
 {
     private SorcerySpellHasteSelf(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(HasteScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(HasteScript) };
 
     public override string Name => "Haste Self";
 

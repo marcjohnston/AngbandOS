@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellCurePoison : Spell
 {
     private FolkSpellCurePoison(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(CurePoisonScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(CurePoisonScript) };
 
     public override string Name => "Cure Poison";
     

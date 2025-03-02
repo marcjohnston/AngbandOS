@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellExtraDimensionalBeing : Spell
 {
     private TarotSpellExtraDimensionalBeing(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(ExtraDimensionalBeingScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(ExtraDimensionalBeingScript) };
 
     public override string Name => "Extradimensional Being";
     

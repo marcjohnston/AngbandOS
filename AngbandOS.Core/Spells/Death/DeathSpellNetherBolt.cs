@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Spells.Death;
 internal class DeathSpellNetherBolt : Spell
 {
     private DeathSpellNetherBolt(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(NetherBoltScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(NetherBoltScript) };
 
-    protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
+    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Nether Bolt";
 

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellEnchantArmor : Spell
 {
     private SorcerySpellEnchantArmor(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(EnchantArmorScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(EnchantArmorScript) };
 
     public override string Name => "Enchant Armor";
     

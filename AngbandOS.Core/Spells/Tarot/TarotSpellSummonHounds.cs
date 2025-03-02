@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellSummonHounds : Spell
 {
     private TarotSpellSummonHounds(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(SummonHoundsScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(SummonHoundsScript) };
 
     public override string Name => "Summon Hounds";
 

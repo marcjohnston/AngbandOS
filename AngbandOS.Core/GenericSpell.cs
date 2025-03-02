@@ -14,8 +14,8 @@ internal class GenericSpell : Spell
     {
         Key = spellGameConfiguration.Key ?? spellGameConfiguration.GetType().Name;
         Name = spellGameConfiguration.Name;
-        CastScriptName = spellGameConfiguration.CastScriptName;
-        CastFailedScriptName = spellGameConfiguration.CastFailedScriptName;
+        CastScriptNames = spellGameConfiguration.CastScriptName;
+        CastFailedScriptNames = spellGameConfiguration.CastFailedScriptName;
         LearnedDetails = spellGameConfiguration.LearnedDetails;
     }
 
@@ -26,8 +26,8 @@ internal class GenericSpell : Spell
     /// </summary>
     public override string Name { get; }
 
-    protected override string? CastScriptName { get; }
-    protected override string? CastFailedScriptName { get; }
+    protected override string[]? CastScriptNames { get; }
+    protected override string[]? CastFailedScriptNames { get; }
 
     /// <summary>
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.

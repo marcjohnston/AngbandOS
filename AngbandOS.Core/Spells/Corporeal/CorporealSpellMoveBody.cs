@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellMoveBody : Spell
 {
     private CorporealSpellMoveBody(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(MoveBodyScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(MoveBodyScript) };
 
     public override string Name => "Move Body";
 

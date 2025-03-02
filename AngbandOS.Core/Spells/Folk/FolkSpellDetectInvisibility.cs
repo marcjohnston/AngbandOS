@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellDetectInvisibility : Spell
 {
     private FolkSpellDetectInvisibility(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(DetectInvisibilityScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(DetectInvisibilityScript) };
 
     public override string Name => "Detect Invisibility";
     

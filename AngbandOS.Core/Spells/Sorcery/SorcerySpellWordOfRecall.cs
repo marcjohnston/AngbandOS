@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellWordOfRecall : Spell
 {
     private SorcerySpellWordOfRecall(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(ToggleRecallScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(ToggleRecallScript) };
 
     public override string Name => "Word of Recall";
 

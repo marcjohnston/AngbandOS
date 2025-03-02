@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellEntangle : Spell
 {
     private NatureSpellEntangle(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(OldSlowAtLos1xProjectileScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(OldSlowAtLos1xProjectileScript) };
 
     public override string Name => "Entangle";
     

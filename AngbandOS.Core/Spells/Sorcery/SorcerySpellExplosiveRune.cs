@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellYellowSign : Spell
 {
     private SorcerySpellYellowSign(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(YellowSignScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(YellowSignScript) };
 
     public override string Name => "Yellow Sign";
 

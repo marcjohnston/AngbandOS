@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellBatsSense : Spell
 {
     private CorporealSpellBatsSense(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(MapAreaScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(MapAreaScript) };
 
     public override string Name => "Bat's Sense";
     

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellWardingTrue : Spell
 {
     private LifeSpellWardingTrue(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(WardingScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(WardingScript) };
 
     public override string Name => "Warding True";
 }

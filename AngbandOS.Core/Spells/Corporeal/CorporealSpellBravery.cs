@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellBravery : Spell
 {
     private CorporealSpellBravery(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(ResetFearTimerScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(ResetFearTimerScript) };
 
     public override string Name => "Bravery";
     

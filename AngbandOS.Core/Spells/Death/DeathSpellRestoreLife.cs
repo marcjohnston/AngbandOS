@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Spells.Death;
 internal class DeathSpellRestoreLife : Spell
 {
     private DeathSpellRestoreLife(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(RestoreLevelScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(RestoreLevelScript) };
 
-    protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
+    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Restore Life";
     

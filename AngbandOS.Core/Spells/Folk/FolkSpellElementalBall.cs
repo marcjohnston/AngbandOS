@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellElementalBall : Spell
 {
     private FolkSpellElementalBall(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(ElementalBallScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(ElementalBallScript) };
 
     public override string Name => "Teleport Away";
 

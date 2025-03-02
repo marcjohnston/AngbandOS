@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellKnowSelf : Spell
 {
     private CorporealSpellKnowSelf(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(SelfKnowledgeScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(SelfKnowledgeScript) };
 
     public override string Name => "Know Self";
     

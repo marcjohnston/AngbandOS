@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellResistEnvironment : Spell
 {
     private NatureSpellResistEnvironment(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(ResistEnvironmentScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(ResistEnvironmentScript) };
 
     public override string Name => "Resist Environment";
 

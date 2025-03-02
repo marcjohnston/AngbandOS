@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellElderSign : Spell
 {
     private LifeSpellElderSign(Game game) : base(game) { }
-    protected override string? CastScriptName => nameof(ElderSignScript);
+    protected override string[]? CastScriptNames => new string[] { nameof(ElderSignScript) };
 
     public override string Name => "Elder Sign";
     
