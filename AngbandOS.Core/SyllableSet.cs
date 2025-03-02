@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core;
 
+[Serializable]
 internal abstract class SyllableSet : IGetKey
 {
     protected readonly Game Game;

@@ -23,7 +23,6 @@ internal class WardingScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.RunScript(nameof(ElderSignScript));
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MakeElderSignProjectile));
         projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, jump: false, beam: false, thru: false, hide: false, kill: false, stop: false);
     }
