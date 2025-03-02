@@ -47,12 +47,31 @@ public class Parser
             }
         }
     }
+
+    /// <summary>
+    /// Parses a complete expression and returns an <see cref="Expression"/> equivalent.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public Expression ParseExpression(string text)
     {
         int characterIndex = 0;
-        return ParseExpression(text,  0, ref characterIndex);
+        Expression expression = ParseExpression(text,  0, ref characterIndex);
+        IgnoreWhitespace(text, ref characterIndex);
+        if (characterIndex != text.Length)
+        {
+            throw new Exception($"Invalid expression {text} at index {characterIndex}.");
+        }
+        return expression;
     }
 
+    /// <summary>
+    /// Parses a nested expression from the position indicated by <paramref name="characterIndex"/>.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="characterIndex"></param>
+    /// <returns></returns>
     public Expression ParseExpression(string text, ref int characterIndex)
     {
         return ParseExpression(text, 0, ref characterIndex);
@@ -77,6 +96,9 @@ public class Parser
         {
             Expression expression = ParseExpression(text, precedence + 1, ref characterIndex);
 
+            IgnoreWhitespace(text, ref characterIndex);
+
+            // Retrieve the infix operators for this level of precedence.
             if (OperatorsDictionary.TryGetValue(precedence, out InfixOperator[]? infixOperators))
             {
                 bool found;
@@ -102,7 +124,7 @@ public class Parser
     }
     private void IgnoreWhitespace(string text, ref int characterIndex)
     {
-        while (ParseLanguage.WhitespaceCharacters.Contains(text[characterIndex]))
+        while (characterIndex < text.Length && ParseLanguage.WhitespaceCharacters.Contains(text[characterIndex]))
         {
             characterIndex++;
         }
