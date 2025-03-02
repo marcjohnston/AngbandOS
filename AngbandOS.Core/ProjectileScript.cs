@@ -8,28 +8,11 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal abstract class ProjectileScript : Script, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
-    protected readonly Game Game;
-    public ProjectileScript(Game game) 
-    {
-        Game = game;
-    }
+    protected ProjectileScript(Game game) : base(game) { }
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
- 
-    public void Bind()
+    public override void Bind()
     {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);
         DamageRoll = Game.ParseRollExpression(DamageRollExpression);
