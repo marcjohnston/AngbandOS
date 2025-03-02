@@ -307,7 +307,27 @@ internal sealed class Item : IComparable<Item>
     public int TreasureRating => _factory.TreasureRating;
     public Realm Realm => _factory.Realm;
 
-    public bool Smash(int who, int y, int x) => _factory.Smash(who, y, x);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="who"></param>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    public bool Smash(int who, int y, int x) 
+    {
+        if (QuaffTuple == null)
+        {
+            throw new Exception("Smash is not supported for a non-potion.");
+        }
+        IUnfriendlyScript? smashUnfriendlyScript = QuaffTuple.Value.SmashScript;
+        if (smashUnfriendlyScript == null)
+        {
+            return false;
+        }
+        return smashUnfriendlyScript.ExecuteUnfriendlyScript(who, y, x);
+    }
+
     public bool IsFlavorAware
     {
         get

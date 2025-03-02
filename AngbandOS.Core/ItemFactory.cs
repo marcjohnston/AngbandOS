@@ -326,27 +326,6 @@ internal abstract class ItemFactory : ItemEnhancement
     }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="game"></param>
-    /// <param name="who"></param>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    public bool Smash(int who, int y, int x)
-    {
-        if (QuaffTuple == null)
-        {
-            throw new Exception("Smash is not supported for a non-potion.");
-        }
-        IUnfriendlyScript? smashUnfriendlyScript = QuaffTuple.Value.SmashScript;
-        if (smashUnfriendlyScript == null)
-        {
-            return false;
-        }
-        return smashUnfriendlyScript.ExecuteUnfriendlyScript(who, y, x);
-    }
-
-    /// <summary>
     /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
     /// </summary>
     /// <returns></returns>
