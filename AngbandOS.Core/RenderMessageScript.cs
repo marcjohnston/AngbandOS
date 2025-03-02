@@ -8,23 +8,16 @@ namespace AngbandOS.Core.RenderMessageScripts;
 
 [Serializable]
 
-internal abstract class RenderMessageScript : IGetKey, IUniversalScript
+internal abstract class RenderMessageScript : Script, IUniversalScript
 {
-    protected readonly Game Game;
-    protected RenderMessageScript(Game game)
-    {
-        Game = game;
-    }
+    protected RenderMessageScript(Game game) : base(game) { }
 
-    public virtual string Key => GetType().Name;
     public virtual bool UsesItem => false;
     public virtual bool IdentifiesItem => false;
 
     public abstract string Message { get; }
 
-    public string GetKey => Key;
-
-    public void Bind() { }
+    public override void Bind() { }
 
     public UsedResult ExecuteActivateItemScript(Item item)
     {
@@ -64,10 +57,5 @@ internal abstract class RenderMessageScript : IGetKey, IUniversalScript
     {
         ExecuteScript();
         return new IdentifiedAndUsedResult(IdentifiesItem, UsesItem);
-    }
-
-    public string ToJson()
-    {
-        return "";
     }
 }
