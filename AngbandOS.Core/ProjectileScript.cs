@@ -41,10 +41,13 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     public Projectile Projectile { get; protected set; }
 
     /// <summary>
-    /// Returns a roll expression for the amount of damage the projectile produces.
+    /// Returns a roll expression for the amount of damage the projectile produces.  This property is used to bind the <see cref="DamageRoll"/> property during the bind phase.
     /// </summary>
     protected abstract string DamageRollExpression { get; }
 
+    /// <summary>
+    /// Returns a roll for the amount of damage the projectile produces.  This property is bound from the <see cref="DamageRollExpression"/> property during the bind phase.
+    /// </summary>
     public Expression DamageRoll { get; protected set; }
 
     /// <summary>
