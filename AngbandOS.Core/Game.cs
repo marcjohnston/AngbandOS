@@ -17696,20 +17696,20 @@ internal class Game
         }
     }
 
-    public Expression ParseRollExpression(string expression)
+    public Expression ParseExpression(string expression)
     {
         Parser parser = new Parser(new AngbandOSExpressionParseLanguage(this));
         return parser.ParseExpression(expression);
     }
 
-    public Expression? ParseNullableRollExpression(string? expression)
+    public Expression? ParseNullableExpression(string? expression)
     {
         if (expression == null)
         {
             return null;
         }
 
-        return ParseRollExpression(expression);
+        return ParseExpression(expression);
     }
 
     public Probability? ParseNullableProbabilityExpression(string? expression)

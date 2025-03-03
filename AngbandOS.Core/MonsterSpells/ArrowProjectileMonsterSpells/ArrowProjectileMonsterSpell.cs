@@ -15,7 +15,7 @@ internal abstract class ArrowProjectileMonsterSpell : ProjectileMonsterSpell
     public override void Bind()
     {
         base.Bind();
-        DamageRoll = Game.ParseRollExpression(DamageRollExpression);
+        DamageRoll = Game.ParseExpression(DamageRollExpression);
     }
 
     public override bool IsInnate => true;

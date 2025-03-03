@@ -83,7 +83,7 @@ internal abstract class Activation : IGetKey
 
     public virtual void Bind()
     {
-        RechargeTimeRoll = Game.ParseRollExpression(RechargeTimeRollExpression);
+        RechargeTimeRoll = Game.ParseExpression(RechargeTimeRollExpression);
         ActivationCancellableScript = Game.SingletonRepository.Get<IActivateItemScript>(ActivationCancellableScriptItemBindingKey);
     }
 

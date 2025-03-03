@@ -31,7 +31,7 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
     public void Bind()
     {
         MonsterFilter = Game.SingletonRepository.Get<MonsterFilter>(MonsterFilterBindingKey);
-        LevelRoll = Game.ParseRollExpression(LevelRollExpression);
+        LevelRoll = Game.ParseExpression(LevelRollExpression);
     }
 
     /// <summary>
