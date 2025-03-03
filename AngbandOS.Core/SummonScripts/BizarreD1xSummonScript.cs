@@ -14,7 +14,7 @@ internal class BizarreD1xSummonScript : SummonScript
 
     protected override string MonsterFilterBindingKey => nameof(Bizarre4MonsterFilter);
     protected override string LevelRollExpression => "X";
-    public override string? PreMessage => "You concentrate on the Fool card...";
-    public override string? SuccessMessage => "The summoned creature gets angry!";
-    public override string? FailureMessage => "No-one ever turns up.";
+    public override string[]? PreMessages => new string[] { "You concentrate on the Fool card..." };
+    public override string[]? SuccessMessages => new string[] { "The summoned creature gets angry!" };
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

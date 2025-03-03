@@ -14,7 +14,7 @@ internal class Animal1xSummonScript : SummonScript
 
     protected override string MonsterFilterBindingKey => nameof(AnimalMonsterFilter);
     protected override string LevelRollExpression => "X";
-    public override string? PreMessage => "You concentrate on the image of an animal...";
-    public override string? SuccessMessage => "The summoned animal gets angry!";
-    public override string? FailureMessage => "No-one ever turns up.";
+    public override string[]? PreMessages => new string[] { "You concentrate on the image of an animal..." };
+    public override string[]? SuccessMessages => new string[] { "The summoned animal gets angry!" };
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

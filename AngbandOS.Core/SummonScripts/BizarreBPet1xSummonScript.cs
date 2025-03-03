@@ -16,6 +16,6 @@ internal class BizarreBPet1xSummonScript : SummonScript
     public override bool Pet => true;
     public override bool Group => false;
     protected override string LevelRollExpression => "X";
-    public override string? PreMessage => "You concentrate on the Fool card...";
-    public override string? FailureMessage => "No-one ever turns up.";
+    public override string[]? PreMessages => new string[] { "You concentrate on the Fool card..." };
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

@@ -14,7 +14,7 @@ internal class Demon1xSummonScript : SummonScript
 
     protected override string MonsterFilterBindingKey => nameof(DemonMonsterFilter);
 
-    public override string? PreMessage => "You concentrate on the image of a demon...";
-    public override string? FailureMessage => "The summoned demon gets angry!";
-    protected override string LevelRollExpression => "x";
+    public override string[]? PreMessages => new string[] { "You concentrate on the image of a demon..." };
+    public override string[]? FailureMessages => new string[] { "The summoned demon gets angry!" };
+    protected override string LevelRollExpression => "X";
 }

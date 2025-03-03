@@ -14,7 +14,7 @@ internal class AncientDragon1xSummonScript : SummonScript
 
     protected override string MonsterFilterBindingKey => nameof(HiDragonNoUniquesMonsterFilter);
     protected override string LevelRollExpression => "X";
-    public override string? PreMessage => "You concentrate on the image of an ancient dragon...";
-    public override string? SuccessMessage => "The summoned dragon gets angry!";
-    public override string? FailureMessage => "No-one ever turns up.";
+    public override string[]? PreMessages => new string[] { "You concentrate on the image of an ancient dragon..." };
+    public override string[]? SuccessMessages => new string[] { "The summoned dragon gets angry!" };
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

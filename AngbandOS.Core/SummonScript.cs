@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class SummonScript : IUniversalScript
+internal abstract class SummonScript : IGetKey, IUniversalScript
 {
     protected readonly Game Game;
     protected SummonScript(Game game)
@@ -47,25 +47,25 @@ internal abstract class SummonScript : IUniversalScript
     public MonsterFilter MonsterFilter { get; private set; }
     protected abstract string LevelRollExpression { get; }
     public Expression LevelRoll { get; private set; }
-    public virtual string? PreMessage => null;
-    public virtual string? SuccessMessage => null;
-    public virtual string? FailureMessage => null;
+    public virtual string[]? PreMessages => null;
+    public virtual string[]? SuccessMessages => null;
+    public virtual string[]? FailureMessages => null;
 
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        if (PreMessage != null)
+        if (PreMessages != null)
         {
-            Game.MsgPrint(PreMessage);
+            Game.MsgPrint(PreMessages);
         }
         IntegerExpression levelResult = LevelRoll.Compute<IntegerExpression>();
         bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, Group, Pet);
-        if (success && SuccessMessage != null)
+        if (success && SuccessMessages != null)
         {
-            Game.MsgPrint(SuccessMessage);
+            Game.MsgPrint(SuccessMessages);
         }
-        else if (FailureMessage != null)
+        else if (FailureMessages != null)
         {
-            Game.MsgPrint(FailureMessage);
+            Game.MsgPrint(FailureMessages);
         }
         return new IdentifiedResult(success);
     }

@@ -16,6 +16,6 @@ internal class AnimalRangerPet1xSummonScript : SummonScript
     public override bool Group => false;
     public override bool Pet => true;
     protected override string LevelRollExpression => "X";
-    public override string? PreMessage => "You concentrate on the image of an animal...";
-    public override string? FailureMessage => "No-one ever turns up.";
+    public override string[]? PreMessages => new string[] { "You concentrate on the image of an animal..." };
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

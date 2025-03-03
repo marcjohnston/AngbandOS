@@ -14,8 +14,8 @@ internal class DemonPet1xSummonScript : SummonScript
 
     protected override string MonsterFilterBindingKey => nameof(DemonMonsterFilter);
     public override bool Pet => true;
-    public override string? PreMessage => "You concentrate on the image of a demon...";
-    public override string? FailureMessage => "No-one ever turns up.";
+    public override string[]? PreMessages => new string[] { "You concentrate on the image of a demon..." };
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 
-    protected override string LevelRollExpression => "x";
+    protected override string LevelRollExpression => "X";
 }

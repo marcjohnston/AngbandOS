@@ -1529,62 +1529,70 @@ internal class Game
     /// is cleared prior to rendering the message on a new line.  If the message is null, any previous message is forced to render and the key input buffer is
     /// cleared.
     /// </summary>
-    /// <param name="msg">Set to NULL to force a --more-- prompt (if there is text the player hasn't seen), then reset the line for new message starting at 0, 0.</param>
-    public void MsgPrint(string? msg)
+    /// <param name="messages">Set to NULL to force a --more-- prompt (if there is text the player hasn't seen), then reset the line for new message starting at 0, 0.</param>
+    public void MsgPrint(params string[]? messages)
     {
-        if (msg == null)
+        void Render(string msg)
+        {
+            // Capitalize the first letter.
+            if (msg.Length > 2)
+            {
+                msg = msg.Substring(0, 1).ToUpper() + msg.Substring(1);
+            }
+            if (!IsDead)
+            {
+                MessageAdd(msg);
+            }
+
+            // Check to see if the message being rendered is longer than one screen width.  If so, it will need to be split.  Compute the amount of space available.
+            int lengthOfMore = MorePrompt.Length;
+            int maxWidth = Screen.Width - lengthOfMore;
+
+            // Check to see if we need to -more- the current line.  Any form of the current message exceeding the current line will force a -more-.
+            if (MessageXCursorPos + msg.Length > maxWidth)
+            {
+                // Close the current line to prepare for the current message.
+                ShowMorePrompt();
+            }
+
+            // Determine if the message is too long for a line by itself.
+            while (msg.Length > maxWidth)
+            {
+                // Find a place to break 
+                int check = maxWidth;
+                while (check > 0 && msg[check] != ' ')
+                {
+                    check--;
+                }
+
+                // Check to see if there were any spaces to break on.
+                if (check == 0)
+                {
+                    // There were none.  Force break on non-breaking character.
+                    check = maxWidth;
+                }
+                else
+                {
+                    string splitMessage = msg.Substring(0, check);
+                    msg = msg.Substring(check + 1);
+                    Screen.Print(ColorEnum.White, splitMessage, 0, 0);
+                    ShowMorePrompt();
+                }
+            }
+            Screen.Print(ColorEnum.White, msg, 0, MessageXCursorPos);
+            MessageXCursorPos += msg.Length + 1;
+        }
+
+        if (messages == null)
         {
             ShowMorePrompt();
             return;
         }
 
-        // Capitalize the first letter.
-        if (msg.Length > 2)
+        foreach (string message in messages)
         {
-            msg = msg.Substring(0, 1).ToUpper() + msg.Substring(1);
+            Render(message);
         }
-        if (!IsDead)
-        {
-            MessageAdd(msg);
-        }
-
-        // Check to see if the message being rendered is longer than one screen width.  If so, it will need to be split.  Compute the amount of space available.
-        int lengthOfMore = MorePrompt.Length;
-        int maxWidth = Screen.Width - lengthOfMore;
-
-        // Check to see if we need to -more- the current line.  Any form of the current message exceeding the current line will force a -more-.
-        if (MessageXCursorPos + msg.Length > maxWidth)
-        {
-            // Close the current line to prepare for the current message.
-            ShowMorePrompt();
-        }
-
-        // Determine if the message is too long for a line by itself.
-        while (msg.Length > maxWidth)
-        {
-            // Find a place to break 
-            int check = maxWidth;
-            while (check > 0 && msg[check] != ' ')
-            {
-                check--;
-            }
-
-            // Check to see if there were any spaces to break on.
-            if (check == 0)
-            {
-                // There were none.  Force break on non-breaking character.
-                check = maxWidth;
-            }
-            else
-            {
-                string splitMessage = msg.Substring(0, check);
-                msg = msg.Substring(check + 1);
-                Screen.Print(ColorEnum.White, splitMessage, 0, 0);
-                ShowMorePrompt();
-            }
-        }
-        Screen.Print(ColorEnum.White, msg, 0, MessageXCursorPos);
-        MessageXCursorPos += msg.Length + 1;
     }
 
     public const string MorePrompt = "-more-";
