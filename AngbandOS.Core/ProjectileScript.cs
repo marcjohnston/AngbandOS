@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -276,6 +278,16 @@ internal abstract class ProjectileScript : Script, IUniversalScript // DO NOT AD
                     }
                     RenderPostMessage();
                     return new IdentifiedAndUsedResult(anyIdentified, true);
+                }
+            case NonDirectionalProjectileModeEnum.AtPlayerLocation:
+                {
+                    int damage = DamageRoll.Compute<IntegerExpression>().Value;
+                    int radius = RadiusRoll.Compute<IntegerExpression>().Value;
+                    RenderPreMessage();
+                    bool affectsMonster = Projectile.Fire(0, radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
+                    RenderPostMessage();
+                    bool identified = Identified ?? affectsMonster;
+                    return new IdentifiedAndUsedResult(identified, true);
                 }
             default:
                 throw new Exception("Invalid value for NonDirectionalProjectileMode.");

@@ -20,5 +20,10 @@ public enum NonDirectionalProjectileModeEnum
     /// <summary>
     /// Specifies that a projectile that is launched using a script interface that does not accept a directional parameter will launch a projectile at every monster that is in the players line-of-sight. 
     /// </summary>
-    AllMonstersInLos = 2
+    AllMonstersInLos = 2,
+
+    /// <summary>
+    /// Specifies that a projectile that is launched using a script interface that does not accept a directional parameter will launch the projectile at the players current location.
+    /// </summary>
+    AtPlayerLocation = 3
 }

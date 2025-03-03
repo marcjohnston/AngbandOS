@@ -249,7 +249,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
 
             case 21:
             case 22:
-                Game.RunScript(nameof(CreateDoorScript));
+                Game.RunScript(nameof(CreateDoorProjectileScript));
                 break;
 
             case 23:

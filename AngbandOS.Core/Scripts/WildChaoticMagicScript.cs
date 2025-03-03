@@ -72,7 +72,7 @@ internal class WildChaoticMagicScript : Script, ICastSpellScript
 
             case 21:
             case 22:
-                Game.RunScript(nameof(CreateDoorScript));
+                Game.RunScript(nameof(CreateDoorProjectileScript));
                 break;
 
             case 23:

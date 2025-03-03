@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellDoorCreation : Spell
 {
     private NatureSpellDoorCreation(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(CreateDoorScript) };
+    protected override string[]? CastScriptNames => new string[] { nameof(CreateDoorProjectileScript) };
 
     public override string Name => "Door Creation";
     
