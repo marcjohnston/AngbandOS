@@ -1,24 +1,23 @@
-﻿namespace AngbandOS.Core.Expressions
+﻿namespace AngbandOS.Core.Expressions;
+
+[Serializable]
+public class AdditionExpression : InfixExpression
 {
-    [Serializable]
-    public class AdditionExpression : InfixExpression
+    public AdditionExpression(Expression addend1, Expression addend2) : base(addend1, addend2) { }
+    public Expression Addend1 => base.Operand1;
+    public Expression Addend2 => base.Operand2;
+    public override Expression Compute()
     {
-        public AdditionExpression(Expression addend1, Expression addend2) : base(addend1, addend2) { }
-        public Expression Addend1 => base.Operand1;
-        public Expression Addend2 => base.Operand2;
-        public override Expression Compute()
+        Expression addend1 = Addend1.Compute();
+        Expression addend2 = Addend2.Compute();
+        if (addend1 is IntegerExpression addend1IntegerExpression && addend2 is IntegerExpression addend2IntegerExpression)
         {
-            Expression addend1 = Addend1.Compute();
-            Expression addend2 = Addend2.Compute();
-            if (addend1 is IntegerExpression addend1IntegerExpression && addend2 is IntegerExpression addend2IntegerExpression)
-            {
-                return new IntegerExpression(addend1IntegerExpression.Value + addend2IntegerExpression.Value);
-            }
-            throw new Exception("Invalid data types for addition.");
+            return new IntegerExpression(addend1IntegerExpression.Value + addend2IntegerExpression.Value);
         }
-        public override string ToString()
-        {
-            return $"{Addend1}+{Addend2}";
-        }
+        throw new Exception("Invalid data types for addition.");
+    }
+    public override string ToString()
+    {
+        return $"{Addend1}+{Addend2}";
     }
 }

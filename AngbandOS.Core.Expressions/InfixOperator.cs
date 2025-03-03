@@ -1,9 +1,8 @@
-﻿namespace AngbandOS.Core.Expressions
+﻿namespace AngbandOS.Core.Expressions;
+
+[Serializable]
+public abstract class InfixOperator
 {
-    [Serializable]
-    public abstract class InfixOperator
-    {
-        public abstract string OperatorSymbol { get; }
-        public abstract InfixExpression CreateExpression(Expression operand1, Expression operand2);
-    }
+    public abstract string OperatorSymbol { get; }
+    public abstract InfixExpression CreateExpression(Expression operand1, Expression operand2);
 }

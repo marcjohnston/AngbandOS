@@ -1,21 +1,20 @@
-﻿namespace AngbandOS.Core.Expressions
-{
-    [Serializable]
-    public class SymbolSet
-    {
-        public readonly bool[] Symbols;
-        public bool Contains(char c)
-        {
-            return Symbols[(byte)c];
-        }
+﻿namespace AngbandOS.Core.Expressions;
 
-        public SymbolSet(string symbols)
+[Serializable]
+public class SymbolSet
+{
+    public readonly bool[] Symbols;
+    public bool Contains(char c)
+    {
+        return Symbols[(byte)c];
+    }
+
+    public SymbolSet(string symbols)
+    {
+        Symbols = new bool[256];
+        foreach (char c in symbols)
         {
-            Symbols = new bool[256];
-            foreach (char c in symbols)
-            {
-                Symbols[(byte)c] = true;
-            }
+            Symbols[(byte)c] = true;
         }
     }
 }

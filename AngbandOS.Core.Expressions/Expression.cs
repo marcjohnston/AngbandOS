@@ -1,17 +1,16 @@
-﻿namespace AngbandOS.Core.Expressions
+﻿namespace AngbandOS.Core.Expressions;
+
+[Serializable]
+public abstract class Expression
 {
-    [Serializable]
-    public abstract class Expression
+    public abstract Expression Compute();
+    public TExpression Compute<TExpression>()
     {
-        public abstract Expression Compute();
-        public TExpression Compute<TExpression>()
+        Expression result = Compute();
+        if (result is TExpression castResult)
         {
-            Expression result = Compute();
-            if (result is TExpression castResult)
-            {
-                return castResult;
-            }
-            throw new Exception("Invalid result from Expression.Compute.");
+            return castResult;
         }
+        throw new Exception("Invalid result from Expression.Compute.");
     }
 }
