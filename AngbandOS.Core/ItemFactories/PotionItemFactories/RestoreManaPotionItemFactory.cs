@@ -26,7 +26,7 @@ internal class RestoreManaPotionItemFactory : ItemFactory
         (25, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBindingTuple => (nameof(RestoreManaScript), nameof(Mana10d10ProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(RestoreManaScript), nameof(Mana10d10ProjectileFriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

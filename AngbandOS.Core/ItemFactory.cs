@@ -251,7 +251,7 @@ internal abstract class ItemFactory : ItemEnhancement
         if (QuaffBindingTuple != null)
         {
             IEatOrQuaffScript quaffNoticeableScript = Game.SingletonRepository.Get<IEatOrQuaffScript>(QuaffBindingTuple.Value.QuaffScriptName);
-            IUnfriendlyScript? smashUnfriendlyScript = Game.SingletonRepository.GetNullable<IUnfriendlyScript>(QuaffBindingTuple.Value.SmashScriptName);
+            ProjectileScript? smashUnfriendlyScript = Game.SingletonRepository.GetNullable<ProjectileScript>(QuaffBindingTuple.Value.SmashScriptName);
             int manaEquivalent = QuaffBindingTuple.Value.ManaEquivalent;
             QuaffTuple = (quaffNoticeableScript, smashUnfriendlyScript, manaEquivalent);
         }
@@ -1394,7 +1394,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// The amount of mana needed to consume to keep the potion.
     /// 
     /// </summary>
-    public (IEatOrQuaffScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple { get; private set; } = null;
+    public (IEatOrQuaffScript QuaffScript, ProjectileScript? SmashScript, int ManaEquivalent)? QuaffTuple { get; private set; } = null;
 
     /// <summary>
     /// Returns the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property bound using

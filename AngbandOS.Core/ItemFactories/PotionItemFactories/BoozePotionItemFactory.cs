@@ -30,7 +30,7 @@ internal class BoozePotionItemFactory : ItemFactory
     public override int DamageSides => 1;
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBindingTuple => (nameof(BoozeScript), nameof(OldConfusionProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(BoozeScript), nameof(OldConfusionProjectileUnfriendlyProjectileScript), 20);
  
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

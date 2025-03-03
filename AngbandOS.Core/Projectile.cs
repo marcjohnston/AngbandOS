@@ -34,10 +34,16 @@ internal abstract class Projectile : IGetKey
     public string GetKey => Key;
     public virtual void Bind() { }
 
-    protected virtual ProjectileGraphic? BoltProjectileGraphic { get; }
+    /// <summary>
+    /// Returns the graphics to be used while the projectile is in motion; or null, if there is no graphic.  Returns null, by default.
+    /// </summary>
+    protected virtual ProjectileGraphic? BoltProjectileGraphic => null;
 
     protected virtual Animation? EffectAnimation => null;
 
+    /// <summary>
+    /// Returns the graphics to be used when the projectile impacts something; or null, if there is no graphic.  Returns null, by default.
+    /// </summary>
     protected virtual ProjectileGraphic? ImpactProjectileGraphic => null;
 
     /// <summary>

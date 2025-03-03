@@ -27,7 +27,7 @@ internal class LifePotionItemFactory : ItemFactory
         (100, 2)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBindingTuple => (nameof(LifeScript), nameof(OldHeal50d50ProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(LifeScript), nameof(OldHeal50d50ProjectileFriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

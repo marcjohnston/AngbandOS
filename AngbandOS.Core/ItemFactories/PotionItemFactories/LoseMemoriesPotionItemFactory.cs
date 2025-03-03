@@ -30,7 +30,7 @@ internal class LoseMemoriesPotionItemFactory : ItemFactory
         (10, 1)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBindingTuple => (nameof(LoseMemoriesScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(LoseMemoriesScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

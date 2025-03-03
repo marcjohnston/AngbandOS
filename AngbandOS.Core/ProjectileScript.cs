@@ -104,6 +104,11 @@ internal abstract class ProjectileScript : Script, IUniversalScript // DO NOT AD
     public virtual string? PostMessage => null;
 
     /// <summary>
+    /// Returns whether or not this projectile turns a pet into an unfriendly monster, when using the <see cref="ExecuteUnfriendlyScript"/> method.  Returns true, by default.
+    /// </summary>
+    public virtual bool SmashingOnPetsTurnsUnfriendly => true;
+
+    /// <summary>
     /// Returns the mode that the projectile will use when it is launched using a script interface that does not accept a directional parameter.
     /// </summary>
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
@@ -171,6 +176,14 @@ internal abstract class ProjectileScript : Script, IUniversalScript // DO NOT AD
     {
         IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectionalWithPreAndPostMessages();
         return new UsedResult(readScrollAndUseStaffResult); // TODO: This is lossy
+    }
+
+    public bool ExecuteUnfriendlyScript(int who, int y, int x)
+    {
+        int damage = DamageRoll.Compute<IntegerExpression>().Value;
+        int radius = RadiusRoll.Compute<IntegerExpression>().Value;
+        bool affectsMonster = Projectile.Fire(who, radius, y, x, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
+        return SmashingOnPetsTurnsUnfriendly;
     }
 
     /// <summary>

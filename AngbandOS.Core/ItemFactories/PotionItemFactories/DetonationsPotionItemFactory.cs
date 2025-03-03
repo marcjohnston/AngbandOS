@@ -26,7 +26,7 @@ internal class DetonationsPotionItemFactory : ItemFactory
         (60, 8)
     };
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBindingTuple => (nameof(DetonationsScript), nameof(Explode25d25ProjectileUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(DetonationsScript), nameof(Explode25d25ProjectileUnfriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

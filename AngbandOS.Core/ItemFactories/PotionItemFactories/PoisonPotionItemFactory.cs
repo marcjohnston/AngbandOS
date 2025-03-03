@@ -31,7 +31,7 @@ internal class PoisonPotionItemFactory : ItemFactory
     };
     public override int Weight => 4;
 
-    protected override (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple => (nameof(Poison1d5p10Script), nameof(PoisonProjectileUnfriendlyScript), 20);
+    protected override (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple => (nameof(Poison1d5p10Script), nameof(PoisonProjectileUnfriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

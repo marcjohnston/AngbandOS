@@ -28,7 +28,7 @@ internal class CureLightWoundsPotionItemFactory : ItemFactory
     };
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
-    protected override (string, string?, int)? QuaffBindingTuple => (nameof(CureLightWounds2d8Script), nameof(OldHeal2d3ProjectileFriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(CureLightWounds2d8Script), nameof(OldHeal2d3ProjectileFriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

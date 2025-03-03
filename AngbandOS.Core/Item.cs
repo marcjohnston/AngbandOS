@@ -271,7 +271,7 @@ internal sealed class Item : IComparable<Item>
     public bool HatesCold => _factory.HatesCold;
     public bool HatesElectricity => _factory.HatesElectricity;
     public bool HatesFire => _factory.HatesFire;
-    public (IEatOrQuaffScript QuaffScript, IUnfriendlyScript? SmashScript, int ManaEquivalent)? QuaffTuple => _factory.QuaffTuple;
+    public (IEatOrQuaffScript QuaffScript, ProjectileScript? SmashScript, int ManaEquivalent)? QuaffTuple => _factory.QuaffTuple;
     public (IZapRodScript Script, Expression TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple => _factory.ZapTuple;
     public (IReadScrollOrUseStaffScript UseScript, Expression InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
     public (IAimWandScript ActivationScript, Expression InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
@@ -308,7 +308,7 @@ internal sealed class Item : IComparable<Item>
     public Realm Realm => _factory.Realm;
 
     /// <summary>
-    /// 
+    /// Returns true, if the smash effect causes the target to be unfriendly.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="who"></param>
@@ -320,7 +320,7 @@ internal sealed class Item : IComparable<Item>
         {
             throw new Exception("Smash is not supported for a non-potion.");
         }
-        IUnfriendlyScript? smashUnfriendlyScript = QuaffTuple.Value.SmashScript;
+        ProjectileScript? smashUnfriendlyScript = QuaffTuple.Value.SmashScript;
         if (smashUnfriendlyScript == null)
         {
             return false;

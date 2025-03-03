@@ -30,7 +30,7 @@ internal class SaltWaterPotionItemFactory : ItemFactory
     public override int DamageSides => 1;
     public override int Weight => 4;
 
-    protected override (string, string?, int)? QuaffBindingTuple => (nameof(SaltWaterScript), nameof(NoEffectButMakeUnfriendlyScript), 20);
+    protected override (string, string?, int)? QuaffBindingTuple => (nameof(SaltWaterScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.
