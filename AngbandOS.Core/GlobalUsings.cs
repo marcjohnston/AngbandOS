@@ -76,6 +76,7 @@ global using AngbandOS.Core.Spells.Tarot;
 global using AngbandOS.Core.StoreCommands;
 global using AngbandOS.Core.StoreFactories;
 global using AngbandOS.Core.SummonScripts;
+global using AngbandOS.Core.SummonWeightedRandoms;
 global using AngbandOS.Core.Tiles;
 global using AngbandOS.Core.Timers;
 global using AngbandOS.Core.Widgets;
