@@ -8,11 +8,27 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class SummonScript : Script, IUniversalScript
+internal abstract class SummonScript : IUniversalScript
 {
-    protected SummonScript(Game game) : base(game) { }
+    protected readonly Game Game;
+    protected SummonScript(Game game)
+    {
+        Game = game;
+    }
 
-    public override void Bind()
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind()
     {
         MonsterFilter = Game.SingletonRepository.Get<MonsterFilter>(MonsterFilterBindingKey);
         LevelRoll = Game.ParseRollExpression(LevelRollExpression);
