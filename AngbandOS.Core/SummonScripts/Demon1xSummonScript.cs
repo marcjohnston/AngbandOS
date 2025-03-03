@@ -1,0 +1,20 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+namespace AngbandOS.Core.SummonScripts;
+
+[Serializable]
+internal class Demon1xSummonScript : SummonScript, IScript, ICastSpellScript
+{
+    private Demon1xSummonScript(Game game) : base(game) { }
+
+    protected override string MonsterFilterBindingKey => nameof(DemonMonsterFilter);
+
+    public override string? PreMessage => "You concentrate on the image of a demon...";
+    public override string? FailureMessage => "The summoned demon gets angry!";
+    protected override string LevelRollExpression => "x";
+}
