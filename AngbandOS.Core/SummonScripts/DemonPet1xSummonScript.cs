@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.SummonScripts;
 
 [Serializable]
-internal class DemonPet1xSummonScript : SummonScript, IScript, ICastSpellScript
+internal class DemonPet1xSummonScript : SummonScript
 {
     private DemonPet1xSummonScript(Game game) : base(game) { }
 
