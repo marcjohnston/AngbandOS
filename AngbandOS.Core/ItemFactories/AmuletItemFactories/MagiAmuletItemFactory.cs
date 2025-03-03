@@ -12,7 +12,8 @@ internal class MagiAmuletItemFactory : ItemFactory
 {
     public override bool NegativeBonusArmorClassRepresentsBroken => true;
     public override bool NegativeBonusHitRepresentsBroken => true;
-    public override bool NegativeBonusDamageRepresentsBroken => true;    private MagiAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
+    public override bool NegativeBonusDamageRepresentsBroken => true;
+    private MagiAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "the Magi";
