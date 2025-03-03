@@ -3,7 +3,7 @@
     [Serializable]
     public class DivisionExpression : InfixExpression
     {
-        public DivisionExpression(Expression dividend, Expression divsor) : base(dividend, divsor) { }
+        public DivisionExpression(Expression dividend, Expression divisor) : base(dividend, divisor) { }
         public Expression Dividend => base.Operand1;
         public Expression Divisor => base.Operand2;
         public override Expression Compute()
