@@ -5,21 +5,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using static System.Net.Mime.MediaTypeNames;
-
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ProjectileScript : Script, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
-    protected ProjectileScript(Game game) : base(game) { }
+    protected readonly Game Game;
+    protected ProjectileScript(Game game)
+    {
+        Game = game;
+    }
 
-    public override void Bind()
+    public void Bind()
     {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);
         DamageRoll = Game.ParseRollExpression(DamageRollExpression);
         RadiusRoll = Game.ParseRollExpression(RadiusRollExpression);
     }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
