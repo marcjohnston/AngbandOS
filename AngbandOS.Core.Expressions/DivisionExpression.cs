@@ -10,15 +10,41 @@ public class DivisionExpression : InfixExpression
     {
         Expression dividend = Dividend.Compute();
         Expression divisor = Divisor.Compute();
-        if (dividend is IntegerExpression dividendIntegerExpression && divisor is IntegerExpression divisorIntegerExpression)
+
+        if (divisor is DecimalExpression divisorDecimalExpression)
+        {
+            if (divisorDecimalExpression.Value == 0)
+            {
+                throw new Exception("Divide by zero error.");
+            }
+            else if (dividend is DecimalExpression dividendDecimalExpression)
+            {
+                return new DecimalExpression(dividendDecimalExpression.Value / divisorDecimalExpression.Value);
+            }
+            else if (dividend is IntegerExpression dividendIntegerExpression)
+            {
+                return new DecimalExpression(dividendIntegerExpression.Value / divisorDecimalExpression.Value);
+            }
+            throw new Exception($"Dividend does not support {dividend.GetType().Name}");
+        }
+        else if (divisor is IntegerExpression divisorIntegerExpression)
         {
             if (divisorIntegerExpression.Value == 0)
             {
                 throw new Exception("Divide by zero error.");
             }
-            return new IntegerExpression(dividendIntegerExpression.Value / divisorIntegerExpression.Value);
+            else if (dividend is DecimalExpression dividendDecimalExpression)
+            {
+                return new DecimalExpression(dividendDecimalExpression.Value / divisorIntegerExpression.Value);
+            }
+            else if (dividend is IntegerExpression dividendIntegerExpression)
+            {
+                return new DecimalExpression(dividendIntegerExpression.Value / divisorIntegerExpression.Value);
+            }
+            throw new Exception($"Dividend does not support {dividend.GetType().Name}");
         }
-        throw new Exception("Invalid data types for division.");
+
+        throw new Exception($"Divisor does not support {divisor.GetType().Name}");
     }
     public override string ToString()
     {

@@ -21,7 +21,7 @@ public class GameConfiguration
 
     public virtual string[]? GoldFactoriesBindingKeys { get; set; } = null;
 
-    public virtual string? GoldItemIsGreatProbabilityExpression { get; set; } = "5"; // 1 in 20 or 5%
+    public virtual string? GoldItemIsGreatProbabilityExpression { get; set; } = "0.05"; // 1 in 20 or 5%
 
     /// <summary>
     /// Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.

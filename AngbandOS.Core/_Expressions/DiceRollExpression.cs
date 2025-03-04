@@ -12,20 +12,16 @@ internal class DiceRollExpression : InfixExpression
     public Expression Sides => base.Operand2;
     public override Expression Compute()
     {
-        Expression dice = Dice.Compute();
-        Expression sides = Sides.Compute();
-        if (Dice is IntegerExpression diceIntegerExpression && Sides is IntegerExpression sidesIntegerExpression)
+        IntegerExpression diceIntegerExpression = Dice.Compute<IntegerExpression>();
+        IntegerExpression sidesIntegerExpression = Sides.Compute<IntegerExpression>();
+        Random random = Game.UseRandom;
+        int sum = 0;
+        for (int rollIndex = 0; rollIndex < diceIntegerExpression.Value; rollIndex++)
         {
-            Random random = Game.UseRandom;
-            int sum = 0;
-            for (int rollIndex = 0; rollIndex < diceIntegerExpression.Value; rollIndex++)
-            {
-                int roll = random.Next(sidesIntegerExpression.Value);
-                sum += roll;
-            }
-            return new IntegerExpression(sum);
+            int roll = random.Next(sidesIntegerExpression.Value);
+            sum += roll;
         }
-        throw new Exception("Invalid data types for addition.");
+        return new IntegerExpression(sum);
     }
     public override string ToString()
     {

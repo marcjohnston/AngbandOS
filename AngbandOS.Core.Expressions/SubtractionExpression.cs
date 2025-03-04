@@ -1,20 +1,45 @@
-﻿namespace AngbandOS.Core.Expressions;
+﻿using System.Numerics;
+
+namespace AngbandOS.Core.Expressions;
 
 [Serializable]
 public class SubtractionExpression : InfixExpression
 {
     public SubtractionExpression(Expression minuend, Expression subtrahend) : base(minuend, subtrahend) { }
-    public Expression Minuend => base.Operand1;
-    public Expression Subtrahend => base.Operand2;
+    public Expression Minuend => Operand1;
+    public Expression Subtrahend => Operand2;
     public override Expression Compute()
     {
         Expression minuend = Minuend.Compute();
         Expression subtrahend = Subtrahend.Compute();
-        if (minuend is IntegerExpression minuendIntegerExpression && subtrahend is IntegerExpression subtrahendIntegerExpression)
+        if (minuend is DecimalExpression minuendDecimalExpression)
         {
-            return new IntegerExpression(minuendIntegerExpression.Value - subtrahendIntegerExpression.Value);
+            if (subtrahend is DecimalExpression subtrahendDecimalExpression)
+            {
+                return new DecimalExpression(minuendDecimalExpression.Value + subtrahendDecimalExpression.Value);
+            }
+            else if (subtrahend is IntegerExpression subtrahendIntegerExpression)
+            {
+                return new DecimalExpression(minuendDecimalExpression.Value + subtrahendIntegerExpression.Value);
+            }
+
+            throw new Exception($"Subtrahend does not support {subtrahend.GetType().Name}");
         }
-        throw new Exception("Invalid data types for subraction.");
+        else if (minuend is IntegerExpression minuendIntegerExpression)
+        {
+            if (subtrahend is DecimalExpression subtrahendDecimalExpression)
+            {
+                return new DecimalExpression(minuendIntegerExpression.Value + subtrahendDecimalExpression.Value);
+            }
+            else if (subtrahend is IntegerExpression subtrahendIntegerExpression)
+            {
+                return new IntegerExpression(minuendIntegerExpression.Value + subtrahendIntegerExpression.Value);
+            }
+
+            throw new Exception($"Subtrahend does not support {subtrahend.GetType().Name}");
+        }
+
+        throw new Exception($"Minuend does not support {minuend.GetType().Name}");
     }
     public override string ToString()
     {
