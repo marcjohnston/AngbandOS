@@ -39,7 +39,16 @@ public class DivisionExpression : InfixExpression
             }
             else if (dividend is IntegerExpression dividendIntegerExpression)
             {
-                return new DecimalExpression(dividendIntegerExpression.Value / divisorIntegerExpression.Value);
+                // Test if the division produces an integer.
+                (int quotient, int remainder) = Math.DivRem(dividendIntegerExpression.Value, divisorIntegerExpression.Value);
+                if (remainder == 0)
+                {
+                    return new IntegerExpression(quotient);
+                }
+                else
+                {
+                    return new DecimalExpression(dividendIntegerExpression.Value / divisorIntegerExpression.Value);
+                }
             }
             throw new Exception($"Dividend does not support {dividend.GetType().Name}");
         }
