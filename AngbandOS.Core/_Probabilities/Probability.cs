@@ -8,17 +8,41 @@
 namespace AngbandOS.Core.Probabilities;
 
 [Serializable]
-internal abstract class Probability
+internal class Probability
 {
+    private readonly Game Game;
+    private Expression _expression { get; }
+    public Probability(Game game, Expression expression)
+    {
+        Game = game;
+        _expression = expression;
+    }
+
     /// <summary>
-    /// Returns the percentage the probability will succeed.
+    /// Computes the expression, ensures and returns the result of the expression being an integer value between and including both 0 and 100.
     /// </summary>
-    public abstract int Percentage { get; }
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public double GetPercentage()
+    {
+        // Compute the expression value.
+        Expression result = _expression.Compute();
+        DecimalExpression? decimalResult = Game.ParseLanguage.ConvertTo<DecimalExpression>(result);
+        if (decimalResult == null)
+        {
+            throw new Exception("Probability expression value type not recognized.");
+        }
+        return decimalResult.Value;
+    }
 
     /// <summary>
     /// Returns true, if a random test succeeds.
     /// </summary>
     /// <param name="game"></param>
     /// <returns></returns>
-    public abstract bool Test(Game game);
+    public bool Test()
+    {
+        double percentage = GetPercentage() * 100;
+        return Game.DieRoll(100) < (int)percentage;
+    }
 }

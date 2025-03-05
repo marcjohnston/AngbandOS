@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Expressions;
 internal class AngbandOSExpressionParseLanguage : ParseLanguage
 {
     public readonly Game Game;
+    
     public AngbandOSExpressionParseLanguage(Game game)
     {
         Game = game;
@@ -31,5 +32,10 @@ internal class AngbandOSExpressionParseLanguage : ParseLanguage
         (1, new MultiplicationInfixOperator()),
         (1, new DivisionInfixOperator()),
         (2, new DiceRollInfixOperator(Game)) // This is the most significant operation
+    };
+
+    public override ExpressionTypeConverter[]? TypeConverters => new ExpressionTypeConverter[]
+    {
+        new IntegerToDecimalExpressionTypeConverter()
     };
 }

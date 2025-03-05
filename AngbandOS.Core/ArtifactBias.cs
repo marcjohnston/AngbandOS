@@ -76,10 +76,10 @@ internal abstract class ArtifactBias : IGetKey
         {
             foreach ((ItemTest itemTest, Probability itemTestProbability, ItemEnhancement itemEnhancement, Probability moreProbability) in RandomResistances)
             {
-                if (itemTestProbability.Test(Game) && itemTest.Test(characteristics))
+                if (itemTestProbability.Test() && itemTest.Test(characteristics))
                 {
                     characteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
-                    if (moreProbability.Test(Game))
+                    if (moreProbability.Test())
                     {
                         return true;
                     }

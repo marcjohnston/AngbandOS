@@ -3,6 +3,46 @@
 [Serializable]
 public abstract class ParseLanguage
 {
+    private readonly Dictionary<string, ExpressionTypeConverter> TypeConverterDictionary = new Dictionary<string, ExpressionTypeConverter>();
+
+    protected ParseLanguage()
+    {
+        if (TypeConverters != null)
+        {
+            foreach (ExpressionTypeConverter expressionTypeConverter in TypeConverters)
+            {
+                string key = GenerateTypeConverterKey(expressionTypeConverter.FromExpressionType.Name, expressionTypeConverter.ToExpressionType.Name);
+                TypeConverterDictionary.Add(key, expressionTypeConverter);
+            }
+        }
+    }
+
+    private string GenerateTypeConverterKey(string fromExpressionTypeName, string toExpressionTypeName)
+    {
+        return $"{fromExpressionTypeName}-{toExpressionTypeName}";
+    }
+
+    public ExpressionTypeConverter? GetTypeConverter<TDesiredExpression>(Expression fromExpression)
+    {
+        string key = GenerateTypeConverterKey(fromExpression.GetType().Name, typeof(TDesiredExpression).Name);
+        TypeConverterDictionary.TryGetValue(key, out ExpressionTypeConverter? typeConverter);
+        return typeConverter;
+    }
+
+    public TExpression? ConvertTo<TExpression>(Expression expression) where TExpression : Expression
+    {
+        if (expression is TExpression)
+        {
+            return (TExpression)expression;
+        }
+        ExpressionTypeConverter? typeConverter = GetTypeConverter<TExpression>(expression);
+        if (typeConverter == null)
+        {
+            return null;
+        }
+        return (TExpression)typeConverter.Convert(expression);
+    }
+
     /// <summary>
     /// Returns the characters that should be recognized as whitespace.
     /// </summary>
@@ -22,4 +62,6 @@ public abstract class ParseLanguage
     /// not affect parsing but will affect performance; therefore, skipping precedence values is undesireable.
     /// </summary>
     public virtual (int precedence, InfixOperator infixOperator)[]? InfixOperators => null;
+
+    public virtual ExpressionTypeConverter[]? TypeConverters => null;
 }

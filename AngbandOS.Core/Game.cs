@@ -50,6 +50,9 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
+    public readonly Parser ExpressionParser;
+    public readonly ParseLanguage ParseLanguage;
+
     public readonly string[] ShopkeeperAcceptedComments;
     public readonly string[] IllegibleFlavorSyllables;
     public readonly string[] FindQuests;
@@ -1126,7 +1129,7 @@ internal class Game
     /// <summary>
     /// Returns the one-in-probability that found gold is great.
     /// </summary>
-    public readonly Probability GoldItemIsGreatProbability = new PercentProbability(5); // 1 in 20
+    public readonly Probability GoldItemIsGreatProbability;
 
     /// <summary>
     /// Creates a new game.  
@@ -1152,6 +1155,8 @@ internal class Game
             MainSequenceRandomSeed = r.Next(int.MaxValue);
         }
 
+        ParseLanguage = new AngbandOSExpressionParseLanguage(this);
+        ExpressionParser = new Parser(ParseLanguage);
         IsDead = true;
         Map = new Map(this);
 
@@ -1181,10 +1186,7 @@ internal class Game
             }
             GoldFactories = goldFactoryList.ToArray();
         }
-        if (gameConfiguration.GoldItemIsGreatProbabilityExpression != null)
-        {
-            GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression);
-        }
+        GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
 
         ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
         HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
@@ -2157,7 +2159,7 @@ internal class Game
         int goldType = ((DieRoll(ObjectLevel + 2) + 2) / 2) - 1;
 
         // A great find has some probability.
-        if (GoldItemIsGreatProbability.Test(this))
+        if (GoldItemIsGreatProbability.Test())
         {
             goldType += DieRoll(ObjectLevel + 1);
         }
@@ -8045,12 +8047,12 @@ internal class Game
             }
         }
         // There's a chance of breakage if we hit a creature
-        Probability chanceToBreak = hitBody ? missile.BreakageChanceProbability : new FalseProbability();
+        Probability chanceToBreak = hitBody ? missile.BreakageChanceProbability : new FalseProbability(this);
 
         // If we hit with a potion, the potion might affect the creature
         if (missile.QuaffTuple != null)
         {
-            if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test(this))
+            if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test())
             {
                 MsgPrint($"The {missileName} shatters!");
                 if (missile.Smash(1, y, x))
@@ -8064,11 +8066,11 @@ internal class Game
                 }
                 return;
             }
-            chanceToBreak = new FalseProbability();
+            chanceToBreak = new FalseProbability(this);
         }
 
         // Drop the item on the floor
-        DropNear(missile, chanceToBreak.Percentage, y, x);
+        DropNear(missile, (int)chanceToBreak.GetPercentage(), y, x);
     }
 
     public void RunScript(string scriptName)
@@ -17698,8 +17700,7 @@ internal class Game
 
     public Expression ParseExpression(string expression)
     {
-        Parser parser = new Parser(new AngbandOSExpressionParseLanguage(this));
-        return parser.ParseExpression(expression);
+        return ExpressionParser.ParseExpression(expression);
     }
 
     public Expression? ParseNullableExpression(string? expression)
@@ -17728,47 +17729,9 @@ internal class Game
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Probability ParseProbabilityExpression(string expression)
+    public Probability ParseProbabilityExpression(string probabilityExpression)
     {
-        if (expression.Trim() == "1")
-        {
-            return new TrueProbability();
-        }
-        if (expression.Trim() == "0")
-        {
-            return new FalseProbability();
-        }
-        // Test for simple integer value.
-        if (double.TryParse(expression, out double intValue))
-        {
-            int percent = (int)Math.Round(intValue * 100);
-            return new PercentProbability(percent);
-        }
-        Regex regEx = new Regex(@"(\d*)\/(\d*)");
-        Match match = regEx.Match(expression);
-        if (match.Success)
-        {
-            if (!int.TryParse(match.Groups[1].Value, out int numerator))
-            {
-                throw new Exception("Invalid numerator in fractional probability expression.");
-            }
-            if (!int.TryParse(match.Groups[2].Value, out int denominator))
-            {
-                throw new Exception("Invalid denominator in fractional probability expression.");
-            }
-            if (denominator == 0)
-            {
-                throw new Exception("Invalid denominator value of zero in fractional probability expression.");
-            }
-            double doubleValue = (double)numerator / (double)denominator;
-            if (doubleValue > 1)
-            {
-                throw new Exception("Fractional probability cannot be greater than 1.");
-            }
-            int percent = (int)Math.Round(doubleValue * 100);
-
-            return new PercentProbability(percent);
-        }
-        throw new Exception("Unrecognized probability expression.");
+        Expression expression = ParseExpression(probabilityExpression);
+        return new Probability(this, expression);
     }
 }

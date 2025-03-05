@@ -47,7 +47,7 @@ public class DivisionExpression : InfixExpression
                 }
                 else
                 {
-                    return new DecimalExpression(dividendIntegerExpression.Value / divisorIntegerExpression.Value);
+                    return new DecimalExpression((double)dividendIntegerExpression.Value / (double)divisorIntegerExpression.Value);
                 }
             }
             throw new Exception($"Dividend does not support {dividend.GetType().Name}");

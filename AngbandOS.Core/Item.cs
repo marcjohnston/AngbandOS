@@ -2349,7 +2349,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // The factory may have specified a breakage
-        if (power == 0 && _factory.BreaksDuringEnchantmentProbability != null && _factory.BreaksDuringEnchantmentProbability.Test(Game))
+        if (power == 0 && _factory.BreaksDuringEnchantmentProbability != null && _factory.BreaksDuringEnchantmentProbability.Test())
         {
             power = -1;
         }
