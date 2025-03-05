@@ -23,7 +23,7 @@ public class DivisionExpression : InfixExpression
             }
             else if (dividend is IntegerExpression dividendIntegerExpression)
             {
-                return new DecimalExpression(dividendIntegerExpression.Value / divisorDecimalExpression.Value);
+                return new DecimalExpression((double)dividendIntegerExpression.Value / divisorDecimalExpression.Value);
             }
             throw new Exception($"Dividend does not support {dividend.GetType().Name}");
         }
@@ -35,7 +35,7 @@ public class DivisionExpression : InfixExpression
             }
             else if (dividend is DecimalExpression dividendDecimalExpression)
             {
-                return new DecimalExpression(dividendDecimalExpression.Value / divisorIntegerExpression.Value);
+                return new DecimalExpression(dividendDecimalExpression.Value / (double)divisorIntegerExpression.Value);
             }
             else if (dividend is IntegerExpression dividendIntegerExpression)
             {
