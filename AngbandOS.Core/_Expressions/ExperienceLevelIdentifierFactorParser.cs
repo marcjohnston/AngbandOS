@@ -18,6 +18,6 @@ internal class ExperienceLevelIdentifierFactorParser : IdentifierFactorParser
     public override string Identifier => "x";
     protected override Expression GenerateExpression(string matchedIdentifier)
     {
-        return new ExperienceLevelIdentifierExpression(Game);
+        return new ExperienceLevelIdentifierExpression(Game, Identifier);
     }
 }

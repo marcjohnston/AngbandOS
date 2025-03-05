@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Expressions;
 internal class ExperienceLevelIdentifierExpression : IdentifierExpression
 {
     public readonly Game Game;
-    public ExperienceLevelIdentifierExpression(Game game) : base("x")
+    public ExperienceLevelIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
     {
         Game = game;
     }

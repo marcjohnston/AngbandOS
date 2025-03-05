@@ -18,6 +18,6 @@ internal class DifficultyIdentifierFactorParser : IdentifierFactorParser
     public override string Identifier => "d";
     protected override Expression GenerateExpression(string matchedIdentifier)
     {
-        return new DifficultyIdentifierExpression(Game);
+        return new DifficultyIdentifierExpression(Game, Identifier);
     }
 }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Expressions;
 internal class DifficultyIdentifierExpression : IdentifierExpression
 {
     public readonly Game Game;
-    public DifficultyIdentifierExpression(Game game) : base("x")
+    public DifficultyIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
     {
         Game = game;
     }
