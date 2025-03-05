@@ -15,6 +15,7 @@ internal class ExperienceLevelIdentifierExpression : IdentifierExpression
     {
         Game = game;
     }
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
     public override Expression Compute()
     {
         return new IntegerExpression(Game.ExperienceLevel.IntValue);

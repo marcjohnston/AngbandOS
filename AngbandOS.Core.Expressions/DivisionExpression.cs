@@ -6,6 +6,7 @@ public class DivisionExpression : InfixExpression
     public DivisionExpression(Expression dividend, Expression divisor) : base(dividend, divisor) { }
     public Expression Dividend => Operand1;
     public Expression Divisor => Operand2;
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
     public override Expression Compute()
     {
         Expression dividend = Dividend.Compute();

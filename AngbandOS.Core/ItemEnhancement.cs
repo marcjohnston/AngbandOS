@@ -163,22 +163,22 @@ internal abstract class ItemEnhancement : IGetKey
     public virtual void Bind()
     {
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
-        BonusStrengthRoll = Game.ParseNullableExpression(BonusStrengthRollExpression);
-        BonusIntelligenceRoll = Game.ParseNullableExpression(BonusIntelligenceRollExpression);
-        BonusWisdomRoll = Game.ParseNullableExpression(BonusWisdomRollExpression);
-        BonusDexterityRoll = Game.ParseNullableExpression(BonusDexterityRollExpression);
-        BonusConstitutionRoll = Game.ParseNullableExpression(BonusConstitutionRollExpression);
-        BonusCharismaRoll = Game.ParseNullableExpression(BonusCharismaRollExpression);
-        BonusStealthRoll = Game.ParseNullableExpression(BonusStealthRollExpression);
-        BonusSearchRoll = Game.ParseNullableExpression(BonusSearchRollExpression);
-        BonusInfravisionRoll = Game.ParseNullableExpression(BonusInfravisionRollExpression);
-        BonusTunnelRoll = Game.ParseNullableExpression(BonusTunnelRollExpression);
-        BonusAttacksRoll = Game.ParseNullableExpression(BonusAttacksRollExpression);
-        BonusSpeedRoll = Game.ParseNullableExpression(BonusSpeedRollExpression);
+        BonusStrengthRoll = Game.ParseNullableNumericExpression(BonusStrengthRollExpression);
+        BonusIntelligenceRoll = Game.ParseNullableNumericExpression(BonusIntelligenceRollExpression);
+        BonusWisdomRoll = Game.ParseNullableNumericExpression(BonusWisdomRollExpression);
+        BonusDexterityRoll = Game.ParseNullableNumericExpression(BonusDexterityRollExpression);
+        BonusConstitutionRoll = Game.ParseNullableNumericExpression(BonusConstitutionRollExpression);
+        BonusCharismaRoll = Game.ParseNullableNumericExpression(BonusCharismaRollExpression);
+        BonusStealthRoll = Game.ParseNullableNumericExpression(BonusStealthRollExpression);
+        BonusSearchRoll = Game.ParseNullableNumericExpression(BonusSearchRollExpression);
+        BonusInfravisionRoll = Game.ParseNullableNumericExpression(BonusInfravisionRollExpression);
+        BonusTunnelRoll = Game.ParseNullableNumericExpression(BonusTunnelRollExpression);
+        BonusAttacksRoll = Game.ParseNullableNumericExpression(BonusAttacksRollExpression);
+        BonusSpeedRoll = Game.ParseNullableNumericExpression(BonusSpeedRollExpression);
 
-        BonusArmorClassRoll = Game.ParseNullableExpression(BonusArmorClassRollExpression);
-        BonusHitRoll = Game.ParseNullableExpression(BonusHitRollExpression);
-        BonusDamageRoll = Game.ParseNullableExpression(BonusDamageRollExpression);
+        BonusArmorClassRoll = Game.ParseNullableNumericExpression(BonusArmorClassRollExpression);
+        BonusHitRoll = Game.ParseNullableNumericExpression(BonusHitRollExpression);
+        BonusDamageRoll = Game.ParseNullableNumericExpression(BonusDamageRollExpression);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);

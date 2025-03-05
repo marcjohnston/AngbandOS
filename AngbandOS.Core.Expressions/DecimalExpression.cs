@@ -9,6 +9,7 @@ public class DecimalExpression : Expression
         Value = value;
     }
 
+    public override Type[] ResultTypes => new Type[] { typeof(DecimalExpression) };
     public override Expression Compute()
     {
         return this;

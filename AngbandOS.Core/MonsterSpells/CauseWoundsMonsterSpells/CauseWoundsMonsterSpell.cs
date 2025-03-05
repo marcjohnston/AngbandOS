@@ -15,7 +15,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
     public override void Bind()
     {
         base.Bind();
-        DamageRoll = Game.ParseExpression(DamageRollExpression);
+        DamageRoll = Game.ParseNumericExpression(DamageRollExpression);
     }
 
     public override bool IsAttack => true;

@@ -8,6 +8,7 @@ public class SubtractionExpression : InfixExpression
     public SubtractionExpression(Expression minuend, Expression subtrahend) : base(minuend, subtrahend) { }
     public Expression Minuend => Operand1;
     public Expression Subtrahend => Operand2;
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
     public override Expression Compute()
     {
         Expression minuend = Minuend.Compute();

@@ -9,6 +9,8 @@ public abstract class Expression
     /// <returns></returns>
     public abstract Expression Compute();
 
+    public abstract Type[] ResultTypes { get; }
+
     /// <summary>
     /// Computes and returns the result.  A test to ensure the result is of a specific type <typeparamref name="TExpression"/> is also performed.
     /// </summary>

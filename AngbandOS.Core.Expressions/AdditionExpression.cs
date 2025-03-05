@@ -8,6 +8,7 @@ public class AdditionExpression : InfixExpression
     public AdditionExpression(Expression addend1, Expression addend2) : base(addend1, addend2) { }
     public Expression Addend1 => Operand1;
     public Expression Addend2 => Operand2;
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
     public override Expression Compute()
     {
         Expression addend1 = Addend1.Compute();

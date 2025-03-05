@@ -7,6 +7,7 @@ public class MultiplicationExpression : InfixExpression
     public Expression Factor1 => Operand1;
     public Expression Factor2 => Operand2;
 
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
     public override Expression Compute()
     {
         Expression factor1 = Factor1.Compute();

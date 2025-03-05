@@ -17725,40 +17725,78 @@ internal class Game
         }
     }
 
-    public Expression ParseExpression(string expression)
+    /// <summary>
+    /// Parses an expression and returns a <see cref="BooleanExpression"/> expression.  An exception is thrown, if the result does not result in an <see cref="BooleanExpression"/> expression.
+    /// </summary>
+    /// <param name="expressionText"></param>
+    /// <returns></returns>
+    public Expression ParseBooleanExpression(string expressionText)
     {
-        return ExpressionParser.ParseExpression(expression);
-    }
-
-    public Expression? ParseNullableExpression(string? expression)
-    {
-        if (expression == null)
+        Expression expression = ExpressionParser.ParseExpression(expressionText);
+        if (!expression.ResultTypes.Contains(typeof(BooleanExpression)))
         {
-            return null;
+            throw new Exception($"Invalid expression type expected.  {expressionText} does not return a boolean result.");
         }
-
-        return ParseExpression(expression);
-    }
-
-    public Probability? ParseNullableProbabilityExpression(string? expression)
-    {
-        if (expression == null)
-        {
-            return null;
-        }
-        return ParseProbabilityExpression(expression);
+        return expression;
     }
 
     /// <summary>
-    /// Returns a probability from an expression.  Recognized expressions are: 1 => will always happen, 0 => will never happen, 0.0 ... 1.0 => percentage of success and x/y where x and y are
-    /// both integers, y is not 0 and x <= y.
+    /// Parses an expression and returns either an <see cref="IntegerExpression"/> or <see cref="DecimalExpression"/> expression.  An exception is thrown, if the result does not result in an
+    /// <see cref="IntegerExpression"/> or <see cref="DecimalExpression"/> expression.
+    /// </summary>
+    /// <param name="expressionText"></param>
+    /// <returns></returns>
+    public Expression ParseNumericExpression(string expressionText)
+    {
+        Expression expression = ExpressionParser.ParseExpression(expressionText);
+        if (!expression.ResultTypes.Contains(typeof(IntegerExpression)) && !expression.ResultTypes.Contains(typeof(DecimalExpression)))
+        {
+            throw new Exception($"Invalid expression type expected.  {expressionText} does not return a numeric result.");
+        }
+        return expression;
+    }
+
+    /// <summary>
+    /// Parses an expression and returns either an <see cref="IntegerExpression"/> or <see cref="DecimalExpression"/> expression.  If the expression is null, null is returned.  An exception is thrown,
+    /// if the result does not result in an <see cref="IntegerExpression"/> or <see cref="DecimalExpression"/> expression.
+    /// </summary>
+    /// <param name="expressionText"></param>
+    /// <returns></returns>
+    public Expression? ParseNullableNumericExpression(string? expressionText)
+    {
+        if (expressionText == null)
+        {
+            return null;
+        }
+
+        return ParseNumericExpression(expressionText);
+    }
+
+    /// <summary>
+    /// Parses a numeric expression and returns a <see cref="Probability"/>.  If the expression is null, null is returned.  The expression must return a <see cref="DecimalExpression"/> value between
+    /// 0 and 1.  
+    /// </summary>
+    /// <param name="expressionText"></param>
+    /// <returns></returns>
+    public Probability? ParseNullableProbabilityExpression(string? expressionText)
+    {
+        if (expressionText == null)
+        {
+            return null;
+        }
+        return ParseProbabilityExpression(expressionText);
+    }
+
+    /// <summary>
+    /// Parses a numeric expression and returns a <see cref="Probability"/>.  The expression must return a <see cref="DecimalExpression"/> value between
+    /// 0 and 1.  
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Probability ParseProbabilityExpression(string probabilityExpression)
+    public Probability ParseProbabilityExpression(string expressionText)
     {
-        Expression expression = ParseExpression(probabilityExpression);
+        Expression expression = ParseNumericExpression(expressionText);
         return new Probability(this, expression);
     }
 }

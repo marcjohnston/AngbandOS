@@ -10,6 +10,7 @@ internal class DiceRollExpression : InfixExpression
     }
     public Expression Dice => base.Operand1;
     public Expression Sides => base.Operand2;
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
     public override Expression Compute()
     {
         IntegerExpression diceIntegerExpression = Game.ComputeIntegerExpression(Dice);

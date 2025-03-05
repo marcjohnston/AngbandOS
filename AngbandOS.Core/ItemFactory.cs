@@ -183,7 +183,7 @@ internal abstract class ItemFactory : ItemEnhancement
             List<(int, Expression)> massProduceTuplesList = new List<(int, Expression)>();
             foreach ((int cost, string rollExpression) in MassProduceBindingTuples)
             {
-                Expression rollResult = Game.ParseExpression(rollExpression);
+                Expression rollResult = Game.ParseNumericExpression(rollExpression);
                 (int, Expression) newTuple = (cost, rollResult);
                 massProduceTuplesList.Add(newTuple);
             }
@@ -196,7 +196,7 @@ internal abstract class ItemFactory : ItemEnhancement
             }
         }
 
-        InitialGoldPiecesRoll = Game.ParseExpression(InitialGoldPiecesRollExpression);
+        InitialGoldPiecesRoll = Game.ParseNumericExpression(InitialGoldPiecesRollExpression);
         EatScript = Game.SingletonRepository.GetNullable<IEatOrQuaffScript>(EatScriptBindingKey);
 
         // If there is no DescriptionSyntax, use the Name as the default.
@@ -216,7 +216,7 @@ internal abstract class ItemFactory : ItemEnhancement
         if (AimingBindingTuple != null)
         {
             IAimWandScript identifableDirectionalScript = Game.SingletonRepository.Get<IAimWandScript>(AimingBindingTuple.Value.ActivationScriptName);
-            Expression initialChargeCountRoll = Game.ParseExpression(AimingBindingTuple.Value.InitialChargesCountRollExpression);
+            Expression initialChargeCountRoll = Game.ParseNumericExpression(AimingBindingTuple.Value.InitialChargesCountRollExpression);
             int perChargeValue = AimingBindingTuple.Value.PerChargeValue;
             int manaValue = AimingBindingTuple.Value.ManaValue;
             AimingTuple = (identifableDirectionalScript, initialChargeCountRoll, perChargeValue, manaValue);
@@ -240,7 +240,7 @@ internal abstract class ItemFactory : ItemEnhancement
         if (ZapBindingTuple != null)
         {
             IZapRodScript identifiedAndUsedScriptItemDirection = Game.SingletonRepository.Get<IZapRodScript>(ZapBindingTuple.Value.ScriptName);
-            Expression roll = Game.ParseExpression(ZapBindingTuple.Value.TurnsToRecharge);
+            Expression roll = Game.ParseNumericExpression(ZapBindingTuple.Value.TurnsToRecharge);
             bool requiresAiming = ZapBindingTuple.Value.RequiresAiming;
             int manaEquivalent = ZapBindingTuple.Value.ManaEquivalent;
             ZapTuple = (identifiedAndUsedScriptItemDirection, roll, requiresAiming, manaEquivalent);
@@ -259,7 +259,7 @@ internal abstract class ItemFactory : ItemEnhancement
         if (UseBindingTuple != null)
         {
             IReadScrollOrUseStaffScript useScript = Game.SingletonRepository.Get<IReadScrollOrUseStaffScript>(UseBindingTuple.Value.UseScriptBindingKey);
-            Expression initialChargeRoll = Game.ParseExpression(UseBindingTuple.Value.InitialChargesRollExpression);
+            Expression initialChargeRoll = Game.ParseNumericExpression(UseBindingTuple.Value.InitialChargesRollExpression);
             int chargeValue = UseBindingTuple.Value.PerChargeValue;
             int manaEquivalent = UseBindingTuple.Value.ManaEquivalent;
             UseTuple = (useScript, initialChargeRoll, chargeValue, manaEquivalent);
@@ -1893,7 +1893,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
     /// <summary>
     /// Returns the roll expression to determine the initial gold pieces that are given to the player when the item is picked up.  This property must conform to the <see cref="Roll"/> syntax for parsing.  
-    /// See <see cref="Game.ParseExpression"/> for syntax details.  This property is used to bind the <see cref="InitialGoldPiecesRoll"/> property during the bind phase.
+    /// See <see cref="Game.ParseNumericExpression"/> for syntax details.  This property is used to bind the <see cref="InitialGoldPiecesRoll"/> property during the bind phase.
     /// </summary>
     protected virtual string InitialGoldPiecesRollExpression => "0";
 

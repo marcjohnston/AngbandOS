@@ -9,6 +9,7 @@ public class BooleanExpression : Expression
         Value = value;
     }
 
+    public override Type[] ResultTypes => new Type[] { typeof(BooleanExpression) };
     public override Expression Compute()
     {
         return this;

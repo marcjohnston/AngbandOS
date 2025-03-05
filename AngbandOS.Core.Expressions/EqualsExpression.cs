@@ -6,6 +6,7 @@ public class EqualsExpression : InfixExpression
     public EqualsExpression(Expression leftExpression, Expression rightExpression) : base(leftExpression, rightExpression) { }
     public Expression LeftExpression => Operand1;
     public Expression RightExpression => Operand2;
+    public override Type[] ResultTypes => new Type[] { typeof(BooleanExpression) };
     public override Expression Compute()
     {
         Expression leftExpression = LeftExpression.Compute();

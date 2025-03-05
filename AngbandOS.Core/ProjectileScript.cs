@@ -19,8 +19,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     public void Bind()
     {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);
-        DamageRoll = Game.ParseExpression(DamageRollExpression);
-        RadiusRoll = Game.ParseExpression(RadiusRollExpression);
+        DamageRoll = Game.ParseNumericExpression(DamageRollExpression);
+        RadiusRoll = Game.ParseNumericExpression(RadiusRollExpression);
     }
 
     /// <summary>

@@ -9,6 +9,7 @@ public class IntegerExpression : Expression
         Value = value;
     }
 
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
     public override Expression Compute()
     {
         return this;
