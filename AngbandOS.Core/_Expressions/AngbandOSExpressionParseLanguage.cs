@@ -23,7 +23,8 @@ internal class AngbandOSExpressionParseLanguage : ParseLanguage
         new BooleanFactorParser(),
         new DecimalFactorParser(), // A decimal value needs to be parsed before an integer attempt is made.
         new IntegerFactorParser(),
-        new ExperienceLevelIdentifierFactorParser(Game)
+        new ExperienceLevelIdentifierFactorParser(Game),
+        new DifficultyIdentifierFactorParser(Game)
     };
 
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]

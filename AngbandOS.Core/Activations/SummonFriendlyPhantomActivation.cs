@@ -17,7 +17,7 @@ internal class SummonFriendlyPhantomActivation : Activation
     
     public override string? PreActivationMessage => "You summon a phantasmal servant.";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(SummonFriendlyPhantomScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(FriendlyPhantomSummonScript);
 
     protected override string RechargeTimeRollExpression => "1d200+200";
 

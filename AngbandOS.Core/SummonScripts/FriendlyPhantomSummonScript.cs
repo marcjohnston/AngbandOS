@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.SummonScripts;
 
 [Serializable]
-internal class FriendlyAnimalSummonScript : SummonScript
+internal class FriendlyPhantomSummonScript : SummonScript
 {
-    private FriendlyAnimalSummonScript(Game game) : base(game) { }
-    protected override string MonsterFilterBindingKey => nameof(AnimalRangerMonsterFilter);
+    private FriendlyPhantomSummonScript(Game game) : base(game) { }
 
-    protected override string LevelRollExpression => "X";
+    protected override string MonsterFilterBindingKey => nameof(PhantomMonsterFilter);
+
+    protected override string LevelRollExpression => "d";
     public override bool Pet => true;
-    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }
