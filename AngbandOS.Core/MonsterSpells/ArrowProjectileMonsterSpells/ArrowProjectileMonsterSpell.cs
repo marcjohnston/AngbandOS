@@ -45,7 +45,7 @@ internal abstract class ArrowProjectileMonsterSpell : ProjectileMonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected override int Damage(Monster monster) => DamageRoll.Compute<IntegerExpression>().Value;
+    protected override int Damage(Monster monster) => Game.ComputeIntegerExpression(DamageRoll).Value;
 
     protected override string ProjectileKey => nameof(ArrowProjectile);
 

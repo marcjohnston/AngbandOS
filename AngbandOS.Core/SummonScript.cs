@@ -64,7 +64,7 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
         {
             Game.MsgPrint(PreMessages);
         }
-        IntegerExpression levelResult = LevelRoll.Compute<IntegerExpression>();
+        IntegerExpression levelResult = Game.ComputeIntegerExpression(LevelRoll);
         BooleanExpression summonGroup = Group.Compute<BooleanExpression>();
         bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, summonGroup.Value, Pet);
         if (success && SuccessMessages != null)

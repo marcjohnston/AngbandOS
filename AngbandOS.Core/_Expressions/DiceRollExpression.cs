@@ -12,8 +12,8 @@ internal class DiceRollExpression : InfixExpression
     public Expression Sides => base.Operand2;
     public override Expression Compute()
     {
-        IntegerExpression diceIntegerExpression = Dice.Compute<IntegerExpression>();
-        IntegerExpression sidesIntegerExpression = Sides.Compute<IntegerExpression>();
+        IntegerExpression diceIntegerExpression = Game.ComputeIntegerExpression(Dice);
+        IntegerExpression sidesIntegerExpression = Game.ComputeIntegerExpression(Sides);
         Random random = Game.UseRandom;
         int sum = 0;
         for (int rollIndex = 0; rollIndex < diceIntegerExpression.Value; rollIndex++)

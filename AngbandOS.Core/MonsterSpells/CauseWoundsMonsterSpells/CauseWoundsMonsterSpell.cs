@@ -62,7 +62,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
             string monsterDescription = monster.IndefiniteVisibleName;
 
             Game.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
-            int damage = DamageRoll.Compute<IntegerExpression>().Value;
+            int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
             Game.TakeHit(damage, monsterDescription);
 
             if (TimedBleeding > 0)
@@ -89,7 +89,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
         }
         else
         {
-            int damage = DamageRoll.Compute<IntegerExpression>().Value;
+            int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
             target.TakeDamageFromAnotherMonster(damage, out _, " is destroyed.");
         }
     }

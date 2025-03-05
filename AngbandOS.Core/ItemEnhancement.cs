@@ -28,22 +28,22 @@ internal abstract class ItemEnhancement : IGetKey
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
 
-        itemCharacteristics.BonusStrength = BonusStrengthRoll == null ? 0 : BonusStrengthRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusIntelligence = BonusIntelligenceRoll == null ? 0 : BonusIntelligenceRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusWisdom = BonusWisdomRoll == null ? 0 : BonusWisdomRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusDexterity = BonusDexterityRoll == null ? 0 : BonusDexterityRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusConstitution = BonusConstitutionRoll == null ? 0 : BonusConstitutionRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusCharisma = BonusCharismaRoll == null ? 0 : BonusCharismaRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusStealth = BonusStealthRoll == null ? 0 : BonusStealthRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusSearch = BonusSearchRoll == null ? 0 : BonusSearchRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusInfravision = BonusInfravisionRoll == null ? 0 : BonusInfravisionRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusTunnel = BonusTunnelRoll == null ? 0 : BonusTunnelRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusAttacks = BonusAttacksRoll == null ? 0 : BonusAttacksRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusSpeed = BonusSpeedRoll == null ? 0 : BonusSpeedRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusStrength = BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value;
+        itemCharacteristics.BonusIntelligence = BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value;
+        itemCharacteristics.BonusWisdom = BonusWisdomRoll == null ? 0 : Game.ComputeIntegerExpression(BonusWisdomRoll).Value;
+        itemCharacteristics.BonusDexterity = BonusDexterityRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDexterityRoll).Value;
+        itemCharacteristics.BonusConstitution = BonusConstitutionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusConstitutionRoll).Value;
+        itemCharacteristics.BonusCharisma = BonusCharismaRoll == null ? 0 : Game.ComputeIntegerExpression(BonusCharismaRoll).Value;
+        itemCharacteristics.BonusStealth = BonusStealthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStealthRoll).Value;
+        itemCharacteristics.BonusSearch = BonusSearchRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSearchRoll).Value;
+        itemCharacteristics.BonusInfravision = BonusInfravisionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusInfravisionRoll).Value;
+        itemCharacteristics.BonusTunnel = BonusTunnelRoll == null ? 0 : Game.ComputeIntegerExpression(BonusTunnelRoll).Value;
+        itemCharacteristics.BonusAttacks = BonusAttacksRoll == null ? 0 : Game.ComputeIntegerExpression(BonusAttacksRoll).Value;
+        itemCharacteristics.BonusSpeed = BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value;
 
-        itemCharacteristics.BonusArmorClass = BonusArmorClassRoll == null ? 0 : BonusArmorClassRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusHit = BonusHitRoll == null ? 0 : BonusHitRoll.Compute<IntegerExpression>().Value;
-        itemCharacteristics.BonusDamage = BonusDamageRoll == null ? 0 : BonusDamageRoll.Compute<IntegerExpression>().Value;
+        itemCharacteristics.BonusArmorClass = BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value;
+        itemCharacteristics.BonusHit = BonusHitRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitRoll).Value;
+        itemCharacteristics.BonusDamage = BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value;
 
         itemCharacteristics.Activation = Activation;
         itemCharacteristics.Aggravate = Aggravate;

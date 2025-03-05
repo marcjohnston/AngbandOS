@@ -35,9 +35,4 @@ internal class AngbandOSExpressionParseLanguage : ParseLanguage
         (2, new DivisionInfixOperator()),
         (3, new DiceRollInfixOperator(Game)) // This is the most significant operation
     };
-
-    public override ExpressionTypeConverter[]? TypeConverters => new ExpressionTypeConverter[]
-    {
-        new IntegerToDecimalExpressionTypeConverter()
-    };
 }

@@ -62,8 +62,7 @@ internal abstract class Activation : IGetKey
         UsedResult usedResult = ActivationCancellableScript.ExecuteActivateItemScript(item);
         if (usedResult.IsUsed)
         {
-            IntegerExpression result = RechargeTimeRoll.Compute<IntegerExpression>();
-            item.ActivationRechargeTimeRemaining = result.Value;
+            item.ActivationRechargeTimeRemaining = Game.ComputeIntegerExpression(RechargeTimeRoll).Value;
         }
         return usedResult;
     }

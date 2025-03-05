@@ -52,6 +52,8 @@ internal class Game
 
     public readonly Parser ExpressionParser;
     public readonly ParseLanguage ParseLanguage;
+    public readonly IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter;
+    public readonly DecimalToIntegerExpressionTypeConverter DecimalToIntegerExpressionTypeConverter;
 
     public readonly string[] ShopkeeperAcceptedComments;
     public readonly string[] IllegibleFlavorSyllables;
@@ -1132,6 +1134,28 @@ internal class Game
     public readonly Probability GoldItemIsGreatProbability;
 
     /// <summary>
+    /// Returns an <see cref="IntegerExpression"/> from an expression computation.  A type-conversion from a decimal result to an integer result is performed as needed.  If the result is not
+    /// a valid <see cref="IntegerExpression"/> an exception is thrown.
+    /// </summary>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    public IntegerExpression ComputeIntegerExpression(Expression expression)
+    {
+        return expression.Compute<IntegerExpression>(DecimalToIntegerExpressionTypeConverter);
+    }
+
+    /// <summary>
+    /// Returns an <see cref="DecimalExpression"/> from an expression computation.  A type-conversion from a integer result to an decimal result is performed as needed.  If the result is not
+    /// a valid <see cref="DecimalExpression"/> an exception is thrown.
+    /// </summary>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    public DecimalExpression ComputeDecimalExpression(Expression expression)
+    {
+        return expression.Compute<DecimalExpression>(IntegerToDecimalExpressionTypeConverter);
+    }
+
+    /// <summary>
     /// Creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
@@ -1157,6 +1181,9 @@ internal class Game
 
         ParseLanguage = new AngbandOSExpressionParseLanguage(this);
         ExpressionParser = new Parser(ParseLanguage);
+        IntegerToDecimalExpressionTypeConverter = new IntegerToDecimalExpressionTypeConverter();
+        DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
+
         IsDead = true;
         Map = new Map(this);
 

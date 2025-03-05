@@ -118,7 +118,7 @@ internal class ZapRodScript : Script, IScript, ICastSpellScript, IGameCommandScr
         // The player may be able to cancel the zap.
         if (identifiedAndUsedResult.IsUsed)
         {
-            item.RodRechargeTimeRemaining = item.ZapTuple.Value.TurnsToRecharge.Compute<IntegerExpression>().Value;
+            item.RodRechargeTimeRemaining = Game.ComputeIntegerExpression(item.ZapTuple.Value.TurnsToRecharge).Value;
         }
         else
         {

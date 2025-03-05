@@ -2605,7 +2605,7 @@ internal sealed class Item : IComparable<Item>
 
         // Now we retrieve all of the characteristics from the factory.
         NutritionalValue = _factory.InitialNutritionalValue;        
-        GoldPieces = _factory.InitialGoldPiecesRoll.Compute<IntegerExpression>().Value;
+        GoldPieces = Game.ComputeIntegerExpression(_factory.InitialGoldPiecesRoll).Value;
         TurnsOfLightRemaining = _factory.InitialTurnsOfLight;
         Weight = _factory.Weight;
         Characteristics.BonusHit = _factory.BonusHit;
@@ -2619,12 +2619,12 @@ internal sealed class Item : IComparable<Item>
 
         if (_factory.AimingTuple != null)
         {
-            WandChargesRemaining = _factory.AimingTuple.Value.InitialChargesCountRoll.Compute<IntegerExpression>().Value;
+            WandChargesRemaining = Game.ComputeIntegerExpression(_factory.AimingTuple.Value.InitialChargesCountRoll).Value;
         }
 
         if (_factory.UseTuple != null)
         {
-            StaffChargesRemaining = _factory.UseTuple.Value.InitialCharges.Compute<IntegerExpression>().Value;
+            StaffChargesRemaining = Game.ComputeIntegerExpression(_factory.UseTuple.Value.InitialCharges).Value;
         }
     }
     #endregion

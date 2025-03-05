@@ -25,14 +25,8 @@ internal class Probability
     /// <exception cref="Exception"></exception>
     public double GetPercentage()
     {
-        // Compute the expression value.
-        Expression result = _expression.Compute();
-        DecimalExpression? decimalResult = Game.ParseLanguage.ConvertTo<DecimalExpression>(result);
-        if (decimalResult == null)
-        {
-            throw new Exception("Probability expression value type not recognized.");
-        }
-        return decimalResult.Value;
+        // Compute the expression value.  Integer expressions can be converted to decimals.
+        return Game.ComputeDecimalExpression(_expression).Value;
     }
 
     /// <summary>

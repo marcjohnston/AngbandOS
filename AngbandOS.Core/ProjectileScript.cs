@@ -197,8 +197,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
 
     public bool ExecuteUnfriendlyScript(int who, int y, int x)
     {
-        int damage = DamageRoll.Compute<IntegerExpression>().Value;
-        int radius = RadiusRoll.Compute<IntegerExpression>().Value;
+        int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
+        int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
         bool affectsMonster = Projectile.Fire(who, radius, y, x, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
         return SmashingOnPetsTurnsUnfriendly;
     }
@@ -269,8 +269,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
                 {
                     RenderPreMessage();
                     bool anyIdentified = false;
-                    int damage = DamageRoll.Compute<IntegerExpression>().Value;
-                    int radius = RadiusRoll.Compute<IntegerExpression>().Value;
+                    int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
+                    int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
                     for (int i = 1; i < Game.MonsterMax; i++)
                     {
                         Monster mPtr = Game.Monsters[i];
@@ -296,8 +296,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
                 }
             case NonDirectionalProjectileModeEnum.AtPlayerLocation:
                 {
-                    int damage = DamageRoll.Compute<IntegerExpression>().Value;
-                    int radius = RadiusRoll.Compute<IntegerExpression>().Value;
+                    int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
+                    int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
                     RenderPreMessage();
                     bool affectsMonster = Projectile.Fire(0, radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
                     RenderPostMessage();
@@ -312,8 +312,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     private IdentifiedResult ExecuteDirectionalWithPreAndPostMessages(int direction)
     {
         RenderPreMessage();
-        int radius = RadiusRoll.Compute<IntegerExpression>().Value;
-        int damage = DamageRoll.Compute<IntegerExpression>().Value;
+        int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
+        int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
         bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
         bool isIdentified = Identified ?? hitSuccess;
         RenderPostMessage();
@@ -322,8 +322,8 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
 
     private IdentifiedResult ExecuteTargeted(int direction)
     {
-        int radius = RadiusRoll.Compute<IntegerExpression>().Value;
-        int damage = DamageRoll.Compute<IntegerExpression>().Value;
+        int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
+        int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
         bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
         bool isIdentified = Identified ?? hitSuccess;
         return new IdentifiedResult(isIdentified);

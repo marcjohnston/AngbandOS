@@ -317,7 +317,7 @@ internal abstract class ItemFactory : ItemEnhancement
             {
                 if (itemCost <= cost)
                 {
-                    IntegerExpression result = expression.Compute<IntegerExpression>();
+                    IntegerExpression result = Game.ComputeIntegerExpression(expression);
                     return result.Value;
                 }
             }

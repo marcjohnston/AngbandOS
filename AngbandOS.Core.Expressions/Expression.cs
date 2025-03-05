@@ -15,12 +15,22 @@ public abstract class Expression
     /// <typeparam name="TExpression"></typeparam>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public TExpression Compute<TExpression>()
+    public TExpression Compute<TExpression>(params ExpressionTypeConverter[] typeConverters) where TExpression : Expression
     {
-        Expression result = Compute();
-        if (result is TExpression castResult)
+        Expression expression = Compute();
+        if (expression is TExpression castResult)
         {
             return castResult;
+        }
+        if (typeConverters != null)
+        {
+            foreach (ExpressionTypeConverter typeConverter in typeConverters)
+            {
+                if (typeConverter.ToExpressionType == typeof(TExpression))
+                {
+                    return (TExpression)typeConverter.Convert(expression);
+                }
+            }
         }
         throw new Exception($"Invalid result from Expression.Compute.  A result of type {typeof(TExpression).Name} was expected.");
     }
