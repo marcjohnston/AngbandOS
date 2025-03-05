@@ -52,7 +52,7 @@ internal class ControlAnimalProjectile : Projectile
         else
         {
             note = " is tamed!";
-            mPtr.SmFriendly = true;
+            mPtr.IsPet = true;
         }
         dam = 0;
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);

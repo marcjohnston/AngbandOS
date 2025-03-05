@@ -97,7 +97,7 @@ internal class DominationProjectile : Projectile
                 if (dam > 29 && Game.DieRoll(100) < dam)
                 {
                     note = " is in your thrall!";
-                    mPtr.SmFriendly = true;
+                    mPtr.IsPet = true;
                 }
                 else
                 {

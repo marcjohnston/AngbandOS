@@ -44,7 +44,7 @@ internal class ControlUndeadProjectile : Projectile
         else
         {
             note = " is in your thrall!";
-            mPtr.SmFriendly = true;
+            mPtr.IsPet = true;
         }
         dam = 0;
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);

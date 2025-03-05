@@ -14,7 +14,7 @@ internal class BizarreBPet1xSummonScript : SummonScript
 
     protected override string MonsterFilterBindingKey => nameof(Bizarre2MonsterFilter);
     public override bool Pet => true;
-    public override bool Group => false;
+    protected override string GroupBooleanExpression => "false";
     protected override string LevelRollExpression => "X";
     public override string[]? PreMessages => new string[] { "You concentrate on the Fool card..." };
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };

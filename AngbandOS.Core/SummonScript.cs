@@ -32,6 +32,7 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
     {
         MonsterFilter = Game.SingletonRepository.Get<MonsterFilter>(MonsterFilterBindingKey);
         LevelRoll = Game.ParseExpression(LevelRollExpression);
+        Group = Game.ParseExpression(GroupBooleanExpression);
     }
 
     /// <summary>
@@ -40,9 +41,15 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
     public virtual bool Pet => false;
 
     /// <summary>
-    /// Returns true, if a group of monsters or pets can be summon; false, otherwise.  Returns true, by default.
+    /// Returns a boolean expression that is computed to determine whether the summoning of the monster will produce a group of like-monsters.  Returns true, by default.
     /// </summary>
-    public virtual bool Group => true;
+    protected virtual string GroupBooleanExpression => "true";
+
+    /// <summary>
+    /// Returns true, if a group of monsters or pets will be summon; false, otherwise.
+    /// </summary>
+    public Expression Group { get; private set; }
+
     protected abstract string MonsterFilterBindingKey { get; }
     public MonsterFilter MonsterFilter { get; private set; }
     protected abstract string LevelRollExpression { get; }
@@ -58,7 +65,8 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
             Game.MsgPrint(PreMessages);
         }
         IntegerExpression levelResult = LevelRoll.Compute<IntegerExpression>();
-        bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, Group, Pet);
+        BooleanExpression summonGroup = Group.Compute<BooleanExpression>();
+        bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, summonGroup.Value, Pet);
         if (success && SuccessMessages != null)
         {
             Game.MsgPrint(SuccessMessages);

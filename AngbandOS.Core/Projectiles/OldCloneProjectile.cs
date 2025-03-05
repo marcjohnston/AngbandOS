@@ -34,7 +34,7 @@ internal class OldCloneProjectile : Projectile
         {
             obvious = true;
         }
-        if (mPtr.SmFriendly && Game.DieRoll(3) != 1)
+        if (mPtr.IsPet && Game.DieRoll(3) != 1)
         {
             isFriend = true;
         }

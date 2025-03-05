@@ -58,7 +58,7 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
         for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
         {
             monster = Game.Monsters[petCtr];
-            if (monster.SmFriendly)
+            if (monster.IsPet)
             {
                 pets++;
             }
@@ -162,7 +162,7 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
             for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
             {
                 monster = Game.Monsters[petCtr];
-                if (monster.SmFriendly)
+                if (monster.IsPet)
                 {
                     bool deleteThis = false;
                     if (allPets)

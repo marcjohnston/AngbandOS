@@ -774,7 +774,7 @@ internal class JournalScript : Script, IScript, ICastSpellScript, IGameCommandSc
         for (int petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
         {
             Monster mPtr = Game.Monsters[petCtr];
-            if (!mPtr.SmFriendly)
+            if (!mPtr.IsPet)
             {
                 continue;
             }

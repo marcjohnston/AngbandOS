@@ -4797,11 +4797,11 @@ internal class Game
                     mPtr.Speed = rPtr.Speed + 10;
                     speed = true;
                 }
-                if (mPtr.SmFriendly)
+                if (mPtr.IsPet)
                 {
                     if (DieRoll(2) == 1)
                     {
-                        mPtr.SmFriendly = false;
+                        mPtr.IsPet = false;
                     }
                 }
             }
@@ -6965,7 +6965,7 @@ internal class Game
         if (tile.MonsterIndex != 0 && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-            if (monster.SmFriendly && !(ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) && (GridPassable(newY, newX) || canPassWalls))
+            if (monster.IsPet && !(ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) && (GridPassable(newY, newX) || canPassWalls))
             {
                 // Wake up the monster, and track it
                 monster.SleepLevel = 0;
@@ -7342,7 +7342,7 @@ internal class Game
             HealthTrack(tile.MonsterIndex);
         }
         // if the monster is our friend and we're not confused, we can avoid hitting it
-        if (monster.SmFriendly && !(StunTimer.Value != 0 || ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible))
+        if (monster.IsPet && !(StunTimer.Value != 0 || ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible))
         {
             MsgPrint($"You stop to avoid hitting {monsterName}.");
             return;
@@ -7585,10 +7585,10 @@ internal class Game
                     break;
                 }
                 // Hitting a friend gets it angry
-                if (monster.SmFriendly)
+                if (monster.IsPet)
                 {
                     MsgPrint($"{monsterName} gets angry!");
-                    monster.SmFriendly = false;
+                    monster.IsPet = false;
                 }
                 // The monster might have an aura that hurts the player
                 TouchZapPlayer(monster);
@@ -8029,11 +8029,11 @@ internal class Game
                     {
                         // Let the player know what happens to the monster
                         MessagePain(monster, damage);
-                        if (monster.SmFriendly && missile.QuaffTuple == null)
+                        if (monster.IsPet && missile.QuaffTuple == null)
                         {
                             string mName = monster.Name;
                             MsgPrint($"{mName} gets angry!");
-                            monster.SmFriendly = false;
+                            monster.IsPet = false;
                         }
                         if (fear && monster.IsVisible)
                         {
@@ -8057,11 +8057,11 @@ internal class Game
                 MsgPrint($"The {missileName} shatters!");
                 if (missile.Smash(1, y, x))
                 {
-                    if (Map.Grid[y][x].MonsterIndex != 0 && Monsters[Map.Grid[y][x].MonsterIndex].SmFriendly)
+                    if (Map.Grid[y][x].MonsterIndex != 0 && Monsters[Map.Grid[y][x].MonsterIndex].IsPet)
                     {
                         string mName = Monsters[Map.Grid[y][x].MonsterIndex].Name;
                         MsgPrint($"{mName} gets angry!");
-                        Monsters[Map.Grid[y][x].MonsterIndex].SmFriendly = false;
+                        Monsters[Map.Grid[y][x].MonsterIndex].IsPet = false;
                     }
                 }
                 return;
@@ -8525,10 +8525,10 @@ internal class Game
                 damage = 0;
             }
             // If it's a friend, it will get angry
-            if (monster.SmFriendly)
+            if (monster.IsPet)
             {
                 MsgPrint($"{monsterName} gets angry!");
-                monster.SmFriendly = false;
+                monster.IsPet = false;
             }
             // Apply damage of the correct type to the monster
             switch (mutation.MutationAttackType)
@@ -8683,7 +8683,7 @@ internal class Game
                 continue;
             }
             // Keep count of how many are our friends
-            if (monster.SmFriendly)
+            if (monster.IsPet)
             {
                 TotalFriends++;
                 TotalFriendLevels += monster.Race.Level;
@@ -8770,7 +8770,7 @@ internal class Game
             // If there's another monster in the way and it is friendly, give up
             if (distance != 0 && Map.Grid[y][x].MonsterIndex > 0)
             {
-                if (!Monsters[Map.Grid[y][x].MonsterIndex].SmFriendly)
+                if (!Monsters[Map.Grid[y][x].MonsterIndex].IsPet)
                 {
                     break;
                 }
@@ -12878,7 +12878,7 @@ internal class Game
                         else
                         {
                             string c = mPtr.SmCloned ? " (clone)" : "";
-                            string a = mPtr.SmFriendly ? " (allied) " : " ";
+                            string a = mPtr.IsPet ? " (allied) " : " ";
                             outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
                             MainForm.MoveCursorTo(y, x);
@@ -16347,7 +16347,7 @@ internal class Game
         List<Monster> list = new List<Monster>();
         foreach (Monster monster in Monsters)
         {
-            if (monster.SmFriendly)
+            if (monster.IsPet)
             {
                 list.Add(monster);
             }
@@ -16588,9 +16588,9 @@ internal class Game
         return false;
     }
 
-    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool charm)
+    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet)
     {
-        if (!PlaceMonsterOne(y, x, rPtr, slp, charm))
+        if (!PlaceMonsterOne(y, x, rPtr, slp, pet))
         {
             return false;
         }
@@ -16610,11 +16610,11 @@ internal class Game
                     break;
                 }
                 MonsterRace race = SingletonRepository.Get<MonsterRace>(z);
-                PlaceMonsterOne(ny, nx, race, slp, charm);
+                PlaceMonsterOne(ny, nx, race, slp, pet);
                 if (race.Friends ||
                     rPtr.EscortsGroup)
                 {
-                    PlaceMonsterGroup(ny, nx, z, slp, charm);
+                    PlaceMonsterGroup(ny, nx, z, slp, pet);
                 }
             }
         }
@@ -16624,7 +16624,7 @@ internal class Game
         }
         if (rPtr.Friends)
         {
-            PlaceMonsterGroup(y, x, rPtr.Index, slp, charm);
+            PlaceMonsterGroup(y, x, rPtr.Index, slp, pet);
         }
         return true;
     }
@@ -16687,9 +16687,9 @@ internal class Game
     /// <param name="lev"></param>
     /// <param name="monsterFilter"></param>
     /// <param name="groupOk"></param>
-    /// <param name="friendly"></param>
+    /// <param name="pet"></param>
     /// <returns>True, if a monster was summoned; false, otherwise.</returns>
-    public bool SummonSpecific(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk, bool friendly)
+    public bool SummonSpecific(int y1, int x1, int lev, MonsterFilter? monsterFilter, bool groupOk, bool pet)
     {
         int i;
         int x = x1;
@@ -16718,7 +16718,7 @@ internal class Game
             return false;
         }
         MonsterRace race = SingletonRepository.Get<MonsterRace>(rIdx);
-        if (!PlaceMonsterAux(y, x, race, false, groupOk, false))
+        if (!PlaceMonsterAux(y, x, race, false, groupOk, pet))
         {
             return false;
         }
@@ -16884,7 +16884,7 @@ internal class Game
             if ((mPtr.IndividualMonsterFlags & Constants.MflagView) == 0)
             {
                 mPtr.IndividualMonsterFlags |= Constants.MflagView;
-                if (!mPtr.SmFriendly)
+                if (!mPtr.IsPet)
                 {
                     Disturb(true);
                 }
@@ -16895,7 +16895,7 @@ internal class Game
             if ((mPtr.IndividualMonsterFlags & Constants.MflagView) != 0)
             {
                 mPtr.IndividualMonsterFlags &= ~Constants.MflagView;
-                if (!mPtr.SmFriendly)
+                if (!mPtr.IsPet)
                 {
                     Disturb(true);
                 }
@@ -17048,7 +17048,7 @@ internal class Game
         DangerRating = old;
     }
 
-    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool charm)
+    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
     {
         // Monster must be provided.
         if (rPtr == null)
@@ -17136,9 +17136,9 @@ internal class Game
         mPtr.StunLevel = 0;
         mPtr.ConfusionLevel = 0;
         mPtr.FearLevel = 0;
-        if (charm)
+        if (pet)
         {
-            mPtr.SmFriendly = true;
+            mPtr.IsPet = true;
         }
         mPtr.SleepLevel = 0;
         if (slp && rPtr.Sleep != 0)

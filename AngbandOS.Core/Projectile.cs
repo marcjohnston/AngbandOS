@@ -593,12 +593,12 @@ internal abstract class Projectile : IGetKey
         dam = (dam + r) / (r + 1);
 
         // Attempt to turn friendly monsters against their owner, if the owner attacks them.
-        bool isFriendly = mPtr.SmFriendly;
+        bool isFriendly = mPtr.IsPet;
         if (who == 0 && isFriendly && ProjectileAngersMonster(mPtr))
         {
             string mName = mPtr.Name;
             Game.MsgPrint($"{mName} gets angry!");
-            mPtr.SmFriendly = false;
+            mPtr.IsPet = false;
         }
 
         bool notice = AffectMonster(who, mPtr, dam, r);
@@ -725,7 +725,7 @@ internal abstract class Projectile : IGetKey
             mPtr.Health -= dam;
             if (mPtr.Health < 0)
             {
-                bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
+                bool sad = mPtr.IsPet && !mPtr.IsVisible;
                 Game.MonsterDeath(mPtr);
                 Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 if (string.IsNullOrEmpty(note) == false)

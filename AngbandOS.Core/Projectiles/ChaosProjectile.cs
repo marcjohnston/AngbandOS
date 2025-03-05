@@ -102,7 +102,7 @@ internal class ChaosProjectile : Projectile
         if (doPoly && Game.DieRoll(90) > rPtr.Level)
         {
             note = " is unaffected!";
-            bool charm = mPtr.SmFriendly;
+            bool charm = mPtr.IsPet;
             int tmp = Game.PolymorphMonsterRace(mPtr.Race);
             if (tmp != mPtr.Race.Index)
             {

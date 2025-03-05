@@ -49,7 +49,7 @@ internal class CharmProjectile : Projectile
         else
         {
             note = " suddenly seems friendly!";
-            mPtr.SmFriendly = true;
+            mPtr.IsPet = true;
         }
         dam = 0;
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);

@@ -94,7 +94,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         bool playerIsBlind = Game.BlindnessTimer.Value != 0;
-        bool friendly = monster.SmFriendly;
+        bool friendly = monster.IsPet;
         int count = 0;
 
         MonsterFilter? monsterFilter = MonsterSelector?.GetMonsterFilter(monster.Race);

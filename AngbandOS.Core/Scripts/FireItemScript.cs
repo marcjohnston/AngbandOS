@@ -167,11 +167,11 @@ internal class FireItemScript : Script, IScript, ICastSpellScript, IGameCommandS
                             Game.HealthTrack(tile.MonsterIndex);
                         }
                         // Note that pets only get angry if they see us and we see them
-                        if (monster.SmFriendly)
+                        if (monster.IsPet)
                         {
                             monsterName = monster.Name;
                             Game.MsgPrint($"{monsterName} gets angry!");
-                            monster.SmFriendly = false;
+                            monster.IsPet = false;
                         }
                     }
                     // Work out the damage done

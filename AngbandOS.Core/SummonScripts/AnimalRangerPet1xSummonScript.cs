@@ -13,7 +13,7 @@ internal class AnimalRangerPet1xSummonScript : SummonScript
     private AnimalRangerPet1xSummonScript(Game game) : base(game) { } // This object is a singleton
 
     protected override string MonsterFilterBindingKey => nameof(AnimalRangerMonsterFilter);
-    public override bool Group => false;
+    protected override string GroupBooleanExpression => "false";
     public override bool Pet => true;
     protected override string LevelRollExpression => "X";
     public override string[]? PreMessages => new string[] { "You concentrate on the image of an animal..." };

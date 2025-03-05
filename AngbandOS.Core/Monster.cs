@@ -141,21 +141,21 @@ internal class Monster : IItemContainer
     /// <summary>
     /// Returns the true, if the monster is friendly; false, otherwise.
     /// </summary>
-    private bool _smFriendly;
+    private bool _isPet;
 
     /// <summary>
     /// Returns the true, if the monster is friendly; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
     /// property, when the tracked monster health changes.
     /// </summary>
-    public bool SmFriendly
+    public bool IsPet
     {
         get
         {
-            return _smFriendly;
+            return _isPet;
         }
         set
         {
-            _smFriendly = value;
+            _isPet = value;
             if (Game.TrackedMonster.NullMonsterValue == this)
             {
                 Game.TrackedMonsterChanged.SetChangedFlag();
@@ -503,7 +503,7 @@ internal class Monster : IItemContainer
             }
             else
             {
-                desc = SmFriendly ? "your " : "the ";
+                desc = IsPet ? "your " : "the ";
                 desc += name;
             }
             if ((mode & 0x02) != 0)
@@ -549,7 +549,7 @@ internal class Monster : IItemContainer
             {
                 return;
             }
-            if (SmFriendly && Game.DieRoll(8) != 1)
+            if (IsPet && Game.DieRoll(8) != 1)
             {
                 return;
             }
@@ -765,12 +765,12 @@ internal class Monster : IItemContainer
         }
         // If we're curently friendly and the player aggravates, then stop being friendly
         bool getsAngry = false;
-        if (SmFriendly && Game.HasAggravation)
+        if (IsPet && Game.HasAggravation)
         {
             getsAngry = true;
         }
         // If we're unique, don't stay friendly
-        if (SmFriendly && !Game.IsWizard.BoolValue && Race.Unique)
+        if (IsPet && !Game.IsWizard.BoolValue && Race.Unique)
         {
             getsAngry = true;
         }
@@ -779,7 +779,7 @@ internal class Monster : IItemContainer
         {
             string monsterName = Name;
             Game.MsgPrint($"{monsterName} suddenly becomes hostile!");
-            SmFriendly = false;
+            IsPet = false;
         }
         // Are we afraid?
         if (FearLevel != 0)
@@ -821,7 +821,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're friendly, then our babies are friendly too
-            bool isFriend = SmFriendly;
+            bool isFriend = IsPet;
             // If there's lots of space, then pop out a baby
             if (k < 4 && (k == 0 || Game.RandomLessThan(k * Constants.MonMultAdj) == 0))
             {
@@ -907,7 +907,7 @@ internal class Monster : IItemContainer
             potentialMoves[3] = 5;
         }
         // If we're the player's friend and we're too far away, add sensible moves to our matrix
-        else if (SmFriendly)
+        else if (IsPet)
         {
             if (DistanceFromPlayer > Constants.FollowDistance)
             {
@@ -1131,7 +1131,7 @@ internal class Monster : IItemContainer
                 doMove = false;
                 // If we can trample other monsters on our team and we're tougher than the one
                 // that's in our way...
-                if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && Game.GridPassable(newY, newX) && !(SmFriendly && monsterInTargetTile.SmFriendly))
+                if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && Game.GridPassable(newY, newX) && !(IsPet && monsterInTargetTile.IsPet))
                 {
                     // Remove the other monster and replace it
                     doMove = true;
@@ -1140,7 +1140,7 @@ internal class Monster : IItemContainer
                     monsterInTargetTile = Game.Monsters[tile.MonsterIndex];
                 }
                 // If we're not on the same team as the other monster or we're confused
-                else if (SmFriendly != monsterInTargetTile.SmFriendly || ConfusionLevel != 0)
+                else if (IsPet != monsterInTargetTile.IsPet || ConfusionLevel != 0)
                 {
                     doMove = false;
                     // Attack the monster in the target tile
@@ -1190,7 +1190,7 @@ internal class Monster : IItemContainer
                 // If we are hostile and the player saw us move, then game.Disturb them
                 if (IsVisible && (IndividualMonsterFlags & Constants.MflagView) != 0)
                 {
-                    if (!SmFriendly)
+                    if (!IsPet)
                     {
                         Game.Disturb(false);
                     }
@@ -1204,7 +1204,7 @@ internal class Monster : IItemContainer
                         continue;
                     }
                     // If we pick up or stomp on items, check the item type
-                    if ((Race.TakeItem || Race.KillItem) && !SmFriendly)
+                    if ((Race.TakeItem || Race.KillItem) && !IsPet)
                     {
                         bool willHurt = false;
                         ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
@@ -1295,7 +1295,7 @@ internal class Monster : IItemContainer
             }
         }
         // If all our moves failed, have another go at casting a spell at the player
-        if (!doTurn && !doMove && FearLevel == 0 && !SmFriendly)
+        if (!doTurn && !doMove && FearLevel == 0 && !IsPet)
         {
             if (TryCastingASpellAgainstPlayer())
             {
@@ -1536,7 +1536,7 @@ internal class Monster : IItemContainer
             return false;
         }
         // No spells on the player if they're our friend
-        if (SmFriendly)
+        if (IsPet)
         {
             return false;
         }
@@ -1710,7 +1710,7 @@ internal class Monster : IItemContainer
     /// <returns> True if we cast a spell, false otherwise </returns>
     private bool TryCastingASpellAgainstAnotherMonster()
     {
-        bool friendly = SmFriendly;
+        bool friendly = IsPet;
 
         // Can't cast a spell if we're confused
         if (ConfusionLevel != 0)
@@ -1751,7 +1751,7 @@ internal class Monster : IItemContainer
             }
 
             // Don't cast spells on monsters from the same team
-            if (SmFriendly == target.SmFriendly)
+            if (IsPet == target.IsPet)
             {
                 continue;
             }
@@ -2297,7 +2297,7 @@ internal class Monster : IItemContainer
         TrackPlayerByScent(targetLocation);
         // Get the relative move needed to reach our target location
         GridCoordinate desiredRelativeMovement = new GridCoordinate(MapX - targetLocation.X, MapY - targetLocation.Y);
-        if (!SmFriendly)
+        if (!IsPet)
         {
             // If we're a pack animal that can't go through walls
             if (Race.Friends && Race.Animal &&
@@ -2349,7 +2349,7 @@ internal class Monster : IItemContainer
             }
         }
         // If we're an ally then check if we should retreat
-        if (SmFriendly)
+        if (IsPet)
         {
             if (MonsterShouldRetreat())
             {
@@ -2768,7 +2768,7 @@ internal class Monster : IItemContainer
             return false;
         }
         // If we're the player's friend then don't move away from them
-        if (SmFriendly)
+        if (IsPet)
         {
             return false;
         }
@@ -2833,7 +2833,7 @@ internal class Monster : IItemContainer
             return;
         }
         // Friends don't hit friends
-        if (SmFriendly)
+        if (IsPet)
         {
             return;
         }
@@ -3199,7 +3199,7 @@ internal class Monster : IItemContainer
                 {
                     Monster enemy = Game.Monsters[Game.Map.Grid[y][x].MonsterIndex];
                     // Only go for monsters who are awake and on the opposing side
-                    if (enemy.SmFriendly != SmFriendly && enemy.SleepLevel == 0)
+                    if (enemy.IsPet != IsPet && enemy.SleepLevel == 0)
                     {
                         // Add moves directly towards and either side of the enemy based on its
                         // relative location

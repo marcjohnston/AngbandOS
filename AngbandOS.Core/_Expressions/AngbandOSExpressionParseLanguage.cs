@@ -20,6 +20,7 @@ internal class AngbandOSExpressionParseLanguage : ParseLanguage
     public override FactorParser[] FactorParsers => new FactorParser[]
     {
         new ParenthesisFactorParser(),
+        new BooleanFactorParser(),
         new DecimalFactorParser(), // A decimal value needs to be parsed before an integer attempt is made.
         new IntegerFactorParser(),
         new ExperienceLevelIdentifierFactorParser(Game)
@@ -27,11 +28,12 @@ internal class AngbandOSExpressionParseLanguage : ParseLanguage
 
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]
     {
-        (0, new AdditionInfixOperator()),
-        (0, new SubtractionInfixOperator()),
-        (1, new MultiplicationInfixOperator()),
-        (1, new DivisionInfixOperator()),
-        (2, new DiceRollInfixOperator(Game)) // This is the most significant operation
+        (0, new EqualsInfixOperator()),
+        (1, new AdditionInfixOperator()),
+        (1, new SubtractionInfixOperator()),
+        (2, new MultiplicationInfixOperator()),
+        (2, new DivisionInfixOperator()),
+        (3, new DiceRollInfixOperator(Game)) // This is the most significant operation
     };
 
     public override ExpressionTypeConverter[]? TypeConverters => new ExpressionTypeConverter[]

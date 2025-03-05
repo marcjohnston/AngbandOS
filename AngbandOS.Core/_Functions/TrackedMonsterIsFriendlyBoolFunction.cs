@@ -15,6 +15,6 @@ namespace AngbandOS.Core.Functions;
 internal class TrackedMonsterIsFriendlyBoolFunction : BoolFunction
 {
     private TrackedMonsterIsFriendlyBoolFunction(Game game) : base(game) { } // This object is a singleton.
-    public override bool BoolValue => Game.TrackedMonster.Value != null && Game.TrackedMonster.Value.SmFriendly;
+    public override bool BoolValue => Game.TrackedMonster.Value != null && Game.TrackedMonster.Value.IsPet;
     public override string[]? DependencyNames => new string[] { nameof(TrackedMonsterNullableMonsterProperty), nameof(TrackedMonsterChangedProperty) };
 }
