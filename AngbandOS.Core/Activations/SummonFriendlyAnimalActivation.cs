@@ -15,7 +15,7 @@ internal class SummonFriendlyAnimalActivation : Activation
 {
     private SummonFriendlyAnimalActivation(Game game) : base(game) { }
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(SummonFriendlyAnimalScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(FriendlyAnimalSummonScript);
 
     protected override string RechargeTimeRollExpression => "1d300+200";
 
