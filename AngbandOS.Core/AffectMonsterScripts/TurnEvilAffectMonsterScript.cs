@@ -53,7 +53,7 @@ internal class TurnEvilAffectMonsterScript : AffectMonsterScript
         {
             return false;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, doFear);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, doFear);
         return obvious;
     }
 }

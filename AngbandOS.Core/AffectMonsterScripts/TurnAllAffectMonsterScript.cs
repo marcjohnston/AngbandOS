@@ -29,7 +29,7 @@ internal class TurnAllAffectMonsterScript : AffectMonsterScript
             doFear = 0;
         }
         dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, doFear);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, doFear);
         return obvious;
     }
 }

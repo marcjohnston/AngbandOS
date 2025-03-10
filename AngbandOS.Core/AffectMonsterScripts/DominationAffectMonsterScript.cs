@@ -154,7 +154,7 @@ internal class DominationAffectMonsterScript : AffectMonsterScript
             }
             mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, doFear);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, doFear);
         return obvious;
     }
 }
