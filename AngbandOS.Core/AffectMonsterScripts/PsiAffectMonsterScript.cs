@@ -18,7 +18,7 @@ internal class PsiAffectMonsterScript : AffectMonsterScript
         return rPtr.EmptyMind;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         int tmp;
         MonsterRace rPtr = mPtr.Race;

@@ -11,7 +11,7 @@ internal class WaterAffectMonsterScript : AffectMonsterScript
 {
     private WaterAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         bool obvious = false;
         string? note = null;

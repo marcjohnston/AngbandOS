@@ -16,7 +16,7 @@ internal class ControlAnimalAffectMonsterScript : AffectMonsterScript
         return false;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;

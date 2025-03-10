@@ -18,7 +18,7 @@ internal class TurnUndeadAffectMonsterScript : AffectMonsterScript
         return rPtr.Undead;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;

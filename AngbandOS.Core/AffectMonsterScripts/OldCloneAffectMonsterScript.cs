@@ -17,7 +17,7 @@ internal class OldCloneAffectMonsterScript : AffectMonsterScript
         return (Game.DieRoll(8) == 1);
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;

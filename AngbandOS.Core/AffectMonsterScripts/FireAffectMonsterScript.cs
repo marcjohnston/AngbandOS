@@ -11,7 +11,7 @@ internal class FireAffectMonsterScript : AffectMonsterScript
 {
     private FireAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;

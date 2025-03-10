@@ -16,7 +16,7 @@ internal class MakeElderSignAffectMonsterScript : AffectMonsterScript
         return false;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         string? note = null;

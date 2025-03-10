@@ -17,7 +17,7 @@ internal class DispelLivingAffectMonsterScript : AffectMonsterScript
         return !rPtr.Undead && !rPtr.Nonliving;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         bool seen = mPtr.IsVisible;
         bool obvious = false;

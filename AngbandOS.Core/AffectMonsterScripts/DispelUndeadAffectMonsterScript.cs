@@ -17,7 +17,7 @@ internal class DispelUndeadAffectMonsterScript : AffectMonsterScript
         MonsterRace rPtr = mPtr.Race;
         return rPtr.Undead;
     }
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;

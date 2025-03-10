@@ -16,7 +16,7 @@ internal class JamDoorAffectMonsterScript : AffectMonsterScript
         return false;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         string? note = null;
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);

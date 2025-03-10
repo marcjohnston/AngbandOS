@@ -16,7 +16,7 @@ internal class DispelAllAffectMonsterScript : AffectMonsterScript
         return false;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         bool seen = mPtr.IsVisible;
         bool obvious = false;

@@ -18,7 +18,7 @@ internal class LightWeakAffectMonsterScript : AffectMonsterScript
         return rPtr.HurtByLight;
     }
 
-    public override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;

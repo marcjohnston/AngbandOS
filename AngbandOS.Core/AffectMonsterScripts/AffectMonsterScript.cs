@@ -139,7 +139,7 @@ internal abstract class AffectMonsterScript : IGetKey
         }
     }
 
-    public abstract bool Apply(int who, Monster mPtr, int dam, int r);
+    protected abstract bool Apply(int who, Monster mPtr, int dam, int r);
 
     public bool AffectMonster(int who, int r, int y, int x, int dam, ref int projectMn, ref int projectMx, ref int projectMy)
     {
