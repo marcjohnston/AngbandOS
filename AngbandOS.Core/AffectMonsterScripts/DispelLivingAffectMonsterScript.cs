@@ -42,7 +42,7 @@ internal class DispelLivingAffectMonsterScript : AffectMonsterScript
         {
             return false;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
         return obvious;
     }
 }

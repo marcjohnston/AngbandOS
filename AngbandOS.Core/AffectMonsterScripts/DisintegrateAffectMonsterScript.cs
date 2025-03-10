@@ -40,7 +40,7 @@ internal class DisintegrateAffectMonsterScript : AffectMonsterScript
                 dam >>= 3;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
         return obvious;
     }
 }

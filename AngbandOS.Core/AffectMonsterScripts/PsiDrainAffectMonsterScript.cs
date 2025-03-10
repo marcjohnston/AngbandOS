@@ -66,7 +66,7 @@ internal class PsiDrainAffectMonsterScript : AffectMonsterScript
             Game.Mana.IntValue = b;
         }
         string noteDies = " collapses, a mindless husk.";
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
         return obvious;
     }
 }

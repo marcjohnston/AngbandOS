@@ -42,7 +42,7 @@ internal class WallToMudAffectMonsterScript : AffectMonsterScript
         {
             dam = 0;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
         return obvious;
     }
 }

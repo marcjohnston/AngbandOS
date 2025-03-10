@@ -26,7 +26,7 @@ internal class DispelAllAffectMonsterScript : AffectMonsterScript
             obvious = true;
         }
         string? note = " shudders.";
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
         return obvious;
     }
 }
