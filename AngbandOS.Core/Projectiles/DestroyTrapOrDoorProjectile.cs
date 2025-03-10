@@ -60,15 +60,5 @@ internal class DestroyTrapOrDoorProjectile : Projectile
         return obvious;
     }
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        return false;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        string? note = null;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return false;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DestroyTrapOrDoorAffectMonsterScript);
 }

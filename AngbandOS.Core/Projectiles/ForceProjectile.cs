@@ -69,41 +69,7 @@ internal class ForceProjectile : Projectile
         return obvious;
     }
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        int doStun = (Game.DieRoll(15) + r) / (r + 1);
-        if (rPtr.BreatheForce)
-        {
-            note = " resists.";
-            dam *= 3;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
-        {
-            int tmp;
-            if (mPtr.StunLevel != 0)
-            {
-                note = " is more dazed.";
-                tmp = mPtr.StunLevel + (doStun / 2);
-            }
-            else
-            {
-                note = " is dazed.";
-                tmp = doStun;
-            }
-            mPtr.StunLevel = tmp < 200 ? tmp : 200;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(ForceAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

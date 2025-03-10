@@ -14,49 +14,5 @@ internal class TurnEvilProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only evil friends are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.Evil;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        bool skipped = false;
-        int doFear = 0;
-        string? note = null;
-        if (rPtr.Evil)
-        {
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.Evil = true;
-            }
-            if (seen)
-            {
-                obvious = true;
-            }
-            doFear = Game.DiceRoll(3, dam / 2) + 1;
-            if (rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
-            {
-                note = " is unaffected!";
-                obvious = false;
-                doFear = 0;
-            }
-        }
-        else
-        {
-            skipped = true;
-        }
-        dam = 0;
-        if (skipped)
-        {
-            return false;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, doFear);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(TurnEvilAffectMonsterScript);
 }

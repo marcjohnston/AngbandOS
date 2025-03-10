@@ -16,38 +16,5 @@ internal class DispelLivingProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenExpandAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        return !rPtr.Undead && !rPtr.Nonliving;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        bool skipped = false;
-        string? note = null;
-        string? noteDies = null;
-        if (ProjectileAngersMonster(mPtr))
-        {
-            if (seen)
-            {
-                obvious = true;
-            }
-            note = " shudders.";
-            noteDies = " dissolves!";
-        }
-        else
-        {
-            skipped = true;
-            dam = 0;
-        }
-        if (skipped)
-        {
-            return false;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DispelLivingAffectMonsterScript);
 }

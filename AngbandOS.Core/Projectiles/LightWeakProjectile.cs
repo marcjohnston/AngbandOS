@@ -34,38 +34,5 @@ internal class LightWeakProjectile : Projectile
         return obvious;
     }
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only friends that are hurt by light are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.HurtByLight;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        string? noteDies = null;
-        if (rPtr.HurtByLight)
-        {
-            if (seen)
-            {
-                obvious = true;
-            }
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.HurtByLight = true;
-            }
-            note = " cringes from the light!";
-            noteDies = " shrivels away in the light!";
-        }
-        else
-        {
-            dam = 0;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(LightWeakAffectMonsterScript);
 }

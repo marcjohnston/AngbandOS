@@ -75,28 +75,7 @@ internal class FireProjectile : Projectile
         return obvious;
     }
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.ImmuneFire)
-        {
-            note = " resists a lot.";
-            dam /= 9;
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.ImmuneFire = true;
-            }
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(FireAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

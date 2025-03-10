@@ -11,9 +11,6 @@ namespace AngbandOS.Core;
 internal abstract class Projectile : IGetKey
 {
     protected readonly Game Game;
-    protected int ProjectMn; // TODO: These need to be removed
-    protected int ProjectMx; // TODO: These need to be removed
-    protected int ProjectMy; // TODO: These need to be removed
 
     public Projectile(Game game)
     {
@@ -32,7 +29,10 @@ internal abstract class Projectile : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        AffectMonsterScript = Game.SingletonRepository.Get<AffectMonsterScript>(AffectMonsterScriptBindingKey);
+    }
 
     /// <summary>
     /// Returns the graphics to be used while the projectile is in motion; or null, if there is no graphic.  Returns null, by default.
@@ -409,9 +409,9 @@ internal abstract class Projectile : IGetKey
         }
         if (kill)
         {
-            ProjectMn = 0;
-            ProjectMx = 0;
-            ProjectMy = 0;
+            int projectMn = 0;
+            int projectMx = 0;
+            int projectMy = 0;
             dist = 0;
             for (i = 0; i < grids; i++)
             {
@@ -423,7 +423,7 @@ internal abstract class Projectile : IGetKey
                 x = gx[i];
                 if (grids > 1)
                 {
-                    if (AffectMonster(who, dist, y, x, dam))
+                    if (AffectMonsterScript.AffectMonster(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
                     {
                         notice = true;
                     }
@@ -459,17 +459,17 @@ internal abstract class Projectile : IGetKey
                     }
                     else
                     {
-                        if (AffectMonster(who, dist, y, x, dam))
+                        if (AffectMonsterScript.AffectMonster(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
                         {
                             notice = true;
                         }
                     }
                 }
             }
-            if (who == 0 && ProjectMn == 1 && !jump)
+            if (who == 0 && projectMn == 1 && !jump)
             {
-                x = ProjectMx;
-                y = ProjectMy;
+                x = projectMx;
+                y = projectMy;
                 cPtr = Game.Map.Grid[y][x];
                 if (cPtr.MonsterIndex != 0)
                 {
@@ -524,7 +524,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="dam"></param>
     /// <param name="aRad"></param>
     /// <returns></returns>
-    protected virtual bool CheckBounceOffPlayer(int who, int dam, int aRad)
+    protected bool CheckBounceOffPlayer(int who, int dam, int aRad)
     {
         if (Game.HasReflection && aRad == 0 && Game.DieRoll(10) != 1)
         {
@@ -569,61 +569,7 @@ internal abstract class Projectile : IGetKey
     /// <returns></returns>
     protected virtual bool AffectItem(int who, int y, int x) => false;
 
-    protected bool AffectMonster(int who, int r, int y, int x, int dam)
-    {
-        // Get the grid tile for the location in question.
-        GridTile cPtr = Game.Map.Grid[y][x];
-
-        // Check to see if there is a monster at this location.
-        if (cPtr.MonsterIndex == 0)
-        {
-            return false;
-        }
-
-        // Check to see if the monster/player is the monster/player performing the action.
-        if (who != 0 && cPtr.MonsterIndex == who)
-        {
-            return false;
-        }
-
-        // Get a reference to the monster in question.
-        Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
-
-        // Modify the damage based on the distance from the attacker.
-        dam = (dam + r) / (r + 1);
-
-        // Attempt to turn friendly monsters against their owner, if the owner attacks them.
-        bool isFriendly = mPtr.IsPet;
-        if (who == 0 && isFriendly && ProjectileAngersMonster(mPtr))
-        {
-            string mName = mPtr.Name;
-            Game.MsgPrint($"{mName} gets angry!");
-            mPtr.IsPet = false;
-        }
-
-        bool notice = AffectMonster(who, mPtr, dam, r);
-
-        GridTile newGridTile = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
-        Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
-        Game.MainForm.RefreshMapLocation(y, x);
-        ProjectMn++;
-        ProjectMx = mPtr.MapX;
-        ProjectMy = mPtr.MapY;
-
-        return notice;
-    }
-
-    /// <summary>
-    /// Returns true, if the projectile angers a monster and will turn it from being friendly to attacking the player.  Returns true, by default, in
-    /// that all friends will be affected and turn against the player. Return false, to disable the functionality of friends turning against the
-    /// player for all attacks with the projectile.
-    /// </summary>
-    /// <param name="mPtr"></param>
-    /// <returns></returns>
-    protected virtual bool ProjectileAngersMonster(Monster mPtr) // TODO: This return value should be combined with the potion smash and IUnfriendlyScript
-    {
-        return true;
-    }
+    protected AffectMonsterScript AffectMonsterScript { get; private set; }
 
     /// <summary>
     /// Perform any effect needed on a monster and returns true, if the effect was noticed.
@@ -633,7 +579,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="mPtr">Represents the monster to affect.</param>
     /// <param name="r">Represents the distance from the attacker.</param>
     /// <returns></returns>
-    protected abstract bool AffectMonster(int who, Monster mPtr, int dam, int r);
+    protected abstract string AffectMonsterScriptBindingKey { get; }
 
     /// <summary>
     /// Perform any effect needed on the player and returns true, if the effect was noticed.  Disturbs the player and returns true, by default.

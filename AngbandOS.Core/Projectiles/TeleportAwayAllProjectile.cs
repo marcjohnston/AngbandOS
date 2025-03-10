@@ -18,58 +18,5 @@ internal class TeleportAwayAllProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PinkSwirlAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        return false;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        int doDist = 0;
-        string? note = null;
-        bool resistsTele = false;
-        if (rPtr.ResistTeleport)
-        {
-            if (rPtr.Unique)
-            {
-                if (seen)
-                {
-                    rPtr.Knowledge.Characteristics.ResistTeleport = true;
-                }
-                note = " is unaffected!";
-                resistsTele = true;
-            }
-            else if (rPtr.Level > Game.DieRoll(100))
-            {
-                if (seen)
-                {
-                    rPtr.Knowledge.Characteristics.ResistTeleport = true;
-                }
-                note = " resists!";
-                resistsTele = true;
-            }
-        }
-        if (!resistsTele)
-        {
-            if (seen)
-            {
-                obvious = true;
-            }
-            doDist = dam;
-        }
-        if (doDist != 0)
-        {
-            if (seen)
-            {
-                obvious = true;
-            }
-            note = " disappears!";
-            mPtr.TeleportAway(doDist);
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, 0, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(TeleportAwayAllAffectMonsterScript);
 }

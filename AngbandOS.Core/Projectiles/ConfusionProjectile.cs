@@ -16,46 +16,7 @@ internal class ConfusionProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyQuestionAnimation));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        int doConf = (10 + Game.DieRoll(15) + r) / (r + 1);
-        if (rPtr.BreatheConfusion)
-        {
-            note = " resists.";
-            dam *= 2;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        else if (rPtr.ImmuneConfusion)
-        {
-            note = " resists somewhat.";
-            dam /= 2;
-        }
-        if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
-        {
-            int tmp;
-            if (mPtr.ConfusionLevel != 0)
-            {
-                note = " looks more confused.";
-                tmp = mPtr.ConfusionLevel + (doConf / 2);
-            }
-            else
-            {
-                note = " looks confused.";
-                tmp = doConf;
-            }
-            mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(ConfusionAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

@@ -24,16 +24,5 @@ internal class MakeTrapProjectile : Projectile
         return false;
     }
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        return false;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        string? note = null;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return false;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(MakeTrapAffectMonsterScript);
 }

@@ -63,7 +63,7 @@ internal class SingletonRepository
         // Retrieve the singleton by key name.
         if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
         {
-            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.  Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.");
+            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.\n\n1. Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.\n\n2. There is only one private constructor and that it only accepts the Game parameter.\n\n3. The singletons are either loaded fromt the Assembly or the configuration.\n\n");
         }
         return (T)singleton;
     }
@@ -244,6 +244,7 @@ internal class SingletonRepository
         RegisterRepository<IZapRodScript>();
 
         RegisterRepository<ActivationWeightedRandom>();
+        RegisterRepository<AffectMonsterScript>();
         RegisterRepository<Alignment>();
         RegisterRepository<AlterAction>();
         RegisterRepository<Animation>();
@@ -351,6 +352,7 @@ internal class SingletonRepository
         // Load the remaining user-configured singletons from the assembly.
         LoadAllAssemblyTypes<Activation>();
         LoadAllAssemblyTypes<ActivationWeightedRandom>();
+        LoadAllAssemblyTypes<AffectMonsterScript>();
         LoadAllAssemblyTypes<AlterAction>();
         LoadAllAssemblyTypes<ArtifactBias>();
         LoadAllAssemblyTypes<ArtifactBiasWeightedRandom>();

@@ -16,29 +16,7 @@ internal class OldSpeedProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightBlueSwirlAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        return false;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (mPtr.Speed < 150)
-        {
-            mPtr.Speed += 10;
-        }
-        string? note = " starts moving faster.";
-        dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(OldSpeedAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

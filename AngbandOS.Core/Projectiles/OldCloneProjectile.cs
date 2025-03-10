@@ -16,40 +16,5 @@ internal class OldCloneProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(CopperExpandAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // The attack will turn friends 1 in 8 times.
-        return (Game.DieRoll(8) == 1);
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        bool isFriend = false;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (mPtr.IsPet && Game.DieRoll(3) != 1)
-        {
-            isFriend = true;
-        }
-        mPtr.Health = mPtr.MaxHealth;
-        if (mPtr.Speed < 150)
-        {
-            mPtr.Speed += 10;
-        }
-        Monster targetMonster = Game.Monsters[cPtr.MonsterIndex];
-        if (Game.MultiplyMonster(targetMonster, isFriend, true))
-        {
-            note = " spawns!";
-        }
-        dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(OldCloneAffectMonsterScript);
 }

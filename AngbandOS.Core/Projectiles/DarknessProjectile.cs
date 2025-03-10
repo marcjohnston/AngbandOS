@@ -34,32 +34,7 @@ internal class DarknessProjectile : Projectile
         return obvious;
     }
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Invisible friends are not affected by darkness.
-        return mPtr.IsVisible;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.BreatheDark || rPtr.Orc || rPtr.HurtByLight)
-        {
-            note = " resists.";
-            dam *= 2;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DarknessAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

@@ -16,58 +16,7 @@ internal class NukeProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(ChartreuseFlashAnimation));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        bool doPoly = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.ImmunePoison)
-        {
-            note = " resists.";
-            dam *= 3;
-            dam /= Game.DieRoll(6) + 6;
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.ImmunePoison = true;
-            }
-        }
-        else if (Game.DieRoll(3) == 1)
-        {
-            doPoly = true;
-        }
-        if (rPtr.Unique)
-        {
-            doPoly = false;
-        }
-        if (rPtr.Guardian)
-        {
-            doPoly = false;
-        }
-        if (doPoly && Game.DieRoll(90) > rPtr.Level)
-        {
-            note = " is unaffected!";
-            bool charm = mPtr.IsPet;
-            int tmp = Game.PolymorphMonsterRace(mPtr.Race);
-            if (tmp != mPtr.Race.Index)
-            {
-                note = " changes!";
-                dam = 0;
-                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
-                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = Game.Monsters[cPtr.MonsterIndex];
-            }
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(NukeAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

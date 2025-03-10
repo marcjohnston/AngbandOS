@@ -18,28 +18,7 @@ internal class PoisonGasProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenCloudAnimation));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.ImmunePoison)
-        {
-            note = " resists a lot.";
-            dam /= 9;
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.ImmunePoison = true;
-            }
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(PoisonGasAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

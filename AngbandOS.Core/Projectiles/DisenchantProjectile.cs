@@ -16,29 +16,7 @@ internal class DisenchantProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(ChartreuseSplatProjectileGraphic));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.ResistDisenchant)
-        {
-            note = " resists.";
-            dam *= 3;
-            dam /= Game.DieRoll(6) + 6;
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.ResistDisenchant = true;
-            }
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DisenchantAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

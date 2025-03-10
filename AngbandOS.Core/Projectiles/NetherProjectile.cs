@@ -16,47 +16,7 @@ internal class NetherProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlackSplatProjectileGraphic));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.Undead)
-        {
-            note = " is immune.";
-            dam = 0;
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.Undead = true;
-            }
-        }
-        else if (rPtr.ResistNether)
-        {
-            note = " resists.";
-            dam *= 3;
-            dam /= Game.DieRoll(6) + 6;
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.ResistNether = true;
-            }
-        }
-        else if (rPtr.Evil)
-        {
-            dam /= 2;
-            note = " resists somewhat.";
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.Evil = true;
-            }
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(NetherAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

@@ -16,34 +16,5 @@ internal class DispelDemonProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightRedExpandAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only demon friends are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.Demon;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string noteDies = " dissolves!";
-        string? note = null;
-        if (rPtr.Demon)
-        {
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.Demon = true;
-                obvious = true;
-            }
-            note = " shudders.";
-        }
-        else
-        {
-            return false;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DispelDemonAffectMonsterScript);
 }

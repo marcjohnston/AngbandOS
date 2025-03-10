@@ -34,9 +34,5 @@ internal class DarknessWeakProjectile : Projectile
         return obvious;
     }
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        ApplyProjectileDamageToMonster(who, mPtr, dam, null);
-        return false;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DarknessWeakAffectMonsterScript);
 }

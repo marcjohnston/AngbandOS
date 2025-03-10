@@ -14,8 +14,5 @@ namespace AngbandOS.Core.Projectiles;
 internal class NoProjectile : Projectile
 {
     private NoProjectile(Game game) : base(game) { } // This object is a singleton.
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        return false; // The effect is not noticed.
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(NoAffectMonsterScript);
 }

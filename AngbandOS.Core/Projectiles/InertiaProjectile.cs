@@ -16,41 +16,7 @@ internal class InertiaProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(OrangeSplatProjectileGraphic));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.BreatheInertia)
-        {
-            note = " resists.";
-            dam *= 3;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        else
-        {
-            if (rPtr.Unique ||
-                rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
-            {
-                obvious = false;
-            }
-            else
-            {
-                if (mPtr.Speed > 60)
-                {
-                    mPtr.Speed -= 10;
-                }
-                note = " starts moving slower.";
-            }
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(InertiaAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

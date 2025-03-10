@@ -94,38 +94,5 @@ internal class WallToMudProjectile : Projectile
         return obvious;
     }
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only friends that are hurt by rock are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.HurtByRock;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        string? noteDies = null;
-        if (rPtr.HurtByRock)
-        {
-            if (seen)
-            {
-                obvious = true;
-            }
-            if (seen)
-            {
-                rPtr.Knowledge.Characteristics.HurtByRock = true;
-            }
-            note = " loses some skin!";
-            noteDies = " dissolves!";
-        }
-        else
-        {
-            dam = 0;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(WallToMudAffectMonsterScript);
 }

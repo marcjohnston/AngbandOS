@@ -16,34 +16,7 @@ internal class OldSlowProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlueSwirlAnimation));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        if (rPtr.Unique ||
-            rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
-        {
-            note = " is unaffected!";
-            obvious = false;
-        }
-        else
-        {
-            if (mPtr.Speed > 60)
-            {
-                mPtr.Speed -= 10;
-            }
-            note = " starts moving slower.";
-        }
-        dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(OldSlowAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

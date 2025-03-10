@@ -16,35 +16,5 @@ internal class StasisProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(SilverCloudAnimation));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        int doSleep = 0;
-        if (seen)
-        {
-            obvious = true;
-        }
-        string? note = null;
-        if (rPtr.Unique ||
-            rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
-        {
-            note = " is unaffected!";
-            obvious = false;
-        }
-        else
-        {
-            note = " is suspended!";
-            doSleep = 500;
-        }
-        dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        // Put the monster to sleep, if not dead.
-        if (mPtr.Health >= 0 && doSleep != 0)
-        {
-            mPtr.SleepLevel = doSleep;
-        }
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(StasisAffectMonsterScript);
 }

@@ -16,31 +16,7 @@ internal class OldHealProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteSparkleAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr) 
-    {
-        return false;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        if (seen)
-        {
-            obvious = true;
-        }
-        mPtr.SleepLevel = 0;
-        mPtr.Health += dam;
-        if (mPtr.Health > mPtr.MaxHealth)
-        {
-            mPtr.Health = mPtr.MaxHealth;
-        }
-        string? note = " looks healthier.";
-        dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(OldHealAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

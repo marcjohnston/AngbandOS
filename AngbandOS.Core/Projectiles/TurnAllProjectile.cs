@@ -14,25 +14,5 @@ internal class TurnAllProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        int doFear = Game.DiceRoll(3, dam / 2) + 1;
-        if (rPtr.Unique || rPtr.ImmuneFear || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
-        {
-            note = " is unaffected!";
-            obvious = false;
-            doFear = 0;
-        }
-        dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, doFear);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(TurnAllAffectMonsterScript);
 }

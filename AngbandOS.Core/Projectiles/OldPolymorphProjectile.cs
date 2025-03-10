@@ -16,55 +16,5 @@ internal class OldPolymorphProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PurpleSparkleAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // The attack will turn friends 1 in 8 times.
-        return (Game.DieRoll(8) == 1);
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        bool doPoly = true;
-        if (rPtr.Unique || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
-        {
-            note = " is unaffected!";
-            doPoly = false;
-            obvious = false;
-        }
-        dam = 0;
-        if (rPtr.Unique)
-        {
-            doPoly = false;
-        }
-        if (rPtr.Guardian)
-        {
-            doPoly = false;
-        }
-        if (doPoly && Game.DieRoll(90) > rPtr.Level)
-        {
-            note = " is unaffected!";
-            bool charm = mPtr.IsPet;
-            int tmp = Game.PolymorphMonsterRace(mPtr.Race);
-            if (tmp != mPtr.Race.Index)
-            {
-                note = " changes!";
-                dam = 0;
-                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
-                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = Game.Monsters[cPtr.MonsterIndex];
-            }
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(OldPolymorphAffectMonsterScript);
 }

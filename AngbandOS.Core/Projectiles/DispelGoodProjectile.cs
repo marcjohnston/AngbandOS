@@ -16,40 +16,5 @@ internal class DispelGoodProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightWhiteExpandAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only evil friends are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.Evil;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        bool skipped = false;
-        string? note = null;
-        string? noteDies = null;
-        if (!rPtr.Evil)
-        {
-            if (seen)
-            {
-                obvious = true;
-            }
-            note = " shudders.";
-            noteDies = " dissolves!";
-        }
-        else
-        {
-            skipped = true;
-            dam = 0;
-        }
-        if (skipped)
-        {
-            return false;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DispelGoodAffectMonsterScript);
 }

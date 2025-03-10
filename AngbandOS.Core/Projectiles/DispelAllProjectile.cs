@@ -16,22 +16,5 @@ internal class DispelAllProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightPinkExpandAnimation));
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        return false;
-    }
-
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string noteDies = " dissolves!";
-        if (seen)
-        {
-            obvious = true;
-        }
-        string? note = " shudders.";
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(DispelAllAffectMonsterScript);
 }

@@ -70,68 +70,7 @@ internal class ChaosProjectile : Projectile
         return obvious;
     }
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-    {
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
-        MonsterRace rPtr = mPtr.Race;
-        bool seen = mPtr.IsVisible;
-        bool obvious = false;
-        string? note = null;
-        if (seen)
-        {
-            obvious = true;
-        }
-        bool doPoly = true;
-        int doConf = (5 + Game.DieRoll(11) + r) / (r + 1);
-        if (rPtr.BreatheChaos ||
-            (rPtr.Demon && Game.DieRoll(3) == 1))
-        {
-            note = " resists.";
-            dam *= 3;
-            dam /= Game.DieRoll(6) + 6;
-            doPoly = false;
-        }
-        if (rPtr.Unique)
-        {
-            doPoly = false;
-        }
-        if (rPtr.Guardian)
-        {
-            doPoly = false;
-        }
-        if (doPoly && Game.DieRoll(90) > rPtr.Level)
-        {
-            note = " is unaffected!";
-            bool charm = mPtr.IsPet;
-            int tmp = Game.PolymorphMonsterRace(mPtr.Race);
-            if (tmp != mPtr.Race.Index)
-            {
-                note = " changes!";
-                dam = 0;
-                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
-                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = Game.Monsters[cPtr.MonsterIndex];
-            }
-        }
-        else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
-        {
-            int tmp;
-            if (mPtr.ConfusionLevel != 0)
-            {
-                note = " looks more confused.";
-                tmp = mPtr.ConfusionLevel + (doConf / 2);
-            }
-            else
-            {
-                note = " looks confused.";
-                tmp = doConf;
-            }
-            mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
-        }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-        return obvious;
-    }
+    protected override string AffectMonsterScriptBindingKey => nameof(ChaosAffectMonsterScript);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
