@@ -44,7 +44,7 @@ internal class OldCloneAffectMonsterScript : AffectMonsterScript
             note = " spawns!";
         }
         dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

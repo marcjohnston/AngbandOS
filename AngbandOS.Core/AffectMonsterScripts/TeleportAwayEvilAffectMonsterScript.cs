@@ -81,7 +81,7 @@ internal class TeleportAwayEvilAffectMonsterScript : AffectMonsterScript
             mPtr.TeleportAway(doDist);
             cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

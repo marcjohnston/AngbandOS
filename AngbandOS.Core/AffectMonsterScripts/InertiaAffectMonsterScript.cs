@@ -43,7 +43,7 @@ internal class InertiaAffectMonsterScript : AffectMonsterScript
                 note = " starts moving slower.";
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

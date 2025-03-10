@@ -37,7 +37,7 @@ internal class WaterAffectMonsterScript : AffectMonsterScript
                 rPtr.Knowledge.Characteristics.ResistWater = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

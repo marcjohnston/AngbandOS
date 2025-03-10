@@ -33,7 +33,7 @@ internal class OldHealAffectMonsterScript : AffectMonsterScript
         }
         string? note = " looks healthier.";
         dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

@@ -48,7 +48,7 @@ internal class ControlAnimalAffectMonsterScript : AffectMonsterScript
             mPtr.IsPet = true;
         }
         dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

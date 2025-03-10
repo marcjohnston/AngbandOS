@@ -21,7 +21,7 @@ internal class ManaAffectMonsterScript : AffectMonsterScript
         {
             obvious = true;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

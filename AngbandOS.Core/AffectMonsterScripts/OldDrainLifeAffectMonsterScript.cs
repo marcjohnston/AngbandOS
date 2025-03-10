@@ -41,7 +41,7 @@ internal class OldDrainLifeAffectMonsterScript : AffectMonsterScript
             obvious = false;
             dam = 0;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

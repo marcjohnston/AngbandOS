@@ -20,7 +20,7 @@ internal class MakeDoorAffectMonsterScript : AffectMonsterScript
     {
         MonsterRace rPtr = mPtr.Race;
         string? note = null;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return false;
     }
 }

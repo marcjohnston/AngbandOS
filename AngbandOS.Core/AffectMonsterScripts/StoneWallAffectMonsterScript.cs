@@ -16,7 +16,7 @@ internal class StoneWallAffectMonsterScript : AffectMonsterScript
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         string? note = null;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return false;
     }
 }

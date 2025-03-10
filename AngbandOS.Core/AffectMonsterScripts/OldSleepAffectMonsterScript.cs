@@ -42,7 +42,7 @@ internal class OldSleepAffectMonsterScript : AffectMonsterScript
         }
         dam = 0;
 
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
 
         // Put the monster to sleep, if not dead.
         if (mPtr.Health >= 0 && doSleep != 0)

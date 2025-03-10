@@ -30,7 +30,7 @@ internal class FireAffectMonsterScript : AffectMonsterScript
                 rPtr.Knowledge.Characteristics.ImmuneFire = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

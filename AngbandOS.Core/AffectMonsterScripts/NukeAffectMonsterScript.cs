@@ -60,7 +60,7 @@ internal class NukeAffectMonsterScript : AffectMonsterScript
                 mPtr = Game.Monsters[cPtr.MonsterIndex];
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

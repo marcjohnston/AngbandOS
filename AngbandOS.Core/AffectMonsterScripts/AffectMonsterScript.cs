@@ -27,11 +27,6 @@ internal abstract class AffectMonsterScript : IGetKey
         Game = game;
     }
 
-    protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note)
-    {
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-    }
-
     /// <summary>
     /// Returns true, if the projectile angers a monster and will turn it from being friendly to attacking the player.  Returns true, by default, in
     /// that all friends will be affected and turn against the player. Return false, to disable the functionality of friends turning against the

@@ -30,7 +30,7 @@ internal class PoisonGasAffectMonsterScript : AffectMonsterScript
                 rPtr.Knowledge.Characteristics.ImmunePoison = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

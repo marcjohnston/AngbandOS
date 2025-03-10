@@ -31,7 +31,7 @@ internal class DisenchantAffectMonsterScript : AffectMonsterScript
                 rPtr.Knowledge.Characteristics.ResistDisenchant = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

@@ -19,7 +19,7 @@ internal class ArrowAffectMonsterScript : AffectMonsterScript
         {
             obvious = true;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, null);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, null, null, 0);
         return obvious;
     }
 }

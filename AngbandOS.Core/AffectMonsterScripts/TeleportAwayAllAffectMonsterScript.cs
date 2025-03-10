@@ -62,7 +62,7 @@ internal class TeleportAwayAllAffectMonsterScript : AffectMonsterScript
             note = " disappears!";
             mPtr.TeleportAway(doDist);
         }
-        ApplyProjectileDamageToMonster(who, mPtr, 0, note);
+        ApplyProjectileDamageToMonster(who, mPtr, 0, note, null, 0);
         return obvious;
     }
 }

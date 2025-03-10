@@ -49,7 +49,7 @@ internal class StunAffectMonsterScript : AffectMonsterScript
             }
             mPtr.StunLevel = tmp < 200 ? tmp : 200;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

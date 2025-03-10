@@ -31,7 +31,7 @@ internal class PlasmaAffectMonsterScript : AffectMonsterScript
                 rPtr.Knowledge.Characteristics.ResistPlasma = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

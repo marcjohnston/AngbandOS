@@ -18,7 +18,7 @@ internal class DestroyTrapOrDoorAffectMonsterScript : AffectMonsterScript
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
-        ApplyProjectileDamageToMonster(who, mPtr, dam, null);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, null, null, 0);
         return false;
     }
 }

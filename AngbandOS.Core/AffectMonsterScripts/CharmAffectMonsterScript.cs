@@ -49,7 +49,7 @@ internal class CharmAffectMonsterScript : AffectMonsterScript
             mPtr.IsPet = true;
         }
         dam = 0; // Don't do any damage to the charmed monster.
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

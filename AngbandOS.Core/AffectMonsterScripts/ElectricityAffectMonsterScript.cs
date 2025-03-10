@@ -30,7 +30,7 @@ internal class ElectricityAffectMonsterScript : AffectMonsterScript
                 rPtr.Knowledge.Characteristics.ImmuneLightning = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

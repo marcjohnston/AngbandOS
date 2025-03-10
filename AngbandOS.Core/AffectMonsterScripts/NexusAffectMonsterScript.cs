@@ -31,7 +31,7 @@ internal class NexusAffectMonsterScript : AffectMonsterScript
                 rPtr.Knowledge.Characteristics.ResistNexus = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

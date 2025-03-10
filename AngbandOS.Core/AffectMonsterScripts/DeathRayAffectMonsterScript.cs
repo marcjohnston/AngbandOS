@@ -44,7 +44,7 @@ internal class DeathRayAffectMonsterScript : AffectMonsterScript
         {
             dam = Game.ExperienceLevel.IntValue * 200;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }

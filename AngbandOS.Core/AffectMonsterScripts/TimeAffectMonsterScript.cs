@@ -27,7 +27,7 @@ internal class TimeAffectMonsterScript : AffectMonsterScript
             dam *= 3;
             dam /= Game.DieRoll(6) + 6;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious;
     }
 }
