@@ -1411,7 +1411,7 @@ internal abstract class ItemFactory : ItemEnhancement
     public IScriptItemInt? RechargeScript { get; private set; }
 
     public (int, Expression)[]? MassProduceTuples { get; private set; } = null;
-    public Probability? BreaksDuringEnchantmentProbability { get; private set; }
+    public ProbabilityExpression? BreaksDuringEnchantmentProbability { get; private set; }
     public (int[]? Powers, bool? StoreStock, IEnhancementScript[] Scripts)[]? EnchantmentTuples { get; private set; }
 
     /// <summary>
@@ -1427,7 +1427,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// <summary>
     /// Returns the probability that an item that is thrown or fired will break.  This property is bound using the <see cref="BreakageChangeProbabilityExpression"/> property during the bind phase.
     /// </summary>
-    public Probability BreakageChanceProbability { get; private set; }
+    public ProbabilityExpression BreakageChanceProbability { get; private set; }
 
     public (IZapRodScript Script, Expression TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple { get; private set; } = null;
     public ItemClass ItemClass { get; private set; }

@@ -90,7 +90,7 @@ internal class SkeletonRace : Race
             // Spawn a new food item on the floor to make up for the one that will be destroyed
             Item floorItem = item.TakeFromStack(1);
             Game.MsgPrint("The food falls through your jaws!");
-            Game.DropNear(floorItem, -1, Game.MapY.IntValue, Game.MapX.IntValue);
+            Game.DropNear(floorItem, null, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
 

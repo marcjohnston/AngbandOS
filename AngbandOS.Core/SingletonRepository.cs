@@ -289,7 +289,7 @@ internal class SingletonRepository
         RegisterRepository<Mutation>();
         RegisterRepository<Patron>();
         RegisterRepository<Plural>();
-        RegisterRepository<Probability>();
+        RegisterRepository<ProbabilityExpression>();
         RegisterRepository<Projectile>();
         RegisterRepository<ProjectileGraphic>();
         RegisterRepository<ProjectileScript>();
@@ -323,7 +323,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Justification>();
         LoadAllAssemblyTypes<MonsterSelector>();
         LoadAllAssemblyTypes<Function>();
-        LoadAllAssemblyTypes<Probability>();
+        LoadAllAssemblyTypes<ProbabilityExpression>();
         LoadAllAssemblyTypes<Property>();
         LoadAllAssemblyTypes<Timer>();
 

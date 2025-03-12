@@ -1131,7 +1131,7 @@ internal class Game
     /// <summary>
     /// Returns the one-in-probability that found gold is great.
     /// </summary>
-    public readonly Probability GoldItemIsGreatProbability;
+    public readonly ProbabilityExpression GoldItemIsGreatProbability;
 
     /// <summary>
     /// Returns an <see cref="IntegerExpression"/> from an expression computation.  A type-conversion from a decimal result to an integer result is performed as needed.  If the result is not
@@ -3237,14 +3237,14 @@ internal class Game
         foreach (Item oPtr in mPtr.Items)
         {
             oPtr.HoldingMonsterIndex = 0;
-            DropNear(oPtr, -1, y, x);
+            DropNear(oPtr, null, y, x);
         }
         if (mPtr.StolenGold > 0)
         {
 
             Item oPtr = rPtr.GoldItemFactory.GenerateItem();
             oPtr.GoldPieces = mPtr.StolenGold;
-            DropNear(oPtr, -1, y, x);
+            DropNear(oPtr, null, y, x);
         }
         mPtr.Items.Clear();
         if (rPtr.Drop60 && RandomLessThan(100) < 60)
@@ -3296,7 +3296,7 @@ internal class Game
             {
                 // Make gold to drop near the monster.
                 Item qPtr = rPtr.GoldItemFactory.GenerateItem();
-                DropNear(qPtr, -1, y, x);
+                DropNear(qPtr, null, y, x);
                 dumpGold++;
             }
             else
@@ -3306,7 +3306,7 @@ internal class Game
                     Item? qPtr = this.MakeObject(good, great, false);
                     if (qPtr != null)
                     {
-                        DropNear(qPtr, -1, y, x);
+                        DropNear(qPtr, null, y, x);
                         dumpItem++;
                     }
                 }
@@ -3315,7 +3315,7 @@ internal class Game
                     Item? qPtr = this.MakeObject(true, true, false);
                     if (qPtr != null)
                     {
-                        DropNear(qPtr, -1, y, x);
+                        DropNear(qPtr, null, y, x);
                         dumpItem++;
                     }
                 }
@@ -3388,7 +3388,7 @@ internal class Game
                 Item? qPtr = MakeGold();
                 if (qPtr != null)
                 {
-                    DropNear(qPtr, -1, y, x);
+                    DropNear(qPtr, null, y, x);
                 }
             }
             else
@@ -3396,7 +3396,7 @@ internal class Game
                 Item qPtr = MakeObject(false, false, true);
                 if (qPtr != null)
                 {
-                    DropNear(qPtr, -1, y, x);
+                    DropNear(qPtr, null, y, x);
                 }
             }
         }
@@ -4149,7 +4149,7 @@ internal class Game
                 MsgPrint("Your pack overflows!");
                 string oName = oPtr.GetFullDescription(true);
                 MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-                DropNear(oPtr, 0, MapY.IntValue, MapX.IntValue);
+                DropNear(oPtr, null, MapY.IntValue, MapX.IntValue);
                 oPtr.ModifyStackCount(-255);
                 InvenItemDescribe(item);
                 InvenItemOptimize(item);
@@ -8074,7 +8074,7 @@ internal class Game
             }
         }
         // There's a chance of breakage if we hit a creature
-        Probability chanceToBreak = hitBody ? missile.BreakageChanceProbability : new FalseProbability(this);
+        ProbabilityExpression? chanceToBreak = hitBody ? missile.BreakageChanceProbability : null;
 
         // If we hit with a potion, the potion might affect the creature
         if (missile.QuaffTuple != null)
@@ -8093,11 +8093,11 @@ internal class Game
                 }
                 return;
             }
-            chanceToBreak = new FalseProbability(this);
+            chanceToBreak = null;
         }
 
         // Drop the item on the floor
-        DropNear(missile, (int)chanceToBreak.GetPercentage(), y, x);
+        DropNear(missile, chanceToBreak, y, x);
     }
 
     public void RunScript(string scriptName)
@@ -14660,7 +14660,7 @@ internal class Game
         Item qPtr = oPtr.TakeFromStack(amt);
         string oName = qPtr.GetFullDescription(true);
         MsgPrint($"You drop {oName} ({oPtr.Label}).");
-        DropNear(qPtr, 0, MapY.IntValue, MapX.IntValue);
+        DropNear(qPtr, null, MapY.IntValue, MapX.IntValue);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
     }
@@ -14856,7 +14856,7 @@ internal class Game
             {
                 continue;
             }
-            DropNear(qPtr, -1, y1, x1);
+            DropNear(qPtr, null, y1, x1);
         }
     }
 
@@ -14948,7 +14948,7 @@ internal class Game
         return d;
     }
 
-    public void DropNear(Item jPtr, int chance, int y, int x)
+    public void DropNear(Item jPtr, ProbabilityExpression? chance, int y, int x)
     {
         int ty, tx;
         GridTile cPtr;
@@ -14956,7 +14956,7 @@ internal class Game
         bool done = false;
         bool plural = jPtr.StackCount != 1;
         string oName = jPtr.GetDescription(false);
-        if (!jPtr.IsArtifact && RandomLessThan(100) < chance)
+        if (!jPtr.IsArtifact && chance != null && chance.Test())
         {
             string p = plural ? "" : "s";
             MsgPrint($"The {oName} disappear{p}.");
@@ -15085,7 +15085,7 @@ internal class Game
         NoteSpot(by, bx);
         MainForm.RefreshMapLocation(by, bx);
         PlaySound(SoundEffectEnum.Drop);
-        if (chance > 0 && by == MapY.IntValue && bx == MapX.IntValue)
+        if (chance != null && by == MapY.IntValue && bx == MapX.IntValue)
         {
             MsgPrint("You feel something roll beneath your feet.");
         }
@@ -17773,12 +17773,12 @@ internal class Game
     }
 
     /// <summary>
-    /// Parses a numeric expression and returns a <see cref="Probability"/>.  If the expression is null, null is returned.  The expression must return a <see cref="DecimalExpression"/> value between
+    /// Parses a numeric expression and returns a <see cref="ProbabilityExpression"/>.  If the expression is null, null is returned.  The expression must return a <see cref="DecimalExpression"/> value between
     /// 0 and 1.  
     /// </summary>
     /// <param name="expressionText"></param>
     /// <returns></returns>
-    public Probability? ParseNullableProbabilityExpression(string? expressionText)
+    public ProbabilityExpression? ParseNullableProbabilityExpression(string? expressionText)
     {
         if (expressionText == null)
         {
@@ -17788,15 +17788,15 @@ internal class Game
     }
 
     /// <summary>
-    /// Parses a numeric expression and returns a <see cref="Probability"/>.  The expression must return a <see cref="DecimalExpression"/> value between
+    /// Parses a numeric expression and returns a <see cref="ProbabilityExpression"/>.  The expression must return a <see cref="DecimalExpression"/> value between
     /// 0 and 1.  
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Probability ParseProbabilityExpression(string expressionText)
+    public ProbabilityExpression ParseProbabilityExpression(string expressionText)
     {
         Expression expression = ParseNumericExpression(expressionText);
-        return new Probability(this, expression);
+        return new ProbabilityExpression(this, expression);
     }
 }

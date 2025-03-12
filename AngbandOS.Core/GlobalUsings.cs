@@ -54,7 +54,6 @@ global using AngbandOS.Core.MonsterSpells;
 global using AngbandOS.Core.Mutations.ActiveMutations;
 global using AngbandOS.Core.Mutations.PassiveMutations;
 global using AngbandOS.Core.Mutations.RandomMutations;
-global using AngbandOS.Core.Probabilities;
 global using AngbandOS.Core.Projectiles;
 global using AngbandOS.Core.ProjectileScripts; 
 global using AngbandOS.Core.Properties;

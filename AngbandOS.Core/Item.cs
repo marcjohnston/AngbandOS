@@ -276,7 +276,7 @@ internal sealed class Item : IComparable<Item>
     public (IReadScrollOrUseStaffScript UseScript, Expression InitialCharges, int PerChargeValue, int ManaEquivalent)? UseTuple => _factory.UseTuple;
     public (IAimWandScript ActivationScript, Expression InitialChargesCountRoll, int PerChargeValue, int ManaValue)? AimingTuple => _factory.AimingTuple;
     public (IReadScrollOrUseStaffScript ActivationScript, int ManaValue)? ReadTuple => _factory.ReadTuple;
-    public Probability BreakageChanceProbability => _factory.BreakageChanceProbability;
+    public ProbabilityExpression BreakageChanceProbability => _factory.BreakageChanceProbability;
     public int MissileDamageMultiplier => _factory.MissileDamageMultiplier;
     public bool CanBeRead => _factory.CanBeRead;
     public IScriptItemInt? RechargeScript => _factory.RechargeScript;

@@ -37,13 +37,13 @@ internal abstract class ArtifactBias : IGetKey
     {
         if (RandomResistanceTuples != null)
         {
-            List<(ItemTest, Probability, ItemEnhancement, Probability)> randomResistances = new List<(ItemTest, Probability, ItemEnhancement, Probability)>();
+            List<(ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)> randomResistances = new List<(ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)>();
             foreach ((string itemTestName, string itemTestProbabilityExpression, string itemAdditiveBundleName, string moreProbabilityExpression) in RandomResistanceTuples)
             {
                 ItemTest itemTest = Game.SingletonRepository.Get<ItemTest>(itemTestName);
-                Probability itemTestProbability = Game.ParseProbabilityExpression(itemTestProbabilityExpression);
+                ProbabilityExpression itemTestProbability = Game.ParseProbabilityExpression(itemTestProbabilityExpression);
                 ItemEnhancement itemAdditiveBundle = Game.SingletonRepository.Get<ItemEnhancement>(itemAdditiveBundleName);
-                Probability moreProbability = Game.ParseProbabilityExpression(moreProbabilityExpression);
+                ProbabilityExpression moreProbability = Game.ParseProbabilityExpression(moreProbabilityExpression);
                 randomResistances.Add((itemTest, itemTestProbability, itemAdditiveBundle, moreProbability));
             }
             RandomResistances = randomResistances.ToArray();
@@ -63,7 +63,7 @@ internal abstract class ArtifactBias : IGetKey
     public virtual bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics) => false;
 
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
-    public (ItemTest, Probability, ItemEnhancement, Probability)[]? RandomResistances { get; private set; } = null;
+    public (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomResistances { get; private set; } = null;
             
     /// <summary>
     /// Apply resistances to the item and returns true, if additional resistances can applied.  By default, no resistances are applied and false is returned.
@@ -74,7 +74,7 @@ internal abstract class ArtifactBias : IGetKey
     {
         if (RandomResistances != null)
         {
-            foreach ((ItemTest itemTest, Probability itemTestProbability, ItemEnhancement itemEnhancement, Probability moreProbability) in RandomResistances)
+            foreach ((ItemTest itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in RandomResistances)
             {
                 if (itemTestProbability.Test() && itemTest.Test(characteristics))
                 {

@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Probabilities;
+namespace AngbandOS.Core;
 
 [Serializable]
-internal class Probability
+internal class ProbabilityExpression 
 {
     private readonly Game Game;
     private Expression _expression { get; }
-    public Probability(Game game, Expression expression)
+    public ProbabilityExpression(Game game, Expression expression)
     {
         Game = game;
         _expression = expression;

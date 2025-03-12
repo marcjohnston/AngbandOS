@@ -34,7 +34,7 @@ internal abstract class MonsterFilter : IGetKey
     /// </summary>
     protected virtual string? FrequencyProbabilityExpressionText => null;
 
-    protected Probability? FrequencyProbabilityExpression { get; private set; }
+    protected ProbabilityExpression? FrequencyProbabilityExpression { get; private set; }
 
     protected abstract bool Match(Monster mPtr);
 

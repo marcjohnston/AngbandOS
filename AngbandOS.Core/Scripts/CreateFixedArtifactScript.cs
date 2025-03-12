@@ -38,7 +38,7 @@ internal class CreateFixedArtifactScript : Script, IScript, ICastSpellScript
         // Apply the fixed artifact.
         if (qPtr.ApplyFixedArtifact(aPtr))
         {
-            Game.DropNear(qPtr, -1, Game.MapY.IntValue, Game.MapX.IntValue);
+            Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);
             Game.MsgPrint("Allocated.");
         }
     }
