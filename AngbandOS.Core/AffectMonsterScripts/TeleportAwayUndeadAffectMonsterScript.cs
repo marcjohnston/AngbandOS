@@ -11,10 +11,10 @@ internal class TeleportAwayUndeadAffectMonsterScript : AffectMonsterScript
 {
     private TeleportAwayUndeadAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        return false;
-    }
+    /// <summary>
+    /// Returns the null because pets do not become unfriendly when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => null;
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

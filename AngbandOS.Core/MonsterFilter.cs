@@ -11,30 +11,42 @@ namespace AngbandOS.Core;
 internal abstract class MonsterFilter : IGetKey
 {
     protected readonly Game Game;
-
-    protected MonsterFilter(Game game)
+    public MonsterFilter(Game game)
     {
         Game = game;
     }
     public virtual string Key => GetType().Name;
+
     public string GetKey => Key;
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
+    public void Bind()
+    {
+        FrequencyProbabilityExpression = Game.ParseNullableProbabilityExpression(FrequencyProbabilityExpressionText);
+    }
+
     public string ToJson()
     {
         return "";
     }
 
-    public virtual void Bind() { }
-
     /// <summary>
-    /// Returns true, if a monster matches the selector.
+    /// Returns a probability for the frequency in which a match is returned as a match or null, if a match is always returned as a match.
     /// </summary>
-    /// <param name="game"></param>
-    /// <param name="rPtr">The monster race to check.</param>
-    /// <returns></returns>
-    public abstract bool Matches(MonsterRace rPtr);
+    protected virtual string? FrequencyProbabilityExpressionText => null;
+
+    protected Probability? FrequencyProbabilityExpression { get; private set; }
+
+    protected abstract bool Match(Monster mPtr);
+
+    public bool Matches(Monster mPtr)
+    {
+        bool match = Match(mPtr);
+
+        // If it is a match, check the frequency probability.
+        if (match && FrequencyProbabilityExpression != null)
+        {
+            match = FrequencyProbabilityExpression.Test();
+        }
+        return match;
+    }
 }

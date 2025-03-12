@@ -12,7 +12,7 @@ internal class TombDungeon : Dungeon
     private TombDungeon(Game game) : base(game) { }
     public override int BaseOffset => 4;
     public override int MaxLevel => 21;
-    protected override string? BiasMonsterFilterName => nameof(UndeadMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(UndeadMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(TheDisembodiedHandDungeonGuardian),

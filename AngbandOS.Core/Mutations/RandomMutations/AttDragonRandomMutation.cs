@@ -25,11 +25,11 @@ internal class AttDragonRandomMutation : Mutation
         bool dSummon;
         if (base.Game.DieRoll(5) == 1)
         {
-            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(DragonMonsterFilter)), true, true);
+            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DragonMonsterRaceFilter)), true, true);
         }
         else
         {
-            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(DragonMonsterFilter)), true, false);
+            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DragonMonsterRaceFilter)), true, false);
         }
         if (!dSummon)
         {

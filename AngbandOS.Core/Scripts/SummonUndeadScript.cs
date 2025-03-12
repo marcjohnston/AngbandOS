@@ -26,12 +26,12 @@ internal class SummonUndeadScript : Script, IScript, ICastSpellScript
         Game.MsgPrint("You concentrate on the image of an undead creature...");
         if (Game.DieRoll(10) > 3)
         {
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), true, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(UndeadMonsterRaceFilter)), true, true))
             {
                 Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), true, false))
+        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(UndeadMonsterRaceFilter)), true, false))
         {
             Game.MsgPrint("The summoned undead creature gets angry!");
         }

@@ -14,7 +14,7 @@ internal class SerMonsReward : Reward
     public override void GetReward(Patron patron)
     {
         Game.MsgPrint($"{patron.ShortName} rewards you with a servant!");
-        if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter)), false, true))
+        if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(NoUniquesMonsterRaceFilter)), false, true))
         {
             Game.MsgPrint("Nobody ever turns up...");
         }

@@ -31,7 +31,7 @@ internal class DivineInterventionScript : Script, IScript, ICastSpellScript
         Game.RunScript(nameof(OldConfuseAtLos4xProjectileScript));
         Game.RunScript(nameof(TurnAllAtLos4xProjectileScript));
         Game.RunIdentifiedScript(nameof(StasisAtLos4xProjectileScript));
-        Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter)), true, true);
+        Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(CthuloidMonsterRaceFilter)), true, true);
         Game.SuperheroismTimer.AddTimer(Game.DieRoll(25) + 25);
         Game.RestoreHealth(300);
         if (Game.HasteTimer.Value == 0)

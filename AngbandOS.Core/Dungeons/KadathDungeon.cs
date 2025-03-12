@@ -12,7 +12,7 @@ internal class KadathDungeon : Dungeon
     private KadathDungeon(Game game) : base(game) { }
     public override int BaseOffset => 50;
     public override int MaxLevel => 75;
-    protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(NyarlathotepDungeonGuardian),

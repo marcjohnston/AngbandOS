@@ -11,12 +11,10 @@ internal class PsiDrainAffectMonsterScript : AffectMonsterScript
 {
     private PsiDrainAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only stupid friends are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.EmptyMind;
-    }
+    /// <summary>
+    /// Returns the <see cref="EmptyMindMonsterFilter"/> because pets that have no mind will become unfriendly when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(EmptyMindMonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

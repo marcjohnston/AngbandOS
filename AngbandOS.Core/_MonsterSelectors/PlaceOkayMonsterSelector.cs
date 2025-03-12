@@ -12,7 +12,7 @@ internal class PlaceOkayMonsterSelector : MonsterSelector
 {
     private PlaceOkayMonsterSelector(Game game) : base(game) { }
 
-    public override MonsterFilter GetMonsterFilter(MonsterRace monsterRace)
+    public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new PlaceOkaySystemMonsterFilter(Game, monsterRace.Index);
     }

@@ -11,11 +11,10 @@ internal class OldPolymorphAffectMonsterScript : AffectMonsterScript
 {
     private OldPolymorphAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // The attack will turn friends 1 in 8 times.
-        return (Game.DieRoll(8) == 1);
-    }
+    /// <summary>
+    /// Returns the <see cref="Any1In8MonsterFilter"/> because all pets will become unfriendly 1 time in 8 when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(Any1In8MonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

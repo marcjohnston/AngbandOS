@@ -16,7 +16,7 @@ internal class ConfluxDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 20;
-    protected override string? BiasMonsterFilterName => nameof(ElementalMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(ElementalMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(LashaMistressOfWaterDungeonGuardian),

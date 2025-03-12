@@ -30,7 +30,7 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
     public string GetKey => Key;
     public void Bind()
     {
-        MonsterFilter = Game.SingletonRepository.Get<MonsterFilter>(MonsterFilterBindingKey);
+        MonsterFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(MonsterFilterBindingKey);
         LevelRoll = Game.ParseNumericExpression(LevelRollExpression);
         Group = Game.ParseBooleanExpression(GroupBooleanExpression);
     }
@@ -51,7 +51,7 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
     public Expression Group { get; private set; }
 
     protected abstract string MonsterFilterBindingKey { get; }
-    public MonsterFilter MonsterFilter { get; private set; }
+    public MonsterRaceFilter MonsterFilter { get; private set; }
     protected abstract string LevelRollExpression { get; }
     public Expression LevelRoll { get; private set; }
     public virtual string[]? PreMessages => null;

@@ -11,11 +11,10 @@ internal class DarknessAffectMonsterScript : AffectMonsterScript
 {
     private DarknessAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Invisible friends are not affected by darkness.
-        return mPtr.IsVisible;
-    }
+    /// <summary>
+    /// Returns the null if the monster is visible because invisible pets do not become unfriendly when hit with darkness.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(VisibleMonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

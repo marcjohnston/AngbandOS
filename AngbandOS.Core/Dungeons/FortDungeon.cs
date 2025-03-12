@@ -16,7 +16,7 @@ internal class FortDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 5;
-    protected override string? BiasMonsterFilterName => nameof(KoboldMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(KoboldMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(VortTheKoboldQueenDungeonGuardian)

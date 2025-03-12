@@ -283,6 +283,7 @@ internal class SingletonRepository
         RegisterRepository<MartialArtsAttack>();
         RegisterRepository<MonsterFilter>();
         RegisterRepository<MonsterRace>();
+        RegisterRepository<MonsterRaceFilter>();
         RegisterRepository<MonsterSelector>();
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
@@ -376,6 +377,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<ItemTest>();
         LoadAllAssemblyTypes<MartialArtsAttack>();
         LoadAllAssemblyTypes<MonsterFilter>();
+        LoadAllAssemblyTypes<MonsterRaceFilter>();
         LoadAllAssemblyTypes<MonsterSpell>();
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<Patron>();

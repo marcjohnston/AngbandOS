@@ -27,7 +27,7 @@ internal class Type6RoomLayout : RoomLayout
         int y2 = yval + 4;
         int x1 = xval - 11;
         int x2 = xval + 11;
-        MonsterFilter getMonNumHook;
+        MonsterRaceFilter getMonNumHook;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
@@ -92,15 +92,15 @@ internal class Type6RoomLayout : RoomLayout
         int tmp = Game.DieRoll(Game.Difficulty);
         if (tmp < 20)
         {
-            getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(OrcMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(OrcMonsterRaceFilter));
         }
         else if (tmp < 40)
         {
-            getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(TrollMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(TrollMonsterRaceFilter));
         }
         else if (tmp < 55)
         {
-            getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(GiantMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(GiantMonsterRaceFilter));
         }
         else if (tmp < 70)
         {
@@ -117,11 +117,11 @@ internal class Type6RoomLayout : RoomLayout
             {
                 if (Game.DieRoll(2) == 1)
                 {
-                    getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(CultMonsterFilter));
+                    getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(CultMonsterRaceFilter));
                 }
                 else
                 {
-                    getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(ChapelMonsterFilter));
+                    getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(ChapelMonsterRaceFilter));
                 }
             }
         }
@@ -131,32 +131,32 @@ internal class Type6RoomLayout : RoomLayout
             {
                 case 0:
                     {
-                        getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(AcidBreathingDragonMonsterFilter));
+                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AcidBreathingDragonMonsterRaceFilter));
                         break;
                     }
                 case 1:
                     {
-                        getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(LightningBreathingDragonMonsterFilter));
+                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(LightningBreathingDragonMonsterRaceFilter));
                         break;
                     }
                 case 2:
                     {
-                        getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(FireBreathingDragonMonsterFilter));
+                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(FireBreathingDragonMonsterRaceFilter));
                         break;
                     }
                 case 3:
                     {
-                        getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(ColdBreathingDragonMonsterFilter));
+                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(ColdBreathingDragonMonsterRaceFilter));
                         break;
                     }
                 case 4:
                     {
-                        getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(PoisonBreathingDragonMonsterFilter));
+                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(PoisonBreathingDragonMonsterRaceFilter));
                         break;
                     }
                 default:
                     {
-                        getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(AnyBreathingDragonMonsterFilter));
+                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnyBreathingDragonMonsterFilter));
                         break;
                     }
             }

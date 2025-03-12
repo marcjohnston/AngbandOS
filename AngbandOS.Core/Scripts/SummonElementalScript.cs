@@ -25,12 +25,12 @@ internal class SummonElementalScript : Script, IScript, ICastSpellScript
     {
         if (Game.DieRoll(6) > 3)
         {
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(ElementalMonsterFilter)), false, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(ElementalMonsterRaceFilter)), false, true))
             {
                 Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(ElementalMonsterFilter)), true, false))
+        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(ElementalMonsterRaceFilter)), true, false))
         {
             Game.MsgPrint("You fail to control the elemental creature!");
         }

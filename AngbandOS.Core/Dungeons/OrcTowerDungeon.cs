@@ -16,7 +16,7 @@ internal class OrcTowerDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 17;
-    protected override string? BiasMonsterFilterName => nameof(OrcMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(OrcMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(BolgSonOfAzogDungeonGuardian),

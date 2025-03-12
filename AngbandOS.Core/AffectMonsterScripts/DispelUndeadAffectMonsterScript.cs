@@ -11,12 +11,11 @@ internal class DispelUndeadAffectMonsterScript : AffectMonsterScript
 {
     private DispelUndeadAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only undead friends are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.Undead;
-    }
+    /// <summary>
+    /// Returns the <see cref="UndeadMonsterFilter"/> because undead pets will become unfriendly when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(UndeadMonsterFilter);
+
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;

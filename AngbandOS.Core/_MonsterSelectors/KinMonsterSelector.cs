@@ -12,7 +12,7 @@ internal class KinMonsterSelector : MonsterSelector
 {
     private KinMonsterSelector(Game game) : base(game) { }
 
-    public override MonsterFilter GetMonsterFilter(MonsterRace monsterRace)
+    public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new KinSystemMonsterFilter(Game, monsterRace.Symbol.Character);
     }

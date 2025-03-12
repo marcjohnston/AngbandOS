@@ -26,12 +26,12 @@ internal class SummonSpiderScript : Script, IScript, ICastSpellScript
         Game.MsgPrint("You concentrate on the image of a spider...");
         if (Game.DieRoll(5) > 2)
         {
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(SpiderMonsterFilter)), true, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(SpiderMonsterRaceFilter)), true, true))
             {
                 Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(SpiderMonsterFilter)), true, false))
+        else if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(SpiderMonsterRaceFilter)), true, false))
         {
             Game.MsgPrint("The summoned spiders get angry!");
         }

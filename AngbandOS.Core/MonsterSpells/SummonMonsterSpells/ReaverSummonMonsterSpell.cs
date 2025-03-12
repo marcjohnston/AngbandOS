@@ -22,5 +22,5 @@ internal class ReaverSummonMonsterSpell : SummonMonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected override string? MonsterSelectorKey => nameof(ReaverMonsterFilter);
+    protected override string? MonsterSelectorKey => nameof(ReaverMonsterRaceFilter);
 }

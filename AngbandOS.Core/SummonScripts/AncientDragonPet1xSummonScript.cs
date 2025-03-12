@@ -12,7 +12,7 @@ internal class AncientDragonPet1xSummonScript : SummonScript
 {
     private AncientDragonPet1xSummonScript(Game game) : base(game) { } // This object is a singleton
 
-    protected override string MonsterFilterBindingKey => nameof(HiDragonNoUniquesMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(HiDragonNoUniquesMonsterRaceFilter);
     public override bool Pet => true;
     protected override string LevelRollExpression => "X";
     public override string[]? PreMessages => new string[] { "You concentrate on the image of an ancient dragon..." };

@@ -26,7 +26,7 @@ internal class SummonMonsterScript : Script, IScript, ICastSpellScript
         Game.MsgPrint("You concentrate on the image of a monster...");
         if (Game.DieRoll(5) > 2)
         {
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter)), false, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(NoUniquesMonsterRaceFilter)), false, true))
             {
                 Game.MsgPrint("No-one ever turns up.");
             }

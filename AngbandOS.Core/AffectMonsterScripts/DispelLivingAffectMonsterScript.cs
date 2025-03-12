@@ -11,11 +11,10 @@ internal class DispelLivingAffectMonsterScript : AffectMonsterScript
 {
     private DispelLivingAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        return !rPtr.Undead && !rPtr.Nonliving;
-    }
+    /// <summary>
+    /// Returns the <see cref="LivingMonsterFilter"/> because living pets will become unfriendly when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(LivingMonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
@@ -24,7 +23,7 @@ internal class DispelLivingAffectMonsterScript : AffectMonsterScript
         bool skipped = false;
         string? note = null;
         string? noteDies = null;
-        if (ProjectileAngersMonster(mPtr))
+        if (!mPtr.Race.Undead && !mPtr.Race.Nonliving)
         {
             if (seen)
             {

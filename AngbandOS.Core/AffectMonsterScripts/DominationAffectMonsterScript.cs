@@ -11,12 +11,10 @@ internal class DominationAffectMonsterScript : AffectMonsterScript
 {
     private DominationAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only evil friends are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.ImmuneConfusion;
-    }
+    /// <summary>
+    /// Returns the <see cref="ConfusionImmuneMonsterFilter"/> because pets that are already immune to confusion will become unfriendly when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(ConfusionImmuneMonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

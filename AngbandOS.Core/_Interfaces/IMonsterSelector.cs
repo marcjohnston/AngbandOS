@@ -9,5 +9,5 @@ namespace AngbandOS.Core.Interfaces;
 
 internal interface IMonsterSelector
 {
-    MonsterFilter GetMonsterFilter(MonsterRace monsterRace);
+    MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace);
 }

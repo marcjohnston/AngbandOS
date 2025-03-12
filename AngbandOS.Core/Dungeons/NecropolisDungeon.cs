@@ -16,7 +16,7 @@ internal class NecropolisDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 40;
-    protected override string? BiasMonsterFilterName => nameof(HiUndeadMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(HiUndeadMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(FirePhantomDungeonGuardian),

@@ -12,6 +12,6 @@ internal class DemonSummonMonsterSpell : SummonMonsterSpell
 {
     private DemonSummonMonsterSpell(Game game) : base(game) { }
     protected override int MaximumSummonCount => 1;
-    protected override string? MonsterSelectorKey => nameof(DemonMonsterFilter);
+    protected override string? MonsterSelectorKey => nameof(DemonMonsterRaceFilter);
     public override string? VsPlayerActionMessage => "{0} magically summons a demon!";
 }

@@ -12,7 +12,7 @@ internal class DemonServantPetSummonScript : SummonScript
 {
     private DemonServantPetSummonScript(Game game) : base(game) { }
 
-    protected override string MonsterFilterBindingKey => nameof(DemonMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(DemonMonsterRaceFilter);
 
     protected override string LevelRollExpression => "X*3/2";
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };

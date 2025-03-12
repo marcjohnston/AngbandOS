@@ -11,12 +11,10 @@ internal class HolyFireAffectMonsterScript : AffectMonsterScript
 {
     private HolyFireAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only good friends are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.Good;
-    }
+    /// <summary>
+    /// Returns the <see cref="GoodMonsterFilter"/> because good pets will become unfriendly when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(GoodMonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

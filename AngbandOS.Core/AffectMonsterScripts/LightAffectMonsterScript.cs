@@ -11,12 +11,10 @@ internal class LightAffectMonsterScript : AffectMonsterScript
 {
     private LightAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only friends that are hurt by light are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.HurtByLight;
-    }
+    /// <summary>
+    /// Returns the <see cref="HurtByLightMonsterFilter"/> because pets that are hurt by light will become unfriendly when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(HurtByLightMonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

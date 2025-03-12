@@ -32,7 +32,7 @@ internal abstract class Dungeon : IGetKey
     {
         if (BiasMonsterFilterName != null)
         {
-            BiasMonsterFilter = Game.SingletonRepository.Get<MonsterFilter>(BiasMonsterFilterName);
+            BiasMonsterFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(BiasMonsterFilterName);
         }
 
         List<DungeonGuardian> dungeonGuardianList = new List<DungeonGuardian>();
@@ -65,7 +65,7 @@ internal abstract class Dungeon : IGetKey
     /// <summary>
     /// The bias for monster generation in the dungeon
     /// </summary>
-    public MonsterFilter? BiasMonsterFilter { get; private set; } = null;
+    public MonsterRaceFilter? BiasMonsterFilter { get; private set; } = null;
 
     /// <summary>
     /// Returns the quests that are associated to this dungeon; or an empty array, if there are none.  This property is bound during

@@ -23,7 +23,7 @@ internal class PhantasmalServantScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(PhantomMonsterFilter)), false, true);
+        bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * 3 / 2, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(PhantomMonsterRaceFilter)), false, true);
         string msg = success ? "'Your wish, master?'" : "No-one ever turns up.";
         Game.MsgPrint(msg);
     }

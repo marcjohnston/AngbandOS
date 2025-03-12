@@ -14,7 +14,7 @@ internal class UltharDungeon : Dungeon
     private UltharDungeon(Game game) : base(game) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
-    protected override string? BiasMonsterFilterName => nameof(AnimalMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(AnimalMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(HobbesTheTigerMonsterRaceDungeonGuardian)

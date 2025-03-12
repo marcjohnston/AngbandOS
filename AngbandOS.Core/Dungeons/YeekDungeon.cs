@@ -12,7 +12,7 @@ internal class YeekDungeon : Dungeon
     private YeekDungeon(Game game) : base(game) { }
     public override int BaseOffset => 2;
     public override int MaxLevel => 8;
-    protected override string? BiasMonsterFilterName => nameof(YeekMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(YeekMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(OrfaxSonOfBoldorDungeonGuardian),

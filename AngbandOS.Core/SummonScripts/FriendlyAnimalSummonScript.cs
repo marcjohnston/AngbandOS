@@ -11,7 +11,7 @@ namespace AngbandOS.Core.SummonScripts;
 internal class FriendlyAnimalSummonScript : SummonScript
 {
     private FriendlyAnimalSummonScript(Game game) : base(game) { }
-    protected override string MonsterFilterBindingKey => nameof(AnimalRangerMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(AnimalRangerMonsterRaceFilter);
 
     protected override string LevelRollExpression => "X";
     public override bool Pet => true;

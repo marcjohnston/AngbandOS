@@ -11,12 +11,10 @@ internal class WallToMudAffectMonsterScript : AffectMonsterScript
 {
     private WallToMudAffectMonsterScript(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ProjectileAngersMonster(Monster mPtr)
-    {
-        // Only friends that are hurt by rock are affected.
-        MonsterRace rPtr = mPtr.Race;
-        return rPtr.HurtByRock;
-    }
+    /// <summary>
+    /// Returns the <see cref="Any1In8MonsterFilter"/> because all pets will become unfriendly 1 time in 8 when hit with this projectile.
+    /// </summary>
+    protected override string? UnfriendPetMonsterFilterBindingKey => nameof(Any1In8MonsterFilter);
 
     protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {

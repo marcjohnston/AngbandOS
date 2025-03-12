@@ -16,7 +16,7 @@ internal class SummonFriendlyDemon2In3Script : Script, IActivateItemScript
     {
         if (Game.DieRoll(3) == 1)
         {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, (int)(Game.ExperienceLevel.IntValue * 1.5), Game.SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)), true, false))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, (int)(Game.ExperienceLevel.IntValue * 1.5), Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DemonMonsterRaceFilter)), true, false))
             {
                 Game.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 Game.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -24,7 +24,7 @@ internal class SummonFriendlyDemon2In3Script : Script, IActivateItemScript
         }
         else
         {
-            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, (int)(Game.ExperienceLevel.IntValue * 1.5), Game.SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)), Game.ExperienceLevel.IntValue == 50, true))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, (int)(Game.ExperienceLevel.IntValue * 1.5), Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DemonMonsterRaceFilter)), Game.ExperienceLevel.IntValue == 50, true))
             {
                 Game.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 Game.MsgPrint("'What is thy bidding... Master?'");

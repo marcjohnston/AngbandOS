@@ -27,7 +27,7 @@ internal class Type5RoomLayout : RoomLayout
         int y2 = yval + 4;
         int x1 = xval - 11;
         int x2 = xval + 11;
-        MonsterFilter getMonNumHook;
+        MonsterRaceFilter getMonNumHook;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
@@ -109,32 +109,32 @@ internal class Type5RoomLayout : RoomLayout
         }
         else if (tmp < 25)
         {
-            getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(JellyMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(JellyMonsterRaceFilter));
         }
         else if (tmp < 50)
         {
-            getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(TreasureMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(TreasureMonsterRaceFilter));
         }
         else if (tmp < 65)
         {
             if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(KennelMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(KennelMonsterRaceFilter));
             }
             else
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(AnimalMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnimalMonsterRaceFilter));
             }
         }
         else
         {
             if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(ChapelMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(ChapelMonsterRaceFilter));
             }
             else
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(UndeadMonsterRaceFilter));
             }
         }
         for (int i = 0; i < 64; i++)

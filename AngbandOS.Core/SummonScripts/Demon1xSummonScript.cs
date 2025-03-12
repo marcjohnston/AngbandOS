@@ -12,7 +12,7 @@ internal class Demon1xSummonScript : SummonScript
 {
     private Demon1xSummonScript(Game game) : base(game) { }
 
-    protected override string MonsterFilterBindingKey => nameof(DemonMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(DemonMonsterRaceFilter);
 
     public override string[]? PreMessages => new string[] { "You concentrate on the image of a demon..." };
     public override string[]? FailureMessages => new string[] { "The summoned demon gets angry!" };

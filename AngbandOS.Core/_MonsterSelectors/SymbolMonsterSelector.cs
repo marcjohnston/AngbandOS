@@ -11,7 +11,7 @@ internal class SymbolMonsterSelector : MonsterSelector
 {
     private SymbolMonsterSelector(Game game) : base(game) { }
 
-    public override MonsterFilter GetMonsterFilter(MonsterRace monsterRace)
+    public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new SymbolSystemMonsterFilter(Game, monsterRace.Symbol.Character);
     }

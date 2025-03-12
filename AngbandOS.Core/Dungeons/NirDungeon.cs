@@ -12,7 +12,7 @@ internal class NirDungeon : Dungeon
     private NirDungeon(Game game) : base(game) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
-    protected override string? BiasMonsterFilterName => nameof(HumanMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(HumanMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(RobinHoodTheOutlawDungeonGuardian)

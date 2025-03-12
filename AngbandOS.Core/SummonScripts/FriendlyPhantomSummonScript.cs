@@ -12,7 +12,7 @@ internal class FriendlyPhantomSummonScript : SummonScript
 {
     private FriendlyPhantomSummonScript(Game game) : base(game) { }
 
-    protected override string MonsterFilterBindingKey => nameof(PhantomMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(PhantomMonsterRaceFilter);
 
     protected override string LevelRollExpression => "d";
     public override bool Pet => true;

@@ -51,7 +51,7 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
         if (die < 8)
         {
             Game.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)), true, false);
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(UndeadMonsterRaceFilter)), true, false);
         }
         if (die < 14)
         {

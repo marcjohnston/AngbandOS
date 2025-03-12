@@ -12,7 +12,7 @@ internal class DemonPet1xSummonScript : SummonScript
 {
     private DemonPet1xSummonScript(Game game) : base(game) { }
 
-    protected override string MonsterFilterBindingKey => nameof(DemonMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(DemonMonsterRaceFilter);
     public override bool Pet => true;
     public override string[]? PreMessages => new string[] { "You concentrate on the image of a demon..." };
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };

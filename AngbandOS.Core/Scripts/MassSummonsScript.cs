@@ -29,7 +29,7 @@ internal class MassSummonsScript : Script, IScript, ICastSpellScript
         {
             if (Game.DieRoll(10) > 3)
             {
-                if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter)), false, true))
+                if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(NoUniquesMonsterRaceFilter)), false, true))
                 {
                     noneCame = false;
                 }

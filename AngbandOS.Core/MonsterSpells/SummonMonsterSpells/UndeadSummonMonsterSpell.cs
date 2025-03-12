@@ -15,5 +15,5 @@ internal class UndeadSummonMonsterSpell : SummonMonsterSpell
 
     protected override int MaximumSummonCount => 1;
 
-    protected override string? MonsterSelectorKey => nameof(UndeadMonsterFilter);
+    protected override string? MonsterSelectorKey => nameof(UndeadMonsterRaceFilter);
 }

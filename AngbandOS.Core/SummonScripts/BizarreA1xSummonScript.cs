@@ -12,7 +12,7 @@ internal class BizarreA1xSummonScript : SummonScript
 {
     private BizarreA1xSummonScript(Game game) : base(game) { } // This object is a singleton
 
-    protected override string MonsterFilterBindingKey => nameof(Bizarre1MonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(Bizarre1MonsterRaceFilter);
     protected override string LevelRollExpression => "X";
     public override string[]? PreMessages => new string[] { "You concentrate on the Fool card..." };
     public override string[]? SuccessMessages => new string[] { "The summoned creature gets angry!" };

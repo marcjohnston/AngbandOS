@@ -16,7 +16,7 @@ internal class SpireDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 20;
-    protected override string? BiasMonsterFilterName => nameof(DemonMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(DemonMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(TheEmissaryDungeonGuardian),

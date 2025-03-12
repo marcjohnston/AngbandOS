@@ -12,7 +12,7 @@ internal class Animal1xSummonScript : SummonScript
 {
     private Animal1xSummonScript(Game game) : base(game) { } // This object is a singleton
 
-    protected override string MonsterFilterBindingKey => nameof(AnimalMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(AnimalMonsterRaceFilter);
     protected override string LevelRollExpression => "X";
     public override string[]? PreMessages => new string[] { "You concentrate on the image of an animal..." };
     public override string[]? SuccessMessages => new string[] { "The summoned animal gets angry!" };

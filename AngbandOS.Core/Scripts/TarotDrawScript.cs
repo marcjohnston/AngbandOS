@@ -41,7 +41,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
         else if (die < 14)
         {
             Game.MsgPrint("Oh no! It's the Devil!");
-            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)), true, false);
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DemonMonsterRaceFilter)), true, false);
         }
         else if (die < 18)
         {
@@ -116,7 +116,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
         else if (die < 82)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre1MonsterFilter)), false, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre1MonsterRaceFilter)), false, true))
             {
                 noneCame = true;
             }
@@ -124,7 +124,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
         else if (die < 84)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre2MonsterFilter)), false, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre2MonsterRaceFilter)), false, true))
             {
                 noneCame = true;
             }
@@ -132,7 +132,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
         else if (die < 86)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre4MonsterFilter)), false, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre4MonsterRaceFilter)), false, true))
             {
                 noneCame = true;
             }
@@ -140,7 +140,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
         else if (die < 88)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre5MonsterFilter)), false, true))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre5MonsterRaceFilter)), false, true))
             {
                 noneCame = true;
             }

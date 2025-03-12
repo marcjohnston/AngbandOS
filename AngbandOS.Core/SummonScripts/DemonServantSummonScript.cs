@@ -12,7 +12,7 @@ internal class DemonServantSummonScript : SummonScript
 {
     private DemonServantSummonScript(Game game) : base(game) { }
 
-    protected override string MonsterFilterBindingKey => nameof(DemonMonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(DemonMonsterRaceFilter);
 
     protected override string LevelRollExpression => "X*3/2";
 

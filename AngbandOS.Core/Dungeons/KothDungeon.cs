@@ -16,7 +16,7 @@ internal class KothDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 20;
-    protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterFilter);
+    protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterRaceFilter);
     protected override string[]? DungeonGuardianNames => new string[]
     {
         nameof(FatherDagonDungeonGuardian),

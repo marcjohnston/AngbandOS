@@ -12,7 +12,7 @@ internal class BizarreDPet1xSummonScript : SummonScript
 {
     private BizarreDPet1xSummonScript(Game game) : base(game) { } // This object is a singleton
 
-    protected override string MonsterFilterBindingKey => nameof(Bizarre4MonsterFilter);
+    protected override string MonsterFilterBindingKey => nameof(Bizarre4MonsterRaceFilter);
     public override bool Pet => true;
     protected override string GroupBooleanExpression => "false";
     protected override string LevelRollExpression => "X";
