@@ -19,5 +19,5 @@ internal class KinSummonMonsterSpell : SummonMonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected override string? MonsterSelectorKey => nameof(KinMonsterSelector);
+    protected override string? MonsterSelectorBindingKey => nameof(KinMonsterSelector);
 }

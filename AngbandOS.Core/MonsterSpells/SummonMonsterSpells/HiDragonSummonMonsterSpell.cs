@@ -12,6 +12,6 @@ internal class HiDragonSummonMonsterSpell : SummonMonsterSpell
 {
     private HiDragonSummonMonsterSpell(Game game) : base(game) { }
     protected override int MaximumSummonCount => 8;
-    protected override string? MonsterSelectorKey => nameof(HiDragonMonsterRaceFilter);
+    protected override string? MonsterSelectorBindingKey => nameof(HiDragonMonsterRaceFilter);
     public override string? VsPlayerActionMessage => "{0} magically summons ancient dragons!";
 }

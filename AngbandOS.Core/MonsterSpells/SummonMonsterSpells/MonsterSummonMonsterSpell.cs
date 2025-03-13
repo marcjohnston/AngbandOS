@@ -16,7 +16,7 @@ internal class MonsterSummonMonsterSpell : SummonMonsterSpell
     /// <summary>
     /// Returns null, to summon any monster.
     /// </summary>
-    protected override string? MonsterSelectorKey => null;
+    protected override string? MonsterSelectorBindingKey => null;
 
     /// <summary>
     /// Returns 1, to summon a single monster.

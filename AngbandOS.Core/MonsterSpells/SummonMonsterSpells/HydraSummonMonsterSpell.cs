@@ -13,5 +13,5 @@ internal class HydraSummonMonsterSpell : SummonMonsterSpell
     private HydraSummonMonsterSpell(Game game) : base(game) { }
     public override string? VsPlayerActionMessage => "{0} magically summons hydras!";
 
-    protected override string? MonsterSelectorKey => nameof(HydraMonsterRaceFilter);
+    protected override string? MonsterSelectorBindingKey => nameof(HydraMonsterRaceFilter);
 }

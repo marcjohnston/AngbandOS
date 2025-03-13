@@ -12,5 +12,5 @@ internal class HoundSummonMonsterSpell : SummonMonsterSpell
 {
     private HoundSummonMonsterSpell(Game game) : base(game) { }
     public override string? VsPlayerActionMessage => "{0} magically summons hounds!";
-    protected override string? MonsterSelectorKey => nameof(HoundMonsterRaceFilter);
+    protected override string? MonsterSelectorBindingKey => nameof(HoundMonsterRaceFilter);
 }

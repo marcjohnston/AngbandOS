@@ -13,5 +13,5 @@ internal class SpiderSummonMonsterSpell : SummonMonsterSpell
     private SpiderSummonMonsterSpell(Game game) : base(game) { }
     public override string? VsPlayerActionMessage => "{0} magically summons spiders!";
 
-    protected override string? MonsterSelectorKey => nameof(SpiderMonsterRaceFilter);
+    protected override string? MonsterSelectorBindingKey => nameof(SpiderMonsterRaceFilter);
 }

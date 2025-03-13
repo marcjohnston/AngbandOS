@@ -12,6 +12,6 @@ internal class CthuloidSummonMonsterSpell : SummonMonsterSpell
 {
     private CthuloidSummonMonsterSpell(Game game) : base(game) { }
     protected override int MaximumSummonCount => 1;
-    protected override string? MonsterSelectorKey => nameof(CthuloidMonsterRaceFilter);
+    protected override string? MonsterSelectorBindingKey => nameof(CthuloidMonsterRaceFilter);
     public override string? VsPlayerActionMessage => "{0} magically summons a Cthuloid entity!";
 }
