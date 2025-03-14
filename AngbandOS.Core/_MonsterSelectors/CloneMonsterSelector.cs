@@ -14,6 +14,6 @@ internal class CloneMonsterSelector : MonsterSelector
 
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
-        return new CloneSystemMonsterFilter(Game, monsterRace);
+        return new CloneSystemMonsterRaceFilter(Game, monsterRace);
     }
 }

@@ -6,7 +6,7 @@ public class DecimalFactorParser : FactorParser
     public readonly SymbolSet NumericDigits = new SymbolSet("0123456789");
     public readonly SymbolSet DecimalDigits = new SymbolSet(".");
     public DecimalFactorParser() { }
-    public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
+    public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)
     {
         int currentCharacterIndex = characterIndex;
         if (SignsDigits.Contains(text[currentCharacterIndex]))

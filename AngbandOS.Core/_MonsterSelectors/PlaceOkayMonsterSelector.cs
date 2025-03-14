@@ -14,6 +14,6 @@ internal class PlaceOkayMonsterSelector : MonsterSelector
 
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
-        return new PlaceOkaySystemMonsterFilter(Game, monsterRace.Index);
+        return new PlaceOkaySystemMonsterRaceFilter(Game, monsterRace.Index);
     }
 }

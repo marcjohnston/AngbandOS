@@ -111,7 +111,7 @@ internal class Type6RoomLayout : RoomLayout
                 {
                     _templateRace = Game.DieRoll(Game.SingletonRepository.Count<MonsterRace>() - 2);
                 } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
-                getMonNumHook = new SymbolSystemMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
+                getMonNumHook = new SymbolSystemMonsterRaceFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
             }
             else
             {
@@ -163,7 +163,7 @@ internal class Type6RoomLayout : RoomLayout
         }
         else
         {
-            getMonNumHook = new SymbolSystemMonsterFilter(Game, 'U');
+            getMonNumHook = new SymbolSystemMonsterRaceFilter(Game, 'U');
         }
         for (i = 0; i < 16; i++)
         {

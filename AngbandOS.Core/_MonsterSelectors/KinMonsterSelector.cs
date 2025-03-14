@@ -14,6 +14,6 @@ internal class KinMonsterSelector : MonsterSelector
 
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
-        return new KinSystemMonsterFilter(Game, monsterRace.Symbol.Character);
+        return new KinSystemMonsterRaceFilter(Game, monsterRace.Symbol.Character);
     }
 }

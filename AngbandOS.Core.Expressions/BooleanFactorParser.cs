@@ -3,7 +3,7 @@
 [Serializable]
 public class BooleanFactorParser : FactorParser
 {
-    public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
+    public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)
     {
         if (characterIndex + 4 <= text.Length && text.ToLower().Substring(characterIndex, 4) == "true")
         {

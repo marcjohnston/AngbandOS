@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-public class Parser
+public class ExpressionParser
 {
     public readonly ParseLanguage ParseLanguage;
 
@@ -14,7 +14,7 @@ public class Parser
 
     private int HighestPrecedence;
 
-    public Parser(ParseLanguage parseLanguage)
+    public ExpressionParser(ParseLanguage parseLanguage)
     {
         ParseLanguage = parseLanguage;
         if (ParseLanguage.InfixOperators != null)

@@ -4,7 +4,7 @@
 public class ParenthesisFactorParser : FactorParser
 {
 
-    public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
+    public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)
     {
         if (text[characterIndex] == '(')
         {

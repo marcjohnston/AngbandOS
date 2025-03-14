@@ -13,6 +13,6 @@ internal class SymbolMonsterSelector : MonsterSelector
 
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
-        return new SymbolSystemMonsterFilter(Game, monsterRace.Symbol.Character);
+        return new SymbolSystemMonsterRaceFilter(Game, monsterRace.Symbol.Character);
     }
 }

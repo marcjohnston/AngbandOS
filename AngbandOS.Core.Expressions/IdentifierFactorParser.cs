@@ -6,7 +6,7 @@ public abstract class IdentifierFactorParser : FactorParser
     public virtual bool CaseSensitive => false;
     public abstract string Identifier { get; }
     protected abstract Expression GenerateExpression(string matchedIdentifier);
-    public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
+    public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)
     {
         int startCharacterIndex = characterIndex;
         char c = text[characterIndex];

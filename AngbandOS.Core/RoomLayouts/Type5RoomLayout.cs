@@ -100,11 +100,11 @@ internal class Type5RoomLayout : RoomLayout
             } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
             if (Game.DieRoll(2) != 1 && Game.Difficulty >= 25 + Game.DieRoll(15))
             {
-                getMonNumHook = new SymbolSystemMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
+                getMonNumHook = new SymbolSystemMonsterRaceFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
             }
             else
             {
-                getMonNumHook = new CloneSystemMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace));
+                getMonNumHook = new CloneSystemMonsterRaceFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace));
             }
         }
         else if (tmp < 25)

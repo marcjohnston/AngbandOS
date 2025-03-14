@@ -3,5 +3,5 @@
 [Serializable]
 public abstract class FactorParser
 {
-    public abstract Expression? TryParse(Parser parser, string text, ref int characterIndex);
+    public abstract Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex);
 }

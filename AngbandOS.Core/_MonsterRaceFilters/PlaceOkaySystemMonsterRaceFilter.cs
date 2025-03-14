@@ -5,13 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.MonsterSelectors;
+namespace AngbandOS.Core.MonsterRaceFilters;
 
 [Serializable]
-internal class PlaceOkaySystemMonsterFilter : MonsterRaceFilter
+internal class PlaceOkaySystemMonsterRaceFilter : MonsterRaceFilter
 {
     private int _placeMonsterIdx;
-    public PlaceOkaySystemMonsterFilter(Game game, int placeMonsterIdx) : base(game)
+    public PlaceOkaySystemMonsterRaceFilter(Game game, int placeMonsterIdx) : base(game)
     {
         _placeMonsterIdx = placeMonsterIdx;
     }

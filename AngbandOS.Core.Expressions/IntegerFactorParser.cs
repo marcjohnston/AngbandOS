@@ -5,7 +5,7 @@ public class IntegerFactorParser : FactorParser
     public readonly SymbolSet InitialDigits = new SymbolSet("+-0123456789");
     public readonly SymbolSet SubsequentDigits = new SymbolSet("0123456789");
     public IntegerFactorParser() { }
-    public override Expression? TryParse(Parser parser, string text, ref int characterIndex)
+    public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)
     {
         int currentCharacterIndex = characterIndex;
         char c = text[currentCharacterIndex];

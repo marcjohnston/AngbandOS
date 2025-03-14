@@ -10,7 +10,7 @@ public partial class MainForm : Form
     private void button1_Click(object sender, EventArgs e)
     {
         treeView1.Nodes.Clear();
-        Parser parser = new Parser(new TestParseLanguage());
+        ExpressionParser parser = new ExpressionParser(new TestParseLanguage());
         Expression expression = parser.ParseExpression(textBox1.Text);
         TreeNode rootNode = treeView1.Nodes.Add("Expression");
         rootNode.Tag = expression;

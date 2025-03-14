@@ -50,7 +50,7 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
-    public readonly Parser ExpressionParser;
+    public readonly ExpressionParser ExpressionParser;
     public readonly ParseLanguage ParseLanguage;
     public readonly IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter;
     public readonly DecimalToIntegerExpressionTypeConverter DecimalToIntegerExpressionTypeConverter;
@@ -1180,7 +1180,7 @@ internal class Game
         }
 
         ParseLanguage = new AngbandOSExpressionParseLanguage(this);
-        ExpressionParser = new Parser(ParseLanguage);
+        ExpressionParser = new ExpressionParser(ParseLanguage);
         IntegerToDecimalExpressionTypeConverter = new IntegerToDecimalExpressionTypeConverter();
         DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
 
@@ -15992,7 +15992,7 @@ internal class Game
         Monster mPtr = Monsters[_hackMIdxIi];
         for (attempts = DieRoll(10) + 5; attempts != 0; attempts--)
         {
-            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinSystemMonsterFilter(this, rPtr.Symbol.Character), true, false);
+            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinSystemMonsterRaceFilter(this, rPtr.Symbol.Character), true, false);
         }
         return true;
     }
@@ -16631,7 +16631,7 @@ internal class Game
                 {
                     continue;
                 }
-                int z = GetMonNum(rPtr.Level, new PlaceOkaySystemMonsterFilter(this, rPtr.Index));
+                int z = GetMonNum(rPtr.Level, new PlaceOkaySystemMonsterRaceFilter(this, rPtr.Index));
                 if (z == 0)
                 {
                     break;
