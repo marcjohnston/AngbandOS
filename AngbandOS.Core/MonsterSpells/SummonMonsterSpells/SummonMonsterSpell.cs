@@ -97,23 +97,21 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         bool friendly = monster.IsPet;
         int count = 0;
 
-        MonsterRaceFilter? monsterFilter = MonsterSelector?.GetMonsterFilter(monster.Race);
         for (int k = 0; k < 8; k++)
         {
             int summonLevel = SummonLevel.HasValue ? SummonLevel.Value : monster.Race.Level >= 1 ? monster.Race.Level : 1;
             if (friendly)
             {
-                if (Game.SummonSpecific(target.MapY, target.MapX, summonLevel, monsterFilter, true, true))
+                MonsterRaceFilter? friendlyMonsterFilter = FriendlyMonsterSelector?.GetMonsterFilter(monster.Race);
+                if (Game.SummonSpecific(target.MapY, target.MapX, summonLevel, friendlyMonsterFilter, true, true))
                 {
                     count++;
                 }
             }
             else
             {
-                int playerX = Game.MapX.IntValue;
-                int playerY = Game.MapY.IntValue;
-
-                if (Game.SummonSpecific(playerY, playerX, summonLevel, MonsterSelector?.GetMonsterFilter(monster.Race), true, false))
+                MonsterRaceFilter? monsterFilter = MonsterSelector?.GetMonsterFilter(monster.Race);
+                if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, summonLevel, monsterFilter, true, false))
                 {
                     count++;
                 }
