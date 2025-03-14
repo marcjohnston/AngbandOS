@@ -34,5 +34,5 @@ internal class LightWeakProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(LightWeakAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(LightWeakMonsterEffect);
 }

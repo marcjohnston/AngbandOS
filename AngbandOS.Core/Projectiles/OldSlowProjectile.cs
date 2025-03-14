@@ -16,7 +16,7 @@ internal class OldSlowProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlueSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldSlowAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(OldSlowMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

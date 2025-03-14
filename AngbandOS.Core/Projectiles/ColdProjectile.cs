@@ -75,7 +75,7 @@ internal class ColdProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ColdAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ColdMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

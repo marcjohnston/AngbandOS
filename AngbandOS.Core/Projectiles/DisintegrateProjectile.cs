@@ -60,7 +60,7 @@ internal class DisintegrateProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DisintegrateAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(DisintegrateMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

@@ -60,7 +60,7 @@ internal class ManaProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ManaAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ManaMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

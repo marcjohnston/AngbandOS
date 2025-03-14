@@ -69,7 +69,7 @@ internal class HolyFireProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(HolyFireAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(HolyFireMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

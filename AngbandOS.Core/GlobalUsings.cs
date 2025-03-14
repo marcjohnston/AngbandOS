@@ -10,7 +10,7 @@ global using static AngbandOS.Core.Extensions;
 global using AngbandOS.Core;
 global using AngbandOS.Core.Activations;
 global using AngbandOS.Core.ActivationWeightRandoms;
-global using AngbandOS.Core.AffectMonsterScripts;
+global using AngbandOS.Core.MonsterEffects;
 global using AngbandOS.Core.AlterActions;
 global using AngbandOS.Core.ArtifactBiases;
 global using AngbandOS.Core.ArtifactBiasWeightedRandoms;

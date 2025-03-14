@@ -16,7 +16,7 @@ internal class DisenchantProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(ChartreuseSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DisenchantAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(DisenchantMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

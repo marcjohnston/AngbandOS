@@ -86,7 +86,7 @@ internal class PlasmaProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(PlasmaAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(PlasmaMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

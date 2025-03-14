@@ -16,7 +16,7 @@ internal class TimeProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightGreenCloudAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(TimeAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(TimeMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

@@ -16,7 +16,7 @@ internal class NexusProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PinkSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(NexusAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(NexusMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

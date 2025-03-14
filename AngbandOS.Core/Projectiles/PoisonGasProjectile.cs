@@ -18,7 +18,7 @@ internal class PoisonGasProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenCloudAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(PoisonGasAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(PoisonGasMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

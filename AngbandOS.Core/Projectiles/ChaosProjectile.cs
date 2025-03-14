@@ -70,7 +70,7 @@ internal class ChaosProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ChaosAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ChaosMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

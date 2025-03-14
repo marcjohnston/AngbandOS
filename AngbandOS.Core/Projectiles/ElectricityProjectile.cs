@@ -77,7 +77,7 @@ internal class ElectricityProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ElectricityAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ElectricityMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

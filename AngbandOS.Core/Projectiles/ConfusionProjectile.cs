@@ -16,7 +16,7 @@ internal class ConfusionProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyQuestionAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ConfusionAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ConfusionMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

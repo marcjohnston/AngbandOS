@@ -16,7 +16,7 @@ internal class InertiaProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(OrangeSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(InertiaAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(InertiaMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

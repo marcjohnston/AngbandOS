@@ -14,5 +14,5 @@ internal class DominationProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DominationAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(DominationMonsterEffect);
 }

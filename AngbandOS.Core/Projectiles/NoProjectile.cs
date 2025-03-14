@@ -14,5 +14,5 @@ namespace AngbandOS.Core.Projectiles;
 internal class NoProjectile : Projectile
 {
     private NoProjectile(Game game) : base(game) { } // This object is a singleton.
-    protected override string AffectMonsterScriptBindingKey => nameof(NoAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(NoMonsterEffect);
 }

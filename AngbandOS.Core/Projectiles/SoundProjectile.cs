@@ -70,7 +70,7 @@ internal class SoundProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(SoundAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(SoundMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

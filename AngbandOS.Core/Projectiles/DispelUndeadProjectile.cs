@@ -17,5 +17,5 @@ internal class DispelUndeadProjectile : Projectile
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlackExpandAnimation));
 
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DispelUndeadAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(DispelUndeadMonsterEffect);
 }

@@ -24,5 +24,5 @@ internal class StoneWallProjectile : Projectile
         return false;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(StoneWallAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(StoneWallMonsterEffect);
 }

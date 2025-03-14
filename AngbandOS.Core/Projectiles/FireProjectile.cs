@@ -75,7 +75,7 @@ internal class FireProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(FireAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(FireMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

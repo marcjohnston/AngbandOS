@@ -24,5 +24,5 @@ internal class MakeElderSignProjectile : Projectile
         return false;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MakeElderSignAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(MakeElderSignMonsterEffect);
 }

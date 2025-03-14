@@ -85,7 +85,7 @@ internal class MeteorProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MeteorAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(MeteorMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

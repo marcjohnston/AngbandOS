@@ -16,7 +16,7 @@ internal class WaterProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlueSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(WaterAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(WaterMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

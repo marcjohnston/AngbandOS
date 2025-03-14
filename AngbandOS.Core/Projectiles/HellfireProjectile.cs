@@ -70,7 +70,7 @@ internal class HellfireProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(HellfireAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(HellfireMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

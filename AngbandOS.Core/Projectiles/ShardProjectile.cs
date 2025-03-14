@@ -16,7 +16,7 @@ internal class ShardProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightBrownSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ShardAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ShardMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

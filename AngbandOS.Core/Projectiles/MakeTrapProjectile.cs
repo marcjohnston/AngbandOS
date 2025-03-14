@@ -24,5 +24,5 @@ internal class MakeTrapProjectile : Projectile
         return false;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MakeTrapAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(MakeTrapMonsterEffect);
 }

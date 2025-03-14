@@ -60,5 +60,5 @@ internal class DestroyTrapOrDoorProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DestroyTrapOrDoorAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(DestroyTrapOrDoorMonsterEffect);
 }

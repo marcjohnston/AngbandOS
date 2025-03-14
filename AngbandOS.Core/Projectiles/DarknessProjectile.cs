@@ -34,7 +34,7 @@ internal class DarknessProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DarknessAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(DarknessMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

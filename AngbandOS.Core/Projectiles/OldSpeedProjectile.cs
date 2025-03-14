@@ -16,7 +16,7 @@ internal class OldSpeedProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightBlueSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldSpeedAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(OldSpeedMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

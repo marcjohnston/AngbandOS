@@ -35,5 +35,5 @@ internal class JamDoorProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(JamDoorAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(JamDoorMonsterEffect);
 }

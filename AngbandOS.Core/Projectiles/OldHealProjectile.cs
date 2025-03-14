@@ -16,7 +16,7 @@ internal class OldHealProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteSparkleAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldHealAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(OldHealMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

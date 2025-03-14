@@ -14,7 +14,7 @@ internal class ArrowProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightBrownBoltProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ArrowAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ArrowMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

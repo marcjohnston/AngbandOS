@@ -16,5 +16,5 @@ internal class OldConfuseProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyQuestionAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldConfuseAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(OldConfuseMonsterEffect);
 }

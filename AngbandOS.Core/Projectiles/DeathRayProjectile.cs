@@ -16,5 +16,5 @@ internal class DeathRayProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(CopperContractAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DeathRayAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(DeathRayMonsterEffect);
 }

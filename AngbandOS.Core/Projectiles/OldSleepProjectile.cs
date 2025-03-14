@@ -14,7 +14,7 @@ internal class OldSleepProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(YellowSparkleAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldSleepAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(OldSleepMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

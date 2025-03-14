@@ -16,7 +16,7 @@ internal class NukeProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(ChartreuseFlashAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(NukeAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(NukeMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

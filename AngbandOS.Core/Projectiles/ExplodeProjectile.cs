@@ -70,7 +70,7 @@ internal class ExplodeProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ExplodeAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(ExplodeMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

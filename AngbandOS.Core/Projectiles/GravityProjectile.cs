@@ -16,7 +16,7 @@ internal class GravityProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(TurquoiseSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(GravityAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(GravityMonsterEffect);
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {

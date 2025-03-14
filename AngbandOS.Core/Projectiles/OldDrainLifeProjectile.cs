@@ -16,5 +16,5 @@ internal class OldDrainLifeProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlackContractAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldDrainLifeAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(OldDrainLifeMonsterEffect);
 }

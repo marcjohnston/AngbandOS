@@ -33,5 +33,5 @@ internal class MakeDoorProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MakeDoorAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(MakeDoorMonsterEffect);
 }

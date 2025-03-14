@@ -94,5 +94,5 @@ internal class WallToMudProjectile : Projectile
         return obvious;
     }
 
-    protected override string AffectMonsterScriptBindingKey => nameof(WallToMudAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(WallToMudMonsterEffect);
 }

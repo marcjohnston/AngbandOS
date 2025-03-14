@@ -14,5 +14,5 @@ internal class CharmProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyControlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(CharmAffectMonsterScript);
+    protected override string AffectMonsterScriptBindingKey => nameof(CharmMonsterEffect);
 }
