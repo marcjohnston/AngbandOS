@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class MonsterRaceFilter : IGetKey
+internal abstract class MonsterRaceFilter : IMonsterSelector, IGetKey
 {
     protected readonly Game Game;
 
@@ -29,6 +29,8 @@ internal abstract class MonsterRaceFilter : IGetKey
     }
 
     public virtual void Bind() { }
+
+    public MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace) => this;
 
     /// <summary>
     /// Returns true, if a monster matches the selector.

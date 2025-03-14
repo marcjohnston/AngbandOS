@@ -156,7 +156,7 @@ internal class Type6RoomLayout : RoomLayout
                     }
                 default:
                     {
-                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnyBreathingDragonMonsterFilter));
+                        getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnyBreathingDragonMonsterRaceFilter));
                         break;
                     }
             }

@@ -8,11 +8,9 @@
 namespace AngbandOS.Core.MonsterRaceFilters;
 
 [Serializable]
-internal class OrcMonsterRaceFilter : MonsterRaceFilter, IMonsterSelector
+internal class OrcMonsterRaceFilter : MonsterRaceFilter
 {
     private OrcMonsterRaceFilter(Game game) : base(game) { } // This object is a singleton.
-
-    public MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace) => this;
 
     public override bool Matches(MonsterRace rPtr)
     {

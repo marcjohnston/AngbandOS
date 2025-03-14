@@ -13,6 +13,6 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class AntSummonMonsterSpell : SummonMonsterSpell
 {
     private AntSummonMonsterSpell(Game game) : base(game) { }
-    protected override string? MonsterSelectorBindingKey => nameof(AntMonsterFilter);
+    protected override string? MonsterSelectorBindingKey => nameof(AntMonsterRaceFilter);
     public override string? VsPlayerActionMessage => "{0} magically summons ants!";
 }

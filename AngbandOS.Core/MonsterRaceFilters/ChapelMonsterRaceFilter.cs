@@ -8,11 +8,9 @@
 namespace AngbandOS.Core.MonsterRaceFilters;
 
 [Serializable]
-internal class ChapelMonsterRaceFilter : MonsterRaceFilter, IMonsterSelector
+internal class ChapelMonsterRaceFilter : MonsterRaceFilter
 {
     private ChapelMonsterRaceFilter(Game game) : base(game) { } // This object is a singleton.
-
-    public MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace) => this;
 
     /// <summary>
     /// Returns true, if a monster is not unique and is a Shaman.
