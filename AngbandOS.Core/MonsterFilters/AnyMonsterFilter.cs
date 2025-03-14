@@ -12,7 +12,7 @@ internal class AnyMonsterFilter : MonsterFilter
 {
     private AnyMonsterFilter(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool Match(Monster mPtr)
+    protected override bool DoMatches(Monster mPtr)
     {
         return true;
     }

@@ -36,11 +36,11 @@ internal abstract class MonsterFilter : IGetKey
 
     protected ProbabilityExpression? FrequencyProbabilityExpression { get; private set; }
 
-    protected abstract bool Match(Monster mPtr);
+    protected abstract bool DoMatches(Monster mPtr);
 
     public bool Matches(Monster mPtr)
     {
-        bool match = Match(mPtr);
+        bool match = DoMatches(mPtr);
 
         // If it is a match, check the frequency probability.
         if (match && FrequencyProbabilityExpression != null)

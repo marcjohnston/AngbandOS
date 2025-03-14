@@ -14,7 +14,7 @@ internal class Any1In8MonsterFilter : MonsterFilter
 
     protected override string? FrequencyProbabilityExpressionText => "1/8";
 
-    protected override bool Match(Monster mPtr)
+    protected override bool DoMatches(Monster mPtr)
     {
         return true;
     }

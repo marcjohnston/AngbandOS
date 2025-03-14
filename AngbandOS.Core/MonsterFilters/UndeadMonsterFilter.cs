@@ -12,7 +12,7 @@ internal class UndeadMonsterFilter : MonsterFilter
 {
     private UndeadMonsterFilter(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool Match(Monster mPtr)
+    protected override bool DoMatches(Monster mPtr)
     {
         return mPtr.Race.Undead;
     }
