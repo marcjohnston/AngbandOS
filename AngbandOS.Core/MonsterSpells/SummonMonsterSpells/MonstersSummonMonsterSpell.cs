@@ -23,5 +23,5 @@ internal class MonstersSummonMonsterSpell : SummonMonsterSpell
     /// </summary>
     protected override string? MonsterSelectorBindingKey => null;
 
-    protected override string? FriendlyMonsterSelectorKey => nameof(NoUniquesMonsterRaceFilter);
+    protected override string? FriendlyMonsterSelectorBindingKey => nameof(NoUniquesMonsterRaceFilter);
 }

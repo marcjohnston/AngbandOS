@@ -16,7 +16,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     {
         base.Bind();
         MonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(MonsterSelectorBindingKey);
-        FriendlyMonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(FriendlyMonsterSelectorKey);
+        FriendlyMonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(FriendlyMonsterSelectorBindingKey);
     }
 
     /// <summary>
@@ -48,11 +48,11 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// Returns a monster selector key that is used to specify which type of monster to be summoned when a friendly monster is attacking
     /// another monster, or null for any monster.  Returns the monster selector key, by default.
     /// </summary>
-    protected virtual string? FriendlyMonsterSelectorKey => MonsterSelectorBindingKey;
+    protected virtual string? FriendlyMonsterSelectorBindingKey => MonsterSelectorBindingKey;
 
     /// <summary>
     /// Returns a monster selector that is used to specify which type of monster to be summoned when a friendly monster is attacking
-    /// another monster, or null for any monster.  Returns the same monster selector as the MonsterSelector, by default.
+    /// another monster, or null for any monster.  This property is bound using the <see cref="FriendlyMonsterSelectorBindingKey"/> property during the bind phase.
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
