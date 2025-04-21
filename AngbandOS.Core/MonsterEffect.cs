@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class AffectMonsterScript : IGetKey
+internal abstract class MonsterEffect : IGetKey
 {
     protected readonly Game Game;
 
@@ -25,7 +25,7 @@ internal abstract class AffectMonsterScript : IGetKey
         return "";
     }
 
-    protected AffectMonsterScript(Game game)
+    protected MonsterEffect(Game game)
     {
         Game = game;
     }

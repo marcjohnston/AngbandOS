@@ -40,28 +40,7 @@ internal class DestroyTrapProjectile : Projectile
         return obvious;
     }
 
-    protected override bool AffectItem(int who, int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        foreach (Item oPtr in cPtr.Items)
-        {
-            if (oPtr.IsContainer)
-            {
-                if (!oPtr.ContainerIsOpen && oPtr.ContainerTraps != null)
-                {
-                    oPtr.ContainerTraps = null;
-                    oPtr.BecomeKnown();
-                    if (oPtr.WasNoticed)
-                    {
-                        Game.MsgPrint("Click!");
-                        obvious = true;
-                    }
-                }
-            }
-        }
-        return obvious;
-    }
+    protected override string ItemEffectBindingKey => nameof(DestroyTrapItemEffect);
 
     protected override string AffectMonsterScriptBindingKey => nameof(DestroyTrapOrDoorMonsterEffect);
 }

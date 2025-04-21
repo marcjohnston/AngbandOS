@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.MonsterEffects;
 
 [Serializable]
-internal class DispelUndeadMonsterEffect : AffectMonsterScript
+internal class DispelUndeadMonsterEffect : MonsterEffect
 {
     private DispelUndeadMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 

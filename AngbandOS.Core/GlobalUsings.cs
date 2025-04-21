@@ -38,6 +38,7 @@ global using AngbandOS.Core.Gods;
 global using AngbandOS.Core.Interfaces;
 global using AngbandOS.Core.WieldSlots;
 global using AngbandOS.Core.ItemActions;
+global using AngbandOS.Core.ItemEffects;
 global using AngbandOS.Core.ItemTests;
 global using AngbandOS.Core.ItemClasses;
 global using AngbandOS.Core.ItemEnhancements;

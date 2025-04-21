@@ -31,7 +31,8 @@ internal abstract class Projectile : IGetKey
     public string GetKey => Key;
     public virtual void Bind()
     {
-        AffectMonsterScript = Game.SingletonRepository.Get<AffectMonsterScript>(AffectMonsterScriptBindingKey);
+        AffectMonsterScript = Game.SingletonRepository.Get<MonsterEffect>(AffectMonsterScriptBindingKey);
+        ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);
     }
 
     /// <summary>
@@ -401,7 +402,7 @@ internal abstract class Projectile : IGetKey
                 }
                 y = gy[i];
                 x = gx[i];
-                if (AffectItem(who, y, x))
+                if (ItemEffect.Apply(who, y, x))
                 {
                     notice = true;
                 }
@@ -561,15 +562,18 @@ internal abstract class Projectile : IGetKey
     protected virtual bool AffectFloor(int y, int x) => false;
 
     /// <summary>
-    /// Perform any effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.
+    /// Returns the <see cref="ItemEffect"/> that perform the effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.  This property is bound
+    /// from the <see cref="ItemEffectBindingKey"/> property during the binding phase.
     /// </summary>
-    /// <param name="who"></param>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    /// <returns></returns>
-    protected virtual bool AffectItem(int who, int y, int x) => false;
+    protected ItemEffect ItemEffect { get; private set; }
 
-    protected AffectMonsterScript AffectMonsterScript { get; private set; }
+    /// <summary>
+    /// Returns the binding key for the <see cref="ItemEffect"></see> object to perform the effect needed on an item.  This property is used to bind the <see cref="ItemEffect"></see> property during the
+    /// binding phase.
+    /// </summary>
+    protected virtual string ItemEffectBindingKey => nameof(NoItemEffect);
+
+    protected MonsterEffect AffectMonsterScript { get; private set; }
 
     /// <summary>
     /// Perform any effect needed on a monster and returns true, if the effect was noticed.

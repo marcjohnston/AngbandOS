@@ -16,64 +16,7 @@ internal class FireProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(RedSplatProjectileGraphic));
 
-    protected override bool AffectItem(int who, int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        string oName = "";
-        foreach (Item oPtr in cPtr.Items.ToArray()) // We need the ToArray to prevent collection modified error
-        {
-            bool ignore = false;
-            bool plural = false;
-            bool doKill = false;
-            string noteKill = null;
-            ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-            if (oPtr.StackCount > 1)
-            {
-                plural = true;
-            }
-            if (oPtr.HatesFire)
-            {
-                doKill = true;
-                noteKill = plural ? " burn up!" : " burns up!";
-                if (mergedCharacteristics.IgnoreFire)
-                {
-                    ignore = true;
-                }
-            }
-            if (doKill)
-            {
-                if (oPtr.WasNoticed)
-                {
-                    obvious = true;
-                    oName = oPtr.GetDescription(false);
-                }
-                if (oPtr.IsArtifact || ignore)
-                {
-                    if (oPtr.WasNoticed)
-                    {
-                        string s = plural ? "are" : "is";
-                        Game.MsgPrint($"The {oName} {s} unaffected!");
-                    }
-                }
-                else
-                {
-                    if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
-                    {
-                        Game.MsgPrint($"The {oName}{noteKill}");
-                    }
-                    bool isPotion = oPtr.QuaffTuple != null;
-                    Game.DeleteObject(oPtr);
-                    if (isPotion)
-                    {
-                        oPtr.Smash(who, y, x);
-                    }
-                    Game.MainForm.RefreshMapLocation(y, x);
-                }
-            }
-        }
-        return obvious;
-    }
+    protected override string ItemEffectBindingKey => nameof(FireItemEffect);
 
     protected override string AffectMonsterScriptBindingKey => nameof(FireMonsterEffect);
 

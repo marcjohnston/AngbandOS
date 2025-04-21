@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.MonsterEffects;
 
 [Serializable]
-internal class TeleportAwayAllMonsterEffect : AffectMonsterScript
+internal class TeleportAwayAllMonsterEffect : MonsterEffect
 {
     private TeleportAwayAllMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 

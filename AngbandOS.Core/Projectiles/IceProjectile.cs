@@ -16,58 +16,7 @@ internal class IceProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(DiamondSplatProjectileGraphic));
 
-    protected override bool AffectItem(int who, int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        string oName = "";
-        foreach (Item oPtr in cPtr.Items)
-        {
-            bool plural = false;
-            bool doKill = false;
-            string noteKill = null;
-            if (oPtr.StackCount > 1)
-            {
-                plural = true;
-            }
-            if (oPtr.HatesCold)
-            {
-                noteKill = plural ? " shatter!" : " shatters!";
-                doKill = true;
-            }
-            if (doKill)
-            {
-                if (oPtr.WasNoticed)
-                {
-                    obvious = true;
-                    oName = oPtr.GetDescription(false);
-                }
-                if (oPtr.IsArtifact)
-                {
-                    if (oPtr.WasNoticed)
-                    {
-                        string s = plural ? "are" : "is";
-                        Game.MsgPrint($"The {oName} {s} unaffected!");
-                    }
-                }
-                else
-                {
-                    if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
-                    {
-                        Game.MsgPrint($"The {oName}{noteKill}");
-                    }
-                    bool isPotion = oPtr.QuaffTuple != null;
-                    Game.DeleteObject(oPtr);
-                    if (isPotion)
-                    {
-                        oPtr.Smash(who, y, x);
-                    }
-                    Game.MainForm.RefreshMapLocation(y, x);
-                }
-            }
-        }
-        return obvious;
-    }
+    protected override string ItemEffectBindingKey => nameof(IceItemEffect);
 
     protected override string AffectMonsterScriptBindingKey => nameof(IceMonsterEffect);
 

@@ -16,49 +16,7 @@ internal class DisintegrateProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenContractAnimation));
 
-    protected override bool AffectItem(int who, int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        string oName = "";
-        foreach (Item oPtr in cPtr.Items)
-        {
-            bool plural = false;
-            if (oPtr.StackCount > 1)
-            {
-                plural = true;
-            }
-            string noteKill = plural ? " evaporate!" : " evaporates!";
-            if (oPtr.WasNoticed)
-            {
-                obvious = true;
-                oName = oPtr.GetDescription(false);
-            }
-            if (oPtr.IsArtifact)
-            {
-                if (oPtr.WasNoticed)
-                {
-                    string s = plural ? "are" : "is";
-                    Game.MsgPrint($"The {oName} {s} unaffected!");
-                }
-            }
-            else
-            {
-                if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
-                {
-                    Game.MsgPrint($"The {oName}{noteKill}");
-                }
-                bool isPotion = oPtr.QuaffTuple != null;
-                Game.DeleteObject(oPtr);
-                if (isPotion)
-                {
-                    oPtr.Smash(who, y, x);
-                }
-                Game.MainForm.RefreshMapLocation(y, x);
-            }
-        }
-        return obvious;
-    }
+    protected override string ItemEffectBindingKey => nameof(DisintegrateItemEffect);
 
     protected override string AffectMonsterScriptBindingKey => nameof(DisintegrateMonsterEffect);
 

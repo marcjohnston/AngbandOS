@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.MonsterEffects;
 
 [Serializable]
-internal class DestroyTrapOrDoorMonsterEffect : AffectMonsterScript
+internal class DestroyTrapOrDoorMonsterEffect : MonsterEffect
 {
     private DestroyTrapOrDoorMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 

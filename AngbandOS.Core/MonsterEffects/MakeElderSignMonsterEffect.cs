@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.MonsterEffects;
 
 [Serializable]
-internal class MakeElderSignMonsterEffect : AffectMonsterScript
+internal class MakeElderSignMonsterEffect : MonsterEffect
 {
     private MakeElderSignMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 

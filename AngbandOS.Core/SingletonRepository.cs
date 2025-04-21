@@ -244,7 +244,7 @@ internal class SingletonRepository
         RegisterRepository<IZapRodScript>();
 
         RegisterRepository<ActivationWeightedRandom>();
-        RegisterRepository<AffectMonsterScript>();
+        RegisterRepository<MonsterEffect>();
         RegisterRepository<Alignment>();
         RegisterRepository<AlterAction>();
         RegisterRepository<Animation>();
@@ -270,6 +270,7 @@ internal class SingletonRepository
         RegisterRepository<HelpGroup>();
         RegisterRepository<ItemAction>();
         RegisterRepository<ItemClass>();
+        RegisterRepository<ItemEffect>();
         RegisterRepository<ItemEnhancement>();
         RegisterRepository<ItemEnhancementWeightedRandom>();
         RegisterRepository<ItemFactory>();
@@ -353,7 +354,7 @@ internal class SingletonRepository
         // Load the remaining user-configured singletons from the assembly.
         LoadAllAssemblyTypes<Activation>();
         LoadAllAssemblyTypes<ActivationWeightedRandom>();
-        LoadAllAssemblyTypes<AffectMonsterScript>();
+        LoadAllAssemblyTypes<MonsterEffect>();
         LoadAllAssemblyTypes<AlterAction>();
         LoadAllAssemblyTypes<ArtifactBias>();
         LoadAllAssemblyTypes<ArtifactBiasWeightedRandom>();
@@ -368,6 +369,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Gender>();
         LoadAllAssemblyTypes<ItemAction>();
         LoadAllAssemblyTypes<ItemClass>();
+        LoadAllAssemblyTypes<ItemEffect>();
         LoadAllAssemblyTypes<ItemEnhancement>();
         LoadAllAssemblyTypes<ItemEnhancementWeightedRandom>();
         LoadAllAssemblyTypes<ItemFactory>();
