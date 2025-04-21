@@ -11,7 +11,7 @@ internal class DarknessWeakMonsterEffect : MonsterEffect
 {
     private DarknessWeakMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    protected override bool Apply(int who, Monster mPtr, int dam, int r)
     {
         ApplyProjectileDamageToMonster(who, mPtr, dam, null, null, 0);
         return false;

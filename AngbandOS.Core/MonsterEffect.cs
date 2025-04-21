@@ -127,7 +127,7 @@ internal abstract class MonsterEffect : IGetKey
         }
     }
 
-    protected abstract bool AffectMonster(int who, Monster mPtr, int dam, int r);
+    protected abstract bool Apply(int who, Monster mPtr, int dam, int r);
 
     public bool Apply(int who, int r, int y, int x, int dam, ref int projectMn, ref int projectMx, ref int projectMy)
     {
@@ -161,7 +161,7 @@ internal abstract class MonsterEffect : IGetKey
             mPtr.IsPet = false;
         }
 
-        bool notice = AffectMonster(who, mPtr, dam, r);
+        bool notice = Apply(who, mPtr, dam, r);
 
         GridTile newGridTile = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
