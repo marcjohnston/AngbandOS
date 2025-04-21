@@ -16,5 +16,5 @@ internal class StunProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GoldSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(StunMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(StunMonsterEffect);
 }

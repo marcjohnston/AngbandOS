@@ -4,10 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.ItemEffects;
+namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ItemEffect : IGetKey
+internal abstract class PlayerEffect : IGetKey
 {
     protected readonly Game Game;
 
@@ -24,20 +24,10 @@ internal abstract class ItemEffect : IGetKey
         return "";
     }
 
-    protected ItemEffect(Game game)
+    protected PlayerEffect(Game game)
     {
         Game = game;
     }
 
-    public abstract bool Apply(int who, int y, int x);
+    public abstract bool Apply(int who, int r, int y, int x, int dam, int aRad);
 }
-
-//[Serializable]
-//internal class ItemEffect : ItemEffect
-//{
-//    private ItemEffect(Game game) : base(game) { } // This object is a singleton.
-
-//    public override bool Apply(int who, int y, int x)
-//    {
-//    }
-//}

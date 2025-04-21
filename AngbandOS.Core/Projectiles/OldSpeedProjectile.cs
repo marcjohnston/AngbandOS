@@ -16,16 +16,7 @@ internal class OldSpeedProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightBlueSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldSpeedMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(OldSpeedMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something!");
-        }
-        Game.HasteTimer.AddTimer(Game.DieRoll(5));
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(OldSpeedPlayerEffect);
 }

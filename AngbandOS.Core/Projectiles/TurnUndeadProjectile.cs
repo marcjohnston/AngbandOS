@@ -14,5 +14,5 @@ internal class TurnUndeadProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(TurnUndeadMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(TurnUndeadMonsterEffect);
 }

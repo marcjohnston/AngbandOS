@@ -14,15 +14,7 @@ internal class MakeElderSignProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightGreenSparkleAnimation));
 
-    protected override bool AffectFloor(int y, int x)
-    {
-        if (!Game.GridOpenNoItemOrCreature(y, x))
-        {
-            return false;
-        }
-        Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(ElderSignSigilTile)));
-        return false;
-    }
+    protected override string FloorEffectBindingKey => nameof(MakeElderSignFloorEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MakeElderSignMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(MakeElderSignMonsterEffect);
 }

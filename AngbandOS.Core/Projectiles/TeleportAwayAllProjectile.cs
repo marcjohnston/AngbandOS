@@ -18,5 +18,5 @@ internal class TeleportAwayAllProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PinkSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(TeleportAwayAllMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(TeleportAwayAllMonsterEffect);
 }

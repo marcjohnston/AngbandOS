@@ -16,23 +16,7 @@ internal class DarknessWeakProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreySplatProjectileGraphic));
 
-    protected override bool AffectFloor(int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = Game.PlayerCanSeeBold(y, x);
-        cPtr.SelfLit = false;
-        if (cPtr.FeatureType.IsOpenFloor)
-        {
-            cPtr.PlayerMemorized = false;
-            Game.NoteSpot(y, x);
-        }
-        Game.MainForm.RefreshMapLocation(y, x);
-        if (cPtr.MonsterIndex != 0)
-        {
-            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-        }
-        return obvious;
-    }
+    protected override string FloorEffectBindingKey => nameof(DarknessWeakFloorEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DarknessWeakMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(DarknessWeakMonsterEffect);
 }

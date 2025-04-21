@@ -14,15 +14,7 @@ internal class MakeTrapProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightRedSparkleAnimation));
 
-    protected override bool AffectFloor(int y, int x)
-    {
-        if (!Game.GridOpenNoItemOrCreature(y, x))
-        {
-            return false;
-        }
-        Game.PlaceTrap(y, x);
-        return false;
-    }
+    protected override string FloorEffectBindingKey => nameof(MakeTrapFloorEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MakeTrapMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(MakeTrapMonsterEffect);
 }

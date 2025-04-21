@@ -16,32 +16,7 @@ internal class ConfusionProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyQuestionAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ConfusionMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(ConfusionMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something puzzling!");
-        }
-        if (Game.HasConfusionResistance)
-        {
-            dam *= 5;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        if (!Game.HasConfusionResistance)
-        {
-            Game.ConfusedTimer.AddTimer(Game.DieRoll(20) + 10);
-        }
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(ConfusionPlayerEffect);
 }

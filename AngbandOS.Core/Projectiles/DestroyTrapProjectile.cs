@@ -14,33 +14,9 @@ internal class DestroyTrapProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(RedSwirlAnimation));
 
-    protected override bool AffectFloor(int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
-        {
-            if (Game.PlayerHasLosBold(y, x))
-            {
-                Game.MsgPrint("There is a bright flash of light!");
-                obvious = true;
-            }
-            cPtr.PlayerMemorized = false;
-            Game.RevertTileToBackground(y, x);
-        }
-        else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
-        {
-            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
-            if (Game.PlayerHasLosBold(y, x))
-            {
-                Game.MsgPrint("Click!");
-                obvious = true;
-            }
-        }
-        return obvious;
-    }
+    protected override string FloorEffectBindingKey => nameof(DestroyTrapFloorEffect);
 
     protected override string ItemEffectBindingKey => nameof(DestroyTrapItemEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DestroyTrapOrDoorMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(DestroyTrapOrDoorMonsterEffect);
 }

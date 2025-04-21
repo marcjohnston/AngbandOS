@@ -14,5 +14,5 @@ internal class TurnAllProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(TurnAllMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(TurnAllMonsterEffect);
 }

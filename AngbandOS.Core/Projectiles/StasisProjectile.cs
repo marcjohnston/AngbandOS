@@ -16,5 +16,5 @@ internal class StasisProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(SilverCloudAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(StasisMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(StasisMonsterEffect);
 }

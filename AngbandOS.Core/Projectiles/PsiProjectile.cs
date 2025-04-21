@@ -14,5 +14,5 @@ internal class PsiProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(DiamondSparkleAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(PsiMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(PsiMonsterEffect);
 }

@@ -16,5 +16,5 @@ internal class TelekinesisProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(TurquoiseSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(TelekinesisMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(TelekinesisMonsterEffect);
 }

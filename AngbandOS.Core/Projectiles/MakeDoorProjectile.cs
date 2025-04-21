@@ -14,24 +14,7 @@ internal class MakeDoorProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightBrownSparkleAnimation));
 
-    protected override bool AffectFloor(int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        if (!Game.GridOpenNoItemOrCreature(y, x))
-        {
-            return false;
-        }
-        Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
-        if (cPtr.PlayerMemorized)
-        {
-            obvious = true;
-        }
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
-        return obvious;
-    }
+    protected override string FloorEffectBindingKey => nameof(MakeDoorFloorEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MakeDoorMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(MakeDoorMonsterEffect);
 }

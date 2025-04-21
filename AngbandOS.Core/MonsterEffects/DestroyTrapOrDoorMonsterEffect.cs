@@ -16,7 +16,7 @@ internal class DestroyTrapOrDoorMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => null;
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
         ApplyProjectileDamageToMonster(who, mPtr, dam, null, null, 0);
         return false;

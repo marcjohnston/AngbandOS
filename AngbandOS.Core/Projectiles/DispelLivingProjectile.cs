@@ -16,5 +16,5 @@ internal class DispelLivingProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenExpandAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DispelLivingMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(DispelLivingMonsterEffect);
 }

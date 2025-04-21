@@ -16,23 +16,7 @@ internal class LightWeakProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightWhiteCloudAnimation));
 
-    protected override bool AffectFloor(int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        cPtr.SelfLit = true;
-        Game.NoteSpot(y, x);
-        Game.MainForm.RefreshMapLocation(y, x);
-        if (Game.PlayerCanSeeBold(y, x))
-        {
-            obvious = true;
-        }
-        if (cPtr.MonsterIndex != 0)
-        {
-            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-        }
-        return obvious;
-    }
+    protected override string FloorEffectBindingKey => nameof(LightWeakFloorEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(LightWeakMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(LightWeakMonsterEffect);
 }

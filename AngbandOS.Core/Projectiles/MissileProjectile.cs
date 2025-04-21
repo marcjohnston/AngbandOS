@@ -16,23 +16,7 @@ internal class MissileProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightTurquoiseSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MissileMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(MissileMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something!");
-        }
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(MissilePlayerEffect);
 }

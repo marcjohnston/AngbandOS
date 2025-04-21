@@ -18,32 +18,7 @@ internal class PlasmaProjectile : Projectile
 
     protected override string ItemEffectBindingKey => nameof(PlasmaItemEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(PlasmaMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(PlasmaMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something *HOT*!");
-        }
-        Game.TakeHit(dam, killer);
-        if (!Game.HasSoundResistance)
-        {
-            int kk = Game.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
-            Game.StunTimer.AddTimer(kk);
-        }
-        if (!(Game.HasFireResistance || Game.FireResistanceTimer.Value != 0 || Game.HasFireImmunity))
-        {
-            Game.InvenDamage(Game.SetAcidDestroy, 3);
-        }
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(GravityPlayerEffect);
 }

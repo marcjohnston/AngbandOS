@@ -16,16 +16,7 @@ internal class OldSlowProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlueSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldSlowMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(OldSlowMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something slow!");
-        }
-        Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(OldSlowPlayerEffect);
 }

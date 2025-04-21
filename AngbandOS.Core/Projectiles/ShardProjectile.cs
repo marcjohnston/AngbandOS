@@ -16,39 +16,7 @@ internal class ShardProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightBrownSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ShardMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(ShardMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by shards of crystal!");
-        }
-        if (!Game.HasSoundResistance)
-        {
-            Game.StunTimer.AddTimer(Game.DieRoll(20));
-        }
-        if (Game.HasShardResistance)
-        {
-            dam /= 2;
-        }
-        else
-        {
-            Game.BleedingTimer.AddTimer((dam / 2));
-        }
-        if (!Game.HasShardResistance || Game.DieRoll(12) == 1)
-        {
-            Game.InvenDamage(Game.SetColdDestroy, 3);
-        }
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(ShardPlayerEffect);
 }

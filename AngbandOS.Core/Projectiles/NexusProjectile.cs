@@ -16,32 +16,7 @@ internal class NexusProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PinkSwirlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(NexusMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(NexusMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something strange!");
-        }
-        if (Game.HasNexusResistance)
-        {
-            dam *= 6;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        else
-        {
-            Game.ApplyNexus(mPtr);
-        }
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(NexusPlayerEffect);
 }

@@ -16,21 +16,7 @@ internal class OldHealProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteSparkleAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldHealMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(OldHealMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something invigorating!");
-        }
-        Game.RestoreHealth(dam);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(OldHealPlayerEffect);
 }

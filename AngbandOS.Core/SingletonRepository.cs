@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using AngbandOS.Core.RenderMessageScripts;
 using System.Reflection;
 using Timer = AngbandOS.Core.Timers.Timer;
 
@@ -244,7 +242,6 @@ internal class SingletonRepository
         RegisterRepository<IZapRodScript>();
 
         RegisterRepository<ActivationWeightedRandom>();
-        RegisterRepository<MonsterEffect>();
         RegisterRepository<Alignment>();
         RegisterRepository<AlterAction>();
         RegisterRepository<Animation>();
@@ -262,6 +259,7 @@ internal class SingletonRepository
         RegisterRepository<DungeonGuardian>();
         RegisterRepository<FixedArtifact>();
         RegisterRepository<FlaggedAction>();
+        RegisterRepository<FloorEffect>();
         RegisterRepository<Form>();
         RegisterRepository<Function>();
         RegisterRepository<GameCommand>();
@@ -282,6 +280,7 @@ internal class SingletonRepository
         RegisterRepository<ItemTest>();
         RegisterRepository<Justification>();
         RegisterRepository<MartialArtsAttack>();
+        RegisterRepository<MonsterEffect>();
         RegisterRepository<MonsterFilter>();
         RegisterRepository<MonsterRace>();
         RegisterRepository<MonsterRaceFilter>();
@@ -289,6 +288,7 @@ internal class SingletonRepository
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
         RegisterRepository<Patron>();
+        RegisterRepository<PlayerEffect>();
         RegisterRepository<Plural>();
         RegisterRepository<ProbabilityExpression>();
         RegisterRepository<Projectile>();
@@ -354,7 +354,6 @@ internal class SingletonRepository
         // Load the remaining user-configured singletons from the assembly.
         LoadAllAssemblyTypes<Activation>();
         LoadAllAssemblyTypes<ActivationWeightedRandom>();
-        LoadAllAssemblyTypes<MonsterEffect>();
         LoadAllAssemblyTypes<AlterAction>();
         LoadAllAssemblyTypes<ArtifactBias>();
         LoadAllAssemblyTypes<ArtifactBiasWeightedRandom>();
@@ -365,6 +364,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<ChestTrap>();
         LoadAllAssemblyTypes<DungeonGenerator>();
         LoadAllAssemblyTypes<FixedArtifact>();
+        LoadAllAssemblyTypes<FloorEffect>();
         LoadAllAssemblyTypes<Form>();
         LoadAllAssemblyTypes<Gender>();
         LoadAllAssemblyTypes<ItemAction>();
@@ -378,11 +378,13 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<ItemQualityRating>();
         LoadAllAssemblyTypes<ItemTest>();
         LoadAllAssemblyTypes<MartialArtsAttack>();
+        LoadAllAssemblyTypes<MonsterEffect>();
         LoadAllAssemblyTypes<MonsterFilter>();
         LoadAllAssemblyTypes<MonsterRaceFilter>();
         LoadAllAssemblyTypes<MonsterSpell>();
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<Patron>();
+        LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Projectile>();
         LoadAllAssemblyTypes<ProjectileScript>();
         LoadAllAssemblyTypes<ProjectileWeightedRandomScript>();

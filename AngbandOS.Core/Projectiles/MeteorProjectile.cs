@@ -18,31 +18,7 @@ internal class MeteorProjectile : Projectile
 
     protected override string ItemEffectBindingKey => nameof(MeteorItemEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(MeteorMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(MeteorMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("Something falls from the sky on you!");
-        }
-        Game.TakeHit(dam, killer);
-        if (!Game.HasShardResistance || Game.DieRoll(13) == 1)
-        {
-            if (!Game.HasFireImmunity)
-            {
-                Game.InvenDamage(Game.SetFireDestroy, 2);
-            }
-            Game.InvenDamage(Game.SetColdDestroy, 2);
-        }
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(MeteorPlayerEffect);
 }

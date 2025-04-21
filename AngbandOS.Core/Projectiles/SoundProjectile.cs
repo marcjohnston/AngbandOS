@@ -18,37 +18,7 @@ internal class SoundProjectile : Projectile
 
     protected override string ItemEffectBindingKey => nameof(SoundItemEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(SoundMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(SoundMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by a loud noise!");
-        }
-        if (Game.HasSoundResistance)
-        {
-            dam *= 5;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        else
-        {
-            int kk = Game.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-            Game.StunTimer.AddTimer(kk);
-        }
-        if (!Game.HasSoundResistance || Game.DieRoll(13) == 1)
-        {
-            Game.InvenDamage(Game.SetColdDestroy, 2);
-        }
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(SoundPlayerEffect);
 }

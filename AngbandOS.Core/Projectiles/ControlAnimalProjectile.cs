@@ -16,5 +16,5 @@ internal class ControlAnimalProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenControlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ControlAnimalMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(ControlAnimalMonsterEffect);
 }

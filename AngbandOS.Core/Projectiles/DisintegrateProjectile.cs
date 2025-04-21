@@ -18,23 +18,7 @@ internal class DisintegrateProjectile : Projectile
 
     protected override string ItemEffectBindingKey => nameof(DisintegrateItemEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(DisintegrateMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(DisintegrateMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by pure energy!");
-        }
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(DisintegratePlayerEffect);
 }

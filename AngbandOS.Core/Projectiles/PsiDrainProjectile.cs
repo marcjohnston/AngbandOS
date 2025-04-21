@@ -16,5 +16,5 @@ internal class PsiDrainProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BeigeContractAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(PsiDrainAffectMonsterScript);
+    protected override string MonsterEffectBindingKey => nameof(PsiDrainAffectMonsterScript);
 }

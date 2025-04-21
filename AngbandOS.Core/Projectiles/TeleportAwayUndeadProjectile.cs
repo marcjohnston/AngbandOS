@@ -18,5 +18,5 @@ internal class TeleportAwayUndeadProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(PinkBulletProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(TeleportAwayUndeadMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(TeleportAwayUndeadMonsterEffect);
 }

@@ -16,24 +16,7 @@ internal class InertiaProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(OrangeSplatProjectileGraphic));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(InertiaMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(InertiaMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something slow!");
-        }
-        Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(InertiaPlayerEffect);
 }

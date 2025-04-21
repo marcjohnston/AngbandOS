@@ -16,5 +16,5 @@ internal class OldCloneProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(CopperExpandAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldCloneMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(OldCloneMonsterEffect);
 }

@@ -14,26 +14,7 @@ internal class JamDoorProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(YellowSwirlAnimation));
 
-    protected override bool AffectFloor(int y, int x)
-    {
-        GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        if (cPtr.FeatureType.IsVisibleDoor)
-        {
-            Tile? jammedTile = cPtr.FeatureType.OnJammedTile;
-            if (jammedTile == null)
-            {
-                throw new Exception("No jammed door specified.");
-            }
-            cPtr.SetFeature(jammedTile);
-            if (Game.PlayerHasLosBold(y, x))
-            {
-                Game.MsgPrint("The door seems stuck.");
-                obvious = true;
-            }
-        }
-        return obvious;
-    }
+    protected override string FloorEffectBindingKey => nameof(JamDoorFloorEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(JamDoorMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(JamDoorMonsterEffect);
 }

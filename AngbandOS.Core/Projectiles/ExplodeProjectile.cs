@@ -18,36 +18,7 @@ internal class ExplodeProjectile : Projectile
 
     protected override string ItemEffectBindingKey => nameof(ExplodeItemEffect);
 
-    protected override string AffectMonsterScriptBindingKey => nameof(ExplodeMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(ExplodeMonsterEffect);
 
-    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
-        string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by an explosion of shrapnel!");
-        }
-        if (Game.HasShardResistance)
-        {
-            dam *= 6;
-            dam /= Game.DieRoll(6) + 6;
-        }
-        else
-        {
-            Game.BleedingTimer.AddTimer(dam);
-        }
-        if (!Game.HasShardResistance || Game.DieRoll(13) == 1)
-        {
-            Game.InvenDamage(Game.SetColdDestroy, 2);
-        }
-        Game.TakeHit(dam, killer);
-        return true;
-    }
+    protected override string PlayerEffectBindingKey => nameof(ExplodePlayerEffect);
 }

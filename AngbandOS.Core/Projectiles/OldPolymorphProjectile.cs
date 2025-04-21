@@ -16,5 +16,5 @@ internal class OldPolymorphProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PurpleSparkleAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(OldPolymorphMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(OldPolymorphMonsterEffect);
 }

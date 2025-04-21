@@ -31,8 +31,10 @@ internal abstract class Projectile : IGetKey
     public string GetKey => Key;
     public virtual void Bind()
     {
-        AffectMonsterScript = Game.SingletonRepository.Get<MonsterEffect>(AffectMonsterScriptBindingKey);
+        MonsterEffect = Game.SingletonRepository.Get<MonsterEffect>(MonsterEffectBindingKey);
         ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);
+        PlayerEffect = Game.SingletonRepository.Get<PlayerEffect>(PlayerEffectBindingKey);
+        FloorEffect = Game.SingletonRepository.Get<FloorEffect>(FloorEffectBindingKey);
     }
 
     /// <summary>
@@ -385,7 +387,7 @@ internal abstract class Projectile : IGetKey
                 }
                 y = gy[i];
                 x = gx[i];
-                if (AffectFloor(y, x))
+                if (FloorEffect.Apply(y, x))
                 {
                     notice = true;
                 }
@@ -424,7 +426,7 @@ internal abstract class Projectile : IGetKey
                 x = gx[i];
                 if (grids > 1)
                 {
-                    if (AffectMonsterScript.AffectMonster(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
+                    if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
                     {
                         notice = true;
                     }
@@ -460,7 +462,7 @@ internal abstract class Projectile : IGetKey
                     }
                     else
                     {
-                        if (AffectMonsterScript.AffectMonster(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
+                        if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
                         {
                             notice = true;
                         }
@@ -501,7 +503,7 @@ internal abstract class Projectile : IGetKey
                     if (!CheckBounceOffPlayer(who, dam, rad))
                     {
                         // Allow the projectile to perform any effects on the player.
-                        if (AffectPlayer(who, dist, y, x, dam, rad))
+                        if (PlayerEffect.Apply(who, dist, y, x, dam, rad))
                         {
                             // Disturb the player.
                             Game.Disturb(true);
@@ -553,53 +555,6 @@ internal abstract class Projectile : IGetKey
         return false;
     }
 
-    /// <summary>
-    /// Perform any effect needed on the floor and returns true, if the effect was noticed.  Does nothing and returns false, by default.
-    /// </summary>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    /// <returns></returns>
-    protected virtual bool AffectFloor(int y, int x) => false;
-
-    /// <summary>
-    /// Returns the <see cref="ItemEffect"/> that perform the effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.  This property is bound
-    /// from the <see cref="ItemEffectBindingKey"/> property during the binding phase.
-    /// </summary>
-    protected ItemEffect ItemEffect { get; private set; }
-
-    /// <summary>
-    /// Returns the binding key for the <see cref="ItemEffect"></see> object to perform the effect needed on an item.  This property is used to bind the <see cref="ItemEffect"></see> property during the
-    /// binding phase.
-    /// </summary>
-    protected virtual string ItemEffectBindingKey => nameof(NoItemEffect);
-
-    protected MonsterEffect AffectMonsterScript { get; private set; }
-
-    /// <summary>
-    /// Perform any effect needed on a monster and returns true, if the effect was noticed.
-    /// </summary>
-    /// <param name="who">Represents who performed the attack.  A value of 0, means the player.  Otherwise, who represents the MonsterIndex.</param>
-    /// <param name="dam">Represents the amount of damage to inflict.  This damage value is automatically decreased with the distance from the attacker.</param>
-    /// <param name="mPtr">Represents the monster to affect.</param>
-    /// <param name="r">Represents the distance from the attacker.</param>
-    /// <returns></returns>
-    protected abstract string AffectMonsterScriptBindingKey { get; }
-
-    /// <summary>
-    /// Perform any effect needed on the player and returns true, if the effect was noticed.  Disturbs the player and returns true, by default.
-    /// </summary>
-    /// <param name="who"></param>
-    /// <param name="r"></param>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    /// <param name="dam"></param>
-    /// <param name="aRad"></param>
-    /// <returns></returns>
-    protected virtual bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-    {
-        return true;
-    }
-
     private char BoltChar(int y, int x, int ny, int nx)
     {
         if (ny == y && nx == x)
@@ -625,101 +580,41 @@ internal abstract class Projectile : IGetKey
         return '*'; // TODO: This can be a property for each projectile
     }
 
-    protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note)
-    {
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-    }
-    protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, string noteDies)
-    {
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
-    }
-    protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, int addFear)
-    {
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, addFear);
-    }
+    protected FloorEffect FloorEffect { get; private set; }
 
     /// <summary>
-    /// Attempt to join all of the projectile affect monsters with common framework.
+    /// Perform any effect needed on the floor and returns true, if the effect was noticed.  Does nothing and returns false, by default.
     /// </summary>
-    /// <param name="who"></param>
-    /// <param name="mPtr"></param>
-    /// <param name="dam"></param>
-    /// <param name="note"></param>
-    protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, string? noteDies, int addFear)
-    {
-        if (addFear != 0)
-        {
-            int tmp = mPtr.FearLevel + addFear;
-            mPtr.FearLevel = tmp < 200 ? tmp : 200;
-        }
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <returns></returns>
+    protected virtual string FloorEffectBindingKey => nameof(UnnoticedFloorEffect);
 
-        string mName = mPtr.Name;
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
-        MonsterRace rPtr = mPtr.Race;
+    /// <summary>
+    /// Returns the <see cref="ItemEffect"/> that perform the effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.  This property is bound
+    /// from the <see cref="ItemEffectBindingKey"/> property during the binding phase.
+    /// </summary>
+    protected ItemEffect ItemEffect { get; private set; }
 
-        if (noteDies == null)
-        {
-            noteDies = rPtr.DeathNote();
-        }
-        if (rPtr.Guardian && who != 0 && dam > mPtr.Health)
-        { 
-            dam = mPtr.Health;
-        }
-        if (dam > mPtr.Health)
-        {
-            note = noteDies;
-        }
-        if (who != 0)
-        {
-            mPtr.SleepLevel = 0;
-            mPtr.Health -= dam;
-            if (mPtr.Health < 0)
-            {
-                bool sad = mPtr.IsPet && !mPtr.IsVisible;
-                Game.MonsterDeath(mPtr);
-                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                if (string.IsNullOrEmpty(note) == false)
-                {
-                    Game.MsgPrint($"{mName}{note}");
-                }
-                if (sad)
-                {
-                    Game.MsgPrint("You feel sad for a moment.");
-                }
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(note) == false && mPtr.IsVisible)
-                {
-                    Game.MsgPrint($"{mName}{note}");
-                }
-                else if (dam > 0)
-                {
-                    Game.MessagePain(mPtr, dam);
-                }
-            }
-        }
-        else
-        {
-            if (Game.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
-            {
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(note) == false && mPtr.IsVisible)
-                {
-                    Game.MsgPrint($"{mName}{note}");
-                }
-                else if (dam > 0)
-                {
-                    Game.MessagePain(mPtr, dam);
-                }
-                if ((fear || addFear > 0) && mPtr.IsVisible)
-                {
-                    Game.PlaySound(SoundEffectEnum.MonsterFlees);
-                    Game.MsgPrint($"{mName} flees in terror!");
-                }
-            }
-        }
-    }
+    /// <summary>
+    /// Returns the binding key for the <see cref="ItemEffect"></see> object to perform the effect needed on an item.  This property is used to bind the <see cref="ItemEffect"></see> property during the
+    /// binding phase.
+    /// </summary>
+    protected virtual string ItemEffectBindingKey => nameof(UnnoticedItemEffect);
+
+    protected PlayerEffect PlayerEffect { get; private set; }
+
+    protected virtual string PlayerEffectBindingKey => nameof(NoticedPlayerEffect);
+
+    protected MonsterEffect MonsterEffect { get; private set; }
+
+    /// <summary>
+    /// Perform any effect needed on a monster and returns true, if the effect was noticed.
+    /// </summary>
+    /// <param name="who">Represents who performed the attack.  A value of 0, means the player.  Otherwise, who represents the MonsterIndex.</param>
+    /// <param name="dam">Represents the amount of damage to inflict.  This damage value is automatically decreased with the distance from the attacker.</param>
+    /// <param name="mPtr">Represents the monster to affect.</param>
+    /// <param name="r">Represents the distance from the attacker.</param>
+    /// <returns></returns>
+    protected abstract string MonsterEffectBindingKey { get; }
 }

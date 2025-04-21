@@ -14,5 +14,5 @@ internal class TurnEvilProjectile : Projectile
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
 
-    protected override string AffectMonsterScriptBindingKey => nameof(TurnEvilMonsterEffect);
+    protected override string MonsterEffectBindingKey => nameof(TurnEvilMonsterEffect);
 }
