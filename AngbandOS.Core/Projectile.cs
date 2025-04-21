@@ -5,6 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+using System.Text.Json;
+using System.Xml.Linq;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -23,31 +27,51 @@ internal abstract class Projectile : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        ProjectileGameConfiguration projectileDefinition = new ProjectileGameConfiguration()
+        {
+            Key = Key,
+            FloorEffectBindingKey = FloorEffectBindingKey,
+            MonsterEffectBindingKey = MonsterEffectBindingKey,
+            ItemEffectBindingKey = ItemEffectBindingKey,
+            PlayerEffectBindingKey = PlayerEffectBindingKey,
+            ImpactProjectileGraphicBindingKey = ImpactProjectileGraphicBindingKey,
+            EffectAnimationBindingKey = EffectAnimationBindingKey,
+            BoltProjectileGraphicBindingKey = BoltProjectileGraphicBindingKey
+        };
+        return JsonSerializer.Serialize(projectileDefinition, Game.GetJsonSerializerOptions());
     }
 
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         MonsterEffect = Game.SingletonRepository.Get<MonsterEffect>(MonsterEffectBindingKey);
         ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);
         PlayerEffect = Game.SingletonRepository.Get<PlayerEffect>(PlayerEffectBindingKey);
         FloorEffect = Game.SingletonRepository.Get<FloorEffect>(FloorEffectBindingKey);
+        ImpactProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(ImpactProjectileGraphicBindingKey);
+        EffectAnimation = Game.SingletonRepository.GetNullable<Animation>(EffectAnimationBindingKey);
+        BoltProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(BoltProjectileGraphicBindingKey);
     }
 
     /// <summary>
     /// Returns the graphics to be used while the projectile is in motion; or null, if there is no graphic.  Returns null, by default.
     /// </summary>
-    protected virtual ProjectileGraphic? BoltProjectileGraphic => null;
+    protected ProjectileGraphic? BoltProjectileGraphic { get; private set; }
 
-    protected virtual Animation? EffectAnimation => null;
+    protected virtual string? BoltProjectileGraphicBindingKey => null;
+
+    protected Animation? EffectAnimation { get; private set; }
+
+    protected virtual string? EffectAnimationBindingKey => null;
 
     /// <summary>
     /// Returns the graphics to be used when the projectile impacts something; or null, if there is no graphic.  Returns null, by default.
     /// </summary>
-    protected virtual ProjectileGraphic? ImpactProjectileGraphic => null;
+    protected ProjectileGraphic? ImpactProjectileGraphic { get; private set; }
+
+    protected virtual string? ImpactProjectileGraphicBindingKey => null;
 
     /// <summary>
     /// Returns true, if the projectile actually hits and affects a monster.

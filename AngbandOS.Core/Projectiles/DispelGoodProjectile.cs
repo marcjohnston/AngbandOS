@@ -12,9 +12,9 @@ internal class DispelGoodProjectile : Projectile
 {
     private DispelGoodProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightWhiteSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightWhiteSplatProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightWhiteExpandAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BrightWhiteExpandAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(DispelGoodMonsterEffect);
 }

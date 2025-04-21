@@ -12,9 +12,9 @@ internal class ShardProjectile : Projectile
 {
     private ShardProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightBrownSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightBrownSplatProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightBrownSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(BrightBrownSplatProjectileGraphic);
 
     protected override string MonsterEffectBindingKey => nameof(ShardMonsterEffect);
 

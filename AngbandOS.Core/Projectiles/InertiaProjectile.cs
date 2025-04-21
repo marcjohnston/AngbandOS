@@ -12,9 +12,9 @@ internal class InertiaProjectile : Projectile
 {
     private InertiaProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(OrangeBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(OrangeBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(OrangeSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(OrangeSplatProjectileGraphic);
 
     protected override string MonsterEffectBindingKey => nameof(InertiaMonsterEffect);
 

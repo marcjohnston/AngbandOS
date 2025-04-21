@@ -12,9 +12,9 @@ internal class ControlAnimalProjectile : Projectile
 {
     private ControlAnimalProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreenBulletProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(GreenBulletProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenControlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(GreenControlAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(ControlAnimalMonsterEffect);
 }

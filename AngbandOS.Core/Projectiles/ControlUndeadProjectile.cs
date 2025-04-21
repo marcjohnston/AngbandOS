@@ -12,9 +12,9 @@ internal class ControlUndeadProjectile : Projectile
 {
     private ControlUndeadProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlackBulletProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BlackBulletProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlackControlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BlackControlAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(ControlUndeadMonsterEffect);
 }

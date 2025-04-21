@@ -12,9 +12,9 @@ internal class FireProjectile : Projectile
 {
     private FireProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(RedBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(RedBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(RedSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(RedSplatProjectileGraphic);
 
     protected override string ItemEffectBindingKey => nameof(FireItemEffect);
 

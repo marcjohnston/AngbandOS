@@ -12,9 +12,9 @@ internal class WaterProjectile : Projectile
 {
     private WaterProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlueSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BlueSplatProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlueSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(BlueSplatProjectileGraphic);
 
     protected override string MonsterEffectBindingKey => nameof(WaterMonsterEffect);
 

@@ -12,9 +12,9 @@ internal class OldCloneProjectile : Projectile
 {
     private OldCloneProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(CopperBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(CopperBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(CopperExpandAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(CopperExpandAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(OldCloneMonsterEffect);
 }

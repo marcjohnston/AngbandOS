@@ -12,9 +12,9 @@ internal class LightWeakProjectile : Projectile
 {
     private LightWeakProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightWhiteBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightWhiteBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightWhiteCloudAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BrightWhiteCloudAnimation);
 
     protected override string FloorEffectBindingKey => nameof(LightWeakFloorEffect);
 

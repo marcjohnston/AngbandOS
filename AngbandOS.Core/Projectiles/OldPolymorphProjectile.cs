@@ -12,9 +12,9 @@ internal class OldPolymorphProjectile : Projectile
 {
     private OldPolymorphProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(PurpleSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(PurpleSplatProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PurpleSparkleAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(PurpleSparkleAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(OldPolymorphMonsterEffect);
 }

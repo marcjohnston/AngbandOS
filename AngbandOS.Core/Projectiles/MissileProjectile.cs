@@ -12,9 +12,9 @@ internal class MissileProjectile : Projectile
 {
     private MissileProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightTurquoiseBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightTurquoiseBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightTurquoiseSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(BrightTurquoiseSplatProjectileGraphic);
 
     protected override string MonsterEffectBindingKey => nameof(MissileMonsterEffect);
 

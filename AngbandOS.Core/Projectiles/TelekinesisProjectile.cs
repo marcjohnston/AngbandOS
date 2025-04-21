@@ -12,9 +12,9 @@ internal class TelekinesisProjectile : Projectile
 {
     private TelekinesisProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(TurquoiseBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(TurquoiseBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(TurquoiseSwirlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(TurquoiseSwirlAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(TelekinesisMonsterEffect);
 }

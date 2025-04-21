@@ -12,9 +12,9 @@ internal class DeathRayProjectile : Projectile
 {
     private DeathRayProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(CopperBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(CopperBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(CopperContractAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(CopperContractAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(DeathRayMonsterEffect);
 }

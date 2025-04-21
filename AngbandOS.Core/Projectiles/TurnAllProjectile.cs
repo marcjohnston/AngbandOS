@@ -12,7 +12,7 @@ internal class TurnAllProjectile : Projectile
 {
     private TurnAllProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(WhiteControlAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(TurnAllMonsterEffect);
 }

@@ -12,9 +12,9 @@ internal class TimeProjectile : Projectile
 {
     private TimeProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightGreenBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightGreenBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightGreenCloudAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BrightGreenCloudAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(TimeMonsterEffect);
 

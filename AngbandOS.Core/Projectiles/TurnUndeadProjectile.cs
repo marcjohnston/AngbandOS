@@ -12,7 +12,7 @@ internal class TurnUndeadProjectile : Projectile
 {
     private TurnUndeadProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(WhiteControlAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(TurnUndeadMonsterEffect);
 }

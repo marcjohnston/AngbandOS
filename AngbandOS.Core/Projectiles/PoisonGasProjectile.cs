@@ -12,11 +12,11 @@ internal class PoisonGasProjectile : Projectile
 {
     private PoisonGasProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreenBulletProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(GreenBulletProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreenSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(GreenSplatProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenCloudAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(GreenCloudAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(PoisonGasMonsterEffect);
 

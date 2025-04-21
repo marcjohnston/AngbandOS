@@ -12,9 +12,9 @@ internal class OldDrainLifeProjectile : Projectile
 {
     private OldDrainLifeProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlackBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BlackBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlackContractAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BlackContractAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(OldDrainLifeMonsterEffect);
 }

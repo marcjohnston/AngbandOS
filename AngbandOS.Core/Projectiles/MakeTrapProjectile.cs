@@ -12,7 +12,7 @@ internal class MakeTrapProjectile : Projectile
 {
     private MakeTrapProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightRedSparkleAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BrightRedSparkleAnimation);
 
     protected override string FloorEffectBindingKey => nameof(MakeTrapFloorEffect);
 

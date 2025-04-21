@@ -14,9 +14,9 @@ internal class IceProjectile : Projectile
 {
     private IceProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(DiamondBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(DiamondBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(DiamondSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(DiamondSplatProjectileGraphic);
 
     protected override string ItemEffectBindingKey => nameof(IceItemEffect);
 

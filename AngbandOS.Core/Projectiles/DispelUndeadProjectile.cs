@@ -12,9 +12,9 @@ internal class DispelUndeadProjectile : Projectile
 {
     private DispelUndeadProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlackSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BlackSplatProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlackExpandAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BlackExpandAnimation);
 
 
     protected override string MonsterEffectBindingKey => nameof(DispelUndeadMonsterEffect);

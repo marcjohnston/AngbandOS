@@ -12,9 +12,9 @@ internal class DisenchantProjectile : Projectile
 {
     private DisenchantProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(ChartreuseSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(ChartreuseSplatProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(ChartreuseSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(ChartreuseSplatProjectileGraphic);
 
     protected override string MonsterEffectBindingKey => nameof(DisenchantMonsterEffect);
 

@@ -12,7 +12,7 @@ internal class WallToMudProjectile : Projectile
 {
     private WallToMudProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrownSwirlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BrownSwirlAnimation);
 
     protected override string FloorEffectBindingKey => nameof(WallToMudFloorEffect);
 

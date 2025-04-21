@@ -12,9 +12,9 @@ internal class ColdProjectile : Projectile
 {
     private ColdProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(WhiteSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(WhiteSplatProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(WhiteSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(WhiteSplatProjectileGraphic);
 
     protected override string ItemEffectBindingKey => nameof(ColdItemEffect);
 

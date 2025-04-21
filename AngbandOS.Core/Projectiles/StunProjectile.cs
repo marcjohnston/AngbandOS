@@ -12,9 +12,9 @@ internal class StunProjectile : Projectile
 {
     private StunProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GoldBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(GoldBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GoldSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(GoldSplatProjectileGraphic);
 
     protected override string MonsterEffectBindingKey => nameof(StunMonsterEffect);
 }

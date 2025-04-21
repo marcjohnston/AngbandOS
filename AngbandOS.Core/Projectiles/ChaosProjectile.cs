@@ -12,11 +12,11 @@ internal class ChaosProjectile : Projectile
 {
     private ChaosProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(PurpleBulletProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(PurpleBulletProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(PurpleSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(PurpleSplatProjectileGraphic);
 
-    protected override Animation? EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PinkPurpleFlashAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(PinkPurpleFlashAnimation);
 
     protected override string FloorEffectBindingKey => nameof(NoticedFloorEffect);
 

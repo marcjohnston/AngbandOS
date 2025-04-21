@@ -12,9 +12,9 @@ internal class WizardBoltProjectile : Projectile
 {
     private WizardBoltProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(PinkBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(PinkBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(PinkSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(PinkSplatProjectileGraphic);
 
     protected override string ItemEffectBindingKey => nameof(WizardBoltItemEffect);
 

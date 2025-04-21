@@ -12,9 +12,9 @@ internal class PsiDrainProjectile : Projectile
 {
     private PsiDrainProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BeigeBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BeigeBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BeigeContractAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BeigeContractAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(PsiDrainAffectMonsterScript);
 }

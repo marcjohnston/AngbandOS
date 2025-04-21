@@ -12,9 +12,9 @@ internal class NexusProjectile : Projectile
 {
     private NexusProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(PinkBulletProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(PinkBulletProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PinkSwirlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(PinkSwirlAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(NexusMonsterEffect);
 

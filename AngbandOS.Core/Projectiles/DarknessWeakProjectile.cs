@@ -12,9 +12,9 @@ internal class DarknessWeakProjectile : Projectile
 {
     private DarknessWeakProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreyBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(GreyBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreySplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(GreySplatProjectileGraphic);
 
     protected override string FloorEffectBindingKey => nameof(DarknessWeakFloorEffect);
 

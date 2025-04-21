@@ -12,7 +12,7 @@ internal class JamDoorProjectile : Projectile
 {
     private JamDoorProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(YellowSwirlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(YellowSwirlAnimation);
 
     protected override string FloorEffectBindingKey => nameof(JamDoorFloorEffect);
 

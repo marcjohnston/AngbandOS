@@ -12,7 +12,7 @@ internal class CharmProjectile : Projectile
 {
     private CharmProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyControlAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(GreyControlAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(CharmMonsterEffect);
 }

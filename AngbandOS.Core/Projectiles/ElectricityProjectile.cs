@@ -12,9 +12,9 @@ internal class ElectricityProjectile : Projectile
 {
     private ElectricityProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightYellowBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightYellowBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightYellowCloudAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(BrightYellowCloudAnimation);
 
     protected override string ItemEffectBindingKey => nameof(ElectricityItemEffect);
 

@@ -14,9 +14,9 @@ internal class HolyFireProjectile : Projectile
 {
     private HolyFireProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightRedSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightRedSplatProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(RedWhiteFlashAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(RedWhiteFlashAnimation);
 
     protected override string ItemEffectBindingKey => nameof(HolyFireItemEffect);
 

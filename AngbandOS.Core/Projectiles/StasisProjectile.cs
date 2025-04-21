@@ -12,9 +12,9 @@ internal class StasisProjectile : Projectile
 {
     private StasisProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(SilverBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(SilverBoltProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(SilverCloudAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(SilverCloudAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(StasisMonsterEffect);
 }

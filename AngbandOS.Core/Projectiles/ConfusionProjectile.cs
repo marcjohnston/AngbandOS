@@ -12,9 +12,9 @@ internal class ConfusionProjectile : Projectile
 {
     private ConfusionProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreySplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(GreySplatProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyQuestionAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(GreyQuestionAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(ConfusionMonsterEffect);
 

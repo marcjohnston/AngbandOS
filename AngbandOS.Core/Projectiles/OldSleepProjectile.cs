@@ -14,7 +14,7 @@ internal class OldSleepProjectile : Projectile
 {
     private OldSleepProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(YellowSparkleAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(YellowSparkleAnimation);
 
     protected override string MonsterEffectBindingKey => nameof(OldSleepMonsterEffect);
 

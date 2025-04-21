@@ -12,9 +12,9 @@ internal class PlasmaProjectile : Projectile
 {
     private PlasmaProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightRedBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightRedBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightRedSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(BrightRedSplatProjectileGraphic);
 
     protected override string ItemEffectBindingKey => nameof(PlasmaItemEffect);
 

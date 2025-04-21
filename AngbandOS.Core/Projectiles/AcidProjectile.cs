@@ -12,9 +12,9 @@ internal class AcidProjectile : Projectile
 {
     private AcidProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightChartreuseBoltProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(BrightChartreuseBoltProjectileGraphic);
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightChartreuseSplatProjectileGraphic));
+    protected override string? ImpactProjectileGraphicBindingKey => nameof(BrightChartreuseSplatProjectileGraphic);
 
     protected override string ItemEffectBindingKey => nameof(AcidItemEffect);
 

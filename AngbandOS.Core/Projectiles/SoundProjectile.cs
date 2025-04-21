@@ -12,9 +12,9 @@ internal class SoundProjectile : Projectile
 {
     private SoundProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GoldSplatProjectileGraphic));
+    protected override string? BoltProjectileGraphicBindingKey => nameof(GoldSplatProjectileGraphic);
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GoldCloudAnimation));
+    protected override string? EffectAnimationBindingKey => nameof(GoldCloudAnimation);
 
     protected override string ItemEffectBindingKey => nameof(SoundItemEffect);
 
