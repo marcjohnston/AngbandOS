@@ -27,6 +27,20 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
         return new RepeatableResult(false);
     }
 
+    private List<Mutation> ActivatableMutations()
+    {
+        List<Mutation> list = new List<Mutation>();
+        foreach (Mutation mutation in Game.MutationsPossessed)
+        {
+            if (string.IsNullOrEmpty(mutation.ActivationSummary(Game.ExperienceLevel.IntValue)))
+            {
+                continue;
+            }
+            list.Add(mutation);
+        }
+        return list;
+    }
+
     /// <summary>
     /// Executes the mutant power script.
     /// </summary>
@@ -63,7 +77,7 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
                 pets++;
             }
         }
-        List<Mutation> activeMutations = Game.ActivatableMutations();
+        List<Mutation> activeMutations = ActivatableMutations();
         if (!hasRacial && activeMutations.Count == 0 && pets == 0)
         {
             Game.MsgPrint("You have no powers to activate.");

@@ -17543,20 +17543,6 @@ internal class Game
 
     public bool HasMutations => MutationsPossessed.Count > 0;
 
-    public List<Mutation> ActivatableMutations()
-    {
-        List<Mutation> list = new List<Mutation>();
-        foreach (Mutation mutation in MutationsPossessed)
-        {
-            if (string.IsNullOrEmpty(mutation.ActivationSummary(ExperienceLevel.IntValue)))
-            {
-                continue;
-            }
-            list.Add(mutation);
-        }
-        return list;
-    }
-
     public string[] GetMutationList()
     {
         if (MutationsPossessed.Count == 0)
