@@ -17590,38 +17590,6 @@ internal class Game
         HandleStuff();
     }
 
-    public void LoseMutation()
-    {
-        if (MutationsPossessed.Count == 0)
-        {
-            return;
-        }
-        MsgPrint("You change...");
-        int total = 0;
-        foreach (Mutation mutation in MutationsPossessed)
-        {
-            total += mutation.Frequency;
-        }
-        int roll = DieRoll(total);
-        for (int i = 0; i < MutationsPossessed.Count; i++)
-        {
-            roll -= MutationsPossessed[i].Frequency;
-            if (roll > 0)
-            {
-                continue;
-            }
-            Mutation mutation = MutationsPossessed[i];
-            MutationsPossessed.RemoveAt(i);
-            mutation.OnLose();
-            MutationsNotPossessed.Add(mutation);
-            MsgPrint(mutation.LoseMessage);
-            return;
-        }
-        MsgPrint("Oops! Fell out of mutation list!");
-        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-        HandleStuff();
-    }
-
     public string Pluralize(string singular)
     {
         return Pluralize(singular, 0);
