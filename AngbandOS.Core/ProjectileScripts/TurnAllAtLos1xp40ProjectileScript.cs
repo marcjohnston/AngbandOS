@@ -20,7 +20,7 @@ internal class TurnAllAtLos1xp40ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(TurnAllProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.TurnAllProjectile);
     protected override string DamageRollExpression => "X+40";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

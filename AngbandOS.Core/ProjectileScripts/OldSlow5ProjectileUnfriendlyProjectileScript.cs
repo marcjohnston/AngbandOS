@@ -28,7 +28,7 @@ internal class OldSlow5ProjectileUnfriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(OldSlowProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldSlowProjectile);
 
     protected override string DamageRollExpression => "5";
     protected override string RadiusRollExpression => "2";

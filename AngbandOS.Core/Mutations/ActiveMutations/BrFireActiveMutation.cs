@@ -20,7 +20,7 @@ internal class BrFireActiveMutation : Mutation
         Game.MsgPrint("You breathe fire...");
         if (Game.GetDirectionWithAim(out int dir))
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.ExperienceLevel.IntValue * 2, -(1 + (Game.ExperienceLevel.IntValue / 20)));
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), dir, Game.ExperienceLevel.IntValue * 2, -(1 + (Game.ExperienceLevel.IntValue / 20)));
         }
     }
 

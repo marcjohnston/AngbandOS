@@ -20,7 +20,7 @@ internal class OldSlow1xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(OldSlowProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldSlowProjectile);
     protected override string DamageRollExpression => "X";
     public override bool? Identified => null;
 }

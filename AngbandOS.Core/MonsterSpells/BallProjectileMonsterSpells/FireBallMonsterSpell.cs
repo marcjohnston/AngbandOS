@@ -16,7 +16,7 @@ internal class FireBallMonsterSpell : BallProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a fire ball at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a fire ball.";
-    protected override string ProjectileKey => nameof(FireProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.FireProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

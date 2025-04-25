@@ -93,6 +93,7 @@ public class GameConfiguration
 
     public virtual GodGameConfiguration[]? Gods { get; set; } = null;
     public virtual SyllableSetGameConfiguration[]? SyllableSets { get; set; } = null;
+    public virtual ProjectileGameConfiguration[]? Projectiles { get; set; } = null;
 
     public virtual string[]? ShopkeeperAcceptedComments { get; set; } = null;
     public virtual string[]? IllegibleFlavorSyllables { get; set; } = null;

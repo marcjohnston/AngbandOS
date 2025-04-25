@@ -20,6 +20,6 @@ internal class TeleportAwayAll1xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(TeleportAwayAllProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.TeleportAwayAllProjectile);
     protected override string DamageRollExpression => "X";
 }

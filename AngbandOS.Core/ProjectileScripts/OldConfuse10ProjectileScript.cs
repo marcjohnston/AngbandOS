@@ -20,7 +20,7 @@ internal class OldConfuse10ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(OldConfuseProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldConfuseProjectile);
     protected override string DamageRollExpression => "10";
     public override bool? Identified => null;
 }

@@ -28,7 +28,7 @@ internal class Explode25d25ProjectileUnfriendlyProjectileScript : ProjectileScri
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(ExplodeProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ExplodeProjectile);
 
     protected override string DamageRollExpression => "25d25";
     protected override string RadiusRollExpression => "2";

@@ -21,7 +21,7 @@ internal class DarknessMonsterSpell : BallProjectileMonsterSpell
     /// </summary>
     public override string? VsMonsterSeenMessage => "{0} gestures in shadow at {3}";
     public override string? VsPlayerActionMessage => "{0} gestures in shadow.";
-    protected override string ProjectileKey => nameof(AcidProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.AcidProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

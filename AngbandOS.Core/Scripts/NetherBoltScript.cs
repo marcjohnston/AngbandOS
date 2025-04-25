@@ -42,6 +42,6 @@ internal class NetherBoltScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(NetherProjectile)), dir, Game.DiceRoll(6 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.NetherProjectile)), dir, Game.DiceRoll(6 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

@@ -20,7 +20,7 @@ internal class Chaos220rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ChaosProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ChaosProjectile);
     protected override string DamageRollExpression => "220";
     protected override string RadiusRollExpression => "-2";
     public override string? PreMessage => "You breathe chaos.";

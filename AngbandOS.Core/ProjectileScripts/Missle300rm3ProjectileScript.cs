@@ -20,7 +20,7 @@ internal class Missle300rm3ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(MissileProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.MissileProjectile);
     protected override string DamageRollExpression => "300";
     protected override string RadiusRollExpression => "-3";
 }

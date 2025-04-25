@@ -20,7 +20,7 @@ internal class StasisAtLos4xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(StasisProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.StasisProjectile);
     protected override string DamageRollExpression => "4*X";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

@@ -20,7 +20,7 @@ internal class PoisonGas60rm3ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(PoisonGasProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.PoisonGasProjectile);
     protected override string DamageRollExpression => "60";
     protected override string RadiusRollExpression => "-3";
 }

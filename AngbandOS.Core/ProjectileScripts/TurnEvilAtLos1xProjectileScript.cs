@@ -20,7 +20,7 @@ internal class TurnEvilAtLos1xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(TurnEvilProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.TurnEvilProjectile);
     protected override string DamageRollExpression => "X";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

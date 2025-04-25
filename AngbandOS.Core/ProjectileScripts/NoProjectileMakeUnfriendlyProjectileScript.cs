@@ -28,7 +28,7 @@ internal class NoProjectileMakeUnfriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(NoProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.NoProjectile);
 
     protected override string DamageRollExpression => "0";
 }

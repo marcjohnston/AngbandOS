@@ -15,7 +15,7 @@ internal class LightningBallMonsterSpell : BallProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a lightning ball at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a lightning ball.";
-    protected override string ProjectileKey => nameof(ElectricityProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ElectricityProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

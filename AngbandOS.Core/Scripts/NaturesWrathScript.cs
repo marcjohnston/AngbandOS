@@ -25,7 +25,7 @@ internal class NaturesWrathScript : Script, IScript, ICastSpellScript
     {
         Game.RunScript(nameof(DispelAllAtLos4xProjectileScript));
         Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 20 + (Game.ExperienceLevel.IntValue / 2));
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DisintegrateProjectile));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DisintegrateProjectile));
         projectile.Fire(0, 1 + (Game.ExperienceLevel.IntValue / 12), Game.MapY.IntValue, Game.MapX.IntValue, 100 + Game.ExperienceLevel.IntValue, kill: true, item: true, jump: false, beam: false, thru: false, hide: false, grid: false, stop: false);
     }
 }

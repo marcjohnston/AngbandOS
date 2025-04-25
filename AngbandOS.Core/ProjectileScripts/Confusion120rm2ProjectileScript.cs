@@ -20,7 +20,7 @@ internal class Confusion120rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ConfusionProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ConfusionProjectile);
     protected override string DamageRollExpression => "120";
     protected override string RadiusRollExpression => "-2";
 }

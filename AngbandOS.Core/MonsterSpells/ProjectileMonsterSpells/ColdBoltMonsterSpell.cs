@@ -23,6 +23,6 @@ internal class ColdBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DiceRoll(6, 8) + (monsterLevel / 3);
     }
-    protected override string ProjectileKey => nameof(ColdProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ColdProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ColdSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

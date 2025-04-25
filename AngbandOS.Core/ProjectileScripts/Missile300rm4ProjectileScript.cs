@@ -20,7 +20,7 @@ internal class Missile300rm4ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(MissileProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.MissileProjectile);
     protected override string DamageRollExpression => "300";
     protected override string RadiusRollExpression => "-4";
     public override string? PreMessage => "You breathe the elements.";
@@ -39,7 +39,7 @@ internal class Missile300r4ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(MissileProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.MissileProjectile);
     protected override string DamageRollExpression => "300";
     protected override string RadiusRollExpression => "4";
 }

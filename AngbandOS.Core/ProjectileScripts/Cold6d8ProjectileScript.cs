@@ -20,6 +20,6 @@ internal class Cold6d8ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ColdProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ColdProjectile);
     protected override string DamageRollExpression => "6d8";
 }

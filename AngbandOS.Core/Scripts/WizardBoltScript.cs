@@ -40,7 +40,7 @@ internal class WizardBoltScript : Script, IScript, ICastSpellScript
                 ty = target.Y;
             }
         }
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(WizardBoltProjectile));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.WizardBoltProjectile));
         projectile.Fire(0, 0, ty, tx, 1000000, stop: stop, grid: true, item: true, kill: true, jump: false, beam: false, thru: false, hide: false);
     }
 }

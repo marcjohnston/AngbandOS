@@ -20,6 +20,6 @@ internal class ControlUndead1xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ControlUndeadProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ControlUndeadProjectile);
     protected override string DamageRollExpression => "X";
 }

@@ -42,6 +42,6 @@ internal class FireBoltOrBeamOfFireScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

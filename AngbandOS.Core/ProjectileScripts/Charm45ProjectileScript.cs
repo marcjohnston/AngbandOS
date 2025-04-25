@@ -20,6 +20,6 @@ internal class Charm45ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(CharmProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.CharmProjectile);
     protected override string DamageRollExpression => "45";
 }

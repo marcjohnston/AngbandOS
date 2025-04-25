@@ -22,6 +22,6 @@ internal class NetherBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return 30 + Game.DiceRoll(5, 5) + (monsterLevel * 3 / 2);
     }
-    protected override string ProjectileKey => nameof(NetherProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.NetherProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(NethSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

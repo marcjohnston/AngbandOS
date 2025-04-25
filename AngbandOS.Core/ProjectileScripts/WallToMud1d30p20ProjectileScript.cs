@@ -20,7 +20,7 @@ internal class WallToMud1d30p20ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(WallToMudProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.WallToMudProjectile);
     protected override string DamageRollExpression => "1d30+20";
     public override bool? Identified => null;
 }

@@ -31,19 +31,19 @@ internal class ElementalBallScript : Script, IScript, ICastSpellScript
         switch (Game.DieRoll(4))
         {
             case 1:
-                dummy = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
+                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile));
                 break;
 
             case 2:
-                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile));
+                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ElectricityProjectile));
                 break;
 
             case 3:
-                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
+                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ColdProjectile));
                 break;
 
             default:
-                dummy = Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile));
+                dummy = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.AcidProjectile));
                 break;
         }
         Game.FireBall(dummy, dir, 75 + Game.ExperienceLevel.IntValue, 2);

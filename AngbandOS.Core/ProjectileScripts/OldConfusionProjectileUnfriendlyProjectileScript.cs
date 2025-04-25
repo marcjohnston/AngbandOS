@@ -28,7 +28,7 @@ internal class OldConfusionProjectileUnfriendlyProjectileScript : ProjectileScri
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(OldHealProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldHealProjectile);
 
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "2";

@@ -20,7 +20,7 @@ internal class DispelDemonAtLos3xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(DispelDemonProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.DispelDemonProjectile);
     protected override string DamageRollExpression => "3*X";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

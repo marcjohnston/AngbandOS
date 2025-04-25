@@ -20,7 +20,7 @@ internal class ControlAnimalAtLos2xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(ControlAnimalProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ControlAnimalProjectile);
     protected override string DamageRollExpression => "2*X";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

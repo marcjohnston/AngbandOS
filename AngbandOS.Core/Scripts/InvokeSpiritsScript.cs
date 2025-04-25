@@ -69,7 +69,7 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
         }
         if (die < 36)
         {
-            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), dir,
+            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.MissileProjectile)), dir,
                 Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 4));
         }
         if (die < 41)
@@ -78,7 +78,7 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
         }
         if (die < 46)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile)), dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PoisonGasProjectile)), dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3);
         }
         if (die < 51)
         {
@@ -86,19 +86,19 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
         }
         if (die < 56)
         {
-            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ElectricityProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
         }
         if (die < 61)
         {
-            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, Game.DiceRoll(5 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+            Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ColdProjectile)), dir, Game.DiceRoll(5 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
         }
         if (die < 66)
         {
-            Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, Game.DiceRoll(6 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+            Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.AcidProjectile)), dir, Game.DiceRoll(6 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
         }
         if (die < 71)
         {
-            Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+            Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
         }
         if (die < 76)
         {
@@ -106,19 +106,19 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
         }
         if (die < 81)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, 30 + (Game.ExperienceLevel.IntValue / 2), 2);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ElectricityProjectile)), dir, 30 + (Game.ExperienceLevel.IntValue / 2), 2);
         }
         if (die < 86)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 40 + Game.ExperienceLevel.IntValue, 2);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.AcidProjectile)), dir, 40 + Game.ExperienceLevel.IntValue, 2);
         }
         if (die < 91)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(IceProjectile)), dir, 70 + Game.ExperienceLevel.IntValue, 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.IceProjectile)), dir, 70 + Game.ExperienceLevel.IntValue, 3);
         }
         if (die < 96)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 80 + Game.ExperienceLevel.IntValue, 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), dir, 80 + Game.ExperienceLevel.IntValue, 3);
         }
         if (die < 101)
         {

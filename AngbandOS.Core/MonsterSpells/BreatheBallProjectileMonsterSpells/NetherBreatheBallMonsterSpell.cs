@@ -14,7 +14,7 @@ internal class NetherBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool UsesNether => true;
     public override string? VsMonsterSeenMessage => "{0} breathes nether at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes nether.";
-    protected override string ProjectileKey => nameof(NetherProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.NetherProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 550;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(NethSpellResistantDetection) };

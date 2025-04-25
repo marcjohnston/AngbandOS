@@ -20,6 +20,6 @@ internal class Fire9d8ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(FireProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.FireProjectile);
     protected override string DamageRollExpression => "9d8";
 }

@@ -20,7 +20,7 @@ internal class Mana300r3ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ManaProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ManaProjectile);
     protected override string DamageRollExpression => "300";
     protected override string RadiusRollExpression => "3";
 }

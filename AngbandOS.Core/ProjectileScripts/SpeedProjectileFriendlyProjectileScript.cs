@@ -28,7 +28,7 @@ internal class SpeedProjectileFriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(OldSpeedProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldSpeedProjectile);
 
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "2";

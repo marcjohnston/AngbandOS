@@ -20,7 +20,7 @@ internal class DestroyTrapProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(DestroyTrapProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.DestroyTrapProjectile);
     protected override string DamageRollExpression => "0";
     public override bool? Identified => null;
 }

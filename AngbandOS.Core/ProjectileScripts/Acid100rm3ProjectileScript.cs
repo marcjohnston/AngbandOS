@@ -20,7 +20,7 @@ internal class Acid100rm3ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(AcidProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.AcidProjectile);
     protected override string DamageRollExpression => "100";
     protected override string RadiusRollExpression => "-3";
 }

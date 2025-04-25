@@ -20,6 +20,6 @@ internal class Arrow150ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ArrowProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ArrowProjectile);
     protected override string DamageRollExpression => "150";
 }

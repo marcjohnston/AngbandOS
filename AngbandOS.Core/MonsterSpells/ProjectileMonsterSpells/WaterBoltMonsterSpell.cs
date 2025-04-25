@@ -20,6 +20,6 @@ internal class WaterBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DiceRoll(10, 10) + monsterLevel;
     }
-    protected override string ProjectileKey => nameof(WaterProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.WaterProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

@@ -20,7 +20,7 @@ internal class TeleportAwayEvilAtLosByArtifact100ProjectileScript : ProjectileSc
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(TeleportAwayEvilProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.TeleportAwayEvilProjectile);
     protected override string DamageRollExpression => "100";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

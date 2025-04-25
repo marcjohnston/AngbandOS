@@ -15,7 +15,7 @@ internal class NetherBallMonsterSpell : BallProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts an nether ball at {3}";
     public override string? VsPlayerActionMessage => "{0} casts an nether ball.";
-    protected override string ProjectileKey => nameof(NetherProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.NetherProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

@@ -20,7 +20,7 @@ internal class Darkness200rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(DarknessProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.DarknessProjectile);
     protected override string DamageRollExpression => "200";
     protected override string RadiusRollExpression => "-2";
     public override string? PreMessage => "You breathe darkness.";

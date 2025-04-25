@@ -18,7 +18,7 @@ internal class ChaosBall222R4IdentifableAndUsedScript : Script, IReadScrollOrUse
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, 222, 4);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ChaosProjectile)), 0, 222, 4);
         if (!Game.HasChaosResistance)
         {
             Game.TakeHit(111 + Game.DieRoll(111), "a Scroll of Chaos");

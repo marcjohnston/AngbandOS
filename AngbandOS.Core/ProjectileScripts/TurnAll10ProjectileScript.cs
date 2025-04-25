@@ -20,7 +20,7 @@ internal class TurnAll10ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(TurnAllProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.TurnAllProjectile);
     protected override string DamageRollExpression => "10";
     public override bool? Identified => null;
 }

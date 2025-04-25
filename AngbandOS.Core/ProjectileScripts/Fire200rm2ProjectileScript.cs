@@ -20,7 +20,7 @@ internal class Fire200rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(FireProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.FireProjectile);
     protected override string DamageRollExpression => "200";
     protected override string RadiusRollExpression => "-2";
 }

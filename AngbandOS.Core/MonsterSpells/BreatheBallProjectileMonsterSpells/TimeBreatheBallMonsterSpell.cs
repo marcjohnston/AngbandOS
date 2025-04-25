@@ -13,7 +13,7 @@ internal class TimeBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     private TimeBreatheBallMonsterSpell(Game game) : base(game) { }
     public override string? VsMonsterSeenMessage => "{0} breathes time at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes time.";
-    protected override string ProjectileKey => nameof(TimeProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.TimeProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 150;
 }

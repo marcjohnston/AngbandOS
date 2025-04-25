@@ -18,7 +18,7 @@ internal class FireIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScrip
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), 0, 150, 4);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), 0, 150, 4);
         if (!(Game.FireResistanceTimer.Value != 0 || Game.HasFireResistance || Game.HasFireImmunity))
         {
             Game.TakeHit(50 + Game.DieRoll(50), "a Scroll of Fire");

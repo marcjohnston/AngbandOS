@@ -14,7 +14,7 @@ internal class LightBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool UsesLight => true;
     public override string? VsMonsterSeenMessage => "{0} breathes light at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes light.";
-    protected override string ProjectileKey => nameof(LightProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.LightProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(LightSpellResistantDetection) };

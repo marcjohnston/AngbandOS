@@ -29,7 +29,7 @@ internal class CreateDoorProjectileScript : ProjectileScript
 
     public override bool Hide => true;
 
-    protected override string ProjectileBindingKey => nameof(MakeDoorProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.MakeDoorProjectile);
 
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "1";

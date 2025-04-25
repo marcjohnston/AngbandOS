@@ -28,7 +28,7 @@ internal class OldHeal6d3ProjectileFriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(OldHealProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldHealProjectile);
 
     protected override string DamageRollExpression => "6d3";
     protected override string RadiusRollExpression => "2";

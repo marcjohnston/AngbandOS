@@ -28,7 +28,7 @@ internal class DeathRayProjectileUnfriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(DeathRayProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.DeathRayProjectile);
 
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "1";

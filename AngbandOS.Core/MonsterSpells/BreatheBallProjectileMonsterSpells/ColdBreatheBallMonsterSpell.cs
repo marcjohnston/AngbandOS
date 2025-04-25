@@ -14,7 +14,7 @@ internal class ColdBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool UsesCold => true;
     public override string? VsMonsterSeenMessage => "{0} breathes frost at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes frost.";
-    protected override string ProjectileKey => nameof(ColdProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ColdProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ColdSpellResistantDetection) };

@@ -277,7 +277,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
                 break;
 
             case 32:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, spell + 5, 1 + (spell / 10));
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ChaosProjectile)), 0, spell + 5, 1 + (spell / 10));
                 break;
 
             case 33:

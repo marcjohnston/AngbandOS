@@ -20,7 +20,7 @@ internal class Light200rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(LightProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.LightProjectile);
     protected override string DamageRollExpression => "200";
     protected override string RadiusRollExpression => "-2";
     public override string? PreMessage => "You breathe light.";

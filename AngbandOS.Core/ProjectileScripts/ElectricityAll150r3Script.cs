@@ -20,7 +20,7 @@ internal class ElectricityAll150r3Script : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ElectricityProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ElectricityProjectile);
     protected override string DamageRollExpression => "150";
     protected override string RadiusRollExpression => "3";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllDirections;

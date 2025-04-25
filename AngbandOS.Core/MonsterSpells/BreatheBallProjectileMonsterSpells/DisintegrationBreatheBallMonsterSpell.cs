@@ -13,7 +13,7 @@ internal class DisintegrationBreatheBallMonsterSpell : BreatheBallProjectileMons
     private DisintegrationBreatheBallMonsterSpell(Game game) : base(game) { }
     public override string? VsMonsterSeenMessage => "{0} breathes disintegration at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes disintegration.";
-    protected override string ProjectileKey => nameof(DisintegrateProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.DisintegrateProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 300;
 }

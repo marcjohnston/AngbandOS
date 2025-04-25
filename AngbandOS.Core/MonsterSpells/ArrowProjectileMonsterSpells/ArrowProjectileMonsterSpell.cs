@@ -47,7 +47,7 @@ internal abstract class ArrowProjectileMonsterSpell : ProjectileMonsterSpell
     /// <returns></returns>
     protected override int Damage(Monster monster) => Game.ComputeIntegerExpression(DamageRoll).Value;
 
-    protected override string ProjectileKey => nameof(ArrowProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ArrowProjectile);
 
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

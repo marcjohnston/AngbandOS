@@ -21,6 +21,6 @@ internal class AcidBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DiceRoll(7, 8) + (monsterLevel / 3);
     }
-    protected override string ProjectileKey => nameof(AcidProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.AcidProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(AcidSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

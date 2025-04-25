@@ -28,7 +28,7 @@ internal class SonicBoomProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(SoundProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.SoundProjectile);
 
     protected override string DamageRollExpression => "45+x";
     protected override string RadiusRollExpression => "2+(x/10)";

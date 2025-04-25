@@ -28,7 +28,7 @@ internal class WardingProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(MakeElderSignProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.MakeElderSignProjectile);
 
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "1";

@@ -20,7 +20,7 @@ internal class LightWeak6d8ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(LightWeakProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.LightWeakProjectile);
     protected override string DamageRollExpression => "6d8";
     public override string? PreMessage => "A line of blue shimmering light appears.";
 }

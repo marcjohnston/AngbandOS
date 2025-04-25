@@ -22,7 +22,7 @@ internal class ChaosBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesChaos => true;
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} invokes raw chaos at {3}";
-    protected override string ProjectileKey => nameof(ChaosProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ChaosProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

@@ -60,6 +60,6 @@ internal class DrainStaffChargesAttackEffect : AttackEffect
 
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile));
+        pt = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DisenchantProjectile));
     }
 }

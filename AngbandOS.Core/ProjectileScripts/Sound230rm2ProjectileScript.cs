@@ -20,7 +20,7 @@ internal class Sound230rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(SoundProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.SoundProjectile);
     protected override string DamageRollExpression => "230";
     protected override string RadiusRollExpression => "-2";
     public override string? PreMessage => "You breathe sound.";

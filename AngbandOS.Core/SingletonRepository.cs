@@ -45,23 +45,54 @@ internal class SingletonRepository
     /// <exception cref="Exception"></exception>
     public T? GetNullable<T>(string? key) where T : class
     {
-        if (key == null)
-        {
-            return null;
-        }
-
-        string typeName = typeof(T).Name;
-
         // Check to see if the dictionary has a dictionary for this type of object.
+        string typeName = typeof(T).Name;
         if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
 
+        if (key == null)
+        {
+            return null;
+        }
+        T? value = TryGet<T>(key);
+        if (value == null)
+        {
+            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.\n\n1. Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.\n\n2. There is only one private constructor and that it only accepts the Game parameter.\n\n3. The singletons are either loaded fromt the Assembly or the configuration.\n\n");
+        }
+        return value;
+    }
+
+    /// <summary>
+    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> and returns null, if it isn't found.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public T? TryGet<T>(string key) where T : class
+    {
+
+        // Check to see if the dictionary has a dictionary for this type of object.
+        string typeName = typeof(T).Name;
+        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        {
+            throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
+        }
+
+        if (key == null)
+        {
+            throw new Exception($"A null key has been presented to the non-nullable binding for {typeof(T).Name}.  Use the {nameof(GetNullable)} method.");
+        }
+
+        string[] keyTokens = key.Split('.');
+        key = keyTokens[keyTokens.Length - 1];
+
         // Retrieve the singleton by key name.
         if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
         {
-            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.\n\n1. Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.\n\n2. There is only one private constructor and that it only accepts the Game parameter.\n\n3. The singletons are either loaded fromt the Assembly or the configuration.\n\n");
+            return null;
         }
         return (T)singleton;
     }
@@ -132,37 +163,17 @@ internal class SingletonRepository
     /// <exception cref="Exception"></exception>
     public T Get<T>(string key) where T : class
     {
+        if (key == null)
+        {
+            throw new Exception($"A null key has been presented to the non-nullable binding for {typeof(T).Name}.  Use the {nameof(GetNullable)} method.");
+        }
+
         T? singleton = GetNullable<T>(key);
         if (singleton == null)
         {
             throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
         }
         return singleton;
-    }
-
-    /// <summary>
-    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> and returns null, if it isn't found.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public T? TryGet<T>(string key) where T : class
-    {
-        string typeName = typeof(T).Name;
-
-        // Check to see if the dictionary has a dictionary for this type of object.
-        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
-        {
-            throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
-        }
-
-        // Retrieve the singleton by key name.
-        if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
-        {
-            return null;
-        }
-        return (T)singleton;
     }
 
     public T Get<T>(int index) where T : class
@@ -328,7 +339,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Property>();
         LoadAllAssemblyTypes<Timer>();
 
-        // Now load the user-configured singletons.
+        // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
@@ -341,6 +352,7 @@ internal class SingletonRepository
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
+        LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
@@ -351,7 +363,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
 
-        // Load the remaining user-configured singletons from the assembly.
+        // Load the remaining user-configured singletons from the assembly.  These singletons have not been exported to the GamePack yet.
         LoadAllAssemblyTypes<Activation>();
         LoadAllAssemblyTypes<ActivationWeightedRandom>();
         LoadAllAssemblyTypes<AlterAction>();
@@ -385,7 +397,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<Patron>();
         LoadAllAssemblyTypes<PlayerEffect>();
-        LoadAllAssemblyTypes<Projectile>();
         LoadAllAssemblyTypes<ProjectileScript>();
         LoadAllAssemblyTypes<ProjectileWeightedRandomScript>();
         LoadAllAssemblyTypes<Race>();

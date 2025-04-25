@@ -20,7 +20,7 @@ internal class Explode250rm2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ExplodeProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ExplodeProjectile);
     protected override string DamageRollExpression => "250";
     protected override string RadiusRollExpression => "-2";
     public override string? PreMessage => "You breathe shards.";

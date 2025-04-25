@@ -28,7 +28,7 @@ internal class OldSleepProjectileUnfriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(OldSleepProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldSleepProjectile);
 
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "2";

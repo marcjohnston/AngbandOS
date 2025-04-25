@@ -20,7 +20,7 @@ internal class OldCloneProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(OldCloneProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldCloneProjectile);
     protected override string DamageRollExpression => "0"; // Not used.
     public override bool? Identified => null;
 }

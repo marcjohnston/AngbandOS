@@ -23,7 +23,7 @@ internal class MagicMissileMonsterSpell : ProjectileMonsterSpell
         return Game.DiceRoll(2, 6) + (monsterLevel / 3);
     }
 
-    protected override string ProjectileKey => nameof(MissileProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.MissileProjectile);
 
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

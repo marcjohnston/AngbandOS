@@ -28,7 +28,7 @@ internal class DarkProjectileUnfriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(DarknessProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.DarknessProjectile);
 
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "2";

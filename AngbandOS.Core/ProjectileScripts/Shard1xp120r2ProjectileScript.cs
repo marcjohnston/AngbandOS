@@ -20,7 +20,7 @@ internal class Shard1xp120r2ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ShardProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ShardProjectile);
     protected override string DamageRollExpression => "X+120";
     protected override string RadiusRollExpression => "2";
 }

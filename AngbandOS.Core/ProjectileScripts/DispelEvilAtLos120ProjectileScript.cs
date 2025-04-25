@@ -20,7 +20,7 @@ internal class DispelEvilAtLos120ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(DispelEvilProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.DispelEvilProjectile);
     protected override string DamageRollExpression => "120";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

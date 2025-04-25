@@ -20,6 +20,6 @@ internal class Electricity3d8ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ElectricityProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ElectricityProjectile);
     protected override string DamageRollExpression => "3d8";
 }

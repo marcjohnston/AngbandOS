@@ -23,6 +23,6 @@ internal class FlameStrikeScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), 0, 150 + (2 * Game.ExperienceLevel.IntValue), 8);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), 0, 150 + (2 * Game.ExperienceLevel.IntValue), 8);
     }
 }

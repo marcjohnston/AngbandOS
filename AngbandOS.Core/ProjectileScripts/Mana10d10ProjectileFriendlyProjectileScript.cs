@@ -28,7 +28,7 @@ internal class Mana10d10ProjectileFriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(ManaProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ManaProjectile);
 
     protected override string DamageRollExpression => "10d10";
     protected override string RadiusRollExpression => "1";

@@ -20,7 +20,7 @@ internal class MakeTrapr1ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(MakeTrapProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.MakeTrapProjectile);
     protected override string DamageRollExpression => "0";
     protected override string RadiusRollExpression => "1";
 }

@@ -20,6 +20,6 @@ internal class ControlAnimal1xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(ControlAnimalProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.ControlAnimalProjectile);
     protected override string DamageRollExpression => "X";
 }

@@ -20,7 +20,7 @@ internal class OldConfuseAtLos4xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => false;
     public override bool Hide => true;
-    protected override string ProjectileBindingKey => nameof(OldConfuseProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldConfuseProjectile);
     protected override string DamageRollExpression => "4*X";
     public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllMonstersInLos;
     public override bool? Identified => null;

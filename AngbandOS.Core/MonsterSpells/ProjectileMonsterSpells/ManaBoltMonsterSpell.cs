@@ -20,6 +20,6 @@ internal class ManaBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DieRoll(monsterLevel * 7 / 2) + 50;
     }
-    protected override string ProjectileKey => nameof(ManaProjectile);
+    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ManaProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

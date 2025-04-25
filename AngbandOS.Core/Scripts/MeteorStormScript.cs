@@ -48,7 +48,7 @@ internal class MeteorStormScript : Script, IScript, ICastSpellScript
                 break;
             }
             count = 0;
-            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MeteorProjectile));
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.MeteorProjectile));
             projectile.Fire(0, 2, y, x, Game.ExperienceLevel.IntValue * 3 / 2, kill: true, item: true, jump: true, beam: false, thru: false, hide: false, grid: false, stop: false);
         }
     }

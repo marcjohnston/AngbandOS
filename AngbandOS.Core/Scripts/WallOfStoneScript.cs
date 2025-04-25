@@ -23,7 +23,7 @@ internal class WallOfStoneScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(StoneWallProjectile));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.StoneWallProjectile));
         projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, jump: false, beam: false, thru: false, hide: false, stop: false, kill: false);
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();

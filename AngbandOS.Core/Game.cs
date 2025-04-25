@@ -83,6 +83,55 @@ internal class Game
     public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
     public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
 
+    [NonSerialized]
+    private Random _mainSequence;
+
+    [NonSerialized]
+    private Random _fixed;
+
+    public Random UseRandom => UseFixed ? _fixed : _mainSequence;
+
+    /// <summary>
+    /// Set true to use the fixed seed, and false to use the generic randomiser
+    /// </summary>
+    public bool UseFixed = false;
+
+    private const int _randnorNum = 256;
+    private const int _randnorStd = 64;
+
+    private readonly int[] _randnorTable =
+    {
+        206, 613, 1022, 1430, 1838, 2245, 2652, 3058, 3463, 3867, 4271, 4673, 5075, 5475, 5874, 6271, 6667, 7061,
+        7454, 7845, 8234, 8621, 9006, 9389, 9770, 10148, 10524, 10898, 11269, 11638, 12004, 12367, 12727, 13085,
+        13440, 13792, 14140, 14486, 14828, 15168, 15504, 15836, 16166, 16492, 16814, 17133, 17449, 17761, 18069,
+        18374, 18675, 18972, 19266, 19556, 19842, 20124, 20403, 20678, 20949, 21216, 21479, 21738, 21994, 22245,
+        22493, 22737, 22977, 23213, 23446, 23674, 23899, 24120, 24336, 24550, 24759, 24965, 25166, 25365, 25559,
+        25750, 25937, 26120, 26300, 26476, 26649, 26818, 26983, 27146, 27304, 27460, 27612, 27760, 27906, 28048,
+        28187, 28323, 28455, 28585, 28711, 28835, 28955, 29073, 29188, 29299, 29409, 29515, 29619, 29720, 29818,
+        29914, 30007, 30098, 30186, 30272, 30356, 30437, 30516, 30593, 30668, 30740, 30810, 30879, 30945, 31010,
+        31072, 31133, 31192, 31249, 31304, 31358, 31410, 31460, 31509, 31556, 31601, 31646, 31688, 31730, 31770,
+        31808, 31846, 31882, 31917, 31950, 31983, 32014, 32044, 32074, 32102, 32129, 32155, 32180, 32205, 32228,
+        32251, 32273, 32294, 32314, 32333, 32352, 32370, 32387, 32404, 32420, 32435, 32450, 32464, 32477, 32490,
+        32503, 32515, 32526, 32537, 32548, 32558, 32568, 32577, 32586, 32595, 32603, 32611, 32618, 32625, 32632,
+        32639, 32645, 32651, 32657, 32662, 32667, 32672, 32677, 32682, 32686, 32690, 32694, 32698, 32702, 32705,
+        32708, 32711, 32714, 32717, 32720, 32722, 32725, 32727, 32729, 32731, 32733, 32735, 32737, 32739, 32740,
+        32742, 32743, 32745, 32746, 32747, 32748, 32749, 32750, 32751, 32752, 32753, 32754, 32755, 32756, 32757,
+        32757, 32758, 32758, 32759, 32760, 32760, 32761, 32761, 32761, 32762, 32762, 32763, 32763, 32763, 32764,
+        32764, 32764, 32764, 32765, 32765, 32765, 32765, 32766, 32766, 32766, 32766, 32767
+    };
+
+    private int _fixedSeed;
+
+    public int FixedSeed // TODO: This is ugly
+    {
+        get => _fixedSeed;
+        set
+        {
+            _fixed = new Random(value);
+            _fixedSeed = value;
+        }
+    }
+
     public readonly ExpressionParser ExpressionParser;
     public readonly ParseLanguage ParseLanguage;
     public readonly IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter;
@@ -4927,19 +4976,19 @@ internal class Game
 
     public bool CharmAnimal(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ControlAnimalProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public bool CharmMonster(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.CharmProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public bool CloneMonster(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldCloneProjectile));
         return projectile.TargetedFire(dir, 0, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -4975,7 +5024,7 @@ internal class Game
 
     public bool ConfuseMonster(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldConfuseProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5053,7 +5102,7 @@ internal class Game
 
     public bool DestroyTrapOrDoor(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DestroyTrapOrDoorProjectile));
         return projectile.TargetedFire(dir, 0, 0, beam: true, grid: true, item: true, jump: false, stop: false, kill: false, thru: true, hide: false);
     }
 
@@ -5254,7 +5303,7 @@ internal class Game
     /// <returns></returns>
     public bool DrainLife(int dir, int dam)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainLifeProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldDrainLifeProjectile));
         return projectile.TargetedFire(dir, dam, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5729,7 +5778,7 @@ internal class Game
 
     public bool ScareMonster(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.TurnAllProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5800,7 +5849,7 @@ internal class Game
 
     public bool HealMonster(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldHealProjectile));
         return projectile.TargetedFire(dir, DiceRoll(4, 6), 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5810,7 +5859,7 @@ internal class Game
         {
             MsgPrint("You are surrounded by a white light.");
         }
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.LightWeakProjectile));
         projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         LightRoom(MapY.IntValue, MapX.IntValue);
         return true;
@@ -5818,7 +5867,7 @@ internal class Game
 
     public bool LightLine(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.LightWeakProjectile));
         return projectile.TargetedFire(dir, DiceRoll(6, 8), 0, beam: true, grid: true, kill: true, jump: false, stop: false, item: false, thru: true, hide: false);
     }
 
@@ -6085,7 +6134,7 @@ internal class Game
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DarknessWeakProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DarknessWeakProjectile));
         projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;
@@ -6143,7 +6192,7 @@ internal class Game
 
     public bool WizardLock(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.JamDoorProjectile));
         return projectile.TargetedFire(dir, 20 + DieRoll(30), 0, grid: true, item: true, kill: true, beam: true, jump: false, stop: false, thru: true, hide: false);
     }
 
@@ -8598,12 +8647,12 @@ internal class Game
                     break;
 
                 case MutationAttackTypeEnum.Poison:
-                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
+                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PoisonGasProjectile));
                     poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill : true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                     break;
 
                 case MutationAttackTypeEnum.Hellfire:
-                    Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
+                    Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.HellfireProjectile));
                     hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                     break;
             }
@@ -17243,14 +17292,6 @@ internal class Game
         return true;
     }
 
-    [NonSerialized]
-    private Random _mainSequence;
-
-    [NonSerialized]
-    private Random _fixed;
-
-    public Random UseRandom => UseFixed ? _fixed : _mainSequence;
-
     public static bool ValidateTupleSorting<T>(T[] items, Func<T, T, bool> testPredicate)
     {
         for (int i = 0; i < items.Length - 1; i++)
@@ -17261,47 +17302,6 @@ internal class Game
             }
         }
         return true;
-    }
-
-    /// <summary>
-    /// Set true to use the fixed seed, and false to use the generic randomiser
-    /// </summary>
-    public bool UseFixed = false;
-
-    private const int _randnorNum = 256;
-    private const int _randnorStd = 64;
-
-    private readonly int[] _randnorTable =
-    {
-        206, 613, 1022, 1430, 1838, 2245, 2652, 3058, 3463, 3867, 4271, 4673, 5075, 5475, 5874, 6271, 6667, 7061,
-        7454, 7845, 8234, 8621, 9006, 9389, 9770, 10148, 10524, 10898, 11269, 11638, 12004, 12367, 12727, 13085,
-        13440, 13792, 14140, 14486, 14828, 15168, 15504, 15836, 16166, 16492, 16814, 17133, 17449, 17761, 18069,
-        18374, 18675, 18972, 19266, 19556, 19842, 20124, 20403, 20678, 20949, 21216, 21479, 21738, 21994, 22245,
-        22493, 22737, 22977, 23213, 23446, 23674, 23899, 24120, 24336, 24550, 24759, 24965, 25166, 25365, 25559,
-        25750, 25937, 26120, 26300, 26476, 26649, 26818, 26983, 27146, 27304, 27460, 27612, 27760, 27906, 28048,
-        28187, 28323, 28455, 28585, 28711, 28835, 28955, 29073, 29188, 29299, 29409, 29515, 29619, 29720, 29818,
-        29914, 30007, 30098, 30186, 30272, 30356, 30437, 30516, 30593, 30668, 30740, 30810, 30879, 30945, 31010,
-        31072, 31133, 31192, 31249, 31304, 31358, 31410, 31460, 31509, 31556, 31601, 31646, 31688, 31730, 31770,
-        31808, 31846, 31882, 31917, 31950, 31983, 32014, 32044, 32074, 32102, 32129, 32155, 32180, 32205, 32228,
-        32251, 32273, 32294, 32314, 32333, 32352, 32370, 32387, 32404, 32420, 32435, 32450, 32464, 32477, 32490,
-        32503, 32515, 32526, 32537, 32548, 32558, 32568, 32577, 32586, 32595, 32603, 32611, 32618, 32625, 32632,
-        32639, 32645, 32651, 32657, 32662, 32667, 32672, 32677, 32682, 32686, 32690, 32694, 32698, 32702, 32705,
-        32708, 32711, 32714, 32717, 32720, 32722, 32725, 32727, 32729, 32731, 32733, 32735, 32737, 32739, 32740,
-        32742, 32743, 32745, 32746, 32747, 32748, 32749, 32750, 32751, 32752, 32753, 32754, 32755, 32756, 32757,
-        32757, 32758, 32758, 32759, 32760, 32760, 32761, 32761, 32761, 32762, 32762, 32763, 32763, 32763, 32764,
-        32764, 32764, 32764, 32765, 32765, 32765, 32765, 32766, 32766, 32766, 32766, 32767
-    };
-
-    private int _fixedSeed;
-
-    public int FixedSeed // TODO: This is ugly
-    {
-        get => _fixedSeed;
-        set
-        {
-            _fixed = new Random(value);
-            _fixedSeed = value;
-        }
     }
 
     /// <summary>

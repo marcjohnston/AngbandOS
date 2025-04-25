@@ -28,7 +28,7 @@ internal class PoisonProjectileUnfriendlyProjectileScript : ProjectileScript
 
     public override bool Hide => false;
 
-    protected override string ProjectileBindingKey => nameof(PoisonGasProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.PoisonGasProjectile);
 
     protected override string DamageRollExpression => "3";
     protected override string RadiusRollExpression => "2";

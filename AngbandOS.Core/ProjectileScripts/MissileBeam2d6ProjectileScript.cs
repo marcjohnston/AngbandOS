@@ -20,6 +20,6 @@ internal class MissileBeam2d6ProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(MissileProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.MissileProjectile);
     protected override string DamageRollExpression => "2d6";
 }

@@ -20,7 +20,7 @@ internal class Jamdoor1d30p20ProjectileScript : ProjectileScript
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(JamDoorProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.JamDoorProjectile);
     protected override string DamageRollExpression => "1d30+20";
     public override bool? Identified => null;
 }

@@ -20,7 +20,7 @@ internal class OldSleep1xProjectileScript : ProjectileScript
     public override bool Item => false;
     public override bool Thru => true;
     public override bool Hide => false;
-    protected override string ProjectileBindingKey => nameof(OldSleepProjectile);
+    protected override string ProjectileBindingKey => nameof(ProjectileNamesEnum.OldSleepProjectile);
     protected override string DamageRollExpression => "X";
     public override bool? Identified => null;
 }

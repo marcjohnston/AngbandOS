@@ -75,7 +75,7 @@ internal class DarkElfRace : Race
             if (Game.GetDirectionWithAim(out int direction))
             {
                 Game.MsgPrint("You cast a magic missile.");
-                Game.FireBoltOrBeam(10, Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 4));
+                Game.FireBoltOrBeam(10, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.MissileProjectile)), direction, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 4));
             }
         }
     }
