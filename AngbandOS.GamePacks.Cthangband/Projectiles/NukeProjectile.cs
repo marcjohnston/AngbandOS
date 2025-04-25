@@ -14,7 +14,7 @@ public class NukeProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(ChartreuseFlashAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.NukeMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.NukeMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.NukePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.NukePlayerEffect);
 }

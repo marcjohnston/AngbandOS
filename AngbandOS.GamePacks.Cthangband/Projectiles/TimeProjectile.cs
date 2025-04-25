@@ -14,7 +14,7 @@ public class TimeProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BrightGreenCloudAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.TimeMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.TimeMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.TimePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.TimePlayerEffect);
 }

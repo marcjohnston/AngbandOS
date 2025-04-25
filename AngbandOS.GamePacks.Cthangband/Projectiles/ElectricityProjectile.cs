@@ -14,9 +14,9 @@ public class ElectricityProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BrightYellowCloudAnimation);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.ElectricityItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.ElectricityItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ElectricityMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ElectricityMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ElectricityPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ElectricityPlayerEffect);
 }

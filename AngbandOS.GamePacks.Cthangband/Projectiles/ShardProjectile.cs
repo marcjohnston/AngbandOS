@@ -14,7 +14,7 @@ public class ShardProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BrightBrownSplatProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ShardMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ShardMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ShardPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ShardPlayerEffect);
 }

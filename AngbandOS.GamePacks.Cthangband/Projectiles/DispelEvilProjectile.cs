@@ -14,5 +14,5 @@ public class DispelEvilProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(RedExpandAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DispelEvilMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DispelEvilMonsterEffect);
 }

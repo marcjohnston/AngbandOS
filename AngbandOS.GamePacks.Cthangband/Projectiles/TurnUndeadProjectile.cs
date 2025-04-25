@@ -12,5 +12,5 @@ public class TurnUndeadProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(WhiteControlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.TurnUndeadMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.TurnUndeadMonsterEffect);
 }

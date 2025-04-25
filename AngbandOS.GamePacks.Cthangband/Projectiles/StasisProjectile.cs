@@ -14,5 +14,5 @@ public class StasisProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(SilverCloudAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.StasisMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.StasisMonsterEffect);
 }

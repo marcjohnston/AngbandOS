@@ -14,7 +14,7 @@ public class InertiaProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(OrangeSplatProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.InertiaMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.InertiaMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.InertiaPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.InertiaPlayerEffect);
 }

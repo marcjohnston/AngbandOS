@@ -14,9 +14,9 @@ public class MeteorProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(RedOrangeFlashAnimation);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.MeteorItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.MeteorItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.MeteorMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.MeteorMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.MeteorPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.MeteorPlayerEffect);
 }

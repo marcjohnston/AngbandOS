@@ -7,20 +7,21 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-public enum FloorEffectScripts
+public enum WieldSlotsEnum
 {
-    DarknessFloorEffect,
-    DarknessWeakFloorEffect,
-    DestroyTrapFloorEffect,
-    DestroyTrapOrDoorFloorEffect,
-    JamDoorFloorEffect,
-    LightFloorEffect,
-    LightWeakFloorEffect,
-    MakeDoorFloorEffect,
-    MakeElderSignFloorEffect,
-    MakeTrapFloorEffect,
-    NoticedFloorEffect,
-    StoneWallFloorEffect,
-    UnnoticedFloorEffect,
-    WallToMudFloorEffect,
+    AboutBodyWieldSlot,
+    ArmWieldSlot,
+    DiggerWieldSlot,
+    EquipmentWieldSlot,
+    FeetWieldSlot,
+    HandsWieldSlot,
+    HeadWieldSlot,
+    LeftHandWieldSlot,
+    LightsourceWieldSlot,
+    MeleeWeaponWieldSlot,
+    NeckWieldSlot,
+    OnBodyWieldSlot,
+    PackWieldSlot,
+    RangedWeaponWieldSlot,
+    RightHandWieldSlot,
 }

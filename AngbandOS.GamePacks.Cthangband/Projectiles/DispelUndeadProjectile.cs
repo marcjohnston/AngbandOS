@@ -15,5 +15,5 @@ public class DispelUndeadProjectile : ProjectileGameConfiguration
     public override string? EffectAnimationBindingKey => nameof(BlackExpandAnimation);
 
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DispelUndeadMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DispelUndeadMonsterEffect);
 }

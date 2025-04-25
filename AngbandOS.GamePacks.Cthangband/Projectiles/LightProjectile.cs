@@ -14,9 +14,9 @@ public class LightProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BrightWhiteCloudAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.LightFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.LightFloorEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.LightMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.LightMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.LightPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.LightPlayerEffect);
 }

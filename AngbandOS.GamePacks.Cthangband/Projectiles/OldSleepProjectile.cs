@@ -12,7 +12,7 @@ public class OldSleepProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(YellowSparkleAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.OldSleepMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.OldSleepMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.OldSleepPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.OldSleepPlayerEffect);
 }

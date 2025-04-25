@@ -14,7 +14,7 @@ public class NexusProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(PinkSwirlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.NexusMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.NexusMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.NexusPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.NexusPlayerEffect);
 }

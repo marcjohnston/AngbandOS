@@ -14,7 +14,7 @@ public class ConfusionProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(GreyQuestionAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ConfusionMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ConfusionMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ConfusionPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ConfusionPlayerEffect);
 }

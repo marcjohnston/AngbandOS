@@ -12,7 +12,7 @@ public class WallToMudProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrownSwirlAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.WallToMudFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.WallToMudFloorEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.WallToMudMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.WallToMudMonsterEffect);
 }

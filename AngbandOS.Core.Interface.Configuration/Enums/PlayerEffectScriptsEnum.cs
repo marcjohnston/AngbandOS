@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-public enum PlayerEffectScripts
+public enum PlayerEffectScriptsEnum
 {
     AcidPlayerEffect,
     ArrowPlayerEffect,

@@ -14,7 +14,7 @@ public class NetherProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BlackSplatProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.NetherMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.NetherMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.NetherPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.NetherPlayerEffect);
 }

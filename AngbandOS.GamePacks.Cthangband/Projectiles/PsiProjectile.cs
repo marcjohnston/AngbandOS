@@ -12,5 +12,5 @@ public class PsiProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(DiamondSparkleAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.PsiMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.PsiMonsterEffect);
 }

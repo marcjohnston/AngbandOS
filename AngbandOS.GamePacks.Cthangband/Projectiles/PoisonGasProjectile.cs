@@ -16,7 +16,7 @@ public class PoisonGasProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(GreenCloudAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.PoisonGasMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.PoisonGasMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.PoisonGasPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.PoisonGasPlayerEffect);
 }

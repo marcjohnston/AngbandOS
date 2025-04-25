@@ -12,9 +12,9 @@ public class DestroyTrapOrDoorProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightYellowSwirlAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.DestroyTrapOrDoorFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.DestroyTrapOrDoorFloorEffect);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.DestroyTrapOrDoorItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.DestroyTrapOrDoorItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DestroyTrapOrDoorMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DestroyTrapOrDoorMonsterEffect);
 }

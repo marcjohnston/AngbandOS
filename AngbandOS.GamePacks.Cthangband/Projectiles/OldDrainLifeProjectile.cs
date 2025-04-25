@@ -14,5 +14,5 @@ public class OldDrainLifeProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BlackContractAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.OldDrainLifeMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.OldDrainLifeMonsterEffect);
 }

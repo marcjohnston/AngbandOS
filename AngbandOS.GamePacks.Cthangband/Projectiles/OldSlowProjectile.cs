@@ -14,7 +14,7 @@ public class OldSlowProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BlueSwirlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.OldSlowMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.OldSlowMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.OldSlowPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.OldSlowPlayerEffect);
 }

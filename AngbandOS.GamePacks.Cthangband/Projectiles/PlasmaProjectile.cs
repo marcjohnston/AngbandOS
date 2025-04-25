@@ -14,9 +14,9 @@ public class PlasmaProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BrightRedSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.PlasmaItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.PlasmaItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.PlasmaMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.PlasmaMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.GravityPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.GravityPlayerEffect);
 }

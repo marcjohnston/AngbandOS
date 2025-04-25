@@ -14,5 +14,5 @@ public class DeathRayProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(CopperContractAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DeathRayMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DeathRayMonsterEffect);
 }

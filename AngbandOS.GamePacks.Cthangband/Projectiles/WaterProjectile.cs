@@ -14,7 +14,7 @@ public class WaterProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BlueSplatProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.WaterMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.WaterMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.WaterPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.WaterPlayerEffect);
 }

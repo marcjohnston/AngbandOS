@@ -14,5 +14,5 @@ public class TelekinesisProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(TurquoiseSwirlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.TelekinesisMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.TelekinesisMonsterEffect);
 }

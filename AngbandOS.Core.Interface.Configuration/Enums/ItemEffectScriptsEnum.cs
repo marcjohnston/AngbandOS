@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-public enum ItemEffectScripts
+public enum ItemEffectScriptsEnum
 {
     AcidItemEffect,
     ChaosItemEffect,

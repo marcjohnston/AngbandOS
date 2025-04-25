@@ -14,9 +14,9 @@ public class IceProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(DiamondSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.IceItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.IceItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.IceMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.IceMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.IcePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.IcePlayerEffect);
 }

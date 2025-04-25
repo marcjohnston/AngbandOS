@@ -14,7 +14,7 @@ public class OldHealProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(WhiteSparkleAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.OldHealMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.OldHealMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.OldHealPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.OldHealPlayerEffect);
 }

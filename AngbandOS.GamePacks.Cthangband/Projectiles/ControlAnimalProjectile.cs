@@ -14,5 +14,5 @@ public class ControlAnimalProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(GreenControlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ControlAnimalMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ControlAnimalMonsterEffect);
 }

@@ -12,5 +12,5 @@ public class DominationProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(WhiteControlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DominationMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DominationMonsterEffect);
 }

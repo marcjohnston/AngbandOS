@@ -16,5 +16,5 @@ public class TeleportAwayUndeadProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(PinkBulletProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.TeleportAwayUndeadMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.TeleportAwayUndeadMonsterEffect);
 }

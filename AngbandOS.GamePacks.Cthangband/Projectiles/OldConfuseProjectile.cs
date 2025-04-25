@@ -14,5 +14,5 @@ public class OldConfuseProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(GreyQuestionAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.OldConfuseMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.OldConfuseMonsterEffect);
 }

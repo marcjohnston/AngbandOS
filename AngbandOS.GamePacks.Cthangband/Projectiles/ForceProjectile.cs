@@ -14,9 +14,9 @@ public class ForceProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BrightTurquoiseSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.ForceItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.ForceItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ForceMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ForceMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ForcePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ForcePlayerEffect);
 }

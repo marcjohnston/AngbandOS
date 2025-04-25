@@ -12,9 +12,9 @@ public class DestroyTrapProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(RedSwirlAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.DestroyTrapFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.DestroyTrapFloorEffect);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.DestroyTrapItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.DestroyTrapItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DestroyTrapOrDoorMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DestroyTrapOrDoorMonsterEffect);
 }

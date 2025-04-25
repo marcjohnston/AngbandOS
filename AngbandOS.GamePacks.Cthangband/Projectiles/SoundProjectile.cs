@@ -14,9 +14,9 @@ public class SoundProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(GoldCloudAnimation);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.SoundItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.SoundItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.SoundMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.SoundMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.SoundPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.SoundPlayerEffect);
 }

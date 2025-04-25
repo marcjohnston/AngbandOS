@@ -12,7 +12,7 @@ public class ArrowProjectile : ProjectileGameConfiguration
 {
     public override string? BoltProjectileGraphicBindingKey => nameof(BrightBrownBoltProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ArrowMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ArrowMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ArrowPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ArrowPlayerEffect);
 }

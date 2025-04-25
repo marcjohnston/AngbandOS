@@ -12,5 +12,5 @@ public class CharmProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(GreyControlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.CharmMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.CharmMonsterEffect);
 }

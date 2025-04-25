@@ -12,7 +12,7 @@ public class JamDoorProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(YellowSwirlAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.JamDoorFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.JamDoorFloorEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.JamDoorMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.JamDoorMonsterEffect);
 }

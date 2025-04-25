@@ -14,7 +14,7 @@ public class MissileProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BrightTurquoiseSplatProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.MissileMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.MissileMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.MissilePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.MissilePlayerEffect);
 }

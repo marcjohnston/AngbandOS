@@ -14,9 +14,9 @@ public class DisintegrateProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(GreenContractAnimation);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.DisintegrateItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.DisintegrateItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DisintegrateMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DisintegrateMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.DisintegratePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.DisintegratePlayerEffect);
 }

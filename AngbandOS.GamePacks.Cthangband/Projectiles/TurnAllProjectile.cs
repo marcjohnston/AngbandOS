@@ -12,5 +12,5 @@ public class TurnAllProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(WhiteControlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.TurnAllMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.TurnAllMonsterEffect);
 }

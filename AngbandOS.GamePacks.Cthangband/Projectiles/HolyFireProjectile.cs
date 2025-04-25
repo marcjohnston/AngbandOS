@@ -14,9 +14,9 @@ public class HolyFireProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(RedWhiteFlashAnimation);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.HolyFireItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.HolyFireItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.HolyFireMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.HolyFireMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.HolyFirePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.HolyFirePlayerEffect);
 }

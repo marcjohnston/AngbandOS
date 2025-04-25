@@ -14,9 +14,9 @@ public class AcidProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BrightChartreuseSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.AcidItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.AcidItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.AcidMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.AcidMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.AcidPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.AcidPlayerEffect);
 }

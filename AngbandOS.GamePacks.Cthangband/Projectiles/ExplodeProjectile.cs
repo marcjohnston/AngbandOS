@@ -14,9 +14,9 @@ public class ExplodeProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(RedOrangeFlashAnimation);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.ExplodeItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.ExplodeItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ExplodeMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ExplodeMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ExplodePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ExplodePlayerEffect);
 }

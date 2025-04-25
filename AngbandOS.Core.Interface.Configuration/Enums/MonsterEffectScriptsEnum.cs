@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-public enum MonsterEffectScripts
+public enum MonsterEffectScriptsEnum
 {
     AcidMonsterEffect,
     ArrowMonsterEffect,

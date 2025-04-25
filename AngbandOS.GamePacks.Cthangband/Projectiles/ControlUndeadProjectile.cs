@@ -14,5 +14,5 @@ public class ControlUndeadProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BlackControlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ControlUndeadMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ControlUndeadMonsterEffect);
 }

@@ -14,9 +14,9 @@ public class WizardBoltProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(PinkSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.WizardBoltItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.WizardBoltItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.WizardBoltMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.WizardBoltMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.WizardBoltPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.WizardBoltPlayerEffect);
 }

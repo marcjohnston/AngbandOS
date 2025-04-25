@@ -14,5 +14,5 @@ public class OldCloneProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(CopperExpandAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.OldCloneMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.OldCloneMonsterEffect);
 }

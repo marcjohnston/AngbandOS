@@ -14,7 +14,7 @@ public class DisenchantProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(ChartreuseSplatProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DisenchantMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DisenchantMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.DisenchantPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.DisenchantPlayerEffect);
 }

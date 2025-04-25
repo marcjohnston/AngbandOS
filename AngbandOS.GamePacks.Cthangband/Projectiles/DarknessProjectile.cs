@@ -14,9 +14,9 @@ public class DarknessProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BlackSplatProjectileGraphic);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.DarknessFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.DarknessFloorEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.DarknessMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DarknessMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.DarknessPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.DarknessPlayerEffect);
 }

@@ -12,7 +12,7 @@ public class MakeTrapProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightRedSparkleAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.MakeTrapFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.MakeTrapFloorEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.MakeTrapMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.MakeTrapMonsterEffect);
 }

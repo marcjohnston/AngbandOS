@@ -14,9 +14,9 @@ public class FireProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(RedSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.FireItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.FireItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.FireMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.FireMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.FirePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.FirePlayerEffect);
 }

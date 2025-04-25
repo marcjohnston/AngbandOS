@@ -12,7 +12,7 @@ public class MakeElderSignProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightGreenSparkleAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.MakeElderSignFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.MakeElderSignFloorEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.MakeElderSignMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.MakeElderSignMonsterEffect);
 }

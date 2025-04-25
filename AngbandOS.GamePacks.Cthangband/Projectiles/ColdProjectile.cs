@@ -14,9 +14,9 @@ public class ColdProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(WhiteSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.ColdItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.ColdItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ColdMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ColdMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ColdPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ColdPlayerEffect);
 }

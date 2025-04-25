@@ -14,9 +14,9 @@ public class ManaProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(BrightTurquoiseSplatProjectileGraphic);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.ManaItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.ManaItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ManaMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ManaMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ManaPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ManaPlayerEffect);
 }

@@ -14,5 +14,5 @@ public class OldPolymorphProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(PurpleSparkleAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.OldPolymorphMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.OldPolymorphMonsterEffect);
 }

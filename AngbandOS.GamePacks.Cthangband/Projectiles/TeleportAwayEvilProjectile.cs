@@ -16,5 +16,5 @@ public class TeleportAwayEvilProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(PinkSwirlAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.TeleportAwayEvilMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.TeleportAwayEvilMonsterEffect);
 }

@@ -14,7 +14,7 @@ public class GravityProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(TurquoiseSplatProjectileGraphic);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.GravityMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.GravityMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.GravityPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.GravityPlayerEffect);
 }

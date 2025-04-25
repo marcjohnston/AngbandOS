@@ -14,5 +14,5 @@ public class PsiDrainProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BeigeContractAnimation);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.PsiDrainMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.PsiDrainMonsterEffect);
 }

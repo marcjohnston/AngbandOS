@@ -16,11 +16,11 @@ public class ChaosProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(PinkPurpleFlashAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScripts.NoticedFloorEffect);
+    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.NoticedFloorEffect);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.ChaosItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.ChaosItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.ChaosMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.ChaosMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.ChaosPlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.ChaosPlayerEffect);
 }

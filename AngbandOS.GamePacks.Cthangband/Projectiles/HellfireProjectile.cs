@@ -14,9 +14,9 @@ public class HellfireProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(RedBlackFlashAnimation);
 
-    public override string ItemEffectBindingKey => nameof(ItemEffectScripts.HellfireItemEffect);
+    public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.HellfireItemEffect);
 
-    public override string MonsterEffectBindingKey => nameof(MonsterEffectScripts.HellfireMonsterEffect);
+    public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.HellfireMonsterEffect);
 
-    public override string PlayerEffectBindingKey => nameof(PlayerEffectScripts.HellfirePlayerEffect);
+    public override string PlayerEffectBindingKey => nameof(PlayerEffectScriptsEnum.HellfirePlayerEffect);
 }
