@@ -42,6 +42,6 @@ internal class DarkBoltScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DarknessProjectile)), dir, Game.DiceRoll(4 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(DarknessProjectile)), dir, Game.DiceRoll(4 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

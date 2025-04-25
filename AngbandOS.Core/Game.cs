@@ -4976,19 +4976,19 @@ internal class Game
 
     public bool CharmAnimal(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ControlAnimalProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public bool CharmMonster(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.CharmProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public bool CloneMonster(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldCloneProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile));
         return projectile.TargetedFire(dir, 0, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5024,7 +5024,7 @@ internal class Game
 
     public bool ConfuseMonster(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldConfuseProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5102,7 +5102,7 @@ internal class Game
 
     public bool DestroyTrapOrDoor(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DestroyTrapOrDoorProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
         return projectile.TargetedFire(dir, 0, 0, beam: true, grid: true, item: true, jump: false, stop: false, kill: false, thru: true, hide: false);
     }
 
@@ -5303,7 +5303,7 @@ internal class Game
     /// <returns></returns>
     public bool DrainLife(int dir, int dam)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldDrainLifeProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainLifeProjectile));
         return projectile.TargetedFire(dir, dam, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5778,7 +5778,7 @@ internal class Game
 
     public bool ScareMonster(int dir, int plev)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.TurnAllProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5849,7 +5849,7 @@ internal class Game
 
     public bool HealMonster(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.OldHealProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
         return projectile.TargetedFire(dir, DiceRoll(4, 6), 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
@@ -5859,7 +5859,7 @@ internal class Game
         {
             MsgPrint("You are surrounded by a white light.");
         }
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.LightWeakProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
         projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         LightRoom(MapY.IntValue, MapX.IntValue);
         return true;
@@ -5867,7 +5867,7 @@ internal class Game
 
     public bool LightLine(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.LightWeakProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
         return projectile.TargetedFire(dir, DiceRoll(6, 8), 0, beam: true, grid: true, kill: true, jump: false, stop: false, item: false, thru: true, hide: false);
     }
 
@@ -6134,7 +6134,7 @@ internal class Game
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DarknessWeakProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DarknessWeakProjectile));
         projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;
@@ -6192,7 +6192,7 @@ internal class Game
 
     public bool WizardLock(int dir)
     {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.JamDoorProjectile));
+        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile));
         return projectile.TargetedFire(dir, 20 + DieRoll(30), 0, grid: true, item: true, kill: true, beam: true, jump: false, stop: false, thru: true, hide: false);
     }
 
@@ -8647,12 +8647,12 @@ internal class Game
                     break;
 
                 case MutationAttackTypeEnum.Poison:
-                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PoisonGasProjectile));
+                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
                     poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill : true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                     break;
 
                 case MutationAttackTypeEnum.Hellfire:
-                    Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.HellfireProjectile));
+                    Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
                     hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                     break;
             }

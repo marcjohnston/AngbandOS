@@ -14,7 +14,7 @@ internal class DisenchantBreatheBallMonsterSpell : BreatheBallProjectileMonsterS
     public override bool UsesDisenchantment => true;
     public override string? VsMonsterSeenMessage => "{0} breathes disenchantment at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes disenchantment.";
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.DisenchantProjectile);
+    protected override string ProjectileKey => nameof(DisenchantProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 500;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(DisenSpellResistantDetection) };

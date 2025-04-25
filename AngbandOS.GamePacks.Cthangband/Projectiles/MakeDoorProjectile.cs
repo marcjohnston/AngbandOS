@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class MakeDoorProjectile : ProjectileGameConfiguration
+public class MakeDoorProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightBrownSparkleAnimation);
 

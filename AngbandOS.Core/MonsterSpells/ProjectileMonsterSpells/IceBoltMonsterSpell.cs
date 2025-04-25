@@ -21,6 +21,6 @@ internal class IceBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DiceRoll(6, 6) + monsterLevel;
     }
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.IceProjectile);
+    protected override string ProjectileKey => nameof(IceProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ColdSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

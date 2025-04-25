@@ -21,6 +21,6 @@ internal class LightningBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DiceRoll(4, 8) + (monsterLevel / 3);
     }
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ElectricityProjectile);
+    protected override string ProjectileKey => nameof(ElectricityProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ElecSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

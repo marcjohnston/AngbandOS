@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class JamDoorProjectile : ProjectileGameConfiguration
+public class JamDoorProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(YellowSwirlAnimation);
 

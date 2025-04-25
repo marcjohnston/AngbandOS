@@ -14,7 +14,7 @@ internal class RadiationBreatheBallMonsterSpell : BreatheBallProjectileMonsterSp
     public override bool UsesRadiation => true;
     public override string? VsMonsterSeenMessage => "{0} breathes toxic waste at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes toxic waste.";
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.NukeProjectile);
+    protected override string ProjectileKey => nameof(NukeProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 800;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(PoisSpellResistantDetection) };

@@ -24,12 +24,12 @@ internal class NeuralBlastTalent : Talent
         }
         if (Game.DieRoll(100) < Game.ExperienceLevel.IntValue * 2)
         {
-            Game.FireBeam(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PsiProjectile)), dir,
+            Game.FireBeam(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dir,
                 Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)));
         }
         else
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PsiProjectile)), dir,
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dir,
                 Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)), 0);
         }
     }

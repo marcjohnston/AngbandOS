@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -29,27 +31,33 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        ProjectileScriptGameConfiguration projectileScriptGameConfiguration = new ProjectileScriptGameConfiguration()
+        {
+            Key = Key,
+            ProjectileBindingKey = ProjectileBindingKey,
+            DamageRollExpression = DamageRollExpression,
+            RadiusRollExpression = RadiusRollExpression,
+            Stop = Stop,
+            Kill = Kill,
+            Jump = Jump,
+            Beam = Beam,
+            Grid = Grid,
+            Item = Item,
+            Thru = Thru,
+            Hide = Hide,
+            Identified = Identified,
+            PreMessage = PreMessage,
+            PostMessage = PostMessage,
+            SmashingOnPetsTurnsUnfriendly = SmashingOnPetsTurnsUnfriendly,
+            NonDirectionalProjectileMode = NonDirectionalProjectileMode,
+        };
+        return JsonSerializer.Serialize(projectileScriptGameConfiguration, Game.GetJsonSerializerOptions());
     }
-
-    public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
 
-    /// <summary>
-    /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
-    /// </summary>
-    protected abstract string ProjectileBindingKey { get; }
-
-    /// <summary>
-    /// Returns the projectile to use.  This property is bound using the <see cref="ProjectileBindingKey"/> property during the binding phase.
-    /// </summary>
-    public Projectile Projectile { get; protected set; }
-
-    /// <summary>
-    /// Returns a roll expression for the amount of damage the projectile produces.  This property is used to bind the <see cref="DamageRoll"/> property during the bind phase.
-    /// </summary>
-    protected abstract string DamageRollExpression { get; }
+    #region Bounded Properties
+    public Expression RadiusRoll { get; protected set; }
 
     /// <summary>
     /// Returns a roll for the amount of damage the projectile produces.  This property is bound from the <see cref="DamageRollExpression"/> property during the bind phase.
@@ -57,12 +65,29 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     public Expression DamageRoll { get; protected set; }
 
     /// <summary>
+    /// Returns the projectile to use.  This property is bound using the <see cref="ProjectileBindingKey"/> property during the binding phase.
+    /// </summary>
+    public Projectile Projectile { get; protected set; }
+    #endregion
+
+    #region Light-weight virtuals and abstracts for game configuration.
+    public virtual string Key => GetType().Name;
+
+    /// <summary>
+    /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
+    /// </summary>
+    protected abstract string ProjectileBindingKey { get; }
+
+    /// <summary>
+    /// Returns a roll expression for the amount of damage the projectile produces.  This property is used to bind the <see cref="DamageRoll"/> property during the bind phase.
+    /// </summary>
+    protected abstract string DamageRollExpression { get; }
+
+    /// <summary>
     /// Returns a roll expression for the radius of damage the projectile produces.  A radius of 0 represents a bolt.  A radius >0 represents a ball and a radius <0 represents breathe.
     /// Returns zero by default.
     /// </summary>
     protected virtual string RadiusRollExpression => "0";
-
-    public Expression RadiusRoll { get; protected set; }
 
     /// <summary>
     /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.
@@ -129,6 +154,7 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     /// Returns the mode that the projectile will use when it is launched using a script interface that does not accept a directional parameter.
     /// </summary>
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.Default;
+    #endregion
 
     #region Interface Fulfillments - These fulfillments use the private implementations to satisfy the interfaces that the projectiles support.
     public bool ExecuteSuccessByChanceScript()

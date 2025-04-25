@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class CharmProjectile : ProjectileGameConfiguration
+public class CharmProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(GreyControlAnimation);
 

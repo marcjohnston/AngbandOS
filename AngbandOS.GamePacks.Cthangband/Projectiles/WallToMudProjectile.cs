@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WallToMudProjectile : ProjectileGameConfiguration
+public class WallToMudProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrownSwirlAnimation);
 

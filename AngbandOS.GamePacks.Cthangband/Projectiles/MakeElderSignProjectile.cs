@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class MakeElderSignProjectile : ProjectileGameConfiguration
+public class MakeElderSignProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightGreenSparkleAnimation);
 

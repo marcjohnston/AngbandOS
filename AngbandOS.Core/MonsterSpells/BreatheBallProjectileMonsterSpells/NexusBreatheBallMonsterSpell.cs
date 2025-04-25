@@ -14,7 +14,7 @@ internal class NexusBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool UsesNexus => true;
     public override string? VsMonsterSeenMessage => "{0} breathes nexus at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes nexus.";
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.NexusProjectile);
+    protected override string ProjectileKey => nameof(NexusProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 250;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(NexusSpellResistantDetection) };

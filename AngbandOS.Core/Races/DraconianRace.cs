@@ -108,12 +108,12 @@ internal class DraconianRace : Race
         // Default to being randomly fire (66% chance) or cold (33% chance)
         if (Game.DieRoll(3) == 1)
         {
-            projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ColdProjectile));
+            projectile = Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
             projectileDescription = "cold";
         }
         else
         {
-            projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile));
+            projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
             projectileDescription = "fire";
         }
 
@@ -128,12 +128,12 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.ChosenOne:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.MissileProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile));
                         projectileDescription = "the elements";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ExplodeProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile));
                         projectileDescription = "shards";
                     }
                     break;
@@ -144,12 +144,12 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.Channeler:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ManaProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
                         projectileDescription = "mana";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DisenchantProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile));
                         projectileDescription = "disenchantment";
                     }
                     break;
@@ -158,12 +158,12 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.Cultist:
                     if (Game.DieRoll(3) != 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ConfusionProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ChaosProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile));
                         projectileDescription = "chaos";
                     }
                     break;
@@ -171,12 +171,12 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.Monk:
                     if (Game.DieRoll(3) != 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ConfusionProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.SoundProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));
                         projectileDescription = "sound";
                     }
                     break;
@@ -185,12 +185,12 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.Mystic:
                     if (Game.DieRoll(3) != 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ConfusionProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PsiProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
                         projectileDescription = "mental energy";
                     }
                     break;
@@ -199,12 +199,12 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.Paladin:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.HellfireProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
                         projectileDescription = "hellfire";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.HolyFireProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile));
                         projectileDescription = "holy fire";
                     }
                     break;
@@ -212,12 +212,12 @@ internal class DraconianRace : Race
                 case CharacterClassEnum.Rogue:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DarknessProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DarknessProjectile));
                         projectileDescription = "darkness";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PoisonGasProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
                         projectileDescription = "poison";
                     }
                     break;

@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class OldDrainLifeProjectile : ProjectileGameConfiguration
+public class OldDrainLifeProjectile : ProjectileGameConfiguration
 {
     public override string? BoltProjectileGraphicBindingKey => nameof(BlackBoltProjectileGraphic);
 

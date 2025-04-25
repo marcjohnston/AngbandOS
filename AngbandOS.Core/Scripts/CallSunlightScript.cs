@@ -23,7 +23,7 @@ internal class CallSunlightScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.LightProjectile)), 0, 150, 8);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile)), 0, 150, 8);
         Game.RunScript(nameof(LightScript));
         if (!Game.Race.IsBurnedBySunlight || Game.HasLightResistance)
         {

@@ -14,7 +14,7 @@ internal class ConfusionBreatheBallMonsterSpell : BreatheBallProjectileMonsterSp
     public override bool UsesConfusion => true;
     public override string? VsMonsterSeenMessage => "{0} breathes confusion at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes confusion.";
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ConfusionProjectile);
+    protected override string ProjectileKey => nameof(ConfusionProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ColdSpellResistantDetection) };

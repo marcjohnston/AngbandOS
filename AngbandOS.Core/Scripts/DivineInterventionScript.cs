@@ -23,7 +23,7 @@ internal class DivineInterventionScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.HolyFireProjectile));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile));
         projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 777, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
         Game.RunScript(nameof(DispelAllAtLos4xProjectileScript));
         Game.RunScript(nameof(OldSlowAtLos1xProjectileScript));

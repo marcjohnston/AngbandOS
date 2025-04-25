@@ -27,7 +27,7 @@ internal class DeathRayScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DeathRayProjectile));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DeathRayProjectile));
         projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 }

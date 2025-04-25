@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class OldSleepProjectile : ProjectileGameConfiguration
+public class OldSleepProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(YellowSparkleAnimation);
 

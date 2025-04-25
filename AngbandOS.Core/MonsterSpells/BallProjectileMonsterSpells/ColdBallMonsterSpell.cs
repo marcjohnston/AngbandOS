@@ -16,7 +16,7 @@ internal class ColdBallMonsterSpell : BallProjectileMonsterSpell
 
     public override string? VsMonsterSeenMessage => "{0} casts a frost ball at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a frost ball.";
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.ColdProjectile);
+    protected override string ProjectileKey => nameof(ColdProjectile);
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

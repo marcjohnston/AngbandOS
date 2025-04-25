@@ -23,7 +23,7 @@ internal class PsychicDrainTalent : Talent
             return;
         }
         int i = Game.DiceRoll(Game.ExperienceLevel.IntValue / 2, 6);
-        if (Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PsiDrainProjectile)), dir, i, 0 + ((Game.ExperienceLevel.IntValue - 25) / 10))) // TODO: Need to determine if the return hit success from the fireball is what was intended
+        if (Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PsiDrainProjectile)), dir, i, 0 + ((Game.ExperienceLevel.IntValue - 25) / 10))) // TODO: Need to determine if the return hit success from the fireball is what was intended
         {
             Game.Energy -= Game.DieRoll(150);
         }

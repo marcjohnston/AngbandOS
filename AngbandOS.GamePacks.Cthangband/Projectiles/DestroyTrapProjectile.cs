@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class DestroyTrapProjectile : ProjectileGameConfiguration
+public class DestroyTrapProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(RedSwirlAnimation);
 

@@ -27,6 +27,6 @@ internal class BreatheChaosScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ChaosProjectile)), dir, Game.Health.IntValue, -2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), dir, Game.Health.IntValue, -2);
     }
 }

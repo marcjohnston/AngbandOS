@@ -25,7 +25,7 @@ internal class ChainLightingScript : Script, IScript, ICastSpellScript
     {
         for (int dir = 0; dir <= 9; dir++)
         {
-            Game.FireBeam(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.ElectricityProjectile)), dir, Game.DiceRoll(5 + (Game.ExperienceLevel.IntValue / 10), 8));
+            Game.FireBeam(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, Game.DiceRoll(5 + (Game.ExperienceLevel.IntValue / 10), 8));
         }
     }
 }

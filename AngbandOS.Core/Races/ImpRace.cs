@@ -95,13 +95,13 @@ internal class ImpRace : Race
                 if (Game.ExperienceLevel.IntValue >= 30)
                 {
                     Game.MsgPrint("You cast a ball of fire.");
-                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), direction, Game.ExperienceLevel.IntValue,
+                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue,
                         2);
                 }
                 else
                 {
                     Game.MsgPrint("You cast a bolt of fire.");
-                    Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.FireProjectile)), direction, Game.ExperienceLevel.IntValue);
+                    Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue);
                 }
             }
         }

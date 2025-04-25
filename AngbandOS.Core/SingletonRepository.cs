@@ -36,6 +36,16 @@ internal class SingletonRepository
         return new WeightedRandom<T>(Game, list, predicate);
     }
 
+    private GenericRepository? ValidateAndLookupRepository<T>()
+    {
+        string typeName = typeof(T).Name;
+        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        {
+            throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
+        }
+        return genericRepository;
+    }
+
     /// <summary>
     /// Returns the singleton from the repository specified by the <typeparamref name="T"/> type referenced by the unique key identifier <paramref name="key"/> or null if <paramref name="key"/> is null.
     /// </summary>
@@ -46,16 +56,13 @@ internal class SingletonRepository
     public T? GetNullable<T>(string? key) where T : class
     {
         // Check to see if the dictionary has a dictionary for this type of object.
-        string typeName = typeof(T).Name;
-        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
-        {
-            throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
-        }
+        GenericRepository? genericRepository = ValidateAndLookupRepository<T>();
 
         if (key == null)
         {
             return null;
         }
+
         T? value = TryGet<T>(key);
         if (value == null)
         {
@@ -73,18 +80,10 @@ internal class SingletonRepository
     /// <exception cref="Exception"></exception>
     public T? TryGet<T>(string key) where T : class
     {
+        ValidateNonNullKey(key);
 
         // Check to see if the dictionary has a dictionary for this type of object.
-        string typeName = typeof(T).Name;
-        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
-        {
-            throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
-        }
-
-        if (key == null)
-        {
-            throw new Exception($"A null key has been presented to the non-nullable binding for {typeof(T).Name}.  Use the {nameof(GetNullable)} method.");
-        }
+        GenericRepository? genericRepository = ValidateAndLookupRepository<T>();
 
         string[] keyTokens = key.Split('.');
         key = keyTokens[keyTokens.Length - 1];
@@ -95,6 +94,25 @@ internal class SingletonRepository
             return null;
         }
         return (T)singleton;
+    }
+
+    /// <summary>
+    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public T Get<T>(string key) where T : class
+    {
+        ValidateNonNullKey(key);
+
+        T? singleton = GetNullable<T>(key);
+        if (singleton == null)
+        {
+            throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
+        }
+        return singleton;
     }
 
     /// <summary>
@@ -154,26 +172,12 @@ internal class SingletonRepository
         return results.ToArray();
     }
 
-    /// <summary>
-    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public T Get<T>(string key) where T : class
+    private void ValidateNonNullKey(string? key)
     {
         if (key == null)
         {
-            throw new Exception($"A null key has been presented to the non-nullable binding for {typeof(T).Name}.  Use the {nameof(GetNullable)} method.");
+            throw new Exception($"A null key has been presented to a non-nullable binding request.  Use the {nameof(GetNullable)} method.");
         }
-
-        T? singleton = GetNullable<T>(key);
-        if (singleton == null)
-        {
-            throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
-        }
-        return singleton;
     }
 
     public T Get<T>(int index) where T : class
@@ -353,6 +357,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
+        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, GenericProjectileScript>(gameConfiguration.ProjectileScripts);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
@@ -397,7 +402,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<Patron>();
         LoadAllAssemblyTypes<PlayerEffect>();
-        LoadAllAssemblyTypes<ProjectileScript>();
         LoadAllAssemblyTypes<ProjectileWeightedRandomScript>();
         LoadAllAssemblyTypes<Race>();
         LoadAllAssemblyTypes<Realm>();

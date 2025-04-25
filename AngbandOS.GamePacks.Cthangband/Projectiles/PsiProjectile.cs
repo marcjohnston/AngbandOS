@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class PsiProjectile : ProjectileGameConfiguration
+public class PsiProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(DiamondSparkleAnimation);
 

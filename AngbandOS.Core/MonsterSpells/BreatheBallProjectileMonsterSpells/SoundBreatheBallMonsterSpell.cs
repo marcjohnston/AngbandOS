@@ -14,7 +14,7 @@ internal class SoundBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool UsesSound => true;
     public override string? VsMonsterSeenMessage => "{0} breathes sound at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes sound.";
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.SoundProjectile);
+    protected override string ProjectileKey => nameof(SoundProjectile);
     protected override int MonsterHealthDamageDivisor => 6;
     protected override int MaxDamage => 400;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(SoundSpellResistantDetection) };

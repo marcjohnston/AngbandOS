@@ -33,7 +33,7 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, I
     /// <returns></returns>
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.DestroyTrapOrDoorProjectile));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
         bool isIdentified = projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
         return new IdentifiedResult(isIdentified);
     }

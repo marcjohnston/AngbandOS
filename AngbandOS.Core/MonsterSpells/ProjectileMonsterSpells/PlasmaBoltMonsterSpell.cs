@@ -20,6 +20,6 @@ internal class PlasmaBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return 10 + Game.DiceRoll(8, 7) + monsterLevel;
     }
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.PlasmaProjectile);
+    protected override string ProjectileKey => nameof(PlasmaProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

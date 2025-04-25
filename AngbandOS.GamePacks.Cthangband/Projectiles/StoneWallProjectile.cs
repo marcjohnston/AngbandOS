@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class StoneWallProjectile : ProjectileGameConfiguration
+public class StoneWallProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightGreySparkleAnimation);
 

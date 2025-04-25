@@ -14,7 +14,7 @@ internal class AcidBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override bool UsesAcid => true;
     public override string? VsMonsterSeenMessage => "{0} breathes acid at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes acid.";
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.AcidProjectile);
+    protected override string ProjectileKey => nameof(AcidProjectile);
     protected override int MonsterHealthDamageDivisor => 3;
     protected override int MaxDamage => 1600;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(AcidSpellResistantDetection) };

@@ -89,7 +89,7 @@ internal class MindFlayerRace : Race
             if (Game.GetDirectionWithAim(out int direction))
             {
                 Game.MsgPrint("You concentrate and your eyes glow red...");
-                Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ProjectileNamesEnum.PsiProjectile)), direction, Game.ExperienceLevel.IntValue);
+                Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), direction, Game.ExperienceLevel.IntValue);
             }
         }
     }

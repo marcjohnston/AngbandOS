@@ -21,6 +21,6 @@ internal class FireBoltMonsterSpell : ProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DiceRoll(9, 8) + (monsterLevel / 3);
     }
-    protected override string ProjectileKey => nameof(ProjectileNamesEnum.FireProjectile);
+    protected override string ProjectileKey => nameof(FireProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(FireSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class TeleportAwayUndeadProjectile : ProjectileGameConfiguration
+public class TeleportAwayUndeadProjectile : ProjectileGameConfiguration
 {
     public override string? BoltProjectileGraphicBindingKey => nameof(PinkBulletProjectileGraphic);
 
