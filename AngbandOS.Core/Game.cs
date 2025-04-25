@@ -50,6 +50,39 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
+    private const int DecayRate = 10;
+    private const int PatronRestingFavour = 30;
+    public God? God;
+
+    public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
+    public int GenomeArmorClassBonus;
+    public bool ChaosGift;
+    public int CharismaBonus;
+    public bool CharismaOverride;
+    public int ConstitutionBonus;
+    public int DexterityBonus;
+    public bool ElecHit;
+    public bool Esp;
+    public bool FeatherFall;
+    public bool FireHit;
+    public bool FreeAction;
+    public int InfravisionBonus;
+    public int IntelligenceBonus;
+    public bool MagicResistance;
+    public bool Regen;
+    public bool ResFear;
+    public bool ResTime;
+    public int SearchBonus;
+    public int SpeedBonus;
+    public int StealthBonus;
+    public int StrengthBonus;
+    public bool SuppressRegen;
+    public bool SustainAll;
+    public bool Vulnerable;
+    public int WisdomBonus;
+    public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
+    public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
+
     public readonly ExpressionParser ExpressionParser;
     public readonly ParseLanguage ParseLanguage;
     public readonly IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter;
@@ -17176,9 +17209,7 @@ internal class Game
         mPtr.DistanceFromPlayer = 0;
         mPtr.IndividualMonsterFlags = 0;
         mPtr.IsVisible = false;
-        mPtr.MaxHealth = rPtr.ForceMaxHp
-            ? DiceRollMax(rPtr.Hdice, rPtr.Hside)
-            : DiceRoll(rPtr.Hdice, rPtr.Hside);
+        mPtr.MaxHealth = rPtr.ForceMaxHp ? rPtr.Hdice * rPtr.Hside : DiceRoll(rPtr.Hdice, rPtr.Hside);
         mPtr.Health = mPtr.MaxHealth;
         mPtr.Speed = rPtr.Speed;
         if (!rPtr.Unique)
@@ -17290,17 +17321,6 @@ internal class Game
     }
 
     /// <summary>
-    /// Returns the maximum value of a dice roll of (num)d(sides)
-    /// </summary>
-    /// <param name="num"> The number of dice to roll </param>
-    /// <param name="sides"> The number of sides per die </param>
-    /// <returns> </returns>
-    public int DiceRollMax(int num, int sides)
-    {
-        return num * sides;
-    }
-
-    /// <summary>
     /// Returns a random number greater or equal to one and less than or equal to max
     /// </summary>
     /// <param name="max"> The upper limit (inclusive) </param>
@@ -17407,35 +17427,6 @@ internal class Game
         Random use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);
     }
-
-    public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
-    public int GenomeArmorClassBonus;
-    public bool ChaosGift;
-    public int CharismaBonus;
-    public bool CharismaOverride;
-    public int ConstitutionBonus;
-    public int DexterityBonus;
-    public bool ElecHit;
-    public bool Esp;
-    public bool FeatherFall;
-    public bool FireHit;
-    public bool FreeAction;
-    public int InfravisionBonus;
-    public int IntelligenceBonus;
-    public bool MagicResistance;
-    public bool Regen;
-    public bool ResFear;
-    public bool ResTime;
-    public int SearchBonus;
-    public int SpeedBonus;
-    public int StealthBonus;
-    public int StrengthBonus;
-    public bool SuppressRegen;
-    public bool SustainAll;
-    public bool Vulnerable;
-    public int WisdomBonus;
-    public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
-    public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
 
     public void InitializeMutations()
     {
@@ -17609,10 +17600,6 @@ internal class Game
             }
         }
     }
-
-    private const int DecayRate = 10;
-    private const int PatronRestingFavour = 30;
-    public God? God;
 
     public void RefreshGods()
     {
