@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -1466,7 +1465,7 @@ internal abstract class ItemFactory : ItemEnhancement
     public virtual bool NegativeBonusArmorClassRepresentsBroken => false;
     public virtual bool NegativeBonusHitRepresentsBroken => false;
 
-    protected virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; set; } = nameof(SlayingItemEnhancementWeightedRandom);
+    protected virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingItemEnhancementWeightedRandom);
 
     /// <summary>
     /// Returns the ceiling value for bonus armor values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
@@ -1819,7 +1818,6 @@ internal abstract class ItemFactory : ItemEnhancement
     public virtual int DamageSides => 0;
 
     public virtual int LevelNormallyFound => 0;
-    public virtual bool Lightsource { get; set; } = false;
 
     /// <summary>
     /// Returns the initial amount of bonus charisma to be assigned to the item.
