@@ -23,6 +23,8 @@ internal class BrillianceAmuletItemFactory : ItemFactory
     public override int Cost => 500;
     public override bool HideType => true;
     public override bool Int => true;
+    protected override string? BonusIntelligenceRollExpression => "1";
+    protected override string? BonusWisdomRollExpression => "1";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
