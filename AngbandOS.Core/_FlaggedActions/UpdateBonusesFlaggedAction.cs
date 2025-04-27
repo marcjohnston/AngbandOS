@@ -194,55 +194,55 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
                     if (mergedCharacteristics.Str)
                     {
-                        Game.AbilityScores[AbilityEnum.Strength].Bonus += oPtr.Characteristics.BonusStrength;
+                        Game.AbilityScores[AbilityEnum.Strength].Bonus += mergedCharacteristics.BonusStrength;
                     }
                     if (mergedCharacteristics.Int)
                     {
-                        Game.AbilityScores[AbilityEnum.Intelligence].Bonus += oPtr.Characteristics.BonusIntelligence;
+                        Game.AbilityScores[AbilityEnum.Intelligence].Bonus += mergedCharacteristics.BonusIntelligence;
                     }
                     if (mergedCharacteristics.Wis)
                     {
-                        Game.AbilityScores[AbilityEnum.Wisdom].Bonus += oPtr.Characteristics.BonusWisdom;
+                        Game.AbilityScores[AbilityEnum.Wisdom].Bonus += mergedCharacteristics.BonusWisdom;
                     }
                     if (mergedCharacteristics.Dex)
                     {
-                        Game.AbilityScores[AbilityEnum.Dexterity].Bonus += oPtr.Characteristics.BonusDexterity;
+                        Game.AbilityScores[AbilityEnum.Dexterity].Bonus += mergedCharacteristics.BonusDexterity;
                     }
                     if (mergedCharacteristics.Con)
                     {
-                        Game.AbilityScores[AbilityEnum.Constitution].Bonus += oPtr.Characteristics.BonusConstitution;
+                        Game.AbilityScores[AbilityEnum.Constitution].Bonus += mergedCharacteristics.BonusConstitution;
                     }
                     if (mergedCharacteristics.Cha)
                     {
-                        Game.AbilityScores[AbilityEnum.Charisma].Bonus += oPtr.Characteristics.BonusCharisma;
+                        Game.AbilityScores[AbilityEnum.Charisma].Bonus += mergedCharacteristics.BonusCharisma;
                     }
                     if (mergedCharacteristics.Stealth)
                     {
-                        Game.SkillStealth += oPtr.Characteristics.BonusStealth;
+                        Game.SkillStealth += mergedCharacteristics.BonusStealth;
                     }
                     if (mergedCharacteristics.Search)
                     {
-                        Game.SkillSearching += oPtr.Characteristics.BonusSearch * 5;
+                        Game.SkillSearching += mergedCharacteristics.BonusSearch * 5;
                     }
                     if (mergedCharacteristics.Search)
                     {
-                        Game.SkillSearchFrequency += oPtr.Characteristics.BonusSearch * 5;
+                        Game.SkillSearchFrequency += mergedCharacteristics.BonusSearch * 5;
                     }
                     if (mergedCharacteristics.Infra)
                     {
-                        Game.InfravisionRange += oPtr.Characteristics.BonusInfravision;
+                        Game.InfravisionRange += mergedCharacteristics.BonusInfravision;
                     }
                     if (mergedCharacteristics.Tunnel)
                     {
-                        Game.SkillDigging += oPtr.Characteristics.BonusTunnel * 20;
+                        Game.SkillDigging += mergedCharacteristics.BonusTunnel * 20;
                     }
                     if (mergedCharacteristics.Speed)
                     {
-                        Game.Speed.IntValue += oPtr.Characteristics.BonusSpeed;
+                        Game.Speed.IntValue += mergedCharacteristics.BonusSpeed;
                     }
                     if (mergedCharacteristics.Blows)
                     {
-                        extraBlows += oPtr.Characteristics.BonusAttacks;
+                        extraBlows += mergedCharacteristics.BonusAttacks;
                     }
                     if (mergedCharacteristics.Impact)
                     {
@@ -434,24 +434,24 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     Game.BaseArmorClass += oPtr.ArmorClass;
                     Game.DisplayedBaseArmorClass.IntValue += oPtr.ArmorClass;
-                    Game.ArmorClassBonus += oPtr.Characteristics.BonusArmorClass;
+                    Game.ArmorClassBonus += mergedCharacteristics.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedArmorClassBonus.IntValue += oPtr.Characteristics.BonusArmorClass;
+                        Game.DisplayedArmorClassBonus.IntValue += mergedCharacteristics.BonusArmorClass;
                     }
                     if (inventorySlot.IsWeapon)
                     {
                         continue;
                     }
-                    Game.AttackBonus += oPtr.Characteristics.BonusHit;
-                    Game.DamageBonus += oPtr.Characteristics.BonusDamage;
+                    Game.AttackBonus += mergedCharacteristics.BonusHit;
+                    Game.DamageBonus += mergedCharacteristics.BonusDamage;
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedAttackBonus += oPtr.Characteristics.BonusHit;
+                        Game.DisplayedAttackBonus += mergedCharacteristics.BonusHit;
                     }
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedDamageBonus += oPtr.Characteristics.BonusDamage;
+                        Game.DisplayedDamageBonus += mergedCharacteristics.BonusDamage;
                     }
                 }
             }
