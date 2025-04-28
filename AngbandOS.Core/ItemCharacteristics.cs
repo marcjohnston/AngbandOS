@@ -1057,7 +1057,7 @@ internal class ItemCharacteristics
         }
         return true;
     }
-    public static bool operator ==(ItemCharacteristics left, ItemCharacteristics right)
+    public static bool operator ==(ItemCharacteristics? left, ItemCharacteristics? right)
     {
         if (ReferenceEquals(left, right))
         {
@@ -1071,7 +1071,7 @@ internal class ItemCharacteristics
         return left.Equals(right);
     }
 
-    public static bool operator !=(ItemCharacteristics left, ItemCharacteristics right)
+    public static bool operator !=(ItemCharacteristics? left, ItemCharacteristics? right)
     {
         return !(left == right);
     }
