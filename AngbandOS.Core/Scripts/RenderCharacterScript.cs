@@ -293,7 +293,7 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
                     // Only extract known bonuses, not full bonuses
                     ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
                     ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.Characteristics.BonusStrength, row + 0, col);
-                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, item.Characteristics.BonusIntelligence, row + 1, col);
+                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.BonusIntelligence != 0, item.Characteristics.BonusIntelligence, row + 1, col);
                     ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, item.Characteristics.BonusWisdom, row + 2, col);
                     ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, item.Characteristics.BonusDexterity, row + 3, col);
                     ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, item.Characteristics.BonusConstitution, row + 4, col);
@@ -305,7 +305,7 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
 
         ItemCharacteristics playerCharacteristics = Game.GetAbilitiesAsItemFlags();
         DisplayPlayerStatWithModification(Game.StrengthBonus, playerCharacteristics.Str, row + 0, col);
-        DisplayPlayerStatWithModification(Game.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
+        DisplayPlayerStatWithModification(Game.IntelligenceBonus, playerCharacteristics.BonusIntelligence != 0, row + 1, col);
         DisplayPlayerStatWithModification(Game.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
         DisplayPlayerStatWithModification(Game.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
         DisplayPlayerStatWithModification(Game.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);

@@ -29,7 +29,6 @@ internal class CloakDarknessFixedArtifact : FixedArtifact
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Int => true;
     public override int Level => 5;
     protected override string? BonusStealthRollExpression => "2";
     protected override string? BonusIntelligenceRollExpression => "2";

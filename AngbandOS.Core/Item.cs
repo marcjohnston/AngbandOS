@@ -1343,7 +1343,7 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It affects your strength.";
         }
-        if (mergedCharacteristics.Int)
+        if (mergedCharacteristics.BonusIntelligence != 0)
         {
             info[i++] = "It affects your intelligence.";
         }
@@ -2079,10 +2079,7 @@ internal sealed class Item : IComparable<Item>
         {
             value += Characteristics.BonusStrength * Game.BonusStrengthValue;
         }
-        if (mergedCharacteristics.Int)
-        {
-            value += Characteristics.BonusIntelligence * Game.BonusIntelligenceValue;
-        }
+        value += Characteristics.BonusIntelligence * Game.BonusIntelligenceValue;
         if (mergedCharacteristics.Wis)
         {
             value += Characteristics.BonusWisdom * Game.BonusWisdomValue;

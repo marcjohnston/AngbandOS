@@ -80,7 +80,6 @@ internal abstract class ItemEnhancement : IGetKey
         itemCharacteristics.Impact = Impact;
         itemCharacteristics.Infra = Infra;
         itemCharacteristics.InstaArt = InstaArt;
-        itemCharacteristics.Int = Int;
         itemCharacteristics.KillDragon = KillDragon;
         itemCharacteristics.NoMagic = NoMagic;
         itemCharacteristics.NoTele = NoTele;
@@ -371,10 +370,7 @@ internal abstract class ItemEnhancement : IGetKey
     
     /// <inheritdoc />
     public virtual bool InstaArt => false;
-    
-    /// <inheritdoc />
-    public virtual bool Int => false;
-    
+       
     /// <inheritdoc />
     public virtual bool KillDragon => false;
     

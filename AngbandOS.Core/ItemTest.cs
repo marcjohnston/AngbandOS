@@ -215,10 +215,6 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(Int, characteristics.Int))
-        {
-            return false;
-        }
         if (!TestBoolean(KillDragon, characteristics.KillDragon))
         {
             return false;
@@ -523,8 +519,6 @@ internal abstract class ItemTest : IGetKey
     public virtual bool? Infra => null;
 
     public virtual bool? InstaArt => null;
-
-    public virtual bool? Int => null;
 
     public virtual bool? KillDragon => null;
 

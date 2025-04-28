@@ -15,9 +15,9 @@ internal class IntelligenceArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics)
     {
-        if (!characteristics.Int)
+        if (characteristics.BonusIntelligence != 0)
         {
-            characteristics.Int = true;
+            characteristics.BonusIntelligence = 1;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

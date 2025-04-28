@@ -196,10 +196,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.AbilityScores[AbilityEnum.Strength].Bonus += mergedCharacteristics.BonusStrength;
                     }
-                    if (mergedCharacteristics.Int)
-                    {
-                        Game.AbilityScores[AbilityEnum.Intelligence].Bonus += mergedCharacteristics.BonusIntelligence;
-                    }
+                    Game.AbilityScores[AbilityEnum.Intelligence].Bonus += mergedCharacteristics.BonusIntelligence;
                     if (mergedCharacteristics.Wis)
                     {
                         Game.AbilityScores[AbilityEnum.Wisdom].Bonus += mergedCharacteristics.BonusWisdom;
