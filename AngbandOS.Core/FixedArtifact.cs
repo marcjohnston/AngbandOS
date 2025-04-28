@@ -26,7 +26,7 @@ internal abstract class FixedArtifact : ItemEnhancement
     /// <summary>
     /// Returns the multipler to use when being used to kill a dragon.  The SwordOfLightning returns a 3.  All other weapons return 1.
     /// </summary>
-    public virtual int KillDragonMultiplier => 1; // TODO: Move this into the IItemCharacteristics
+    public virtual int KillDragonMultiplier => 1; // TODO: Move this into the ItemCharacteristics
 
     /// <summary>
     /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
@@ -44,14 +44,14 @@ internal abstract class FixedArtifact : ItemEnhancement
     /// <summary>
     /// Returns a 1-in-chance value of the weapon doing extra vorpal damage.  Does not affect non-vorpal cutting weapons.  Default to a 1-in-6 chance.
     /// </summary>
-    public virtual int VorpalExtraDamage1InChance => 6; // TODO: Move this into the IItemCharacteristics
+    public virtual int VorpalExtraDamage1InChance => 6; // TODO: Move this into the ItemCharacteristics
 
-    public virtual bool IsVorpalBlade => false; // TODO: Move this into the IItemCharacteristics
+    public virtual bool IsVorpalBlade => false; // TODO: Move this into the ItemCharacteristics
 
     /// <summary>
     /// Returns a 1-in-chance value of the weapon doing extra vorpal attacks. Does not affect non-vorpal cutting weapons.  Default to a 1-in-4 chance.
     /// </summary>
-    public virtual int VorpalExtraAttacks1InChance => 4; // TODO: Move this into the IItemCharacteristics
+    public virtual int VorpalExtraAttacks1InChance => 4; // TODO: Move this into the ItemCharacteristics
 
     public virtual ColorEnum Color => ColorEnum.White; // TODO: This must be used outside of the ItemEnhancement
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement

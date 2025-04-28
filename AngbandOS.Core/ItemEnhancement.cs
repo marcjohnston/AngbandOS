@@ -24,7 +24,7 @@ internal abstract class ItemEnhancement : IGetKey
     /// Returns a deterministic set of characteristics that are merge with the other <see cref="Item"/> characteristics.
     /// </summary>
     /// <returns></returns>
-    public IItemCharacteristics GenerateItemCharacteristics()
+    public ItemCharacteristics GenerateItemCharacteristics()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
 

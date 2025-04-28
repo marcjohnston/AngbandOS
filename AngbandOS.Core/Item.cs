@@ -53,7 +53,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the deterministic set of fixed artifact characteristics.
     /// </summary>
-    private IItemCharacteristics? FixedArtifactItemCharacteristics = null;
+    private ItemCharacteristics? FixedArtifactItemCharacteristics = null;
 
     /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
@@ -63,7 +63,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the deterministic set of rare item characteristics.
     /// </summary>
-    private IItemCharacteristics? RareItemCharacteristics = null;
+    private ItemCharacteristics? RareItemCharacteristics = null;
 
     /// <summary>
     /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
@@ -83,7 +83,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the deterministic set of random power characteristics.
     /// </summary>
-    private IItemCharacteristics? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
+    private ItemCharacteristics? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
 
     /// <summary>
     /// Returns the number of stacked items.
@@ -222,7 +222,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the deterministic set of fixed artifact characteristics.
     /// </summary>
-    private readonly IItemCharacteristics FactoryItemCharacteristics;
+    private readonly ItemCharacteristics FactoryItemCharacteristics;
 
     /// <summary>
     /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.

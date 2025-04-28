@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// Represents a set of deterministic read and write item characteristics that are used as the storage for one or more merged <see cref="ItemEnhancement"/> objects.
 /// </summary>
 [Serializable]
-internal class ItemCharacteristics : IItemCharacteristics
+internal class ItemCharacteristics
 {
     public bool CanApplyBlessedArtifactBias { get; set; }
     public bool CanApplyArtifactBiasSlaying { get; set; }
@@ -319,7 +319,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     /// </summary>
     /// <param name="itemCharacteristicsA"></param>
     /// <param name="itemCharacteristicsB"></param>
-    public void Copy(IItemCharacteristics itemCharacteristics)
+    public void Copy(ItemCharacteristics itemCharacteristics)
     {
         CanApplyBlessedArtifactBias = itemCharacteristics.CanApplyBlessedArtifactBias;
         CanApplyArtifactBiasSlaying = itemCharacteristics.CanApplyArtifactBiasSlaying;
@@ -443,7 +443,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     /// Merge two sets of item characteristics.  Characteristics are typically merged by using an OR operation.
     /// </summary>
     /// <param name="itemCharacteristics"></param>
-    public void Merge(IItemCharacteristics? itemCharacteristics)
+    public void Merge(ItemCharacteristics? itemCharacteristics)
     {
         if (itemCharacteristics == null)
         {
@@ -588,15 +588,10 @@ internal class ItemCharacteristics : IItemCharacteristics
     /// <returns></returns>
     public override bool Equals(object? obj)
     {
-        if (obj == null)
+        if (obj is not ItemCharacteristics other)
         {
             return false;
         }
-        if (obj is not ItemCharacteristics)
-        {
-            return false;
-        }
-        ItemCharacteristics other = (ItemCharacteristics)obj;
 
         if (CanApplyBlessedArtifactBias != other.CanApplyBlessedArtifactBias)
         {
@@ -1062,13 +1057,22 @@ internal class ItemCharacteristics : IItemCharacteristics
         }
         return true;
     }
-    public static bool operator ==(ItemCharacteristics obj1, ItemCharacteristics obj2)
+    public static bool operator ==(ItemCharacteristics left, ItemCharacteristics right)
     {
-        return obj1.Equals(obj2);
+        if (ReferenceEquals(left, right))
+        {
+            return true;
+        }
+        if (left is null || right is null)
+        {
+            return false;
+        }
+
+        return left.Equals(right);
     }
 
-    public static bool operator !=(ItemCharacteristics obj1, ItemCharacteristics obj2)
+    public static bool operator !=(ItemCharacteristics left, ItemCharacteristics right)
     {
-        return !obj1.Equals(obj2);
+        return !(left == right);
     }
 }
