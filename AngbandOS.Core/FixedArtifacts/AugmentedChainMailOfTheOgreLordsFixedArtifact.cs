@@ -36,6 +36,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
+    public override bool Int => true;
     public override int Level => 25;
     protected override string? BonusConstitutionRollExpression => "3";
     protected override string? BonusIntelligenceRollExpression => "3";

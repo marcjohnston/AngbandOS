@@ -37,6 +37,7 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ImCold => true;
+    public override bool Int => true;
     public override int Level => 30;
     protected override string? BonusCharismaRollExpression => "2";
     protected override string? BonusConstitutionRollExpression => "2";

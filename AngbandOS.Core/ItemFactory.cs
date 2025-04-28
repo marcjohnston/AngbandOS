@@ -803,6 +803,7 @@ internal abstract class ItemFactory : ItemEnhancement
 
                 case 3:
                 case 4:
+                    characteristics.Int = true;
                     characteristics.BonusIntelligence = EnchantBonus(characteristics.BonusIntelligence);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {

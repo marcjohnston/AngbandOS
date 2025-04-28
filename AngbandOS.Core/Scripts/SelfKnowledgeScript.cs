@@ -315,7 +315,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "Your strength is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusIntelligence != 0)
+        if (inventoryCharacteristics.Int)
         {
             info[infoCount++] = "Your intelligence is affected by your equipment.";
         }

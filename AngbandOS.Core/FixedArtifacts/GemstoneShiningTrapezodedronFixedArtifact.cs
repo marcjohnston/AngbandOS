@@ -33,6 +33,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool InstaArt => true;
+    public override bool Int => true;
     public override int Level => 50;
     protected override string? BonusIntelligenceRollExpression => "3";
     protected override string? BonusSpeedRollExpression => "3";

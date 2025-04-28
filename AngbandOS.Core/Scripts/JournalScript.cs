@@ -237,7 +237,7 @@ internal class JournalScript : Script, IScript, ICastSpellScript, IGameCommandSc
         Game.DisplayPlayerEquippy(0, 0 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 0 + 11);
         DisplayStat("Add Str", 2, 0, (ItemCharacteristics itemCharacteristics) => itemCharacteristics.Str);
-        DisplayStat("Add Int", 3, 0, (ItemCharacteristics itemCharacteristics) => itemCharacteristics.BonusIntelligence != 0);
+        DisplayStat("Add Int", 3, 0, (ItemCharacteristics itemCharacteristics) => itemCharacteristics.Int);
         DisplayStat("Add Wis", 4, 0, (ItemCharacteristics itemCharacteristics) => itemCharacteristics.Wis);
         DisplayStat("Add Dex", 5, 0, (ItemCharacteristics itemCharacteristics) => itemCharacteristics.Dex);
         DisplayStat("Add Con", 6, 0, (ItemCharacteristics itemCharacteristics) => itemCharacteristics.Con);

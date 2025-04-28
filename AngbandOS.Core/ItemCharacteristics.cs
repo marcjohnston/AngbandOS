@@ -144,6 +144,9 @@ internal class ItemCharacteristics
     public bool InstaArt { get; set; } = false;
 
     /// <inheritdoc/>
+    public bool Int { get; set; } = false;
+
+    /// <inheritdoc/>
     public bool KillDragon { get; set; } = false;
 
     /// <inheritdoc/>
@@ -377,6 +380,7 @@ internal class ItemCharacteristics
         Impact = itemCharacteristics.Impact;
         Infra = itemCharacteristics.Infra;
         InstaArt = itemCharacteristics.InstaArt;
+        Int = itemCharacteristics.Int;
         KillDragon = itemCharacteristics.KillDragon;
         NoMagic = itemCharacteristics.NoMagic;
         NoTele = itemCharacteristics.NoTele;
@@ -514,6 +518,7 @@ internal class ItemCharacteristics
         Impact |= itemCharacteristics.Impact;
         Infra |= itemCharacteristics.Infra;
         InstaArt |= itemCharacteristics.InstaArt;
+        Int |= itemCharacteristics.Int;
         KillDragon |= itemCharacteristics.KillDragon;
         NoMagic |= itemCharacteristics.NoMagic;
         NoTele |= itemCharacteristics.NoTele;
@@ -819,6 +824,10 @@ internal class ItemCharacteristics
             return false;
         }
         if (InstaArt != other.InstaArt)
+        {
+            return false;
+        }
+        if (Int != other.Int)
         {
             return false;
         }
