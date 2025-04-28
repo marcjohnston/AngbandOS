@@ -17,7 +17,7 @@ internal class BrillianceAmuletItemFactory : ItemFactory
     protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
 {
         (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorWisdomEnchantmentScript), nameof(PoorIntelligence5BP1EnchantmentScript) }),
-        (new int[] {1, 2}, null, new string[] { nameof(BonusWisdomEnchantmentScript), nameof(BonusIntelligence5BP1EnchantmentScript) })
+        (new int[] {0, 1, 2}, null, new string[] { nameof(BonusWisdomEnchantmentScript), nameof(BonusIntelligence5BP1EnchantmentScript) })
 };
 
     protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
