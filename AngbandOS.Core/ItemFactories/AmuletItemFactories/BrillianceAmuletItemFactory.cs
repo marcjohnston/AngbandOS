@@ -14,6 +14,11 @@ internal class BrillianceAmuletItemFactory : ItemFactory
     public override bool NegativeBonusHitRepresentsBroken => true;
     public override bool NegativeBonusDamageRepresentsBroken => true;
     private BrillianceAmuletItemFactory(Game game) : base(game) { } // This object is a singleton.
+    protected override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
+{
+        (new int[] {-1, -2}, null, new string[] { nameof(BrokenAndCursedEnchantmentScript), nameof(PoorWisdomEnchantmentScript), nameof(PoorIntelligence5BP1EnchantmentScript) }),
+        (new int[] {1, 2}, null, new string[] { nameof(BonusWisdomEnchantmentScript), nameof(BonusIntelligence5BP1EnchantmentScript) })
+};
 
     protected override string SymbolBindingKey => nameof(DoubleQuoteSymbol);
     public override string Name => "Brilliance";
@@ -23,8 +28,6 @@ internal class BrillianceAmuletItemFactory : ItemFactory
     public override int Cost => 500;
     public override bool HideType => true;
     public override bool Int => true;
-    protected override string? BonusIntelligenceRollExpression => "1";
-    protected override string? BonusWisdomRollExpression => "1";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
