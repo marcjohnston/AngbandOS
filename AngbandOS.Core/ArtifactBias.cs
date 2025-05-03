@@ -60,25 +60,26 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics) => false;
+    public virtual bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics) => false;
 
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
     public (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomResistances { get; private set; } = null;
             
     /// <summary>
-    /// Apply resistances to the item and returns true, if additional resistances can applied.  By default, no resistances are applied and false is returned.
+    /// Apply resistances to the item and returns true, if additional resistances can be applied.  By default, no resistances are applied and false is returned.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public bool ApplyRandomResistances(ItemCharacteristics characteristics)
+    public bool ApplyRandomResistances(RwItemPropertySet characteristics)
     {
         if (RandomResistances != null)
         {
             foreach ((ItemTest itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in RandomResistances)
             {
+                // Test the probability and if whether the item test pass.
                 if (itemTestProbability.Test() && itemTest.Test(characteristics))
                 {
-                    characteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
+                    characteristics = characteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
                     if (moreProbability.Test())
                     {
                         return true;
@@ -94,14 +95,14 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyMiscPowers(ItemCharacteristics characteristics) => false;
+    public virtual bool ApplyMiscPowers(RwItemPropertySet characteristics) => false;
 
     /// <summary>
     /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplySlaying(ItemCharacteristics characteristics) => false;
+    public virtual bool ApplySlaying(RwItemPropertySet characteristics) => false;
 
     /// <summary>
     /// Returns an activation type to be applied for the item or null when there is no biased activation type.  By default, null is returned.

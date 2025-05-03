@@ -45,7 +45,7 @@ internal class DraconianRace : Race
     public override string RacialPowersDescription(int lvl) => "breath weapon      (racial, cost lvl, dam 2*lvl, CON based)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.Feather = true;
         if (level > 4)

@@ -23,6 +23,6 @@ internal class BonusWisdomEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusWisdom = 1 + item.GetBonusValue(5, level);
+        item.EnchantmentItemProperties.BonusWisdom = 1 + item.GetBonusValue(5, level);
     }
 }

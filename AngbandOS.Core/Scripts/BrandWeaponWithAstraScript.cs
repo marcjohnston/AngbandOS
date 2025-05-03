@@ -26,19 +26,23 @@ internal class BrandWeaponWithAstraScript : Script, IScript, ICastSpellScript
         Item? item = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
 
         // We must have a non-rare, non-artifact weapon that isn't cursed
-        if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed)
+        if (item != null)
         {
-            string act;
-            string itemName = item.GetDescription(false);
+            RoItemPropertySet effectiveItemCharacteristics = item.GetEffectiveItemProperties();
+            if (!item.IsArtifact && !item.IsRare() && !effectiveItemCharacteristics.IsCursed)
+            {
+                string act;
+                string itemName = item.GetDescription(false);
 
-            // Make it a planar weapon
-            act = "seems very unstable now.";
-            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponPlanarWeaponItemEnhancement));
-            item.Characteristics.BonusSearch = Game.DieRoll(2);
+                // Make it a planar weapon
+                act = "seems very unstable now.";
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponPlanarWeaponItemEnhancement));
+                item.EnchantmentItemProperties.BonusSearch = Game.DieRoll(2);
 
-            // Let the player know what happened
-            Game.MsgPrint($"Your {itemName} {act}");
-            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+                // Let the player know what happened
+                Game.MsgPrint($"Your {itemName} {act}");
+                Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            }
         }
         else
         {

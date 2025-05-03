@@ -45,7 +45,7 @@ internal class GnomeRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "teleport           (racial, unusable until level 5)" : "teleport           (racial, cost 5 + lvl/5, INT based)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.FreeAct = true;
     }

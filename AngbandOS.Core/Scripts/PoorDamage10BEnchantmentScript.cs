@@ -23,6 +23,6 @@ internal class PoorDamage10BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusDamage -= item.GetBonusValue(10, level);
+        item.EnchantmentItemProperties.BonusDamage -= item.GetBonusValue(10, level);
     }
 }

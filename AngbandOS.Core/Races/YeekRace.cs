@@ -44,7 +44,7 @@ internal class YeekRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "scare monster      (racial, unusable until level 15)" : "scare monster      (racial, cost 15, WIS based)";
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.ResAcid = true;
         if (level > 19)

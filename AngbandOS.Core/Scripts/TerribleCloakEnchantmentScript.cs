@@ -18,11 +18,11 @@ internal class TerribleCloakEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusArmorClass -= item.GetBonusValue(10, level);
+        item.EnchantmentItemProperties.BonusArmorClass -= item.GetBonusValue(10, level);
         item.RareItem = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(CloakPoorItemEnhancementWeightedRandom)).ChooseOrDefault();
-        if (item.Characteristics.BonusArmorClass < 0)
+        if (item.EnchantmentItemProperties.BonusArmorClass < 0)
         {
-            item.IsCursed = true;
+            item.EnchantmentItemProperties.IsCursed = true;
         }
     }
 }

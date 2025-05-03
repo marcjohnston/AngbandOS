@@ -18,7 +18,7 @@ internal class GreatRobeSoftArmorEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusArmorClass += item.GetBonusValue(10, level);
+        item.EnchantmentItemProperties.BonusArmorClass += item.GetBonusValue(10, level);
 
         // Robes have a chance of having the armor of permanence instead of a random characteristic.
         if (Game.RandomLessThan(100) < 10)
@@ -58,7 +58,7 @@ internal class GreatRobeSoftArmorEnchantmentScript : Script, IEnhancementScript
                     item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistanceItemEnhancement));
                     if (Game.DieRoll(4) == 1)
                     {
-                        item.Characteristics.ResPois = true;
+                        item.EnchantmentItemProperties.ResPois = true;
                     }
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                     break;

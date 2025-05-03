@@ -35,7 +35,7 @@ internal class DetectMagicalObjectsScript : Script, IScript, ICastSpellScript
                     {
                         continue;
                     }
-                    if (oPtr.IsArtifact || oPtr.IsRare() || oPtr.IsMagical || oPtr.Characteristics.BonusArmorClass > 0 || oPtr.Characteristics.BonusHit + oPtr.Characteristics.BonusDamage > 0)
+                    if (oPtr.IsArtifact || oPtr.IsRare() || oPtr.IsMagical || oPtr.EnchantmentItemProperties.BonusArmorClass > 0 || oPtr.EnchantmentItemProperties.BonusHit + oPtr.EnchantmentItemProperties.BonusDamage > 0)
                     {
                         oPtr.WasNoticed = true;
                         Game.MainForm.RefreshMapLocation(y, x);

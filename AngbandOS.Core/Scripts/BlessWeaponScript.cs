@@ -34,8 +34,8 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         }
         string your = oPtr.IsInInventory ? "your" : "the"; ;
         string oName = oPtr.GetDescription(false);
-        ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-        if (oPtr.IsCursed)
+        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
+        if (mergedCharacteristics.IsCursed)
         {
             if ((mergedCharacteristics.HeavyCurse && Game.DieRoll(100) < 33) || mergedCharacteristics.PermaCurse)
             {
@@ -43,7 +43,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
                 return;
             }
             Game.MsgPrint($"A malignant aura leaves {your} {oName}.");
-            oPtr.IsCursed = false;
+            oPtr.EnchantmentItemProperties.IsCursed = false;
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -58,38 +58,38 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         {
             string s = oPtr.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {oName} shine{s}!");
-            oPtr.Characteristics.Blessed = true;
+            oPtr.EnchantmentItemProperties.Blessed = true;
         }
         else
         {
             bool disHappened = false;
             Game.MsgPrint("The artifact resists your blessing!");
-            if (oPtr.Characteristics.BonusHit > 0)
+            if (oPtr.EnchantmentItemProperties.BonusHit > 0)
             {
-                oPtr.Characteristics.BonusHit--;
+                oPtr.EnchantmentItemProperties.BonusHit--;
                 disHappened = true;
             }
-            if (oPtr.Characteristics.BonusHit > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EnchantmentItemProperties.BonusHit > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.Characteristics.BonusHit--;
+                oPtr.EnchantmentItemProperties.BonusHit--;
             }
-            if (oPtr.Characteristics.BonusDamage > 0)
+            if (oPtr.EnchantmentItemProperties.BonusDamage > 0)
             {
-                oPtr.Characteristics.BonusDamage--;
+                oPtr.EnchantmentItemProperties.BonusDamage--;
                 disHappened = true;
             }
-            if (oPtr.Characteristics.BonusDamage > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EnchantmentItemProperties.BonusDamage > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.Characteristics.BonusDamage--;
+                oPtr.EnchantmentItemProperties.BonusDamage--;
             }
-            if (oPtr.Characteristics.BonusArmorClass > 0)
+            if (oPtr.EnchantmentItemProperties.BonusArmorClass > 0)
             {
-                oPtr.Characteristics.BonusArmorClass--;
+                oPtr.EnchantmentItemProperties.BonusArmorClass--;
                 disHappened = true;
             }
-            if (oPtr.Characteristics.BonusArmorClass > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EnchantmentItemProperties.BonusArmorClass > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.Characteristics.BonusArmorClass--;
+                oPtr.EnchantmentItemProperties.BonusArmorClass--;
             }
             if (disHappened)
             {

@@ -65,7 +65,9 @@ internal class SellScript : Script, IStoreCommandScript
         {
             return;
         }
-        if (oPtr.IsInEquipment && oPtr.IsCursed)
+
+        RoItemPropertySet effectiveItemCharacteristics = oPtr.GetEffectiveItemProperties();
+        if (oPtr.IsInEquipment && effectiveItemCharacteristics.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

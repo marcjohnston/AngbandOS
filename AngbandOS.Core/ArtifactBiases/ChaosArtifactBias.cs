@@ -20,7 +20,7 @@ internal class ChaosArtifactBias : ArtifactBias
         (nameof(FalseResistDisenchantItemTest), "1", nameof(ResistDisenchantItemEnhancement), "1/2")
     };
 
-    public override bool ApplyMiscPowers(ItemCharacteristics characteristics)
+    public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
     {
         if (!characteristics.Teleport)
         {
@@ -32,7 +32,7 @@ internal class ChaosArtifactBias : ArtifactBias
         }
         return false;
     }
-    public override bool ApplySlaying(ItemCharacteristics characteristics)
+    public override bool ApplySlaying(RwItemPropertySet characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

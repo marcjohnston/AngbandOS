@@ -26,18 +26,22 @@ internal class BrandWeaponWithChaosScript : Script, IScript, ICastSpellScript
         Item? item = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
 
         // We must have a non-rare, non-artifact weapon that isn't cursed
-        if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed)
+        if (item != null)
         {
-            string act;
-            string itemName = item.GetDescription(false);
+            RoItemPropertySet effectiveItemCharacteristics = item.GetEffectiveItemProperties();
+            if (!item.IsArtifact && !item.IsRare() && !effectiveItemCharacteristics.IsCursed)
+            {
+                string act;
+                string itemName = item.GetDescription(false);
 
-            // Make it a chaotic weapon
-            act = "is engulfed in raw chaos!";
-            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponChaoticItemEnhancement));
+                // Make it a chaotic weapon
+                act = "is engulfed in raw chaos!";
+                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponChaoticItemEnhancement));
 
-            // Let the player know what happened
-            Game.MsgPrint($"Your {itemName} {act}");
-            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+                // Let the player know what happened
+                Game.MsgPrint($"Your {itemName} {act}");
+                Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            }
         }
         else
         {

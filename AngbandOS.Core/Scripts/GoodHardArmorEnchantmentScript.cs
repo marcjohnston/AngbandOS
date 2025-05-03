@@ -18,6 +18,6 @@ internal class GoodHardArmorEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusArmorClass += Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.EnchantmentItemProperties.BonusArmorClass += Game.DieRoll(5) + item.GetBonusValue(5, level);
     }
 }

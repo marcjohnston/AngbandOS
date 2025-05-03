@@ -23,6 +23,6 @@ internal class GreatHit1D5P5BP10BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusHit += Game.DieRoll(5) + item.GetBonusValue(5, level) + item.GetBonusValue(10, level);
+        item.EnchantmentItemProperties.BonusHit += Game.DieRoll(5) + item.GetBonusValue(5, level) + item.GetBonusValue(10, level);
     }
 }

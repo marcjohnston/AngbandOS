@@ -13,7 +13,7 @@ internal class ConstitutionArtifactBias : ArtifactBias
     private ConstitutionArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Constitution";
 
-    public override bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics)
+    public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
     {
         if (!characteristics.Con)
         {
@@ -26,7 +26,7 @@ internal class ConstitutionArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(ItemCharacteristics characteristics)
+    public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
     {
         if (!characteristics.SustCon)
         {

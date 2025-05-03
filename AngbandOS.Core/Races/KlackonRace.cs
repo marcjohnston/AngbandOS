@@ -44,7 +44,7 @@ internal class KlackonRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 9 ? "spit acid          (racial, unusable until level 9)" : "spit acid          (racial, cost 9, dam lvl, DEX based)";
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         if (level > 9)
         {

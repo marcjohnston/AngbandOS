@@ -97,7 +97,8 @@ internal class DestroyItemScript : Script, IScript, ICastSpellScript, IGameComma
             string feel = "special";
             Game.EnergyUse = 0;
             Game.MsgPrint($"You cannot destroy {itemName}.");
-            if (item.IsCursed || item.IsBroken)
+            RoItemPropertySet effectiveItemCharacteristics = item.GetEffectiveItemProperties();
+            if (effectiveItemCharacteristics.IsCursed || item.IsBroken)
             {
                 feel = "terrible";
             }

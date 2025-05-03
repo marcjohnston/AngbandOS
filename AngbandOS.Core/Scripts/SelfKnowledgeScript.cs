@@ -25,14 +25,14 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
     {
         int infoCount = 0;
         string[] info = new string[128];
-        ItemCharacteristics inventoryCharacteristics = new ItemCharacteristics();
+        RoItemPropertySet inventoryCharacteristics = new RoItemPropertySet();
         for (int k = InventorySlotEnum.MeleeWeapon; k < InventorySlotEnum.Total; k++)
         {
             Item? oPtr = Game.GetInventoryItem(k);
             if (oPtr != null)
             {
-                ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
-                inventoryCharacteristics.Merge(mergedCharacteristics);
+                RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
+                inventoryCharacteristics = inventoryCharacteristics.Merge(mergedCharacteristics);
             }
         }
         string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.IntValue);
@@ -362,7 +362,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         Item? meleeItem = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
-            ItemCharacteristics mergedCharacteristics = meleeItem.GetMergedCharacteristics();
+            RoItemPropertySet mergedCharacteristics = meleeItem.GetEffectiveItemProperties();
             if (mergedCharacteristics.Blessed)
             {
                 info[infoCount++] = "Your weapon has been blessed by the gods.";

@@ -20,7 +20,7 @@ internal class AcidArtifactBias : ArtifactBias
         (nameof(FalseAcidImmunityItemTest), "1/20", nameof(AcidImmunityAndAcidArtifactBiasItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(ItemCharacteristics characteristics)
+    public override bool ApplySlaying(RwItemPropertySet characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

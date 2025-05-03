@@ -20,7 +20,7 @@ internal class ElectricityArtifactBias : ArtifactBias
         (nameof(FalseElectricityImmunityItemTest), "1/20", nameof(ElectricityImmunityItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(ItemCharacteristics characteristics)
+    public override bool ApplySlaying(RwItemPropertySet characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

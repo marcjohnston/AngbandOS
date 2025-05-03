@@ -18,10 +18,10 @@ internal class TerribleSoftArmorEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusArmorClass -= item.GetBonusValue(10, level);
-        if (item.Characteristics.BonusArmorClass < 0)
+        item.EnchantmentItemProperties.BonusArmorClass -= item.GetBonusValue(10, level);
+        if (item.EnchantmentItemProperties.BonusArmorClass < 0)
         {
-            item.IsCursed = true;
+            item.EnchantmentItemProperties.IsCursed = true;
         }
     }
 }

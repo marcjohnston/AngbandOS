@@ -45,7 +45,7 @@ internal class HalfOrcRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 3 ? "remove fear        (racial, unusable until level 3)" : "remove fear        (racial, cost 5, WIS based)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.ResDark = true;
     }

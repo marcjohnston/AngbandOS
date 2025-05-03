@@ -45,7 +45,7 @@ internal class TchoTchoRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 8 ? "berserk            (racial, unusable until level 8)" : "berserk            (racial, cost 10, WIS based)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.ResFear = true;
     }

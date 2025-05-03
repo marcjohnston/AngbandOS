@@ -21,122 +21,123 @@ internal abstract class ItemEnhancement : IGetKey
     }
 
     /// <summary>
-    /// Returns a deterministic set of characteristics that are merge with the other <see cref="Item"/> characteristics.
+    /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.
     /// </summary>
     /// <returns></returns>
-    public ItemCharacteristics GenerateItemCharacteristics()
+    public RoItemPropertySet GenerateItemCharacteristics()
     {
-        ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
+        RoItemPropertySet itemCharacteristics = new RoItemPropertySet()
+        {
+            BonusStrength = BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value,
+            BonusIntelligence = BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value,
+            BonusWisdom = BonusWisdomRoll == null ? 0 : Game.ComputeIntegerExpression(BonusWisdomRoll).Value,
+            BonusDexterity = BonusDexterityRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDexterityRoll).Value,
+            BonusConstitution = BonusConstitutionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusConstitutionRoll).Value,
+            BonusCharisma = BonusCharismaRoll == null ? 0 : Game.ComputeIntegerExpression(BonusCharismaRoll).Value,
+            BonusStealth = BonusStealthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStealthRoll).Value,
+            BonusSearch = BonusSearchRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSearchRoll).Value,
+            BonusInfravision = BonusInfravisionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusInfravisionRoll).Value,
+            BonusTunnel = BonusTunnelRoll == null ? 0 : Game.ComputeIntegerExpression(BonusTunnelRoll).Value,
+            BonusAttacks = BonusAttacksRoll == null ? 0 : Game.ComputeIntegerExpression(BonusAttacksRoll).Value,
+            BonusSpeed = BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value,
 
-        itemCharacteristics.BonusStrength = BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value;
-        itemCharacteristics.BonusIntelligence = BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value;
-        itemCharacteristics.BonusWisdom = BonusWisdomRoll == null ? 0 : Game.ComputeIntegerExpression(BonusWisdomRoll).Value;
-        itemCharacteristics.BonusDexterity = BonusDexterityRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDexterityRoll).Value;
-        itemCharacteristics.BonusConstitution = BonusConstitutionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusConstitutionRoll).Value;
-        itemCharacteristics.BonusCharisma = BonusCharismaRoll == null ? 0 : Game.ComputeIntegerExpression(BonusCharismaRoll).Value;
-        itemCharacteristics.BonusStealth = BonusStealthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStealthRoll).Value;
-        itemCharacteristics.BonusSearch = BonusSearchRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSearchRoll).Value;
-        itemCharacteristics.BonusInfravision = BonusInfravisionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusInfravisionRoll).Value;
-        itemCharacteristics.BonusTunnel = BonusTunnelRoll == null ? 0 : Game.ComputeIntegerExpression(BonusTunnelRoll).Value;
-        itemCharacteristics.BonusAttacks = BonusAttacksRoll == null ? 0 : Game.ComputeIntegerExpression(BonusAttacksRoll).Value;
-        itemCharacteristics.BonusSpeed = BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value;
+            BonusArmorClass = BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value,
+            BonusHit = BonusHitRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitRoll).Value,
+            BonusDamage = BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value,
 
-        itemCharacteristics.BonusArmorClass = BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value;
-        itemCharacteristics.BonusHit = BonusHitRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitRoll).Value;
-        itemCharacteristics.BonusDamage = BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value;
-
-        itemCharacteristics.Activation = Activation;
-        itemCharacteristics.Aggravate = Aggravate;
-        itemCharacteristics.AntiTheft = AntiTheft;
-        itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();
-        itemCharacteristics.Blessed = Blessed;
-        itemCharacteristics.Blows = Blows;
-        itemCharacteristics.BrandAcid = BrandAcid;
-        itemCharacteristics.BrandCold = BrandCold;
-        itemCharacteristics.BrandElec = BrandElec;
-        itemCharacteristics.BrandFire = BrandFire;
-        itemCharacteristics.BrandPois = BrandPois;
-        itemCharacteristics.Cha = Cha;
-        itemCharacteristics.Chaotic = Chaotic;
-        itemCharacteristics.Con = Con;
-        itemCharacteristics.IsCursed = IsCursed;
-        itemCharacteristics.Dex = Dex;
-        itemCharacteristics.DrainExp = DrainExp;
-        itemCharacteristics.DreadCurse = DreadCurse;
-        itemCharacteristics.EasyKnow = EasyKnow;
-        itemCharacteristics.Feather = Feather;
-        itemCharacteristics.FreeAct = FreeAct;
-        itemCharacteristics.HeavyCurse = HeavyCurse;
-        itemCharacteristics.HideType = HideType;
-        itemCharacteristics.HoldLife = HoldLife;
-        itemCharacteristics.IgnoreAcid = IgnoreAcid;
-        itemCharacteristics.IgnoreCold = IgnoreCold;
-        itemCharacteristics.IgnoreElec = IgnoreElec;
-        itemCharacteristics.IgnoreFire = IgnoreFire;
-        itemCharacteristics.ImAcid = ImAcid;
-        itemCharacteristics.ImCold = ImCold;
-        itemCharacteristics.ImElec = ImElec;
-        itemCharacteristics.ImFire = ImFire;
-        itemCharacteristics.Impact = Impact;
-        itemCharacteristics.Infra = Infra;
-        itemCharacteristics.InstaArt = InstaArt;
-        itemCharacteristics.Int = Int;
-        itemCharacteristics.KillDragon = KillDragon;
-        itemCharacteristics.NoMagic = NoMagic;
-        itemCharacteristics.NoTele = NoTele;
-        itemCharacteristics.PermaCurse = PermaCurse;
-        itemCharacteristics.Radius = Radius;
-        itemCharacteristics.Reflect = Reflect;
-        itemCharacteristics.Regen = Regen;
-        itemCharacteristics.ResAcid = ResAcid;
-        itemCharacteristics.ResBlind = ResBlind;
-        itemCharacteristics.ResChaos = ResChaos;
-        itemCharacteristics.ResCold = ResCold;
-        itemCharacteristics.ResConf = ResConf;
-        itemCharacteristics.ResDark = ResDark;
-        itemCharacteristics.ResDisen = ResDisen;
-        itemCharacteristics.ResElec = ResElec;
-        itemCharacteristics.ResFear = ResFear;
-        itemCharacteristics.ResFire = ResFire;
-        itemCharacteristics.ResLight = ResLight;
-        itemCharacteristics.ResNether = ResNether;
-        itemCharacteristics.ResNexus = ResNexus;
-        itemCharacteristics.ResPois = ResPois;
-        itemCharacteristics.ResShards = ResShards;
-        itemCharacteristics.ResSound = ResSound;
-        itemCharacteristics.Search = Search;
-        itemCharacteristics.SeeInvis = SeeInvis;
-        itemCharacteristics.ShElec = ShElec;
-        itemCharacteristics.ShFire = ShFire;
-        itemCharacteristics.ShowMods = ShowMods;
-        itemCharacteristics.SlayAnimal = SlayAnimal;
-        itemCharacteristics.SlayDemon = SlayDemon;
-        itemCharacteristics.SlayDragon = SlayDragon;
-        itemCharacteristics.SlayEvil = SlayEvil;
-        itemCharacteristics.SlayGiant = SlayGiant;
-        itemCharacteristics.SlayOrc = SlayOrc;
-        itemCharacteristics.SlayTroll = SlayTroll;
-        itemCharacteristics.SlayUndead = SlayUndead;
-        itemCharacteristics.SlowDigest = SlowDigest;
-        itemCharacteristics.Speed = Speed;
-        itemCharacteristics.Stealth = Stealth;
-        itemCharacteristics.Str = Str;
-        itemCharacteristics.SustCha = SustCha;
-        itemCharacteristics.SustCon = SustCon;
-        itemCharacteristics.SustDex = SustDex;
-        itemCharacteristics.SustInt = SustInt;
-        itemCharacteristics.SustStr = SustStr;
-        itemCharacteristics.SustWis = SustWis;
-        itemCharacteristics.Telepathy = Telepathy;
-        itemCharacteristics.Teleport = Teleport;
-        itemCharacteristics.TreasureRating = TreasureRating;
-        itemCharacteristics.Tunnel = Tunnel;
-        itemCharacteristics.Vampiric = Vampiric;
-        itemCharacteristics.Vorpal = Vorpal;
-        itemCharacteristics.Wis = Wis;
-        itemCharacteristics.Wraith = Wraith;
-        itemCharacteristics.XtraMight = XtraMight;
-        itemCharacteristics.XtraShots = XtraShots;
+            Activation = Activation,
+            Aggravate = Aggravate,
+            AntiTheft = AntiTheft,
+            ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault(),
+            Blessed = Blessed,
+            Blows = Blows,
+            BrandAcid = BrandAcid,
+            BrandCold = BrandCold,
+            BrandElec = BrandElec,
+            BrandFire = BrandFire,
+            BrandPois = BrandPois,
+            Cha = Cha,
+            Chaotic = Chaotic,
+            Con = Con,
+            IsCursed = IsCursed,
+            Dex = Dex,
+            DrainExp = DrainExp,
+            DreadCurse = DreadCurse,
+            EasyKnow = EasyKnow,
+            Feather = Feather,
+            FreeAct = FreeAct,
+            HeavyCurse = HeavyCurse,
+            HideType = HideType,
+            HoldLife = HoldLife,
+            IgnoreAcid = IgnoreAcid,
+            IgnoreCold = IgnoreCold,
+            IgnoreElec = IgnoreElec,
+            IgnoreFire = IgnoreFire,
+            ImAcid = ImAcid,
+            ImCold = ImCold,
+            ImElec = ImElec,
+            ImFire = ImFire,
+            Impact = Impact,
+            Infra = Infra,
+            InstaArt = InstaArt,
+            Int = Int,
+            KillDragon = KillDragon,
+            NoMagic = NoMagic,
+            NoTele = NoTele,
+            PermaCurse = PermaCurse,
+            Radius = Radius,
+            Reflect = Reflect,
+            Regen = Regen,
+            ResAcid = ResAcid,
+            ResBlind = ResBlind,
+            ResChaos = ResChaos,
+            ResCold = ResCold,
+            ResConf = ResConf,
+            ResDark = ResDark,
+            ResDisen = ResDisen,
+            ResElec = ResElec,
+            ResFear = ResFear,
+            ResFire = ResFire,
+            ResLight = ResLight,
+            ResNether = ResNether,
+            ResNexus = ResNexus,
+            ResPois = ResPois,
+            ResShards = ResShards,
+            ResSound = ResSound,
+            Search = Search,
+            SeeInvis = SeeInvis,
+            ShElec = ShElec,
+            ShFire = ShFire,
+            ShowMods = ShowMods,
+            SlayAnimal = SlayAnimal,
+            SlayDemon = SlayDemon,
+            SlayDragon = SlayDragon,
+            SlayEvil = SlayEvil,
+            SlayGiant = SlayGiant,
+            SlayOrc = SlayOrc,
+            SlayTroll = SlayTroll,
+            SlayUndead = SlayUndead,
+            SlowDigest = SlowDigest,
+            Speed = Speed,
+            Stealth = Stealth,
+            Str = Str,
+            SustCha = SustCha,
+            SustCon = SustCon,
+            SustDex = SustDex,
+            SustInt = SustInt,
+            SustStr = SustStr,
+            SustWis = SustWis,
+            Telepathy = Telepathy,
+            Teleport = Teleport,
+            TreasureRating = TreasureRating,
+            Tunnel = Tunnel,
+            Vampiric = Vampiric,
+            Vorpal = Vorpal,
+            Wis = Wis,
+            Wraith = Wraith,
+            XtraMight = XtraMight,
+            XtraShots = XtraShots,
+        };
         return itemCharacteristics;
     }
 

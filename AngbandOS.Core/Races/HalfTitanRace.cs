@@ -45,7 +45,7 @@ internal class HalfTitanRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 35 ? "probing            (racial, unusable until level 35)" : "probing            (racial, cost 20, INT based)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.ResChaos = true;
     }

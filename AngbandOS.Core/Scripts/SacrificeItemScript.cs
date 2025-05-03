@@ -34,7 +34,8 @@ internal class SacrificeItemScript : Script, IStoreCommandScript
         {
             return;
         }
-        if (oPtr.IsInEquipment && oPtr.IsCursed)
+        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
+        if (oPtr.IsInEquipment && mergedCharacteristics.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

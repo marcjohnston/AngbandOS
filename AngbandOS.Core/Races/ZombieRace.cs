@@ -44,7 +44,7 @@ internal class ZombieRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 30 ? "restore life       (racial, unusable until level 30)" : "restore life       (racial, cost 30, WIS based)";
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.SeeInvis = true;
         itemCharacteristics.HoldLife = true;

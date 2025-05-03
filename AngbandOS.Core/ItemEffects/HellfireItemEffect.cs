@@ -25,7 +25,9 @@ internal class HellfireItemEffect : ItemEffect
             {
                 plural = true;
             }
-            if (oPtr.IsCursed)
+
+            RoItemPropertySet effectiveItemProperties = oPtr.GetEffectiveItemProperties();
+            if (effectiveItemProperties.IsCursed)
             {
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";

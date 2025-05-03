@@ -23,6 +23,6 @@ internal class BonusConstitution5BP1EnchantmentScript : Script, IEnhancementScri
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusConstitution = 1 + item.GetBonusValue(5, level);
+        item.EnchantmentItemProperties.BonusConstitution = 1 + item.GetBonusValue(5, level);
     }
 }

@@ -23,6 +23,6 @@ internal class TerribleTunnelEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusTunnel = 0 - item.Characteristics.BonusTunnel;
+        item.EnchantmentItemProperties.BonusTunnel = 0 - item.EnchantmentItemProperties.BonusTunnel;
     }
 }

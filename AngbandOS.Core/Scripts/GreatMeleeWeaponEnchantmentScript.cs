@@ -29,10 +29,10 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponElderSignInscribedItemEnhancement));
                 if (Game.DieRoll(4) == 1)
                 {
-                    item.Characteristics.Blows = true;
-                    if (item.Characteristics.BonusAttacks > 2)
+                    item.EnchantmentItemProperties.Blows = true;
+                    if (item.EnchantmentItemProperties.BonusAttacks > 2)
                     {
-                        item.Characteristics.BonusAttacks -= Game.DieRoll(2);
+                        item.EnchantmentItemProperties.BonusAttacks -= Game.DieRoll(2);
                     }
                 }
                 break;
@@ -40,7 +40,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponDefenderItemEnhancement));
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.Characteristics.ResPois = true;
+                    item.EnchantmentItemProperties.ResPois = true;
                 }
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                 break;
@@ -72,7 +72,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 {
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.Characteristics.ResPois = true;
+                        item.EnchantmentItemProperties.ResPois = true;
                     }
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(NaturalAndPoisonResistanceItemEnhancementWeightedRandom)));
                     item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfDragonBaneItemEnhancement));
@@ -83,8 +83,8 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayEvilItemEnhancement));
                 if (Game.RandomLessThan(100) < 20)
                 {
-                    item.Characteristics.ResFear = true;
-                    item.Characteristics.Blessed = true;
+                    item.EnchantmentItemProperties.ResFear = true;
+                    item.EnchantmentItemProperties.Blessed = true;
                     item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfEvilBaneItemEnhancement));
                 }
                 break;
@@ -93,7 +93,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayUndeadItemEnhancement));
                 if (Game.RandomLessThan(100) < 20)
                 {
-                    item.Characteristics.ResNether = true;
+                    item.EnchantmentItemProperties.ResNether = true;
                     item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfUndeadBaneItemEnhancement));
                 }
                 break;
@@ -121,7 +121,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfKadathItemEnhancement));
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.Characteristics.ResFear = true;
+                    item.EnchantmentItemProperties.ResFear = true;
                 }
                 break;
             case 28:
@@ -165,11 +165,11 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 if (Game.DieRoll(5) == 1)
                 {
-                    item.Characteristics.BrandPois = true;
+                    item.EnchantmentItemProperties.BrandPois = true;
                 }
                 if (item.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
                 {
-                    item.Characteristics.Vorpal = true;
+                    item.EnchantmentItemProperties.Vorpal = true;
                 }
                 break;
             case 38:
@@ -178,22 +178,22 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                 if (Game.DieRoll(5) == 1)
                 {
-                    item.Characteristics.SlayDemon = true;
+                    item.EnchantmentItemProperties.SlayDemon = true;
                 }
                 break;
             case 40:
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfLawItemEnhancement));
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.Characteristics.HoldLife = true;
+                    item.EnchantmentItemProperties.HoldLife = true;
                 }
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.Characteristics.Dex = true;
+                    item.EnchantmentItemProperties.Dex = true;
                 }
                 if (Game.DieRoll(5) == 1)
                 {
-                    item.Characteristics.ResFear = true;
+                    item.EnchantmentItemProperties.ResFear = true;
                 }
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                 break;
@@ -202,16 +202,16 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 if (item.CanBeWeaponOfSharpness)
                 {
                     item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSharpnessItemEnhancement));
-                    item.Characteristics.BonusTunnel = item.GetBonusValue(5, level) + 1;
+                    item.EnchantmentItemProperties.BonusTunnel = item.GetBonusValue(5, level) + 1;
                 }
                 else
                 {
                     item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfEarthquakesItemEnhancement));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.Characteristics.Blows = true;
+                        item.EnchantmentItemProperties.Blows = true;
                     }
-                    item.Characteristics.BonusTunnel = item.GetBonusValue(3, level);
+                    item.EnchantmentItemProperties.BonusTunnel = item.GetBonusValue(3, level);
                 }
                 break;
         }

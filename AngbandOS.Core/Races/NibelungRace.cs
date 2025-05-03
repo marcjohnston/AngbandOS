@@ -45,7 +45,7 @@ internal class NibelungRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "detect doors+traps (racial, WIS based, unusable until level 5)" : "detect doors+traps (racial, cost 5, WIS based)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.ResDisen = true;
         itemCharacteristics.ResDark = true;

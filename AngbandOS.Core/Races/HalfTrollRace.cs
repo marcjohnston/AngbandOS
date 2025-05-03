@@ -45,7 +45,7 @@ internal class HalfTrollRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 10 ? "berserk            (racial, unusable until level 10)" : "berserk            (racial, cost 12, WIS based)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.SustStr = true;
         if (level > 14)

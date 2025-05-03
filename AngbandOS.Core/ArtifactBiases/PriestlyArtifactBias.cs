@@ -13,7 +13,7 @@ internal class PriestlyArtifactBias : ArtifactBias
     private PriestlyArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Priests";
 
-    public override bool ApplyRandomArtifactBonuses(ItemCharacteristics characteristics)
+    public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
     {
         if (!characteristics.Wis)
         {
@@ -26,7 +26,7 @@ internal class PriestlyArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplySlaying(ItemCharacteristics characteristics)
+    public override bool ApplySlaying(RwItemPropertySet characteristics)
     {
         if (characteristics.CanApplyBlessedArtifactBias && !characteristics.Blessed)
         {

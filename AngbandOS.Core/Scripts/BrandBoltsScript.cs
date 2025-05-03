@@ -51,7 +51,8 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IActivateIt
             }
 
             // Skip cursed or broken bolts
-            if (item.IsCursed || item.IsBroken)
+            RoItemPropertySet effectiveItemCharacteristics = item.GetEffectiveItemProperties();
+            if (effectiveItemCharacteristics.IsCursed || item.IsBroken)
             {
                 continue;
             }

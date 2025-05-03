@@ -23,6 +23,6 @@ internal class PoorDexterity5BP1EnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusDexterity = 0 - (1 + item.GetBonusValue(5, level));
+        item.EnchantmentItemProperties.BonusDexterity = 0 - (1 + item.GetBonusValue(5, level));
     }
 }

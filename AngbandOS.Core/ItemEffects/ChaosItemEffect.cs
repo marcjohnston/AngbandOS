@@ -20,7 +20,7 @@ internal class ChaosItemEffect : ItemEffect
         {
             bool ignore = false;
             bool plural = false;
-            ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;

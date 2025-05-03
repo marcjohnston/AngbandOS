@@ -25,7 +25,9 @@ internal class HolyFireItemEffect : ItemEffect
             {
                 plural = true;
             }
-            if (oPtr.IsCursed)
+
+            RoItemPropertySet effectiveItemCharacterisitcs = oPtr.GetEffectiveItemProperties();
+            if (effectiveItemCharacterisitcs.IsCursed)
             {
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";

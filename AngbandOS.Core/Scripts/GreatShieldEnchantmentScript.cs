@@ -18,7 +18,7 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusArmorClass += item.GetBonusValue(10, level);
+        item.EnchantmentItemProperties.BonusArmorClass += item.GetBonusValue(10, level);
 
         switch (Game.DieRoll(23))
         {
@@ -53,7 +53,7 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
                 if (Game.DieRoll(4) == 1)
                 {
-                    item.Characteristics.ResPois = true;
+                    item.EnchantmentItemProperties.ResPois = true;
                 }
                 item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistanceItemEnhancement));
                 break;

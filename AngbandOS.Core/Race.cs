@@ -93,7 +93,7 @@ internal abstract class Race : IGetKey
     /// </summary>
     /// <param name="level"></param>
     /// <param name="itemCharacteristics"></param>
-    public virtual void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public virtual void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
     }
 

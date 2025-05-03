@@ -24,27 +24,32 @@ internal class BrandWeaponWithFireOrIceScript : Script, IScript, ICastSpellScrip
     public void ExecuteScript()
     {
         Item? item = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
+
         // We must have a non-rare, non-artifact weapon that isn't cursed
-        if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed)
+        if (item != null)
         {
-            string act;
-            string itemName = item.GetDescription(false);
-
-            // Make it a fire or ice weapon
-            if (Game.RandomLessThan(100) < 25)
+            RoItemPropertySet effectiveItemCharacteristics = item.GetEffectiveItemProperties();
+            if (!item.IsArtifact && !item.IsRare() && !effectiveItemCharacteristics.IsCursed)
             {
-                act = "is covered in a fiery shield!";
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfBurningItemEnhancement));
-            }
-            else
-            {
-                act = "glows deep, icy blue!";
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfFreezingItemEnhancement));
-            }
+                string act;
+                string itemName = item.GetDescription(false);
 
-            // Let the player know what happened
-            Game.MsgPrint($"Your {itemName} {act}");
-            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+                // Make it a fire or ice weapon
+                if (Game.RandomLessThan(100) < 25)
+                {
+                    act = "is covered in a fiery shield!";
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfBurningItemEnhancement));
+                }
+                else
+                {
+                    act = "glows deep, icy blue!";
+                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfFreezingItemEnhancement));
+                }
+
+                // Let the player know what happened
+                Game.MsgPrint($"Your {itemName} {act}");
+                Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            }
         }
         else
         {

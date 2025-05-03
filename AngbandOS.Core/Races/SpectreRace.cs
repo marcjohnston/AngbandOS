@@ -44,7 +44,7 @@ internal class SpectreRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 4 ? "scare monster      (racial, unusable until level 4)" : "scare monster      (racial, cost 3, INT based)";
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.ResCold = true;
         itemCharacteristics.SeeInvis = true;

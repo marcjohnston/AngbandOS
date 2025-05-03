@@ -22,7 +22,7 @@ internal class ElectricityItemEffect : ItemEffect
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;

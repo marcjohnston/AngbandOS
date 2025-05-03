@@ -24,6 +24,6 @@ internal class BrokenAndCursedEnchantmentScript : Script, IEnhancementScript
     public void ExecuteEnchantmentScript(Item item, int level)
     {
         item.IsBroken = true;
-        item.IsCursed = true;
+        item.EnchantmentItemProperties.IsCursed = true;
     }
 }

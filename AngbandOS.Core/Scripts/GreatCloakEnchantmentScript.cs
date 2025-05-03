@@ -18,7 +18,7 @@ internal class GreatCloakEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusArmorClass += item.GetBonusValue(10, level);
+        item.EnchantmentItemProperties.BonusArmorClass += item.GetBonusValue(10, level);
         if (Game.DieRoll(20) == 1)
         {
             item.CreateRandomArtifact(false);

@@ -45,7 +45,7 @@ internal class GreatOneRace : Race
     public override string RacialPowersDescription(int lvl) => "dream powers    (unusable until level 30/40)";
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.SustCon = true;
         itemCharacteristics.Regen = true;

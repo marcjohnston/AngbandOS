@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interfaces;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -51,9 +53,9 @@ internal sealed class Item : IComparable<Item>
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
 
     /// <summary>
-    /// Returns the deterministic set of fixed artifact characteristics.
+    /// Returns the set of fixed artifact characteristics that was generated when the item was promoted to the fixed item artifact.
     /// </summary>
-    private ItemCharacteristics? FixedArtifactItemCharacteristics = null;
+    private RoItemPropertySet? FixedArtifactItemCharacteristics = null;
 
     /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
@@ -61,19 +63,21 @@ internal sealed class Item : IComparable<Item>
     public ItemEnhancement? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
 
     /// <summary>
-    /// Returns the deterministic set of rare item characteristics.
+    /// Returns the set of rare item characteristics that was generated when the item received the rare item enchantment.
     /// </summary>
-    private ItemCharacteristics? RareItemCharacteristics = null;
+    private RoItemPropertySet? RareItemCharacteristics = null;
 
     /// <summary>
-    /// Returns the base characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
+    /// Returns enchanted characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
     /// </summary>
-    public ItemCharacteristics Characteristics = new ItemCharacteristics();
+    public RwItemPropertySet EnchantmentItemProperties = new RwItemPropertySet();
+
+    public OverrideItemPropertySet OverrideItemCharacteristics = new OverrideItemPropertySet();
 
     /// <summary>
     /// Returns the deterministic set of random artifact characteristics.
     /// </summary>
-    public ItemCharacteristics? RandomArtifactItemCharacteristics = null;
+    public RoItemPropertySet? RandomArtifactItemCharacteristics = null;
 
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
@@ -81,9 +85,9 @@ internal sealed class Item : IComparable<Item>
     public ItemEnhancement? RandomPower = null;
 
     /// <summary>
-    /// Returns the deterministic set of random power characteristics.
+    /// Returns the set of random power characteristics that was generated when the item received the random power.
     /// </summary>
-    private ItemCharacteristics? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
+    private RoItemPropertySet? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
 
     /// <summary>
     /// Returns the number of stacked items.
@@ -146,14 +150,9 @@ internal sealed class Item : IComparable<Item>
     public int DamageSides;
 
     /// <summary>
-    /// This property used to be a flag in the IdentifyFlags.
-    /// </summary>
-    public bool IsCursed;
-
-    /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items are considered worthless, regardless of their other properties.
     /// </summary>
-    public bool IsBroken;
+    public bool IsBroken; // TODO: This needs to be moved into IItemCharacteristics
     #endregion
 
     #region API Methods
@@ -183,8 +182,11 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
         clonedItem.FixedArtifact = FixedArtifact;
+        clonedItem.FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics?.Clone();
         clonedItem.RareItem = RareItem;
-        clonedItem.Characteristics.Copy(Characteristics);
+        clonedItem.RareItemCharacteristics = RareItemCharacteristics?.Clone();
+        clonedItem.EnchantmentItemProperties = EnchantmentItemProperties.Clone();
+        clonedItem.OverrideItemCharacteristics = OverrideItemCharacteristics.Clone();
         clonedItem.RandomArtifactItemCharacteristics = RandomArtifactItemCharacteristics;
         clonedItem.RandomPower = RandomPower;
         clonedItem.Discount = Discount;
@@ -206,7 +208,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.ArmorClass = ArmorClass;
         clonedItem.DamageDice = DamageDice;
         clonedItem.DamageSides = DamageSides;
-        clonedItem.IsCursed = IsCursed;
         clonedItem.IsBroken = IsBroken;
 
         return clonedItem;
@@ -220,9 +221,9 @@ internal sealed class Item : IComparable<Item>
     private readonly ItemFactory _factory;
 
     /// <summary>
-    /// Returns the deterministic set of fixed artifact characteristics.
+    /// Returns the set of fixed artifact characteristics that wax generated when the item was created.
     /// </summary>
-    private readonly ItemCharacteristics FactoryItemCharacteristics;
+    private readonly RoItemPropertySet FactoryItemCharacteristics;
 
     /// <summary>
     /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
@@ -735,7 +736,7 @@ internal sealed class Item : IComparable<Item>
     {
         int mult = 1;
         MonsterRace rPtr = mPtr.Race;
-        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
+        RoItemPropertySet mergedCharacteristics = GetEffectiveItemProperties();
         if (GetsDamageMultiplier)
         {
             if (mergedCharacteristics.SlayAnimal && rPtr.Animal)
@@ -960,8 +961,8 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
 
-        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
-        ItemCharacteristics otherMergedCharacteristics = other.GetMergedCharacteristics();
+        RoItemPropertySet mergedCharacteristics = GetEffectiveItemProperties();
+        RoItemPropertySet otherMergedCharacteristics = other.GetEffectiveItemProperties();
         if (mergedCharacteristics != otherMergedCharacteristics)
         {
             return false;
@@ -971,66 +972,6 @@ internal sealed class Item : IComparable<Item>
         if (IsKnown() != other.IsKnown())
         {
             return false;
-        }
-        if (Characteristics.BonusHit != other.Characteristics.BonusHit)
-        {
-            return false;
-        }
-        if (Characteristics.BonusDamage != other.Characteristics.BonusDamage)
-        {
-            return false;
-        }
-        if (Characteristics.BonusArmorClass != other.Characteristics.BonusArmorClass)
-        {
-            return false;
-        }
-        if (Characteristics.BonusStrength != other.Characteristics.BonusStrength)
-        {
-            return false;
-        }
-        if (Characteristics.BonusIntelligence != other.Characteristics.BonusIntelligence)
-        {
-         return false;
-        }
-        if (Characteristics.BonusWisdom != other.Characteristics.BonusWisdom)
-        {
-          return false;
-        }
-        if (Characteristics.BonusDexterity != other.Characteristics.BonusDexterity)
-        {
-          return false;
-        }
-        if (Characteristics.BonusConstitution != other.Characteristics.BonusConstitution)
-        {
-          return false;
-        }
-        if (Characteristics.BonusCharisma != other.Characteristics.BonusCharisma)
-        {
-         return false;
-        }
-        if (Characteristics.BonusStealth != other.Characteristics.BonusStealth)
-        {
-            return false;
-        }
-        if (Characteristics.BonusSearch != other.Characteristics.BonusSearch)
-        {
-           return false;
-        }
-        if (Characteristics.BonusInfravision != other.Characteristics.BonusInfravision)
-        {
-           return false;
-        }
-        if (Characteristics.BonusTunnel != other.Characteristics.BonusTunnel)
-        {
-            return false;
-        }
-        if (Characteristics.BonusAttacks != other.Characteristics.BonusAttacks)
-        {
-           return false;
-        }
-        if (Characteristics.BonusSpeed != other.Characteristics.BonusSpeed)
-        {
-           return false;
         }
 
         // Only open chests can be combined; otherwise, chests are never combined.
@@ -1097,10 +1038,6 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (IsCursed != other.IsCursed)
-        {
-            return false;
-        }
         if (IsBroken != other.IsBroken)
         {
             return false;
@@ -1162,6 +1099,7 @@ internal sealed class Item : IComparable<Item>
         string basenm = GetDescription(includeCountPrefix);
         basenm += _factory.GetDetailedDescription(this);
         basenm += _factory.GetVerboseDescription(this);
+        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
 
         // This is the full description.
         string fullDescription = "";
@@ -1169,7 +1107,7 @@ internal sealed class Item : IComparable<Item>
         {
             fullDescription = Inscription;
         }
-        else if (IsCursed && (IsKnown() || IdentSense))
+        else if (effectiveCharacteristics.IsCursed && (IsKnown() || IdentSense))
         {
             fullDescription = "cursed";
         }
@@ -1216,9 +1154,10 @@ internal sealed class Item : IComparable<Item>
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
+        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
         if (IsArtifact)
         {
-            if (IsCursed || IsBroken)
+            if (effectiveCharacteristics.IsCursed || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(TerribleItemQualityRating));
             }
@@ -1226,14 +1165,14 @@ internal sealed class Item : IComparable<Item>
         }
         if (IsRare())
         {
-            if (IsCursed || IsBroken)
+            if (effectiveCharacteristics.IsCursed || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(WorthlessItemQualityRating));
             }
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(ExcellentItemQualityRating));
         }
 
-        if (IsCursed)
+        if (effectiveCharacteristics.IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
@@ -1242,20 +1181,20 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusDamageRepresentsBroken && Characteristics.BonusDamage < 0)
+        if (NegativeBonusDamageRepresentsBroken && EnchantmentItemProperties.BonusDamage < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusArmorClassRepresentsBroken && Characteristics.BonusArmorClass < 0)
+        if (NegativeBonusArmorClassRepresentsBroken && EnchantmentItemProperties.BonusArmorClass < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusHitRepresentsBroken && Characteristics.BonusHit < 0)
+        if (NegativeBonusHitRepresentsBroken && EnchantmentItemProperties.BonusHit < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
-        if (Characteristics.BonusArmorClass > 0 || Characteristics.BonusHit + Characteristics.BonusDamage > 0)
+        if (EnchantmentItemProperties.BonusArmorClass > 0 || EnchantmentItemProperties.BonusHit + EnchantmentItemProperties.BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1273,31 +1212,16 @@ internal sealed class Item : IComparable<Item>
     /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
     /// the flag-based properties.
     /// </summary>
-    public ItemCharacteristics GetMergedCharacteristics()
+    public RoItemPropertySet GetEffectiveItemProperties()
     {
-        // All characteristics are set to false.
-        ItemCharacteristics characteristics = new ItemCharacteristics();
-
-        // Merge the characteristics from the base item category.
-        characteristics.Merge(FactoryItemCharacteristics); // TODO: This merging is obsolete
-
-        // Now merge the characteristics from the fixed artifact, if there is one.
-        characteristics.Merge(FixedArtifactItemCharacteristics);
-
-        // Now merge the characteristics from the rare item type, if there is one.
-        characteristics.Merge(RareItemCharacteristics);
-
-        // Finally, merge any additional random artifact characteristics, if there are any.
-        characteristics.Merge(Characteristics);
-
-        // If there are any random power characteristics, apply those also.
-        characteristics.Merge(RandomPowerItemCharacteristics);
-        return characteristics;
+        RoItemPropertySet effectiveItemPropertySet = OverrideItemCharacteristics.Override(FactoryItemCharacteristics.Merge(FixedArtifactItemCharacteristics).Merge(RareItemCharacteristics).Merge(RandomPowerItemCharacteristics).Merge(EnchantmentItemProperties));
+        return effectiveItemPropertySet;
     }
 
     public ItemQualityRating? GetVagueQualityRating()
-    { 
-        if (IsCursed)
+    {
+        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
+        if (effectiveCharacteristics.IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
@@ -1313,11 +1237,11 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (Characteristics.BonusArmorClass > 0)
+        if (EnchantmentItemProperties.BonusArmorClass > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (Characteristics.BonusHit + Characteristics.BonusDamage > 0)
+        if (EnchantmentItemProperties.BonusHit + EnchantmentItemProperties.BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1328,335 +1252,335 @@ internal sealed class Item : IComparable<Item>
     {
         int i = 0, j, k;
         string[] info = new string[128];
-        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
-        if (mergedCharacteristics.Activation != null)
+        RoItemPropertySet effectiveItemCharacteristics = GetEffectiveItemProperties();
+        if (effectiveItemCharacteristics.Activation != null)
         {
             info[i++] = "It can be activated for...";
-            info[i++] = mergedCharacteristics.Activation.Description;
+            info[i++] = effectiveItemCharacteristics.Activation.Description;
             info[i++] = "...if it is being worn.";
         }
-        if (mergedCharacteristics.ArtifactBias != null)
+        if (effectiveItemCharacteristics.ArtifactBias != null)
         {
-            info[i++] = $"It has an affinity for {mergedCharacteristics.ArtifactBias.AffinityName.ToLower()}.";
+            info[i++] = $"It has an affinity for {effectiveItemCharacteristics.ArtifactBias.AffinityName.ToLower()}.";
         }
-        if (mergedCharacteristics.Str)
+        if (effectiveItemCharacteristics.Str)
         {
             info[i++] = "It affects your strength.";
         }
-        if (mergedCharacteristics.Int)
+        if (effectiveItemCharacteristics.Int)
         {
             info[i++] = "It affects your intelligence.";
         }
-        if (mergedCharacteristics.Wis)
+        if (effectiveItemCharacteristics.Wis)
         {
             info[i++] = "It affects your wisdom.";
         }
-        if (mergedCharacteristics.Dex)
+        if (effectiveItemCharacteristics.Dex)
         {
             info[i++] = "It affects your dexterity.";
         }
-        if (mergedCharacteristics.Con)
+        if (effectiveItemCharacteristics.Con)
         {
             info[i++] = "It affects your constitution.";
         }
-        if (mergedCharacteristics.Cha)
+        if (effectiveItemCharacteristics.Cha)
         {
             info[i++] = "It affects your charisma.";
         }
-        if (mergedCharacteristics.Stealth)
+        if (effectiveItemCharacteristics.Stealth)
         {
             info[i++] = "It affects your stealth.";
         }
-        if (mergedCharacteristics.Search)
+        if (effectiveItemCharacteristics.Search)
         {
             info[i++] = "It affects your searching.";
         }
-        if (mergedCharacteristics.Infra)
+        if (effectiveItemCharacteristics.Infra)
         {
             info[i++] = "It affects your infravision.";
         }
-        if (mergedCharacteristics.Tunnel)
+        if (effectiveItemCharacteristics.Tunnel)
         {
             info[i++] = "It affects your ability to tunnel.";
         }
-        if (mergedCharacteristics.Speed)
+        if (effectiveItemCharacteristics.Speed)
         {
             info[i++] = "It affects your movement speed.";
         }
-        if (mergedCharacteristics.Blows)
+        if (effectiveItemCharacteristics.Blows)
         {
             info[i++] = "It affects your attack speed.";
         }
-        if (mergedCharacteristics.BrandAcid)
+        if (effectiveItemCharacteristics.BrandAcid)
         {
             info[i++] = "It does extra damage from acid.";
         }
-        if (mergedCharacteristics.BrandElec)
+        if (effectiveItemCharacteristics.BrandElec)
         {
             info[i++] = "It does extra damage from electricity.";
         }
-        if (mergedCharacteristics.BrandFire)
+        if (effectiveItemCharacteristics.BrandFire)
         {
             info[i++] = "It does extra damage from fire.";
         }
-        if (mergedCharacteristics.BrandCold)
+        if (effectiveItemCharacteristics.BrandCold)
         {
             info[i++] = "It does extra damage from frost.";
         }
-        if (mergedCharacteristics.BrandPois)
+        if (effectiveItemCharacteristics.BrandPois)
         {
             info[i++] = "It poisons your foes.";
         }
-        if (mergedCharacteristics.Chaotic)
+        if (effectiveItemCharacteristics.Chaotic)
         {
             info[i++] = "It produces chaotic effects.";
         }
-        if (mergedCharacteristics.Vampiric)
+        if (effectiveItemCharacteristics.Vampiric)
         {
             info[i++] = "It drains life from your foes.";
         }
-        if (mergedCharacteristics.Impact)
+        if (effectiveItemCharacteristics.Impact)
         {
             info[i++] = "It can cause earthquakes.";
         }
 
-        if (mergedCharacteristics.Radius > 0)
+        if (effectiveItemCharacteristics.Radius > 0)
         {
             string burnRate = BurnRate == 0 ? "forever" : "when fueled";
-            info[i++] = $"It provides light (radius {mergedCharacteristics.Radius}) {burnRate}.";
+            info[i++] = $"It provides light (radius {effectiveItemCharacteristics.Radius}) {burnRate}.";
         }
 
-        if (mergedCharacteristics.Vorpal)
+        if (effectiveItemCharacteristics.Vorpal)
         {
             info[i++] = "It is very sharp and can cut your foes.";
         }
-        if (mergedCharacteristics.KillDragon)
+        if (effectiveItemCharacteristics.KillDragon)
         {
             info[i++] = "It is a great bane of dragons.";
         }
-        else if (mergedCharacteristics.SlayDragon)
+        else if (effectiveItemCharacteristics.SlayDragon)
         {
             info[i++] = "It is especially deadly against dragons.";
         }
-        if (mergedCharacteristics.SlayOrc)
+        if (effectiveItemCharacteristics.SlayOrc)
         {
             info[i++] = "It is especially deadly against orcs.";
         }
-        if (mergedCharacteristics.SlayTroll)
+        if (effectiveItemCharacteristics.SlayTroll)
         {
             info[i++] = "It is especially deadly against trolls.";
         }
-        if (mergedCharacteristics.SlayGiant)
+        if (effectiveItemCharacteristics.SlayGiant)
         {
             info[i++] = "It is especially deadly against giants.";
         }
-        if (mergedCharacteristics.SlayDemon)
+        if (effectiveItemCharacteristics.SlayDemon)
         {
             info[i++] = "It strikes at demons with holy wrath.";
         }
-        if (mergedCharacteristics.SlayUndead)
+        if (effectiveItemCharacteristics.SlayUndead)
         {
             info[i++] = "It strikes at undead with holy wrath.";
         }
-        if (mergedCharacteristics.SlayEvil)
+        if (effectiveItemCharacteristics.SlayEvil)
         {
             info[i++] = "It fights against evil with holy fury.";
         }
-        if (mergedCharacteristics.SlayAnimal)
+        if (effectiveItemCharacteristics.SlayAnimal)
         {
             info[i++] = "It is especially deadly against natural creatures.";
         }
-        if (mergedCharacteristics.SustStr)
+        if (effectiveItemCharacteristics.SustStr)
         {
             info[i++] = "It sustains your strength.";
         }
-        if (mergedCharacteristics.SustInt)
+        if (effectiveItemCharacteristics.SustInt)
         {
             info[i++] = "It sustains your intelligence.";
         }
-        if (mergedCharacteristics.SustWis)
+        if (effectiveItemCharacteristics.SustWis)
         {
             info[i++] = "It sustains your wisdom.";
         }
-        if (mergedCharacteristics.SustDex)
+        if (effectiveItemCharacteristics.SustDex)
         {
             info[i++] = "It sustains your dexterity.";
         }
-        if (mergedCharacteristics.SustCon)
+        if (effectiveItemCharacteristics.SustCon)
         {
             info[i++] = "It sustains your constitution.";
         }
-        if (mergedCharacteristics.SustCha)
+        if (effectiveItemCharacteristics.SustCha)
         {
             info[i++] = "It sustains your charisma.";
         }
-        if (mergedCharacteristics.ImAcid)
+        if (effectiveItemCharacteristics.ImAcid)
         {
             info[i++] = "It provides immunity to acid.";
         }
-        if (mergedCharacteristics.ImElec)
+        if (effectiveItemCharacteristics.ImElec)
         {
             info[i++] = "It provides immunity to electricity.";
         }
-        if (mergedCharacteristics.ImFire)
+        if (effectiveItemCharacteristics.ImFire)
         {
             info[i++] = "It provides immunity to fire.";
         }
-        if (mergedCharacteristics.ImCold)
+        if (effectiveItemCharacteristics.ImCold)
         {
             info[i++] = "It provides immunity to cold.";
         }
-        if (mergedCharacteristics.FreeAct)
+        if (effectiveItemCharacteristics.FreeAct)
         {
             info[i++] = "It provides immunity to paralysis.";
         }
-        if (mergedCharacteristics.HoldLife)
+        if (effectiveItemCharacteristics.HoldLife)
         {
             info[i++] = "It provides resistance to life draining.";
         }
-        if (mergedCharacteristics.ResFear)
+        if (effectiveItemCharacteristics.ResFear)
         {
             info[i++] = "It makes you completely fearless.";
         }
-        if (mergedCharacteristics.ResAcid)
+        if (effectiveItemCharacteristics.ResAcid)
         {
             info[i++] = "It provides resistance to acid.";
         }
-        if (mergedCharacteristics.ResElec)
+        if (effectiveItemCharacteristics.ResElec)
         {
             info[i++] = "It provides resistance to electricity.";
         }
-        if (mergedCharacteristics.ResFire)
+        if (effectiveItemCharacteristics.ResFire)
         {
             info[i++] = "It provides resistance to fire.";
         }
-        if (mergedCharacteristics.ResCold)
+        if (effectiveItemCharacteristics.ResCold)
         {
             info[i++] = "It provides resistance to cold.";
         }
-        if (mergedCharacteristics.ResPois)
+        if (effectiveItemCharacteristics.ResPois)
         {
             info[i++] = "It provides resistance to poison.";
         }
-        if (mergedCharacteristics.ResLight)
+        if (effectiveItemCharacteristics.ResLight)
         {
             info[i++] = "It provides resistance to light.";
         }
-        if (mergedCharacteristics.ResDark)
+        if (effectiveItemCharacteristics.ResDark)
         {
             info[i++] = "It provides resistance to dark.";
         }
-        if (mergedCharacteristics.ResBlind)
+        if (effectiveItemCharacteristics.ResBlind)
         {
             info[i++] = "It provides resistance to blindness.";
         }
-        if (mergedCharacteristics.ResConf)
+        if (effectiveItemCharacteristics.ResConf)
         {
             info[i++] = "It provides resistance to confusion.";
         }
-        if (mergedCharacteristics.ResSound)
+        if (effectiveItemCharacteristics.ResSound)
         {
             info[i++] = "It provides resistance to sound.";
         }
-        if (mergedCharacteristics.ResShards)
+        if (effectiveItemCharacteristics.ResShards)
         {
             info[i++] = "It provides resistance to shards.";
         }
-        if (mergedCharacteristics.ResNether)
+        if (effectiveItemCharacteristics.ResNether)
         {
             info[i++] = "It provides resistance to nether.";
         }
-        if (mergedCharacteristics.ResNexus)
+        if (effectiveItemCharacteristics.ResNexus)
         {
             info[i++] = "It provides resistance to nexus.";
         }
-        if (mergedCharacteristics.ResChaos)
+        if (effectiveItemCharacteristics.ResChaos)
         {
             info[i++] = "It provides resistance to chaos.";
         }
-        if (mergedCharacteristics.ResDisen)
+        if (effectiveItemCharacteristics.ResDisen)
         {
             info[i++] = "It provides resistance to disenchantment.";
         }
-        if (mergedCharacteristics.Wraith)
+        if (effectiveItemCharacteristics.Wraith)
         {
             info[i++] = "It renders you incorporeal.";
         }
-        if (mergedCharacteristics.Feather)
+        if (effectiveItemCharacteristics.Feather)
         {
             info[i++] = "It allows you to levitate.";
         }
-        if (mergedCharacteristics.Radius > 0 && BurnRate == 0)
+        if (effectiveItemCharacteristics.Radius > 0 && BurnRate == 0)
         {
             info[i++] = "It provides permanent light.";
         }
-        if (mergedCharacteristics.SeeInvis)
+        if (effectiveItemCharacteristics.SeeInvis)
         {
             info[i++] = "It allows you to see invisible monsters.";
         }
-        if (mergedCharacteristics.Telepathy)
+        if (effectiveItemCharacteristics.Telepathy)
         {
             info[i++] = "It gives telepathic powers.";
         }
-        if (mergedCharacteristics.SlowDigest)
+        if (effectiveItemCharacteristics.SlowDigest)
         {
             info[i++] = "It slows your metabolism.";
         }
-        if (mergedCharacteristics.Regen)
+        if (effectiveItemCharacteristics.Regen)
         {
             info[i++] = "It speeds your regenerative powers.";
         }
-        if (mergedCharacteristics.Reflect)
+        if (effectiveItemCharacteristics.Reflect)
         {
             info[i++] = "It reflects bolts and arrows.";
         }
-        if (mergedCharacteristics.ShFire)
+        if (effectiveItemCharacteristics.ShFire)
         {
             info[i++] = "It produces a fiery sheath.";
         }
-        if (mergedCharacteristics.ShElec)
+        if (effectiveItemCharacteristics.ShElec)
         {
             info[i++] = "It produces an electric sheath.";
         }
-        if (mergedCharacteristics.NoMagic)
+        if (effectiveItemCharacteristics.NoMagic)
         {
             info[i++] = "It produces an anti-magic shell.";
         }
-        if (mergedCharacteristics.NoTele)
+        if (effectiveItemCharacteristics.NoTele)
         {
             info[i++] = "It prevents teleportation.";
         }
-        if (mergedCharacteristics.XtraMight)
+        if (effectiveItemCharacteristics.XtraMight)
         {
             info[i++] = "It fires missiles with extra might.";
         }
-        if (mergedCharacteristics.XtraShots)
+        if (effectiveItemCharacteristics.XtraShots)
         {
             info[i++] = "It fires missiles excessively fast.";
         }
-        if (mergedCharacteristics.DrainExp)
+        if (effectiveItemCharacteristics.DrainExp)
         {
             info[i++] = "It drains experience.";
         }
-        if (mergedCharacteristics.Teleport)
+        if (effectiveItemCharacteristics.Teleport)
         {
             info[i++] = "It induces random teleportation.";
         }
-        if (mergedCharacteristics.Aggravate)
+        if (effectiveItemCharacteristics.Aggravate)
         {
             info[i++] = "It aggravates nearby creatures.";
         }
-        if (mergedCharacteristics.Blessed)
+        if (effectiveItemCharacteristics.Blessed)
         {
             info[i++] = "It has been blessed by the gods.";
         }
-        if (IsCursed)
+        if (effectiveItemCharacteristics.IsCursed)
         {
-            if (mergedCharacteristics.PermaCurse)
+            if (effectiveItemCharacteristics.PermaCurse)
             {
                 info[i++] = "It is permanently cursed.";
             }
-            else if (mergedCharacteristics.HeavyCurse)
+            else if (effectiveItemCharacteristics.HeavyCurse)
             {
                 info[i++] = "It is heavily cursed.";
             }
@@ -1665,23 +1589,23 @@ internal sealed class Item : IComparable<Item>
                 info[i++] = "It is cursed.";
             }
         }
-        if (mergedCharacteristics.DreadCurse)
+        if (effectiveItemCharacteristics.DreadCurse)
         {
             info[i++] = "It carries an ancient foul curse.";
         }
-        if (mergedCharacteristics.IgnoreAcid)
+        if (effectiveItemCharacteristics.IgnoreAcid)
         {
             info[i++] = "It cannot be harmed by acid.";
         }
-        if (mergedCharacteristics.IgnoreElec)
+        if (effectiveItemCharacteristics.IgnoreElec)
         {
             info[i++] = "It cannot be harmed by electricity.";
         }
-        if (mergedCharacteristics.IgnoreFire)
+        if (effectiveItemCharacteristics.IgnoreFire)
         {
             info[i++] = "It cannot be harmed by fire.";
         }
-        if (mergedCharacteristics.IgnoreCold)
+        if (effectiveItemCharacteristics.IgnoreCold)
         {
             info[i++] = "It cannot be harmed by cold.";
         }
@@ -1732,13 +1656,13 @@ internal sealed class Item : IComparable<Item>
         return RareItem != null;
     }
 
-    public ItemCharacteristics ObjectFlagsKnown()
+    public RoItemPropertySet ObjectFlagsKnown()
     {
         if (!IsKnown())
         {
-            return new ItemCharacteristics();
+            return new RoItemPropertySet();
         }
-        return GetMergedCharacteristics();
+        return GetEffectiveItemProperties();
     }
 
     /// <summary>
@@ -1782,7 +1706,7 @@ internal sealed class Item : IComparable<Item>
             }
         }
 
-        ItemCharacteristics mergedCharacteristics = GetMergedCharacteristics();
+        RoItemPropertySet mergedCharacteristics = GetEffectiveItemProperties();
         if (mergedCharacteristics.Chaotic)
         {
             value += Game.BonusChaoticValue;
@@ -2077,51 +2001,51 @@ internal sealed class Item : IComparable<Item>
         }
         if (mergedCharacteristics.Str)
         {
-            value += Characteristics.BonusStrength * Game.BonusStrengthValue;
+            value += EnchantmentItemProperties.BonusStrength * Game.BonusStrengthValue;
         }
         if (mergedCharacteristics.Int)
         {
-            value += Characteristics.BonusIntelligence * Game.BonusIntelligenceValue;
+            value += EnchantmentItemProperties.BonusIntelligence * Game.BonusIntelligenceValue;
         }
         if (mergedCharacteristics.Wis)
         {
-            value += Characteristics.BonusWisdom * Game.BonusWisdomValue;
+            value += EnchantmentItemProperties.BonusWisdom * Game.BonusWisdomValue;
         }
         if (mergedCharacteristics.Dex)
         {
-            value += Characteristics.BonusDexterity * Game.BonusDexterityValue;
+            value += EnchantmentItemProperties.BonusDexterity * Game.BonusDexterityValue;
         }
         if (mergedCharacteristics.Con)
         {
-            value += Characteristics.BonusConstitution * Game.BonusConstitutionValue;
+            value += EnchantmentItemProperties.BonusConstitution * Game.BonusConstitutionValue;
         }
         if (mergedCharacteristics.Cha)
         {
-            value += Characteristics.BonusCharisma * Game.BonusCharismaValue;
+            value += EnchantmentItemProperties.BonusCharisma * Game.BonusCharismaValue;
         }
         if (mergedCharacteristics.Stealth)
         {
-            value += Characteristics.BonusStealth * Game.BonusStealthValue;
+            value += EnchantmentItemProperties.BonusStealth * Game.BonusStealthValue;
         }
         if (mergedCharacteristics.Search)
         {
-            value += Characteristics.BonusSearch * Game.BonusSearchValue;
+            value += EnchantmentItemProperties.BonusSearch * Game.BonusSearchValue;
         }
         if (mergedCharacteristics.Infra)
         {
-            value += Characteristics.BonusInfravision * Game.BonusInfravisionValue;
+            value += EnchantmentItemProperties.BonusInfravision * Game.BonusInfravisionValue;
         }
         if (mergedCharacteristics.Tunnel)
         {
-            value += Characteristics.BonusTunnel * Game.BonusTunnelValue;
+            value += EnchantmentItemProperties.BonusTunnel * Game.BonusTunnelValue;
         }
         if (mergedCharacteristics.Blows)
         {
-            value += Characteristics.BonusAttacks * Game.BonusExtraBlowslValue;
+            value += EnchantmentItemProperties.BonusAttacks * Game.BonusExtraBlowslValue;
         }
         if (mergedCharacteristics.Speed)
         {
-            value += Characteristics.BonusSpeed * Game.BonusSpeedlValue;
+            value += EnchantmentItemProperties.BonusSpeed * Game.BonusSpeedlValue;
         }
 
         if (mergedCharacteristics.Activation != null)
@@ -2234,6 +2158,7 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public int Value()
     {
+        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
         int value;
         if (IsKnown())
         {
@@ -2241,7 +2166,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (IsCursed)
+            if (effectiveCharacteristics.IsCursed)
             {
                 return 0;
             }
@@ -2253,7 +2178,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (IdentSense && IsCursed)
+            if (IdentSense && effectiveCharacteristics.IsCursed)
             {
                 return 0;
             }
@@ -2284,14 +2209,10 @@ internal sealed class Item : IComparable<Item>
         ArmorClass = fixedArtifact.Ac;
         DamageDice = fixedArtifact.Dd;
         DamageSides = fixedArtifact.Ds;
-        Characteristics.BonusArmorClass = fixedArtifact.ToA;
-        Characteristics.BonusHit = fixedArtifact.ToH;
-        Characteristics.BonusDamage = fixedArtifact.ToD;
+        EnchantmentItemProperties.BonusArmorClass = fixedArtifact.ToA;
+        EnchantmentItemProperties.BonusHit = fixedArtifact.ToH;
+        EnchantmentItemProperties.BonusDamage = fixedArtifact.ToD;
         Weight = fixedArtifact.Weight;
-        if (fixedArtifact.IsCursed)
-        {
-            IsCursed = true;
-        }
         if (FixedArtifact != null)
         {
             FixedArtifact.ApplyResistances(this);
@@ -2399,47 +2320,47 @@ internal sealed class Item : IComparable<Item>
         Game.TreasureRating += TreasureRating;
         if (IsRandomArtifact) 
         {
-            Game.TreasureRating += Characteristics.TreasureRating;
+            Game.TreasureRating += EnchantmentItemProperties.TreasureRating;
         }
         else if (RareItem != null)
         {
-            RareItemCharacteristics = RareItem.GenerateItemCharacteristics();
+            // Check to see if we are enchanting a cursed or broken item.
+            RoItemPropertySet effectiveItemCharacteristics = GetEffectiveItemProperties();
+            int goodBadMultiplier = effectiveItemCharacteristics.IsCursed || IsBroken ? -1 : 1;
+
+            RoItemPropertySet roRareItemCharacteristics = RareItem.GenerateItemCharacteristics();
+            RwItemPropertySet modifiedRareItemCharacteristics = roRareItemCharacteristics.AsWriteable();
+
+            // If the rare item has no value, consider it broken.
             if (RareItem.Value.HasValue && RareItem.Value == 0)
             {
                 IsBroken = true;
             }
-            if (RareItem.IsCursed)
-            {
-                IsCursed = true;
-            }
 
-            // Check to see if we are enchanting a cursed or broken item.
-            int goodBadMultiplier = IsCursed || IsBroken ? -1 : 1;
-            Characteristics.BonusHit -= RareItemCharacteristics.BonusHit * goodBadMultiplier;
-            Characteristics.BonusDamage -= RareItemCharacteristics.BonusDamage * goodBadMultiplier;
-            Characteristics.BonusArmorClass -= RareItemCharacteristics.BonusArmorClass * goodBadMultiplier;
-            Characteristics.BonusStrength -= RareItemCharacteristics.BonusStrength * goodBadMultiplier;
-            Characteristics.BonusIntelligence -= RareItemCharacteristics.BonusIntelligence * goodBadMultiplier;
-            Characteristics.BonusWisdom -= RareItemCharacteristics.BonusWisdom * goodBadMultiplier;
-            Characteristics.BonusDexterity -= RareItemCharacteristics.BonusDexterity * goodBadMultiplier;
-            Characteristics.BonusConstitution -= RareItemCharacteristics.BonusConstitution * goodBadMultiplier;
-            Characteristics.BonusCharisma -= RareItemCharacteristics.BonusCharisma * goodBadMultiplier;
-            Characteristics.BonusStealth -= RareItemCharacteristics.BonusStealth * goodBadMultiplier;
-            Characteristics.BonusSearch -= RareItemCharacteristics.BonusSearch * goodBadMultiplier;
-            Characteristics.BonusInfravision -= RareItemCharacteristics.BonusInfravision * goodBadMultiplier;
-            Characteristics.BonusTunnel -= RareItemCharacteristics.BonusTunnel * goodBadMultiplier;
-            Characteristics.BonusAttacks -= RareItemCharacteristics.BonusAttacks * goodBadMultiplier;
-            Characteristics.BonusSpeed -= RareItemCharacteristics.BonusSpeed * goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusHit *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusDamage *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusArmorClass *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusStrength *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusIntelligence *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusWisdom *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusDexterity *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusConstitution *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusCharisma *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusStealth *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusSearch *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusInfravision *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusTunnel *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusAttacks *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
+
+            RareItemCharacteristics = modifiedRareItemCharacteristics.AsReadOnly();
+
             Game.TreasureRating += RareItem.TreasureRating;
             return;
         }
         if (Cost == 0)
         {
             IsBroken = true;
-        }
-        if (IsCursed)
-        {
-            IsCursed = true;
         }
     }
 
@@ -2448,16 +2369,16 @@ internal sealed class Item : IComparable<Item>
         ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
         if (itemAdditiveBundle != null)
         {
-            Characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
+            EnchantmentItemProperties.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
         }
     }
 
     public bool CreateRandomArtifact(bool fromScroll)
     {
         // Create a set of random artifact characteristics.
-        RandomArtifactItemCharacteristics = new ItemCharacteristics();
+        RwItemPropertySet randomArtifactItemPropertySet = new RwItemPropertySet();
 
-        _factory.CreateRandomArtifact(RandomArtifactItemCharacteristics, fromScroll);
+        _factory.CreateRandomArtifact(randomArtifactItemPropertySet, fromScroll);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
@@ -2482,6 +2403,7 @@ internal sealed class Item : IComparable<Item>
             newName = GenerateRandomArtifactName();
         }
         RandomArtifactName = newName;
+        RandomArtifactItemCharacteristics = randomArtifactItemPropertySet.AsReadOnly();
         return true;
     }
 
@@ -2608,14 +2530,13 @@ internal sealed class Item : IComparable<Item>
         GoldPieces = Game.ComputeIntegerExpression(_factory.InitialGoldPiecesRoll).Value;
         TurnsOfLightRemaining = _factory.InitialTurnsOfLight;
         Weight = _factory.Weight;
-        Characteristics.BonusHit = _factory.BonusHit;
-        Characteristics.BonusDamage = _factory.BonusDamage;
-        Characteristics.BonusArmorClass = _factory.BonusArmorClass;
+        EnchantmentItemProperties.BonusHit = _factory.BonusHit;
+        EnchantmentItemProperties.BonusDamage = _factory.BonusDamage;
+        EnchantmentItemProperties.BonusArmorClass = _factory.BonusArmorClass;
         ArmorClass = _factory.ArmorClass;
         DamageDice = _factory.DamageDice;
         DamageSides = _factory.DamageSides;
         IsBroken = _factory.IsBroken;
-        IsCursed = _factory.IsCursed;
 
         if (_factory.AimingTuple != null)
         {

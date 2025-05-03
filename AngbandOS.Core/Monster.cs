@@ -1205,7 +1205,7 @@ internal class Monster : IItemContainer
                     if ((Race.TakeItem || Race.KillItem) && !IsPet)
                     {
                         bool willHurt = false;
-                        ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
+                        RoItemPropertySet mergedCharacteristics = item.GetEffectiveItemProperties();
                         string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
                         if (mergedCharacteristics.KillDragon && Race.Dragon)

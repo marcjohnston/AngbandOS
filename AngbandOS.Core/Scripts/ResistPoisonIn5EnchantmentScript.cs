@@ -25,7 +25,7 @@ internal class ResistPoisonIn5EnchantmentScript : Script, IEnhancementScript
     {
         if (Game.DieRoll(5) == 1)
         {
-            item.Characteristics.ResPois = true;
+            item.EnchantmentItemProperties.ResPois = true;
         }
     }
 }

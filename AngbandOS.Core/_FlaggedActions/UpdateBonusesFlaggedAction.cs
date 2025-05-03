@@ -191,7 +191,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    ItemCharacteristics mergedCharacteristics = oPtr.GetMergedCharacteristics();
+                    RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
                     if (mergedCharacteristics.Str)
                     {
                         Game.AbilityScores[AbilityEnum.Strength].Bonus += mergedCharacteristics.BonusStrength;

@@ -23,6 +23,6 @@ internal class BonusSearch1D5P5BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusSearch = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.EnchantmentItemProperties.BonusSearch = Game.DieRoll(5) + item.GetBonusValue(5, level);
     }
 }

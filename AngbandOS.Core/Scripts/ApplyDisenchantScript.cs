@@ -40,7 +40,7 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
         {
             return IdentifiedResult.False;
         }
-        if (oPtr.Characteristics.BonusHit <= 0 && oPtr.Characteristics.BonusDamage <= 0 && oPtr.Characteristics.BonusArmorClass <= 0)
+        if (oPtr.EnchantmentItemProperties.BonusHit <= 0 && oPtr.EnchantmentItemProperties.BonusDamage <= 0 && oPtr.EnchantmentItemProperties.BonusArmorClass <= 0)
         {
             return IdentifiedResult.False;
         }
@@ -52,29 +52,29 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
             Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
             return IdentifiedResult.True;
         }
-        if (oPtr.Characteristics.BonusHit > 0)
+        if (oPtr.EnchantmentItemProperties.BonusHit > 0)
         {
-            oPtr.Characteristics.BonusHit--;
+            oPtr.EnchantmentItemProperties.BonusHit--;
         }
-        if (oPtr.Characteristics.BonusHit > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.EnchantmentItemProperties.BonusHit > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.Characteristics.BonusHit--;
+            oPtr.EnchantmentItemProperties.BonusHit--;
         }
-        if (oPtr.Characteristics.BonusDamage > 0)
+        if (oPtr.EnchantmentItemProperties.BonusDamage > 0)
         {
-            oPtr.Characteristics.BonusDamage--;
+            oPtr.EnchantmentItemProperties.BonusDamage--;
         }
-        if (oPtr.Characteristics.BonusDamage > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.EnchantmentItemProperties.BonusDamage > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.Characteristics.BonusDamage--;
+            oPtr.EnchantmentItemProperties.BonusDamage--;
         }
-        if (oPtr.Characteristics.BonusArmorClass > 0)
+        if (oPtr.EnchantmentItemProperties.BonusArmorClass > 0)
         {
-            oPtr.Characteristics.BonusArmorClass--;
+            oPtr.EnchantmentItemProperties.BonusArmorClass--;
         }
-        if (oPtr.Characteristics.BonusArmorClass > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.EnchantmentItemProperties.BonusArmorClass > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.Characteristics.BonusArmorClass--;
+            oPtr.EnchantmentItemProperties.BonusArmorClass--;
         }
         s = oPtr.StackCount != 1 ? "were" : "was";
         Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");

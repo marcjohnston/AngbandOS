@@ -44,7 +44,7 @@ internal class SpriteRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 12 ? "sleeping dust      (racial, unusable until level 12)" : "sleeping dust      (racial, cost 12, INT based)";
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
         itemCharacteristics.ResLight = true;
         itemCharacteristics.Feather = true;

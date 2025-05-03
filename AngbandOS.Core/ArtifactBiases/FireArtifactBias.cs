@@ -19,13 +19,13 @@ internal class FireArtifactBias : ArtifactBias
         (nameof(FalseFireImmunityItemTest), "1/20", nameof(FireImmunityItemEnhancement), "1/2")
     };
 
-    public override bool ApplyMiscPowers(ItemCharacteristics characteristics)
+    public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
     {
         characteristics.Radius = 3;
         return false;
     }
 
-    public override bool ApplySlaying(ItemCharacteristics characteristics)
+    public override bool ApplySlaying(RwItemPropertySet characteristics)
     {
         if (characteristics.CanApplyArtifactBiasSlaying)
         {

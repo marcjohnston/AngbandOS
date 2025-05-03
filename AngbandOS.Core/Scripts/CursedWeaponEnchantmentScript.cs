@@ -23,9 +23,9 @@ internal class CursedWeaponEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        if (item.Characteristics.BonusHit + item.Characteristics.BonusDamage < 0)
+        if (item.EnchantmentItemProperties.BonusHit + item.EnchantmentItemProperties.BonusDamage < 0)
         {
-            item.IsCursed = true;
+            item.EnchantmentItemProperties.IsCursed = true;
         }
     }
 }

@@ -23,11 +23,11 @@ internal class PoorSpeed1D5P5EnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.Characteristics.BonusSpeed = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.EnchantmentItemProperties.BonusSpeed = Game.DieRoll(5) + item.GetBonusValue(5, level);
         while (Game.RandomLessThan(100) < 50)
         {
-            item.Characteristics.BonusSpeed++;
+            item.EnchantmentItemProperties.BonusSpeed++;
         }
-        item.Characteristics.BonusSpeed = 0 - item.Characteristics.BonusSpeed;
+        item.EnchantmentItemProperties.BonusSpeed = 0 - item.EnchantmentItemProperties.BonusSpeed;
     }
 }

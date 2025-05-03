@@ -82,7 +82,7 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
         Game.PlaySound(SoundEffectEnum.ActivateArtifact);
 
         // If it is a random artifact then use its ability and quit
-        ItemCharacteristics mergedCharacteristics = item.GetMergedCharacteristics();
+        RoItemPropertySet mergedCharacteristics = item.GetEffectiveItemProperties();
         if (mergedCharacteristics.Activation != null)
         {
             UsedResult usedResult = mergedCharacteristics.Activation.Activate(item);

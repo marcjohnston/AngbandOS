@@ -101,15 +101,20 @@ internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScri
         Item? wieldingItem = Game.GetInventoryItem(inventoryItem);
 
         // Can't replace a cursed item
-        if (wieldingItem != null && wieldingItem.IsCursed)
+        if (wieldingItem != null)
         {
-            string cursedItemName = wieldingItem.GetDescription(false);
-            Game.MsgPrint($"The {cursedItemName} you are {slot.DescribeItemLocation(wieldingItem)} appears to be cursed.");
-            return;
+            RoItemPropertySet wieldingItemEffectiveItemCharacteristics = wieldingItem.GetEffectiveItemProperties();
+            if (wieldingItemEffectiveItemCharacteristics.IsCursed)
+            {
+                string cursedItemName = wieldingItem.GetDescription(false);
+                Game.MsgPrint($"The {cursedItemName} you are {slot.DescribeItemLocation(wieldingItem)} appears to be cursed.");
+                return;
+            }
         }
 
         // If we know the item to be cursed, confirm its wearing
-        if (item.IsCursed && (item.IsKnown() || item.IdentSense))
+        RoItemPropertySet newItemEffectiveItemCharacteristics = item.GetEffectiveItemProperties();
+        if (newItemEffectiveItemCharacteristics.IsCursed && (item.IsKnown() || item.IdentSense))
         {
             string cursedItemName = item.GetDescription(false);
             string dummy = $"Really use the {cursedItemName} {{cursed}}? ";
@@ -146,8 +151,10 @@ internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScri
         string wieldPhrase = slot.WieldPhrase;
         string itemName = wornItem.GetFullDescription(true);
         Game.MsgPrint($"{wieldPhrase} {itemName} ({inventoryItem.IndexToLabel()}).");
+
         // Let us know if it's cursed
-        if (wornItem.IsCursed)
+        RoItemPropertySet wornItemCharacterisics = wornItem.GetEffectiveItemProperties();
+        if (wornItemCharacterisics.IsCursed)
         {
             Game.MsgPrint("Oops! It feels deathly cold!");
             wornItem.IdentSense = true;

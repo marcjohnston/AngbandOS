@@ -291,19 +291,19 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
                 else
                 {
                     // Only extract known bonuses, not full bonuses
-                    ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
-                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.Characteristics.BonusStrength, row + 0, col);
-                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, item.Characteristics.BonusIntelligence, row + 1, col);
-                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, item.Characteristics.BonusWisdom, row + 2, col);
-                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, item.Characteristics.BonusDexterity, row + 3, col);
-                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, item.Characteristics.BonusConstitution, row + 4, col);
-                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, item.Characteristics.BonusCharisma, row + 5, col);
+                    RoItemPropertySet itemCharacteristics = item.ObjectFlagsKnown();
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.EnchantmentItemProperties.BonusStrength, row + 0, col);
+                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, item.EnchantmentItemProperties.BonusIntelligence, row + 1, col);
+                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, item.EnchantmentItemProperties.BonusWisdom, row + 2, col);
+                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, item.EnchantmentItemProperties.BonusDexterity, row + 3, col);
+                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, item.EnchantmentItemProperties.BonusConstitution, row + 4, col);
+                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, item.EnchantmentItemProperties.BonusCharisma, row + 5, col);
                 }
                 col++;
             }
         }
 
-        ItemCharacteristics playerCharacteristics = Game.GetAbilitiesAsItemFlags();
+        RoItemPropertySet playerCharacteristics = Game.GetAbilitiesAsItemFlags();
         DisplayPlayerStatWithModification(Game.StrengthBonus, playerCharacteristics.Str, row + 0, col);
         DisplayPlayerStatWithModification(Game.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
         DisplayPlayerStatWithModification(Game.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
@@ -356,8 +356,8 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
         // Only show bonuses if we know them
         if (item != null && item.IsKnown())
         {
-            showTohit += item.Characteristics.BonusHit;
-            showTodam += item.Characteristics.BonusDamage;
+            showTohit += item.EnchantmentItemProperties.BonusHit;
+            showTodam += item.EnchantmentItemProperties.BonusDamage;
         }
         // Print some basics
         PrintBonus("+ To Hit    ", showTohit, 30, 1, ColorEnum.Brown);
@@ -436,13 +436,13 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
         int fighting = Game.SkillMelee + (Game.AttackBonus * Constants.BthPlusAdj);
         if (meeleeItem != null)
         {
-            fighting += meeleeItem.Characteristics.BonusHit * Constants.BthPlusAdj;
+            fighting += meeleeItem.EnchantmentItemProperties.BonusHit * Constants.BthPlusAdj;
             damdice += meeleeItem.DamageDice;
             damsides += meeleeItem.DamageSides;
 
             if (meeleeItem.IsKnown())
             {
-                dambonus += meeleeItem.Characteristics.BonusDamage;
+                dambonus += meeleeItem.EnchantmentItemProperties.BonusDamage;
             }
         }
 
@@ -451,7 +451,7 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
         int shooting = Game.SkillRanged + (Game.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)
         {
-            shooting += rangedItem.Characteristics.BonusHit * Constants.BthPlusAdj;
+            shooting += rangedItem.EnchantmentItemProperties.BonusHit * Constants.BthPlusAdj;
         }
 
         int attacksPerRound = Game.MeleeAttacksPerRound;
