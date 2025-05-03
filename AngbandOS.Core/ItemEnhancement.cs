@@ -14,6 +14,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class ItemEnhancement : IGetKey
 {
+    #region API
     protected readonly Game Game;
     protected ItemEnhancement(Game game)
     {
@@ -143,15 +144,6 @@ internal abstract class ItemEnhancement : IGetKey
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
-
-    /// <summary>
-    /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
-    /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
-    /// </summary>
-    protected virtual string[]? ApplicableItemFactoryBindingKeys => null;
-
-    public ItemFactory[]? ApplicableItemFactories { get; private set; }
-
     public bool AppliesTo(ItemFactory itemFactory)
     {
         if (ApplicableItemFactories == null)
@@ -190,33 +182,11 @@ internal abstract class ItemEnhancement : IGetKey
     {
         return "";
     }
+    #endregion
 
-    protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey => null;
-
-    public ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; private set; }
-
-    /// <summary>
-    /// Returns the value of the enhancement.
-    /// </summary>
-    public virtual int? Value => null;
-
-    /// <summary>
-    /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
-    /// </summary>
-    public virtual string? FriendlyName => null;
-
-    protected virtual string? BonusStrengthRollExpression => null;
-    protected virtual string? BonusIntelligenceRollExpression => null;
-    protected virtual string? BonusWisdomRollExpression => null;
-    protected virtual string? BonusDexterityRollExpression => null;
-    protected virtual string? BonusConstitutionRollExpression => null;
-    protected virtual string? BonusCharismaRollExpression => null;
-    protected virtual string? BonusStealthRollExpression => null;
-    protected virtual string? BonusSearchRollExpression => null;
-    protected virtual string? BonusInfravisionRollExpression => null;
-    protected virtual string? BonusTunnelRollExpression => null;
-    protected virtual string? BonusAttacksRollExpression => null;
-    protected virtual string? BonusSpeedRollExpression => null;
+    #region Bound Properties
+    /// <inheritdoc />
+    public Activation? Activation { get; protected set; }
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional strength when adding magic.  If the item is cursed or broken,
@@ -235,29 +205,71 @@ internal abstract class ItemEnhancement : IGetKey
     public Expression? BonusAttacksRoll { get; private set; } = null;
     public Expression? BonusSpeedRoll { get; private set; } = null;
 
-    protected virtual string? BonusArmorClassRollExpression => null;
-
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
     public Expression? BonusArmorClassRoll { get; private set; }
 
-    protected virtual string? BonusDamageRollExpression => null;
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
+    public Expression? BonusHitRoll { get; private set; } 
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
     public Expression? BonusDamageRoll { get; private set; }
+    
+    public ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; private set; }
+
+    /// <inheritdoc />
+    public ArtifactBiasWeightedRandom? ArtifactBiasWeightedRandom { get; private set; }
+
+    public ItemFactory[]? ApplicableItemFactories { get; private set; }
+    #endregion
+
+    #region Unique ItemEnhancement Light-weight Virtual & Abstract Properties
+    /// <summary>
+    /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
+    /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
+    /// </summary>
+    protected virtual string[]? ApplicableItemFactoryBindingKeys => null;
+
+    protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey => null;
+
+    /// <summary>
+    /// Returns the value of the enhancement.
+    /// </summary>
+    public virtual int? Value => null;
+
+    /// <summary>
+    /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
+    /// </summary>
+    public virtual string? FriendlyName => null;
+    #endregion
+
+    #region ItemPropertySet Light-weight Virtual & Abstract Properties
+    protected virtual string? BonusStrengthRollExpression => null;
+    protected virtual string? BonusIntelligenceRollExpression => null;
+    protected virtual string? BonusWisdomRollExpression => null;
+    protected virtual string? BonusDexterityRollExpression => null;
+    protected virtual string? BonusConstitutionRollExpression => null;
+    protected virtual string? BonusCharismaRollExpression => null;
+    protected virtual string? BonusStealthRollExpression => null;
+    protected virtual string? BonusSearchRollExpression => null;
+    protected virtual string? BonusInfravisionRollExpression => null;
+    protected virtual string? BonusTunnelRollExpression => null;
+    protected virtual string? BonusAttacksRollExpression => null;
+    protected virtual string? BonusSpeedRollExpression => null;
+
+    protected virtual string? BonusArmorClassRollExpression => null;
 
     protected virtual string? BonusHitRollExpression => null;
 
-    /// <summary>
-    /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
-    /// this maximum value will be subtracted from the item
-    /// </summary>
-    public Expression? BonusHitRoll { get; private set; } 
+    protected virtual string? BonusDamageRollExpression => null;
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
@@ -267,18 +279,12 @@ internal abstract class ItemEnhancement : IGetKey
     protected virtual string? ActivationName { get; }
 
     /// <inheritdoc />
-    public Activation? Activation { get; protected set; }
-    
-    /// <inheritdoc />
     public virtual bool Aggravate => false;
     
     /// <inheritdoc />
     public virtual bool AntiTheft => false;
 
     protected virtual string? ArtifactBiasWeightedRandomBindingKey => null;
-
-    /// <inheritdoc />
-    public ArtifactBiasWeightedRandom? ArtifactBiasWeightedRandom { get; private set; }
     
     /// <inheritdoc />
     public virtual bool Blessed => false;
@@ -543,4 +549,5 @@ internal abstract class ItemEnhancement : IGetKey
     
     /// <inheritdoc />
     public virtual bool XtraShots => false;
+    #endregion
 }
