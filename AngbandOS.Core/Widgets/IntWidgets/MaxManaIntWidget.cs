@@ -16,7 +16,7 @@ internal class MaxManaIntWidget : IntWidget
     private MaxManaIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 25;
-    public override int Width => 5;
+    public override int? Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntValueName => nameof(MaxManaIntProperty);
     public override string JustificationName => nameof(RightJustification);

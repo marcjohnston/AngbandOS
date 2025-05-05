@@ -16,6 +16,6 @@ internal class NoTrapsDetectedTextWidget : TextWidget
     private NoTrapsDetectedTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 53;
     public override int Y => 44;
-    public override int Width => 5;
+    public override int? Width => 5;
     public override string Text => "";
 }

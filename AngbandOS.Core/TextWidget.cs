@@ -39,7 +39,7 @@ internal abstract class TextWidget : Widget
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public virtual int Width => Text.Length;
+    public virtual int? Width => null;
 
     /// <summary>
     /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property is bound using
@@ -65,7 +65,7 @@ internal abstract class TextWidget : Widget
     protected override void Paint()
     {
         string justifiedText = Text;
-        justifiedText = Justification.Format(justifiedText, Width);
+        justifiedText = Justification.Format(justifiedText, Width ?? justifiedText.Length);
         Game.Screen.Print(Color, justifiedText, Y, X);
     }
 }

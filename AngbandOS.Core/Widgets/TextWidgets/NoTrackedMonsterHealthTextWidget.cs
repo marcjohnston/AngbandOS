@@ -16,6 +16,6 @@ internal class NoTrackedMonsterHealthTextWidget : TextWidget
     private NoTrackedMonsterHealthTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 32;
-    public override int Width => 12;
+    public override int? Width => 12;
     public override string Text => "";
 }

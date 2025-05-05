@@ -13,7 +13,7 @@ internal class BlindnessRangedWidget : RangedWidget
     private BlindnessRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 8;
     public override int Y => 44;
-    public override int Width => 5;
+    public override int? Width => 5;
     public override string IntValueName => nameof(BlindnessTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]

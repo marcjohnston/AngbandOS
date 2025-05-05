@@ -13,7 +13,7 @@ internal class ArmorClassIntWidget : IntWidget
     private ArmorClassIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 22;
-    public override int Width => 5;
+    public override int? Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntValueName => nameof(ArmorClassFunction);
     public override string JustificationName => nameof(RightJustification);

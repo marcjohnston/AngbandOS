@@ -523,8 +523,15 @@ internal class SingletonRepository
                 if (constructors.Length == 1)
                 {
                     // We will only instantiate the singleton, if we are storing it.
-                    object? singleton = constructors[0].Invoke(new object[] { Game });
-                    LoadSingleton(singleton);
+                    try
+                    {
+                        object? singleton = constructors[0].Invoke(new object[] { Game });
+                        LoadSingleton(singleton);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"An error occurred instantiating the {type.Name} singleton.  Check to ensure the constructor is private(Game game).");
+                    }
                 }
             }
         }

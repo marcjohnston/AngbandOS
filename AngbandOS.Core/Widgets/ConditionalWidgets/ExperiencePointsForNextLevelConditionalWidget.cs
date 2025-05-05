@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Widgets;
 internal class ExperiencePointsForNextLevelConditionalWidget : ConditionalWidget
 {
     private ExperiencePointsForNextLevelConditionalWidget(Game game) : base(game) { } // This object is a singleton.
-    public override (string, bool, int)[] EnabledNames => new (string, bool, int)[] {
+    protected override (string, bool, int)[] EnabledNames => new (string, bool, int)[] {
         (nameof(ExperiencePointsLostFunction), true, 0)
     };
     public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsForNextLevelLostIntWidget) };

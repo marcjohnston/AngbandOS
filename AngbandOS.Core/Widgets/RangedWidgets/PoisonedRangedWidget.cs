@@ -13,7 +13,7 @@ internal class PoisonedRangedWidget : RangedWidget
     private PoisonedRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 33;
     public override int Y => 44;
-    public override int Width => 8;
+    public override int? Width => 8;
     public override string IntValueName => nameof(PoisonedTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]

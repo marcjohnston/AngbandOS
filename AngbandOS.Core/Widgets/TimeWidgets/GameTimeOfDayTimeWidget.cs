@@ -14,7 +14,7 @@ internal class GameTimeOfDayTimeWidget : TimeWidget
     private GameTimeOfDayTimeWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 4;
     public override int Y => 8;
-    public override int Width => 8;
+    public override int? Width => 8;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string JustificationName => nameof(RightJustification);
     public override string DateAndTimeValueName => nameof(CurrentGameDateTimeProperty);

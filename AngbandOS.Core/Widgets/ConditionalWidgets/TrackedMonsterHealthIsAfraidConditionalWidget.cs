@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Widgets;
 internal class TrackedMonsterHealthIsAfraidConditionalWidget : ConditionalWidget
 {
     private TrackedMonsterHealthIsAfraidConditionalWidget(Game game) : base(game) { } // This object is a singleton.
-    public override (string conditionalName, bool isTrue, int term)[] EnabledNames => new (string, bool, int)[]
+    protected override (string conditionalName, bool isTrue, int term)[] EnabledNames => new (string, bool, int)[]
     {
         (nameof(TrackedMonsterIsAfraidBoolFunction), true, 0)
     };

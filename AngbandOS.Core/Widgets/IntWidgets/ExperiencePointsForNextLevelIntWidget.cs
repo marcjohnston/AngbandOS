@@ -16,7 +16,7 @@ internal class ExperiencePointsForNextLevelIntWidget : IntWidget
     private ExperiencePointsForNextLevelIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 4;
     public override int Y => 6;
-    public override int Width => 8;
+    public override int? Width => 8;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntValueName => nameof(ExperiencePointsForNextLevelFunction);
     public override string JustificationName => nameof(RightJustification);

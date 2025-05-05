@@ -13,8 +13,8 @@ internal class StudyBoolWidget : BoolWidget
     private StudyBoolWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 60;
     public override int Y => 44;
-    public override int Width => 5;
-    public override string BoolValueName => nameof(CanStudyFunction);
+    public override int? Width => 5;
+    protected override string BoolValueName => nameof(CanStudyFunction);
     public override string TrueValue => "Study";
     public override string FalseValue => "";
     public override string[]? ChangeTrackerNames => new string[] { nameof(CanStudyFunction) };

@@ -13,7 +13,7 @@ internal class DepthStringWidget : StringWidget
     private DepthStringWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 69;
     public override int Y => 44;
-    public override int Width => 9;
+    public override int? Width => 9;
     public override string StringValueName => nameof(DepthFunction);
     public override string[]? ChangeTrackerNames => new string[] { nameof(DepthFunction) };
 }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Widgets;
 internal class WinnerConditionalWidget : ConditionalWidget
 {
     private WinnerConditionalWidget(Game game) : base(game) { } // This object is a singleton.
-    public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
+    protected override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
         (nameof(IsWinnerBoolProperty), true, 0),
     };

@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 internal abstract class BoolWidget : TextWidget
 {
     protected BoolWidget(Game game) : base(game) { }
-    public abstract string BoolValueName { get; }
+    protected abstract string BoolValueName { get; }
     public IBoolValue BoolValue { get; private set; }
 
     public override void Bind()
@@ -25,3 +25,4 @@ internal abstract class BoolWidget : TextWidget
 
     public override string Text => BoolValue.BoolValue ? TrueValue : FalseValue;
 }
+

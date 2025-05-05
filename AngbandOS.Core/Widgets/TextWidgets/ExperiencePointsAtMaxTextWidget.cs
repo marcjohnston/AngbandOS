@@ -17,7 +17,7 @@ internal class ExperiencePointsAtMaxTextWidget : TextWidget
 
     public override int X => 4;
     public override int Y => 6;
-    public override int Width => 8;
+    public override int? Width => 8;
     public override string Text => "   *****";
     public override string JustificationName => nameof(RightJustification);
     public override ColorEnum Color => ColorEnum.BrightGreen;

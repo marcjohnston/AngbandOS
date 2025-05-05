@@ -17,7 +17,7 @@ internal class TrapCountRangedWidget : RangedWidget
     private TrapCountRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 53;
     public override int Y => 44;
-    public override int Width => 5;
+    public override int? Width => 5;
     protected override ColorEnum DefaultColor => ColorEnum.Yellow;
     protected override string DefaultText => "DTRAP";
     public override string IntValueName => nameof(TrapCountFunction);

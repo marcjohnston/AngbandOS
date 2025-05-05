@@ -13,7 +13,7 @@ internal class HungerRangedWidget : RangedWidget
     private HungerRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 44;
-    public override int Width => 6;
+    public override int? Width => 6;
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
     protected override string DefaultText => "Dead";
     public override string IntValueName => nameof(FoodIntProperty);

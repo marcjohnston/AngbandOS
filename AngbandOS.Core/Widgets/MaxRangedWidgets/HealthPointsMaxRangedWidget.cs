@@ -13,7 +13,7 @@ internal class HealthPointsMaxRangedWidget : MaxRangedWidget
     private HealthPointsMaxRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 24;
-    public override int Width => 5;
+    public override int? Width => 5;
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
     public override string IntValueName => nameof(HealthPointsIntProperty);
     public override string MaxIntValueName => nameof(MaxHealthPointsIntProperty);

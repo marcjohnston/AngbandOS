@@ -12,10 +12,10 @@ internal class GenericGod : God
 {
     public GenericGod(Game game, GodGameConfiguration godGameConfiguration) : base(game)
     {
+        Key = godGameConfiguration.Key ?? godGameConfiguration.GetType().Name;
         LongName = godGameConfiguration.LongName;
         ShortName = godGameConfiguration.ShortName;
         FavorDescription = godGameConfiguration.FavorDescription;
-        Key = godGameConfiguration.Key ?? godGameConfiguration.GetType().Name;
     }
 
     public override string LongName { get; }

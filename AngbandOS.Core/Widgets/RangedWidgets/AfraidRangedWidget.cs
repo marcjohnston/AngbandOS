@@ -18,7 +18,7 @@ internal class AfraidRangedWidget : RangedWidget
     } // This object is a singleton.
     public override int X => 25;
     public override int Y => 44;
-    public override int Width => 6;
+    public override int? Width => 6;
     public override string IntValueName => nameof(FearTimer);
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

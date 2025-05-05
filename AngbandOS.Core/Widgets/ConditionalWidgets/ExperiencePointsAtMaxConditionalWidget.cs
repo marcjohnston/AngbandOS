@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Widgets;
 internal class ExperiencePointsAtMaxConditionalWidget : ConditionalWidget
 {
     private ExperiencePointsAtMaxConditionalWidget(Game game) : base(game) { } // This object is a singleton.
-    public override (string, bool, int)[] EnabledNames => new(string, bool, int)[] {
+    protected override (string, bool, int)[] EnabledNames => new(string, bool, int)[] {
         (nameof(ExperienceLevelAtMaxFunction), true, 0)
     };
     public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsAtMaxTextWidget) };

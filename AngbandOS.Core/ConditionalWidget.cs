@@ -28,7 +28,7 @@ internal abstract class ConditionalWidget : Widget
     /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    public abstract (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
+    protected abstract (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 

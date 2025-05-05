@@ -13,7 +13,7 @@ internal class CutRangedWidget : RangedWidget
     private CutRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 13;
     public override int Y => 43;
-    public override int Width => 12;
+    public override int? Width => 12;
     public override string IntValueName => nameof(BleedingTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
