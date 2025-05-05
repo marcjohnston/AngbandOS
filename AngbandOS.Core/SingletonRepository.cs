@@ -270,6 +270,7 @@ internal class SingletonRepository
         RegisterRepository<ChestTrap>();
         RegisterRepository<ChestTrapConfiguration>();
         RegisterRepository<ClassSpell>();
+        RegisterRepository<DateWidget>();
         RegisterRepository<Dungeon>();
         RegisterRepository<DungeonGuardian>();
         RegisterRepository<FixedArtifact>();
@@ -281,6 +282,7 @@ internal class SingletonRepository
         RegisterRepository<Gender>();
         RegisterRepository<God>();
         RegisterRepository<HelpGroup>();
+        RegisterRepository<IntWidget>();
         RegisterRepository<ItemAction>();
         RegisterRepository<ItemClass>();
         RegisterRepository<ItemEffect>();
@@ -294,7 +296,9 @@ internal class SingletonRepository
         RegisterRepository<ItemQualityRating>();
         RegisterRepository<ItemTest>();
         RegisterRepository<Justification>();
+        RegisterRepository<MapWidget>();
         RegisterRepository<MartialArtsAttack>();
+        RegisterRepository<MaxRangedWidget>();
         RegisterRepository<MonsterEffect>();
         RegisterRepository<MonsterFilter>();
         RegisterRepository<MonsterRace>();
@@ -302,6 +306,7 @@ internal class SingletonRepository
         RegisterRepository<MonsterSelector>();
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
+        RegisterRepository<NullableStringsTextAreaWidget>();
         RegisterRepository<Patron>();
         RegisterRepository<PlayerEffect>();
         RegisterRepository<Plural>();
@@ -311,6 +316,7 @@ internal class SingletonRepository
         RegisterRepository<ProjectileScript>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();
+        RegisterRepository<RangedWidget>();
         RegisterRepository<Realm>();
         RegisterRepository<RenderMessageScript>();
         RegisterRepository<Reward>();
@@ -320,16 +326,19 @@ internal class SingletonRepository
         RegisterRepository<SpellResistantDetection>();
         RegisterRepository<StoreCommand>();
         RegisterRepository<StoreFactory>();
+        RegisterRepository<StringWidget>();
         RegisterRepository<SummonScript>();
         RegisterRepository<SyllableSet>();
         RegisterRepository<Symbol>();
         RegisterRepository<Talent>();
+        RegisterRepository<TextWidget>();
         RegisterRepository<Tile>();
         RegisterRepository<Timer>();
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
-        RegisterRepository<Widget>();
+        RegisterRepository<TimeWidget>();
         RegisterRepository<WieldSlot>();
+        RegisterRepository<Widget>();
         RegisterRepository<WizardCommand>();
 
         // Load system singletons.
