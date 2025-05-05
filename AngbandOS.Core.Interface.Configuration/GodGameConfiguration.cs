@@ -10,3 +10,5 @@ public class GodGameConfiguration
 
     public virtual string Key { get; set; }
 }
+
+

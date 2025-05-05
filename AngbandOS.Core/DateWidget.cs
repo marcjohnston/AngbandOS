@@ -5,6 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -21,4 +25,19 @@ internal abstract class DateWidget : TextWidget
     }
 
     public override string Text => DateValue.DateAndTimeValue.ToString("MMM d");
+    public override string ToJson()
+    {
+        DateWidgetGameConfiguration dateWidgetGameConfiguration = new DateWidgetGameConfiguration()
+        {
+            Key = Key,
+            DateValueName = DateValueName,
+            Color = Color,
+            X = X,
+            Y = Y,
+            Width = Width,
+            JustificationName = JustificationName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(dateWidgetGameConfiguration, Game.GetJsonSerializerOptions());
+    }
 }

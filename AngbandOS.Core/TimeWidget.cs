@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -21,4 +23,17 @@ internal abstract class TimeWidget : TextWidget
     }
 
     public override string Text => DateAndTimeValue.DateAndTimeValue.ToString("h:mmtt");
+    public override string ToJson()
+    {
+        TimeWidgetGameConfiguration timeWidgetGameConfiguration = new TimeWidgetGameConfiguration()
+        {
+            Key = Key,
+            DateAndTimeValueName = DateAndTimeValueName,
+            Color = Color,
+            X = X ,            Y = Y ,            Width = Width,
+            JustificationName = JustificationName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(timeWidgetGameConfiguration, Game.GetJsonSerializerOptions());
+    }
 }

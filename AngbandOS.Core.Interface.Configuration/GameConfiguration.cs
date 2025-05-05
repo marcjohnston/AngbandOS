@@ -103,10 +103,21 @@ public class GameConfiguration
     public virtual string[]? FunnyDescriptions { get; set; } = null;
     public virtual string[]? FunnyComments { get; set; } = null;
     public virtual string[]? HorrificDescriptions { get; set; } = null;
-    public virtual ArtifactBiasWeightedRandomGameConfiguration[]? ArtifactBiasWeightedRandoms {get; set; } = null;
+    public virtual ArtifactBiasWeightedRandomGameConfiguration[]? ArtifactBiasWeightedRandoms { get; set; } = null;
     public virtual ItemClassGameConfiguration[]? ItemClasses { get; set; } = null;
     public virtual ItemEnhancementGameConfiguration[]? ItemEnhancements { get; set; } = null;
     public virtual ItemEnhancementWeightedRandomGameConfiguration[]? ItemEnhancementWeightedRandoms { get; set; } = null;
     public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
     public virtual ProjectileWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
+    
+    public virtual ConditionalWidgetGameConfiguration[]? ConditionalWidgets { get; set; } = null;
+    public virtual DateWidgetGameConfiguration[]? DateWidgets { get; set; } = null;
+    public virtual IntWidgetGameConfiguration[]? IntWidgets { get; set; } = null;
+    public virtual MapWidgetGameConfiguration[]? MapWidgets { get; set; } = null;
+    public virtual MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets { get; set; } = null;
+    public virtual RangedWidgetGameConfiguration[]? RangedWidgets { get; set; } = null;
+    public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
+    public virtual TextWidgetGameConfiguration[]? TextWidgets { get; set; } = null;
+    public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
+    public virtual NullableStringsTextAreaWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
 }

@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -19,5 +21,20 @@ internal abstract class NullableStringsTextAreaWidget : NullableTextAreaWidget
     {
         base.Bind();
         NullableTextAreaValue = Game.SingletonRepository.Get<INullableStringsValue>(NullableTextAreaValueName);
+    }
+    public override string ToJson()
+    {
+        NullableStringsTextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration = new NullableStringsTextAreaWidgetGameConfiguration()
+        {
+            Key = Key,
+            NullableTextAreaValueName = NullableTextAreaValueName,
+            NullableText = NullableText,
+            Color = Color,
+            X = X,
+            Y = Y,
+            JustificationName = JustificationName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(nullableStringsTextAreaWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

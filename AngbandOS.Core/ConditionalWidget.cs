@@ -5,6 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+using System.Drawing;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -121,5 +125,17 @@ internal abstract class ConditionalWidget : Widget
                 }
             }
         }
+    }
+    public override string ToJson()
+    {
+        ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration = new ConditionalWidgetGameConfiguration()
+        {
+            Key = Key,
+            EnabledNames = EnabledNames,
+            TrueWidgetNames = TrueWidgetNames,
+            FalseWidgetNames = FalseWidgetNames,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(conditionalWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

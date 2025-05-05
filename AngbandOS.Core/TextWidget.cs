@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -67,5 +69,20 @@ internal abstract class TextWidget : Widget
         string justifiedText = Text;
         justifiedText = Justification.Format(justifiedText, Width ?? justifiedText.Length);
         Game.Screen.Print(Color, justifiedText, Y, X);
+    }
+    public override string ToJson()
+    {
+        TextWidgetGameConfiguration textWidgetGameConfiguration = new TextWidgetGameConfiguration()
+        {
+            Key = Key,
+            Text = Text,
+            Color = Color,
+            X = X,
+            Y = Y,
+            Width = Width,
+            JustificationName = JustificationName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(textWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

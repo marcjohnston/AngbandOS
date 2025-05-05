@@ -348,28 +348,38 @@ internal class SingletonRepository
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, GenericArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
+        LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, GenericConditionalWidget>(gameConfiguration.ConditionalWidgets);
+        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, GenericDateWidget>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration, GenericDungeon>(gameConfiguration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GenericGameCommand>(gameConfiguration.GameCommands);
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
+        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, GenericIntWidget>(gameConfiguration.IntWidgets);
         LoadFromConfiguration<ItemClass, ItemClassGameConfiguration, GenericItemClass>(gameConfiguration.ItemClasses);
         LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration, GenericItemEnhancement>(gameConfiguration.ItemEnhancements);
         LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, GenericItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
         LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration, GenericItemFactory>(gameConfiguration.ItemFactories);
         LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, GenericItemFlavor>(gameConfiguration.ItemFlavors);
+        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration, GenericMapWidget>(gameConfiguration.MapWidgets);
+        LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, GenericMaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
+        LoadFromConfiguration<NullableStringsTextAreaWidget, NullableStringsTextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, GenericProjectileScript>(gameConfiguration.ProjectileScripts);
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, GenericProjectileWeightedRandomScript>(gameConfiguration.ProjectileWeightedRandomScripts);
+        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, GenericRangedWidget>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
+        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, GenericStringWidget>(gameConfiguration.StringWidgets);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, GenericSyllableSet>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
+        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, GenericTextWidget>(gameConfiguration.TextWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(gameConfiguration.Tiles);
+        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, GenericTimeWidget>(gameConfiguration.TimeWidgets);
         LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, GenericWizardCommand>(gameConfiguration.WizardCommands);
@@ -414,7 +424,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<SummonScript>();
         LoadAllAssemblyTypes<SummonWeightedRandom>();
         LoadAllAssemblyTypes<Talent>();
-        LoadAllAssemblyTypes<Widget>();
         LoadAllAssemblyTypes<WieldSlot>();
 
         // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.

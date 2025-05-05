@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -26,5 +28,20 @@ internal abstract class IntWidget : TextWidget
     {
         base.Bind();
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
+    }
+    public override string ToJson()
+    {
+        IntWidgetGameConfiguration intWidgetGameConfiguration = new IntWidgetGameConfiguration()
+        {
+            Key = Key,
+            IntValueName = IntValueName,
+            Color = Color,
+            X = X,
+            Y = Y,
+            Width = Width,
+            JustificationName = JustificationName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(intWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

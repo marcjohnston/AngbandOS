@@ -63,10 +63,7 @@ internal abstract class Widget : IGetKey
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
     }
 
-    public string ToJson()
-    {
-        return "";
-    }
+    public abstract string ToJson();
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.

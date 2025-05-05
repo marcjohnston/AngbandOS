@@ -5,6 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Drawing;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -75,5 +78,16 @@ internal abstract class MapWidget : Widget
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;
         Game.Screen.PutChar(attr, ch, row - offsetY, col -+ offsetX);// TODO: The - is weird and should be +
+    }
+    public override string ToJson()
+    {
+        MapWidgetGameConfiguration mapWidgetGameConfiguration = new MapWidgetGameConfiguration()
+        {
+            Key = Key,
+            X = X,
+            Y = Y,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(mapWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }
