@@ -20,6 +20,16 @@ internal abstract class Widget : IGetKey
         Game = game;
     }
 
+    /// <summary>
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
+    /// </summary>
+    public virtual string[]? ChangeTrackerNames => null;
+
+    /// <summary>
+    /// Returns the property that participates in change tracking.  This property is bound from the <see cref="ChangeTrackerNames"/> property during the bind phase.
+    /// </summary>
+    public IChangeTracker[]? ChangeTrackers { get; private set; }
+
     public virtual bool CanPoke => false;
 
     /// <summary>
@@ -48,7 +58,10 @@ internal abstract class Widget : IGetKey
 
     public string GetKey => Key;
 
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
+    }
 
     public string ToJson()
     {
@@ -66,6 +79,17 @@ internal abstract class Widget : IGetKey
     /// </summary>
     public virtual void Update()
     {
+        // If the widget is not invalid, and there are change trackers, check the change trackers and invalidate the widget.
+        if (!IsInvalid && ChangeTrackers is not null && ChangeTrackers.Any(_changeTracker => _changeTracker.IsChanged))
+        {
+            // It has, invalidate the widget.
+            Invalidate();
+
+            // Now force the widget to update.
+            Update();
+        }
+
+        // If this widget is invalid, paint it and validate it.
         if (IsInvalid)
         {
             Paint();

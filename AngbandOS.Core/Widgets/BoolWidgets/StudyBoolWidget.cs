@@ -17,4 +17,5 @@ internal class StudyBoolWidget : BoolWidget
     public override string BoolValueName => nameof(CanStudyFunction);
     public override string TrueValue => "Study";
     public override string FalseValue => "";
+    public override string[]? ChangeTrackerNames => new string[] { nameof(CanStudyFunction) };
 }

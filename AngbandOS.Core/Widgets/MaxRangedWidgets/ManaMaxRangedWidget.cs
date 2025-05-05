@@ -28,4 +28,5 @@ internal class ManaMaxRangedWidget : MaxRangedWidget
         (40, null, ColorEnum.BrightYellow),
         (20, null, ColorEnum.Orange)
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(ManaIntProperty) };
 }

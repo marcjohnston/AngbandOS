@@ -18,4 +18,5 @@ internal class GameTimeOfDayTimeWidget : TimeWidget
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string JustificationName => nameof(RightJustification);
     public override string DateAndTimeValueName => nameof(CurrentGameDateTimeProperty);
+    public override string[]? ChangeTrackerNames => new string[] { nameof(CurrentGameDateTimeProperty) };
 }

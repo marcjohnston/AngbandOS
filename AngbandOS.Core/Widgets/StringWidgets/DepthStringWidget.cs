@@ -15,4 +15,5 @@ internal class DepthStringWidget : StringWidget
     public override int Y => 44;
     public override int Width => 9;
     public override string StringValueName => nameof(DepthFunction);
+    public override string[]? ChangeTrackerNames => new string[] { nameof(DepthFunction) };
 }

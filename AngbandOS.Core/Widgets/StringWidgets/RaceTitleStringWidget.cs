@@ -15,5 +15,6 @@ internal class RaceTitleStringWidget : StringWidget
     public override int X => 0;
     public override int Y => 2;
     public override string StringValueName => nameof(RaceTitleFunction);
+    public override string[]? ChangeTrackerNames => new string[] { nameof(RaceTitleFunction) };
 }
 

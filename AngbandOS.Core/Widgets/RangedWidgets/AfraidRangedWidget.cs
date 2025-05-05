@@ -24,4 +24,5 @@ internal class AfraidRangedWidget : RangedWidget
     {
         (1, "Afraid", ColorEnum.Orange),
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(FearTimer) };
 }

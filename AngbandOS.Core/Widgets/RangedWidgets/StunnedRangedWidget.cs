@@ -22,4 +22,5 @@ internal class StunnedRangedWidget : RangedWidget
         (51, "Heavy stun", ColorEnum.Orange),
         (1, "Stun", ColorEnum.Orange)
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(StunnedTimer) };
 }

@@ -27,4 +27,5 @@ internal class HungerRangedWidget : RangedWidget
         (Constants.PyFoodFaint, "Weak", ColorEnum.Orange),
         (0, "Weak", ColorEnum.Red)
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(FoodIntProperty) };
 }

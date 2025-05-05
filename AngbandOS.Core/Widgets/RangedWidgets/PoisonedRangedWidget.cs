@@ -20,4 +20,5 @@ internal class PoisonedRangedWidget : RangedWidget
     {
         (1, "Poisoned", ColorEnum.Orange),
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(PoisonedTimer) };
 }

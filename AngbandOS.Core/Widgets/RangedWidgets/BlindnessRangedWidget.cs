@@ -20,4 +20,5 @@ internal class BlindnessRangedWidget : RangedWidget
     {
         (1, "Blind", ColorEnum.Orange),
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(BlindnessTimer) };
 }

@@ -25,4 +25,5 @@ internal class HealthPointsMaxRangedWidget : MaxRangedWidget
         (40, null, ColorEnum.BrightYellow),
         (20, null, ColorEnum.Orange)
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(HealthPointsIntProperty), nameof(MaxHealthPointsIntProperty) }; // TODO: Why do we need to watch the max health also
 }

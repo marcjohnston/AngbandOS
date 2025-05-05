@@ -26,4 +26,5 @@ internal class CutRangedWidget : RangedWidget
         (11, "Light cut", ColorEnum.Yellow),
         (1, "Graze", ColorEnum.Yellow)
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(BleedingTimer) };
 }

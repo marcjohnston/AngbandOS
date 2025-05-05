@@ -22,4 +22,5 @@ internal class TrapDetectionConditionalWidget : ConditionalWidget
 
     public override string[]? TrueWidgetNames => new string[] { nameof(TrapCountRangedWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(NoTrapsDetectedTextWidget) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(TrapsDetectedFunction) };
 }

@@ -15,5 +15,6 @@ internal class CharacterSubclassNameStringWidget : StringWidget
     public override int X => 0;
     public override int Y => 3;
     public override string StringValueName => nameof(CharacterSubclassNameFunction);
+    public override string[]? ChangeTrackerNames => new string[] { nameof(CharacterSubclassNameFunction) };
 }
 

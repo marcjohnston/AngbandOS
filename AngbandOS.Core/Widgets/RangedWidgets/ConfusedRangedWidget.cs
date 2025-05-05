@@ -20,4 +20,5 @@ internal class ConfusedRangedWidget : RangedWidget
     {
         (1, "Confused", ColorEnum.Orange),
     };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(ConfusedTimer) };
 }

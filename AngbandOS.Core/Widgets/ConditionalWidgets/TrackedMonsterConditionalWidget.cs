@@ -20,4 +20,5 @@ internal class TrackedMonsterConditionalWidget : ConditionalWidget
     };
     public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterRaceNameNullableStringsTextAreaWidget), nameof(TrackedMonsterHealthIsInvisibleConditionalWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(TrackedMonsterRaceNameNullableStringsTextAreaWidget), nameof(NoTrackedMonsterHealthTextWidget) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(PlayerIsTrackingMonsterBoolFunction) };
 }

@@ -21,4 +21,5 @@ internal class ExperiencePointsAtMaxConditionalWidget : ConditionalWidget
     };
     public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsAtMaxTextWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(ExperiencePointsForNextLevelConditionalWidget) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(ExperiencePointsForNextLevelFunction) };
 }

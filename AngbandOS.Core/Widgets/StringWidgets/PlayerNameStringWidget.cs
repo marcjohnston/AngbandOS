@@ -15,5 +15,6 @@ internal class PlayerNameStringWidget : StringWidget
     public override int X => 0;
     public override int Y => 1;
     public override string StringValueName => nameof(PlayerNameStringProperty);
+    public override string[]? ChangeTrackerNames => new string[] { nameof(PlayerNameStringProperty) };
 }
 
