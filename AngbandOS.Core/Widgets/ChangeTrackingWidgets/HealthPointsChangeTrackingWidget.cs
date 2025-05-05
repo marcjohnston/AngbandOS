@@ -14,11 +14,3 @@ internal class HealthPointsChangeTrackingWidget : ChangeTrackingWidget
     public override string[] ChangeTrackerNames => new string[] { nameof(HealthPointsIntProperty), nameof(MaxHealthPointsIntProperty) }; // TODO: Why do we need to watch the max health also
     public override string[] WidgetNames => new string[] { nameof(HealthPointsMaxRangedWidget) };
 }
-
-[Serializable]
-internal class MaxHealthPointsChangeTrackingWidget : ChangeTrackingWidget
-{
-    private MaxHealthPointsChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string[] ChangeTrackerNames => new string[] { nameof(MaxHealthPointsIntProperty) };
-    public override string[] WidgetNames => new string[] { nameof(MaxHealthPointsIntWidget) };
-}

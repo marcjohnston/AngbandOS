@@ -13,10 +13,16 @@
   <ItemGroup>
     <Compile Remove="ConfigurationMetadata\**" />
     <Compile Remove="DirectionalActivations\**" />
+    <Compile Remove="Widgets\NullableTextAreaWidget\**" />
+    <Compile Remove="Widgets\TextAreaWidgets\**" />
     <EmbeddedResource Remove="ConfigurationMetadata\**" />
     <EmbeddedResource Remove="DirectionalActivations\**" />
+    <EmbeddedResource Remove="Widgets\NullableTextAreaWidget\**" />
+    <EmbeddedResource Remove="Widgets\TextAreaWidgets\**" />
     <None Remove="ConfigurationMetadata\**" />
     <None Remove="DirectionalActivations\**" />
+    <None Remove="Widgets\NullableTextAreaWidget\**" />
+    <None Remove="Widgets\TextAreaWidgets\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,11 +34,6 @@
     <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration\AngbandOS.Core.Interface.Configuration.csproj" />
     <ProjectReference Include="..\AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Widgets\NullableTextAreaWidget\" />
-    <Folder Include="Widgets\TextAreaWidgets\" />
   </ItemGroup>
 
 </Project>
