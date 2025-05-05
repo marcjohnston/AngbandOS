@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -30,6 +32,11 @@ internal abstract class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhan
 
     public string ToJson()
     {
-        return "";
+        ItemEnhancementWeightedRandomGameConfiguration definition = new ItemEnhancementWeightedRandomGameConfiguration()
+        {
+            Key = Key,
+            ItemEnhancementBindingKeyAndWeightTuples = ItemEnhancementBindingKeyAndWeightTuples,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 }

@@ -12,7 +12,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
 {
     private AdamantitePlateMailSoulkeeperFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(AdamantitePlateMailHardItemFactory);
+    protected override string BaseItemFactoryName => nameof(AdamantitePlateMailHardArmorItemFactory);
     protected override string? ActivationName => nameof(Heal1000Every888Activation);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";

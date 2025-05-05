@@ -124,6 +124,7 @@ internal class GenericItemFactory : ItemFactory
         XtraMight = itemFactoryGameConfiguration.XtraMight;
         XtraShots = itemFactoryGameConfiguration.XtraShots;
 
+        PreassignedItemFlavorBindingKey = itemFactoryGameConfiguration.PreassignedItemFlavorBindingKey;
         NegativeBonusDamageRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusDamageRepresentsBroken;
         NegativeBonusArmorClassRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusArmorClassRepresentsBroken;
         NegativeBonusHitRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusHitRepresentsBroken;
@@ -174,7 +175,7 @@ internal class GenericItemFactory : ItemFactory
         CanApplyBonusArmorClassMiscPower = itemFactoryGameConfiguration.CanApplyBonusArmorClassMiscPower;
         CanApplyBlowsBonus = itemFactoryGameConfiguration.CanApplyBlowsBonus;
         BreakageChanceProbabilityExpression = itemFactoryGameConfiguration.BreakageChanceProbabilityExpression;
-        MakeObjectCount = itemFactoryGameConfiguration.MakeObjectCount;
+        MakeObjectCountExpression = itemFactoryGameConfiguration.MakeObjectCountExpression;
         GetsDamageMultiplier = itemFactoryGameConfiguration.GetsDamageMultiplier;
         IdentityCanBeSensed = itemFactoryGameConfiguration.IdentityCanBeSensed;
         IsFuelForTorch = itemFactoryGameConfiguration.IsFuelForTorch;
@@ -212,8 +213,8 @@ internal class GenericItemFactory : ItemFactory
         InitialBonusAttacks = itemFactoryGameConfiguration.InitialBonusAttacks;
         InitialBonusInfravision = itemFactoryGameConfiguration.InitialBonusInfravision;
         InitialBonusSpeed = itemFactoryGameConfiguration.InitialBonusSpeed;
-        InitialBonusSearch = itemFactoryGameConfiguration.InitialBonusSearch;
-        InitialBonusStealth = itemFactoryGameConfiguration.InitialBonusStealth;
+        InitialBonusSearchExpression = itemFactoryGameConfiguration.InitialBonusSearchExpression;
+        InitialBonusStealthExpression = itemFactoryGameConfiguration.InitialBonusStealthExpression;
         InitialBonusTunnel = itemFactoryGameConfiguration.InitialBonusTunnel;
         InitialTurnsOfLight = itemFactoryGameConfiguration.InitialTurnsOfLight;
         InitialNutritionalValue = itemFactoryGameConfiguration.InitialNutritionalValue;
@@ -362,6 +363,13 @@ internal class GenericItemFactory : ItemFactory
 
     #endregion
 
+    /// <summary>
+    /// Returns the name of the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
+    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
+    /// This property is used to bind the <see cref="PreassignedItemFlavor"/> property during the binding phase.
+    /// </summary>
+    protected override string? PreassignedItemFlavorBindingKey { get; } = null;
+
     public override bool NegativeBonusDamageRepresentsBroken { get; } = false;
     public override bool NegativeBonusArmorClassRepresentsBroken { get; } = false;
     public override bool NegativeBonusHitRepresentsBroken { get; } = false;
@@ -413,7 +421,7 @@ internal class GenericItemFactory : ItemFactory
     public override bool CanApplyBonusArmorClassMiscPower { get; } = false;
     public override bool CanApplyBlowsBonus { get; } = false;
     protected override string BreakageChanceProbabilityExpression { get; } = "10/100";
-    public override int MakeObjectCount { get; } = 1;
+    protected override string MakeObjectCountExpression { get; } = "1";
     public override bool GetsDamageMultiplier { get; } = false;
     public override bool IdentityCanBeSensed { get; } = false;
     public override bool IsFuelForTorch { get; } = false;
@@ -451,8 +459,8 @@ internal class GenericItemFactory : ItemFactory
     public override int InitialBonusAttacks { get; } = 0;
     public override int InitialBonusInfravision { get; } = 0;
     public override int InitialBonusSpeed { get; } = 0;
-    public override int InitialBonusSearch { get; } = 0;
-    public override int InitialBonusStealth { get; } = 0;
+    protected override string InitialBonusSearchExpression { get; } = "0";
+    protected override string InitialBonusStealthExpression { get; } = "0";
     public override int InitialBonusTunnel { get; } = 0;
     public override int InitialTurnsOfLight { get; } = 0;
     public override int InitialNutritionalValue { get; } = 0;

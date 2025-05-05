@@ -13,7 +13,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
 {
     private MetalScaleMailOfTheOrcsFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(MetalScaleMailHardItemFactory);
+    protected override string BaseItemFactoryName => nameof(MetalScaleMailHardArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {

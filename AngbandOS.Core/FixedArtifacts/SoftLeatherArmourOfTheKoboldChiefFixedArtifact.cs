@@ -13,7 +13,7 @@ internal class SoftLeatherArmorOfTheKoboldChiefFixedArtifact : FixedArtifact
 {
     private SoftLeatherArmorOfTheKoboldChiefFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(SoftLeatherSoftItemFactory);
+    protected override string BaseItemFactoryName => nameof(SoftLeatherSoftArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {

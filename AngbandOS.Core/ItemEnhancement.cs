@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -142,7 +144,6 @@ internal abstract class ItemEnhancement : IGetKey
         return itemCharacteristics;
     }
 
-    public virtual string Key => GetType().Name;
     public string GetKey => Key;
     public bool AppliesTo(ItemFactory itemFactory)
     {
@@ -178,9 +179,124 @@ internal abstract class ItemEnhancement : IGetKey
         ApplicableItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(ApplicableItemFactoryBindingKeys);
     }
 
-    public string ToJson()
+    public virtual string ToJson()
     {
-        return "";
+        ItemEnhancementGameConfiguration itemEnhancementDefinition = new()
+        {
+            Key = Key,
+            Value = Value,
+            ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
+            AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
+            FriendlyName = FriendlyName,
+            BonusStrengthRollExpression = BonusStrengthRollExpression,
+            BonusIntelligenceRollExpression = BonusIntelligenceRollExpression,
+            BonusWisdomRollExpression = BonusWisdomRollExpression,
+            BonusDexterityRollExpression = BonusDexterityRollExpression,
+            BonusConstitutionRollExpression = BonusConstitutionRollExpression,
+            BonusCharismaRollExpression = BonusCharismaRollExpression,
+            BonusStealthRollExpression = BonusStealthRollExpression,
+            BonusSearchRollExpression = BonusSearchRollExpression,
+            BonusInfravisionRollExpression = BonusInfravisionRollExpression,
+            BonusTunnelRollExpression = BonusTunnelRollExpression,
+            BonusAttacksRollExpression = BonusAttacksRollExpression,
+            BonusSpeedRollExpression = BonusSpeedRollExpression,
+            BonusArmorClassRollExpression = BonusArmorClassRollExpression,
+            BonusHitRollExpression = BonusHitRollExpression,
+            BonusDamageRollExpression = BonusDamageRollExpression,
+            ActivationName = ActivationName,
+            Aggravate = Aggravate,
+            AntiTheft = AntiTheft,
+            ArtifactBiasWeightedRandomBindingKey = ArtifactBiasWeightedRandomBindingKey,
+            Blessed = Blessed,
+            Blows = Blows,
+            BrandAcid = BrandAcid,
+            BrandCold = BrandCold,
+            BrandElec = BrandElec,
+            BrandFire = BrandFire,
+            BrandPois = BrandPois,
+            Cha = Cha,
+            Chaotic = Chaotic,
+            Con = Con,
+            IsCursed = IsCursed,
+            Dex = Dex,
+            DrainExp = DrainExp,
+            DreadCurse = DreadCurse,
+            EasyKnow = EasyKnow,
+            Feather = Feather,
+            FreeAct = FreeAct,
+            HeavyCurse = HeavyCurse,
+            HideType = HideType,
+            HoldLife = HoldLife,
+            IgnoreAcid = IgnoreAcid,
+            IgnoreCold = IgnoreCold,
+            IgnoreElec = IgnoreElec,
+            IgnoreFire = IgnoreFire,
+            ImAcid = ImAcid,
+            ImCold = ImCold,
+            ImElec = ImElec,
+            ImFire = ImFire,
+            Impact = Impact,
+            Infra = Infra,
+            InstaArt = InstaArt,
+            Int = Int,
+            KillDragon = KillDragon,
+            NoMagic = NoMagic,
+            NoTele = NoTele,
+            PermaCurse = PermaCurse,
+            Radius = Radius,
+            Reflect = Reflect,
+            Regen = Regen,
+            ResAcid = ResAcid,
+            ResBlind = ResBlind,
+            ResChaos = ResChaos,
+            ResCold = ResCold,
+            ResConf = ResConf,
+            ResDark = ResDark,
+            ResDisen = ResDisen,
+            ResElec = ResElec,
+            ResFear = ResFear,
+            ResFire = ResFire,
+            ResLight = ResLight,
+            ResNether = ResNether,
+            ResNexus = ResNexus,
+            ResPois = ResPois,
+            ResShards = ResShards,
+            ResSound = ResSound,
+            Search = Search,
+            SeeInvis = SeeInvis,
+            ShElec = ShElec,
+            ShFire = ShFire,
+            ShowMods = ShowMods,
+            SlayAnimal = SlayAnimal,
+            SlayDemon = SlayDemon,
+            SlayDragon = SlayDragon,
+            SlayEvil = SlayEvil,
+            SlayGiant = SlayGiant,
+            SlayOrc = SlayOrc,
+            SlayTroll = SlayTroll,
+            SlayUndead = SlayUndead,
+            SlowDigest = SlowDigest,
+            Speed = Speed,
+            Stealth = Stealth,
+            Str = Str,
+            SustCha = SustCha,
+            SustCon = SustCon,
+            SustDex = SustDex,
+            SustInt = SustInt,
+            SustStr = SustStr,
+            SustWis = SustWis,
+            Telepathy = Telepathy,
+            Teleport = Teleport,
+            TreasureRating = TreasureRating,
+            Tunnel = Tunnel,
+            Vampiric = Vampiric,
+            Vorpal = Vorpal,
+            Wis = Wis,
+            Wraith = Wraith,
+            XtraMight = XtraMight,
+            XtraShots = XtraShots,
+        };
+        return JsonSerializer.Serialize(itemEnhancementDefinition, Game.GetJsonSerializerOptions());
     }
     #endregion
 
@@ -232,6 +348,13 @@ internal abstract class ItemEnhancement : IGetKey
     #endregion
 
     #region Unique ItemEnhancement Light-weight Virtual & Abstract Properties
+    public virtual string Key => GetType().Name;
+
+    /// <summary>
+    /// Returns the value of the enhancement.
+    /// </summary>
+    public virtual int? Value => null;
+
     /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
@@ -239,11 +362,6 @@ internal abstract class ItemEnhancement : IGetKey
     protected virtual string[]? ApplicableItemFactoryBindingKeys => null;
 
     protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey => null;
-
-    /// <summary>
-    /// Returns the value of the enhancement.
-    /// </summary>
-    public virtual int? Value => null;
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
@@ -276,7 +394,7 @@ internal abstract class ItemEnhancement : IGetKey
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    protected virtual string? ActivationName { get; }
+    protected virtual string? ActivationName => null;
 
     /// <inheritdoc />
     public virtual bool Aggravate => false;

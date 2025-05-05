@@ -54,7 +54,7 @@ public class GameConfiguration
     public virtual ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
 
     /// <entity-noun>AmuletReadableFlavor</entity-noun>
-    public virtual ItemFlavorGameConfiguration[]? AmuletReadableFlavors { get; set; } = null;
+    public virtual ItemFlavorGameConfiguration[]? ItemFlavors { get; set; } = null;
 
     /// <entity-noun>MushroomReadableFlavor</entity-noun>
     public virtual ItemFlavorGameConfiguration[]? MushroomReadableFlavors { get; set; } = null;
@@ -103,4 +103,10 @@ public class GameConfiguration
     public virtual string[]? FunnyDescriptions { get; set; } = null;
     public virtual string[]? FunnyComments { get; set; } = null;
     public virtual string[]? HorrificDescriptions { get; set; } = null;
+    public virtual ArtifactBiasWeightedRandomGameConfiguration[]? ArtifactBiasWeightedRandoms {get; set; } = null;
+    public virtual ItemClassGameConfiguration[]? ItemClasses { get; set; } = null;
+    public virtual ItemEnhancementGameConfiguration[]? ItemEnhancements { get; set; } = null;
+    public virtual ItemEnhancementWeightedRandomGameConfiguration[]? ItemEnhancementWeightedRandoms { get; set; } = null;
+    public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
+    public virtual ProjectileWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
 }

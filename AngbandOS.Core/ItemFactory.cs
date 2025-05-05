@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -38,13 +40,6 @@ internal abstract class ItemFactory : ItemEnhancement
     /// </summary>
     [Obsolete("This property is available via the IFlavor.Flavor property.")]
     public ColorEnum FlavorColor;
-
-    /// <summary>
-    /// Returns the name of the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
-    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
-    /// This property is used to bind the <see cref="PreassignedItemFlavor"/> property during the binding phase.
-    /// </summary>
-    protected virtual string? PreassignedItemFlavorBindingKey => null;
 
     /// <summary>
     /// Returns the the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
@@ -98,6 +93,248 @@ internal abstract class ItemFactory : ItemEnhancement
     #endregion
 
     #region Concrete Methods and Properties (Non-abstract and non-virtual) - API Object Functionality
+    public override string ToJson()
+    {
+        ItemFactoryGameConfiguration itemFactoryGameConfiguration = new ItemFactoryGameConfiguration()
+        {
+            Key = Key,
+            ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
+            AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
+            Value = Value,
+            FriendlyName = FriendlyName,
+            BonusStrengthRollExpression = BonusStrengthRollExpression,
+            BonusIntelligenceRollExpression = BonusIntelligenceRollExpression,
+            BonusWisdomRollExpression = BonusWisdomRollExpression,
+            BonusDexterityRollExpression = BonusDexterityRollExpression,
+            BonusConstitutionRollExpression = BonusConstitutionRollExpression,
+            BonusCharismaRollExpression = BonusCharismaRollExpression,
+            BonusStealthRollExpression = BonusStealthRollExpression,
+            BonusSearchRollExpression = BonusSearchRollExpression,
+            BonusInfravisionRollExpression = BonusInfravisionRollExpression,
+            BonusTunnelRollExpression = BonusTunnelRollExpression,
+            BonusAttacksRollExpression = BonusAttacksRollExpression,
+            BonusSpeedRollExpression = BonusSpeedRollExpression,
+            BonusArmorClassRollExpression = BonusArmorClassRollExpression,
+            BonusDamageRollExpression = BonusDamageRollExpression,
+            BonusHitRollExpression = BonusHitRollExpression,
+            ActivationName = ActivationName,
+            Aggravate = Aggravate,
+            AntiTheft = AntiTheft,
+            ArtifactBiasWeightedRandomBindingKey = ArtifactBiasWeightedRandomBindingKey,
+            Blessed = Blessed,
+            Blows = Blows,
+            BrandAcid = BrandAcid,
+            BrandCold = BrandCold,
+            BrandElec = BrandElec,
+            BrandFire = BrandFire,
+            BrandPois = BrandPois,
+            Cha = Cha,
+            Chaotic = Chaotic,
+            Con = Con,
+            IsCursed = IsCursed,
+            Dex = Dex,
+            DrainExp = DrainExp,
+            DreadCurse = DreadCurse,
+            EasyKnow = EasyKnow,
+            Feather = Feather,
+            FreeAct = FreeAct,
+            HeavyCurse = HeavyCurse,
+            HideType = HideType,
+            HoldLife = HoldLife,
+            IgnoreAcid = IgnoreAcid,
+            IgnoreCold = IgnoreCold,
+            IgnoreElec = IgnoreElec,
+            IgnoreFire = IgnoreFire,
+            ImAcid = ImAcid,
+            ImCold = ImCold,
+            ImElec = ImElec,
+            ImFire = ImFire,
+            Impact = Impact,
+            Infra = Infra,
+            InstaArt = InstaArt,
+            Int = Int,
+            KillDragon = KillDragon,
+            NoMagic = NoMagic,
+            NoTele = NoTele,
+            PermaCurse = PermaCurse,
+            Radius = Radius,
+            Reflect = Reflect,
+            Regen = Regen,
+            ResAcid = ResAcid,
+            ResBlind = ResBlind,
+            ResChaos = ResChaos,
+            ResCold = ResCold,
+            ResConf = ResConf,
+            ResDark = ResDark,
+            ResDisen = ResDisen,
+            ResElec = ResElec,
+            ResFear = ResFear,
+            ResFire = ResFire,
+            ResLight = ResLight,
+            ResNether = ResNether,
+            ResNexus = ResNexus,
+            ResPois = ResPois,
+            ResShards = ResShards,
+            ResSound = ResSound,
+            Search = Search,
+            SeeInvis = SeeInvis,
+            ShElec = ShElec,
+            ShFire = ShFire,
+            ShowMods = ShowMods,
+            SlayAnimal = SlayAnimal,
+            SlayDemon = SlayDemon,
+            SlayDragon = SlayDragon,
+            SlayEvil = SlayEvil,
+            SlayGiant = SlayGiant,
+            SlayOrc = SlayOrc,
+            SlayTroll = SlayTroll,
+            SlayUndead = SlayUndead,
+            SlowDigest = SlowDigest,
+            Speed = Speed,
+            Stealth = Stealth,
+            Str = Str,
+            SustCha = SustCha,
+            SustCon = SustCon,
+            SustDex = SustDex,
+            SustInt = SustInt,
+            SustStr = SustStr,
+            SustWis = SustWis,
+            Telepathy = Telepathy,
+            Teleport = Teleport,
+            TreasureRating = TreasureRating,
+            Tunnel = Tunnel,
+            Vampiric = Vampiric,
+            Vorpal = Vorpal,
+            Wis = Wis,
+            Wraith = Wraith,
+            XtraMight = XtraMight,
+            XtraShots = XtraShots,
+
+            PreassignedItemFlavorBindingKey = PreassignedItemFlavorBindingKey,
+            NegativeBonusDamageRepresentsBroken = NegativeBonusDamageRepresentsBroken,
+            NegativeBonusArmorClassRepresentsBroken = NegativeBonusArmorClassRepresentsBroken,
+            NegativeBonusHitRepresentsBroken = NegativeBonusHitRepresentsBroken,
+            SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey = SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey,
+            RandomArtifactBonusArmorCeiling = RandomArtifactBonusArmorCeiling,
+            RandomArtifactBonusHitCeiling = RandomArtifactBonusHitCeiling,
+            RandomArtifactBonusDamageCeiling = RandomArtifactBonusDamageCeiling,
+            RefillScriptBindingKey = RefillScriptBindingKey,
+            SymbolBindingKey = SymbolBindingKey,
+            CanBeWeaponOfLaw = CanBeWeaponOfLaw,
+            CanBeWeaponOfSharpness = CanBeWeaponOfSharpness,
+            CapableOfVorpalSlaying = CapableOfVorpalSlaying,
+            Color = Color,
+            UseBindingTuple = UseBindingTuple,
+            QuaffBindingTuple = QuaffBindingTuple,
+            AmmunitionItemFactoryBindingKeys = AmmunitionItemFactoryBindingKeys,
+            CanSpikeDoorClosed = CanSpikeDoorClosed,
+            CanTunnel = CanTunnel,
+            CanProjectArrows = CanProjectArrows,
+            EnchantmentMaximumCount = EnchantmentMaximumCount,
+            IsMagical = IsMagical,
+            ValuePerTurnOfLight = ValuePerTurnOfLight,
+            AimingBindingTuple = AimingBindingTuple,
+            IsBroken = IsBroken,
+            InitialBrokenStomp = InitialBrokenStomp,
+            InitialAverageStomp = InitialAverageStomp,
+            InitialGoodStomp = InitialGoodStomp,
+            InitialExcellentStomp = InitialExcellentStomp,
+            RechargeScriptBindingKey = RechargeScriptBindingKey,
+            IsIgnoredByMonsters = IsIgnoredByMonsters,
+            IsContainer = IsContainer,
+            IsRangedWeapon = IsRangedWeapon,
+            MissileDamageMultiplier = MissileDamageMultiplier,
+            MaxPhlogiston = MaxPhlogiston,
+            BurnRate = BurnRate,
+            MassProduceBindingTuples = MassProduceBindingTuples,
+            BonusHitRealValueMultiplier = BonusHitRealValueMultiplier,
+            BonusDamageRealValueMultiplier = BonusDamageRealValueMultiplier,
+            BonusArmorClassRealValueMultiplier = BonusArmorClassRealValueMultiplier,
+            BonusDiceRealValueMultiplier = BonusDiceRealValueMultiplier,
+            BreaksDuringEnchantmentProbabilityExpression = BreaksDuringEnchantmentProbabilityExpression,
+            EnchantmentBindingTuples = EnchantmentBindingTuples,
+            EatMagicScriptBindingKey = EatMagicScriptBindingKey,
+            GridProcessWorldScriptBindingKey = GridProcessWorldScriptBindingKey,
+            MonsterProcessWorldScriptBindingKey = MonsterProcessWorldScriptBindingKey,
+            EquipmentProcessWorldScriptBindingKey = EquipmentProcessWorldScriptBindingKey,
+            PackProcessWorldScriptBindingKey = PackProcessWorldScriptBindingKey,
+            CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
+            CanApplyBlowsBonus = CanApplyBlowsBonus,
+            BreakageChanceProbabilityExpression = BreakageChanceProbabilityExpression,
+            MakeObjectCountExpression = MakeObjectCountExpression,
+            GetsDamageMultiplier = GetsDamageMultiplier,
+            IdentityCanBeSensed = IdentityCanBeSensed,
+            IsFuelForTorch = IsFuelForTorch,
+            IsWearableOrWieldable = IsWearableOrWieldable,
+            CanBeEaten = CanBeEaten,
+            IsArmor = IsArmor,
+            IsWeapon = IsWeapon,
+            NumberOfItemsContained = NumberOfItemsContained,
+            Name = Name,
+            DescriptionSyntax = DescriptionSyntax,
+            AlternateDescriptionSyntax = AlternateDescriptionSyntax,
+            FlavorSuppressedDescriptionSyntax = FlavorSuppressedDescriptionSyntax,
+            AlternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax,
+            FlavorUnknownDescriptionSyntax = FlavorUnknownDescriptionSyntax,
+            AlternateFlavorUnknownDescriptionSyntax = AlternateFlavorUnknownDescriptionSyntax,
+            ZapBindingTuple = ZapBindingTuple,
+            ItemClassBindingKey = ItemClassBindingKey,
+            IsLanternFuel = IsLanternFuel,
+            PackSort = PackSort,
+            WieldSlotBindingKeys = WieldSlotBindingKeys,
+            AskDestroyAll = AskDestroyAll,
+            HasQualityRatings = HasQualityRatings,
+            ArmorClass = ArmorClass,
+            DepthsFoundAndChances = DepthsFoundAndChances,
+            Cost = Cost,
+            DamageDice = DamageDice,
+            DamageSides = DamageSides,
+            LevelNormallyFound = LevelNormallyFound,
+            InitialBonusCharisma = InitialBonusCharisma,
+            InitialBonusConstitution = InitialBonusConstitution,
+            InitialBonusDexterity = InitialBonusDexterity,
+            InitialBonusIntelligence = InitialBonusIntelligence,
+            InitialBonusStrength = InitialBonusStrength,
+            InitialBonusWisdom = InitialBonusWisdom,
+            InitialBonusAttacks = InitialBonusAttacks,
+            InitialBonusInfravision = InitialBonusInfravision,
+            InitialBonusSpeed = InitialBonusSpeed,
+            InitialBonusSearchExpression = InitialBonusSearchExpression,
+            InitialBonusStealthExpression = InitialBonusStealthExpression,
+            InitialBonusTunnel = InitialBonusTunnel,
+            InitialTurnsOfLight = InitialTurnsOfLight,
+            InitialNutritionalValue = InitialNutritionalValue,
+            InitialGoldPiecesRollExpression = InitialGoldPiecesRollExpression,
+            ExperienceGainDivisorForDestroying = ExperienceGainDivisorForDestroying,
+            SpellBindingKeys = SpellBindingKeys,
+            BonusArmorClass = BonusArmorClass,
+            BonusDamage = BonusDamage,
+            BonusHit = BonusHit,
+            Weight = Weight,
+            IsSmall = IsSmall,
+            CanApplySlayingBonus = CanApplySlayingBonus,
+            BaseValue = BaseValue,
+            HatesElectricity = HatesElectricity,
+            HatesFire = HatesFire,
+            HatesAcid = HatesAcid,
+            HatesCold = HatesCold,
+            CanProvideSheathOfElectricity = CanProvideSheathOfElectricity,
+            CanProvideSheathOfFire = CanProvideSheathOfFire,
+            CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
+            RandartActivationChance = RandartActivationChance,
+            ProvidesSunlight = ProvidesSunlight,
+            CanApplyArtifactBiasSlaying = CanApplyArtifactBiasSlaying,
+            CanApplyArtifactBiasResistance = CanApplyArtifactBiasResistance,
+            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
+            CanBeEatenByMonsters = CanBeEatenByMonsters,
+            EatScriptBindingKey = EatScriptBindingKey,
+            VanishesWhenEatenBySkeletons = VanishesWhenEatenBySkeletons,
+            IsConsumedWhenEaten = IsConsumedWhenEaten,
+            ReadBindingTuple = ReadBindingTuple,
+        };
+        return JsonSerializer.Serialize(itemFactoryGameConfiguration, Game.GetJsonSerializerOptions());
+    }
+
     public Item GenerateItem()
     {
         return new Item(Game, this);
@@ -174,7 +411,11 @@ internal abstract class ItemFactory : ItemEnhancement
         FlavorSymbol = Symbol;
         FlavorColor = Color;
 
+        MakeObjectCount = Game.ParseNumericExpression(MakeObjectCountExpression);
         WieldSlots = Game.SingletonRepository.Get<WieldSlot>(WieldSlotBindingKeys);
+
+        InitialBonusSearch = Game.ParseNumericExpression(InitialBonusSearchExpression);
+        InitialBonusStealth = Game.ParseNumericExpression(InitialBonusStealthExpression);
 
         // Bind the MassProduceTuples
         if (MassProduceBindingTuples != null)
@@ -1357,6 +1598,14 @@ internal abstract class ItemFactory : ItemEnhancement
     #endregion
 
     #region Bound Concrete Properties - API Object Functionality - Set during Bind() - get; private set;
+    public Expression InitialBonusSearch { get; private set; }
+    public Expression InitialBonusStealth { get; private set; }
+
+    /// <summary>
+    /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
+    /// </summary>
+    public Expression MakeObjectCount { get; private set; }
+
     public ItemEnhancementWeightedRandom? SlayingRandomArtifactItemEnhancementWeightedRandom { get; private set; }
 
     /// <summary>
@@ -1461,6 +1710,13 @@ internal abstract class ItemFactory : ItemEnhancement
     #endregion
 
     #region Light-Weight Virtual and Abstract Properties - Action Hooks and Behavior Modifiers for Game Packs and Generic API Objects
+    /// <summary>
+    /// Returns the name of the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
+    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
+    /// This property is used to bind the <see cref="PreassignedItemFlavor"/> property during the binding phase.
+    /// </summary>
+    protected virtual string? PreassignedItemFlavorBindingKey => null;
+
     public virtual bool NegativeBonusDamageRepresentsBroken => false;
     public virtual bool NegativeBonusArmorClassRepresentsBroken => false;
     public virtual bool NegativeBonusHitRepresentsBroken => false;
@@ -1692,10 +1948,7 @@ internal abstract class ItemFactory : ItemEnhancement
     /// </summary>
     protected virtual string BreakageChanceProbabilityExpression => "10/100";
 
-    /// <summary>
-    /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
-    /// </summary>
-    public virtual int MakeObjectCount => 1;
+    protected virtual string MakeObjectCountExpression => "1";
 
     /// <summary>
     /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
@@ -1867,12 +2120,12 @@ internal abstract class ItemFactory : ItemEnhancement
     /// <summary>
     /// Returns the initial amount of bonus search to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusSearch => 0;
+    protected virtual string InitialBonusSearchExpression => "0";
 
     /// <summary>
     /// Returns the initial amount of bonus stealth to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusStealth => 0;
+    protected virtual string InitialBonusStealthExpression => "0";
 
     /// <summary>
     /// Returns the initial amount of bonus tunnel to be assigned to the item.

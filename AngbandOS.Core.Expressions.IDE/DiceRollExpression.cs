@@ -5,6 +5,9 @@ public class DiceRollExpression : InfixExpression
     public DiceRollExpression(Expression dice, Expression sides) : base(dice, sides) { }
     public Expression Dice => base.Operand1;
     public Expression Sides => base.Operand2;
+
+    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
+
     public override Expression Compute()
     {
         Expression dice = Dice.Compute();

@@ -47,7 +47,7 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
     {
         nameof(SmallSwordWeaponItemFactory),
         nameof(HealingPotionItemFactory),
-        nameof(SoftLeatherSoftItemFactory)
+        nameof(SoftLeatherSoftArmorItemFactory)
     };
 
     public override void CalcBonuses()

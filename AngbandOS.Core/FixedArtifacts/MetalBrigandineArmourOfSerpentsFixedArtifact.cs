@@ -13,7 +13,7 @@ internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
 {
     private MetalBrigandineArmorOfSerpentsFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(MetalBrigandineHardItemFactory);
+    protected override string BaseItemFactoryName => nameof(MetalBrigandineHardArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {

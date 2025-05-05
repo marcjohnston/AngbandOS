@@ -1,3 +1,6 @@
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -41,7 +44,15 @@ internal abstract class ItemClass : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        ItemClassGameConfiguration definition = new ItemClassGameConfiguration()
+        {
+            Key = Key,
+            Name = Name,
+            AllowStomp  = AllowStomp,
+            NumberOfFlavorsToGenerate  = NumberOfFlavorsToGenerate,
+            ItemFlavorBindingKeys  = ItemFlavorBindingKeys,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     public virtual string Key => GetType().Name;
@@ -52,3 +63,4 @@ internal abstract class ItemClass : IGetKey
         ItemFlavorRepository = Game.SingletonRepository.GetNullable<ItemFlavor>(ItemFlavorBindingKeys);
     }
 }
+

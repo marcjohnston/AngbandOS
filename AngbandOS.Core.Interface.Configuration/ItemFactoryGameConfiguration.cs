@@ -126,6 +126,13 @@ public class ItemFactoryGameConfiguration
 
     #endregion
 
+    /// <summary>
+    /// Returns the name of the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
+    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
+    /// This property is used to bind the <see cref="PreassignedItemFlavor"/> property during the binding phase.
+    /// </summary>
+    public virtual string? PreassignedItemFlavorBindingKey { get; set; } = null;
+
     public virtual bool NegativeBonusDamageRepresentsBroken { get; set; } = false;
     public virtual bool NegativeBonusArmorClassRepresentsBroken { get; set; } = false;
     public virtual bool NegativeBonusHitRepresentsBroken { get; set; } = false;
@@ -360,7 +367,7 @@ public class ItemFactoryGameConfiguration
     /// <summary>
     /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
     /// </summary>
-    public virtual int MakeObjectCount { get; set; } = 1;
+    public virtual string MakeObjectCountExpression { get; set; } = "1";
 
     /// <summary>
     /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
@@ -532,12 +539,12 @@ public class ItemFactoryGameConfiguration
     /// <summary>
     /// Returns the initial amount of bonus search to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusSearch { get; set; } = 0;
+    public virtual string InitialBonusSearchExpression { get; set; } = "0";
 
     /// <summary>
     /// Returns the initial amount of bonus stealth to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusStealth { get; set; } = 0;
+    public virtual string InitialBonusStealthExpression { get; set; } = "0";
 
     /// <summary>
     /// Returns the initial amount of bonus tunnel to be assigned to the item.

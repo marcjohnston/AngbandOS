@@ -82,7 +82,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(BroadSwordWeaponItemFactory),
-        nameof(MetalScaleMailHardItemFactory)
+        nameof(MetalScaleMailHardArmorItemFactory)
     };
 
     public override void CalcBonuses()

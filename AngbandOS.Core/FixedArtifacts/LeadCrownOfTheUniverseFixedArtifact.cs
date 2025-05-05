@@ -12,7 +12,7 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 {
     private LeadCrownOfTheUniverseFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(LeadCrownItemFactory);
+    protected override string BaseItemFactoryName => nameof(LeadCrownArmorItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.Black;

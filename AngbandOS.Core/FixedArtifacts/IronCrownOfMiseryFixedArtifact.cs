@@ -12,7 +12,7 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 {
     private IronCrownOfMiseryFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(IronCrownItemFactory);
+    protected override string BaseItemFactoryName => nameof(IronCrownArmorItemFactory);
 
 
     public override void ApplyResistances(Item item)

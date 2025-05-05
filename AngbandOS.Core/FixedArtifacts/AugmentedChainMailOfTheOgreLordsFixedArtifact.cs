@@ -13,7 +13,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
 {
     private AugmentedChainMailOfTheOgreLordsFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(AugmentedChainMailHardItemFactory);
+    protected override string BaseItemFactoryName => nameof(AugmentedChainMailHardArmorItemFactory);
 
     // Ogre Lords destroys doors
     protected override string? ActivationName => nameof(DestroyDoorsEvery10Activation);

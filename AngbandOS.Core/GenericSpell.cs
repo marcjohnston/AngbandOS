@@ -14,8 +14,8 @@ internal class GenericSpell : Spell
     {
         Key = spellGameConfiguration.Key ?? spellGameConfiguration.GetType().Name;
         Name = spellGameConfiguration.Name;
-        CastScriptNames = spellGameConfiguration.CastScriptName;
-        CastFailedScriptNames = spellGameConfiguration.CastFailedScriptName;
+        CastScriptNames = spellGameConfiguration.CastScriptNames;
+        CastFailedScriptNames = spellGameConfiguration.CastFailedScriptNames;
         LearnedDetails = spellGameConfiguration.LearnedDetails;
     }
 

@@ -250,7 +250,7 @@ internal sealed class Item : IComparable<Item>
     public int? MaxPhlogiston => _factory.MaxPhlogiston;
     public bool IsMagical => _factory.IsMagical;
     public ItemClass ItemClass => _factory.ItemClass;
-    public int MakeObjectCount  => _factory.MakeObjectCount ;
+    public int MakeObjectCount  => Game.ComputeIntegerExpression(_factory.MakeObjectCount).Value;
     public int LevelNormallyFound => _factory.LevelNormallyFound;
     public int NumberOfItemsContained => _factory.NumberOfItemsContained;
     public int EnchantmentMaximumCount => _factory.EnchantmentMaximumCount;

@@ -35,8 +35,8 @@ internal abstract class Spell : IGetKey
         SpellGameConfiguration definition = new()
         {
             Key = Key,
-            CastScriptName = CastScriptNames,
-            CastFailedScriptName = CastFailedScriptNames,
+            CastScriptNames = CastScriptNames,
+            CastFailedScriptNames = CastFailedScriptNames,
             Name = Name,
             LearnedDetails = LearnedDetails
         };

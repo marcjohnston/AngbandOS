@@ -50,7 +50,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     {
         nameof(FearResistanceRingItemFactory),
         nameof(BroadSwordWeaponItemFactory),
-        nameof(ChainMailHardItemFactory)
+        nameof(ChainMailHardArmorItemFactory)
     };
     public override void CalcBonuses()
     {

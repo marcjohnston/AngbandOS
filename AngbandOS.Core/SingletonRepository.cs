@@ -345,6 +345,7 @@ internal class SingletonRepository
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
+        LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, GenericArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
@@ -352,12 +353,17 @@ internal class SingletonRepository
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GenericGameCommand>(gameConfiguration.GameCommands);
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
-        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, GenericItemFlavor>(gameConfiguration.AmuletReadableFlavors);
+        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration, GenericItemClass>(gameConfiguration.ItemClasses);
+        LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration, GenericItemEnhancement>(gameConfiguration.ItemEnhancements);
+        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, GenericItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
+        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration, GenericItemFactory>(gameConfiguration.ItemFactories);
+        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, GenericItemFlavor>(gameConfiguration.ItemFlavors);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, GenericProjectileScript>(gameConfiguration.ProjectileScripts);
+        LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, GenericProjectileWeightedRandomScript>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
@@ -373,7 +379,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<ActivationWeightedRandom>();
         LoadAllAssemblyTypes<AlterAction>();
         LoadAllAssemblyTypes<ArtifactBias>();
-        LoadAllAssemblyTypes<ArtifactBiasWeightedRandom>();
         LoadAllAssemblyTypes<AttackEffect>();
         LoadAllAssemblyTypes<BirthStage>();
         LoadAllAssemblyTypes<BaseCharacterClass>();
@@ -385,11 +390,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Form>();
         LoadAllAssemblyTypes<Gender>();
         LoadAllAssemblyTypes<ItemAction>();
-        LoadAllAssemblyTypes<ItemClass>();
         LoadAllAssemblyTypes<ItemEffect>();
-        LoadAllAssemblyTypes<ItemEnhancement>();
-        LoadAllAssemblyTypes<ItemEnhancementWeightedRandom>();
-        LoadAllAssemblyTypes<ItemFactory>();
         LoadAllAssemblyTypes<ItemFactoryGenericWeightedRandom>();
         LoadAllAssemblyTypes<ItemFilter>();
         LoadAllAssemblyTypes<ItemQualityRating>();
@@ -402,7 +403,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<Patron>();
         LoadAllAssemblyTypes<PlayerEffect>();
-        LoadAllAssemblyTypes<ProjectileWeightedRandomScript>();
         LoadAllAssemblyTypes<Race>();
         LoadAllAssemblyTypes<Realm>();
         LoadAllAssemblyTypes<RenderMessageScript>();
@@ -482,7 +482,11 @@ internal class SingletonRepository
                 switch (singleton)
                 {
                     case IGetKey getKeySingleton:
-                        string key = getKeySingleton.GetKey;
+                        string? key = getKeySingleton.GetKey;
+                        if (key is null)
+                        {
+                            throw new Exception($"The singleton {type.Name} has a null key value.  This may be the result of a the json deserialization.");
+                        }
 
                         // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.
                         if (!_allSingletonsList.Contains(getKeySingleton))

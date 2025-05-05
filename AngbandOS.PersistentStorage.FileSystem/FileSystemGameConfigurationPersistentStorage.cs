@@ -104,7 +104,7 @@ namespace AngbandOS.PersistentStorage
 
             return new GameConfiguration()
             {
-                AmuletReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("AmuletReadableFlavors"),
+                ItemFlavors = LoadEntities<ItemFlavorGameConfiguration>("AmuletReadableFlavors"),
                 Animations = LoadEntities<AnimationGameConfiguration>("Animations"),
                 Attacks = LoadEntities<AttackGameConfiguration>("Attacks"),
                 ClassSpells = LoadEntities<ClassSpellGameConfiguration>("ClassSpells"),
