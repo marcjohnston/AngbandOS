@@ -38,12 +38,6 @@ public class DoomAmuletItemFactory : ItemFactoryGameConfiguration
     {
         (50, 1)
     };
-    public override int InitialBonusStrength => -5;
-    public override int InitialBonusCharisma => -5;
-    public override int InitialBonusConstitution => -5;
-    public override int InitialBonusIntelligence => -5;
-    public override int InitialBonusDexterity => -5;
-    public override int InitialBonusWisdom => -5;
     public override bool Str => true;
     public override int Weight => 3;
     public override bool Wis => true;

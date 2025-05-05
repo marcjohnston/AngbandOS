@@ -204,12 +204,6 @@ internal class GenericItemFactory : ItemFactory
         DamageDice = itemFactoryGameConfiguration.DamageDice;
         DamageSides = itemFactoryGameConfiguration.DamageSides;
         LevelNormallyFound = itemFactoryGameConfiguration.LevelNormallyFound;
-        InitialBonusCharisma = itemFactoryGameConfiguration.InitialBonusCharisma;
-        InitialBonusConstitution = itemFactoryGameConfiguration.InitialBonusConstitution;
-        InitialBonusDexterity = itemFactoryGameConfiguration.InitialBonusDexterity;
-        InitialBonusIntelligence = itemFactoryGameConfiguration.InitialBonusIntelligence;
-        InitialBonusStrength = itemFactoryGameConfiguration.InitialBonusStrength;
-        InitialBonusWisdom = itemFactoryGameConfiguration.InitialBonusWisdom;
         InitialBonusAttacks = itemFactoryGameConfiguration.InitialBonusAttacks;
         InitialBonusInfravision = itemFactoryGameConfiguration.InitialBonusInfravision;
         InitialBonusSpeed = itemFactoryGameConfiguration.InitialBonusSpeed;
@@ -450,12 +444,6 @@ internal class GenericItemFactory : ItemFactory
     public override int DamageDice { get; } = 0;
     public override int DamageSides { get; } = 0;
     public override int LevelNormallyFound { get; } = 0;
-    public override int InitialBonusCharisma { get; } = 0;
-    public override int InitialBonusConstitution { get; } = 0;
-    public override int InitialBonusDexterity { get; } = 0;
-    public override int InitialBonusIntelligence { get; } = 0;
-    public override int InitialBonusStrength { get; } = 0;
-    public override int InitialBonusWisdom { get; } = 0;
     public override int InitialBonusAttacks { get; } = 0;
     public override int InitialBonusInfravision { get; } = 0;
     public override int InitialBonusSpeed { get; } = 0;

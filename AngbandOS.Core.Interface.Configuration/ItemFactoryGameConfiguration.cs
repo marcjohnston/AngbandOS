@@ -492,36 +492,6 @@ public class ItemFactoryGameConfiguration
     public virtual int LevelNormallyFound { get; set; } = 0;
 
     /// <summary>
-    /// Returns the initial amount of bonus charisma to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusCharisma { get; set; } = 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus constitution to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusConstitution { get; set; } = 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus dexterity to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusDexterity { get; set; } = 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus intelligence to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusIntelligence { get; set; } = 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus strength to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusStrength { get; set; } = 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus wisdom to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusWisdom { get; set; } = 0;
-
-    /// <summary>
     /// Returns the initial amount of bonus attacks to be assigned to the item.
     /// </summary>
     public virtual int InitialBonusAttacks { get; set; } = 0;

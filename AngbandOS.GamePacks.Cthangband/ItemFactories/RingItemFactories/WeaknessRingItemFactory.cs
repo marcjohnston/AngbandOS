@@ -30,7 +30,7 @@ public class WeaknessRingItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int InitialBonusStrength => -5;
+    public override string? BonusStrengthRollExpression => "-5";
     public override bool Str => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;

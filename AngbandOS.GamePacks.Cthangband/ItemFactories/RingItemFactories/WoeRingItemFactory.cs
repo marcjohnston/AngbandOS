@@ -35,7 +35,6 @@ public class WoeRingItemFactory : ItemFactoryGameConfiguration
     {
         (50, 1)
     };
-    public override int InitialBonusWisdom => -5;
     public override bool Teleport => true;
     public override int Weight => 2;
     public override bool Wis => true;

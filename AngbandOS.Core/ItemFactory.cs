@@ -290,12 +290,6 @@ internal abstract class ItemFactory : ItemEnhancement
             DamageDice = DamageDice,
             DamageSides = DamageSides,
             LevelNormallyFound = LevelNormallyFound,
-            InitialBonusCharisma = InitialBonusCharisma,
-            InitialBonusConstitution = InitialBonusConstitution,
-            InitialBonusDexterity = InitialBonusDexterity,
-            InitialBonusIntelligence = InitialBonusIntelligence,
-            InitialBonusStrength = InitialBonusStrength,
-            InitialBonusWisdom = InitialBonusWisdom,
             InitialBonusAttacks = InitialBonusAttacks,
             InitialBonusInfravision = InitialBonusInfravision,
             InitialBonusSpeed = InitialBonusSpeed,
@@ -2071,36 +2065,6 @@ internal abstract class ItemFactory : ItemEnhancement
     public virtual int DamageSides => 0;
 
     public virtual int LevelNormallyFound => 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus charisma to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusCharisma => 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus constitution to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusConstitution => 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus dexterity to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusDexterity => 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus intelligence to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusIntelligence => 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus strength to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusStrength => 0;
-
-    /// <summary>
-    /// Returns the initial amount of bonus wisdom to be assigned to the item.
-    /// </summary>
-    public virtual int InitialBonusWisdom => 0;
 
     /// <summary>
     /// Returns the initial amount of bonus attacks to be assigned to the item.

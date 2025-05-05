@@ -35,7 +35,6 @@ public class StupidityRingItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int InitialBonusIntelligence => -5;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
