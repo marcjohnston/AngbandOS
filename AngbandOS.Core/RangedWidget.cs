@@ -96,6 +96,7 @@ internal abstract class RangedWidget : TextWidget
             Ranges = Ranges,
             IntValueName = IntValueName,
             DefaultText = DefaultText,
+            DefaultColor = DefaultColor,
             X = X,
             Y = Y,
             Width = Width,

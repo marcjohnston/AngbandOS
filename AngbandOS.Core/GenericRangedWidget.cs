@@ -16,6 +16,7 @@ internal class GenericRangedWidget : RangedWidget
         Ranges = rangedWidgetGameConfiguration.Ranges;
         IntValueName = rangedWidgetGameConfiguration.IntValueName;
         DefaultText = rangedWidgetGameConfiguration.DefaultText;
+        DefaultColor = rangedWidgetGameConfiguration.DefaultColor;
         X = rangedWidgetGameConfiguration.X;
         Y = rangedWidgetGameConfiguration.Y;
         Width = rangedWidgetGameConfiguration.Width;
@@ -36,6 +37,11 @@ internal class GenericRangedWidget : RangedWidget
     /// Returns the text to be rendered, when none of the ranges apply.  Returns an empty string, by default.
     /// </summary>
     protected override string DefaultText { get; }
+
+    /// <summary>
+    /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.  Returns the color white, by default.
+    /// </summary>
+    protected override ColorEnum DefaultColor { get; } 
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.

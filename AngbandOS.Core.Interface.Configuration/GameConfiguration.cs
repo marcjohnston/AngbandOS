@@ -109,7 +109,8 @@ public class GameConfiguration
     public virtual ItemEnhancementWeightedRandomGameConfiguration[]? ItemEnhancementWeightedRandoms { get; set; } = null;
     public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
     public virtual ProjectileWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
-    
+
+    public virtual BoolWidgetGameConfiguration[]? BoolWidgets { get; set; } = null;
     public virtual ConditionalWidgetGameConfiguration[]? ConditionalWidgets { get; set; } = null;
     public virtual DateWidgetGameConfiguration[]? DateWidgets { get; set; } = null;
     public virtual IntWidgetGameConfiguration[]? IntWidgets { get; set; } = null;

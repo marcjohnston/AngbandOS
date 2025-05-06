@@ -11,7 +11,7 @@ public class TextWidgetGameConfiguration
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public virtual ColorEnum Color { get; set; }
+    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
@@ -32,7 +32,7 @@ public class TextWidgetGameConfiguration
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName { get; set; }
+    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

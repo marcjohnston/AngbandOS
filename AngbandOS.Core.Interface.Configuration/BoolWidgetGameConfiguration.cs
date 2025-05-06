@@ -26,7 +26,7 @@ public class BoolWidgetGameConfiguration
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public virtual int Width { get; set; }
+    public virtual int? Width { get; set; }
 
     /// <summary>
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property

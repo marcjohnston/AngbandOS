@@ -18,26 +18,3 @@ internal class TrackedMonsterIsDeadBoolFunction : BoolFunction
     public override bool BoolValue => Game.TrackedMonster.Value != null && Game.TrackedMonster.Value.Health < 0;
     public override string[]? DependencyNames => new string[] { nameof(TrackedMonsterNullableMonsterProperty), nameof(TrackedMonsterChangedProperty) };
 }
-
-/// <summary>
-/// Represents an integer function that returns -1, when the player is not tracking a monster or the health of the monster.
-/// </summary>
-[Serializable]
-internal class TrackedMonsterHealthIntFunction : IntFunction
-{
-    private TrackedMonsterHealthIntFunction(Game game) : base(game) { } // This object is a singleton.
-    public override int Value => Game.TrackedMonster.Value == null ? -1 : Game.TrackedMonster.Value.Health;
-    public override string[]? DependencyNames => new string[] { nameof(TrackedMonsterNullableMonsterProperty), nameof(TrackedMonsterChangedProperty) };
-}
-
-
-/// <summary>
-/// Represents an integer function that returns -1, when the player is not tracking a monster or the health of the monster.
-/// </summary>
-[Serializable]
-internal class TrackedMonsterMaxHealthIntFunction : IntFunction
-{
-    private TrackedMonsterMaxHealthIntFunction(Game game) : base(game) { } // This object is a singleton.
-    public override int Value => Game.TrackedMonster.Value == null ? -1 : Game.TrackedMonster.Value.MaxHealth;
-    public override string[]? DependencyNames => new string[] { nameof(TrackedMonsterNullableMonsterProperty), nameof(TrackedMonsterChangedProperty) };
-}

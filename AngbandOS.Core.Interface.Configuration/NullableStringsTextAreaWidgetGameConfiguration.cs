@@ -35,7 +35,13 @@ public class NullableStringsTextAreaWidgetGameConfiguration
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName { get; set; }
+    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
+
+    /// <summary>
+    /// Returns the name of the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is used to bind the <see cref="Alignment"/>
+    /// property during the bind phase.
+    /// </summary>
+    public virtual string AlignmentName { get; set; }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

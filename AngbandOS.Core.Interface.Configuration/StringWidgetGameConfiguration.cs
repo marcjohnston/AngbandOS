@@ -29,7 +29,7 @@ public class StringWidgetGameConfiguration
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName { get; set; }
+    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

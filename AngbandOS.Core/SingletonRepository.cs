@@ -267,6 +267,7 @@ internal class SingletonRepository
         RegisterRepository<Activation>();
         RegisterRepository<BaseCharacterClass>();
         RegisterRepository<BirthStage>();
+        RegisterRepository<BoolWidget>();
         RegisterRepository<ChestTrap>();
         RegisterRepository<ChestTrapConfiguration>();
         RegisterRepository<ClassSpell>();
@@ -356,6 +357,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, GenericArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
+        LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration, GenericBoolWidget>(gameConfiguration.BoolWidgets);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, GenericConditionalWidget>(gameConfiguration.ConditionalWidgets);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, GenericDateWidget>(gameConfiguration.DateWidgets);

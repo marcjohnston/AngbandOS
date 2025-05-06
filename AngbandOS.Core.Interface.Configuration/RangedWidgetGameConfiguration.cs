@@ -15,7 +15,12 @@ public class RangedWidgetGameConfiguration
     /// <summary>
     /// Returns the text to be rendered, when none of the ranges apply.  Returns an empty string, by default.
     /// </summary>
-    public virtual string DefaultText { get; set; }
+    public virtual string DefaultText { get; set; } = "";
+
+    /// <summary>
+    /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.  Returns the color white, by default.
+    /// </summary>
+    public virtual ColorEnum DefaultColor { get; set; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
@@ -36,7 +41,7 @@ public class RangedWidgetGameConfiguration
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName { get; set; }
+    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

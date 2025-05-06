@@ -33,6 +33,7 @@ internal abstract class NullableStringsTextAreaWidget : NullableTextAreaWidget
             X = X,
             Y = Y,
             JustificationName = JustificationName,
+            AlignmentName = AlignmentName,
             ChangeTrackerNames = ChangeTrackerNames,
         };
         return JsonSerializer.Serialize(nullableStringsTextAreaWidgetGameConfiguration, Game.GetJsonSerializerOptions());

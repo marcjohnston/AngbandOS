@@ -21,6 +21,7 @@ internal class GenericNullableStringsTextAreaWidget : NullableStringsTextAreaWid
         Width = nullableStringsTextAreaWidgetGameConfiguration.Width;
         Height = nullableStringsTextAreaWidgetGameConfiguration.Height;
         JustificationName = nullableStringsTextAreaWidgetGameConfiguration.JustificationName;
+        AlignmentName = nullableStringsTextAreaWidgetGameConfiguration.AlignmentName;
         ChangeTrackerNames = nullableStringsTextAreaWidgetGameConfiguration.ChangeTrackerNames;
     }
 
@@ -57,6 +58,12 @@ internal class GenericNullableStringsTextAreaWidget : NullableStringsTextAreaWid
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
     public override string JustificationName { get; }
+
+    /// <summary>
+    /// Returns the name of the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is used to bind the <see cref="Alignment"/>
+    /// property during the bind phase.
+    /// </summary>
+    public override string AlignmentName { get; }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

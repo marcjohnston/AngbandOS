@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+
 namespace AngbandOS.GamePacks.Cthangband;
 
 public class CthangbandGameConfiguration : GameConfiguration
@@ -1989,5 +1991,113 @@ public class CthangbandGameConfiguration : GameConfiguration
         new ZincPlatedWandItemFlavor(),
         new ZincWandItemFlavor(),
         new ZirconiumWandItemFlavor(),
+    };
+
+    
+    public override BoolWidgetGameConfiguration[]? BoolWidgets => new BoolWidgetGameConfiguration[]
+    {
+        new StudyBoolWidget(),
+    };
+
+    public override ConditionalWidgetGameConfiguration[]? ConditionalWidgets => new ConditionalWidgetGameConfiguration[]
+    {
+        new ExperienceLevelConditionalWidget(),
+        new ExperiencePointsAtMaxConditionalWidget(),
+        new ExperiencePointsForNextLevelConditionalWidget(),
+        new ManaConditionalWidget(),
+        new PlayerIsHallucinatingTrackedMonsterHealthConditionalWidget(),
+        new PlayerTitleConditionalWidget(),
+        new TrackedMonsterConditionalWidget(),
+        new TrackedMonsterHealthIsAfraidConditionalWidget(),
+        new TrackedMonsterHealthIsDeadConditionalWidget(),
+        new TrackedMonsterHealthIsFriendlyConditionalWidget(),
+        new TrackedMonsterHealthIsInvisibleConditionalWidget(),
+        new TrackedMonsterHealthIsSleepingConditionalWidget(),
+        new TrapDetectionConditionalWidget(),
+        new WinnerConditionalWidget(),
+    };
+
+    public override DateWidgetGameConfiguration[]? DateWidgets => new DateWidgetGameConfiguration[]
+    {
+        new GameDayDateWidget(),
+    };
+
+    public override IntWidgetGameConfiguration[]? IntWidgets => new IntWidgetGameConfiguration[]
+    {
+        new ArmorClassIntWidget(),
+        new ExperienceLevelIntWidget(),
+        new ExperienceLevelLostIntWidget(),
+        new ExperiencePointsForNextLevelIntWidget(),
+        new ExperiencePointsForNextLevelLostIntWidget(),
+        new GoldIntWidget(),
+        new MaxHealthPointsIntWidget(),
+        new MaxManaIntWidget(),
+    };
+
+    public override MapWidgetGameConfiguration[]? MapWidgets => new MapWidgetGameConfiguration[]
+    {
+        new DungeonMapWidget(),
+    };
+
+    public override MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets => new MaxRangedWidgetGameConfiguration[]
+    {
+        new HealthPointsMaxRangedWidget(),
+        new ManaMaxRangedWidget(),
+        new TrackedMonsterHealthMaxRangedWidget(),
+    };
+
+    public override RangedWidgetGameConfiguration[]? RangedWidgets => new RangedWidgetGameConfiguration[]
+    {
+        new AfraidRangedWidget(),
+        new BlindnessRangedWidget(),
+        new ConfusedRangedWidget(),
+        new CutRangedWidget(),
+        new HungerRangedWidget(),
+        new PoisonedRangedWidget(),
+        new StunnedRangedWidget(),
+        new TrapCountRangedWidget(),
+    };
+
+    public override StringWidgetGameConfiguration[]? StringWidgets => new StringWidgetGameConfiguration[]
+    {
+        new CharacterSubclassNameStringWidget(),
+        new DepthStringWidget(),
+        new PlayerNameStringWidget(),
+        new RaceTitleStringWidget(),
+    };
+
+    public override TextWidgetGameConfiguration[]? TextWidgets => new TextWidgetGameConfiguration[]
+    {
+        new ArmorClassLabelTextWidget(),
+        new ExperienceLevelLabelTextWidget(),
+        new ExperienceLevelLostLabelTextWidget(),
+        new ExperiencePointsAtMaxTextWidget(),
+        new ExperiencePointsLabelTextWidget(),
+        new GameDateLabelTextWidget(),
+        new GameTimeLabelTextWidget(),
+        new GoldLabelTextWidget(),
+        new HealthPointsLabelTextWidget(),
+        new ManaLabelTextWidget(),
+        new MaxHealthPointsLabelTextWidget(),
+        new MaxManaLabelTextWidget(),
+        new NoTrackedMonsterHealthTextWidget(),
+        new NoTrapsDetectedTextWidget(),
+        new PlayerTitleTextWidget(),
+        new TrackedMonsterHealthIsAfraidTextWidget(),
+        new TrackedMonsterHealthIsFriendlyTextWidget(),
+        new TrackedMonsterHealthIsSleepingTextWidget(),
+        new TrackedMonsterHealthUnknownTextWidget(),
+        new WinnerTitleTextWidget(),
+        new WizardTitleTextWidget(),
+    };
+
+    public override TimeWidgetGameConfiguration[]? TimeWidgets => new TimeWidgetGameConfiguration[]
+    {
+        new GameTimeOfDayTimeWidget(),
+    };
+
+    public override NullableStringsTextAreaWidgetGameConfiguration[]? NullableStringsTextAreaWidgets => new NullableStringsTextAreaWidgetGameConfiguration[]
+    {
+        new TrackedMonsterRaceNameNullableStringsTextAreaWidget(),
     };
 }
