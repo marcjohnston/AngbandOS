@@ -43,14 +43,7 @@ internal abstract class Shopkeeper : IGetKey
 
     public void Bind()
     {
-        if (RaceName == null)
-        {
-            OwnerRace = null;
-        }
-        else
-        {
-            OwnerRace = Game.SingletonRepository.Get<Race>(RaceName);
-        }
+        OwnerRace = Game.SingletonRepository.GetNullable<Race>(RaceName);
     }
 
     public string ToJson()
