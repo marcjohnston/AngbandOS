@@ -385,6 +385,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
+        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, GenericStoreFactory>(gameConfiguration.StoreFactories);
         LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, GenericStringWidget>(gameConfiguration.StringWidgets);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, GenericSyllableSet>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
@@ -431,7 +432,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<RoomLayout>();
         LoadAllAssemblyTypes<Script>();
         LoadAllAssemblyTypes<SpellResistantDetection>();
-        LoadAllAssemblyTypes<StoreFactory>();
         LoadAllAssemblyTypes<SummonScript>();
         LoadAllAssemblyTypes<SummonWeightedRandom>();
         LoadAllAssemblyTypes<Talent>();

@@ -72,7 +72,7 @@ public static class TileMetadata
                 {
                     DefaultValue = null,
                     Description = "Returns true, if the tile type blocks the scent trail.  Defaults to return true, if the tile type blocks line of sight; false, otherwise.  Secret doors typically block line of sight but will allow the scent to pass through.",
-                    IsNullable = false,
+                    IsNullable = true,
                     Title = "Blocks Scent",
                     CategoryTitle = "",
                 },

@@ -16,22 +16,29 @@ internal class GenericTile : Tile
         AlterActionName = tileGameConfiguration.AlterActionName;
         BlocksLos = tileGameConfiguration.BlocksLos;
         BlocksScent = tileGameConfiguration.BlocksScent;
+        CanBeClosed = tileGameConfiguration.CanBeClosed;
         Color = tileGameConfiguration.Color;
         Description = tileGameConfiguration.Description;
         DimsOutsideLOS = tileGameConfiguration.DimsOutsideLOS;
+        HasWater = tileGameConfiguration.HasWater;
         HiddenTreasureForTileName = tileGameConfiguration.HiddenTreasureForTileName;
         IsBasicWall = tileGameConfiguration.IsBasicWall;
         IsBorder = tileGameConfiguration.IsBorder;
         IsClosedDoor = tileGameConfiguration.IsClosedDoor;
+        IsDownStaircase = tileGameConfiguration.IsDownStaircase;
+        IsGrass = tileGameConfiguration.IsGrass;
         IsInteresting = tileGameConfiguration.IsInteresting;
+        IsInvisibleTrap = tileGameConfiguration.IsInvisibleTrap;
         IsJammedClosedDoor = tileGameConfiguration.IsJammedClosedDoor;
         IsMagma = tileGameConfiguration.IsMagma;
         IsOpenDoor = tileGameConfiguration.IsOpenDoor;
         IsOpenFloor = tileGameConfiguration.IsOpenFloor;
         IsPassable = tileGameConfiguration.IsPassable;
         IsPath = tileGameConfiguration.IsPath;
+        IsPathBase = tileGameConfiguration.IsPathBase;
         IsPermanent = tileGameConfiguration.IsPermanent;
         IsRevealedWithDetectStairsScript = tileGameConfiguration.IsRevealedWithDetectStairsScript;
+        IsRock = tileGameConfiguration.IsRock;
         IsRubble = tileGameConfiguration.IsRubble;
         IsSecretDoor = tileGameConfiguration.IsSecretDoor;
         IsShop = tileGameConfiguration.IsShop;
@@ -40,26 +47,30 @@ internal class GenericTile : Tile
         IsTreasure = tileGameConfiguration.IsTreasure;
         IsTree = tileGameConfiguration.IsTree;
         IsUnidentifiedTrap = tileGameConfiguration.IsUnidentifiedTrap;
+        IsUpStaircase = tileGameConfiguration.IsUpStaircase;
         IsVein = tileGameConfiguration.IsVein;
         IsVisibleDoor = tileGameConfiguration.IsVisibleDoor;
         IsVisibleTreasure = tileGameConfiguration.IsVisibleTreasure;
         IsWall = tileGameConfiguration.IsWall;
-        IsRock = tileGameConfiguration.IsRock;
         IsWater = tileGameConfiguration.IsWater;
-        HasWater = tileGameConfiguration.HasWater;
         IsWildPath = tileGameConfiguration.IsWildPath;
-        IsGrass = tileGameConfiguration.IsGrass;
-        IsDownStaircase = tileGameConfiguration.IsDownStaircase;
-        IsUpStaircase = tileGameConfiguration.IsUpStaircase;
+        IsYellowSignSigil = tileGameConfiguration.IsYellowSignSigil;
         Key = tileGameConfiguration.Key ?? tileGameConfiguration.GetType().Name;
         LockLevel = tileGameConfiguration.LockLevel;
         MapPriority = tileGameConfiguration.MapPriority;
         MimicTileName = tileGameConfiguration.MimicTileName;
+        OnJammedTileName = tileGameConfiguration.OnJammedTileName;
         RunPast = tileGameConfiguration.RunPast;
         StepOnScriptName = tileGameConfiguration.StepOnScriptName;
         SymbolName = tileGameConfiguration.SymbolName;
+        VisibleTreasureForTileName = tileGameConfiguration.VisibleTreasureForTileName;
         YellowInTorchlight = tileGameConfiguration.YellowInTorchlight;
     }
+
+    public override bool IsYellowSignSigil { get; } = false;
+    public override bool CanBeClosed { get; } = false;
+    public override bool IsInvisibleTrap { get; } = false;
+    public override bool IsPathBase { get; } = false;
 
     protected override string? OnJammedTileName { get; }
     protected override string? VisibleTreasureForTileName { get; }
@@ -102,7 +113,7 @@ internal class GenericTile : Tile
     /// Returns true, if the tile type blocks the scent trail.  Defaults to return true, if the tile type blocks line of sight; false, otherwise.  Secret doors typically block line of sight but will allow
     /// the scent to pass through.
     /// </summary>
-    public override bool BlocksScent { get; }
+    public override bool? BlocksScent { get; }
 
     /// <summary>
     /// Returns null, if the tile type is not a hidden treasure; otherwise, when the tile is a hidden treasure, the visible tile type is returned.

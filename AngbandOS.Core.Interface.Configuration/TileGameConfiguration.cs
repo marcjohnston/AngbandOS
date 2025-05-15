@@ -3,8 +3,12 @@
 [Serializable]
 public class TileGameConfiguration
 {
-    protected virtual string? OnJammedTileName => null;
-    protected virtual string? VisibleTreasureForTileName => null;
+    public virtual bool IsPathBase { get; set; } = false;
+    public virtual bool CanBeClosed { get; set; } = false;
+    public virtual bool IsInvisibleTrap { get; set; } = false;
+    public virtual string? OnJammedTileName { get; set; } = null;
+    public virtual string? VisibleTreasureForTileName { get; set; } = null;
+    public virtual bool IsYellowSignSigil { get; set; } = false;
 
     public virtual string Key { get; set; }
 
@@ -34,7 +38,7 @@ public class TileGameConfiguration
     /// Returns true, if the tile type blocks the scent trail.  Defaults to return true, if the tile type blocks line of sight; false, otherwise.  Secret doors typically block line of sight but will allow
     /// the scent to pass through.
     /// </summary>
-    public virtual bool BlocksScent { get; set; }
+    public virtual bool? BlocksScent { get; set; }
 
     /// <summary>
     /// Returns null, if the tile type is not a hidden treasure; otherwise, when the tile is a hidden treasure, the visible tile type is returned.

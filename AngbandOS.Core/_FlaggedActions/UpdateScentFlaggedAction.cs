@@ -17,12 +17,19 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private void UpdateFlowAux(int y, int x, int n)
     {
         int oldHead = _flowHead;
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[1][1];
+        try
+        {
+            cPtr = Game.Map.Grid[y][x];
+        }
+        catch (Exception ex)
+        {
+        }
         if (cPtr.ScentAge == _flowN)
         {
             return;
         }
-        if (cPtr.FeatureType.BlocksScent)
+        if (cPtr.FeatureType.BlocksScent ?? cPtr.FeatureType.BlocksLos)
         {
             return;
         }

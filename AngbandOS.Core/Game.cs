@@ -1114,8 +1114,16 @@ internal class Game
     /// </summary>
     public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7 }; // The final direction [8] and a non-directional value of 5 has been removed because it is not used.
 
+    /// <summary>
+    /// 0=South, 1=North, 2=East, 3=West, 4=SE, 5=SW, 6=NE, 7=NW, 8=0,0
+    /// </summary>
     public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
+
+    /// <summary>
+    /// 0=South, 1=North, 2=East, 3=West, 4=SE, 5=SW, 6=NE, 7=NW, 8=0,0
+    /// </summary>
     public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
+
     public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
     public readonly int[] TempY = new int[Constants.TempMax]; // TODO: These are shared privates??? what a hack
 
@@ -6713,39 +6721,6 @@ internal class Game
     }
 
     /// <summary>
-    /// Count the number of open doors around the players location, puting the location of the
-    /// last one found into a map coordinate
-    /// </summary>
-    /// <param name="mapCoordinate">
-    /// The map coordinate into which the location should be placed
-    /// </param>
-    /// <returns> The number of open doors found </returns>
-    public int CountOpenDoors(out GridCoordinate? mapCoordinate)
-    {
-        int count = 0;
-        mapCoordinate = null;
-        for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
-        {
-            int yy = MapY.IntValue + OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX.IntValue + OrderedDirectionXOffset[orderedDirection];
-            // We must be aware of the door
-            if (!Map.Grid[yy][xx].PlayerMemorized)
-            {
-                continue;
-            }
-            // It must actually be an open door
-            if (Map.Grid[yy][xx].FeatureType is not OpenDoorTile)
-            {
-                continue;
-            }
-            count++;
-            // Remember the location
-            mapCoordinate = new GridCoordinate(xx, yy);
-        }
-        return count;
-    }
-
-    /// <summary>
     /// Heavily curse the players armor. 
     /// </summary>
     /// <returns>
@@ -7311,7 +7286,7 @@ internal class Game
             _artificialKeyBuffer += SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
         }
         // If we've just stepped on an unknown trap then activate it
-        else if (tile.FeatureType is InvisibleTile)
+        else if (tile.FeatureType.IsInvisibleTrap)
         {
             Disturb(false);
             MsgPrint("You found a trap!");
@@ -12345,7 +12320,7 @@ internal class Game
         {
             for (int y = 1; y < CurHgt - 1; y++)
             {
-                if (Map.Grid[y][x].FeatureType is not PathBaseTile)
+                if (!Map.Grid[y][x].FeatureType.IsPathBase)
                 {
                     continue;
                 }
@@ -15472,7 +15447,7 @@ internal class Game
     public void PickTrap(int y, int x)
     {
         GridTile cPtr = Map.Grid[y][x];
-        if (cPtr.FeatureType is not InvisibleTile)
+        if (!cPtr.FeatureType.IsInvisibleTrap)
         {
             return;
         }
@@ -15571,7 +15546,7 @@ internal class Game
         {
             return;
         }
-        CaveSetFeat(y, x, SingletonRepository.Get<Tile>(nameof(InvisibleTile)));
+        CaveSetFeat(y, x, SingletonRepository.Get<Tile>(nameof(InvisibleTrap)));
     }
 
     public bool PlayerCanSeeBold(int y, int x)
@@ -15617,7 +15592,7 @@ internal class Game
             {
                 return true;
             }
-            if (dist != 0 && !GridPassable(y, x) && Map.Grid[y][x].FeatureType is not YellowSignSigilTile)
+            if (dist != 0 && !GridPassable(y, x) && !Map.Grid[y][x].FeatureType.IsYellowSignSigil)
             {
                 break;
             }

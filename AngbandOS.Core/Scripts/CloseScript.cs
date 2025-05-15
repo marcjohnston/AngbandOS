@@ -27,6 +27,39 @@ internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScri
     }
 
     /// <summary>
+    /// Count the number of open doors around the players location, puting the location of the
+    /// last one found into a map coordinate
+    /// </summary>
+    /// <param name="mapCoordinate">
+    /// The map coordinate into which the location should be placed
+    /// </param>
+    /// <returns> The number of open doors found </returns>
+    private int CountOpenDoors(out GridCoordinate? mapCoordinate)
+    {
+        int count = 0;
+        mapCoordinate = null;
+        for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
+        {
+            int yy = Game.MapY.IntValue + Game.OrderedDirectionYOffset[orderedDirection];
+            int xx = Game.MapX.IntValue + Game.OrderedDirectionXOffset[orderedDirection];
+            // We must be aware of the door
+            if (!Game.Map.Grid[yy][xx].PlayerMemorized)
+            {
+                continue;
+            }
+            // It must actually be an open door
+            if (Game.Map.Grid[yy][xx].FeatureType.CanBeClosed)
+            {
+                continue;
+            }
+            count++;
+            // Remember the location
+            mapCoordinate = new GridCoordinate(xx, yy);
+        }
+        return count;
+    }
+
+    /// <summary>
     /// Executes the close script and returns true, if the close failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
@@ -34,7 +67,7 @@ internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScri
     {
         bool isRepeatable = false;
         // If there's only one door, assume we mean that one and don't ask for a direction
-        if (Game.CountOpenDoors(out GridCoordinate? coord) == 1)
+        if (CountOpenDoors(out GridCoordinate? coord) == 1)
         {
             Game.CommandDirection = Game.CoordsToDir(coord.Y, coord.X);
         }
