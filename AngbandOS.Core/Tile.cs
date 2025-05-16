@@ -246,7 +246,7 @@ internal abstract class Tile : IGetKey
     public virtual bool IsRock => false;
 
     /// <summary>
-    /// Returns true, if the tile is rubble.  Returns false, by default.  Rubble returns true.
+    /// Returns true, if the tile is rubble.  Returns false, by default.  The RubbleTile returns true.
     /// </summary>
     public virtual bool IsRubble => false;
 

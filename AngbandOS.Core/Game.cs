@@ -5489,7 +5489,7 @@ internal class Game
                                 {
                                     continue;
                                 }
-                                if (Map.Grid[y][x].FeatureType is YellowSignSigilTile)
+                                if (Map.Grid[y][x].FeatureType.IsYellowSignSigil)
                                 {
                                     continue;
                                 }
@@ -7069,7 +7069,7 @@ internal class Game
             // If we can't see it and haven't memories it, tell us what we bumped into
             if (!tile.PlayerMemorized && (BlindnessTimer.Value != 0 || !tile.PlayerLit))
             {
-                if (tile.FeatureType is RubbleTile)
+                if (tile.FeatureType.IsRubble)
                 {
                     MsgPrint("You feel some rubble blocking your way.");
                     tile.PlayerMemorized = true;
@@ -8872,7 +8872,7 @@ internal class Game
                     continue;
                 }
                 // Can't summon onto a Yellow Sign
-                if (Map.Grid[y][x].FeatureType is YellowSignSigilTile)
+                if (Map.Grid[y][x].FeatureType.IsYellowSignSigil)
                 {
                     continue;
                 }

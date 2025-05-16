@@ -1082,7 +1082,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're going to move onto a Yellow Sign and we can attack
-            else if (doMove && tile.FeatureType is YellowSignSigilTile && !Race.NeverAttack)
+            else if (doMove && tile.FeatureType.IsYellowSignSigil && !Race.NeverAttack)
             {
                 // Assume we're not moving
                 doMove = false;
@@ -3142,7 +3142,7 @@ internal class Monster : IItemContainer
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType is YellowSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType.IsYellowSignSigil)
                 {
                     continue;
                 }

@@ -61,7 +61,7 @@ internal class SearchScript : Script, IScript, ICastSpellScript, IGameCommandScr
                 {
                     // If there's a trap, then find it
                     GridTile tile = Game.Map.Grid[y][x];
-                    if (tile.FeatureType is InvisibleTrap)
+                    if (tile.FeatureType.IsInvisibleTrap)
                     {
                         // Pick a random trap to replace the undetected one with
                         Game.PickTrap(y, x);

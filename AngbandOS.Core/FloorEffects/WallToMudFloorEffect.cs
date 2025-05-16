@@ -55,7 +55,7 @@ internal class WallToMudFloorEffect : FloorEffect
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
         }
-        else if (cPtr.FeatureType is RubbleTile)
+        else if (cPtr.FeatureType.IsRubble)
         {
             if (cPtr.PlayerMemorized)
             {
