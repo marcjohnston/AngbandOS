@@ -5485,11 +5485,7 @@ internal class Game
                                 {
                                     continue;
                                 }
-                                if (Map.Grid[y][x].FeatureType is ElderSignSigilTile)
-                                {
-                                    continue;
-                                }
-                                if (Map.Grid[y][x].FeatureType.IsYellowSignSigil)
+                                if (Map.Grid[y][x].FeatureType.IsEarthquakeResistant)
                                 {
                                     continue;
                                 }
@@ -6598,7 +6594,7 @@ internal class Game
     {
         EnergyUse = 100;
         GridTile cPtr = Map.Grid[y][x];
-        if (cPtr.FeatureType is BrokenDoorTile)
+        if (cPtr.FeatureType.IsBrokenDoor)
         {
             MsgPrint("The door appears to be broken.");
         }
@@ -7081,7 +7077,7 @@ internal class Game
                     tile.PlayerMemorized = true;
                     MainForm.RefreshMapLocation(newY, newX);
                 }
-                else if (tile.FeatureType is PillarTile)
+                else if (tile.FeatureType.IsPillar)
                 {
                     MsgPrint("You feel a pillar blocking your way.");
                     tile.PlayerMemorized = true;
@@ -7148,7 +7144,7 @@ internal class Game
             // We can see it, so give a different message
             else
             {
-                if (tile.FeatureType is RubbleTile)
+                if (tile.FeatureType.IsRubble)
                 {
                     MsgPrint("There is rubble blocking your way.");
                     if (!(ConfusedTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
@@ -7162,7 +7158,7 @@ internal class Game
                     tile.PlayerMemorized = true;
                     MainForm.RefreshMapLocation(newY, newX);
                 }
-                else if (tile.FeatureType is PillarTile)
+                else if (tile.FeatureType.IsPillar)
                 {
                     MsgPrint("There is a pillar blocking your way.");
                     tile.PlayerMemorized = true;
@@ -8282,7 +8278,7 @@ internal class Game
             }
         }
         // Pillars are a bit easier than walls
-        else if (tile.FeatureType is PillarTile)
+        else if (tile.FeatureType.IsPillar)
         {
             if (SkillDigging > 40 + RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
             {
@@ -8366,7 +8362,7 @@ internal class Game
             }
         }
         // Rubble is easy to tunnel through
-        else if (tile.FeatureType is RubbleTile)
+        else if (tile.FeatureType.IsRubble)
         {
             if (SkillDigging > RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
             {
@@ -8867,7 +8863,7 @@ internal class Game
                     continue;
                 }
                 // Can't summon onto an Elder Sign
-                if (Map.Grid[y][x].FeatureType is ElderSignSigilTile)
+                if (Map.Grid[y][x].FeatureType.IsElderSignSigil)
                 {
                     continue;
                 }

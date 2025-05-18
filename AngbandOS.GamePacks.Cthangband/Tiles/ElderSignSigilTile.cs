@@ -21,4 +21,6 @@ public class ElderSignSigilTile : TileGameConfiguration
     /// Returns false, because monsters cannot occupy Sigil tiles.
     /// </summary>
     public override bool AllowMonsterToOccupy => false;
+
+    public override bool IsEarthquakeResistant => true;
 }

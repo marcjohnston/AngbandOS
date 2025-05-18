@@ -21,4 +21,5 @@ public class WallPermentSolidTile : TileGameConfiguration
     public override int MapPriority => 10;
     public override bool RunPast => true;
     public override bool YellowInTorchlight => true;
+    public override bool IsWallPermanentSolid => true;
 }

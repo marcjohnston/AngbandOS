@@ -48,7 +48,7 @@ internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScri
                 continue;
             }
             // It must actually be an open door
-            if (Game.Map.Grid[yy][xx].FeatureType.CanBeClosed)
+            if (!Game.Map.Grid[yy][xx].FeatureType.CanBeClosed)
             {
                 continue;
             }

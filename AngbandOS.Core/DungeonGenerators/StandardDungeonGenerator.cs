@@ -710,35 +710,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 tmpCol = col1 + colDir;
             }
             cPtr = Game.Map.Grid[tmpRow][tmpCol];
-            if (cPtr.FeatureType is WallPermentSolidTile)
+            if (cPtr.FeatureType.IsWallPermanentSolid)
             {
                 continue;
             }
-            if (cPtr.FeatureType is WallPermanentOuterTile)
+            if (cPtr.FeatureType.IsWallPermanentOuter)
             {
                 continue;
             }
-            if (cPtr.FeatureType is WallSolidTile)
+            if (cPtr.FeatureType.IsWallSolid)
             {
                 continue;
             }
-            if (cPtr.FeatureType is WallOuterTile)
+            if (cPtr.FeatureType.IsWallOuter)
             {
                 y = tmpRow + rowDir;
                 x = tmpCol + colDir;
-                if (Game.Map.Grid[y][x].FeatureType is WallPermentSolidTile)
+                if (Game.Map.Grid[y][x].FeatureType.IsWallPermanentSolid)
                 {
                     continue;
                 }
-                if (Game.Map.Grid[y][x].FeatureType is WallPermanentOuterTile)
+                if (Game.Map.Grid[y][x].FeatureType.IsWallPermanentOuter)
                 {
                     continue;
                 }
-                if (Game.Map.Grid[y][x].FeatureType is WallOuterTile)
+                if (Game.Map.Grid[y][x].FeatureType.IsWallOuter)
                 {
                     continue;
                 }
-                if (Game.Map.Grid[y][x].FeatureType is WallSolidTile)
+                if (Game.Map.Grid[y][x].FeatureType.IsWallSolid)
                 {
                     continue;
                 }
@@ -753,7 +753,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 {
                     for (x = col1 - 1; x <= col1 + 1; x++)
                     {
-                        if (Game.Map.Grid[y][x].FeatureType is WallOuterTile)
+                        if (Game.Map.Grid[y][x].FeatureType.IsWallOuter)
                         {
                             Game.Map.Grid[y][x].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallSolidTile)));
                         }

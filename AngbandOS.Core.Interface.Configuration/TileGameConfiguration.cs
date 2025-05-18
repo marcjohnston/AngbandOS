@@ -3,6 +3,7 @@
 [Serializable]
 public class TileGameConfiguration
 {
+    public virtual bool IsEarthquakeResistant { get; set; } = false;
     public virtual bool IsPathBase { get; set; } = false;
     public virtual bool CanBeClosed { get; set; } = false;
     public virtual bool IsInvisibleTrap { get; set; } = false;
@@ -53,6 +54,10 @@ public class TileGameConfiguration
     public virtual bool IsBorder { get; set; } = false;
 
     public virtual bool IsMagma { get; set; } = false;
+    public virtual bool IsWallOuter { get; set; } = false;
+    public virtual bool IsWallPermanentOuter { get; set; } = false;
+    public virtual bool IsWallPermanentSolid { get; set; } = false;
+    public virtual bool IsWallSolid { get; set; } = false;
 
     /// <summary>
     /// Returns the name of the single action to perform on the tile.
@@ -206,6 +211,10 @@ public class TileGameConfiguration
     /// Returns true, if the tile is rubble.  Returns false, by default.  Rubble returns true.
     /// </summary>
     public virtual bool IsRubble { get; set; } = false;
+    public virtual bool IsBrokenDoor { get; set; } = false;
+    public virtual bool IsBush { get; set; } = false;
+    public virtual bool IsPillar { get; set; } = false;
+    public virtual bool IsElderSignSigil { get; set; } = false;  
 
     /// <summary>
     /// Returns true, if the tile is an open door.  Returns false, by default.  Open and broken doors returns true.

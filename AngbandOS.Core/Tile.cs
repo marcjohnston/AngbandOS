@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -38,8 +39,12 @@ internal abstract class Tile : IGetKey
             HiddenTreasureForTileName = HiddenTreasureForTileName,
             IsBasicWall = IsBasicWall,
             IsBorder = IsBorder,
+            IsBrokenDoor = IsBrokenDoor,
+            IsBush = IsBush ,
             IsClosedDoor = IsClosedDoor,
             IsDownStaircase = IsDownStaircase,
+            IsEarthquakeResistant = IsEarthquakeResistant,
+            IsElderSignSigil = IsElderSignSigil,
             IsGrass = IsGrass,
             IsInteresting = IsInteresting,
             IsInvisibleTrap = IsInvisibleTrap,
@@ -51,6 +56,7 @@ internal abstract class Tile : IGetKey
             IsPath = IsPath,
             IsPathBase = IsPathBase,
             IsPermanent = IsPermanent,
+            IsPillar = IsPillar,
             IsRevealedWithDetectStairsScript = IsRevealedWithDetectStairsScript,
             IsRock = IsRock,
             IsRubble = IsRubble,
@@ -66,6 +72,10 @@ internal abstract class Tile : IGetKey
             IsVisibleDoor = IsVisibleDoor,
             IsVisibleTreasure = IsVisibleTreasure,
             IsWall = IsWall,
+            IsWallOuter = IsWallOuter,
+            IsWallPermanentOuter = IsWallPermanentOuter,
+            IsWallPermanentSolid = IsWallPermanentSolid,
+            IsWallSolid = IsWallSolid,
             IsWater = IsWater,
             IsWildPath = IsWildPath,
             IsYellowSignSigil = IsYellowSignSigil,
@@ -180,6 +190,10 @@ internal abstract class Tile : IGetKey
 
     public virtual bool IsBorder => false;
 
+    public virtual bool IsBrokenDoor => false;
+
+    public virtual bool IsBush => false;
+
     /// <summary>
     /// Returns true, if the tile is a closed door.  Returns false, by default.  Locked doors all return true.  Jammed doors return false.  Returns false, by default.
     /// </summary>
@@ -189,6 +203,13 @@ internal abstract class Tile : IGetKey
     /// The tile is a down staircase.
     /// </summary>
     public virtual bool IsDownStaircase => false;
+
+    /// <summary>
+    /// Returns true, if the tile is not affected by an earthquake.  The Elder Sigil and Yellow Sigil tiles return true.
+    /// </summary>
+    public virtual bool IsEarthquakeResistant => false;
+
+    public virtual bool IsElderSignSigil => false;
 
     /// <summary>
     /// The tile is grass.
@@ -234,6 +255,8 @@ internal abstract class Tile : IGetKey
     /// A text description of the tile.
     /// </summary>
     public virtual bool IsPermanent => false;
+
+    public virtual bool IsPillar => false;
 
     /// <summary>
     /// Returns true, if the tile should be revealed with the detect stairs script.  Returns false, by default.  UpStairs and DownStairs tiles return true.
@@ -306,6 +329,11 @@ internal abstract class Tile : IGetKey
     /// The tile is a wall (not including a secret door).
     /// </summary>
     public virtual bool IsWall => false;
+
+    public virtual bool IsWallOuter => false;
+    public virtual bool IsWallPermanentOuter => false;
+    public virtual bool IsWallPermanentSolid => false;
+    public virtual bool IsWallSolid => false;
 
     /// <summary>
     /// The tile is water.

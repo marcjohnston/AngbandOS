@@ -164,11 +164,11 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType is ElderSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType.IsElderSignSigil)
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType is YellowSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType.IsYellowSignSigil)
                 {
                     continue;
                 }

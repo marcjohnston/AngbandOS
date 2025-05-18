@@ -22,5 +22,5 @@ public class YellowSignSigilTile : TileGameConfiguration
     /// </summary>
     public override bool AllowMonsterToOccupy => false;
     public override bool IsYellowSignSigil => true;
-
+    public override bool IsEarthquakeResistant => true;
 }

@@ -962,7 +962,7 @@ internal class Monster : IItemContainer
                 doMove = true;
             }
             // Bushes don't actually block us, so we can move there too
-            else if (Game.Map.Grid[newY][newX].FeatureType is BushTile)
+            else if (Game.Map.Grid[newY][newX].FeatureType.IsBush)
             {
                 doMove = true;
             }
@@ -1063,7 +1063,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're going to move onto an Elder Sign and we're capable of doing attacks
-            if (doMove && tile.FeatureType is ElderSignSigilTile && !Race.NeverAttack)
+            if (doMove && tile.FeatureType.IsElderSignSigil && !Race.NeverAttack)
             {
                 // Assume we're not moving
                 doMove = false;
@@ -3138,7 +3138,7 @@ internal class Monster : IItemContainer
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType is ElderSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType.IsElderSignSigil)
                 {
                     continue;
                 }

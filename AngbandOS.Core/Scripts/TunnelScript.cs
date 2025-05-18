@@ -41,7 +41,7 @@ internal class TunnelScript : Script, IScript, ICastSpellScript, IGameCommandScr
             int tileX = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
             GridTile tile = Game.Map.Grid[tileY][tileX];
             // Check if it can be tunneled through
-            if (tile.FeatureType.IsPassable || tile.FeatureType is YellowSignSigilTile)
+            if (tile.FeatureType.IsPassable || tile.FeatureType.IsYellowSignSigil)
             {
                 Game.MsgPrint("You cannot tunnel through air.");
             }

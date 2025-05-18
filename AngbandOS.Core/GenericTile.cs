@@ -24,8 +24,12 @@ internal class GenericTile : Tile
         HiddenTreasureForTileName = tileGameConfiguration.HiddenTreasureForTileName;
         IsBasicWall = tileGameConfiguration.IsBasicWall;
         IsBorder = tileGameConfiguration.IsBorder;
+        IsBrokenDoor = tileGameConfiguration.IsBrokenDoor;
+        IsBush = tileGameConfiguration.IsBush;
         IsClosedDoor = tileGameConfiguration.IsClosedDoor;
         IsDownStaircase = tileGameConfiguration.IsDownStaircase;
+        IsEarthquakeResistant = tileGameConfiguration.IsEarthquakeResistant;
+        IsElderSignSigil = tileGameConfiguration.IsElderSignSigil;
         IsGrass = tileGameConfiguration.IsGrass;
         IsInteresting = tileGameConfiguration.IsInteresting;
         IsInvisibleTrap = tileGameConfiguration.IsInvisibleTrap;
@@ -37,6 +41,7 @@ internal class GenericTile : Tile
         IsPath = tileGameConfiguration.IsPath;
         IsPathBase = tileGameConfiguration.IsPathBase;
         IsPermanent = tileGameConfiguration.IsPermanent;
+        IsPillar = tileGameConfiguration.IsPillar;
         IsRevealedWithDetectStairsScript = tileGameConfiguration.IsRevealedWithDetectStairsScript;
         IsRock = tileGameConfiguration.IsRock;
         IsRubble = tileGameConfiguration.IsRubble;
@@ -52,6 +57,10 @@ internal class GenericTile : Tile
         IsVisibleDoor = tileGameConfiguration.IsVisibleDoor;
         IsVisibleTreasure = tileGameConfiguration.IsVisibleTreasure;
         IsWall = tileGameConfiguration.IsWall;
+        IsWallOuter = tileGameConfiguration.IsWallOuter;
+        IsWallPermanentOuter = tileGameConfiguration.IsWallPermanentOuter;
+        IsWallPermanentSolid = tileGameConfiguration.IsWallPermanentSolid;
+        IsWallSolid = tileGameConfiguration.IsWallSolid;
         IsWater = tileGameConfiguration.IsWater;
         IsWildPath = tileGameConfiguration.IsWildPath;
         IsYellowSignSigil = tileGameConfiguration.IsYellowSignSigil;
@@ -67,10 +76,15 @@ internal class GenericTile : Tile
         YellowInTorchlight = tileGameConfiguration.YellowInTorchlight;
     }
 
+    public override bool IsEarthquakeResistant { get; } = false;
     public override bool IsYellowSignSigil { get; } = false;
     public override bool CanBeClosed { get; } = false;
     public override bool IsInvisibleTrap { get; } = false;
     public override bool IsPathBase { get; } = false;
+    public override bool IsBrokenDoor { get; } = false;
+    public override bool IsBush { get; } = false;
+    public override bool IsElderSignSigil { get; } = false;
+    public override bool IsPillar { get; } = false;
 
     protected override string? OnJammedTileName { get; }
     protected override string? VisibleTreasureForTileName { get; }
@@ -200,6 +214,10 @@ internal class GenericTile : Tile
     /// </summary>
     public override bool IsWall { get; } = false;
 
+    public override bool IsWallOuter { get; } = false;
+    public override bool IsWallPermanentOuter { get; } = false;
+    public override bool IsWallPermanentSolid { get; } = false;
+    public override bool IsWallSolid { get; } = false;
     /// <summary>
     /// Returns true, if the tile is water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.
     /// </summary>
