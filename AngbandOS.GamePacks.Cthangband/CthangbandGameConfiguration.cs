@@ -2552,5 +2552,14 @@ public class CthangbandGameConfiguration : GameConfiguration
         new WieldGameCommand(),
         new WizardModeGameCommand(),
         new ZapRodGameCommand(),
-        };
+    };
+
+    public override GodGameConfiguration[]? Gods => new GodGameConfiguration[]
+    {
+        new HagargRyonisGod(),
+        new LobonGod(),
+        new NathHorthahGod(),
+        new TamashGod(),
+        new ZoKalarGod()
+    };
 }

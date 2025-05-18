@@ -5,12 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Gods;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class TamashGod : God
+public class TamashGod : GodGameConfiguration
 {
-    private TamashGod(Game game) : base(game) { } // This object is a singleton.
     public override string LongName => "Tamash, god of illusion and magic";
     public override string ShortName => "Tamash";
     public override string FavorDescription => " (+{0}% max mana)";

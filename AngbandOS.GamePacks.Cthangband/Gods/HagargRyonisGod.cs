@@ -5,13 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Gods;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class LobonGod : God
+public class HagargRyonisGod : GodGameConfiguration
 {
-    private LobonGod(Game game) : base(game) { } // This object is a singleton.
-    public override string LongName => "Lobon, god of youth";
-    public override string ShortName => "Lobon";
-    public override string FavorDescription => " ({0}% chance to avoid ability drain)";
+    public override string LongName => "Hagarg Ryonis, goddess of beasts";
+    public override string ShortName => "Hagarg Ryonis";
+    public override string FavorDescription => " ({0}% chance to avoid poison/life drain)";
 }

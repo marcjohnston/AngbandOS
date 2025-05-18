@@ -5,13 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Gods;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class HagargRyonisGod : God
+public class ZoKalarGod : GodGameConfiguration
 {
-    private HagargRyonisGod(Game game) : base(game) { } // This object is a singleton.
-    public override string LongName => "Hagarg Ryonis, goddess of beasts";
-    public override string ShortName => "Hagarg Ryonis";
-    public override string FavorDescription => " ({0}% chance to avoid poison/life drain)";
+    public override string LongName => "Zo-Kalar, god of birth and death";
+    public override string ShortName => "Zo-Kalar";
+    public override string FavorDescription => " ({0}% chance to avoid death)";
 }

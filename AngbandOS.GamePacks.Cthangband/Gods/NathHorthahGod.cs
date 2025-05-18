@@ -5,12 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Gods;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class NathHorthahGod : God
+public class NathHorthahGod : GodGameConfiguration
 {
-    private NathHorthahGod(Game game) : base(game) { } // This object is a singleton.
     public override string LongName => "Nath-Horthath, god of war";
     public override string ShortName => "Nath-Horthath";
     public override string FavorDescription => " (+{0}% max health)";
