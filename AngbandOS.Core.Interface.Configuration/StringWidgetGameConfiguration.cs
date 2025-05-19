@@ -8,7 +8,7 @@ public class StringWidgetGameConfiguration
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public virtual ColorEnum Color { get; set; }
+    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
