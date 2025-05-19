@@ -202,10 +202,12 @@ public class MonsterRaceGameConfiguration
     public virtual bool Friends { get; set; } = false;
 
     public virtual bool Giant { get; set; } = false;
+    public virtual string GoldItemFactoryBindingKey { get; set; }
 
     public virtual bool Good { get; set; } = false;
 
     public virtual bool GreatOldOne { get; set; } = false;
+    public virtual bool HasLegs { get; set; } = false;
 
     /// <summary>
     /// The number of hit dice the monster has.
@@ -306,6 +308,7 @@ public class MonsterRaceGameConfiguration
 
     public virtual bool Reflecting { get; set; } = false;
 
+    public virtual bool Reaver { get; set; } = false;
     public virtual bool Regenerate { get; set; } = false;
 
     public virtual bool ResistDisenchant { get; set; } = false;

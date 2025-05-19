@@ -14,6 +14,6 @@ internal class ReaverMonsterRaceFilter : MonsterRaceFilter
 
     public override bool Matches(MonsterRace rPtr)
     {
-        return rPtr is BlackReaverMonsterRace && !rPtr.Unique;
+        return rPtr.Reaver && !rPtr.Unique;
     }
 }

@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -25,8 +26,7 @@ internal abstract class Dungeon : IGetKey
         Offset = BaseOffset;
     }
 
-    public virtual string Key => GetType().Name;
-
+    #region Api Methods
     public string GetKey => Key;
     public void Bind() 
     {
@@ -45,93 +45,6 @@ internal abstract class Dungeon : IGetKey
         }
         DungeonGuardians = dungeonGuardianList.ToArray();
     }
-
-    /// <summary>
-    /// Returns the deepest level the player has achieved for Word of Recall.
-    /// </summary>
-    public int RecallLevel;
-
-    /// <summary>
-    /// Returns base offset (difficulty) for the dungeon.
-    /// </summary>
-    public abstract int BaseOffset { get; }
-
-    /// <summary>
-    /// Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no
-    /// biasness.  Returns null, by default.
-    /// </summary>
-    protected virtual string? BiasMonsterFilterName { get; } = null;
-
-    /// <summary>
-    /// The bias for monster generation in the dungeon
-    /// </summary>
-    public MonsterRaceFilter? BiasMonsterFilter { get; private set; } = null;
-
-    /// <summary>
-    /// Returns the quests that are associated to this dungeon; or an empty array, if there are none.  This property is bound during
-    /// the binding phase from the DungeonQuestDefinitions property.
-    /// </summary>
-    public DungeonGuardian[] DungeonGuardians { get; private set; }
-
-    /// <summary>
-    /// Returns all of the quests associated to the dungeon.
-    /// </summary>
-    protected virtual string[]? DungeonGuardianNames => null;
-
-    /// <summary>
-    /// The symbol used for the dungeon on the wilderness map
-    /// </summary>
-    public abstract string MapSymbol { get; }
-
-    /// <summary>
-    /// The number of levels the dungeon has
-    /// </summary>
-    public abstract int MaxLevel { get; }
-
-    /// <summary>
-    /// The full name of the dungeon
-    /// </summary>
-    public abstract string Name { get; }
-
-    /// <summary>
-    /// The shortened name of the dungeon for display purposes
-    /// </summary>
-    public abstract string Shortname { get; }
-
-    /// <summary>
-    /// Returns true, if the dungeon is a tower; false, otherwise.  Returns false, by default.
-    /// </summary>
-    public virtual bool Tower => false;
-
-    /// <summary>
-    /// Whether or not the player knows the depth of the dungeon
-    /// </summary>
-    public bool KnownDepth = false;
-
-    /// <summary>
-    /// Whether or not the player knows the offset (difficulty) of the dungeon
-    /// </summary>
-    public bool KnownOffset = false;
-
-    /// <summary>
-    /// The actual offset (difficulty) of the dungeon
-    /// </summary>
-    public int Offset;
-
-    /// <summary>
-    /// Whether or not the player has visited the dungeon
-    /// </summary>
-    public bool Visited = false;
-
-    /// <summary>
-    /// The X coordinate of the dungeon on the island
-    /// </summary>
-    public int X = 0;
-
-    /// <summary>
-    /// The Y coordinate of the dungeon on the island
-    /// </summary>
-    public int Y = 0;
 
     public int ActiveQuestCount()
     {
@@ -216,4 +129,100 @@ internal abstract class Dungeon : IGetKey
         };
         return JsonSerializer.Serialize(dungeon, Game.GetJsonSerializerOptions());
     }
+    #endregion
+
+    #region Bound Properties
+    /// <summary>
+    /// The bias for monster generation in the dungeon
+    /// </summary>
+    public MonsterRaceFilter? BiasMonsterFilter { get; private set; } = null;
+
+    /// <summary>
+    /// Returns the quests that are associated to this dungeon; or an empty array, if there are none.  This property is bound during
+    /// the binding phase from the DungeonQuestDefinitions property.
+    /// </summary>
+    public DungeonGuardian[] DungeonGuardians { get; private set; }
+    #endregion
+
+    #region State Data
+    /// <summary>
+    /// Returns the deepest level the player has achieved for Word of Recall.
+    /// </summary>
+    public int RecallLevel;
+
+    /// <summary>
+    /// Whether or not the player knows the depth of the dungeon
+    /// </summary>
+    public bool KnownDepth = false;
+
+    /// <summary>
+    /// Whether or not the player knows the offset (difficulty) of the dungeon
+    /// </summary>
+    public bool KnownOffset = false;
+
+    /// <summary>
+    /// The actual offset (difficulty) of the dungeon
+    /// </summary>
+    public int Offset;
+
+    /// <summary>
+    /// Whether or not the player has visited the dungeon
+    /// </summary>
+    public bool Visited = false;
+
+    /// <summary>
+    /// The X coordinate of the dungeon on the island
+    /// </summary>
+    public int X = 0;
+
+    /// <summary>
+    /// The Y coordinate of the dungeon on the island
+    /// </summary>
+    public int Y = 0;
+    #endregion
+
+    #region Light-weight virtuals
+    public virtual string Key => GetType().Name;
+
+    /// <summary>
+    /// Returns base offset (difficulty) for the dungeon.
+    /// </summary>
+    public abstract int BaseOffset { get; }
+
+    /// <summary>
+    /// Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no
+    /// biasness.  Returns null, by default.
+    /// </summary>
+    protected virtual string? BiasMonsterFilterName { get; } = null;
+
+    /// <summary>
+    /// Returns all of the quests associated to the dungeon.
+    /// </summary>
+    protected virtual string[]? DungeonGuardianNames => null;
+
+    /// <summary>
+    /// The symbol used for the dungeon on the wilderness map
+    /// </summary>
+    public abstract string MapSymbol { get; }
+
+    /// <summary>
+    /// The number of levels the dungeon has
+    /// </summary>
+    public abstract int MaxLevel { get; }
+
+    /// <summary>
+    /// The full name of the dungeon
+    /// </summary>
+    public abstract string Name { get; }
+
+    /// <summary>
+    /// The shortened name of the dungeon for display purposes
+    /// </summary>
+    public abstract string Shortname { get; }
+
+    /// <summary>
+    /// Returns true, if the dungeon is a tower; false, otherwise.  Returns false, by default.
+    /// </summary>
+    public virtual bool Tower => false;
+    #endregion
 }

@@ -12,6 +12,6 @@ internal class GreatOldOneSummonMonsterSpell : SummonMonsterSpell
 {
     private GreatOldOneSummonMonsterSpell(Game game) : base(game) { }
     protected override int MaximumSummonCount => 8;
-    protected override string? MonsterSelectorBindingKey => nameof(GooMonsterRaceFilter);
+    protected override string? MonsterSelectorBindingKey => nameof(GreatOldOneMonsterRaceFilter);
     public override string? VsPlayerActionMessage => "{0} magically summons Great Old Ones!";
 }

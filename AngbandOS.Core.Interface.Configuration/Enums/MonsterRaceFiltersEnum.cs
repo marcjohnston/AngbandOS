@@ -1,0 +1,56 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+namespace AngbandOS.Core.Interface.Configuration;
+
+public enum MonsterRaceFiltersEnum
+{
+    AcidBreathingDragonMonsterRaceFilter,
+    AnimalMonsterRaceFilter,
+    AnimalRangerMonsterRaceFilter,
+    AntMonsterRaceFilter,
+    AnyBreathingDragonMonsterRaceFilter,
+    AvatarMonsterRaceFilter,
+    Bizarre1MonsterRaceFilter,
+    Bizarre2MonsterRaceFilter,
+    Bizarre3MonsterRaceFilter,
+    Bizarre4MonsterRaceFilter,
+    Bizarre5MonsterRaceFilter,
+    Bizarre6MonsterRaceFilter,
+    ChapelMonsterRaceFilter,
+    ColdBreathingDragonMonsterRaceFilter,
+    CthuloidMonsterRaceFilter,
+    CultMonsterRaceFilter,
+    DemonMonsterRaceFilter,
+    DragonMonsterRaceFilter,
+    ElementalMonsterRaceFilter,
+    FireBreathingDragonMonsterRaceFilter,
+    GiantMonsterRaceFilter,
+    GooMonsterRaceFilter,
+    HiDragonMonsterRaceFilter,
+    HiDragonNoUniquesMonsterRaceFilter,
+    HiUndeadMonsterRaceFilter,
+    HiUndeadNoUniquesMonsterRaceFilter,
+    HoundMonsterRaceFilter,
+    HumanMonsterRaceFilter,
+    HydraMonsterRaceFilter,
+    JellyMonsterRaceFilter,
+    KennelMonsterRaceFilter,
+    KoboldMonsterRaceFilter,
+    LightningBreathingDragonMonsterRaceFilter,
+    NoUniquesMonsterRaceFilter,
+    OrcMonsterRaceFilter,
+    PhantomMonsterRaceFilter,
+    PoisonBreathingDragonMonsterRaceFilter,
+    ReaverMonsterRaceFilter,
+    SpiderMonsterRaceFilter,
+    TreasureMonsterRaceFilter,
+    TrollMonsterRaceFilter,
+    UndeadMonsterRaceFilter,
+    UniqueMonsterRaceFilter,
+    YeekMonsterRaceFilter,
+}

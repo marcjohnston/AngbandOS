@@ -294,6 +294,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     /// The rarity with which the monster is usually found.
     /// </summary>
     public abstract int Rarity { get; }
+    public virtual bool Reaver => false;
 
     public virtual bool Reflecting => false;
 
@@ -540,8 +541,10 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
             FriendlyName = FriendlyName,
             Friends = Friends,
             Giant = Giant,
+            GoldItemFactoryBindingKey = GoldItemFactoryBindingKey,
             Good = Good,
             GreatOldOne = GreatOldOne,
+            HasLegs = HasLegs,
             Hdice = Hdice,
             Hside = Hside,
             HurtByCold = HurtByCold,
@@ -580,6 +583,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
             RandomMove25 = RandomMove25,
             RandomMove50 = RandomMove50,
             Rarity = Rarity,
+            Reaver = Reaver,
             Reflecting = Reflecting,
             Regenerate = Regenerate,
             ResistDisenchant = ResistDisenchant,

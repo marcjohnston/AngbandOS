@@ -4854,7 +4854,7 @@ internal class Game
                     break;
 
                 case 17:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterRaceFilter>(nameof(GooMonsterRaceFilter)), true, false);
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterRaceFilter>(nameof(GreatOldOneMonsterRaceFilter)), true, false);
                     break;
 
                 case 18:

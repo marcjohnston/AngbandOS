@@ -60,8 +60,10 @@ internal class GenericMonsterRace : MonsterRace
         FriendlyName = monsterRaceGameConfiguration.FriendlyName;
         Friends = monsterRaceGameConfiguration.Friends;
         Giant = monsterRaceGameConfiguration.Giant;
+        GoldItemFactoryBindingKey = monsterRaceGameConfiguration.GoldItemFactoryBindingKey;
         Good = monsterRaceGameConfiguration.Good;
         GreatOldOne = monsterRaceGameConfiguration.GreatOldOne;
+        HasLegs = monsterRaceGameConfiguration.HasLegs;
         Hdice = monsterRaceGameConfiguration.Hdice;
         Hside = monsterRaceGameConfiguration.Hside;
         HurtByCold = monsterRaceGameConfiguration.HurtByCold;
@@ -100,6 +102,7 @@ internal class GenericMonsterRace : MonsterRace
         RandomMove25 = monsterRaceGameConfiguration.RandomMove25;
         RandomMove50 = monsterRaceGameConfiguration.RandomMove50;
         Rarity = monsterRaceGameConfiguration.Rarity;
+        Reaver = monsterRaceGameConfiguration.Reaver;
         Reflecting = monsterRaceGameConfiguration.Reflecting;
         Regenerate = monsterRaceGameConfiguration.Regenerate;
         ResistDisenchant = monsterRaceGameConfiguration.ResistDisenchant;
@@ -297,9 +300,11 @@ internal class GenericMonsterRace : MonsterRace
 
     public override bool Giant { get; } = false;
 
+    protected override string GoldItemFactoryBindingKey { get; } = nameof(LotOfGoldGoldItemFactory);
     public override bool Good { get; } = false;
 
     public override bool GreatOldOne { get; } = false;
+    public override bool HasLegs { get; } = false;
 
     /// <summary>
     /// The number of hit dice the monster has.
@@ -393,6 +398,7 @@ internal class GenericMonsterRace : MonsterRace
 
     public override bool RandomMove50 { get; } = false;
 
+    public override bool Reaver { get; } = false;
     /// <summary>
     /// The rarity with which the monster is usually found.
     /// </summary>
