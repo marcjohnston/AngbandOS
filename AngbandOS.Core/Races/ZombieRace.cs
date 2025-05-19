@@ -25,14 +25,6 @@ internal class ZombieRace : Race
     public override int ExperienceFactor => 135;
     public override int BaseAge => 100;
     public override int AgeRange => 30;
-    public override int MaleBaseHeight => 72;
-    public override int MaleHeightRange => 6;
-    public override int MaleBaseWeight => 100;
-    public override int MaleWeightRange => 25;
-    public override int FemaleBaseHeight => 66;
-    public override int FemaleHeightRange => 4;
-    public override int FemaleBaseWeight => 100;
-    public override int FemaleWeightRange => 20;
     public override int Infravision => 2;
     public override uint Choice => 0x0001;
     public override string Description => "Zombies are undead creatures. Their decayed flesh resists\nnether and poison, and having their life force drained.\nZombies digest food slowly, and can see invisible monsters.\nThey can learn to restore their life force (at lvl 30).";

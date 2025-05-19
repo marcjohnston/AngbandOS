@@ -44,12 +44,23 @@ internal class WeightedRandom<T>
     private readonly List<KeyValuePair<int, T>> _list = new List<KeyValuePair<int, T>>();
     private int _sum = 0;
 
+    /// <summary>
+    /// Creates a new empty weighted-random.  Use the Add method to add items to the list.
+    /// </summary>
+    /// <param name="game"></param>
     public WeightedRandom(Game game)
     {
         Game = game;
     }
 
-    public WeightedRandom(Game game, IEnumerable<T> values, Func<T, bool>? predicate)
+    /// <summary>
+    /// Creates a new evenly-distributed weighted-random from a list of objects using a predicate function to determine if each item in the list should be included or excluded.
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="values"></param>
+    /// <param name="predicate"></param>
+    [Obsolete("The predicate should modify the list to be sent to the constructor.")]
+    public WeightedRandom(Game game, IEnumerable<T> values, Func<T, bool>? predicate) // TODO: The predicate should be an extension that returns the IEnumerable values not integrated into this constructor.
     {
         Game = game;
         foreach (T value in values)
@@ -61,12 +72,31 @@ internal class WeightedRandom<T>
         }
     }
 
+    /// <summary>
+    /// Creates a new evenly-distributed weighted-random from a list of objects.
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="values"></param>
     public WeightedRandom(Game game, IEnumerable<T> values)
     {
         Game = game;
         foreach (T value in values)
         {
             Add(1, value);
+        }
+    }
+
+    /// <summary>
+    /// Creates a new weighted-random from a given set of tuples.
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="values"></param>
+    public WeightedRandom(Game game, IEnumerable<(T Item, int Weight)> values)
+    {
+        Game = game;
+        foreach ((T Item, int Weight) value in values)
+        {
+            Add(value.Weight, value.Item);
         }
     }
 

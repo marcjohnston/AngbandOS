@@ -25,14 +25,6 @@ internal class ImpRace : Race
     public override int ExperienceFactor => 110;
     public override int BaseAge => 13;
     public override int AgeRange => 4;
-    public override int MaleBaseHeight => 68;
-    public override int MaleHeightRange => 1;
-    public override int MaleBaseWeight => 150;
-    public override int MaleWeightRange => 5;
-    public override int FemaleBaseHeight => 64;
-    public override int FemaleHeightRange => 1;
-    public override int FemaleBaseWeight => 120;
-    public override int FemaleWeightRange => 5;
     public override int Infravision => 3;
     public override uint Choice => 0x97CB;
     public override string Description => "Imps are minor demons that have escaped their binding and\nare able to run free in the world. Imps naturally resist\nfire, and can learn to throw bolt of flame (at lvl 10),\nsee invisible creatures (at lvl 10), become completely\nimmune to fire (at lvl 20), and cast fireballs (at lvl 30).";

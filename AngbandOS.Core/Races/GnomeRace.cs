@@ -25,14 +25,6 @@ internal class GnomeRace : Race
     public override int ExperienceFactor => 135;
     public override int BaseAge => 50;
     public override int AgeRange => 40;
-    public override int MaleBaseHeight => 42;
-    public override int MaleHeightRange => 3;
-    public override int MaleBaseWeight => 90;
-    public override int MaleWeightRange => 6;
-    public override int FemaleBaseHeight => 39;
-    public override int FemaleHeightRange => 3;
-    public override int FemaleBaseWeight => 75;
-    public override int FemaleWeightRange => 3;
     public override int Infravision => 4;
     public override uint Choice => 0x1E0F;
     public override string Description => "Gnomes are small, playful, and talented at magic. However,\nthey are almost chronically incapable of taking anything\nseriously. Gnomes are constantly fidgeting and always on\nthe move, and this makes them impossible to paralyse or\nmagically slow. Gnomes are even able to learn how to \nteleport short distances (at lvl 5).";

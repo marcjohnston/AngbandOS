@@ -25,14 +25,6 @@ internal class YeekRace : Race
     public override int ExperienceFactor => 100;
     public override int BaseAge => 14;
     public override int AgeRange => 3;
-    public override int MaleBaseHeight => 50;
-    public override int MaleHeightRange => 3;
-    public override int MaleBaseWeight => 90;
-    public override int MaleWeightRange => 6;
-    public override int FemaleBaseHeight => 50;
-    public override int FemaleHeightRange => 3;
-    public override int FemaleBaseWeight => 75;
-    public override int FemaleWeightRange => 3;
     public override int Infravision => 2;
     public override uint Choice => 0xDE0F;
     public override string Description => "Yeeks are long-eared furry creatures that look vaguely\nlike humanoid rabbits. Although physically weak, they make\npassable spell casters. They are resistant to acid, and can\nlearn to scream to terrify their foes (at lvl 15) and\nbecome completely immune to acid (at lvl 20).";

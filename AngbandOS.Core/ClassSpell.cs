@@ -43,10 +43,11 @@ internal abstract class ClassSpell : IGetKey
     public abstract int BaseFailure { get; }
     public abstract int FirstCastExperience { get; }
 
+    public static string GetCompositeKey(BaseCharacterClass t1, Spell t2) => $"{t1.GetKey}-{t2.GetKey}";
     /// <summary>
     /// Returns the a composite key created from the character class name and spell name with a period between them.
     /// </summary>
-    public string GetKey => $"{CharacterClassName}.{SpellName}";
+    public string GetKey => $"{CharacterClassName}-{SpellName}";
 
     public virtual void Bind() { }
 }

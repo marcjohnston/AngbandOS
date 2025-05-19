@@ -25,14 +25,6 @@ internal class KlackonRace : Race
     public override int ExperienceFactor => 135;
     public override int BaseAge => 20;
     public override int AgeRange => 3;
-    public override int MaleBaseHeight => 60;
-    public override int MaleHeightRange => 3;
-    public override int MaleBaseWeight => 80;
-    public override int MaleWeightRange => 4;
-    public override int FemaleBaseHeight => 54;
-    public override int FemaleHeightRange => 3;
-    public override int FemaleBaseWeight => 70;
-    public override int FemaleWeightRange => 4;
     public override int Infravision => 2;
     public override uint Choice => 0xC011;
     public override string Description => "Klackons are humanoid insects. Although most stay safe in\ntheir hive cities, a small number venture forth in search\nof adventure. The chitin of a klackon resists acid, and\ntheir ordered minds cannot be confused. They can learn to\nspit acid (at lvl 9) and they get progressively faster if\nunencumbered by armor.";

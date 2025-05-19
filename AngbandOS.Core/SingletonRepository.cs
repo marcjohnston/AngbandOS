@@ -66,7 +66,7 @@ internal class SingletonRepository
         T? value = TryGet<T>(key);
         if (value == null)
         {
-            throw new Exception($"The repository was registered but the singleton {typeof(T).Name}.{key} does not exist.\n\n1. Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.\n\n2. There is only one private constructor and that it only accepts the Game parameter.\n\n3. The singletons are either loaded fromt the Assembly or the configuration.\n\n");
+            throw new Exception($"The {typeof(T).Name} repository was registered but the singleton {key} does not exist.\n\n1. Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.\n\n2. There is only one private constructor and that it only accepts the Game parameter.\n\n3. The singletons are either loaded fromt the Assembly or the configuration.\n\n");
         }
         return value;
     }
@@ -309,6 +309,7 @@ internal class SingletonRepository
         RegisterRepository<Mutation>();
         RegisterRepository<NullableStringsTextAreaWidget>();
         RegisterRepository<Patron>();
+        RegisterRepository<PhysicalAttributeSet>();
         RegisterRepository<PlayerEffect>();
         RegisterRepository<Plural>();
         RegisterRepository<ProbabilityExpression>();
@@ -317,6 +318,7 @@ internal class SingletonRepository
         RegisterRepository<ProjectileScript>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();
+        RegisterRepository<RaceGender>();
         RegisterRepository<RangedWidget>();
         RegisterRepository<Realm>();
         RegisterRepository<RenderMessageScript>();
@@ -424,8 +426,10 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<MonsterSpell>();
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<Patron>();
+        LoadAllAssemblyTypes<PhysicalAttributeSet>();
         LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Race>();
+        LoadAllAssemblyTypes<RaceGender>();
         LoadAllAssemblyTypes<Realm>();
         LoadAllAssemblyTypes<RenderMessageScript>();
         LoadAllAssemblyTypes<Reward>();
@@ -550,7 +554,7 @@ internal class SingletonRepository
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception($"An error occurred instantiating the {type.Name} singleton.  Check to ensure the constructor is private(Game game).");
+                        throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
                     }
                 }
             }

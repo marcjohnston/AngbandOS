@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.PhysicalAttributeSets;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
@@ -9669,29 +9670,15 @@ internal class Game
         CurrentGameDateTime.DateAndTimeValue = _gameStartDateTime;
         Tick();
 
-        if (Gender.Index == Constants.SexMale)
-        {
-            Height = RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
-            Weight = RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
-        }
-        else if (Gender.Index == Constants.SexFemale)
-        {
-            Height = RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
-            Weight = RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
-        }
-        else
-        {
-            if (DieRoll(2) == 1)
-            {
-                Height = RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
-                Weight = RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
-            }
-            else
-            {
-                Height = RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
-                Weight = RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
-            }
-        }
+        RefreshHeightAndWeight();
+    }
+
+    private void RefreshHeightAndWeight()
+    {
+        RaceGender raceGender = SingletonRepository.Get<RaceGender>(RaceGender.GetCompositeKey(Race, Gender));
+        PhysicalAttributeSet physicalAttributeSet = raceGender.PhysicalAttributesWeightedRandom.Choose();
+        Height = RandomNormal(physicalAttributeSet.BaseHeight, physicalAttributeSet.HeightRange);
+        Weight = RandomNormal(physicalAttributeSet.BaseWeight, physicalAttributeSet.WeightRange);
     }
 
     public void GetExtra()
@@ -13478,29 +13465,7 @@ internal class Game
     {
         Race = newRace;
         ExperienceMultiplier.IntValue = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
-        if (Gender.Index == Constants.SexMale)
-        {
-            Height = RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
-            Weight = RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
-        }
-        else if (Gender.Index == Constants.SexFemale)
-        {
-            Height = RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
-            Weight = RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
-        }
-        else
-        {
-            if (DieRoll(2) == 1)
-            {
-                Height = RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
-                Weight = RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
-            }
-            else
-            {
-                Height = RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
-                Weight = RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
-            }
-        }
+        RefreshHeightAndWeight();
         CheckExperience();
         MaxLevelGained = ExperienceLevel.IntValue;
         SingletonRepository.Get<FlaggedAction>(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();

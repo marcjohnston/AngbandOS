@@ -46,16 +46,8 @@ internal abstract class Race : IGetKey
     public abstract int BaseStealthBonus { get; }
     public abstract uint Choice { get; }
     public abstract int ExperienceFactor { get; }
-    public abstract int FemaleBaseHeight { get; }
-    public abstract int FemaleBaseWeight { get; }
-    public abstract int FemaleHeightRange { get; }
-    public abstract int FemaleWeightRange { get; }
     public abstract int HitDieBonus { get; }
     public abstract int Infravision { get; }
-    public abstract int MaleBaseHeight { get; }
-    public abstract int MaleBaseWeight { get; }
-    public abstract int MaleHeightRange { get; }
-    public abstract int MaleWeightRange { get; }
     public abstract string Title { get; }
     public virtual string IndefiniteArticleForTitle
     {

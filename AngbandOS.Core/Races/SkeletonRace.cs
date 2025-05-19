@@ -25,14 +25,6 @@ internal class SkeletonRace : Race
     public override int ExperienceFactor => 145;
     public override int BaseAge => 100;
     public override int AgeRange => 35;
-    public override int MaleBaseHeight => 72;
-    public override int MaleHeightRange => 6;
-    public override int MaleBaseWeight => 50;
-    public override int MaleWeightRange => 5;
-    public override int FemaleBaseHeight => 66;
-    public override int FemaleHeightRange => 4;
-    public override int FemaleBaseWeight => 50;
-    public override int FemaleWeightRange => 5;
     public override int Infravision => 2;
     public override uint Choice => 0x5F0F;
     public override string Description => "Skeletons are undead creatures. Being without eyes, they\nuse magical sight which can see invisible creatures. Their\nlack of flesh means that they resist poison and shards, and\ntheir life force is hard to drain. They can learn to resist\ncold (at lvl 10), and restore their life force (at lvl 30).";

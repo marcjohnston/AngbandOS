@@ -25,14 +25,6 @@ internal class HumanRace : Race
     public override int ExperienceFactor => 100;
     public override int BaseAge => 14;
     public override int AgeRange => 6;
-    public override int MaleBaseHeight => 72;
-    public override int MaleHeightRange => 6;
-    public override int MaleBaseWeight => 180;
-    public override int MaleWeightRange => 25;
-    public override int FemaleBaseHeight => 66;
-    public override int FemaleHeightRange => 4;
-    public override int FemaleBaseWeight => 150;
-    public override int FemaleWeightRange => 20;
     public override int Infravision => 0;
     public override uint Choice => 0xFFFF;
     public override string Description => "Hopefully you know all about humans already because you\nare one! In game terms, humans are the average around which\nthe other races are measured. As such, humans get no\nspecial abilities, but they increase in level quicker than\nany other race. Humans are recommended for new players.";

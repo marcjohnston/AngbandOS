@@ -25,14 +25,6 @@ internal class CyclopsRace : Race
     public override int ExperienceFactor => 130;
     public override int BaseAge => 50;
     public override int AgeRange => 24;
-    public override int MaleBaseHeight => 92;
-    public override int MaleHeightRange => 10;
-    public override int MaleBaseWeight => 255;
-    public override int MaleWeightRange => 60;
-    public override int FemaleBaseHeight => 80;
-    public override int FemaleHeightRange => 8;
-    public override int FemaleBaseWeight => 235;
-    public override int FemaleWeightRange => 60;
     public override int Infravision => 1;
     public override uint Choice => 0x0005;
     public override string Description => "Cyclopes are one eyed giants, often seen as freaks by the\nother races. They can learn to throw boulders (at lvl 20)\nand although they have weak eyesight their hearing is very\nkeen and hard to damage, so they are resistant to sound\nbased attacks.";

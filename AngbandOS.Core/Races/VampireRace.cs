@@ -25,14 +25,6 @@ internal class VampireRace : Race
     public override int ExperienceFactor => 200;
     public override int BaseAge => 100;
     public override int AgeRange => 30;
-    public override int MaleBaseHeight => 72;
-    public override int MaleHeightRange => 6;
-    public override int MaleBaseWeight => 180;
-    public override int MaleWeightRange => 25;
-    public override int FemaleBaseHeight => 66;
-    public override int FemaleHeightRange => 4;
-    public override int FemaleBaseWeight => 150;
-    public override int FemaleWeightRange => 20;
     public override int Infravision => 5;
     public override uint Choice => 0xFFFF;
     public override string Description => "Vampires are powerful undead. They resist darkness, nether,\ncold, poison, and having their life force drained. Vampires\nproduce their own ethereal light in the dark, but are hurt\nby direct sunlight. They can learn to drain the life force\nfrom their foes (at lvl 2).";

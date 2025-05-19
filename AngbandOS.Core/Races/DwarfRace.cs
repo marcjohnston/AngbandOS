@@ -25,14 +25,6 @@ internal class DwarfRace : Race
     public override int ExperienceFactor => 125;
     public override int BaseAge => 35;
     public override int AgeRange => 15;
-    public override int MaleBaseHeight => 48;
-    public override int MaleHeightRange => 3;
-    public override int MaleBaseWeight => 150;
-    public override int MaleWeightRange => 10;
-    public override int FemaleBaseHeight => 46;
-    public override int FemaleHeightRange => 3;
-    public override int FemaleBaseWeight => 120;
-    public override int FemaleWeightRange => 10;
     public override int Infravision => 5;
     public override uint Choice => 0x4805;
     public override string Description => "Dwarves are short and stocky, and although not noted for\ntheir intelligence or subtlety they are generally very\npious. They are also rather resistant to spells. As natural\nminers, used to feeling their way around in the dark,\ndwarves are immune to all forms of blindness and can learn\nto detect secret doors and traps (at lvl 5).";

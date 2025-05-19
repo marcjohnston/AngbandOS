@@ -25,14 +25,6 @@ internal class KoboldRace : Race
     public override int ExperienceFactor => 125;
     public override int BaseAge => 11;
     public override int AgeRange => 3;
-    public override int MaleBaseHeight => 60;
-    public override int MaleHeightRange => 1;
-    public override int MaleBaseWeight => 130;
-    public override int MaleWeightRange => 5;
-    public override int FemaleBaseHeight => 55;
-    public override int FemaleHeightRange => 1;
-    public override int FemaleBaseWeight => 100;
-    public override int FemaleWeightRange => 5;
     public override int Infravision => 3;
     public override uint Choice => 0xC009;
     public override string Description => "Kobolds are small reptillian creatures whose claims to be\nrelated to dragons are generally not taken seriously. They\nare resistant to poison, and can learn to throw poison\ndarts (at lvl 9).";
