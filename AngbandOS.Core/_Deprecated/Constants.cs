@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Reflection;
-
 namespace AngbandOS.Core;
 
 internal static class Constants
@@ -19,48 +17,28 @@ internal static class Constants
     public const int FollowDistance = 4;
     public const int FuelLamp = 15000;
     public const int FuelTorch = 5000;
-    public const int GenerateChoose = 0;
-    public const int GenerateRandom = 1;
-    public const int GenerateReplay = 2;
     public const int GreatObj = 20; // This is a 1-in-chance of getting great gold or a great object.
     public const int GroupMax = 32;
 
     public const int KeymapModeOrig = 0;
-    public const int KeymapModeRogue = 1;
     public const int KeymapModes = 2;
 
-    /// <summary>
-    /// Returns the maximum number of grid tiles that can be lit at one time.
-    /// </summary>
-    public const int LightMax = 128;
     public const int MaKnee = 1;
     public const int MaSlow = 2;
-    public const int MaxAmulets = 17;
 
-    public const int MaxClass = 16;
-    public const int MaxColors = 66;
     public const int MaxDepth = 128;
-    public const int MaxGenders = 3;
-    public const int MaxMa = 17;
     public const int MaxMAllocChance = 160;
-    public const int MaxMetals = 39;
 
     /// <summary>
     /// Returns the maximum number of monsters.
     /// </summary>
     public const int MaxMIdx = 512;
-    public const int MaxMindcraftPowers = 12;
-    public const int MaxPatron = 16;
     public const int MaxRange = 18;
-    public const int MaxRealm = 8;
     public const int MaxRepro = 100;
     public const int MaxShort = 32767;
-    public const int MaxShroom = 20;
     public const int MaxSight = 20;
     public const int MaxStackSize = 100;
-    public const int MaxStoresTotal = 96;
     public const int MaxUchar = 255;
-    public const int MaxWoods = 32;
     public const int MflagBorn = 0x10;
     public const int MflagMark = 0x80;
     public const int MflagNice = 0x20;
@@ -78,14 +56,13 @@ internal static class Constants
     public const int PenetrateInvulnerability = 13;
     public const uint PnCombine = 0x00000001;
     public const uint PnReorder = 0x00000002;
-    public const int PyFoodAlert = 2000;
-    public const int PyFoodFaint = 500;
-    public const int PyFoodFull = 10000;
-    public const int PyFoodMax = 15000;
-    public const int PyFoodStarve = 100;
-    public const int PyFoodWeak = 1000;
+    public const int PyFoodAlert = 2000; // TODO: This doesn't coincide with the widget
+    public const int PyFoodFaint = 500; // TODO: This doesn't coincide with the widget
+    public const int PyFoodFull = 10000; // TODO: This doesn't coincide with the widget
+    public const int PyFoodMax = 15000; // TODO: This doesn't coincide with the widget
+    public const int PyFoodStarve = 100; // TODO: This doesn't coincide with the widget
+    public const int PyFoodWeak = 1000; // TODO: This doesn't coincide with the widget
     public const int PyMaxExp = 99999999;
-    public const int PyMaxGold = 999999999;
     public const int PyMaxLevel = 50;
     public const int PyRegenFaint = 33;
     public const int PyRegenHpbase = 1442;
@@ -108,35 +85,17 @@ internal static class Constants
     public const int PlayableScreenWidth = 66;
     public const int StoreObjLevel = 5;
     public const int StoreShuffle = 21;
-    public const int TargetGrid = 0x08;
     public const int TargetKill = 0x01;
     public const int TargetLook = 0x02;
-    public const int TargetXtra = 0x04;
     public const int TempMax = 1536;
-    public const int TextACursedSize = 50;
-    public const int TextAHighSize = 66;
-    public const int TextALowSize = 85;
-    public const int TextAMedSize = 84;
-    public const int TextElvishSize = 216;
-    public const int TextWCursedSize = 39;
-    public const int TextWHighSize = 87;
-    public const int TextWLowSize = 98;
-    public const int TextWMedSize = 106;
     public const int TurnsInADay = 108000;
-    public const int TurnsInAHalfDay = TurnsInADay / 2;
     public const int UseDevice = 3;
-    public const int ViewMax = 1536;
     public const int WeirdLuck = 12;
     public const int WildernessHeight = 44;
     public const int WildernessWidth = 66;
 
     public const int DelayFactorInMilliseconds = 64;
     public const int HitpointWarn = 2;
-
-    /// <summary>
-    /// Spell flags for each book
-    /// </summary>
-    public static readonly uint[] BookSpellFlags = { 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000 };
 
     public static readonly string[] DescStatNeg = { "weak", "stupid", "naive", "clumsy", "sickly", "ugly" };
     public static readonly string[] DescStatPos = { "strong", "smart", "wise", "dextrous", "healthy", "cute" };
