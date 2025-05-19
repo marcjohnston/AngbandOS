@@ -34,6 +34,4 @@ internal abstract class Gender : IGetKey
     public abstract string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered
 
     public virtual bool CanBeRandomlySelected => true;
-    [Obsolete]
-    public abstract int Index { get; }
 }

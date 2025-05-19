@@ -13,5 +13,4 @@ internal class MaleGender : Gender
     private MaleGender(Game game) : base(game) { }
     public override string Title => "Male";
     public override string Winner => "King";
-    public override int Index => Constants.SexMale;
 }

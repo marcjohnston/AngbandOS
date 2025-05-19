@@ -106,8 +106,6 @@ internal static class Constants
     /// Returns the number of columns that the screen can accommodate for the playing field.  This is the ConsoleWidth - 14;
     /// </summary>
     public const int PlayableScreenWidth = 66;
-    public const int SexFemale = 0;
-    public const int SexMale = 1;
     public const int StoreObjLevel = 5;
     public const int StoreShuffle = 21;
     public const int TargetGrid = 0x08;
