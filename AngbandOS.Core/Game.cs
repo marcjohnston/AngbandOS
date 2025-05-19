@@ -4715,11 +4715,7 @@ internal class Game
             return;
         }
 
-        // Call the update method for each widget.  This allows the widget to render.
-        foreach (Widget widget in MainForm.Widgets)
-        {
-            widget.Update();
-        }
+        MainForm.Refresh();
 
         SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Check();
         SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Check();

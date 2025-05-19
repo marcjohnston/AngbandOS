@@ -19,6 +19,15 @@ internal abstract class Form : IGetKey
     protected abstract string[] WidgetNames { get; }
     public Widget[] Widgets { get; private set; }
 
+    public void Refresh()
+    {
+        // Call the update method for each widget.  This allows the widget to render.
+        foreach (Widget widget in Widgets)
+        {
+            widget.Update();
+        }
+    }
+
     /// <summary>
     /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map; or null, if the pokeable widgets haven't been bound yet.  These types of 
     /// widgets are the only widgets that "Update" inbetween the widget update phases.  Binding of pokeable widgets cannot be performed during the binding phase because the
