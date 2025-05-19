@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Use a down staircase or trapdoor
 /// </summary>
 [Serializable]
-internal class GoDownGameCommand : GameCommandGameConfiguration
+public class GoDownGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '>';
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WalkWithoutGamePickupCommand : GameCommandGameConfiguration
+public class WalkWithoutGamePickupCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '-';
 

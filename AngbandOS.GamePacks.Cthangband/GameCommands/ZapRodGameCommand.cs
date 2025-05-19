@@ -12,7 +12,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// </summary>
 /// <param name="itemIndex"> The inventory index of the item to be used </param>
 [Serializable]
-internal class ZapRodGameCommand : GameCommandGameConfiguration
+public class ZapRodGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'z';
 

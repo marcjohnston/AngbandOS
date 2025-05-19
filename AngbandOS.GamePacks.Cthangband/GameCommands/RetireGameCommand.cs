@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Retire (if a winner) or give up (if not a winner)
 /// </summary>
 [Serializable]
-internal class RetireGameCommand : GameCommandGameConfiguration
+public class RetireGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'Q';
 

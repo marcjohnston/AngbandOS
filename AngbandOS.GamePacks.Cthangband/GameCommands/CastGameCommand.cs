@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class CastGameCommand : GameCommandGameConfiguration
+public class CastGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'm';
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WalkAndPickupGameCommand : GameCommandGameConfiguration
+public class WalkAndPickupGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => ';';
 

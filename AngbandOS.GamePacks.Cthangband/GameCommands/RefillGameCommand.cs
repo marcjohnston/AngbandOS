@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Refill a light source with fuel
 /// </summary>
 [Serializable]
-internal class RefillGameCommand : GameCommandGameConfiguration
+public class RefillGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'F';
 

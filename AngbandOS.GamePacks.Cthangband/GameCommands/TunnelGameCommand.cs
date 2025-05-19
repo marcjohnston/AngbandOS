@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Tunnel into the wall (or whatever is in front of us
 /// </summary>
 [Serializable]
-internal class TunnelGameCommand : GameCommandGameConfiguration
+public class TunnelGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'T';
 

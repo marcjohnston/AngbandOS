@@ -12,7 +12,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// things that can be targeted
 /// </summary>
 [Serializable]
-internal class LookGameCommand : GameCommandGameConfiguration
+public class LookGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'l';
 

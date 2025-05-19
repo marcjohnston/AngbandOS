@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Toggle whether we're automatically searching while moving
 /// </summary>
 [Serializable]
-internal class ToggleSearchGameCommand : GameCommandGameConfiguration
+public class ToggleSearchGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'S';
 

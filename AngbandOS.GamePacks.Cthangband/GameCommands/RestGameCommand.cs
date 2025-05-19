@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Rest for either a fixed amount of time or until back to max health and mana
 /// </summary>
 [Serializable]
-internal class RestGameCommand : GameCommandGameConfiguration
+public class RestGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'R';
 

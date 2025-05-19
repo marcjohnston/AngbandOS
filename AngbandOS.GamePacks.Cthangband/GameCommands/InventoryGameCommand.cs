@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Show the player's inventory
 /// </summary>
 [Serializable]
-internal class InventoryGameCommand : GameCommandGameConfiguration
+public class InventoryGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'i';
 

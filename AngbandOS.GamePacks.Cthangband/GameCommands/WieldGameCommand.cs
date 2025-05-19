@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Wield/wear an item
 /// </summary>
 [Serializable]
-internal class WieldGameCommand : GameCommandGameConfiguration
+public class WieldGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'w';
 

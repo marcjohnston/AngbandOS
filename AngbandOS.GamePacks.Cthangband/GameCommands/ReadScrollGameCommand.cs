@@ -12,7 +12,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// </summary>
 /// <param name="itemIndex"> The inventory index of the scroll to be read </param>
 [Serializable]
-internal class ReadScrollGameCommand : GameCommandGameConfiguration
+public class ReadScrollGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'r';
 

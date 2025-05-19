@@ -12,7 +12,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// </summary>
 /// <param name="itemIndex"> The inventory index of the food item </param>
 [Serializable]
-internal class EatFoodGameCommand : GameCommandGameConfiguration
+public class EatFoodGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'E';
 

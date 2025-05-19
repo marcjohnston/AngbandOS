@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Fire the missile weapon we have in our hand
 /// </summary>
 [Serializable]
-internal class FireGameCommand : GameCommandGameConfiguration
+public class FireGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'f';
 

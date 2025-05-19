@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Let the player scroll through previous messages
 /// </summary>
 [Serializable]
-internal class MessagesGameCommand : GameCommandGameConfiguration
+public class MessagesGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'P';
 

@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Show the player what a particular symbol represents
 /// </summary>
 [Serializable]
-internal class QuerySymbolGameCommand : GameCommandGameConfiguration
+public class QuerySymbolGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '/';
 

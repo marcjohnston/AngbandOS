@@ -12,7 +12,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// </summary>
 /// <param name="itemIndex"> The inventory index of the potion to quaff </param>
 [Serializable]
-internal class QuaffPotionGameCommand : GameCommandGameConfiguration
+public class QuaffPotionGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'q';
 

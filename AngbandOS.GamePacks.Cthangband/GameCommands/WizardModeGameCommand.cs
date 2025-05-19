@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class WizardModeGameCommand : GameCommandGameConfiguration
+public class WizardModeGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'W';
 

@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Display a map of the area on screen
 /// </summary>
 [Serializable]
-internal class ViewMapGameCommand : GameCommandGameConfiguration
+public class ViewMapGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'M';
 

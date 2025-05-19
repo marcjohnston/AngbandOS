@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Use a mutant or racial power
 /// </summary>
 [Serializable]
-internal class MutantPowerGameCommand : GameCommandGameConfiguration
+public class MutantPowerGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'p';
 

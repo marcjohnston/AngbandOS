@@ -12,7 +12,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// </summary>
 /// <exception cref="ArgumentOutOfRangeException"> </exception>
 [Serializable]
-internal class AlterGameCommand : GameCommandGameConfiguration
+public class AlterGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '+';
 

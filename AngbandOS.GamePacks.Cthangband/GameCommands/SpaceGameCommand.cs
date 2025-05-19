@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class SpaceGameCommand : GameCommandGameConfiguration
+public class SpaceGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => ' ';
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class CarriageReturnGameCommand : GameCommandGameConfiguration
+public class CarriageReturnGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '\r';
 }

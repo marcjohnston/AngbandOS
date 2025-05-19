@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Spend a turn searching for traps and secret doors
 /// </summary>
 [Serializable]
-internal class SearchGameCommand : GameCommandGameConfiguration
+public class SearchGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 's';
 

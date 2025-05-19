@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Close a door
 /// </summary>
 [Serializable]
-internal class CloseGameCommand : GameCommandGameConfiguration
+public class CloseGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'c';
 

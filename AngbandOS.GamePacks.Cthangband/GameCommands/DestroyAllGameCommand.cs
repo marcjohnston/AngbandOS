@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Destroy all worthless items in your pack
 /// </summary>
 [Serializable]
-internal class DestroyAllGameCommand : GameCommandGameConfiguration
+public class DestroyAllGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'K';
 

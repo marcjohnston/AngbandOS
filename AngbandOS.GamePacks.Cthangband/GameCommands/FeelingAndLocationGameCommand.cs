@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Repeat the level feeling for the player and also say where we are
 /// </summary>
 [Serializable]
-internal class FeelingAndLocationGameCommand : GameCommandGameConfiguration
+public class FeelingAndLocationGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'H';
 

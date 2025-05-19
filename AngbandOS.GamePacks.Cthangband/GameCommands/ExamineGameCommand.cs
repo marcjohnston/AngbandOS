@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Examine an item
 /// </summary>
 [Serializable]
-internal class ExamineGameCommand : GameCommandGameConfiguration
+public class ExamineGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'x';
 

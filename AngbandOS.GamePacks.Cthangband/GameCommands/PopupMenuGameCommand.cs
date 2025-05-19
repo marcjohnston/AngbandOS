@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Fire the popup menu for quitting and changing options
 /// </summary>
 [Serializable]
-internal class PopupMenuGameCommand : GameCommandGameConfiguration
+public class PopupMenuGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '\x1b';
 

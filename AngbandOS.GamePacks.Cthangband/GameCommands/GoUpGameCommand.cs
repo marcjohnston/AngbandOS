@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Go up a staircase
 /// </summary>
 [Serializable]
-internal class GoUpGameCommand : GameCommandGameConfiguration
+public class GoUpGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '<';
 

@@ -11,7 +11,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Look in the player's journal for any one of a number of different reasons
 /// </summary>
 [Serializable]
-internal class JournalGameCommand : GameCommandGameConfiguration
+public class JournalGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'J';
 

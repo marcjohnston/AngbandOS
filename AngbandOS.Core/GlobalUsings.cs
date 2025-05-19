@@ -15,7 +15,6 @@ global using AngbandOS.Core.AttackEffects;
 global using AngbandOS.Core.BirthStages;
 global using AngbandOS.Core.CharacterClasses;
 global using AngbandOS.Core.ChestTraps;
-global using AngbandOS.Core.GameCommands;
 global using AngbandOS.Core.ConsoleElements;
 global using AngbandOS.Core.DirectionalActivations;
 global using AngbandOS.Core.DungeonGenerators;
