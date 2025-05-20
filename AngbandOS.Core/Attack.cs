@@ -10,15 +10,25 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Attack : IGetKey
+internal class Attack : IGetKey
 {
     protected readonly Game Game;
-    protected Attack(Game game)
+    public Attack(Game game, AttackGameConfiguration attackGameConfiguration)
     {
         Game = game;
+        MonsterAction = attackGameConfiguration.MonsterAction;
+        Key = attackGameConfiguration.Key ?? attackGameConfiguration.GetType().Name;
+        PlayerActionMessages = attackGameConfiguration.PlayerActionMessages;
+        KnowledgeAction = attackGameConfiguration.KnowledgeAction;
+        AttackTouchesTarget = attackGameConfiguration.AttackTouchesTarget;
+        AttackAwakensTarget = attackGameConfiguration.AttackAwakensTarget;
+        AttackStunsTarget = attackGameConfiguration.AttackStunsTarget;
+        AttackCutsTarget = attackGameConfiguration.AttackCutsTarget;
+        RendersMissMessage = attackGameConfiguration.RendersMissMessage;
     }
 
-    public virtual string Key => GetType().Name;
+
+    public virtual string Key { get; }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -47,46 +57,46 @@ internal abstract class Attack : IGetKey
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.
     /// </summary>
-    public abstract string MonsterAction { get; }
+    public virtual string MonsterAction { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets the player.
     /// </summary>
     /// <param name="game"></param>
     /// <returns></returns>
-    public abstract string[]? PlayerActionMessages { get; }
+    public virtual string[]? PlayerActionMessages { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing
     /// their knowledge.
     /// </summary>
-    public abstract string KnowledgeAction { get; }
+    public virtual string KnowledgeAction { get; }
 
     /// <summary>
     /// Returns true, if the attack requires touching the target; false otherwise.  Returns true, by default.  The beg, drool, gaze, insult, moan, show, spit, 
     /// spore, wail and worship attacks do not require touching the target.
     /// </summary>
-    public virtual bool AttackTouchesTarget => true;
+    public virtual bool AttackTouchesTarget { get; } = true;
 
     /// <summary>
     /// Returns true, if the attack awakes the target; false otherwise.  Returns false, by default,  The beg, insult, moan and show attacks
     /// return true.
     /// </summary>
-    public virtual bool AttackAwakensTarget => false;
+    public virtual bool AttackAwakensTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack stuns the target; false otherwise.  Returns false, by default.  The hit, punch, kick, butt and crush attacks return true.
     /// </summary>
-    public virtual bool AttackStunsTarget => false;
+    public virtual bool AttackStunsTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack cuts the target; false otherwise.  Returns false, by default.  The hit, claw and bite attacks all return true.
     /// </summary>
-    public virtual bool AttackCutsTarget => false;
+    public virtual bool AttackCutsTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack should render a message, if the attack touches the target and missed; false no message should be rendered.  Returns true, by default.  
     /// Only the crawl attack, requires touching the target and does not render a miss message.
     /// </summary>
-    public virtual bool RendersMissMessage => true;
+    public virtual bool RendersMissMessage { get; } = true;
 }

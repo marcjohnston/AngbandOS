@@ -356,9 +356,9 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Timer>();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
-        LoadFromConfiguration<Animation, AnimationGameConfiguration, GenericAnimation>(gameConfiguration.Animations);
+        LoadFromConfiguration<Animation, AnimationGameConfiguration, Animation>(gameConfiguration.Animations);
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, GenericArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
-        LoadFromConfiguration<Attack, AttackGameConfiguration, GenericAttack>(gameConfiguration.Attacks);
+        LoadFromConfiguration<Attack, AttackGameConfiguration, Attack>(gameConfiguration.Attacks);
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration, GenericBoolWidget>(gameConfiguration.BoolWidgets);
         LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, GenericConditionalWidget>(gameConfiguration.ConditionalWidgets);
@@ -486,7 +486,7 @@ internal class SingletonRepository
     /// </summary>
     /// <param name="singleton"></param>
     /// <exception cref="Exception"></exception>
-    private void RegisterSingleton(object singleton)
+    private void RegisterSingleton(IGetKey singleton)
     {
         // Enumerate all of the interfaces that the singleton implements.
         Type? type = singleton.GetType();
@@ -554,7 +554,7 @@ internal class SingletonRepository
                     // We will only instantiate the singleton, if we are storing it.
                     try
                     {
-                        object singleton = constructors[0].Invoke(new object[] { Game });
+                        IGetKey singleton = (IGetKey)constructors[0].Invoke(new object[] { Game });
                         RegisterSingleton(singleton);
                     }
                     catch (Exception ex)
