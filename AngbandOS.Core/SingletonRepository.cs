@@ -365,7 +365,7 @@ internal class SingletonRepository
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, GenericDateWidget>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration, GenericDungeon>(gameConfiguration.Dungeons);
-        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GenericGameCommand>(gameConfiguration.GameCommands);
+        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GameCommand>(gameConfiguration.GameCommands);
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
         LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, GenericIntWidget>(gameConfiguration.IntWidgets);
@@ -480,18 +480,23 @@ internal class SingletonRepository
         _singletonsDictionary.Add(typeName, genericRepository);
     }
 
-    private void LoadSingleton(object? singleton)
+    /// <summary>
+    /// Registers a singleton with all of the repositories by determining all of the interfaces and base classes that the singleton supports and registering the singleton
+    /// with each associated repository.
+    /// </summary>
+    /// <param name="singleton"></param>
+    /// <exception cref="Exception"></exception>
+    private void RegisterSingleton(object singleton)
     {
         // Enumerate all of the interfaces that the singleton implements.
-        Type type = singleton.GetType();
+        Type? type = singleton.GetType();
         string name = type.Name;
         List<Type> interfaceTypeNames = new List<Type>();
         interfaceTypeNames.AddRange(type.GetInterfaces());
-        Type? baseType = type.BaseType;
-        while (baseType != null)
+        while (type != null)
         {
-            interfaceTypeNames.Add(baseType);
-            baseType = baseType.BaseType;
+            interfaceTypeNames.Add(type);
+            type = type.BaseType;
         }
 
         // Place the singleton into the respective dictionary repositories for each interface.
@@ -549,8 +554,8 @@ internal class SingletonRepository
                     // We will only instantiate the singleton, if we are storing it.
                     try
                     {
-                        object? singleton = constructors[0].Invoke(new object[] { Game });
-                        LoadSingleton(singleton);
+                        object singleton = constructors[0].Invoke(new object[] { Game });
+                        RegisterSingleton(singleton);
                     }
                     catch (Exception ex)
                     {
@@ -575,7 +580,7 @@ internal class SingletonRepository
             {
                 // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
                 TGeneric entity = (TGeneric)constructors[0].Invoke(new object[] { Game, entityConfiguration });
-                LoadSingleton(entity);
+                RegisterSingleton(entity);
             }
         }
         else
