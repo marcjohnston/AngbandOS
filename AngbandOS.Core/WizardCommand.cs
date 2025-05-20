@@ -10,12 +10,18 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class WizardCommand : IHelpCommand, IGetKey
+internal class WizardCommand : IHelpCommand, IGetKey
 {
     protected readonly Game Game;
-    protected WizardCommand(Game game)
+    public WizardCommand(Game game, WizardCommandGameConfiguration wizardCommandGameConfiguration)
     {
         Game = game;
+        Key = wizardCommandGameConfiguration.Key ?? wizardCommandGameConfiguration.GetType().Name;
+        KeyChar = wizardCommandGameConfiguration.KeyChar;
+        IsEnabled = wizardCommandGameConfiguration.IsEnabled;
+        ExecuteScriptName = wizardCommandGameConfiguration.ExecuteScriptName;
+        HelpDescription = wizardCommandGameConfiguration.HelpDescription;
+        HelpGroupName = wizardCommandGameConfiguration.HelpGroupName;
     }
 
     /// <summary>
@@ -36,7 +42,7 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
     public void Bind() 
@@ -45,27 +51,27 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey
         HelpGroup = HelpGroupName == null ? null : Game.SingletonRepository.Get<HelpGroup>(HelpGroupName);
     }
 
-    public abstract char KeyChar { get; }
+    public virtual char KeyChar { get; }
 
-    public virtual bool IsEnabled => true;
+    public virtual bool IsEnabled { get; } = true;
 
     /// <summary>
     /// Returns the name of a group when rendering the wizard help screen; or null, if the command should not be rendered on the help screen.  Returns null, by default.
     /// </summary>
     public HelpGroup? HelpGroup { get; private set; }
 
-    protected virtual string? HelpGroupName => null;
+    protected virtual string? HelpGroupName { get; } = null;
 
     /// <summary>
     /// Returns a description of the command to be rendered on the Wizard Help screen.  Returns empty by default.
     /// </summary>
-    public virtual string HelpDescription => "";
+    public virtual string HelpDescription { get; } = "";
 
     /// <summary>
     /// Returns the name of the script to run; or null, if the command is ignored.  Returns null, by default.  This property is bound to the ExecuteScript property during
     /// the bind phase.
     /// </summary>
-    protected virtual string? ExecuteScriptName => null;
+    protected virtual string? ExecuteScriptName { get; } = null;
 
     public IScript? ExecuteScript { get; private set; }
 }
