@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageSenseUnseenLifeSpell : ClassSpell
 {
     private HighMageSenseUnseenLifeSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(LifeSpellSenseUnseen);
+    public override string SpellName => nameof(SenseUnseenLifeSpell);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 17;
     public override int ManaCost => 15;

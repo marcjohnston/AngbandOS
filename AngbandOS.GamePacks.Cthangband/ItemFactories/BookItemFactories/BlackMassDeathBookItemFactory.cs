@@ -27,14 +27,14 @@ public class BlackMassDeathBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.DeathSpellOrbOfEntropy),
-        nameof(SpellsEnum.DeathSpellNetherBolt),
-        nameof(SpellsEnum.DeathSpellTerror),
-        nameof(SpellsEnum.DeathSpellVampiricDrain),
-        nameof(SpellsEnum.DeathSpellPoisonBranding),
-        nameof(SpellsEnum.DeathSpellDispelGood),
-        nameof(SpellsEnum.DeathSpellCarnage),
-        nameof(SpellsEnum.DeathSpellRestoreLife)
+        nameof(SpellsEnum.OrbOfEntropyDeathSpell),
+        nameof(SpellsEnum.NetherBoltDeathSpell),
+        nameof(SpellsEnum.TerrorDeathSpell),
+        nameof(SpellsEnum.VampiricDrainDeathSpell),
+        nameof(SpellsEnum.PoisonBrandingDeathSpell),
+        nameof(SpellsEnum.DispelGoodDeathSpell),
+        nameof(SpellsEnum.CarnageDeathSpell),
+        nameof(SpellsEnum.RestoreLifeDeathSpell)
     };
     public override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
     public override bool HatesFire => true;

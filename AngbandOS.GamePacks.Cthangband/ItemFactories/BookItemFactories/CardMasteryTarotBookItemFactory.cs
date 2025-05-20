@@ -28,14 +28,14 @@ public class CardMasteryTarotBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.TarotSpellSummonObject),
-        nameof(SpellsEnum.TarotSpellSummonAnimal),
-        nameof(SpellsEnum.TarotSpellPhantasmalServant),
-        nameof(SpellsEnum.TarotSpellSummonMonster),
-        nameof(SpellsEnum.TarotSpellConjureElemental),
-        nameof(SpellsEnum.TarotSpellTeleportLevel),
-        nameof(SpellsEnum.TarotSpellWordOfRecall),
-        nameof(SpellsEnum.TarotSpellBanish)
+        nameof(SpellsEnum.SummonObjectTarotSpell),
+        nameof(SpellsEnum.SummonAnimalTarotSpell),
+        nameof(SpellsEnum.PhantasmalServantTarotSpell),
+        nameof(SpellsEnum.SummonMonsterTarotSpell),
+        nameof(SpellsEnum.ConjureElementalTarotSpell),
+        nameof(SpellsEnum.TeleportLevelTarotSpell),
+        nameof(SpellsEnum.WordOfRecallTarotSpell),
+        nameof(SpellsEnum.BanishTarotSpell)
     };
     public override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;

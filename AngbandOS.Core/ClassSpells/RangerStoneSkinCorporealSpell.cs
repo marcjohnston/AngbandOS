@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class RangerStoneSkinCorporealSpell : ClassSpell
 {
     private RangerStoneSkinCorporealSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(CorporealSpellStoneSkin);
+    public override string SpellName => nameof(StoneSkinCorporealSpell);
     public override string CharacterClassName => nameof(RangerCharacterClass);
     public override int Level => 17;
     public override int ManaCost => 17;

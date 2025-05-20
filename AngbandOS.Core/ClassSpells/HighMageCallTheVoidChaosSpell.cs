@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageCallTheVoidChaosSpell : ClassSpell
 {
     private HighMageCallTheVoidChaosSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(ChaosSpellCallTheVoid);
+    public override string SpellName => nameof(CallTheVoidChaosSpell);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 46;
     public override int ManaCost => 90;

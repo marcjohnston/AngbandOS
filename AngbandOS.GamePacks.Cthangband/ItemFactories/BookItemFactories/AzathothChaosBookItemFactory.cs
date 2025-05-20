@@ -35,14 +35,14 @@ public class AzathothChaosBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.ChaosSpellGravityBeam),
-        nameof(SpellsEnum.ChaosSpellMeteorSwarm),
-        nameof(SpellsEnum.ChaosSpellFlameStrike),
-        nameof(SpellsEnum.ChaosSpellCallChaos),
-        nameof(SpellsEnum.ChaosSpellShardBall),
-        nameof(SpellsEnum.ChaosSpellManaStorm),
-        nameof(SpellsEnum.ChaosSpellBreatheChaos),
-        nameof(SpellsEnum.ChaosSpellCallTheVoid)
+        nameof(SpellsEnum.GravityBeamChaosSpell),
+        nameof(SpellsEnum.MeteorSwarmChaosSpell),
+        nameof(SpellsEnum.FlameStrikeChaosSpell),
+        nameof(SpellsEnum.CallChaosChaosSpell),
+        nameof(SpellsEnum.ShardBallChaosSpell),
+        nameof(SpellsEnum.ManaStormChaosSpell),
+        nameof(SpellsEnum.BreatheChaosChaosSpell),
+        nameof(SpellsEnum.CallTheVoidChaosSpell)
     };
     public override string ItemClassBindingKey => nameof(ChaosSpellBooksItemClass);
     public override int PackSort => 5;

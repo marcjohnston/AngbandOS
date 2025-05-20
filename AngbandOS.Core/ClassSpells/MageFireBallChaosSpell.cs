@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageFireBallChaosSpell : ClassSpell
 {
     private MageFireBallChaosSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(ChaosSpellFireBall);
+    public override string SpellName => nameof(FireBallChaosSpell);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 25;
     public override int ManaCost => 16;

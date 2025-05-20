@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class PriestCureWoundsAndPoisonNatureSpell : ClassSpell
 {
     private PriestCureWoundsAndPoisonNatureSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(NatureSpellCureWoundsAndPoison);
+    public override string SpellName => nameof(CureWoundsAndPoisonNatureSpell);
     public override string CharacterClassName => nameof(PriestCharacterClass);
     public override int Level => 7;
     public override int ManaCost => 7;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistWhirlpoolNatureSpell : ClassSpell
 {
     private CultistWhirlpoolNatureSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(NatureSpellWhirlpool);
+    public override string SpellName => nameof(WhirlpoolNatureSpell);
     public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 38;
     public override int ManaCost => 38;

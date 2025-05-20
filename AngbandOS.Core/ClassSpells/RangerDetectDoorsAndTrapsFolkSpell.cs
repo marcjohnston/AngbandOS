@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class RangerDetectDoorsAndTrapsFolkSpell : ClassSpell
 {
     private RangerDetectDoorsAndTrapsFolkSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(FolkSpellDetectDoorsAndTraps);
+    public override string SpellName => nameof(DetectDoorsAndTrapsFolkSpell);
     public override string CharacterClassName => nameof(RangerCharacterClass);
     public override int Level => 9;
     public override int ManaCost => 9;

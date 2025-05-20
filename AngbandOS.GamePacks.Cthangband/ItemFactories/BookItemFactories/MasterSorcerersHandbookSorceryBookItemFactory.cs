@@ -27,14 +27,14 @@ public class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactoryGameConf
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.SorcerySpellMagicMapping),
-        nameof(SpellsEnum.SorcerySpellIdentify),
-        nameof(SpellsEnum.SorcerySpellSlowMonster),
-        nameof(SpellsEnum.SorcerySpellMassSleep),
-        nameof(SpellsEnum.SorcerySpellTeleportAway),
-        nameof(SpellsEnum.SorcerySpellHasteSelf),
-        nameof(SpellsEnum.SorcerySpellDetectionTrue),
-        nameof(SpellsEnum.SorcerySpellIdentifyTrue)
+        nameof(SpellsEnum.MagicMappingSorcerySpell),
+        nameof(SpellsEnum.IdentifySorcerySpell),
+        nameof(SpellsEnum.SlowMonsterSorcerySpell),
+        nameof(SpellsEnum.MassSleepSorcerySpell),
+        nameof(SpellsEnum.TeleportAwaySorcerySpell),
+        nameof(SpellsEnum.HasteSelfSorcerySpell),
+        nameof(SpellsEnum.DetectionTrueSorcerySpell),
+        nameof(SpellsEnum.IdentifyTrueSorcerySpell)
     };
     /// <summary>
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.

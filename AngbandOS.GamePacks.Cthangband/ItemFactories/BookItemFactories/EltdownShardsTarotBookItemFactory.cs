@@ -31,14 +31,14 @@ public class EltdownShardsTarotBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.TarotSpellTheFool),
-        nameof(SpellsEnum.TarotSpellSummonSpiders),
-        nameof(SpellsEnum.TarotSpellSummonReptiles),
-        nameof(SpellsEnum.TarotSpellSummonHounds),
-        nameof(SpellsEnum.TarotSpellAstralBranding),
-        nameof(SpellsEnum.TarotSpellExtraDimensionalBeing),
-        nameof(SpellsEnum.TarotSpellDeathDealing),
-        nameof(SpellsEnum.TarotSpellSummonReaver)
+        nameof(SpellsEnum.TheFoolTarotSpell),
+        nameof(SpellsEnum.SummonSpidersTarotSpell),
+        nameof(SpellsEnum.SummonReptilesTarotSpell),
+        nameof(SpellsEnum.SummonHoundsTarotSpell),
+        nameof(SpellsEnum.AstralBrandingTarotSpell),
+        nameof(SpellsEnum.ExtraDimensionalBeingTarotSpell),
+        nameof(SpellsEnum.DeathDealingTarotSpell),
+        nameof(SpellsEnum.SummonReaverTarotSpell)
     };
     public override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;

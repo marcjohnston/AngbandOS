@@ -37,14 +37,14 @@ public class NecronomiconDeathBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.DeathSpellDeathRay),
-        nameof(SpellsEnum.DeathSpellRaiseTheDead),
-        nameof(SpellsEnum.DeathSpellEsoteria),
-        nameof(SpellsEnum.DeathSpellWordOfDeath),
-        nameof(SpellsEnum.DeathSpellEvocation),
-        nameof(SpellsEnum.DeathSpellHellfire),
-        nameof(SpellsEnum.DeathSpellAnnihilation),
-        nameof(SpellsEnum.DeathSpellWraithform)
+        nameof(SpellsEnum.DeathRayDeathSpell),
+        nameof(SpellsEnum.RaiseTheDeadDeathSpell),
+        nameof(SpellsEnum.EsoteriaDeathSpell),
+        nameof(SpellsEnum.WordOfDeathDeathSpell),
+        nameof(SpellsEnum.EvocationDeathSpell),
+        nameof(SpellsEnum.HellfireDeathSpell),
+        nameof(SpellsEnum.AnnihilationDeathSpell),
+        nameof(SpellsEnum.WraithformDeathSpell)
     };
     public override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
     public override bool HatesFire => true;

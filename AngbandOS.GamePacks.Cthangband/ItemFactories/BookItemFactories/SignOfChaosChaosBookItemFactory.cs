@@ -27,14 +27,14 @@ public class SignOfChaosChaosBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.ChaosSpellMagicMissile),
-        nameof(SpellsEnum.ChaosSpellTrapAndDoorDestruction),
-        nameof(SpellsEnum.ChaosSpellFlashOfLight),
-        nameof(SpellsEnum.ChaosSpellTouchOfConfusion),
-        nameof(SpellsEnum.ChaosSpellManaBurst),
-        nameof(SpellsEnum.ChaosSpellFireBolt),
-        nameof(SpellsEnum.ChaosSpellFistOfForce),
-        nameof(SpellsEnum.ChaosSpellTeleportSelf)
+        nameof(SpellsEnum.MagicMissileChaosSpell),
+        nameof(SpellsEnum.TrapAndDoorDestructionChaosSpell),
+        nameof(SpellsEnum.FlashOfLightChaosSpell),
+        nameof(SpellsEnum.TouchOfConfusionChaosSpell),
+        nameof(SpellsEnum.ManaBurstChaosSpell),
+        nameof(SpellsEnum.FireBoltChaosSpell),
+        nameof(SpellsEnum.FistOfForceChaosSpell),
+        nameof(SpellsEnum.TeleportSelfChaosSpell)
     };
     public override string ItemClassBindingKey => nameof(ChaosSpellBooksItemClass);
     public override int PackSort => 5;

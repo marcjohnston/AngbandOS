@@ -27,14 +27,14 @@ public class BlackPrayersDeathBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.DeathSpellDetectUnlife),
-        nameof(SpellsEnum.DeathSpellMalediction),
-        nameof(SpellsEnum.DeathSpellDetectEvil),
-        nameof(SpellsEnum.DeathSpellStinkingCloud),
-        nameof(SpellsEnum.DeathSpellBlackSleep),
-        nameof(SpellsEnum.DeathSpellResistPoison),
-        nameof(SpellsEnum.DeathSpellHorrify),
-        nameof(SpellsEnum.DeathSpellEnslaveUndead)
+        nameof(SpellsEnum.DetectUnlifeDeathSpell),
+        nameof(SpellsEnum.MaledictionDeathSpell),
+        nameof(SpellsEnum.DetectEvilDeathSpell),
+        nameof(SpellsEnum.StinkingCloudDeathSpell),
+        nameof(SpellsEnum.BlackSleepDeathSpell),
+        nameof(SpellsEnum.ResistPoisonDeathSpell),
+        nameof(SpellsEnum.HorrifyDeathSpell),
+        nameof(SpellsEnum.EnslaveUndeadDeathSpell)
     };
     public override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
     public override bool HatesFire => true;

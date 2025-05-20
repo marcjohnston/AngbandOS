@@ -26,14 +26,14 @@ public class CommonPrayerLifeBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.LifeSpellDetectEvil),
-        nameof(SpellsEnum.LifeSpellCureLightWounds),
-        nameof(SpellsEnum.LifeSpellBless),
-        nameof(SpellsEnum.LifeSpellRemoveFear),
-        nameof(SpellsEnum.LifeSpellCallLight),
-        nameof(SpellsEnum.LifeSpellDetectTrapsAndSecretDoors),
-        nameof(SpellsEnum.LifeSpellCureMediumWounds),
-        nameof(SpellsEnum.LifeSpellSatisfyHunger)
+        nameof(SpellsEnum.DetectEvilLifeSpell),
+        nameof(SpellsEnum.CureLightWoundsLifeSpell),
+        nameof(SpellsEnum.BlessLifeSpell),
+        nameof(SpellsEnum.RemoveFearLifeSpell),
+        nameof(SpellsEnum.CallLightLifeSpell),
+        nameof(SpellsEnum.DetectTrapsAndSecretDoorsLifeSpell),
+        nameof(SpellsEnum.CureMediumWoundsLifeSpell),
+        nameof(SpellsEnum.SatisfyHungerLifeSpell)
    };
     public override string ItemClassBindingKey => nameof(LifeSpellBooksItemClass);
     public override bool HatesFire => true;

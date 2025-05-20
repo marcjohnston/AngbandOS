@@ -26,14 +26,14 @@ public class CantripsforBeginnersFolkBookItemFactory : ItemFactoryGameConfigurat
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.FolkSpellZap),
-        nameof(SpellsEnum.FolkSpellWizardLock),
-        nameof(SpellsEnum.FolkSpellDetectInvisibility),
-        nameof(SpellsEnum.FolkSpellDetectMonsters),
-        nameof(SpellsEnum.FolkSpellBlink),
-        nameof(SpellsEnum.FolkSpellLightArea),
-        nameof(SpellsEnum.FolkSpellTrapAndDoorDestruction),
-        nameof(SpellsEnum.FolkSpellCureLightWounds),
+        nameof(SpellsEnum.ZapFolkSpell),
+        nameof(SpellsEnum.WizardLockFolkSpell),
+        nameof(SpellsEnum.DetectInvisibilityFolkSpell),
+        nameof(SpellsEnum.DetectMonstersFolkSpell),
+        nameof(SpellsEnum.BlinkFolkSpell),
+        nameof(SpellsEnum.LightAreaFolkSpell),
+        nameof(SpellsEnum.TrapAndDoorDestructionFolkSpell),
+        nameof(SpellsEnum.CureLightWoundsFolkSpell),
     };
     public override string ItemClassBindingKey => nameof(FolkSpellBooksItemClass);
     public override int PackSort => 2;

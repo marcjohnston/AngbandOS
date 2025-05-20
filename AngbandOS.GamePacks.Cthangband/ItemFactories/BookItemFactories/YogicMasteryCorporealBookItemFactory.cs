@@ -27,14 +27,14 @@ public class YogicMasteryCorporealBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.CorporealSpellBurnResistance),
-        nameof(SpellsEnum.CorporealSpellDetoxify),
-        nameof(SpellsEnum.CorporealSpellCureCriticalWounds),
-        nameof(SpellsEnum.CorporealSpellSeeInvisible),
-        nameof(SpellsEnum.CorporealSpellTeleport),
-        nameof(SpellsEnum.CorporealSpellHaste),
-        nameof(SpellsEnum.CorporealSpellHealing),
-        nameof(SpellsEnum.CorporealSpellResistTrue)
+        nameof(SpellsEnum.BurnResistanceCorporealSpell),
+        nameof(SpellsEnum.DetoxifyCorporealSpell),
+        nameof(SpellsEnum.CureCriticalWoundsCorporealSpell),
+        nameof(SpellsEnum.SeeInvisibleCorporealSpell),
+        nameof(SpellsEnum.TeleportCorporealSpell),
+        nameof(SpellsEnum.HasteCorporealSpell),
+        nameof(SpellsEnum.HealingCorporealSpell),
+        nameof(SpellsEnum.ResistTrueCorporealSpell)
     };
     public override string ItemClassBindingKey => nameof(CorporealSpellBooksItemClass);
     public override int PackSort => 1;

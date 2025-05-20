@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageStoneTellNatureSpell : ClassSpell
 {
     private MageStoneTellNatureSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(NatureSpellStoneTell);
+    public override string SpellName => nameof(StoneTellNatureSpell);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 37;
     public override int ManaCost => 40;

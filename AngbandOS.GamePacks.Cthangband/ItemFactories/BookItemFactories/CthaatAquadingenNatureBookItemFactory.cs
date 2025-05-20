@@ -37,14 +37,14 @@ public class CthaatAquadingenNatureBookItemFactory : ItemFactoryGameConfiguratio
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.NatureSpellEarthquake),
-        nameof(SpellsEnum.NatureSpellWhirlwindAttack),
-        nameof(SpellsEnum.NatureSpellBlizzard),
-        nameof(SpellsEnum.NatureSpellLightningStorm),
-        nameof(SpellsEnum.NatureSpellWhirlpool),
-        nameof(SpellsEnum.NatureSpellCallSunlight),
-        nameof(SpellsEnum.NatureSpellElementalBranding),
-        nameof(SpellsEnum.NatureSpellNaturesWrath)
+        nameof(SpellsEnum.EarthquakeNatureSpell),
+        nameof(SpellsEnum.WhirlwindAttackNatureSpell),
+        nameof(SpellsEnum.BlizzardNatureSpell),
+        nameof(SpellsEnum.LightningStormNatureSpell),
+        nameof(SpellsEnum.WhirlpoolNatureSpell),
+        nameof(SpellsEnum.CallSunlightNatureSpell),
+        nameof(SpellsEnum.ElementalBrandingNatureSpell),
+        nameof(SpellsEnum.NaturesWrathNatureSpell)
     };
     public override string ItemClassBindingKey => nameof(NatureSpellBooksItemClass);
 

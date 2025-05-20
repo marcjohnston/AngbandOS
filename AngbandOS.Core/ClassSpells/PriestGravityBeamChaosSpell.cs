@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class PriestGravityBeamChaosSpell : ClassSpell
 {
     private PriestGravityBeamChaosSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(ChaosSpellGravityBeam);
+    public override string SpellName => nameof(GravityBeamChaosSpell);
     public override string CharacterClassName => nameof(PriestCharacterClass);
     public override int Level => 25;
     public override int ManaCost => 25;

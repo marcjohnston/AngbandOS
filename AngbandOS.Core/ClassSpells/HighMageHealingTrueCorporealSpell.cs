@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageHealingTrueCorporealSpell : ClassSpell
 {
     private HighMageHealingTrueCorporealSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(CorporealSpellHealingTrue);
+    public override string SpellName => nameof(HealingTrueCorporealSpell);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 30;
     public override int ManaCost => 65;

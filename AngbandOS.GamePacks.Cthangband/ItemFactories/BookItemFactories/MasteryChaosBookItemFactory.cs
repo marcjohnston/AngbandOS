@@ -27,14 +27,14 @@ public class MasteryChaosBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.ChaosSpellWonder),
-        nameof(SpellsEnum.ChaosSpellChaosBolt),
-        nameof(SpellsEnum.ChaosSpellSonicBoom),
-        nameof(SpellsEnum.ChaosSpellDoomBolt),
-        nameof(SpellsEnum.ChaosSpellFireBall),
-        nameof(SpellsEnum.ChaosSpellTeleportOther),
-        nameof(SpellsEnum.ChaosSpellWordOfDestruction),
-        nameof(SpellsEnum.ChaosSpellInvokeChaos)
+        nameof(SpellsEnum.WonderChaosSpell),
+        nameof(SpellsEnum.ChaosBoltChaosSpell),
+        nameof(SpellsEnum.SonicBoomChaosSpell),
+        nameof(SpellsEnum.DoomBoltChaosSpell),
+        nameof(SpellsEnum.FireBallChaosSpell),
+        nameof(SpellsEnum.TeleportOtherChaosSpell),
+        nameof(SpellsEnum.WordOfDestructionChaosSpell),
+        nameof(SpellsEnum.InvokeChaosChaosSpell)
     };
     public override string ItemClassBindingKey => nameof(ChaosSpellBooksItemClass);
     public override int PackSort => 5;

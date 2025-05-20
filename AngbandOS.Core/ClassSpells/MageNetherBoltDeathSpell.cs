@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageNetherBoltDeathSpell : ClassSpell
 {
     private MageNetherBoltDeathSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(DeathSpellNetherBolt);
+    public override string SpellName => nameof(NetherBoltDeathSpell);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 13;
     public override int ManaCost => 12;

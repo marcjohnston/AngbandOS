@@ -31,14 +31,14 @@ public class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactoryGameConf
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.SorcerySpellDetectObjectsAndTreasure),
-        nameof(SpellsEnum.SorcerySpellDetectEnchantment),
-        nameof(SpellsEnum.SorcerySpellCharmMonster),
-        nameof(SpellsEnum.SorcerySpellDimensionDoor),
-        nameof(SpellsEnum.SorcerySpellSenseMinds),
-        nameof(SpellsEnum.SorcerySpellSelfKnowledge),
-        nameof(SpellsEnum.SorcerySpellTeleportLevel),
-        nameof(SpellsEnum.SorcerySpellWordOfRecall)
+        nameof(SpellsEnum.DetectObjectsAndTreasureSorcerySpell),
+        nameof(SpellsEnum.DetectEnchantmentSorcerySpell),
+        nameof(SpellsEnum.CharmMonsterSorcerySpell),
+        nameof(SpellsEnum.DimensionDoorSorcerySpell),
+        nameof(SpellsEnum.SenseMindsSorcerySpell),
+        nameof(SpellsEnum.SelfKnowledgeSorcerySpell),
+        nameof(SpellsEnum.TeleportLevelSorcerySpell),
+        nameof(SpellsEnum.WordOfRecallSorcerySpell)
     };
 
     public override string ItemClassBindingKey => nameof(SorcerySpellBooksItemClass);

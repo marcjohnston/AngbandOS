@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class RogueDetectObjectsAndTreasureSorcerySpell : ClassSpell
 {
     private RogueDetectObjectsAndTreasureSorcerySpell(Game game) : base(game) { }
-    public override string SpellName => nameof(SorcerySpellDetectObjectsAndTreasure);
+    public override string SpellName => nameof(DetectObjectsAndTreasureSorcerySpell);
     public override string CharacterClassName => nameof(RogueCharacterClass);
     public override int Level => 9;
     public override int ManaCost => 3;

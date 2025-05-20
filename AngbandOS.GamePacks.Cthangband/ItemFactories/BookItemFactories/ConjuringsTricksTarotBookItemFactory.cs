@@ -27,14 +27,14 @@ public class ConjuringsTricksTarotBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.TarotSpellPhaseDoor),
-        nameof(SpellsEnum.TarotSpellMindBlast),
-        nameof(SpellsEnum.TarotSpellTarotDraw),
-        nameof(SpellsEnum.TarotSpellResetRecall),
-        nameof(SpellsEnum.TarotSpellTeleport),
-        nameof(SpellsEnum.TarotSpellDimensionDoor),
-        nameof(SpellsEnum.TarotSpellAstralSpying),
-        nameof(SpellsEnum.TarotSpellTeleportAway)
+        nameof(SpellsEnum.PhaseDoorTarotSpell),
+        nameof(SpellsEnum.MindBlastTarotSpell),
+        nameof(SpellsEnum.TarotDrawTarotSpell),
+        nameof(SpellsEnum.ResetRecallTarotSpell),
+        nameof(SpellsEnum.TeleportTarotSpell),
+        nameof(SpellsEnum.DimensionDoorTarotSpell),
+        nameof(SpellsEnum.AstralSpyingTarotSpell),
+        nameof(SpellsEnum.TeleportAwayTarotSpell)
     };
     public override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;

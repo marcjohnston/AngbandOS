@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class RogueZapFolkSpell : ClassSpell
 {
     private RogueZapFolkSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(FolkSpellZap);
+    public override string SpellName => nameof(ZapFolkSpell);
     public override string CharacterClassName => nameof(RogueCharacterClass);
     public override int Level => 5;
     public override int ManaCost => 2;

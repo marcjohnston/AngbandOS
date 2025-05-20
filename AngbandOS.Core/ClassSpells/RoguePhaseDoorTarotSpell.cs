@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class RoguePhaseDoorTarotSpell : ClassSpell
 {
     private RoguePhaseDoorTarotSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(TarotSpellPhaseDoor);
+    public override string SpellName => nameof(PhaseDoorTarotSpell);
     public override string CharacterClassName => nameof(RogueCharacterClass);
     public override int Level => 5;
     public override int ManaCost => 2;

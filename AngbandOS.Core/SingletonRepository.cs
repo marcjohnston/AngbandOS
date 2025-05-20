@@ -214,9 +214,9 @@ internal class SingletonRepository
             Game.MsgPrint("The persistance interface does not support entity persistance.");
             return;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Game.MsgPrint("The persistance interface failed to save the configuration.");
+            Game.MsgPrint($"The persistance interface failed to save the configuration '{ex.Message}'.");
             return;
         }
     }

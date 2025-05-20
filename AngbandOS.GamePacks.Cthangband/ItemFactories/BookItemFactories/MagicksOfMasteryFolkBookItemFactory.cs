@@ -33,14 +33,14 @@ public class MagicksOfMasteryFolkBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.FolkSpellRecharging),
-        nameof(SpellsEnum.FolkSpellTeleportLevel),
-        nameof(SpellsEnum.FolkSpellIdentify),
-        nameof(SpellsEnum.FolkSpellTeleportAway),
-        nameof(SpellsEnum.FolkSpellElementalBall),
-        nameof(SpellsEnum.FolkSpellDetection),
-        nameof(SpellsEnum.FolkSpellWordOfRecall),
-        nameof(SpellsEnum.FolkSpellClairvoyance)
+        nameof(SpellsEnum.RechargingFolkSpell),
+        nameof(SpellsEnum.TeleportLevelFolkSpell),
+        nameof(SpellsEnum.IdentifyFolkSpell),
+        nameof(SpellsEnum.TeleportAwayFolkSpell),
+        nameof(SpellsEnum.ElementalBallFolkSpell),
+        nameof(SpellsEnum.DetectionFolkSpell),
+        nameof(SpellsEnum.WordOfRecallFolkSpell),
+        nameof(SpellsEnum.ClairvoyanceFolkSpell)
     };
     public override string ItemClassBindingKey => nameof(FolkSpellBooksItemClass);
     public override int PackSort => 2;

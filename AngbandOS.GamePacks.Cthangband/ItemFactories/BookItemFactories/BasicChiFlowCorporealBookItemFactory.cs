@@ -27,14 +27,14 @@ public class BasicChiFlowCorporealBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.CorporealSpellBlink),
-        nameof(SpellsEnum.CorporealSpellBravery),
-        nameof(SpellsEnum.CorporealSpellBatsSense),
-        nameof(SpellsEnum.CorporealSpellEaglesVision),
-        nameof(SpellsEnum.CorporealSpellMindVision),
-        nameof(SpellsEnum.CorporealSpellCureMediumWounds),
-        nameof(SpellsEnum.CorporealSpellCureLightWounds),
-        nameof(SpellsEnum.CorporealSpellSatisfyHunger)
+        nameof(SpellsEnum.BlinkCorporealSpell),
+        nameof(SpellsEnum.BraveryCorporealSpell),
+        nameof(SpellsEnum.BatsSenseCorporealSpell),
+        nameof(SpellsEnum.EaglesVisionCorporealSpell),
+        nameof(SpellsEnum.MindVisionCorporealSpell),
+        nameof(SpellsEnum.CureMediumWoundsCorporealSpell),
+        nameof(SpellsEnum.CureLightWoundsCorporealSpell),
+        nameof(SpellsEnum.SatisfyHungerCorporealSpell)
     };
     public override string ItemClassBindingKey => nameof(CorporealSpellBooksItemClass);
 

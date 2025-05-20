@@ -37,14 +37,14 @@ public class PnakoticManuscriptsCorporealBookItemFactory : ItemFactoryGameConfig
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.CorporealSpellHeroism),
-        nameof(SpellsEnum.CorporealSpellWraithform),
-        nameof(SpellsEnum.CorporealSpellAttunement),
-        nameof(SpellsEnum.CorporealSpellRestoreBody),
-        nameof(SpellsEnum.CorporealSpellHealingTrue),
-        nameof(SpellsEnum.CorporealSpellHypnoticEyes),
-        nameof(SpellsEnum.CorporealSpellRestoreSoul),
-        nameof(SpellsEnum.CorporealSpellInvulnerability)
+        nameof(SpellsEnum.HeroismCorporealSpell),
+        nameof(SpellsEnum.WraithformCorporealSpell),
+        nameof(SpellsEnum.AttunementCorporealSpell),
+        nameof(SpellsEnum.RestoreBodyCorporealSpell),
+        nameof(SpellsEnum.HealingTrueCorporealSpell),
+        nameof(SpellsEnum.HypnoticEyesCorporealSpell),
+        nameof(SpellsEnum.RestoreSoulCorporealSpell),
+        nameof(SpellsEnum.InvulnerabilityCorporealSpell)
    };
     public override string ItemClassBindingKey => nameof(CorporealSpellBooksItemClass);
     public override int PackSort => 1;

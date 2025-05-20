@@ -31,14 +31,14 @@ public class CultesdesGoulesDeathBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.DeathSpellBerserk),
-        nameof(SpellsEnum.DeathSpellInvokeSpirits),
-        nameof(SpellsEnum.DeathSpellDarkBolt),
-        nameof(SpellsEnum.DeathSpellBattleFrenzy),
-        nameof(SpellsEnum.DeathSpellVampirismTrue),
-        nameof(SpellsEnum.DeathSpellVampiricBranding),
-        nameof(SpellsEnum.DeathSpellDarknessStorm),
-        nameof(SpellsEnum.DeathSpellMassCarnage)
+        nameof(SpellsEnum.BerserkDeathSpell),
+        nameof(SpellsEnum.InvokeSpiritsDeathSpell),
+        nameof(SpellsEnum.DarkBoltDeathSpell),
+        nameof(SpellsEnum.BattleFrenzyDeathSpell),
+        nameof(SpellsEnum.VampirismTrueDeathSpell),
+        nameof(SpellsEnum.VampiricBrandingDeathSpell),
+        nameof(SpellsEnum.DarknessStormDeathSpell),
+        nameof(SpellsEnum.MassCarnageDeathSpell)
     };
     public override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
     public override bool HatesFire => true;

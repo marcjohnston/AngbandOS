@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageEnchantArmorSorcerySpell : ClassSpell
 {
     private HighMageEnchantArmorSorcerySpell(Game game) : base(game) { }
-    public override string SpellName => nameof(SorcerySpellEnchantArmor);
+    public override string SpellName => nameof(EnchantArmorSorcerySpell);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 35;
     public override int ManaCost => 80;

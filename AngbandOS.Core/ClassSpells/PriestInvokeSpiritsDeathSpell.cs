@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class PriestInvokeSpiritsDeathSpell : ClassSpell
 {
     private PriestInvokeSpiritsDeathSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(DeathSpellInvokeSpirits);
+    public override string SpellName => nameof(InvokeSpiritsDeathSpell);
     public override string CharacterClassName => nameof(PriestCharacterClass);
     public override int Level => 13;
     public override int ManaCost => 15;

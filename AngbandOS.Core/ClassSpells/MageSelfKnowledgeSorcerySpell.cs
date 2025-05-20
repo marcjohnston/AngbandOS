@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageSelfKnowledgeSorcerySpell : ClassSpell
 {
     private MageSelfKnowledgeSorcerySpell(Game game) : base(game) { }
-    public override string SpellName => nameof(SorcerySpellSelfKnowledge);
+    public override string SpellName => nameof(SelfKnowledgeSorcerySpell);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 20;
     public override int ManaCost => 18;

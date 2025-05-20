@@ -27,14 +27,14 @@ public class CallOfTheWildNatureBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.NatureSpellDetectCreatures),
-        nameof(SpellsEnum.NatureSpellFirstAid),
-        nameof(SpellsEnum.NatureSpellDetectDoorsAndTraps),
-        nameof(SpellsEnum.NatureSpellForaging),
-        nameof(SpellsEnum.NatureSpellDaylight),
-        nameof(SpellsEnum.NatureSpellAnimalTaming),
-        nameof(SpellsEnum.NatureSpellResistEnvironment),
-        nameof(SpellsEnum.NatureSpellCureWoundsAndPoison)
+        nameof(SpellsEnum.DetectCreaturesNatureSpell),
+        nameof(SpellsEnum.FirstAidNatureSpell),
+        nameof(SpellsEnum.DetectDoorsAndTrapsNatureSpell),
+        nameof(SpellsEnum.ForagingNatureSpell),
+        nameof(SpellsEnum.DaylightNatureSpell),
+        nameof(SpellsEnum.AnimalTamingNatureSpell),
+        nameof(SpellsEnum.ResistEnvironmentNatureSpell),
+        nameof(SpellsEnum.CureWoundsAndPoisonNatureSpell)
     };
     public override string ItemClassBindingKey => nameof(NatureSpellBooksItemClass);
 

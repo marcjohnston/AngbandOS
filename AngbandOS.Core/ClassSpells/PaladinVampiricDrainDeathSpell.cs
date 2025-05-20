@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class PaladinVampiricDrainDeathSpell : ClassSpell
 {
     private PaladinVampiricDrainDeathSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(DeathSpellVampiricDrain);
+    public override string SpellName => nameof(VampiricDrainDeathSpell);
     public override string CharacterClassName => nameof(PaladinCharacterClass);
     public override int Level => 28;
     public override int ManaCost => 26;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageMagicMappingSorcerySpell : ClassSpell
 {
     private HighMageMagicMappingSorcerySpell(Game game) : base(game) { }
-    public override string SpellName => nameof(SorcerySpellMagicMapping);
+    public override string SpellName => nameof(MagicMappingSorcerySpell);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 7;
     public override int ManaCost => 5;

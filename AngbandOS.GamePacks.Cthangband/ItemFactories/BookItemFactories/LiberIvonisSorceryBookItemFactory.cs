@@ -37,14 +37,14 @@ public class LiberIvonisSorceryBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.SorcerySpellStasis),
-        nameof(SpellsEnum.SorcerySpellTelekinesis),
-        nameof(SpellsEnum.SorcerySpellYellowSign),
-        nameof(SpellsEnum.SorcerySpellClairvoyance),
-        nameof(SpellsEnum.SorcerySpellEnchantWeapon),
-        nameof(SpellsEnum.SorcerySpellEnchantArmor),
-        nameof(SpellsEnum.SorcerySpellAlchemy),
-        nameof(SpellsEnum.SorcerySpellGlobeOfInvulnerability)
+        nameof(SpellsEnum.StasisSorcerySpell),
+        nameof(SpellsEnum.TelekinesisSorcerySpell),
+        nameof(SpellsEnum.YellowSignSorcerySpell),
+        nameof(SpellsEnum.ClairvoyanceSorcerySpell),
+        nameof(SpellsEnum.EnchantWeaponSorcerySpell),
+        nameof(SpellsEnum.EnchantArmorSorcerySpell),
+        nameof(SpellsEnum.AlchemySorcerySpell),
+        nameof(SpellsEnum.GlobeOfInvulnerabilitySorcerySpell)
     };
     /// <summary>
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.

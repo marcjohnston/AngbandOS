@@ -31,14 +31,14 @@ public class GharneFragmentsChaosBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.ChaosSpellPolymorphOther),
-        nameof(SpellsEnum.ChaosSpellChainLightning),
-        nameof(SpellsEnum.ChaosSpellArcaneBinding),
-        nameof(SpellsEnum.ChaosSpellDisintegrate),
-        nameof(SpellsEnum.ChaosSpellAlterReality),
-        nameof(SpellsEnum.ChaosSpellPolymorphSelf),
-        nameof(SpellsEnum.ChaosSpellChaosBranding),
-        nameof(SpellsEnum.ChaosSpellSummonDemon)
+        nameof(SpellsEnum.PolymorphOtherChaosSpell),
+        nameof(SpellsEnum.ChainLightningChaosSpell),
+        nameof(SpellsEnum.ArcaneBindingChaosSpell),
+        nameof(SpellsEnum.DisintegrateChaosSpell),
+        nameof(SpellsEnum.AlterRealityChaosSpell),
+        nameof(SpellsEnum.PolymorphSelfChaosSpell),
+        nameof(SpellsEnum.ChaosBrandingChaosSpell),
+        nameof(SpellsEnum.SummonDemonChaosSpell)
     };
     public override string ItemClassBindingKey => nameof(ChaosSpellBooksItemClass);
     public override int PackSort => 5;

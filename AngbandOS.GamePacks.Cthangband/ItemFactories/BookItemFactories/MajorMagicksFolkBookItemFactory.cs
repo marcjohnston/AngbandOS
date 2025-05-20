@@ -27,14 +27,14 @@ public class MajorMagicksFolkBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.FolkSpellResistLightning),
-        nameof(SpellsEnum.FolkSpellResistAcid),
-        nameof(SpellsEnum.FolkSpellCureMediumWounds),
-        nameof(SpellsEnum.FolkSpellTeleport),
-        nameof(SpellsEnum.FolkSpellStoneToMud),
-        nameof(SpellsEnum.FolkSpellRayOfLight),
-        nameof(SpellsEnum.FolkSpellSatisfyHunger),
-        nameof(SpellsEnum.FolkSpellSeeInvisible)
+        nameof(SpellsEnum.ResistLightningFolkSpell),
+        nameof(SpellsEnum.ResistAcidFolkSpell),
+        nameof(SpellsEnum.CureMediumWoundsFolkSpell),
+        nameof(SpellsEnum.TeleportFolkSpell),
+        nameof(SpellsEnum.StoneToMudFolkSpell),
+        nameof(SpellsEnum.RayOfLightFolkSpell),
+        nameof(SpellsEnum.SatisfyHungerFolkSpell),
+        nameof(SpellsEnum.SeeInvisibleFolkSpell)
     };
     public override string ItemClassBindingKey => nameof(FolkSpellBooksItemClass);
     public override int PackSort => 2;

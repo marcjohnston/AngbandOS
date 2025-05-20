@@ -31,14 +31,14 @@ public class RevelationsOfGlaakiNatureBookItemFactory : ItemFactoryGameConfigura
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.NatureSpellDoorCreation),
-        nameof(SpellsEnum.NatureSpellStairBuilding),
-        nameof(SpellsEnum.NatureSpellStoneSkin),
-        nameof(SpellsEnum.NatureSpellResistanceTrue),
-        nameof(SpellsEnum.NatureSpellAnimalFriendship),
-        nameof(SpellsEnum.NatureSpellStoneTell),
-        nameof(SpellsEnum.NatureSpellWallOfStone),
-        nameof(SpellsEnum.NatureSpellProtectFromCorrosion)
+        nameof(SpellsEnum.DoorCreationNatureSpell),
+        nameof(SpellsEnum.StairBuildingNatureSpell),
+        nameof(SpellsEnum.StoneSkinNatureSpell),
+        nameof(SpellsEnum.ResistanceTrueNatureSpell),
+        nameof(SpellsEnum.AnimalFriendshipNatureSpell),
+        nameof(SpellsEnum.StoneTellNatureSpell),
+        nameof(SpellsEnum.WallOfStoneNatureSpell),
+        nameof(SpellsEnum.ProtectFromCorrosionNatureSpell)
     };
     public override string ItemClassBindingKey => nameof(NatureSpellBooksItemClass);
 

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageElementalBrandingNatureSpell : ClassSpell
 {
     private MageElementalBrandingNatureSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(NatureSpellElementalBranding);
+    public override string SpellName => nameof(ElementalBrandingNatureSpell);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 40;
     public override int ManaCost => 90;

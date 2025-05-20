@@ -27,14 +27,14 @@ public class MinorMagicksFolkBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.FolkSpellDetectDoorsAndTraps),
-        nameof(SpellsEnum.FolkSpellPhlogiston),
-        nameof(SpellsEnum.FolkSpellDetectTreasure),
-        nameof(SpellsEnum.FolkSpellDetectEnchantment),
-        nameof(SpellsEnum.FolkSpellDetectObjects),
-        nameof(SpellsEnum.FolkSpellCurePoison),
-        nameof(SpellsEnum.FolkSpellResistCold),
-        nameof(SpellsEnum.FolkSpellResistFire)
+        nameof(SpellsEnum.DetectDoorsAndTrapsFolkSpell),
+        nameof(SpellsEnum.PhlogistonFolkSpell),
+        nameof(SpellsEnum.DetectTreasureFolkSpell),
+        nameof(SpellsEnum.DetectEnchantmentFolkSpell),
+        nameof(SpellsEnum.DetectObjectsFolkSpell),
+        nameof(SpellsEnum.CurePoisonFolkSpell),
+        nameof(SpellsEnum.ResistColdFolkSpell),
+        nameof(SpellsEnum.ResistFireFolkSpell)
     };
     public override string ItemClassBindingKey => nameof(FolkSpellBooksItemClass);
     public override int PackSort => 2;

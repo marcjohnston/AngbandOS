@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class DruidStairBuildingNatureSpell : ClassSpell
 {
     private DruidStairBuildingNatureSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(NatureSpellStairBuilding);
+    public override string SpellName => nameof(StairBuildingNatureSpell);
     public override string CharacterClassName => nameof(DruidCharacterClass);
     public override int Level => 7;
     public override int ManaCost => 7;

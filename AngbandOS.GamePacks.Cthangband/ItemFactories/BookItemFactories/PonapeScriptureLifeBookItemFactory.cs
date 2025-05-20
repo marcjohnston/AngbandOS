@@ -37,14 +37,14 @@ public class PonapeScriptureLifeBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.LifeSpellHeroism),
-        nameof(SpellsEnum.LifeSpellPrayer),
-        nameof(SpellsEnum.LifeSpellBlessWeapon),
-        nameof(SpellsEnum.LifeSpellRestoration),
-        nameof(SpellsEnum.LifeSpellHealingTrue),
-        nameof(SpellsEnum.LifeSpellHolyVision),
-        nameof(SpellsEnum.LifeSpellDivineIntervention),
-        nameof(SpellsEnum.LifeSpellHolyInvulnerability)
+        nameof(SpellsEnum.HeroismLifeSpell),
+        nameof(SpellsEnum.PrayerLifeSpell),
+        nameof(SpellsEnum.BlessWeaponLifeSpell),
+        nameof(SpellsEnum.RestorationLifeSpell),
+        nameof(SpellsEnum.HealingTrueLifeSpell),
+        nameof(SpellsEnum.HolyVisionLifeSpell),
+        nameof(SpellsEnum.DivineInterventionLifeSpell),
+        nameof(SpellsEnum.HolyInvulnerabilityLifeSpell)
     };
     public override string ItemClassBindingKey => nameof(LifeSpellBooksItemClass);
     public override bool HatesFire => true;

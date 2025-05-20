@@ -31,14 +31,14 @@ public class DeVermisMysteriisCorporealBookItemFactory : ItemFactoryGameConfigur
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.CorporealSpellHorrificVisage),
-        nameof(SpellsEnum.CorporealSpellSeeMagic),
-        nameof(SpellsEnum.CorporealSpellStoneSkin),
-        nameof(SpellsEnum.CorporealSpellMoveBody),
-        nameof(SpellsEnum.CorporealSpellMutateBody),
-        nameof(SpellsEnum.CorporealSpellKnowSelf),
-        nameof(SpellsEnum.CorporealSpellTeleportLevel),
-        nameof(SpellsEnum.CorporealSpellWordOfRecall)
+        nameof(SpellsEnum.HorrificVisageCorporealSpell),
+        nameof(SpellsEnum.SeeMagicCorporealSpell),
+        nameof(SpellsEnum.StoneSkinCorporealSpell),
+        nameof(SpellsEnum.MoveBodyCorporealSpell),
+        nameof(SpellsEnum.MutateBodyCorporealSpell),
+        nameof(SpellsEnum.KnowSelfCorporealSpell),
+        nameof(SpellsEnum.TeleportLevelCorporealSpell),
+        nameof(SpellsEnum.WordOfRecallCorporealSpell)
     };
     public override string ItemClassBindingKey => nameof(CorporealSpellBooksItemClass);
     public override int PackSort => 1;

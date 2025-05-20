@@ -31,14 +31,14 @@ public class DholChantsLifeBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.LifeSpellExorcism),
-        nameof(SpellsEnum.LifeSpellDispelCurse),
-        nameof(SpellsEnum.LifeSpellDispelUndeadAndDemons),
-        nameof(SpellsEnum.LifeSpellDayOfTheDove),
-        nameof(SpellsEnum.LifeSpellDispelEvil),
-        nameof(SpellsEnum.LifeSpellBanish),
-        nameof(SpellsEnum.LifeSpellHolyWord),
-        nameof(SpellsEnum.LifeSpellWardingTrue)
+        nameof(SpellsEnum.ExorcismLifeSpell),
+        nameof(SpellsEnum.DispelCurseLifeSpell),
+        nameof(SpellsEnum.DispelUndeadAndDemonsLifeSpell),
+        nameof(SpellsEnum.DayOfTheDoveLifeSpell),
+        nameof(SpellsEnum.DispelEvilLifeSpell),
+        nameof(SpellsEnum.BanishLifeSpell),
+        nameof(SpellsEnum.HolyWordLifeSpell),
+        nameof(SpellsEnum.WardingTrueLifeSpell)
     };
     public override string ItemClassBindingKey => nameof(LifeSpellBooksItemClass);
     public override bool HatesFire => true;

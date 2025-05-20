@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistSonicBoomChaosSpell : ClassSpell
 {
     private CultistSonicBoomChaosSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(ChaosSpellSonicBoom);
+    public override string SpellName => nameof(SonicBoomChaosSpell);
     public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 19;
     public override int ManaCost => 11;

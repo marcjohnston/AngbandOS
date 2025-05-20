@@ -36,14 +36,14 @@ public class CeleanoFragmentsTarotBookItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.TarotSpellEtherealDivination),
-        nameof(SpellsEnum.TarotSpellAstralLore),
-        nameof(SpellsEnum.TarotSpellSummonUndead),
-        nameof(SpellsEnum.TarotSpellSummonDragon),
-        nameof(SpellsEnum.TarotSpellMassSummons),
-        nameof(SpellsEnum.TarotSpellSummonDemon),
-        nameof(SpellsEnum.TarotSpellSummonAncientDragon),
-        nameof(SpellsEnum.TarotSpellSummonGreaterUndead)
+        nameof(SpellsEnum.EtherealDivinationTarotSpell),
+        nameof(SpellsEnum.AstralLoreTarotSpell),
+        nameof(SpellsEnum.SummonUndeadTarotSpell),
+        nameof(SpellsEnum.SummonDragonTarotSpell),
+        nameof(SpellsEnum.MassSummonsTarotSpell),
+        nameof(SpellsEnum.SummonDemonTarotSpell),
+        nameof(SpellsEnum.SummonAncientDragonTarotSpell),
+        nameof(SpellsEnum.SummonGreaterUndeadTarotSpell)
     };
     public override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;

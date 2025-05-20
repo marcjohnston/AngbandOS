@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class WarriorMageHasteCorporealSpell : ClassSpell
 {
     private WarriorMageHasteCorporealSpell(Game game) : base(game) { }
-    public override string SpellName => nameof(CorporealSpellHaste);
+    public override string SpellName => nameof(HasteCorporealSpell);
     public override string CharacterClassName => nameof(WarriorMageCharacterClass);
     public override int Level => 27;
     public override int ManaCost => 18;

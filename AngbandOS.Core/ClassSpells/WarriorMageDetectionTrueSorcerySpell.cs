@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ClassSpells;
 internal class WarriorMageDetectionTrueSorcerySpell : ClassSpell
 {
     private WarriorMageDetectionTrueSorcerySpell(Game game) : base(game) { }
-    public override string SpellName => nameof(SorcerySpellDetectionTrue);
+    public override string SpellName => nameof(DetectionTrueSorcerySpell);
     public override string CharacterClassName => nameof(WarriorMageCharacterClass);
     public override int Level => 33;
     public override int ManaCost => 25;

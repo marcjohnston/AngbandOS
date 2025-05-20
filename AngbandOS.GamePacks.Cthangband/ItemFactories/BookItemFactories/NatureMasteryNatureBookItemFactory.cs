@@ -27,14 +27,14 @@ public class NatureMasteryNatureBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.NatureSpellStoneToMud),
-        nameof(SpellsEnum.NatureSpellLightningBolt),
-        nameof(SpellsEnum.NatureSpellNatureAwareness),
-        nameof(SpellsEnum.NatureSpellFrostBolt),
-        nameof(SpellsEnum.NatureSpellRayOfSunlight),
-        nameof(SpellsEnum.NatureSpellEntangle),
-        nameof(SpellsEnum.NatureSpellSummonAnimal),
-        nameof(SpellsEnum.NatureSpellHerbalHealing)
+        nameof(SpellsEnum.StoneToMudNatureSpell),
+        nameof(SpellsEnum.LightningBoltNatureSpell),
+        nameof(SpellsEnum.NatureAwarenessNatureSpell),
+        nameof(SpellsEnum.FrostBoltNatureSpell),
+        nameof(SpellsEnum.RayOfSunlightNatureSpell),
+        nameof(SpellsEnum.EntangleNatureSpell),
+        nameof(SpellsEnum.SummonAnimalNatureSpell),
+        nameof(SpellsEnum.HerbalHealingNatureSpell)
     };
     public override string ItemClassBindingKey => nameof(NatureSpellBooksItemClass);
 

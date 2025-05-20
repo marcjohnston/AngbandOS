@@ -26,14 +26,14 @@ public class HighMassLifeBookItemFactory : ItemFactoryGameConfiguration
 
     public override string[] SpellBindingKeys => new string[]
     {
-        nameof(SpellsEnum.LifeSpellRemoveCurse),
-        nameof(SpellsEnum.LifeSpellCurePoison),
-        nameof(SpellsEnum.LifeSpellCureCriticalWounds),
-        nameof(SpellsEnum.LifeSpellSenseUnseen),
-        nameof(SpellsEnum.LifeSpellHolyOrb),
-        nameof(SpellsEnum.LifeSpellProtectionFromEvil),
-        nameof(SpellsEnum.LifeSpellHealing),
-        nameof(SpellsEnum.LifeSpellElderSign)
+        nameof(SpellsEnum.RemoveCurseLifeSpell),
+        nameof(SpellsEnum.CurePoisonLifeSpell),
+        nameof(SpellsEnum.CureCriticalWoundsLifeSpell),
+        nameof(SpellsEnum.SenseUnseenLifeSpell),
+        nameof(SpellsEnum.HolyOrbLifeSpell),
+        nameof(SpellsEnum.ProtectionFromEvilLifeSpell),
+        nameof(SpellsEnum.HealingLifeSpell),
+        nameof(SpellsEnum.ElderSignLifeSpell)
     };
     public override string ItemClassBindingKey => nameof(LifeSpellBooksItemClass);
     public override bool HatesFire => true;
