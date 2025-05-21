@@ -18,6 +18,7 @@ internal class GenericTown : Town
         Name = townGameConfiguration.Name;
         Char = townGameConfiguration.Char;
         StoreFactoryNames = townGameConfiguration.StoreFactoryNames;
+        AllowStartupTown = townGameConfiguration.AllowStartupTown;
     }
 
     public override string DungeonName { get; }
@@ -26,4 +27,5 @@ internal class GenericTown : Town
     public override string Name { get; }
     public override char Char { get; }
     protected override string[] StoreFactoryNames { get; }
+    public override bool AllowStartupTown { get; }
 }
