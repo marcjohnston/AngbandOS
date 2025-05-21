@@ -10,9 +10,20 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Town : IGetKey
+internal class Town : IGetKey
 {
     protected readonly Game Game;
+    public Town(Game game, TownGameConfiguration townGameConfiguration)
+    {
+        Game = game;
+        Key = townGameConfiguration.Key ?? townGameConfiguration.GetType().Name;
+        DungeonName = townGameConfiguration.DungeonName;
+        HousePrice = townGameConfiguration.HousePrice;
+        Name = townGameConfiguration.Name;
+        Char = townGameConfiguration.Char;
+        StoreFactoryNames = townGameConfiguration.StoreFactoryNames;
+        AllowStartupTown = townGameConfiguration.AllowStartupTown;
+    }
 
     /// <summary>
     /// Represents the RND seed that is used to generate the town.  This ensures the town is regenerated the same when the player returns.
@@ -38,12 +49,12 @@ internal abstract class Town : IGetKey
     /// <summary>
     /// Returns the name of the dungeon that is under the city.  This property is bound to the Dungeon property during the bind phase.
     /// </summary>
-    public abstract string DungeonName { get; }
+    public virtual string DungeonName { get; }
 
-    public virtual bool AllowStartupTown => true;
-    public abstract char Char { get; }
-    public abstract int HousePrice { get; }
-    public abstract string Name { get; }
+    public virtual bool AllowStartupTown { get; } = true;
+    public virtual char Char { get; }
+    public virtual int HousePrice { get; }
+    public virtual string Name { get; }
 
     /// <summary>
     /// Returns the store factories that are used to generate the stores for the town.  This property is bound using the StoreFactoryNames property
@@ -55,16 +66,11 @@ internal abstract class Town : IGetKey
     /// Returns the stores that belong to the town.
     /// </summary>
     public Store[] Stores { get; private set; }
-    protected abstract string[] StoreFactoryNames { get; }
+    protected virtual string[] StoreFactoryNames { get; }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
-
-    protected Town(Game game)
-    {
-        Game = game;
-    }
 
     /// <summary>
     /// Returns true, if unused store lots should be graveyards; false, for them to be fields.  In Kadath, unused fields are graveyards.

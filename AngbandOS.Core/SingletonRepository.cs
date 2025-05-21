@@ -411,7 +411,7 @@ internal class SingletonRepository
         LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, GenericTextWidget>(gameConfiguration.TextWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration, GenericTile>(gameConfiguration.Tiles);
         LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, GenericTimeWidget>(gameConfiguration.TimeWidgets);
-        LoadFromConfiguration<Town, TownGameConfiguration, GenericTown>(gameConfiguration.Towns);
+        LoadFromConfiguration<Town, TownGameConfiguration, Town>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, WizardCommand>(gameConfiguration.WizardCommands);
 
