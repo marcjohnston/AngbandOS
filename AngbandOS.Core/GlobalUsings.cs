@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-global using static AngbandOS.Core.Extensions;
-
 global using AngbandOS.Core;
 global using AngbandOS.Core.Activations;
 global using AngbandOS.Core.ActivationWeightRandoms;
@@ -27,7 +25,6 @@ global using AngbandOS.Core.ItemFlavors;
 global using AngbandOS.Core.FloorEffects;
 global using AngbandOS.Core.Forms;
 global using AngbandOS.Core.Functions;
-global using AngbandOS.Core.Genders;
 global using AngbandOS.Core.GetItemProperties;
 global using AngbandOS.Core.Interfaces;
 global using AngbandOS.Core.WieldSlots;
@@ -69,6 +66,7 @@ global using AngbandOS.Core.SummonWeightedRandoms;
 global using AngbandOS.Core.Timers;
 global using AngbandOS.Core.Widgets;
 
+global using static AngbandOS.Core.Extensions;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.Interface.Configuration;
 global using AngbandOS.GamePacks.Cthangband; // TODO: This can be deleted when the Cthangband game pack is complete.  We can also drop the Project Reference.

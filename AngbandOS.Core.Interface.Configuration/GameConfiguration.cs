@@ -121,4 +121,8 @@ public class GameConfiguration
     public virtual TextWidgetGameConfiguration[]? TextWidgets { get; set; } = null;
     public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
     public virtual NullableStringsTextAreaWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
+
+    public virtual RaceGenderGameConfiguration[]? RaceGenders { get; set; } = null;
+    public virtual GenderGameConfiguration[]? Genders { get; set; } = null;
+    public virtual PhysicalAttributeSetGameConfiguration[]? PhysicalAttributeSets { get; set; } = null;
 }

@@ -5,15 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+using System.Text.Json;
+
 namespace AngbandOS.Core.PhysicalAttributeSets;
 
 [Serializable]
-internal abstract class PhysicalAttributeSet : IGetKey
+internal class PhysicalAttributeSet : IGetKey
 {
     protected readonly Game Game;
-    protected PhysicalAttributeSet(Game game)
+    public PhysicalAttributeSet(Game game, PhysicalAttributeSetGameConfiguration physicalAttributeSetGameConfiguration)
     {
         Game = game;
+        Key = Key = physicalAttributeSetGameConfiguration.Key ?? physicalAttributeSetGameConfiguration.GetType().Name;
+        BaseHeight = physicalAttributeSetGameConfiguration.BaseHeight;
+        HeightRange = physicalAttributeSetGameConfiguration.HeightRange;
+        BaseWeight = physicalAttributeSetGameConfiguration.BaseWeight;
+        WeightRange = physicalAttributeSetGameConfiguration.WeightRange;
     }
 
     /// <summary>
@@ -22,17 +30,25 @@ internal abstract class PhysicalAttributeSet : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        PhysicalAttributeSetGameConfiguration definition = new PhysicalAttributeSetGameConfiguration()
+        {
+            Key = Key,
+            BaseHeight = BaseHeight,
+            HeightRange = HeightRange,
+            BaseWeight = BaseWeight,
+            WeightRange = WeightRange
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
     public void Bind() { }
 
-    public abstract int BaseHeight { get; }
-    public abstract int HeightRange { get; }
-    public abstract int BaseWeight { get; }
-    public abstract int WeightRange { get; }
+    public virtual int BaseHeight { get; }
+    public virtual int HeightRange { get; }
+    public virtual int BaseWeight { get; }
+    public virtual int WeightRange { get; }
 }

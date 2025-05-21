@@ -366,6 +366,7 @@ internal class SingletonRepository
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration, GenericDungeon>(gameConfiguration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GameCommand>(gameConfiguration.GameCommands);
+        LoadFromConfiguration<Gender, GenderGameConfiguration, Gender>(gameConfiguration.Genders);
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
         LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, GenericIntWidget>(gameConfiguration.IntWidgets);
@@ -378,11 +379,13 @@ internal class SingletonRepository
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, GenericMaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
         LoadFromConfiguration<NullableStringsTextAreaWidget, NullableStringsTextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
+        LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration, PhysicalAttributeSet>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, GenericProjectileScript>(gameConfiguration.ProjectileScripts);
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, GenericProjectileWeightedRandomScript>(gameConfiguration.ProjectileWeightedRandomScripts);
+        LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration, RaceGender>(gameConfiguration.RaceGenders);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, GenericRangedWidget>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
@@ -412,7 +415,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<FixedArtifact>();
         LoadAllAssemblyTypes<FloorEffect>();
         LoadAllAssemblyTypes<Form>();
-        LoadAllAssemblyTypes<Gender>();
         LoadAllAssemblyTypes<ItemAction>();
         LoadAllAssemblyTypes<ItemEffect>();
         LoadAllAssemblyTypes<ItemFactoryGenericWeightedRandom>();
@@ -426,10 +428,8 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<MonsterSpell>();
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<Patron>();
-        LoadAllAssemblyTypes<PhysicalAttributeSet>();
         LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Race>();
-        LoadAllAssemblyTypes<RaceGender>();
         LoadAllAssemblyTypes<Realm>();
         LoadAllAssemblyTypes<RenderMessageScript>();
         LoadAllAssemblyTypes<Reward>();
@@ -507,30 +507,22 @@ internal class SingletonRepository
             // Check to see if there is a repository that is registered for this type.  There is none; we simple ignore this interface.
             if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
             {
-                // Ensure the singleton implements the IGetKey interface and get the key from the singleton.
-                switch (singleton)
+                string? key = singleton.GetKey;
+                if (key is null)
                 {
-                    case IGetKey getKeySingleton:
-                        string? key = getKeySingleton.GetKey;
-                        if (key is null)
-                        {
-                            throw new Exception($"The singleton {type.Name} has a null key value.  This may be the result of a the json deserialization.");
-                        }
+                    throw new Exception($"The singleton {singleton.GetType().Name} has a null key value.  This may be the result of a the json deserialization.");
+                }
 
-                        // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.
-                        if (!_allSingletonsList.Contains(getKeySingleton))
-                        {
-                            _allSingletonsList.Add(getKeySingleton);
-                        }
+                // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.
+                if (!_allSingletonsList.Contains(singleton))
+                {
+                    _allSingletonsList.Add(singleton);
+                }
 
-                        // If the singleton hasn't been registered, register it now.  The singleton may belong to many repositories.
-                        if (!genericRepository.Dictionary.TryGetValue(key, out _))
-                        {
-                            genericRepository.Add(key, singleton);
-                        }
-                        break;
-                    default:
-                        throw new Exception($"The singleton {type.Name} does not implement the IGetKey interface.");
+                // If the singleton hasn't been registered, register it now.  The singleton may belong to many repositories.
+                if (!genericRepository.Dictionary.TryGetValue(key, out _))
+                {
+                    genericRepository.Add(key, singleton);
                 }
             }
         }
@@ -574,7 +566,7 @@ internal class SingletonRepository
             ConstructorInfo[] constructors = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             if (constructors.Length != 1)
             {
-                throw new Exception($"Invalid number of constructors for {typeof(TGeneric)}.");
+                throw new Exception($"Invalid number of constructors {constructors.Length} for {typeof(TGeneric)}.  Expecting exactly one public (Game, {typeof(TConfiguration).Name})");
             }
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {

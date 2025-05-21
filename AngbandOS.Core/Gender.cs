@@ -5,15 +5,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Gender : IGetKey
+internal class Gender : IGetKey
 {
     protected readonly Game Game;
-    protected Gender(Game game)
+    public Gender(Game game, GenderGameConfiguration genderGameConfiguration)
     {
         Game = game;
+        Key = genderGameConfiguration.Key ?? genderGameConfiguration.GetType().Name;
+        Title = genderGameConfiguration.Title;
+        Winner = genderGameConfiguration.Winner;
+        CanBeRandomlySelected = genderGameConfiguration.CanBeRandomlySelected;
     }
 
     /// <summary>
@@ -22,16 +29,23 @@ internal abstract class Gender : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        GenderGameConfiguration definition = new GenderGameConfiguration()
+        {
+            Key = Key,
+            Title = Title,
+            Winner = Winner,
+            CanBeRandomlySelected = CanBeRandomlySelected
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
     public virtual void Bind() { }
 
-    public abstract string Title { get; }
-    public abstract string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered
+    public virtual string Title { get; }
+    public virtual string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered
 
-    public virtual bool CanBeRandomlySelected => true;
+    public virtual bool CanBeRandomlySelected { get; } = true;
 }

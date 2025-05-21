@@ -4,15 +4,21 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
+using System.Text.Json;
+
 namespace AngbandOS.Core.RaceGenders;
 
 [Serializable]
-internal abstract class RaceGender : IGetKey
+internal class RaceGender : IGetKey
 {
     protected readonly Game Game;
-    protected RaceGender(Game game)
+    public RaceGender(Game game, RaceGenderGameConfiguration raceGenderGameConfiguration)
     {
         Game = game;
+        RaceBindingKey = raceGenderGameConfiguration.RaceBindingKey;
+        GenderBindingKey = raceGenderGameConfiguration.GenderBindingKey;
+        PhysicalAttributesWeightedRandomBindings = raceGenderGameConfiguration.PhysicalAttributesWeightedRandomBindings;
     }
 
     /// <summary>
@@ -21,7 +27,13 @@ internal abstract class RaceGender : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        RaceGenderGameConfiguration definition = new RaceGenderGameConfiguration()
+        {
+            RaceBindingKey = RaceBindingKey,
+            GenderBindingKey = GenderBindingKey,
+            PhysicalAttributesWeightedRandomBindings = PhysicalAttributesWeightedRandomBindings,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     public string GetKey => $"{RaceBindingKey}-{GenderBindingKey}";
@@ -38,8 +50,9 @@ internal abstract class RaceGender : IGetKey
 
     public Race Race { get; private set; }
     public Gender Gender { get; private set; }
-    protected abstract string RaceBindingKey { get; }
-    protected abstract string GenderBindingKey { get; }
     public WeightedRandom<PhysicalAttributeSet> PhysicalAttributesWeightedRandom { get; private set; }
-    protected abstract (string PhysicalAttributesBindingKey, int Weight)[] PhysicalAttributesWeightedRandomBindings { get; }
+    protected virtual string RaceBindingKey { get; }
+    protected virtual string GenderBindingKey { get; }
+    protected virtual (string PhysicalAttributesBindingKey, int Weight)[] PhysicalAttributesWeightedRandomBindings { get; }
 }
+
