@@ -21,7 +21,7 @@ internal class DarknessWeakFloorEffect : FloorEffect
             cPtr.PlayerMemorized = false;
             Game.NoteSpot(y, x);
         }
-        Game.MainForm.RefreshMapLocation(y, x);
+        Game.ConsoleView.RefreshMapLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
             Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);

@@ -5,20 +5,42 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents a view (or layout) of widgets used to render the UI.  Views consist of widgets and must conform to the window.
+/// </summary>
 [Serializable]
-internal abstract class Form : IGetKey
+internal class View : IGetKey
 {
+    #region State Data
     protected readonly Game Game;
 
-    protected Form(Game game)
+    /// <summary>
+    /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map; or null, if the pokeable widgets haven't been bound yet.  These types of 
+    /// widgets are the only widgets that "Update" inbetween the widget update phases.  Binding of pokeable widgets cannot be performed during the binding phase because the
+    /// widgets themselves may not have been bound when the form binds; in that case, null is used.
+    /// </summary>
+    private Widget[]? PokeWidgets = null;
+    #endregion
+
+    #region Constructors
+    public View(Game game, ViewGameConfiguration viewGameConfiguration)
     {
         Game = game;
+        Key = viewGameConfiguration.Key ?? viewGameConfiguration.GetType().Name;
+        WidgetNames = viewGameConfiguration.WidgetNames;
     }
-    protected abstract string[] WidgetNames { get; }
-    public Widget[] Widgets { get; private set; }
+    #endregion
 
+    #region Bound Properties
+    public Widget[] Widgets { get; private set; }
+    #endregion
+
+    #region Api Methods
     public void Refresh()
     {
         // Call the update method for each widget.  This allows the widget to render.
@@ -28,24 +50,11 @@ internal abstract class Form : IGetKey
         }
     }
 
-    /// <summary>
-    /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map; or null, if the pokeable widgets haven't been bound yet.  These types of 
-    /// widgets are the only widgets that "Update" inbetween the widget update phases.  Binding of pokeable widgets cannot be performed during the binding phase because the
-    /// widgets themselves may not have been bound when the form binds; in that case, null is used.
-    /// </summary>
-    private Widget[]? PokeWidgets = null;
-
-    public string Key => GetType().Name;
     public string GetKey => Key;
 
     public void Bind()
     {
-        List<Widget> widgetList = new List<Widget>();
-        foreach (string widgetName in WidgetNames)
-        {
-            widgetList.Add(Game.SingletonRepository.Get<Widget>(widgetName));
-        }
-        Widgets = widgetList.ToArray();
+        Widgets = Game.SingletonRepository.Get<Widget>(WidgetNames);
     }
 
     private Widget[] GetPokeWidgets()
@@ -63,7 +72,12 @@ internal abstract class Form : IGetKey
 
     public string ToJson()
     {
-        return "";
+        ViewGameConfiguration definition = new ViewGameConfiguration()
+        {
+            Key = Key,
+            WidgetNames = WidgetNames,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     /// <summary>
@@ -150,4 +164,11 @@ internal abstract class Form : IGetKey
             widget.MoveCursorTo(row, col);
         }
     }
+    #endregion
+
+    #region Light-weight Virtuals and Abstracts
+    public virtual string Key { get; }
+    protected virtual string[] WidgetNames { get; }
+    #endregion
 }
+

@@ -32,7 +32,7 @@ internal class NewLifeScript : Script, IEatOrQuaffScript
             var oldRaceName = Game.RaceAtBirth.Title;
             Game.MsgPrint($"You feel more {oldRaceName} again.");
             Game.ChangeRace(Game.RaceAtBirth);
-            Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
+            Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
         }
         return new IdentifiedResult(true);
     }

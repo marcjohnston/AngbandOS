@@ -79,7 +79,7 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
         int ox = Game.MapX.IntValue;
         Game.MapY.IntValue = y;
         Game.MapX.IntValue = x;
-        Game.MainForm.RefreshMapLocation(oy, ox);
+        Game.ConsoleView.RefreshMapLocation(oy, ox);
         while (xx < 2)
         {
             int yy = -1;
@@ -105,7 +105,7 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
             }
             xx++;
         }
-        Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
+        Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
         Game.RecenterScreenAroundPlayer();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
@@ -188,8 +188,8 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
         mPtr.MapY = ny;
         mPtr.MapX = nx;
         Game.UpdateMonsterVisibility(mIdx, true);
-        Game.MainForm.RefreshMapLocation(oy, ox);
-        Game.MainForm.RefreshMapLocation(ny, nx);
+        Game.ConsoleView.RefreshMapLocation(oy, ox);
+        Game.ConsoleView.RefreshMapLocation(ny, nx);
     }
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()

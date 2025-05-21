@@ -670,7 +670,7 @@ internal class Store
         Game.SingletonRepository.Get<FlaggedAction>(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
-        Game.MainForm.Invalidate();
+        Game.ConsoleView.Invalidate();
     }
 
     /// <summary>

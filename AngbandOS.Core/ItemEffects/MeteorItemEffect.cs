@@ -73,7 +73,7 @@ internal class MeteorItemEffect : ItemEffect
                     {
                         oPtr.Smash(who, y, x);
                     }
-                    Game.MainForm.RefreshMapLocation(y, x);
+                    Game.ConsoleView.RefreshMapLocation(y, x);
                 }
             }
         }

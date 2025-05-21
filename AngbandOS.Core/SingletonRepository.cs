@@ -288,7 +288,6 @@ internal class SingletonRepository
         RegisterRepository<FixedArtifact>();
         RegisterRepository<FlaggedAction>();
         RegisterRepository<FloorEffect>();
-        RegisterRepository<Form>();
         RegisterRepository<Function>();
         RegisterRepository<GameCommand>();
         RegisterRepository<Gender>();
@@ -351,6 +350,7 @@ internal class SingletonRepository
         RegisterRepository<Timer>();
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
+        RegisterRepository<View>();
         RegisterRepository<TimeWidget>();
         RegisterRepository<WieldSlot>();
         RegisterRepository<Widget>();
@@ -413,6 +413,7 @@ internal class SingletonRepository
         LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, GenericTimeWidget>(gameConfiguration.TimeWidgets);
         LoadFromConfiguration<Town, TownGameConfiguration, Town>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, GenericVault>(gameConfiguration.Vaults);
+        LoadFromConfiguration<View, ViewGameConfiguration, View>(gameConfiguration.Views);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, WizardCommand>(gameConfiguration.WizardCommands);
 
         // Load the remaining user-configured singletons from the assembly.  These singletons have not been exported to the GamePack yet.
@@ -428,7 +429,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<DungeonGenerator>();
         LoadAllAssemblyTypes<FixedArtifact>();
         LoadAllAssemblyTypes<FloorEffect>();
-        LoadAllAssemblyTypes<Form>();
         LoadAllAssemblyTypes<ItemAction>();
         LoadAllAssemblyTypes<ItemEffect>();
         LoadAllAssemblyTypes<ItemFactoryGenericWeightedRandom>();

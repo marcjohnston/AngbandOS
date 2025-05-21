@@ -41,7 +41,7 @@ internal class RedrawScript : Script, IScript, ICastSpellScript
         Game.SingletonRepository.Get<FlaggedAction>(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
 
         // Invalidate the main form.  This will force all of the widgets to redraw.
-        Game.MainForm.Invalidate();
+        Game.ConsoleView.Invalidate();
 
         Game.HandleStuff();
         Game.UpdateScreen();

@@ -165,7 +165,7 @@ internal abstract class MonsterEffect : IGetKey
 
         GridTile newGridTile = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
-        Game.MainForm.RefreshMapLocation(y, x);
+        Game.ConsoleView.RefreshMapLocation(y, x);
         projectMn++;
         projectMx = mPtr.MapX;
         projectMy = mPtr.MapY;

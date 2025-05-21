@@ -73,7 +73,7 @@ internal class Animation : IGetKey
                 if (Game.PlayerHasLosBold(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
                 {
                     ColorEnum color = oddFrame ? Color : AlternateColor;
-                    Game.MainForm.PutCharAtMapLocation(character, color, y[j], x[j]);
+                    Game.ConsoleView.PutCharAtMapLocation(character, color, y[j], x[j]);
                     drawn = true;
                 }
             }
@@ -90,7 +90,7 @@ internal class Animation : IGetKey
             {
                 if (Game.PlayerHasLosBold(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
                 {
-                    Game.MainForm.RefreshMapLocation(y[j], x[j]);
+                    Game.ConsoleView.RefreshMapLocation(y[j], x[j]);
                 }
             }
             Game.UpdateScreen();

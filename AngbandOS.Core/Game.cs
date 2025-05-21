@@ -764,7 +764,7 @@ internal class Game
     /// <summary>
     /// The current contents of the game screen.
     /// </summary>
-    public Screen Screen;
+    public Window Screen;
 
     public int KeyHead = 0;
     public int KeyTail = 0;
@@ -822,7 +822,7 @@ internal class Game
 
     public readonly SpareSpellSlotsIntProperty SpareSpellSlots;
 
-    public readonly MainForm MainForm;
+    public readonly View ConsoleView;
 
     public readonly HealthPointsIntProperty Health;
 
@@ -1366,7 +1366,23 @@ internal class Game
         SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.Get<Timer>(nameof(SuperHeroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
 
-        MainForm = (MainForm)SingletonRepository.Get<Form>(nameof(MainForm));
+        View? consoleView = SingletonRepository.GetNullable<View>(gameConfiguration.ConsoleViewBindingKey);
+        if (consoleView is null)
+        {
+            // Check to see if there is only one view.
+            if (SingletonRepository.Count<View>() == 1)
+            {
+                ConsoleView = SingletonRepository.Get<View>(0);
+            }
+            else
+            {
+                throw new Exception("View not defined.");
+            }
+        }
+        else
+        {
+            ConsoleView = consoleView;
+        }
 
         InitializeAllocationTables();
     }
@@ -1819,7 +1835,7 @@ internal class Game
         }
         GridTile cPtr = Map.Grid[y][x];
         cPtr.Items.Clear();
-        MainForm.RefreshMapLocation(y, x);
+        ConsoleView.RefreshMapLocation(y, x);
     }
 
     public bool AddItemToMonster(Item item, Monster monster)
@@ -2592,7 +2608,7 @@ internal class Game
         LastInputReceived = DateTime.Now;
         CorePersistentStorage = persistentStorage;
         KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
-        Screen = new Screen(consoleViewPort);
+        Screen = new Window(consoleViewPort);
         MapMovementKeys();
 
         FullScreenOverlay = true;
@@ -3916,7 +3932,7 @@ internal class Game
         CharacterXtra = true;
 
         // Invalidate the main screen.
-        MainForm.Invalidate();
+        ConsoleView.Invalidate();
 
         // TOSO: These flagged actions are not part of the main form yet
         SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
@@ -3994,7 +4010,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
+            ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -4005,7 +4021,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
+            ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -4014,7 +4030,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
+            ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -4230,7 +4246,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
+            ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             UpdateScreen();
             const int item = InventorySlotEnum.PackCount;
             Item? oPtr = GetInventoryItem(item);
@@ -4276,7 +4292,7 @@ internal class Game
             }
             else
             {
-                MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
+                ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
 
                 // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
                 // has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
@@ -4307,7 +4323,7 @@ internal class Game
                             continue;
                         }
                         ShimmerMonsters = true;
-                        MainForm.RefreshMapLocation(mPtr.MapY, mPtr.MapX);
+                        ConsoleView.RefreshMapLocation(mPtr.MapY, mPtr.MapX);
                     }
                 }
                 if (RepairMonsters)
@@ -4336,7 +4352,7 @@ internal class Game
                                 mPtr.IndividualMonsterFlags &= ~Constants.MflagMark;
                                 mPtr.IsVisible = false;
                                 UpdateMonsterVisibility(i, false);
-                                MainForm.RefreshMapLocation(mPtr.MapY, mPtr.MapX);
+                                ConsoleView.RefreshMapLocation(mPtr.MapY, mPtr.MapX);
                             }
                         }
                     }
@@ -4715,7 +4731,7 @@ internal class Game
             return;
         }
 
-        MainForm.Refresh();
+        ConsoleView.Refresh();
 
         SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Check();
         SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Check();
@@ -5126,7 +5142,7 @@ internal class Game
                 if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsOpenDoor)
                 {
                     cPtr.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(y, x);
+                    ConsoleView.RefreshMapLocation(y, x);
                     detect = true;
                 }
             }
@@ -5165,7 +5181,7 @@ internal class Game
                 RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                MainForm.RefreshMapLocation(y, x);
+                ConsoleView.RefreshMapLocation(y, x);
                 flag = true;
             }
         }
@@ -5195,7 +5211,7 @@ internal class Game
                     if (oPtr.GoldPieces > 0)
                     {
                         oPtr.WasNoticed = true;
-                        MainForm.RefreshMapLocation(y, x);
+                        ConsoleView.RefreshMapLocation(y, x);
                         detect = true;
                     }
                 }
@@ -5224,7 +5240,7 @@ internal class Game
                 if (cPtr.FeatureType.IsRevealedWithDetectStairsScript)
                 {
                     cPtr.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(y, x);
+                    ConsoleView.RefreshMapLocation(y, x);
                     detect = true;
                 }
             }
@@ -5249,7 +5265,7 @@ internal class Game
             {
                 GridTile cPtr = Map.Grid[y][x];
                 cPtr.TrapsDetected = true;
-                MainForm.RefreshMapLocation(y, x);
+                ConsoleView.RefreshMapLocation(y, x);
                 if (cPtr.FeatureType.IsUnidentifiedTrap)
                 {
                     PickTrap(y, x);
@@ -5288,7 +5304,7 @@ internal class Game
                 if (cPtr.FeatureType.IsVisibleTreasure)
                 {
                     cPtr.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(y, x);
+                    ConsoleView.RefreshMapLocation(y, x);
                     anyTreasureRevealed = true;
                 }
             }
@@ -5443,8 +5459,8 @@ internal class Game
                 int ox = MapX.IntValue;
                 MapY.IntValue = sy;
                 MapX.IntValue = sx;
-                MainForm.RefreshMapLocation(oy, ox);
-                MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
+                ConsoleView.RefreshMapLocation(oy, ox);
+                ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
             }
             map[16 + MapY.IntValue - cy][16 + MapX.IntValue - cx] = false;
@@ -5517,8 +5533,8 @@ internal class Game
                             mPtr.MapY = sy;
                             mPtr.MapX = sx;
                             UpdateMonsterVisibility(mIdx, true);
-                            MainForm.RefreshMapLocation(yy, xx);
-                            MainForm.RefreshMapLocation(sy, sx);
+                            ConsoleView.RefreshMapLocation(yy, xx);
+                            ConsoleView.RefreshMapLocation(sy, sx);
                         }
                     }
                 }
@@ -6045,8 +6061,8 @@ internal class Game
         int ox = MapX.IntValue;
         MapY.IntValue = y;
         MapX.IntValue = x;
-        MainForm.RefreshMapLocation(oy, ox);
-        MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
+        ConsoleView.RefreshMapLocation(oy, ox);
+        ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
         RecenterScreenAroundPlayer();
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
@@ -6096,8 +6112,8 @@ internal class Game
                 tx = mPtr.MapX;
                 ty = mPtr.MapY;
                 UpdateMonsterVisibility(Map.Grid[ty][tx].MonsterIndex, true);
-                MainForm.RefreshMapLocation(ty, tx);
-                MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
+                ConsoleView.RefreshMapLocation(ty, tx);
+                ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
@@ -6231,7 +6247,7 @@ internal class Game
                 }
             }
             NoteSpot(y, x);
-            MainForm.RefreshMapLocation(y, x);
+            ConsoleView.RefreshMapLocation(y, x);
         }
         TempN = 0;
     }
@@ -6254,7 +6270,7 @@ internal class Game
             {
                 UpdateMonsterVisibility(cPtr.MonsterIndex, false);
             }
-            MainForm.RefreshMapLocation(y, x);
+            ConsoleView.RefreshMapLocation(y, x);
         }
         TempN = 0;
     }
@@ -6281,7 +6297,7 @@ internal class Game
                 RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                MainForm.RefreshMapLocation(y, x);
+                ConsoleView.RefreshMapLocation(y, x);
                 flag = true;
             }
         }
@@ -7065,25 +7081,25 @@ internal class Game
                 {
                     MsgPrint("You feel some rubble blocking your way.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 else if (tile.FeatureType.IsTree)
                 {
                     MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 else if (tile.FeatureType.IsPillar)
                 {
                     MsgPrint("You feel a pillar blocking your way.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 else if (tile.FeatureType.HasWater)
                 {
                     MsgPrint("Your way seems to be blocked by water.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 // If we're moving onto a border, change wilderness location
                 else if (tile.FeatureType.IsBorder)
@@ -7128,13 +7144,13 @@ internal class Game
                 {
                     MsgPrint("You feel a closed door blocking your way.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 else
                 {
                     MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
             }
             // We can see it, so give a different message
@@ -7152,19 +7168,19 @@ internal class Game
                 {
                     MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 else if (tile.FeatureType.IsPillar)
                 {
                     MsgPrint("There is a pillar blocking your way.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 else if (tile.FeatureType.HasWater)
                 {
                     MsgPrint("You cannot swim.");
                     tile.PlayerMemorized = true;
-                    MainForm.RefreshMapLocation(newY, newX);
+                    ConsoleView.RefreshMapLocation(newY, newX);
                 }
                 // Again, walking onto a border means a change of wilderness grid
                 else if (tile.FeatureType.IsBorder)
@@ -7250,8 +7266,8 @@ internal class Game
         MapY.IntValue = newY;
         MapX.IntValue = newX;
         // Redraw our old and new locations
-        MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
-        MainForm.RefreshMapLocation(oldY, oldX);
+        ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
+        ConsoleView.RefreshMapLocation(oldY, oldX);
         // Recenter the screen if we have to
         RecenterScreenAroundPlayer();
         // We'll need to update and redraw various things
@@ -8016,11 +8032,11 @@ internal class Game
             // If we can see, display the thrown item with a suitable delay
             if (PanelContains(y, x) && PlayerCanSeeBold(y, x))
             {
-                MainForm.PutCharAtMapLocation(missileCharacter, missileColor, y, x);
-                MainForm.MoveCursorTo(y, x);
+                ConsoleView.PutCharAtMapLocation(missileCharacter, missileColor, y, x);
+                ConsoleView.MoveCursorTo(y, x);
                 UpdateScreen();
                 Pause(msec);
-                MainForm.RefreshMapLocation(y, x);
+                ConsoleView.RefreshMapLocation(y, x);
                 UpdateScreen();
             }
             else
@@ -12699,7 +12715,7 @@ internal class Game
         MsgPrint("Select a point and press space.");
         while (ch != 27 && ch != ' ' && !Shutdown)
         {
-            MainForm.MoveCursorTo(y, x);
+            ConsoleView.MoveCursorTo(y, x);
             ch = Inkey();
             switch (ch)
             {
@@ -12874,7 +12890,7 @@ internal class Game
                 const string name = "something strange";
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
-                MainForm.MoveCursorTo(y, x);
+                ConsoleView.MoveCursorTo(y, x);
                 query = Inkey();
                 if (!Shutdown)
                 {
@@ -12914,7 +12930,7 @@ internal class Game
                             string a = mPtr.IsPet ? " (allied) " : " ";
                             outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
-                            MainForm.MoveCursorTo(y, x);
+                            ConsoleView.MoveCursorTo(y, x);
                             query = Inkey();
                         }
                         if (query != 'r')
@@ -12948,7 +12964,7 @@ internal class Game
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                         Screen.PrintLine(outVal, 0, 0);
                         Screen.UpdateScreen();
-                        MainForm.MoveCursorTo(y, x);
+                        ConsoleView.MoveCursorTo(y, x);
                         query = Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')
                         {
@@ -12978,7 +12994,7 @@ internal class Game
                     string oName = oPtr.GetFullDescription(true);
                     outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                     Screen.PrintLine(outVal, 0, 0);
-                    MainForm.MoveCursorTo(y, x);
+                    ConsoleView.MoveCursorTo(y, x);
                     query = Inkey();
                     if (query != '\r' && query != '\n' && query != ' ')
                     {
@@ -13025,7 +13041,7 @@ internal class Game
                 }
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
-                MainForm.MoveCursorTo(y, x);
+                ConsoleView.MoveCursorTo(y, x);
                 query = Inkey();
                 if (query != '\r' && query != '\n' && query != ' ')
                 {
@@ -13500,7 +13516,7 @@ internal class Game
         while (ExperienceLevel.IntValue > 1 && ExperiencePoints.IntValue < Constants.PlayerExp[ExperienceLevel.IntValue - 2] * ExperienceMultiplier.IntValue / 100L)
         {
             ExperienceLevel.IntValue--;
-            MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
+            ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
@@ -13510,7 +13526,7 @@ internal class Game
         while (ExperienceLevel.IntValue < Constants.PyMaxLevel && ExperiencePoints.IntValue >= Constants.PlayerExp[ExperienceLevel.IntValue - 1] * ExperienceMultiplier.IntValue / 100L)
         {
             ExperienceLevel.IntValue++;
-            MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
+            ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
             if (ExperienceLevel.IntValue > MaxLevelGained)
             {
                 MaxLevelGained = ExperienceLevel.IntValue;
@@ -14849,7 +14865,7 @@ internal class Game
         GridTile cPtr = Map.Grid[y][x];
         cPtr.FeatureType = tile;
         NoteSpot(y, x);
-        MainForm.RefreshMapLocation(y, x);
+        ConsoleView.RefreshMapLocation(y, x);
     }
 
     public bool CaveValidBold(int y, int x)
@@ -14920,7 +14936,7 @@ internal class Game
         {
             int y = jPtr.Y;
             int x = jPtr.X;
-            MainForm.RefreshMapLocation(y, x);
+            ConsoleView.RefreshMapLocation(y, x);
         }
     }
 
@@ -15067,7 +15083,7 @@ internal class Game
             }
         }
         NoteSpot(by, bx);
-        MainForm.RefreshMapLocation(by, bx);
+        ConsoleView.RefreshMapLocation(by, bx);
         PlaySound(SoundEffectEnum.Drop);
         if (chance != null && by == MapY.IntValue && bx == MapX.IntValue)
         {
@@ -15457,7 +15473,7 @@ internal class Game
             if (AddItemToGrid(oPtr, x, y))
             {
                 NoteSpot(y, x);
-                MainForm.RefreshMapLocation(y, x);
+                ConsoleView.RefreshMapLocation(y, x);
             }
         }
     }
@@ -15481,7 +15497,7 @@ internal class Game
         if (AddItemToGrid(qPtr, x, y))
         {
             NoteSpot(y, x);
-            MainForm.RefreshMapLocation(y, x);
+            ConsoleView.RefreshMapLocation(y, x);
         }
         else
         {
@@ -15585,7 +15601,7 @@ internal class Game
         GridTile cPtr = Map.Grid[y][x];
         cPtr.RevertToBackground();
         NoteSpot(y, x);
-        MainForm.RefreshMapLocation(y, x);
+        ConsoleView.RefreshMapLocation(y, x);
     }
 
     public (int yp, int xp) Scatter(int y, int x, int d)
@@ -16243,7 +16259,7 @@ internal class Game
         MCnt--;
         if (visibly)
         {
-            MainForm.RefreshMapLocation(y, x);
+            ConsoleView.RefreshMapLocation(y, x);
         }
     }
 
@@ -16841,7 +16857,7 @@ internal class Game
             if (!mPtr.IsVisible)
             {
                 mPtr.IsVisible = true;
-                MainForm.RefreshMapLocation(fy, fx);
+                ConsoleView.RefreshMapLocation(fy, fx);
                 if (rPtr.Knowledge.RSights < Constants.MaxShort)
                 {
                     rPtr.Knowledge.RSights++;
@@ -16880,7 +16896,7 @@ internal class Game
             if (mPtr.IsVisible)
             {
                 mPtr.IsVisible = false;
-                MainForm.RefreshMapLocation(fy, fx);
+                ConsoleView.RefreshMapLocation(fy, fx);
             }
         }
         if (easy)

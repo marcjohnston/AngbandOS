@@ -17,7 +17,7 @@ internal class LightWeakFloorEffect : FloorEffect
         bool obvious = false;
         cPtr.SelfLit = true;
         Game.NoteSpot(y, x);
-        Game.MainForm.RefreshMapLocation(y, x);
+        Game.ConsoleView.RefreshMapLocation(y, x);
         if (Game.PlayerCanSeeBold(y, x))
         {
             obvious = true;

@@ -19,12 +19,12 @@ internal class GenericMapWidget : MapWidget
     }
 
     /// <summary>
-    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
+    /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
     public override int X { get; }
 
     /// <summary>
-    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
+    /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
     public override int Y { get; }
 

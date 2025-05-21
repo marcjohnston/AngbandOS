@@ -125,11 +125,11 @@ internal class FireItemScript : Script, IScript, ICastSpellScript, IGameCommandS
             // If we can see the current projectile location, show it briefly
             if (Game.PanelContains(y, x) && Game.PlayerCanSeeBold(y, x))
             {
-                Game.MainForm.PutCharAtMapLocation(missileCharacter, missileColor, y, x);
-                Game.MainForm.MoveCursorTo(y, x);
+                Game.ConsoleView.PutCharAtMapLocation(missileCharacter, missileColor, y, x);
+                Game.ConsoleView.MoveCursorTo(y, x);
                 Game.UpdateScreen();
                 Game.Pause(msec);
-                Game.MainForm.RefreshMapLocation(y, x);
+                Game.ConsoleView.RefreshMapLocation(y, x);
                 Game.UpdateScreen();
             }
             else

@@ -46,7 +46,7 @@ internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, 
             {
                 Game.TakeHit(Game.DieRoll(4), "the strain of casting Carnage");
             }
-            Game.MainForm.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);
+            Game.ConsoleView.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);
             Game.HandleStuff();
             Game.UpdateScreen();
             Game.Pause(msec);

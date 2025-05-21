@@ -21,12 +21,12 @@ internal abstract class MapWidget : Widget
     public override bool CanPoke => true;
 
     /// <summary>
-    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
+    /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
     public abstract int X { get; }
 
     /// <summary>
-    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
+    /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
     public abstract int Y { get; }
 
@@ -55,7 +55,7 @@ internal abstract class MapWidget : Widget
                 Game.Screen.Print(a, c, y - offsetY, x - offsetX); // TODO: The - is weird and should be +
             }
         }
-        Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
+        Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
 
         // Restore the cursor visible.
         Game.Screen.CursorVisible = v;

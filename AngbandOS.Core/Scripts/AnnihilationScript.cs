@@ -43,7 +43,7 @@ internal class AnnihilationScript : Script, IScript, ICastSpellScript
             Game.DeleteMonsterByIndex(i, true);
             Game.TakeHit(Game.DieRoll(4), "the strain of casting Annihilation");
             Game.Mana.IntValue++;
-            Game.MainForm.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);
+            Game.ConsoleView.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);
             Game.HandleStuff();
             Game.UpdateScreen();
             Game.Pause(Constants.DelayFactorInMilliseconds);

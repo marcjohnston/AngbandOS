@@ -22,7 +22,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
         if (Game.LightLevel <= 0)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
-            Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
+            Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
             return;
         }
         foreach (GridCoordinate gridCoordinate in Game.Light)
@@ -145,7 +145,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
                 continue;
             }
             Game.NoteSpot(gridCoordinate.Y, gridCoordinate.X);
-            Game.MainForm.RefreshMapLocation(gridCoordinate.Y, gridCoordinate.X);
+            Game.ConsoleView.RefreshMapLocation(gridCoordinate.Y, gridCoordinate.X);
         }
         for (int i = 0; i < Game.TempN; i++)
         {
@@ -156,7 +156,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
             {
                 continue;
             }
-            Game.MainForm.RefreshMapLocation(y, x);
+            Game.ConsoleView.RefreshMapLocation(y, x);
         }
         Game.TempN = 0;
     }

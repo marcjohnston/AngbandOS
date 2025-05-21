@@ -37,7 +37,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IE
                     if (oPtr.GoldPieces == 0)
                     {
                         oPtr.WasNoticed = true;
-                        Game.MainForm.RefreshMapLocation(y, x);
+                        Game.ConsoleView.RefreshMapLocation(y, x);
                         isIdentified = true;
                     }
                 }

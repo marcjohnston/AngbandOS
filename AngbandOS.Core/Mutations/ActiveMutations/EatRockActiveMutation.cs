@@ -62,8 +62,8 @@ internal class EatRockActiveMutation : Mutation
         int ox = Game.MapX.IntValue;
         Game.MapY.IntValue = y;
         Game.MapX.IntValue = x;
-        Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
-        Game.MainForm.RefreshMapLocation(oy, ox);
+        Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
+        Game.ConsoleView.RefreshMapLocation(oy, ox);
         Game.RecenterScreenAroundPlayer();
         base.Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
         base.Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();

@@ -65,7 +65,7 @@ internal class PolymorphSelfScript : Script, IScript, ICastSpellScript, IGameCom
                         Game.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
                         Game.ChangeRace(newRace);
                     }
-                    Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
+                    Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
                     moreEffects = false;
                     break;
 

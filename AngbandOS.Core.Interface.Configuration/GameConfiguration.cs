@@ -12,6 +12,8 @@ public class GameConfiguration
     /// </summary>    
     public virtual int? MaxMessageLogLength { get; set; } = 2048;
 
+    public virtual string? ConsoleViewBindingKey { get; set; } = null;
+
     /// <summary>
     /// Returns the name of the town where the player will start, ignoring whether or not that town is a startup town; or null, for a random town to be choosen 
     /// from the available startup towns.
@@ -127,4 +129,5 @@ public class GameConfiguration
     public virtual PhysicalAttributeSetGameConfiguration[]? PhysicalAttributeSets { get; set; } = null;
     public virtual RealmGameConfiguration[]? Realms { get; set; } = null;
     public virtual RealmCharacterClassGameConfiguration[]? RealmCharacterClasses { get; set; } = null;
+    public virtual ViewGameConfiguration[]? Views { get; set; } = null;
 }

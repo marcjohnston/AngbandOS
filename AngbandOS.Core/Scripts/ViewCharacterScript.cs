@@ -76,7 +76,7 @@ internal class ViewCharacterScript : Script, IScript, ICastSpellScript, IGameCom
         Game.SingletonRepository.Get<FlaggedAction>(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
 
         // Invalidate the main screen.
-        Game.MainForm.Invalidate();
+        Game.ConsoleView.Invalidate();
 
         Game.HandleStuff();
     }

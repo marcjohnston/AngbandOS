@@ -9,6 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 
 public class CthangbandGameConfiguration : GameConfiguration
 {
+    public override string? ConsoleViewBindingKey => nameof(ConsoleView);
+
     public override string[]? GoldFactoriesBindingKeys => new string[]
     {
         "CopperGoldItemFactory",
@@ -5249,5 +5251,10 @@ public class CthangbandGameConfiguration : GameConfiguration
         new TarotRealmHighMageCharacterClass(),
         new TarotRealmMonkCharacterClass(),
         new TarotRealmRogueCharacterClass(),
+    };
+
+    public override ViewGameConfiguration[]? Views => new ViewGameConfiguration[]
+    {
+        new ConsoleView()
     };
 }

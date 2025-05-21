@@ -23,7 +23,6 @@ global using AngbandOS.Core.EventsArgs;
 global using AngbandOS.Core.FlaggedActions;
 global using AngbandOS.Core.ItemFlavors;
 global using AngbandOS.Core.FloorEffects;
-global using AngbandOS.Core.Forms;
 global using AngbandOS.Core.Functions;
 global using AngbandOS.Core.GetItemProperties;
 global using AngbandOS.Core.Interfaces;
