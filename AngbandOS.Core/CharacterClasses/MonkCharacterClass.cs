@@ -38,23 +38,6 @@ internal class MonkCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool IsMartialArtist => true;
 
-    public override string ClassSubName(Realm? realm)
-    {
-        switch (realm)
-        {
-            case CorporealRealm:
-                return "Ascetic";
-
-            case TarotRealm:
-                return "Ninja";
-
-            case ChaosRealm:
-                return "Street Fighter";
-
-            default:
-                return "Monk";
-        }
-    }
     public override int PrimeStat => AbilityEnum.Dexterity;
     public override string[] Info => new string[] {
         "Masters of unarmed combat. While wearing only light armor",

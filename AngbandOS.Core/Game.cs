@@ -982,10 +982,9 @@ internal class Game
     /// <summary>
     /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    [Obsolete("Replaced with the IsUsableSpellBook item filter")]
-    public bool Studies<T>() where T : Realm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType())); // TODO: Replace this with an itemfilter
+    [Obsolete("Relies on the Realm.Key")]
+    public bool Studies(string realmName) => (PrimaryRealm != null && PrimaryRealm.Key == realmName) || (SecondaryRealm != null && SecondaryRealm.Key == realmName); // TODO: This relies on the realm key.
 
     public int SkillDigging;
     public int SkillDisarmTraps;

@@ -47,7 +47,6 @@ global using AngbandOS.Core.PropertyFormatters;
 global using AngbandOS.Core.PhysicalAttributeSets;
 global using AngbandOS.Core.Races;
 global using AngbandOS.Core.RaceGenders;
-global using AngbandOS.Core.Realms;
 global using AngbandOS.Core.RenderMessageScripts;
 global using AngbandOS.Core.Rewards;
 global using AngbandOS.Core.RoomLayouts;

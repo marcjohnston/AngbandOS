@@ -5,13 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Realms;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class CorporealRealm : Realm
+public class CorporealRealm : RealmGameConfiguration
 {
-    private CorporealRealm(Game savedGame) : base(savedGame) { }
-
     public override string[] Info => new string[] {
         "The Corporeal realm contains spells that exclusively affect",
         "the caster's body, although some spells also indirectly",
@@ -22,7 +20,7 @@ internal class CorporealRealm : Realm
     /// <summary>
     /// Returns the Basic Chi, Yogic Mastery, DeVermis Mysteriis and Pnakotic Manuscript books because they belong to the Corporeal realm.
     /// </summary>
-    protected override string[] SpellBookNames => new string[]
+    public override string[] SpellBookNames => new string[]
     {
         nameof(BasicChiFlowCorporealBookItemFactory),
         nameof(YogicMasteryCorporealBookItemFactory),

@@ -125,4 +125,6 @@ public class GameConfiguration
     public virtual RaceGenderGameConfiguration[]? RaceGenders { get; set; } = null;
     public virtual GenderGameConfiguration[]? Genders { get; set; } = null;
     public virtual PhysicalAttributeSetGameConfiguration[]? PhysicalAttributeSets { get; set; } = null;
+    public virtual RealmGameConfiguration[]? Realms { get; set; } = null;
+    public virtual RealmCharacterClassGameConfiguration[]? RealmCharacterClasses { get; set; } = null;
 }

@@ -33,16 +33,6 @@ internal class PaladinCharacterClass : BaseCharacterClass
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 35;
 
-    public override string ClassSubName(Realm? realm)
-    {
-        switch (realm)
-        {
-            case DeathRealm:
-                return "Death Knight";
-            default:
-                return "Paladin";
-        }
-    }
     public override int PrimeStat => AbilityEnum.Wisdom;
     public override string[] Info => new string[] {
         "Holy warriors who use WIS based spell casting to supplement",

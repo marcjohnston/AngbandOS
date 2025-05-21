@@ -32,39 +32,6 @@ internal class HighMageCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;
     public override int ExperienceFactor => 30;
-
-    public override string ClassSubName(Realm? realm)
-    {
-        switch (realm)
-        {
-            case LifeRealm:
-                return "Vivimancer";
-
-            case SorceryRealm:
-                return "Sorcerer";
-
-            case NatureRealm:
-                return "Naturist";
-
-            case ChaosRealm:
-                return "Warlock";
-
-            case DeathRealm:
-                return "Necromancer";
-
-            case TarotRealm:
-                return "Summoner";
-
-            case FolkRealm:
-                return "Hedge Wizard";
-
-            case CorporealRealm:
-                return "Zen Master";
-
-            default:
-                return "High Mage";
-        }
-    }
     public override int PrimeStat => AbilityEnum.Intelligence;
     public override string[] Info => new string[] {
         "INT based spell casters who specialise in a single realm",

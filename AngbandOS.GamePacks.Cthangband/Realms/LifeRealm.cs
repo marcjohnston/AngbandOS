@@ -5,13 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Realms;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class LifeRealm : Realm
+public class LifeRealm : RealmGameConfiguration
 {
-    private LifeRealm(Game savedGame) : base(savedGame) { }
-
     public override string[] Info => new string[] {
         "The Life realm is devoted to healing and buffing, with some", 
         "offensive capability against undead and demons. It is the", 
@@ -22,7 +20,7 @@ internal class LifeRealm : Realm
     /// <summary>
     /// Returns the Common Prayers, High Mass, Dhol Chants and Ponape Scripture books because they belong to the Life realm.
     /// </summary>
-    protected override string[] SpellBookNames => new string[]
+    public override string[] SpellBookNames => new string[]
     {
         nameof(CommonPrayerLifeBookItemFactory),
         nameof(HighMassLifeBookItemFactory),

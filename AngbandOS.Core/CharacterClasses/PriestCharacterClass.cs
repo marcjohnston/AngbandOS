@@ -32,16 +32,6 @@ internal class PriestCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 2;
     public override int ExperienceFactor => 20;
-    public override string ClassSubName(Realm? realm)
-    {
-        switch (realm)
-        {
-            case DeathRealm:
-                return "Exorcist";
-            default:
-                return "Priest";
-        }
-    }
     public override int PrimeStat => AbilityEnum.Wisdom;
     public override string[] Info => new string[] {
         "Devout followers of the Great Ones, Priests use WIS based",
@@ -93,30 +83,6 @@ internal class PriestCharacterClass : BaseCharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
-
-    public override God? DefaultDeity(Realm? realm)
-    {
-        switch (realm)
-        {
-            case NatureRealm:
-                return Game.SingletonRepository.Get<God>(nameof(HagargRyonisGod));
-
-            case FolkRealm:
-                return Game.SingletonRepository.Get<God>(nameof(ZoKalarGod));
-
-            case ChaosRealm:
-                return Game.SingletonRepository.Get<God>(nameof(NathHorthahGod));
-
-            case CorporealRealm:
-                return Game.SingletonRepository.Get<God>(nameof(LobonGod));
-
-            case TarotRealm:
-                return Game.SingletonRepository.Get<God>(nameof(TamashGod));
-
-            default:
-                return null;
-        }
-    }
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {

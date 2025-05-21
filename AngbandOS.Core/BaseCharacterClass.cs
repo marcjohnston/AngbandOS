@@ -416,7 +416,48 @@ internal abstract class BaseCharacterClass : IGetKey
 
     public abstract string Title { get; }
 
-    public virtual string ClassSubName(Realm? realm) => Title;
+    public string ClassSubName(Realm? realm)
+    {
+        if (realm is null)
+        {
+            return Title;
+        }
+
+        string compositeKey = RealmCharacterClass.GetCompositeKey(realm, this);
+        RealmCharacterClass? realmCharacterClass = Game.SingletonRepository.TryGetNullable<RealmCharacterClass>(compositeKey);
+
+        // If not configured, return the default title.
+        if (realmCharacterClass is null)
+        {
+            return Title;
+        }
+
+        // Return the override title.
+        return realmCharacterClass.CharacterClassTitle ?? Title;
+    }
+
+    /// <summary>
+    /// Returns the default deity that the character class worships.  This is used when randomly choosing a CharacterClass.  Defaults to None.
+    /// </summary>
+    public God? DefaultDeity(Realm? realm)
+    {
+        if (realm is null)
+        {
+            return null;
+        }
+
+        string compositeKey = RealmCharacterClass.GetCompositeKey(realm, this);
+        RealmCharacterClass? realmCharacterClass = Game.SingletonRepository.TryGetNullable<RealmCharacterClass>(compositeKey);
+
+        // If not configured, return the null.
+        if (realmCharacterClass is null)
+        {
+            return null;
+        }
+
+        return realmCharacterClass.Deity;
+    }
+
     public abstract int PrimeStat { get; }
 
     public abstract string[] Info { get; }
@@ -454,11 +495,6 @@ internal abstract class BaseCharacterClass : IGetKey
     }
 
     public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
-
-    /// <summary>
-    /// Returns the default deity that the character class worships.  This is used when randomly choosing a CharacterClass.  Defaults to None.
-    /// </summary>
-    public virtual God? DefaultDeity(Realm? realm) => null;
 
     /// <summary>
     /// Allows the character class to perform any additional handling when an item is destroyed.  Warriors and Paladins gain experience when specific spell books are

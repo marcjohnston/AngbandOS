@@ -5,13 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Realms;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class TarotRealm : Realm
+public class TarotRealm : RealmGameConfiguration
 {
-    private TarotRealm(Game savedGame) : base(savedGame) { }
-
     public override string[] Info => new string[] {
         "The Tarot realm is one of the most specialised realms of", 
         "all, almost exclusively containing summoning and transport", 
@@ -22,7 +20,7 @@ internal class TarotRealm : Realm
     /// <summary>
     /// Returns the Conjurings Tricks, Card Mastery, Eltdown Shards and Celeano Fragments books because they belong to the Tarot realm.
     /// </summary>
-    protected override string[] SpellBookNames => new string[]
+    public override string[] SpellBookNames => new string[]
     {
         nameof(ConjuringsTricksTarotBookItemFactory),
         nameof(CardMasteryTarotBookItemFactory),

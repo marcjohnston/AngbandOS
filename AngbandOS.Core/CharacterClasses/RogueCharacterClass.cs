@@ -32,23 +32,6 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 10;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 25;
-    public override string ClassSubName(Realm? realm)
-    {
-        switch (realm)
-        {
-            case SorceryRealm:
-                return "Burglar";
-
-            case DeathRealm:
-                return "Assassin";
-
-            case TarotRealm:
-                return "Card Sharp";
-
-            default:
-                return "Thief";
-        }
-    }
     public override int PrimeStat => AbilityEnum.Dexterity;
     public override string[] Info => new string[] {
         "Stealth based characters who are adept at picking locks,",
@@ -94,7 +77,7 @@ internal class RogueCharacterClass : BaseCharacterClass
 
     protected override void OutfitItem(Item item)
     {
-        if (item.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) && Game.Studies<DeathRealm>())
+        if (item.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) && Game.Studies(nameof(DeathRealm)))
         {
             item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfPoisoningItemEnhancement));
         }

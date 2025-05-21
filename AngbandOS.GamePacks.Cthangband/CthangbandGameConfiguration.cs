@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Configuration;
-
 namespace AngbandOS.GamePacks.Cthangband;
 
 public class CthangbandGameConfiguration : GameConfiguration
@@ -5216,4 +5214,40 @@ public class CthangbandGameConfiguration : GameConfiguration
         new ZombieMalePhysicalAttributeSet(),
     };
 
+    public override RealmGameConfiguration[]? Realms => new RealmGameConfiguration[]
+    {
+        new ChaosRealm(),
+        new CorporealRealm(),
+        new DeathRealm(),
+        new FolkRealm(),
+        new LifeRealm(),
+        new NatureRealm(),
+        new SorceryRealm(),
+        new TarotRealm(),
+    };
+
+    public override RealmCharacterClassGameConfiguration[]? RealmCharacterClasses => new RealmCharacterClassGameConfiguration[]
+    {
+        new ChaosRealmHighMageCharacterClass(),
+        new ChaosRealmMonkCharacterClass(),
+        new ChaosRealmRogueCharacterClass(),
+        new CorporealRealmHighMageCharacterClass(),
+        new CorporealRealmMonkCharacterClass(),
+        new CorporealRealmRogueCharacterClass(),
+        new DeathRealmHighMageCharacterClass(),
+        new DeathRealmPaladinCharacterClass(),
+        new DeathRealmPriestCharacterClass(),
+        new DeathRealmRogueCharacterClass(),
+        new FolkRealmHighMageCharacterClass(),
+        new FolkRealmRogueCharacterClass(),
+        new LifeRealmHighMageCharacterClass(),
+        new LifeRealmRogueCharacterClass(),
+        new NatureRealmHighMageCharacterClass(),
+        new NatureRealmRogueCharacterClass(),
+        new SorceryRealmHighMageCharacterClass(),
+        new SorceryRealmRogueCharacterClass(),
+        new TarotRealmHighMageCharacterClass(),
+        new TarotRealmMonkCharacterClass(),
+        new TarotRealmRogueCharacterClass(),
+    };
 }

@@ -5,13 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Realms;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class FolkRealm : Realm
+public class FolkRealm : RealmGameConfiguration
 {
-    private FolkRealm(Game savedGame) : base(savedGame) { }
-
     public override string[] Info => new string[] {
         "The Folk realm is the least specialised of all the realms.",
         "Folk magic is capable of doing any effect that is possible", 
@@ -22,7 +20,7 @@ internal class FolkRealm : Realm
     /// <summary>
     /// Returns the Cantrips for Beginners, Minor Magicks, Major Magicks and Magicks of Mastery books because they belong to the Folk realm.
     /// </summary>
-    protected override string[] SpellBookNames => new string[]
+    public override string[] SpellBookNames => new string[]
     {
         nameof(CantripsforBeginnersFolkBookItemFactory),
         nameof(MinorMagicksFolkBookItemFactory),

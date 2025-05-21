@@ -71,6 +71,15 @@ internal class SingletonRepository
         return value;
     }
 
+    public T? TryGetNullable<T>(string? key) where T : class
+    {
+        if (key is null)
+        {
+            return null;
+        }
+        return TryGet<T>(key);
+    }
+
     /// <summary>
     /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> and returns null, if it isn't found.
     /// </summary>
@@ -85,6 +94,8 @@ internal class SingletonRepository
         // Check to see if the dictionary has a dictionary for this type of object.
         GenericRepository? genericRepository = ValidateAndLookupRepository<T>();
 
+        // We will only take the last token when a period is found.  This is to support game-packs use of the nameof(*Enum.object) references.  The enum is included as the first token and needs to be removed.
+        // Composite keyed objects will use a dash.
         string[] keyTokens = key.Split('.');
         key = keyTokens[keyTokens.Length - 1];
 
@@ -321,6 +332,7 @@ internal class SingletonRepository
         RegisterRepository<RaceGender>();
         RegisterRepository<RangedWidget>();
         RegisterRepository<Realm>();
+        RegisterRepository<RealmCharacterClass>();
         RegisterRepository<RenderMessageScript>();
         RegisterRepository<Reward>();
         RegisterRepository<RoomLayout>();
@@ -387,6 +399,8 @@ internal class SingletonRepository
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, GenericProjectileWeightedRandomScript>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration, RaceGender>(gameConfiguration.RaceGenders);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, GenericRangedWidget>(gameConfiguration.RangedWidgets);
+        LoadFromConfiguration<Realm, RealmGameConfiguration, Realm>(gameConfiguration.Realms);
+        LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration, RealmCharacterClass>(gameConfiguration.RealmCharacterClasses);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
@@ -430,7 +444,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Patron>();
         LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Race>();
-        LoadAllAssemblyTypes<Realm>();
         LoadAllAssemblyTypes<RenderMessageScript>();
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();

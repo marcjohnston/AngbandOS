@@ -5,13 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Realms;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class DeathRealm : Realm
+public class DeathRealm : RealmGameConfiguration
 {
-    private DeathRealm(Game savedGame) : base(savedGame) { }
-
     public override string[] Info => new string[] {
         "The Death realm has a combination of life-draining spells,",
         "curses, and undead summoning. Like chaos, it is a very",
@@ -22,7 +20,7 @@ internal class DeathRealm : Realm
     /// <summary>
     /// Returns the Black Prayers, Black Mass, Cultesdes Goules and Necronomicon books because they belong to the Death realm.
     /// </summary>
-    protected override string[] SpellBookNames => new string[]
+    public override string[] SpellBookNames => new string[]
     {
         nameof(BlackPrayersDeathBookItemFactory),
         nameof(BlackMassDeathBookItemFactory),

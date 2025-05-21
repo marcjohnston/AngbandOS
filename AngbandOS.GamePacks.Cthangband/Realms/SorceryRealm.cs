@@ -5,13 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Realms;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class SorceryRealm : Realm
+public class SorceryRealm : RealmGameConfiguration
 {
-    private SorceryRealm(Game savedGame) : base(savedGame) { }
-
     public override string[] Info => new string[] {
         "The Sorcery realm contains spells dealing with raw magic",
         "itself, for example spells dealing with magical items.",
@@ -23,7 +21,7 @@ internal class SorceryRealm : Realm
     /// <summary>
     /// Returns the Beginners Handbook, Master Sorcerers, Unaussprechlich Kulten and Liber Ivonis books because they belong to the Sorcery realm.
     /// </summary>
-    protected override string[] SpellBookNames => new string[]
+    public override string[] SpellBookNames => new string[]
     {
         nameof(BeginnersHandbookSorceryBookItemFactory),
         nameof(MasterSorcerersHandbookSorceryBookItemFactory),

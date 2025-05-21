@@ -5,16 +5,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Realm : IGetKey
+internal class Realm : IGetKey
 {
-    protected readonly Game Game;
-    protected Realm(Game game)
+    #region Constructor
+    public Realm(Game game, RealmGameConfiguration realmGameConfiguration)
     {
         Game = game;
+        Key = realmGameConfiguration.Key ?? realmGameConfiguration.GetType().Name;
+        SpellBookNames = realmGameConfiguration.SpellBookNames;
+        Info = realmGameConfiguration.Info;
+        Name = realmGameConfiguration.Name;
+        ResistantToHolyAndHellProjectiles = realmGameConfiguration.ResistantToHolyAndHellProjectiles;
+        SusceptibleToHolyAndHellProjectiles = realmGameConfiguration.SusceptibleToHolyAndHellProjectiles;
     }
+    #endregion
+
+    #region Api Methods
+    protected readonly Game Game;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -22,21 +34,22 @@ internal abstract class Realm : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        RealmGameConfiguration definition = new RealmGameConfiguration()
+        {
+            Key = Key,
+            SpellBookNames = SpellBookNames,
+            Info = Info,
+            Name = Name,
+            ResistantToHolyAndHellProjectiles = ResistantToHolyAndHellProjectiles,
+            SusceptibleToHolyAndHellProjectiles = SusceptibleToHolyAndHellProjectiles
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
-
-    public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
     public void Bind()
     {
-        List<ItemFactory> itemFactoryList = new List<ItemFactory>();
-        foreach (string bookItemFactoryName in SpellBookNames)
-        {
-            ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(bookItemFactoryName);
-            itemFactoryList.Add(itemFactory);
-        }
-        SpellBooks = itemFactoryList.ToArray();
+        SpellBooks = Game.SingletonRepository.Get<ItemFactory>(SpellBookNames);
     }
 
     /// <summary>
@@ -52,33 +65,6 @@ internal abstract class Realm : IGetKey
 
         Game.OutfitPlayerWithItem(item);
     }
-
-    /// <summary>
-    /// Returns the spells books that belong to the realm.
-    /// </summary>
-    public ItemFactory[] SpellBooks { get; private set; }
-    protected abstract string[] SpellBookNames { get; }
-
-    public abstract string[] Info { get; }
-
-    public abstract string Name { get; }
-
-    /// <summary>
-    /// Returns true, if a player subscribing to the realm gains resistance to hellfire projectiles.  The resistance offers a 50% reduction in damage.  Returns false, by default.  The Death realm, returns true.
-    /// </summary>
-    /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
-    public virtual bool ResistantToHolyAndHellProjectiles => false;
-
-    /// <summary>
-    /// Returns true, if a player subscribing to the realm gains is more susceptible to hellfire projectiles.  The susceptibility costs an additional 50% increase in damage.  Returns false, by default.  The Life realm, returns true.
-    /// </summary>
-    /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
-    public virtual bool SusceptibleToHolyAndHellProjectiles => false;
-
-    /// <summary>
-    /// Returns the level of the first spell for this realm.  If there are no books or spells, null is returned.
-    /// </summary>
-    public int? FirstSpellLevel { get; private set; }
 
     /// <summary>
     /// Initialize the spells for the character that the player has chosen.  This process occurs during the confirmation birth stage.  Only the
@@ -108,4 +94,42 @@ internal abstract class Realm : IGetKey
         }
         FirstSpellLevel = spellFirst;
     }
+    #endregion
+
+    #region Bound Properties
+    /// <summary>
+    /// Returns the spells books that belong to the realm.
+    /// </summary>
+    public ItemFactory[] SpellBooks { get; private set; }
+    #endregion
+
+    #region State Data
+    /// <summary>
+    /// Returns the level of the first spell for this realm.  If there are no books or spells, null is returned.
+    /// </summary>
+    public int? FirstSpellLevel { get; private set; }
+    #endregion
+
+    #region Light-weight Virtuals and Abstracts
+    public virtual string Key { get; }
+    protected virtual string[] SpellBookNames { get; }
+
+    public virtual string[] Info { get; }
+
+    public virtual string Name { get; }
+
+    /// <summary>
+    /// Returns true, if a player subscribing to the realm gains resistance to hellfire projectiles.  The resistance offers a 50% reduction in damage.  Returns false, by default.  The Death realm, returns true.
+    /// </summary>
+    /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
+    public virtual bool ResistantToHolyAndHellProjectiles { get; } = false;
+
+    /// <summary>
+    /// Returns true, if a player subscribing to the realm gains is more susceptible to hellfire projectiles.  The susceptibility costs an additional 50% increase in damage.  Returns false, by default.  The Life realm, returns true.
+    /// </summary>
+    /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
+    public virtual bool SusceptibleToHolyAndHellProjectiles { get; } = false;
+
+    public virtual string ClassSubname { get; }
+    #endregion
 }

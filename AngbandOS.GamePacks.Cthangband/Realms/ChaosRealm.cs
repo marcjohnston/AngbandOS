@@ -5,13 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Realms;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class ChaosRealm : Realm
+public class ChaosRealm : RealmGameConfiguration
 {
-    private ChaosRealm(Game savedGame) : base(savedGame) { }
-
     public override string[] Info => new string[] {
         "The Chaos realm is the most destructive realm. It focuses",
         "on combat spells. It is a very good choice for anyone who",
@@ -24,7 +22,7 @@ internal class ChaosRealm : Realm
     /// <summary>
     /// Returns the Sign Of Chaos, Mastery Chaos, Gharne Fragments and Azathoth Chaos books because they belong to the Chaos realm.
     /// </summary>
-    protected override string[] SpellBookNames => new string[]
+    public override string[] SpellBookNames => new string[]
     {
         nameof(SignOfChaosChaosBookItemFactory),
         nameof(MasteryChaosBookItemFactory),
