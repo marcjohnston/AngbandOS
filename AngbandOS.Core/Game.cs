@@ -873,8 +873,6 @@ internal class Game
     public bool HasHeavyBow;
     public bool HasHeavyWeapon;
     public bool HasHoldLife;
-    public bool HasLightningImmunity;
-    public bool HasLightningResistance;
     public bool HasElectricitySheath;
     public bool HasLightResistance;
     public bool HasNetherResistance;
@@ -992,29 +990,41 @@ internal class Game
     public int SkillUseDevice;
     public int SocialClass;
 
+    #region Timers with resistance and immunity booleans moved
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_ACID]</remarks>
     public readonly Timer AcidResistanceTimer;
-    public readonly Timer BleedingTimer;
-    public readonly Timer BlessingTimer;
-    public readonly Timer BlindnessTimer; // There is no immunity
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_COLD]</remarks>
     public readonly Timer ColdResistanceTimer;
-    public readonly Timer ConfusedTimer;
-    public readonly Timer EtherealnessTimer;
-    public readonly Timer FearTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_FIRE]</remakrs>
     public readonly Timer FireResistanceTimer;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_OPP_ELEC]</remarks>
+    public readonly Timer LightningResistanceTimer;
+    #endregion
+
+    #region Timers with only resistance boolean moved
+    public readonly Timer BlindnessTimer; // There is no immunity
+    #endregion
+
+    public readonly Timer BleedingTimer;
+    public readonly Timer BlessingTimer;
+    public readonly Timer ConfusedTimer;
+    public readonly Timer EtherealnessTimer;
+    public readonly Timer FearTimer;
     public readonly Timer HallucinationsTimer;
 
     /// <summary>
@@ -1030,12 +1040,6 @@ internal class Game
     public readonly Timer HeroismTimer;
     public readonly Timer InfravisionTimer;
     public readonly Timer InvulnerabilityTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_OPP_ELEC]</remarks>
-    public readonly Timer LightningResistanceTimer;
     public readonly Timer ParalysisTimer;
     public readonly Timer PoisonTimer;
 
@@ -5585,7 +5589,7 @@ internal class Game
     public void ElecDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (HasLightningImmunity || dam <= 0)
+        if (LightningResistanceTimer.HasImmunity || dam <= 0)
         {
             return;
         }
@@ -5597,16 +5601,16 @@ internal class Game
         {
             dam = (dam + 2) / 3;
         }
-        if (HasLightningResistance)
+        if (LightningResistanceTimer.HasResistance)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(LightningResistanceTimer.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
+        if (!(LightningResistanceTimer.Value != 0 || LightningResistanceTimer.HasResistance) && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(AbilityEnum.Dexterity);
         }
         TakeHit(dam, kbStr);
-        if (!(LightningResistanceTimer.Value != 0 && HasLightningResistance))
+        if (!(LightningResistanceTimer.Value != 0 && LightningResistanceTimer.HasResistance))
         {
             InvenDamage(SetElecDestroy, inv);
         }
@@ -8680,7 +8684,7 @@ internal class Game
             }
         }
         // If we have a lightning aura, apply it
-        if (race.LightningAura && !HasLightningImmunity)
+        if (race.LightningAura && !LightningResistanceTimer.HasImmunity)
         {
             auraDamage = DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
             string auraDam = monster.IndefiniteVisibleName;
@@ -8688,7 +8692,7 @@ internal class Game
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
-            if (HasLightningResistance)
+            if (LightningResistanceTimer.HasResistance)
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
