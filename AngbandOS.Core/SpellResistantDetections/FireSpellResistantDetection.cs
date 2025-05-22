@@ -13,7 +13,7 @@ internal class FireSpellResistantDetection : SpellResistantDetection
     private FireSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (Game.FireResistanceTimer.HasResistance)
+        if (Game.HasFireResistance)
         {
             monster.SmResFire = true;
         }
@@ -21,7 +21,7 @@ internal class FireSpellResistantDetection : SpellResistantDetection
         {
             monster.SmOppFire = true;
         }
-        if (Game.FireResistanceTimer.HasImmunity)
+        if (Game.HasFireImmunity)
         {
             monster.SmImmFire = true;
         }

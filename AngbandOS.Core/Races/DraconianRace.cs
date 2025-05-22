@@ -71,7 +71,7 @@ internal class DraconianRace : Race
         Game.HasFeatherFall = true;
         if (Game.ExperienceLevel.IntValue > 4)
         {
-            Game.FireResistanceTimer.HasResistance = true;
+            Game.HasFireResistance = true;
         }
         if (Game.ExperienceLevel.IntValue > 9)
         {
