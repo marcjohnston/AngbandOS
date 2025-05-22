@@ -406,6 +406,7 @@ internal class SingletonRepository
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
         LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, GenericStoreFactory>(gameConfiguration.StoreFactories);
         LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, GenericStringWidget>(gameConfiguration.StringWidgets);
+        LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration, SummonScript>(gameConfiguration.SummonScripts);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, GenericSyllableSet>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, GenericSymbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, GenericTextWidget>(gameConfiguration.TextWidgets);
@@ -449,7 +450,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<RoomLayout>();
         LoadAllAssemblyTypes<Script>();
         LoadAllAssemblyTypes<SpellResistantDetection>();
-        LoadAllAssemblyTypes<SummonScript>();
         LoadAllAssemblyTypes<SummonWeightedRandom>();
         LoadAllAssemblyTypes<Talent>();
         LoadAllAssemblyTypes<WieldSlot>();

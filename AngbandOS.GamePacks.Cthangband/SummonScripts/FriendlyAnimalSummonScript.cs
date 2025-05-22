@@ -5,15 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.SummonScripts;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class FriendlyPhantomSummonScript : SummonScript
+public class FriendlyAnimalSummonScript : SummonScriptGameConfiguration
 {
-    private FriendlyPhantomSummonScript(Game game) : base(game) { }
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.AnimalRangerMonsterRaceFilter);
 
-    protected override string MonsterFilterBindingKey => nameof(PhantomMonsterRaceFilter);
-
-    protected override string LevelRollExpression => "d";
+    public override string LevelRollExpression => "X";
     public override bool Pet => true;
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

@@ -49,5 +49,3 @@ public class NullableStringsTextAreaWidgetGameConfiguration
     public virtual string[]? ChangeTrackerNames { get; set; }
     public virtual string Key { get; set; }
 }
-
-

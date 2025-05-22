@@ -5,15 +5,27 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Configuration;
+using System.Reflection;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class SummonScript : IGetKey, IUniversalScript
+internal class SummonScript : IGetKey, IUniversalScript
 {
     protected readonly Game Game;
-    protected SummonScript(Game game)
+    public SummonScript(Game game, SummonScriptGameConfiguration summonScriptGameConfiguration)
     {
         Game = game;
+        Key = summonScriptGameConfiguration.Key ?? summonScriptGameConfiguration.GetType().Name;
+        Pet = summonScriptGameConfiguration.Pet;
+        GroupBooleanExpression = summonScriptGameConfiguration.GroupBooleanExpression;
+        MonsterFilterBindingKey = summonScriptGameConfiguration.MonsterFilterBindingKey;
+        LevelRollExpression = summonScriptGameConfiguration.LevelRollExpression;
+        PreMessages = summonScriptGameConfiguration.PreMessages;
+        SuccessMessages = summonScriptGameConfiguration.SuccessMessages;
+        FailureMessages = summonScriptGameConfiguration.FailureMessages;
     }
 
     /// <summary>
@@ -22,41 +34,29 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        SummonScriptGameConfiguration definition = new SummonScriptGameConfiguration()
+        {
+            Key = Key,
+            Pet = Pet,
+            GroupBooleanExpression = GroupBooleanExpression,
+            MonsterFilterBindingKey = MonsterFilterBindingKey,
+            LevelRollExpression = LevelRollExpression,
+            PreMessages = PreMessages,
+            SuccessMessages = SuccessMessages,
+            FailureMessages = FailureMessages,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
-
     public string GetKey => Key;
+    public MonsterRaceFilter MonsterFilter { get; private set; }
+    public Expression LevelRoll { get; private set; }
     public void Bind()
     {
         MonsterFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(MonsterFilterBindingKey);
         LevelRoll = Game.ParseNumericExpression(LevelRollExpression);
         Group = Game.ParseBooleanExpression(GroupBooleanExpression);
     }
-
-    /// <summary>
-    /// Returns true, to summon a friendly monster (a.k.a pet); false, otherwise.  Returns false, by default.
-    /// </summary>
-    public virtual bool Pet => false;
-
-    /// <summary>
-    /// Returns a boolean expression that is computed to determine whether the summoning of the monster will produce a group of like-monsters.  Returns true, by default.
-    /// </summary>
-    protected virtual string GroupBooleanExpression => "true";
-
-    /// <summary>
-    /// Returns true, if a group of monsters or pets will be summon; false, otherwise.
-    /// </summary>
-    public Expression Group { get; private set; }
-
-    protected abstract string MonsterFilterBindingKey { get; }
-    public MonsterRaceFilter MonsterFilter { get; private set; }
-    protected abstract string LevelRollExpression { get; }
-    public Expression LevelRoll { get; private set; }
-    public virtual string[]? PreMessages => null;
-    public virtual string[]? SuccessMessages => null;
-    public virtual string[]? FailureMessages => null;
 
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
@@ -109,4 +109,29 @@ internal abstract class SummonScript : IGetKey, IUniversalScript
         IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
         return new IdentifiedAndUsedResult(identifiedResult, UsedResult.True);
     }
+
+    /// <summary>
+    /// Returns true, if a group of monsters or pets will be summon; false, otherwise.
+    /// </summary>
+    public Expression Group { get; private set; }
+
+    #region Light-weight Virtuals and Properties
+    public virtual string Key { get; }
+
+    /// <summary>
+    /// Returns true, to summon a friendly monster (a.k.a pet); false, otherwise.  Returns false, by default.
+    /// </summary>
+    public virtual bool Pet { get; } = false;
+
+    /// <summary>
+    /// Returns a boolean expression that is computed to determine whether the summoning of the monster will produce a group of like-monsters.  Returns true, by default.
+    /// </summary>
+    protected virtual string GroupBooleanExpression { get; } = "true";
+
+    protected virtual string MonsterFilterBindingKey { get; }
+    protected virtual string LevelRollExpression { get; }
+    public virtual string[]? PreMessages { get; } = null;
+    public virtual string[]? SuccessMessages { get; } = null;
+    public virtual string[]? FailureMessages { get; } = null;
+    #endregion
 }

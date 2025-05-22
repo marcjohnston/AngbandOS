@@ -5,17 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.SummonScripts;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class DemonPet1xSummonScript : SummonScript
+public class DemonPet1xSummonScript : SummonScriptGameConfiguration
 {
-    private DemonPet1xSummonScript(Game game) : base(game) { }
-
-    protected override string MonsterFilterBindingKey => nameof(DemonMonsterRaceFilter);
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.DemonMonsterRaceFilter);
     public override bool Pet => true;
     public override string[]? PreMessages => new string[] { "You concentrate on the image of a demon..." };
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 
-    protected override string LevelRollExpression => "X";
+    public override string LevelRollExpression => "X";
 }

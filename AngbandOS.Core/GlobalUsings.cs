@@ -59,7 +59,6 @@ global using AngbandOS.Core.Spells.Life;
 global using AngbandOS.Core.Spells.Nature;
 global using AngbandOS.Core.Spells.Sorcery;
 global using AngbandOS.Core.Spells.Tarot;
-global using AngbandOS.Core.SummonScripts;
 global using AngbandOS.Core.SummonWeightedRandoms;
 global using AngbandOS.Core.Timers;
 global using AngbandOS.Core.Widgets;

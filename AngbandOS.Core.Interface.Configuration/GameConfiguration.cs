@@ -130,4 +130,5 @@ public class GameConfiguration
     public virtual RealmGameConfiguration[]? Realms { get; set; } = null;
     public virtual RealmCharacterClassGameConfiguration[]? RealmCharacterClasses { get; set; } = null;
     public virtual ViewGameConfiguration[]? Views { get; set; } = null;
+    public virtual SummonScriptGameConfiguration[]? SummonScripts { get; set; } = null;
 }

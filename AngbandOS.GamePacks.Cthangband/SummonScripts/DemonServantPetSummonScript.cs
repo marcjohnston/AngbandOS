@@ -8,15 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DemonServantPetSummonScript : SummonScript
+public class DemonServantPetSummonScript : SummonScriptGameConfiguration
 {
-    private DemonServantPetSummonScript(Game game) : base(game) { }
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.DemonMonsterRaceFilter);
 
-    protected override string MonsterFilterBindingKey => nameof(DemonMonsterRaceFilter);
-
-    protected override string LevelRollExpression => "X*3/2";
+    public override string LevelRollExpression => "X*3/2";
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
     public override string[]? SuccessMessages => new string[] { "The area fills with a stench of sulphur and brimstone.", "'What is thy bidding... Master?'" };
     public override bool Pet => true;
-    protected override string GroupBooleanExpression => "X==50";
+    public override string GroupBooleanExpression => "X==50";
 }

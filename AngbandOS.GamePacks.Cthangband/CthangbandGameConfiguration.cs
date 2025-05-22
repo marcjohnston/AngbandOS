@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Scripts;
+
 namespace AngbandOS.GamePacks.Cthangband;
 
 public class CthangbandGameConfiguration : GameConfiguration
@@ -5256,5 +5258,27 @@ public class CthangbandGameConfiguration : GameConfiguration
     public override ViewGameConfiguration[]? Views => new ViewGameConfiguration[]
     {
         new ConsoleView()
+    };
+
+    public override SummonScriptGameConfiguration[]? SummonScripts => new SummonScriptGameConfiguration[]
+    {
+        new AncientDragon1xSummonScript(),
+        new AncientDragonPet1xSummonScript(),
+        new Animal1xSummonScript(),
+        new AnimalRangerPet1xSummonScript(),
+        new BizarreA1xSummonScript(),
+        new BizarreAPet1xSummonScript(),
+        new BizarreB1xSummonScript(),
+        new BizarreBPet1xSummonScript(),
+        new BizarreD1xSummonScript(),
+        new BizarreDPet1xSummonScript(),
+        new BizarreE1xSummonScript(),
+        new BizarreEPet1xSummonScript(),
+        new Demon1xSummonScript(),
+        new DemonPet1xSummonScript(),
+        new DemonServantPetSummonScript(),
+        new DemonServantSummonScript(),
+        new FriendlyAnimalSummonScript(),
+        new FriendlyPhantomSummonScript()
     };
 }

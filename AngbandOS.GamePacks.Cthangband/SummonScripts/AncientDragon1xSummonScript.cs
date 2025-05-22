@@ -5,15 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.SummonScripts;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class AncientDragon1xSummonScript : SummonScript
+public class AncientDragon1xSummonScript : SummonScriptGameConfiguration
 {
-    private AncientDragon1xSummonScript(Game game) : base(game) { } // This object is a singleton
-
-    protected override string MonsterFilterBindingKey => nameof(HiDragonNoUniquesMonsterRaceFilter);
-    protected override string LevelRollExpression => "X";
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.HiDragonNoUniquesMonsterRaceFilter);
+    public override string LevelRollExpression => "X";
     public override string[]? PreMessages => new string[] { "You concentrate on the image of an ancient dragon..." };
     public override string[]? SuccessMessages => new string[] { "The summoned dragon gets angry!" };
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };

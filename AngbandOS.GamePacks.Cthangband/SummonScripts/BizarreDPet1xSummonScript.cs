@@ -5,16 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.SummonScripts;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class AncientDragonPet1xSummonScript : SummonScript
+public class BizarreDPet1xSummonScript : SummonScriptGameConfiguration
 {
-    private AncientDragonPet1xSummonScript(Game game) : base(game) { } // This object is a singleton
-
-    protected override string MonsterFilterBindingKey => nameof(HiDragonNoUniquesMonsterRaceFilter);
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.Bizarre4MonsterRaceFilter);
     public override bool Pet => true;
-    protected override string LevelRollExpression => "X";
-    public override string[]? PreMessages => new string[] { "You concentrate on the image of an ancient dragon..." };
+    public override string GroupBooleanExpression => "false";
+    public override string LevelRollExpression => "X";
+    public override string[]? PreMessages => new string[] { "You concentrate on the Fool card..." };
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

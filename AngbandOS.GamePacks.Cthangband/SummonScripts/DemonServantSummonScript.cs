@@ -8,13 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DemonServantSummonScript : SummonScript
+public class DemonServantSummonScript : SummonScriptGameConfiguration
 {
-    private DemonServantSummonScript(Game game) : base(game) { }
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.DemonMonsterRaceFilter);
 
-    protected override string MonsterFilterBindingKey => nameof(DemonMonsterRaceFilter);
-
-    protected override string LevelRollExpression => "X*3/2";
+    public override string LevelRollExpression => "X*3/2";
 
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
     public override string[]? SuccessMessages => new string[] { "The area fills with a stench of sulphur and brimstone.", "'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'" };
