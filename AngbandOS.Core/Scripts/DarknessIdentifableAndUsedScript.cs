@@ -18,7 +18,7 @@ internal class DarknessIdentifableAndUsedScript : Script, IReadScrollOrUseStaffS
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        if (!Game.BlindnessTimer.HasResistance && !Game.HasDarkResistance)
+        if (!Game.HasBlindnessResistance && !Game.HasDarkResistance)
         {
             Game.BlindnessTimer.AddTimer(3 + Game.DieRoll(5));
         }

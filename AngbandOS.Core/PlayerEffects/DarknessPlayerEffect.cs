@@ -33,7 +33,7 @@ internal class DarknessPlayerEffect : PlayerEffect
                 dam = 0;
             }
         }
-        else if (!blind && !Game.BlindnessTimer.HasResistance)
+        else if (!blind && !Game.HasBlindnessResistance)
         {
             Game.BlindnessTimer.AddTimer(Game.DieRoll(5) + 2);
         }

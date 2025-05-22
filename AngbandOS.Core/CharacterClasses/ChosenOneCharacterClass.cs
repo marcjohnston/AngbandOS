@@ -63,7 +63,7 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
         }
         if (Game.ExperienceLevel.IntValue >= 6)
         {
-            Game.BlindnessTimer.HasResistance = true;
+            Game.HasBlindnessResistance = true;
         }
         if (Game.ExperienceLevel.IntValue >= 8)
         {

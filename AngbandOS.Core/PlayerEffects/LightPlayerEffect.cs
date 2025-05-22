@@ -29,7 +29,7 @@ internal class LightPlayerEffect : PlayerEffect
             dam *= 4;
             dam /= Game.DieRoll(6) + 6;
         }
-        else if (!blind && !Game.BlindnessTimer.HasResistance)
+        else if (!blind && !Game.HasBlindnessResistance)
         {
             Game.BlindnessTimer.AddTimer(Game.DieRoll(5) + 2);
         }

@@ -79,7 +79,7 @@ internal class DraconianRace : Race
         }
         if (Game.ExperienceLevel.IntValue > 14)
         {
-            Game.AcidResistanceTimer.HasResistance = true;
+            Game.HasAcidResistance = true;
         }
         if (Game.ExperienceLevel.IntValue > 19)
         {

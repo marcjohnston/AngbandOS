@@ -34,7 +34,7 @@ internal class BrainSmashMonsterSpell : MonsterSpell
         {
             Game.MsgPrint("Your mind is blasted by psionic energy.");
             Game.TakeHit(base.Game.DiceRoll(12, 15), monsterDescription);
-            if (!Game.BlindnessTimer.HasResistance)
+            if (!Game.HasBlindnessResistance)
             {
                 Game.BlindnessTimer.AddTimer(8 + base.Game.RandomLessThan(8));
             }

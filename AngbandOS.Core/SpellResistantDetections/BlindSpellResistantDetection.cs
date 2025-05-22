@@ -13,7 +13,7 @@ internal class BlindSpellResistantDetection : SpellResistantDetection
     private BlindSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (Game.BlindnessTimer.HasResistance)
+        if (Game.HasBlindnessResistance)
         {
             monster.SmResBlind = true;
         }

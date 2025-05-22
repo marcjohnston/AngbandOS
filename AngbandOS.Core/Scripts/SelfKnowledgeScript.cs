@@ -187,15 +187,15 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "Your skin glows in the dark.";
         }
-        if (Game.AcidResistanceTimer.HasImmunity)
+        if (Game.HasAcidImmunity)
         {
             info[infoCount++] = "You are completely immune to acid.";
         }
-        else if (Game.AcidResistanceTimer.HasResistance && Game.AcidResistanceTimer.Value != 0)
+        else if (Game.HasAcidResistance && Game.AcidResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You resist acid exceptionally well.";
         }
-        else if (Game.AcidResistanceTimer.HasResistance || Game.AcidResistanceTimer.Value != 0)
+        else if (Game.HasAcidResistance || Game.AcidResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You are resistant to acid.";
         }
@@ -283,7 +283,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "You are completely fearless.";
         }
-        if (Game.BlindnessTimer.HasResistance)
+        if (Game.HasBlindnessResistance)
         {
             info[infoCount++] = "Your eyes are resistant to blindness.";
         }

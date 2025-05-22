@@ -79,9 +79,6 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
         return SetTimer(Value + deltaValue);
     }
 
-    public bool HasResistance;
-    public bool HasImmunity;
-
     /// <summary>
     /// Converts the current timer into a rate.  Rates are ranges of values.  By default, a rate of 1 is returns for all timer values greater than 0 and a rate of 0 is returned
     /// when the timer is stopped.  Derived timers can modify these rates.
