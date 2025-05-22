@@ -33,9 +33,9 @@ internal class IcePlayerEffect : PlayerEffect
         {
             Game.StunTimer.AddTimer(Game.DieRoll(15));
         }
-        if (!(Game.ColdResistanceTimer.HasResistance || Game.ColdResistanceTimer.Value != 0) || Game.DieRoll(12) == 1)
+        if (!(Game.HasColdResistance || Game.ColdResistanceTimer.Value != 0) || Game.DieRoll(12) == 1)
         {
-            if (!Game.ColdResistanceTimer.HasImmunity)
+            if (!Game.HasColdImmunity)
             {
                 Game.InvenDamage(Game.SetColdDestroy, 3);
             }

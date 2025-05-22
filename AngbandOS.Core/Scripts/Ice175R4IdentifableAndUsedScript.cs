@@ -19,7 +19,7 @@ internal class Ice175R4IdentifableAndUsedScript : Script, IReadScrollOrUseStaffS
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(IceProjectile)), 0, 175, 4);
-        if (!(Game.ColdResistanceTimer.Value != 0 || Game.ColdResistanceTimer.HasResistance || Game.ColdResistanceTimer.HasImmunity))
+        if (!(Game.ColdResistanceTimer.Value != 0 || Game.HasColdResistance || Game.HasColdImmunity))
         {
             Game.TakeHit(100 + Game.DieRoll(100), "a Scroll of Ice");
         }
