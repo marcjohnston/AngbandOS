@@ -22,7 +22,7 @@ internal class BlindnessMonsterSpell : MonsterSpell
     public override void ExecuteOnPlayer(Monster monster)
     {
 
-        if (Game.HasBlindnessResistance)
+        if (Game.BlindnessTimer.HasResistance)
         {
             Game.MsgPrint("You are unaffected!");
         }

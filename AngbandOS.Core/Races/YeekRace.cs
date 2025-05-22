@@ -55,10 +55,10 @@ internal class YeekRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasAcidResistance = true;
+        Game.AcidResistanceTimer.HasResistance = true;
         if (Game.ExperienceLevel.IntValue > 19)
         {
-            Game.HasAcidImmunity = true;
+            Game.AcidResistanceTimer.HasImmunity = true;
         }
     }
 

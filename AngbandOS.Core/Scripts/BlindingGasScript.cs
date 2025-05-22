@@ -25,7 +25,7 @@ internal class BlindingGasScript : Script, IScript, ICastSpellScript
     {
         // Blind the player
         Game.MsgPrint("A black gas surrounds you!");
-        if (!Game.HasBlindnessResistance)
+        if (!Game.BlindnessTimer.HasResistance)
         {
             Game.BlindnessTimer.AddTimer(Game.RandomLessThan(50) + 25);
         }

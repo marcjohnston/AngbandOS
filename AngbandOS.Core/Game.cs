@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.PhysicalAttributeSets;
+using System;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
@@ -841,14 +842,11 @@ internal class Game
     public readonly ExperienceLevelIntProperty ExperienceLevel;
 
     public Patron GooPatron;
-    public bool HasAcidImmunity;
-    public bool HasAcidResistance;
     public bool HasAggravation;
     public bool HasAntiMagic;
     public bool HasAntiTeleport;
     public bool HasAntiTheft;
     public bool HasBlessedBlade;
-    public bool HasBlindnessResistance;
     public bool HasChaosResistance;
     public bool HasColdImmunity;
     public bool HasColdResistance;
@@ -4787,7 +4785,7 @@ internal class Game
     public void AcidDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (HasAcidImmunity || dam <= 0)
+        if (AcidResistanceTimer.HasImmunity || dam <= 0)
         {
             return;
         }
@@ -4795,7 +4793,7 @@ internal class Game
         {
             dam *= 2;
         }
-        if (HasAcidResistance)
+        if (AcidResistanceTimer.HasResistance)
         {
             dam = (dam + 2) / 3;
         }
@@ -4803,7 +4801,7 @@ internal class Game
         {
             dam = (dam + 2) / 3;
         }
-        if (AcidResistanceTimer.Value == 0 && !HasAcidResistance && DieRoll(HurtChance) == 1)
+        if (AcidResistanceTimer.Value == 0 && !AcidResistanceTimer.HasResistance && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(AbilityEnum.Charisma);
         }
@@ -4812,7 +4810,7 @@ internal class Game
             dam = (dam + 1) / 2;
         }
         TakeHit(dam, kbStr);
-        if (AcidResistanceTimer.Value == 0 && !HasAcidResistance)
+        if (AcidResistanceTimer.Value == 0 && !AcidResistanceTimer.HasResistance)
         {
             InvenDamage(SetAcidDestroy, inv);
         }
@@ -5107,7 +5105,7 @@ internal class Game
         if (flag)
         {
             MsgPrint("There is a searing blast of light!");
-            if (!HasBlindnessResistance && !HasLightResistance)
+            if (!BlindnessTimer.HasResistance && !HasLightResistance)
             {
                 BlindnessTimer.AddTimer(10 + DieRoll(10));
             }
@@ -17208,6 +17206,14 @@ internal class Game
             ShimmerMonsters = true;
         }
         return true;
+    }
+
+    public static void ValidateEnum<T>(T enumValue) where T : Enum
+    {
+        if (!Enum.IsDefined(typeof(T), enumValue))
+        {
+            throw new Exception($"{enumValue} is invalid for a {typeof(T).Name}.");
+        }
     }
 
     public static bool ValidateTupleSorting<T>(T[] items, Func<T, T, bool> testPredicate)

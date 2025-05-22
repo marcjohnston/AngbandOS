@@ -72,7 +72,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasSustainConstitution = false;
         Game.HasSustainDexterity = false;
         Game.HasSustainCharisma = false;
-        Game.HasAcidResistance = false;
+        Game.AcidResistanceTimer.HasResistance = false;
         Game.HasLightningResistance = false;
         Game.HasFireResistance = false;
         Game.HasColdResistance = false;
@@ -86,7 +86,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasDisenchantResistance = false;
         Game.HasShardResistance = false;
         Game.HasNexusResistance = false;
-        Game.HasBlindnessResistance = false;
+        Game.BlindnessTimer.HasResistance = false;
         Game.HasNetherResistance = false;
         Game.HasFearResistance = false;
         Game.HasElementalVulnerability = false;
@@ -96,7 +96,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasAntiMagic = false;
         Game.HasAntiTeleport = false;
         Game.HasAntiTheft = false;
-        Game.HasAcidImmunity = false;
+        Game.AcidResistanceTimer.HasImmunity = false;
         Game.HasLightningImmunity = false;
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
@@ -312,7 +312,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ImAcid)
                     {
-                        Game.HasAcidImmunity = true;
+                        Game.AcidResistanceTimer.HasImmunity = true;
                     }
                     if (mergedCharacteristics.ImCold)
                     {
@@ -324,7 +324,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ResAcid)
                     {
-                        Game.HasAcidResistance = true;
+                        Game.AcidResistanceTimer.HasResistance = true;
                     }
                     if (mergedCharacteristics.ResElec)
                     {
@@ -380,7 +380,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ResBlind)
                     {
-                        Game.HasBlindnessResistance = true;
+                        Game.BlindnessTimer.HasResistance = true;
                     }
                     if (mergedCharacteristics.ResNether)
                     {

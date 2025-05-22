@@ -13,7 +13,7 @@ internal class AcidSpellResistantDetection : SpellResistantDetection
     private AcidSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (Game.HasAcidResistance)
+        if (Game.AcidResistanceTimer.HasResistance)
         {
             monster.SmResAcid = true;
         }
@@ -21,7 +21,7 @@ internal class AcidSpellResistantDetection : SpellResistantDetection
         {
             monster.SmOppAcid = true;
         }
-        if (Game.HasAcidImmunity)
+        if (Game.AcidResistanceTimer.HasImmunity)
         {
             monster.SmImmAcid = true;
         }

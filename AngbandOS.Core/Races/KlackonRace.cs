@@ -57,7 +57,7 @@ internal class KlackonRace : Race
     public override void CalcBonuses()
     {
         Game.HasConfusionResistance = true;
-        Game.HasAcidResistance = true;
+        Game.AcidResistanceTimer.HasResistance = true;
         Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
     }
     public override void UseRacialPower()

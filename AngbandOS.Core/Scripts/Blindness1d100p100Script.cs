@@ -18,7 +18,7 @@ internal class Blindness1d100p100Script : Script, IEatOrQuaffScript
     /// <returns></returns>
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        if (!Game.HasBlindnessResistance)
+        if (!Game.BlindnessTimer.HasResistance)
         {
             bool isIdentified = Game.BlindnessTimer.AddTimer(Game.RandomLessThan(100) + 100);
             return new IdentifiedResult(isIdentified);

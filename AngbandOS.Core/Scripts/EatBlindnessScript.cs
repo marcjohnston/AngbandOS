@@ -19,7 +19,7 @@ internal class EatBlindnessScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        if (!Game.HasBlindnessResistance)
+        if (!Game.BlindnessTimer.HasResistance)
         {
             if (Game.BlindnessTimer.AddTimer(Game.RandomLessThan(200) + 200))
             {

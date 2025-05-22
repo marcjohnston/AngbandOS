@@ -52,7 +52,7 @@ internal class DwarfRace : Race
 
     public override void CalcBonuses()
     {
-        Game.HasBlindnessResistance = true;
+        Game.BlindnessTimer.HasResistance = true;
     }
     public override void UseRacialPower()
     {
