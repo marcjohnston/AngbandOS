@@ -41,7 +41,7 @@ internal class AdrenalineChannelingTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"dur 10+d{Game.ExperienceLevel.IntValue * 3 / 2}";
     }

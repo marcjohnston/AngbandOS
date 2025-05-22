@@ -31,7 +31,7 @@ internal class MindWaveTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return Game.ExperienceLevel.IntValue < 25 ? $"dam {Game.ExperienceLevel.IntValue * 3 / 2}" : $"dam {Game.ExperienceLevel.IntValue * (((Game.ExperienceLevel.IntValue - 5) / 10) + 1)}";
     }

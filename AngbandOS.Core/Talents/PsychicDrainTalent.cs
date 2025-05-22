@@ -29,7 +29,7 @@ internal class PsychicDrainTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"dam {Game.ExperienceLevel.IntValue / 2}d6";
     }

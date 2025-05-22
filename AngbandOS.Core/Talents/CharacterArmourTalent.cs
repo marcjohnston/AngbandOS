@@ -41,7 +41,7 @@ internal class CharacterArmorTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"dur {Game.ExperienceLevel.IntValue}";
     }

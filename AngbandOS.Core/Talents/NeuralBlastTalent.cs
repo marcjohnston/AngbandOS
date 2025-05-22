@@ -34,7 +34,7 @@ internal class NeuralBlastTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"dam {3 + ((Game.ExperienceLevel.IntValue - 1) / 4)}d{3 + (Game.ExperienceLevel.IntValue / 15)}";
     }

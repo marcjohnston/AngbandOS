@@ -23,7 +23,7 @@ internal class TelekineticWaveTalent : Talent
         projectile.Fire(0, 3 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3), item: true, kill: true, grid: true, jump: false, beam: false, thru: false, hide: false, stop: false);
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"dam {Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3)}";
     }

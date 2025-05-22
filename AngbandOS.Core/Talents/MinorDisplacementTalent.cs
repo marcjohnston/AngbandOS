@@ -43,7 +43,7 @@ internal class MinorDisplacementTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"range {(Game.ExperienceLevel.IntValue < 25 ? 10 : Game.ExperienceLevel.IntValue + 2)}";
     }

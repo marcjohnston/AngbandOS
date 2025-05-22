@@ -25,7 +25,7 @@ internal class MajorDisplacementTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"range {Game.ExperienceLevel.IntValue * 5}";
     }

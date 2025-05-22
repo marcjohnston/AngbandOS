@@ -67,7 +67,7 @@ internal abstract class Talent : IGetKey
 
     public string SummaryLine()
     {
-        return $"{Name,-30}{Level,2} {ManaCost,4} {FailureChance(),3}% {Comment()}";
+        return $"{Name,-30}{Level,2} {ManaCost,4} {FailureChance(),3}% {LearnedDetails()}";
     }
 
     public override string ToString()
@@ -77,5 +77,5 @@ internal abstract class Talent : IGetKey
 
     public abstract void Use();
 
-    protected abstract string Comment();
+    protected abstract string LearnedDetails();
 }

@@ -28,7 +28,7 @@ internal class PsychometryTalent : Talent
         }
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return string.Empty;
     }

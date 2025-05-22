@@ -26,7 +26,7 @@ internal class PulveriseTalent : Talent
             Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8), Game.ExperienceLevel.IntValue > 20 ? ((Game.ExperienceLevel.IntValue - 20) / 8) + 1 : 0);
     }
 
-    protected override string Comment()
+    protected override string LearnedDetails()
     {
         return $"dam {8 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
         ;
