@@ -13,7 +13,7 @@ internal class ElecSpellResistantDetection : SpellResistantDetection
     private ElecSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (Game.LightningResistanceTimer.HasResistance)
+        if (Game.HasLightningResistance)
         {
             monster.SmResElec = true;
         }
@@ -21,7 +21,7 @@ internal class ElecSpellResistantDetection : SpellResistantDetection
         {
             monster.SmOppElec = true;
         }
-        if (Game.LightningResistanceTimer.HasImmunity)
+        if (Game.HasLightningImmunity)
         {
             monster.SmImmElec = true;
         }

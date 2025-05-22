@@ -73,7 +73,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasSustainDexterity = false;
         Game.HasSustainCharisma = false;
         Game.AcidResistanceTimer.HasResistance = false;
-        Game.LightningResistanceTimer.HasResistance = false;
+        Game.HasLightningResistance = false;
         Game.FireResistanceTimer.HasResistance = false;
         Game.ColdResistanceTimer.HasResistance = false;
         Game.HasPoisonResistance = false;
@@ -97,7 +97,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasAntiTeleport = false;
         Game.HasAntiTheft = false;
         Game.AcidResistanceTimer.HasImmunity = false;
-        Game.LightningResistanceTimer.HasImmunity = false;
+        Game.HasLightningImmunity = false;
         Game.FireResistanceTimer.HasImmunity = false;
         Game.ColdResistanceTimer.HasImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision;
@@ -320,7 +320,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ImElec)
                     {
-                        Game.LightningResistanceTimer.HasImmunity = true;
+                        Game.HasLightningImmunity = true;
                     }
                     if (mergedCharacteristics.ResAcid)
                     {
@@ -328,7 +328,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ResElec)
                     {
-                        Game.LightningResistanceTimer.HasResistance = true;
+                        Game.HasLightningResistance = true;
                     }
                     if (mergedCharacteristics.ResFire)
                     {
