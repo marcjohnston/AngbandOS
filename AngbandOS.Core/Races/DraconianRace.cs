@@ -75,7 +75,7 @@ internal class DraconianRace : Race
         }
         if (Game.ExperienceLevel.IntValue > 9)
         {
-            Game.HasColdResistance = true;
+            Game.ColdResistanceTimer.HasResistance = true;
         }
         if (Game.ExperienceLevel.IntValue > 14)
         {

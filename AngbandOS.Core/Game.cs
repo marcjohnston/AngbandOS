@@ -848,8 +848,6 @@ internal class Game
     public bool HasAntiTheft;
     public bool HasBlessedBlade;
     public bool HasChaosResistance;
-    public bool HasColdImmunity;
-    public bool HasColdResistance;
 
     /// <summary>
     /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.
@@ -1003,7 +1001,7 @@ internal class Game
     public readonly Timer AcidResistanceTimer;
     public readonly Timer BleedingTimer;
     public readonly Timer BlessingTimer;
-    public readonly Timer BlindnessTimer;
+    public readonly Timer BlindnessTimer; // There is no immunity
 
     /// <summary>
     /// 
@@ -5014,7 +5012,7 @@ internal class Game
     public void ColdDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (HasColdImmunity || dam <= 0)
+        if (ColdResistanceTimer.HasImmunity || dam <= 0)
         {
             return;
         }
@@ -5022,7 +5020,7 @@ internal class Game
         {
             dam *= 2;
         }
-        if (HasColdResistance)
+        if (ColdResistanceTimer.HasResistance)
         {
             dam = (dam + 2) / 3;
         }
@@ -5030,12 +5028,12 @@ internal class Game
         {
             dam = (dam + 2) / 3;
         }
-        if (!(ColdResistanceTimer.Value != 0 || HasColdResistance) && DieRoll(HurtChance) == 1)
+        if (!(ColdResistanceTimer.Value != 0 || ColdResistanceTimer.HasResistance) && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(AbilityEnum.Strength);
         }
         TakeHit(dam, kbStr);
-        if (!(HasColdResistance && ColdResistanceTimer.Value != 0))
+        if (!(ColdResistanceTimer.HasResistance && ColdResistanceTimer.Value != 0))
         {
             InvenDamage(SetColdDestroy, inv);
         }

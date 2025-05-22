@@ -13,7 +13,7 @@ internal class ColdSpellResistantDetection : SpellResistantDetection
     private ColdSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (Game.HasColdResistance)
+        if (Game.ColdResistanceTimer.HasResistance)
         {
             monster.SmResCold = true;
         }
@@ -21,7 +21,7 @@ internal class ColdSpellResistantDetection : SpellResistantDetection
         {
             monster.SmOppCold = true;
         }
-        if (Game.HasColdImmunity)
+        if (Game.ColdResistanceTimer.HasImmunity)
         {
             monster.SmImmCold = true;
         }

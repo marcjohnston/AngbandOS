@@ -67,7 +67,7 @@ internal class ZombieRace : Race
         Game.HasSlowDigestion = true;
         if (Game.ExperienceLevel.IntValue > 4)
         {
-            Game.HasColdResistance = true;
+            Game.ColdResistanceTimer.HasResistance = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;

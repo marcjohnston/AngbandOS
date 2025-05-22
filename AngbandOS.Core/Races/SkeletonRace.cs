@@ -63,7 +63,7 @@ internal class SkeletonRace : Race
         Game.HasPoisonResistance = true;
         if (Game.ExperienceLevel.IntValue > 9)
         {
-            Game.HasColdResistance = true;
+            Game.ColdResistanceTimer.HasResistance = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
