@@ -211,15 +211,15 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "You are resistant to lightning.";
         }
-        if (Game.HasFireImmunity)
+        if (Game.FireResistanceTimer.HasImmunity)
         {
             info[infoCount++] = "You are completely immune to fire.";
         }
-        else if (Game.HasFireResistance && Game.FireResistanceTimer.Value != 0)
+        else if (Game.FireResistanceTimer.HasResistance && Game.FireResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You resist fire exceptionally well.";
         }
-        else if (Game.HasFireResistance || Game.FireResistanceTimer.Value != 0)
+        else if (Game.FireResistanceTimer.HasResistance || Game.FireResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You are resistant to fire.";
         }

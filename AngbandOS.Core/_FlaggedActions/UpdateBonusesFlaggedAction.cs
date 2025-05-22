@@ -74,7 +74,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasSustainCharisma = false;
         Game.AcidResistanceTimer.HasResistance = false;
         Game.HasLightningResistance = false;
-        Game.HasFireResistance = false;
+        Game.FireResistanceTimer.HasResistance = false;
         Game.ColdResistanceTimer.HasResistance = false;
         Game.HasPoisonResistance = false;
         Game.HasConfusionResistance = false;
@@ -98,7 +98,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasAntiTheft = false;
         Game.AcidResistanceTimer.HasImmunity = false;
         Game.HasLightningImmunity = false;
-        Game.HasFireImmunity = false;
+        Game.FireResistanceTimer.HasImmunity = false;
         Game.ColdResistanceTimer.HasImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision;
         Game.SkillDisarmTraps = Game.Race.BaseDisarmBonus + Game.BaseCharacterClass.BaseDisarmBonus;
@@ -308,7 +308,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ImFire)
                     {
-                        Game.HasFireImmunity = true;
+                        Game.FireResistanceTimer.HasImmunity = true;
                     }
                     if (mergedCharacteristics.ImAcid)
                     {
@@ -332,7 +332,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (mergedCharacteristics.ResFire)
                     {
-                        Game.HasFireResistance = true;
+                        Game.FireResistanceTimer.HasResistance = true;
                     }
                     if (mergedCharacteristics.ResCold)
                     {

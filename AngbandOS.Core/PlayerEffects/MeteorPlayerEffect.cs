@@ -27,7 +27,7 @@ internal class MeteorPlayerEffect : PlayerEffect
         Game.TakeHit(dam, killer);
         if (!Game.HasShardResistance || Game.DieRoll(13) == 1)
         {
-            if (!Game.HasFireImmunity)
+            if (!Game.FireResistanceTimer.HasImmunity)
             {
                 Game.InvenDamage(Game.SetFireDestroy, 2);
             }

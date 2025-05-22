@@ -66,14 +66,14 @@ internal class ImpRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasFireResistance = true;
+        Game.FireResistanceTimer.HasResistance = true;
         if (Game.ExperienceLevel.IntValue > 9)
         {
             Game.HasSeeInvisibility = true;
         }
         if (Game.ExperienceLevel.IntValue > 19)
         {
-            Game.HasFireImmunity = true;
+            Game.FireResistanceTimer.HasImmunity = true;
         }
     }
 

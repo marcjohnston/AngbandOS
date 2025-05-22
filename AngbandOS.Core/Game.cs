@@ -862,8 +862,6 @@ internal class Game
     public bool HasExtraMight;
     public bool HasFearResistance;
     public bool HasFeatherFall;
-    public bool HasFireImmunity;
-    public bool HasFireResistance;
     public bool HasFireSheath;
     public bool HasFreeAction;
 
@@ -5812,7 +5810,7 @@ internal class Game
     public void FireDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (HasFireImmunity || dam <= 0)
+        if (FireResistanceTimer.HasImmunity || dam <= 0)
         {
             return;
         }
@@ -5820,7 +5818,7 @@ internal class Game
         {
             dam *= 2;
         }
-        if (HasFireResistance)
+        if (FireResistanceTimer.HasResistance)
         {
             dam = (dam + 2) / 3;
         }
@@ -5828,12 +5826,12 @@ internal class Game
         {
             dam = (dam + 2) / 3;
         }
-        if (!(FireResistanceTimer.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
+        if (!(FireResistanceTimer.Value != 0 || FireResistanceTimer.HasResistance) && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(AbilityEnum.Strength);
         }
         TakeHit(dam, kbStr);
-        if (!(HasFireResistance && FireResistanceTimer.Value != 0))
+        if (!(FireResistanceTimer.HasResistance && FireResistanceTimer.Value != 0))
         {
             InvenDamage(SetFireDestroy, inv);
         }
@@ -8663,7 +8661,7 @@ internal class Game
         // If we have a fire aura, apply it
         if (race.FireAura)
         {
-            if (!HasFireImmunity)
+            if (!FireResistanceTimer.HasImmunity)
             {
                 auraDamage = DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                 string auraDam = monster.IndefiniteVisibleName;
@@ -8672,7 +8670,7 @@ internal class Game
                 {
                     auraDamage = (auraDamage + 2) / 3;
                 }
-                if (HasFireResistance)
+                if (FireResistanceTimer.HasResistance)
                 {
                     auraDamage = (auraDamage + 2) / 3;
                 }
