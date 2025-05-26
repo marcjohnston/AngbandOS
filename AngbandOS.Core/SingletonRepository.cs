@@ -60,7 +60,7 @@ internal class SingletonRepository
 
         if (key == null)
         {
-            return null;
+            return default;
         }
 
         T? value = TryGet<T>(key);
@@ -75,7 +75,7 @@ internal class SingletonRepository
     {
         if (key is null)
         {
-            return null;
+            return default;
         }
         return TryGet<T>(key);
     }
@@ -102,7 +102,7 @@ internal class SingletonRepository
         // Retrieve the singleton by key name.
         if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
         {
-            return null;
+            return default;
         }
         return (T)singleton;
     }
@@ -460,6 +460,9 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Talent>();
         LoadAllAssemblyTypes<WieldSlot>();
 
+        //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
+        //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
+
         // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -471,6 +474,18 @@ internal class SingletonRepository
         {
             singleton.Bind();
         }
+    }
+    private void ValidateJointTable<T, T1, T2>(Func<T1, T2, string> GetCompositeKey) where T : class where T1 : class where T2 : class
+    {
+        foreach (T1 t1 in Get<T1>())
+        {
+            foreach (T2 t2 in Get<T2>())
+            {
+                string compositeKey = GetCompositeKey(t1, t2);
+                T t = Get<T>(compositeKey);
+            }
+        }
+
     }
     #endregion
 
