@@ -13,7 +13,6 @@ internal class WarriorCharacterClass : BaseCharacterClass
     private WarriorCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 0;
     public override string Title => "Warrior";
-    public override int[] AbilityBonus => new[] { 5, -2, -2, 2, 2, -1 };
     public override int BaseDisarmBonus => 25;
     public override int BaseDeviceBonus => 18;
     public override int BaseSaveBonus => 18;
@@ -32,7 +31,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 45;
     public override int HitDieBonus => 9;
     public override int ExperienceFactor => 0;
-    public override int PrimeStat => AbilityEnum.Strength;
+    public override Ability PrimeStat => Game.StrengthAbility;
     public override string[] Info => new string[] {
         "Straightforward, no-nonsense fighters. They are the best",
         "characters at melee combat, and require the least amount",

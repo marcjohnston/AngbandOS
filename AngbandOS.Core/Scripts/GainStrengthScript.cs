@@ -19,6 +19,6 @@ internal class GainStrengthScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Strength increases your strength
-        return Game.TryIncreasingAbilityScore(AbilityEnum.Strength);
+        return Game.TryIncreasingAbilityScore(Game.StrengthAbility);
     }
 }

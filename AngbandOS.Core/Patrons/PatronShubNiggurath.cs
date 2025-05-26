@@ -13,7 +13,7 @@ internal class PatronShubNiggurath : Patron
     private PatronShubNiggurath(Game game) : base(game) { }
     public override string ShortName => "Shub Niggurath";
     public override string LongName => "Shub Niggurath, Black Goat of the Woods";
-    public override int PreferredAbility => AbilityEnum.Intelligence;
+    public override Ability? PreferredAbility => Game.IntelligenceAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

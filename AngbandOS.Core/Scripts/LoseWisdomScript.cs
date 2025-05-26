@@ -19,6 +19,6 @@ internal class LoseWisdomScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Naivety tries to reduce your wisdom
-        return Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+        return Game.TryDecreasingAbilityScore(Game.WisdomAbility);
     }
 }

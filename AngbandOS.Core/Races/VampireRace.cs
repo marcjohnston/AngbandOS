@@ -12,7 +12,6 @@ internal class VampireRace : Race
 {
     private VampireRace(Game game) : base(game) { }
     public override string Title => "Vampire";
-    public override int[] AbilityBonus => new int[] { 3, 3, -1, -1, 1, 2 };
     public override int BaseDisarmBonus => 4;
     public override int BaseDeviceBonus => 10;
     public override int BaseSaveBonus => 10;
@@ -83,7 +82,7 @@ internal class VampireRace : Race
     public override void UseRacialPower()
     {
         // Vampires can drain health
-        if (Game.CheckIfRacialPowerWorks(2, 1 + (Game.ExperienceLevel.IntValue / 3), AbilityEnum.Constitution, 9))
+        if (Game.CheckIfRacialPowerWorks(2, 1 + (Game.ExperienceLevel.IntValue / 3), Game.ConstitutionAbility, 9))
         {
             if (Game.GetDirectionNoAim(out int direction))
             {

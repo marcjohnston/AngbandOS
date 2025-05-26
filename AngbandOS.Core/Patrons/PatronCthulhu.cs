@@ -13,7 +13,7 @@ internal class PatronCthulhu : Patron
     private PatronCthulhu(Game game) : base(game) { }
     public override string ShortName => "Cthulhu";
     public override string LongName => "Cthulhu, who Lies Dreaming";
-    public override int PreferredAbility => AbilityEnum.Constitution;
+    public override Ability? PreferredAbility => Game.ConstitutionAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

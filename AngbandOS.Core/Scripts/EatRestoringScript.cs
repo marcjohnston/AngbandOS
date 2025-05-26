@@ -20,27 +20,27 @@ internal class EatRestoringScript : Script, IEatOrQuaffScript
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         bool isIdentified = false;
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Strength))
+        if (Game.TryRestoringAbilityScore(Game.StrengthAbility))
         {
             isIdentified = true;
         }
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
+        if (Game.TryRestoringAbilityScore(Game.IntelligenceAbility))
         {
             isIdentified = true;
         }
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Wisdom))
+        if (Game.TryRestoringAbilityScore(Game.WisdomAbility))
         {
             isIdentified = true;
         }
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Dexterity))
+        if (Game.TryRestoringAbilityScore(Game.DexterityAbility))
         {
             isIdentified = true;
         }
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Constitution))
+        if (Game.TryRestoringAbilityScore(Game.ConstitutionAbility))
         {
             isIdentified = true;
         }
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Charisma))
+        if (Game.TryRestoringAbilityScore(Game.CharismaAbility))
         {
             isIdentified = true;
         }

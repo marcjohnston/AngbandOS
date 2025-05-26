@@ -13,7 +13,6 @@ internal class DruidCharacterClass : BaseCharacterClass
     private DruidCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 11;
     public override string Title => "Druid";
-    public override int[] AbilityBonus => new[] { -1, -3, 4, -2, 0, 3 };
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 32;
@@ -32,7 +31,7 @@ internal class DruidCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 3;
     public override int ExperienceFactor => 20;
-    public override int PrimeStat => AbilityEnum.Wisdom;
+    public override Ability PrimeStat => Game.WisdomAbility;
     public override string[] Info => new string[] {
         "Nature priests who use WIS based spell casting and who are",
         "limited to the Nature realm. As priests, they can't use",
@@ -68,7 +67,7 @@ internal class DruidCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override int SpellStat => AbilityEnum.Wisdom;
+    public override Ability SpellStat => Game.WisdomAbility;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {

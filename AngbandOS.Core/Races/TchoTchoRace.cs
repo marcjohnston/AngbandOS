@@ -12,7 +12,6 @@ internal class TchoTchoRace : Race
 {
     private TchoTchoRace(Game game) : base(game) { }
     public override string Title => "Tcho-Tcho";
-    public override int[] AbilityBonus => new int[] { 3, -2, -1, 1, 2, -2 };
     public override int BaseDisarmBonus => -2;
     public override int BaseDeviceBonus => -10;
     public override int BaseSaveBonus => 2;
@@ -58,7 +57,7 @@ internal class TchoTchoRace : Race
     public override void UseRacialPower()
     {
         // Tcho-Tcho can create The Yellow Sign
-        if (Game.CheckIfRacialPowerWorks(25, 35, AbilityEnum.Intelligence, 15))
+        if (Game.CheckIfRacialPowerWorks(25, 35, Game.IntelligenceAbility, 15))
         {
             Game.MsgPrint("You carefully draw The Yellow Sign...");
             Game.RunScript(nameof(YellowSignScript));

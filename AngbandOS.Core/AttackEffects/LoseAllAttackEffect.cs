@@ -17,32 +17,32 @@ internal class LoseAllAttackEffect : AttackEffect
     {
         // Try to decrease all six ability scores
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Strength);
+        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(Game.StrengthAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;
         }
-        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity);
+        identifiedResult = Game.TryDecreasingAbilityScore(Game.DexterityAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;
         }
-        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
+        identifiedResult = Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;
         }
-        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+        identifiedResult = Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;
         }
-        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+        identifiedResult = Game.TryDecreasingAbilityScore(Game.WisdomAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;
         }
-        identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Charisma);
+        identifiedResult = Game.TryDecreasingAbilityScore(Game.CharismaAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;

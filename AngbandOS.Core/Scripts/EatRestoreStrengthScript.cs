@@ -19,7 +19,7 @@ internal class EatRestoreStrengthScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Strength))
+        if (Game.TryRestoringAbilityScore(Game.StrengthAbility))
         {
             return new IdentifiedResult(true);
         }

@@ -13,7 +13,7 @@ internal class PatronRhanTegoth : Patron
     private PatronRhanTegoth(Game game) : base(game) { }
     public override string ShortName => "Rhan-Tegoth";
     public override string LongName => "Rhan-Tegoth, He of the Ivory Throne";
-    public override int PreferredAbility => AbilityEnum.Intelligence;
+    public override Ability? PreferredAbility => Game.IntelligenceAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

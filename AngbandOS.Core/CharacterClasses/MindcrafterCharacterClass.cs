@@ -14,7 +14,6 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     private MindcrafterCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 9;
     public override string Title => "Mindcrafter";
-    public override int[] AbilityBonus => new[] { -1, 0, 3, -1, -1, 2 };
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 30;
@@ -33,7 +32,7 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 2;
     public override int ExperienceFactor => 25;
-    public override int PrimeStat => AbilityEnum.Wisdom;
+    public override Ability PrimeStat => Game.WisdomAbility;
     public override string[] Info => new string[] {
         "Disciples of the psionic arts, Mindcrafters learn a range",
         "of mental abilities; which they power using WIS. As well",
@@ -45,7 +44,7 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
 
     public override void Cast() => CastMentalism();
 
-    public override int SpellStat => AbilityEnum.Wisdom;
+    public override Ability SpellStat => Game.WisdomAbility;
     public override ArtifactBias? ArtifactBias => (Game.DieRoll(5) > 2 ? Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias)) : null);
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 

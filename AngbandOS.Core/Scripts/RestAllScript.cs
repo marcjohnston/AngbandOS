@@ -14,12 +14,12 @@ internal class RestAllScript : Script, IActivateItemScript
 
     public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        Game.TryRestoringAbilityScore(AbilityEnum.Strength);
-        Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
-        Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
-        Game.TryRestoringAbilityScore(AbilityEnum.Dexterity);
-        Game.TryRestoringAbilityScore(AbilityEnum.Constitution);
-        Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
+        Game.TryRestoringAbilityScore(Game.StrengthAbility);
+        Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
+        Game.TryRestoringAbilityScore(Game.WisdomAbility);
+        Game.TryRestoringAbilityScore(Game.DexterityAbility);
+        Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
+        Game.TryRestoringAbilityScore(Game.CharismaAbility);
         Game.RunScript(nameof(RestoreLevelScript));
         return new UsedResult(true);
     }

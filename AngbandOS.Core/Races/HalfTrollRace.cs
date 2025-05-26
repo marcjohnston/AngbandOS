@@ -12,7 +12,6 @@ internal class HalfTrollRace : Race
 {
     private HalfTrollRace(Game game) : base(game) { }
     public override string Title => "Half Troll";
-    public override int[] AbilityBonus => new int[] { 4, -4, -2, -4, 3, -6 };
     public override int BaseDisarmBonus => -5;
     public override int BaseDeviceBonus => -8;
     public override int BaseSaveBonus => -8;
@@ -70,7 +69,7 @@ internal class HalfTrollRace : Race
     public override void UseRacialPower()
     {
         // Half-trolls can go berserk, which also heals them
-        if (Game.CheckIfRacialPowerWorks(10, 12, AbilityEnum.Wisdom, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
+        if (Game.CheckIfRacialPowerWorks(10, 12, Game.WisdomAbility, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
         {
             Game.MsgPrint("RAAAGH!");
             Game.FearTimer.ResetTimer();

@@ -12,7 +12,6 @@ internal class HumanRace : Race
 {
     private HumanRace(Game game) : base(game) { }
     public override string Title => "Human";
-    public override int[] AbilityBonus => new int[] { 0, 0, 0, 0, 0, 0 };
     public override int BaseDisarmBonus => 0;
     public override int BaseDeviceBonus => 0;
     public override int BaseSaveBonus => 0;

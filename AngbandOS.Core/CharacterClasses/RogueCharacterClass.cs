@@ -13,7 +13,6 @@ internal class RogueCharacterClass : BaseCharacterClass
     private RogueCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 3;
     public override string Title => "Rogue";
-    public override int[] AbilityBonus => new[] { 2, 1, -2, 3, 1, -1 };
     public override int BaseDisarmBonus => 45;
     public override int BaseDeviceBonus => 32;
     public override int BaseSaveBonus => 28;
@@ -32,7 +31,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 10;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 25;
-    public override int PrimeStat => AbilityEnum.Dexterity;
+    public override Ability PrimeStat => Game.DexterityAbility;
     public override string[] Info => new string[] {
         "Stealth based characters who are adept at picking locks,",
         "searching, and disarming traps. Rogues can use stealth to",
@@ -56,7 +55,7 @@ internal class RogueCharacterClass : BaseCharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override int SpellStat => AbilityEnum.Intelligence;
+    public override Ability SpellStat => Game.IntelligenceAbility;
     public override int MaximumWeight => 30;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;

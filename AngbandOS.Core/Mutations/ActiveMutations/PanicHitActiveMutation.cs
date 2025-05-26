@@ -13,7 +13,7 @@ internal class PanicHitActiveMutation : Mutation
     private PanicHitActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(10, 12, AbilityEnum.Dexterity, 14))
+        if (!Game.CheckIfRacialPowerWorks(10, 12, Game.DexterityAbility, 14))
         {
             return;
         }

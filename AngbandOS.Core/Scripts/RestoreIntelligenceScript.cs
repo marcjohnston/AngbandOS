@@ -19,7 +19,7 @@ internal class RestoreIntelligenceScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Restore intelligence restores your intelligence
-        bool isIdentified = Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
+        bool isIdentified = Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
         return new IdentifiedResult(isIdentified);
     }
 }

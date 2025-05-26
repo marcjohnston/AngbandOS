@@ -16,7 +16,7 @@ internal class LoseWisAttackEffect : AttackEffect
     public override void ApplyToPlayer(Monster monster, ref bool identified, ref int damage, ref bool blinked)
     {
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(Game.WisdomAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;

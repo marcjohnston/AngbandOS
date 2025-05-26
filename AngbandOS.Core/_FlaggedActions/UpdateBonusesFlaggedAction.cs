@@ -5,6 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RaceAbilities;
+using System.Diagnostics;
+
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
@@ -40,9 +43,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         bool oldTelepathy = Game.HasTelepathy;
         bool oldSeeInv = Game.HasSeeInvisibility;
         int extraBlows = extraShots = 0;
-        for (int i = 0; i < 6; i++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            Game.AbilityScores[i].Bonus = 0;
+            ability.Bonus = 0;
         }
         Game.DisplayedBaseArmorClass.IntValue = 0;
         Game.BaseArmorClass = 0;
@@ -116,16 +119,19 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.Speed.IntValue = 110;
         Game.MeleeAttacksPerRound = 1;
         Game.MissileAttacksPerRound = 1;
-        for (int i = 0; i < 6; i++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            Game.AbilityScores[i].Bonus += Game.Race.AbilityBonus[i] + Game.BaseCharacterClass.AbilityBonus[i];
+            RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
+            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
+            ability.Bonus += raceAbility.Bonus + characterClassAbility.Bonus;
         }
-        Game.AbilityScores[AbilityEnum.Strength].Bonus += Game.StrengthBonus;
-        Game.AbilityScores[AbilityEnum.Intelligence].Bonus += Game.IntelligenceBonus;
-        Game.AbilityScores[AbilityEnum.Wisdom].Bonus += Game.WisdomBonus;
-        Game.AbilityScores[AbilityEnum.Dexterity].Bonus += Game.DexterityBonus;
-        Game.AbilityScores[AbilityEnum.Constitution].Bonus += Game.ConstitutionBonus;
-        Game.AbilityScores[AbilityEnum.Charisma].Bonus += Game.CharismaBonus;
+        Game.StrengthAbility.Bonus += Game.StrengthBonus;
+        Game.IntelligenceAbility.Bonus += Game.IntelligenceBonus;
+        Game.WisdomAbility.Bonus += Game.WisdomBonus;
+        Game.DexterityAbility.Bonus += Game.DexterityBonus;
+        Game.ConstitutionAbility.Bonus += Game.ConstitutionBonus;
+        Game.CharismaAbility.Bonus += Game.CharismaBonus;
         Game.Speed.IntValue += Game.SpeedBonus;
         Game.HasRegeneration |= Game.Regen;
         Game.SkillSearchFrequency += Game.SearchBonus;
@@ -154,9 +160,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.HasRegeneration = false;
         }
-        if (Game.CharismaOverride)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            Game.AbilityScores[AbilityEnum.Charisma].Bonus = 0;
+            ability.OverrideUpdateBonuses();
         }
         if (Game.SustainAll)
         {
@@ -192,27 +198,27 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
                     if (mergedCharacteristics.Str)
                     {
-                        Game.AbilityScores[AbilityEnum.Strength].Bonus += mergedCharacteristics.BonusStrength;
+                        Game.StrengthAbility.Bonus += mergedCharacteristics.BonusStrength;
                     }
                     if (mergedCharacteristics.Int)
                     {
-                        Game.AbilityScores[AbilityEnum.Intelligence].Bonus += mergedCharacteristics.BonusIntelligence;
+                        Game.IntelligenceAbility.Bonus += mergedCharacteristics.BonusIntelligence;
                     }
                     if (mergedCharacteristics.Wis)
                     {
-                        Game.AbilityScores[AbilityEnum.Wisdom].Bonus += mergedCharacteristics.BonusWisdom;
+                        Game.WisdomAbility.Bonus += mergedCharacteristics.BonusWisdom;
                     }
                     if (mergedCharacteristics.Dex)
                     {
-                        Game.AbilityScores[AbilityEnum.Dexterity].Bonus += mergedCharacteristics.BonusDexterity;
+                        Game.DexterityAbility.Bonus += mergedCharacteristics.BonusDexterity;
                     }
                     if (mergedCharacteristics.Con)
                     {
-                        Game.AbilityScores[AbilityEnum.Constitution].Bonus += mergedCharacteristics.BonusConstitution;
+                        Game.ConstitutionAbility.Bonus += mergedCharacteristics.BonusConstitution;
                     }
                     if (mergedCharacteristics.Cha)
                     {
-                        Game.AbilityScores[AbilityEnum.Charisma].Bonus += mergedCharacteristics.BonusCharisma;
+                        Game.CharismaAbility.Bonus += mergedCharacteristics.BonusCharisma;
                     }
                     if (mergedCharacteristics.Stealth)
                     {
@@ -470,28 +476,20 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.GlowInTheDarkRadius = 1;
         }
-        for (int i = 0; i < 6; i++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             int ind;
-            int top = Game.AbilityScores[i]
-                .ModifyStatValue(Game.AbilityScores[i].InnateMax, Game.AbilityScores[i].Bonus);
-            if (Game.AbilityScores[i].AdjustedMax != top)
+            int top = ability.ModifyStatValue(ability.InnateMax, ability.Bonus);
+            if (ability.AdjustedMax != top)
             {
-                Game.AbilityScores[i].AdjustedMax = top;
+                ability.AdjustedMax = top;
                 Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
             }
-            int use = Game.AbilityScores[i]
-                .ModifyStatValue(Game.AbilityScores[i].Innate, Game.AbilityScores[i].Bonus);
-            if (i == AbilityEnum.Charisma && Game.CharismaOverride)
+            int use = ability.ModifyStatValue(ability.Innate, ability.Bonus);
+            use = ability.OverrideUse(use);
+            if (ability.Adjusted != use)
             {
-                if (use < 8 + (2 * Game.ExperienceLevel.IntValue))
-                {
-                    use = 8 + (2 * Game.ExperienceLevel.IntValue);
-                }
-            }
-            if (Game.AbilityScores[i].Adjusted != use)
-            {
-                Game.AbilityScores[i].Adjusted = use;
+                ability.Adjusted = use;
                 Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
             }
             if (use <= 18)
@@ -506,37 +504,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 ind = 37;
             }
-            if (Game.AbilityScores[i].TableIndex != ind)
+            if (ability.TableIndex != ind)
             {
-                Game.AbilityScores[i].TableIndex = ind;
-                if (i == AbilityEnum.Constitution)
-                {
-                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
-                }
-                else if (i == AbilityEnum.Intelligence)
-                {
-                    if (Game.BaseCharacterClass.SpellStat == AbilityEnum.Intelligence)
-                    {
-                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
-                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
-                    }
-                }
-                else if (i == AbilityEnum.Wisdom)
-                {
-                    if (Game.BaseCharacterClass.SpellStat == AbilityEnum.Wisdom)
-                    {
-                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
-                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
-                    }
-                }
-                else if (i == AbilityEnum.Charisma)
-                {
-                    if (Game.BaseCharacterClass.SpellStat == AbilityEnum.Charisma)
-                    {
-                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
-                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
-                    }
-                }
+                ability.TableIndex = ind;
+                ability.FlagActions();
             }
         }
         if (Game.StunTimer.Value > 50)
@@ -631,7 +602,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int j = Game.WeightCarried;
 
         // Compute the weight limit.
-        int ii = Game.AbilityScores[AbilityEnum.Strength].StrCarryingCapacity * 100;
+        int ii = Game.StrengthAbility.StrCarryingCapacity * 100;
 
         if (j > ii / 2)
         {
@@ -649,15 +620,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
         }
-        Game.ArmorClassBonus += Game.AbilityScores[AbilityEnum.Dexterity].DexArmorClassBonus;
-        Game.DamageBonus += Game.AbilityScores[AbilityEnum.Strength].StrDamageBonus;
-        Game.AttackBonus += Game.AbilityScores[AbilityEnum.Dexterity].DexAttackBonus;
-        Game.AttackBonus += Game.AbilityScores[AbilityEnum.Strength].StrAttackBonus;
-        Game.DisplayedArmorClassBonus.IntValue += Game.AbilityScores[AbilityEnum.Dexterity].DexArmorClassBonus;
-        Game.DisplayedDamageBonus += Game.AbilityScores[AbilityEnum.Strength].StrDamageBonus;
-        Game.DisplayedAttackBonus += Game.AbilityScores[AbilityEnum.Dexterity].DexAttackBonus;
-        Game.DisplayedAttackBonus += Game.AbilityScores[AbilityEnum.Strength].StrAttackBonus;
-        int hold = Game.AbilityScores[AbilityEnum.Strength].StrMaxWeaponWeight;
+        Game.ArmorClassBonus += Game.DexterityAbility.DexArmorClassBonus;
+        Game.DamageBonus += Game.StrengthAbility.StrDamageBonus;
+        Game.AttackBonus += Game.DexterityAbility.DexAttackBonus;
+        Game.AttackBonus += Game.StrengthAbility.StrAttackBonus;
+        Game.DisplayedArmorClassBonus.IntValue += Game.DexterityAbility.DexArmorClassBonus;
+        Game.DisplayedDamageBonus += Game.StrengthAbility.StrDamageBonus;
+        Game.DisplayedAttackBonus += Game.DexterityAbility.DexAttackBonus;
+        Game.DisplayedAttackBonus += Game.StrengthAbility.StrAttackBonus;
+        int hold = Game.StrengthAbility.StrMaxWeaponWeight;
         foreach (WieldSlot rangedWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
         {
             foreach (int index in rangedWeaponInventorySlot.InventorySlots)
@@ -728,12 +699,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     int wgt = Game.BaseCharacterClass.MaximumWeight;
                     int mul = Game.BaseCharacterClass.AttackSpeedMultiplier;
                     int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
-                    int strIndex = Game.AbilityScores[AbilityEnum.Strength].StrAttackSpeedComponent * mul / div;
+                    int strIndex = Game.StrengthAbility.StrAttackSpeedComponent * mul / div;
                     if (strIndex > 11)
                     {
                         strIndex = 11;
                     }
-                    int dexIndex = Game.AbilityScores[AbilityEnum.Dexterity].DexAttackSpeedComponent;
+                    int dexIndex = Game.DexterityAbility.DexAttackSpeedComponent;
                     if (dexIndex > 11)
                     {
                         dexIndex = 11;
@@ -827,11 +798,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
 
         Game.SkillStealth++;
-        Game.SkillDisarmTraps += Game.AbilityScores[AbilityEnum.Dexterity].DexDisarmBonus;
-        Game.SkillDisarmTraps += Game.AbilityScores[AbilityEnum.Intelligence].IntDisarmBonus;
-        Game.SkillUseDevice += Game.AbilityScores[AbilityEnum.Intelligence].IntUseDeviceBonus;
-        Game.SkillSavingThrow += Game.AbilityScores[AbilityEnum.Wisdom].WisSavingThrowBonus;
-        Game.SkillDigging += Game.AbilityScores[AbilityEnum.Strength].StrDiggingBonus;
+        Game.SkillDisarmTraps += Game.DexterityAbility.DexDisarmBonus;
+        Game.SkillDisarmTraps += Game.IntelligenceAbility.IntDisarmBonus;
+        Game.SkillUseDevice += Game.IntelligenceAbility.IntUseDeviceBonus;
+        Game.SkillSavingThrow += Game.WisdomAbility.WisSavingThrowBonus;
+        Game.SkillDigging += Game.StrengthAbility.StrDiggingBonus;
         Game.SkillDisarmTraps += (Game.BaseCharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillUseDevice += (Game.BaseCharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillSavingThrow += (Game.BaseCharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;

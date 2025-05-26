@@ -13,7 +13,7 @@ internal class SpitAcidActiveMutation : Mutation
     private SpitAcidActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(9, 9, AbilityEnum.Dexterity, 15))
+        if (!Game.CheckIfRacialPowerWorks(9, 9, Game.DexterityAbility, 15))
         {
             return;
         }

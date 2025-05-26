@@ -33,7 +33,7 @@ internal abstract class Patron : IGetKey
     public abstract string LongName { get; }
     public bool MultiRew;
 
-    public abstract int PreferredAbility { get; }
+    public abstract Ability? PreferredAbility { get; }
     protected abstract Reward[] Rewards { get; }
     public abstract string ShortName { get; }
 

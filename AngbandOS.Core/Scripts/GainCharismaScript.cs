@@ -19,6 +19,6 @@ internal class GainCharismaScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Charisma increases your charisma
-        return Game.TryIncreasingAbilityScore(AbilityEnum.Charisma);
+        return Game.TryIncreasingAbilityScore(Game.CharismaAbility);
     }
 }

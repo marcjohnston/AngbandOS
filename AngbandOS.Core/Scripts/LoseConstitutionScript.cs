@@ -19,6 +19,6 @@ internal class LoseConstitutionScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Sickliness tries to reduce your constitution
-        return Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
+        return Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
     }
 }

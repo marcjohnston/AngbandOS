@@ -13,7 +13,7 @@ internal class WeighMagActiveMutation : Mutation
     private WeighMagActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(6, 6, AbilityEnum.Intelligence, 10))
+        if (Game.CheckIfRacialPowerWorks(6, 6, Game.IntelligenceAbility, 10))
         {
             Game.RunScript(nameof(ReportMagicsScript));
         }

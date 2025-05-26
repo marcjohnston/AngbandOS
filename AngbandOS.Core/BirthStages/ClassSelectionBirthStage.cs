@@ -69,10 +69,15 @@ internal class ClassSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
         Game.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
         Game.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
-        for (int i = 0; i < 6; i++)
+        int i = 0;
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            int bonus = characterClass.AbilityBonus[i];
+            string compositeKey = CharacterClassAbility.GetCompositeKey(characterClass, ability);
+            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
+
+            int bonus = characterClassAbility.Bonus;
             Game.DisplayStatBonus(26, 36 + i, bonus);
+            i++;
         }
         Game.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
         Game.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);

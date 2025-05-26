@@ -12,7 +12,6 @@ internal class HalfOgreRace : Race
 {
     private HalfOgreRace(Game game) : base(game) { }
     public override string Title => "Half Ogre";
-    public override int[] AbilityBonus => new int[] { 3, -1, -1, -1, 3, -3 };
     public override int BaseDisarmBonus => -3;
     public override int BaseDeviceBonus => -5;
     public override int BaseSaveBonus => -5;
@@ -62,7 +61,7 @@ internal class HalfOgreRace : Race
     public override void UseRacialPower()
     {
         // Half-Ogres can go berserk
-        if (Game.CheckIfRacialPowerWorks(8, 10, AbilityEnum.Wisdom, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
+        if (Game.CheckIfRacialPowerWorks(8, 10, Game.WisdomAbility, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
         {
             Game.MsgPrint("Raaagh!");
             Game.FearTimer.ResetTimer();

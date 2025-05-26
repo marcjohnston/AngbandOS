@@ -15,13 +15,15 @@ internal class GainAblReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} rings out:");
         Game.MsgPrint("'Stay, mortal, and let me mould thee.'");
-        if (Game.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
+        if (Game.DieRoll(3) == 1 && patron.PreferredAbility is not null)
         {
             Game.TryIncreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            Game.TryIncreasingAbilityScore(Game.DieRoll(6) - 1);
+            WeightedRandom<Ability> abilitiesWeightedRandom = Game.SingletonRepository.ToWeightedRandom<Ability>();
+            Ability ability = abilitiesWeightedRandom.Choose();
+            Game.TryIncreasingAbilityScore(ability);
         }
     }
 }

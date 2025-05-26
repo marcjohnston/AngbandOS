@@ -22,7 +22,7 @@ internal class CharmMonsterEffect : MonsterEffect
         bool seen = mPtr.IsVisible;
         bool obvious = false;
         string? note = null;
-        dam += Game.AbilityScores[AbilityEnum.Charisma].ConRecoverySpeed - 1;
+        dam += Game.CharismaAbility.ConRecoverySpeed - 1;
         if (seen)
         {
             obvious = true;

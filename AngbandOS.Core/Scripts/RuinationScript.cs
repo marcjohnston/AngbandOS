@@ -22,12 +22,12 @@ internal class RuinationScript : Script, IEatOrQuaffScript
         // sustains and divine protection
         Game.MsgPrint("Your nerves and muscles feel weak and lifeless!");
         Game.TakeHit(Game.DiceRoll(10, 10), "a potion of Ruination");
-        Game.DecreaseAbilityScore(AbilityEnum.Dexterity, 25, true);
-        Game.DecreaseAbilityScore(AbilityEnum.Wisdom, 25, true);
-        Game.DecreaseAbilityScore(AbilityEnum.Constitution, 25, true);
-        Game.DecreaseAbilityScore(AbilityEnum.Strength, 25, true);
-        Game.DecreaseAbilityScore(AbilityEnum.Charisma, 25, true);
-        Game.DecreaseAbilityScore(AbilityEnum.Intelligence, 25, true);
+        Game.DecreaseAbilityScore(Game.DexterityAbility, 25, true);
+        Game.DecreaseAbilityScore(Game.WisdomAbility, 25, true);
+        Game.DecreaseAbilityScore(Game.ConstitutionAbility, 25, true);
+        Game.DecreaseAbilityScore(Game.StrengthAbility, 25, true);
+        Game.DecreaseAbilityScore(Game.CharismaAbility, 25, true);
+        Game.DecreaseAbilityScore(Game.IntelligenceAbility, 25, true);
         return new IdentifiedResult(true);
     }
 }

@@ -20,7 +20,7 @@ internal class EatStupidityScript : Script, IEatOrQuaffScript
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.TakeHit(Game.DiceRoll(8, 8), "poisonous food.");
-        Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+        Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
         return new IdentifiedResult(true);
     }
 }

@@ -13,7 +13,6 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
     private ChosenOneCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 14;
     public override string Title => "Chosen One";
-    public override int[] AbilityBonus => new[] { 3, -2, -2, 2, 2, -1 };
     public override int BaseDisarmBonus => 25;
     public override int BaseDeviceBonus => 18;
     public override int BaseSaveBonus => 20;
@@ -32,7 +31,7 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 4;
     public override int ExperienceFactor => 20;
-    public override int PrimeStat => AbilityEnum.Strength;
+    public override Ability PrimeStat => Game.StrengthAbility;
     public override string[] Info => new string[] {
         "Warriors of fate, who have no spell casting abilities but",
         "gain a large number of passive magical abilities (too long",

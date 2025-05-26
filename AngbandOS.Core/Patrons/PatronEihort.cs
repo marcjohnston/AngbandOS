@@ -13,7 +13,7 @@ internal class PatronEihort : Patron
     private PatronEihort(Game game) : base(game) { }
     public override string ShortName => "Eihort";
     public override string LongName => "Eihort, God of the Labyrinth";
-    public override int PreferredAbility => AbilityEnum.Constitution;
+    public override Ability? PreferredAbility => Game.ConstitutionAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

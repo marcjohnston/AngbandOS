@@ -23,9 +23,9 @@ internal class HealFulReward : Reward
         Game.StunTimer.ResetTimer();
         Game.BleedingTimer.ResetTimer();
         Game.RestoreHealth(5000);
-        for (int dummy = 0; dummy < 6; dummy++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            Game.TryRestoringAbilityScore(dummy);
+            Game.TryRestoringAbilityScore(ability);
         }
     }
 }

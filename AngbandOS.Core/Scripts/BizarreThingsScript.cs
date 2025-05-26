@@ -21,12 +21,12 @@ internal class BizarreThingsScript : Script, IActivateItemScript
                 {
                     // Decrease all the players ability scores, bypassing sustain and divine protection
                     Game.MsgPrint("You are surrounded by a malignant aura.");
-                    Game.DecreaseAbilityScore(AbilityEnum.Strength, 50, true);
-                    Game.DecreaseAbilityScore(AbilityEnum.Intelligence, 50, true);
-                    Game.DecreaseAbilityScore(AbilityEnum.Wisdom, 50, true);
-                    Game.DecreaseAbilityScore(AbilityEnum.Dexterity, 50, true);
-                    Game.DecreaseAbilityScore(AbilityEnum.Constitution, 50, true);
-                    Game.DecreaseAbilityScore(AbilityEnum.Charisma, 50, true);
+                    Game.DecreaseAbilityScore(Game.StrengthAbility, 50, true);
+                    Game.DecreaseAbilityScore(Game.IntelligenceAbility, 50, true);
+                    Game.DecreaseAbilityScore(Game.WisdomAbility, 50, true);
+                    Game.DecreaseAbilityScore(Game.DexterityAbility, 50, true);
+                    Game.DecreaseAbilityScore(Game.ConstitutionAbility, 50, true);
+                    Game.DecreaseAbilityScore(Game.CharismaAbility, 50, true);
                     // Reduce both experience and maximum experience
                     Game.ExperiencePoints.IntValue -= Game.ExperiencePoints.IntValue / 4;
                     Game.MaxExperienceGained.IntValue -= Game.ExperiencePoints.IntValue / 4;

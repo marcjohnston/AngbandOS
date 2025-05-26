@@ -13,7 +13,7 @@ internal class MindBlstActiveMutation : Mutation
     private MindBlstActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(5, 3, AbilityEnum.Wisdom, 15))
+        if (!Game.CheckIfRacialPowerWorks(5, 3, Game.WisdomAbility, 15))
         {
             return;
         }

@@ -19,6 +19,6 @@ internal class GainConstitutionScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Constitution increases your constitution
-        return Game.TryIncreasingAbilityScore(AbilityEnum.Constitution);
+        return Game.TryIncreasingAbilityScore(Game.ConstitutionAbility);
     }
 }

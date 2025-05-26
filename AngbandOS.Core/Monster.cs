@@ -588,8 +588,8 @@ internal class Monster : IItemContainer
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
-            Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+            Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
+            Game.TryDecreasingAbilityScore(Game.WisdomAbility);
             return;
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
@@ -604,11 +604,11 @@ internal class Monster : IItemContainer
             }
             while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+                Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
             }
             while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+                Game.TryDecreasingAbilityScore(Game.WisdomAbility);
             }
             if (!Game.HasChaosResistance)
             {
@@ -618,11 +618,11 @@ internal class Monster : IItemContainer
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            if (Game.DecreaseAbilityScore(AbilityEnum.Intelligence, 10, true))
+            if (Game.DecreaseAbilityScore(Game.IntelligenceAbility, 10, true))
             {
                 happened = true;
             }
-            if (Game.DecreaseAbilityScore(AbilityEnum.Wisdom, 10, true))
+            if (Game.DecreaseAbilityScore(Game.WisdomAbility, 10, true))
             {
                 happened = true;
             }

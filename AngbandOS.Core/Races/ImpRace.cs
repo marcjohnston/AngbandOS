@@ -12,7 +12,6 @@ internal class ImpRace : Race
 {
     private ImpRace(Game game) : base(game) { }
     public override string Title => "Imp";
-    public override int[] AbilityBonus => new int[] { -1, -1, -1, 1, 2, -3 };
     public override int BaseDisarmBonus => -3;
     public override int BaseDeviceBonus => 2;
     public override int BaseSaveBonus => -1;
@@ -80,7 +79,7 @@ internal class ImpRace : Race
     public override void UseRacialPower()
     {
         // Imps can cast fire bolt/ball
-        if (Game.CheckIfRacialPowerWorks(9, 15, AbilityEnum.Wisdom, 15))
+        if (Game.CheckIfRacialPowerWorks(9, 15, Game.WisdomAbility, 15))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

@@ -13,7 +13,6 @@ internal class PaladinCharacterClass : BaseCharacterClass
     private PaladinCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 5;
     public override string Title => "Paladin";
-    public override int[] AbilityBonus => new[] { 3, -3, 1, 0, 2, 2 };
     public override int BaseDisarmBonus => 20;
     public override int BaseDeviceBonus => 24;
     public override int BaseSaveBonus => 26;
@@ -33,7 +32,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 35;
 
-    public override int PrimeStat => AbilityEnum.Wisdom;
+    public override Ability PrimeStat => Game.WisdomAbility;
     public override string[] Info => new string[] {
         "Holy warriors who use WIS based spell casting to supplement",
         "their fighting skills. Paladins can specialise in either",
@@ -43,7 +42,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
     };
     public override int SpellWeight => 400;
     public override void Cast() => CastMentalism();
-    public override int SpellStat => AbilityEnum.Wisdom;
+    public override Ability SpellStat => Game.WisdomAbility;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));

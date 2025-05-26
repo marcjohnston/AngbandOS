@@ -11,8 +11,58 @@ namespace AngbandOS.Core;
 /// An ability score
 /// </summary>
 [Serializable]
-internal class AbilityScore
+internal abstract class Ability : IGetKey
 {
+    protected readonly Game Game;
+    public Ability(Game game)
+    {
+        Game = game;
+    }
+
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+
+    public int OverrideUse(int use)
+    {
+        if (Override)
+        {
+            if (use < 8 + (2 * Game.ExperienceLevel.IntValue))
+            {
+                use = 8 + (2 * Game.ExperienceLevel.IntValue);
+            }
+        }
+        return use;
+    }
+
+    public virtual void FlagActions() { }
+
+    public void OverrideUpdateBonuses()
+    {
+        if (Override)
+        {
+            Bonus = 0;
+        }
+    }
+
+    public bool Override;
+
+    public void Bind()
+    {
+    }
+
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public abstract bool HasSustain { get; }
+    public abstract string DescStatNeg { get; }
+    public abstract string DescStatPos { get; }
+    public abstract string Act { get; }
+    public abstract string Name { get; }
+    public abstract string NameReduced { get; }
+    public abstract (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) GetBonuses();
+
     /// <summary>
     /// The current score including bonus
     /// </summary>

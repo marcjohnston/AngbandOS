@@ -267,6 +267,7 @@ internal class SingletonRepository
         RegisterRepository<IUsedScriptInt>();
         RegisterRepository<IZapRodScript>();
 
+        RegisterRepository<Ability>();
         RegisterRepository<ActivationWeightedRandom>();
         RegisterRepository<Alignment>();
         RegisterRepository<AlterAction>();
@@ -277,6 +278,7 @@ internal class SingletonRepository
         RegisterRepository<AttackEffect>();
         RegisterRepository<Activation>();
         RegisterRepository<BaseCharacterClass>();
+        RegisterRepository<CharacterClassAbility>();
         RegisterRepository<BirthStage>();
         RegisterRepository<BoolWidget>();
         RegisterRepository<ChestTrap>();
@@ -328,6 +330,7 @@ internal class SingletonRepository
         RegisterRepository<ProjectileScript>();
         RegisterRepository<Property>();
         RegisterRepository<Race>();
+        RegisterRepository<RaceAbility>();
         RegisterRepository<RaceGender>();
         RegisterRepository<RangedWidget>();
         RegisterRepository<Realm>();
@@ -419,12 +422,14 @@ internal class SingletonRepository
 
         // Load the remaining user-configured singletons from the assembly.  These singletons have not been exported to the GamePack yet.
         LoadAllAssemblyTypes<Activation>();
+        LoadAllAssemblyTypes<Ability>();
         LoadAllAssemblyTypes<ActivationWeightedRandom>();
         LoadAllAssemblyTypes<AlterAction>();
         LoadAllAssemblyTypes<ArtifactBias>();
         LoadAllAssemblyTypes<AttackEffect>();
         LoadAllAssemblyTypes<BirthStage>();
         LoadAllAssemblyTypes<BaseCharacterClass>();
+        LoadAllAssemblyTypes<CharacterClassAbility>();
         LoadAllAssemblyTypes<ChestTrapConfiguration>();
         LoadAllAssemblyTypes<ChestTrap>();
         LoadAllAssemblyTypes<DungeonGenerator>();
@@ -445,6 +450,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Patron>();
         LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Race>();
+        LoadAllAssemblyTypes<RaceAbility>();
         LoadAllAssemblyTypes<RenderMessageScript>();
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();

@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RaceAbilities;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -46,76 +48,15 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
     /// </summary>
     /// <param name="abilityIndex"> The index of the ability score to summarise </param>
     /// <returns> The summary of the score's bonuses </returns>
-    private string AbilitySummary(int abilityIndex)
+    private string AbilitySummary(Ability ability)
     {
         // The summary will have up to five sections
-        string bonus1 = string.Empty;
-        string bonus2 = string.Empty;
-        string bonus3 = string.Empty;
-        string bonus4 = string.Empty;
-        string bonus5 = string.Empty;
         // Get the score
-        AbilityScore ability = Game.AbilityScores[abilityIndex];
         // Fill in up to five pieces of bonus text
-        switch (abilityIndex)
-        {
-            case AbilityEnum.Strength:
-                int toHit = ability.StrAttackBonus;
-                bonus1 = $"{toHit:+0;-0;+0} to hit";
-                int toDam = ability.StrDamageBonus;
-                bonus2 = $", {toDam:+0;-0;+0} damage";
-                int carry = ability.StrCarryingCapacity * 5;
-                bonus3 = $", carry {carry}lb";
-                int weap = ability.StrMaxWeaponWeight;
-                bonus4 = $", wield {weap}lb";
-                int dig = ability.StrDiggingBonus;
-                bonus5 = $", {dig}% digging";
-                break;
+        (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) = ability.GetBonuses();
 
-            case AbilityEnum.Intelligence:
-                int device = ability.IntUseDeviceBonus;
-                bonus1 = $"{device:+0;-0;+0} device";
-                int disarm = ability.IntDisarmBonus;
-                bonus2 = $", {disarm:+0;-0;+0}% disarm";
-                break;
-
-            case AbilityEnum.Wisdom:
-                int save = ability.WisSavingThrowBonus;
-                bonus1 = $"{save:+0;-0;+0} save";
-                break;
-
-            case AbilityEnum.Dexterity:
-                toHit = ability.DexAttackBonus;
-                bonus1 = $"{toHit:+0;-0;+0} to hit";
-                disarm = ability.DexDisarmBonus;
-                bonus2 = $", {disarm:+0;-0;+0}% disarm";
-                int ac = ability.DexArmorClassBonus;
-                bonus3 = $", {ac:+0;-0;+0} AC";
-                int theft = ability.DexTheftAvoidance;
-                bonus4 = $", {theft}% anti-theft";
-                break;
-
-            case AbilityEnum.Constitution:
-                int hits = ability.ConHealthBonus;
-                if (hits == -1)
-                {
-                    bonus1 = "-0.5 HP/lvl";
-                }
-                else
-                {
-                    bonus1 = hits % 2 == 0 ? $"{hits / 2:+0;-0;+0} HP/lvl" : $"{hits / 2:+0;-0;+0}.5 HP/lvl";
-                }
-                int regen = ability.ConRecoverySpeed;
-                bonus2 = $", x{regen + 1} recovery";
-                break;
-
-            case AbilityEnum.Charisma:
-                int haggle = ability.ChaPriceAdjustment;
-                bonus1 = $"{haggle}% prices";
-                break;
-        }
         // Add the bonus text for spell casting abilities
-        if (Game.BaseCharacterClass.SpellStat == abilityIndex && abilityIndex != AbilityEnum.Strength)
+        if (Game.BaseCharacterClass.SpellStat == ability && ability != Game.StrengthAbility)
         {
             int mana = ability.ManaBonus;
             // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
@@ -154,27 +95,29 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
     private void DisplayPlayerAbilityScoresWithEffects()
     {
         // Loop through the scores
-        for (int i = 0; i < 6; i++)
+        int i = 0;
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             string buf;
             // If they've been drained, make them visually distinct
-            if (Game.AbilityScores[i].Innate < Game.AbilityScores[i].InnateMax)
+            if (ability.Innate < ability.InnateMax)
             {
-                Game.Screen.Print(ColorEnum.Blue, Constants.StatNamesReduced[i], 14 + i, 1);
-                int value = Game.AbilityScores[i].Adjusted;
+                Game.Screen.Print(ColorEnum.Blue, ability.NameReduced, 14 + i, 1);
+                int value = ability.Adjusted;
                 buf = value.StatToString();
                 Game.Screen.Print(ColorEnum.Grey, buf, 14 + i, 6);
-                buf = AbilitySummary(i);
+                buf = AbilitySummary(ability);
                 Game.Screen.Print(ColorEnum.Grey, buf, i + 14, 13);
             }
             else
             {
-                Game.Screen.Print(ColorEnum.Blue, Constants.StatNames[i], 14 + i, 1);
-                buf = Game.AbilityScores[i].Adjusted.StatToString();
+                Game.Screen.Print(ColorEnum.Blue, ability.Name, 14 + i, 1);
+                buf = ability.Adjusted.StatToString();
                 Game.Screen.Print(ColorEnum.Green, buf, 14 + i, 6);
-                buf = AbilitySummary(i);
+                buf = AbilitySummary(ability);
                 Game.Screen.Print(ColorEnum.Green, buf, i + 14, 13);
             }
+            i++;
         }
     }
 
@@ -227,47 +170,53 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
         Game.Screen.Print(ColorEnum.Brown, "Race Class Mods", row - 1, statCol + 13);
         Game.Screen.Print(ColorEnum.Green, "Actual", row - 1, statCol + 29);
         Game.Screen.Print(ColorEnum.Red, "Reduced", row - 1, statCol + 36);
+
         // Loop through the scores
-        for (int i = 0; i < 6; i++)
+        int i = 0;
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             // Reverse engineer our equipment bonuses from our score
             int equipmentBonuses = 0;
-            if (Game.AbilityScores[i].InnateMax > 18 && Game.AbilityScores[i].AdjustedMax > 18)
+            if (ability.InnateMax > 18 && ability.AdjustedMax > 18)
             {
-                equipmentBonuses = (Game.AbilityScores[i].AdjustedMax - Game.AbilityScores[i].InnateMax) / 10;
+                equipmentBonuses = (ability.AdjustedMax - ability.InnateMax) / 10;
             }
-            if (Game.AbilityScores[i].InnateMax <= 18 && Game.AbilityScores[i].AdjustedMax <= 18)
+            if (ability.InnateMax <= 18 && ability.AdjustedMax <= 18)
             {
-                equipmentBonuses = Game.AbilityScores[i].AdjustedMax - Game.AbilityScores[i].InnateMax;
+                equipmentBonuses = ability.AdjustedMax - ability.InnateMax;
             }
-            if (Game.AbilityScores[i].InnateMax <= 18 && Game.AbilityScores[i].AdjustedMax > 18)
+            if (ability.InnateMax <= 18 && ability.AdjustedMax > 18)
             {
-                equipmentBonuses = ((Game.AbilityScores[i].AdjustedMax - 18) / 10) - Game.AbilityScores[i].InnateMax + 18;
+                equipmentBonuses = ((ability.AdjustedMax - 18) / 10) - ability.InnateMax + 18;
             }
-            if (Game.AbilityScores[i].InnateMax > 18 && Game.AbilityScores[i].AdjustedMax <= 18)
+            if (ability.InnateMax > 18 && ability.AdjustedMax <= 18)
             {
-                equipmentBonuses = Game.AbilityScores[i].AdjustedMax - ((Game.AbilityScores[i].InnateMax - 18) / 10) - 19;
+                equipmentBonuses = ability.AdjustedMax - ((ability.InnateMax - 18) / 10) - 19;
             }
             // Take out the bonuses we got for our our race and profession
-            equipmentBonuses -= Game.Race.AbilityBonus[i];
-            equipmentBonuses -= Game.BaseCharacterClass.AbilityBonus[i];
+            RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
+            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
+            equipmentBonuses -= raceAbility.Bonus;
+            equipmentBonuses -= characterClassAbility.Bonus;
             // Print each of the scores and bonuses
-            Game.Screen.Print(ColorEnum.Blue, Constants.StatNames[i], row + i, statCol);
-            string buf = Game.AbilityScores[i].InnateMax.StatToString();
+            Game.Screen.Print(ColorEnum.Blue, ability.Name, row + i, statCol);
+            string buf = ability.InnateMax.StatToString();
             Game.Screen.Print(ColorEnum.Purple, buf, row + i, statCol + 4);
-            buf = Game.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+            buf = raceAbility.Bonus.ToString("+0;-0;+0").PadLeft(3);
             Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 13);
-            buf = Game.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+            buf = characterClassAbility.Bonus.ToString("+0;-0;+0").PadLeft(3);
             Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 19);
             buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
             Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 24);
-            buf = Game.AbilityScores[i].AdjustedMax.StatToString();
+            buf = ability.AdjustedMax.StatToString();
             Game.Screen.Print(ColorEnum.Green, buf, row + i, statCol + 27);
-            if (Game.AbilityScores[i].Adjusted < Game.AbilityScores[i].AdjustedMax)
+            if (ability.Adjusted < ability.AdjustedMax)
             {
-                buf = Game.AbilityScores[i].Adjusted.StatToString();
+                buf = ability.Adjusted.StatToString();
                 Game.Screen.Print(ColorEnum.Red, buf, row + i, statCol + 35);
             }
+            i++;
         }
 
         // Print the bonuses for each score and each item we have
@@ -276,9 +225,9 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
         Game.Screen.Print(ColorEnum.Blue, "Modifications", row + 6, col);
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
-            foreach (int i in inventorySlot.InventorySlots)
+            foreach (int inventorySlotIndex in inventorySlot.InventorySlots)
             {
-                Item? item = Game.GetInventoryItem(i);
+                Item? item = Game.GetInventoryItem(inventorySlotIndex);
                 if (item == null)
                 {
                     ShowBonus(false, false, 0, row + 0, col);
@@ -541,27 +490,28 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
         PrintShortScore("Height       ", Game.Height, 4, 32, ColorEnum.Brown);
         PrintShortScore("Weight       ", Game.Weight, 5, 32, ColorEnum.Brown);
         PrintShortScore("Social Class ", Game.SocialClass, 6, 32, ColorEnum.Brown);
-        int i;
+        int i = 0;
         // Print a quick summary of ability scores, but no detail
-        for (i = 0; i < 6; i++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             string buf;
-            if (Game.AbilityScores[i].Innate < Game.AbilityScores[i].InnateMax)
+            if (ability.Innate < ability.InnateMax)
             {
-                Game.Screen.Print(ColorEnum.Blue, Constants.StatNamesReduced[i], 2 + i, 61);
-                int value = Game.AbilityScores[i].Adjusted;
+                Game.Screen.Print(ColorEnum.Blue, ability.NameReduced, 2 + i, 61);
+                int value = ability.Adjusted;
                 buf = value.StatToString();
                 Game.Screen.Print(ColorEnum.Red, buf, 2 + i, 66);
-                value = Game.AbilityScores[i].AdjustedMax;
+                value = ability.AdjustedMax;
                 buf = value.StatToString();
                 Game.Screen.Print(ColorEnum.Green, buf, 2 + i, 73);
             }
             else
             {
-                Game.Screen.Print(ColorEnum.Blue, Constants.StatNames[i], 2 + i, 61);
-                buf = Game.AbilityScores[i].Adjusted.StatToString();
+                Game.Screen.Print(ColorEnum.Blue, ability.Name, 2 + i, 61);
+                buf = ability.Adjusted.StatToString();
                 Game.Screen.Print(ColorEnum.Green, buf, 2 + i, 66);
             }
+            i++;
         }
     }
 

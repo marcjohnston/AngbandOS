@@ -50,7 +50,7 @@ internal class EquipScript : Script, IScript, ICastSpellScript, IGameCommandScri
         Game.ShowEquip(null);
 
         // Get a command
-        string outVal = $"Equipment: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.AbilityScores[AbilityEnum.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+        string outVal = $"Equipment: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.StrengthAbility.StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
         Game.Screen.PrintLine(outVal, 0, 0);
         char c = Game.Inkey();
         Game.Screen.Restore(savedScreen);

@@ -97,9 +97,6 @@ internal static class Constants
     public const int DelayFactorInMilliseconds = 64;
     public const int HitpointWarn = 2;
 
-    public static readonly string[] DescStatNeg = { "weak", "stupid", "naive", "clumsy", "sickly", "ugly" };
-    public static readonly string[] DescStatPos = { "strong", "smart", "wise", "dextrous", "healthy", "cute" };
-
     public static readonly int[] ExtractEnergy =
     {
 	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
@@ -131,8 +128,4 @@ internal static class Constants
         550000, 700000, 850000, 1000000, 1250000, 1500000, 1800000, 2100000, 2400000, 2700000, 3000000, 3500000,
         4000000, 4500000, 5000000
     };
-
-    public static readonly string[] StatNames = { "STR: ", "INT: ", "WIS: ", "DEX: ", "CON: ", "CHA: " };
-
-    public static readonly string[] StatNamesReduced = { "str: ", "int: ", "wis: ", "dex: ", "con: ", "cha: " };
 }

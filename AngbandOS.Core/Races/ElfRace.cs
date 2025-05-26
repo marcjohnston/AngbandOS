@@ -12,7 +12,6 @@ internal class ElfRace : Race
 {
     private ElfRace(Game game) : base(game) { }
     public override string Title => "Elf";
-    public override int[] AbilityBonus => new int[] { -1, 2, 2, 1, -2, 2 };
     public override int BaseDisarmBonus => 5;
     public override int BaseDeviceBonus => 6;
     public override int BaseSaveBonus => 6;

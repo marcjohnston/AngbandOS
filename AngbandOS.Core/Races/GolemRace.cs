@@ -12,7 +12,6 @@ internal class GolemRace : Race
 {
     private GolemRace(Game game) : base(game) { }
     public override string Title => "Golem";
-    public override int[] AbilityBonus => new int[] { 4, -5, -5, 0, 4, -4 };
     public override int BaseDisarmBonus => -5;
     public override int BaseDeviceBonus => -5;
     public override int BaseSaveBonus => 10;
@@ -84,7 +83,7 @@ internal class GolemRace : Race
     public override void UseRacialPower()
     {
         // Golems can harden their skin
-        if (Game.CheckIfRacialPowerWorks(20, 15, AbilityEnum.Constitution, 8))
+        if (Game.CheckIfRacialPowerWorks(20, 15, Game.ConstitutionAbility, 8))
         {
             Game.StoneskinTimer.AddTimer(Game.DieRoll(20) + 30);
         }

@@ -13,7 +13,6 @@ internal class MonkCharacterClass : BaseCharacterClass
     private MonkCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 8;
     public override string Title => "Monk";
-    public override int[] AbilityBonus => new[] { 2, -1, 1, 3, 2, 1 };
     public override int BaseDisarmBonus => 45;
     public override int BaseDeviceBonus => 32;
     public override int BaseSaveBonus => 28;
@@ -38,7 +37,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool IsMartialArtist => true;
 
-    public override int PrimeStat => AbilityEnum.Dexterity;
+    public override Ability PrimeStat => Game.DexterityAbility;
     public override string[] Info => new string[] {
         "Masters of unarmed combat. While wearing only light armor",
         "they can move faster and dodge blows and can learn to",
@@ -75,7 +74,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override int SpellStat => AbilityEnum.Wisdom;
+    public override Ability SpellStat => Game.WisdomAbility;
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;

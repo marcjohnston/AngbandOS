@@ -16,7 +16,7 @@ internal class LoseChaAttackEffect : AttackEffect
     public override void ApplyToPlayer(Monster monster, ref bool identified, ref int damage, ref bool blinked)
     {
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Charisma);
+        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(Game.CharismaAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;

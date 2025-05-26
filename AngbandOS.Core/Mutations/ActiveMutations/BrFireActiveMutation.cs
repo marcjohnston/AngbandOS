@@ -13,7 +13,7 @@ internal class BrFireActiveMutation : Mutation
     private BrFireActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(20, Game.ExperienceLevel.IntValue, AbilityEnum.Constitution, 18))
+        if (!Game.CheckIfRacialPowerWorks(20, Game.ExperienceLevel.IntValue, Game.ConstitutionAbility, 18))
         {
             return;
         }

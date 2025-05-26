@@ -19,6 +19,6 @@ internal class GainDexterityScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Dexterity increases your dexterity
-        return Game.TryIncreasingAbilityScore(AbilityEnum.Dexterity);
+        return Game.TryIncreasingAbilityScore(Game.DexterityAbility);
     }
 }

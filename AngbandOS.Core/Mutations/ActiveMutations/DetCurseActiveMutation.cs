@@ -13,7 +13,7 @@ internal class DetCurseActiveMutation : Mutation
     private DetCurseActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(7, 14, AbilityEnum.Wisdom, 14))
+        if (!Game.CheckIfRacialPowerWorks(7, 14, Game.WisdomAbility, 14))
         {
             return;
         }

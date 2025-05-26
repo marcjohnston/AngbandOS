@@ -19,6 +19,6 @@ internal class LoseDexterityScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Clumsiness tries to reduce your dexterity
-        return Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity);
+        return Game.TryDecreasingAbilityScore(Game.DexterityAbility);
     }
 }

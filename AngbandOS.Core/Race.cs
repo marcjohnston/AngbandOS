@@ -33,7 +33,6 @@ internal abstract class Race : IGetKey
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
     }
 
-    public abstract int[] AbilityBonus { get; } // TODO: This needs to be a dictionary where the keys are stats
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }
     public abstract int BaseDeviceBonus { get; }

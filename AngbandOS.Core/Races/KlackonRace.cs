@@ -12,7 +12,6 @@ internal class KlackonRace : Race
 {
     private KlackonRace(Game game) : base(game) { }
     public override string Title => "Klackon";
-    public override int[] AbilityBonus => new int[] { 2, -1, -1, 1, 2, -2 };
     public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 5;
     public override int BaseSaveBonus => 5;
@@ -63,7 +62,7 @@ internal class KlackonRace : Race
     public override void UseRacialPower()
     {
         // Klackons can spit acid
-        if (Game.CheckIfRacialPowerWorks(9, 9, AbilityEnum.Dexterity, 14))
+        if (Game.CheckIfRacialPowerWorks(9, 9, Game.DexterityAbility, 14))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

@@ -13,7 +13,6 @@ internal class MysticCharacterClass : BaseCharacterClass
     private MysticCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 15;
     public override string Title => "Mystic";
-    public override int[] AbilityBonus => new[] { 2, -1, 2, 2, 2, 0 };
     public override int BaseDisarmBonus => 40;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 30;
@@ -32,7 +31,7 @@ internal class MysticCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 40;
-    public override int PrimeStat => AbilityEnum.Wisdom;
+    public override Ability PrimeStat => Game.WisdomAbility;
     public override string[] Info => new string[] {
         "Mystics master both martial and psionic arts, which they",
         "power using WIS. Can resist confusion (at lvl 10), fear",
@@ -42,7 +41,7 @@ internal class MysticCharacterClass : BaseCharacterClass
     };
     public override int SpellWeight => 300;
     public override void Cast() => CastMentalism();
-    public override int SpellStat => AbilityEnum.Wisdom;
+    public override Ability SpellStat => Game.WisdomAbility;
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;

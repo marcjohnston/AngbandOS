@@ -15,13 +15,15 @@ internal class LoseAblReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'I grow tired of thee, mortal.'");
-        if (Game.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
+        if (Game.DieRoll(3) == 1 && patron.PreferredAbility is not null)
         {
             Game.TryDecreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            Game.TryDecreasingAbilityScore(Game.DieRoll(6) - 1);
+            WeightedRandom<Ability> abilitiesWeightedRandom = Game.SingletonRepository.ToWeightedRandom<Ability>();
+            Ability ability = abilitiesWeightedRandom.Choose();
+            Game.TryDecreasingAbilityScore(ability);
         }
     }
 }

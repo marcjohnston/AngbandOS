@@ -12,7 +12,6 @@ internal class YeekRace : Race
 {
     private YeekRace(Game game) : base(game) { }
     public override string Title => "Yeek";
-    public override int[] AbilityBonus => new int[] { -2, 1, 1, 1, -2, -7 };
     public override int BaseDisarmBonus => 2;
     public override int BaseDeviceBonus => 4;
     public override int BaseSaveBonus => 10;
@@ -65,7 +64,7 @@ internal class YeekRace : Race
     public override void UseRacialPower()
     {
         // Yeeks can scream
-        if (Game.CheckIfRacialPowerWorks(15, 15, AbilityEnum.Wisdom, 10))
+        if (Game.CheckIfRacialPowerWorks(15, 15, Game.WisdomAbility, 10))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

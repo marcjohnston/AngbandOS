@@ -13,7 +13,7 @@ internal class DazzleActiveMutation : Mutation
     private DazzleActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(7, 15, AbilityEnum.Charisma, 8))
+        if (!Game.CheckIfRacialPowerWorks(7, 15, Game.CharismaAbility, 8))
         {
             return;
         }

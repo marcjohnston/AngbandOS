@@ -13,7 +13,7 @@ internal class VteleportActiveMutation : Mutation
     private VteleportActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(7, 7, AbilityEnum.Wisdom, 15))
+        if (!Game.CheckIfRacialPowerWorks(7, 7, Game.WisdomAbility, 15))
         {
             return;
         }

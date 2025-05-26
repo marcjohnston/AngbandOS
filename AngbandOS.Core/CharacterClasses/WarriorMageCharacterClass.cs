@@ -13,7 +13,6 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
     private WarriorMageCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 6;
     public override string Title => "Warrior-Mage";
-    public override int[] AbilityBonus => new[] { 2, 2, 0, 1, 0, 1 };
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 28;
@@ -32,7 +31,7 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 4;
     public override int ExperienceFactor => 50;
-    public override int PrimeStat => AbilityEnum.Intelligence;
+    public override Ability PrimeStat => Game.IntelligenceAbility;
     public override string[] Info => new string[] {
         "A blend of both warrior and mage, getting the abilities of",
         "both but not being the best at either. They use INT based",
@@ -56,7 +55,7 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override int SpellStat => AbilityEnum.Intelligence;
+    public override Ability SpellStat => Game.IntelligenceAbility;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(75000 / ((level * level) + 40)));

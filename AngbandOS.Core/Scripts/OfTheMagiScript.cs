@@ -15,7 +15,7 @@ internal class OfTheMagiScript : Script, IReadScrollOrUseStaffScript
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         bool isIdentified = false;
-        if (Game.TryRestoringAbilityScore(AbilityEnum.Intelligence))
+        if (Game.TryRestoringAbilityScore(Game.IntelligenceAbility))
         {
             isIdentified = true;
         }

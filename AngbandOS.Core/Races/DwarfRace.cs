@@ -12,7 +12,6 @@ internal class DwarfRace : Race
 {
     private DwarfRace(Game game) : base(game) { }
     public override string Title => "Dwarf";
-    public override int[] AbilityBonus => new int[] { 2, -2, 2, -2, 2, -3 };
     public override int BaseDisarmBonus => 2;
     public override int BaseDeviceBonus => 9;
     public override int BaseSaveBonus => 10;
@@ -57,7 +56,7 @@ internal class DwarfRace : Race
     public override void UseRacialPower()
     {
         // Dwarves can detect traps, doors, and stairs
-        if (Game.CheckIfRacialPowerWorks(5, 5, AbilityEnum.Wisdom, 12))
+        if (Game.CheckIfRacialPowerWorks(5, 5, Game.WisdomAbility, 12))
         {
             Game.MsgPrint("You examine your surroundings.");
             Game.DetectTraps();

@@ -19,9 +19,9 @@ internal class WrathReward : Reward
         Game.MsgPrint($"The voice of {patron.ShortName} thunders:");
         Game.MsgPrint("'Die, mortal!'");
         Game.TakeHit(Game.ExperienceLevel.IntValue * 4, wrathReason);
-        for (int dummy = 0; dummy < 6; dummy++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            Game.DecreaseAbilityScore(dummy, 10 + Game.DieRoll(15), false);
+            Game.DecreaseAbilityScore(ability, 10 + Game.DieRoll(15), false);
         }
         Game.ActivateHiSummon();
         Game.ActivateDreadCurse();

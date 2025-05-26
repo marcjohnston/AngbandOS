@@ -12,7 +12,6 @@ internal class SpectreRace : Race
 {
     private SpectreRace(Game game) : base(game) { }
     public override string Title => "Spectre";
-    public override int[] AbilityBonus => new int[] { -5, 4, 4, 2, -3, -6 };
     public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 25;
     public override int BaseSaveBonus => 20;
@@ -90,7 +89,7 @@ internal class SpectreRace : Race
     public override void UseRacialPower()
     {
         // Spectres can howl
-        if (Game.CheckIfRacialPowerWorks(4, 6, AbilityEnum.Intelligence, 3))
+        if (Game.CheckIfRacialPowerWorks(4, 6, Game.IntelligenceAbility, 3))
         {
             Game.MsgPrint("You emit an eldritch howl!");
             if (Game.GetDirectionWithAim(out int direction))

@@ -34,7 +34,6 @@ internal class PolymorphSelfScript : Script, IScript, ICastSpellScript, IGameCom
     public void ExecuteScript()
     {
         int effects = Game.DieRoll(2);
-        int tmp = 0;
         bool moreEffects = true;
         Game.MsgPrint("You feel a change coming over you...");
         while (effects-- != 0 && moreEffects)
@@ -71,10 +70,9 @@ internal class PolymorphSelfScript : Script, IScript, ICastSpellScript, IGameCom
 
                 case 8:
                     Game.MsgPrint("You polymorph into an abomination!");
-                    while (tmp < 6)
+                    foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
                     {
-                        Game.DecreaseAbilityScore(tmp, Game.FixedSeed + 6, Game.DieRoll(3) == 1);
-                        tmp++;
+                        Game.DecreaseAbilityScore(ability, Game.FixedSeed + 6, Game.DieRoll(3) == 1);
                     }
                     if (Game.DieRoll(6) == 1)
                     {

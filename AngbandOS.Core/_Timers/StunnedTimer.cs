@@ -38,25 +38,25 @@ internal class StunnedTimer : Timer
             {
                 if (!Game.HasSustainIntelligence)
                 {
-                    Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+                    Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
                 }
                 if (!Game.HasSustainWisdom)
                 {
-                    Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+                    Game.TryDecreasingAbilityScore(Game.WisdomAbility);
                 }
             }
             else if (Game.DieRoll(2) == 1)
             {
                 if (!Game.HasSustainIntelligence)
                 {
-                    Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+                    Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
                 }
             }
             else
             {
                 if (!Game.HasSustainWisdom)
                 {
-                    Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+                    Game.TryDecreasingAbilityScore(Game.WisdomAbility);
                 }
             }
         }
@@ -65,7 +65,7 @@ internal class StunnedTimer : Timer
     {
         if (Value != 0)
         {
-            int adjust = Game.AbilityScores[AbilityEnum.Constitution].ConRecoverySpeed + 1;
+            int adjust = Game.ConstitutionAbility.ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }

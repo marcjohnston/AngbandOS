@@ -19,6 +19,6 @@ internal class GainIntelligenceScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Intelligence increases your intelligence
-        return Game.TryIncreasingAbilityScore(AbilityEnum.Intelligence);
+        return Game.TryIncreasingAbilityScore(Game.IntelligenceAbility);
     }
 }

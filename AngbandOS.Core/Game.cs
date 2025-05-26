@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.RaceAbilities;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
@@ -48,6 +49,13 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
+    public Ability StrengthAbility; // TODO: These are still hardcoded into the framework
+    public Ability IntelligenceAbility; // TODO: These are still hardcoded into the framework
+    public Ability WisdomAbility; // TODO: These are still hardcoded into the framework
+    public Ability DexterityAbility; // TODO: These are still hardcoded into the framework
+    public Ability ConstitutionAbility; // TODO: These are still hardcoded into the framework
+    public Ability CharismaAbility; // TODO: These are still hardcoded into the framework
+
     private const int DecayRate = 10;
     private const int PatronRestingFavour = 30;
     public God? God;
@@ -56,7 +64,6 @@ internal class Game
     public int GenomeArmorClassBonus;
     public bool ChaosGift;
     public int CharismaBonus;
-    public bool CharismaOverride;
     public int ConstitutionBonus;
     public int DexterityBonus;
     public bool ElecHit;
@@ -782,7 +789,6 @@ internal class Game
     /// GUI
     public const int SafeMaxAttempts = 5000;
 
-    public readonly AbilityScore[] AbilityScores = new AbilityScore[6]; // TODO: This needs to be a dictionary where the keys need to be stats
     public readonly string[] History = new string[4];
     public readonly int[] MaxDlv = new int[DungeonCount];
     public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
@@ -2454,10 +2460,14 @@ internal class Game
         {
             History[i] = "";
         }
-        for (int i = 0; i < 6; i++)
-        {
-            AbilityScores[i] = new AbilityScore();
-        }
+
+        StrengthAbility = SingletonRepository.Get<Ability>(nameof(StrengthAbility));
+        IntelligenceAbility = SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
+        WisdomAbility = SingletonRepository.Get<Ability>(nameof(WisdomAbility));
+        DexterityAbility = SingletonRepository.Get<Ability>(nameof(DexterityAbility));
+        ConstitutionAbility = SingletonRepository.Get<Ability>(nameof(ConstitutionAbility));
+        CharismaAbility = SingletonRepository.Get<Ability>(nameof(CharismaAbility)); 
+
         WeightCarried = 0;
 
         foreach (FixedArtifact aPtr in SingletonRepository.Get<FixedArtifact>())
@@ -2692,7 +2702,6 @@ internal class Game
 
     public void ActivateDreadCurse()
     {
-        int i = 0;
         do
         {
             switch (DieRoll(27))
@@ -2747,7 +2756,8 @@ internal class Game
                 case 21:
                 case 22:
                 case 23:
-                    TryDecreasingAbilityScore(DieRoll(6) - 1);
+                    WeightedRandom<Ability> abilitiesWeightedRandom = SingletonRepository.ToWeightedRandom<Ability>();
+                    TryDecreasingAbilityScore(abilitiesWeightedRandom.Choose());
                     break;
 
                 case 24:
@@ -2760,13 +2770,12 @@ internal class Game
                     break;
 
                 default:
-                    while (i < 6)
+                    foreach (Ability ability in SingletonRepository.Get<Ability>())
                     {
                         do
                         {
-                            TryDecreasingAbilityScore(i);
+                            TryDecreasingAbilityScore(ability);
                         } while (DieRoll(2) == 1);
-                        i++;
                     }
                     break;
             }
@@ -4802,7 +4811,7 @@ internal class Game
         }
         if (AcidResistanceTimer.Value == 0 && !HasAcidResistance && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(AbilityEnum.Charisma);
+            TryDecreasingAbilityScore(CharismaAbility);
         }
         if (MinusAc())
         {
@@ -5031,7 +5040,7 @@ internal class Game
         }
         if (!(ColdResistanceTimer.Value != 0 || HasColdResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(AbilityEnum.Strength);
+            TryDecreasingAbilityScore(StrengthAbility);
         }
         TakeHit(dam, kbStr);
         if (!(HasColdResistance && ColdResistanceTimer.Value != 0))
@@ -5606,7 +5615,7 @@ internal class Game
         }
         if (!(LightningResistanceTimer.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(AbilityEnum.Dexterity);
+            TryDecreasingAbilityScore(DexterityAbility);
         }
         TakeHit(dam, kbStr);
         if (!(LightningResistanceTimer.Value != 0 && HasLightningResistance))
@@ -5831,7 +5840,7 @@ internal class Game
         }
         if (!(FireResistanceTimer.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(AbilityEnum.Strength);
+            TryDecreasingAbilityScore(StrengthAbility);
         }
         TakeHit(dam, kbStr);
         if (!(HasFireResistance && FireResistanceTimer.Value != 0))
@@ -6485,7 +6494,7 @@ internal class Game
         EnergyUse = 100;
         GridTile cPtr = Map.Grid[y][x];
         MsgPrint("You smash into the door!");
-        int bash = AbilityScores[AbilityEnum.Strength].StrAttackSpeedComponent;
+        int bash = StrengthAbility.StrAttackSpeedComponent;
         int temp = cPtr.FeatureType.LockLevel;
         temp = bash - (temp * 10);
         if (temp < 1)
@@ -6502,7 +6511,7 @@ internal class Game
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         }
-        else if (RandomLessThan(100) < AbilityScores[AbilityEnum.Dexterity].DexTheftAvoidance + ExperienceLevel.IntValue)
+        else if (RandomLessThan(100) < DexterityAbility.DexTheftAvoidance + ExperienceLevel.IntValue)
         {
             MsgPrint("The door holds firm.");
             more = true;
@@ -6523,7 +6532,7 @@ internal class Game
     /// <param name="useStat"> The ability score used for the power </param>
     /// <param name="difficulty"> The difficulty of the power to use </param>
     /// <returns> True if the power worked, false if it didn't </returns>
-    public bool CheckIfRacialPowerWorks(int minLevel, int cost, int useStat, int difficulty)
+    public bool CheckIfRacialPowerWorks(int minLevel, int cost, Ability useStat, int difficulty)
     {
         // If we don't have enough mana we'll use health instead
         bool useHealth = Mana.IntValue < cost;
@@ -6583,8 +6592,7 @@ internal class Game
         }
 
         // Check to see if we were successful
-        if (DieRoll(AbilityScores[useStat].Innate) >=
-            (difficulty / 2) + DieRoll(difficulty / 2))
+        if (DieRoll(useStat.Innate) >= (difficulty / 2) + DieRoll(difficulty / 2))
         {
             return true;
         }
@@ -7978,7 +7986,7 @@ internal class Game
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
         int divider = missile.Weight > 10 ? missile.Weight : 10;
-        int throwDistance = (AbilityScores[AbilityEnum.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
+        int throwDistance = (StrengthAbility.StrAttackSpeedComponent + 20) * multiplier / divider;
         if (throwDistance > 10)
         {
             throwDistance = 10;
@@ -9728,23 +9736,23 @@ internal class Game
     public void GetStartingGold()
     {
         int gold = (SocialClass * 6) + DieRoll(100) + 300;
-        for (int i = 0; i < 6; i++)
+        foreach (Ability ability in SingletonRepository.Get<Ability>())
         {
-            if (AbilityScores[i].Adjusted >= 18 + 50)
+            if (ability.Adjusted >= 18 + 50)
             {
                 gold -= 300;
             }
-            else if (AbilityScores[i].Adjusted >= 18 + 20)
+            else if (ability.Adjusted >= 18 + 20)
             {
                 gold -= 200;
             }
-            else if (AbilityScores[i].Adjusted > 18)
+            else if (ability.Adjusted > 18)
             {
                 gold -= 150;
             }
             else
             {
-                gold -= (AbilityScores[i].Adjusted - 8) * 10;
+                gold -= (ability.Adjusted - 8) * 10;
             }
         }
         if (gold < 100)
@@ -9756,21 +9764,22 @@ internal class Game
 
     public void GetStats()
     {
-        int i;
         while (true)
         {
             List<int> maxList = new List<int>() { 17, 16, 14, 12, 11, 10 };
-            for (i = 0; i < 6; i++) // There are six abilities
+            foreach (Ability ability in SingletonRepository.Get<Ability>()) // There are six abilities
             {
                 int maxIndex = RandomLessThan(maxList.Count); // Choose a random max from the maxList
                 int max = maxList[maxIndex];
                 maxList.RemoveAt(maxIndex);
-                AbilityScores[i].InnateMax = max;
-                int bonus = Race.AbilityBonus[i] + BaseCharacterClass.AbilityBonus[i];
-                AbilityScores[i].Innate = AbilityScores[i].InnateMax;
-                AbilityScores[i].Adjusted = AbilityScores[i].ModifyStatValue(AbilityScores[i].InnateMax, bonus);
+                ability.InnateMax = max;
+                RaceAbility raceAbility = SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Race, ability));
+                CharacterClassAbility characterClassAbility = SingletonRepository.Get<CharacterClassAbility>(CharacterClassAbility.GetCompositeKey(BaseCharacterClass, ability));
+                int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
+                ability.Innate = ability.InnateMax;
+                ability.Adjusted = ability.ModifyStatValue(ability.InnateMax, bonus);
             }
-            if (AbilityScores[BaseCharacterClass.PrimeStat].InnateMax > 13)
+            if (BaseCharacterClass.PrimeStat.InnateMax > 13)
             {
                 break;
             }
@@ -13614,12 +13623,12 @@ internal class Game
         }
     }
 
-    public bool DecreaseAbilityScore(int stat, int amount, bool permanent)
+    public bool DecreaseAbilityScore(Ability stat, int amount, bool permanent)
     {
         int loss;
         bool res = false;
-        int cur = AbilityScores[stat].Innate;
-        int max = AbilityScores[stat].InnateMax;
+        int cur = stat.Innate;
+        int max = stat.InnateMax;
         bool same = cur == max;
         if (cur > 3)
         {
@@ -13661,7 +13670,7 @@ internal class Game
             {
                 cur = 3;
             }
-            if (cur != AbilityScores[stat].Innate)
+            if (cur != stat.Innate)
             {
                 res = true;
             }
@@ -13702,15 +13711,15 @@ internal class Game
             {
                 max = cur;
             }
-            if (max != AbilityScores[stat].InnateMax)
+            if (max != stat.InnateMax)
             {
                 res = true;
             }
         }
         if (res)
         {
-            AbilityScores[stat].Innate = cur;
-            AbilityScores[stat].InnateMax = max;
+            stat.Innate = cur;
+            stat.InnateMax = max;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
         return res;
@@ -14106,11 +14115,11 @@ internal class Game
     /// </summary>
     /// <param name="stat"></param>
     /// <returns>Returns true, if the ability was less than max and was restored back to max; false, otherwise.</returns>
-    public bool RestoreAbilityScore(int stat)
+    public bool RestoreAbilityScore(Ability stat)
     {
-        if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
+        if (stat.Innate != stat.InnateMax)
         {
-            AbilityScores[stat].Innate = AbilityScores[stat].InnateMax;
+            stat.Innate = stat.InnateMax;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             return true;
         }
@@ -14272,18 +14281,21 @@ internal class Game
     public void ShuffleAbilityScores()
     {
         int jj;
-        int ii = RandomLessThan(6);
-        for (jj = ii; jj != ii; jj = RandomLessThan(6))
+        int abilityCount = SingletonRepository.Count<Ability>();
+        int ii = RandomLessThan(abilityCount);
+        for (jj = ii; jj != ii; jj = RandomLessThan(abilityCount))
         {
         }
-        int max1 = AbilityScores[ii].InnateMax;
-        int cur1 = AbilityScores[ii].Innate;
-        int max2 = AbilityScores[jj].InnateMax;
-        int cur2 = AbilityScores[jj].Innate;
-        AbilityScores[ii].InnateMax = max2;
-        AbilityScores[ii].Innate = cur2;
-        AbilityScores[jj].InnateMax = max1;
-        AbilityScores[jj].Innate = cur1;
+        Ability iiAbility = SingletonRepository.Get<Ability>(ii);
+        Ability jjAbility = SingletonRepository.Get<Ability>(ii);
+        int max1 = iiAbility.InnateMax;
+        int cur1 = iiAbility.Innate;
+        int max2 = jjAbility.InnateMax;
+        int cur2 = jjAbility.Innate;
+        iiAbility.InnateMax = max2;
+        iiAbility.Innate = cur2;
+        jjAbility.InnateMax = max1;
+        jjAbility.Innate = cur1;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
     }
 
@@ -14374,82 +14386,38 @@ internal class Game
         }
     }
 
-    public IdentifiedResult TryDecreasingAbilityScore(int stat)
+    public IdentifiedResult TryDecreasingAbilityScore(Ability stat)
     {
-        bool sust = false;
-        switch (stat)
-        {
-            case AbilityEnum.Strength:
-                if (HasSustainStrength)
-                {
-                    sust = true;
-                }
-                break;
-
-            case AbilityEnum.Intelligence:
-                if (HasSustainIntelligence)
-                {
-                    sust = true;
-                }
-                break;
-
-            case AbilityEnum.Wisdom:
-                if (HasSustainWisdom)
-                {
-                    sust = true;
-                }
-                break;
-
-            case AbilityEnum.Dexterity:
-                if (HasSustainDexterity)
-                {
-                    sust = true;
-                }
-                break;
-
-            case AbilityEnum.Constitution:
-                if (HasSustainConstitution)
-                {
-                    sust = true;
-                }
-                break;
-
-            case AbilityEnum.Charisma:
-                if (HasSustainCharisma)
-                {
-                    sust = true;
-                }
-                break;
-        }
+        bool sust = stat.HasSustain;
         if (sust)
         {
-            MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but the feeling passes.");
+            MsgPrint($"You feel {stat.DescStatNeg} for a moment, but the feeling passes.");
             return new IdentifiedResult(true);
         }
         if (DieRoll(10) <= SingletonRepository.Get<God>(nameof(LobonGod)).AdjustedFavour)
         {
-            MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
+            MsgPrint($"You feel {stat.DescStatNeg} for a moment, but Lobon's favour protects you.");
             return new IdentifiedResult(true);
         }
         if (DecreaseAbilityScore(stat, 10, false))
         {
-            MsgPrint($"You feel very {Constants.DescStatNeg[stat]}.");
+            MsgPrint($"You feel very {stat.DescStatNeg}.");
             return new IdentifiedResult(true);
         }
         return new IdentifiedResult(false);
     }
 
-    public IdentifiedResult TryIncreasingAbilityScore(int stat)
+    public IdentifiedResult TryIncreasingAbilityScore(Ability stat)
     {
         bool res = RestoreAbilityScore(stat);
         if (IncreaseAbilityScore(stat))
         {
-            MsgPrint($"Wow!  You feel very {Constants.DescStatPos[stat]}!");
+            MsgPrint($"Wow!  You feel very {stat.DescStatPos}!");
             return new IdentifiedResult(true);
         }
         if (res)
         {
-            MsgPrint($"You feel less {Constants.DescStatNeg[stat]}.");
+            MsgPrint($"You feel less {stat.DescStatNeg}.");
             return new IdentifiedResult(true);
         }
         return new IdentifiedResult(false);
@@ -14460,19 +14428,19 @@ internal class Game
     /// </summary>
     /// <param name="stat"></param>
     /// <returns>Returns true, if the ability was less than max and was restored back to max; false, otherwise.</returns>
-    public bool TryRestoringAbilityScore(int stat)
+    public bool TryRestoringAbilityScore(Ability stat)
     {
         if (RestoreAbilityScore(stat))
         {
-            MsgPrint($"You feel less {Constants.DescStatNeg[stat]}.");
+            MsgPrint($"You feel less {stat.DescStatNeg}.");
             return true;
         }
         return false;
     }
 
-    private bool IncreaseAbilityScore(int which)
+    private bool IncreaseAbilityScore(Ability which)
     {
-        int value = AbilityScores[which].Innate;
+        int value = which.Innate;
         if (value < 18 + 100)
         {
             int gain;
@@ -14498,10 +14466,10 @@ internal class Game
             {
                 value++;
             }
-            AbilityScores[which].Innate = value;
-            if (value > AbilityScores[which].InnateMax)
+            which.Innate = value;
+            if (value > which.InnateMax)
             {
-                AbilityScores[which].InnateMax = value;
+                which.InnateMax = value;
             }
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             return true;

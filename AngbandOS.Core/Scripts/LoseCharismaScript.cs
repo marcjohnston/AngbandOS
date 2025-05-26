@@ -19,6 +19,6 @@ internal class LoseCharismaScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Ugliness tries to reduce your charisma
-        return Game.TryDecreasingAbilityScore(AbilityEnum.Charisma);
+        return Game.TryDecreasingAbilityScore(Game.CharismaAbility);
     }
 }

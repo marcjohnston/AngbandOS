@@ -13,7 +13,7 @@ internal class PatronNyogtha : Patron
     private PatronNyogtha(Game game) : base(game) { }
     public override string ShortName => "Nyogtha";
     public override string LongName => "Nyogtha, the Thing Which Should Not Be";
-    public override int PreferredAbility => AbilityEnum.Constitution;
+    public override Ability? PreferredAbility => Game.ConstitutionAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

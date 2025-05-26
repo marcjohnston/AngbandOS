@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RaceAbilities;
+
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
@@ -63,10 +65,15 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
         Game.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
         Game.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
-        for (int i = 0; i < 6; i++)
+        int i = 0;
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            int bonus = race.AbilityBonus[i] + Game.BaseCharacterClass.AbilityBonus[i];
+            RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(race, ability));
+            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
+            int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
             Game.DisplayStatBonus(26, 36 + i, bonus);
+            i++;
         }
         Game.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
         Game.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);

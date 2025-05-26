@@ -13,7 +13,7 @@ internal class VampirismActiveMutation : Mutation
     private VampirismActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(13, Game.ExperienceLevel.IntValue, AbilityEnum.Constitution, 14))
+        if (!Game.CheckIfRacialPowerWorks(13, Game.ExperienceLevel.IntValue, Game.ConstitutionAbility, 14))
         {
             return;
         }

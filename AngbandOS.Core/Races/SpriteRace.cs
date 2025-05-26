@@ -12,7 +12,6 @@ internal class SpriteRace : Race
 {
     private SpriteRace(Game game) : base(game) { }
     public override string Title => "Sprite";
-    public override int[] AbilityBonus => new int[] { -4, 3, 3, 3, -2, 2 };
     public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 10;
     public override int BaseSaveBonus => 10;
@@ -66,7 +65,7 @@ internal class SpriteRace : Race
     public override void UseRacialPower()
     {
         // Sprites can sleep monsters
-        if (Game.CheckIfRacialPowerWorks(12, 12, AbilityEnum.Intelligence, 15))
+        if (Game.CheckIfRacialPowerWorks(12, 12, Game.IntelligenceAbility, 15))
         {
             Game.MsgPrint("You throw some magic dust...");
             if (Game.ExperienceLevel.IntValue < 25)

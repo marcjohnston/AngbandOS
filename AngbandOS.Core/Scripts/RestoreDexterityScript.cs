@@ -19,7 +19,7 @@ internal class RestoreDexterityScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Restore wisdom restores your wisdom
-        bool isIdentified = Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
+        bool isIdentified = Game.TryRestoringAbilityScore(Game.WisdomAbility);
         return new IdentifiedResult(isIdentified);
     }
 }

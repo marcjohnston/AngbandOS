@@ -12,7 +12,6 @@ internal class DraconianRace : Race
 {
     private DraconianRace(Game game) : base(game) { }
     public override string Title => "Draconian";
-    public override int[] AbilityBonus => new int[] { 2, 1, 1, 1, 2, -3 };
     public override int BaseDisarmBonus => -2;
     public override int BaseDeviceBonus => 5;
     public override int BaseSaveBonus => 3;
@@ -215,7 +214,7 @@ internal class DraconianRace : Race
                     break;
             }
         }
-        if (Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, AbilityEnum.Constitution, 12))
+        if (Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, Game.ConstitutionAbility, 12))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

@@ -13,7 +13,7 @@ internal class BerserkActiveMutation : Mutation
     private BerserkActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(8, 8, AbilityEnum.Strength, 14))
+        if (!Game.CheckIfRacialPowerWorks(8, 8, Game.StrengthAbility, 14))
         {
             return;
         }

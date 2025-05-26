@@ -16,7 +16,7 @@ internal class LoseDexAttackEffect : AttackEffect
     public override void ApplyToPlayer(Monster monster, ref bool identified, ref int damage, ref bool blinked)
     {
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(AbilityEnum.Dexterity);
+        IdentifiedResult identifiedResult = Game.TryDecreasingAbilityScore(Game.DexterityAbility);
         if (identifiedResult.IsIdentified)
         {
             identified = true;

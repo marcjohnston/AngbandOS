@@ -13,7 +13,7 @@ internal class SwapPosActiveMutation : Mutation
     private SwapPosActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(15, 12, AbilityEnum.Dexterity, 16))
+        if (!Game.CheckIfRacialPowerWorks(15, 12, Game.DexterityAbility, 16))
         {
             return;
         }

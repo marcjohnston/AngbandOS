@@ -13,7 +13,6 @@ internal class HighMageCharacterClass : BaseCharacterClass
     private HighMageCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 10;
     public override string Title => "High-Mage";
-    public override int[] AbilityBonus => new[] { -5, 4, 0, 0, -2, 1 };
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 38;
     public override int BaseSaveBonus => 30;
@@ -32,7 +31,7 @@ internal class HighMageCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;
     public override int ExperienceFactor => 30;
-    public override int PrimeStat => AbilityEnum.Intelligence;
+    public override Ability PrimeStat => Game.IntelligenceAbility;
     public override string[] Info => new string[] {
         "INT based spell casters who specialise in a single realm",
         "of magic. They may choose any realm, and are better at",
@@ -55,7 +54,7 @@ internal class HighMageCharacterClass : BaseCharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override int SpellStat => AbilityEnum.Intelligence;
+    public override Ability SpellStat => Game.IntelligenceAbility;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;

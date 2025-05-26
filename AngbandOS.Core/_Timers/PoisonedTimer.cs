@@ -23,7 +23,7 @@ internal class PoisonedTimer : Timer
     {
         if (Value != 0)
         {
-            int adjust = Game.AbilityScores[AbilityEnum.Constitution].ConRecoverySpeed + 1;
+            int adjust = Game.ConstitutionAbility.ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }   

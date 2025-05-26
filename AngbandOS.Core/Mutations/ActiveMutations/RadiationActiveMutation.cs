@@ -13,7 +13,7 @@ internal class RadiationActiveMutation : Mutation
     private RadiationActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(15, 15, AbilityEnum.Constitution, 14))
+        if (!Game.CheckIfRacialPowerWorks(15, 15, Game.ConstitutionAbility, 14))
         {
             return;
         }

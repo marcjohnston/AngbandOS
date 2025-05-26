@@ -24,12 +24,12 @@ internal class CureAllScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         Game.RunScript(nameof(RemoveAllCurseScript));
-        Game.RestoreAbilityScore(AbilityEnum.Strength);
-        Game.RestoreAbilityScore(AbilityEnum.Intelligence);
-        Game.RestoreAbilityScore(AbilityEnum.Wisdom);
-        Game.RestoreAbilityScore(AbilityEnum.Constitution);
-        Game.RestoreAbilityScore(AbilityEnum.Dexterity);
-        Game.RestoreAbilityScore(AbilityEnum.Charisma);
+        Game.RestoreAbilityScore(Game.StrengthAbility);
+        Game.RestoreAbilityScore(Game.IntelligenceAbility);
+        Game.RestoreAbilityScore(Game.WisdomAbility);
+        Game.RestoreAbilityScore(Game.ConstitutionAbility);
+        Game.RestoreAbilityScore(Game.DexterityAbility);
+        Game.RestoreAbilityScore(Game.CharismaAbility);
         Game.RunScript(nameof(RestoreLevelScript));
         Game.Health.IntValue = Game.MaxHealth.IntValue;
         Game.FractionalHealth = 0;

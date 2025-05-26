@@ -13,7 +13,7 @@ internal class IllumineActiveMutation : Mutation
     private IllumineActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(3, 2, AbilityEnum.Intelligence, 10))
+        if (Game.CheckIfRacialPowerWorks(3, 2, Game.IntelligenceAbility, 10))
         {
             Game.LightArea(base.Game.DiceRoll(2, Game.ExperienceLevel.IntValue / 2), (Game.ExperienceLevel.IntValue / 10) + 1);
         }

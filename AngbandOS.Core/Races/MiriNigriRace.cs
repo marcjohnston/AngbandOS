@@ -12,7 +12,6 @@ internal class MiriNigriRace : Race
 {
     private MiriNigriRace(Game game) : base(game) { }
     public override string Title => "Miri Nigri";
-    public override int[] AbilityBonus => new int[] { 2, -2, -1, -1, 2, -4 };
     public override int BaseDisarmBonus => -5;
     public override int BaseDeviceBonus => -2;
     public override int BaseSaveBonus => -1;

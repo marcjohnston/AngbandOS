@@ -19,7 +19,7 @@ internal class RestoreStrengthScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Restore strength restores your strength
-        bool isIdentified = Game.TryRestoringAbilityScore(AbilityEnum.Strength);
+        bool isIdentified = Game.TryRestoringAbilityScore(Game.StrengthAbility);
         return new IdentifiedResult(isIdentified);
     }
 }

@@ -12,7 +12,6 @@ internal class TimePlayerEffect : PlayerEffect
     private TimePlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override bool Apply(int who, int r, int y, int x, int dam, int aRad)
     {
-        int k = 0;
         bool blind = Game.BlindnessTimer.Value != 0;
         string act = null;
         if (dam > 1600)
@@ -51,43 +50,14 @@ internal class TimePlayerEffect : PlayerEffect
                 case 8:
                 case 9:
                     {
-                        switch (Game.DieRoll(6))
-                        {
-                            case 1:
-                                k = AbilityEnum.Strength;
-                                act = "strong";
-                                break;
-
-                            case 2:
-                                k = AbilityEnum.Intelligence;
-                                act = "bright";
-                                break;
-
-                            case 3:
-                                k = AbilityEnum.Wisdom;
-                                act = "wise";
-                                break;
-
-                            case 4:
-                                k = AbilityEnum.Dexterity;
-                                act = "agile";
-                                break;
-
-                            case 5:
-                                k = AbilityEnum.Constitution;
-                                act = "hale";
-                                break;
-
-                            case 6:
-                                k = AbilityEnum.Charisma;
-                                act = "beautiful";
-                                break;
-                        }
+                        WeightedRandom<Ability> abilitiesWeightedRandom = Game.SingletonRepository.ToWeightedRandom<Ability>();
+                        Ability k = abilitiesWeightedRandom.Choose();
+                        act = k.Act;
                         Game.MsgPrint($"You're not as {act} as you used to be...");
-                        Game.AbilityScores[k].Innate = Game.AbilityScores[k].Innate * 3 / 4;
-                        if (Game.AbilityScores[k].Innate < 3)
+                        k.Innate = k.Innate * 3 / 4;
+                        if (k.Innate < 3)
                         {
-                            Game.AbilityScores[k].Innate = 3;
+                            k.Innate = 3;
                         }
                         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                         break;
@@ -95,12 +65,12 @@ internal class TimePlayerEffect : PlayerEffect
                 case 10:
                     {
                         Game.MsgPrint("You're not as powerful as you used to be...");
-                        for (k = 0; k < 6; k++)
+                        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
                         {
-                            Game.AbilityScores[k].Innate = Game.AbilityScores[k].Innate * 3 / 4;
-                            if (Game.AbilityScores[k].Innate < 3)
+                            ability.Innate = ability.Innate * 3 / 4;
+                            if (ability.Innate < 3)
                             {
-                                Game.AbilityScores[k].Innate = 3;
+                                ability.Innate = 3;
                             }
                         }
                         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();

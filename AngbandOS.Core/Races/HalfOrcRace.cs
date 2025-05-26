@@ -12,7 +12,6 @@ internal class HalfOrcRace : Race
 {
     private HalfOrcRace(Game game) : base(game) { }
     public override string Title => "Half Orc";
-    public override int[] AbilityBonus => new int[] { 2, -1, 0, 0, 1, -4 };
     public override int BaseDisarmBonus => -3;
     public override int BaseDeviceBonus => -3;
     public override int BaseSaveBonus => -3;
@@ -60,7 +59,7 @@ internal class HalfOrcRace : Race
     public override void UseRacialPower()
     {
         // Half-orcs can remove fear
-        if (Game.CheckIfRacialPowerWorks(3, 5, AbilityEnum.Wisdom, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 5 : 10))
+        if (Game.CheckIfRacialPowerWorks(3, 5, Game.WisdomAbility, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 5 : 10))
         {
             Game.MsgPrint("You play tough.");
             Game.FearTimer.ResetTimer();

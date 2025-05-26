@@ -12,7 +12,6 @@ internal class HalfGiantRace : Race
 {
     private HalfGiantRace(Game game) : base(game) { }
     public override string Title => "Half Giant";
-    public override int[] AbilityBonus => new int[] { 4, -2, -2, -2, 3, -3 };
     public override int BaseDisarmBonus => -6;
     public override int BaseDeviceBonus => -8;
     public override int BaseSaveBonus => -6;
@@ -61,7 +60,7 @@ internal class HalfGiantRace : Race
     public override void UseRacialPower()
     {
         // Half-giants can bash through stone walls
-        if (Game.CheckIfRacialPowerWorks(20, 10, AbilityEnum.Strength, 12))
+        if (Game.CheckIfRacialPowerWorks(20, 10, Game.StrengthAbility, 12))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

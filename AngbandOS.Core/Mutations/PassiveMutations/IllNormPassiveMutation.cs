@@ -18,11 +18,11 @@ internal class IllNormPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        Game.CharismaOverride = true;
+        Game.CharismaAbility.Override = true;
     }
 
     public override void OnLose()
     {
-        Game.CharismaOverride = false;
+        Game.CharismaAbility.Override = false;
     }
 }

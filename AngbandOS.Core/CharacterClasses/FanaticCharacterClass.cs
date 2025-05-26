@@ -13,7 +13,6 @@ internal class FanaticCharacterClass : BaseCharacterClass
     private FanaticCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 7;
     public override string Title => "Fanatic";
-    public override int[] AbilityBonus => new[] { 2, 1, 0, 1, 2, -2 };
     public override int BaseDisarmBonus => 20;
     public override int BaseDeviceBonus => 24;
     public override int BaseSaveBonus => 30;
@@ -32,7 +31,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 35;
-    public override int PrimeStat => AbilityEnum.Intelligence;
+    public override Ability PrimeStat => Game.IntelligenceAbility;
     public override string[] Info => new string[] {
         "Warriors who dabble in INT based Chaos magic. Have a cult",
         "patron who will randomly give them rewards or punishments",
@@ -68,7 +67,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override int SpellStat => AbilityEnum.Intelligence;
+    public override Ability SpellStat => Game.IntelligenceAbility;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));

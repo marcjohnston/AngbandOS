@@ -21,32 +21,32 @@ internal class AugmentScript : Script, IEatOrQuaffScript
         bool isIdentified = false;
 
         // Augmentation increases all ability scores
-        IdentifiedResult identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Strength);
+        IdentifiedResult identifiedResult = Game.TryIncreasingAbilityScore(Game.StrengthAbility);
         if (identifiedResult.IsIdentified)
         {
             isIdentified = true;
         }
-        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Intelligence);
+        identifiedResult = Game.TryIncreasingAbilityScore(Game.IntelligenceAbility);
         if (identifiedResult.IsIdentified)
         {
             isIdentified = true;
         }
-        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Wisdom);
+        identifiedResult = Game.TryIncreasingAbilityScore(Game.WisdomAbility);
         if (identifiedResult.IsIdentified)
         {
             isIdentified = true;
         }
-        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Dexterity);
+        identifiedResult = Game.TryIncreasingAbilityScore(Game.DexterityAbility);
         if (identifiedResult.IsIdentified)
         {
             isIdentified = true;
         }
-        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Constitution);
+        identifiedResult = Game.TryIncreasingAbilityScore(Game.ConstitutionAbility);
         if (identifiedResult.IsIdentified)
         {
             isIdentified = true;
         }
-        identifiedResult = Game.TryIncreasingAbilityScore(AbilityEnum.Charisma);
+        identifiedResult = Game.TryIncreasingAbilityScore(Game.CharismaAbility);
         if (identifiedResult.IsIdentified)
         {
             isIdentified = true;

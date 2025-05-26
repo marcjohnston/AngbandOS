@@ -12,7 +12,6 @@ internal class DarkElfRace : Race
 {
     private DarkElfRace(Game game) : base(game) { }
     public override string Title => "Dark Elf";
-    public override int[] AbilityBonus => new int[] { -1, 3, 2, 2, -2, 1 };
     public override int BaseDisarmBonus => 5;
     public override int BaseDeviceBonus => 15;
     public override int BaseSaveBonus => 20;
@@ -62,7 +61,7 @@ internal class DarkElfRace : Race
     public override void UseRacialPower()
     {
         // Dark elves can cast magic missile
-        if (Game.CheckIfRacialPowerWorks(2, 2, AbilityEnum.Intelligence, 9))
+        if (Game.CheckIfRacialPowerWorks(2, 2, Game.IntelligenceAbility, 9))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

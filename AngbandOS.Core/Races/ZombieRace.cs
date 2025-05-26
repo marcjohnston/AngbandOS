@@ -12,7 +12,6 @@ internal class ZombieRace : Race
 {
     private ZombieRace(Game game) : base(game) { }
     public override string Title => "Zombie";
-    public override int[] AbilityBonus => new int[] { 2, -6, -6, 1, 4, -5 };
     public override int BaseDisarmBonus => -5;
     public override int BaseDeviceBonus => -5;
     public override int BaseSaveBonus => 8;
@@ -82,7 +81,7 @@ internal class ZombieRace : Race
     public override void UseRacialPower()
     {
         // Skeletons and zombies can restore their life energy
-        if (Game.CheckIfRacialPowerWorks(30, 30, AbilityEnum.Wisdom, 18))
+        if (Game.CheckIfRacialPowerWorks(30, 30, Game.WisdomAbility, 18))
         {
             Game.MsgPrint("You attempt to restore your lost energies.");
             Game.RunScript(nameof(RestoreLevelScript));

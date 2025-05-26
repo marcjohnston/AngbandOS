@@ -18,61 +18,13 @@ internal class WastingRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (base.Game.DieRoll(3000) != 13)
+        if (Game.DieRoll(3000) != 13)
         {
             return;
         }
-        int whichStat = base.Game.RandomLessThan(6);
-        bool sustained = false;
-        switch (whichStat)
-        {
-            case AbilityEnum.Strength:
-                if (Game.HasSustainStrength)
-                {
-                    sustained = true;
-                }
-                break;
-
-            case AbilityEnum.Intelligence:
-                if (Game.HasSustainIntelligence)
-                {
-                    sustained = true;
-                }
-                break;
-
-            case AbilityEnum.Wisdom:
-                if (Game.HasSustainWisdom)
-                {
-                    sustained = true;
-                }
-                break;
-
-            case AbilityEnum.Dexterity:
-                if (Game.HasSustainDexterity)
-                {
-                    sustained = true;
-                }
-                break;
-
-            case AbilityEnum.Constitution:
-                if (Game.HasSustainConstitution)
-                {
-                    sustained = true;
-                }
-                break;
-
-            case AbilityEnum.Charisma:
-                if (Game.HasSustainCharisma)
-                {
-                    sustained = true;
-                }
-                break;
-
-            default:
-                Game.MsgPrint("Invalid stat chosen!");
-                sustained = true;
-                break;
-        }
+        WeightedRandom<Ability> abilitiesWeightedRandom = Game.SingletonRepository.ToWeightedRandom<Ability>();
+        Ability whichStat = abilitiesWeightedRandom.Choose();
+        bool sustained = whichStat.HasSustain;
         if (sustained)
         {
             return;

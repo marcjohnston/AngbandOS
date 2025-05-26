@@ -13,7 +13,7 @@ internal class ShriekActiveMutation : Mutation
     private ShriekActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(4, 4, AbilityEnum.Constitution, 6))
+        if (!Game.CheckIfRacialPowerWorks(4, 4, Game.ConstitutionAbility, 6))
         {
             return;
         }

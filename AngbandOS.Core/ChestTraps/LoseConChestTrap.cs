@@ -17,7 +17,7 @@ internal class LoseConChestTrap : ChestTrap
     {
         Game.RunScript(nameof(ASmallNeedleHasPrickedYouRenderMessageScript));
         Game.TakeHit(Game.DiceRoll(1, 4), "a poison needle");
-        Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
+        Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
     }
     public override string Description => "(Poison Needle)";
 }

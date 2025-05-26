@@ -12,7 +12,6 @@ internal class NibelungRace : Race
 {
     private NibelungRace(Game game) : base(game) { }
     public override string Title => "Nibelung";
-    public override int[] AbilityBonus => new int[] { 1, -1, 2, 0, 2, -4 };
     public override int BaseDisarmBonus => 3;
     public override int BaseDeviceBonus => 5;
     public override int BaseSaveBonus => 10;
@@ -62,7 +61,7 @@ internal class NibelungRace : Race
     public override void UseRacialPower()
     {
         // Nibelungen can detect traps, doors, and stairs
-        if (Game.CheckIfRacialPowerWorks(5, 5, AbilityEnum.Wisdom, 10))
+        if (Game.CheckIfRacialPowerWorks(5, 5, Game.WisdomAbility, 10))
         {
             Game.MsgPrint("You examine your surroundings.");
             Game.DetectTraps();

@@ -49,11 +49,11 @@ internal class BrainSmashMonsterSpell : MonsterSpell
             Game.SlowTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
             while (base.Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+                Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
             }
             while (base.Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(AbilityEnum.Wisdom);
+                Game.TryDecreasingAbilityScore(Game.WisdomAbility);
             }
             if (!Game.HasChaosResistance)
             {

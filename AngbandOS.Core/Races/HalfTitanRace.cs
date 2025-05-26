@@ -12,7 +12,6 @@ internal class HalfTitanRace : Race
 {
     private HalfTitanRace(Game game) : base(game) { }
     public override string Title => "Half Titan";
-    public override int[] AbilityBonus => new int[] { 5, 1, 1, -2, 3, 1 };
     public override int BaseDisarmBonus => -5;
     public override int BaseDeviceBonus => 5;
     public override int BaseSaveBonus => 2;
@@ -59,7 +58,7 @@ internal class HalfTitanRace : Race
     public override void UseRacialPower()
     {
         // Half-Titans can probe enemies
-        if (Game.CheckIfRacialPowerWorks(35, 20, AbilityEnum.Intelligence, 12))
+        if (Game.CheckIfRacialPowerWorks(35, 20, Game.IntelligenceAbility, 12))
         {
             Game.MsgPrint("You examine your foes...");
             Game.Probing();

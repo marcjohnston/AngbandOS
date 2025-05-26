@@ -13,7 +13,7 @@ internal class PatronHastur : Patron
     private PatronHastur(Game game) : base(game) { }
     public override string ShortName => "Hastur";
     public override string LongName => "Hastur, the Unspeakable";
-    public override int PreferredAbility => -1;
+    public override Ability? PreferredAbility => null;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

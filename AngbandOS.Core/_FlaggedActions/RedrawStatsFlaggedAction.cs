@@ -13,33 +13,33 @@ internal class RedrawStatsFlaggedAction : FlaggedAction
     private const int RowStat = 15;
     private const int ColStat = 6;
     private RedrawStatsFlaggedAction(Game game) : base(game) { }
-    private void PrtStat(int stat)
+    private void PrtStat(Ability stat, int rowOffset)
     {
-        if (Game.AbilityScores[stat].Innate < Game.AbilityScores[stat].InnateMax)
+        if (stat.Innate < stat.InnateMax)
         {
-            Game.Screen.Print(Constants.StatNamesReduced[stat], RowStat + stat, 0);
-            string tmp = Game.AbilityScores[stat].Adjusted.StatToString();
-            Game.Screen.Print(ColorEnum.Yellow, tmp, RowStat + stat, ColStat);
+            Game.Screen.Print(stat.NameReduced, RowStat + rowOffset, 0);
+            string tmp = stat.Adjusted.StatToString();
+            Game.Screen.Print(ColorEnum.Yellow, tmp, RowStat + rowOffset, ColStat);
         }
         else
         {
-            Game.Screen.Print(Constants.StatNames[stat], RowStat + stat, 0);
-            string tmp = Game.AbilityScores[stat].Adjusted.StatToString();
-            Game.Screen.Print(ColorEnum.BrightGreen, tmp, RowStat + stat, ColStat);
+            Game.Screen.Print(stat.Name, RowStat + rowOffset, 0);
+            string tmp = stat.Adjusted.StatToString();
+            Game.Screen.Print(ColorEnum.BrightGreen, tmp, RowStat + rowOffset, ColStat);
         }
-        if (Game.AbilityScores[stat].InnateMax == 18 + 100)
+        if (stat.InnateMax == 18 + 100)
         {
-            Game.Screen.Print("!", RowStat + stat, 3);
+            Game.Screen.Print("!", RowStat + rowOffset, 3);
         }
     }
 
     protected override void Execute()
     {
-        PrtStat(AbilityEnum.Strength);
-        PrtStat(AbilityEnum.Intelligence);
-        PrtStat(AbilityEnum.Wisdom);
-        PrtStat(AbilityEnum.Dexterity);
-        PrtStat(AbilityEnum.Constitution);
-        PrtStat(AbilityEnum.Charisma);
+        PrtStat(Game.StrengthAbility, 0);
+        PrtStat(Game.IntelligenceAbility, 1);
+        PrtStat(Game.WisdomAbility, 2);
+        PrtStat(Game.DexterityAbility, 3);
+        PrtStat(Game.ConstitutionAbility, 4);
+        PrtStat(Game.CharismaAbility, 5);
     }
 }

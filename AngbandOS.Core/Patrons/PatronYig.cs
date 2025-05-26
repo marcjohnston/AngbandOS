@@ -13,7 +13,7 @@ internal class PatronYig : Patron
     private PatronYig(Game game) : base(game) { }
     public override string ShortName => "Yig";
     public override string LongName => "Yig, Father of Serpents";
-    public override int PreferredAbility => AbilityEnum.Strength;
+    public override Ability? PreferredAbility => Game.StrengthAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

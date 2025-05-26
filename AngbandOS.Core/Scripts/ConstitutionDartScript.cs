@@ -30,7 +30,7 @@ internal class ConstitutionDartScript : Script, IScript, ICastSpellScript
             // Do 1d4 damage plus constitution drain
             int damage = Game.DiceRoll(1, 4);
             Game.TakeHit(damage, "a dart trap");
-            Game.TryDecreasingAbilityScore(AbilityEnum.Constitution);
+            Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
         }
         else
         {

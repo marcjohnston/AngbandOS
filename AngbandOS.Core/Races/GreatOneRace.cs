@@ -12,7 +12,6 @@ internal class GreatOneRace : Race
 {
     private GreatOneRace(Game game) : base(game) { }
     public override string Title => "Great One";
-    public override int[] AbilityBonus => new int[] { 1, 2, 2, 2, 3, 2 };
     public override int BaseDisarmBonus => 4;
     public override int BaseDeviceBonus => 5;
     public override int BaseSaveBonus => 5;
@@ -90,7 +89,7 @@ internal class GreatOneRace : Race
         }
         if (dreamPower == 1)
         {
-            if (Game.CheckIfRacialPowerWorks(40, 75, AbilityEnum.Wisdom, 50))
+            if (Game.CheckIfRacialPowerWorks(40, 75, Game.WisdomAbility, 50))
             {
                 Game.MsgPrint("You dream of a time of health and peace...");
                 Game.PoisonTimer.ResetTimer();
@@ -99,18 +98,18 @@ internal class GreatOneRace : Race
                 Game.BleedingTimer.ResetTimer();
                 Game.BlindnessTimer.ResetTimer();
                 Game.FearTimer.ResetTimer();
-                Game.TryRestoringAbilityScore(AbilityEnum.Strength);
-                Game.TryRestoringAbilityScore(AbilityEnum.Intelligence);
-                Game.TryRestoringAbilityScore(AbilityEnum.Wisdom);
-                Game.TryRestoringAbilityScore(AbilityEnum.Dexterity);
-                Game.TryRestoringAbilityScore(AbilityEnum.Constitution);
-                Game.TryRestoringAbilityScore(AbilityEnum.Charisma);
+                Game.TryRestoringAbilityScore(Game.StrengthAbility);
+                Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
+                Game.TryRestoringAbilityScore(Game.WisdomAbility);
+                Game.TryRestoringAbilityScore(Game.DexterityAbility);
+                Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
+                Game.TryRestoringAbilityScore(Game.CharismaAbility);
                 Game.RunScript(nameof(RestoreLevelScript));
             }
         }
         else if (dreamPower == 2)
         {
-            if (Game.CheckIfRacialPowerWorks(30, 50, AbilityEnum.Intelligence, 50))
+            if (Game.CheckIfRacialPowerWorks(30, 50, Game.IntelligenceAbility, 50))
             {
                 Game.MsgPrint("You start walking around. Your surroundings change.");
                 Game.DoCmdSaveGame(true);

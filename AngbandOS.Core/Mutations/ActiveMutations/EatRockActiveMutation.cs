@@ -13,7 +13,7 @@ internal class EatRockActiveMutation : Mutation
     private EatRockActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.CheckIfRacialPowerWorks(8, 12, AbilityEnum.Constitution, 18))
+        if (!Game.CheckIfRacialPowerWorks(8, 12, Game.ConstitutionAbility, 18))
         {
             return;
         }

@@ -25,10 +25,10 @@ internal class EditStatsScript : Script, IScript, ICastSpellScript
     {
         string tmpVal;
         int tmpInt;
-        for (int i = 0; i < 6; i++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            string ppp = $"{Constants.StatNames[i]} (3-118): ";
-            if (!Game.GetString(ppp, out tmpVal, $"{Game.AbilityScores[i].InnateMax}", 3))
+            string ppp = $"{ability.Name} (3-118): ";
+            if (!Game.GetString(ppp, out tmpVal, $"{ability.InnateMax}", 3))
             {
                 return;
             }
@@ -44,8 +44,8 @@ internal class EditStatsScript : Script, IScript, ICastSpellScript
             {
                 tmpInt = 3;
             }
-            Game.AbilityScores[i].Innate = tmpInt;
-            Game.AbilityScores[i].InnateMax = tmpInt;
+            ability.Innate = tmpInt;
+            ability.InnateMax = tmpInt;
         }
         if (!Game.GetString("Gold: ", out tmpVal, $"{Game.Gold.IntValue}", 9))
         {

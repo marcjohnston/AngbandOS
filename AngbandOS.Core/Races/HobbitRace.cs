@@ -12,7 +12,6 @@ internal class HobbitRace : Race
 {
     private HobbitRace(Game game) : base(game) { }
     public override string Title => "Hobbit";
-    public override int[] AbilityBonus => new int[] { -2, 2, 1, 3, 2, 1 };
     public override int BaseDisarmBonus => 15;
     public override int BaseDeviceBonus => 18;
     public override int BaseSaveBonus => 18;
@@ -60,7 +59,7 @@ internal class HobbitRace : Race
     public override void UseRacialPower()
     {
         // Hobbits can cook food
-        if (Game.CheckIfRacialPowerWorks(15, 10, AbilityEnum.Intelligence, 10))
+        if (Game.CheckIfRacialPowerWorks(15, 10, Game.IntelligenceAbility, 10))
         {
             ItemFactory foodItemFactory = Game.SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
             Item item = foodItemFactory.GenerateItem();

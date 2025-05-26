@@ -15,9 +15,9 @@ internal class AugmAblReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'Receive this modest gift from me!'");
-        for (int dummy = 0; dummy < 6; dummy++)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            Game.TryIncreasingAbilityScore(dummy);
+            Game.TryIncreasingAbilityScore(ability);
         }
     }
 }

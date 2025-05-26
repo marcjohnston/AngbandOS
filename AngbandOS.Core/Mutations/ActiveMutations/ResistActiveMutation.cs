@@ -13,7 +13,7 @@ internal class ResistActiveMutation : Mutation
     private ResistActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(10, 12, AbilityEnum.Constitution, 12))
+        if (Game.CheckIfRacialPowerWorks(10, 12, Game.ConstitutionAbility, 12))
         {
             int num = Game.ExperienceLevel.IntValue / 10;
             int dur = base.Game.DieRoll(20) + 20;

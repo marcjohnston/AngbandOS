@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RaceAbilities;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -58,24 +60,24 @@ internal abstract class BirthStage : IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Height       ", 4, 32);
         Game.Screen.Print(ColorEnum.Blue, "Weight       ", 5, 32);
         Game.Screen.Print(ColorEnum.Blue, "Social Class ", 6, 32);
-        Game.Screen.Print(ColorEnum.Blue, "STR:", 2 + AbilityEnum.Strength, 61);
-        Game.Screen.Print(ColorEnum.Blue, "INT:", 2 + AbilityEnum.Intelligence, 61);
-        Game.Screen.Print(ColorEnum.Blue, "WIS:", 2 + AbilityEnum.Wisdom, 61);
-        Game.Screen.Print(ColorEnum.Blue, "DEX:", 2 + AbilityEnum.Dexterity, 61);
-        Game.Screen.Print(ColorEnum.Blue, "CON:", 2 + AbilityEnum.Constitution, 61);
-        Game.Screen.Print(ColorEnum.Blue, "CHA:", 2 + AbilityEnum.Charisma, 61);
-        Game.Screen.Print(ColorEnum.Blue, "STR:", 14 + AbilityEnum.Strength, 1);
-        Game.Screen.Print(ColorEnum.Blue, "INT:", 14 + AbilityEnum.Intelligence, 1);
-        Game.Screen.Print(ColorEnum.Blue, "WIS:", 14 + AbilityEnum.Wisdom, 1);
-        Game.Screen.Print(ColorEnum.Blue, "DEX:", 14 + AbilityEnum.Dexterity, 1);
-        Game.Screen.Print(ColorEnum.Blue, "CON:", 14 + AbilityEnum.Constitution, 1);
-        Game.Screen.Print(ColorEnum.Blue, "CHA:", 14 + AbilityEnum.Charisma, 1);
-        Game.Screen.Print(ColorEnum.Blue, "STR:", 22 + AbilityEnum.Strength, 1);
-        Game.Screen.Print(ColorEnum.Blue, "INT:", 22 + AbilityEnum.Intelligence, 1);
-        Game.Screen.Print(ColorEnum.Blue, "WIS:", 22 + AbilityEnum.Wisdom, 1);
-        Game.Screen.Print(ColorEnum.Blue, "DEX:", 22 + AbilityEnum.Dexterity, 1);
-        Game.Screen.Print(ColorEnum.Blue, "CON:", 22 + AbilityEnum.Constitution, 1);
-        Game.Screen.Print(ColorEnum.Blue, "CHA:", 22 + AbilityEnum.Charisma, 1);
+        Game.Screen.Print(ColorEnum.Blue, "STR:", 2, 61);
+        Game.Screen.Print(ColorEnum.Blue, "INT:", 3, 61);
+        Game.Screen.Print(ColorEnum.Blue, "WIS:", 4, 61);
+        Game.Screen.Print(ColorEnum.Blue, "DEX:", 5, 61);
+        Game.Screen.Print(ColorEnum.Blue, "CON:", 6, 61);
+        Game.Screen.Print(ColorEnum.Blue, "CHA:", 7, 61);
+        Game.Screen.Print(ColorEnum.Blue, "STR:", 14, 1);
+        Game.Screen.Print(ColorEnum.Blue, "INT:", 15, 1);
+        Game.Screen.Print(ColorEnum.Blue, "WIS:", 16, 1);
+        Game.Screen.Print(ColorEnum.Blue, "DEX:", 17, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CON:", 18, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CHA:", 19, 1);
+        Game.Screen.Print(ColorEnum.Blue, "STR:", 22, 1);
+        Game.Screen.Print(ColorEnum.Blue, "INT:", 23, 1);
+        Game.Screen.Print(ColorEnum.Blue, "WIS:", 24, 1);
+        Game.Screen.Print(ColorEnum.Blue, "DEX:", 25, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CON:", 26, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CHA:", 27, 1);
         Game.Screen.Print(ColorEnum.Purple, "Initial", 21, 6);
         Game.Screen.Print(ColorEnum.Brown, "Race Class Mods", 21, 14);
         Game.Screen.Print(ColorEnum.Green, "Actual", 21, 30);
@@ -88,16 +90,29 @@ internal abstract class BirthStage : IGetKey
         Game.Screen.Print(ColorEnum.Grey, "..............", 26, 45);
         Game.Screen.Print(ColorEnum.Grey, "..............", 27, 45);
         Game.Screen.Print(ColorEnum.Blue, "Modifications", 28, 45);
-        for (int i = 0; i < 6; i++)
+        if (Game.BaseCharacterClass is not null)
         {
-            string characterClassAbilityBonus = Game.BaseCharacterClass?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
-            Game.Screen.Print(ColorEnum.Brown, characterClassAbilityBonus, 22 + i, 20);
+            int i = 0;
+            foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+            {
+                string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+                CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
+                string characterClassAbilityBonus = characterClassAbility.Bonus.ToString("+0;-0;+0").PadLeft(3) ?? "   ";
+                Game.Screen.Print(ColorEnum.Brown, characterClassAbilityBonus, 22 + i, 20);
+                i++;
+            }
         }
-        for (int i = 0; i < 6; i++)
+        if (Game.Race is not null)
         {
-            string raceAbilityBonus = Game.Race?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
-            Game.Screen.Print(ColorEnum.Brown, raceAbilityBonus, 22 + i, 14);
-        }
+            int i = 0;
+            foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+            {
+                RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
+                string raceAbilityBonus = raceAbility.Bonus.ToString("+0;-0;+0").PadLeft(3) ?? "   ";
+                Game.Screen.Print(ColorEnum.Brown, raceAbilityBonus, 22 + i, 14);
+                i++;
+            }
+         }
     }
 
 }

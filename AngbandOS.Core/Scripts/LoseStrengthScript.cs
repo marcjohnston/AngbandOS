@@ -19,6 +19,6 @@ internal class LoseStrengthScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Weakness tries to reduce your strength
-        return Game.TryDecreasingAbilityScore(AbilityEnum.Strength);
+        return Game.TryDecreasingAbilityScore(Game.StrengthAbility);
     }
 }

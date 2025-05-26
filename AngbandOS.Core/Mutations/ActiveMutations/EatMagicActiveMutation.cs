@@ -18,7 +18,7 @@ internal class EatMagicActiveMutation : Mutation
             Game.MsgPrint("You have nothing appropriate to eat.");
             return;
         }
-        if (!Game.CheckIfRacialPowerWorks(17, 1, AbilityEnum.Wisdom, 15))
+        if (!Game.CheckIfRacialPowerWorks(17, 1, Game.WisdomAbility, 15))
         {
             return;
         }

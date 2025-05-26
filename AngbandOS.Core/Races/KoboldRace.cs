@@ -12,7 +12,6 @@ internal class KoboldRace : Race
 {
     private KoboldRace(Game game) : base(game) { }
     public override string Title => "Kobold";
-    public override int[] AbilityBonus => new int[] { 1, -1, 0, 1, 0, -4 };
     public override int BaseDisarmBonus => -2;
     public override int BaseDeviceBonus => -3;
     public override int BaseSaveBonus => -2;
@@ -58,7 +57,7 @@ internal class KoboldRace : Race
     public override void UseRacialPower()
     {
         // Kobolds can throw poison darts
-        if (Game.CheckIfRacialPowerWorks(12, 8, AbilityEnum.Dexterity, 14))
+        if (Game.CheckIfRacialPowerWorks(12, 8, Game.DexterityAbility, 14))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

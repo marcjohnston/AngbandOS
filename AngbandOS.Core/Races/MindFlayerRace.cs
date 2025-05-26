@@ -12,7 +12,6 @@ internal class MindFlayerRace : Race
 {
     private MindFlayerRace(Game game) : base(game) { }
     public override string Title => "Mind Flayer";
-    public override int[] AbilityBonus => new int[] { -3, 4, 4, 0, -2, -5 };
     public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 25;
     public override int BaseSaveBonus => 15;
@@ -76,7 +75,7 @@ internal class MindFlayerRace : Race
     public override void UseRacialPower()
     {
         // Mind Flayers can shoot psychic bolts
-        if (Game.CheckIfRacialPowerWorks(15, 12, AbilityEnum.Intelligence, 14))
+        if (Game.CheckIfRacialPowerWorks(15, 12, Game.IntelligenceAbility, 14))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

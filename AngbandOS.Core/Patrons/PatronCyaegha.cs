@@ -13,7 +13,7 @@ internal class PatronCyaegha : Patron
     private PatronCyaegha(Game game) : base(game) { }
     public override string ShortName => "Cyaegha";
     public override string LongName => "Cyaegha, the Destroying Eye";
-    public override int PreferredAbility => AbilityEnum.Strength;
+    public override Ability? PreferredAbility => Game.StrengthAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(WrathReward)),

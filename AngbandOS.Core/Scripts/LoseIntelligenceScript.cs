@@ -19,6 +19,6 @@ internal class LoseIntelligenceScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Stupidity tries to reduce your intelligence
-        return Game.TryDecreasingAbilityScore(AbilityEnum.Intelligence);
+        return Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
     }
 }

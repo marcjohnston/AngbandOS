@@ -13,7 +13,7 @@ internal class MidasTchActiveMutation : Mutation
     private MidasTchActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (Game.CheckIfRacialPowerWorks(10, 5, AbilityEnum.Intelligence, 12))
+        if (Game.CheckIfRacialPowerWorks(10, 5, Game.IntelligenceAbility, 12))
         {
             Game.RunScript(nameof(AlchemyScript));
         }

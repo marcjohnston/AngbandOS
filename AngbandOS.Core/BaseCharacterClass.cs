@@ -126,7 +126,7 @@ internal abstract class BaseCharacterClass : IGetKey
             {
                 bool perm = Game.RandomLessThan(100) < 25;
                 Game.MsgPrint("You have damaged your health!");
-                Game.DecreaseAbilityScore(AbilityEnum.Constitution, 15 + Game.DieRoll(10), perm);
+                Game.DecreaseAbilityScore(Game.ConstitutionAbility, 15 + Game.DieRoll(10), perm);
             }
         }
     }
@@ -207,7 +207,7 @@ internal abstract class BaseCharacterClass : IGetKey
             {
                 bool perm = Game.RandomLessThan(100) < 25;
                 Game.MsgPrint("You have damaged your mind!");
-                Game.DecreaseAbilityScore(AbilityEnum.Wisdom, 15 + Game.DieRoll(10), perm);
+                Game.DecreaseAbilityScore(Game.WisdomAbility, 15 + Game.DieRoll(10), perm);
             }
         }
     }
@@ -376,8 +376,6 @@ internal abstract class BaseCharacterClass : IGetKey
     /// </summary>
     public virtual bool OutfitsWithScrollsOfLight => false;
 
-    public abstract int[] AbilityBonus { get; }
-
     public abstract int BaseDeviceBonus { get; }
 
     public abstract int BaseDisarmBonus { get; }
@@ -458,7 +456,7 @@ internal abstract class BaseCharacterClass : IGetKey
         return realmCharacterClass.Deity;
     }
 
-    public abstract int PrimeStat { get; }
+    public abstract Ability PrimeStat { get; }
 
     public abstract string[] Info { get; }
 
@@ -468,7 +466,7 @@ internal abstract class BaseCharacterClass : IGetKey
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;
 
-    public virtual int SpellStat => AbilityEnum.Strength;
+    public virtual Ability SpellStat => Game.StrengthAbility;
     public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
     public virtual int MaximumWeight => 35;
     public virtual int AttackSpeedMultiplier => 3;

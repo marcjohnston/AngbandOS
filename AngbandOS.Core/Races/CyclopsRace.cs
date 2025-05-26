@@ -12,7 +12,6 @@ internal class CyclopsRace : Race
 {
     private CyclopsRace(Game game) : base(game) { }
     public override string Title => "Cyclops";
-    public override int[] AbilityBonus => new int[] { 4, -3, -3, -3, 4, -6 };
     public override int BaseDisarmBonus => -4;
     public override int BaseDeviceBonus => -5;
     public override int BaseSaveBonus => -5;
@@ -60,7 +59,7 @@ internal class CyclopsRace : Race
     public override void UseRacialPower()
     {
         // Cyclopes can throw boulders
-        if (Game.CheckIfRacialPowerWorks(20, 15, AbilityEnum.Strength, 12))
+        if (Game.CheckIfRacialPowerWorks(20, 15, Game.StrengthAbility, 12))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {

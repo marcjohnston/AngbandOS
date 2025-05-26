@@ -37,9 +37,9 @@ internal class PissOffReward : Reward
                 break;
 
             default:
-                for (int dummy = 0; dummy < 6; dummy++)
+                foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
                 {
-                    Game.DecreaseAbilityScore(dummy, 10 + Game.DieRoll(15), true);
+                    Game.DecreaseAbilityScore(ability, 10 + Game.DieRoll(15), true);
                 }
                 break;
         }

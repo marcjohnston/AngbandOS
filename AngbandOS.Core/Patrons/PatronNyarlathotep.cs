@@ -13,7 +13,7 @@ internal class PatronNyarlathotep : Patron
     private PatronNyarlathotep(Game game) : base(game) { }
     public override string ShortName => "Nyarlathotep";
     public override string LongName => "Nyarlathotep, the Crawling Chaos";
-    public override int PreferredAbility => AbilityEnum.Strength;
+    public override Ability? PreferredAbility => Game.StrengthAbility;
     protected override Reward[] Rewards => new Reward[]
     {
         Game.SingletonRepository.Get<Reward>(nameof(DreadCurseReward)),
