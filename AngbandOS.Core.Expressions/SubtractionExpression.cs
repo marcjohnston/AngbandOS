@@ -17,11 +17,11 @@ public class SubtractionExpression : InfixExpression
         {
             if (subtrahend is DecimalExpression subtrahendDecimalExpression)
             {
-                return new DecimalExpression(minuendDecimalExpression.Value + subtrahendDecimalExpression.Value);
+                return new DecimalExpression(minuendDecimalExpression.Value - subtrahendDecimalExpression.Value);
             }
             else if (subtrahend is IntegerExpression subtrahendIntegerExpression)
             {
-                return new DecimalExpression(minuendDecimalExpression.Value + subtrahendIntegerExpression.Value);
+                return new DecimalExpression(minuendDecimalExpression.Value - subtrahendIntegerExpression.Value);
             }
 
             throw new Exception($"Subtrahend does not support {subtrahend.GetType().Name}");
@@ -30,11 +30,11 @@ public class SubtractionExpression : InfixExpression
         {
             if (subtrahend is DecimalExpression subtrahendDecimalExpression)
             {
-                return new DecimalExpression(minuendIntegerExpression.Value + subtrahendDecimalExpression.Value);
+                return new DecimalExpression(minuendIntegerExpression.Value - subtrahendDecimalExpression.Value);
             }
             else if (subtrahend is IntegerExpression subtrahendIntegerExpression)
             {
-                return new IntegerExpression(minuendIntegerExpression.Value + subtrahendIntegerExpression.Value);
+                return new IntegerExpression(minuendIntegerExpression.Value - subtrahendIntegerExpression.Value);
             }
 
             throw new Exception($"Subtrahend does not support {subtrahend.GetType().Name}");

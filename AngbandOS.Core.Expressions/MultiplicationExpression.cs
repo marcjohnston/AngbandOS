@@ -16,11 +16,11 @@ public class MultiplicationExpression : InfixExpression
         {
             if (factor2 is DecimalExpression addend2DecimalExpression)
             {
-                return new DecimalExpression(factor1DecimalExpression.Value + addend2DecimalExpression.Value);
+                return new DecimalExpression(factor1DecimalExpression.Value * addend2DecimalExpression.Value);
             }
             else if (factor2 is IntegerExpression factor2IntegerExpression)
             {
-                return new DecimalExpression(factor1DecimalExpression.Value + factor2IntegerExpression.Value);
+                return new DecimalExpression(factor1DecimalExpression.Value * factor2IntegerExpression.Value);
             }
 
             throw new Exception($"Factor2 does not support {factor2.GetType().Name}");
@@ -29,11 +29,11 @@ public class MultiplicationExpression : InfixExpression
         {
             if (factor2 is DecimalExpression factor2DecimalExpression)
             {
-                return new DecimalExpression(factor1IntegerExpression.Value + factor2DecimalExpression.Value);
+                return new DecimalExpression(factor1IntegerExpression.Value * factor2DecimalExpression.Value);
             }
             else if (factor2 is IntegerExpression factor2IntegerExpression)
             {
-                return new IntegerExpression(factor1IntegerExpression.Value + factor2IntegerExpression.Value);
+                return new IntegerExpression(factor1IntegerExpression.Value * factor2IntegerExpression.Value);
             }
 
             throw new Exception($"Factor2 does not support {factor2.GetType().Name}");
