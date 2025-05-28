@@ -1,4 +1,6 @@
-﻿namespace AngbandOS.Core.Expressions;
+﻿using System.Windows.Markup;
+
+namespace AngbandOS.Core.Expressions;
 
 [Serializable]
 public class ParenthesisFactorParser : FactorParser
@@ -6,16 +8,29 @@ public class ParenthesisFactorParser : FactorParser
 
     public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)
     {
-        if (text[characterIndex] == '(')
+        int currentCharacterIndex = characterIndex;
+        bool? sign = null;
+        if (text[currentCharacterIndex] == '-')
         {
-            characterIndex++;
-            Expression parenthesisExpression = parser.ParseExpression(text, ref characterIndex);
-            if (text[characterIndex] != ')')
+            sign = false;
+            currentCharacterIndex++;
+        }
+        else if (text[currentCharacterIndex] == '+')
+        {
+            sign = true;
+            currentCharacterIndex++;
+        }
+        if (text[currentCharacterIndex] == '(')
+        {
+            currentCharacterIndex++;
+            Expression parenthesisExpression = parser.ParseExpression(text, ref currentCharacterIndex);
+            if (text[currentCharacterIndex] != ')')
             {
                 throw new Exception($"Missing closing parenthesis in expression \"{text}\" at position {characterIndex}.");
             }
-            characterIndex++;
-            return parenthesisExpression;
+            currentCharacterIndex++;
+            characterIndex = currentCharacterIndex;
+            return new ParenthesisExpression(parenthesisExpression, sign);
         }
         return null;
     }
