@@ -79,7 +79,7 @@ public class GameConfiguration
     /// <entity-noun>WandReadableFlavor</entity-noun>
     public virtual ItemFlavorGameConfiguration[]? WandReadableFlavors { get; set; } = null;
 
-    public virtual ClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
+    public virtual CharacterClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
 
     public virtual WizardCommandGameConfiguration[]? WizardCommands { get; set; } = null;
 
