@@ -76,7 +76,7 @@ internal abstract class Spell : IGetKey
     /// </summary>
     public bool Tried { get; private set; } = false;
 
-    public ClassSpell ClassSpell { get; private set; }
+    public CharacterClassSpell ClassSpell { get; private set; }
 
     /// <summary>
     /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when successfully casted.  This
@@ -179,7 +179,7 @@ internal abstract class Spell : IGetKey
     public void Initialize(ItemFactory itemFactory, int spellIndex)
     {
         BaseCharacterClass characterClass = Game.BaseCharacterClass;
-        ClassSpell = Game.SingletonRepository.Get<ClassSpell>(ClassSpell.GetCompositeKey(characterClass, this));
+        ClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(characterClass, this));
         SpellIndex = spellIndex;
         SpellBookItemFactory = itemFactory;
     }

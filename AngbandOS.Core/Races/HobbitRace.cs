@@ -34,6 +34,7 @@ internal class HobbitRace : Race
     public override int Chart => 10;
 
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "create food        (racial, unusable until level 15)" : "create food        (racial, cost 10, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -54,17 +55,5 @@ internal class HobbitRace : Race
     public override void CalcBonuses()
     {
         Game.HasSustainDexterity = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Hobbits can cook food
-        if (Game.CheckIfRacialPowerWorks(15, 10, Game.IntelligenceAbility, 10))
-        {
-            ItemFactory foodItemFactory = Game.SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
-            Item item = foodItemFactory.GenerateItem();
-            Game.DropNear(item, null, Game.MapY.IntValue, Game.MapX.IntValue);
-            Game.MsgPrint("You cook some food.");
-        }
     }
 }

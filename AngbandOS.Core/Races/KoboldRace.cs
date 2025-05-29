@@ -34,6 +34,7 @@ internal class KoboldRace : Race
     public override int Chart => 82;
 
     public override string RacialPowersDescription(int lvl) => lvl < 12 ? "poison dart        (racial, unusable until level 12)" : "poison dart        (racial, cost 8, dam lvl, DEX based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -52,18 +53,5 @@ internal class KoboldRace : Race
     public override void CalcBonuses()
     {
         Game.HasPoisonResistance = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Kobolds can throw poison darts
-        if (Game.CheckIfRacialPowerWorks(12, 8, Game.DexterityAbility, 14))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint("You throw a dart of poison.");
-                Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile)), direction, Game.ExperienceLevel.IntValue);
-            }
-        }
     }
 }

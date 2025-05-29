@@ -1237,6 +1237,11 @@ internal class Game
         return expression.Compute<IntegerExpression>(DecimalToIntegerExpressionTypeConverter);
     }
 
+//    private static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
+    private static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
+ //   public static string GetCompositeKey<T1, T2>(T1? t1, T2? t2, string? t3) where T1 : IGetKey where T2 : IGetKey => GetCompositeKey(t1?.GetKey, t2?.GetKey, t3);
+    public static string GetCompositeKey(string? t1, string? t2, string? t3) => $"{DelimitIf(t1, "-", DelimitIf(t2, "-", t3))}";
+
     /// <summary>
     /// Returns an <see cref="DecimalExpression"/> from an expression computation.  A type-conversion from a integer result to an decimal result is performed as needed.  If the result is not
     /// a valid <see cref="DecimalExpression"/> an exception is thrown.

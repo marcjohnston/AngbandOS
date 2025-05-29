@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Configuration;
-using System.Drawing;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -19,11 +17,11 @@ internal abstract class ConditionalWidget : Widget
     /// <summary>
     /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
     /// to be enabled.  This property is bound from the EnabledNames property during the binding phase.  The conditions are a boolean expression in the form of a product of sums (POS)
-    /// that determine if the widget is enabled when the result matches the <see cref="valueConditionalMustBe"/> parameter.  The <see cref="term"/> parameter is used to determine
-    /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
+    /// that determine if the widget is enabled when the result matches the <see cref="valueConditionalMustBe"/> parameter.  The <see cref="productOfSumsTerm"/> parameter is used to determine
+    /// the conditions that make up a term using a Product-Of-Sums formula.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected (IBoolValue conditional, bool valueConditionalMustBe, int term)[] Enabled { get; private set; }
+    protected (IBoolValue conditional, bool valueConditionalMustBe, int productOfSumsTerm)[] Enabled { get; private set; }
 
     /// <summary>
     /// Returns an array of the names of the conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for 
@@ -61,10 +59,10 @@ internal abstract class ConditionalWidget : Widget
     public override void Bind()
     {
         List<(IBoolValue, bool, int)> conditionalList = new();
-        foreach ((string enabledName, bool isTrue, int term) in EnabledNames)
+        foreach ((string enabledName, bool isTrue, int productOfSumsTerm) in EnabledNames)
         {
             IBoolValue boolValue = Game.SingletonRepository.Get<IBoolValue>(enabledName);
-            conditionalList.Add((boolValue, isTrue, term));
+            conditionalList.Add((boolValue, isTrue, productOfSumsTerm));
         }
         Enabled = conditionalList.ToArray();
         TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
@@ -80,17 +78,17 @@ internal abstract class ConditionalWidget : Widget
         {
             // Check to see if the widget is enabled.  Evaluate the product of sums.
             Dictionary<int, bool> terms = new Dictionary<int, bool>();
-            foreach ((IBoolValue condition, bool isTrue, int term) in Enabled)
+            foreach ((IBoolValue condition, bool isTrue, int productOfSumsTerm) in Enabled)
             {
-                if (!terms.ContainsKey(term))
+                if (!terms.ContainsKey(productOfSumsTerm))
                 {
                     bool conditionIsTrue = condition.BoolValue;
-                    terms.Add(term, conditionIsTrue);
+                    terms.Add(productOfSumsTerm, conditionIsTrue);
                 }
-                else if (terms[term] == false) // Short circuit evaluation
+                else if (terms[productOfSumsTerm] == false) // Short circuit evaluation
                 {
                     bool conditionIsTrue = condition.BoolValue;
-                    terms[term] |= conditionIsTrue;
+                    terms[productOfSumsTerm] |= conditionIsTrue;
                 }
             }
             if (terms.Any(termAndResult => !termAndResult.Value))

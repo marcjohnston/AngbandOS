@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RacialPowers;
+
 namespace AngbandOS.Core.Races;
 
 [Serializable]
@@ -34,6 +36,7 @@ internal class DarkElfRace : Race
     public override int Chart => 69;
 
     public override string RacialPowersDescription(int lvl) => lvl < 2 ? "magic missile      (racial, unusable until level 2)" : "magic missile      (racial, cost 2, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -55,19 +58,6 @@ internal class DarkElfRace : Race
         if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasSeeInvisibility = true;
-        }
-    }
-
-    public override void UseRacialPower()
-    {
-        // Dark elves can cast magic missile
-        if (Game.CheckIfRacialPowerWorks(2, 2, Game.IntelligenceAbility, 9))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint("You cast a magic missile.");
-                Game.FireBoltOrBeam(10, Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 4));
-            }
         }
     }
 }

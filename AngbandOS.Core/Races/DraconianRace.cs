@@ -34,6 +34,7 @@ internal class DraconianRace : Race
     public override int Chart => 89;
 
     public override string RacialPowersDescription(int lvl) => "breath weapon      (racial, cost lvl, dam 2*lvl, CON based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(DraconianRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -87,140 +88,6 @@ internal class DraconianRace : Race
         if (Game.ExperienceLevel.IntValue > 34)
         {
             Game.HasPoisonResistance = true;
-        }
-    }
-
-    public override void UseRacialPower()
-    {
-        // Draconians can breathe an element based on their class and level
-        Projectile projectile;
-        string projectileDescription;
-
-        // Default to being randomly fire (66% chance) or cold (33% chance)
-        if (Game.DieRoll(3) == 1)
-        {
-            projectile = Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
-            projectileDescription = "cold";
-        }
-        else
-        {
-            projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
-            projectileDescription = "fire";
-        }
-
-        // Chance of replacing the default fire/cold element with a special one
-        if (Game.DieRoll(100) < Game.ExperienceLevel.IntValue)
-        {
-            switch (Game.BaseCharacterClass.ID)
-            {
-                case CharacterClassEnum.Warrior:
-                case CharacterClassEnum.Ranger:
-                case CharacterClassEnum.Druid:
-                case CharacterClassEnum.ChosenOne:
-                    if (Game.DieRoll(3) == 1)
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile));
-                        projectileDescription = "the elements";
-                    }
-                    else
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile));
-                        projectileDescription = "shards";
-                    }
-                    break;
-
-                case CharacterClassEnum.Mage:
-                case CharacterClassEnum.WarriorMage:
-                case CharacterClassEnum.HighMage:
-                case CharacterClassEnum.Channeler:
-                    if (Game.DieRoll(3) == 1)
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
-                        projectileDescription = "mana";
-                    }
-                    else
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile));
-                        projectileDescription = "disenchantment";
-                    }
-                    break;
-
-                case CharacterClassEnum.Fanatic:
-                case CharacterClassEnum.Cultist:
-                    if (Game.DieRoll(3) != 1)
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
-                        projectileDescription = "confusion";
-                    }
-                    else
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile));
-                        projectileDescription = "chaos";
-                    }
-                    break;
-
-                case CharacterClassEnum.Monk:
-                    if (Game.DieRoll(3) != 1)
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
-                        projectileDescription = "confusion";
-                    }
-                    else
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));
-                        projectileDescription = "sound";
-                    }
-                    break;
-
-                case CharacterClassEnum.Mindcrafter:
-                case CharacterClassEnum.Mystic:
-                    if (Game.DieRoll(3) != 1)
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
-                        projectileDescription = "confusion";
-                    }
-                    else
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
-                        projectileDescription = "mental energy";
-                    }
-                    break;
-
-                case CharacterClassEnum.Priest:
-                case CharacterClassEnum.Paladin:
-                    if (Game.DieRoll(3) == 1)
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
-                        projectileDescription = "hellfire";
-                    }
-                    else
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile));
-                        projectileDescription = "holy fire";
-                    }
-                    break;
-
-                case CharacterClassEnum.Rogue:
-                    if (Game.DieRoll(3) == 1)
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DarknessProjectile));
-                        projectileDescription = "darkness";
-                    }
-                    else
-                    {
-                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
-                        projectileDescription = "poison";
-                    }
-                    break;
-            }
-        }
-        if (Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, Game.ConstitutionAbility, 12))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint($"You breathe {projectileDescription}.");
-                Game.FireBall(projectile, direction, Game.ExperienceLevel.IntValue * 2, -(Game.ExperienceLevel.IntValue / 15) + 1);
-            }
         }
     }
 }

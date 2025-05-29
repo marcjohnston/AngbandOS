@@ -34,6 +34,7 @@ internal class TchoTchoRace : Race
     public override int Chart => 138;
 
     public override string RacialPowersDescription(int lvl) => lvl < 8 ? "berserk            (racial, unusable until level 8)" : "berserk            (racial, cost 10, WIS based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -52,16 +53,6 @@ internal class TchoTchoRace : Race
     public override void CalcBonuses()
     {
         Game.HasFearResistance = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Tcho-Tcho can create The Yellow Sign
-        if (Game.CheckIfRacialPowerWorks(25, 35, Game.IntelligenceAbility, 15))
-        {
-            Game.MsgPrint("You carefully draw The Yellow Sign...");
-            Game.RunScript(nameof(YellowSignScript));
-        }
     }
 
     public override ItemFactory OutfitItemClass(ItemFactory itemClass)

@@ -34,6 +34,7 @@ internal class MindFlayerRace : Race
     public override int Chart => 92;
 
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "mind blast         (racial, unusable until level 15)" : "mind blast         (racial, cost 12, dam lvl, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -69,19 +70,6 @@ internal class MindFlayerRace : Race
         if (Game.ExperienceLevel.IntValue > 29)
         {
             Game.HasTelepathy = true;
-        }
-    }
-
-    public override void UseRacialPower()
-    {
-        // Mind Flayers can shoot psychic bolts
-        if (Game.CheckIfRacialPowerWorks(15, 12, Game.IntelligenceAbility, 14))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint("You concentrate and your eyes glow red...");
-                Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), direction, Game.ExperienceLevel.IntValue);
-            }
         }
     }
     public override int ChanceOfSanityBlastImmunity(int level) => 100;

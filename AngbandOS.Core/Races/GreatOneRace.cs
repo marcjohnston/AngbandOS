@@ -34,6 +34,7 @@ internal class GreatOneRace : Race
     public override int Chart => 67;
 
     public override string RacialPowersDescription(int lvl) => "dream powers    (unusable until level 30/40)";
+    protected override string? RacialPowerScriptBindingKey => nameof(GreatOneRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -63,59 +64,5 @@ internal class GreatOneRace : Race
     {
         Game.HasSustainConstitution = true;
         Game.HasRegeneration = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Great ones can heal themselves or swap to a new level
-        int dreamPower;
-        while (true)
-        {
-            if (!Game.GetCom("Use Dream [T]ravel or [D]reaming? ", out char ch))
-            {
-                dreamPower = 0;
-                break;
-            }
-            if (ch == 'D' || ch == 'd')
-            {
-                dreamPower = 1;
-                break;
-            }
-            if (ch == 'T' || ch == 't')
-            {
-                dreamPower = 2;
-                break;
-            }
-        }
-        if (dreamPower == 1)
-        {
-            if (Game.CheckIfRacialPowerWorks(40, 75, Game.WisdomAbility, 50))
-            {
-                Game.MsgPrint("You dream of a time of health and peace...");
-                Game.PoisonTimer.ResetTimer();
-                Game.HallucinationsTimer.ResetTimer();
-                Game.StunTimer.ResetTimer();
-                Game.BleedingTimer.ResetTimer();
-                Game.BlindnessTimer.ResetTimer();
-                Game.FearTimer.ResetTimer();
-                Game.TryRestoringAbilityScore(Game.StrengthAbility);
-                Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
-                Game.TryRestoringAbilityScore(Game.WisdomAbility);
-                Game.TryRestoringAbilityScore(Game.DexterityAbility);
-                Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
-                Game.TryRestoringAbilityScore(Game.CharismaAbility);
-                Game.RunScript(nameof(RestoreLevelScript));
-            }
-        }
-        else if (dreamPower == 2)
-        {
-            if (Game.CheckIfRacialPowerWorks(30, 50, Game.IntelligenceAbility, 50))
-            {
-                Game.MsgPrint("You start walking around. Your surroundings change.");
-                Game.DoCmdSaveGame(true);
-                Game.NewLevelFlag = true;
-                Game.CameFrom = LevelStartEnum.StartRandom;
-            }
-        }
     }
 }

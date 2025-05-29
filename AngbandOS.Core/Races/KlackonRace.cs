@@ -34,6 +34,7 @@ internal class KlackonRace : Race
     public override int Chart => 84;
 
     public override string RacialPowersDescription(int lvl) => lvl < 9 ? "spit acid          (racial, unusable until level 9)" : "spit acid          (racial, cost 9, dam lvl, DEX based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -58,24 +59,5 @@ internal class KlackonRace : Race
         Game.HasConfusionResistance = true;
         Game.HasAcidResistance = true;
         Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
-    }
-    public override void UseRacialPower()
-    {
-        // Klackons can spit acid
-        if (Game.CheckIfRacialPowerWorks(9, 9, Game.DexterityAbility, 14))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint("You spit acid.");
-                if (Game.ExperienceLevel.IntValue < 25)
-                {
-                    Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, Game.ExperienceLevel.IntValue);
-                }
-                else
-                {
-                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, Game.ExperienceLevel.IntValue, 2);
-                }
-            }
-        }
     }
 }

@@ -34,6 +34,7 @@ internal class HalfTrollRace : Race
     public override int Chart => 22;
 
     public override string RacialPowersDescription(int lvl) => lvl < 10 ? "berserk            (racial, unusable until level 10)" : "berserk            (racial, cost 12, WIS based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -63,18 +64,6 @@ internal class HalfTrollRace : Race
         {
             Game.HasRegeneration = true;
             Game.HasSlowDigestion = true;
-        }
-    }
-
-    public override void UseRacialPower()
-    {
-        // Half-trolls can go berserk, which also heals them
-        if (Game.CheckIfRacialPowerWorks(10, 12, Game.WisdomAbility, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
-        {
-            Game.MsgPrint("RAAAGH!");
-            Game.FearTimer.ResetTimer();
-            Game.SuperheroismTimer.AddTimer(10 + Game.DieRoll(Game.ExperienceLevel.IntValue));
-            Game.RestoreHealth(30);
         }
     }
 }

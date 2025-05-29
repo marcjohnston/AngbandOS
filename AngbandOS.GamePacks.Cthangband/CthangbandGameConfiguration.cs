@@ -921,6 +921,24 @@ public class CthangbandGameConfiguration : GameConfiguration
         new TurnEvilAtLos1xProjectileScript(),
         new WallToMud1d30p20ProjectileScript(),
         new WardingProjectileScript(),
+
+        new CyclopsRacialPowerProjectileScript(),
+        new DarkElfBoltRacialPowerProjectileScript(),
+        new DarkElfBeamRacialPowerProjectileScript(),
+        new DraconianRacialPowerColdBallProjectileScript(),
+        new DraconianRacialPowerFireBallProjectileScript(),
+        new DraconianRacialPowerMissileBallProjectileScript(),
+        new DraconianRacialPowerExplodeBallProjectileScript(),
+        new DraconianRacialPowerManaBallProjectileScript(),
+        new DraconianRacialPowerDisenchantmentBallProjectileScript(),
+        new DraconianRacialPowerConfusionBallProjectileScript(),
+        new DraconianRacialPowerChaosBallProjectileScript(),
+        new DraconianRacialPowerSoundBallProjectileScript(),
+        new DraconianRacialPowerPsiBallProjectileScript(),
+        new DraconianRacialPowerHellFireBallProjectileScript(),
+        new DraconianRacialPowerHolyFireBallProjectileScript(),
+        new DraconianRacialPowerDarknessBallProjectileScript(),
+        new DraconianRacialPowerPoisonBallProjectileScript(),
     };
 
     public override ArtifactBiasWeightedRandomGameConfiguration[]? ArtifactBiasWeightedRandoms => new ArtifactBiasWeightedRandomGameConfiguration[]
@@ -1717,6 +1735,16 @@ public class CthangbandGameConfiguration : GameConfiguration
         new LightOrDarkness200rm2ProjectileWeightedRandom(),
         new SoundOrExplode230rm2ProjectileWeightedRandom(),
         new WonderProjectileWeightedRandom(),
+
+        new DarkElfRacialPowerProjectileWeightedRandom(),
+        new DraconianRacialPowerDarknessOrPoisonProjectileWeightedRandom(),
+        new DraconianRacialPowerHellFireOrHolyFireProjectileWeightedRandom(),
+        new DraconianRacialPowerConfusionOrPsiProjectileWeightedRandom(),
+        new DraconianRacialPowerConfusionOrSoundProjectileWeightedRandom(),
+        new DraconianRacialPowerConfusionOrChaosProjectileWeightedRandom(),
+        new DraconianRacialPowerManaOrDisenchantmentProjectileWeightedRandom(),
+        new DraconianRacialPowerMissileOrExpolodeProjectileWeightedRandom(),
+        new DraconianRacialPowerFireOrColdProjectileWeightedRandom(),
     };
 
     public override ItemFlavorGameConfiguration[]? ItemFlavors => new ItemFlavorGameConfiguration[]
@@ -3212,7 +3240,7 @@ public class CthangbandGameConfiguration : GameConfiguration
         new UltharTown(),
     };
 
-    public override ClassSpellGameConfiguration[]? ClassSpells => new ClassSpellGameConfiguration[]
+    public override CharacterClassSpellGameConfiguration[]? ClassSpells => new CharacterClassSpellGameConfiguration[]
     {
         new CultistAlchemySorcerySpell(),
         new CultistAlterRealityChaosSpell(),

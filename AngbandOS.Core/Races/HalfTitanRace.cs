@@ -34,6 +34,7 @@ internal class HalfTitanRace : Race
     public override int Chart => 76;
 
     public override string RacialPowersDescription(int lvl) => lvl < 35 ? "probing            (racial, unusable until level 35)" : "probing            (racial, cost 20, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -53,15 +54,5 @@ internal class HalfTitanRace : Race
     public override void CalcBonuses()
     {
         Game.HasChaosResistance = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Half-Titans can probe enemies
-        if (Game.CheckIfRacialPowerWorks(35, 20, Game.IntelligenceAbility, 12))
-        {
-            Game.MsgPrint("You examine your foes...");
-            Game.Probing();
-        }
     }
 }

@@ -34,6 +34,7 @@ internal class YeekRace : Race
     public override int Chart => 78;
 
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "scare monster      (racial, unusable until level 15)" : "scare monster      (racial, cost 15, WIS based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -58,19 +59,6 @@ internal class YeekRace : Race
         if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasAcidImmunity = true;
-        }
-    }
-
-    public override void UseRacialPower()
-    {
-        // Yeeks can scream
-        if (Game.CheckIfRacialPowerWorks(15, 15, Game.WisdomAbility, 10))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint("You make a horrible scream!");
-                Game.ScareMonster(direction, Game.ExperienceLevel.IntValue);
-            }
         }
     }
 }

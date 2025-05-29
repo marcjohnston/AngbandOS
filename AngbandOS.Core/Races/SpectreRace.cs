@@ -34,6 +34,7 @@ internal class SpectreRace : Race
     public override int Chart => 118;
 
     public override string RacialPowersDescription(int lvl) => lvl < 4 ? "scare monster      (racial, unusable until level 4)" : "scare monster      (racial, cost 3, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -86,18 +87,6 @@ internal class SpectreRace : Race
 
     public override bool ProjectingNetherRestoresHealth => true;
 
-    public override void UseRacialPower()
-    {
-        // Spectres can howl
-        if (Game.CheckIfRacialPowerWorks(4, 6, Game.IntelligenceAbility, 3))
-        {
-            Game.MsgPrint("You emit an eldritch howl!");
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.ScareMonster(direction, Game.ExperienceLevel.IntValue);
-            }
-        }
-    }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;
     public override bool OutfitsWithScrollsOfLight => true;
     public override int ChanceOfSanityBlastImmunity(int level) => level + 25;

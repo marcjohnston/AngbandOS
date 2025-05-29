@@ -34,6 +34,7 @@ internal class CyclopsRace : Race
     public override int Chart => 77;
 
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "throw boulder      (racial, unusable until level 20)" : "throw boulder      (racial, cost 15, dam 3*lvl, STR based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -54,18 +55,5 @@ internal class CyclopsRace : Race
     public override void CalcBonuses()
     {
         Game.HasSoundResistance = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Cyclopes can throw boulders
-        if (Game.CheckIfRacialPowerWorks(20, 15, Game.StrengthAbility, 12))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint("You throw a huge boulder.");
-                Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 3 * Game.ExperienceLevel.IntValue / 2);
-            }
-        }
     }
 }

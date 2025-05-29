@@ -34,6 +34,7 @@ internal class HalfGiantRace : Race
     public override int Chart => 75;
 
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone to mud       (racial, unusable until level 20)" : "stone to mud       (racial, cost 10, STR based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -55,18 +56,5 @@ internal class HalfGiantRace : Race
     {
         Game.HasSustainStrength = true;
         Game.HasShardResistance = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Half-giants can bash through stone walls
-        if (Game.CheckIfRacialPowerWorks(20, 10, Game.StrengthAbility, 12))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                Game.MsgPrint("You bash at a stone wall.");
-                Game.RunIdentifiedScriptDirection(nameof(WallToMud1d30p20ProjectileScript), direction);
-            }
-        }
     }
 }

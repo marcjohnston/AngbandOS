@@ -283,7 +283,7 @@ internal class SingletonRepository
         RegisterRepository<BoolWidget>();
         RegisterRepository<ChestTrap>();
         RegisterRepository<ChestTrapConfiguration>();
-        RegisterRepository<ClassSpell>();
+        RegisterRepository<CharacterClassSpell>();
         RegisterRepository<DateWidget>();
         RegisterRepository<Dungeon>();
         RegisterRepository<DungeonGuardian>();
@@ -331,6 +331,8 @@ internal class SingletonRepository
         RegisterRepository<Property>();
         RegisterRepository<Race>();
         RegisterRepository<RaceAbility>();
+        RegisterRepository<RacialPower>();
+        RegisterRepository<RacialPowerTest>();
         RegisterRepository<RaceGender>();
         RegisterRepository<RangedWidget>();
         RegisterRepository<Realm>();
@@ -375,7 +377,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, GenericArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration, Attack>(gameConfiguration.Attacks);
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration, GenericBoolWidget>(gameConfiguration.BoolWidgets);
-        LoadFromConfiguration<ClassSpell, ClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
+        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, GenericConditionalWidget>(gameConfiguration.ConditionalWidgets);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, GenericDateWidget>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
@@ -432,6 +434,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<CharacterClassAbility>();
         LoadAllAssemblyTypes<ChestTrapConfiguration>();
         LoadAllAssemblyTypes<ChestTrap>();
+        LoadAllAssemblyTypes<ConditionalScript>();
         LoadAllAssemblyTypes<DungeonGenerator>();
         LoadAllAssemblyTypes<FixedArtifact>();
         LoadAllAssemblyTypes<FloorEffect>();
@@ -451,6 +454,8 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Race>();
         LoadAllAssemblyTypes<RaceAbility>();
+        LoadAllAssemblyTypes<RacialPower>();
+        LoadAllAssemblyTypes<RacialPowerTest>();
         LoadAllAssemblyTypes<RenderMessageScript>();
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();

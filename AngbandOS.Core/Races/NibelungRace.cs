@@ -34,6 +34,7 @@ internal class NibelungRace : Race
     public override int Chart => 87;
 
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "detect doors+traps (racial, WIS based, unusable until level 5)" : "detect doors+traps (racial, cost 5, WIS based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -56,17 +57,5 @@ internal class NibelungRace : Race
     {
         Game.HasDisenchantResistance = true;
         Game.HasDarkResistance = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Nibelungen can detect traps, doors, and stairs
-        if (Game.CheckIfRacialPowerWorks(5, 5, Game.WisdomAbility, 10))
-        {
-            Game.MsgPrint("You examine your surroundings.");
-            Game.DetectTraps();
-            Game.DetectDoors();
-            Game.DetectStairs();
-        }
     }
 }

@@ -34,6 +34,7 @@ internal class HalfOrcRace : Race
     public override int Chart => 19;
 
     public override string RacialPowersDescription(int lvl) => lvl < 3 ? "remove fear        (racial, unusable until level 3)" : "remove fear        (racial, cost 5, WIS based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -54,15 +55,5 @@ internal class HalfOrcRace : Race
     public override void CalcBonuses()
     {
         Game.HasDarkResistance = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Half-orcs can remove fear
-        if (Game.CheckIfRacialPowerWorks(3, 5, Game.WisdomAbility, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 5 : 10))
-        {
-            Game.MsgPrint("You play tough.");
-            Game.FearTimer.ResetTimer();
-        }
     }
 }

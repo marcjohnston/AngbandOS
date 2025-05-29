@@ -31,6 +31,7 @@ internal abstract class Race : IGetKey
     public virtual void Bind()
     {
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
+        RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
     }
 
     public abstract int AgeRange { get; }
@@ -168,11 +169,29 @@ internal abstract class Race : IGetKey
     /// </summary>
     public virtual bool IsEthereal => false;
 
-    public virtual void UseRacialPower()
+    /// <summary>
+    /// Returns the name of the <see cref="IScript"/> for the racial powers that are associated to this race or null, if the race has no additional
+    /// bonus power.  Returns null, by default.  This property is used to bind the <see cref="RacialPowerScript"/> property during the bind phase.
+    /// </summary>
+    protected virtual string? RacialPowerScriptBindingKey => null;
+
+    public IScript? RacialPowerScript { get; private set; }
+
+    /// <summary>
+    /// Executes the racial power script associated to this race.  If the race doesn't have a racial power, a message is rendered.
+    /// </summary>
+    public void UseRacialPower()
     {
-        // Other races don't have powers
-        Game.MsgPrint("This race has no bonus power.");
-        Game.EnergyUse = 0;
+        if (RacialPowerScript is not null)
+        {
+            RacialPowerScript.ExecuteScript();
+        }
+        else
+        {
+            // Other races don't have powers
+            Game.MsgPrint("This race has no bonus power.");
+            Game.EnergyUse = 0;
+        }
     }
 
     /// <summary>

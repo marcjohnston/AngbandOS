@@ -34,6 +34,7 @@ internal class ImpRace : Race
     public override int Chart => 94;
 
     public override string RacialPowersDescription(int lvl) => lvl < 9 ? "fire bolt/ball     (racial, unusable until level 9/30)" : "fire bolt/ball(30) (racial, cost 15, dam lvl, WIS based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -75,28 +76,5 @@ internal class ImpRace : Race
             Game.HasFireImmunity = true;
         }
     }
-
-    public override void UseRacialPower()
-    {
-        // Imps can cast fire bolt/ball
-        if (Game.CheckIfRacialPowerWorks(9, 15, Game.WisdomAbility, 15))
-        {
-            if (Game.GetDirectionWithAim(out int direction))
-            {
-                if (Game.ExperienceLevel.IntValue >= 30)
-                {
-                    Game.MsgPrint("You cast a ball of fire.");
-                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue,
-                        2);
-                }
-                else
-                {
-                    Game.MsgPrint("You cast a bolt of fire.");
-                    Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue);
-                }
-            }
-        }
-    }
-
     public override int ChanceOfSanityBlastImmunity(int level) => 100;
 }

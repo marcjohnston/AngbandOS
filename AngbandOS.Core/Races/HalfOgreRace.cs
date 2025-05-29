@@ -34,6 +34,7 @@ internal class HalfOgreRace : Race
     public override int Chart => 74;
 
     public override string RacialPowersDescription(int lvl) => lvl < 25 ? "Yellow Sign     (racial, unusable until level 25)" : "Yellow Sign     (racial, cost 35, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -56,17 +57,5 @@ internal class HalfOgreRace : Race
     {
         Game.HasDarkResistance = true;
         Game.HasSustainStrength = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Half-Ogres can go berserk
-        if (Game.CheckIfRacialPowerWorks(8, 10, Game.WisdomAbility, Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior ? 6 : 12))
-        {
-            Game.MsgPrint("Raaagh!");
-            Game.FearTimer.ResetTimer();
-            Game.SuperheroismTimer.AddTimer(10 + Game.DieRoll(Game.ExperienceLevel.IntValue));
-            Game.RestoreHealth(30);
-        }
     }
 }

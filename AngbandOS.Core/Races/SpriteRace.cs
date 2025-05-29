@@ -34,6 +34,7 @@ internal class SpriteRace : Race
     public override int Chart => 124;
 
     public override string RacialPowersDescription(int lvl) => lvl < 12 ? "sleeping dust      (racial, unusable until level 12)" : "sleeping dust      (racial, cost 12, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -60,22 +61,5 @@ internal class SpriteRace : Race
         Game.GlowInTheDarkRadius = 1;
         Game.HasLightResistance = true;
         Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Sprites can sleep monsters
-        if (Game.CheckIfRacialPowerWorks(12, 12, Game.IntelligenceAbility, 15))
-        {
-            Game.MsgPrint("You throw some magic dust...");
-            if (Game.ExperienceLevel.IntValue < 25)
-            {
-                Game.RunScript(nameof(OldSleep1xr1ProjectileScript));
-            }
-            else
-            {
-                Game.RunScript(nameof(OldSleepAtLos1xProjectileScript));
-            }
-        }
     }
 }

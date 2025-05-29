@@ -33,6 +33,7 @@ internal class SkeletonRace : Race
     /// </summary>
     public override int Chart => 102;
     public override string RacialPowersDescription(int lvl) => lvl < 30 ? "restore life       (racial, unusable until level 30)" : "restore life       (racial, cost 30, WIS based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -94,15 +95,6 @@ internal class SkeletonRace : Race
         }
     }
     public override bool CanBleed(int level) => false;
-    public override void UseRacialPower()
-    {
-        // Skeletons and zombies can restore their life energy
-        if (Game.CheckIfRacialPowerWorks(30, 30, Game.WisdomAbility, 18))
-        {
-            Game.MsgPrint("You attempt to restore your lost energies.");
-            Game.RunScript(nameof(RestoreLevelScript));
-        }
-    }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;
     public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
 }

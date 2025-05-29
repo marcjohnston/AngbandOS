@@ -34,6 +34,7 @@ internal class VampireRace : Race
     public override int Chart => 113;
 
     public override string RacialPowersDescription(int lvl) => lvl < 2 ? "drain life         (racial, unusable until level 2)" : "drain life         (racial, cost 1 + lvl/3, based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
     {
@@ -76,49 +77,6 @@ internal class VampireRace : Race
         if (Game.Food.IntValue < Constants.PyFoodAlert)
         {
             Game.MsgPrint("Your hunger can only be satisfied with fresh blood!");
-        }
-    }
-
-    public override void UseRacialPower()
-    {
-        // Vampires can drain health
-        if (Game.CheckIfRacialPowerWorks(2, 1 + (Game.ExperienceLevel.IntValue / 3), Game.ConstitutionAbility, 9))
-        {
-            if (Game.GetDirectionNoAim(out int direction))
-            {
-                int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[direction];
-                int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[direction];
-                GridTile tile = Game.Map.Grid[y][x];
-                if (tile.MonsterIndex == 0)
-                {
-                    Game.MsgPrint("You bite into thin air!");
-                }
-                else
-                {
-                    Game.MsgPrint("You grin and bare your fangs...");
-                    int dummy = Game.ExperienceLevel.IntValue + (Game.DieRoll(Game.ExperienceLevel.IntValue) * Math.Max(1, Game.ExperienceLevel.IntValue / 10));
-                    if (Game.DrainLife(direction, dummy))
-                    {
-                        if (Game.Food.IntValue < Constants.PyFoodFull)
-                        {
-                            Game.RestoreHealth(dummy);
-                        }
-                        else
-                        {
-                            Game.MsgPrint("You were not hungry.");
-                        }
-                        dummy = Game.Food.IntValue + Math.Min(5000, 100 * dummy);
-                        if (Game.Food.IntValue < Constants.PyFoodMax)
-                        {
-                            Game.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
-                        }
-                    }
-                    else
-                    {
-                        Game.MsgPrint("Yechh. That tastes foul.");
-                    }
-                }
-            }
         }
     }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;

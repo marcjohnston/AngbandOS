@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RacialPowers;
+
 namespace AngbandOS.Core.Races;
 
 [Serializable]
@@ -34,6 +36,7 @@ internal class GolemRace : Race
     public override int Chart => 98;
 
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone skin         (racial, unusable until level 20)" : "stone skin         (racial, cost 15, dur 30+d20, CON based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -80,14 +83,6 @@ internal class GolemRace : Race
 
     public override bool CanBleed(int level) => false;
 
-    public override void UseRacialPower()
-    {
-        // Golems can harden their skin
-        if (Game.CheckIfRacialPowerWorks(20, 15, Game.ConstitutionAbility, 8))
-        {
-            Game.StoneskinTimer.AddTimer(Game.DieRoll(20) + 30);
-        }
-    }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;
 
     public override bool CanBeStunned => false;

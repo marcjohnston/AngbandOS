@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.RacialPowers;
+
 namespace AngbandOS.Core.Races;
 
 [Serializable]
@@ -34,6 +36,7 @@ internal class GnomeRace : Race
     public override int Chart => 13;
 
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "teleport           (racial, unusable until level 5)" : "teleport           (racial, cost 5 + lvl/5, INT based)";
+    protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
     public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
@@ -54,15 +57,5 @@ internal class GnomeRace : Race
     public override void CalcBonuses()
     {
         Game.HasFreeAction = true;
-    }
-
-    public override void UseRacialPower()
-    {
-        // Gnomes can do a short-range teleport
-        if (Game.CheckIfRacialPowerWorks(5, 5 + (Game.ExperienceLevel.IntValue / 5), Game.IntelligenceAbility, 12))
-        {
-            Game.MsgPrint("Blink!");
-            Game.RunScriptInt(nameof(TeleportSelfScript), 10 + Game.ExperienceLevel.IntValue);
-        }
     }
 }
