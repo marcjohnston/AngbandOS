@@ -260,10 +260,10 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     public virtual int this[int index] => InventorySlots[index];
 
     /// <summary>
-    /// Returns a bonus for armor class, for Monk and Mystic character classes when the player doesn't have use the slot.
+    /// Returns a bonus armor class that is applied for martial artist character classes for each inventory slot in which the player is not wearing any armor.  
+    /// Monk and Mystic character classes are martial artists.  Returns 0, by default.
     /// </summary>
     public virtual int BareArmorClassBonus => 0;
-
 
     public virtual string Key => GetType().Name;
 

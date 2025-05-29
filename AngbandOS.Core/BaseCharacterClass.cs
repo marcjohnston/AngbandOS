@@ -362,6 +362,7 @@ internal abstract class BaseCharacterClass : IGetKey
 
     /// <summary>
     /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
+    /// The monk and mystic character classes return true.
     /// </summary>
     public virtual bool IsMartialArtist => false;
 

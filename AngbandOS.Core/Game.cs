@@ -13113,7 +13113,7 @@ internal class Game
     public bool MartialArtistHeavyArmor()
     {
         int martialArtistArmWgt = 0;
-        if (BaseCharacterClass.ID != CharacterClassEnum.Monk && BaseCharacterClass.ID != CharacterClassEnum.Mystic)
+        if (!BaseCharacterClass.IsMartialArtist)
         {
             return false;
         }

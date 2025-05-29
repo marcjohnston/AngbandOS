@@ -460,7 +460,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
-        if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Monk || Game.BaseCharacterClass.ID == CharacterClassEnum.Mystic) && !Game.MartialArtistHeavyArmor())
+        if (Game.BaseCharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
         {
             foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
             {
@@ -567,7 +567,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.Speed.IntValue -= 10;
         }
-        if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Monk || Game.BaseCharacterClass.ID == CharacterClassEnum.Mystic) && !Game.MartialArtistHeavyArmor())
+        if (Game.BaseCharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
         {
             Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
         }
@@ -884,7 +884,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
             OldUnpriestlyWeapon = Game.HasUnpriestlyWeapon;
         }
-        if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Monk || Game.BaseCharacterClass.ID == CharacterClassEnum.Mystic) && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
+        if (Game.BaseCharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
         {
             Game.MsgPrint(Game.MartialArtistHeavyArmor()
                 ? "The weight of your armor disrupts your balance."
