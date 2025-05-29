@@ -10,70 +10,95 @@ public partial class MainForm : Form
     private void button1_Click(object sender, EventArgs e)
     {
         treeView1.Nodes.Clear();
-        ExpressionParser parser = new ExpressionParser(new TestParseLanguage());
-        Expression expression = parser.ParseExpression(textBox1.Text);
-        TreeNode rootNode = treeView1.Nodes.Add("Expression");
-        rootNode.Tag = expression;
-        RenderExpression(rootNode, expression);
+        statusLabel.Text = "";
+        computeLabel.Text = "";
+        ExpressionParser parser = new ExpressionParser(new TestParseLanguage(Int32.Parse(experienceValueTextBox.Text)));
+        try
+        {
+            Expression expression = parser.ParseExpression(textBox1.Text);
+            TreeNode rootNode = treeView1.Nodes.Add("Expression");
+            rootNode.Tag = expression;
+            statusLabel.Text = expression.ToString();
+            RenderExpression(rootNode, expression);
+        }
+        catch (Exception ex)
+        {
+            statusLabel.Text = ex.Message;
+        }
     }
 
     private void RenderExpression(TreeNode rootNode, Expression expression)
     {
+        TreeNode newNode;
         switch (expression)
         {
             case IntegerExpression integerExpression:
-                TreeNode integerNode = rootNode.Nodes.Add($"Integer {integerExpression.Value}");
-                integerNode.Tag = expression;
+                newNode = rootNode.Nodes.Add($"Integer {integerExpression.Value}");
                 break;
             case IdentifierExpression identifierExpression:
-                TreeNode identifierNode = rootNode.Nodes.Add($"Identifier {identifierExpression.Identifier}");
-                identifierNode.Tag = expression;
+                newNode = rootNode.Nodes.Add($"Identifier {identifierExpression.Identifier}");
                 break;
             case MultiplicationExpression multiplicationExpression:
-                TreeNode multiplicationNode = rootNode.Nodes.Add($"Multiply");
-                multiplicationNode.Tag = expression;
-                RenderExpression(multiplicationNode, multiplicationExpression.Factor1);
-                RenderExpression(multiplicationNode, multiplicationExpression.Factor2);
+                newNode = rootNode.Nodes.Add($"Multiply");
+                RenderExpression(newNode, multiplicationExpression.Factor1);
+                RenderExpression(newNode, multiplicationExpression.Factor2);
                 break;
             case DivisionExpression divisionExpression:
-                TreeNode divisionNode = rootNode.Nodes.Add($"Division");
-                divisionNode.Tag = expression;
-                RenderExpression(divisionNode, divisionExpression.Dividend);
-                RenderExpression(divisionNode, divisionExpression.Divisor);
+                newNode = rootNode.Nodes.Add($"Division");
+                RenderExpression(newNode, divisionExpression.Dividend);
+                RenderExpression(newNode, divisionExpression.Divisor);
                 break;
             case AdditionExpression additionExpression:
-                TreeNode additionNode = rootNode.Nodes.Add($"Addition");
-                additionNode.Tag = expression;
-                RenderExpression(additionNode, additionExpression.Addend1);
-                RenderExpression(additionNode, additionExpression.Addend2);
+                newNode = rootNode.Nodes.Add($"Addition");
+                RenderExpression(newNode, additionExpression.Addend1);
+                RenderExpression(newNode, additionExpression.Addend2);
                 break;
             case SubtractionExpression subtractionExpression:
-                TreeNode subtractionNode = rootNode.Nodes.Add($"Subtraction");
-                subtractionNode.Tag = expression;
-                RenderExpression(subtractionNode, subtractionExpression.Minuend);
-                RenderExpression(subtractionNode, subtractionExpression.Subtrahend);
+                newNode = rootNode.Nodes.Add($"Subtraction");
+                RenderExpression(newNode, subtractionExpression.Minuend);
+                RenderExpression(newNode, subtractionExpression.Subtrahend);
+                break;
+            case ParenthesisExpression parenthesisExpression:
+                string sign = !parenthesisExpression.Sign.HasValue ? "" : parenthesisExpression.Sign.Value ? " + " : " - ";
+                newNode = rootNode.Nodes.Add($"Parenthesis {sign}");
+                RenderExpression(newNode, parenthesisExpression.Expression);
                 break;
             case DiceRollExpression diceRollExpression:
-                TreeNode diceRollNode = rootNode.Nodes.Add($"DiceRoll");
-                diceRollNode.Tag = expression;
-                RenderExpression(diceRollNode, diceRollExpression.Dice);
-                RenderExpression(diceRollNode, diceRollExpression.Sides);
+                newNode = rootNode.Nodes.Add($"DiceRoll");
+                RenderExpression(newNode, diceRollExpression.Dice);
+                RenderExpression(newNode, diceRollExpression.Sides);
                 break;
+            default:
+                throw new Exception($"No treeview support for {expression.GetType().Name}.");
         }
+        newNode.Tag = expression;
     }
 
     private void computeButton_Click(object sender, EventArgs e)
     {
         TreeNode node = treeView1.SelectedNode;
+        if (node == null)
+        {
+            node = treeView1.Nodes[0];
+        }
         Expression expression = (Expression)node.Tag;
         Expression result = expression.Compute();
-        if (result is IntegerExpression integerResult)
+        switch (result)
         {
-            label1.Text = $"{expression}={integerResult.Value}";
+            case IntegerExpression integerExpression:
+                computeLabel.Text = $"{integerExpression.Value}";
+                break;
+            case DecimalExpression decimalExpression:
+                computeLabel.Text = $"{decimalExpression.Value}";
+                break;
+            default:
+                MessageBox.Show("Unsupported return data type");
+                break;
         }
-        else
-        {
-            MessageBox.Show("Invalid return data type");
-        }
+    }
+
+    private void textBox1_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }

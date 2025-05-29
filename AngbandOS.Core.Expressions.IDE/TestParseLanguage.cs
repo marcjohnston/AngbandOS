@@ -9,27 +9,17 @@ namespace AngbandOS.Core.Expressions.IDE;
 
 public class TestParseLanguage : ParseLanguage
 {
+    private readonly int ExperienceValue;
+    public TestParseLanguage(int experienceValue)
+    {
+        ExperienceValue = experienceValue;
+    }
     public override string WhitespaceCharacters => " ";
     public override FactorParser[] FactorParsers => new FactorParser[]
     {
         new ParenthesisFactorParser(),
         new IntegerFactorParser(),
-        new IdentifierFactorParser("x", false, () =>
-        {
-            InputForm inputForm = new InputForm();
-            //inputForm.la
-            //inputForm.ShowDialog();
-            if (inputForm.ShowDialog() != DialogResult.OK)
-            {
-                throw new Exception("Input cancelled.");
-            }
-            string text = inputForm.TextInput;
-            if (!Int32.TryParse(text, out int value))
-            {
-                throw new Exception("Invalid integer.");
-            }
-            return new IntegerExpression(value);
-        })
+        new ExperienceLevelIdentifierFactorParser(ExperienceValue),
     };
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]
     {
