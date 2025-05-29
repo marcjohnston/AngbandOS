@@ -10,10 +10,10 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ClassSpell : IGetKey
+internal abstract class CharacterClassSpell : IGetKey
 {
     protected readonly Game Game;
-    protected ClassSpell(Game game)
+    protected CharacterClassSpell(Game game)
     {
         Game = game;
     }
@@ -24,7 +24,7 @@ internal abstract class ClassSpell : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        ClassSpellGameConfiguration classSpellDefinition = new()
+        CharacterClassSpellGameConfiguration classSpellDefinition = new()
         {
             SpellName = SpellName,
             CharacterClassName = CharacterClassName,

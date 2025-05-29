@@ -107,7 +107,7 @@ namespace AngbandOS.PersistentStorage
                 ItemFlavors = LoadEntities<ItemFlavorGameConfiguration>("AmuletReadableFlavors"),
                 Animations = LoadEntities<AnimationGameConfiguration>("Animations"),
                 Attacks = LoadEntities<AttackGameConfiguration>("Attacks"),
-                ClassSpells = LoadEntities<ClassSpellGameConfiguration>("ClassSpells"),
+                ClassSpells = LoadEntities<CharacterClassSpellGameConfiguration>("ClassSpells"),
                 DungeonGuardians = LoadEntities<DungeonGuardianGameConfiguration>("DungeonGuardians"),
                 Dungeons = LoadEntities<DungeonGameConfiguration>("Dungeons"),
                 GameCommands = LoadEntities<GameCommandGameConfiguration>("GameCommands"),
