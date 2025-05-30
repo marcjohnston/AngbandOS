@@ -15,6 +15,7 @@ internal class Vault : IGetKey
     protected Game Game;
     public Vault(Game game, VaultGameConfiguration vaultGameConfiguration)
     {
+        Game = game;
         Key = vaultGameConfiguration.Key ?? vaultGameConfiguration.GetType().Name;
         Color = vaultGameConfiguration.Color;
         Name = vaultGameConfiguration.Name;

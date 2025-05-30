@@ -409,10 +409,10 @@ internal class SingletonRepository
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, GenericSpell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
-        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, GenericStoreFactory>(gameConfiguration.StoreFactories);
+        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, StoreFactory>(gameConfiguration.StoreFactories);
         LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, GenericStringWidget>(gameConfiguration.StringWidgets);
         LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration, SummonScript>(gameConfiguration.SummonScripts);
-        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, GenericSyllableSet>(gameConfiguration.SyllableSets);
+        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, SyllableSet>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, Symbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, GenericTextWidget>(gameConfiguration.TextWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration, Tile>(gameConfiguration.Tiles);

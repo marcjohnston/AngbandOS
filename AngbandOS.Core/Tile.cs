@@ -16,6 +16,7 @@ internal class Tile : IGetKey
     protected Game Game;
     public Tile(Game game, TileGameConfiguration tileGameConfiguration)
     {
+        Game = game;
         AllowMonsterToOccupy = tileGameConfiguration.AllowMonsterToOccupy;
         AlterActionName = tileGameConfiguration.AlterActionName;
         BlocksLos = tileGameConfiguration.BlocksLos;

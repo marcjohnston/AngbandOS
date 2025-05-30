@@ -8,6 +8,7 @@ internal class Symbol : IGetKey
     protected readonly Game Game;
     public Symbol(Game game, SymbolGameConfiguration symbolGameConfiguration) 
     {
+        Game = game;
         Character = symbolGameConfiguration.Character;
         QueryCharacter = symbolGameConfiguration.QueryCharacter;
         Name = symbolGameConfiguration.Name;

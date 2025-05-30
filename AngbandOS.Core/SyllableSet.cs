@@ -8,18 +8,22 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class SyllableSet : IGetKey
+internal class SyllableSet : IGetKey
 {
     protected readonly Game Game;
-    protected SyllableSet(Game game)
+    public SyllableSet(Game game, SyllableSetGameConfiguration syllableSetGameConfiguration)
     {
         Game = game;
+        Key = syllableSetGameConfiguration.Key ?? syllableSetGameConfiguration.GetType().Name;
+        BeginningSyllables = syllableSetGameConfiguration.BeginningSyllables;
+        MiddleSyllables = syllableSetGameConfiguration.MiddleSyllables;
+        EndingSyllables = syllableSetGameConfiguration.EndingSyllables;
     }
 
-    public abstract string[] BeginningSyllables { get; }
-    public abstract string[] MiddleSyllables { get; }
-    public abstract string[] EndingSyllables { get; }
-    public virtual string Key => GetType().Name;
+    public virtual string[] BeginningSyllables { get; }
+    public virtual string[] MiddleSyllables { get; }
+    public virtual string[] EndingSyllables { get; }
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
