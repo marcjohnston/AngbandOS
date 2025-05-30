@@ -42,18 +42,18 @@ internal class CharacterClassSpell : IGetKey
         return JsonSerializer.Serialize(classSpellDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string SpellName { get; }
-    public virtual string CharacterClassName { get; }
+    protected virtual string SpellName { get; }
+    protected virtual string CharacterClassName { get; }
     public virtual int Level { get; }
     public virtual int ManaCost { get; }
     public virtual int BaseFailure { get; }
     public virtual int FirstCastExperience { get; }
 
-    public static string GetCompositeKey(BaseCharacterClass t1, Spell t2) => $"{t1.GetKey}-{t2.GetKey}";
+    public static string GetCompositeKey(BaseCharacterClass t1, Spell t2) => Game.GetCompositeKey(t1.GetKey, t2.GetKey);
     /// <summary>
     /// Returns the a composite key created from the character class name and spell name with a period between them.
     /// </summary>
-    public string GetKey => $"{CharacterClassName}-{SpellName}";
+    public string GetKey => Game.GetCompositeKey(CharacterClassName, SpellName);
 
     public virtual void Bind() { }
 }
