@@ -42,8 +42,8 @@ internal class CharacterClassSpell : IGetKey
         return JsonSerializer.Serialize(classSpellDefinition, Game.GetJsonSerializerOptions());
     }
 
-    protected virtual string SpellName { get; }
-    protected virtual string CharacterClassName { get; }
+    protected virtual string SpellName { get; } // TODO: This is only used for the key
+    protected virtual string CharacterClassName { get; } // TODO: This is only used for the key
     public virtual int Level { get; }
     public virtual int ManaCost { get; }
     public virtual int BaseFailure { get; }
