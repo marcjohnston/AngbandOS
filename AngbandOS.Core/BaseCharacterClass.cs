@@ -131,7 +131,7 @@ internal abstract class BaseCharacterClass : IGetKey
         }
     }
 
-    public void CastMentalism()
+    protected void CastMentalism()
     {
         int plev = Game.ExperienceLevel.IntValue;
         if (Game.ConfusedTimer.Value != 0)
