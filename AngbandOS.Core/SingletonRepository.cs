@@ -377,7 +377,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, GenericArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration, Attack>(gameConfiguration.Attacks);
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration, GenericBoolWidget>(gameConfiguration.BoolWidgets);
-        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration, GenericClassSpell>(gameConfiguration.ClassSpells);
+        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration, CharacterClassSpell>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, GenericConditionalWidget>(gameConfiguration.ConditionalWidgets);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, GenericDateWidget>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);

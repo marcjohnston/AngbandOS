@@ -10,12 +10,18 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class CharacterClassSpell : IGetKey
+internal class CharacterClassSpell : IGetKey
 {
     protected readonly Game Game;
-    protected CharacterClassSpell(Game game)
+    public CharacterClassSpell(Game game, CharacterClassSpellGameConfiguration classSpellGameConfiguration)
     {
         Game = game;
+        SpellName = classSpellGameConfiguration.SpellName;
+        CharacterClassName = classSpellGameConfiguration.CharacterClassName;
+        Level = classSpellGameConfiguration.Level;
+        ManaCost = classSpellGameConfiguration.ManaCost;
+        BaseFailure = classSpellGameConfiguration.BaseFailure;
+        FirstCastExperience = classSpellGameConfiguration.FirstCastExperience;
     }
 
     /// <summary>
@@ -36,12 +42,12 @@ internal abstract class CharacterClassSpell : IGetKey
         return JsonSerializer.Serialize(classSpellDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public abstract string SpellName { get; }
-    public abstract string CharacterClassName { get; }
-    public abstract int Level { get; }
-    public abstract int ManaCost { get; }
-    public abstract int BaseFailure { get; }
-    public abstract int FirstCastExperience { get; }
+    public virtual string SpellName { get; }
+    public virtual string CharacterClassName { get; }
+    public virtual int Level { get; }
+    public virtual int ManaCost { get; }
+    public virtual int BaseFailure { get; }
+    public virtual int FirstCastExperience { get; }
 
     public static string GetCompositeKey(BaseCharacterClass t1, Spell t2) => $"{t1.GetKey}-{t2.GetKey}";
     /// <summary>
