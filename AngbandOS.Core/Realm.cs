@@ -86,9 +86,9 @@ internal class Realm : IGetKey
 
 
                 // Check to see if the first spell for the character needs to be lowered.
-                if (spellFirst == null || spell.ClassSpell.Level < spellFirst)
+                if (spellFirst == null || spell.CharacterClassSpell.Level < spellFirst)
                 {
-                    spellFirst = spell.ClassSpell.Level;
+                    spellFirst = spell.CharacterClassSpell.Level;
                 }
             }
         }

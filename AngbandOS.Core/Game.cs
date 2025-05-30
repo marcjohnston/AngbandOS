@@ -7962,7 +7962,7 @@ internal class Game
             }
             if (ask)
             {
-                string tmpVal = $"{prompt} {spell.Name} ({spell.ClassSpell.ManaCost} mana, {spell.FailureChance()}% fail)? ";
+                string tmpVal = $"{prompt} {spell.Name} ({spell.CharacterClassSpell.ManaCost} mana, {spell.FailureChance()}% fail)? ";
                 if (!GetCheck(tmpVal))
                 {
                     continue;
@@ -14321,7 +14321,7 @@ internal class Game
 
     public bool SpellOkay(Spell sPtr, bool known)
     {
-        if (sPtr.ClassSpell.Level > ExperienceLevel.IntValue)
+        if (sPtr.CharacterClassSpell.Level > ExperienceLevel.IntValue)
         {
             return false;
         }

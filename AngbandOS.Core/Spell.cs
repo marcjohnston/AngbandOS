@@ -76,7 +76,10 @@ internal abstract class Spell : IGetKey
     /// </summary>
     public bool Tried { get; private set; } = false;
 
-    public CharacterClassSpell ClassSpell { get; private set; }
+    /// <remarks>
+    /// This is initialized after the player selects a character class.
+    /// </remarks>
+    public CharacterClassSpell CharacterClassSpell { get; private set; }
 
     /// <summary>
     /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when successfully casted.  This
@@ -132,12 +135,12 @@ internal abstract class Spell : IGetKey
         {
             return 100;
         }
-        int chance = ClassSpell.BaseFailure;
-        chance -= 3 * (Game.ExperienceLevel.IntValue - ClassSpell.Level);
+        int chance = CharacterClassSpell.BaseFailure;
+        chance -= 3 * (Game.ExperienceLevel.IntValue - CharacterClassSpell.Level);
         chance -= 3 * (Game.BaseCharacterClass.SpellStat.SpellFailureReduction - 1);
-        if (ClassSpell.ManaCost > Game.Mana.IntValue)
+        if (CharacterClassSpell.ManaCost > Game.Mana.IntValue)
         {
-            chance += 5 * (ClassSpell.ManaCost - Game.Mana.IntValue);
+            chance += 5 * (CharacterClassSpell.ManaCost - Game.Mana.IntValue);
         }
         int minfail = Game.BaseCharacterClass.SpellStat.SpellMinFailChance;
         if (Game.BaseCharacterClass.ID != CharacterClassEnum.Priest && Game.BaseCharacterClass.ID != CharacterClassEnum.Druid &&
@@ -179,7 +182,7 @@ internal abstract class Spell : IGetKey
     public void Initialize(ItemFactory itemFactory, int spellIndex)
     {
         BaseCharacterClass characterClass = Game.BaseCharacterClass;
-        ClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(characterClass, this));
+        CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(characterClass, this));
         SpellIndex = spellIndex;
         SpellBookItemFactory = itemFactory;
     }
@@ -200,7 +203,7 @@ internal abstract class Spell : IGetKey
             info = !Tried ? "untried" : LearnedDetails;
         }
 
-        return ClassSpell.Level >= 99 ? "(illegible)" : $"{Name,-30} {ClassSpell.Level,3} {ClassSpell.ManaCost,4} {FailureChance(),3}% {info}";
+        return CharacterClassSpell.Level >= 99 ? "(illegible)" : $"{Name,-30} {CharacterClassSpell.Level,3} {CharacterClassSpell.ManaCost,4} {FailureChance(),3}% {info}";
     }
 
     /// <summary>
@@ -209,7 +212,7 @@ internal abstract class Spell : IGetKey
     /// <returns></returns>
     public override string ToString()
     {
-        return $"{Name} ({ClassSpell.Level}, {ClassSpell.ManaCost}, {ClassSpell.BaseFailure}, {ClassSpell.FirstCastExperience})";
+        return $"{Name} ({CharacterClassSpell.Level}, {CharacterClassSpell.ManaCost}, {CharacterClassSpell.BaseFailure}, {CharacterClassSpell.FirstCastExperience})";
     }
 
     /// <summary>

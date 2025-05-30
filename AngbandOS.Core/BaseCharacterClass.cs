@@ -86,7 +86,7 @@ internal abstract class BaseCharacterClass : IGetKey
             return;
         }
 
-        if (spell.ClassSpell.ManaCost > Game.Mana.IntValue)
+        if (spell.CharacterClassSpell.ManaCost > Game.Mana.IntValue)
         {
             string cast = Game.BaseCharacterClass.CastVerb;
             Game.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
@@ -111,13 +111,13 @@ internal abstract class BaseCharacterClass : IGetKey
             spell.CastSpell();
         }
         Game.EnergyUse = 100;
-        if (spell.ClassSpell.ManaCost <= Game.Mana.IntValue)
+        if (spell.CharacterClassSpell.ManaCost <= Game.Mana.IntValue)
         {
-            Game.Mana.IntValue -= spell.ClassSpell.ManaCost;
+            Game.Mana.IntValue -= spell.CharacterClassSpell.ManaCost;
         }
         else
         {
-            int oops = spell.ClassSpell.ManaCost - Game.Mana.IntValue;
+            int oops = spell.CharacterClassSpell.ManaCost - Game.Mana.IntValue;
             Game.Mana.IntValue = 0;
             Game.FractionalMana = 0;
             Game.MsgPrint("You faint from the effort!");
