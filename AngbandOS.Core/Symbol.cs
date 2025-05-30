@@ -3,15 +3,17 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Symbol : IGetKey
+internal class Symbol : IGetKey
 {
     protected readonly Game Game;
-    protected Symbol(Game game)
+    public Symbol(Game game, SymbolGameConfiguration symbolGameConfiguration) 
     {
-        Game = game;
+        Character = symbolGameConfiguration.Character;
+        QueryCharacter = symbolGameConfiguration.QueryCharacter;
+        Name = symbolGameConfiguration.Name;
+        Key = symbolGameConfiguration.Key ?? symbolGameConfiguration.GetType().Name;
     }
-    
-    public abstract char Character { get; }
+    public virtual char Character { get; }
 
     /// <summary>
     /// Returns the symbol that the player specifies to query the symbol; or null, if the Character property is to be used.  Returns
@@ -19,11 +21,11 @@ internal abstract class Symbol : IGetKey
     /// When a query charactter is specified, it works in conjuction with the character symbol; meaning, that both the character
     /// and the query character are both recognized.  The PeriodSymbol overrides this property.
     /// </summary>
-    public virtual char? QueryCharacter => null;
+    public virtual char? QueryCharacter { get; } = null;
 
-    public abstract string Name { get; }
+    public virtual string Name { get; }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
     public virtual void Bind() { }
 
     public string GetKey => Key;

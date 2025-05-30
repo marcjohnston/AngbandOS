@@ -10,26 +10,33 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Vault : IGetKey
+internal class Vault : IGetKey
 {
     protected Game Game;
-    protected Vault(Game game)
+    public Vault(Game game, VaultGameConfiguration vaultGameConfiguration)
     {
-        Game = game;
+        Key = vaultGameConfiguration.Key ?? vaultGameConfiguration.GetType().Name;
+        Color = vaultGameConfiguration.Color;
+        Name = vaultGameConfiguration.Name;
+        Category = vaultGameConfiguration.Category;
+        Height = vaultGameConfiguration.Height;
+        Rating = vaultGameConfiguration.Rating;
+        Text = vaultGameConfiguration.Text;
+        Width = vaultGameConfiguration.Width;
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
     public virtual void Bind() { }
 
-    public virtual ColorEnum Color => ColorEnum.White;
-    public abstract string Name { get; }
-    public abstract int Category { get; }
-    public abstract int Height { get; }
-    public abstract int Rating { get; }
-    public abstract string Text { get; }
-    public abstract int Width { get; }
+    public virtual ColorEnum Color { get; } = ColorEnum.White;
+    public virtual string Name { get; }
+    public virtual int Category { get; }
+    public virtual int Height { get; }
+    public virtual int Rating { get; }
+    public virtual string Text { get; }
+    public virtual int Width { get; }
 
     public string ToJson()
     {
