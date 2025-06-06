@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-public class EqualsExpression : InfixExpression
+public class EqualsInfixExpression : InfixExpression
 {
-    public EqualsExpression(Expression leftExpression, Expression rightExpression) : base(leftExpression, rightExpression) { }
+    public EqualsInfixExpression(Expression leftExpression, Expression rightExpression) : base(leftExpression, rightExpression) { }
     public Expression LeftExpression => Operand1;
     public Expression RightExpression => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(BooleanExpression) };
@@ -31,8 +31,5 @@ public class EqualsExpression : InfixExpression
         }
     }
 
-    public override string ToString()
-    {
-        return $"{LeftExpression}=={RightExpression}";
-    }
+    public override string Text => $"{LeftExpression}=={RightExpression}";
 }

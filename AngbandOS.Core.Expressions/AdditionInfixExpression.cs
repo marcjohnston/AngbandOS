@@ -3,9 +3,9 @@
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-public class AdditionExpression : InfixExpression
+public class AdditionInfixExpression : InfixExpression
 {
-    public AdditionExpression(Expression addend1, Expression addend2) : base(addend1, addend2) { }
+    public AdditionInfixExpression(Expression addend1, Expression addend2) : base(addend1, addend2) { }
     public Expression Addend1 => Operand1;
     public Expression Addend2 => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
@@ -42,8 +42,5 @@ public class AdditionExpression : InfixExpression
 
         throw new Exception($"Addend1 does not support {addend1.GetType().Name}");
     }
-    public override string ToString()
-    {
-        return $"{Addend1}+{Addend2}";
-    }
+    public override string Text => $"{Addend1}+{Addend2}";
 }

@@ -3,9 +3,9 @@
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-public class SubtractionExpression : InfixExpression
+public class SubtractionInfixExpression : InfixExpression
 {
-    public SubtractionExpression(Expression minuend, Expression subtrahend) : base(minuend, subtrahend) { }
+    public SubtractionInfixExpression(Expression minuend, Expression subtrahend) : base(minuend, subtrahend) { }
     public Expression Minuend => Operand1;
     public Expression Subtrahend => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
@@ -42,8 +42,5 @@ public class SubtractionExpression : InfixExpression
 
         throw new Exception($"Minuend does not support {minuend.GetType().Name}");
     }
-    public override string ToString()
-    {
-        return $"{Minuend}-{Subtrahend}";
-    }
+    public override string Text => $"{Minuend}-{Subtrahend}";
 }

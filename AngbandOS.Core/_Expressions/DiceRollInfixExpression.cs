@@ -1,10 +1,10 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-internal class DiceRollExpression : InfixExpression
+internal class DiceRollInfixExpression : InfixExpression
 {
     public readonly Game Game;
-    public DiceRollExpression(Game game, Expression dice, Expression sides) : base(dice, sides)
+    public DiceRollInfixExpression(Game game, Expression dice, Expression sides) : base(dice, sides)
     {
         Game = game;
     }
@@ -24,8 +24,5 @@ internal class DiceRollExpression : InfixExpression
         }
         return new IntegerExpression(sum);
     }
-    public override string ToString()
-    {
-        return $"{Dice}d{Sides}";
-    }
+    public override string Text => $"{Dice}d{Sides}";
 }

@@ -9,5 +9,5 @@ internal class DiceRollInfixOperator : InfixOperator
         Game = game;    
     }
     public override string OperatorSymbol => "d";
-    public override InfixExpression CreateExpression(Expression operand1, Expression operand2) => new DiceRollExpression(Game, operand1, operand2);
+    public override InfixExpression CreateExpression(Expression operand1, Expression operand2) => new DiceRollInfixExpression(Game, operand1, operand2);
 }

@@ -14,8 +14,5 @@ public class IntegerExpression : Expression
     {
         return this;
     }
-    public override string ToString()
-    {
-        return $"{Value}";
-    }
+    public override string Text => $"{Value}";
 }

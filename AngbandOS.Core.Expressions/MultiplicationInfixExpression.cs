@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-public class MultiplicationExpression : InfixExpression
+public class MultiplicationInfixExpression : InfixExpression
 {
-    public MultiplicationExpression(Expression factor1, Expression factor2) : base(factor1, factor2) { }
+    public MultiplicationInfixExpression(Expression factor1, Expression factor2) : base(factor1, factor2) { }
     public Expression Factor1 => Operand1;
     public Expression Factor2 => Operand2;
 
@@ -41,8 +41,5 @@ public class MultiplicationExpression : InfixExpression
 
         throw new Exception($"Factor1 does not support {factor1.GetType().Name}");
     }
-    public override string ToString()
-    {
-        return $"{Factor1}*{Factor2}";
-    }
+    public override string Text => $"{Factor1}*{Factor2}";
 }

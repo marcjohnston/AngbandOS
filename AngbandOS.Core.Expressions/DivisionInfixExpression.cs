@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-public class DivisionExpression : InfixExpression
+public class DivisionInfixExpression : InfixExpression
 {
-    public DivisionExpression(Expression dividend, Expression divisor) : base(dividend, divisor) { }
+    public DivisionInfixExpression(Expression dividend, Expression divisor) : base(dividend, divisor) { }
     public Expression Dividend => Operand1;
     public Expression Divisor => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
@@ -56,8 +56,5 @@ public class DivisionExpression : InfixExpression
 
         throw new Exception($"Divisor does not support {divisor.GetType().Name}");
     }
-    public override string ToString()
-    {
-        return $"{Dividend}/{Divisor}";
-    }
+    public override string Text => $"{Dividend}/{Divisor}";
 }

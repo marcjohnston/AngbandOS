@@ -29,13 +29,16 @@ public class ParenthesisExpression : Expression
         }
         return expression;
     }
-    public override string ToString()
+    public override string Text
     {
-        string signSymbol = "";
-        if (Sign.HasValue)
+        get
         {
-            signSymbol = Sign.Value ? "+" : "-";
+            string signSymbol = "";
+            if (Sign.HasValue)
+            {
+                signSymbol = Sign.Value ? "+" : "-";
+            }
+            return $"{signSymbol}({Expression})";
         }
-        return $"{signSymbol}({Expression})";
     }
 }

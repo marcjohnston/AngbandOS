@@ -36,4 +36,6 @@ public abstract class Expression
         }
         throw new Exception($"Invalid result from Expression.Compute.  A result of type {typeof(TExpression).Name} was expected.");
     }
+    public abstract string Text { get; }
+    public override string ToString() => Text;
 }

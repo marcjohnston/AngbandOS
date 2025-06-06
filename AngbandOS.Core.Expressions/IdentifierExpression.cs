@@ -8,8 +8,5 @@ public abstract class IdentifierExpression : Expression
     {
         Identifier = identifier;
     }
-    public override string ToString()
-    {
-        return $"{Identifier}";
-    }
+    public override string Text => $"{Identifier}";
 }

@@ -38,22 +38,22 @@ public partial class MainForm : Form
             case IdentifierExpression identifierExpression:
                 newNode = rootNode.Nodes.Add($"Identifier {identifierExpression.Identifier}");
                 break;
-            case MultiplicationExpression multiplicationExpression:
+            case MultiplicationInfixExpression multiplicationExpression:
                 newNode = rootNode.Nodes.Add($"Multiply");
                 RenderExpression(newNode, multiplicationExpression.Factor1);
                 RenderExpression(newNode, multiplicationExpression.Factor2);
                 break;
-            case DivisionExpression divisionExpression:
+            case DivisionInfixExpression divisionExpression:
                 newNode = rootNode.Nodes.Add($"Division");
                 RenderExpression(newNode, divisionExpression.Dividend);
                 RenderExpression(newNode, divisionExpression.Divisor);
                 break;
-            case AdditionExpression additionExpression:
+            case AdditionInfixExpression additionExpression:
                 newNode = rootNode.Nodes.Add($"Addition");
                 RenderExpression(newNode, additionExpression.Addend1);
                 RenderExpression(newNode, additionExpression.Addend2);
                 break;
-            case SubtractionExpression subtractionExpression:
+            case SubtractionInfixExpression subtractionExpression:
                 newNode = rootNode.Nodes.Add($"Subtraction");
                 RenderExpression(newNode, subtractionExpression.Minuend);
                 RenderExpression(newNode, subtractionExpression.Subtrahend);
