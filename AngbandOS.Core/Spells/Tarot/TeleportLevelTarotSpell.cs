@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TeleportLevelTarotSpell : Spell
 {
     private TeleportLevelTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(TeleportLevelScript) };
 
     public override string Name => "Teleport Level";
     

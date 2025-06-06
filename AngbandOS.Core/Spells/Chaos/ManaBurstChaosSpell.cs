@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class ManaBurstChaosSpell : Spell
 {
     private ManaBurstChaosSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(ManaBurstScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
     public override string Name => "Mana Burst";
 
     protected override string LearnedDetails 

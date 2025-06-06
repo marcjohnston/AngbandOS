@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class StinkingCloudDeathSpell : Spell
 {
     private StinkingCloudDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(StinkingCloudScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Stinking Cloud";
 

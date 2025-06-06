@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class BurnResistanceCorporealSpell : Spell
 {
     private BurnResistanceCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(BurnResistanceScript) };
 
     public override string Name => "Burn Resistance";
 

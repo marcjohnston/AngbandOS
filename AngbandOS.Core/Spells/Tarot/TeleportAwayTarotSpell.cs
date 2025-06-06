@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TeleportAwayTarotSpell : Spell
 {
     private TeleportAwayTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(TeleportAwayAll1xProjectileScript) };
 
     public override string Name => "Teleport Away";
     

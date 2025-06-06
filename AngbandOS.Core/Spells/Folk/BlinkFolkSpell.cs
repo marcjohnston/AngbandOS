@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class BlinkFolkSpell : Spell
 {
     private BlinkFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(PhaseDoorScript) };
 
     public override string Name => "Blink";
 

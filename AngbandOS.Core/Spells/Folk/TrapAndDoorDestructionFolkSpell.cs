@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class TrapAndDoorDestructionFolkSpell : Spell
 {
     private TrapAndDoorDestructionFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(TrapAndDoorDestructionScript) };
 
     public override string Name => "Trap & Door Destruction";
     

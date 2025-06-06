@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class DimensionDoorTarotSpell : Spell
 {
     private DimensionDoorTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(CreateDimensionDoorScript) };
 
     public override string Name => "Dimension Door";
 

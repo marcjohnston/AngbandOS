@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class BlackSleepDeathSpell : Spell
 {
     private BlackSleepDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(OldSleep1xProjectileScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Black Sleep";  
 }

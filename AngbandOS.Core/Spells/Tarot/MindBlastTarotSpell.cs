@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class MindBlastTarotSpell : Spell
 {
     private MindBlastTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(MindBlastScript) };
 
     public override string Name => "Mind Blast";
 

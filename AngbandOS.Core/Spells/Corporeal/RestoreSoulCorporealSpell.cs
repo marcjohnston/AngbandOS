@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class RestoreSoulCorporealSpell : Spell
 {
     private RestoreSoulCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(RestoreLevelScript) };
 
     public override string Name => "Restore Soul";
     

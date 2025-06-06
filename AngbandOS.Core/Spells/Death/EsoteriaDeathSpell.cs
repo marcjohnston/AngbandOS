@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class EsoteriaDeathSpell : Spell
 {
     private EsoteriaDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(EsoteriaScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Esoteria"; 
 }

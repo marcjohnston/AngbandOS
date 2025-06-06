@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class IdentifySorcerySpell : Spell
 {
     private IdentifySorcerySpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(IdentifyItemScript) };
 
     public override string Name => "Identify";
     

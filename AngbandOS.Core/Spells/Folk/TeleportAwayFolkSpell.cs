@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class TeleportAwayFolkSpell : Spell
 {
     private TeleportAwayFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(TeleportAwayAll1xProjectileScript) };
 
     public override string Name => "Teleport Away";
     

@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class SeeMagicCorporealSpell : Spell
 {
     private SeeMagicCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(DetectMagicalObjectsScript) };
 
     public override string Name => "See Magic";
 

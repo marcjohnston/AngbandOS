@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class TrapAndDoorDestructionChaosSpell : Spell
 {
     private TrapAndDoorDestructionChaosSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(DestroyAdjacentDoorsScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
 
     public override string Name => "Trap and Door Destruction";
     

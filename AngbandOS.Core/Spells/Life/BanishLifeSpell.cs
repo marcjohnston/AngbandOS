@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Life;
 internal class BanishLifeSpell : Spell
 {
     private BanishLifeSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(TeleportAwayEvilAtLosByGod100ProjectileScript) };
 
     public override string Name => "Banish";
     

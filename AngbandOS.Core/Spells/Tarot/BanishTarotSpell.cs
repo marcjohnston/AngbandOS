@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class BanishTarotSpell : Spell
 {
     private BanishTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(TeleportAwayAllAtLos4xProjectileScript) };
 
     public override string Name => "Banish";
     

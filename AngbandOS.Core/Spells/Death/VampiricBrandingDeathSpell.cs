@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class VampiricBrandingDeathSpell : Spell
 {
     private VampiricBrandingDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(BrandWeaponAsVampiricScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Vampiric Branding";
     

@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class BattleFrenzyDeathSpell : Spell
 {
     private BattleFrenzyDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(BattleFrenzyScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Battle Frenzy";
 

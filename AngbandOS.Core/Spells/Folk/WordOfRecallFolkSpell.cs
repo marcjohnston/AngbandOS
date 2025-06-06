@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class WordOfRecallFolkSpell : Spell
 {
     private WordOfRecallFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(ToggleRecallScript) };
 
     public override string Name => "Word of Recall";
 

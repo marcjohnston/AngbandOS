@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class OrbOfEntropyDeathSpell : Spell
 {
     private OrbOfEntropyDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(OrbOfEntropyScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Orb of Entropy";
 

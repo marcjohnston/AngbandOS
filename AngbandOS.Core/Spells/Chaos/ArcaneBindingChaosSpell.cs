@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class ArcaneBindingChaosSpell : Spell
 {
     private ArcaneBindingChaosSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(ArcaneBindingScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
 
     public override string Name => "Arcane Binding";
     

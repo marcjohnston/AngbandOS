@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class HerbalHealingNatureSpell : Spell
 {
     private HerbalHealingNatureSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(HerbalHealingScript) };
 
     public override string Name => "Herbal Healing";
 

@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class FistOfForceChaosSpell : Spell
 {
     private FistOfForceChaosSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(FistOfForceScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
 
     public override string Name => "Fist of Force";
 

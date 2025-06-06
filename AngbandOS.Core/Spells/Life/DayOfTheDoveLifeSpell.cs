@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Life;
 internal class DayOfTheDoveLifeSpell : Spell
 {
     private DayOfTheDoveLifeSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(ControlAnimalAtLos2xProjectileScript) };
 
     public override string Name => "Day of the Dove";
     

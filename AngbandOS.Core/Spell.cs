@@ -10,13 +10,22 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Spell : IGetKey
+internal class Spell : IGetKey
 {
     protected readonly Game Game;
 
-    protected Spell(Game game)
+    public Spell(Game game)
     {
         Game = game;
+        Key = GetType().Name;
+    }
+
+    public Spell(Game game, SpellGameConfiguration spellGameConfiguration)
+    {
+        Game = game;
+        Key = spellGameConfiguration.Key ?? spellGameConfiguration.GetType().Name;
+        Name = spellGameConfiguration.Name;
+        LearnedDetails = spellGameConfiguration.LearnedDetails;
     }
 
     public ItemFactory SpellBookItemFactory { get; private set; }
@@ -35,24 +44,20 @@ internal abstract class Spell : IGetKey
         SpellGameConfiguration definition = new()
         {
             Key = Key,
-            CastScriptNames = CastScriptNames,
-            CastFailedScriptNames = CastFailedScriptNames,
+       //     CastScriptNames = CastScriptNames,
+       //     CastFailedScriptNames = CastFailedScriptNames,
             Name = Name,
             LearnedDetails = LearnedDetails
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
 
-    public virtual void Bind()
-    {
-        CastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastScriptNames);
-        FailedCastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastFailedScriptNames);
-    }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.
@@ -68,7 +73,7 @@ internal abstract class Spell : IGetKey
     /// <summary>
     /// Returns the name of the spell, as rendered to the Game.
     /// </summary>
-    public abstract string Name { get; }
+    public virtual string Name { get; }
 
     /// <summary>
     /// Returns true, if the spell has been attempted to be cast; false, otherwise.  Set to false, by default.  Set to true, the first time the player attempts to cast the
@@ -85,16 +90,37 @@ internal abstract class Spell : IGetKey
     /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when successfully casted.  This
     /// property is used to bind the <see cref="CastSpellScripts"/> property during the bind phase.
     /// </summary>
-    protected virtual string[]? CastScriptNames => null;
+ //   protected virtual string[]? CastScriptNames => null;
 
     /// <summary>
     /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell fails; or null, if the spell does nothing when the spell fails.  This
     /// property is used to bind the <see cref="FailedCastSpellScripts"/> property during the bind phase.
     /// </summary>
-    protected virtual string[]? CastFailedScriptNames => null;
+ //   protected virtual string[]? CastFailedScriptNames => null;
+   
+    protected MappedSpellScript MappedSpellScript { get; private set; }
 
-    private ICastSpellScript[]? CastSpellScripts { get; set; }
-    private ICastSpellScript[]? FailedCastSpellScripts { get; set; }
+    /// <summary>
+    /// Returns the spell scripts that are associated with either the success or failure of casting a spell.  This is done by performing a lookup through the spell script
+    /// mapping repository.
+    /// </summary>
+    /// <param name="namespaceKey"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    private ICastSpellScript[]? GetMappedSpellScripts(string namespaceKey)
+    {
+        Func<Realm?, Spell?, BaseCharacterClass?, string> compositeKeyRetrieval = (Realm? realm, Spell? spell, BaseCharacterClass? characterClass) => MappedSpellScript.GetCompositeKey(Game, realm, spell, characterClass, namespaceKey);
+        MappedSpellScript? mappedCastSpellScript = Game.SingletonRepository.GetMapping<MappedSpellScript, Realm, Spell, BaseCharacterClass>(compositeKeyRetrieval, SpellBookItemFactory.Realm, this, Game.BaseCharacterClass);
+        if (mappedCastSpellScript is null)
+        {
+            throw new Exception($"No mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.BaseCharacterClass.GetKey} and {namespaceKey}.");
+        }
+
+        return mappedCastSpellScript.CastSpellScripts;
+    }
+    private ICastSpellScript[]? CastSpellScripts;
+
+    private ICastSpellScript[]? FailedCastSpellScripts;
 
     /// <summary>
     /// Performs the spell.
@@ -181,10 +207,11 @@ internal abstract class Spell : IGetKey
 
     public void Initialize(ItemFactory itemFactory, int spellIndex)
     {
-        BaseCharacterClass characterClass = Game.BaseCharacterClass;
-        CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(characterClass, this));
+        CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.BaseCharacterClass, this));
         SpellIndex = spellIndex;
         SpellBookItemFactory = itemFactory;
+        CastSpellScripts = GetMappedSpellScripts(MappedSpellScript.SuccessNamespaceKey);
+        FailedCastSpellScripts = GetMappedSpellScripts(MappedSpellScript.FailureNamespaceKey);
     }
 
     public string Title()
@@ -219,5 +246,5 @@ internal abstract class Spell : IGetKey
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.
     /// </summary>
     /// <returns></returns>
-    protected virtual string LearnedDetails => "";
+    protected virtual string LearnedDetails { get; }
 }

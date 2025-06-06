@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class HorrificVisageCorporealSpell : Spell
 {
     private HorrificVisageCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(HorrificVisageScript) };
 
     public override string Name => "Horrific Visage";
     

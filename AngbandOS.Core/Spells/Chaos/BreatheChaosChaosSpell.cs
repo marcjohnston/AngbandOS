@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class BreatheChaosChaosSpell : Spell
 {
     private BreatheChaosChaosSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(BreatheChaosScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
 
     public override string Name => "Breathe Chaos";
     

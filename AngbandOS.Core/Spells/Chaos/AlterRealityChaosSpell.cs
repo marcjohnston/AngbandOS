@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class AlterRealityChaosSpell : Spell
 {
     private AlterRealityChaosSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(AlterRealityScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
-
     public override string Name => "Alter Reality";
 
 }
+

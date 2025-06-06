@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class CallSunlightNatureSpell : Spell
 {
     private CallSunlightNatureSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(CallSunlightScript) };
 
     public override string Name => "Whirlpool";
 

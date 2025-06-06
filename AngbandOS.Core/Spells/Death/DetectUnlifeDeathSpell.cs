@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class DetectUnlifeDeathSpell : Spell
 {
     private DetectUnlifeDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(DetectNonlivingScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Detect Unlife";
 }

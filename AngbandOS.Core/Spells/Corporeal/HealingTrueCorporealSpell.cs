@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class HealingTrueCorporealSpell : Spell
 {
     private HealingTrueCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(HealingTrueScript) };
 
     public override string Name => "Healing True";
 

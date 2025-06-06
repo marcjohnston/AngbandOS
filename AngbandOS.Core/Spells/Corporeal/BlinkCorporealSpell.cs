@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class BlinkCorporealSpell : Spell
 {
     private BlinkCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(PhaseDoorScript) };
 
     public override string Name => "Blink";
 

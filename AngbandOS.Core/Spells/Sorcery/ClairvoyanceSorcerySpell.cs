@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class ClairvoyanceSorcerySpell : Spell
 {
     private ClairvoyanceSorcerySpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(ClairvoyanceScript) };
 
     public override string Name => "Clairvoyance";
 

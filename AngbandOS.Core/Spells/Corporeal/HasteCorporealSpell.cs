@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class HasteCorporealSpell : Spell
 {
     private HasteCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(HasteScript) };
 
     public override string Name => "Haste";
 

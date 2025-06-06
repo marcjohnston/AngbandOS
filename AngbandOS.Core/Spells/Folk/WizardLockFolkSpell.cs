@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class WizardLockFolkSpell : Spell
 {
     private WizardLockFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(Jamdoor1d30p20ProjectileScript) };
 
     public override string Name => "Wizard Lock";
     

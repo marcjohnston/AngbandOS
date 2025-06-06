@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class ResistAcidFolkSpell : Spell
 {
     private ResistAcidFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(ResistAcidScript) };
 
     public override string Name => "Resist Acid";
 

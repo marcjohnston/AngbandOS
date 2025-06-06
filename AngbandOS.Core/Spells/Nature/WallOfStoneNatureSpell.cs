@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class WallOfStoneNatureSpell : Spell
 {
     private WallOfStoneNatureSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(WallOfStoneScript) };
 
     public override string Name => "Wall of Stone";
     

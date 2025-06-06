@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SlowMonsterSorcerySpell : Spell
 {
     private SlowMonsterSorcerySpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(OldSlow1xProjectileScript) };
 
     public override string Name => "Slow Monster";
     

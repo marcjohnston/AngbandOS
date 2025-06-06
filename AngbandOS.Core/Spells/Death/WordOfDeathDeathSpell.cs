@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class WordOfDeathDeathSpell : Spell
 {
     private WordOfDeathDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(DispelLivingAtLos3xProjectileScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
 
     public override string Name => "Word of Death";
 

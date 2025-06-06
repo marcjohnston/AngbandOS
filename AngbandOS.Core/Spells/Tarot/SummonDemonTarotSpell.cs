@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class SummonDemonTarotSpell : Spell
 {
     private SummonDemonTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(DemonSummonWeightedRandom) };
 
     public override string Name => "Summon Demon";
 

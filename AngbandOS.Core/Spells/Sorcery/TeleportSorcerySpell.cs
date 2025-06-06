@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class TeleportSorcerySpell : Spell
 {
     private TeleportSorcerySpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(TeleportSelf5xScript) };
 
     public override string Name => "Teleport";
 

@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Life;
 internal class SatisfyHungerLifeSpell : Spell
 {
     private SatisfyHungerLifeSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(SatisfyHungerScript) };
 
     public override string Name => "Satisfy Hunger";
     

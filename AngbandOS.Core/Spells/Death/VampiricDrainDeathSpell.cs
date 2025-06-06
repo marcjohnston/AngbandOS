@@ -11,10 +11,6 @@ namespace AngbandOS.Core.Spells.Death;
 internal class VampiricDrainDeathSpell : Spell
 {
     private VampiricDrainDeathSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(VampiricDrainScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildDeathMagicScript) };
-
     public override string Name => "Vampiric Drain";
 
     protected override string LearnedDetails => $"dam {Math.Max(1, Game.ExperienceLevel.IntValue / 10)}d{Game.ExperienceLevel.IntValue}+{Game.ExperienceLevel.IntValue}";

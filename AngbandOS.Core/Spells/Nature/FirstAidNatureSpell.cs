@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class FirstAidNatureSpell : Spell
 {
     private FirstAidNatureSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(FirstAidScript) };
 
     public override string Name => "First Aid";
 

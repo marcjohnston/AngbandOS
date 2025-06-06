@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TheFoolTarotSpell : Spell
 {
     private TheFoolTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(BizarreSummonWeightedRandom) };
 
     public override string Name => "The Fool";
 

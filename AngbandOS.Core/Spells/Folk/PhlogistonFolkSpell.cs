@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class PhlogistonFolkSpell : Spell
 {
     private PhlogistonFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(CreatePhlogistonScript) };
 
     public override string Name => "Phlogiston";
     

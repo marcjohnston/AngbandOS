@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Life;
 internal class DetectTrapsAndSecretDoorsLifeSpell : Spell
 {
     private DetectTrapsAndSecretDoorsLifeSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(DetectDoorsTrapsAndStairsScript) };
 
     public override string Name => "Detect Traps and Secret Doors";
     

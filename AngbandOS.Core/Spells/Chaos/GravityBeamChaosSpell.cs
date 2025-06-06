@@ -11,9 +11,6 @@ namespace AngbandOS.Core.Spells.Chaos;
 internal class GravityBeamChaosSpell : Spell
 {
     private GravityBeamChaosSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(GravityBeamScript) };
-
-    protected override string[]? CastFailedScriptNames => new string[] { nameof(WildChaoticMagicScript) };
 
     public override string Name => "Gravity Beam";
 

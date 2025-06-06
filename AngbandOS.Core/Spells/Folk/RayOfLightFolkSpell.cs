@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class RayOfLightFolkSpell : Spell
 {
     private RayOfLightFolkSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(RayOfLightScript) };
 
     public override string Name => "Ray of Light";
 

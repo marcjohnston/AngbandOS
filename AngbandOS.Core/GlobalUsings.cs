@@ -36,6 +36,7 @@ global using AngbandOS.Core.ItemFactoryWeightedRandoms;
 global using AngbandOS.Core.ItemFilters;
 global using AngbandOS.Core.ItemMatches;
 global using AngbandOS.Core.ItemQualityRatings;
+global using AngbandOS.Core.MappedSpellScripts;
 global using AngbandOS.Core.MonsterFilters;
 global using AngbandOS.Core.MonsterRaceFilters;
 global using AngbandOS.Core.MonsterSpells;

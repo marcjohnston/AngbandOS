@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class AstralBrandingTarotSpell : Spell
 {
     private AstralBrandingTarotSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(BrandWeaponWithAstraScript) };
 
     public override string Name => "Astral Branding";
     

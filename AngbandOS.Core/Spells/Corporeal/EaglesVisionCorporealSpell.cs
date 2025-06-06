@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class EaglesVisionCorporealSpell : Spell
 {
     private EaglesVisionCorporealSpell(Game game) : base(game) { }
-    protected override string[]? CastScriptNames => new string[] { nameof(EaglesVisionScript) };
 
     public override string Name => "Eagle's Vision";
     
