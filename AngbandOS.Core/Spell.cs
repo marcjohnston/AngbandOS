@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -45,8 +44,6 @@ internal class Spell : IGetKey
         SpellGameConfiguration definition = new()
         {
             Key = Key,
-       //     CastScriptNames = CastScriptNames,
-       //     CastFailedScriptNames = CastFailedScriptNames,
             Name = Name,
             LearnedDetails = LearnedDetails
         };
@@ -86,19 +83,7 @@ internal class Spell : IGetKey
     /// This is initialized after the player selects a character class.
     /// </remarks>
     public CharacterClassSpell CharacterClassSpell { get; private set; }
-
-    /// <summary>
-    /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when successfully casted.  This
-    /// property is used to bind the <see cref="CastSpellScripts"/> property during the bind phase.
-    /// </summary>
- //   protected virtual string[]? CastScriptNames => null;
-
-    /// <summary>
-    /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell fails; or null, if the spell does nothing when the spell fails.  This
-    /// property is used to bind the <see cref="FailedCastSpellScripts"/> property during the bind phase.
-    /// </summary>
- //   protected virtual string[]? CastFailedScriptNames => null;
-   
+  
     protected MappedSpellScript MappedSpellScript { get; private set; }
 
     /// <summary>
