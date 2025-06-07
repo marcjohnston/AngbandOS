@@ -20,4 +20,5 @@ internal class DifficultyIdentifierExpression : IdentifierExpression
     {
         return new IntegerExpression(Game.Difficulty);
     }
+    public override Expression Minimize(MinimizeOptions options) => new IntegerExpression(Game.Difficulty);
 }

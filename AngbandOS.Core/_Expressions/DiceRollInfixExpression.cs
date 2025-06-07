@@ -25,4 +25,10 @@ internal class DiceRollInfixExpression : InfixExpression
         return new IntegerExpression(sum);
     }
     public override string Text => $"{Dice}d{Sides}";
+    public override Expression Minimize(MinimizeOptions options)
+    {
+        Expression minimizedDice = Dice.Minimize(options);
+        Expression minimizedSides = Sides.Minimize(options);
+        return new DiceRollInfixExpression(Game, minimizedDice, minimizedSides);
+    }
 }

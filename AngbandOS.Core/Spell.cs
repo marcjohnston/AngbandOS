@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -205,7 +206,7 @@ internal class Spell : IGetKey
         return chance;
     }
 
-    public void Initialize(ItemFactory itemFactory, int spellIndex)
+    public void Initialize(ItemFactory itemFactory, int spellIndex) // TODO: This can be a game event for "CharacterClass_Changed"
     {
         CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.BaseCharacterClass, this));
         SpellIndex = spellIndex;

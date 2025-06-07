@@ -14,7 +14,17 @@ public class ParenthesisExpression : Expression
     public override Type[] ResultTypes => Expression.ResultTypes;
     public override Expression Compute()
     {
-        Expression expression = Expression.Compute();
+        Expression computedExpression = Expression.Compute();
+        Expression? resultExpression = TryCompute(Sign, computedExpression);
+
+        if (resultExpression is null)
+        {
+            throw new Exception("Invalid type for signed parenthesis");
+        }
+        return computedExpression;
+    }
+    private Expression? TryCompute(bool? sign, Expression expression)
+    {
         if (Sign.HasValue)
         {
             switch (expression)
@@ -24,11 +34,12 @@ public class ParenthesisExpression : Expression
                 case DecimalExpression decimalExpression:
                     return new DecimalExpression(Sign.Value ? decimalExpression.Value : -decimalExpression.Value);
                 default:
-                    throw new Exception("Invalid type for signed parenthesis");
+                    return null;
             }
         }
         return expression;
     }
+
     public override string Text
     {
         get
@@ -40,5 +51,11 @@ public class ParenthesisExpression : Expression
             }
             return $"{signSymbol}({Expression})";
         }
+    }
+    public override Expression Minimize(MinimizeOptions options)
+    {
+        Expression minimizedExpression = Expression.Minimize(options);
+        Expression? computedExpression = TryCompute(Sign, minimizedExpression);
+        return computedExpression ?? new ParenthesisExpression(minimizedExpression, Sign);
     }
 }

@@ -9,9 +9,19 @@ public class DivisionInfixExpression : InfixExpression
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
     public override Expression Compute()
     {
-        Expression dividend = Dividend.Compute();
-        Expression divisor = Divisor.Compute();
+        Expression computedDividend = Dividend.Compute();
+        Expression computedDivisor = Divisor.Compute();
+        Expression? computedExpression = TryDivide(computedDividend, computedDivisor);
 
+        if (computedExpression is null)
+        {
+            throw new Exception($"Incompatible types for division {computedDividend.Text} and {computedDivisor.Text}");
+        }
+        return computedExpression;
+    }
+    public override string Text => $"{Dividend}/{Divisor}";
+    private Expression? TryDivide(Expression dividend, Expression divisor)
+    {
         if (divisor is DecimalExpression divisorDecimalExpression)
         {
             if (divisorDecimalExpression.Value == 0)
@@ -26,7 +36,6 @@ public class DivisionInfixExpression : InfixExpression
             {
                 return new DecimalExpression((double)dividendIntegerExpression.Value / divisorDecimalExpression.Value);
             }
-            throw new Exception($"Dividend does not support {dividend.GetType().Name}");
         }
         else if (divisor is IntegerExpression divisorIntegerExpression)
         {
@@ -51,10 +60,29 @@ public class DivisionInfixExpression : InfixExpression
                     return new DecimalExpression((double)dividendIntegerExpression.Value / (double)divisorIntegerExpression.Value);
                 }
             }
-            throw new Exception($"Dividend does not support {dividend.GetType().Name}");
         }
-
-        throw new Exception($"Divisor does not support {divisor.GetType().Name}");
+        return null;
     }
-    public override string Text => $"{Dividend}/{Divisor}";
+
+    public override Expression Minimize(MinimizeOptions options)
+    {
+        Expression minimizedDividend = Dividend.Minimize(options);
+        Expression minimizedDivisor = Divisor.Minimize(options);
+
+        // Check for identities. x/1=x
+        if (minimizedDivisor is IntegerExpression minimizedIntegerDivisorExpression && minimizedIntegerDivisorExpression.Value == 1)
+        {
+            return minimizedDividend;
+        }
+        else if (minimizedDivisor is DecimalExpression minimizedDecimalDivisorExpression && minimizedDecimalDivisorExpression.Value == 1)
+        {
+            return minimizedDividend;
+        }
+        Expression? minimizedExpression = TryDivide(minimizedDividend, minimizedDivisor);
+        if (options.DivideOnlyOnfIntegerResult && minimizedExpression is DecimalExpression && minimizedDividend is IntegerExpression && minimizedDivisor is IntegerExpression)
+        {
+            return new DivisionInfixExpression(minimizedDividend, minimizedDivisor);
+        }
+        return minimizedExpression ?? new DivisionInfixExpression(minimizedDividend, minimizedDivisor);
+    }
 }

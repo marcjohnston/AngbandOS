@@ -38,4 +38,5 @@ public abstract class Expression
     }
     public abstract string Text { get; }
     public override string ToString() => Text;
+    public virtual Expression Minimize(MinimizeOptions options) => this;
 }

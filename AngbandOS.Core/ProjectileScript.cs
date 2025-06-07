@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -17,7 +18,7 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     {
         Game = game;
     }
-
+    static int i = 0;
     public void Bind()
     {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);

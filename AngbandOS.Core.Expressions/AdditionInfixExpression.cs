@@ -11,8 +11,19 @@ public class AdditionInfixExpression : InfixExpression
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
     public override Expression Compute()
     {
-        Expression addend1 = Addend1.Compute();
-        Expression addend2 = Addend2.Compute();
+        Expression computedAddend1 = Addend1.Compute();
+        Expression computedAddend2 = Addend2.Compute();
+        Expression? computedExpression = TryAdd(computedAddend1, computedAddend2);
+
+        if (computedExpression is null)
+        {
+            throw new Exception($"Incompatible types for addition {computedAddend1.Text} and {computedAddend2.Text}");
+        }
+        return computedExpression;
+    }
+    public override string Text => $"{Addend1}+{Addend2}";
+    private Expression? TryAdd(Expression addend1, Expression addend2)
+    {
         if (addend1 is DecimalExpression addend1DecimalExpression)
         {
             if (addend2 is DecimalExpression addend2DecimalExpression)
@@ -23,8 +34,6 @@ public class AdditionInfixExpression : InfixExpression
             {
                 return new DecimalExpression(addend1DecimalExpression.Value + addend2IntegerExpression.Value);
             }
-
-            throw new Exception($"Addend2 does not support {addend2.GetType().Name}");
         }
         else if (addend1 is IntegerExpression addend1IntegerExpression)
         {
@@ -36,11 +45,33 @@ public class AdditionInfixExpression : InfixExpression
             {
                 return new IntegerExpression(addend1IntegerExpression.Value + addend2IntegerExpression.Value);
             }
+        }
+        return null;
+    }
+    public override Expression Minimize(MinimizeOptions options)
+    {
+        Expression minimizedAddend1 = Addend1.Minimize(options);
+        Expression minimizedAddend2 = Addend2.Minimize(options);
 
-            throw new Exception($"Addend2 does not support {addend2.GetType().Name}");
+        // Check for identities. x+0=x, 0+x=x
+        if (minimizedAddend1 is IntegerExpression minimizedIntegerAddend1Expression && minimizedIntegerAddend1Expression.Value == 0)
+        {
+            return minimizedAddend2;
+        }
+        else if (minimizedAddend1 is DecimalExpression minimizedDecimalAddend1Expression && minimizedDecimalAddend1Expression.Value == 0)
+        {
+            return minimizedAddend2;
+        }
+        else if (minimizedAddend2 is IntegerExpression minimizedIntegerAddend2Expression && minimizedIntegerAddend2Expression.Value == 0)
+        {
+            return minimizedAddend1;
+        }
+        else if (minimizedAddend2 is DecimalExpression minimizedDecimalAddend2Expression && minimizedDecimalAddend2Expression.Value == 0)
+        {
+            return minimizedAddend1;
         }
 
-        throw new Exception($"Addend1 does not support {addend1.GetType().Name}");
+        Expression? minimizedExpression = TryAdd(minimizedAddend1, minimizedAddend2);
+        return minimizedExpression ?? new AdditionInfixExpression(minimizedAddend1, minimizedAddend2);
     }
-    public override string Text => $"{Addend1}+{Addend2}";
 }
