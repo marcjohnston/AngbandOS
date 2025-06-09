@@ -18,6 +18,11 @@ internal class GoDownStairsScript : Script, IScript, ICastSpellScript, IGameComm
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the go down stairs script and returns false.
     /// </summary>
     /// <returns></returns>

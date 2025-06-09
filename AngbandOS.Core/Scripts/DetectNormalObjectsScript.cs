@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -68,4 +68,5 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IE
         IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
         return new IdentifiedAndUsedResult(identifiedResult, true);
     }
+    public string LearnedDetails => "";
 }

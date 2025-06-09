@@ -18,6 +18,11 @@ internal class TargetScript : Script, IScript, ICastSpellScript, IGameCommandScr
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the target script and returns false.
     /// </summary>
     /// <returns></returns>

@@ -20,6 +20,11 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the render character script and returns false.
     /// </summary>
     /// <returns></returns>

@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -13,6 +13,4 @@ internal class DivineInterventionLifeSpell : Spell
     private DivineInterventionLifeSpell(Game game) : base(game) { }
 
     public override string Name => "Divine Intervention";
-
-    protected override string LearnedDetails => $"h300/d{Game.ExperienceLevel.IntValue * 4}+777";
 }

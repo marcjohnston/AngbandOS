@@ -849,7 +849,7 @@ public class CthangbandGameConfiguration : GameConfiguration
         new FireBeam6d8ProjectileScript(),
         new FireBeam8d8ProjectileScript(),
         new Frost6d8ProjectileScript(),
-        new Jamdoor1d30p20ProjectileScript(),
+        new JamDoor1d30p20ProjectileScript(),
         new Light200rm2ProjectileScript(),
         new LightWeak0ProjectileScript(),
         new LightWeak6d8ProjectileScript(),

@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -28,4 +28,5 @@ internal class NaturesWrathScript : Script, IScript, ICastSpellScript
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DisintegrateProjectile));
         projectile.Fire(0, 1 + (Game.ExperienceLevel.IntValue / 12), Game.MapY.IntValue, Game.MapX.IntValue, 100 + Game.ExperienceLevel.IntValue, kill: true, item: true, jump: false, beam: false, thru: false, hide: false, grid: false, stop: false);
     }
+    public string LearnedDetails => $"dam {4 * Game.ExperienceLevel.IntValue}+{100 + Game.ExperienceLevel.IntValue}";
 }

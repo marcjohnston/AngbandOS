@@ -18,6 +18,11 @@ internal class WizardHelpScript : Script, IScript, ICastSpellScript
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the wizard help script.
     /// </summary>
     /// <returns></returns>

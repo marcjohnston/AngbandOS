@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -26,4 +26,5 @@ internal class FirstAidScript : Script, IScript, ICastSpellScript
         Game.RestoreHealth(Game.DiceRoll(2, 8));
         Game.BleedingTimer.AddTimer(-15);
     }
+    public string LearnedDetails => "heal 2d8";
 }

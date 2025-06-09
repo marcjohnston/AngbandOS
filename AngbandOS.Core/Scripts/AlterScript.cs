@@ -18,6 +18,11 @@ internal class AlterScript : Script, IScript, ICastSpellScript, IGameCommandScri
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the alter script and disposes of the successful result.
     /// </summary>
     /// <returns></returns>

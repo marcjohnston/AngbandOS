@@ -18,6 +18,11 @@ internal class ViewCharacterScript : Script, IScript, ICastSpellScript, IGameCom
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the view character script and sets the requires rerendering flag.
     /// </summary>
     /// <returns></returns>

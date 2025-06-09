@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -29,4 +29,5 @@ internal class DoomBoltScript : Script, IScript, ICastSpellScript
         }
         Game.FireBeam(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), dir, Game.DiceRoll(11 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
+    public string LearnedDetails => $"dam {11 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
 }

@@ -38,5 +38,5 @@ public abstract class Expression
     }
     public abstract string Text { get; }
     public override string ToString() => Text;
-    public virtual Expression Minimize(MinimizeOptions options) => this;
+    public virtual Expression Minimize(MinimizeOptions options) => this; // TODO: Would like the options to not be required to be sent.
 }

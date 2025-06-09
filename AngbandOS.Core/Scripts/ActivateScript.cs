@@ -21,6 +21,11 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the activate script and disposes of the successful result.
     /// </summary>
     public void ExecuteScript()

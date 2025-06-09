@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -13,6 +13,4 @@ internal class WordOfDeathDeathSpell : Spell
     private WordOfDeathDeathSpell(Game game) : base(game) { }
 
     public override string Name => "Word of Death";
-
-    protected override string LearnedDetails => $"dam {Game.ExperienceLevel.IntValue * 3}";
 }

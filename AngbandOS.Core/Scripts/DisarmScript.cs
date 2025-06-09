@@ -18,6 +18,11 @@ internal class DisarmScript : Script, IScript, ICastSpellScript, IGameCommandScr
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the disarm script and disposes of the repeatable result.
     /// </summary>
     /// <returns></returns>

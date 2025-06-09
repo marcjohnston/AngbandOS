@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -27,4 +27,5 @@ internal class ExorcismScript : Script, IScript, ICastSpellScript
         Game.RunScript(nameof(DispelDemonAtLos1xProjectileScript));
         Game.RunScript(nameof(TurnEvilAtLos1xProjectileScript));
     }
+    public string LearnedDetails => $"dam {Game.ExperienceLevel.IntValue}+{Game.ExperienceLevel.IntValue}";
 }

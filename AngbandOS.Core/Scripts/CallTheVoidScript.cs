@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -65,4 +65,5 @@ internal class CallTheVoidScript : Script, IScript, ICastSpellScript
             Game.TakeHit(100 + Game.DieRoll(150), "a suicidal Call the Void");
         }
     }
+    public string LearnedDetails => "dam 3 * 175";
 }

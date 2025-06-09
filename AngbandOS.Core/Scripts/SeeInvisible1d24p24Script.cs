@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -25,4 +25,5 @@ internal class SeeInvisible1d24p24Script : Script, IScript, ICastSpellScript
     {
         Game.SeeInvisibilityTimer.AddTimer(Game.DieRoll(24) + 24);
     }
+    public string LearnedDetails => "dur 24+d24";
 }

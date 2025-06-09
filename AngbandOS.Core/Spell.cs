@@ -77,7 +77,7 @@ internal class Spell : IGetKey
     /// Returns true, if the spell has been attempted to be cast; false, otherwise.  Set to false, by default.  Set to true, the first time the player attempts to cast the
     /// spell; regardless of success or failure.
     /// </summary>
-    public bool Tried { get; private set; } = false;
+    public bool Tried = false;
 
     /// <remarks>
     /// This is initialized after the player selects a character class.
@@ -213,7 +213,31 @@ internal class Spell : IGetKey
         }
         else
         {
-            info = !Tried ? "untried" : LearnedDetails;
+            // Retrieve the learned details for the spell.
+            string? learnedDetails = LearnedDetails;
+
+            // Check to see if the spell learned details is null.
+            if (learnedDetails is null)
+            {
+                // We will default the details to blank, if there are no scripts.
+                learnedDetails = "";
+                if (CastSpellScripts is not null)
+                {
+                    // A null value for learned details for a spell, means to use the associated scripts.
+                    List<string> learnedDetailsList = new List<string>();
+                    foreach (ICastSpellScript castSpellScript in CastSpellScripts)
+                    {
+                        string castSpellScriptLearnedDetails = castSpellScript.LearnedDetails;
+                        if (!learnedDetailsList.Contains(castSpellScriptLearnedDetails))
+                        {
+                            learnedDetailsList.Add(castSpellScriptLearnedDetails);
+                        }
+                    }
+
+                    learnedDetails = String.Join(" ", learnedDetailsList);
+                }
+            }
+            info = !Tried ? "untried" : learnedDetails;
         }
 
         return CharacterClassSpell.Level >= 99 ? "(illegible)" : $"{Name,-30} {CharacterClassSpell.Level,3} {CharacterClassSpell.ManaCost,4} {FailureChance(),3}% {info}";
@@ -232,5 +256,5 @@ internal class Spell : IGetKey
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.
     /// </summary>
     /// <returns></returns>
-    protected virtual string LearnedDetails { get; }
+    protected virtual string? LearnedDetails { get; } = null;
 }

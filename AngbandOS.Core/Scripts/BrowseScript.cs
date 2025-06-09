@@ -18,6 +18,11 @@ internal class BrowseScript : Script, IScript, ICastSpellScript, IGameCommandScr
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the browse script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>

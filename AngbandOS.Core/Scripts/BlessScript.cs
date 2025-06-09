@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -25,4 +25,5 @@ internal class BlessScript : Script, IScript, ICastSpellScript
     {
         Game.BlessingTimer.AddTimer(Game.DieRoll(12) + 12);
     }
+    public string LearnedDetails => "dur 12+d12 turns";
 }

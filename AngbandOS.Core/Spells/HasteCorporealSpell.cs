@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -13,6 +13,4 @@ internal class HasteCorporealSpell : Spell
     private HasteCorporealSpell(Game game) : base(game) { }
 
     public override string Name => "Haste";
-
-    protected override string LearnedDetails => $"dur {Game.ExperienceLevel.IntValue}+d{20 + Game.ExperienceLevel.IntValue}";
 }

@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -27,4 +27,5 @@ internal class PhantasmalServantScript : Script, IScript, ICastSpellScript
         string msg = success ? "'Your wish, master?'" : "No-one ever turns up.";
         Game.MsgPrint(msg);
     }
+    public string LearnedDetails => "control 100%";
 }

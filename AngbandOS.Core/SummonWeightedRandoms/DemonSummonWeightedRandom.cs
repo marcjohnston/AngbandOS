@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -16,4 +16,5 @@ internal class DemonSummonWeightedRandom : SummonWeightedRandom
         (nameof(DemonPet1xSummonScript), 6),
         (nameof(Demon1xSummonScript), 4)
     };
+    public string LearnedDetails =>  "control 70%"; // TODO: This math is incorrect ... should be 60%
 }

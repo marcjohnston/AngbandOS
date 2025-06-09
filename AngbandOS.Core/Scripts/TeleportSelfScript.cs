@@ -18,6 +18,11 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Teleports the player between a specified distance from 1/2 of the distance up to a maximum of 200.
     /// </summary>
     /// <param name="distance">A distance up to 200.</param>

@@ -14,6 +14,11 @@ internal class VersionScript : Script, IScript, ICastSpellScript, IGameCommandSc
 {
     private VersionScript(Game game) : base(game) { }
 
+    /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
     public void ExecuteCastSpellScript(Spell spell)
     {
         ExecuteScript();

@@ -18,7 +18,7 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     {
         Game = game;
     }
-    static int i = 0;
+
     public void Bind()
     {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);
@@ -73,6 +73,11 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
 
     #region Light-weight virtuals and abstracts for game configuration.
     public virtual string Key => GetType().Name;
+
+    /// <summary>
+    /// Returns the details that are presented to the player.  Returns the <see cref="Expression.Minimize(MinimizeOptions)"> version of the <see cref="DamageRoll"/>, by default.
+    /// </summary>
+    public string LearnedDetails => $"dam {DamageRoll.Minimize(new MinimizeOptions() { DivideOnlyOnfIntegerResult = true }).Text}";
 
     /// <summary>
     /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.

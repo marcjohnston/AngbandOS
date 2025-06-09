@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -26,4 +26,5 @@ internal class ExtraDimensionalBeingScript : Script, IScript, ICastSpellScript
         Game.MsgPrint("You have turned into a Extradimensional Being.");
         Game.RunScript(nameof(GainMutationScript));
     }
+    public string LearnedDetails => "";
 }

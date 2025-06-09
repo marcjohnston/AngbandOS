@@ -58,4 +58,9 @@ internal abstract class RenderMessageScript : Script, IUniversalScript
         ExecuteScript();
         return new IdentifiedAndUsedResult(IdentifiesItem, UsesItem);
     }
+
+    /// <summary>
+    /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
+    /// </summary>
+    public virtual string LearnedDetails => "";
 }

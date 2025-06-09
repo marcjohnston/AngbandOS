@@ -7,10 +7,8 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-/// <summary>
-/// Represents an interface for a script to execute that accepts a 
-/// </summary>
 internal interface ICastSpellScript
 {
     void ExecuteCastSpellScript(Spell spell);
+    string LearnedDetails { get; }
 }

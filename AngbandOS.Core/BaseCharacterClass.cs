@@ -110,6 +110,13 @@ internal abstract class BaseCharacterClass : IGetKey
         {
             spell.CastSpell();
         }
+        if (!spell.Tried)
+        {
+            int e = spell.CharacterClassSpell.FirstCastExperience;
+            spell.Tried = true;
+            Game.GainExperience(e * spell.CharacterClassSpell.Level);
+        }
+
         Game.EnergyUse = 100;
         if (spell.CharacterClassSpell.ManaCost <= Game.Mana.IntValue)
         {

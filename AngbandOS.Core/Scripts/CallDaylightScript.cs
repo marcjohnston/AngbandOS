@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -31,4 +31,5 @@ internal class CallDaylightScript : Script, IScript, ICastSpellScript
         Game.MsgPrint("The daylight scorches your flesh!");
         Game.TakeHit(Game.DiceRoll(2, 2), "daylight");
     }
+    public string LearnedDetails => $"dam 2d{Game.ExperienceLevel.IntValue / 2}";
 }

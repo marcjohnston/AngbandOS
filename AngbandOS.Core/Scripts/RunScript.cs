@@ -18,6 +18,11 @@ internal class RunScript : Script, IScript, ICastSpellScript, IGameCommandScript
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the run script and disposes of the repeatable result.
     /// </summary>
     /// <returns></returns>

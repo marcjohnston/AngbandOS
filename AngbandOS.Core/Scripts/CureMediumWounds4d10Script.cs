@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -26,4 +26,5 @@ internal class CureMediumWounds4d10Script : Script, IScript, ICastSpellScript
         Game.RestoreHealth(Game.DiceRoll(4, 10));
         Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 20);
     }
+    public string LearnedDetails => "heal 4d10";
 }

@@ -18,6 +18,11 @@ internal class SelectItemAndEatScript : Script, IScript, ICastSpellScript, IGame
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the eat script and returns false because the process shouldn't be repeated.
     /// </summary>
     /// <returns></returns>

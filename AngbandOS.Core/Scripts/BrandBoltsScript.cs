@@ -20,6 +20,11 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IActivateIt
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Runs the successful script and returns true, because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>

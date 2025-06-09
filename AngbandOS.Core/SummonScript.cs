@@ -111,6 +111,11 @@ internal class SummonScript : IGetKey, IUniversalScript
     }
 
     /// <summary>
+    /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
+    /// </summary>
+    public virtual string LearnedDetails => "";
+
+    /// <summary>
     /// Returns true, if a group of monsters or pets will be summon; false, otherwise.
     /// </summary>
     public Expression Group { get; private set; }

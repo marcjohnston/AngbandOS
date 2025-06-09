@@ -18,6 +18,11 @@ internal class OpenScript : Script, IScript, ICastSpellScript, IGameCommandScrip
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the open script and disposes of the repeatable result.
     /// </summary>
     /// <returns></returns>

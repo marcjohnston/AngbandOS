@@ -7,5 +7,5 @@ internal class WizardLockSpellFolkRealmSuccessMappedSpellScript : MappedSpellScr
     public override string NamespaceKey => MappedSpellScript.SuccessNamespaceKey;
     protected override string SpellBindingKey => nameof(WizardLockFolkSpell);
     protected override string? RealmBindingKey => nameof(FolkRealm);
-    protected override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Jamdoor1d30p20ProjectileScript) };
+    protected override string[]? CastSpellScriptBindingKeys => new string[] { nameof(JamDoor1d30p20ProjectileScript) };
 }

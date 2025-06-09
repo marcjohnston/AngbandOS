@@ -18,6 +18,11 @@ internal class ViewMapScript : Script, IScript, ICastSpellScript, IGameCommandSc
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the view map script and returns false.
     /// </summary>
     /// <returns></returns>

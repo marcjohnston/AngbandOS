@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -13,6 +13,4 @@ internal class BlizzardNatureSpell : Spell
     private BlizzardNatureSpell(Game game) : base(game) { }
 
     public override string Name => "Blizzard";
-
-    protected override string LearnedDetails => $"dam {70 + Game.ExperienceLevel.IntValue}";
 }

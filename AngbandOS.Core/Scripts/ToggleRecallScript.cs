@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -40,4 +40,5 @@ internal class ToggleRecallScript : Script, IScript, ICastSpellScript, IActivate
             Game.MsgPrint("A tension leaves the air around you...");
         }
     }
+    public string LearnedDetails => "delay 15+d21";
 }

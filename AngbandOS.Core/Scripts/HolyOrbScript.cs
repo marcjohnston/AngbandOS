@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -29,4 +29,5 @@ internal class HolyOrbScript : Script, IScript, ICastSpellScript
         }
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile)), dir, Game.DiceRoll(3, 6) + Game.ExperienceLevel.IntValue + (Game.ExperienceLevel.IntValue / (Game.BaseCharacterClass.ID == CharacterClassEnum.Priest || Game.BaseCharacterClass.ID == CharacterClassEnum.HighMage ? 2 : 4)), Game.ExperienceLevel.IntValue < 30 ? 2 : 3);
     }
+    public string LearnedDetails => "";
 }

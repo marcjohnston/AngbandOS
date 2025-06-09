@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -21,4 +21,5 @@ internal class TeleportSelf4xScript : Script, IScript, ICastSpellScript
     {
         Game.RunScriptInt(nameof(TeleportSelfScript), Game.ExperienceLevel.IntValue * 4);
     }
+    public string LearnedDetails => $"range {Game.ExperienceLevel.IntValue * 4}";
 }

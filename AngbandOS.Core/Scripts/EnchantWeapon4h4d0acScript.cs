@@ -18,6 +18,11 @@ internal class EnchantWeapon4h4d0acScript : Script, IScript, ICastSpellScript, I
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the enchant weapon script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>

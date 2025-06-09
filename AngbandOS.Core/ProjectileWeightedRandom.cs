@@ -52,4 +52,9 @@ internal abstract class ProjectileWeightedRandom : GenericWeightedRandom<Project
     {
         Choose().ExecuteCastSpellScript(spell);
     }
+
+    /// <summary>
+    /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
+    /// </summary>
+    public virtual string LearnedDetails => "";
 }

@@ -17,6 +17,11 @@ internal class JournalScript : Script, IScript, ICastSpellScript, IGameCommandSc
     private readonly string[] _menuItem = new string[128];
     private int _menuLength;
 
+    /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
     public void ExecuteCastSpellScript(Spell spell)
     {
         ExecuteScript();

@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -25,4 +25,5 @@ internal class LightAreaScript : Script, IScript, ICastSpellScript
     {
         Game.LightArea(Game.DiceRoll(2, Game.ExperienceLevel.IntValue / 2), (Game.ExperienceLevel.IntValue / 10) + 1);
     }
+    public string LearnedDetails => $"dam 2d{Game.ExperienceLevel.IntValue / 2}";
 }

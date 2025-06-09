@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -52,4 +52,5 @@ internal class MeteorStormScript : Script, IScript, ICastSpellScript
             projectile.Fire(0, 2, y, x, Game.ExperienceLevel.IntValue * 3 / 2, kill: true, item: true, jump: true, beam: false, thru: false, hide: false, grid: false, stop: false);
         }
     }
+    public string LearnedDetails => $"dam {3 * Game.ExperienceLevel.IntValue / 2} each";
 }

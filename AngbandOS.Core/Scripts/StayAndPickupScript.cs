@@ -18,6 +18,11 @@ internal class StayAndPickupScript : Script, IScript, ICastSpellScript, IGameCom
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the stay and pickup script and returns false.
     /// </summary>
     /// <returns></returns>

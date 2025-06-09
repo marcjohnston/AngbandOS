@@ -18,6 +18,11 @@ internal class LightScript : Script, IScript, ICastSpellScript
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Lights the map.
     /// </summary>
     /// <returns></returns>

@@ -18,6 +18,11 @@ internal class DropScript : Script, IScript, ICastSpellScript, IGameCommandScrip
     }
 
     /// <summary>
+    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// </summary>
+    public string LearnedDetails => "";
+
+    /// <summary>
     /// Executes the drop script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
