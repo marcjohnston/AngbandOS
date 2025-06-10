@@ -517,7 +517,7 @@ internal class SingletonRepository
         LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration, SummonWeightedRandom>(gameConfiguration.SummonWeightedRandoms);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, SyllableSet>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, Symbol>(gameConfiguration.Symbols);
-        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, GenericTextWidget>(gameConfiguration.TextWidgets);
+        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, TextWidget>(gameConfiguration.TextWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration, Tile>(gameConfiguration.Tiles);
         LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, GenericTimeWidget>(gameConfiguration.TimeWidgets);
         LoadFromConfiguration<Town, TownGameConfiguration, Town>(gameConfiguration.Towns);

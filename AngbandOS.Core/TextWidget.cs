@@ -14,16 +14,27 @@ namespace AngbandOS.Core;
 /// property within the space provided by the <see cref="Width"/> property.  The text is drawn in the color specified by the <see cref="Color"/> property.
 /// </summary>
 [Serializable]
-internal abstract class TextWidget : Widget, IGetKey
+internal class TextWidget : Widget, IGetKey
 {
-    protected TextWidget(Game game) : base(game) { }
+    protected TextWidget(Game game) : base(game) { } // TODO: Remove this
+    public TextWidget(Game game, TextWidgetGameConfiguration textWidgetGameConfiguration) : base(game)
+    {
+        Key = textWidgetGameConfiguration.Key ?? textWidgetGameConfiguration.GetType().Name;
+        Text = textWidgetGameConfiguration.Text;
+        Color = textWidgetGameConfiguration.Color;
+        X = textWidgetGameConfiguration.X;
+        Y = textWidgetGameConfiguration.Y;
+        Width = textWidgetGameConfiguration.Width;
+        JustificationName = textWidgetGameConfiguration.JustificationName;
+        ChangeTrackerNames = textWidgetGameConfiguration.ChangeTrackerNames;
+    }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public virtual string[]? ChangeTrackerNames => null;
+    public virtual string[]? ChangeTrackerNames { get; } = null;
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
@@ -52,27 +63,27 @@ internal abstract class TextWidget : Widget, IGetKey
     /// <summary>
     /// Returns the text to be rendered for the widget.
     /// </summary>
-    public abstract string Text { get; }
+    public virtual string Text { get; }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
+    public virtual ColorEnum Color { get; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public abstract int X { get; }
+    public virtual int X { get; }
 
     /// <summary>
     /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public abstract int Y { get; }
+    public virtual int Y { get; }
 
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public virtual int? Width => null;
+    public virtual int? Width { get; } = null;
 
     /// <summary>
     /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property is bound using
@@ -84,7 +95,7 @@ internal abstract class TextWidget : Widget, IGetKey
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName => nameof(LeftJustification);
+    public virtual string JustificationName { get; } = nameof(LeftJustification);
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
