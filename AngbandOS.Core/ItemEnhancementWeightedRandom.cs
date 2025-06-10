@@ -13,20 +13,28 @@ namespace AngbandOS.Core;
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
 /// </summary>
 [Serializable]
-internal abstract class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey
+internal class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey
 {
-    protected ItemEnhancementWeightedRandom(Game game) : base(game) { }
+    public ItemEnhancementWeightedRandom(Game game, ItemEnhancementWeightedRandomGameConfiguration itemEnhancementWeightedRandomGameConfiguration) : base(game)
+    {
+        Key = itemEnhancementWeightedRandomGameConfiguration.Key ?? itemEnhancementWeightedRandomGameConfiguration.GetType().Name;
+        NameAndWeightBindings = itemEnhancementWeightedRandomGameConfiguration.NameAndWeightBindings;
+    }
 
-    public virtual string Key => GetType().Name;
+    /// <summary>
+    /// Returns the nullable names and weights.  Names can be null to support non-action weights.
+    /// </summary>
+    protected (string? name, int weight)[] NameAndWeightBindings { get; }
+
+    public virtual string Key { get; }
+
     public string GetKey => Key;
 
-    protected abstract (string?, int)[] ItemEnhancementBindingKeyAndWeightTuples { get; }
-
-    public virtual void Bind()
+    public void Bind()
     {
-        foreach ((string? itemEnhancementBindingKey, int weight) in ItemEnhancementBindingKeyAndWeightTuples)
+        foreach ((string? name, int weight) in NameAndWeightBindings)
         {
-            Add(weight, Game.SingletonRepository.GetNullable<ItemEnhancement>(itemEnhancementBindingKey));
+            Add(weight, name == null ? null : Game.SingletonRepository.Get<ItemEnhancement>(name)); // TODO: This smells because of the nullability
         }
     }
 
@@ -35,7 +43,7 @@ internal abstract class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhan
         ItemEnhancementWeightedRandomGameConfiguration definition = new ItemEnhancementWeightedRandomGameConfiguration()
         {
             Key = Key,
-            ItemEnhancementBindingKeyAndWeightTuples = ItemEnhancementBindingKeyAndWeightTuples,
+            NameAndWeightBindings = NameAndWeightBindings,
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }

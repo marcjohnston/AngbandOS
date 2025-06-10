@@ -401,7 +401,7 @@ internal class SingletonRepository
         RegisterRepository<ItemEnhancement>();
         RegisterRepository<ItemEnhancementWeightedRandom>();
         RegisterRepository<ItemFactory>();
-        RegisterRepository<ItemFactoryGenericWeightedRandom>();
+        RegisterRepository<ItemFactoryWeightedRandom>();
         RegisterRepository<ItemFilter>();
         RegisterRepository<ItemFlavor>();
         RegisterRepository<ItemMatch>();
@@ -489,10 +489,12 @@ internal class SingletonRepository
         LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, GenericIntWidget>(gameConfiguration.IntWidgets);
         LoadFromConfiguration<ItemClass, ItemClassGameConfiguration, GenericItemClass>(gameConfiguration.ItemClasses);
         LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration, GenericItemEnhancement>(gameConfiguration.ItemEnhancements);
-        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, GenericItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
+        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, ItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
+        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration, ItemFactoryWeightedRandom>(gameConfiguration.ItemFactoryWeightedRandoms);
         LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration, GenericItemFactory>(gameConfiguration.ItemFactories);
         LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, GenericItemFlavor>(gameConfiguration.ItemFlavors);
         LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration, GenericMapWidget>(gameConfiguration.MapWidgets);
+        LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration, MappedSpellScript>(gameConfiguration.MappedSpellScripts);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, GenericMaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
         LoadFromConfiguration<NullableStringsTextAreaWidget, NullableStringsTextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
@@ -501,17 +503,18 @@ internal class SingletonRepository
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, GenericProjectileScript>(gameConfiguration.ProjectileScripts);
-        LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, GenericProjectileWeightedRandomScript>(gameConfiguration.ProjectileWeightedRandomScripts);
+        LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, ProjectileWeightedRandom>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration, RaceGender>(gameConfiguration.RaceGenders);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, GenericRangedWidget>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Realm, RealmGameConfiguration, Realm>(gameConfiguration.Realms);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration, RealmCharacterClass>(gameConfiguration.RealmCharacterClasses);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
- //       LoadFromConfiguration<Spell, SpellGameConfiguration, Spell>(gameConfiguration.Spells);
+        LoadFromConfiguration<Spell, SpellGameConfiguration, Spell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
         LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, StoreFactory>(gameConfiguration.StoreFactories);
         LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, GenericStringWidget>(gameConfiguration.StringWidgets);
         LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration, SummonScript>(gameConfiguration.SummonScripts);
+        LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration, SummonWeightedRandom>(gameConfiguration.SummonWeightedRandoms);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, SyllableSet>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, Symbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, GenericTextWidget>(gameConfiguration.TextWidgets);
@@ -540,11 +543,9 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<FloorEffect>();
         LoadAllAssemblyTypes<ItemAction>();
         LoadAllAssemblyTypes<ItemEffect>();
-        LoadAllAssemblyTypes<ItemFactoryGenericWeightedRandom>();
         LoadAllAssemblyTypes<ItemFilter>();
         LoadAllAssemblyTypes<ItemQualityRating>();
         LoadAllAssemblyTypes<ItemTest>();
-        LoadAllAssemblyTypes<MappedSpellScript>();
         LoadAllAssemblyTypes<MartialArtsAttack>();
         LoadAllAssemblyTypes<MonsterEffect>();
         LoadAllAssemblyTypes<MonsterFilter>();
@@ -561,9 +562,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();
         LoadAllAssemblyTypes<Script>();
-        LoadAllAssemblyTypes<Spell>();
         LoadAllAssemblyTypes<SpellResistantDetection>();
-        LoadAllAssemblyTypes<SummonWeightedRandom>();
         LoadAllAssemblyTypes<Talent>();
         LoadAllAssemblyTypes<WieldSlot>();
 

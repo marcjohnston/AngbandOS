@@ -131,4 +131,7 @@ public class GameConfiguration
     public virtual RealmCharacterClassGameConfiguration[]? RealmCharacterClasses { get; set; } = null;
     public virtual ViewGameConfiguration[]? Views { get; set; } = null;
     public virtual SummonScriptGameConfiguration[]? SummonScripts { get; set; } = null;
+    public virtual MappedSpellScriptGameConfiguration[]? MappedSpellScripts { get; set; } = null;
+    public virtual SummonWeightedRandomGameConfiguration[]? SummonWeightedRandoms { get; set; } = null;
+    public virtual ItemFactoryWeightedRandomGameConfiguration[]? ItemFactoryWeightedRandoms { get; set; } = null;
 }

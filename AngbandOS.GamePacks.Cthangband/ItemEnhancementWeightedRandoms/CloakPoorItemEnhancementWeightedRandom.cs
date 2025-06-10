@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CloakPoorItemEnhancementWeightedRandom : ItemEnhancementWeightedRandomGameConfiguration
 {
-    public override (string?, int)[] ItemEnhancementBindingKeyAndWeightTuples => new (string?, int)[]
+    public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
         (nameof(CloakOfIrritationItemEnhancement), 1),
         (nameof(CloakOfVulnerabilityItemEnhancement), 1),

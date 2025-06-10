@@ -8,5 +8,5 @@ public class ItemEnhancementWeightedRandomGameConfiguration
 {
     public virtual string Key { get; set; }
 
-    public virtual (string?, int)[] ItemEnhancementBindingKeyAndWeightTuples { get; set; }
+    public virtual (string, int)[] NameAndWeightBindings { get; set; }
 }

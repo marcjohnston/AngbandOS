@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LordlyResistanceItemEnhancementWeightedRandom : ItemEnhancementWeightedRandomGameConfiguration
 {
-    public override (string?, int)[] ItemEnhancementBindingKeyAndWeightTuples => new (string?, int)[]
+    public override (string?, int)[] NameAndWeightBindings => new (string?, int)[]
     {
         (nameof(ResistFearAndWarriorBiasItemEnhancement), 2 * 16), // 1/3
         (nameof(ResistFearItemEnhancement), 2 * 32), // 2/3

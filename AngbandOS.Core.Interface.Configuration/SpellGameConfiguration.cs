@@ -11,7 +11,11 @@ public class SpellGameConfiguration
     /// Returns the name of the spell, as rendered to the SaveGame.
     /// </summary>
     public virtual string Name { get; set; }
-    public virtual string[]? CastScriptNames { get; set; } = null;
-    public virtual string[]? CastFailedScriptNames { get; set; } = null;
-    public virtual string LearnedDetails { get; set; } = "";
+
+    /// <summary>
+    /// Returns details about the spell, blank if there are no details or null, if the details should be retrieved from the
+    /// associated scripts that are configured when the spell succeeds.  Returns null, by default.
+    /// </summary>
+    /// <returns></returns>
+    public virtual string? LearnedDetails { get; set; } = null;
 }

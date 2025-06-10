@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DragonsBreatheProjectileWeightedRandom : ProjectileWeightedRandomGameConfiguration
 {
-    public override (string, int)[] NameAndWeightBindingTuples => new (string, int)[]
+    public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
         (nameof(Acid100rm3ProjectileScript), 1),
         (nameof(Electricity80rm3ProjectileScript), 1),

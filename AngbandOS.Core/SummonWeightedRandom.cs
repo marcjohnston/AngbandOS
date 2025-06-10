@@ -5,12 +5,47 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class SummonWeightedRandom : GenericWeightedRandom<SummonScript>, IUniversalScript
+internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript
 {
-    protected SummonWeightedRandom(Game game) : base(game) { }
+    public SummonWeightedRandom(Game game, SummonWeightedRandomGameConfiguration summonWeightedRandomGameConfiguration) : base(game)
+    {
+        Key = summonWeightedRandomGameConfiguration.Key ?? summonWeightedRandomGameConfiguration.GetType().Name;
+        NameAndWeightBindings = summonWeightedRandomGameConfiguration.NameAndWeightBindings;
+        LearnedDetails = LearnedDetails;
+    }
+
+    /// <summary>
+    /// Returns the nullable names and weights.  Names can be null to support non-action weights.
+    /// </summary>
+    protected (string name, int weight)[] NameAndWeightBindings { get; }
+
+    public virtual string Key { get; }
+
+    public string GetKey => Key;
+
+    public void Bind()
+    {
+        foreach ((string name, int weight) in NameAndWeightBindings)
+        {
+            Add(weight, Game.SingletonRepository.Get<SummonScript>(name));
+        }
+    }
+
+    public string ToJson()
+    {
+        SummonWeightedRandomGameConfiguration definition = new()
+        {
+            Key = Key,
+            NameAndWeightBindings = NameAndWeightBindings,
+            LearnedDetails = LearnedDetails,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
+    }
 
     public UsedResult ExecuteActivateItemScript(Item item)
     {
@@ -45,5 +80,5 @@ internal abstract class SummonWeightedRandom : GenericWeightedRandom<SummonScrip
     /// <summary>
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
     /// </summary>
-    public virtual string LearnedDetails => "";
+    public virtual string LearnedDetails { get; } = ""; // TODO: This could be automated, if we knew which were pets and which were not.
 }

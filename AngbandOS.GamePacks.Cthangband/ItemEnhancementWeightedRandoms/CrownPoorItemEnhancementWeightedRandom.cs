@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CrownPoorItemEnhancementWeightedRandom : ItemEnhancementWeightedRandomGameConfiguration
 {
-    public override (string?, int)[] ItemEnhancementBindingKeyAndWeightTuples => new (string?, int)[]
+    public override (string?, int)[] NameAndWeightBindings => new (string?, int)[]
     {
         (nameof(HatOfStupidityItemEnhancement), 2),
         (nameof(HatOfNaivetyItemEnhancement), 2),

@@ -33,11 +33,11 @@ internal class SlimeMoldScript : Script, IEatOrQuaffScript
         //Ruination = 15,
         //SlimeMold = 2,
 
-        ItemFactoryGenericWeightedRandom itemFactoryWeightedRandom = Game.SingletonRepository.Get<ItemFactoryGenericWeightedRandom>(nameof(SlimeMoldPotionItemFactoryWeightedRandom));
+        ItemFactoryWeightedRandom itemFactoryWeightedRandom = Game.SingletonRepository.Get<ItemFactoryWeightedRandom>(nameof(SlimeMoldPotionItemFactoryWeightedRandom));
         ItemFactory potion = itemFactoryWeightedRandom.Choose();
         if (potion.QuaffTuple == null)
         {
-            throw new Exception($"The {nameof(WeightedRandom<ItemFactoryGenericWeightedRandom>)} choose an item that is not a potion.");
+            throw new Exception($"The {nameof(WeightedRandom<ItemFactoryWeightedRandom>)} choose an item that is not a potion.");
         }
         potion.QuaffTuple.Value.QuaffScript.ExecuteEatOrQuaffScript();
         return new IdentifiedResult(true);

@@ -6,5 +6,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ProjectileWeightedRandomGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual (string, int)[] NameAndWeightBindingTuples { get; set; }
+    public virtual (string, int)[] NameAndWeightBindings { get; set; }
+    public virtual string LearnedDetails { get; set; } = "";
 }

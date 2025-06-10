@@ -14,12 +14,6 @@ internal class Spell : IGetKey
 {
     protected readonly Game Game;
 
-    public Spell(Game game)
-    {
-        Game = game;
-        Key = GetType().Name;
-    }
-
     public Spell(Game game, SpellGameConfiguration spellGameConfiguration)
     {
         Game = game;
@@ -93,13 +87,13 @@ internal class Spell : IGetKey
     /// <param name="namespaceKey"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    private ICastSpellScript[]? GetMappedSpellScripts(string namespaceKey)
+    private ICastSpellScript[]? GetMappedSpellScripts(bool successScript)
     {
-        Func<Realm?, Spell?, BaseCharacterClass?, string> compositeKeyRetrieval = (Realm? realm, Spell? spell, BaseCharacterClass? characterClass) => MappedSpellScript.GetCompositeKey(Game, realm, spell, characterClass, namespaceKey);
+        Func<Realm?, Spell?, BaseCharacterClass?, string> compositeKeyRetrieval = (Realm? realm, Spell? spell, BaseCharacterClass? characterClass) => MappedSpellScript.GetCompositeKey(Game, realm, spell, characterClass, successScript);
         MappedSpellScript? mappedCastSpellScript = Game.SingletonRepository.GetMapping<MappedSpellScript, Realm, Spell, BaseCharacterClass>(compositeKeyRetrieval, SpellBookItemFactory.Realm, this, Game.BaseCharacterClass);
         if (mappedCastSpellScript is null)
         {
-            throw new Exception($"No mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.BaseCharacterClass.GetKey} and {namespaceKey}.");
+            throw new Exception($"No {(successScript ? "success" : "failure")} mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.BaseCharacterClass.GetKey}.");
         }
 
         return mappedCastSpellScript.CastSpellScripts;
@@ -196,8 +190,8 @@ internal class Spell : IGetKey
         CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.BaseCharacterClass, this));
         SpellIndex = spellIndex;
         SpellBookItemFactory = itemFactory;
-        CastSpellScripts = GetMappedSpellScripts(MappedSpellScript.SuccessNamespaceKey);
-        FailedCastSpellScripts = GetMappedSpellScripts(MappedSpellScript.FailureNamespaceKey);
+        CastSpellScripts = GetMappedSpellScripts(true);
+        FailedCastSpellScripts = GetMappedSpellScripts(false);
     }
 
     public string Title()

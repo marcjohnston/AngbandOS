@@ -1,15 +1,22 @@
+using System.Text.Json;
+
 namespace AngbandOS.Core.MappedSpellScripts;
 
 [Serializable]
 internal class MappedSpellScript : IGetKey
 {
     protected readonly Game Game;
-    protected MappedSpellScript(Game game)
+    public MappedSpellScript(Game game, MappedSpellScriptGameConfiguration mappedSpellScriptGameConfiguration)
     {
         Game = game;
+        Success = mappedSpellScriptGameConfiguration.Success;
+        RealmBindingKey = mappedSpellScriptGameConfiguration.RealmBindingKey;
+        SpellBindingKey = mappedSpellScriptGameConfiguration.SpellBindingKey;
+        CharacterClassBindingKey = mappedSpellScriptGameConfiguration.CharacterClassBindingKey;
+        CastSpellScriptBindingKeys = mappedSpellScriptGameConfiguration.CastSpellScriptBindingKeys;
     }
 
-    public string GetKey => Game.GetCompositeKey(SpellBindingKey, RealmBindingKey, CharacterClassBindingKey, NamespaceKey);
+    public string GetKey => Game.GetCompositeKey(SpellBindingKey, RealmBindingKey, CharacterClassBindingKey, Success ? SuccessNamespaceKey : FailureNamespaceKey);
 
     public void Bind()
     {
@@ -18,12 +25,20 @@ internal class MappedSpellScript : IGetKey
         CharacterClass = Game.SingletonRepository.GetNullable<BaseCharacterClass>(CharacterClassBindingKey);
         CastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastSpellScriptBindingKeys);
     }
-    public static string GetCompositeKey(Game game, Realm? realm, Spell? spell, BaseCharacterClass? characterClass, string namespaceKey) => Game.GetCompositeKey(spell?.GetKey, realm?.GetKey, characterClass?.GetKey, namespaceKey);
-    public static string SuccessNamespaceKey => "Success";
-    public static string FailureNamespaceKey => "Failure";
+    public static string GetCompositeKey(Game game, Realm? realm, Spell? spell, BaseCharacterClass? characterClass, bool successScript) => Game.GetCompositeKey(spell?.GetKey, realm?.GetKey, characterClass?.GetKey, successScript ? SuccessNamespaceKey : FailureNamespaceKey);
+    private static string SuccessNamespaceKey => "Success";
+    private static string FailureNamespaceKey => "Failure";
     public string ToJson()
     {
-        return "";
+        MappedSpellScriptGameConfiguration definition = new MappedSpellScriptGameConfiguration()
+        {
+            Success = Success,
+            RealmBindingKey = RealmBindingKey,
+            SpellBindingKey = SpellBindingKey,
+            CharacterClassBindingKey = CharacterClassBindingKey,
+            CastSpellScriptBindingKeys = CastSpellScriptBindingKeys,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
     public Realm? Realm { get; private set; }
     public BaseCharacterClass? CharacterClass { get; private set; }
@@ -33,12 +48,16 @@ internal class MappedSpellScript : IGetKey
     protected virtual string? RealmBindingKey { get; }
     protected virtual string? CharacterClassBindingKey { get; }
     protected virtual string? SpellBindingKey { get; }
-    public virtual string NamespaceKey { get; }
+
+    /// <summary>
+    /// Returns true, if the spell script applies when the spell is successful; otherwise, returns false, indicating that the script applies when the
+    /// cast fails.  Returns true, by default.
+    /// </summary>
+    public virtual bool Success { get; } = true;
 
     /// <summary>
     /// Returns the name of an <see cref="ICastSpellScript"/> script to be run, when the spell is cast; or null, if the spell does nothing when cast.  This
     /// property is used to bind the <see cref="CastSpellScripts"/> property during the bind phase.
     /// </summary>
     protected virtual string[]? CastSpellScriptBindingKeys { get; }
-
 }
