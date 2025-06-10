@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using static System.Reflection.Metadata.BlobBuilder;
-
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]

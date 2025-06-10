@@ -7,7 +7,6 @@
 
 using AngbandOS.Core.Interface;
 using System.Xml.Linq;
-
 namespace AngbandOS.Core.Properties;
 
 [Serializable]

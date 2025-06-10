@@ -7,7 +7,6 @@
 
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
-
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]

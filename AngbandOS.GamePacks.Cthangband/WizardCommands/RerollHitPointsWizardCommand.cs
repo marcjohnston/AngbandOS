@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]

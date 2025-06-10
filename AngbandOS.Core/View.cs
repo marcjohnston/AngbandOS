@@ -6,8 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Configuration;
-using System.Text.Json;
-
 namespace AngbandOS.Core;
 
 /// <summary>

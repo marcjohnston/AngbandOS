@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.RaceAbilities;
-
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]

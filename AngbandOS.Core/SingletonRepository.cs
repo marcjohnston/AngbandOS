@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 using System.Reflection;
 using Timer = AngbandOS.Core.Timers.Timer;
-
 namespace AngbandOS.Core;
 
 [Serializable]

@@ -2,7 +2,6 @@
 using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.PersistentStorage.MySql.Entities;
 using Microsoft.EntityFrameworkCore;
-
 namespace AngbandOS.PersistentStorage
 {
     /// <summary>

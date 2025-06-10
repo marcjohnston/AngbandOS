@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Media;
-
 namespace Cthangband
 {
     public class Mixer

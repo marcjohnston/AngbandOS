@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.Text;
-
 namespace AngbandOS.Core;
 
 /// <summary>

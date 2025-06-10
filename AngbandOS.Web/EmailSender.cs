@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Net;
 using System.Net.Mail;
-
 namespace AngbandOS.Web
 {
     internal class EmailSender : IEmailSender

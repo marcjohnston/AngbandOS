@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Configuration;
-
 namespace AngbandOS.Core;
 
 [Serializable]

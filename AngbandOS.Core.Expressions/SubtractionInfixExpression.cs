@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]

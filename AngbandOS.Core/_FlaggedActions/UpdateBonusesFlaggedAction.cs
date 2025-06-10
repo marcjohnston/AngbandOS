@@ -7,7 +7,6 @@
 
 using AngbandOS.Core.RaceAbilities;
 using System.Diagnostics;
-
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]

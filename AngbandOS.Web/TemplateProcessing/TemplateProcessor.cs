@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-
 namespace AngbandOS.Web.TemplateProcessing
 {
     public class TemplateProcessor

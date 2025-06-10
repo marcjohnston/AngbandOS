@@ -2,7 +2,6 @@
 using AngbandOS.Web.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
 namespace AngbandOS.PersistentStorage
 {
     /// <summary>

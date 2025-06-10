@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace AngbandOS.Core;
+﻿namespace AngbandOS.Core;
 
 [Serializable]
 internal class Symbol : IGetKey

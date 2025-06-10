@@ -1,6 +1,5 @@
 ﻿using AngbandOS.PersistentStorage.Sql.Entities;
 using Microsoft.EntityFrameworkCore;
-
 namespace AngbandOS.PersistentStorage
 {
     /// <summary>

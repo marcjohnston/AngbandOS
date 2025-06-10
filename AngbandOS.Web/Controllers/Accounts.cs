@@ -11,7 +11,6 @@ using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
-
 namespace AngbandOS.Web.Controllers
 {
     /// <summary>

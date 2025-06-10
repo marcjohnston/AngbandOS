@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Core.Interface.Configuration;
-
 namespace AngbandOS.Core;
 
 [Serializable]

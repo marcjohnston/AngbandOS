@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Expressions.IDE;
-
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]

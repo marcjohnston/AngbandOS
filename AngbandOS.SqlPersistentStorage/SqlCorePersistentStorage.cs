@@ -3,7 +3,6 @@ using AngbandOS.PersistentStorage.Sql.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
-
 namespace AngbandOS.PersistentStorage
 {
     /// <summary>

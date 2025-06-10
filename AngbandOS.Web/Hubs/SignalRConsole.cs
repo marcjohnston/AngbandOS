@@ -4,7 +4,6 @@ using AngbandOS.Core.Interface.Configuration;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.ComponentModel;
-
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>

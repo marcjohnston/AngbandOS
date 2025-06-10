@@ -10,7 +10,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
-
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>

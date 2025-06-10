@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
 namespace AngbandOS.PersistentStorage.Sql.Entities
 {
     public partial class AngbandOSContext : DbContext

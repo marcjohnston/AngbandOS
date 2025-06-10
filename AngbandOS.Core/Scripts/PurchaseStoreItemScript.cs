@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using static System.Formats.Asn1.AsnWriter;
-
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]

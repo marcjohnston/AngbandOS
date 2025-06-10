@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.ComponentModel.DataAnnotations;
-
 namespace AngbandOS.Core.Interface.Configuration;
 
 

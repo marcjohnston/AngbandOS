@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.Reflection.PortableExecutable;
-
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]

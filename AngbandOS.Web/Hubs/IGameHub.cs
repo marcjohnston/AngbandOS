@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Core.Interface;
-
 namespace AngbandOS.Web.Hubs;
 
 /// <summary>

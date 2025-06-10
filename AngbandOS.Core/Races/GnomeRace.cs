@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.RacialPowers;
-
 namespace AngbandOS.Core.Races;
 
 [Serializable]

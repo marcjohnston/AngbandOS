@@ -63,3 +63,5 @@ global using static AngbandOS.Core.Extensions;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.Interface.Configuration;
 global using AngbandOS.GamePacks.Cthangband; // TODO: This can be deleted when the Cthangband game pack is complete.  We can also drop the Project Reference.
+
+global using System.Text.Json;

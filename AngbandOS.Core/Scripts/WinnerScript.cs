@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.Runtime.CompilerServices;
-
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]

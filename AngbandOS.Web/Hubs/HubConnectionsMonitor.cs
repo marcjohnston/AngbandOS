@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Web.Models;
 using System.Collections.Concurrent;
-
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>

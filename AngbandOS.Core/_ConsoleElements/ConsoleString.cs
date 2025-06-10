@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.Collections;
-
 namespace AngbandOS.Core.ConsoleElements;
 
 /// <summary>

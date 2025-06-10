@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 namespace AngbandOS.PersistentStorage.MySql.Entities
 {
     public partial class AngbandOSContext : DbContext

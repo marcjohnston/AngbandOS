@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text.Json;
-
 namespace AngbandOS.Web.Controllers
 {
     [Route("apiv1")]

@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Web.Interface;
 using AngbandOS.Web.Models;
-
 namespace AngbandOS.Web.Hubs
 {
     public class AdministatorChatRecipient : ChatRecipient

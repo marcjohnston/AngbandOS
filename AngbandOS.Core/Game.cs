@@ -9,7 +9,6 @@ using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using Timer = AngbandOS.Core.Timers.Timer;
-
 namespace AngbandOS.Core;
 
 [Serializable]

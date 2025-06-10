@@ -7,8 +7,6 @@
 
 using AngbandOS.Core.Interface.Configuration;
 using System.Reflection;
-using System.Text.Json;
-
 namespace AngbandOS.Core;
 
 [Serializable]

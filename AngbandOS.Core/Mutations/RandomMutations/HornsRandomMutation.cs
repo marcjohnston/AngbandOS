@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using System.Security.Cryptography.X509Certificates;
-
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
 [Serializable]

@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using System;
-
 namespace AngbandOS.Core;
 
 [Serializable]

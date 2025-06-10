@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Web.Models;
-
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>

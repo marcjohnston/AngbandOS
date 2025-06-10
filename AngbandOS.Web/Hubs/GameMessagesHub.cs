@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
 using Microsoft.AspNetCore.SignalR;
-
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
