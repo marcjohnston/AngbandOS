@@ -478,7 +478,7 @@ internal class SingletonRepository
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration, BoolWidget>(gameConfiguration.BoolWidgets);
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration, CharacterClassSpell>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, ConditionalWidget>(gameConfiguration.ConditionalWidgets);
-        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, GenericDateWidget>(gameConfiguration.DateWidgets);
+        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, DateWidget>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration, GenericDungeon>(gameConfiguration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GameCommand>(gameConfiguration.GameCommands);
