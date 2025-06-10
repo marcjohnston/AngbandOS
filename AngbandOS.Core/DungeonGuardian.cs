@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class DungeonGuardian : IGetKey
+internal class DungeonGuardian : IGetKey
 {
     protected readonly Game Game;
     public DungeonGuardian(Game game, DungeonGuardianGameConfiguration dungeonGuardianGameConfiguration)

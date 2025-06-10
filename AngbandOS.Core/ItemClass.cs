@@ -1,38 +1,42 @@
-using System.Security.Cryptography.X509Certificates;
 namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents a class of items factories that are similar.  These classes define a distinct class name and stomp setting.
 /// </summary>
 [Serializable]
-internal abstract class ItemClass : IGetKey
+internal class ItemClass : IGetKey
 {
     protected readonly Game Game;
-    protected ItemClass(Game game)
+    public ItemClass(Game game, ItemClassGameConfiguration itemClassGameConfiguration)
     {
         Game = game;
+        Key = itemClassGameConfiguration.Key ?? itemClassGameConfiguration.GetType().Name;
+        Name = itemClassGameConfiguration.Name;
+        AllowStomp = itemClassGameConfiguration.AllowStomp;
+        NumberOfFlavorsToGenerate = itemClassGameConfiguration.NumberOfFlavorsToGenerate;
+        ItemFlavorBindingKeys = itemClassGameConfiguration.ItemFlavorBindingKeys;
     }
 
     /// <summary>
     /// Returns the capitalized name of a singular item that the class represents.  This name can be used in a format like 'Your {0}'
     /// </summary>
-    public abstract string Name { get; }
+    public virtual string Name { get; }
 
     /// <summary>
     /// Returns a description of the item class.  This is typically a plural version of the Name property.  This description is typically used to allow the player to select an item from
     /// the class.
     /// </summary>
-    public virtual bool AllowStomp => true;
+    public virtual bool AllowStomp { get; } = true;
 
     public bool HasFlavor => (ItemFlavorRepository != null);
 
-    public virtual int NumberOfFlavorsToGenerate => 0;
+    public virtual int NumberOfFlavorsToGenerate { get; } = 0;
 
     /// <summary>
     /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned
     /// when an item has a predefined flavor.  Apple juice, water and slime-mold item factories use pre-defined flavors. 
     /// </summary>
-    protected virtual string[]? ItemFlavorBindingKeys => null;
+    protected virtual string[]? ItemFlavorBindingKeys { get; } = null;
 
     public Flavor[]? ItemFlavorRepository { get; private set; }
 
@@ -53,10 +57,10 @@ internal abstract class ItemClass : IGetKey
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         ItemFlavorRepository = Game.SingletonRepository.GetNullable<ItemFlavor>(ItemFlavorBindingKeys);
     }

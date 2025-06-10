@@ -7,16 +7,20 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class God : IGetKey
+internal class God : IGetKey
 {
     protected readonly Game Game;
-    protected God(Game game)
+    public God(Game game, GodGameConfiguration godGameConfiguration)
     {
         Game = game;
+        Key = godGameConfiguration.Key ?? godGameConfiguration.GetType().Name;
+        LongName = godGameConfiguration.LongName;
+        ShortName = godGameConfiguration.ShortName;
+        FavorDescription = godGameConfiguration.FavorDescription;
     }
 
-    public abstract string LongName { get; }
-    public abstract string ShortName { get; }
+    public virtual string LongName { get; }
+    public virtual string ShortName { get; }
     private const int PatronMultiplier = 2;
 
     public int AdjustedFavour
@@ -36,9 +40,9 @@ internal abstract class God : IGetKey
     public bool IsPatron { get; set; }
     public int RestingFavor { get; set; }
 
-    public abstract string FavorDescription { get; }
+    public virtual string FavorDescription { get; }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 

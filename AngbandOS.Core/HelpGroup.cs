@@ -7,15 +7,18 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class HelpGroup : IGetKey, IToJson
+internal class HelpGroup : IGetKey
 {
     protected readonly Game Game;
-    protected HelpGroup(Game game) 
+    public HelpGroup(Game game, HelpGroupGameConfiguration helpGroupGameConfiguration)
     {
         Game = game;
+        Key = helpGroupGameConfiguration.Key ?? helpGroupGameConfiguration.GetType().Name;
+        SortIndex = helpGroupGameConfiguration.SortIndex;
+        Title = helpGroupGameConfiguration.Title;
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
     public virtual void Bind() { }
@@ -31,6 +34,6 @@ internal abstract class HelpGroup : IGetKey, IToJson
         return JsonSerializer.Serialize(helpGroupDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public abstract string Title { get; }
-    public abstract int SortIndex { get; }
+    public virtual string Title { get; }
+    public virtual int SortIndex { get; }
 }

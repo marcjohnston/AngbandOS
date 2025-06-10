@@ -483,10 +483,10 @@ internal class SingletonRepository
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration, Dungeon>(gameConfiguration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GameCommand>(gameConfiguration.GameCommands);
         LoadFromConfiguration<Gender, GenderGameConfiguration, Gender>(gameConfiguration.Genders);
-        LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
-        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, GenericHelpGroup>(gameConfiguration.HelpGroups);
+        LoadFromConfiguration<God, GodGameConfiguration, God>(gameConfiguration.Gods);
+        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, HelpGroup>(gameConfiguration.HelpGroups);
         LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, GenericIntWidget>(gameConfiguration.IntWidgets);
-        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration, GenericItemClass>(gameConfiguration.ItemClasses);
+        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration, ItemClass>(gameConfiguration.ItemClasses);
         LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration, GenericItemEnhancement>(gameConfiguration.ItemEnhancements);
         LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, ItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
         LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration, ItemFactoryWeightedRandom>(gameConfiguration.ItemFactoryWeightedRandoms);
