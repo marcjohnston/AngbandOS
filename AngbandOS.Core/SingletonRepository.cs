@@ -479,7 +479,7 @@ internal class SingletonRepository
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration, CharacterClassSpell>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, ConditionalWidget>(gameConfiguration.ConditionalWidgets);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, DateWidget>(gameConfiguration.DateWidgets);
-        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
+        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, DungeonGuardian>(gameConfiguration.DungeonGuardians);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration, Dungeon>(gameConfiguration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GameCommand>(gameConfiguration.GameCommands);
         LoadFromConfiguration<Gender, GenderGameConfiguration, Gender>(gameConfiguration.Genders);

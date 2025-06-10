@@ -10,24 +10,27 @@ namespace AngbandOS.Core;
 internal abstract class DungeonGuardian : IGetKey
 {
     protected readonly Game Game;
-    protected DungeonGuardian(Game game)
+    public DungeonGuardian(Game game, DungeonGuardianGameConfiguration dungeonGuardianGameConfiguration)
     {
         Game = game;
+        Key = dungeonGuardianGameConfiguration.Key ?? dungeonGuardianGameConfiguration.GetType().Name;
+        MonsterRaceName = dungeonGuardianGameConfiguration.MonsterRaceName;
+        LevelFound = dungeonGuardianGameConfiguration.LevelFound;
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public MonsterRace MonsterRace { get; private set; }
 
     /// <summary>
     /// The name of the race of the dungeon guardian.
     /// </summary>
-    protected abstract string MonsterRaceName { get; }
+    protected virtual string MonsterRaceName { get; }
 
     /// <summary>
     /// The level for the fixed quest.
     /// </summary>
-    public abstract int LevelFound { get; }
+    public virtual int LevelFound { get; }
 
     public string GetKey => Key;
 
