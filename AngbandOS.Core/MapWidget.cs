@@ -14,16 +14,22 @@ namespace AngbandOS.Core;
 /// Represents a widget that renders a dungeon map.  This widget supports the ability to "poke" a character directly into the map grid.
 /// </summary>
 [Serializable]
-internal abstract class MapWidget : Widget, IGetKey
+internal class MapWidget : Widget, IGetKey
 {
-    protected MapWidget(Game game) : base(game) { }
+    public MapWidget(Game game, MapWidgetGameConfiguration mapWidgetGameConfiguration) : base(game)
+    {
+        Key = mapWidgetGameConfiguration.Key ?? mapWidgetGameConfiguration.GetType().Name;
+        X = mapWidgetGameConfiguration.X;
+        Y = mapWidgetGameConfiguration.Y;
+        ChangeTrackerNames = mapWidgetGameConfiguration.ChangeTrackerNames;
+    }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public virtual string[]? ChangeTrackerNames => null;
+    public virtual string[]? ChangeTrackerNames { get; } = null;
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
@@ -49,12 +55,12 @@ internal abstract class MapWidget : Widget, IGetKey
     /// <summary>
     /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public abstract int X { get; }
+    public virtual int X { get; }
 
     /// <summary>
     /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public abstract int Y { get; }
+    public virtual int Y { get; }
 
     protected override void Paint()
     {
