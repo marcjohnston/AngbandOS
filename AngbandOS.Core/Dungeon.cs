@@ -11,17 +11,26 @@ namespace AngbandOS.Core;
 /// A dungeon that the player can explore
 /// </summary>
 [Serializable]
-internal abstract class Dungeon : IGetKey
+internal class Dungeon : IGetKey
 {
     protected readonly Game Game;
 
     /// <summary>
     /// Create the dungeon
     /// </summary>
-    protected Dungeon(Game game)
+    public Dungeon(Game game, DungeonGameConfiguration dungeonGameConfiguration)
     {
         Game = game;
         Offset = BaseOffset;
+        Key = dungeonGameConfiguration.Key ?? dungeonGameConfiguration.GetType().Name;
+        BaseOffset = dungeonGameConfiguration.BaseOffset;
+        BiasMonsterFilterName = dungeonGameConfiguration.BiasMonsterFilterName;
+        DungeonGuardianNames = dungeonGameConfiguration.DungeonGuardianNames;
+        MapSymbol = dungeonGameConfiguration.MapSymbol;
+        MaxLevel = dungeonGameConfiguration.MaxLevel;
+        Name = dungeonGameConfiguration.Name;
+        Shortname = dungeonGameConfiguration.Shortname;
+        Tower = dungeonGameConfiguration.Tower;
     }
 
     #region Api Methods
@@ -180,12 +189,12 @@ internal abstract class Dungeon : IGetKey
     #endregion
 
     #region Light-weight virtuals
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     /// <summary>
     /// Returns base offset (difficulty) for the dungeon.
     /// </summary>
-    public abstract int BaseOffset { get; }
+    public virtual int BaseOffset { get; }
 
     /// <summary>
     /// Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no
@@ -196,31 +205,31 @@ internal abstract class Dungeon : IGetKey
     /// <summary>
     /// Returns all of the quests associated to the dungeon.
     /// </summary>
-    protected virtual string[]? DungeonGuardianNames => null;
+    protected virtual string[]? DungeonGuardianNames { get; } = null;
 
     /// <summary>
     /// The symbol used for the dungeon on the wilderness map
     /// </summary>
-    public abstract string MapSymbol { get; }
+    public virtual string MapSymbol { get; }
 
     /// <summary>
     /// The number of levels the dungeon has
     /// </summary>
-    public abstract int MaxLevel { get; }
+    public virtual int MaxLevel { get; }
 
     /// <summary>
     /// The full name of the dungeon
     /// </summary>
-    public abstract string Name { get; }
+    public virtual string Name { get; }
 
     /// <summary>
     /// The shortened name of the dungeon for display purposes
     /// </summary>
-    public abstract string Shortname { get; }
+    public virtual string Shortname { get; }
 
     /// <summary>
     /// Returns true, if the dungeon is a tower; false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool Tower => false;
+    public virtual bool Tower { get; } = false;
     #endregion
 }

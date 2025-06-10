@@ -480,7 +480,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, ConditionalWidget>(gameConfiguration.ConditionalWidgets);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, DateWidget>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, GenericDungeonGuardian>(gameConfiguration.DungeonGuardians);
-        LoadFromConfiguration<Dungeon, DungeonGameConfiguration, GenericDungeon>(gameConfiguration.Dungeons);
+        LoadFromConfiguration<Dungeon, DungeonGameConfiguration, Dungeon>(gameConfiguration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GameCommand>(gameConfiguration.GameCommands);
         LoadFromConfiguration<Gender, GenderGameConfiguration, Gender>(gameConfiguration.Genders);
         LoadFromConfiguration<God, GodGameConfiguration, GenericGod>(gameConfiguration.Gods);
