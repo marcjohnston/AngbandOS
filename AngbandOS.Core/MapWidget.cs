@@ -14,9 +14,35 @@ namespace AngbandOS.Core;
 /// Represents a widget that renders a dungeon map.  This widget supports the ability to "poke" a character directly into the map grid.
 /// </summary>
 [Serializable]
-internal abstract class MapWidget : Widget
+internal abstract class MapWidget : Widget, IGetKey
 {
     protected MapWidget(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
+    /// </summary>
+    public virtual string[]? ChangeTrackerNames => null;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public virtual void Bind()
+    {
+        ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
+    }
+
+    public virtual string ToJson()
+    {
+        MapWidgetGameConfiguration mapWidgetGameConfiguration = new MapWidgetGameConfiguration()
+        {
+            Key = Key,
+            X = X,
+            Y = Y,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(mapWidgetGameConfiguration, Game.GetJsonSerializerOptions());
+    }
 
     public override bool CanPoke => true;
 
@@ -78,16 +104,5 @@ internal abstract class MapWidget : Widget
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;
         Game.Screen.PutChar(attr, ch, row - offsetY, col -+ offsetX);// TODO: The - is weird and should be +
-    }
-    public override string ToJson()
-    {
-        MapWidgetGameConfiguration mapWidgetGameConfiguration = new MapWidgetGameConfiguration()
-        {
-            Key = Key,
-            X = X,
-            Y = Y,
-            ChangeTrackerNames = ChangeTrackerNames,
-        };
-        return JsonSerializer.Serialize(mapWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

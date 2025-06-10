@@ -14,9 +14,40 @@ namespace AngbandOS.Core;
 /// property within the space provided by the <see cref="Width"/> property.  The text is drawn in the color specified by the <see cref="Color"/> property.
 /// </summary>
 [Serializable]
-internal abstract class TextWidget : Widget
+internal abstract class TextWidget : Widget, IGetKey
 {
     protected TextWidget(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
+    /// </summary>
+    public virtual string[]? ChangeTrackerNames => null;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public virtual void Bind()
+    {
+        ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
+        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
+    }
+
+    public virtual string ToJson()
+    {
+        TextWidgetGameConfiguration textWidgetGameConfiguration = new TextWidgetGameConfiguration()
+        {
+            Key = Key,
+            Text = Text,
+            Color = Color,
+            X = X,
+            Y = Y,
+            Width = Width,
+            JustificationName = JustificationName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(textWidgetGameConfiguration, Game.GetJsonSerializerOptions());
+    }
 
     /// <summary>
     /// Returns the text to be rendered for the widget.
@@ -55,12 +86,6 @@ internal abstract class TextWidget : Widget
     /// </summary>
     public virtual string JustificationName => nameof(LeftJustification);
 
-    public override void Bind()
-    {
-        base.Bind();
-        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
-    }
-
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
     /// </summary>
@@ -69,20 +94,5 @@ internal abstract class TextWidget : Widget
         string justifiedText = Text;
         justifiedText = Justification.Format(justifiedText, Width ?? justifiedText.Length);
         Game.Screen.Print(Color, justifiedText, Y, X);
-    }
-    public override string ToJson()
-    {
-        TextWidgetGameConfiguration textWidgetGameConfiguration = new TextWidgetGameConfiguration()
-        {
-            Key = Key,
-            Text = Text,
-            Color = Color,
-            X = X,
-            Y = Y,
-            Width = Width,
-            JustificationName = JustificationName,
-            ChangeTrackerNames = ChangeTrackerNames,
-        };
-        return JsonSerializer.Serialize(textWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

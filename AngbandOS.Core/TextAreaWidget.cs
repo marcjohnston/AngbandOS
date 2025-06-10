@@ -8,9 +8,27 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class TextAreaWidget : Widget
+internal abstract class TextAreaWidget : Widget, IGetKey
 {
     protected TextAreaWidget(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
+    /// </summary>
+    public virtual string[]? ChangeTrackerNames => null;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public virtual void Bind()
+    {
+        ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
+        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
+        Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
+    }
+
+    public abstract string ToJson();
 
     /// <summary>
     /// Returns the text to be rendered for the widget.
@@ -65,13 +83,6 @@ internal abstract class TextAreaWidget : Widget
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
     public virtual string JustificationName => nameof(LeftJustification);
-
-    public override void Bind()
-    {
-        base.Bind();
-        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
-        Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
-    }
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.

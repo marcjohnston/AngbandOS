@@ -10,9 +10,45 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ConditionalWidget : Widget
+internal abstract class ConditionalWidget : Widget, IGetKey
 {
     protected ConditionalWidget(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
+    /// </summary>
+    public virtual string[]? ChangeTrackerNames => null;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public virtual void Bind()
+    {
+        ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
+        List<(IBoolValue, bool, int)> conditionalList = new();
+        foreach ((string enabledName, bool isTrue, int productOfSumsTerm) in EnabledNames)
+        {
+            IBoolValue boolValue = Game.SingletonRepository.Get<IBoolValue>(enabledName);
+            conditionalList.Add((boolValue, isTrue, productOfSumsTerm));
+        }
+        Enabled = conditionalList.ToArray();
+        TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
+        FalseWidgets = Game.SingletonRepository.GetNullable<Widget>(FalseWidgetNames);
+    }
+
+    public virtual string ToJson()
+    {
+        ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration = new ConditionalWidgetGameConfiguration()
+        {
+            Key = Key,
+            EnabledNames = EnabledNames,
+            TrueWidgetNames = TrueWidgetNames,
+            FalseWidgetNames = FalseWidgetNames,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(conditionalWidgetGameConfiguration, Game.GetJsonSerializerOptions());
+    }
 
     /// <summary>
     /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
@@ -55,19 +91,6 @@ internal abstract class ConditionalWidget : Widget
     /// during the bind phase.
     /// </summary>
     protected Widget[]? FalseWidgets { get; private set; }
-
-    public override void Bind()
-    {
-        List<(IBoolValue, bool, int)> conditionalList = new();
-        foreach ((string enabledName, bool isTrue, int productOfSumsTerm) in EnabledNames)
-        {
-            IBoolValue boolValue = Game.SingletonRepository.Get<IBoolValue>(enabledName);
-            conditionalList.Add((boolValue, isTrue, productOfSumsTerm));
-        }
-        Enabled = conditionalList.ToArray();
-        TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
-        FalseWidgets = Game.SingletonRepository.GetNullable<Widget>(FalseWidgetNames);
-    }
 
     /// <summary>
     /// Evaluates the <see cref="Enabled"/> property as a Product of Sums expression and returns true or false accordingly.
@@ -123,17 +146,5 @@ internal abstract class ConditionalWidget : Widget
                 }
             }
         }
-    }
-    public override string ToJson()
-    {
-        ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration = new ConditionalWidgetGameConfiguration()
-        {
-            Key = Key,
-            EnabledNames = EnabledNames,
-            TrueWidgetNames = TrueWidgetNames,
-            FalseWidgetNames = FalseWidgetNames,
-            ChangeTrackerNames = ChangeTrackerNames,
-        };
-        return JsonSerializer.Serialize(conditionalWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

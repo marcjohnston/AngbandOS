@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 /// needs to be updated and the Paint method is used to actually draw the widget.  
 /// </summary>
 [Serializable]
-internal abstract class Widget : IGetKey
+internal abstract class Widget
 {
     protected readonly Game Game;
     protected Widget(Game game)
@@ -21,14 +21,9 @@ internal abstract class Widget : IGetKey
     }
 
     /// <summary>
-    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
-    /// </summary>
-    public virtual string[]? ChangeTrackerNames => null;
-
-    /// <summary>
     /// Returns the property that participates in change tracking.  This property is bound from the <see cref="ChangeTrackerNames"/> property during the bind phase.
     /// </summary>
-    public IChangeTracker[]? ChangeTrackers { get; private set; }
+    public IChangeTracker[]? ChangeTrackers { get; protected set; }
 
     public virtual bool CanPoke => false;
 
@@ -53,17 +48,6 @@ internal abstract class Widget : IGetKey
     {
         IsInvalid = true;
     }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-
-    public virtual void Bind()
-    {
-        ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-    }
-
-    public abstract string ToJson();
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
