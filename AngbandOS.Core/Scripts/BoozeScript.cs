@@ -22,7 +22,7 @@ internal class BoozeScript : Script, IEatOrQuaffScript
         // Confusion makes you confused and possibly other effects
         if (!(Game.HasConfusionResistance || Game.HasChaosResistance))
         {
-            if (Game.ConfusedTimer.AddTimer(Game.RandomLessThan(20) + 15))
+            if (Game.ConfusionTimer.AddTimer(Game.RandomLessThan(20) + 15))
             {
                 isIdentified = true;
             }

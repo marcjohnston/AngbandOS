@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.Timers;
 
 [Serializable]
-internal class StunnedTimer : Timer
+internal class StunningTimer : Timer
 {
-    private StunnedTimer(Game game) : base(game) { } // This object is a singleton.
+    private StunningTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         Game.MsgPrint("You are no longer stunned.");

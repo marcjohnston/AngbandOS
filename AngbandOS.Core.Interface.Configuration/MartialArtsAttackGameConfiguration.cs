@@ -3,7 +3,7 @@
 [Serializable]
 public class MartialArtsAttackGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     public virtual int Chance { get; set; }
     public virtual int Dd { get; set; }
     public virtual string Desc { get; set; }

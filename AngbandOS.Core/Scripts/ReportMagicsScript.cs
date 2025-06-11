@@ -41,9 +41,9 @@ internal class ReportMagicsScript : Script, IScript, ICastSpellScript
             info2[i] = ReportMagicsAux(Game.BlindnessTimer.Value);
             info[i++] = "You cannot see";
         }
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(Game.ConfusedTimer.Value);
+            info2[i] = ReportMagicsAux(Game.ConfusionTimer.Value);
             info[i++] = "You are confused";
         }
         if (Game.FearTimer.Value != 0)

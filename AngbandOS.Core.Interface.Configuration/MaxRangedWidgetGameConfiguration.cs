@@ -46,7 +46,7 @@ public class MaxRangedWidgetGameConfiguration
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
     public virtual string[]? ChangeTrackerNames { get; set; }
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 }
 
 

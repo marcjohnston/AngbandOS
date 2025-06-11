@@ -16,7 +16,7 @@ internal class ProtectionFromEvilActivation : Activation
     
     public override string? PreActivationMessage => "Your {0} lets out a shrill wail...";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(ProtectionFromEvilScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Scripts.ProtectionFromEvilScript);
 
     protected override string RechargeTimeRollExpression => "1d225+225";
 

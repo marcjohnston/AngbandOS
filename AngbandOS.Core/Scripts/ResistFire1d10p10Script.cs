@@ -17,8 +17,8 @@ internal class ResistFire1d10p10Script : Script, IEatOrQuaffScript
     /// <returns></returns>
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
-        // Resist heat gives you timed fire resistance
-        bool isIdentified = Game.FireResistanceTimer.AddTimer(Game.DieRoll(10) + 10);
+        // Resist heat gives you timed fire resistance       
+        bool isIdentified = Game.RunIdentifiedScript(nameof(Add1d10p10FireResistanceTimerGameConfiguration));
         return new IdentifiedResult(isIdentified);
     }
 }

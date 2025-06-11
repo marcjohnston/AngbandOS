@@ -9,7 +9,6 @@ global using AngbandOS.Core;
 global using AngbandOS.Core.Activations;
 global using AngbandOS.Core.ActivationWeightRandoms;
 global using AngbandOS.Core.ArtifactBiases;
-global using AngbandOS.Core.AttackEffects;
 global using AngbandOS.Core.BirthStages;
 global using AngbandOS.Core.CharacterClasses;
 global using AngbandOS.Core.CharacterClassAbilities;
@@ -49,7 +48,6 @@ global using AngbandOS.Core.PhysicalAttributeSets;
 global using AngbandOS.Core.Races;
 global using AngbandOS.Core.RaceAbilities;
 global using AngbandOS.Core.RaceGenders;
-global using AngbandOS.Core.RacialPowers;
 global using AngbandOS.Core.RacialPowerTests;
 global using AngbandOS.Core.RenderMessageScripts;
 global using AngbandOS.Core.Rewards;
@@ -60,6 +58,7 @@ global using AngbandOS.Core.Timers;
 global using AngbandOS.Core.Widgets;
 
 global using static AngbandOS.Core.Extensions;
+global using Timer = AngbandOS.Core.Timers.Timer;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.Interface.Configuration;
 global using AngbandOS.GamePacks.Cthangband; // TODO: This can be deleted when the Cthangband game pack is complete.  We can also drop the Project Reference.

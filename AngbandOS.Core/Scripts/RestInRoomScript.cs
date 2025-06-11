@@ -58,7 +58,7 @@ internal class RestInRoomScript : Script, IScript, ICastSpellScript
         Game.SlowTimer.SetValue();
         Game.BlindnessTimer.SetValue();
         Game.ParalysisTimer.SetValue();
-        Game.ConfusedTimer.SetValue();
+        Game.ConfusionTimer.SetValue();
         Game.FearTimer.SetValue();
         Game.HallucinationsTimer.SetValue();
         Game.PoisonTimer.SetValue();
@@ -81,7 +81,7 @@ internal class RestInRoomScript : Script, IScript, ICastSpellScript
         Game.Health.IntValue = Game.MaxHealth.IntValue;
         Game.Mana.IntValue = Game.MaxMana.IntValue;
         Game.BlindnessTimer.SetValue();
-        Game.ConfusedTimer.SetValue();
+        Game.ConfusionTimer.SetValue();
         Game.StunTimer.SetValue();
         Game.NewLevelFlag = true;
         Game.CameFrom = LevelStartEnum.StartWalk;

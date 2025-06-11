@@ -16,5 +16,5 @@ internal class PlayerIsHallucinatingBoolFunction : BoolFunction
 {
     private PlayerIsHallucinatingBoolFunction(Game game) : base(game) { } // This object is a singleton.
     public override bool BoolValue => Game.HallucinationsTimer.Value != 0;
-    public override string[]? DependencyNames => new string[] { nameof(HallucinationsTimer) };
+    public override string[]? DependencyNames => new string[] { nameof(HallucinatingTimer) };
 }

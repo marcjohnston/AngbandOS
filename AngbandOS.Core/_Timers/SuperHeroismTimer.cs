@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.Timers;
 
 [Serializable]
-internal class SuperHeroismTimer : Timer
+internal class SuperheroismTimer : Timer
 {
-    private SuperHeroismTimer(Game game) : base(game) { } // This object is a singleton.
+    private SuperheroismTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         Game.MsgPrint("You feel less Berserk.");

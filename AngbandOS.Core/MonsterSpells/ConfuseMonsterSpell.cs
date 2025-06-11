@@ -30,7 +30,7 @@ internal class ConfuseMonsterSpell : MonsterSpell
         }
         else
         {
-            Game.ConfusedTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
+            Game.ConfusionTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
         }
         Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ConfSpellResistantDetection)));
     }

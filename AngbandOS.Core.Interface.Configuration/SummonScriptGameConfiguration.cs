@@ -3,7 +3,7 @@
 [Serializable]
 public class SummonScriptGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns true, to summon a friendly monster (a.k.a pet); false, otherwise.  Returns false, by default.

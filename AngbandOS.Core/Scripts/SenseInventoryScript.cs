@@ -28,7 +28,7 @@ internal class SenseInventoryScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         int playerLevel = Game.ExperienceLevel.IntValue;
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             return;
         }

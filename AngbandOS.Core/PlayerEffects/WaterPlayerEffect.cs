@@ -30,7 +30,7 @@ internal class WaterPlayerEffect : PlayerEffect
         }
         if (!Game.HasConfusionResistance)
         {
-            Game.ConfusedTimer.AddTimer(Game.DieRoll(5) + 5);
+            Game.ConfusionTimer.AddTimer(Game.DieRoll(5) + 5);
         }
         if (Game.DieRoll(5) == 1)
         {

@@ -16,7 +16,7 @@ internal class Heal777CuringAndHeroism25pd25Script : Script, IActivateItemScript
         Game.PoisonTimer.ResetTimer();
         Game.BleedingTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
-        Game.ConfusedTimer.ResetTimer();
+        Game.ConfusionTimer.ResetTimer();
         Game.BlindnessTimer.ResetTimer();
         Game.HeroismTimer.AddTimer(base.Game.DieRoll(25) + 25);
         Game.RestoreHealth(777);

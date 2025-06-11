@@ -31,7 +31,7 @@ internal class ConfuseGasScript : Script, IScript, ICastSpellScript
         Game.MsgPrint("A gas of scintillating colors surrounds you!");
         if (!Game.HasConfusionResistance)
         {
-            Game.ConfusedTimer.AddTimer(Game.RandomLessThan(20) + 10);
+            Game.ConfusionTimer.AddTimer(Game.RandomLessThan(20) + 10);
         }
     }
 }

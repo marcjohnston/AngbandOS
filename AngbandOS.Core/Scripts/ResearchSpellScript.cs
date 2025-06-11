@@ -49,7 +49,7 @@ internal class ResearchSpellScript : Script, IScript, ICastSpellScript, IStoreCo
             Game.MsgPrint("You cannot see!");
             return;
         }
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
             return;

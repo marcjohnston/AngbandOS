@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class ProjectileGraphicGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns the character to be used for the projectile.

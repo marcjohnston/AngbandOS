@@ -87,7 +87,7 @@ internal class OpenScript : Script, IScript, ICastSpellScript, IGameCommandScrip
                         i /= 10;
                     }
                     // Hard to pick locks when you're confused or hallucinating
-                    if (Game.ConfusedTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
+                    if (Game.ConfusionTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
                     {
                         i /= 10;
                     }

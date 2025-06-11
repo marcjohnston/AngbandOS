@@ -51,7 +51,7 @@ internal class SearchScript : Script, IScript, ICastSpellScript, IGameCommandScr
             chance /= 10;
         }
         // If we're confused it's hard to search
-        if (Game.ConfusedTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
         {
             chance /= 10;
         }

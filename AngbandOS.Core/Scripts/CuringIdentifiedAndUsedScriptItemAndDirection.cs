@@ -26,7 +26,7 @@ internal class CuringIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodSc
         {
             isIdentified = true;
         }
-        if (Game.ConfusedTimer.ResetTimer())
+        if (Game.ConfusionTimer.ResetTimer())
         {
             isIdentified = true;
         }

@@ -12,11 +12,11 @@ public class ConfusedRangedWidget : RangedWidgetGameConfiguration
     public override int X => 15;
     public override int Y => 44;
     public override int? Width => 8;
-    public override string IntValueName => nameof(TimersEnum.ConfusedTimer);
+    public override string IntValueName => nameof(TimersEnum.ConfusingTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
         (1, "Confused", ColorEnum.Orange),
     };
-    public override string[]? ChangeTrackerNames => new string[] { nameof(TimersEnum.ConfusedTimer) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(TimersEnum.ConfusingTimer) };
 }

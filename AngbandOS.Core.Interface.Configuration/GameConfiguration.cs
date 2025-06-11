@@ -134,4 +134,5 @@ public class GameConfiguration
     public virtual MappedSpellScriptGameConfiguration[]? MappedSpellScripts { get; set; } = null;
     public virtual SummonWeightedRandomGameConfiguration[]? SummonWeightedRandoms { get; set; } = null;
     public virtual ItemFactoryWeightedRandomGameConfiguration[]? ItemFactoryWeightedRandoms { get; set; } = null;
+    public virtual TimerScriptGameConfiguration[]? TimerScripts { get; set; } = null;
 }

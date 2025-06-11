@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class ItemEnhancementGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns the value of the enhancement.

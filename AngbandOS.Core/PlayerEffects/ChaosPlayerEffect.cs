@@ -31,7 +31,7 @@ internal class ChaosPlayerEffect : PlayerEffect
         }
         if (!Game.HasConfusionResistance)
         {
-            Game.ConfusedTimer.AddTimer(Game.RandomLessThan(20) + 10);
+            Game.ConfusionTimer.AddTimer(Game.RandomLessThan(20) + 10);
         }
         if (!Game.HasChaosResistance)
         {

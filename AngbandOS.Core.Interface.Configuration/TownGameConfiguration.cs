@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class TownGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     public virtual char Char { get; set; }
     public virtual int HousePrice { get; set; }
     public virtual string Name { get; set; }

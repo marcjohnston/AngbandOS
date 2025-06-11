@@ -56,7 +56,7 @@ internal abstract class BaseCharacterClass : IGetKey
             Game.MsgPrint("You cannot see!");
             return;
         }
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
             return;
@@ -140,7 +140,7 @@ internal abstract class BaseCharacterClass : IGetKey
     protected void CastMentalism()
     {
         int plev = Game.ExperienceLevel.IntValue;
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
             return;
@@ -178,7 +178,7 @@ internal abstract class BaseCharacterClass : IGetKey
                 else if (i < 45)
                 {
                     Game.MsgPrint("Your brain is addled!");
-                    Game.ConfusedTimer.AddTimer(Game.DieRoll(8));
+                    Game.ConfusionTimer.AddTimer(Game.DieRoll(8));
                 }
                 else if (i < 90)
                 {

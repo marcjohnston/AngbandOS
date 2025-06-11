@@ -172,7 +172,8 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
     }
 
     /// <summary>
-    /// Resets the timer to a specific value.  No messages or processing occurs.
+    /// Resets the timer to a specific value.  No messages or processing occurs.  The default value of 0 allows the timer to be reset
+    /// without any notice to the player.
     /// </summary>
     public virtual void SetValue(int value = 0)
     {

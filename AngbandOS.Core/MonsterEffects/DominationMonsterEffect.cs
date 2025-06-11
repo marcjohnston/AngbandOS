@@ -57,7 +57,7 @@ internal class DominationMonsterEffect : MonsterEffect
                             break;
 
                         case 2:
-                            Game.ConfusedTimer.AddTimer((dam / 2));
+                            Game.ConfusionTimer.AddTimer((dam / 2));
                             break;
 
                         default:

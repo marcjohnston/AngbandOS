@@ -24,7 +24,7 @@ internal class LifeScript : Script, IEatOrQuaffScript
         Game.RestoreHealth(5000);
         Game.PoisonTimer.ResetTimer();
         Game.BlindnessTimer.ResetTimer();
-        Game.ConfusedTimer.ResetTimer();
+        Game.ConfusionTimer.ResetTimer();
         Game.HallucinationsTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
         Game.BleedingTimer.ResetTimer();

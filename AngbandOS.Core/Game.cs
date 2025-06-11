@@ -4,11 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.RaceAbilities;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.Json;
-using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -1014,7 +1011,7 @@ internal class Game
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_COLD]</remarks>
     public readonly Timer ColdResistanceTimer;
-    public readonly Timer ConfusedTimer;
+    public readonly Timer ConfusionTimer;
     public readonly Timer EtherealnessTimer;
     public readonly Timer FearTimer;
 
@@ -1367,25 +1364,25 @@ internal class Game
         BlessingTimer = (BlessingTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlessingTimer));
         BlindnessTimer = (BlindnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlindnessTimer));
         ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.ColdResistanceTimer));
-        ConfusedTimer = (ConfusedTimer)SingletonRepository.Get<Timer>(nameof(Timers.ConfusedTimer));
+        ConfusionTimer = (ConfusingTimer)SingletonRepository.Get<Timer>(nameof(Timers.ConfusingTimer));
         EtherealnessTimer = (EtherealnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.EtherealnessTimer));
         FearTimer = (FearTimer)SingletonRepository.Get<Timer>(nameof(Timers.FearTimer));
         FireResistanceTimer = (FireResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.FireResistanceTimer));
-        HallucinationsTimer = (HallucinationsTimer)SingletonRepository.Get<Timer>(nameof(Timers.HallucinationsTimer));
+        HallucinationsTimer = (HallucinatingTimer)SingletonRepository.Get<Timer>(nameof(Timers.HallucinatingTimer));
         HasteTimer = (HasteTimer)SingletonRepository.Get<Timer>(nameof(Timers.HasteTimer));
         HeroismTimer = (HeroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.HeroismTimer));
         InfravisionTimer = (InfravisionTimer)SingletonRepository.Get<Timer>(nameof(Timers.InfravisionTimer));
         InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.InvulnerabilityTimer));
         LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.LightningResistanceTimer));
         ParalysisTimer = (ParalysisTimer)SingletonRepository.Get<Timer>(nameof(Timers.ParalysisTimer));
-        PoisonTimer = (PoisonedTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisonedTimer));
+        PoisonTimer = (PoisoningTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisoningTimer));
         PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisonResistanceTimer));
         ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.Get<Timer>(nameof(Timers.ProtectionFromEvilTimer));
         SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.SeeInvisibilityTimer));
         SlowTimer = (SlowTimer)SingletonRepository.Get<Timer>(nameof(Timers.SlowTimer));
         StoneskinTimer = (StoneskinTimer)SingletonRepository.Get<Timer>(nameof(Timers.StoneskinTimer));
-        StunTimer = (StunnedTimer)SingletonRepository.Get<Timer>(nameof(Timers.StunnedTimer));
-        SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.Get<Timer>(nameof(SuperHeroismTimer));
+        StunTimer = (StunningTimer)SingletonRepository.Get<Timer>(nameof(Timers.StunningTimer));
+        SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
 
         View? consoleView = SingletonRepository.GetNullable<View>(gameConfiguration.ConsoleViewBindingKey);
@@ -4250,7 +4247,7 @@ internal class Game
             else if (Resting == -2)
             {
                 if (Health.IntValue == MaxHealth.IntValue && Mana.IntValue == MaxMana.IntValue && BlindnessTimer.Value == 0 &&
-                    ConfusedTimer.Value == 0 && PoisonTimer.Value == 0 && FearTimer.Value == 0 && StunTimer.Value == 0 &&
+                    ConfusionTimer.Value == 0 && PoisonTimer.Value == 0 && FearTimer.Value == 0 && StunTimer.Value == 0 &&
                     BleedingTimer.Value == 0 && SlowTimer.Value == 0 && ParalysisTimer.Value == 0 && HallucinationsTimer.Value == 0 &&
                     WordOfRecallDelay == 0)
                 {
@@ -6563,7 +6560,7 @@ internal class Game
             return false;
         }
         // Can't use it if we're confused
-        if (ConfusedTimer.Value != 0)
+        if (ConfusionTimer.Value != 0)
         {
             MsgPrint("You are too confused to use this power.");
             EnergyUse = 0;
@@ -6860,7 +6857,7 @@ internal class Game
             i /= 10;
         }
         // Disarming is tricky when confused
-        if (ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0)
+        if (ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0)
         {
             i /= 10;
         }
@@ -6922,7 +6919,7 @@ internal class Game
             i /= 10;
         }
         // Difficult to disarm when we're confused
-        if (ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0)
+        if (ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0)
         {
             i /= 10;
         }
@@ -7052,7 +7049,7 @@ internal class Game
         if (tile.MonsterIndex != 0 && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-            if (monster.IsPet && !(ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) && (GridPassable(newY, newX) || canPassWalls))
+            if (monster.IsPet && !(ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) && (GridPassable(newY, newX) || canPassWalls))
             {
                 // Wake up the monster, and track it
                 monster.SleepLevel = 0;
@@ -7183,7 +7180,7 @@ internal class Game
                 if (tile.FeatureType.IsRubble)
                 {
                     MsgPrint("There is rubble blocking your way.");
-                    if (!(ConfusedTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
+                    if (!(ConfusionTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
                     {
                         EnergyUse = 0;
                     }
@@ -7257,7 +7254,7 @@ internal class Game
                 else
                 {
                     MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
-                    if (!(ConfusedTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
+                    if (!(ConfusionTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
                     {
                         EnergyUse = 0;
                     }
@@ -7277,7 +7274,7 @@ internal class Game
         // If we're leaving an area where we've detected traps at a run, then stop running
         if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
         {
-            if (!(ConfusedTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
+            if (!(ConfusionTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
             {
                 EnergyUse = 0;
             }
@@ -7429,7 +7426,7 @@ internal class Game
             HealthTrack(tile.MonsterIndex);
         }
         // if the monster is our friend and we're not confused, we can avoid hitting it
-        if (monster.IsPet && !(StunTimer.Value != 0 || ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible))
+        if (monster.IsPet && !(StunTimer.Value != 0 || ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible))
         {
             MsgPrint($"You stop to avoid hitting {monsterName}.");
             return;
@@ -7537,7 +7534,7 @@ internal class Game
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
                         // with the weakest attack type
-                        if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(StunTimer.Value != 0 || ConfusedTimer.Value != 0))
+                        if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(StunTimer.Value != 0 || ConfusionTimer.Value != 0))
                         {
                             oldMartialArtsAttack = martialArtsAttack;
                         }
@@ -8466,7 +8463,7 @@ internal class Game
                 skill /= 10;
             }
             // Lockpicking is hard when you're confused
-            if (ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0)
+            if (ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0)
             {
                 skill /= 10;
             }
@@ -12553,7 +12550,7 @@ internal class Game
             return false;
         }
         CommandDirection = dir;
-        if (ConfusedTimer.Value != 0)
+        if (ConfusionTimer.Value != 0)
         {
             if (RandomLessThan(100) < 75)
             {
@@ -12618,7 +12615,7 @@ internal class Game
             return false;
         }
         CommandDirection = dir;
-        if (ConfusedTimer.Value != 0)
+        if (ConfusionTimer.Value != 0)
         {
             dir = OrderedDirection[RandomLessThan(8)]; // Choose a random direction.
         }

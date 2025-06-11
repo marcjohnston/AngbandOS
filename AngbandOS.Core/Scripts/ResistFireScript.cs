@@ -22,7 +22,7 @@ internal class ResistFireScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(Add1d20p20FireResistanceTimerGameConfiguration));
     }
     public string LearnedDetails => "dur 20+d20";
 }

@@ -37,7 +37,7 @@ internal class RunScript : Script, IScript, ICastSpellScript, IGameCommandScript
     public RepeatableResult ExecuteGameCommandScript()
     {
         // Can't run if we're confused
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
             return new RepeatableResult(false); // Don't repeat this.

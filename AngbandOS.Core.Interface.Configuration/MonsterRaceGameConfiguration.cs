@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class MonsterRaceGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <foreign-collection-name>MonsterSpells</foreign-collection-name>
     public virtual string[]? SpellNames { get; set; } = null;

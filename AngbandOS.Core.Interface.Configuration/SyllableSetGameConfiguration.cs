@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class SyllableSetGameConfiguration
 {
-    public virtual string Key { get; }
-    public virtual string[] BeginningSyllables { get; }
-    public virtual string[] MiddleSyllables { get; }
-    public virtual string[] EndingSyllables { get; }
+    public virtual string? Key { get; set; } = null;
+    public virtual string[] BeginningSyllables { get; set; }
+    public virtual string[] MiddleSyllables { get; set; }
+    public virtual string[] EndingSyllables { get; set; }
 }

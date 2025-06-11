@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class DungeonGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns base offset (difficulty) for the dungeon.

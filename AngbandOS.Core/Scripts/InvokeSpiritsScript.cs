@@ -60,7 +60,7 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
         if (die < 26)
         {
             Game.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
-            Game.ConfusedTimer.AddTimer(Game.DieRoll(4) + 4);
+            Game.ConfusionTimer.AddTimer(Game.DieRoll(4) + 4);
         }
         if (die < 31)
         {

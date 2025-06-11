@@ -7,7 +7,7 @@ public class PluralGameConfiguration
     /// <summary>
     /// Returns the capitalized singular version of the noun.
     /// </summary>
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns the pluralized version of the key.

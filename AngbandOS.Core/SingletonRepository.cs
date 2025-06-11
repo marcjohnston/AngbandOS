@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using System.Reflection;
-using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -385,6 +384,7 @@ internal class SingletonRepository
         RegisterRepository<DateWidget>();
         RegisterRepository<Dungeon>();
         RegisterRepository<DungeonGuardian>();
+        RegisterRepository<FireResistanceTimer>();
         RegisterRepository<FixedArtifact>();
         RegisterRepository<FlaggedAction>();
         RegisterRepository<FloorEffect>();
@@ -452,6 +452,7 @@ internal class SingletonRepository
         RegisterRepository<TextWidget>();
         RegisterRepository<Tile>();
         RegisterRepository<Timer>();
+        RegisterRepository<TimerScript>();
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
         RegisterRepository<View>();
@@ -518,6 +519,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Symbol, SymbolGameConfiguration, Symbol>(gameConfiguration.Symbols);
         LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, TextWidget>(gameConfiguration.TextWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration, Tile>(gameConfiguration.Tiles);
+        LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration, TimerScript>(gameConfiguration.TimerScripts);
         LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, GenericTimeWidget>(gameConfiguration.TimeWidgets);
         LoadFromConfiguration<Town, TownGameConfiguration, Town>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, Vault>(gameConfiguration.Vaults);

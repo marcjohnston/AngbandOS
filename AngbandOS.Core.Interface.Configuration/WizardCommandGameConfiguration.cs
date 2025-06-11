@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class WizardCommandGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     public virtual char KeyChar { get; set; }
     public virtual bool IsEnabled { get; set; } = true;
     public virtual string? HelpGroupName { get; set; } = null;

@@ -7,15 +7,22 @@
 namespace AngbandOS.Core.Timers;
 
 [Serializable]
-internal class ConfusedTimer : Timer
+internal class HallucinatingTimer : Timer
 {
-    private ConfusedTimer(Game game) : base(game) { } // This object is a singleton.
+    private HallucinatingTimer(Game game) : base(game) { } // This object is a singleton.
+
     protected override void EffectStopped()
     {
-        Game.MsgPrint("You feel less confused now.");
+        Game.MsgPrint("You can see clearly again.");
     }
     protected override void OnRateIncreased(int newRate, int currentRate)
     {
-        Game.MsgPrint("You are confused!");
+        Game.MsgPrint("Oh, wow! Everything looks so cosmic now!");
+    }
+    protected override void Noticed()
+    {
+        Game.RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+        base.Noticed();
     }
 }

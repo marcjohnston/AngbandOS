@@ -6,7 +6,7 @@
 [Serializable]
 public class ArtifactBiasWeightedRandomGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     public virtual (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples { get; set; }
 }

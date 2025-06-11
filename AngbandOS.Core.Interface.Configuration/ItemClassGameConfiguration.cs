@@ -3,7 +3,7 @@
 [Serializable]
 public class ItemClassGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns the capitalized name of a singular item that the class represents.  This name can be used in a format like 'Your {0}'

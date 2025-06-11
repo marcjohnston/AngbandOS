@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class ItemFlavorGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     /// <foreign-collection-name>Symbols</foreign-collection-name>
     public virtual string SymbolName { get; set; }
     public virtual ColorEnum Color { get; set; }

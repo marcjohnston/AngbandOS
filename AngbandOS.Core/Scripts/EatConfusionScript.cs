@@ -20,7 +20,7 @@ internal class EatConfusionScript : Script, IEatOrQuaffScript
         Game.PlaySound(SoundEffectEnum.Eat);
         if (!Game.HasConfusionResistance)
         {
-            if (Game.ConfusedTimer.AddTimer(Game.RandomLessThan(10) + 10))
+            if (Game.ConfusionTimer.AddTimer(Game.RandomLessThan(10) + 10))
             {
                 return new IdentifiedResult(true);
             }

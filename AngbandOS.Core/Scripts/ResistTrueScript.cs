@@ -24,7 +24,7 @@ internal class ResistTrueScript : Script, IScript, ICastSpellScript
     {
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(Add1d20p20FireResistanceTimerGameConfiguration));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }

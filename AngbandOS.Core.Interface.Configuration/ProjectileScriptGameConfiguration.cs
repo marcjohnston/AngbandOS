@@ -3,7 +3,7 @@
 [Serializable]
 public class ProjectileScriptGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     /// <summary>
     /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
     /// </summary>

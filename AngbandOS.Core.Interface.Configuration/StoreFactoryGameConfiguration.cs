@@ -32,7 +32,7 @@ public class StoreFactoryGameConfiguration
     /// </summary>
     public virtual bool StoreEntranceDoorsAreBlownOff { get; set; } = false;
 
-    public virtual string Key { get; set; } // The default value is set in the constructor.
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns the number of items in a page for the store.

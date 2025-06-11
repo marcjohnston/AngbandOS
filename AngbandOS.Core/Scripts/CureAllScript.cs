@@ -40,7 +40,7 @@ internal class CureAllScript : Script, IScript, ICastSpellScript
         Game.Mana.IntValue = Game.MaxMana.IntValue;
         Game.FractionalMana = 0;
         Game.BlindnessTimer.ResetTimer();
-        Game.ConfusedTimer.ResetTimer();
+        Game.ConfusionTimer.ResetTimer();
         Game.PoisonTimer.ResetTimer();
         Game.FearTimer.ResetTimer();
         Game.ParalysisTimer.ResetTimer();

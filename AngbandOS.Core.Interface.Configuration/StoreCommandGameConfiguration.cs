@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class StoreCommandGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     public virtual char KeyChar { get; set; }
     public virtual string Description { get; set; }
     public virtual string[]? ValidStoreFactoryNames { get; set; }

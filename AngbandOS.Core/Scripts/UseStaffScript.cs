@@ -65,7 +65,7 @@ internal class UseStaffScript : Script, IScript, ICastSpellScript, IGameCommandS
         // We have a chance of the device working equal to skill (halved if confused) - item
         // level (capped at 50)
         int chance = Game.SkillUseDevice;
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             chance /= 2;
         }

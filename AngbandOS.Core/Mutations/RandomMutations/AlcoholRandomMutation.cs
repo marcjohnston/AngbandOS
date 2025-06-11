@@ -48,7 +48,7 @@ internal class AlcoholRandomMutation : Mutation
         {
             if (!Game.HasConfusionResistance)
             {
-                Game.ConfusedTimer.AddTimer(base.Game.RandomLessThan(20) + 15);
+                Game.ConfusionTimer.AddTimer(base.Game.RandomLessThan(20) + 15);
             }
             if (base.Game.DieRoll(3) == 1 && !Game.HasChaosResistance)
             {

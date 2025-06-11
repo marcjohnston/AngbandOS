@@ -14,7 +14,7 @@ internal class BallOfFire50r2AndResistFire1d20p20Script : Script, IActivateItemS
     public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(Fire50r2ProjectileScript));
-        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(Add1d20p20FireResistanceTimerGameConfiguration));
         return new UsedResult(true);
     }
 }

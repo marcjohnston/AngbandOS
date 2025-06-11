@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class GameCommandGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     public virtual char KeyChar { get; set; }
     public virtual int? Repeat { get; set; } = 0;
     public virtual bool IsEnabled { get; set; } = true;

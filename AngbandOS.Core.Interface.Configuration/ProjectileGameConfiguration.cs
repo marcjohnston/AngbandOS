@@ -3,7 +3,7 @@
 [Serializable]
 public class ProjectileGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     public virtual string FloorEffectBindingKey { get; set; } = nameof(FloorEffectScriptsEnum.UnnoticedFloorEffect);
     public virtual string ItemEffectBindingKey { get; set; } = nameof(ItemEffectScriptsEnum.UnnoticedItemEffect);

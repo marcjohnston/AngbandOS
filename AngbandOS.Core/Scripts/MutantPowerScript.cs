@@ -67,7 +67,7 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
             powerDesc[num] = "";
         }
         num = 0;
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused to use any powers!");
             Game.EnergyUse = 0;

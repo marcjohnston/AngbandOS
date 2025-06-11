@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class DungeonGuardianGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns the name of the race for the first quest monster.

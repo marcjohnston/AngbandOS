@@ -18,7 +18,7 @@ internal class EatCureConfusionScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        if (Game.ConfusedTimer.ResetTimer())
+        if (Game.ConfusionTimer.ResetTimer())
         {
             return new IdentifiedResult(true);
         }

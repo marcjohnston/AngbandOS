@@ -79,7 +79,7 @@ internal class ZapRodScript : Script, IScript, ICastSpellScript, IGameCommandScr
         int itemLevel = item.LevelNormallyFound;
         // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
         int chance = Game.SkillUseDevice;
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             chance /= 2;
         }

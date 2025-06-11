@@ -577,7 +577,7 @@ internal class Monster : IItemContainer
         {
             if (!Game.HasConfusionResistance)
             {
-                Game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
+                Game.ConfusionTimer.AddTimer(Game.RandomLessThan(4) + 4);
             }
             if (!Game.HasChaosResistance && Game.DieRoll(3) == 1)
             {
@@ -595,7 +595,7 @@ internal class Monster : IItemContainer
         {
             if (!Game.HasConfusionResistance)
             {
-                Game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
+                Game.ConfusionTimer.AddTimer(Game.RandomLessThan(4) + 4);
             }
             if (!Game.HasFreeAction)
             {

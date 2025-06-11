@@ -17,7 +17,7 @@ internal class HealFulReward : Reward
         Game.RunScript(nameof(RestoreLevelScript));
         Game.PoisonTimer.ResetTimer();
         Game.BlindnessTimer.ResetTimer();
-        Game.ConfusedTimer.ResetTimer();
+        Game.ConfusionTimer.ResetTimer();
         Game.HallucinationsTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
         Game.BleedingTimer.ResetTimer();

@@ -12,7 +12,7 @@ public class StunnedRangedWidget : RangedWidgetGameConfiguration
     public override int X => 0;
     public override int Y => 44;
     public override int? Width => 11;
-    public override string IntValueName => nameof(TimersEnum.StunnedTimer);
+    public override string IntValueName => nameof(TimersEnum.StunningTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
@@ -20,5 +20,5 @@ public class StunnedRangedWidget : RangedWidgetGameConfiguration
         (51, "Heavy stun", ColorEnum.Orange),
         (1, "Stun", ColorEnum.Orange)
     };
-    public override string[]? ChangeTrackerNames => new string[] { nameof(TimersEnum.StunnedTimer) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(TimersEnum.StunningTimer) };
 }

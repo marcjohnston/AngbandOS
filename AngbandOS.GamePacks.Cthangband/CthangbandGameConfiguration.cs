@@ -5853,4 +5853,12 @@ public class CthangbandGameConfiguration : GameConfiguration
         new YellowSignSorcerySpell(),
         new ZapFolkSpell(),
     };
+
+    public override TimerScriptGameConfiguration[]? TimerScripts => new TimerScriptGameConfiguration[]
+    {
+        new Add1d20p20FireResistanceTimerGameConfiguration(),
+        new Add1d50p50FireResistanceTimerGameConfiguration(),
+        new Add1d10p10FireResistanceTimerGameConfiguration(),
+        new Add1d40p40FireResistanceTimerGameConfiguration(),
+    };
 }

@@ -39,7 +39,7 @@ internal class BrainSmashMonsterSpell : MonsterSpell
             }
             if (!Game.HasConfusionResistance)
             {
-                Game.ConfusedTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
+                Game.ConfusionTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
             }
             if (!Game.HasFreeAction)
             {

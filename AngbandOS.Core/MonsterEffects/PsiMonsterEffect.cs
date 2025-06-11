@@ -59,7 +59,7 @@ internal class PsiMonsterEffect : MonsterEffect
                         switch (Game.DieRoll(4))
                         {
                             case 1:
-                                Game.ConfusedTimer.AddTimer(3 + Game.DieRoll(dam));
+                                Game.ConfusionTimer.AddTimer(3 + Game.DieRoll(dam));
                                 break;
 
                             case 2:

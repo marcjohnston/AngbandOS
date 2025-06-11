@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ItemFactoryGameConfiguration
 {
     #region ItemEnhancement
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
     public virtual string[]? ApplicableItemFactoryBindingKeys { get; set; } = null;
     public virtual string? AdditionalItemEnhancementWeightedRandomBindingKey { get; set; } = null;
     public virtual int? Value { get; set; } = null;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class HelpGroupGameConfiguration
 {
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     public virtual int SortIndex { get; set; }
 

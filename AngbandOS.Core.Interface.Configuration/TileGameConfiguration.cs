@@ -11,7 +11,7 @@ public class TileGameConfiguration
     public virtual string? VisibleTreasureForTileName { get; set; } = null;
     public virtual bool IsYellowSignSigil { get; set; } = false;
 
-    public virtual string Key { get; set; }
+    public virtual string? Key { get; set; } = null;
 
     public virtual string? StepOnScriptName { get; set; }
 

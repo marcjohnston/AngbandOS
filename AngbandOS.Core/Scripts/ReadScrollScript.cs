@@ -48,7 +48,7 @@ internal class ReadScrollScript : Script, IScript, ICastSpellScript, IGameComman
             Game.MsgPrint("You have no light to read by.");
             return;
         }
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
             return;

@@ -54,7 +54,7 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
         // Work out the chance of using the item successfully based on its level and the
         // player's skill
         int chance = Game.SkillUseDevice;
-        if (Game.ConfusedTimer.Value != 0)
+        if (Game.ConfusionTimer.Value != 0)
         {
             chance /= 2;
         }

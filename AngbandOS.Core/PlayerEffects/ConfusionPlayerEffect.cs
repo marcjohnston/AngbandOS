@@ -31,7 +31,7 @@ internal class ConfusionPlayerEffect : PlayerEffect
         }
         if (!Game.HasConfusionResistance)
         {
-            Game.ConfusedTimer.AddTimer(Game.DieRoll(20) + 10);
+            Game.ConfusionTimer.AddTimer(Game.DieRoll(20) + 10);
         }
         Game.TakeHit(dam, killer);
         return true;
