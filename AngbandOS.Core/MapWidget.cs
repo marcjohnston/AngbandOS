@@ -36,7 +36,7 @@ internal class MapWidget : Widget, IGetKey
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
     }
 
-    public virtual string ToJson()
+    public string ToJson()
     {
         MapWidgetGameConfiguration mapWidgetGameConfiguration = new MapWidgetGameConfiguration()
         {

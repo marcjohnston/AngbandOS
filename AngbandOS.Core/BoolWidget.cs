@@ -40,7 +40,7 @@ internal class BoolWidget : Widget, IGetKey
         BoolValue = Game.SingletonRepository.Get<IBoolValue>(BoolValueName);
     }
 
-    public virtual string ToJson()
+    public string ToJson()
     {
         BoolWidgetGameConfiguration textWidgetGameConfiguration = new BoolWidgetGameConfiguration()
         {

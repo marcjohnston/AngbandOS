@@ -11,13 +11,130 @@ namespace AngbandOS.Core;
 /// artifact creation process.
 /// </summary>
 [Serializable]
-internal abstract class ItemEnhancement : IGetKey
+internal class ItemEnhancement : IGetKey
 {
     #region API
     protected readonly Game Game;
-    protected ItemEnhancement(Game game)
+    protected ItemEnhancement(Game game) // TODO: Delete
     {
         Game = game;
+    }
+
+    public ItemEnhancement(Game game, ItemEnhancementGameConfiguration itemEnhancementGameConfiguration)
+    {
+        Game = game;
+        Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
+        Value = itemEnhancementGameConfiguration.Value;
+        ApplicableItemFactoryBindingKeys = itemEnhancementGameConfiguration.ApplicableItemFactoryBindingKeys;
+        AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
+        FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
+        BonusStrengthRollExpression = itemEnhancementGameConfiguration.BonusStrengthRollExpression;
+        BonusIntelligenceRollExpression = itemEnhancementGameConfiguration.BonusIntelligenceRollExpression;
+        BonusWisdomRollExpression = itemEnhancementGameConfiguration.BonusWisdomRollExpression;
+        BonusDexterityRollExpression = itemEnhancementGameConfiguration.BonusDexterityRollExpression;
+        BonusConstitutionRollExpression = itemEnhancementGameConfiguration.BonusConstitutionRollExpression;
+        BonusCharismaRollExpression = itemEnhancementGameConfiguration.BonusCharismaRollExpression;
+        BonusStealthRollExpression = itemEnhancementGameConfiguration.BonusStealthRollExpression;
+        BonusSearchRollExpression = itemEnhancementGameConfiguration.BonusSearchRollExpression;
+        BonusInfravisionRollExpression = itemEnhancementGameConfiguration.BonusInfravisionRollExpression;
+        BonusTunnelRollExpression = itemEnhancementGameConfiguration.BonusTunnelRollExpression;
+        BonusAttacksRollExpression = itemEnhancementGameConfiguration.BonusAttacksRollExpression;
+        BonusSpeedRollExpression = itemEnhancementGameConfiguration.BonusSpeedRollExpression;
+        BonusArmorClassRollExpression = itemEnhancementGameConfiguration.BonusArmorClassRollExpression;
+        BonusHitRollExpression = itemEnhancementGameConfiguration.BonusHitRollExpression;
+        BonusDamageRollExpression = itemEnhancementGameConfiguration.BonusDamageRollExpression;
+        ActivationName = itemEnhancementGameConfiguration.ActivationName;
+        Aggravate = itemEnhancementGameConfiguration.Aggravate;
+        AntiTheft = itemEnhancementGameConfiguration.AntiTheft;
+        ArtifactBiasWeightedRandomBindingKey = itemEnhancementGameConfiguration.ArtifactBiasWeightedRandomBindingKey;
+        Blessed = itemEnhancementGameConfiguration.Blessed;
+        Blows = itemEnhancementGameConfiguration.Blows;
+        BrandAcid = itemEnhancementGameConfiguration.BrandAcid;
+        BrandCold = itemEnhancementGameConfiguration.BrandCold;
+        BrandElec = itemEnhancementGameConfiguration.BrandElec;
+        BrandFire = itemEnhancementGameConfiguration.BrandFire;
+        BrandPois = itemEnhancementGameConfiguration.BrandPois;
+        Cha = itemEnhancementGameConfiguration.Cha;
+        Chaotic = itemEnhancementGameConfiguration.Chaotic;
+        Con = itemEnhancementGameConfiguration.Con;
+        IsCursed = itemEnhancementGameConfiguration.IsCursed;
+        Dex = itemEnhancementGameConfiguration.Dex;
+        DrainExp = itemEnhancementGameConfiguration.DrainExp;
+        DreadCurse = itemEnhancementGameConfiguration.DreadCurse;
+        EasyKnow = itemEnhancementGameConfiguration.EasyKnow;
+        Feather = itemEnhancementGameConfiguration.Feather;
+        FreeAct = itemEnhancementGameConfiguration.FreeAct;
+        HeavyCurse = itemEnhancementGameConfiguration.HeavyCurse;
+        HideType = itemEnhancementGameConfiguration.HideType;
+        HoldLife = itemEnhancementGameConfiguration.HoldLife;
+        IgnoreAcid = itemEnhancementGameConfiguration.IgnoreAcid;
+        IgnoreCold = itemEnhancementGameConfiguration.IgnoreCold;
+        IgnoreElec = itemEnhancementGameConfiguration.IgnoreElec;
+        IgnoreFire = itemEnhancementGameConfiguration.IgnoreFire;
+        ImAcid = itemEnhancementGameConfiguration.ImAcid;
+        ImCold = itemEnhancementGameConfiguration.ImCold;
+        ImElec = itemEnhancementGameConfiguration.ImElec;
+        ImFire = itemEnhancementGameConfiguration.ImFire;
+        Impact = itemEnhancementGameConfiguration.Impact;
+        Infra = itemEnhancementGameConfiguration.Infra;
+        InstaArt = itemEnhancementGameConfiguration.InstaArt;
+        Int = itemEnhancementGameConfiguration.Int;
+        KillDragon = itemEnhancementGameConfiguration.KillDragon;
+        NoMagic = itemEnhancementGameConfiguration.NoMagic;
+        NoTele = itemEnhancementGameConfiguration.NoTele;
+        PermaCurse = itemEnhancementGameConfiguration.PermaCurse;
+        Radius = itemEnhancementGameConfiguration.Radius;
+        Reflect = itemEnhancementGameConfiguration.Reflect;
+        Regen = itemEnhancementGameConfiguration.Regen;
+        ResAcid = itemEnhancementGameConfiguration.ResAcid;
+        ResBlind = itemEnhancementGameConfiguration.ResBlind;
+        ResChaos = itemEnhancementGameConfiguration.ResChaos;
+        ResCold = itemEnhancementGameConfiguration.ResCold;
+        ResConf = itemEnhancementGameConfiguration.ResConf;
+        ResDark = itemEnhancementGameConfiguration.ResDark;
+        ResDisen = itemEnhancementGameConfiguration.ResDisen;
+        ResElec = itemEnhancementGameConfiguration.ResElec;
+        ResFear = itemEnhancementGameConfiguration.ResFear;
+        ResFire = itemEnhancementGameConfiguration.ResFire;
+        ResLight = itemEnhancementGameConfiguration.ResLight;
+        ResNether = itemEnhancementGameConfiguration.ResNether;
+        ResNexus = itemEnhancementGameConfiguration.ResNexus;
+        ResPois = itemEnhancementGameConfiguration.ResPois;
+        ResShards = itemEnhancementGameConfiguration.ResShards;
+        ResSound = itemEnhancementGameConfiguration.ResSound;
+        Search = itemEnhancementGameConfiguration.Search;
+        SeeInvis = itemEnhancementGameConfiguration.SeeInvis;
+        ShElec = itemEnhancementGameConfiguration.ShElec;
+        ShFire = itemEnhancementGameConfiguration.ShFire;
+        ShowMods = itemEnhancementGameConfiguration.ShowMods;
+        SlayAnimal = itemEnhancementGameConfiguration.SlayAnimal;
+        SlayDemon = itemEnhancementGameConfiguration.SlayDemon;
+        SlayDragon = itemEnhancementGameConfiguration.SlayDragon;
+        SlayEvil = itemEnhancementGameConfiguration.SlayEvil;
+        SlayGiant = itemEnhancementGameConfiguration.SlayGiant;
+        SlayOrc = itemEnhancementGameConfiguration.SlayOrc;
+        SlayTroll = itemEnhancementGameConfiguration.SlayTroll;
+        SlayUndead = itemEnhancementGameConfiguration.SlayUndead;
+        SlowDigest = itemEnhancementGameConfiguration.SlowDigest;
+        Speed = itemEnhancementGameConfiguration.Speed;
+        Stealth = itemEnhancementGameConfiguration.Stealth;
+        Str = itemEnhancementGameConfiguration.Str;
+        SustCha = itemEnhancementGameConfiguration.SustCha;
+        SustCon = itemEnhancementGameConfiguration.SustCon;
+        SustDex = itemEnhancementGameConfiguration.SustDex;
+        SustInt = itemEnhancementGameConfiguration.SustInt;
+        SustStr = itemEnhancementGameConfiguration.SustStr;
+        SustWis = itemEnhancementGameConfiguration.SustWis;
+        Telepathy = itemEnhancementGameConfiguration.Telepathy;
+        Teleport = itemEnhancementGameConfiguration.Teleport;
+        TreasureRating = itemEnhancementGameConfiguration.TreasureRating;
+        Tunnel = itemEnhancementGameConfiguration.Tunnel;
+        Vampiric = itemEnhancementGameConfiguration.Vampiric;
+        Vorpal = itemEnhancementGameConfiguration.Vorpal;
+        Wis = itemEnhancementGameConfiguration.Wis;
+        Wraith = itemEnhancementGameConfiguration.Wraith;
+        XtraMight = itemEnhancementGameConfiguration.XtraMight;
+        XtraShots = itemEnhancementGameConfiguration.XtraShots;
     }
 
     /// <summary>
@@ -345,324 +462,324 @@ internal abstract class ItemEnhancement : IGetKey
     #endregion
 
     #region Unique ItemEnhancement Light-weight Virtual & Abstract Properties
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     /// <summary>
     /// Returns the value of the enhancement.
     /// </summary>
-    public virtual int? Value => null;
+    public virtual int? Value { get; } = null;
 
     /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>
-    protected virtual string[]? ApplicableItemFactoryBindingKeys => null;
+    protected virtual string[]? ApplicableItemFactoryBindingKeys { get; } = null;
 
-    protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey => null;
+    protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey { get; } = null;
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
     /// </summary>
-    public virtual string? FriendlyName => null;
+    public virtual string? FriendlyName { get; } = null;
     #endregion
 
     #region ItemPropertySet Light-weight Virtual & Abstract Properties
-    protected virtual string? BonusStrengthRollExpression => null;
-    protected virtual string? BonusIntelligenceRollExpression => null;
-    protected virtual string? BonusWisdomRollExpression => null;
-    protected virtual string? BonusDexterityRollExpression => null;
-    protected virtual string? BonusConstitutionRollExpression => null;
-    protected virtual string? BonusCharismaRollExpression => null;
-    protected virtual string? BonusStealthRollExpression => null;
-    protected virtual string? BonusSearchRollExpression => null;
-    protected virtual string? BonusInfravisionRollExpression => null;
-    protected virtual string? BonusTunnelRollExpression => null;
-    protected virtual string? BonusAttacksRollExpression => null;
-    protected virtual string? BonusSpeedRollExpression => null;
+    protected virtual string? BonusStrengthRollExpression { get; } = null;
+    protected virtual string? BonusIntelligenceRollExpression { get; } = null;
+    protected virtual string? BonusWisdomRollExpression { get; } = null;
+    protected virtual string? BonusDexterityRollExpression { get; } = null;
+    protected virtual string? BonusConstitutionRollExpression { get; } = null;
+    protected virtual string? BonusCharismaRollExpression { get; } = null;
+    protected virtual string? BonusStealthRollExpression { get; } = null;
+    protected virtual string? BonusSearchRollExpression { get; } = null;
+    protected virtual string? BonusInfravisionRollExpression { get; } = null;
+    protected virtual string? BonusTunnelRollExpression { get; } = null;
+    protected virtual string? BonusAttacksRollExpression { get; } = null;
+    protected virtual string? BonusSpeedRollExpression { get; } = null;
 
-    protected virtual string? BonusArmorClassRollExpression => null;
+    protected virtual string? BonusArmorClassRollExpression { get; } = null;
 
-    protected virtual string? BonusHitRollExpression => null;
+    protected virtual string? BonusHitRollExpression { get; } = null;
 
-    protected virtual string? BonusDamageRollExpression => null;
+    protected virtual string? BonusDamageRollExpression { get; } = null;
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    protected virtual string? ActivationName => null;
+    protected virtual string? ActivationName { get; } = null;
 
     /// <inheritdoc />
-    public virtual bool Aggravate => false;
+    public virtual bool Aggravate { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool AntiTheft => false;
+    public virtual bool AntiTheft { get; } = false;
 
-    protected virtual string? ArtifactBiasWeightedRandomBindingKey => null;
+    protected virtual string? ArtifactBiasWeightedRandomBindingKey { get; } = null;
     
     /// <inheritdoc />
-    public virtual bool Blessed => false;
+    public virtual bool Blessed { get; } = false;
 
     /// <inheritdoc/>
-    public virtual bool Blows => false;
+    public virtual bool Blows { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandAcid => false;
+    public virtual bool BrandAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandCold => false;
+    public virtual bool BrandCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandElec => false;
+    public virtual bool BrandElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandFire => false;
+    public virtual bool BrandFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandPois => false;
+    public virtual bool BrandPois { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Cha => false;
+    public virtual bool Cha { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Chaotic => false;
+    public virtual bool Chaotic { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Con => false;
+    public virtual bool Con { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IsCursed => false;
+    public virtual bool IsCursed { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Dex => false;
+    public virtual bool Dex { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool DrainExp => false;
+    public virtual bool DrainExp { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool DreadCurse => false;
+    public virtual bool DreadCurse { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool EasyKnow => false;
+    public virtual bool EasyKnow { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Feather => false;
+    public virtual bool Feather { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool FreeAct => false;
+    public virtual bool FreeAct { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool HeavyCurse => false;
+    public virtual bool HeavyCurse { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool HideType => false;
+    public virtual bool HideType { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool HoldLife => false;
+    public virtual bool HoldLife { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreAcid => false;
+    public virtual bool IgnoreAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreCold => false;
+    public virtual bool IgnoreCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreElec => false;
+    public virtual bool IgnoreElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreFire => false;
+    public virtual bool IgnoreFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImAcid => false;
+    public virtual bool ImAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImCold => false;
+    public virtual bool ImCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImElec => false;
+    public virtual bool ImElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImFire => false;
+    public virtual bool ImFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Impact => false;
+    public virtual bool Impact { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Infra => false;
+    public virtual bool Infra { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool InstaArt => false;
+    public virtual bool InstaArt { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Int => false;
+    public virtual bool Int { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool KillDragon => false;
+    public virtual bool KillDragon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool NoMagic => false;
+    public virtual bool NoMagic { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool NoTele => false;
+    public virtual bool NoTele { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool PermaCurse => false;
+    public virtual bool PermaCurse { get; } = false;
     
     /// <inheritdoc />
-    public virtual int Radius => 0;
+    public virtual int Radius { get; } = 0;
     
     /// <inheritdoc />
-    public virtual bool Reflect => false;
+    public virtual bool Reflect { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Regen => false;
+    public virtual bool Regen { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResAcid => false;
+    public virtual bool ResAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResBlind => false;
+    public virtual bool ResBlind { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResChaos => false;
+    public virtual bool ResChaos { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResCold => false;
+    public virtual bool ResCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResConf => false;
+    public virtual bool ResConf { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResDark => false;
+    public virtual bool ResDark { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResDisen => false;
+    public virtual bool ResDisen { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResElec => false;
+    public virtual bool ResElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResFear => false;
+    public virtual bool ResFear { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResFire => false;
+    public virtual bool ResFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResLight => false;
+    public virtual bool ResLight { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResNether => false;
+    public virtual bool ResNether { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResNexus => false;
+    public virtual bool ResNexus { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResPois => false;
+    public virtual bool ResPois { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResShards => false;
+    public virtual bool ResShards { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResSound => false;
+    public virtual bool ResSound { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Search => false;
+    public virtual bool Search { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SeeInvis => false;
+    public virtual bool SeeInvis { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ShElec => false;
+    public virtual bool ShElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ShFire => false;
+    public virtual bool ShFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ShowMods => false;
+    public virtual bool ShowMods { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayAnimal => false;
+    public virtual bool SlayAnimal { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayDemon => false;
+    public virtual bool SlayDemon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayDragon => false;
+    public virtual bool SlayDragon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayEvil => false;
+    public virtual bool SlayEvil { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayGiant => false;
+    public virtual bool SlayGiant { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayOrc => false;
+    public virtual bool SlayOrc { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayTroll => false;
+    public virtual bool SlayTroll { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayUndead => false;
+    public virtual bool SlayUndead { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlowDigest => false;
+    public virtual bool SlowDigest { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Speed => false;
+    public virtual bool Speed { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Stealth => false;
+    public virtual bool Stealth { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Str => false;
+    public virtual bool Str { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustCha => false;
+    public virtual bool SustCha { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustCon => false;
+    public virtual bool SustCon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustDex => false;
+    public virtual bool SustDex { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustInt => false;
+    public virtual bool SustInt { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustStr => false;
+    public virtual bool SustStr { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustWis => false;
+    public virtual bool SustWis { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Telepathy => false;
+    public virtual bool Telepathy { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Teleport => false;
+    public virtual bool Teleport { get; } = false;
 
     /// <inheritdoc />
-    public virtual int TreasureRating => 0;
+    public virtual int TreasureRating { get; } = 0;
 
     /// <inheritdoc />
-    public virtual bool Tunnel => false;
+    public virtual bool Tunnel { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Vampiric => false;
+    public virtual bool Vampiric { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Vorpal => false;
+    public virtual bool Vorpal { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Wis => false;
+    public virtual bool Wis { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Wraith => false;
+    public virtual bool Wraith { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool XtraMight => false;
+    public virtual bool XtraMight { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool XtraShots => false;
+    public virtual bool XtraShots { get; } = false;
     #endregion
 }

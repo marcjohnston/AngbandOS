@@ -16,6 +16,7 @@ internal abstract class FixedArtifact : ItemEnhancement
         base.Bind();
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
     }
+    public override string Key => GetType().Name;
 
     /// <summary>
     /// Represents the quantity of this artifact currently in existence.  

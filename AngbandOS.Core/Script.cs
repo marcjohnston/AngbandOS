@@ -19,7 +19,7 @@ internal abstract class Script : IGetKey
     /// Returns the entity serialized into a Json string.  Returns an empty string by default.
     /// </summary>
     /// <returns></returns>
-    public virtual string ToJson()
+    public string ToJson()
     {
         return "";
     }
