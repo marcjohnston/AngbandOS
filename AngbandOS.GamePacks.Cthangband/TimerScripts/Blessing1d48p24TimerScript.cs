@@ -1,8 +1,8 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Add1xBlessingTimer : TimerScriptGameConfiguration
+public class Blessing1d48p24TimerScript : TimerScriptGameConfiguration
 {
-    public override string? ValueExpression => "x";
+    public override string? ValueExpression => "1d48+24";
     public override string TimerBindingKey => nameof(TimersEnum.BlessingTimer);
 }

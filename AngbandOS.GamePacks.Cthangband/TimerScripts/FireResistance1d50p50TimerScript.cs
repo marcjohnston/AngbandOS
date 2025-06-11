@@ -1,8 +1,8 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Add1d20p20FireResistanceTimer : TimerScriptGameConfiguration
+public class FireResistance1d50p50TimerScript : TimerScriptGameConfiguration
 {
-    public override string? ValueExpression => "1d20+20";
+    public override string? ValueExpression => "1d50+50";
     public override string TimerBindingKey => nameof(TimersEnum.FireResistanceTimer);
 }

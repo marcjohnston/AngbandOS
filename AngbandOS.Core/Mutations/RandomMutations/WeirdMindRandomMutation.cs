@@ -24,12 +24,12 @@ internal class WeirdMindRandomMutation : Mutation
         if (Game.TelepathyTimer.Value > 0)
         {
             Game.MsgPrint("Your mind feels cloudy!");
-            Game.TelepathyTimer.ResetTimer();
+            Game.RunScript(nameof(TelepathyResetTimerScript));
         }
         else
         {
             Game.MsgPrint("Your mind expands!");
-            Game.TelepathyTimer.SetTimer(Game.ExperienceLevel.IntValue);
+            Game.RunScript(nameof(Telepathy1xTimerScript));
         }
     }
 }

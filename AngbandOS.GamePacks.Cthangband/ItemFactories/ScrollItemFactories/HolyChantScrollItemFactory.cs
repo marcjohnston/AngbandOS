@@ -27,7 +27,7 @@ public class HolyChantScrollItemFactory : ItemFactoryGameConfiguration
     };
     public override int Weight => 5;
 
-    public override (string, int)? ReadBindingTuple => (nameof(Add1d24p12BlessingTimer), 10);
+    public override (string, int)? ReadBindingTuple => (nameof(Blessing1d24p12TimerScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

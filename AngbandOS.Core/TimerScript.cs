@@ -19,6 +19,7 @@ internal class TimerScript : IUniversalScript, IGetKey
         TimerBindingKey = gameConfiguration.TimerBindingKey;
         Used = gameConfiguration.Used;
         LearnedDetails = gameConfiguration.LearnedDetails;
+        Quiet = gameConfiguration.Quiet;
     }
     protected virtual bool Used { get; }
     public virtual string Key { get; }
@@ -31,6 +32,7 @@ internal class TimerScript : IUniversalScript, IGetKey
     }
     protected string? ValueExpression { get; }
     protected virtual string TimerBindingKey { get; }
+    protected virtual bool Quiet { get; }
     protected Timer Timer { get; private set; }
     protected Expression? Value { get; private set; }
     public string ToJson()
@@ -41,7 +43,8 @@ internal class TimerScript : IUniversalScript, IGetKey
             ValueExpression = ValueExpression,
             TimerBindingKey = TimerBindingKey,
             Used = Used,
-            LearnedDetails = LearnedDetails
+            LearnedDetails = LearnedDetails,
+            Quiet = Quiet
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
@@ -67,12 +70,24 @@ internal class TimerScript : IUniversalScript, IGetKey
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
+        // Is this a request to reset?
         if (Value is null)
         {
+            if (Quiet)
+            {
+                Timer.SetValue();
+                return new IdentifiedAndUsedResult(false, true);
+            }
             return new IdentifiedAndUsedResult(Timer.ResetTimer(), true);
         }
 
         int value = Game.ComputeIntegerExpression(Value).Value;
+
+        if (Quiet)
+        {
+            Timer.SetValue(Timer.Value + value);
+            return new IdentifiedAndUsedResult(false, Used);
+        }
         return new IdentifiedAndUsedResult(Timer.AddTimer(value), Used);
     }
 

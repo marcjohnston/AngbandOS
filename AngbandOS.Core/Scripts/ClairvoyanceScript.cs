@@ -25,7 +25,7 @@ internal class ClairvoyanceScript : Script, IScript, ICastSpellScript
         Game.RunScript(nameof(LightScript));
         if (!Game.HasTelepathy)
         {
-            Game.RunScript(nameof(Add1d30p25TelepathyTimer));
+            Game.RunScript(nameof(Telepathy1d30p25TimerScript));
         }
     }
     public string LearnedDetails => "dur 25+d30";

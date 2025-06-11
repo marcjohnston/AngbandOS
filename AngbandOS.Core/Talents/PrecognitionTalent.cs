@@ -44,7 +44,7 @@ internal class PrecognitionTalent : Talent
         }
         if (Game.ExperienceLevel.IntValue > 24 && Game.ExperienceLevel.IntValue < 40)
         {
-            Game.TelepathyTimer.AddTimer(Game.ExperienceLevel.IntValue);
+            Game.RunScript(nameof(Telepathy1xTimerScript));
         }
         if (!isIdentified)
         {

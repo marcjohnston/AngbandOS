@@ -54,6 +54,7 @@ internal class RestInRoomScript : Script, IScript, ICastSpellScript
                 }
             }
         }
+        // TODO: This is missing telepathy
         Game.HasteTimer.SetValue();
         Game.SlowTimer.SetValue();
         Game.BlindnessTimer.SetValue();
@@ -69,13 +70,13 @@ internal class RestInRoomScript : Script, IScript, ICastSpellScript
         Game.HeroismTimer.SetValue();
         Game.SuperheroismTimer.SetValue();
         Game.StoneskinTimer.SetValue();
-        Game.BlessingTimer.SetValue();
+        Game.RunScript(nameof(BlessingQuietResetTimerScript));
         Game.SeeInvisibilityTimer.SetValue();
         Game.EtherealnessTimer.SetValue();
         Game.InfravisionTimer.SetValue();
         Game.AcidResistanceTimer.SetValue();
         Game.LightningResistanceTimer.SetValue();
-        Game.FireResistanceTimer.SetValue();
+        Game.RunScript(nameof(FireResistanceQuietResetTimerScript));
         Game.ColdResistanceTimer.SetValue();
         Game.PoisonResistanceTimer.SetValue();
         Game.Health.IntValue = Game.MaxHealth.IntValue;

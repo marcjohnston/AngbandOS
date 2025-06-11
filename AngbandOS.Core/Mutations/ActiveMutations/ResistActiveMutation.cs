@@ -28,7 +28,7 @@ internal class ResistActiveMutation : Mutation
             }
             if (base.Game.RandomLessThan(3) < num)
             {
-                Game.FireResistanceTimer.AddTimer(dur);
+                Game.RunScript(nameof(FireResistance1d20p20TimerScript));
                 num--;
             }
             if (base.Game.RandomLessThan(2) < num)

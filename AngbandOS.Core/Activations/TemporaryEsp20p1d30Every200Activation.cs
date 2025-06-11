@@ -16,7 +16,7 @@ internal class TemporaryEsp20p1d30Every200Activation : Activation
     
     public override string? PreActivationMessage => "";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(Add1d30p25TelepathyTimer);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Telepathy1d30p25TimerScript);
 
     protected override string RechargeTimeRollExpression => "200";
 

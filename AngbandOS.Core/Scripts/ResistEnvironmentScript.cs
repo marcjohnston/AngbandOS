@@ -23,7 +23,7 @@ internal class ResistEnvironmentScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.RunScript(nameof(Add1d20p20FireResistanceTimer));
+        Game.RunScript(nameof(FireResistance1d20p20TimerScript));
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
     public string LearnedDetails => "dur 20+d20";

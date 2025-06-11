@@ -22,7 +22,7 @@ internal class BurnResistanceScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.RunScript(nameof(Add1d20p20FireResistanceTimer));
+        Game.RunScript(nameof(FireResistance1d20p20TimerScript));
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }

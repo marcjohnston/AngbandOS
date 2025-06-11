@@ -24,7 +24,7 @@ internal class CharacterArmorTalent : Talent
         }
         if (Game.ExperienceLevel.IntValue > 19)
         {
-            Game.FireResistanceTimer.AddTimer(Game.ExperienceLevel.IntValue);
+            Game.RunScript(nameof(FireResistance1xTimerScript));
         }
         if (Game.ExperienceLevel.IntValue > 24)
         {

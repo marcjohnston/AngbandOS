@@ -14,7 +14,7 @@ internal class SuperheroismAndBlessing50p1d50Script : Script, IActivateItemScrip
     public UsedResult ExecuteActivateItemScript(Item item)
     {
         Game.SuperheroismTimer.AddTimer(Game.DieRoll(50) + 50);
-        Game.RunScript(nameof(Add1d50p50BlessingTimer));
+        Game.RunScript(nameof(Blessing1d50p50TimerScript));
         return new UsedResult(true);
     }
 }

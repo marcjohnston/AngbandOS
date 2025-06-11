@@ -5,5 +5,5 @@ internal class PrayerSpellLifeRealmSuccessMappedSpellScript : MappedSpellScriptG
 {
     public override string SpellBindingKey => nameof(PrayerLifeSpell);
     public override string? RealmBindingKey => nameof(LifeRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Add1d48p48BlessingTimer) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Blessing1d48p48TimerScript) };
 }
