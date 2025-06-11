@@ -85,7 +85,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
         else if (die < 42)
         {
             Game.MsgPrint("It's the Star.");
-            Game.BlessingTimer.AddTimer(Game.ExperienceLevel.IntValue);
+            Game.RunScript(nameof(Add1xBlessingTimer));
         }
         else if (die < 47)
         {

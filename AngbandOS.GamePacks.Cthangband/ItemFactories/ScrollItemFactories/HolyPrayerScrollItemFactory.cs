@@ -27,7 +27,7 @@ public class HolyPrayerScrollItemFactory : ItemFactoryGameConfiguration
     };
     public override int Weight => 5;
 
-    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.Blessing1d48p24IdentifableAndUsedScript), 10);
+    public override (string, int)? ReadBindingTuple => (nameof(Add1d48p24BlessingTimer), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

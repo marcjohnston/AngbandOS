@@ -5860,6 +5860,13 @@ public class CthangbandGameConfiguration : GameConfiguration
         new Add1d50p50FireResistanceTimer(),
         new Add1d10p10FireResistanceTimer(),
         new Add1d40p40FireResistanceTimer(),
-        new Add1d30p25TelepathyTimer()
+        new Add1d30p25TelepathyTimer(),
+        new Add1d12p6BlessingTimer(),
+        new Add1d12p12BlessingTimer(),
+        new Add1d24p12BlessingTimer(),
+        new Add1d48p24BlessingTimer(),
+        new Add1d48p48BlessingTimer(),
+        new Add1d50p50BlessingTimer(),
+        new Add1xBlessingTimer(),
     };
 }
