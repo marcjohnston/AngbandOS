@@ -5,5 +5,5 @@ internal class AstralSpyingSpellTarotRealmSuccessMappedSpellScript : MappedSpell
 {
     public override string SpellBindingKey => nameof(AstralSpyingTarotSpell);
     public override string? RealmBindingKey => nameof(TarotRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.AddTelepathy25p1d30Script) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Add1d30p25TelepathyTimer) };
 }

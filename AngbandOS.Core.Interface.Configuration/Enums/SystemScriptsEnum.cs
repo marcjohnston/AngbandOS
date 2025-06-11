@@ -5,7 +5,6 @@
         AcidTrapScript,
         AcquirementIdentifableAndUsedScript,
         ActivateScript,
-        AddTelepathy25p1d30Script,
         AggravateMonstersIdentifableAndUsedScript,
         AimWandScript,
         AlchemyScript,

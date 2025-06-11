@@ -5856,9 +5856,10 @@ public class CthangbandGameConfiguration : GameConfiguration
 
     public override TimerScriptGameConfiguration[]? TimerScripts => new TimerScriptGameConfiguration[]
     {
-        new Add1d20p20FireResistanceTimerGameConfiguration(),
-        new Add1d50p50FireResistanceTimerGameConfiguration(),
-        new Add1d10p10FireResistanceTimerGameConfiguration(),
-        new Add1d40p40FireResistanceTimerGameConfiguration(),
+        new Add1d20p20FireResistanceTimer(),
+        new Add1d50p50FireResistanceTimer(),
+        new Add1d10p10FireResistanceTimer(),
+        new Add1d40p40FireResistanceTimer(),
+        new Add1d30p25TelepathyTimer()
     };
 }

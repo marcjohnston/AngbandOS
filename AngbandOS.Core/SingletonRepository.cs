@@ -364,6 +364,103 @@ internal class SingletonRepository
         RegisterRepository<IUsedScriptInt>();
         RegisterRepository<IZapRodScript>();
 
+        RegisterRepository<Ability>();
+        RegisterRepository<ActivationWeightedRandom>();
+        RegisterRepository<Alignment>();
+        RegisterRepository<AlterAction>();
+        RegisterRepository<Animation>();
+        RegisterRepository<ArtifactBias>();
+        RegisterRepository<ArtifactBiasWeightedRandom>();
+        RegisterRepository<Attack>();
+        RegisterRepository<AttackEffect>();
+        RegisterRepository<Activation>();
+        RegisterRepository<BaseCharacterClass>();
+        RegisterRepository<CharacterClassAbility>();
+        RegisterRepository<BirthStage>();
+        RegisterRepository<BoolWidget>();
+        RegisterRepository<ChestTrap>();
+        RegisterRepository<ChestTrapConfiguration>();
+        RegisterRepository<CharacterClassSpell>();
+        RegisterRepository<DateWidget>();
+        RegisterRepository<Dungeon>();
+        RegisterRepository<DungeonGuardian>();
+        RegisterRepository<FireResistanceTimer>();
+        RegisterRepository<FixedArtifact>();
+        RegisterRepository<FlaggedAction>();
+        RegisterRepository<FloorEffect>();
+        RegisterRepository<Function>();
+        RegisterRepository<GameCommand>();
+        RegisterRepository<Gender>();
+        RegisterRepository<God>();
+        RegisterRepository<HelpGroup>();
+        RegisterRepository<IntWidget>();
+        RegisterRepository<ItemAction>();
+        RegisterRepository<ItemClass>();
+        RegisterRepository<ItemEffect>();
+        RegisterRepository<ItemEnhancement>();
+        RegisterRepository<ItemEnhancementWeightedRandom>();
+        RegisterRepository<ItemFactory>();
+        RegisterRepository<ItemFactoryWeightedRandom>();
+        RegisterRepository<ItemFilter>();
+        RegisterRepository<ItemFlavor>();
+        RegisterRepository<ItemMatch>();
+        RegisterRepository<ItemQualityRating>();
+        RegisterRepository<ItemTest>();
+        RegisterRepository<Justification>();
+        RegisterRepository<MappedSpellScript>();
+        RegisterRepository<MapWidget>();
+        RegisterRepository<MartialArtsAttack>();
+        RegisterRepository<MaxRangedWidget>();
+        RegisterRepository<MonsterEffect>();
+        RegisterRepository<MonsterFilter>();
+        RegisterRepository<MonsterRace>();
+        RegisterRepository<MonsterRaceFilter>();
+        RegisterRepository<MonsterSelector>();
+        RegisterRepository<MonsterSpell>();
+        RegisterRepository<Mutation>();
+        RegisterRepository<NullableStringsTextAreaWidget>();
+        RegisterRepository<Patron>();
+        RegisterRepository<PhysicalAttributeSet>();
+        RegisterRepository<PlayerEffect>();
+        RegisterRepository<Plural>();
+        RegisterRepository<ProbabilityExpression>();
+        RegisterRepository<Projectile>();
+        RegisterRepository<ProjectileGraphic>();
+        RegisterRepository<ProjectileScript>();
+        RegisterRepository<Property>();
+        RegisterRepository<Race>();
+        RegisterRepository<RaceAbility>();
+        RegisterRepository<RacialPower>();
+        RegisterRepository<RacialPowerTest>();
+        RegisterRepository<RaceGender>();
+        RegisterRepository<RangedWidget>();
+        RegisterRepository<Realm>();
+        RegisterRepository<RealmCharacterClass>();
+        RegisterRepository<RenderMessageScript>();
+        RegisterRepository<Reward>();
+        RegisterRepository<RoomLayout>();
+        RegisterRepository<Shopkeeper>();
+        RegisterRepository<Spell>();
+        RegisterRepository<SpellResistantDetection>();
+        RegisterRepository<StoreCommand>();
+        RegisterRepository<StoreFactory>();
+        RegisterRepository<StringWidget>();
+        RegisterRepository<SummonScript>();
+        RegisterRepository<SyllableSet>();
+        RegisterRepository<Symbol>();
+        RegisterRepository<Talent>();
+        RegisterRepository<TextWidget>();
+        RegisterRepository<Tile>();
+        RegisterRepository<Timer>();
+        RegisterRepository<TimerScript>();
+        RegisterRepository<Town>();
+        RegisterRepository<Vault>();
+        RegisterRepository<View>();
+        RegisterRepository<TimeWidget>();
+        RegisterRepository<WieldSlot>();
+        RegisterRepository<Widget>();
+        RegisterRepository<WizardCommand>();
+        
         // Load system singletons.
         LoadAllAssemblyTypes<Alignment>();
         LoadAllAssemblyTypes<ConsoleElement>();
@@ -574,8 +671,6 @@ internal class SingletonRepository
 
     private void LoadAllAssemblyTypes<T>() // TODO: WHY CANT THIS BE where T: IGETKEY
     {
-        RegisterRepository<T>();
-
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type[] types = assembly.GetTypes();
         foreach (Type type in types)
@@ -606,8 +701,6 @@ internal class SingletonRepository
 
     private void LoadFromConfiguration<T, TConfiguration, TGeneric>(TConfiguration[]? entityConfigurations) where T : IGetKey where TGeneric : T where TConfiguration : notnull
     {
-        RegisterRepository<T>();
-
         string typeName = typeof(T).Name;
         if (entityConfigurations != null)
         {

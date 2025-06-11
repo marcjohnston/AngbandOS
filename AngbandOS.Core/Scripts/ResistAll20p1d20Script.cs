@@ -15,7 +15,7 @@ internal class ResistAll20p1d20Script : Script, IActivateItemScript
     {
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.RunScript(nameof(Add1d20p20FireResistanceTimerGameConfiguration));
+        Game.RunScript(nameof(Add1d20p20FireResistanceTimer));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         return new UsedResult(true);

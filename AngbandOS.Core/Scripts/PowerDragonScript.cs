@@ -21,7 +21,7 @@ internal class PowerDragonScript : Script, IActivateItemScript
         Game.BlessingTimer.AddTimer(base.Game.DieRoll(50) + 50);
         Game.AcidResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
         Game.LightningResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        Game.RunScript(nameof(Add1d50p50FireResistanceTimerGameConfiguration));
+        Game.RunScript(nameof(Add1d50p50FireResistanceTimer));
         Game.ColdResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
         Game.PoisonResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
         return new UsedResult(true);

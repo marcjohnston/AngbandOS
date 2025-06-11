@@ -18,6 +18,7 @@ internal class TimerScript : IUniversalScript, IGetKey
         ValueExpression = gameConfiguration.ValueExpression;
         TimerBindingKey = gameConfiguration.TimerBindingKey;
         Used = gameConfiguration.Used;
+        LearnedDetails = gameConfiguration.LearnedDetails;
     }
     protected virtual bool Used { get; }
     public virtual string Key { get; }
@@ -39,7 +40,8 @@ internal class TimerScript : IUniversalScript, IGetKey
             Key = Key,
             ValueExpression = ValueExpression,
             TimerBindingKey = TimerBindingKey,
-            Used = Used
+            Used = Used,
+            LearnedDetails = LearnedDetails
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
@@ -79,8 +81,33 @@ internal class TimerScript : IUniversalScript, IGetKey
         ExecuteReadScrollOrUseStaffScript();
     }
 
+
     /// <summary>
-    /// Returns blank because timers do not reveal any learned details.
+    /// Returns a duration "dur" for the timer blank because timers do not reveal any learned details.
     /// </summary>
-    public string LearnedDetails => "";
+    public string? LearnedDetails { get; } = null;
+
+    string ICastSpellScript.LearnedDetails
+    {
+        get
+        {
+            // Check to see if the default learned details should be used.
+            if (LearnedDetails is null)
+            {
+                // Yes.  Return the default.
+                if (Value is null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return $"dur {Value.Minimize(new MinimizeOptions() { DivideOnlyOnfIntegerResult = true }).Text}";
+                }
+            }
+            else
+            {
+                return LearnedDetails;
+            }
+        }
+    }
 }
