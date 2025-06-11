@@ -47,7 +47,7 @@ public class AdditionInfixExpression : InfixExpression
         }
         return null;
     }
-    public override Expression Minimize(MinimizeOptions options)
+    public override Expression Minimize(MinimizeOptions? options = null)
     {
         Expression minimizedAddend1 = Addend1.Minimize(options);
         Expression minimizedAddend2 = Addend2.Minimize(options);
@@ -71,6 +71,12 @@ public class AdditionInfixExpression : InfixExpression
         }
 
         Expression? minimizedExpression = TryAdd(minimizedAddend1, minimizedAddend2);
-        return minimizedExpression ?? new AdditionInfixExpression(minimizedAddend1, minimizedAddend2);
+
+        if (minimizedExpression is not null)
+        {
+            return minimizedExpression;
+        }
+        // TODO: This is where we want to switch the addends if the addend1 is a dice roll and addend 2 is a number but we can't because we have to know that addend1 is a dice roll which is not in the namespace.
+        return new AdditionInfixExpression(minimizedAddend1, minimizedAddend2);
     }
 }

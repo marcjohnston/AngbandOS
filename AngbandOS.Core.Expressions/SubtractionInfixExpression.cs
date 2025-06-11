@@ -47,7 +47,7 @@ public class SubtractionInfixExpression : InfixExpression
         return null;
     }
     public override string Text => $"{Minuend}-{Subtrahend}";
-    public override Expression Minimize(MinimizeOptions options)
+    public override Expression Minimize(MinimizeOptions? options = null)
     {
         Expression minimizedMinuend = Minuend.Minimize(options);
         Expression minimizedSubtrahend = Subtrahend.Minimize(options);

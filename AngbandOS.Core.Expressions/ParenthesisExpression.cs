@@ -52,7 +52,7 @@ public class ParenthesisExpression : Expression
             return $"{signSymbol}({Expression})";
         }
     }
-    public override Expression Minimize(MinimizeOptions options)
+    public override Expression Minimize(MinimizeOptions? options = null)
     {
         Expression minimizedExpression = Expression.Minimize(options);
         Expression? computedExpression = TryCompute(Sign, minimizedExpression);

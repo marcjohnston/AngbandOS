@@ -19,5 +19,5 @@ internal class ExperienceLevelIdentifierExpression : IdentifierExpression
     {
         return new IntegerExpression(Game.ExperienceLevel.IntValue);
     }
-    public override Expression Minimize(MinimizeOptions options) => new IntegerExpression(Game.ExperienceLevel.IntValue);
+    public override Expression Minimize(MinimizeOptions? options = null) => new IntegerExpression(Game.ExperienceLevel.IntValue);
 }

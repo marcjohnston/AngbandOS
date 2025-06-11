@@ -49,7 +49,7 @@ public class MultiplicationInfixExpression : InfixExpression
     }
 
     public override string Text => $"{Factor1}*{Factor2}";
-    public override Expression Minimize(MinimizeOptions options)
+    public override Expression Minimize(MinimizeOptions? options = null)
     {
         Expression minimizedFactor1 = Factor1.Minimize(options);
         Expression minimizedFactor2 = Factor2.Minimize(options);

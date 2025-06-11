@@ -74,7 +74,7 @@ internal abstract class ProjectileScript : IGetKey, IUniversalScript // DO NOT A
     /// <summary>
     /// Returns the details that are presented to the player.  Returns the <see cref="Expression.Minimize(MinimizeOptions)"> version of the <see cref="DamageRoll"/>, by default.
     /// </summary>
-    public string LearnedDetails => $"dam {DamageRoll.Minimize(new MinimizeOptions() { DivideOnlyOnfIntegerResult = true }).Text}";
+    public string LearnedDetails => $"dam {DamageRoll.Minimize(new MinimizeOptions()).Text}";
 
     /// <summary>
     /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.

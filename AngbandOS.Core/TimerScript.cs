@@ -101,7 +101,7 @@ internal class TimerScript : IUniversalScript, IGetKey
                 }
                 else
                 {
-                    return $"dur {Value.Minimize(new MinimizeOptions() { DivideOnlyOnfIntegerResult = true }).Text}";
+                    return $"dur {Value.Minimize(new MinimizeOptions()).Text}";
                 }
             }
             else

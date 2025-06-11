@@ -24,8 +24,22 @@ internal class DiceRollInfixExpression : InfixExpression
         }
         return new IntegerExpression(sum);
     }
-    public override string Text => $"{Dice}d{Sides}";
-    public override Expression Minimize(MinimizeOptions options)
+    public override string Text
+    {
+        get
+        {
+            if (Dice is IntegerExpression integerDiceExpression && integerDiceExpression.Value == 1)
+            {
+                return $"d{Sides}";
+            }
+            if (Dice is DecimalExpression decimalDiceExpression && decimalDiceExpression.Value == 1)
+            {
+                return $"d{Sides}";
+            }
+            return $"{Dice}d{Sides}";
+        }
+    }
+    public override Expression Minimize(MinimizeOptions? options = null)
     {
         Expression minimizedDice = Dice.Minimize(options);
         Expression minimizedSides = Sides.Minimize(options);

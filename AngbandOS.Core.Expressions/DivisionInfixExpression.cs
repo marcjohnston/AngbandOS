@@ -64,8 +64,12 @@ public class DivisionInfixExpression : InfixExpression
         return null;
     }
 
-    public override Expression Minimize(MinimizeOptions options)
+    public override Expression Minimize(MinimizeOptions? options = null)
     {
+        if (options is null)
+        {
+            options = new MinimizeOptions();
+        }
         Expression minimizedDividend = Dividend.Minimize(options);
         Expression minimizedDivisor = Divisor.Minimize(options);
 
