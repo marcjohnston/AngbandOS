@@ -502,7 +502,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Plural, PluralGameConfiguration, GenericPlural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
-        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, GenericProjectileScript>(gameConfiguration.ProjectileScripts);
+        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, ProjectileScript>(gameConfiguration.ProjectileScripts);
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, ProjectileWeightedRandom>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration, RaceGender>(gameConfiguration.RaceGenders);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, GenericRangedWidget>(gameConfiguration.RangedWidgets);
