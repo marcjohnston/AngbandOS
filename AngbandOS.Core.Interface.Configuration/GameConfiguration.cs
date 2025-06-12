@@ -1,4 +1,7 @@
-﻿namespace AngbandOS.Core.Interface.Configuration;
+﻿using System.Diagnostics;
+using System.Reflection;
+
+namespace AngbandOS.Core.Interface.Configuration;
 
 /// <summary>
 /// Represents an interface that describes the configuration data that the GameServer.Play method accepts.  This configuration data is used to completely
@@ -7,6 +10,91 @@
 [Serializable]
 public class GameConfiguration
 {
+    private static T[] LoadFromAssembly<T>(Assembly assembly) where T : new()
+    {
+        List<T> singletonsList = new List<T>();
+
+        int i = 0;
+        foreach (var type in assembly.GetTypes())
+        {
+            if (typeof(T).IsAssignableFrom(type))
+            {
+                T? singleton = (T?)Activator.CreateInstance(type);
+                if (singleton is null)
+                {
+                    throw new Exception("Error in LoadFromAssembly generating singleton.");
+                }
+                singletonsList.Add(singleton);
+            }
+        }
+        return singletonsList.ToArray();
+    }
+
+    public static GameConfiguration LoadFromAssembly(Assembly assembly)
+    {
+        GameConfiguration gameConfiguration = new GameConfiguration();
+        gameConfiguration.Towns = LoadFromAssembly<TownGameConfiguration>(assembly);
+        gameConfiguration.Shopkeepers = LoadFromAssembly<ShopkeeperGameConfiguration>(assembly);
+        gameConfiguration.GameCommands = LoadFromAssembly<GameCommandGameConfiguration>(assembly);
+        gameConfiguration.StoreCommands = LoadFromAssembly<StoreCommandGameConfiguration>(assembly);
+        gameConfiguration.HelpGroups = LoadFromAssembly<HelpGroupGameConfiguration>(assembly);
+        gameConfiguration.MonsterRaces = LoadFromAssembly<MonsterRaceGameConfiguration>(assembly);
+        gameConfiguration.Symbols = LoadFromAssembly<SymbolGameConfiguration>(assembly);
+        gameConfiguration.Vaults = LoadFromAssembly<VaultGameConfiguration>(assembly);
+        gameConfiguration.DungeonGuardians = LoadFromAssembly<DungeonGuardianGameConfiguration>(assembly);
+        gameConfiguration.Dungeons = LoadFromAssembly<DungeonGameConfiguration>(assembly);
+        gameConfiguration.StoreFactories = LoadFromAssembly<StoreFactoryGameConfiguration>(assembly);
+        gameConfiguration.ProjectileGraphics = LoadFromAssembly<ProjectileGraphicGameConfiguration>(assembly);
+        gameConfiguration.ItemFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.MushroomReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.PotionReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.RingReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.RodReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.ScrollReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.StaffReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.WandReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
+        gameConfiguration.ClassSpells = LoadFromAssembly<CharacterClassSpellGameConfiguration>(assembly);
+        gameConfiguration.WizardCommands = LoadFromAssembly<WizardCommandGameConfiguration>(assembly);
+        gameConfiguration.Tiles = LoadFromAssembly<TileGameConfiguration>(assembly);
+        gameConfiguration.Animations = LoadFromAssembly<AnimationGameConfiguration>(assembly);
+        gameConfiguration.Spells = LoadFromAssembly<SpellGameConfiguration>(assembly);
+        gameConfiguration.Plurals = LoadFromAssembly<PluralGameConfiguration>(assembly);
+        gameConfiguration.Attacks = LoadFromAssembly<AttackGameConfiguration>(assembly);
+        gameConfiguration.Gods = LoadFromAssembly<GodGameConfiguration>(assembly);
+        gameConfiguration.SyllableSets = LoadFromAssembly<SyllableSetGameConfiguration>(assembly);
+        gameConfiguration.Projectiles = LoadFromAssembly<ProjectileGameConfiguration>(assembly);
+        gameConfiguration.ProjectileScripts = LoadFromAssembly<ProjectileScriptGameConfiguration>(assembly);
+        gameConfiguration.ArtifactBiasWeightedRandoms = LoadFromAssembly<ArtifactBiasWeightedRandomGameConfiguration>(assembly);
+        gameConfiguration.ItemClasses = LoadFromAssembly<ItemClassGameConfiguration>(assembly);
+        gameConfiguration.ItemEnhancements = LoadFromAssembly<ItemEnhancementGameConfiguration>(assembly);
+        gameConfiguration.ItemEnhancementWeightedRandoms = LoadFromAssembly<ItemEnhancementWeightedRandomGameConfiguration>(assembly);
+        gameConfiguration.ItemFactories = LoadFromAssembly<ItemFactoryGameConfiguration>(assembly);
+        gameConfiguration.ProjectileWeightedRandomScripts = LoadFromAssembly<ProjectileWeightedRandomGameConfiguration>(assembly);
+        gameConfiguration.BoolWidgets = LoadFromAssembly<BoolWidgetGameConfiguration>(assembly);
+        gameConfiguration.ConditionalWidgets = LoadFromAssembly<ConditionalWidgetGameConfiguration>(assembly);
+        gameConfiguration.DateWidgets = LoadFromAssembly<DateWidgetGameConfiguration>(assembly);
+        gameConfiguration.IntWidgets = LoadFromAssembly<IntWidgetGameConfiguration>(assembly);
+        gameConfiguration.MapWidgets = LoadFromAssembly<MapWidgetGameConfiguration>(assembly);
+        gameConfiguration.MaxRangedWidgets = LoadFromAssembly<MaxRangedWidgetGameConfiguration>(assembly);
+        gameConfiguration.RangedWidgets = LoadFromAssembly<RangedWidgetGameConfiguration>(assembly);
+        gameConfiguration.StringWidgets = LoadFromAssembly<StringWidgetGameConfiguration>(assembly);
+        gameConfiguration.TextWidgets = LoadFromAssembly<TextWidgetGameConfiguration>(assembly);
+        gameConfiguration.TimeWidgets = LoadFromAssembly<TimeWidgetGameConfiguration>(assembly);
+        gameConfiguration.NullableStringsTextAreaWidgets = LoadFromAssembly<NullableStringsTextAreaWidgetGameConfiguration>(assembly);
+        gameConfiguration.RaceGenders = LoadFromAssembly<RaceGenderGameConfiguration>(assembly);
+        gameConfiguration.Genders = LoadFromAssembly<GenderGameConfiguration>(assembly);
+        gameConfiguration.PhysicalAttributeSets = LoadFromAssembly<PhysicalAttributeSetGameConfiguration>(assembly);
+        gameConfiguration.Realms = LoadFromAssembly<RealmGameConfiguration>(assembly);
+        gameConfiguration.RealmCharacterClasses = LoadFromAssembly<RealmCharacterClassGameConfiguration>(assembly);
+        gameConfiguration.Views = LoadFromAssembly<ViewGameConfiguration>(assembly);
+        gameConfiguration.SummonScripts = LoadFromAssembly<SummonScriptGameConfiguration>(assembly);
+        gameConfiguration.MappedSpellScripts = LoadFromAssembly<MappedSpellScriptGameConfiguration>(assembly);
+        gameConfiguration.SummonWeightedRandoms = LoadFromAssembly<SummonWeightedRandomGameConfiguration>(assembly);
+        gameConfiguration.ItemFactoryWeightedRandoms = LoadFromAssembly<ItemFactoryWeightedRandomGameConfiguration>(assembly);
+        gameConfiguration.TimerScripts = LoadFromAssembly<TimerScriptGameConfiguration>(assembly);
+        return gameConfiguration;
+    }
+
     /// <summary>
     /// Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.
     /// </summary>    

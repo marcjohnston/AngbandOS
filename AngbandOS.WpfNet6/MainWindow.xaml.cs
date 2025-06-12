@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -229,13 +230,12 @@ public partial class MainWindow : Window, IConsoleViewPort
                 gameReplay = File.ReadAllText(replayFilename);
             }
 
-            //GameConfiguration gameConfiguration = GameConfiguration.LoadGameConfiguration(persistentStorage);
-            //GameConfiguration gameConfiguration = GameConfiguration.LoadGamePack();
-            //GameConfiguration gameConfiguration = new GameConfiguration();
-            //GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
-            GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
+            // Retrieve a reference to the assembly so that we can dynamically load it.
+            Assembly assembly = typeof(AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration).Assembly;
 
-            //gameConfiguration.StartupTownName = "DylathLeenTown";
+            // Dynamically load the game configuration with all singletons found in the assembly.
+            GameConfiguration gameConfiguration = GameConfiguration.LoadFromAssembly(assembly);
+
             GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, gameConfiguration, gameReplay);
             File.WriteAllText(replayFilename, gameResults.Replay);
         }
