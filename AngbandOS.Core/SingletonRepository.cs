@@ -508,6 +508,7 @@ internal class SingletonRepository
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, GenericRangedWidget>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Realm, RealmGameConfiguration, Realm>(gameConfiguration.Realms);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration, RealmCharacterClass>(gameConfiguration.RealmCharacterClasses);
+        LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration, RenderMessageScript>(gameConfiguration.RenderMessageScripts);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, Spell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
@@ -559,7 +560,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<RaceAbility>();
         LoadAllAssemblyTypes<RacialPower>();
         LoadAllAssemblyTypes<RacialPowerTest>();
-        LoadAllAssemblyTypes<RenderMessageScript>();
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();
         LoadAllAssemblyTypes<Script>();

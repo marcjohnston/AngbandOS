@@ -53,6 +53,11 @@ internal class TimerScript : IUniversalScript, IGetKey
         return ExecuteReadScrollOrUseStaffScript().UsedResult;
     }
 
+    public IdentifiedResult ExecuteEatOrQuaffScript()
+    {
+        return ExecuteReadScrollOrUseStaffScript().IdentifiedResult;
+    }
+
     public IdentifiedResult ExecuteAimWandScript(int dir)
     {
         return ExecuteReadScrollOrUseStaffScript().IdentifiedResult;

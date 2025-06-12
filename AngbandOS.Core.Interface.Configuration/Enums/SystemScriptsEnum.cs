@@ -590,7 +590,6 @@
         WallOfStoneScript,
         WandEatMagicScript,
         WardingScript,
-        WaterScript,
         WhirlpoolScript,
         WhirlwindAttackScript,
         WhirlwindScript,

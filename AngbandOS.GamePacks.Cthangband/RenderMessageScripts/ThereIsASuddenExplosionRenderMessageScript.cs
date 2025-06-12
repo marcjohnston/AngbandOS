@@ -4,11 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.RenderMessageScripts;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class APuffOfYellowGasSurroundsYouRenderMessageScript : RenderMessageScript
+public class ThereIsASuddenExplosionRenderMessageScript : RenderMessageScriptGameConfiguration
 {
-    private APuffOfYellowGasSurroundsYouRenderMessageScript(Game game) : base(game) { }
-    public override string Message => "A puff of yellow gas surrounds you!";
+    public override string Message => "There is a sudden explosion!";
 }

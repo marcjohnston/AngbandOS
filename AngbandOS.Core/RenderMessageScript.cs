@@ -4,20 +4,26 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.RenderMessageScripts;
+namespace AngbandOS.Core;
 
 [Serializable]
 
-internal abstract class RenderMessageScript : Script, IUniversalScript
+internal class RenderMessageScript : IGetKey, IUniversalScript
 {
-    protected RenderMessageScript(Game game) : base(game) { }
+    protected readonly Game Game;
+    public RenderMessageScript(Game game, RenderMessageScriptGameConfiguration renderMessageScriptGameConfiguration)
+    {
+        Game = game;
+        Key = renderMessageScriptGameConfiguration.Key ?? renderMessageScriptGameConfiguration.GetType().Name;
+        Message = renderMessageScriptGameConfiguration.Message;
+        UsesItem = renderMessageScriptGameConfiguration.UsesItem;
+        IdentifiesItem = renderMessageScriptGameConfiguration.IdentifiesItem;
+    }
 
-    public virtual bool UsesItem => false;
-    public virtual bool IdentifiesItem => false;
+    public virtual bool UsesItem { get; } = false;
+    public virtual bool IdentifiesItem { get; } = false;
 
-    public abstract string Message { get; }
-
-    public override void Bind() { }
+    public virtual string Message { get; }
 
     public UsedResult ExecuteActivateItemScript(Item item)
     {
@@ -59,8 +65,33 @@ internal abstract class RenderMessageScript : Script, IUniversalScript
         return new IdentifiedAndUsedResult(IdentifiesItem, UsesItem);
     }
 
+    public string ToJson()
+    {
+        RenderMessageScriptGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            Message = Message,
+            UsesItem = UsesItem,
+            IdentifiesItem = IdentifiesItem
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
+    }
+
+    public void Bind() { }
+
+    public IdentifiedResult ExecuteEatOrQuaffScript()
+    {
+        ExecuteScript();
+        return new IdentifiedResult(IdentifiesItem);
+    }
+
+    public virtual string Key { get; }
+
     /// <summary>
-    /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
+    /// Returns information about this message, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
     /// </summary>
     public virtual string LearnedDetails => "";
+
+    public string GetKey => Key;
 }
+

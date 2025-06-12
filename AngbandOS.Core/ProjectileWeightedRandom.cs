@@ -38,6 +38,11 @@ internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGet
         return Choose().ExecuteDirectionalActivationScript(item, direction);
     }
 
+    public IdentifiedResult ExecuteEatOrQuaffScript()
+    {
+        return Choose().ExecuteEatOrQuaffScript();
+    }
+
     public IdentifiedResult ExecuteAimWandScript(int dir)
     {
         return Choose().ExecuteAimWandScript(dir);

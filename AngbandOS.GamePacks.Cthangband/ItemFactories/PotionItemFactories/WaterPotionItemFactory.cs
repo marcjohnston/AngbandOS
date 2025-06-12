@@ -24,7 +24,7 @@ public class WaterPotionItemFactory : ItemFactoryGameConfiguration
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
 
-    public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.WaterScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
+    public override (string, string?, int)? QuaffBindingTuple => (nameof(YouFeelLessThirstyRenderMessageScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
     public override string? PreassignedItemFlavorBindingKey => nameof(ClearPotionItemFlavor);
 

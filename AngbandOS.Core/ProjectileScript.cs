@@ -206,6 +206,11 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
         return ExecuteDirectionalWithPreAndPostMessages(direction);
     }
 
+    public IdentifiedResult ExecuteEatOrQuaffScript()
+    {
+        return ExecuteNonDirectionalWithPreAndPostMessages().IdentifiedResult;
+    }
+
     /// <summary>
     /// Projects the projectile and returns whether the projectile can be identified by the player and true for used because projectiles are always used.
     /// </summary>

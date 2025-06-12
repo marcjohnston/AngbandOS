@@ -4,11 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.RenderMessageScripts;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class ThereIsASuddenExplosionRenderMessageScript : RenderMessageScript
+public class YouAreSplashedWithAcidRenderMessageScript : RenderMessageScriptGameConfiguration
 {
-    private ThereIsASuddenExplosionRenderMessageScript(Game game) : base(game) { }
-    public override string Message => "There is a sudden explosion!";
+    public override string Message => "You are splashed with acid!";
 }

@@ -4,11 +4,11 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.RenderMessageScripts;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class ASmallNeedleHasPrickedYouRenderMessageScript : RenderMessageScript
+public class YouFeelLessThirstyRenderMessageScript : RenderMessageScriptGameConfiguration
 {
-    private ASmallNeedleHasPrickedYouRenderMessageScript(Game game) : base(game) { }
-    public override string Message => "A small needle has pricked you!";
+    public override string Message => "You feel less thirsty.";
+    public override bool IdentifiesItem => true;
 }
