@@ -15,7 +15,7 @@ internal class Heal1000Script : Script, IActivateItemScript
     {
         Game.MsgPrint("You feel much better...");
         Game.RestoreHealth(1000);
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         return new UsedResult(true);
     }
 }

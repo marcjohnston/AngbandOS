@@ -24,7 +24,7 @@ internal class HerbalHealingScript : Script, IScript, ICastSpellScript
     {
         Game.RestoreHealth(1000);
         Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         Game.PoisonTimer.ResetTimer();
     }
     public string LearnedDetails => "heal 1000";

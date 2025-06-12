@@ -24,7 +24,7 @@ internal class CureCriticalWounds8d10Script : Script, IScript, ICastSpellScript
     {
         Game.RestoreHealth(Game.DiceRoll(8, 10));
         Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
     }
     public string LearnedDetails => "heal 8d10";
 }

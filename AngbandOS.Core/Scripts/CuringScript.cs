@@ -34,7 +34,7 @@ internal class CuringScript : Script, IReadScrollOrUseStaffScript
         {
             isIdentified = true;
         }
-        if (Game.BleedingTimer.ResetTimer())
+        if (Game.RunIdentifiedScript(nameof(BleedingResetTimerScript)))
         {
             isIdentified = true;
         }

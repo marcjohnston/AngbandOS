@@ -16,7 +16,7 @@ internal class GoldenCrownOfTheSunScript : Script, IActivateItemScript
         Game.MsgPrint("Your crown glows deep yellow...");
         Game.MsgPrint("You feel a warm tingling inside...");
         Game.RestoreHealth(700);
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         return new UsedResult(true);
     }
 }

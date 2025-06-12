@@ -29,7 +29,7 @@ internal class Healing300ResetStunAndBleedingScript : Script, IScript, ICastSpel
         {
             isIdentified = true;
         }
-        if (Game.BleedingTimer.ResetTimer())
+        if (Game.RunIdentifiedScript(nameof(BleedingResetTimerScript)))
         {
             isIdentified = true;
         }

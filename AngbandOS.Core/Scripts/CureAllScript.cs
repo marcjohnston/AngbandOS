@@ -46,7 +46,7 @@ internal class CureAllScript : Script, IScript, ICastSpellScript
         Game.ParalysisTimer.ResetTimer();
         Game.HallucinationsTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         Game.SlowTimer.ResetTimer();
         Game.SetFood(Constants.PyFoodMax - 1);
         Game.RunScript(nameof(RedrawScript));

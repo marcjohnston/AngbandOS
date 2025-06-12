@@ -28,7 +28,7 @@ internal class CureLightWounds2d8Script : Script, IScript, ICastSpellScript, IEa
         {
             isIdentified = true;
         }
-        if (Game.BleedingTimer.AddTimer(-10))
+        if (Game.RunIdentifiedScript(nameof(BleedingM10TimerScript)))
         {
             isIdentified = true;
         }

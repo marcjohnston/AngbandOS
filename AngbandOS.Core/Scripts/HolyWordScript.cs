@@ -27,7 +27,7 @@ internal class HolyWordScript : Script, IScript, ICastSpellScript
         Game.FearTimer.ResetTimer();
         Game.PoisonTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        Game.PoisonTimer.ResetTimer();
     }
     public string LearnedDetails => $"d {4 * Game.ExperienceLevel.IntValue}/h 1000";
 }

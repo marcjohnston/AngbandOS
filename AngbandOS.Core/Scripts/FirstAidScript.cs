@@ -23,7 +23,7 @@ internal class FirstAidScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         Game.RestoreHealth(Game.DiceRoll(2, 8));
-        Game.BleedingTimer.AddTimer(-15);
+        Game.RunScript(nameof(BleedingM15TimerScript));
     }
     public string LearnedDetails => "heal 2d8";
 }

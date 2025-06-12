@@ -14,7 +14,7 @@ internal class Heal777CuringAndHeroism25pd25Script : Script, IActivateItemScript
     public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.PoisonTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         Game.StunTimer.ResetTimer();
         Game.ConfusionTimer.ResetTimer();
         Game.BlindnessTimer.ResetTimer();

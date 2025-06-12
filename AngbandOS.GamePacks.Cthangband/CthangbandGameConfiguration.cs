@@ -5877,6 +5877,9 @@ public class CthangbandGameConfiguration : GameConfiguration
         new AcidResistance1d40p40TimerScript(),
         new AcidResistance1d50p50TimerScript(),
         new AcidResistance1d20p20TimerScript(),
-
+        new BleedingResetTimerScript(),
+        new BleedingM10TimerScript(),
+        new BleedingM15TimerScript(),
+        new Bleeding5000TimerScript(),
     };
 }

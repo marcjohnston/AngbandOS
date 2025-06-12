@@ -23,7 +23,7 @@ internal class CureLightWounds2d10Script : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         Game.RestoreHealth(Game.DiceRoll(2, 10));
-        Game.BleedingTimer.AddTimer(-10);
+        Game.RunScript(nameof(BleedingM10TimerScript));
     }
     public string LearnedDetails => "heal 2d10";
 }

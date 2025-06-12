@@ -21,7 +21,7 @@ internal class DetonationsScript : Script, IEatOrQuaffScript
         Game.MsgPrint("Massive explosions rupture your body!");
         Game.TakeHit(Game.DiceRoll(50, 20), "a potion of Detonation");
         Game.StunTimer.AddTimer(75);
-        Game.BleedingTimer.AddTimer(5000);
+        Game.RunScript(nameof(Bleeding5000TimerScript));
         return new IdentifiedResult(true);
     }
 }

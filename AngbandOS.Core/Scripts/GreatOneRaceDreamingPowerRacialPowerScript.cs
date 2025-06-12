@@ -9,7 +9,7 @@ internal class GreatOneRaceDreamingPowerRacialPowerScript : Script, IScript
         Game.PoisonTimer.ResetTimer();
         Game.HallucinationsTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         Game.BlindnessTimer.ResetTimer();
         Game.FearTimer.ResetTimer();
         Game.TryRestoringAbilityScore(Game.StrengthAbility);

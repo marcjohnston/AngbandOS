@@ -40,7 +40,7 @@ internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Sc
         {
             isIdentified = true;
         }
-        if (Game.BleedingTimer.ResetTimer())
+        if (Game.RunIdentifiedScript(nameof(BleedingResetTimerScript)))
         {
             isIdentified = true;
         }

@@ -15,7 +15,7 @@ internal class Heal700Script : Script, IActivateItemScript
     {
         Game.MsgPrint("You feel a warm tingling inside...");
         Game.RestoreHealth(700);
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         return new UsedResult(true);
     }
 }

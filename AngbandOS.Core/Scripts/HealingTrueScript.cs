@@ -24,7 +24,7 @@ internal class HealingTrueScript : Script, IScript, ICastSpellScript
     {
         Game.RestoreHealth(2000);
         Game.StunTimer.ResetTimer();
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
     }
     public string LearnedDetails => "heal 2000";
 }

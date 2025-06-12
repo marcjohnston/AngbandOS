@@ -43,7 +43,7 @@ internal class HolinessScript : Script, IReadScrollOrUseStaffScript
         {
             isIdentified = true;
         }
-        if (Game.BleedingTimer.ResetTimer())
+        if (Game.RunIdentifiedScript(nameof(BleedingResetTimerScript)))
         {
             isIdentified = true;
         }

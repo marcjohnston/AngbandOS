@@ -41,7 +41,7 @@ internal class SpecialHealingScript : Script, IEatOrQuaffScript
         {
             isIdentified = true;
         }
-        if (Game.BleedingTimer.ResetTimer())
+        if (Game.RunIdentifiedScript(nameof(BleedingResetTimerScript)))
         {
             isIdentified = true;
         }

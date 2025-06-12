@@ -22,7 +22,7 @@ internal class CureWoundsAndPoisonScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.BleedingTimer.ResetTimer();
+        Game.RunScript(nameof(BleedingResetTimerScript));
         Game.PoisonTimer.ResetTimer();
     }
     public string LearnedDetails => "";

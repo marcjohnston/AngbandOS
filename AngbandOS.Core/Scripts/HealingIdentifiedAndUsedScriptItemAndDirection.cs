@@ -26,7 +26,7 @@ internal class HealingIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodS
         {
             isIdentified = true;
         }
-        if (Game.BleedingTimer.ResetTimer())
+        if (Game.RunIdentifiedScript(nameof(BleedingResetTimerScript)))
         {
             isIdentified = true;
         }
