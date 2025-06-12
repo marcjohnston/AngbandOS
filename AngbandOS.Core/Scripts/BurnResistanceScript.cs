@@ -24,7 +24,7 @@ internal class BurnResistanceScript : Script, IScript, ICastSpellScript
     {
         Game.RunScript(nameof(FireResistance1d20p20TimerScript));
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(AcidResistance1d20p20TimerScript));
     }
     public string LearnedDetails => "dur 20+d20";
 }

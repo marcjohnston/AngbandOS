@@ -18,7 +18,7 @@ internal class ResistanceScript : Script, IEatOrQuaffScript
     public IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Resistance gives you all timed resistances
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(AcidResistance1d20p20TimerScript));
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.RunScript(nameof(FireResistance1d20p20TimerScript));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);

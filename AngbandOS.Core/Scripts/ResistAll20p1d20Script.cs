@@ -13,7 +13,7 @@ internal class ResistAll20p1d20Script : Script, IActivateItemScript
 
     public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(AcidResistance1d20p20TimerScript));
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.RunScript(nameof(FireResistance1d20p20TimerScript));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);

@@ -5873,5 +5873,10 @@ public class CthangbandGameConfiguration : GameConfiguration
         new Blessing1d50p50TimerScript(),
         new Blessing1xTimerScript(),
         new BlessingQuietResetTimerScript(),
+        new AcidResistanceQuietResetTimerScript(),
+        new AcidResistance1d40p40TimerScript(),
+        new AcidResistance1d50p50TimerScript(),
+        new AcidResistance1d20p20TimerScript(),
+
     };
 }

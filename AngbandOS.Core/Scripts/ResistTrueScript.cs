@@ -22,7 +22,7 @@ internal class ResistTrueScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(AcidResistance1d20p20TimerScript));
         Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.RunScript(nameof(FireResistance1d20p20TimerScript));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);

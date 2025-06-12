@@ -74,7 +74,7 @@ internal class RestInRoomScript : Script, IScript, ICastSpellScript
         Game.SeeInvisibilityTimer.SetValue();
         Game.EtherealnessTimer.SetValue();
         Game.InfravisionTimer.SetValue();
-        Game.AcidResistanceTimer.SetValue();
+        Game.RunScript(nameof(AcidResistanceQuietResetTimerScript));
         Game.LightningResistanceTimer.SetValue();
         Game.RunScript(nameof(FireResistanceQuietResetTimerScript));
         Game.ColdResistanceTimer.SetValue();

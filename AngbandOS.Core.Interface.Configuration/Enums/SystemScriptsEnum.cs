@@ -427,7 +427,6 @@
         ResetFearTimerScript,
         ResetPoisonScript,
         ResetRecallScript,
-        ResistAcidScript,
         ResistAll20p1d20Script,
         ResistAll40p1d40Script,
         ResistanceScript,

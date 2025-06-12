@@ -14,7 +14,7 @@ internal class BallOfAcid50r2AndResistAcid1d20p20Script : Script, IActivateItemS
     public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(Acid50r2ProjectileScript));
-        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.RunScript(nameof(AcidResistance1d20p20TimerScript));
         return new UsedResult(true);
     }
 }
