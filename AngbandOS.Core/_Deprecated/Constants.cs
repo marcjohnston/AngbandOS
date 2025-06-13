@@ -22,9 +22,6 @@ internal static class Constants
     public const int KeymapModeOrig = 0;
     public const int KeymapModes = 2;
 
-    public const int MaKnee = 1;
-    public const int MaSlow = 2;
-
     public const int MaxDepth = 128;
     public const int MaxMAllocChance = 160;
 

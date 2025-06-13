@@ -4,16 +4,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.MartialArtsAttacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class DragonFistMartialArtsAttack : MartialArtsAttack
+public class CrushingBlowMartialArtsAttack : MartialArtsAttackGameConfiguration
 {
     public override int Chance => 35;
     public override int Dd => 10;
-    public override string Desc => "You hit {0} with a Dragon Fist.";
-    public override int Ds => 10;
-    public override int Effect => 16;
-    public override int MinLevel => 45;
-    private DragonFistMartialArtsAttack(Game game) : base(game) { }
+    public override string Desc => "You hit {0} with a Crushing Blow.";
+    public override int Ds => 12;
+    public override string MartialArtsEffectBindingKey => nameof(MartialArtsEffectsEnum.Stun9p1d9MartialArtsEffect);
+    public override int MinLevel => 48;
 }

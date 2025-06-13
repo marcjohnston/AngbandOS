@@ -4,16 +4,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.MartialArtsAttacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class JumpKickMartialArtsAttack : MartialArtsAttack
+public class EaglesClawMartialArtsAttack : MartialArtsAttackGameConfiguration
 {
     public override int Chance => 25;
-    public override int Dd => 5;
-    public override string Desc => "You hit {0} with a jump kick.";
+    public override int Dd => 6;
+    public override string Desc => "You hit {0} with an Eagle's Claw.";
     public override int Ds => 6;
-    public override int Effect => 10;
-    public override int MinLevel => 25;
-    private JumpKickMartialArtsAttack(Game game) : base(game) { }
+    public override string MartialArtsEffectBindingKey => nameof(MartialArtsEffectsEnum.Stun0MartialArtsEffect);
+    public override int MinLevel => 29;
 }

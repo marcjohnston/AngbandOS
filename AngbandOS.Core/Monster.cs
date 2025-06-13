@@ -3019,8 +3019,7 @@ internal class Monster : IItemContainer
                         if (!Race.ImmuneFire)
                         {
                             Game.MsgPrint($"{monsterName} is suddenly very hot!");
-                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear,
-                                " turns into a pile of ash."))
+                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear, " turns into a pile of ash."))
                             {
                                 blinked = false;
                                 alive = false;
@@ -3040,8 +3039,7 @@ internal class Monster : IItemContainer
                         if (!Race.ImmuneLightning)
                         {
                             Game.MsgPrint($"{monsterName} gets zapped!");
-                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear,
-                                " turns into a pile of cinder."))
+                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear, " turns into a pile of cinder."))
                             {
                                 blinked = false;
                                 alive = false;

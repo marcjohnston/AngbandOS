@@ -7,17 +7,22 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class StoreCommand : IGetKey, IToJson
+internal class StoreCommand : IGetKey, IToJson
 {
     protected readonly Game Game;
-    protected StoreCommand(Game game)
+    public StoreCommand(Game game, StoreCommandGameConfiguration storeCommandGameConfiguration)
     {
         Game = game;
+        Key = storeCommandGameConfiguration.Key ?? storeCommandGameConfiguration.GetType().Name;
+        KeyChar = storeCommandGameConfiguration.KeyChar;
+        Description = storeCommandGameConfiguration.Description;
+        ValidStoreFactoryNames = storeCommandGameConfiguration.ValidStoreFactoryNames;
+        ExecuteScriptName = storeCommandGameConfiguration.ExecuteScriptName;
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
-    public abstract char KeyChar { get; }
+    public virtual char KeyChar { get; }
 
     /// <summary>
     /// Returns the store factories that the command is valid for; or null, if the command is valid for all stores.  This property is bound to the 
@@ -28,7 +33,7 @@ internal abstract class StoreCommand : IGetKey, IToJson
     /// </remarks>
     public StoreFactory[]? ValidStoreFactories { get; private set; }
 
-    public abstract string Description { get; }
+    public virtual string Description { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -63,9 +68,9 @@ internal abstract class StoreCommand : IGetKey, IToJson
     /// <summary>
     /// Returns the names of the store factories that the command is valid in; or null, for all stores.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? ValidStoreFactoryNames => null;
+    protected virtual string[]? ValidStoreFactoryNames { get; } = null;
 
-    protected virtual string? ExecuteScriptName => null;
+    protected virtual string? ExecuteScriptName { get; } = null;
     public IStoreCommandScript ExecuteScript { get; private set; }
 
     public string ToJson()

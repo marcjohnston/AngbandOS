@@ -92,6 +92,7 @@ public class GameConfiguration
         gameConfiguration.ItemFactoryWeightedRandoms = LoadFromAssembly<ItemFactoryWeightedRandomGameConfiguration>(assembly);
         gameConfiguration.TimerScripts = LoadFromAssembly<TimerScriptGameConfiguration>(assembly);
         gameConfiguration.RenderMessageScripts = LoadFromAssembly<RenderMessageScriptGameConfiguration>(assembly);
+        gameConfiguration.MartialArtsAttacks = LoadFromAssembly<MartialArtsAttackGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -223,4 +224,5 @@ public class GameConfiguration
     public virtual ItemFactoryWeightedRandomGameConfiguration[]? ItemFactoryWeightedRandoms { get; set; } = null;
     public virtual TimerScriptGameConfiguration[]? TimerScripts { get; set; } = null;
     public virtual RenderMessageScriptGameConfiguration[]? RenderMessageScripts { get; set; } = null;
+    public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
 }

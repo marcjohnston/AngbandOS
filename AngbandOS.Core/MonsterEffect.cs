@@ -49,6 +49,8 @@ internal abstract class MonsterEffect : IGetKey
     /// <param name="mPtr"></param>
     /// <param name="dam"></param>
     /// <param name="note"></param>
+    /// <param name="noteDies">The note to render if the monster dies or null, to render the <see cref="MonsterRace.DeathNote"/> applicable to the monsters' race.</param>
+    /// <param name="addFear"></param>
     protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, string? noteDies, int addFear)
     {
         if (addFear != 0)
@@ -61,6 +63,7 @@ internal abstract class MonsterEffect : IGetKey
         GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
 
+        // Apply the default death note, if needed.
         if (noteDies == null)
         {
             noteDies = rPtr.DeathNote();

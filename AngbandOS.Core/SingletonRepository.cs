@@ -410,6 +410,7 @@ internal class SingletonRepository
         RegisterRepository<MappedSpellScript>();
         RegisterRepository<MapWidget>();
         RegisterRepository<MartialArtsAttack>();
+        RegisterRepository<MartialArtsEffect>();
         RegisterRepository<MaxRangedWidget>();
         RegisterRepository<MonsterEffect>();
         RegisterRepository<MonsterFilter>();
@@ -466,6 +467,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<ConsoleElement>();
         LoadAllAssemblyTypes<FlaggedAction>();
         LoadAllAssemblyTypes<Justification>();
+        LoadAllAssemblyTypes<MartialArtsEffect>();
         LoadAllAssemblyTypes<MonsterSelector>();
         LoadAllAssemblyTypes<Function>();
         LoadAllAssemblyTypes<ProbabilityExpression>();
@@ -495,13 +497,14 @@ internal class SingletonRepository
         LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, ItemFlavor>(gameConfiguration.ItemFlavors);
         LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration, MapWidget>(gameConfiguration.MapWidgets);
         LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration, MappedSpellScript>(gameConfiguration.MappedSpellScripts);
+        LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration, MartialArtsAttack>(gameConfiguration.MartialArtsAttacks);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, GenericMaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
         LoadFromConfiguration<NullableStringsTextAreaWidget, NullableStringsTextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration, PhysicalAttributeSet>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration, Plural>(gameConfiguration.Plurals);
-        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, GenericProjectileGraphic>(gameConfiguration.ProjectileGraphics);
-        LoadFromConfiguration<Projectile, ProjectileGameConfiguration, GenericProjectile>(gameConfiguration.Projectiles);
+        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, ProjectileGraphic>(gameConfiguration.ProjectileGraphics);
+        LoadFromConfiguration<Projectile, ProjectileGameConfiguration, Projectile>(gameConfiguration.Projectiles);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, ProjectileScript>(gameConfiguration.ProjectileScripts);
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, ProjectileWeightedRandom>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration, RaceGender>(gameConfiguration.RaceGenders);
@@ -509,9 +512,9 @@ internal class SingletonRepository
         LoadFromConfiguration<Realm, RealmGameConfiguration, Realm>(gameConfiguration.Realms);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration, RealmCharacterClass>(gameConfiguration.RealmCharacterClasses);
         LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration, RenderMessageScript>(gameConfiguration.RenderMessageScripts);
-        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, GenericShopkeeper>(gameConfiguration.Shopkeepers);
+        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, Shopkeeper>(gameConfiguration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellGameConfiguration, Spell>(gameConfiguration.Spells);
-        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, GenericStoreCommand>(gameConfiguration.StoreCommands);
+        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, StoreCommand>(gameConfiguration.StoreCommands);
         LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, StoreFactory>(gameConfiguration.StoreFactories);
         LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, GenericStringWidget>(gameConfiguration.StringWidgets);
         LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration, SummonScript>(gameConfiguration.SummonScripts);

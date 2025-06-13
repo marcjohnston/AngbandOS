@@ -7,13 +7,17 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ProjectileGraphic : IGetKey
+internal class ProjectileGraphic : IGetKey
 {
     protected Game Game;
-    protected ProjectileGraphic(Game game)
+    public ProjectileGraphic(Game game, ProjectileGraphicGameConfiguration projectileGraphicGameConfiguration)
     {
         Game = game;
+        Key = projectileGraphicGameConfiguration.Key ?? projectileGraphicGameConfiguration.GetType().Name;
+        Character = projectileGraphicGameConfiguration.Character;
+        Color = projectileGraphicGameConfiguration.Color;
     }
+
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -30,7 +34,7 @@ internal abstract class ProjectileGraphic : IGetKey
         return JsonSerializer.Serialize(projectileGraphicDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
     public virtual void Bind() { }
@@ -38,10 +42,10 @@ internal abstract class ProjectileGraphic : IGetKey
     /// <summary>
     /// Returns the character to be used for the projectile.
     /// </summary>
-    public abstract char Character { get; }
+    public virtual char Character { get; }
 
     /// <summary>
     /// Returns the color to be used for the projectile.
     /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
+    public virtual ColorEnum Color { get; } = ColorEnum.White;
 }

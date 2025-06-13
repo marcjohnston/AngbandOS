@@ -7,36 +7,41 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Shopkeeper : IGetKey
+internal class Shopkeeper : IGetKey
 {
     protected readonly Game Game;
-    public abstract int MaxCost { get; }
+    public Shopkeeper(Game game, ShopkeeperGameConfiguration shopkeeperGameConfiguration)
+    {
+        Game = game;
+        Key = shopkeeperGameConfiguration.Key ?? shopkeeperGameConfiguration.GetType().Name;
+        MaxCost = shopkeeperGameConfiguration.MaxCost;
+        MinInflate = shopkeeperGameConfiguration.MinInflate;
+        Name = shopkeeperGameConfiguration.Name;
+        RaceName = shopkeeperGameConfiguration.RaceName;
+    }
+
+    public virtual int MaxCost { get; }
 
     /// <summary>
     /// Returns the minimum inflation value for this store owner.
     /// </summary>
-    public abstract int MinInflate { get; }
+    public virtual int MinInflate { get; }
 
     /// <summary>
     /// Returns the name of the owner.  For stores with no owner, this is the name of the store.
     /// </summary>
-    public abstract string Name { get; }
+    public virtual string Name { get; }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     /// <summary>
     /// Returns the race of the store owner.  Null, if there is no store owner.
     /// </summary>
     public Race? OwnerRace { get; private set; }
 
-    protected abstract string? RaceName { get; }
+    protected virtual string? RaceName { get; }
 
     public string GetKey => Key;
-
-    protected Shopkeeper(Game game)
-    {
-        Game = game;
-    }
 
     public void Bind()
     {

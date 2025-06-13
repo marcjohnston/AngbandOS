@@ -7483,9 +7483,9 @@ internal class Game
                 // Default to 1 damage for an unarmed hit
                 int totalDamage = 1;
 
-                RoItemPropertySet mergedCharacteristics = meleeItem.GetEffectiveItemProperties();
                 if (meleeItem != null)
                 {
+                    RoItemPropertySet mergedCharacteristics = meleeItem.GetEffectiveItemProperties();
                     // Get our weapon's flags to see if we need to do anything special
                     chaosEffect = mergedCharacteristics.Chaotic && DieRoll(2) == 1;
                     if (mergedCharacteristics.Vampiric || (chaosEffect && DieRoll(5) < 3))
@@ -7505,8 +7505,6 @@ internal class Game
                 // If we're a martial artist then we have special attacks
                 if (IsMartialArtistAndNotWieldingAMeleeWeapon())
                 {
-                    int specialEffect = 0;
-                    int stunEffect = 0;
                     int times;
                     MartialArtsAttack martialArtsAttack = SingletonRepository.Get<MartialArtsAttack>().Single(_martialArtsAttack => _martialArtsAttack.IsDefault);
                     MartialArtsAttack oldMartialArtsAttack = martialArtsAttack;
@@ -7549,73 +7547,8 @@ internal class Game
                             martialArtsAttack = oldMartialArtsAttack;
                         }
                     }
-                    // Get damage from the martial arts attack
-                    totalDamage = DiceRoll(martialArtsAttack.Dd, martialArtsAttack.Ds);
 
-                    // If it was a knee attack and the monster is male, hit it in the groin
-                    if (martialArtsAttack.Effect == Constants.MaKnee)
-                    {
-                        if (race.Male)
-                        {
-                            MsgPrint($"You hit {monsterName} in the groin with your knee!");
-                            specialEffect = Constants.MaKnee;
-                        }
-                        else
-                        {
-                            MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
-                        }
-                    }
-                    // If it was an ankle kick and the monster has legs, slow it
-                    else if (martialArtsAttack.Effect == Constants.MaSlow)
-                    {
-                        // Check to ensure the monster is not stationary and has legs.
-                        if (!race.NeverMove && race.HasLegs)
-                        {
-                            MsgPrint($"You kick {monsterName} in the ankle.");
-                            specialEffect = Constants.MaSlow;
-                        }
-                        else
-                        {
-                            MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
-                        }
-                    }
-                    // Have a chance of stunning based on the martial arts attack type chosen
-                    else
-                    {
-                        if (martialArtsAttack.Effect != 0)
-                        {
-                            stunEffect = (martialArtsAttack.Effect / 2) + DieRoll(martialArtsAttack.Effect / 2);
-                        }
-                        MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
-                    }
-                    // It might be a critical hit
-                    totalDamage = PlayerCriticalMelee(ExperienceLevel.IntValue * DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
-                    // Make a groin attack into a stunning attack
-                    if (specialEffect == Constants.MaKnee && totalDamage + DamageBonus < monster.Health)
-                    {
-                        MsgPrint($"{monsterName} moans in agony!");
-                        stunEffect = 7 + DieRoll(13);
-                        resistStun /= 3;
-                    }
-                    // Slow if we had a knee attack
-                    else if (specialEffect == Constants.MaSlow && totalDamage + DamageBonus < monster.Health)
-                    {
-                        if (!race.Unique && DieRoll(ExperienceLevel.IntValue) > race.Level &&
-                            monster.Speed > 60)
-                        {
-                            MsgPrint($"{monsterName} starts limping slower.");
-                            monster.Speed -= 10;
-                        }
-                    }
-                    // Stun if we had a stunning attack
-                    if (stunEffect != 0 && totalDamage + DamageBonus < monster.Health)
-                    {
-                        if (ExperienceLevel.IntValue > DieRoll(race.Level + resistStun + 10))
-                        {
-                            MsgPrint(monster.StunLevel != 0 ? $"{monsterName} is more stunned." : $"{monsterName} is stunned.");
-                            monster.StunLevel += stunEffect;
-                        }
-                    }
+                    totalDamage = martialArtsAttack.MartialArtsAttackEffect.Execute(monster, martialArtsAttack, resistStun);
                 }
                 // We have a weapon
                 else if (meleeItem != null)
@@ -7644,6 +7577,7 @@ internal class Game
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
                     // Vorpal weapons have a chance of a deep cut.
+                    RoItemPropertySet mergedCharacteristics = meleeItem.GetEffectiveItemProperties();
                     bool vorpalCut = mergedCharacteristics.Vorpal && DieRoll(extraDamage1InChance) == 1;
 
                     // If we did a vorpal cut, do extra damage
@@ -7668,7 +7602,7 @@ internal class Game
                     totalDamage = 0;
                 }
                 // Apply damage to the monster
-                if (DamageMonster(tile.MonsterIndex, totalDamage, out fear, null))
+                if (DamageMonster(tile.MonsterIndex, totalDamage, out fear, ""))
                 {
                     // Can't have any more attacks because the monster's dead
                     noExtra = true;
@@ -8544,7 +8478,7 @@ internal class Game
     /// <param name="plus"> The bonuses to hit the player has </param>
     /// <param name="damage"> The amount of base damage that was done </param>
     /// <returns> The damage total modified for a critical hit </returns>
-    private int PlayerCriticalMelee(int weight, int plus, int damage)
+    public int PlayerCriticalMelee(int weight, int plus, int damage)
     {
         int i = weight + ((AttackBonus + plus) * 5) + (ExperienceLevel.IntValue * 3);
         if (DieRoll(5000) <= i)
@@ -8624,7 +8558,7 @@ internal class Game
             switch (mutation.MutationAttackType)
             {
                 case MutationAttackTypeEnum.Physical:
-                    monsterDies = DamageMonster(monsterIndex, damage, out fear, null);
+                    monsterDies = DamageMonster(monsterIndex, damage, out fear, "");
                     break;
 
                 case MutationAttackTypeEnum.Poison:
@@ -16119,7 +16053,7 @@ internal class Game
                 }
             }
             PlaySound(SoundEffectEnum.MonsterDies);
-            if (string.IsNullOrEmpty(note) == false)
+            if (!string.IsNullOrEmpty(note))
             {
                 MsgPrint($"{mName}{note}");
             }

@@ -4,17 +4,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.MartialArtsAttacks;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class FrontKickMartialArtsAttack : MartialArtsAttack
+public class SideKickMartialArtsAttack : MartialArtsAttackGameConfiguration
 {
-    public override int Chance => 0;
-    public override int Dd => 1;
+    public override int Chance => 10;
+    public override int Dd => 3;
     public override string Desc => "You kick {0}.";
-    public override int Ds => 6;
-    public override int Effect => 0;
-    public override int MinLevel => 2;
-
-    private FrontKickMartialArtsAttack(Game game) : base(game) { }
+    public override int Ds => 4;
+    public override string MartialArtsEffectBindingKey => nameof(MartialArtsEffectsEnum.SlowMartialArtsEffect);
+    public override int MinLevel => 11;
 }

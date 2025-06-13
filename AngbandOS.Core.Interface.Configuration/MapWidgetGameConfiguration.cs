@@ -19,5 +19,3 @@ public class MapWidgetGameConfiguration
     public virtual string[]? ChangeTrackerNames { get; set; }
     public virtual string? Key { get; set; } = null;
 }
-
-

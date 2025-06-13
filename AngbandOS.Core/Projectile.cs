@@ -7,14 +7,23 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Projectile : IGetKey
+internal class Projectile : IGetKey
 {
     protected readonly Game Game;
 
-    public Projectile(Game game)
+    public Projectile(Game game, ProjectileGameConfiguration projectileGameConfiguration)
     {
         Game = game;
+        Key = projectileGameConfiguration.Key ?? projectileGameConfiguration.GetType().Name;
+        FloorEffectBindingKey = projectileGameConfiguration.FloorEffectBindingKey;
+        ItemEffectBindingKey = projectileGameConfiguration.ItemEffectBindingKey;
+        PlayerEffectBindingKey = projectileGameConfiguration.PlayerEffectBindingKey;
+        MonsterEffectBindingKey = projectileGameConfiguration.MonsterEffectBindingKey;
+        BoltProjectileGraphicBindingKey = projectileGameConfiguration.BoltProjectileGraphicBindingKey;
+        EffectAnimationBindingKey = projectileGameConfiguration.EffectAnimationBindingKey;
+        ImpactProjectileGraphicBindingKey = projectileGameConfiguration.ImpactProjectileGraphicBindingKey;
     }
+
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -36,7 +45,7 @@ internal abstract class Projectile : IGetKey
         return JsonSerializer.Serialize(projectileDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -55,18 +64,18 @@ internal abstract class Projectile : IGetKey
     /// </summary>
     protected ProjectileGraphic? BoltProjectileGraphic { get; private set; }
 
-    protected virtual string? BoltProjectileGraphicBindingKey => null;
+    protected virtual string? BoltProjectileGraphicBindingKey { get; } = null;
 
     protected Animation? EffectAnimation { get; private set; }
 
-    protected virtual string? EffectAnimationBindingKey => null;
+    protected virtual string? EffectAnimationBindingKey { get; } = null;
 
     /// <summary>
     /// Returns the graphics to be used when the projectile impacts something; or null, if there is no graphic.  Returns null, by default.
     /// </summary>
     protected ProjectileGraphic? ImpactProjectileGraphic { get; private set; }
 
-    protected virtual string? ImpactProjectileGraphicBindingKey => null;
+    protected virtual string? ImpactProjectileGraphicBindingKey { get; } = null;
 
     /// <summary>
     /// Returns true, if the projectile actually hits and affects a monster.
@@ -607,7 +616,7 @@ internal abstract class Projectile : IGetKey
     /// <param name="y"></param>
     /// <param name="x"></param>
     /// <returns></returns>
-    protected virtual string FloorEffectBindingKey => nameof(UnnoticedFloorEffect);
+    protected virtual string FloorEffectBindingKey { get; } = nameof(UnnoticedFloorEffect);
 
     /// <summary>
     /// Returns the <see cref="ItemEffect"/> that perform the effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.  This property is bound
@@ -619,11 +628,11 @@ internal abstract class Projectile : IGetKey
     /// Returns the binding key for the <see cref="ItemEffect"></see> object to perform the effect needed on an item.  This property is used to bind the <see cref="ItemEffect"></see> property during the
     /// binding phase.
     /// </summary>
-    protected virtual string ItemEffectBindingKey => nameof(UnnoticedItemEffect);
+    protected virtual string ItemEffectBindingKey { get; } = nameof(UnnoticedItemEffect);
 
     protected PlayerEffect PlayerEffect { get; private set; }
 
-    protected virtual string PlayerEffectBindingKey => nameof(NoticedPlayerEffect);
+    protected virtual string PlayerEffectBindingKey { get; } = nameof(NoticedPlayerEffect);
 
     protected MonsterEffect MonsterEffect { get; private set; }
 
@@ -635,5 +644,5 @@ internal abstract class Projectile : IGetKey
     /// <param name="mPtr">Represents the monster to affect.</param>
     /// <param name="r">Represents the distance from the attacker.</param>
     /// <returns></returns>
-    protected abstract string MonsterEffectBindingKey { get; }
+    protected virtual string MonsterEffectBindingKey { get; }
 }

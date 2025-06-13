@@ -4,17 +4,28 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Xml.Linq;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class MartialArtsAttack : IGetKey
+internal class MartialArtsAttack : IGetKey
 {
     protected readonly Game Game;
 
-    protected MartialArtsAttack(Game game)
+    public MartialArtsAttack(Game game, MartialArtsAttackGameConfiguration martialArtsAttackGameConfiguration)
     {
         Game = game;
+        Key = martialArtsAttackGameConfiguration.Key ?? martialArtsAttackGameConfiguration.GetType().Name;
+        Chance = martialArtsAttackGameConfiguration.Chance;
+        Dd = martialArtsAttackGameConfiguration.Dd;
+        Desc = martialArtsAttackGameConfiguration.Desc;
+        Ds = martialArtsAttackGameConfiguration.Ds;
+        MartialArtsEffectBindingKey = martialArtsAttackGameConfiguration.MartialArtsEffectBindingKey;
+        MinLevel = martialArtsAttackGameConfiguration.MinLevel;
+        IsDefault = martialArtsAttackGameConfiguration.IsDefault;
     }
+
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -22,19 +33,34 @@ internal abstract class MartialArtsAttack : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        MartialArtsAttackGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            Chance = Chance,
+            Dd = Dd,
+            Desc = Desc,
+            Ds = Ds,
+            MartialArtsEffectBindingKey = MartialArtsEffectBindingKey,
+            MinLevel = MinLevel,
+            IsDefault = IsDefault,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        MartialArtsAttackEffect = Game.SingletonRepository.Get<MartialArtsEffect>(MartialArtsEffectBindingKey);
+    }
 
-    public abstract int Chance { get; }
-    public abstract int Dd { get; }
-    public abstract string Desc { get; }
-    public abstract int Ds { get; }
-    public abstract int Effect { get; }
-    public abstract int MinLevel { get;  }
-    public virtual bool IsDefault => false;
+    public virtual int Chance { get; }
+    public virtual int Dd { get; }
+    public virtual string Desc { get; }
+    public virtual int Ds { get; }
+    public MartialArtsEffect MartialArtsAttackEffect { get; private set; }
+    protected virtual string MartialArtsEffectBindingKey { get; }
+    public virtual int MinLevel { get;  }
+    public virtual bool IsDefault { get; } = false;
 }
