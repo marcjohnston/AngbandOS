@@ -3567,6 +3567,12 @@ internal class Game
         int i, j;
         UseFixed = true;
         FixedSeed = _seedFlavor;
+        WeightedRandom<string> illegibleFlavorSyllablesWeightedRandom = new WeightedRandom<string>(this, IllegibleFlavorSyllables);
+        if (illegibleFlavorSyllablesWeightedRandom.Count == 0)
+        {
+            throw new Exception("No illegible syllables loaded to generate item flavors.");
+        }
+
         for (i = 0; i < itemClass.NumberOfFlavorsToGenerate; i++)
         {
             while (true)
@@ -3578,7 +3584,7 @@ internal class Game
                     int s = RandomLessThan(100) < 30 ? 1 : 2;
                     for (int q = 0; q < s; q++)
                     {
-                        tmp += new WeightedRandom<string>(this, IllegibleFlavorSyllables).ChooseOrDefault();
+                        tmp += illegibleFlavorSyllablesWeightedRandom.Choose();
                     }
                     if (buf.Length + tmp.Length > 14)
                     {

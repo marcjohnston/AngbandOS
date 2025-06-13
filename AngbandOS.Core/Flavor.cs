@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents a flavor for the items that are created by an item factory that participate in the IFlavorFactory interface.
+/// Represents a generic flavor for items.  Flavors can be generated as illegible or provided from the configuration.
 /// </summary>
 [Serializable]
 internal abstract class Flavor
@@ -21,7 +21,7 @@ internal abstract class Flavor
     /// <summary>
     /// Returns the symbol to use for rendering.
     /// </summary>
-    public abstract Symbol Symbol { get; }
+    public abstract Symbol Symbol { get; protected set; }
 
     /// <summary>
     /// The color to use for the visual.

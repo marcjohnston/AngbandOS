@@ -9,7 +9,7 @@ namespace AngbandOS.Core.ItemFlavors;
 [Serializable]
 internal class IllegibleItemFlavor : Flavor
 {
-    public override Symbol Symbol { get; }
+    public override Symbol Symbol { get; protected set; }
     public override ColorEnum Color { get; }
     public override string Name { get; }
     public IllegibleItemFlavor(Game game, Symbol symbol, ColorEnum color, string name) : base(game)

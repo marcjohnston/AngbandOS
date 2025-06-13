@@ -30,9 +30,8 @@ public class GameConfiguration
         return singletonsList.ToArray();
     }
 
-    public static GameConfiguration LoadFromAssembly(Assembly assembly)
+    public static void MergeAllSingletonsFromAssembly(GameConfiguration gameConfiguration, Assembly assembly)
     {
-        GameConfiguration gameConfiguration = new GameConfiguration();
         gameConfiguration.Towns = LoadFromAssembly<TownGameConfiguration>(assembly);
         gameConfiguration.Shopkeepers = LoadFromAssembly<ShopkeeperGameConfiguration>(assembly);
         gameConfiguration.GameCommands = LoadFromAssembly<GameCommandGameConfiguration>(assembly);
@@ -93,7 +92,6 @@ public class GameConfiguration
         gameConfiguration.ItemFactoryWeightedRandoms = LoadFromAssembly<ItemFactoryWeightedRandomGameConfiguration>(assembly);
         gameConfiguration.TimerScripts = LoadFromAssembly<TimerScriptGameConfiguration>(assembly);
         gameConfiguration.RenderMessageScripts = LoadFromAssembly<RenderMessageScriptGameConfiguration>(assembly);
-        return gameConfiguration;
     }
 
     /// <summary>

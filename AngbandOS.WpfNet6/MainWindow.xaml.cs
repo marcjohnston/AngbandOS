@@ -231,10 +231,11 @@ public partial class MainWindow : Window, IConsoleViewPort
             }
 
             // Retrieve a reference to the assembly so that we can dynamically load it.
+            GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
             Assembly assembly = typeof(AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration).Assembly;
 
             // Dynamically load the game configuration with all singletons found in the assembly.
-            GameConfiguration gameConfiguration = GameConfiguration.LoadFromAssembly(assembly);
+            GameConfiguration.MergeAllSingletonsFromAssembly(gameConfiguration, assembly);
 
             GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, gameConfiguration, gameReplay);
             File.WriteAllText(replayFilename, gameResults.Replay);

@@ -44,6 +44,11 @@ internal class WeightedRandom<T>
     private int _sum = 0;
 
     /// <summary>
+    /// Returns the total number of items to be selected from.  This is a sum of the weights.
+    /// </summary>
+    public int Count => _sum;
+
+    /// <summary>
     /// Creates a new empty weighted-random.  Use the Add method to add items to the list.
     /// </summary>
     /// <param name="game"></param>

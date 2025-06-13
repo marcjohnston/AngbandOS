@@ -10,11 +10,16 @@ namespace AngbandOS.Core.ItemFlavors;
 /// Represents a single flavor for a group of items that participate in the IFlavor interface.
 /// </summary>
 [Serializable]
-internal abstract class ItemFlavor : Flavor, IGetKey
+internal class ItemFlavor : Flavor, IGetKey
 {
-    protected ItemFlavor(Game game) : base(game) { }
-
-    private Symbol _symbol;
+    public ItemFlavor(Game game, ItemFlavorGameConfiguration readableFlavorGameConfiguration) : base(game)
+    {
+        Key = readableFlavorGameConfiguration.Key ?? readableFlavorGameConfiguration.GetType().Name;
+        Name = readableFlavorGameConfiguration.Name;
+        SymbolName = readableFlavorGameConfiguration.SymbolName;
+        Color = readableFlavorGameConfiguration.Color;
+        CanBeAssigned = readableFlavorGameConfiguration.CanBeAssigned;
+    }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -36,19 +41,23 @@ internal abstract class ItemFlavor : Flavor, IGetKey
     /// <summary>
     /// This property is bound from the SymbolName property during the binding phase.
     /// </summary>
-    public override Symbol Symbol => _symbol;
+    public override Symbol Symbol { get; protected set; }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
     public void Bind()
     {
-        _symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
+        Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
     }
 
     /// <summary>
     /// Returns the name of the symbol to be used for rendering.  This property is used to bind the Symbol property during the bind phase.
     /// </summary>
-    protected abstract string SymbolName { get; }
+    protected virtual string SymbolName { get; }
+    public override string Name { get; }
+
+    public override ColorEnum Color { get; }
+    public override bool CanBeAssigned { get; }
 }
