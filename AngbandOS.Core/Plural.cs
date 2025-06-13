@@ -1,12 +1,14 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Plural : IGetKey
+internal class Plural : IGetKey
 {
     protected readonly Game Game;
-    protected Plural(Game game)
+    public Plural(Game game, PluralGameConfiguration pluralGameConfiguration)
     {
         Game = game;
+        Key = pluralGameConfiguration.Key ?? pluralGameConfiguration.GetType().Name;
+        PluralForm = pluralGameConfiguration.PluralForm;
     }
 
     /// <summary>
@@ -27,7 +29,7 @@ internal abstract class Plural : IGetKey
     /// Returns the pluralized version of the key.
     /// the class.
     /// </summary>
-    public abstract string PluralForm { get; }
+    public virtual string PluralForm { get; }
 
     /// <summary>
     /// Returns the capitalized singular version of the noun.
