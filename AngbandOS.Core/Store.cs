@@ -528,7 +528,7 @@ internal class Store
 
         // Create a charisma factor that affects the store owner.
         int factor = 100;
-        factor += Game.CharismaAbility.ChaPriceAdjustment;
+        factor += Game.CharismaAbility.CharismaPriceAdjustment;
         adjust = 100 + (greed + factor - 300);
         if (adjust < 100)
         {
@@ -563,7 +563,7 @@ internal class Store
 
         // Create a charisma factor that affects the store owner.
         int factor = 100;
-        factor += Game.CharismaAbility.ChaPriceAdjustment;
+        factor += Game.CharismaAbility.CharismaPriceAdjustment;
         adjust = 100 + (300 - (greed + factor));
         if (adjust > 100)
         {

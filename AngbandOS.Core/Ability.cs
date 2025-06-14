@@ -21,6 +21,11 @@ internal abstract class Ability : IGetKey
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
+    /// <summary>
+    /// Allows an ability to override the Use value.
+    /// </summary>
+    /// <param name="use"></param>
+    /// <returns></returns>
     public int OverrideUse(int use)
     {
         if (Override)
@@ -78,7 +83,7 @@ internal abstract class Ability : IGetKey
     public int Bonus;
 
     /// <summary>
-    /// The current innate rolled score without bonuses
+    /// The current innate rolled score without bonuses.  This is the base "Use" value before Bonuses are added.
     /// </summary>
     public int Innate;
 
@@ -96,9 +101,11 @@ internal abstract class Ability : IGetKey
     /// Price adjustment for charisma (as a percentage of normal price)
     /// </summary>
     private readonly int[] _adjChaPriceAdjustment =
-                                                    {
-        130, 125, 122, 120, 118, 116, 114, 112, 110, 108, 106, 104, 103, 102, 101, 100, 99, 98, 97, 96, 95, 94, 93,
-        92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78
+    {
+        130, 125, 122, 120, 118, 116, 114, 112, 110, 108,
+        106, 104, 103, 102, 101, 100,  99,  98,  97,  96,
+         95,  94,  93,  92,  91,  90,  89,  88,  87,  86,
+         85,  84,  83,  82,  81,  80,  79,  78
     };
 
     /// <summary>
@@ -106,10 +113,10 @@ internal abstract class Ability : IGetKey
     /// </summary>
     private readonly int[] _adjConHealthBonus =
     {
-        -5, -3, -2, -1, 0, 0, 0, 0, 0, 0, 0,
-        0, 1, 1, 2, 3, 4, 4, 4, 4, 5, 6, 7,
-        8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20,
-        22, 25, 26, 27
+        -5, -3, -2, -1,  0,  0,  0,  0,  0,  0,
+         0,  0,  1,  1,  2,  3,  4,  4,  4,  4,
+         5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
+        15, 16, 18, 20, 22, 25, 26, 27
     };
 
     /// <summary>
@@ -117,8 +124,10 @@ internal abstract class Ability : IGetKey
     /// </summary>
     private readonly int[] _adjConRecoverySpeed =
     {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 6, 6, 7, 7, 8, 8, 8, 9,
-        9, 9
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 1, 1, 1, 2, 2, 2, 2, 2,
+        3, 3, 3, 3, 3, 4, 4, 5, 6, 6,
+        7, 7, 8, 8, 8, 9, 9, 9
     };
 
     /// <summary>
@@ -294,7 +303,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Price adjustment for charisma (as a percentage of normal price)
     /// </summary>
-    public int ChaPriceAdjustment => _adjChaPriceAdjustment[TableIndex];
+    public int CharismaPriceAdjustment => _adjChaPriceAdjustment[TableIndex];
 
     /// <summary>
     /// Con bonus to health (per hit die), stored as double actual bonus
@@ -409,7 +418,7 @@ internal abstract class Ability : IGetKey
         {
             for (i = 0; i < amount; i++)
             {
-                if (value < 18)
+                if (value < 18) // TODO: This should be a setting
                 {
                     value++;
                 }

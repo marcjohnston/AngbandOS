@@ -28,7 +28,7 @@ internal class CharismaAbility : Ability
 
     public override (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) GetBonuses()
     {
-        int haggle = ChaPriceAdjustment;
+        int haggle = CharismaPriceAdjustment;
         string bonus1 = $"{haggle}% prices";
         return (bonus1, string.Empty, string.Empty, string.Empty, string.Empty);
     }

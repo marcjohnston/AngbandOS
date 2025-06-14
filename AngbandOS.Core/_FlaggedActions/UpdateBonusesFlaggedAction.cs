@@ -477,7 +477,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            int ind;
             int top = ability.ModifyStatValue(ability.InnateMax, ability.Bonus);
             if (ability.AdjustedMax != top)
             {
@@ -491,21 +490,18 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 ability.Adjusted = use;
                 Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
             }
-            if (use <= 18)
+            int abilityTableIndex = 37; // The range for this value is 0-37.
+            if (use <= 18) // TODO: This should be a setting
             {
-                ind = use - 3;
+                abilityTableIndex = use - 3; // TODO: This should be a setting
             }
             else if (use <= 18 + 219)
             {
-                ind = 15 + ((use - 18) / 10);
+                abilityTableIndex = 15 + ((use - 18) / 10);
             }
-            else
+            if (ability.TableIndex != abilityTableIndex)
             {
-                ind = 37;
-            }
-            if (ability.TableIndex != ind)
-            {
-                ability.TableIndex = ind;
+                ability.TableIndex = abilityTableIndex;
                 ability.FlagActions();
             }
         }
