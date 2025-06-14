@@ -488,7 +488,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Gender, GenderGameConfiguration, Gender>(gameConfiguration.Genders);
         LoadFromConfiguration<God, GodGameConfiguration, God>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, HelpGroup>(gameConfiguration.HelpGroups);
-        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, GenericIntWidget>(gameConfiguration.IntWidgets);
+        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, IntWidget>(gameConfiguration.IntWidgets);
         LoadFromConfiguration<ItemClass, ItemClassGameConfiguration, ItemClass>(gameConfiguration.ItemClasses);
         LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration, ItemEnhancement>(gameConfiguration.ItemEnhancements);
         LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, ItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
