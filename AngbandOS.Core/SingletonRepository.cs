@@ -499,7 +499,7 @@ internal class SingletonRepository
         LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration, MappedSpellScript>(gameConfiguration.MappedSpellScripts);
         LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration, MartialArtsAttack>(gameConfiguration.MartialArtsAttacks);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, GenericMaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
-        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, GenericMonsterRace>(gameConfiguration.MonsterRaces);
+        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, MonsterRace>(gameConfiguration.MonsterRaces);
         LoadFromConfiguration<NullableStringsTextAreaWidget, NullableStringsTextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration, PhysicalAttributeSet>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration, Plural>(gameConfiguration.Plurals);

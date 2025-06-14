@@ -7,351 +7,454 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
+internal class MonsterRace : IMonsterCharacteristics, IGetKey
 {
     #region 102 Serialized Members
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
-    protected virtual string[]? SpellNames => null;
+    protected virtual string[]? SpellNames { get; } = null;
 
     /// <summary>
     /// Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the
     /// bind phase.
     /// </summary>
-    protected abstract string SymbolName { get; }
+    protected virtual string SymbolName { get; }
 
     /// <summary>
     /// The color to display the monster as.
     /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
+    public virtual ColorEnum Color { get; } = ColorEnum.White;
 
     /// <summary>
     /// The monster is an animal.
     /// </summary>
-    public virtual bool Animal => false;
+    public virtual bool Animal { get; } = false;
 
     /// <summary>
     /// The monsters armor class.
     /// </summary>
-    public abstract int ArmorClass { get; }
+    public virtual int ArmorClass { get; }
 
     /// <summary>
     /// Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns
     /// null, by default.
     /// </summary>
-    protected virtual (string MethodName, string? EffectName, int Dice, int Sides)[]? AttackDefinitions => null;
+    protected virtual (string MethodName, string? EffectName, int Dice, int Sides)[]? AttackDefinitions { get; } = null;
 
     /// <summary>
     /// The monster's color can be anything (if 'AttrMulti' is set).
     /// </summary>
-    public virtual bool AttrAny => false;
+    public virtual bool AttrAny { get; } = false;
 
     /// <summary>
     /// The monster is transparent.
     /// </summary>
-    public virtual bool AttrClear => false;
+    public virtual bool AttrClear { get; } = false;
 
     /// <summary>
     /// The monster changes color.
     /// </summary>
-    public virtual bool AttrMulti => false;
+    public virtual bool AttrMulti { get; } = false;
 
     /// <summary>
     /// The monster can break open doors.
     /// </summary>
-    public virtual bool BashDoor => false;
+    public virtual bool BashDoor { get; } = false;
 
     /// <summary>
     /// The monster is never seen, even with see invisible.
     /// </summary>
-    public virtual bool CharClear => false;
+    public virtual bool CharClear { get; } = false;
 
     /// <summary>
     /// The monster is changes shape randomly.
     /// </summary>
-    public virtual bool CharMulti => false;
+    public virtual bool CharMulti { get; } = false;
 
-    public virtual bool ColdBlood => false;
+    public virtual bool ColdBlood { get; } = false;
 
-    public virtual bool Cthuloid => false;
+    public virtual bool Cthuloid { get; } = false;
 
 
-    public virtual bool Demon => false;
+    public virtual bool Demon { get; } = false;
 
     /// <summary>
     /// The descriptive text.
     /// </summary>
-    public abstract string Description { get; }
+    public virtual string Description { get; }
 
-    public virtual bool Dragon => false;
+    public virtual bool Dragon { get; } = false;
 
     /// <summary>
     /// The monster drops 1d2 items.
     /// </summary>
-    public virtual bool Drop_1D2 => false;
+    public virtual bool Drop_1D2 { get; } = false;
 
     /// <summary>
     /// The monster drops 2d2 items.
     /// </summary>
-    public virtual bool Drop_2D2 => false;
+    public virtual bool Drop_2D2 { get; } = false;
 
     /// <summary>
     /// The monster drops 3d2 items.
     /// </summary>
-    public virtual bool Drop_3D2 => false;
+    public virtual bool Drop_3D2 { get; } = false;
 
     /// <summary>
     /// The monster drops 4d2 items.
     /// </summary>
-    public virtual bool Drop_4D2 => false;
+    public virtual bool Drop_4D2 { get; } = false;
 
     /// <summary>
     /// The monster drops an item 60% of the time.
     /// </summary>
-    public virtual bool Drop60 => false;
+    public virtual bool Drop60 { get; } = false;
 
     /// <summary>
     /// The monster drops an item 90% of the time.
     /// </summary>
-    public virtual bool Drop90 => false;
+    public virtual bool Drop90 { get; } = false;
 
     /// <summary>
     /// The monster drops good items.
     /// </summary>
-    public virtual bool DropGood => false;
+    public virtual bool DropGood { get; } = false;
 
     /// <summary>
     /// The monster drops great items.
     /// </summary>
-    public virtual bool DropGreat => false;
+    public virtual bool DropGreat { get; } = false;
 
-    public virtual bool EldritchHorror => false;
+    public virtual bool EldritchHorror { get; } = false;
 
-    public virtual bool EmptyMind => false;
+    public virtual bool EmptyMind { get; } = false;
 
     /// <summary>
     /// The monster comes with minions of the same character.
     /// </summary>
-    public virtual bool Escorted => false;
+    public virtual bool Escorted { get; } = false;
 
     /// <summary>
     /// The monster's minions come in groups (this doesn't force minions if 'Escort' isn't set).
     /// </summary>
-    public virtual bool EscortsGroup => false;
+    public virtual bool EscortsGroup { get; } = false;
 
-    public virtual bool Evil => false;
+    public virtual bool Evil { get; } = false;
 
     /// <summary>
     /// The monster should use feminine pronouns.
     /// </summary>
-    public virtual bool Female => false;
+    public virtual bool Female { get; } = false;
 
     /// <summary>
     /// The monster has an aura of fire around it.
     /// </summary>
-    public virtual bool FireAura => false;
+    public virtual bool FireAura { get; } = false;
 
     /// The monster has maximum hit points.
     /// </summary>
-    public virtual bool ForceMaxHp => false;
+    public virtual bool ForceMaxHp { get; } = false;
 
     /// <summary>
     /// The monster always starts asleep.
     /// </summary>
-    public virtual bool ForceSleep => false;
+    public virtual bool ForceSleep { get; } = false;
 
     /// <summary>
     /// The 1-in-X frequency with which the monster uses special abilities.
     /// </summary>
-    public abstract int FreqInate { get; }
+    public virtual int FreqInate { get; }
 
     /// <summary>
     /// The 1-in-X frequency with which the monster uses spells.
     /// </summary>
-    public abstract int FreqSpell { get; }
+    public virtual int FreqSpell { get; }
 
     /// <summary>
     /// Returns the full name of the monster race that is shown to the player.  Duplicate names is supported.
     /// </summary>
-    public abstract string FriendlyName { get; }
+    public virtual string FriendlyName { get; }
 
     /// <summary>
     /// Returns a multiline version of the monster race that is shown to the player.  Returns null, if the <see cref="FriendlyName"/> should be used.  Word-breaks
     /// are encoded with a \n character.
     /// </summary>
-    public virtual string? MultilineName => null;
-
-    public string[] GetMultilineName => Game.ConvertToMultiline(MultilineName ?? FriendlyName);
+    public virtual string? MultilineName { get; } = null;
 
     /// <summary>
     /// The monster comes with friends of the same race.
     /// </summary>
-    public virtual bool Friends => false;
+    public virtual bool Friends { get; } = false;
 
-    public virtual bool Giant => false;
+    public virtual bool Giant { get; } = false;
 
-    public virtual bool Good => false;
+    public virtual bool Good { get; } = false;
 
-    public virtual bool GreatOldOne => false;
+    public virtual bool GreatOldOne { get; } = false;
 
     /// <summary>
     /// The number of hit dice the monster has.
     /// </summary>
-    public abstract int Hdice { get; }
+    public virtual int Hdice { get; }
 
     /// <summary>
     /// The number of sides of the monster's hit dice.
     /// </summary>
-    public abstract int Hside { get; }
+    public virtual int Hside { get; }
 
-    public virtual bool HurtByCold => false;
+    public virtual bool HurtByCold { get; } = false;
 
-    public virtual bool HurtByFire => false;
+    public virtual bool HurtByFire { get; } = false;
 
-    public virtual bool HurtByLight => false;
+    public virtual bool HurtByLight { get; } = false;
 
-    public virtual bool HurtByRock => false;
+    public virtual bool HurtByRock { get; } = false;
 
-    public virtual bool ImmuneAcid => false;
+    public virtual bool ImmuneAcid { get; } = false;
 
-    public virtual bool ImmuneCold => false;
+    public virtual bool ImmuneCold { get; } = false;
 
-    public virtual bool ImmuneConfusion => false;
+    public virtual bool ImmuneConfusion { get; } = false;
 
-    public virtual bool ImmuneFear => false;
+    public virtual bool ImmuneFear { get; } = false;
 
-    public virtual bool ImmuneFire => false;
+    public virtual bool ImmuneFire { get; } = false;
 
-    public virtual bool ImmuneLightning => false;
+    public virtual bool ImmuneLightning { get; } = false;
 
-    public virtual bool ImmunePoison => false;
+    public virtual bool ImmunePoison { get; } = false;
 
-    public virtual bool ImmuneSleep => false;
+    public virtual bool ImmuneSleep { get; } = false;
 
-    public virtual bool ImmuneStun => false;
+    public virtual bool ImmuneStun { get; } = false;
 
-    public virtual bool Invisible => false;
+    public virtual bool Invisible { get; } = false;
 
-    public virtual bool KillBody => false;
+    public virtual bool KillBody { get; } = false;
 
-    public virtual bool KillItem => false;
+    public virtual bool KillItem { get; } = false;
 
-    public virtual bool KillWall => false;
+    public virtual bool KillWall { get; } = false;
 
     /// <summary>
     /// The level on which the monster is normally found.
     /// </summary>
-    public abstract int LevelFound { get; }
+    public virtual int LevelFound { get; }
 
     /// <summary>
     /// The monster has an aura of electricity around it.
     /// </summary>
-    public virtual bool LightningAura => false;
+    public virtual bool LightningAura { get; } = false;
 
 
-    public virtual bool Male => false;
+    public virtual bool Male { get; } = false;
 
     /// <summary>
     /// The experience value for killing one of these.
     /// </summary>
-    public abstract int Mexp { get; }
+    public virtual int Mexp { get; }
 
-    public virtual bool MoveBody => false;
+    public virtual bool MoveBody { get; } = false;
 
-    public virtual bool Multiply => false;
-    public virtual bool NeverAttack => false;
+    public virtual bool Multiply { get; } = false;
+    public virtual bool NeverAttack { get; } = false;
 
-    public virtual bool NeverMove => false;
+    public virtual bool NeverMove { get; } = false;
 
-    public virtual bool Nonliving => false;
+    public virtual bool Nonliving { get; } = false;
 
     /// <summary>
     /// The distance at which the monster notices the player.
     /// </summary>
-    public abstract int NoticeRange { get; }
+    public virtual int NoticeRange { get; }
 
-    public virtual bool OnlyDropGold => false;
+    public virtual bool OnlyDropGold { get; } = false;
 
-    public virtual bool OnlyDropItem => false;
+    public virtual bool OnlyDropItem { get; } = false;
 
-    public virtual bool OpenDoor => false;
+    public virtual bool OpenDoor { get; } = false;
 
-    public virtual bool Orc => false;
+    public virtual bool Orc { get; } = false;
 
-    public virtual bool PassWall => false;
+    public virtual bool PassWall { get; } = false;
 
-    public virtual bool Powerful => false;
+    public virtual bool Powerful { get; } = false;
 
-    public virtual bool RandomMove25 => false;
+    public virtual bool RandomMove25 { get; } = false;
 
-    public virtual bool RandomMove50 => false;
+    public virtual bool RandomMove50 { get; } = false;
 
     /// <summary>
     /// The rarity with which the monster is usually found.
     /// </summary>
-    public abstract int Rarity { get; }
-    public virtual bool Reaver => false;
+    public virtual int Rarity { get; }
+    public virtual bool Reaver { get; } = false;
 
-    public virtual bool Reflecting => false;
+    public virtual bool Reflecting { get; } = false;
 
-    public virtual bool Regenerate => false;
+    public virtual bool Regenerate { get; } = false;
 
-    public virtual bool ResistDisenchant => false;
+    public virtual bool ResistDisenchant { get; } = false;
 
-    public virtual bool ResistNether => false;
+    public virtual bool ResistNether { get; } = false;
 
-    public virtual bool ResistNexus => false;
+    public virtual bool ResistNexus { get; } = false;
 
-    public virtual bool ResistPlasma => false;
+    public virtual bool ResistPlasma { get; } = false;
 
-    public virtual bool ResistTeleport => false;
+    public virtual bool ResistTeleport { get; } = false;
 
-    public virtual bool ResistWater => false;
+    public virtual bool ResistWater { get; } = false;
 
-    public virtual bool Shapechanger => false;
+    public virtual bool Shapechanger { get; } = false;
 
     /// <summary>
     /// How deeply the monster sleeps.
     /// </summary>
-    public abstract int Sleep { get; }
+    public virtual int Sleep { get; }
 
     /// <summary>
     /// Returns true, if the monster is smart.  When badly injured, the monster will want to prioritise spells that disable the
     /// player, summon help, or let it escape over spells that do direct damage.
     /// </summary>
-    public virtual bool Smart => false;
+    public virtual bool Smart { get; } = false;
 
     /// <summary>
     /// how fast the monster moves (110 = normal speed, higher is better).
     /// </summary>
-    public abstract int Speed { get; }
+    public virtual int Speed { get; }
 
-    public virtual bool Stupid => false;
+    public virtual bool Stupid { get; } = false;
 
-    public virtual bool TakeItem => false;
+    public virtual bool TakeItem { get; } = false;
 
-    public virtual bool Troll => false;
+    public virtual bool Troll { get; } = false;
 
-    public virtual bool Undead => false;
+    public virtual bool Undead { get; } = false;
 
-    public virtual bool Unique => false;
+    public virtual bool Unique { get; } = false;
 
-    public virtual bool WeirdMind => false;
+    public virtual bool WeirdMind { get; } = false;
 
-    protected virtual string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
+    protected virtual string GoldItemFactoryBindingKey { get; } = nameof(LotOfGoldGoldItemFactory);
 
     /// <summary>
     /// Returns true, if the monster has legs.  Monsters that have legs are susceptible to martial arts ankle kicks that will slow the monster.  Returns false, by default.
     /// </summary>
-    public virtual bool HasLegs => false;
+    public virtual bool HasLegs { get; } = false;
     #endregion
 
     #region
     protected readonly Game Game;
-    protected MonsterRace(Game game)
+    public string[] GetMultilineName => Game.ConvertToMultiline(MultilineName ?? FriendlyName);
+
+    public MonsterRace(Game game, MonsterRaceGameConfiguration monsterRaceGameConfiguration)
     {
         Game = game;
+        // 102 Properties
+        Key = monsterRaceGameConfiguration.Key ?? monsterRaceGameConfiguration.GetType().Name;
+        SpellNames = monsterRaceGameConfiguration.SpellNames;
+        SymbolName = monsterRaceGameConfiguration.SymbolName;
+        MultilineName = monsterRaceGameConfiguration.MultilineName;
+        Color = monsterRaceGameConfiguration.Color;
+        Animal = monsterRaceGameConfiguration.Animal;
+        ArmorClass = monsterRaceGameConfiguration.ArmorClass;
+        AttackDefinitions = monsterRaceGameConfiguration.AttackDefinitions;
+        AttrAny = monsterRaceGameConfiguration.AttrAny;
+        AttrClear = monsterRaceGameConfiguration.AttrClear;
+        AttrMulti = monsterRaceGameConfiguration.AttrMulti;
+        BashDoor = monsterRaceGameConfiguration.BashDoor;
+        CharClear = monsterRaceGameConfiguration.CharClear;
+        CharMulti = monsterRaceGameConfiguration.CharMulti;
+        ColdBlood = monsterRaceGameConfiguration.ColdBlood;
+        Cthuloid = monsterRaceGameConfiguration.Cthuloid;
+        Demon = monsterRaceGameConfiguration.Demon;
+        Description = monsterRaceGameConfiguration.Description;
+        Dragon = monsterRaceGameConfiguration.Dragon;
+        Drop_1D2 = monsterRaceGameConfiguration.Drop_1D2;
+        Drop_2D2 = monsterRaceGameConfiguration.Drop_2D2;
+        Drop_3D2 = monsterRaceGameConfiguration.Drop_3D2;
+        Drop_4D2 = monsterRaceGameConfiguration.Drop_4D2;
+        Drop60 = monsterRaceGameConfiguration.Drop60;
+        Drop90 = monsterRaceGameConfiguration.Drop90;
+        DropGood = monsterRaceGameConfiguration.DropGood;
+        DropGreat = monsterRaceGameConfiguration.DropGreat;
+        EldritchHorror = monsterRaceGameConfiguration.EldritchHorror;
+        EmptyMind = monsterRaceGameConfiguration.EmptyMind;
+        Escorted = monsterRaceGameConfiguration.Escorted;
+        EscortsGroup = monsterRaceGameConfiguration.EscortsGroup;
+        Evil = monsterRaceGameConfiguration.Evil;
+        Female = monsterRaceGameConfiguration.Female;
+        FireAura = monsterRaceGameConfiguration.FireAura;
+        ForceMaxHp = monsterRaceGameConfiguration.ForceMaxHp;
+        ForceSleep = monsterRaceGameConfiguration.ForceSleep;
+        FreqInate = monsterRaceGameConfiguration.FreqInate;
+        FreqSpell = monsterRaceGameConfiguration.FreqSpell;
+        FriendlyName = monsterRaceGameConfiguration.FriendlyName;
+        Friends = monsterRaceGameConfiguration.Friends;
+        Giant = monsterRaceGameConfiguration.Giant;
+        GoldItemFactoryBindingKey = monsterRaceGameConfiguration.GoldItemFactoryBindingKey;
+        Good = monsterRaceGameConfiguration.Good;
+        GreatOldOne = monsterRaceGameConfiguration.GreatOldOne;
+        HasLegs = monsterRaceGameConfiguration.HasLegs;
+        Hdice = monsterRaceGameConfiguration.Hdice;
+        Hside = monsterRaceGameConfiguration.Hside;
+        HurtByCold = monsterRaceGameConfiguration.HurtByCold;
+        HurtByFire = monsterRaceGameConfiguration.HurtByFire;
+        HurtByLight = monsterRaceGameConfiguration.HurtByLight;
+        HurtByRock = monsterRaceGameConfiguration.HurtByRock;
+        ImmuneAcid = monsterRaceGameConfiguration.ImmuneAcid;
+        ImmuneCold = monsterRaceGameConfiguration.ImmuneCold;
+        ImmuneConfusion = monsterRaceGameConfiguration.ImmuneConfusion;
+        ImmuneFear = monsterRaceGameConfiguration.ImmuneFear;
+        ImmuneFire = monsterRaceGameConfiguration.ImmuneFire;
+        ImmuneLightning = monsterRaceGameConfiguration.ImmuneLightning;
+        ImmunePoison = monsterRaceGameConfiguration.ImmunePoison;
+        ImmuneSleep = monsterRaceGameConfiguration.ImmuneSleep;
+        ImmuneStun = monsterRaceGameConfiguration.ImmuneStun;
+        Invisible = monsterRaceGameConfiguration.Invisible;
+        KillBody = monsterRaceGameConfiguration.KillBody;
+        KillItem = monsterRaceGameConfiguration.KillItem;
+        KillWall = monsterRaceGameConfiguration.KillWall;
+        LevelFound = monsterRaceGameConfiguration.LevelFound;
+        LightningAura = monsterRaceGameConfiguration.LightningAura;
+        Male = monsterRaceGameConfiguration.Male;
+        Mexp = monsterRaceGameConfiguration.Mexp;
+        MoveBody = monsterRaceGameConfiguration.MoveBody;
+        Multiply = monsterRaceGameConfiguration.Multiply;
+        NeverAttack = monsterRaceGameConfiguration.NeverAttack;
+        NeverMove = monsterRaceGameConfiguration.NeverMove;
+        Nonliving = monsterRaceGameConfiguration.Nonliving;
+        NoticeRange = monsterRaceGameConfiguration.NoticeRange;
+        OnlyDropGold = monsterRaceGameConfiguration.OnlyDropGold;
+        OnlyDropItem = monsterRaceGameConfiguration.OnlyDropItem;
+        OpenDoor = monsterRaceGameConfiguration.OpenDoor;
+        Orc = monsterRaceGameConfiguration.Orc;
+        PassWall = monsterRaceGameConfiguration.PassWall;
+        Powerful = monsterRaceGameConfiguration.Powerful;
+        RandomMove25 = monsterRaceGameConfiguration.RandomMove25;
+        RandomMove50 = monsterRaceGameConfiguration.RandomMove50;
+        Rarity = monsterRaceGameConfiguration.Rarity;
+        Reaver = monsterRaceGameConfiguration.Reaver;
+        Reflecting = monsterRaceGameConfiguration.Reflecting;
+        Regenerate = monsterRaceGameConfiguration.Regenerate;
+        ResistDisenchant = monsterRaceGameConfiguration.ResistDisenchant;
+        ResistNether = monsterRaceGameConfiguration.ResistNether;
+        ResistNexus = monsterRaceGameConfiguration.ResistNexus;
+        ResistPlasma = monsterRaceGameConfiguration.ResistPlasma;
+        ResistTeleport = monsterRaceGameConfiguration.ResistTeleport;
+        ResistWater = monsterRaceGameConfiguration.ResistWater;
+        Shapechanger = monsterRaceGameConfiguration.Shapechanger;
+        Sleep = monsterRaceGameConfiguration.Sleep;
+        Smart = monsterRaceGameConfiguration.Smart;
+        Speed = monsterRaceGameConfiguration.Speed;
+        Stupid = monsterRaceGameConfiguration.Stupid;
+        TakeItem = monsterRaceGameConfiguration.TakeItem;
+        Troll = monsterRaceGameConfiguration.Troll;
+        Undead = monsterRaceGameConfiguration.Undead;
+        Unique = monsterRaceGameConfiguration.Unique;
+        WeirdMind = monsterRaceGameConfiguration.WeirdMind;
     }
 
     public string GetKey => Key;
