@@ -516,7 +516,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Spell, SpellGameConfiguration, Spell>(gameConfiguration.Spells);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, StoreCommand>(gameConfiguration.StoreCommands);
         LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, StoreFactory>(gameConfiguration.StoreFactories);
-        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, GenericStringWidget>(gameConfiguration.StringWidgets);
+        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, StringWidget>(gameConfiguration.StringWidgets);
         LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration, SummonScript>(gameConfiguration.SummonScripts);
         LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration, SummonWeightedRandom>(gameConfiguration.SummonWeightedRandoms);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, SyllableSet>(gameConfiguration.SyllableSets);
