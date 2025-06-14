@@ -146,14 +146,10 @@ internal class Spell : IGetKey
             chance += 5 * (CharacterClassSpell.ManaCost - Game.Mana.IntValue);
         }
         int minfail = Game.BaseCharacterClass.SpellStat.SpellMinFailChance;
-        if (Game.BaseCharacterClass.ID != CharacterClassEnum.Priest && Game.BaseCharacterClass.ID != CharacterClassEnum.Druid &&
-            Game.BaseCharacterClass.ID != CharacterClassEnum.Mage && Game.BaseCharacterClass.ID != CharacterClassEnum.HighMage &&
-            Game.BaseCharacterClass.ID != CharacterClassEnum.Cultist)
+        int characterClassMinimumSpellFailureChance = Game.BaseCharacterClass.SpellMinFailChance ?? 0;
+        if (minfail < characterClassMinimumSpellFailureChance)
         {
-            if (minfail < 5)
-            {
-                minfail = 5;
-            }
+            minfail = characterClassMinimumSpellFailureChance;
         }
         if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Priest || Game.BaseCharacterClass.ID == CharacterClassEnum.Druid) && Game.HasUnpriestlyWeapon)
         {

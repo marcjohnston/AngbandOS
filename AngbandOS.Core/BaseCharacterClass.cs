@@ -16,6 +16,12 @@ internal abstract class BaseCharacterClass : IGetKey
     }
 
     /// <summary>
+    /// Returns the minimum spell failure chance for the character class.  Spell failure chances that are lower than this value will be set to this value; or null, if there is no
+    /// minimum.  Priests, mages, high-mages, cultists and druids have a minimum 5% failure chance.
+    /// </summary>
+    public virtual int? SpellMinFailChance => null;
+
+    /// <summary>
     /// Returns a divisor for the amount of mana needed to keep friends.  Returns 20, by default.
     /// </summary>
     public virtual int FriendsUpkeepDivider => 20;
