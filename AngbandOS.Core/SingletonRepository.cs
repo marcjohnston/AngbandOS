@@ -508,7 +508,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, ProjectileScript>(gameConfiguration.ProjectileScripts);
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, ProjectileWeightedRandom>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration, RaceGender>(gameConfiguration.RaceGenders);
-        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, GenericRangedWidget>(gameConfiguration.RangedWidgets);
+        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, RangedWidget>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Realm, RealmGameConfiguration, Realm>(gameConfiguration.Realms);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration, RealmCharacterClass>(gameConfiguration.RealmCharacterClasses);
         LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration, RenderMessageScript>(gameConfiguration.RenderMessageScripts);
