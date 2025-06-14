@@ -16,6 +16,11 @@ internal abstract class BaseCharacterClass : IGetKey
     }
 
     /// <summary>
+    /// Returns a divisor for the amount of mana needed to keep friends.  Returns 20, by default.
+    /// </summary>
+    public virtual int FriendsUpkeepDivider => 20;
+
+    /// <summary>
     /// Returns the names of the <see cref="ItemAction"/> objects that are associated with this <see cref="BaseCharacterClass"/> or null, if this <see cref="BaseCharacterClass"/> doesn't have any
     /// special item action handling.  This property is used to bind the <see cref="ItemActions"/> property using the bind phase.
     /// </summary>

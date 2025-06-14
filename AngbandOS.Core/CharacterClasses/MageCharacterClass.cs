@@ -11,6 +11,7 @@ internal class MageCharacterClass : BaseCharacterClass
 {
     private MageCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 1;
+    public override int FriendsUpkeepDivider => 15;
     public override string Title => "Mage";
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 36;

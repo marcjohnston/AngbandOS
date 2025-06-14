@@ -4609,15 +4609,7 @@ internal class Game
         int upkeepFactor = 0;
         if (TotalFriends != 0)
         {
-            int upkeepDivider = 20;
-            if (BaseCharacterClass.ID == CharacterClassEnum.Mage)
-            {
-                upkeepDivider = 15;
-            }
-            else if (BaseCharacterClass.ID == CharacterClassEnum.HighMage)
-            {
-                upkeepDivider = 12;
-            }
+            int upkeepDivider = BaseCharacterClass.FriendsUpkeepDivider;
             if (TotalFriends > 1 + (ExperienceLevel.IntValue / upkeepDivider))
             {
                 upkeepFactor = TotalFriendLevels;

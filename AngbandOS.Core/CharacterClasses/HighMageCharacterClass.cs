@@ -11,6 +11,7 @@ internal class HighMageCharacterClass : BaseCharacterClass
 {
     private HighMageCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 10;
+    public override int FriendsUpkeepDivider => 12;
     public override string Title => "High-Mage";
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 38;
