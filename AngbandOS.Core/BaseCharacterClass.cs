@@ -300,7 +300,8 @@ internal abstract class BaseCharacterClass : IGetKey
     }
 
     /// <summary>
-    /// Returns the name for the magic type.  Returns "magic" by default.  Divine casting returns "prayer".
+    /// Returns the name for the magic type.  Returns "magic" by default.  Divine character classes, druid, fanatic, monk, priest and rangers return "prayer".
+    /// Mindcrafters and mystics return "psychic talents";
     /// </summary>
     public virtual string MagicType => "magic";
 

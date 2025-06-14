@@ -40,10 +40,6 @@ internal class CastScript : Script, IScript, ICastSpellScript, IGameCommandScrip
         if (Game.HasAntiMagic)
         {
             string whichMagicType = Game.BaseCharacterClass.MagicType;
-            if (Game.BaseCharacterClass.ID == CharacterClassEnum.Mindcrafter || Game.BaseCharacterClass.ID == CharacterClassEnum.Mystic)
-            {
-                whichMagicType = "psychic talents";
-            }
             Game.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
             Game.EnergyUse = 5;
         }

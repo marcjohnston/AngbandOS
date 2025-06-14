@@ -38,6 +38,7 @@ internal class MysticCharacterClass : BaseCharacterClass
         "wearing only light armor they can move faster and dodge,",
         "and while not wielding a weapon they do increased damage."
     };
+    public override string MagicType => "psychic talents";
     public override int SpellWeight => 300;
     public override void Cast() => CastMentalism();
     public override Ability SpellStat => Game.WisdomAbility;
