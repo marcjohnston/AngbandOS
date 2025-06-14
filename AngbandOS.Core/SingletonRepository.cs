@@ -524,7 +524,7 @@ internal class SingletonRepository
         LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, TextWidget>(gameConfiguration.TextWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration, Tile>(gameConfiguration.Tiles);
         LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration, TimerScript>(gameConfiguration.TimerScripts);
-        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, GenericTimeWidget>(gameConfiguration.TimeWidgets);
+        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, TimeWidget>(gameConfiguration.TimeWidgets);
         LoadFromConfiguration<Town, TownGameConfiguration, Town>(gameConfiguration.Towns);
         LoadFromConfiguration<Vault, VaultGameConfiguration, Vault>(gameConfiguration.Vaults);
         LoadFromConfiguration<View, ViewGameConfiguration, View>(gameConfiguration.Views);
