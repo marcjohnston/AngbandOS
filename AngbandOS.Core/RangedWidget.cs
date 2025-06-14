@@ -160,8 +160,8 @@ internal class RangedWidget : Widget, IGetKey
     /// </summary>
     protected override void Paint()
     {
-        string justifiedText = _text;
+        string justifiedText = Text;
         justifiedText = Justification.Format(justifiedText, Width ?? justifiedText.Length);
-        Game.Screen.Print(_color, justifiedText, Y, X);
+        Game.Screen.Print(Color, justifiedText, Y, X);
     }
 }

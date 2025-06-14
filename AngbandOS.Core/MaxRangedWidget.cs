@@ -7,16 +7,35 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class MaxRangedWidget : TextWidget
+internal class MaxRangedWidget : Widget, IGetKey
 {
     private bool _sortValidated = false;
     private string _value;
     private ColorEnum _color;
 
-    protected MaxRangedWidget(Game game) : base(game)
+    public MaxRangedWidget(Game game, MaxRangedWidgetGameConfiguration maxRangedWidgetGameConfiguration) : base(game)
     {
+        Key = maxRangedWidgetGameConfiguration.Key ?? maxRangedWidgetGameConfiguration.GetType().Name;
+        Ranges = maxRangedWidgetGameConfiguration.Ranges;
+        DefaultColor = maxRangedWidgetGameConfiguration.DefaultColor;
+        MaxIntValueName = maxRangedWidgetGameConfiguration.MaxIntValueName;
+        IntValueName = maxRangedWidgetGameConfiguration.IntValueName;
+        X = maxRangedWidgetGameConfiguration.X;
+        Y = maxRangedWidgetGameConfiguration.Y;
+        Width = maxRangedWidgetGameConfiguration.Width;
+        JustificationName = maxRangedWidgetGameConfiguration.JustificationName;
+        ChangeTrackerNames = maxRangedWidgetGameConfiguration.ChangeTrackerNames;
         _color = DefaultColor;
     }
+
+    /// <summary>
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
+    /// </summary>
+    public virtual string[]? ChangeTrackerNames { get; } = null;
+
+    public virtual string Key { get; }
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns an array of tuples that specify a range factor and color to render for a range of values.  The <param name="startValue"></param> specifies the smallest (or start) value of the range.  Ranges must be sorted in
@@ -25,22 +44,23 @@ internal abstract class MaxRangedWidget : TextWidget
     /// 
     /// The factor
     /// </summary>
-    public abstract (int percentage, string? text, ColorEnum color)[] Ranges { get; }
+    public virtual (int percentage, string? text, ColorEnum color)[] Ranges { get; }
 
     /// <summary>
     /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.  Returns the color white, by default.
     /// </summary>
-    protected virtual ColorEnum DefaultColor => ColorEnum.White;
+    protected virtual ColorEnum DefaultColor { get; } = ColorEnum.White;
 
-    public abstract string MaxIntValueName { get; }
+    public virtual string MaxIntValueName { get; }
     public IIntValue MaxIntValue { get; private set; }
 
-    public abstract string IntValueName { get; }
+    public virtual string IntValueName { get; }
     public IIntValue IntValue { get; private set; }
 
-    public override void Bind()
+    public void Bind()
     {
-        base.Bind();
+        ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
+        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
         MaxIntValue = Game.SingletonRepository.Get<IIntValue>(MaxIntValueName);
     }
@@ -62,9 +82,27 @@ internal abstract class MaxRangedWidget : TextWidget
         }
     }
 
-    public sealed override string Text => _value;
+    public string Text => _value;
 
-    public sealed override ColorEnum Color => _color;
+    public ColorEnum Color => _color;
+
+    public string ToJson()
+    {
+        MaxRangedWidgetGameConfiguration rangedWidgetGameConfiguration = new MaxRangedWidgetGameConfiguration()
+        {
+            Key = Key,
+            Ranges = Ranges,
+            IntValueName = IntValueName,
+            DefaultColor = DefaultColor,
+            X = X,
+            Y = Y,
+            Width = Width,
+            JustificationName = JustificationName,
+            ChangeTrackerNames = ChangeTrackerNames,
+            MaxIntValueName = MaxIntValueName,
+        };
+        return JsonSerializer.Serialize(rangedWidgetGameConfiguration, Game.GetJsonSerializerOptions());
+    }
 
     public override void Update()
     {
@@ -116,5 +154,42 @@ internal abstract class MaxRangedWidget : TextWidget
         }
 
         base.Update();
+    }
+
+    /// <summary>
+    /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
+    /// </summary>
+    public virtual int X { get; }
+
+    /// <summary>
+    /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
+    /// </summary>
+    public virtual int Y { get; }
+
+    /// <summary>
+    /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
+    /// </summary>
+    public virtual int? Width { get; } = null;
+
+    /// <summary>
+    /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property is bound using
+    /// the <see cref="JustificationName"/> property during the bind phase.
+    /// </summary>
+    protected Justification Justification { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
+    /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
+    /// </summary>
+    public virtual string JustificationName { get; } = nameof(LeftJustification);
+
+    /// <summary>
+    /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
+    /// </summary>
+    protected override void Paint()
+    {
+        string justifiedText = Text;
+        justifiedText = Justification.Format(justifiedText, Width ?? justifiedText.Length);
+        Game.Screen.Print(Color, justifiedText, Y, X);
     }
 }
