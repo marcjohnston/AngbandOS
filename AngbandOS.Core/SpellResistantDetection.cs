@@ -31,3 +31,4 @@ internal abstract class SpellResistantDetection : IGetKey
 
     public abstract void Learn(Monster monster);
 }
+

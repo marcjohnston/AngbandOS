@@ -93,6 +93,7 @@ public class GameConfiguration
         gameConfiguration.TimerScripts = LoadFromAssembly<TimerScriptGameConfiguration>(assembly);
         gameConfiguration.RenderMessageScripts = LoadFromAssembly<RenderMessageScriptGameConfiguration>(assembly);
         gameConfiguration.MartialArtsAttacks = LoadFromAssembly<MartialArtsAttackGameConfiguration>(assembly);
+        gameConfiguration.AbilityScoreScripts = LoadFromAssembly<AbilityScoreScriptGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -225,4 +226,5 @@ public class GameConfiguration
     public virtual TimerScriptGameConfiguration[]? TimerScripts { get; set; } = null;
     public virtual RenderMessageScriptGameConfiguration[]? RenderMessageScripts { get; set; } = null;
     public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
+    public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
 }

@@ -475,6 +475,7 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Timer>();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
+        LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration, AbilityScoreScript>(gameConfiguration.AbilityScoreScripts);
         LoadFromConfiguration<Animation, AnimationGameConfiguration, Animation>(gameConfiguration.Animations);
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, ArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration, Attack>(gameConfiguration.Attacks);

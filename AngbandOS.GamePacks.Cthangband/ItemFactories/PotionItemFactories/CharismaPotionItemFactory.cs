@@ -24,7 +24,7 @@ public class CharismaPotionItemFactory : ItemFactoryGameConfiguration
         (25, 1)
     };
     public override int Weight => 4;
-    public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.GainCharismaScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
+    public override (string, string?, int)? QuaffBindingTuple => (nameof(GainCharismaAbilityScoreScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
   
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.
