@@ -1,4 +1,4 @@
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -7,11 +7,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class DemonServantSummonWeightedRandom : SummonWeightedRandomGameConfiguration
+public class ElementalPet1xSummonScript : SummonScriptGameConfiguration
 {
-    public override (string, int)[] NameAndWeightBindings => new (string, int)[] {
-        (nameof(DemonServantPetSummonScript), 2),
-        (nameof(DemonServantSummonScript), 1)
-    };
-    public override string LearnedDetails =>  "control 67%";
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.ElementalMonsterRaceFilter);
+    public override string LevelRollExpression => "X";
+    public override bool Pet => true;
+    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }
+

@@ -7,12 +7,13 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class DemonServantSummonScript : SummonScriptGameConfiguration
+public class DragonPet1xSummonScript : SummonScriptGameConfiguration
 {
-    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.DemonMonsterRaceFilter);
-
-    public override string LevelRollExpression => "X*3/2";
-
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.DragonMonsterRaceFilter);
+    public override string LevelRollExpression => "X";
+    public override bool Pet => true;
+    public override string[]? PreMessages => new string[] { "You concentrate on the image of a dragon..." };
+    public override string[]? SuccessMessages => new string[] { "The summoned dragon gets angry!" };
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
-    public override string[]? SuccessMessages => new string[] { "The area fills with a stench of sulphur and brimstone.", "'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'" };
 }
+

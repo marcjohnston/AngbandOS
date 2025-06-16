@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class DemonServantPetSummonScript : SummonScriptGameConfiguration
+public class DemonPet3xD2SummonScript : SummonScriptGameConfiguration
 {
     public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.DemonMonsterRaceFilter);
 

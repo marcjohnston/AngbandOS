@@ -5,5 +5,5 @@ internal class SummonDemonSpellChaosRealmSuccessMappedSpellScript : MappedSpellS
 {
     public override string SpellBindingKey => nameof(SummonDemonChaosSpell);
     public override string? RealmBindingKey => nameof(ChaosRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(DemonServantSummonWeightedRandom) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Demon3xD2SummonWeightedRandom) };
 }

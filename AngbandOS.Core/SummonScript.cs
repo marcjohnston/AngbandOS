@@ -24,6 +24,7 @@ internal class SummonScript : IGetKey, IUniversalScript
         PreMessages = summonScriptGameConfiguration.PreMessages;
         SuccessMessages = summonScriptGameConfiguration.SuccessMessages;
         FailureMessages = summonScriptGameConfiguration.FailureMessages;
+        LearnedDetails = summonScriptGameConfiguration.LearnedDetails;
     }
 
     /// <summary>
@@ -42,6 +43,7 @@ internal class SummonScript : IGetKey, IUniversalScript
             PreMessages = PreMessages,
             SuccessMessages = SuccessMessages,
             FailureMessages = FailureMessages,
+            LearnedDetails = LearnedDetails,
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
@@ -117,7 +119,7 @@ internal class SummonScript : IGetKey, IUniversalScript
     /// <summary>
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
     /// </summary>
-    public virtual string LearnedDetails => "";
+    public virtual string LearnedDetails { get; } = "";
 
     public virtual string Key { get; }
 

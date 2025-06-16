@@ -337,6 +337,8 @@ internal class SingletonRepository
     public void Load(GameConfiguration gameConfiguration)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
+        RegisterRepository<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
+
         RegisterRepository<IActivateItemScript>();
         RegisterRepository<IAimWandScript>();
         RegisterRepository<IBoolValue>();
@@ -573,6 +575,7 @@ internal class SingletonRepository
 
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
+        ValidateSystemScriptsEnum(); // TODO: This is development validation
 
         // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
         MonsterRace[] monsterRaces = Get<MonsterRace>();
@@ -584,6 +587,23 @@ internal class SingletonRepository
         foreach (IGetKey singleton in _allSingletonsList)
         {
             singleton.Bind();
+        }
+    }
+
+    private void ValidateSystemScriptsEnum()
+    {
+        List<string> missing = new List<string>();
+        foreach (string name in Enum.GetNames(typeof(SystemScriptsEnum)))
+        {
+            IGetKey? singleton = TryGet<IGetKey>(name);
+            if (singleton is null)
+            { 
+                missing.Add(name);
+            }
+        }
+        if (missing.Count > 0)
+        {
+            throw new Exception($"{String.Join("\t", missing)} enums have missing SystemScripts");
         }
     }
     private void ValidateJointTable<T, T1, T2>(Func<T1, T2, string> GetCompositeKey) where T : class where T1 : class where T2 : class // TODO: WHY CANT THIS BE where T: IGETKEY

@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-internal class BizarreSummonWeightedRandom : SummonWeightedRandomGameConfiguration
+public class BizarreSummonWeightedRandom : SummonWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[] {
         (nameof(BizarreAPet1xSummonScript), 1),
