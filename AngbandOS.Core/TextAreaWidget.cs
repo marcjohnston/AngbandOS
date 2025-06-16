@@ -9,8 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class TextAreaWidget : Widget, IGetKey
 {
-    protected TextAreaWidget(Game game) : base(game) { }
-
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
@@ -25,14 +23,8 @@ internal abstract class TextAreaWidget : Widget, IGetKey
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
+        NullableTextAreaValue = Game.SingletonRepository.Get<INullableStringsValue>(NullableTextAreaValueName);
     }
-
-    public abstract string ToJson();
-
-    /// <summary>
-    /// Returns the text to be rendered for the widget.
-    /// </summary>
-    public abstract string[] Text { get; }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
@@ -84,6 +76,11 @@ internal abstract class TextAreaWidget : Widget, IGetKey
     public virtual string JustificationName => nameof(LeftJustification);
 
     /// <summary>
+    /// Returns the text to be rendered for the widget.
+    /// </summary>
+    public virtual string[] Text => NullableText ?? NullText;
+
+    /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
     /// </summary>
     protected override void Paint()
@@ -101,5 +98,36 @@ internal abstract class TextAreaWidget : Widget, IGetKey
             Game.Screen.Print(Color, justifiedText, currentY, X);
             currentY++;
         }
+    }
+
+    protected TextAreaWidget(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the text to render when the value is null.  By default, returns a single line of an empty string.  The alignment will vertically add lines and the justification
+    /// will horizontally add space.
+    /// </summary>
+    public virtual string[] NullText => new string[] { String.Empty };
+
+    public abstract string NullableTextAreaValueName { get; }
+    public INullableStringsValue NullableTextAreaValue { get; private set; }
+    /// <summary>
+    /// Returns the text to be rendered for the widget.
+    /// </summary>
+    public virtual string[]? NullableText => NullableTextAreaValue.NullableStringsValue;
+    public string ToJson()
+    {
+        TextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration = new TextAreaWidgetGameConfiguration()
+        {
+            Key = Key,
+            NullableTextAreaValueName = NullableTextAreaValueName,
+            NullableText = NullableText,
+            Color = Color,
+            X = X,
+            Y = Y,
+            JustificationName = JustificationName,
+            AlignmentName = AlignmentName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(nullableStringsTextAreaWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

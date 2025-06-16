@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class TrackedMonsterRaceNameNullableStringsTextAreaWidget : NullableStringsTextAreaWidgetGameConfiguration
+public class TrackedMonsterRaceNameNullableStringsTextAreaWidget : TextAreaWidgetGameConfiguration
 {
     public override int X => 0;
     public override int Y => 29;

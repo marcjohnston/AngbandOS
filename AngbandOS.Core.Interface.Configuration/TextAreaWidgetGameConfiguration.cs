@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class NullableStringsTextAreaWidgetGameConfiguration
+public class TextAreaWidgetGameConfiguration
 {
     public virtual string NullableTextAreaValueName { get; set; }
     public virtual string[]? NullableText { get; set; }

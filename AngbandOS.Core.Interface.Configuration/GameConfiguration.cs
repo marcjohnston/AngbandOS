@@ -79,7 +79,7 @@ public class GameConfiguration
         gameConfiguration.StringWidgets = LoadFromAssembly<StringWidgetGameConfiguration>(assembly);
         gameConfiguration.TextWidgets = LoadFromAssembly<TextWidgetGameConfiguration>(assembly);
         gameConfiguration.TimeWidgets = LoadFromAssembly<TimeWidgetGameConfiguration>(assembly);
-        gameConfiguration.NullableStringsTextAreaWidgets = LoadFromAssembly<NullableStringsTextAreaWidgetGameConfiguration>(assembly);
+        gameConfiguration.NullableStringsTextAreaWidgets = LoadFromAssembly<TextAreaWidgetGameConfiguration>(assembly);
         gameConfiguration.RaceGenders = LoadFromAssembly<RaceGenderGameConfiguration>(assembly);
         gameConfiguration.Genders = LoadFromAssembly<GenderGameConfiguration>(assembly);
         gameConfiguration.PhysicalAttributeSets = LoadFromAssembly<PhysicalAttributeSetGameConfiguration>(assembly);
@@ -211,7 +211,7 @@ public class GameConfiguration
     public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
     public virtual TextWidgetGameConfiguration[]? TextWidgets { get; set; } = null;
     public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
-    public virtual NullableStringsTextAreaWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
+    public virtual TextAreaWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
 
     public virtual RaceGenderGameConfiguration[]? RaceGenders { get; set; } = null;
     public virtual GenderGameConfiguration[]? Genders { get; set; } = null;
