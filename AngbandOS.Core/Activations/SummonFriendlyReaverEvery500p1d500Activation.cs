@@ -15,7 +15,7 @@ internal class SummonFriendlyReaverEvery500p1d500Activation : Activation
     private SummonFriendlyReaverEvery500p1d500Activation(Game game) : base(game) { }
     public override string? PreActivationMessage => "Your {0} flickers black for a moment...";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(SummonFriendlyReaverScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(ReaverPet1DSummonScript);
 
     protected override string RechargeTimeRollExpression => "1d500+500";
 
