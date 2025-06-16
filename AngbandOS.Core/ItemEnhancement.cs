@@ -259,7 +259,7 @@ internal class ItemEnhancement : IGetKey
     }
 
     public string GetKey => Key;
-    public bool AppliesTo(ItemFactory itemFactory)
+    public bool AppliesTo(ItemFactory itemFactory) // TODO: This is only being used to apply slaying item enhancements.
     {
         if (ApplicableItemFactories == null)
         {
@@ -458,7 +458,7 @@ internal class ItemEnhancement : IGetKey
     /// <inheritdoc />
     public ArtifactBiasWeightedRandom? ArtifactBiasWeightedRandom { get; private set; }
 
-    public ItemFactory[]? ApplicableItemFactories { get; private set; }
+    public ItemFactory[]? ApplicableItemFactories { get; private set; } // TODO: This is contrary to the ItemEnhancement for ItemFactories.
     #endregion
 
     #region Unique ItemEnhancement Light-weight Virtual & Abstract Properties
