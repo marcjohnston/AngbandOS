@@ -421,7 +421,7 @@ internal class SingletonRepository
         RegisterRepository<MonsterSelector>();
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
-        RegisterRepository<NullableStringsTextAreaWidget>();
+        RegisterRepository<NullableTextAreaWidget>();
         RegisterRepository<Patron>();
         RegisterRepository<PhysicalAttributeSet>();
         RegisterRepository<PlayerEffect>();
@@ -503,7 +503,7 @@ internal class SingletonRepository
         LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration, MartialArtsAttack>(gameConfiguration.MartialArtsAttacks);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, MaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, MonsterRace>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<NullableStringsTextAreaWidget, NullableStringsTextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
+        LoadFromConfiguration<NullableTextAreaWidget, NullableStringsTextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration, PhysicalAttributeSet>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration, Plural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, ProjectileGraphic>(gameConfiguration.ProjectileGraphics);

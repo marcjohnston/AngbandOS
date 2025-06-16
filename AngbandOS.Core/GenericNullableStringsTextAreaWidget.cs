@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class GenericNullableStringsTextAreaWidget : NullableStringsTextAreaWidget
+internal class GenericNullableStringsTextAreaWidget : NullableTextAreaWidget
 {
     public GenericNullableStringsTextAreaWidget(Game game, NullableStringsTextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration) : base(game)
     {

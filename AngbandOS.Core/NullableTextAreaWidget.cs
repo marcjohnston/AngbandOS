@@ -11,11 +11,6 @@ internal abstract class NullableTextAreaWidget : TextAreaWidget
 {
     protected NullableTextAreaWidget(Game game) : base(game) { }
 
-    /// <summary>
-    /// Returns the text to be rendered for the widget.
-    /// </summary>
-    public abstract string[]? NullableText { get; }
-
     public override string[] Text => NullableText ?? NullText;
 
     /// <summary>
@@ -23,4 +18,32 @@ internal abstract class NullableTextAreaWidget : TextAreaWidget
     /// will horizontally add space.
     /// </summary>
     public virtual string[] NullText => new string[] { String.Empty };
+
+    public abstract string NullableTextAreaValueName { get; }
+    public INullableStringsValue NullableTextAreaValue { get; private set; }
+    /// <summary>
+    /// Returns the text to be rendered for the widget.
+    /// </summary>
+    public virtual string[]? NullableText => NullableTextAreaValue.NullableStringsValue;
+    public override void Bind()
+    {
+        base.Bind();
+        NullableTextAreaValue = Game.SingletonRepository.Get<INullableStringsValue>(NullableTextAreaValueName);
+    }
+    public override string ToJson()
+    {
+        NullableStringsTextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration = new NullableStringsTextAreaWidgetGameConfiguration()
+        {
+            Key = Key,
+            NullableTextAreaValueName = NullableTextAreaValueName,
+            NullableText = NullableText,
+            Color = Color,
+            X = X,
+            Y = Y,
+            JustificationName = JustificationName,
+            AlignmentName = AlignmentName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(nullableStringsTextAreaWidgetGameConfiguration, Game.GetJsonSerializerOptions());
+    }
 }
