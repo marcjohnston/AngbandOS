@@ -14,7 +14,7 @@ internal class SummonFriendlyElemental2In3Activation : Activation
 {
     private SummonFriendlyElemental2In3Activation(Game game) : base(game) { }
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(SummonFriendlyElemental2In3Script);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Elemental3xD2SummonWeightedRandom);
 
     protected override string RechargeTimeRollExpression => "750";
 

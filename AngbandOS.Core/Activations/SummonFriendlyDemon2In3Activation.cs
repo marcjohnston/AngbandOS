@@ -14,7 +14,7 @@ internal class SummonFriendlyDemon2In3Activation : Activation
 {
     private SummonFriendlyDemon2In3Activation(Game game) : base(game) { }
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(Demon3xD2SummonWeightedRandom);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Demon3xD2Pet2In3SummonWeightedRandom);
 
     protected override string RechargeTimeRollExpression => "1d333+666";
 

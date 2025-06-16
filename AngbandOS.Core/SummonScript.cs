@@ -25,6 +25,7 @@ internal class SummonScript : IGetKey, IUniversalScript
         SuccessMessages = summonScriptGameConfiguration.SuccessMessages;
         FailureMessages = summonScriptGameConfiguration.FailureMessages;
         LearnedDetails = summonScriptGameConfiguration.LearnedDetails;
+        Used = summonScriptGameConfiguration.Used;
     }
 
     /// <summary>
@@ -44,6 +45,7 @@ internal class SummonScript : IGetKey, IUniversalScript
             SuccessMessages = SuccessMessages,
             FailureMessages = FailureMessages,
             LearnedDetails = LearnedDetails,
+            Used = Used,
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
@@ -91,7 +93,7 @@ internal class SummonScript : IGetKey, IUniversalScript
     public UsedResult ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return UsedResult.True;
+        return new UsedResult(Used);
     }
 
     public IdentifiedResult ExecuteAimWandScript(int dir)
@@ -107,9 +109,9 @@ internal class SummonScript : IGetKey, IUniversalScript
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
-        return new IdentifiedAndUsedResult(identifiedResult, UsedResult.True);
+        return new IdentifiedAndUsedResult(identifiedResult, new UsedResult(Used));
     }
-
+    protected virtual bool Used { get; } = true;
     /// <summary>
     /// Returns true, if a group of monsters or pets will be summon; false, otherwise.
     /// </summary>

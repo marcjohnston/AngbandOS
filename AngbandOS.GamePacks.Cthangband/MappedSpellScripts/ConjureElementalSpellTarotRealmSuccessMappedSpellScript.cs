@@ -5,5 +5,5 @@ internal class ConjureElementalSpellTarotRealmSuccessMappedSpellScript : MappedS
 {
     public override string SpellBindingKey => nameof(ConjureElementalTarotSpell);
     public override string? RealmBindingKey => nameof(TarotRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(ElementalSummonWeightedRandom) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Elemental1xPet1In2SummonWeightedRandom) };
 }

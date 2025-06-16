@@ -485,7 +485,6 @@
         StoneSkinScript,
         StoneToMudScript,
         StrengthDartScript,
-        SummonFriendlyElemental2In3Script,
         SummonFriendlyReaverScript,
         SummonFriendlyUndead2In3Script,
         SummonGreaterUndeadScript,

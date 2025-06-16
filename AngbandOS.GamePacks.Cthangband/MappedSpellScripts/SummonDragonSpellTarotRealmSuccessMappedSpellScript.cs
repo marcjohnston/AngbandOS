@@ -5,5 +5,5 @@ internal class SummonDragonSpellTarotRealmSuccessMappedSpellScript : MappedSpell
 {
     public override string SpellBindingKey => nameof(SummonDragonTarotSpell);
     public override string? RealmBindingKey => nameof(TarotRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(DragonSummonWeightedRandom) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Dragon1xPet7In10SummonWeightedRandom) };
 }

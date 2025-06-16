@@ -7,10 +7,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Elemental1xSummonScript : SummonScriptGameConfiguration
+public class Elemental1xPet1In2SummonWeightedRandom : SummonWeightedRandomGameConfiguration
 {
-    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.ElementalMonsterRaceFilter);
-    public override string LevelRollExpression => "X";
-    public override string[]? SuccessMessages => new string[] { "You fail to control the elemental creature!" };
-    public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
+    public override (string, int)[] NameAndWeightBindings => new (string, int)[] {
+        (nameof(ElementalPet1xSummonScript), 3),
+        (nameof(Elemental1xSummonScript), 3)
+    };
+    public override string LearnedDetails => "control 30%";
 }

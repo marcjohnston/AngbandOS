@@ -21,5 +21,6 @@ public class SummonScriptGameConfiguration
     public virtual string[]? SuccessMessages { get; set; } = null;
     public virtual string[]? FailureMessages { get; set; } = null;
     public virtual string LearnedDetails { get; set; } = "";
+    public virtual bool Used { get; set; } = true;
 }
 

@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class AnimalSummonWeightedRandom : SummonWeightedRandomGameConfiguration
+public class Animal1xPet3In5SummonWeightedRandom : SummonWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[] {
         (nameof(AnimalRangerPet1xSummonScript), 3),

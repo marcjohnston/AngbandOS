@@ -7,11 +7,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class DragonSummonWeightedRandom : SummonWeightedRandomGameConfiguration
+public class Elemental3xD2SummonWeightedRandom : SummonWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[] {
-        (nameof(DragonPet1xSummonScript), 7),
-        (nameof(Dragon1xSummonScript), 3)
+        (nameof(ElementalPet3xD2SummonScript), 2),
+        (nameof(Elemental3xD2SummonScript), 1)
     };
-    public override string LearnedDetails => "control 70%"; 
 }
