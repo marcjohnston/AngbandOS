@@ -7,14 +7,29 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class TextAreaWidget : Widget, IGetKey
+internal class TextAreaWidget : Widget, IGetKey
 {
+    public TextAreaWidget(Game game, TextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration) : base(game)
+    {
+        Key = nullableStringsTextAreaWidgetGameConfiguration.Key ?? nullableStringsTextAreaWidgetGameConfiguration.GetType().Name;
+        NullableTextAreaValueName = nullableStringsTextAreaWidgetGameConfiguration.NullableTextAreaValueName;
+        NullableText = nullableStringsTextAreaWidgetGameConfiguration.NullableText;
+        Color = nullableStringsTextAreaWidgetGameConfiguration.Color;
+        X = nullableStringsTextAreaWidgetGameConfiguration.X;
+        Y = nullableStringsTextAreaWidgetGameConfiguration.Y;
+        Width = nullableStringsTextAreaWidgetGameConfiguration.Width;
+        Height = nullableStringsTextAreaWidgetGameConfiguration.Height;
+        JustificationName = nullableStringsTextAreaWidgetGameConfiguration.JustificationName;
+        AlignmentName = nullableStringsTextAreaWidgetGameConfiguration.AlignmentName;
+        ChangeTrackerNames = nullableStringsTextAreaWidgetGameConfiguration.ChangeTrackerNames;
+    }
+
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public virtual string[]? ChangeTrackerNames => null;
+    public virtual string[]? ChangeTrackerNames { get; } = null;
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
@@ -29,27 +44,27 @@ internal abstract class TextAreaWidget : Widget, IGetKey
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
+    public virtual ColorEnum Color { get; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public abstract int X { get; }
+    public virtual int X { get; }
 
     /// <summary>
     /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public abstract int Y { get; }
+    public virtual int Y { get; }
 
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public abstract int Width { get; }
+    public virtual int Width { get; }
 
     /// <summary>
     /// Returns the height of the widget.  If the height provided is less than the number of lines in the <see cref="Text"/> property, remaining lines will not be rendered.
     /// </summary>
-    public abstract int Height { get; }
+    public virtual int Height { get; }
 
     /// <summary>
     /// Returns the <see cref="Justification"/> object to be used to justify the each line of the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property
@@ -73,12 +88,12 @@ internal abstract class TextAreaWidget : Widget, IGetKey
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName => nameof(LeftJustification);
+    public virtual string JustificationName { get; } = nameof(LeftJustification);
 
-    /// <summary>
-    /// Returns the text to be rendered for the widget.
-    /// </summary>
-    public virtual string[] Text => NullableText ?? NullText;
+    ///// <summary>
+    ///// Returns the text to be rendered for the widget.
+    ///// </summary>
+    //public virtual string[] Text => NullableText ?? NullText;
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
@@ -86,7 +101,8 @@ internal abstract class TextAreaWidget : Widget, IGetKey
     protected override void Paint()
     {
         // Align the text vertically.
-        string[] alignedText = Alignment.Align(Text, Height);
+        string[] text = NullableTextAreaValue.NullableStringsValue ?? NullText;
+        string[] alignedText = Alignment.Align(text, Height);
 
         // Ensure we do not exceed the maximum height.
         alignedText = alignedText.Take(Height).ToArray();
@@ -100,20 +116,18 @@ internal abstract class TextAreaWidget : Widget, IGetKey
         }
     }
 
-    protected TextAreaWidget(Game game) : base(game) { }
-
     /// <summary>
     /// Returns the text to render when the value is null.  By default, returns a single line of an empty string.  The alignment will vertically add lines and the justification
     /// will horizontally add space.
     /// </summary>
-    public virtual string[] NullText => new string[] { String.Empty };
+    public virtual string[] NullText { get; } = new string[] { String.Empty };
 
-    public abstract string NullableTextAreaValueName { get; }
+    public virtual string NullableTextAreaValueName { get; }
     public INullableStringsValue NullableTextAreaValue { get; private set; }
     /// <summary>
     /// Returns the text to be rendered for the widget.
     /// </summary>
-    public virtual string[]? NullableText => NullableTextAreaValue.NullableStringsValue;
+    public virtual string[]? NullableText { get; }
     public string ToJson()
     {
         TextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration = new TextAreaWidgetGameConfiguration()

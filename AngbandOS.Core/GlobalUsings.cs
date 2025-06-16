@@ -54,7 +54,6 @@ global using AngbandOS.Core.RoomLayouts;
 global using AngbandOS.Core.Scripts;
 global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Core.Timers;
-global using AngbandOS.Core.Widgets;
 
 global using static AngbandOS.Core.Extensions;
 global using Timer = AngbandOS.Core.Timers.Timer;

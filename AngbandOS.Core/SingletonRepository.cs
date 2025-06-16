@@ -503,7 +503,7 @@ internal class SingletonRepository
         LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration, MartialArtsAttack>(gameConfiguration.MartialArtsAttacks);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, MaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, MonsterRace>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<TextAreaWidget, TextAreaWidgetGameConfiguration, GenericNullableStringsTextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
+        LoadFromConfiguration<TextAreaWidget, TextAreaWidgetGameConfiguration, TextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration, PhysicalAttributeSet>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration, Plural>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, ProjectileGraphic>(gameConfiguration.ProjectileGraphics);
