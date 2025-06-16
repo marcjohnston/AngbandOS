@@ -27,7 +27,7 @@ public class DragonsFlameWandItemFactory : ItemFactoryGameConfiguration
         (50, 4)
     };
     public override int Weight => 10;
-    public override (string, string, int, int)? AimingBindingTuple => (nameof(Fire100r3ProjectileScript), "1d3+1", 120, 150);
+    public override (string, string, int, int)? AimingBindingTuple => (nameof(Fire100R3ProjectileScript), "1d3+1", 120, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeWandScript);

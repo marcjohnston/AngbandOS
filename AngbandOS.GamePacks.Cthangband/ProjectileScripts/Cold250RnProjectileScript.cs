@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Acid100rm3ProjectileScript : ProjectileScriptGameConfiguration
+public class Cold250RnProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
     public override bool Kill => true;
@@ -17,7 +17,8 @@ public class Acid100rm3ProjectileScript : ProjectileScriptGameConfiguration
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    public override string ProjectileBindingKey => nameof(AcidProjectile);
-    public override string DamageRollExpression => "100";
-    public override string RadiusRollExpression => "-3";
+    public override string ProjectileBindingKey => nameof(ColdProjectile);
+    public override string DamageRollExpression => "250";
+    public override string RadiusRollExpression => "-2";
+    public override string? PreMessage => "You breathe frost.";
 }

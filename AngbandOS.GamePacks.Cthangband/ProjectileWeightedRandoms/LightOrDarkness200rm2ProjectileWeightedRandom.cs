@@ -12,6 +12,6 @@ public class LightOrDarkness200rm2ProjectileWeightedRandom : ProjectileWeightedR
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
         (nameof(Light200rm2ProjectileScript), 1),
-        (nameof(Darkness200rm2ProjectileScript), 1),
+        (nameof(Darkness200Rn2ProjectileScript), 1),
     };
 }

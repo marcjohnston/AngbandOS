@@ -11,6 +11,6 @@ public class FriendlyPhantomSummonScript : SummonScriptGameConfiguration
 {
     public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.PhantomMonsterRaceFilter);
 
-    public override string LevelRollExpression => "d";
+    public override string LevelRollExpression => "f";
     public override bool Pet => true;
 }

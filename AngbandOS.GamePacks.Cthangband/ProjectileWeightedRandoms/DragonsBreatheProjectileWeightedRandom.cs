@@ -11,10 +11,10 @@ public class DragonsBreatheProjectileWeightedRandom : ProjectileWeightedRandomGa
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
-        (nameof(Acid100rm3ProjectileScript), 1),
-        (nameof(Electricity80rm3ProjectileScript), 1),
-        (nameof(Fire100rm3ProjectileScript), 1),
-        (nameof(Cold80rm3ProjectileScript), 1),
+        (nameof(Acid100Rn3ProjectileScript), 1),
+        (nameof(Electricity80Rn3ProjectileScript), 1),
+        (nameof(Fire100Rn3ProjectileScript), 1),
+        (nameof(Cold80Rn3ProjectileScript), 1),
         (nameof(PoisonGas60rm3ProjectileScript), 1),
     };
 }

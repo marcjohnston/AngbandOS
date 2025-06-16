@@ -11,7 +11,7 @@ public class ChaosOrDisenchant220rm2ProjectileWeightedRandom : ProjectileWeighte
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
-        (nameof(Chaos220rm2ProjectileScript), 1),
-        (nameof(Disenchant220rm2ProjectileScript), 1),
+        (nameof(Chaos220Rn2ProjectileScript), 1),
+        (nameof(Disenchant220Rn2ProjectileScript), 1),
     };
 }

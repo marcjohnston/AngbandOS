@@ -7,18 +7,17 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class CyclopsRacialPowerProjectileScript : ProjectileScriptGameConfiguration
+public class Electricity100Rn2ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
     public override bool Kill => true;
     public override bool Jump => false;
     public override bool Beam => false;
-    public override bool Grid => false;
-    public override bool Item => false;
+    public override bool Grid => true;
+    public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    public override string ProjectileBindingKey => nameof(MissileProjectile);
-    public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.PlayerSpecified;
-    public override string DamageRollExpression => "3*x/2";
-    public override string? PreMessage => "You throw a huge boulder.";
+    public override string ProjectileBindingKey => nameof(ElectricityProjectile);
+    public override string DamageRollExpression => "100";
+    public override string RadiusRollExpression => "-2";
 }

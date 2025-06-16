@@ -14,7 +14,7 @@ internal class BallOfAcid130r2Every1d450p450DirectionalActivation : Activation
     public override string? PreActivationMessage => "You breathe acid.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(Acid130rm2ProjectileScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Acid130Rn2ProjectileScript);
 
     public override int Value => 5000;
 

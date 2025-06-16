@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Fire250rm2ProjectileScript : ProjectileScriptGameConfiguration
+public class Disenchant220Rn2ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
     public override bool Kill => true;
@@ -17,8 +17,8 @@ public class Fire250rm2ProjectileScript : ProjectileScriptGameConfiguration
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    public override string ProjectileBindingKey => nameof(FireProjectile);
-    public override string DamageRollExpression => "250";
+    public override string ProjectileBindingKey => nameof(DisenchantProjectile);
+    public override string DamageRollExpression => "220";
     public override string RadiusRollExpression => "-2";
-    public override string? PreMessage => "You breathe fire.";
+    public override string? PreMessage => "You breathe disenchantment.";
 }

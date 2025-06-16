@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Electricity80rm3ProjectileScript : ProjectileScriptGameConfiguration
+public class Cold80Rn3ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
     public override bool Kill => true;
@@ -17,7 +17,7 @@ public class Electricity80rm3ProjectileScript : ProjectileScriptGameConfiguratio
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    public override string ProjectileBindingKey => nameof(ElectricityProjectile);
+    public override string ProjectileBindingKey => nameof(ColdProjectile);
     public override string DamageRollExpression => "80";
     public override string RadiusRollExpression => "-3";
 }

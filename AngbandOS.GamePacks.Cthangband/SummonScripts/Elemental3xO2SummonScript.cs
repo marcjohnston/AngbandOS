@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Elemental3xD2SummonScript : SummonScriptGameConfiguration
+public class Elemental3xO2SummonScript : SummonScriptGameConfiguration
 {
     public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.ElementalMonsterRaceFilter);
     public override string LevelRollExpression => "X*3/2";

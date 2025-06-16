@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Chaos250rm2ProjectileScript : ProjectileScriptGameConfiguration
+public class Fire250Rn2ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
     public override bool Kill => true;
@@ -17,8 +17,8 @@ public class Chaos250rm2ProjectileScript : ProjectileScriptGameConfiguration
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    public override string ProjectileBindingKey => nameof(ChaosProjectile);
+    public override string ProjectileBindingKey => nameof(FireProjectile);
     public override string DamageRollExpression => "250";
     public override string RadiusRollExpression => "-2";
-    public override string? PreMessage => "You breathe chaos.";
+    public override string? PreMessage => "You breathe fire.";
 }

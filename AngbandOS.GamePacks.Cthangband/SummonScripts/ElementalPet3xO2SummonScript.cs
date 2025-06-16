@@ -7,12 +7,13 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Demon3xD2SummonScript : SummonScriptGameConfiguration
+public class ElementalPet3xO2SummonScript : SummonScriptGameConfiguration
 {
-    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.DemonMonsterRaceFilter);
-
+    public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.ElementalMonsterRaceFilter);
     public override string LevelRollExpression => "X*3/2";
-
+    public override bool Pet => true;
+    public override string GroupBooleanExpression => "X==50";
+    public override string[]? SuccessMessages => new string[] { "An elemental materializes..." , "It seems obedient to you." };
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
-    public override string[]? SuccessMessages => new string[] { "The area fills with a stench of sulphur and brimstone.", "'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'" };
 }
+

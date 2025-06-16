@@ -14,7 +14,7 @@ internal class BallOfConfusion120r2Every1d450p450DirectionalActivation : Activat
     public override string? PreActivationMessage => "You breathe confusion.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(Confusion120rm2ProjectileScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Confusion120Rn2ProjectileScript);
 
     public override int Value => 5000;
 

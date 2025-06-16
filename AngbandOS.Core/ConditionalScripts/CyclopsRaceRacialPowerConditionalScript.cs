@@ -8,5 +8,5 @@ internal class CyclopsRaceRacialPowerConditionalScript : ConditionalScript
     {
         (nameof(CyclopsRaceRacialPowerTest), true, 0)
     };
-    protected override string[]? TrueScriptBindingKeys => new string[] { nameof(CyclopsRacialPowerProjectileScript) };
+    protected override string[]? TrueScriptBindingKeys => new string[] { nameof(Cyclops3xO2RacialPowerProjectileScript) };
 }

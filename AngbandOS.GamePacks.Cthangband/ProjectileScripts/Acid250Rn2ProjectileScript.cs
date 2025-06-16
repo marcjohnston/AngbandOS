@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Electricity100rm2ProjectileScript : ProjectileScriptGameConfiguration
+public class Acid250Rn2ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
     public override bool Kill => true;
@@ -17,7 +17,8 @@ public class Electricity100rm2ProjectileScript : ProjectileScriptGameConfigurati
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    public override string ProjectileBindingKey => nameof(ElectricityProjectile);
-    public override string DamageRollExpression => "100";
+    public override string ProjectileBindingKey => nameof(AcidProjectile);
+    public override string DamageRollExpression => "250";
     public override string RadiusRollExpression => "-2";
+    public override string? PreMessage => "You breathe acid.";
 }

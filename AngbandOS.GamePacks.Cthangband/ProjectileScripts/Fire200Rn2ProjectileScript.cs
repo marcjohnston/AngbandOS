@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Darkness200rm2ProjectileScript : ProjectileScriptGameConfiguration
+public class Fire200Rn2ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
     public override bool Kill => true;
@@ -17,8 +17,7 @@ public class Darkness200rm2ProjectileScript : ProjectileScriptGameConfiguration
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
-    public override string ProjectileBindingKey => nameof(DarknessProjectile);
+    public override string ProjectileBindingKey => nameof(FireProjectile);
     public override string DamageRollExpression => "200";
     public override string RadiusRollExpression => "-2";
-    public override string? PreMessage => "You breathe darkness.";
 }

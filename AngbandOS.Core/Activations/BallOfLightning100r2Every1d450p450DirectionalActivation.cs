@@ -14,7 +14,7 @@ internal class BallOfLightning100r2Every1d450p450DirectionalActivation : Activat
     public override string? PreActivationMessage => "You breathe lightning.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(Electricity100rm2ProjectileScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Electricity100Rn2ProjectileScript);
 
     public override int Value => 5000;
 

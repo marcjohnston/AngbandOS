@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ReaverPet1DSummonScript : SummonScriptGameConfiguration
 {
     public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.ReaverMonsterRaceFilter);
-    public override string LevelRollExpression => "d";
+    public override string LevelRollExpression => "f";
     public override bool Pet => true;
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
 }

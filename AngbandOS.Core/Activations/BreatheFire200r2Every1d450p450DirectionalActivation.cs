@@ -14,7 +14,7 @@ internal class BreatheFire200r2Every1d450p450DirectionalActivation : Activation
     public override string? PreActivationMessage => "You breathe fire.";
     protected override string RechargeTimeRollExpression => "1d450+450";
 
-    protected override string ActivationCancellableScriptItemBindingKey => nameof(Fire200rm2ProjectileScript);
+    protected override string ActivationCancellableScriptItemBindingKey => nameof(Fire200Rn2ProjectileScript);
 
     public override int Value => 5000;
 

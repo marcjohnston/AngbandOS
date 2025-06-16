@@ -12,6 +12,6 @@ public class SoundOrExplode230rm2ProjectileWeightedRandom : ProjectileWeightedRa
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
         (nameof(Sound230rm2ProjectileScript), 1),
-        (nameof(Explode230rm2ProjectileScript), 1),
+        (nameof(Explode230Rn2ProjectileScript), 1),
     };
 }

@@ -1,4 +1,4 @@
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -7,11 +7,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Demon3xD2Pet2In3SummonWeightedRandom : SummonWeightedRandomGameConfiguration
+public class Elemental3xO2SummonWeightedRandom : SummonWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[] {
-        (nameof(DemonPet3xD2SummonScript), 2),
-        (nameof(Demon3xD2SummonScript), 1)
+        (nameof(ElementalPet3xO2SummonScript), 2),
+        (nameof(Elemental3xO2SummonScript), 1)
     };
-    public override string LearnedDetails =>  "control 67%";
 }

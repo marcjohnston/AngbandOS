@@ -11,10 +11,10 @@ public class FireColdElectricityPoisonGasOrAcid220rm2ProjectileWeightedRandom : 
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
-        (nameof(Fire250rm2ProjectileScript), 1),
-        (nameof(Cold250rm2ProjectileScript), 1),
-        (nameof(Acid250rm2ProjectileScript), 1),
-        (nameof(Electricity250rm2ProjectileScript), 1),
+        (nameof(Fire250Rn2ProjectileScript), 1),
+        (nameof(Cold250RnProjectileScript), 1),
+        (nameof(Acid250Rn2ProjectileScript), 1),
+        (nameof(Electricity250Rn2ProjectileScript), 1),
         (nameof(PoisonGas250rm2ProjectileScript), 1),
     };
 }
