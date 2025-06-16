@@ -3,8 +3,7 @@
 [Serializable]
 public class TextAreaWidgetGameConfiguration
 {
-    public virtual string NullableTextAreaValueName { get; set; }
-    public virtual string[]? NullableText { get; set; }
+    public virtual string NullableStringsValueName { get; set; }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.

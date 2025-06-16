@@ -31,5 +31,5 @@ public class TrackedMonsterRaceNameNullableStringsTextAreaWidget : TextAreaWidge
     /// <summary>
     /// Returns the <see cref="TrackedMonsterRaceNameNullableStringsFunction"/> function to render a multiline version of the monster race name.
     /// </summary>
-    public override string NullableTextAreaValueName => nameof(FunctionsEnum.TrackedMonsterRaceNameNullableStringsFunction);
+    public override string NullableStringsValueName => nameof(FunctionsEnum.TrackedMonsterRaceNameNullableStringsFunction);
 }

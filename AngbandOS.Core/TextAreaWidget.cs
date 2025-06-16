@@ -12,8 +12,7 @@ internal class TextAreaWidget : Widget, IGetKey
     public TextAreaWidget(Game game, TextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration) : base(game)
     {
         Key = nullableStringsTextAreaWidgetGameConfiguration.Key ?? nullableStringsTextAreaWidgetGameConfiguration.GetType().Name;
-        NullableTextAreaValueName = nullableStringsTextAreaWidgetGameConfiguration.NullableTextAreaValueName;
-        NullableText = nullableStringsTextAreaWidgetGameConfiguration.NullableText;
+        NullableStringsValueName = nullableStringsTextAreaWidgetGameConfiguration.NullableStringsValueName;
         Color = nullableStringsTextAreaWidgetGameConfiguration.Color;
         X = nullableStringsTextAreaWidgetGameConfiguration.X;
         Y = nullableStringsTextAreaWidgetGameConfiguration.Y;
@@ -38,7 +37,7 @@ internal class TextAreaWidget : Widget, IGetKey
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
-        NullableTextAreaValue = Game.SingletonRepository.Get<INullableStringsValue>(NullableTextAreaValueName);
+        NullableStringsValue = Game.SingletonRepository.Get<INullableStringsValue>(NullableStringsValueName);
     }
 
     /// <summary>
@@ -101,7 +100,7 @@ internal class TextAreaWidget : Widget, IGetKey
     protected override void Paint()
     {
         // Align the text vertically.
-        string[] text = NullableTextAreaValue.NullableStringsValue ?? NullText;
+        string[] text = NullableStringsValue.NullableStringsValue ?? DefaultText;
         string[] alignedText = Alignment.Align(text, Height);
 
         // Ensure we do not exceed the maximum height.
@@ -120,10 +119,14 @@ internal class TextAreaWidget : Widget, IGetKey
     /// Returns the text to render when the value is null.  By default, returns a single line of an empty string.  The alignment will vertically add lines and the justification
     /// will horizontally add space.
     /// </summary>
-    public virtual string[] NullText { get; } = new string[] { String.Empty };
+    public virtual string[] DefaultText { get; } = new string[] { String.Empty };
 
-    public virtual string NullableTextAreaValueName { get; }
-    public INullableStringsValue NullableTextAreaValue { get; private set; }
+    /// <summary>
+    /// Returns the binding key for an <see cref="INullableStringsValue"> function used to generate the value to render.
+    /// </summary>
+    public virtual string NullableStringsValueName { get; }
+
+    public INullableStringsValue NullableStringsValue { get; private set; }
     /// <summary>
     /// Returns the text to be rendered for the widget.
     /// </summary>
@@ -133,8 +136,7 @@ internal class TextAreaWidget : Widget, IGetKey
         TextAreaWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration = new TextAreaWidgetGameConfiguration()
         {
             Key = Key,
-            NullableTextAreaValueName = NullableTextAreaValueName,
-            NullableText = NullableText,
+            NullableStringsValueName = NullableStringsValueName,
             Color = Color,
             X = X,
             Y = Y,
