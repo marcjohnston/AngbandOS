@@ -18,7 +18,7 @@ public class BronzeDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfConfusion120r2Every1d450p450DirectionalActivation);
+    public override string? ItemEnhancementBindingKey => nameof(BronzeDragonItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Bronze Dragon Scale Mail";
@@ -28,24 +28,15 @@ public class BronzeDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Bronze Dragon Scale Mail~";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (55, 8)
     };
-    public override bool ResConf => true;
     public override int BonusArmorClass => 10;
     public override int BonusHit => -2;
     public override int Weight => 200;
 
-    /// <summary>
-    /// Returns a treasure rating of 30 for dragon scale mail items.
-    /// </summary>
-    public override int TreasureRating => 30;
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 19;

@@ -34,9 +34,9 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    protected override string? BonusConstitutionRollExpression => "4";
-    protected override string? BonusDexterityRollExpression => "4";
-    protected override string? BonusStrengthRollExpression => "4";
+    public override string? BonusConstitutionRollExpression => "4";
+    public override string? BonusDexterityRollExpression => "4";
+    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 45;
     public override bool Regen => true;
     public override bool ResChaos => true;

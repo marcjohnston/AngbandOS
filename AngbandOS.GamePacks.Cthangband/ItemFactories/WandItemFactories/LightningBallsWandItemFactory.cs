@@ -17,7 +17,7 @@ public class LightningBallsWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool IgnoreElec => true;
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreElectricityItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

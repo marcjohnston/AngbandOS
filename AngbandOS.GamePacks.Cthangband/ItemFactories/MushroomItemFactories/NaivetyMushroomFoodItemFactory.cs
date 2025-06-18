@@ -33,7 +33,7 @@ public class NaivetyMushroomFoodItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int InitialNutritionalValue => 500;
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

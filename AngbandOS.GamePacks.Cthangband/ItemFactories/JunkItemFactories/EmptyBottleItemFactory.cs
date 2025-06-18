@@ -11,7 +11,7 @@ public class EmptyBottleItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ExclamationPointSymbol);
     public override string ItemClassBindingKey => nameof(BottlesItemClass);
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
     public override int PackSort => 39;
     public override bool HatesCold => true;
     public override string BreakageChanceProbabilityExpression => "100/100";

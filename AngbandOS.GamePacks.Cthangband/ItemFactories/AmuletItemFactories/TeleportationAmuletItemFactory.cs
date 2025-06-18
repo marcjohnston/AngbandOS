@@ -18,14 +18,12 @@ public class TeleportationAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 250;
-    public override bool IsCursed => true;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(TeleportationItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (15, 1)
     };
-    public override bool Teleport => true;
     public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 

@@ -31,9 +31,9 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    protected override string? BonusConstitutionRollExpression => "3";
-    protected override string? BonusStealthRollExpression => "3";
-    protected override string? BonusStrengthRollExpression => "3";
+    public override string? BonusConstitutionRollExpression => "3";
+    public override string? BonusStealthRollExpression => "3";
+    public override string? BonusStrengthRollExpression => "3";
     public override int Rarity => 15;
     public override bool Regen => true;
     public override bool ResAcid => true;

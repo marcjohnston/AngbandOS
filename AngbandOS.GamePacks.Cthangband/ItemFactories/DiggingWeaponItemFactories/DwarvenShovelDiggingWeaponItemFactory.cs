@@ -23,8 +23,7 @@ public class DwarvenShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguratio
         (40, 1)
     };
     public override int InitialBonusTunnel => 3;
-    public override bool ShowMods => true;
-    public override bool Tunnel => true;
+    public override string? ItemEnhancementBindingKey => nameof(TunnellingItemFactoryItemEnhancement);
     public override int Weight => 120;
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);

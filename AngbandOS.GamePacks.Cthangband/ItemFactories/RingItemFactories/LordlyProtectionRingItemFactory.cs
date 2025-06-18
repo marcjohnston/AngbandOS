@@ -18,25 +18,18 @@ public class LordlyProtectionRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
 
-    /// <summary>
-    /// Returns a treasure rating of 5 for a ring of lordly protection.
-    /// </summary>
-    public override int TreasureRating => 5;
+    public override string? ItemEnhancementBindingKey => nameof(LordlyProtectionItemFactoryItemEnhancement);
 
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(SystemScriptsEnum.LordlyProtectionEnchantmentScript) })
     };
     public override int Cost => 100000;
-    public override bool FreeAct => true;
-    public override bool HoldLife => true;
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (100, 5)
     };
-    public override bool ResDisen => true;
-    public override bool ResPois => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

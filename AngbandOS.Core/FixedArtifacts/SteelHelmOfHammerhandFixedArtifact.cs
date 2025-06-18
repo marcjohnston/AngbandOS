@@ -29,7 +29,7 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    protected override string? BonusDexterityRollExpression => "3";
+    public override string? BonusDexterityRollExpression => "3";
     public override int Rarity => 2;
     public override bool ResAcid => true;
     public override bool ResNexus => true;

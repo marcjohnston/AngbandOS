@@ -15,15 +15,11 @@ public class StarEssenceElendilLightSourceItemFactory : ItemFactoryGameConfigura
 
     public override int Cost => 25000;
 
-    /// <summary>
-    /// Returns a radius of 2 for a star of essence.
-    /// </summary>
-    public override int Radius => 2;
+    public override string? ItemEnhancementBindingKey => nameof(Radius2InstantArtifactItemFactoryItemEnhancement);
 
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Star Essence~"; // TODO: This appears to cause a defect in identification
-    public override bool InstaArt => true;
     public override int LevelNormallyFound => 30;
     public override int Weight => 5;
     public override bool ProvidesSunlight => true;

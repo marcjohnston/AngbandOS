@@ -18,10 +18,7 @@ public class MagiAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
 
-    /// <summary>
-    /// Returns a treasure rating of 25 for an amulet of the magi.
-    /// </summary>
-    public override int TreasureRating => 25;
+    public override string? ItemEnhancementBindingKey => nameof(MagiItemFactoryItemEnhancement);
 
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
@@ -29,19 +26,12 @@ public class MagiAmuletItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int Cost => 30000;
-    public override bool FreeAct => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 4),
         (80, 3)
     };
-    public override bool Search => true;
-    public override bool SeeInvis => true;
     public override int BonusArmorClass => 3;
     public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;

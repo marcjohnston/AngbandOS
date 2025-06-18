@@ -23,19 +23,12 @@ public class ResistanceAmuletItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int Cost => 25000;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override string? ItemEnhancementBindingKey => nameof(ResistanceItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 4)
     };
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
     public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 

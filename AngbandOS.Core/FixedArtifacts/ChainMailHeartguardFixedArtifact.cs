@@ -32,8 +32,8 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    protected override string? BonusCharismaRollExpression => "2";
-    protected override string? BonusStrengthRollExpression => "2";
+    public override string? BonusCharismaRollExpression => "2";
+    public override string? BonusStrengthRollExpression => "2";
     public override int Rarity => 3;
     public override bool ResAcid => true;
     public override bool ResCold => true;

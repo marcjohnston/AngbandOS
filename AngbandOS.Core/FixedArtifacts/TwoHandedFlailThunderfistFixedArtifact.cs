@@ -37,7 +37,7 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusStrengthRollExpression => "4";
+    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 38;
     public override bool ResDark => true;
     public override bool ResElec => true;

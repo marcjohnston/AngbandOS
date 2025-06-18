@@ -22,7 +22,7 @@ public class ExecutionersSwordWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (40, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 260;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

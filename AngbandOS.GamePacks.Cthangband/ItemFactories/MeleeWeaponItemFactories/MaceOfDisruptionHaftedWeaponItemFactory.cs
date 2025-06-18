@@ -22,8 +22,7 @@ public class MaceOfDisruptionHaftedWeaponItemFactory : ItemFactoryGameConfigurat
     {
         (80, 8)
     };
-    public override bool ShowMods => true;
-    public override bool SlayUndead => true;
+    public override string? ItemEnhancementBindingKey => nameof(MaceOfDistruptionItemFactoryItemEnhancement);
     public override int Weight => 400;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

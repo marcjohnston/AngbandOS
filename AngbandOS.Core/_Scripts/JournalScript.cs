@@ -1146,7 +1146,7 @@ internal class JournalScript : Script, IScript, ICastSpellScript, IGameCommandSc
             ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
             if (itemFactory.ItemClass == tval)
             {
-                if (itemFactory.InstaArt)
+                if (itemFactory.ItemEnhancement.InstaArt) // TODO: This only pulls from the ItemFactory and not generated characteristcs
                 {
                     continue;
                 }
@@ -1193,7 +1193,7 @@ internal class JournalScript : Script, IScript, ICastSpellScript, IGameCommandSc
                             itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
                             if (itemFactory.ItemClass == tval)
                             {
-                                if (itemFactory.InstaArt)
+                                if (itemFactory.ItemEnhancement.InstaArt) // TODO: This only pulls from the ItemFactory and not generated characteristcs
                                 {
                                     continue;
                                 }

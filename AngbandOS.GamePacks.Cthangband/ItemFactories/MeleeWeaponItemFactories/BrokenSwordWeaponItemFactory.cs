@@ -21,7 +21,7 @@ public class BrokenSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax => "Broken Sword~";
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int BonusDamage => -4;
     public override int BonusHit => -2;
     public override int Weight => 30;

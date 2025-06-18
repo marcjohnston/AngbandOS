@@ -21,10 +21,7 @@ public class AzathothChaosBookItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 100000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -51,11 +48,6 @@ public class AzathothChaosBookItemFactory : ItemFactoryGameConfiguration
     /// Returns true, because books are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-
-    /// <summary>
-    /// Returns true for all books.
-    /// </summary>
-    public override bool EasyKnow => true;
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

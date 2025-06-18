@@ -17,7 +17,7 @@ public class ColdBallWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 1500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool IgnoreCold => true;
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreColdItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

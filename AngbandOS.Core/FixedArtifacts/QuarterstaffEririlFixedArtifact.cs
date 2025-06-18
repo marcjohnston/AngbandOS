@@ -36,8 +36,8 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusIntelligenceRollExpression => "4";
-    protected override string? BonusWisdomRollExpression => "4";
+    public override string? BonusIntelligenceRollExpression => "4";
+    public override string? BonusWisdomRollExpression => "4";
     public override int Rarity => 18;
     public override bool ResLight => true;
     public override bool SeeInvis => true;

@@ -33,9 +33,9 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    protected override string? BonusAttacksRollExpression => "2";
-    protected override string? BonusDexterityRollExpression => "2";
-    protected override string? BonusSpeedRollExpression => "2";
+    public override string? BonusAttacksRollExpression => "2";
+    public override string? BonusDexterityRollExpression => "2";
+    public override string? BonusSpeedRollExpression => "2";
     public override int Rarity => 40;
     public override bool Regen => true;
     public override bool ResCold => true;

@@ -30,8 +30,8 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    protected override string? BonusDexterityRollExpression => "1";
-    protected override string? BonusStrengthRollExpression => "1";
+    public override string? BonusDexterityRollExpression => "1";
+    public override string? BonusStrengthRollExpression => "1";
     public override int Rarity => 15;
     public override bool ShowMods => true;
     public override bool SlayOrc => true;

@@ -25,8 +25,7 @@ public class IntelligenceRingItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int Cost => 500;
-    public override bool HideType => true;
-    public override bool Int => true;
+    public override string? ItemEnhancementBindingKey => nameof(IntelligenceItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

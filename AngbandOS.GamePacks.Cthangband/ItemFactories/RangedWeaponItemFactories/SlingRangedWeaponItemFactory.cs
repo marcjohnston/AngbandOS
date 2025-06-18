@@ -22,7 +22,7 @@ public class SlingRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (1, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 5;
     public override int MissileDamageMultiplier => 2;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]

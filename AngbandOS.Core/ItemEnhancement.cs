@@ -15,7 +15,7 @@ internal class ItemEnhancement : IGetKey
 {
     #region API
     protected readonly Game Game;
-    protected ItemEnhancement(Game game) // TODO: Delete
+    public ItemEnhancement(Game game) // Used by ItemFactory and FixedArtifacts // TODO: Delete
     {
         Game = game;
     }
@@ -484,24 +484,24 @@ internal class ItemEnhancement : IGetKey
     #endregion
 
     #region ItemPropertySet Light-weight Virtual & Abstract Properties
-    protected virtual string? BonusStrengthRollExpression { get; } = null;
-    protected virtual string? BonusIntelligenceRollExpression { get; } = null;
-    protected virtual string? BonusWisdomRollExpression { get; } = null;
-    protected virtual string? BonusDexterityRollExpression { get; } = null;
-    protected virtual string? BonusConstitutionRollExpression { get; } = null;
-    protected virtual string? BonusCharismaRollExpression { get; } = null;
-    protected virtual string? BonusStealthRollExpression { get; } = null;
-    protected virtual string? BonusSearchRollExpression { get; } = null;
-    protected virtual string? BonusInfravisionRollExpression { get; } = null;
-    protected virtual string? BonusTunnelRollExpression { get; } = null;
-    protected virtual string? BonusAttacksRollExpression { get; } = null;
-    protected virtual string? BonusSpeedRollExpression { get; } = null;
+    public virtual string? BonusStrengthRollExpression { get; } = null;
+    public virtual string? BonusIntelligenceRollExpression { get; } = null;
+    public virtual string? BonusWisdomRollExpression { get; } = null;
+    public virtual string? BonusDexterityRollExpression { get; } = null;
+    public virtual string? BonusConstitutionRollExpression { get; } = null;
+    public virtual string? BonusCharismaRollExpression { get; } = null;
+    public virtual string? BonusStealthRollExpression { get; } = null;
+    public virtual string? BonusSearchRollExpression { get; } = null;
+    public virtual string? BonusInfravisionRollExpression { get; } = null;
+    public virtual string? BonusTunnelRollExpression { get; } = null;
+    public virtual string? BonusAttacksRollExpression { get; } = null;
+    public virtual string? BonusSpeedRollExpression { get; } = null;
 
-    protected virtual string? BonusArmorClassRollExpression { get; } = null;
+    public virtual string? BonusArmorClassRollExpression { get; } = null;
 
-    protected virtual string? BonusHitRollExpression { get; } = null;
+    public virtual string? BonusHitRollExpression { get; } = null;
 
-    protected virtual string? BonusDamageRollExpression { get; } = null;
+    public virtual string? BonusDamageRollExpression { get; } = null;
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and

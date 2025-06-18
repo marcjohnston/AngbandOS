@@ -33,10 +33,10 @@ internal class RingOfBastFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool InstaArt => true;
     public override int Level => 70;
-    protected override string? BonusConstitutionRollExpression => "4";
-    protected override string? BonusDexterityRollExpression => "4";
-    protected override string? BonusSpeedRollExpression => "4";
-    protected override string? BonusStrengthRollExpression => "4";
+    public override string? BonusConstitutionRollExpression => "4";
+    public override string? BonusDexterityRollExpression => "4";
+    public override string? BonusSpeedRollExpression => "4";
+    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 50;
     public override bool Speed => true;
     public override bool Str => true;

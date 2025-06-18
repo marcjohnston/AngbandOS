@@ -22,7 +22,7 @@ public class GreatAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (40, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 230;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

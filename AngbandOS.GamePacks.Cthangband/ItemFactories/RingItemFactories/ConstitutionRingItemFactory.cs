@@ -24,9 +24,8 @@ public class ConstitutionRingItemFactory : ItemFactoryGameConfiguration
         (new int[] {0, 1, 2}, null, new string[] { nameof(SystemScriptsEnum.BonusConstitution5BP1EnchantmentScript) })
     };
 
-    public override bool Con => true;
+    public override string? ItemEnhancementBindingKey => nameof(ConstitutionItemFactoryItemEnhancement);
     public override int Cost => 500;
-    public override bool HideType => true;
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

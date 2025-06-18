@@ -18,8 +18,7 @@ public class FreeActionRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 1500;
-    public override bool EasyKnow => true;
-    public override bool FreeAct => true;
+    public override string? ItemEnhancementBindingKey => nameof(FreeActionItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

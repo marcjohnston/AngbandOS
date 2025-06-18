@@ -18,14 +18,12 @@ public class ResistFireRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 250;
-    public override bool EasyKnow => true;
-    public override bool IgnoreFire => true;
+    public override string? ItemEnhancementBindingKey => nameof(ResistFireItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (10, 1)
     };
-    public override bool ResFire => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

@@ -26,7 +26,7 @@ public class SteelBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
         (3, 1),
         (25, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 3;
     public override string ItemClassBindingKey => nameof(BoltsItemClass);
     public override int PackSort => 33;

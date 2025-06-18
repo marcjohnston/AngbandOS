@@ -32,11 +32,11 @@ internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    protected override string? BonusAttacksRollExpression => "2";
-    protected override string? BonusCharismaRollExpression => "2";
-    protected override string? BonusDexterityRollExpression => "2";
-    protected override string? BonusSpeedRollExpression => "2";
-    protected override string? BonusStealthRollExpression => "2";
+    public override string? BonusAttacksRollExpression => "2";
+    public override string? BonusCharismaRollExpression => "2";
+    public override string? BonusDexterityRollExpression => "2";
+    public override string? BonusSpeedRollExpression => "2";
+    public override string? BonusStealthRollExpression => "2";
     public override int Rarity => 15;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;

@@ -36,7 +36,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool ImAcid => true;
     public override int Level => 30;
-    protected override string? BonusDexterityRollExpression => "4";
+    public override string? BonusDexterityRollExpression => "4";
     public override int Rarity => 90;
     public override bool Regen => true;
     public override bool ResNether => true;

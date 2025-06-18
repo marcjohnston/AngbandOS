@@ -31,9 +31,9 @@ public class BrassLanternLightSourceItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 35;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(Radius2EasyKnowIgnoreFireArtifactItemEnhancement);
+
     public override string? DescriptionSyntax => "Brass Lantern~";
-    public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,12 +41,6 @@ public class BrassLanternLightSourceItemFactory : ItemFactoryGameConfiguration
     };
     public override int InitialTurnsOfLight => 7500;
     public override int Weight => 50;
-
-
-    /// <summary>
-    /// Returns a radius of 2 for a brass lantern.
-    /// </summary>
-    public override int Radius => 2;
 
     public override string? RefillScriptBindingKey => nameof(SystemScriptsEnum.RefillLightSourceFromFlaskScript);
 

@@ -47,10 +47,7 @@ public class BeginnersHandbookSorceryBookItemFactory : ItemFactoryGameConfigurat
     /// </summary>
     public override bool IsMagical => true;
 
-    /// <summary>
-    /// Returns true for all books.
-    /// </summary>
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

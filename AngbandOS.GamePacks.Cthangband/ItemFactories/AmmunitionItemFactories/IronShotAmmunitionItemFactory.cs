@@ -25,7 +25,7 @@ public class IronShotAmmunitionItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 5;
     public override string ItemClassBindingKey => nameof(ShotsItemClass);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

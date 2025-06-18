@@ -17,10 +17,7 @@ public class WonderWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

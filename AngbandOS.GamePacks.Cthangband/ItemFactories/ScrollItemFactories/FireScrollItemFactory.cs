@@ -20,7 +20,7 @@ public class FireScrollItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
     public override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
     public override int Cost => 1000;
-    public override bool IgnoreFire => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreFireItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -39,7 +39,6 @@ public class FireScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override bool EasyKnow => true;
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

@@ -18,8 +18,8 @@ public class AdornmentAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 20;
-    public override bool EasyKnow => true;
 
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

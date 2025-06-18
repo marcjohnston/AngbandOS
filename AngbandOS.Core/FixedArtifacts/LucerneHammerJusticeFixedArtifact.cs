@@ -42,8 +42,8 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusInfravisionRollExpression => "4";
-    protected override string? BonusWisdomRollExpression => "4";
+    public override string? BonusInfravisionRollExpression => "4";
+    public override string? BonusWisdomRollExpression => "4";
     public override int Rarity => 15;
     public override bool Regen => true;
     public override bool ResCold => true;

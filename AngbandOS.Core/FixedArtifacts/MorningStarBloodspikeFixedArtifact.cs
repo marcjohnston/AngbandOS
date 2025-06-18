@@ -27,7 +27,7 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    protected override string? BonusStrengthRollExpression => "4";
+    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 30;
     public override bool ResNexus => true;
     public override bool SeeInvis => true;

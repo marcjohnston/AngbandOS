@@ -37,8 +37,8 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusCharismaRollExpression => "3";
-    protected override string? BonusDexterityRollExpression => "3";
+    public override string? BonusCharismaRollExpression => "3";
+    public override string? BonusDexterityRollExpression => "3";
     public override int Rarity => 8;
     public override bool ResCold => true;
     public override bool ResFire => true;

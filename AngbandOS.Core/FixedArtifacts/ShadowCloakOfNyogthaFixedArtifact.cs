@@ -32,11 +32,11 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 40;
-    protected override string? BonusCharismaRollExpression => "2";
-    protected override string? BonusIntelligenceRollExpression => "2";
-    protected override string? BonusSpeedRollExpression => "2";
-    protected override string? BonusStealthRollExpression => "2";
-    protected override string? BonusWisdomRollExpression => "2";
+    public override string? BonusCharismaRollExpression => "2";
+    public override string? BonusIntelligenceRollExpression => "2";
+    public override string? BonusSpeedRollExpression => "2";
+    public override string? BonusStealthRollExpression => "2";
+    public override string? BonusWisdomRollExpression => "2";
     public override int Rarity => 40;
     public override bool ResAcid => true;
     public override bool ResCold => true;

@@ -22,7 +22,7 @@ public class SpearPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 50;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

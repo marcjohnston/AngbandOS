@@ -12,7 +12,7 @@ public class IceRingItemFactory : ItemFactoryGameConfiguration
     public override bool NegativeBonusArmorClassRepresentsBroken => true;
     public override bool NegativeBonusHitRepresentsBroken => true;
     public override bool NegativeBonusDamageRepresentsBroken => true;
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfCold50r2Every1d20p20DirectionalActivation);
+    public override string? ItemEnhancementBindingKey => nameof(IceItemFactoryItemEnhancement);
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(SystemScriptsEnum.BonusArmorClass1D5P10BP5EnchantmentScript) })
@@ -23,13 +23,11 @@ public class IceRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 3000;
-    public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 1)
     };
-    public override bool ResCold => true;
     public override int BonusArmorClass => 15;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;

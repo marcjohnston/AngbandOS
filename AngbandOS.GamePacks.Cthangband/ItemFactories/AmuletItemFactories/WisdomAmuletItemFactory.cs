@@ -23,9 +23,8 @@ public class WisdomAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
-    public override bool Wis => true;
+    public override string? ItemEnhancementBindingKey => nameof(WisdomItemFactoryItemEnhancement);
     public override int Cost => 500;
-    public override bool HideType => true;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

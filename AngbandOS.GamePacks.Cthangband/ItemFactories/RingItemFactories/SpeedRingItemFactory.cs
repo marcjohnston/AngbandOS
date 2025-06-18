@@ -18,10 +18,7 @@ public class SpeedRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
 
-    /// <summary>
-    /// Returns a treasure rating of 25 for a ring of speed.
-    /// </summary>
-    public override int TreasureRating => 25;
+    public override string? ItemEnhancementBindingKey => nameof(SpeedItemFactoryItemEnhancement);
 
     public override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
@@ -31,13 +28,11 @@ public class SpeedRingItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int Cost => 100000;
-    public override bool HideType => true;
     public override int LevelNormallyFound => 80;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (80, 1)
     };
-    public override bool Speed => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

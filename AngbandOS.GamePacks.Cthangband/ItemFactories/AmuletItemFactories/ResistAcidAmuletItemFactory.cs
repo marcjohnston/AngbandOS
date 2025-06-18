@@ -18,14 +18,12 @@ public class ResistAcidAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 300;
-    public override bool EasyKnow => true;
-    public override bool IgnoreAcid => true;
+    public override string? ItemEnhancementBindingKey => nameof(ResistAcidItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (20, 1)
     };
-    public override bool ResAcid => true;
     public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 

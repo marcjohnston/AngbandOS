@@ -40,7 +40,7 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    protected override string? BonusDexterityRollExpression => "3";
+    public override string? BonusDexterityRollExpression => "3";
     public override int Rarity => 20;
     public override bool ShowMods => true;
     public override int ToA => 0;

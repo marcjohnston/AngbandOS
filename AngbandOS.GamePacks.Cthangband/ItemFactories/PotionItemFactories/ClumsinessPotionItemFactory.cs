@@ -43,7 +43,7 @@ public class ClumsinessPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

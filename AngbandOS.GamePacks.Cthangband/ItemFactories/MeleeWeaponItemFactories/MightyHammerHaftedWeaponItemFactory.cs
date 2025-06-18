@@ -17,9 +17,8 @@ public class MightyHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 3;
     public override int DamageSides => 9;
     public override string? DescriptionSyntax => "Mighty Hammer~"; // TODO: This appears to cause a defect in identification
-    public override bool InstaArt => true;
     public override int LevelNormallyFound => 15;
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(MightyHammerItemFactoryItemEnhancement);
     public override int Weight => 200;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

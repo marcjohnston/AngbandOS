@@ -28,7 +28,7 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool ImAcid => true;
     public override int Level => 40;
-    protected override string? BonusStealthRollExpression => "4";
+    public override string? BonusStealthRollExpression => "4";
     public override int Rarity => 40;
     public override bool SeeInvis => true;
     public override bool Stealth => true;

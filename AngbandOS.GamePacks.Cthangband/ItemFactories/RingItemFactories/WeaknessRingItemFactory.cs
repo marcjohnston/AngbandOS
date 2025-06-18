@@ -22,15 +22,12 @@ public class WeaknessRingItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override bool IsCursed => true;
-    public override bool HideType => true;
+    public override string? ItemEnhancementBindingKey => nameof(WeaknessItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (5, 1)
     };
-    public override string? BonusStrengthRollExpression => "-5";
-    public override bool Str => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

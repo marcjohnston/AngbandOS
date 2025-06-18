@@ -20,10 +20,7 @@ public class ChaosScrollItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
     public override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
     public override int Cost => 10000;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -42,7 +39,6 @@ public class ChaosScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override bool EasyKnow => true;
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

@@ -37,7 +37,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool KillDragon => true;
     public override int Level => 40;
-    protected override string? BonusWisdomRollExpression => "4";
+    public override string? BonusWisdomRollExpression => "4";
     public override int Rarity => 75;
     public override bool ResAcid => true;
     public override bool ResCold => true;

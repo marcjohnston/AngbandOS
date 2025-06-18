@@ -36,7 +36,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusStealthRollExpression => "2";
+    public override string? BonusStealthRollExpression => "2";
     public override int Rarity => 8;
     public override bool ResConf => true;
     public override bool ResFire => true;

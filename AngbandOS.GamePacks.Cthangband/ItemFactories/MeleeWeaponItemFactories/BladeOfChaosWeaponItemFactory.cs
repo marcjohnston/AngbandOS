@@ -13,7 +13,6 @@ public class BladeOfChaosWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Blade of Chaos";
 
-    public override bool Chaotic => true;
     public override int Cost => 4000;
     public override int DamageDice => 6;
     public override int DamageSides => 5;
@@ -23,8 +22,7 @@ public class BladeOfChaosWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (70, 8)
     };
-    public override bool ResChaos => true;
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(BladeOfChaosItemFactoryItemEnhancement);
     public override int Weight => 180;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

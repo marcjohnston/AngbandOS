@@ -30,7 +30,7 @@ public class SlayingRingItemFactory : ItemFactoryGameConfiguration
     {
         (40, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

@@ -301,10 +301,8 @@ internal sealed class Item : IComparable<Item>
 
     public int Weight { get; private set; }
 
-    private bool EasyKnow => _factory.EasyKnow;
     private int TurnOfLightValue => _factory.ValuePerTurnOfLight;
     private int BaseValue => _factory.BaseValue;
-    public int TreasureRating => _factory.TreasureRating;
     public Realm Realm => _factory.Realm;
 
     /// <summary>
@@ -1639,11 +1637,13 @@ internal sealed class Item : IComparable<Item>
 
     public bool IsKnown()
     {
+        RoItemPropertySet effectiveItemProperties = GetEffectiveItemProperties();
+
         if (IdentityIsKnown)
         {
             return true;
         }
-        if (EasyKnow && IsFlavorAware)
+        if (effectiveItemProperties.EasyKnow && IsFlavorAware)
         {
             return true;
         }
@@ -2316,7 +2316,7 @@ internal sealed class Item : IComparable<Item>
             }
         }
 
-        Game.TreasureRating += TreasureRating;
+        Game.TreasureRating += _factory.ItemEnhancement.TreasureRating; // TODO: This only pulls from the ItemFactory and not generated characteristcs
         if (IsRandomArtifact) 
         {
             Game.TreasureRating += EnchantmentItemProperties.TreasureRating;
@@ -2520,7 +2520,7 @@ internal sealed class Item : IComparable<Item>
     {
         Game = game;
         _factory = factory;
-        FactoryItemCharacteristics = factory.GenerateItemCharacteristics();
+        FactoryItemCharacteristics = factory.ItemEnhancement.GenerateItemCharacteristics();
 
         StackCount = 1;
 

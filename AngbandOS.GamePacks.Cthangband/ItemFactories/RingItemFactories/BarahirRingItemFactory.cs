@@ -18,7 +18,7 @@ public class BarahirRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 65000;
-    public override bool InstaArt => true;
+    public override string? ItemEnhancementBindingKey => nameof(InstantArtifactItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;

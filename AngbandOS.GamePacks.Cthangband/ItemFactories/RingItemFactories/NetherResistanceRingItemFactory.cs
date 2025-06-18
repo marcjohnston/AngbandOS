@@ -18,14 +18,12 @@ public class NetherResistanceRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 14500;
-    public override bool EasyKnow => true;
-    public override bool HoldLife => true;
+    public override string? ItemEnhancementBindingKey => nameof(ResistNetherItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 34;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (34, 2)
     };
-    public override bool ResNether => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

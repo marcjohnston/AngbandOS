@@ -29,8 +29,8 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    protected override string? BonusDexterityRollExpression => "3";
-    protected override string? BonusStealthRollExpression => "3";
+    public override string? BonusDexterityRollExpression => "3";
+    public override string? BonusStealthRollExpression => "3";
     public override int Rarity => 8;
     public override bool Regen => true;
     public override bool ResAcid => true;

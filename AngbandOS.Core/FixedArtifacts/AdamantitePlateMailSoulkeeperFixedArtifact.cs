@@ -28,7 +28,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 75;
-    protected override string? BonusConstitutionRollExpression => "2";
+    public override string? BonusConstitutionRollExpression => "2";
     public override int Rarity => 9;
     public override bool ResAcid => true;
     public override bool ResChaos => true;

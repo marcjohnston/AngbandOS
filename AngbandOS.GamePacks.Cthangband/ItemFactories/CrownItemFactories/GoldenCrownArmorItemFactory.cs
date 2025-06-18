@@ -26,7 +26,7 @@ public class GoldenCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Golden Crown~";
-    public override bool IgnoreAcid => true;
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

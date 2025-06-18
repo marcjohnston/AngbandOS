@@ -36,7 +36,7 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusIntelligenceRollExpression => "2";
+    public override string? BonusIntelligenceRollExpression => "2";
     public override int Rarity => 15;
     public override bool ResCold => true;
     public override bool ResFire => true;

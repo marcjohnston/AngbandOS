@@ -18,13 +18,12 @@ public class NexusResistanceRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 3000;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(ResistNexusItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 24;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (24, 2)
     };
-    public override bool ResNexus => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

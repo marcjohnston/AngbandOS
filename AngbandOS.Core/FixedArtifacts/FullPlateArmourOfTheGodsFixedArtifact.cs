@@ -27,7 +27,7 @@ internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    protected override string? BonusConstitutionRollExpression => "1";
+    public override string? BonusConstitutionRollExpression => "1";
     public override int Rarity => 3;
     public override bool ResAcid => true;
     public override bool ResCold => true;

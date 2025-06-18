@@ -31,7 +31,6 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 2;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool EasyKnow => true;
     public override string? DescriptionSyntax => "Wooden Torch~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
@@ -41,11 +40,7 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     public override int InitialTurnsOfLight => 4000;
     public override int Weight => 30;
     public override string? RefillScriptBindingKey => nameof(SystemScriptsEnum.RefillLightSourceFromTorchScript);
-
-    /// <summary>
-    /// Returns a radius of 1 for a wooden torch.
-    /// </summary>
-    public override int Radius => 1;
+    public override string? ItemEnhancementBindingKey => nameof(Radius1EasyKnowArtifactItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(LightSourcesItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.LightsourceWieldSlot) };

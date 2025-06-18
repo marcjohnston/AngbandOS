@@ -28,7 +28,7 @@ public class ShardOfPotteryJunkItemFactory : ItemFactoryGameConfiguration
     public override int Weight => 5;
     public override string ItemClassBindingKey => nameof(JunkItemClass);
     public override int PackSort => 38;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
     public override string BreakageChanceProbabilityExpression => "100/100";
     public override bool HatesAcid => true;
 }

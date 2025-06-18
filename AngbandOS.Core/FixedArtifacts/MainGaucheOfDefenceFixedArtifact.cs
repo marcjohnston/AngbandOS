@@ -41,9 +41,9 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 15;
-    protected override string? BonusDexterityRollExpression => "3";
-    protected override string? BonusIntelligenceRollExpression => "3";
-    protected override string? BonusSpeedRollExpression => "3";
+    public override string? BonusDexterityRollExpression => "3";
+    public override string? BonusIntelligenceRollExpression => "3";
+    public override string? BonusSpeedRollExpression => "3";
     public override int Rarity => 30;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;

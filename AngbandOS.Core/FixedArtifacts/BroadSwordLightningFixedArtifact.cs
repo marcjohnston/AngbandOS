@@ -41,7 +41,7 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusSearchRollExpression => "4";
+    public override string? BonusSearchRollExpression => "4";
     public override int Rarity => 90;
     public override bool ResElec => true;
     public override bool ResFear => true;

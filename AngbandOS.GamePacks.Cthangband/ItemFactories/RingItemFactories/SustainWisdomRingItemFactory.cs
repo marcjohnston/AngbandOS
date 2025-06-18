@@ -18,13 +18,12 @@ public class SustainWisdomRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 600;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(SustainWisdomItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (30, 1)
     };
-    public override bool SustWis => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

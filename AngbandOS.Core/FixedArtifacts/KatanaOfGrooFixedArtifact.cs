@@ -30,9 +30,9 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    protected override string? BonusAttacksRollExpression => "3";
-    protected override string? BonusDexterityRollExpression => "3";
-    protected override string? BonusSpeedRollExpression => "3";
+    public override string? BonusAttacksRollExpression => "3";
+    public override string? BonusDexterityRollExpression => "3";
+    public override string? BonusSpeedRollExpression => "3";
     public override int Rarity => 25;
     public override bool ShowMods => true;
     public override bool Speed => true;

@@ -22,19 +22,12 @@ public class DragonShieldItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Shield";
 
-    /// <summary>
-    /// Returns a treasure rating of 5 for a shield of dragon scale mail.
-    /// </summary>
-    public override int TreasureRating => 5;
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsTreasureItemFactoryItemEnhancement);
     public override int ArmorClass => 8;
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
     public override string? DescriptionSyntax => "Dragon Shield~";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

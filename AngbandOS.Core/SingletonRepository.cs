@@ -728,15 +728,20 @@ internal class SingletonRepository
         string typeName = typeof(T).Name;
         if (entityConfigurations != null)
         {
-            ConstructorInfo[] constructors = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
-            if (constructors.Length != 1)
+            ConstructorInfo? constructor = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+                .SingleOrDefault(_constructor =>
+                {
+                    ParameterInfo[] parameters = _constructor.GetParameters();
+                    return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration);
+                });
+            if (constructor is null)
             {
-                throw new Exception($"Invalid number of constructors {constructors.Length} for {typeof(TGeneric)}.  Expecting exactly one public (Game, {typeof(TConfiguration).Name})");
+                throw new Exception($"Cannot find constructor for {typeof(TGeneric).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
             }
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
                 // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
-                TGeneric entity = (TGeneric)constructors[0].Invoke(new object[] { Game, entityConfiguration });
+                TGeneric entity = (TGeneric)constructor.Invoke(new object[] { Game, entityConfiguration });
                 RegisterSingleton(entity);
             }
         }

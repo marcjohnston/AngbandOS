@@ -26,7 +26,7 @@ public class WoodenArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
         (3, 1),
         (15, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 2;
     public override string ItemClassBindingKey => nameof(ArrowsItemClass);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

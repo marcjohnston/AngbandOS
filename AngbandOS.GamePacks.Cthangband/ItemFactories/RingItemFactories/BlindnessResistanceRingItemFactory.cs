@@ -18,13 +18,12 @@ public class BlindnessResistanceRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 7500;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(ResistBlindnessItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (60, 2)
     };
-    public override bool ResBlind => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

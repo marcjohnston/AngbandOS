@@ -18,14 +18,12 @@ public class TeleportationRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 250;
-    public override bool IsCursed => true;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(TeleportationItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (5, 1)
     };
-    public override bool Teleport => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

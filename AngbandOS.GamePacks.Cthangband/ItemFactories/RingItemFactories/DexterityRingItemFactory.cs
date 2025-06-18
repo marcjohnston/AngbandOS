@@ -25,8 +25,7 @@ public class DexterityRingItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int Cost => 500;
-    public override bool Dex => true;
-    public override bool HideType => true;
+    public override string? ItemEnhancementBindingKey => nameof(DexterityItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

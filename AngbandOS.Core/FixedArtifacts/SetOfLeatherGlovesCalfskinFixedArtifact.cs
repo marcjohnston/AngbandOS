@@ -29,8 +29,8 @@ internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    protected override string? BonusConstitutionRollExpression => "2";
-    protected override string? BonusStrengthRollExpression => "2";
+    public override string? BonusConstitutionRollExpression => "2";
+    public override string? BonusStrengthRollExpression => "2";
     public override int Rarity => 6;
     public override bool ShowMods => true;
     public override bool Str => true;

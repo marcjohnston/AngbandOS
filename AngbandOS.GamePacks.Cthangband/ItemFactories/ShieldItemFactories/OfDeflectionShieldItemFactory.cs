@@ -26,7 +26,7 @@ public class OfDeflectionShieldItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool IgnoreAcid => true;
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 70;
     public override string? DescriptionSyntax => "Shield~ of Deflection";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

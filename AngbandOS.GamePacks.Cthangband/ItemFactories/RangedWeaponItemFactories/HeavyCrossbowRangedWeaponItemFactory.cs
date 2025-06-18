@@ -22,7 +22,7 @@ public class HeavyCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (30, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 200;
     public override int MissileDamageMultiplier => 4;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]

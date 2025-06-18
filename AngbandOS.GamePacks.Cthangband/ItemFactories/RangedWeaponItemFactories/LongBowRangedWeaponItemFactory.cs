@@ -22,7 +22,7 @@ public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 40;
     public override int MissileDamageMultiplier => 3;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]

@@ -37,8 +37,8 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    protected override string? BonusCharismaRollExpression => "3";
-    protected override string? BonusDexterityRollExpression => "3";
+    public override string? BonusCharismaRollExpression => "3";
+    public override string? BonusDexterityRollExpression => "3";
     public override int Rarity => 90;
     public override bool ResAcid => true;
     public override bool ResCold => true;

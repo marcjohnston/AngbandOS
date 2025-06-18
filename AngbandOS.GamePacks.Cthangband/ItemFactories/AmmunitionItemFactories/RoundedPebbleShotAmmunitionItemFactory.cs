@@ -24,7 +24,7 @@ public class RoundedPebbleShotAmmunitionItemFactory : ItemFactoryGameConfigurati
     public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax => "Rounded Pebble~";
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 4;
     public override string ItemClassBindingKey => nameof(ShotsItemClass);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

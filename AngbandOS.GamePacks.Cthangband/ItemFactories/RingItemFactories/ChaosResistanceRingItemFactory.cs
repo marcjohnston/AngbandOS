@@ -18,14 +18,12 @@ public class ChaosResistanceRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 13000;
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(ResistChaosItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 2)
     };
-    public override bool ResChaos => true;
-    public override bool ResConf => true;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 

@@ -18,8 +18,7 @@ public class LevitationRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 200;
-    public override bool EasyKnow => true;
-    public override bool Feather => true;
+    public override string? ItemEnhancementBindingKey => nameof(FeatherFallItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

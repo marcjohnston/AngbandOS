@@ -33,7 +33,7 @@ public class PieceOfDwarfBreadFoodItemFactory : ItemFactoryGameConfiguration
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatDwarfBreadScript);
     public override string ItemClassBindingKey => nameof(FoodItemClass);
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

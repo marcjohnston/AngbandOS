@@ -30,8 +30,7 @@ public class ShadowCloakItemFactory : ItemFactoryGameConfiguration
     {
         (75, 5)
     };
-    public override bool ResDark => true;
-    public override bool ResLight => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShadowCloakItemFactoryItemEnhancement);
     public override int BonusArmorClass => 4;
     public override int Weight => 5;
 

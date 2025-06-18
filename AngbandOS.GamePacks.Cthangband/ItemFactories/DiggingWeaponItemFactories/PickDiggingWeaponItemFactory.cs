@@ -23,8 +23,7 @@ public class PickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
         (10, 16)
     };
     public override int InitialBonusTunnel => 1;
-    public override bool ShowMods => true;
-    public override bool Tunnel => true;
+    public override string? ItemEnhancementBindingKey => nameof(TunnellingItemFactoryItemEnhancement);
     public override int Weight => 150;
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);

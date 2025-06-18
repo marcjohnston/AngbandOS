@@ -28,9 +28,9 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Infra => true;
     public override int Level => 15;
-    protected override string? BonusInfravisionRollExpression => "3";
-    protected override string? BonusSpeedRollExpression => "3";
-    protected override string? BonusStealthRollExpression => "3";
+    public override string? BonusInfravisionRollExpression => "3";
+    public override string? BonusSpeedRollExpression => "3";
+    public override string? BonusStealthRollExpression => "3";
     public override int Rarity => 12;
     public override bool ResCold => true;
     public override bool ResDark => true;

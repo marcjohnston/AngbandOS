@@ -31,7 +31,7 @@ public class IronSpikeItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string MakeObjectCountExpression => "6d7";
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
     public override bool CanSpikeDoorClosed => true;
     public override int PackSort => 37;
 }

@@ -41,8 +41,8 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusDexterityRollExpression => "2";
-    protected override string? BonusStrengthRollExpression => "2";
+    public override string? BonusDexterityRollExpression => "2";
+    public override string? BonusStrengthRollExpression => "2";
     public override int Rarity => 15;
     public override bool ResLight => true;
     public override bool SeeInvis => true;

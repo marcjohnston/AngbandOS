@@ -26,9 +26,7 @@ public class StupidityRingItemFactory : ItemFactoryGameConfiguration
     {
         (null, null, new string[] { nameof(SystemScriptsEnum.BrokenAndCursedEnchantmentScript), nameof(SystemScriptsEnum.PoorIntelligence5BP1EnchantmentScript) })
     };
-    public override bool IsCursed => true;
-    public override bool HideType => true;
-    public override bool Int => true;
+    public override string? ItemEnhancementBindingKey => nameof(StupidityItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

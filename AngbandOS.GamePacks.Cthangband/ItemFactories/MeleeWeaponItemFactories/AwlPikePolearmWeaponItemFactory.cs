@@ -22,7 +22,7 @@ public class AwlPikePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 160;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

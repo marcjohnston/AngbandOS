@@ -18,7 +18,7 @@ public class NenyaRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 200000;
-    public override bool InstaArt => true;
+    public override string? ItemEnhancementBindingKey => nameof(InstantArtifactItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 90;
     public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;

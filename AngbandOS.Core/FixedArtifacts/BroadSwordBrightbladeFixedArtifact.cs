@@ -44,7 +44,7 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusSearchRollExpression => "1";
+    public override string? BonusSearchRollExpression => "1";
     public override int Rarity => 20;
     public override bool ResFire => true;
     public override bool ResLight => true;

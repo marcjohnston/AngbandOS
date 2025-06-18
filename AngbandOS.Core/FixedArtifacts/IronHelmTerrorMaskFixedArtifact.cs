@@ -51,9 +51,9 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
     public override bool Int => true;
     public override int Level => 20;
     public override bool NoMagic => true;
-    protected override string? BonusIntelligenceRollExpression => "-1";
-    protected override string? BonusSearchRollExpression => "-1";
-    protected override string? BonusWisdomRollExpression => "-1";
+    public override string? BonusIntelligenceRollExpression => "-1";
+    public override string? BonusSearchRollExpression => "-1";
+    public override string? BonusWisdomRollExpression => "-1";
     public override int Rarity => 5;
     public override bool ResAcid => true;
     public override bool ResCold => true;

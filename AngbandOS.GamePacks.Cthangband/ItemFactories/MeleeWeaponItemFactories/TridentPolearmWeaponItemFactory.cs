@@ -22,7 +22,7 @@ public class TridentPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 70;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

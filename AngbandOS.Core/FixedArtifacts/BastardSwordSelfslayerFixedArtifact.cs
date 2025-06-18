@@ -32,7 +32,7 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool KillDragon => true;
     public override int Level => 30;
-    protected override string? BonusConstitutionRollExpression => "5";
+    public override string? BonusConstitutionRollExpression => "5";
     public override int Rarity => 15;
     public override bool ResDisen => true;
     public override bool ShowMods => true;

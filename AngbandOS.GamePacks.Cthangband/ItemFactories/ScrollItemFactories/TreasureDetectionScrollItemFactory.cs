@@ -37,7 +37,7 @@ public class TreasureDetectionScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override bool EasyKnow => true;
+    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

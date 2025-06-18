@@ -24,7 +24,7 @@ public class ExtraAttacksRingItemFactory : ItemFactoryGameConfiguration
         (new int[] {0, 1, 2}, null, new string[] { nameof(SystemScriptsEnum.BonusAttacks3BEnchantmentScript) })
     };
 
-    public override bool Blows => true;
+    public override string? ItemEnhancementBindingKey => nameof(ExtraAttacksItemFactoryItemEnhancement);
     public override int Cost => 100000;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

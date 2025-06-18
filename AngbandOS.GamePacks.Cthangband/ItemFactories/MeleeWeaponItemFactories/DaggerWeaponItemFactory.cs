@@ -24,7 +24,7 @@ public class DaggerWeaponItemFactory : ItemFactoryGameConfiguration
         (10, 1),
         (20, 1)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 12;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

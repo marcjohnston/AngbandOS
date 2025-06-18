@@ -44,13 +44,13 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 
     public override bool NoTele => true;
     public override bool PermaCurse => true;
-    protected override string? BonusCharismaRollExpression => "125";
-    protected override string? BonusConstitutionRollExpression => "125";
-    protected override string? BonusDexterityRollExpression => "125";
-    protected override string? BonusIntelligenceRollExpression => "125";
-    protected override string? BonusInfravisionRollExpression => "125";
-    protected override string? BonusStrengthRollExpression => "125";
-    protected override string? BonusWisdomRollExpression => "125";
+    public override string? BonusCharismaRollExpression => "125";
+    public override string? BonusConstitutionRollExpression => "125";
+    public override string? BonusDexterityRollExpression => "125";
+    public override string? BonusIntelligenceRollExpression => "125";
+    public override string? BonusInfravisionRollExpression => "125";
+    public override string? BonusStrengthRollExpression => "125";
+    public override string? BonusWisdomRollExpression => "125";
     public override int Rarity => 1;
     public override bool ResAcid => true;
     public override bool ResCold => true;

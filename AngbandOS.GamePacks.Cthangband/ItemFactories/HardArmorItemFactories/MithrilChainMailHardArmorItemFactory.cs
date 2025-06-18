@@ -27,7 +27,7 @@ public class MithrilChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Mithril Chain Mail~";
-    public override bool IgnoreAcid => true;
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

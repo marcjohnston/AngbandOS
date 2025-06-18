@@ -18,10 +18,7 @@ public class OrbLightSourceItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Orb";
 
-    /// <summary>
-    /// Returns a radius of 2 for an orb of light.
-    /// </summary>
-    public override int Radius => 4;
+    public override string? ItemEnhancementBindingKey => nameof(Radius4LightItemFactoryItemEnhancement);
 
     public override bool IdentityCanBeSensed => true;
     public override int Cost => 1000;

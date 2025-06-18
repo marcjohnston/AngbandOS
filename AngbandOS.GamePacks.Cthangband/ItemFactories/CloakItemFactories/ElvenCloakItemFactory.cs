@@ -36,17 +36,12 @@ public class ElvenCloakItemFactory : ItemFactoryGameConfiguration
     public override int ArmorClass => 4;
     public override int Cost => 1500;
     public override string? DescriptionSyntax => "Elven Cloak~";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override string? ItemEnhancementBindingKey => nameof(ElvenCloakItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (30, 4)
     };
-    public override bool Search => true;
-    public override bool Stealth => true;
     public override int BonusArmorClass => 4;
     public override int Weight => 5;
 

@@ -18,7 +18,7 @@ public class MultiHuedDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    public override string? ActivationName => nameof(ActivationsEnum.BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225DirectionalActivation);
+    public override string? ItemEnhancementBindingKey => nameof(MultiHuedDragonItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Multi-Hued Dragon Scale Mail";
@@ -27,28 +27,15 @@ public class MultiHuedDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Multi-Hued Dragon Scale Mail~";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (100, 16)
     };
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
-    public override bool ResPois => true;
     public override int BonusArmorClass => 10;
     public override int BonusHit => -2;
     public override int Weight => 200;
 
-    /// <summary>
-    /// Returns a treasure rating of 30 for dragon scale mail items.
-    /// </summary>
-    public override int TreasureRating => 30;
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 19;

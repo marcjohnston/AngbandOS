@@ -22,7 +22,7 @@ public class ScytheOfSlicingPolearmWeaponItemFactory : ItemFactoryGameConfigurat
     {
         (60, 4)
     };
-    public override bool ShowMods => true;
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
     public override int Weight => 250;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

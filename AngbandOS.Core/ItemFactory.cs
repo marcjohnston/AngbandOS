@@ -11,10 +11,18 @@ namespace AngbandOS.Core;
 /// properties are modifiable.
 /// </summary>
 [Serializable]
-internal abstract class ItemFactory : ItemEnhancement
+internal abstract class ItemFactory : IGetKey
 {
+    protected readonly Game Game;
+    protected virtual string? ItemEnhancementBindingKey { get; } = null;
+    public ItemEnhancement ItemEnhancement { get; private set; }
+    public virtual string Key { get; }
+    public string GetKey => Key;
     #region Constructors
-    protected ItemFactory(Game game) : base(game) { }
+    protected ItemFactory(Game game)
+    {
+        Game = game;
+    }
     #endregion
 
     #region State Data - Read/write fields.
@@ -91,123 +99,12 @@ internal abstract class ItemFactory : ItemEnhancement
     #endregion
 
     #region Concrete Methods and Properties (Non-abstract and non-virtual) - API Object Functionality
-    public override string ToJson()
+    public string ToJson()
     {
         ItemFactoryGameConfiguration itemFactoryGameConfiguration = new ItemFactoryGameConfiguration()
         {
-            Key = Key,
-            ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
-            AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
-            Value = Value,
-            FriendlyName = FriendlyName,
-            BonusStrengthRollExpression = BonusStrengthRollExpression,
-            BonusIntelligenceRollExpression = BonusIntelligenceRollExpression,
-            BonusWisdomRollExpression = BonusWisdomRollExpression,
-            BonusDexterityRollExpression = BonusDexterityRollExpression,
-            BonusConstitutionRollExpression = BonusConstitutionRollExpression,
-            BonusCharismaRollExpression = BonusCharismaRollExpression,
-            BonusStealthRollExpression = BonusStealthRollExpression,
-            BonusSearchRollExpression = BonusSearchRollExpression,
-            BonusInfravisionRollExpression = BonusInfravisionRollExpression,
-            BonusTunnelRollExpression = BonusTunnelRollExpression,
-            BonusAttacksRollExpression = BonusAttacksRollExpression,
-            BonusSpeedRollExpression = BonusSpeedRollExpression,
-            BonusArmorClassRollExpression = BonusArmorClassRollExpression,
-            BonusDamageRollExpression = BonusDamageRollExpression,
-            BonusHitRollExpression = BonusHitRollExpression,
-            ActivationName = ActivationName,
-            Aggravate = Aggravate,
-            AntiTheft = AntiTheft,
-            ArtifactBiasWeightedRandomBindingKey = ArtifactBiasWeightedRandomBindingKey,
-            Blessed = Blessed,
-            Blows = Blows,
-            BrandAcid = BrandAcid,
-            BrandCold = BrandCold,
-            BrandElec = BrandElec,
-            BrandFire = BrandFire,
-            BrandPois = BrandPois,
-            Cha = Cha,
-            Chaotic = Chaotic,
-            Con = Con,
-            IsCursed = IsCursed,
-            Dex = Dex,
-            DrainExp = DrainExp,
-            DreadCurse = DreadCurse,
-            EasyKnow = EasyKnow,
-            Feather = Feather,
-            FreeAct = FreeAct,
-            HeavyCurse = HeavyCurse,
-            HideType = HideType,
-            HoldLife = HoldLife,
-            IgnoreAcid = IgnoreAcid,
-            IgnoreCold = IgnoreCold,
-            IgnoreElec = IgnoreElec,
-            IgnoreFire = IgnoreFire,
-            ImAcid = ImAcid,
-            ImCold = ImCold,
-            ImElec = ImElec,
-            ImFire = ImFire,
-            Impact = Impact,
-            Infra = Infra,
-            InstaArt = InstaArt,
-            Int = Int,
-            KillDragon = KillDragon,
-            NoMagic = NoMagic,
-            NoTele = NoTele,
-            PermaCurse = PermaCurse,
-            Radius = Radius,
-            Reflect = Reflect,
-            Regen = Regen,
-            ResAcid = ResAcid,
-            ResBlind = ResBlind,
-            ResChaos = ResChaos,
-            ResCold = ResCold,
-            ResConf = ResConf,
-            ResDark = ResDark,
-            ResDisen = ResDisen,
-            ResElec = ResElec,
-            ResFear = ResFear,
-            ResFire = ResFire,
-            ResLight = ResLight,
-            ResNether = ResNether,
-            ResNexus = ResNexus,
-            ResPois = ResPois,
-            ResShards = ResShards,
-            ResSound = ResSound,
-            Search = Search,
-            SeeInvis = SeeInvis,
-            ShElec = ShElec,
-            ShFire = ShFire,
-            ShowMods = ShowMods,
-            SlayAnimal = SlayAnimal,
-            SlayDemon = SlayDemon,
-            SlayDragon = SlayDragon,
-            SlayEvil = SlayEvil,
-            SlayGiant = SlayGiant,
-            SlayOrc = SlayOrc,
-            SlayTroll = SlayTroll,
-            SlayUndead = SlayUndead,
-            SlowDigest = SlowDigest,
-            Speed = Speed,
-            Stealth = Stealth,
-            Str = Str,
-            SustCha = SustCha,
-            SustCon = SustCon,
-            SustDex = SustDex,
-            SustInt = SustInt,
-            SustStr = SustStr,
-            SustWis = SustWis,
-            Telepathy = Telepathy,
-            Teleport = Teleport,
-            TreasureRating = TreasureRating,
-            Tunnel = Tunnel,
-            Vampiric = Vampiric,
-            Vorpal = Vorpal,
-            Wis = Wis,
-            Wraith = Wraith,
-            XtraMight = XtraMight,
-            XtraShots = XtraShots,
-
+            Key = Key,           
+            ItemEnhancementBindingKey = ItemEnhancementBindingKey,
             PreassignedItemFlavorBindingKey = PreassignedItemFlavorBindingKey,
             NegativeBonusDamageRepresentsBroken = NegativeBonusDamageRepresentsBroken,
             NegativeBonusArmorClassRepresentsBroken = NegativeBonusArmorClassRepresentsBroken,
@@ -395,9 +292,12 @@ internal abstract class ItemFactory : ItemEnhancement
         ProcessWorld(item);
     }
 
-    public override void Bind()
+    public void Bind()
     {
-        base.Bind();
+        // TODO: We require an object but not from the game config
+        ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
+        ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
+
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -563,11 +463,12 @@ internal abstract class ItemFactory : ItemEnhancement
     /// <returns></returns>
     public string GetDetailedDescription(Item item)
     {
+        RoItemPropertySet effectiveItemProperties = item.GetEffectiveItemProperties();
         string s = "";
         if (IsRangedWeapon)
         {
             int power = MissileDamageMultiplier;
-            if (XtraMight)
+            if (effectiveItemProperties.XtraMight)
             {
                 power++;
             }
@@ -621,7 +522,7 @@ internal abstract class ItemFactory : ItemEnhancement
         {
             if (item.IsKnown())
             {
-                if (ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
+                if (effectiveItemProperties.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
                 }
@@ -646,7 +547,7 @@ internal abstract class ItemFactory : ItemEnhancement
         {
             if (item.IsKnown())
             {
-                if (ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
+                if (effectiveItemProperties.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
                 }
@@ -705,6 +606,8 @@ internal abstract class ItemFactory : ItemEnhancement
     /// <returns></returns>
     public string GetVerboseDescription(Item item)
     {
+        RoItemPropertySet effectiveItemProperties = item.GetEffectiveItemProperties();
+
         string s = "";
         if (item.IsKnown() && AimingBindingTuple != null)
         {
@@ -722,7 +625,7 @@ internal abstract class ItemFactory : ItemEnhancement
             if (commonBonusValue.HasValue && commonBonusValue.Value.bonusValue != 0)
             {
                 s += $" ({GetSignedValue(commonBonusValue.Value.bonusValue)}";
-                if (!HideType && commonBonusValue.Value.priorityBonusName != "")
+                if (!effectiveItemProperties.HideType && commonBonusValue.Value.priorityBonusName != "")
                 {
                     s += $" {commonBonusValue.Value.priorityBonusName}";
                 }

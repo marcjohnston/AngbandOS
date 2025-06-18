@@ -26,20 +26,13 @@ public class DoomAmuletItemFactory : ItemFactoryGameConfiguration
     {
         (null, null, new string[] { nameof(SystemScriptsEnum.BrokenAndCursedEnchantmentScript),  nameof(SystemScriptsEnum.PoorStatsEnchantmentScript), nameof(SystemScriptsEnum.PoorArmorClass1D5B5EnchantmentScript) })
     };
-    public override bool Cha => true;
-    public override bool Con => true;
-    public override bool IsCursed => true;
-    public override bool Dex => true;
-    public override bool HideType => true;
-    public override bool Int => true;
+    public override string? ItemEnhancementBindingKey => nameof(DoomItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 1)
     };
-    public override bool Str => true;
     public override int Weight => 3;
-    public override bool Wis => true;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

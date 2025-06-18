@@ -30,8 +30,8 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    protected override string? BonusConstitutionRollExpression => "3";
-    protected override string? BonusWisdomRollExpression => "3";
+    public override string? BonusConstitutionRollExpression => "3";
+    public override string? BonusWisdomRollExpression => "3";
     public override int Rarity => 15;
     public override bool ShowMods => true;
     public override bool SlayDragon => true;

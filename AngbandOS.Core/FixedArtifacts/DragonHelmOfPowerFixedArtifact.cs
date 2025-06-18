@@ -38,9 +38,9 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
     /// </summary>
     public override int Radius => 3;
 
-    protected override string? BonusConstitutionRollExpression => "4";
-    protected override string? BonusDexterityRollExpression => "4";
-    protected override string? BonusStrengthRollExpression => "4";
+    public override string? BonusConstitutionRollExpression => "4";
+    public override string? BonusDexterityRollExpression => "4";
+    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 12;
     public override bool ResAcid => true;
     public override bool ResBlind => true;

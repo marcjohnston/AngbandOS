@@ -26,17 +26,13 @@ public class WoeRingItemFactory : ItemFactoryGameConfiguration
     {
         (null, null, new string[] { nameof(SystemScriptsEnum.BrokenAndCursedEnchantmentScript), nameof(SystemScriptsEnum.PoorCharismaAndWisdom5BP1EnchantmentScript), nameof(SystemScriptsEnum.PoorArmorClass10BP5EnchantmentScript) })
     };
-    public override bool Cha => true;
-    public override bool IsCursed => true;
-    public override bool HideType => true;
+    public override string? ItemEnhancementBindingKey => nameof(WoeItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 1)
     };
-    public override bool Teleport => true;
     public override int Weight => 2;
-    public override bool Wis => true;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

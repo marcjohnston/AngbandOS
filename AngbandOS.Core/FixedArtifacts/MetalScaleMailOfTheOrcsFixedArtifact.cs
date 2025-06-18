@@ -36,8 +36,8 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 40;
-    protected override string? BonusCharismaRollExpression => "4";
-    protected override string? BonusStrengthRollExpression => "4";
+    public override string? BonusCharismaRollExpression => "4";
+    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 3;
     public override bool ResAcid => true;
     public override bool ResCold => true;
