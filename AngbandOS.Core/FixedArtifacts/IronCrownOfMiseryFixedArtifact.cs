@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 {
     private IronCrownOfMiseryFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(IronCrownArmorItemFactory);
 

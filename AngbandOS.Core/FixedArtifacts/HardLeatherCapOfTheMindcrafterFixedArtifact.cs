@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 {
     private HardLeatherCapOfTheMindcrafterFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(HardLeatherCapHelmItemFactory);
 

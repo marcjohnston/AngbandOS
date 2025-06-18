@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
 {
     private MainGaucheOfDefenceFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(MainGaucheWeaponItemFactory);
 

@@ -61,8 +61,6 @@ internal abstract class FixedArtifact : ItemEnhancement
     /// </summary>
     public abstract int Ac { get; } // TODO: Need to convert this to an enhancement
 
-    public override int TreasureRating => 10; // TODO: Need to convert this to an enhancement
-
     /// <summary>
     /// Overrides the BaseItemFactory Cost
     /// </summary>

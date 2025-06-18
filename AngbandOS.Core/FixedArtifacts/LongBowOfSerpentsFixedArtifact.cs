@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
 {
     private LongBowOfSerpentsFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(LongBowRangedWeaponItemFactory);
 

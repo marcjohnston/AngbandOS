@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
 {
     private StarEssenceOfPolarisFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(StarEssenceGaladrielLightSourceItemFactory);
     protected override string? ActivationName => nameof(IlluminationEvery1d10p10DirectionalActivation);

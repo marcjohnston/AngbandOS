@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfGhoulsFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
     protected override string? ActivationName => nameof(BoltOfFrost6d8Every1d7p7DirectionalActivation);

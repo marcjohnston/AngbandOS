@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfXothFixedArtifact : FixedArtifact
 {
     private StarEssenceOfXothFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(StarEssenceElendilLightSourceItemFactory);
     protected override string? ActivationName => nameof(MagicMappingAndIlluminationEvery1d50p50DirectionalActivation);

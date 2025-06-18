@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact
 {
     private SetOfLeatherGlovesOfLightFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(LeatherGlovesItemFactory);
     protected override string? ActivationName => nameof(MagicMissile2d6Every2DirectionalActivation);

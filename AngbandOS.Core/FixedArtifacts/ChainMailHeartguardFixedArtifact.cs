@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 {
     private ChainMailHeartguardFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(ChainMailHardArmorItemFactory);
 

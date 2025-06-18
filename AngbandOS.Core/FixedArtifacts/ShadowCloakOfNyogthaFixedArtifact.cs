@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfNyogthaFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
     protected override string? ActivationName => nameof(RestoreLifeLevelsEvery450DirectionalActivation);

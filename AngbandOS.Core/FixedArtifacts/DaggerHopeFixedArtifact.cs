@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerHopeFixedArtifact : FixedArtifact
 {
     private DaggerHopeFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 

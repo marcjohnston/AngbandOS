@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PikeOfTepesFixedArtifact : FixedArtifact
 {
     private PikeOfTepesFixedArtifact(Game game) : base(game) { }
+    public override int TreasureRating => 10;
 
     protected override string BaseItemFactoryName => nameof(PikePolearmWeaponItemFactory);
 
