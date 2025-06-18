@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
 {
     private BroadSwordBlackIceFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(BroadSwordBlackIceFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
 
@@ -29,30 +29,12 @@ internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Broad Sword 'Black Ice'";
     public override int Ac => 0;
-    public override bool BrandCold => true;
     public override int Cost => 40000;
     public override int Dd => 2;
     public override int Ds => 5;
-    public override string FriendlyName => "'Black Ice'";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 20;
 
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a broad sword which provides no light.
-    /// </summary>
-    public override int Radius => 3;
-
-    public override string? BonusStealthRollExpression => "3";
     public override int Rarity => 20;
-    public override bool ResCold => true;
-    public override bool ShowMods => true;
-    public override bool SlayEvil => true;
-    public override bool SlayOrc => true;
-    public override bool SlowDigest => true;
-    public override bool Stealth => true;
     public override int ToA => 0;
     public override int ToD => 15;
     public override int ToH => 10;

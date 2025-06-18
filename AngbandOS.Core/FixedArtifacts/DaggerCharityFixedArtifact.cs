@@ -10,12 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerCharityFixedArtifact : FixedArtifact
 {
     private DaggerCharityFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(DaggerCharityFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
-    // Charity shoots a lightning bolt
-    protected override string? ActivationName => nameof(LightningBolt4d8Every6p1d6DirectionalActivation);
 
     public override void ApplyResistances(Item item)
     {
@@ -26,19 +24,11 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Charity'";
     public override int Ac => 0;
-    public override bool BrandElec => true;
     public override int Cost => 13000;
     public override int Dd => 1;
     public override int Ds => 4;
-    public override string FriendlyName => "'Charity'";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 5;
     public override int Rarity => 10;
-    public override bool ResElec => true;
-    public override bool ShowMods => true;
     public override int ToA => 0;
     public override int ToD => 6;
     public override int ToH => 4;

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
 {
     private SmallMetalShieldVitriolFixedArtifact(Game game) : base(game) { }
+    public override string? ItemEnhancementBindingKey => nameof(SmallMetalShieldVitriolFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(SmallMetalShieldItemFactory);
 
@@ -21,26 +22,11 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Small Metal Shield 'Vitriol'";
     public override int Ac => 3;
-    public override bool Con => true;
     public override int Cost => 60000;
-    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 2;
-    public override bool FreeAct => true;
-    public override string FriendlyName => "'Vitriol'";
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-    public override bool ImAcid => true;
     public override int Level => 30;
-    public override string? BonusConstitutionRollExpression => "4";
-    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 6;
-    public override bool ResChaos => true;
-    public override bool ResSound => true;
-    public override bool Str => true;
     public override int ToA => 25;
     public override int ToD => 0;
     public override int ToH => 0;

@@ -10,28 +10,17 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfGhoulsFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(SetOfGauntletsOfGhoulsFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
-    protected override string? ActivationName => nameof(BoltOfFrost6d8Every1d7p7DirectionalActivation);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Ghouls";
     public override int Ac => 2;
-    public override bool Con => true;
     public override int Cost => 33000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override string FriendlyName => "of Ghouls";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override string? BonusConstitutionRollExpression => "4";
     public override int Rarity => 20;
-    public override bool Regen => true;
-    public override bool ResCold => true;
-    public override bool SustCon => true;
     public override int ToA => 15;
     public override int ToD => 0;
     public override int ToH => 0;

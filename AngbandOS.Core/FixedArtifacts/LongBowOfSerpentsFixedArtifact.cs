@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
 {
     private LongBowOfSerpentsFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(LongBowOfSerpentsFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(LongBowRangedWeaponItemFactory);
 
@@ -31,22 +31,11 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override int Cost => 20000;
     public override int Dd => 0;
-    public override bool Dex => true;
     public override int Ds => 0;
-    public override bool FreeAct => true;
-    public override string FriendlyName => "of Serpents";
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 30;
-    public override string? BonusDexterityRollExpression => "3";
     public override int Rarity => 20;
-    public override bool ShowMods => true;
     public override int ToA => 0;
     public override int ToD => 19;
     public override int ToH => 17;
     public override int Weight => 40;
-    public override bool XtraMight => true;
 }

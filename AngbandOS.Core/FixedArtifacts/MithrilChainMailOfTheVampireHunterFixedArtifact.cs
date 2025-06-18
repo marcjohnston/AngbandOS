@@ -10,44 +10,21 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
 {
     private MithrilChainMailOfTheVampireHunterFixedArtifact(Game game) : base(game) { }
+    public override string? ItemEnhancementBindingKey => nameof(MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(MithrilChainMailHardArmorItemFactory);
 
-    // Vampire Hunter cures most ailments
-    protected override string? ActivationName => nameof(Heal777CuringAndHeroism25pd25Every300Activation);
 
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
     public override int Ac => 28;
     public override int Cost => 135000;
-    public override int TreasureRating => 20;
     public override int Dd => 1;
     public override int Ds => 4;
-    public override string FriendlyName => "of the Vampire Hunter";
-    public override bool HoldLife => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-    public override bool Int => true;
     public override int Level => 40;
-    public override string? BonusIntelligenceRollExpression => "4";
-    public override string? BonusStealthRollExpression => "4";
-    public override string? BonusWisdomRollExpression => "4";
     public override int Rarity => 3;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResDark => true;
-    public override bool ResElec => true;
-    public override bool ResFear => true;
-    public override bool ResFire => true;
-    public override bool ResNether => true;
-    public override bool ResPois => true;
-    public override bool SeeInvis => true;
-    public override bool Stealth => true;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => -1;
     public override int Weight => 150;
-    public override bool Wis => true;
 }

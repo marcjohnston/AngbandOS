@@ -10,33 +10,18 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
 {
     private AdamantitePlateMailSoulkeeperFixedArtifact(Game game) : base(game) { }
+    public override string? ItemEnhancementBindingKey => nameof(AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(AdamantitePlateMailHardArmorItemFactory);
-    protected override string? ActivationName => nameof(Heal1000Every888Activation);
+
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";
     public override int Ac => 40;
-    public override bool Con => true;
     public override int Cost => 300000;
-    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 4;
-    public override string FriendlyName => "'Soulkeeper'";
-    public override bool HoldLife => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 75;
-    public override string? BonusConstitutionRollExpression => "2";
     public override int Rarity => 9;
-    public override bool ResAcid => true;
-    public override bool ResChaos => true;
-    public override bool ResCold => true;
-    public override bool ResDark => true;
-    public override bool ResNether => true;
-    public override bool ResNexus => true;
-    public override bool SustCon => true;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => -4;

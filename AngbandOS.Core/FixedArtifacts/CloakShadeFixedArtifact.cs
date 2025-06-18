@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakShadeFixedArtifact : FixedArtifact
 {
     private CloakShadeFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(CloakShadeFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
 
@@ -21,16 +21,8 @@ internal class CloakShadeFixedArtifact : FixedArtifact
     public override int Cost => 8000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override bool FreeAct => true;
-    public override string FriendlyName => "'Shade'";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 5;
     public override int Rarity => 20;
-    public override bool ResAcid => true;
-    public override bool SeeInvis => true;
     public override int ToA => 10;
     public override int ToD => 0;
     public override int ToH => 0;

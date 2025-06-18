@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfThanosFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(SetOfGauntletsOfThanosFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
 
@@ -18,35 +18,11 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Thanos";
     public override int Ac => 2;
-    public override bool Aggravate => true;
     public override int Cost => 0;
-    public override bool IsCursed => true;
     public override int Dd => 1;
-    public override bool Dex => true;
-    public override bool DreadCurse => true;
     public override int Ds => 1;
-    public override string FriendlyName => "of Thanos";
-    public override bool HeavyCurse => true;
-    public override bool HideType => true;
-    public override bool HoldLife => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-    public override bool ImCold => true;
-    public override bool ImFire => true;
     public override int Level => 10;
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
     public override int Rarity => 20;
-    public override bool ResChaos => true;
-    public override bool ResDisen => true;
-    public override bool ResNether => true;
-    public override bool ResNexus => true;
-    public override bool ResPois => true;
-    public override bool ShowMods => true;
-    public override bool Str => true;
-    public override bool Teleport => true;
     public override int ToA => 0;
     public override int ToD => -12;
     public override int ToH => -11;

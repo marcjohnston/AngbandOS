@@ -10,12 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakShifterFixedArtifact : FixedArtifact
 {
     private CloakShifterFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(CloakShifterFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
 
-    // Shifter teleports you
-    protected override string? ActivationName => nameof(Teleport100Every45Activation);
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Shifter'";
@@ -23,16 +21,8 @@ internal class CloakShifterFixedArtifact : FixedArtifact
     public override int Cost => 11000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override string FriendlyName => "'Shifter'";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 3;
-    public override string? BonusStealthRollExpression => "3";
     public override int Rarity => 10;
-    public override bool ResAcid => true;
-    public override bool Stealth => true;
     public override int ToA => 15;
     public override int ToD => 0;
     public override int ToH => 0;

@@ -10,12 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
 {
     private LightCrossbowOfDeathFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(LightCrossbowOfDeathFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(LightCrossbowRangedWeaponItemFactory);
 
-    // Death brands your bolts
-    protected override string? ActivationName => nameof(BrandBoltsEvery999Activation);
 
     public override void ApplyResistances(Item item)
     {
@@ -36,20 +34,10 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
     public override int Cost => 50000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override string FriendlyName => "of Death";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 50;
-    public override string? BonusSpeedRollExpression => "10";
     public override int Rarity => 25;
-    public override bool ResFire => true;
-    public override bool ShowMods => true;
-    public override bool Speed => true;
     public override int ToA => 0;
     public override int ToD => 14;
     public override int ToH => 10;
     public override int Weight => 110;
-    public override bool XtraMight => true;
 }

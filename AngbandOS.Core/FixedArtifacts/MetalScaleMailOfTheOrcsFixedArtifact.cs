@@ -10,6 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
 {
     private MetalScaleMailOfTheOrcsFixedArtifact(Game game) : base(game) { }
+    public override string? ItemEnhancementBindingKey => nameof(MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(MetalScaleMailHardArmorItemFactory);
 
@@ -18,34 +19,15 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
         item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
     }
 
-    // Orc does Carnage
-    protected override string? ActivationName => nameof(GenocideEvery500Activation);
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Scale Mail of the Orcs";
     public override int Ac => 15;
-    public override bool Cha => true;
     public override int Cost => 150000;
-    public override int TreasureRating => 20;
     public override int Dd => 2;
     public override int Ds => 4;
-    public override string FriendlyName => "of the Orcs";
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 40;
-    public override string? BonusCharismaRollExpression => "4";
-    public override string? BonusStrengthRollExpression => "4";
     public override int Rarity => 3;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResDark => true;
-    public override bool ResDisen => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
-    public override bool Str => true;
     public override int ToA => 40;
     public override int ToD => 0;
     public override int ToH => -2;

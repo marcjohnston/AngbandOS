@@ -7,16 +7,40 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class FixedArtifact : ItemEnhancement
+public class FixedArtifactGameConfiguration
 {
-    protected FixedArtifact(Game game) : base(game) { }
+    public virtual string Key { get; set; } = null;
+}
 
-    public override void Bind()
+[Serializable]
+internal abstract class FixedArtifact : IGetKey
+{
+    protected readonly Game Game;
+    protected FixedArtifact(Game game)
     {
-        base.Bind();
-        BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
+        Game = game;
+//        Key = fixedArtifactGameConfiguration.Key ?? fixedArtifactGameConfiguration.GetType().Name;
     }
-    public override string Key => GetType().Name;
+
+    public void Bind()
+    {
+        BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
+        ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
+        ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
+    }
+    public string ToJson()
+    {
+        FixedArtifactGameConfiguration gameConfiguration = new FixedArtifactGameConfiguration()
+        {
+            Key = Key,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
+    }
+
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+    public ItemEnhancement ItemEnhancement { get; private set; }
+    public virtual string? ItemEnhancementBindingKey { get; } = null;
 
     /// <summary>
     /// Represents the quantity of this artifact currently in existence.  

@@ -10,31 +10,19 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AmuletOfLobonFixedArtifact : FixedArtifact
 {
     private AmuletOfLobonFixedArtifact(Game game) : base(game) { }
+    public override string? ItemEnhancementBindingKey => nameof(AmuletOfLobonFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(CarlammasAmuletItemFactory);
 
-    // Amulet of Lobon protects us from evil
-    protected override string? ActivationName => nameof(ProtectionFromEvilActivation);
 
     public override string Name => "The Amulet of Lobon";
     public override int Ac => 0;
-    public override bool Con => true;
     public override int Cost => 60000;
-    public override int TreasureRating => 20;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override string FriendlyName => "of Lobon";
     public override bool HasOwnType => true;
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-    public override bool InstaArt => true;
     public override int Level => 50;
-    public override string? BonusConstitutionRollExpression => "2";
     public override int Rarity => 10;
-    public override bool ResFire => true;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;

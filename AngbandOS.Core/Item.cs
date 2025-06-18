@@ -2204,7 +2204,7 @@ internal sealed class Item : IComparable<Item>
 
         fixedArtifact.CurNum = 1;
         FixedArtifact = fixedArtifact;
-        FixedArtifactItemCharacteristics = fixedArtifact.GenerateItemCharacteristics();
+        FixedArtifactItemCharacteristics = fixedArtifact.ItemEnhancement.GenerateItemCharacteristics();
         ArmorClass = fixedArtifact.Ac;
         DamageDice = fixedArtifact.Dd;
         DamageSides = fixedArtifact.Ds;
@@ -2221,7 +2221,7 @@ internal sealed class Item : IComparable<Item>
         {
             IsBroken = true;
         }
-        Game.TreasureRating += fixedArtifact.TreasureRating;
+        Game.TreasureRating += fixedArtifact.ItemEnhancement.TreasureRating;
         Game.SpecialTreasure = true;
         return true;
     }

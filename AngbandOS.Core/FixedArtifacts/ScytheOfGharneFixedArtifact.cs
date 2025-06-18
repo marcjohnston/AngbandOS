@@ -10,42 +10,18 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ScytheOfGharneFixedArtifact : FixedArtifact
 {
     private ScytheOfGharneFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(ScytheOfGharneFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(ScythePolearmWeaponItemFactory);
-    protected override string? ActivationName => nameof(WordOfRecallEvery200DirectionalActivation);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Scythe of G'harne";
     public override int Ac => 0;
-    public override bool BrandCold => true;
-    public override bool BrandFire => true;
-    public override bool Cha => true;
     public override int Cost => 18000;
     public override int Dd => 5;
-    public override bool Dex => true;
     public override int Ds => 3;
-    public override bool FreeAct => true;
-    public override string FriendlyName => "of G'harne";
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 40;
 
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a scythe which provides no light.
-    /// </summary>
-    public override int Radius => 3;
-
-    public override string? BonusCharismaRollExpression => "3";
-    public override string? BonusDexterityRollExpression => "3";
     public override int Rarity => 8;
-    public override bool ResCold => true;
-    public override bool ResFire => true;
-    public override bool ResLight => true;
-    public override bool SeeInvis => true;
-    public override bool ShowMods => true;
     public override int ToA => 10;
     public override int ToD => 8;
     public override int ToH => 8;

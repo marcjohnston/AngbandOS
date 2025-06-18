@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 {
     private LargeLeatherShieldRawhideFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(LargeLeatherShieldRawhideFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(LargeLeatherShieldItemFactory);
 
@@ -25,19 +25,8 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     public override int Cost => 12000;
     public override int Dd => 1;
     public override int Ds => 2;
-    public override string FriendlyName => "'Rawhide'";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 30;
     public override int Rarity => 3;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResDark => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
-    public override bool ResLight => true;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => 0;

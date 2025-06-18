@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfTheShoggothFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(ShadowCloakOfTheShoggothFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
 
@@ -21,18 +21,8 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
     public override int Cost => 35000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override bool FreeAct => true;
-    public override string FriendlyName => "of the Shoggoth";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-    public override bool ImAcid => true;
     public override int Level => 40;
-    public override string? BonusStealthRollExpression => "4";
     public override int Rarity => 40;
-    public override bool SeeInvis => true;
-    public override bool Stealth => true;
     public override int ToA => 12;
     public override int ToD => 0;
     public override int ToH => 0;

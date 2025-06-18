@@ -10,12 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
 {
     private CloakOfTheSwashbucklerFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(CloakOfTheSwashbucklerFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
 
-    // Swashbuckler recharges items
-    protected override string? ActivationName => nameof(RechargeActivation);
 
     public override void ApplyResistances(Item item)
     {
@@ -25,25 +23,11 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of the Swashbuckler";
     public override int Ac => 1;
-    public override bool Cha => true;
     public override int Cost => 35000;
     public override int Dd => 0;
-    public override bool Dex => true;
     public override int Ds => 0;
-    public override bool FreeAct => true;
-    public override string FriendlyName => "of the Swashbuckler";
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override string? BonusCharismaRollExpression => "3";
-    public override string? BonusDexterityRollExpression => "3";
     public override int Rarity => 90;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResFire => true;
     public override int ToA => 18;
     public override int ToD => 0;
     public override int ToH => 0;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
 {
     private CutlassOfBlackbeardFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(CutlassOfBlackbeardFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(CutlassWeaponItemFactory);
 
@@ -20,27 +20,9 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     public override int Ac => 0;
     public override int Cost => 28000;
     public override int Dd => 1;
-    public override bool Dex => true;
     public override int Ds => 7;
-    public override bool Feather => true;
-    public override string FriendlyName => "of Blackbeard";
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override string? BonusDexterityRollExpression => "3";
-    public override string? BonusStealthRollExpression => "3";
     public override int Rarity => 8;
-    public override bool Regen => true;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
-    public override bool SeeInvis => true;
-    public override bool ShowMods => true;
-    public override bool Stealth => true;
     public override int ToA => 0;
     public override int ToD => 11;
     public override int ToH => 10;

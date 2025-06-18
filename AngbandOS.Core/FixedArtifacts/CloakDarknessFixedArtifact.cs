@@ -10,12 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakDarknessFixedArtifact : FixedArtifact
 {
     private CloakDarknessFixedArtifact(Game game) : base(game) { }
-    public override int TreasureRating => 10;
+    public override string? ItemEnhancementBindingKey => nameof(CloakDarknessFixedArtifactItemEnhancement);
 
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
 
-    // Darkness sends monsters to sleep
-    protected override string? ActivationName => nameof(SleepActivation);
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Darkness'";
@@ -23,24 +21,10 @@ internal class CloakDarknessFixedArtifact : FixedArtifact
     public override int Cost => 13000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override string FriendlyName => "'Darkness'";
-    public override bool HideType => true;
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-    public override bool Int => true;
     public override int Level => 5;
-    public override string? BonusStealthRollExpression => "2";
-    public override string? BonusIntelligenceRollExpression => "2";
-    public override string? BonusWisdomRollExpression => "2";
     public override int Rarity => 45;
-    public override bool ResAcid => true;
-    public override bool ResDark => true;
-    public override bool Stealth => true;
     public override int ToA => 4;
     public override int ToD => 0;
     public override int ToH => 0;
     public override int Weight => 10;
-    public override bool Wis => true;
 }
