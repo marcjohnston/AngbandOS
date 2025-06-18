@@ -2271,7 +2271,7 @@ internal class Game
         Item? item = null;
 
         // Attempt to create a fixed artifact.
-        if (RandomLessThan(prob) == 0)
+        if (RandomLessThan(prob) == 0) // TODO: This should be a configurable setting
         {
             item = MakeFixedArtifact();
         }
