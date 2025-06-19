@@ -16,10 +16,10 @@ internal class Animation : IGetKey
     public Animation(Game game, AnimationGameConfiguration animationGameConfiguration) 
     {
         Game = game;
+        Key = animationGameConfiguration.Key ?? animationGameConfiguration.GetType().Name;
         AlternateColor = animationGameConfiguration.AlternateColor;
         Character = animationGameConfiguration.Character;
         Color = animationGameConfiguration.Color;
-        Key = animationGameConfiguration.Key ?? animationGameConfiguration.GetType().Name;
         Name = animationGameConfiguration.Name;
         Sequence = animationGameConfiguration.Sequence;
     }

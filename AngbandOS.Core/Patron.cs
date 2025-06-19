@@ -7,12 +7,17 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Patron : IGetKey
+internal class Patron : IGetKey
 {
     protected readonly Game Game;
-    protected Patron(Game game)
+    public Patron(Game game, PatronGameConfiguration patronGameConfiguration)
     {
         Game = game;
+        Key = patronGameConfiguration.Key ?? patronGameConfiguration.GetType().Name;
+        LongName = patronGameConfiguration.LongName;
+        PreferredAbilityBindingKey = patronGameConfiguration.PreferredAbilityBindingKey;
+        RewardBindingKeys = patronGameConfiguration.RewardBindingKeys;
+        ShortName = patronGameConfiguration.ShortName;
     }
 
     /// <summary>
@@ -21,20 +26,34 @@ internal abstract class Patron : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        PatronGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            LongName = LongName,
+            PreferredAbilityBindingKey = PreferredAbilityBindingKey,
+            RewardBindingKeys = RewardBindingKeys,
+            ShortName = ShortName
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        PreferredAbility = Game.SingletonRepository.GetNullable<Ability>(PreferredAbilityBindingKey);
+        Rewards = Game.SingletonRepository.Get<Reward>(RewardBindingKeys);
+    }
 
-    public abstract string LongName { get; }
+    public virtual string LongName { get; }
     public bool MultiRew;
 
-    public abstract Ability? PreferredAbility { get; }
-    protected abstract Reward[] Rewards { get; }
-    public abstract string ShortName { get; }
+    public Ability? PreferredAbility { get; private set; }
+    protected virtual string? PreferredAbilityBindingKey { get; } = null;
+    protected Reward[] Rewards { get; private set; }
+    protected virtual string[] RewardBindingKeys { get; } 
+    public virtual string ShortName { get; }
 
     public void GetReward()
     {

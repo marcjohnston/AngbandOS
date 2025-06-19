@@ -95,6 +95,7 @@ public class GameConfiguration
         gameConfiguration.MartialArtsAttacks = LoadFromAssembly<MartialArtsAttackGameConfiguration>(assembly);
         gameConfiguration.AbilityScoreScripts = LoadFromAssembly<AbilityScoreScriptGameConfiguration>(assembly);
         gameConfiguration.ChestTrapCombinations = LoadFromAssembly<ChestTrapCombinationGameConfiguration>(assembly);
+        gameConfiguration.Patrons = LoadFromAssembly<PatronGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -229,6 +230,7 @@ public class GameConfiguration
     public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
     public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
     public virtual ChestTrapCombinationGameConfiguration[]? ChestTrapCombinations { get; set; } = null;
+    public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
 
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {

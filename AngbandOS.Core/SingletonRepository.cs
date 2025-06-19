@@ -505,6 +505,7 @@ internal class SingletonRepository
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces);
         LoadFromConfiguration<TextAreaWidget, TextAreaWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets);
+        LoadFromConfiguration<Patron, PatronGameConfiguration>(gameConfiguration.Patrons);
         LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics);
@@ -560,7 +561,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<MonsterRaceFilter>();
         LoadAllAssemblyTypes<MonsterSpell>();
         LoadAllAssemblyTypes<Mutation>();
-        LoadAllAssemblyTypes<Patron>();
         LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Race>();
         LoadAllAssemblyTypes<RaceAbility>();
