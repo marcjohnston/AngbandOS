@@ -232,7 +232,7 @@ internal class MonsterKnowledge
                 _description.Append(" very");
             }
             _description.Append(" quickly");
-            _description.Append(" (").Append(Constants.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
+            _description.Append(" (").Append(Game.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
         }
         else if (_monsterType.Speed < 110)
         {
@@ -245,7 +245,7 @@ internal class MonsterKnowledge
                 _description.Append(" very");
             }
             _description.Append(" slowly");
-            _description.Append(" (").Append(Constants.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
+            _description.Append(" (").Append(Game.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
         }
         else
         {

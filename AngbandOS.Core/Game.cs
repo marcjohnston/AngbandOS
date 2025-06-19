@@ -45,6 +45,11 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
+
+    public readonly int[] RequiredExperiencePerLevel;
+
+    public readonly int[] ExtractEnergy;
+
     public Ability StrengthAbility; // TODO: These are still hardcoded into the framework
     public Ability IntelligenceAbility; // TODO: These are still hardcoded into the framework
     public Ability WisdomAbility; // TODO: These are still hardcoded into the framework
@@ -1323,6 +1328,9 @@ internal class Game
             GoldFactories = goldFactoryList.ToArray();
         }
         GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
+
+        RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
+        ExtractEnergy = gameConfiguration.ExtractEnergy;
 
         ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
         HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
@@ -4234,7 +4242,7 @@ internal class Game
             RunScript(nameof(GainMutationScript));
             GetFirstLevelMutation = false;
         }
-        Energy += Constants.ExtractEnergy[Speed.IntValue]; // TODO: This causes a runtime error for out of bounds
+        Energy += ExtractEnergy[Speed.IntValue]; // TODO: This causes a runtime error for out of bounds
         if (Energy < 100)
         {
             return;
@@ -4543,7 +4551,7 @@ internal class Game
         {
             if (IsTurnHundred)
             {
-                int additionalEnergy = Constants.ExtractEnergy[Speed.IntValue] * 2;
+                int additionalEnergy = ExtractEnergy[Speed.IntValue] * 2;
                 if (HasRegeneration)
                 {
                     additionalEnergy += 30;
@@ -8709,7 +8717,7 @@ internal class Game
                 continue;
             }
             // Check the monster's speed to see if it should get a turn
-            monster.Energy += Constants.ExtractEnergy[monster.Speed];
+            monster.Energy += ExtractEnergy[monster.Speed];
             if (monster.Energy < 100)
             {
                 continue;
@@ -13465,7 +13473,7 @@ internal class Game
             MaxExperienceGained.IntValue = ExperiencePoints.IntValue;
         }
         HandleStuff();
-        while (ExperienceLevel.IntValue > 1 && ExperiencePoints.IntValue < Constants.PlayerExp[ExperienceLevel.IntValue - 2] * ExperienceMultiplier.IntValue / 100L)
+        while (ExperienceLevel.IntValue > 1 && ExperiencePoints.IntValue < RequiredExperiencePerLevel[ExperienceLevel.IntValue - 2] * ExperienceMultiplier.IntValue / 100L)
         {
             ExperienceLevel.IntValue--;
             ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
@@ -13475,7 +13483,7 @@ internal class Game
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             HandleStuff();
         }
-        while (ExperienceLevel.IntValue < Constants.PyMaxLevel && ExperiencePoints.IntValue >= Constants.PlayerExp[ExperienceLevel.IntValue - 1] * ExperienceMultiplier.IntValue / 100L)
+        while (ExperienceLevel.IntValue < Constants.PyMaxLevel && ExperiencePoints.IntValue >= RequiredExperiencePerLevel[ExperienceLevel.IntValue - 1] * ExperienceMultiplier.IntValue / 100L)
         {
             ExperienceLevel.IntValue++;
             ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
@@ -13942,9 +13950,9 @@ internal class Game
             int prev = 0;
             if (MaxLevelGained > 1)
             {
-                prev = Constants.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier.IntValue / 100;
+                prev = RequiredExperiencePerLevel[MaxLevelGained - 2] * ExperienceMultiplier.IntValue / 100;
             }
-            int next = Constants.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier.IntValue / 100;
+            int next = RequiredExperiencePerLevel[MaxLevelGained - 1] * ExperienceMultiplier.IntValue / 100;
             int numerator = MaxExperienceGained.IntValue - prev;
             int denominator = next - prev;
             int fraction = 100 * numerator / denominator;
@@ -17092,7 +17100,7 @@ internal class Game
         mPtr.Speed = rPtr.Speed;
         if (!rPtr.Unique)
         {
-            int i = Constants.ExtractEnergy[rPtr.Speed] / 10;
+            int i = ExtractEnergy[rPtr.Speed] / 10;
             if (i != 0)
             {
                 mPtr.Speed += RandomSpread(0, i);

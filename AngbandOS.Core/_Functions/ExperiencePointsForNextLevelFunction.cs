@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Functions;
 internal class ExperiencePointsForNextLevelFunction : IntFunction
 {
     private ExperiencePointsForNextLevelFunction(Game game) : base(game) { } // This object is a singleton.
-    public override int Value => (Constants.PlayerExp[Game.ExperienceLevel.IntValue - 1] * Game.ExperienceMultiplier.IntValue / 100) - Game.ExperiencePoints.IntValue;
+    public override int Value => (Game.RequiredExperiencePerLevel[Game.ExperienceLevel.IntValue - 1] * Game.ExperienceMultiplier.IntValue / 100) - Game.ExperiencePoints.IntValue;
     public override string[]? DependencyNames => new string[]
     {
         nameof(ExperienceLevelIntProperty),

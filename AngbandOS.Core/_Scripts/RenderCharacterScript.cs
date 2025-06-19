@@ -329,7 +329,7 @@ internal class RenderCharacterScript : Script, IScript, ICastSpellScript, IGameC
         }
         else
         {
-            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[Game.ExperienceLevel.IntValue - 1] * Game.ExperienceMultiplier.IntValue / 100L), 33, 28,
+            PrintLongScore("Exp to Adv.", (int)(Game.RequiredExperiencePerLevel[Game.ExperienceLevel.IntValue - 1] * Game.ExperienceMultiplier.IntValue / 100L), 33, 28,
                 ColorEnum.Green);
         }
         PrintLongScore("Exp Factor ", Game.ExperienceMultiplier.IntValue, 34, 28, ColorEnum.Green);
