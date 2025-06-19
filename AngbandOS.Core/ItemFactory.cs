@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// properties are modifiable.
 /// </summary>
 [Serializable]
-internal abstract class ItemFactory : IGetKey
+internal class ItemFactory : IGetKey
 {
     protected readonly Game Game;
     protected virtual string? ItemEnhancementBindingKey { get; } = null;
@@ -19,9 +19,127 @@ internal abstract class ItemFactory : IGetKey
     public virtual string Key { get; }
     public string GetKey => Key;
     #region Constructors
-    protected ItemFactory(Game game)
+    public ItemFactory(Game game, ItemFactoryGameConfiguration itemFactoryGameConfiguration) 
     {
         Game = game;
+        Key = itemFactoryGameConfiguration.Key ?? itemFactoryGameConfiguration.GetType().Name;
+        ItemEnhancementBindingKey = itemFactoryGameConfiguration.ItemEnhancementBindingKey;
+
+        PreassignedItemFlavorBindingKey = itemFactoryGameConfiguration.PreassignedItemFlavorBindingKey;
+        NegativeBonusDamageRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusDamageRepresentsBroken;
+        NegativeBonusArmorClassRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusArmorClassRepresentsBroken;
+        NegativeBonusHitRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusHitRepresentsBroken;
+        SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey = itemFactoryGameConfiguration.SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey;
+        RandomArtifactBonusArmorCeiling = itemFactoryGameConfiguration.RandomArtifactBonusArmorCeiling;
+        RandomArtifactBonusHitCeiling = itemFactoryGameConfiguration.RandomArtifactBonusHitCeiling;
+        RandomArtifactBonusDamageCeiling = itemFactoryGameConfiguration.RandomArtifactBonusDamageCeiling;
+        RefillScriptBindingKey = itemFactoryGameConfiguration.RefillScriptBindingKey;
+        SymbolBindingKey = itemFactoryGameConfiguration.SymbolBindingKey;
+        CanBeWeaponOfLaw = itemFactoryGameConfiguration.CanBeWeaponOfLaw;
+        CanBeWeaponOfSharpness = itemFactoryGameConfiguration.CanBeWeaponOfSharpness;
+        CapableOfVorpalSlaying = itemFactoryGameConfiguration.CapableOfVorpalSlaying;
+        Color = itemFactoryGameConfiguration.Color;
+        UseBindingTuple = itemFactoryGameConfiguration.UseBindingTuple;
+        QuaffBindingTuple = itemFactoryGameConfiguration.QuaffBindingTuple;
+        AmmunitionItemFactoryBindingKeys = itemFactoryGameConfiguration.AmmunitionItemFactoryBindingKeys;
+        CanSpikeDoorClosed = itemFactoryGameConfiguration.CanSpikeDoorClosed;
+        CanTunnel = itemFactoryGameConfiguration.CanTunnel;
+        CanProjectArrows = itemFactoryGameConfiguration.CanProjectArrows;
+        EnchantmentMaximumCount = itemFactoryGameConfiguration.EnchantmentMaximumCount;
+        IsMagical = itemFactoryGameConfiguration.IsMagical;
+        ValuePerTurnOfLight = itemFactoryGameConfiguration.ValuePerTurnOfLight;
+        AimingBindingTuple = itemFactoryGameConfiguration.AimingBindingTuple;
+        IsBroken = itemFactoryGameConfiguration.IsBroken;
+        InitialBrokenStomp = itemFactoryGameConfiguration.InitialBrokenStomp;
+        InitialAverageStomp = itemFactoryGameConfiguration.InitialAverageStomp;
+        InitialGoodStomp = itemFactoryGameConfiguration.InitialGoodStomp;
+        InitialExcellentStomp = itemFactoryGameConfiguration.InitialExcellentStomp;
+        RechargeScriptBindingKey = itemFactoryGameConfiguration.RechargeScriptBindingKey;
+        IsIgnoredByMonsters = itemFactoryGameConfiguration.IsIgnoredByMonsters;
+        IsContainer = itemFactoryGameConfiguration.IsContainer;
+        IsRangedWeapon = itemFactoryGameConfiguration.IsRangedWeapon;
+        MissileDamageMultiplier = itemFactoryGameConfiguration.MissileDamageMultiplier;
+        MaxPhlogiston = itemFactoryGameConfiguration.MaxPhlogiston;
+        BurnRate = itemFactoryGameConfiguration.BurnRate;
+        MassProduceBindingTuples = itemFactoryGameConfiguration.MassProduceBindingTuples;
+        BonusHitRealValueMultiplier = itemFactoryGameConfiguration.BonusHitRealValueMultiplier;
+        BonusDamageRealValueMultiplier = itemFactoryGameConfiguration.BonusDamageRealValueMultiplier;
+        BonusArmorClassRealValueMultiplier = itemFactoryGameConfiguration.BonusArmorClassRealValueMultiplier;
+        BonusDiceRealValueMultiplier = itemFactoryGameConfiguration.BonusDiceRealValueMultiplier;
+        BreaksDuringEnchantmentProbabilityExpression = itemFactoryGameConfiguration.BreaksDuringEnchantmentProbabilityExpression;
+        EnchantmentBindingTuples = itemFactoryGameConfiguration.EnchantmentBindingTuples;
+        EatMagicScriptBindingKey = itemFactoryGameConfiguration.EatMagicScriptBindingKey;
+        GridProcessWorldScriptBindingKey = itemFactoryGameConfiguration.GridProcessWorldScriptBindingKey;
+        MonsterProcessWorldScriptBindingKey = itemFactoryGameConfiguration.MonsterProcessWorldScriptBindingKey;
+        EquipmentProcessWorldScriptBindingKey = itemFactoryGameConfiguration.EquipmentProcessWorldScriptBindingKey;
+        PackProcessWorldScriptBindingKey = itemFactoryGameConfiguration.PackProcessWorldScriptBindingKey;
+        CanApplyBonusArmorClassMiscPower = itemFactoryGameConfiguration.CanApplyBonusArmorClassMiscPower;
+        CanApplyBlowsBonus = itemFactoryGameConfiguration.CanApplyBlowsBonus;
+        BreakageChanceProbabilityExpression = itemFactoryGameConfiguration.BreakageChanceProbabilityExpression;
+        MakeObjectCountExpression = itemFactoryGameConfiguration.MakeObjectCountExpression;
+        GetsDamageMultiplier = itemFactoryGameConfiguration.GetsDamageMultiplier;
+        IdentityCanBeSensed = itemFactoryGameConfiguration.IdentityCanBeSensed;
+        IsFuelForTorch = itemFactoryGameConfiguration.IsFuelForTorch;
+        IsWearableOrWieldable = itemFactoryGameConfiguration.IsWearableOrWieldable;
+        CanBeEaten = itemFactoryGameConfiguration.CanBeEaten;
+        IsArmor = itemFactoryGameConfiguration.IsArmor;
+        IsWeapon = itemFactoryGameConfiguration.IsWeapon;
+        NumberOfItemsContained = itemFactoryGameConfiguration.NumberOfItemsContained;
+        Name = itemFactoryGameConfiguration.Name;
+        DescriptionSyntax = itemFactoryGameConfiguration.DescriptionSyntax;
+        AlternateDescriptionSyntax = itemFactoryGameConfiguration.AlternateDescriptionSyntax;
+        FlavorSuppressedDescriptionSyntax = itemFactoryGameConfiguration.FlavorSuppressedDescriptionSyntax;
+        AlternateFlavorSuppressedDescriptionSyntax = itemFactoryGameConfiguration.AlternateFlavorSuppressedDescriptionSyntax;
+        FlavorUnknownDescriptionSyntax = itemFactoryGameConfiguration.FlavorUnknownDescriptionSyntax;
+        AlternateFlavorUnknownDescriptionSyntax = itemFactoryGameConfiguration.AlternateFlavorUnknownDescriptionSyntax;
+        ZapBindingTuple = itemFactoryGameConfiguration.ZapBindingTuple;
+        ItemClassBindingKey = itemFactoryGameConfiguration.ItemClassBindingKey;
+        IsLanternFuel = itemFactoryGameConfiguration.IsLanternFuel;
+        PackSort = itemFactoryGameConfiguration.PackSort;
+        WieldSlotBindingKeys = itemFactoryGameConfiguration.WieldSlotBindingKeys;
+        AskDestroyAll = itemFactoryGameConfiguration.AskDestroyAll;
+        HasQualityRatings = itemFactoryGameConfiguration.HasQualityRatings;
+        ArmorClass = itemFactoryGameConfiguration.ArmorClass;
+        DepthsFoundAndChances = itemFactoryGameConfiguration.DepthsFoundAndChances;
+        Cost = itemFactoryGameConfiguration.Cost;
+        DamageDice = itemFactoryGameConfiguration.DamageDice;
+        DamageSides = itemFactoryGameConfiguration.DamageSides;
+        LevelNormallyFound = itemFactoryGameConfiguration.LevelNormallyFound;
+        InitialBonusAttacks = itemFactoryGameConfiguration.InitialBonusAttacks;
+        InitialBonusInfravision = itemFactoryGameConfiguration.InitialBonusInfravision;
+        InitialBonusSpeed = itemFactoryGameConfiguration.InitialBonusSpeed;
+        InitialBonusSearchExpression = itemFactoryGameConfiguration.InitialBonusSearchExpression;
+        InitialBonusStealthExpression = itemFactoryGameConfiguration.InitialBonusStealthExpression;
+        InitialBonusTunnel = itemFactoryGameConfiguration.InitialBonusTunnel;
+        InitialTurnsOfLight = itemFactoryGameConfiguration.InitialTurnsOfLight;
+        InitialNutritionalValue = itemFactoryGameConfiguration.InitialNutritionalValue;
+        InitialGoldPiecesRollExpression = itemFactoryGameConfiguration.InitialGoldPiecesRollExpression;
+        ExperienceGainDivisorForDestroying = itemFactoryGameConfiguration.ExperienceGainDivisorForDestroying;
+        SpellBindingKeys = itemFactoryGameConfiguration.SpellBindingKeys;
+        BonusArmorClass = itemFactoryGameConfiguration.BonusArmorClass;
+        BonusDamage = itemFactoryGameConfiguration.BonusDamage;
+        BonusHit = itemFactoryGameConfiguration.BonusHit;
+        Weight = itemFactoryGameConfiguration.Weight;
+        IsSmall = itemFactoryGameConfiguration.IsSmall;
+        CanApplySlayingBonus = itemFactoryGameConfiguration.CanApplySlayingBonus;
+        BaseValue = itemFactoryGameConfiguration.BaseValue;
+        HatesElectricity = itemFactoryGameConfiguration.HatesElectricity;
+        HatesFire = itemFactoryGameConfiguration.HatesFire;
+        HatesAcid = itemFactoryGameConfiguration.HatesAcid;
+        HatesCold = itemFactoryGameConfiguration.HatesCold;
+        CanProvideSheathOfElectricity = itemFactoryGameConfiguration.CanProvideSheathOfElectricity;
+        CanProvideSheathOfFire = itemFactoryGameConfiguration.CanProvideSheathOfFire;
+        CanReflectBoltsAndArrows = itemFactoryGameConfiguration.CanReflectBoltsAndArrows;
+        RandartActivationChance = itemFactoryGameConfiguration.RandartActivationChance;
+        ProvidesSunlight = itemFactoryGameConfiguration.ProvidesSunlight;
+        CanApplyArtifactBiasSlaying = itemFactoryGameConfiguration.CanApplyArtifactBiasSlaying;
+        CanApplyArtifactBiasResistance = itemFactoryGameConfiguration.CanApplyArtifactBiasResistance;
+        CanApplyBlessedArtifactBias = itemFactoryGameConfiguration.CanApplyBlessedArtifactBias;
+        CanBeEatenByMonsters = itemFactoryGameConfiguration.CanBeEatenByMonsters;
+        EatScriptBindingKey = itemFactoryGameConfiguration.EatScriptBindingKey;
+        VanishesWhenEatenBySkeletons = itemFactoryGameConfiguration.VanishesWhenEatenBySkeletons;
+        IsConsumedWhenEaten = itemFactoryGameConfiguration.IsConsumedWhenEaten;
+        ReadBindingTuple = itemFactoryGameConfiguration.ReadBindingTuple;
     }
     #endregion
 
@@ -1610,58 +1728,58 @@ internal abstract class ItemFactory : IGetKey
     /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
     /// This property is used to bind the <see cref="PreassignedItemFlavor"/> property during the binding phase.
     /// </summary>
-    protected virtual string? PreassignedItemFlavorBindingKey => null;
+    protected virtual string? PreassignedItemFlavorBindingKey { get; } = null;
 
-    public virtual bool NegativeBonusDamageRepresentsBroken => false;
-    public virtual bool NegativeBonusArmorClassRepresentsBroken => false;
-    public virtual bool NegativeBonusHitRepresentsBroken => false;
+    public virtual bool NegativeBonusDamageRepresentsBroken { get; } = false;
+    public virtual bool NegativeBonusArmorClassRepresentsBroken { get; } = false;
+    public virtual bool NegativeBonusHitRepresentsBroken { get; } = false;
 
-    protected virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingItemEnhancementWeightedRandom);
+    protected virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; } = nameof(SlayingItemEnhancementWeightedRandom);
 
     /// <summary>
     /// Returns the ceiling value for bonus armor values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
     /// be added to the bonus.  The die rolls will be provided a maximum value to prevent the bonus from going over the this ceiling value.  If the bonus is already above this ceiling
     /// value, the die roll will only provide an additional bonus value of 1.  Returns a value of null, by default.
     /// </summary>
-    public virtual int? RandomArtifactBonusArmorCeiling => null;
+    public virtual int? RandomArtifactBonusArmorCeiling { get; } = null;
 
     /// <summary>
     /// Returns the ceiling value for bonus hit values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
     /// be added to the bonus.  The die rolls will be provided a maximum value to prevent the bonus from going over the this ceiling value.  If the bonus is already above this ceiling
     /// value, the die roll will only provide an additional bonus value of 1.  Returns a value of null, by default.
     /// </summary>
-    public virtual int? RandomArtifactBonusHitCeiling => null;
+    public virtual int? RandomArtifactBonusHitCeiling { get; } = null;
 
     /// <summary>
     /// Returns the ceiling value for bonus damage values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
     /// be added to the bonus.  The die rolls will be provided a maximum value to prevent the bonus from going over the this ceiling value.  If the bonus is already above this ceiling
     /// value, the die roll will only provide an additional bonus value of 1.  Returns a value of null, by default.
     /// </summary>
-    public virtual int? RandomArtifactBonusDamageCeiling => null;
+    public virtual int? RandomArtifactBonusDamageCeiling { get; } = null;
 
     /// <summary>
     /// Returns the key of the script that is used to refill the item; or null, if the item cannot be refilled.  Returns null, by default.  This property is used to bind the <see cref="RefillScript"/>
     /// property during the binding phase.
     /// </summary>
-    protected virtual string? RefillScriptBindingKey => null;
+    protected virtual string? RefillScriptBindingKey { get; } = null;
 
     /// <summary>
     /// Returns the symbol to use for rendering the item.  This symbol will be initially used to set the <see cref="FlavorSymol"/> and item catagories that have flavor may the change the
     /// <see cref="FlavorCharacter"/> based on the flavor.  This property is used to bind the <see cref="Symbol"/> property during the bind phase.
     /// </summary>
-    protected abstract string SymbolBindingKey { get; }
+    protected virtual string SymbolBindingKey { get; }
 
-    public virtual bool CanBeWeaponOfLaw => false;
+    public virtual bool CanBeWeaponOfLaw { get; } = false;
 
-    public virtual bool CanBeWeaponOfSharpness => false;
+    public virtual bool CanBeWeaponOfSharpness { get; } = false;
 
-    public virtual bool CapableOfVorpalSlaying => false;
+    public virtual bool CapableOfVorpalSlaying { get; } = false;
 
     /// <summary>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
     /// that have flavor may change the FlavorColor based on the flavor.
     /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
+    public virtual ColorEnum Color { get; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the name of the noticeable script to run when the player uses the item ; or null if the potion does
@@ -1674,7 +1792,7 @@ internal abstract class ItemFactory : IGetKey
     /// Returns the value of each staff charge.  Returns 0, by default.
     /// The amount of mana needed to consume to keep the potion.
     /// </summary>
-    protected virtual (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => null;
+    protected virtual (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple { get; } = null;
 
     /// <summary>
     /// Returns the name of the noticeable script to run when the player quaffs the potion and the name of the smash script when the player smashes the potion; or null if the potion does
@@ -1685,126 +1803,126 @@ internal abstract class ItemFactory : IGetKey
     /// 
     /// The amount of mana needed to consume to keep the potion.
     /// </summary>
-    protected virtual (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple => null;
+    protected virtual (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple { get; } = null;
 
     /// <summary>
     /// Returns the name of the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property is used to bind
     /// the <see cref="AmmunitionItemFactories"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? AmmunitionItemFactoryBindingKeys => null;
+    protected virtual string[]? AmmunitionItemFactoryBindingKeys { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be used to spike a door closed; false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool CanSpikeDoorClosed => false;
+    public virtual bool CanSpikeDoorClosed { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can be used to dig; false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool CanTunnel => false;
+    public virtual bool CanTunnel { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is a bow and can project arrows; false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool CanProjectArrows => false;
+    public virtual bool CanProjectArrows { get; } = false;
 
     /// <summary>
     /// Returns the maximum number of items that can be enchanted at one time.  A value of 1 is returned, by default.  Ammunition items return 20.  Item counts greater than this value
     /// will have a decreased probability of enchantment.
     /// </summary>
-    public virtual int EnchantmentMaximumCount => 1;
+    public virtual int EnchantmentMaximumCount { get; } = 1;
 
     /// <summary>
     /// Returns true, if the item is magical and is noticed with the detect magical scoll.
     /// </summary>
-    public virtual bool IsMagical => false;
+    public virtual bool IsMagical { get; } = false;
 
     /// <summary>
     /// Returns the value of each turn of light for light sources.  Returns 0, by default;
     /// </summary>
-    public virtual int ValuePerTurnOfLight => 0;
+    public virtual int ValuePerTurnOfLight { get; } = 0;
 
     /// <summary>
     /// Returns the name of the <see cref="IAimWandScript"/> script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
     /// item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="AimingTuple"/>  property during the bind phase.
     /// </summary>
-    protected virtual (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBindingTuple => null;
+    protected virtual (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBindingTuple { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
     /// </summary>
-    public virtual bool IsBroken => false;
+    public virtual bool IsBroken { get; } = false;
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality that should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  
     /// Returns false, by default.  Weapons, armor, orbs of light and broken items (items that negatively affect the player) return true.
     /// </summary>
-    public virtual bool InitialBrokenStomp => false;
+    public virtual bool InitialBrokenStomp { get; } = false;
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.
     /// Returns false, by default.
     /// </summary>
-    public virtual bool InitialAverageStomp => false;
+    public virtual bool InitialAverageStomp { get; } = false;
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.
     /// Returns false, by default.
     /// </summary>
-    public virtual bool InitialGoodStomp => false;
+    public virtual bool InitialGoodStomp { get; } = false;
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.
     /// Returns false, by default.
     /// </summary>
-    public virtual bool InitialExcellentStomp => false;
+    public virtual bool InitialExcellentStomp { get; } = false;
 
-    protected virtual string? RechargeScriptBindingKey => null;
+    protected virtual string? RechargeScriptBindingKey { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is ignored by monsters.  Returns false for all items, except gold.  Gold isn't picked up by monsters.
     /// </summary>
-    public virtual bool IsIgnoredByMonsters => false;
+    public virtual bool IsIgnoredByMonsters { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is a container; false, otherwise.  Containers can be opened (ContainerIsOpen) and trapped (ContainerTraps).
     /// </summary>
-    public virtual bool IsContainer => false;
+    public virtual bool IsContainer { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is a ranged weapon; false, otherwise.
     /// </summary>
-    public virtual bool IsRangedWeapon => false;
+    public virtual bool IsRangedWeapon { get; } = false;
 
     /// <summary>
     /// Returns a damage multiplier when the missile weapon is used.
     /// </summary>
-    public virtual int MissileDamageMultiplier => 1;
+    public virtual int MissileDamageMultiplier { get; } = 1;
 
     /// <summary>
     /// Returns the maximum fuel that can be used for phlogiston.  Returns null, by default, meaning that the light source cannot be used to create a phlogiston.
     /// </summary>
-    public virtual int? MaxPhlogiston => null;
+    public virtual int? MaxPhlogiston { get; } = null;
 
     /// <summary>
     /// Returns the number of turns of light that is consumed per turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
     /// Torches and laterns have burn rates greater than zero.
     /// </summary>
-    public virtual int BurnRate => 0;
+    public virtual int BurnRate { get; } = 0;
 
     /// <summary>
     /// Returns an array of tuples that define the mass produce for items of this factory.  These tuples define a Roll that is applied for additional items to be produced
     /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Returns null, by default.  This property is used
     /// to bind the <see cref="MassProduceTuples"/> property during the bind phase.  The tuples must be sorted by cost and are checked during the bind phase.
     /// </summary>
-    protected virtual (int count, string rollExpression)[]? MassProduceBindingTuples => null;
+    protected virtual (int count, string rollExpression)[]? MassProduceBindingTuples { get; } = null;
 
-    public virtual int BonusHitRealValueMultiplier => 100;
-    public virtual int BonusDamageRealValueMultiplier => 100;
-    public virtual int BonusArmorClassRealValueMultiplier => 100;
-    public virtual int BonusDiceRealValueMultiplier => 100;
+    public virtual int BonusHitRealValueMultiplier { get; } = 100;
+    public virtual int BonusDamageRealValueMultiplier { get; } = 100;
+    public virtual int BonusArmorClassRealValueMultiplier { get; } = 100;
+    public virtual int BonusDiceRealValueMultiplier { get; } = 100;
 
-    protected virtual string? BreaksDuringEnchantmentProbabilityExpression => null;
+    protected virtual string? BreaksDuringEnchantmentProbabilityExpression { get; } = null;
 
     /// <summary>
     /// Returns the name of the IEnchantmentScript to run for enchanting items depending on the item power and whether the item is being sold in a store.
@@ -1814,316 +1932,316 @@ internal abstract class ItemFactory : IGetKey
     /// StoreStock - True, when the enchantment applies only to items sold in a store; false, when the enchantment only applies to items not sold in a store; or null, if the enchantment applies regardless of whether the item is being sold in a store or not.;<para />
     /// ScriptNames - The names of one or more scripts that implement the IEnhancementScript interface to be run to enhance the item when the Powers and StoreStock criteria match.  An empty array will throw during binding.
     /// </returns>
-    protected virtual (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => null;
+    protected virtual (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples { get; } = null;
 
     /// <summary>
     /// Returns the name of the script to run, when the energy of a rechargeable item is consumed; or null, if the item does not have charges that can be consumed or those charges cannot be consumed.
     /// This property is used to bind the <see cref="EatMagicScript"/> property during the bind phase.
     /// </summary>
-    protected virtual string? EatMagicScriptBindingKey => null;
+    protected virtual string? EatMagicScriptBindingKey { get; } = null;
 
-    protected virtual string? GridProcessWorldScriptBindingKey => null;
-    protected virtual string? MonsterProcessWorldScriptBindingKey => null;
-    protected virtual string? EquipmentProcessWorldScriptBindingKey => null;
-    protected virtual string? PackProcessWorldScriptBindingKey => null;
+    protected virtual string? GridProcessWorldScriptBindingKey { get; } = null;
+    protected virtual string? MonsterProcessWorldScriptBindingKey { get; } = null;
+    protected virtual string? EquipmentProcessWorldScriptBindingKey { get; } = null;
+    protected virtual string? PackProcessWorldScriptBindingKey { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
     /// </summary>
-    public virtual bool CanApplyBonusArmorClassMiscPower => false;
+    public virtual bool CanApplyBonusArmorClassMiscPower { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
     /// </summary>
-    public virtual bool CanApplyBlowsBonus => false;
+    public virtual bool CanApplyBlowsBonus { get; } = false;
 
     /// <summary>
     /// Returns an expression that represents the chance that an item that is thrown or fired will break.  Returns 10, or 10%, by default.  This
     /// property is used to bind the <see cref="BreakageChanceProbability"/> property during the bind phase.
     /// </summary>
-    protected virtual string BreakageChanceProbabilityExpression => "10/100";
+    protected virtual string BreakageChanceProbabilityExpression { get; } = "10/100";
 
-    protected virtual string MakeObjectCountExpression => "1";
+    protected virtual string MakeObjectCountExpression { get; } = "1";
 
     /// <summary>
     /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
     /// </summary>
-    public virtual bool GetsDamageMultiplier => false;
+    public virtual bool GetsDamageMultiplier { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can be sensed; false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool IdentityCanBeSensed => false;
+    public virtual bool IdentityCanBeSensed { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can be used as fuel for a torch.
     /// </summary>
-    public virtual bool IsFuelForTorch => false;
+    public virtual bool IsFuelForTorch { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can be worn.
     /// </summary>
-    public virtual bool IsWearableOrWieldable => false;
+    public virtual bool IsWearableOrWieldable { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can be eaten.
     /// </summary>
-    public virtual bool CanBeEaten => false;
+    public virtual bool CanBeEaten { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is armor.
     /// </summary>
-    public virtual bool IsArmor => false;
+    public virtual bool IsArmor { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is a weapon.
     /// </summary>
-    public virtual bool IsWeapon => false;
+    public virtual bool IsWeapon { get; } = false;
 
     /// <summary>
     /// Returns the number of items contained in the chest; or 0, if the item is not a container.  Returns 0, by default.
     /// </summary>
-    public virtual int NumberOfItemsContained => 0;
+    public virtual int NumberOfItemsContained { get; } = 0;
 
     /// <summary>
     /// Returns the name of the item as it applies to the factory class.  In other words, the name does not include the factory class name.  E.g. The factory class of scrolls would
     /// have names like "light", "magic mapping" and "identify".  This name should be able to uniquely identify the item from other items within the same factory class.
     /// </summary>
-    public abstract string Name { get; }
+    public virtual string Name { get; }
 
     /// <summary>
     /// Returns the syntax for the description of the item.  The and symbol '&' is used to represent the article (a, an or a number) and the
     /// tilde symbol '~' used to place the 's', 'es', or 'ies' plural form of the noun.
     /// </summary>
-    protected virtual string? DescriptionSyntax => null; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
+    protected virtual string? DescriptionSyntax { get; } = null; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
 
     /// <summary>
     /// Returns an alternate coded name for some character classes for known items; null, if there is no altername name; in which the <see cref="DescriptionSyntax"/> property will
     /// be used.  Returns null, by default.  Spellbooks have a alternate names.  Druid, Fanatic, Monk, Priest and Ranger character classes use alternate names.  Character
     /// classes will use alternate naming conventions when <see cref="BaseCharacterClass.UseAlternateItemNames"/> property returns true.
     /// </summary>
-    protected virtual string? AlternateDescriptionSyntax => null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
+    protected virtual string? AlternateDescriptionSyntax { get; } = null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
 
-    protected virtual string? FlavorSuppressedDescriptionSyntax => null;
-    protected virtual string? AlternateFlavorSuppressedDescriptionSyntax => null;
+    protected virtual string? FlavorSuppressedDescriptionSyntax { get; } = null;
+    protected virtual string? AlternateFlavorSuppressedDescriptionSyntax { get; } = null;
 
-    protected virtual string? FlavorUnknownDescriptionSyntax => null;
+    protected virtual string? FlavorUnknownDescriptionSyntax { get; } = null;
 
-    protected virtual string? AlternateFlavorUnknownDescriptionSyntax => null;
+    protected virtual string? AlternateFlavorUnknownDescriptionSyntax { get; } = null;
 
     /// <summary>
     /// Returns the number of turns an item that can be zapped needs before it is recharged; or null, if the item cannot be zapped.  A value of zero, means the item does not need any turns to
     /// be recharged after it is used.
     /// </summary>
-    protected virtual (string ScriptName, string TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapBindingTuple => null;
+    protected virtual (string ScriptName, string TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapBindingTuple { get; } = null;
 
-    protected abstract string ItemClassBindingKey { get; }
+    protected virtual string ItemClassBindingKey { get; }
 
     /// <summary>
     /// Returns true, if the item is fuel for a lantern.  Returns false, by default.
     /// </summary>
-    public virtual bool IsLanternFuel => false;
+    public virtual bool IsLanternFuel { get; } = false;
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
     /// </summary>
-    public abstract int PackSort { get; }
+    public virtual int PackSort { get; }
 
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Items will be wielded in the first slot that is available.  Rings use multiple wield slots for left and right hands.
     /// Returns the pack, by default.  This property is used to bind the <see cref="WieldSlots"/>  property during the binding phase.
     /// </summary>
-    protected virtual string[] WieldSlotBindingKeys => new string[] { nameof(PackWieldSlot) };
+    protected virtual string[] WieldSlotBindingKeys { get; } = new string[] { nameof(PackWieldSlot) };
 
     /// <summary>
     /// Returns true, if the destroy script should ask the player if known items from this factory should be destroyed by setting the applicable 
     /// broken stomp type to true; false, otherwise.  Returns true, by default.  Chests, weapons, armor and orbs of light return false.
     /// </summary>
-    public virtual bool AskDestroyAll => true;
+    public virtual bool AskDestroyAll { get; } = true;
 
     /// <summary>
     /// Returns true, if the object has different quality ratings; false, if items of the factory all have the same quality rating.  Returns false, by default.  
     /// Armor, weapons and orbs of light return true.  Items without quality ratings will always use the Broken stomp type.  Items with various quality ratings will use various
     /// item properties to determine their quality.
     /// </summary>
-    public virtual bool HasQualityRatings => false;
+    public virtual bool HasQualityRatings { get; } = false;
 
-    public virtual int ArmorClass => 0;
+    public virtual int ArmorClass { get; } = 0;
 
     /// <summary>
     /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by default.
     /// </summary>
-    public virtual (int level, int chance)[]? DepthsFoundAndChances => null; // TODO: Convert the chance into a Roll object
+    public virtual (int level, int chance)[]? DepthsFoundAndChances { get; } = null; // TODO: Convert the chance into a Roll object
 
     /// <summary>
     /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should
     /// still have some value if it can be recharged.
     /// </summary>
-    public virtual int Cost => 0;
+    public virtual int Cost { get; } = 0;
 
-    public virtual int DamageDice => 0;
+    public virtual int DamageDice { get; } = 0;
 
-    public virtual int DamageSides => 0;
+    public virtual int DamageSides { get; } = 0;
 
-    public virtual int LevelNormallyFound => 0;
+    public virtual int LevelNormallyFound { get; } = 0;
 
     /// <summary>
     /// Returns the initial amount of bonus attacks to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusAttacks => 0;
+    public virtual int InitialBonusAttacks { get; } = 0;
 
     /// <summary>
     /// Returns the initial amount of bonus infravision to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusInfravision => 0;
+    public virtual int InitialBonusInfravision { get; } = 0;
 
     /// <summary>
     /// Returns the initial amount of bonus speed to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusSpeed => 0;
+    public virtual int InitialBonusSpeed { get; } = 0;
 
     /// <summary>
     /// Returns the initial amount of bonus search to be assigned to the item.
     /// </summary>
-    protected virtual string InitialBonusSearchExpression => "0";
+    protected virtual string InitialBonusSearchExpression { get; } = "0";
 
     /// <summary>
     /// Returns the initial amount of bonus stealth to be assigned to the item.
     /// </summary>
-    protected virtual string InitialBonusStealthExpression => "0";
+    protected virtual string InitialBonusStealthExpression { get; } = "0";
 
     /// <summary>
     /// Returns the initial amount of bonus tunnel to be assigned to the item.
     /// </summary>
-    public virtual int InitialBonusTunnel => 0;
+    public virtual int InitialBonusTunnel { get; } = 0;
 
     /// <summary>
     /// Returns the initial number of turns of light to be assigned to the item.
     /// </summary>
-    public virtual int InitialTurnsOfLight => 0;
+    public virtual int InitialTurnsOfLight { get; } = 0;
 
     /// <summary>
     /// Returns the initial nutritional value that items of this factory will be given.  0 turns is returns by default.
     /// </summary>
-    public virtual int InitialNutritionalValue => 0;
+    public virtual int InitialNutritionalValue { get; } = 0;
 
     /// <summary>
     /// Returns the roll expression to determine the initial gold pieces that are given to the player when the item is picked up.  This property must conform to the <see cref="Roll"/> syntax for parsing.  
     /// See <see cref="Game.ParseNumericExpression"/> for syntax details.  This property is used to bind the <see cref="InitialGoldPiecesRoll"/> property during the bind phase.
     /// </summary>
-    protected virtual string InitialGoldPiecesRollExpression => "0";
+    protected virtual string InitialGoldPiecesRollExpression { get; } = "0";
 
     /// <summary>
     /// Returns a divisor to be used to compute the amount of experience gained when an applicable character class destroys the book.  Defaults to 4.
     /// </summary>
-    public virtual int ExperienceGainDivisorForDestroying => 0;
+    public virtual int ExperienceGainDivisorForDestroying { get; } = 0;
 
     /// <summary>
     /// Returns the names of the spells, in order, that belong to this book; or null, if the item is not a book.  This property is used to bind the Spells property during the binding phase.
     /// </summary>
-    protected virtual string[]? SpellBindingKeys => null;
+    protected virtual string[]? SpellBindingKeys { get; } = null;
 
-    public virtual int BonusArmorClass => 0;
-    public virtual int BonusDamage => 0;
-    public virtual int BonusHit => 0;
+    public virtual int BonusArmorClass { get; } = 0;
+    public virtual int BonusDamage { get; } = 0;
+    public virtual int BonusHit { get; } = 0;
 
-    public virtual int Weight => 0;
+    public virtual int Weight { get; } = 0;
 
     /// <summary>
     /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.
     /// </summary>
-    public virtual bool IsSmall => false; // TODO: This property is only valid when IsContainer.  The data type is horrible.
+    public virtual bool IsSmall { get; } = false; // TODO: This property is only valid when IsContainer.  The data type is horrible.
 
     /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool CanApplySlayingBonus => false;
+    public virtual bool CanApplySlayingBonus { get; } = false;
 
     /// <summary>
     /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
     /// </summary>
-    public virtual int BaseValue => 0;
+    public virtual int BaseValue { get; } = 0;
 
     /// <summary>
     /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
     /// </summary>
-    public virtual bool HatesElectricity => false;
+    public virtual bool HatesElectricity { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is susceptible to fire.  Returns false, by default.
     /// </summary>
-    public virtual bool HatesFire => false;
+    public virtual bool HatesFire { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is susceptible to acid.  Returns false, by default.
     /// </summary>
-    public virtual bool HatesAcid => false;
+    public virtual bool HatesAcid { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is susceptible to cold.  Returns false, by default.
     /// </summary>
-    public virtual bool HatesCold => false;
+    public virtual bool HatesCold { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can provide a sheath of electricity.  Returns false, by default.  Cloaks, soft and hard armor return true.
     /// </summary>
-    public virtual bool CanProvideSheathOfElectricity => false;
+    public virtual bool CanProvideSheathOfElectricity { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can provide a sheath of fire.  Returns false, by default.  Cloaks, soft and hard armor return true.
     /// </summary>
-    public virtual bool CanProvideSheathOfFire => false;
+    public virtual bool CanProvideSheathOfFire { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
     /// </summary>
-    public virtual bool CanReflectBoltsAndArrows => false;
+    public virtual bool CanReflectBoltsAndArrows { get; } = false;
 
     /// <summary>
     /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armor returns double the default.
     /// </summary>
-    public virtual int RandartActivationChance => 3;
+    public virtual int RandartActivationChance { get; } = 3;
 
     /// <summary>
     /// Returns true, if the item provides sunlight, which burns certain races.  Returns false, by default.
     /// </summary>
-    public virtual bool ProvidesSunlight => false;
+    public virtual bool ProvidesSunlight { get; } = false;
 
     /// <summary>
     /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
     /// </summary>
-    public virtual bool CanApplyArtifactBiasSlaying => true;
+    public virtual bool CanApplyArtifactBiasSlaying { get; } = true;
 
     /// <summary>
     /// Returns true, if an item of this factory can have random resistance bonus applied for biased artifacts.  Returns false for all items except for cloaks, soft armor and hard armor; which return true.
     /// </summary>
-    public virtual bool CanApplyArtifactBiasResistance => true;
+    public virtual bool CanApplyArtifactBiasResistance { get; } = true;
 
     /// <summary>
     /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
     /// </summary>
-    public virtual bool CanApplyBlessedArtifactBias => false;
+    public virtual bool CanApplyBlessedArtifactBias { get; } = false;
 
     /// <summary>
     /// Returns true, if an item of this factory can be eaten by a monster with the eat food attack effect.  Returns false for all items except food items; which return true.
     /// </summary>
-    public virtual bool CanBeEatenByMonsters => false;
+    public virtual bool CanBeEatenByMonsters { get; } = false;
 
     /// <summary>
     /// Returns the name of the script to be run when an item of this factory is eaten; or null, if items cannot be eaten.  Returns null, by default.  This property
     /// is used to bind the <see cref="EatScript"/> property during the bind phase.
     /// </summary>
-    public virtual string? EatScriptBindingKey => null;
+    public virtual string? EatScriptBindingKey { get; } = null;
 
-    public virtual bool VanishesWhenEatenBySkeletons => false;
+    public virtual bool VanishesWhenEatenBySkeletons { get; } = false;
 
     /// <summary>
     /// Returns true, if the food item is completely consumed when eaten.  Consumed food items are removed once eaten.  Returns true, by default because 
     /// all food items are consumed except for dwarf bread.  Dwarf bread returns false.
     /// </summary>
-    public virtual bool IsConsumedWhenEaten => true;
+    public virtual bool IsConsumedWhenEaten { get; } = true;
 
     /// <summary>
     /// Returns the name of the activation script for scrolls when read; or null, if the item cannot be read.  Returns null, by default.  This property is used to bind the <see cref="ReadTuple"/> 
@@ -2132,6 +2250,6 @@ internal abstract class ItemFactory : IGetKey
     /// <returns>
     /// ManaValue:description Returns the amount of mana channelers can substitute instead of the scroll being used up.
     /// </returns>
-    protected virtual (string ScriptName, int ManaValue)? ReadBindingTuple => null;
+    protected virtual (string ScriptName, int ManaValue)? ReadBindingTuple { get; } = null;
     #endregion
 }

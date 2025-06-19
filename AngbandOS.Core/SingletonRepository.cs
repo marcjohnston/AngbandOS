@@ -496,7 +496,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration, ItemEnhancement>(gameConfiguration.ItemEnhancements);
         LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, ItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
         LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration, ItemFactoryWeightedRandom>(gameConfiguration.ItemFactoryWeightedRandoms);
-        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration, GenericItemFactory>(gameConfiguration.ItemFactories);
+        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration, ItemFactory>(gameConfiguration.ItemFactories);
         LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, ItemFlavor>(gameConfiguration.ItemFlavors);
         LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration, MapWidget>(gameConfiguration.MapWidgets);
         LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration, MappedSpellScript>(gameConfiguration.MappedSpellScripts);
