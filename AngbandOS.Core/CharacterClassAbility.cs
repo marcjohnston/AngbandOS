@@ -1,13 +1,16 @@
 namespace AngbandOS.Core.CharacterClassAbilities;
 
 [Serializable]
-internal abstract class CharacterClassAbility : IGetKey
+internal class CharacterClassAbility : IGetKey
 {
     protected readonly Game Game;
-    protected CharacterClassAbility(Game game)
+    public CharacterClassAbility(Game game, CharacterClassAbilityGameConfiguration characterClassAbilityGameConfiguration)
     {
         Game = game;
-    }
+        Bonus = characterClassAbilityGameConfiguration.Bonus;
+        CharacterClassBindingKey = characterClassAbilityGameConfiguration.CharacterClassBindingKey;
+        AbilityBindingKey = characterClassAbilityGameConfiguration.AbilityBindingKey;
+   }
     public virtual int Bonus { get; } = 0;
 
     public BaseCharacterClass CharacterClass { get; private set; }
@@ -25,6 +28,12 @@ internal abstract class CharacterClassAbility : IGetKey
 
     public string ToJson()
     {
-        return "";
+        CharacterClassAbilityGameConfiguration gameConfiguration = new()
+        {
+            Bonus = Bonus,
+            CharacterClassBindingKey = CharacterClassBindingKey,
+            AbilityBindingKey = AbilityBindingKey,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

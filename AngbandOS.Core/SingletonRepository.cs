@@ -482,6 +482,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration>(gameConfiguration.BoolWidgets);
+        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities);
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets);
@@ -548,7 +549,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<AttackEffect>();
         LoadAllAssemblyTypes<BirthStage>();
         LoadAllAssemblyTypes<BaseCharacterClass>();
-        LoadAllAssemblyTypes<CharacterClassAbility>();
         LoadAllAssemblyTypes<ChestTrap>();
         LoadAllAssemblyTypes<DungeonGenerator>();
         LoadAllAssemblyTypes<FixedArtifact>();

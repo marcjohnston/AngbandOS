@@ -100,6 +100,8 @@ public class GameConfiguration
         gameConfiguration.RaceAbilities = LoadFromAssembly<RaceAbilityGameConfiguration>(assembly);
         gameConfiguration.RacialPowers = LoadFromAssembly<RacialPowerGameConfiguration>(assembly);
         gameConfiguration.ConditionalScripts = LoadFromAssembly<ConditionalScriptGameConfiguration>(assembly);
+        gameConfiguration.CharacterClassAbilities = LoadFromAssembly<CharacterClassAbilityGameConfiguration>(assembly);
+        
     }
 
     /// <summary>
@@ -239,7 +241,8 @@ public class GameConfiguration
     public virtual RaceAbilityGameConfiguration[]? RaceAbilities { get; set; } = null;
     public virtual RacialPowerGameConfiguration[]? RacialPowers { get; set; } = null;
     public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
-
+    public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
+    
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {
         10, 25, 45, 70, 100, 140, 200, 280, 380, 500, 650, 850, 1100, 1400, 1800, 2300, 2900, 3600, 4400, 5400,
