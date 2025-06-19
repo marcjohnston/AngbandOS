@@ -9081,7 +9081,7 @@ internal class Game
     /// <param name="val"> The sound to play </param>
     public void PlaySound(SoundEffectEnum sound)
     {
-    //    _console.PlaySound(sound);
+        ConsoleViewPort.PlaySound(sound);
     }
 
     /// <summary>
@@ -9094,7 +9094,7 @@ internal class Game
 
     public void PlayMusic(MusicTrackEnum musicTrack)
     {
-    //    _console.PlayMusic(musicTrack);
+        ConsoleViewPort.PlayMusic(musicTrack);
     }
 
     public void RequestCommand(bool shopping)
