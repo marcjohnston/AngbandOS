@@ -12,12 +12,38 @@ namespace AngbandOS.Core;
 /// are performed.  These <see cref="ItemFilter"/> objects are designed to support configurability.
 /// </summary>
 [Serializable]
-internal abstract class ItemFilter : IGetKey, IItemFilter
+internal class ItemFilter : IGetKey, IItemFilter
 {
     protected readonly Game Game;
-    protected ItemFilter(Game game)
+    public ItemFilter(Game game, ItemFilterGameConfiguration itemFilterGameConfiguration)
     {
         Game = game;
+        Key = itemFilterGameConfiguration.Key ?? itemFilterGameConfiguration.GetType().Name;
+        CanBeActivated = itemFilterGameConfiguration.CanBeActivated;
+        CanBeAimed = itemFilterGameConfiguration.CanBeAimed;
+        CanBeEaten = itemFilterGameConfiguration.CanBeEaten;
+        CanBeFired = itemFilterGameConfiguration.CanBeFired;
+        CanBeQuaffed = itemFilterGameConfiguration.CanBeQuaffed;
+        CanBeRead = itemFilterGameConfiguration.CanBeRead;
+        CanBeRecharged = itemFilterGameConfiguration.CanBeRecharged;
+        CanBeUsed = itemFilterGameConfiguration.CanBeUsed;
+        CanBeUsedToDig = itemFilterGameConfiguration.CanBeUsedToDig;
+        CanBeZapped = itemFilterGameConfiguration.CanBeZapped;
+        CanProjectArrows = itemFilterGameConfiguration.CanProjectArrows;
+        IsArmor = itemFilterGameConfiguration.IsArmor;
+        IsBlessed = itemFilterGameConfiguration.IsBlessed;
+        IsFuelForTorch = itemFilterGameConfiguration.IsFuelForTorch;
+        IsKnown = itemFilterGameConfiguration.IsKnown;
+        IsLanternFuel = itemFilterGameConfiguration.IsLanternFuel;
+        IsOfValue = itemFilterGameConfiguration.IsOfValue;
+        IsTooHeavyToWield = itemFilterGameConfiguration.IsTooHeavyToWield;
+        IsUsableSpellBook = itemFilterGameConfiguration.IsUsableSpellBook;
+        IsWeapon = itemFilterGameConfiguration.IsWeapon;
+        IsWearableOrWieldable = itemFilterGameConfiguration.IsWearableOrWieldable;
+        AnyMatchingItemClassNames = itemFilterGameConfiguration.AnyMatchingItemClassNames;
+        AllNonMatchingItemClassNames = itemFilterGameConfiguration.AllNonMatchingItemClassNames;
+        AnyMatchingItemFactoryNames = itemFilterGameConfiguration.AnyMatchingItemFactoryNames;
+        AllNonMatchingItemFactoryNames = itemFilterGameConfiguration.AllNonMatchingItemFactoryNames;
     }
 
     protected ItemMatch[] ItemMatches { get; private set; }
@@ -28,9 +54,38 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        ItemFilterGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            CanBeActivated = CanBeActivated,
+            CanBeAimed = CanBeAimed,
+            CanBeEaten = CanBeEaten,
+            CanBeFired = CanBeFired,
+            CanBeQuaffed = CanBeQuaffed,
+            CanBeRead = CanBeRead,
+            CanBeRecharged = CanBeRecharged,
+            CanBeUsed = CanBeUsed,
+            CanBeUsedToDig = CanBeUsedToDig,
+            CanBeZapped = CanBeZapped,
+            CanProjectArrows = CanProjectArrows,
+            IsArmor = IsArmor,
+            IsBlessed = IsBlessed,
+            IsFuelForTorch = IsFuelForTorch,
+            IsKnown = IsKnown,
+            IsLanternFuel = IsLanternFuel,
+            IsOfValue = IsOfValue,
+            IsTooHeavyToWield = IsTooHeavyToWield,
+            IsUsableSpellBook = IsUsableSpellBook,
+            IsWeapon = IsWeapon,
+            IsWearableOrWieldable = IsWearableOrWieldable,
+            AnyMatchingItemClassNames = AnyMatchingItemClassNames,
+            AllNonMatchingItemClassNames = AllNonMatchingItemClassNames,
+            AnyMatchingItemFactoryNames = AnyMatchingItemFactoryNames,
+            AllNonMatchingItemFactoryNames = AllNonMatchingItemFactoryNames,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
     public string GetKey => Key;
 
     /// <summary>
@@ -75,7 +130,7 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
         return new ItemMatch[] { };
     }
 
-    public virtual void Bind()
+    public void Bind()
     {
         AnyMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AnyMatchingItemClassNames);
         AllNonMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AllNonMatchingItemClassNames);
@@ -124,131 +179,131 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     /// <summary>
     /// Returns true, if the item must be activatable; false, if the item cannot be activatable; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeActivated => null;
+    public virtual bool? CanBeActivated { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be aimed; false, if the item cannot be aimed; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeAimed => null;
+    public virtual bool? CanBeAimed { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be eaten; false, if the item cannot be eaten; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeEaten => null;
+    public virtual bool? CanBeEaten { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be fired; false, if the item cannot be fired; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeFired => null;
+    public virtual bool? CanBeFired { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be quaffed; false, if the item cannot be quaffed; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeQuaffed => null;
+    public virtual bool? CanBeQuaffed { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be read; false, if the item cannot be read; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeRead => null;
+    public virtual bool? CanBeRead { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is rechargable; false, if the item cannot be rechargable; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeRecharged => null;
+    public virtual bool? CanBeRecharged { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be used; false, if the item cannot be used; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeUsed => null;
+    public virtual bool? CanBeUsed { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be used to dig; false, if the item cannot be used to dig; or null, if indifferent.  Returns null, by default.
     /// </summary>
     [Obsolete("Use ItemClass")]
-    public virtual bool? CanBeUsedToDig => null;
+    public virtual bool? CanBeUsedToDig { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be zapped; false, if the item cannot be zapped; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanBeZapped => null;
+    public virtual bool? CanBeZapped { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must be able to project arrows; false, if the item cannot project arrows; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? CanProjectArrows => null;
+    public virtual bool? CanProjectArrows { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is armor; false, if the item cannot be armor; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsArmor => null;
+    public virtual bool? IsArmor { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must be blessed; false, if the item cannot be blessed; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsBlessed => null;
+    public virtual bool? IsBlessed { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must capable of fueling a torch; false, if the item cannot be fuel for a torch; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsFuelForTorch => null;
+    public virtual bool? IsFuelForTorch { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must be known; false, if the item cannot be known; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsKnown => null;
+    public virtual bool? IsKnown { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must capable of fueling a lantern; false, if the item cannot be fuel for a lantern; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsLanternFuel => null;
+    public virtual bool? IsLanternFuel { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must have a value greater than zero (>0); false, if the item must have a value of zero or less (<=0); or null, 
     /// if indifferent.  Returns null, by default.  Stores require their items to have value to be an item in the store.
     /// </summary>
-    public virtual bool? IsOfValue => null;
+    public virtual bool? IsOfValue { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must be too heavy to wield; false, if the item cannot be too heavy to wield; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsTooHeavyToWield => null;
+    public virtual bool? IsTooHeavyToWield { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is either the primary or secondary spell book; false, if the item cannot be either the primary or secondary spell book; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsUsableSpellBook => null;
+    public virtual bool? IsUsableSpellBook { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must a weapon; false, if the item cannot be a weapon; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsWeapon => null;
+    public virtual bool? IsWeapon { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is wearable; false, if the item cannot be wearable; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    public virtual bool? IsWearableOrWieldable => null;
+    public virtual bool? IsWearableOrWieldable { get; } = null;
 
     /// <summary>
     /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? AnyMatchingItemClassNames => null;
+    protected virtual string[]? AnyMatchingItemClassNames { get; } = null;
     public ItemClass[]? AnyMatchingItemClasses { get; private set; }
 
     /// <summary>
     /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? AllNonMatchingItemClassNames => null;
+    protected virtual string[]? AllNonMatchingItemClassNames { get; } = null;
     public ItemClass[]? AllNonMatchingItemClasses { get; private set; }
 
     /// <summary>
     /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should match; null, if indifferent.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? AnyMatchingItemFactoryNames => null;
+    protected virtual string[]? AnyMatchingItemFactoryNames { get; } = null;
     public ItemFactory[]? AnyMatchingItemFactories { get; private set; }
 
     /// <summary>
     /// Returns one or more <see cref="ItemFactory"/> keys for item factories that should not match; null, if indifferent.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? AllNonMatchingItemFactoryNames => null;
+    protected virtual string[]? AllNonMatchingItemFactoryNames { get; } = null;
     public ItemFactory[]? AllNonMatchingItemFactories { get; private set; }
 }

@@ -102,6 +102,7 @@ public class GameConfiguration
         gameConfiguration.ConditionalScripts = LoadFromAssembly<ConditionalScriptGameConfiguration>(assembly);
         gameConfiguration.CharacterClassAbilities = LoadFromAssembly<CharacterClassAbilityGameConfiguration>(assembly);
         gameConfiguration.Activations = LoadFromAssembly<ActivationGameConfiguration>(assembly);
+        gameConfiguration.ItemFilters = LoadFromAssembly<ItemFilterGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -243,6 +244,7 @@ public class GameConfiguration
     public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
     public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
     public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
+    public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
 
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {

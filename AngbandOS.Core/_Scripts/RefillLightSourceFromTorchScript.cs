@@ -16,7 +16,7 @@ internal class RefillLightSourceFromTorchScript : Script, IScriptItem
     public void ExecuteScriptItem(Item item)
     {
         // Get an item if we don't already have one
-        if (!Game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, base.Game.SingletonRepository.Get<ItemFilter>(nameof(ItemFilters.TorchFuelItemFilter))))
+        if (!Game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(TorchFuelItemFilter))))
         {
             Game.MsgPrint("You have no extra torches.");
             return;
@@ -27,7 +27,7 @@ internal class RefillLightSourceFromTorchScript : Script, IScriptItem
         }
 
         // Check that our fuel is suitable
-        if (!Game.ItemMatchesFilter(fuelSource, base.Game.SingletonRepository.Get<ItemFilter>(nameof(ItemFilters.TorchFuelItemFilter))))
+        if (!Game.ItemMatchesFilter(fuelSource, base.Game.SingletonRepository.Get<ItemFilter>(nameof(TorchFuelItemFilter))))
         {
             Game.MsgPrint("You can't refill a torch with that!");
             return;

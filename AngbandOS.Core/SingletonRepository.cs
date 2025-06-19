@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -501,6 +502,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration>(gameConfiguration.ItemEnhancementWeightedRandoms);
         LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms);
         LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration>(gameConfiguration.ItemFactories);
+        LoadFromConfiguration<ItemFilter, ItemFilterGameConfiguration>(gameConfiguration.ItemFilters);
         LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors);
         LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets);
         LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts);
@@ -555,7 +557,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<FloorEffect>();
         LoadAllAssemblyTypes<ItemAction>();
         LoadAllAssemblyTypes<ItemEffect>();
-        LoadAllAssemblyTypes<ItemFilter>();
         LoadAllAssemblyTypes<ItemQualityRating>();
         LoadAllAssemblyTypes<ItemTest>();
         LoadAllAssemblyTypes<MartialArtsAttack>();
