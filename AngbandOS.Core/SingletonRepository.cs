@@ -485,6 +485,7 @@ internal class SingletonRepository
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets);
+        LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons);
@@ -514,6 +515,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders);
+        LoadFromConfiguration<RacialPower, RacialPowerGameConfiguration>(gameConfiguration.RacialPowers);
         LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms);
@@ -548,7 +550,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<BaseCharacterClass>();
         LoadAllAssemblyTypes<CharacterClassAbility>();
         LoadAllAssemblyTypes<ChestTrap>();
-        LoadAllAssemblyTypes<ConditionalScript>();
         LoadAllAssemblyTypes<DungeonGenerator>();
         LoadAllAssemblyTypes<FixedArtifact>();
         LoadAllAssemblyTypes<FloorEffect>();
@@ -565,7 +566,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Mutation>();
         LoadAllAssemblyTypes<PlayerEffect>();
         LoadAllAssemblyTypes<Race>();
-        LoadAllAssemblyTypes<RacialPower>();
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();
         LoadAllAssemblyTypes<Script>();

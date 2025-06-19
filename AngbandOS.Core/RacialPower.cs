@@ -7,18 +7,21 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class RacialPower : IGetKey, IScript
+internal class RacialPower : IGetKey, IScript
 {
     protected readonly Game Game;
-    protected RacialPower(Game game)
+    public RacialPower(Game game, RacialPowerGameConfiguration racialPowerGameConfiguration)
     {
         Game = game;
+        ScriptBindingKey = racialPowerGameConfiguration.ScriptBindingKey;
+        RaceBindingKey = racialPowerGameConfiguration.RaceBindingKey;
+        CharacterClassBindingKey = racialPowerGameConfiguration.CharacterClassBindingKey;
     }
     public static string GetCompositeKey(Race race, BaseCharacterClass? characterClass) => Game.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacialPower));
     public IScript Script { get; private set; }
-    protected abstract string ScriptBindingKey { get; }
+    protected virtual string ScriptBindingKey { get; }
     public Race Race { get; private set; }
-    protected abstract string RaceBindingKey { get; }
+    protected virtual string RaceBindingKey { get; }
     public BaseCharacterClass? CharacterClass { get; private set; }
     protected virtual string? CharacterClassBindingKey { get; } = null;
 
@@ -33,7 +36,13 @@ internal abstract class RacialPower : IGetKey, IScript
 
     public string ToJson()
     {
-        return "";
+        RacialPowerGameConfiguration gameConfiguration = new()
+        {
+            ScriptBindingKey = ScriptBindingKey,
+            RaceBindingKey = RaceBindingKey,
+            CharacterClassBindingKey = CharacterClassBindingKey,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
     public void ExecuteScript()

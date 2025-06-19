@@ -10,12 +10,16 @@ namespace AngbandOS.Core;
 /// Represents a script that evaluates an <see cref="IBoolValue"/> and runs a script depending on the result.
 /// </summary>
 [Serializable]
-internal abstract class ConditionalScript : IGetKey, IScript
+internal class ConditionalScript : IGetKey, IScript
 {
     protected readonly Game Game;
-    protected ConditionalScript(Game game)
+    public ConditionalScript(Game game, ConditionalScriptGameConfiguration conditionalScriptGameConfiguration)
     {
         Game = game;
+        Key = conditionalScriptGameConfiguration.Key ?? conditionalScriptGameConfiguration.GetType().Name;
+        EnabledNames = conditionalScriptGameConfiguration.EnabledNames;
+        TrueScriptBindingKeys = conditionalScriptGameConfiguration.TrueScriptBindingKeys;
+        FalseScriptBindingKeys = conditionalScriptGameConfiguration.FalseScriptBindingKeys;
     }
     /// <summary>
     /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
@@ -33,19 +37,19 @@ internal abstract class ConditionalScript : IGetKey, IScript
     /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected abstract (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; }
+    protected virtual (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 
     /// property is used to bind the <see cref="TrueWidgets"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? TrueScriptBindingKeys => null;
+    protected virtual string[]? TrueScriptBindingKeys { get; } = null;
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns false; or null, if no widget should be invalidated.  This 
     /// property is used to bind the <see cref="FalseWidgets"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? FalseScriptBindingKeys => null;
+    protected virtual string[]? FalseScriptBindingKeys { get; } = null;
 
     /// <summary>
     /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns true.  This property is bound using the <see cref="TrueWidgetNames"/> property 
@@ -74,7 +78,14 @@ internal abstract class ConditionalScript : IGetKey, IScript
 
     public string ToJson()
     {
-        return "";
+        ConditionalScriptGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            EnabledNames = EnabledNames,
+            TrueScriptBindingKeys = TrueScriptBindingKeys,
+            FalseScriptBindingKeys = FalseScriptBindingKeys
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
     public void ExecuteScript()
@@ -131,7 +142,7 @@ internal abstract class ConditionalScript : IGetKey, IScript
         }
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
     public string GetKey => Key;
 
 }

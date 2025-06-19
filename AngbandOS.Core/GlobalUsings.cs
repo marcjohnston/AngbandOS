@@ -13,7 +13,6 @@ global using AngbandOS.Core.BirthStages;
 global using AngbandOS.Core.CharacterClasses;
 global using AngbandOS.Core.CharacterClassAbilities;
 global using AngbandOS.Core.ChestTraps;
-global using AngbandOS.Core.ConditionalScripts;
 global using AngbandOS.Core.ConsoleElements;
 global using AngbandOS.Core.DirectionalActivations;
 global using AngbandOS.Core.DungeonGenerators;

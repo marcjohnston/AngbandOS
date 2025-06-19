@@ -98,6 +98,8 @@ public class GameConfiguration
         gameConfiguration.Patrons = LoadFromAssembly<PatronGameConfiguration>(assembly);
         gameConfiguration.RacialPowerTests = LoadFromAssembly<RacialPowerTestGameConfiguration>(assembly);
         gameConfiguration.RaceAbilities = LoadFromAssembly<RaceAbilityGameConfiguration>(assembly);
+        gameConfiguration.RacialPowers = LoadFromAssembly<RacialPowerGameConfiguration>(assembly);
+        gameConfiguration.ConditionalScripts = LoadFromAssembly<ConditionalScriptGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -235,6 +237,8 @@ public class GameConfiguration
     public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
     public virtual RacialPowerTestGameConfiguration[]? RacialPowerTests { get; set; } = null;
     public virtual RaceAbilityGameConfiguration[]? RaceAbilities { get; set; } = null;
+    public virtual RacialPowerGameConfiguration[]? RacialPowers { get; set; } = null;
+    public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
 
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {
