@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 global using AngbandOS.Core;
-global using AngbandOS.Core.Activations;
 global using AngbandOS.Core.ActivationWeightRandoms;
 global using AngbandOS.Core.ArtifactBiases;
 global using AngbandOS.Core.BirthStages;
@@ -14,7 +13,6 @@ global using AngbandOS.Core.CharacterClasses;
 global using AngbandOS.Core.CharacterClassAbilities;
 global using AngbandOS.Core.ChestTraps;
 global using AngbandOS.Core.ConsoleElements;
-global using AngbandOS.Core.DirectionalActivations;
 global using AngbandOS.Core.DungeonGenerators;
 global using AngbandOS.Core.Expressions;
 global using AngbandOS.Core.MonsterSelectors;

@@ -478,6 +478,7 @@ internal class SingletonRepository
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
+        LoadFromConfiguration<Activation, ActivationGameConfiguration>(gameConfiguration.Activations);
         LoadFromConfiguration<Animation, AnimationGameConfiguration>(gameConfiguration.Animations);
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
@@ -541,7 +542,6 @@ internal class SingletonRepository
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands);
 
         // Load the remaining user-configured singletons from the assembly.  These singletons have not been exported to the GamePack yet.
-        LoadAllAssemblyTypes<Activation>();
         LoadAllAssemblyTypes<Ability>();
         LoadAllAssemblyTypes<ActivationWeightedRandom>();
         LoadAllAssemblyTypes<AlterAction>();

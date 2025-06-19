@@ -10,24 +10,30 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.  Fixed artifacts are now using this Activation.
 /// </summary>
-internal abstract class Activation : IGetKey
+internal class Activation : IGetKey
 {
     protected readonly Game Game;
-    protected Activation(Game game)
+    public Activation(Game game, ActivationGameConfiguration activationGameConfiguration)
     {
         Game = game;
+        Key = activationGameConfiguration.Key ?? activationGameConfiguration.GetType().Name;
+        Name = activationGameConfiguration.Name;
+        PreActivationMessage = activationGameConfiguration.PreActivationMessage;
+        Value = activationGameConfiguration.Value;
+        RechargeTimeRollExpression = activationGameConfiguration.RechargeTimeRollExpression;
+        ActivationCancellableScriptItemBindingKey = activationGameConfiguration.ActivationCancellableScriptItemBindingKey;
     }
 
     /// <summary>
     /// Returns the unique name for this activation.  This name should be capitalized appropriately.
     /// </summary>
-    public abstract string Name { get; }
+    public virtual string Name { get; }
 
     /// <summary>
     /// Returns the message to be displayed to the player, before the activation and before a direction is requested, or null, if no message is to be rendered.  Returns null, by default.  This message also supports string interpolation:
     /// {0} - will be replaced with the associated <see cref="ItemClass.Name"/>. 
     /// </summary>
-    public virtual string? PreActivationMessage => null; // TODO: Need to accomodate proper grammar for items that use the {0} class name and a verb (e.g. your gauntlets glow vs your scale mail glows)
+    public virtual string? PreActivationMessage { get; } = null; // TODO: Need to accomodate proper grammar for items that use the {0} class name and a verb (e.g. your gauntlets glow vs your scale mail glows)
 
     /// <summary>
     /// Returns a Roll that determines the amount of time the activation needs to recharge.  This property is bound from the <see cref="RechargeTimeRollExpression"/> property during the bind phase.
@@ -37,7 +43,7 @@ internal abstract class Activation : IGetKey
     /// <summary>
     /// Returns the gold value of the activation.
     /// </summary>
-    public abstract int Value { get; }
+    public virtual int Value { get; }
 
     /// <summary>
     /// Returns the description of the activation.
@@ -72,14 +78,23 @@ internal abstract class Activation : IGetKey
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        ActivationGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            Name = Name,
+            PreActivationMessage = PreActivationMessage,
+            Value = Value,
+            RechargeTimeRollExpression = RechargeTimeRollExpression,
+            ActivationCancellableScriptItemBindingKey = ActivationCancellableScriptItemBindingKey,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
 
-    public virtual void Bind()
+    public void Bind()
     {
         RechargeTimeRoll = Game.ParseNumericExpression(RechargeTimeRollExpression);
         ActivationCancellableScript = Game.SingletonRepository.Get<IActivateItemScript>(ActivationCancellableScriptItemBindingKey);
@@ -88,13 +103,13 @@ internal abstract class Activation : IGetKey
     /// <summary>
     /// Returns a Roll expression that determines the amount of time the activation needs to recharge.  This property is used to bind the <see cref="RechargeTimeRoll ">/> property during the bind phase.
     /// </summary>
-    protected abstract string RechargeTimeRollExpression { get; }
+    protected virtual string RechargeTimeRollExpression { get; }
 
     /// <summary>
     /// Returns the binding key for the <see cref="IActivateItemScript"/> that should be run when the activation is executed.  This property is used to bind
     /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
     /// </summary>
-    protected abstract string ActivationCancellableScriptItemBindingKey { get; }
+    protected virtual string ActivationCancellableScriptItemBindingKey { get; }
 
     /// <summary>
     /// Returns the binding key for the <see cref="IActivateItemScript"/> that should be run when the activation is executed.  This property is used to bind
