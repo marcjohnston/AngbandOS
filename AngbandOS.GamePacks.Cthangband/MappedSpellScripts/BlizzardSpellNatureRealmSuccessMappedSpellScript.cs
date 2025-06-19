@@ -5,5 +5,5 @@ internal class BlizzardSpellNatureRealmSuccessMappedSpellScript : MappedSpellScr
 {
     public override string SpellBindingKey => nameof(BlizzardNatureSpell);
     public override string? RealmBindingKey => nameof(NatureRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.BlizzardScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(ColdXP70RXO12P3ProjectileScript) };
 }

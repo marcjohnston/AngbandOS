@@ -26,7 +26,6 @@
         BlessWeaponScript,
         BlindingGasScript,
         Blindness1d100p100Script,
-        BlizzardScript,
         BonusArmorClass1D5P10BP5EnchantmentScript,
         BonusArmorClass1D5P5BEnchantmentScript,
         BonusArmorClass1D8P10BP5EnchantmentScript,
