@@ -97,6 +97,7 @@ public class GameConfiguration
         gameConfiguration.ChestTrapCombinations = LoadFromAssembly<ChestTrapCombinationGameConfiguration>(assembly);
         gameConfiguration.Patrons = LoadFromAssembly<PatronGameConfiguration>(assembly);
         gameConfiguration.RacialPowerTests = LoadFromAssembly<RacialPowerTestGameConfiguration>(assembly);
+        gameConfiguration.RaceAbilities = LoadFromAssembly<RaceAbilityGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -232,7 +233,8 @@ public class GameConfiguration
     public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
     public virtual ChestTrapCombinationGameConfiguration[]? ChestTrapCombinations { get; set; } = null;
     public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
-    public virtual RacialPowerTestGameConfiguration[]? RacialPowerTests { get; set; } = null;    
+    public virtual RacialPowerTestGameConfiguration[]? RacialPowerTests { get; set; } = null;
+    public virtual RaceAbilityGameConfiguration[]? RaceAbilities { get; set; } = null;
 
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {

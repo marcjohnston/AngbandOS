@@ -4,15 +4,21 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
+using System.Security.Cryptography.X509Certificates;
+
 namespace AngbandOS.Core.RaceAbilities;
 
 [Serializable]
 internal class RaceAbility : IGetKey
 {
     protected readonly Game Game;
-    public RaceAbility(Game game)
+    public RaceAbility(Game game, RaceAbilityGameConfiguration raceAbilityGameConfiguration)
     {
         Game = game;
+        Bonus = raceAbilityGameConfiguration.Bonus;
+        RaceBindingKey = raceAbilityGameConfiguration.RaceBindingKey;
+        AbilityBindingKey = raceAbilityGameConfiguration.AbilityBindingKey;
     }
     public virtual int Bonus { get; } = 0;
     public Race Race { get; private set; }
@@ -30,6 +36,12 @@ internal class RaceAbility : IGetKey
 
     public string ToJson()
     {
-        return "";
+        RaceAbilityGameConfiguration gameConfiguration = new()
+        {
+            Bonus = Bonus,
+            RaceBindingKey = RaceBindingKey,
+            AbilityBindingKey = AbilityBindingKey,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 }
