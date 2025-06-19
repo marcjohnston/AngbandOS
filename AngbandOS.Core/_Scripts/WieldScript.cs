@@ -154,7 +154,7 @@ internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScri
         // Inform us what we did
         string wieldPhrase = slot.WieldPhrase;
         string itemName = wornItem.GetFullDescription(true);
-        Game.MsgPrint($"{wieldPhrase} {itemName} ({inventoryItem.IndexToLabel()}).");
+        Game.MsgPrint($"{wieldPhrase} {itemName} ({slot.Label(wornItem)}).");
 
         // Let us know if it's cursed
         RoItemPropertySet wornItemCharacterisics = wornItem.GetEffectiveItemProperties();

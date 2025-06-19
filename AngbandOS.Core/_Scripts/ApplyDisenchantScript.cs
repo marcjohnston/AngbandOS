@@ -53,7 +53,7 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
         if (oPtr.IsArtifact && Game.RandomLessThan(100) < 71)
         {
             s = oPtr.StackCount != 1 ? "" : "s";
-            Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
+            Game.MsgPrint($"Your {oName} ({inventorySlot.Label(oPtr)}) resist{s} disenchantment!");
             return IdentifiedResult.True;
         }
         if (oPtr.EnchantmentItemProperties.BonusHit > 0)
@@ -81,7 +81,7 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
             oPtr.EnchantmentItemProperties.BonusArmorClass--;
         }
         s = oPtr.StackCount != 1 ? "were" : "was";
-        Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
+        Game.MsgPrint($"Your {oName} ({inventorySlot.Label(oPtr)}) {s} disenchanted!");
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return IdentifiedResult.True;
     }

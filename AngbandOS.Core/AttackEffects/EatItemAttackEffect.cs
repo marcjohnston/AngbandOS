@@ -33,7 +33,7 @@ internal class EatItemAttackEffect : AttackEffect
             {
                 string itemName = item.GetFullDescription(false);
                 string y = item.StackCount > 1 ? "One of y" : "Y";
-                Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
+                Game.MsgPrint($"{y}our {itemName} ({packInventorySlot.Label(item)}) was stolen!");
 
                 // Give the item to the thief so it can later drop it
                 Item stolenItem = item.TakeFromStack(1);

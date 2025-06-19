@@ -81,7 +81,7 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     /// Returns the alphabetical label for the position of the item in the container.  The player will use this label to select the item from the container.
     /// </summary>
     /// <param name="oPtr"></param>
-    public abstract string Label(Item oPtr);
+    public abstract string Label(Item oPtr); // TODO: This is problematic for inventory slots that have more than one item.
 
     /// <summary>
     /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive.

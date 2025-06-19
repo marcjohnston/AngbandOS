@@ -26,7 +26,7 @@ internal class EatFoodAttackEffect : AttackEffect
                 // Note that the monster doesn't actually get the food item - it's gone
                 string itemName = item.GetDescription(false);
                 string y = item.StackCount > 1 ? "One of y" : "Y";
-                Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
+                Game.MsgPrint($"{y}our {itemName} ({packInventorySlot.Label(item)}) was eaten!");
                 item.ModifyStackCount(-1);
                 Game.InvenItemOptimize(i);
                 obvious = true;
