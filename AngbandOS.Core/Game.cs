@@ -2806,10 +2806,8 @@ internal class Game
         }
         foreach (ChestTrap trap in chestItem.ContainerTraps)
         {
-            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(MapX.IntValue, MapY.IntValue);
-            trap.Activate(eventArgs);
-
-            if (eventArgs.DestroysContents)
+            bool destroysContents = trap.Activate(MapX.IntValue, MapY.IntValue);
+            if (destroysContents)
             {
                 MsgPrint("Everything inside the chest is destroyed!");
                 chestItem.ContainerIsOpen = true;

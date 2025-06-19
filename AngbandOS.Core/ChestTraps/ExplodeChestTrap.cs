@@ -10,11 +10,11 @@ namespace AngbandOS.Core.ChestTraps;
 internal class ExplodeChestTrap : ChestTrap
 {
     private ExplodeChestTrap(Game game) : base(game) { }
-    public override void Activate(ActivateChestTrapEventArgs eventArgs)
+    public override bool Activate(int x, int y)
     {
         Game.RunScript(nameof(ThereIsASuddenExplosionRenderMessageScript));
         Game.TakeHit(Game.DiceRoll(5, 8), "an exploding chest");
-        eventArgs.DestroysContents = true;
+        return true;
     }
 
     public override string Description => "(Explosion Device)";

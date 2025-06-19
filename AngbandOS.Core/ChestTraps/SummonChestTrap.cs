@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ChestTraps;
 internal class SummonChestTrap : ChestTrap
 {
     private SummonChestTrap(Game game) : base(game) { }
-    public override void Activate(ActivateChestTrapEventArgs eventArgs)
+    public override bool Activate(int x, int y)
     {
         Game.RunScript(nameof(YouAreEnvelopedInACloudOfSmokeRenderMessageScript));
         int num = 2 + Game.DieRoll(3);
@@ -22,9 +22,10 @@ internal class SummonChestTrap : ChestTrap
             }
             else
             {
-                Game.SummonSpecific(eventArgs.Y, eventArgs.X, Game.Difficulty, null, true, false);
+                Game.SummonSpecific(y, x, Game.Difficulty, null, true, false);
             }
         }
+        return false;
     }
 
     public override string Description => "(Summoning Runes)";
