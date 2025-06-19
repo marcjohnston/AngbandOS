@@ -27,7 +27,7 @@ internal abstract class Race : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
@@ -48,7 +48,7 @@ internal abstract class Race : IGetKey
     public abstract int HitDieBonus { get; }
     public abstract int Infravision { get; }
     public abstract string Title { get; }
-    public virtual string IndefiniteArticleForTitle
+    public string IndefiniteArticleForTitle
     {
         get
         {
@@ -84,9 +84,7 @@ internal abstract class Race : IGetKey
     /// </summary>
     /// <param name="level"></param>
     /// <param name="itemCharacteristics"></param>
-    public virtual void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
-    {
-    }
+    public virtual void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics) { }
 
     protected abstract string GenerateNameSyllableSetName { get; }
     public SyllableSet GenerateNameSyllableSet { get; private set; }
