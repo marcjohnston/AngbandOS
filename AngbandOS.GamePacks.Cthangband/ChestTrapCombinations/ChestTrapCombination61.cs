@@ -4,14 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.Interface.Configuration;
+namespace AngbandOS.GamePacks.Cthangband;
 
-public enum AbilitiesEnum
+[Serializable]
+public class ChestTrapCombination61 : ChestTrapCombinationGameConfiguration
 {
-    CharismaAbility,
-    ConstitutionAbility,
-    DexterityAbility,
-    IntelligenceAbility,
-    StrengthAbility,
-    WisdomAbility,
+    public override string[] ChestTrapBindingKeys => new string[] { nameof(ChestTrapsEnum.ExplodeChestTrap), nameof(ChestTrapsEnum.SummonChestTrap) };
 }

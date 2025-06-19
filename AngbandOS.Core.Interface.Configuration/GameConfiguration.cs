@@ -94,6 +94,7 @@ public class GameConfiguration
         gameConfiguration.RenderMessageScripts = LoadFromAssembly<RenderMessageScriptGameConfiguration>(assembly);
         gameConfiguration.MartialArtsAttacks = LoadFromAssembly<MartialArtsAttackGameConfiguration>(assembly);
         gameConfiguration.AbilityScoreScripts = LoadFromAssembly<AbilityScoreScriptGameConfiguration>(assembly);
+        gameConfiguration.ChestTrapCombinations = LoadFromAssembly<ChestTrapCombinationGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -227,4 +228,5 @@ public class GameConfiguration
     public virtual RenderMessageScriptGameConfiguration[]? RenderMessageScripts { get; set; } = null;
     public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
     public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
+    public virtual ChestTrapCombinationGameConfiguration[]? ChestTrapCombinations { get; set; } = null;
 }

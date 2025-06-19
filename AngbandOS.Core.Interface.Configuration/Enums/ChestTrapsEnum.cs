@@ -6,12 +6,12 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-public enum AbilitiesEnum
+public enum ChestTrapsEnum
 {
-    CharismaAbility,
-    ConstitutionAbility,
-    DexterityAbility,
-    IntelligenceAbility,
-    StrengthAbility,
-    WisdomAbility,
+    ExplodeChestTrap,
+    LoseConChestTrap,
+    LoseStrChestTrap,
+    ParalyzeChestTrap,
+    PoisonChestTrap,
+    SummonChestTrap
 }

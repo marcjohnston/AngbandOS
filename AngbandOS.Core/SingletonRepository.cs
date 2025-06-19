@@ -381,7 +381,7 @@ internal class SingletonRepository
         RegisterRepository<BirthStage>();
         RegisterRepository<BoolWidget>();
         RegisterRepository<ChestTrap>();
-        RegisterRepository<ChestTrapConfiguration>();
+        RegisterRepository<ChestTrapCombination>();
         RegisterRepository<CharacterClassSpell>();
         RegisterRepository<DateWidget>();
         RegisterRepository<Dungeon>();
@@ -483,6 +483,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration>(gameConfiguration.BoolWidgets);
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
+        LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians);
@@ -543,7 +544,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<BirthStage>();
         LoadAllAssemblyTypes<BaseCharacterClass>();
         LoadAllAssemblyTypes<CharacterClassAbility>();
-        LoadAllAssemblyTypes<ChestTrapConfiguration>();
         LoadAllAssemblyTypes<ChestTrap>();
         LoadAllAssemblyTypes<ConditionalScript>();
         LoadAllAssemblyTypes<DungeonGenerator>();

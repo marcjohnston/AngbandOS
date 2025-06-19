@@ -26,14 +26,14 @@ internal class ChestEnchantmentScript : Script, IEnhancementScript
         {
             int chestType = Game.DieRoll(item.LevelNormallyFound);
             item.ContainerIsOpen = false;
-            int chestTrapConfigurationCount = Game.SingletonRepository.Count<ChestTrapConfiguration>();
+            int chestTrapConfigurationCount = Game.SingletonRepository.Count<ChestTrapCombination>();
             int eightFivePercent = chestTrapConfigurationCount * 100 / 85;
             if (chestType > eightFivePercent)
             {
                 int randomRemaining = chestTrapConfigurationCount - eightFivePercent;
                 chestType = eightFivePercent + Game.RandomLessThan(randomRemaining);
             }
-            item.ContainerTraps = Game.SingletonRepository.Get<ChestTrapConfiguration>(chestType).Traps;
+            item.ContainerTraps = Game.SingletonRepository.Get<ChestTrapCombination>(chestType).ChestTraps;
             item.LevelOfObjectsInContainer = chestType;
         }
     }
