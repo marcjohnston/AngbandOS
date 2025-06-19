@@ -27,7 +27,7 @@ internal abstract class AlterAction : IGetKey
         return "";
     }
 
-    public abstract void Execute(AlterEventArgs alterEventArgs);
+    public abstract bool Execute(int x, int y);
 
     public virtual string Key => GetType().Name;
 

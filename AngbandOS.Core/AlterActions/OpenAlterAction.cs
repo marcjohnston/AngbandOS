@@ -10,9 +10,9 @@ namespace AngbandOS.Core.AlterActions;
 internal class OpenAlterAction : AlterAction
 {
     private OpenAlterAction(Game game) : base(game) { }
-    public override void Execute(AlterEventArgs alterEventArgs)
+    public override bool Execute(int x, int y)
     {
         // Disturb the player, if the action did not fail.
-        alterEventArgs.More = Game.OpenDoor(alterEventArgs.Y, alterEventArgs.X);
+        return Game.OpenDoor(y, x);
     }
 }

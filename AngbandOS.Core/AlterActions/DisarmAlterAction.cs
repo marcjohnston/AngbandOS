@@ -10,8 +10,8 @@ namespace AngbandOS.Core.AlterActions;
 internal class DisarmAlterAction : AlterAction
 {
     private DisarmAlterAction(Game game) : base(game) { }
-    public override void Execute(AlterEventArgs alterEventArgs)
+    public override bool Execute(int x, int y)
     {
-        alterEventArgs.More = Game.DisarmTrap(alterEventArgs.Y, alterEventArgs.X);
+        return Game.DisarmTrap(y, x);
     }
 }

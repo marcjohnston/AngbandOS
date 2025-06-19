@@ -61,10 +61,8 @@ internal class AlterScript : Script, IScript, ICastSpellScript, IGameCommandScri
                     Game.MsgPrint("You're not sure what you can do with that...");
                 }
                 else
-                {
-                    AlterEventArgs alterEventArgs = new AlterEventArgs(y, x);
-                    alterAction.Execute(alterEventArgs);
-                    isRepeatable = alterEventArgs.More;
+                {                   
+                    isRepeatable = alterAction.Execute(x, y);
                 }
             }
         }

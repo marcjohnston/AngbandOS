@@ -10,8 +10,8 @@ namespace AngbandOS.Core.AlterActions;
 internal class TunnelAlterAction : AlterAction
 {
     private TunnelAlterAction(Game game) : base(game) { }
-    public override void Execute(AlterEventArgs alterEventArgs)
+    public override bool Execute(int x, int y)
     {
-        alterEventArgs.More = Game.TunnelThroughTile(alterEventArgs.Y, alterEventArgs.X);
+        return Game.TunnelThroughTile(y, x);
     }
 }

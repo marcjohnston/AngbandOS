@@ -10,8 +10,8 @@ namespace AngbandOS.Core.AlterActions;
 internal class CloseAlterAction : AlterAction
 {
     private CloseAlterAction(Game game) : base(game) { }
-    public override void Execute(AlterEventArgs alterEventArgs)
+    public override bool Execute(int x, int y)
     {
-        alterEventArgs.More = Game.CloseDoor(alterEventArgs.Y, alterEventArgs.X);
+        return Game.CloseDoor(y, x);
     }
 }
