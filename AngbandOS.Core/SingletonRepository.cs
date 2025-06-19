@@ -513,6 +513,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts);
         LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders);
+        LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses);
@@ -565,7 +566,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Race>();
         LoadAllAssemblyTypes<RaceAbility>();
         LoadAllAssemblyTypes<RacialPower>();
-        LoadAllAssemblyTypes<RacialPowerTest>();
         LoadAllAssemblyTypes<Reward>();
         LoadAllAssemblyTypes<RoomLayout>();
         LoadAllAssemblyTypes<Script>();

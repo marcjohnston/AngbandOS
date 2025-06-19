@@ -10,35 +10,48 @@ namespace AngbandOS.Core;
 /// Check if racial power works based on the minimum level, cost, ability and difficulty.  If the racial power works, it runs an associated script.
 /// </summary>
 [Serializable]
-internal abstract class RacialPowerTest : IGetKey, IBoolValue
+internal class RacialPowerTest : IGetKey, IBoolValue
 {
     protected readonly Game Game;
-    protected RacialPowerTest(Game game)
+    public RacialPowerTest(Game game, RacialPowerTestGameConfiguration racialPowerTestGameConfiguration)
     {
         Game = game;
+        Key = racialPowerTestGameConfiguration.Key ?? racialPowerTestGameConfiguration.GetType().Name;
+        MinLevel = racialPowerTestGameConfiguration.MinLevel;
+        CostExpression = racialPowerTestGameConfiguration.CostExpression;
+        UseAbilityBindingKey = racialPowerTestGameConfiguration.UseAbilityBindingKey;
+        Difficulty = racialPowerTestGameConfiguration.Difficulty;
     }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; set; }
     public string GetKey => Key;
 
     public void Bind()
     {
-        UseAbility = Game.SingletonRepository.Get<Ability>(AbilityBindingKey);
+        UseAbility = Game.SingletonRepository.Get<Ability>(UseAbilityBindingKey);
         Cost = Game.ParseNumericExpression(CostExpression);
     }
 
     public string ToJson()
     {
-        return "";
+        RacialPowerTestGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            MinLevel = MinLevel,
+            CostExpression = CostExpression,
+            UseAbilityBindingKey = UseAbilityBindingKey,
+            Difficulty = Difficulty
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
     public Ability UseAbility { get; private set; }
     public IScript Script { get; private set; }
-    public abstract int MinLevel { get; }
-    public abstract string CostExpression { get; }
+    public virtual int MinLevel { get; }
+    public virtual string CostExpression { get; }
     public Expression Cost { get; private set; }
-    public abstract string AbilityBindingKey { get; }
-    public abstract int Difficulty { get; }
+    public virtual string UseAbilityBindingKey { get; }
+    public virtual int Difficulty { get; }
 
     public bool BoolValue
     {
