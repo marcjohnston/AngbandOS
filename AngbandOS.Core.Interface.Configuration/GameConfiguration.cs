@@ -230,14 +230,15 @@ public class GameConfiguration
     public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
     public virtual ChestTrapCombinationGameConfiguration[]? ChestTrapCombinations { get; set; } = null;
 
-    public virtual int[] RequiredExperiencePerLevel => new int[] {
+    public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
+    {
         10, 25, 45, 70, 100, 140, 200, 280, 380, 500, 650, 850, 1100, 1400, 1800, 2300, 2900, 3600, 4400, 5400,
         6800, 8400, 10200, 12500, 17500, 25000, 35000, 50000, 75000, 100000, 150000, 200000, 275000, 350000, 450000,
         550000, 700000, 850000, 1000000, 1250000, 1500000, 1800000, 2100000, 2400000, 2700000, 3000000, 3500000,
         4000000, 4500000, 5000000
     };
 
-    public virtual int[] ExtractEnergy => new int[]
+    public virtual int[] ExtractEnergy => new int[] // TODO: Need defaults removed.
     {
 	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
 	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
