@@ -477,61 +477,61 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Timer>();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
-        LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration, AbilityScoreScript>(gameConfiguration.AbilityScoreScripts);
-        LoadFromConfiguration<Animation, AnimationGameConfiguration, Animation>(gameConfiguration.Animations);
-        LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration, ArtifactBiasWeightedRandom>(gameConfiguration.ArtifactBiasWeightedRandoms);
-        LoadFromConfiguration<Attack, AttackGameConfiguration, Attack>(gameConfiguration.Attacks);
-        LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration, BoolWidget>(gameConfiguration.BoolWidgets);
-        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration, CharacterClassSpell>(gameConfiguration.ClassSpells);
-        LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration, ConditionalWidget>(gameConfiguration.ConditionalWidgets);
-        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration, DateWidget>(gameConfiguration.DateWidgets);
-        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration, DungeonGuardian>(gameConfiguration.DungeonGuardians);
-        LoadFromConfiguration<Dungeon, DungeonGameConfiguration, Dungeon>(gameConfiguration.Dungeons);
-        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration, GameCommand>(gameConfiguration.GameCommands);
-        LoadFromConfiguration<Gender, GenderGameConfiguration, Gender>(gameConfiguration.Genders);
-        LoadFromConfiguration<God, GodGameConfiguration, God>(gameConfiguration.Gods);
-        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration, HelpGroup>(gameConfiguration.HelpGroups);
-        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration, IntWidget>(gameConfiguration.IntWidgets);
-        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration, ItemClass>(gameConfiguration.ItemClasses);
-        LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration, ItemEnhancement>(gameConfiguration.ItemEnhancements);
-        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration, ItemEnhancementWeightedRandom>(gameConfiguration.ItemEnhancementWeightedRandoms);
-        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration, ItemFactoryWeightedRandom>(gameConfiguration.ItemFactoryWeightedRandoms);
-        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration, ItemFactory>(gameConfiguration.ItemFactories);
-        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration, ItemFlavor>(gameConfiguration.ItemFlavors);
-        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration, MapWidget>(gameConfiguration.MapWidgets);
-        LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration, MappedSpellScript>(gameConfiguration.MappedSpellScripts);
-        LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration, MartialArtsAttack>(gameConfiguration.MartialArtsAttacks);
-        LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration, MaxRangedWidget>(gameConfiguration.MaxRangedWidgets);
-        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration, MonsterRace>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<TextAreaWidget, TextAreaWidgetGameConfiguration, TextAreaWidget>(gameConfiguration.NullableStringsTextAreaWidgets);
-        LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration, PhysicalAttributeSet>(gameConfiguration.PhysicalAttributeSets);
-        LoadFromConfiguration<Plural, PluralGameConfiguration, Plural>(gameConfiguration.Plurals);
-        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration, ProjectileGraphic>(gameConfiguration.ProjectileGraphics);
-        LoadFromConfiguration<Projectile, ProjectileGameConfiguration, Projectile>(gameConfiguration.Projectiles);
-        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration, ProjectileScript>(gameConfiguration.ProjectileScripts);
-        LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration, ProjectileWeightedRandom>(gameConfiguration.ProjectileWeightedRandomScripts);
-        LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration, RaceGender>(gameConfiguration.RaceGenders);
-        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration, RangedWidget>(gameConfiguration.RangedWidgets);
-        LoadFromConfiguration<Realm, RealmGameConfiguration, Realm>(gameConfiguration.Realms);
-        LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration, RealmCharacterClass>(gameConfiguration.RealmCharacterClasses);
-        LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration, RenderMessageScript>(gameConfiguration.RenderMessageScripts);
-        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration, Shopkeeper>(gameConfiguration.Shopkeepers);
-        LoadFromConfiguration<Spell, SpellGameConfiguration, Spell>(gameConfiguration.Spells);
-        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration, StoreCommand>(gameConfiguration.StoreCommands);
-        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration, StoreFactory>(gameConfiguration.StoreFactories);
-        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration, StringWidget>(gameConfiguration.StringWidgets);
-        LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration, SummonScript>(gameConfiguration.SummonScripts);
-        LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration, SummonWeightedRandom>(gameConfiguration.SummonWeightedRandoms);
-        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration, SyllableSet>(gameConfiguration.SyllableSets);
-        LoadFromConfiguration<Symbol, SymbolGameConfiguration, Symbol>(gameConfiguration.Symbols);
-        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration, TextWidget>(gameConfiguration.TextWidgets);
-        LoadFromConfiguration<Tile, TileGameConfiguration, Tile>(gameConfiguration.Tiles);
-        LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration, TimerScript>(gameConfiguration.TimerScripts);
-        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration, TimeWidget>(gameConfiguration.TimeWidgets);
-        LoadFromConfiguration<Town, TownGameConfiguration, Town>(gameConfiguration.Towns);
-        LoadFromConfiguration<Vault, VaultGameConfiguration, Vault>(gameConfiguration.Vaults);
-        LoadFromConfiguration<View, ViewGameConfiguration, View>(gameConfiguration.Views);
-        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration, WizardCommand>(gameConfiguration.WizardCommands);
+        LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
+        LoadFromConfiguration<Animation, AnimationGameConfiguration>(gameConfiguration.Animations);
+        LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms);
+        LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
+        LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration>(gameConfiguration.BoolWidgets);
+        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
+        LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets);
+        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets);
+        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians);
+        LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons);
+        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration>(gameConfiguration.GameCommands);
+        LoadFromConfiguration<Gender, GenderGameConfiguration>(gameConfiguration.Genders);
+        LoadFromConfiguration<God, GodGameConfiguration>(gameConfiguration.Gods);
+        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration>(gameConfiguration.HelpGroups);
+        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration>(gameConfiguration.IntWidgets);
+        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration>(gameConfiguration.ItemClasses);
+        LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration>(gameConfiguration.ItemEnhancements);
+        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration>(gameConfiguration.ItemEnhancementWeightedRandoms);
+        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms);
+        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration>(gameConfiguration.ItemFactories);
+        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors);
+        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets);
+        LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts);
+        LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks);
+        LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets);
+        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces);
+        LoadFromConfiguration<TextAreaWidget, TextAreaWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets);
+        LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets);
+        LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals);
+        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics);
+        LoadFromConfiguration<Projectile, ProjectileGameConfiguration>(gameConfiguration.Projectiles);
+        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts);
+        LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts);
+        LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders);
+        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets);
+        LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms);
+        LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses);
+        LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration>(gameConfiguration.RenderMessageScripts);
+        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration>(gameConfiguration.Shopkeepers);
+        LoadFromConfiguration<Spell, SpellGameConfiguration>(gameConfiguration.Spells);
+        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration>(gameConfiguration.StoreCommands);
+        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration>(gameConfiguration.StoreFactories);
+        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration>(gameConfiguration.StringWidgets);
+        LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration>(gameConfiguration.SummonScripts);
+        LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms);
+        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets);
+        LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols);
+        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.TextWidgets);
+        LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles);
+        LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts);
+        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets);
+        LoadFromConfiguration<Town, TownGameConfiguration>(gameConfiguration.Towns);
+        LoadFromConfiguration<Vault, VaultGameConfiguration>(gameConfiguration.Vaults);
+        LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views);
+        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands);
 
         // Load the remaining user-configured singletons from the assembly.  These singletons have not been exported to the GamePack yet.
         LoadAllAssemblyTypes<Activation>();
@@ -723,12 +723,12 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadFromConfiguration<T, TConfiguration, TGeneric>(TConfiguration[]? entityConfigurations) where T : IGetKey where TGeneric : T where TConfiguration : notnull
+    private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations) where T : IGetKey where TConfiguration : notnull
     {
         string typeName = typeof(T).Name;
         if (entityConfigurations != null)
         {
-            ConstructorInfo? constructor = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+            ConstructorInfo? constructor = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
                 .SingleOrDefault(_constructor =>
                 {
                     ParameterInfo[] parameters = _constructor.GetParameters();
@@ -736,12 +736,12 @@ internal class SingletonRepository
                 });
             if (constructor is null)
             {
-                throw new Exception($"Cannot find constructor for {typeof(TGeneric).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
+                throw new Exception($"Cannot find constructor for {typeof(T).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
             }
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
                 // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
-                TGeneric entity = (TGeneric)constructor.Invoke(new object[] { Game, entityConfiguration });
+                T entity = (T)constructor.Invoke(new object[] { Game, entityConfiguration });
                 RegisterSingleton(entity);
             }
         }
