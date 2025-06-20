@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SelectItemAndEatScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class EatScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
-    private SelectItemAndEatScript(Game game) : base(game) { }
+    private EatScript(Game game) : base(game) { }
 
     public void ExecuteCastSpellScript(Spell spell)
     {
