@@ -6212,12 +6212,6 @@ internal class Game
         }
     }
 
-    public bool WizardLock(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile));
-        return projectile.TargetedFire(dir, 20 + DieRoll(30), 0, grid: true, item: true, kill: true, beam: true, jump: false, stop: false, thru: true, hide: false);
-    }
-
     private void CaveTempRoomAux(int y, int x)
     {
         GridTile cPtr = Map.Grid[y][x];
