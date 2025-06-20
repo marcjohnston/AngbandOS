@@ -10,15 +10,25 @@ namespace AngbandOS.Core;
 /// Represents an eat or quaff script (a call with no parameters that returns an IdentifiedResult) with adapters for the other calling mechanisms.
 /// </summary>
 [Serializable]
-internal abstract class EatOrQuaffUniversalScript : IUniversalScript
+internal abstract class EatOrQuaffScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript
 {
     protected readonly Game Game;
-    protected EatOrQuaffUniversalScript(Game game)
+    protected EatOrQuaffScript(Game game)
     {
         Game = game;
     }
+
+    /// <summary>
+    /// Returns the details to reveal to the player when learned.  Returns blank, by default.
+    /// </summary>
     public virtual string LearnedDetails => "";
-    public abstract bool UsesItem { get; }
+
+    /// <summary>
+    /// Returns true, if the timer update should be done with no notification to the player; false, for normal operation.  When true, the identified
+    /// return value is always false.
+    /// </summary>
+    public virtual bool UsesItem { get; }
+
 
     public UsedResult ExecuteActivateItemScript(Item item)
     {

@@ -15,5 +15,5 @@ public class EatFoodGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'E';
 
-    public override string? ExecuteScriptName => nameof(SystemScriptsEnum.SelectItemAndEatScript);
+    public override string? ExecuteScriptName => nameof(SystemScriptsEnum.EatScript);
 }

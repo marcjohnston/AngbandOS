@@ -7,21 +7,23 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class TimerScript : IUniversalScript, IGetKey
+internal class TimerScript : EatOrQuaffScript, IGetKey
 {
-    protected readonly Game Game;
-
-    public TimerScript(Game game, TimerScriptGameConfiguration gameConfiguration)
+    public TimerScript(Game game, TimerScriptGameConfiguration gameConfiguration) : base(game)
     {
-        Game = game;
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
         ValueExpression = gameConfiguration.ValueExpression;
         TimerBindingKey = gameConfiguration.TimerBindingKey;
         Used = gameConfiguration.Used;
-        LearnedDetails = gameConfiguration.LearnedDetails;
+        CustomLearnedDetails = gameConfiguration.CustomLearnedDetails;
         Quiet = gameConfiguration.Quiet;
     }
+
+    /// <summary>
+    /// Returns whether or not an item is considered used when this script executes.
+    /// </summary>
     protected virtual bool Used { get; }
+
     public virtual string Key { get; }
     public string GetKey => Key;
 
@@ -32,7 +34,9 @@ internal class TimerScript : IUniversalScript, IGetKey
     }
     protected string? ValueExpression { get; }
     protected virtual string TimerBindingKey { get; }
+
     protected virtual bool Quiet { get; }
+
     protected Timer Timer { get; private set; }
     protected Expression? Value { get; private set; }
     public string ToJson()
@@ -43,37 +47,12 @@ internal class TimerScript : IUniversalScript, IGetKey
             ValueExpression = ValueExpression,
             TimerBindingKey = TimerBindingKey,
             Used = Used,
-            LearnedDetails = LearnedDetails,
+            CustomLearnedDetails = CustomLearnedDetails,
             Quiet = Quiet
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
-    public UsedResult ExecuteActivateItemScript(Item item)
-    {
-        return ExecuteReadScrollOrUseStaffScript().UsedResult;
-    }
-
-    public IdentifiedResult ExecuteEatOrQuaffScript()
-    {
-        return ExecuteReadScrollOrUseStaffScript().IdentifiedResult;
-    }
-
-    public IdentifiedResult ExecuteAimWandScript(int dir)
-    {
-        return ExecuteReadScrollOrUseStaffScript().IdentifiedResult;
-    }
-
-    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
-    {
-        return ExecuteReadScrollOrUseStaffScript();
-    }
-
-    public void ExecuteScript()
-    {
-        ExecuteReadScrollOrUseStaffScript();
-    }
-
-    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
+    public override IdentifiedResult ExecuteEatOrQuaffScript()
     {
         // Is this a request to reset?
         if (Value is null)
@@ -81,9 +60,9 @@ internal class TimerScript : IUniversalScript, IGetKey
             if (Quiet)
             {
                 Timer.SetValue();
-                return new IdentifiedAndUsedResult(false, true);
+                return new IdentifiedResult(false);
             }
-            return new IdentifiedAndUsedResult(Timer.ResetTimer(), true);
+            return new IdentifiedResult(Timer.ResetTimer());
         }
 
         int value = Game.ComputeIntegerExpression(Value).Value;
@@ -91,23 +70,17 @@ internal class TimerScript : IUniversalScript, IGetKey
         if (Quiet)
         {
             Timer.SetValue(Timer.Value + value);
-            return new IdentifiedAndUsedResult(false, Used);
+            return new IdentifiedResult(false);
         }
-        return new IdentifiedAndUsedResult(Timer.AddTimer(value), Used);
+        return new IdentifiedResult(Timer.AddTimer(value));
     }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteReadScrollOrUseStaffScript();
-    }
-
 
     /// <summary>
-    /// Returns a duration "dur" for the timer blank because timers do not reveal any learned details.
+    /// Returns details to reveal to the player when learned; or null to return a default duration "dur" of the remaining time.
     /// </summary>
-    public string? LearnedDetails { get; } = null;
+    public virtual string? CustomLearnedDetails { get; } = null;
 
-    string ICastSpellScript.LearnedDetails
+    public sealed override string LearnedDetails
     {
         get
         {

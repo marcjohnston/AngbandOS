@@ -36,4 +36,10 @@
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="_ReadScrollOrUseStaffScripts\" />
+    <Folder Include="_ZapRodScripts\" />
+    <Folder Include="_AimWandScripts\" />
+  </ItemGroup>
+
 </Project>
