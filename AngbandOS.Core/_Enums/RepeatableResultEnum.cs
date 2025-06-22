@@ -7,6 +7,10 @@
 
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents whether or not a command can be repeated.  This enum is being used to differentiate a boolean repeatable value from an identified boolean value
+/// and/or a used boolean value;
+/// </summary>
 public enum RepeatableResultEnum
 {
     True,
