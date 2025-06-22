@@ -29,6 +29,7 @@ internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWan
     /// </summary>
     public virtual bool UsesItem { get; }
 
+
     public abstract IdentifiedResult ExecuteEatOrQuaffScript();
 
     #region Adapters

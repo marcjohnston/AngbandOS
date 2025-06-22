@@ -8,61 +8,24 @@ namespace AngbandOS.Core;
 
 [Serializable]
 
-internal class RenderMessageScript : IGetKey, IUniversalScript
+internal class RenderMessageScript : UniversalScript, IGetKey
 {
-    protected readonly Game Game;
-    public RenderMessageScript(Game game, RenderMessageScriptGameConfiguration renderMessageScriptGameConfiguration)
+    public RenderMessageScript(Game game, RenderMessageScriptGameConfiguration renderMessageScriptGameConfiguration) : base(game)
     {
-        Game = game;
         Key = renderMessageScriptGameConfiguration.Key ?? renderMessageScriptGameConfiguration.GetType().Name;
         Message = renderMessageScriptGameConfiguration.Message;
         UsesItem = renderMessageScriptGameConfiguration.UsesItem;
         IdentifiesItem = renderMessageScriptGameConfiguration.IdentifiesItem;
     }
 
-    public virtual bool UsesItem { get; } = false;
-    public virtual bool IdentifiesItem { get; } = false;
+    public override bool UsesItem { get; } = false;
+    public override bool IdentifiesItem { get; } = false;
 
     public virtual string Message { get; }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
-    {
-        ExecuteScript();
-        return new UsedResult(UsesItem);
-    }
-
-    public IdentifiedResult ExecuteAimWandScript(int dir)
-    {
-        ExecuteScript();
-        return new IdentifiedResult(IdentifiesItem);
-    }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
-    {
-        ExecuteScript();
-        return new IdentifiedAndUsedResult(IdentifiesItem, UsesItem);
-    }
-
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         Game.MsgPrint(Message);
-    }
-
-    /// <summary>
-    /// Renders the message and returns false for both the identified and used results.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="dir"></param>
-    /// <returns></returns>
-    public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
-    {
-        ExecuteScript();
-        return new IdentifiedAndUsedResult(IdentifiesItem, UsesItem);
     }
 
     public string ToJson()
@@ -79,18 +42,7 @@ internal class RenderMessageScript : IGetKey, IUniversalScript
 
     public void Bind() { }
 
-    public IdentifiedResult ExecuteEatOrQuaffScript()
-    {
-        ExecuteScript();
-        return new IdentifiedResult(IdentifiesItem);
-    }
-
     public virtual string Key { get; }
-
-    /// <summary>
-    /// Returns information about this message, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
-    /// </summary>
-    public virtual string LearnedDetails => "";
 
     public string GetKey => Key;
 }

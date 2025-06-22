@@ -13,7 +13,6 @@
         AmmoOfBackbitingEnchantmentScript,
         AnimalTrainingScript,
         AnnihilationScript,
-        AppleJuiceScript,
         ApplyDisenchantScript,
         ArcaneBindingScript,
         AugmentScript,
