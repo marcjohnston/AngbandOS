@@ -5,5 +5,5 @@ internal class CurePoisonSpellFolkRealmSuccessMappedSpellScript : MappedSpellScr
 {
     public override string SpellBindingKey => nameof(CurePoisonFolkSpell);
     public override string? RealmBindingKey => nameof(FolkRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.CurePoisonScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(PoisonResetTimerScript) };
 }

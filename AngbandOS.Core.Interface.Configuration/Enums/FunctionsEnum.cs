@@ -13,6 +13,7 @@ public enum FunctionsEnum
     ExperienceLevelsLostBoolFunction,
     ExperiencePointsLostBoolFunction,
     HasBlindnessResistanceBoolFunction,
+    HasConfusionResistanceBoolFunction,
     PlayerIsHallucinatingBoolFunction,
     PlayerIsTrackingMonsterBoolFunction,
     TrackedMonsterIsAfraidBoolFunction,

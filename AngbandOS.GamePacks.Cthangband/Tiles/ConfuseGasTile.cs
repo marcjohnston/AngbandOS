@@ -17,5 +17,5 @@ public class ConfuseGasTile : TileGameConfiguration
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override string? StepOnScriptName => nameof(SystemScriptsEnum.ConfuseGasScript);
+    public override string? StepOnScriptName => nameof(ConfuseGasTimerScript);
 }

@@ -39,6 +39,7 @@
   <ItemGroup>
     <Folder Include="_BoolPosFunctions\" />
     <Folder Include="_ReadScrollOrUseStaffScripts\" />
+    <Folder Include="_TimerScripts\" />
     <Folder Include="_ZapRodScripts\" />
     <Folder Include="_AimWandScripts\" />
   </ItemGroup>

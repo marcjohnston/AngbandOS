@@ -8,8 +8,8 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal class HasBlindnessResistanceBoolFunction : BoolFunction
+internal class HasConfusionResistanceBoolFunction : BoolFunction
 {
-    private HasBlindnessResistanceBoolFunction(Game game) : base(game) { } // This object is a singleton.
-    public override bool BoolValue => Game.HasBlindnessResistance;
+    private HasConfusionResistanceBoolFunction(Game game) : base(game) { } // This object is a singleton.
+    public override bool BoolValue => Game.HasConfusionResistance;
 }
