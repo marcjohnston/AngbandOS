@@ -16,6 +16,7 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
         Game = game;
     }
 
+    public virtual bool RequiresRerendering { get; } = false;
     /// <summary>
     /// Returns information about this message, or blank if there is no detailed information.  Returns blank, by default.
     /// </summary>
@@ -26,7 +27,7 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
     /// </summary>
     public virtual bool UsesItem { get; } = false;
 
-    public virtual RepeatableResultEnum RepeatableResult { get; } = false;
+    public virtual RepeatableResultEnum RepeatableResult { get; } = RepeatableResultEnum.False;
 
     /// <summary>
     /// Returns true, if the script identifies the item; false, otherwise.  Returns false, by default.
@@ -76,6 +77,7 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
     public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
+        storeCommandEvent.RequiresRerendering = RequiresRerendering;
     }
     #endregion
 }

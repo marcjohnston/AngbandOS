@@ -4,55 +4,24 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using System.Xml.Linq;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JournalScript : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
+internal class JournalScript : UniversalScript
 {
-    private readonly ColorEnum[] _menuColors = new ColorEnum[128];
-    private readonly int[] _menuIndices = new int[128];
-    private readonly string[] _menuItem = new string[128];
-    private int _menuLength;
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
+    private readonly ColorEnum[] _menuColors = new ColorEnum[128]; // TODO: This is state that we might not need
+    private readonly int[] _menuIndices = new int[128]; // TODO: This is state that we might not need
+    private readonly string[] _menuItem = new string[128]; // TODO: This is state that we might not need
+    private int _menuLength; // TODO: This is state that we might not need
     private JournalScript(Game game) : base(game) { }
 
-    /// <summary>
-    /// Executes the journal script and sets the RequiresRerendering flag.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
-    {
-        ExecuteScript();
-        storeCommandEvent.RequiresRerendering = true;
-    }
-
-    /// <summary>
-    /// Executes the journal script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
+    public override bool RequiresRerendering => true;
 
     /// <summary>
     /// Renders the journal on the screen.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         Game.FullScreenOverlay = true;
         ScreenBuffer savedScreen = Game.Screen.Clone();
