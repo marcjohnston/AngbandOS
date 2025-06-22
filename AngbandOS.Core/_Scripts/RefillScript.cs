@@ -7,35 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RefillScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class RefillScript : UniversalScript
 {
     private RefillScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the refill script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the refill script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         // Make sure we actually have a light source to refuel.           
         WieldSlot? chosenLightSourceInventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();

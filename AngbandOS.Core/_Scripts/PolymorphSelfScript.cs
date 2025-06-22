@@ -7,30 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PolymorphSelfScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class PolymorphSelfScript : UniversalScript
 {
     private PolymorphSelfScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Executes the polymorph-self script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the polymorh-self script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         int effects = Game.DieRoll(2);
         bool moreEffects = true;
@@ -87,5 +72,4 @@ internal class PolymorphSelfScript : Script, IScript, ICastSpellScript, IGameCom
             }
         }
     }
-    public string LearnedDetails => "";
 }
