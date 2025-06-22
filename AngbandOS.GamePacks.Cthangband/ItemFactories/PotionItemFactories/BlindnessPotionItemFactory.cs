@@ -27,7 +27,7 @@ public class BlindnessPotionItemFactory : ItemFactoryGameConfiguration
     public override int DamageSides => 1;
     public override int Weight => 4;
 
-    public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.Blindness1d100p100Script), nameof(DarkProjectileUnfriendlyProjectileScript), 20);
+    public override (string, string?, int)? QuaffBindingTuple => (nameof(Blindness1d100p100TimerScript), nameof(DarkProjectileUnfriendlyProjectileScript), 20);
  
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

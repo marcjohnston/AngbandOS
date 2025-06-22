@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class BoolWidget : Widget, IGetKey
 {
-    protected BoolWidget(Game game) : base(game) { }
     public BoolWidget(Game game, BoolWidgetGameConfiguration boolWidgetGameConfiguration) : base(game)
     {
         Key = boolWidgetGameConfiguration.Key ?? boolWidgetGameConfiguration.GetType().Name;

@@ -17,6 +17,8 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
         Used = gameConfiguration.Used;
         CustomLearnedDetails = gameConfiguration.CustomLearnedDetails;
         Quiet = gameConfiguration.Quiet;
+        PreMessage = gameConfiguration.PreMessage;
+        EnabledBoolPosFunctionBindingKey = gameConfiguration.EnabledBoolPosFunctionBindingKey;
     }
 
     /// <summary>
@@ -38,9 +40,9 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
 
     protected virtual bool Quiet { get; }
 
-    public string? PreMessage { get; } = null;
     public BoolPosFunction? EnabledBoolPosFunction { get; private set; }
-    protected string? EnabledBoolPosFunctionBindingKey { get; } = null;
+    public virtual string? PreMessage { get; } = null;
+    protected virtual string? EnabledBoolPosFunctionBindingKey { get; } = null;
     protected Timer Timer { get; private set; }
     protected Expression? Value { get; private set; }
     public string ToJson()
@@ -52,7 +54,9 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
             TimerBindingKey = TimerBindingKey,
             Used = Used,
             CustomLearnedDetails = CustomLearnedDetails,
-            Quiet = Quiet
+            Quiet = Quiet,
+            PreMessage = PreMessage,
+            EnabledBoolPosFunctionBindingKey = EnabledBoolPosFunctionBindingKey
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }

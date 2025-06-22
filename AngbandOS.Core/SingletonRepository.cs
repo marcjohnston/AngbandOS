@@ -378,10 +378,10 @@ internal class SingletonRepository
         RegisterRepository<AttackEffect>();
         RegisterRepository<Activation>();
         RegisterRepository<BaseCharacterClass>();
-        RegisterRepository<CharacterClassAbility>();
         RegisterRepository<BirthStage>();
-        RegisterRepository<BoolWidget>();
         RegisterRepository<BoolPosFunction>();
+        RegisterRepository<BoolWidget>();
+        RegisterRepository<CharacterClassAbility>();
         RegisterRepository<ChestTrap>();
         RegisterRepository<ChestTrapCombination>();
         RegisterRepository<CharacterClassSpell>();
@@ -476,7 +476,6 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Property>();
         LoadAllAssemblyTypes<Timer>();
         LoadAllAssemblyTypes<BoolFunction>();
-        LoadAllAssemblyTypes<BoolPosFunction>();
         LoadAllAssemblyTypes<IntFunction>();
         LoadAllAssemblyTypes<StringFunction>();
         LoadAllAssemblyTypes<TextFunction>();
@@ -489,6 +488,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration>(gameConfiguration.BoolWidgets);
+        LoadFromConfiguration<BoolPosFunction, BoolPosFunctionGameConfiguration>(gameConfiguration.BoolPosFunctions);
         LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities);
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations);
@@ -609,7 +609,7 @@ internal class SingletonRepository
         }
         if (missing.Count > 0)
         {
-            throw new Exception($"{String.Join("\t", missing)} enums have missing SystemScripts");
+            throw new Exception($"There is no cooresponding system script for the {String.Join("\t", missing)} enum.");
         }
     }
     private void ValidateJointTable<T, T1, T2>(Func<T1, T2, string> GetCompositeKey) where T : class where T1 : class where T2 : class // TODO: WHY CANT THIS BE where T: IGETKEY

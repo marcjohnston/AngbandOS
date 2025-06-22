@@ -103,6 +103,7 @@ public class GameConfiguration
         gameConfiguration.CharacterClassAbilities = LoadFromAssembly<CharacterClassAbilityGameConfiguration>(assembly);
         gameConfiguration.Activations = LoadFromAssembly<ActivationGameConfiguration>(assembly);
         gameConfiguration.ItemFilters = LoadFromAssembly<ItemFilterGameConfiguration>(assembly);
+        gameConfiguration.BoolPosFunctions = LoadFromAssembly<BoolPosFunctionGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -245,6 +246,7 @@ public class GameConfiguration
     public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
     public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
     public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
+    public virtual BoolPosFunctionGameConfiguration[]? BoolPosFunctions { get; set; } = null;
 
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {

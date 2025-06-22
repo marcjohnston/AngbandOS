@@ -9,4 +9,6 @@ public class TimerScriptGameConfiguration
     public virtual string TimerBindingKey { get; set; }
     public virtual string? CustomLearnedDetails { get; set; } = null;
     public virtual bool Quiet { get; set; } = false;
+    public virtual string? PreMessage { get; set; } = null;
+    public virtual string? EnabledBoolPosFunctionBindingKey { get; set; } = null;
 }
