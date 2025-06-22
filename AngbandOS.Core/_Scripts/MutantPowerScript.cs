@@ -7,29 +7,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class MutantPowerScript : UniversalScript
 {
     private MutantPowerScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the mutant power script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     private List<Mutation> ActivatableMutations()
     {
@@ -49,7 +29,7 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
     /// Executes the mutant power script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         int i = 0;
         int num;
@@ -168,7 +148,8 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
         }
         if (powers[i] == int.MaxValue)
         {
-            UseRacialPower();
+            // Check the player's race to see what their power is
+            Game.Race.UseRacialPower();
         }
         else if (powers[i] == 3)
         {
@@ -211,14 +192,5 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
             Game.EnergyUse = 100;
             activeMutations[powers[i] - 100].Activate();
         }
-    }
-
-    /// <summary>
-    /// Use the player's racial power, if they have one
-    /// </summary>
-    public void UseRacialPower()
-    {
-        // Check the player's race to see what their power is
-        Game.Race.UseRacialPower();
     }
 }

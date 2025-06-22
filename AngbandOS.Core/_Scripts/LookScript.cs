@@ -7,35 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LookScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class LookScript : UniversalScript
 {
     private LookScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the look script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the look script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         if (Game.TargetSet(Constants.TargetLook))
         {
