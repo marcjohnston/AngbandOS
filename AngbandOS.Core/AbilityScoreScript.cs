@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class AbilityScoreScript : EatOrQuaffScript, IGetKey
+internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey
 {
     public AbilityScoreScript(Game game, AbilityScoreScriptGameConfiguration gameConfiguration) : base(game)
     {

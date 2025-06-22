@@ -11,12 +11,39 @@ namespace AngbandOS.Core.Functions;
 /// to repaint the map as needed.
 /// </summary>
 [Serializable]
-internal class RefreshMapFunction : Function
+internal class RefreshMapFunction : IChangeTracker, IGetKey
 {
-    private RefreshMapFunction(Game game) : base(game) { } // This object is a singleton.
-    public override string[]? DependencyNames => new string[]
+    protected readonly Game Game;
+    private RefreshMapFunction(Game game) 
+    {
+        Game = game;
+    }
+    public virtual string[]? DependencyNames => new string[]
     {
         nameof(RefreshMapProperty), // Manual map refresh
-        nameof(InvulnerabilityTimer), // Invulnerability
+        nameof(InvulnerabilityTimer), // Invulnerability // TODO: Not sure why
     };
+    /// <summary>
+    /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.
+    /// </summary>
+    public bool IsChanged => Dependencies == null ? true : Dependencies.Any(_dependency => _dependency.IsChanged);
+
+    /// <summary>
+    /// Does nothing, because functions are not sinks for tracking.
+    /// </summary>
+    public void ClearChangedFlag() { }
+
+    protected IChangeTracker[]? Dependencies { get; private set; }
+    public string ToJson()
+    {
+        return "";
+    }
+    public string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public void Bind()
+    {
+        Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
+    }
 }

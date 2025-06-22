@@ -15,9 +15,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ExperiencePointsAtMaxConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override (string, bool, int)[] EnabledNames => new(string, bool, int)[] {
-        (nameof(FunctionsEnum.ExperienceLevelAtMaxFunction), true, 0)
+        (nameof(FunctionsEnum.ExperienceLevelAtMaxBoolFunction), true, 0)
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsAtMaxTextWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsAtMaxLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(ExperiencePointsForNextLevelConditionalWidget) };
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.ExperiencePointsForNextLevelFunction) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.ExperiencePointsForNextLevelIntFunction) };
 }

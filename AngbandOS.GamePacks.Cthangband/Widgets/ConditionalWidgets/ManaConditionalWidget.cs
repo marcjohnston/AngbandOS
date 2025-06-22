@@ -15,7 +15,7 @@ public class ManaConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
-        (nameof(FunctionsEnum.UsesManaFunction), true, 0)
+        (nameof(FunctionsEnum.UsesManaBoolFunction), true, 0)
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(ManaMaxRangedWidget), nameof(ManaLabelTextWidget), nameof(MaxManaLabelTextWidget), nameof(MaxManaIntWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(ManaMaxRangedWidget), nameof(ManaLabelWidget), nameof(MaxManaLabelWidget), nameof(MaxManaIntWidget) };
 }

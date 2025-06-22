@@ -351,7 +351,7 @@ internal class SingletonRepository
         RegisterRepository<IGameCommandScript>();
         RegisterRepository<IIntValue>();
         RegisterRepository<IMonsterSelector>();
-        RegisterRepository<INullableStringsValue>();
+        RegisterRepository<ITextValue>();
         RegisterRepository<IReadScrollOrUseStaffScript>();
         RegisterRepository<IScript>();
         RegisterRepository<IScriptBool>();
@@ -381,6 +381,7 @@ internal class SingletonRepository
         RegisterRepository<CharacterClassAbility>();
         RegisterRepository<BirthStage>();
         RegisterRepository<BoolWidget>();
+        RegisterRepository<BoolPosFunction>();
         RegisterRepository<ChestTrap>();
         RegisterRepository<ChestTrapCombination>();
         RegisterRepository<CharacterClassSpell>();
@@ -391,7 +392,6 @@ internal class SingletonRepository
         RegisterRepository<FixedArtifact>();
         RegisterRepository<FlaggedAction>();
         RegisterRepository<FloorEffect>();
-        RegisterRepository<Function>();
         RegisterRepository<GameCommand>();
         RegisterRepository<Gender>();
         RegisterRepository<God>();
@@ -422,7 +422,7 @@ internal class SingletonRepository
         RegisterRepository<MonsterSelector>();
         RegisterRepository<MonsterSpell>();
         RegisterRepository<Mutation>();
-        RegisterRepository<TextAreaWidget>();
+        RegisterRepository<TextWidget>();
         RegisterRepository<Patron>();
         RegisterRepository<PhysicalAttributeSet>();
         RegisterRepository<PlayerEffect>();
@@ -453,7 +453,7 @@ internal class SingletonRepository
         RegisterRepository<SyllableSet>();
         RegisterRepository<Symbol>();
         RegisterRepository<Talent>();
-        RegisterRepository<TextWidget>();
+        RegisterRepository<LabelWidget>();
         RegisterRepository<Tile>();
         RegisterRepository<Timer>();
         RegisterRepository<TimerScript>();
@@ -472,10 +472,15 @@ internal class SingletonRepository
         LoadAllAssemblyTypes<Justification>();
         LoadAllAssemblyTypes<MartialArtsEffect>();
         LoadAllAssemblyTypes<MonsterSelector>();
-        LoadAllAssemblyTypes<Function>();
         LoadAllAssemblyTypes<ProbabilityExpression>();
         LoadAllAssemblyTypes<Property>();
         LoadAllAssemblyTypes<Timer>();
+        LoadAllAssemblyTypes<BoolFunction>();
+        LoadAllAssemblyTypes<BoolPosFunction>();
+        LoadAllAssemblyTypes<IntFunction>();
+        LoadAllAssemblyTypes<StringFunction>();
+        LoadAllAssemblyTypes<TextFunction>();
+        LoadAllAssemblyTypes<RefreshMapFunction>();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
@@ -509,7 +514,7 @@ internal class SingletonRepository
         LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<TextAreaWidget, TextAreaWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets);
+        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<Patron, PatronGameConfiguration>(gameConfiguration.Patrons);
         LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals);
@@ -534,7 +539,7 @@ internal class SingletonRepository
         LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols);
-        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.TextWidgets);
+        LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.TextWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles);
         LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts);
         LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets);

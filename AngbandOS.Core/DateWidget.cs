@@ -60,13 +60,13 @@ internal class DateWidget : Widget, IGetKey
     public virtual int? Width { get; } = null;
 
     /// <summary>
-    /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property is bound using
+    /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget"/>.  This property is bound using
     /// the <see cref="JustificationName"/> property during the bind phase.
     /// </summary>
     protected Justification Justification { get; private set; }
 
     /// <summary>
-    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
+    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
     public virtual string JustificationName { get; } = nameof(LeftJustification);

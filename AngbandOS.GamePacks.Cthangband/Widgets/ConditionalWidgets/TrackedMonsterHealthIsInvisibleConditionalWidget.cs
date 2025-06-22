@@ -17,6 +17,6 @@ public class TrackedMonsterHealthIsInvisibleConditionalWidget : ConditionalWidge
     {
         (nameof(FunctionsEnum.TrackedMonsterIsInvisibleBoolFunction), true, 0)
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterHealthUnknownTextWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterHealthUnknownLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(PlayerIsHallucinatingTrackedMonsterHealthConditionalWidget) };
 }

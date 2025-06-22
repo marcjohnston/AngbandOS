@@ -15,10 +15,10 @@ public class ExperienceLevelConditionalWidget : ConditionalWidgetGameConfigurati
 {
     public override (string conditionalName, bool isTrue, int term)[] EnabledNames => new (string, bool, int)[]
     {
-        (nameof(FunctionsEnum.ExperienceLevelsLostFunction), true, 0)
+        (nameof(FunctionsEnum.ExperienceLevelsLostBoolFunction), true, 0)
     };
 
-    public override string[]? TrueWidgetNames => new string[] { nameof(ExperienceLevelLostIntWidget), nameof(ExperienceLevelLostLabelTextWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(ExperienceLevelLostIntWidget), nameof(ExperienceLevelLostLabelWidget) };
 
-    public override string[]? FalseWidgetNames => new string[] { nameof(ExperienceLevelIntWidget), nameof(ExperienceLevelLabelTextWidget) };
+    public override string[]? FalseWidgetNames => new string[] { nameof(ExperienceLevelIntWidget), nameof(ExperienceLevelLabelWidget) };
 }

@@ -17,6 +17,6 @@ public class PlayerIsHallucinatingTrackedMonsterHealthConditionalWidget : Condit
     {
         (nameof(FunctionsEnum.PlayerIsHallucinatingBoolFunction), true, 0)
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterHealthUnknownTextWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterHealthUnknownLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(TrackedMonsterHealthIsDeadConditionalWidget) };
 }

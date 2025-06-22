@@ -12,8 +12,8 @@ public class StudyBoolWidget : BoolWidgetGameConfiguration
     public override int X => 60;
     public override int Y => 44;
     public override int? Width => 5;
-    public override string BoolValueName => nameof(FunctionsEnum.CanStudyFunction);
+    public override string BoolValueName => nameof(FunctionsEnum.CanStudyBoolFunction);
     public override string TrueValue => "Study";
     public override string FalseValue => "";
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.CanStudyFunction) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.CanStudyBoolFunction) };
 }

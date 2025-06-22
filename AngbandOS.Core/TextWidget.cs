@@ -6,24 +6,21 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-/// <summary>
-/// Represents a widget that renders a single line of text at the coordinates specified by <see cref="X"/> and <see cref="Y"/>.  Text is automatically justified using the <see cref="Justification"/>
-/// property within the space provided by the <see cref="Width"/> property.  The text is drawn in the color specified by the <see cref="Color"/> property.
-/// </summary>
 [Serializable]
 internal class TextWidget : Widget, IGetKey
 {
-    protected TextWidget(Game game) : base(game) { } // TODO: Remove this
-    public TextWidget(Game game, TextWidgetGameConfiguration textWidgetGameConfiguration) : base(game)
+    public TextWidget(Game game, TextWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration) : base(game)
     {
-        Key = textWidgetGameConfiguration.Key ?? textWidgetGameConfiguration.GetType().Name;
-        Text = textWidgetGameConfiguration.Text;
-        Color = textWidgetGameConfiguration.Color;
-        X = textWidgetGameConfiguration.X;
-        Y = textWidgetGameConfiguration.Y;
-        Width = textWidgetGameConfiguration.Width;
-        JustificationName = textWidgetGameConfiguration.JustificationName;
-        ChangeTrackerNames = textWidgetGameConfiguration.ChangeTrackerNames;
+        Key = nullableStringsTextAreaWidgetGameConfiguration.Key ?? nullableStringsTextAreaWidgetGameConfiguration.GetType().Name;
+        NullableStringsValueName = nullableStringsTextAreaWidgetGameConfiguration.NullableStringsValueName;
+        Color = nullableStringsTextAreaWidgetGameConfiguration.Color;
+        X = nullableStringsTextAreaWidgetGameConfiguration.X;
+        Y = nullableStringsTextAreaWidgetGameConfiguration.Y;
+        Width = nullableStringsTextAreaWidgetGameConfiguration.Width;
+        Height = nullableStringsTextAreaWidgetGameConfiguration.Height;
+        JustificationName = nullableStringsTextAreaWidgetGameConfiguration.JustificationName;
+        AlignmentName = nullableStringsTextAreaWidgetGameConfiguration.AlignmentName;
+        ChangeTrackerNames = nullableStringsTextAreaWidgetGameConfiguration.ChangeTrackerNames;
     }
 
     /// <summary>
@@ -39,28 +36,9 @@ internal class TextWidget : Widget, IGetKey
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
+        Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
+        NullableStringsValue = Game.SingletonRepository.Get<ITextValue>(NullableStringsValueName);
     }
-
-    public virtual string ToJson()
-    {
-        TextWidgetGameConfiguration textWidgetGameConfiguration = new TextWidgetGameConfiguration()
-        {
-            Key = Key,
-            Text = Text,
-            Color = Color,
-            X = X,
-            Y = Y,
-            Width = Width,
-            JustificationName = JustificationName,
-            ChangeTrackerNames = ChangeTrackerNames,
-        };
-        return JsonSerializer.Serialize(textWidgetGameConfiguration, Game.GetJsonSerializerOptions());
-    }
-
-    /// <summary>
-    /// Returns the text to be rendered for the widget.
-    /// </summary>
-    public virtual string Text { get; }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
@@ -80,27 +58,92 @@ internal class TextWidget : Widget, IGetKey
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public virtual int? Width { get; } = null;
+    public virtual int Width { get; }
 
     /// <summary>
-    /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property is bound using
-    /// the <see cref="JustificationName"/> property during the bind phase.
+    /// Returns the height of the widget.  If the height provided is less than the number of lines in the <see cref="Text"/> property, remaining lines will not be rendered.
+    /// </summary>
+    public virtual int Height { get; }
+
+    /// <summary>
+    /// Returns the <see cref="Justification"/> object to be used to justify the each line of the text within the <see cref="Width"/> of the <see cref="LabelWidget"/>.  This property
+    /// is bound using the <see cref="JustificationName"/> property during the bind phase.
     /// </summary>
     protected Justification Justification { get; private set; }
 
     /// <summary>
-    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
+    /// Returns the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is bound using the <see cref="AlignmentName"/>
+    /// property during the bind phase.
+    /// </summary>
+    protected Alignment Alignment { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is used to bind the <see cref="Alignment"/>
+    /// property during the bind phase.
+    /// </summary>
+    public virtual string AlignmentName { get; }
+
+    /// <summary>
+    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
     public virtual string JustificationName { get; } = nameof(LeftJustification);
+
+    ///// <summary>
+    ///// Returns the text to be rendered for the widget.
+    ///// </summary>
+    //public virtual string[] Text => NullableText ?? NullText;
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
     /// </summary>
     protected override void Paint()
     {
-        string justifiedText = Text;
-        justifiedText = Justification.Format(justifiedText, Width ?? justifiedText.Length);
-        Game.Screen.Print(Color, justifiedText, Y, X);
+        // Align the text vertically.
+        string[] text = NullableStringsValue.NullableStringsValue ?? DefaultText;
+        string[] alignedText = Alignment.Align(text, Height);
+
+        // Ensure we do not exceed the maximum height.
+        alignedText = alignedText.Take(Height).ToArray();
+
+        int currentY = Y;
+        foreach (string line in alignedText)
+        {
+            string justifiedText = Justification.Format(line, Width);
+            Game.Screen.Print(Color, justifiedText, currentY, X);
+            currentY++;
+        }
+    }
+
+    /// <summary>
+    /// Returns the text to render when the value is null.  By default, returns a single line of an empty string.  The alignment will vertically add lines and the justification
+    /// will horizontally add space.
+    /// </summary>
+    public virtual string[] DefaultText { get; } = new string[] { String.Empty };
+
+    /// <summary>
+    /// Returns the binding key for an <see cref="ITextValue"> function used to generate the value to render.
+    /// </summary>
+    public virtual string NullableStringsValueName { get; }
+
+    public ITextValue NullableStringsValue { get; private set; }
+    /// <summary>
+    /// Returns the text to be rendered for the widget.
+    /// </summary>
+    public virtual string[]? NullableText { get; }
+    public string ToJson()
+    {
+        TextWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration = new TextWidgetGameConfiguration()
+        {
+            Key = Key,
+            NullableStringsValueName = NullableStringsValueName,
+            Color = Color,
+            X = X,
+            Y = Y,
+            JustificationName = JustificationName,
+            AlignmentName = AlignmentName,
+            ChangeTrackerNames = ChangeTrackerNames,
+        };
+        return JsonSerializer.Serialize(nullableStringsTextAreaWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

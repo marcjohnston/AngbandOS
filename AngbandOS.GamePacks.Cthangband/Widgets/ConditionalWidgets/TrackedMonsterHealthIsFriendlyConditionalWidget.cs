@@ -17,6 +17,6 @@ public class TrackedMonsterHealthIsFriendlyConditionalWidget : ConditionalWidget
     {
         (nameof(FunctionsEnum.TrackedMonsterIsSleepingBoolFunction), true, 0)
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterHealthIsFriendlyTextWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterHealthIsFriendlyLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(TrackedMonsterHealthMaxRangedWidget) };
 }

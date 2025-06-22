@@ -14,10 +14,10 @@ public class TrapDetectionConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
-        (nameof(FunctionsEnum.TrapsDetectedFunction), true, 0)
+        (nameof(FunctionsEnum.TrapsDetectedBoolFunction), true, 0)
     };
 
     public override string[]? TrueWidgetNames => new string[] { nameof(TrapCountRangedWidget) };
-    public override string[]? FalseWidgetNames => new string[] { nameof(NoTrapsDetectedTextWidget) };
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.TrapsDetectedFunction) };
+    public override string[]? FalseWidgetNames => new string[] { nameof(NoTrapsDetectedLabelWidget) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.TrapsDetectedBoolFunction) };
 }

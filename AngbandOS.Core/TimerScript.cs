@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class TimerScript : EatOrQuaffScript, IGetKey
+internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
 {
     public TimerScript(Game game, TimerScriptGameConfiguration gameConfiguration) : base(game)
     {
@@ -31,12 +31,16 @@ internal class TimerScript : EatOrQuaffScript, IGetKey
     {
         Value = Game.ParseNullableNumericExpression(ValueExpression);
         Timer = Game.SingletonRepository.Get<Timer>(TimerBindingKey);
+        EnabledBoolPosFunction = Game.SingletonRepository.GetNullable<BoolPosFunction>(EnabledBoolPosFunctionBindingKey);
     }
     protected string? ValueExpression { get; }
     protected virtual string TimerBindingKey { get; }
 
     protected virtual bool Quiet { get; }
 
+    public string? PreMessage { get; } = null;
+    public BoolPosFunction? EnabledBoolPosFunction { get; private set; }
+    protected string? EnabledBoolPosFunctionBindingKey { get; } = null;
     protected Timer Timer { get; private set; }
     protected Expression? Value { get; private set; }
     public string ToJson()
@@ -54,6 +58,16 @@ internal class TimerScript : EatOrQuaffScript, IGetKey
     }
     public override IdentifiedResult ExecuteEatOrQuaffScript()
     {
+        if (PreMessage != null)
+        {
+            Game.MsgPrint(PreMessage);
+        }
+
+        if (EnabledBoolPosFunction != null && !EnabledBoolPosFunction.BoolValue)
+        {
+            return IdentifiedResult.False;
+        }
+
         // Is this a request to reset?
         if (Value is null)
         {

@@ -3,15 +3,12 @@
 [Serializable]
 public class TextWidgetGameConfiguration
 {
-    /// <summary>
-    /// Returns the text to be rendered for the widget.
-    /// </summary>
-    public virtual string Text { get; set; }
+    public virtual string NullableStringsValueName { get; set; }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
+    public virtual ColorEnum Color { get; set; }
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
@@ -26,13 +23,24 @@ public class TextWidgetGameConfiguration
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public virtual int? Width { get; set; } = null;
+    public virtual int Width { get; set; }
+
+    /// <summary>
+    /// Returns the height of the widget.  If the height provided is less than the number of lines in the <see cref="Text"/> property, remaining lines will not be rendered.
+    /// </summary>
+    public virtual int Height { get; set; }
 
     /// <summary>
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
     public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
+
+    /// <summary>
+    /// Returns the name of the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is used to bind the <see cref="Alignment"/>
+    /// property during the bind phase.
+    /// </summary>
+    public virtual string AlignmentName { get; set; }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

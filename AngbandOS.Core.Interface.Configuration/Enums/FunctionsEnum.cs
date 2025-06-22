@@ -8,32 +8,32 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public enum FunctionsEnum
 {
-    ArmorClassFunction,
-    BoolFunction,
-    CanStudyFunction,
-    CharacterSubclassNameFunction,
-    DepthFunction,
-    ExperienceLevelAtMaxFunction,
-    ExperienceLevelsLostFunction,
-    ExperiencePointsForNextLevelFunction,
-    ExperiencePointsLostFunction,
- //   FearFunction,
-    IntFunction,
-    NullableStringsFunction,
+    CanStudyBoolFunction,
+    ExperienceLevelAtMaxBoolFunction,
+    ExperienceLevelsLostBoolFunction,
+    ExperiencePointsLostBoolFunction,
+    HasBlindnessResistanceBoolFunction,
     PlayerIsHallucinatingBoolFunction,
     PlayerIsTrackingMonsterBoolFunction,
-    RaceTitleFunction,
-    RefreshMapFunction,
-    StringFunction,
-    TrackedMonsterHealthIntFunction,
-    TrackedMonsterMaxHealthIntFunction,
     TrackedMonsterIsAfraidBoolFunction,
     TrackedMonsterIsDeadBoolFunction,
     TrackedMonsterIsFriendlyBoolFunction,
     TrackedMonsterIsInvisibleBoolFunction,
     TrackedMonsterIsSleepingBoolFunction,
-    TrackedMonsterRaceNameNullableStringsFunction,
-    TrapCountFunction,
-    TrapsDetectedFunction,
-    UsesManaFunction
+    TrapsDetectedBoolFunction,
+    UsesManaBoolFunction,
+
+    RefreshMapFunction,
+
+    ArmorClassIntFunction,
+    ExperiencePointsForNextLevelIntFunction,
+    TrackedMonsterHealthIntFunction,
+    TrackedMonsterMaxHealthIntFunction,
+    TrapCountIntFunction,
+
+    CharacterSubclassNameStringFunction,
+    DepthStringFunction,
+    RaceTitleStringFunction,
+
+    TrackedMonsterRaceNameTextFunction,
 }

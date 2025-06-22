@@ -14,6 +14,6 @@ public class PlayerTitleConditionalWidget : ConditionalWidgetGameConfiguration
     {
         (nameof(PropertiesEnum.IsWizardBoolProperty), true, 0),
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(WizardTitleTextWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(WizardTitleLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(WinnerConditionalWidget) };
 }

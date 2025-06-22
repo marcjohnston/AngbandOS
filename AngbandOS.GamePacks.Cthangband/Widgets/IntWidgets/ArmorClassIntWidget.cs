@@ -13,7 +13,7 @@ public class ArmorClassIntWidget : IntWidgetGameConfiguration
     public override int Y => 22;
     public override int? Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntValueName => nameof(FunctionsEnum.ArmorClassFunction);
+    public override string IntValueName => nameof(FunctionsEnum.ArmorClassIntFunction);
     public override string JustificationName => nameof(JustificationsEnum.RightJustification);
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.ArmorClassFunction) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.ArmorClassIntFunction) };
 }
