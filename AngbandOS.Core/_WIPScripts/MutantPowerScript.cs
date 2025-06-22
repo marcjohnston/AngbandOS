@@ -25,10 +25,10 @@ internal class MutantPowerScript : Script, IScript, ICastSpellScript, IGameComma
     /// Executes the mutant power script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new RepeatableResult(false);
+        return RepeatableResultEnum.False;
     }
 
     private List<Mutation> ActivatableMutations()

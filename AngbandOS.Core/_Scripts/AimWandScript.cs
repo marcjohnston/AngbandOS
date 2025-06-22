@@ -25,10 +25,10 @@ internal class AimWandScript : Script, IScript, ICastSpellScript, IGameCommandSc
     /// Executes the aim wand script, disposes of the successful result and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new RepeatableResult(false);
+        return RepeatableResultEnum.False;
     }
 
     /// <summary>

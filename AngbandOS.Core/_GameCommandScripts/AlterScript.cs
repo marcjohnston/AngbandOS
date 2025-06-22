@@ -34,7 +34,7 @@ internal class AlterScript : Script, IScript, ICastSpellScript, IGameCommandScri
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         // Assume we won't disturb the player
         bool isRepeatable = false;
@@ -66,6 +66,6 @@ internal class AlterScript : Script, IScript, ICastSpellScript, IGameCommandScri
                 }
             }
         }
-        return new RepeatableResult(isRepeatable);
+        return isRepeatable ? RepeatableResultEnum.True : RepeatableResultEnum.False;
     }
 }

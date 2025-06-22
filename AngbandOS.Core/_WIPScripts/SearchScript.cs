@@ -28,10 +28,10 @@ internal class SearchScript : Script, IScript, ICastSpellScript, IGameCommandScr
     /// Executes the search script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new RepeatableResult(false);
+        return RepeatableResultEnum.False;
     }
 
     /// <summary>

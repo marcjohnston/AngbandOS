@@ -34,13 +34,13 @@ internal class RunScript : Script, IScript, ICastSpellScript, IGameCommandScript
     /// Executes the run script and returns false, if the player is confused; true, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         // Can't run if we're confused
         if (Game.ConfusionTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
-            return new RepeatableResult(false); // Don't repeat this.
+            return RepeatableResultEnum.False; // Don't repeat this.
         }
         // Get a direction if we don't already have one
         if (Game.GetDirectionNoAim(out int dir))
@@ -50,6 +50,6 @@ internal class RunScript : Script, IScript, ICastSpellScript, IGameCommandScript
             // Run one step in the chosen direction
             Game.RunOneStep(dir);
         }
-        return new RepeatableResult(true); // Repeat the run.
+        return RepeatableResultEnum.True; // Repeat the run.
     }
 }

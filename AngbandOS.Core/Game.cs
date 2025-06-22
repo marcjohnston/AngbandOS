@@ -6467,8 +6467,8 @@ internal class Game
                 bool isRepeatable = false;
                 if (command.ExecuteScript != null)
                 {
-                    RepeatableResult gameCommandResult = command.ExecuteScript.ExecuteGameCommandScript();
-                    isRepeatable = gameCommandResult.IsRepeatable;
+                    RepeatableResultEnum gameCommandResult = command.ExecuteScript.ExecuteGameCommandScript();
+                    isRepeatable = gameCommandResult == RepeatableResultEnum.True;
                 }
 
                 if (!isRepeatable)

@@ -34,7 +34,7 @@ internal class OpenScript : Script, IScript, ICastSpellScript, IGameCommandScrip
     /// Executes the open script and returns true, if the open fails due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // Check if there's only one thing we can open
@@ -122,6 +122,6 @@ internal class OpenScript : Script, IScript, ICastSpellScript, IGameCommandScrip
                 isRepeatable = Game.OpenDoor(y, x);
             }
         }
-        return new RepeatableResult(isRepeatable);
+        return isRepeatable ? RepeatableResultEnum.True : RepeatableResultEnum.False;
     }
 }

@@ -36,7 +36,7 @@ internal class WalkAndPickupScript : Script, IScript, ICastSpellScript, IGameCom
     /// Executes the walk and pickup script and returns true, if the walk succeeded or failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
 
@@ -48,6 +48,6 @@ internal class WalkAndPickupScript : Script, IScript, ICastSpellScript, IGameCom
             Game.MovePlayer(dir, false);
             isRepeatable = true;
         }
-        return new RepeatableResult(isRepeatable);
+        return isRepeatable ? RepeatableResultEnum.True : RepeatableResultEnum.False;
     }
 }

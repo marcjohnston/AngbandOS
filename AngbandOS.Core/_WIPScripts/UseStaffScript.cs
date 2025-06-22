@@ -25,10 +25,10 @@ internal class UseStaffScript : Script, IScript, ICastSpellScript, IGameCommandS
     /// Executes the use staff script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new RepeatableResult(false);
+        return RepeatableResultEnum.False;
     }
 
     /// <summary>

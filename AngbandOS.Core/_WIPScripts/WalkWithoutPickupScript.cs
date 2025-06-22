@@ -34,7 +34,7 @@ internal class WalkWithoutPickupScript : Script, IScript, ICastSpellScript, IGam
     /// Executes the stay script.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // If we don't already have a direction, get one
@@ -45,6 +45,6 @@ internal class WalkWithoutPickupScript : Script, IScript, ICastSpellScript, IGam
             Game.MovePlayer(dir, true);
             isRepeatable = true;
         }
-        return new RepeatableResult(isRepeatable);
+        return isRepeatable ? RepeatableResultEnum.True : RepeatableResultEnum.False;
     }
 }

@@ -25,10 +25,10 @@ internal class SayLocationAndFeelingScript : Script, IScript, ICastSpellScript, 
     /// Executes the say location and feeling script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new RepeatableResult(false);
+        return RepeatableResultEnum.False;
     }
 
     /// <summary>

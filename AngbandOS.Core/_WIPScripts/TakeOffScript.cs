@@ -34,10 +34,10 @@ internal class TakeOffScript : Script, IScript, ICastSpellScript, IGameCommandSc
     /// Executes the take-off script and returns false.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new RepeatableResult(false);
+        return RepeatableResultEnum.False;
     }
 
     /// <summary>

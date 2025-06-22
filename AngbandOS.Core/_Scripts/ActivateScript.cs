@@ -97,9 +97,9 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
     /// Executes the activate script, disposes of the successful result and returns false because activation is never repeatable.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         ExecuteScript();
-        return new RepeatableResult(false);
+        return RepeatableResultEnum.False;
     }
 }

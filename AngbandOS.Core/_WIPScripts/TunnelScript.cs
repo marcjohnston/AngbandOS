@@ -34,7 +34,7 @@ internal class TunnelScript : Script, IScript, ICastSpellScript, IGameCommandScr
     /// Executes the stay script and returns true, if the tunnel succeeded or failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // Get the direction in which we wish to tunnel
@@ -66,6 +66,6 @@ internal class TunnelScript : Script, IScript, ICastSpellScript, IGameCommandScr
                 isRepeatable = Game.TunnelThroughTile(tileY, tileX);
             }
         }
-        return new RepeatableResult(isRepeatable);
+        return isRepeatable ? RepeatableResultEnum.True : RepeatableResultEnum.False;
     }
 }

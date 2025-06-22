@@ -67,7 +67,7 @@ internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScri
     /// Executes the close script and returns true, if the close failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResult ExecuteGameCommandScript()
+    public RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // If there's only one door, assume we mean that one and don't ask for a direction
@@ -99,6 +99,6 @@ internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScri
                 isRepeatable = Game.CloseDoor(y, x);
             }
         }
-        return new RepeatableResult(isRepeatable);
+        return isRepeatable ? RepeatableResultEnum.True : RepeatableResultEnum.False;
     }
 }
