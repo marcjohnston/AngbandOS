@@ -10,24 +10,14 @@ namespace AngbandOS.Core.Scripts;
 /// Activate the special feature of an item.
 /// </summary>
 [Serializable]
-internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class ActivateScript : UniversalScript
 {
     private ActivateScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
 
     /// <summary>
     /// Executes the activate script and disposes of the successful result.
     /// </summary>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         // No item passed in, so get one; filtering to activatable items only
         if (!Game.SelectItem(out Item? item, "Activate which item? ", true, true, false, Game.SingletonRepository.Get<ItemFilter>(nameof(KnownAndActivableItemFilter))))
@@ -91,15 +81,5 @@ internal class ActivateScript : Script, IScript, ICastSpellScript, IGameCommandS
         {
             UsedResult usedResult = mergedCharacteristics.Activation.Activate(item);
         }
-    }
-
-    /// <summary>
-    /// Executes the activate script, disposes of the successful result and returns false because activation is never repeatable.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
     }
 }

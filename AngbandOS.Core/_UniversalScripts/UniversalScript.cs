@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 [Serializable]
 
-internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript
+internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript, IGameCommandScript, IStoreCommandScript
 {
     protected readonly Game Game;
     protected UniversalScript(Game game)
@@ -25,6 +25,8 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
     /// Returns true, if the script uses the item; false, otherwise.  Returns false, by default.
     /// </summary>
     public virtual bool UsesItem { get; } = false;
+
+    public virtual RepeatableResultEnum RepeatableResult { get; } = false;
 
     /// <summary>
     /// Returns true, if the script identifies the item; false, otherwise.  Returns false, by default.
@@ -65,6 +67,15 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
     {
         ExecuteScript();
         return new IdentifiedResult(IdentifiesItem);
+    }
+    public RepeatableResultEnum ExecuteGameCommandScript()
+    {
+        ExecuteScript();
+        return RepeatableResult;
+    }
+    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
     }
     #endregion
 }

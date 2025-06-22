@@ -10,34 +10,15 @@ namespace AngbandOS.Core.Scripts;
 /// Get a direction and bash a door, returning true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
 /// </summary>
 [Serializable]
-internal class BashScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class BashScript : GameCommandUniversalScript
 {
     private BashScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the bash script and disposes of the repeatable result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteGameCommandScript();
-    }
 
     /// <summary>
     /// Allows the player to select a direction and bashes the object found in that direction.  Returns true, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
+    public override RepeatableResultEnum ExecuteGameCommandScript()
     {
         // Assume it won't disturb us
         bool isRepeatable = false;

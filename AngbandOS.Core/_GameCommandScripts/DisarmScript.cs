@@ -7,34 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DisarmScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class DisarmScript : GameCommandUniversalScript
 {
     private DisarmScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the disarm script and disposes of the repeatable result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteGameCommandScript();
-    }
 
     /// <summary>
     /// Executes the disarm script and returns true, if the disarm fails due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
+    public override RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         int numTraps = Game.CountKnownTraps(out GridCoordinate? trapCoord);

@@ -8,6 +8,7 @@
     <AssemblyVersion>1.1</AssemblyVersion>
     <FileVersion>1.1</FileVersion>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <WarningsAsErrors>CS0114</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>

@@ -7,35 +7,19 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterRealityScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class AlterRealityScript : UniversalScript
 {
     private AlterRealityScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Executes the script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Takes the player to a new level with a random starting location.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         Game.MsgPrint("The world changes!");
         Game.DoCmdSaveGame(true);
         Game.NewLevelFlag = true;
         Game.CameFrom = LevelStartEnum.StartRandom;
     }
-    public string LearnedDetails => "";
 }

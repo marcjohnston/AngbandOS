@@ -7,34 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class AlterScript : GameCommandUniversalScript
 {
     private AlterScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the alter script and disposes of the successful result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteGameCommandScript();
-    }
 
     /// <summary>
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
+    public override RepeatableResultEnum ExecuteGameCommandScript()
     {
         // Assume we won't disturb the player
         bool isRepeatable = false;

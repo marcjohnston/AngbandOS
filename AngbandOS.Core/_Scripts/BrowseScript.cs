@@ -7,44 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrowseScript : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
+internal class BrowseScript : UniversalScript
 {
     private BrowseScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the browse script.  Does not modify any of the store flags.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Executes the browse script, disposes of the successful result and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the browse script and disposes of the successful result.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         // Make sure we can read
         if (!Game.CanCastSpells)

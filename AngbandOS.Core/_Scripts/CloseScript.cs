@@ -7,28 +7,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class CloseScript : GameCommandUniversalScript
 {
     private CloseScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the close script and disposes of the repeatable result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteGameCommandScript();
-    }
 
     /// <summary>
     /// Count the number of open doors around the players location, puting the location of the
@@ -67,7 +48,7 @@ internal class CloseScript : Script, IScript, ICastSpellScript, IGameCommandScri
     /// Executes the close script and returns true, if the close failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
+    public override RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // If there's only one door, assume we mean that one and don't ask for a direction
