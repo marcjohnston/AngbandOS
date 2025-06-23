@@ -290,7 +290,6 @@
         LightAreaRadius3Damage2d15Script,
         LightAreaScript,
         LightningBoltScript,
-        LightningStormScript,
         LightScript,
         ListCommandsScript,
         LocateScript,

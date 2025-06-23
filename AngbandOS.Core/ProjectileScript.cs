@@ -110,44 +110,44 @@ internal class ProjectileScript : IGetKey, IUniversalScript
     protected virtual string RadiusRollExpression { get; } = "0";
 
     /// <summary>
-    /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.
+    /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.  Defaults to false;
     /// </summary>
-    public virtual bool Stop { get; }
+    public virtual bool Stop { get; } = false;
 
     /// <summary>
-    /// Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.
+    /// Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.  Defaults to false;
     /// </summary>
-    public virtual bool Kill { get; }
+    public virtual bool Kill { get; } = false;
 
     /// <summary>
-    /// Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.
+    /// Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.  Defaults to false;
     /// </summary>
-    public virtual bool Jump { get; }
+    public virtual bool Jump { get; } = false;
 
     /// <summary>
-    /// Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.
+    /// Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.  Defaults to false;
     /// </summary>
-    public virtual bool Beam { get; }
+    public virtual bool Beam { get; } = false;
 
     /// <summary>
-    /// Allows the effect to interact with each grid (tile or cell) it moves through, which can alter terrain or affect grid-based elements like traps.
+    /// Allows the effect to interact with each grid (tile or cell) it moves through, which can alter terrain or affect grid-based elements like traps.  Defaults to false;
     /// </summary>
-    public virtual bool Grid { get; }
+    public virtual bool Grid { get; } = false;
 
     /// <summary>
-    /// Enables the effect to interact with items it encounters, possibly damaging or destroying them if applicable.
+    /// Enables the effect to interact with items it encounters, possibly damaging or destroying them if applicable.  Defaults to false;
     /// </summary>
-    public virtual bool Item { get; }
+    public virtual bool Item { get; } = false;
 
     /// <summary>
-    /// Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.
+    /// Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.  Defaults to false;
     /// </summary>
-    public virtual bool Thru { get; }
+    public virtual bool Thru { get; } = false;
 
     /// <summary>
-    /// Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.
+    /// Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.  Defaults to false;
     /// </summary>
-    public virtual bool Hide { get; }
+    public virtual bool Hide { get; } = false;
 
     /// <summary>
     /// Returns true, if the projectile is automatically identified; false, if the projectile is not identifiable; or null, if the projectile is identified, if and
