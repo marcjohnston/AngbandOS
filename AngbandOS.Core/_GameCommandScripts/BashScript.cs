@@ -10,9 +10,23 @@ namespace AngbandOS.Core.Scripts;
 /// Get a direction and bash a door, returning true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
 /// </summary>
 [Serializable]
-internal class BashScript : GameCommandUniversalScript
+internal class BashScript : GameCommandUniversalScript, IGetKey
 {
     private BashScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     /// <summary>
     /// Allows the player to select a direction and bashes the object found in that direction.  Returns true, if the action fails due to chance.

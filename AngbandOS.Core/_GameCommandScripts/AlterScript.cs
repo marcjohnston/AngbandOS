@@ -7,9 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterScript : GameCommandUniversalScript
+internal class AlterScript : GameCommandUniversalScript, IGetKey
 {
     private AlterScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     /// <summary>
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.

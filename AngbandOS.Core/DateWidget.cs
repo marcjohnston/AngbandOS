@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class DateWidget : Widget, IGetKey
 {
-    protected DateWidget(Game game) : base(game) { }
     public DateWidget(Game game, DateWidgetGameConfiguration dateWidgetGameConfiguration) : base(game)
     {
         Key = dateWidgetGameConfiguration.Key ?? dateWidgetGameConfiguration.GetType().Name;

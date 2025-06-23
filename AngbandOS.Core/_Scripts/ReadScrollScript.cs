@@ -7,9 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ReadScrollScript : UniversalScript
+internal class ReadScrollScript : UniversalScript, IGetKey
 {
     private ReadScrollScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     /// <summary>
     /// Executes the read scroll script.

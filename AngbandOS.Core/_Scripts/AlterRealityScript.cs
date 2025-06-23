@@ -7,10 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterRealityScript : UniversalScript
+internal class AlterRealityScript : UniversalScript, IGetKey
 {
     private AlterRealityScript(Game game) : base(game) { }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
     /// <summary>
     /// Takes the player to a new level with a random starting location.
     /// </summary>

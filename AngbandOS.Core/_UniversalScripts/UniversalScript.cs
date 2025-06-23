@@ -17,6 +17,7 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
     }
 
     public virtual bool RequiresRerendering { get; } = false;
+
     /// <summary>
     /// Returns information about this message, or blank if there is no detailed information.  Returns blank, by default.
     /// </summary>

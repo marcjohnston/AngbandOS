@@ -7,9 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAllWorthlessItemsScript : UniversalScript
+internal class DestroyAllWorthlessItemsScript : UniversalScript, IGetKey
 {
     private DestroyAllWorthlessItemsScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     /// <summary>
     /// Destroy all items in the inventory that are considered stompable.

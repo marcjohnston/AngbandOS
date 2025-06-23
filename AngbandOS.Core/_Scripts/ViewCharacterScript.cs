@@ -7,9 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewCharacterScript : UniversalScript, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
+internal class ViewCharacterScript : UniversalScript, IGetKey
 {
     private ViewCharacterScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     public override bool RequiresRerendering => true;
 

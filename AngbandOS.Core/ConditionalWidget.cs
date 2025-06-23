@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ConditionalWidget : Widget, IGetKey
 {
-    protected ConditionalWidget(Game game) : base(game) { }
     public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration) : base(game)
     {
         Key = conditionalWidgetGameConfiguration.Key ?? conditionalWidgetGameConfiguration.GetType().Name;

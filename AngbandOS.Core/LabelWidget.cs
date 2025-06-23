@@ -13,7 +13,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class LabelWidget : Widget, IGetKey
 {
-    protected LabelWidget(Game game) : base(game) { } // TODO: Remove this
     public LabelWidget(Game game, LabelWidgetGameConfiguration textWidgetGameConfiguration) : base(game)
     {
         Key = textWidgetGameConfiguration.Key ?? textWidgetGameConfiguration.GetType().Name;

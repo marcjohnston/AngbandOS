@@ -20,7 +20,6 @@ internal class StringWidget : Widget, IGetKey
         JustificationName = stringWidgetGameConfiguration.JustificationName;
         ChangeTrackerNames = stringWidgetGameConfiguration.ChangeTrackerNames;
     }
-    protected StringWidget(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

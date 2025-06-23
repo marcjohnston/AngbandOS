@@ -7,9 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkAndPickupScript : GameCommandUniversalScript
+internal class WalkAndPickupScript : GameCommandUniversalScript, IGetKey
 {
     private WalkAndPickupScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     /// <summary>
     /// Executes the walk and pickup script and returns true, if the walk succeeded or failed due to chance; false, otherwise.

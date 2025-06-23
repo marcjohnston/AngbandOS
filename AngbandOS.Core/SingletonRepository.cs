@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interface.Configuration;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -466,20 +465,7 @@ internal class SingletonRepository
         RegisterRepository<WizardCommand>();
         
         // Load system singletons.
-        LoadAllAssemblyTypes<Alignment>();
-        LoadAllAssemblyTypes<ConsoleElement>();
-        LoadAllAssemblyTypes<FlaggedAction>();
-        LoadAllAssemblyTypes<Justification>();
-        LoadAllAssemblyTypes<MartialArtsEffect>();
-        LoadAllAssemblyTypes<MonsterSelector>();
-        LoadAllAssemblyTypes<ProbabilityExpression>();
-        LoadAllAssemblyTypes<Property>();
-        LoadAllAssemblyTypes<Timer>();
-        LoadAllAssemblyTypes<BoolFunction>();
-        LoadAllAssemblyTypes<IntFunction>();
-        LoadAllAssemblyTypes<StringFunction>();
-        LoadAllAssemblyTypes<TextFunction>();
-        LoadAllAssemblyTypes<RefreshMapFunction>();
+        LoadAllAssemblyTypes<IGetKey>();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
@@ -548,37 +534,6 @@ internal class SingletonRepository
         LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands);
 
-        // Load the remaining user-configured singletons from the assembly.  These singletons have not been exported to the GamePack yet.
-        LoadAllAssemblyTypes<Ability>();
-        LoadAllAssemblyTypes<ActivationWeightedRandom>();
-        LoadAllAssemblyTypes<AlterAction>();
-        LoadAllAssemblyTypes<ArtifactBias>();
-        LoadAllAssemblyTypes<AttackEffect>();
-        LoadAllAssemblyTypes<BirthStage>();
-        LoadAllAssemblyTypes<BaseCharacterClass>();
-        LoadAllAssemblyTypes<ChestTrap>();
-        LoadAllAssemblyTypes<DungeonGenerator>();
-        LoadAllAssemblyTypes<FixedArtifact>();
-        LoadAllAssemblyTypes<FloorEffect>();
-        LoadAllAssemblyTypes<ItemAction>();
-        LoadAllAssemblyTypes<ItemEffect>();
-        LoadAllAssemblyTypes<ItemQualityRating>();
-        LoadAllAssemblyTypes<ItemTest>();
-        LoadAllAssemblyTypes<MartialArtsAttack>();
-        LoadAllAssemblyTypes<MonsterEffect>();
-        LoadAllAssemblyTypes<MonsterFilter>();
-        LoadAllAssemblyTypes<MonsterRaceFilter>();
-        LoadAllAssemblyTypes<MonsterSpell>();
-        LoadAllAssemblyTypes<Mutation>();
-        LoadAllAssemblyTypes<PlayerEffect>();
-        LoadAllAssemblyTypes<Race>();
-        LoadAllAssemblyTypes<Reward>();
-        LoadAllAssemblyTypes<RoomLayout>();
-        LoadAllAssemblyTypes<Script>();
-        LoadAllAssemblyTypes<SpellResistantDetection>();
-        LoadAllAssemblyTypes<Talent>();
-        LoadAllAssemblyTypes<WieldSlot>();
-
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
         ValidateSystemScriptsEnum(); // TODO: This is development validation
@@ -609,7 +564,7 @@ internal class SingletonRepository
         }
         if (missing.Count > 0)
         {
-            throw new Exception($"There is no cooresponding system script for the {String.Join("\t", missing)} enum.");
+            throw new Exception($"There is no cooresponding system script for the {String.Join("\t", missing)} enum.  A system script that implements the {nameof(IGetKey)} is required to be loaded.");
         }
     }
     private void ValidateJointTable<T, T1, T2>(Func<T1, T2, string> GetCompositeKey) where T : class where T1 : class where T2 : class // TODO: WHY CANT THIS BE where T: IGETKEY
@@ -681,7 +636,7 @@ internal class SingletonRepository
                 string? key = singleton.GetKey;
                 if (key is null)
                 {
-                    throw new Exception($"The singleton {singleton.GetType().Name} has a null key value.  This may be the result of a the json deserialization.");
+                    throw new Exception($"The singleton {singleton.GetType().Name} has a null key value.  This may be the result of a the json deserialization or a public ctor(Game game) still available for a singleton that no longer supports system loading.");
                 }
 
                 // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.

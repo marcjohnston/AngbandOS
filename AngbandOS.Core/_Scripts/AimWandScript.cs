@@ -7,10 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AimWandScript : UniversalScript
+internal class AimWandScript : UniversalScript, IGetKey
 {
     private AimWandScript(Game game) : base(game) { }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
     /// <summary>
     /// Executes the aim wand script and disposes of the successful result.
     /// </summary>

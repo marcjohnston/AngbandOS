@@ -7,13 +7,27 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JournalScript : UniversalScript
+internal class JournalScript : UniversalScript, IGetKey
 {
+    private JournalScript(Game game) : base(game) { }
     private readonly ColorEnum[] _menuColors = new ColorEnum[128]; // TODO: This is state that we might not need
     private readonly int[] _menuIndices = new int[128]; // TODO: This is state that we might not need
     private readonly string[] _menuItem = new string[128]; // TODO: This is state that we might not need
     private int _menuLength; // TODO: This is state that we might not need
-    private JournalScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     public override bool RequiresRerendering => true;
 

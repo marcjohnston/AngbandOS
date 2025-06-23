@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript, ICastSpellScript, IStoreCommandScript, IGetKey
+internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript, ICastSpellScript, IStoreCommandScript
 {
     protected readonly Game Game;
     protected GameCommandUniversalScript(Game game)
@@ -20,20 +20,6 @@ internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript
     /// </summary>
     public virtual string LearnedDetails => "";
     public abstract RepeatableResultEnum ExecuteGameCommandScript();
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public virtual void Bind() { }
 
     #region Adapters
     public void ExecuteCastSpellScript(Spell spell)

@@ -23,9 +23,6 @@ internal class Animation : IGetKey
         Name = animationGameConfiguration.Name;
         Sequence = animationGameConfiguration.Sequence;
     }
-    protected Animation(Game game)
-    {
-    }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

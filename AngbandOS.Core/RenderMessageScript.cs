@@ -18,16 +18,10 @@ internal class RenderMessageScript : UniversalScript, IGetKey
         IdentifiesItem = renderMessageScriptGameConfiguration.IdentifiesItem;
     }
 
-    public override bool UsesItem { get; } = false;
-    public override bool IdentifiesItem { get; } = false;
-
-    public virtual string Message { get; }
-
-    public override void ExecuteScript()
-    {
-        Game.MsgPrint(Message);
-    }
-
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
     public string ToJson()
     {
         RenderMessageScriptGameConfiguration gameConfiguration = new()
@@ -40,10 +34,20 @@ internal class RenderMessageScript : UniversalScript, IGetKey
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public void Bind() { }
-
     public virtual string Key { get; }
 
     public string GetKey => Key;
+    public virtual void Bind() { }
+
+    public override bool UsesItem { get; } = false;
+    public override bool IdentifiesItem { get; } = false;
+
+    public virtual string Message { get; }
+
+    public override void ExecuteScript()
+    {
+        Game.MsgPrint(Message);
+    }
+
 }
 
