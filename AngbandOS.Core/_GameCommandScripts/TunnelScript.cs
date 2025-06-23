@@ -7,34 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TunnelScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class TunnelScript : GameCommandUniversalScript
 {
     private TunnelScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the tunnel script and disposes of the repeatable result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteScript();
-    }
 
     /// <summary>
     /// Executes the stay script and returns true, if the tunnel succeeded or failed due to chance; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
+    public override RepeatableResultEnum ExecuteGameCommandScript()
     {
         bool isRepeatable = false;
         // Get the direction in which we wish to tunnel

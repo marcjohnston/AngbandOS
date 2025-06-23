@@ -7,35 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ToggleSearchScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class ToggleSearchScript : UniversalScript
 {
     private ToggleSearchScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the toggle search script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the toggle search script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         Game.IsSearching = !Game.IsSearching;
         Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();

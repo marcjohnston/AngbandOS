@@ -7,35 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SayFeelingScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class SayFeelingScript : UniversalScript
 {
     private SayFeelingScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the say feeling script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the say feeling script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         if (Game.CurrentDepth > 0)
         {

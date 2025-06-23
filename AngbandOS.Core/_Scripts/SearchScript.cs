@@ -10,35 +10,16 @@ namespace AngbandOS.Core.Scripts;
 /// Search around the player for secret doors and traps
 /// </summary>
 [Serializable]
-internal class SearchScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class SearchScript : UniversalScript
 {
     private SearchScript(Game game) : base(game) { }
 
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the search script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the search script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         // Searching costs 100.
         Game.EnergyUse = 100;

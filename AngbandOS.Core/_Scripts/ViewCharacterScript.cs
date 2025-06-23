@@ -7,45 +7,17 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewCharacterScript : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
+internal class ViewCharacterScript : UniversalScript, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
 {
     private ViewCharacterScript(Game game) : base(game) { }
 
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the view character script and sets the requires rerendering flag.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
-    {
-        ExecuteScript();
-        storeCommandEvent.RequiresRerendering = true;
-    }
-
-    /// <summary>
-    /// Executes the view character script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
+    public override bool RequiresRerendering => true;
 
     /// <summary>
     /// Renders details about character.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         // Save the current screen
         Game.FullScreenOverlay = true;

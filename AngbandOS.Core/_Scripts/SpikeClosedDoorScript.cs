@@ -7,35 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpikeClosedDoorScript : Script, IScript, ICastSpellScript, IGameCommandScript
+internal class SpikeClosedDoorScript : UniversalScript
 {
     private SpikeClosedDoorScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
-
-    /// <summary>
-    /// Executes the spike closed door script and returns false.
-    /// </summary>
-    /// <returns></returns>
-    public RepeatableResultEnum ExecuteGameCommandScript()
-    {
-        ExecuteScript();
-        return RepeatableResultEnum.False;
-    }
 
     /// <summary>
     /// Executes the spike closed door script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         // Get the location to be spiked
         if (Game.GetDirectionNoAim(out int dir))
