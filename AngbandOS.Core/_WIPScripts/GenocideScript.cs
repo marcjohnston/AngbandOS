@@ -71,10 +71,10 @@ internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, 
         ExecuteScriptBool(true);
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
     public string LearnedDetails => "";
 }

@@ -11,7 +11,7 @@ internal class PowerDragonScript : Script, IActivateItemScript
 {
     private PowerDragonScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(Missile300r4ProjectileScript));
         Game.MsgPrint("Your armor glows many colors...");
@@ -24,6 +24,6 @@ internal class PowerDragonScript : Script, IActivateItemScript
         Game.RunScript(nameof(FireResistance1d50p50TimerScript));
         Game.ColdResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
         Game.PoisonResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

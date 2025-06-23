@@ -17,7 +17,7 @@ internal class Recharge60IdentifableAndUsedScript : Script, IReadScrollOrUseStaf
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        UsedResult usedResult = Game.RunUsedScriptInt(nameof(RechargeItemScript), 60);
-        return new IdentifiedAndUsedResult(true, usedResult.IsUsed);
+        UsedResultEnum usedResult = Game.RunUsedScriptInt(nameof(RechargeItemScript), 60);
+        return new IdentifiedAndUsedResult(true, usedResult);
     }
 }

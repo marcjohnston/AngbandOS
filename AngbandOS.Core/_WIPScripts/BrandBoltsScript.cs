@@ -27,12 +27,12 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IActivateIt
     /// Runs the successful script and returns true, because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
 
         // Return true because the player cannot cancel the script.
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 
     /// <summary>

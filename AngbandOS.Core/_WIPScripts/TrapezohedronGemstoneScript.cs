@@ -11,7 +11,7 @@ internal class TrapezohedronGemstoneScript : Script, IActivateItemScript
 {
     private TrapezohedronGemstoneScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.MsgPrint("The gemstone flashes bright red!");
         Game.RunScript(nameof(LightScript));
@@ -24,6 +24,6 @@ internal class TrapezohedronGemstoneScript : Script, IActivateItemScript
         {
             Game.RunScript(nameof(ToggleRecallScript));
         }
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

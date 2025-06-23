@@ -202,9 +202,9 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
         return new IdentifiedAndUsedResult(true, true);
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteScriptInt(100);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

@@ -6,18 +6,8 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
-public class UsedResult
+public enum UsedResultEnum
 {
-    public bool IsUsed { get; set; }
-    public UsedResult(bool isUsed)
-    {
-        IsUsed = isUsed;
-    }
-    public UsedResult(IdentifiedAndUsedResult identifiedAndUsedResult)
-    {
-        IsUsed = identifiedAndUsedResult.IsUsed;
-    }
-    public static UsedResult True => new UsedResult(true);
-    public static UsedResult False => new UsedResult(false);
+    True,
+    False
 }

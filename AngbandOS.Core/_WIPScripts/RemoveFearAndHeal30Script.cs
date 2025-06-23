@@ -11,10 +11,10 @@ internal class RemoveFearAndHeal30Script : Script, IActivateItemScript
 {
     private RemoveFearAndHeal30Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.FearTimer.ResetTimer();
         Game.RestoreHealth(30);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

@@ -33,10 +33,10 @@ internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWan
     public abstract IdentifiedResultEnum ExecuteEatOrQuaffScript();
 
     #region Adapters
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteEatOrQuaffScript();
-        return new UsedResult(UsesItem);
+        return UsesItem ? UsedResultEnum.True : UsedResultEnum.False;
     }
 
     public IdentifiedResultEnum ExecuteAimWandScript(int dir)

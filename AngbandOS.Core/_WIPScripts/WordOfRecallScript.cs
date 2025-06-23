@@ -11,9 +11,9 @@ internal class WordOfRecallScript : Script, IActivateItemScript
 {
     private WordOfRecallScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(ToggleRecallScript));
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

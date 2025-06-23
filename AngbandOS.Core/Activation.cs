@@ -56,7 +56,7 @@ internal class Activation : IGetKey
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    public UsedResult Activate(Item item) // TODO: This should be an ActivatibleScript
+    public UsedResultEnum Activate(Item item) // TODO: This should be an ActivatibleScript
     {
         if (PreActivationMessage != null)
         {
@@ -64,8 +64,8 @@ internal class Activation : IGetKey
             string formattedPreActivationMessage = String.Format(PreActivationMessage, itemClassName);
             Game.MsgPrint(formattedPreActivationMessage);
         }
-        UsedResult usedResult = ActivationCancellableScript.ExecuteActivateItemScript(item);
-        if (usedResult.IsUsed)
+        UsedResultEnum usedResult = ActivationCancellableScript.ExecuteActivateItemScript(item);
+        if (usedResult == UsedResultEnum.True)
         {
             item.ActivationRechargeTimeRemaining = Game.ComputeIntegerExpression(RechargeTimeRoll).Value;
         }

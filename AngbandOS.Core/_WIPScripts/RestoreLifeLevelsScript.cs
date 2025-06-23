@@ -11,9 +11,9 @@ internal class RestoreLifeLevelsScript : Script, IActivateItemScript
 {
     private RestoreLifeLevelsScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(RestoreLevelScript));
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

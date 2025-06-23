@@ -20,10 +20,10 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, I
     /// Runs the successful script and returns false because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteEatOrQuaffScript();
-        return new UsedResult(false);
+        return UsedResultEnum.False;
     }
 
     /// <summary>

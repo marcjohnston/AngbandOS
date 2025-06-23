@@ -44,7 +44,7 @@ internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUn
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         return Choose().ExecuteActivateItemScript(item);
     }

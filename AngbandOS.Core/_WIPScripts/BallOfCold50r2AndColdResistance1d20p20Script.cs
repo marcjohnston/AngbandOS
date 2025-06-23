@@ -11,10 +11,10 @@ internal class BallOfCold50r2AndColdResistance1d20p20Script : Script, IActivateI
 {
     private BallOfCold50r2AndColdResistance1d20p20Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(Cold50r2ProjectileScript));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

@@ -21,24 +21,24 @@ internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IReadScro
 
     public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
-        UsedResult usedResult = ExecuteUsedScript();
-        return new IdentifiedAndUsedResult(true, usedResult.IsUsed);
+        UsedResultEnum usedResult = ExecuteUsedScript();
+        return new IdentifiedAndUsedResult(true, usedResult);
     }
 
     /// <summary>
     /// Identifies a chosen item and returns true, if the item selection is cancelled; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public UsedResult ExecuteUsedScript()
+    public UsedResultEnum ExecuteUsedScript()
     {
         if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
             Game.MsgPrint("You have nothing to identify.");
-            return UsedResult.False;
+            return UsedResultEnum.False;
         }
         if (oPtr == null)
         {
-            return UsedResult.False;
+            return UsedResultEnum.False;
         }
         oPtr.IsFlavorAware = true;
         oPtr.BecomeKnown();
@@ -58,18 +58,18 @@ internal class IdentifyItemScript : Script, IScript, ICastSpellScript, IReadScro
             oPtr.ItemOptimize();
         }
 
-        return UsedResult.True;
+        return UsedResultEnum.True;
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScript();
     }
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        UsedResult usedResult = ExecuteUsedScript();
-        return new IdentifiedAndUsedResult(true, usedResult.IsUsed);
+        UsedResultEnum usedResult = ExecuteUsedScript();
+        return new IdentifiedAndUsedResult(true, usedResult);
     }
 
     /// <summary>

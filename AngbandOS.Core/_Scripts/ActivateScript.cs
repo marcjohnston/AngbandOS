@@ -93,7 +93,7 @@ internal class ActivateScript : UniversalScript, IGetKey
         RoItemPropertySet mergedCharacteristics = item.GetEffectiveItemProperties();
         if (mergedCharacteristics.Activation != null)
         {
-            UsedResult usedResult = mergedCharacteristics.Activation.Activate(item);
+            UsedResultEnum usedResult = mergedCharacteristics.Activation.Activate(item);
         }
     }
 }

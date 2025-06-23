@@ -13,5 +13,5 @@ internal interface IUsedScriptInt
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    UsedResult ExecuteUsedScriptInt(int num);
+    UsedResultEnum ExecuteUsedScriptInt(int num);
 }

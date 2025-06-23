@@ -11,7 +11,7 @@ internal class RestAllScript : Script, IActivateItemScript
 {
     private RestAllScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.TryRestoringAbilityScore(Game.StrengthAbility);
         Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
@@ -20,6 +20,6 @@ internal class RestAllScript : Script, IActivateItemScript
         Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
         Game.TryRestoringAbilityScore(Game.CharismaAbility);
         Game.RunScript(nameof(RestoreLevelScript));
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

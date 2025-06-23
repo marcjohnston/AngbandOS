@@ -190,10 +190,10 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
     /// <param name="item"></param>
     /// <param name="direction"></param>
     /// <returns></returns>
-    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction)
+    public UsedResultEnum ExecuteDirectionalActivationScript(Item item, int direction)
     {
         ExecuteDirectionalWithPreAndPostMessages(direction);
-        return UsedResult.True;
+        return UsedResultEnum.True;
     }
 
     /// <summary>
@@ -240,10 +240,10 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
         ExecuteNonDirectionalWithPreAndPostMessages();
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectionalWithPreAndPostMessages();
-        return new UsedResult(readScrollAndUseStaffResult); // TODO: This is lossy
+        return readScrollAndUseStaffResult.UsedResult;
     }
 
     public bool ExecuteUnfriendlyScript(int who, int y, int x)

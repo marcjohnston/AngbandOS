@@ -11,10 +11,10 @@ internal class BallOfAcid50r2AndResistAcid1d20p20Script : Script, IActivateItemS
 {
     private BallOfAcid50r2AndResistAcid1d20p20Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RunScript(nameof(Acid50r2ProjectileScript));
         Game.RunScript(nameof(AcidResistance1d20p20TimerScript));
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

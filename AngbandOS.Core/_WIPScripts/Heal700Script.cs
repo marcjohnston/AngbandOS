@@ -11,11 +11,11 @@ internal class Heal700Script : Script, IActivateItemScript
 {
     private Heal700Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.MsgPrint("You feel a warm tingling inside...");
         Game.RestoreHealth(700);
         Game.RunScript(nameof(BleedingResetTimerScript));
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

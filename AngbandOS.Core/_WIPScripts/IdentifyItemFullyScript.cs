@@ -18,24 +18,24 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IAct
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        UsedResult usedResult = ExecuteUsedScript();
-        return new IdentifiedAndUsedResult(true, usedResult.IsUsed);
+        UsedResultEnum usedResult = ExecuteUsedScript();
+        return new IdentifiedAndUsedResult(true, usedResult);
     }
 
     /// <summary>
     /// Identifies an item completely and returns true, if an item was chosen to be identified; false, of the item selection was cancelled.
     /// </summary>
     /// <returns></returns>
-    public UsedResult ExecuteUsedScript()
+    public UsedResultEnum ExecuteUsedScript()
     {
         if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
             Game.MsgPrint("You have nothing to identify.");
-            return UsedResult.False;
+            return UsedResultEnum.False;
         }
         if (oPtr == null)
         {
-            return UsedResult.False;
+            return UsedResultEnum.False;
         }
         oPtr.IsFlavorAware = true;
         oPtr.BecomeKnown();
@@ -58,10 +58,10 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IAct
         }
 
         oPtr.IdentifyFully();
-        return UsedResult.True;
+        return UsedResultEnum.True;
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScript();
     }

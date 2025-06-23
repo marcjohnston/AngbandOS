@@ -16,28 +16,28 @@ internal class RechargeItemScript : Script, IScript, ICastSpellScript, IUsedScri
         ExecuteScript();
     }
 
-    public UsedResult ExecuteUsedScriptInt(int num)
+    public UsedResultEnum ExecuteUsedScriptInt(int num)
     {
         if (!Game.SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeRechargedItemFilter))))
         {
             Game.MsgPrint("You have nothing to recharge.");
-            return new UsedResult(false);
+            return UsedResultEnum.False;
         }
         if (oPtr == null)
         {
-            return new UsedResult(false);
+            return UsedResultEnum.False;
         }
         // Make sure the item is rechargable
         if (oPtr.RechargeScript == null)
         {
             Game.MsgPrint("That is not a rod!");
-            return new UsedResult(false);
+            return UsedResultEnum.False;
         }
         oPtr.RechargeScript.ExecuteScriptItemInt(oPtr, num);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScriptInt(60);
     }

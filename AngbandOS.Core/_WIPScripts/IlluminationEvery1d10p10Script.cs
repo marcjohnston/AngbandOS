@@ -11,9 +11,9 @@ internal class IlluminationEvery1d10p10Script : Script, IActivateItemScript
 {
     private IlluminationEvery1d10p10Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.LightArea(base.Game.DiceRoll(2, 15), 3);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

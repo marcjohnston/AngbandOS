@@ -11,15 +11,15 @@ internal class ProbingDetectionAndFullIdScript : Script, IActivateItemScript
 {
     private ProbingDetectionAndFullIdScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        UsedResult rechargeItemUsedResult = Game.RunUsedScriptInt(nameof(RechargeItemScript), Game.ExperienceLevel.IntValue * 2);
-        if (!rechargeItemUsedResult.IsUsed)
+        UsedResultEnum rechargeItemUsedResult = Game.RunUsedScriptInt(nameof(RechargeItemScript), Game.ExperienceLevel.IntValue * 2);
+        if (rechargeItemUsedResult == UsedResultEnum.False)
         {
             return rechargeItemUsedResult;
         }
         Game.RunScript(nameof(DetectionScript));
         Game.Probing();
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

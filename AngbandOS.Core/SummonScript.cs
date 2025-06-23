@@ -90,10 +90,10 @@ internal class SummonScript : IGetKey, IUniversalScript
         ExecuteScript();
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return new UsedResult(Used);
+        return Used ? UsedResultEnum.True : UsedResultEnum.False;
     }
 
     public IdentifiedResultEnum ExecuteAimWandScript(int dir)
@@ -109,7 +109,7 @@ internal class SummonScript : IGetKey, IUniversalScript
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         IdentifiedResultEnum identifiedResult = ExecuteEatOrQuaffScript();
-        return new IdentifiedAndUsedResult(identifiedResult, new UsedResult(Used));
+        return new IdentifiedAndUsedResult(identifiedResult, Used);
     }
     protected virtual bool Used { get; } = true;
     /// <summary>

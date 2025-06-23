@@ -33,7 +33,7 @@ internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGet
         }
     }
 
-    public UsedResult ExecuteDirectionalActivationScript(Item item, int direction)
+    public UsedResultEnum ExecuteDirectionalActivationScript(Item item, int direction)
     {
         return Choose().ExecuteDirectionalActivationScript(item, direction);
     }
@@ -63,7 +63,7 @@ internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGet
         return Choose().ExecuteReadScrollOrUseStaffScript();
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         return Choose().ExecuteActivateItemScript(item);
     }

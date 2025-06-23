@@ -38,10 +38,10 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
     public abstract void ExecuteScript();
 
     #region Adapters
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return new UsedResult(UsesItem);
+        return UsesItem ? UsedResultEnum.True : UsedResultEnum.False;
     }
 
     public IdentifiedResultEnum ExecuteAimWandScript(int dir)

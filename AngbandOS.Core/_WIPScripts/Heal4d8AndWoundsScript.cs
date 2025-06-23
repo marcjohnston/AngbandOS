@@ -11,10 +11,10 @@ internal class Heal4d8AndWoundsScript : Script, IActivateItemScript
 {
     private Heal4d8AndWoundsScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.RestoreHealth(Game.DiceRoll(4, 8));
         Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 50);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

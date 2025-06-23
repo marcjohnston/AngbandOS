@@ -16,10 +16,10 @@ internal class ProtectionFromEvilScript : Script, IScript, ICastSpellScript, IAc
         ExecuteScript();
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 
     /// <summary>

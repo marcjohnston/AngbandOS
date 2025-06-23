@@ -11,7 +11,7 @@ internal class Vampire100Script : Script, IActivateItemScript
 {
     private Vampire100Script(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         for (int i = 0; i < 3; i++)
         {
@@ -20,6 +20,6 @@ internal class Vampire100Script : Script, IActivateItemScript
                 Game.RestoreHealth(100);
             }
         }
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

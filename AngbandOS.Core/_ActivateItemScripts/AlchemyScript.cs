@@ -19,30 +19,30 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
         ExecuteScript();
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         return ExecuteUsedScript();
     }
 
-    public UsedResult ExecuteUsedScript()
+    public UsedResultEnum ExecuteUsedScript()
     {
         int amt = 1;
         bool force = Game.CommandArgument > 0;
         if (!Game.SelectItem(out Item? oPtr, "Turn which item to gold? ", false, true, true, null))
         {
             Game.MsgPrint("You have nothing to turn to gold.");
-            return new UsedResult(false);
+            return UsedResultEnum.False;
         }
         if (oPtr == null)
         {
-            return new UsedResult(false);
+            return UsedResultEnum.False;
         }
         if (oPtr.StackCount > 1)
         {
             amt = Game.GetQuantity(oPtr.StackCount, true);
             if (amt <= 0)
             {
-                return new UsedResult(false);
+                return UsedResultEnum.False;
             }
         }
         int oldNumber = oPtr.StackCount;
@@ -56,7 +56,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
                 string outVal = $"Really turn {oName} to gold? ";
                 if (!Game.GetCheck(outVal))
                 {
-                    return new UsedResult(false);
+                    return UsedResultEnum.False;
                 }
             }
         }
@@ -72,7 +72,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
             oPtr.Inscription = feel;
             oPtr.IdentSense = true;
             Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
-            return new UsedResult(true);
+            return UsedResultEnum.True;
         }
         int price = oPtr.GetRealValue();
         if (price <= 0)
@@ -96,7 +96,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
         oPtr.ModifyStackCount(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 
     /// <summary>

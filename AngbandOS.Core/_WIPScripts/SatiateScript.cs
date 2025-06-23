@@ -11,9 +11,9 @@ internal class SatiateScript : Script, IActivateItemScript
 {
     private SatiateScript(Game game) : base(game) { }
 
-    public UsedResult ExecuteActivateItemScript(Item item) // This is run by an item activation
+    public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
         Game.SetFood(Constants.PyFoodMax - 1);
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 }

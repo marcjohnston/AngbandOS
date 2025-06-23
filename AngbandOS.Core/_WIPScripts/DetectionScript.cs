@@ -42,11 +42,11 @@ internal class DetectionScript : Script, IScript, ICastSpellScript, IEatOrQuaffS
         ExecuteEatOrQuaffScript();
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         Game.MsgPrint("An image forms in your mind...");
         ExecuteEatOrQuaffScript();
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
     public string LearnedDetails => "";
 }

@@ -16,10 +16,10 @@ internal class ElderSignScript : Script, IScript, ICastSpellScript, IActivateIte
         ExecuteScript();
     }
 
-    public UsedResult ExecuteActivateItemScript(Item item)
+    public UsedResultEnum ExecuteActivateItemScript(Item item)
     {
         ExecuteScript();
-        return new UsedResult(true);
+        return UsedResultEnum.True;
     }
 
     /// <summary>
