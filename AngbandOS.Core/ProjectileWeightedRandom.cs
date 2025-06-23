@@ -33,11 +33,6 @@ internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGet
         }
     }
 
-    public UsedResultEnum ExecuteDirectionalActivationScript(Item item, int direction)
-    {
-        return Choose().ExecuteDirectionalActivationScript(item, direction);
-    }
-
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         return Choose().ExecuteEatOrQuaffScript();
@@ -68,10 +63,6 @@ internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGet
         return Choose().ExecuteActivateItemScript(item);
     }
 
-    public bool ExecuteSuccessByChanceScript()
-    {
-        return Choose().ExecuteSuccessByChanceScript();
-    }
 
     public void ExecuteCastSpellScript(Spell spell)
     {

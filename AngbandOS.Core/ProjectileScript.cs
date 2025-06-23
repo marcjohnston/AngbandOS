@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal class ProjectileScript : IGetKey, IUniversalScript 
 {
     protected readonly Game Game;
     public ProjectileScript(Game game, ProjectileScriptGameConfiguration projectileScriptGameConfiguration)
@@ -177,25 +177,6 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
     #endregion
 
     #region Interface Fulfillments - These fulfillments use the private implementations to satisfy the interfaces that the projectiles support.
-    public bool ExecuteSuccessByChanceScript()
-    {
-        IdentifiedAndUsedResult readScrollAndUseStaffResult = ExecuteNonDirectionalWithPreAndPostMessages();
-        return readScrollAndUseStaffResult.IsIdentified;
-    }
-
-    /// <summary>
-    /// Projects the projectile in a given direction and returns true in all cases because there is no user interaction that can result in the player cancelling the script.  The <paramref name="item"/>
-    /// parameter is ignored.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="direction"></param>
-    /// <returns></returns>
-    public UsedResultEnum ExecuteDirectionalActivationScript(Item item, int direction)
-    {
-        ExecuteDirectionalWithPreAndPostMessages(direction);
-        return UsedResultEnum.True;
-    }
-
     /// <summary>
     /// Projects the projectile in a given direction using the associated properties.
     /// </summary>
