@@ -7,20 +7,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AnnihilationScript : Script, IScript, ICastSpellScript
+internal class AnnihilationScript : UniversalScript
 {
     private AnnihilationScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
 
     /// <summary>
     /// Destroys every monster, taking a hit for each one but adding mana for each too.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public override void ExecuteScript()
     {
         Game.Mana.IntValue -= 100;
         for (int i = 1; i < Game.MonsterMax; i++)
@@ -49,5 +44,4 @@ internal class AnnihilationScript : Script, IScript, ICastSpellScript
         }
         Game.Mana.IntValue += 100;
     }
-    public string LearnedDetails => "";
 }
