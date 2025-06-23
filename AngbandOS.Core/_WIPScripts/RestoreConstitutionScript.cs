@@ -15,10 +15,10 @@ internal class RestoreConstitutionScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Restore constitution restores your constitution
         bool isIdentified = Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

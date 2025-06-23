@@ -15,15 +15,15 @@ internal class LoseMemoriesScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Lose Memories reduces your experience
         if (!Game.HasHoldLife && Game.ExperiencePoints.IntValue > 0)
         {
             Game.MsgPrint("You feel your memories fade.");
             Game.LoseExperience(Game.ExperiencePoints.IntValue / 4);
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

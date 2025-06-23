@@ -15,13 +15,13 @@ internal class EatCureParanoiaScript : Script, IEatOrQuaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (Game.FearTimer.ResetTimer())
         {
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

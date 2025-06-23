@@ -15,9 +15,9 @@ internal class ResetFearScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = Game.FearTimer.ResetTimer();
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

@@ -49,12 +49,12 @@ internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUn
         return Choose().ExecuteActivateItemScript(item);
     }
 
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         return Choose().ExecuteEatOrQuaffScript();
     }
 
-    public IdentifiedResult ExecuteAimWandScript(int dir)
+    public IdentifiedResultEnum ExecuteAimWandScript(int dir)
     {
         return Choose().ExecuteAimWandScript(dir);
     }

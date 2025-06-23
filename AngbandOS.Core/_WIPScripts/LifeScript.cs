@@ -15,7 +15,7 @@ internal class LifeScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Life heals you 5000 health, removes experience and ability score drains, and
         // cures blindness, confusion, stun, poison, and bleeding
@@ -34,6 +34,6 @@ internal class LifeScript : Script, IEatOrQuaffScript
         Game.TryRestoringAbilityScore(Game.WisdomAbility);
         Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
         Game.TryRestoringAbilityScore(Game.CharismaAbility);
-        return new IdentifiedResult(true);
+        return true ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

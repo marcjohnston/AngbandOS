@@ -20,7 +20,7 @@ internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, I
     /// Detects monsters and returns true, if monsters were reveals; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
         for (int i = 1; i < Game.MonsterMax; i++)
@@ -50,7 +50,7 @@ internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, I
         {
             Game.MsgPrint("You sense the presence of monsters!");
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>

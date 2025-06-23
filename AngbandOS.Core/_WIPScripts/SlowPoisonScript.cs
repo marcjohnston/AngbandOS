@@ -15,10 +15,10 @@ internal class SlowPoisonScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Slow poison halves the remaining duration of any poison you have
         bool isIdentified = Game.PoisonTimer.SetTimer(Game.PoisonTimer.Value / 2);
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

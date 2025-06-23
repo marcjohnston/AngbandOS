@@ -25,14 +25,14 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
     /// Executes the script and returns a success result.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Select an inventory slot where items can be disenchanted.
         WieldSlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
         if (inventorySlot == null)
         {
             // There are no inventory slots capable of being disenchanted.
-            return IdentifiedResult.False;
+            return IdentifiedResultEnum.False;
         }
 
         // Select an item in the inventory slot to be disenchanted.
@@ -42,11 +42,11 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
         // The chosen slot does not have an item to disenchant.
         if (oPtr == null)
         {
-            return IdentifiedResult.False;
+            return IdentifiedResultEnum.False;
         }
         if (oPtr.EnchantmentItemProperties.BonusHit <= 0 && oPtr.EnchantmentItemProperties.BonusDamage <= 0 && oPtr.EnchantmentItemProperties.BonusArmorClass <= 0)
         {
-            return IdentifiedResult.False;
+            return IdentifiedResultEnum.False;
         }
         string oName = oPtr.GetDescription(false);
         string s;
@@ -54,7 +54,7 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
         {
             s = oPtr.StackCount != 1 ? "" : "s";
             Game.MsgPrint($"Your {oName} ({inventorySlot.Label(oPtr)}) resist{s} disenchantment!");
-            return IdentifiedResult.True;
+            return IdentifiedResultEnum.True;
         }
         if (oPtr.EnchantmentItemProperties.BonusHit > 0)
         {
@@ -83,7 +83,7 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
         s = oPtr.StackCount != 1 ? "were" : "was";
         Game.MsgPrint($"Your {oName} ({inventorySlot.Label(oPtr)}) {s} disenchanted!");
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-        return IdentifiedResult.True;
+        return IdentifiedResultEnum.True;
     }
 
     /// <summary>

@@ -15,20 +15,20 @@ internal class Speed1D25P15Or5Script : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Speed temporarily hastes you.  But it is not additive.
         if (Game.HasteTimer.Value == 0)
         {
             if (Game.HasteTimer.SetTimer(Game.DieRoll(25) + 15))
             {
-                return new IdentifiedResult(true);
+                return IdentifiedResultEnum.True;
             }
         }
         else
         {
             Game.HasteTimer.AddTimer(5);
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

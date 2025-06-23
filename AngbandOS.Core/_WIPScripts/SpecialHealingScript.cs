@@ -15,7 +15,7 @@ internal class SpecialHealingScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 
@@ -46,6 +46,6 @@ internal class SpecialHealingScript : Script, IEatOrQuaffScript
             isIdentified = true;
         }
 
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

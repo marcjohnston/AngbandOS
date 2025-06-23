@@ -15,11 +15,11 @@ internal class EatSicknessScript : Script, IEatOrQuaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.TakeHit(Game.DiceRoll(6, 6), "poisonous food.");
         Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

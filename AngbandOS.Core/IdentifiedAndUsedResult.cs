@@ -9,29 +9,29 @@ namespace AngbandOS.Core;
 [Serializable]
 public class IdentifiedAndUsedResult
 {
-    public bool IsIdentified { get; set; }
+    public bool IsIdentified => IdentifiedResult == IdentifiedResultEnum.True;
     public bool IsUsed { get; set; }
     public UsedResult UsedResult => new UsedResult(IsUsed);
-    public IdentifiedResult IdentifiedResult => new IdentifiedResult(IsIdentified);
+    public IdentifiedResultEnum IdentifiedResult { get; }
     public IdentifiedAndUsedResult(bool isIdentified, bool isUsed)
     {
-        IsIdentified = isIdentified;
+        IdentifiedResult = isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
         IsUsed = isUsed;
     }
-    public IdentifiedAndUsedResult(IdentifiedResult identifiedResult, bool isUsed)
+    public IdentifiedAndUsedResult(IdentifiedResultEnum identifiedResult, bool isUsed)
     {
-        IsIdentified = identifiedResult.IsIdentified;
+        IdentifiedResult = identifiedResult;
         IsUsed = isUsed;
     }
     public IdentifiedAndUsedResult(bool isIdentified, UsedResult usedResult)
     {
-        IsIdentified = isIdentified;
+        IdentifiedResult = isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
         IsUsed = usedResult.IsUsed;
     }
 
-    public IdentifiedAndUsedResult(IdentifiedResult identifiedResult, UsedResult usedResult)
+    public IdentifiedAndUsedResult(IdentifiedResultEnum identifiedResult, UsedResult usedResult)
     {
-        IsIdentified = identifiedResult.IsIdentified;
+        IdentifiedResult = identifiedResult;
         IsUsed = usedResult.IsUsed;
     }
 }

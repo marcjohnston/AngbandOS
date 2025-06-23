@@ -22,7 +22,7 @@ internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IRe
     /// Detects evil monsters and returns true, if monsters were revealed; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
         for (int i = 1; i < Game.MonsterMax; i++)
@@ -53,7 +53,7 @@ internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IRe
         {
             Game.MsgPrint("You sense the presence of evil creatures!");
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IRe
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
+        IdentifiedResultEnum identifiedResult = ExecuteEatOrQuaffScript();
         return new IdentifiedAndUsedResult(identifiedResult, true);
     }
     public string LearnedDetails => "";

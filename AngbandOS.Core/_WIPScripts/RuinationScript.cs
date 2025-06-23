@@ -15,7 +15,7 @@ internal class RuinationScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Ruination does 10d10 damage and reduces all your ability scores, bypassing
         // sustains and divine protection
@@ -27,6 +27,6 @@ internal class RuinationScript : Script, IEatOrQuaffScript
         Game.DecreaseAbilityScore(Game.StrengthAbility, 25, true);
         Game.DecreaseAbilityScore(Game.CharismaAbility, 25, true);
         Game.DecreaseAbilityScore(Game.IntelligenceAbility, 25, true);
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

@@ -30,7 +30,7 @@ internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey
     protected Ability Ability { get; private set; }
     protected virtual string AbilityBindingKey { get; }
     protected virtual bool TrueToIncreaseFalseToDecrease { get; }
-    public override IdentifiedResult ExecuteEatOrQuaffScript()
+    public override IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         if (TrueToIncreaseFalseToDecrease)
         {

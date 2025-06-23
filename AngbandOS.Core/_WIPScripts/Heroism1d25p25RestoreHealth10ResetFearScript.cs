@@ -16,7 +16,7 @@ internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, I
         ExecuteScript();
     }
 
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
         // Heroism removes fear, cures 10 health, and gives you timed heroism
@@ -32,7 +32,7 @@ internal class Heroism1d25p25RestoreHealth10ResetFearScript : Script, IScript, I
         {
             isIdentified = true;
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>

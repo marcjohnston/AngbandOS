@@ -86,13 +86,13 @@ internal class AimWandScript : UniversalScript, IGetKey
             return;
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
-        IdentifiedResult identifiedResult = item.AimingTuple.Value.ActivationScript.ExecuteAimWandScript(dir);
+        IdentifiedResultEnum identifiedResult = item.AimingTuple.Value.ActivationScript.ExecuteAimWandScript(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried
         item.ObjectTried();
         // If we just discovered the item's flavor, mark it as so
-        if (identifiedResult.IsIdentified && !item.IsFlavorAware)
+        if (identifiedResult == IdentifiedResultEnum.True && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

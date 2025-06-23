@@ -15,5 +15,5 @@ internal interface IAimWandScript
     /// Returns true, if the script performs an action that would identify the item that performed the action; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    IdentifiedResult ExecuteAimWandScript(int dir);
+    IdentifiedResultEnum ExecuteAimWandScript(int dir);
 }

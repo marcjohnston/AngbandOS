@@ -60,7 +60,7 @@ internal class SummonScript : IGetKey, IUniversalScript
         Group = Game.ParseBooleanExpression(GroupBooleanExpression);
     }
 
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         if (PreMessages != null)
         {
@@ -77,7 +77,7 @@ internal class SummonScript : IGetKey, IUniversalScript
         {
             Game.MsgPrint(FailureMessages);
         }
-        return new IdentifiedResult(success);
+        return success ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     public void ExecuteScript()
@@ -96,7 +96,7 @@ internal class SummonScript : IGetKey, IUniversalScript
         return new UsedResult(Used);
     }
 
-    public IdentifiedResult ExecuteAimWandScript(int dir)
+    public IdentifiedResultEnum ExecuteAimWandScript(int dir)
     {
         return ExecuteEatOrQuaffScript();
     }
@@ -108,7 +108,7 @@ internal class SummonScript : IGetKey, IUniversalScript
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
+        IdentifiedResultEnum identifiedResult = ExecuteEatOrQuaffScript();
         return new IdentifiedAndUsedResult(identifiedResult, new UsedResult(Used));
     }
     protected virtual bool Used { get; } = true;

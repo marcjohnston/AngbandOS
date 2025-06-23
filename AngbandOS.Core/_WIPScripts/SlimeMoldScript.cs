@@ -15,7 +15,7 @@ internal class SlimeMoldScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Slime mold juice has a random effect (calling this function again recusively)
         Game.MsgPrint("That tastes awful.");
@@ -39,6 +39,6 @@ internal class SlimeMoldScript : Script, IEatOrQuaffScript
             throw new Exception($"The {nameof(WeightedRandom<ItemFactoryWeightedRandom>)} choose an item that is not a potion.");
         }
         potion.QuaffTuple.Value.QuaffScript.ExecuteEatOrQuaffScript();
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

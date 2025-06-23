@@ -44,10 +44,10 @@ internal class RemoveCurseScript : Script, IScript, ICastSpellScript, IStoreComm
     /// Removes a curse from all items, excluding a heavy curse and returns true if a curse was removed from any items; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = Game.RemoveCurseAux(false);
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>
@@ -61,8 +61,8 @@ internal class RemoveCurseScript : Script, IScript, ICastSpellScript, IStoreComm
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
-        if (identifiedResult.IsIdentified)
+        IdentifiedResultEnum identifiedResult = ExecuteEatOrQuaffScript();
+        if (identifiedResult == IdentifiedResultEnum.True)
         {
             if (Game.BlindnessTimer.Value == 0)
             {

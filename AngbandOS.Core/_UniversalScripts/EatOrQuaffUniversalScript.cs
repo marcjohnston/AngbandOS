@@ -30,7 +30,7 @@ internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWan
     public virtual bool UsesItem { get; }
 
 
-    public abstract IdentifiedResult ExecuteEatOrQuaffScript();
+    public abstract IdentifiedResultEnum ExecuteEatOrQuaffScript();
 
     #region Adapters
     public UsedResult ExecuteActivateItemScript(Item item)
@@ -39,7 +39,7 @@ internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWan
         return new UsedResult(UsesItem);
     }
 
-    public IdentifiedResult ExecuteAimWandScript(int dir)
+    public IdentifiedResultEnum ExecuteAimWandScript(int dir)
     {
         return ExecuteEatOrQuaffScript();
     }
@@ -51,7 +51,7 @@ internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWan
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        IdentifiedResult identified = ExecuteEatOrQuaffScript();
+        IdentifiedResultEnum identified = ExecuteEatOrQuaffScript();
         return new IdentifiedAndUsedResult(identified, UsesItem);
     }
 

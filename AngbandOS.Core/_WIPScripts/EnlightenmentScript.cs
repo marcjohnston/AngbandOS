@@ -15,11 +15,11 @@ internal class EnlightenmentScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Enlightenment shows you the whole level
         Game.MsgPrint("An image of your surroundings forms in your mind...");
         Game.RunScript(nameof(LightScript));
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

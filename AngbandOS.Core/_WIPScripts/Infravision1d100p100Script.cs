@@ -15,10 +15,10 @@ internal class Infravision1d100p100Script : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Infravision gives you timed infravision
         bool isIdentified = Game.InfravisionTimer.AddTimer(100 + Game.DieRoll(100));
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

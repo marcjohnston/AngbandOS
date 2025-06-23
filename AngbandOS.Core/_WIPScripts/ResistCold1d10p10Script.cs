@@ -15,10 +15,10 @@ internal class ResistCold1d10p10Script : Script, IEatOrQuaffScript
     /// Executes the script.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Resist cold gives you timed frost resistance
         bool isIdentified = Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

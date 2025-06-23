@@ -60,7 +60,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
-    public override IdentifiedResult ExecuteEatOrQuaffScript()
+    public override IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         if (PreMessage != null)
         {
@@ -69,7 +69,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
 
         if (EnabledBoolPosFunction != null && !EnabledBoolPosFunction.BoolValue)
         {
-            return IdentifiedResult.False;
+            return IdentifiedResultEnum.False;
         }
 
         // Is this a request to reset?
@@ -78,9 +78,9 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
             if (Quiet)
             {
                 Timer.SetValue();
-                return new IdentifiedResult(false);
+                return IdentifiedResultEnum.False;
             }
-            return new IdentifiedResult(Timer.ResetTimer());
+            return Timer.ResetTimer() ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
         }
 
         int value = Game.ComputeIntegerExpression(Value).Value;
@@ -88,9 +88,9 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey
         if (Quiet)
         {
             Timer.SetValue(Timer.Value + value);
-            return new IdentifiedResult(false);
+            return IdentifiedResultEnum.False;
         }
-        return new IdentifiedResult(Timer.AddTimer(value));
+        return Timer.AddTimer(value) ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>

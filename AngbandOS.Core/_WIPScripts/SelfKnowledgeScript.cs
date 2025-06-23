@@ -468,13 +468,13 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Self knowledge gives you information about yourself
         Game.MsgPrint("You begin to know yourself a little better...");
         Game.MsgPrint(null);
         ExecuteScript();
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
     public string LearnedDetails => "";
 }

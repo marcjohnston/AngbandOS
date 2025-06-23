@@ -15,7 +15,7 @@ internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Sc
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 
@@ -45,6 +45,6 @@ internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Sc
             isIdentified = true;
         }
 
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

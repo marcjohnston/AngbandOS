@@ -53,7 +53,7 @@ internal class EatScript : UniversalScript, IGetKey
         int itemLevel = item.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
-        IdentifiedResult eatResult = item.EatScript.ExecuteEatOrQuaffScript();
+        IdentifiedResultEnum eatResult = item.EatScript.ExecuteEatOrQuaffScript();
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
@@ -61,7 +61,7 @@ internal class EatScript : UniversalScript, IGetKey
         item.ObjectTried();
 
         // Learn its flavor if necessary
-        if (eatResult.IsIdentified && !item.IsFlavorAware)
+        if (eatResult == IdentifiedResultEnum.True && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

@@ -8096,7 +8096,7 @@ internal class Game
         castedScript.ExecuteScript();
     }
 
-    public IdentifiedResult RunIdentifiedScriptDirection(string scriptName, int dir)
+    public IdentifiedResultEnum RunIdentifiedScriptDirection(string scriptName, int dir)
     {
         IAimWandScript script = SingletonRepository.Get<IAimWandScript>(scriptName);
         return script.ExecuteAimWandScript(dir);
@@ -8116,11 +8116,11 @@ internal class Game
         castedScript.ExecuteScriptBool(value);
     }
 
-    public bool RunIdentifiedScript(string scriptName)
+    public bool RunIdentifiedScript(string scriptName) // TODO: Return IdentifiedResultEnum
     {
         // Get the script from the singleton repository.
         IEatOrQuaffScript castedScript = SingletonRepository.Get<IEatOrQuaffScript>(scriptName);
-        return castedScript.ExecuteEatOrQuaffScript().IsIdentified; // TODO: Fix this
+        return castedScript.ExecuteEatOrQuaffScript() == IdentifiedResultEnum.True; // TODO: Fix this
     }
 
     /// <summary>
@@ -14334,41 +14334,41 @@ internal class Game
         }
     }
 
-    public IdentifiedResult TryDecreasingAbilityScore(Ability stat)
+    public IdentifiedResultEnum TryDecreasingAbilityScore(Ability stat)
     {
         bool sust = stat.HasSustain;
         if (sust)
         {
             MsgPrint($"You feel {stat.DescStatNeg} for a moment, but the feeling passes.");
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
         if (DieRoll(10) <= SingletonRepository.Get<God>(nameof(LobonGod)).AdjustedFavour)
         {
             MsgPrint($"You feel {stat.DescStatNeg} for a moment, but Lobon's favour protects you.");
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
         if (DecreaseAbilityScore(stat, 10, false))
         {
             MsgPrint($"You feel very {stat.DescStatNeg}.");
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 
-    public IdentifiedResult TryIncreasingAbilityScore(Ability stat)
+    public IdentifiedResultEnum TryIncreasingAbilityScore(Ability stat)
     {
         bool res = RestoreAbilityScore(stat);
         if (IncreaseAbilityScore(stat))
         {
             MsgPrint($"Wow!  You feel very {stat.DescStatPos}!");
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
         if (res)
         {
             MsgPrint($"You feel less {stat.DescStatNeg}.");
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 
     /// <summary>

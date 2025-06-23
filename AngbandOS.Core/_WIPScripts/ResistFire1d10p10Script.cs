@@ -15,10 +15,10 @@ internal class ResistFire1d10p10Script : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Resist heat gives you timed fire resistance       
         bool isIdentified = Game.RunIdentifiedScript(nameof(FireResistance1d10p10TimerScript));
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

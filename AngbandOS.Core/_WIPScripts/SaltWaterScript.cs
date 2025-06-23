@@ -15,13 +15,13 @@ internal class SaltWaterScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Salt water makes you vomit, but gets rid of poison
         Game.MsgPrint("The saltiness makes you vomit!");
         Game.SetFood(Constants.PyFoodStarve - 1);
         Game.PoisonTimer.ResetTimer();
         Game.ParalysisTimer.AddTimer(4);
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

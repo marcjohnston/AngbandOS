@@ -15,7 +15,7 @@ internal class RestoreManaScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Restore mana restores your to maximum mana
         if (Game.Mana.IntValue < Game.MaxMana.IntValue)
@@ -23,8 +23,8 @@ internal class RestoreManaScript : Script, IEatOrQuaffScript
             Game.Mana.IntValue = Game.MaxMana.IntValue;
             Game.FractionalMana = 0;
             Game.MsgPrint("Your feel your head clear.");
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

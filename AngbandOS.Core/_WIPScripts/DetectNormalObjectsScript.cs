@@ -19,7 +19,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IE
         ExecuteScript();
     }
 
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
         for (int y = 1; y < Game.CurHgt - 1; y++)
@@ -50,7 +50,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IE
         {
             isIdentified = true;
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IE
 
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        IdentifiedResult identifiedResult = ExecuteEatOrQuaffScript();
+        IdentifiedResultEnum identifiedResult = ExecuteEatOrQuaffScript();
         return new IdentifiedAndUsedResult(identifiedResult, true);
     }
     public string LearnedDetails => "";

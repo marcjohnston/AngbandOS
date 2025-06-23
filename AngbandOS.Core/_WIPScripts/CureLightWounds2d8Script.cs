@@ -20,7 +20,7 @@ internal class CureLightWounds2d8Script : Script, IScript, ICastSpellScript, IEa
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
         // Cure light wounds heals you 2d8 health and reduces bleeding
@@ -32,7 +32,7 @@ internal class CureLightWounds2d8Script : Script, IScript, ICastSpellScript, IEa
         {
             isIdentified = true;
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>

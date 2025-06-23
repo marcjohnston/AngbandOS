@@ -15,7 +15,7 @@ internal class GainExperienceScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Experience increases your experience points by 50%, with a minimum of +10 and
         // maximuum of +10,000
@@ -28,8 +28,8 @@ internal class GainExperienceScript : Script, IEatOrQuaffScript
             }
             Game.MsgPrint("You feel more experienced.");
             Game.GainExperience(ee);
-            return new IdentifiedResult(true);
+            return IdentifiedResultEnum.True;
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

@@ -166,7 +166,7 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
     /// </summary>
     /// <param name="turns"></param>
     /// <returns></returns>
-    public virtual bool ResetTimer()
+    public virtual bool ResetTimer() // TODO: Return IdentifiedResult
     {
         return SetTimer(0);
     }

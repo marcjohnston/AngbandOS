@@ -44,10 +44,10 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
         return new UsedResult(UsesItem);
     }
 
-    public IdentifiedResult ExecuteAimWandScript(int dir)
+    public IdentifiedResultEnum ExecuteAimWandScript(int dir)
     {
         ExecuteScript();
-        return new IdentifiedResult(IdentifiesItem);
+        return IdentifiesItem ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     public void ExecuteCastSpellScript(Spell spell)
@@ -65,10 +65,10 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
         ExecuteScript();
         return new IdentifiedAndUsedResult(IdentifiesItem, UsesItem);
     }
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         ExecuteScript();
-        return new IdentifiedResult(IdentifiesItem);
+        return IdentifiesItem ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
     public RepeatableResultEnum ExecuteGameCommandScript()
     {

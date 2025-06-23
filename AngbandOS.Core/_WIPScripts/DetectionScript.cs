@@ -20,7 +20,7 @@ internal class DetectionScript : Script, IScript, ICastSpellScript, IEatOrQuaffS
     /// Detects traps, doors, stairs, treasures, gold, normal objects, normal monsters and invisible monsters and returns true, if anything was detected; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = Game.DetectTraps();
         isIdentified |= Game.DetectDoors();
@@ -30,7 +30,7 @@ internal class DetectionScript : Script, IScript, ICastSpellScript, IEatOrQuaffS
         isIdentified |= Game.RunIdentifiedScript(nameof(DetectNormalObjectsScript));
         isIdentified |= Game.DetectInvisibleMonsters();
         isIdentified |= Game.RunIdentifiedScript(nameof(DetectNormalMonstersScript));
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>

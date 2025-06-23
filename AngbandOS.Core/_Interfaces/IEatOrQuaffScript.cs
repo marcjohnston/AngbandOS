@@ -18,5 +18,5 @@ internal interface IEatOrQuaffScript
     /// Returns true, if the script performs an action that would identify the item; false, otherwise. 
     /// </summary>
     /// <returns></returns>
-    IdentifiedResult ExecuteEatOrQuaffScript();
+    IdentifiedResultEnum ExecuteEatOrQuaffScript();
 }

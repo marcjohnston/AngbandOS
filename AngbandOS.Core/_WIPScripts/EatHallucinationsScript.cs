@@ -15,16 +15,16 @@ internal class EatHallucinationsScript : Script, IEatOrQuaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         if (!Game.HasChaosResistance)
         {
             if (Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 250))
             {
-                return new IdentifiedResult(true);
+                return IdentifiedResultEnum.True;
             }
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

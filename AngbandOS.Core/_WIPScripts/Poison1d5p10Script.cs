@@ -15,7 +15,7 @@ internal class Poison1d5p10Script : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Poison simply poisons you
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
@@ -27,9 +27,9 @@ internal class Poison1d5p10Script : Script, IEatOrQuaffScript
             }
             else if (Game.PoisonTimer.AddTimer(Game.RandomLessThan(15) + 10))
             {
-                return new IdentifiedResult(true);
+                return IdentifiedResultEnum.True;
             }
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

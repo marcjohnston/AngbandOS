@@ -15,11 +15,11 @@ internal class IocaineScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Iocaine simply does 5000 damage
         Game.MsgPrint("A feeling of Death flows through your body.");
         Game.TakeHit(5000, "a potion of Death");
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

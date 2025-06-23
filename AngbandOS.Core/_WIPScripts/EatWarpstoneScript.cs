@@ -15,7 +15,7 @@ internal class EatWarpstoneScript : Script, IEatOrQuaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.MsgPrint("That tastes... funky.");
@@ -28,6 +28,6 @@ internal class EatWarpstoneScript : Script, IEatOrQuaffScript
         {
             Game.RunScript(nameof(GainMutationScript));
         }
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

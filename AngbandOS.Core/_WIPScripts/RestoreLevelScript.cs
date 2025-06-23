@@ -20,7 +20,7 @@ internal class RestoreLevelScript : Script, IScript, ICastSpellScript, IEatOrQua
     /// Executes the script and returns the success value as whether or not the action was noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Restore life levels restores any lost experience
         if (Game.ExperiencePoints.IntValue < Game.MaxExperienceGained.IntValue)
@@ -28,9 +28,9 @@ internal class RestoreLevelScript : Script, IScript, ICastSpellScript, IEatOrQua
             Game.MsgPrint("You feel your life energies returning.");
             Game.ExperiencePoints.IntValue = Game.MaxExperienceGained.IntValue;
             Game.CheckExperience();
-            return IdentifiedResult.True;
+            return IdentifiedResultEnum.True;
         }
-        return IdentifiedResult.False;
+        return IdentifiedResultEnum.False;
     }
 
     /// <summary>

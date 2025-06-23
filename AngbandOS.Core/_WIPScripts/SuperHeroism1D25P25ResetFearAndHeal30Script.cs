@@ -20,7 +20,7 @@ internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, IEatOrQuaff
     /// Restores 30 points of health, removes fear and adds between 25 and 50 turns of super heroism.  Returns true, if any action is noticed; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 
@@ -37,7 +37,7 @@ internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, IEatOrQuaff
         {
             isIdentified = true;
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
     /// <summary>

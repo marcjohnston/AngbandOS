@@ -15,41 +15,41 @@ internal class AugmentScript : Script, IEatOrQuaffScript
     /// Augments all ability scores and returns true, if any ability score was increased; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 
         // Augmentation increases all ability scores
-        IdentifiedResult identifiedResult = Game.TryIncreasingAbilityScore(Game.StrengthAbility);
-        if (identifiedResult.IsIdentified)
+        IdentifiedResultEnum identifiedResult = Game.TryIncreasingAbilityScore(Game.StrengthAbility);
+        if (identifiedResult == IdentifiedResultEnum.True)
         {
             isIdentified = true;
         }
         identifiedResult = Game.TryIncreasingAbilityScore(Game.IntelligenceAbility);
-        if (identifiedResult.IsIdentified)
+        if (identifiedResult == IdentifiedResultEnum.True)
         {
             isIdentified = true;
         }
         identifiedResult = Game.TryIncreasingAbilityScore(Game.WisdomAbility);
-        if (identifiedResult.IsIdentified)
+        if (identifiedResult == IdentifiedResultEnum.True)
         {
             isIdentified = true;
         }
         identifiedResult = Game.TryIncreasingAbilityScore(Game.DexterityAbility);
-        if (identifiedResult.IsIdentified)
+        if (identifiedResult == IdentifiedResultEnum.True)
         {
             isIdentified = true;
         }
         identifiedResult = Game.TryIncreasingAbilityScore(Game.ConstitutionAbility);
-        if (identifiedResult.IsIdentified)
+        if (identifiedResult == IdentifiedResultEnum.True)
         {
             isIdentified = true;
         }
         identifiedResult = Game.TryIncreasingAbilityScore(Game.CharismaAbility);
-        if (identifiedResult.IsIdentified)
+        if (identifiedResult == IdentifiedResultEnum.True)
         {
             isIdentified = true;
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

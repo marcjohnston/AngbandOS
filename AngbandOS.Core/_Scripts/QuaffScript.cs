@@ -54,7 +54,7 @@ internal class QuaffScript : UniversalScript, IGetKey
         int itemLevel = item.LevelNormallyFound;
 
         // Do the actual potion effect
-        IdentifiedResult identifiedResult = item.QuaffTuple.Value.QuaffScript.ExecuteEatOrQuaffScript();
+        IdentifiedResultEnum identifiedResult = item.QuaffTuple.Value.QuaffScript.ExecuteEatOrQuaffScript();
 
         // Skeletons are messy drinkers
         Game.Race.Quaff(item);
@@ -62,7 +62,7 @@ internal class QuaffScript : UniversalScript, IGetKey
 
         // We may now know the potion's type
         item.ObjectTried();
-        if (identifiedResult.IsIdentified && !item.IsFlavorAware)
+        if (identifiedResult == IdentifiedResultEnum.True && !item.IsFlavorAware)
         {
             item.IsFlavorAware = true;
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

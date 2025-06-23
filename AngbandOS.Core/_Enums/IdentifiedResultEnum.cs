@@ -7,13 +7,8 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-public class IdentifiedResult
+public enum IdentifiedResultEnum
 {
-    public bool IsIdentified { get; set; }
-    public IdentifiedResult(bool isIdentified)
-    {
-        IsIdentified = isIdentified;
-    }
-    public static IdentifiedResult True => new IdentifiedResult(true);
-    public static IdentifiedResult False => new IdentifiedResult(false);
+    True,
+    False
 }

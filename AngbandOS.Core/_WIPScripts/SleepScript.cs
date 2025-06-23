@@ -15,16 +15,16 @@ internal class SleepScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Sleep paralyses you
         if (!Game.HasFreeAction)
         {
             if (Game.ParalysisTimer.AddTimer(Game.RandomLessThan(4) + 4))
             {
-                return new IdentifiedResult(true);
+                return IdentifiedResultEnum.True;
             }
         }
-        return new IdentifiedResult(false);
+        return IdentifiedResultEnum.False;
     }
 }

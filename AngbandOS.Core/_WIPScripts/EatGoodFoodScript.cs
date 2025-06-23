@@ -15,10 +15,10 @@ internal class EatGoodFoodScript : Script, IEatOrQuaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.MsgPrint("That tastes good.");
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

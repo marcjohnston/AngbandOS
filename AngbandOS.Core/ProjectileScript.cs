@@ -201,12 +201,12 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
     /// </summary>
     /// <param name="direction"></param>
     /// <returns>True, if the projectile can be identified by the player; false, otherwise.</returns>
-    public IdentifiedResult ExecuteAimWandScript(int direction)
+    public IdentifiedResultEnum ExecuteAimWandScript(int direction)
     {
         return ExecuteDirectionalWithPreAndPostMessages(direction);
     }
 
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         return ExecuteNonDirectionalWithPreAndPostMessages().IdentifiedResult;
     }
@@ -220,7 +220,7 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
     /// </returns>
     public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int direction)
     {
-        IdentifiedResult identifiedResult = ExecuteTargeted(direction);
+        IdentifiedResultEnum identifiedResult = ExecuteTargeted(direction);
         return new IdentifiedAndUsedResult(identifiedResult, true);
     }
 
@@ -297,9 +297,9 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
                         return new IdentifiedAndUsedResult(false, false);
                     }
                     RenderPreMessage();
-                    IdentifiedResult identifiedResult = ExecuteTargeted(direction);
+                    IdentifiedResultEnum identifiedResult = ExecuteTargeted(direction);
                     RenderPostMessage();
-                    return new IdentifiedAndUsedResult(identifiedResult.IsIdentified, true);
+                    return new IdentifiedAndUsedResult(identifiedResult, true);
                 }
             case NonDirectionalProjectileModeEnum.AllDirections:
                 {
@@ -307,8 +307,8 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
                     bool identified = false;
                     foreach (int direction in Game.OrderedDirection)
                     {
-                        IdentifiedResult identifiedResult = ExecuteTargeted(direction);
-                        if (identifiedResult.IsIdentified)
+                        IdentifiedResultEnum identifiedResult = ExecuteTargeted(direction);
+                        if (identifiedResult == IdentifiedResultEnum.True)
                         {
                             identified = true;
                         }
@@ -360,7 +360,7 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
         }
     }
 
-    private IdentifiedResult ExecuteDirectionalWithPreAndPostMessages(int direction)
+    private IdentifiedResultEnum ExecuteDirectionalWithPreAndPostMessages(int direction)
     {
         RenderPreMessage();
         int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
@@ -368,16 +368,16 @@ internal class ProjectileScript : IGetKey, IUniversalScript // DO NOT ADD MORE I
         bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
         bool isIdentified = Identified ?? hitSuccess;
         RenderPostMessage();
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 
-    private IdentifiedResult ExecuteTargeted(int direction)
+    private IdentifiedResultEnum ExecuteTargeted(int direction)
     {
         int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
         int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
         bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
         bool isIdentified = Identified ?? hitSuccess;
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
     #endregion
 }

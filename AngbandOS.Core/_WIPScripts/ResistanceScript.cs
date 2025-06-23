@@ -15,7 +15,7 @@ internal class ResistanceScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Resistance gives you all timed resistances
         Game.RunScript(nameof(AcidResistance1d20p20TimerScript));
@@ -23,6 +23,6 @@ internal class ResistanceScript : Script, IEatOrQuaffScript
         Game.RunScript(nameof(FireResistance1d20p20TimerScript));
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

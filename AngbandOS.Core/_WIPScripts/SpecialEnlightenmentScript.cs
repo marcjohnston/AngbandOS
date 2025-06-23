@@ -15,7 +15,7 @@ internal class SpecialEnlightenmentScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // *Enlightenment* shows you the whole level, increases your intelligence and
         // wisdom, identifies all your items, and detects everything
@@ -32,6 +32,6 @@ internal class SpecialEnlightenmentScript : Script, IEatOrQuaffScript
         Game.RunScript(nameof(DetectNormalObjectsScript));
         Game.RunScript(nameof(IdentifyAllItemsScript));
         Game.RunScript(nameof(SelfKnowledgeScript));
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

@@ -15,10 +15,10 @@ internal class SeeInvisible1d12p12Script : Script, IEatOrQuaffScript
     /// Adds between 24 and 48 turns of see invisibility.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Detect invisible gives you times see invisibility
         bool isIdentified = Game.SeeInvisibilityTimer.AddTimer(12 + Game.DieRoll(12));
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

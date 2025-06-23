@@ -15,10 +15,10 @@ internal class EatSlimeMoldScript : Script, IEatOrQuaffScript
     /// Executes the script and returns false.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
         Game.RunIdentifiedScript(nameof(SlimeMoldScript));
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }

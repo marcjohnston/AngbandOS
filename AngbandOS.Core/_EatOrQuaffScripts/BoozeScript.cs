@@ -15,7 +15,7 @@ internal class BoozeScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 
@@ -53,6 +53,6 @@ internal class BoozeScript : Script, IEatOrQuaffScript
                 Game.MsgPrint("You can't remember a thing, or how you got here!");
             }
         }
-        return new IdentifiedResult(isIdentified);
+        return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

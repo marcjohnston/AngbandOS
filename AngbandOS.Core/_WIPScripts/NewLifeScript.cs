@@ -15,7 +15,7 @@ internal class NewLifeScript : Script, IEatOrQuaffScript
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResult ExecuteEatOrQuaffScript()
+    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // New life rerolls your health, cures all mutations, and restores you to your birth race
         Game.RunScript(nameof(RerollHitPointsScript));
@@ -33,6 +33,6 @@ internal class NewLifeScript : Script, IEatOrQuaffScript
             Game.ChangeRace(Game.RaceAtBirth);
             Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
         }
-        return new IdentifiedResult(true);
+        return IdentifiedResultEnum.True;
     }
 }
