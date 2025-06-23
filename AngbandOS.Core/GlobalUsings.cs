@@ -51,7 +51,7 @@ global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Core.Timers;
 
 global using static AngbandOS.Core.Extensions;
-global using Timer = AngbandOS.Core.Timers.Timer;
+global using Timer = AngbandOS.Core.Timer;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.Interface.Configuration;
 global using AngbandOS.GamePacks.Cthangband; // TODO: This can be deleted when the Cthangband game pack is complete.  We can also drop the Project Reference.
