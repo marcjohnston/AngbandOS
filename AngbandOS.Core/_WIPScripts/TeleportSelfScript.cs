@@ -84,6 +84,8 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
         Game.MapY.IntValue = y;
         Game.MapX.IntValue = x;
         Game.ConsoleView.RefreshMapLocation(oy, ox);
+
+        // We are using xx and yy as offsets from -1, 0, 1 to search for monsters that we will be teleporting right next to.
         while (xx < 2)
         {
             int yy = -1;
@@ -94,12 +96,15 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
                 }
                 else
                 {
+                    // Check to see if there is a monster here.
                     if (Game.Map.Grid[oy + yy][ox + xx].MonsterIndex != 0)
                     {
+                        // There is.  Check to see if the monster is capable of self teleportation, is not resistant to teleportation and is not sleeping.
                         if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf && !Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                         {
                             if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                             {
+                                // Teleport the monster to the player (which doesn't make sense yet).
                                 TeleportToPlayer(Game.Map.Grid[oy + yy][ox + xx].MonsterIndex);
                             }
                         }
