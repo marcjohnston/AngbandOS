@@ -362,7 +362,6 @@ internal class SingletonRepository
         RegisterRepository<IScriptItemMonster>();
         RegisterRepository<IStoreCommandScript>();
         RegisterRepository<IStringValue>();
-        RegisterRepository<ITileScript>();
         RegisterRepository<IUsedScript>();
         RegisterRepository<IZapRodScript>();
 
