@@ -15,7 +15,7 @@ public class RechargeActivation : ActivationGameConfiguration
     
     public override string? PreActivationMessage => "Your {0} glows bright yellow...";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(SystemScriptsEnum.RechargeItemScript);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(RechargeItem60RechargeItemScript);
 
     public override string RechargeTimeRollExpression => "70";
 

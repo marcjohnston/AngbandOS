@@ -26,7 +26,7 @@ internal class Vault : IGetKey
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public virtual ColorEnum Color { get; } = ColorEnum.White;
     public virtual string Name { get; }

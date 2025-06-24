@@ -26,7 +26,7 @@ internal abstract class Mutation : IGetKey
     }
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public virtual string AttackDescription => "";
     public virtual int DamageDiceNumber => 0;

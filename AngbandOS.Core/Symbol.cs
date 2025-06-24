@@ -25,7 +25,7 @@ internal class Symbol : IGetKey
     public virtual string Name { get; }
 
     public virtual string Key { get; }
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public string GetKey => Key;
 

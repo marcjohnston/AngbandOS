@@ -37,7 +37,7 @@ internal class RenderMessageScript : UniversalScript, IGetKey
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public override bool UsesItem { get; } = false;
     public override bool IdentifiesItem { get; } = false;

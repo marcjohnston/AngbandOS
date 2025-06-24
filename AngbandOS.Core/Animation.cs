@@ -46,7 +46,7 @@ internal class Animation : IGetKey
 
     public string GetKey => Key;
 
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public virtual char Character { get; }
     public virtual ColorEnum Color { get; }

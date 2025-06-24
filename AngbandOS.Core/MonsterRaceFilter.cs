@@ -27,7 +27,7 @@ internal abstract class MonsterRaceFilter : IMonsterSelector, IGetKey
         return "";
     }
 
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace) => this;
 

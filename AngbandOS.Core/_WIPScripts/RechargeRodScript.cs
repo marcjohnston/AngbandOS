@@ -15,10 +15,10 @@ internal class RechargeRodScript : Script, IScriptItemInt
     /// Executes the script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptItemInt(Item item, int num)
+    public void ExecuteScriptItemInt(Item item, int turns) // TODO: This subroutine needs more control.
     {
         int i, t;
-        i = (100 - item.LevelNormallyFound + num) / 5;
+        i = (100 - item.LevelNormallyFound + turns) / 5;
         if (i < 1)
         {
             i = 1;
@@ -33,7 +33,7 @@ internal class RechargeRodScript : Script, IScriptItemInt
         }
         else
         {
-            t = num * Game.DiceRoll(2, 4);
+            t = turns * Game.DiceRoll(2, 4);
             if (item.RodRechargeTimeRemaining > t)
             {
                 item.RodRechargeTimeRemaining -= t;

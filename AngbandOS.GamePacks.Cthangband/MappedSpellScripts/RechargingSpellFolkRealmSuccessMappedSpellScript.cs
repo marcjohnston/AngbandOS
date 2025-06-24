@@ -5,5 +5,5 @@ internal class RechargingSpellFolkRealmSuccessMappedSpellScript : MappedSpellScr
 {
     public override string SpellBindingKey => nameof(RechargingFolkSpell);
     public override string? RealmBindingKey => nameof(FolkRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.RechargeItemScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(RechargeItem60RechargeItemScript) };
 }

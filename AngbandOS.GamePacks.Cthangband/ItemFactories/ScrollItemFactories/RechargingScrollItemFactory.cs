@@ -27,7 +27,7 @@ public class RechargingScrollItemFactory : ItemFactoryGameConfiguration
     };
     public override int Weight => 5;
 
-    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.Recharge60IdentifableAndUsedScript), 10);
+    public override (string, int)? ReadBindingTuple => (nameof(RechargeItem60RechargeItemScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

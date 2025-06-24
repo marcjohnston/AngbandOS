@@ -13,7 +13,7 @@ internal class ProbingDetectionAndFullIdScript : Script, IActivateItemScript
 
     public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        UsedResultEnum rechargeItemUsedResult = Game.RunUsedScriptInt(nameof(RechargeItemScript), Game.ExperienceLevel.IntValue * 2);
+        UsedResultEnum rechargeItemUsedResult = Game.RunUsedScript(nameof(RechargeItem2xRechargeItemScript));
         if (rechargeItemUsedResult == UsedResultEnum.False)
         {
             return rechargeItemUsedResult;

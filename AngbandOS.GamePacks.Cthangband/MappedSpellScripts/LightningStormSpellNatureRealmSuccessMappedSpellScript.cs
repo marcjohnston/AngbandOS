@@ -5,5 +5,5 @@ internal class LightningStormSpellNatureRealmSuccessMappedSpellScript : MappedSp
 {
     public override string SpellBindingKey => nameof(LightningStormNatureSpell);
     public override string? RealmBindingKey => nameof(NatureRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.LightningStormScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(LightningStormProjectileScript) };
 }

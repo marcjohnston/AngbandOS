@@ -18,7 +18,7 @@ internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, I
 
     protected abstract (string, int)[] ActivationNamesAndWeights { get; }
 
-    public virtual void Bind()
+    public void Bind()
     {
         foreach ((string activationName, int weight) in ActivationNamesAndWeights)
         {

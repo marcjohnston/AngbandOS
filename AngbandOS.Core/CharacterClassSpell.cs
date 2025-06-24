@@ -52,5 +52,5 @@ internal class CharacterClassSpell : IGetKey
     /// </summary>
     public string GetKey => Game.GetCompositeKey(CharacterClassName, SpellName);
 
-    public virtual void Bind() { }
+    public void Bind() { }
 }

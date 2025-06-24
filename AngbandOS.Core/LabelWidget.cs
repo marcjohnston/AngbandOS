@@ -34,13 +34,13 @@ internal class LabelWidget : Widget, IGetKey
 
     public string GetKey => Key;
 
-    public virtual void Bind()
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
     }
 
-    public virtual string ToJson()
+    public string ToJson()
     {
         LabelWidgetGameConfiguration textWidgetGameConfiguration = new LabelWidgetGameConfiguration()
         {

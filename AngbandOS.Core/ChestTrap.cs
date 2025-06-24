@@ -31,7 +31,7 @@ internal abstract class ChestTrap : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     /// <summary>
     /// Activate the trap.

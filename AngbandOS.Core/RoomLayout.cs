@@ -27,7 +27,7 @@ internal abstract class RoomLayout : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     /// <summary>
     /// Returns the number of grid blocks to the left this type of room occupies.

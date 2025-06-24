@@ -44,7 +44,7 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     private int _value;
 

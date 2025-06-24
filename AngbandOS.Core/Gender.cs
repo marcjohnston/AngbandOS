@@ -40,7 +40,7 @@ internal class Gender : IGetKey
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public virtual string Title { get; }
     public virtual string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered

@@ -50,7 +50,7 @@ internal class MartialArtsAttack : IGetKey
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         MartialArtsAttackEffect = Game.SingletonRepository.Get<MartialArtsEffect>(MartialArtsEffectBindingKey);
     }

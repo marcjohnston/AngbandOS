@@ -268,7 +268,7 @@ internal class ItemEnhancement : IGetKey
         return ApplicableItemFactories.Contains(itemFactory);
     }
 
-    public virtual void Bind()
+    public void Bind()
     {
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
         BonusStrengthRoll = Game.ParseNullableNumericExpression(BonusStrengthRollExpression);
@@ -293,7 +293,7 @@ internal class ItemEnhancement : IGetKey
         ApplicableItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(ApplicableItemFactoryBindingKeys);
     }
 
-    public virtual string ToJson()
+    public string ToJson()
     {
         ItemEnhancementGameConfiguration itemEnhancementDefinition = new()
         {

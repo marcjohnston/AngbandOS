@@ -29,7 +29,7 @@ internal abstract class BirthStage : IGetKey
 
     public virtual string Key => GetType().Name;
 
-    public virtual void Bind() { }
+    public void Bind() { }
 
     /// <summary>
     /// Renders the birth stage and returns the next birth stage to render or null when either the birth stage is complete or the Game.Shutdown is true.

@@ -8128,11 +8128,11 @@ internal class Game
     /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
     /// </summary>
     /// <returns></returns>
-    public UsedResultEnum RunUsedScriptInt(string scriptName, int value)
+    public UsedResultEnum RunUsedScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        IUsedScriptInt castedScript = SingletonRepository.Get<IUsedScriptInt>(scriptName);
-        return castedScript.ExecuteUsedScriptInt(value);
+        IUsedScript castedScript = SingletonRepository.Get<IUsedScript>(scriptName);
+        return castedScript.ExecuteUsedScript();
     }
 
     /// <summary>

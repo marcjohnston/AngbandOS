@@ -32,7 +32,7 @@ internal abstract class ArtifactBias : IGetKey
 
     public virtual string Key => GetType().Name;
 
-    public virtual void Bind()
+    public void Bind()
     {
         if (RandomResistanceTuples != null)
         {

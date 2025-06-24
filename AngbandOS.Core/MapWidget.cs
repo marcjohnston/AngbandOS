@@ -31,7 +31,7 @@ internal class MapWidget : Widget, IGetKey
 
     public string GetKey => Key;
 
-    public virtual void Bind()
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
     }

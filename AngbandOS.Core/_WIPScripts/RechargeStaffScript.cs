@@ -15,17 +15,17 @@ internal class RechargeStaffScript : Script, IScriptItemInt
     /// Executes the script.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScriptItemInt(Item item, int num)
+    public void ExecuteScriptItemInt(Item item, int turns)
     {
         int i, t;
-        i = (100 - item.LevelNormallyFound + num) / 5;
+        i = (100 - item.LevelNormallyFound + turns) / 5;
         if (i < 1)
         {
             i = 1;
         }
         if (Game.RandomLessThan(i) == 0)
         {
-            Game.MsgPrint("The recharge backfires, draining the rod further!");
+            Game.MsgPrint("The recharge backfires, draining the staff further!");
             if (item.StaffChargesRemaining < 10000)
             {
                 item.StaffChargesRemaining = (item.StaffChargesRemaining + 100) * 2;
@@ -33,7 +33,7 @@ internal class RechargeStaffScript : Script, IScriptItemInt
         }
         else
         {
-            t = num * Game.DiceRoll(2, 4);
+            t = turns * Game.DiceRoll(2, 4);
             if (item.StaffChargesRemaining > t)
             {
                 item.StaffChargesRemaining -= t;

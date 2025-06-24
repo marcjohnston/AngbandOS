@@ -23,7 +23,7 @@ internal class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>, IGetK
 
     protected (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples { get; }
 
-    public virtual void Bind()
+    public void Bind()
     {
         foreach ((string? artifactBiasBindingKey, int weight) in ArtifactBiasBindingKeyAndWeightTuples)
         {

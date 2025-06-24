@@ -40,7 +40,7 @@ internal class Patron : IGetKey
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         PreferredAbility = Game.SingletonRepository.GetNullable<Ability>(PreferredAbilityBindingKey);
         Rewards = Game.SingletonRepository.Get<Reward>(RewardBindingKeys);

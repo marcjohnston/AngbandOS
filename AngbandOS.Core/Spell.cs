@@ -46,7 +46,7 @@ internal class Spell : IGetKey
     public string GetKey => Key;
 
 
-    public virtual void Bind() { }
+    public void Bind() { }
 
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.

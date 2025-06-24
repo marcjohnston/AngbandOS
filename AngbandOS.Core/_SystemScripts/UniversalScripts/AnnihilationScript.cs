@@ -7,9 +7,23 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AnnihilationScript : UniversalScript
+internal class AnnihilationScript : UniversalScript, IGetKey
 {
     private AnnihilationScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind() { }
 
     /// <summary>
     /// Destroys every monster, taking a hit for each one but adding mana for each too.

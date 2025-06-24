@@ -34,7 +34,7 @@ internal class ChestTrapCombination : IGetKey
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         ChestTraps = Game.SingletonRepository.Get<ChestTrap>(ChestTrapBindingKeys);
     }

@@ -31,7 +31,7 @@ public class AggravateMonsterScrollItemFactory : ItemFactoryGameConfiguration
     };
     public override int Weight => 5;
 
-    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.AggravateMonstersIdentifableAndUsedScript), 10);
+    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.AggravateMonstersScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

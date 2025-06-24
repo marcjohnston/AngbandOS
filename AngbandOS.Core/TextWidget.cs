@@ -32,7 +32,7 @@ internal class TextWidget : Widget, IGetKey
 
     public string GetKey => Key;
 
-    public virtual void Bind()
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);

@@ -16,14 +16,29 @@
     <Compile Remove="DirectionalActivations\**" />
     <Compile Remove="Widgets\NullableTextAreaWidget\**" />
     <Compile Remove="Widgets\TextAreaWidgets\**" />
+    <Compile Remove="_AimWandScripts\**" />
+    <Compile Remove="_BoolPosFunctions\**" />
+    <Compile Remove="_ReadScrollOrUseStaffScripts\**" />
+    <Compile Remove="_RenderMessageScripts\**" />
+    <Compile Remove="_TimerScripts\**" />
     <EmbeddedResource Remove="ConfigurationMetadata\**" />
     <EmbeddedResource Remove="DirectionalActivations\**" />
     <EmbeddedResource Remove="Widgets\NullableTextAreaWidget\**" />
     <EmbeddedResource Remove="Widgets\TextAreaWidgets\**" />
+    <EmbeddedResource Remove="_AimWandScripts\**" />
+    <EmbeddedResource Remove="_BoolPosFunctions\**" />
+    <EmbeddedResource Remove="_ReadScrollOrUseStaffScripts\**" />
+    <EmbeddedResource Remove="_RenderMessageScripts\**" />
+    <EmbeddedResource Remove="_TimerScripts\**" />
     <None Remove="ConfigurationMetadata\**" />
     <None Remove="DirectionalActivations\**" />
     <None Remove="Widgets\NullableTextAreaWidget\**" />
     <None Remove="Widgets\TextAreaWidgets\**" />
+    <None Remove="_AimWandScripts\**" />
+    <None Remove="_BoolPosFunctions\**" />
+    <None Remove="_ReadScrollOrUseStaffScripts\**" />
+    <None Remove="_RenderMessageScripts\**" />
+    <None Remove="_TimerScripts\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,12 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="_BoolPosFunctions\" />
-    <Folder Include="_ReadScrollOrUseStaffScripts\" />
-    <Folder Include="_RenderMessageScripts\" />
-    <Folder Include="_TimerScripts\" />
     <Folder Include="_ZapRodScripts\" />
-    <Folder Include="_AimWandScripts\" />
   </ItemGroup>
 
 </Project>

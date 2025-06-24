@@ -27,7 +27,7 @@ internal class ConditionalWidget : Widget, IGetKey
 
     public string GetKey => Key;
 
-    public virtual void Bind()
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         List<(IBoolValue, bool, int)> conditionalList = new();

@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class LightningStormScript : ProjectileScriptGameConfiguration
+public class LightningStormProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "90+x";
     public override string ProjectileBindingKey => nameof(ElectricityProjectile);

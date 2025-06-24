@@ -363,7 +363,7 @@ internal class SingletonRepository
         RegisterRepository<IStoreCommandScript>();
         RegisterRepository<IStringValue>();
         RegisterRepository<ITileScript>();
-        RegisterRepository<IUsedScriptInt>();
+        RegisterRepository<IUsedScript>();
         RegisterRepository<IZapRodScript>();
 
         RegisterRepository<Ability>();
@@ -514,6 +514,7 @@ internal class SingletonRepository
         LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets);
         LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms);
+        LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses);
         LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration>(gameConfiguration.RenderMessageScripts);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration>(gameConfiguration.Shopkeepers);
