@@ -86,7 +86,7 @@ internal class ProjectileScript : IGetKey, IUniversalScript
     #endregion
 
     #region Light-weight virtuals and abstracts for game configuration.
-    public virtual string Key { get; }
+    public string Key { get; }
 
     /// <summary>
     /// Returns the details that are presented to the player.  Returns the <see cref="Expression.Minimize(MinimizeOptions)"> version of the <see cref="DamageRoll"/>, by default.
@@ -96,84 +96,84 @@ internal class ProjectileScript : IGetKey, IUniversalScript
     /// <summary>
     /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
     /// </summary>
-    protected virtual string ProjectileBindingKey { get; }
+    protected string ProjectileBindingKey { get; }
 
     /// <summary>
     /// Returns a roll expression for the amount of damage the projectile produces.  This property is used to bind the <see cref="DamageRoll"/> property during the bind phase.
     /// </summary>
-    protected virtual string DamageRollExpression { get; }
+    protected string DamageRollExpression { get; }
 
     /// <summary>
     /// Returns a roll expression for the radius of damage the projectile produces.  A radius of 0 represents a bolt.  A radius >0 represents a ball and a radius <0 represents breathe.
     /// Returns zero by default.
     /// </summary>
-    protected virtual string RadiusRollExpression { get; } = "0";
+    protected string RadiusRollExpression { get; } = "0";
 
     /// <summary>
     /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.  Defaults to false;
     /// </summary>
-    public virtual bool Stop { get; } = false;
+    public bool Stop { get; } = false;
 
     /// <summary>
     /// Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.  Defaults to false;
     /// </summary>
-    public virtual bool Kill { get; } = false;
+    public bool Kill { get; } = false;
 
     /// <summary>
     /// Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.  Defaults to false;
     /// </summary>
-    public virtual bool Jump { get; } = false;
+    public bool Jump { get; } = false;
 
     /// <summary>
     /// Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.  Defaults to false;
     /// </summary>
-    public virtual bool Beam { get; } = false;
+    public bool Beam { get; } = false;
 
     /// <summary>
     /// Allows the effect to interact with each grid (tile or cell) it moves through, which can alter terrain or affect grid-based elements like traps.  Defaults to false;
     /// </summary>
-    public virtual bool Grid { get; } = false;
+    public bool Grid { get; } = false;
 
     /// <summary>
     /// Enables the effect to interact with items it encounters, possibly damaging or destroying them if applicable.  Defaults to false;
     /// </summary>
-    public virtual bool Item { get; } = false;
+    public bool Item { get; } = false;
 
     /// <summary>
     /// Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.  Defaults to false;
     /// </summary>
-    public virtual bool Thru { get; } = false;
+    public bool Thru { get; } = false;
 
     /// <summary>
     /// Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.  Defaults to false;
     /// </summary>
-    public virtual bool Hide { get; } = false;
+    public bool Hide { get; } = false;
 
     /// <summary>
     /// Returns true, if the projectile is automatically identified; false, if the projectile is not identifiable; or null, if the projectile is identified, if and
     /// only if, the projectile hits and affects a monster, item or grid tile.  Returns true, by default.
     /// </summary>
-    public virtual bool? Identified { get; } = true;
+    public bool? Identified { get; } = true;
 
     /// <summary>
     /// Returns a message to be rendered before the projectile is projected or null, for no message.  Returns null, by default.
     /// </summary>
-    public virtual string? PreMessage { get; } = null;
+    public string? PreMessage { get; } = null;
 
     /// <summary>
     /// Returns a message to be rendered after the projectile is projected or null, for no message.  Returns null, by default.
     /// </summary>
-    public virtual string? PostMessage { get; } = null;
+    public string? PostMessage { get; } = null;
 
     /// <summary>
     /// Returns whether or not this projectile turns a pet into an unfriendly monster, when using the <see cref="ExecuteUnfriendlyScript"/> method.  Returns true, by default.
     /// </summary>
-    public virtual bool SmashingOnPetsTurnsUnfriendly { get; } = true;
+    public bool SmashingOnPetsTurnsUnfriendly { get; } = true;
 
     /// <summary>
     /// Returns the mode that the projectile will use when it is launched using a script interface that does not accept a directional parameter.
     /// </summary>
-    public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode { get; } = NonDirectionalProjectileModeEnum.Default;
+    public NonDirectionalProjectileModeEnum NonDirectionalProjectileMode { get; } = NonDirectionalProjectileModeEnum.Default;
     #endregion
 
     #region Interface Fulfillments - These fulfillments use the private implementations to satisfy the interfaces that the projectiles support.
