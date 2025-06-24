@@ -12,7 +12,7 @@ public class Teleport100Every1d50p50Activation : ActivationGameConfiguration
 
     public override string? PreActivationMessage => "Your {0} twists space around you...";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(SystemScriptsEnum.TeleportSelfScript);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(TeleportSelf100TeleportSelfScript);
 
     public override string RechargeTimeRollExpression => "1d50+50";
 

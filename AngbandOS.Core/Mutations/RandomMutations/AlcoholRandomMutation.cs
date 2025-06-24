@@ -39,7 +39,7 @@ internal class AlcoholRandomMutation : Mutation
             {
                 Game.RunScript(nameof(DarkScript));
             }
-            Game.RunScriptInt(nameof(TeleportSelfScript), 100);
+            Game.RunScript(nameof(TeleportSelf100TeleportSelfScript));
             Game.RunScript(nameof(DarkScript));
             Game.MsgPrint("You wake up somewhere with a sore head...");
             Game.MsgPrint("You can't remember a thing, or how you got here!");

@@ -5,5 +5,5 @@ internal class TeleportSpellFolkRealmSuccessMappedSpellScript : MappedSpellScrip
 {
     public override string SpellBindingKey => nameof(TeleportFolkSpell);
     public override string? RealmBindingKey => nameof(FolkRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.TeleportSelf5xScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(TeleportSelf5xTeleportSelfScript) };
 }

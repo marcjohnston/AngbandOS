@@ -15,5 +15,5 @@ public class TeleportWizardCommand : WizardCommandGameConfiguration
 
     public override string? HelpGroupName => nameof(WizardMovementHelpGroup);
 
-    public override string? ExecuteScriptName => nameof(SystemScriptsEnum.TeleportSelfScript);
+    public override string? ExecuteScriptName => nameof(TeleportSelf100TeleportSelfScript);
 }

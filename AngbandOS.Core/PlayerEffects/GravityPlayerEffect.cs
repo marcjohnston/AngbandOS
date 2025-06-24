@@ -25,7 +25,7 @@ internal class GravityPlayerEffect : PlayerEffect
             Game.MsgPrint("You are hit by something heavy!");
         }
         Game.MsgPrint("Gravity warps around you.");
-        Game.RunScriptInt(nameof(TeleportSelfScript), 5);
+        Game.RunScript(nameof(TeleportSelf5TeleportSelfScript));
         if (!Game.HasFeatherFall)
         {
             Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);

@@ -30,18 +30,18 @@ internal class WildChaoticMagicScript : Script, ICastSpellScript
             case 1:
             case 2:
             case 3:
-                Game.RunScriptInt(nameof(TeleportSelfScript), 10);
+                Game.RunScript(nameof(TeleportSelf10TeleportSelfScript));
                 break;
 
             case 4:
             case 5:
             case 6:
-                Game.RunScriptInt(nameof(TeleportSelfScript), 100);
+                Game.RunScript(nameof(TeleportSelf100TeleportSelfScript));
                 break;
 
             case 7:
             case 8:
-                Game.RunScriptInt(nameof(TeleportSelfScript), 200);
+                Game.RunScript(nameof(TeleportSelf200TeleportSelfScript));
                 break;
 
             case 9:

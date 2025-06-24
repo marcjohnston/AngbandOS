@@ -29,6 +29,6 @@ internal class TeleportRuneScript : Script, IScript, ICastSpellScript
     {
         // Teleport the player up to 100 squares
         Game.MsgPrint("You hit a teleport trap!");
-        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
+        Game.RunScript(nameof(TeleportSelf100TeleportSelfScript));
     }
 }

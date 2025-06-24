@@ -26,7 +26,7 @@ public class TeleportationScrollItemFactory : ItemFactoryGameConfiguration
         (10, 1)
     };
     public override int Weight => 5;
-    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.TeleportationScript), 10);
+    public override (string, int)? ReadBindingTuple => (nameof(TeleportSelf100TeleportSelfScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

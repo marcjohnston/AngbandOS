@@ -21,7 +21,7 @@ internal class TeleportAwayMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(Monster monster)
     {
-        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
+        Game.RunScript(nameof(TeleportSelf100TeleportSelfScript));
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)

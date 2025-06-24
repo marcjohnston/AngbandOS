@@ -17,10 +17,10 @@ internal class MajorDisplacementTalent : Talent
 
     public override void Use()
     {
-        Game.RunScriptInt(nameof(TeleportSelfScript), Game.ExperienceLevel.IntValue * 5);
+        Game.RunScript(nameof(TeleportSelf5xTeleportSelfScript));
         if (Game.ExperienceLevel.IntValue > 29)
         {
-            Game.RunScriptInt(nameof(TeleportAwayAllAtLos4xProjectileScript), Game.ExperienceLevel.IntValue);
+            Game.RunScript(nameof(TeleportAwayAllAtLos1xProjectileScript));
         }
     }
 

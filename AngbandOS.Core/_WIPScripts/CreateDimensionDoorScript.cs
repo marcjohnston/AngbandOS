@@ -32,7 +32,7 @@ internal class CreateDimensionDoorScript : Script, IScript, ICastSpellScript
         {
             Game.MsgPrint("You fail to exit the astral plane correctly!");
             Game.Energy -= 100;
-            Game.RunScriptInt(nameof(TeleportSelfScript), 10);
+            Game.RunScript(nameof(TeleportSelf10TeleportSelfScript));
         }
         else
         {

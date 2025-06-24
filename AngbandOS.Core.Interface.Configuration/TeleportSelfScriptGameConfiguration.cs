@@ -4,9 +4,11 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.Interfaces;
+namespace AngbandOS.Core.Interface.Configuration;
 
-internal interface IScriptInt
+[Serializable]
+public class TeleportSelfScriptGameConfiguration
 {
-    void ExecuteScriptInt(int value);
+    public virtual string? Key { get; set; } = null;
+    public virtual string DistanceExpression { get; set; } = "10";
 }

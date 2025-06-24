@@ -105,6 +105,7 @@ public class GameConfiguration
         gameConfiguration.ItemFilters = LoadFromAssembly<ItemFilterGameConfiguration>(assembly);
         gameConfiguration.BoolPosFunctions = LoadFromAssembly<BoolPosFunctionGameConfiguration>(assembly);
         gameConfiguration.RechargeItemScripts = LoadFromAssembly<RechargeItemScriptGameConfiguration>(assembly);
+        gameConfiguration.TeleportSelfScripts = LoadFromAssembly<TeleportSelfScriptGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -249,6 +250,7 @@ public class GameConfiguration
     public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
     public virtual BoolPosFunctionGameConfiguration[]? BoolPosFunctions { get; set; } = null;
     public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
+    public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
     
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {

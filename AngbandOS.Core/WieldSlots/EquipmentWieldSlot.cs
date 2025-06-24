@@ -65,14 +65,14 @@ internal abstract class EquipmentWieldSlot : WieldSlot
                     if (mergedCharacteristics.IsCursed && !Game.HasAntiTeleport)
                     {
                         Game.Disturb(true);
-                        Game.RunScriptInt(nameof(TeleportSelfScript), 40);
+                        Game.RunScript(nameof(TeleportSelf40TeleportSelfScript));
                     }
                     else
                     {
                         if (Game.GetCheck("Teleport? "))
                         {
                             Game.Disturb(false);
-                            Game.RunScriptInt(nameof(TeleportSelfScript), 50);
+                            Game.RunScript(nameof(TeleportSelf50TeleportSelfScript));
                         }
                     }
                 }

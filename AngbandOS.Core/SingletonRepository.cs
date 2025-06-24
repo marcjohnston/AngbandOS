@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
+using AngbandOS.Core.Scripts;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -354,7 +356,6 @@ internal class SingletonRepository
         RegisterRepository<IReadScrollOrUseStaffScript>();
         RegisterRepository<IScript>();
         RegisterRepository<IScriptBool>();
-        RegisterRepository<IScriptInt>();
         RegisterRepository<IScriptIntInt>();
         RegisterRepository<IScriptItem>();
         RegisterRepository<IScriptItemGridTile>();
@@ -454,6 +455,7 @@ internal class SingletonRepository
         RegisterRepository<Symbol>();
         RegisterRepository<Talent>();
         RegisterRepository<LabelWidget>();
+        RegisterRepository<TeleportSelfScript>();
         RegisterRepository<Tile>();
         RegisterRepository<Timer>();
         RegisterRepository<TimerScript>();
@@ -528,6 +530,7 @@ internal class SingletonRepository
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols);
         LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.TextWidgets);
+        LoadFromConfiguration<TeleportSelfScript, TeleportSelfScriptGameConfiguration>(gameConfiguration.TeleportSelfScripts);        
         LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles);
         LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts);
         LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets);

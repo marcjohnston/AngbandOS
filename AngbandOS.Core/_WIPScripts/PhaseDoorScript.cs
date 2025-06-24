@@ -21,7 +21,7 @@ internal class PhaseDoorScript : Script, IScript, ICastSpellScript
     /// </summary>
     public void ExecuteScript()
     {
-        Game.RunScriptInt(nameof(TeleportSelfScript), 10);
+        Game.RunScript(nameof(TeleportSelf10TeleportSelfScript));
     }
     public string LearnedDetails => "range 10";
 }

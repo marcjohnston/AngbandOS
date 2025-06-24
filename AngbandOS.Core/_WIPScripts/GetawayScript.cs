@@ -20,7 +20,7 @@ internal class GetawayScript : Script, IActivateItemScript
             case 3:
             case 4:
             case 5:
-                Game.RunScriptInt(nameof(TeleportSelfScript), 10);
+                Game.RunScript(nameof(TeleportSelf10TeleportSelfScript));
                 break;
 
             case 6:
@@ -28,7 +28,7 @@ internal class GetawayScript : Script, IActivateItemScript
             case 8:
             case 9:
             case 10:
-                Game.RunScriptInt(nameof(TeleportSelfScript), 222);
+                Game.RunScript(nameof(TeleportSelf222TeleportSelfScript));
                 break;
 
             case 11:

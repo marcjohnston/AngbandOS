@@ -17,7 +17,7 @@ internal class VteleportActiveMutation : Mutation
             return;
         }
         Game.MsgPrint("You concentrate...");
-        Game.RunScriptInt(nameof(TeleportSelfScript), 10 + (4 * Game.ExperienceLevel.IntValue));
+        Game.RunScript(nameof(TeleportSelf10P4xTeleportSelfScript));
     }
 
     public override string ActivationSummary(int lvl)

@@ -4988,7 +4988,7 @@ internal class Game
             case 2:
             case 3:
                 {
-                    RunScriptInt(nameof(TeleportSelfScript), 200);
+                    RunScript(nameof(TeleportSelf200TeleportSelfScript));
                     break;
                 }
             case 4:
@@ -8100,13 +8100,6 @@ internal class Game
     {
         IAimWandScript script = SingletonRepository.Get<IAimWandScript>(scriptName);
         return script.ExecuteAimWandScript(dir);
-    }
-
-    public void RunScriptInt(string scriptName, int value)
-    {
-        // Get the script from the singleton repository.
-        IScriptInt castedScript = SingletonRepository.Get<IScriptInt>(scriptName);
-        castedScript.ExecuteScriptInt(value);
     }
 
     public void RunScriptBool(string scriptName, bool value)

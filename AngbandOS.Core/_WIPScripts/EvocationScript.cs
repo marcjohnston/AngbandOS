@@ -24,7 +24,7 @@ internal class EvocationScript : Script, IScript, ICastSpellScript
     {
         Game.RunScript(nameof(DispelAllAtLos4xProjectileScript));
         Game.RunScript(nameof(TurnAllAtLos4xProjectileScript));
-        Game.RunScriptInt(nameof(TeleportAwayAllAtLos4xProjectileScript), Game.ExperienceLevel.IntValue * 4);
+        Game.RunScript(nameof(TeleportAwayAllAtLos4xProjectileScript));
     }
     public string LearnedDetails => $"dam {Game.ExperienceLevel.IntValue * 4}";
 }

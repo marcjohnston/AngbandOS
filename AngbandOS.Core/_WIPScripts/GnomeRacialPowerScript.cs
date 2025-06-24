@@ -8,6 +8,6 @@ internal class GnomeRacialPowerScript : Script, IScript
     public void ExecuteScript()
     {
         Game.MsgPrint("Blink!");
-        Game.RunScriptInt(nameof(TeleportSelfScript), 10 + Game.ExperienceLevel.IntValue);
+        Game.RunScript(nameof(TeleportSelf10P1xTeleportSelfScript));
     }
 }

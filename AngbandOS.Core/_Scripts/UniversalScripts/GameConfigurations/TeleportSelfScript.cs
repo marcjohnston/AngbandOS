@@ -7,27 +7,51 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptInt, IReadScrollOrUseStaffScript, IActivateItemScript
+internal class TeleportSelfScript : UniversalScript, IGetKey
 {
-    private TeleportSelfScript(Game game) : base(game) { }
-
-    public void ExecuteCastSpellScript(Spell spell)
+    public TeleportSelfScript(Game game, TeleportSelfScriptGameConfiguration teleportSelfScriptGameConfiguration) : base(game)
     {
-        ExecuteScript();
+        Key = teleportSelfScriptGameConfiguration.Key ?? teleportSelfScriptGameConfiguration.GetType().Name;
+        DistanceExpression = teleportSelfScriptGameConfiguration.DistanceExpression;
     }
 
+    public override string LearnedDetails => $"range {Distance.Minimize().Text}";
+
+    public override bool IdentifiesItem => true;
+    public override bool UsesItem => true;
     /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
     /// </summary>
-    public string LearnedDetails => "";
+    /// <returns></returns>
+    public string ToJson()
+    {
+        TeleportSelfScriptGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            DistanceExpression = DistanceExpression
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
+    }
+
+    public virtual string Key { get; }
+
+    public string GetKey => Key;
+    public void Bind()
+    {
+        Distance = Game.ParseNumericExpression(DistanceExpression);
+    }
+
+    protected string DistanceExpression { get; }
+    protected Expression Distance { get; private set; }
 
     /// <summary>
     /// Teleports the player between a specified distance from 1/2 of the distance up to a maximum of 200.
     /// </summary>
     /// <param name="distance">A distance up to 200.</param>
     /// <returns></returns>
-    public void ExecuteScriptInt(int distance)
+    public override void ExecuteScript()
     {
+        int distance = Game.ComputeIntegerExpression(Distance).Value;
         int x = Game.MapX.IntValue;
         int y = Game.MapY.IntValue;
         int xx = -1;
@@ -123,11 +147,6 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
         Game.HandleStuff();
     }
 
-    public void ExecuteScript()
-    {
-        ExecuteScriptInt(100);
-    }
-
     private void TeleportToPlayer(int mIdx)
     {
         int ny = Game.MapY.IntValue;
@@ -199,17 +218,5 @@ internal class TeleportSelfScript : Script, IScript, ICastSpellScript, IScriptIn
         Game.UpdateMonsterVisibility(mIdx, true);
         Game.ConsoleView.RefreshMapLocation(oy, ox);
         Game.ConsoleView.RefreshMapLocation(ny, nx);
-    }
-
-    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
-    {
-        ExecuteScriptInt(100);
-        return new IdentifiedAndUsedResult(true, true);
-    }
-
-    public UsedResultEnum ExecuteActivateItemScript(Item item)
-    {
-        ExecuteScriptInt(100);
-        return UsedResultEnum.True;
     }
 }
