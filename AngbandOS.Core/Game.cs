@@ -8124,18 +8124,6 @@ internal class Game
     }
 
     /// <summary>
-    /// Run the associated script and return false, if the script is cancelled; true, otherwise.  A script is considered to have been run if it fails by chance.  A script is considered cancelled
-    /// if the player doesn't have an item for the script to run against, or the player cancels an item or other selection.
-    /// </summary>
-    /// <returns></returns>
-    public UsedResultEnum RunUsedScript(string scriptName)
-    {
-        // Get the script from the singleton repository.
-        IUsedScript castedScript = SingletonRepository.Get<IUsedScript>(scriptName);
-        return castedScript.ExecuteUsedScript();
-    }
-
-    /// <summary>
     /// Summon an item to the player via telekinesis
     /// </summary>
     /// <param name="dir"> The direction to check for items </param>

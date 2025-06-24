@@ -439,6 +439,7 @@ internal class SingletonRepository
         RegisterRepository<RangedWidget>();
         RegisterRepository<Realm>();
         RegisterRepository<RealmCharacterClass>();
+        RegisterRepository<RechargeItemScript>();
         RegisterRepository<RenderMessageScript>();
         RegisterRepository<Reward>();
         RegisterRepository<RoomLayout>();
