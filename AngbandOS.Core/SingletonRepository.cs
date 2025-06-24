@@ -356,7 +356,6 @@ internal class SingletonRepository
         RegisterRepository<IReadScrollOrUseStaffScript>();
         RegisterRepository<IScript>();
         RegisterRepository<IScriptBool>();
-        RegisterRepository<IScriptIntInt>();
         RegisterRepository<IScriptItem>();
         RegisterRepository<IScriptItemGridTile>();
         RegisterRepository<IScriptItemInt>();
