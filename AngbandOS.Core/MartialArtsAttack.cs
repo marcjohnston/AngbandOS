@@ -9,7 +9,7 @@ using System.Xml.Linq;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class MartialArtsAttack : IGetKey
+internal class MartialArtsAttack : IGetKey, IToJson
 {
     protected readonly Game Game;
 

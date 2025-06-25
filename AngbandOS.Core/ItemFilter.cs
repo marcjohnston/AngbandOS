@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 /// are performed.  These <see cref="ItemFilter"/> objects are designed to support configurability.
 /// </summary>
 [Serializable]
-internal class ItemFilter : IGetKey, IItemFilter
+internal class ItemFilter : IGetKey, IItemFilter, IToJson
 {
     protected readonly Game Game;
     public ItemFilter(Game game, ItemFilterGameConfiguration itemFilterGameConfiguration)

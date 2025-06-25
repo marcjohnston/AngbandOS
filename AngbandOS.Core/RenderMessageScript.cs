@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 [Serializable]
 
-internal class RenderMessageScript : UniversalScript, IGetKey
+internal class RenderMessageScript : UniversalScript, IGetKey, IToJson
 {
     public RenderMessageScript(Game game, RenderMessageScriptGameConfiguration renderMessageScriptGameConfiguration) : base(game)
     {

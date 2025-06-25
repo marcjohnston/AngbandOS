@@ -18,11 +18,7 @@ internal abstract class FloorEffect : IGetKey
     public void Bind()
     {
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     protected FloorEffect(Game game)
     {

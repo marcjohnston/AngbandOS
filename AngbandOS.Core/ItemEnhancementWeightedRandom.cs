@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
 /// </summary>
 [Serializable]
-internal class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey
+internal class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey, IToJson
 {
     public ItemEnhancementWeightedRandom(Game game, ItemEnhancementWeightedRandomGameConfiguration itemEnhancementWeightedRandomGameConfiguration) : base(game)
     {

@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 /// Represents a widget that renders a dungeon map.  This widget supports the ability to "poke" a character directly into the map grid.
 /// </summary>
 [Serializable]
-internal class MapWidget : Widget, IGetKey
+internal class MapWidget : Widget, IGetKey, IToJson
 {
     public MapWidget(Game game, MapWidgetGameConfiguration mapWidgetGameConfiguration) : base(game)
     {

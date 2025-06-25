@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
 /// </summary>
 [Serializable]
-internal class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>, IGetKey
+internal class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>, IGetKey, IToJson
 {
     public ArtifactBiasWeightedRandom(Game game, ArtifactBiasWeightedRandomGameConfiguration artifactBiasWeightedRandomGameConfiguration) : base(game)
     {

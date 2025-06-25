@@ -22,11 +22,7 @@ internal abstract class ItemTest : IGetKey
     public string GetKey => Key;
 
     public void Bind() { }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     private bool TestBoolean(bool? testValue, bool actualValue)
     {

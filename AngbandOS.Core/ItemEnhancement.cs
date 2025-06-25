@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// artifact creation process.
 /// </summary>
 [Serializable]
-internal class ItemEnhancement : IGetKey
+internal class ItemEnhancement : IGetKey, IToJson
 {
     #region API
     protected readonly Game Game;

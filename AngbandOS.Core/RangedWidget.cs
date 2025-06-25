@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class RangedWidget : Widget, IGetKey
+internal class RangedWidget : Widget, IGetKey, IToJson
 {
     private string _text;
     private ColorEnum _color;

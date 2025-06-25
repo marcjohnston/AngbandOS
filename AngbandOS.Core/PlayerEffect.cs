@@ -18,11 +18,7 @@ internal abstract class PlayerEffect : IGetKey
     public void Bind()
     {
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     protected PlayerEffect(Game game)
     {

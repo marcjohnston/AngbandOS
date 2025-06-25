@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class MaxRangedWidget : Widget, IGetKey
+internal class MaxRangedWidget : Widget, IGetKey, IToJson
 {
     private bool _sortValidated = false;
     private string _value;

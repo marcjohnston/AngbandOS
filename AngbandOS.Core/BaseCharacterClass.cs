@@ -360,11 +360,7 @@ internal abstract class BaseCharacterClass : IGetKey
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
+    /// <returns></returns>
 
     public string GetKey => Key;
     public void Bind()

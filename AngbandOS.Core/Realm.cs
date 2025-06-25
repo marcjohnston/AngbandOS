@@ -9,7 +9,7 @@ using System.Diagnostics;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Realm : IGetKey
+internal class Realm : IGetKey, IToJson
 {
     #region Constructor
     public Realm(Game game, RealmGameConfiguration realmGameConfiguration)

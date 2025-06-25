@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
     public ProjectileWeightedRandom(Game game, ProjectileWeightedRandomGameConfiguration projectileWeightedRandomGameConfiguration) : base(game)
     {

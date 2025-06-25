@@ -20,9 +20,5 @@ internal abstract class Alignment : IGetKey
     public abstract string[] Align(string[] lines, int mininumHeight);
 
     public void Bind() { }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ProjectileScript : IGetKey, IUniversalScript 
+internal class ProjectileScript : IGetKey, IUniversalScript, IToJson
 {
     protected readonly Game Game;
     public ProjectileScript(Game game, ProjectileScriptGameConfiguration projectileScriptGameConfiguration)

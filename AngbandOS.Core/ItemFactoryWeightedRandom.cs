@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey
+internal class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson
 {
     public ItemFactoryWeightedRandom(Game game, ItemFactoryWeightedRandomGameConfiguration itemFactoryWeightedRandomGameConfiguration) : base(game)
     {

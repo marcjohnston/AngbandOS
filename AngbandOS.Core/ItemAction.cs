@@ -23,11 +23,7 @@ internal abstract class ItemAction : IGetKey
     {
         ItemFilters = Game.SingletonRepository.Get<ItemFilter>(ItemFilterNames);
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     protected abstract string[] ItemFilterNames { get; }
 

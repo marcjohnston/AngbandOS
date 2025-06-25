@@ -4,10 +4,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Xml.Linq;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SyllableSet : IGetKey
+internal class SyllableSet : IGetKey, IToJson
 {
     protected readonly Game Game;
     public SyllableSet(Game game, SyllableSetGameConfiguration syllableSetGameConfiguration)
@@ -30,7 +32,14 @@ internal class SyllableSet : IGetKey
 
     public string ToJson()
     {
-        return "";
+        SyllableSetGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            BeginningSyllables = BeginningSyllables,
+            MiddleSyllables = MiddleSyllables,
+            EndingSyllables = EndingSyllables,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
     public string GenerateName()

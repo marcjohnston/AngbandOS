@@ -21,11 +21,7 @@ internal abstract class AlterAction : IGetKey
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
+    /// <returns></returns>
 
     public abstract bool Execute(int x, int y);
 

@@ -18,11 +18,7 @@ internal abstract class ItemEffect : IGetKey
     public void Bind()
     {
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     protected ItemEffect(Game game)
     {

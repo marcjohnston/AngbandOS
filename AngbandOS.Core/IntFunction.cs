@@ -25,11 +25,7 @@ internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue
     /// </summary>
     public void ClearChangedFlag() { }
 
-    protected IChangeTracker[]? Dependencies { get; private set; }
-    public string ToJson()
-    {
-        return "";
-    }
+    protected IChangeTracker[]? Dependencies { get; private set; }
     public string Key => GetType().Name;
 
     public string GetKey => Key;

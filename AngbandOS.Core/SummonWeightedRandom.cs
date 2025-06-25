@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript
+internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript, IToJson
 {
     public SummonWeightedRandom(Game game, SummonWeightedRandomGameConfiguration summonWeightedRandomGameConfiguration) : base(game)
     {

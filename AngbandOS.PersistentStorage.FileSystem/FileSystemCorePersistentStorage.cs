@@ -20,7 +20,7 @@ namespace AngbandOS.PersistentStorage
         {
             foreach (char c in name.ToLower())
             {
-                if (!"abcdefghijklmnopqrstuvwxyz0123456789.-_".Contains(c))
+                if (!"abcdefghijklmnopqrstuvwxyz0123456789.-_~".Contains(c))
                 {
                     return false;
                 }
@@ -52,7 +52,7 @@ namespace AngbandOS.PersistentStorage
                 string key = keyValuePair.Key;
                 if (!IsValidName(key))
                 {
-                    throw new Exception($"The entity key name {key} contains invalid characters.  Only a-z, A-Z, 0-9, . characters are allows.");
+                    throw new Exception($"The entity key name {key} contains invalid characters.  Only a-z, A-Z, 0-9, .-_~ characters are allows.");
                 }
 
                 // Check to see if there is any content to save.  Empty content will not be written to the disk.
@@ -62,6 +62,7 @@ namespace AngbandOS.PersistentStorage
                     if (!directoryCreated)
                     {
                         Directory.CreateDirectory(folderName);
+                        directoryCreated = true;
                     }
 
                     // Write the file.

@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ProjectileGraphic : IGetKey
+internal class ProjectileGraphic : IGetKey, IToJson
 {
     protected Game Game;
     public ProjectileGraphic(Game game, ProjectileGraphicGameConfiguration projectileGraphicGameConfiguration)

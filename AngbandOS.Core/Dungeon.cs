@@ -4,14 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Security.Cryptography.X509Certificates;
 namespace AngbandOS.Core;
 
 /// <summary>
 /// A dungeon that the player can explore
 /// </summary>
 [Serializable]
-internal class Dungeon : IGetKey
+internal class Dungeon : IGetKey, IToJson
 {
     protected readonly Game Game;
 

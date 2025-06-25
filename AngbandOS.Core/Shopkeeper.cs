@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Shopkeeper : IGetKey
+internal class Shopkeeper : IGetKey, IToJson
 {
     protected readonly Game Game;
     public Shopkeeper(Game game, ShopkeeperGameConfiguration shopkeeperGameConfiguration)

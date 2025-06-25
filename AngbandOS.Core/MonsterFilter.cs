@@ -22,11 +22,7 @@ internal abstract class MonsterFilter : IGetKey
     {
         FrequencyProbabilityExpression = Game.ParseNullableProbabilityExpression(FrequencyProbabilityExpressionText);
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     /// <summary>
     /// Returns a probability for the frequency in which a match is returned as a match or null, if a match is always returned as a match.

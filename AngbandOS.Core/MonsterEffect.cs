@@ -19,11 +19,7 @@ internal abstract class MonsterEffect : IGetKey
     {
         UnfriendPetMonsterFilter = Game.SingletonRepository.GetNullable<MonsterFilter>(UnfriendPetMonsterFilterBindingKey);
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     protected MonsterEffect(Game game)
     {

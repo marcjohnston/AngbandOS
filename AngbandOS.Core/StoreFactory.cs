@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class StoreFactory : IItemFilter, IGetKey
+internal class StoreFactory : IItemFilter, IGetKey, IToJson
 {
     protected readonly Game Game;
     public StoreFactory(Game game, StoreFactoryGameConfiguration storeFactoryGameConfiguration)

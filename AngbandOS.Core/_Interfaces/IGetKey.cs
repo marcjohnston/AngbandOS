@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-internal interface IGetKey : IToJson // TODO: Not all keyed entities will be deserialized as a configuration item.  IToJson should be separated.
+internal interface IGetKey 
 {
     /// <summary>
     /// Returns the key to be used for other items to link to this repository item.

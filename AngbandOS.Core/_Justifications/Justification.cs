@@ -20,9 +20,4 @@ internal abstract class Justification : IGetKey
     public string GetKey => GetType().Name;
 
     public void Bind() { }
-
-    public string ToJson()
-    {
-        return "";
-    }
 }

@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class WizardCommand : IHelpCommand, IGetKey
+internal class WizardCommand : IHelpCommand, IGetKey, IToJson
 {
     protected readonly Game Game;
     public WizardCommand(Game game, WizardCommandGameConfiguration wizardCommandGameConfiguration)

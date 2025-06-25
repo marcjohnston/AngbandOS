@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents an animation that occurs when a projectile is launched.
 /// </summary>
 [Serializable]
-internal class Animation : IGetKey
+internal class Animation : IGetKey, IToJson
 {
     protected Game Game;
     public Animation(Game game, AnimationGameConfiguration animationGameConfiguration) 

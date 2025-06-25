@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core;
 
 [Serializable]
-internal class Symbol : IGetKey
+internal class Symbol : IGetKey, IToJson
 {
     protected readonly Game Game;
     public Symbol(Game game, SymbolGameConfiguration symbolGameConfiguration) 

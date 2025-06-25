@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interface.Configuration;
-using AngbandOS.Core.Scripts;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -32,14 +30,14 @@ internal class SingletonRepository
     public WeightedRandom<T> ToWeightedRandom<T>(Func<T, bool>? predicate = null)
     {
         string typeName = typeof(T).Name;
-        T[] list = _singletonsDictionary[typeName].Get<T>();
+        T[] list = _allGenericRepositoriesDictionary[typeName].Get<T>();
         return new WeightedRandom<T>(Game, list, predicate);
     }
 
     private GenericRepository? ValidateAndLookupRepository<T>()
     {
         string typeName = typeof(T).Name;
-        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        if (!_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
@@ -250,7 +248,7 @@ internal class SingletonRepository
     public T[] Get<T>() where T : class // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         string typeName = typeof(T).Name;
-        return _singletonsDictionary[typeName].Get<T>();
+        return _allGenericRepositoriesDictionary[typeName].Get<T>();
     }
 
     /// <summary>
@@ -261,7 +259,7 @@ internal class SingletonRepository
     public int Count<T>()
     {
         string typeName = typeof(T).Name;
-        return _singletonsDictionary[typeName].Count;
+        return _allGenericRepositoriesDictionary[typeName].Count;
     }
 
     /// <summary>
@@ -293,7 +291,7 @@ internal class SingletonRepository
     public T Get<T>(int index) where T : class // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         string typeName = typeof(T).Name;
-        return (T)_singletonsDictionary[typeName].List[index];
+        return (T)_allGenericRepositoriesDictionary[typeName].List[index];
     }
 
     /// <summary>
@@ -304,15 +302,21 @@ internal class SingletonRepository
     {
         try
         {
-            // Dictionary repositories.
-            foreach (KeyValuePair<string, GenericRepository> typeNameAndRepository in _singletonsDictionary)
+            // Enumerate all of the repositories.
+            KeyValuePair<string, GenericRepository>[] persistedRepositories = _allGenericRepositoriesDictionary.Where(_repository => _repository.Value.EnablePersistance).ToArray();
+            foreach (KeyValuePair<string, GenericRepository> typeNameAndRepository in persistedRepositories)
             {
+                // We need to serialize all of the entities.
                 List<KeyValuePair<string, string>> jsonEntityList = new List<KeyValuePair<string, string>>();
                 foreach (KeyValuePair<string, object> keyAndEntity in typeNameAndRepository.Value.Dictionary)
                 {
-                    string key = keyAndEntity.Key; // entity.GetKey.ToString(); // TODO: The use of .ToString is because TKey needs to be strings
-                    IGetKey entity = (IGetKey)keyAndEntity.Value;
-                    string serializedEntity = entity.ToJson();
+                    object entityAsObject = keyAndEntity.Value;
+                    Type entityType = entityAsObject.GetType();
+
+                    IGetKey entityAsIGetKey = (IGetKey)keyAndEntity.Value;
+                    string key = entityAsIGetKey.GetKey;
+                    IToJson entityAsIToJson = (IToJson)entityAsObject;
+                    string serializedEntity = entityAsIToJson.ToJson();
                     jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
                 }
                 string pluralName = Game.Pluralize(typeNameAndRepository.Key);
@@ -339,132 +343,68 @@ internal class SingletonRepository
     public void Load(GameConfiguration gameConfiguration)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
-        RegisterRepository<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
+        RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
+        RegisterInterface<IActivateItemScript>();
+        RegisterInterface<IAimWandScript>();
+        RegisterInterface<IBoolValue>();
+        RegisterInterface<ICastSpellScript>();
+        RegisterInterface<IChangeTracker>();
+        RegisterInterface<IDateAndTimeValue>();
+        RegisterInterface<IEatOrQuaffScript>();
+        RegisterInterface<IEnhancementScript>();
+        RegisterInterface<IGameCommandScript>();
+        RegisterInterface<IIntValue>();
+        RegisterInterface<IMonsterSelector>();
+        RegisterInterface<ITextValue>();
+        RegisterInterface<IReadScrollOrUseStaffScript>();
+        RegisterInterface<IScript>();
+        RegisterInterface<IScriptBool>();
+        RegisterInterface<IScriptItem>();
+        RegisterInterface<IScriptItemGridTile>();
+        RegisterInterface<IScriptItemInt>();
+        RegisterInterface<IScriptItemMonster>();
+        RegisterInterface<IStoreCommandScript>();
+        RegisterInterface<IStringValue>();
+        RegisterInterface<IUsedScript>();
+        RegisterInterface<IZapRodScript>();
 
-        RegisterRepository<IActivateItemScript>();
-        RegisterRepository<IAimWandScript>();
-        RegisterRepository<IBoolValue>();
-        RegisterRepository<ICastSpellScript>();
-        RegisterRepository<IChangeTracker>();
-        RegisterRepository<IDateAndTimeValue>();
-        RegisterRepository<IEatOrQuaffScript>();
-        RegisterRepository<IEnhancementScript>();
-        RegisterRepository<IGameCommandScript>();
-        RegisterRepository<IIntValue>();
-        RegisterRepository<IMonsterSelector>();
-        RegisterRepository<ITextValue>();
-        RegisterRepository<IReadScrollOrUseStaffScript>();
-        RegisterRepository<IScript>();
-        RegisterRepository<IScriptBool>();
-        RegisterRepository<IScriptItem>();
-        RegisterRepository<IScriptItemGridTile>();
-        RegisterRepository<IScriptItemInt>();
-        RegisterRepository<IScriptItemMonster>();
-        RegisterRepository<IStoreCommandScript>();
-        RegisterRepository<IStringValue>();
-        RegisterRepository<IUsedScript>();
-        RegisterRepository<IZapRodScript>();
+        RegisterInterface<Ability>();
+        RegisterInterface<ActivationWeightedRandom>();
+        RegisterInterface<Alignment>();
+        RegisterInterface<AlterAction>();
+        RegisterInterface<ArtifactBias>();
+        RegisterInterface<AttackEffect>();
+        RegisterInterface<BaseCharacterClass>();
+        RegisterInterface<BirthStage>();
+        RegisterInterface<ChestTrap>();
+        RegisterInterface<FixedArtifact>();
+        RegisterInterface<FlaggedAction>();
+        RegisterInterface<FloorEffect>();
+        RegisterInterface<ItemAction>();
+        RegisterInterface<ItemEffect>();
+        RegisterInterface<ItemMatch>();
+        RegisterInterface<ItemQualityRating>();
+        RegisterInterface<ItemTest>();
+        RegisterInterface<Justification>();
+        RegisterInterface<MartialArtsEffect>();
+        RegisterInterface<MonsterEffect>();
+        RegisterInterface<MonsterFilter>();
+        RegisterInterface<MonsterRaceFilter>();
+        RegisterInterface<MonsterSelector>();
+        RegisterInterface<MonsterSpell>();
+        RegisterInterface<Mutation>();
+        RegisterInterface<PlayerEffect>();
+        RegisterInterface<ProbabilityExpression>();
+        RegisterInterface<Property>();
+        RegisterInterface<Race>();
+        RegisterInterface<Reward>();
+        RegisterInterface<RoomLayout>();
+        RegisterInterface<SpellResistantDetection>();
+        RegisterInterface<Talent>();
+        RegisterInterface<Timer>();
+        RegisterInterface<WieldSlot>();
+        RegisterInterface<Widget>();
 
-        RegisterRepository<Ability>();
-        RegisterRepository<ActivationWeightedRandom>();
-        RegisterRepository<Alignment>();
-        RegisterRepository<AlterAction>();
-        RegisterRepository<Animation>();
-        RegisterRepository<ArtifactBias>();
-        RegisterRepository<ArtifactBiasWeightedRandom>();
-        RegisterRepository<Attack>();
-        RegisterRepository<AttackEffect>();
-        RegisterRepository<Activation>();
-        RegisterRepository<BaseCharacterClass>();
-        RegisterRepository<BirthStage>();
-        RegisterRepository<BoolPosFunction>();
-        RegisterRepository<BoolWidget>();
-        RegisterRepository<CharacterClassAbility>();
-        RegisterRepository<ChestTrap>();
-        RegisterRepository<ChestTrapCombination>();
-        RegisterRepository<CharacterClassSpell>();
-        RegisterRepository<DateWidget>();
-        RegisterRepository<Dungeon>();
-        RegisterRepository<DungeonGuardian>();
-        RegisterRepository<FireResistanceTimer>();
-        RegisterRepository<FixedArtifact>();
-        RegisterRepository<FlaggedAction>();
-        RegisterRepository<FloorEffect>();
-        RegisterRepository<GameCommand>();
-        RegisterRepository<Gender>();
-        RegisterRepository<God>();
-        RegisterRepository<HelpGroup>();
-        RegisterRepository<IntWidget>();
-        RegisterRepository<ItemAction>();
-        RegisterRepository<ItemClass>();
-        RegisterRepository<ItemEffect>();
-        RegisterRepository<ItemEnhancement>();
-        RegisterRepository<ItemEnhancementWeightedRandom>();
-        RegisterRepository<ItemFactory>();
-        RegisterRepository<ItemFactoryWeightedRandom>();
-        RegisterRepository<ItemFilter>();
-        RegisterRepository<ItemFlavor>();
-        RegisterRepository<ItemMatch>();
-        RegisterRepository<ItemQualityRating>();
-        RegisterRepository<ItemTest>();
-        RegisterRepository<Justification>();
-        RegisterRepository<MappedSpellScript>();
-        RegisterRepository<MapWidget>();
-        RegisterRepository<MartialArtsAttack>();
-        RegisterRepository<MartialArtsEffect>();
-        RegisterRepository<MaxRangedWidget>();
-        RegisterRepository<MonsterEffect>();
-        RegisterRepository<MonsterFilter>();
-        RegisterRepository<MonsterRace>();
-        RegisterRepository<MonsterRaceFilter>();
-        RegisterRepository<MonsterSelector>();
-        RegisterRepository<MonsterSpell>();
-        RegisterRepository<Mutation>();
-        RegisterRepository<TextWidget>();
-        RegisterRepository<Patron>();
-        RegisterRepository<PhysicalAttributeSet>();
-        RegisterRepository<PlayerEffect>();
-        RegisterRepository<Plural>();
-        RegisterRepository<ProbabilityExpression>();
-        RegisterRepository<Projectile>();
-        RegisterRepository<ProjectileGraphic>();
-        RegisterRepository<ProjectileScript>();
-        RegisterRepository<Property>();
-        RegisterRepository<Race>();
-        RegisterRepository<RaceAbility>();
-        RegisterRepository<RacialPower>();
-        RegisterRepository<RacialPowerTest>();
-        RegisterRepository<RaceGender>();
-        RegisterRepository<RangedWidget>();
-        RegisterRepository<Realm>();
-        RegisterRepository<RealmCharacterClass>();
-        RegisterRepository<RechargeItemScript>();
-        RegisterRepository<RenderMessageScript>();
-        RegisterRepository<Reward>();
-        RegisterRepository<RoomLayout>();
-        RegisterRepository<Shopkeeper>();
-        RegisterRepository<Spell>();
-        RegisterRepository<SpellResistantDetection>();
-        RegisterRepository<StoreCommand>();
-        RegisterRepository<StoreFactory>();
-        RegisterRepository<StringWidget>();
-        RegisterRepository<SummonScript>();
-        RegisterRepository<SyllableSet>();
-        RegisterRepository<Symbol>();
-        RegisterRepository<Talent>();
-        RegisterRepository<LabelWidget>();
-        RegisterRepository<TeleportSelfScript>();
-        RegisterRepository<Tile>();
-        RegisterRepository<Timer>();
-        RegisterRepository<TimerScript>();
-        RegisterRepository<Town>();
-        RegisterRepository<Vault>();
-        RegisterRepository<View>();
-        RegisterRepository<TimeWidget>();
-        RegisterRepository<WieldSlot>();
-        RegisterRepository<Widget>();
-        RegisterRepository<WizardCommand>();
-        
         // Load system singletons.
         LoadAllAssemblyTypes<IGetKey>();
 
@@ -492,16 +432,15 @@ internal class SingletonRepository
         LoadFromConfiguration<ItemClass, ItemClassGameConfiguration>(gameConfiguration.ItemClasses);
         LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration>(gameConfiguration.ItemEnhancements);
         LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration>(gameConfiguration.ItemEnhancementWeightedRandoms);
-        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms);
         LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration>(gameConfiguration.ItemFactories);
+        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms);
         LoadFromConfiguration<ItemFilter, ItemFilterGameConfiguration>(gameConfiguration.ItemFilters);
         LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors);
-        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets);
         LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts);
+        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets);
         LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets);
         LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<Patron, PatronGameConfiguration>(gameConfiguration.Patrons);
         LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets);
         LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals);
@@ -527,8 +466,9 @@ internal class SingletonRepository
         LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols);
-        LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.TextWidgets);
+        LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.LabelWidgets);
         LoadFromConfiguration<TeleportSelfScript, TeleportSelfScriptGameConfiguration>(gameConfiguration.TeleportSelfScripts);        
+        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets);
         LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles);
         LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts);
         LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets);
@@ -544,8 +484,8 @@ internal class SingletonRepository
         // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
-        _singletonsDictionary["MonsterRace"].List.Clear();
-        _singletonsDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
+        _allGenericRepositoriesDictionary["MonsterRace"].List.Clear();
+        _allGenericRepositoriesDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
@@ -586,27 +526,32 @@ internal class SingletonRepository
 
     #region Privates
     private readonly Game Game;
-    private Dictionary<string, GenericRepository> _singletonsDictionary = new Dictionary<string, GenericRepository>();
+    private Dictionary<string, GenericRepository> _allGenericRepositoriesDictionary = new Dictionary<string, GenericRepository>();
 
     /// <summary>
     /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
     /// </summary>
     private List<IGetKey> _allSingletonsList = new List<IGetKey>();
 
+    private void RegisterInterface<T>()
+    {
+        RegisterRepository<T>(false);
+    }
+
     /// <summary>
     /// Registers a repository for all singletons that implement the interface specified by <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <exception cref="Exception"></exception>
-    private void RegisterRepository<T>()
+    private void RegisterRepository<T>(bool enablePersistance = true)
     {
         string typeName = typeof(T).Name;
-        if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        if (_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception($"{typeName} repository already registered.");
         }
-        genericRepository = new GenericRepository();
-        _singletonsDictionary.Add(typeName, genericRepository);
+        genericRepository = new GenericRepository(enablePersistance);
+        _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
     }
 
     /// <summary>
@@ -634,7 +579,7 @@ internal class SingletonRepository
             string typeName = interfaceType.Name;
 
             // Check to see if there is a repository that is registered for this type.  There is none; we simple ignore this interface.
-            if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+            if (_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
             {
                 string? key = singleton.GetKey;
                 if (key is null)
@@ -689,6 +634,15 @@ internal class SingletonRepository
 
     private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations) where T : IGetKey where TConfiguration : notnull
     {
+        // For persistance validation, we need to ensure the type T implements IToJson.
+        if (!typeof(IToJson).IsAssignableFrom(typeof(T)))
+        {
+            throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistance for {nameof(GameConfiguration)}.");
+        }
+
+        // Register the repository with persistance.
+        RegisterRepository<T>();
+
         string typeName = typeof(T).Name;
         if (entityConfigurations != null)
         {

@@ -4,15 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using AngbandOS.Core.Interface.Configuration;
 namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents a view (or layout) of widgets used to render the UI.  Views consist of widgets and must conform to the window.
 /// </summary>
 [Serializable]
-internal class View : IGetKey
+internal class View : IGetKey, IToJson
 {
     #region State Data
     protected readonly Game Game;

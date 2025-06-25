@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// properties are modifiable.
 /// </summary>
 [Serializable]
-internal class ItemFactory : IGetKey
+internal class ItemFactory : IGetKey, IToJson
 {
     protected readonly Game Game;
     protected virtual string? ItemEnhancementBindingKey { get; } = null;

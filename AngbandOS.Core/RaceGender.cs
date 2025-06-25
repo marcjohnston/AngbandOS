@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.RaceGenders;
 
 [Serializable]
-internal class RaceGender : IGetKey
+internal class RaceGender : IGetKey, IToJson
 {
     protected readonly Game Game;
     public RaceGender(Game game, RaceGenderGameConfiguration raceGenderGameConfiguration)

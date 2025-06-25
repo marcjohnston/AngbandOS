@@ -27,11 +27,7 @@ internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue
     /// </summary>
     public void ClearChangedFlag() { }
 
-    protected IChangeTracker[]? Dependencies { get; private set; }
-    public string ToJson()
-    {
-        return "";
-    }
+    protected IChangeTracker[]? Dependencies { get; private set; }
     public string Key => GetType().Name;
 
     public string GetKey => Key;

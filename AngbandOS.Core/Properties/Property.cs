@@ -46,9 +46,5 @@ internal abstract class Property : IGetKey, IChangeTracker
     }
 
     public void Bind() { }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 }

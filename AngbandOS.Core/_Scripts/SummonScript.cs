@@ -4,13 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using AngbandOS.Core.Interface.Configuration;
-using System.Reflection;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SummonScript : IGetKey, IUniversalScript
+internal class SummonScript : IGetKey, IUniversalScript, IToJson
 {
     protected readonly Game Game;
     public SummonScript(Game game, SummonScriptGameConfiguration summonScriptGameConfiguration)

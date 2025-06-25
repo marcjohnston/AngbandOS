@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// property within the space provided by the <see cref="Width"/> property.  The text is drawn in the color specified by the <see cref="Color"/> property.
 /// </summary>
 [Serializable]
-internal class LabelWidget : Widget, IGetKey
+internal class LabelWidget : Widget, IGetKey, IToJson
 {
     public LabelWidget(Game game, LabelWidgetGameConfiguration textWidgetGameConfiguration) : base(game)
     {

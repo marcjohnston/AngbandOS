@@ -20,9 +20,5 @@ internal abstract class MonsterSelector : IMonsterSelector, IGetKey
     public void Bind() { }
 
     public abstract MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace);
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 }

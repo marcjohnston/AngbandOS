@@ -48,9 +48,5 @@ internal abstract class MartialArtsEffect : IGetKey
         }
     }
     public virtual string Key { get; }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 }

@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class BoolWidget : Widget, IGetKey
+internal class BoolWidget : Widget, IGetKey, IToJson
 {
     public BoolWidget(Game game, BoolWidgetGameConfiguration boolWidgetGameConfiguration) : base(game)
     {

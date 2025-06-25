@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class RechargeItemScript : UsedResultUniversalScript, IGetKey
+internal class RechargeItemScript : UsedResultUniversalScript, IGetKey, IToJson
 {
     public RechargeItemScript(Game game, RechargeItemScriptGameConfiguration rechargeItemScriptGameConfiguration) : base(game)
     {

@@ -32,10 +32,6 @@ internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue
     public void ClearChangedFlag() { }
 
     protected IChangeTracker[]? Dependencies { get; private set; }
-    public string ToJson()
-    {
-        return "";
-    }
     public string Key => GetType().Name;
 
     public string GetKey => Key;

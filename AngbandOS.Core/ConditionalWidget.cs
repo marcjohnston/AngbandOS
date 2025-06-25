@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ConditionalWidget : Widget, IGetKey
+internal class ConditionalWidget : Widget, IGetKey, IToJson
 {
     public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration) : base(game)
     {

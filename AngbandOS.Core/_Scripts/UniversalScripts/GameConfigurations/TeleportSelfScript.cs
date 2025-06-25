@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : UniversalScript, IGetKey
+internal class TeleportSelfScript : UniversalScript, IGetKey, IToJson
 {
     public TeleportSelfScript(Game game, TeleportSelfScriptGameConfiguration teleportSelfScriptGameConfiguration) : base(game)
     {

@@ -4,13 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interface.Configuration;
-using System.Security.Cryptography.X509Certificates;
-
 namespace AngbandOS.Core.RaceAbilities;
 
 [Serializable]
-internal class RaceAbility : IGetKey
+internal class RaceAbility : IGetKey, IToJson
 {
     protected readonly Game Game;
     public RaceAbility(Game game, RaceAbilityGameConfiguration raceAbilityGameConfiguration)

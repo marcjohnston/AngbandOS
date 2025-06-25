@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class God : IGetKey
+internal class God : IGetKey, IToJson
 {
     protected readonly Game Game;
     public God(Game game, GodGameConfiguration godGameConfiguration)

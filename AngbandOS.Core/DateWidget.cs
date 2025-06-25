@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class DateWidget : Widget, IGetKey
+internal class DateWidget : Widget, IGetKey, IToJson
 {
     public DateWidget(Game game, DateWidgetGameConfiguration dateWidgetGameConfiguration) : base(game)
     {

@@ -21,11 +21,7 @@ internal abstract class MonsterRaceFilter : IMonsterSelector, IGetKey
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
+    /// <returns></returns>
 
     public void Bind() { }
 

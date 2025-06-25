@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class RacialPower : IGetKey, IScript
+internal class RacialPower : IGetKey, IScript, IToJson
 {
     protected readonly Game Game;
     public RacialPower(Game game, RacialPowerGameConfiguration racialPowerGameConfiguration)

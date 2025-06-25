@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class MonsterRace : IMonsterCharacteristics, IGetKey
+internal class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson
 {
     #region 102 Serialized Members
 

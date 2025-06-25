@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue
+internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
 {
     protected readonly Game Game;
     public BoolPosFunction(Game game, BoolPosFunctionGameConfiguration boolPosFunctionGameConfiguration) 

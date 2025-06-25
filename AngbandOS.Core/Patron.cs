@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Patron : IGetKey
+internal class Patron : IGetKey, IToJson
 {
     protected readonly Game Game;
     public Patron(Game game, PatronGameConfiguration patronGameConfiguration)

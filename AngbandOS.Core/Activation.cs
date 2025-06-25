@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.  Fixed artifacts are now using this Activation.
 /// </summary>
-internal class Activation : IGetKey
+internal class Activation : IGetKey, IToJson
 {
     protected readonly Game Game;
     public Activation(Game game, ActivationGameConfiguration activationGameConfiguration)

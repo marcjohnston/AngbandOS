@@ -1248,7 +1248,7 @@ internal class Game
         {
             if (String.IsNullOrEmpty(key))
             {
-                compositeKey = $"{DelimitIf(compositeKey, "-", "*")}";
+                compositeKey = $"{DelimitIf(compositeKey, "-", "~")}";
             }
             else
             {
@@ -17401,6 +17401,10 @@ internal class Game
             if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
             {
                 return $"{singular}es";
+            }
+            else if (singular.EndsWith("ey"))
+            {
+                return $"{singular}s";
             }
             else if (singular.EndsWith("y"))
             {

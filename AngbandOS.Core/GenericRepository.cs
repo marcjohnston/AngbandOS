@@ -13,6 +13,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GenericRepository // TODO: Rename this as simply Repository
 {
+    public GenericRepository(bool enablePersistance)
+    {
+        EnablePersistance = enablePersistance;
+    }
+    public bool EnablePersistance { get; }
     public Dictionary<string, object> Dictionary = new Dictionary<string, object>(); // TODO: Make this private
     public List<object> List = new List<object>(); // TODO: Make this private
     public void Add(string key, object singleton)

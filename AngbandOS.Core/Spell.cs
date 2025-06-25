@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Spell : IGetKey
+internal class Spell : IGetKey, IToJson
 {
     protected readonly Game Game;
 

@@ -53,11 +53,7 @@ internal abstract class Ability : IGetKey
     public void Bind()
     {
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 
     public abstract bool HasSustain { get; }
     public abstract string DescStatNeg { get; }

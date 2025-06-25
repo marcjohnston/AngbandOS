@@ -26,11 +26,7 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
+    /// <returns></returns>
 
     //  private List<Item> Items = new List<Item>();
     public abstract int[] InventorySlots { get; }

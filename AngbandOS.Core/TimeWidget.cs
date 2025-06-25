@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class TimeWidget : Widget, IGetKey
+internal class TimeWidget : Widget, IGetKey, IToJson
 {
     public TimeWidget(Game game, TimeWidgetGameConfiguration timeWidgetGameConfiguration) : base(game)
     {

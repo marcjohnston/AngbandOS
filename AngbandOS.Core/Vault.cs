@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Vault : IGetKey
+internal class Vault : IGetKey, IToJson
 {
     protected Game Game;
     public Vault(Game game, VaultGameConfiguration vaultGameConfiguration)

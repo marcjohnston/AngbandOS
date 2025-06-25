@@ -14,11 +14,7 @@ internal class AlterRealityScript : UniversalScript, IGetKey
     /// <summary>
     /// Returns the entity serialized into a Json string.  Returns an empty string by default.
     /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
+    /// <returns></returns>
 
     public virtual string Key => GetType().Name;
 

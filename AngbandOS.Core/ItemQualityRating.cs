@@ -29,9 +29,5 @@ internal abstract class ItemQualityRating : IGetKey
     public void Bind()
     {
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
+
 }

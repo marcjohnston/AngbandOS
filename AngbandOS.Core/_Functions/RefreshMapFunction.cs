@@ -34,10 +34,6 @@ internal class RefreshMapFunction : IChangeTracker, IGetKey
     public void ClearChangedFlag() { }
 
     protected IChangeTracker[]? Dependencies { get; private set; }
-    public string ToJson()
-    {
-        return "";
-    }
     public string Key => GetType().Name;
 
     public string GetKey => Key;

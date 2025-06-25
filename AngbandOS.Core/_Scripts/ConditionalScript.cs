@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents a script that evaluates an <see cref="IBoolValue"/> and runs a script depending on the result.
 /// </summary>
 [Serializable]
-internal class ConditionalScript : IGetKey, IScript
+internal class ConditionalScript : IGetKey, IScript, IToJson
 {
     protected readonly Game Game;
     public ConditionalScript(Game game, ConditionalScriptGameConfiguration conditionalScriptGameConfiguration)

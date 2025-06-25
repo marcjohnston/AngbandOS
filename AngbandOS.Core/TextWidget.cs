@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class TextWidget : Widget, IGetKey
+internal class TextWidget : Widget, IGetKey, IToJson
 {
     public TextWidget(Game game, TextWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration) : base(game)
     {

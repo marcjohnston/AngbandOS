@@ -13,7 +13,7 @@ public class FixedArtifactGameConfiguration
 }
 
 [Serializable]
-internal abstract class FixedArtifact : IGetKey
+internal abstract class FixedArtifact : IGetKey, IToJson
 {
     protected readonly Game Game;
     protected FixedArtifact(Game game)

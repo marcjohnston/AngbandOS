@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ChestTrapCombination : IGetKey
+internal class ChestTrapCombination : IGetKey, IToJson
 {
     protected Game Game;
     public ChestTrapCombination(Game game, ChestTrapCombinationGameConfiguration chestTrapGameConfiguration)
