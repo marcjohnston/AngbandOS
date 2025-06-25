@@ -5021,12 +5021,6 @@ internal class Game
         }
     }
 
-    public bool CharmAnimal(int dir, int plev)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile));
-        return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public bool CharmMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(CharmProjectile));

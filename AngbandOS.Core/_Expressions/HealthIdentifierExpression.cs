@@ -7,10 +7,10 @@
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-internal class DifficultyIdentifierExpression : IdentifierExpression
+internal class HealthIdentifierExpression : IdentifierExpression
 {
     public readonly Game Game;
-    public DifficultyIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
+    public HealthIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
     {
         Game = game;
     }
@@ -19,5 +19,5 @@ internal class DifficultyIdentifierExpression : IdentifierExpression
     {
         return new IntegerExpression(Game.Difficulty);
     }
-    public override Expression Minimize(MinimizeOptions? options = null) => new IntegerExpression(Game.Difficulty);
+    public override Expression Minimize(MinimizeOptions? options = null) => new IntegerExpression(Game.Health.IntValue);
 }

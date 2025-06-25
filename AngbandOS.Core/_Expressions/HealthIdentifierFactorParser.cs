@@ -7,17 +7,16 @@
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-internal class DifficultyIdentifierExpression : IdentifierExpression
+internal class HealthIdentifierFactorParser : IdentifierFactorParser
 {
     public readonly Game Game;
-    public DifficultyIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
+    public HealthIdentifierFactorParser(Game game)
     {
         Game = game;
     }
-    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute()
+    public override string Identifier => "h";
+    protected override Expression GenerateExpression(string matchedIdentifier)
     {
-        return new IntegerExpression(Game.Difficulty);
+        return new HealthIdentifierExpression(Game, Identifier);
     }
-    public override Expression Minimize(MinimizeOptions? options = null) => new IntegerExpression(Game.Difficulty);
 }

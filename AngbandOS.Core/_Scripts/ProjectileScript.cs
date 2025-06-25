@@ -31,6 +31,7 @@ internal class ProjectileScript : IGetKey, IUniversalScript, IToJson
         PostMessage = projectileScriptGameConfiguration.PostMessage;
         SmashingOnPetsTurnsUnfriendly = projectileScriptGameConfiguration.SmashingOnPetsTurnsUnfriendly;
         NonDirectionalProjectileMode = projectileScriptGameConfiguration.NonDirectionalProjectileMode;
+        CustomLearnedDetails = projectileScriptGameConfiguration.CustomLearnedDetails;
     }
 
     public void Bind()
@@ -65,6 +66,7 @@ internal class ProjectileScript : IGetKey, IUniversalScript, IToJson
             PostMessage = PostMessage,
             SmashingOnPetsTurnsUnfriendly = SmashingOnPetsTurnsUnfriendly,
             NonDirectionalProjectileMode = NonDirectionalProjectileMode,
+            CustomLearnedDetails = CustomLearnedDetails,
         };
         return JsonSerializer.Serialize(projectileScriptGameConfiguration, Game.GetJsonSerializerOptions());
     }
@@ -88,10 +90,12 @@ internal class ProjectileScript : IGetKey, IUniversalScript, IToJson
     #region Light-weight virtuals and abstracts for game configuration.
     public string Key { get; }
 
+    public string? CustomLearnedDetails { get; }
+
     /// <summary>
     /// Returns the details that are presented to the player.  Returns the <see cref="Expression.Minimize(MinimizeOptions)"> version of the <see cref="DamageRoll"/>, by default.
     /// </summary>
-    public string LearnedDetails => $"dam {DamageRoll.Minimize(new MinimizeOptions()).Text}";
+    public string LearnedDetails => CustomLearnedDetails ?? $"dam {DamageRoll.Minimize(new MinimizeOptions()).Text}";
 
     /// <summary>
     /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
