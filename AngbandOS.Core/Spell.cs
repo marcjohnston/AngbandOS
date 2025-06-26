@@ -85,7 +85,7 @@ internal class Spell : IGetKey, IToJson
     private ICastSpellScript[]? GetMappedSpellScripts(bool successScript)
     {
         // Retrieve the entire table.
-        MappedSpellScript[] table = Game.SingletonRepository.Get<MappedSpellScript>(); // TODO: This will be slow.
+        MappedSpellScript[] table = Game.SingletonRepository.Get<MappedSpellScript>(); // TODO: This will be slow because the GenericRepository is type casting every record.
 
         // Retrieve all of the matching records.
         MappedSpellScript[]? matching = table.Where(_mappedSpellScript =>
@@ -105,26 +105,21 @@ internal class Spell : IGetKey, IToJson
         Dictionary<string, List<MappedSpellScript>> matchingDictionaryBySignature = new Dictionary<string, List<MappedSpellScript>>();
         foreach (MappedSpellScript mappedSpellScript in matching)
         {
-            int matchCount = 0;
             string signature = "";
             if (mappedSpellScript.Spell is not null)
             {
-                matchCount++;
                 signature = $"{signature}a";
             }
             if (mappedSpellScript.Realm is not null)
             {
-                matchCount++;
                 signature = $"{signature}b";
             }
             if (mappedSpellScript.CharacterClass is not null)
             {
-                matchCount++;
                 signature = $"{signature}c";
             }
             if (mappedSpellScript.MinimumExperienceLevel is not null)
             {
-                matchCount++;
                 signature = $"{signature}d";
             }
             if (!matchingDictionaryBySignature.TryGetValue(signature, out List<MappedSpellScript>? matchList))
@@ -135,6 +130,7 @@ internal class Spell : IGetKey, IToJson
             matchList.Add(mappedSpellScript);
         }
 
+        // Retrieves the records based on a signature and returns the highest minimum experience.
         MappedSpellScript? GetBySignature(string signature)
         {
             if (matchingDictionaryBySignature.TryGetValue(signature, out List<MappedSpellScript>? list))
@@ -144,6 +140,8 @@ internal class Spell : IGetKey, IToJson
             }
             return null;
         }
+
+        // Retrieve records for each of the associated signatures, detecting ambiguity across multiple signatures.
         MappedSpellScript? CheckSignatures(params string[] signatures)
         {
             MappedSpellScript? authorativeMappedSpellScript = null;
@@ -162,6 +160,7 @@ internal class Spell : IGetKey, IToJson
             return authorativeMappedSpellScript;
         }
 
+        // Check for highest order of precedence, similar to CSS query selections.
         MappedSpellScript? fourMatching = CheckSignatures("abcd");
         if (fourMatching != null)
         {
@@ -189,6 +188,7 @@ internal class Spell : IGetKey, IToJson
         }
         throw new Exception($"No {(successScript ? "success" : "failure")} mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.BaseCharacterClass.GetKey}.");
     }
+
     private ICastSpellScript[]? CastSpellScripts => GetMappedSpellScripts(true);
 
     private ICastSpellScript[]? FailedCastSpellScripts => GetMappedSpellScripts(false);
