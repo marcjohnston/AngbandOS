@@ -7,6 +7,7 @@ internal class MappedSpellScript : IGetKey, IToJson
     public MappedSpellScript(Game game, MappedSpellScriptGameConfiguration mappedSpellScriptGameConfiguration)
     {
         Game = game;
+        Key = mappedSpellScriptGameConfiguration.Key ?? mappedSpellScriptGameConfiguration.GetType().Name;
         Success = mappedSpellScriptGameConfiguration.Success;
         RealmBindingKey = mappedSpellScriptGameConfiguration.RealmBindingKey;
         SpellBindingKey = mappedSpellScriptGameConfiguration.SpellBindingKey;
@@ -15,7 +16,8 @@ internal class MappedSpellScript : IGetKey, IToJson
         MinimumExperienceLevel = mappedSpellScriptGameConfiguration.MinimumExperienceLevel;
     }
 
-    public string GetKey => Game.GetCompositeKey(SpellBindingKey, RealmBindingKey, CharacterClassBindingKey, Success ? SuccessNamespaceKey : FailureNamespaceKey);
+    public string Key { get; }
+    public string GetKey => Key;
 
     public void Bind()
     {
@@ -24,12 +26,11 @@ internal class MappedSpellScript : IGetKey, IToJson
         CharacterClass = Game.SingletonRepository.GetNullable<BaseCharacterClass>(CharacterClassBindingKey);
         CastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastSpellScriptBindingKeys);
     }
-    private static string SuccessNamespaceKey => "Success";
-    private static string FailureNamespaceKey => "Failure";
     public string ToJson()
     {
         MappedSpellScriptGameConfiguration definition = new MappedSpellScriptGameConfiguration()
         {
+            Key = Key,
             Success = Success,
             RealmBindingKey = RealmBindingKey,
             SpellBindingKey = SpellBindingKey,

@@ -75,8 +75,6 @@ internal class Spell : IGetKey, IToJson
     /// </remarks>
     public CharacterClassSpell CharacterClassSpell { get; private set; }
   
-    protected MappedSpellScript MappedSpellScript { get; private set; }
-
     /// <summary>
     /// Returns the spell scripts that are associated with either the success or failure of casting a spell.  This is done by performing a lookup through the spell script
     /// mapping repository.

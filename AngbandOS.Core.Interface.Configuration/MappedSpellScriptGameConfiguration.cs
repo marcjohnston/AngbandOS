@@ -4,6 +4,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class MappedSpellScriptGameConfiguration
 {
+    public virtual string? Key { get; set; } = null;
     public virtual string? RealmBindingKey { get; set; }
     public virtual string? CharacterClassBindingKey { get; set; }
     public virtual string? SpellBindingKey { get; set; }
