@@ -1240,19 +1240,32 @@ internal class Game
 
 //    private static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
     private static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
-    //   public static string GetCompositeKey<T1, T2>(T1? t1, T2? t2, string? t3) where T1 : IGetKey where T2 : IGetKey => GetCompositeKey(t1?.GetKey, t2?.GetKey, t3);
+    private static string DelimitIf(string? prefix, char delimiter, char? suffix) => String.IsNullOrEmpty(prefix) || suffix is null ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
+    private static string DelimitIf(string? prefix, char delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
+
+    /// <summary>
+    /// Returns a string representation for composite key.  The returned key is compliant for filenames and ensures keys do not collide in namespace.
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <returns></returns>
     public static string GetCompositeKey(params string?[] keys)
     {
+        const char wildCardCharacter = '~';
+        const char keyDelimiter = '-';
         string compositeKey = "";
         foreach (string? key in keys)
         {
             if (String.IsNullOrEmpty(key))
             {
-                compositeKey = $"{DelimitIf(compositeKey, "-", "~")}";
+                compositeKey = $"{DelimitIf(compositeKey, keyDelimiter, wildCardCharacter)}";
             }
             else
             {
-                compositeKey = $"{DelimitIf(compositeKey, "-", key)}";
+                if (key.Contains("-") || key.Contains(wildCardCharacter))
+                {
+                    throw new Exception($"The singleton key {key} presented for composite generation cannot contain the reserved character '{keyDelimiter}' or '{wildCardCharacter}'.");
+                }
+                compositeKey = $"{DelimitIf(compositeKey, keyDelimiter, key)}";
             }
         }
         return compositeKey;
