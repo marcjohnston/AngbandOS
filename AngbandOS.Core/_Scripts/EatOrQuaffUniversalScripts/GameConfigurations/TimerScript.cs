@@ -40,6 +40,10 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
 
     protected virtual bool Quiet { get; }
 
+    /// <summary>
+    /// Returns the function to be used to determine if the script is enabled or null, if the script is always enabled.  If the script is not enabled, the
+    /// <see cref="IdentifiedResultEnum"/> return value will always be false.
+    /// </summary>
     public BoolPosFunction? EnabledBoolPosFunction { get; private set; }
     public virtual string? PreMessage { get; } = null;
     protected virtual string? EnabledBoolPosFunctionBindingKey { get; } = null;
