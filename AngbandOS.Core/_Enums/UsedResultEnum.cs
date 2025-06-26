@@ -6,8 +6,18 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents whether or not an action was cancelled or an item was used.
+/// </summary>
 public enum UsedResultEnum
 {
+    /// <summary>
+    /// Represents an action that was not cancelled and that the item was used.
+    /// </summary>
     True,
+
+    /// <summary>
+    /// Represents an action that was cancelled or that the item was not used.
+    /// </summary>
     False
 }

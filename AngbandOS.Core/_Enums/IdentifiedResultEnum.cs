@@ -6,8 +6,18 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents whether or not something has been identified or "noticed" by the player.
+/// </summary>
 public enum IdentifiedResultEnum
 {
+    /// <summary>
+    /// The action or item has been identified or "noticed".
+    /// </summary>
     True,
+
+    /// <summary>
+    /// The action or item has not been identified or "noticed".
+    /// </summary>
     False
 }
