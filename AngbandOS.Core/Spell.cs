@@ -189,9 +189,9 @@ internal class Spell : IGetKey, IToJson
         }
         throw new Exception($"No {(successScript ? "success" : "failure")} mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.BaseCharacterClass.GetKey}.");
     }
-    private ICastSpellScript[]? CastSpellScripts;
+    private ICastSpellScript[]? CastSpellScripts => GetMappedSpellScripts(true);
 
-    private ICastSpellScript[]? FailedCastSpellScripts;
+    private ICastSpellScript[]? FailedCastSpellScripts => GetMappedSpellScripts(false);
 
     /// <summary>
     /// Performs the spell.
@@ -277,8 +277,8 @@ internal class Spell : IGetKey, IToJson
         CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.BaseCharacterClass, this));
         SpellIndex = spellIndex;
         SpellBookItemFactory = itemFactory;
-        CastSpellScripts = GetMappedSpellScripts(true);
-        FailedCastSpellScripts = GetMappedSpellScripts(false);
+        //CastSpellScripts = GetMappedSpellScripts(true);
+        //FailedCastSpellScripts = GetMappedSpellScripts(false);
     }
 
     public string Title()

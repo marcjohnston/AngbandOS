@@ -297,7 +297,6 @@
         LoseMemoriesScript,
         MageChaosBoltScript,
         MageDarkBoltScript,
-        MageHolyOrbScript,
         MageManaBurstScript,
         MageOrbOfEntropyScript,
         MagicMappingAndIlluminationScript,
