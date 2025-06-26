@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.MappedSpellScripts;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -42,105 +43,6 @@ internal class SingletonRepository
             throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
         return genericRepository;
-    }
-
-    /// <summary>
-    /// Returns a non-ambigious mapping for a 3-keyed mapping repository.  A 3-key lookup is performed first; if found, it is returned; as it is non-ambigious.  When
-    /// the 3-key lookup fails to match a singleton in the repository, all three 2-key lookups are performed.  If only singleton is found for all three 2-key lookups; it is
-    /// returned as non-ambigious.  If more than one 2-key lookup singletons are matched, an ambigious exception is thrown.  If no 2-key singletons are found, a lookup
-    /// for all three 1-key singletons is performed.  If more than one is found, an ambigious error is thrown.  If a single 1-key singleton is found, it is returned; otherwise
-    /// no 1-key singletons were found and null is returned.
-    /// </summary>
-    /// <typeparam name="T">Represents the mapping type of singletons stored in the repository.  E.g. MappedSpellScript</typeparam>
-    /// <typeparam name="T1">Represents the type for the first key.</typeparam>
-    /// <typeparam name="T2">Represents the type for the second key.</typeparam>
-    /// <typeparam name="T3">Represents the type for the third key.</typeparam>
-    /// <param name="getCompositeKey"></param>
-    /// <param name="t1"></param>
-    /// <param name="t2"></param>
-    /// <param name="t3"></param>
-    /// <returns></returns>
-    public T? GetMapping<T, T1, T2, T3>(Func<T1?, T2?, T3?, string> getCompositeKey, T1? t1, T2? t2, T3? t3) where T : class
-    {
-        // Check all 3 keys.
-        string t1T2T3CompositeKey = getCompositeKey(t1, t2, t3);
-        T? t1T2T3mapping = Game.SingletonRepository.TryGet<T>(t1T2T3CompositeKey);
-        if (t1T2T3mapping is not null)
-        {
-            return t1T2T3mapping;
-        }
-
-        // Check 2 keys.
-        string t1T2CompositeKey = getCompositeKey(t1, t2, default);
-        T? t1T2Mapping = Game.SingletonRepository.TryGet<T>(t1T2CompositeKey);
-
-        string t1T3CompositeKey = getCompositeKey(t1, default, t3);
-        T? t1T3Mapping = Game.SingletonRepository.TryGet<T>(t1T3CompositeKey);
-
-        string t2T3CompositeKey = getCompositeKey(default, t2, t3);
-        T? t2T3Mapping = Game.SingletonRepository.TryGet<T>(t2T3CompositeKey);
-
-        if (t1T2Mapping is not null)
-        {
-            if (t1T3Mapping is not null)
-            {
-                throw new Exception($"Ambigious mapped spell script for {t1T2CompositeKey} and {t1T2CompositeKey}.");
-            }
-            else if (t2T3Mapping is not null)
-            {
-                throw new Exception($"Ambigious mapped spell script for {t1T2CompositeKey} and {t2T3CompositeKey}.");
-            }
-            return t1T2Mapping;
-        }
-        else if (t1T3Mapping is not null)
-        {
-            if (t2T3Mapping is not null)
-            {
-                throw new Exception($"Ambigious mapped spell script for {t1T2CompositeKey} and {t2T3CompositeKey}.");
-            }
-            return t1T3Mapping;
-        }
-        else if (t2T3Mapping is not null)
-        {
-            return t2T3Mapping;
-        }
-
-        // Check 1 key.
-        string t1CompositeKey = getCompositeKey(t1, default, default);
-        T? t1Mapping = Game.SingletonRepository.TryGet<T>(t1CompositeKey);
-
-        string bySpellKey = getCompositeKey(default, t2, default);
-        T? t2Mapping = Game.SingletonRepository.TryGet<T>(bySpellKey);
-
-        string byCharacterClassKey = getCompositeKey(default, default, t3);
-        T? t3Mapping = Game.SingletonRepository.TryGet<T>(byCharacterClassKey);
-
-        if (t1Mapping is not null)
-        {
-            if (t2Mapping is not null)
-            {
-                throw new Exception($"Ambigious mapped spell script for {t1CompositeKey} and {bySpellKey}.");
-            }
-            else if (t3Mapping is not null)
-            {
-                throw new Exception($"Ambigious mapped spell script for {t1CompositeKey} and {byCharacterClassKey}.");
-            }
-            return t1Mapping;
-        }
-        else if (t2Mapping is not null)
-        {
-            if (t3Mapping is not null)
-            {
-                throw new Exception($"Ambigious mapped spell script for {bySpellKey} and {byCharacterClassKey}.");
-            }
-            return t2Mapping;
-        }
-        else if (t3Mapping is not null)
-        {
-            return t3Mapping;
-        }
-
-        return null;
     }
 
     /// <summary>

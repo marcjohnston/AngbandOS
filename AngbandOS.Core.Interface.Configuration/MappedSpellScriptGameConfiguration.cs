@@ -14,4 +14,5 @@ public class MappedSpellScriptGameConfiguration
     /// property is used to bind the <see cref="CastSpellScripts"/> property during the bind phase.
     /// </summary>
     public virtual string[]? CastSpellScriptBindingKeys { get; set; }
+    public virtual int? MinimumExperienceLevel { get; set; } = null;
 }

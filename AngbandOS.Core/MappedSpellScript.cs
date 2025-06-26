@@ -12,6 +12,7 @@ internal class MappedSpellScript : IGetKey, IToJson
         SpellBindingKey = mappedSpellScriptGameConfiguration.SpellBindingKey;
         CharacterClassBindingKey = mappedSpellScriptGameConfiguration.CharacterClassBindingKey;
         CastSpellScriptBindingKeys = mappedSpellScriptGameConfiguration.CastSpellScriptBindingKeys;
+        MinimumExperienceLevel = mappedSpellScriptGameConfiguration.MinimumExperienceLevel;
     }
 
     public string GetKey => Game.GetCompositeKey(SpellBindingKey, RealmBindingKey, CharacterClassBindingKey, Success ? SuccessNamespaceKey : FailureNamespaceKey);
@@ -23,7 +24,6 @@ internal class MappedSpellScript : IGetKey, IToJson
         CharacterClass = Game.SingletonRepository.GetNullable<BaseCharacterClass>(CharacterClassBindingKey);
         CastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastSpellScriptBindingKeys);
     }
-    public static string GetCompositeKey(Game game, Realm? realm, Spell? spell, BaseCharacterClass? characterClass, bool successScript) => Game.GetCompositeKey(spell?.GetKey, realm?.GetKey, characterClass?.GetKey, successScript ? SuccessNamespaceKey : FailureNamespaceKey);
     private static string SuccessNamespaceKey => "Success";
     private static string FailureNamespaceKey => "Failure";
     public string ToJson()
@@ -35,9 +35,12 @@ internal class MappedSpellScript : IGetKey, IToJson
             SpellBindingKey = SpellBindingKey,
             CharacterClassBindingKey = CharacterClassBindingKey,
             CastSpellScriptBindingKeys = CastSpellScriptBindingKeys,
+            MinimumExperienceLevel = MinimumExperienceLevel,
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
+
+    public int? MinimumExperienceLevel { get; }
     public Realm? Realm { get; private set; }
     public BaseCharacterClass? CharacterClass { get; private set; }
     public Spell? Spell { get; private set; }
