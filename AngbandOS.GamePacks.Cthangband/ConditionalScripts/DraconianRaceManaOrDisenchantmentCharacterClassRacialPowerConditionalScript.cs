@@ -7,5 +7,5 @@ public class DraconianRaceManaOrDisenchantmentCharacterClassRacialPowerCondition
     {
         (nameof(DraconianRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerManaOrDisenchantmentProjectileWeightedRandom) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerManaOrDisenchantmentProjectileScriptWeightedRandom) };
 }

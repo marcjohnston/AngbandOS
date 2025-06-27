@@ -23,7 +23,7 @@ public class AcidBoltWandItemFactory : ItemFactoryGameConfiguration
         (30, 1)
     };
     public override int Weight => 10;
-    public override (string, string, int, int)? AimingBindingTuple => (nameof(AcidBoltOrBeam3d8ProjectileWeightedRandom), "1d8+6", 48, 150);
+    public override (string, string, int, int)? AimingBindingTuple => (nameof(AcidBoltOrBeam3d8ProjectileScriptWeightedRandom), "1d8+6", 48, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeWandScript);

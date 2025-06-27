@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
 {
-    public ProjectileWeightedRandom(Game game, ProjectileWeightedRandomGameConfiguration projectileWeightedRandomGameConfiguration) : base(game)
+    public ProjectileScriptWeightedRandom(Game game, ProjectileScriptWeightedRandomGameConfiguration projectileWeightedRandomGameConfiguration) : base(game)
     {
         Key = projectileWeightedRandomGameConfiguration.Key ?? projectileWeightedRandomGameConfiguration.GetType().Name;
         NameAndWeightBindings = projectileWeightedRandomGameConfiguration.NameAndWeightBindings;
@@ -71,7 +71,7 @@ internal class ProjectileWeightedRandom : WeightedRandom<ProjectileScript>, IGet
 
     public string ToJson()
     {
-        ProjectileWeightedRandomGameConfiguration definition = new()
+        ProjectileScriptWeightedRandomGameConfiguration definition = new()
         {
             Key = Key,
             NameAndWeightBindings = NameAndWeightBindings,

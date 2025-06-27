@@ -12,7 +12,7 @@ public class BreatheChaosDisenchantSoundOrShardsEvery1d300p300DirectionalActivat
 
     public override string RechargeTimeRollExpression => "1d300+300";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(ChaosDisenchantSoundOrShards250rm2ProjectileWeightedRandom);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(ChaosDisenchantSoundOrShards250rm2ProjectileScriptWeightedRandom);
 
     public override int Value => 10000;
 

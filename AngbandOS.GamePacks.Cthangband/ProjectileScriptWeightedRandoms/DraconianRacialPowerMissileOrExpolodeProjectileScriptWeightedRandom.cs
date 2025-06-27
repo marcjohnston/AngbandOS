@@ -1,7 +1,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class DraconianRacialPowerMissileOrExpolodeProjectileWeightedRandom : ProjectileWeightedRandomGameConfiguration
+public class DraconianRacialPowerMissileOrExpolodeProjectileScriptWeightedRandom : ProjectileScriptWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {

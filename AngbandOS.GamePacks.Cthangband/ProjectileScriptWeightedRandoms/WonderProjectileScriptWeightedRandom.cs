@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class WonderProjectileWeightedRandom : ProjectileWeightedRandomGameConfiguration
+public class WonderProjectileScriptWeightedRandom : ProjectileScriptWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {

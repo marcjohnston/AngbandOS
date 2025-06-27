@@ -23,7 +23,7 @@ public class FrostBoltsWandItemFactory : ItemFactoryGameConfiguration
         (20, 1)
     };
     public override int Weight => 10;
-    public override (string, string, int, int)? AimingBindingTuple => (nameof(ColdBoltOrBeam3d8ProjectileWeightedRandom), "1d5+6", 40, 150);
+    public override (string, string, int, int)? AimingBindingTuple => (nameof(ColdBoltOrBeam3d8ProjectileScriptWeightedRandom), "1d5+6", 40, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeWandScript);

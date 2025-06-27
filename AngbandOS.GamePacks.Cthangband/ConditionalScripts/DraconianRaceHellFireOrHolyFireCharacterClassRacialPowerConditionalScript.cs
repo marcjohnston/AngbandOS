@@ -7,5 +7,5 @@ public class DraconianRaceHellFireOrHolyFireCharacterClassRacialPowerConditional
     {
         (nameof(DraconianRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerHellFireOrHolyFireProjectileWeightedRandom) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerHellFireOrHolyFireProjectileScriptWeightedRandom) };
 }

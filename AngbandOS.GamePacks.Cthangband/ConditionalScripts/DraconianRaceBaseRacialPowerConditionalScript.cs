@@ -7,5 +7,5 @@ public class DraconianRaceBaseRacialPowerConditionalScript : ConditionalScriptGa
     {
         (nameof(DraconianRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerFireOrColdProjectileWeightedRandom) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerFireOrColdProjectileScriptWeightedRandom) };
 }

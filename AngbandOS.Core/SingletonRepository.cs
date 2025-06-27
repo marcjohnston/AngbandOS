@@ -348,7 +348,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration>(gameConfiguration.Projectiles);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts);
-        LoadFromConfiguration<ProjectileWeightedRandom, ProjectileWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts);
+        LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts);
         LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities);
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders);
         LoadFromConfiguration<RacialPower, RacialPowerGameConfiguration>(gameConfiguration.RacialPowers);

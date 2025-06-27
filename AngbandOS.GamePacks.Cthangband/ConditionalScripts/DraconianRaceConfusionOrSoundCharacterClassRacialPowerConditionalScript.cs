@@ -7,5 +7,5 @@ public class DraconianRaceConfusionOrSoundCharacterClassRacialPowerConditionalSc
     {
         (nameof(DraconianRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerConfusionOrSoundProjectileWeightedRandom) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerConfusionOrSoundProjectileScriptWeightedRandom) };
 }

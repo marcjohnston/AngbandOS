@@ -12,7 +12,7 @@ public class BallOfChaos200r2Every1d300p300DirectionalActivation : ActivationGam
 
     public override string RechargeTimeRollExpression => "1d300+300";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(ChaosOrDisenchant220rm2ProjectileWeightedRandom);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(ChaosOrDisenchant220rm2ProjectileScriptWeightedRandom);
 
     public override int Value => 5000;
 

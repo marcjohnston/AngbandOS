@@ -7,11 +7,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class AcidBoltOrBeam3d8ProjectileWeightedRandom : ProjectileWeightedRandomGameConfiguration
+public class LightOrDarkness200rm2ProjectileScriptWeightedRandom : ProjectileScriptWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
-        (nameof(Acid3d8ProjectileScript), 20),
-        (nameof(AcidBeam3d8ProjectileScript), 80),
+        (nameof(Light200rm2ProjectileScript), 1),
+        (nameof(Darkness200Rn2ProjectileScript), 1),
     };
 }

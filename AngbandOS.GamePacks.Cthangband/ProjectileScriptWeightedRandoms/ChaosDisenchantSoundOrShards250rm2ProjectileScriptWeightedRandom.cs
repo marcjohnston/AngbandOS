@@ -7,11 +7,13 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class ChaosOrDisenchant220rm2ProjectileWeightedRandom : ProjectileWeightedRandomGameConfiguration
+public class ChaosDisenchantSoundOrShards250rm2ProjectileScriptWeightedRandom : ProjectileScriptWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
-        (nameof(Chaos220Rn2ProjectileScript), 1),
-        (nameof(Disenchant220Rn2ProjectileScript), 1),
+        (nameof(Chaos250Rn2ProjectileScript), 1),
+        (nameof(Disenchant250Rn2ProjectileScript), 1),
+        (nameof(Sound250rm2ProjectileScript), 1),
+        (nameof(Explode250Rn2ProjectileScript), 1),
     };
 }

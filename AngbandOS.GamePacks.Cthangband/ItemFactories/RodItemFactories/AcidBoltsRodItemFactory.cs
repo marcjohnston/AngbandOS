@@ -23,7 +23,7 @@ public class AcidBoltsRodItemFactory : ItemFactoryGameConfiguration
         (40, 1)
     };
     public override int Weight => 15;
-    public override (string, string, bool, int)? ZapBindingTuple => (nameof(AcidBoltOrBeam6d8ProjectileWeightedRandom), "12", true, 250);
+    public override (string, string, bool, int)? ZapBindingTuple => (nameof(AcidBoltOrBeam6d8ProjectileScriptWeightedRandom), "12", true, 250);
     public override string ItemClassBindingKey => nameof(RodsItemClass);
 
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeRodScript);

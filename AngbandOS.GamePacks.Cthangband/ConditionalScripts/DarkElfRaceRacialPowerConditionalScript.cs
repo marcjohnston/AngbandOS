@@ -7,5 +7,5 @@ public class DarkElfRaceRacialPowerConditionalScript : ConditionalScriptGameConf
     {
         (nameof(DarkElfRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DarkElfRacialPowerProjectileWeightedRandom) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DarkElfRacialPowerProjectileScriptWeightedRandom) };
 }

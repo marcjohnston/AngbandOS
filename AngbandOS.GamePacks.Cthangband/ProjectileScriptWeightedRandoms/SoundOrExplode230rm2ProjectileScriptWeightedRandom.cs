@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class SoundOrExplode230rm2ProjectileWeightedRandom : ProjectileWeightedRandomGameConfiguration
+public class SoundOrExplode230rm2ProjectileScriptWeightedRandom : ProjectileScriptWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {

@@ -12,7 +12,7 @@ public class BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225Directio
 
     public override string RechargeTimeRollExpression => "1d225+225";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(FireColdElectricityPoisonGasOrAcid220rm2ProjectileWeightedRandom);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(FireColdElectricityPoisonGasOrAcid220rm2ProjectileScriptWeightedRandom);
 
     public override int Value => 5000;
 

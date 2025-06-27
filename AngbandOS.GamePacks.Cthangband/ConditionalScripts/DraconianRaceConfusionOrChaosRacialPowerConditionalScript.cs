@@ -7,5 +7,5 @@ public class DraconianRaceConfusionOrChaosRacialPowerConditionalScript : Conditi
     {
         (nameof(DraconianRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerConfusionOrChaosProjectileWeightedRandom) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(DraconianRacialPowerConfusionOrChaosProjectileScriptWeightedRandom) };
 }
