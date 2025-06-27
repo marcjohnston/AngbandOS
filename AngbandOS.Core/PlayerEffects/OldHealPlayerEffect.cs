@@ -10,13 +10,9 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class OldHealPlayerEffect : PlayerEffect
 {
     private OldHealPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    public override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
     {
         bool blind = Game.BlindnessTimer.Value != 0;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
         dam = (dam + r) / (r + 1);
         if (blind)
         {

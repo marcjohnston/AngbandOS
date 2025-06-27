@@ -10,14 +10,10 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class TimePlayerEffect : PlayerEffect
 {
     private TimePlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    public override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
     {
         bool blind = Game.BlindnessTimer.Value != 0;
         string act = null;
-        if (dam > 1600)
-        {
-            dam = 1600;
-        }
         dam = (dam + r) / (r + 1);
         Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;

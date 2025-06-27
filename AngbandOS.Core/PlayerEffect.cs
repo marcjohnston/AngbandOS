@@ -15,15 +15,23 @@ internal abstract class PlayerEffect : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind()
-    {
-    }
-
+    public void Bind() { }
 
     protected PlayerEffect(Game game)
     {
         Game = game;
     }
 
-    public abstract bool Apply(int who, int r, int y, int x, int dam, int aRad);
+    public virtual int MaximumDamageAllowed => 1600;
+
+    public bool ApplyEffect(int who, int r, int y, int x, int dam, int aRad)
+    {
+        if (dam > MaximumDamageAllowed)
+        {
+            dam = MaximumDamageAllowed;
+        }
+        return Apply(who, r, y, x, dam, aRad);
+    }
+
+    protected abstract bool Apply(int who, int r, int y, int x, int dam, int aRad);
 }

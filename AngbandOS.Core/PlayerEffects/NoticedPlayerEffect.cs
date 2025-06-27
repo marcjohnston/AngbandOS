@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class NoticedPlayerEffect : PlayerEffect
 {
     private NoticedPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    public override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
     {
         return true;
     }
