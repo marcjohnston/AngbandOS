@@ -5,5 +5,5 @@ internal class ElementalBallSpellFolkRealmSuccessMappedSpellScript : MappedSpell
 {
     public override string SpellBindingKey => nameof(ElementalBallFolkSpell);
     public override string? RealmBindingKey => nameof(FolkRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.ElementalBallScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(ElementalBall75PXProjectileScriptWeightedRandom) };
 }

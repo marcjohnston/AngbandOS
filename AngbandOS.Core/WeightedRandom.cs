@@ -41,12 +41,19 @@ internal class WeightedRandom<T>
 {
     protected readonly Game Game;
     private readonly List<KeyValuePair<int, T>> _list = new List<KeyValuePair<int, T>>();
-    private int _sum = 0;
+    private int _sumCount = 0;
+
+    protected T[] Items => _list.Select(_keyValuePair => _keyValuePair.Value).ToArray();
+
+    /// <summary>
+    /// Returns the number of items without regard to their weight to be selected from.
+    /// </summary>
+    public int Count => _list.Count;
 
     /// <summary>
     /// Returns the total number of items to be selected from.  This is a sum of the weights.
     /// </summary>
-    public int Count => _sum;
+    public int SumCount => _sumCount;
 
     /// <summary>
     /// Creates a new empty weighted-random.  Use the Add method to add items to the list.
@@ -108,8 +115,8 @@ internal class WeightedRandom<T>
     {
         foreach (T value in values)
         {
-            _sum += weight;
-            _list.Add(new KeyValuePair<int, T>(_sum, value));
+            _sumCount += weight;
+            _list.Add(new KeyValuePair<int, T>(_sumCount, value));
         }
     }
 
@@ -138,7 +145,7 @@ internal class WeightedRandom<T>
         {
             return default;
         }
-        int choice = Game.RandomLessThan(_sum);
+        int choice = Game.RandomLessThan(_sumCount);
         int index = 0;
         while (choice >= _list[index].Key) // This is because there are weights.  The keys are used to track weights.
         {

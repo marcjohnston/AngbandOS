@@ -154,7 +154,6 @@
         EditItemScript,
         EditStatsScript,
         ElderSignScript,
-        ElementalBallScript,
         EnchantArmor1D3P2IdentifableAndUsedScript,
         EnchantArmor1IdentifableAndUsedScript,
         EnchantArmor4AcScript,

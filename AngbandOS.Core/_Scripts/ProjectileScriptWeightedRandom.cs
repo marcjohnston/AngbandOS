@@ -13,7 +13,8 @@ internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>
     {
         Key = projectileWeightedRandomGameConfiguration.Key ?? projectileWeightedRandomGameConfiguration.GetType().Name;
         NameAndWeightBindings = projectileWeightedRandomGameConfiguration.NameAndWeightBindings;
-        LearnedDetails = LearnedDetails;
+        LearnedDetails = projectileWeightedRandomGameConfiguration.LearnedDetails;
+        LearnedDetailsMode = projectileWeightedRandomGameConfiguration.LearnedDetailsMode;
     }
 
     /// <summary>
@@ -76,12 +77,68 @@ internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>
             Key = Key,
             NameAndWeightBindings = NameAndWeightBindings,
             LearnedDetails = LearnedDetails,
+            LearnedDetailsMode = LearnedDetailsMode,
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
+
+    UsedResultEnum IActivateItemScript.ExecuteActivateItemScript(Item item)
+    {
+        throw new NotImplementedException();
+    }
+
+    IdentifiedResultEnum IAimWandScript.ExecuteAimWandScript(int dir)
+    {
+        throw new NotImplementedException();
+    }
+
+    IdentifiedAndUsedResult IZapRodScript.ExecuteZapRodScript(Item item, int dir)
+    {
+        throw new NotImplementedException();
+    }
+
+    void IScript.ExecuteScript()
+    {
+        throw new NotImplementedException();
+    }
+
+    IdentifiedAndUsedResult IReadScrollOrUseStaffScript.ExecuteReadScrollOrUseStaffScript()
+    {
+        throw new NotImplementedException();
+    }
+
+    void ICastSpellScript.ExecuteCastSpellScript(Spell spell)
+    {
+        throw new NotImplementedException();
+    }
+
+    IdentifiedResultEnum IEatOrQuaffScript.ExecuteEatOrQuaffScript()
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual LearnedDetailsWeightedRandomEnum LearnedDetailsMode { get; }
 
     /// <summary>
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
     /// </summary>
     public virtual string LearnedDetails { get; } = "";
+
+    string ICastSpellScript.LearnedDetails
+    {
+        get
+        {
+            switch (LearnedDetailsMode)
+            {
+                case LearnedDetailsWeightedRandomEnum.InheritFromFirstDefined:
+                    if (Count > 0)
+                    {
+                        return Items[0].LearnedDetails;
+                    }
+                    break;
+            }
+            return LearnedDetails;
+        }
+    }
 }
+
