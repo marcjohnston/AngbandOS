@@ -23,7 +23,7 @@ public class HavocRodItemFactory : ItemFactoryGameConfiguration
         (100, 16)
     };
     public override int Weight => 15;
-    public override (string, string, bool, int)? ZapBindingTuple => (nameof(SystemScriptsEnum.CallChaosIdentifiedAndUsedScriptItemAndDirection), "250", true, 250);
+    public override (string, string, bool, int)? ZapBindingTuple => (nameof(CallChaosProjectileScriptWeightedRandom), "250", true, 250);
     public override string ItemClassBindingKey => nameof(RodsItemClass);
 
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeRodScript);

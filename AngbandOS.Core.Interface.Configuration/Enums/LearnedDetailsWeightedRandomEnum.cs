@@ -6,8 +6,18 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
+/// <summary>
+/// Represents how learned details should be returned.
+/// </summary>
 public enum LearnedDetailsWeightedRandomEnum
 {
+    /// <summary>
+    /// Represents using the LearnedDetails property.
+    /// </summary>
     Default,
+
+    /// <summary>
+    /// Represents returning the learned details from the first item.
+    /// </summary>
     InheritFromFirstDefined
 }

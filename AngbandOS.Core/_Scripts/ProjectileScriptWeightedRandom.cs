@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson // DO NOT ADD MORE INTERFACES HERE, ADD IT TO THE IPROJECTILE
+internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson 
 {
     public ProjectileScriptWeightedRandom(Game game, ProjectileScriptWeightedRandomGameConfiguration projectileWeightedRandomGameConfiguration) : base(game)
     {
@@ -80,41 +80,6 @@ internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>
             LearnedDetailsMode = LearnedDetailsMode,
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
-    }
-
-    UsedResultEnum IActivateItemScript.ExecuteActivateItemScript(Item item)
-    {
-        throw new NotImplementedException();
-    }
-
-    IdentifiedResultEnum IAimWandScript.ExecuteAimWandScript(int dir)
-    {
-        throw new NotImplementedException();
-    }
-
-    IdentifiedAndUsedResult IZapRodScript.ExecuteZapRodScript(Item item, int dir)
-    {
-        throw new NotImplementedException();
-    }
-
-    void IScript.ExecuteScript()
-    {
-        throw new NotImplementedException();
-    }
-
-    IdentifiedAndUsedResult IReadScrollOrUseStaffScript.ExecuteReadScrollOrUseStaffScript()
-    {
-        throw new NotImplementedException();
-    }
-
-    void ICastSpellScript.ExecuteCastSpellScript(Spell spell)
-    {
-        throw new NotImplementedException();
-    }
-
-    IdentifiedResultEnum IEatOrQuaffScript.ExecuteEatOrQuaffScript()
-    {
-        throw new NotImplementedException();
     }
 
     public virtual LearnedDetailsWeightedRandomEnum LearnedDetailsMode { get; }

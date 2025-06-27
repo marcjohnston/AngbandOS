@@ -52,7 +52,6 @@
         BrowseScript,
         BurnResistanceScript,
         BuyHouseScript,
-        CallChaosIdentifiedAndUsedScriptItemAndDirection,
         CallDaylightScript,
         CallSunlightScript,
         CallTheVoidScript,
