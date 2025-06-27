@@ -32,7 +32,7 @@ internal class EquipScript : UniversalScript, IGetKey
         ScreenBuffer savedScreen = Game.Screen.Clone();
 
         // We're interested in seeing everything
-        Game.ShowEquip(null);
+        Game.ShowEquipment(null);
 
         // Get a command
         string outVal = $"Equipment: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.StrengthAbility.StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";

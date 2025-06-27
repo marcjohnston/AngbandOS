@@ -3093,7 +3093,7 @@ internal class Game
             {
                 if (ViewingEquipment)
                 {
-                    ShowEquip(itemFilter);
+                    ShowEquipment(itemFilter);
                 }
                 else
                 {
@@ -14597,15 +14597,9 @@ internal class Game
         return i;
     }
 
-    public void ShowEquip(IItemFilter? itemFilter)
+    public void ShowEquipment(IItemFilter? itemFilter)
     {
-        ShowInventoryOptions options = new ShowInventoryOptions()
-        {
-            ShowEmptySlotsAsNothing = true,
-            ShowFlavorColumn = true,
-            ShowUsageColumn = true
-        };
-        ShowInven(_inventorySlot => _inventorySlot.IsEquipment, itemFilter, options);
+        ShowInven(_inventorySlot => _inventorySlot.IsEquipment, itemFilter, true, true, true);
     }
 
     /// <summary>
@@ -14615,13 +14609,8 @@ internal class Game
     /// <param name="itemFilter"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public bool ShowInven(Func<WieldSlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, ShowInventoryOptions? options = null)
+    public bool ShowInven(Func<WieldSlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, bool ShowEmptySlotsAsNothing = false, bool ShowFlavorColumn = false, bool ShowUsageColumn = false)
     {
-        if (options == null)
-        {
-            options = new ShowInventoryOptions();
-        }
-
         WieldSlot[] inventorySlots = SingletonRepository.Get<WieldSlot>()
             .Where(_inventorySlot => inventorySlotPredicate(_inventorySlot))
             .OrderBy(_inventorySlot => _inventorySlot.SortOrder)
@@ -14629,8 +14618,8 @@ internal class Game
 
         const string labels = "abcdefghijklmnopqrstuvwxyz";
         ConsoleTable consoleTable = new ConsoleTable("label", "flavor", "usage", "description", "weight");
-        consoleTable.Column("flavor").IsVisible = options.ShowFlavorColumn;
-        consoleTable.Column("usage").IsVisible = options.ShowFlavorColumn;
+        consoleTable.Column("flavor").IsVisible = ShowFlavorColumn;
+        consoleTable.Column("usage").IsVisible = ShowFlavorColumn;
         consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
         foreach (WieldSlot inventorySlot in inventorySlots)
         {
@@ -14655,7 +14644,7 @@ internal class Game
                     slotIsEmpty = false;
                 }
             }
-            if (options.ShowEmptySlotsAsNothing && slotIsEmpty)
+            if (ShowEmptySlotsAsNothing && slotIsEmpty)
             {
                 ConsoleTableRow consoleRow = consoleTable.AddRow();
                 consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{labels[consoleTable.Rows.Count() - 1]})");
