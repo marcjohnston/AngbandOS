@@ -7,25 +7,19 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript
+internal class ApplyDisenchantScript : EatOrQuaffUniversalScript, IGetKey
 {
-    private ApplyDisenchantScript(Game game) : base(game) { }
+    private ApplyDisenchantScript(Game game) : base(game) {  }
 
-    public void ExecuteCastSpellScript(Spell spell)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
-    /// </summary>
-    public string LearnedDetails => "";
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+    public virtual void Bind() { }
 
     /// <summary>
     /// Executes the script and returns a success result.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
+    public override IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Select an inventory slot where items can be disenchanted.
         WieldSlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
@@ -84,14 +78,5 @@ internal class ApplyDisenchantScript : Script, IScript, ICastSpellScript, IEatOr
         Game.MsgPrint($"Your {oName} ({inventorySlot.Label(oPtr)}) {s} disenchanted!");
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return IdentifiedResultEnum.True;
-    }
-
-    /// <summary>
-    /// Executes the successful script and disposes of the result
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        ExecuteEatOrQuaffScript();
     }
 }

@@ -7,15 +7,19 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BoozeScript : Script, IEatOrQuaffScript
+internal class BoozeScript : EatOrQuaffUniversalScript, IGetKey
 {
     private BoozeScript(Game game) : base(game) { }
+
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+    public virtual void Bind() { }
 
     /// <summary>
     /// Executes the script and returns true because the action is always noticed.
     /// </summary>
     /// <returns></returns>
-    public IdentifiedResultEnum ExecuteEatOrQuaffScript()
+    public override IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
 
