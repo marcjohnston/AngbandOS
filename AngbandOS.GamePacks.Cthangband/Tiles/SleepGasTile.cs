@@ -17,5 +17,5 @@ public class SleepGasTile : TileGameConfiguration
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override string? StepOnScriptName => nameof(SystemScriptsEnum.SleepGasScript);
+    public override string? StepOnScriptName => nameof(Paralysis5P1d10TimerScript);
 }

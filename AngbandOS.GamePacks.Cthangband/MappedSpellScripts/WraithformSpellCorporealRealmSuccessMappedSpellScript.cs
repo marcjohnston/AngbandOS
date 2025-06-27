@@ -5,5 +5,5 @@ internal class WraithformSpellCorporealRealmSuccessMappedSpellScript : MappedSpe
 {
     public override string SpellBindingKey => nameof(WraithformCorporealSpell);
     public override string? RealmBindingKey => nameof(CorporealRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.WraithformScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(EtherealnessXO2dX02TimerScript) };
 }

@@ -29,7 +29,7 @@ public class SlownessPotionItemFactory : ItemFactoryGameConfiguration
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
 
-    public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.Slowness1D25P15Script), nameof(OldSlow5ProjectileUnfriendlyProjectileScript), 20);
+    public override (string, string?, int)? QuaffBindingTuple => (nameof(Slow15P1d25TimerScript), nameof(OldSlow5ProjectileUnfriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

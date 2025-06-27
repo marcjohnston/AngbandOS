@@ -15,7 +15,7 @@ public class WraithActivation : ActivationGameConfiguration
     
     public override string? PreActivationMessage => "";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(SystemScriptsEnum.WraithScript);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(Etherealness1dXTimerScript);
 
     public override string RechargeTimeRollExpression => "1000";
 

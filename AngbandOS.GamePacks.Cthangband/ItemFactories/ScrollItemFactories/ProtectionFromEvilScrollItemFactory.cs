@@ -27,7 +27,7 @@ public class ProtectionFromEvilScrollItemFactory : ItemFactoryGameConfiguration
     };
     public override int Weight => 5;
 
-    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.ProtectionFromEvilIdentifableAndUsedScript), 10);
+    public override (string, int)? ReadBindingTuple => (nameof(ProtectionFromEvil3XP1d25TimerScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

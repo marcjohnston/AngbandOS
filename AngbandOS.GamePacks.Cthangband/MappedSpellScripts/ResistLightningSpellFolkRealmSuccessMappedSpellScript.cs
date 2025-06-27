@@ -5,5 +5,5 @@ internal class ResistLightningSpellFolkRealmSuccessMappedSpellScript : MappedSpe
 {
     public override string SpellBindingKey => nameof(ResistLightningFolkSpell);
     public override string? RealmBindingKey => nameof(FolkRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.ResistLightningScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(LightningResistance20P1d20TimerScript) };
 }

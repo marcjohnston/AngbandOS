@@ -7,5 +7,5 @@ public class GolemRaceRacialPowerConditionalScript : ConditionalScriptGameConfig
     {
         (nameof(GolemRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.GolemRacialPowerScript) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(Stoneskin30P1d20TimerScript) };
 }

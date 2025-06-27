@@ -5,5 +5,5 @@ internal class SeeInvisibleSpellCorporealRealmSuccessMappedSpellScript : MappedS
 {
     public override string SpellBindingKey => nameof(SeeInvisibleCorporealSpell);
     public override string? RealmBindingKey => nameof(CorporealRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.SeeInvisible1d24p24Script) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SeeInvisibility24P1d24TimerScript) };
 }

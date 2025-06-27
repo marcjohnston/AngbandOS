@@ -5,5 +5,5 @@ internal class ResistColdSpellFolkRealmSuccessMappedSpellScript : MappedSpellScr
 {
     public override string SpellBindingKey => nameof(ResistColdFolkSpell);
     public override string? RealmBindingKey => nameof(FolkRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.ResistCold1d20p20Script) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(ColdResistance20P1d20TimerScript) };
 }

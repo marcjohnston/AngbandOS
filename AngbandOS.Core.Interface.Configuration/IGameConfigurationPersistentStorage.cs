@@ -3,7 +3,10 @@
 [Serializable]
 public class TimerScriptGameConfiguration
 {
-    public virtual bool Used { get; set; }
+    /// <summary>
+    /// Returns whether or not items are considered used.  Returns true, by default for timers.
+    /// </summary>
+    public virtual bool Used { get; set; } = true;
     public virtual string Key { get; set; }
 
     /// <summary>

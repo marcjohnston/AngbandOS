@@ -5,5 +5,5 @@ internal class StoneSkinSpellCorporealRealmSuccessMappedSpellScript : MappedSpel
 {
     public override string SpellBindingKey => nameof(StoneSkinCorporealSpell);
     public override string? RealmBindingKey => nameof(CorporealRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.StoneSkinScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(Stoneskin30P1d20TimerScript) };
 }

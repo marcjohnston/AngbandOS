@@ -15,7 +15,7 @@ public class ProtectionFromEvilActivation : ActivationGameConfiguration
     
     public override string? PreActivationMessage => "Your {0} lets out a shrill wail...";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(SystemScriptsEnum.ProtectionFromEvilScript);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(ProtectionFromEvil3XP1d25TimerScript);
 
     public override string RechargeTimeRollExpression => "1d225+225";
 

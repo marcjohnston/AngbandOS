@@ -27,7 +27,7 @@ public class SlownessStaffItemFactory : ItemFactoryGameConfiguration
         (40, 1)
     };
     public override int Weight => 50;
-    public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.Slowness1D30P15Script), "1d8+8", 200, 100);
+    public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(Slow15P1d30TimerScript), "1d8+8", 200, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);
 

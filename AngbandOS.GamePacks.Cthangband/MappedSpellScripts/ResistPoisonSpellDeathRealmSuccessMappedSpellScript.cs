@@ -5,5 +5,5 @@ internal class ResistPoisonSpellDeathRealmSuccessMappedSpellScript : MappedSpell
 {
     public override string SpellBindingKey => nameof(ResistPoisonDeathSpell);
     public override string? RealmBindingKey => nameof(DeathRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.ResistPoisonScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(PoisonResistance20P1d20TimerScript) };
 }

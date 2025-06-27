@@ -15,7 +15,7 @@ public class InvulnActivation : ActivationGameConfiguration
     
     public override string? PreActivationMessage => "";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(SystemScriptsEnum.Invulnerability1d8p8Script);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(Invulnerability1d8p8TimerScript);
 
     public override string RechargeTimeRollExpression => "1000";
 

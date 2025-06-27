@@ -28,7 +28,7 @@ public class SleepPotionItemFactory : ItemFactoryGameConfiguration
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 
-    public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SleepScript), nameof(OldSleepProjectileUnfriendlyProjectileScript), 20);
+    public override (string, string?, int)? QuaffBindingTuple => (nameof(Paralysis4P1d4TimerScript), nameof(OldSleepProjectileUnfriendlyProjectileScript), 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.

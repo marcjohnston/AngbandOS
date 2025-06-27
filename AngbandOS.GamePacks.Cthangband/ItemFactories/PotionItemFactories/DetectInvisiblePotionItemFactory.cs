@@ -23,7 +23,7 @@ public class DetectInvisiblePotionItemFactory : ItemFactoryGameConfiguration
         (3, 1)
     };
     public override int Weight => 4;
-    public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SeeInvisible1d12p12Script), null, 20);
+    public override (string, string?, int)? QuaffBindingTuple => (nameof(SeeInvisibility12P1d12TimerScript), null, 20);
 
     /// <summary>
     /// Returns true, because potions are magical and should be detected with the detect magic scroll.
