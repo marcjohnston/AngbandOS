@@ -1,4 +1,4 @@
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -7,16 +7,17 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class AnimalTrainingScript : ProjectileScriptGameConfiguration
+public class MageLevel30OrbOfEntropyProjectileScript : ProjectileScriptGameConfiguration
 {
-    public override string DamageRollExpression => "X";
-    public override string ProjectileBindingKey => nameof(ControlAnimalProjectile);
+    public override string DamageRollExpression => "3d6+X+X/2";
+    public override string RadiusRollExpression => "3";
+    public override string ProjectileBindingKey => nameof(OldDrainLifeProjectile);
     public override bool Stop => true;
     public override bool Kill => true;
     public override bool Jump => false;
     public override bool Beam => false;
-    public override bool Grid => false;
-    public override bool Item => false;
+    public override bool Grid => true;
+    public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
 }

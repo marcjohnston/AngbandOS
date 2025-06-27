@@ -5,5 +5,5 @@ internal class FistOfForceSpellChaosRealmSuccessMappedSpellScript : MappedSpellS
 {
     public override string SpellBindingKey => nameof(FistOfForceChaosSpell);
     public override string? RealmBindingKey => nameof(ChaosRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.FistOfForceScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(FistOfForceProjectileScript) };
 }

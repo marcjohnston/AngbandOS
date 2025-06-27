@@ -5,5 +5,5 @@ internal class GravityBeamSpellChaosRealmSuccessMappedSpellScript : MappedSpellS
 {
     public override string SpellBindingKey => nameof(GravityBeamChaosSpell);
     public override string? RealmBindingKey => nameof(ChaosRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.GravityBeamScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(GravityBeamProjectileScript) };
 }

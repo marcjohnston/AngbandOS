@@ -7,10 +7,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class FistOfForceScript : ProjectileScriptGameConfiguration
+public class DarknessStormProjectileScript : ProjectileScriptGameConfiguration
 {
-    public override string DamageRollExpression => "8+((X-5)/4)d8";
-    public override string ProjectileBindingKey => nameof(DisintegrateProjectile);
+    public override string RadiusRollExpression => "4";
+    public override string DamageRollExpression => "120";
+    public override string ProjectileBindingKey => nameof(DarknessProjectile);
     public override bool Stop => true;
     public override bool Kill => true;
     public override bool Jump => false;

@@ -6,6 +6,6 @@ internal class MageCharacterClassLevel30HolyOrbSpellLifeRealmSuccessMappedSpellS
     public override string SpellBindingKey => nameof(HolyOrbLifeSpell);
     public override string? RealmBindingKey => nameof(LifeRealm);
     public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.MageCharacterClass);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(MageLevel30HolyOrbScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(MageLevel30HolyOrbProjectileScript) };
     public override int? MinimumExperienceLevel => 30;
 }

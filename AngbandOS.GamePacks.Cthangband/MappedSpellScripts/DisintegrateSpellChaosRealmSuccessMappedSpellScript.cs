@@ -5,5 +5,5 @@ internal class DisintegrateSpellChaosRealmSuccessMappedSpellScript : MappedSpell
 {
     public override string SpellBindingKey => nameof(DisintegrateChaosSpell);
     public override string? RealmBindingKey => nameof(ChaosRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.DisintegrateScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(DisintegrateProjectileScript) };
 }

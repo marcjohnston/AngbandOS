@@ -1,4 +1,4 @@
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -7,11 +7,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class FlameStrikeScript : ProjectileScriptGameConfiguration
+public class MageLevel30ManaBurstProjectileScript : ProjectileScriptGameConfiguration
 {
-    public override string RadiusRollExpression => "8";
-    public override string DamageRollExpression => "150+2*x";
-    public override string ProjectileBindingKey => nameof(FireProjectile);
     public override bool Stop => true;
     public override bool Kill => true;
     public override bool Jump => false;
@@ -20,4 +17,7 @@ public class FlameStrikeScript : ProjectileScriptGameConfiguration
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
+    public override string RadiusRollExpression => "3";
+    public override string ProjectileBindingKey => nameof(MissileProjectile);
+    public override string DamageRollExpression => "3d5+(X+X/2)";
 }

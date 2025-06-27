@@ -5,5 +5,5 @@ internal class NonMageCharacterClassHolyOrbSpellLifeRealmSuccessMappedSpellScrip
 {
     public override string SpellBindingKey => nameof(HolyOrbLifeSpell);
     public override string? RealmBindingKey => nameof(LifeRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.NonMageHolyOrbScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(NonMageHolyOrbProjectileScript) };
 }

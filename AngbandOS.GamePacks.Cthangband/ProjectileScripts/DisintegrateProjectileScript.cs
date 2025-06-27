@@ -7,17 +7,17 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class ChainLightingScript : ProjectileScriptGameConfiguration
+public class DisintegrateProjectileScript : ProjectileScriptGameConfiguration
 {
-    public override NonDirectionalProjectileModeEnum NonDirectionalProjectileMode => NonDirectionalProjectileModeEnum.AllDirections;
-    public override string DamageRollExpression => "(5+X/10)d8";
-    public override string ProjectileBindingKey => nameof(ElectricityProjectile);
-    public override bool Stop => false;
+    public override string RadiusRollExpression => "3+X/40";
+    public override string DamageRollExpression => "80+x";
+    public override string ProjectileBindingKey => nameof(DisintegrateProjectile);
+    public override bool Stop => true;
     public override bool Kill => true;
     public override bool Jump => false;
-    public override bool Beam => true;
-    public override bool Grid => false;
-    public override bool Item => false;
+    public override bool Beam => false;
+    public override bool Grid => true;
+    public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
 }

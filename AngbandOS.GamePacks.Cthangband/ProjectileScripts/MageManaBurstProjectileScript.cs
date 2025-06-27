@@ -7,11 +7,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class DarknessStormScript : ProjectileScriptGameConfiguration
+public class MageManaBurstProjectileScript : ProjectileScriptGameConfiguration
 {
-    public override string RadiusRollExpression => "4";
-    public override string DamageRollExpression => "120";
-    public override string ProjectileBindingKey => nameof(DarknessProjectile);
     public override bool Stop => true;
     public override bool Kill => true;
     public override bool Jump => false;
@@ -20,4 +17,7 @@ public class DarknessStormScript : ProjectileScriptGameConfiguration
     public override bool Item => true;
     public override bool Thru => true;
     public override bool Hide => false;
+    public override string RadiusRollExpression => "2";
+    public override string ProjectileBindingKey => nameof(MissileProjectile);
+    public override string DamageRollExpression => "3d5+(X+X/2)";
 }

@@ -7,11 +7,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class DisintegrateScript : ProjectileScriptGameConfiguration
+public class MageOrbOfEntropyProjectileScript : ProjectileScriptGameConfiguration
 {
-    public override string RadiusRollExpression => "3+X/40";
-    public override string DamageRollExpression => "80+x";
-    public override string ProjectileBindingKey => nameof(DisintegrateProjectile);
+    public override string DamageRollExpression => "3d6+X+X/2";
+    public override string RadiusRollExpression => "2";
+    public override string ProjectileBindingKey => nameof(OldDrainLifeProjectile);
     public override bool Stop => true;
     public override bool Kill => true;
     public override bool Jump => false;

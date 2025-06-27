@@ -5,5 +5,5 @@ internal class ChainLightningSpellChaosRealmSuccessMappedSpellScript : MappedSpe
 {
     public override string SpellBindingKey => nameof(ChainLightningChaosSpell);
     public override string? RealmBindingKey => nameof(ChaosRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.ChainLightingScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(ChainLightingProjectileScript) };
 }
