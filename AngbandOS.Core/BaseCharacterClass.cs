@@ -384,7 +384,12 @@ internal abstract class BaseCharacterClass : IGetKey
     /// Returns the deprecated CharacterClass constant for backwards compatibility.
     /// </summary>
     /// <value>The identifier.</value>
-    public abstract int ID { get; }
+    public abstract int ID { get; } // TODO: Need to delete
+
+    /// <summary>
+    /// Returns whether or not the character can backstab.  Returns false, by default.  Rogues return true.
+    /// </summary>
+    public virtual bool CanBackstab => false;
 
     /// <summary>
     /// Returns true, if players of the character class are outfitted with scrolls of light at the start of the game.  Returns false, by default.

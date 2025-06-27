@@ -7410,7 +7410,7 @@ internal class Game
         bool noExtra = false;
         Disturb(false);
         // If we're a rogue then we can backstab monsters
-        if (BaseCharacterClass.ID == CharacterClassEnum.Rogue)
+        if (BaseCharacterClass.CanBackstab)
         {
             if (monster.SleepLevel != 0 && monster.IsVisible)
             {
