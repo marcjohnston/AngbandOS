@@ -13472,7 +13472,7 @@ internal class Game
             if (ExperienceLevel.IntValue > MaxLevelGained)
             {
                 MaxLevelGained = ExperienceLevel.IntValue;
-                if (BaseCharacterClass.ID == CharacterClassEnum.Fanatic || BaseCharacterClass.ID == CharacterClassEnum.Cultist)
+                if (BaseCharacterClass.ReceivesLevelRewards)
                 {
                     levelReward = true;
                 }
@@ -13673,172 +13673,114 @@ internal class Game
 
     public RoItemPropertySet GetAbilitiesAsItemFlags()
     {
-        RwItemPropertySet itemCharacteristics = new RwItemPropertySet(); 
-        if ((BaseCharacterClass.ID == CharacterClassEnum.Warrior && ExperienceLevel.IntValue > 29) || (BaseCharacterClass.ID == CharacterClassEnum.Paladin && ExperienceLevel.IntValue > 39) || (BaseCharacterClass.ID == CharacterClassEnum.Fanatic && ExperienceLevel.IntValue > 39))
+        RwItemPropertySet itemCharacteristics = new RwItemPropertySet();
+        if (BaseCharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFearResistanceLevel)
         {
             itemCharacteristics.ResFear = true;
         }
-        if (BaseCharacterClass.ID == CharacterClassEnum.Fanatic && ExperienceLevel.IntValue > 29)
+        if (BaseCharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantChaosResistanceLevel)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClassEnum.Cultist && ExperienceLevel.IntValue > 19)
+        if (BaseCharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainWisdomLevel)
         {
-            itemCharacteristics.ResChaos = true;
+            itemCharacteristics.SustWis = true;
         }
-        if (BaseCharacterClass.ID == CharacterClassEnum.Monk && ExperienceLevel.IntValue > 9 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantConfusionResistanceLevel)
+        {
+            itemCharacteristics.ResConf = true;
+        }
+        if (BaseCharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantTelepathyLevel)
+        {
+            itemCharacteristics.Telepathy = true;
+        }
+        if (BaseCharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.Speed = true;
         }
-        if (BaseCharacterClass.ID == CharacterClassEnum.Monk && ExperienceLevel.IntValue > 24 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFreeActionLevel && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.FreeAct = true;
         }
-        if (BaseCharacterClass.ID == CharacterClassEnum.Mindcrafter)
+        if (BaseCharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantBlindnessResistanceLevel)
         {
-            if (ExperienceLevel.IntValue > 9)
-            {
-                itemCharacteristics.ResFear = true;
-            }
-            if (ExperienceLevel.IntValue > 19)
-            {
-                itemCharacteristics.SustWis = true;
-            }
-            if (ExperienceLevel.IntValue > 29)
-            {
-                itemCharacteristics.ResConf = true;
-            }
-            if (ExperienceLevel.IntValue > 39)
-            {
-                itemCharacteristics.Telepathy = true;
-            }
+            itemCharacteristics.ResBlind = true;
         }
-        if (BaseCharacterClass.ID == CharacterClassEnum.Mystic)
+        if (BaseCharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFeatherFallingLevel)
         {
-            if (ExperienceLevel.IntValue > 9)
-            {
-                itemCharacteristics.ResConf = true;
-            }
-            if (ExperienceLevel.IntValue > 9 && !MartialArtistHeavyArmor())
-            {
-                itemCharacteristics.Speed = true;
-            }
-            if (ExperienceLevel.IntValue > 24)
-            {
-                itemCharacteristics.ResFear = true;
-            }
-            if (ExperienceLevel.IntValue > 29 && !MartialArtistHeavyArmor())
-            {
-                itemCharacteristics.FreeAct = true;
-            }
-            if (ExperienceLevel.IntValue > 39)
-            {
-                itemCharacteristics.Telepathy = true;
-            }
+            itemCharacteristics.Feather = true;
         }
-        if (BaseCharacterClass.ID == CharacterClassEnum.ChosenOne)
+        if (BaseCharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSeeInvisibilityLevel)
         {
-            itemCharacteristics.Radius = 2;
-            if (ExperienceLevel.IntValue >= 2)
-            {
-                itemCharacteristics.ResConf = true;
-            }
-            if (ExperienceLevel.IntValue >= 4)
-            {
-                itemCharacteristics.ResFear = true;
-            }
-            if (ExperienceLevel.IntValue >= 6)
-            {
-                itemCharacteristics.ResBlind = true;
-            }
-            if (ExperienceLevel.IntValue >= 8)
-            {
-                itemCharacteristics.Feather = true;
-            }
-            if (ExperienceLevel.IntValue >= 10)
-            {
-                itemCharacteristics.SeeInvis = true;
-            }
-            if (ExperienceLevel.IntValue >= 12)
-            {
-                itemCharacteristics.SlowDigest = true;
-            }
-            if (ExperienceLevel.IntValue >= 14)
-            {
-                itemCharacteristics.SustCon = true;
-            }
-            if (ExperienceLevel.IntValue >= 16)
-            {
-                itemCharacteristics.ResPois = true;
-            }
-            if (ExperienceLevel.IntValue >= 18)
-            {
-                itemCharacteristics.SustDex = true;
-            }
-            if (ExperienceLevel.IntValue >= 20)
-            {
-                itemCharacteristics.SustStr = true;
-            }
-            if (ExperienceLevel.IntValue >= 22)
-            {
-                itemCharacteristics.HoldLife = true;
-            }
-            if (ExperienceLevel.IntValue >= 24)
-            {
-                itemCharacteristics.FreeAct = true;
-            }
-            if (ExperienceLevel.IntValue >= 26)
-            {
-                itemCharacteristics.Telepathy = true;
-            }
-            if (ExperienceLevel.IntValue >= 28)
-            {
-                itemCharacteristics.ResDark = true;
-            }
-            if (ExperienceLevel.IntValue >= 30)
-            {
-                itemCharacteristics.ResLight = true;
-            }
-            if (ExperienceLevel.IntValue >= 32)
-            {
-                itemCharacteristics.SustCha = true;
-            }
-            if (ExperienceLevel.IntValue >= 34)
-            {
-                itemCharacteristics.ResSound = true;
-            }
-            if (ExperienceLevel.IntValue >= 36)
-            {
-                itemCharacteristics.ResDisen = true;
-            }
-            if (ExperienceLevel.IntValue >= 38)
-            {
-                itemCharacteristics.Regen = true;
-            }
-            if (ExperienceLevel.IntValue >= 40)
-            {
-                itemCharacteristics.SustInt = true;
-            }
-            if (ExperienceLevel.IntValue >= 42)
-            {
-                itemCharacteristics.ResChaos = true;
-            }
-            if (ExperienceLevel.IntValue >= 44)
-            {
-                itemCharacteristics.SustWis = true;
-            }
-            if (ExperienceLevel.IntValue >= 46)
-            {
-                itemCharacteristics.ResNexus = true;
-            }
-            if (ExperienceLevel.IntValue >= 48)
-            {
-                itemCharacteristics.ResShards = true;
-            }
-            if (ExperienceLevel.IntValue >= 50)
-            {
-                itemCharacteristics.ResNether = true;
-            }
+            itemCharacteristics.SeeInvis = true;
+        }
+        if (BaseCharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSlowDigestionLevel)
+        {
+            itemCharacteristics.SlowDigest = true;
+        }
+        if (BaseCharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainConstitutionLevel)
+        {
+            itemCharacteristics.SustCon = true;
+        }
+        if (BaseCharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantPoisonResistanceLevel)
+        {
+            itemCharacteristics.ResPois = true;
+        }
+        if (BaseCharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainDexterityLevel)
+        {
+            itemCharacteristics.SustDex = true;
+        }
+        if (BaseCharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainStrengthLevel)
+        {
+            itemCharacteristics.SustStr = true;
+        }
+        if (BaseCharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantHoldLifeLevel)
+        {
+            itemCharacteristics.HoldLife = true;
+        }
+        if (BaseCharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDarknessResistanceLevel)
+        {
+            itemCharacteristics.ResDark = true;
+        }
+        if (BaseCharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantLightResistanceLevel)
+        {
+            itemCharacteristics.ResLight = true;
+        }
+        if (BaseCharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainCharismaLevel)
+        {
+            itemCharacteristics.SustCha = true;
+        }
+        if (BaseCharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSoundResistanceLevel)
+        {
+            itemCharacteristics.ResSound = true;
+        }
+        if (BaseCharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDisenchantmentResistanceLevel)
+        {
+            itemCharacteristics.ResDisen = true;
+        }
+        if (BaseCharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantRegenerationLevel)
+        {
+            itemCharacteristics.Regen = true;
+        }
+        if (BaseCharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainIntelligenceLevel)
+        {
+            itemCharacteristics.SustInt = true;
+        }
+        if (BaseCharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNexusResistanceLevel)
+        {
+            itemCharacteristics.ResNexus = true;
+        }
+        if (BaseCharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantShardsResistanceLevel)
+        {
+            itemCharacteristics.ResShards = true;
+        }
+        if (BaseCharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNetherResistanceLevel)
+        {
+            itemCharacteristics.ResNether = true;
+        }
+        if (BaseCharacterClass.ItemRadiusOverride.HasValue)
+        {
+            itemCharacteristics.Radius = BaseCharacterClass.ItemRadiusOverride.Value;
         }
 
         Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);

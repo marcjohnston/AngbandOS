@@ -12,6 +12,8 @@ internal class CultistCharacterClass : BaseCharacterClass
     private CultistCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 12;
     public override string Title => "Cultist";
+    public override bool ReceivesLevelRewards => true;
+    public override int? InstantChaosResistanceLevel => 20;
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 36;
     public override int BaseSaveBonus => 32;

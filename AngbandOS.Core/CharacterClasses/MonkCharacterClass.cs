@@ -12,6 +12,8 @@ internal class MonkCharacterClass : BaseCharacterClass
     private MonkCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 8;
     public override string Title => "Monk";
+    public override int? InstantSpeedLevel => 10;
+    public override int? InstantFreeActionLevel => 25;
     public override int BaseDisarmBonus => 45;
     public override int BaseDeviceBonus => 32;
     public override int BaseSaveBonus => 28;

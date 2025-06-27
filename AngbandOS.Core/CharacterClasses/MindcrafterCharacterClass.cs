@@ -13,6 +13,10 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     private MindcrafterCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 9;
     public override string Title => "Mindcrafter";
+    public override int? InstantFearResistanceLevel => 10;
+    public override int? InstantSustainWisdomLevel => 20;
+    public override int? InstantConfusionResistanceLevel => 30;
+    public override int? InstantTelepathyLevel => 40;
     public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 30;

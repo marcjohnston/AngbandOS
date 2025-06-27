@@ -12,6 +12,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
     private PaladinCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 5;
     public override string Title => "Paladin";
+    public override int? InstantFearResistanceLevel => 40;
     public override int BaseDisarmBonus => 20;
     public override int BaseDeviceBonus => 24;
     public override int BaseSaveBonus => 26;

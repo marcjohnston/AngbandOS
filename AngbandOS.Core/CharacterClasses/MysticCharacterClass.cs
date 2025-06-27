@@ -12,6 +12,11 @@ internal class MysticCharacterClass : BaseCharacterClass
     private MysticCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 15;
     public override string Title => "Mystic";
+    public override int? InstantSpeedLevel => 10;
+    public override int? InstantFearResistanceLevel => 25;
+    public override int? InstantTelepathyLevel => 40;
+    public override int? InstantFreeActionLevel => 30;
+    public override int? InstantConfusionResistanceLevel => 10;
     public override int BaseDisarmBonus => 40;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 30;

@@ -12,6 +12,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     private WarriorCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 0;
     public override string Title => "Warrior";
+    public override int? InstantFearResistanceLevel => 30;
     public override int BaseDisarmBonus => 25;
     public override int BaseDeviceBonus => 18;
     public override int BaseSaveBonus => 18;

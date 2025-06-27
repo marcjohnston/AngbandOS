@@ -387,6 +387,146 @@ internal abstract class BaseCharacterClass : IGetKey
     public abstract int ID { get; } // TODO: Need to delete
 
     /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to chaos; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantChaosResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to darkness; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantDarknessResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to light; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantLightResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to nether; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantNetherResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to shards; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantShardsResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to nexus; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantNexusResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive regeneration; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantRegenerationLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to disenchantment; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantDisenchantmentResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to sound; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSoundResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to poison; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantPoisonResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive hold life; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantHoldLifeLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive sustain intelligence; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSustainIntelligenceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive sustain charisma; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSustainCharismaLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive sustain constitution; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSustainConstitutionLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive sustain strength; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSustainStrengthLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive sustain dexterity; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSustainDexterityLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive sustain wisdom; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSustainWisdomLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive free action; or null, if never.  Free action is only granted when not heavy armor.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantFreeActionLevel => null;
+
+    /// <summary>
+    /// Returns a radius applied to all items for the character; or null, if no change.  Returns null, by default.
+    /// </summary>
+    public virtual int? ItemRadiusOverride => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to blindness; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantBlindnessResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive slow digestion; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSlowDigestionLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive feather falling; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantFeatherFallingLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive see invisibility; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSeeInvisibilityLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to confusion; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantConfusionResistanceLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive telepathy; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantTelepathyLevel => null;
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive speed; or null, if never.  Speed is only granted when not heavy armor.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantSpeedLevel => null; // TODO: This won't work because speed was converted to an expression, not a flag
+
+    /// <summary>
+    /// Returns the level at which the character will automatically receive resistance to fear; or null, if never.  Returns null, by default.
+    /// </summary>
+    public virtual int? InstantFearResistanceLevel => null;
+
+    /// <summary>
+    /// Returns true, if the character class receives level rewards.  Returns false, by default.  Fanatics and cultists return true.
+    /// </summary>
+    public virtual bool ReceivesLevelRewards => false;
+
+    /// <summary>
     /// Returns whether or not the character can backstab.  Returns false, by default.  Rogues return true.
     /// </summary>
     public virtual bool CanBackstab => false;
