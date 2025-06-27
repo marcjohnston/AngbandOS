@@ -17,7 +17,7 @@ internal class CallChaosIdentifiedAndUsedScriptItemAndDirection : Script, IZapRo
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteZapRodScript(Item item, int dir)
     {
-        Game.RunScript(nameof(CallChaosCancellableScript));
+        Game.RunScript(nameof(CallChaosProjectileScriptWeightedRandom));
         return new IdentifiedAndUsedResult(true, true);
     }
 }

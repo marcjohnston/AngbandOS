@@ -5,5 +5,5 @@ internal class CallSpellChaosRealmSuccessMappedSpellScript : MappedSpellScriptGa
 {
     public override string SpellBindingKey => nameof(CallChaosChaosSpell);
     public override string? RealmBindingKey => nameof(ChaosRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.CallChaosCancellableScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(CallChaosProjectileScriptWeightedRandom) };
 }

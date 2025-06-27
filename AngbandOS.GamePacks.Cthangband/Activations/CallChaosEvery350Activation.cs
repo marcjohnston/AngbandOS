@@ -17,7 +17,7 @@ public class CallChaosEvery350Activation : ActivationGameConfiguration
 
     public override string RechargeTimeRollExpression => "350";
 
-    public override string ActivationCancellableScriptItemBindingKey => nameof(SystemScriptsEnum.CallChaosCancellableScript);
+    public override string ActivationCancellableScriptItemBindingKey => nameof(CallChaosProjectileScriptWeightedRandom);
 
     public override int Value => 5000;
 

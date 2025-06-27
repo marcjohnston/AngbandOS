@@ -14,6 +14,6 @@ internal class DoHavocReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} whispers out:");
         Game.MsgPrint("'Death and destruction! This pleaseth me!'");
-        Game.RunScript(nameof(CallChaosCancellableScript));
+        Game.RunScript(nameof(CallChaosProjectileScriptWeightedRandom));
     }
 }
