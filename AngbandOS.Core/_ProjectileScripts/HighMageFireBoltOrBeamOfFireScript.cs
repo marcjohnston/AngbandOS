@@ -1,4 +1,4 @@
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FireBoltOrBeamOfFireScript : Script, IScript, ICastSpellScript
+internal class HighMageFireBoltOrBeamOfFireScript : Script, IScript, ICastSpellScript
 {
-    private FireBoltOrBeamOfFireScript(Game game) : base(game) { }
+    private HighMageFireBoltOrBeamOfFireScript(Game game) : base(game) { }
 
     public void ExecuteCastSpellScript(Spell spell)
     {
@@ -22,26 +22,12 @@ internal class FireBoltOrBeamOfFireScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int beam;
-        switch (Game.BaseCharacterClass.ID)
-        {
-            case CharacterClassEnum.Mage:
-                beam = Game.ExperienceLevel.IntValue;
-                break;
-
-            case CharacterClassEnum.HighMage:
-                beam = Game.ExperienceLevel.IntValue + 10;
-                break;
-
-            default:
-                beam = Game.ExperienceLevel.IntValue / 2;
-                break;
-        }
         if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+        Game.FireBoltOrBeam(Game.ExperienceLevel.IntValue + 10, Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
     public string LearnedDetails => $"dam {6 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
 }
+
