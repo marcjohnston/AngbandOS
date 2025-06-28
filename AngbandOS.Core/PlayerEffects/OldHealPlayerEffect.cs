@@ -11,7 +11,7 @@ internal class OldHealPlayerEffect : PlayerEffect
 {
     private OldHealPlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "You are hit by something invigorating!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam, int aRad)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam)
     {
         Game.RestoreHealth(dam);
         return IdentifiedResultEnum.True;

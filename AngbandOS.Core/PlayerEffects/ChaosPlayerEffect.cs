@@ -11,7 +11,7 @@ internal class ChaosPlayerEffect : PlayerEffect
 {
     private ChaosPlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "You are hit by a wave of anarchy!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam, int aRad)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;
         if (Game.HasChaosResistance)

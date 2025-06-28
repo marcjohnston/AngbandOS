@@ -11,7 +11,7 @@ internal class TimePlayerEffect : PlayerEffect
 {
     private TimePlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "You are hit by a blast from the past!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam, int aRad)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam)
     {
         string act = null;
         string killer = mPtr.IndefiniteVisibleName;
