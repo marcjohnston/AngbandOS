@@ -11,7 +11,7 @@ internal class ForcePlayerEffect : PlayerEffect
 {
     private ForcePlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "You are hit by kinetic force!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;
         if (!Game.HasSoundResistance)

@@ -11,7 +11,7 @@ internal class MeteorPlayerEffect : PlayerEffect
 {
     private MeteorPlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "Something falls from the sky on you!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;
         Game.TakeHit(dam, killer);

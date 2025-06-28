@@ -11,7 +11,7 @@ internal class IcePlayerEffect : PlayerEffect
 {
     private IcePlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "You are hit by something sharp and cold!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;
         Game.ColdDam(dam, killer);

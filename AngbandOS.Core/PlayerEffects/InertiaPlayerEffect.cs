@@ -11,7 +11,7 @@ internal class InertiaPlayerEffect : PlayerEffect
 {
     private InertiaPlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "You are hit by something slow!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;
         Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);

@@ -37,8 +37,8 @@ internal abstract class PlayerEffect : IGetKey
         {
             Game.MsgPrint(BlindPreMessage);
         }
-        return Apply(mPtr, y, x, dam);
+        return Apply(mPtr, dam);
     }
 
-    protected abstract IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam);
+    protected abstract IdentifiedResultEnum Apply(Monster mPtr, int dam);
 }
