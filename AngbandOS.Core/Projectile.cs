@@ -52,7 +52,7 @@ internal class Projectile : IGetKey, IToJson
     {
         MonsterEffect = Game.SingletonRepository.Get<MonsterEffect>(MonsterEffectBindingKey);
         ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);
-        PlayerEffect = Game.SingletonRepository.Get<PlayerEffect>(PlayerEffectBindingKey);
+        PlayerEffect = Game.SingletonRepository.Get<PlayerEffectUniversalScript>(PlayerEffectBindingKey);
         FloorEffect = Game.SingletonRepository.Get<FloorEffect>(FloorEffectBindingKey);
         ImpactProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(ImpactProjectileGraphicBindingKey);
         EffectAnimation = Game.SingletonRepository.GetNullable<Animation>(EffectAnimationBindingKey);
@@ -630,7 +630,7 @@ internal class Projectile : IGetKey, IToJson
     /// </summary>
     protected virtual string ItemEffectBindingKey { get; } = nameof(UnnoticedItemEffect);
 
-    protected PlayerEffect PlayerEffect { get; private set; }
+    protected PlayerEffectUniversalScript PlayerEffect { get; private set; }
 
     protected virtual string PlayerEffectBindingKey { get; } = nameof(NoticedPlayerEffect);
 

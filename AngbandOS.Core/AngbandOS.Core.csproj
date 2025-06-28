@@ -55,4 +55,8 @@
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PlayerEffects\" />
+  </ItemGroup>
+
 </Project>

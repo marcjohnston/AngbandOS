@@ -294,7 +294,7 @@ internal class SingletonRepository
         RegisterInterface<MonsterSelector>();
         RegisterInterface<MonsterSpell>();
         RegisterInterface<Mutation>();
-        RegisterInterface<PlayerEffect>();
+        RegisterInterface<PlayerEffectUniversalScript>();
         RegisterInterface<ProbabilityExpression>();
         RegisterInterface<Property>();
         RegisterInterface<Race>();
