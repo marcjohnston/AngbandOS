@@ -11,7 +11,7 @@ internal class OldSlowMonsterEffect : MonsterEffect
 {
     private OldSlowMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -37,6 +37,6 @@ internal class OldSlowMonsterEffect : MonsterEffect
         }
         dam = 0;
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

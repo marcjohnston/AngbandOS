@@ -16,7 +16,7 @@ internal class HolyFireMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(GoodMonsterFilter);
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -51,6 +51,6 @@ internal class HolyFireMonsterEffect : MonsterEffect
             dam /= Game.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

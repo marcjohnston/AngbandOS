@@ -16,7 +16,7 @@ internal class TeleportAwayUndeadMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => null;
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -68,7 +68,7 @@ internal class TeleportAwayUndeadMonsterEffect : MonsterEffect
         dam = 0;
         if (skipped)
         {
-            return false;
+            return IdentifiedResultEnum.False;
         }
         if (doDist != 0)
         {
@@ -80,6 +80,6 @@ internal class TeleportAwayUndeadMonsterEffect : MonsterEffect
             mPtr.TeleportAway(doDist);
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

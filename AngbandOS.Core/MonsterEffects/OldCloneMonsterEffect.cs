@@ -16,7 +16,7 @@ internal class OldCloneMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(Any1In8MonsterFilter);
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
@@ -44,6 +44,6 @@ internal class OldCloneMonsterEffect : MonsterEffect
         }
         dam = 0;
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

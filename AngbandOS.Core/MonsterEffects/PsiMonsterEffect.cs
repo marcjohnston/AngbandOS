@@ -16,7 +16,7 @@ internal class PsiMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(EmptyMindMonsterFilter);
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         int tmp;
         MonsterRace rPtr = mPtr.Race;
@@ -148,6 +148,6 @@ internal class PsiMonsterEffect : MonsterEffect
         {
             mPtr.SleepLevel = doSleep;
         }
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

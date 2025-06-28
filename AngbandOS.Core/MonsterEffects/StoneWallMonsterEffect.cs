@@ -11,12 +11,12 @@ internal class StoneWallMonsterEffect : MonsterEffect
 {
     private StoneWallMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         string? note = null;
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-        return false;
+        return IdentifiedResultEnum.False;
     }
 }

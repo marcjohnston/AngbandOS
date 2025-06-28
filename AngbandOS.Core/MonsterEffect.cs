@@ -19,7 +19,6 @@ internal abstract class MonsterEffect : IGetKey
     {
         UnfriendPetMonsterFilter = Game.SingletonRepository.GetNullable<MonsterFilter>(UnfriendPetMonsterFilterBindingKey);
     }
-
 
     protected MonsterEffect(Game game)
     {
@@ -126,9 +125,7 @@ internal abstract class MonsterEffect : IGetKey
         }
     }
 
-    protected abstract bool Apply(int who, Monster mPtr, int dam, int r);
-
-    public bool Apply(int who, int r, int y, int x, int dam, ref int projectMn, ref int projectMx, ref int projectMy)
+    public IdentifiedResultEnum Apply(int who, int r, int y, int x, int dam, ref int projectMn, ref int projectMx, ref int projectMy)
     {
         // Get the grid tile for the location in question.
         GridTile cPtr = Game.Map.Grid[y][x];
@@ -136,13 +133,13 @@ internal abstract class MonsterEffect : IGetKey
         // Check to see if there is a monster at this location.
         if (cPtr.MonsterIndex == 0)
         {
-            return false;
+            return IdentifiedResultEnum.False;
         }
 
         // Check to see if the monster/player is the monster/player performing the action.
         if (who != 0 && cPtr.MonsterIndex == who)
         {
-            return false;
+            return IdentifiedResultEnum.False;
         }
 
         // Get a reference to the monster in question.
@@ -160,7 +157,7 @@ internal abstract class MonsterEffect : IGetKey
             mPtr.IsPet = false;
         }
 
-        bool notice = Apply(who, mPtr, dam, r);
+        IdentifiedResultEnum notice = Apply(who, mPtr, dam, r);
 
         GridTile newGridTile = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
@@ -171,4 +168,6 @@ internal abstract class MonsterEffect : IGetKey
 
         return notice;
     }
+
+    protected abstract IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r);
 }

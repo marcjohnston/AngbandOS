@@ -454,7 +454,7 @@ internal class Projectile : IGetKey, IToJson
                 x = gx[i];
                 if (grids > 1)
                 {
-                    if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
+                    if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
                     {
                         notice = true;
                     }
@@ -490,7 +490,7 @@ internal class Projectile : IGetKey, IToJson
                     }
                     else
                     {
-                        if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy))
+                        if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
                         {
                             notice = true;
                         }

@@ -16,7 +16,7 @@ internal class DispelAllMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => null;
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -27,6 +27,6 @@ internal class DispelAllMonsterEffect : MonsterEffect
         }
         string? note = " shudders.";
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

@@ -11,7 +11,7 @@ internal class ChaosMonsterEffect : MonsterEffect
 {
     private ChaosMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
@@ -71,6 +71,6 @@ internal class ChaosMonsterEffect : MonsterEffect
             mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

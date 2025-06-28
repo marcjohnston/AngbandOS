@@ -16,7 +16,7 @@ internal class PsiDrainMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(EmptyMindMonsterFilter);
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -65,6 +65,6 @@ internal class PsiDrainMonsterEffect : MonsterEffect
         }
         string noteDies = " collapses, a mindless husk.";
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

@@ -11,8 +11,8 @@ internal class UnnoticedMonsterEffect : MonsterEffect
 {
     private UnnoticedMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
-        return false; // The effect is not noticed.
+        return IdentifiedResultEnum.False; // The effect is not noticed.
     }
 }

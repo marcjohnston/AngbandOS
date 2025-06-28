@@ -16,7 +16,7 @@ internal class DominationMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(ConfusionImmuneMonsterFilter);
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -153,6 +153,6 @@ internal class DominationMonsterEffect : MonsterEffect
             mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, doFear);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

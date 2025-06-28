@@ -11,7 +11,7 @@ internal class OldConfuseMonsterEffect : MonsterEffect
 {
     private OldConfuseMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -56,6 +56,6 @@ internal class OldConfuseMonsterEffect : MonsterEffect
             mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
-        return obvious;
+        return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }
