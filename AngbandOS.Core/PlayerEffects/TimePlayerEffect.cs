@@ -10,17 +10,11 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class TimePlayerEffect : PlayerEffect
 {
     private TimePlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    public override string? BlindPreMessage => "You are hit by a blast from the past!";
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = Game.BlindnessTimer.Value != 0;
         string act = null;
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by a blast from the past!");
-        }
         if (Game.HasTimeResistance)
         {
             dam *= 4;
@@ -75,6 +69,6 @@ internal class TimePlayerEffect : PlayerEffect
             }
         }
         Game.TakeHit(dam, killer);
-        return true;
+        return IdentifiedResultEnum.True;
     }
 }

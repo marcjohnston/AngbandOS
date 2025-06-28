@@ -23,15 +23,22 @@ internal abstract class PlayerEffect : IGetKey
     }
 
     public virtual int MaximumDamageAllowed => 1600;
+    public virtual string? BlindPreMessage => null;
 
-    public bool ApplyEffect(int who, int r, int y, int x, int dam, int aRad)
+    public IdentifiedResultEnum ApplyEffect(int who, int r, int y, int x, int dam, int aRad)
     {
         if (dam > MaximumDamageAllowed)
         {
             dam = MaximumDamageAllowed;
         }
-        return Apply(who, r, y, x, dam, aRad);
+        dam = (dam + r) / (r + 1);
+        Monster mPtr = Game.Monsters[who];
+        if (BlindPreMessage is not null && Game.BlindnessTimer.Value != 0)
+        {
+            Game.MsgPrint(BlindPreMessage);
+        }
+        return Apply(mPtr, r, y, x, dam, aRad);
     }
 
-    protected abstract bool Apply(int who, int r, int y, int x, int dam, int aRad);
+    protected abstract IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad);
 }

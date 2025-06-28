@@ -5846,7 +5846,7 @@ internal class Game
         }
     }
 
-    public void FireDam(int dam, string kbStr)
+    public void FireDam(int dam, string killedByIndefiniteVisibleName)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
         if (HasFireImmunity || dam <= 0)
@@ -5869,7 +5869,7 @@ internal class Game
         {
             TryDecreasingAbilityScore(StrengthAbility);
         }
-        TakeHit(dam, kbStr);
+        TakeHit(dam, killedByIndefiniteVisibleName);
         if (!(HasFireResistance && FireResistanceTimer.Value != 0))
         {
             InvenDamage(SetFireDestroy, inv);

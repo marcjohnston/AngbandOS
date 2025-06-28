@@ -10,19 +10,14 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class OldSleepPlayerEffect : PlayerEffect
 {
     private OldSleepPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    public override string? BlindPreMessage => "You fall asleep!";
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        dam = (dam + r) / (r + 1);
         if (Game.HasFreeAction)
         {
-            return false;
-        }
-        if (blind)
-        {
-            Game.MsgPrint("You fall asleep!");
+            return IdentifiedResultEnum.False;
         }
         Game.ParalysisTimer.AddTimer(dam);
-        return true;
+        return IdentifiedResultEnum.True;
     }
 }

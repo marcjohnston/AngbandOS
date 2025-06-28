@@ -10,16 +10,10 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class NexusPlayerEffect : PlayerEffect
 {
     private NexusPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    public override string? BlindPreMessage => "You are hit by something strange!";
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something strange!");
-        }
         if (Game.HasNexusResistance)
         {
             dam *= 6;
@@ -30,6 +24,6 @@ internal class NexusPlayerEffect : PlayerEffect
             Game.ApplyNexus(mPtr);
         }
         Game.TakeHit(dam, killer);
-        return true;
+        return IdentifiedResultEnum.True;
     }
 }

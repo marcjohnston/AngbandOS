@@ -10,16 +10,10 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class NukePlayerEffect : PlayerEffect
 {
     private NukePlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    public override string? BlindPreMessage => "You are hit by radiation!";
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by radiation!");
-        }
         if (Game.HasPoisonResistance)
         {
             dam = ((2 * dam) + 2) / 5;
@@ -49,6 +43,6 @@ internal class NukePlayerEffect : PlayerEffect
                 Game.InvenDamage(Game.SetAcidDestroy, 2);
             }
         }
-        return true;
+        return IdentifiedResultEnum.True;
     }
 }

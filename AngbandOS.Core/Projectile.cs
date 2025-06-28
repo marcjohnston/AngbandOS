@@ -531,7 +531,7 @@ internal class Projectile : IGetKey, IToJson
                     if (!CheckBounceOffPlayer(who, dam, rad))
                     {
                         // Allow the projectile to perform any effects on the player.
-                        if (PlayerEffect.ApplyEffect(who, dist, y, x, dam, rad))
+                        if (PlayerEffect.ApplyEffect(who, dist, y, x, dam, rad) == IdentifiedResultEnum.True)
                         {
                             // Disturb the player.
                             Game.Disturb(true);

@@ -10,16 +10,10 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class NetherPlayerEffect : PlayerEffect
 {
     private NetherPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    public override string? BlindPreMessage => "You are hit by nether forces!";
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by nether forces!");
-        }
         if (Game.HasNetherResistance)
         {
             if (Game.Race.NegatesNetherResistance)
@@ -58,6 +52,6 @@ internal class NetherPlayerEffect : PlayerEffect
         {
             Game.TakeHit(dam, killer);
         }
-        return true;
+        return IdentifiedResultEnum.True;
     }
 }

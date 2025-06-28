@@ -10,14 +10,10 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class OldSpeedPlayerEffect : PlayerEffect
 {
     private OldSpeedPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    public override string? BlindPreMessage => "You are hit by something!";
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        if (blind)
-        {
-            Game.MsgPrint("You are hit by something!");
-        }
         Game.HasteTimer.AddTimer(Game.DieRoll(5));
-        return true;
+        return IdentifiedResultEnum.True;
     }
 }

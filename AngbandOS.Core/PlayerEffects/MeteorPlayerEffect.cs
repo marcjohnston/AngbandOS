@@ -10,16 +10,10 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class MeteorPlayerEffect : PlayerEffect
 {
     private MeteorPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override bool Apply(int who, int r, int y, int x, int dam, int aRad)
+    public override string? BlindPreMessage => "Something falls from the sky on you!";
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = Game.BlindnessTimer.Value != 0;
-        dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
-        if (blind)
-        {
-            Game.MsgPrint("Something falls from the sky on you!");
-        }
         Game.TakeHit(dam, killer);
         if (!Game.HasShardResistance || Game.DieRoll(13) == 1)
         {
@@ -29,6 +23,6 @@ internal class MeteorPlayerEffect : PlayerEffect
             }
             Game.InvenDamage(Game.SetColdDestroy, 2);
         }
-        return true;
+        return IdentifiedResultEnum.True;
     }
 }
