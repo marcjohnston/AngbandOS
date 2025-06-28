@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class NoticedPlayerEffect : PlayerEffect
 {
     private NoticedPlayerEffect(Game game) : base(game) { } // This object is a singleton.
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam, int aRad)
     {
         return IdentifiedResultEnum.True;
     }

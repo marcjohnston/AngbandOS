@@ -11,7 +11,7 @@ internal class ManaPlayerEffect : PlayerEffect
 {
     private ManaPlayerEffect(Game game) : base(game) { } // This object is a singleton.
     public override string? BlindPreMessage => "You are hit by an aura of magic!";
-    protected override IdentifiedResultEnum Apply(Monster mPtr, int r, int y, int x, int dam, int aRad)
+    protected override IdentifiedResultEnum Apply(Monster mPtr, int y, int x, int dam, int aRad)
     {
         string killer = mPtr.IndefiniteVisibleName;
         Game.TakeHit(dam, killer);
