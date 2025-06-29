@@ -710,9 +710,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         Game.MeleeAttacksPerRound = num;
                     }
                     Game.MeleeAttacksPerRound += extraBlows;
-                    if (Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior)
+                    if (Game.BaseCharacterClass.MeleeAttacksPerRoundBonus is not null)
                     {
-                        Game.MeleeAttacksPerRound += Game.ExperienceLevel.IntValue / 15;
+                        int meleeAttacksPerRound = Game.ComputeIntegerExpression(Game.BaseCharacterClass.MeleeAttacksPerRoundBonus).Value;
+                        Game.MeleeAttacksPerRound += meleeAttacksPerRound;
                     }
                     if (Game.MeleeAttacksPerRound < 1)
                     {
@@ -863,9 +864,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             if (Game.HasUnpriestlyWeapon)
             {
-                Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist
-                    ? "Your weapon restricts the flow of chaos through you."
-                    : "You do not feel comfortable with your weapon.");
+                Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
             }
             else if (Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon) != null)
             {
@@ -873,17 +872,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
             else
             {
-                Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist
-                    ? "Chaos flows freely through you again."
-                    : "You feel more comfortable after removing your weapon.");
+                Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
             }
             OldUnpriestlyWeapon = Game.HasUnpriestlyWeapon;
         }
         if (Game.BaseCharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
         {
-            Game.MsgPrint(Game.MartialArtistHeavyArmor()
-                ? "The weight of your armor disrupts your balance."
-                : "You regain your balance.");
+            Game.MsgPrint(Game.MartialArtistHeavyArmor() ? "The weight of your armor disrupts your balance." : "You regain your balance.");
             MartialArtistNotifyAux = MartialArtistArmorAux;
         }
     }

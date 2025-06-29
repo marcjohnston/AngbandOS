@@ -15,6 +15,9 @@ internal abstract class BaseCharacterClass : IGetKey
         Game = game;
     }
 
+    protected virtual string? MeleeAttacksPerRoundBonusExpression => null;
+    public Expression? MeleeAttacksPerRoundBonus { get; private set; }
+
     /// <summary>
     /// Returns the minimum spell failure chance for the character class.  Spell failure chances that are lower than this value will be set to this value; or null, if there is no
     /// minimum.  Priests, mages, high-mages, cultists and druids have a minimum 5% failure chance.
@@ -372,6 +375,7 @@ internal abstract class BaseCharacterClass : IGetKey
         }
         OutfitItemFactories = outfitItemFactories.ToArray();
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
+        MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
     }
 
     /// <summary>
