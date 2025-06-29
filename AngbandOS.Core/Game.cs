@@ -45,9 +45,8 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
-
+    public readonly int[][] BlowsTable;
     public readonly int[] RequiredExperiencePerLevel;
-
     public readonly int[] ExtractEnergy;
 
     public Ability StrengthAbility; // TODO: These are still hardcoded into the framework
@@ -1344,6 +1343,7 @@ internal class Game
 
         RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
         ExtractEnergy = gameConfiguration.ExtractEnergy;
+        BlowsTable = gameConfiguration.BlowsTable;
 
         ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
         HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };

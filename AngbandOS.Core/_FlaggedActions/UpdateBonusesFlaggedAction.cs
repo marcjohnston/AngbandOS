@@ -12,22 +12,6 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateBonusesFlaggedAction : FlaggedAction
 {
-    private readonly int[][] _blowsTable =
-    {
-        new[] {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3},
-        new[] {1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4},
-        new[] {1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5},
-        new[] {1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 5},
-        new[] {1, 2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5},
-        new[] {2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6},
-        new[] {2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6},
-        new[] {2, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5, 6},
-        new[] {3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6, 6},
-        new[] {3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6},
-        new[] {3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6},
-        new[] {3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 6, 6}
-    };
-
     private bool MartialArtistArmorAux;
     private bool MartialArtistNotifyAux;
     private bool OldUnpriestlyWeapon;
@@ -704,7 +688,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         dexIndex = 11;
                     }
-                    Game.MeleeAttacksPerRound = _blowsTable[strIndex][dexIndex];
+                    Game.MeleeAttacksPerRound = Game.BlowsTable[strIndex][dexIndex];
                     if (Game.MeleeAttacksPerRound > num)
                     {
                         Game.MeleeAttacksPerRound = num;
