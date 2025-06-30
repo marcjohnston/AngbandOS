@@ -666,7 +666,12 @@ internal class Game
     public int AllocRaceSize;
     public AllocationEntry[] AllocRaceTable;
     public LevelStartEnum CameFrom;
+
+    /// <summary>
+    /// Uses to control whether messages are rendered to the player when bonuses are updated.
+    /// </summary>
     public bool CharacterXtra; // TODO: This global can be removed when actions are updated
+
     public bool CreateDownStair;
     public bool CreateUpStair;
     public Dungeon CurDungeon; // TODO: This may be CurTown.Dungeon?
@@ -876,7 +881,6 @@ internal class Game
     /// </summary>
     public int GlowInTheDarkRadius;
 
-    public bool HasHeavyBow;
     public bool HasHeavyWeapon;
     public bool HasHoldLife;
     public bool HasLightningImmunity;

@@ -12,7 +12,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool MartialArtistArmorAux;
     private bool MartialArtistNotifyAux;
     private bool OldUnpriestlyWeapon;
-    private bool OldHeavyBow;
     private bool OldHeavyWeapon;
 
 
@@ -26,6 +25,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int displayedAttackBonus = 0;
         int displayedDamageBonus = 0;
         bool hasUnpriestlyWeapon = false;
+        bool hasHeavyBow = false;
 
         int extraShots;
         int oldSpeed = Game.Speed.IntValue;
@@ -613,7 +613,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             foreach (int index in rangedWeaponInventorySlot.InventorySlots)
             {
-                Game.HasHeavyBow = false;
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null)
                 {
@@ -621,9 +620,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         attackBonus += 2 * (hold - (oPtr.Weight / 10));
                         displayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                        Game.HasHeavyBow = true;
+                        hasHeavyBow = true;
                     }
-                    if (!Game.HasHeavyBow)
+                    else
                     {
                         // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
                         ItemFactory[]? ammunitionItemFactories = oPtr.AmmunitionItemFactories;
@@ -825,6 +824,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             DisplayedAttackBonus = displayedAttackBonus,
             DisplayedDamageBonus = displayedDamageBonus,
             HasUnpriestlyWeapon = hasUnpriestlyWeapon,
+            HasHeavyBow = hasHeavyBow,
         };
 
         // Merge the additional bonuses.
@@ -833,16 +833,20 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             newBonuses = newBonuses.Merge(bonuses);
         }
 
-        // Set the game bonuses with the immutable object.
+        // Grab a copy of the previous/old bonuses for us to render messages.
+        Bonuses previousBonuses = Game.Bonuses;
+
+        // Set the game bonuses with the new immutable object.
         Game.Bonuses = newBonuses;
 
         if (Game.CharacterXtra)
         {
             return;
         }
-        if (OldHeavyBow != Game.HasHeavyBow) // TODO: This should be moved to the wield action
+
+        if (previousBonuses.HasHeavyBow != newBonuses.HasHeavyBow) // TODO: This should be moved to the wield action
         {
-            if (Game.HasHeavyBow)
+            if (newBonuses.HasHeavyBow)
             {
                 Game.MsgPrint("You have trouble wielding such a heavy bow.");
             }
@@ -854,8 +858,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint("You feel relieved to put down your heavy bow.");
             }
-            OldHeavyBow = Game.HasHeavyBow;
         }
+
         if (OldHeavyWeapon != Game.HasHeavyWeapon) // TODO: This should be moved to the wield action
         {
             if (Game.HasHeavyWeapon)
