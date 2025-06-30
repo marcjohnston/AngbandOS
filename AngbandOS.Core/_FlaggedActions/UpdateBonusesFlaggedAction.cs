@@ -31,7 +31,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             ability.Bonus = 0;
         }
         Game.DisplayedBaseArmorClass.IntValue = 0;
-        Game.BaseArmorClass = 0;
         Game.DisplayedAttackBonus = 0;
         Game.AttackBonus = 0;
         Game.DisplayedDamageBonus = 0;
@@ -419,7 +418,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    Game.BaseArmorClass += oPtr.ArmorClass;
                     Game.DisplayedBaseArmorClass.IntValue += oPtr.ArmorClass;
                     Game.ArmorClassBonus += mergedCharacteristics.BonusArmorClass;
                     if (oPtr.IsKnown())

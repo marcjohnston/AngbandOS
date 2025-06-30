@@ -795,7 +795,6 @@ internal class Game
     public int Age;
     public int ArmorClassBonus;
     public int AttackBonus;
-    public int BaseArmorClass;
     public int DamageBonus;
     public int DisplayedAttackBonus;
     public int DisplayedDamageBonus;
@@ -8665,7 +8664,7 @@ internal class Game
             return false;
         }
         // Roll for the attack
-        int armorClass = BaseArmorClass + ArmorClassBonus;
+        int armorClass = DisplayedBaseArmorClass.IntValue + ArmorClassBonus;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 
