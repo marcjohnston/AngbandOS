@@ -15,6 +15,8 @@ internal abstract class BaseCharacterClass : IGetKey
         Game = game;
     }
 
+    public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
+
     protected virtual string? MeleeAttacksPerRoundBonusExpression => null;
     public Expression? MeleeAttacksPerRoundBonus { get; private set; }
 

@@ -292,8 +292,8 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
     /// </summary>
     private void DisplayPlayerEssentials()
     {
-        int showTohit = Game.DisplayedAttackBonus;
-        int showTodam = Game.DisplayedDamageBonus;
+        int showTohit = Game.Bonuses.DisplayedAttackBonus;
+        int showTodam = Game.Bonuses.DisplayedDamageBonus;
         MeleeWeaponWieldSlot meeleeWeaponInventorySlot = (MeleeWeaponWieldSlot)Game.SingletonRepository.Get<WieldSlot>(nameof(MeleeWeaponWieldSlot));
         Item? item = Game.GetInventoryItem(meeleeWeaponInventorySlot.WeightedRandom.ChooseOrDefault());
         // Only show bonuses if we know them
@@ -364,7 +364,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
     }
 
     /// <summary>
-    /// Dislpay ther player's skills
+    /// Display ther player's skills
     /// </summary>
     private void DisplayPlayerSkills()
     {
@@ -372,11 +372,11 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int index = meeleeWeaponInventorySlot.WeightedRandom.ChooseOrDefault();
         Item? meeleeItem = Game.GetInventoryItem(index);
 
-        int dambonus = Game.DisplayedDamageBonus;
+        int dambonus = Game.Bonuses.DisplayedDamageBonus;
         // Only include weapon damage if the player knows what it is
         int damdice = 0;
         int damsides = 0;
-        int fighting = Game.SkillMelee + (Game.AttackBonus * Constants.BthPlusAdj);
+        int fighting = Game.SkillMelee + (Game.Bonuses.AttackBonus * Constants.BthPlusAdj);
         if (meeleeItem != null)
         {
             fighting += meeleeItem.EnchantmentItemProperties.BonusHit * Constants.BthPlusAdj;
@@ -391,7 +391,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
 
         RangedWeaponWieldSlot rangedWeaponInventorySlot = (RangedWeaponWieldSlot)Game.SingletonRepository.Get<WieldSlot>(nameof(RangedWeaponWieldSlot));
         Item? rangedItem = Game.GetInventoryItem(rangedWeaponInventorySlot.WeightedRandom.ChooseOrDefault());
-        int shooting = Game.SkillRanged + (Game.AttackBonus * Constants.BthPlusAdj);
+        int shooting = Game.SkillRanged + (Game.Bonuses.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)
         {
             shooting += rangedItem.EnchantmentItemProperties.BonusHit * Constants.BthPlusAdj;

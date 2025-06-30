@@ -15,9 +15,18 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool OldHeavyBow;
     private bool OldHeavyWeapon;
 
+
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
+        List<Bonuses> bonusesToMerge = new List<Bonuses>();
+        int baseArmorClass = 0;
+        int attackBonus = 0;
+        int damageBonus = 0;
+        int displayedAttackBonus = 0;
+        int displayedDamageBonus = 0;
+        bool hasUnpriestlyWeapon = false;
+
         int extraShots;
         int oldSpeed = Game.Speed.IntValue;
         bool oldTelepathy = Game.HasTelepathy;
@@ -28,11 +37,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             ability.Bonus = 0;
         }
         Game.DisplayedBaseArmorClass.IntValue = 0;
-        Game.BaseArmorClass = 0;
-        Game.DisplayedAttackBonus = 0;
-        Game.AttackBonus = 0;
-        Game.DisplayedDamageBonus = 0;
-        Game.DamageBonus = 0;
         Game.DisplayedArmorClassBonus.IntValue = 0;
         Game.ArmorClassBonus = 0;
         Game.HasAggravation = false;
@@ -416,7 +420,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    Game.BaseArmorClass += oPtr.ArmorClass;
+                    baseArmorClass += oPtr.ArmorClass;
                     Game.DisplayedBaseArmorClass.IntValue += oPtr.ArmorClass;
                     Game.ArmorClassBonus += mergedCharacteristics.BonusArmorClass;
                     if (oPtr.IsKnown())
@@ -427,15 +431,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         continue;
                     }
-                    Game.AttackBonus += mergedCharacteristics.BonusHit;
-                    Game.DamageBonus += mergedCharacteristics.BonusDamage;
+                    attackBonus += mergedCharacteristics.BonusHit;
+                    damageBonus += mergedCharacteristics.BonusDamage;
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedAttackBonus += mergedCharacteristics.BonusHit;
+                        displayedAttackBonus += mergedCharacteristics.BonusHit;
                     }
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedDamageBonus += mergedCharacteristics.BonusDamage;
+                        displayedDamageBonus += mergedCharacteristics.BonusDamage;
                     }
                 }
             }
@@ -488,17 +492,17 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (Game.StunTimer.Value > 50)
         {
-            Game.AttackBonus -= 20;
-            Game.DisplayedAttackBonus -= 20;
-            Game.DamageBonus -= 20;
-            Game.DisplayedDamageBonus -= 20;
+            attackBonus -= 20;
+            displayedAttackBonus -= 20;
+            damageBonus -= 20;
+            displayedDamageBonus -= 20;
         }
         else if (Game.StunTimer.Value != 0)
         {
-            Game.AttackBonus -= 5;
-            Game.DisplayedAttackBonus -= 5;
-            Game.DamageBonus -= 5;
-            Game.DisplayedDamageBonus -= 5;
+            attackBonus -= 5;
+            displayedAttackBonus -= 5;
+            damageBonus -= 5;
+            displayedDamageBonus -= 5;
         }
         if (Game.InvulnerabilityTimer.Value != 0)
         {
@@ -515,8 +519,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.ArmorClassBonus += 5;
             Game.DisplayedArmorClassBonus.IntValue += 5;
-            Game.AttackBonus += 10;
-            Game.DisplayedAttackBonus += 10;
+            attackBonus += 10;
+            displayedAttackBonus += 10;
         }
         if (Game.StoneskinTimer.Value != 0)
         {
@@ -525,13 +529,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (Game.HeroismTimer.Value != 0)
         {
-            Game.AttackBonus += 12;
-            Game.DisplayedAttackBonus += 12;
+            attackBonus += 12;
+            displayedAttackBonus += 12;
         }
         if (Game.SuperheroismTimer.Value != 0)
         {
-            Game.AttackBonus += 24;
-            Game.DisplayedAttackBonus += 24;
+            attackBonus += 24;
+            displayedAttackBonus += 24;
             Game.ArmorClassBonus -= 10;
             Game.DisplayedArmorClassBonus.IntValue -= 10;
         }
@@ -597,13 +601,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
         }
         Game.ArmorClassBonus += Game.DexterityAbility.DexArmorClassBonus;
-        Game.DamageBonus += Game.StrengthAbility.StrDamageBonus;
-        Game.AttackBonus += Game.DexterityAbility.DexAttackBonus;
-        Game.AttackBonus += Game.StrengthAbility.StrAttackBonus;
+        damageBonus += Game.StrengthAbility.StrDamageBonus;
+        attackBonus += Game.DexterityAbility.DexAttackBonus;
+        attackBonus += Game.StrengthAbility.StrAttackBonus;
         Game.DisplayedArmorClassBonus.IntValue += Game.DexterityAbility.DexArmorClassBonus;
-        Game.DisplayedDamageBonus += Game.StrengthAbility.StrDamageBonus;
-        Game.DisplayedAttackBonus += Game.DexterityAbility.DexAttackBonus;
-        Game.DisplayedAttackBonus += Game.StrengthAbility.StrAttackBonus;
+        displayedDamageBonus += Game.StrengthAbility.StrDamageBonus;
+        displayedAttackBonus += Game.DexterityAbility.DexAttackBonus;
+        displayedAttackBonus += Game.StrengthAbility.StrAttackBonus;
         int hold = Game.StrengthAbility.StrMaxWeaponWeight;
         foreach (WieldSlot rangedWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
         {
@@ -615,8 +619,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 {
                     if (hold < oPtr.Weight / 10)
                     {
-                        Game.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                        Game.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                        attackBonus += 2 * (hold - (oPtr.Weight / 10));
+                        displayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
                         Game.HasHeavyBow = true;
                     }
                     if (!Game.HasHeavyBow)
@@ -657,6 +661,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
         }
 
+        // TODO: Legacy code only had 1 possibility for the melee weapon.  Now we are scanning multiple wield slots capable of multiple items.
         foreach (WieldSlot meleeWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
         {
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
@@ -665,8 +670,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null && hold < oPtr.Weight / 10)
                 {
-                    Game.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                    Game.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                    attackBonus += 2 * (hold - (oPtr.Weight / 10));
+                    displayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
                     Game.HasHeavyWeapon = true;
                 }
                 if (oPtr != null && !Game.HasHeavyWeapon)
@@ -740,33 +745,38 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.MeleeAttacksPerRound += 1 + extraBlows;
                     if (!Game.MartialArtistHeavyArmor())
                     {
-                        Game.AttackBonus += Game.ExperienceLevel.IntValue / 3;
-                        Game.DamageBonus += Game.ExperienceLevel.IntValue / 3;
-                        Game.DisplayedAttackBonus += Game.ExperienceLevel.IntValue / 3;
-                        Game.DisplayedDamageBonus += Game.ExperienceLevel.IntValue / 3;
+                        attackBonus += Game.ExperienceLevel.IntValue / 3;
+                        damageBonus += Game.ExperienceLevel.IntValue / 3;
+                        displayedAttackBonus += Game.ExperienceLevel.IntValue / 3;
+                        displayedDamageBonus += Game.ExperienceLevel.IntValue / 3;
                     }
                 }
 
-                Game.HasUnpriestlyWeapon = false;
                 MartialArtistArmorAux = false;
                 if (Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior)
                 {
-                    Game.AttackBonus += Game.ExperienceLevel.IntValue / 5;
-                    Game.DamageBonus += Game.ExperienceLevel.IntValue / 5;
-                    Game.DisplayedAttackBonus += Game.ExperienceLevel.IntValue / 5;
-                    Game.DisplayedDamageBonus += Game.ExperienceLevel.IntValue / 5;
+                    attackBonus += Game.ExperienceLevel.IntValue / 5;
+                    damageBonus += Game.ExperienceLevel.IntValue / 5;
+                    displayedAttackBonus += Game.ExperienceLevel.IntValue / 5;
+                    displayedDamageBonus += Game.ExperienceLevel.IntValue / 5;
                 }
                 
                 if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Priest || Game.BaseCharacterClass.ID == CharacterClassEnum.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
                 {
-                    Game.AttackBonus -= 2;
-                    Game.DamageBonus -= 2;
-                    Game.DisplayedAttackBonus -= 2;
-                    Game.DisplayedDamageBonus -= 2;
-                    Game.HasUnpriestlyWeapon = true;
+                    attackBonus -= 2;
+                    damageBonus -= 2;
+                    displayedAttackBonus -= 2;
+                    displayedDamageBonus -= 2;
+                    hasUnpriestlyWeapon = true;
                 }
 
-                Game.BaseCharacterClass.UpdateBonusesForMeleeWeapon(oPtr);
+                Bonuses? characterClassMeleeWeaponBonuses = Game.BaseCharacterClass.GetBonusesForMeleeWeapon(oPtr);
+                if (characterClassMeleeWeaponBonuses is not null)
+                {
+                    bonusesToMerge.Add(characterClassMeleeWeaponBonuses);
+                }
+
+                Game.BaseCharacterClass.UpdateBonusesForMeleeWeapon(oPtr); // TODO: This is being deleted in favor of the GetBonusesForMeleeWeapon
                 if (Game.MartialArtistHeavyArmor())
                 {
                     MartialArtistArmorAux = true;
@@ -805,6 +815,27 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.SkillSavingThrow = 95;
         }
+
+        // Create a new bonuses that we will use to merge with all of the additionals.
+        Bonuses newBonuses = new Bonuses
+        {
+            BaseArmorClass = baseArmorClass,
+            AttackBonus = attackBonus,
+            DamageBonus = damageBonus,
+            DisplayedAttackBonus = displayedAttackBonus,
+            DisplayedDamageBonus = displayedDamageBonus,
+            HasUnpriestlyWeapon = hasUnpriestlyWeapon,
+        };
+
+        // Merge the additional bonuses.
+        foreach (Bonuses bonuses in bonusesToMerge)
+        {
+            newBonuses = newBonuses.Merge(bonuses);
+        }
+
+        // Set the game bonuses with the immutable object.
+        Game.Bonuses = newBonuses;
+
         if (Game.CharacterXtra)
         {
             return;
@@ -841,9 +872,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
             OldHeavyWeapon = Game.HasHeavyWeapon;
         }
-        if (OldUnpriestlyWeapon != Game.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
+        if (OldUnpriestlyWeapon != Game.Bonuses.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
         {
-            if (Game.HasUnpriestlyWeapon)
+            if (Game.Bonuses.HasUnpriestlyWeapon)
             {
                 Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
             }
@@ -855,7 +886,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
             }
-            OldUnpriestlyWeapon = Game.HasUnpriestlyWeapon;
+            OldUnpriestlyWeapon = hasUnpriestlyWeapon;
         }
         if (Game.BaseCharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
         {

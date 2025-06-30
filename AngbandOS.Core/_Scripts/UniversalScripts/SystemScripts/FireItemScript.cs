@@ -66,7 +66,7 @@ internal class FireItemScript : UniversalScript, IGetKey
         char missileCharacter = individualAmmunition.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;
         int shotDamage = Game.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageSides) + individualAmmunition.EnchantmentItemProperties.BonusDamage + missileWeapon.EnchantmentItemProperties.BonusDamage;
-        int attackBonus = Game.AttackBonus + individualAmmunition.EnchantmentItemProperties.BonusHit + missileWeapon.EnchantmentItemProperties.BonusHit;
+        int attackBonus = Game.Bonuses.AttackBonus + individualAmmunition.EnchantmentItemProperties.BonusHit + missileWeapon.EnchantmentItemProperties.BonusHit;
         int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
 
         // Damage multiplier depends on weapon

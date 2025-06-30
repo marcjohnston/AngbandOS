@@ -794,13 +794,10 @@ internal class Game
     public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
     public int Age;
     public int ArmorClassBonus;
-    public int AttackBonus;
-    public int BaseArmorClass;
-    public int DamageBonus;
-    public int DisplayedAttackBonus;
-    public int DisplayedDamageBonus;
     public int Energy;
     public readonly ExperienceMultiplierIntProperty ExperienceMultiplier;
+
+    public Bonuses Bonuses = new Bonuses(); // Create a new bonuses with default values until the UpdateBonusesFlaggedAction updates it.
 
     public int FractionalExperiencePoints;
     public int FractionalHealth;
@@ -907,7 +904,6 @@ internal class Game
     public bool HasSustainWisdom;
     public bool HasTelepathy;
     public bool HasTimeResistance;
-    public bool HasUnpriestlyWeapon;
     public int Height;
     public int HitDie;
     public int InfravisionRange;
@@ -7442,7 +7438,7 @@ internal class Game
             MsgPrint(monster.IsVisible ? $"You are too afraid to attack {monsterName}!" : "There is something scary in your way!");
             return;
         }
-        int bonus = AttackBonus;
+        int bonus = Bonuses.AttackBonus;
         bool chaosEffect = false;
         Item? meleeItem = GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
@@ -7594,7 +7590,7 @@ internal class Game
                     totalDamage += meleeItem.EnchantmentItemProperties.BonusDamage;
                 }
                 // Add bonus damage for strength etc.
-                totalDamage += DamageBonus;
+                totalDamage += Bonuses.DamageBonus;
                 // Can't do negative damage
                 if (totalDamage < 0)
                 {
@@ -7771,7 +7767,7 @@ internal class Game
     public int PlayerCriticalRanged(int weight, int plus, int damage)
     {
         // Chance of a critical is based on weight, level, and plusses
-        int i = weight + ((AttackBonus + plus) * 4) + (ExperienceLevel.IntValue * 2);
+        int i = weight + ((Bonuses.AttackBonus + plus) * 4) + (ExperienceLevel.IntValue * 2);
         if (DieRoll(5000) <= i)
         {
             int k = weight + DieRoll(500);
@@ -7949,7 +7945,7 @@ internal class Game
         // Work out the damage done
         int damage = DiceRoll(missile.DamageDice, missile.DamageSides) + missile.EnchantmentItemProperties.BonusDamage;
         damage *= damageMultiplier;
-        int chance = SkillThrowing + (AttackBonus * Constants.BthPlusAdj);
+        int chance = SkillThrowing + (Bonuses.AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
         EnergyUse = 100;
         int y = MapY.IntValue;
@@ -8460,7 +8456,7 @@ internal class Game
     /// <returns> The damage total modified for a critical hit </returns>
     public int PlayerCriticalMelee(int weight, int plus, int damage)
     {
-        int i = weight + ((AttackBonus + plus) * 5) + (ExperienceLevel.IntValue * 3);
+        int i = weight + ((Bonuses.AttackBonus + plus) * 5) + (ExperienceLevel.IntValue * 3);
         if (DieRoll(5000) <= i)
         {
             int k = weight + DieRoll(650);
@@ -8512,7 +8508,7 @@ internal class Game
         string attackDescription = mutation.AttackDescription;
         string monsterName = monster.Name;
         // See if the player hit the monster
-        int bonus = AttackBonus;
+        int bonus = Bonuses.AttackBonus;
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         if (PlayerCheckHitOnMonster(chance, race.ArmorClass, monster.IsVisible))
         {
@@ -8521,8 +8517,8 @@ internal class Game
             MsgPrint($"You hit {monsterName} with your {attackDescription}.");
             // Roll the damage, with possible critical damage
             int damage = DiceRoll(damageDice, damageSides);
-            damage = PlayerCriticalMelee(effectiveWeight, AttackBonus, damage);
-            damage += DamageBonus;
+            damage = PlayerCriticalMelee(effectiveWeight, Bonuses.AttackBonus, damage);
+            damage += Bonuses.DamageBonus;
             // Can't have negative damage
             if (damage < 0)
             {
@@ -8665,7 +8661,7 @@ internal class Game
             return false;
         }
         // Roll for the attack
-        int armorClass = BaseArmorClass + ArmorClassBonus;
+        int armorClass = Bonuses.BaseArmorClass + ArmorClassBonus;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 

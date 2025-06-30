@@ -22,7 +22,7 @@ internal class Stun3p1d3MartialArtsEffect : MartialArtsEffect
 
         // It might be a critical hit
         totalDamage = Game.PlayerCriticalMelee(Game.ExperienceLevel.IntValue * Game.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
-        if (totalDamage + Game.DamageBonus < monster.Health)
+        if (totalDamage + Game.Bonuses.DamageBonus < monster.Health)
         {
             DoStun(monster, resistanceToStun);
         }

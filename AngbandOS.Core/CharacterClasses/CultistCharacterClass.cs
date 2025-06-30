@@ -80,7 +80,7 @@ internal class CultistCharacterClass : BaseCharacterClass
         nameof(SustainIntelligenceRingItemFactory),
     };
 
-    public override void UpdateBonusesForMeleeWeapon(Item? oPtr)
+    public override Bonuses? GetBonusesForMeleeWeapon(Item? oPtr)
     {
         // Cultists that are NOT wielding the a blade of chaos lose bonuses for being an unpriestly weapon.
         if (oPtr != null)
@@ -88,13 +88,17 @@ internal class CultistCharacterClass : BaseCharacterClass
             RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (!mergedCharacteristics.Chaotic)
             {
-                Game.AttackBonus -= 10;
-                Game.DamageBonus -= 10;
-                Game.DisplayedAttackBonus -= 10;
-                Game.DisplayedDamageBonus -= 10;
-                Game.HasUnpriestlyWeapon = true;
+                return new Bonuses()
+                {
+                    AttackBonus = -10,
+                    DamageBonus = -10,
+                    DisplayedAttackBonus = -10,
+                    DisplayedDamageBonus = -10,
+                    HasUnpriestlyWeapon = true,
+                };
             }
         }
+        return null;
     }
 
     public override void CalcBonuses()

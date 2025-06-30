@@ -3453,7 +3453,7 @@ internal class Monster : IItemContainer
         }
         // Otherwise, compare the power and level to the player's armor class
         int i = attackPower + (Level * 3);
-        int ac = Game.BaseArmorClass + Game.ArmorClassBonus;
+        int ac = Game.Bonuses.BaseArmorClass + Game.ArmorClassBonus;
         return i > 0 && this.Game.DieRoll(i) > ac * 3 / 4;
     }
 
