@@ -15,6 +15,8 @@ internal class Bonuses
     public int DisplayedDamageBonus { get; init; } = 0;
     public bool HasUnpriestlyWeapon {get; init; } = false;
     public bool HasHeavyBow { get; init; } = false;
+    public bool HasHeavyWeapon { get; init; } = false;
+
 
     public Bonuses Merge(Bonuses bonuses)
     {
@@ -26,7 +28,8 @@ internal class Bonuses
             DisplayedAttackBonus = DisplayedAttackBonus + bonuses.DisplayedAttackBonus,
             DisplayedDamageBonus = DisplayedDamageBonus + bonuses.DisplayedDamageBonus,
             HasUnpriestlyWeapon = HasUnpriestlyWeapon || bonuses.HasUnpriestlyWeapon,
-            HasHeavyBow = HasHeavyBow | bonuses.HasHeavyBow,
+            HasHeavyBow = HasHeavyBow || bonuses.HasHeavyBow,
+            HasHeavyWeapon = HasHeavyWeapon || bonuses.HasHeavyWeapon,
         };
     }
 }

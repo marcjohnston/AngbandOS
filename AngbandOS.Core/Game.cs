@@ -881,7 +881,6 @@ internal class Game
     /// </summary>
     public int GlowInTheDarkRadius;
 
-    public bool HasHeavyWeapon;
     public bool HasHoldLife;
     public bool HasLightningImmunity;
     public bool HasLightningResistance;

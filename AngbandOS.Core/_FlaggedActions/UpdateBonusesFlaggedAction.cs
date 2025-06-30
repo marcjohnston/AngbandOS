@@ -11,9 +11,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
 {
     private bool MartialArtistArmorAux;
     private bool MartialArtistNotifyAux;
-    private bool OldUnpriestlyWeapon;
-    private bool OldHeavyWeapon;
-
 
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
@@ -26,6 +23,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int displayedDamageBonus = 0;
         bool hasUnpriestlyWeapon = false;
         bool hasHeavyBow = false;
+        bool hasHeavyWeapon = false;
 
         int extraShots;
         int oldSpeed = Game.Speed.IntValue;
@@ -665,15 +663,14 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
             {
-                Game.HasHeavyWeapon = false; // TODO: Is this local only
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null && hold < oPtr.Weight / 10)
                 {
                     attackBonus += 2 * (hold - (oPtr.Weight / 10));
                     displayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                    Game.HasHeavyWeapon = true;
+                    hasHeavyWeapon = true;
                 }
-                if (oPtr != null && !Game.HasHeavyWeapon)
+                if (oPtr != null && !hasHeavyWeapon)
                 {
                     int num = Game.BaseCharacterClass.MaximumMeleeAttacksPerRound(Game.ExperienceLevel.IntValue);
                     int wgt = Game.BaseCharacterClass.MaximumWeight;
@@ -825,6 +822,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             DisplayedDamageBonus = displayedDamageBonus,
             HasUnpriestlyWeapon = hasUnpriestlyWeapon,
             HasHeavyBow = hasHeavyBow,
+            HasHeavyWeapon = hasHeavyWeapon,
         };
 
         // Merge the additional bonuses.
@@ -860,9 +858,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
         }
 
-        if (OldHeavyWeapon != Game.HasHeavyWeapon) // TODO: This should be moved to the wield action
+        if (previousBonuses.HasHeavyWeapon != newBonuses.HasHeavyWeapon) // TODO: This should be moved to the wield action
         {
-            if (Game.HasHeavyWeapon)
+            if (newBonuses.HasHeavyWeapon)
             {
                 Game.MsgPrint("You have trouble wielding such a heavy weapon.");
             }
@@ -874,11 +872,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint("You feel relieved to put down your heavy weapon.");
             }
-            OldHeavyWeapon = Game.HasHeavyWeapon;
         }
-        if (OldUnpriestlyWeapon != Game.Bonuses.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
+        if (previousBonuses.HasUnpriestlyWeapon != newBonuses.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
         {
-            if (Game.Bonuses.HasUnpriestlyWeapon)
+            if (newBonuses.HasUnpriestlyWeapon)
             {
                 Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
             }
@@ -890,7 +887,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
             }
-            OldUnpriestlyWeapon = hasUnpriestlyWeapon;
         }
         if (Game.BaseCharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
         {
@@ -898,5 +894,4 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             MartialArtistNotifyAux = MartialArtistArmorAux;
         }
     }
-
 }
