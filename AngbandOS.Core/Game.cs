@@ -815,8 +815,8 @@ internal class Game
     public readonly ManaIntProperty Mana;
     public readonly MaxManaIntProperty MaxMana;
     public readonly ExperiencePointsIntProperty ExperiencePoints;
-    public readonly DisplayedArmorClassBonusIntProperty DisplayedArmorClassBonus;
-    public readonly DisplayedBaseArmorClassIntProperty DisplayedBaseArmorClass;
+    public int DisplayedArmorClassBonus;
+    public int DisplayedBaseArmorClass;
     public readonly StringProperty PlayerName;
 
     /// <summary>
@@ -1359,8 +1359,6 @@ internal class Game
         Mana = (ManaIntProperty)SingletonRepository.Get<Property>(nameof(ManaIntProperty));
         MaxMana = (MaxManaIntProperty)SingletonRepository.Get<Property>(nameof(MaxManaIntProperty));
         ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Get<Property>(nameof(ExperiencePointsIntProperty));
-        DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntProperty)SingletonRepository.Get<Property>(nameof(DisplayedArmorClassBonusIntProperty));
-        DisplayedBaseArmorClass = (DisplayedBaseArmorClassIntProperty)SingletonRepository.Get<Property>(nameof(DisplayedBaseArmorClassIntProperty));
         Food = (FoodIntProperty)SingletonRepository.Get<Property>(nameof(FoodIntProperty));
         Health = (HealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(HealthPointsIntProperty));
         Speed = (SpeedIntProperty)SingletonRepository.Get<Property>(nameof(SpeedIntProperty));

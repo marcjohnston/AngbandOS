@@ -305,8 +305,8 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         // Print some basics
         PrintBonus("+ To Hit    ", showTohit, 30, 1, ColorEnum.Brown);
         PrintBonus("+ To Damage ", showTodam, 31, 1, ColorEnum.Brown);
-        PrintBonus("+ To AC     ", Game.DisplayedArmorClassBonus.IntValue, 32, 1, ColorEnum.Brown);
-        PrintShortScore("  Base AC   ", Game.DisplayedBaseArmorClass.IntValue, 33, 1, ColorEnum.Brown);
+        PrintBonus("+ To AC     ", Game.DisplayedArmorClassBonus, 32, 1, ColorEnum.Brown);
+        PrintShortScore("  Base AC   ", Game.DisplayedBaseArmorClass, 33, 1, ColorEnum.Brown);
         PrintShortScore("Level      ", Game.ExperienceLevel.IntValue, 30, 28, ColorEnum.Green);
         PrintLongScore("Experience ", Game.ExperiencePoints.IntValue, 31, 28,
             Game.ExperiencePoints.IntValue >= Game.MaxExperienceGained.IntValue ? ColorEnum.Green : ColorEnum.Red);

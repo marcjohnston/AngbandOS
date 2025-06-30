@@ -34,8 +34,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             ability.Bonus = 0;
         }
-        Game.DisplayedBaseArmorClass.IntValue = 0;
-        Game.DisplayedArmorClassBonus.IntValue = 0;
+        Game.DisplayedBaseArmorClass = 0;
+        Game.DisplayedArmorClassBonus = 0;
         Game.ArmorClassBonus = 0;
         Game.HasAggravation = false;
         Game.HasRandomTeleport = false;
@@ -126,7 +126,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             Game.GlowInTheDarkRadius = 1;
         }
         Game.ArmorClassBonus += Game.GenomeArmorClassBonus;
-        Game.DisplayedArmorClassBonus.IntValue += Game.GenomeArmorClassBonus;
+        Game.DisplayedArmorClassBonus += Game.GenomeArmorClassBonus;
         Game.HasFeatherFall |= Game.FeatherFall;
         Game.HasFearResistance |= Game.ResFear;
         Game.HasTimeResistance |= Game.ResTime;
@@ -419,11 +419,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         Game.HasSustainCharisma = true;
                     }
                     baseArmorClass += oPtr.ArmorClass;
-                    Game.DisplayedBaseArmorClass.IntValue += oPtr.ArmorClass;
+                    Game.DisplayedBaseArmorClass += oPtr.ArmorClass;
                     Game.ArmorClassBonus += mergedCharacteristics.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedArmorClassBonus.IntValue += mergedCharacteristics.BonusArmorClass;
+                        Game.DisplayedArmorClassBonus += mergedCharacteristics.BonusArmorClass;
                     }
                     if (inventorySlot.IsWeapon)
                     {
@@ -450,7 +450,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 {
                     int bareArmorBonus = inventorySlot.BareArmorClassBonus;
                     Game.ArmorClassBonus += bareArmorBonus;
-                    Game.DisplayedArmorClassBonus.IntValue += bareArmorBonus;
+                    Game.DisplayedArmorClassBonus += bareArmorBonus;
                 }
             }
         }
@@ -505,25 +505,25 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (Game.InvulnerabilityTimer.Value != 0)
         {
             Game.ArmorClassBonus += 100;
-            Game.DisplayedArmorClassBonus.IntValue += 100;
+            Game.DisplayedArmorClassBonus += 100;
         }
         if (Game.EtherealnessTimer.Value != 0)
         {
             Game.ArmorClassBonus += 100;
-            Game.DisplayedArmorClassBonus.IntValue += 100;
+            Game.DisplayedArmorClassBonus += 100;
             Game.HasReflection = true;
         }
         if (Game.BlessingTimer.Value != 0)
         {
             Game.ArmorClassBonus += 5;
-            Game.DisplayedArmorClassBonus.IntValue += 5;
+            Game.DisplayedArmorClassBonus += 5;
             attackBonus += 10;
             displayedAttackBonus += 10;
         }
         if (Game.StoneskinTimer.Value != 0)
         {
             Game.ArmorClassBonus += 50;
-            Game.DisplayedArmorClassBonus.IntValue += 50;
+            Game.DisplayedArmorClassBonus += 50;
         }
         if (Game.HeroismTimer.Value != 0)
         {
@@ -535,7 +535,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             attackBonus += 24;
             displayedAttackBonus += 24;
             Game.ArmorClassBonus -= 10;
-            Game.DisplayedArmorClassBonus.IntValue -= 10;
+            Game.DisplayedArmorClassBonus -= 10;
         }
         if (Game.HasteTimer.Value != 0)
         {
@@ -602,7 +602,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         damageBonus += Game.StrengthAbility.StrDamageBonus;
         attackBonus += Game.DexterityAbility.DexAttackBonus;
         attackBonus += Game.StrengthAbility.StrAttackBonus;
-        Game.DisplayedArmorClassBonus.IntValue += Game.DexterityAbility.DexArmorClassBonus;
+        Game.DisplayedArmorClassBonus += Game.DexterityAbility.DexArmorClassBonus;
         displayedDamageBonus += Game.StrengthAbility.StrDamageBonus;
         displayedAttackBonus += Game.DexterityAbility.DexAttackBonus;
         displayedAttackBonus += Game.StrengthAbility.StrAttackBonus;

@@ -8,14 +8,25 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal class ArmorClassIntFunction : IntFunction
+internal class ArmorClassIntFunction : IChangeTracker, IGetKey, IIntValue
 {
-    private ArmorClassIntFunction(Game game) : base(game) { } // This object is a singleton.
-
-    public override int Value => Game.DisplayedBaseArmorClass.IntValue + Game.DisplayedArmorClassBonus.IntValue;
-    public override string[]? DependencyNames => new string[]
+    private readonly Game Game;
+    private int? OldValue = null;
+    private ArmorClassIntFunction(Game game)
     {
-        nameof(DisplayedBaseArmorClassIntProperty),
-        nameof(DisplayedArmorClassBonusIntProperty)
-    };
+        Game = game;
+    }
+
+    public bool IsChanged => !OldValue.HasValue || OldValue.Value != Game.DisplayedBaseArmorClass + Game.DisplayedArmorClassBonus;
+
+    public string GetKey => GetType().Name;
+
+    public int IntValue => Game.DisplayedBaseArmorClass + Game.DisplayedArmorClassBonus;
+
+    public void Bind() {  }
+
+    public void ClearChangedFlag()
+    {
+        OldValue = IntValue;
+    }
 }
