@@ -772,7 +772,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     bonusesToMerge.Add(characterClassMeleeWeaponBonuses);
                 }
 
-                Game.BaseCharacterClass.UpdateBonusesForMeleeWeapon(oPtr); // TODO: This is being deleted in favor of the GetBonusesForMeleeWeapon
                 if (Game.MartialArtistHeavyArmor())
                 {
                     MartialArtistArmorAux = true;

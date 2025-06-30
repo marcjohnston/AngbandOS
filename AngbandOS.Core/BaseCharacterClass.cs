@@ -699,16 +699,9 @@ internal abstract class BaseCharacterClass : IGetKey
     protected ItemFactory[] OutfitItemFactories { get; private set; }
     protected abstract string[] OutfitItemFactoryNames { get; }
 
-
     /// <summary>
     /// During the outfit process, derived character classes can modify outfitted items.  Does nothing by default.
     /// </summary>
     /// <param name="item"></param>
     protected virtual void OutfitItem(Item item) { }
-
-    /// <summary>
-    /// Update the player bonuses for a melee weapon.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    public virtual void UpdateBonusesForMeleeWeapon(Item oPtr) { }
 }
