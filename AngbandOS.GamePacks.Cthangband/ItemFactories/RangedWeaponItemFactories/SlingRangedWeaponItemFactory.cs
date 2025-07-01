@@ -22,7 +22,7 @@ public class SlingRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (1, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyArtifactBiasSlayingAndBlowsBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SlingItemFactoryItemEnhancement);
     public override int Weight => 5;
     public override int MissileDamageMultiplier => 2;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]
@@ -65,8 +65,6 @@ public class SlingRangedWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
-
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;

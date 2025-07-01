@@ -22,7 +22,7 @@ public class ScytheOfSlicingPolearmWeaponItemFactory : ItemFactoryGameConfigurat
     {
         (60, 4)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyBlessedArtifactBiasAndSlayingBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ScytheOfSlicingPolearmItemFactoryItemEnhancement);
     public override int Weight => 250;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
@@ -58,7 +58,6 @@ public class ScytheOfSlicingPolearmWeaponItemFactory : ItemFactoryGameConfigurat
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

@@ -238,11 +238,6 @@ public class ItemFactoryGameConfiguration
     public virtual string? PackProcessWorldScriptBindingKey { get; set; } = null;
 
     /// <summary>
-    /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanApplyBonusArmorClassMiscPower { get; set; } = false;
-
-    /// <summary>
     /// Returns an expression that represents the chance that an item that is thrown or fired will break.  Returns 10, or 10%, by default.  This
     /// property is used to bind the <see cref="BreakageChanceProbability"/> property during the bind phase.
     /// </summary>

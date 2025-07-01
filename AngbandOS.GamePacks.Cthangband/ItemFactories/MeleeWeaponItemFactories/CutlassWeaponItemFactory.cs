@@ -22,7 +22,7 @@ public class CutlassWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyBlessedArtifactBiasAndSlayingBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CutlassItemFactoryItemEnhancement);
     public override int Weight => 110;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
@@ -59,7 +59,6 @@ public class CutlassWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

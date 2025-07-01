@@ -31,6 +31,7 @@ internal class ItemEnhancement : IGetKey, IToJson
         CanApplyBlowsBonus = itemEnhancementGameConfiguration.CanApplyBlowsBonus;
         CanReflectBoltsAndArrows = itemEnhancementGameConfiguration.CanReflectBoltsAndArrows;
         CanApplySlayingBonus = itemEnhancementGameConfiguration.CanApplySlayingBonus;
+        CanApplyBonusArmorClassMiscPower = itemEnhancementGameConfiguration.CanApplyBonusArmorClassMiscPower;
 
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
         Value = itemEnhancementGameConfiguration.Value;
@@ -159,6 +160,7 @@ internal class ItemEnhancement : IGetKey, IToJson
             CanApplyBlowsBonus = CanApplyBlowsBonus,
             CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
             CanApplySlayingBonus = CanApplySlayingBonus,
+            CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
 
             BonusStrength = BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value,
             BonusIntelligence = BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value,
@@ -317,6 +319,7 @@ internal class ItemEnhancement : IGetKey, IToJson
             CanApplyBlowsBonus = CanApplyBlowsBonus,
             CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
             CanApplySlayingBonus = CanApplySlayingBonus,
+            CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
 
             Key = Key,
             Value = Value,
@@ -505,6 +508,11 @@ internal class ItemEnhancement : IGetKey, IToJson
     #endregion
 
     #region ItemPropertySet Light-weight Virtual & Abstract Properties
+    /// <summary>
+    /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
+    /// </summary>
+    public virtual bool CanApplyBonusArmorClassMiscPower { get; } = false;
+
     /// <summary>
     /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
     /// </summary>

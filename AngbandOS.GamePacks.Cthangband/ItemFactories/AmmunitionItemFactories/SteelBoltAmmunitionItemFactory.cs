@@ -26,7 +26,7 @@ public class SteelBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
         (3, 1),
         (25, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusAndArmorClassMiscPowerItemFactoryItemEnhancement);
     public override int Weight => 3;
     public override string ItemClassBindingKey => nameof(BoltsItemClass);
     public override int PackSort => 33;
@@ -67,8 +67,6 @@ public class SteelBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
-
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override bool IsWearableOrWieldable => true;
 }

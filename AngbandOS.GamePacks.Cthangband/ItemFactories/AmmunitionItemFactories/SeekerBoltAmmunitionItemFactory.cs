@@ -25,7 +25,7 @@ public class SeekerBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     {
         (65, 4)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusAndArmorClassMiscPowerItemFactoryItemEnhancement);
     public override int Weight => 3;
     public override string ItemClassBindingKey => nameof(BoltsItemClass);
     public override int PackSort => 33;
@@ -66,8 +66,6 @@ public class SeekerBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
-
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override bool IsWearableOrWieldable => true;
 }

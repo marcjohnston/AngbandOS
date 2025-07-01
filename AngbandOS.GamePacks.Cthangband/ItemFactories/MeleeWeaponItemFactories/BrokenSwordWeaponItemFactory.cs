@@ -21,7 +21,7 @@ public class BrokenSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax => "Broken Sword~";
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyBlessedArtifactBiasAndSlayingBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BrokenSwordItemFactoryItemEnhancement);
     public override int BonusDamage => -4;
     public override int BonusHit => -2;
     public override int Weight => 30;
@@ -61,7 +61,6 @@ public class BrokenSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

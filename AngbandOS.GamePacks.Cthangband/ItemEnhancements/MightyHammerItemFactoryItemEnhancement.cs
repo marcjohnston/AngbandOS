@@ -6,4 +6,5 @@ public class MightyHammerItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override bool ShowMods => true;
     public override bool InstaArt => true;
     public override bool CanApplySlayingBonus => true;
+    public override bool CanApplyBonusArmorClassMiscPower => true;
 }

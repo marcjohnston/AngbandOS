@@ -22,7 +22,7 @@ public class HeavyCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (30, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyArtifactBiasSlayingAndBlowsBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(HeavyCrossbowItemFactoryItemEnhancement);
     public override int Weight => 200;
     public override int MissileDamageMultiplier => 4;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]
@@ -66,7 +66,6 @@ public class HeavyCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

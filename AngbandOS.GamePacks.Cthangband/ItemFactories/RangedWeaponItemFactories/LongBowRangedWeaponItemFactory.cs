@@ -22,7 +22,7 @@ public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyArtifactBiasSlayingAndBlowsBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LongBowItemFactoryItemEnhancement);
     public override int Weight => 40;
     public override int MissileDamageMultiplier => 3;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]
@@ -65,7 +65,6 @@ public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

@@ -22,7 +22,7 @@ public class TridentPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyBlessedArtifactBiasAndSlayingBonusItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(TridentPolearmItemFactoryItemEnhancement);
     public override int Weight => 70;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
@@ -57,7 +57,6 @@ public class TridentPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

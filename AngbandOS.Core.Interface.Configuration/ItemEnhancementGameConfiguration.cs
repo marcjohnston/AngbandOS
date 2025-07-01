@@ -34,6 +34,11 @@ public class ItemEnhancementGameConfiguration
     public virtual string? FriendlyName { get; set; } = null;
 
     /// <summary>
+    /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
+    /// </summary>
+    public virtual bool CanApplyBonusArmorClassMiscPower { get; set; } = false;
+
+    /// <summary>
     /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
     /// </summary>
     public virtual bool CanApplyBlessedArtifactBias { get; set; } = false;

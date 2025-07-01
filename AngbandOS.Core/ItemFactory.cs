@@ -73,7 +73,6 @@ internal class ItemFactory : IGetKey, IToJson
         MonsterProcessWorldScriptBindingKey = itemFactoryGameConfiguration.MonsterProcessWorldScriptBindingKey;
         EquipmentProcessWorldScriptBindingKey = itemFactoryGameConfiguration.EquipmentProcessWorldScriptBindingKey;
         PackProcessWorldScriptBindingKey = itemFactoryGameConfiguration.PackProcessWorldScriptBindingKey;
-        CanApplyBonusArmorClassMiscPower = itemFactoryGameConfiguration.CanApplyBonusArmorClassMiscPower;
         BreakageChanceProbabilityExpression = itemFactoryGameConfiguration.BreakageChanceProbabilityExpression;
         MakeObjectCountExpression = itemFactoryGameConfiguration.MakeObjectCountExpression;
         GetsDamageMultiplier = itemFactoryGameConfiguration.GetsDamageMultiplier;
@@ -266,7 +265,6 @@ internal class ItemFactory : IGetKey, IToJson
             MonsterProcessWorldScriptBindingKey = MonsterProcessWorldScriptBindingKey,
             EquipmentProcessWorldScriptBindingKey = EquipmentProcessWorldScriptBindingKey,
             PackProcessWorldScriptBindingKey = PackProcessWorldScriptBindingKey,
-            CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
             BreakageChanceProbabilityExpression = BreakageChanceProbabilityExpression,
             MakeObjectCountExpression = MakeObjectCountExpression,
             GetsDamageMultiplier = GetsDamageMultiplier,
@@ -1934,11 +1932,6 @@ internal class ItemFactory : IGetKey, IToJson
     protected virtual string? MonsterProcessWorldScriptBindingKey { get; } = null;
     protected virtual string? EquipmentProcessWorldScriptBindingKey { get; } = null;
     protected virtual string? PackProcessWorldScriptBindingKey { get; } = null;
-
-    /// <summary>
-    /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanApplyBonusArmorClassMiscPower { get; } = false;
 
     /// <summary>
     /// Returns an expression that represents the chance that an item that is thrown or fired will break.  Returns 10, or 10%, by default.  This
