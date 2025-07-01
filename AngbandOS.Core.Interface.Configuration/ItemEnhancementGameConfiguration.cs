@@ -33,6 +33,33 @@ public class ItemEnhancementGameConfiguration
     /// </summary>
     public virtual string? FriendlyName { get; set; } = null;
 
+    /// <summary>
+    /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
+    /// </summary>
+    public virtual bool CanApplyBlessedArtifactBias { get; set; } = false;
+
+    /// <summary>
+    /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
+    /// </summary>
+    public virtual bool CanApplyArtifactBiasSlaying { get; set; } = true;
+
+    /// <summary>
+    /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
+    /// </summary>
+    public virtual bool CanApplyBlowsBonus { get; set; } = false;
+
+    /// <summary>
+    /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
+    /// </summary>
+    public virtual bool CanReflectBoltsAndArrows { get; set; } = false;
+
+    /// <summary>
+    /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual bool CanApplySlayingBonus { get; set; } = false;
+
     public virtual string? BonusStrengthRollExpression { get; set; } = null;
     public virtual string? BonusIntelligenceRollExpression { get; set; } = null;
     public virtual string? BonusWisdomRollExpression { get; set; } = null;

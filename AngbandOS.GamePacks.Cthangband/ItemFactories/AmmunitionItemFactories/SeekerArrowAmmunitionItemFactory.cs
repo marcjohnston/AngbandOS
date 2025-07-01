@@ -25,7 +25,7 @@ public class SeekerArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     {
         (55, 2)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusItemFactoryItemEnhancement);
     public override int Weight => 2;
     public override string ItemClassBindingKey => nameof(ArrowsItemClass);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
@@ -71,6 +71,4 @@ public class SeekerArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
 
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override bool IsWearableOrWieldable => true;
-
-    public override bool CanApplySlayingBonus => true;
 }

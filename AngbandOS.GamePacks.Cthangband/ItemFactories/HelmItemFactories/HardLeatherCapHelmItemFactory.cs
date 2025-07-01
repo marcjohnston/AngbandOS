@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -21,6 +21,7 @@ public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hard Leather Cap";
+    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
 
     public override int ArmorClass => 2;
     public override int Cost => 12;
@@ -31,13 +32,10 @@ public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
         (3, 1)
     };
     public override int Weight => 15;
-
     public override string ItemClassBindingKey => nameof(HelmsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HeadWieldSlot) };
     public override int PackSort => 25;
     public override bool HatesAcid => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
 
     /// <summary>
     /// Returns true because broken armor should be stomped automatically. 

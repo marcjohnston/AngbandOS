@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -21,6 +21,7 @@ public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large Metal Shield";
+    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
 
     public override int ArmorClass => 5;
     public override int Cost => 200;
@@ -38,8 +39,6 @@ public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };
     public override int PackSort => 23;
     public override bool HatesAcid => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
 
     /// <summary>
     /// Returns true because broken armor should be stomped automatically. 

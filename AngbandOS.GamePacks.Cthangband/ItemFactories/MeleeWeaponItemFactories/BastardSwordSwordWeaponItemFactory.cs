@@ -22,7 +22,7 @@ public class BastardSwordSwordWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (15, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyBlessedArtifactBiasAndSlayingBonusItemFactoryItemEnhancement);
     public override int Weight => 140;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
@@ -36,7 +36,6 @@ public class BastardSwordSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool HatesAcid => true;
     public override int PackSort => 28;
 
-    public override bool CanApplyBlessedArtifactBias => true;
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;
 
@@ -71,6 +70,4 @@ public class BastardSwordSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearableOrWieldable => true;
-
-    public override bool CanApplySlayingBonus => true;
 }

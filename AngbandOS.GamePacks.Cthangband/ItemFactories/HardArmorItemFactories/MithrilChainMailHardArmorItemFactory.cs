@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MithrilChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-  {
+    {
         (100, "3d5-3")
-  };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -27,7 +27,7 @@ public class MithrilChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Mithril Chain Mail~";
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidAndCanReflectBoltsAndArrowsItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -44,7 +44,6 @@ public class MithrilChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
 
     public override bool CanProvideSheathOfFire => true;
 
-    public override bool CanReflectBoltsAndArrows => true;
     public override bool CanApplyArtifactBiasResistance => true;
 
     /// <summary>

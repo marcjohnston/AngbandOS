@@ -22,7 +22,7 @@ public class WarHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusItemFactoryItemEnhancement);
     public override int Weight => 120;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
@@ -69,6 +69,4 @@ public class WarHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearableOrWieldable => true;
-
-    public override bool CanApplySlayingBonus => true;
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class OfDeflectionShieldItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-  {
+    {
         (100, "3d5-3")
-  };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -26,7 +26,7 @@ public class OfDeflectionShieldItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidAndCanReflectBoltsAndArrowsItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 70;
     public override string? DescriptionSyntax => "Shield~ of Deflection";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
@@ -40,8 +40,6 @@ public class OfDeflectionShieldItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };
     public override int PackSort => 23;
     public override bool HatesAcid => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
 
     /// <summary>
     /// Returns true because broken armor should be stomped automatically. 

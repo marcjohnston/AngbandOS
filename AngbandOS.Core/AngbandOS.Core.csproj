@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Remove="ConfigurationMetadata\**" />
     <Compile Remove="DirectionalActivations\**" />
+    <Compile Remove="PlayerEffects\**" />
     <Compile Remove="Widgets\NullableTextAreaWidget\**" />
     <Compile Remove="Widgets\TextAreaWidgets\**" />
     <Compile Remove="_AimWandScripts\**" />
@@ -24,6 +25,7 @@
     <Compile Remove="_ZapRodScripts\**" />
     <EmbeddedResource Remove="ConfigurationMetadata\**" />
     <EmbeddedResource Remove="DirectionalActivations\**" />
+    <EmbeddedResource Remove="PlayerEffects\**" />
     <EmbeddedResource Remove="Widgets\NullableTextAreaWidget\**" />
     <EmbeddedResource Remove="Widgets\TextAreaWidgets\**" />
     <EmbeddedResource Remove="_AimWandScripts\**" />
@@ -34,6 +36,7 @@
     <EmbeddedResource Remove="_ZapRodScripts\**" />
     <None Remove="ConfigurationMetadata\**" />
     <None Remove="DirectionalActivations\**" />
+    <None Remove="PlayerEffects\**" />
     <None Remove="Widgets\NullableTextAreaWidget\**" />
     <None Remove="Widgets\TextAreaWidgets\**" />
     <None Remove="_AimWandScripts\**" />
@@ -53,10 +56,6 @@
     <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration\AngbandOS.Core.Interface.Configuration.csproj" />
     <ProjectReference Include="..\AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PlayerEffects\" />
   </ItemGroup>
 
 </Project>

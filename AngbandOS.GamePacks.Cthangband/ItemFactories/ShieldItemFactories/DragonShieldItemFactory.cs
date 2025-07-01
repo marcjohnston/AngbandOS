@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DragonShieldItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -22,7 +22,7 @@ public class DragonShieldItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Shield";
 
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsTreasureItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsTreasureAndCanReflectBoltsAndArrowsItemFactoryItemEnhancement);
     public override int ArmorClass => 8;
     public override int Cost => 10000;
     public override int DamageDice => 1;
@@ -40,8 +40,6 @@ public class DragonShieldItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };
     public override int PackSort => 23;
     public override bool HatesAcid => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
 
     /// <summary>
     /// Returns true because broken armor should be stomped automatically. 

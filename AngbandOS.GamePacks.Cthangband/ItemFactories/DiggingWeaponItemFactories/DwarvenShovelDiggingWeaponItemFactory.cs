@@ -23,7 +23,7 @@ public class DwarvenShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguratio
         (40, 1)
     };
     public override int InitialBonusTunnel => 3;
-    public override string? ItemEnhancementBindingKey => nameof(TunnellingItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(TunnellingAndCanApplySlayingBonusItemFactoryItemEnhancement);
     public override int Weight => 120;
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
@@ -67,6 +67,4 @@ public class DwarvenShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguratio
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearableOrWieldable => true;
-
-    public override bool CanApplySlayingBonus => true;
 }

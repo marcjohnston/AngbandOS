@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class RibbedPlateHardArmorItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -21,6 +21,7 @@ public class RibbedPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Ribbed Plate Armor";
+    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
 
     public override int ArmorClass => 28;
     public override int Cost => 1500;
@@ -38,12 +39,8 @@ public class RibbedPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;
     public override bool HatesAcid => true;
-
     public override bool CanProvideSheathOfElectricity => true;
-
     public override bool CanProvideSheathOfFire => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
     public override bool CanApplyArtifactBiasResistance => true;
 
     /// <summary>

@@ -34,6 +34,7 @@ public class AugmentedChainMailHardArmorItemFactory : ItemFactoryGameConfigurati
     };
     public override int BonusHit => -2;
     public override int Weight => 270;
+    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
@@ -44,7 +45,6 @@ public class AugmentedChainMailHardArmorItemFactory : ItemFactoryGameConfigurati
 
     public override bool CanProvideSheathOfFire => true;
 
-    public override bool CanReflectBoltsAndArrows => true;
     public override bool CanApplyArtifactBiasResistance => true;
 
     /// <summary>

@@ -24,7 +24,7 @@ public class RoundedPebbleShotAmmunitionItemFactory : ItemFactoryGameConfigurati
     public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax => "Rounded Pebble~";
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusItemFactoryItemEnhancement);
     public override int Weight => 4;
     public override string ItemClassBindingKey => nameof(ShotsItemClass);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
@@ -68,6 +68,4 @@ public class RoundedPebbleShotAmmunitionItemFactory : ItemFactoryGameConfigurati
 
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override bool IsWearableOrWieldable => true;
-
-    public override bool CanApplySlayingBonus => true;
 }

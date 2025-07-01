@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -23,6 +25,13 @@ internal class ItemEnhancement : IGetKey, IToJson
     public ItemEnhancement(Game game, ItemEnhancementGameConfiguration itemEnhancementGameConfiguration)
     {
         Game = game;
+
+        CanApplyBlessedArtifactBias = itemEnhancementGameConfiguration.CanApplyBlessedArtifactBias;
+        CanApplyArtifactBiasSlaying = itemEnhancementGameConfiguration.CanApplyArtifactBiasSlaying;
+        CanApplyBlowsBonus = itemEnhancementGameConfiguration.CanApplyBlowsBonus;
+        CanReflectBoltsAndArrows = itemEnhancementGameConfiguration.CanReflectBoltsAndArrows;
+        CanApplySlayingBonus = itemEnhancementGameConfiguration.CanApplySlayingBonus;
+
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
         Value = itemEnhancementGameConfiguration.Value;
         ApplicableItemFactoryBindingKeys = itemEnhancementGameConfiguration.ApplicableItemFactoryBindingKeys;
@@ -145,6 +154,12 @@ internal class ItemEnhancement : IGetKey, IToJson
     {
         RoItemPropertySet itemCharacteristics = new RoItemPropertySet()
         {
+            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
+            CanApplyArtifactBiasSlaying = CanApplyArtifactBiasSlaying,
+            CanApplyBlowsBonus = CanApplyBlowsBonus,
+            CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
+            CanApplySlayingBonus = CanApplySlayingBonus,
+
             BonusStrength = BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value,
             BonusIntelligence = BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value,
             BonusWisdom = BonusWisdomRoll == null ? 0 : Game.ComputeIntegerExpression(BonusWisdomRoll).Value,
@@ -297,6 +312,12 @@ internal class ItemEnhancement : IGetKey, IToJson
     {
         ItemEnhancementGameConfiguration itemEnhancementDefinition = new()
         {
+            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
+            CanApplyArtifactBiasSlaying = CanApplyArtifactBiasSlaying,
+            CanApplyBlowsBonus = CanApplyBlowsBonus,
+            CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
+            CanApplySlayingBonus = CanApplySlayingBonus,
+
             Key = Key,
             Value = Value,
             ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
@@ -484,6 +505,33 @@ internal class ItemEnhancement : IGetKey, IToJson
     #endregion
 
     #region ItemPropertySet Light-weight Virtual & Abstract Properties
+    /// <summary>
+    /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
+    /// </summary>
+    public virtual bool CanReflectBoltsAndArrows { get; } = false;
+
+    /// <summary>
+    /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
+    /// </summary>
+    public virtual bool CanApplyArtifactBiasSlaying { get; } = true;
+
+    /// <summary>
+    /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
+    /// </summary>
+    public virtual bool CanApplyBlessedArtifactBias { get; } = false;
+
+    /// <summary>
+    /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
+    /// </summary>
+    public virtual bool CanApplyBlowsBonus { get; } = false;
+
+    /// <summary>
+    /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual bool CanApplySlayingBonus { get; } = false;
+
     public virtual string? BonusStrengthRollExpression { get; } = null;
     public virtual string? BonusIntelligenceRollExpression { get; } = null;
     public virtual string? BonusWisdomRollExpression { get; } = null;

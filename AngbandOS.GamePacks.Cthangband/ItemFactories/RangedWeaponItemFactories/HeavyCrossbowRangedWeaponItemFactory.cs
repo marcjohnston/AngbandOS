@@ -22,7 +22,7 @@ public class HeavyCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (30, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShowModsCanApplyArtifactBiasSlayingAndBlowsBonusItemFactoryItemEnhancement);
     public override int Weight => 200;
     public override int MissileDamageMultiplier => 4;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]
@@ -47,15 +47,11 @@ public class HeavyCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
    };
 
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.RangedWeaponWieldSlot) };
-    public override bool CanApplyBlowsBonus => true;
-
     public override int PackSort => 32;
 
     public override bool CanProjectArrows => true;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
-    public override bool CanApplyArtifactBiasSlaying => false;
-
     public override int? RandomArtifactBonusDamageCeiling => 19;
     public override int? RandomArtifactBonusHitCeiling => 19;
 
@@ -80,6 +76,4 @@ public class HeavyCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearableOrWieldable => true;
-
-    public override bool CanApplySlayingBonus => true;
 }

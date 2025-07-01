@@ -243,11 +243,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool CanApplyBonusArmorClassMiscPower { get; set; } = false;
 
     /// <summary>
-    /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
-    /// </summary>
-    public virtual bool CanApplyBlowsBonus { get; set; } = false;
-
-    /// <summary>
     /// Returns an expression that represents the chance that an item that is thrown or fired will break.  Returns 10, or 10%, by default.  This
     /// property is used to bind the <see cref="BreakageChanceProbability"/> property during the bind phase.
     /// </summary>
@@ -448,13 +443,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool IsSmall { get; set; } = false; // TODO: This property is only valid when IsContainer.  The data type is horrible.
 
     /// <summary>
-    /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual bool CanApplySlayingBonus { get; set; } = false;
-
-    /// <summary>
     /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
     /// </summary>
     public virtual int BaseValue { get; set; } = 0;
@@ -490,11 +478,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool CanProvideSheathOfFire { get; set; } = false;
 
     /// <summary>
-    /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
-    /// </summary>
-    public virtual bool CanReflectBoltsAndArrows { get; set; } = false;
-
-    /// <summary>
     /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armor returns double the default.
     /// </summary>
     public virtual int RandartActivationChance { get; set; } = 3;
@@ -505,19 +488,9 @@ public class ItemFactoryGameConfiguration
     public virtual bool ProvidesSunlight { get; set; } = false;
 
     /// <summary>
-    /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
-    /// </summary>
-    public virtual bool CanApplyArtifactBiasSlaying { get; set; } = true;
-
-    /// <summary>
     /// Returns true, if an item of this factory can have random resistance bonus applied for biased artifacts.  Returns false for all items except for cloaks, soft armor and hard armor; which return true.
     /// </summary>
     public virtual bool CanApplyArtifactBiasResistance { get; set; } = true;
-
-    /// <summary>
-    /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
-    /// </summary>
-    public virtual bool CanApplyBlessedArtifactBias { get; set; } = false;
 
     /// <summary>
     /// Returns true, if an item of this factory can be eaten by a monster with the eat food attack effect.  Returns false for all items except food items; which return true.

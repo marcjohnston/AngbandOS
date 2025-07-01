@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MithrilPlateMailHardArmorItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -27,7 +27,7 @@ public class MithrilPlateMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Mithril Plate Mail~";
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidAndCanReflectBoltsAndArrowsItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -39,12 +39,8 @@ public class MithrilPlateMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;
     public override bool HatesAcid => true;
-
     public override bool CanProvideSheathOfElectricity => true;
-
     public override bool CanProvideSheathOfFire => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
     public override bool CanApplyArtifactBiasResistance => true;
 
     /// <summary>

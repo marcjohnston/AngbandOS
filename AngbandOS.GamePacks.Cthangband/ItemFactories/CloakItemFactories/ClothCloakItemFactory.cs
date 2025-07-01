@@ -10,10 +10,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ClothCloakItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
+    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
@@ -51,8 +52,6 @@ public class ClothCloakItemFactory : ItemFactoryGameConfiguration
     public override bool CanProvideSheathOfElectricity => true;
 
     public override bool CanProvideSheathOfFire => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
 
     public override bool CanApplyArtifactBiasResistance => true;
 

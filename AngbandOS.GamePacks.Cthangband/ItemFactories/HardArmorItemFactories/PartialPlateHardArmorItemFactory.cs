@@ -21,6 +21,7 @@ public class PartialPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Partial Plate Armor";
+    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
 
     public override int ArmorClass => 22;
     public override int Cost => 1200;
@@ -38,12 +39,8 @@ public class PartialPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;
     public override bool HatesAcid => true;
-
     public override bool CanProvideSheathOfElectricity => true;
-
     public override bool CanProvideSheathOfFire => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
     public override bool CanApplyArtifactBiasResistance => true;
 
     /// <summary>

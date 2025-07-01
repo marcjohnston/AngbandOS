@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ShadowCloakItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-  {
+    {
         (100, "3d5-3")
-  };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -52,8 +52,6 @@ public class ShadowCloakItemFactory : ItemFactoryGameConfiguration
     public override bool CanProvideSheathOfElectricity => true;
 
     public override bool CanProvideSheathOfFire => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
 
     public override bool CanApplyArtifactBiasResistance => true;
 

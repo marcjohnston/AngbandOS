@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
@@ -21,6 +21,7 @@ public class ChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Chain Mail";
+    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
 
     public override int ArmorClass => 14;
     public override int Cost => 750;
@@ -43,7 +44,6 @@ public class ChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
 
     public override bool CanProvideSheathOfFire => true;
 
-    public override bool CanReflectBoltsAndArrows => true;
     public override bool CanApplyArtifactBiasResistance => true;
 
     /// <summary>

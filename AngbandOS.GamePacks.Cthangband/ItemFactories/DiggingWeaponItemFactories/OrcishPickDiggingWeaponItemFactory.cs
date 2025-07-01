@@ -23,7 +23,7 @@ public class OrcishPickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
         (30, 4)
     };
     public override int InitialBonusTunnel => 2;
-    public override string? ItemEnhancementBindingKey => nameof(TunnellingItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(TunnellingAndCanApplySlayingBonusItemFactoryItemEnhancement);
     public override int Weight => 150;
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
@@ -67,6 +67,4 @@ public class OrcishPickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearableOrWieldable => true;
-
-    public override bool CanApplySlayingBonus => true;
 }

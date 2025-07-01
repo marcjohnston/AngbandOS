@@ -22,7 +22,7 @@ public class DragonHelmItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Helm";
 
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsTreasureItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsTreasureAndCanReflectBoltsAndArrowsItemFactoryItemEnhancement);
     public override int ArmorClass => 8;
     public override int Cost => 10000;
     public override int DamageDice => 1;
@@ -40,8 +40,6 @@ public class DragonHelmItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HeadWieldSlot) };
     public override int PackSort => 25;
     public override bool HatesAcid => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
 
     /// <summary>
     /// Returns true because broken armor should be stomped automatically. 
