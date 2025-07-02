@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AbilityItemEnhancementWeightedRandom : ItemEnhancementWeightedRandomGameConfiguration
 {
-    public override (string, int)[] NameAndWeightBindings => new (string, int)[]
+    public override (string?, int)[] NameAndWeightBindings => new (string?, int)[]
     {
         (nameof(FeatherFallItemItemEnhancement), 1),
         (nameof(FreeActionItemEnhancement), 1),
