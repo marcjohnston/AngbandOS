@@ -2216,6 +2216,10 @@ internal sealed class Item : IComparable<Item>
         {
             FixedArtifact.ApplyResistances(this);
         }
+        if (RandomPower is not null)
+        {
+            FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics.Merge(RandomPower.GenerateItemCharacteristics());
+        }
 
         if (fixedArtifact.Cost == 0)
         {
