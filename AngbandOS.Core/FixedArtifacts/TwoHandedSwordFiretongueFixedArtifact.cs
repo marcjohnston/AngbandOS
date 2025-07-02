@@ -11,29 +11,14 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
 {
     private TwoHandedSwordFiretongueFixedArtifact(Game game) : base(game) { }
     public override string? ItemEnhancementBindingKey => nameof(TwoHandedSwordFiretongueFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override string? RandomPowerItemEnhancementWeightedRandomBindingKey => nameof(FixedArtifactRandomPowerItemEnhancementWeightedRandom); public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Firetongue'";
     public override int Ac => 0;
     public override int Cost => 205000;
     public override int Dd => 4;
     public override int Ds => 6;
     public override int Level => 30;
-
     public override int Rarity => 180;
     public override int ToA => 0;
     public override int ToD => 21;

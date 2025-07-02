@@ -11,21 +11,8 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
 {
     private BroadSwordBrightbladeFixedArtifact(Game game) : base(game) { }
     public override string? ItemEnhancementBindingKey => nameof(BroadSwordBrightbladeFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
+    public override string? RandomPowerItemEnhancementWeightedRandomBindingKey => nameof(FixedArtifactRandomPowerItemEnhancementWeightedRandom);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Broad Sword 'Brightblade'";
     public override int Ac => 0;
@@ -33,7 +20,6 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 5;
     public override int Level => 20;
-
     public override int Rarity => 20;
     public override int ToA => 0;
     public override int ToD => 15;

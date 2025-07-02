@@ -11,12 +11,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
 {
     private SetOfCestiOfCombatFixedArtifact(Game game) : base(game) { }
     public override string? ItemEnhancementBindingKey => nameof(SetOfCestiOfCombatFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(CestiGlovesItemFactory);
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-    }
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Set of Cesti of Combat";
     public override int Ac => 5;

@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FixedArtifactItemEnhancementWeightedRandom : ItemEnhancementWeightedRandomGameConfiguration
 {
-    public override (string?, int)[] NameAndWeightBindings => new (string?, int)[]
+    public override (string, int)[] NameAndWeightBindings => new (string, int)[]
     {
         (nameof(ResistPoisonAndPoisonBiasItemEnhancement), 2 * 36), // 12/16
         (nameof(ResistPoisonAndNecromanticBiasItemEnhancement), 2 * 6), // 2/16

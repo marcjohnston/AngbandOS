@@ -14,19 +14,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
 
     protected override string BaseItemFactoryName => nameof(ScimitarWeaponItemFactory);
 
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override string? RandomPowerItemEnhancementWeightedRandomBindingKey => nameof(FixedArtifactRandomPowerItemEnhancementWeightedRandom);
     public override string Name => "The Scimitar 'Soulsword'";
     public override int Ac => 0;
     public override int Cost => 111111;

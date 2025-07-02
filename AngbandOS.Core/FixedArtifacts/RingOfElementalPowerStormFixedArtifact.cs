@@ -11,15 +11,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
 {
     private RingOfElementalPowerStormFixedArtifact(Game game) : base(game) { }
     public override string? ItemEnhancementBindingKey => nameof(RingOfElementalPowerStormFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(VilyaRingItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-    }
-
     public override string Name => "The Ring of Elemental Power (Storm)";
     public override int Ac => 0;
     public override int Cost => 300000;

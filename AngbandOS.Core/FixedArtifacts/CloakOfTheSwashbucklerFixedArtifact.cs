@@ -11,15 +11,8 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
 {
     private CloakOfTheSwashbucklerFixedArtifact(Game game) : base(game) { }
     public override string? ItemEnhancementBindingKey => nameof(CloakOfTheSwashbucklerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-    }
-
+    public override string? RandomPowerItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of the Swashbuckler";
     public override int Ac => 1;

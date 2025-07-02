@@ -33,4 +33,9 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool Speed => true;
     public override bool Str => true;
     public override bool Wis => true;
+    public override bool Feather => true;
+    public override bool FreeAct => true;
+    public override bool HoldLife => true;
+    public override bool SlowDigest => true;
+    public override bool Telepathy => true;
 }

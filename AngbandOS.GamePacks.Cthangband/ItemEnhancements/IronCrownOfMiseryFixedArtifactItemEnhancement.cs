@@ -20,4 +20,9 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool SeeInvis => true;
     public override bool Str => true;
     public override bool Telepathy => true;
+    public override bool Feather => true;
+    public override bool HoldLife => true;
+    public override int Radius => 3;
+    public override bool Regen => true;
+    public override bool SlowDigest => true;
 }

@@ -11,23 +11,9 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
 {
     private LightCrossbowOfDeathFixedArtifact(Game game) : base(game) { }
     public override string? ItemEnhancementBindingKey => nameof(LightCrossbowOfDeathFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LightCrossbowRangedWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
+    public override string? RandomPowerItemEnhancementWeightedRandomBindingKey => nameof(FixedArtifactRandomPowerItemEnhancementWeightedRandom);
     public string DescribeActivationEffect => "fire branding of bolts every 999 turns";
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Light Crossbow of Death";
     public override int Ac => 0;

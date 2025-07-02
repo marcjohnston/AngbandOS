@@ -11,17 +11,8 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
 {
     private GoldenCrownOfTheSunFixedArtifact(Game game) : base(game) { }
     public override string? ItemEnhancementBindingKey => nameof(GoldenCrownOfTheSunFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(GoldenCrownArmorItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
+    public override string? RandomPowerItemEnhancementWeightedRandomBindingKey => nameof(FixedArtifactItemEnhancementWeightedRandom);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Golden Crown of the Sun";
     public override int Ac => 0;
@@ -29,7 +20,6 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 1;
     public override int Level => 40;
-
     public override int Rarity => 40;
     public override int ToA => 15;
     public override int ToD => 0;

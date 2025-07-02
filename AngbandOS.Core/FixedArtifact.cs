@@ -27,6 +27,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
         ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
         ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
+        RandomPowerItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(RandomPowerItemEnhancementWeightedRandomBindingKey);
     }
     public string ToJson()
     {
@@ -39,8 +40,28 @@ internal abstract class FixedArtifact : IGetKey, IToJson
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
+
+    /// <summary>
+    /// Represents the <see cref="ItemEnhancement"/> that will always be applied to the fixed artifact.
+    /// </summary>
     public ItemEnhancement ItemEnhancement { get; private set; }
+
+    /// <summary>
+    /// Represents the binding key for the <see cref="ItemEnhancement"/> that will always be applied to the fixed artifact; or null, in which a default
+    /// <see cref="ItemEnhancement"/> will be provided.  This property is used to bind the <see cref="ItemEnhancement"/> property during the binding phase.
+    /// </summary>
     public virtual string? ItemEnhancementBindingKey { get; } = null;
+
+    /// <summary>
+    /// Represents the binding key for the <see cref="ItemEnhancementWeightedRandom"/> to apply a single enchanment to the fixed artifact; or null, if there are
+    /// no additional <see cref="ItemEnhancement"/> to be provided.  This property is used to bind the <see cref="RandomPowerItemEnhancementWeightedRandom"/> property during the binding phase.
+    /// </summary>
+    public virtual string? RandomPowerItemEnhancementWeightedRandomBindingKey { get; } = null;
+
+    /// <summary>
+    /// Represents the <see cref="ItemEnhancementWeightedRandom"/> that will always be applied to the fixed artifact.
+    /// </summary>
+    public ItemEnhancementWeightedRandom? RandomPowerItemEnhancementWeightedRandom { get; private set; } = null;
 
     /// <summary>
     /// Represents the quantity of this artifact currently in existence.  

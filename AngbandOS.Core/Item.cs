@@ -81,7 +81,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns an additional special power that is added for fixed artifacts and rare items.
     /// </summary>
-    public ItemEnhancement? RandomPower = null;
+    public ItemEnhancement? RandomPower = null; // TODO: Use the RandomPowerItemEnhancementWeightedRandom to replace this
 
     /// <summary>
     /// Returns the set of random power characteristics that was generated when the item received the random power.
@@ -2212,13 +2212,21 @@ internal sealed class Item : IComparable<Item>
         EnchantmentItemProperties.BonusHit = fixedArtifact.ToH;
         EnchantmentItemProperties.BonusDamage = fixedArtifact.ToD;
         Weight = fixedArtifact.Weight;
-        if (FixedArtifact != null)
-        {
-            FixedArtifact.ApplyResistances(this);
-        }
+        FixedArtifact.ApplyResistances(this);
+        
+        // TODO: This RandomPower is going away
         if (RandomPower is not null)
         {
             FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics.Merge(RandomPower.GenerateItemCharacteristics());
+        }
+
+        if (FixedArtifact.RandomPowerItemEnhancementWeightedRandom is not null)
+        {
+            ItemEnhancement? itemAdditiveBundle = FixedArtifact.RandomPowerItemEnhancementWeightedRandom.ChooseOrDefault();
+            if (itemAdditiveBundle != null)
+            {
+                FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
+            }
         }
 
         if (fixedArtifact.Cost == 0)
