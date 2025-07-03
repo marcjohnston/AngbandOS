@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
 {
     private DragonHelmOfPowerFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(DragonHelmOfPowerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(DragonHelmItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Dragon Helm of Power";
     public override int Ac => 8;
@@ -22,7 +18,6 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 3;
     public override int Level => 40;
-
     public override int Rarity => 12;
     public override int ToA => 20;
     public override int ToD => 0;

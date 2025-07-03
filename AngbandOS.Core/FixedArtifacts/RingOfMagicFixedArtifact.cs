@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfMagicFixedArtifact : FixedArtifact
 {
     private RingOfMagicFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(RingOfMagicFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BarahirRingItemFactory);
-
-
     public override string Name => "The Ring of Magic";
     public override int Ac => 0;
     public override int Cost => 75000;

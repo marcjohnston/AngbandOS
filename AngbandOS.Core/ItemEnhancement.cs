@@ -4,16 +4,22 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interface.Configuration;
-
 namespace AngbandOS.Core;
+
+/// <summary>
+/// Represents an interface for item enhancements.  This interface is used by the ItemEnhancementWeightedRandom so that it qualifies as an item enhancement.
+/// </summary>
+internal interface IItemEnhancement
+{
+    ItemEnhancement? GetItemEnhancement();
+}
 
 /// <summary>
 /// Represents a set of non-deterministic item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
 [Serializable]
-internal class ItemEnhancement : IGetKey, IToJson
+internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 {
     #region API
     protected readonly Game Game;
@@ -146,6 +152,12 @@ internal class ItemEnhancement : IGetKey, IToJson
         XtraMight = itemEnhancementGameConfiguration.XtraMight;
         XtraShots = itemEnhancementGameConfiguration.XtraShots;
     }
+
+    /// <summary>
+    /// Returns this <see cref="ItemEnhancement"/> object itself.  This method allows the <see cref="ItemEnhancement"/> and <see cref="ItemEnhancementWeightedRandom"/> to be specified in the <see cref="MappedItemEnhancement.ItemEnhancements"/>.
+    /// </summary>
+    /// <returns></returns>
+    public ItemEnhancement? GetItemEnhancement() => this;
 
     /// <summary>
     /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.

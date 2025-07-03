@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
 {
     private BattleAxeSpleenSlicerFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(BattleAxeSpleenSlicerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BattleAxePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe 'Spleen Slicer'";
     public override int Ac => 0;

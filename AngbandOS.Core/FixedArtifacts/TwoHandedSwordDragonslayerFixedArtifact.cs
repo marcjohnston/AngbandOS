@@ -10,22 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
 {
     private TwoHandedSwordDragonslayerFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(TwoHandedSwordDragonslayerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
     public override int Ac => 0;

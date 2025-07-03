@@ -10,8 +10,6 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
 {
     private StarEssenceOfPolarisFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(StarEssenceOfPolarisFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(StarEssenceGaladrielLightSourceItemFactory);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Polaris";
@@ -26,5 +24,4 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
     public override int ToD => 0;
     public override int ToH => 0;
     public override int Weight => 10;
-
 }

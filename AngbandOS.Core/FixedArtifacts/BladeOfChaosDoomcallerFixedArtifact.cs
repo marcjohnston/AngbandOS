@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 {
     private BladeOfChaosDoomcallerFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(BladeOfChaosDoomcallerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BladeOfChaosWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Blade of Chaos 'Doomcaller'";
     public override int Ac => 0;

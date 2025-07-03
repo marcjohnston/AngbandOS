@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 {
     private LargeLeatherShieldRawhideFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LargeLeatherShieldRawhideFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LargeLeatherShieldItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Large Leather Shield 'Rawhide'";
     public override int Ac => 4;

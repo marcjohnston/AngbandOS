@@ -10,8 +10,6 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
 {
     private ExecutionersSwordOfNyarlathotepFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(ExecutionersSwordOfNyarlathotepFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ExecutionersSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Executioner's Sword of Nyarlathotep";

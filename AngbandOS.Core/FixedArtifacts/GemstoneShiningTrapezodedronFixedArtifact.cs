@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
 {
     private GemstoneShiningTrapezodedronFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(GemstoneShiningTrapezodedronFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(GemstoneLightSourceItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Gemstone 'Shining Trapezodedron'";
     public override int Ac => 0;

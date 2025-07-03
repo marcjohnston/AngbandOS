@@ -10,10 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
 {
     private AdamantitePlateMailSoulkeeperFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(AdamantitePlateMailHardArmorItemFactory);
-
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";
     public override int Ac => 40;

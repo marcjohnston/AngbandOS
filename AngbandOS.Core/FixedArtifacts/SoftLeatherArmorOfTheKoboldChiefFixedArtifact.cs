@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SoftLeatherArmorOfTheKoboldChiefFixedArtifact : FixedArtifact
 {
     private SoftLeatherArmorOfTheKoboldChiefFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SoftLeatherArmorOfTheKoboldChiefFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(SoftLeatherSoftArmorItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Soft Leather Armor of the Kobold Chief";
     public override int Ac => 4;

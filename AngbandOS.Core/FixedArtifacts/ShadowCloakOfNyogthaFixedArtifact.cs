@@ -10,13 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfNyogthaFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(ShadowCloakOfNyogthaFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Shadow Cloak of Nyogtha";
     public override int Ac => 6;

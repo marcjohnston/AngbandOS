@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TridentOfWrathFixedArtifact : FixedArtifact
 {
     private TridentOfWrathFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(TridentOfWrathFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(TridentPolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Trident of Wrath";
     public override int Ac => 0;

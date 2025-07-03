@@ -10,16 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerFaithFixedArtifact : FixedArtifact
 {
     private DaggerFaithFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(DaggerFaithFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Faith'";
     public override int Ac => 0;
@@ -27,8 +18,6 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 4;
     public override int Level => 4;
-
-
     public override int Rarity => 10;
     public override int ToA => 0;
     public override int ToD => 6;

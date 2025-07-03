@@ -10,29 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
 {
     private IronHelmTerrorMaskFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(IronHelmTerrorMaskFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(IronHelmItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior)
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.EnchantmentItemProperties.IsCursed = true;
-            item.EnchantmentItemProperties.HeavyCurse = true;
-            item.EnchantmentItemProperties.Aggravate = true;
-            item.EnchantmentItemProperties.DreadCurse = true;
-            return;
-        }
-    }
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";
     public override int Ac => 5;

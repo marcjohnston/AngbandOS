@@ -10,22 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
 {
     private LongBowOfSerpentsFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LongBowOfSerpentsFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LongBowRangedWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Long Bow of Serpents";
     public override int Ac => 0;

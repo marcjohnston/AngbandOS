@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfTheShoggothFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(ShadowCloakOfTheShoggothFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Shadow Cloak of the Shoggoth";
     public override int Ac => 6;

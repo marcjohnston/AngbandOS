@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class QuarterstaffEririlFixedArtifact : FixedArtifact
 {
     private QuarterstaffEririlFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(QuarterstaffEririlFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff 'Eriril'";
     public override int Ac => 0;
@@ -22,7 +18,6 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 9;
     public override int Level => 20;
-
     public override int Rarity => 18;
     public override int ToA => 0;
     public override int ToD => 5;

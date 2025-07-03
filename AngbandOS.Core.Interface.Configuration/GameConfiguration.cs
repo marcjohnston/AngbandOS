@@ -106,6 +106,7 @@ public class GameConfiguration
         gameConfiguration.BoolPosFunctions = LoadFromAssembly<BoolPosFunctionGameConfiguration>(assembly);
         gameConfiguration.RechargeItemScripts = LoadFromAssembly<RechargeItemScriptGameConfiguration>(assembly);
         gameConfiguration.TeleportSelfScripts = LoadFromAssembly<TeleportSelfScriptGameConfiguration>(assembly);
+        gameConfiguration.MappedItemEnhancements = LoadFromAssembly<MappedItemEnhancementGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -251,7 +252,8 @@ public class GameConfiguration
     public virtual BoolPosFunctionGameConfiguration[]? BoolPosFunctions { get; set; } = null;
     public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
     public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
-    
+    public virtual MappedItemEnhancementGameConfiguration[]? MappedItemEnhancements { get; set; } = null;
+
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {
         10, 25, 45, 70, 100, 140, 200, 280, 380, 500, 650, 850, 1100, 1400, 1800, 2300, 2900, 3600, 4400, 5400,

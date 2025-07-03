@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SabreOfXuraFixedArtifact : FixedArtifact
 {
     private SabreOfXuraFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SabreOfXuraFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(SabreWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Sabre of Xura";
     public override int Ac => 0;

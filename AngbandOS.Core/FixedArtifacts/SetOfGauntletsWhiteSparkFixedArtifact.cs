@@ -10,8 +10,6 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsWhiteSparkFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SetOfGauntletsWhiteSparkFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets 'White Spark'";

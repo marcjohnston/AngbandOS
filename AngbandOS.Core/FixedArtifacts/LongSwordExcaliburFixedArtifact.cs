@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordExcaliburFixedArtifact : FixedArtifact
 {
     private LongSwordExcaliburFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LongSwordExcaliburFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword 'Excalibur'";
     public override int Ac => 0;
@@ -22,7 +18,6 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     public override int Dd => 4;
     public override int Ds => 5;
     public override int Level => 20;
-
     public override int Rarity => 120;
     public override int ToA => 0;
     public override int ToD => 25;

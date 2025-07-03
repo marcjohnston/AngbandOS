@@ -10,8 +10,6 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ScytheOfGharneFixedArtifact : FixedArtifact
 {
     private ScytheOfGharneFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(ScytheOfGharneFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ScythePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Scythe of G'harne";
@@ -20,7 +18,6 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact
     public override int Dd => 5;
     public override int Ds => 3;
     public override int Level => 40;
-
     public override int Rarity => 8;
     public override int ToA => 10;
     public override int ToD => 8;

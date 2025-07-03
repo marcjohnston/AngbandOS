@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SmallSwordStingFixedArtifact : FixedArtifact
 {
     private SmallSwordStingFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SmallSwordStingFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Small Sword 'Sting'";
     public override int Ac => 0;
@@ -26,7 +18,6 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 6;
     public override int Level => 20;
-
     public override int Rarity => 15;
     public override int ToA => 0;
     public override int ToD => 8;

@@ -255,6 +255,7 @@ internal class SingletonRepository
         RegisterInterface<IEnhancementScript>();
         RegisterInterface<IGameCommandScript>();
         RegisterInterface<IIntValue>();
+        RegisterInterface<IItemEnhancement>();
         RegisterInterface<IMonsterSelector>();
         RegisterInterface<ITextValue>();
         RegisterInterface<IReadScrollOrUseStaffScript>();
@@ -338,6 +339,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ItemFilter, ItemFilterGameConfiguration>(gameConfiguration.ItemFilters);
         LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors);
         LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts);
+        LoadFromConfiguration<MappedItemEnhancement, MappedItemEnhancementGameConfiguration>(gameConfiguration.MappedItemEnhancements);
         LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets);
         LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks);
         LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets);

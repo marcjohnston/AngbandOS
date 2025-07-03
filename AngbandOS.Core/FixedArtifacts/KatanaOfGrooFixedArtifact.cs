@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class KatanaOfGrooFixedArtifact : FixedArtifact
 {
     private KatanaOfGrooFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(KatanaOfGrooFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(KatanaWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Katana of Groo";
     public override int Ac => 0;

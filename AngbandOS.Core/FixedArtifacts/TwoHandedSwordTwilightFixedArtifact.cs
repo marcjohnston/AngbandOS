@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
 {
     private TwoHandedSwordTwilightFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(TwoHandedSwordTwilightFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Twilight'";
     public override int Ac => 0;
@@ -22,7 +18,6 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     public override int Dd => 4;
     public override int Ds => 6;
     public override int Level => 30;
-
     public override int Rarity => 15;
     public override int ToA => -50;
     public override int ToD => -60;

@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
 {
     private PairOfMetalShodBootsOfTheBlackReaverFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(PairOfMetalShodBootsOfTheBlackReaverFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MetalShodBootsItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Pair of Metal Shod Boots of the Black Reaver";
     public override int Ac => 6;

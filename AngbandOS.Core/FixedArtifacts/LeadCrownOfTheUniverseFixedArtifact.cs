@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 {
     private LeadCrownOfTheUniverseFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LeadCrownOfTheUniverseFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LeadCrownArmorItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Lead Crown of the Universe";
     public override int Ac => 0;
@@ -22,8 +18,6 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 1;
     public override int Level => 100;
-
-
     public override int Rarity => 1;
     public override int ToA => 0;
     public override int ToD => 0;

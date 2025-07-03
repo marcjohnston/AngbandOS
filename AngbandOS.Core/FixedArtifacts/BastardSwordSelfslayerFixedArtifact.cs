@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
 {
     private BastardSwordSelfSlayerFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(BastardSwordSelfSlayerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BastardSwordSwordWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Bastard Sword 'Selfslayer'";
     public override int Ac => 0;

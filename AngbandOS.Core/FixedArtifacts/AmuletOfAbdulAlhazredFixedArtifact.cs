@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact
 {
     private AmuletOfAbdulAlhazredFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(AmuletOfAbdulAlhazredFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(IngweAmuletItemFactory);
-
-
     public override string Name => "The Amulet of Abdul Alhazred";
     public override int Ac => 0;
     public override int Cost => 90000;

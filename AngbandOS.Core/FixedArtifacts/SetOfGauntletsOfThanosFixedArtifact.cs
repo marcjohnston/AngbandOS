@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfThanosFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SetOfGauntletsOfThanosFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Thanos";
     public override int Ac => 2;

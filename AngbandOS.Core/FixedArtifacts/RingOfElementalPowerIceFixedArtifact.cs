@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact
 {
     private RingOfElementalPowerIceFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(RingOfElementalPowerIceFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(NenyaRingItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-    }
-
     public override string Name => "The Ring of Elemental Power (Ice)";
     public override int Ac => 0;
     public override int Cost => 200000;

@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
 {
     private SetOfLeatherGlovesCalfskinFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SetOfLeatherGlovesCalfskinFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LeatherGlovesItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Leather Gloves 'Calfskin'";
     public override int Ac => 1;

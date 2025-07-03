@@ -7,19 +7,10 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
+internal class LucerneHammerJusticeFixedArtifact : FixedArtifact
 {
-    private TheLucerneHammerJusticeFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(TheLucerneHammerJusticeFixedArtifactItemEnhancement);
-
+    private LucerneHammerJusticeFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LucerneHammerHaftedWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Lucerne Hammer 'Justice'";
     public override int Ac => 0;
@@ -27,7 +18,6 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 5;
     public override int Level => 20;
-
     public override int Rarity => 15;
     public override int ToA => 8;
     public override int ToD => 6;

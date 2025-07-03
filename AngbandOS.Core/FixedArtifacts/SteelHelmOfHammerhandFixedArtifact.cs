@@ -10,10 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
 {
     private SteelHelmOfHammerhandFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SteelHelmOfHammerhandFixedArtifactItemEnhancement);
     protected override string BaseItemFactoryName => nameof(SteelHelmItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Steel Helm of Hammerhand";
     public override int Ac => 6;

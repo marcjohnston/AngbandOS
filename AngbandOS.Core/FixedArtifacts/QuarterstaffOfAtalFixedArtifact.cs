@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
 {
     private QuarterstaffOfAtalFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(QuarterstaffOfAtalFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-    }
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff of Atal";
     public override int Ac => 0;
@@ -26,7 +18,6 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 9;
     public override int Level => 30;
-
     public override int Rarity => 105;
     public override int ToA => 0;
     public override int ToD => 13;

@@ -10,8 +10,6 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SpearOfDestinyFixedArtifact : FixedArtifact
 {
     private SpearOfDestinyFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SpearOfDestinyFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear of Destiny";
@@ -20,7 +18,6 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 6;
     public override int Level => 15;
-
     public override int Rarity => 45;
     public override int ToA => 0;
     public override int ToD => 15;

@@ -79,11 +79,6 @@ internal sealed class Item : IComparable<Item>
     public RoItemPropertySet? RandomArtifactItemCharacteristics = null;
 
     /// <summary>
-    /// Returns an additional special power that is added for fixed artifacts and rare items.
-    /// </summary>
-    public ItemEnhancement? RandomPower = null;
-
-    /// <summary>
     /// Returns the set of random power characteristics that was generated when the item received the random power.
     /// </summary>
     private RoItemPropertySet? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
@@ -187,7 +182,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.EnchantmentItemProperties = EnchantmentItemProperties.Clone();
         clonedItem.OverrideItemCharacteristics = OverrideItemCharacteristics.Clone();
         clonedItem.RandomArtifactItemCharacteristics = RandomArtifactItemCharacteristics;
-        clonedItem.RandomPower = RandomPower;
         clonedItem.Discount = Discount;
         clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
         clonedItem.Inscription = Inscription;
@@ -2204,7 +2198,8 @@ internal sealed class Item : IComparable<Item>
 
         fixedArtifact.CurNum = 1;
         FixedArtifact = fixedArtifact;
-        FixedArtifactItemCharacteristics = fixedArtifact.ItemEnhancement.GenerateItemCharacteristics();
+
+        // TODO: These should be deltas on the item enhancements
         ArmorClass = fixedArtifact.Ac;
         DamageDice = fixedArtifact.Dd;
         DamageSides = fixedArtifact.Ds;
@@ -2212,20 +2207,69 @@ internal sealed class Item : IComparable<Item>
         EnchantmentItemProperties.BonusHit = fixedArtifact.ToH;
         EnchantmentItemProperties.BonusDamage = fixedArtifact.ToD;
         Weight = fixedArtifact.Weight;
-        if (FixedArtifact != null)
+
+        // Retrieve all of the mapped item enhancements for the LINQ query.
+        MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
+
+        // A => Fixed Artifact
+        // B => Character Class
+
+        // Query for the applicable item enhancement.
+        MappedItemEnhancement? mappedItemEnhancement = allMappedItemEnhancements
+            .SingleOrDefault(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(fixedArtifact.GetKey)) && // Must match the fixed artifact
+                                                       (_mappedItemEnhancement.CharacterClassBindingKeys is not null && _mappedItemEnhancement.CharacterClassBindingKeys.Contains(Game.BaseCharacterClass.GetKey))); // Must match the character class
+
+        if (mappedItemEnhancement is null)
         {
-            FixedArtifact.ApplyResistances(this);
+            // Check the mappings for a and b and detect ambiguity.
+            MappedItemEnhancement? aMappedItemEnhancement = allMappedItemEnhancements
+                .SingleOrDefault(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(fixedArtifact.GetKey)) && // Must match the fixed artifact
+                                                           (_mappedItemEnhancement.CharacterClassBindingKeys is null)); // Wildcard match for the character class
+
+            MappedItemEnhancement? bMappedItemEnhancement = allMappedItemEnhancements
+                .SingleOrDefault(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is null) && // Wilcard match for the fixed artifact
+                                                           (_mappedItemEnhancement.CharacterClassBindingKeys is not null && _mappedItemEnhancement.CharacterClassBindingKeys.Contains(Game.BaseCharacterClass.GetKey))); // Must match the character class
+
+            if (aMappedItemEnhancement is not null && bMappedItemEnhancement is not null)
+            {
+                throw new Exception($"Ambigious mapped item enhancement for fixed artifact {fixedArtifact.GetKey} and character class {Game.BaseCharacterClass.GetKey}.");
+            }
+            else if (aMappedItemEnhancement is not null)
+            {
+                mappedItemEnhancement = aMappedItemEnhancement;
+            }
+            else
+            {
+                mappedItemEnhancement = bMappedItemEnhancement;
+            }
         }
-        if (RandomPower is not null)
+        if (mappedItemEnhancement is null)
         {
-            FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics.Merge(RandomPower.GenerateItemCharacteristics());
+            mappedItemEnhancement = allMappedItemEnhancements.SingleOrDefault(_mappedItemEnhancement => _mappedItemEnhancement.FixedArtifactBindingKeys is null && _mappedItemEnhancement.CharacterClassBindingKeys is null);
+        }
+
+        // Check to see if we found an applicable mapped item enhancement and check to see if there are any attached item enhancements.
+        FixedArtifactItemCharacteristics = new ItemEnhancement(Game).GenerateItemCharacteristics(); // TODO: This is ugly but we must have something to merge.
+        if (mappedItemEnhancement is not null && mappedItemEnhancement.ItemEnhancements is not null)
+        {
+            // Merge all of the applicable item enhancements.
+            foreach (IItemEnhancement itemEnhancementAsInterface in mappedItemEnhancement.ItemEnhancements)
+            {
+                ItemEnhancement? itemEnhancement = itemEnhancementAsInterface.GetItemEnhancement();
+
+                // If it was a weighted random, no item enhancement might have been selected because null item enhancements can be assigned weights.
+                if (itemEnhancement is not null)
+                {
+                    FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
+                }
+            }
         }
 
         if (fixedArtifact.Cost == 0)
         {
             IsBroken = true;
         }
-        Game.TreasureRating += fixedArtifact.ItemEnhancement.TreasureRating;
+        Game.TreasureRating += FixedArtifactItemCharacteristics.TreasureRating;
         Game.SpecialTreasure = true;
         return true;
     }

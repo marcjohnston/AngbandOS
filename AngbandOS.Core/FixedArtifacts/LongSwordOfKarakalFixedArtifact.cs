@@ -10,13 +10,8 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
 {
     private LongSwordOfKarakalFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LongSwordOfKarakalFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
-
-
     public string DescribeActivationEffect => "a getaway every 35 turns";
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Karakal";
     public override int Ac => 0;
@@ -24,7 +19,6 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 5;
     public override int Level => 20;
-
     public override int Rarity => 30;
     public override int ToA => 0;
     public override int ToD => 12;

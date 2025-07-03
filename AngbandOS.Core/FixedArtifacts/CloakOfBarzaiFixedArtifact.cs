@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakOfBarzaiFixedArtifact : FixedArtifact
 {
     private CloakOfBarzaiFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(CloakOfBarzaiFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of Barzai";
     public override int Ac => 1;

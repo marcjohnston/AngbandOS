@@ -25,8 +25,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public void Bind()
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
-        ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
-        ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
     }
     public string ToJson()
     {
@@ -39,8 +37,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
-    public ItemEnhancement ItemEnhancement { get; private set; }
-    public virtual string? ItemEnhancementBindingKey { get; } = null;
 
     /// <summary>
     /// Represents the quantity of this artifact currently in existence.  

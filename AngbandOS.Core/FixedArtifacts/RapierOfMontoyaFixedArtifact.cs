@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RapierOfMontoyaFixedArtifact : FixedArtifact
 {
     private RapierOfMontoyaFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(RapierOfMontoyaFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(RapierWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Rapier of Montoya";
     public override int Ac => 0;
@@ -22,7 +18,6 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override int Ds => 6;
     public override int Level => 15;
-
     public override int Rarity => 8;
     public override int ToA => 0;
     public override int ToD => 19;

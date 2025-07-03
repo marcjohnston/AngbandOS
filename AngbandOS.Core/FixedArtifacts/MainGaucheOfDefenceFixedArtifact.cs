@@ -10,22 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
 {
     private MainGaucheOfDefenceFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MainGaucheOfDefenceFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MainGaucheWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Main Gauche of Defence";
     public override int Ac => 0;

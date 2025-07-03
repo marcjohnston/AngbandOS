@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LanceSkewerFixedArtifact : FixedArtifact
 {
     private LanceSkewerFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LanceSkewerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LancePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Lance 'Skewer'";
     public override int Ac => 0;

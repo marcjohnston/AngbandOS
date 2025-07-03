@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
 {
     private PowerDragonScaleMailBladeturnerFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";
     public override int Ac => 50;

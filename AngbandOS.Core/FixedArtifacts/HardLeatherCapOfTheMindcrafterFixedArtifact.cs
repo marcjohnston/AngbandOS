@@ -10,14 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 {
     private HardLeatherCapOfTheMindcrafterFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(HardLeatherCapOfTheMindcrafterFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(HardLeatherCapHelmItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "The Hard Leather Cap of the Mindcrafter";
     public override int Ac => 2;

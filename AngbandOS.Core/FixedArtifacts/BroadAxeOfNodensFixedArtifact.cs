@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
 {
     private BroadAxeOfNodensFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(BroadAxeOfNodensFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BroadAxePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Broad Axe of Nodens";
     public override int Ac => 0;

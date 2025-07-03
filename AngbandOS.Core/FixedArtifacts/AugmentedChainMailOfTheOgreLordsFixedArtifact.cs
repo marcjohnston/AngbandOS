@@ -10,16 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
 {
     private AugmentedChainMailOfTheOgreLordsFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(AugmentedChainMailHardArmorItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Augmented Chain Mail of the Ogre Lords";
     public override int Ac => 16;

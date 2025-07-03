@@ -10,23 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
 {
     private LongSwordVorpalBladeFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LongSwordVorpalBladeFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
-
-
-    /// <summary>
-    /// Returns a 1-in-3 chance for the long sword of vorpal cutting.
-    /// </summary>
     public override int VorpalExtraDamage1InChance => 3;
-
-    /// <summary>
-    /// Returns a 1-in-2 chance for the long sword of vorpal to have extra attacks.
-    /// </summary>
     public override int VorpalExtraAttacks1InChance => 2;
-
     public override bool IsVorpalBlade => true;
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword 'Vorpal Blade'";
     public override int Ac => 0;
@@ -34,7 +21,6 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     public override int Dd => 5;
     public override int Ds => 5;
     public override int Level => 50;
-
     public override int Rarity => 30;
     public override int ToA => 0;
     public override int ToD => 32;

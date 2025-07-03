@@ -10,17 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class WarHammerMjolnirFixedArtifact : FixedArtifact
 {
     private WarHammerMjolnirFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(WarHammerMjolnirFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(WarHammerHaftedWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The War Hammer 'Mjolnir'";
     public override int Ac => 0;

@@ -10,16 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
 {
     private MetalScaleMailOfTheOrcsFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MetalScaleMailHardArmorItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Scale Mail of the Orcs";
     public override int Ac => 15;

@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
 {
     private MultiHuedDragonScaleMailRazorbackFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MultiHuedDragonScaleMailItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";
     public override int Ac => 30;
@@ -22,8 +18,6 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 4;
     public override int Level => 90;
-
-
     public override int Rarity => 9;
     public override int ToA => 25;
     public override int ToD => 0;

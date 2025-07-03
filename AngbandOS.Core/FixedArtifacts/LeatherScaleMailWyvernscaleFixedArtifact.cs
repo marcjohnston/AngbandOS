@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
 {
     private LeatherScaleMailWyvernscaleFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LeatherScaleMailSoftArmorItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Leather Scale Mail 'Wyvernscale'";
     public override int Ac => 11;

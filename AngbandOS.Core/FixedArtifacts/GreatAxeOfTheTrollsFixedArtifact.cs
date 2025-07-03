@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
 {
     private GreatAxeOfTheTrollsFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(GreatAxeOfTheTrollsFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(GreatAxePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Great Axe of the Trolls";
     public override int Ac => 0;

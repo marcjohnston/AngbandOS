@@ -10,23 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
 {
     private LongSwordOfEverflameFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LongSwordOfEverflameFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Everflame";
     public override int Ac => 0;
@@ -34,7 +18,6 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 5;
     public override int Level => 20;
-
     public override int Rarity => 40;
     public override int ToA => 5;
     public override int ToD => 15;

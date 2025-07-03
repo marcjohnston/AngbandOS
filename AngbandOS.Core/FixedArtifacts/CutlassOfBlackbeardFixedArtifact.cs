@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
 {
     private CutlassOfBlackbeardFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(CutlassOfBlackbeardFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(CutlassWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Cutlass of Blackbeard";
     public override int Ac => 0;

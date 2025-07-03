@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
 {
     private BattleAxeOfNKaiFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(BattleAxeOfNKaiFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BattleAxePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe of N'Kai";
     public override int Ac => 0;

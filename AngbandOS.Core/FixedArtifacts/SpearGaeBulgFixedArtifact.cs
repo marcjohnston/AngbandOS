@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SpearGaeBulgFixedArtifact : FixedArtifact
 {
     private SpearGaeBulgFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SpearGaeBulgFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear 'Gae Bulg'";
     public override int Ac => 0;

@@ -10,17 +10,8 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerCharityFixedArtifact : FixedArtifact
 {
     private DaggerCharityFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(DaggerCharityFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
     public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Charity'";
     public override int Ac => 0;

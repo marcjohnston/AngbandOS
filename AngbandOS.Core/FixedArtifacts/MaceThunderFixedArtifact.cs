@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MaceThunderFixedArtifact : FixedArtifact
 {
     private MaceThunderFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MaceThunderFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mace 'Thunder'";
     public override int Ac => 0;

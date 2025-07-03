@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GlaiveOfPainFixedArtifact : FixedArtifact
 {
     private GlaiveOfPainFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(GlaiveOfPainFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(GlaivePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Glaive of Pain";
     public override int Ac => 0;

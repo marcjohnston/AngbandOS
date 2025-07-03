@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MorningStarFirestarterFixedArtifact : FixedArtifact
 {
     private MorningStarFirestarterFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MorningStarFirestarterFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Morning Star 'Firestarter'";
     public override int Ac => 0;
@@ -22,8 +18,6 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 6;
     public override int Level => 20;
-
-
     public override int Rarity => 15;
     public override int ToA => 2;
     public override int ToD => 7;

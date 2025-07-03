@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
 {
     private LargeMetalShieldOfStabilityFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LargeMetalShieldOfStabilityFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LargeMetalShieldItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Large Metal Shield of Stability";
     public override int Ac => 5;

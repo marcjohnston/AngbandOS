@@ -10,13 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
 {
     private TridentOfTheGnorriFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(TridentOfTheGnorriFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(TridentPolearmWeaponItemFactory);
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-    }
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Trident of the Gnorri";
     public override int Ac => 0;

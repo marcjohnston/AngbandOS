@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
 {
     private MetalCapOfHolinessFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MetalCapOfHolinessFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MetalCapHelmItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Cap of Holiness";
     public override int Ac => 3;

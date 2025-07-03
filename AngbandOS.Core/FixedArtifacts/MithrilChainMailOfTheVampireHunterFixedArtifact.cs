@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
 {
     private MithrilChainMailOfTheVampireHunterFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MithrilChainMailHardArmorItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
     public override int Ac => 28;

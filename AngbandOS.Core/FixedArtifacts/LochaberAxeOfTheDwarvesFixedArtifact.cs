@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
 {
     private LochaberAxeOfTheDwarvesFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LochaberAxePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Lochaber Axe of the Dwarves";
     public override int Ac => 0;

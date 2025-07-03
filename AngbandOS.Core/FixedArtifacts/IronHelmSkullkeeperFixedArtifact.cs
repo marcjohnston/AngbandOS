@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
 {
     private IronHelmSkullkeeperFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(IronHelmSkullkeeperFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(IronHelmItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Skullkeeper'";
     public override int Ac => 5;

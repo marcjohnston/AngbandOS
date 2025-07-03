@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongBowSureshotFixedArtifact : FixedArtifact
 {
     private LongBowSureshotFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(LongBowSureshotFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(LongBowRangedWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Long Bow 'Sureshot'";
     public override int Ac => 0;

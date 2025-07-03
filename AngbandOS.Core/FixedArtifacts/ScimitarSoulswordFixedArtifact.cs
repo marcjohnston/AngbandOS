@@ -10,22 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ScimitarSoulswordFixedArtifact : FixedArtifact
 {
     private ScimitarSoulswordFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(ScimitarSoulswordFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ScimitarWeaponItemFactory);
-
-
-    public override void ApplyResistances(Item item)
-    {
-        if (Game.DieRoll(2) == 1)
-        {
-            item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-        }
-        else
-        {
-            item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-        }
-    }
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Scimitar 'Soulsword'";
     public override int Ac => 0;

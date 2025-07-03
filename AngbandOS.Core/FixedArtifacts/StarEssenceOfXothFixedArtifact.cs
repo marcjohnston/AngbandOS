@@ -10,8 +10,6 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfXothFixedArtifact : FixedArtifact
 {
     private StarEssenceOfXothFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(StarEssenceOfXothFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(StarEssenceElendilLightSourceItemFactory);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Xoth";

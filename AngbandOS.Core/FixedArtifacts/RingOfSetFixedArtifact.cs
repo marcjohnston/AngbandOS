@@ -10,17 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfSetFixedArtifact : FixedArtifact
 {
     private RingOfSetFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(RingOfSetFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(PowerRingItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.RandomPower = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(AbilityItemEnhancementWeightedRandom)).Choose();
-
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Ring of Set";
     public override int Ac => 0;

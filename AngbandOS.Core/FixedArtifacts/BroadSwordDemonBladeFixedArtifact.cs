@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
 {
     private BroadSwordDemonBladeFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(BroadSwordDemonBladeFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Broad Sword 'Demon Blade'";
     public override int Ac => 0;

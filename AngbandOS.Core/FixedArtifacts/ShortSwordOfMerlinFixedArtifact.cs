@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
 {
     private ShortSwordOfMerlinFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(ShortSwordOfMerlinFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Short Sword of Merlin";
     public override int Ac => 0;

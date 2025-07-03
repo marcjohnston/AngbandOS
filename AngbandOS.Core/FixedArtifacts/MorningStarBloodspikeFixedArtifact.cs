@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
 {
     private MorningStarBloodspikeFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MorningStarBloodspikeFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Morning Star 'Bloodspike'";
     public override int Ac => 0;

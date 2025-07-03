@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
 {
     private MetalBrigandineArmorOfSerpentsFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(MetalBrigandineHardArmorItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Brigandine Armor of Serpents";
     public override int Ac => 19;

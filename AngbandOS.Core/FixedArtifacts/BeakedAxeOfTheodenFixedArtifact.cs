@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact
 {
     private BeakedAxeOfTheodenFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(BeakedAxeOfTheodenFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(BeakedAxePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Beaked Axe of Theoden";
     public override int Ac => 0;

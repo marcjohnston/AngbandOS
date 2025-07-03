@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class HalberdArmorbaneFixedArtifact : FixedArtifact
 {
     private HalberdArmorbaneFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(HalberdArmorbaneFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(HalberdPolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Halberd 'Armorbane'";
     public override int Ac => 0;
@@ -22,7 +18,6 @@ internal class HalberdArmorbaneFixedArtifact : FixedArtifact
     public override int Dd => 3;
     public override int Ds => 5;
     public override int Level => 20;
-
     public override int Rarity => 8;
     public override int ToA => 0;
     public override int ToD => 9;

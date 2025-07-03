@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
 {
     private NecklaceOfTheDwarvesFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(NecklaceOfTheDwarvesFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(NecklaceAmuletItemFactory);
-
-
     public override string Name => "The Necklace of the Dwarves";
     public override int Ac => 0;
     public override int Cost => 75000;
@@ -22,7 +18,6 @@ internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
     public override int Ds => 0;
     public override bool HasOwnType => true;
     public override int Level => 70;
-
     public override int Rarity => 50;
     public override int ToA => 0;
     public override int ToD => 0;

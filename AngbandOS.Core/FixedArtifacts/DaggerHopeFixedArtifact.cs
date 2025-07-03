@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerHopeFixedArtifact : FixedArtifact
 {
     private DaggerHopeFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(DaggerHopeFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Hope'";
     public override int Ac => 0;

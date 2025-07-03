@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
 {
     private FullPlateArmorOfTheGodsFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(FullPlateArmorOfTheGodsFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(FullPlateHardArmorItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Full Plate Armor of the Gods";
     public override int Ac => 25;

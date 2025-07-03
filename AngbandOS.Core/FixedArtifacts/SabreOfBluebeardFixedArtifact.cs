@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SabreOfBluebeardFixedArtifact : FixedArtifact
 {
     private SabreOfBluebeardFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(SabreOfBluebeardFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(SabreWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Sabre of Bluebeard";
     public override int Ac => 0;

@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
 {
     private PairOfSoftLeatherBootsOfDancingFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(SoftLeatherBootsItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Pair of Soft Leather Boots of Dancing";
     public override int Ac => 2;

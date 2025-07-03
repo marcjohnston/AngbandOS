@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerOfAssassinFixedArtifact : FixedArtifact
 {
     private DaggerOfAssassinFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(DaggerOfAssassinFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger of Assassin";
     public override int Ac => 0;

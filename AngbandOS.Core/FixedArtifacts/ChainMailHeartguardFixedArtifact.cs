@@ -10,15 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 {
     private ChainMailHeartguardFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(ChainMailHeartguardFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(ChainMailHardArmorItemFactory);
-
-    public override void ApplyResistances(Item item)
-    {
-        item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
-    }
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Chain Mail 'Heartguard'";
     public override int Ac => 14;

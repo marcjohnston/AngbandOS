@@ -9,12 +9,8 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
 {
-    private MightyHammerOfWorldsFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(MightyHammerOfWorldsFixedArtifactItemEnhancement);
-
+    private MightyHammerOfWorldsFixedArtifact(Game game) : base(game) { }   
     protected override string BaseItemFactoryName => nameof(MightyHammerHaftedWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mighty Hammer of Worlds";
     public override int Ac => 0;

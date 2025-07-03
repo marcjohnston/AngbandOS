@@ -10,11 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PikeOfTepesFixedArtifact : FixedArtifact
 {
     private PikeOfTepesFixedArtifact(Game game) : base(game) { }
-    public override string? ItemEnhancementBindingKey => nameof(PikeOfTepesFixedArtifactItemEnhancement);
-
     protected override string BaseItemFactoryName => nameof(PikePolearmWeaponItemFactory);
-
-
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Pike of Tepes";
     public override int Ac => 0;
@@ -22,7 +18,6 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override int Ds => 5;
     public override int Level => 20;
-
     public override int Rarity => 15;
     public override int ToA => 10;
     public override int ToD => 12;
