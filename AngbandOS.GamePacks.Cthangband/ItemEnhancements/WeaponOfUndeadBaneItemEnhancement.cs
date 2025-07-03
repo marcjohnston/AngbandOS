@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfUndeadBaneItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 8000;
+    public override int Value => 8000;
     public override string? FriendlyName => "of Undead Bane";
     public override string? BonusWisdomRollExpression => "1d2";
     public override int TreasureRating => 24;

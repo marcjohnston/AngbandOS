@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BootsWingedItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 250;
+    public override int Value => 250;
     public override bool Feather => true;
     public override string? FriendlyName => "(Winged)";
     public override int TreasureRating => 7;

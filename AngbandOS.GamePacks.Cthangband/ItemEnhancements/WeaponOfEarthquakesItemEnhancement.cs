@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfEarthquakesItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 4000;
+    public override int Value => 4000;
     public override string? FriendlyName => "of Earthquakes";
     public override bool Impact => true;
     public override string? BonusTunnelRollExpression => "1d3";

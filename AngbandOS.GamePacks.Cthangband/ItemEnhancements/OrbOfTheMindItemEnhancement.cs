@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class OrbOfTheMindItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 1000;
+    public override int Value => 1000;
     public override string? FriendlyName => "of the Mind";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

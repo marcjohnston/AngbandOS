@@ -11,7 +11,7 @@ public class WeaponPlanarWeaponItemEnhancement : ItemEnhancementGameConfiguratio
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
     public override string? ActivationName => nameof(ActivationsEnum.Teleport100Every1d50p50Activation);
-    public override int? Value => 7000;
+    public override int Value => 7000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Planar Weapon)";
     public override string? BonusSearchRollExpression => "1d2";

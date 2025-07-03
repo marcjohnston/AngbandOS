@@ -6962,7 +6962,7 @@ internal class Game
     public bool DoCmdChannel(Item item, int manaValue)
     {
         int manaNeeded;
-        int itemCost = item.Cost;
+        int itemCost = item.GetRealValue();
 
         // Never channel worthless items
         if (itemCost <= 0)

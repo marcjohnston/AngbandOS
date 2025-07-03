@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BootsOfAnnoyanceItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Aggravate => true;
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "of Annoyance";
     public override string? BonusSpeedRollExpression => "1d10";
     public override int TreasureRating => 0;

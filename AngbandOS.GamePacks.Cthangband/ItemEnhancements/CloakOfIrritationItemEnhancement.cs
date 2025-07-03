@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CloakOfIrritationItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Aggravate => true;
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "of Irritation";
     public override string? BonusDamageRollExpression => "1d15";
     public override string? BonusHitRollExpression => "1d15";

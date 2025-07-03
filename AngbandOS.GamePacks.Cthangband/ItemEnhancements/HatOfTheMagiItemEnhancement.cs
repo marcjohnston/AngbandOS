@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HatOfTheMagiItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
-    public override int? Value => 7500;
+    public override int Value => 7500;
     public override string? FriendlyName => "of the Magi";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

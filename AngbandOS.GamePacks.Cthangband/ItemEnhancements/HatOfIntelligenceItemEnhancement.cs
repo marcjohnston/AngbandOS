@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfIntelligenceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 500;
+    public override int Value => 500;
     public override string? FriendlyName => "of Intelligence";
     public override bool Int => true;
     public override string? BonusIntelligenceRollExpression => "1d2";

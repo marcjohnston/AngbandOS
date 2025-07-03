@@ -20,4 +20,5 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
     public override bool ResNether => true;
     public override bool ResNexus => true;
     public override bool SustCon => true;
+    public override int Value => 280000; // Total 300000
 }

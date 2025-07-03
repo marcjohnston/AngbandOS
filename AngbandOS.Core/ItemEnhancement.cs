@@ -7,14 +7,6 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents an interface for item enhancements.  This interface is used by the ItemEnhancementWeightedRandom so that it qualifies as an item enhancement.
-/// </summary>
-internal interface IItemEnhancement
-{
-    ItemEnhancement? GetItemEnhancement();
-}
-
-/// <summary>
 /// Represents a set of non-deterministic item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
@@ -145,6 +137,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Teleport = itemEnhancementGameConfiguration.Teleport;
         TreasureRating = itemEnhancementGameConfiguration.TreasureRating;
         Tunnel = itemEnhancementGameConfiguration.Tunnel;
+        Valueless = itemEnhancementGameConfiguration.Valueless;
         Vampiric = itemEnhancementGameConfiguration.Vampiric;
         Vorpal = itemEnhancementGameConfiguration.Vorpal;
         Wis = itemEnhancementGameConfiguration.Wis;
@@ -277,6 +270,8 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Teleport = Teleport,
             TreasureRating = TreasureRating,
             Tunnel = Tunnel,
+            Value = Value,
+            Valueless = Valueless,
             Vampiric = Vampiric,
             Vorpal = Vorpal,
             Wis = Wis,
@@ -439,6 +434,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Teleport = Teleport,
             TreasureRating = TreasureRating,
             Tunnel = Tunnel,
+            Valueless = Valueless,
             Vampiric = Vampiric,
             Vorpal = Vorpal,
             Wis = Wis,
@@ -501,9 +497,9 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     public virtual string Key { get; }
 
     /// <summary>
-    /// Returns the value of the enhancement.
+    /// Returns the value of the enhancement.  Returns 0, by default.
     /// </summary>
-    public virtual int? Value { get; } = null;
+    public virtual int Value { get; } = 0;
 
     /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
@@ -831,7 +827,10 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     /// <inheritdoc />
     public virtual bool Tunnel { get; } = false;
-    
+
+    /// <inheritdoc />
+    public virtual bool Valueless { get; } = false;
+
     /// <inheritdoc />
     public virtual bool Vampiric { get; } = false;
     

@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BootsOfSpeedItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 200000;
+    public override int Value => 200000;
     public override string? FriendlyName => "of Speed";
     public override bool HideType => true;
     public override string? BonusSpeedRollExpression => "1d10";

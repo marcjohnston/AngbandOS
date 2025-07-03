@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfAnimalBaneItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 6000;
+    public override int Value => 6000;
     public override string? FriendlyName => "of Animal Bane";
     public override bool Int => true;
     public override string? BonusIntelligenceRollExpression => "1d2";

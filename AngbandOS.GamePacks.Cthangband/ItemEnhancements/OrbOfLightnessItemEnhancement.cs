@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class OrbOfLightnessItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 1000;
+    public override int Value => 1000;
     public override bool Feather => true;
     public override string? FriendlyName => "of Lightness";
     public override bool IgnoreAcid => true;

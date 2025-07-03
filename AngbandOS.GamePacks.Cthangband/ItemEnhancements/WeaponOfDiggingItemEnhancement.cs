@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponOfDiggingItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool BrandAcid => true;
-    public override int? Value => 500;
+    public override int Value => 500;
     public override string? FriendlyName => "of Digging";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

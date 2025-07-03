@@ -3,6 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override bool Valueless => true;
     public override int TreasureRating => 10;
     public override bool Con => true;
     public override bool IsCursed => true;

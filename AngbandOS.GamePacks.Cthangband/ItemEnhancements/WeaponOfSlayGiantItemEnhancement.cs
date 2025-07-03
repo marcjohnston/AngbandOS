@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfSlayGiantItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 2500;
+    public override int Value => 2500;
     public override string? FriendlyName => "of Slay Giant";
     public override int TreasureRating => 14;
     public override bool SlayGiant => true;

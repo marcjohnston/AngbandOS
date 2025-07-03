@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponDefenderItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(SustainItemEnhancementWeightedRandom);
-    public override int? Value => 15000;
+    public override int Value => 15000;
     public override bool Feather => true;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Defender)";

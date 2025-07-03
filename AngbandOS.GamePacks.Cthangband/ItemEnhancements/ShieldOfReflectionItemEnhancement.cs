@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ShieldOfReflectionItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 15000;
+    public override int Value => 15000;
     public override string? FriendlyName => "of Reflection";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

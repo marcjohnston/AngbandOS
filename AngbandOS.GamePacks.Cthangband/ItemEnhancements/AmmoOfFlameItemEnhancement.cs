@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AmmoOfFlameItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool BrandFire => true;
-    public override int? Value => 30;
+    public override int Value => 30;
     public override string? FriendlyName => "of Flame";
     public override bool IgnoreFire => true;
     public override int TreasureRating => 10;

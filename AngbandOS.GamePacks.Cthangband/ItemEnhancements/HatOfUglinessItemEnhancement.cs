@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HatOfUglinessItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Cha => true;
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "of Ugliness";
     public override string? BonusCharismaRollExpression => "1d5";
     public override int TreasureRating => 0;

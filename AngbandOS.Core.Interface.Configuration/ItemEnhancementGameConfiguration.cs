@@ -16,9 +16,9 @@ public class ItemEnhancementGameConfiguration
     public virtual string? Key { get; set; } = null;
 
     /// <summary>
-    /// Returns the value of the enhancement.
+    /// Returns the additional value of the enhancement.  Returns 0, by default.
     /// </summary>
-    public virtual int? Value { get; set; } = null;
+    public virtual int Value { get; set; } = 0;
 
     /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
@@ -172,6 +172,12 @@ public class ItemEnhancementGameConfiguration
     public virtual bool Teleport { get; set; } = false;
     public virtual int TreasureRating { get; set; } = 0;
     public virtual bool Tunnel { get; set; } = false;
+
+    /// <summary>
+    /// Returns true, if the enhancement causes the item to become valueless; false, if the item retains its value.  Returns false, by default.
+    /// </summary>
+    public virtual bool Valueless { get; set; } = false;
+
     public virtual bool Vampiric { get; set; } = false;
     public virtual bool Vorpal { get; set; } = false;
     public virtual bool Wis { get; set; } = false;

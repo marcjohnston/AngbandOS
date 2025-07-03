@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponShatteredItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "(Shattered)";
     public override string? BonusDamageRollExpression => "1d5";
     public override string? BonusHitRollExpression => "1d5";

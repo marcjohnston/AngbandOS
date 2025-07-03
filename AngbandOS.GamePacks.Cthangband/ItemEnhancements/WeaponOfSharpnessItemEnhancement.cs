@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfSharpnessItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 5000;
+    public override int Value => 5000;
     public override string? FriendlyName => "of Sharpness";
     public override int TreasureRating => 20;
     public override bool Tunnel => true;

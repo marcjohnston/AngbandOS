@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ArmorBlastedItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "(Blasted)";
     public override string? BonusArmorClassRollExpression => "1d10";
     public override int TreasureRating => 0;

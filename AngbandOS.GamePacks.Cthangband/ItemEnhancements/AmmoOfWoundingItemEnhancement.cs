@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AmmoOfWoundingItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 20;
+    public override int Value => 20;
     public override string? FriendlyName => "of Wounding";
     public override string? BonusDamageRollExpression => "1d6";
     public override string? BonusHitRollExpression => "1d6";

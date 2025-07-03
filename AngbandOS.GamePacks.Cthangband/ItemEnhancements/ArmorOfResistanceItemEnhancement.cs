@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ArmorOfResistanceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 12500;
+    public override int Value => 12500;
     public override string? FriendlyName => "of Resistance";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

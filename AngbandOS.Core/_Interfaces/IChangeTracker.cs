@@ -22,3 +22,4 @@ internal interface IChangeTracker
     /// </summary>
     bool IsChanged { get; }
 }
+

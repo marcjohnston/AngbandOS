@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponOfBurningItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool BrandFire => true;
-    public override int? Value => 3000;
+    public override int Value => 3000;
     public override string? FriendlyName => "of Burning";
     public override bool IgnoreFire => true;
     public override int Radius => 3;

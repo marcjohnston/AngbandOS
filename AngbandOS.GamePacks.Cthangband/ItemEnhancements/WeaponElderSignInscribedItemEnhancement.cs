@@ -11,7 +11,7 @@ public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfig
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(SustainItemEnhancementWeightedRandom);
     public override bool Blessed => true;
-    public override int? Value => 20000;
+    public override int Value => 20000;
     public override string? FriendlyName => "(Elder Sign Inscribed)";
     public override string? BonusWisdomRollExpression => "1d4";
     public override string? BonusArmorClassRollExpression => "1d4";

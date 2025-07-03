@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponOfPoisoningItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool BrandPois => true;
-    public override int? Value => 4500;
+    public override int Value => 4500;
     public override string? FriendlyName => "of Poisoning";
     public override int TreasureRating => 20;
     public override bool ResPois => true;

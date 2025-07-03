@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HatOfLordlinessItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Cha => true;
-    public override int? Value => 2000;
+    public override int Value => 2000;
     public override string? FriendlyName => "of Lordliness";
     public override string? BonusCharismaRollExpression => "1d3";
     public override string? BonusWisdomRollExpression => "1d3";

@@ -7,4 +7,5 @@ public class IronHelmTerrorMaskNonWarriorFixedArtifactItemEnhancement : ItemEnha
     public override bool HeavyCurse => true;
     public override bool Aggravate => true;
     public override bool DreadCurse => true;
+    public override bool Valueless => true;
 }

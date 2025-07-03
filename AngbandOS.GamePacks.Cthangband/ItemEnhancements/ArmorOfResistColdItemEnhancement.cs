@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ArmorOfResistColdItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 600;
+    public override int Value => 600;
     public override string? FriendlyName => "of Resist Cold";
     public override bool IgnoreCold => true;
     public override int TreasureRating => 12;

@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CloakOfAmanItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(ResistanceItemEnhancementWeightedRandom);
-    public override int? Value => 4000;
+    public override int Value => 4000;
     public override string? FriendlyName => "of Aman";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

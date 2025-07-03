@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponOfLengItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Aggravate => true;
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override bool IsCursed => true;
     public override string? FriendlyName => "of Leng";
     public override bool HeavyCurse => true;

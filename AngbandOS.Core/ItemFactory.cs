@@ -15,7 +15,12 @@ internal class ItemFactory : IGetKey, IToJson
 {
     protected readonly Game Game;
     protected virtual string? ItemEnhancementBindingKey { get; } = null;
+
+    /// <summary>
+    /// Represents the enhancements to apply to items created by this factory.
+    /// </summary>
     public ItemEnhancement ItemEnhancement { get; private set; }
+
     public virtual string Key { get; }
     public string GetKey => Key;
     #region Constructors
@@ -2055,7 +2060,7 @@ internal class ItemFactory : IGetKey, IToJson
     /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should
     /// still have some value if it can be recharged.
     /// </summary>
-    public virtual int Cost { get; } = 0;
+    public int Cost { get; }
 
     public virtual int DamageDice { get; } = 0;
 
@@ -2133,7 +2138,7 @@ internal class ItemFactory : IGetKey, IToJson
     /// <summary>
     /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
     /// </summary>
-    public virtual int BaseValue { get; } = 0;
+    public int BaseValue { get; } = 0;
 
     /// <summary>
     /// Returns true, if the item is susceptible to electricity.  Returns false, by default.

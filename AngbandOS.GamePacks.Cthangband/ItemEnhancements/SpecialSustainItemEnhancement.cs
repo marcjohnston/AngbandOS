@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SpecialSustainItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "";
     public override int TreasureRating => 0;
 }

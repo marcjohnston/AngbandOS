@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponOfLawItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Con => true;
-    public override int? Value => 25000;
+    public override int Value => 25000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Weapon of Law)";
     public override string? BonusConstitutionRollExpression => "1d2";

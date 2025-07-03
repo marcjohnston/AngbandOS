@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponOfDragonBaneItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Con => true;
-    public override int? Value => 6000;
+    public override int Value => 6000;
     public override string? FriendlyName => "of Dragon Bane";
     public override bool KillDragon => true;
     public override string? BonusConstitutionRollExpression => "1d1";

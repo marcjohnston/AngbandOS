@@ -117,6 +117,8 @@ internal enum ItemPropertiesEnum
     Teleport,
     TreasureRating,
     Tunnel,
+    Value,
+    Valueless,
     Vampiric,
     Vorpal,
     Wis,

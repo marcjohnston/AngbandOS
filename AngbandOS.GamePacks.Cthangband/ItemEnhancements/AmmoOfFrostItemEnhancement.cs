@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AmmoOfFrostItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool BrandCold => true;
-    public override int? Value => 25;
+    public override int Value => 25;
     public override string? FriendlyName => "of Frost";
     public override bool IgnoreCold => true;
     public override int TreasureRating => 10;

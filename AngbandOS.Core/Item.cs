@@ -246,7 +246,6 @@ internal sealed class Item : IComparable<Item>
     public int NumberOfItemsContained => _factory.NumberOfItemsContained;
     public int EnchantmentMaximumCount => _factory.EnchantmentMaximumCount;
     public bool IsSmall => _factory.IsSmall;
-    public int Cost => _factory.Cost;
     public bool AskDestroyAll => _factory.AskDestroyAll;
     public bool VanishesWhenEatenBySkeletons => _factory.VanishesWhenEatenBySkeletons;
     public bool CanSpikeDoorClosed => _factory.CanSpikeDoorClosed;
@@ -1671,33 +1670,19 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public int GetRealValue()
     {
-        if (Cost == 0)
+        // If the factory reports the item as valueless, then the item is valueless.
+        if (_factory.Cost == 0)
         {
             return 0;
         }
-        int value = Cost;
-        if (FixedArtifact != null)
-        {
-            if (FixedArtifact.Cost == 0)
-            {
-                return 0;
-            }
-            value = FixedArtifact.Cost;
-        }
-        else if (RareItem != null)
-        {
-            // Check to see if the item is now worthless.
-            if (RareItem.Value.HasValue)
-            {
-                if (RareItem.Value == 0)
-                {
-                    return 0;
-                }
-                value += RareItem.Value.Value;
-            }
-        }
+        int value = _factory.Cost;
 
         RoItemPropertySet mergedCharacteristics = GetEffectiveItemProperties();
+        if (mergedCharacteristics.Valueless)
+        {
+            return 0;
+        }
+
         if (mergedCharacteristics.Chaotic)
         {
             value += Game.BonusChaoticValue;
@@ -2175,7 +2160,7 @@ internal sealed class Item : IComparable<Item>
             }
             if (IsFlavorAware)
             {
-                return Cost;
+                return _factory.Cost;
             }
             return BaseValue;
         }
@@ -2377,7 +2362,7 @@ internal sealed class Item : IComparable<Item>
             RwItemPropertySet modifiedRareItemCharacteristics = roRareItemCharacteristics.AsWriteable();
 
             // If the rare item has no value, consider it broken.
-            if (RareItem.Value.HasValue && RareItem.Value == 0)
+            if (RareItem.Value == 0)
             {
                 IsBroken = true;
             }
@@ -2403,7 +2388,7 @@ internal sealed class Item : IComparable<Item>
             Game.TreasureRating += RareItem.TreasureRating;
             return;
         }
-        if (Cost == 0)
+        if (_factory.Cost == 0)
         {
             IsBroken = true;
         }

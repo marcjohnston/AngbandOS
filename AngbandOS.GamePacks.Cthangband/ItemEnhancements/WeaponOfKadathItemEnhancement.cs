@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponOfKadathItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Con => true;
-    public override int? Value => 20000;
+    public override int Value => 20000;
     public override bool Dex => true;
     public override bool FreeAct => true;
     public override string? FriendlyName => "of Kadath";

@@ -4,11 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.GamePacks.Cthangband;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-public class TerribleWeaponOfDiggingItemEnhancement : ItemEnhancementGameConfiguration
+/// <summary>
+/// Represents an interface for item enhancements.  This interface is used by the ItemEnhancementWeightedRandom so that it qualifies as an item enhancement.
+/// </summary>
+internal interface IItemEnhancement
 {
-    public override bool Valueless => true;
-    public override string? BonusTunnelRollExpression => "-1d5+5";
+    ItemEnhancement? GetItemEnhancement();
 }
+

@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfTeleportationItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "of Teleportation";
     public override int TreasureRating => 0;
-        public override bool Teleport => true;
+    public override bool Teleport => true;
 }

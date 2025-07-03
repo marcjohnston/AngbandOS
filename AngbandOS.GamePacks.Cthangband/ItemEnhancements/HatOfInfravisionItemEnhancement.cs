@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfInfravisionItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 500;
+    public override int Value => 500;
     public override string? FriendlyName => "of Infravision";
     public override bool HideType => true;
     public override bool Infra => true;

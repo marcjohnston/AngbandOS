@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class OrbOfIrritationItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Aggravate => true;
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "of Irritation";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

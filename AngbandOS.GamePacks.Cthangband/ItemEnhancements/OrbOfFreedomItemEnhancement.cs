@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class OrbOfFreedomItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 1000;
+    public override int Value => 1000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "of Freedom";
     public override bool IgnoreAcid => true;

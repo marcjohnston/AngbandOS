@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ArmorOfYithItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(ResistanceItemEnhancementWeightedRandom);
-    public override int? Value => 15000;
+    public override int Value => 15000;
     public override string? FriendlyName => "of Yith";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

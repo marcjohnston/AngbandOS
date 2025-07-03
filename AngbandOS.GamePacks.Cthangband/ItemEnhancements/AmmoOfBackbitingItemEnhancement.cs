@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AmmoOfBackbitingItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "of Backbiting";
     public override string? BonusDamageRollExpression => "1d50";
     public override string? BonusHitRollExpression => "1d50";

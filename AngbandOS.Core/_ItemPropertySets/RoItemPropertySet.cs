@@ -1463,6 +1463,32 @@ internal class RoItemPropertySet : ItemPropertySet
             ValueItemProperty.Value = value;
         }
     }
+    public int Value
+    {
+        get
+        {
+            ValueItemProperty<int> ValueItemProperty = (ValueItemProperty<int>)ItemProperties[(int)ItemPropertiesEnum.Value];
+            return ValueItemProperty.Value;
+        }
+        init
+        {
+            ValueItemProperty<int> ValueItemProperty = (ValueItemProperty<int>)ItemProperties[(int)ItemPropertiesEnum.Value];
+            ValueItemProperty.Value = value;
+        }
+    }
+    public bool Valueless
+    {
+        get
+        {
+            ValueItemProperty<bool> ValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
+            return ValueItemProperty.Value;
+        }
+        init
+        {
+            ValueItemProperty<bool> ValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
+            ValueItemProperty.Value = value;
+        }
+    }
     public bool Vampiric
     {
         get

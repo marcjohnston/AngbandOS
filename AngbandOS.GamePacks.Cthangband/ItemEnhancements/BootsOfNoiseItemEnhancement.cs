@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BootsOfNoiseItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Aggravate => true;
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override string? FriendlyName => "of Noise";
     public override int TreasureRating => 0;
     }

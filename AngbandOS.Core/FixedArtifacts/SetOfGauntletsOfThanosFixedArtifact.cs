@@ -14,7 +14,7 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Thanos";
     public override int Ac => 2;
-    public override int Cost => 0;
+    public override int Cost => 40000;
     public override int Dd => 1;
     public override int Ds => 1;
     public override int Level => 10;

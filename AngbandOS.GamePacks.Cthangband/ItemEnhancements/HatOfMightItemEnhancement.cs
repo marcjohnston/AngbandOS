@@ -10,7 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HatOfMightItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Con => true;
-    public override int? Value => 2000;
+    public override int Value => 2000;
     public override bool Dex => true;
     public override bool FreeAct => true;
     public override string? FriendlyName => "of Might";

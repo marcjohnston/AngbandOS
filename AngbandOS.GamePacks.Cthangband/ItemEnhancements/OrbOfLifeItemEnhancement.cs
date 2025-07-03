@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class OrbOfLifeItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 1000;
+    public override int Value => 1000;
     public override string? FriendlyName => "of Life";
     public override bool HoldLife => true;
     public override bool IgnoreAcid => true;

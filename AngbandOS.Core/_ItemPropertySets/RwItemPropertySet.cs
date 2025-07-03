@@ -1461,6 +1461,19 @@ internal class RwItemPropertySet : ItemPropertySet
             rwValueItemProperty.Value = value;
         }
     }
+    public bool Valueless
+    {
+        get
+        {
+            ValueItemProperty<bool> ValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
+            return ValueItemProperty.Value;
+        }
+        set
+        {
+            ValueItemProperty<bool> ValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
+            ValueItemProperty.Value = value;
+        }
+    }
     public bool Vampiric
     {
         get

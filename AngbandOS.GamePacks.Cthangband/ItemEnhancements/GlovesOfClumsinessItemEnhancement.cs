@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GlovesOfClumsinessItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 0;
+    public override bool Valueless => true;
     public override bool Dex => true;
     public override string? FriendlyName => "of Clumsiness";
     public override string? BonusDexterityRollExpression => "1d10";
