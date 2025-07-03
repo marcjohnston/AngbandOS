@@ -48,12 +48,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     /// </summary>
     public virtual int KillDragonMultiplier => 1; // TODO: Move this into the ItemCharacteristics
 
-    /// <summary>
-    /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
-    /// </summary>
-    /// <returns></returns>
-    public virtual void ApplyResistances(Item item) { }
-
     protected abstract string BaseItemFactoryName { get; }
 
     /// <summary>
