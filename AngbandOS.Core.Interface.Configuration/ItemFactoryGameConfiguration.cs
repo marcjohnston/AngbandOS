@@ -351,6 +351,9 @@ public class ItemFactoryGameConfiguration
     /// </summary>
     public virtual bool HasQualityRatings { get; set; } = false;
 
+    /// <summary>
+    /// Returns the base armor class rating for items created by the factory.  Returns 0, by default.
+    /// </summary>
     public virtual int ArmorClass { get; set; } = 0;
 
     /// <summary>
