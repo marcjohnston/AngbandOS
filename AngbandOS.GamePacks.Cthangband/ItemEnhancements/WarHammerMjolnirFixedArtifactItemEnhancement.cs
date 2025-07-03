@@ -25,4 +25,10 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override bool Wis => true;
+    public override bool Feather => true;
+    public override bool HoldLife => true;
+    public override int Radius => 3;
+    public override bool Regen => true;
+    public override bool SlowDigest => true;
+    public override bool Telepathy => true;
 }

@@ -38,4 +38,6 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
     public override bool SustStr => true;
     public override bool SustWis => true;
     public override bool Wis => true;
+    public override int Radius => 3;
+    public override bool Telepathy => true;
 }

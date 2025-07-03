@@ -44,4 +44,10 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override bool SustStr => true;
     public override bool SustWis => true;
     public override bool Wis => true;
+    public override bool Feather => true;
+    public override bool FreeAct => true;
+    public override bool HoldLife => true;
+    public override int Radius => 3;
+    public override bool SlowDigest => true;
+    public override bool Telepathy => true;
 }

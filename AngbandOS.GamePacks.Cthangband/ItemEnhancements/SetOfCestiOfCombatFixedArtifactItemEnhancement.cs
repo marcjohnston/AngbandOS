@@ -16,4 +16,11 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string? BonusDexterityRollExpression => "4";
     public override bool ResAcid => true;
     public override bool ShowMods => true;
+    public override bool Feather => true;
+    public override bool HoldLife => true;
+    public override int Radius => 3;
+    public override bool Regen => true;
+    public override bool SeeInvis => true;
+    public override bool SlowDigest => true;
+    public override bool Telepathy => true;
 }

@@ -36,5 +36,7 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool SustInt => true;
     public override bool SustWis => true;
     public override bool Wis => true;
-
+    public override int Radius => 3;
+    public override bool SlowDigest => true;
+    public override bool Telepathy => true;
 }
