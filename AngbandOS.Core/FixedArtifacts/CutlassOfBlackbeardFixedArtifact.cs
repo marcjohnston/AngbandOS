@@ -13,7 +13,6 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(CutlassWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Cutlass of Blackbeard";
-    public override int Ac => 0;
     public override int Cost => 28000;
     public override int Dd => 1;
     public override int Ds => 7;

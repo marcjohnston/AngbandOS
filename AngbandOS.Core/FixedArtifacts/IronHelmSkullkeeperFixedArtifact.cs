@@ -13,7 +13,6 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(IronHelmItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Skullkeeper'";
-    public override int Ac => 5;
     public override int Cost => 100000;
     public override int Dd => 1;
     public override int Ds => 3;

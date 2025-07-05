@@ -13,7 +13,6 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff of Atal";
-    public override int Ac => 0;
     public override int Cost => 140000;
     public override int Dd => 2;
     public override int Ds => 9;

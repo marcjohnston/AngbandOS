@@ -13,7 +13,6 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear 'Gae Bulg'";
-    public override int Ac => 0;
     public override int Cost => 30000;
     public override int Dd => 1;
     public override int Ds => 6;

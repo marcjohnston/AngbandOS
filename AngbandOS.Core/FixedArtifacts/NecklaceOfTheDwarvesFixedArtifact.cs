@@ -12,7 +12,6 @@ internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
     private NecklaceOfTheDwarvesFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(NecklaceAmuletItemFactory);
     public override string Name => "The Necklace of the Dwarves";
-    public override int Ac => 0;
     public override int Cost => 75000;
     public override int Dd => 0;
     public override int Ds => 0;

@@ -13,7 +13,6 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(StarEssenceGaladrielLightSourceItemFactory);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Polaris";
-    public override int Ac => 0;
     public override int Cost => 10000;
     public override int Dd => 1;
     public override int Ds => 1;

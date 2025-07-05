@@ -13,7 +13,6 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
-    public override int Ac => 0;
     public override int Cost => 100000;
     public override int Dd => 3;
     public override int Ds => 6;

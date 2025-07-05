@@ -13,7 +13,6 @@ internal class SabreOfBluebeardFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SabreWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Sabre of Bluebeard";
-    public override int Ac => 0;
     public override int Cost => 25000;
     public override int Dd => 1;
     public override int Ds => 7;

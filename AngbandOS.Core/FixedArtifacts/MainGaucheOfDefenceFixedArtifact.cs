@@ -13,7 +13,6 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MainGaucheWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Main Gauche of Defence";
-    public override int Ac => 0;
     public override int Cost => 22500;
     public override int Dd => 2;
     public override int Ds => 5;

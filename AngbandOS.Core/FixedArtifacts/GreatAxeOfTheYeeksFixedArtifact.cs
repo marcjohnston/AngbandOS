@@ -13,7 +13,6 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GreatAxePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Great Axe of the Yeeks";
-    public override int Ac => 0;
     public override int Cost => 150000;
     public override int Dd => 4;
     public override int Ds => 4;

@@ -13,7 +13,6 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(CestiGlovesItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Set of Cesti of Combat";
-    public override int Ac => 5;
     public override int Cost => 110000;
     public override int Dd => 1;
     public override int Ds => 1;

@@ -13,7 +13,6 @@ internal class LanceSkewerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LancePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Lance 'Skewer'";
-    public override int Ac => 0;
     public override int Cost => 55000;
     public override int Dd => 3;
     public override int Ds => 8;

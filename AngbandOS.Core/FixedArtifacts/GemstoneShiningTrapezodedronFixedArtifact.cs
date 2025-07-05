@@ -13,7 +13,6 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GemstoneLightSourceItemFactory);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Gemstone 'Shining Trapezodedron'";
-    public override int Ac => 0;
     public override int Cost => 150000;
     public override int Dd => 1;
     public override int Ds => 1;

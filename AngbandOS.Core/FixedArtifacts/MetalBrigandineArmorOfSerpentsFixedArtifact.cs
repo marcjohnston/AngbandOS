@@ -13,7 +13,6 @@ internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MetalBrigandineHardArmorItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Brigandine Armor of Serpents";
-    public override int Ac => 19;
     public override int Cost => 30000;
     public override int Dd => 1;
     public override int Ds => 4;

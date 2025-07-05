@@ -395,6 +395,13 @@ internal class SingletonRepository
         {
             singleton.Bind();
         }
+        //foreach (FixedArtifact fixedArtifact in Get<FixedArtifact>())
+        //{
+        //    if (fixedArtifact.Dd != fixedArtifact.BaseItemFactory.DamageDice)
+        //    {
+        //        throw new Exception();
+        //    }
+        //}
     }
 
     private void ValidateSystemScriptsEnum()

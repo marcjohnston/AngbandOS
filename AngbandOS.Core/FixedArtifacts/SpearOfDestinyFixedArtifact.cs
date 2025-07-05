@@ -13,7 +13,6 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear of Destiny";
-    public override int Ac => 0;
     public override int Cost => 77777;
     public override int Dd => 1;
     public override int Ds => 6;

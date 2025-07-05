@@ -13,7 +13,6 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(AugmentedChainMailHardArmorItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Augmented Chain Mail of the Ogre Lords";
-    public override int Ac => 16;
     public override int Cost => 40000;
     public override int Dd => 1;
     public override int Ds => 4;

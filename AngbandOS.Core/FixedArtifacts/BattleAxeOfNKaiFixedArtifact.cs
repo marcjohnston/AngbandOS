@@ -13,7 +13,6 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BattleAxePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe of N'Kai";
-    public override int Ac => 0;
     public override int Cost => 90000;
     public override int Dd => 3;
     public override int Ds => 8;

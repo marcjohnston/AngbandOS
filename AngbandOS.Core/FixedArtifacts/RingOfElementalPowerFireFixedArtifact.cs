@@ -12,7 +12,6 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact
     private RingOfElementalPowerFireFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(NaryaRingItemFactory);
     public override string Name => "The Ring of Elemental Power (Fire)";
-    public override int Ac => 0;
     public override int Cost => 100000;
     public override int Dd => 1;
     public override int Ds => 1;

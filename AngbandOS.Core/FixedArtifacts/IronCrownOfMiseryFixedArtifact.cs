@@ -13,7 +13,6 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(IronCrownArmorItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Crown of Misery";
-    public override int Ac => 0;
     public override int Cost => 0;
     public override int Dd => 1;
     public override int Ds => 1;

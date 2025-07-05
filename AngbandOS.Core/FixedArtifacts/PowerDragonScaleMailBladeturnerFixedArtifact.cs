@@ -13,7 +13,6 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailItemFactory);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";
-    public override int Ac => 50;
     public override int Cost => 500000;
     public override int Dd => 2;
     public override int Ds => 4;

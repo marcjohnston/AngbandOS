@@ -13,7 +13,6 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MetalCapHelmItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Cap of Holiness";
-    public override int Ac => 3;
     public override int Cost => 22000;
     public override int Dd => 1;
     public override int Ds => 1;

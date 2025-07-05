@@ -13,7 +13,6 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MultiHuedDragonScaleMailItemFactory);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";
-    public override int Ac => 30;
     public override int Cost => 400000;
     public override int Dd => 2;
     public override int Ds => 4;

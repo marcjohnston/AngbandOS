@@ -13,7 +13,6 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Thanos";
-    public override int Ac => 2;
     public override int Cost => 40000;
     public override int Dd => 1;
     public override int Ds => 1;

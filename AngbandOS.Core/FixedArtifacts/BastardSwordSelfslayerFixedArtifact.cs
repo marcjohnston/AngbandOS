@@ -13,7 +13,6 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BastardSwordSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Bastard Sword 'Selfslayer'";
-    public override int Ac => 0;
     public override int Cost => 100000;
     public override int Dd => 5;
     public override int Ds => 4;

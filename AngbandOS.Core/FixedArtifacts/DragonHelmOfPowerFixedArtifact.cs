@@ -13,7 +13,6 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DragonHelmItemFactory);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Dragon Helm of Power";
-    public override int Ac => 8;
     public override int Cost => 300000;
     public override int Dd => 1;
     public override int Ds => 3;

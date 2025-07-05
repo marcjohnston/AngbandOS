@@ -3,7 +3,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    // Bladeturner heals you and gives you timed resistances
+    //Bladeturner heals you and gives you timed resistances
+    public override string? BonusArmorClassRollExpression => "10"; // 40 => 50;
     public override string? ActivationName => nameof(ActivationsEnum.PowerDragonEvery400DirectionalActivation);
     public override int TreasureRating => 20;
     public override bool Feather => true;

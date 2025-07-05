@@ -13,7 +13,6 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LongBowRangedWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Long Bow of Serpents";
-    public override int Ac => 0;
     public override int Cost => 20000;
     public override int Dd => 0;
     public override int Ds => 0;

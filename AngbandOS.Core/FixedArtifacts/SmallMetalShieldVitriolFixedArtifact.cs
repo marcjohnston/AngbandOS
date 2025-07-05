@@ -13,7 +13,6 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SmallMetalShieldItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Small Metal Shield 'Vitriol'";
-    public override int Ac => 3;
     public override int Cost => 60000;
     public override int Dd => 1;
     public override int Ds => 2;

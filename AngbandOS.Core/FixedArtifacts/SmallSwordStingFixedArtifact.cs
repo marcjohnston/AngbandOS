@@ -13,7 +13,6 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Small Sword 'Sting'";
-    public override int Ac => 0;
     public override int Cost => 100000;
     public override int Dd => 1;
     public override int Ds => 6;

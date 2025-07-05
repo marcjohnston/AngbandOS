@@ -13,7 +13,6 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Firetongue'";
-    public override int Ac => 0;
     public override int Cost => 205000;
     public override int Dd => 4;
     public override int Ds => 6;

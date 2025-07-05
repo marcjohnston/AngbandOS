@@ -13,7 +13,6 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Shadow Cloak of Nyogtha";
-    public override int Ac => 6;
     public override int Cost => 55000;
     public override int Dd => 0;
     public override int Ds => 0;

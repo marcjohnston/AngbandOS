@@ -13,7 +13,6 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of the Swashbuckler";
-    public override int Ac => 1;
     public override int Cost => 35000;
     public override int Dd => 0;
     public override int Ds => 0;

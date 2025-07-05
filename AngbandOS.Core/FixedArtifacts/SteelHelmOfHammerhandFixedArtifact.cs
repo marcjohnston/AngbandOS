@@ -13,7 +13,6 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SteelHelmItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Steel Helm of Hammerhand";
-    public override int Ac => 6;
     public override int Cost => 45000;
     public override int Dd => 1;
     public override int Ds => 3;

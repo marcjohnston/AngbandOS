@@ -13,7 +13,6 @@ internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Short Sword of Merlin";
-    public override int Ac => 0;
     public override int Cost => 35000;
     public override int Dd => 1;
     public override int Ds => 7;

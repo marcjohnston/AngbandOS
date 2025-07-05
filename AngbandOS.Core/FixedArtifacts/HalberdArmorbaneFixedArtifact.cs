@@ -13,7 +13,6 @@ internal class HalberdArmorbaneFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(HalberdPolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Halberd 'Armorbane'";
-    public override int Ac => 0;
     public override int Cost => 22000;
     public override int Dd => 3;
     public override int Ds => 5;

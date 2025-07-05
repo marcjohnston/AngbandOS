@@ -13,7 +13,6 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(AdamantitePlateMailHardArmorItemFactory);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";
-    public override int Ac => 40;
     public override int Cost => 300000;
     public override int Dd => 2;
     public override int Ds => 4;

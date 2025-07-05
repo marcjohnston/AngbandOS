@@ -13,7 +13,6 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LeatherGlovesItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Leather Gloves of Light";
-    public override int Ac => 1;
     public override int Cost => 30000;
     public override int Dd => 0;
     public override int Ds => 0;

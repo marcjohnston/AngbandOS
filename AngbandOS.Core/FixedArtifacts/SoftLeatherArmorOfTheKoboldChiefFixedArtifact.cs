@@ -13,7 +13,6 @@ internal class SoftLeatherArmorOfTheKoboldChiefFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SoftLeatherSoftArmorItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Soft Leather Armor of the Kobold Chief";
-    public override int Ac => 4;
     public override int Cost => 45000;
     public override int Dd => 0;
     public override int Ds => 0;

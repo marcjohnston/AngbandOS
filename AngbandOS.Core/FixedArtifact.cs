@@ -71,11 +71,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
 
     /// <summary>
-    /// Overrides the BaseItemFactory ArmorClass 
-    /// </summary>
-    public abstract int Ac { get; } // TODO: Need to convert this to an enhancement
-
-    /// <summary>
     /// Overrides the BaseItemFactory Cost
     /// </summary>
     public abstract int Cost { get; } // TODO: Need to convert this to an enhancement .. this also doesn't appear to be copied

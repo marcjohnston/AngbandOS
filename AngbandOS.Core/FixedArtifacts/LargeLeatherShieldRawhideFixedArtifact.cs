@@ -13,7 +13,6 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LargeLeatherShieldItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Large Leather Shield 'Rawhide'";
-    public override int Ac => 4;
     public override int Cost => 12000;
     public override int Dd => 1;
     public override int Ds => 2;

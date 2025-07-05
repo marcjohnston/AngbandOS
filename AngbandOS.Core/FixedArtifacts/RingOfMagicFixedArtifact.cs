@@ -12,7 +12,6 @@ internal class RingOfMagicFixedArtifact : FixedArtifact
     private RingOfMagicFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(BarahirRingItemFactory);
     public override string Name => "The Ring of Magic";
-    public override int Ac => 0;
     public override int Cost => 75000;
     public override int Dd => 0;
     public override int Ds => 0;

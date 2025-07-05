@@ -4,6 +4,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     // Orc does Carnage
+    public override string? BonusArmorClassRollExpression => "2"; // 13 -> 15
     public override string? ActivationName => nameof(ActivationsEnum.GenocideEvery500Activation);
     public override bool Cha => true;
     public override int TreasureRating => 20;
