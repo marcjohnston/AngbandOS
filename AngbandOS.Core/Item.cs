@@ -175,9 +175,9 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
         clonedItem.FixedArtifact = FixedArtifact;
-        clonedItem.FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics?.Clone();
+        clonedItem.FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics;
         clonedItem.RareItem = RareItem;
-        clonedItem.RareItemCharacteristics = RareItemCharacteristics?.Clone();
+        clonedItem.RareItemCharacteristics = RareItemCharacteristics;
         clonedItem.EnchantmentItemProperties = EnchantmentItemProperties.Clone();
         clonedItem.OverrideItemCharacteristics = OverrideItemCharacteristics.Clone();
         clonedItem.RandomArtifactItemCharacteristics = RandomArtifactItemCharacteristics;

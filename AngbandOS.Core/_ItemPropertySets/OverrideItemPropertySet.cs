@@ -45,7 +45,7 @@ internal class OverrideItemPropertySet : ItemPropertySet
     }
 
     #region Properties
-    public bool? IsCursed
+    public bool? IsCursed // TODO: This should simply be CurseRemoved
     {
         get
         {
@@ -58,7 +58,7 @@ internal class OverrideItemPropertySet : ItemPropertySet
             RwNullableValueItemProperty.Value = value;
         }
     }
-    public bool? HeavyCurse
+    public bool? HeavyCurse // This should simply be HeavyCurseRemoved
     {
         get
         {
