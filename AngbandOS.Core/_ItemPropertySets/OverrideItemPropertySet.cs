@@ -45,31 +45,42 @@ internal class OverrideItemPropertySet : ItemPropertySet
     }
 
     #region Properties
-    public bool? IsCursed // TODO: This should simply be CurseRemoved
+    ///// <summary>
+    ///// Returns a final armor class that is applied to the item; or null, if there is no overriding armor class and the effective armor class is used instead.
+    ///// </summary>
+    //public int? BonusArmorClass
+    //{
+    //    get
+    //    {
+    //        NullableValueItemProperty<int> RwNullableValueItemProperty = (NullableValueItemProperty<int>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
+    //        return RwNullableValueItemProperty.Value;
+    //    }
+    //    set
+    //    {
+    //        NullableValueItemProperty<int> RwNullableValueItemProperty = (NullableValueItemProperty<int>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
+    //        RwNullableValueItemProperty.Value = value;
+    //    }
+    //}
+
+    public void ResetCurse()
     {
-        get
-        {
-            NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
-            return RwNullableValueItemProperty.Value;
-        }
-        set
-        {
-            NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
-            RwNullableValueItemProperty.Value = value;
-        }
+        NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
+        RwNullableValueItemProperty.Value = null;
     }
-    public bool? HeavyCurse // This should simply be HeavyCurseRemoved
+    public void RemoveCurse()
     {
-        get
-        {
-            NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
-            return RwNullableValueItemProperty.Value;
-        }
-        set
-        {
-            NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
-            RwNullableValueItemProperty.Value = value;
-        }
+        NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
+        RwNullableValueItemProperty.Value = false;
+    }
+    public void ResetHeavyCurse()
+    {
+        NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
+        RwNullableValueItemProperty.Value = null;
+    }
+    public void RemoveHeavyCurse()
+    {
+        NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
+        RwNullableValueItemProperty.Value = false;
     }
     #endregion
 }

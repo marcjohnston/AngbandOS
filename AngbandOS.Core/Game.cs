@@ -5685,8 +5685,8 @@ internal class Game
                     if (mergedCharacteristics.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.EnchantmentItemProperties.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.OverrideItemCharacteristics.IsCursed = false;
-                        oPtr.OverrideItemCharacteristics.HeavyCurse = false;
+                        oPtr.OverrideItemCharacteristics.RemoveCurse();
+                        oPtr.OverrideItemCharacteristics.RemoveHeavyCurse();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5713,8 +5713,8 @@ internal class Game
                     if (mergedCharacteristics.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.EnchantmentItemProperties.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.OverrideItemCharacteristics.IsCursed = false;
-                        oPtr.OverrideItemCharacteristics.HeavyCurse = false;
+                        oPtr.OverrideItemCharacteristics.RemoveCurse();
+                        oPtr.OverrideItemCharacteristics.RemoveHeavyCurse();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5742,8 +5742,8 @@ internal class Game
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.OverrideItemCharacteristics.IsCursed = false;
-                        oPtr.OverrideItemCharacteristics.HeavyCurse = false;
+                        oPtr.OverrideItemCharacteristics.RemoveCurse();
+                        oPtr.OverrideItemCharacteristics.RemoveHeavyCurse();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -6443,8 +6443,8 @@ internal class Game
             {
                 continue;
             }
-            oPtr.OverrideItemCharacteristics.IsCursed = false;
-            oPtr.OverrideItemCharacteristics.HeavyCurse = false;
+            oPtr.OverrideItemCharacteristics.RemoveCurse();
+            oPtr.OverrideItemCharacteristics.RemoveHeavyCurse();
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6794,7 +6794,8 @@ internal class Game
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.OverrideItemCharacteristics.IsCursed = true;
+            item.EnchantmentItemProperties.IsCursed = true;
+            item.OverrideItemCharacteristics.ResetCurse();
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -6832,7 +6833,8 @@ internal class Game
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.OverrideItemCharacteristics.IsCursed = true;
+            item.EnchantmentItemProperties.IsCursed = true;
+            item.OverrideItemCharacteristics.ResetCurse();
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -13532,8 +13534,10 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.OverrideItemCharacteristics.HeavyCurse = true;
-            oPtr.OverrideItemCharacteristics.IsCursed = true;
+            oPtr.EnchantmentItemProperties.IsCursed = true;
+            oPtr.EnchantmentItemProperties.HeavyCurse = true;
+            oPtr.OverrideItemCharacteristics.ResetCurse();
+            oPtr.OverrideItemCharacteristics.ResetHeavyCurse();
         }
         else
         {
@@ -13541,7 +13545,8 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.OverrideItemCharacteristics.IsCursed = true;
+            oPtr.EnchantmentItemProperties.IsCursed = true;
+            oPtr.OverrideItemCharacteristics.ResetCurse();
         }
         if (changed)
         {
