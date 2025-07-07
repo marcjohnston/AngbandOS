@@ -65,11 +65,12 @@ internal sealed class Item : IComparable<Item>
     private RoItemPropertySet? RareItemCharacteristics = null;
 
     /// <summary>
-    /// Returns enchanted characteristics for this item.  These characteristics all provide defaults and can be modified with magic via enchancement or random artifact creation.
+    /// Returns the enchanted characteristics for this item.  These characteristics start with a default value and can be modified with magic via enchancement by the player.  These
+    /// enchantments are merged with fixed and rare item enchantments.
     /// </summary>
-    public RwItemPropertySet EnchantmentItemProperties = new RwItemPropertySet();
+    public RwItemPropertySet EnchantmentItemProperties;
 
-    public OverrideItemPropertySet OverrideItemCharacteristics = new OverrideItemPropertySet();
+    public OverrideItemPropertySet OverrideItemCharacteristics;
 
     /// <summary>
     /// Returns the deterministic set of random artifact characteristics.
@@ -2550,6 +2551,12 @@ internal sealed class Item : IComparable<Item>
     {
         Game = game;
         _factory = factory;
+
+        // Create a set of read-write item properties for additional player enhancements.
+        EnchantmentItemProperties = new RwItemPropertySet();
+        OverrideItemCharacteristics = new OverrideItemPropertySet();
+
+        // Generate the read-only item characteristics from the factory.
         FactoryItemCharacteristics = factory.ItemEnhancement.GenerateItemCharacteristics();
 
         StackCount = 1;
