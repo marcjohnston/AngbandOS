@@ -527,11 +527,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool IsCursed
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
@@ -618,11 +613,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool HeavyCurse
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];

@@ -61,31 +61,6 @@ internal abstract class ArtifactBias : IGetKey
     public (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomResistances { get; private set; } = null;
             
     /// <summary>
-    /// Apply resistances to the item and returns true, if additional resistances can be applied.  By default, no resistances are applied and false is returned.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public bool ApplyRandomResistances(RwItemPropertySet characteristics)
-    {
-        if (RandomResistances != null)
-        {
-            foreach ((ItemTest itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in RandomResistances)
-            {
-                // Test the probability and if whether the item test pass.
-                if (itemTestProbability.Test() && itemTest.Test(characteristics))
-                {
-                    characteristics = characteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
-                    if (moreProbability.Test())
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    /// <summary>
     /// Apply powers to the item and returns true, if additional powers can applied.  By default, no powers are applied and false is returned.
     /// </summary>
     /// <param name="item"></param>

@@ -68,7 +68,7 @@ internal abstract class ItemTest : IGetKey
         return true;
     }
 
-    public bool Test(RwItemPropertySet characteristics)
+    public bool Test(RoItemPropertySet characteristics)
     {
         if (!TestNullObject<Activation>(Activation, characteristics.Activation))
         {

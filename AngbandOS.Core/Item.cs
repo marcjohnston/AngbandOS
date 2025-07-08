@@ -2403,12 +2403,15 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
+    /// <summary>
+    /// Converts this item into a random artifact.
+    /// </summary>
+    /// <param name="fromScroll"></param>
+    /// <returns></returns>
     public bool CreateRandomArtifact(bool fromScroll)
     {
         // Create a set of random artifact characteristics.
-        RwItemPropertySet randomArtifactItemPropertySet = new RwItemPropertySet();
-
-        _factory.CreateRandomArtifact(randomArtifactItemPropertySet, fromScroll);
+        RandomArtifactItemCharacteristics = _factory.CreateRandomArtifact(this, fromScroll);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
@@ -2433,7 +2436,6 @@ internal sealed class Item : IComparable<Item>
             newName = GenerateRandomArtifactName();
         }
         RandomArtifactName = newName;
-        RandomArtifactItemCharacteristics = randomArtifactItemPropertySet.AsReadOnly();
         return true;
     }
 

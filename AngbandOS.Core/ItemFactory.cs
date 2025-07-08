@@ -1008,7 +1008,7 @@ internal class ItemFactory : IGetKey, IToJson
     /// </summary>
     public bool CanBeRead => ReadTuple != null;
 
-    public void CreateRandomArtifact(RwItemPropertySet characteristics, bool fromScroll)
+    public RoItemPropertySet CreateRandomArtifact(Item item, bool fromScroll)
     {
         int EnchantBonus(int bonus)
         {
@@ -1418,6 +1418,37 @@ internal class ItemFactory : IGetKey, IToJson
             }
         }
 
+        /// <summary>
+        /// Apply resistances to the item and returns true, if additional resistances can be applied.  By default, no resistances are applied and false is returned.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        bool ApplyRandomResistances(Item item, RwItemPropertySet characteristics)
+        {
+            if (characteristics.ArtifactBias?.RandomResistances != null)
+            {
+                foreach ((ItemTest itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in characteristics.ArtifactBias.RandomResistances)
+                {
+                    // Test the probability and if whether the item test pass.
+                    if (itemTestProbability.Test())
+                    {
+                        // The test only occurs on the effective properties.
+                        RoItemPropertySet effectiveItemPropertySet = item.GetEffectiveItemProperties();
+                        if (itemTest.Test(effectiveItemPropertySet))
+                        {
+                            characteristics = characteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
+                            if (moreProbability.Test())
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        RwItemPropertySet characteristics = new RwItemPropertySet();
         const int ArtifactCurseChance = 13;
         int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;
@@ -1458,11 +1489,8 @@ internal class ItemFactory : IGetKey, IToJson
                     break;
                 case 3:
                 case 4:
-                    if (characteristics.ArtifactBias != null)
-                    {
-                        characteristics.ArtifactBias.ApplyRandomResistances(characteristics);
-                    }
-                    else
+                    bool randomResistancesApplied = ApplyRandomResistances(item, characteristics);
+                    if (!randomResistancesApplied)
                     {
                         WeightedRandom<ItemEnhancement> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemEnhancement>(Game);
                         itemAdditiveBundleWeightedRandom.Add(1 * 48, Game.SingletonRepository.Get<ItemEnhancement>(nameof(AcidImmunityAndAcidArtifactBiasItemEnhancement)));
@@ -1579,6 +1607,7 @@ internal class ItemFactory : IGetKey, IToJson
                 characteristics.Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
             }
         }
+        return characteristics.AsReadOnly();
     }
 
     public void ApplySlayingForRandomArtifactCreation(RwItemPropertySet characteristics)
