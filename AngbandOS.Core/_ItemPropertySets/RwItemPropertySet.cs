@@ -46,11 +46,6 @@ internal class RwItemPropertySet : ItemPropertySet
     #region Properties
     public bool CanApplyBlessedArtifactBias
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyBlessedArtifactBias];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyBlessedArtifactBias];
@@ -59,11 +54,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool CanApplyArtifactBiasSlaying
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyArtifactBiasSlaying];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyArtifactBiasSlaying];
@@ -1440,11 +1430,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Tunnel
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Tunnel];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Tunnel];
@@ -1453,11 +1438,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Valueless
     {
-        get
-        {
-            ValueItemProperty<bool> ValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
-            return ValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> ValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
@@ -1466,11 +1446,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Vampiric
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vampiric];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vampiric];
@@ -1479,11 +1454,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Vorpal
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vorpal];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vorpal];
@@ -1505,11 +1475,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Wraith
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Wraith];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Wraith];
@@ -1518,11 +1483,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool XtraMight
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraMight];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraMight];
@@ -1531,11 +1491,6 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool XtraShots
     {
-        get
-        {
-            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraShots];
-            return rwValueItemProperty.Value;
-        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraShots];
