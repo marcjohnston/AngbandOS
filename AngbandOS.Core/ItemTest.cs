@@ -70,7 +70,7 @@ internal abstract class ItemTest : IGetKey
 
     public bool Test(RoItemPropertySet characteristics)
     {
-        if (!TestNullObject<Activation>(Activation, characteristics.Activation))
+        if (!TestNullObject<Activation>(HasActivation, characteristics.Activation))
         {
             return false;
         }
@@ -460,7 +460,7 @@ internal abstract class ItemTest : IGetKey
     protected virtual bool? CanApplyBlessedArtifactBias => null;
     protected virtual bool? CanApplyArtifactBiasSlaying => null;
 
-    protected virtual bool? Activation => null;
+    protected virtual bool? HasActivation => null;
 
     public virtual bool? Aggravate => null;
 
