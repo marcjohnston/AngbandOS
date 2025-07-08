@@ -62,21 +62,36 @@ internal class OverrideItemPropertySet : ItemPropertySet
     //    }
     //}
 
+    /// <summary>
+    /// Resets the curse removed state back to default.  This is used when applying a curse on an item so that the item shows as cursed.
+    /// </summary>
     public void ResetCurse()
     {
         NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
         RwNullableValueItemProperty.Value = null;
     }
+
+    /// <summary>
+    /// Removes the curse from an item.  This overrides the curse state of an item; as false.
+    /// </summary>
     public void RemoveCurse()
     {
         NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
         RwNullableValueItemProperty.Value = false;
     }
+
+    /// <summary>
+    /// Resets the heavy curse removed state back to default.  This is used when applying a heavy curse on an item so that the item shows as cursed.
+    /// </summary>
     public void ResetHeavyCurse()
     {
         NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
         RwNullableValueItemProperty.Value = null;
     }
+
+    /// <summary>
+    /// Removes the heavy curse from an item.  This overrides the heavy curse state of an item; as false.
+    /// </summary>
     public void RemoveHeavyCurse()
     {
         NullableValueItemProperty<bool> RwNullableValueItemProperty = (NullableValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
