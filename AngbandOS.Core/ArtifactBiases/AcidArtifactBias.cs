@@ -21,6 +21,6 @@ internal class AcidArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseBrandAcidItemTest), "1", nameof(BrandAcidItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandAcidItemTest), "1", nameof(BrandAcidItemEnhancement), "1/2")
     };
 }

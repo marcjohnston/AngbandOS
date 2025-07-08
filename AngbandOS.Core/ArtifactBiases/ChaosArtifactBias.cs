@@ -21,7 +21,7 @@ internal class ChaosArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseChaoticItemTest), "1", nameof(ChaoticItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseChaoticItemTest), "1", nameof(ChaoticItemEnhancement), "1/2")
     };
 
     public override bool ApplyMiscPowers(RwItemPropertySet characteristics)

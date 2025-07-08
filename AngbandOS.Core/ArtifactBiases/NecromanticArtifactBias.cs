@@ -21,8 +21,8 @@ internal class NecromanticArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseVampiricItemTest), "1", nameof(VampiricItemEnhancement), "1/2"),
-        (nameof(FalseBrandPoisonItemTest), "1/2", nameof(BrandPoisonItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseVampiricItemTest), "1", nameof(VampiricItemEnhancement), "1/2"),
+        (nameof(CanSlayAndFalseBrandPoisonItemTest), "1/2", nameof(BrandPoisonItemEnhancement), "1/2")
     };
 
     public override Activation GetActivationPowerType()

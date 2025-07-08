@@ -20,7 +20,7 @@ internal class FireArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseBrandFireItemTest), "1", nameof(BrandFireItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandFireItemTest), "1", nameof(BrandFireItemEnhancement), "1/2")
     };
 
     public override bool ApplyMiscPowers(RwItemPropertySet characteristics)

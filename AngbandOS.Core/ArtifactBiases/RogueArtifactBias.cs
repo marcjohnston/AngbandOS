@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using System.Reflection.PortableExecutable;
 namespace AngbandOS.Core.ArtifactBiases;
 
 [Serializable]
@@ -16,7 +14,7 @@ internal class RogueArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "0")
+        (nameof(CanSlayAndFalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "0")
     };
     public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
     {

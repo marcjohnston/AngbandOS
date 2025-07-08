@@ -1425,7 +1425,7 @@ internal class ItemFactory : IGetKey, IToJson
             /// </summary>
             /// <param name="item"></param>
             /// <returns></returns>
-            if (characteristics.ArtifactBias != null & characteristics.CanApplyArtifactBiasSlaying)
+            if (characteristics.ArtifactBias != null)
             {
                 bool slayingApplied = ApplyTestsAndItemEnhancements(item, characteristics, characteristics.ArtifactBias?.RandomSlayings);
 

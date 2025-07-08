@@ -7,9 +7,10 @@
 namespace AngbandOS.Core.ItemTests;
 
 [Serializable]
-internal class FalseSlayAnimalItemTest : ItemTest
+internal class CanSlayAndFalseBrandPoisonItemTest : ItemTest
 {
-    private FalseSlayAnimalItemTest(Game game) : base(game) { } // This object is a singleton.
+    private CanSlayAndFalseBrandPoisonItemTest(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool? SlayAnimal => false;
+    public override bool? BrandPois => false;
+    protected override bool? CanApplyArtifactBiasSlaying => true;
 }

@@ -20,7 +20,7 @@ internal class ColdArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseBrandColdItemTest), "1", nameof(BrandColdItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandColdItemTest), "1", nameof(BrandColdItemEnhancement), "1/2")
     };
 
     public override Activation GetActivationPowerType()

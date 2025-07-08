@@ -14,7 +14,7 @@ internal class PriestlyArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseBlessedItemTest), "1", nameof(BlessedItemEnhancement), "0")
+        (nameof(CanBlessAndFalseBlessedItemTest), "1", nameof(BlessedItemEnhancement), "0")
     };
 
     public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)

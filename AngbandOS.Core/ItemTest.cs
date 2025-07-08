@@ -74,6 +74,14 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
+        if (!TestBoolean(CanApplyBlessedArtifactBias, characteristics.CanApplyBlessedArtifactBias))
+        {
+            return false;
+        }
+        if (!TestBoolean(CanApplyArtifactBiasSlaying, characteristics.CanApplyArtifactBiasSlaying))
+        {
+            return false;
+        }
         if (!TestBoolean(Aggravate, characteristics.Aggravate))
         {
             return false;
@@ -448,6 +456,9 @@ internal abstract class ItemTest : IGetKey
         }
         return true;
     }
+
+    protected virtual bool? CanApplyBlessedArtifactBias => null;
+    protected virtual bool? CanApplyArtifactBiasSlaying => null;
 
     protected virtual bool? Activation => null;
 

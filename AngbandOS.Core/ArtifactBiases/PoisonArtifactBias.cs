@@ -18,7 +18,7 @@ internal class PoisonArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "1/2")
     };
 
     public override Activation GetActivationPowerType()

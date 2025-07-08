@@ -21,7 +21,7 @@ internal class ElectricityArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseBrandElectricityItemTest), "1", nameof(BrandElectricityItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandElectricityItemTest), "1", nameof(BrandElectricityItemEnhancement), "1/2")
     };
 
     public override Activation GetActivationPowerType()

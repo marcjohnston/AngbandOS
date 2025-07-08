@@ -13,9 +13,9 @@ internal class LawArtifactBias : ArtifactBias
     public override string AffinityName => "Law";
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseSlayEvilItemTest), "1", nameof(SlayEvilItemEnhancement), "1/2"),
-        (nameof(FalseSlayUndeadItemTest), "1", nameof(SlayUndeadItemEnhancement), "1/2"),
-        (nameof(FalseSlayDemonItemTest), "1", nameof(SlayDemonItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseSlayEvilItemTest), "1", nameof(SlayEvilItemEnhancement), "1/2"),
+        (nameof(CanSlayAndFalseSlayUndeadItemTest), "1", nameof(SlayUndeadItemEnhancement), "1/2"),
+        (nameof(CanSlayAndFalseSlayDemonItemTest), "1", nameof(SlayDemonItemEnhancement), "1/2")
     };
     public override Activation GetActivationPowerType()
     {
