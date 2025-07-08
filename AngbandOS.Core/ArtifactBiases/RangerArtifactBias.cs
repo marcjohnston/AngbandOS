@@ -14,6 +14,11 @@ internal class RangerArtifactBias : ArtifactBias
     private RangerArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Rangers";
 
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
+    {
+        (nameof(FalseSlayAnimalItemTest), "1", nameof(SlayAnimalItemEnhancement), "1/2")
+    };
+
     public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
     {
         if (!characteristics.Con)
@@ -52,21 +57,6 @@ internal class RangerArtifactBias : ArtifactBias
             if (Game.DieRoll(2) == 1)
             {
                 return true;
-            }
-        }
-        return false;
-    }
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
-    {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.SlayAnimal)
-            {
-                characteristics.SlayAnimal = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
             }
         }
         return false;

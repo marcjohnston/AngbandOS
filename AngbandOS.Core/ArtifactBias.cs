@@ -30,19 +30,26 @@ internal abstract class ArtifactBias : IGetKey
 
     public void Bind()
     {
-        if (RandomResistanceTuples != null)
+        (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? BindTestsAndItemEnhancements((string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? tuples)
         {
-            List<(ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)> randomResistances = new List<(ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)>();
-            foreach ((string itemTestName, string itemTestProbabilityExpression, string itemAdditiveBundleName, string moreProbabilityExpression) in RandomResistanceTuples)
+            if (tuples == null)
+            {
+                return null;
+            }
+
+            List<(ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)> list = new();
+            foreach ((string itemTestName, string itemTestProbabilityExpression, string itemAdditiveBundleName, string moreProbabilityExpression) in tuples)
             {
                 ItemTest itemTest = Game.SingletonRepository.Get<ItemTest>(itemTestName);
                 ProbabilityExpression itemTestProbability = Game.ParseProbabilityExpression(itemTestProbabilityExpression);
                 ItemEnhancement itemAdditiveBundle = Game.SingletonRepository.Get<ItemEnhancement>(itemAdditiveBundleName);
                 ProbabilityExpression moreProbability = Game.ParseProbabilityExpression(moreProbabilityExpression);
-                randomResistances.Add((itemTest, itemTestProbability, itemAdditiveBundle, moreProbability));
+                list.Add((itemTest, itemTestProbability, itemAdditiveBundle, moreProbability));
             }
-            RandomResistances = randomResistances.ToArray();
+            return list.ToArray();
         }
+        RandomResistances = BindTestsAndItemEnhancements(RandomResistanceTuples);
+        RandomSlayings = BindTestsAndItemEnhancements(RandomSlayingTuples);
     }
 
     /// <summary>
@@ -58,21 +65,16 @@ internal abstract class ArtifactBias : IGetKey
     public virtual bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics) => false;
 
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
+    protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => null;
     public (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomResistances { get; private set; } = null;
-            
+    public (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomSlayings { get; private set; } = null;
+
     /// <summary>
     /// Apply powers to the item and returns true, if additional powers can applied.  By default, no powers are applied and false is returned.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
     public virtual bool ApplyMiscPowers(RwItemPropertySet characteristics) => false;
-
-    /// <summary>
-    /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual bool ApplySlaying(RwItemPropertySet characteristics) => false;
 
     /// <summary>
     /// Returns an activation type to be applied for the item or null when there is no biased activation type.  By default, null is returned.

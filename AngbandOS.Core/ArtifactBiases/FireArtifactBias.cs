@@ -18,25 +18,14 @@ internal class FireArtifactBias : ArtifactBias
         (nameof(FalseFireImmunityItemTest), "1/20", nameof(FireImmunityItemEnhancement), "1/2")
     };
 
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
+    {
+        (nameof(FalseBrandFireItemTest), "1", nameof(BrandFireItemEnhancement), "1/2")
+    };
+
     public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
     {
         characteristics.Radius = 3;
-        return false;
-    }
-
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
-    {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.BrandFire)
-            {
-                characteristics.BrandFire = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-        }
         return false;
     }
 

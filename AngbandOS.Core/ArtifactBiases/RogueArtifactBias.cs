@@ -14,6 +14,10 @@ internal class RogueArtifactBias : ArtifactBias
     private RogueArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Rogues";
 
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
+    {
+        (nameof(FalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "0")
+    };
     public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
     {
         if (!characteristics.Stealth)
@@ -22,22 +26,6 @@ internal class RogueArtifactBias : ArtifactBias
             if (Game.DieRoll(2) == 1)
             {
                 return true;
-            }
-        }
-        return false;
-    }
-
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
-    {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.BrandPois)
-            {
-                characteristics.BrandPois = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
             }
         }
         return false;

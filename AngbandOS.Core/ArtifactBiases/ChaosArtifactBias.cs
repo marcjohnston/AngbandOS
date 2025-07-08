@@ -19,6 +19,11 @@ internal class ChaosArtifactBias : ArtifactBias
         (nameof(FalseResistDisenchantItemTest), "1", nameof(ResistDisenchantItemEnhancement), "1/2")
     };
 
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
+    {
+        (nameof(FalseChaoticItemTest), "1", nameof(ChaoticItemEnhancement), "1/2")
+    };
+
     public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
     {
         if (!characteristics.Teleport)
@@ -31,22 +36,6 @@ internal class ChaosArtifactBias : ArtifactBias
         }
         return false;
     }
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
-    {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.Chaotic)
-            {
-                characteristics.Chaotic = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public override int ActivationPowerChance => 50;
 
     public override Activation GetActivationPowerType()

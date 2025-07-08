@@ -12,6 +12,11 @@ internal class PriestlyArtifactBias : ArtifactBias
     private PriestlyArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Priests";
 
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
+    {
+        (nameof(FalseBlessedItemTest), "1", nameof(BlessedItemEnhancement), "0")
+    };
+
     public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
     {
         if (!characteristics.Wis)
@@ -21,15 +26,6 @@ internal class PriestlyArtifactBias : ArtifactBias
             {
                 return true;
             }
-        }
-        return false;
-    }
-
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
-    {
-        if (characteristics.CanApplyBlessedArtifactBias && !characteristics.Blessed)
-        {
-            characteristics.Blessed = true;
         }
         return false;
     }

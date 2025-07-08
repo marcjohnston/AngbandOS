@@ -16,21 +16,10 @@ internal class PoisonArtifactBias : ArtifactBias
         (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.BrandPois)
-            {
-                characteristics.BrandPois = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+        (nameof(FalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "1/2")
+    };
 
     public override Activation GetActivationPowerType()
     {

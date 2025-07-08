@@ -18,21 +18,10 @@ internal class ColdArtifactBias : ArtifactBias
         (nameof(FalseColdImmunityItemTest), "1/20", nameof(ColdImmunityItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.BrandCold)
-            {
-                characteristics.BrandCold = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+        (nameof(FalseBrandColdItemTest), "1", nameof(BrandColdItemEnhancement), "1/2")
+    };
 
     public override Activation GetActivationPowerType()
     {

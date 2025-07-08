@@ -1418,16 +1418,43 @@ internal class ItemFactory : IGetKey, IToJson
             }
         }
 
-        /// <summary>
-        /// Apply resistances to the item and returns true, if additional resistances can be applied.  By default, no resistances are applied and false is returned.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        bool ApplyRandomResistances(Item item, RwItemPropertySet characteristics)
+        void ApplySlayingForRandomArtifactCreation(Item item, RwItemPropertySet characteristics)
         {
-            if (characteristics.ArtifactBias?.RandomResistances != null)
+            /// <summary>
+            /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            if (characteristics.ArtifactBias != null & characteristics.CanApplyArtifactBiasSlaying)
             {
-                foreach ((ItemTest itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in characteristics.ArtifactBias.RandomResistances)
+                bool slayingApplied = ApplyTestsAndItemEnhancements(item, characteristics, characteristics.ArtifactBias?.RandomSlayings);
+
+                if (slayingApplied)
+                {
+                    return;
+                }
+            }
+
+            // Slaying wasn't applied via artifact bias.  Choose a slaying item enhancement.  If the item enhancement doesn't apply to this item factory, choose another.
+            ItemEnhancement? slayingItemEnhancement = null;
+            do
+            {
+                slayingItemEnhancement = SlayingRandomArtifactItemEnhancementWeightedRandom?.ChooseOrDefault();
+            } while (slayingItemEnhancement != null && !slayingItemEnhancement.AppliesTo(this));
+
+            // Apply the item enhancement.  This supports a null choice.
+            characteristics.Merge(slayingItemEnhancement?.GenerateItemCharacteristics());
+        }
+
+        /// <summary>
+        /// Loops through an array of item tests and enhancements and based on the probability of the test, applies its associated item enhancement and returns true, if an enhancement
+        /// was applied.  If all of the tests fail, false is returned.
+        /// </summary>
+        bool ApplyTestsAndItemEnhancements(Item item, RwItemPropertySet characteristics, (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? testsAndItemEnhancements)
+        {
+            if (testsAndItemEnhancements != null)
+            {
+                foreach ((ItemTest itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in testsAndItemEnhancements)
                 {
                     // Test the probability and if whether the item test pass.
                     if (itemTestProbability.Test())
@@ -1489,7 +1516,7 @@ internal class ItemFactory : IGetKey, IToJson
                     break;
                 case 3:
                 case 4:
-                    bool randomResistancesApplied = ApplyRandomResistances(item, characteristics);
+                    bool randomResistancesApplied = ApplyTestsAndItemEnhancements(item, characteristics, characteristics.ArtifactBias?.RandomResistances);
                     if (!randomResistancesApplied)
                     {
                         WeightedRandom<ItemEnhancement> itemAdditiveBundleWeightedRandom = new WeightedRandom<ItemEnhancement>(Game);
@@ -1561,7 +1588,7 @@ internal class ItemFactory : IGetKey, IToJson
 
                 case 6:
                 case 7:
-                    ApplySlayingForRandomArtifactCreation(characteristics);
+                    ApplySlayingForRandomArtifactCreation(item, characteristics);
                     break;
 
                 default:
@@ -1608,27 +1635,6 @@ internal class ItemFactory : IGetKey, IToJson
             }
         }
         return characteristics.AsReadOnly();
-    }
-
-    public void ApplySlayingForRandomArtifactCreation(RwItemPropertySet characteristics)
-    {
-        if (characteristics.ArtifactBias != null)
-        {
-            if (characteristics.ArtifactBias.ApplySlaying(characteristics))
-            {
-                return;
-            }
-        }
-
-        // Choose a slaying item enhancement.  If the item enhancement doesn't apply to this item factory, choose another.
-        ItemEnhancement? slayingItemEnhancement = null;
-        do
-        {
-            slayingItemEnhancement = SlayingRandomArtifactItemEnhancementWeightedRandom?.ChooseOrDefault();
-        } while (slayingItemEnhancement != null && !slayingItemEnhancement.AppliesTo(this));
-
-        // Apply the item enhancement.  This supports a null choice.
-        characteristics.Merge(slayingItemEnhancement?.GenerateItemCharacteristics());
     }
     #endregion
 

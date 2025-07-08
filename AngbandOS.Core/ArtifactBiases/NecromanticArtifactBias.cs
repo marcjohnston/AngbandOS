@@ -19,29 +19,11 @@ internal class NecromanticArtifactBias : ArtifactBias
         (nameof(FalseResistDarknessItemTest), "1", nameof(ResistDarknessItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.Vampiric)
-            {
-                characteristics.Vampiric = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-            if (!characteristics.BrandPois && Game.DieRoll(2) == 1)
-            {
-                characteristics.BrandPois = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+        (nameof(FalseVampiricItemTest), "1", nameof(VampiricItemEnhancement), "1/2"),
+        (nameof(FalseBrandPoisonItemTest), "1/2", nameof(BrandPoisonItemEnhancement), "1/2")
+    };
 
     public override Activation GetActivationPowerType()
     {

@@ -11,38 +11,12 @@ internal class LawArtifactBias : ArtifactBias
 {
     private LawArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Law";
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.SlayEvil)
-            {
-                characteristics.SlayEvil = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-            if (!characteristics.SlayUndead)
-            {
-                characteristics.SlayUndead = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-            if (!characteristics.SlayDemon)
-            {
-                characteristics.SlayDemon = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
+        (nameof(FalseSlayEvilItemTest), "1", nameof(SlayEvilItemEnhancement), "1/2"),
+        (nameof(FalseSlayUndeadItemTest), "1", nameof(SlayUndeadItemEnhancement), "1/2"),
+        (nameof(FalseSlayDemonItemTest), "1", nameof(SlayDemonItemEnhancement), "1/2")
+    };
     public override Activation GetActivationPowerType()
     {
         if (Game.DieRoll(8) == 1)

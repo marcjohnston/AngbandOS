@@ -19,19 +19,8 @@ internal class AcidArtifactBias : ArtifactBias
         (nameof(FalseAcidImmunityItemTest), "1/20", nameof(AcidImmunityAndAcidArtifactBiasItemEnhancement), "1/2")
     };
 
-    public override bool ApplySlaying(RwItemPropertySet characteristics)
+    protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        if (characteristics.CanApplyArtifactBiasSlaying)
-        {
-            if (!characteristics.BrandAcid)
-            {
-                characteristics.BrandAcid = true;
-                if (Game.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+        (nameof(FalseBrandAcidItemTest), "1", nameof(BrandAcidItemEnhancement), "1/2")
+    };
 }
