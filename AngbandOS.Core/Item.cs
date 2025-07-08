@@ -2186,7 +2186,7 @@ internal sealed class Item : IComparable<Item>
         // TODO: These should be deltas on the item enhancements
         DamageDice = fixedArtifact.Dd;
         DamageSides = fixedArtifact.Ds;
-        EnchantmentItemProperties.BonusArmorClass = fixedArtifact.ToA;
+        EnchantmentItemProperties.BonusAttacks = fixedArtifact.ToA;
         EnchantmentItemProperties.BonusHit = fixedArtifact.ToH;
         EnchantmentItemProperties.BonusDamage = fixedArtifact.ToD;
         Weight = fixedArtifact.Weight;
