@@ -46,6 +46,11 @@ internal class RwItemPropertySet : ItemPropertySet
     #region Properties
     public bool CanApplyBlessedArtifactBias
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyBlessedArtifactBias];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyBlessedArtifactBias];
@@ -54,6 +59,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool CanApplyArtifactBiasSlaying
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyArtifactBiasSlaying];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.CanApplyArtifactBiasSlaying];
@@ -517,6 +527,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool IsCursed
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.IsCursed];
@@ -603,6 +618,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool HeavyCurse
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.HeavyCurse];
@@ -1475,6 +1495,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Wraith
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Wraith];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Wraith];
@@ -1483,6 +1508,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool XtraMight
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraMight];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraMight];
@@ -1491,6 +1521,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool XtraShots
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraShots];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.XtraShots];
