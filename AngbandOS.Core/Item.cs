@@ -1162,17 +1162,6 @@ internal sealed class Item : IComparable<Item>
         return GetQualityRating().Description;
     }
 
-    /// <summary>
-    /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
-    /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
-    /// the flag-based properties.
-    /// </summary>
-    public RoItemPropertySet GetEffectiveItemProperties()
-    {
-        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(FactoryItemCharacteristics.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet).Merge(RandomPowerItemPropertySet).Merge(EnchantmentItemProperties));
-        return effectiveItemPropertySet;
-    }
-
     public ItemQualityRating? GetVagueQualityRating()
     {
         RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
@@ -2617,5 +2606,16 @@ internal sealed class Item : IComparable<Item>
     /// Returns the set of random power characteristics that was generated when the item received the random power.
     /// </summary>
     private RoItemPropertySet? RandomPowerItemPropertySet = null; // TODO: Rare items generate this and can be merged with RareItem
+
+    /// <summary>
+    /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
+    /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
+    /// the flag-based properties.
+    /// </summary>
+    public RoItemPropertySet GetEffectiveItemProperties()
+    {
+        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(FactoryItemCharacteristics.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet).Merge(RandomPowerItemPropertySet).Merge(EnchantmentItemProperties));
+        return effectiveItemPropertySet;
+    }
     #endregion
 }
