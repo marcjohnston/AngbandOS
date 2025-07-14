@@ -70,7 +70,35 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RwItemPropertySet EnchantmentItemProperties;
 
-    public OverrideItemPropertySet OverrideItemCharacteristics;
+    private OverrideItemPropertySet OverrideItemCharacteristics;
+    public void ResetCurse()
+    {
+        OverrideItemCharacteristics.ResetCurse();
+    }
+
+    /// <summary>
+    /// Removes the curse from an item.  This overrides the curse state of an item; as false.
+    /// </summary>
+    public void RemoveCurse()
+    {
+        OverrideItemCharacteristics.RemoveCurse();
+    }
+
+    /// <summary>
+    /// Resets the heavy curse removed state back to default.  This is used when applying a heavy curse on an item so that the item shows as cursed.
+    /// </summary>
+    public void ResetHeavyCurse()
+    {
+        OverrideItemCharacteristics.ResetHeavyCurse();
+    }
+
+    /// <summary>
+    /// Removes the heavy curse from an item.  This overrides the heavy curse state of an item; as false.
+    /// </summary>
+    public void RemoveHeavyCurse()
+    {
+        OverrideItemCharacteristics.RemoveHeavyCurse();
+    }
 
     /// <summary>
     /// Returns the deterministic set of random artifact characteristics.
