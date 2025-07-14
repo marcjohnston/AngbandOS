@@ -1450,6 +1450,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Tunnel
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Tunnel];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Tunnel];
@@ -1458,6 +1463,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Valueless
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> ValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Valueless];
@@ -1466,6 +1476,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Vampiric
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vampiric];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vampiric];
@@ -1474,6 +1489,11 @@ internal class RwItemPropertySet : ItemPropertySet
     }
     public bool Vorpal
     {
+        get
+        {
+            ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vorpal];
+            return rwValueItemProperty.Value;
+        }
         set
         {
             ValueItemProperty<bool> rwValueItemProperty = (ValueItemProperty<bool>)ItemProperties[(int)ItemPropertiesEnum.Vorpal];
