@@ -24,7 +24,7 @@ internal class OverrideItemPropertySet : ItemPropertySet
     /// Returns a cloned set of item properties.
     /// </summary>
     /// <remarks>
-    /// This override version of the clone is used to clone the <see cref="Item.OverrideItemCharacteristics"/> when cloning an <see cref="Item"/>.
+    /// This override version of the clone is used to clone the <see cref="Item.OverrideItemPropertySet"/> when cloning an <see cref="Item"/>.
     /// </remarks>
     /// <returns></returns>
     public OverrideItemPropertySet Clone()

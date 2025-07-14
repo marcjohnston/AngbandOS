@@ -47,68 +47,6 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public bool IdentMental;
 
-    public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
-
-    /// <summary>
-    /// Returns the set of fixed artifact characteristics that was generated when the item was promoted to the fixed item artifact.
-    /// </summary>
-    private RoItemPropertySet? FixedArtifactItemCharacteristics = null;
-
-    /// <summary>
-    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
-    /// </summary>
-    public ItemEnhancement? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
-
-    /// <summary>
-    /// Returns the set of rare item characteristics that was generated when the item received the rare item enchantment.
-    /// </summary>
-    private RoItemPropertySet? RareItemCharacteristics = null;
-
-    /// <summary>
-    /// Returns the enchanted characteristics for this item.  These characteristics start with a default value and can be modified with magic via enchancement by the player.  These
-    /// enchantments are merged with fixed and rare item enchantments.
-    /// </summary>
-    public RwItemPropertySet EnchantmentItemProperties;
-
-    private OverrideItemPropertySet OverrideItemCharacteristics;
-    public void ResetCurse()
-    {
-        OverrideItemCharacteristics.IsCursed = null;
-    }
-
-    /// <summary>
-    /// Removes the curse from an item.  This overrides the curse state of an item; as false.
-    /// </summary>
-    public void RemoveCurse()
-    {
-        OverrideItemCharacteristics.IsCursed = false;
-    }
-
-    /// <summary>
-    /// Resets the heavy curse removed state back to default.  This is used when applying a heavy curse on an item so that the item shows as cursed.
-    /// </summary>
-    public void ResetHeavyCurse()
-    {
-        OverrideItemCharacteristics.HeavyCurse = null;
-    }
-
-    /// <summary>
-    /// Removes the heavy curse from an item.  This overrides the heavy curse state of an item; as false.
-    /// </summary>
-    public void RemoveHeavyCurse()
-    {
-        OverrideItemCharacteristics.HeavyCurse = false;
-    }
-
-    /// <summary>
-    /// Returns the deterministic set of random artifact characteristics.
-    /// </summary>
-    public RoItemPropertySet? RandomArtifactItemCharacteristics = null;
-
-    /// <summary>
-    /// Returns the set of random power characteristics that was generated when the item received the random power.
-    /// </summary>
-    private RoItemPropertySet? RandomPowerItemCharacteristics = null; // TODO: Rare items generate this and can be merged with RareItem
 
     /// <summary>
     /// Returns the number of stacked items.
@@ -203,12 +141,12 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
         clonedItem.FixedArtifact = FixedArtifact;
-        clonedItem.FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics;
+        clonedItem.FixedArtifactItemPropertySet = FixedArtifactItemPropertySet;
         clonedItem.RareItem = RareItem;
-        clonedItem.RareItemCharacteristics = RareItemCharacteristics;
+        clonedItem.RareItemPropertySet = RareItemPropertySet;
         clonedItem.EnchantmentItemProperties = EnchantmentItemProperties.Clone();
-        clonedItem.OverrideItemCharacteristics = OverrideItemCharacteristics.Clone();
-        clonedItem.RandomArtifactItemCharacteristics = RandomArtifactItemCharacteristics;
+        clonedItem.OverrideItemPropertySet = OverrideItemPropertySet.Clone();
+        clonedItem.RandomArtifactItemPropertySet = RandomArtifactItemPropertySet;
         clonedItem.Discount = Discount;
         clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
         clonedItem.Inscription = Inscription;
@@ -1231,7 +1169,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RoItemPropertySet GetEffectiveItemProperties()
     {
-        RoItemPropertySet effectiveItemPropertySet = OverrideItemCharacteristics.Override(FactoryItemCharacteristics.Merge(FixedArtifactItemCharacteristics).Merge(RareItemCharacteristics).Merge(RandomPowerItemCharacteristics).Merge(EnchantmentItemProperties));
+        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(FactoryItemCharacteristics.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet).Merge(RandomPowerItemPropertySet).Merge(EnchantmentItemProperties));
         return effectiveItemPropertySet;
     }
 
@@ -2260,7 +2198,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Check to see if we found an applicable mapped item enhancement and check to see if there are any attached item enhancements.
-        FixedArtifactItemCharacteristics = new ItemEnhancement(Game).GenerateItemCharacteristics(); // TODO: This is ugly but we must have something to merge.
+        FixedArtifactItemPropertySet = new ItemEnhancement(Game).GenerateItemCharacteristics(); // TODO: This is ugly but we must have something to merge.
         if (mappedItemEnhancement is not null && mappedItemEnhancement.ItemEnhancements is not null)
         {
             // Merge all of the applicable item enhancements.
@@ -2271,7 +2209,7 @@ internal sealed class Item : IComparable<Item>
                 // If it was a weighted random, no item enhancement might have been selected because null item enhancements can be assigned weights.
                 if (itemEnhancement is not null)
                 {
-                    FixedArtifactItemCharacteristics = FixedArtifactItemCharacteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
+                    FixedArtifactItemPropertySet = FixedArtifactItemPropertySet.Merge(itemEnhancement.GenerateItemCharacteristics());
                 }
             }
         }
@@ -2280,7 +2218,7 @@ internal sealed class Item : IComparable<Item>
         {
             IsBroken = true;
         }
-        Game.TreasureRating += FixedArtifactItemCharacteristics.TreasureRating;
+        Game.TreasureRating += FixedArtifactItemPropertySet.TreasureRating;
         Game.SpecialTreasure = true;
         return true;
     }
@@ -2411,7 +2349,7 @@ internal sealed class Item : IComparable<Item>
             modifiedRareItemCharacteristics.BonusAttacks *= goodBadMultiplier;
             modifiedRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
 
-            RareItemCharacteristics = modifiedRareItemCharacteristics.AsReadOnly();
+            RareItemPropertySet = modifiedRareItemCharacteristics.AsReadOnly();
 
             Game.TreasureRating += RareItem.TreasureRating;
             return;
@@ -2439,7 +2377,7 @@ internal sealed class Item : IComparable<Item>
     public bool CreateRandomArtifact(bool fromScroll)
     {
         // Create a set of random artifact characteristics.
-        RandomArtifactItemCharacteristics = _factory.CreateRandomArtifact(this, fromScroll);
+        RandomArtifactItemPropertySet = _factory.CreateRandomArtifact(this, fromScroll);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
@@ -2584,7 +2522,7 @@ internal sealed class Item : IComparable<Item>
 
         // Create a set of read-write item properties for additional player enhancements.
         EnchantmentItemProperties = new RwItemPropertySet();
-        OverrideItemCharacteristics = new OverrideItemPropertySet();
+        OverrideItemPropertySet = new OverrideItemPropertySet();
 
         // Generate the read-only item characteristics from the factory.
         FactoryItemCharacteristics = factory.ItemEnhancement.GenerateItemCharacteristics();
@@ -2614,5 +2552,70 @@ internal sealed class Item : IComparable<Item>
             StaffChargesRemaining = Game.ComputeIntegerExpression(_factory.UseTuple.Value.InitialCharges).Value;
         }
     }
+    #endregion
+
+    #region Item Properties Management
+    public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
+
+    /// <summary>
+    /// Returns the set of fixed artifact characteristics that was generated when the item was promoted to the fixed item artifact.
+    /// </summary>
+    private RoItemPropertySet? FixedArtifactItemPropertySet = null;
+
+    /// <summary>
+    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
+    /// </summary>
+    public ItemEnhancement? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
+
+    /// <summary>
+    /// Returns the set of rare item characteristics that was generated when the item received the rare item enchantment.
+    /// </summary>
+    private RoItemPropertySet? RareItemPropertySet = null;
+
+    /// <summary>
+    /// Returns the enchanted characteristics for this item.  These characteristics start with a default value and can be modified with magic via enchancement by the player.  These
+    /// enchantments are merged with fixed and rare item enchantments.
+    /// </summary>
+    public RwItemPropertySet EnchantmentItemProperties;
+
+    private OverrideItemPropertySet OverrideItemPropertySet;
+    public void ResetCurse()
+    {
+        OverrideItemPropertySet.IsCursed = null;
+    }
+
+    /// <summary>
+    /// Removes the curse from an item.  This overrides the curse state of an item; as false.
+    /// </summary>
+    public void RemoveCurse()
+    {
+        OverrideItemPropertySet.IsCursed = false;
+    }
+
+    /// <summary>
+    /// Resets the heavy curse removed state back to default.  This is used when applying a heavy curse on an item so that the item shows as cursed.
+    /// </summary>
+    public void ResetHeavyCurse()
+    {
+        OverrideItemPropertySet.HeavyCurse = null;
+    }
+
+    /// <summary>
+    /// Removes the heavy curse from an item.  This overrides the heavy curse state of an item; as false.
+    /// </summary>
+    public void RemoveHeavyCurse()
+    {
+        OverrideItemPropertySet.HeavyCurse = false;
+    }
+
+    /// <summary>
+    /// Returns the deterministic set of random artifact characteristics.
+    /// </summary>
+    public RoItemPropertySet? RandomArtifactItemPropertySet = null;
+
+    /// <summary>
+    /// Returns the set of random power characteristics that was generated when the item received the random power.
+    /// </summary>
+    private RoItemPropertySet? RandomPowerItemPropertySet = null; // TODO: Rare items generate this and can be merged with RareItem
     #endregion
 }
