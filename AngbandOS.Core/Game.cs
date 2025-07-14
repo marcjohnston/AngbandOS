@@ -2243,8 +2243,10 @@ internal class Game
 
     private Item? MakeFixedArtifact()
     {
-        foreach (FixedArtifact aPtr in SingletonRepository.Get<FixedArtifact>()) // TODO: This shouldn't be in order ... needs to be randomized
+        WeightedRandom<FixedArtifact> fixedArtifactsWeightedRandom = SingletonRepository.ToWeightedRandom<FixedArtifact>();
+        do
         {
+            FixedArtifact aPtr = fixedArtifactsWeightedRandom.Choose();
             if (!aPtr.HasOwnType)
             {
                 continue;
@@ -2277,7 +2279,7 @@ internal class Game
             Item item = kIdx.GenerateItem();
             item.FixedArtifact = aPtr;
             return item;
-        }
+        } while (true);
         return null;
     }
 
