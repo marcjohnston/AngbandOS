@@ -73,7 +73,7 @@ internal sealed class Item : IComparable<Item>
     private OverrideItemPropertySet OverrideItemCharacteristics;
     public void ResetCurse()
     {
-        OverrideItemCharacteristics.ResetCurse();
+        OverrideItemCharacteristics.IsCursed = null;
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public void RemoveCurse()
     {
-        OverrideItemCharacteristics.RemoveCurse();
+        OverrideItemCharacteristics.IsCursed = false;
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public void ResetHeavyCurse()
     {
-        OverrideItemCharacteristics.ResetHeavyCurse();
+        OverrideItemCharacteristics.HeavyCurse = null;
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public void RemoveHeavyCurse()
     {
-        OverrideItemCharacteristics.RemoveHeavyCurse();
+        OverrideItemCharacteristics.HeavyCurse = false;
     }
 
     /// <summary>
