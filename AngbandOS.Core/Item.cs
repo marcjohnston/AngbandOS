@@ -2567,7 +2567,11 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RwItemPropertySet EnchantmentItemProperties;
 
+    /// <summary>
+    /// Returns the override item properties.  Only the IsCursed and HeavyCurse properties are presented.
+    /// </summary>
     private OverrideItemPropertySet OverrideItemPropertySet;
+
     public void ResetCurse()
     {
         OverrideItemPropertySet.IsCursed = null;
@@ -2600,7 +2604,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the deterministic set of random artifact characteristics.
     /// </summary>
-    public RoItemPropertySet? RandomArtifactItemPropertySet = null;
+    private RoItemPropertySet? RandomArtifactItemPropertySet = null;
 
     /// <summary>
     /// Returns the set of random power characteristics that was generated when the item received the random power.
