@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
+[Serializable]
 internal class Bonuses
 {
     public int BaseArmorClass { get; init; } = 0;
