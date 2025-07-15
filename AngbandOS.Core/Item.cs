@@ -2494,7 +2494,7 @@ internal sealed class Item : IComparable<Item>
         FixedArtifactItemPropertySet = fixedArtifactItemPropertySet;
 
         // Refresh the effective item properties.
-        _effectiveItemPropertySet = null;
+        _baseItemPropertySet = null;
     }
 
     /// <summary>
@@ -2530,7 +2530,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     private RoItemPropertySet? RandomArtifactItemPropertySet = null;
 
-    private RoItemPropertySet? _effectiveItemPropertySet = null;
+    private RoItemPropertySet? _baseItemPropertySet = null;
 
     /// <summary>
     /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
@@ -2539,11 +2539,11 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RoItemPropertySet GetEffectiveItemProperties()
     {
-        if (_effectiveItemPropertySet == null)
+        if (_baseItemPropertySet == null)
         {
-            _effectiveItemPropertySet = _factoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet);
+            _baseItemPropertySet = _factoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet);
         }
-        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(_effectiveItemPropertySet.Merge(EnchantmentItemProperties));
+        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(_baseItemPropertySet.Merge(EnchantmentItemProperties));
         return effectiveItemPropertySet;
     }
 
@@ -2562,7 +2562,7 @@ internal sealed class Item : IComparable<Item>
         _factoryItemPropertySet = factoryItemPropertySet;
 
         // Refresh the effective item properties.
-        _effectiveItemPropertySet = null;
+        _baseItemPropertySet = null;
     }
 
     /// <summary>
@@ -2632,7 +2632,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Refresh the effective item properties.
-        _effectiveItemPropertySet = null;
+        _baseItemPropertySet = null;
     }
 
     public void ResetCurse()
