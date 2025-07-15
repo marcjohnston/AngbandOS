@@ -140,8 +140,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentityIsKnown = IdentityIsKnown;
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
-        clonedItem.FixedArtifact = FixedArtifact;
-        clonedItem.FixedArtifactItemPropertySet = FixedArtifactItemPropertySet;
+        clonedItem.SetFixedArtifact(FixedArtifact, FixedArtifactItemPropertySet);
         clonedItem.RareItem = RareItem;
         clonedItem.RareItemPropertySet = RareItemPropertySet;
         clonedItem.EnchantmentItemProperties = EnchantmentItemProperties.Clone();
@@ -181,7 +180,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the set of fixed artifact characteristics that wax generated when the item was created.
     /// </summary>
-    private readonly RoItemPropertySet FactoryItemCharacteristics;
+    private readonly RoItemPropertySet FactoryItemPropertySet;
 
     /// <summary>
     /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
@@ -2513,7 +2512,7 @@ internal sealed class Item : IComparable<Item>
         OverrideItemPropertySet = new OverrideItemPropertySet();
 
         // Generate the read-only item characteristics from the factory.
-        FactoryItemCharacteristics = factory.ItemEnhancement.GenerateItemCharacteristics();
+        FactoryItemPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
 
         StackCount = 1;
 
@@ -2543,10 +2542,11 @@ internal sealed class Item : IComparable<Item>
     #endregion
 
     #region Item Properties Management
-    public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
+    private FixedArtifact? _fixedArtifact = null;
+    public FixedArtifact? FixedArtifact => _fixedArtifact; // If this item is a fixed artifact, this will be not null.
     public void SetFixedArtifact(FixedArtifact? fixedArtifact, RoItemPropertySet? fixedArtifactItemPropertySet)
     {
-        FixedArtifact = fixedArtifact;
+        _fixedArtifact = fixedArtifact;
         FixedArtifactItemPropertySet = fixedArtifactItemPropertySet;
     }
 
@@ -2622,7 +2622,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RoItemPropertySet GetEffectiveItemProperties()
     {
-        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(FactoryItemCharacteristics.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet).Merge(RandomPowerItemPropertySet).Merge(EnchantmentItemProperties));
+        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(FactoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet).Merge(RandomPowerItemPropertySet).Merge(EnchantmentItemProperties));
         return effectiveItemPropertySet;
     }
     #endregion
