@@ -22,6 +22,6 @@ internal class TerribleDiggerEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(TerribleWeaponOfDiggingItemEnhancement));
+        item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(TerribleWeaponOfDiggingItemEnhancement)));
     }
 }

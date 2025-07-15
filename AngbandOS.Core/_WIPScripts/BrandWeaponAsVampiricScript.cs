@@ -35,7 +35,7 @@ internal class BrandWeaponAsVampiricScript : Script, IScript, ICastSpellScript
 
                 // Make it a vampiric weapon
                 act = "thirsts for blood!";
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponVampiricItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponVampiricItemEnhancement)));
 
                 // Let the player know what happened
                 Game.MsgPrint($"Your {itemName} {act}");

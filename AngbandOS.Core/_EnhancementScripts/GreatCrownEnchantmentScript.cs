@@ -27,27 +27,27 @@ internal class GreatCrownEnchantmentScript : Script, IEnhancementScript
             switch (Game.DieRoll(8))
             {
                 case 1:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfTheMagiItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfTheMagiItemEnhancement)));
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                     break;
                 case 2:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfMightItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfMightItemEnhancement)));
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                     break;
                 case 3:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfTelepathyItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfTelepathyItemEnhancement)));
                     break;
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfRegenerationItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfRegenerationItemEnhancement)));
                     break;
                 case 5:
                 case 6:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfLordlinessItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfLordlinessItemEnhancement)));
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                     break;
                 case 7:
                 case 8:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement)));
                     if (Game.DieRoll(3) == 1)
                     {
                         item.EnchantmentItemProperties.Telepathy = true;

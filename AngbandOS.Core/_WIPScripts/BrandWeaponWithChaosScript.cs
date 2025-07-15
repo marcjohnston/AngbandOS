@@ -35,7 +35,7 @@ internal class BrandWeaponWithChaosScript : Script, IScript, ICastSpellScript
 
                 // Make it a chaotic weapon
                 act = "is engulfed in raw chaos!";
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponChaoticItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponChaoticItemEnhancement)));
 
                 // Let the player know what happened
                 Game.MsgPrint($"Your {itemName} {act}");

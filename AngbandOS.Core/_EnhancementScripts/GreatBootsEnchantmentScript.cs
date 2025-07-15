@@ -27,13 +27,13 @@ internal class GreatBootsEnchantmentScript : Script, IEnhancementScript
             switch (Game.DieRoll(24))
             {
                 case 1:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfSpeedItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfSpeedItemEnhancement)));
                     break;
                 case 2:
                 case 3:
                 case 4:
                 case 5:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfFreeActionItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfFreeActionItemEnhancement)));
                     break;
                 case 6:
                 case 7:
@@ -43,7 +43,7 @@ internal class GreatBootsEnchantmentScript : Script, IEnhancementScript
                 case 11:
                 case 12:
                 case 13:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfStealthItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsOfStealthItemEnhancement)));
                     break;
                 case 14:
                 case 15:
@@ -56,7 +56,7 @@ internal class GreatBootsEnchantmentScript : Script, IEnhancementScript
                 case 22:
                 case 23:
                 case 24:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsWingedItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(BootsWingedItemEnhancement)));
                     if (Game.DieRoll(2) == 1)
                     {
                         item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));

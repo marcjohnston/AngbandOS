@@ -24,7 +24,7 @@ internal class TerribleMeleeWeaponEnchantmentScript : Script, IEnhancementScript
     {
         if (Game.RandomLessThan(Constants.MaxDepth) < level)
         {
-            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfLengItemEnhancement));
+            item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfLengItemEnhancement)));
             if (Game.DieRoll(6) == 1)
             {
                 item.EnchantmentItemProperties.DreadCurse = true;

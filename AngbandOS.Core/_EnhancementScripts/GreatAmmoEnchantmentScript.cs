@@ -27,30 +27,30 @@ internal class GreatAmmoEnchantmentScript : Script, IEnhancementScript
             case 1:
             case 2:
             case 3:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfWoundingItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfWoundingItemEnhancement)));
                 break;
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFlameItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFlameItemEnhancement)));
                 break;
             case 5:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFrostItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfFrostItemEnhancement)));
                 break;
             case 6:
             case 7:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtAnimalItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtAnimalItemEnhancement)));
                 break;
             case 8:
             case 9:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtEvilItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtEvilItemEnhancement)));
                 break;
             case 10:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtDragonItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfHurtDragonItemEnhancement)));
                 break;
             case 11:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfShockingItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfShockingItemEnhancement)));
                 break;
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfSlayingItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfSlayingItemEnhancement)));
                 item.DamageDice++;
                 break;
         }

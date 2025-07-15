@@ -31,7 +31,7 @@ internal class BrandWeaponWithPoisonScript : Script, IScript, ICastSpellScript
             string itemName = item.GetDescription(false);
 
             // Make it a poison brand
-            item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfPoisoningItemEnhancement));
+            item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfPoisoningItemEnhancement)));
 
             // Let the player know what happened
             Game.MsgPrint($"Your {itemName} is coated with poison.");

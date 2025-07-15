@@ -29,19 +29,19 @@ internal class GreatHelmEnchantmentScript : Script, IEnhancementScript
             {
                 case 1:
                 case 2:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfIntelligenceItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfIntelligenceItemEnhancement)));
                     break;
                 case 3:
                 case 4:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfWisdomItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfWisdomItemEnhancement)));
                     break;
                 case 5:
                 case 6:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfBeautyItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfBeautyItemEnhancement)));
                     break;
                 case 7:
                 case 8:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement)));
                     if (Game.DieRoll(7) == 1)
                     {
                         item.EnchantmentItemProperties.Telepathy = true;
@@ -49,13 +49,13 @@ internal class GreatHelmEnchantmentScript : Script, IEnhancementScript
                     break;
                 case 9:
                 case 10:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfLightItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfLightItemEnhancement)));
                     break;
                 case 11:
                 case 12:
                 case 13:
                 case 14:
-                    item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfInfravisionItemEnhancement));
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfInfravisionItemEnhancement)));
                     break;
             }
         }

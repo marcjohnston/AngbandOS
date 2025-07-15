@@ -52,7 +52,7 @@ internal class EditItemScript : Script, IScript, ICastSpellScript
                 {
                     return;
                 }
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(val);
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(val));
                 item.EnchantItem(Game.Difficulty, ok, good, great, true);
                 break;
             }

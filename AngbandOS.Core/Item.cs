@@ -141,8 +141,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
         clonedItem.SetFixedArtifact(FixedArtifact, FixedArtifactItemPropertySet);
-        clonedItem.RareItem = RareItem;
-        clonedItem.RareItemPropertySet = RareItemPropertySet;
+        clonedItem.SetRareItem(RareItem, RareItemPropertySet);
         clonedItem.EnchantmentItemProperties = EnchantmentItemProperties.Clone();
         clonedItem.OverrideItemPropertySet = OverrideItemPropertySet.Clone();
         clonedItem.RandomArtifactItemPropertySet = RandomArtifactItemPropertySet;
@@ -2277,7 +2276,7 @@ internal sealed class Item : IComparable<Item>
                 {
                     foreach (IEnhancementScript script in Scripts)
                     {
-                        script.ExecuteEnchantmentScript(this, lev);
+                        script.ExecuteEnchantmentScript(this, lev); // This may set the RareItem property
                     }
                 }
             }
@@ -2287,42 +2286,6 @@ internal sealed class Item : IComparable<Item>
         if (IsRandomArtifact) 
         {
             Game.TreasureRating += EnchantmentItemProperties.TreasureRating;
-        }
-        else if (RareItem != null)
-        {
-            // Check to see if we are enchanting a cursed or broken item.
-            RoItemPropertySet effectiveItemCharacteristics = GetEffectiveItemProperties();
-            int goodBadMultiplier = effectiveItemCharacteristics.IsCursed || IsBroken ? -1 : 1;
-
-            RoItemPropertySet roRareItemCharacteristics = RareItem.GenerateItemCharacteristics();
-            RwItemPropertySet modifiedRareItemCharacteristics = roRareItemCharacteristics.AsWriteable();
-
-            // If the rare item has no value, consider it broken.
-            if (RareItem.Value == 0)
-            {
-                IsBroken = true;
-            }
-
-            modifiedRareItemCharacteristics.BonusHit *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusDamage *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusArmorClass *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusStrength *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusIntelligence *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusWisdom *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusDexterity *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusConstitution *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusCharisma *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusStealth *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusSearch *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusInfravision *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusTunnel *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusAttacks *= goodBadMultiplier;
-            modifiedRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
-
-            RareItemPropertySet = modifiedRareItemCharacteristics.AsReadOnly();
-
-            Game.TreasureRating += RareItem.TreasureRating;
-            return;
         }
         if (_factory.Cost == 0)
         {
@@ -2538,10 +2501,71 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     private RoItemPropertySet? FixedArtifactItemPropertySet = null;
 
+    private ItemEnhancement? _rareItem = null;
     /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
     /// </summary>
-    public ItemEnhancement? RareItem = null; // TODO: To accommodate the RandomPower ... this needs to be an array
+    public ItemEnhancement? RareItem => _rareItem;
+
+    public void SetRareItem(ItemEnhancement? rareItem)
+    {
+        if (rareItem == null)
+        {
+            // Check to see if we need to remove properties.
+            if (_rareItem != null)
+            {
+                Game.TreasureRating -= _rareItem.TreasureRating;
+                RareItemPropertySet = null;
+            }
+            _rareItem = null;
+            RareItemPropertySet = null;
+        }
+        else
+        {
+            // Check to see if we are enchanting a cursed or broken item.
+            RoItemPropertySet effectiveItemCharacteristics = GetEffectiveItemProperties();
+            int goodBadMultiplier = effectiveItemCharacteristics.IsCursed || IsBroken ? -1 : 1;
+
+            RoItemPropertySet roRareItemCharacteristics = rareItem.GenerateItemCharacteristics();
+            RwItemPropertySet modifiedRareItemCharacteristics = roRareItemCharacteristics.AsWriteable();
+
+            // If the rare item has no value, consider it broken.
+            if (rareItem.Value == 0)
+            {
+                IsBroken = true;
+            }
+
+            modifiedRareItemCharacteristics.BonusHit *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusDamage *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusArmorClass *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusStrength *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusIntelligence *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusWisdom *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusDexterity *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusConstitution *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusCharisma *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusStealth *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusSearch *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusInfravision *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusTunnel *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusAttacks *= goodBadMultiplier;
+            modifiedRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
+
+            _rareItem = rareItem;
+            Game.TreasureRating += rareItem.TreasureRating;
+            RareItemPropertySet = modifiedRareItemCharacteristics.AsReadOnly();
+        }
+    }
+
+    public void SetRareItem(ItemEnhancement rareItem, RoItemPropertySet roRareItemPropertySet)
+    {
+        _rareItem = rareItem;
+        RareItemPropertySet = roRareItemPropertySet;
+        if (_rareItem != null)
+        {
+            Game.TreasureRating += rareItem.TreasureRating;
+        }
+    }
 
     /// <summary>
     /// Returns the set of rare item characteristics that was generated when the item received the rare item enchantment.

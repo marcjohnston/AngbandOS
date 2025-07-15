@@ -23,6 +23,6 @@ internal class TerribleGlovesEnchantmentScript : Script, IEnhancementScript
             item.EnchantmentItemProperties.IsCursed = true;
         }
 
-        item.RareItem = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(GlovesPoorItemEnhancementWeightedRandom)).ChooseOrDefault();
+        item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(GlovesPoorItemEnhancementWeightedRandom)).ChooseOrDefault());
     }
 }

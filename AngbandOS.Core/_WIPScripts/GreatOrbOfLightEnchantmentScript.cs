@@ -22,7 +22,7 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfPowerItemEnhancement));
+        item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfPowerItemEnhancement)));
         for (int i = 0; i < 3; i++)
         {
             WeightedRandomAction weightedRandomAction = new WeightedRandomAction(Game);

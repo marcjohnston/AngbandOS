@@ -25,29 +25,29 @@ internal class GreatSoftArmorEnchantmentScript : Script, IEnhancementScript
             case 2:
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistAcidItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistAcidItemEnhancement)));
                 break;
             case 5:
             case 6:
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistLightningItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistLightningItemEnhancement)));
                 break;
             case 9:
             case 10:
             case 11:
             case 12:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistFireItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistFireItemEnhancement)));
                 break;
             case 13:
             case 14:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistColdItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistColdItemEnhancement)));
                 break;
             case 17:
             case 18:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistanceItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistanceItemEnhancement)));
                 if (Game.DieRoll(4) == 1)
                 {
                     item.EnchantmentItemProperties.ResPois = true;
@@ -59,7 +59,7 @@ internal class GreatSoftArmorEnchantmentScript : Script, IEnhancementScript
                 break;
             case 20:
             case 21:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfYithItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfYithItemEnhancement)));
                 break;
         }
     }

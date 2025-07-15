@@ -23,7 +23,7 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
         {
             case 1:
             case 11:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistAcidItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistAcidItemEnhancement)));
                 break;
             case 2:
             case 3:
@@ -31,13 +31,13 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
             case 12:
             case 13:
             case 14:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistLightningItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistLightningItemEnhancement)));
                 break;
             case 5:
             case 6:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistFireItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistFireItemEnhancement)));
                 break;
             case 7:
             case 8:
@@ -45,7 +45,7 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
             case 17:
             case 18:
             case 19:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistColdItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistColdItemEnhancement)));
                 break;
             case 10:
             case 20:
@@ -54,11 +54,11 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
                 {
                     item.EnchantmentItemProperties.ResPois = true;
                 }
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistanceItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistanceItemEnhancement)));
                 break;
             case 21:
             case 22:
-                item.RareItem = Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfReflectionItemEnhancement));
+                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfReflectionItemEnhancement)));
                 break;
             case 23:
                 item.CreateRandomArtifact(false);

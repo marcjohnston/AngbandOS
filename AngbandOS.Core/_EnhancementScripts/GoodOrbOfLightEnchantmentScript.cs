@@ -52,6 +52,6 @@ internal class GoodOrbOfLightEnchantmentScript : Script, IEnhancementScript
         weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfSustenanceItemEnhancement)));
         weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfHealthItemEnhancement)));
         weightedRandom.Add(1, Game.SingletonRepository.Get<ItemEnhancement>(nameof(OrbOfFrostItemEnhancement)));
-        item.RareItem = weightedRandom.ChooseOrDefault();
+        item.SetRareItem(weightedRandom.ChooseOrDefault());
     }
 }

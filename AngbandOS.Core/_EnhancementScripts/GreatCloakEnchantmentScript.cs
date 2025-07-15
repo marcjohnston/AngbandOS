@@ -24,7 +24,7 @@ internal class GreatCloakEnchantmentScript : Script, IEnhancementScript
         }
         else
         {
-            item.RareItem = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(CloakGoodItemEnhancementWeightedRandom)).ChooseOrDefault();
+            item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(CloakGoodItemEnhancementWeightedRandom)).ChooseOrDefault());
         }
     }
 }

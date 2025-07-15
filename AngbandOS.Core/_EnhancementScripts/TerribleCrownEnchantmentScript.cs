@@ -18,7 +18,7 @@ internal class TerribleCrownEnchantmentScript : Script, IEnhancementScript
     public void ExecuteEnchantmentScript(Item item, int level)
     {
         item.EnchantmentItemProperties.BonusArmorClass -= item.GetBonusValue(10, level);
-        item.RareItem = Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(CrownPoorItemEnhancementWeightedRandom)).ChooseOrDefault();
+        item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(CrownPoorItemEnhancementWeightedRandom)).ChooseOrDefault());
         if (item.EnchantmentItemProperties.BonusArmorClass < 0)
         {
             item.EnchantmentItemProperties.IsCursed = true;
