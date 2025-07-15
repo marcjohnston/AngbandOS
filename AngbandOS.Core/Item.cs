@@ -2136,7 +2136,6 @@ internal sealed class Item : IComparable<Item>
         }
 
         fixedArtifact.CurNum = 1;
-        FixedArtifact = fixedArtifact;
 
         // TODO: These should be deltas on the item enhancements
         DamageDice = fixedArtifact.Dd;
@@ -2187,7 +2186,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Check to see if we found an applicable mapped item enhancement and check to see if there are any attached item enhancements.
-        FixedArtifactItemPropertySet = new ItemEnhancement(Game).GenerateItemCharacteristics(); // TODO: This is ugly but we must have something to merge.
+        RoItemPropertySet fixedArtifactItemPropertySet = new ItemEnhancement(Game).GenerateItemCharacteristics(); // TODO: This is ugly but we must have something to merge.
         if (mappedItemEnhancement is not null && mappedItemEnhancement.ItemEnhancements is not null)
         {
             // Merge all of the applicable item enhancements.
@@ -2198,10 +2197,11 @@ internal sealed class Item : IComparable<Item>
                 // If it was a weighted random, no item enhancement might have been selected because null item enhancements can be assigned weights.
                 if (itemEnhancement is not null)
                 {
-                    FixedArtifactItemPropertySet = FixedArtifactItemPropertySet.Merge(itemEnhancement.GenerateItemCharacteristics());
+                    fixedArtifactItemPropertySet = fixedArtifactItemPropertySet.Merge(itemEnhancement.GenerateItemCharacteristics());
                 }
             }
         }
+        SetFixedArtifact(fixedArtifact, fixedArtifactItemPropertySet);
 
         if (fixedArtifact.Cost == 0)
         {
@@ -2261,21 +2261,20 @@ internal sealed class Item : IComparable<Item>
         }
 
         int rollsForFixedArtifactAttempts = 0;
-        if (power >= 2)
+        if (allowFixedArtifact && FixedArtifact == null)
         {
-            rollsForFixedArtifactAttempts = 1;
-        }
-        if (great)
-        {
-            rollsForFixedArtifactAttempts = 4;
-        }
-        if (!allowFixedArtifact || FixedArtifact != null)
-        {
-            rollsForFixedArtifactAttempts = 0;
+            if (great)
+            {
+                rollsForFixedArtifactAttempts = 4;
+            }
+            else if (power >= 2)
+            {
+                rollsForFixedArtifactAttempts = 1;
+            }
         }
         for (int i = 0; i < rollsForFixedArtifactAttempts; i++)
         {
-            FixedArtifact? fixedArtifact = SelectCompatibleFixedArtifact();
+            FixedArtifact? fixedArtifact = SelectCompatibleFixedArtifact(); // TODO: This overrides the MakeArtifact selection
             if (fixedArtifact != null)
             {
                 // Apply the fixed 
@@ -2545,6 +2544,11 @@ internal sealed class Item : IComparable<Item>
 
     #region Item Properties Management
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
+    public void SetFixedArtifact(FixedArtifact? fixedArtifact, RoItemPropertySet? fixedArtifactItemPropertySet)
+    {
+        FixedArtifact = fixedArtifact;
+        FixedArtifactItemPropertySet = fixedArtifactItemPropertySet;
+    }
 
     /// <summary>
     /// Returns the set of fixed artifact characteristics that was generated when the item was promoted to the fixed item artifact.

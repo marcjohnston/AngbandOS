@@ -2277,10 +2277,9 @@ internal class Game
                 }
             }
             Item item = kIdx.GenerateItem();
-            item.FixedArtifact = aPtr;
+            item.ApplyFixedArtifact(aPtr);
             return item;
-        } while (true);
-        return null;
+        } while (true); // TODO: This may loop forever if no fixed artifact can be created.
     }
 
     public Item? MakeObject(bool good, bool great, bool doNotAllowChestToBeCreated)
@@ -2306,7 +2305,7 @@ internal class Game
             }
             item = kIdx.GenerateItem();
         }
-        item.EnchantItem(ObjectLevel, true, good, great, true);
+        item.EnchantItem(ObjectLevel, true, good, great, true); // This applies the fixed artifact.
         item.StackCount = item.MakeObjectCount;
         RoItemPropertySet mergedItemCharacteristics = item.GetEffectiveItemProperties();
         if (!mergedItemCharacteristics.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
@@ -6788,7 +6787,7 @@ internal class Game
         {
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
-            item.FixedArtifact = null;
+            item.SetFixedArtifact(null, null);
             item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement));
             item.EnchantmentItemProperties.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EnchantmentItemProperties.BonusHit = 0;
@@ -6827,7 +6826,7 @@ internal class Game
         {
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
-            item.FixedArtifact = null;
+            item.SetFixedArtifact(null, null);
             item.RareItem = SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement));
             item.EnchantmentItemProperties.BonusHit = 0 - DieRoll(5) - DieRoll(5);
             item.EnchantmentItemProperties.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
