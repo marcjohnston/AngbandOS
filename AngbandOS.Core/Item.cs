@@ -2451,14 +2451,12 @@ internal sealed class Item : IComparable<Item>
     public Item(Game game, ItemFactory factory)
     {
         Game = game;
-        _factory = factory;
+
+        SetFactory(factory, factory.ItemEnhancement.GenerateItemCharacteristics());
 
         // Create a set of read-write item properties for additional player enhancements.
         EnchantmentItemProperties = new RwItemPropertySet();
         OverrideItemPropertySet = new OverrideItemPropertySet();
-
-        // Generate the read-only item characteristics from the factory.
-        FactoryItemPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
 
         StackCount = 1;
 
@@ -2489,11 +2487,14 @@ internal sealed class Item : IComparable<Item>
 
     #region Item Properties Management
     private FixedArtifact? _fixedArtifact = null;
-    public FixedArtifact? FixedArtifact => _fixedArtifact; // If this item is a fixed artifact, this will be not null.
+    public FixedArtifact? FixedArtifact => _fixedArtifact; // TODO: This should be encapsulated.  If this item is a fixed artifact, this will be not null.
     public void SetFixedArtifact(FixedArtifact? fixedArtifact, RoItemPropertySet? fixedArtifactItemPropertySet)
     {
         _fixedArtifact = fixedArtifact;
         FixedArtifactItemPropertySet = fixedArtifactItemPropertySet;
+
+        // Refresh the effective item properties.
+        _effectiveItemPropertySet = null;
     }
 
     /// <summary>
@@ -2502,23 +2503,84 @@ internal sealed class Item : IComparable<Item>
     private RoItemPropertySet? FixedArtifactItemPropertySet = null;
 
     private ItemEnhancement? _rareItem = null;
+
     /// <summary>
     /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
     /// </summary>
-    public ItemEnhancement? RareItem => _rareItem;
+    public ItemEnhancement? RareItem => _rareItem; // TODO: This should be encapsulated.  If this item is a rare item, this will be not null.
+
+    /// <summary>
+    /// Returns the set of rare item characteristics that was generated when the item received the rare item enchantment.
+    /// </summary>
+    private RoItemPropertySet? RareItemPropertySet = null;
+
+    /// <summary>
+    /// Returns the enchanted characteristics for this item.  These characteristics start with a default value and can be modified with magic via enchancement by the player.  These
+    /// enchantments are merged with fixed and rare item enchantments.
+    /// </summary>
+    public RwItemPropertySet EnchantmentItemProperties;
+
+    /// <summary>
+    /// Returns the override item properties.  Only the IsCursed and HeavyCurse properties are presented.
+    /// </summary>
+    private OverrideItemPropertySet OverrideItemPropertySet;
+
+    /// <summary>
+    /// Returns the deterministic set of random artifact characteristics.
+    /// </summary>
+    private RoItemPropertySet? RandomArtifactItemPropertySet = null;
+
+    private RoItemPropertySet? _effectiveItemPropertySet = null;
+
+    /// <summary>
+    /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
+    /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
+    /// the flag-based properties.
+    /// </summary>
+    public RoItemPropertySet GetEffectiveItemProperties()
+    {
+        if (_effectiveItemPropertySet == null)
+        {
+            _effectiveItemPropertySet = _factoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet);
+        }
+        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(_effectiveItemPropertySet.Merge(EnchantmentItemProperties));
+        return effectiveItemPropertySet;
+    }
+
+    /// <summary>
+    /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
+    /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
+    /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
+    /// </summary>
+    private ItemFactory _factory;
+    private RoItemPropertySet _factoryItemPropertySet;
+
+    private void SetFactory(ItemFactory factory, RoItemPropertySet factoryItemPropertySet)
+    {
+        // Generate the read-only item characteristics from the factory.
+        _factory = factory;
+        _factoryItemPropertySet = factoryItemPropertySet;
+
+        // Refresh the effective item properties.
+        _effectiveItemPropertySet = null;
+    }
+
+    /// <summary>
+    /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
+    /// </summary>
+    public ItemFactory GetFactory => _factory; // TODO: Refactor the ItemFilter to not need this.
+
 
     public void SetRareItem(ItemEnhancement? rareItem)
     {
+        RoItemPropertySet? roRareItemCharacteristics = null;
         if (rareItem == null)
         {
             // Check to see if we need to remove properties.
             if (_rareItem != null)
             {
                 Game.TreasureRating -= _rareItem.TreasureRating;
-                RareItemPropertySet = null;
             }
-            _rareItem = null;
-            RareItemPropertySet = null;
         }
         else
         {
@@ -2526,8 +2588,7 @@ internal sealed class Item : IComparable<Item>
             RoItemPropertySet effectiveItemCharacteristics = GetEffectiveItemProperties();
             int goodBadMultiplier = effectiveItemCharacteristics.IsCursed || IsBroken ? -1 : 1;
 
-            RoItemPropertySet roRareItemCharacteristics = rareItem.GenerateItemCharacteristics();
-            RwItemPropertySet modifiedRareItemCharacteristics = roRareItemCharacteristics.AsWriteable();
+            RwItemPropertySet modifiedRareItemCharacteristics = rareItem.GenerateItemCharacteristics().AsWriteable();
 
             // If the rare item has no value, consider it broken.
             if (rareItem.Value == 0)
@@ -2550,38 +2611,29 @@ internal sealed class Item : IComparable<Item>
             modifiedRareItemCharacteristics.BonusTunnel *= goodBadMultiplier;
             modifiedRareItemCharacteristics.BonusAttacks *= goodBadMultiplier;
             modifiedRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
-
-            _rareItem = rareItem;
-            Game.TreasureRating += rareItem.TreasureRating;
-            RareItemPropertySet = modifiedRareItemCharacteristics.AsReadOnly();
+            roRareItemCharacteristics = modifiedRareItemCharacteristics.AsReadOnly();
         }
+        SetRareItem(rareItem, roRareItemCharacteristics);
     }
 
-    public void SetRareItem(ItemEnhancement rareItem, RoItemPropertySet roRareItemPropertySet)
+    private void SetRareItem(ItemEnhancement? rareItem, RoItemPropertySet? roRareItemPropertySet)
     {
+        if ((rareItem == null && roRareItemPropertySet != null) || (rareItem != null && roRareItemPropertySet == null))
+        {
+            throw new Exception("SetRareItem invalid parameter.");
+        }
+
         _rareItem = rareItem;
         RareItemPropertySet = roRareItemPropertySet;
+
         if (_rareItem != null)
         {
-            Game.TreasureRating += rareItem.TreasureRating;
+            Game.TreasureRating += _rareItem.TreasureRating;
         }
+
+        // Refresh the effective item properties.
+        _effectiveItemPropertySet = null;
     }
-
-    /// <summary>
-    /// Returns the set of rare item characteristics that was generated when the item received the rare item enchantment.
-    /// </summary>
-    private RoItemPropertySet? RareItemPropertySet = null;
-
-    /// <summary>
-    /// Returns the enchanted characteristics for this item.  These characteristics start with a default value and can be modified with magic via enchancement by the player.  These
-    /// enchantments are merged with fixed and rare item enchantments.
-    /// </summary>
-    public RwItemPropertySet EnchantmentItemProperties;
-
-    /// <summary>
-    /// Returns the override item properties.  Only the IsCursed and HeavyCurse properties are presented.
-    /// </summary>
-    private OverrideItemPropertySet OverrideItemPropertySet;
 
     public void ResetCurse()
     {
@@ -2612,42 +2664,5 @@ internal sealed class Item : IComparable<Item>
         OverrideItemPropertySet.HeavyCurse = false;
     }
 
-    /// <summary>
-    /// Returns the deterministic set of random artifact characteristics.
-    /// </summary>
-    private RoItemPropertySet? RandomArtifactItemPropertySet = null;
-
-    /// <summary>
-    /// Returns the set of random power characteristics that was generated when the item received the random power.
-    /// </summary>
-    private RoItemPropertySet? RandomPowerItemPropertySet = null; // TODO: Rare items generate this and can be merged with RareItem
-
-    /// <summary>
-    /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
-    /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
-    /// the flag-based properties.
-    /// </summary>
-    public RoItemPropertySet GetEffectiveItemProperties()
-    {
-        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(FactoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet).Merge(RandomPowerItemPropertySet).Merge(EnchantmentItemProperties));
-        return effectiveItemPropertySet;
-    }
-
-    /// <summary>
-    /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
-    /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
-    /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
-    /// </summary>
-    private readonly ItemFactory _factory;
-
-    /// <summary>
-    /// Returns the set of fixed artifact characteristics that wax generated when the item was created.
-    /// </summary>
-    private readonly RoItemPropertySet FactoryItemPropertySet;
-
-    /// <summary>
-    /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
-    /// </summary>
-    public ItemFactory GetFactory => _factory; // TODO: Refactor the ItemFilter to not need this.
     #endregion
 }
