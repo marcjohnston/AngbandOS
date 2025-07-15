@@ -170,23 +170,6 @@ internal sealed class Item : IComparable<Item>
         return clonedItem;
     }
 
-    /// <summary>
-    /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
-    /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
-    /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
-    /// </summary>
-    private readonly ItemFactory _factory;
-
-    /// <summary>
-    /// Returns the set of fixed artifact characteristics that wax generated when the item was created.
-    /// </summary>
-    private readonly RoItemPropertySet FactoryItemPropertySet;
-
-    /// <summary>
-    /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
-    /// </summary>
-    public ItemFactory GetFactory => _factory; // TODO: Refactor the ItemFilter to not need this.
-
     public bool CanBeWeaponOfSharpness => _factory.CanBeWeaponOfSharpness;
     public bool CapableOfVorpalSlaying => _factory.CapableOfVorpalSlaying;
     public bool CanBeWeaponOfLaw => _factory.CanBeWeaponOfLaw;
@@ -2625,5 +2608,22 @@ internal sealed class Item : IComparable<Item>
         RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(FactoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet).Merge(RandomPowerItemPropertySet).Merge(EnchantmentItemProperties));
         return effectiveItemPropertySet;
     }
+
+    /// <summary>
+    /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
+    /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
+    /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
+    /// </summary>
+    private readonly ItemFactory _factory;
+
+    /// <summary>
+    /// Returns the set of fixed artifact characteristics that wax generated when the item was created.
+    /// </summary>
+    private readonly RoItemPropertySet FactoryItemPropertySet;
+
+    /// <summary>
+    /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
+    /// </summary>
+    public ItemFactory GetFactory => _factory; // TODO: Refactor the ItemFilter to not need this.
     #endregion
 }
