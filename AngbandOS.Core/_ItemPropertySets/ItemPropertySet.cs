@@ -165,7 +165,7 @@ internal abstract class ItemPropertySet
         RegisterValueItemCharacteristic<bool>(ItemPropertiesEnum.Teleport);
         RegisterValueItemCharacteristic<int>(ItemPropertiesEnum.TreasureRating);
         RegisterValueItemCharacteristic<bool>(ItemPropertiesEnum.Tunnel);
-        RegisterValueItemCharacteristic<int>(ItemPropertiesEnum.Valueless);
+        RegisterValueItemCharacteristic<int>(ItemPropertiesEnum.Value);
         RegisterValueItemCharacteristic<bool>(ItemPropertiesEnum.Valueless);
         RegisterValueItemCharacteristic<bool>(ItemPropertiesEnum.Vampiric);
         RegisterValueItemCharacteristic<bool>(ItemPropertiesEnum.Vorpal);
