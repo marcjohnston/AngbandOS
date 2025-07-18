@@ -14,7 +14,7 @@ namespace AngbandOS.Core;
 internal abstract class ItemProperty
 {
     /// <summary>
-    /// Returns a new instance of the item property with a copy/clone of the value and the same access modifier.
+    /// Returns a new instance of the item property with a copy/clone of the value.
     /// </summary>
     /// <returns></returns>
     public abstract ItemProperty Clone();
