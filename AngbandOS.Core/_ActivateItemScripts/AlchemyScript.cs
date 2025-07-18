@@ -64,8 +64,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
         {
             string feel = "special";
             Game.MsgPrint($"You fail to turn {oName} to gold!");
-            RoItemPropertySet effectiveItemCharacteristics = oPtr.GetEffectiveItemProperties();
-            if (effectiveItemCharacteristics.IsCursed || oPtr.IsBroken)
+            if (oPtr.EffectiveItemPropertySet.IsCursed || oPtr.IsBroken)
             {
                 feel = "terrible";
             }

@@ -20,13 +20,12 @@ internal class ChaosItemEffect : ItemEffect
         {
             bool ignore = false;
             bool plural = false;
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;
             }
             string noteKill = plural ? " are destroyed!" : " is destroyed!";
-            if (mergedCharacteristics.ResChaos)
+            if (oPtr.EffectiveItemPropertySet.ResChaos)
             {
                 ignore = true;
             }

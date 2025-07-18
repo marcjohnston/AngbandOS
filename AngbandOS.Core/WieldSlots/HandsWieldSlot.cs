@@ -37,8 +37,7 @@ internal class HandsWieldSlot : EquipmentWieldSlot
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null)
                 {
-                    RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-                    if (!mergedCharacteristics.FreeAct && !mergedCharacteristics.Dex && oPtr.EnchantmentItemProperties.BonusDexterity > 0)
+                    if (!oPtr.EffectiveItemPropertySet.FreeAct && !oPtr.EffectiveItemPropertySet.Dex && oPtr.EnchantmentItemProperties.BonusDexterity > 0)
                     {
                         msp = 3 * msp / 4;
                         RestrictingGloves = true;

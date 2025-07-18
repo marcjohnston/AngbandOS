@@ -27,8 +27,7 @@ internal class BrandWeaponAsVampiricScript : Script, IScript, ICastSpellScript
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null)
         {
-            RoItemPropertySet effectiveItemCharacteristics = item.GetEffectiveItemProperties();
-            if (!item.IsArtifact && !item.IsRare() && !effectiveItemCharacteristics.IsCursed)
+            if (!item.IsArtifact && !item.IsRare() && !item.EffectiveItemPropertySet.IsCursed)
             {
                 string act;
                 string itemName = item.GetDescription(false);

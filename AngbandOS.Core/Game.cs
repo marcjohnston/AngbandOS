@@ -2307,8 +2307,7 @@ internal class Game
         }
         item.EnchantItem(ObjectLevel, true, good, great, true); // This applies the fixed artifact.
         item.StackCount = item.MakeObjectCount;
-        RoItemPropertySet mergedItemCharacteristics = item.GetEffectiveItemProperties();
-        if (!mergedItemCharacteristics.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
+        if (!item.EffectiveItemPropertySet.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
         {
             TreasureRating += item.LevelNormallyFound - Difficulty;
         }
@@ -5655,7 +5654,6 @@ internal class Game
 
         bool res = false;
         bool isArtifact = oPtr.IsArtifact;
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
         int prob = oPtr.StackCount * 100;
         prob /= oPtr.EnchantmentMaximumCount;
         for (int i = 0; i < n; i++)
@@ -5683,7 +5681,7 @@ internal class Game
                 {
                     oPtr.EnchantmentItemProperties.BonusHit++;
                     res = true;
-                    if (mergedCharacteristics.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.EnchantmentItemProperties.BonusHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveItemPropertySet.IsCursed && !oPtr.EffectiveItemPropertySet.PermaCurse && oPtr.EnchantmentItemProperties.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -5711,7 +5709,7 @@ internal class Game
                 {
                     oPtr.EnchantmentItemProperties.BonusDamage++;
                     res = true;
-                    if (mergedCharacteristics.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.EnchantmentItemProperties.BonusDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveItemPropertySet.IsCursed && !oPtr.EffectiveItemPropertySet.PermaCurse && oPtr.EnchantmentItemProperties.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -5739,7 +5737,7 @@ internal class Game
                 {
                     oPtr.EnchantmentItemProperties.BonusArmorClass++;
                     res = true;
-                    if (mergedCharacteristics.IsCursed && !mergedCharacteristics.PermaCurse && oPtr.EnchantmentItemProperties.BonusArmorClass >= 0 &&
+                    if (oPtr.EffectiveItemPropertySet.IsCursed && !oPtr.EffectiveItemPropertySet.PermaCurse && oPtr.EnchantmentItemProperties.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
@@ -5999,8 +5997,7 @@ internal class Game
         {
             return false;
         }
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-        if (mergedCharacteristics.IgnoreAcid)
+        if (oPtr.EffectiveItemPropertySet.IgnoreAcid)
         {
             return false;
         }
@@ -6013,8 +6010,7 @@ internal class Game
         {
             return false;
         }
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-        if (mergedCharacteristics.IgnoreCold)
+        if (oPtr.EffectiveItemPropertySet.IgnoreCold)
         {
             return false;
         }
@@ -6027,8 +6023,7 @@ internal class Game
         {
             return false;
         }
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-        if (mergedCharacteristics.IgnoreElec)
+        if (oPtr.EffectiveItemPropertySet.IgnoreElec)
         {
             return false;
         }
@@ -6041,8 +6036,7 @@ internal class Game
         {
             return false;
         }
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-        if (mergedCharacteristics.IgnoreFire)
+        if (oPtr.EffectiveItemPropertySet.IgnoreFire)
         {
             return false;
         }
@@ -6379,8 +6373,7 @@ internal class Game
             return false;
         }
         string oName = oPtr.GetDescription(false);
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-        if (mergedCharacteristics.IgnoreAcid)
+        if (oPtr.EffectiveItemPropertySet.IgnoreAcid)
         {
             MsgPrint($"Your {oName} is unaffected!");
             return true;
@@ -6431,16 +6424,15 @@ internal class Game
             {
                 continue;
             }
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-            if (!mergedCharacteristics.IsCursed)
+            if (!oPtr.EffectiveItemPropertySet.IsCursed)
             {
                 continue;
             }
-            if (!alsoRemoveHeavyCurse && mergedCharacteristics.HeavyCurse)
+            if (!alsoRemoveHeavyCurse && oPtr.EffectiveItemPropertySet.HeavyCurse)
             {
                 continue;
             }
-            if (mergedCharacteristics.PermaCurse)
+            if (oPtr.EffectiveItemPropertySet.PermaCurse)
             {
                 continue;
             }
@@ -7484,10 +7476,9 @@ internal class Game
 
                 if (meleeItem != null)
                 {
-                    RoItemPropertySet mergedCharacteristics = meleeItem.GetEffectiveItemProperties();
                     // Get our weapon's flags to see if we need to do anything special
-                    chaosEffect = mergedCharacteristics.Chaotic && DieRoll(2) == 1;
-                    if (mergedCharacteristics.Vampiric || (chaosEffect && DieRoll(5) < 3))
+                    chaosEffect = meleeItem.EffectiveItemPropertySet.Chaotic && DieRoll(2) == 1;
+                    if (meleeItem.EffectiveItemPropertySet.Vampiric || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7576,8 +7567,7 @@ internal class Game
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
                     // Vorpal weapons have a chance of a deep cut.
-                    RoItemPropertySet mergedCharacteristics = meleeItem.GetEffectiveItemProperties();
-                    bool vorpalCut = mergedCharacteristics.Vorpal && DieRoll(extraDamage1InChance) == 1;
+                    bool vorpalCut = meleeItem.EffectiveItemPropertySet.Vorpal && DieRoll(extraDamage1InChance) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
@@ -13521,8 +13511,7 @@ internal class Game
         {
             return;
         }
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-        if (mergedCharacteristics.Blessed && DieRoll(888) > chance)
+        if (oPtr.EffectiveItemPropertySet.Blessed && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.StackCount > 1 ? "" : "s";
@@ -13531,7 +13520,7 @@ internal class Game
         }
         if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.RareItem != null))
         {
-            if (!mergedCharacteristics.HeavyCurse)
+            if (!oPtr.EffectiveItemPropertySet.HeavyCurse)
             {
                 changed = true;
             }
@@ -13542,7 +13531,7 @@ internal class Game
         }
         else
         {
-            if (!mergedCharacteristics.IsCursed)
+            if (!oPtr.EffectiveItemPropertySet.IsCursed)
             {
                 changed = true;
             }

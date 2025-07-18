@@ -52,17 +52,16 @@ internal abstract class EquipmentWieldSlot : WieldSlot
             if (oPtr != null)
             {
                 // Perform some universal actions for items that are worn.
-                RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-                if (mergedCharacteristics.DreadCurse && Game.DieRoll(100) == 1)
+                if (oPtr.EffectiveItemPropertySet.DreadCurse && Game.DieRoll(100) == 1)
                 {
                     Game.ActivateDreadCurse();
                 }
 
 
                 // Items that teleport.
-                if (mergedCharacteristics.Teleport && Game.RandomLessThan(100) < 1)
+                if (oPtr.EffectiveItemPropertySet.Teleport && Game.RandomLessThan(100) < 1)
                 {
-                    if (mergedCharacteristics.IsCursed && !Game.HasAntiTeleport)
+                    if (oPtr.EffectiveItemPropertySet.IsCursed && !Game.HasAntiTeleport)
                     {
                         Game.Disturb(true);
                         Game.RunScript(nameof(TeleportSelf40TeleportSelfScript));

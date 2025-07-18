@@ -1204,42 +1204,41 @@ internal class Monster : IItemContainer
                     if ((Race.TakeItem || Race.KillItem) && !IsPet)
                     {
                         bool willHurt = false;
-                        RoItemPropertySet mergedCharacteristics = item.GetEffectiveItemProperties();
                         string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
-                        if (mergedCharacteristics.KillDragon && Race.Dragon)
+                        if (item.EffectiveItemPropertySet.KillDragon && Race.Dragon)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayDragon && Race.Dragon)
+                        if (item.EffectiveItemPropertySet.SlayDragon && Race.Dragon)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayTroll && Race.Troll)
+                        if (item.EffectiveItemPropertySet.SlayTroll && Race.Troll)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayGiant && Race.Giant)
+                        if (item.EffectiveItemPropertySet.SlayGiant && Race.Giant)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayOrc && Race.Orc)
+                        if (item.EffectiveItemPropertySet.SlayOrc && Race.Orc)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayDemon && Race.Demon)
+                        if (item.EffectiveItemPropertySet.SlayDemon && Race.Demon)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayUndead && Race.Undead)
+                        if (item.EffectiveItemPropertySet.SlayUndead && Race.Undead)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayAnimal && Race.Animal)
+                        if (item.EffectiveItemPropertySet.SlayAnimal && Race.Animal)
                         {
                             willHurt = true;
                         }
-                        if (mergedCharacteristics.SlayEvil && Race.Evil)
+                        if (item.EffectiveItemPropertySet.SlayEvil && Race.Evil)
                         {
                             willHurt = true;
                         }

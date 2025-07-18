@@ -22,7 +22,6 @@ internal class MeteorItemEffect : ItemEffect
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;
@@ -31,7 +30,7 @@ internal class MeteorItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (mergedCharacteristics.IgnoreFire)
+                if (oPtr.EffectiveItemPropertySet.IgnoreFire)
                 {
                     ignore = true;
                 }
@@ -41,7 +40,7 @@ internal class MeteorItemEffect : ItemEffect
                 ignore = false;
                 doKill = true;
                 noteKill = plural ? " shatter!" : " shatters!";
-                if (mergedCharacteristics.IgnoreCold)
+                if (oPtr.EffectiveItemPropertySet.IgnoreCold)
                 {
                     ignore = true;
                 }

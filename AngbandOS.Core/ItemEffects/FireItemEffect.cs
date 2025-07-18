@@ -22,7 +22,6 @@ internal class FireItemEffect : ItemEffect
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;
@@ -31,7 +30,7 @@ internal class FireItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (mergedCharacteristics.IgnoreFire)
+                if (oPtr.EffectiveItemPropertySet.IgnoreFire)
                 {
                     ignore = true;
                 }

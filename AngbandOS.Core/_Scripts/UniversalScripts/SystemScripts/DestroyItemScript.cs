@@ -82,8 +82,7 @@ internal class DestroyItemScript : UniversalScript, IGetKey
             string feel = "special";
             Game.EnergyUse = 0;
             Game.MsgPrint($"You cannot destroy {itemName}.");
-            RoItemPropertySet effectiveItemCharacteristics = item.GetEffectiveItemProperties();
-            if (effectiveItemCharacteristics.IsCursed || item.IsBroken)
+            if (item.EffectiveItemPropertySet.IsCursed || item.IsBroken)
             {
                 feel = "terrible";
             }

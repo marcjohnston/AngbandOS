@@ -37,8 +37,7 @@ internal class RustProofScript : Script, IScript, ICastSpellScript
         // Make sure the grammar of the message is correct
         string your = item.IsInInventory ? "Your" : "The";
         string s;
-        RoItemPropertySet mergedCharacteristics = item.GetEffectiveItemProperties();
-        if (item.EnchantmentItemProperties.BonusArmorClass < 0 && !mergedCharacteristics.IsCursed)
+        if (item.EnchantmentItemProperties.BonusArmorClass < 0 && !item.EffectiveItemPropertySet.IsCursed)
         {
             s = item.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {itenName} look{s} as good as new!");

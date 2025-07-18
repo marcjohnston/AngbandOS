@@ -33,10 +33,9 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         }
         string your = oPtr.IsInInventory ? "your" : "the"; ;
         string oName = oPtr.GetDescription(false);
-        RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-        if (mergedCharacteristics.IsCursed)
+        if (oPtr.EffectiveItemPropertySet.IsCursed)
         {
-            if ((mergedCharacteristics.HeavyCurse && Game.DieRoll(100) < 33) || mergedCharacteristics.PermaCurse)
+            if ((oPtr.EffectiveItemPropertySet.HeavyCurse && Game.DieRoll(100) < 33) || oPtr.EffectiveItemPropertySet.PermaCurse)
             {
                 Game.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
                 return;
@@ -47,7 +46,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
             oPtr.Inscription = "uncursed";
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
-        if (mergedCharacteristics.Blessed)
+        if (oPtr.EffectiveItemPropertySet.Blessed)
         {
             string s = oPtr.StackCount > 1 ? "were" : "was";
             Game.MsgPrint($"{your} {oName} {s} blessed already.");

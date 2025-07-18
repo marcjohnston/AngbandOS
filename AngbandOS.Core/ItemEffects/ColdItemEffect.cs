@@ -22,7 +22,6 @@ internal class ColdItemEffect : ItemEffect
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;
@@ -31,7 +30,7 @@ internal class ColdItemEffect : ItemEffect
             {
                 noteKill = plural ? " shatter!" : " shatters!";
                 doKill = true;
-                if (mergedCharacteristics.IgnoreCold)
+                if (oPtr.EffectiveItemPropertySet.IgnoreCold)
                 {
                     ignore = true;
                 }

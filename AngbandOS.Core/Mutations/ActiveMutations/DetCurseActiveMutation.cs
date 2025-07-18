@@ -25,8 +25,7 @@ internal class DetCurseActiveMutation : Mutation
 
                 if (oPtr != null)                    
                 {
-                    RoItemPropertySet effectiveItemCharacteristics = oPtr.GetEffectiveItemProperties();
-                    if (effectiveItemCharacteristics.IsCursed)
+                    if (oPtr.EffectiveItemPropertySet.IsCursed)
                     {
                         oPtr.Inscription = "cursed";
                     }

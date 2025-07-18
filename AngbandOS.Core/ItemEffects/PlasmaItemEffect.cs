@@ -22,7 +22,6 @@ internal class PlasmaItemEffect : ItemEffect
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;
@@ -31,7 +30,7 @@ internal class PlasmaItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (mergedCharacteristics.IgnoreFire)
+                if (oPtr.EffectiveItemPropertySet.IgnoreFire)
                 {
                     ignore = true;
                 }
@@ -41,7 +40,7 @@ internal class PlasmaItemEffect : ItemEffect
                 ignore = false;
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";
-                if (mergedCharacteristics.IgnoreElec)
+                if (oPtr.EffectiveItemPropertySet.IgnoreElec)
                 {
                     ignore = true;
                 }

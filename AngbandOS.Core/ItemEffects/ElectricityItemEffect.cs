@@ -22,7 +22,6 @@ internal class ElectricityItemEffect : ItemEffect
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;
@@ -31,7 +30,7 @@ internal class ElectricityItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";
-                if (mergedCharacteristics.IgnoreElec)
+                if (oPtr.EffectiveItemPropertySet.IgnoreElec)
                 {
                     ignore = true;
                 }

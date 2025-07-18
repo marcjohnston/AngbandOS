@@ -22,7 +22,6 @@ internal class AcidItemEffect : ItemEffect
             bool plural = false;
             bool doKill = false;
             string noteKill = null;
-            RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
             if (oPtr.StackCount > 1)
             {
                 plural = true;
@@ -31,7 +30,7 @@ internal class AcidItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " melt!" : " melts!";
-                if (mergedCharacteristics.IgnoreAcid)
+                if (oPtr.EffectiveItemPropertySet.IgnoreAcid)
                 {
                     ignore = true;
                 }

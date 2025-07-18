@@ -177,267 +177,266 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    RoItemPropertySet mergedCharacteristics = oPtr.GetEffectiveItemProperties();
-                    if (mergedCharacteristics.Str)
+                    if (oPtr.EffectiveItemPropertySet.Str)
                     {
-                        Game.StrengthAbility.Bonus += mergedCharacteristics.BonusStrength;
+                        Game.StrengthAbility.Bonus += oPtr.EffectiveItemPropertySet.BonusStrength;
                     }
-                    if (mergedCharacteristics.Int)
+                    if (oPtr.EffectiveItemPropertySet.Int)
                     {
-                        Game.IntelligenceAbility.Bonus += mergedCharacteristics.BonusIntelligence;
+                        Game.IntelligenceAbility.Bonus += oPtr.EffectiveItemPropertySet.BonusIntelligence;
                     }
-                    if (mergedCharacteristics.Wis)
+                    if (oPtr.EffectiveItemPropertySet.Wis)
                     {
-                        Game.WisdomAbility.Bonus += mergedCharacteristics.BonusWisdom;
+                        Game.WisdomAbility.Bonus += oPtr.EffectiveItemPropertySet.BonusWisdom;
                     }
-                    if (mergedCharacteristics.Dex)
+                    if (oPtr.EffectiveItemPropertySet.Dex)
                     {
-                        Game.DexterityAbility.Bonus += mergedCharacteristics.BonusDexterity;
+                        Game.DexterityAbility.Bonus += oPtr.EffectiveItemPropertySet.BonusDexterity;
                     }
-                    if (mergedCharacteristics.Con)
+                    if (oPtr.EffectiveItemPropertySet.Con)
                     {
-                        Game.ConstitutionAbility.Bonus += mergedCharacteristics.BonusConstitution;
+                        Game.ConstitutionAbility.Bonus += oPtr.EffectiveItemPropertySet.BonusConstitution;
                     }
-                    if (mergedCharacteristics.Cha)
+                    if (oPtr.EffectiveItemPropertySet.Cha)
                     {
-                        Game.CharismaAbility.Bonus += mergedCharacteristics.BonusCharisma;
+                        Game.CharismaAbility.Bonus += oPtr.EffectiveItemPropertySet.BonusCharisma;
                     }
-                    if (mergedCharacteristics.Stealth)
+                    if (oPtr.EffectiveItemPropertySet.Stealth)
                     {
-                        Game.SkillStealth += mergedCharacteristics.BonusStealth;
+                        Game.SkillStealth += oPtr.EffectiveItemPropertySet.BonusStealth;
                     }
-                    if (mergedCharacteristics.Search)
+                    if (oPtr.EffectiveItemPropertySet.Search)
                     {
-                        Game.SkillSearching += mergedCharacteristics.BonusSearch * 5;
+                        Game.SkillSearching += oPtr.EffectiveItemPropertySet.BonusSearch * 5;
                     }
-                    if (mergedCharacteristics.Search)
+                    if (oPtr.EffectiveItemPropertySet.Search)
                     {
-                        Game.SkillSearchFrequency += mergedCharacteristics.BonusSearch * 5;
+                        Game.SkillSearchFrequency += oPtr.EffectiveItemPropertySet.BonusSearch * 5;
                     }
-                    if (mergedCharacteristics.Infra)
+                    if (oPtr.EffectiveItemPropertySet.Infra)
                     {
-                        Game.InfravisionRange += mergedCharacteristics.BonusInfravision;
+                        Game.InfravisionRange += oPtr.EffectiveItemPropertySet.BonusInfravision;
                     }
-                    if (mergedCharacteristics.Tunnel)
+                    if (oPtr.EffectiveItemPropertySet.Tunnel)
                     {
-                        Game.SkillDigging += mergedCharacteristics.BonusTunnel * 20;
+                        Game.SkillDigging += oPtr.EffectiveItemPropertySet.BonusTunnel * 20;
                     }
-                    if (mergedCharacteristics.Speed)
+                    if (oPtr.EffectiveItemPropertySet.Speed)
                     {
-                        Game.Speed.IntValue += mergedCharacteristics.BonusSpeed;
+                        Game.Speed.IntValue += oPtr.EffectiveItemPropertySet.BonusSpeed;
                     }
-                    if (mergedCharacteristics.Blows)
+                    if (oPtr.EffectiveItemPropertySet.Blows)
                     {
-                        extraBlows += mergedCharacteristics.BonusAttacks;
+                        extraBlows += oPtr.EffectiveItemPropertySet.BonusAttacks;
                     }
-                    if (mergedCharacteristics.Impact)
+                    if (oPtr.EffectiveItemPropertySet.Impact)
                     {
                         Game.HasQuakeWeapon = true;
                     }
-                    if (mergedCharacteristics.AntiTheft)
+                    if (oPtr.EffectiveItemPropertySet.AntiTheft)
                     {
                         Game.HasAntiTheft = true;
                     }
-                    if (mergedCharacteristics.XtraShots)
+                    if (oPtr.EffectiveItemPropertySet.XtraShots)
                     {
                         extraShots++;
                     }
-                    if (mergedCharacteristics.Aggravate)
+                    if (oPtr.EffectiveItemPropertySet.Aggravate)
                     {
                         Game.HasAggravation = true;
                     }
-                    if (mergedCharacteristics.Teleport)
+                    if (oPtr.EffectiveItemPropertySet.Teleport)
                     {
                         Game.HasRandomTeleport = true;
                     }
-                    if (mergedCharacteristics.DrainExp)
+                    if (oPtr.EffectiveItemPropertySet.DrainExp)
                     {
                         Game.HasExperienceDrain = true;
                     }
-                    if (mergedCharacteristics.Blessed)
+                    if (oPtr.EffectiveItemPropertySet.Blessed)
                     {
                         Game.HasBlessedBlade = true;
                     }
-                    if (mergedCharacteristics.XtraMight)
+                    if (oPtr.EffectiveItemPropertySet.XtraMight)
                     {
                         Game.HasExtraMight = true;
                     }
-                    if (mergedCharacteristics.SlowDigest)
+                    if (oPtr.EffectiveItemPropertySet.SlowDigest)
                     {
                         Game.HasSlowDigestion = true;
                     }
-                    if (mergedCharacteristics.Regen)
+                    if (oPtr.EffectiveItemPropertySet.Regen)
                     {
                         Game.HasRegeneration = true;
                     }
-                    if (mergedCharacteristics.Telepathy)
+                    if (oPtr.EffectiveItemPropertySet.Telepathy)
                     {
                         Game.HasTelepathy = true;
                     }
-                    if (mergedCharacteristics.SeeInvis)
+                    if (oPtr.EffectiveItemPropertySet.SeeInvis)
                     {
                         Game.HasSeeInvisibility = true;
                     }
-                    if (mergedCharacteristics.Feather)
+                    if (oPtr.EffectiveItemPropertySet.Feather)
                     {
                         Game.HasFeatherFall = true;
                     }
-                    if (mergedCharacteristics.FreeAct)
+                    if (oPtr.EffectiveItemPropertySet.FreeAct)
                     {
                         Game.HasFreeAction = true;
                     }
-                    if (mergedCharacteristics.HoldLife)
+                    if (oPtr.EffectiveItemPropertySet.HoldLife)
                     {
                         Game.HasHoldLife = true;
                     }
-                    if (mergedCharacteristics.Wraith)
+                    if (oPtr.EffectiveItemPropertySet.Wraith)
                     {
                         Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
                     }
-                    if (mergedCharacteristics.ImFire)
+                    if (oPtr.EffectiveItemPropertySet.ImFire)
                     {
                         Game.HasFireImmunity = true;
                     }
-                    if (mergedCharacteristics.ImAcid)
+                    if (oPtr.EffectiveItemPropertySet.ImAcid)
                     {
                         Game.HasAcidImmunity = true;
                     }
-                    if (mergedCharacteristics.ImCold)
+                    if (oPtr.EffectiveItemPropertySet.ImCold)
                     {
                         Game.HasColdImmunity = true;
                     }
-                    if (mergedCharacteristics.ImElec)
+                    if (oPtr.EffectiveItemPropertySet.ImElec)
                     {
                         Game.HasLightningImmunity = true;
                     }
-                    if (mergedCharacteristics.ResAcid)
+                    if (oPtr.EffectiveItemPropertySet.ResAcid)
                     {
                         Game.HasAcidResistance = true;
                     }
-                    if (mergedCharacteristics.ResElec)
+                    if (oPtr.EffectiveItemPropertySet.ResElec)
                     {
                         Game.HasLightningResistance = true;
                     }
-                    if (mergedCharacteristics.ResFire)
+                    if (oPtr.EffectiveItemPropertySet.ResFire)
                     {
                         Game.HasFireResistance = true;
                     }
-                    if (mergedCharacteristics.ResCold)
+                    if (oPtr.EffectiveItemPropertySet.ResCold)
                     {
                         Game.HasColdResistance = true;
                     }
-                    if (mergedCharacteristics.ResPois)
+                    if (oPtr.EffectiveItemPropertySet.ResPois)
                     {
                         Game.HasPoisonResistance = true;
                     }
-                    if (mergedCharacteristics.ResFear)
+                    if (oPtr.EffectiveItemPropertySet.ResFear)
                     {
                         Game.HasFearResistance = true;
                     }
-                    if (mergedCharacteristics.ResConf)
+                    if (oPtr.EffectiveItemPropertySet.ResConf)
                     {
                         Game.HasConfusionResistance = true;
                     }
-                    if (mergedCharacteristics.ResSound)
+                    if (oPtr.EffectiveItemPropertySet.ResSound)
                     {
                         Game.HasSoundResistance = true;
                     }
-                    if (mergedCharacteristics.ResLight)
+                    if (oPtr.EffectiveItemPropertySet.ResLight)
                     {
                         Game.HasLightResistance = true;
                     }
-                    if (mergedCharacteristics.ResDark)
+                    if (oPtr.EffectiveItemPropertySet.ResDark)
                     {
                         Game.HasDarkResistance = true;
                     }
-                    if (mergedCharacteristics.ResChaos)
+                    if (oPtr.EffectiveItemPropertySet.ResChaos)
                     {
                         Game.HasChaosResistance = true;
                     }
-                    if (mergedCharacteristics.ResDisen)
+                    if (oPtr.EffectiveItemPropertySet.ResDisen)
                     {
                         Game.HasDisenchantResistance = true;
                     }
-                    if (mergedCharacteristics.ResShards)
+                    if (oPtr.EffectiveItemPropertySet.ResShards)
                     {
                         Game.HasShardResistance = true;
                     }
-                    if (mergedCharacteristics.ResNexus)
+                    if (oPtr.EffectiveItemPropertySet.ResNexus)
                     {
                         Game.HasNexusResistance = true;
                     }
-                    if (mergedCharacteristics.ResBlind)
+                    if (oPtr.EffectiveItemPropertySet.ResBlind)
                     {
                         Game.HasBlindnessResistance = true;
                     }
-                    if (mergedCharacteristics.ResNether)
+                    if (oPtr.EffectiveItemPropertySet.ResNether)
                     {
                         Game.HasNetherResistance = true;
                     }
-                    if (mergedCharacteristics.Reflect)
+                    if (oPtr.EffectiveItemPropertySet.Reflect)
                     {
                         Game.HasReflection = true;
                     }
-                    if (mergedCharacteristics.ShFire)
+                    if (oPtr.EffectiveItemPropertySet.ShFire)
                     {
                         Game.HasFireSheath = true;
                     }
-                    if (mergedCharacteristics.ShElec)
+                    if (oPtr.EffectiveItemPropertySet.ShElec)
                     {
                         Game.HasElectricitySheath = true;
                     }
-                    if (mergedCharacteristics.NoMagic)
+                    if (oPtr.EffectiveItemPropertySet.NoMagic)
                     {
                         Game.HasAntiMagic = true;
                     }
-                    if (mergedCharacteristics.NoTele)
+                    if (oPtr.EffectiveItemPropertySet.NoTele)
                     {
                         Game.HasAntiTeleport = true;
                     }
-                    if (mergedCharacteristics.SustStr)
+                    if (oPtr.EffectiveItemPropertySet.SustStr)
                     {
                         Game.HasSustainStrength = true;
                     }
-                    if (mergedCharacteristics.SustInt)
+                    if (oPtr.EffectiveItemPropertySet.SustInt)
                     {
                         Game.HasSustainIntelligence = true;
                     }
-                    if (mergedCharacteristics.SustWis)
+                    if (oPtr.EffectiveItemPropertySet.SustWis)
                     {
                         Game.HasSustainWisdom = true;
                     }
-                    if (mergedCharacteristics.SustDex)
+                    if (oPtr.EffectiveItemPropertySet.SustDex)
                     {
                         Game.HasSustainDexterity = true;
                     }
-                    if (mergedCharacteristics.SustCon)
+                    if (oPtr.EffectiveItemPropertySet.SustCon)
                     {
                         Game.HasSustainConstitution = true;
                     }
-                    if (mergedCharacteristics.SustCha)
+                    if (oPtr.EffectiveItemPropertySet.SustCha)
                     {
                         Game.HasSustainCharisma = true;
                     }
                     baseArmorClass += oPtr.ArmorClass;
                     Game.DisplayedBaseArmorClass += oPtr.ArmorClass;
-                    Game.ArmorClassBonus += mergedCharacteristics.BonusArmorClass;
+                    Game.ArmorClassBonus += oPtr.EffectiveItemPropertySet.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedArmorClassBonus += mergedCharacteristics.BonusArmorClass;
+                        Game.DisplayedArmorClassBonus += oPtr.EffectiveItemPropertySet.BonusArmorClass;
                     }
                     if (inventorySlot.IsWeapon)
                     {
                         continue;
                     }
-                    attackBonus += mergedCharacteristics.BonusHit;
-                    damageBonus += mergedCharacteristics.BonusDamage;
+                    attackBonus += oPtr.EffectiveItemPropertySet.BonusHit;
+                    damageBonus += oPtr.EffectiveItemPropertySet.BonusDamage;
                     if (oPtr.IsKnown())
                     {
-                        displayedAttackBonus += mergedCharacteristics.BonusHit;
+                        displayedAttackBonus += oPtr.EffectiveItemPropertySet.BonusHit;
                     }
                     if (oPtr.IsKnown())
                     {
-                        displayedDamageBonus += mergedCharacteristics.BonusDamage;
+                        displayedDamageBonus += oPtr.EffectiveItemPropertySet.BonusDamage;
                     }
                 }
             }

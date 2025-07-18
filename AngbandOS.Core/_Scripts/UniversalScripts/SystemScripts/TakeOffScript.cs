@@ -38,8 +38,7 @@ internal class TakeOffScript : UniversalScript, IGetKey
             return;
         }
         // Can't take of cursed items
-        RoItemPropertySet mergedCharacteristics = item.GetEffectiveItemProperties();
-        if (mergedCharacteristics.IsCursed)
+        if (item.EffectiveItemPropertySet.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

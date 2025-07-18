@@ -672,10 +672,9 @@ internal sealed class Item : IComparable<Item>
     {
         int mult = 1;
         MonsterRace rPtr = mPtr.Race;
-        RoItemPropertySet mergedCharacteristics = GetEffectiveItemProperties();
         if (GetsDamageMultiplier)
         {
-            if (mergedCharacteristics.SlayAnimal && rPtr.Animal)
+            if (EffectiveItemPropertySet.SlayAnimal && rPtr.Animal)
             {
                 if (mPtr.IsVisible)
                 {
@@ -686,7 +685,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (mergedCharacteristics.SlayEvil && rPtr.Evil)
+            if (EffectiveItemPropertySet.SlayEvil && rPtr.Evil)
             {
                 if (mPtr.IsVisible)
                 {
@@ -697,7 +696,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (mergedCharacteristics.SlayUndead && rPtr.Undead)
+            if (EffectiveItemPropertySet.SlayUndead && rPtr.Undead)
             {
                 if (mPtr.IsVisible)
                 {
@@ -708,7 +707,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (mergedCharacteristics.SlayDemon && rPtr.Demon)
+            if (EffectiveItemPropertySet.SlayDemon && rPtr.Demon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -719,7 +718,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (mergedCharacteristics.SlayOrc && rPtr.Orc)
+            if (EffectiveItemPropertySet.SlayOrc && rPtr.Orc)
             {
                 if (mPtr.IsVisible)
                 {
@@ -730,7 +729,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (mergedCharacteristics.SlayTroll && rPtr.Troll)
+            if (EffectiveItemPropertySet.SlayTroll && rPtr.Troll)
             {
                 if (mPtr.IsVisible)
                 {
@@ -741,7 +740,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (mergedCharacteristics.SlayGiant && rPtr.Giant)
+            if (EffectiveItemPropertySet.SlayGiant && rPtr.Giant)
             {
                 if (mPtr.IsVisible)
                 {
@@ -752,7 +751,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (mergedCharacteristics.SlayDragon && rPtr.Dragon)
+            if (EffectiveItemPropertySet.SlayDragon && rPtr.Dragon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -763,7 +762,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (mergedCharacteristics.KillDragon && rPtr.Dragon)
+            if (EffectiveItemPropertySet.KillDragon && rPtr.Dragon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -778,7 +777,7 @@ internal sealed class Item : IComparable<Item>
                     mult *= FixedArtifact.KillDragonMultiplier;
                 }
             }
-            if (mergedCharacteristics.BrandAcid)
+            if (EffectiveItemPropertySet.BrandAcid)
             {
                 if (rPtr.ImmuneAcid)
                 {
@@ -795,7 +794,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (mergedCharacteristics.BrandElec)
+            if (EffectiveItemPropertySet.BrandElec)
             {
                 if (rPtr.ImmuneLightning)
                 {
@@ -812,7 +811,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (mergedCharacteristics.BrandFire)
+            if (EffectiveItemPropertySet.BrandFire)
             {
                 if (rPtr.ImmuneFire)
                 {
@@ -829,7 +828,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (mergedCharacteristics.BrandCold)
+            if (EffectiveItemPropertySet.BrandCold)
             {
                 if (rPtr.ImmuneCold)
                 {
@@ -846,7 +845,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (mergedCharacteristics.BrandPois)
+            if (EffectiveItemPropertySet.BrandPois)
             {
                 if (rPtr.ImmunePoison)
                 {
@@ -1035,7 +1034,6 @@ internal sealed class Item : IComparable<Item>
         string basenm = GetDescription(includeCountPrefix);
         basenm += _factory.GetDetailedDescription(this);
         basenm += _factory.GetVerboseDescription(this);
-        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
 
         // This is the full description.
         string fullDescription = "";
@@ -1043,7 +1041,7 @@ internal sealed class Item : IComparable<Item>
         {
             fullDescription = Inscription;
         }
-        else if (effectiveCharacteristics.IsCursed && (IsKnown() || IdentSense))
+        else if (EffectiveItemPropertySet.IsCursed && (IsKnown() || IdentSense))
         {
             fullDescription = "cursed";
         }
@@ -1090,10 +1088,9 @@ internal sealed class Item : IComparable<Item>
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
-        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
         if (IsArtifact)
         {
-            if (effectiveCharacteristics.IsCursed || IsBroken)
+            if (EffectiveItemPropertySet.IsCursed || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(TerribleItemQualityRating));
             }
@@ -1101,14 +1098,14 @@ internal sealed class Item : IComparable<Item>
         }
         if (IsRare())
         {
-            if (effectiveCharacteristics.IsCursed || IsBroken)
+            if (EffectiveItemPropertySet.IsCursed || IsBroken)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(WorthlessItemQualityRating));
             }
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(ExcellentItemQualityRating));
         }
 
-        if (effectiveCharacteristics.IsCursed)
+        if (EffectiveItemPropertySet.IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
@@ -1145,8 +1142,7 @@ internal sealed class Item : IComparable<Item>
 
     public ItemQualityRating? GetVagueQualityRating()
     {
-        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
-        if (effectiveCharacteristics.IsCursed)
+        if (EffectiveItemPropertySet.IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
@@ -1177,335 +1173,334 @@ internal sealed class Item : IComparable<Item>
     {
         int i = 0, j, k;
         string[] info = new string[128];
-        RoItemPropertySet effectiveItemCharacteristics = GetEffectiveItemProperties();
-        if (effectiveItemCharacteristics.Activation != null)
+        if (EffectiveItemPropertySet.Activation != null)
         {
             info[i++] = "It can be activated for...";
-            info[i++] = effectiveItemCharacteristics.Activation.Description;
+            info[i++] = EffectiveItemPropertySet.Activation.Description;
             info[i++] = "...if it is being worn.";
         }
-        if (effectiveItemCharacteristics.ArtifactBias != null)
+        if (EffectiveItemPropertySet.ArtifactBias != null)
         {
-            info[i++] = $"It has an affinity for {effectiveItemCharacteristics.ArtifactBias.AffinityName.ToLower()}.";
+            info[i++] = $"It has an affinity for {EffectiveItemPropertySet.ArtifactBias.AffinityName.ToLower()}.";
         }
-        if (effectiveItemCharacteristics.Str)
+        if (EffectiveItemPropertySet.Str)
         {
             info[i++] = "It affects your strength.";
         }
-        if (effectiveItemCharacteristics.Int)
+        if (EffectiveItemPropertySet.Int)
         {
             info[i++] = "It affects your intelligence.";
         }
-        if (effectiveItemCharacteristics.Wis)
+        if (EffectiveItemPropertySet.Wis)
         {
             info[i++] = "It affects your wisdom.";
         }
-        if (effectiveItemCharacteristics.Dex)
+        if (EffectiveItemPropertySet.Dex)
         {
             info[i++] = "It affects your dexterity.";
         }
-        if (effectiveItemCharacteristics.Con)
+        if (EffectiveItemPropertySet.Con)
         {
             info[i++] = "It affects your constitution.";
         }
-        if (effectiveItemCharacteristics.Cha)
+        if (EffectiveItemPropertySet.Cha)
         {
             info[i++] = "It affects your charisma.";
         }
-        if (effectiveItemCharacteristics.Stealth)
+        if (EffectiveItemPropertySet.Stealth)
         {
             info[i++] = "It affects your stealth.";
         }
-        if (effectiveItemCharacteristics.Search)
+        if (EffectiveItemPropertySet.Search)
         {
             info[i++] = "It affects your searching.";
         }
-        if (effectiveItemCharacteristics.Infra)
+        if (EffectiveItemPropertySet.Infra)
         {
             info[i++] = "It affects your infravision.";
         }
-        if (effectiveItemCharacteristics.Tunnel)
+        if (EffectiveItemPropertySet.Tunnel)
         {
             info[i++] = "It affects your ability to tunnel.";
         }
-        if (effectiveItemCharacteristics.Speed)
+        if (EffectiveItemPropertySet.Speed)
         {
             info[i++] = "It affects your movement speed.";
         }
-        if (effectiveItemCharacteristics.Blows)
+        if (EffectiveItemPropertySet.Blows)
         {
             info[i++] = "It affects your attack speed.";
         }
-        if (effectiveItemCharacteristics.BrandAcid)
+        if (EffectiveItemPropertySet.BrandAcid)
         {
             info[i++] = "It does extra damage from acid.";
         }
-        if (effectiveItemCharacteristics.BrandElec)
+        if (EffectiveItemPropertySet.BrandElec)
         {
             info[i++] = "It does extra damage from electricity.";
         }
-        if (effectiveItemCharacteristics.BrandFire)
+        if (EffectiveItemPropertySet.BrandFire)
         {
             info[i++] = "It does extra damage from fire.";
         }
-        if (effectiveItemCharacteristics.BrandCold)
+        if (EffectiveItemPropertySet.BrandCold)
         {
             info[i++] = "It does extra damage from frost.";
         }
-        if (effectiveItemCharacteristics.BrandPois)
+        if (EffectiveItemPropertySet.BrandPois)
         {
             info[i++] = "It poisons your foes.";
         }
-        if (effectiveItemCharacteristics.Chaotic)
+        if (EffectiveItemPropertySet.Chaotic)
         {
             info[i++] = "It produces chaotic effects.";
         }
-        if (effectiveItemCharacteristics.Vampiric)
+        if (EffectiveItemPropertySet.Vampiric)
         {
             info[i++] = "It drains life from your foes.";
         }
-        if (effectiveItemCharacteristics.Impact)
+        if (EffectiveItemPropertySet.Impact)
         {
             info[i++] = "It can cause earthquakes.";
         }
 
-        if (effectiveItemCharacteristics.Radius > 0)
+        if (EffectiveItemPropertySet.Radius > 0)
         {
             string burnRate = BurnRate == 0 ? "forever" : "when fueled";
-            info[i++] = $"It provides light (radius {effectiveItemCharacteristics.Radius}) {burnRate}.";
+            info[i++] = $"It provides light (radius {EffectiveItemPropertySet.Radius}) {burnRate}.";
         }
 
-        if (effectiveItemCharacteristics.Vorpal)
+        if (EffectiveItemPropertySet.Vorpal)
         {
             info[i++] = "It is very sharp and can cut your foes.";
         }
-        if (effectiveItemCharacteristics.KillDragon)
+        if (EffectiveItemPropertySet.KillDragon)
         {
             info[i++] = "It is a great bane of dragons.";
         }
-        else if (effectiveItemCharacteristics.SlayDragon)
+        else if (EffectiveItemPropertySet.SlayDragon)
         {
             info[i++] = "It is especially deadly against dragons.";
         }
-        if (effectiveItemCharacteristics.SlayOrc)
+        if (EffectiveItemPropertySet.SlayOrc)
         {
             info[i++] = "It is especially deadly against orcs.";
         }
-        if (effectiveItemCharacteristics.SlayTroll)
+        if (EffectiveItemPropertySet.SlayTroll)
         {
             info[i++] = "It is especially deadly against trolls.";
         }
-        if (effectiveItemCharacteristics.SlayGiant)
+        if (EffectiveItemPropertySet.SlayGiant)
         {
             info[i++] = "It is especially deadly against giants.";
         }
-        if (effectiveItemCharacteristics.SlayDemon)
+        if (EffectiveItemPropertySet.SlayDemon)
         {
             info[i++] = "It strikes at demons with holy wrath.";
         }
-        if (effectiveItemCharacteristics.SlayUndead)
+        if (EffectiveItemPropertySet.SlayUndead)
         {
             info[i++] = "It strikes at undead with holy wrath.";
         }
-        if (effectiveItemCharacteristics.SlayEvil)
+        if (EffectiveItemPropertySet.SlayEvil)
         {
             info[i++] = "It fights against evil with holy fury.";
         }
-        if (effectiveItemCharacteristics.SlayAnimal)
+        if (EffectiveItemPropertySet.SlayAnimal)
         {
             info[i++] = "It is especially deadly against natural creatures.";
         }
-        if (effectiveItemCharacteristics.SustStr)
+        if (EffectiveItemPropertySet.SustStr)
         {
             info[i++] = "It sustains your strength.";
         }
-        if (effectiveItemCharacteristics.SustInt)
+        if (EffectiveItemPropertySet.SustInt)
         {
             info[i++] = "It sustains your intelligence.";
         }
-        if (effectiveItemCharacteristics.SustWis)
+        if (EffectiveItemPropertySet.SustWis)
         {
             info[i++] = "It sustains your wisdom.";
         }
-        if (effectiveItemCharacteristics.SustDex)
+        if (EffectiveItemPropertySet.SustDex)
         {
             info[i++] = "It sustains your dexterity.";
         }
-        if (effectiveItemCharacteristics.SustCon)
+        if (EffectiveItemPropertySet.SustCon)
         {
             info[i++] = "It sustains your constitution.";
         }
-        if (effectiveItemCharacteristics.SustCha)
+        if (EffectiveItemPropertySet.SustCha)
         {
             info[i++] = "It sustains your charisma.";
         }
-        if (effectiveItemCharacteristics.ImAcid)
+        if (EffectiveItemPropertySet.ImAcid)
         {
             info[i++] = "It provides immunity to acid.";
         }
-        if (effectiveItemCharacteristics.ImElec)
+        if (EffectiveItemPropertySet.ImElec)
         {
             info[i++] = "It provides immunity to electricity.";
         }
-        if (effectiveItemCharacteristics.ImFire)
+        if (EffectiveItemPropertySet.ImFire)
         {
             info[i++] = "It provides immunity to fire.";
         }
-        if (effectiveItemCharacteristics.ImCold)
+        if (EffectiveItemPropertySet.ImCold)
         {
             info[i++] = "It provides immunity to cold.";
         }
-        if (effectiveItemCharacteristics.FreeAct)
+        if (EffectiveItemPropertySet.FreeAct)
         {
             info[i++] = "It provides immunity to paralysis.";
         }
-        if (effectiveItemCharacteristics.HoldLife)
+        if (EffectiveItemPropertySet.HoldLife)
         {
             info[i++] = "It provides resistance to life draining.";
         }
-        if (effectiveItemCharacteristics.ResFear)
+        if (EffectiveItemPropertySet.ResFear)
         {
             info[i++] = "It makes you completely fearless.";
         }
-        if (effectiveItemCharacteristics.ResAcid)
+        if (EffectiveItemPropertySet.ResAcid)
         {
             info[i++] = "It provides resistance to acid.";
         }
-        if (effectiveItemCharacteristics.ResElec)
+        if (EffectiveItemPropertySet.ResElec)
         {
             info[i++] = "It provides resistance to electricity.";
         }
-        if (effectiveItemCharacteristics.ResFire)
+        if (EffectiveItemPropertySet.ResFire)
         {
             info[i++] = "It provides resistance to fire.";
         }
-        if (effectiveItemCharacteristics.ResCold)
+        if (EffectiveItemPropertySet.ResCold)
         {
             info[i++] = "It provides resistance to cold.";
         }
-        if (effectiveItemCharacteristics.ResPois)
+        if (EffectiveItemPropertySet.ResPois)
         {
             info[i++] = "It provides resistance to poison.";
         }
-        if (effectiveItemCharacteristics.ResLight)
+        if (EffectiveItemPropertySet.ResLight)
         {
             info[i++] = "It provides resistance to light.";
         }
-        if (effectiveItemCharacteristics.ResDark)
+        if (EffectiveItemPropertySet.ResDark)
         {
             info[i++] = "It provides resistance to dark.";
         }
-        if (effectiveItemCharacteristics.ResBlind)
+        if (EffectiveItemPropertySet.ResBlind)
         {
             info[i++] = "It provides resistance to blindness.";
         }
-        if (effectiveItemCharacteristics.ResConf)
+        if (EffectiveItemPropertySet.ResConf)
         {
             info[i++] = "It provides resistance to confusion.";
         }
-        if (effectiveItemCharacteristics.ResSound)
+        if (EffectiveItemPropertySet.ResSound)
         {
             info[i++] = "It provides resistance to sound.";
         }
-        if (effectiveItemCharacteristics.ResShards)
+        if (EffectiveItemPropertySet.ResShards)
         {
             info[i++] = "It provides resistance to shards.";
         }
-        if (effectiveItemCharacteristics.ResNether)
+        if (EffectiveItemPropertySet.ResNether)
         {
             info[i++] = "It provides resistance to nether.";
         }
-        if (effectiveItemCharacteristics.ResNexus)
+        if (EffectiveItemPropertySet.ResNexus)
         {
             info[i++] = "It provides resistance to nexus.";
         }
-        if (effectiveItemCharacteristics.ResChaos)
+        if (EffectiveItemPropertySet.ResChaos)
         {
             info[i++] = "It provides resistance to chaos.";
         }
-        if (effectiveItemCharacteristics.ResDisen)
+        if (EffectiveItemPropertySet.ResDisen)
         {
             info[i++] = "It provides resistance to disenchantment.";
         }
-        if (effectiveItemCharacteristics.Wraith)
+        if (EffectiveItemPropertySet.Wraith)
         {
             info[i++] = "It renders you incorporeal.";
         }
-        if (effectiveItemCharacteristics.Feather)
+        if (EffectiveItemPropertySet.Feather)
         {
             info[i++] = "It allows you to levitate.";
         }
-        if (effectiveItemCharacteristics.Radius > 0 && BurnRate == 0)
+        if (EffectiveItemPropertySet.Radius > 0 && BurnRate == 0)
         {
             info[i++] = "It provides permanent light.";
         }
-        if (effectiveItemCharacteristics.SeeInvis)
+        if (EffectiveItemPropertySet.SeeInvis)
         {
             info[i++] = "It allows you to see invisible monsters.";
         }
-        if (effectiveItemCharacteristics.Telepathy)
+        if (EffectiveItemPropertySet.Telepathy)
         {
             info[i++] = "It gives telepathic powers.";
         }
-        if (effectiveItemCharacteristics.SlowDigest)
+        if (EffectiveItemPropertySet.SlowDigest)
         {
             info[i++] = "It slows your metabolism.";
         }
-        if (effectiveItemCharacteristics.Regen)
+        if (EffectiveItemPropertySet.Regen)
         {
             info[i++] = "It speeds your regenerative powers.";
         }
-        if (effectiveItemCharacteristics.Reflect)
+        if (EffectiveItemPropertySet.Reflect)
         {
             info[i++] = "It reflects bolts and arrows.";
         }
-        if (effectiveItemCharacteristics.ShFire)
+        if (EffectiveItemPropertySet.ShFire)
         {
             info[i++] = "It produces a fiery sheath.";
         }
-        if (effectiveItemCharacteristics.ShElec)
+        if (EffectiveItemPropertySet.ShElec)
         {
             info[i++] = "It produces an electric sheath.";
         }
-        if (effectiveItemCharacteristics.NoMagic)
+        if (EffectiveItemPropertySet.NoMagic)
         {
             info[i++] = "It produces an anti-magic shell.";
         }
-        if (effectiveItemCharacteristics.NoTele)
+        if (EffectiveItemPropertySet.NoTele)
         {
             info[i++] = "It prevents teleportation.";
         }
-        if (effectiveItemCharacteristics.XtraMight)
+        if (EffectiveItemPropertySet.XtraMight)
         {
             info[i++] = "It fires missiles with extra might.";
         }
-        if (effectiveItemCharacteristics.XtraShots)
+        if (EffectiveItemPropertySet.XtraShots)
         {
             info[i++] = "It fires missiles excessively fast.";
         }
-        if (effectiveItemCharacteristics.DrainExp)
+        if (EffectiveItemPropertySet.DrainExp)
         {
             info[i++] = "It drains experience.";
         }
-        if (effectiveItemCharacteristics.Teleport)
+        if (EffectiveItemPropertySet.Teleport)
         {
             info[i++] = "It induces random teleportation.";
         }
-        if (effectiveItemCharacteristics.Aggravate)
+        if (EffectiveItemPropertySet.Aggravate)
         {
             info[i++] = "It aggravates nearby creatures.";
         }
-        if (effectiveItemCharacteristics.Blessed)
+        if (EffectiveItemPropertySet.Blessed)
         {
             info[i++] = "It has been blessed by the gods.";
         }
-        if (effectiveItemCharacteristics.IsCursed)
+        if (EffectiveItemPropertySet.IsCursed)
         {
-            if (effectiveItemCharacteristics.PermaCurse)
+            if (EffectiveItemPropertySet.PermaCurse)
             {
                 info[i++] = "It is permanently cursed.";
             }
-            else if (effectiveItemCharacteristics.HeavyCurse)
+            else if (EffectiveItemPropertySet.HeavyCurse)
             {
                 info[i++] = "It is heavily cursed.";
             }
@@ -1514,23 +1509,23 @@ internal sealed class Item : IComparable<Item>
                 info[i++] = "It is cursed.";
             }
         }
-        if (effectiveItemCharacteristics.DreadCurse)
+        if (EffectiveItemPropertySet.DreadCurse)
         {
             info[i++] = "It carries an ancient foul curse.";
         }
-        if (effectiveItemCharacteristics.IgnoreAcid)
+        if (EffectiveItemPropertySet.IgnoreAcid)
         {
             info[i++] = "It cannot be harmed by acid.";
         }
-        if (effectiveItemCharacteristics.IgnoreElec)
+        if (EffectiveItemPropertySet.IgnoreElec)
         {
             info[i++] = "It cannot be harmed by electricity.";
         }
-        if (effectiveItemCharacteristics.IgnoreFire)
+        if (EffectiveItemPropertySet.IgnoreFire)
         {
             info[i++] = "It cannot be harmed by fire.";
         }
-        if (effectiveItemCharacteristics.IgnoreCold)
+        if (EffectiveItemPropertySet.IgnoreCold)
         {
             info[i++] = "It cannot be harmed by cold.";
         }
@@ -1565,13 +1560,11 @@ internal sealed class Item : IComparable<Item>
 
     public bool IsKnown()
     {
-        RoItemPropertySet effectiveItemProperties = GetEffectiveItemProperties();
-
         if (IdentityIsKnown)
         {
             return true;
         }
-        if (effectiveItemProperties.EasyKnow && IsFlavorAware)
+        if (EffectiveItemPropertySet.EasyKnow && IsFlavorAware)
         {
             return true;
         }
@@ -1614,356 +1607,355 @@ internal sealed class Item : IComparable<Item>
         }
         int value = _factory.Cost;
 
-        RoItemPropertySet mergedCharacteristics = GetEffectiveItemProperties();
-        if (mergedCharacteristics.Valueless)
+        if (EffectiveItemPropertySet.Valueless)
         {
             return 0;
         }
 
-        if (mergedCharacteristics.Chaotic)
+        if (EffectiveItemPropertySet.Chaotic)
         {
             value += Game.BonusChaoticValue;
         }
-        if (mergedCharacteristics.Vampiric)
+        if (EffectiveItemPropertySet.Vampiric)
         {
             value += Game.BonusVampiricValue;
         }
-        if (mergedCharacteristics.AntiTheft)
+        if (EffectiveItemPropertySet.AntiTheft)
         {
             value += Game.BonusAntiTheftValue;
         }
-        if (mergedCharacteristics.SlayAnimal)
+        if (EffectiveItemPropertySet.SlayAnimal)
         {
             value += Game.BonusSlayAnimalValue;
         }
-        if (mergedCharacteristics.SlayEvil)
+        if (EffectiveItemPropertySet.SlayEvil)
         {
             value += Game.BonusSlayEvilValue;
         }
-        if (mergedCharacteristics.SlayUndead)
+        if (EffectiveItemPropertySet.SlayUndead)
         {
             value += Game.BonusSlayUndeadValue;
         }
-        if (mergedCharacteristics.SlayDemon)
+        if (EffectiveItemPropertySet.SlayDemon)
         {
             value += Game.BonusSlayDemonValue;
         }
-        if (mergedCharacteristics.SlayOrc)
+        if (EffectiveItemPropertySet.SlayOrc)
         {
             value += Game.BonusSlayOrcValue;
         }
-        if (mergedCharacteristics.SlayTroll)
+        if (EffectiveItemPropertySet.SlayTroll)
         {
             value += Game.BonusSlayTrollValue;
         }
-        if (mergedCharacteristics.SlayGiant)
+        if (EffectiveItemPropertySet.SlayGiant)
         {
             value += Game.BonusSlayGiantlValue;
         }
-        if (mergedCharacteristics.SlayDragon)
+        if (EffectiveItemPropertySet.SlayDragon)
         {
             value += Game.BonusSlayDragonValue;
         }
-        if (mergedCharacteristics.KillDragon)
+        if (EffectiveItemPropertySet.KillDragon)
         {
             value += Game.BonusKillDragonValue;
         }
-        if (mergedCharacteristics.Vorpal)
+        if (EffectiveItemPropertySet.Vorpal)
         {
             value += Game.BonusVorpalValue;
         }
-        if (mergedCharacteristics.Impact)
+        if (EffectiveItemPropertySet.Impact)
         {
             value += Game.BonusImpactValue;
         }
-        if (mergedCharacteristics.BrandPois)
+        if (EffectiveItemPropertySet.BrandPois)
         {
             value += Game.BonusBrandPoisValue;
         }
-        if (mergedCharacteristics.BrandAcid)
+        if (EffectiveItemPropertySet.BrandAcid)
         {
             value += Game.BonusBrandAcidValue;
         }
-        if (mergedCharacteristics.BrandElec)
+        if (EffectiveItemPropertySet.BrandElec)
         {
             value += Game.BonusBrandElecValue;
         }
-        if (mergedCharacteristics.BrandFire)
+        if (EffectiveItemPropertySet.BrandFire)
         {
             value += Game.BonusBrandFireValue;
         }
-        if (mergedCharacteristics.BrandCold)
+        if (EffectiveItemPropertySet.BrandCold)
         {
             value += Game.BonusBrandColdValue;
         }
-        if (mergedCharacteristics.SustStr)
+        if (EffectiveItemPropertySet.SustStr)
         {
             value += Game.BonusSustStrValue;
         }
-        if (mergedCharacteristics.SustInt)
+        if (EffectiveItemPropertySet.SustInt)
         {
             value += Game.BonusSustIntValue;
         }
-        if (mergedCharacteristics.SustWis)
+        if (EffectiveItemPropertySet.SustWis)
         {
             value += Game.BonusSustWisValue;
         }
-        if (mergedCharacteristics.SustDex)
+        if (EffectiveItemPropertySet.SustDex)
         {
             value += Game.BonusSustDexValue;
         }
-        if (mergedCharacteristics.SustCon)
+        if (EffectiveItemPropertySet.SustCon)
         {
             value += Game.BonusSustConValue;
         }
-        if (mergedCharacteristics.SustCha)
+        if (EffectiveItemPropertySet.SustCha)
         {
             value += Game.BonusSustChaValue;
         }
-        if (mergedCharacteristics.ImAcid)
+        if (EffectiveItemPropertySet.ImAcid)
         {
             value += Game.BonusImAcidValue;
         }
-        if (mergedCharacteristics.ImElec)
+        if (EffectiveItemPropertySet.ImElec)
         {
             value += Game.BonusImElecValue;
         }
-        if (mergedCharacteristics.ImFire)
+        if (EffectiveItemPropertySet.ImFire)
         {
             value += Game.BonusImFireValue;
         }
-        if (mergedCharacteristics.ImCold)
+        if (EffectiveItemPropertySet.ImCold)
         {
             value += Game.BonusImColdValue;
         }
-        if (mergedCharacteristics.Reflect)
+        if (EffectiveItemPropertySet.Reflect)
         {
             value += Game.BonusReflectValue;
         }
-        if (mergedCharacteristics.FreeAct)
+        if (EffectiveItemPropertySet.FreeAct)
         {
             value += Game.BonusFreeActValue;
         }
-        if (mergedCharacteristics.HoldLife)
+        if (EffectiveItemPropertySet.HoldLife)
         {
             value += Game.BonusHoldLifeValue;
         }
-        if (mergedCharacteristics.ResAcid)
+        if (EffectiveItemPropertySet.ResAcid)
         {
             value += Game.BonusResAcidValue;
         }
-        if (mergedCharacteristics.ResElec)
+        if (EffectiveItemPropertySet.ResElec)
         {
             value += Game.BonusResElecValue;
         }
-        if (mergedCharacteristics.ResFire)
+        if (EffectiveItemPropertySet.ResFire)
         {
             value += Game.BonusResFireValue;
         }
-        if (mergedCharacteristics.ResCold)
+        if (EffectiveItemPropertySet.ResCold)
         {
             value += Game.BonusResColdValue;
         }
-        if (mergedCharacteristics.ResPois)
+        if (EffectiveItemPropertySet.ResPois)
         {
             value += Game.BonusResPoisValue;
         }
-        if (mergedCharacteristics.ResFear)
+        if (EffectiveItemPropertySet.ResFear)
         {
             value += Game.BonusResFearValue;
         }
-        if (mergedCharacteristics.ResLight)
+        if (EffectiveItemPropertySet.ResLight)
         {
             value += Game.BonusResLightValue;
         }
-        if (mergedCharacteristics.ResDark)
+        if (EffectiveItemPropertySet.ResDark)
         {
             value += Game.BonusResDarkValue;
         }
-        if (mergedCharacteristics.ResBlind)
+        if (EffectiveItemPropertySet.ResBlind)
         {
             value += Game.BonusResBlindValue;
         }
-        if (mergedCharacteristics.ResConf)
+        if (EffectiveItemPropertySet.ResConf)
         {
             value += Game.BonusResConfValue;
         }
-        if (mergedCharacteristics.ResSound)
+        if (EffectiveItemPropertySet.ResSound)
         {
             value += Game.BonusResSoundValue;
         }
-        if (mergedCharacteristics.ResShards)
+        if (EffectiveItemPropertySet.ResShards)
         {
             value += Game.BonusResShardsValue;
         }
-        if (mergedCharacteristics.ResNether)
+        if (EffectiveItemPropertySet.ResNether)
         {
             value += Game.BonusResNetherValue;
         }
-        if (mergedCharacteristics.ResNexus)
+        if (EffectiveItemPropertySet.ResNexus)
         {
             value += Game.BonusResNexusValue;
         }
-        if (mergedCharacteristics.ResChaos)
+        if (EffectiveItemPropertySet.ResChaos)
         {
             value += Game.BonusResChaosValue;
         }
-        if (mergedCharacteristics.ResDisen)
+        if (EffectiveItemPropertySet.ResDisen)
         {
             value += Game.BonusResDisenValue;
         }
-        if (mergedCharacteristics.ShFire)
+        if (EffectiveItemPropertySet.ShFire)
         {
             value += Game.BonusShFireValue;
         }
-        if (mergedCharacteristics.ShElec)
+        if (EffectiveItemPropertySet.ShElec)
         {
             value += Game.BonusShElecValue;
         }
-        if (mergedCharacteristics.NoTele)
+        if (EffectiveItemPropertySet.NoTele)
         {
             value += Game.BonusNoTeleValue;
         }
-        if (mergedCharacteristics.NoMagic)
+        if (EffectiveItemPropertySet.NoMagic)
         {
             value += Game.BonusNoMagicValue;
         }
-        if (mergedCharacteristics.Wraith)
+        if (EffectiveItemPropertySet.Wraith)
         {
             value += Game.BonusWraithValue;
         }
-        if (mergedCharacteristics.DreadCurse)
+        if (EffectiveItemPropertySet.DreadCurse)
         {
             value += Game.BonusDreadCurseValue;
         }
-        if (mergedCharacteristics.InstaArt)
+        if (EffectiveItemPropertySet.InstaArt)
         {
             value += 0;
         }
-        if (mergedCharacteristics.Feather)
+        if (EffectiveItemPropertySet.Feather)
         {
             value += Game.BonusFeatherValue;
         }
-        if (mergedCharacteristics.SeeInvis)
+        if (EffectiveItemPropertySet.SeeInvis)
         {
             value += Game.BonusSeeInvisValue;
         }
-        if (mergedCharacteristics.Telepathy)
+        if (EffectiveItemPropertySet.Telepathy)
         {
             value += Game.BonusTelepathyValue;
         }
-        if (mergedCharacteristics.SlowDigest)
+        if (EffectiveItemPropertySet.SlowDigest)
         {
             value += Game.BonusSlowDigestValue;
         }
-        if (mergedCharacteristics.Regen)
+        if (EffectiveItemPropertySet.Regen)
         {
             value += Game.BonusRegenValue;
         }
-        if (mergedCharacteristics.XtraMight)
+        if (EffectiveItemPropertySet.XtraMight)
         {
             value += Game.BonusXtraMightValue;
         }
-        if (mergedCharacteristics.XtraShots)
+        if (EffectiveItemPropertySet.XtraShots)
         {
             value += Game.BonusXtraShotsValue;
         }
-        if (mergedCharacteristics.IgnoreAcid)
+        if (EffectiveItemPropertySet.IgnoreAcid)
         {
             value += Game.BonusIgnoreAcidValue;
         }
-        if (mergedCharacteristics.IgnoreElec)
+        if (EffectiveItemPropertySet.IgnoreElec)
         {
             value += Game.BonusIgnoreElecValue;
         }
-        if (mergedCharacteristics.IgnoreFire)
+        if (EffectiveItemPropertySet.IgnoreFire)
         {
             value += Game.BonusIgnoreFireValue;
         }
-        if (mergedCharacteristics.IgnoreCold)
+        if (EffectiveItemPropertySet.IgnoreCold)
         {
             value += Game.BonusIgnoreColdValue;
         }
-        if (mergedCharacteristics.DrainExp)
+        if (EffectiveItemPropertySet.DrainExp)
         {
             value += Game.BonusDrainExpValue;
         }
-        if (mergedCharacteristics.Teleport)
+        if (EffectiveItemPropertySet.Teleport)
         {
             value += Game.BonusTeleportValue;
         }
-        if (mergedCharacteristics.Aggravate)
+        if (EffectiveItemPropertySet.Aggravate)
         {
             value += Game.BonusAggravateValue;
         }
-        if (mergedCharacteristics.Blessed)
+        if (EffectiveItemPropertySet.Blessed)
         {
             value += Game.BonusBlessedValue;
         }
-        if (mergedCharacteristics.IsCursed)
+        if (EffectiveItemPropertySet.IsCursed)
         {
             value += Game.BonusIsCursedValue;
         }
-        if (mergedCharacteristics.HeavyCurse)
+        if (EffectiveItemPropertySet.HeavyCurse)
         {
             value += Game.BonusHeavyCurseValue;
         }
-        if (mergedCharacteristics.PermaCurse)
+        if (EffectiveItemPropertySet.PermaCurse)
         {
             value += Game.BonusPermaCurseValue;
         }
-        if (mergedCharacteristics.Str)
+        if (EffectiveItemPropertySet.Str)
         {
             value += EnchantmentItemProperties.BonusStrength * Game.BonusStrengthValue;
         }
-        if (mergedCharacteristics.Int)
+        if (EffectiveItemPropertySet.Int)
         {
             value += EnchantmentItemProperties.BonusIntelligence * Game.BonusIntelligenceValue;
         }
-        if (mergedCharacteristics.Wis)
+        if (EffectiveItemPropertySet.Wis)
         {
             value += EnchantmentItemProperties.BonusWisdom * Game.BonusWisdomValue;
         }
-        if (mergedCharacteristics.Dex)
+        if (EffectiveItemPropertySet.Dex)
         {
             value += EnchantmentItemProperties.BonusDexterity * Game.BonusDexterityValue;
         }
-        if (mergedCharacteristics.Con)
+        if (EffectiveItemPropertySet.Con)
         {
             value += EnchantmentItemProperties.BonusConstitution * Game.BonusConstitutionValue;
         }
-        if (mergedCharacteristics.Cha)
+        if (EffectiveItemPropertySet.Cha)
         {
             value += EnchantmentItemProperties.BonusCharisma * Game.BonusCharismaValue;
         }
-        if (mergedCharacteristics.Stealth)
+        if (EffectiveItemPropertySet.Stealth)
         {
             value += EnchantmentItemProperties.BonusStealth * Game.BonusStealthValue;
         }
-        if (mergedCharacteristics.Search)
+        if (EffectiveItemPropertySet.Search)
         {
             value += EnchantmentItemProperties.BonusSearch * Game.BonusSearchValue;
         }
-        if (mergedCharacteristics.Infra)
+        if (EffectiveItemPropertySet.Infra)
         {
             value += EnchantmentItemProperties.BonusInfravision * Game.BonusInfravisionValue;
         }
-        if (mergedCharacteristics.Tunnel)
+        if (EffectiveItemPropertySet.Tunnel)
         {
             value += EnchantmentItemProperties.BonusTunnel * Game.BonusTunnelValue;
         }
-        if (mergedCharacteristics.Blows)
+        if (EffectiveItemPropertySet.Blows)
         {
             value += EnchantmentItemProperties.BonusAttacks * Game.BonusExtraBlowslValue;
         }
-        if (mergedCharacteristics.Speed)
+        if (EffectiveItemPropertySet.Speed)
         {
             value += EnchantmentItemProperties.BonusSpeed * Game.BonusSpeedlValue;
         }
 
-        if (mergedCharacteristics.Activation != null)
+        if (EffectiveItemPropertySet.Activation != null)
         {
-            value += mergedCharacteristics.Activation.Value;
+            value += EffectiveItemPropertySet.Activation.Value;
         }
 
         if (AimingTuple != null)
@@ -2071,7 +2063,6 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public int Value()
     {
-        RoItemPropertySet effectiveCharacteristics = GetEffectiveItemProperties();
         int value;
         if (IsKnown())
         {
@@ -2079,7 +2070,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (effectiveCharacteristics.IsCursed)
+            if (EffectiveItemPropertySet.IsCursed)
             {
                 return 0;
             }
@@ -2091,7 +2082,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (IdentSense && effectiveCharacteristics.IsCursed)
+            if (IdentSense && EffectiveItemPropertySet.IsCursed)
             {
                 return 0;
             }
@@ -2531,6 +2522,18 @@ internal sealed class Item : IComparable<Item>
     private RoItemPropertySet? RandomArtifactItemPropertySet = null;
 
     private RoItemPropertySet? _baseItemPropertySet = null;
+    private EffectiveItemPropertySet _effectiveItemPropertySet = null;
+    public EffectiveItemPropertySet EffectiveItemPropertySet => RefreshEffectiveItemPropertySet();
+
+    private EffectiveItemPropertySet RefreshEffectiveItemPropertySet()
+    {
+        if (_baseItemPropertySet == null)
+        {
+            _baseItemPropertySet = _factoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet);
+            _effectiveItemPropertySet = new EffectiveItemPropertySet(_baseItemPropertySet, EnchantmentItemProperties, OverrideItemPropertySet);
+        }
+        return _effectiveItemPropertySet;
+    }
 
     /// <summary>
     /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
@@ -2539,12 +2542,8 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public RoItemPropertySet GetEffectiveItemProperties()
     {
-        if (_baseItemPropertySet == null)
-        {
-            _baseItemPropertySet = _factoryItemPropertySet.Merge(FixedArtifactItemPropertySet).Merge(RareItemPropertySet);
-        }
-        RoItemPropertySet effectiveItemPropertySet = OverrideItemPropertySet.Override(_baseItemPropertySet.Merge(EnchantmentItemProperties));
-        return effectiveItemPropertySet;
+        RefreshEffectiveItemPropertySet();
+        return OverrideItemPropertySet.Override(_baseItemPropertySet.Merge(EnchantmentItemProperties));
     }
 
     /// <summary>
@@ -2585,8 +2584,7 @@ internal sealed class Item : IComparable<Item>
         else
         {
             // Check to see if we are enchanting a cursed or broken item.
-            RoItemPropertySet effectiveItemCharacteristics = GetEffectiveItemProperties();
-            int goodBadMultiplier = effectiveItemCharacteristics.IsCursed || IsBroken ? -1 : 1;
+            int goodBadMultiplier = EffectiveItemPropertySet.IsCursed || IsBroken ? -1 : 1;
 
             RwItemPropertySet modifiedRareItemCharacteristics = rareItem.GenerateItemCharacteristics().AsWriteable();
 

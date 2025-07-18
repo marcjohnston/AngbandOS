@@ -361,80 +361,79 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         Item? meleeItem = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
-            RoItemPropertySet mergedCharacteristics = meleeItem.GetEffectiveItemProperties();
-            if (mergedCharacteristics.Blessed)
+            if (meleeItem.EffectiveItemPropertySet.Blessed)
             {
                 info[infoCount++] = "Your weapon has been blessed by the gods.";
             }
-            if (mergedCharacteristics.Chaotic)
+            if (meleeItem.EffectiveItemPropertySet.Chaotic)
             {
                 info[infoCount++] = "Your weapon is branded with the Yellow Sign.";
             }
-            if (mergedCharacteristics.Impact)
+            if (meleeItem.EffectiveItemPropertySet.Impact)
             {
                 info[infoCount++] = "The impact of your weapon can cause earthquakes.";
             }
-            if (mergedCharacteristics.Vorpal)
+            if (meleeItem.EffectiveItemPropertySet.Vorpal)
             {
                 info[infoCount++] = "Your weapon is very sharp.";
             }
-            if (mergedCharacteristics.Vampiric)
+            if (meleeItem.EffectiveItemPropertySet.Vampiric)
             {
                 info[infoCount++] = "Your weapon drains life from your foes.";
             }
-            if (mergedCharacteristics.BrandAcid)
+            if (meleeItem.EffectiveItemPropertySet.BrandAcid)
             {
                 info[infoCount++] = "Your weapon melts your foes.";
             }
-            if (mergedCharacteristics.BrandElec)
+            if (meleeItem.EffectiveItemPropertySet.BrandElec)
             {
                 info[infoCount++] = "Your weapon shocks your foes.";
             }
-            if (mergedCharacteristics.BrandFire)
+            if (meleeItem.EffectiveItemPropertySet.BrandFire)
             {
                 info[infoCount++] = "Your weapon burns your foes.";
             }
-            if (mergedCharacteristics.BrandCold)
+            if (meleeItem.EffectiveItemPropertySet.BrandCold)
             {
                 info[infoCount++] = "Your weapon freezes your foes.";
             }
-            if (mergedCharacteristics.BrandPois)
+            if (meleeItem.EffectiveItemPropertySet.BrandPois)
             {
                 info[infoCount++] = "Your weapon poisons your foes.";
             }
-            if (mergedCharacteristics.SlayAnimal)
+            if (meleeItem.EffectiveItemPropertySet.SlayAnimal)
             {
                 info[infoCount++] = "Your weapon strikes at animals with extra force.";
             }
-            if (mergedCharacteristics.SlayEvil)
+            if (meleeItem.EffectiveItemPropertySet.SlayEvil)
             {
                 info[infoCount++] = "Your weapon strikes at evil with extra force.";
             }
-            if (mergedCharacteristics.SlayUndead)
+            if (meleeItem.EffectiveItemPropertySet.SlayUndead)
             {
                 info[infoCount++] = "Your weapon strikes at undead with holy wrath.";
             }
-            if (mergedCharacteristics.SlayDemon)
+            if (meleeItem.EffectiveItemPropertySet.SlayDemon)
             {
                 info[infoCount++] = "Your weapon strikes at demons with holy wrath.";
             }
-            if (mergedCharacteristics.SlayOrc)
+            if (meleeItem.EffectiveItemPropertySet.SlayOrc)
             {
                 info[infoCount++] = "Your weapon is especially deadly against orcs.";
             }
-            if (mergedCharacteristics.SlayTroll)
+            if (meleeItem.EffectiveItemPropertySet.SlayTroll)
             {
                 info[infoCount++] = "Your weapon is especially deadly against trolls.";
             }
-            if (mergedCharacteristics.SlayGiant)
+            if (meleeItem.EffectiveItemPropertySet.SlayGiant)
             {
                 info[infoCount++] = "Your weapon is especially deadly against giants.";
             }
-            if (mergedCharacteristics.SlayDragon)
+            if (meleeItem.EffectiveItemPropertySet.SlayDragon)
             {
                 info[infoCount++] = "Your weapon is especially deadly against dragons.";
             }
-            if (mergedCharacteristics.KillDragon)
+            if (meleeItem.EffectiveItemPropertySet.KillDragon)
             {
                 info[infoCount++] = "Your weapon is a great bane of dragons.";
             }

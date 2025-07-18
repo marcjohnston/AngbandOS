@@ -574,12 +574,11 @@ internal class ItemFactory : IGetKey, IToJson
     /// <returns></returns>
     public string GetDetailedDescription(Item item)
     {
-        RoItemPropertySet effectiveItemProperties = item.GetEffectiveItemProperties();
         string s = "";
         if (IsRangedWeapon)
         {
             int power = MissileDamageMultiplier;
-            if (effectiveItemProperties.XtraMight)
+            if (item.EffectiveItemPropertySet.XtraMight)
             {
                 power++;
             }
@@ -633,7 +632,7 @@ internal class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (effectiveItemProperties.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
+                if (item.EffectiveItemPropertySet.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
                 }
@@ -658,7 +657,7 @@ internal class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (effectiveItemProperties.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
+                if (item.EffectiveItemPropertySet.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
                 }
@@ -717,8 +716,6 @@ internal class ItemFactory : IGetKey, IToJson
     /// <returns></returns>
     public string GetVerboseDescription(Item item)
     {
-        RoItemPropertySet effectiveItemProperties = item.GetEffectiveItemProperties();
-
         string s = "";
         if (item.IsKnown() && AimingBindingTuple != null)
         {
@@ -736,7 +733,7 @@ internal class ItemFactory : IGetKey, IToJson
             if (commonBonusValue.HasValue && commonBonusValue.Value.bonusValue != 0)
             {
                 s += $" ({GetSignedValue(commonBonusValue.Value.bonusValue)}";
-                if (!effectiveItemProperties.HideType && commonBonusValue.Value.priorityBonusName != "")
+                if (!item.EffectiveItemPropertySet.HideType && commonBonusValue.Value.priorityBonusName != "")
                 {
                     s += $" {commonBonusValue.Value.priorityBonusName}";
                 }
@@ -918,8 +915,7 @@ internal class ItemFactory : IGetKey, IToJson
         {
             return 0;
         }
-        RoItemPropertySet mergedCharacteristics = item.GetEffectiveItemProperties();
-        return mergedCharacteristics.Radius;
+        return item.EffectiveItemPropertySet.Radius;
     }
 
     /// <summary>

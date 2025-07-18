@@ -25,8 +25,7 @@ internal class BrandWeaponWithPoisonScript : Script, IScript, ICastSpellScript
         Item? item = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
 
         // We must have a non-rare, non-artifact weapon that isn't cursed
-        RoItemPropertySet effectiveItemProperties = item.GetEffectiveItemProperties();
-        if (item != null && !item.IsArtifact && !item.IsRare() && !effectiveItemProperties.IsCursed)
+        if (item != null && !item.IsArtifact && !item.IsRare() && !item.EffectiveItemPropertySet.IsCursed)
         {
             string itemName = item.GetDescription(false);
 
