@@ -205,6 +205,11 @@ internal abstract class ItemPropertySet
     }
 
     #region Equality
+    /// <summary>
+    /// Returns true, if all of the <see cref="ItemProperty"/> values are the same.  The <see cref="Get"/> method is used to determine equality.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public override bool Equals(object? obj)
     {
         if (obj is not ItemPropertySet other)
@@ -215,6 +220,12 @@ internal abstract class ItemPropertySet
         return ItemProperties.All(_itemProperty => _itemProperty.Equals(other.ItemProperties[_itemProperty.Index]));
     }
 
+    /// <summary>
+    /// Returns true, if the two <see cref="ItemPropertySet"/> objects are equal.  This operator overrride uses the <see cref="Equals"/> override to test the equality.
+    /// </summary>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
+    /// <returns></returns>
     public static bool operator ==(ItemPropertySet? left, ItemPropertySet? right)
     {
         if (ReferenceEquals(left, right))
@@ -229,6 +240,12 @@ internal abstract class ItemPropertySet
         return left.Equals(right);
     }
 
+    /// <summary>
+    /// Returns true, if the two <see cref="ItemPropertySet"/> objects are not equal.  This operator uses the !== operator to test the equality.
+    /// </summary>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
+    /// <returns></returns>
     public static bool operator !=(ItemPropertySet? left, ItemPropertySet? right)
     {
         return !(left == right);
