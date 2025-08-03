@@ -242,7 +242,7 @@ internal class EffectivePropertySet
     {
         Set(PropertyEnum.HeavyCurse, new BoolPropertyValue(false));
     }
-    private PropertyValue GetEffectiveValue(PropertyEnum propertyEnum)
+    private PropertyValue GetValue(PropertyEnum propertyEnum)
     {
         // Retrieve the index for the property.
         int index = (int)propertyEnum;
@@ -256,7 +256,7 @@ internal class EffectivePropertySet
         // Merge all of the immutable enhancements.
         foreach (EffectivePropertySet effectivePropertySet in _enhancements.Values)
         {
-            itemProperty = itemProperty.Merge(effectivePropertySet.GetEffectiveValue(propertyEnum));
+            itemProperty = itemProperty.Merge(effectivePropertySet.GetValue(propertyEnum));
         }
 
         // Merge the writable enhancements.
@@ -269,23 +269,23 @@ internal class EffectivePropertySet
         return itemProperty;
     }
 
-    private bool GetEffectiveBoolValue(PropertyEnum propertyEnum)
+    private bool GetBoolValue(PropertyEnum propertyEnum)
     {
-        PropertyValue effectiveItemProperty = GetEffectiveValue(propertyEnum);
+        PropertyValue effectiveItemProperty = GetValue(propertyEnum);
         BoolPropertyValue boolPropertyValue = (BoolPropertyValue)effectiveItemProperty;
         bool value = boolPropertyValue.Value;
         return value;
     }
 
-    private int GetEffectiveIntValue(PropertyEnum propertyEnum)
+    private int GetIntValue(PropertyEnum propertyEnum)
     {
-        PropertyValue effectiveItemProperty = GetEffectiveValue(propertyEnum);
+        PropertyValue effectiveItemProperty = GetValue(propertyEnum);
         IntPropertyValue intPropertyValue = (IntPropertyValue)effectiveItemProperty;
         int value = intPropertyValue.Value;
         return value;
     }
 
-    private void Write(PropertyEnum propertyEnum, PropertyValue propertyValue)
+    private void SetValue(PropertyEnum propertyEnum, PropertyValue propertyValue)
     {
         // Retrieve the index for the property.
         int index = (int)propertyEnum;
@@ -298,253 +298,253 @@ internal class EffectivePropertySet
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanApplyBlessedArtifactBias);
+            return GetBoolValue(PropertyEnum.CanApplyBlessedArtifactBias);
         }
         set
         {
-            Write(PropertyEnum.CanApplyBlessedArtifactBias, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new BoolPropertyValue(value));
         }
     }
     public bool CanApplyArtifactBiasSlaying
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanApplyArtifactBiasSlaying);
+            return GetBoolValue(PropertyEnum.CanApplyArtifactBiasSlaying);
         }
         set
         {
-            Write(PropertyEnum.CanApplyArtifactBiasSlaying, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanApplyArtifactBiasSlaying, new BoolPropertyValue(value));
         }
     }
     public bool CanApplyBlowsBonus
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanApplyBlowsBonus);
+            return GetBoolValue(PropertyEnum.CanApplyBlowsBonus);
         }
         set
         {
-            Write(PropertyEnum.CanApplyBlowsBonus, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanApplyBlowsBonus, new BoolPropertyValue(value));
         }
     }
     public bool CanReflectBoltsAndArrows
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanReflectBoltsAndArrows);
+            return GetBoolValue(PropertyEnum.CanReflectBoltsAndArrows);
         }
         set
         {
-            Write(PropertyEnum.CanReflectBoltsAndArrows, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanReflectBoltsAndArrows, new BoolPropertyValue(value));
         }
     }
     public bool CanApplySlayingBonus
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanApplySlayingBonus);
+            return GetBoolValue(PropertyEnum.CanApplySlayingBonus);
         }
         set
         {
-            Write(PropertyEnum.CanApplySlayingBonus, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanApplySlayingBonus, new BoolPropertyValue(value));
         }
     }
     public bool CanApplyBonusArmorClassMiscPower
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanApplyBonusArmorClassMiscPower);
+            return GetBoolValue(PropertyEnum.CanApplyBonusArmorClassMiscPower);
         }
         set
         {
-            Write(PropertyEnum.CanApplyBonusArmorClassMiscPower, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanApplyBonusArmorClassMiscPower, new BoolPropertyValue(value));
         }
     }
     public bool CanProvideSheathOfElectricity
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanProvideSheathOfElectricity);
+            return GetBoolValue(PropertyEnum.CanProvideSheathOfElectricity);
         }
         set
         {
-            Write(PropertyEnum.CanProvideSheathOfElectricity, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanProvideSheathOfElectricity, new BoolPropertyValue(value));
         }
     }
     public bool CanProvideSheathOfFire
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.CanProvideSheathOfFire);
+            return GetBoolValue(PropertyEnum.CanProvideSheathOfFire);
         }
         set
         {
-            Write(PropertyEnum.CanProvideSheathOfFire, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.CanProvideSheathOfFire, new BoolPropertyValue(value));
         }
     }
     public int BonusHit
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusHit);
+            return GetIntValue(PropertyEnum.BonusHit);
         }
         set
         {
-            Write(PropertyEnum.BonusHit, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusHit, new IntPropertyValue(value));
         }
     }
     public int BonusArmorClass
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusArmorClass);
+            return GetIntValue(PropertyEnum.BonusArmorClass);
         }
         set
         {
-            Write(PropertyEnum.BonusArmorClass, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusArmorClass, new IntPropertyValue(value));
         }
     }
     public int BonusDamage
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusDamage);
+            return GetIntValue(PropertyEnum.BonusDamage);
         }
         set
         {
-            Write(PropertyEnum.BonusDamage, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusDamage, new IntPropertyValue(value));
         }
     }
     public int BonusStrength
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusStrength);
+            return GetIntValue(PropertyEnum.BonusStrength);
         }
         set
         {
-            Write(PropertyEnum.BonusStrength, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusStrength, new IntPropertyValue(value));
         }
     }
     public int BonusIntelligence
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusIntelligence);
+            return GetIntValue(PropertyEnum.BonusIntelligence);
         }
         set
         {
-            Write(PropertyEnum.BonusIntelligence, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusIntelligence, new IntPropertyValue(value));
         }
     }
     public int BonusWisdom
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusWisdom);
+            return GetIntValue(PropertyEnum.BonusWisdom);
         }
         set
         {
-            Write(PropertyEnum.BonusWisdom, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusWisdom, new IntPropertyValue(value));
         }
     }
     public int BonusDexterity
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusDexterity);
+            return GetIntValue(PropertyEnum.BonusDexterity);
         }
         set
         {
-            Write(PropertyEnum.BonusDexterity, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusDexterity, new IntPropertyValue(value));
         }
     }
     public int BonusConstitution
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusConstitution);
+            return GetIntValue(PropertyEnum.BonusConstitution);
         }
         set
         {
-            Write(PropertyEnum.BonusConstitution, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusConstitution, new IntPropertyValue(value));
         }
     }
     public int BonusCharisma
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusCharisma);
+            return GetIntValue(PropertyEnum.BonusCharisma);
         }
         set
         {
-            Write(PropertyEnum.BonusCharisma, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusCharisma, new IntPropertyValue(value));
         }
     }
     public int BonusStealth
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusStealth);
+            return GetIntValue(PropertyEnum.BonusStealth);
         }
         set
         {
-            Write(PropertyEnum.BonusStealth, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusStealth, new IntPropertyValue(value));
         }
     }
     public int BonusSearch
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusSearch);
+            return GetIntValue(PropertyEnum.BonusSearch);
         }
         set
         {
-            Write(PropertyEnum.BonusSearch, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusSearch, new IntPropertyValue(value));
         }
     }
     public int BonusInfravision
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusInfravision);
+            return GetIntValue(PropertyEnum.BonusInfravision);
         }
         set
         {
-            Write(PropertyEnum.BonusInfravision, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusInfravision, new IntPropertyValue(value));
         }
     }
     public int BonusTunnel
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusTunnel);
+            return GetIntValue(PropertyEnum.BonusTunnel);
         }
         set
         {
-            Write(PropertyEnum.BonusTunnel, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusTunnel, new IntPropertyValue(value));
         }
     }
     public int BonusAttacks
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusAttacks);
+            return GetIntValue(PropertyEnum.BonusAttacks);
         }
         set
         {
-            Write(PropertyEnum.BonusAttacks, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusAttacks, new IntPropertyValue(value));
         }
     }
     public int BonusSpeed
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.BonusSpeed);
+            return GetIntValue(PropertyEnum.BonusSpeed);
         }
         set
         {
-            Write(PropertyEnum.BonusSpeed, new IntPropertyValue(value));
+            SetValue(PropertyEnum.BonusSpeed, new IntPropertyValue(value));
         }
     }
     public Activation? Activation
@@ -562,22 +562,22 @@ internal class EffectivePropertySet
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Aggravate);
+            return GetBoolValue(PropertyEnum.Aggravate);
         }
         set
         {
-            Write(PropertyEnum.Aggravate, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Aggravate, new BoolPropertyValue(value));
         }
     }
     public bool AntiTheft
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.AntiTheft);
+            return GetBoolValue(PropertyEnum.AntiTheft);
         }
         set
         {
-            Write(PropertyEnum.AntiTheft, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.AntiTheft, new BoolPropertyValue(value));
         }
     }
     public ArtifactBias? ArtifactBias
@@ -595,990 +595,990 @@ internal class EffectivePropertySet
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Blessed);
+            return GetBoolValue(PropertyEnum.Blessed);
         }
         set
         {
-            Write(PropertyEnum.Blessed, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Blessed, new BoolPropertyValue(value));
         }
     }
     public bool Blows
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Blows);
+            return GetBoolValue(PropertyEnum.Blows);
         }
         set
         {
-            Write(PropertyEnum.Blows, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Blows, new BoolPropertyValue(value));
         }
     }
     public bool BrandAcid
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.BrandAcid);
+            return GetBoolValue(PropertyEnum.BrandAcid);
         }
         set
         {
-            Write(PropertyEnum.BrandAcid, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.BrandAcid, new BoolPropertyValue(value));
         }
     }
     public bool BrandCold
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.BrandCold);
+            return GetBoolValue(PropertyEnum.BrandCold);
         }
         set
         {
-            Write(PropertyEnum.BrandCold, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.BrandCold, new BoolPropertyValue(value));
         }
     }
     public bool BrandElec
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.BrandElec);
+            return GetBoolValue(PropertyEnum.BrandElec);
         }
         set
         {
-            Write(PropertyEnum.BrandElec, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.BrandElec, new BoolPropertyValue(value));
         }
     }
     public bool BrandFire
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.BrandFire);
+            return GetBoolValue(PropertyEnum.BrandFire);
         }
         set
         {
-            Write(PropertyEnum.BrandFire, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.BrandFire, new BoolPropertyValue(value));
         }
     }
     public bool BrandPois
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.BrandPois);
+            return GetBoolValue(PropertyEnum.BrandPois);
         }
         set
         {
-            Write(PropertyEnum.BrandPois, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.BrandPois, new BoolPropertyValue(value));
         }
     }
     public bool Cha
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Cha);
+            return GetBoolValue(PropertyEnum.Cha);
         }
         set
         {
-            Write(PropertyEnum.Cha, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Cha, new BoolPropertyValue(value));
         }
     }
     public bool Chaotic
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Chaotic);
+            return GetBoolValue(PropertyEnum.Chaotic);
         }
         set
         {
-            Write(PropertyEnum.Chaotic, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Chaotic, new BoolPropertyValue(value));
         }
     }
     public bool Con
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Con);
+            return GetBoolValue(PropertyEnum.Con);
         }
         set
         {
-            Write(PropertyEnum.Con, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Con, new BoolPropertyValue(value));
         }
     }
     public bool IsCursed
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.IsCursed);
+            return GetBoolValue(PropertyEnum.IsCursed);
         }
         set
         {
-            Write(PropertyEnum.IsCursed, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.IsCursed, new BoolPropertyValue(value));
         }
     }
     public bool Dex
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Dex);
+            return GetBoolValue(PropertyEnum.Dex);
         }
         set
         {
-            Write(PropertyEnum.Dex, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Dex, new BoolPropertyValue(value));
         }
     }
     public bool DrainExp
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.DrainExp);
+            return GetBoolValue(PropertyEnum.DrainExp);
         }
         set
         {
-            Write(PropertyEnum.DrainExp, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.DrainExp, new BoolPropertyValue(value));
         }
     }
     public bool DreadCurse
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.DreadCurse);
+            return GetBoolValue(PropertyEnum.DreadCurse);
         }
         set
         {
-            Write(PropertyEnum.DreadCurse, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.DreadCurse, new BoolPropertyValue(value));
         }
     }
     public bool EasyKnow
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.EasyKnow);
+            return GetBoolValue(PropertyEnum.EasyKnow);
         }
         set
         {
-            Write(PropertyEnum.EasyKnow, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.EasyKnow, new BoolPropertyValue(value));
         }
     }
     public bool Feather
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Feather);
+            return GetBoolValue(PropertyEnum.Feather);
         }
         set
         {
-            Write(PropertyEnum.Feather, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Feather, new BoolPropertyValue(value));
         }
     }
     public bool FreeAct
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.FreeAct);
+            return GetBoolValue(PropertyEnum.FreeAct);
         }
         set
         {
-            Write(PropertyEnum.FreeAct, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.FreeAct, new BoolPropertyValue(value));
         }
     }
     public bool HeavyCurse
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.HeavyCurse);
+            return GetBoolValue(PropertyEnum.HeavyCurse);
         }
         set
         {
-            Write(PropertyEnum.HeavyCurse, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.HeavyCurse, new BoolPropertyValue(value));
         }
     }
     public bool HideType
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.HideType);
+            return GetBoolValue(PropertyEnum.HideType);
         }
         set
         {
-            Write(PropertyEnum.HideType, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.HideType, new BoolPropertyValue(value));
         }
     }
     public bool HoldLife
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.HoldLife);
+            return GetBoolValue(PropertyEnum.HoldLife);
         }
         set
         {
-            Write(PropertyEnum.HoldLife, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.HoldLife, new BoolPropertyValue(value));
         }
     }
     public bool IgnoreAcid
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.IgnoreAcid);
+            return GetBoolValue(PropertyEnum.IgnoreAcid);
         }
         set
         {
-            Write(PropertyEnum.IgnoreAcid, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.IgnoreAcid, new BoolPropertyValue(value));
         }
     }
     public bool IgnoreCold
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.IgnoreCold);
+            return GetBoolValue(PropertyEnum.IgnoreCold);
         }
         set
         {
-            Write(PropertyEnum.IgnoreCold, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.IgnoreCold, new BoolPropertyValue(value));
         }
     }
     public bool IgnoreElec
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.IgnoreElec);
+            return GetBoolValue(PropertyEnum.IgnoreElec);
         }
         set
         {
-            Write(PropertyEnum.IgnoreElec, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.IgnoreElec, new BoolPropertyValue(value));
         }
     }
     public bool IgnoreFire
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.IgnoreFire);
+            return GetBoolValue(PropertyEnum.IgnoreFire);
         }
         set
         {
-            Write(PropertyEnum.IgnoreFire, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.IgnoreFire, new BoolPropertyValue(value));
         }
     }
     public bool ImAcid
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ImAcid);
+            return GetBoolValue(PropertyEnum.ImAcid);
         }
         set
         {
-            Write(PropertyEnum.ImAcid, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ImAcid, new BoolPropertyValue(value));
         }
     }
     public bool ImCold
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ImCold);
+            return GetBoolValue(PropertyEnum.ImCold);
         }
         set
         {
-            Write(PropertyEnum.ImCold, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ImCold, new BoolPropertyValue(value));
         }
     }
     public bool ImElec
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ImElec);
+            return GetBoolValue(PropertyEnum.ImElec);
         }
         set
         {
-            Write(PropertyEnum.ImElec, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ImElec, new BoolPropertyValue(value));
         }
     }
     public bool ImFire
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ImFire);
+            return GetBoolValue(PropertyEnum.ImFire);
         }
         set
         {
-            Write(PropertyEnum.ImFire, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ImFire, new BoolPropertyValue(value));
         }
     }
     public bool Impact
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Impact);
+            return GetBoolValue(PropertyEnum.Impact);
         }
         set
         {
-            Write(PropertyEnum.Impact, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Impact, new BoolPropertyValue(value));
         }
     }
     public bool Infra
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Infra);
+            return GetBoolValue(PropertyEnum.Infra);
         }
         set
         {
-            Write(PropertyEnum.Infra, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Infra, new BoolPropertyValue(value));
         }
     }
     public bool InstaArt
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.InstaArt);
+            return GetBoolValue(PropertyEnum.InstaArt);
         }
         set
         {
-            Write(PropertyEnum.InstaArt, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.InstaArt, new BoolPropertyValue(value));
         }
     }
     public bool Int
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Int);
+            return GetBoolValue(PropertyEnum.Int);
         }
         set
         {
-            Write(PropertyEnum.Int, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Int, new BoolPropertyValue(value));
         }
     }
     public bool KillDragon
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.KillDragon);
+            return GetBoolValue(PropertyEnum.KillDragon);
         }
         set
         {
-            Write(PropertyEnum.KillDragon, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.KillDragon, new BoolPropertyValue(value));
         }
     }
     public bool NoMagic
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.NoMagic);
+            return GetBoolValue(PropertyEnum.NoMagic);
         }
         set
         {
-            Write(PropertyEnum.NoMagic, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.NoMagic, new BoolPropertyValue(value));
         }
     }
     public bool NoTele
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.NoTele);
+            return GetBoolValue(PropertyEnum.NoTele);
         }
         set
         {
-            Write(PropertyEnum.NoTele, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.NoTele, new BoolPropertyValue(value));
         }
     }
     public bool PermaCurse
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.PermaCurse);
+            return GetBoolValue(PropertyEnum.PermaCurse);
         }
         set
         {
-            Write(PropertyEnum.PermaCurse, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.PermaCurse, new BoolPropertyValue(value));
         }
     }
     public int Radius
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.Radius);
+            return GetIntValue(PropertyEnum.Radius);
         }
         set
         {
-            Write(PropertyEnum.Radius, new IntPropertyValue(value));
+            SetValue(PropertyEnum.Radius, new IntPropertyValue(value));
         }
     }
     public bool Reflect
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Reflect);
+            return GetBoolValue(PropertyEnum.Reflect);
         }
         set
         {
-            Write(PropertyEnum.Reflect, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Reflect, new BoolPropertyValue(value));
         }
     }
     public bool Regen
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Regen);
+            return GetBoolValue(PropertyEnum.Regen);
         }
         set
         {
-            Write(PropertyEnum.Regen, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Regen, new BoolPropertyValue(value));
         }
     }
     public bool ResAcid
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResAcid);
+            return GetBoolValue(PropertyEnum.ResAcid);
         }
         set
         {
-            Write(PropertyEnum.ResAcid, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResAcid, new BoolPropertyValue(value));
         }
     }
     public bool ResBlind
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResBlind);
+            return GetBoolValue(PropertyEnum.ResBlind);
         }
         set
         {
-            Write(PropertyEnum.ResBlind, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResBlind, new BoolPropertyValue(value));
         }
     }
     public bool ResChaos
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResChaos);
+            return GetBoolValue(PropertyEnum.ResChaos);
         }
         set
         {
-            Write(PropertyEnum.ResChaos, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResChaos, new BoolPropertyValue(value));
         }
     }
     public bool ResCold
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResCold);
+            return GetBoolValue(PropertyEnum.ResCold);
         }
         set
         {
-            Write(PropertyEnum.ResCold, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResCold, new BoolPropertyValue(value));
         }
     }
     public bool ResConf
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResConf);
+            return GetBoolValue(PropertyEnum.ResConf);
         }
         set
         {
-            Write(PropertyEnum.ResConf, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResConf, new BoolPropertyValue(value));
         }
     }
     public bool ResDark
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResDark);
+            return GetBoolValue(PropertyEnum.ResDark);
         }
         set
         {
-            Write(PropertyEnum.ResDark, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResDark, new BoolPropertyValue(value));
         }
     }
     public bool ResDisen
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResDisen);
+            return GetBoolValue(PropertyEnum.ResDisen);
         }
         set
         {
-            Write(PropertyEnum.ResDisen, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResDisen, new BoolPropertyValue(value));
         }
     }
     public bool ResElec
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResElec);
+            return GetBoolValue(PropertyEnum.ResElec);
         }
         set
         {
-            Write(PropertyEnum.ResElec, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResElec, new BoolPropertyValue(value));
         }
     }
     public bool ResFear
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResFear);
+            return GetBoolValue(PropertyEnum.ResFear);
         }
         set
         {
-            Write(PropertyEnum.ResFear, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResFear, new BoolPropertyValue(value));
         }
     }
     public bool ResFire
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResFire);
+            return GetBoolValue(PropertyEnum.ResFire);
         }
         set
         {
-            Write(PropertyEnum.ResFire, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResFire, new BoolPropertyValue(value));
         }
     }
     public bool ResLight
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResLight);
+            return GetBoolValue(PropertyEnum.ResLight);
         }
         set
         {
-            Write(PropertyEnum.ResLight, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResLight, new BoolPropertyValue(value));
         }
     }
     public bool ResNether
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResNether);
+            return GetBoolValue(PropertyEnum.ResNether);
         }
         set
         {
-            Write(PropertyEnum.ResNether, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResNether, new BoolPropertyValue(value));
         }
     }
     public bool ResNexus
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResNexus);
+            return GetBoolValue(PropertyEnum.ResNexus);
         }
         set
         {
-            Write(PropertyEnum.ResNexus, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResNexus, new BoolPropertyValue(value));
         }
     }
     public bool ResPois
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResPois);
+            return GetBoolValue(PropertyEnum.ResPois);
         }
         set
         {
-            Write(PropertyEnum.ResPois, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResPois, new BoolPropertyValue(value));
         }
     }
     public bool ResShards
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResShards);
+            return GetBoolValue(PropertyEnum.ResShards);
         }
         set
         {
-            Write(PropertyEnum.ResShards, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResShards, new BoolPropertyValue(value));
         }
     }
     public bool ResSound
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ResSound);
+            return GetBoolValue(PropertyEnum.ResSound);
         }
         set
         {
-            Write(PropertyEnum.ResSound, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ResSound, new BoolPropertyValue(value));
         }
     }
     public bool Search
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Search);
+            return GetBoolValue(PropertyEnum.Search);
         }
         set
         {
-            Write(PropertyEnum.Search, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Search, new BoolPropertyValue(value));
         }
     }
     public bool SeeInvis
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SeeInvis);
+            return GetBoolValue(PropertyEnum.SeeInvis);
         }
         set
         {
-            Write(PropertyEnum.SeeInvis, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SeeInvis, new BoolPropertyValue(value));
         }
     }
     public bool ShElec
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ShElec);
+            return GetBoolValue(PropertyEnum.ShElec);
         }
         set
         {
-            Write(PropertyEnum.ShElec, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ShElec, new BoolPropertyValue(value));
         }
     }
     public bool ShFire
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ShFire);
+            return GetBoolValue(PropertyEnum.ShFire);
         }
         set
         {
-            Write(PropertyEnum.ShFire, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ShFire, new BoolPropertyValue(value));
         }
     }
     public bool ShowMods
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.ShowMods);
+            return GetBoolValue(PropertyEnum.ShowMods);
         }
         set
         {
-            Write(PropertyEnum.ShowMods, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.ShowMods, new BoolPropertyValue(value));
         }
     }
     public bool SlayAnimal
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayAnimal);
+            return GetBoolValue(PropertyEnum.SlayAnimal);
         }
         set
         {
-            Write(PropertyEnum.SlayAnimal, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayAnimal, new BoolPropertyValue(value));
         }
     }
     public bool SlayDemon
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayDemon);
+            return GetBoolValue(PropertyEnum.SlayDemon);
         }
         set
         {
-            Write(PropertyEnum.SlayDemon, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayDemon, new BoolPropertyValue(value));
         }
     }
     public bool SlayDragon
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayDragon);
+            return GetBoolValue(PropertyEnum.SlayDragon);
         }
         set
         {
-            Write(PropertyEnum.SlayDragon, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayDragon, new BoolPropertyValue(value));
         }
     }
     public bool SlayEvil
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayEvil);
+            return GetBoolValue(PropertyEnum.SlayEvil);
         }
         set
         {
-            Write(PropertyEnum.SlayEvil, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayEvil, new BoolPropertyValue(value));
         }
     }
     public bool SlayGiant
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayGiant);
+            return GetBoolValue(PropertyEnum.SlayGiant);
         }
         set
         {
-            Write(PropertyEnum.SlayGiant, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayGiant, new BoolPropertyValue(value));
         }
     }
     public bool SlayOrc
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayOrc);
+            return GetBoolValue(PropertyEnum.SlayOrc);
         }
         set
         {
-            Write(PropertyEnum.SlayOrc, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayOrc, new BoolPropertyValue(value));
         }
     }
     public bool SlayTroll
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayTroll);
+            return GetBoolValue(PropertyEnum.SlayTroll);
         }
         set
         {
-            Write(PropertyEnum.SlayTroll, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayTroll, new BoolPropertyValue(value));
         }
     }
     public bool SlayUndead
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlayUndead);
+            return GetBoolValue(PropertyEnum.SlayUndead);
         }
         set
         {
-            Write(PropertyEnum.SlayUndead, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlayUndead, new BoolPropertyValue(value));
         }
     }
     public bool SlowDigest
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SlowDigest);
+            return GetBoolValue(PropertyEnum.SlowDigest);
         }
         set
         {
-            Write(PropertyEnum.SlowDigest, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SlowDigest, new BoolPropertyValue(value));
         }
     }
     public bool Speed
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Speed);
+            return GetBoolValue(PropertyEnum.Speed);
         }
         set
         {
-            Write(PropertyEnum.Speed, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Speed, new BoolPropertyValue(value));
         }
     }
     public bool Stealth
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Stealth);
+            return GetBoolValue(PropertyEnum.Stealth);
         }
         set
         {
-            Write(PropertyEnum.Stealth, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Stealth, new BoolPropertyValue(value));
         }
     }
     public bool Str
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Str);
+            return GetBoolValue(PropertyEnum.Str);
         }
         set
         {
-            Write(PropertyEnum.Str, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Str, new BoolPropertyValue(value));
         }
     }
     public bool SustCha
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SustCha);
+            return GetBoolValue(PropertyEnum.SustCha);
         }
         set
         {
-            Write(PropertyEnum.SustCha, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SustCha, new BoolPropertyValue(value));
         }
     }
     public bool SustCon
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SustCon);
+            return GetBoolValue(PropertyEnum.SustCon);
         }
         set
         {
-            Write(PropertyEnum.SustCon, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SustCon, new BoolPropertyValue(value));
         }
     }
     public bool SustDex
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SustDex);
+            return GetBoolValue(PropertyEnum.SustDex);
         }
         set
         {
-            Write(PropertyEnum.SustDex, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SustDex, new BoolPropertyValue(value));
         }
     }
     public bool SustInt
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SustInt);
+            return GetBoolValue(PropertyEnum.SustInt);
         }
         set
         {
-            Write(PropertyEnum.SustInt, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SustInt, new BoolPropertyValue(value));
         }
     }
     public bool SustStr
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SustStr);
+            return GetBoolValue(PropertyEnum.SustStr);
         }
         set
         {
-            Write(PropertyEnum.SustStr, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SustStr, new BoolPropertyValue(value));
         }
     }
     public bool SustWis
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.SustWis);
+            return GetBoolValue(PropertyEnum.SustWis);
         }
         set
         {
-            Write(PropertyEnum.SustWis, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.SustWis, new BoolPropertyValue(value));
         }
     }
     public bool Telepathy
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Telepathy);
+            return GetBoolValue(PropertyEnum.Telepathy);
         }
         set
         {
-            Write(PropertyEnum.Telepathy, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Telepathy, new BoolPropertyValue(value));
         }
     }
     public bool Teleport
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Teleport);
+            return GetBoolValue(PropertyEnum.Teleport);
         }
         set
         {
-            Write(PropertyEnum.Teleport, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Teleport, new BoolPropertyValue(value));
         }
     }
     public int TreasureRating
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.TreasureRating);
+            return GetIntValue(PropertyEnum.TreasureRating);
         }
         set
         {
-            Write(PropertyEnum.TreasureRating, new IntPropertyValue(value));
+            SetValue(PropertyEnum.TreasureRating, new IntPropertyValue(value));
         }
     }
     public bool Tunnel
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Tunnel);
+            return GetBoolValue(PropertyEnum.Tunnel);
         }
         set
         {
-            Write(PropertyEnum.Tunnel, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Tunnel, new BoolPropertyValue(value));
         }
     }
     public int Value
     {
         get
         {
-            return GetEffectiveIntValue(PropertyEnum.Value);
+            return GetIntValue(PropertyEnum.Value);
         }
         set
         {
-            Write(PropertyEnum.Value, new IntPropertyValue(value));
+            SetValue(PropertyEnum.Value, new IntPropertyValue(value));
         }
     }
     public bool Valueless
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Valueless);
+            return GetBoolValue(PropertyEnum.Valueless);
         }
         set
         {
-            Write(PropertyEnum.Valueless, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Valueless, new BoolPropertyValue(value));
         }
     }
     public bool Vampiric
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Vampiric);
+            return GetBoolValue(PropertyEnum.Vampiric);
         }
         set
         {
-            Write(PropertyEnum.Vampiric, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Vampiric, new BoolPropertyValue(value));
         }
     }
     public bool Vorpal
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Vorpal);
+            return GetBoolValue(PropertyEnum.Vorpal);
         }
         set
         {
-            Write(PropertyEnum.Vorpal, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Vorpal, new BoolPropertyValue(value));
         }
     }
     public bool Wis
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Wis);
+            return GetBoolValue(PropertyEnum.Wis);
         }
         set
         {
-            Write(PropertyEnum.Wis, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Wis, new BoolPropertyValue(value));
         }
     }
     public bool Wraith
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.Wraith);
+            return GetBoolValue(PropertyEnum.Wraith);
         }
         set
         {
-            Write(PropertyEnum.Wraith, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.Wraith, new BoolPropertyValue(value));
         }
     }
     public bool XtraMight
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.XtraMight);
+            return GetBoolValue(PropertyEnum.XtraMight);
         }
         set
         {
-            Write(PropertyEnum.XtraMight, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.XtraMight, new BoolPropertyValue(value));
         }
     }
     public bool XtraShots
     {
         get
         {
-            return GetEffectiveBoolValue(PropertyEnum.XtraShots);
+            return GetBoolValue(PropertyEnum.XtraShots);
         }
         set
         {
-            Write(PropertyEnum.XtraShots, new BoolPropertyValue(value));
+            SetValue(PropertyEnum.XtraShots, new BoolPropertyValue(value));
         }
     }
     #endregion
