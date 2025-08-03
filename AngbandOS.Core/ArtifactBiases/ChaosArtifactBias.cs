@@ -24,7 +24,7 @@ internal class ChaosArtifactBias : ArtifactBias
         (nameof(CanSlayAndFalseChaoticItemTest), "1", nameof(ChaoticItemEnhancement), "1/2")
     };
 
-    public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
+    public override bool ApplyMiscPowers(EffectivePropertySet characteristics)
     {
         if (!characteristics.Teleport)
         {

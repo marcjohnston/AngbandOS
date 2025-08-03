@@ -21,6 +21,10 @@ internal class ItemFactory : IGetKey, IToJson
     /// </summary>
     public ItemEnhancement ItemEnhancement { get; private set; }
 
+    public override string ToString()
+    {
+        return $"{Key} - {base.ToString()}";
+    }
     public virtual string Key { get; }
     public string GetKey => Key;
     #region Constructors
@@ -578,7 +582,7 @@ internal class ItemFactory : IGetKey, IToJson
         if (IsRangedWeapon)
         {
             int power = MissileDamageMultiplier;
-            if (item.EffectiveItemPropertySet.XtraMight)
+            if (item.EffectivePropertySet.XtraMight)
             {
                 power++;
             }
@@ -586,17 +590,17 @@ internal class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
+                s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHit)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
 
                 if (item.ArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.EnchantmentItemProperties.BonusArmorClass)}]";
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
-                else if (item.EnchantmentItemProperties.BonusArmorClass != 0)
+                else if (item.EffectivePropertySet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EnchantmentItemProperties.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
             }
             else if (item.ArmorClass != 0)
@@ -610,17 +614,17 @@ internal class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
+                s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHit)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
 
                 if (item.ArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.EnchantmentItemProperties.BonusArmorClass)}]";
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
-                else if (item.EnchantmentItemProperties.BonusArmorClass != 0)
+                else if (item.EffectivePropertySet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EnchantmentItemProperties.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
             }
             else if (item.ArmorClass != 0)
@@ -632,21 +636,21 @@ internal class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectiveItemPropertySet.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
+                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.BonusHit != 0 && item.EffectivePropertySet.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHit)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
                 }
-                else if (item.EnchantmentItemProperties.BonusHit != 0)
+                else if (item.EffectivePropertySet.BonusHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHit)})";
                 }
-                else if (item.EnchantmentItemProperties.BonusDamage != 0)
+                else if (item.EffectivePropertySet.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
                 }
 
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.ArmorClass},{GetSignedValue(item.EnchantmentItemProperties.BonusArmorClass)}]";
+                s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
             }
             else if (item.ArmorClass != 0)
             {
@@ -657,28 +661,28 @@ internal class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectiveItemPropertySet.ShowMods || item.EnchantmentItemProperties.BonusHit != 0 && item.EnchantmentItemProperties.BonusDamage != 0)
+                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.BonusHit != 0 && item.EffectivePropertySet.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)},{GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHit)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
                 }
-                else if (item.EnchantmentItemProperties.BonusHit != 0)
+                else if (item.EffectivePropertySet.BonusHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusHit)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHit)})";
                 }
-                else if (item.EnchantmentItemProperties.BonusDamage != 0)
+                else if (item.EffectivePropertySet.BonusDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EnchantmentItemProperties.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
                 }
 
                 if (item.ArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.EnchantmentItemProperties.BonusArmorClass)}]";
+                    s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
-                else if (item.EnchantmentItemProperties.BonusArmorClass != 0)
+                else if (item.EffectivePropertySet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EnchantmentItemProperties.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
             }
         }
@@ -733,7 +737,7 @@ internal class ItemFactory : IGetKey, IToJson
             if (commonBonusValue.HasValue && commonBonusValue.Value.bonusValue != 0)
             {
                 s += $" ({GetSignedValue(commonBonusValue.Value.bonusValue)}";
-                if (!item.EffectiveItemPropertySet.HideType && commonBonusValue.Value.priorityBonusName != "")
+                if (!item.EffectivePropertySet.HideType && commonBonusValue.Value.priorityBonusName != "")
                 {
                     s += $" {commonBonusValue.Value.priorityBonusName}";
                 }
@@ -760,101 +764,101 @@ internal class ItemFactory : IGetKey, IToJson
     private (int bonusValue, string priorityBonusName)? CommonBonusValue(Item item)
     {
         (int bonusValue, string priorityBonusName)? value = null;
-        if (item.EnchantmentItemProperties.BonusSpeed != 0)
+        if (item.EffectivePropertySet.BonusSpeed != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusSpeed != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusSpeed != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusSpeed, "speed");
+            value = (item.EffectivePropertySet.BonusSpeed, "speed");
         }
-        if (item.EnchantmentItemProperties.BonusAttacks != 0)
+        if (item.EffectivePropertySet.BonusAttacks != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusAttacks != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusAttacks != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusAttacks, item.EnchantmentItemProperties.BonusAttacks > 1 ? "attacks" : "attack");
+            value = (item.EffectivePropertySet.BonusAttacks, item.EffectivePropertySet.BonusAttacks > 1 ? "attacks" : "attack");
         }
-        if (item.EnchantmentItemProperties.BonusStealth != 0)
+        if (item.EffectivePropertySet.BonusStealth != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusStealth != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusStealth != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusStealth, "stealth");
+            value = (item.EffectivePropertySet.BonusStealth, "stealth");
         }
-        if (item.EnchantmentItemProperties.BonusSearch != 0)
+        if (item.EffectivePropertySet.BonusSearch != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusSearch != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusSearch != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusSearch, "searching");
+            value = (item.EffectivePropertySet.BonusSearch, "searching");
         }
-        if (item.EnchantmentItemProperties.BonusInfravision != 0)
+        if (item.EffectivePropertySet.BonusInfravision != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusInfravision != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusInfravision != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusInfravision, "infravision");
+            value = (item.EffectivePropertySet.BonusInfravision, "infravision");
         }
-        if (item.EnchantmentItemProperties.BonusCharisma != 0)
+        if (item.EffectivePropertySet.BonusCharisma != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusCharisma != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusCharisma != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusCharisma, "");
+            value = (item.EffectivePropertySet.BonusCharisma, "");
         }
-        if (item.EnchantmentItemProperties.BonusConstitution != 0)
+        if (item.EffectivePropertySet.BonusConstitution != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusConstitution != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusConstitution != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusConstitution, "");
+            value = (item.EffectivePropertySet.BonusConstitution, "");
         }
-        if (item.EnchantmentItemProperties.BonusDexterity != 0)
+        if (item.EffectivePropertySet.BonusDexterity != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusDexterity != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusDexterity != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusDexterity, "");
+            value = (item.EffectivePropertySet.BonusDexterity, "");
         }
-        if (item.EnchantmentItemProperties.BonusIntelligence != 0)
+        if (item.EffectivePropertySet.BonusIntelligence != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusIntelligence != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusIntelligence != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusIntelligence, "");
+            value = (item.EffectivePropertySet.BonusIntelligence, "");
         }
-        if (item.EnchantmentItemProperties.BonusStrength != 0)
+        if (item.EffectivePropertySet.BonusStrength != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusStrength != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusStrength != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusStrength, "");
+            value = (item.EffectivePropertySet.BonusStrength, "");
         }
-        if (item.EnchantmentItemProperties.BonusWisdom != 0)
+        if (item.EffectivePropertySet.BonusWisdom != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusWisdom != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusWisdom != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusWisdom, "");
+            value = (item.EffectivePropertySet.BonusWisdom, "");
         }
-        if (item.EnchantmentItemProperties.BonusTunnel != 0)
+        if (item.EffectivePropertySet.BonusTunnel != 0)
         {
-            if (value.HasValue && item.EnchantmentItemProperties.BonusTunnel != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.BonusTunnel != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EnchantmentItemProperties.BonusTunnel, "");
+            value = (item.EffectivePropertySet.BonusTunnel, "");
         }
         if (!value.HasValue)
         {
@@ -883,7 +887,7 @@ internal class ItemFactory : IGetKey, IToJson
     /// <returns></returns>
     public int GetBonusRealValue(Item item)
     {
-        int bonusValue = item.EnchantmentItemProperties.BonusHit * BonusHitRealValueMultiplier + item.EnchantmentItemProperties.BonusArmorClass * BonusArmorClassRealValueMultiplier + item.EnchantmentItemProperties.BonusDamage * BonusDamageRealValueMultiplier;
+        int bonusValue = item.EffectivePropertySet.BonusHit * BonusHitRealValueMultiplier + item.EffectivePropertySet.BonusArmorClass * BonusArmorClassRealValueMultiplier + item.EffectivePropertySet.BonusDamage * BonusDamageRealValueMultiplier;
         if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
         {
             bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * BonusDiceRealValueMultiplier;
@@ -915,7 +919,7 @@ internal class ItemFactory : IGetKey, IToJson
         {
             return 0;
         }
-        return item.EffectiveItemPropertySet.Radius;
+        return item.EffectivePropertySet.Radius;
     }
 
     /// <summary>
@@ -1004,7 +1008,7 @@ internal class ItemFactory : IGetKey, IToJson
     /// </summary>
     public bool CanBeRead => ReadTuple != null;
 
-    public RoItemPropertySet CreateRandomArtifact(Item item, bool fromScroll)
+    public EffectivePropertySet CreateRandomArtifact(Item item, bool fromScroll)
     {
         int EnchantBonus(int bonus)
         {
@@ -1019,7 +1023,7 @@ internal class ItemFactory : IGetKey, IToJson
             return bonus;
         }
 
-        void ApplyRandomBonuses(RwItemPropertySet characteristics)
+        void ApplyRandomBonuses(EffectivePropertySet characteristics)
         {
             if (characteristics.ArtifactBias != null)
             {
@@ -1174,7 +1178,7 @@ internal class ItemFactory : IGetKey, IToJson
             }
         }
 
-        void CurseRandart(RwItemPropertySet characteristics)
+        void CurseRandart(EffectivePropertySet characteristics)
         {
             if (characteristics.BonusStrength != 0)
             {
@@ -1269,7 +1273,7 @@ internal class ItemFactory : IGetKey, IToJson
             characteristics.IsCursed = true;
         }
 
-        void ApplyMiscPowerForRandomArtifactCreation(RwItemPropertySet characteristics)
+        void ApplyMiscPowerForRandomArtifactCreation(EffectivePropertySet characteristics)
         {
             if (characteristics.ArtifactBias != null)
             {
@@ -1414,7 +1418,7 @@ internal class ItemFactory : IGetKey, IToJson
             }
         }
 
-        void ApplySlayingForRandomArtifactCreation(Item item, RwItemPropertySet characteristics)
+        void ApplySlayingForRandomArtifactCreation(Item item, EffectivePropertySet characteristics)
         {
             /// <summary>
             /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
@@ -1439,14 +1443,14 @@ internal class ItemFactory : IGetKey, IToJson
             } while (slayingItemEnhancement != null && !slayingItemEnhancement.AppliesTo(this));
 
             // Apply the item enhancement.  This supports a null choice.
-            characteristics.Merge(slayingItemEnhancement?.GenerateItemCharacteristics());
+            characteristics.AddEnhancement(slayingItemEnhancement?.GenerateItemCharacteristics());
         }
 
         /// <summary>
         /// Loops through an array of item tests and enhancements and based on the probability of the test, applies its associated item enhancement and returns true, if an enhancement
         /// was applied.  If all of the tests fail, false is returned.
         /// </summary>
-        bool ApplyTestsAndItemEnhancements(Item item, RwItemPropertySet characteristics, (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? testsAndItemEnhancements)
+        bool ApplyTestsAndItemEnhancements(Item item, EffectivePropertySet characteristics, (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? testsAndItemEnhancements)
         {
             if (testsAndItemEnhancements != null)
             {
@@ -1456,10 +1460,9 @@ internal class ItemFactory : IGetKey, IToJson
                     if (itemTestProbability.Test())
                     {
                         // The test only occurs on the effective properties.
-                        RoItemPropertySet effectiveItemPropertySet = item.GetEffectiveItemProperties();
-                        if (itemTest.Test(effectiveItemPropertySet))
+                        if (itemTest.Test(item.EffectivePropertySet))
                         {
-                            characteristics = characteristics.Merge(itemEnhancement.GenerateItemCharacteristics());
+                            characteristics.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
                             if (moreProbability.Test())
                             {
                                 return true;
@@ -1471,7 +1474,7 @@ internal class ItemFactory : IGetKey, IToJson
             return false;
         }
 
-        RwItemPropertySet characteristics = new RwItemPropertySet();
+        EffectivePropertySet characteristics = new EffectivePropertySet();
         const int ArtifactCurseChance = 13;
         int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;
@@ -1573,7 +1576,7 @@ internal class ItemFactory : IGetKey, IToJson
                         ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
                         if (itemAdditiveBundle != null)
                         {
-                            characteristics = characteristics.Merge(itemAdditiveBundle.GenerateItemCharacteristics());
+                            characteristics.AddEnhancement(itemAdditiveBundle.GenerateItemCharacteristics());
                         }
                     }
                     break;
@@ -1630,7 +1633,7 @@ internal class ItemFactory : IGetKey, IToJson
                 characteristics.Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
             }
         }
-        return characteristics.AsReadOnly();
+        return characteristics;
     }
     #endregion
 

@@ -38,7 +38,7 @@ internal class TakeOffScript : UniversalScript, IGetKey
             return;
         }
         // Can't take of cursed items
-        if (item.EffectiveItemPropertySet.IsCursed)
+        if (item.EffectivePropertySet.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

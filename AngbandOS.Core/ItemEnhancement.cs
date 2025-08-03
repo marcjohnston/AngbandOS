@@ -156,9 +156,9 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.
     /// </summary>
     /// <returns></returns>
-    public RoItemPropertySet GenerateItemCharacteristics()
+    public EffectivePropertySet GenerateItemCharacteristics()
     {
-        RoItemPropertySet itemCharacteristics = new RoItemPropertySet()
+        EffectivePropertySet itemCharacteristics = new EffectivePropertySet()
         {
             CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
             CanApplyArtifactBiasSlaying = CanApplyArtifactBiasSlaying,

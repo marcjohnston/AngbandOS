@@ -22,6 +22,6 @@ internal class CursedEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.IsCursed = true;
+        item.EffectivePropertySet.IsCursed = true;
     }
 }

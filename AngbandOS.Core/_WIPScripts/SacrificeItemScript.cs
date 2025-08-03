@@ -33,7 +33,7 @@ internal class SacrificeItemScript : Script, IStoreCommandScript
         {
             return;
         }
-        if (oPtr.IsInEquipment && oPtr.EffectiveItemPropertySet.IsCursed)
+        if (oPtr.IsInEquipment && oPtr.EffectivePropertySet.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

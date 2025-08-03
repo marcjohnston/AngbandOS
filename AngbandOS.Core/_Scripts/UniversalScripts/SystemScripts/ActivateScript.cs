@@ -86,9 +86,9 @@ internal class ActivateScript : UniversalScript, IGetKey
         Game.PlaySound(SoundEffectEnum.ActivateArtifact);
 
         // If it is a random artifact then use its ability and quit
-        if (item.EffectiveItemPropertySet.Activation != null)
+        if (item.EffectivePropertySet.Activation != null)
         {
-            UsedResultEnum usedResult = item.EffectiveItemPropertySet.Activation.Activate(item);
+            UsedResultEnum usedResult = item.EffectivePropertySet.Activation.Activate(item);
         }
     }
 }

@@ -22,6 +22,6 @@ internal class PoorConstitution5BP1EnchantmentScript : Script, IEnhancementScrip
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusConstitution = 0 - (1 + item.GetBonusValue(5, level));
+        item.EffectivePropertySet.BonusConstitution = 0 - (1 + item.GetBonusValue(5, level));
     }
 }

@@ -22,6 +22,6 @@ internal class BonusDamage1D7P10BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusDamage += Game.DieRoll(7) + item.GetBonusValue(10, level);
+        item.EffectivePropertySet.BonusDamage += Game.DieRoll(7) + item.GetBonusValue(10, level);
     }
 }

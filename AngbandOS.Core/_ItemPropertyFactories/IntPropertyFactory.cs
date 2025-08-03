@@ -6,17 +6,10 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-/// <summary>
-/// Represents a factory for creating an <see cref="ItemProperty"/> property.
-/// </summary>
 [Serializable]
-internal abstract class ItemPropertyFactory
+internal class IntPropertyFactory : PropertyFactory
 {
-    public abstract ItemProperty Instantiate();
-    public abstract ItemProperty InstantiateNullable();
-    public readonly int Index;
-    protected ItemPropertyFactory(int index)
-    {
-        Index = index;
-    }
+    public override PropertyValue Instantiate() => new IntPropertyValue(0);
+    public override NullablePropertyValue InstantiateNullable() => new NullableIntPropertyValue(null);
+    public IntPropertyFactory(int index) : base(index) { }
 }

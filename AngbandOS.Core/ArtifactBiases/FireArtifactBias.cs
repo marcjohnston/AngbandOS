@@ -23,7 +23,7 @@ internal class FireArtifactBias : ArtifactBias
         (nameof(CanSlayAndFalseBrandFireItemTest), "1", nameof(BrandFireItemEnhancement), "1/2")
     };
 
-    public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
+    public override bool ApplyMiscPowers(EffectivePropertySet characteristics)
     {
         characteristics.Radius = 3;
         return false;

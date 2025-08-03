@@ -17,7 +17,7 @@ internal class GreatBootsEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusArmorClass += item.GetBonusValue(10, level);
+        item.EffectivePropertySet.BonusArmorClass += item.GetBonusValue(10, level);
         if (Game.DieRoll(20) == 1)
         {
             item.CreateRandomArtifact(false);

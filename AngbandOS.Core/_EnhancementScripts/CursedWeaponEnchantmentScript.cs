@@ -22,9 +22,9 @@ internal class CursedWeaponEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        if (item.EnchantmentItemProperties.BonusHit + item.EnchantmentItemProperties.BonusDamage < 0)
+        if (item.EffectivePropertySet.BonusHit + item.EffectivePropertySet.BonusDamage < 0)
         {
-            item.EnchantmentItemProperties.IsCursed = true;
+            item.EffectivePropertySet.IsCursed = true;
         }
     }
 }

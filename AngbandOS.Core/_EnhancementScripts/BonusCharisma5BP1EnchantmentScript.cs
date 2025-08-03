@@ -22,6 +22,6 @@ internal class BonusCharisma5BP1EnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusCharisma = 1 + item.GetBonusValue(5, level);
+        item.EffectivePropertySet.BonusCharisma = 1 + item.GetBonusValue(5, level);
     }
 }

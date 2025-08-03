@@ -16,7 +16,7 @@ internal class RogueArtifactBias : ArtifactBias
     {
         (nameof(CanSlayAndFalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "0")
     };
-    public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
         if (!characteristics.Stealth)
         {

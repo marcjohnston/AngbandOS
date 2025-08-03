@@ -36,7 +36,7 @@ internal class CyclopsRace : Race
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, EffectivePropertySet itemCharacteristics)
     {
         itemCharacteristics.ResSound = true;
     }

@@ -17,6 +17,6 @@ internal class GreatDragonScaleMailEnchantmentScript : Script, IEnhancementScrip
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusArmorClass += item.GetBonusValue(10, level);
+        item.EffectivePropertySet.BonusArmorClass += item.GetBonusValue(10, level);
     }
 }

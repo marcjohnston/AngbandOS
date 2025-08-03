@@ -11,38 +11,22 @@ namespace AngbandOS.Core;
 /// operations are handled.
 /// </summary>
 [Serializable]
-internal abstract class ItemProperty
+internal abstract class PropertyValue
 {
     /// <summary>
     /// Returns a new instance of the item property with a copy/clone of the value.
     /// </summary>
     /// <returns></returns>
-    public abstract ItemProperty Clone();
+    public abstract PropertyValue Clone();
 
-    public abstract ItemProperty Override(ItemProperty itemProperty);
+    public abstract PropertyValue Merge(PropertyValue itemProperty);
 
-    public abstract ItemProperty Merge(ItemProperty itemProperty);
-
-    public abstract bool IsEqual(ItemProperty itemProperty);
-
-    /// <summary>
-    /// Returns the index into the <see cref="ItemPropertySet.ItemProperties"/> array that this property occupies.
-    /// </summary>
-    public readonly int Index;
-
-    /// <summary>
-    /// Constructs a new <see cref="ItemProperty"/>.
-    /// </summary>
-    /// <param name="index"></param>
-    public ItemProperty(int index)
-    {
-        Index = index;
-    }
+    public abstract bool IsEqual(PropertyValue itemProperty);
 
     #region Equality
     public override bool Equals(object? obj)
     {
-        if (obj is not ItemProperty other)
+        if (obj is not PropertyValue other)
         {
             return false;
         }
@@ -50,7 +34,7 @@ internal abstract class ItemProperty
         return IsEqual(other);
     }
 
-    public static bool operator ==(ItemProperty? left, ItemProperty? right)
+    public static bool operator ==(PropertyValue? left, PropertyValue? right)
     {
         if (ReferenceEquals(left, right))
         {
@@ -64,7 +48,7 @@ internal abstract class ItemProperty
         return left.Equals(right);
     }
 
-    public static bool operator !=(ItemProperty? left, ItemProperty? right)
+    public static bool operator !=(PropertyValue? left, PropertyValue? right)
     {
         return !(left == right);
     }

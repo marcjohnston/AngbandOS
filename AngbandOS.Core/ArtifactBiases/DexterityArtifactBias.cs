@@ -12,7 +12,7 @@ internal class DexterityArtifactBias : ArtifactBias
     private DexterityArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Dexterity";
 
-    public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
         if (!characteristics.Dex)
         {
@@ -25,7 +25,7 @@ internal class DexterityArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
+    public override bool ApplyMiscPowers(EffectivePropertySet characteristics)
     {
         if (!characteristics.SustDex)
         {

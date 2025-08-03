@@ -107,7 +107,7 @@ internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScri
         // Can't replace a cursed item
         if (wieldingItem != null)
         {
-            if (wieldingItem.EffectiveItemPropertySet.IsCursed)
+            if (wieldingItem.EffectivePropertySet.IsCursed)
             {
                 string cursedItemName = wieldingItem.GetDescription(false);
                 Game.MsgPrint($"The {cursedItemName} you are {slot.DescribeItemLocation(wieldingItem)} appears to be cursed.");
@@ -116,7 +116,7 @@ internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScri
         }
 
         // If we know the item to be cursed, confirm its wearing
-        if (item.EffectiveItemPropertySet.IsCursed && (item.IsKnown() || item.IdentSense))
+        if (item.EffectivePropertySet.IsCursed && (item.IsKnown() || item.IdentSense))
         {
             string cursedItemName = item.GetDescription(false);
             string dummy = $"Really use the {cursedItemName} {{cursed}}? ";
@@ -155,7 +155,7 @@ internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScri
         Game.MsgPrint($"{wieldPhrase} {itemName} ({slot.Label(wornItem)}).");
 
         // Let us know if it's cursed
-        if (wornItem.EffectiveItemPropertySet.IsCursed)
+        if (wornItem.EffectivePropertySet.IsCursed)
         {
             Game.MsgPrint("Oops! It feels deathly cold!");
             wornItem.IdentSense = true;

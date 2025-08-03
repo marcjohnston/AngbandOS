@@ -116,7 +116,7 @@ internal class JournalScript : UniversalScript, IGetKey
         Game.FullScreenOverlay = false;
     }
 
-    private void DisplayStat(string title, int row, int col, Func<RoItemPropertySet, bool> getStat)
+    private void DisplayStat(string title, int row, int col, Func<EffectivePropertySet, bool> getStat)
     {
         // Determine if the stat is granted via any equipment.  This allows us to choose the color before rendering any of the inventory slots.
         bool anyHasStat = false;
@@ -127,8 +127,8 @@ internal class JournalScript : UniversalScript, IGetKey
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    RoItemPropertySet itemCharacteristics = oPtr.ObjectFlagsKnown();
-                    if (getStat(itemCharacteristics))
+                    EffectivePropertySet effectivePropertySet = oPtr.ObjectFlagsKnown();
+                    if (getStat(effectivePropertySet))
                     {
                         anyHasStat = true;
                     }
@@ -150,8 +150,8 @@ internal class JournalScript : UniversalScript, IGetKey
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    RoItemPropertySet itemCharacteristics = oPtr.ObjectFlagsKnown();
-                    if (getStat(itemCharacteristics))
+                    EffectivePropertySet effectivePropertySet = oPtr.ObjectFlagsKnown();
+                    if (getStat(effectivePropertySet))
                     {
                         thisHasStat = true;
                     }
@@ -168,7 +168,7 @@ internal class JournalScript : UniversalScript, IGetKey
             }
         }
 
-        RoItemPropertySet playerCharacteristics = Game.GetAbilitiesAsItemFlags(); // TODO: This is done once for every call.
+        EffectivePropertySet playerCharacteristics = Game.GetAbilitiesAsItemFlags(); // TODO: This is done once for every call.
         if (getStat(playerCharacteristics))
         {
             Game.Screen.Print(baseColor, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
@@ -219,117 +219,117 @@ internal class JournalScript : UniversalScript, IGetKey
 
         Game.DisplayPlayerEquippy(0, 0 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 0 + 11);
-        DisplayStat("Add Str", 2, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Str);
-        DisplayStat("Add Int", 3, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Int);
-        DisplayStat("Add Wis", 4, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Wis);
-        DisplayStat("Add Dex", 5, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Dex);
-        DisplayStat("Add Con", 6, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Con);
-        DisplayStat("Add Cha", 7, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Cha);
+        DisplayStat("Add Str", 2, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Str);
+        DisplayStat("Add Int", 3, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Int);
+        DisplayStat("Add Wis", 4, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Wis);
+        DisplayStat("Add Dex", 5, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Dex);
+        DisplayStat("Add Con", 6, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Con);
+        DisplayStat("Add Cha", 7, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Cha);
 
 
-        DisplayStat("Add Stea.", 10, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Stealth);
-        DisplayStat("Add Sear.", 11, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Search);
-        DisplayStat("Add Infra", 12, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Infra);
-        DisplayStat("Add Tun..", 13, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Tunnel);
-        DisplayStat("Add Speed", 14, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Speed);
-        DisplayStat("Add Blows", 15, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Blows);
-        DisplayStat("Chaotic", 16, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Chaotic);
-        DisplayStat("Vampiric", 17, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Vampiric);
+        DisplayStat("Add Stea.", 10, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Stealth);
+        DisplayStat("Add Sear.", 11, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Search);
+        DisplayStat("Add Infra", 12, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Infra);
+        DisplayStat("Add Tun..", 13, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Tunnel);
+        DisplayStat("Add Speed", 14, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Speed);
+        DisplayStat("Add Blows", 15, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Blows);
+        DisplayStat("Chaotic", 16, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Chaotic);
+        DisplayStat("Vampiric", 17, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Vampiric);
 
         Game.DisplayPlayerEquippy(0, 26 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 26 + 11);
-        DisplayStat("Slay Anim.", 2, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayAnimal);
-        DisplayStat("Slay Evil", 3, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayEvil);
-        DisplayStat("Slay Und.", 4, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayUndead);
-        DisplayStat("Slay Demon", 5, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayDemon);
-        DisplayStat("Slay Orc", 6, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayOrc);
-        DisplayStat("Slay Troll", 7, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayTroll);
-        DisplayStat("Slay Giant", 8, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayGiant);
-        DisplayStat("Slay Drag.", 9, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlayDragon);
-        DisplayStat("Kill Drag.", 10, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.KillDragon);
-        DisplayStat("Sharpness", 11, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Vorpal);
-        DisplayStat("Impact", 12, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Impact);
-        DisplayStat("Poison Brd", 13, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.BrandPois);
-        DisplayStat("Acid Brand", 14, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.BrandAcid);
-        DisplayStat("Elec Brand", 15, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.BrandElec);
-        DisplayStat("Fire Brand", 16, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.BrandFire);
-        DisplayStat("Cold Brand", 17, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.BrandCold);
+        DisplayStat("Slay Anim.", 2, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayAnimal);
+        DisplayStat("Slay Evil", 3, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayEvil);
+        DisplayStat("Slay Und.", 4, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayUndead);
+        DisplayStat("Slay Demon", 5, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayDemon);
+        DisplayStat("Slay Orc", 6, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayOrc);
+        DisplayStat("Slay Troll", 7, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayTroll);
+        DisplayStat("Slay Giant", 8, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayGiant);
+        DisplayStat("Slay Drag.", 9, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayDragon);
+        DisplayStat("Kill Drag.", 10, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.KillDragon);
+        DisplayStat("Sharpness", 11, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Vorpal);
+        DisplayStat("Impact", 12, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Impact);
+        DisplayStat("Poison Brd", 13, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandPois);
+        DisplayStat("Acid Brand", 14, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandAcid);
+        DisplayStat("Elec Brand", 15, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandElec);
+        DisplayStat("Fire Brand", 16, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandFire);
+        DisplayStat("Cold Brand", 17, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandCold);
 
         Game.DisplayPlayerEquippy(0, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 52 + 11);
-        DisplayStat("Sust Str", 2, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SustStr);
-        DisplayStat("Sust Int", 3, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SustInt);
-        DisplayStat("Sust Wis", 4, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SustWis);
-        DisplayStat("Sust Dex", 5, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SustDex);
-        DisplayStat("Sust Con", 6, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SustCon);
-        DisplayStat("Sust Cha", 7, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SustCha);
+        DisplayStat("Sust Str", 2, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SustStr);
+        DisplayStat("Sust Int", 3, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SustInt);
+        DisplayStat("Sust Wis", 4, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SustWis);
+        DisplayStat("Sust Dex", 5, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SustDex);
+        DisplayStat("Sust Con", 6, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SustCon);
+        DisplayStat("Sust Cha", 7, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SustCha);
 
 
-        DisplayStat("Imm Acid", 10, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ImAcid);
-        DisplayStat("Imm Elec", 11, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ImElec);
-        DisplayStat("Imm Fire", 12, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ImFire);
-        DisplayStat("Imm Cold", 13, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ImCold);
+        DisplayStat("Imm Acid", 10, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ImAcid);
+        DisplayStat("Imm Elec", 11, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ImElec);
+        DisplayStat("Imm Fire", 12, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ImFire);
+        DisplayStat("Imm Cold", 13, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ImCold);
 
-        DisplayStat("Reflect", 15, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Reflect);
-        DisplayStat("Free Act", 16, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.FreeAct);
-        DisplayStat("Hold Life", 17, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.HoldLife);
+        DisplayStat("Reflect", 15, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Reflect);
+        DisplayStat("Free Act", 16, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.FreeAct);
+        DisplayStat("Hold Life", 17, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.HoldLife);
 
         Game.DisplayPlayerEquippy(20, 0 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 0 + 11);
-        DisplayStat("Res Acid", 22, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResAcid);
-        DisplayStat("Res Elec", 23, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResElec);
-        DisplayStat("Res Fire", 24, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResFire);
-        DisplayStat("Res Cold", 25, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResCold);
-        DisplayStat("Res Pois", 26, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResPois);
-        DisplayStat("Res Fear", 27, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResFear);
-        DisplayStat("Res Light", 28, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResLight);
-        DisplayStat("Res Dark", 29, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResDark);
-        DisplayStat("Res Blind", 30, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResBlind);
-        DisplayStat("Res Conf", 31, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResConf);
-        DisplayStat("Res Sound", 32, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResSound);
-        DisplayStat("Res Shard", 33, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResShards);
-        DisplayStat("Res Neth", 34, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResNether);
-        DisplayStat("Res Nexus", 35, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResNexus);
-        DisplayStat("Res Chaos", 36, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResChaos);
-        DisplayStat("Res Disen", 37, 0, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ResDisen);
+        DisplayStat("Res Acid", 22, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResAcid);
+        DisplayStat("Res Elec", 23, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResElec);
+        DisplayStat("Res Fire", 24, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResFire);
+        DisplayStat("Res Cold", 25, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResCold);
+        DisplayStat("Res Pois", 26, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResPois);
+        DisplayStat("Res Fear", 27, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResFear);
+        DisplayStat("Res Light", 28, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResLight);
+        DisplayStat("Res Dark", 29, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResDark);
+        DisplayStat("Res Blind", 30, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResBlind);
+        DisplayStat("Res Conf", 31, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResConf);
+        DisplayStat("Res Sound", 32, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResSound);
+        DisplayStat("Res Shard", 33, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResShards);
+        DisplayStat("Res Neth", 34, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResNether);
+        DisplayStat("Res Nexus", 35, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResNexus);
+        DisplayStat("Res Chaos", 36, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResChaos);
+        DisplayStat("Res Disen", 37, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ResDisen);
 
         Game.DisplayPlayerEquippy(20, 26 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 26 + 11);
-        DisplayStat("Aura Fire", 22, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ShFire);
-        DisplayStat("Aura Elec", 23, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ShElec);
+        DisplayStat("Aura Fire", 22, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ShFire);
+        DisplayStat("Aura Elec", 23, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ShElec);
 
-        DisplayStat("Anti-Theft", 25, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.AntiTheft);
-        DisplayStat("Anti-Tele", 26, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.NoTele);
-        DisplayStat("Anti-Magic", 27, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.NoMagic);
-        DisplayStat("WraithForm", 28, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Wraith);
-        DisplayStat("EvilCurse", 29, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.DreadCurse);
-        DisplayStat("Easy Know", 30, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.EasyKnow);
-        DisplayStat("Hide Type", 31, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.HideType);
-        DisplayStat("Show Mods", 32, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.ShowMods);
-        DisplayStat("Insta Art", 33, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.InstaArt);
-        DisplayStat("Levitate", 34, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Feather);
-        DisplayStat("Light", 35, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Radius > 0);
-        DisplayStat("See Invis", 36, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SeeInvis);
-        DisplayStat("Telepathy", 37, 26, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Telepathy);
+        DisplayStat("Anti-Theft", 25, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.AntiTheft);
+        DisplayStat("Anti-Tele", 26, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.NoTele);
+        DisplayStat("Anti-Magic", 27, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.NoMagic);
+        DisplayStat("WraithForm", 28, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Wraith);
+        DisplayStat("EvilCurse", 29, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.DreadCurse);
+        DisplayStat("Easy Know", 30, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.EasyKnow);
+        DisplayStat("Hide Type", 31, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.HideType);
+        DisplayStat("Show Mods", 32, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ShowMods);
+        DisplayStat("Insta Art", 33, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.InstaArt);
+        DisplayStat("Levitate", 34, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Feather);
+        DisplayStat("Light", 35, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Radius > 0);
+        DisplayStat("See Invis", 36, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SeeInvis);
+        DisplayStat("Telepathy", 37, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Telepathy);
 
         Game.DisplayPlayerEquippy(20, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);
-        DisplayStat("Digestion", 22, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.SlowDigest);
-        DisplayStat("Regen", 23, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Regen);
-        DisplayStat("Xtra Might", 24, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.XtraMight);
-        DisplayStat("Xtra Shots", 25, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.XtraShots);
-        DisplayStat("Ign Acid", 26, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.IgnoreAcid);
-        DisplayStat("Ign Elec", 27, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.IgnoreElec);
-        DisplayStat("Ign Fire", 28, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.IgnoreFire);
-        DisplayStat("Ign Cold", 29, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.IgnoreCold);
-        DisplayStat("Activate", 30, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Activation != null);
-        DisplayStat("Drain Exp", 31, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.DrainExp);
-        DisplayStat("Teleport", 32, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Teleport);
-        DisplayStat("Aggravate", 33, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Aggravate);
-        DisplayStat("Blessed", 34, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.Blessed);
-        DisplayStat("Cursed", 35, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.IsCursed);
-        DisplayStat("Hvy Curse", 36, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.HeavyCurse);
-        DisplayStat("Prm Curse", 37, 52, (RoItemPropertySet itemCharacteristics) => itemCharacteristics.PermaCurse);
+        DisplayStat("Digestion", 22, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlowDigest);
+        DisplayStat("Regen", 23, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Regen);
+        DisplayStat("Xtra Might", 24, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.XtraMight);
+        DisplayStat("Xtra Shots", 25, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.XtraShots);
+        DisplayStat("Ign Acid", 26, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.IgnoreAcid);
+        DisplayStat("Ign Elec", 27, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.IgnoreElec);
+        DisplayStat("Ign Fire", 28, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.IgnoreFire);
+        DisplayStat("Ign Cold", 29, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.IgnoreCold);
+        DisplayStat("Activate", 30, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Activation != null);
+        DisplayStat("Drain Exp", 31, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.DrainExp);
+        DisplayStat("Teleport", 32, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Teleport);
+        DisplayStat("Aggravate", 33, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Aggravate);
+        DisplayStat("Blessed", 34, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Blessed);
+        DisplayStat("Cursed", 35, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.IsCursed);
+        DisplayStat("Hvy Curse", 36, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.HeavyCurse);
+        DisplayStat("Prm Curse", 37, 52, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.PermaCurse);
 
         Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
         Game.Inkey();

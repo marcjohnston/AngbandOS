@@ -22,6 +22,6 @@ internal class PoorAttacks3BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusAttacks = 0 - (Math.Max(1, item.GetBonusValue(3, level)));
+        item.EffectivePropertySet.BonusAttacks = 0 - (Math.Max(1, item.GetBonusValue(3, level)));
     }
 }

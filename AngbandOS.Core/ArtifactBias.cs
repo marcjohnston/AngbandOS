@@ -62,7 +62,7 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics) => false;
+    public virtual bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics) => false;
 
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => null;
@@ -74,7 +74,7 @@ internal abstract class ArtifactBias : IGetKey
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool ApplyMiscPowers(RwItemPropertySet characteristics) => false;
+    public virtual bool ApplyMiscPowers(EffectivePropertySet characteristics) => false;
 
     /// <summary>
     /// Returns an activation type to be applied for the item or null when there is no biased activation type.  By default, null is returned.

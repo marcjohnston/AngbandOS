@@ -30,7 +30,7 @@ internal class FireItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (oPtr.EffectiveItemPropertySet.IgnoreFire)
+                if (oPtr.EffectivePropertySet.IgnoreFire)
                 {
                     ignore = true;
                 }

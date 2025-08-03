@@ -22,6 +22,6 @@ internal class PoorWisdomEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusWisdom = 0 - (1 + item.GetBonusValue(5, level));
+        item.EffectivePropertySet.BonusWisdom = 0 - (1 + item.GetBonusValue(5, level));
     }
 }

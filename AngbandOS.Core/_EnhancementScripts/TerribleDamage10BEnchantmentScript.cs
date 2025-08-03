@@ -22,6 +22,6 @@ internal class TerribleDamage10BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusDamage -= 2 * item.GetBonusValue(10, level);
+        item.EffectivePropertySet.BonusDamage -= 2 * item.GetBonusValue(10, level);
     }
 }

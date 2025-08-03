@@ -19,7 +19,7 @@ internal class RangerArtifactBias : ArtifactBias
         (nameof(CanSlayAndFalseSlayAnimalItemTest), "1", nameof(SlayAnimalItemEnhancement), "1/2")
     };
 
-    public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
         if (!characteristics.Con)
         {
@@ -49,7 +49,7 @@ internal class RangerArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(RwItemPropertySet characteristics)
+    public override bool ApplyMiscPowers(EffectivePropertySet characteristics)
     {
         if (!characteristics.SustCon)
         {

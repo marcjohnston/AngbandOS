@@ -17,10 +17,10 @@ internal class TerribleGlovesEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusArmorClass -= item.GetBonusValue(10, level);
-        if (item.EnchantmentItemProperties.BonusArmorClass < 0)
+        item.EffectivePropertySet.BonusArmorClass -= item.GetBonusValue(10, level);
+        if (item.EffectivePropertySet.BonusArmorClass < 0)
         {
-            item.EnchantmentItemProperties.IsCursed = true;
+            item.EffectivePropertySet.IsCursed = true;
         }
 
         item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(GlovesPoorItemEnhancementWeightedRandom)).ChooseOrDefault());

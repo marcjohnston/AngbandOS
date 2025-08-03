@@ -2307,7 +2307,7 @@ internal class Game
         }
         item.EnchantItem(ObjectLevel, true, good, great, true); // This applies the fixed artifact.
         item.StackCount = item.MakeObjectCount;
-        if (!item.EffectiveItemPropertySet.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
+        if (!item.EffectivePropertySet.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
         {
             TreasureRating += item.LevelNormallyFound - Difficulty;
         }
@@ -5665,23 +5665,23 @@ internal class Game
             int chance;
             if ((eflag & Constants.EnchTohit) != 0)
             {
-                if (oPtr.EnchantmentItemProperties.BonusHit < 0)
+                if (oPtr.EffectivePropertySet.BonusHit < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EnchantmentItemProperties.BonusHit > 15)
+                else if (oPtr.EffectivePropertySet.BonusHit > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.EnchantmentItemProperties.BonusHit];
+                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusHit];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EnchantmentItemProperties.BonusHit++;
+                    oPtr.EffectivePropertySet.BonusHit++;
                     res = true;
-                    if (oPtr.EffectiveItemPropertySet.IsCursed && !oPtr.EffectiveItemPropertySet.PermaCurse && oPtr.EnchantmentItemProperties.BonusHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -5693,23 +5693,23 @@ internal class Game
             }
             if ((eflag & Constants.EnchTodam) != 0)
             {
-                if (oPtr.EnchantmentItemProperties.BonusDamage < 0)
+                if (oPtr.EffectivePropertySet.BonusDamage < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EnchantmentItemProperties.BonusDamage > 15)
+                else if (oPtr.EffectivePropertySet.BonusDamage > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.EnchantmentItemProperties.BonusDamage];
+                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusDamage];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EnchantmentItemProperties.BonusDamage++;
+                    oPtr.EffectivePropertySet.BonusDamage++;
                     res = true;
-                    if (oPtr.EffectiveItemPropertySet.IsCursed && !oPtr.EffectiveItemPropertySet.PermaCurse && oPtr.EnchantmentItemProperties.BonusDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -5721,23 +5721,23 @@ internal class Game
             }
             if ((eflag & Constants.EnchToac) != 0)
             {
-                if (oPtr.EnchantmentItemProperties.BonusArmorClass < 0)
+                if (oPtr.EffectivePropertySet.BonusArmorClass < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EnchantmentItemProperties.BonusArmorClass > 15)
+                else if (oPtr.EffectivePropertySet.BonusArmorClass > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.EnchantmentItemProperties.BonusArmorClass];
+                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusArmorClass];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EnchantmentItemProperties.BonusArmorClass++;
+                    oPtr.EffectivePropertySet.BonusArmorClass++;
                     res = true;
-                    if (oPtr.EffectiveItemPropertySet.IsCursed && !oPtr.EffectiveItemPropertySet.PermaCurse && oPtr.EnchantmentItemProperties.BonusArmorClass >= 0 &&
+                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
@@ -5997,7 +5997,7 @@ internal class Game
         {
             return false;
         }
-        if (oPtr.EffectiveItemPropertySet.IgnoreAcid)
+        if (oPtr.EffectivePropertySet.IgnoreAcid)
         {
             return false;
         }
@@ -6010,7 +6010,7 @@ internal class Game
         {
             return false;
         }
-        if (oPtr.EffectiveItemPropertySet.IgnoreCold)
+        if (oPtr.EffectivePropertySet.IgnoreCold)
         {
             return false;
         }
@@ -6023,7 +6023,7 @@ internal class Game
         {
             return false;
         }
-        if (oPtr.EffectiveItemPropertySet.IgnoreElec)
+        if (oPtr.EffectivePropertySet.IgnoreElec)
         {
             return false;
         }
@@ -6036,7 +6036,7 @@ internal class Game
         {
             return false;
         }
-        if (oPtr.EffectiveItemPropertySet.IgnoreFire)
+        if (oPtr.EffectivePropertySet.IgnoreFire)
         {
             return false;
         }
@@ -6368,18 +6368,18 @@ internal class Game
         {
             return false;
         }
-        if (oPtr.ArmorClass + oPtr.EnchantmentItemProperties.BonusArmorClass <= 0)
+        if (oPtr.ArmorClass + oPtr.EffectivePropertySet.BonusArmorClass <= 0)
         {
             return false;
         }
         string oName = oPtr.GetDescription(false);
-        if (oPtr.EffectiveItemPropertySet.IgnoreAcid)
+        if (oPtr.EffectivePropertySet.IgnoreAcid)
         {
             MsgPrint($"Your {oName} is unaffected!");
             return true;
         }
         MsgPrint($"Your {oName} is damaged!");
-        oPtr.EnchantmentItemProperties.BonusArmorClass--;
+        oPtr.EffectivePropertySet.BonusArmorClass--;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
@@ -6424,15 +6424,15 @@ internal class Game
             {
                 continue;
             }
-            if (!oPtr.EffectiveItemPropertySet.IsCursed)
+            if (!oPtr.EffectivePropertySet.IsCursed)
             {
                 continue;
             }
-            if (!alsoRemoveHeavyCurse && oPtr.EffectiveItemPropertySet.HeavyCurse)
+            if (!alsoRemoveHeavyCurse && oPtr.EffectivePropertySet.HeavyCurse)
             {
                 continue;
             }
-            if (oPtr.EffectiveItemPropertySet.PermaCurse)
+            if (oPtr.EffectivePropertySet.PermaCurse)
             {
                 continue;
             }
@@ -6779,15 +6779,16 @@ internal class Game
         {
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
-            item.SetFixedArtifact(null, null);
+            item.FixedArtifact = null;
+            item.EffectivePropertySet.RemoveEnhancement("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement)));
-            item.EnchantmentItemProperties.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
-            item.EnchantmentItemProperties.BonusHit = 0;
-            item.EnchantmentItemProperties.BonusDamage = 0;
+            item.EffectivePropertySet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectivePropertySet.BonusHit = 0;
+            item.EffectivePropertySet.BonusDamage = 0;
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.EnchantmentItemProperties.IsCursed = true;
+            item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6818,15 +6819,16 @@ internal class Game
         {
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
-            item.SetFixedArtifact(null, null);
+            item.FixedArtifact = null;
+            item.EffectivePropertySet.RemoveEnhancement("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement)));
-            item.EnchantmentItemProperties.BonusHit = 0 - DieRoll(5) - DieRoll(5);
-            item.EnchantmentItemProperties.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
-            item.EnchantmentItemProperties.BonusArmorClass = 0;
+            item.EffectivePropertySet.BonusHit = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectivePropertySet.BonusArmorClass = 0;
             item.ArmorClass = 0;
             item.DamageDice = 0;
             item.DamageSides = 0;
-            item.EnchantmentItemProperties.IsCursed = true;
+            item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
             item.IsBroken = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -7439,7 +7441,7 @@ internal class Game
         Item? meleeItem = GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
-            bonus += meleeItem.EnchantmentItemProperties.BonusHit;
+            bonus += meleeItem.EffectivePropertySet.BonusHit;
         }
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         // Attacking uses a full turn
@@ -7477,8 +7479,8 @@ internal class Game
                 if (meleeItem != null)
                 {
                     // Get our weapon's flags to see if we need to do anything special
-                    chaosEffect = meleeItem.EffectiveItemPropertySet.Chaotic && DieRoll(2) == 1;
-                    if (meleeItem.EffectiveItemPropertySet.Vampiric || (chaosEffect && DieRoll(5) < 3))
+                    chaosEffect = meleeItem.EffectivePropertySet.Chaotic && DieRoll(2) == 1;
+                    if (meleeItem.EffectivePropertySet.Vampiric || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7562,12 +7564,12 @@ internal class Game
                         chaosEffect = false;
                     }
                     // Check if we did a critical
-                    totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.EnchantmentItemProperties.BonusHit, totalDamage);
+                    totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.EffectivePropertySet.BonusHit, totalDamage);
 
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
                     // Vorpal weapons have a chance of a deep cut.
-                    bool vorpalCut = meleeItem.EffectiveItemPropertySet.Vorpal && DieRoll(extraDamage1InChance) == 1;
+                    bool vorpalCut = meleeItem.EffectivePropertySet.Vorpal && DieRoll(extraDamage1InChance) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
@@ -7581,7 +7583,7 @@ internal class Game
                         } while (DieRoll(meleeItem.FixedArtifact == null ? 4 : meleeItem.FixedArtifact.VorpalExtraAttacks1InChance) == 1);
                     }
                     // Add bonus damage for the weapon
-                    totalDamage += meleeItem.EnchantmentItemProperties.BonusDamage;
+                    totalDamage += meleeItem.EffectivePropertySet.BonusDamage;
                 }
                 // Add bonus damage for strength etc.
                 totalDamage += Bonuses.DamageBonus;
@@ -7937,7 +7939,7 @@ internal class Game
             throwDistance = 10;
         }
         // Work out the damage done
-        int damage = DiceRoll(missile.DamageDice, missile.DamageSides) + missile.EnchantmentItemProperties.BonusDamage;
+        int damage = DiceRoll(missile.DamageDice, missile.DamageSides) + missile.EffectivePropertySet.BonusDamage;
         damage *= damageMultiplier;
         int chance = SkillThrowing + (Bonuses.AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
@@ -8029,7 +8031,7 @@ internal class Game
                     }
                     // Adjust the damage for the particular monster type
                     damage = missile.AdjustDamageForMonsterType(damage, monster);
-                    damage = PlayerCriticalRanged(missile.Weight, missile.EnchantmentItemProperties.BonusHit, damage);
+                    damage = PlayerCriticalRanged(missile.Weight, missile.EffectivePropertySet.BonusHit, damage);
                     if (damage < 0)
                     {
                         damage = 0;
@@ -13511,7 +13513,7 @@ internal class Game
         {
             return;
         }
-        if (oPtr.EffectiveItemPropertySet.Blessed && DieRoll(888) > chance)
+        if (oPtr.EffectivePropertySet.Blessed && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.StackCount > 1 ? "" : "s";
@@ -13520,22 +13522,22 @@ internal class Game
         }
         if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.RareItem != null))
         {
-            if (!oPtr.EffectiveItemPropertySet.HeavyCurse)
+            if (!oPtr.EffectivePropertySet.HeavyCurse)
             {
                 changed = true;
             }
-            oPtr.EnchantmentItemProperties.IsCursed = true;
-            oPtr.EnchantmentItemProperties.HeavyCurse = true;
+            oPtr.EffectivePropertySet.IsCursed = true;
+            oPtr.EffectivePropertySet.HeavyCurse = true;
             oPtr.ResetCurse();
             oPtr.ResetHeavyCurse();
         }
         else
         {
-            if (!oPtr.EffectiveItemPropertySet.IsCursed)
+            if (!oPtr.EffectivePropertySet.IsCursed)
             {
                 changed = true;
             }
-            oPtr.EnchantmentItemProperties.IsCursed = true;
+            oPtr.EffectivePropertySet.IsCursed = true;
             oPtr.ResetCurse();
         }
         if (changed)
@@ -13663,9 +13665,9 @@ internal class Game
         CheckExperience();
     }
 
-    public RoItemPropertySet GetAbilitiesAsItemFlags()
+    public EffectivePropertySet GetAbilitiesAsItemFlags()
     {
-        RwItemPropertySet itemCharacteristics = new RwItemPropertySet();
+        EffectivePropertySet itemCharacteristics = new EffectivePropertySet();
         if (BaseCharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFearResistanceLevel)
         {
             itemCharacteristics.ResFear = true;
@@ -13837,7 +13839,7 @@ internal class Game
                 itemCharacteristics.SustCha = true;
             }
         }
-        return itemCharacteristics.AsReadOnly();
+        return itemCharacteristics;
     }
 
     public int GetScore(Game game)

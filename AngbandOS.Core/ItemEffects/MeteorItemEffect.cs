@@ -30,7 +30,7 @@ internal class MeteorItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " burn up!" : " burns up!";
-                if (oPtr.EffectiveItemPropertySet.IgnoreFire)
+                if (oPtr.EffectivePropertySet.IgnoreFire)
                 {
                     ignore = true;
                 }
@@ -40,7 +40,7 @@ internal class MeteorItemEffect : ItemEffect
                 ignore = false;
                 doKill = true;
                 noteKill = plural ? " shatter!" : " shatters!";
-                if (oPtr.EffectiveItemPropertySet.IgnoreCold)
+                if (oPtr.EffectivePropertySet.IgnoreCold)
                 {
                     ignore = true;
                 }

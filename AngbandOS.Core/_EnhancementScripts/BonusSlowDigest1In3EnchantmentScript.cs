@@ -24,7 +24,7 @@ internal class BonusSlowDigest1In3EnchantmentScript : Script, IEnhancementScript
     {
         if (Game.DieRoll(3) == 1)
         {
-            item.EnchantmentItemProperties.SlowDigest = true;
+            item.EffectivePropertySet.SlowDigest = true;
         }
     }
 }

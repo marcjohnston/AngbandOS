@@ -26,6 +26,6 @@ internal class LordlyProtectionEnchantmentScript : Script, IEnhancementScript
         {
             item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(LordlyResistanceItemEnhancementWeightedRandom)));
         } while (Game.DieRoll(4) == 1);
-        item.EnchantmentItemProperties.BonusArmorClass = 10 + Game.DieRoll(5) + item.GetBonusValue(10, level);
+        item.EffectivePropertySet.BonusArmorClass = 10 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
 }

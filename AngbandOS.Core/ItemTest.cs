@@ -68,389 +68,389 @@ internal abstract class ItemTest : IGetKey
         return true;
     }
 
-    public bool Test(RoItemPropertySet characteristics)
+    public bool Test(EffectivePropertySet effectivePropertySet)
     {
-        if (!TestNullObject<Activation>(HasActivation, characteristics.Activation))
+        if (!TestNullObject<Activation>(HasActivation, effectivePropertySet.Activation))
         {
             return false;
         }
-        if (!TestBoolean(CanApplyBlessedArtifactBias, characteristics.CanApplyBlessedArtifactBias))
+        if (!TestBoolean(CanApplyBlessedArtifactBias, effectivePropertySet.CanApplyBlessedArtifactBias))
         {
             return false;
         }
-        if (!TestBoolean(CanApplyArtifactBiasSlaying, characteristics.CanApplyArtifactBiasSlaying))
+        if (!TestBoolean(CanApplyArtifactBiasSlaying, effectivePropertySet.CanApplyArtifactBiasSlaying))
         {
             return false;
         }
-        if (!TestBoolean(Aggravate, characteristics.Aggravate))
+        if (!TestBoolean(Aggravate, effectivePropertySet.Aggravate))
         {
             return false;
         }
-        if (!TestBoolean(AntiTheft, characteristics.AntiTheft))
+        if (!TestBoolean(AntiTheft, effectivePropertySet.AntiTheft))
         {
             return false;
         }
-        if (!TestNullObject<ArtifactBias>(ArtifactBias, characteristics.ArtifactBias))
+        if (!TestNullObject<ArtifactBias>(ArtifactBias, effectivePropertySet.ArtifactBias))
         {
             return false;
         }
-        if (!TestBoolean(Blessed, characteristics.Blessed))
+        if (!TestBoolean(Blessed, effectivePropertySet.Blessed))
         {
             return false;
         }
-        if (!TestBoolean(Blows, characteristics.Blows))
+        if (!TestBoolean(Blows, effectivePropertySet.Blows))
         {
             return false;
         }
-        if (!TestBoolean(BrandAcid, characteristics.BrandAcid))
+        if (!TestBoolean(BrandAcid, effectivePropertySet.BrandAcid))
         {
             return false;
         }
-        if (!TestBoolean(BrandCold, characteristics.BrandCold))
+        if (!TestBoolean(BrandCold, effectivePropertySet.BrandCold))
         {
             return false;
         }
-        if (!TestBoolean(BrandElec, characteristics.BrandElec))
+        if (!TestBoolean(BrandElec, effectivePropertySet.BrandElec))
         {
             return false;
         }
-        if (!TestBoolean(BrandFire, characteristics.BrandFire))
+        if (!TestBoolean(BrandFire, effectivePropertySet.BrandFire))
         {
             return false;
         }
-        if (!TestBoolean(BrandPois, characteristics.BrandPois))
+        if (!TestBoolean(BrandPois, effectivePropertySet.BrandPois))
         {
             return false;
         }
-        if (!TestBoolean(Cha, characteristics.Cha))
+        if (!TestBoolean(Cha, effectivePropertySet.Cha))
         {
             return false;
         }
-        if (!TestBoolean(Chaotic, characteristics.Chaotic))
+        if (!TestBoolean(Chaotic, effectivePropertySet.Chaotic))
         {
             return false;
         }
-        if (!TestBoolean(Con, characteristics.Con))
+        if (!TestBoolean(Con, effectivePropertySet.Con))
         {
             return false;
         }
-        if (!TestBoolean(IsCursed, characteristics.IsCursed))
+        if (!TestBoolean(IsCursed, effectivePropertySet.IsCursed))
         {
             return false;
         }
-        if (!TestBoolean(Dex, characteristics.Dex))
+        if (!TestBoolean(Dex, effectivePropertySet.Dex))
         {
             return false;
         }
-        if (!TestBoolean(DrainExp, characteristics.DrainExp))
+        if (!TestBoolean(DrainExp, effectivePropertySet.DrainExp))
         {
             return false;
         }
-        if (!TestBoolean(DreadCurse, characteristics.DreadCurse))
+        if (!TestBoolean(DreadCurse, effectivePropertySet.DreadCurse))
         {
             return false;
         }
-        if (!TestBoolean(EasyKnow, characteristics.EasyKnow))
+        if (!TestBoolean(EasyKnow, effectivePropertySet.EasyKnow))
         {
             return false;
         }
-        if (!TestBoolean(Feather, characteristics.Feather))
+        if (!TestBoolean(Feather, effectivePropertySet.Feather))
         {
             return false;
         }
-        if (!TestBoolean(FreeAct, characteristics.FreeAct))
+        if (!TestBoolean(FreeAct, effectivePropertySet.FreeAct))
         {
             return false;
         }
-        if (!TestBoolean(HeavyCurse, characteristics.HeavyCurse))
+        if (!TestBoolean(HeavyCurse, effectivePropertySet.HeavyCurse))
         {
             return false;
         }
-        if (!TestBoolean(HideType, characteristics.HideType))
+        if (!TestBoolean(HideType, effectivePropertySet.HideType))
         {
             return false;
         }
-        if (!TestBoolean(HoldLife, characteristics.HoldLife))
+        if (!TestBoolean(HoldLife, effectivePropertySet.HoldLife))
         {
             return false;
         }
-        if (!TestBoolean(IgnoreAcid, characteristics.IgnoreAcid))
+        if (!TestBoolean(IgnoreAcid, effectivePropertySet.IgnoreAcid))
         {
             return false;
         }
-        if (!TestBoolean(IgnoreCold, characteristics.IgnoreCold))
+        if (!TestBoolean(IgnoreCold, effectivePropertySet.IgnoreCold))
         {
             return false;
         }
-        if (!TestBoolean(IgnoreElec, characteristics.IgnoreElec))
+        if (!TestBoolean(IgnoreElec, effectivePropertySet.IgnoreElec))
         {
             return false;
         }
-        if (!TestBoolean(IgnoreFire, characteristics.IgnoreFire))
+        if (!TestBoolean(IgnoreFire, effectivePropertySet.IgnoreFire))
         {
             return false;
         }
-        if (!TestBoolean(ImAcid, characteristics.ImAcid))
+        if (!TestBoolean(ImAcid, effectivePropertySet.ImAcid))
         {
             return false;
         }
-        if (!TestBoolean(ImCold, characteristics.ImCold))
+        if (!TestBoolean(ImCold, effectivePropertySet.ImCold))
         {
             return false;
         }
-        if (!TestBoolean(ImElec, characteristics.ImElec))
+        if (!TestBoolean(ImElec, effectivePropertySet.ImElec))
         {
             return false;
         }
-        if (!TestBoolean(ImFire, characteristics.ImFire))
+        if (!TestBoolean(ImFire, effectivePropertySet.ImFire))
         {
             return false;
         }
-        if (!TestBoolean(Impact, characteristics.Impact))
+        if (!TestBoolean(Impact, effectivePropertySet.Impact))
         {
             return false;
         }
-        if (!TestBoolean(Infra, characteristics.Infra))
+        if (!TestBoolean(Infra, effectivePropertySet.Infra))
         {
             return false;
         }
-        if (!TestBoolean(InstaArt, characteristics.InstaArt))
+        if (!TestBoolean(InstaArt, effectivePropertySet.InstaArt))
         {
             return false;
         }
-        if (!TestBoolean(Int, characteristics.Int))
+        if (!TestBoolean(Int, effectivePropertySet.Int))
         {
             return false;
         }
-        if (!TestBoolean(KillDragon, characteristics.KillDragon))
+        if (!TestBoolean(KillDragon, effectivePropertySet.KillDragon))
         {
             return false;
         }
-        if (!TestBoolean(NoMagic, characteristics.NoMagic))
+        if (!TestBoolean(NoMagic, effectivePropertySet.NoMagic))
         {
             return false;
         }
-        if (!TestBoolean(NoTele, characteristics.NoTele))
+        if (!TestBoolean(NoTele, effectivePropertySet.NoTele))
         {
             return false;
         }
-        if (!TestBoolean(PermaCurse, characteristics.PermaCurse))
+        if (!TestBoolean(PermaCurse, effectivePropertySet.PermaCurse))
         {
             return false;
         }
-        if (!TestZeroInt(Radius, characteristics.Radius))
+        if (!TestZeroInt(Radius, effectivePropertySet.Radius))
         {
             return false;
         }
-        if (!TestBoolean(Reflect, characteristics.Reflect))
+        if (!TestBoolean(Reflect, effectivePropertySet.Reflect))
         {
             return false;
         }
-        if (!TestBoolean(Regen, characteristics.Regen))
+        if (!TestBoolean(Regen, effectivePropertySet.Regen))
         {
             return false;
         }
-        if (!TestBoolean(ResAcid, characteristics.ResAcid))
+        if (!TestBoolean(ResAcid, effectivePropertySet.ResAcid))
         {
             return false;
         }
-        if (!TestBoolean(ResBlind, characteristics.ResBlind))
+        if (!TestBoolean(ResBlind, effectivePropertySet.ResBlind))
         {
             return false;
         }
-        if (!TestBoolean(ResChaos, characteristics.ResChaos))
+        if (!TestBoolean(ResChaos, effectivePropertySet.ResChaos))
         {
             return false;
         }
-        if (!TestBoolean(ResCold, characteristics.ResCold))
+        if (!TestBoolean(ResCold, effectivePropertySet.ResCold))
         {
             return false;
         }
-        if (!TestBoolean(ResConf, characteristics.ResConf))
+        if (!TestBoolean(ResConf, effectivePropertySet.ResConf))
         {
             return false;
         }
-        if (!TestBoolean(ResDark, characteristics.ResDark))
+        if (!TestBoolean(ResDark, effectivePropertySet.ResDark))
         {
             return false;
         }
-        if (!TestBoolean(ResDisen, characteristics.ResDisen))
+        if (!TestBoolean(ResDisen, effectivePropertySet.ResDisen))
         {
             return false;
         }
-        if (!TestBoolean(ResElec, characteristics.ResElec))
+        if (!TestBoolean(ResElec, effectivePropertySet.ResElec))
         {
             return false;
         }
-        if (!TestBoolean(ResFear, characteristics.ResFear))
+        if (!TestBoolean(ResFear, effectivePropertySet.ResFear))
         {
             return false;
         }
-        if (!TestBoolean(ResFire, characteristics.ResFire))
+        if (!TestBoolean(ResFire, effectivePropertySet.ResFire))
         {
             return false;
         }
-        if (!TestBoolean(ResLight, characteristics.ResLight))
+        if (!TestBoolean(ResLight, effectivePropertySet.ResLight))
         {
             return false;
         }
-        if (!TestBoolean(ResNether, characteristics.ResNether))
+        if (!TestBoolean(ResNether, effectivePropertySet.ResNether))
         {
             return false;
         }
-        if (!TestBoolean(ResNexus, characteristics.ResNexus))
+        if (!TestBoolean(ResNexus, effectivePropertySet.ResNexus))
         {
             return false;
         }
-        if (!TestBoolean(ResPois, characteristics.ResPois))
+        if (!TestBoolean(ResPois, effectivePropertySet.ResPois))
         {
             return false;
         }
-        if (!TestBoolean(ResShards, characteristics.ResShards))
+        if (!TestBoolean(ResShards, effectivePropertySet.ResShards))
         {
             return false;
         }
-        if (!TestBoolean(ResSound, characteristics.ResSound))
+        if (!TestBoolean(ResSound, effectivePropertySet.ResSound))
         {
             return false;
         }
-        if (!TestBoolean(Search, characteristics.Search))
+        if (!TestBoolean(Search, effectivePropertySet.Search))
         {
             return false;
         }
-        if (!TestBoolean(SeeInvis, characteristics.SeeInvis))
+        if (!TestBoolean(SeeInvis, effectivePropertySet.SeeInvis))
         {
             return false;
         }
-        if (!TestBoolean(FactoryAllowsShElecricity, characteristics.CanProvideSheathOfElectricity))
+        if (!TestBoolean(FactoryAllowsShElecricity, effectivePropertySet.CanProvideSheathOfElectricity))
         {
             return false;
         }
-        if (!TestBoolean(ShElec, characteristics.ShElec))
+        if (!TestBoolean(ShElec, effectivePropertySet.ShElec))
         {
             return false;
         }
-        if (!TestBoolean(FactoryAllowsShFire, characteristics.CanProvideSheathOfFire))
+        if (!TestBoolean(FactoryAllowsShFire, effectivePropertySet.CanProvideSheathOfFire))
         {
             return false;
         }
-        if (!TestBoolean(ShFire, characteristics.ShFire))
+        if (!TestBoolean(ShFire, effectivePropertySet.ShFire))
         {
             return false;
         }
-        if (!TestBoolean(ShowMods, characteristics.ShowMods))
+        if (!TestBoolean(ShowMods, effectivePropertySet.ShowMods))
         {
             return false;
         }
-        if (!TestBoolean(SlayAnimal, characteristics.SlayAnimal))
+        if (!TestBoolean(SlayAnimal, effectivePropertySet.SlayAnimal))
         {
             return false;
         }
-        if (!TestBoolean(SlayDemon, characteristics.SlayDemon))
+        if (!TestBoolean(SlayDemon, effectivePropertySet.SlayDemon))
         {
             return false;
         }
-        if (!TestBoolean(SlayDragon, characteristics.SlayDragon))
+        if (!TestBoolean(SlayDragon, effectivePropertySet.SlayDragon))
         {
             return false;
         }
-        if (!TestBoolean(SlayEvil, characteristics.SlayEvil))
+        if (!TestBoolean(SlayEvil, effectivePropertySet.SlayEvil))
         {
             return false;
         }
-        if (!TestBoolean(SlayGiant, characteristics.SlayGiant))
+        if (!TestBoolean(SlayGiant, effectivePropertySet.SlayGiant))
         {
             return false;
         }
-        if (!TestBoolean(SlayOrc, characteristics.SlayOrc))
+        if (!TestBoolean(SlayOrc, effectivePropertySet.SlayOrc))
         {
             return false;
         }
-        if (!TestBoolean(SlayTroll, characteristics.SlayTroll))
+        if (!TestBoolean(SlayTroll, effectivePropertySet.SlayTroll))
         {
             return false;
         }
-        if (!TestBoolean(SlayUndead, characteristics.SlayUndead))
+        if (!TestBoolean(SlayUndead, effectivePropertySet.SlayUndead))
         {
             return false;
         }
-        if (!TestBoolean(SlowDigest, characteristics.SlowDigest))
+        if (!TestBoolean(SlowDigest, effectivePropertySet.SlowDigest))
         {
             return false;
         }
-        if (!TestBoolean(Speed, characteristics.Speed))
+        if (!TestBoolean(Speed, effectivePropertySet.Speed))
         {
             return false;
         }
-        if (!TestBoolean(Stealth, characteristics.Stealth))
+        if (!TestBoolean(Stealth, effectivePropertySet.Stealth))
         {
             return false;
         }
-        if (!TestBoolean(Str, characteristics.Str))
+        if (!TestBoolean(Str, effectivePropertySet.Str))
         {
             return false;
         }
-        if (!TestBoolean(SustCha, characteristics.SustCha))
+        if (!TestBoolean(SustCha, effectivePropertySet.SustCha))
         {
             return false;
         }
-        if (!TestBoolean(SustCon, characteristics.SustCon))
+        if (!TestBoolean(SustCon, effectivePropertySet.SustCon))
         {
             return false;
         }
-        if (!TestBoolean(SustDex, characteristics.SustDex))
+        if (!TestBoolean(SustDex, effectivePropertySet.SustDex))
         {
             return false;
         }
-        if (!TestBoolean(SustInt, characteristics.SustInt))
+        if (!TestBoolean(SustInt, effectivePropertySet.SustInt))
         {
             return false;
         }
-        if (!TestBoolean(SustStr, characteristics.SustStr))
+        if (!TestBoolean(SustStr, effectivePropertySet.SustStr))
         {
             return false;
         }
-        if (!TestBoolean(SustWis, characteristics.SustWis))
+        if (!TestBoolean(SustWis, effectivePropertySet.SustWis))
         {
             return false;
         }
-        if (!TestBoolean(Telepathy, characteristics.Telepathy))
+        if (!TestBoolean(Telepathy, effectivePropertySet.Telepathy))
         {
             return false;
         }
-        if (!TestBoolean(Teleport, characteristics.Teleport))
+        if (!TestBoolean(Teleport, effectivePropertySet.Teleport))
         {
             return false;
         }
-        if (!TestZeroInt(TreasureRating, characteristics.TreasureRating))
+        if (!TestZeroInt(TreasureRating, effectivePropertySet.TreasureRating))
         {
             return false;
         }
-        if (!TestBoolean(Tunnel, characteristics.Tunnel))
+        if (!TestBoolean(Tunnel, effectivePropertySet.Tunnel))
         {
             return false;
         }
-        if (!TestBoolean(Vampiric, characteristics.Vampiric))
+        if (!TestBoolean(Vampiric, effectivePropertySet.Vampiric))
         {
             return false;
         }
-        if (!TestBoolean(Vorpal, characteristics.Vorpal))
+        if (!TestBoolean(Vorpal, effectivePropertySet.Vorpal))
         {
             return false;
         }
-        if (!TestBoolean(Wis, characteristics.Wis))
+        if (!TestBoolean(Wis, effectivePropertySet.Wis))
         {
             return false;
         }
-        if (!TestBoolean(Wraith, characteristics.Wraith))
+        if (!TestBoolean(Wraith, effectivePropertySet.Wraith))
         {
             return false;
         }
-        if (!TestBoolean(XtraMight, characteristics.XtraMight))
+        if (!TestBoolean(XtraMight, effectivePropertySet.XtraMight))
         {
             return false;
         }
-        if (!TestBoolean(XtraShots, characteristics.XtraShots))
+        if (!TestBoolean(XtraShots, effectivePropertySet.XtraShots))
         {
             return false;
         }

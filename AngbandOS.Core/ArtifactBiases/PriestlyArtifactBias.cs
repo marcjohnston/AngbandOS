@@ -17,7 +17,7 @@ internal class PriestlyArtifactBias : ArtifactBias
         (nameof(CanBlessAndFalseBlessedItemTest), "1", nameof(BlessedItemEnhancement), "0")
     };
 
-    public override bool ApplyRandomArtifactBonuses(RwItemPropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
         if (!characteristics.Wis)
         {

@@ -14,7 +14,7 @@ internal class CanBeActivatedBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "CanBeActivated";
     public override bool Get(Item item)
     {
-        return item.EffectiveItemPropertySet.Activation != null;
+        return item.EffectivePropertySet.Activation != null;
     }
 }
 

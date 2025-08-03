@@ -30,7 +30,7 @@ internal class ColdItemEffect : ItemEffect
             {
                 noteKill = plural ? " shatter!" : " shatters!";
                 doKill = true;
-                if (oPtr.EffectiveItemPropertySet.IgnoreCold)
+                if (oPtr.EffectivePropertySet.IgnoreCold)
                 {
                     ignore = true;
                 }

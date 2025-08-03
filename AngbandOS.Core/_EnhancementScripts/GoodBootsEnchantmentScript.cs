@@ -17,6 +17,6 @@ internal class GoodBootsEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusArmorClass += Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.EffectivePropertySet.BonusArmorClass += Game.DieRoll(5) + item.GetBonusValue(5, level);
     }
 }

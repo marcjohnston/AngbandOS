@@ -30,7 +30,7 @@ internal class AcidItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " melt!" : " melts!";
-                if (oPtr.EffectiveItemPropertySet.IgnoreAcid)
+                if (oPtr.EffectivePropertySet.IgnoreAcid)
                 {
                     ignore = true;
                 }

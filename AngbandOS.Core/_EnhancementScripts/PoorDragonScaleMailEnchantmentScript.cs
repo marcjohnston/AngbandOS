@@ -17,10 +17,10 @@ internal class PoorDragonScaleMailEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusArmorClass -= Game.DieRoll(5) + item.GetBonusValue(5, level);
-        if (item.EnchantmentItemProperties.BonusArmorClass < 0)
+        item.EffectivePropertySet.BonusArmorClass -= Game.DieRoll(5) + item.GetBonusValue(5, level);
+        if (item.EffectivePropertySet.BonusArmorClass < 0)
         {
-            item.EnchantmentItemProperties.IsCursed = true;
+            item.EffectivePropertySet.IsCursed = true;
         }
     }
 }

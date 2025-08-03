@@ -80,7 +80,7 @@ internal abstract class Race : IGetKey
     /// </summary>
     /// <param name="level"></param>
     /// <param name="itemCharacteristics"></param>
-    public virtual void UpdateRacialAbilities(int level, RwItemPropertySet itemCharacteristics) { }
+    public virtual void UpdateRacialAbilities(int level, EffectivePropertySet itemCharacteristics) { }
 
     protected abstract string GenerateNameSyllableSetName { get; }
     public SyllableSet GenerateNameSyllableSet { get; private set; }

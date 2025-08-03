@@ -7,15 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ValueItemPropertyFactory<T> : ItemPropertyFactory where T : struct
+internal class BoolPropertyFactory : PropertyFactory
 {
-    public override ItemProperty Instantiate()
-    {
-        return new ValueItemProperty<T>(Index);
-    }
-    public override ItemProperty InstantiateNullable()
-    {
-        return new NullableValueItemProperty<T>(Index);
-    }
-    public ValueItemPropertyFactory(int index) : base(index) { } 
+    public override PropertyValue Instantiate() => new BoolPropertyValue(false);
+    public override NullablePropertyValue InstantiateNullable() => new NullableBoolPropertyValue(null);
+    public BoolPropertyFactory(int index) : base(index) { } 
 }

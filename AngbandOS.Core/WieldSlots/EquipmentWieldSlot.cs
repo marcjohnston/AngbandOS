@@ -52,16 +52,16 @@ internal abstract class EquipmentWieldSlot : WieldSlot
             if (oPtr != null)
             {
                 // Perform some universal actions for items that are worn.
-                if (oPtr.EffectiveItemPropertySet.DreadCurse && Game.DieRoll(100) == 1)
+                if (oPtr.EffectivePropertySet.DreadCurse && Game.DieRoll(100) == 1)
                 {
                     Game.ActivateDreadCurse();
                 }
 
 
                 // Items that teleport.
-                if (oPtr.EffectiveItemPropertySet.Teleport && Game.RandomLessThan(100) < 1)
+                if (oPtr.EffectivePropertySet.Teleport && Game.RandomLessThan(100) < 1)
                 {
-                    if (oPtr.EffectiveItemPropertySet.IsCursed && !Game.HasAntiTeleport)
+                    if (oPtr.EffectivePropertySet.IsCursed && !Game.HasAntiTeleport)
                     {
                         Game.Disturb(true);
                         Game.RunScript(nameof(TeleportSelf40TeleportSelfScript));

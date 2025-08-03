@@ -14,7 +14,7 @@ internal class IsBlessedBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "IsBlessed";
     public override bool Get(Item item)
     {
-        return item.EnchantmentItemProperties.Blessed;
+        return item.EffectivePropertySet.Blessed;
     }
 }
 

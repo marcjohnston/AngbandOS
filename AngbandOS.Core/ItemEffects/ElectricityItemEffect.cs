@@ -30,7 +30,7 @@ internal class ElectricityItemEffect : ItemEffect
             {
                 doKill = true;
                 noteKill = plural ? " are destroyed!" : " is destroyed!";
-                if (oPtr.EffectiveItemPropertySet.IgnoreElec)
+                if (oPtr.EffectivePropertySet.IgnoreElec)
                 {
                     ignore = true;
                 }

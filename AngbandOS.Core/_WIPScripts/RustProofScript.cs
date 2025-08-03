@@ -33,15 +33,15 @@ internal class RustProofScript : Script, IScript, ICastSpellScript
         }
         string itenName = item.GetDescription(false);
         // Set the ignore acid flag
-        item.EnchantmentItemProperties.IgnoreAcid = true;
+        item.EffectivePropertySet.IgnoreAcid = true;
         // Make sure the grammar of the message is correct
         string your = item.IsInInventory ? "Your" : "The";
         string s;
-        if (item.EnchantmentItemProperties.BonusArmorClass < 0 && !item.EffectiveItemPropertySet.IsCursed)
+        if (item.EffectivePropertySet.BonusArmorClass < 0 && !item.EffectivePropertySet.IsCursed)
         {
             s = item.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {itenName} look{s} as good as new!");
-            item.EnchantmentItemProperties.BonusArmorClass = 0;
+            item.EffectivePropertySet.BonusArmorClass = 0;
         }
         s = item.StackCount > 1 ? "are" : "is";
         Game.MsgPrint($"{your} {itenName} {s} now protected against corrosion.");

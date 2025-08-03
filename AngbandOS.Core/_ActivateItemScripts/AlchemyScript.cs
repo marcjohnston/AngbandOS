@@ -64,7 +64,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
         {
             string feel = "special";
             Game.MsgPrint($"You fail to turn {oName} to gold!");
-            if (oPtr.EffectiveItemPropertySet.IsCursed || oPtr.IsBroken)
+            if (oPtr.EffectivePropertySet.IsCursed || oPtr.IsBroken)
             {
                 feel = "terrible";
             }

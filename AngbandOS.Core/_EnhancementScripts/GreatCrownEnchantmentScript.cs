@@ -17,7 +17,7 @@ internal class GreatCrownEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EnchantmentItemProperties.BonusArmorClass += item.GetBonusValue(10, level);
+        item.EffectivePropertySet.BonusArmorClass += item.GetBonusValue(10, level);
         if (Game.DieRoll(20) == 1)
         {
             item.CreateRandomArtifact(false);
@@ -50,7 +50,7 @@ internal class GreatCrownEnchantmentScript : Script, IEnhancementScript
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement)));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.EnchantmentItemProperties.Telepathy = true;
+                        item.EffectivePropertySet.Telepathy = true;
                     }
                     break;
             }
