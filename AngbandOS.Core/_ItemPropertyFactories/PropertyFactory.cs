@@ -14,8 +14,8 @@ internal abstract class PropertyFactory
 {
     public abstract PropertyValue Instantiate();
     public abstract NullablePropertyValue InstantiateNullable();
-    public readonly int Index;
-    protected PropertyFactory(int index)
+    public readonly PropertyEnum Index;
+    protected PropertyFactory(PropertyEnum index)
     {
         Index = index;
     }

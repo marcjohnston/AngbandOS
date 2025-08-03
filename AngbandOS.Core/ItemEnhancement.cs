@@ -156,7 +156,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.
     /// </summary>
     /// <returns></returns>
-    public EffectivePropertySet GenerateItemCharacteristics()
+    public ReadOnlyPropertySet GenerateItemCharacteristics()
     {
         EffectivePropertySet itemCharacteristics = new EffectivePropertySet()
         {
@@ -279,7 +279,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             XtraMight = XtraMight,
             XtraShots = XtraShots,
         };
-        return itemCharacteristics;
+        return itemCharacteristics.ToReadOnly();
     }
 
     public string GetKey => Key;

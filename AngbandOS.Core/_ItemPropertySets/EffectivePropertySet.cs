@@ -16,7 +16,7 @@ internal class EffectivePropertySet
         {
             Array.Resize(ref _propertyFactories, intIndex + 1);
         }
-        _propertyFactories[intIndex] = new BoolPropertyFactory(intIndex);
+        _propertyFactories[intIndex] = new BoolPropertyFactory(index);
     }
     private void RegisterIntPropertyFactory(PropertyEnum index)
     {
@@ -25,7 +25,7 @@ internal class EffectivePropertySet
         {
             Array.Resize(ref _propertyFactories, intIndex + 1);
         }
-        _propertyFactories[intIndex] = new IntPropertyFactory(intIndex);
+        _propertyFactories[intIndex] = new IntPropertyFactory(index);
     }
 
     private void RegisterReferencePropertyFactory<T>(PropertyEnum index) where T : class
@@ -35,7 +35,7 @@ internal class EffectivePropertySet
         {
             Array.Resize(ref _propertyFactories, intIndex + 1);
         }
-        _propertyFactories[intIndex] = new ReferencePropertyFactory<T>(intIndex);
+        _propertyFactories[intIndex] = new ReferencePropertyFactory<T>(index);
     }
 
     private PropertyFactory[] _propertyFactories = new PropertyFactory[0];
@@ -160,53 +160,73 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.XtraMight);
         RegisterBoolPropertyFactory(PropertyEnum.XtraShots);
 
-        int maxPropertyEnum = Enum.GetValues(typeof(PropertyEnum)).Cast<int>().Max();
-
         // Generate a writable property values.
-        _writeProperties = new PropertyValue[maxPropertyEnum];
+        _writeProperties = new PropertyValue[_propertyFactories.Length];
         foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
         {
-            _writeProperties[itemPropertyFactory.Index] = itemPropertyFactory.Instantiate();
+            int index = (int)itemPropertyFactory.Index;
+            _writeProperties[index] = itemPropertyFactory.Instantiate();
         }
 
         // Generate the override property values.
-        _overrideProperties = new PropertyValue[maxPropertyEnum];
+        _overrideProperties = new PropertyValue[_propertyFactories.Length];
         foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
         {
-            _overrideProperties[itemPropertyFactory.Index] = itemPropertyFactory.InstantiateNullable();
+            int index = (int)itemPropertyFactory.Index;
+            _overrideProperties[index] = itemPropertyFactory.InstantiateNullable();
         }
     }
-    private Dictionary<string, EffectivePropertySet> _enhancements = new Dictionary<string, EffectivePropertySet>();
+    private Dictionary<string, ReadOnlyPropertySet> _enhancements = new Dictionary<string, ReadOnlyPropertySet>();
     private PropertyValue[] _writeProperties;
     private PropertyValue[] _overrideProperties;
     public EffectivePropertySet Clone()
     {
+        // Build a writable property set.
         EffectivePropertySet effectivePropertySet = new EffectivePropertySet();
 
-        foreach (KeyValuePair<string, EffectivePropertySet> enhancement in _enhancements)
+        // Copy the enhancements.  These are immutable, so we can simply reference them.
+        foreach (KeyValuePair<string, ReadOnlyPropertySet> enhancement in _enhancements)
         {
-            effectivePropertySet.AddEnhancement(enhancement.Key, enhancement.Value); // These are immutable.
+            effectivePropertySet.AddEnhancement(enhancement.Key, enhancement.Value);
         }
-        effectivePropertySet._overrideProperties = new PropertyValue[_overrideProperties.Length];
-        for (int index = 0; index < _overrideProperties.Length; index++)
+
+        // Clone the override properties.
+        effectivePropertySet._overrideProperties = new PropertyValue[_propertyFactories.Length];
+        foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
         {
+            int index = (int)itemPropertyFactory.Index;
             effectivePropertySet._overrideProperties[index] = _overrideProperties[index].Clone();
         }
-        effectivePropertySet._writeProperties = new PropertyValue[_writeProperties.Length];
-        for (int index = 0; index < _writeProperties.Length; index++)
+
+        // Clone the writable properties.
+        effectivePropertySet._writeProperties = new PropertyValue[_propertyFactories.Length];
+        foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
         {
+            int index = (int)itemPropertyFactory.Index;
             effectivePropertySet._writeProperties[index] = _writeProperties[index].Clone();
         }
 
         return effectivePropertySet;
     }
-    public void AddEnhancement(string key, EffectivePropertySet effectivePropertySet) 
+    public ReadOnlyPropertySet ToReadOnly()
     {
-        _enhancements.Add(key, effectivePropertySet);
+        PropertyValue[] newProperties = new PropertyValue[_propertyFactories.Length];
+
+        foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
+        {
+            int index = (int)itemPropertyFactory.Index;
+            newProperties[index] = GetValue(itemPropertyFactory.Index);
+        }
+        return new ReadOnlyPropertySet(newProperties);
     }
-    public void AddEnhancement(EffectivePropertySet effectivePropertySet)
+
+    public void AddEnhancement(string key, ReadOnlyPropertySet readOnlyPropertySet) 
     {
-        _enhancements.Add(Guid.NewGuid().ToString(), effectivePropertySet);
+        _enhancements.Add(key, readOnlyPropertySet);
+    }
+    public void AddEnhancement(ReadOnlyPropertySet readOnlyPropertySet)
+    {
+        AddEnhancement(Guid.NewGuid().ToString(), readOnlyPropertySet);
     }
     public void RemoveEnhancement(string key)
     {
@@ -254,7 +274,7 @@ internal class EffectivePropertySet
         PropertyValue itemProperty = itemPropertyFactory.Instantiate();
 
         // Merge all of the immutable enhancements.
-        foreach (EffectivePropertySet effectivePropertySet in _enhancements.Values)
+        foreach (ReadOnlyPropertySet effectivePropertySet in _enhancements.Values)
         {
             itemProperty = itemProperty.Merge(effectivePropertySet.GetValue(propertyEnum));
         }
@@ -269,7 +289,7 @@ internal class EffectivePropertySet
         return itemProperty;
     }
 
-    private bool GetBoolValue(PropertyEnum propertyEnum)
+    public bool GetBoolValue(PropertyEnum propertyEnum)
     {
         PropertyValue effectiveItemProperty = GetValue(propertyEnum);
         BoolPropertyValue boolPropertyValue = (BoolPropertyValue)effectiveItemProperty;
@@ -277,7 +297,7 @@ internal class EffectivePropertySet
         return value;
     }
 
-    private int GetIntValue(PropertyEnum propertyEnum)
+    public int GetIntValue(PropertyEnum propertyEnum)
     {
         PropertyValue effectiveItemProperty = GetValue(propertyEnum);
         IntPropertyValue intPropertyValue = (IntPropertyValue)effectiveItemProperty;
@@ -291,6 +311,21 @@ internal class EffectivePropertySet
         int index = (int)propertyEnum;
 
         _writeProperties[index] = propertyValue;
+    }
+
+    public void SetIntValue(PropertyEnum propertyEnum, int value)
+    {
+        SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new IntPropertyValue(value));
+    }
+
+    public void AddIntValue(PropertyEnum propertyEnum, int value)
+    {
+        SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new IntPropertyValue(GetIntValue(propertyEnum) + value));
+    }
+
+    public void SetBoolValue(PropertyEnum propertyEnum, bool value)
+    {
+        SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new BoolPropertyValue(value));
     }
 
     #region Properties

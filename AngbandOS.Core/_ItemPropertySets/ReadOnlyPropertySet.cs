@@ -6,10 +6,18 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
-internal class BoolPropertyFactory : PropertyFactory
+internal class ReadOnlyPropertySet
 {
-    public override PropertyValue Instantiate() => new BoolPropertyValue(false);
-    public override NullablePropertyValue InstantiateNullable() => new NullableBoolPropertyValue(null);
-    public BoolPropertyFactory(PropertyEnum index) : base(index) { } 
+    private PropertyValue[] _properties;
+
+    public PropertyValue GetValue(PropertyEnum propertyEnum)
+    {
+        int index = (int)propertyEnum;
+        return _properties[index];
+    }
+
+    public ReadOnlyPropertySet(PropertyValue[] properties)
+    {
+        _properties = properties;
+    }
 }

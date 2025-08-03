@@ -11,5 +11,5 @@ internal class IntPropertyFactory : PropertyFactory
 {
     public override PropertyValue Instantiate() => new IntPropertyValue(0);
     public override NullablePropertyValue InstantiateNullable() => new NullableIntPropertyValue(null);
-    public IntPropertyFactory(int index) : base(index) { }
+    public IntPropertyFactory(PropertyEnum index) : base(index) { }
 }

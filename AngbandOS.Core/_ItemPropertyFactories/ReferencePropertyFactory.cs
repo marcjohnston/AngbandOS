@@ -15,5 +15,5 @@ internal class ReferencePropertyFactory<T> : PropertyFactory where T : class
     }
     public override NullablePropertyValue InstantiateNullable() => new NullableReferencePropertyValue<T>(null);
 
-    public ReferencePropertyFactory(int index) : base(index) { }
+    public ReferencePropertyFactory(PropertyEnum index) : base(index) { }
 }

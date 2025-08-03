@@ -30,7 +30,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             Item? oPtr = Game.GetInventoryItem(k);
             if (oPtr != null)
             {
-                inventoryCharacteristics.AddEnhancement(oPtr.EffectivePropertySet);
+                inventoryCharacteristics.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
             }
         }
         string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.IntValue);

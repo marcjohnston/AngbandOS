@@ -2170,7 +2170,7 @@ internal sealed class Item : IComparable<Item>
             }
         }
         FixedArtifact = fixedArtifact;
-        EffectivePropertySet.AddEnhancement("fixed", fixedArtifactItemPropertySet);
+        EffectivePropertySet.AddEnhancement("fixed", fixedArtifactItemPropertySet.ToReadOnly());
 
         if (fixedArtifact.Cost == 0)
         {
@@ -2443,7 +2443,7 @@ internal sealed class Item : IComparable<Item>
         // Generate the read-only item characteristics from the factory.
         _factory = factory;
         EffectivePropertySet = new EffectivePropertySet();
-        EffectivePropertySet factoryPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
+        ReadOnlyPropertySet factoryPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
         EffectivePropertySet.AddEnhancement("factory", factoryPropertySet);
 
         StackCount = 1;
@@ -2498,13 +2498,13 @@ internal sealed class Item : IComparable<Item>
 
     public void SetRareItem(ItemEnhancement? rareItem)
     {
-        EffectivePropertySet? roRareItemCharacteristics = null;
         if (rareItem == null)
         {
             // Check to see if we need to remove properties.
             if (RareItem != null)
             {
                 Game.TreasureRating -= rareItem.TreasureRating;
+                EffectivePropertySet.RemoveEnhancement("rare");
             }
         }
         else
@@ -2512,7 +2512,8 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we are enchanting a cursed or broken item.
             int goodBadMultiplier = EffectivePropertySet.IsCursed || IsBroken ? -1 : 1;
 
-            roRareItemCharacteristics = rareItem.GenerateItemCharacteristics();
+            EffectivePropertySet? roRareItemCharacteristics = new EffectivePropertySet();
+            roRareItemCharacteristics.AddEnhancement(rareItem.GenerateItemCharacteristics());
 
             // If the rare item has no value, consider it broken.
             if (rareItem.Value == 0)
@@ -2536,9 +2537,9 @@ internal sealed class Item : IComparable<Item>
             roRareItemCharacteristics.BonusAttacks *= goodBadMultiplier;
             roRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
             Game.TreasureRating += rareItem.TreasureRating;
+            EffectivePropertySet.AddEnhancement("rare", roRareItemCharacteristics.ToReadOnly());
+            RareItem = rareItem;
         }
-        RareItem = rareItem;
-        EffectivePropertySet.AddEnhancement("rare", roRareItemCharacteristics);
     }
 
     public void ResetCurse()

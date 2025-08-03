@@ -124,6 +124,5 @@ internal enum PropertyEnum
     Wis,
     Wraith,
     XtraMight,
-    XtraShots,
-    LENGTH // This is a reserved enum so that we can determine the number of items in the enum easily.
+    XtraShots
 }

@@ -1008,7 +1008,7 @@ internal class ItemFactory : IGetKey, IToJson
     /// </summary>
     public bool CanBeRead => ReadTuple != null;
 
-    public EffectivePropertySet CreateRandomArtifact(Item item, bool fromScroll)
+    public ReadOnlyPropertySet CreateRandomArtifact(Item item, bool fromScroll)
     {
         int EnchantBonus(int bonus)
         {
@@ -1633,7 +1633,7 @@ internal class ItemFactory : IGetKey, IToJson
                 characteristics.Activation = Game.SingletonRepository.Get<ActivationWeightedRandom>(nameof(RandomArtifactActivationWeightedRandom)).ChooseOrDefault();
             }
         }
-        return characteristics;
+        return characteristics.ToReadOnly();
     }
     #endregion
 
