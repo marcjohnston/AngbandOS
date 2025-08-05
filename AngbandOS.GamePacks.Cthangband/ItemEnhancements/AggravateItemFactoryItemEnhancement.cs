@@ -1,9 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class AggravateItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
+public class AggravateMonsterRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Aggravate => true;
     public override bool IsCursed => true;
     public override bool EasyKnow => true;
+    public override int Weight => 2;
 }

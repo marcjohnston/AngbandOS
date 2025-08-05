@@ -22,8 +22,7 @@ public class ScythePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (45, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ScythePolearmItemFactoryItemEnhancement);
-    public override int Weight => 250;
+    public override string? ItemEnhancementBindingKey => nameof(ScythePolearmWeaponItemFactoryItemEnhancement);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

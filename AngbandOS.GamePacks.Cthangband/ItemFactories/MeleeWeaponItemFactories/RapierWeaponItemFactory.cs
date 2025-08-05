@@ -22,8 +22,7 @@ public class RapierWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(RapierItemFactoryItemEnhancement);
-    public override int Weight => 40;
+    public override string? ItemEnhancementBindingKey => nameof(RapierWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

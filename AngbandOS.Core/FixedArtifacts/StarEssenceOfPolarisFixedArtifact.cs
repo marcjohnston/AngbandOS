@@ -22,5 +22,4 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override int Weight => 10;
 }

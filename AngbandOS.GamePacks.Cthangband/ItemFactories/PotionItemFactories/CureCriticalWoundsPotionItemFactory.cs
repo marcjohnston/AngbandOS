@@ -23,7 +23,6 @@ public class CureCriticalWoundsPotionItemFactory : ItemFactoryGameConfiguration
         (5, 1)
     };
     public override int InitialNutritionalValue => 100;
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.CureCriticalWounds6d8Script), nameof(OldHeal6d3ProjectileFriendlyProjectileScript), 20);
   
     /// <summary>
@@ -40,7 +39,7 @@ public class CureCriticalWoundsPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CureCriticalWoundsPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

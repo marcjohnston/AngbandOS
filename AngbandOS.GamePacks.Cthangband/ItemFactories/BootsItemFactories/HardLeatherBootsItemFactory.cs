@@ -32,7 +32,7 @@ public class HardLeatherBootsItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 40;
+    public override string? ItemEnhancementBindingKey => nameof(HardLeatherBootsItemFactoryItemEnhancement);
 
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {

@@ -28,7 +28,8 @@ public class CloneMonsterWandItemFactory : ItemFactoryGameConfiguration
         (15, 1),
         (50, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(CloneMonsterWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(OldCloneProjectileScript), "1d5+3", 0, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

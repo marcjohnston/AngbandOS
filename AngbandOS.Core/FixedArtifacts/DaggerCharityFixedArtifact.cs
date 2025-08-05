@@ -22,5 +22,4 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 6;
     public override int ToH => 4;
-    public override int Weight => 12;
 }

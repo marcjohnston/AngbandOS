@@ -22,7 +22,8 @@ public class ConfuseMonsterWandItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(ConfuseMonsterWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(OldConfuse10ProjectileScript), "1d12+6", 25, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

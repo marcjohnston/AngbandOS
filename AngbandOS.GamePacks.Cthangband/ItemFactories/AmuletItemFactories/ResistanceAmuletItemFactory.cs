@@ -23,13 +23,12 @@ public class ResistanceAmuletItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int Cost => 25000;
-    public override string? ItemEnhancementBindingKey => nameof(ResistanceItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ResistanceAmuletItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 4)
     };
-    public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

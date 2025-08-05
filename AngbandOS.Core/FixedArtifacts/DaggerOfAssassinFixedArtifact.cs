@@ -21,5 +21,4 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     public override int ToA => 5;
     public override int ToD => 15;
     public override int ToH => 10;
-    public override int Weight => 12;
 }

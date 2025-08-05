@@ -18,7 +18,7 @@ public class SpeedRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
 
-    public override string? ItemEnhancementBindingKey => nameof(SpeedItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SpeedRingItemFactoryItemEnhancement);
 
     public override string? BreaksDuringEnchantmentProbabilityExpression => "1/2";
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
@@ -33,7 +33,6 @@ public class SpeedRingItemFactory : ItemFactoryGameConfiguration
     {
         (80, 1)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

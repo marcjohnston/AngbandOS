@@ -27,7 +27,6 @@ public class DoorStairLocationScrollItemFactory : ItemFactoryGameConfiguration
         (10, 1),
         (15, 1)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.DoorStairLocationIdentifableAndUsedScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -40,7 +39,7 @@ public class DoorStairLocationScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DoorStairLocationScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

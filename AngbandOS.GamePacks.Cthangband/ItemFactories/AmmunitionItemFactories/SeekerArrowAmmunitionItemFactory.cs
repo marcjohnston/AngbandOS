@@ -25,8 +25,7 @@ public class SeekerArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     {
         (55, 2)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShowModsAndCanApplySlayingBonusAndArmorClassMiscPowerItemFactoryItemEnhancement);
-    public override int Weight => 2;
+    public override string? ItemEnhancementBindingKey => nameof(SeekerArrowAmmunitionItemFactoryItemEnhancement);
     public override string ItemClassBindingKey => nameof(ArrowsItemClass);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

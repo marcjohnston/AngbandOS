@@ -82,7 +82,7 @@ internal class ChaosWpReward : Reward
 
             case 28:
             case 29:
-                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(BastardSwordSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(BastardSwordWeaponItemFactory));
                 break;
 
             case 30:

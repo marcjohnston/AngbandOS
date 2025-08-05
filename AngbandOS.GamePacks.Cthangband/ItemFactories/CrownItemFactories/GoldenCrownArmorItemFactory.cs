@@ -26,7 +26,7 @@ public class GoldenCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Golden Crown~";
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(GoldenCrownArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,7 +41,6 @@ public class GoldenCrownArmorItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatCrownEnchantmentScript) })
     };
 
-    public override int Weight => 30;
 
     public override string ItemClassBindingKey => nameof(CrownsItemClass);
 

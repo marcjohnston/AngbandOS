@@ -22,8 +22,7 @@ public class SlingRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (1, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(SlingItemFactoryItemEnhancement);
-    public override int Weight => 5;
+    public override string? ItemEnhancementBindingKey => nameof(SlingRangedWeaponItemFactoryItemEnhancement);
     public override int MissileDamageMultiplier => 2;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]
     {

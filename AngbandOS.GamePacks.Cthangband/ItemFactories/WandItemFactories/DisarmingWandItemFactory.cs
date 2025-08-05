@@ -22,7 +22,8 @@ public class DisarmingWandItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(DisarmingWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(DestroyTrapProjectileScript), "1d5+4", 35, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

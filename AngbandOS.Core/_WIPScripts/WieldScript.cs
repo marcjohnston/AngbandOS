@@ -147,7 +147,7 @@ internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScri
         // Put the item into the wield slot
         Game.SetInventoryItem(inventoryItem, wornItem);
         // Add the weight of the item
-        Game.WeightCarried += wornItem.Weight;
+        Game.WeightCarried += wornItem.EffectivePropertySet.Weight;
 
         // Inform us what we did
         string wieldPhrase = slot.WieldPhrase;

@@ -170,7 +170,7 @@ internal class FireItemScript : UniversalScript, IGetKey
                     }
                     // Work out the damage done
                     shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
-                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.EffectivePropertySet.BonusHit, shotDamage);
+                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.EffectivePropertySet.Weight, individualAmmunition.EffectivePropertySet.BonusHit, shotDamage);
                     if (shotDamage < 0)
                     {
                         shotDamage = 0;

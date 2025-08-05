@@ -26,9 +26,8 @@ public class GnomeSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 30;
     public override string ItemClassBindingKey => nameof(SkeletonsItemClass);
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(GnomeSkeletonSkeletonItemFactoryItemEnhancement);
     public override int PackSort => 40;
     public override string BreakageChanceProbabilityExpression => "50/100";
     public override bool HatesAcid => true;

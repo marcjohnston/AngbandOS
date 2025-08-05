@@ -29,7 +29,6 @@ public class NecronomiconDeathBookItemFactory : ItemFactoryGameConfiguration
         (90, 3)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.DeathRayDeathSpell),
@@ -50,7 +49,7 @@ public class NecronomiconDeathBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(NecronomiconDeathBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

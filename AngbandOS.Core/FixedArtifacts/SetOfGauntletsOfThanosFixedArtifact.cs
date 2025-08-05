@@ -21,5 +21,4 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => -12;
     public override int ToH => -11;
-    public override int Weight => 25;
 }

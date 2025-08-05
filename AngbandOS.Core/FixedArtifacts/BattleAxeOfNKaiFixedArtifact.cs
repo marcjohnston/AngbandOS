@@ -21,5 +21,4 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     public override int ToA => 5;
     public override int ToD => 11;
     public override int ToH => 8;
-    public override int Weight => 170;
 }

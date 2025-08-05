@@ -27,4 +27,5 @@ public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool SlayTroll => true;
     public override bool SlayUndead => true;
     public override bool Telepathy => true;
+    public override int Weight => 800;
 }

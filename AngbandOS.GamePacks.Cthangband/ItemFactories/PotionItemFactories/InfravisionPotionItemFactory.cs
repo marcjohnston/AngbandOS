@@ -22,7 +22,6 @@ public class InfravisionPotionItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(Infravision100P1d100TimerScript), null, 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class InfravisionPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(InfravisionPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

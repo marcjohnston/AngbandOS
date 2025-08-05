@@ -17,13 +17,12 @@ public class FireBallsWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 1800;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreFireItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(FireBallsWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 1)
     };
-    public override int Weight => 10;
     public override (string, string, int, int)? AimingBindingTuple => (nameof(Fire72r2ProjectileScript), "1d4+2", 90, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

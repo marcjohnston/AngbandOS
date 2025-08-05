@@ -30,8 +30,9 @@ public class ProtectionRingItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
+    public override string? ItemEnhancementBindingKey => nameof(ProtectionRingItemFactoryItemEnhancement);
+
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.

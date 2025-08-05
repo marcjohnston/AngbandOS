@@ -26,7 +26,7 @@ public class JewelEncrustedCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Jewel Encrusted Crown~";
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(JewelEncrustedCrownArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,7 +41,6 @@ public class JewelEncrustedCrownArmorItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatCrownEnchantmentScript) })
     };
 
-    public override int Weight => 40;
     public override string ItemClassBindingKey => nameof(CrownsItemClass);
 
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HeadWieldSlot) };

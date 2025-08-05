@@ -22,7 +22,6 @@ public class IronSpikeItemFactory : ItemFactoryGameConfiguration
     {
         (1, 1)
     };
-    public override int Weight => 10;
     public override string ItemClassBindingKey => nameof(SpikesItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
@@ -31,7 +30,7 @@ public class IronSpikeItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string MakeObjectCountExpression => "6d7";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IronSpikeItemFactoryItemEnhancement);
     public override bool CanSpikeDoorClosed => true;
     public override int PackSort => 37;
 }

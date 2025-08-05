@@ -31,4 +31,5 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool SeeInvis => true;
     public override bool Str => true;
     public override bool Telepathy => true;
+    public override int Weight => 25;
 }

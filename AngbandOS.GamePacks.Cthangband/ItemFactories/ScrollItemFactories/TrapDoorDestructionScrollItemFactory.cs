@@ -25,7 +25,6 @@ public class TrapDoorDestructionScrollItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.DestroyTrapsAndDoorsScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -38,7 +37,7 @@ public class TrapDoorDestructionScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(TrapDoorDestructionScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

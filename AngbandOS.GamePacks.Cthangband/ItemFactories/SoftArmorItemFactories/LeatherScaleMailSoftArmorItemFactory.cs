@@ -33,7 +33,8 @@ public class LeatherScaleMailSoftArmorItemFactory : ItemFactoryGameConfiguration
         (15, 1)
     };
     public override int BonusHit => -1;
-    public override int Weight => 140;
+    public override string? ItemEnhancementBindingKey => nameof(LeatherScaleMailSoftArmorItemFactoryItemEnhancement);
+
 
     public override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

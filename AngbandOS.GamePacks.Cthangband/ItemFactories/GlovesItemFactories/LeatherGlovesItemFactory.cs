@@ -30,7 +30,8 @@ public class LeatherGlovesItemFactory : ItemFactoryGameConfiguration
     {
         (1, 1)
     };
-    public override int Weight => 5;
+    public override string? ItemEnhancementBindingKey => nameof(LeatherGlovesItemFactoryItemEnhancement);
+
     public override string ItemClassBindingKey => nameof(GlovesItemClass);
 
     public override int PackSort => 26;

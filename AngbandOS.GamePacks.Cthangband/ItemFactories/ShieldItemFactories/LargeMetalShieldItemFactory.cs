@@ -21,7 +21,7 @@ public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large Metal Shield";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LargeMetalShieldItemFactoryItemEnhancement);
 
     public override int ArmorClass => 5;
     public override int Cost => 200;
@@ -33,7 +33,6 @@ public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
     {
         (30, 1)
     };
-    public override int Weight => 120;
 
     public override string ItemClassBindingKey => nameof(ShieldsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };

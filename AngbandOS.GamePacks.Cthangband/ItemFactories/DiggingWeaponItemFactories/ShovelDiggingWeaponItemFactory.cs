@@ -23,8 +23,7 @@ public class ShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguration
         (5, 16)
     };
     public override int InitialBonusTunnel => 1;
-    public override string? ItemEnhancementBindingKey => nameof(TunnellingAndCanApplySlayingBonusItemFactoryItemEnhancement);
-    public override int Weight => 60;
+    public override string? ItemEnhancementBindingKey => nameof(ShovelDiggingWeaponItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
     public override bool CanTunnel => true;

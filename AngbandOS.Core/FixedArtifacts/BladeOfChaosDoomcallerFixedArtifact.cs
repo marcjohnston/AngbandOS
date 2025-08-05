@@ -21,5 +21,4 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     public override int ToA => -50;
     public override int ToD => 28;
     public override int ToH => 18;
-    public override int Weight => 180;
 }

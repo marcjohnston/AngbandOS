@@ -27,7 +27,7 @@ public class BalanceDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Balance Dragon Scale Mail~";
-    public override string? ItemEnhancementBindingKey => nameof(BalanceDragonItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BalanceDragonScaleMailItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 90;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -35,7 +35,6 @@ public class BalanceDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     };
     public override int BonusArmorClass => 10;
     public override int BonusHit => -2;
-    public override int Weight => 200;
 
 
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);

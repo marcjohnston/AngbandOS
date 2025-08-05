@@ -17,4 +17,5 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool SlayEvil => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
+    public override int Weight => 60;
 }

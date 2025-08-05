@@ -21,5 +21,4 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     public override int ToA => 5;
     public override int ToD => 21;
     public override int ToH => 19;
-    public override int Weight => 120;
 }

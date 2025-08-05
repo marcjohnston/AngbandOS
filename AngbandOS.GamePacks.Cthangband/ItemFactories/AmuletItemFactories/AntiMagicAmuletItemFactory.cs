@@ -23,13 +23,12 @@ public class AntiMagicAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 30000;
-    public override string? ItemEnhancementBindingKey => nameof(AntiMagicItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(AntiMagicAmuletItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (40, 4)
     };
-    public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

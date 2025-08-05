@@ -123,6 +123,7 @@ internal enum PropertyEnum
     Vorpal,
     Wis,
     Wraith,
+    Weight,
     XtraMight,
     XtraShots
 }

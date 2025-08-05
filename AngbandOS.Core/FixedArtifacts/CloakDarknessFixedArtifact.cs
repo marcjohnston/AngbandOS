@@ -21,5 +21,4 @@ internal class CloakDarknessFixedArtifact : FixedArtifact
     public override int ToA => 4;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override int Weight => 10;
 }

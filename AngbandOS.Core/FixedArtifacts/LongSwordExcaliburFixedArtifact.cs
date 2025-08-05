@@ -21,5 +21,4 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 25;
     public override int ToH => 22;
-    public override int Weight => 130;
 }

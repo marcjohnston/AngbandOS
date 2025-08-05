@@ -21,5 +21,4 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
     public override int ToA => 15;
     public override int ToD => 20;
     public override int ToH => 10;
-    public override int Weight => 230;
 }

@@ -22,7 +22,6 @@ public class SelfKnowledgePotionItemFactory : ItemFactoryGameConfiguration
     {
         (40, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SelfKnowledgeScript), null, 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class SelfKnowledgePotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SelfKnowledgePotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

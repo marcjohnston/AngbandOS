@@ -23,7 +23,7 @@ public class RuinedChestItemFactory : ItemFactoryGameConfiguration
     {
         (75, 1)
     };
-    public override int Weight => 250;
+    public override string? ItemEnhancementBindingKey => nameof(RuinedChestItemFactoryItemEnhancement);
     public override bool IsSmall => true;
     public override int NumberOfItemsContained => 0;
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]

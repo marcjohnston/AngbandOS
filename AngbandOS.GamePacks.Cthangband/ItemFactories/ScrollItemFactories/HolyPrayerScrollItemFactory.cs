@@ -25,7 +25,6 @@ public class HolyPrayerScrollItemFactory : ItemFactoryGameConfiguration
     {
         (25, 1)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(Blessing1d48p24TimerScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -38,7 +37,7 @@ public class HolyPrayerScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(HolyPrayerScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

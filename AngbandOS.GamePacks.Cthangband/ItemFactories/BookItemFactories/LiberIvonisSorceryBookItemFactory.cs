@@ -29,7 +29,6 @@ public class LiberIvonisSorceryBookItemFactory : ItemFactoryGameConfiguration
         (90, 3)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.StasisSorcerySpell),
@@ -53,7 +52,7 @@ public class LiberIvonisSorceryBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LiberIvonisSorceryBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

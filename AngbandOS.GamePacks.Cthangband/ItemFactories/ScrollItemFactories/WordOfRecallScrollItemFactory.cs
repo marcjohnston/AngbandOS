@@ -25,7 +25,6 @@ public class WordOfRecallScrollItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.WordOfRecallIdentifableAndUsedScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -38,7 +37,7 @@ public class WordOfRecallScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(WordOfRecallScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

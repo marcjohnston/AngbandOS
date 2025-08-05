@@ -12,7 +12,7 @@ public class IceRingItemFactory : ItemFactoryGameConfiguration
     public override bool NegativeBonusArmorClassRepresentsBroken => true;
     public override bool NegativeBonusHitRepresentsBroken => true;
     public override bool NegativeBonusDamageRepresentsBroken => true;
-    public override string? ItemEnhancementBindingKey => nameof(IceItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IceRingItemFactoryItemEnhancement);
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
         (null, null, new string[] { nameof(SystemScriptsEnum.BonusArmorClass1D5P10BP5EnchantmentScript) })
@@ -29,7 +29,6 @@ public class IceRingItemFactory : ItemFactoryGameConfiguration
         (50, 1)
     };
     public override int BonusArmorClass => 15;
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

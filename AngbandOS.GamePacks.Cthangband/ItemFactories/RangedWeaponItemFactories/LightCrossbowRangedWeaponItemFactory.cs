@@ -22,8 +22,7 @@ public class LightCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (15, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(LightCrossbowItemFactoryItemEnhancement);
-    public override int Weight => 110;
+    public override string? ItemEnhancementBindingKey => nameof(LightCrossbowRangedWeaponItemFactoryItemEnhancement);
     public override int MissileDamageMultiplier => 3;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]
     {

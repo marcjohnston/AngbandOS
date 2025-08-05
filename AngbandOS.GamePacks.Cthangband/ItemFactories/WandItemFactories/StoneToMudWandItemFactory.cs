@@ -24,7 +24,8 @@ public class StoneToMudWandItemFactory : ItemFactoryGameConfiguration
         (40, 1),
         (80, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(StoneToMudWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(WallToMud1d30p20ProjectileScript), "1d8+3", 15, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

@@ -613,10 +613,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null)
                 {
-                    if (hold < oPtr.Weight / 10)
+                    if (hold < oPtr.EffectivePropertySet.Weight / 10)
                     {
-                        attackBonus += 2 * (hold - (oPtr.Weight / 10));
-                        displayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                        attackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
+                        displayedAttackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
                         hasHeavyBow = true;
                     }
                     else
@@ -663,10 +663,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(index);
-                if (oPtr != null && hold < oPtr.Weight / 10)
+                if (oPtr != null && hold < oPtr.EffectivePropertySet.Weight / 10)
                 {
-                    attackBonus += 2 * (hold - (oPtr.Weight / 10));
-                    displayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                    attackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
+                    displayedAttackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
                     hasHeavyWeapon = true;
                 }
                 if (oPtr != null && !hasHeavyWeapon)
@@ -674,7 +674,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     int num = Game.BaseCharacterClass.MaximumMeleeAttacksPerRound(Game.ExperienceLevel.IntValue);
                     int wgt = Game.BaseCharacterClass.MaximumWeight;
                     int mul = Game.BaseCharacterClass.AttackSpeedMultiplier;
-                    int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
+                    int div = oPtr.EffectivePropertySet.Weight < wgt ? wgt : oPtr.EffectivePropertySet.Weight;
                     int strIndex = Game.StrengthAbility.StrAttackSpeedComponent * mul / div;
                     if (strIndex > 11)
                     {
@@ -700,7 +700,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.MeleeAttacksPerRound = 1;
                     }
-                    Game.SkillDigging += oPtr.Weight / 10;
+                    Game.SkillDigging += oPtr.EffectivePropertySet.Weight / 10;
                 }
                 else if (Game.IsMartialArtistAndNotWieldingAMeleeWeapon())
                 {

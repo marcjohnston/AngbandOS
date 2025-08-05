@@ -25,7 +25,6 @@ public class ProtectionFromEvilScrollItemFactory : ItemFactoryGameConfiguration
     {
         (30, 1)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(ProtectionFromEvil3XP1d25TimerScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -38,7 +37,7 @@ public class ProtectionFromEvilScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ProtectionFromEvilScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

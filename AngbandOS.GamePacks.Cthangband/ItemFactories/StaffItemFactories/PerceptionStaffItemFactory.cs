@@ -22,7 +22,8 @@ public class PerceptionStaffItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(PerceptionStaffItemFactoryItemEnhancement);
+
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.IdentifyItemScript), "1d15+5", 20, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);

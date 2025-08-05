@@ -18,9 +18,8 @@ public class NaryaRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 100000;
-    public override string? ItemEnhancementBindingKey => nameof(InstantArtifactItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(NaryaRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 80;
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

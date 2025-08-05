@@ -18,7 +18,7 @@ public class LordlyProtectionRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
 
-    public override string? ItemEnhancementBindingKey => nameof(LordlyProtectionItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LordlyProtectionRingItemFactoryItemEnhancement);
 
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
@@ -30,7 +30,6 @@ public class LordlyProtectionRingItemFactory : ItemFactoryGameConfiguration
     {
         (100, 5)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

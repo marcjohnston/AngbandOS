@@ -22,7 +22,6 @@ public class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactoryGameConf
     {
         (20, 1)
     };
-    public override int Weight => 30;
 
     public override string[] SpellBindingKeys => new string[]
     {
@@ -47,7 +46,7 @@ public class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactoryGameConf
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(MasterSorcerersHandbookSorceryBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -23,8 +23,7 @@ public class LongSwordWeaponItemFactory : ItemFactoryGameConfiguration
         (10, 1),
         (20, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(LongSwordItemFactoryItemEnhancement);
-    public override int Weight => 130;
+    public override string? ItemEnhancementBindingKey => nameof(LongSwordWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

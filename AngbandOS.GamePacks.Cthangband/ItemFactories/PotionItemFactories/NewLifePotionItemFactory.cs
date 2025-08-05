@@ -25,7 +25,6 @@ public class NewLifePotionItemFactory : ItemFactoryGameConfiguration
         (120, 5)
     };
     public override int InitialNutritionalValue => 100;
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.NewLifeScript), null, 20);
 
     /// <summary>
@@ -42,7 +41,7 @@ public class NewLifePotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(NewLifePotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

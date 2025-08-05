@@ -26,7 +26,6 @@ public class IocainePotionItemFactory : ItemFactoryGameConfiguration
     {
         (55, 4)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.IocaineScript), nameof(DeathRayProjectileUnfriendlyProjectileScript), 20);
 
     /// <summary>
@@ -43,7 +42,7 @@ public class IocainePotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IocainePotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

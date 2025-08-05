@@ -13,7 +13,7 @@ public class VorpalAndWarriorArtifactBiasItemEnhancement : ItemEnhancementGameCo
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Warrior1In9ArtifactBiasWeightedRandom);
     public override string[]? ApplicableItemFactoryBindingKeys => new string[]
     {
-        nameof(BastardSwordSwordWeaponItemFactory),
+        nameof(BastardSwordWeaponItemFactory),
         nameof(BladeOfChaosWeaponItemFactory),
         nameof(BroadSwordWeaponItemFactory),
         nameof(BrokenDaggerWeaponItemFactory),

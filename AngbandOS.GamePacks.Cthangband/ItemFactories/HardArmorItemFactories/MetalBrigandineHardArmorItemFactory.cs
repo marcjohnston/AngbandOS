@@ -21,7 +21,7 @@ public class MetalBrigandineHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Metal Brigandine Armor";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(MetalBrigandineHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 19;
     public override int Cost => 1100;
@@ -34,7 +34,6 @@ public class MetalBrigandineHardArmorItemFactory : ItemFactoryGameConfiguration
         (35, 1)
     };
     public override int BonusHit => -3;
-    public override int Weight => 290;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

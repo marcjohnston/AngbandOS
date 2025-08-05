@@ -23,7 +23,6 @@ public class LifePotionItemFactory : ItemFactoryGameConfiguration
         (60, 4),
         (100, 2)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.LifeScript), nameof(OldHeal50d50ProjectileFriendlyProjectileScript), 20);
 
     /// <summary>
@@ -40,7 +39,7 @@ public class LifePotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LifePotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

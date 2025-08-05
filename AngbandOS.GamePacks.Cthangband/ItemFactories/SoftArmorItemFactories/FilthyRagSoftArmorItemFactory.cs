@@ -30,7 +30,8 @@ public class FilthyRagSoftArmorItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 1;
     public override string? DescriptionSyntax => "Filthy Rag~";
     public override int BonusArmorClass => -1;
-    public override int Weight => 20;
+    public override string? ItemEnhancementBindingKey => nameof(FilthyRagSoftArmorItemFactoryItemEnhancement);
+
 
     public override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

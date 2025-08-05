@@ -22,8 +22,7 @@ public class BattleAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (15, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(BattleAxePolearmItemFactoryItemEnhancement);
-    public override int Weight => 170;
+    public override string? ItemEnhancementBindingKey => nameof(BattleAxePolearmWeaponItemFactoryItemEnhancement);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

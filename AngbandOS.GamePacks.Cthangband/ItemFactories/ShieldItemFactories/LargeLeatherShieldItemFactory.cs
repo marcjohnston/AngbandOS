@@ -21,7 +21,7 @@ public class LargeLeatherShieldItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Large Leather Shield";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LargeLeatherShieldItemFactoryItemEnhancement);
 
     public override int ArmorClass => 4;
     public override int Cost => 120;
@@ -33,7 +33,6 @@ public class LargeLeatherShieldItemFactory : ItemFactoryGameConfiguration
     {
         (15, 1)
     };
-    public override int Weight => 100;
 
     public override string ItemClassBindingKey => nameof(ShieldsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };

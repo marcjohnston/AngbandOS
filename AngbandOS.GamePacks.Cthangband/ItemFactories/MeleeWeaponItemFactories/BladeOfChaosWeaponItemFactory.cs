@@ -22,8 +22,7 @@ public class BladeOfChaosWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (70, 8)
     };
-    public override string? ItemEnhancementBindingKey => nameof(BladeOfChaosItemFactoryItemEnhancement);
-    public override int Weight => 180;
+    public override string? ItemEnhancementBindingKey => nameof(BladeOfChaosWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

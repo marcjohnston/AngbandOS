@@ -46,7 +46,7 @@ public class MagicStoreFactory : StoreFactoryGameConfiguration
         (nameof(ResistAcidAmuletItemFactory), 1),
         (nameof(SearchingAmuletItemFactory), 1),
         (nameof(SlowDigestionAmuletItemFactory), 1),
-        (nameof(CantripsforBeginnersFolkBookItemFactory), 2),
+        (nameof(CantripsForBeginnersFolkBookItemFactory), 2),
         (nameof(MagicksOfMasteryFolkBookItemFactory), 2),
         (nameof(MajorMagicksFolkBookItemFactory), 2),
         (nameof(MinorMagicksFolkBookItemFactory), 2),

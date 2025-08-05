@@ -29,7 +29,8 @@ public class AccuracyRingItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 2;
+    public override string? ItemEnhancementBindingKey => nameof(AccuracyRingItemFactoryItemEnhancement);
+
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

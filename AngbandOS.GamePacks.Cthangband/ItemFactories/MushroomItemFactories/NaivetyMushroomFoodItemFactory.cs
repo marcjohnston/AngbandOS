@@ -24,7 +24,6 @@ public class NaivetyMushroomFoodItemFactory : ItemFactoryGameConfiguration
     {
         (15, 1)
     };
-    public override int Weight => 1;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatNaivetyScript);
     public override string ItemClassBindingKey => nameof(MushroomItemClass);
 
@@ -33,7 +32,7 @@ public class NaivetyMushroomFoodItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int InitialNutritionalValue => 500;
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(NaivetyMushroomFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

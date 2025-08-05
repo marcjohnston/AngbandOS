@@ -28,7 +28,6 @@ public class CeleanoFragmentsTarotBookItemFactory : ItemFactoryGameConfiguration
         (90, 3)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.EtherealDivinationTarotSpell),
@@ -49,7 +48,7 @@ public class CeleanoFragmentsTarotBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CeleanoFragmentsTarotBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

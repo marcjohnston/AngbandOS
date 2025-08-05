@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Diagnostics;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -126,7 +128,6 @@ internal class ItemFactory : IGetKey, IToJson
         BonusArmorClass = itemFactoryGameConfiguration.BonusArmorClass;
         BonusDamage = itemFactoryGameConfiguration.BonusDamage;
         BonusHit = itemFactoryGameConfiguration.BonusHit;
-        Weight = itemFactoryGameConfiguration.Weight;
         IsSmall = itemFactoryGameConfiguration.IsSmall;
         BaseValue = itemFactoryGameConfiguration.BaseValue;
         HatesElectricity = itemFactoryGameConfiguration.HatesElectricity;
@@ -318,7 +319,6 @@ internal class ItemFactory : IGetKey, IToJson
             BonusArmorClass = BonusArmorClass,
             BonusDamage = BonusDamage,
             BonusHit = BonusHit,
-            Weight = Weight,
             IsSmall = IsSmall,
             BaseValue = BaseValue,
             HatesElectricity = HatesElectricity,
@@ -406,9 +406,10 @@ internal class ItemFactory : IGetKey, IToJson
         EquipmentProcessWorldScript?.ExecuteScriptItem(item);
         ProcessWorld(item);
     }
-
     public void Bind()
     {
+        if (ItemEnhancementBindingKey is not null && $"{Key}ItemEnhancement" != ItemEnhancementBindingKey)
+            Debug.Print(Key + " " + ItemEnhancementBindingKey);
         // TODO: We require an object but not from the game config
         ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
         ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
@@ -1545,7 +1546,7 @@ internal class ItemFactory : IGetKey, IToJson
                         itemAdditiveBundleWeightedRandom.Add(2 * 8 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistConfusionAndChaosBiasItemEnhancement)));
                         itemAdditiveBundleWeightedRandom.Add(2 * 40 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistConfusionItemEnhancement)));
 
-                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistSoundItemEnhancement)));
+                        itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SoundResistanceRingItemFactoryItemEnhancement)));
                         itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistShardsItemEnhancement)));
 
                         itemAdditiveBundleWeightedRandom.Add(2 * 16 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistNetherAndNecromanticBiasItemEnhancement)));
@@ -2161,8 +2162,6 @@ internal class ItemFactory : IGetKey, IToJson
     public virtual int BonusArmorClass { get; } = 0;
     public virtual int BonusDamage { get; } = 0;
     public virtual int BonusHit { get; } = 0;
-
-    public virtual int Weight { get; } = 0;
 
     /// <summary>
     /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.

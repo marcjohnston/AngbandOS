@@ -20,13 +20,12 @@ public class FireScrollItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
     public override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
     public override int Cost => 1000;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreFireItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(FireScrollItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 4)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.FireIdentifableAndUsedScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);

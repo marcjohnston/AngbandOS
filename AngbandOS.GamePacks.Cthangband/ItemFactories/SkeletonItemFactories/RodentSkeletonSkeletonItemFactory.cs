@@ -26,9 +26,8 @@ public class RodentSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     {
         (1, 1)
     };
-    public override int Weight => 10;
     public override string ItemClassBindingKey => nameof(SkeletonsItemClass);
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(RodentSkeletonSkeletonItemFactoryItemEnhancement);
     public override int PackSort => 40;
     public override string BreakageChanceProbabilityExpression => "50/100";
     public override bool HatesAcid => true;

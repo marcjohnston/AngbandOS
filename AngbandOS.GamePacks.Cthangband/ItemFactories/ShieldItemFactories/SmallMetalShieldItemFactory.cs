@@ -21,7 +21,7 @@ public class SmallMetalShieldItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small Metal Shield";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SmallMetalShieldItemFactoryItemEnhancement);
 
     public override int ArmorClass => 3;
     public override int Cost => 50;
@@ -33,7 +33,6 @@ public class SmallMetalShieldItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 65;
 
     public override string ItemClassBindingKey => nameof(ShieldsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };

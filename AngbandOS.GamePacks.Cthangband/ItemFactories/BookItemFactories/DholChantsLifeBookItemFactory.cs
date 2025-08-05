@@ -23,7 +23,6 @@ public class DholChantsLifeBookItemFactory : ItemFactoryGameConfiguration
         (40, 1)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.ExorcismLifeSpell),
@@ -44,7 +43,7 @@ public class DholChantsLifeBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DholChantsLifeBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

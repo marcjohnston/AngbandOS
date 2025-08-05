@@ -21,7 +21,7 @@ public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hard Leather Cap";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(HardLeatherCapHelmItemFactoryItemEnhancement);
 
     public override int ArmorClass => 2;
     public override int Cost => 12;
@@ -31,7 +31,6 @@ public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 15;
     public override string ItemClassBindingKey => nameof(HelmsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HeadWieldSlot) };
     public override int PackSort => 25;

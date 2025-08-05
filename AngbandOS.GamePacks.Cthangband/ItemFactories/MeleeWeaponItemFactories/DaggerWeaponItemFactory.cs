@@ -24,8 +24,7 @@ public class DaggerWeaponItemFactory : ItemFactoryGameConfiguration
         (10, 1),
         (20, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(DaggerItemFactoryItemEnhancement);
-    public override int Weight => 12;
+    public override string? ItemEnhancementBindingKey => nameof(DaggerWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

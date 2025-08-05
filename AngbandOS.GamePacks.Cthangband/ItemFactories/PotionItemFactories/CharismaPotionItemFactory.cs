@@ -23,7 +23,6 @@ public class CharismaPotionItemFactory : ItemFactoryGameConfiguration
         (20, 1),
         (25, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(GainCharismaAbilityScoreScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
   
     /// <summary>
@@ -40,7 +39,7 @@ public class CharismaPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CharismaPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

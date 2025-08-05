@@ -22,7 +22,8 @@ public class HolinessStaffItemFactory : ItemFactoryGameConfiguration
     {
         (70, 2)
     };
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(HolinessStaffItemFactoryItemEnhancement);
+
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.HolinessScript), "1d2+2", 225, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);

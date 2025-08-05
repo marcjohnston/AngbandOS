@@ -18,9 +18,8 @@ public class NecklaceAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 75000;
-    public override string? ItemEnhancementBindingKey => nameof(InstantArtifactItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(NecklaceAmuletItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 70;
-    public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

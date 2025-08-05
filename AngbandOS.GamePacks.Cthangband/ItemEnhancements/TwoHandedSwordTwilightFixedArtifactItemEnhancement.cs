@@ -26,4 +26,5 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResFire => true;
     public override bool ShowMods => true;
     public override bool Speed => true;
+    public override int Weight => 50;
 }

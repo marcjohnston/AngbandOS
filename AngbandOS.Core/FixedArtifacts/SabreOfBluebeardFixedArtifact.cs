@@ -21,5 +21,4 @@ internal class SabreOfBluebeardFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 8;
     public override int ToH => 6;
-    public override int Weight => 50;
 }

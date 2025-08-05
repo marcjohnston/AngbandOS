@@ -22,7 +22,6 @@ public class RestoreManaPotionItemFactory : ItemFactoryGameConfiguration
     {
         (25, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.RestoreManaScript), nameof(Mana10d10ProjectileFriendlyProjectileScript), 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class RestoreManaPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(RestoreManaPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

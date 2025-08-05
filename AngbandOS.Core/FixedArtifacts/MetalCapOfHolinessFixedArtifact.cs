@@ -21,5 +21,4 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
     public override int ToA => 12;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override int Weight => 20;
 }

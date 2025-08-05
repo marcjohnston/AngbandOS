@@ -18,9 +18,8 @@ public class VilyaRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 300000;
-    public override string? ItemEnhancementBindingKey => nameof(InstantArtifactItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(VilyaRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 100;
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

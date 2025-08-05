@@ -23,7 +23,6 @@ public class PieceOfDwarfBreadFoodItemFactory : ItemFactoryGameConfiguration
         (15, 1)
     };
     public override int InitialNutritionalValue => 7500;
-    public override int Weight => 3;
 
     /// <summary>
     /// Returns false, because dwarf bread isn't actually consumed.
@@ -33,7 +32,7 @@ public class PieceOfDwarfBreadFoodItemFactory : ItemFactoryGameConfiguration
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatDwarfBreadScript);
     public override string ItemClassBindingKey => nameof(FoodItemClass);
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PieceOfDwarfBreadFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

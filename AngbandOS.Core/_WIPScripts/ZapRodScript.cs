@@ -148,7 +148,7 @@ internal class ZapRodScript : Script, IScript, ICastSpellScript, IGameCommandScr
             {
                 Item singleRod = item.TakeFromStack(1);
                 item.RodRechargeTimeRemaining = 0;
-                Game.WeightCarried -= singleRod.Weight;
+                Game.WeightCarried -= singleRod.EffectivePropertySet.Weight;
                 Game.InventoryCarry(singleRod);
                 Game.MsgPrint("You unstack your rod.");
             }

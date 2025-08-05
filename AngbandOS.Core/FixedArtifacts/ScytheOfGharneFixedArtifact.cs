@@ -21,5 +21,4 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact
     public override int ToA => 10;
     public override int ToD => 8;
     public override int ToH => 8;
-    public override int Weight => 250;
 }

@@ -48,7 +48,7 @@ public class LibraryStoreFactory : StoreFactoryGameConfiguration
         (nameof(YogicMasteryCorporealBookItemFactory), 2),
         (nameof(BlackMassDeathBookItemFactory), 4),
         (nameof(BlackPrayersDeathBookItemFactory), 4),
-        (nameof(CantripsforBeginnersFolkBookItemFactory), 2),
+        (nameof(CantripsForBeginnersFolkBookItemFactory), 2),
         (nameof(MagicksOfMasteryFolkBookItemFactory), 2),
         (nameof(MajorMagicksFolkBookItemFactory), 2),
         (nameof(MinorMagicksFolkBookItemFactory), 2),

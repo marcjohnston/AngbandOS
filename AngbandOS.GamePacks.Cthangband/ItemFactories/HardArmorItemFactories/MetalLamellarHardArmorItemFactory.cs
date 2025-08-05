@@ -21,7 +21,7 @@ public class MetalLamellarHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Metal Lamellar Armor";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(MetalLamellarHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 23;
     public override int Cost => 1250;
@@ -34,7 +34,6 @@ public class MetalLamellarHardArmorItemFactory : ItemFactoryGameConfiguration
         (45, 1)
     };
     public override int BonusHit => -3;
-    public override int Weight => 340;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

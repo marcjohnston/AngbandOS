@@ -155,6 +155,7 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.Valueless);
         RegisterBoolPropertyFactory(PropertyEnum.Vampiric);
         RegisterBoolPropertyFactory(PropertyEnum.Vorpal);
+        RegisterIntPropertyFactory(PropertyEnum.Weight);
         RegisterBoolPropertyFactory(PropertyEnum.Wis);
         RegisterBoolPropertyFactory(PropertyEnum.Wraith);
         RegisterBoolPropertyFactory(PropertyEnum.XtraMight);
@@ -315,17 +316,17 @@ internal class EffectivePropertySet
 
     public void SetIntValue(PropertyEnum propertyEnum, int value)
     {
-        SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new IntPropertyValue(value));
+        SetValue(propertyEnum, new IntPropertyValue(value));
     }
 
     public void AddIntValue(PropertyEnum propertyEnum, int value)
     {
-        SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new IntPropertyValue(GetIntValue(propertyEnum) + value));
+        SetValue(propertyEnum, new IntPropertyValue(GetIntValue(propertyEnum) + value));
     }
 
     public void SetBoolValue(PropertyEnum propertyEnum, bool value)
     {
-        SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new BoolPropertyValue(value));
+        SetValue(propertyEnum, new BoolPropertyValue(value));
     }
 
     #region Properties
@@ -337,7 +338,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanApplyBlessedArtifactBias, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanApplyBlessedArtifactBias, value);
         }
     }
     public bool CanApplyArtifactBiasSlaying
@@ -348,7 +349,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanApplyArtifactBiasSlaying, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanApplyArtifactBiasSlaying, value);
         }
     }
     public bool CanApplyBlowsBonus
@@ -359,7 +360,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanApplyBlowsBonus, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanApplyBlowsBonus, value);
         }
     }
     public bool CanReflectBoltsAndArrows
@@ -370,7 +371,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanReflectBoltsAndArrows, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanReflectBoltsAndArrows, value);
         }
     }
     public bool CanApplySlayingBonus
@@ -381,7 +382,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanApplySlayingBonus, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanApplySlayingBonus, value);
         }
     }
     public bool CanApplyBonusArmorClassMiscPower
@@ -392,7 +393,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanApplyBonusArmorClassMiscPower, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanApplyBonusArmorClassMiscPower, value);
         }
     }
     public bool CanProvideSheathOfElectricity
@@ -403,7 +404,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanProvideSheathOfElectricity, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanProvideSheathOfElectricity, value);
         }
     }
     public bool CanProvideSheathOfFire
@@ -414,7 +415,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.CanProvideSheathOfFire, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.CanProvideSheathOfFire, value);
         }
     }
     public int BonusHit
@@ -425,7 +426,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusHit, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusHit, value);
         }
     }
     public int BonusArmorClass
@@ -436,7 +437,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusArmorClass, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusArmorClass, value);
         }
     }
     public int BonusDamage
@@ -447,7 +448,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusDamage, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusDamage, value);
         }
     }
     public int BonusStrength
@@ -458,7 +459,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusStrength, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusStrength, value);
         }
     }
     public int BonusIntelligence
@@ -469,7 +470,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusIntelligence, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusIntelligence, value);
         }
     }
     public int BonusWisdom
@@ -480,7 +481,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusWisdom, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusWisdom, value);
         }
     }
     public int BonusDexterity
@@ -491,7 +492,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusDexterity, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusDexterity, value);
         }
     }
     public int BonusConstitution
@@ -502,7 +503,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusConstitution, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusConstitution, value);
         }
     }
     public int BonusCharisma
@@ -513,7 +514,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusCharisma, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusCharisma, value);
         }
     }
     public int BonusStealth
@@ -524,7 +525,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusStealth, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusStealth, value);
         }
     }
     public int BonusSearch
@@ -535,7 +536,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusSearch, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusSearch, value);
         }
     }
     public int BonusInfravision
@@ -546,7 +547,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusInfravision, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusInfravision, value);
         }
     }
     public int BonusTunnel
@@ -557,7 +558,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusTunnel, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusTunnel, value);
         }
     }
     public int BonusAttacks
@@ -568,7 +569,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusAttacks, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusAttacks, value);
         }
     }
     public int BonusSpeed
@@ -579,7 +580,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BonusSpeed, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.BonusSpeed, value);
         }
     }
     public Activation? Activation
@@ -601,7 +602,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Aggravate, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Aggravate, value);
         }
     }
     public bool AntiTheft
@@ -612,7 +613,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.AntiTheft, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.AntiTheft, value);
         }
     }
     public ArtifactBias? ArtifactBias
@@ -634,7 +635,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Blessed, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Blessed, value);
         }
     }
     public bool Blows
@@ -645,7 +646,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Blows, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Blows, value);
         }
     }
     public bool BrandAcid
@@ -656,7 +657,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BrandAcid, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.BrandAcid, value);
         }
     }
     public bool BrandCold
@@ -667,7 +668,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BrandCold, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.BrandCold, value);
         }
     }
     public bool BrandElec
@@ -678,7 +679,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BrandElec, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.BrandElec, value);
         }
     }
     public bool BrandFire
@@ -689,7 +690,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BrandFire, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.BrandFire, value);
         }
     }
     public bool BrandPois
@@ -700,7 +701,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.BrandPois, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.BrandPois, value);
         }
     }
     public bool Cha
@@ -711,7 +712,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Cha, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Cha, value);
         }
     }
     public bool Chaotic
@@ -722,7 +723,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Chaotic, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Chaotic, value);
         }
     }
     public bool Con
@@ -733,7 +734,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Con, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Con, value);
         }
     }
     public bool IsCursed
@@ -744,7 +745,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.IsCursed, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.IsCursed, value);
         }
     }
     public bool Dex
@@ -755,7 +756,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Dex, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Dex, value);
         }
     }
     public bool DrainExp
@@ -766,7 +767,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.DrainExp, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.DrainExp, value);
         }
     }
     public bool DreadCurse
@@ -777,7 +778,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.DreadCurse, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.DreadCurse, value);
         }
     }
     public bool EasyKnow
@@ -788,7 +789,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.EasyKnow, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.EasyKnow, value);
         }
     }
     public bool Feather
@@ -799,7 +800,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Feather, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Feather, value);
         }
     }
     public bool FreeAct
@@ -810,7 +811,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.FreeAct, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.FreeAct, value);
         }
     }
     public bool HeavyCurse
@@ -821,7 +822,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.HeavyCurse, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.HeavyCurse, value);
         }
     }
     public bool HideType
@@ -832,7 +833,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.HideType, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.HideType, value);
         }
     }
     public bool HoldLife
@@ -843,7 +844,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.HoldLife, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.HoldLife, value);
         }
     }
     public bool IgnoreAcid
@@ -854,7 +855,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.IgnoreAcid, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.IgnoreAcid, value);
         }
     }
     public bool IgnoreCold
@@ -865,7 +866,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.IgnoreCold, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.IgnoreCold, value);
         }
     }
     public bool IgnoreElec
@@ -876,7 +877,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.IgnoreElec, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.IgnoreElec, value);
         }
     }
     public bool IgnoreFire
@@ -887,7 +888,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.IgnoreFire, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.IgnoreFire, value);
         }
     }
     public bool ImAcid
@@ -898,7 +899,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ImAcid, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ImAcid, value);
         }
     }
     public bool ImCold
@@ -909,7 +910,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ImCold, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ImCold, value);
         }
     }
     public bool ImElec
@@ -920,7 +921,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ImElec, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ImElec, value);
         }
     }
     public bool ImFire
@@ -931,7 +932,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ImFire, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ImFire, value);
         }
     }
     public bool Impact
@@ -942,7 +943,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Impact, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Impact, value);
         }
     }
     public bool Infra
@@ -953,7 +954,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Infra, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Infra, value);
         }
     }
     public bool InstaArt
@@ -964,7 +965,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.InstaArt, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.InstaArt, value);
         }
     }
     public bool Int
@@ -975,7 +976,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Int, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Int, value);
         }
     }
     public bool KillDragon
@@ -986,7 +987,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.KillDragon, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.KillDragon, value);
         }
     }
     public bool NoMagic
@@ -997,7 +998,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.NoMagic, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.NoMagic, value);
         }
     }
     public bool NoTele
@@ -1008,7 +1009,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.NoTele, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.NoTele, value);
         }
     }
     public bool PermaCurse
@@ -1019,7 +1020,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.PermaCurse, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.PermaCurse, value);
         }
     }
     public int Radius
@@ -1030,7 +1031,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Radius, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.Radius, value);
         }
     }
     public bool Reflect
@@ -1041,7 +1042,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Reflect, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Reflect, value);
         }
     }
     public bool Regen
@@ -1052,7 +1053,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Regen, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Regen, value);
         }
     }
     public bool ResAcid
@@ -1063,7 +1064,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResAcid, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResAcid, value);
         }
     }
     public bool ResBlind
@@ -1074,7 +1075,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResBlind, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResBlind, value);
         }
     }
     public bool ResChaos
@@ -1085,7 +1086,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResChaos, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResChaos, value);
         }
     }
     public bool ResCold
@@ -1096,7 +1097,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResCold, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResCold, value);
         }
     }
     public bool ResConf
@@ -1107,7 +1108,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResConf, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResConf, value);
         }
     }
     public bool ResDark
@@ -1118,7 +1119,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResDark, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResDark, value);
         }
     }
     public bool ResDisen
@@ -1129,7 +1130,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResDisen, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResDisen, value);
         }
     }
     public bool ResElec
@@ -1140,7 +1141,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResElec, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResElec, value);
         }
     }
     public bool ResFear
@@ -1151,7 +1152,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResFear, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResFear, value);
         }
     }
     public bool ResFire
@@ -1162,7 +1163,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResFire, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResFire, value);
         }
     }
     public bool ResLight
@@ -1173,7 +1174,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResLight, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResLight, value);
         }
     }
     public bool ResNether
@@ -1184,7 +1185,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResNether, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResNether, value);
         }
     }
     public bool ResNexus
@@ -1195,7 +1196,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResNexus, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResNexus, value);
         }
     }
     public bool ResPois
@@ -1206,7 +1207,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResPois, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResPois, value);
         }
     }
     public bool ResShards
@@ -1217,7 +1218,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResShards, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResShards, value);
         }
     }
     public bool ResSound
@@ -1228,7 +1229,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ResSound, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ResSound, value);
         }
     }
     public bool Search
@@ -1239,7 +1240,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Search, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Search, value);
         }
     }
     public bool SeeInvis
@@ -1250,7 +1251,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SeeInvis, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SeeInvis, value);
         }
     }
     public bool ShElec
@@ -1261,7 +1262,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ShElec, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ShElec, value);
         }
     }
     public bool ShFire
@@ -1272,7 +1273,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ShFire, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ShFire, value);
         }
     }
     public bool ShowMods
@@ -1283,7 +1284,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.ShowMods, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.ShowMods, value);
         }
     }
     public bool SlayAnimal
@@ -1294,7 +1295,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayAnimal, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayAnimal, value);
         }
     }
     public bool SlayDemon
@@ -1305,7 +1306,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayDemon, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayDemon, value);
         }
     }
     public bool SlayDragon
@@ -1316,7 +1317,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayDragon, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayDragon, value);
         }
     }
     public bool SlayEvil
@@ -1327,7 +1328,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayEvil, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayEvil, value);
         }
     }
     public bool SlayGiant
@@ -1338,7 +1339,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayGiant, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayGiant, value);
         }
     }
     public bool SlayOrc
@@ -1349,7 +1350,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayOrc, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayOrc, value);
         }
     }
     public bool SlayTroll
@@ -1360,7 +1361,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayTroll, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayTroll, value);
         }
     }
     public bool SlayUndead
@@ -1371,7 +1372,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlayUndead, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlayUndead, value);
         }
     }
     public bool SlowDigest
@@ -1382,7 +1383,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SlowDigest, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SlowDigest, value);
         }
     }
     public bool Speed
@@ -1393,7 +1394,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Speed, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Speed, value);
         }
     }
     public bool Stealth
@@ -1404,7 +1405,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Stealth, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Stealth, value);
         }
     }
     public bool Str
@@ -1415,7 +1416,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Str, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Str, value);
         }
     }
     public bool SustCha
@@ -1426,7 +1427,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SustCha, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SustCha, value);
         }
     }
     public bool SustCon
@@ -1437,7 +1438,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SustCon, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SustCon, value);
         }
     }
     public bool SustDex
@@ -1448,7 +1449,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SustDex, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SustDex, value);
         }
     }
     public bool SustInt
@@ -1459,7 +1460,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SustInt, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SustInt, value);
         }
     }
     public bool SustStr
@@ -1470,7 +1471,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SustStr, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SustStr, value);
         }
     }
     public bool SustWis
@@ -1481,7 +1482,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.SustWis, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.SustWis, value);
         }
     }
     public bool Telepathy
@@ -1492,7 +1493,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Telepathy, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Telepathy, value);
         }
     }
     public bool Teleport
@@ -1503,7 +1504,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Teleport, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Teleport, value);
         }
     }
     public int TreasureRating
@@ -1514,7 +1515,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.TreasureRating, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.TreasureRating, value);
         }
     }
     public bool Tunnel
@@ -1525,7 +1526,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Tunnel, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Tunnel, value);
         }
     }
     public int Value
@@ -1536,7 +1537,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Value, new IntPropertyValue(value));
+            SetIntValue(PropertyEnum.Value, value);
         }
     }
     public bool Valueless
@@ -1547,7 +1548,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Valueless, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Valueless, value);
         }
     }
     public bool Vampiric
@@ -1558,7 +1559,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Vampiric, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Vampiric, value);
         }
     }
     public bool Vorpal
@@ -1569,7 +1570,18 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Vorpal, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Vorpal, value);
+        }
+    }
+    public int Weight
+    {
+        get
+        {
+            return GetIntValue(PropertyEnum.Weight);
+        }
+        set
+        {
+            SetIntValue(PropertyEnum.Weight, value);
         }
     }
     public bool Wis
@@ -1580,7 +1592,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Wis, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Wis, value);
         }
     }
     public bool Wraith
@@ -1591,7 +1603,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.Wraith, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.Wraith, value);
         }
     }
     public bool XtraMight
@@ -1602,7 +1614,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.XtraMight, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.XtraMight, value);
         }
     }
     public bool XtraShots
@@ -1613,7 +1625,7 @@ internal class EffectivePropertySet
         }
         set
         {
-            SetValue(PropertyEnum.XtraShots, new BoolPropertyValue(value));
+            SetBoolValue(PropertyEnum.XtraShots, value);
         }
     }
     #endregion

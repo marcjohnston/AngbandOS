@@ -22,7 +22,7 @@ public class LargeSteelChestItemFactory : ItemFactoryGameConfiguration
     {
         (55, 1)
     };
-    public override int Weight => 1000;
+    public override string? ItemEnhancementBindingKey => nameof(LargeSteelChestItemFactoryItemEnhancement);
     public override bool IsSmall => false;
     public override int NumberOfItemsContained => 6;
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]

@@ -21,7 +21,7 @@ public class RustyChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Rusty Chain Mail";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(RustyChainMailHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 14;
     public override int Cost => 550;
@@ -35,7 +35,6 @@ public class RustyChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     };
     public override int BonusArmorClass => -8;
     public override int BonusHit => -5;
-    public override int Weight => 200;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

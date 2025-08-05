@@ -18,13 +18,12 @@ public class SlowDigestionRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 250;
-    public override string? ItemEnhancementBindingKey => nameof(SlowDigestionItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SlowDigestionRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (5, 1)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

@@ -18,7 +18,7 @@ public class WhiteDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    public override string? ItemEnhancementBindingKey => nameof(WhiteDragonItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(WhiteDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "White Dragon Scale Mail";
 
@@ -34,7 +34,6 @@ public class WhiteDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     };
     public override int BonusArmorClass => 10;
     public override int BonusHit => -2;
-    public override int Weight => 200;
 
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

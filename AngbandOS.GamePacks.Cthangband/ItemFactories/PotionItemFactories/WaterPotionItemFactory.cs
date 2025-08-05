@@ -22,7 +22,6 @@ public class WaterPotionItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int InitialNutritionalValue => 200;
-    public override int Weight => 4;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(YouFeelLessThirstyRenderMessageScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
@@ -42,7 +41,7 @@ public class WaterPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(WaterPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

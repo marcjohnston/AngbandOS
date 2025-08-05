@@ -28,7 +28,6 @@ public class SpecialIdentifyScrollItemFactory : ItemFactoryGameConfiguration
         (80, 1),
         (100, 1)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.IdentifyItemFullyScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -41,7 +40,7 @@ public class SpecialIdentifyScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SpecialIdentifyScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

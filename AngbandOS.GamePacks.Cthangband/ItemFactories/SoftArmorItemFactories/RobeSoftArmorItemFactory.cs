@@ -39,7 +39,8 @@ public class RobeSoftArmorItemFactory : ItemFactoryGameConfiguration
         (1, 1),
         (50, 1)
     };
-    public override int Weight => 20;
+    public override string? ItemEnhancementBindingKey => nameof(RobeSoftArmorItemFactoryItemEnhancement);
+
 
     public override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

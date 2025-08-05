@@ -18,4 +18,5 @@ public class FullPlateArmorOfTheGodsFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool ResFire => true;
     public override bool ResNexus => true;
     public override bool ResSound => true;
+    public override int Weight => -80;
 }

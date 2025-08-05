@@ -17,13 +17,12 @@ public class DragonsFlameWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 2400;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DragonsFlameWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 4)
     };
-    public override int Weight => 10;
     public override (string, string, int, int)? AimingBindingTuple => (nameof(Fire100R3ProjectileScript), "1d3+1", 120, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

@@ -25,10 +25,9 @@ public class ShardOfPotteryJunkItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Shard~ of Pottery";
-    public override int Weight => 5;
     public override string ItemClassBindingKey => nameof(JunkItemClass);
     public override int PackSort => 38;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShardOfPotteryJunkItemFactoryItemEnhancement);
     public override string BreakageChanceProbabilityExpression => "100/100";
     public override bool HatesAcid => true;
 }

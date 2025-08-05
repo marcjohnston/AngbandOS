@@ -29,7 +29,6 @@ public class PnakoticManuscriptsCorporealBookItemFactory : ItemFactoryGameConfig
         (90, 3)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.HeroismCorporealSpell),
@@ -50,7 +49,7 @@ public class PnakoticManuscriptsCorporealBookItemFactory : ItemFactoryGameConfig
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PnakoticManuscriptsCorporealBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

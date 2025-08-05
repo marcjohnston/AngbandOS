@@ -18,7 +18,7 @@ public class BronzeDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    public override string? ItemEnhancementBindingKey => nameof(BronzeDragonItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BronzeDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Bronze Dragon Scale Mail";
@@ -35,7 +35,6 @@ public class BronzeDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     };
     public override int BonusArmorClass => 10;
     public override int BonusHit => -2;
-    public override int Weight => 200;
 
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

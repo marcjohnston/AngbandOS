@@ -22,8 +22,7 @@ public class ScimitarWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ScimitarItemFactoryItemEnhancement);
-    public override int Weight => 130;
+    public override string? ItemEnhancementBindingKey => nameof(ScimitarWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -22,7 +22,8 @@ public class ObjectLocationStaffItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(ObjectLocationStaffItemFactoryItemEnhancement);
+
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.DetectNormalObjectsScript), "1d15+6", 10, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);

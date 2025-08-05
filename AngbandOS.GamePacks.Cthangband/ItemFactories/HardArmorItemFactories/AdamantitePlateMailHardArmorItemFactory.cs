@@ -27,14 +27,13 @@ public class AdamantitePlateMailHardArmorItemFactory : ItemFactoryGameConfigurat
     public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Adamantite Plate Mail~";
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreAcidAndCanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(AdamantitePlateMailHardArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (75, 8)
     };
     public override int BonusHit => -4;
-    public override int Weight => 420;
 
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

@@ -22,7 +22,6 @@ public class DetectInvisiblePotionItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SeeInvisibility12P1d12TimerScript), null, 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class DetectInvisiblePotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DetectInvisiblePotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

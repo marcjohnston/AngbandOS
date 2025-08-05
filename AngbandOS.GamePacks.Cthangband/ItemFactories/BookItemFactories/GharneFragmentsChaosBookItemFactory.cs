@@ -23,7 +23,6 @@ public class GharneFragmentsChaosBookItemFactory : ItemFactoryGameConfiguration
         (50, 1)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.PolymorphOtherChaosSpell),
@@ -44,7 +43,7 @@ public class GharneFragmentsChaosBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(GharneFragmentsChaosBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

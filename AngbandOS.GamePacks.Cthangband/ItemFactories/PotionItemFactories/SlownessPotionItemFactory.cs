@@ -27,7 +27,6 @@ public class SlownessPotionItemFactory : ItemFactoryGameConfiguration
         (1, 1)
     };
     public override int InitialNutritionalValue => 50;
-    public override int Weight => 4;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(Slow15P1d25TimerScript), nameof(OldSlow5ProjectileUnfriendlyProjectileScript), 20);
 
@@ -45,7 +44,7 @@ public class SlownessPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SlownessPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

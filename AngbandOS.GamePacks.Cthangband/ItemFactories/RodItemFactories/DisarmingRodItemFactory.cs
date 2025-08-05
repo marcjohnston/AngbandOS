@@ -22,7 +22,6 @@ public class DisarmingRodItemFactory : ItemFactoryGameConfiguration
     {
         (35, 1)
     };
-    public override int Weight => 15;
     public override (string, string, bool, int)? ZapBindingTuple => (nameof(DestroyTrapProjectileScript), "1d15+15", true, 250);
     public override string ItemClassBindingKey => nameof(RodsItemClass);
 
@@ -34,7 +33,7 @@ public class DisarmingRodItemFactory : ItemFactoryGameConfiguration
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DisarmingRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
     public override ColorEnum Color => ColorEnum.Turquoise;

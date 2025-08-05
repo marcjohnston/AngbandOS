@@ -21,5 +21,4 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     public override int ToA => 10;
     public override int ToD => 12;
     public override int ToH => 10;
-    public override int Weight => 160;
 }

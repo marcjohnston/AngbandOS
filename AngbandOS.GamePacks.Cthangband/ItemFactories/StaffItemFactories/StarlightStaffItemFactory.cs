@@ -22,7 +22,8 @@ public class StarlightStaffItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(StarlightStaffItemFactoryItemEnhancement);
+
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.StarlightScript), "1d5+6", 40, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);

@@ -26,6 +26,6 @@ public class ResistanceItemEnhancementWeightedRandom : ItemEnhancementWeightedRa
         (nameof(ResistNexusItemEnhancement), 1),
         (nameof(ResistPoisonItemEnhancement), 1),
         (nameof(ResistShardsItemEnhancement), 1),
-        (nameof(ResistSoundItemEnhancement), 1)
+        (nameof(SoundResistanceRingItemFactoryItemEnhancement), 1)
     };
 }

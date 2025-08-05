@@ -38,9 +38,8 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
         (1, 1)
     };
     public override int InitialTurnsOfLight => 4000;
-    public override int Weight => 30;
     public override string? RefillScriptBindingKey => nameof(SystemScriptsEnum.RefillLightSourceFromTorchScript);
-    public override string? ItemEnhancementBindingKey => nameof(Radius1EasyKnowArtifactItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(WoodenTorchLightSourceItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(LightSourcesItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.LightsourceWieldSlot) };

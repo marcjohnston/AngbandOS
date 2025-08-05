@@ -26,7 +26,6 @@ public class CarnageScrollItemFactory : ItemFactoryGameConfiguration
         (40, 4),
         (80, 4)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.GenocideScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -39,7 +38,7 @@ public class CarnageScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CarnageScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

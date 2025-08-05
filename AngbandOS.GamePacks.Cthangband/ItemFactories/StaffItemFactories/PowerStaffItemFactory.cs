@@ -22,7 +22,8 @@ public class PowerStaffItemFactory : ItemFactoryGameConfiguration
     {
         (70, 2)
     };
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(PowerStaffItemFactoryItemEnhancement);
+
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(DispelMonstersAtLos120ProjectileScript), "1d3+1", 200, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);

@@ -21,7 +21,7 @@ public class IronHelmItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron Helm";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IronHelmItemFactoryItemEnhancement);
 
     public override int ArmorClass => 5;
     public override int Cost => 75;
@@ -33,7 +33,6 @@ public class IronHelmItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 75;
 
     public override string ItemClassBindingKey => nameof(HelmsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HeadWieldSlot) };

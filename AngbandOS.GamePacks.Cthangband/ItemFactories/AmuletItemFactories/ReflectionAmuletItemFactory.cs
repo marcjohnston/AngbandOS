@@ -18,13 +18,12 @@ public class ReflectionAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 30000;
-    public override string? ItemEnhancementBindingKey => nameof(ReflectionItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ReflectionAmuletItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (60, 4)
     };
-    public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

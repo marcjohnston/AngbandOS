@@ -22,7 +22,9 @@ public class DrainLifeWandItemFactory : ItemFactoryGameConfiguration
     {
         (50, 1)
     };
-    public override int Weight => 10;
+   
+    public override string? ItemEnhancementBindingKey => nameof(DrainLifeWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(OldDrainLife75ProjectileScript), "1d3+3", 60, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

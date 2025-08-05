@@ -29,7 +29,6 @@ public class MagicksOfMasteryFolkBookItemFactory : ItemFactoryGameConfiguration
         (20, 1)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.RechargingFolkSpell),
@@ -50,7 +49,7 @@ public class MagicksOfMasteryFolkBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(MagicksOfMasteryFolkBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -22,7 +22,8 @@ public class DetectEvilStaffItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 50;
+
+    public override string? ItemEnhancementBindingKey => nameof(DetectEvilStaffItemFactoryItemEnhancement);
 
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.DetectEvilMonstersScript), "1d15+8", 18, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);

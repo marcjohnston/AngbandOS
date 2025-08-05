@@ -21,5 +21,4 @@ internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
     public override int ToA => 15;
     public override int ToD => 8;
     public override int ToH => 8;
-    public override int Weight => 5;
 }

@@ -22,7 +22,8 @@ public class PolymorphWandItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(PolymorphWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(OldPolymorph1xProjectileScript), "1d8+6", 20, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

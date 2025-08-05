@@ -20,13 +20,12 @@ public class ChaosScrollItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
     public override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
     public override int Cost => 10000;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ChaosScrollItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (100, 8)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.ChaosBall222R4IdentifableAndUsedScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);

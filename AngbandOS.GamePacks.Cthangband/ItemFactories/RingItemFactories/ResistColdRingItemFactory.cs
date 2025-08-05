@@ -18,13 +18,12 @@ public class ResistColdRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 250;
-    public override string? ItemEnhancementBindingKey => nameof(ResistColdItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ResistColdRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (10, 1)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

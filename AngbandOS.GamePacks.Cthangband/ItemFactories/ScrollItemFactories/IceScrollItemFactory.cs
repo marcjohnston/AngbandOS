@@ -20,13 +20,12 @@ public class IceScrollItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
     public override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
     public override int Cost => 5000;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreColdItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(IceScrollItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (75, 6)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.Ice175R4IdentifableAndUsedScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);

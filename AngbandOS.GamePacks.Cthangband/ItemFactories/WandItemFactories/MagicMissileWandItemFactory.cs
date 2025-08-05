@@ -22,7 +22,8 @@ public class MagicMissileWandItemFactory : ItemFactoryGameConfiguration
     {
         (2, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(MagicMissileWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(Missile2d6ProjectileScript), "1d10+6", 10, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

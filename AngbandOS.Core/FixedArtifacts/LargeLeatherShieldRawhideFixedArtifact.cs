@@ -21,5 +21,4 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override int Weight => 60;
 }

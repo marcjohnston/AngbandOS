@@ -24,14 +24,13 @@ public class ConstitutionRingItemFactory : ItemFactoryGameConfiguration
         (new int[] {0, 1, 2}, null, new string[] { nameof(SystemScriptsEnum.BonusConstitution5BP1EnchantmentScript) })
     };
 
-    public override string? ItemEnhancementBindingKey => nameof(ConstitutionItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ConstitutionRingItemFactoryItemEnhancement);
     public override int Cost => 500;
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (30, 1)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

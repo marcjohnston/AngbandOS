@@ -17,13 +17,12 @@ public class ShardBallsWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 95000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ShardBallsWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (75, 4)
     };
-    public override int Weight => 10;
 
     public override (string, string, int, int)? AimingBindingTuple => (nameof(Shardl1d50p75r2ProjectileScript), "1d2+1", 4500, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);

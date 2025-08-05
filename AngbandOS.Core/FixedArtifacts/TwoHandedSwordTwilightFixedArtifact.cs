@@ -21,5 +21,4 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     public override int ToA => -50;
     public override int ToD => -60;
     public override int ToH => -40;
-    public override int Weight => 250;
 }

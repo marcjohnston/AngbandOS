@@ -22,7 +22,6 @@ public class UnhealthMushroomFoodItemFactory : ItemFactoryGameConfiguration
     {
         (15, 1)
     };
-    public override int Weight => 1;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatUnhealthScript);
     public override string ItemClassBindingKey => nameof(MushroomItemClass);
 
@@ -31,7 +30,7 @@ public class UnhealthMushroomFoodItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int InitialNutritionalValue => 500;
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(UnhealthMushroomFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

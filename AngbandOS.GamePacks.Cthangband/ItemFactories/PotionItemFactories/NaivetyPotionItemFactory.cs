@@ -26,7 +26,6 @@ public class NaivetyPotionItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(LoseWisdomAbilityScoreScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
     /// <summary>
@@ -43,7 +42,7 @@ public class NaivetyPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(NaivetyPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

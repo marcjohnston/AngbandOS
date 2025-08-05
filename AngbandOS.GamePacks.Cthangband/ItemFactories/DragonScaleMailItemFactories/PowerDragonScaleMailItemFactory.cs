@@ -18,7 +18,7 @@ public class PowerDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    public override string? ItemEnhancementBindingKey => nameof(PowerDragonItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PowerDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power Dragon Scale Mail";
@@ -34,7 +34,6 @@ public class PowerDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     };
     public override int BonusArmorClass => 15;
     public override int BonusHit => -3;
-    public override int Weight => 250;
 
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

@@ -22,8 +22,7 @@ public class LucerneHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(LucerneHammerHaftedItemEnhancement);
-    public override int Weight => 120;
+    public override string? ItemEnhancementBindingKey => nameof(LucerneHammerHaftedWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

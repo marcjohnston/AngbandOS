@@ -17,14 +17,13 @@ public class AntiTheftAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
-    public override string? ItemEnhancementBindingKey => nameof(AntiTheftItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(AntiTheftAmuletItemFactoryItemEnhancement);
     public override int Cost => 1000;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (20, 1)
     };
-    public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

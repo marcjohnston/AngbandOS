@@ -17,13 +17,12 @@ public class LightningBallsWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElectricityItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LightningBallsWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (35, 1)
     };
-    public override int Weight => 10;
     public override (string, string, int, int)? AimingBindingTuple => (nameof(Electricity32r2ProjectileScript), "1d8+4", 60, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

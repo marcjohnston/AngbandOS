@@ -26,7 +26,6 @@ public class PoisonPotionItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 4;
 
     public override (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple => (nameof(SystemScriptsEnum.Poison1d5p10Script), nameof(PoisonProjectileUnfriendlyProjectileScript), 20);
 
@@ -44,7 +43,7 @@ public class PoisonPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PoisonPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

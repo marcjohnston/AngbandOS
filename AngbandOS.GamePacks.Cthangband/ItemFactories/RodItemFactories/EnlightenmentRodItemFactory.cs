@@ -22,7 +22,6 @@ public class EnlightenmentRodItemFactory : ItemFactoryGameConfiguration
     {
         (65, 4)
     };
-    public override int Weight => 15;
     public override (string, string, bool, int)? ZapBindingTuple => (nameof(SystemScriptsEnum.EnlightenmentIdentifiedAndUsedScriptItemAndDirection), "99", false, 250);
     public override string ItemClassBindingKey => nameof(RodsItemClass);
 
@@ -34,7 +33,7 @@ public class EnlightenmentRodItemFactory : ItemFactoryGameConfiguration
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(EnlightenmentRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
     public override ColorEnum Color => ColorEnum.Turquoise;

@@ -30,7 +30,8 @@ public class SoftLeatherSoftArmorItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 80;
+    public override string? ItemEnhancementBindingKey => nameof(SoftLeatherSoftArmorItemFactoryItemEnhancement);
+
 
     public override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

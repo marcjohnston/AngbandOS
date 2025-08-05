@@ -26,9 +26,8 @@ public class LeadCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Lead Crown~"; // TODO: This appears to cause a defect in identification
-    public override string? ItemEnhancementBindingKey => nameof(InstantArtifactItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LeadCrownArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 44;
-    public override int Weight => 20;
     public override string ItemClassBindingKey => nameof(CrownsItemClass);
 
 

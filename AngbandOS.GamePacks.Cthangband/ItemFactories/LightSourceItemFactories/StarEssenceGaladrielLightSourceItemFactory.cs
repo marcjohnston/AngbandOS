@@ -13,13 +13,12 @@ public class StarEssenceGaladrielLightSourceItemFactory : ItemFactoryGameConfigu
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Star Essence Galadriel";
 
-    public override string? ItemEnhancementBindingKey => nameof(Radius2InstantArtifactItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(StarEssenceGaladrielLightSourceItemFactoryItemEnhancement);
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Star Essence~"; // TODO: This appears to cause a defect in identification
     public override int LevelNormallyFound => 1;
-    public override int Weight => 10;
     public override bool ProvidesSunlight => true;
  
     public override string ItemClassBindingKey => nameof(LightSourcesItemClass);

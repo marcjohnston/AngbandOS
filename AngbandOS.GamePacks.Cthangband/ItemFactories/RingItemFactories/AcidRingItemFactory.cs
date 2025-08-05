@@ -29,7 +29,6 @@ public class AcidRingItemFactory : ItemFactoryGameConfiguration
         (50, 1)
     };
     public override int BonusArmorClass => 15;
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

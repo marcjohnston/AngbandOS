@@ -21,5 +21,4 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
     public override int ToA => 15;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override int Weight => 30;
 }

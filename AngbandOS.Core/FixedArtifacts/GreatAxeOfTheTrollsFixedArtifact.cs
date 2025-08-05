@@ -21,5 +21,4 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
     public override int ToA => 8;
     public override int ToD => 18;
     public override int ToH => 15;
-    public override int Weight => 230;
 }

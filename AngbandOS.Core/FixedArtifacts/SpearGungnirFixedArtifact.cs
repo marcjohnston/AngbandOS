@@ -21,5 +21,4 @@ internal class SpearGungnirFixedArtifact : FixedArtifact
     public override int ToA => 5;
     public override int ToD => 25;
     public override int ToH => 15;
-    public override int Weight => 50;
 }

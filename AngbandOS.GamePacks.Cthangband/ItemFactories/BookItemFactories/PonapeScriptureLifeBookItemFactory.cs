@@ -29,7 +29,6 @@ public class PonapeScriptureLifeBookItemFactory : ItemFactoryGameConfiguration
         (90, 3)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.HeroismLifeSpell),
@@ -50,7 +49,7 @@ public class PonapeScriptureLifeBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PonapeScriptureLifeBookItemFactoryItemEnhancement);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (50, "2d3-2"),

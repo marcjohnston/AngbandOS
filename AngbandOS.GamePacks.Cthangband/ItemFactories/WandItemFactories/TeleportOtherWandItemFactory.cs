@@ -22,7 +22,8 @@ public class TeleportOtherWandItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(TeleportOtherWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(TeleportAwayAll100ProjectileScript), "1d5+6", 18, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

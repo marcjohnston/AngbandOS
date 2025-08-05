@@ -21,5 +21,4 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 3;
     public override int ToH => 4;
-    public override int Weight => 170;
 }

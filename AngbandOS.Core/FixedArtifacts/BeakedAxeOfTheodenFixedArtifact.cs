@@ -21,5 +21,4 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 10;
     public override int ToH => 8;
-    public override int Weight => 180;
 }

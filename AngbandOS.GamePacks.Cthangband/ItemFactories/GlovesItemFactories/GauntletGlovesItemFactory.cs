@@ -32,7 +32,7 @@ public class GauntletGlovesItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 25;
+    public override string? ItemEnhancementBindingKey => nameof(GauntletGlovesItemFactoryItemEnhancement);
     public override string ItemClassBindingKey => nameof(GlovesItemClass);
 
     public override int PackSort => 26;

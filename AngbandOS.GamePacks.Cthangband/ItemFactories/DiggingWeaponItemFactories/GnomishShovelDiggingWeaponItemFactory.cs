@@ -23,8 +23,7 @@ public class GnomishShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguratio
         (20, 4)
     };
     public override int InitialBonusTunnel => 2;
-    public override string? ItemEnhancementBindingKey => nameof(TunnellingAndCanApplySlayingBonusItemFactoryItemEnhancement);
-    public override int Weight => 60;
+    public override string? ItemEnhancementBindingKey => nameof(GnomishShovelDiggingWeaponItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
     public override bool CanTunnel => true;

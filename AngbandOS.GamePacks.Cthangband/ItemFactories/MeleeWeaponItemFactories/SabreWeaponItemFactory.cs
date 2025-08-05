@@ -22,8 +22,7 @@ public class SabreWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(SabreItemFactoryItemEnhancement);
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(SabreWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -32,7 +32,7 @@ public class CestiGlovesItemFactory : ItemFactoryGameConfiguration
     {
         (50, 1)
     };
-    public override int Weight => 40;
+    public override string? ItemEnhancementBindingKey => nameof(CestiGlovesItemFactoryItemEnhancement);
     public override string ItemClassBindingKey => nameof(GlovesItemClass);
 
     public override int PackSort => 26;

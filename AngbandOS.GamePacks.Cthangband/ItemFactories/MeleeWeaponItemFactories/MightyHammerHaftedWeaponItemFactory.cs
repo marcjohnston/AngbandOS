@@ -18,8 +18,7 @@ public class MightyHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override int DamageSides => 9;
     public override string? DescriptionSyntax => "Mighty Hammer~"; // TODO: This appears to cause a defect in identification
     public override int LevelNormallyFound => 15;
-    public override string? ItemEnhancementBindingKey => nameof(MightyHammerItemFactoryItemEnhancement);
-    public override int Weight => 200;
+    public override string? ItemEnhancementBindingKey => nameof(MightyHammerHaftedWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -18,13 +18,12 @@ public class PoisonResistanceRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override int Cost => 16000;
-    public override string? ItemEnhancementBindingKey => nameof(ResistPoisonItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PoisonResistanceRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (60, 2)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

@@ -24,5 +24,4 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 32;
     public override int ToH => 32;
-    public override int Weight => 150;
 }

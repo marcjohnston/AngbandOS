@@ -26,7 +26,6 @@ public class LightScrollItemFactory : ItemFactoryGameConfiguration
         (3, 1),
         (10, 1)
     };
-    public override int Weight => 5;
 
     public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.LightArea2D8R2Script), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
@@ -39,7 +38,7 @@ public class LightScrollItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(LightScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
     public override bool HatesFire => true;

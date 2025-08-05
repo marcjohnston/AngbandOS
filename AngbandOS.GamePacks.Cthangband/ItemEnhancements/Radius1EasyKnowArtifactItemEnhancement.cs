@@ -7,8 +7,9 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class Radius1EasyKnowArtifactItemEnhancement : ItemEnhancementGameConfiguration
+public class WoodenTorchLightSourceItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool EasyKnow => true;
     public override int Radius => 1;
+    public override int Weight => 30;
 }

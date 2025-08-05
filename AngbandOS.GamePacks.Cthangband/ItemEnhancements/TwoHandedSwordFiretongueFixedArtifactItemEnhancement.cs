@@ -36,4 +36,5 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override bool SlayUndead => true;
     public override bool Str => true;
     public override bool Vorpal => true;
+    public override int Weight => 50;
 }

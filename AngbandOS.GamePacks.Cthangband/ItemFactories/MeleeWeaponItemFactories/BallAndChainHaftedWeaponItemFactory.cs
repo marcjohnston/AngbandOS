@@ -22,8 +22,7 @@ public class BallAndChainHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(BallAndChainHaftedItemFactoryItemEnhancement);
-    public override int Weight => 150;
+    public override string? ItemEnhancementBindingKey => nameof(BallAndChainHaftedWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

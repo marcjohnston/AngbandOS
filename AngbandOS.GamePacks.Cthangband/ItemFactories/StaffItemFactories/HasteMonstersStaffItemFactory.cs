@@ -26,7 +26,8 @@ public class HasteMonstersStaffItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(HasteMonstersStaffItemFactoryItemEnhancement);
+
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(OldSpeedAtLos1xProjectileScript), "1d8+8", 0, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);

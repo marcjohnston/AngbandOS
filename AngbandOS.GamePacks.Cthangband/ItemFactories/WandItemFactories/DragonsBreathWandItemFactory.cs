@@ -17,13 +17,12 @@ public class DragonsBreathWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 2400;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DragonsBreathWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (60, 4)
     };
-    public override int Weight => 10;
     public override (string, string, int, int)? AimingBindingTuple => (nameof(DragonsBreatheProjectileScriptWeightedRandom), "1d3+1", 120, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

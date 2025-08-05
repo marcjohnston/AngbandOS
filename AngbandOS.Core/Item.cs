@@ -236,8 +236,6 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public int NutritionalValue { get; private set; }
 
-    public int Weight { get; private set; }
-
     private int TurnOfLightValue => _factory.ValuePerTurnOfLight;
     private int BaseValue => _factory.BaseValue;
     public Realm Realm => _factory.Realm;
@@ -2111,7 +2109,6 @@ internal sealed class Item : IComparable<Item>
         EffectivePropertySet.BonusAttacks = fixedArtifact.ToA;
         EffectivePropertySet.BonusHit = fixedArtifact.ToH;
         EffectivePropertySet.BonusDamage = fixedArtifact.ToD;
-        Weight = fixedArtifact.Weight;
 
         // Retrieve all of the mapped item enhancements for the LINQ query.
         MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
@@ -2452,7 +2449,6 @@ internal sealed class Item : IComparable<Item>
         NutritionalValue = _factory.InitialNutritionalValue;        
         GoldPieces = Game.ComputeIntegerExpression(_factory.InitialGoldPiecesRoll).Value;
         TurnsOfLightRemaining = _factory.InitialTurnsOfLight;
-        Weight = _factory.Weight;
         EffectivePropertySet.BonusHit = _factory.BonusHit;
         EffectivePropertySet.BonusDamage = _factory.BonusDamage;
         EffectivePropertySet.BonusArmorClass = _factory.BonusArmorClass;

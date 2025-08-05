@@ -22,5 +22,4 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 14;
     public override int ToH => 10;
-    public override int Weight => 110;
 }

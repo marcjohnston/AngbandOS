@@ -22,7 +22,8 @@ public class SleepMonsterWandItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(SleepMonsterWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(OldSleep1xProjectileScript), "1d15+8", 20, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

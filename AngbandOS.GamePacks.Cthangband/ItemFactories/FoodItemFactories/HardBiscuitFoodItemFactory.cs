@@ -16,7 +16,6 @@ public class HardBiscuitFoodItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 1;
     public override string? DescriptionSyntax => "Hard Biscuit~";
     public override int InitialNutritionalValue => 500;
-    public override int Weight => 2;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatGoodFoodScript);
 
     /// <summary>
@@ -26,7 +25,7 @@ public class HardBiscuitFoodItemFactory : ItemFactoryGameConfiguration
 
     public override string ItemClassBindingKey => nameof(FoodItemClass);
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(HardBiscuitFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

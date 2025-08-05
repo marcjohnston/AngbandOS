@@ -32,7 +32,6 @@ public class ShadowCloakItemFactory : ItemFactoryGameConfiguration
     };
     public override string? ItemEnhancementBindingKey => nameof(ShadowCloakItemFactoryItemEnhancement);
     public override int BonusArmorClass => 4;
-    public override int Weight => 5;
 
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {

@@ -22,8 +22,7 @@ public class ShortSwordWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(ShortSwordItemFactoryItemEnhancement);
-    public override int Weight => 80;
+    public override string? ItemEnhancementBindingKey => nameof(ShortSwordWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

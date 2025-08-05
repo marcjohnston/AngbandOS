@@ -12,7 +12,7 @@ public class FlamesRingItemFactory : ItemFactoryGameConfiguration
     public override bool NegativeBonusArmorClassRepresentsBroken => true;
     public override bool NegativeBonusHitRepresentsBroken => true;
     public override bool NegativeBonusDamageRepresentsBroken => true;
-    public override string? ItemEnhancementBindingKey => nameof(FlamesItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(FlamesRingItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Flames";
     public override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
@@ -29,7 +29,6 @@ public class FlamesRingItemFactory : ItemFactoryGameConfiguration
         (50, 1)
     };
     public override int BonusArmorClass => 15;
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

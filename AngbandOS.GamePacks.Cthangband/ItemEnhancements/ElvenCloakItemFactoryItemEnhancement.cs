@@ -10,4 +10,5 @@ public class ElvenCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool Search => true;
     public override bool Stealth => true;
     public override bool CanReflectBoltsAndArrows => true;
+    public override int Weight => 5;
 }

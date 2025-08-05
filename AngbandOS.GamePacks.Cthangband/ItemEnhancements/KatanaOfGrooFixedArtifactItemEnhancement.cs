@@ -19,4 +19,5 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool Speed => true;
     public override bool SustDex => true;
     public override bool Vorpal => true;
+    public override int Weight => -70;
 }

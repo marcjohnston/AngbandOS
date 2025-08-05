@@ -21,11 +21,10 @@ public class SlimeMoldFoodItemFactory : ItemFactoryGameConfiguration
         (1, 1)
     };
     public override int InitialNutritionalValue => 3000;
-    public override int Weight => 5;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatSlimeMoldScript);
     public override string ItemClassBindingKey => nameof(FoodItemClass);
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SlimeMoldFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -24,13 +24,12 @@ public class BrillianceAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 500;
-    public override string? ItemEnhancementBindingKey => nameof(BrillianceItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BrillianceAmuletItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (20, 1)
     };
-    public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

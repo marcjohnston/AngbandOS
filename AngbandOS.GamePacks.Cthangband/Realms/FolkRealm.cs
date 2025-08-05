@@ -21,7 +21,7 @@ public class FolkRealm : RealmGameConfiguration
     /// </summary>
     public override string[] SpellBookNames => new string[]
     {
-        nameof(CantripsforBeginnersFolkBookItemFactory),
+        nameof(CantripsForBeginnersFolkBookItemFactory),
         nameof(MinorMagicksFolkBookItemFactory),
         nameof(MajorMagicksFolkBookItemFactory),
         nameof(MagicksOfMasteryFolkBookItemFactory)

@@ -21,7 +21,7 @@ public class FullPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Full Plate Armor";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(FullPlateHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 25;
     public override int Cost => 1350;
@@ -34,7 +34,6 @@ public class FullPlateHardArmorItemFactory : ItemFactoryGameConfiguration
         (45, 1)
     };
     public override int BonusHit => -3;
-    public override int Weight => 380;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

@@ -22,7 +22,6 @@ public class BerserkStrengthPotionItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SuperHeroism1D25P25ResetFearAndHeal30Script), null, 20);
  
     /// <summary>
@@ -39,7 +38,7 @@ public class BerserkStrengthPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BerserkStrengthPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

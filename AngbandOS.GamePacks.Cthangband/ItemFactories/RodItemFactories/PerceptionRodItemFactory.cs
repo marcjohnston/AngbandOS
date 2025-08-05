@@ -23,7 +23,6 @@ public class PerceptionRodItemFactory : ItemFactoryGameConfiguration
         (50, 8),
         (100, 8)
     };
-    public override int Weight => 15;
     public override (string, string, bool, int)? ZapBindingTuple => (nameof(SystemScriptsEnum.IdentifyItemScript), "10", false, 250);
     public override string ItemClassBindingKey => nameof(RodsItemClass);
 
@@ -35,7 +34,7 @@ public class PerceptionRodItemFactory : ItemFactoryGameConfiguration
     /// Returns true, because rods are magical and should be detected with the detect magic scroll.
     /// </summary>
     public override bool IsMagical => true;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PerceptionRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
     public override ColorEnum Color => ColorEnum.Turquoise;

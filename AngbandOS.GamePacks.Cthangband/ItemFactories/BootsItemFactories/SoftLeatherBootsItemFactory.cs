@@ -41,7 +41,7 @@ public class SoftLeatherBootsItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatBootsEnchantmentScript) })
     };
 
-    public override int Weight => 20;
+    public override string? ItemEnhancementBindingKey => nameof(SoftLeatherBootsItemFactoryItemEnhancement);
     public override string ItemClassBindingKey => nameof(BootsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.FeetWieldSlot) };
     public override bool HatesFire => true;

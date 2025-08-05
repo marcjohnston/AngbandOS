@@ -22,7 +22,6 @@ public class BlackPrayersDeathBookItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 30;
 
     public override string[] SpellBindingKeys => new string[]
     {
@@ -44,7 +43,7 @@ public class BlackPrayersDeathBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BlackPrayersDeathBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

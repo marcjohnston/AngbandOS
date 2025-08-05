@@ -22,5 +22,4 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 12;
     public override int ToH => 8;
-    public override int Weight => 130;
 }

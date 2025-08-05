@@ -27,7 +27,7 @@ public class FixedArtifactItemEnhancementWeightedRandom : ItemEnhancementWeighte
         (nameof(ResistConfusionAndChaosBiasItemEnhancement), 2 * 8), // 1/6
         (nameof(ResistConfusionItemEnhancement), 2 * 40), // 5/6
 
-        (nameof(ResistSoundItemEnhancement), 2 * 48),
+        (nameof(SoundResistanceRingItemFactoryItemEnhancement), 2 * 48),
         (nameof(ResistShardsItemEnhancement), 2 * 48),
 
         (nameof(ResistNetherAndNecromanticBiasItemEnhancement), 2 * 16), // 1/3

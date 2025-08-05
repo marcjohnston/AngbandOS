@@ -28,7 +28,6 @@ public class AppleJuicePotionItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int InitialNutritionalValue => 250;
 
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(AppleJuiceRenderMessageScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
   
     /// <summary>
@@ -45,7 +44,7 @@ public class AppleJuicePotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(AppleJuicePotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

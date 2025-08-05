@@ -30,7 +30,8 @@ public class DamageRingItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 2;
+    public override string? ItemEnhancementBindingKey => nameof(DamageRingItemFactoryItemEnhancement);
+
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

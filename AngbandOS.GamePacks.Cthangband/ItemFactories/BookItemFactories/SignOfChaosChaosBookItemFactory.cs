@@ -22,7 +22,6 @@ public class SignOfChaosChaosBookItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 30;
 
     public override string[] SpellBindingKeys => new string[]
     {
@@ -44,7 +43,7 @@ public class SignOfChaosChaosBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SignOfChaosChaosBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

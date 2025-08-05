@@ -40,7 +40,7 @@ public class IronCrownArmorItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatCrownEnchantmentScript) })
     };
 
-    public override int Weight => 20;
+    public override string? ItemEnhancementBindingKey => nameof(IronCrownArmorItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(CrownsItemClass);
 

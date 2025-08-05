@@ -23,8 +23,7 @@ public class DwarvenPickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
         (50, 1)
     };
     public override int InitialBonusTunnel => 3;
-    public override string? ItemEnhancementBindingKey => nameof(TunnellingAndCanApplySlayingBonusItemFactoryItemEnhancement);
-    public override int Weight => 200;
+    public override string? ItemEnhancementBindingKey => nameof(DwarvenPickDiggingWeaponItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
     public override bool CanTunnel => true;

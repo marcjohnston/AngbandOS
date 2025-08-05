@@ -14,7 +14,7 @@ public class ClothCloakItemFactory : ItemFactoryGameConfiguration
         (100, "3d5-3")
     };
 
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ClothCloakItemFactoryItemEnhancement);
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
@@ -40,7 +40,6 @@ public class ClothCloakItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatCloakEnchantmentScript) })
     };
 
-    public override int Weight => 10;
 
     public override string ItemClassBindingKey => nameof(CloaksItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.AboutBodyWieldSlot) };

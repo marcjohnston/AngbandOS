@@ -22,8 +22,7 @@ public class KatanaWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(KatanaItemFactoryItemEnhancement);
-    public override int Weight => 120;
+    public override string? ItemEnhancementBindingKey => nameof(KatanaWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -21,7 +21,7 @@ public class DoubleChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Double Chain Mail";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DoubleChainMailHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 16;
     public override int Cost => 850;
@@ -34,7 +34,6 @@ public class DoubleChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
         (30, 1)
     };
     public override int BonusHit => -2;
-    public override int Weight => 250;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

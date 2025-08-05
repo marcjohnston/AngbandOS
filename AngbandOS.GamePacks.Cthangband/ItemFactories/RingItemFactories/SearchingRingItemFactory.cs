@@ -25,13 +25,12 @@ public class SearchingRingItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int Cost => 250;
-    public override string? ItemEnhancementBindingKey => nameof(SearchingItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SearchingRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (5, 1)
     };
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

@@ -22,7 +22,6 @@ public class RestoreWisdomPotionItemFactory : ItemFactoryGameConfiguration
     {
         (25, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.RestoreWisdomScript), null, 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class RestoreWisdomPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(RestoreWisdomPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

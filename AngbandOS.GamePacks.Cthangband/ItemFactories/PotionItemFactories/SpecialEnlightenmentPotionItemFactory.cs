@@ -22,7 +22,6 @@ public class SpecialEnlightenmentPotionItemFactory : ItemFactoryGameConfiguratio
     {
         (70, 4)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SpecialEnlightenmentScript), null, 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class SpecialEnlightenmentPotionItemFactory : ItemFactoryGameConfiguratio
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SpecialEnlightenmentPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

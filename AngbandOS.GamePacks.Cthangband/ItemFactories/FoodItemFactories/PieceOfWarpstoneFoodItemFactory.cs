@@ -22,7 +22,6 @@ public class PieceOfWarpstoneFoodItemFactory : ItemFactoryGameConfiguration
     {
         (50, 1)
     };
-    public override int Weight => 1;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatWarpstoneScript);
 
     /// <summary>
@@ -31,7 +30,7 @@ public class PieceOfWarpstoneFoodItemFactory : ItemFactoryGameConfiguration
     public override bool VanishesWhenEatenBySkeletons => true;
     public override string ItemClassBindingKey => nameof(FoodItemClass);
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PieceOfWarpstoneFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

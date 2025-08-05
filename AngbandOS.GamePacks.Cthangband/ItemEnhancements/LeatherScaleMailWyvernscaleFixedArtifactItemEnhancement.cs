@@ -14,4 +14,5 @@ public class LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement : ItemEnhan
     public override string? BonusDexterityRollExpression => "3";
     public override bool ResAcid => true;
     public override bool ResShards => true;
+    public override int Weight => -80;
 }

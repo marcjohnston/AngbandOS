@@ -109,7 +109,7 @@ internal class UseStaffScript : UniversalScript, IGetKey
             {
                 Item singleStaff = item.TakeFromStack(1);
                 singleStaff.StaffChargesRemaining--;
-                Game.WeightCarried -= singleStaff.Weight;
+                Game.WeightCarried -= singleStaff.EffectivePropertySet.Weight;
                 Game.InventoryCarry(singleStaff);
                 Game.MsgPrint("You unstack your staff.");
             }

@@ -22,8 +22,7 @@ public class AwlPikePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(AwlPikePolearmFactoryItemEnhancement);
-    public override int Weight => 160;
+    public override string? ItemEnhancementBindingKey => nameof(AwlPikePolearmWeaponItemFactoryItemEnhancement);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

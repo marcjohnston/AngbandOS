@@ -21,5 +21,4 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 12;
     public override int ToH => 20;
-    public override int Weight => 50;
 }

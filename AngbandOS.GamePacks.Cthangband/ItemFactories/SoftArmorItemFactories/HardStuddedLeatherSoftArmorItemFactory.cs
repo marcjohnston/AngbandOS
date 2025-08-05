@@ -33,7 +33,8 @@ public class HardStuddedLeatherSoftArmorItemFactory : ItemFactoryGameConfigurati
         (10, 1)
     };
     public override int BonusHit => -1;
-    public override int Weight => 110;
+    public override string? ItemEnhancementBindingKey => nameof(HardStuddedLeatherSoftArmorItemFactoryItemEnhancement);
+
 
     public override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

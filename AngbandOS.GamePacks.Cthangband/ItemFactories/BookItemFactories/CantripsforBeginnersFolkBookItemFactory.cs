@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class CantripsforBeginnersFolkBookItemFactory : ItemFactoryGameConfiguration
+public class CantripsForBeginnersFolkBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;
@@ -22,7 +22,6 @@ public class CantripsforBeginnersFolkBookItemFactory : ItemFactoryGameConfigurat
     {
         (10, 1)
     };
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.ZapFolkSpell),
@@ -43,7 +42,7 @@ public class CantripsforBeginnersFolkBookItemFactory : ItemFactoryGameConfigurat
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CantripsForBeginnersFolkBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

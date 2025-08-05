@@ -23,14 +23,13 @@ public class CharismaAmuletItemFactory : ItemFactoryGameConfiguration
         (new int[] {-1, -2}, null, new string[] { nameof(SystemScriptsEnum.BrokenAndCursedEnchantmentScript), nameof(SystemScriptsEnum.PoorCharisma5BP1EnchantmentScript) }),
         (new int[] {0, 1, 2}, null, new string[] { nameof(SystemScriptsEnum.BonusCharisma5BP1EnchantmentScript) }),
     };
-    public override string? ItemEnhancementBindingKey => nameof(CharismaItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CharismaAmuletItemFactoryItemEnhancement);
     public override int Cost => 500;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (20, 1)
     };
-    public override int Weight => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

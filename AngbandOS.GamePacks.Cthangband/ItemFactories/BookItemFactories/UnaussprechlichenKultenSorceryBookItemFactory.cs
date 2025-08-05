@@ -23,7 +23,6 @@ public class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactoryGameConf
         (40, 1)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.DetectObjectsAndTreasureSorcerySpell),
@@ -45,7 +44,7 @@ public class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactoryGameConf
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(UnaussprechlichenKultenSorceryBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

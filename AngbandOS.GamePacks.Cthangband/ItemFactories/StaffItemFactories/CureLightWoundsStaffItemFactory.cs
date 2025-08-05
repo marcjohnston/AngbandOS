@@ -22,7 +22,8 @@ public class CureLightWoundsStaffItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 50;
+
+    public override string? ItemEnhancementBindingKey => nameof(CureLightWoundsStaffItemFactoryItemEnhancement);
 
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.RestoreHealth1d8Script), "1d5+6", 18, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);

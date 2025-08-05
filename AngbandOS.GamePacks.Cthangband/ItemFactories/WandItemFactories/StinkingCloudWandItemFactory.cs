@@ -22,7 +22,8 @@ public class StinkingCloudWandItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(StinkingCloudWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(Poison12r2ProjectileScript), "1d8+6", 20, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

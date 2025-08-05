@@ -22,8 +22,7 @@ public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(LongBowItemFactoryItemEnhancement);
-    public override int Weight => 40;
+    public override string? ItemEnhancementBindingKey => nameof(LongBowRangedWeaponItemFactoryItemEnhancement);
     public override int MissileDamageMultiplier => 3;
     public override string[]? AmmunitionItemFactoryBindingKeys => new string[]
     {

@@ -19,6 +19,6 @@ internal class NeckWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.Neck, item);
-        Game.WeightCarried += item.Weight;
+        Game.WeightCarried += item.EffectivePropertySet.Weight;
     }
 }

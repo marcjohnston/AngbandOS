@@ -22,7 +22,6 @@ public class DetonationsPotionItemFactory : ItemFactoryGameConfiguration
     {
         (60, 8)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.DetonationsScript), nameof(Explode25d25ProjectileUnfriendlyProjectileScript), 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class DetonationsPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DetonationsPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

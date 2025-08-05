@@ -21,5 +21,4 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
     public override int ToA => 40;
     public override int ToD => 0;
     public override int ToH => -2;
-    public override int Weight => 250;
 }

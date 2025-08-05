@@ -21,5 +21,4 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 17;
     public override int ToH => 12;
-    public override int Weight => 250;
 }

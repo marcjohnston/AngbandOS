@@ -25,7 +25,6 @@ public class BlindnessPotionItemFactory : ItemFactoryGameConfiguration
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override int Weight => 4;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(Blindness1d100p100TimerScript), nameof(DarkProjectileUnfriendlyProjectileScript), 20);
  
@@ -43,7 +42,7 @@ public class BlindnessPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BlindnessPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

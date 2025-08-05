@@ -24,7 +24,6 @@ public class WisdomPotionItemFactory : ItemFactoryGameConfiguration
         (25, 3),
         (30, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(GainWisdomAbilityScoreScript), null, 20);
 
     /// <summary>
@@ -41,7 +40,7 @@ public class WisdomPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(WisdomPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

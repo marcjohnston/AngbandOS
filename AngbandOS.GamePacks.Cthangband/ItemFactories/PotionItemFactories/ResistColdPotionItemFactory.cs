@@ -22,7 +22,6 @@ public class ResistColdPotionItemFactory : ItemFactoryGameConfiguration
     {
         (1, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(ColdResistance10P1d10TimerScript), null, 20);
 
     /// <summary>
@@ -39,7 +38,7 @@ public class ResistColdPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ResistColdPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

@@ -29,7 +29,6 @@ public class CthaatAquadingenNatureBookItemFactory : ItemFactoryGameConfiguratio
         (80, 2)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.EarthquakeNatureSpell),
@@ -51,7 +50,7 @@ public class CthaatAquadingenNatureBookItemFactory : ItemFactoryGameConfiguratio
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CthaatAquadingenNatureBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

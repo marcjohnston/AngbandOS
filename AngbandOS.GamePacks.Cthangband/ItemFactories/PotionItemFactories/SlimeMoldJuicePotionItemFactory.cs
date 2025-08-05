@@ -23,7 +23,6 @@ public class SlimeMoldJuicePotionItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int InitialNutritionalValue => 400;
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SlimeMoldScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
     /// <summary>
@@ -40,7 +39,7 @@ public class SlimeMoldJuicePotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SlimeMoldJuicePotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

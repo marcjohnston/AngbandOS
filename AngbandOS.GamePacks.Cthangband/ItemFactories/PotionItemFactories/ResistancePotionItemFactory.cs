@@ -17,7 +17,7 @@ public class ResistancePotionItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ResistancePotionItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -27,7 +27,6 @@ public class ResistancePotionItemFactory : ItemFactoryGameConfiguration
         (100, 1)
     };
     public override int InitialNutritionalValue => 100;
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.ResistanceScript), null, 20);
 
     /// <summary>

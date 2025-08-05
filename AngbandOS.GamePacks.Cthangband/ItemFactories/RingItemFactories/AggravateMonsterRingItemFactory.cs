@@ -22,13 +22,13 @@ public class AggravateMonsterRingItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
-    public override string? ItemEnhancementBindingKey => nameof(AggravateItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(AggravateMonsterRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (5, 1)
     };
-    public override int Weight => 2;
+
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

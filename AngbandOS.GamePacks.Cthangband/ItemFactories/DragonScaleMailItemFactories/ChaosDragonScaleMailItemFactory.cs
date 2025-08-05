@@ -18,7 +18,7 @@ public class ChaosDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
-    public override string? ItemEnhancementBindingKey => nameof(ChaosDragponItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(ChaosDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos Dragon Scale Mail";
@@ -35,7 +35,6 @@ public class ChaosDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     };
     public override int BonusArmorClass => 10;
     public override int BonusHit => -2;
-    public override int Weight => 200;
 
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

@@ -22,8 +22,7 @@ public class MainGaucheWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(MainGaucheItemFactoryItemEnhancement);
-    public override int Weight => 30;
+    public override string? ItemEnhancementBindingKey => nameof(MainGaucheWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

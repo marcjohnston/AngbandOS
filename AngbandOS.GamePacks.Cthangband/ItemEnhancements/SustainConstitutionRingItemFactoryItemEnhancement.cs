@@ -1,0 +1,9 @@
+namespace AngbandOS.GamePacks.Cthangband;
+
+[Serializable]
+public class SustainConstitutionRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
+{
+    public override bool EasyKnow => true;
+    public override bool SustCon => true;
+    public override int Weight => 2;
+}

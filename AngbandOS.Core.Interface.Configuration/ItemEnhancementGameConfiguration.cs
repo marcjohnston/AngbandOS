@@ -180,6 +180,7 @@ public class ItemEnhancementGameConfiguration
 
     public virtual bool Vampiric { get; set; } = false;
     public virtual bool Vorpal { get; set; } = false;
+    public virtual int Weight { get; set; } = 0;
     public virtual bool Wis { get; set; } = false;
     public virtual bool Wraith { get; set; } = false;   
     public virtual bool XtraMight { get; set; } = false;

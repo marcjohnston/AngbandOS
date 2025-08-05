@@ -1,0 +1,9 @@
+namespace AngbandOS.GamePacks.Cthangband;
+
+[Serializable]
+public class DexterityRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
+{
+    public override bool Dex => true;
+    public override bool HideType => true;
+    public override int Weight => 2;
+}

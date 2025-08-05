@@ -23,7 +23,6 @@ public class PieceOfElvishWaybreadFoodItemFactory : ItemFactoryGameConfiguration
         (20, 1)
     };
     public override int InitialNutritionalValue => 7500;
-    public override int Weight => 3;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatElvenBreadScript);
 
     /// <summary>
@@ -33,7 +32,7 @@ public class PieceOfElvishWaybreadFoodItemFactory : ItemFactoryGameConfiguration
 
     public override string ItemClassBindingKey => nameof(FoodItemClass);
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PieceOfElvishWaybreadFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

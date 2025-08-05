@@ -20,6 +20,6 @@ internal class DiggerWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.Digger, item);
-        Game.WeightCarried += item.Weight;
+        Game.WeightCarried += item.EffectivePropertySet.Weight;
     }
 }

@@ -21,9 +21,8 @@ public class PowerRingItemFactory : ItemFactoryGameConfiguration
 
     public override string? PreassignedItemFlavorBindingKey => nameof(PlainGoldRingItemFlavor);
     public override int Cost => 5000000;
-    public override string? ItemEnhancementBindingKey => nameof(InstantArtifactItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PowerRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 110;
-    public override int Weight => 2;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

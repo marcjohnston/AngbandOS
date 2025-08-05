@@ -26,4 +26,5 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool Speed => true;
     public override bool Str => true;
     public override bool Vorpal => true;
+    public override int Weight => 20;
 }

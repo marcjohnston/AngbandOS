@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
 {
     private BastardSwordSelfSlayerFixedArtifact(Game game) : base(game) { }
-    protected override string BaseItemFactoryName => nameof(BastardSwordSwordWeaponItemFactory);
+    protected override string BaseItemFactoryName => nameof(BastardSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Bastard Sword 'Selfslayer'";
     public override int Cost => 100000;
@@ -21,5 +21,4 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 20;
     public override int ToH => -20;
-    public override int Weight => 140;
 }

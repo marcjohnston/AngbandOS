@@ -26,7 +26,8 @@ public class HasteMonsterWandItemFactory : ItemFactoryGameConfiguration
     {
         (2, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(HasteMonsterWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(OldSpeed1xProjectileScript), "1d20+8", 0, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

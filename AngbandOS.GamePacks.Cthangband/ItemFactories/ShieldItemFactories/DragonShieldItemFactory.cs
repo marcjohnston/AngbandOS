@@ -22,7 +22,7 @@ public class DragonShieldItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Shield";
 
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsTreasureAndCanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(DragonShieldItemFactoryItemEnhancement);
     public override int ArmorClass => 8;
     public override int Cost => 10000;
     public override int DamageDice => 1;
@@ -34,7 +34,6 @@ public class DragonShieldItemFactory : ItemFactoryGameConfiguration
         (80, 4)
     };
     public override int BonusArmorClass => 10;
-    public override int Weight => 100;
 
     public override string ItemClassBindingKey => nameof(ShieldsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };

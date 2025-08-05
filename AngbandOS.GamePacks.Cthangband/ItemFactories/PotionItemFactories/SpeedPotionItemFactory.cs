@@ -24,7 +24,6 @@ public class SpeedPotionItemFactory : ItemFactoryGameConfiguration
         (40, 1),
         (60, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.Speed1D25P15Or5Script), nameof(SpeedProjectileFriendlyProjectileScript), 20);
 
     /// <summary>
@@ -41,7 +40,7 @@ public class SpeedPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SpeedPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

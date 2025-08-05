@@ -23,7 +23,6 @@ public class CultesdesGoulesDeathBookItemFactory : ItemFactoryGameConfiguration
         (50, 1)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.BerserkDeathSpell),
@@ -44,7 +43,7 @@ public class CultesdesGoulesDeathBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CultesdesGoulesDeathBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

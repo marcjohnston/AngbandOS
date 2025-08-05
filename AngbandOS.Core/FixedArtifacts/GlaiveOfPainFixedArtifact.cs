@@ -21,5 +21,4 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 30;
     public override int ToH => 0;
-    public override int Weight => 190;
 }

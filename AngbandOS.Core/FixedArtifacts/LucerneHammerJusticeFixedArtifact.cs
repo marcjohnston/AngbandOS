@@ -21,5 +21,4 @@ internal class LucerneHammerJusticeFixedArtifact : FixedArtifact
     public override int ToA => 8;
     public override int ToD => 6;
     public override int ToH => 10;
-    public override int Weight => 120;
 }

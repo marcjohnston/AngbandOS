@@ -22,8 +22,7 @@ public class MorningStarHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(MorningStarHaftedItemFactoryItemEnhancement);
-    public override int Weight => 150;
+    public override string? ItemEnhancementBindingKey => nameof(MorningStarHaftedWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

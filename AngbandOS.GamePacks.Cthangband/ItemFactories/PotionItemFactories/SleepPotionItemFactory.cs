@@ -26,7 +26,6 @@ public class SleepPotionItemFactory : ItemFactoryGameConfiguration
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int InitialNutritionalValue => 100;
-    public override int Weight => 4;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(Paralysis4P1d4TimerScript), nameof(OldSleepProjectileUnfriendlyProjectileScript), 20);
 
@@ -44,7 +43,7 @@ public class SleepPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SleepPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

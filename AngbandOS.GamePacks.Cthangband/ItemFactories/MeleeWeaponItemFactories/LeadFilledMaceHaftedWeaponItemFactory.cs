@@ -22,8 +22,7 @@ public class LeadFilledMaceHaftedWeaponItemFactory : ItemFactoryGameConfiguratio
     {
         (15, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(LeadFilledMaceHaftedItemFactoryItemEnhancement);
-    public override int Weight => 180;
+    public override string? ItemEnhancementBindingKey => nameof(LeadFilledMaceHaftedWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

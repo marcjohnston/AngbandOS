@@ -23,7 +23,6 @@ public class TulwarWeaponItemFactory : ItemFactoryGameConfiguration
         (5, 1)
     };
     public override string? ItemEnhancementBindingKey => nameof(TulwarWeaponItemFactoryItemEnhancement);
-    public override int Weight => 100;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

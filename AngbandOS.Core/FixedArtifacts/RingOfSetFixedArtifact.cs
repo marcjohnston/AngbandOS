@@ -22,5 +22,4 @@ internal class RingOfSetFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 15;
     public override int ToH => 15;
-    public override int Weight => 2;
 }

@@ -20,7 +20,6 @@ public class RestoreStrengthMushroomFoodItemFactory : ItemFactoryGameConfigurati
     {
         (20, 1)
     };
-    public override int Weight => 1;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatRestoreStrengthScript);
     public override string ItemClassBindingKey => nameof(MushroomItemClass);
 
@@ -29,7 +28,7 @@ public class RestoreStrengthMushroomFoodItemFactory : ItemFactoryGameConfigurati
     /// </summary>
     public override int InitialNutritionalValue => 500;
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(RestoreStrengthMushroomFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

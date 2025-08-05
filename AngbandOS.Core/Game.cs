@@ -7564,7 +7564,7 @@ internal class Game
                         chaosEffect = false;
                     }
                     // Check if we did a critical
-                    totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.EffectivePropertySet.BonusHit, totalDamage);
+                    totalDamage = PlayerCriticalMelee(meleeItem.EffectivePropertySet.Weight, meleeItem.EffectivePropertySet.BonusHit, totalDamage);
 
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
@@ -7932,7 +7932,7 @@ internal class Game
         char missileCharacter = missile.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
-        int divider = missile.Weight > 10 ? missile.Weight : 10;
+        int divider = missile.EffectivePropertySet.Weight > 10 ? missile.EffectivePropertySet.Weight : 10;
         int throwDistance = (StrengthAbility.StrAttackSpeedComponent + 20) * multiplier / divider;
         if (throwDistance > 10)
         {
@@ -8031,7 +8031,7 @@ internal class Game
                     }
                     // Adjust the damage for the particular monster type
                     damage = missile.AdjustDamageForMonsterType(damage, monster);
-                    damage = PlayerCriticalRanged(missile.Weight, missile.EffectivePropertySet.BonusHit, damage);
+                    damage = PlayerCriticalRanged(missile.EffectivePropertySet.Weight, missile.EffectivePropertySet.BonusHit, damage);
                     if (damage < 0)
                     {
                         damage = 0;
@@ -8183,7 +8183,7 @@ internal class Game
         }
         Item item = tile.Items[0]; // TODO: We can only pull the top item?
         // Check the weight of the item
-        if (item != null && item.Weight > maxWeight) // TODO: We are only measuring the weight of the first item?
+        if (item != null && item.EffectivePropertySet.Weight > maxWeight) // TODO: We are only measuring the weight of the first item?
         {
             MsgPrint("The object is too heavy.");
             return;
@@ -9776,7 +9776,7 @@ internal class Game
             Item carried = item.TakeFromStack(1);
             LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
-            WeightCarried += carried.Weight;
+            WeightCarried += carried.EffectivePropertySet.Weight;
         }
         BaseCharacterClass.OutfitPlayer();
 
@@ -13049,7 +13049,7 @@ internal class Game
                     Item? item = GetInventoryItem(index);
                     if (item != null)
                     {
-                        martialArtistArmWgt += item.Weight;
+                        martialArtistArmWgt += item.EffectivePropertySet.Weight;
                     }
                     //foreach (Item item in inventorySlot)
                     //{
@@ -14384,7 +14384,7 @@ internal class Game
             {
                 // Group it together.
                 jPtr.Absorb(oPtr);
-                WeightCarried += oPtr.StackCount * oPtr.Weight;
+                WeightCarried += oPtr.StackCount * oPtr.EffectivePropertySet.Weight;
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                 return jPtr;
             }
@@ -14432,7 +14432,7 @@ internal class Game
         oPtr.Y = 0;
         oPtr.X = 0;
         oPtr.HoldingMonsterIndex = 0;
-        WeightCarried += oPtr.StackCount * oPtr.Weight;
+        WeightCarried += oPtr.StackCount * oPtr.EffectivePropertySet.Weight;
         _invenCnt++;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
@@ -14633,7 +14633,7 @@ internal class Game
                     ColorEnum color = oPtr.Color;
                     consoleRow["description"] = new ConsoleString(color, oPtr.GetFullDescription(true));
 
-                    int wgt = oPtr.Weight * oPtr.StackCount;
+                    int wgt = oPtr.EffectivePropertySet.Weight * oPtr.StackCount;
                     consoleRow["weight"] = new ConsoleString(ColorEnum.White, $"{wgt / 10}.{wgt % 10} lb");
                     slotIsEmpty = false;
                 }

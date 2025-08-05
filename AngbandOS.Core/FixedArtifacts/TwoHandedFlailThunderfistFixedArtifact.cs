@@ -21,5 +21,4 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 18;
     public override int ToH => 5;
-    public override int Weight => 300;
 }

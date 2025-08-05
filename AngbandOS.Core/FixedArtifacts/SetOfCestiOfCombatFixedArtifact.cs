@@ -21,5 +21,4 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
     public override int ToA => 20;
     public override int ToD => 10;
     public override int ToH => 10;
-    public override int Weight => 40;
 }

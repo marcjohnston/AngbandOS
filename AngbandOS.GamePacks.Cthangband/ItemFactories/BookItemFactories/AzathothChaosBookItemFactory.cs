@@ -21,14 +21,13 @@ public class AzathothChaosBookItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 100000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowIgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(AzathothChaosBookItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (100, 3)
     };
 
-    public override int Weight => 30;
     public override string[] SpellBindingKeys => new string[]
     {
         nameof(SpellsEnum.GravityBeamChaosSpell),

@@ -27,9 +27,8 @@ public class FlaskOfOilItemFactory : ItemFactoryGameConfiguration
         (1, 1)
     };
     public override int InitialTurnsOfLight => 7500;
-    public override int Weight => 10;
     public override string ItemClassBindingKey => nameof(FlasksItemClass);
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(FlaskOfOilItemFactoryItemEnhancement);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (20, "3d5-3")

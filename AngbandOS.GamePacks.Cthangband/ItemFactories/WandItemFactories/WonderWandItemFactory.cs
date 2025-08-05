@@ -17,13 +17,12 @@ public class WonderWandItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string? ItemEnhancementBindingKey => nameof(IgnoreElementsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(WonderWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (3, 1)
     };
-    public override int Weight => 10;
     public override (string, string, int, int)? AimingBindingTuple => (nameof(WonderProjectileScriptWeightedRandom), "1d15+8", 13, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

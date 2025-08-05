@@ -22,7 +22,8 @@ public class TameMonsterWandItemFactory : ItemFactoryGameConfiguration
     {
         (30, 2)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(TameMonsterWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(Charm45ProjectileScript), "1d6+2", 75, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

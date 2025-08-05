@@ -21,5 +21,4 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
     public override int ToA => 10;
     public override int ToD => 25;
     public override int ToH => 25;
-    public override int Weight => 75;
 }

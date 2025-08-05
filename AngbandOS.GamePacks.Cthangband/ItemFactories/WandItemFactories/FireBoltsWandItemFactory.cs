@@ -22,7 +22,8 @@ public class FireBoltsWandItemFactory : ItemFactoryGameConfiguration
     {
         (30, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(FireBoltsWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(FireBoltOrBeam6d8ProjectileScriptWeightedRandom), "1d8+6", 50, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

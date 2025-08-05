@@ -33,4 +33,5 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override bool Str => true;
     public override bool Tunnel => true;
     public override bool Vampiric => true;
+    public override int Weight => 280;
 }

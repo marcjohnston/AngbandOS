@@ -23,7 +23,7 @@ internal class LightsourceWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.Lightsource, item);
-        Game.WeightCarried += item.Weight;
+        Game.WeightCarried += item.EffectivePropertySet.Weight;
     }
     /// <summary>
     /// Consumes a turn of light during the ProcessWorldHook event.  Base inventory slot ProcessWorldHook processing occurs first, allowing light source items to process the event first.

@@ -140,6 +140,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Valueless = itemEnhancementGameConfiguration.Valueless;
         Vampiric = itemEnhancementGameConfiguration.Vampiric;
         Vorpal = itemEnhancementGameConfiguration.Vorpal;
+        Weight = itemEnhancementGameConfiguration.Weight;
         Wis = itemEnhancementGameConfiguration.Wis;
         Wraith = itemEnhancementGameConfiguration.Wraith;
         XtraMight = itemEnhancementGameConfiguration.XtraMight;
@@ -274,6 +275,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Valueless = Valueless,
             Vampiric = Vampiric,
             Vorpal = Vorpal,
+            Weight = Weight,
             Wis = Wis,
             Wraith = Wraith,
             XtraMight = XtraMight,
@@ -437,6 +439,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Valueless = Valueless,
             Vampiric = Vampiric,
             Vorpal = Vorpal,
+            Weight = Weight,
             Wis = Wis,
             Wraith = Wraith,
             XtraMight = XtraMight,
@@ -836,6 +839,8 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     public virtual bool Vorpal { get; } = false;
+
+    public virtual int Weight { get; } = 0;
     
     /// <inheritdoc />
     public virtual bool Wis { get; } = false;

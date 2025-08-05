@@ -21,5 +21,4 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
     public override int ToA => 0;
     public override int ToD => 19;
     public override int ToH => 17;
-    public override int Weight => 40;
 }

@@ -32,6 +32,7 @@ public class MetalShodBootsItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
+    public override string? ItemEnhancementBindingKey => nameof(MetalShodBootsItemFactoryItemEnhancement);
 
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]
     {
@@ -41,7 +42,6 @@ public class MetalShodBootsItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatBootsEnchantmentScript) })
     };
 
-    public override int Weight => 80;
 
     public override string ItemClassBindingKey => nameof(BootsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.FeetWieldSlot) };

@@ -24,4 +24,5 @@ public class MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement : Ite
     public override bool ResLight => true;
     public override bool ResPois => true;
     public override bool SeeInvis => true;
+    public override int Weight => 300;
 }

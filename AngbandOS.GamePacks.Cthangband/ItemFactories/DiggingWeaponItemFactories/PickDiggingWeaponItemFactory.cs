@@ -23,8 +23,7 @@ public class PickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
         (10, 16)
     };
     public override int InitialBonusTunnel => 1;
-    public override string? ItemEnhancementBindingKey => nameof(TunnellingAndCanApplySlayingBonusItemFactoryItemEnhancement);
-    public override int Weight => 150;
+    public override string? ItemEnhancementBindingKey => nameof(PickDiggingWeaponItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
     public override bool CanTunnel => true;

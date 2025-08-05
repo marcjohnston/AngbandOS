@@ -22,7 +22,6 @@ public class CardMasteryTarotBookItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override int Weight => 30;
 
 
     public override string[] SpellBindingKeys => new string[]
@@ -45,7 +44,7 @@ public class CardMasteryTarotBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(CardMasteryTarotBookItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

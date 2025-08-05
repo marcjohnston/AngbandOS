@@ -21,5 +21,4 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact
     public override int ToA => 2;
     public override int ToD => 7;
     public override int ToH => 5;
-    public override int Weight => 150;
 }

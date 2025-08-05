@@ -23,7 +23,8 @@ public class SlowMonsterWandItemFactory : ItemFactoryGameConfiguration
     {
         (2, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(SlowMonsterWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(OldSlow1xProjectileScript), "1d10+6", 25, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

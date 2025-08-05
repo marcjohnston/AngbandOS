@@ -33,8 +33,7 @@ public class AugmentedChainMailHardArmorItemFactory : ItemFactoryGameConfigurati
         (30, 1)
     };
     public override int BonusHit => -2;
-    public override int Weight => 270;
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(AugmentedChainMailHardArmorItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

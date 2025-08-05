@@ -22,8 +22,7 @@ public class TridentPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(TridentPolearmItemFactoryItemEnhancement);
-    public override int Weight => 70;
+    public override string? ItemEnhancementBindingKey => nameof(TridentPolearmWeaponItemFactoryItemEnhancement);
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

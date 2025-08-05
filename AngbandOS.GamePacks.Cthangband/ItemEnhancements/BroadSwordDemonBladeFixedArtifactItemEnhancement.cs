@@ -25,5 +25,6 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool SlayTroll => true;
     public override bool Speed => true;
     public override bool Stealth => true;
+    public override int Weight => -20;
     public override bool Vorpal => true;
 }

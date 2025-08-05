@@ -22,7 +22,8 @@ public class LightWandItemFactory : ItemFactoryGameConfiguration
     {
         (3, 1)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(LightWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(LightWeak6d8ProjectileScript), "1d10+6", 10, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

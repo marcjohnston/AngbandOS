@@ -23,8 +23,7 @@ public class TwoHandedSwordWeaponItemFactory : ItemFactoryGameConfiguration
         (30, 1),
         (40, 1)
     };
-    public override string? ItemEnhancementBindingKey => nameof(TwoHandedSwordItemFactoryItemEnhancement);
-    public override int Weight => 200;
+    public override string? ItemEnhancementBindingKey => nameof(TwoHandedSwordWeaponItemFactoryItemEnhancement);
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

@@ -22,7 +22,8 @@ public class CarnageStaffItemFactory : ItemFactoryGameConfiguration
     {
         (70, 4)
     };
-    public override int Weight => 50;
+    public override string? ItemEnhancementBindingKey => nameof(CarnageStaffItemFactoryItemEnhancement);
+
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.GenocideScript), "1d2+1", 180, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);
     public override string? RechargeScriptBindingKey => nameof(SystemScriptsEnum.RechargeStaffScript);

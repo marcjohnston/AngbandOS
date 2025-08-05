@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Diagnostics;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -26,6 +28,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
     }
+
     public string ToJson()
     {
         FixedArtifactGameConfiguration gameConfiguration = new FixedArtifactGameConfiguration()
@@ -93,6 +96,4 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public abstract int ToD { get; } // TODO: Need to convert this to an enhancement
 
     public abstract int ToH { get; } // TODO: Need to convert this to an enhancement
-
-    public abstract int Weight { get; } // TODO: Need to convert this to an enhancement
 }

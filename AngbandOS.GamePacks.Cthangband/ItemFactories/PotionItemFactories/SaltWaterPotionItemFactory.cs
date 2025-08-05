@@ -25,7 +25,6 @@ public class SaltWaterPotionItemFactory : ItemFactoryGameConfiguration
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override int Weight => 4;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SaltWaterScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
@@ -43,7 +42,7 @@ public class SaltWaterPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SaltWaterPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

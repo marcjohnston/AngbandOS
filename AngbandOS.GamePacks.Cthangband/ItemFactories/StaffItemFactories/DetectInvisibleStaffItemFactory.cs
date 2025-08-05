@@ -22,7 +22,8 @@ public class DetectInvisibleStaffItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int Weight => 50;
+
+    public override string? ItemEnhancementBindingKey => nameof(DetectInvisibleStaffItemFactoryItemEnhancement);
 
     public override (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple => (nameof(SystemScriptsEnum.DetectInvisibleIdentifableAndUsedScript), "1d15+8", 10, 100);
     public override string ItemClassBindingKey => nameof(StaffsItemClass);

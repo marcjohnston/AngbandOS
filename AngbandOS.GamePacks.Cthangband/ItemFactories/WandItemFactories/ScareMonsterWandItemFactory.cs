@@ -22,7 +22,8 @@ public class ScareMonsterWandItemFactory : ItemFactoryGameConfiguration
     {
         (10, 4)
     };
-    public override int Weight => 10;
+    public override string? ItemEnhancementBindingKey => nameof(ScareMonsterWandItemFactoryItemEnhancement);
+
     public override (string, string, int, int)? AimingBindingTuple => (nameof(TurnAll10ProjectileScript), "1d5+3", 25, 150);
     public override string ItemClassBindingKey => nameof(WandsItemClass);
 

@@ -21,7 +21,7 @@ public class BarChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Bar Chain Mail";
-    public override string? ItemEnhancementBindingKey => nameof(CanReflectBoltsAndArrowsItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(BarChainMailHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 18;
     public override int Cost => 950;
@@ -34,7 +34,6 @@ public class BarChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
         (35, 1)
     };
     public override int BonusHit => -2;
-    public override int Weight => 280;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

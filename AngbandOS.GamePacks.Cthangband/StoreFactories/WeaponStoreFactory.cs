@@ -58,7 +58,7 @@ public class WeaponStoreFactory : StoreFactoryGameConfiguration
         (nameof(SpearPolearmWeaponItemFactory), 1),
         (nameof(TridentPolearmWeaponItemFactory), 1),
         (nameof(IronShotAmmunitionItemFactory), 2),
-        (nameof(BastardSwordSwordWeaponItemFactory), 1),
+        (nameof(BastardSwordWeaponItemFactory), 1),
         (nameof(BroadSwordWeaponItemFactory), 2),
         (nameof(CutlassWeaponItemFactory), 1),
         (nameof(DaggerWeaponItemFactory), 2),

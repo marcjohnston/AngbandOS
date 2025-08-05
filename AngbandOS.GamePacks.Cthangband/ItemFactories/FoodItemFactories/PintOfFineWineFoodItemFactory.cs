@@ -16,11 +16,10 @@ public class PintOfFineWineFoodItemFactory : ItemFactoryGameConfiguration
     public override int Cost => 2;
     public override string? DescriptionSyntax => "Pint~ of Fine Wine";
     public override int InitialNutritionalValue => 1000;
-    public override int Weight => 10;
     public override string? EatScriptBindingKey => nameof(SystemScriptsEnum.EatGoodFoodScript);
     public override string ItemClassBindingKey => nameof(FoodItemClass);
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(PintOfFineWineFoodItemFactoryItemEnhancement);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

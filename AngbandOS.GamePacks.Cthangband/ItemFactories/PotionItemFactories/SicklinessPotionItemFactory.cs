@@ -26,7 +26,6 @@ public class SicklinessPotionItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 4;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(LoseConstitutionAbilityScoreScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 
     /// <summary>
@@ -43,7 +42,7 @@ public class SicklinessPotionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override string? ItemEnhancementBindingKey => nameof(EasyKnowItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(SicklinessPotionItemFactoryItemEnhancement);
     public override int PackSort => 11;
 
     /// <summary>

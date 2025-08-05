@@ -21,5 +21,4 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
     public override int ToA => 35;
     public override int ToD => 0;
     public override int ToH => -8;
-    public override int Weight => 600;
 }

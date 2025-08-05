@@ -433,8 +433,6 @@ public class ItemFactoryGameConfiguration
     public virtual int BonusDamage { get; set; } = 0;
     public virtual int BonusHit { get; set; } = 0;
 
-    public virtual int Weight { get; set; } = 0;
-
     /// <summary>
     /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.
     /// </summary>

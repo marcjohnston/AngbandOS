@@ -18,7 +18,7 @@ public class OrbLightSourceItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Orb";
 
-    public override string? ItemEnhancementBindingKey => nameof(Radius4LightItemFactoryItemEnhancement);
+    public override string? ItemEnhancementBindingKey => nameof(OrbLightSourceItemFactoryItemEnhancement);
 
     public override bool IdentityCanBeSensed => true;
     public override int Cost => 1000;
@@ -31,7 +31,6 @@ public class OrbLightSourceItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override int Weight => 50;
 
     /// <summary>
     /// Returns false, because the player shouldn't be asked to stomp all Orbs of light. 
