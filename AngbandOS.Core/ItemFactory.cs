@@ -408,8 +408,6 @@ internal class ItemFactory : IGetKey, IToJson
     }
     public void Bind()
     {
-        if (ItemEnhancementBindingKey is not null && $"{Key}ItemEnhancement" != ItemEnhancementBindingKey)
-            Debug.Print(Key + " " + ItemEnhancementBindingKey);
         // TODO: We require an object but not from the game config
         ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
         ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
