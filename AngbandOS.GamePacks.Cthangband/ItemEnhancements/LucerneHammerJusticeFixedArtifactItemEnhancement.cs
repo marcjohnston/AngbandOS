@@ -1,7 +1,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class TheLucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
+public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
     // Justice drains life
