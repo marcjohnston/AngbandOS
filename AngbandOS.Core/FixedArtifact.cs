@@ -29,7 +29,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
 
         // Cut and paste
-        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Cost => ");
+        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override string Name => ");
         //if (property is null)
         //    throw new Exception("");
         //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow

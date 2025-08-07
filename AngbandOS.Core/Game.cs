@@ -13568,7 +13568,7 @@ internal class Game
             MsgPrint($"Your {oName} resist{s} cursing!");
             return;
         }
-        if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.RareItem != null))
+        if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.IsRare))
         {
             if (!oPtr.EffectivePropertySet.HeavyCurse)
             {

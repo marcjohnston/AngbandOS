@@ -208,6 +208,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             EasyKnow = EasyKnow,
             Feather = Feather,
             FreeAct = FreeAct,
+            FriendlyName = FriendlyName,
             HeavyCurse = HeavyCurse,
             HideType = HideType,
             HoldLife = HoldLife,
@@ -518,7 +519,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
     /// </summary>
-    public virtual string? FriendlyName { get; } = null;
+    private string? FriendlyName { get; } = null;
     #endregion
 
     #region ItemPropertySet Light-weight Virtual & Abstract Properties

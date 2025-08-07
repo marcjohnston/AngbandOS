@@ -48,7 +48,7 @@ internal class CreateRandomArtifactScript : Script, IScript, ICastSpellScript
             Game.MsgPrint($"The {oName} {are} already {s}!");
             okay = false;
         }
-        else if (oPtr.RareItem != null)
+        else if (oPtr.IsRare)
         {
             string are = oPtr.StackCount > 1 ? "are" : "is";
             s = oPtr.StackCount > 1 ? "rare items" : "a rare item";

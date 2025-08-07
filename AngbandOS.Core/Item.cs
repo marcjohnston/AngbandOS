@@ -142,7 +142,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentMental = IdentMental;
         clonedItem.EffectivePropertySet = EffectivePropertySet.Clone();
         clonedItem.FixedArtifact = FixedArtifact;
-        clonedItem.RareItem = RareItem;
         clonedItem.Discount = Discount;
         clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
         clonedItem.Inscription = Inscription;
@@ -939,10 +938,6 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (RareItem != other.RareItem)
-        {
-            return false;
-        }
         if (ActivationRechargeTimeRemaining != 0 || other.ActivationRechargeTimeRemaining != 0)
         {
             return false;
@@ -1009,10 +1004,9 @@ internal sealed class Item : IComparable<Item>
             {
                 basenm = FixedArtifact.Name;
             }
-            else if (RareItem != null && RareItem.FriendlyName != null)
+            else if (EffectivePropertySet.FriendlyName != null)
             {
-                basenm += ' ';
-                basenm += RareItem.FriendlyName; // This used to be oPtr.Name ... but Long Bow Bow of Velocity is wrong
+                basenm = $"{basenm} {EffectivePropertySet.FriendlyName}";
             }
         }
         return basenm;
@@ -1090,7 +1084,7 @@ internal sealed class Item : IComparable<Item>
             }
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(SpecialItemQualityRating));
         }
-        if (IsRare())
+        if (IsRare)
         {
             if (EffectivePropertySet.IsCursed || IsBroken)
             {
@@ -1148,7 +1142,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(SpecialItemQualityRating));
         }
-        if (IsRare())
+        if (IsRare)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1565,10 +1559,7 @@ internal sealed class Item : IComparable<Item>
         return false;
     }
 
-    public bool IsRare()
-    {
-        return RareItem != null;
-    }
+    public bool IsRare => EffectivePropertySet.HasKeyedItemEnhancements("rare");
 
     public EffectivePropertySet ObjectFlagsKnown()
     {
@@ -2467,11 +2458,6 @@ internal sealed class Item : IComparable<Item>
     #region Item Properties Management
     public FixedArtifact? FixedArtifact = null;
 
-    /// <summary>
-    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
-    /// </summary>
-    public ItemEnhancement? RareItem; // TODO: This should be encapsulated.  If this item is a rare item, this will be not null.
-
     public EffectivePropertySet EffectivePropertySet;
 
     /// <summary>
@@ -2491,7 +2477,7 @@ internal sealed class Item : IComparable<Item>
         if (rareItem == null)
         {
             // Check to see if we need to remove properties.
-            if (RareItem != null)
+            if (IsRare)
             {
                 Game.TreasureRating -= rareItem.TreasureRating;
                 EffectivePropertySet.RemoveEnhancement("rare");
@@ -2528,7 +2514,6 @@ internal sealed class Item : IComparable<Item>
             roRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
             Game.TreasureRating += rareItem.TreasureRating;
             EffectivePropertySet.AddEnhancement("rare", roRareItemCharacteristics.ToReadOnly());
-            RareItem = rareItem;
         }
     }
 

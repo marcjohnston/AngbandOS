@@ -49,7 +49,7 @@ internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IActivateIt
             {
                 continue;
             }
-            if (item.IsArtifact || item.IsRare())
+            if (item.IsArtifact || item.IsRare)
             {
                 continue;
             }

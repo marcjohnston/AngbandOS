@@ -86,6 +86,7 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.DreadCurse);
         RegisterBoolPropertyFactory(PropertyEnum.EasyKnow);
         RegisterBoolPropertyFactory(PropertyEnum.Feather);
+        RegisterReferencePropertyFactory<string>(PropertyEnum.FriendlyName);
         RegisterBoolPropertyFactory(PropertyEnum.FreeAct);
         RegisterBoolPropertyFactory(PropertyEnum.HeavyCurse);
         RegisterBoolPropertyFactory(PropertyEnum.HideType);
@@ -325,12 +326,28 @@ internal class EffectivePropertySet
         return value;
     }
 
+    public T? GetReferenceValue<T>(PropertyEnum propertyEnum) where T : class
+    {
+        PropertyValue effectiveItemProperty = GetValue(propertyEnum);
+        NullableReferencePropertyValue<T> referencePropertyValue = (NullableReferencePropertyValue<T>)effectiveItemProperty;
+        T? value = referencePropertyValue.Value;
+        return value;
+    }
+
     private void SetValue(PropertyEnum propertyEnum, PropertyValue propertyValue)
     {
         // Retrieve the index for the property.
         int index = (int)propertyEnum;
 
         _writeProperties[index] = propertyValue;
+    }
+
+    public void SetReferenceValue<T>(PropertyEnum propertyEnum, T? propertyValue) where T : class
+    {
+        // Retrieve the index for the property.
+        int index = (int)propertyEnum;
+
+        _writeProperties[index] = new NullableReferencePropertyValue<T>(propertyValue);
     }
 
     public void SetIntValue(PropertyEnum propertyEnum, int value)
@@ -606,11 +623,11 @@ internal class EffectivePropertySet
     {
         get
         {
-            return default;
+            return GetReferenceValue<Activation>(PropertyEnum.Activation);
         }
         set
         {
-
+            SetReferenceValue<Activation>(PropertyEnum.Activation, value);
         }
     }
     public bool Aggravate
@@ -639,11 +656,11 @@ internal class EffectivePropertySet
     {
         get
         {
-            return default;
+            return GetReferenceValue<ArtifactBias>(PropertyEnum.ArtifactBias);
         }
         set
         {
-
+            SetReferenceValue<ArtifactBias>(PropertyEnum.ArtifactBias, value);
         }
     }
     public bool Blessed
@@ -842,6 +859,17 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.FreeAct, value);
+        }
+    }
+    public string? FriendlyName
+    {
+        get
+        {
+            return GetReferenceValue<string>(PropertyEnum.FriendlyName);
+        }
+        set
+        {
+            SetReferenceValue<string>(PropertyEnum.FriendlyName, value);
         }
     }
     public bool HeavyCurse

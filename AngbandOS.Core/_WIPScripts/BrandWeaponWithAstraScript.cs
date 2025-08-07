@@ -27,7 +27,7 @@ internal class BrandWeaponWithAstraScript : Script, IScript, ICastSpellScript
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null)
         {
-            if (!item.IsArtifact && !item.IsRare() && !item.EffectivePropertySet.IsCursed)
+            if (!item.IsArtifact && !item.IsRare && !item.EffectivePropertySet.IsCursed)
             {
                 string act;
                 string itemName = item.GetDescription(false);

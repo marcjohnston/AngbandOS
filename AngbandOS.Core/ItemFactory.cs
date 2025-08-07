@@ -408,10 +408,10 @@ internal class ItemFactory : IGetKey, IToJson
         ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
         ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
 
-// Cut and paste
-//        string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int Cost =>");
-//        if (prop is not null)
-//            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.Key, prop);
+        // Cut and paste
+        //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override string Name =>");
+        //if (prop is not null)
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.Key, prop);
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -546,7 +546,7 @@ internal class ItemFactory : IGetKey, IToJson
     public int GetAdditionalMassProduceCount(Item item)
     {
         // Rare items will not mass produce.
-        if (item.RareItem != null)
+        if (item.IsRare)
         {
             return 0;
         }

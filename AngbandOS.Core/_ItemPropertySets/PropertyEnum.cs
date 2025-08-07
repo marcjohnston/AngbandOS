@@ -58,6 +58,7 @@ internal enum PropertyEnum
     EasyKnow,
     Feather,
     FreeAct,
+    FriendlyName,
     HeavyCurse,
     HideType,
     HoldLife,
