@@ -4,4 +4,5 @@ public class MetalCapHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigu
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 20;
+    public override int Cost => 30;
 }

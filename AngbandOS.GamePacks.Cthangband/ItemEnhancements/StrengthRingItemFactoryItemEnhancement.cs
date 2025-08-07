@@ -6,4 +6,5 @@ public class StrengthRingItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override bool HideType => true;
     public override bool Str => true; // TODO: The bonus value is controlled by a script
     public override int Weight => 2;
+    public override int Cost => 500;
 }

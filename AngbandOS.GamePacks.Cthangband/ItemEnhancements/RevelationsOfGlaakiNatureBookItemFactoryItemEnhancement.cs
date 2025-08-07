@@ -8,4 +8,5 @@ public class RevelationsOfGlaakiNatureBookItemFactoryItemEnhancement : ItemEnhan
     public override bool IgnoreFire => true;
     public override bool EasyKnow => true;
     public override int Weight => 30;
+    public override int Cost => 25000;
 }

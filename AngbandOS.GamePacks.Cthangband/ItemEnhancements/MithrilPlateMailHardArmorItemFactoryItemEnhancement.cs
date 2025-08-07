@@ -5,4 +5,5 @@ public class MithrilPlateMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
     public override bool IgnoreAcid => true;
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 300;
+    public override int Cost => 15000;
 }

@@ -4,4 +4,5 @@ public class LargeLeatherShieldItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 100;
+    public override int Cost => 120;
 }

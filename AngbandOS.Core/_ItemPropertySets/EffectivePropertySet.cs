@@ -79,6 +79,7 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.Cha);
         RegisterBoolPropertyFactory(PropertyEnum.Chaotic);
         RegisterBoolPropertyFactory(PropertyEnum.Con);
+        RegisterIntPropertyFactory(PropertyEnum.Cost);
         RegisterBoolPropertyFactory(PropertyEnum.IsCursed);
         RegisterBoolPropertyFactory(PropertyEnum.Dex);
         RegisterBoolPropertyFactory(PropertyEnum.DrainExp);
@@ -177,7 +178,7 @@ internal class EffectivePropertySet
             _overrideProperties[index] = itemPropertyFactory.InstantiateNullable();
         }
     }
-    private Dictionary<string, ReadOnlyPropertySet> _enhancements = new Dictionary<string, ReadOnlyPropertySet>();
+    private Dictionary<string, List<ReadOnlyPropertySet>> _enhancements = new Dictionary<string, List<ReadOnlyPropertySet>>();
     private PropertyValue[] _writeProperties;
     private PropertyValue[] _overrideProperties;
     public EffectivePropertySet Clone()
@@ -186,9 +187,12 @@ internal class EffectivePropertySet
         EffectivePropertySet effectivePropertySet = new EffectivePropertySet();
 
         // Copy the enhancements.  These are immutable, so we can simply reference them.
-        foreach (KeyValuePair<string, ReadOnlyPropertySet> enhancement in _enhancements)
+        foreach (KeyValuePair<string, List<ReadOnlyPropertySet>> enhancement in _enhancements)
         {
-            effectivePropertySet.AddEnhancement(enhancement.Key, enhancement.Value);
+            foreach (ReadOnlyPropertySet readOnlyPropertySet in enhancement.Value)
+            {
+                effectivePropertySet.AddEnhancement(enhancement.Key, readOnlyPropertySet);
+            }
         }
 
         // Clone the override properties.
@@ -223,7 +227,12 @@ internal class EffectivePropertySet
 
     public void AddEnhancement(string key, ReadOnlyPropertySet readOnlyPropertySet) 
     {
-        _enhancements.Add(key, readOnlyPropertySet);
+        if (!_enhancements.TryGetValue(key, out List<ReadOnlyPropertySet>? readOnlyPropertySetList))
+        {
+            readOnlyPropertySetList = new List<ReadOnlyPropertySet>();
+            _enhancements.Add(key, readOnlyPropertySetList);
+        }
+        readOnlyPropertySetList.Add(readOnlyPropertySet);
     }
     public void AddEnhancement(ReadOnlyPropertySet readOnlyPropertySet)
     {
@@ -263,6 +272,12 @@ internal class EffectivePropertySet
     {
         Set(PropertyEnum.HeavyCurse, new BoolPropertyValue(false));
     }
+
+    public bool HasKeyedItemEnhancements(string key)
+    {
+        return _enhancements.ContainsKey(key);
+    }
+
     private PropertyValue GetValue(PropertyEnum propertyEnum)
     {
         // Retrieve the index for the property.
@@ -274,10 +289,14 @@ internal class EffectivePropertySet
         // Retrieve a default value from the factory.
         PropertyValue itemProperty = itemPropertyFactory.Instantiate();
 
-        // Merge all of the immutable enhancements.
-        foreach (ReadOnlyPropertySet effectivePropertySet in _enhancements.Values)
+        // Merge all of the immutable enhancements across all of the keys.
+        foreach (List<ReadOnlyPropertySet> readOnlyPropertySetList in _enhancements.Values)
         {
-            itemProperty = itemProperty.Merge(effectivePropertySet.GetValue(propertyEnum));
+            // For each key, there may be multiple item enhancements.
+            foreach (ReadOnlyPropertySet readOnlyPropertySet in readOnlyPropertySetList)
+            {
+                itemProperty = itemProperty.Merge(readOnlyPropertySet.GetValue(propertyEnum));
+            }
         }
 
         // Merge the writable enhancements.
@@ -735,6 +754,17 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.Con, value);
+        }
+    }
+    public int Cost
+    {
+        get
+        {
+            return GetIntValue(PropertyEnum.Cost);
+        }
+        set
+        {
+            SetIntValue(PropertyEnum.Cost, value);
         }
     }
     public bool IsCursed

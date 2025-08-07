@@ -7,4 +7,5 @@ public class ShadowCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigur
     public override bool ResLight => true;
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 5;
+    public override int Cost => 7500;
 }

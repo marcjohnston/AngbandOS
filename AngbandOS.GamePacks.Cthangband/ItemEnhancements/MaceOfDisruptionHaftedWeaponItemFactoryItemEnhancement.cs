@@ -8,4 +8,5 @@ public class MaceOfDisruptionHaftedWeaponItemFactoryItemEnhancement : ItemEnhanc
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 400;
+    public override int Cost => 4300;
 }

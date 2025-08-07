@@ -31,4 +31,5 @@ public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool Stealth => true;
     public override bool Str => true;
     public override bool Wis => true;
+    public override int Cost => 75000;
 }

@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.GamePacks.Cthangband;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
 public class LongBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
@@ -9,4 +9,5 @@ public class LongBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 40;
+    public override int Cost => 120;
 }

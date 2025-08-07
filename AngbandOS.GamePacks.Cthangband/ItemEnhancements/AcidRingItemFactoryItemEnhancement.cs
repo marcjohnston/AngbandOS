@@ -7,4 +7,5 @@ public class AcidRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
     public override bool IgnoreAcid => true;
     public override bool ResAcid => true;
     public override int Weight => 2;
+    public override int Cost => 2000;
 }

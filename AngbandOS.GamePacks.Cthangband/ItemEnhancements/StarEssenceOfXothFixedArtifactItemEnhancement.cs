@@ -20,4 +20,5 @@ public class StarEssenceOfXothFixedArtifactItemEnhancement : ItemEnhancementGame
     /// Returns a value of 1 to add to the radius of light for a star of essence which provides no light.
     /// </summary>
     public override int Radius => 1;
+    public override int Cost => 32500;
 }

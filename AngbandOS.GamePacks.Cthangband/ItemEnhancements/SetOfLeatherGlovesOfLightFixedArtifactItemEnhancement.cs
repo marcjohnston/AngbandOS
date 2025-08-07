@@ -17,4 +17,5 @@ public class SetOfLeatherGlovesOfLightFixedArtifactItemEnhancement : ItemEnhance
     public override int Radius => 3;
     public override bool ResLight => true;
     public override bool SustCon => true;
+    public override int Cost => 30000;
 }

@@ -28,4 +28,5 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool SlayTroll => true;
     public override bool Str => true;
     public override bool SustDex => true;
+    public override int Cost => 80000;
 }

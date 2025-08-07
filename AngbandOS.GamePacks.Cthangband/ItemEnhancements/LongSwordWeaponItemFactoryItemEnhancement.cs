@@ -7,4 +7,5 @@ public class LongSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 130;
+    public override int Cost => 300;
 }

@@ -27,6 +27,21 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public void Bind()
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
+
+        // Cut and paste
+        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Cost => ");
+        //if (property is null)
+        //    throw new Exception("");
+        //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
+        //MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
+
+        //if (mappedItemEnhancements.Length == 0)
+        //    throw new Exception("");
+        //foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
+        //{
+        //    mappedItemEnhancement.Bind();
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.Key, property);
+        //}
     }
 
     public string ToJson()
@@ -72,11 +87,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
 
     public virtual ColorEnum Color => ColorEnum.White; // TODO: This must be used outside of the ItemEnhancement
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
-
-    /// <summary>
-    /// Overrides the BaseItemFactory Cost
-    /// </summary>
-    public abstract int Cost { get; } // TODO: Need to convert this to an enhancement .. this also doesn't appear to be copied
 
     /// <summary>
     /// Overrides the BaseItemFactory Cost

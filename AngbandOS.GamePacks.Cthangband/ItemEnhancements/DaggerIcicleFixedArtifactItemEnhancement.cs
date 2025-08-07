@@ -25,4 +25,5 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool ShowMods => true;
     public override bool SlowDigest => true;
     public override bool Speed => true;
+    public override int Cost => 50000;
 }

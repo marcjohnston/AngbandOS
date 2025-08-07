@@ -6,4 +6,5 @@ public class TwoHandedFlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 280;
+    public override int Cost => 590;
 }

@@ -7,4 +7,5 @@ public class PickDiggingWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 150;
+    public override int Cost => 50;
 }

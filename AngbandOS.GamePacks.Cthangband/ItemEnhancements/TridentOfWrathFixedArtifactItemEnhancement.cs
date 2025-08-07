@@ -23,4 +23,5 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool SlayUndead => true;
     public override bool Str => true;
     public override int Weight => 230;
+    public override int Cost => 90000;
 }

@@ -22,4 +22,5 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
     public override bool SeeInvis => true;
     public override bool Speed => true;
     public override bool Wis => true;
+    public override int Cost => 150000;
 }

@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class RemoveCurseStaffItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 50;
+    public override int Cost => 500;
 }

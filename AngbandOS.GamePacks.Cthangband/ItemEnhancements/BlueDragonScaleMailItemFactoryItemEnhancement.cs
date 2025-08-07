@@ -11,4 +11,5 @@ public class BlueDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool ResElec => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
+    public override int Cost => 35000;
 }

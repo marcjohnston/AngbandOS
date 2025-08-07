@@ -16,4 +16,5 @@ public class SetOfLeatherGlovesCalfskinFixedArtifactItemEnhancement : ItemEnhanc
     public override string? BonusStrengthRollExpression => "2";
     public override bool ShowMods => true;
     public override bool Str => true;
+    public override int Cost => 36000;
 }

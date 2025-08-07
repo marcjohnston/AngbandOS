@@ -28,4 +28,5 @@ public class ScytheOfGharneFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool ResLight => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
+    public override int Cost => 18000;
 }

@@ -4,4 +4,5 @@ public class RibbedPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGam
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 380;
+    public override int Cost => 1500;
 }

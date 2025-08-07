@@ -27,4 +27,5 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
     public override bool SeeInvis => true;
     public override bool Stealth => true;
     public override bool Wis => true;
+    public override int Cost => 135000;
 }

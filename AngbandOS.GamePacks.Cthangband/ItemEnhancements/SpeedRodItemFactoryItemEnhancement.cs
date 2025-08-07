@@ -4,4 +4,5 @@ public class SpeedRodItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
 {
     public override bool EasyKnow => true;
     public override int Weight => 15;
+    public override int Cost => 50000;
 }

@@ -7,4 +7,5 @@ public class LochaberAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 250;
+    public override int Cost => 750;
 }

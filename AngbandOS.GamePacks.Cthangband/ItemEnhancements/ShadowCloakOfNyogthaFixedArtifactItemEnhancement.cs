@@ -24,4 +24,5 @@ public class ShadowCloakOfNyogthaFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool Speed => true;
     public override bool Stealth => true;
     public override bool Wis => true;
+    public override int Cost => 55000;
 }

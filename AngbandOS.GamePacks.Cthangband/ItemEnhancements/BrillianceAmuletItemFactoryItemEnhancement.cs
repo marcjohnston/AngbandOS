@@ -7,4 +7,5 @@ public class BrillianceAmuletItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool Int => true;
     public override bool Wis => true;
     public override int Weight => 3;
+    public override int Cost => 500;
 }

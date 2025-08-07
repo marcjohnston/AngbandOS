@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MetalShodBootsItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 80;
+    public override int Cost => 50;
 }

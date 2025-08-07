@@ -1595,17 +1595,12 @@ internal sealed class Item : IComparable<Item>
     public int GetRealValue()
     {
         // If the factory reports the item as valueless, then the item is valueless.
-        if (_factory.Cost == 0)
-        {
-            return 0;
-        }
-        int value = _factory.Cost;
-
         if (EffectivePropertySet.Valueless)
         {
             return 0;
         }
 
+        int value = EffectivePropertySet.Cost;
         if (EffectivePropertySet.Chaotic)
         {
             value += Game.BonusChaoticValue;
@@ -2082,7 +2077,7 @@ internal sealed class Item : IComparable<Item>
             }
             if (IsFlavorAware)
             {
-                return _factory.Cost;
+                return EffectivePropertySet.Cost;
             }
             return BaseValue;
         }
@@ -2169,7 +2164,7 @@ internal sealed class Item : IComparable<Item>
         FixedArtifact = fixedArtifact;
         EffectivePropertySet.AddEnhancement("fixed", fixedArtifactItemPropertySet.ToReadOnly());
 
-        if (fixedArtifact.Cost == 0)
+        if (EffectivePropertySet.Cost <= 0) // TODO: This was the fixedartifiact cost == 0, then isbroken = true.  should be enumerated out into the enhancements.
         {
             IsBroken = true;
         }
@@ -2272,7 +2267,7 @@ internal sealed class Item : IComparable<Item>
         {
             Game.TreasureRating += EffectivePropertySet.TreasureRating;
         }
-        if (_factory.Cost == 0)
+        if (EffectivePropertySet.Cost == 0)
         {
             IsBroken = true;
         }
@@ -2490,7 +2485,6 @@ internal sealed class Item : IComparable<Item>
     /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
     /// </summary>
     public ItemFactory GetFactory => _factory; // TODO: Refactor the ItemFilter to not need this.
-
 
     public void SetRareItem(ItemEnhancement? rareItem)
     {

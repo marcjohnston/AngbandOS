@@ -19,4 +19,5 @@ public class BattleAxeSpleenSlicerFixedArtifactItemEnhancement : ItemEnhancement
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool Str => true;
+    public override int Cost => 21000;
 }

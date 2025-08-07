@@ -7,4 +7,5 @@ public class LightAndDarknessResistanceRingItemFactoryItemEnhancement : ItemEnha
     public override bool ResDark => true;
     public override bool ResLight => true;
     public override int Weight => 2;
+    public override int Cost => 3000;
 }

@@ -25,4 +25,5 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool ShowMods => true;
     public override bool SlayGiant => true;
     public override bool SlayUndead => true;
+    public override int Cost => 22000;
 }

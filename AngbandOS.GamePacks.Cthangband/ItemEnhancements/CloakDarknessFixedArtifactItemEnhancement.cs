@@ -20,4 +20,5 @@ public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool ResDark => true;
     public override bool Stealth => true;
     public override bool Wis => true;
+    public override int Cost => 13000;
 }

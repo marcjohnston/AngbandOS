@@ -6,4 +6,5 @@ public class ShardResistanceRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool EasyKnow => true;
     public override bool ResShards => true;
     public override int Weight => 2;
+    public override int Cost => 3000;
 }

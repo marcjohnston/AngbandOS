@@ -7,4 +7,5 @@ public class BastardSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 140;
+    public override int Cost => 350;
 }

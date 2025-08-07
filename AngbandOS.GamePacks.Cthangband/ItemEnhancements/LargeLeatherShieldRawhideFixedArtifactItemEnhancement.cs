@@ -16,4 +16,5 @@ public class LargeLeatherShieldRawhideFixedArtifactItemEnhancement : ItemEnhance
     public override bool ResFire => true;
     public override bool ResLight => true;
     public override int Weight => -40;
+    public override int Cost => 12000;
 }

@@ -361,12 +361,6 @@ public class ItemFactoryGameConfiguration
     /// </summary>
     public virtual (int level, int chance)[]? DepthsFoundAndChances { get; set; } = null; // TODO: Convert the chance into a Roll object
 
-    /// <summary>
-    /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should
-    /// still have some value if it can be recharged.
-    /// </summary>
-    public virtual int Cost { get; set; } = 0;
-
     public virtual int DamageDice { get; set; } = 0;
 
     public virtual int DamageSides { get; set; } = 0;

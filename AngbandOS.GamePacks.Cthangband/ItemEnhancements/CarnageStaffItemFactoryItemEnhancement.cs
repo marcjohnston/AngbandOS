@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CarnageStaffItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 50;
+    public override int Cost => 3500;
 }

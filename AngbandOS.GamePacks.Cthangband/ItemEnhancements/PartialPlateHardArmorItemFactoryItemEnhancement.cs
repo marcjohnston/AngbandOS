@@ -4,4 +4,5 @@ public class PartialPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGa
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 260;
+    public override int Cost => 1200;
 }

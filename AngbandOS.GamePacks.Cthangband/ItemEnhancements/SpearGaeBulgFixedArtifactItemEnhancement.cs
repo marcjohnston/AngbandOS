@@ -21,4 +21,5 @@ public class SpearGaeBulgFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool SlayUndead => true;
     public override bool Speed => true;
     public override bool Stealth => true;
+    public override int Cost => 30000;
 }

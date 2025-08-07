@@ -5,4 +5,5 @@ public class ExtraAttacksRingItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override bool Blows => true;
     public override int Weight => 2;
+    public override int Cost => 100000;
 }

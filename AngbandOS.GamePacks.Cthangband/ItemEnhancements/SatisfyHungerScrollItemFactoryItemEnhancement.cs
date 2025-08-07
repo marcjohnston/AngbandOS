@@ -4,4 +4,5 @@ public class SatisfyHungerScrollItemFactoryItemEnhancement : ItemEnhancementGame
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
+    public override int Cost => 10;
 }

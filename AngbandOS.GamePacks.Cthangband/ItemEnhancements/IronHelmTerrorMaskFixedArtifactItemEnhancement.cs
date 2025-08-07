@@ -29,4 +29,5 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool ShowMods => true;
     public override bool Teleport => true;
     public override bool Wis => true;
+    public override int Cost => 40000;
 }

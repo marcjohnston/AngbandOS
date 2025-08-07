@@ -19,4 +19,5 @@ public class ExecutionersSwordOfNyarlathotepFixedArtifactItemEnhancement : ItemE
     public override bool SlayTroll => true;
     public override bool SlayUndead => true;
     public override bool Vorpal => true;
+    public override int Cost => 111000;
 }

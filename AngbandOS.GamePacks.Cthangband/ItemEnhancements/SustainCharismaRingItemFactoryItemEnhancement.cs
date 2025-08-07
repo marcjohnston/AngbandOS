@@ -6,4 +6,5 @@ public class SustainCharismaRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool EasyKnow => true;
     public override bool SustCha => true;
     public override int Weight => 2;
+    public override int Cost => 500;
 }

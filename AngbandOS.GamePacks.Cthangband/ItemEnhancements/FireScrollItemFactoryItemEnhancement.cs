@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.GamePacks.Cthangband;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
 public class FireScrollItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
@@ -6,4 +6,5 @@ public class FireScrollItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool IgnoreFire=> true;
     public override bool EasyKnow => true;
     public override int Weight => 5;
+    public override int Cost => 1000;
 }

@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -12,4 +12,5 @@ public class WoodenTorchLightSourceItemFactoryItemEnhancement : ItemEnhancementG
     public override bool EasyKnow => true;
     public override int Radius => 1;
     public override int Weight => 30;
+    public override int Cost => 2;
 }

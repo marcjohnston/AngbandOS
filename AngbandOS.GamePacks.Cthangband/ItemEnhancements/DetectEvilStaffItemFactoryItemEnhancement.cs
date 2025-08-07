@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DetectEvilStaffItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 50;
+    public override int Cost => 350;
 }

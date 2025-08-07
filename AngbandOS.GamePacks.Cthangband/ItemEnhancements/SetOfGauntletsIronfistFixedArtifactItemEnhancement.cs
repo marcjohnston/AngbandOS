@@ -11,4 +11,5 @@ public class SetOfGauntletsIronfistFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ResFire => true;
+    public override int Cost => 15000;
 }

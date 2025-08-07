@@ -4,4 +4,5 @@ public class GoldenCrownArmorItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override bool IgnoreAcid => true;
     public override int Weight => 30;
+    public override int Cost => 1000;
 }

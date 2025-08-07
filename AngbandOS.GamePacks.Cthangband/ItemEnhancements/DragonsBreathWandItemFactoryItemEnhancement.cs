@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.GamePacks.Cthangband;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
 public class DragonsBreathWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
@@ -8,4 +8,5 @@ public class DragonsBreathWandItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Weight => 10;
+    public override int Cost => 2400;
 }

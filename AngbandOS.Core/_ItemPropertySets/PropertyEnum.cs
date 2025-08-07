@@ -45,6 +45,12 @@ internal enum PropertyEnum
     Cha,
     Chaotic,
     Con,
+
+    /// <summary>
+    /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should
+    /// still have some value if it can be recharged.
+    /// </summary>
+    Cost,
     IsCursed,
     Dex,
     DrainExp,

@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -24,7 +24,6 @@ public class WisdomAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override string? ItemEnhancementBindingKey => nameof(WisdomAmuletItemFactoryItemEnhancement);
-    public override int Cost => 500;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

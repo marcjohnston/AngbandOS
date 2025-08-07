@@ -1,9 +1,9 @@
 // AngbandOS: 2022 Marc Johnston
 //
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// This game is released under the ï¿½Angband Licenseï¿½, defined as: ï¿½ï¿½ 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
+// copies. Other copyrights may also apply.ï¿½
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
@@ -13,7 +13,6 @@ public class PieceOfElvishWaybreadFoodItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Piece of Elvish Waybread";
 
-    public override int Cost => 10;
     public override string? DescriptionSyntax => "Piece~ of Elvish Waybread";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

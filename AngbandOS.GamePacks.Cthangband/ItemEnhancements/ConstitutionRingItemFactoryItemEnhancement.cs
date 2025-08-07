@@ -6,4 +6,5 @@ public class ConstitutionRingItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool Con => true;
     public override bool HideType => true;
     public override int Weight => 2;
+    public override int Cost => 500;
 }

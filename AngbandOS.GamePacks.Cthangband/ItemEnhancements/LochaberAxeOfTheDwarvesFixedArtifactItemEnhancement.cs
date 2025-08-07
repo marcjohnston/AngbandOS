@@ -22,4 +22,5 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
     public override bool Tunnel => true;
+    public override int Cost => 80000;
 }

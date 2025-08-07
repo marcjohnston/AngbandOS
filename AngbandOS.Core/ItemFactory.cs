@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Diagnostics;
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -110,7 +108,6 @@ internal class ItemFactory : IGetKey, IToJson
         HasQualityRatings = itemFactoryGameConfiguration.HasQualityRatings;
         ArmorClass = itemFactoryGameConfiguration.ArmorClass;
         DepthsFoundAndChances = itemFactoryGameConfiguration.DepthsFoundAndChances;
-        Cost = itemFactoryGameConfiguration.Cost;
         DamageDice = itemFactoryGameConfiguration.DamageDice;
         DamageSides = itemFactoryGameConfiguration.DamageSides;
         LevelNormallyFound = itemFactoryGameConfiguration.LevelNormallyFound;
@@ -301,7 +298,6 @@ internal class ItemFactory : IGetKey, IToJson
             HasQualityRatings = HasQualityRatings,
             ArmorClass = ArmorClass,
             DepthsFoundAndChances = DepthsFoundAndChances,
-            Cost = Cost,
             DamageDice = DamageDice,
             DamageSides = DamageSides,
             LevelNormallyFound = LevelNormallyFound,
@@ -412,6 +408,10 @@ internal class ItemFactory : IGetKey, IToJson
         ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
         ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
 
+// Cut and paste
+//        string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int Cost =>");
+//        if (prop is not null)
+//            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.Key, prop);
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -2088,12 +2088,6 @@ internal class ItemFactory : IGetKey, IToJson
     /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by default.
     /// </summary>
     public virtual (int level, int chance)[]? DepthsFoundAndChances { get; } = null; // TODO: Convert the chance into a Roll object
-
-    /// <summary>
-    /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should
-    /// still have some value if it can be recharged.
-    /// </summary>
-    public int Cost { get; }
 
     public virtual int DamageDice { get; } = 0;
 

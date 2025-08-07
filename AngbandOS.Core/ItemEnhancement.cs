@@ -65,6 +65,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Cha = itemEnhancementGameConfiguration.Cha;
         Chaotic = itemEnhancementGameConfiguration.Chaotic;
         Con = itemEnhancementGameConfiguration.Con;
+        Cost = itemEnhancementGameConfiguration.Cost;
         IsCursed = itemEnhancementGameConfiguration.IsCursed;
         Dex = itemEnhancementGameConfiguration.Dex;
         DrainExp = itemEnhancementGameConfiguration.DrainExp;
@@ -199,6 +200,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Cha = Cha,
             Chaotic = Chaotic,
             Con = Con,
+            Cost = Cost,
             IsCursed = IsCursed,
             Dex = Dex,
             DrainExp = DrainExp,
@@ -364,6 +366,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Cha = Cha,
             Chaotic = Chaotic,
             Con = Con,
+            Cost = Cost,
             IsCursed = IsCursed,
             Dex = Dex,
             DrainExp = DrainExp,
@@ -614,6 +617,8 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     public virtual bool Con { get; } = false;
+
+    public virtual int Cost { get; } = 0;
     
     /// <inheritdoc />
     public virtual bool IsCursed { get; } = false;

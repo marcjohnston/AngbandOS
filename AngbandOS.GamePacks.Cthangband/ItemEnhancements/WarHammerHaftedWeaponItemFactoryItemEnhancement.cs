@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.GamePacks.Cthangband;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
 public class WarHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
@@ -7,4 +7,5 @@ public class WarHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 120;
+    public override int Cost => 225;
 }

@@ -4,4 +4,5 @@ public class PieceOfDwarfBreadFoodItemFactoryItemEnhancement : ItemEnhancementGa
 {
     public override bool EasyKnow => true;
     public override int Weight => 3;
+    public override int Cost => 16;
 }

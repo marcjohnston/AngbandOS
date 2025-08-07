@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.GamePacks.Cthangband;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
 public class DragonHelmItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
@@ -10,4 +10,5 @@ public class DragonHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool IgnoreFire => true;
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 50;
+    public override int Cost => 10000;
 }

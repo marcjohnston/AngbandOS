@@ -6,4 +6,5 @@ public class SearchingRingItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override bool HideType => true;
     public override bool Search => true;
     public override int Weight => 2;
+    public override int Cost => 250;
 }

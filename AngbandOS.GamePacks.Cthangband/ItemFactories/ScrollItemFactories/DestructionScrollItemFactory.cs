@@ -1,9 +1,9 @@
 // AngbandOS: 2022 Marc Johnston
 //
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// This game is released under the ï¿½Angband Licenseï¿½, defined as: ï¿½ï¿½ 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
+// copies. Other copyrights may also apply.ï¿½
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
@@ -19,7 +19,6 @@ public class DestructionScrollItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "Scroll~ titled \"$Flavor$\" of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
     public override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
-    public override int Cost => 250;
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

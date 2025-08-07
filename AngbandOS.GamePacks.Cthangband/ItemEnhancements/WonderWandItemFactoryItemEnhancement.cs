@@ -8,4 +8,5 @@ public class WonderWandItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Weight => 10;
+    public override int Cost => 250;
 }

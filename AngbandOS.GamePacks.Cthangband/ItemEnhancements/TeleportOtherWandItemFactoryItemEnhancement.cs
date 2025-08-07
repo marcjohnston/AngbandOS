@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class TeleportOtherWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 10;
+    public override int Cost => 350;
 }

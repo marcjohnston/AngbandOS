@@ -16,4 +16,5 @@ public class CloakOfBarzaiFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool ResPois => true;
+    public override int Cost => 10000;
 }

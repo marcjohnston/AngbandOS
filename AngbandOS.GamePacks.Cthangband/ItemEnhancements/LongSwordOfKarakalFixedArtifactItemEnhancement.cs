@@ -43,4 +43,5 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SustInt => true;
     public override bool SustStr => true;
     public override bool SustWis => true;
+    public override int Cost => 150000;
 }

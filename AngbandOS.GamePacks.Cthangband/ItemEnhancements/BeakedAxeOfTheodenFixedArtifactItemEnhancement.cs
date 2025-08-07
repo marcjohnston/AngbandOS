@@ -20,4 +20,5 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
     public override bool Wis => true;
+    public override int Cost => 40000;
 }

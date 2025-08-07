@@ -4,4 +4,5 @@ public class SlimeMoldFoodItemFactoryItemEnhancement : ItemEnhancementGameConfig
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
+    public override int Cost => 2;
 }

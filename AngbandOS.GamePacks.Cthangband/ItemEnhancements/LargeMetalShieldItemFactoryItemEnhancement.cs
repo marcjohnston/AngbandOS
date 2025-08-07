@@ -4,4 +4,5 @@ public class LargeMetalShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 120;
+    public override int Cost => 200;
 }

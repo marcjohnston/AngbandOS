@@ -4,4 +4,5 @@ public class JewelEncrustedCrownArmorItemFactoryItemEnhancement : ItemEnhancemen
 {
     public override bool IgnoreAcid => true;
     public override int Weight => 40;
+    public override int Cost => 2000;
 }

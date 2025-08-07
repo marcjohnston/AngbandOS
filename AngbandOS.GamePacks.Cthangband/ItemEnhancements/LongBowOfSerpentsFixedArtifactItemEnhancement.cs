@@ -15,4 +15,5 @@ public class LongBowOfSerpentsFixedArtifactItemEnhancement : ItemEnhancementGame
     public override string? BonusDexterityRollExpression => "3";
     public override bool ShowMods => true;
     public override bool XtraMight => true;
+    public override int Cost => 20000;
 }

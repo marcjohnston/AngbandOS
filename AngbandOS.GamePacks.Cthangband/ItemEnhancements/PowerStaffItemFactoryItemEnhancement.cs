@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PowerStaffItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 50;
+    public override int Cost => 4000;
 }

@@ -34,4 +34,5 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayUndead => true;
     public override bool SustCha => true;
     public override bool Vorpal => true;
+    public override int Cost => 250000;
 }

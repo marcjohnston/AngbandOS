@@ -16,4 +16,5 @@ public class AmuletOfLobonFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool InstaArt => true;
     public override string? BonusConstitutionRollExpression => "2";
     public override bool ResFire => true;
+    public override int Cost => 60000;
 }

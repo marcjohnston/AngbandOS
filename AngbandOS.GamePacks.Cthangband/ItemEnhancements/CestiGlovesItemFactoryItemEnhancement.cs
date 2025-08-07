@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CestiGlovesItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 40;
+    public override int Cost => 100;
 }

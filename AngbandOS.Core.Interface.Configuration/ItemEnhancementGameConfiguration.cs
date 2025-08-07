@@ -100,6 +100,7 @@ public class ItemEnhancementGameConfiguration
     public virtual bool Cha { get; set; } = false;
     public virtual bool Chaotic { get; set; } = false;
     public virtual bool Con { get; set; } = false;
+    public virtual int Cost { get; set; } = 0;
     public virtual bool IsCursed { get; set; } = false;
     public virtual bool Dex { get; set; } = false;
     public virtual bool DrainExp { get; set; } = false;

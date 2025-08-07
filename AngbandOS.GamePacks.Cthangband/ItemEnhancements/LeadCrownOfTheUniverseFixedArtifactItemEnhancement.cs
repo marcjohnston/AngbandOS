@@ -44,4 +44,5 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool Str => true;
     public override bool Telepathy => true;
     public override bool Wis => true;
+    public override int Cost => 10000000;
 }

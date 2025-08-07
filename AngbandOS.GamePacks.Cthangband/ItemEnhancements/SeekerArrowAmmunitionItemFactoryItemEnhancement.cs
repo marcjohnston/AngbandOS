@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.GamePacks.Cthangband;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
 public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
@@ -7,5 +7,6 @@ public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 2;
+    public override int Cost => 20;
 }
 

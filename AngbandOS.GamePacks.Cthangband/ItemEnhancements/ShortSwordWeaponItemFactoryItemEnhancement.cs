@@ -7,4 +7,5 @@ public class ShortSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 80;
+    public override int Cost => 90;
 }

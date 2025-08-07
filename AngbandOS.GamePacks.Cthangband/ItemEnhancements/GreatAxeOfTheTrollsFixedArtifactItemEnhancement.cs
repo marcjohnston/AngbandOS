@@ -33,4 +33,5 @@ public class GreatAxeOfTheTrollsFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool SlayUndead => true;
     public override bool Str => true;
     public override bool Wis => true;
+    public override int Cost => 200000;
 }

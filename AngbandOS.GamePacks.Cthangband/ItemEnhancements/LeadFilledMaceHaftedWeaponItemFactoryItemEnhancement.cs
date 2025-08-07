@@ -6,4 +6,5 @@ public class LeadFilledMaceHaftedWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 180;
+    public override int Cost => 502;
 }

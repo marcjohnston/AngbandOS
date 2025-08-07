@@ -5,4 +5,5 @@ public class MithrilChainMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
     public override bool IgnoreAcid => true;
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 150;
+    public override int Cost => 7000;
 }

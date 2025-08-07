@@ -4,4 +4,5 @@ public class RestorationRodItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override bool EasyKnow => true;
     public override int Weight => 15;
+    public override int Cost => 25000;
 }

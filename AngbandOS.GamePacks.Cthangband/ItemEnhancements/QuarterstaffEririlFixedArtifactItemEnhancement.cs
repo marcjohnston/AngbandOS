@@ -25,4 +25,5 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
     public override bool Wis => true;
+    public override int Cost => 20000;
 }

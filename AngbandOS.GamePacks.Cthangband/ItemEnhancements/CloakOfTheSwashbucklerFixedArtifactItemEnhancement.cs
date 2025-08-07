@@ -20,4 +20,5 @@ public class CloakOfTheSwashbucklerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResFire => true;
+    public override int Cost => 35000;
 }

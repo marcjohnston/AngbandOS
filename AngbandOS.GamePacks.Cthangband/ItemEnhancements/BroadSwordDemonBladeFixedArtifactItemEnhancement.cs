@@ -27,4 +27,5 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool Stealth => true;
     public override int Weight => -20;
     public override bool Vorpal => true;
+    public override int Cost => 66666;
 }

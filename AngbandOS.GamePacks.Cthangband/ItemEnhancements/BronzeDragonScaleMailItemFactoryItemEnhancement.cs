@@ -11,4 +11,5 @@ public class BronzeDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool ResConf => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
+    public override int Cost => 25000;
 }

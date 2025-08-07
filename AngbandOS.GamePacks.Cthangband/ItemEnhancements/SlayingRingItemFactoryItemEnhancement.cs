@@ -5,4 +5,5 @@ public class SlayingRingItemFactoryItemEnhancement : ItemEnhancementGameConfigur
 {
     public override bool ShowMods => true;
     public override int Weight => 2;
+    public override int Cost => 1000;
 }

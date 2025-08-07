@@ -7,4 +7,5 @@ public class TeleportationRingItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool EasyKnow => true;
     public override bool Teleport => true;
     public override int Weight => 2;
+    public override int Cost => 250;
 }

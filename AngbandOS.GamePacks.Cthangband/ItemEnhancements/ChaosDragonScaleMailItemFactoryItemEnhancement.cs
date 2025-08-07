@@ -12,4 +12,5 @@ public class ChaosDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool ResDisen => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
+    public override int Cost => 65000;
 }

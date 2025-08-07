@@ -14,4 +14,5 @@ public class CloakShifterFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override string? BonusStealthRollExpression => "3";
     public override bool ResAcid => true;
     public override bool Stealth => true;
+    public override int Cost => 11000;
 }

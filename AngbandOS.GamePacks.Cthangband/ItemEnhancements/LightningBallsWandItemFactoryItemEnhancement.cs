@@ -5,4 +5,5 @@ public class LightningBallsWandItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool IgnoreElec => true;
     public override int Weight => 10;
+    public override int Cost => 1200;
 }

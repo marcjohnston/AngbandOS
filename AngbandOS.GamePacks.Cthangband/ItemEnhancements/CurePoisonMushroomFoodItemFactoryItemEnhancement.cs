@@ -4,4 +4,5 @@ public class CurePoisonMushroomFoodItemFactoryItemEnhancement : ItemEnhancementG
 {
     public override bool EasyKnow => true;
     public override int Weight => 1;
+    public override int Cost => 60;
 }

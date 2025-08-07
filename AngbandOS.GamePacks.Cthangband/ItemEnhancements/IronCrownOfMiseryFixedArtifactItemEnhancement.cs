@@ -26,4 +26,5 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
     public override int Radius => 3;
     public override bool Regen => true;
     public override bool SlowDigest => true;
+    public override int Cost => 0;
 }

@@ -16,4 +16,5 @@ public class DaggerOfThothFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool ResPois => true;
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
+    public override int Cost => 35000;
 }

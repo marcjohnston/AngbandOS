@@ -23,4 +23,5 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool Str => true;
+    public override int Cost => 150000;
 }

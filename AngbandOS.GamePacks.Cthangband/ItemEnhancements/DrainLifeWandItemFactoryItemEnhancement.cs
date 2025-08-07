@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DrainLifeWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 10;
+    public override int Cost => 1200;
 }

@@ -11,4 +11,5 @@ public class WhiteDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool ResCold => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
+    public override int Cost => 35000;
 }

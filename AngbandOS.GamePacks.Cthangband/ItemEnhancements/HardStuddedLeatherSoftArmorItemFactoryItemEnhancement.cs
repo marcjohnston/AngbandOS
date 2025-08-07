@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HardStuddedLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 110;
+    public override int Cost => 200;
 }

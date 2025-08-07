@@ -39,4 +39,5 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
     public override int Radius => 3;
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
+    public override int Cost => 200000;
 }

@@ -12,4 +12,5 @@ public class PseudoDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool ResLight => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
+    public override int Cost => 55000;
 }

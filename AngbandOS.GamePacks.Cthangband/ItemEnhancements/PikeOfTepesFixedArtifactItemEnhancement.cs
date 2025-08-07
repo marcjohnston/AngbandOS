@@ -27,4 +27,5 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool SlayTroll => true;
     public override bool SlowDigest => true;
     public override bool SustInt => true;
+    public override int Cost => 32000;
 }

@@ -3,4 +3,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ProtectionRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 2;
+    public override int Cost => 500;
 }

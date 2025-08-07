@@ -11,4 +11,5 @@ public class RedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool ResFire => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
+    public override int Cost => 100000;
 }

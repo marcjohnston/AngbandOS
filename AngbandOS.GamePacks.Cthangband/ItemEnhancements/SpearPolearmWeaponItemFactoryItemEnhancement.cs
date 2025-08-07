@@ -7,4 +7,5 @@ public class SpearPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 50;
+    public override int Cost => 36;
 }

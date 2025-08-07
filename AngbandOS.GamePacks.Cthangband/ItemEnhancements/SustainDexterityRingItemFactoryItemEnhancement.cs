@@ -6,4 +6,5 @@ public class SustainDexterityRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool EasyKnow => true;
     public override bool SustDex => true;
     public override int Weight => 2;
+    public override int Cost => 750;
 }

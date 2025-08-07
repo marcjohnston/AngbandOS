@@ -21,4 +21,5 @@ public class RingOfBastFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
     public override string? BonusStrengthRollExpression => "4";
     public override bool Speed => true;
     public override bool Str => true;
+    public override int Cost => 175000;
 }

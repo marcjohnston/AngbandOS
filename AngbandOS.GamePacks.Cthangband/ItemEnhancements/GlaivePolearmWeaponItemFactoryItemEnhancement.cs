@@ -7,4 +7,5 @@ public class GlaivePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 190;
+    public override int Cost => 363;
 }

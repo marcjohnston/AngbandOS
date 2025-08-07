@@ -16,4 +16,5 @@ public class MaceThunderFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool KillDragon => true;
     public override bool ShowMods => true;
     public override int Weight => 80;
+    public override int Cost => 50000;
 }

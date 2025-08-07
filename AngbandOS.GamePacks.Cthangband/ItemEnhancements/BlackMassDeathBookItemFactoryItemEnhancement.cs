@@ -4,4 +4,5 @@ public class BlackMassDeathBookItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool EasyKnow => true;
     public override int Weight => 30;
+    public override int Cost => 1000;
 }

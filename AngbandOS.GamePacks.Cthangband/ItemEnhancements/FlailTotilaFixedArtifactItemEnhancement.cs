@@ -23,4 +23,5 @@ public class FlailTotilaFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
     public override bool Stealth => true;
+    public override int Cost => 55000;
 }
