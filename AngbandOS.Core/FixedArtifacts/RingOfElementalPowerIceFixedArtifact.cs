@@ -9,6 +9,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact
 {
+    public override bool DisableStomp => true;
     private RingOfElementalPowerIceFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(NenyaRingItemFactory);
     public override string Name => "The Ring of Elemental Power (Ice)";

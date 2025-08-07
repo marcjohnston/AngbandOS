@@ -16,7 +16,6 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool Infra => true;
-    public override bool InstaArt => true;
     public override bool Int => true;
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a lead crown which provides no light.

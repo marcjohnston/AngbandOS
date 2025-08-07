@@ -17,7 +17,6 @@ public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ImFire => true;
-    public override bool InstaArt => true;
     public override bool Int => true;
     public override string? BonusCharismaRollExpression => "1";
     public override string? BonusConstitutionRollExpression => "1";

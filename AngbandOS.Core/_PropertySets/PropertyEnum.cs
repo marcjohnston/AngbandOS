@@ -72,7 +72,6 @@ internal enum PropertyEnum
     ImFire,
     Impact,
     Infra,
-    InstaArt,
     Int,
     KillDragon,
     NoMagic,

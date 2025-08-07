@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GemstoneLightSourceItemFactory : ItemFactoryGameConfiguration
 {
+    public override bool DisableStomp => true;
     public override string? EquipmentProcessWorldScriptBindingKey => nameof(SystemScriptsEnum.JewelJudgementDrainLifeScript);
 
     public override string SymbolBindingKey => nameof(AsteriskSymbol);

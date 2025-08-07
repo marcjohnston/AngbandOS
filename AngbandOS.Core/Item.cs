@@ -1808,10 +1808,6 @@ internal sealed class Item : IComparable<Item>
         {
             value += Game.BonusDreadCurseValue;
         }
-        if (EffectivePropertySet.InstaArt)
-        {
-            value += 0;
-        }
         if (EffectivePropertySet.Feather)
         {
             value += Game.BonusFeatherValue;

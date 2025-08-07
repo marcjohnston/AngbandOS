@@ -86,7 +86,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ImFire = itemEnhancementGameConfiguration.ImFire;
         Impact = itemEnhancementGameConfiguration.Impact;
         Infra = itemEnhancementGameConfiguration.Infra;
-        InstaArt = itemEnhancementGameConfiguration.InstaArt;
         Int = itemEnhancementGameConfiguration.Int;
         KillDragon = itemEnhancementGameConfiguration.KillDragon;
         NoMagic = itemEnhancementGameConfiguration.NoMagic;
@@ -222,7 +221,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImFire = ImFire,
             Impact = Impact,
             Infra = Infra,
-            InstaArt = InstaArt,
             Int = Int,
             KillDragon = KillDragon,
             NoMagic = NoMagic,
@@ -388,7 +386,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImFire = ImFire,
             Impact = Impact,
             Infra = Infra,
-            InstaArt = InstaArt,
             Int = Int,
             KillDragon = KillDragon,
             NoMagic = NoMagic,
@@ -680,10 +677,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool Infra { get; } = false;
-    
-    /// <inheritdoc />
-    public bool InstaArt { get; } = false;
-    
+       
     /// <inheritdoc />
     private bool Int { get; } = false;
     

@@ -15,7 +15,6 @@ public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool InstaArt => true;
     public override bool Int => true;
     public override string? BonusCharismaRollExpression => "1";
     public override string? BonusConstitutionRollExpression => "1";

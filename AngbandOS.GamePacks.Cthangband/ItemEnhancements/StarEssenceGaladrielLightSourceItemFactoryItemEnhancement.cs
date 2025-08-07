@@ -3,7 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class StarEssenceGaladrielLightSourceItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Radius => 2;
-    public override bool InstaArt => true;
     public override int Weight => 10;
     public override int Cost => 10000;
 }

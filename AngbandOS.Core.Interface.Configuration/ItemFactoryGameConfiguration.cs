@@ -186,6 +186,8 @@ public class ItemFactoryGameConfiguration
     /// </summary>
     public virtual bool IsRangedWeapon { get; set; } = false;
 
+    public virtual bool DisableStomp { get; set; } = false;
+
     /// <summary>
     /// Returns a damage multiplier when the missile weapon is used.
     /// </summary>

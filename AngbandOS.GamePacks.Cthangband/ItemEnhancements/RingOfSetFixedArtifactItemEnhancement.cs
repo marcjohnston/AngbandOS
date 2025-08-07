@@ -23,7 +23,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override bool ImCold => true;
     public override bool ImElec => true;
     public override bool ImFire => true;
-    public override bool InstaArt => true;
     public override bool Int => true;
     public override bool PermaCurse => true;
     public override string? BonusCharismaRollExpression => "5";

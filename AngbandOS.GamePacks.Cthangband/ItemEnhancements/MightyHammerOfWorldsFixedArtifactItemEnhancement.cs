@@ -11,7 +11,6 @@ public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool Impact => true;
-    public override bool InstaArt => true;
     public override bool KillDragon => true;
     public override bool NoMagic => true;
     public override bool ResAcid => true;

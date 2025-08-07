@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class StarEssenceGaladrielLightSourceItemFactory : ItemFactoryGameConfiguration
 {
+    public override bool DisableStomp => true;
     public override string SymbolBindingKey => nameof(AsteriskSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Star Essence Galadriel";

@@ -10,10 +10,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LeadCrownArmorItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-  {
+    {
         (100, "3d5-3")
-  };
+    };
 
+    public override bool DisableStomp => true;
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

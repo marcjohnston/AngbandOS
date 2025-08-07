@@ -9,6 +9,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact
 {
+    public override bool DisableStomp => true;
     private AmuletOfAbdulAlhazredFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(IngweAmuletItemFactory);
     public override string Name => "The Amulet of Abdul Alhazred";

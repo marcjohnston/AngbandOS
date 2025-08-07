@@ -121,7 +121,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool ImFire { get; set; } = false;
     public virtual bool Impact { get; set; } = false;
     public virtual bool Infra { get; set; } = false;
-    public virtual bool InstaArt { get; set; } = false;
     public virtual bool Int { get; set; } = false;
     public virtual bool KillDragon { get; set; } = false;
     public virtual bool NoMagic { get; set; } = false;

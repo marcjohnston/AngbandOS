@@ -13,7 +13,6 @@ public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool Infra => true;
-    public override bool InstaArt => true;
     /// <summary>
     /// Returns a radius of 3 for this fixed artifact.
     /// </summary>

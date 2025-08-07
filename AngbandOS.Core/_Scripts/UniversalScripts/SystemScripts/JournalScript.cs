@@ -306,11 +306,10 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Easy Know", 30, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.EasyKnow);
         DisplayStat("Hide Type", 31, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.HideType);
         DisplayStat("Show Mods", 32, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.ShowMods);
-        DisplayStat("Insta Art", 33, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.InstaArt);
-        DisplayStat("Levitate", 34, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Feather);
-        DisplayStat("Light", 35, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Radius > 0);
-        DisplayStat("See Invis", 36, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SeeInvis);
-        DisplayStat("Telepathy", 37, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Telepathy);
+        DisplayStat("Levitate", 33, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Feather);
+        DisplayStat("Light", 34, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Radius > 0);
+        DisplayStat("See Invis", 35, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SeeInvis);
+        DisplayStat("Telepathy", 36, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Telepathy);
 
         Game.DisplayPlayerEquippy(20, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);
@@ -1125,7 +1124,7 @@ internal class JournalScript : UniversalScript, IGetKey
             ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
             if (itemFactory.ItemClass == tval)
             {
-                if (itemFactory.ItemEnhancement.InstaArt) // TODO: This only pulls from the ItemFactory and not generated characteristcs
+                if (itemFactory.DisableStomp) // TODO: This only pulls from the ItemFactory and not generated characteristcs
                 {
                     continue;
                 }
@@ -1172,7 +1171,7 @@ internal class JournalScript : UniversalScript, IGetKey
                             itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
                             if (itemFactory.ItemClass == tval)
                             {
-                                if (itemFactory.ItemEnhancement.InstaArt) // TODO: This only pulls from the ItemFactory and not generated characteristcs
+                                if (itemFactory.DisableStomp) // TODO: This only pulls from the ItemFactory and not generated characteristcs
                                 {
                                     continue;
                                 }

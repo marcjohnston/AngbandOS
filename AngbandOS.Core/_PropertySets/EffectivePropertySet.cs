@@ -101,7 +101,6 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.ImFire);
         RegisterBoolPropertyFactory(PropertyEnum.Impact);
         RegisterBoolPropertyFactory(PropertyEnum.Infra);
-        RegisterBoolPropertyFactory(PropertyEnum.InstaArt);
         RegisterBoolPropertyFactory(PropertyEnum.Int);
         RegisterBoolPropertyFactory(PropertyEnum.KillDragon);
         RegisterBoolPropertyFactory(PropertyEnum.NoMagic);
@@ -1013,17 +1012,6 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.Infra, value);
-        }
-    }
-    public bool InstaArt
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.InstaArt);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.InstaArt, value);
         }
     }
     public bool Int

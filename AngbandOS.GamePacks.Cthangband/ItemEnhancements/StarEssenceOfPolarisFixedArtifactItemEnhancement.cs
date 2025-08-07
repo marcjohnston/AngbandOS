@@ -10,7 +10,6 @@ public class StarEssenceOfPolarisFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool InstaArt => true;
     public override string? BonusSearchRollExpression => "1";
     public override bool Search => true;
     /// <summary>

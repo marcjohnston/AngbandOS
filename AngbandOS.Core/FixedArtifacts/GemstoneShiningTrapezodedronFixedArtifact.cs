@@ -9,6 +9,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
 {
+    public override bool DisableStomp => true;
     private GemstoneShiningTrapezodedronFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(GemstoneLightSourceItemFactory);
     public override ColorEnum Color => ColorEnum.Red;

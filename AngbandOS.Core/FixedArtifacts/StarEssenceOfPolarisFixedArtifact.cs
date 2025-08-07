@@ -9,6 +9,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
 {
+    public override bool DisableStomp => true;
     private StarEssenceOfPolarisFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(StarEssenceGaladrielLightSourceItemFactory);
     public override ColorEnum Color => ColorEnum.Yellow;

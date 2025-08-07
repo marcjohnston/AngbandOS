@@ -9,6 +9,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 {
+    public override bool DisableStomp => true;
     private LeadCrownOfTheUniverseFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LeadCrownArmorItemFactory);
     public override ColorEnum Color => ColorEnum.Black;

@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -141,6 +143,7 @@ internal class ItemFactory : IGetKey, IToJson
         VanishesWhenEatenBySkeletons = itemFactoryGameConfiguration.VanishesWhenEatenBySkeletons;
         IsConsumedWhenEaten = itemFactoryGameConfiguration.IsConsumedWhenEaten;
         ReadBindingTuple = itemFactoryGameConfiguration.ReadBindingTuple;
+        DisableStomp = itemFactoryGameConfiguration.DisableStomp;
     }
     #endregion
 
@@ -256,6 +259,7 @@ internal class ItemFactory : IGetKey, IToJson
             RechargeScriptBindingKey = RechargeScriptBindingKey,
             IsIgnoredByMonsters = IsIgnoredByMonsters,
             IsContainer = IsContainer,
+            DisableStomp = DisableStomp,
             IsRangedWeapon = IsRangedWeapon,
             MissileDamageMultiplier = MissileDamageMultiplier,
             MaxPhlogiston = MaxPhlogiston,
@@ -2052,6 +2056,8 @@ internal class ItemFactory : IGetKey, IToJson
     protected virtual (string ScriptName, string TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapBindingTuple { get; } = null;
 
     protected virtual string ItemClassBindingKey { get; }
+
+    public bool DisableStomp { get; }
 
     /// <summary>
     /// Returns true, if the item is fuel for a lantern.  Returns false, by default.

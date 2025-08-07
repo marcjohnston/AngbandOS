@@ -14,7 +14,6 @@ public class RingOfBastFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool InstaArt => true;
     public override string? BonusConstitutionRollExpression => "4";
     public override string? BonusDexterityRollExpression => "4";
     public override string? BonusSpeedRollExpression => "4";

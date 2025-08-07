@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MightyHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override bool DisableStomp => true;
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Mighty Hammer";

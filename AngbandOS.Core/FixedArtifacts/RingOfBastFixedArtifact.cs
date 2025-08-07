@@ -9,6 +9,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfBastFixedArtifact : FixedArtifact
 {
+    public override bool DisableStomp => true;
     private RingOfBastFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(TulkasRingItemFactory);
     public override string Name => "The Ring of Bast";

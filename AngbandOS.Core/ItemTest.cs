@@ -214,10 +214,6 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(InstaArt, effectivePropertySet.InstaArt))
-        {
-            return false;
-        }
         if (!TestBoolean(Int, effectivePropertySet.Int))
         {
             return false;
@@ -527,8 +523,6 @@ internal abstract class ItemTest : IGetKey
     public virtual bool? Impact => null;
 
     public virtual bool? Infra => null;
-
-    public virtual bool? InstaArt => null;
 
     public virtual bool? Int => null;
 

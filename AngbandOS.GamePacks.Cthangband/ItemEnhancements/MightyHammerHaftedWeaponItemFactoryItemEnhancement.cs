@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MightyHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool ShowMods => true;
-    public override bool InstaArt => true;
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 200;

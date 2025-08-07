@@ -11,7 +11,6 @@ public class StarEssenceOfXothFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool InstaArt => true;
     public override string? BonusSpeedRollExpression => "1";
     public override bool SeeInvis => true;
     public override bool Speed => true;

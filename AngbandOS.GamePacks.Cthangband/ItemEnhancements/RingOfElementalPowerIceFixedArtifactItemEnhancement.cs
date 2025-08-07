@@ -19,7 +19,6 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ImCold => true;
-    public override bool InstaArt => true;
     public override bool Int => true;
     public override string? BonusCharismaRollExpression => "2";
     public override string? BonusConstitutionRollExpression => "2";

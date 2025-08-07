@@ -86,6 +86,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public virtual int VorpalExtraAttacks1InChance => 4; // TODO: Move this into the ItemCharacteristics
 
     public virtual ColorEnum Color => ColorEnum.White; // TODO: This must be used outside of the ItemEnhancement
+    public virtual bool DisableStomp => false;
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
 
     /// <summary>

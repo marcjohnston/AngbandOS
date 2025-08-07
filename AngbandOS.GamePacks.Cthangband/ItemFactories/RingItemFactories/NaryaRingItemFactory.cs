@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class NaryaRingItemFactory : ItemFactoryGameConfiguration
 {
+    public override bool DisableStomp => true;
     public override bool NegativeBonusArmorClassRepresentsBroken => true;
     public override bool NegativeBonusHitRepresentsBroken => true;
     public override bool NegativeBonusDamageRepresentsBroken => true;
