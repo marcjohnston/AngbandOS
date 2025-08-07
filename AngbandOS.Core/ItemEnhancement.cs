@@ -455,66 +455,66 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     #region Bound Properties
     /// <inheritdoc />
-    public Activation? Activation { get; protected set; }
+    private Activation? Activation { get; set; }
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional strength when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item.  Returns 0, by default.
     /// </summary>
-    public Expression? BonusStrengthRoll { get; private set; } = null;
-    public Expression? BonusIntelligenceRoll { get; private set; } = null;
-    public Expression? BonusWisdomRoll { get; private set; } = null;
-    public Expression? BonusDexterityRoll { get; private set; } = null;
-    public Expression? BonusConstitutionRoll { get; private set; } = null;
-    public Expression? BonusCharismaRoll { get; private set; } = null;
-    public Expression? BonusStealthRoll { get; private set; } = null;
-    public Expression? BonusSearchRoll { get; private set; } = null;
-    public Expression? BonusInfravisionRoll { get; private set; } = null;
-    public Expression? BonusTunnelRoll { get; private set; } = null;
-    public Expression? BonusAttacksRoll { get; private set; } = null;
-    public Expression? BonusSpeedRoll { get; private set; } = null;
+    private Expression? BonusStrengthRoll { get; set; } = null;
+    private Expression? BonusIntelligenceRoll { get; set; } = null;
+    private Expression? BonusWisdomRoll { get; set; } = null;
+    private Expression? BonusDexterityRoll { get; set; } = null;
+    private Expression? BonusConstitutionRoll { get; set; } = null;
+    private Expression? BonusCharismaRoll { get; set; } = null;
+    private Expression? BonusStealthRoll { get; set; } = null;
+    private Expression? BonusSearchRoll { get; set; } = null;
+    private Expression? BonusInfravisionRoll { get; set; } = null;
+    private Expression? BonusTunnelRoll { get; set; } = null;
+    private Expression? BonusAttacksRoll { get; set; } = null;
+    private Expression? BonusSpeedRoll { get; set; } = null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public Expression? BonusArmorClassRoll { get; private set; }
+    private Expression? BonusArmorClassRoll { get; set; }
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public Expression? BonusHitRoll { get; private set; } 
+    private Expression? BonusHitRoll { get; set; } 
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    public Expression? BonusDamageRoll { get; private set; }
+    private Expression? BonusDamageRoll { get; set; }
     
-    public ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; private set; }
+    private ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; set; }
 
     /// <inheritdoc />
-    public ArtifactBiasWeightedRandom? ArtifactBiasWeightedRandom { get; private set; }
+    private ArtifactBiasWeightedRandom? ArtifactBiasWeightedRandom { get; set; }
 
-    public ItemFactory[]? ApplicableItemFactories { get; private set; } // TODO: This is contrary to the ItemEnhancement for ItemFactories.
+    private ItemFactory[]? ApplicableItemFactories { get; set; } // TODO: This is contrary to the ItemEnhancement for ItemFactories.
     #endregion
 
-    #region Unique ItemEnhancement Light-weight Virtual & Abstract Properties
-    public virtual string Key { get; }
+    #region Unique ItemEnhancement Light-weight & Abstract Properties
+    private string Key { get; }
 
     /// <summary>
     /// Returns the value of the enhancement.  Returns 0, by default.
     /// </summary>
-    public virtual int Value { get; } = 0;
+    private int Value { get; } = 0;
 
     /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>
-    protected virtual string[]? ApplicableItemFactoryBindingKeys { get; } = null;
+    protected string[]? ApplicableItemFactoryBindingKeys { get; } = null;
 
-    protected virtual string? AdditionalItemEnhancementWeightedRandomBindingKey { get; } = null;
+    protected string? AdditionalItemEnhancementWeightedRandomBindingKey { get; } = null;
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
@@ -522,342 +522,342 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private string? FriendlyName { get; } = null;
     #endregion
 
-    #region ItemPropertySet Light-weight Virtual & Abstract Properties
+    #region ItemPropertySet Light-weight & Abstract Properties
     /// <summary>
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
     /// </summary>
-    public virtual bool CanApplyBonusArmorClassMiscPower { get; } = false;
+    private bool CanApplyBonusArmorClassMiscPower { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
     /// </summary>
-    public virtual bool CanReflectBoltsAndArrows { get; } = false;
+    private bool CanReflectBoltsAndArrows { get; } = false;
 
     /// <summary>
     /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
     /// </summary>
-    public virtual bool CanApplyArtifactBiasSlaying { get; } = true;
+    private bool CanApplyArtifactBiasSlaying { get; } = true;
 
     /// <summary>
     /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
     /// </summary>
-    public virtual bool CanApplyBlessedArtifactBias { get; } = false;
+    private bool CanApplyBlessedArtifactBias { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
     /// </summary>
-    public virtual bool CanApplyBlowsBonus { get; } = false;
+    private bool CanApplyBlowsBonus { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool CanApplySlayingBonus { get; } = false;
+    private bool CanApplySlayingBonus { get; } = false;
 
-    public virtual string? BonusStrengthRollExpression { get; } = null;
-    public virtual string? BonusIntelligenceRollExpression { get; } = null;
-    public virtual string? BonusWisdomRollExpression { get; } = null;
-    public virtual string? BonusDexterityRollExpression { get; } = null;
-    public virtual string? BonusConstitutionRollExpression { get; } = null;
-    public virtual string? BonusCharismaRollExpression { get; } = null;
-    public virtual string? BonusStealthRollExpression { get; } = null;
-    public virtual string? BonusSearchRollExpression { get; } = null;
-    public virtual string? BonusInfravisionRollExpression { get; } = null;
-    public virtual string? BonusTunnelRollExpression { get; } = null;
-    public virtual string? BonusAttacksRollExpression { get; } = null;
-    public virtual string? BonusSpeedRollExpression { get; } = null;
+    private string? BonusStrengthRollExpression { get; } = null;
+    private string? BonusIntelligenceRollExpression { get; } = null;
+    private string? BonusWisdomRollExpression { get; } = null;
+    private string? BonusDexterityRollExpression { get; } = null;
+    private string? BonusConstitutionRollExpression { get; } = null;
+    private string? BonusCharismaRollExpression { get; } = null;
+    private string? BonusStealthRollExpression { get; } = null;
+    private string? BonusSearchRollExpression { get; } = null;
+    private string? BonusInfravisionRollExpression { get; } = null;
+    private string? BonusTunnelRollExpression { get; } = null;
+    private string? BonusAttacksRollExpression { get; } = null;
+    private string? BonusSpeedRollExpression { get; } = null;
 
-    public virtual string? BonusArmorClassRollExpression { get; } = null;
+    private string? BonusArmorClassRollExpression { get; } = null;
 
-    public virtual string? BonusHitRollExpression { get; } = null;
+    private string? BonusHitRollExpression { get; } = null;
 
-    public virtual string? BonusDamageRollExpression { get; } = null;
+    private string? BonusDamageRollExpression { get; } = null;
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    protected virtual string? ActivationName { get; } = null;
+    protected string? ActivationName { get; } = null;
 
     /// <inheritdoc />
-    public virtual bool Aggravate { get; } = false;
+    private bool Aggravate { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool AntiTheft { get; } = false;
+    private bool AntiTheft { get; } = false;
 
-    protected virtual string? ArtifactBiasWeightedRandomBindingKey { get; } = null;
+    protected string? ArtifactBiasWeightedRandomBindingKey { get; } = null;
     
     /// <inheritdoc />
-    public virtual bool Blessed { get; } = false;
+    private bool Blessed { get; } = false;
 
     /// <inheritdoc/>
-    public virtual bool Blows { get; } = false;
+    private bool Blows { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandAcid { get; } = false;
+    private bool BrandAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandCold { get; } = false;
+    private bool BrandCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandElec { get; } = false;
+    private bool BrandElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandFire { get; } = false;
+    private bool BrandFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool BrandPois { get; } = false;
+    private bool BrandPois { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Cha { get; } = false;
+    private bool Cha { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Chaotic { get; } = false;
+    private bool Chaotic { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Con { get; } = false;
+    private bool Con { get; } = false;
 
-    public virtual int Cost { get; } = 0;
+    private int Cost { get; } = 0;
     
     /// <inheritdoc />
-    public virtual bool IsCursed { get; } = false;
+    private bool IsCursed { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Dex { get; } = false;
+    private bool Dex { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool DrainExp { get; } = false;
+    private bool DrainExp { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool DreadCurse { get; } = false;
+    private bool DreadCurse { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool EasyKnow { get; } = false;
+    private bool EasyKnow { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Feather { get; } = false;
+    private bool Feather { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool FreeAct { get; } = false;
+    private bool FreeAct { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool HeavyCurse { get; } = false;
+    private bool HeavyCurse { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool HideType { get; } = false;
+    private bool HideType { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool HoldLife { get; } = false;
+    private bool HoldLife { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreAcid { get; } = false;
+    private bool IgnoreAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreCold { get; } = false;
+    private bool IgnoreCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreElec { get; } = false;
+    private bool IgnoreElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool IgnoreFire { get; } = false;
+    private bool IgnoreFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImAcid { get; } = false;
+    private bool ImAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImCold { get; } = false;
+    private bool ImCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImElec { get; } = false;
+    private bool ImElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ImFire { get; } = false;
+    private bool ImFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Impact { get; } = false;
+    private bool Impact { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Infra { get; } = false;
+    private bool Infra { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool InstaArt { get; } = false;
+    public bool InstaArt { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Int { get; } = false;
+    private bool Int { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool KillDragon { get; } = false;
+    private bool KillDragon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool NoMagic { get; } = false;
+    private bool NoMagic { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool NoTele { get; } = false;
+    private bool NoTele { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool PermaCurse { get; } = false;
+    private bool PermaCurse { get; } = false;
     
     /// <inheritdoc />
-    public virtual int Radius { get; } = 0;
+    private int Radius { get; } = 0;
     
     /// <inheritdoc />
-    public virtual bool Reflect { get; } = false;
+    private bool Reflect { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Regen { get; } = false;
+    private bool Regen { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResAcid { get; } = false;
+    private bool ResAcid { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResBlind { get; } = false;
+    private bool ResBlind { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResChaos { get; } = false;
+    private bool ResChaos { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResCold { get; } = false;
+    private bool ResCold { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResConf { get; } = false;
+    private bool ResConf { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResDark { get; } = false;
+    private bool ResDark { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResDisen { get; } = false;
+    private bool ResDisen { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResElec { get; } = false;
+    private bool ResElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResFear { get; } = false;
+    private bool ResFear { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResFire { get; } = false;
+    private bool ResFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResLight { get; } = false;
+    private bool ResLight { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResNether { get; } = false;
+    private bool ResNether { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResNexus { get; } = false;
+    private bool ResNexus { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResPois { get; } = false;
+    private bool ResPois { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResShards { get; } = false;
+    private bool ResShards { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ResSound { get; } = false;
+    private bool ResSound { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Search { get; } = false;
+    private bool Search { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SeeInvis { get; } = false;
+    private bool SeeInvis { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ShElec { get; } = false;
+    private bool ShElec { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ShFire { get; } = false;
+    private bool ShFire { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool ShowMods { get; } = false;
+    private bool ShowMods { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayAnimal { get; } = false;
+    private bool SlayAnimal { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayDemon { get; } = false;
+    private bool SlayDemon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayDragon { get; } = false;
+    private bool SlayDragon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayEvil { get; } = false;
+    private bool SlayEvil { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayGiant { get; } = false;
+    private bool SlayGiant { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayOrc { get; } = false;
+    private bool SlayOrc { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayTroll { get; } = false;
+    private bool SlayTroll { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlayUndead { get; } = false;
+    private bool SlayUndead { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SlowDigest { get; } = false;
+    private bool SlowDigest { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Speed { get; } = false;
+    private bool Speed { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Stealth { get; } = false;
+    private bool Stealth { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Str { get; } = false;
+    private bool Str { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustCha { get; } = false;
+    private bool SustCha { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustCon { get; } = false;
+    private bool SustCon { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustDex { get; } = false;
+    private bool SustDex { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustInt { get; } = false;
+    private bool SustInt { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustStr { get; } = false;
+    private bool SustStr { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool SustWis { get; } = false;
+    private bool SustWis { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Telepathy { get; } = false;
+    private bool Telepathy { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Teleport { get; } = false;
-
-    /// <inheritdoc />
-    public virtual int TreasureRating { get; } = 0;
+    private bool Teleport { get; } = false;
 
     /// <inheritdoc />
-    public virtual bool Tunnel { get; } = false;
+    public int TreasureRating { get; } = 0;
 
     /// <inheritdoc />
-    public virtual bool Valueless { get; } = false;
+    private bool Tunnel { get; } = false;
 
     /// <inheritdoc />
-    public virtual bool Vampiric { get; } = false;
-    
-    /// <inheritdoc />
-    public virtual bool Vorpal { get; } = false;
+    private bool Valueless { get; } = false;
 
-    public virtual int Weight { get; } = 0;
+    /// <inheritdoc />
+    private bool Vampiric { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool Wis { get; } = false;
+    private bool Vorpal { get; } = false;
+
+    private int Weight { get; } = 0;
     
     /// <inheritdoc />
-    public virtual bool Wraith { get; } = false;
+    private bool Wis { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool XtraMight { get; } = false;
+    private bool Wraith { get; } = false;
     
     /// <inheritdoc />
-    public virtual bool XtraShots { get; } = false;
+    private bool XtraMight { get; } = false;
+    
+    /// <inheritdoc />
+    private bool XtraShots { get; } = false;
     #endregion
 }

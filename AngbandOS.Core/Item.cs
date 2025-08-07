@@ -2488,32 +2488,32 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we are enchanting a cursed or broken item.
             int goodBadMultiplier = EffectivePropertySet.IsCursed || IsBroken ? -1 : 1;
 
-            EffectivePropertySet? roRareItemCharacteristics = new EffectivePropertySet();
-            roRareItemCharacteristics.AddEnhancement(rareItem.GenerateItemCharacteristics());
+            EffectivePropertySet? rareItemEffectivePropertySet = new EffectivePropertySet();
+            rareItemEffectivePropertySet.AddEnhancement(rareItem.GenerateItemCharacteristics());
 
             // If the rare item has no value, consider it broken.
-            if (rareItem.Value == 0)
+            if (rareItemEffectivePropertySet.Valueless)
             {
-                IsBroken = true;
+                IsBroken = true; // This should be manual.
             }
 
-            roRareItemCharacteristics.BonusHit *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusDamage *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusArmorClass *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusStrength *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusIntelligence *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusWisdom *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusDexterity *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusConstitution *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusCharisma *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusStealth *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusSearch *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusInfravision *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusTunnel *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusAttacks *= goodBadMultiplier;
-            roRareItemCharacteristics.BonusSpeed *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusHit *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusDamage *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusArmorClass *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusStrength *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusIntelligence *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusWisdom *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusDexterity *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusConstitution *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusCharisma *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusStealth *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusSearch *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusInfravision *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusTunnel *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusAttacks *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusSpeed *= goodBadMultiplier;
             Game.TreasureRating += rareItem.TreasureRating;
-            EffectivePropertySet.AddEnhancement("rare", roRareItemCharacteristics.ToReadOnly());
+            EffectivePropertySet.AddEnhancement("rare", rareItemEffectivePropertySet.ToReadOnly());
         }
     }
 
