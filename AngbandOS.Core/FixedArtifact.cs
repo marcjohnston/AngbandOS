@@ -4,15 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Diagnostics;
-
 namespace AngbandOS.Core;
-
-[Serializable]
-public class FixedArtifactGameConfiguration
-{
-    public virtual string Key { get; set; } = null;
-}
 
 [Serializable]
 internal abstract class FixedArtifact : IGetKey, IToJson
@@ -21,7 +13,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     protected FixedArtifact(Game game)
     {
         Game = game;
-//        Key = fixedArtifactGameConfiguration.Key ?? fixedArtifactGameConfiguration.GetType().Name;
     }
 
     public void Bind()
@@ -46,11 +37,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson
 
     public string ToJson()
     {
-        FixedArtifactGameConfiguration gameConfiguration = new FixedArtifactGameConfiguration()
-        {
-            Key = Key,
-        };
-        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
+        return "";
     }
 
     public virtual string Key => GetType().Name;
