@@ -5,9 +5,7 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
 {
     // Dragon Helm and Terror Mask cause fear
     public override string? ActivationName => nameof(ActivationsEnum.Terror40xEvery3xp10Activation);
-    public override bool Con => true;
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override string FriendlyName => "of Power";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -29,7 +27,6 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool ResFire => true;
     public override bool ResLight => true;
     public override bool SeeInvis => true;
-    public override bool Str => true;
     public override bool Telepathy => true;
     public override int Weight => 25;
     public override int Cost => 300000;

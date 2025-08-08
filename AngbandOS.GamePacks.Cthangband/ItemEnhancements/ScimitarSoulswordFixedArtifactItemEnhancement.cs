@@ -12,7 +12,6 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Int => true;
     public override string? BonusIntelligenceRollExpression => "2";
     public override string? BonusWisdomRollExpression => "2";
     public override bool ResChaos => true;
@@ -26,6 +25,5 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool SlayDragon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-    public override bool Wis => true;
     public override int Cost => 111111;
 }

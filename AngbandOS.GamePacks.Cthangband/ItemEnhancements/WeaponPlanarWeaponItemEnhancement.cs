@@ -20,7 +20,6 @@ public class WeaponPlanarWeaponItemEnhancement : ItemEnhancementGameConfiguratio
     public override int TreasureRating => 22;
     public override bool Regen => true;
     public override bool ResNexus => true;
-    public override bool Search => true;
     public override bool SlayEvil => true;
     public override bool SlowDigest => true;
     public override bool Teleport => true;

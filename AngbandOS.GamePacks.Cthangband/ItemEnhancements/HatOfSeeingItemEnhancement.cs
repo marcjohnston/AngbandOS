@@ -14,6 +14,5 @@ public class HatOfSeeingItemEnhancement : ItemEnhancementGameConfiguration
     public override string? BonusSearchRollExpression => "1d5";
     public override int TreasureRating => 8;
     public override bool ResBlind => true;
-    public override bool Search => true;
     public override bool SeeInvis => true;
 }

@@ -6,8 +6,6 @@ public class CloakOfTheSwashbucklerFixedArtifactItemEnhancement : ItemEnhancemen
     public override int TreasureRating => 10;
     // Swashbuckler recharges items
     public override string? ActivationName => nameof(ActivationsEnum.RechargeActivation);
-    public override bool Cha => true;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Swashbuckler";
     public override bool HideType => true;

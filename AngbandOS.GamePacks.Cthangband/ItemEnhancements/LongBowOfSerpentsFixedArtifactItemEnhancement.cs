@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LongBowOfSerpentsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Serpents";
     public override bool HideType => true;

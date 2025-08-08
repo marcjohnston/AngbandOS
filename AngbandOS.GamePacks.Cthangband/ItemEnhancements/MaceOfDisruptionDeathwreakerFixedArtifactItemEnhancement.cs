@@ -30,8 +30,6 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override bool SlayDragon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-    public override bool Str => true;
-    public override bool Tunnel => true;
     public override bool Vampiric => true;
     public override int Weight => 280;
     public override int Cost => 444444;

@@ -11,7 +11,6 @@ public class HatOfStupidityItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Valueless => true;
     public override string? FriendlyName => "of Stupidity";
-    public override bool Int => true;
     public override string? BonusIntelligenceRollExpression => "1d5";
     public override int TreasureRating => 0;
 }

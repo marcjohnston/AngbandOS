@@ -7,8 +7,6 @@ public class ScytheOfGharneFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override string? ActivationName => nameof(ActivationsEnum.WordOfRecallEvery200DirectionalActivation);
     public override bool BrandCold => true;
     public override bool BrandFire => true;
-    public override bool Cha => true;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of G'harne";
     public override bool HideType => true;

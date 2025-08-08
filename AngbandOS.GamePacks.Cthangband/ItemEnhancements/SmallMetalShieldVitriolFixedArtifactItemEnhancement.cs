@@ -3,7 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Vitriol'";
@@ -17,6 +16,5 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
     public override string? BonusStrengthRollExpression => "4";
     public override bool ResChaos => true;
     public override bool ResSound => true;
-    public override bool Str => true;
     public override int Cost => 60000;
 }

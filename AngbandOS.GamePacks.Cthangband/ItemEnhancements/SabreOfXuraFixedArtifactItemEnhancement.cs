@@ -5,9 +5,7 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
 {
     public override bool Blessed => true;
     public override bool BrandCold => true;
-    public override bool Con => true;
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Xura";
     public override bool HideType => true;
@@ -31,7 +29,6 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override bool SlowDigest => true;
-    public override bool Str => true;
     public override bool SustCon => true;
     public override bool SustStr => true;
     public override int Cost => 125000;

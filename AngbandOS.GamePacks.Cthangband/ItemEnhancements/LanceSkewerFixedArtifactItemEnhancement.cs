@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override string FriendlyName => "'Skewer'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

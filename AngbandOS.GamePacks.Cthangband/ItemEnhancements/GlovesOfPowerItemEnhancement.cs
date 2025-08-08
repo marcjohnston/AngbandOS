@@ -17,5 +17,4 @@ public class GlovesOfPowerItemEnhancement : ItemEnhancementGameConfiguration
     public override string? BonusHitRollExpression => "1d5";
     public override int TreasureRating => 22;
     public override bool ShowMods => true;
-    public override bool Str => true;
 }

@@ -5,9 +5,7 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
 {
     public override bool Valueless => true;
     public override int TreasureRating => 10;
-    public override bool Con => true;
     public override bool IsCursed => true;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Misery";
     public override bool HideType => true;
@@ -19,7 +17,6 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
     public override string? BonusDexterityRollExpression => "-25";
     public override string? BonusStrengthRollExpression => "-25";
     public override bool SeeInvis => true;
-    public override bool Str => true;
     public override bool Telepathy => true;
     public override bool Feather => true;
     public override bool HoldLife => true;

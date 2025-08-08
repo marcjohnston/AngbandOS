@@ -23,5 +23,4 @@ public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfig
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-    public override bool Wis => true;
 }

@@ -14,5 +14,4 @@ public class BootsOfSpeedItemEnhancement : ItemEnhancementGameConfiguration
     public override bool HideType => true;
     public override string? BonusSpeedRollExpression => "1d10";
     public override int TreasureRating => 25;
-    public override bool Speed => true;
 }

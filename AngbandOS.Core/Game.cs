@@ -59,6 +59,19 @@ internal class Game
     //    throw new Exception("");
     //}
 
+    public int EnchantBonus(int bonus)
+    {
+        do
+        {
+            bonus++;
+        } while (bonus < DieRoll(5) || DieRoll(bonus) == 1);
+        if (bonus > 4 && DieRoll(Constants.WeirdLuck) != 1)
+        {
+            bonus = 4;
+        }
+        return bonus;
+    }
+
     #region Game Replay
     /// <summary>
     /// Returns the date and time of when the last keystroke was presented to the game either by the replay system or via the keyboard/console.

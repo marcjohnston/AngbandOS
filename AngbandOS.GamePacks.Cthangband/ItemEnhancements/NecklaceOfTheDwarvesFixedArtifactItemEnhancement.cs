@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Con => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Dwarves";
     public override bool HideType => true;
@@ -12,7 +11,6 @@ public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Infra => true;
     /// <summary>
     /// Returns a radius of 3 for this fixed artifact.
     /// </summary>
@@ -21,6 +19,5 @@ public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementG
     public override string? BonusStrengthRollExpression => "3";
     public override bool Regen => true;
     public override bool SeeInvis => true;
-    public override bool Str => true;
     public override int Cost => 75000;
 }

@@ -13,7 +13,6 @@ public class StarEssenceOfXothFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool IgnoreFire => true;
     public override string? BonusSpeedRollExpression => "1";
     public override bool SeeInvis => true;
-    public override bool Speed => true;
 
     /// <summary>
     /// Returns a value of 1 to add to the radius of light for a star of essence which provides no light.

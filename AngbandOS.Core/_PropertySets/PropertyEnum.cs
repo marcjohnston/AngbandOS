@@ -44,7 +44,11 @@ internal enum PropertyEnum
     BrandPois,
     Cha,
     Chaotic,
-    Con,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    Con, // TODO: This maintains state, tracks when constitution is added randomly
 
     /// <summary>
     /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should

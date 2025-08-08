@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfBeautyItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Cha => true;
     public override int Value => 1000;
     public override string? FriendlyName => "of Beauty";
     public override string? BonusCharismaRollExpression => "1d4";

@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SearchingAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool HideType => true;
-    public override bool Search => true;
     public override int Weight => 3;
     public override int Cost => 600;
 }

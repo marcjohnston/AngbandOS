@@ -14,8 +14,9 @@ internal class ConstitutionArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
-        if (!characteristics.Con)
+        if (characteristics.BonusConstitution == 0)
         {
+            characteristics.BonusConstitution = Game.EnchantBonus(characteristics.BonusConstitution);
             characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {

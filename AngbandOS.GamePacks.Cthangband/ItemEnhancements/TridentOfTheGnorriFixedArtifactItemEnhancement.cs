@@ -6,7 +6,6 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string? ActivationName => nameof(ActivationsEnum.TeleportAwayEvery150DirectionalActivation);
     public override bool Blessed => true;
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Gnorri";
     public override bool HideType => true;

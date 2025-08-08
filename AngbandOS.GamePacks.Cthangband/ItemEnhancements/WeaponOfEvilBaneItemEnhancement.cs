@@ -15,5 +15,4 @@ public class WeaponOfEvilBaneItemEnhancement : ItemEnhancementGameConfiguration
     public override string? BonusWisdomRollExpression => "1d2";
     public override int TreasureRating => 20;
     public override bool SlayEvil => true;
-    public override bool Wis => true;
 }

@@ -14,9 +14,9 @@ internal class CharismaArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
-        if (!characteristics.Cha)
+        if (characteristics.BonusCharisma == 0)
         {
-            characteristics.Cha = true;
+            characteristics.BonusCharisma = Game.EnchantBonus(characteristics.BonusCharisma);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

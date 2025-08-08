@@ -5,9 +5,7 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
 {
     public override bool Aggravate => true;
     public override bool Blows => true;
-    public override bool Cha => true;
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override string FriendlyName => "'Demon Blade'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -23,8 +21,6 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
-    public override bool Speed => true;
-    public override bool Stealth => true;
     public override int Weight => -20;
     public override bool Vorpal => true;
     public override int Cost => 66666;

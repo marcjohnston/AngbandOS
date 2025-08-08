@@ -6,7 +6,6 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override int TreasureRating => 10;
     public override bool Aggravate => true;
     public override bool IsCursed => true;
-    public override bool Dex => true;
     public override bool DreadCurse => true;
     public override string FriendlyName => "of Thanos";
     public override bool HeavyCurse => true;
@@ -26,7 +25,6 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResNexus => true;
     public override bool ResPois => true;
     public override bool ShowMods => true;
-    public override bool Str => true;
     public override bool Teleport => true;
     public override int Cost => 40000;
 }

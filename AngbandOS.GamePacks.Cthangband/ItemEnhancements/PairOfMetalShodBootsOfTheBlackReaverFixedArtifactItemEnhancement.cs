@@ -5,7 +5,6 @@ public class PairOfMetalShodBootsOfTheBlackReaverFixedArtifactItemEnhancement : 
 {
     public override int TreasureRating => 10;
     public override bool Aggravate => true;
-    public override bool Con => true;
     public override string FriendlyName => "of the Black Reaver";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -15,7 +14,5 @@ public class PairOfMetalShodBootsOfTheBlackReaverFixedArtifactItemEnhancement : 
     public override string? BonusConstitutionRollExpression => "10";
     public override string? BonusSpeedRollExpression => "10";
     public override string? BonusStrengthRollExpression => "10";
-    public override bool Speed => true;
-    public override bool Str => true;
     public override int Cost => 15000;
 }

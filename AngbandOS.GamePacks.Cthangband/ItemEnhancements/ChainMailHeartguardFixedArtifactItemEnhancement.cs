@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ChainMailHeartguardFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Cha => true;
     public override string FriendlyName => "'Heartguard'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -19,6 +18,5 @@ public class ChainMailHeartguardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResFire => true;
     public override bool ResNexus => true;
     public override bool ResShards => true;
-    public override bool Str => true;
     public override int Cost => 32000;
 }

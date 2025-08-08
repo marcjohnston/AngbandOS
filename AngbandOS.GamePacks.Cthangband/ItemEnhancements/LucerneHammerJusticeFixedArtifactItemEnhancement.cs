@@ -13,7 +13,6 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Infra => true;
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a lucrene hammer which provides no light.
     /// </summary>
@@ -26,6 +25,5 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ResLight => true;
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
-    public override bool Wis => true;
     public override int Cost => 30000;
 }

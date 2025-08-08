@@ -7,8 +7,6 @@ public class ElvenCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Search => true;
-    public override bool Stealth => true;
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 5;
     public override int Cost => 1500;

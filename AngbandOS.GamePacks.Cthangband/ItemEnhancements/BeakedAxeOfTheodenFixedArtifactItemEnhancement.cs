@@ -6,7 +6,6 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int TreasureRating => 10;
     // Theoden drains life
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife120Every400DirectionalActivation);
-    public override bool Con => true;
     public override string FriendlyName => "of Theoden";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -19,6 +18,5 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayDragon => true;
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
-    public override bool Wis => true;
     public override int Cost => 40000;
 }

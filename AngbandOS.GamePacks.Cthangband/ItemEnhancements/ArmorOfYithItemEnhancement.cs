@@ -23,5 +23,4 @@ public class ArmorOfYithItemEnhancement : ItemEnhancementGameConfiguration
     public override bool ResCold => true;
     public override bool ResElec => true;
     public override bool ResFire => true;
-    public override bool Stealth => true;
 }

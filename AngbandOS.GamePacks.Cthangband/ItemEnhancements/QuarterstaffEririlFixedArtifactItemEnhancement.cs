@@ -12,7 +12,6 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Int => true;
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a quarterstaff which provides no light.
     /// </summary>
@@ -24,6 +23,5 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
-    public override bool Wis => true;
     public override int Cost => 20000;
 }

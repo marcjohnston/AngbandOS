@@ -235,12 +235,12 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 {
                     // Only extract known bonuses, not full bonuses
                     EffectivePropertySet itemCharacteristics = item.ObjectFlagsKnown();
-                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.EffectivePropertySet.BonusStrength, row + 0, col);
-                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, item.EffectivePropertySet.BonusIntelligence, row + 1, col);
-                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, item.EffectivePropertySet.BonusWisdom, row + 2, col);
-                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, item.EffectivePropertySet.BonusDexterity, row + 3, col);
-                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, item.EffectivePropertySet.BonusConstitution, row + 4, col);
-                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, item.EffectivePropertySet.BonusCharisma, row + 5, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.BonusStrength > 0, item.EffectivePropertySet.BonusStrength, row + 0, col);
+                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.BonusIntelligence > 0, item.EffectivePropertySet.BonusIntelligence, row + 1, col);
+                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.BonusWisdom > 0, item.EffectivePropertySet.BonusWisdom, row + 2, col);
+                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.BonusDexterity > 0, item.EffectivePropertySet.BonusDexterity, row + 3, col);
+                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.BonusConstitution > 0, item.EffectivePropertySet.BonusConstitution, row + 4, col);
+                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.BonusCharisma > 0, item.EffectivePropertySet.BonusCharisma, row + 5, col);
                 }
                 col++;
             }

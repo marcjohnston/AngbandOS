@@ -9,7 +9,6 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool Blows => true;
     public override bool BrandCold => true;
     public override bool BrandPois => true;
-    public override bool Dex => true;
     public override string FriendlyName => "'Icicle'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -24,6 +23,5 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool SlowDigest => true;
-    public override bool Speed => true;
     public override int Cost => 50000;
 }

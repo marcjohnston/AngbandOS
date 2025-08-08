@@ -9,12 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfSicklinessItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Con => true;
     public override bool Valueless => true;
-    public override bool Dex => true;
     public override string? FriendlyName => "of Sickliness";
     public override string? BonusStrengthRollExpression => "1d5";
     public override string? BonusDexterityRollExpression => "1d5";
     public override int TreasureRating => 0;
-    public override bool Str => true;
 }

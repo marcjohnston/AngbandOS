@@ -9,9 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfKadathItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Con => true;
     public override int Value => 20000;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string? FriendlyName => "of Kadath";
     public override string? BonusConstitutionRollExpression => "1d2";
@@ -24,5 +22,4 @@ public class WeaponOfKadathItemEnhancement : ItemEnhancementGameConfiguration
     public override bool SlayGiant => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
-    public override bool Str => true;
 }

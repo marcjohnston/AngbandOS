@@ -219,12 +219,12 @@ internal class JournalScript : UniversalScript, IGetKey
 
         Game.DisplayPlayerEquippy(0, 0 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 0 + 11);
-        DisplayStat("Add Str", 2, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Str);
-        DisplayStat("Add Int", 3, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Int);
-        DisplayStat("Add Wis", 4, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Wis);
-        DisplayStat("Add Dex", 5, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Dex);
-        DisplayStat("Add Con", 6, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Con);
-        DisplayStat("Add Cha", 7, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Cha);
+        DisplayStat("Add Str", 2, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusStrength > 0);
+        DisplayStat("Add Int", 3, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusIntelligence > 0);
+        DisplayStat("Add Wis", 4, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusWisdom > 0);
+        DisplayStat("Add Dex", 5, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusDexterity > 0);
+        DisplayStat("Add Con", 6, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusConstitution > 0);
+        DisplayStat("Add Cha", 7, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusCharisma > 0);
 
 
         DisplayStat("Add Stea.", 10, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Stealth);

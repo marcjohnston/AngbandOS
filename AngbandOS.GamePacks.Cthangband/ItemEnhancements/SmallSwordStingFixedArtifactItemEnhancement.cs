@@ -4,9 +4,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Blows => true;
-    public override bool Con => true;
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Sting'";
     public override bool IgnoreAcid => true;
@@ -26,7 +24,6 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool SlayEvil => true;
     public override bool SlayOrc => true;
     public override bool SlayUndead => true;
-    public override bool Str => true;
     public override int Weight => -5;
     public override int Cost => 100000;
 }

@@ -21,6 +21,5 @@ public class BroadSwordBlackIceFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayEvil => true;
     public override bool SlayOrc => true;
     public override bool SlowDigest => true;
-    public override bool Stealth => true;
     public override int Cost => 40000;
 }

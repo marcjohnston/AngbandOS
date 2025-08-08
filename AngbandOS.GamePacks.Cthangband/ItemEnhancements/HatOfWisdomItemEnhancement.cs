@@ -14,5 +14,4 @@ public class HatOfWisdomItemEnhancement : ItemEnhancementGameConfiguration
     public override string? BonusWisdomRollExpression => "1d2";
     public override int TreasureRating => 13;
     public override bool SustWis => true;
-    public override bool Wis => true;
 }

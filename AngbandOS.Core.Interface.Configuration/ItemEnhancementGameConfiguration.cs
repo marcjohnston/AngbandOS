@@ -97,12 +97,9 @@ public class ItemEnhancementGameConfiguration
     public virtual bool BrandElec { get; set; } = false;
     public virtual bool BrandFire { get; set; } = false;
     public virtual bool BrandPois { get; set; } = false;
-    public virtual bool Cha { get; set; } = false;
     public virtual bool Chaotic { get; set; } = false;
-    public virtual bool Con { get; set; } = false;
     public virtual int Cost { get; set; } = 0;
     public virtual bool IsCursed { get; set; } = false;
-    public virtual bool Dex { get; set; } = false;
     public virtual bool DrainExp { get; set; } = false;
     public virtual bool DreadCurse { get; set; } = false;
     public virtual bool EasyKnow { get; set; } = false;
@@ -120,8 +117,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool ImElec { get; set; } = false;
     public virtual bool ImFire { get; set; } = false;
     public virtual bool Impact { get; set; } = false;
-    public virtual bool Infra { get; set; } = false;
-    public virtual bool Int { get; set; } = false;
     public virtual bool KillDragon { get; set; } = false;
     public virtual bool NoMagic { get; set; } = false;
     public virtual bool NoTele { get; set; } = false;
@@ -145,7 +140,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool ResPois { get; set; } = false;
     public virtual bool ResShards { get; set; } = false;
     public virtual bool ResSound { get; set; } = false;
-    public virtual bool Search { get; set; } = false;
     public virtual bool SeeInvis { get; set; } = false;
     public virtual bool ShElec { get; set; } = false;
     public virtual bool ShFire { get; set; } = false;
@@ -159,9 +153,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool SlayTroll { get; set; } = false;
     public virtual bool SlayUndead { get; set; } = false;
     public virtual bool SlowDigest { get; set; } = false;
-    public virtual bool Speed { get; set; } = false;
-    public virtual bool Stealth { get; set; } = false;
-    public virtual bool Str { get; set; } = false;
     public virtual bool SustCha { get; set; } = false;
     public virtual bool SustCon { get; set; } = false;
     public virtual bool SustDex { get; set; } = false;
@@ -171,7 +162,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool Telepathy { get; set; } = false;
     public virtual bool Teleport { get; set; } = false;
     public virtual int TreasureRating { get; set; } = 0;
-    public virtual bool Tunnel { get; set; } = false;
 
     /// <summary>
     /// Returns true, if the enhancement causes the item to become valueless; false, if the item retains its value.  Returns false, by default.
@@ -181,7 +171,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool Vampiric { get; set; } = false;
     public virtual bool Vorpal { get; set; } = false;
     public virtual int Weight { get; set; } = 0;
-    public virtual bool Wis { get; set; } = false;
     public virtual bool Wraith { get; set; } = false;   
     public virtual bool XtraMight { get; set; } = false;
     public virtual bool XtraShots { get; set; } = false;

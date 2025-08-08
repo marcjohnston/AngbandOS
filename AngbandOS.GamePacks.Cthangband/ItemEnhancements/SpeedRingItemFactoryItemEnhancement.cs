@@ -5,7 +5,6 @@ public class SpeedRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
 {
     public override int TreasureRating => 25;
     public override bool HideType => true;
-    public override bool Speed => true;
     public override int Weight => 2;
     public override int Cost => 100000;
 }

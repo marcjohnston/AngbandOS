@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Dex => true;
     public override string FriendlyName => "of Serpents";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -19,7 +18,6 @@ public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEn
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool ResSound => true;
-    public override bool Str => true;
     public override int Weight => -90;
     public override int Cost => 30000;
 }

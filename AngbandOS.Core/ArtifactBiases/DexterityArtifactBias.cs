@@ -14,9 +14,9 @@ internal class DexterityArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
-        if (!characteristics.Dex)
+        if (characteristics.BonusDexterity == 0)
         {
-            characteristics.Dex = true;
+            characteristics.BonusDexterity = Game.EnchantBonus(characteristics.BonusDexterity);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfLawItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Con => true;
     public override int Value => 25000;
     public override bool FreeAct => true;
     public override string? FriendlyName => "(Weapon of Law)";
@@ -22,5 +21,4 @@ public class WeaponOfLawItemEnhancement : ItemEnhancementGameConfiguration
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-    public override bool Str => true;
 }

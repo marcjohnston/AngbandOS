@@ -3,11 +3,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Cha => true;
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override bool IsCursed => true;
-    public override bool Dex => true;
     public override string FriendlyName => "of the Universe";
     public override bool HeavyCurse => true;
     public override bool HideType => true;
@@ -15,8 +12,6 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Infra => true;
-    public override bool Int => true;
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a lead crown which provides no light.
     /// </summary>
@@ -40,8 +35,6 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResNexus => true;
     public override bool ResPois => true;
     public override bool SeeInvis => true;
-    public override bool Str => true;
     public override bool Telepathy => true;
-    public override bool Wis => true;
     public override int Cost => 10000000;
 }

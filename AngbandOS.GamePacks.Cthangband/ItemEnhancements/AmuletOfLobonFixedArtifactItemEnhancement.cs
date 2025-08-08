@@ -5,7 +5,6 @@ public class AmuletOfLobonFixedArtifactItemEnhancement : ItemEnhancementGameConf
 {
     // Amulet of Lobon protects us from evil
     public override string? ActivationName => nameof(ActivationsEnum.ProtectionFromEvilActivation);
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override string FriendlyName => "of Lobon";
     public override bool HideType => true;

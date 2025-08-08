@@ -5,7 +5,6 @@ public class SetOfGauntletsOfGhoulsFixedArtifactItemEnhancement : ItemEnhancemen
 {
     public override int TreasureRating => 10;
     public override string? ActivationName => nameof(ActivationsEnum.BoltOfFrost6d8Every1d7p7DirectionalActivation);
-    public override bool Con => true;
     public override string FriendlyName => "of Ghouls";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

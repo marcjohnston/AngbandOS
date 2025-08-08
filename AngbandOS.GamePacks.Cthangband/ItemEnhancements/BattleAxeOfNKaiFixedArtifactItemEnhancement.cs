@@ -3,7 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override bool Feather => true;
     public override bool FreeAct => true;
@@ -27,7 +26,5 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool SlayDemon => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
-    public override bool Stealth => true;
-    public override bool Str => true;
     public override int Cost => 90000;
 }

@@ -13,5 +13,4 @@ public class CloakOfStealthItemEnhancement : ItemEnhancementGameConfiguration
     public override string? FriendlyName => "of Stealth";
     public override string? BonusStealthRollExpression => "1d3";
     public override int TreasureRating => 10;
-    public override bool Stealth => true;
 }

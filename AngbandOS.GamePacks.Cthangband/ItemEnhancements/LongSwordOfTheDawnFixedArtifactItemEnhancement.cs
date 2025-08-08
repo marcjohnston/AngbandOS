@@ -6,7 +6,6 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     // Dawn Sword summons a reaver
     public override string? ActivationName => nameof(ActivationsEnum.SummonFriendlyReaverEvery500p1d500Activation);
     public override bool BrandFire => true;
-    public override bool Cha => true;
     public override int TreasureRating => 20;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Dawn";
@@ -14,7 +13,6 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Infra => true;
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a long sword which provides no light.
     /// </summary>

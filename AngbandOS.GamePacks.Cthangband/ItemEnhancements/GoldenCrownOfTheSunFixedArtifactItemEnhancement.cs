@@ -5,7 +5,6 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
 {
     // Sun Crown heals
     public override string? ActivationName => nameof(ActivationsEnum.Heal700Every25Activation);
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override string FriendlyName => "of the Sun";
     public override bool HideType => true;
@@ -30,9 +29,6 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResFire => true;
     public override bool ResLight => true;
     public override bool SeeInvis => true;
-    public override bool Speed => true;
-    public override bool Str => true;
-    public override bool Wis => true;
     public override bool Feather => true;
     public override bool FreeAct => true;
     public override bool HoldLife => true;

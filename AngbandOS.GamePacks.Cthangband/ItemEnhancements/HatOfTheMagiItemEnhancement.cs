@@ -16,7 +16,6 @@ public class HatOfTheMagiItemEnhancement : ItemEnhancementGameConfiguration
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Int => true;
     public override string? BonusIntelligenceRollExpression => "1d3";
     public override int TreasureRating => 15;
     public override bool ResAcid => true;

@@ -3,7 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Yeeks";

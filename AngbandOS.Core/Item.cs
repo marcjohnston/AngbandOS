@@ -1171,27 +1171,27 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = $"It has an affinity for {EffectivePropertySet.ArtifactBias.AffinityName.ToLower()}.";
         }
-        if (EffectivePropertySet.Str)
+        if (EffectivePropertySet.BonusStrength > 0)
         {
             info[i++] = "It affects your strength.";
         }
-        if (EffectivePropertySet.Int)
+        if (EffectivePropertySet.BonusIntelligence > 0)
         {
             info[i++] = "It affects your intelligence.";
         }
-        if (EffectivePropertySet.Wis)
+        if (EffectivePropertySet.BonusWisdom > 0)
         {
             info[i++] = "It affects your wisdom.";
         }
-        if (EffectivePropertySet.Dex)
+        if (EffectivePropertySet.BonusDexterity > 0)
         {
             info[i++] = "It affects your dexterity.";
         }
-        if (EffectivePropertySet.Con)
+        if (EffectivePropertySet.BonusConstitution > 0)
         {
             info[i++] = "It affects your constitution.";
         }
-        if (EffectivePropertySet.Cha)
+        if (EffectivePropertySet.BonusCharisma > 0)
         {
             info[i++] = "It affects your charisma.";
         }
@@ -1880,30 +1880,12 @@ internal sealed class Item : IComparable<Item>
         {
             value += Game.BonusPermaCurseValue;
         }
-        if (EffectivePropertySet.Str)
-        {
-            value += EffectivePropertySet.BonusStrength * Game.BonusStrengthValue;
-        }
-        if (EffectivePropertySet.Int)
-        {
-            value += EffectivePropertySet.BonusIntelligence * Game.BonusIntelligenceValue;
-        }
-        if (EffectivePropertySet.Wis)
-        {
-            value += EffectivePropertySet.BonusWisdom * Game.BonusWisdomValue;
-        }
-        if (EffectivePropertySet.Dex)
-        {
-            value += EffectivePropertySet.BonusDexterity * Game.BonusDexterityValue;
-        }
-        if (EffectivePropertySet.Con)
-        {
-            value += EffectivePropertySet.BonusConstitution * Game.BonusConstitutionValue;
-        }
-        if (EffectivePropertySet.Cha)
-        {
-            value += EffectivePropertySet.BonusCharisma * Game.BonusCharismaValue;
-        }
+        value += EffectivePropertySet.BonusStrength * Game.BonusStrengthValue;
+        value += EffectivePropertySet.BonusIntelligence * Game.BonusIntelligenceValue;
+        value += EffectivePropertySet.BonusWisdom * Game.BonusWisdomValue;
+        value += EffectivePropertySet.BonusDexterity * Game.BonusDexterityValue;
+        value += EffectivePropertySet.BonusConstitution * Game.BonusConstitutionValue;
+        value += EffectivePropertySet.BonusCharisma * Game.BonusCharismaValue;
         if (EffectivePropertySet.Stealth)
         {
             value += EffectivePropertySet.BonusStealth * Game.BonusStealthValue;

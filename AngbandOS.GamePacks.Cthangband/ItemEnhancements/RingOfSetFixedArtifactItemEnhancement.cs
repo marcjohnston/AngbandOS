@@ -5,11 +5,8 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
 {
     public override string? ActivationName => nameof(ActivationsEnum.BizarreThingsEvery1d450p450DirectionalActivation);
     public override bool Aggravate => true;
-    public override bool Cha => true;
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override bool IsCursed => true;
-    public override bool Dex => true;
     public override bool DrainExp => true;
     public override bool DreadCurse => true;
     public override string FriendlyName => "of Set";
@@ -23,7 +20,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override bool ImCold => true;
     public override bool ImElec => true;
     public override bool ImFire => true;
-    public override bool Int => true;
     public override bool PermaCurse => true;
     public override string? BonusCharismaRollExpression => "5";
     public override string? BonusConstitutionRollExpression => "5";
@@ -34,15 +30,12 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override string? BonusWisdomRollExpression => "5";
     public override bool Regen => true;
     public override bool SeeInvis => true;
-    public override bool Speed => true;
-    public override bool Str => true;
     public override bool SustCha => true;
     public override bool SustCon => true;
     public override bool SustDex => true;
     public override bool SustInt => true;
     public override bool SustStr => true;
     public override bool SustWis => true;
-    public override bool Wis => true;
     public override bool Feather => true;
     public override bool FreeAct => true;
     public override bool HoldLife => true;

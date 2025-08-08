@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class GlovesOfAgilityItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Value => 1000;
-    public override bool Dex => true;
     public override string? FriendlyName => "of Agility";
     public override bool HideType => true;
     public override string? BonusDexterityRollExpression => "1d5";

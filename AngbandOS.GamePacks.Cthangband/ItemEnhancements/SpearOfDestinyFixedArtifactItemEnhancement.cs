@@ -15,8 +15,6 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Infra => true;
-    public override bool Int => true;
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a spear which provides no light.
     /// </summary>
@@ -28,7 +26,6 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool ResFear => true;
     public override bool ResFire => true;
     public override bool ResLight => true;
-    public override bool Search => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool SlayDemon => true;
@@ -36,6 +33,5 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
     public override bool SlayUndead => true;
-    public override bool Wis => true;
     public override int Cost => 77777;
 }

@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? ActivationName => nameof(ActivationsEnum.Heal1000Every888Activation);
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override string FriendlyName => "'Soulkeeper'";
     public override bool HoldLife => true;

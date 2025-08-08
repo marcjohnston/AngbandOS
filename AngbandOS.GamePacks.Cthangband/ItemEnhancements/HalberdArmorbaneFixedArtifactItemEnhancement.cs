@@ -5,7 +5,6 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
 {
     public override int TreasureRating => 10;
     public override bool BrandFire => true;
-    public override bool Cha => true;
     public override bool Feather => true;
     public override string FriendlyName => "'Armorbane'";
     public override bool HideType => true;

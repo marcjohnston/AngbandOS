@@ -6,7 +6,6 @@ public class BattleAxeSpleenSlicerFixedArtifactItemEnhancement : ItemEnhancement
     public override int TreasureRating => 10;
     // Spleens Slicer heals you
     public override string? ActivationName => nameof(ActivationsEnum.Heal4d8AndWoundsEvery3p1d3Activation);
-    public override bool Dex => true;
     public override string FriendlyName => "'Spleen Slicer'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -18,6 +17,5 @@ public class BattleAxeSpleenSlicerFixedArtifactItemEnhancement : ItemEnhancement
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
-    public override bool Str => true;
     public override int Cost => 21000;
 }

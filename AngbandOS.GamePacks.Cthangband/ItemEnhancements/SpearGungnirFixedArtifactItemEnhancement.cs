@@ -15,7 +15,6 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Int => true;
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a spear which provides no light.
     /// </summary>
@@ -31,6 +30,5 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool SlowDigest => true;
-    public override bool Wis => true;
     public override int Cost => 180000;
 }

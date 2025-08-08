@@ -10,7 +10,6 @@ public class SpearGaeBulgFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Infra => true;
     public override string? BonusInfravisionRollExpression => "3";
     public override string? BonusSpeedRollExpression => "3";
     public override string? BonusStealthRollExpression => "3";
@@ -19,7 +18,5 @@ public class SpearGaeBulgFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool SlayUndead => true;
-    public override bool Speed => true;
-    public override bool Stealth => true;
     public override int Cost => 30000;
 }

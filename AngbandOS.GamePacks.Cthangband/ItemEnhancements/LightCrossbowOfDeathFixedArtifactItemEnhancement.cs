@@ -14,7 +14,6 @@ public class LightCrossbowOfDeathFixedArtifactItemEnhancement : ItemEnhancementG
     public override string? BonusSpeedRollExpression => "10";
     public override bool ResFire => true;
     public override bool ShowMods => true;
-    public override bool Speed => true;
     public override bool XtraMight => true;
     public override int Cost => 50000;
 }

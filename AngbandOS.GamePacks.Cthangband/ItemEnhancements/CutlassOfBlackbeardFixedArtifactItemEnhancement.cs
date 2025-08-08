@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Dex => true;
     public override bool Feather => true;
     public override string FriendlyName => "of Blackbeard";
     public override bool HideType => true;
@@ -21,6 +20,5 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResFire => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
-    public override bool Stealth => true;
     public override int Cost => 28000;
 }

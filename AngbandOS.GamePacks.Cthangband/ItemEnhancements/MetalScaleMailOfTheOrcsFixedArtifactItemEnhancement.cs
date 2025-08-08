@@ -6,7 +6,6 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
     // Orc does Carnage
     public override string? BonusArmorClassRollExpression => "2"; // 13 -> 15
     public override string? ActivationName => nameof(ActivationsEnum.GenocideEvery500Activation);
-    public override bool Cha => true;
     public override int TreasureRating => 20;
     public override string FriendlyName => "of the Orcs";
     public override bool HideType => true;
@@ -22,6 +21,5 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool ResDisen => true;
     public override bool ResElec => true;
     public override bool ResFire => true;
-    public override bool Str => true;
     public override int Cost => 150000;
 }

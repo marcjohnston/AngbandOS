@@ -5,7 +5,6 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
 {
     public override string? ActivationName => nameof(ActivationsEnum.MagicalArrow150Every1d90p90DirectionalActivation);
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Combat";
     public override bool HideType => true;

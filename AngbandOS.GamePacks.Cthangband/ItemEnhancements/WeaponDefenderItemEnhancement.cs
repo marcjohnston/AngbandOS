@@ -29,5 +29,4 @@ public class WeaponDefenderItemEnhancement : ItemEnhancementGameConfiguration
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool SeeInvis => true;
-    public override bool Stealth => true;
 }

@@ -29,6 +29,5 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayTroll => true;
     public override bool SlayUndead => true;
     public override bool SlowDigest => true;
-    public override bool Speed => true;
     public override int Cost => 300000;
 }

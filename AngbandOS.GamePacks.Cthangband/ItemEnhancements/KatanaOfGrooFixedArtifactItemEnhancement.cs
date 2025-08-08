@@ -5,7 +5,6 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
 {
     public override bool Blows => true;
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override string FriendlyName => "of Groo";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -16,7 +15,6 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override string? BonusDexterityRollExpression => "3";
     public override string? BonusSpeedRollExpression => "3";
     public override bool ShowMods => true;
-    public override bool Speed => true;
     public override bool SustDex => true;
     public override bool Vorpal => true;
     public override int Weight => -70;

@@ -18,9 +18,9 @@ internal class RogueArtifactBias : ArtifactBias
     };
     public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
-        if (!characteristics.Stealth)
+        if (characteristics.BonusStealth == 0)
         {
-            characteristics.Stealth = true;
+            characteristics.BonusStealth = Game.EnchantBonus(characteristics.BonusStealth);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

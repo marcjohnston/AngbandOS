@@ -15,5 +15,4 @@ public class WeaponOfUndeadBaneItemEnhancement : ItemEnhancementGameConfiguratio
     public override int TreasureRating => 24;
     public override bool SeeInvis => true;
     public override bool SlayUndead => true;
-    public override bool Wis => true;
 }

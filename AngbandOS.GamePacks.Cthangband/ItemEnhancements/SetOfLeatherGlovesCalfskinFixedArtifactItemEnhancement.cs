@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SetOfLeatherGlovesCalfskinFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Con => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Calfskin'";
     public override bool HideType => true;
@@ -15,6 +14,5 @@ public class SetOfLeatherGlovesCalfskinFixedArtifactItemEnhancement : ItemEnhanc
     public override string? BonusConstitutionRollExpression => "2";
     public override string? BonusStrengthRollExpression => "2";
     public override bool ShowMods => true;
-    public override bool Str => true;
     public override int Cost => 36000;
 }

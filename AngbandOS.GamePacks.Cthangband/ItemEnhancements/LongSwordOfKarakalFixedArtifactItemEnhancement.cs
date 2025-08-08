@@ -8,7 +8,6 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool Blows => true;
     public override bool BrandElec => true;
     public override bool Chaotic => true;
-    public override bool Con => true;
     public override int TreasureRating => 20;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Karakal";
@@ -37,8 +36,6 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;
     public override bool SlowDigest => true;
-    public override bool Speed => true;
-    public override bool Str => true;
     public override bool SustCon => true;
     public override bool SustInt => true;
     public override bool SustStr => true;

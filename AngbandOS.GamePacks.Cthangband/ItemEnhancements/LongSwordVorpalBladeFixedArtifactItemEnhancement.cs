@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Vorpal Blade'";
     public override bool IgnoreAcid => true;
@@ -23,8 +22,6 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool SeeInvis => true;
     public override bool SlayEvil => true;
     public override bool SlowDigest => true;
-    public override bool Speed => true;
-    public override bool Str => true;
     public override bool Vorpal => true;
     public override int Weight => 20;
     public override int Cost => 250000;

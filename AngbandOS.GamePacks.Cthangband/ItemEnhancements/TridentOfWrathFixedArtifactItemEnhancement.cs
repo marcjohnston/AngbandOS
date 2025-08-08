@@ -6,7 +6,6 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool Blessed => true;
     public override bool Chaotic => true;
     public override int TreasureRating => 20;
-    public override bool Dex => true;
     public override string FriendlyName => "of Wrath";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -21,7 +20,6 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-    public override bool Str => true;
     public override int Weight => 230;
     public override int Cost => 90000;
 }

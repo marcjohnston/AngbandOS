@@ -62,12 +62,9 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BrandElec = itemEnhancementGameConfiguration.BrandElec;
         BrandFire = itemEnhancementGameConfiguration.BrandFire;
         BrandPois = itemEnhancementGameConfiguration.BrandPois;
-        Cha = itemEnhancementGameConfiguration.Cha;
         Chaotic = itemEnhancementGameConfiguration.Chaotic;
-        Con = itemEnhancementGameConfiguration.Con;
         Cost = itemEnhancementGameConfiguration.Cost;
         IsCursed = itemEnhancementGameConfiguration.IsCursed;
-        Dex = itemEnhancementGameConfiguration.Dex;
         DrainExp = itemEnhancementGameConfiguration.DrainExp;
         DreadCurse = itemEnhancementGameConfiguration.DreadCurse;
         EasyKnow = itemEnhancementGameConfiguration.EasyKnow;
@@ -85,8 +82,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ImElec = itemEnhancementGameConfiguration.ImElec;
         ImFire = itemEnhancementGameConfiguration.ImFire;
         Impact = itemEnhancementGameConfiguration.Impact;
-        Infra = itemEnhancementGameConfiguration.Infra;
-        Int = itemEnhancementGameConfiguration.Int;
         KillDragon = itemEnhancementGameConfiguration.KillDragon;
         NoMagic = itemEnhancementGameConfiguration.NoMagic;
         NoTele = itemEnhancementGameConfiguration.NoTele;
@@ -110,7 +105,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ResPois = itemEnhancementGameConfiguration.ResPois;
         ResShards = itemEnhancementGameConfiguration.ResShards;
         ResSound = itemEnhancementGameConfiguration.ResSound;
-        Search = itemEnhancementGameConfiguration.Search;
         SeeInvis = itemEnhancementGameConfiguration.SeeInvis;
         ShElec = itemEnhancementGameConfiguration.ShElec;
         ShFire = itemEnhancementGameConfiguration.ShFire;
@@ -124,9 +118,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         SlayTroll = itemEnhancementGameConfiguration.SlayTroll;
         SlayUndead = itemEnhancementGameConfiguration.SlayUndead;
         SlowDigest = itemEnhancementGameConfiguration.SlowDigest;
-        Speed = itemEnhancementGameConfiguration.Speed;
-        Stealth = itemEnhancementGameConfiguration.Stealth;
-        Str = itemEnhancementGameConfiguration.Str;
         SustCha = itemEnhancementGameConfiguration.SustCha;
         SustCon = itemEnhancementGameConfiguration.SustCon;
         SustDex = itemEnhancementGameConfiguration.SustDex;
@@ -136,12 +127,10 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Telepathy = itemEnhancementGameConfiguration.Telepathy;
         Teleport = itemEnhancementGameConfiguration.Teleport;
         TreasureRating = itemEnhancementGameConfiguration.TreasureRating;
-        Tunnel = itemEnhancementGameConfiguration.Tunnel;
         Valueless = itemEnhancementGameConfiguration.Valueless;
         Vampiric = itemEnhancementGameConfiguration.Vampiric;
         Vorpal = itemEnhancementGameConfiguration.Vorpal;
         Weight = itemEnhancementGameConfiguration.Weight;
-        Wis = itemEnhancementGameConfiguration.Wis;
         Wraith = itemEnhancementGameConfiguration.Wraith;
         XtraMight = itemEnhancementGameConfiguration.XtraMight;
         XtraShots = itemEnhancementGameConfiguration.XtraShots;
@@ -196,12 +185,9 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BrandElec = BrandElec,
             BrandFire = BrandFire,
             BrandPois = BrandPois,
-            Cha = Cha,
             Chaotic = Chaotic,
-            Con = Con,
             Cost = Cost,
             IsCursed = IsCursed,
-            Dex = Dex,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -221,7 +207,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImFire = ImFire,
             Impact = Impact,
             Infra = Infra,
-            Int = Int,
             KillDragon = KillDragon,
             NoMagic = NoMagic,
             NoTele = NoTele,
@@ -261,7 +246,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SlowDigest = SlowDigest,
             Speed = Speed,
             Stealth = Stealth,
-            Str = Str,
             SustCha = SustCha,
             SustCon = SustCon,
             SustDex = SustDex,
@@ -277,7 +261,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Vampiric = Vampiric,
             Vorpal = Vorpal,
             Weight = Weight,
-            Wis = Wis,
             Wraith = Wraith,
             XtraMight = XtraMight,
             XtraShots = XtraShots,
@@ -362,12 +345,9 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BrandElec = BrandElec,
             BrandFire = BrandFire,
             BrandPois = BrandPois,
-            Cha = Cha,
             Chaotic = Chaotic,
-            Con = Con,
             Cost = Cost,
             IsCursed = IsCursed,
-            Dex = Dex,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -385,8 +365,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImElec = ImElec,
             ImFire = ImFire,
             Impact = Impact,
-            Infra = Infra,
-            Int = Int,
             KillDragon = KillDragon,
             NoMagic = NoMagic,
             NoTele = NoTele,
@@ -410,7 +388,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ResPois = ResPois,
             ResShards = ResShards,
             ResSound = ResSound,
-            Search = Search,
             SeeInvis = SeeInvis,
             ShElec = ShElec,
             ShFire = ShFire,
@@ -424,9 +401,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SlayTroll = SlayTroll,
             SlayUndead = SlayUndead,
             SlowDigest = SlowDigest,
-            Speed = Speed,
-            Stealth = Stealth,
-            Str = Str,
             SustCha = SustCha,
             SustCon = SustCon,
             SustDex = SustDex,
@@ -436,12 +410,10 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Telepathy = Telepathy,
             Teleport = Teleport,
             TreasureRating = TreasureRating,
-            Tunnel = Tunnel,
             Valueless = Valueless,
             Vampiric = Vampiric,
             Vorpal = Vorpal,
             Weight = Weight,
-            Wis = Wis,
             Wraith = Wraith,
             XtraMight = XtraMight,
             XtraShots = XtraShots,
@@ -606,24 +578,15 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool BrandPois { get; } = false;
-    
-    /// <inheritdoc />
-    private bool Cha { get; } = false;
-    
+        
     /// <inheritdoc />
     private bool Chaotic { get; } = false;
     
-    /// <inheritdoc />
-    private bool Con { get; } = false;
-
     private int Cost { get; } = 0;
     
     /// <inheritdoc />
     private bool IsCursed { get; } = false;
-    
-    /// <inheritdoc />
-    private bool Dex { get; } = false;
-    
+   
     /// <inheritdoc />
     private bool DrainExp { get; } = false;
     
@@ -677,10 +640,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool Infra { get; } = false;
-       
-    /// <inheritdoc />
-    private bool Int { get; } = false;
-    
+   
     /// <inheritdoc />
     private bool KillDragon { get; } = false;
     
@@ -799,9 +759,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool Stealth { get; } = false;
     
     /// <inheritdoc />
-    private bool Str { get; } = false;
-    
-    /// <inheritdoc />
     private bool SustCha { get; } = false;
     
     /// <inheritdoc />
@@ -841,9 +798,6 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool Vorpal { get; } = false;
 
     private int Weight { get; } = 0;
-    
-    /// <inheritdoc />
-    private bool Wis { get; } = false;
     
     /// <inheritdoc />
     private bool Wraith { get; } = false;

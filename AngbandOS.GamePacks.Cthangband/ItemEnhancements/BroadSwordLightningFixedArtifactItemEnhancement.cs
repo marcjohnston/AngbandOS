@@ -21,7 +21,6 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResFear => true;
     public override bool ResFire => true;
     public override bool ResPois => true;
-    public override bool Search => true;
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
     public override bool SlowDigest => true;

@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Dex => true;
     public override string FriendlyName => "'Wyvernscale'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

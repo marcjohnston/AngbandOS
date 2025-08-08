@@ -4,8 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Con => true;
-    public override bool Dex => true;
     public override string FriendlyName => "of Hammerhand";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
@@ -15,6 +13,5 @@ public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancement
     public override string? BonusDexterityRollExpression => "3";
     public override bool ResAcid => true;
     public override bool ResNexus => true;
-    public override bool Str => true;
     public override int Cost => 45000;
 }

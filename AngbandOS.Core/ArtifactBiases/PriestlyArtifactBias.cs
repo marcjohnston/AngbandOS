@@ -19,9 +19,9 @@ internal class PriestlyArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {
-        if (!characteristics.Wis)
+        if (characteristics.BonusWisdom == 0)
         {
-            characteristics.Wis = true;
+            characteristics.BonusWisdom = Game.EnchantBonus(characteristics.BonusWisdom);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

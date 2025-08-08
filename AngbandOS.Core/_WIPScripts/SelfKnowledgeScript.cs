@@ -309,27 +309,27 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "Your charisma is sustained.";
         }
-        if (inventoryCharacteristics.Str)
+        if (inventoryCharacteristics.BonusStrength > 0)
         {
             info[infoCount++] = "Your strength is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Int)
+        if (inventoryCharacteristics.BonusIntelligence > 0)
         {
             info[infoCount++] = "Your intelligence is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Wis)
+        if (inventoryCharacteristics.BonusWisdom > 0)
         {
             info[infoCount++] = "Your wisdom is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Dex)
+        if (inventoryCharacteristics.BonusDexterity > 0)
         {
             info[infoCount++] = "Your dexterity is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Con)
+        if (inventoryCharacteristics.BonusConstitution > 0)
         {
             info[infoCount++] = "Your constitution is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Cha)
+        if (inventoryCharacteristics.BonusCharisma > 0)
         {
             info[infoCount++] = "Your charisma is affected by your equipment.";
         }

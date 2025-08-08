@@ -9,7 +9,6 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Infra => true;
     public override string? BonusInfravisionRollExpression => "10";
     public override string? BonusTunnelRollExpression => "10";
     public override bool ResAcid => true;
@@ -17,10 +16,8 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool ResElec => true;
     public override bool ResFear => true;
     public override bool ResFire => true;
-    public override bool Search => true;
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
-    public override bool Tunnel => true;
     public override int Cost => 80000;
 }

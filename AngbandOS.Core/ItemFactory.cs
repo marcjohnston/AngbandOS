@@ -1013,18 +1013,6 @@ internal class ItemFactory : IGetKey, IToJson
 
     public ReadOnlyPropertySet CreateRandomArtifact(Item item, bool fromScroll)
     {
-        int EnchantBonus(int bonus)
-        {
-            do
-            {
-                bonus++;
-            } while (bonus < Game.DieRoll(5) || Game.DieRoll(bonus) == 1);
-            if (bonus > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
-            {
-                bonus = 4;
-            }
-            return bonus;
-        }
 
         void ApplyRandomBonuses(EffectivePropertySet characteristics)
         {
@@ -1040,7 +1028,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 1:
                 case 2:
                     characteristics.Str = true;
-                    characteristics.BonusStrength = EnchantBonus(characteristics.BonusStrength);
+                    characteristics.BonusStrength = Game.EnchantBonus(characteristics.BonusStrength);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -1054,7 +1042,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 3:
                 case 4:
                     characteristics.Int = true;
-                    characteristics.BonusIntelligence = EnchantBonus(characteristics.BonusIntelligence);
+                    characteristics.BonusIntelligence = Game.EnchantBonus(characteristics.BonusIntelligence);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -1068,7 +1056,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 5:
                 case 6:
                     characteristics.Wis = true;
-                    characteristics.BonusWisdom = EnchantBonus(characteristics.BonusWisdom);
+                    characteristics.BonusWisdom = Game.EnchantBonus(characteristics.BonusWisdom);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
@@ -1082,7 +1070,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 7:
                 case 8:
                     characteristics.Dex = true;
-                    characteristics.BonusDexterity = EnchantBonus(characteristics.BonusDexterity);
+                    characteristics.BonusDexterity = Game.EnchantBonus(characteristics.BonusDexterity);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -1096,7 +1084,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 9:
                 case 10:
                     characteristics.Con = true;
-                    characteristics.BonusConstitution = EnchantBonus(characteristics.BonusConstitution);
+                    characteristics.BonusConstitution = Game.EnchantBonus(characteristics.BonusConstitution);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -1110,7 +1098,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 11:
                 case 12:
                     characteristics.Cha = true;
-                    characteristics.BonusCharisma = EnchantBonus(characteristics.BonusCharisma);
+                    characteristics.BonusCharisma = Game.EnchantBonus(characteristics.BonusCharisma);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
@@ -1120,7 +1108,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 13:
                 case 14:
                     characteristics.Stealth = true;
-                    characteristics.BonusStealth = EnchantBonus(characteristics.BonusStealth);
+                    characteristics.BonusStealth = Game.EnchantBonus(characteristics.BonusStealth);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
@@ -1130,7 +1118,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 15:
                 case 16:
                     characteristics.Search = true;
-                    characteristics.BonusSearch = EnchantBonus(characteristics.BonusSearch);
+                    characteristics.BonusSearch = Game.EnchantBonus(characteristics.BonusSearch);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
@@ -1140,12 +1128,12 @@ internal class ItemFactory : IGetKey, IToJson
                 case 17:
                 case 18:
                     characteristics.Infra = true;
-                    characteristics.BonusInfravision = EnchantBonus(characteristics.BonusInfravision);
+                    characteristics.BonusInfravision = Game.EnchantBonus(characteristics.BonusInfravision);
                     break;
 
                 case 19:
                     characteristics.Speed = true;
-                    characteristics.BonusSpeed = EnchantBonus(characteristics.BonusSpeed);
+                    characteristics.BonusSpeed = Game.EnchantBonus(characteristics.BonusSpeed);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
@@ -1155,7 +1143,7 @@ internal class ItemFactory : IGetKey, IToJson
                 case 20:
                 case 21:
                     characteristics.Tunnel = true;
-                    characteristics.BonusTunnel = EnchantBonus(characteristics.BonusTunnel);
+                    characteristics.BonusTunnel = Game.EnchantBonus(characteristics.BonusTunnel);
                     break;
 
                 case 22:

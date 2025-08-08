@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class FullPlateArmorOfTheGodsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Con => true;
     public override string FriendlyName => "of the Gods";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

@@ -14,7 +14,6 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ImCold => true;
-    public override bool Int => true;
     public override bool NoMagic => true;
     public override string? BonusIntelligenceRollExpression => "-1";
     public override string? BonusSearchRollExpression => "-1";
@@ -24,10 +23,8 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool ResDisen => true;
     public override bool ResFear => true;
     public override bool ResPois => true;
-    public override bool Search => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool Teleport => true;
-    public override bool Wis => true;
     public override int Cost => 40000;
 }

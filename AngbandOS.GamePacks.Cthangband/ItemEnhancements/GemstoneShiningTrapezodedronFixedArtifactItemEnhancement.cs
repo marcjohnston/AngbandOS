@@ -13,13 +13,10 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool Int => true;
     public override string? BonusIntelligenceRollExpression => "3";
     public override string? BonusSpeedRollExpression => "3";
     public override string? BonusWisdomRollExpression => "3";
     public override bool ResChaos => true;
     public override bool SeeInvis => true;
-    public override bool Speed => true;
-    public override bool Wis => true;
     public override int Cost => 150000;
 }

@@ -11,7 +11,6 @@ public class WeaponOfAnimalBaneItemEnhancement : ItemEnhancementGameConfiguratio
 {
     public override int Value => 6000;
     public override string? FriendlyName => "of Animal Bane";
-    public override bool Int => true;
     public override string? BonusIntelligenceRollExpression => "1d2";
     public override int TreasureRating => 20;
     public override bool Regen => true;

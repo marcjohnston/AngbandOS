@@ -177,30 +177,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    if (oPtr.EffectivePropertySet.Str)
-                    {
-                        Game.StrengthAbility.Bonus += oPtr.EffectivePropertySet.BonusStrength;
-                    }
-                    if (oPtr.EffectivePropertySet.Int)
-                    {
-                        Game.IntelligenceAbility.Bonus += oPtr.EffectivePropertySet.BonusIntelligence;
-                    }
-                    if (oPtr.EffectivePropertySet.Wis)
-                    {
-                        Game.WisdomAbility.Bonus += oPtr.EffectivePropertySet.BonusWisdom;
-                    }
-                    if (oPtr.EffectivePropertySet.Dex)
-                    {
-                        Game.DexterityAbility.Bonus += oPtr.EffectivePropertySet.BonusDexterity;
-                    }
-                    if (oPtr.EffectivePropertySet.Con)
-                    {
-                        Game.ConstitutionAbility.Bonus += oPtr.EffectivePropertySet.BonusConstitution;
-                    }
-                    if (oPtr.EffectivePropertySet.Cha)
-                    {
-                        Game.CharismaAbility.Bonus += oPtr.EffectivePropertySet.BonusCharisma;
-                    }
+                    Game.StrengthAbility.Bonus += oPtr.EffectivePropertySet.BonusStrength;
+                    Game.IntelligenceAbility.Bonus += oPtr.EffectivePropertySet.BonusIntelligence;
+                    Game.WisdomAbility.Bonus += oPtr.EffectivePropertySet.BonusWisdom;
+                    Game.DexterityAbility.Bonus += oPtr.EffectivePropertySet.BonusDexterity;
+                    Game.ConstitutionAbility.Bonus += oPtr.EffectivePropertySet.BonusConstitution;
+                    Game.CharismaAbility.Bonus += oPtr.EffectivePropertySet.BonusCharisma;
                     if (oPtr.EffectivePropertySet.Stealth)
                     {
                         Game.SkillStealth += oPtr.EffectivePropertySet.BonusStealth;

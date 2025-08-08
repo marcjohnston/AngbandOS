@@ -5,7 +5,6 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
 {
     public override int TreasureRating => 10;
     public override bool Aggravate => true;
-    public override bool Con => true;
     public override bool IsCursed => true;
     public override string FriendlyName => "'Selfslayer'";
     public override bool HeavyCurse => true;

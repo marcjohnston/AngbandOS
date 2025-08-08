@@ -6,8 +6,6 @@ public class PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement : ItemE
     public override int TreasureRating => 10;
     // Dancing heal poison and fear
     public override string? ActivationName => nameof(ActivationsEnum.RemoveFearAndPoisonEvery5Activation);
-    public override bool Cha => true;
-    public override bool Dex => true;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Dancing";
     public override bool HideType => true;

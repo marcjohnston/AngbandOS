@@ -10,6 +10,7 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
+
     /// <summary>
     /// Returns a value of 3 to add to the radius of light for a broad sword which provides no light.
     /// </summary>
@@ -18,7 +19,6 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
     public override string? BonusSearchRollExpression => "1";
     public override bool ResFire => true;
     public override bool ResLight => true;
-    public override bool Search => true;
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
     public override bool SlayOrc => true;
